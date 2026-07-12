@@ -24,21 +24,24 @@ type IAccountsSettingsPaneInterop struct {
 var IID_IAccountsSettingsPaneInterop = win32.GUID{Data1: 0xd3ee12ad, Data2: 0x3865, Data3: 0x4362, Data4: [8]byte{0x97, 0x46, 0xb7, 0x5a, 0x68, 0x2d, 0xf0, 0xe6}}
 
 // GetForWindow dispatches through IAccountsSettingsPaneInterop's vtable slot 6.
-func (self *IAccountsSettingsPaneInterop) GetForWindow(appWindow foundation.HWND, riid *win32.GUID, accountsSettingsPane *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(accountsSettingsPane)))
-	return win32.HRESULTError(int32(r1))
+func (self *IAccountsSettingsPaneInterop) GetForWindow(appWindow foundation.HWND, riid *win32.GUID) (*win32.IUnknown, error) {
+	var _accountsSettingsPane *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_accountsSettingsPane)))
+	return _accountsSettingsPane, win32.HRESULTError(int32(r1))
 }
 
 // ShowManageAccountsForWindowAsync dispatches through IAccountsSettingsPaneInterop's vtable slot 7.
-func (self *IAccountsSettingsPaneInterop) ShowManageAccountsForWindowAsync(appWindow foundation.HWND, riid *win32.GUID, asyncAction *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(asyncAction)))
-	return win32.HRESULTError(int32(r1))
+func (self *IAccountsSettingsPaneInterop) ShowManageAccountsForWindowAsync(appWindow foundation.HWND, riid *win32.GUID) (*win32.IUnknown, error) {
+	var _asyncAction *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_asyncAction)))
+	return _asyncAction, win32.HRESULTError(int32(r1))
 }
 
 // ShowAddAccountForWindowAsync dispatches through IAccountsSettingsPaneInterop's vtable slot 8.
-func (self *IAccountsSettingsPaneInterop) ShowAddAccountForWindowAsync(appWindow foundation.HWND, riid *win32.GUID, asyncAction *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(asyncAction)))
-	return win32.HRESULTError(int32(r1))
+func (self *IAccountsSettingsPaneInterop) ShowAddAccountForWindowAsync(appWindow foundation.HWND, riid *win32.GUID) (*win32.IUnknown, error) {
+	var _asyncAction *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_asyncAction)))
+	return _asyncAction, win32.HRESULTError(int32(r1))
 }
 
 // IActivationFactory: https://learn.microsoft.com/windows/win32/api/activation/nn-activation-iactivationfactory
@@ -66,7 +69,7 @@ type IAgileReference struct {
 var IID_IAgileReference = win32.GUID{Data1: 0xc03f6a43, Data2: 0x65a4, Data3: 0x9818, Data4: [8]byte{0x98, 0x7e, 0xe0, 0xb8, 0x10, 0xd2, 0xa6, 0xf2}}
 
 // Resolve dispatches through IAgileReference's vtable slot 3.
-func (self *IAgileReference) Resolve(riid *win32.GUID, ppvObjectReference *unsafe.Pointer) error {
+func (self *IAgileReference) Resolve(riid *win32.GUID, ppvObjectReference **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObjectReference)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -94,7 +97,7 @@ type IAppServiceConnectionExtendedExecution struct {
 var IID_IAppServiceConnectionExtendedExecution = win32.GUID{Data1: 0x65219584, Data2: 0xf9cb, Data3: 0x4ae3, Data4: [8]byte{0x81, 0xf9, 0xa2, 0x8a, 0x6c, 0xa4, 0x50, 0xd9}}
 
 // OpenForExtendedExecutionAsync dispatches through IAppServiceConnectionExtendedExecution's vtable slot 3.
-func (self *IAppServiceConnectionExtendedExecution) OpenForExtendedExecutionAsync(riid *win32.GUID, operation *unsafe.Pointer) error {
+func (self *IAppServiceConnectionExtendedExecution) OpenForExtendedExecutionAsync(riid *win32.GUID, operation **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(operation)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -384,7 +387,7 @@ type IDragDropManagerInterop struct {
 var IID_IDragDropManagerInterop = win32.GUID{Data1: 0x5ad8cba7, Data2: 0x4c01, Data3: 0x4dac, Data4: [8]byte{0x90, 0x74, 0x82, 0x78, 0x94, 0x29, 0x2d, 0x63}}
 
 // GetForWindow dispatches through IDragDropManagerInterop's vtable slot 6.
-func (self *IDragDropManagerInterop) GetForWindow(hwnd foundation.HWND, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IDragDropManagerInterop) GetForWindow(hwnd foundation.HWND, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -399,9 +402,10 @@ type IHolographicSpaceInterop struct {
 var IID_IHolographicSpaceInterop = win32.GUID{Data1: 0x5c4ee536, Data2: 0x6a98, Data3: 0x4b86, Data4: [8]byte{0xa1, 0x70, 0x58, 0x70, 0x13, 0xd6, 0xfd, 0x4b}}
 
 // CreateForWindow dispatches through IHolographicSpaceInterop's vtable slot 6.
-func (self *IHolographicSpaceInterop) CreateForWindow(window foundation.HWND, riid *win32.GUID, holographicSpace *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(window), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(holographicSpace)))
-	return win32.HRESULTError(int32(r1))
+func (self *IHolographicSpaceInterop) CreateForWindow(window foundation.HWND, riid *win32.GUID) (*win32.IUnknown, error) {
+	var _holographicSpace *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(window), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_holographicSpace)))
+	return _holographicSpace, win32.HRESULTError(int32(r1))
 }
 
 // IInputPaneInterop: https://learn.microsoft.com/windows/win32/api/inputpaneinterop/nn-inputpaneinterop-iinputpaneinterop
@@ -414,9 +418,10 @@ type IInputPaneInterop struct {
 var IID_IInputPaneInterop = win32.GUID{Data1: 0x75cf2c57, Data2: 0x9195, Data3: 0x4931, Data4: [8]byte{0x83, 0x32, 0xf0, 0xb4, 0x09, 0xe9, 0x16, 0xaf}}
 
 // GetForWindow dispatches through IInputPaneInterop's vtable slot 6.
-func (self *IInputPaneInterop) GetForWindow(appWindow foundation.HWND, riid *win32.GUID, inputPane *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(inputPane)))
-	return win32.HRESULTError(int32(r1))
+func (self *IInputPaneInterop) GetForWindow(appWindow foundation.HWND, riid *win32.GUID) (*win32.IUnknown, error) {
+	var _inputPane *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_inputPane)))
+	return _inputPane, win32.HRESULTError(int32(r1))
 }
 
 // IInspectable: https://learn.microsoft.com/windows/win32/api/inspectable/nn-inspectable-iinspectable
@@ -557,9 +562,10 @@ type IPlayToManagerInterop struct {
 var IID_IPlayToManagerInterop = win32.GUID{Data1: 0x24394699, Data2: 0x1f2c, Data3: 0x4eb3, Data4: [8]byte{0x8c, 0xd7, 0x0e, 0xc1, 0xda, 0x42, 0xa5, 0x40}}
 
 // GetForWindow dispatches through IPlayToManagerInterop's vtable slot 6.
-func (self *IPlayToManagerInterop) GetForWindow(appWindow foundation.HWND, riid *win32.GUID, playToManager *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(playToManager)))
-	return win32.HRESULTError(int32(r1))
+func (self *IPlayToManagerInterop) GetForWindow(appWindow foundation.HWND, riid *win32.GUID) (*win32.IUnknown, error) {
+	var _playToManager *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_playToManager)))
+	return _playToManager, win32.HRESULTError(int32(r1))
 }
 
 // ShowPlayToUIForWindow dispatches through IPlayToManagerInterop's vtable slot 7.
@@ -615,9 +621,10 @@ type IShareWindowCommandSourceInterop struct {
 var IID_IShareWindowCommandSourceInterop = win32.GUID{Data1: 0x461a191f, Data2: 0x8424, Data3: 0x43a6, Data4: [8]byte{0xa0, 0xfa, 0x34, 0x51, 0xa2, 0x2f, 0x56, 0xab}}
 
 // GetForWindow dispatches through IShareWindowCommandSourceInterop's vtable slot 3.
-func (self *IShareWindowCommandSourceInterop) GetForWindow(appWindow foundation.HWND, riid *win32.GUID, shareWindowCommandSource *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(shareWindowCommandSource)))
-	return win32.HRESULTError(int32(r1))
+func (self *IShareWindowCommandSourceInterop) GetForWindow(appWindow foundation.HWND, riid *win32.GUID) (*win32.IUnknown, error) {
+	var _shareWindowCommandSource *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_shareWindowCommandSource)))
+	return _shareWindowCommandSource, win32.HRESULTError(int32(r1))
 }
 
 // ISpatialInteractionManagerInterop: https://learn.microsoft.com/windows/win32/api/spatialinteractionmanagerinterop/nn-spatialinteractionmanagerinterop-ispatialinteractionmanagerinterop
@@ -630,9 +637,10 @@ type ISpatialInteractionManagerInterop struct {
 var IID_ISpatialInteractionManagerInterop = win32.GUID{Data1: 0x5c4ee536, Data2: 0x6a98, Data3: 0x4b86, Data4: [8]byte{0xa1, 0x70, 0x58, 0x70, 0x13, 0xd6, 0xfd, 0x4b}}
 
 // GetForWindow dispatches through ISpatialInteractionManagerInterop's vtable slot 6.
-func (self *ISpatialInteractionManagerInterop) GetForWindow(window foundation.HWND, riid *win32.GUID, spatialInteractionManager *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(window), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(spatialInteractionManager)))
-	return win32.HRESULTError(int32(r1))
+func (self *ISpatialInteractionManagerInterop) GetForWindow(window foundation.HWND, riid *win32.GUID) (*win32.IUnknown, error) {
+	var _spatialInteractionManager *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(window), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_spatialInteractionManager)))
+	return _spatialInteractionManager, win32.HRESULTError(int32(r1))
 }
 
 // ISystemMediaTransportControlsInterop: https://learn.microsoft.com/windows/win32/api/systemmediatransportcontrolsinterop/nn-systemmediatransportcontrolsinterop-isystemmediatransportcontrolsinterop
@@ -645,9 +653,10 @@ type ISystemMediaTransportControlsInterop struct {
 var IID_ISystemMediaTransportControlsInterop = win32.GUID{Data1: 0xddb0472d, Data2: 0xc911, Data3: 0x4a1f, Data4: [8]byte{0x86, 0xd9, 0xdc, 0x3d, 0x71, 0xa9, 0x5f, 0x5a}}
 
 // GetForWindow dispatches through ISystemMediaTransportControlsInterop's vtable slot 6.
-func (self *ISystemMediaTransportControlsInterop) GetForWindow(appWindow foundation.HWND, riid *win32.GUID, mediaTransportControl *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(mediaTransportControl)))
-	return win32.HRESULTError(int32(r1))
+func (self *ISystemMediaTransportControlsInterop) GetForWindow(appWindow foundation.HWND, riid *win32.GUID) (*win32.IUnknown, error) {
+	var _mediaTransportControl *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_mediaTransportControl)))
+	return _mediaTransportControl, win32.HRESULTError(int32(r1))
 }
 
 // IUIViewSettingsInterop: https://learn.microsoft.com/windows/win32/api/uiviewsettingsinterop/nn-uiviewsettingsinterop-iuiviewsettingsinterop
@@ -660,9 +669,10 @@ type IUIViewSettingsInterop struct {
 var IID_IUIViewSettingsInterop = win32.GUID{Data1: 0x3694dbf9, Data2: 0x8f68, Data3: 0x44be, Data4: [8]byte{0x8f, 0xf5, 0x19, 0x5c, 0x98, 0xed, 0xe8, 0xa6}}
 
 // GetForWindow dispatches through IUIViewSettingsInterop's vtable slot 6.
-func (self *IUIViewSettingsInterop) GetForWindow(hwnd foundation.HWND, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+func (self *IUIViewSettingsInterop) GetForWindow(hwnd foundation.HWND, riid *win32.GUID) (*win32.IUnknown, error) {
+	var _ppv *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_ppv)))
+	return _ppv, win32.HRESULTError(int32(r1))
 }
 
 // IUserActivityInterop: https://learn.microsoft.com/windows/win32/api/useractivityinterop/nn-useractivityinterop-iuseractivityinterop
@@ -675,9 +685,10 @@ type IUserActivityInterop struct {
 var IID_IUserActivityInterop = win32.GUID{Data1: 0x1ade314d, Data2: 0x0e0a, Data3: 0x40d9, Data4: [8]byte{0x82, 0x4c, 0x9a, 0x08, 0x8a, 0x50, 0x05, 0x9f}}
 
 // CreateSessionForWindow dispatches through IUserActivityInterop's vtable slot 6.
-func (self *IUserActivityInterop) CreateSessionForWindow(window foundation.HWND, iid *win32.GUID, value *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(window), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+func (self *IUserActivityInterop) CreateSessionForWindow(window foundation.HWND, iid *win32.GUID) (*win32.IUnknown, error) {
+	var _value *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(window), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(&_value)))
+	return _value, win32.HRESULTError(int32(r1))
 }
 
 // IUserActivityRequestManagerInterop: https://learn.microsoft.com/windows/win32/api/useractivityinterop/nn-useractivityinterop-iuseractivityrequestmanagerinterop
@@ -690,9 +701,10 @@ type IUserActivityRequestManagerInterop struct {
 var IID_IUserActivityRequestManagerInterop = win32.GUID{Data1: 0xdd69f876, Data2: 0x9699, Data3: 0x4715, Data4: [8]byte{0x90, 0x95, 0xe3, 0x7e, 0xa3, 0x0d, 0xfa, 0x1b}}
 
 // GetForWindow dispatches through IUserActivityRequestManagerInterop's vtable slot 6.
-func (self *IUserActivityRequestManagerInterop) GetForWindow(window foundation.HWND, iid *win32.GUID, value *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(window), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+func (self *IUserActivityRequestManagerInterop) GetForWindow(window foundation.HWND, iid *win32.GUID) (*win32.IUnknown, error) {
+	var _value *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(window), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(&_value)))
+	return _value, win32.HRESULTError(int32(r1))
 }
 
 // IUserActivitySourceHostInterop: https://learn.microsoft.com/windows/win32/api/useractivityinterop/nn-useractivityinterop-iuseractivitysourcehostinterop
@@ -720,9 +732,10 @@ type IUserConsentVerifierInterop struct {
 var IID_IUserConsentVerifierInterop = win32.GUID{Data1: 0x39e050c3, Data2: 0x4e74, Data3: 0x441a, Data4: [8]byte{0x8d, 0xc0, 0xb8, 0x11, 0x04, 0xdf, 0x94, 0x9c}}
 
 // RequestVerificationForWindowAsync dispatches through IUserConsentVerifierInterop's vtable slot 6.
-func (self *IUserConsentVerifierInterop) RequestVerificationForWindowAsync(appWindow foundation.HWND, message HSTRING, riid *win32.GUID, asyncOperation *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(message), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(asyncOperation)))
-	return win32.HRESULTError(int32(r1))
+func (self *IUserConsentVerifierInterop) RequestVerificationForWindowAsync(appWindow foundation.HWND, message HSTRING, riid *win32.GUID) (*win32.IUnknown, error) {
+	var _asyncOperation *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(message), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_asyncOperation)))
+	return _asyncOperation, win32.HRESULTError(int32(r1))
 }
 
 // IWeakReference: https://learn.microsoft.com/windows/win32/api/weakreference/nn-weakreference-iweakreference
@@ -735,7 +748,7 @@ type IWeakReference struct {
 var IID_IWeakReference = win32.GUID{Data1: 0x00000037, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // Resolve dispatches through IWeakReference's vtable slot 3.
-func (self *IWeakReference) Resolve(riid *win32.GUID, objectReference *unsafe.Pointer) error {
+func (self *IWeakReference) Resolve(riid *win32.GUID, objectReference **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(objectReference)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -765,13 +778,15 @@ type IWebAuthenticationCoreManagerInterop struct {
 var IID_IWebAuthenticationCoreManagerInterop = win32.GUID{Data1: 0xf4b8e804, Data2: 0x811e, Data3: 0x4436, Data4: [8]byte{0xb6, 0x9c, 0x44, 0xcb, 0x67, 0xb7, 0x20, 0x84}}
 
 // RequestTokenForWindowAsync dispatches through IWebAuthenticationCoreManagerInterop's vtable slot 6.
-func (self *IWebAuthenticationCoreManagerInterop) RequestTokenForWindowAsync(appWindow foundation.HWND, request *IInspectable, riid *win32.GUID, asyncInfo *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(request)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(asyncInfo)))
-	return win32.HRESULTError(int32(r1))
+func (self *IWebAuthenticationCoreManagerInterop) RequestTokenForWindowAsync(appWindow foundation.HWND, request *IInspectable, riid *win32.GUID) (*win32.IUnknown, error) {
+	var _asyncInfo *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(request)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_asyncInfo)))
+	return _asyncInfo, win32.HRESULTError(int32(r1))
 }
 
 // RequestTokenWithWebAccountForWindowAsync dispatches through IWebAuthenticationCoreManagerInterop's vtable slot 7.
-func (self *IWebAuthenticationCoreManagerInterop) RequestTokenWithWebAccountForWindowAsync(appWindow foundation.HWND, request *IInspectable, webAccount *IInspectable, riid *win32.GUID, asyncInfo *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(request)), uintptr(unsafe.Pointer(webAccount)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(asyncInfo)))
-	return win32.HRESULTError(int32(r1))
+func (self *IWebAuthenticationCoreManagerInterop) RequestTokenWithWebAccountForWindowAsync(appWindow foundation.HWND, request *IInspectable, webAccount *IInspectable, riid *win32.GUID) (*win32.IUnknown, error) {
+	var _asyncInfo *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(request)), uintptr(unsafe.Pointer(webAccount)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_asyncInfo)))
+	return _asyncInfo, win32.HRESULTError(int32(r1))
 }

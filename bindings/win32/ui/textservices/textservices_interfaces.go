@@ -232,7 +232,7 @@ type IClonableWrapper struct {
 var IID_IClonableWrapper = win32.GUID{Data1: 0xb33e75ff, Data2: 0xe84c, Data3: 0x4dca, Data4: [8]byte{0xa2, 0x5c, 0x33, 0xb8, 0xdc, 0x00, 0x33, 0x74}}
 
 // CloneNewWrapper dispatches through IClonableWrapper's vtable slot 3.
-func (self *IClonableWrapper) CloneNewWrapper(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IClonableWrapper) CloneNewWrapper(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }

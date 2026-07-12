@@ -495,7 +495,7 @@ func (self *ID3D11Device) CreateDeferredContext(ContextFlags uint32, ppDeferredC
 }
 
 // OpenSharedResource dispatches through ID3D11Device's vtable slot 28.
-func (self *ID3D11Device) OpenSharedResource(hResource foundation.HANDLE, ReturnedInterface *win32.GUID, ppResource *unsafe.Pointer) error {
+func (self *ID3D11Device) OpenSharedResource(hResource foundation.HANDLE, ReturnedInterface *win32.GUID, ppResource **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(hResource), uintptr(unsafe.Pointer(ReturnedInterface)), uintptr(unsafe.Pointer(ppResource)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -633,13 +633,13 @@ func (self *ID3D11Device1) CreateDeviceContextState(Flags uint32, pFeatureLevels
 }
 
 // OpenSharedResource1 dispatches through ID3D11Device1's vtable slot 48.
-func (self *ID3D11Device1) OpenSharedResource1(hResource foundation.HANDLE, returnedInterface *win32.GUID, ppResource *unsafe.Pointer) error {
+func (self *ID3D11Device1) OpenSharedResource1(hResource foundation.HANDLE, returnedInterface *win32.GUID, ppResource **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(hResource), uintptr(unsafe.Pointer(returnedInterface)), uintptr(unsafe.Pointer(ppResource)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // OpenSharedResourceByName dispatches through ID3D11Device1's vtable slot 49.
-func (self *ID3D11Device1) OpenSharedResourceByName(lpName string, dwDesiredAccess uint32, returnedInterface *win32.GUID, ppResource *unsafe.Pointer) error {
+func (self *ID3D11Device1) OpenSharedResourceByName(lpName string, dwDesiredAccess uint32, returnedInterface *win32.GUID, ppResource **win32.IUnknown) error {
 	_lpName := win32.UTF16Ptr(lpName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpName)), uintptr(dwDesiredAccess), uintptr(unsafe.Pointer(returnedInterface)), uintptr(unsafe.Pointer(ppResource)))
 	return win32.HRESULTError(int32(r1))
@@ -778,13 +778,13 @@ type ID3D11Device5 struct {
 var IID_ID3D11Device5 = win32.GUID{Data1: 0x8ffde202, Data2: 0xa0e7, Data3: 0x45df, Data4: [8]byte{0x9e, 0x01, 0xe8, 0x37, 0x80, 0x1b, 0x5e, 0xa0}}
 
 // OpenSharedFence dispatches through ID3D11Device5's vtable slot 67.
-func (self *ID3D11Device5) OpenSharedFence(hFence foundation.HANDLE, ReturnedInterface *win32.GUID, ppFence *unsafe.Pointer) error {
+func (self *ID3D11Device5) OpenSharedFence(hFence foundation.HANDLE, ReturnedInterface *win32.GUID, ppFence **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(hFence), uintptr(unsafe.Pointer(ReturnedInterface)), uintptr(unsafe.Pointer(ppFence)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateFence dispatches through ID3D11Device5's vtable slot 68.
-func (self *ID3D11Device5) CreateFence(InitialValue uint64, Flags D3D11_FENCE_FLAG, ReturnedInterface *win32.GUID, ppFence *unsafe.Pointer) error {
+func (self *ID3D11Device5) CreateFence(InitialValue uint64, Flags D3D11_FENCE_FLAG, ReturnedInterface *win32.GUID, ppFence **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(InitialValue), uintptr(Flags), uintptr(unsafe.Pointer(ReturnedInterface)), uintptr(unsafe.Pointer(ppFence)))
 	return win32.HRESULTError(int32(r1))
 }

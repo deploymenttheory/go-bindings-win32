@@ -131,7 +131,7 @@ func PSCreateDelayedMultiplexPropertyStore(flags GETPROPERTYSTOREFLAGS, pdpsf *I
 // PSCreateMemoryPropertyStore calls PROPSYS!PSCreateMemoryPropertyStore.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pscreatememorypropertystore
 // Minimum OS: windows5.1.2600.
-func PSCreateMemoryPropertyStore(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func PSCreateMemoryPropertyStore(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procPSCreateMemoryPropertyStore.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -727,7 +727,7 @@ func SHAddDefaultPropertiesByExt(pszExt string, pPropStore *IPropertyStore) erro
 // SHGetPropertyStoreForWindow calls SHELL32!SHGetPropertyStoreForWindow.
 // https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-shgetpropertystoreforwindow
 // Minimum OS: windows6.1.
-func SHGetPropertyStoreForWindow(hwnd foundation.HWND, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func SHGetPropertyStoreForWindow(hwnd foundation.HWND, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procSHGetPropertyStoreForWindow.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -743,7 +743,7 @@ func SHGetPropertyStoreFromIDList(pidl *uishellcommon.ITEMIDLIST, flags GETPROPE
 // SHGetPropertyStoreFromParsingName calls SHELL32!SHGetPropertyStoreFromParsingName.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shgetpropertystorefromparsingname
 // Minimum OS: windows6.0.6000.
-func SHGetPropertyStoreFromParsingName(pszPath string, pbc *systemcom.IBindCtx, flags GETPROPERTYSTOREFLAGS, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func SHGetPropertyStoreFromParsingName(pszPath string, pbc *systemcom.IBindCtx, flags GETPROPERTYSTOREFLAGS, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	r1, _, _ := syscall.SyscallN(procSHGetPropertyStoreFromParsingName.Addr(), uintptr(unsafe.Pointer(_pszPath)), uintptr(unsafe.Pointer(pbc)), uintptr(flags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))

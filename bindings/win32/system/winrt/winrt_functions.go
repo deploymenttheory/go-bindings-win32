@@ -104,14 +104,14 @@ func CoDecodeProxy(dwClientPid uint32, ui64ProxyAddress uint64, pServerInformati
 
 // CreateControlInput calls Windows.UI!CreateControlInput.
 // https://learn.microsoft.com/windows/win32/api/corewindow/nf-corewindow-createcontrolinput
-func CreateControlInput(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func CreateControlInput(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCreateControlInput.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateControlInputEx calls Windows.UI!CreateControlInputEx.
 // https://learn.microsoft.com/windows/win32/api/corewindow/nf-corewindow-createcontrolinputex
-func CreateControlInputEx(pCoreWindow *systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func CreateControlInputEx(pCoreWindow *systemcom.IUnknown, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCreateControlInputEx.Addr(), uintptr(unsafe.Pointer(pCoreWindow)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -119,7 +119,7 @@ func CreateControlInputEx(pCoreWindow *systemcom.IUnknown, riid *win32.GUID, ppv
 // CreateRandomAccessStreamOnFile calls api-ms-win-shcore-stream-winrt-l1-1-0!CreateRandomAccessStreamOnFile.
 // https://learn.microsoft.com/windows/win32/api/shcore/nf-shcore-createrandomaccessstreamonfile
 // Minimum OS: windows8.0.
-func CreateRandomAccessStreamOnFile(filePath string, accessMode uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func CreateRandomAccessStreamOnFile(filePath string, accessMode uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_filePath := win32.UTF16Ptr(filePath)
 	r1, _, _ := syscall.SyscallN(procCreateRandomAccessStreamOnFile.Addr(), uintptr(unsafe.Pointer(_filePath)), uintptr(accessMode), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
@@ -128,7 +128,7 @@ func CreateRandomAccessStreamOnFile(filePath string, accessMode uint32, riid *wi
 // CreateRandomAccessStreamOverStream calls api-ms-win-shcore-stream-winrt-l1-1-0!CreateRandomAccessStreamOverStream.
 // https://learn.microsoft.com/windows/win32/api/shcore/nf-shcore-createrandomaccessstreamoverstream
 // Minimum OS: windows8.0.
-func CreateRandomAccessStreamOverStream(stream *systemcom.IStream, options BSOS_OPTIONS, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func CreateRandomAccessStreamOverStream(stream *systemcom.IStream, options BSOS_OPTIONS, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCreateRandomAccessStreamOverStream.Addr(), uintptr(unsafe.Pointer(stream)), uintptr(options), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -136,7 +136,7 @@ func CreateRandomAccessStreamOverStream(stream *systemcom.IStream, options BSOS_
 // CreateStreamOverRandomAccessStream calls api-ms-win-shcore-stream-winrt-l1-1-0!CreateStreamOverRandomAccessStream.
 // https://learn.microsoft.com/windows/win32/api/shcore/nf-shcore-createstreamoverrandomaccessstream
 // Minimum OS: windows8.0.
-func CreateStreamOverRandomAccessStream(randomAccessStream *systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func CreateStreamOverRandomAccessStream(randomAccessStream *systemcom.IUnknown, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCreateStreamOverRandomAccessStream.Addr(), uintptr(unsafe.Pointer(randomAccessStream)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -252,7 +252,7 @@ func RoFailFastWithErrorContext(hrError foundation.HRESULT) {
 // RoGetActivationFactory calls api-ms-win-core-winrt-l1-1-0!RoGetActivationFactory.
 // https://learn.microsoft.com/windows/win32/api/roapi/nf-roapi-rogetactivationfactory
 // Minimum OS: windows8.0.
-func RoGetActivationFactory(activatableClassId HSTRING, iid *win32.GUID, factory *unsafe.Pointer) error {
+func RoGetActivationFactory(activatableClassId HSTRING, iid *win32.GUID, factory **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procRoGetActivationFactory.Addr(), uintptr(activatableClassId), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(factory)))
 	return win32.HRESULTError(int32(r1))
 }

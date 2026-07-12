@@ -738,7 +738,7 @@ var (
 // AssocCreateForClasses calls SHELL32!AssocCreateForClasses.
 // https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-assoccreateforclasses
 // Minimum OS: windows6.0.6000.
-func AssocCreateForClasses(rgClasses []ASSOCIATIONELEMENT, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func AssocCreateForClasses(rgClasses []ASSOCIATIONELEMENT, riid *win32.GUID, ppv **win32.IUnknown) error {
 	var _rgClasses *ASSOCIATIONELEMENT
 	if len(rgClasses) > 0 {
 		_rgClasses = &rgClasses[0]
@@ -1415,19 +1415,19 @@ func HashData(pbData []byte, pbHash []byte) error {
 }
 
 // HlinkClone calls hlink!HlinkClone.
-func HlinkClone(pihl *IHlink, riid *win32.GUID, pihlsiteForClone *IHlinkSite, dwSiteData uint32, ppvObj *unsafe.Pointer) error {
+func HlinkClone(pihl *IHlink, riid *win32.GUID, pihlsiteForClone *IHlinkSite, dwSiteData uint32, ppvObj **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procHlinkClone.Addr(), uintptr(unsafe.Pointer(pihl)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pihlsiteForClone)), uintptr(dwSiteData), uintptr(unsafe.Pointer(ppvObj)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // HlinkCreateBrowseContext calls hlink!HlinkCreateBrowseContext.
-func HlinkCreateBrowseContext(piunkOuter *systemcom.IUnknown, riid *win32.GUID, ppvObj *unsafe.Pointer) error {
+func HlinkCreateBrowseContext(piunkOuter *systemcom.IUnknown, riid *win32.GUID, ppvObj **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procHlinkCreateBrowseContext.Addr(), uintptr(unsafe.Pointer(piunkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObj)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // HlinkCreateExtensionServices calls hlink!HlinkCreateExtensionServices.
-func HlinkCreateExtensionServices(pwzAdditionalHeaders string, phwnd foundation.HWND, pszUsername string, pszPassword string, piunkOuter *systemcom.IUnknown, riid *win32.GUID, ppvObj *unsafe.Pointer) error {
+func HlinkCreateExtensionServices(pwzAdditionalHeaders string, phwnd foundation.HWND, pszUsername string, pszPassword string, piunkOuter *systemcom.IUnknown, riid *win32.GUID, ppvObj **win32.IUnknown) error {
 	_pwzAdditionalHeaders := win32.UTF16Ptr(pwzAdditionalHeaders)
 	_pszUsername := win32.UTF16Ptr(pszUsername)
 	_pszPassword := win32.UTF16Ptr(pszPassword)
@@ -1436,13 +1436,13 @@ func HlinkCreateExtensionServices(pwzAdditionalHeaders string, phwnd foundation.
 }
 
 // HlinkCreateFromData calls hlink!HlinkCreateFromData.
-func HlinkCreateFromData(piDataObj *systemcom.IDataObject, pihlsite *IHlinkSite, dwSiteData uint32, piunkOuter *systemcom.IUnknown, riid *win32.GUID, ppvObj *unsafe.Pointer) error {
+func HlinkCreateFromData(piDataObj *systemcom.IDataObject, pihlsite *IHlinkSite, dwSiteData uint32, piunkOuter *systemcom.IUnknown, riid *win32.GUID, ppvObj **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procHlinkCreateFromData.Addr(), uintptr(unsafe.Pointer(piDataObj)), uintptr(unsafe.Pointer(pihlsite)), uintptr(dwSiteData), uintptr(unsafe.Pointer(piunkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObj)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // HlinkCreateFromMoniker calls hlink!HlinkCreateFromMoniker.
-func HlinkCreateFromMoniker(pimkTrgt *systemcom.IMoniker, pwzLocation string, pwzFriendlyName string, pihlsite *IHlinkSite, dwSiteData uint32, piunkOuter *systemcom.IUnknown, riid *win32.GUID, ppvObj *unsafe.Pointer) error {
+func HlinkCreateFromMoniker(pimkTrgt *systemcom.IMoniker, pwzLocation string, pwzFriendlyName string, pihlsite *IHlinkSite, dwSiteData uint32, piunkOuter *systemcom.IUnknown, riid *win32.GUID, ppvObj **win32.IUnknown) error {
 	_pwzLocation := win32.UTF16Ptr(pwzLocation)
 	_pwzFriendlyName := win32.UTF16Ptr(pwzFriendlyName)
 	r1, _, _ := syscall.SyscallN(procHlinkCreateFromMoniker.Addr(), uintptr(unsafe.Pointer(pimkTrgt)), uintptr(unsafe.Pointer(_pwzLocation)), uintptr(unsafe.Pointer(_pwzFriendlyName)), uintptr(unsafe.Pointer(pihlsite)), uintptr(dwSiteData), uintptr(unsafe.Pointer(piunkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObj)))
@@ -1450,7 +1450,7 @@ func HlinkCreateFromMoniker(pimkTrgt *systemcom.IMoniker, pwzLocation string, pw
 }
 
 // HlinkCreateFromString calls hlink!HlinkCreateFromString.
-func HlinkCreateFromString(pwzTarget string, pwzLocation string, pwzFriendlyName string, pihlsite *IHlinkSite, dwSiteData uint32, piunkOuter *systemcom.IUnknown, riid *win32.GUID, ppvObj *unsafe.Pointer) error {
+func HlinkCreateFromString(pwzTarget string, pwzLocation string, pwzFriendlyName string, pihlsite *IHlinkSite, dwSiteData uint32, piunkOuter *systemcom.IUnknown, riid *win32.GUID, ppvObj **win32.IUnknown) error {
 	_pwzTarget := win32.UTF16Ptr(pwzTarget)
 	_pwzLocation := win32.UTF16Ptr(pwzLocation)
 	_pwzFriendlyName := win32.UTF16Ptr(pwzFriendlyName)
@@ -1831,7 +1831,7 @@ func IUnknown_AtomicRelease(ppunk *unsafe.Pointer) {
 // IUnknown_GetSite calls SHLWAPI!IUnknown_GetSite.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-iunknown_getsite
 // Minimum OS: windows5.0.
-func IUnknown_GetSite(punk *systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func IUnknown_GetSite(punk *systemcom.IUnknown, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procIUnknown_GetSite.Addr(), uintptr(unsafe.Pointer(punk)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1847,7 +1847,7 @@ func IUnknown_GetWindow(punk *systemcom.IUnknown, phwnd *foundation.HWND) error 
 // IUnknown_QueryService calls SHLWAPI!IUnknown_QueryService.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-iunknown_queryservice
 // Minimum OS: windows5.0.
-func IUnknown_QueryService(punk *systemcom.IUnknown, guidService *win32.GUID, riid *win32.GUID, ppvOut *unsafe.Pointer) error {
+func IUnknown_QueryService(punk *systemcom.IUnknown, guidService *win32.GUID, riid *win32.GUID, ppvOut **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procIUnknown_QueryService.Addr(), uintptr(unsafe.Pointer(punk)), uintptr(unsafe.Pointer(guidService)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvOut)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -3287,7 +3287,7 @@ func PropVariantToStrRet(propvar *systemcomstructuredstorage.PROPVARIANT, pstrre
 // QISearch calls SHLWAPI!QISearch.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-qisearch
 // Minimum OS: windows5.0.
-func QISearch(that unsafe.Pointer, pqit *QITAB, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func QISearch(that unsafe.Pointer, pqit *QITAB, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procQISearch.Addr(), uintptr(unsafe.Pointer(that)), uintptr(unsafe.Pointer(pqit)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -3443,7 +3443,7 @@ func SHAssocEnumHandlers(pszExtra string, afFilter ASSOC_FILTER, ppEnumHandler *
 // SHAssocEnumHandlersForProtocolByApplication calls SHELL32!SHAssocEnumHandlersForProtocolByApplication.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shassocenumhandlersforprotocolbyapplication
 // Minimum OS: windows6.1.
-func SHAssocEnumHandlersForProtocolByApplication(protocol string, riid *win32.GUID, enumHandlers *unsafe.Pointer) error {
+func SHAssocEnumHandlersForProtocolByApplication(protocol string, riid *win32.GUID, enumHandlers **win32.IUnknown) error {
 	_protocol := win32.UTF16Ptr(protocol)
 	r1, _, _ := syscall.SyscallN(procSHAssocEnumHandlersForProtocolByApplication.Addr(), uintptr(unsafe.Pointer(_protocol)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(enumHandlers)))
 	return win32.HRESULTError(int32(r1))
@@ -3460,7 +3460,7 @@ func SHAutoComplete(hwndEdit foundation.HWND, dwFlags SHELL_AUTOCOMPLETE_FLAGS) 
 // SHBindToFolderIDListParent calls SHELL32!SHBindToFolderIDListParent.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shbindtofolderidlistparent
 // Minimum OS: windows6.0.6000.
-func SHBindToFolderIDListParent(psfRoot *IShellFolder, pidl *uishellcommon.ITEMIDLIST, riid *win32.GUID, ppv *unsafe.Pointer, ppidlLast **uishellcommon.ITEMIDLIST) error {
+func SHBindToFolderIDListParent(psfRoot *IShellFolder, pidl *uishellcommon.ITEMIDLIST, riid *win32.GUID, ppv **win32.IUnknown, ppidlLast **uishellcommon.ITEMIDLIST) error {
 	r1, _, _ := syscall.SyscallN(procSHBindToFolderIDListParent.Addr(), uintptr(unsafe.Pointer(psfRoot)), uintptr(unsafe.Pointer(pidl)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)), uintptr(unsafe.Pointer(ppidlLast)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -3468,7 +3468,7 @@ func SHBindToFolderIDListParent(psfRoot *IShellFolder, pidl *uishellcommon.ITEMI
 // SHBindToFolderIDListParentEx calls SHELL32!SHBindToFolderIDListParentEx.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shbindtofolderidlistparentex
 // Minimum OS: windows6.0.6000.
-func SHBindToFolderIDListParentEx(psfRoot *IShellFolder, pidl *uishellcommon.ITEMIDLIST, ppbc *systemcom.IBindCtx, riid *win32.GUID, ppv *unsafe.Pointer, ppidlLast **uishellcommon.ITEMIDLIST) error {
+func SHBindToFolderIDListParentEx(psfRoot *IShellFolder, pidl *uishellcommon.ITEMIDLIST, ppbc *systemcom.IBindCtx, riid *win32.GUID, ppv **win32.IUnknown, ppidlLast **uishellcommon.ITEMIDLIST) error {
 	r1, _, _ := syscall.SyscallN(procSHBindToFolderIDListParentEx.Addr(), uintptr(unsafe.Pointer(psfRoot)), uintptr(unsafe.Pointer(pidl)), uintptr(unsafe.Pointer(ppbc)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)), uintptr(unsafe.Pointer(ppidlLast)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -3476,7 +3476,7 @@ func SHBindToFolderIDListParentEx(psfRoot *IShellFolder, pidl *uishellcommon.ITE
 // SHBindToObject calls SHELL32!SHBindToObject.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shbindtoobject
 // Minimum OS: windows6.0.6000.
-func SHBindToObject(psf *IShellFolder, pidl *uishellcommon.ITEMIDLIST, pbc *systemcom.IBindCtx, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func SHBindToObject(psf *IShellFolder, pidl *uishellcommon.ITEMIDLIST, pbc *systemcom.IBindCtx, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procSHBindToObject.Addr(), uintptr(unsafe.Pointer(psf)), uintptr(unsafe.Pointer(pidl)), uintptr(unsafe.Pointer(pbc)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -3484,7 +3484,7 @@ func SHBindToObject(psf *IShellFolder, pidl *uishellcommon.ITEMIDLIST, pbc *syst
 // SHBindToParent calls SHELL32!SHBindToParent.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shbindtoparent
 // Minimum OS: windows5.0.
-func SHBindToParent(pidl *uishellcommon.ITEMIDLIST, riid *win32.GUID, ppv *unsafe.Pointer, ppidlLast **uishellcommon.ITEMIDLIST) error {
+func SHBindToParent(pidl *uishellcommon.ITEMIDLIST, riid *win32.GUID, ppv **win32.IUnknown, ppidlLast **uishellcommon.ITEMIDLIST) error {
 	r1, _, _ := syscall.SyscallN(procSHBindToParent.Addr(), uintptr(unsafe.Pointer(pidl)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)), uintptr(unsafe.Pointer(ppidlLast)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -3572,7 +3572,7 @@ func SHCloneSpecialIDList(csidl int32, fCreate bool) *uishellcommon.ITEMIDLIST {
 // SHCoCreateInstance calls SHELL32!SHCoCreateInstance.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shcocreateinstance
 // Minimum OS: windows5.1.2600.
-func SHCoCreateInstance(pszCLSID string, pclsid *win32.GUID, pUnkOuter *systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func SHCoCreateInstance(pszCLSID string, pclsid *win32.GUID, pUnkOuter *systemcom.IUnknown, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszCLSID := win32.UTF16Ptr(pszCLSID)
 	r1, _, _ := syscall.SyscallN(procSHCoCreateInstance.Addr(), uintptr(unsafe.Pointer(_pszCLSID)), uintptr(unsafe.Pointer(pclsid)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
@@ -3598,7 +3598,7 @@ func SHCopyKeyA(hkeySrc systemregistry.HKEY, pszSrcSubKey foundation.PSTR, hkeyD
 // SHCreateAssociationRegistration calls SHELL32!SHCreateAssociationRegistration.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shcreateassociationregistration
 // Minimum OS: windows6.0.6000.
-func SHCreateAssociationRegistration(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func SHCreateAssociationRegistration(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procSHCreateAssociationRegistration.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -3606,7 +3606,7 @@ func SHCreateAssociationRegistration(riid *win32.GUID, ppv *unsafe.Pointer) erro
 // SHCreateDataObject calls SHELL32!SHCreateDataObject.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shcreatedataobject
 // Minimum OS: windows6.0.6000.
-func SHCreateDataObject(pidlFolder *uishellcommon.ITEMIDLIST, apidl []*uishellcommon.ITEMIDLIST, pdtInner *systemcom.IDataObject, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func SHCreateDataObject(pidlFolder *uishellcommon.ITEMIDLIST, apidl []*uishellcommon.ITEMIDLIST, pdtInner *systemcom.IDataObject, riid *win32.GUID, ppv **win32.IUnknown) error {
 	var _apidl **uishellcommon.ITEMIDLIST
 	if len(apidl) > 0 {
 		_apidl = &apidl[0]
@@ -3618,7 +3618,7 @@ func SHCreateDataObject(pidlFolder *uishellcommon.ITEMIDLIST, apidl []*uishellco
 // SHCreateDefaultContextMenu calls SHELL32!SHCreateDefaultContextMenu.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shcreatedefaultcontextmenu
 // Minimum OS: windows6.0.6000.
-func SHCreateDefaultContextMenu(pdcm *DEFCONTEXTMENU, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func SHCreateDefaultContextMenu(pdcm *DEFCONTEXTMENU, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procSHCreateDefaultContextMenu.Addr(), uintptr(unsafe.Pointer(pdcm)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -3626,7 +3626,7 @@ func SHCreateDefaultContextMenu(pdcm *DEFCONTEXTMENU, riid *win32.GUID, ppv *uns
 // SHCreateDefaultExtractIcon calls SHELL32!SHCreateDefaultExtractIcon.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shcreatedefaultextracticon
 // Minimum OS: windows6.0.6000.
-func SHCreateDefaultExtractIcon(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func SHCreateDefaultExtractIcon(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procSHCreateDefaultExtractIcon.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -3668,7 +3668,7 @@ func SHCreateDirectoryExA(hwnd foundation.HWND, pszPath foundation.PSTR, psa *se
 // SHCreateFileExtractIcon calls SHELL32!SHCreateFileExtractIconW.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shcreatefileextracticonw
 // Minimum OS: windows5.1.2600.
-func SHCreateFileExtractIcon(pszFile string, dwFileAttributes uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func SHCreateFileExtractIcon(pszFile string, dwFileAttributes uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszFile := win32.UTF16Ptr(pszFile)
 	r1, _, _ := syscall.SyscallN(procSHCreateFileExtractIcon.Addr(), uintptr(unsafe.Pointer(_pszFile)), uintptr(dwFileAttributes), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
@@ -3677,7 +3677,7 @@ func SHCreateFileExtractIcon(pszFile string, dwFileAttributes uint32, riid *win3
 // SHCreateItemFromIDList calls SHELL32!SHCreateItemFromIDList.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shcreateitemfromidlist
 // Minimum OS: windows6.0.6000.
-func SHCreateItemFromIDList(pidl *uishellcommon.ITEMIDLIST, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func SHCreateItemFromIDList(pidl *uishellcommon.ITEMIDLIST, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procSHCreateItemFromIDList.Addr(), uintptr(unsafe.Pointer(pidl)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -3685,7 +3685,7 @@ func SHCreateItemFromIDList(pidl *uishellcommon.ITEMIDLIST, riid *win32.GUID, pp
 // SHCreateItemFromParsingName calls SHELL32!SHCreateItemFromParsingName.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shcreateitemfromparsingname
 // Minimum OS: windows6.0.6000.
-func SHCreateItemFromParsingName(pszPath string, pbc *systemcom.IBindCtx, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func SHCreateItemFromParsingName(pszPath string, pbc *systemcom.IBindCtx, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	r1, _, _ := syscall.SyscallN(procSHCreateItemFromParsingName.Addr(), uintptr(unsafe.Pointer(_pszPath)), uintptr(unsafe.Pointer(pbc)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
@@ -3694,7 +3694,7 @@ func SHCreateItemFromParsingName(pszPath string, pbc *systemcom.IBindCtx, riid *
 // SHCreateItemFromRelativeName calls SHELL32!SHCreateItemFromRelativeName.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shcreateitemfromrelativename
 // Minimum OS: windows6.0.6000.
-func SHCreateItemFromRelativeName(psiParent *IShellItem, pszName string, pbc *systemcom.IBindCtx, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func SHCreateItemFromRelativeName(psiParent *IShellItem, pszName string, pbc *systemcom.IBindCtx, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszName := win32.UTF16Ptr(pszName)
 	r1, _, _ := syscall.SyscallN(procSHCreateItemFromRelativeName.Addr(), uintptr(unsafe.Pointer(psiParent)), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(pbc)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
@@ -3703,7 +3703,7 @@ func SHCreateItemFromRelativeName(psiParent *IShellItem, pszName string, pbc *sy
 // SHCreateItemInKnownFolder calls SHELL32!SHCreateItemInKnownFolder.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shcreateiteminknownfolder
 // Minimum OS: windows6.0.6000.
-func SHCreateItemInKnownFolder(kfid *win32.GUID, dwKFFlags uint32, pszItem string, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func SHCreateItemInKnownFolder(kfid *win32.GUID, dwKFFlags uint32, pszItem string, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszItem := win32.UTF16Ptr(pszItem)
 	r1, _, _ := syscall.SyscallN(procSHCreateItemInKnownFolder.Addr(), uintptr(unsafe.Pointer(kfid)), uintptr(dwKFFlags), uintptr(unsafe.Pointer(_pszItem)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
@@ -3712,7 +3712,7 @@ func SHCreateItemInKnownFolder(kfid *win32.GUID, dwKFFlags uint32, pszItem strin
 // SHCreateItemWithParent calls SHELL32!SHCreateItemWithParent.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shcreateitemwithparent
 // Minimum OS: windows6.0.6000.
-func SHCreateItemWithParent(pidlParent *uishellcommon.ITEMIDLIST, psfParent *IShellFolder, pidl *uishellcommon.ITEMIDLIST, riid *win32.GUID, ppvItem *unsafe.Pointer) error {
+func SHCreateItemWithParent(pidlParent *uishellcommon.ITEMIDLIST, psfParent *IShellFolder, pidl *uishellcommon.ITEMIDLIST, riid *win32.GUID, ppvItem **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procSHCreateItemWithParent.Addr(), uintptr(unsafe.Pointer(pidlParent)), uintptr(unsafe.Pointer(psfParent)), uintptr(unsafe.Pointer(pidl)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvItem)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -3796,7 +3796,7 @@ func SHCreateShellItemArray(pidlParent *uishellcommon.ITEMIDLIST, psf *IShellFol
 // SHCreateShellItemArrayFromDataObject calls SHELL32!SHCreateShellItemArrayFromDataObject.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shcreateshellitemarrayfromdataobject
 // Minimum OS: windows6.0.6000.
-func SHCreateShellItemArrayFromDataObject(pdo *systemcom.IDataObject, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func SHCreateShellItemArrayFromDataObject(pdo *systemcom.IDataObject, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procSHCreateShellItemArrayFromDataObject.Addr(), uintptr(unsafe.Pointer(pdo)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -3816,7 +3816,7 @@ func SHCreateShellItemArrayFromIDLists(rgpidl []*uishellcommon.ITEMIDLIST, ppsiI
 // SHCreateShellItemArrayFromShellItem calls SHELL32!SHCreateShellItemArrayFromShellItem.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shcreateshellitemarrayfromshellitem
 // Minimum OS: windows6.0.6000.
-func SHCreateShellItemArrayFromShellItem(psi *IShellItem, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func SHCreateShellItemArrayFromShellItem(psi *IShellItem, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procSHCreateShellItemArrayFromShellItem.Addr(), uintptr(unsafe.Pointer(psi)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -4294,7 +4294,7 @@ func SHGetIconOverlayIndexA(pszIconPath foundation.PSTR, iIconIndex int32) int32
 // SHGetImageList calls SHELL32!SHGetImageList.
 // https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-shgetimagelist
 // Minimum OS: windows5.1.2600.
-func SHGetImageList(iImageList int32, riid *win32.GUID, ppvObj *unsafe.Pointer) error {
+func SHGetImageList(iImageList int32, riid *win32.GUID, ppvObj **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procSHGetImageList.Addr(), uintptr(iImageList), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObj)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -4322,7 +4322,7 @@ func SHGetInverseCMAP(pbMap []byte) error {
 // SHGetItemFromDataObject calls SHELL32!SHGetItemFromDataObject.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shgetitemfromdataobject
 // Minimum OS: windows6.1.
-func SHGetItemFromDataObject(pdtobj *systemcom.IDataObject, dwFlags DATAOBJ_GET_ITEM_FLAGS, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func SHGetItemFromDataObject(pdtobj *systemcom.IDataObject, dwFlags DATAOBJ_GET_ITEM_FLAGS, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procSHGetItemFromDataObject.Addr(), uintptr(unsafe.Pointer(pdtobj)), uintptr(dwFlags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -4330,7 +4330,7 @@ func SHGetItemFromDataObject(pdtobj *systemcom.IDataObject, dwFlags DATAOBJ_GET_
 // SHGetItemFromObject calls SHELL32!SHGetItemFromObject.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shgetitemfromobject
 // Minimum OS: windows6.1.
-func SHGetItemFromObject(punk *systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func SHGetItemFromObject(punk *systemcom.IUnknown, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procSHGetItemFromObject.Addr(), uintptr(unsafe.Pointer(punk)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -4346,7 +4346,7 @@ func SHGetKnownFolderIDList(rfid *win32.GUID, dwFlags uint32, hToken foundation.
 // SHGetKnownFolderItem calls SHELL32!SHGetKnownFolderItem.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shgetknownfolderitem
 // Minimum OS: windows6.1.
-func SHGetKnownFolderItem(rfid *win32.GUID, flags KNOWN_FOLDER_FLAG, hToken foundation.HANDLE, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func SHGetKnownFolderItem(rfid *win32.GUID, flags KNOWN_FOLDER_FLAG, hToken foundation.HANDLE, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procSHGetKnownFolderItem.Addr(), uintptr(unsafe.Pointer(rfid)), uintptr(flags), uintptr(hToken), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -4538,7 +4538,7 @@ func SHGetValueA(hkey systemregistry.HKEY, pszSubKey foundation.PSTR, pszValue f
 // SHGetViewStatePropertyBag calls SHLWAPI!SHGetViewStatePropertyBag.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shgetviewstatepropertybag
 // Minimum OS: windows5.1.2600.
-func SHGetViewStatePropertyBag(pidl *uishellcommon.ITEMIDLIST, pszBagName string, dwFlags uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func SHGetViewStatePropertyBag(pidl *uishellcommon.ITEMIDLIST, pszBagName string, dwFlags uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszBagName := win32.UTF16Ptr(pszBagName)
 	r1, _, _ := syscall.SyscallN(procSHGetViewStatePropertyBag.Addr(), uintptr(unsafe.Pointer(pidl)), uintptr(unsafe.Pointer(_pszBagName)), uintptr(dwFlags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
@@ -5704,7 +5704,7 @@ func SoftwareUpdateMessageBox(hWnd foundation.HWND, pszDistUnit string, dwFlags 
 // StgMakeUniqueName calls SHELL32!StgMakeUniqueName.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-stgmakeuniquename
 // Minimum OS: windows6.1.
-func StgMakeUniqueName(pstgParent *systemcomstructuredstorage.IStorage, pszFileSpec string, grfMode uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func StgMakeUniqueName(pstgParent *systemcomstructuredstorage.IStorage, pszFileSpec string, grfMode uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszFileSpec := win32.UTF16Ptr(pszFileSpec)
 	r1, _, _ := syscall.SyscallN(procStgMakeUniqueName.Addr(), uintptr(unsafe.Pointer(pstgParent)), uintptr(unsafe.Pointer(_pszFileSpec)), uintptr(grfMode), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))

@@ -372,7 +372,7 @@ type ID3D12VideoDecoder1 struct {
 var IID_ID3D12VideoDecoder1 = win32.GUID{Data1: 0x79a2e5fb, Data2: 0xccd2, Data3: 0x469a, Data4: [8]byte{0x9f, 0xde, 0x19, 0x5d, 0x10, 0x95, 0x1f, 0x7e}}
 
 // GetProtectedResourceSession dispatches through ID3D12VideoDecoder1's vtable slot 9.
-func (self *ID3D12VideoDecoder1) GetProtectedResourceSession(riid *win32.GUID, ppProtectedSession *unsafe.Pointer) error {
+func (self *ID3D12VideoDecoder1) GetProtectedResourceSession(riid *win32.GUID, ppProtectedSession **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppProtectedSession)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -396,7 +396,7 @@ type ID3D12VideoDecoderHeap1 struct {
 var IID_ID3D12VideoDecoderHeap1 = win32.GUID{Data1: 0xda1d98c5, Data2: 0x539f, Data3: 0x41b2, Data4: [8]byte{0xbf, 0x6b, 0x11, 0x98, 0xa0, 0x3b, 0x6d, 0x26}}
 
 // GetProtectedResourceSession dispatches through ID3D12VideoDecoderHeap1's vtable slot 9.
-func (self *ID3D12VideoDecoderHeap1) GetProtectedResourceSession(riid *win32.GUID, ppProtectedSession *unsafe.Pointer) error {
+func (self *ID3D12VideoDecoderHeap1) GetProtectedResourceSession(riid *win32.GUID, ppProtectedSession **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppProtectedSession)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -421,19 +421,19 @@ func (self *ID3D12VideoDevice) CheckFeatureSupport(FeatureVideo D3D12_FEATURE_VI
 }
 
 // CreateVideoDecoder dispatches through ID3D12VideoDevice's vtable slot 4.
-func (self *ID3D12VideoDevice) CreateVideoDecoder(pDesc *D3D12_VIDEO_DECODER_DESC, riid *win32.GUID, ppVideoDecoder *unsafe.Pointer) error {
+func (self *ID3D12VideoDevice) CreateVideoDecoder(pDesc *D3D12_VIDEO_DECODER_DESC, riid *win32.GUID, ppVideoDecoder **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppVideoDecoder)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateVideoDecoderHeap dispatches through ID3D12VideoDevice's vtable slot 5.
-func (self *ID3D12VideoDevice) CreateVideoDecoderHeap(pVideoDecoderHeapDesc *D3D12_VIDEO_DECODER_HEAP_DESC, riid *win32.GUID, ppVideoDecoderHeap *unsafe.Pointer) error {
+func (self *ID3D12VideoDevice) CreateVideoDecoderHeap(pVideoDecoderHeapDesc *D3D12_VIDEO_DECODER_HEAP_DESC, riid *win32.GUID, ppVideoDecoderHeap **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoDecoderHeapDesc)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppVideoDecoderHeap)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateVideoProcessor dispatches through ID3D12VideoDevice's vtable slot 6.
-func (self *ID3D12VideoDevice) CreateVideoProcessor(NodeMask uint32, pOutputStreamDesc *D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC, pInputStreamDescs []D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC, riid *win32.GUID, ppVideoProcessor *unsafe.Pointer) error {
+func (self *ID3D12VideoDevice) CreateVideoProcessor(NodeMask uint32, pOutputStreamDesc *D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC, pInputStreamDescs []D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC, riid *win32.GUID, ppVideoProcessor **win32.IUnknown) error {
 	var _pInputStreamDescs *D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC
 	if len(pInputStreamDescs) > 0 {
 		_pInputStreamDescs = &pInputStreamDescs[0]
@@ -452,13 +452,13 @@ type ID3D12VideoDevice1 struct {
 var IID_ID3D12VideoDevice1 = win32.GUID{Data1: 0x981611ad, Data2: 0xa144, Data3: 0x4c83, Data4: [8]byte{0x98, 0x90, 0xf3, 0x0e, 0x26, 0xd6, 0x58, 0xab}}
 
 // CreateVideoMotionEstimator dispatches through ID3D12VideoDevice1's vtable slot 7.
-func (self *ID3D12VideoDevice1) CreateVideoMotionEstimator(pDesc *D3D12_VIDEO_MOTION_ESTIMATOR_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, riid *win32.GUID, ppVideoMotionEstimator *unsafe.Pointer) error {
+func (self *ID3D12VideoDevice1) CreateVideoMotionEstimator(pDesc *D3D12_VIDEO_MOTION_ESTIMATOR_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, riid *win32.GUID, ppVideoMotionEstimator **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(pProtectedResourceSession)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppVideoMotionEstimator)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateVideoMotionVectorHeap dispatches through ID3D12VideoDevice1's vtable slot 8.
-func (self *ID3D12VideoDevice1) CreateVideoMotionVectorHeap(pDesc *D3D12_VIDEO_MOTION_VECTOR_HEAP_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, riid *win32.GUID, ppVideoMotionVectorHeap *unsafe.Pointer) error {
+func (self *ID3D12VideoDevice1) CreateVideoMotionVectorHeap(pDesc *D3D12_VIDEO_MOTION_VECTOR_HEAP_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, riid *win32.GUID, ppVideoMotionVectorHeap **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(pProtectedResourceSession)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppVideoMotionVectorHeap)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -473,19 +473,19 @@ type ID3D12VideoDevice2 struct {
 var IID_ID3D12VideoDevice2 = win32.GUID{Data1: 0xf019ac49, Data2: 0xf838, Data3: 0x4a95, Data4: [8]byte{0x9b, 0x17, 0x57, 0x94, 0x37, 0xc8, 0xf5, 0x13}}
 
 // CreateVideoDecoder1 dispatches through ID3D12VideoDevice2's vtable slot 9.
-func (self *ID3D12VideoDevice2) CreateVideoDecoder1(pDesc *D3D12_VIDEO_DECODER_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, riid *win32.GUID, ppVideoDecoder *unsafe.Pointer) error {
+func (self *ID3D12VideoDevice2) CreateVideoDecoder1(pDesc *D3D12_VIDEO_DECODER_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, riid *win32.GUID, ppVideoDecoder **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(pProtectedResourceSession)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppVideoDecoder)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateVideoDecoderHeap1 dispatches through ID3D12VideoDevice2's vtable slot 10.
-func (self *ID3D12VideoDevice2) CreateVideoDecoderHeap1(pVideoDecoderHeapDesc *D3D12_VIDEO_DECODER_HEAP_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, riid *win32.GUID, ppVideoDecoderHeap *unsafe.Pointer) error {
+func (self *ID3D12VideoDevice2) CreateVideoDecoderHeap1(pVideoDecoderHeapDesc *D3D12_VIDEO_DECODER_HEAP_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, riid *win32.GUID, ppVideoDecoderHeap **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoDecoderHeapDesc)), uintptr(unsafe.Pointer(pProtectedResourceSession)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppVideoDecoderHeap)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateVideoProcessor1 dispatches through ID3D12VideoDevice2's vtable slot 11.
-func (self *ID3D12VideoDevice2) CreateVideoProcessor1(NodeMask uint32, pOutputStreamDesc *D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC, pInputStreamDescs []D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, riid *win32.GUID, ppVideoProcessor *unsafe.Pointer) error {
+func (self *ID3D12VideoDevice2) CreateVideoProcessor1(NodeMask uint32, pOutputStreamDesc *D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC, pInputStreamDescs []D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, riid *win32.GUID, ppVideoProcessor **win32.IUnknown) error {
 	var _pInputStreamDescs *D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC
 	if len(pInputStreamDescs) > 0 {
 		_pInputStreamDescs = &pInputStreamDescs[0]
@@ -495,7 +495,7 @@ func (self *ID3D12VideoDevice2) CreateVideoProcessor1(NodeMask uint32, pOutputSt
 }
 
 // CreateVideoExtensionCommand dispatches through ID3D12VideoDevice2's vtable slot 12.
-func (self *ID3D12VideoDevice2) CreateVideoExtensionCommand(pDesc *D3D12_VIDEO_EXTENSION_COMMAND_DESC, pCreationParameters []byte, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, riid *win32.GUID, ppVideoExtensionCommand *unsafe.Pointer) error {
+func (self *ID3D12VideoDevice2) CreateVideoExtensionCommand(pDesc *D3D12_VIDEO_EXTENSION_COMMAND_DESC, pCreationParameters []byte, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, riid *win32.GUID, ppVideoExtensionCommand **win32.IUnknown) error {
 	var _pCreationParameters *byte
 	if len(pCreationParameters) > 0 {
 		_pCreationParameters = &pCreationParameters[0]
@@ -528,13 +528,13 @@ type ID3D12VideoDevice3 struct {
 var IID_ID3D12VideoDevice3 = win32.GUID{Data1: 0x4243adb4, Data2: 0x3a32, Data3: 0x4666, Data4: [8]byte{0x97, 0x3c, 0x0c, 0xcc, 0x56, 0x25, 0xdc, 0x44}}
 
 // CreateVideoEncoder dispatches through ID3D12VideoDevice3's vtable slot 14.
-func (self *ID3D12VideoDevice3) CreateVideoEncoder(pDesc *D3D12_VIDEO_ENCODER_DESC, riid *win32.GUID, ppVideoEncoder *unsafe.Pointer) error {
+func (self *ID3D12VideoDevice3) CreateVideoEncoder(pDesc *D3D12_VIDEO_ENCODER_DESC, riid *win32.GUID, ppVideoEncoder **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppVideoEncoder)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateVideoEncoderHeap dispatches through ID3D12VideoDevice3's vtable slot 15.
-func (self *ID3D12VideoDevice3) CreateVideoEncoderHeap(pDesc *D3D12_VIDEO_ENCODER_HEAP_DESC, riid *win32.GUID, ppVideoEncoderHeap *unsafe.Pointer) error {
+func (self *ID3D12VideoDevice3) CreateVideoEncoderHeap(pDesc *D3D12_VIDEO_ENCODER_HEAP_DESC, riid *win32.GUID, ppVideoEncoderHeap **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppVideoEncoderHeap)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -548,7 +548,7 @@ type ID3D12VideoDevice4 struct {
 var IID_ID3D12VideoDevice4 = win32.GUID{Data1: 0xe59ad09e, Data2: 0xf1ae, Data3: 0x42bb, Data4: [8]byte{0x89, 0x83, 0x9f, 0x6e, 0x55, 0x86, 0xc4, 0xeb}}
 
 // CreateVideoEncoderHeap1 dispatches through ID3D12VideoDevice4's vtable slot 16.
-func (self *ID3D12VideoDevice4) CreateVideoEncoderHeap1(pDesc *D3D12_VIDEO_ENCODER_HEAP_DESC1, riid *win32.GUID, ppVideoEncoderHeap *unsafe.Pointer) error {
+func (self *ID3D12VideoDevice4) CreateVideoEncoderHeap1(pDesc *D3D12_VIDEO_ENCODER_HEAP_DESC1, riid *win32.GUID, ppVideoEncoderHeap **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppVideoEncoderHeap)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -849,7 +849,7 @@ type ID3D12VideoExtensionCommand struct {
 var IID_ID3D12VideoExtensionCommand = win32.GUID{Data1: 0x554e41e8, Data2: 0xae8e, Data3: 0x4a8c, Data4: [8]byte{0xb7, 0xd2, 0x5b, 0x4f, 0x27, 0x4a, 0x30, 0xe4}}
 
 // GetProtectedResourceSession dispatches through ID3D12VideoExtensionCommand's vtable slot 9.
-func (self *ID3D12VideoExtensionCommand) GetProtectedResourceSession(riid *win32.GUID, ppProtectedSession *unsafe.Pointer) error {
+func (self *ID3D12VideoExtensionCommand) GetProtectedResourceSession(riid *win32.GUID, ppProtectedSession **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppProtectedSession)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -864,7 +864,7 @@ type ID3D12VideoMotionEstimator struct {
 var IID_ID3D12VideoMotionEstimator = win32.GUID{Data1: 0x33fdae0e, Data2: 0x098b, Data3: 0x428f, Data4: [8]byte{0x87, 0xbb, 0x34, 0xb6, 0x95, 0xde, 0x08, 0xf8}}
 
 // GetProtectedResourceSession dispatches through ID3D12VideoMotionEstimator's vtable slot 9.
-func (self *ID3D12VideoMotionEstimator) GetProtectedResourceSession(riid *win32.GUID, ppProtectedSession *unsafe.Pointer) error {
+func (self *ID3D12VideoMotionEstimator) GetProtectedResourceSession(riid *win32.GUID, ppProtectedSession **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppProtectedSession)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -879,7 +879,7 @@ type ID3D12VideoMotionVectorHeap struct {
 var IID_ID3D12VideoMotionVectorHeap = win32.GUID{Data1: 0x5be17987, Data2: 0x743a, Data3: 0x4061, Data4: [8]byte{0x83, 0x4b, 0x23, 0xd2, 0x2d, 0xae, 0xa5, 0x05}}
 
 // GetProtectedResourceSession dispatches through ID3D12VideoMotionVectorHeap's vtable slot 9.
-func (self *ID3D12VideoMotionVectorHeap) GetProtectedResourceSession(riid *win32.GUID, ppProtectedSession *unsafe.Pointer) error {
+func (self *ID3D12VideoMotionVectorHeap) GetProtectedResourceSession(riid *win32.GUID, ppProtectedSession **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppProtectedSession)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1090,7 +1090,7 @@ type ID3D12VideoProcessor1 struct {
 var IID_ID3D12VideoProcessor1 = win32.GUID{Data1: 0xf3cfe615, Data2: 0x553f, Data3: 0x425c, Data4: [8]byte{0x86, 0xd8, 0xee, 0x8c, 0x1b, 0x1f, 0xb0, 0x1c}}
 
 // GetProtectedResourceSession dispatches through ID3D12VideoProcessor1's vtable slot 12.
-func (self *ID3D12VideoProcessor1) GetProtectedResourceSession(riid *win32.GUID, ppProtectedSession *unsafe.Pointer) error {
+func (self *ID3D12VideoProcessor1) GetProtectedResourceSession(riid *win32.GUID, ppProtectedSession **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppProtectedSession)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -2569,9 +2569,10 @@ type IMFActivate struct {
 var IID_IMFActivate = win32.GUID{Data1: 0x7fee9e9a, Data2: 0x4a89, Data3: 0x47a6, Data4: [8]byte{0x89, 0x9c, 0xb6, 0xa5, 0x3a, 0x70, 0xfb, 0x67}}
 
 // ActivateObject dispatches through IMFActivate's vtable slot 33.
-func (self *IMFActivate) ActivateObject(riid *win32.GUID, ppv *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+func (self *IMFActivate) ActivateObject(riid *win32.GUID) (*win32.IUnknown, error) {
+	var _ppv *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_ppv)))
+	return _ppv, win32.HRESULTError(int32(r1))
 }
 
 // ShutdownObject dispatches through IMFActivate's vtable slot 34.
@@ -2765,7 +2766,7 @@ func (self *IMFAttributes) GetAllocatedBlob(guidKey *win32.GUID, ppBuf **byte, p
 }
 
 // GetUnknown dispatches through IMFAttributes's vtable slot 17.
-func (self *IMFAttributes) GetUnknown(guidKey *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IMFAttributes) GetUnknown(guidKey *win32.GUID, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidKey)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -3210,7 +3211,7 @@ type IMFByteStreamProxyClassFactory struct {
 var IID_IMFByteStreamProxyClassFactory = win32.GUID{Data1: 0xa6b43f84, Data2: 0x5c0a, Data3: 0x42e8, Data4: [8]byte{0xa4, 0x4d, 0xb1, 0x85, 0x7a, 0x76, 0x99, 0x2f}}
 
 // CreateByteStreamProxy dispatches through IMFByteStreamProxyClassFactory's vtable slot 3.
-func (self *IMFByteStreamProxyClassFactory) CreateByteStreamProxy(pByteStream *IMFByteStream, pAttributes *IMFAttributes, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+func (self *IMFByteStreamProxyClassFactory) CreateByteStreamProxy(pByteStream *IMFByteStream, pAttributes *IMFAttributes, riid *win32.GUID, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pByteStream)), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -3537,7 +3538,7 @@ type IMFCaptureEngineClassFactory struct {
 var IID_IMFCaptureEngineClassFactory = win32.GUID{Data1: 0x8f02d140, Data2: 0x56fc, Data3: 0x4302, Data4: [8]byte{0xa7, 0x05, 0x3a, 0x97, 0xc7, 0x8b, 0xe7, 0x79}}
 
 // CreateInstance dispatches through IMFCaptureEngineClassFactory's vtable slot 3.
-func (self *IMFCaptureEngineClassFactory) CreateInstance(clsid *win32.GUID, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+func (self *IMFCaptureEngineClassFactory) CreateInstance(clsid *win32.GUID, riid *win32.GUID, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -4508,7 +4509,7 @@ type IMFDXGICrossAdapterBuffer struct {
 var IID_IMFDXGICrossAdapterBuffer = win32.GUID{Data1: 0xb25d03fb, Data2: 0xd148, Data3: 0x45ef, Data4: [8]byte{0xbf, 0xed, 0xf7, 0x78, 0xb7, 0x56, 0x6c, 0x07}}
 
 // GetResourceForDevice dispatches through IMFDXGICrossAdapterBuffer's vtable slot 3.
-func (self *IMFDXGICrossAdapterBuffer) GetResourceForDevice(pUnkDevice *systemcom.IUnknown, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+func (self *IMFDXGICrossAdapterBuffer) GetResourceForDevice(pUnkDevice *systemcom.IUnknown, riid *win32.GUID, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkDevice)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -4520,7 +4521,7 @@ func (self *IMFDXGICrossAdapterBuffer) GetSubresourceIndexForDevice(pUnkDevice *
 }
 
 // GetUnknownForDevice dispatches through IMFDXGICrossAdapterBuffer's vtable slot 5.
-func (self *IMFDXGICrossAdapterBuffer) GetUnknownForDevice(pUnkDevice *systemcom.IUnknown, guid *win32.GUID, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+func (self *IMFDXGICrossAdapterBuffer) GetUnknownForDevice(pUnkDevice *systemcom.IUnknown, guid *win32.GUID, riid *win32.GUID, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkDevice)), uintptr(unsafe.Pointer(guid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -5054,7 +5055,7 @@ type IMFGetService struct {
 var IID_IMFGetService = win32.GUID{Data1: 0xfa993888, Data2: 0x4383, Data3: 0x415a, Data4: [8]byte{0xa9, 0x30, 0xdd, 0x47, 0x2a, 0x8c, 0xf6, 0xf7}}
 
 // GetService dispatches through IMFGetService's vtable slot 3.
-func (self *IMFGetService) GetService(guidService *win32.GUID, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+func (self *IMFGetService) GetService(guidService *win32.GUID, riid *win32.GUID, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidService)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -7730,7 +7731,7 @@ func (self *IMFPMPHost) UnlockProcess() error {
 }
 
 // CreateObjectByCLSID dispatches through IMFPMPHost's vtable slot 5.
-func (self *IMFPMPHost) CreateObjectByCLSID(clsid *win32.GUID, pStream *systemcom.IStream, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IMFPMPHost) CreateObjectByCLSID(clsid *win32.GUID, pStream *systemcom.IStream, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(pStream)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -7757,7 +7758,7 @@ func (self *IMFPMPHostApp) UnlockProcess() error {
 }
 
 // ActivateClassById dispatches through IMFPMPHostApp's vtable slot 5.
-func (self *IMFPMPHostApp) ActivateClassById(id string, pStream *systemcom.IStream, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IMFPMPHostApp) ActivateClassById(id string, pStream *systemcom.IStream, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_id := win32.UTF16Ptr(id)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_id)), uintptr(unsafe.Pointer(pStream)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
@@ -7785,7 +7786,7 @@ func (self *IMFPMPServer) UnlockProcess() error {
 }
 
 // CreateObjectByCLSID dispatches through IMFPMPServer's vtable slot 5.
-func (self *IMFPMPServer) CreateObjectByCLSID(clsid *win32.GUID, riid *win32.GUID, ppObject *unsafe.Pointer) error {
+func (self *IMFPMPServer) CreateObjectByCLSID(clsid *win32.GUID, riid *win32.GUID, ppObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppObject)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -8512,14 +8513,14 @@ type IMFReadWriteClassFactory struct {
 var IID_IMFReadWriteClassFactory = win32.GUID{Data1: 0xe7fe2e12, Data2: 0x661c, Data3: 0x40da, Data4: [8]byte{0x92, 0xf9, 0x4f, 0x00, 0x2a, 0xb6, 0x76, 0x27}}
 
 // CreateInstanceFromURL dispatches through IMFReadWriteClassFactory's vtable slot 3.
-func (self *IMFReadWriteClassFactory) CreateInstanceFromURL(clsid *win32.GUID, pwszURL string, pAttributes *IMFAttributes, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+func (self *IMFReadWriteClassFactory) CreateInstanceFromURL(clsid *win32.GUID, pwszURL string, pAttributes *IMFAttributes, riid *win32.GUID, ppvObject **win32.IUnknown) error {
 	_pwszURL := win32.UTF16Ptr(pwszURL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(_pwszURL)), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateInstanceFromObject dispatches through IMFReadWriteClassFactory's vtable slot 4.
-func (self *IMFReadWriteClassFactory) CreateInstanceFromObject(clsid *win32.GUID, punkObject *systemcom.IUnknown, pAttributes *IMFAttributes, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+func (self *IMFReadWriteClassFactory) CreateInstanceFromObject(clsid *win32.GUID, punkObject *systemcom.IUnknown, pAttributes *IMFAttributes, riid *win32.GUID, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(punkObject)), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
 	return win32.HRESULTError(int32(r1))
 }

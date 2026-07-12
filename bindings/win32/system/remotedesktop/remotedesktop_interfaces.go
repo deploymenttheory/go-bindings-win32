@@ -569,7 +569,7 @@ type IRemoteSystemAdditionalInfoProvider struct {
 var IID_IRemoteSystemAdditionalInfoProvider = win32.GUID{Data1: 0xeeaa3d5f, Data2: 0xec63, Data3: 0x4d27, Data4: [8]byte{0xaf, 0x38, 0xe8, 0x6b, 0x1d, 0x72, 0x92, 0xcb}}
 
 // GetAdditionalInfo dispatches through IRemoteSystemAdditionalInfoProvider's vtable slot 3.
-func (self *IRemoteSystemAdditionalInfoProvider) GetAdditionalInfo(deduplicationId *systemwinrt.HSTRING, riid *win32.GUID, mapView *unsafe.Pointer) error {
+func (self *IRemoteSystemAdditionalInfoProvider) GetAdditionalInfo(deduplicationId *systemwinrt.HSTRING, riid *win32.GUID, mapView **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(deduplicationId)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(mapView)))
 	return win32.HRESULTError(int32(r1))
 }

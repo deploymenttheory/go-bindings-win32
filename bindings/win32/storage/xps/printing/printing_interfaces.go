@@ -44,7 +44,7 @@ func (self *IPrintDocumentPackageTarget) GetPackageTargetTypes(targetCount *uint
 }
 
 // GetPackageTarget dispatches through IPrintDocumentPackageTarget's vtable slot 4.
-func (self *IPrintDocumentPackageTarget) GetPackageTarget(guidTargetType *win32.GUID, riid *win32.GUID, ppvTarget *unsafe.Pointer) error {
+func (self *IPrintDocumentPackageTarget) GetPackageTarget(guidTargetType *win32.GUID, riid *win32.GUID, ppvTarget **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidTargetType)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvTarget)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -70,7 +70,7 @@ func (self *IPrintDocumentPackageTarget2) GetIsTargetIppPrinter(isIppPrinter *fo
 }
 
 // GetTargetIppPrintDevice dispatches through IPrintDocumentPackageTarget2's vtable slot 4.
-func (self *IPrintDocumentPackageTarget2) GetTargetIppPrintDevice(riid *win32.GUID, ppvTarget *unsafe.Pointer) error {
+func (self *IPrintDocumentPackageTarget2) GetTargetIppPrintDevice(riid *win32.GUID, ppvTarget **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvTarget)))
 	return win32.HRESULTError(int32(r1))
 }

@@ -444,10 +444,11 @@ type ICLRMetaHost struct {
 var IID_ICLRMetaHost = win32.GUID{Data1: 0xd332db9e, Data2: 0xb9b3, Data3: 0x4125, Data4: [8]byte{0x82, 0x07, 0xa1, 0x48, 0x84, 0xf5, 0x32, 0x16}}
 
 // GetRuntime dispatches through ICLRMetaHost's vtable slot 3.
-func (self *ICLRMetaHost) GetRuntime(pwzVersion string, riid *win32.GUID, ppRuntime *unsafe.Pointer) error {
+func (self *ICLRMetaHost) GetRuntime(pwzVersion string, riid *win32.GUID) (*win32.IUnknown, error) {
 	_pwzVersion := win32.UTF16Ptr(pwzVersion)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzVersion)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppRuntime)))
-	return win32.HRESULTError(int32(r1))
+	var _ppRuntime *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzVersion)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_ppRuntime)))
+	return _ppRuntime, win32.HRESULTError(int32(r1))
 }
 
 // GetVersionFromFile dispatches through ICLRMetaHost's vtable slot 4.
@@ -478,9 +479,10 @@ func (self *ICLRMetaHost) RequestRuntimeLoadedNotification(pCallbackFunction Run
 }
 
 // QueryLegacyV2RuntimeBinding dispatches through ICLRMetaHost's vtable slot 8.
-func (self *ICLRMetaHost) QueryLegacyV2RuntimeBinding(riid *win32.GUID, ppUnk *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppUnk)))
-	return win32.HRESULTError(int32(r1))
+func (self *ICLRMetaHost) QueryLegacyV2RuntimeBinding(riid *win32.GUID) (*win32.IUnknown, error) {
+	var _ppUnk *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_ppUnk)))
+	return _ppUnk, win32.HRESULTError(int32(r1))
 }
 
 // ExitProcess dispatches through ICLRMetaHost's vtable slot 9.
@@ -498,10 +500,11 @@ type ICLRMetaHostPolicy struct {
 var IID_ICLRMetaHostPolicy = win32.GUID{Data1: 0xe2190695, Data2: 0x77b2, Data3: 0x492e, Data4: [8]byte{0x8e, 0x14, 0xc4, 0xb3, 0xa7, 0xfd, 0xd5, 0x93}}
 
 // GetRequestedRuntime dispatches through ICLRMetaHostPolicy's vtable slot 3.
-func (self *ICLRMetaHostPolicy) GetRequestedRuntime(dwPolicyFlags METAHOST_POLICY_FLAGS, pwzBinary string, pCfgStream *systemcom.IStream, pwzVersion foundation.PWSTR, pcchVersion *uint32, pwzImageVersion foundation.PWSTR, pcchImageVersion *uint32, pdwConfigFlags *uint32, riid *win32.GUID, ppRuntime *unsafe.Pointer) error {
+func (self *ICLRMetaHostPolicy) GetRequestedRuntime(dwPolicyFlags METAHOST_POLICY_FLAGS, pwzBinary string, pCfgStream *systemcom.IStream, pwzVersion foundation.PWSTR, pcchVersion *uint32, pwzImageVersion foundation.PWSTR, pcchImageVersion *uint32, pdwConfigFlags *uint32, riid *win32.GUID) (*win32.IUnknown, error) {
 	_pwzBinary := win32.UTF16Ptr(pwzBinary)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwPolicyFlags), uintptr(unsafe.Pointer(_pwzBinary)), uintptr(unsafe.Pointer(pCfgStream)), uintptr(unsafe.Pointer(pwzVersion)), uintptr(unsafe.Pointer(pcchVersion)), uintptr(unsafe.Pointer(pwzImageVersion)), uintptr(unsafe.Pointer(pcchImageVersion)), uintptr(unsafe.Pointer(pdwConfigFlags)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppRuntime)))
-	return win32.HRESULTError(int32(r1))
+	var _ppRuntime *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwPolicyFlags), uintptr(unsafe.Pointer(_pwzBinary)), uintptr(unsafe.Pointer(pCfgStream)), uintptr(unsafe.Pointer(pwzVersion)), uintptr(unsafe.Pointer(pcchVersion)), uintptr(unsafe.Pointer(pwzImageVersion)), uintptr(unsafe.Pointer(pcchImageVersion)), uintptr(unsafe.Pointer(pdwConfigFlags)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_ppRuntime)))
+	return _ppRuntime, win32.HRESULTError(int32(r1))
 }
 
 // IID: 1d0e0132-e64f-493d-9260-025c0e32c175
@@ -727,9 +730,10 @@ func (self *ICLRRuntimeInfo) GetProcAddress(pszProcName foundation.PSTR, ppProc 
 }
 
 // GetInterface dispatches through ICLRRuntimeInfo's vtable slot 9.
-func (self *ICLRRuntimeInfo) GetInterface(rclsid *win32.GUID, riid *win32.GUID, ppUnk *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppUnk)))
-	return win32.HRESULTError(int32(r1))
+func (self *ICLRRuntimeInfo) GetInterface(rclsid *win32.GUID, riid *win32.GUID) (*win32.IUnknown, error) {
+	var _ppUnk *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_ppUnk)))
+	return _ppUnk, win32.HRESULTError(int32(r1))
 }
 
 // IsLoadable dispatches through ICLRRuntimeInfo's vtable slot 10.

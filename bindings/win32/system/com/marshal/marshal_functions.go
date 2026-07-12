@@ -315,7 +315,7 @@ func CoUnmarshalHresult(pstm *systemcom.IStream, phresult *foundation.HRESULT) e
 // CoUnmarshalInterface calls OLE32!CoUnmarshalInterface.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-counmarshalinterface
 // Minimum OS: windows5.0.
-func CoUnmarshalInterface(pStm *systemcom.IStream, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func CoUnmarshalInterface(pStm *systemcom.IStream, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCoUnmarshalInterface.Addr(), uintptr(unsafe.Pointer(pStm)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }

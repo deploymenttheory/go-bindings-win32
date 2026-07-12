@@ -186,7 +186,7 @@ func CoGetInstanceFromIStorage(pServerInfo *systemcom.COSERVERINFO, pClsid *win3
 // CoGetInterfaceAndReleaseStream calls OLE32!CoGetInterfaceAndReleaseStream.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cogetinterfaceandreleasestream
 // Minimum OS: windows5.0.
-func CoGetInterfaceAndReleaseStream(pStm *systemcom.IStream, iid *win32.GUID, ppv *unsafe.Pointer) error {
+func CoGetInterfaceAndReleaseStream(pStm *systemcom.IStream, iid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCoGetInterfaceAndReleaseStream.Addr(), uintptr(unsafe.Pointer(pStm)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -996,7 +996,7 @@ func PropVariantToVariant(pPropVar *PROPVARIANT, pVar *systemvariant.VARIANT) er
 // PropVariantToWinRTPropertyValue calls PROPSYS!PropVariantToWinRTPropertyValue.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-propvarianttowinrtpropertyvalue
 // Minimum OS: windows8.0.
-func PropVariantToWinRTPropertyValue(propvar *PROPVARIANT, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func PropVariantToWinRTPropertyValue(propvar *PROPVARIANT, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToWinRTPropertyValue.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }

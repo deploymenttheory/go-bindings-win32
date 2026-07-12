@@ -585,9 +585,10 @@ func (self *ICondition) GetConditionType() (systemsearchcommon.CONDITION_TYPE, e
 }
 
 // GetSubConditions dispatches through ICondition's vtable slot 9.
-func (self *ICondition) GetSubConditions(riid *win32.GUID, ppv *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+func (self *ICondition) GetSubConditions(riid *win32.GUID) (*win32.IUnknown, error) {
+	var _ppv *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_ppv)))
+	return _ppv, win32.HRESULTError(int32(r1))
 }
 
 // GetComparisonInfo dispatches through ICondition's vtable slot 10.
@@ -695,26 +696,26 @@ type IConditionFactory2 struct {
 var IID_IConditionFactory2 = win32.GUID{Data1: 0x71d222e1, Data2: 0x432f, Data3: 0x429e, Data4: [8]byte{0x8c, 0x13, 0xb6, 0xda, 0xfd, 0xe5, 0x07, 0x7a}}
 
 // CreateTrueFalse dispatches through IConditionFactory2's vtable slot 7.
-func (self *IConditionFactory2) CreateTrueFalse(fVal bool, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IConditionFactory2) CreateTrueFalse(fVal bool, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_fVal := win32.Bool32(fVal)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(_fVal), uintptr(cco), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateNegation dispatches through IConditionFactory2's vtable slot 8.
-func (self *IConditionFactory2) CreateNegation(pcSub *ICondition, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IConditionFactory2) CreateNegation(pcSub *ICondition, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcSub)), uintptr(cco), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateCompoundFromObjectArray dispatches through IConditionFactory2's vtable slot 9.
-func (self *IConditionFactory2) CreateCompoundFromObjectArray(ct systemsearchcommon.CONDITION_TYPE, poaSubs *uishellcommon.IObjectArray, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IConditionFactory2) CreateCompoundFromObjectArray(ct systemsearchcommon.CONDITION_TYPE, poaSubs *uishellcommon.IObjectArray, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(ct), uintptr(unsafe.Pointer(poaSubs)), uintptr(cco), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateCompoundFromArray dispatches through IConditionFactory2's vtable slot 10.
-func (self *IConditionFactory2) CreateCompoundFromArray(ct systemsearchcommon.CONDITION_TYPE, ppcondSubs []*ICondition, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IConditionFactory2) CreateCompoundFromArray(ct systemsearchcommon.CONDITION_TYPE, ppcondSubs []*ICondition, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv **win32.IUnknown) error {
 	var _ppcondSubs **ICondition
 	if len(ppcondSubs) > 0 {
 		_ppcondSubs = &ppcondSubs[0]
@@ -724,7 +725,7 @@ func (self *IConditionFactory2) CreateCompoundFromArray(ct systemsearchcommon.CO
 }
 
 // CreateStringLeaf dispatches through IConditionFactory2's vtable slot 11.
-func (self *IConditionFactory2) CreateStringLeaf(propkey *foundation.PROPERTYKEY, cop systemsearchcommon.CONDITION_OPERATION, pszValue string, pszLocaleName string, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IConditionFactory2) CreateStringLeaf(propkey *foundation.PROPERTYKEY, cop systemsearchcommon.CONDITION_OPERATION, pszValue string, pszLocaleName string, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszValue := win32.UTF16Ptr(pszValue)
 	_pszLocaleName := win32.UTF16Ptr(pszLocaleName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propkey)), uintptr(cop), uintptr(unsafe.Pointer(_pszValue)), uintptr(unsafe.Pointer(_pszLocaleName)), uintptr(cco), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
@@ -732,20 +733,20 @@ func (self *IConditionFactory2) CreateStringLeaf(propkey *foundation.PROPERTYKEY
 }
 
 // CreateIntegerLeaf dispatches through IConditionFactory2's vtable slot 12.
-func (self *IConditionFactory2) CreateIntegerLeaf(propkey *foundation.PROPERTYKEY, cop systemsearchcommon.CONDITION_OPERATION, lValue int32, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IConditionFactory2) CreateIntegerLeaf(propkey *foundation.PROPERTYKEY, cop systemsearchcommon.CONDITION_OPERATION, lValue int32, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propkey)), uintptr(cop), uintptr(lValue), uintptr(cco), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateBooleanLeaf dispatches through IConditionFactory2's vtable slot 13.
-func (self *IConditionFactory2) CreateBooleanLeaf(propkey *foundation.PROPERTYKEY, cop systemsearchcommon.CONDITION_OPERATION, fValue bool, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IConditionFactory2) CreateBooleanLeaf(propkey *foundation.PROPERTYKEY, cop systemsearchcommon.CONDITION_OPERATION, fValue bool, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_fValue := win32.Bool32(fValue)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propkey)), uintptr(cop), uintptr(_fValue), uintptr(cco), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateLeaf dispatches through IConditionFactory2's vtable slot 14.
-func (self *IConditionFactory2) CreateLeaf(propkey *foundation.PROPERTYKEY, cop systemsearchcommon.CONDITION_OPERATION, propvar *systemcomstructuredstorage.PROPVARIANT, pszSemanticType string, pszLocaleName string, pPropertyNameTerm *IRichChunk, pOperationTerm *IRichChunk, pValueTerm *IRichChunk, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IConditionFactory2) CreateLeaf(propkey *foundation.PROPERTYKEY, cop systemsearchcommon.CONDITION_OPERATION, propvar *systemcomstructuredstorage.PROPVARIANT, pszSemanticType string, pszLocaleName string, pPropertyNameTerm *IRichChunk, pOperationTerm *IRichChunk, pValueTerm *IRichChunk, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszSemanticType := win32.UTF16Ptr(pszSemanticType)
 	_pszLocaleName := win32.UTF16Ptr(pszLocaleName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propkey)), uintptr(cop), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(_pszSemanticType)), uintptr(unsafe.Pointer(_pszLocaleName)), uintptr(unsafe.Pointer(pPropertyNameTerm)), uintptr(unsafe.Pointer(pOperationTerm)), uintptr(unsafe.Pointer(pValueTerm)), uintptr(cco), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
@@ -753,7 +754,7 @@ func (self *IConditionFactory2) CreateLeaf(propkey *foundation.PROPERTYKEY, cop 
 }
 
 // ResolveCondition dispatches through IConditionFactory2's vtable slot 15.
-func (self *IConditionFactory2) ResolveCondition(pc *ICondition, sqro STRUCTURED_QUERY_RESOLVE_OPTION, pstReferenceTime *foundation.SYSTEMTIME, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IConditionFactory2) ResolveCondition(pc *ICondition, sqro STRUCTURED_QUERY_RESOLVE_OPTION, pstReferenceTime *foundation.SYSTEMTIME, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pc)), uintptr(sqro), uintptr(unsafe.Pointer(pstReferenceTime)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1283,9 +1284,10 @@ func (self *IEntity) Base() (*IEntity, error) {
 }
 
 // Relationships dispatches through IEntity's vtable slot 5.
-func (self *IEntity) Relationships(riid *win32.GUID, pRelationships *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pRelationships)))
-	return win32.HRESULTError(int32(r1))
+func (self *IEntity) Relationships(riid *win32.GUID) (*win32.IUnknown, error) {
+	var _pRelationships *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_pRelationships)))
+	return _pRelationships, win32.HRESULTError(int32(r1))
 }
 
 // GetRelationship dispatches through IEntity's vtable slot 6.
@@ -1297,15 +1299,17 @@ func (self *IEntity) GetRelationship(pszRelationName string) (*IRelationship, er
 }
 
 // MetaData dispatches through IEntity's vtable slot 7.
-func (self *IEntity) MetaData(riid *win32.GUID, pMetaData *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pMetaData)))
-	return win32.HRESULTError(int32(r1))
+func (self *IEntity) MetaData(riid *win32.GUID) (*win32.IUnknown, error) {
+	var _pMetaData *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_pMetaData)))
+	return _pMetaData, win32.HRESULTError(int32(r1))
 }
 
 // NamedEntities dispatches through IEntity's vtable slot 8.
-func (self *IEntity) NamedEntities(riid *win32.GUID, pNamedEntities *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pNamedEntities)))
-	return win32.HRESULTError(int32(r1))
+func (self *IEntity) NamedEntities(riid *win32.GUID) (*win32.IUnknown, error) {
+	var _pNamedEntities *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_pNamedEntities)))
+	return _pNamedEntities, win32.HRESULTError(int32(r1))
 }
 
 // GetNamedEntity dispatches through IEntity's vtable slot 9.
@@ -2068,10 +2072,11 @@ type IQueryParserManager struct {
 var IID_IQueryParserManager = win32.GUID{Data1: 0xa879e3c4, Data2: 0xaf77, Data3: 0x44fb, Data4: [8]byte{0x8f, 0x37, 0xeb, 0xd1, 0x48, 0x7c, 0xf9, 0x20}}
 
 // CreateLoadedParser dispatches through IQueryParserManager's vtable slot 3.
-func (self *IQueryParserManager) CreateLoadedParser(pszCatalog string, langidForKeywords uint16, riid *win32.GUID, ppQueryParser *unsafe.Pointer) error {
+func (self *IQueryParserManager) CreateLoadedParser(pszCatalog string, langidForKeywords uint16, riid *win32.GUID) (*win32.IUnknown, error) {
 	_pszCatalog := win32.UTF16Ptr(pszCatalog)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszCatalog)), uintptr(langidForKeywords), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppQueryParser)))
-	return win32.HRESULTError(int32(r1))
+	var _ppQueryParser *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszCatalog)), uintptr(langidForKeywords), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_ppQueryParser)))
+	return _ppQueryParser, win32.HRESULTError(int32(r1))
 }
 
 // InitializeOptions dispatches through IQueryParserManager's vtable slot 4.
@@ -2104,9 +2109,10 @@ func (self *IQuerySolution) GetQuery(ppQueryNode **ICondition, ppMainType **IEnt
 }
 
 // GetErrors dispatches through IQuerySolution's vtable slot 8.
-func (self *IQuerySolution) GetErrors(riid *win32.GUID, ppParseErrors *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppParseErrors)))
-	return win32.HRESULTError(int32(r1))
+func (self *IQuerySolution) GetErrors(riid *win32.GUID) (*win32.IUnknown, error) {
+	var _ppParseErrors *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_ppParseErrors)))
+	return _ppParseErrors, win32.HRESULTError(int32(r1))
 }
 
 // GetLexicalData dispatches through IQuerySolution's vtable slot 9.
@@ -2198,9 +2204,10 @@ func (self *IRelationship) Destination() (*IEntity, error) {
 }
 
 // MetaData dispatches through IRelationship's vtable slot 6.
-func (self *IRelationship) MetaData(riid *win32.GUID, pMetaData *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pMetaData)))
-	return win32.HRESULTError(int32(r1))
+func (self *IRelationship) MetaData(riid *win32.GUID) (*win32.IUnknown, error) {
+	var _pMetaData *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_pMetaData)))
+	return _pMetaData, win32.HRESULTError(int32(r1))
 }
 
 // DefaultPhrase dispatches through IRelationship's vtable slot 7.
@@ -3229,9 +3236,10 @@ type ISchemaProvider struct {
 var IID_ISchemaProvider = win32.GUID{Data1: 0x8cf89bcb, Data2: 0x394c, Data3: 0x49b2, Data4: [8]byte{0xae, 0x28, 0xa5, 0x9d, 0xd4, 0xed, 0x7f, 0x68}}
 
 // Entities dispatches through ISchemaProvider's vtable slot 3.
-func (self *ISchemaProvider) Entities(riid *win32.GUID, pEntities *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pEntities)))
-	return win32.HRESULTError(int32(r1))
+func (self *ISchemaProvider) Entities(riid *win32.GUID) (*win32.IUnknown, error) {
+	var _pEntities *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_pEntities)))
+	return _pEntities, win32.HRESULTError(int32(r1))
 }
 
 // RootEntity dispatches through ISchemaProvider's vtable slot 4.
@@ -3250,9 +3258,10 @@ func (self *ISchemaProvider) GetEntity(pszEntityName string) (*IEntity, error) {
 }
 
 // MetaData dispatches through ISchemaProvider's vtable slot 6.
-func (self *ISchemaProvider) MetaData(riid *win32.GUID, pMetaData *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pMetaData)))
-	return win32.HRESULTError(int32(r1))
+func (self *ISchemaProvider) MetaData(riid *win32.GUID) (*win32.IUnknown, error) {
+	var _pMetaData *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_pMetaData)))
+	return _pMetaData, win32.HRESULTError(int32(r1))
 }
 
 // Localize dispatches through ISchemaProvider's vtable slot 7.
@@ -3443,7 +3452,7 @@ func (self *ISearchCatalogManager) RegisterViewForNotification(pszView string, p
 }
 
 // GetItemsChangedSink dispatches through ISearchCatalogManager's vtable slot 21.
-func (self *ISearchCatalogManager) GetItemsChangedSink(pISearchNotifyInlineSite *ISearchNotifyInlineSite, riid *win32.GUID, ppv *unsafe.Pointer, pGUIDCatalogResetSignature *win32.GUID, pGUIDCheckPointSignature *win32.GUID, pdwLastCheckPointNumber *uint32) error {
+func (self *ISearchCatalogManager) GetItemsChangedSink(pISearchNotifyInlineSite *ISearchNotifyInlineSite, riid *win32.GUID, ppv **win32.IUnknown, pGUIDCatalogResetSignature *win32.GUID, pGUIDCheckPointSignature *win32.GUID, pdwLastCheckPointNumber *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pISearchNotifyInlineSite)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)), uintptr(unsafe.Pointer(pGUIDCatalogResetSignature)), uintptr(unsafe.Pointer(pGUIDCheckPointSignature)), uintptr(unsafe.Pointer(pdwLastCheckPointNumber)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -3724,13 +3733,13 @@ func (self *ISearchLanguageSupport) GetDiacriticSensitivity() (foundation.BOOL, 
 }
 
 // LoadWordBreaker dispatches through ISearchLanguageSupport's vtable slot 5.
-func (self *ISearchLanguageSupport) LoadWordBreaker(lcid uint32, riid *win32.GUID, ppWordBreaker *unsafe.Pointer, pLcidUsed *uint32) error {
+func (self *ISearchLanguageSupport) LoadWordBreaker(lcid uint32, riid *win32.GUID, ppWordBreaker **win32.IUnknown, pLcidUsed *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(lcid), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppWordBreaker)), uintptr(unsafe.Pointer(pLcidUsed)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // LoadStemmer dispatches through ISearchLanguageSupport's vtable slot 6.
-func (self *ISearchLanguageSupport) LoadStemmer(lcid uint32, riid *win32.GUID, ppStemmer *unsafe.Pointer, pLcidUsed *uint32) error {
+func (self *ISearchLanguageSupport) LoadStemmer(lcid uint32, riid *win32.GUID, ppStemmer **win32.IUnknown, pLcidUsed *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(lcid), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppStemmer)), uintptr(unsafe.Pointer(pLcidUsed)))
 	return win32.HRESULTError(int32(r1))
 }

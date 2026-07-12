@@ -39,7 +39,7 @@ type ICompositionDrawingSurfaceInterop struct {
 var IID_ICompositionDrawingSurfaceInterop = win32.GUID{Data1: 0xfd04e6e3, Data2: 0xfe0c, Data3: 0x4c3c, Data4: [8]byte{0xab, 0x19, 0xa0, 0x76, 0x01, 0xa5, 0x76, 0xee}}
 
 // BeginDraw dispatches through ICompositionDrawingSurfaceInterop's vtable slot 3.
-func (self *ICompositionDrawingSurfaceInterop) BeginDraw(updateRect *foundation.RECT, iid *win32.GUID, updateObject *unsafe.Pointer, updateOffset *foundation.POINT) error {
+func (self *ICompositionDrawingSurfaceInterop) BeginDraw(updateRect *foundation.RECT, iid *win32.GUID, updateObject **win32.IUnknown, updateOffset *foundation.POINT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(updateRect)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(updateObject)), uintptr(unsafe.Pointer(updateOffset)))
 	return win32.HRESULTError(int32(r1))
 }

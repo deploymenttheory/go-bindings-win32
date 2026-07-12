@@ -30,7 +30,7 @@ var (
 
 // D3D12CreateDevice calls d3d12!D3D12CreateDevice.
 // https://learn.microsoft.com/windows/win32/api/d3d12/nf-d3d12-d3d12createdevice
-func D3D12CreateDevice(pAdapter *systemcom.IUnknown, MinimumFeatureLevel graphicsdirect3d.D3D_FEATURE_LEVEL, riid *win32.GUID, ppDevice *unsafe.Pointer) error {
+func D3D12CreateDevice(pAdapter *systemcom.IUnknown, MinimumFeatureLevel graphicsdirect3d.D3D_FEATURE_LEVEL, riid *win32.GUID, ppDevice **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procD3D12CreateDevice.Addr(), uintptr(unsafe.Pointer(pAdapter)), uintptr(MinimumFeatureLevel), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppDevice)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -66,14 +66,14 @@ func D3D12EnableExperimentalFeatures(NumFeatures uint32, pIIDs *win32.GUID, pCon
 
 // D3D12GetDebugInterface calls d3d12!D3D12GetDebugInterface.
 // https://learn.microsoft.com/windows/win32/api/d3d12/nf-d3d12-d3d12getdebuginterface
-func D3D12GetDebugInterface(riid *win32.GUID, ppvDebug *unsafe.Pointer) error {
+func D3D12GetDebugInterface(riid *win32.GUID, ppvDebug **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procD3D12GetDebugInterface.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvDebug)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // D3D12GetInterface calls d3d12!D3D12GetInterface.
 // https://learn.microsoft.com/windows/win32/api/d3d12/nf-d3d12-d3d12getinterface
-func D3D12GetInterface(rclsid *win32.GUID, riid *win32.GUID, ppvDebug *unsafe.Pointer) error {
+func D3D12GetInterface(rclsid *win32.GUID, riid *win32.GUID, ppvDebug **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procD3D12GetInterface.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvDebug)))
 	return win32.HRESULTError(int32(r1))
 }

@@ -163,6 +163,13 @@ each call, then the template dispatches via `syscall.SyscallN`:
   value (`Get_X() (T, error)`). For flat functions only when the return is a
   clean status (HRESULT / BOOL+SetLastError / void); for COM methods whenever
   the return is HRESULT.
+- a `void**` `[out]` param carrying `[ComOutPtr]` (or `[IidParameterIndex]`,
+  ingested but absent from the current winmd) is typed `**win32.IUnknown` —
+  the runtime's root COM shape (`bindings/runtime/win32/iunknown.go`), layout-
+  compatible with every generated `*IFoo` and carrying QueryInterface/AddRef/
+  Release. Cast to the concrete interface selected by the riid argument. A
+  `[retval]` one elevates to a `(*win32.IUnknown, error)` return like any
+  typed COM out. Unattributed `void**` outs stay `*unsafe.Pointer`.
 - a parameter whose name would shadow a type used in the signature (e.g. a
   param `Node` in a method returning `(*Node, error)`) is suffixed with `_`,
   because Go puts parameter names in scope for the result types.

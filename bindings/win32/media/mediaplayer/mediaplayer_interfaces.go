@@ -4966,7 +4966,7 @@ func (self *IXFeed) Move(pszPath string) error {
 }
 
 // Parent dispatches through IXFeed's vtable slot 11.
-func (self *IXFeed) Parent(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IXFeed) Parent(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -5044,7 +5044,7 @@ func (self *IXFeed) Items(ppfe **IXFeedsEnum) error {
 }
 
 // GetItem dispatches through IXFeed's vtable slot 24.
-func (self *IXFeed) GetItem(uiId uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IXFeed) GetItem(uiId uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(uiId), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -5166,7 +5166,7 @@ func (self *IXFeed) IsList(pbIsList *foundation.BOOL) error {
 }
 
 // GetWatcher dispatches through IXFeed's vtable slot 44.
-func (self *IXFeed) GetWatcher(scope FEEDS_EVENTS_SCOPE, mask FEEDS_EVENTS_MASK, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IXFeed) GetWatcher(scope FEEDS_EVENTS_SCOPE, mask FEEDS_EVENTS_MASK, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(mask), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -5192,7 +5192,7 @@ type IXFeed2 struct {
 var IID_IXFeed2 = win32.GUID{Data1: 0xce528e77, Data2: 0x3716, Data3: 0x4eb7, Data4: [8]byte{0x95, 0x6d, 0xf5, 0xe3, 0x75, 0x02, 0xe1, 0x2a}}
 
 // GetItemByEffectiveId dispatches through IXFeed2's vtable slot 47.
-func (self *IXFeed2) GetItemByEffectiveId(uiEffectiveId uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IXFeed2) GetItemByEffectiveId(uiEffectiveId uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(uiEffectiveId), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -5286,7 +5286,7 @@ func (self *IXFeedEnclosure) LocalPath(ppszPath *foundation.PWSTR) error {
 }
 
 // Parent dispatches through IXFeedEnclosure's vtable slot 11.
-func (self *IXFeedEnclosure) Parent(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IXFeedEnclosure) Parent(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -5405,7 +5405,7 @@ func (self *IXFeedFolder) Subfolders(ppfe **IXFeedsEnum) error {
 }
 
 // CreateFeed dispatches through IXFeedFolder's vtable slot 5.
-func (self *IXFeedFolder) CreateFeed(pszName string, pszUrl string, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IXFeedFolder) CreateFeed(pszName string, pszUrl string, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszName := win32.UTF16Ptr(pszName)
 	_pszUrl := win32.UTF16Ptr(pszUrl)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(_pszUrl)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
@@ -5413,7 +5413,7 @@ func (self *IXFeedFolder) CreateFeed(pszName string, pszUrl string, riid *win32.
 }
 
 // CreateSubfolder dispatches through IXFeedFolder's vtable slot 6.
-func (self *IXFeedFolder) CreateSubfolder(pszName string, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IXFeedFolder) CreateSubfolder(pszName string, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszName := win32.UTF16Ptr(pszName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
@@ -5434,14 +5434,14 @@ func (self *IXFeedFolder) ExistsSubfolder(pszName string, pbSubfolderExists *fou
 }
 
 // GetFeed dispatches through IXFeedFolder's vtable slot 9.
-func (self *IXFeedFolder) GetFeed(pszName string, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IXFeedFolder) GetFeed(pszName string, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszName := win32.UTF16Ptr(pszName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetSubfolder dispatches through IXFeedFolder's vtable slot 10.
-func (self *IXFeedFolder) GetSubfolder(pszName string, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IXFeedFolder) GetSubfolder(pszName string, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszName := win32.UTF16Ptr(pszName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
@@ -5480,7 +5480,7 @@ func (self *IXFeedFolder) Move(pszPath string) error {
 }
 
 // Parent dispatches through IXFeedFolder's vtable slot 16.
-func (self *IXFeedFolder) Parent(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IXFeedFolder) Parent(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -5492,7 +5492,7 @@ func (self *IXFeedFolder) IsRoot(pbIsRootFeedFolder *foundation.BOOL) error {
 }
 
 // GetWatcher dispatches through IXFeedFolder's vtable slot 18.
-func (self *IXFeedFolder) GetWatcher(scope FEEDS_EVENTS_SCOPE, mask FEEDS_EVENTS_MASK, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IXFeedFolder) GetWatcher(scope FEEDS_EVENTS_SCOPE, mask FEEDS_EVENTS_MASK, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(mask), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -5691,7 +5691,7 @@ func (self *IXFeedItem) Author(ppszAuthor *foundation.PWSTR) error {
 }
 
 // Enclosure dispatches through IXFeedItem's vtable slot 11.
-func (self *IXFeedItem) Enclosure(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IXFeedItem) Enclosure(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -5716,7 +5716,7 @@ func (self *IXFeedItem) LocalId(puiId *uint32) error {
 }
 
 // Parent dispatches through IXFeedItem's vtable slot 15.
-func (self *IXFeedItem) Parent(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IXFeedItem) Parent(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -5774,7 +5774,7 @@ func (self *IXFeedsEnum) Count(puiCount *uint32) error {
 }
 
 // Item dispatches through IXFeedsEnum's vtable slot 4.
-func (self *IXFeedsEnum) Item(uiIndex uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IXFeedsEnum) Item(uiIndex uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(uiIndex), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -5788,7 +5788,7 @@ type IXFeedsManager struct {
 var IID_IXFeedsManager = win32.GUID{Data1: 0x5357e238, Data2: 0xfb12, Data3: 0x4aca, Data4: [8]byte{0xa9, 0x30, 0xca, 0xb7, 0x83, 0x2b, 0x84, 0xbf}}
 
 // RootFolder dispatches through IXFeedsManager's vtable slot 3.
-func (self *IXFeedsManager) RootFolder(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IXFeedsManager) RootFolder(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -5808,14 +5808,14 @@ func (self *IXFeedsManager) ExistsFeed(pszPath string, pbFeedExists *foundation.
 }
 
 // GetFeed dispatches through IXFeedsManager's vtable slot 6.
-func (self *IXFeedsManager) GetFeed(pszPath string, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IXFeedsManager) GetFeed(pszPath string, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetFeedByUrl dispatches through IXFeedsManager's vtable slot 7.
-func (self *IXFeedsManager) GetFeedByUrl(pszUrl string, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IXFeedsManager) GetFeedByUrl(pszUrl string, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszUrl := win32.UTF16Ptr(pszUrl)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszUrl)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
@@ -5829,7 +5829,7 @@ func (self *IXFeedsManager) ExistsFolder(pszPath string, pbFolderExists *foundat
 }
 
 // GetFolder dispatches through IXFeedsManager's vtable slot 9.
-func (self *IXFeedsManager) GetFolder(pszPath string, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IXFeedsManager) GetFolder(pszPath string, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))

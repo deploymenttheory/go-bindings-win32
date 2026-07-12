@@ -22,7 +22,7 @@ var (
 
 // CreatePresentationFactory calls dcomp!CreatePresentationFactory.
 // https://learn.microsoft.com/windows/win32/api/presentation/nf-presentation-createpresentationfactory
-func CreatePresentationFactory(d3dDevice *systemcom.IUnknown, riid *win32.GUID, presentationFactory *unsafe.Pointer) error {
+func CreatePresentationFactory(d3dDevice *systemcom.IUnknown, riid *win32.GUID, presentationFactory **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCreatePresentationFactory.Addr(), uintptr(unsafe.Pointer(d3dDevice)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(presentationFactory)))
 	return win32.HRESULTError(int32(r1))
 }

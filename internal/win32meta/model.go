@@ -9,7 +9,7 @@ package win32meta
 
 // CurrentSchemaVersion is bumped when the IR changes incompatibly; readers
 // reject files with a different version so stale caches are re-ingested.
-const CurrentSchemaVersion = 1
+const CurrentSchemaVersion = 2
 
 // NamespaceMeta is the serialized unit: the full API surface of one
 // Windows.Win32 namespace.
@@ -90,6 +90,9 @@ type Param struct {
 	// MemorySizeBytesParamIndex is the 0-based index of the parameter
 	// carrying this pointer parameter's byte size (-1 when absent).
 	MemorySizeBytesParamIndex int `json:"memory_size_bytes_param_index,omitempty"`
+	// IidParamIndex is the 0-based index of the riid parameter selecting
+	// the interface this void** out-param receives (-1 when absent).
+	IidParamIndex int `json:"iid_param_index,omitempty"`
 	// FreeWith names the function that releases this out param's resource.
 	FreeWith string `json:"free_with,omitempty"`
 }

@@ -3405,7 +3405,7 @@ func (self *ID2D1SvgElement) SetAttributeValue__(name string, type_ D2D1_SVG_ATT
 }
 
 // GetAttributeValue dispatches through ID2D1SvgElement's vtable slot 30.
-func (self *ID2D1SvgElement) GetAttributeValue(name string, riid *win32.GUID, value *unsafe.Pointer) error {
+func (self *ID2D1SvgElement) GetAttributeValue(name string, riid *win32.GUID, value **win32.IUnknown) error {
 	_name := win32.UTF16Ptr(name)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(value)))
 	return win32.HRESULTError(int32(r1))

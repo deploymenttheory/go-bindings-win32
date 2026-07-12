@@ -22,7 +22,7 @@ type IWindowsDevicesAllJoynBusAttachmentFactoryInterop struct {
 var IID_IWindowsDevicesAllJoynBusAttachmentFactoryInterop = win32.GUID{Data1: 0x4b8f7505, Data2: 0xb239, Data3: 0x4e7b, Data4: [8]byte{0x88, 0xaf, 0xf6, 0x68, 0x25, 0x75, 0xd8, 0x61}}
 
 // CreateFromWin32Handle dispatches through IWindowsDevicesAllJoynBusAttachmentFactoryInterop's vtable slot 6.
-func (self *IWindowsDevicesAllJoynBusAttachmentFactoryInterop) CreateFromWin32Handle(win32handle uint64, enableAboutData byte, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IWindowsDevicesAllJoynBusAttachmentFactoryInterop) CreateFromWin32Handle(win32handle uint64, enableAboutData byte, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32handle), uintptr(enableAboutData), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -52,7 +52,7 @@ type IWindowsDevicesAllJoynBusObjectFactoryInterop struct {
 var IID_IWindowsDevicesAllJoynBusObjectFactoryInterop = win32.GUID{Data1: 0x6174e506, Data2: 0x8b95, Data3: 0x4e36, Data4: [8]byte{0x95, 0xc0, 0xb8, 0x8f, 0xed, 0x34, 0x93, 0x8c}}
 
 // CreateFromWin32Handle dispatches through IWindowsDevicesAllJoynBusObjectFactoryInterop's vtable slot 6.
-func (self *IWindowsDevicesAllJoynBusObjectFactoryInterop) CreateFromWin32Handle(win32handle uint64, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IWindowsDevicesAllJoynBusObjectFactoryInterop) CreateFromWin32Handle(win32handle uint64, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32handle), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }

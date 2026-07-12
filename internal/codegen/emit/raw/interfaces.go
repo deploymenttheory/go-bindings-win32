@@ -117,6 +117,7 @@ func (g *Generator) buildComMethod(meta *win32meta.NamespaceMeta, interfaceName 
 	for i := range method.Params {
 		resolvedParams[i] = g.mapper.GoType(&method.Params[i].Type, context, scratch)
 	}
+	retypeComOutParams(method.Params, resolvedParams, scratch, g.mapper.ModulePath)
 	slicePlans, elidedCounts := planSliceParams(method.Params, resolvedParams, true)
 	returnContext := context
 	returnContext.IsReturn = true

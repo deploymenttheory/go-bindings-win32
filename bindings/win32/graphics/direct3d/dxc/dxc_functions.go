@@ -22,13 +22,13 @@ var (
 )
 
 // DxcCreateInstance calls dxcompiler!DxcCreateInstance.
-func DxcCreateInstance(rclsid *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func DxcCreateInstance(rclsid *win32.GUID, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procDxcCreateInstance.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // DxcCreateInstance2 calls dxcompiler!DxcCreateInstance2.
-func DxcCreateInstance2(pMalloc *systemcom.IMalloc, rclsid *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func DxcCreateInstance2(pMalloc *systemcom.IMalloc, rclsid *win32.GUID, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procDxcCreateInstance2.Addr(), uintptr(unsafe.Pointer(pMalloc)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }

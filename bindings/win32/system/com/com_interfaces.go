@@ -906,7 +906,7 @@ type IClassActivator struct {
 var IID_IClassActivator = win32.GUID{Data1: 0x00000140, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // GetClassObject dispatches through IClassActivator's vtable slot 3.
-func (self *IClassActivator) GetClassObject(rclsid *win32.GUID, dwClassContext uint32, locale uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IClassActivator) GetClassObject(rclsid *win32.GUID, dwClassContext uint32, locale uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rclsid)), uintptr(dwClassContext), uintptr(locale), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -921,7 +921,7 @@ type IClassFactory struct {
 var IID_IClassFactory = win32.GUID{Data1: 0x00000001, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // CreateInstance dispatches through IClassFactory's vtable slot 3.
-func (self *IClassFactory) CreateInstance(pUnkOuter *IUnknown, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+func (self *IClassFactory) CreateInstance(pUnkOuter *IUnknown, riid *win32.GUID, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1821,7 +1821,7 @@ func (self *IMachineGlobalObjectTable) RegisterObject(clsid *win32.GUID, identif
 }
 
 // GetObject dispatches through IMachineGlobalObjectTable's vtable slot 4.
-func (self *IMachineGlobalObjectTable) GetObject(clsid *win32.GUID, identifier string, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IMachineGlobalObjectTable) GetObject(clsid *win32.GUID, identifier string, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_identifier := win32.UTF16Ptr(identifier)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(_identifier)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
@@ -1972,13 +1972,13 @@ type IMoniker struct {
 var IID_IMoniker = win32.GUID{Data1: 0x0000000f, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // BindToObject dispatches through IMoniker's vtable slot 8.
-func (self *IMoniker) BindToObject(pbc *IBindCtx, pmkToLeft *IMoniker, riidResult *win32.GUID, ppvResult *unsafe.Pointer) error {
+func (self *IMoniker) BindToObject(pbc *IBindCtx, pmkToLeft *IMoniker, riidResult *win32.GUID, ppvResult **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbc)), uintptr(unsafe.Pointer(pmkToLeft)), uintptr(unsafe.Pointer(riidResult)), uintptr(unsafe.Pointer(ppvResult)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // BindToStorage dispatches through IMoniker's vtable slot 9.
-func (self *IMoniker) BindToStorage(pbc *IBindCtx, pmkToLeft *IMoniker, riid *win32.GUID, ppvObj *unsafe.Pointer) error {
+func (self *IMoniker) BindToStorage(pbc *IBindCtx, pmkToLeft *IMoniker, riid *win32.GUID, ppvObj **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbc)), uintptr(unsafe.Pointer(pmkToLeft)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObj)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -2101,14 +2101,14 @@ type IOplockStorage struct {
 var IID_IOplockStorage = win32.GUID{Data1: 0x8d19c834, Data2: 0x8879, Data3: 0x11d1, Data4: [8]byte{0x83, 0xe9, 0x00, 0xc0, 0x4f, 0xc2, 0xc6, 0xd4}}
 
 // CreateStorageEx dispatches through IOplockStorage's vtable slot 3.
-func (self *IOplockStorage) CreateStorageEx(pwcsName string, grfMode uint32, stgfmt uint32, grfAttrs uint32, riid *win32.GUID, ppstgOpen *unsafe.Pointer) error {
+func (self *IOplockStorage) CreateStorageEx(pwcsName string, grfMode uint32, stgfmt uint32, grfAttrs uint32, riid *win32.GUID, ppstgOpen **win32.IUnknown) error {
 	_pwcsName := win32.UTF16Ptr(pwcsName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwcsName)), uintptr(grfMode), uintptr(stgfmt), uintptr(grfAttrs), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppstgOpen)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // OpenStorageEx dispatches through IOplockStorage's vtable slot 4.
-func (self *IOplockStorage) OpenStorageEx(pwcsName string, grfMode uint32, stgfmt uint32, grfAttrs uint32, riid *win32.GUID, ppstgOpen *unsafe.Pointer) error {
+func (self *IOplockStorage) OpenStorageEx(pwcsName string, grfMode uint32, stgfmt uint32, grfAttrs uint32, riid *win32.GUID, ppstgOpen **win32.IUnknown) error {
 	_pwcsName := win32.UTF16Ptr(pwcsName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwcsName)), uintptr(grfMode), uintptr(stgfmt), uintptr(grfAttrs), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppstgOpen)))
 	return win32.HRESULTError(int32(r1))
@@ -2885,7 +2885,7 @@ type IServiceProvider struct {
 var IID_IServiceProvider = win32.GUID{Data1: 0x6d5140c1, Data2: 0x7436, Data3: 0x11ce, Data4: [8]byte{0x80, 0x34, 0x00, 0xaa, 0x00, 0x60, 0x09, 0xfa}}
 
 // QueryService dispatches through IServiceProvider's vtable slot 3.
-func (self *IServiceProvider) QueryService(guidService *win32.GUID, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+func (self *IServiceProvider) QueryService(guidService *win32.GUID, riid *win32.GUID, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidService)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -3328,7 +3328,7 @@ func (self *ITypeInfo) AddressOfMember(memid int32, invKind INVOKEKIND, ppv *uns
 }
 
 // CreateInstance dispatches through ITypeInfo's vtable slot 16.
-func (self *ITypeInfo) CreateInstance(pUnkOuter *IUnknown, riid *win32.GUID, ppvObj *unsafe.Pointer) error {
+func (self *ITypeInfo) CreateInstance(pUnkOuter *IUnknown, riid *win32.GUID, ppvObj **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObj)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -3640,7 +3640,7 @@ type IUnknown struct {
 var IID_IUnknown = win32.GUID{Data1: 0x00000000, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // QueryInterface dispatches through IUnknown's vtable slot 0.
-func (self *IUnknown) QueryInterface(riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+func (self *IUnknown) QueryInterface(riid *win32.GUID, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[0], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
 	return win32.HRESULTError(int32(r1))
 }

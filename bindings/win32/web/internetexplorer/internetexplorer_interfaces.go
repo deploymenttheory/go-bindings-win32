@@ -934,7 +934,7 @@ type IInternetExplorerManager struct {
 var IID_IInternetExplorerManager = win32.GUID{Data1: 0xacc84351, Data2: 0x04ff, Data3: 0x44f9, Data4: [8]byte{0xb2, 0x3f, 0x65, 0x5e, 0xd1, 0x68, 0xc6, 0xd5}}
 
 // CreateObject dispatches through IInternetExplorerManager's vtable slot 3.
-func (self *IInternetExplorerManager) CreateObject(dwConfig uint32, pszURL string, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IInternetExplorerManager) CreateObject(dwConfig uint32, pszURL string, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszURL := win32.UTF16Ptr(pszURL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwConfig), uintptr(unsafe.Pointer(_pszURL)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
@@ -2026,7 +2026,7 @@ func (self *IUrlHistoryStg) QueryUrl(pocsUrl string, dwFlags uint32, lpSTATURL *
 }
 
 // BindToObject dispatches through IUrlHistoryStg's vtable slot 6.
-func (self *IUrlHistoryStg) BindToObject(pocsUrl string, riid *win32.GUID, ppvOut *unsafe.Pointer) error {
+func (self *IUrlHistoryStg) BindToObject(pocsUrl string, riid *win32.GUID, ppvOut **win32.IUnknown) error {
 	_pocsUrl := win32.UTF16Ptr(pocsUrl)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pocsUrl)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvOut)))
 	return win32.HRESULTError(int32(r1))

@@ -41,7 +41,7 @@ func (self *ICreateDeviceAccessAsync) Close() error {
 }
 
 // GetResult dispatches through ICreateDeviceAccessAsync's vtable slot 6.
-func (self *ICreateDeviceAccessAsync) GetResult(riid *win32.GUID, deviceAccess *unsafe.Pointer) error {
+func (self *ICreateDeviceAccessAsync) GetResult(riid *win32.GUID, deviceAccess **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(deviceAccess)))
 	return win32.HRESULTError(int32(r1))
 }

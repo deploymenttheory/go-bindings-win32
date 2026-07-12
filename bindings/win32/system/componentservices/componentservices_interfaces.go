@@ -1785,7 +1785,7 @@ type ICreateWithTipTransactionEx struct {
 var IID_ICreateWithTipTransactionEx = win32.GUID{Data1: 0x455acf59, Data2: 0x5345, Data3: 0x11d2, Data4: [8]byte{0x99, 0xcf, 0x00, 0xc0, 0x4f, 0x79, 0x7b, 0xc9}}
 
 // CreateInstance dispatches through ICreateWithTipTransactionEx's vtable slot 3.
-func (self *ICreateWithTipTransactionEx) CreateInstance(bstrTipUrl foundation.BSTR, rclsid *win32.GUID, riid *win32.GUID, pObject *unsafe.Pointer) error {
+func (self *ICreateWithTipTransactionEx) CreateInstance(bstrTipUrl foundation.BSTR, rclsid *win32.GUID, riid *win32.GUID, pObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTipUrl)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pObject)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1800,7 +1800,7 @@ type ICreateWithTransactionEx struct {
 var IID_ICreateWithTransactionEx = win32.GUID{Data1: 0x455acf57, Data2: 0x5345, Data3: 0x11d2, Data4: [8]byte{0x99, 0xcf, 0x00, 0xc0, 0x4f, 0x79, 0x7b, 0xc9}}
 
 // CreateInstance dispatches through ICreateWithTransactionEx's vtable slot 3.
-func (self *ICreateWithTransactionEx) CreateInstance(pTransaction *systemdistributedtransactioncoordinator.ITransaction, rclsid *win32.GUID, riid *win32.GUID, pObject *unsafe.Pointer) error {
+func (self *ICreateWithTransactionEx) CreateInstance(pTransaction *systemdistributedtransactioncoordinator.ITransaction, rclsid *win32.GUID, riid *win32.GUID, pObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTransaction)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pObject)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -3747,7 +3747,7 @@ type ITransactionContextEx struct {
 var IID_ITransactionContextEx = win32.GUID{Data1: 0x7999fc22, Data2: 0xd3c6, Data3: 0x11cf, Data4: [8]byte{0xac, 0xab, 0x00, 0xa0, 0x24, 0xa5, 0x5a, 0xef}}
 
 // CreateInstance dispatches through ITransactionContextEx's vtable slot 3.
-func (self *ITransactionContextEx) CreateInstance(rclsid *win32.GUID, riid *win32.GUID, pObject *unsafe.Pointer) error {
+func (self *ITransactionContextEx) CreateInstance(rclsid *win32.GUID, riid *win32.GUID, pObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pObject)))
 	return win32.HRESULTError(int32(r1))
 }

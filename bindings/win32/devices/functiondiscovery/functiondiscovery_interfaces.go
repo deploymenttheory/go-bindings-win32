@@ -237,9 +237,10 @@ type IFunctionDiscoveryServiceProvider struct {
 var IID_IFunctionDiscoveryServiceProvider = win32.GUID{Data1: 0x4c81ed02, Data2: 0x1b04, Data3: 0x43f2, Data4: [8]byte{0xa4, 0x51, 0x69, 0x96, 0x6c, 0xbc, 0xd1, 0xc2}}
 
 // Initialize dispatches through IFunctionDiscoveryServiceProvider's vtable slot 3.
-func (self *IFunctionDiscoveryServiceProvider) Initialize(pIFunctionInstance *IFunctionInstance, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIFunctionInstance)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+func (self *IFunctionDiscoveryServiceProvider) Initialize(pIFunctionInstance *IFunctionInstance, riid *win32.GUID) (*win32.IUnknown, error) {
+	var _ppv *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIFunctionInstance)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_ppv)))
+	return _ppv, win32.HRESULTError(int32(r1))
 }
 
 // IFunctionInstance: https://learn.microsoft.com/windows/win32/api/functiondiscoveryapi/nn-functiondiscoveryapi-ifunctioninstance

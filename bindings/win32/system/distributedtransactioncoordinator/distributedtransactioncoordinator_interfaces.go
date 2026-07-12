@@ -1218,7 +1218,7 @@ type ITransactionImport struct {
 var IID_ITransactionImport = win32.GUID{Data1: 0xe1cf9b5a, Data2: 0x8745, Data3: 0x11ce, Data4: [8]byte{0xa9, 0xba, 0x00, 0xaa, 0x00, 0x6c, 0x37, 0x06}}
 
 // Import dispatches through ITransactionImport's vtable slot 3.
-func (self *ITransactionImport) Import(rgbTransactionCookie []byte, piid *win32.GUID, ppvTransaction *unsafe.Pointer) error {
+func (self *ITransactionImport) Import(rgbTransactionCookie []byte, piid *win32.GUID, ppvTransaction **win32.IUnknown) error {
 	var _rgbTransactionCookie *byte
 	if len(rgbTransactionCookie) > 0 {
 		_rgbTransactionCookie = &rgbTransactionCookie[0]

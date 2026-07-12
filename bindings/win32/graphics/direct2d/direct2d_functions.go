@@ -45,7 +45,7 @@ func D2D1CreateDeviceContext(dxgiSurface *graphicsdxgi.IDXGISurface, creationPro
 // D2D1CreateFactory calls d2d1!D2D1CreateFactory.
 // https://learn.microsoft.com/windows/win32/api/d2d1/nf-d2d1-d2d1createfactory
 // Minimum OS: windows6.1.
-func D2D1CreateFactory(factoryType D2D1_FACTORY_TYPE, riid *win32.GUID, pFactoryOptions *D2D1_FACTORY_OPTIONS, ppIFactory *unsafe.Pointer) error {
+func D2D1CreateFactory(factoryType D2D1_FACTORY_TYPE, riid *win32.GUID, pFactoryOptions *D2D1_FACTORY_OPTIONS, ppIFactory **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procD2D1CreateFactory.Addr(), uintptr(factoryType), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pFactoryOptions)), uintptr(unsafe.Pointer(ppIFactory)))
 	return win32.HRESULTError(int32(r1))
 }

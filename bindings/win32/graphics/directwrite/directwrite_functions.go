@@ -22,7 +22,7 @@ var (
 // DWriteCreateFactory calls DWrite!DWriteCreateFactory.
 // https://learn.microsoft.com/windows/win32/api/dwrite/nf-dwrite-dwritecreatefactory
 // Minimum OS: windows6.1.
-func DWriteCreateFactory(factoryType DWRITE_FACTORY_TYPE, iid *win32.GUID, factory *unsafe.Pointer) error {
+func DWriteCreateFactory(factoryType DWRITE_FACTORY_TYPE, iid *win32.GUID, factory **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procDWriteCreateFactory.Addr(), uintptr(factoryType), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(factory)))
 	return win32.HRESULTError(int32(r1))
 }

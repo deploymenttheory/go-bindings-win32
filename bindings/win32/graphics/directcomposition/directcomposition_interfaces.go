@@ -1360,7 +1360,7 @@ type IDCompositionSurface struct {
 var IID_IDCompositionSurface = win32.GUID{Data1: 0xbb8a4953, Data2: 0x2c99, Data3: 0x4f5a, Data4: [8]byte{0x96, 0xf5, 0x48, 0x19, 0x02, 0x7f, 0xa3, 0xac}}
 
 // BeginDraw dispatches through IDCompositionSurface's vtable slot 3.
-func (self *IDCompositionSurface) BeginDraw(updateRect *foundation.RECT, iid *win32.GUID, updateObject *unsafe.Pointer, updateOffset *foundation.POINT) error {
+func (self *IDCompositionSurface) BeginDraw(updateRect *foundation.RECT, iid *win32.GUID, updateObject **win32.IUnknown, updateOffset *foundation.POINT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(updateRect)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(updateObject)), uintptr(unsafe.Pointer(updateOffset)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1560,7 +1560,7 @@ func (self *IDCompositionTexture) SetAlphaMode(alphaMode graphicsdxgicommon.DXGI
 }
 
 // GetAvailableFence dispatches through IDCompositionTexture's vtable slot 6.
-func (self *IDCompositionTexture) GetAvailableFence(fenceValue *uint64, iid *win32.GUID, availableFence *unsafe.Pointer) error {
+func (self *IDCompositionTexture) GetAvailableFence(fenceValue *uint64, iid *win32.GUID, availableFence **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fenceValue)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(availableFence)))
 	return win32.HRESULTError(int32(r1))
 }

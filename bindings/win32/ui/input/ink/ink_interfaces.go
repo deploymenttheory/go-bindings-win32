@@ -74,7 +74,7 @@ func (self *IInkDesktopHost) QueueWorkItem(workItem *IInkHostWorkItem) error {
 }
 
 // CreateInkPresenter dispatches through IInkDesktopHost's vtable slot 4.
-func (self *IInkDesktopHost) CreateInkPresenter(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IInkDesktopHost) CreateInkPresenter(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }

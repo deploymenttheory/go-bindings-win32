@@ -24,7 +24,7 @@ type ISoftwareBitmapNative struct {
 var IID_ISoftwareBitmapNative = win32.GUID{Data1: 0x94bc8415, Data2: 0x04ea, Data3: 0x4b2e, Data4: [8]byte{0xaf, 0x13, 0x4d, 0xe9, 0x5a, 0xa8, 0x98, 0xeb}}
 
 // GetData dispatches through ISoftwareBitmapNative's vtable slot 6.
-func (self *ISoftwareBitmapNative) GetData(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *ISoftwareBitmapNative) GetData(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -39,14 +39,14 @@ type ISoftwareBitmapNativeFactory struct {
 var IID_ISoftwareBitmapNativeFactory = win32.GUID{Data1: 0xc3c181ec, Data2: 0x2914, Data3: 0x4791, Data4: [8]byte{0xaf, 0x02, 0x02, 0xd2, 0x24, 0xa1, 0x0b, 0x43}}
 
 // CreateFromWICBitmap dispatches through ISoftwareBitmapNativeFactory's vtable slot 6.
-func (self *ISoftwareBitmapNativeFactory) CreateFromWICBitmap(data *graphicsimaging.IWICBitmap, forceReadOnly bool, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *ISoftwareBitmapNativeFactory) CreateFromWICBitmap(data *graphicsimaging.IWICBitmap, forceReadOnly bool, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_forceReadOnly := win32.Bool32(forceReadOnly)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(data)), uintptr(_forceReadOnly), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateFromMF2DBuffer2 dispatches through ISoftwareBitmapNativeFactory's vtable slot 7.
-func (self *ISoftwareBitmapNativeFactory) CreateFromMF2DBuffer2(data *mediamediafoundation.IMF2DBuffer2, subtype *win32.GUID, width uint32, height uint32, forceReadOnly bool, minDisplayAperture *mediamediafoundation.MFVideoArea, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *ISoftwareBitmapNativeFactory) CreateFromMF2DBuffer2(data *mediamediafoundation.IMF2DBuffer2, subtype *win32.GUID, width uint32, height uint32, forceReadOnly bool, minDisplayAperture *mediamediafoundation.MFVideoArea, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_forceReadOnly := win32.Bool32(forceReadOnly)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(data)), uintptr(unsafe.Pointer(subtype)), uintptr(width), uintptr(height), uintptr(_forceReadOnly), uintptr(unsafe.Pointer(minDisplayAperture)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))

@@ -2827,15 +2827,17 @@ func (self *IUIAutomationElement) GetCachedPropertyValueEx(propertyId UIA_PROPER
 }
 
 // GetCurrentPatternAs dispatches through IUIAutomationElement's vtable slot 14.
-func (self *IUIAutomationElement) GetCurrentPatternAs(patternId UIA_PATTERN_ID, riid *win32.GUID, patternObject *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(patternId), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(patternObject)))
-	return win32.HRESULTError(int32(r1))
+func (self *IUIAutomationElement) GetCurrentPatternAs(patternId UIA_PATTERN_ID, riid *win32.GUID) (*win32.IUnknown, error) {
+	var _patternObject *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(patternId), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_patternObject)))
+	return _patternObject, win32.HRESULTError(int32(r1))
 }
 
 // GetCachedPatternAs dispatches through IUIAutomationElement's vtable slot 15.
-func (self *IUIAutomationElement) GetCachedPatternAs(patternId UIA_PATTERN_ID, riid *win32.GUID, patternObject *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(patternId), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(patternObject)))
-	return win32.HRESULTError(int32(r1))
+func (self *IUIAutomationElement) GetCachedPatternAs(patternId UIA_PATTERN_ID, riid *win32.GUID) (*win32.IUnknown, error) {
+	var _patternObject *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(patternId), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_patternObject)))
+	return _patternObject, win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentPattern dispatches through IUIAutomationElement's vtable slot 16.

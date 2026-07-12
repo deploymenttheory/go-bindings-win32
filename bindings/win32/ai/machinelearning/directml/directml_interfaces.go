@@ -118,19 +118,19 @@ func (self *IDMLDevice) CheckFeatureSupport(feature DML_FEATURE, featureQueryDat
 }
 
 // CreateOperator dispatches through IDMLDevice's vtable slot 8.
-func (self *IDMLDevice) CreateOperator(desc *DML_OPERATOR_DESC, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IDMLDevice) CreateOperator(desc *DML_OPERATOR_DESC, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(desc)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CompileOperator dispatches through IDMLDevice's vtable slot 9.
-func (self *IDMLDevice) CompileOperator(op *IDMLOperator, flags DML_EXECUTION_FLAGS, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IDMLDevice) CompileOperator(op *IDMLOperator, flags DML_EXECUTION_FLAGS, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(op)), uintptr(flags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateOperatorInitializer dispatches through IDMLDevice's vtable slot 10.
-func (self *IDMLDevice) CreateOperatorInitializer(operators []*IDMLCompiledOperator, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IDMLDevice) CreateOperatorInitializer(operators []*IDMLCompiledOperator, riid *win32.GUID, ppv **win32.IUnknown) error {
 	var _operators **IDMLCompiledOperator
 	if len(operators) > 0 {
 		_operators = &operators[0]
@@ -140,13 +140,13 @@ func (self *IDMLDevice) CreateOperatorInitializer(operators []*IDMLCompiledOpera
 }
 
 // CreateCommandRecorder dispatches through IDMLDevice's vtable slot 11.
-func (self *IDMLDevice) CreateCommandRecorder(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IDMLDevice) CreateCommandRecorder(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateBindingTable dispatches through IDMLDevice's vtable slot 12.
-func (self *IDMLDevice) CreateBindingTable(desc *DML_BINDING_TABLE_DESC, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IDMLDevice) CreateBindingTable(desc *DML_BINDING_TABLE_DESC, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(desc)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -178,7 +178,7 @@ func (self *IDMLDevice) GetDeviceRemovedReason() error {
 }
 
 // GetParentDevice dispatches through IDMLDevice's vtable slot 16.
-func (self *IDMLDevice) GetParentDevice(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IDMLDevice) GetParentDevice(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -193,7 +193,7 @@ type IDMLDevice1 struct {
 var IID_IDMLDevice1 = win32.GUID{Data1: 0xa0884f9a, Data2: 0xd2be, Data3: 0x4355, Data4: [8]byte{0xaa, 0x5d, 0x59, 0x01, 0x28, 0x1a, 0xd1, 0xd2}}
 
 // CompileGraph dispatches through IDMLDevice1's vtable slot 17.
-func (self *IDMLDevice1) CompileGraph(desc *DML_GRAPH_DESC, flags DML_EXECUTION_FLAGS, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IDMLDevice1) CompileGraph(desc *DML_GRAPH_DESC, flags DML_EXECUTION_FLAGS, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(desc)), uintptr(flags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -208,7 +208,7 @@ type IDMLDeviceChild struct {
 var IID_IDMLDeviceChild = win32.GUID{Data1: 0x27e83142, Data2: 0x8165, Data3: 0x49e3, Data4: [8]byte{0x97, 0x4e, 0x2f, 0xd6, 0x6e, 0x4c, 0xb6, 0x9d}}
 
 // GetDevice dispatches through IDMLDeviceChild's vtable slot 7.
-func (self *IDMLDeviceChild) GetDevice(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IDMLDeviceChild) GetDevice(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }

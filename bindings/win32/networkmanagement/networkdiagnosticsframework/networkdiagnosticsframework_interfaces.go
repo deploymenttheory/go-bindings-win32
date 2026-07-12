@@ -205,7 +205,7 @@ type INetDiagHelperUtilFactory struct {
 var IID_INetDiagHelperUtilFactory = win32.GUID{Data1: 0x104613fb, Data2: 0xbc57, Data3: 0x4178, Data4: [8]byte{0x95, 0xba, 0x88, 0x80, 0x96, 0x98, 0x35, 0x4a}}
 
 // CreateUtilityInstance dispatches through INetDiagHelperUtilFactory's vtable slot 3.
-func (self *INetDiagHelperUtilFactory) CreateUtilityInstance(riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+func (self *INetDiagHelperUtilFactory) CreateUtilityInstance(riid *win32.GUID, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
 	return win32.HRESULTError(int32(r1))
 }

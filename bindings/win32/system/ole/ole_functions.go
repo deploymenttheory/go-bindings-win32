@@ -782,7 +782,7 @@ func OleCreateMenuDescriptor(hmenuCombined uiwindowsandmessaging.HMENU, lpMenuWi
 // OleCreatePictureIndirect calls OLEAUT32!OleCreatePictureIndirect.
 // https://learn.microsoft.com/windows/win32/api/olectl/nf-olectl-olecreatepictureindirect
 // Minimum OS: windows5.0.
-func OleCreatePictureIndirect(lpPictDesc *PICTDESC, riid *win32.GUID, fOwn bool, lplpvObj *unsafe.Pointer) error {
+func OleCreatePictureIndirect(lpPictDesc *PICTDESC, riid *win32.GUID, fOwn bool, lplpvObj **win32.IUnknown) error {
 	_fOwn := win32.Bool32(fOwn)
 	r1, _, _ := syscall.SyscallN(procOleCreatePictureIndirect.Addr(), uintptr(unsafe.Pointer(lpPictDesc)), uintptr(unsafe.Pointer(riid)), uintptr(_fOwn), uintptr(unsafe.Pointer(lplpvObj)))
 	return win32.HRESULTError(int32(r1))

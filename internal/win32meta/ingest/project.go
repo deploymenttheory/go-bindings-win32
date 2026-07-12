@@ -183,6 +183,7 @@ func (in *Ingester) paramsOf(method *winmd.MethodDefRow, sig *winmd.MethodSig) [
 			Type:                       in.typeRefOf(&sig.Params[i]),
 			NativeArrayCountParamIndex: -1,
 			MemorySizeBytesParamIndex:  -1,
+			IidParamIndex:              -1,
 		}
 	}
 	tables := &in.file.Tables
@@ -226,6 +227,10 @@ func (in *Ingester) applyParamAttributes(param *win32meta.Param, target winmd.Co
 		case "MemorySizeAttribute":
 			if v, ok := attr.Named["BytesParamIndex"]; ok {
 				param.MemorySizeBytesParamIndex = intValue(v)
+			}
+		case "IidParameterIndexAttribute":
+			if len(attr.Fixed) == 1 {
+				param.IidParamIndex = intValue(attr.Fixed[0])
 			}
 		}
 	}

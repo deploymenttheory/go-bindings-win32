@@ -2803,7 +2803,7 @@ type IClassFactoryEx struct {
 var IID_IClassFactoryEx = win32.GUID{Data1: 0x342d1ea0, Data2: 0xae25, Data3: 0x11d1, Data4: [8]byte{0x89, 0xc5, 0x00, 0x60, 0x08, 0xc3, 0xfb, 0xfc}}
 
 // CreateInstanceWithContext dispatches through IClassFactoryEx's vtable slot 5.
-func (self *IClassFactoryEx) CreateInstanceWithContext(punkContext *systemcom.IUnknown, punkOuter *systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IClassFactoryEx) CreateInstanceWithContext(punkContext *systemcom.IUnknown, punkOuter *systemcom.IUnknown, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(punkContext)), uintptr(unsafe.Pointer(punkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -40262,9 +40262,10 @@ func (self *ISurfacePresenter) Present(uBuffer uint32, pDirty *foundation.RECT) 
 }
 
 // GetBuffer dispatches through ISurfacePresenter's vtable slot 4.
-func (self *ISurfacePresenter) GetBuffer(backBufferIndex uint32, riid *win32.GUID, ppBuffer *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(backBufferIndex), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppBuffer)))
-	return win32.HRESULTError(int32(r1))
+func (self *ISurfacePresenter) GetBuffer(backBufferIndex uint32, riid *win32.GUID) (*win32.IUnknown, error) {
+	var _ppBuffer *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(backBufferIndex), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_ppBuffer)))
+	return _ppBuffer, win32.HRESULTError(int32(r1))
 }
 
 // IsCurrent dispatches through ISurfacePresenter's vtable slot 5.

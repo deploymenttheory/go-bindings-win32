@@ -135,7 +135,7 @@ var (
 // BindMoniker calls OLE32!BindMoniker.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-bindmoniker
 // Minimum OS: windows5.0.
-func BindMoniker(pmk *IMoniker, grfOpt uint32, iidResult *win32.GUID, ppvResult *unsafe.Pointer) error {
+func BindMoniker(pmk *IMoniker, grfOpt uint32, iidResult *win32.GUID, ppvResult **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procBindMoniker.Addr(), uintptr(unsafe.Pointer(pmk)), uintptr(grfOpt), uintptr(unsafe.Pointer(iidResult)), uintptr(unsafe.Pointer(ppvResult)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -232,7 +232,7 @@ func CoCreateGuid(pguid *win32.GUID) error {
 // CoCreateInstance calls OLE32!CoCreateInstance.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cocreateinstance
 // Minimum OS: windows5.0.
-func CoCreateInstance(rclsid *win32.GUID, pUnkOuter *IUnknown, dwClsContext CLSCTX, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func CoCreateInstance(rclsid *win32.GUID, pUnkOuter *IUnknown, dwClsContext CLSCTX, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCoCreateInstance.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(dwClsContext), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -363,7 +363,7 @@ func CoGetApartmentType(pAptType *APTTYPE, pAptQualifier *APTTYPEQUALIFIER) erro
 // CoGetCallContext calls OLE32!CoGetCallContext.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cogetcallcontext
 // Minimum OS: windows5.0.
-func CoGetCallContext(riid *win32.GUID, ppInterface *unsafe.Pointer) error {
+func CoGetCallContext(riid *win32.GUID, ppInterface **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCoGetCallContext.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppInterface)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -379,7 +379,7 @@ func CoGetCallerTID(lpdwTID *uint32) error {
 // CoGetCancelObject calls OLE32!CoGetCancelObject.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cogetcancelobject
 // Minimum OS: windows5.0.
-func CoGetCancelObject(dwThreadId uint32, iid *win32.GUID, ppUnk *unsafe.Pointer) error {
+func CoGetCancelObject(dwThreadId uint32, iid *win32.GUID, ppUnk **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCoGetCancelObject.Addr(), uintptr(dwThreadId), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(ppUnk)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -387,7 +387,7 @@ func CoGetCancelObject(dwThreadId uint32, iid *win32.GUID, ppUnk *unsafe.Pointer
 // CoGetClassObject calls OLE32!CoGetClassObject.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cogetclassobject
 // Minimum OS: windows5.0.
-func CoGetClassObject(rclsid *win32.GUID, dwClsContext uint32, pvReserved unsafe.Pointer, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func CoGetClassObject(rclsid *win32.GUID, dwClsContext uint32, pvReserved unsafe.Pointer, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCoGetClassObject.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(dwClsContext), uintptr(unsafe.Pointer(pvReserved)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -427,7 +427,7 @@ func CoGetMalloc(dwMemContext uint32, ppMalloc **IMalloc) error {
 // CoGetObject calls OLE32!CoGetObject.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-cogetobject
 // Minimum OS: windows5.0.
-func CoGetObject(pszName string, pBindOptions *BIND_OPTS, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func CoGetObject(pszName string, pBindOptions *BIND_OPTS, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszName := win32.UTF16Ptr(pszName)
 	r1, _, _ := syscall.SyscallN(procCoGetObject.Addr(), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(pBindOptions)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
@@ -436,7 +436,7 @@ func CoGetObject(pszName string, pBindOptions *BIND_OPTS, riid *win32.GUID, ppv 
 // CoGetObjectContext calls OLE32!CoGetObjectContext.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cogetobjectcontext
 // Minimum OS: windows5.0.
-func CoGetObjectContext(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func CoGetObjectContext(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCoGetObjectContext.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -836,7 +836,7 @@ func CreateDataAdviseHolder(ppDAHolder **IDataAdviseHolder) error {
 // CreateDataCache calls OLE32!CreateDataCache.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-createdatacache
 // Minimum OS: windows5.0.
-func CreateDataCache(pUnkOuter *IUnknown, rclsid *win32.GUID, iid *win32.GUID, ppv *unsafe.Pointer) error {
+func CreateDataCache(pUnkOuter *IUnknown, rclsid *win32.GUID, iid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCreateDataCache.Addr(), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }

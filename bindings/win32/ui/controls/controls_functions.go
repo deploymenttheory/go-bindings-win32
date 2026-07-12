@@ -1434,7 +1434,7 @@ func ImageList_BeginDrag(himlTrack HIMAGELIST, iTrack int32, dxHotspot int32, dy
 // ImageList_CoCreateInstance calls COMCTL32!ImageList_CoCreateInstance.
 // https://learn.microsoft.com/windows/win32/api/commoncontrols/nf-commoncontrols-imagelist_cocreateinstance
 // Minimum OS: windows6.0.6000.
-func ImageList_CoCreateInstance(rclsid *win32.GUID, punkOuter *systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func ImageList_CoCreateInstance(rclsid *win32.GUID, punkOuter *systemcom.IUnknown, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procImageList_CoCreateInstance.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(punkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }

@@ -99,13 +99,13 @@ func (self *IDirectManipulationContent) SetContentRect(contentSize *foundation.R
 }
 
 // GetViewport dispatches through IDirectManipulationContent's vtable slot 5.
-func (self *IDirectManipulationContent) GetViewport(riid *win32.GUID, object *unsafe.Pointer) error {
+func (self *IDirectManipulationContent) GetViewport(riid *win32.GUID, object **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(object)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetTag dispatches through IDirectManipulationContent's vtable slot 6.
-func (self *IDirectManipulationContent) GetTag(riid *win32.GUID, object *unsafe.Pointer, id *uint32) error {
+func (self *IDirectManipulationContent) GetTag(riid *win32.GUID, object **win32.IUnknown, id *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(object)), uintptr(unsafe.Pointer(id)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -273,19 +273,19 @@ func (self *IDirectManipulationManager) ProcessInput(message *uiwindowsandmessag
 }
 
 // GetUpdateManager dispatches through IDirectManipulationManager's vtable slot 7.
-func (self *IDirectManipulationManager) GetUpdateManager(riid *win32.GUID, object *unsafe.Pointer) error {
+func (self *IDirectManipulationManager) GetUpdateManager(riid *win32.GUID, object **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(object)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateViewport dispatches through IDirectManipulationManager's vtable slot 8.
-func (self *IDirectManipulationManager) CreateViewport(frameInfo *IDirectManipulationFrameInfoProvider, window foundation.HWND, riid *win32.GUID, object *unsafe.Pointer) error {
+func (self *IDirectManipulationManager) CreateViewport(frameInfo *IDirectManipulationFrameInfoProvider, window foundation.HWND, riid *win32.GUID, object **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(frameInfo)), uintptr(window), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(object)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateContent dispatches through IDirectManipulationManager's vtable slot 9.
-func (self *IDirectManipulationManager) CreateContent(frameInfo *IDirectManipulationFrameInfoProvider, clsid *win32.GUID, riid *win32.GUID, object *unsafe.Pointer) error {
+func (self *IDirectManipulationManager) CreateContent(frameInfo *IDirectManipulationFrameInfoProvider, clsid *win32.GUID, riid *win32.GUID, object **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(frameInfo)), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(object)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -300,7 +300,7 @@ type IDirectManipulationManager2 struct {
 var IID_IDirectManipulationManager2 = win32.GUID{Data1: 0xfa1005e9, Data2: 0x3d16, Data3: 0x484c, Data4: [8]byte{0xbf, 0xc9, 0x62, 0xb6, 0x1e, 0x56, 0xec, 0x4e}}
 
 // CreateBehavior dispatches through IDirectManipulationManager2's vtable slot 10.
-func (self *IDirectManipulationManager2) CreateBehavior(clsid *win32.GUID, riid *win32.GUID, object *unsafe.Pointer) error {
+func (self *IDirectManipulationManager2) CreateBehavior(clsid *win32.GUID, riid *win32.GUID, object **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(object)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -315,7 +315,7 @@ type IDirectManipulationManager3 struct {
 var IID_IDirectManipulationManager3 = win32.GUID{Data1: 0x2cb6b33d, Data2: 0xffe8, Data3: 0x488c, Data4: [8]byte{0xb7, 0x50, 0xfb, 0xdf, 0xe8, 0x8d, 0xca, 0x8c}}
 
 // GetService dispatches through IDirectManipulationManager3's vtable slot 11.
-func (self *IDirectManipulationManager3) GetService(clsid *win32.GUID, riid *win32.GUID, object *unsafe.Pointer) error {
+func (self *IDirectManipulationManager3) GetService(clsid *win32.GUID, riid *win32.GUID, object **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(object)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -461,7 +461,7 @@ func (self *IDirectManipulationViewport) GetStatus(status *DIRECTMANIPULATION_ST
 }
 
 // GetTag dispatches through IDirectManipulationViewport's vtable slot 9.
-func (self *IDirectManipulationViewport) GetTag(riid *win32.GUID, object *unsafe.Pointer, id *uint32) error {
+func (self *IDirectManipulationViewport) GetTag(riid *win32.GUID, object **win32.IUnknown, id *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(object)), uintptr(unsafe.Pointer(id)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -505,7 +505,7 @@ func (self *IDirectManipulationViewport) SyncDisplayTransform(matrix []float32) 
 }
 
 // GetPrimaryContent dispatches through IDirectManipulationViewport's vtable slot 16.
-func (self *IDirectManipulationViewport) GetPrimaryContent(riid *win32.GUID, object *unsafe.Pointer) error {
+func (self *IDirectManipulationViewport) GetPrimaryContent(riid *win32.GUID, object **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(object)))
 	return win32.HRESULTError(int32(r1))
 }

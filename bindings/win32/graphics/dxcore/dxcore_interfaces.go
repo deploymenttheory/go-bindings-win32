@@ -67,7 +67,7 @@ func (self *IDXCoreAdapter) SetState(state DXCoreAdapterState, inputStateDetails
 }
 
 // GetFactory dispatches through IDXCoreAdapter's vtable slot 12.
-func (self *IDXCoreAdapter) GetFactory(riid *win32.GUID, ppvFactory *unsafe.Pointer) error {
+func (self *IDXCoreAdapter) GetFactory(riid *win32.GUID, ppvFactory **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvFactory)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -104,7 +104,7 @@ type IDXCoreAdapterFactory struct {
 var IID_IDXCoreAdapterFactory = win32.GUID{Data1: 0x78ee5945, Data2: 0xc36e, Data3: 0x4b13, Data4: [8]byte{0xa6, 0x69, 0x00, 0x5d, 0xd1, 0x1c, 0x0f, 0x06}}
 
 // CreateAdapterList dispatches through IDXCoreAdapterFactory's vtable slot 3.
-func (self *IDXCoreAdapterFactory) CreateAdapterList(filterAttributes []win32.GUID, riid *win32.GUID, ppvAdapterList *unsafe.Pointer) error {
+func (self *IDXCoreAdapterFactory) CreateAdapterList(filterAttributes []win32.GUID, riid *win32.GUID, ppvAdapterList **win32.IUnknown) error {
 	var _filterAttributes *win32.GUID
 	if len(filterAttributes) > 0 {
 		_filterAttributes = &filterAttributes[0]
@@ -114,7 +114,7 @@ func (self *IDXCoreAdapterFactory) CreateAdapterList(filterAttributes []win32.GU
 }
 
 // GetAdapterByLuid dispatches through IDXCoreAdapterFactory's vtable slot 4.
-func (self *IDXCoreAdapterFactory) GetAdapterByLuid(adapterLUID *foundation.LUID, riid *win32.GUID, ppvAdapter *unsafe.Pointer) error {
+func (self *IDXCoreAdapterFactory) GetAdapterByLuid(adapterLUID *foundation.LUID, riid *win32.GUID, ppvAdapter **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(adapterLUID)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvAdapter)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -140,7 +140,7 @@ type IDXCoreAdapterFactory1 struct {
 var IID_IDXCoreAdapterFactory1 = win32.GUID{Data1: 0xd5682e19, Data2: 0x6d21, Data3: 0x401c, Data4: [8]byte{0x82, 0x7a, 0x9a, 0x51, 0xa4, 0xea, 0x35, 0xd7}}
 
 // CreateAdapterListByWorkload dispatches through IDXCoreAdapterFactory1's vtable slot 8.
-func (self *IDXCoreAdapterFactory1) CreateAdapterListByWorkload(workload DXCoreWorkload, runtimeFilter DXCoreRuntimeFilterFlags, hardwareTypeFilter DXCoreHardwareTypeFilterFlags, riid *win32.GUID, ppvAdapterList *unsafe.Pointer) error {
+func (self *IDXCoreAdapterFactory1) CreateAdapterListByWorkload(workload DXCoreWorkload, runtimeFilter DXCoreRuntimeFilterFlags, hardwareTypeFilter DXCoreHardwareTypeFilterFlags, riid *win32.GUID, ppvAdapterList **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(workload), uintptr(runtimeFilter), uintptr(hardwareTypeFilter), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvAdapterList)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -155,7 +155,7 @@ type IDXCoreAdapterList struct {
 var IID_IDXCoreAdapterList = win32.GUID{Data1: 0x526c7776, Data2: 0x40e9, Data3: 0x459b, Data4: [8]byte{0xb7, 0x11, 0xf3, 0x2a, 0xd7, 0x6d, 0xfc, 0x28}}
 
 // GetAdapter dispatches through IDXCoreAdapterList's vtable slot 3.
-func (self *IDXCoreAdapterList) GetAdapter(index uint32, riid *win32.GUID, ppvAdapter *unsafe.Pointer) error {
+func (self *IDXCoreAdapterList) GetAdapter(index uint32, riid *win32.GUID, ppvAdapter **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvAdapter)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -167,7 +167,7 @@ func (self *IDXCoreAdapterList) GetAdapterCount() uint32 {
 }
 
 // GetFactory dispatches through IDXCoreAdapterList's vtable slot 6.
-func (self *IDXCoreAdapterList) GetFactory(riid *win32.GUID, ppvFactory *unsafe.Pointer) error {
+func (self *IDXCoreAdapterList) GetFactory(riid *win32.GUID, ppvFactory **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvFactory)))
 	return win32.HRESULTError(int32(r1))
 }

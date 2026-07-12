@@ -68,7 +68,7 @@ func (self *IClassFactory2) RequestLicKey(dwReserved uint32, pBstrKey *foundatio
 }
 
 // CreateInstanceLic dispatches through IClassFactory2's vtable slot 7.
-func (self *IClassFactory2) CreateInstanceLic(pUnkOuter *systemcom.IUnknown, riid *win32.GUID, bstrKey foundation.BSTR, ppvObj *unsafe.Pointer) error {
+func (self *IClassFactory2) CreateInstanceLic(pUnkOuter *systemcom.IUnknown, riid *win32.GUID, bstrKey foundation.BSTR, ppvObj **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), 0, uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(bstrKey)), uintptr(unsafe.Pointer(ppvObj)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1064,7 +1064,7 @@ func (self *IObjectWithSite) SetSite(pUnkSite *systemcom.IUnknown) error {
 }
 
 // GetSite dispatches through IObjectWithSite's vtable slot 4.
-func (self *IObjectWithSite) GetSite(riid *win32.GUID, ppvSite *unsafe.Pointer) error {
+func (self *IObjectWithSite) GetSite(riid *win32.GUID, ppvSite **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvSite)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1868,14 +1868,14 @@ type IOleItemContainer struct {
 var IID_IOleItemContainer = win32.GUID{Data1: 0x0000011c, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // GetObject dispatches through IOleItemContainer's vtable slot 6.
-func (self *IOleItemContainer) GetObject(pszItem string, dwSpeedNeeded uint32, pbc *systemcom.IBindCtx, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+func (self *IOleItemContainer) GetObject(pszItem string, dwSpeedNeeded uint32, pbc *systemcom.IBindCtx, riid *win32.GUID, ppvObject **win32.IUnknown) error {
 	_pszItem := win32.UTF16Ptr(pszItem)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszItem)), uintptr(dwSpeedNeeded), uintptr(unsafe.Pointer(pbc)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetObjectStorage dispatches through IOleItemContainer's vtable slot 7.
-func (self *IOleItemContainer) GetObjectStorage(pszItem string, pbc *systemcom.IBindCtx, riid *win32.GUID, ppvStorage *unsafe.Pointer) error {
+func (self *IOleItemContainer) GetObjectStorage(pszItem string, pbc *systemcom.IBindCtx, riid *win32.GUID, ppvStorage **win32.IUnknown) error {
 	_pszItem := win32.UTF16Ptr(pszItem)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszItem)), uintptr(unsafe.Pointer(pbc)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvStorage)))
 	return win32.HRESULTError(int32(r1))

@@ -28,7 +28,7 @@ func (self *IObjectArray) GetCount(pcObjects *uint32) error {
 }
 
 // GetAt dispatches through IObjectArray's vtable slot 4.
-func (self *IObjectArray) GetAt(uiIndex uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IObjectArray) GetAt(uiIndex uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(uiIndex), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }

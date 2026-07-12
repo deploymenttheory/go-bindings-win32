@@ -86,7 +86,7 @@ func (self *IActiveScript) SetScriptSite(pass *IActiveScriptSite) error {
 }
 
 // GetScriptSite dispatches through IActiveScript's vtable slot 4.
-func (self *IActiveScript) GetScriptSite(riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+func (self *IActiveScript) GetScriptSite(riid *win32.GUID, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
 	return win32.HRESULTError(int32(r1))
 }

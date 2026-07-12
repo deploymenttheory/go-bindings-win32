@@ -289,7 +289,7 @@ func (self *ISurfaceImageSourceNativeWithD2D) SetDevice(device *systemcom.IUnkno
 }
 
 // BeginDraw dispatches through ISurfaceImageSourceNativeWithD2D's vtable slot 4.
-func (self *ISurfaceImageSourceNativeWithD2D) BeginDraw(updateRect *foundation.RECT, iid *win32.GUID, updateObject *unsafe.Pointer, offset *foundation.POINT) error {
+func (self *ISurfaceImageSourceNativeWithD2D) BeginDraw(updateRect *foundation.RECT, iid *win32.GUID, updateObject **win32.IUnknown, offset *foundation.POINT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(updateRect)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(updateObject)), uintptr(unsafe.Pointer(offset)))
 	return win32.HRESULTError(int32(r1))
 }

@@ -152,6 +152,7 @@ func (g *Generator) buildFunction(meta *win32meta.NamespaceMeta, function *win32
 	for i := range function.Params {
 		resolvedParams[i] = g.mapper.GoType(&function.Params[i].Type, context, scratch)
 	}
+	retypeComOutParams(function.Params, resolvedParams, scratch, g.mapper.ModulePath)
 	slicePlans, elidedCounts := planSliceParams(function.Params, resolvedParams, true)
 
 	returnContext := context
@@ -546,6 +547,33 @@ func planSliceParams(params []win32meta.Param, resolved []typemap.Resolved, type
 func isVoidPointer(ref *win32meta.TypeRef) bool {
 	return ref.Kind == "PointerTo" && ref.Child != nil &&
 		ref.Child.Kind == "Native" && ref.Child.Name == "Void"
+}
+
+// isVoidDoublePointer reports whether a metadata type is literally void**.
+func isVoidDoublePointer(ref *win32meta.TypeRef) bool {
+	return ref.Kind == "PointerTo" && ref.Child != nil && isVoidPointer(ref.Child)
+}
+
+// retypeComOutParams upgrades void** [out] params carrying [ComOutPtr] or an
+// [IidParameterIndex] linkage to **win32.IUnknown: the metadata guarantees
+// the slot receives a COM object pointer (the concrete interface is selected
+// at runtime by the riid argument). The marshaling word is unchanged; a
+// [retval] param retyped here elevates through the normal retValElement path.
+func retypeComOutParams(params []win32meta.Param, resolved []typemap.Resolved, imports typemap.ImportSet, modulePath string) {
+	for i := range params {
+		param := &params[i]
+		if !param.IsOut || param.IsReserved {
+			continue
+		}
+		if !param.IsComOutPtr && param.IidParamIndex < 0 {
+			continue
+		}
+		if !isVoidDoublePointer(&param.Type) {
+			continue
+		}
+		resolved[i] = typemap.Resolved{GoType: "**win32.IUnknown", Kind: typemap.KindPointer}
+		imports["win32"] = modulePath + "/bindings/runtime/win32"
+	}
 }
 
 // isBytePointer reports whether a metadata type is literally byte*.

@@ -93,7 +93,7 @@ func (self *ID3DShaderCacheApplication) GetDesc(pApplicationDesc *D3D_SHADER_CAC
 }
 
 // RegisterComponent dispatches through ID3DShaderCacheApplication's vtable slot 5.
-func (self *ID3DShaderCacheApplication) RegisterComponent(pName string, pStateObjectDBPath string, pPSDBs []D3D_SHADER_CACHE_PSDB_PROPERTIES, riid *win32.GUID, ppvComponent *unsafe.Pointer) error {
+func (self *ID3DShaderCacheApplication) RegisterComponent(pName string, pStateObjectDBPath string, pPSDBs []D3D_SHADER_CACHE_PSDB_PROPERTIES, riid *win32.GUID, ppvComponent **win32.IUnknown) error {
 	_pName := win32.UTF16Ptr(pName)
 	_pStateObjectDBPath := win32.UTF16Ptr(pStateObjectDBPath)
 	var _pPSDBs *D3D_SHADER_CACHE_PSDB_PROPERTIES
@@ -117,7 +117,7 @@ func (self *ID3DShaderCacheApplication) GetComponentCount() uint32 {
 }
 
 // GetComponent dispatches through ID3DShaderCacheApplication's vtable slot 8.
-func (self *ID3DShaderCacheApplication) GetComponent(index uint32, riid *win32.GUID, ppvComponent *unsafe.Pointer) error {
+func (self *ID3DShaderCacheApplication) GetComponent(index uint32, riid *win32.GUID, ppvComponent **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvComponent)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -196,7 +196,7 @@ type ID3DShaderCacheExplorer struct {
 var IID_ID3DShaderCacheExplorer = win32.GUID{Data1: 0x90432322, Data2: 0x32f5, Data3: 0x487f, Data4: [8]byte{0x92, 0x64, 0xe9, 0x39, 0x0f, 0xa5, 0x8b, 0x2a}}
 
 // GetApplicationFromExePath dispatches through ID3DShaderCacheExplorer's vtable slot 3.
-func (self *ID3DShaderCacheExplorer) GetApplicationFromExePath(pFullExePath string, riid *win32.GUID, ppvApp *unsafe.Pointer) error {
+func (self *ID3DShaderCacheExplorer) GetApplicationFromExePath(pFullExePath string, riid *win32.GUID, ppvApp **win32.IUnknown) error {
 	_pFullExePath := win32.UTF16Ptr(pFullExePath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pFullExePath)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvApp)))
 	return win32.HRESULTError(int32(r1))
@@ -235,7 +235,7 @@ func (self *ID3DShaderCacheInstaller) UnregisterServiceDriverUpdateTrigger(hServ
 }
 
 // RegisterApplication dispatches through ID3DShaderCacheInstaller's vtable slot 7.
-func (self *ID3DShaderCacheInstaller) RegisterApplication(pExePath string, pApplicationDesc *D3D_SHADER_CACHE_APPLICATION_DESC, riid *win32.GUID, ppvApp *unsafe.Pointer) error {
+func (self *ID3DShaderCacheInstaller) RegisterApplication(pExePath string, pApplicationDesc *D3D_SHADER_CACHE_APPLICATION_DESC, riid *win32.GUID, ppvApp **win32.IUnknown) error {
 	_pExePath := win32.UTF16Ptr(pExePath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pExePath)), uintptr(unsafe.Pointer(pApplicationDesc)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvApp)))
 	return win32.HRESULTError(int32(r1))
@@ -254,7 +254,7 @@ func (self *ID3DShaderCacheInstaller) GetApplicationCount() uint32 {
 }
 
 // GetApplication dispatches through ID3DShaderCacheInstaller's vtable slot 10.
-func (self *ID3DShaderCacheInstaller) GetApplication(index uint32, riid *win32.GUID, ppvApp *unsafe.Pointer) error {
+func (self *ID3DShaderCacheInstaller) GetApplication(index uint32, riid *win32.GUID, ppvApp **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvApp)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -312,13 +312,13 @@ type ID3DShaderCacheInstallerFactory struct {
 var IID_ID3DShaderCacheInstallerFactory = win32.GUID{Data1: 0x09b2dfe4, Data2: 0x840f, Data3: 0x401a, Data4: [8]byte{0x80, 0x4c, 0x0d, 0xd8, 0xaa, 0xdc, 0x9e, 0x9f}}
 
 // CreateInstaller dispatches through ID3DShaderCacheInstallerFactory's vtable slot 3.
-func (self *ID3DShaderCacheInstallerFactory) CreateInstaller(pClient *ID3DShaderCacheInstallerClient, riid *win32.GUID, ppvInstaller *unsafe.Pointer) error {
+func (self *ID3DShaderCacheInstallerFactory) CreateInstaller(pClient *ID3DShaderCacheInstallerClient, riid *win32.GUID, ppvInstaller **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pClient)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvInstaller)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateExplorer dispatches through ID3DShaderCacheInstallerFactory's vtable slot 4.
-func (self *ID3DShaderCacheInstallerFactory) CreateExplorer(pUnknown *systemcom.IUnknown, riid *win32.GUID, ppvExplorer *unsafe.Pointer) error {
+func (self *ID3DShaderCacheInstallerFactory) CreateExplorer(pUnknown *systemcom.IUnknown, riid *win32.GUID, ppvExplorer **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnknown)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvExplorer)))
 	return win32.HRESULTError(int32(r1))
 }

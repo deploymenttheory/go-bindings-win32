@@ -45,13 +45,13 @@ func DebugConnectWide(RemoteOptions string, InterfaceId *win32.GUID, Interface *
 }
 
 // DebugCreate calls dbgeng!DebugCreate.
-func DebugCreate(InterfaceId *win32.GUID, Interface *unsafe.Pointer) error {
+func DebugCreate(InterfaceId *win32.GUID, Interface **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procDebugCreate.Addr(), uintptr(unsafe.Pointer(InterfaceId)), uintptr(unsafe.Pointer(Interface)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // DebugCreateEx calls dbgeng!DebugCreateEx.
-func DebugCreateEx(InterfaceId *win32.GUID, DbgEngOptions uint32, Interface *unsafe.Pointer) error {
+func DebugCreateEx(InterfaceId *win32.GUID, DbgEngOptions uint32, Interface **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procDebugCreateEx.Addr(), uintptr(unsafe.Pointer(InterfaceId)), uintptr(DbgEngOptions), uintptr(unsafe.Pointer(Interface)))
 	return win32.HRESULTError(int32(r1))
 }

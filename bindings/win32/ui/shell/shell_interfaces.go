@@ -1006,7 +1006,7 @@ func (self *IApplicationDocumentLists) SetAppID(pszAppID string) error {
 }
 
 // GetList dispatches through IApplicationDocumentLists's vtable slot 4.
-func (self *IApplicationDocumentLists) GetList(listtype APPDOCLISTTYPE, cItemsDesired uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IApplicationDocumentLists) GetList(listtype APPDOCLISTTYPE, cItemsDesired uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(listtype), uintptr(cItemsDesired), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1267,7 +1267,7 @@ type IBandHost struct {
 var IID_IBandHost = win32.GUID{Data1: 0xb9075c7c, Data2: 0xd48e, Data3: 0x403f, Data4: [8]byte{0xab, 0x99, 0xd6, 0xc7, 0x7a, 0x10, 0x84, 0xac}}
 
 // CreateBand dispatches through IBandHost's vtable slot 3.
-func (self *IBandHost) CreateBand(rclsidBand *win32.GUID, fAvailable bool, fVisible bool, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IBandHost) CreateBand(rclsidBand *win32.GUID, fAvailable bool, fVisible bool, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_fAvailable := win32.Bool32(fAvailable)
 	_fVisible := win32.Bool32(fVisible)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rclsidBand)), uintptr(_fAvailable), uintptr(_fVisible), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
@@ -1327,7 +1327,7 @@ func (self *IBandSite) RemoveBand(dwBandID uint32) error {
 }
 
 // GetBandObject dispatches through IBandSite's vtable slot 8.
-func (self *IBandSite) GetBandObject(dwBandID uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IBandSite) GetBandObject(dwBandID uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwBandID), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -2157,7 +2157,7 @@ func (self *ICategoryProvider) GetCategoryName(pguid *win32.GUID, pszName founda
 }
 
 // CreateCategory dispatches through ICategoryProvider's vtable slot 8.
-func (self *ICategoryProvider) CreateCategory(pguid *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *ICategoryProvider) CreateCategory(pguid *win32.GUID, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -3015,7 +3015,7 @@ func (self *ICustomDestinationList) SetAppID(pszAppID string) error {
 }
 
 // BeginList dispatches through ICustomDestinationList's vtable slot 4.
-func (self *ICustomDestinationList) BeginList(pcMinSlots *uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *ICustomDestinationList) BeginList(pcMinSlots *uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcMinSlots)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -3046,7 +3046,7 @@ func (self *ICustomDestinationList) CommitList() error {
 }
 
 // GetRemovedDestinations dispatches through ICustomDestinationList's vtable slot 9.
-func (self *ICustomDestinationList) GetRemovedDestinations(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *ICustomDestinationList) GetRemovedDestinations(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -3135,9 +3135,10 @@ type IDataTransferManagerInterop struct {
 var IID_IDataTransferManagerInterop = win32.GUID{Data1: 0x3a3dcd6c, Data2: 0x3eab, Data3: 0x43dc, Data4: [8]byte{0xbc, 0xde, 0x45, 0x67, 0x1c, 0xe8, 0x00, 0xc8}}
 
 // GetForWindow dispatches through IDataTransferManagerInterop's vtable slot 3.
-func (self *IDataTransferManagerInterop) GetForWindow(appWindow foundation.HWND, riid *win32.GUID, dataTransferManager *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(dataTransferManager)))
-	return win32.HRESULTError(int32(r1))
+func (self *IDataTransferManagerInterop) GetForWindow(appWindow foundation.HWND, riid *win32.GUID) (*win32.IUnknown, error) {
+	var _dataTransferManager *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_dataTransferManager)))
+	return _dataTransferManager, win32.HRESULTError(int32(r1))
 }
 
 // ShowShareUIForWindow dispatches through IDataTransferManagerInterop's vtable slot 4.
@@ -4474,7 +4475,7 @@ func (self *IExplorerBrowser) RemoveAll() error {
 }
 
 // GetCurrentView dispatches through IExplorerBrowser's vtable slot 17.
-func (self *IExplorerBrowser) GetCurrentView(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IExplorerBrowser) GetCurrentView(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -4580,13 +4581,13 @@ type IExplorerCommandProvider struct {
 var IID_IExplorerCommandProvider = win32.GUID{Data1: 0x64961751, Data2: 0x0835, Data3: 0x43c0, Data4: [8]byte{0x8f, 0xfe, 0xd5, 0x76, 0x86, 0x53, 0x0e, 0x64}}
 
 // GetCommands dispatches through IExplorerCommandProvider's vtable slot 3.
-func (self *IExplorerCommandProvider) GetCommands(punkSite *systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IExplorerCommandProvider) GetCommands(punkSite *systemcom.IUnknown, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(punkSite)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetCommand dispatches through IExplorerCommandProvider's vtable slot 4.
-func (self *IExplorerCommandProvider) GetCommand(rguidCommandId *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IExplorerCommandProvider) GetCommand(rguidCommandId *win32.GUID, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rguidCommandId)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -5749,7 +5750,7 @@ func (self *IFolderView) SetCurrentViewMode(ViewMode uint32) error {
 }
 
 // GetFolder dispatches through IFolderView's vtable slot 5.
-func (self *IFolderView) GetFolder(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IFolderView) GetFolder(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -5767,7 +5768,7 @@ func (self *IFolderView) ItemCount(uFlags uint32, pcItems *int32) error {
 }
 
 // Items dispatches through IFolderView's vtable slot 8.
-func (self *IFolderView) Items(uFlags uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IFolderView) Items(uFlags uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(uFlags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -5914,7 +5915,7 @@ func (self *IFolderView2) GetSortColumns(rgSortColumns []SORTCOLUMN) error {
 }
 
 // GetItem dispatches through IFolderView2's vtable slot 29.
-func (self *IFolderView2) GetItem(iItem int32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IFolderView2) GetItem(iItem int32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(iItem), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -6054,7 +6055,7 @@ type IFolderViewSettings struct {
 var IID_IFolderViewSettings = win32.GUID{Data1: 0xae8c987d, Data2: 0x8797, Data3: 0x4ed3, Data4: [8]byte{0xbe, 0x72, 0x2a, 0x47, 0xdd, 0x93, 0x8d, 0xb0}}
 
 // GetColumnPropertyList dispatches through IFolderViewSettings's vtable slot 3.
-func (self *IFolderViewSettings) GetColumnPropertyList(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IFolderViewSettings) GetColumnPropertyList(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -6934,7 +6935,7 @@ func (self *IKnownFolder) GetCategory(pCategory *KF_CATEGORY) error {
 }
 
 // GetShellItem dispatches through IKnownFolder's vtable slot 5.
-func (self *IKnownFolder) GetShellItem(dwFlags uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IKnownFolder) GetShellItem(dwFlags uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -7943,7 +7944,7 @@ type IObjectProvider struct {
 var IID_IObjectProvider = win32.GUID{Data1: 0xa6087428, Data2: 0x3be3, Data3: 0x4d73, Data4: [8]byte{0xb3, 0x08, 0x7c, 0x04, 0xa5, 0x40, 0xbf, 0x1a}}
 
 // QueryObject dispatches through IObjectProvider's vtable slot 3.
-func (self *IObjectProvider) QueryObject(guidObject *win32.GUID, riid *win32.GUID, ppvOut *unsafe.Pointer) error {
+func (self *IObjectProvider) QueryObject(guidObject *win32.GUID, riid *win32.GUID, ppvOut **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidObject)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvOut)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -8073,7 +8074,7 @@ func (self *IObjectWithSelection) SetSelection(psia *IShellItemArray) error {
 }
 
 // GetSelection dispatches through IObjectWithSelection's vtable slot 4.
-func (self *IObjectWithSelection) GetSelection(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IObjectWithSelection) GetSelection(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -8118,7 +8119,7 @@ type IOpenSearchSource struct {
 var IID_IOpenSearchSource = win32.GUID{Data1: 0xf0ee7333, Data2: 0xe6fc, Data3: 0x479b, Data4: [8]byte{0x9f, 0x25, 0xa8, 0x60, 0xc2, 0x34, 0xa3, 0x8e}}
 
 // GetResults dispatches through IOpenSearchSource's vtable slot 3.
-func (self *IOpenSearchSource) GetResults(hwnd foundation.HWND, pszQuery string, dwStartIndex uint32, dwCount uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IOpenSearchSource) GetResults(hwnd foundation.HWND, pszQuery string, dwStartIndex uint32, dwCount uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszQuery := win32.UTF16Ptr(pszQuery)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(unsafe.Pointer(_pszQuery)), uintptr(dwStartIndex), uintptr(dwCount), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
@@ -8380,7 +8381,7 @@ func (self *IParseAndCreateItem) SetItem(psi *IShellItem) error {
 }
 
 // GetItem dispatches through IParseAndCreateItem's vtable slot 4.
-func (self *IParseAndCreateItem) GetItem(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IParseAndCreateItem) GetItem(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -9186,7 +9187,7 @@ type ISearchBoxInfo struct {
 var IID_ISearchBoxInfo = win32.GUID{Data1: 0x6af6e03f, Data2: 0xd664, Data3: 0x4ef4, Data4: [8]byte{0x96, 0x26, 0xf7, 0xe0, 0xed, 0x36, 0x75, 0x5e}}
 
 // GetCondition dispatches through ISearchBoxInfo's vtable slot 3.
-func (self *ISearchBoxInfo) GetCondition(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *ISearchBoxInfo) GetCondition(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -9301,7 +9302,7 @@ func (self *ISearchFolderItemFactory) SetCondition(pCondition *systemsearch.ICon
 }
 
 // GetShellItem dispatches through ISearchFolderItemFactory's vtable slot 13.
-func (self *ISearchFolderItemFactory) GetShellItem(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *ISearchFolderItemFactory) GetShellItem(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -9940,13 +9941,13 @@ func (self *IShellFolder) EnumObjects(hwnd foundation.HWND, grfFlags uint32, ppe
 }
 
 // BindToObject dispatches through IShellFolder's vtable slot 5.
-func (self *IShellFolder) BindToObject(pidl *uishellcommon.ITEMIDLIST, pbc *systemcom.IBindCtx, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IShellFolder) BindToObject(pidl *uishellcommon.ITEMIDLIST, pbc *systemcom.IBindCtx, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pidl)), uintptr(unsafe.Pointer(pbc)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // BindToStorage dispatches through IShellFolder's vtable slot 6.
-func (self *IShellFolder) BindToStorage(pidl *uishellcommon.ITEMIDLIST, pbc *systemcom.IBindCtx, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IShellFolder) BindToStorage(pidl *uishellcommon.ITEMIDLIST, pbc *systemcom.IBindCtx, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pidl)), uintptr(unsafe.Pointer(pbc)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -9958,7 +9959,7 @@ func (self *IShellFolder) CompareIDs(lParam foundation.LPARAM, pidl1 *uishellcom
 }
 
 // CreateViewObject dispatches through IShellFolder's vtable slot 8.
-func (self *IShellFolder) CreateViewObject(hwndOwner foundation.HWND, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IShellFolder) CreateViewObject(hwndOwner foundation.HWND, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(hwndOwner), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -9974,7 +9975,7 @@ func (self *IShellFolder) GetAttributesOf(apidl []*uishellcommon.ITEMIDLIST, rgf
 }
 
 // GetUIObjectOf dispatches through IShellFolder's vtable slot 10.
-func (self *IShellFolder) GetUIObjectOf(hwndOwner foundation.HWND, apidl []*uishellcommon.ITEMIDLIST, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IShellFolder) GetUIObjectOf(hwndOwner foundation.HWND, apidl []*uishellcommon.ITEMIDLIST, riid *win32.GUID, ppv **win32.IUnknown) error {
 	var _apidl **uishellcommon.ITEMIDLIST
 	if len(apidl) > 0 {
 		_apidl = &apidl[0]
@@ -10783,7 +10784,7 @@ type IShellItem struct {
 var IID_IShellItem = win32.GUID{Data1: 0x43826d1e, Data2: 0xe718, Data3: 0x42ee, Data4: [8]byte{0xbc, 0x55, 0xa1, 0xe2, 0x61, 0xc3, 0x7b, 0xfe}}
 
 // BindToHandler dispatches through IShellItem's vtable slot 3.
-func (self *IShellItem) BindToHandler(pbc *systemcom.IBindCtx, bhid *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IShellItem) BindToHandler(pbc *systemcom.IBindCtx, bhid *win32.GUID, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbc)), uintptr(unsafe.Pointer(bhid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -10822,19 +10823,19 @@ type IShellItem2 struct {
 var IID_IShellItem2 = win32.GUID{Data1: 0x7e9fb0d3, Data2: 0x919f, Data3: 0x4307, Data4: [8]byte{0xab, 0x2e, 0x9b, 0x18, 0x60, 0x31, 0x0c, 0x93}}
 
 // GetPropertyStore dispatches through IShellItem2's vtable slot 8.
-func (self *IShellItem2) GetPropertyStore(flags uishellpropertiessystem.GETPROPERTYSTOREFLAGS, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IShellItem2) GetPropertyStore(flags uishellpropertiessystem.GETPROPERTYSTOREFLAGS, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(flags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetPropertyStoreWithCreateObject dispatches through IShellItem2's vtable slot 9.
-func (self *IShellItem2) GetPropertyStoreWithCreateObject(flags uishellpropertiessystem.GETPROPERTYSTOREFLAGS, punkCreateObject *systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IShellItem2) GetPropertyStoreWithCreateObject(flags uishellpropertiessystem.GETPROPERTYSTOREFLAGS, punkCreateObject *systemcom.IUnknown, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(flags), uintptr(unsafe.Pointer(punkCreateObject)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetPropertyStoreForKeys dispatches through IShellItem2's vtable slot 10.
-func (self *IShellItem2) GetPropertyStoreForKeys(rgKeys []foundation.PROPERTYKEY, flags uishellpropertiessystem.GETPROPERTYSTOREFLAGS, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IShellItem2) GetPropertyStoreForKeys(rgKeys []foundation.PROPERTYKEY, flags uishellpropertiessystem.GETPROPERTYSTOREFLAGS, riid *win32.GUID, ppv **win32.IUnknown) error {
 	var _rgKeys *foundation.PROPERTYKEY
 	if len(rgKeys) > 0 {
 		_rgKeys = &rgKeys[0]
@@ -10844,7 +10845,7 @@ func (self *IShellItem2) GetPropertyStoreForKeys(rgKeys []foundation.PROPERTYKEY
 }
 
 // GetPropertyDescriptionList dispatches through IShellItem2's vtable slot 11.
-func (self *IShellItem2) GetPropertyDescriptionList(keyType *foundation.PROPERTYKEY, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IShellItem2) GetPropertyDescriptionList(keyType *foundation.PROPERTYKEY, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(keyType)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -10913,19 +10914,19 @@ type IShellItemArray struct {
 var IID_IShellItemArray = win32.GUID{Data1: 0xb63ea76d, Data2: 0x1f85, Data3: 0x456f, Data4: [8]byte{0xa1, 0x9c, 0x48, 0x15, 0x9e, 0xfa, 0x85, 0x8b}}
 
 // BindToHandler dispatches through IShellItemArray's vtable slot 3.
-func (self *IShellItemArray) BindToHandler(pbc *systemcom.IBindCtx, bhid *win32.GUID, riid *win32.GUID, ppvOut *unsafe.Pointer) error {
+func (self *IShellItemArray) BindToHandler(pbc *systemcom.IBindCtx, bhid *win32.GUID, riid *win32.GUID, ppvOut **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbc)), uintptr(unsafe.Pointer(bhid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvOut)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetPropertyStore dispatches through IShellItemArray's vtable slot 4.
-func (self *IShellItemArray) GetPropertyStore(flags uishellpropertiessystem.GETPROPERTYSTOREFLAGS, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IShellItemArray) GetPropertyStore(flags uishellpropertiessystem.GETPROPERTYSTOREFLAGS, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(flags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetPropertyDescriptionList dispatches through IShellItemArray's vtable slot 5.
-func (self *IShellItemArray) GetPropertyDescriptionList(keyType *foundation.PROPERTYKEY, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IShellItemArray) GetPropertyDescriptionList(keyType *foundation.PROPERTYKEY, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(keyType)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -11036,13 +11037,13 @@ func (self *IShellItemResources) SupportsResource(pcsir *SHELL_ITEM_RESOURCE) er
 }
 
 // OpenResource dispatches through IShellItemResources's vtable slot 10.
-func (self *IShellItemResources) OpenResource(pcsir *SHELL_ITEM_RESOURCE, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IShellItemResources) OpenResource(pcsir *SHELL_ITEM_RESOURCE, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcsir)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateResource dispatches through IShellItemResources's vtable slot 11.
-func (self *IShellItemResources) CreateResource(pcsir *SHELL_ITEM_RESOURCE, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IShellItemResources) CreateResource(pcsir *SHELL_ITEM_RESOURCE, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcsir)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -11087,19 +11088,19 @@ func (self *IShellLibrary) RemoveFolder(psiLocation *IShellItem) error {
 }
 
 // GetFolders dispatches through IShellLibrary's vtable slot 7.
-func (self *IShellLibrary) GetFolders(lff LIBRARYFOLDERFILTER, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IShellLibrary) GetFolders(lff LIBRARYFOLDERFILTER, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(lff), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ResolveFolder dispatches through IShellLibrary's vtable slot 8.
-func (self *IShellLibrary) ResolveFolder(psiFolderToResolve *IShellItem, dwTimeout uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IShellLibrary) ResolveFolder(psiFolderToResolve *IShellItem, dwTimeout uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(psiFolderToResolve)), uintptr(dwTimeout), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetDefaultSaveFolder dispatches through IShellLibrary's vtable slot 9.
-func (self *IShellLibrary) GetDefaultSaveFolder(dsft DEFAULTSAVEFOLDERTYPE, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IShellLibrary) GetDefaultSaveFolder(dsft DEFAULTSAVEFOLDERTYPE, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dsft), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -12581,7 +12582,7 @@ func (self *IShellView) SelectItem(pidlItem *uishellcommon.ITEMIDLIST, uFlags ui
 }
 
 // GetItemObject dispatches through IShellView's vtable slot 15.
-func (self *IShellView) GetItemObject(uItem uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IShellView) GetItemObject(uItem uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(uItem), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -12992,7 +12993,7 @@ func (self *ISyncMgrConflict) Resolve(pResolveInfo *ISyncMgrConflictResolveInfo)
 }
 
 // GetResolutionHandler dispatches through ISyncMgrConflict's vtable slot 7.
-func (self *ISyncMgrConflict) GetResolutionHandler(riid *win32.GUID, ppvResolutionHandler *unsafe.Pointer) error {
+func (self *ISyncMgrConflict) GetResolutionHandler(riid *win32.GUID, ppvResolutionHandler **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvResolutionHandler)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -13145,7 +13146,7 @@ func (self *ISyncMgrConflictStore) EnumConflicts(pszHandlerID string, pszItemID 
 }
 
 // BindToConflict dispatches through ISyncMgrConflictStore's vtable slot 4.
-func (self *ISyncMgrConflictStore) BindToConflict(pConflictIdInfo *SYNCMGR_CONFLICT_ID_INFO, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *ISyncMgrConflictStore) BindToConflict(pConflictIdInfo *SYNCMGR_CONFLICT_ID_INFO, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pConflictIdInfo)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -13481,7 +13482,7 @@ func (self *ISyncMgrHandler) GetHandlerInfo(ppHandlerInfo **ISyncMgrHandlerInfo)
 }
 
 // GetObject dispatches through ISyncMgrHandler's vtable slot 5.
-func (self *ISyncMgrHandler) GetObject(rguidObjectID *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *ISyncMgrHandler) GetObject(rguidObjectID *win32.GUID, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rguidObjectID)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -13538,7 +13539,7 @@ func (self *ISyncMgrHandlerCollection) GetHandlerEnumerator(ppenum **systemcom.I
 }
 
 // BindToHandler dispatches through ISyncMgrHandlerCollection's vtable slot 4.
-func (self *ISyncMgrHandlerCollection) BindToHandler(pszHandlerID string, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *ISyncMgrHandlerCollection) BindToHandler(pszHandlerID string, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszHandlerID := win32.UTF16Ptr(pszHandlerID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszHandlerID)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
@@ -13807,7 +13808,7 @@ func (self *ISyncMgrSyncItem) GetItemInfo(ppItemInfo **ISyncMgrSyncItemInfo) err
 }
 
 // GetObject dispatches through ISyncMgrSyncItem's vtable slot 6.
-func (self *ISyncMgrSyncItem) GetObject(rguidObjectID *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *ISyncMgrSyncItem) GetObject(rguidObjectID *win32.GUID, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rguidObjectID)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -13951,7 +13952,7 @@ func (self *ISyncMgrSynchronize) EnumSyncMgrItems(ppSyncMgrEnumItems **ISyncMgrE
 }
 
 // GetItemObject dispatches through ISyncMgrSynchronize's vtable slot 6.
-func (self *ISyncMgrSynchronize) GetItemObject(ItemID *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *ISyncMgrSynchronize) GetItemObject(ItemID *win32.GUID, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ItemID)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -14322,7 +14323,7 @@ type IThumbnailHandlerFactory struct {
 var IID_IThumbnailHandlerFactory = win32.GUID{Data1: 0xe35b4b2e, Data2: 0x00da, Data3: 0x4bc1, Data4: [8]byte{0x9f, 0x13, 0x38, 0xbc, 0x11, 0xf5, 0xd4, 0x17}}
 
 // GetThumbnailHandler dispatches through IThumbnailHandlerFactory's vtable slot 3.
-func (self *IThumbnailHandlerFactory) GetThumbnailHandler(pidlChild *uishellcommon.ITEMIDLIST, pbc *systemcom.IBindCtx, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IThumbnailHandlerFactory) GetThumbnailHandler(pidlChild *uishellcommon.ITEMIDLIST, pbc *systemcom.IBindCtx, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pidlChild)), uintptr(unsafe.Pointer(pbc)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }

@@ -23,13 +23,13 @@ type IGraphicsCaptureItemInterop struct {
 var IID_IGraphicsCaptureItemInterop = win32.GUID{Data1: 0x3628e81b, Data2: 0x3cac, Data3: 0x4c60, Data4: [8]byte{0xb7, 0xf4, 0x23, 0xce, 0x0e, 0x0c, 0x33, 0x56}}
 
 // CreateForWindow dispatches through IGraphicsCaptureItemInterop's vtable slot 3.
-func (self *IGraphicsCaptureItemInterop) CreateForWindow(window foundation.HWND, riid *win32.GUID, result *unsafe.Pointer) error {
+func (self *IGraphicsCaptureItemInterop) CreateForWindow(window foundation.HWND, riid *win32.GUID, result **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(window), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(result)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateForMonitor dispatches through IGraphicsCaptureItemInterop's vtable slot 4.
-func (self *IGraphicsCaptureItemInterop) CreateForMonitor(monitor graphicsgdi.HMONITOR, riid *win32.GUID, result *unsafe.Pointer) error {
+func (self *IGraphicsCaptureItemInterop) CreateForMonitor(monitor graphicsgdi.HMONITOR, riid *win32.GUID, result **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(monitor), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(result)))
 	return win32.HRESULTError(int32(r1))
 }

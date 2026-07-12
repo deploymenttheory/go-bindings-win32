@@ -376,7 +376,7 @@ type IDXGIDeviceSubObject struct {
 var IID_IDXGIDeviceSubObject = win32.GUID{Data1: 0x3d3e0379, Data2: 0xf9de, Data3: 0x4d58, Data4: [8]byte{0xbb, 0x6c, 0x18, 0xd6, 0x29, 0x92, 0xf1, 0xa6}}
 
 // GetDevice dispatches through IDXGIDeviceSubObject's vtable slot 7.
-func (self *IDXGIDeviceSubObject) GetDevice(riid *win32.GUID, ppDevice *unsafe.Pointer) error {
+func (self *IDXGIDeviceSubObject) GetDevice(riid *win32.GUID, ppDevice **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppDevice)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -560,7 +560,7 @@ type IDXGIFactory4 struct {
 var IID_IDXGIFactory4 = win32.GUID{Data1: 0x1bc6ea02, Data2: 0xef36, Data3: 0x464f, Data4: [8]byte{0xbf, 0x0c, 0x21, 0xca, 0x39, 0xe5, 0x16, 0x8a}}
 
 // EnumWarpAdapter dispatches through IDXGIFactory4's vtable slot 27.
-func (self *IDXGIFactory4) EnumWarpAdapter(riid *win32.GUID, ppvAdapter *unsafe.Pointer) error {
+func (self *IDXGIFactory4) EnumWarpAdapter(riid *win32.GUID, ppvAdapter **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvAdapter)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -594,7 +594,7 @@ type IDXGIFactory6 struct {
 var IID_IDXGIFactory6 = win32.GUID{Data1: 0xc1b6694f, Data2: 0xff09, Data3: 0x44a9, Data4: [8]byte{0xb0, 0x3c, 0x77, 0x90, 0x0a, 0x0a, 0x1d, 0x17}}
 
 // EnumAdapterByGpuPreference dispatches through IDXGIFactory6's vtable slot 29.
-func (self *IDXGIFactory6) EnumAdapterByGpuPreference(Adapter uint32, GpuPreference DXGI_GPU_PREFERENCE, riid *win32.GUID, ppvAdapter *unsafe.Pointer) error {
+func (self *IDXGIFactory6) EnumAdapterByGpuPreference(Adapter uint32, GpuPreference DXGI_GPU_PREFERENCE, riid *win32.GUID, ppvAdapter **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(Adapter), uintptr(GpuPreference), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvAdapter)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -709,7 +709,7 @@ func (self *IDXGIObject) GetPrivateData(Name *win32.GUID, pDataSize *uint32, pDa
 }
 
 // GetParent dispatches through IDXGIObject's vtable slot 6.
-func (self *IDXGIObject) GetParent(riid *win32.GUID, ppParent *unsafe.Pointer) error {
+func (self *IDXGIObject) GetParent(riid *win32.GUID, ppParent **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppParent)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1090,7 +1090,7 @@ type IDXGISurface2 struct {
 var IID_IDXGISurface2 = win32.GUID{Data1: 0xaba496dd, Data2: 0xb617, Data3: 0x4cb8, Data4: [8]byte{0xa8, 0x66, 0xbc, 0x44, 0xd7, 0xeb, 0x1f, 0xa2}}
 
 // GetResource dispatches through IDXGISurface2's vtable slot 13.
-func (self *IDXGISurface2) GetResource(riid *win32.GUID, ppParentResource *unsafe.Pointer, pSubresourceIndex *uint32) error {
+func (self *IDXGISurface2) GetResource(riid *win32.GUID, ppParentResource **win32.IUnknown, pSubresourceIndex *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppParentResource)), uintptr(unsafe.Pointer(pSubresourceIndex)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1111,7 +1111,7 @@ func (self *IDXGISwapChain) Present(SyncInterval uint32, Flags DXGI_PRESENT) err
 }
 
 // GetBuffer dispatches through IDXGISwapChain's vtable slot 9.
-func (self *IDXGISwapChain) GetBuffer(Buffer uint32, riid *win32.GUID, ppSurface *unsafe.Pointer) error {
+func (self *IDXGISwapChain) GetBuffer(Buffer uint32, riid *win32.GUID, ppSurface **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Buffer), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppSurface)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1196,7 +1196,7 @@ func (self *IDXGISwapChain1) GetHwnd(pHwnd *foundation.HWND) error {
 }
 
 // GetCoreWindow dispatches through IDXGISwapChain1's vtable slot 21.
-func (self *IDXGISwapChain1) GetCoreWindow(refiid *win32.GUID, ppUnk *unsafe.Pointer) error {
+func (self *IDXGISwapChain1) GetCoreWindow(refiid *win32.GUID, ppUnk **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(refiid)), uintptr(unsafe.Pointer(ppUnk)))
 	return win32.HRESULTError(int32(r1))
 }

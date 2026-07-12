@@ -248,7 +248,7 @@ func (self *IAudioClient) SetEventHandle(eventHandle foundation.HANDLE) error {
 }
 
 // GetService dispatches through IAudioClient's vtable slot 14.
-func (self *IAudioClient) GetService(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IAudioClient) GetService(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1239,7 +1239,7 @@ type IMMDevice struct {
 var IID_IMMDevice = win32.GUID{Data1: 0xd666063f, Data2: 0x1587, Data3: 0x4e43, Data4: [8]byte{0x81, 0xf1, 0xb9, 0x48, 0xe8, 0x07, 0x36, 0x3f}}
 
 // Activate dispatches through IMMDevice's vtable slot 3.
-func (self *IMMDevice) Activate(iid *win32.GUID, dwClsCtx systemcom.CLSCTX, pActivationParams *systemcomstructuredstorage.PROPVARIANT, ppInterface *unsafe.Pointer) error {
+func (self *IMMDevice) Activate(iid *win32.GUID, dwClsCtx systemcom.CLSCTX, pActivationParams *systemcomstructuredstorage.PROPVARIANT, ppInterface **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(iid)), uintptr(dwClsCtx), uintptr(unsafe.Pointer(pActivationParams)), uintptr(unsafe.Pointer(ppInterface)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1641,7 +1641,7 @@ func (self *ISpatialAudioClient) IsSpatialAudioStreamAvailable(streamUuid *win32
 }
 
 // ActivateSpatialAudioStream dispatches through ISpatialAudioClient's vtable slot 10.
-func (self *ISpatialAudioClient) ActivateSpatialAudioStream(activationParams *systemcomstructuredstorage.PROPVARIANT, riid *win32.GUID, stream *unsafe.Pointer) error {
+func (self *ISpatialAudioClient) ActivateSpatialAudioStream(activationParams *systemcomstructuredstorage.PROPVARIANT, riid *win32.GUID, stream **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(activationParams)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(stream)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -2022,7 +2022,7 @@ func (self *ISpatialAudioObjectRenderStreamBase) GetAvailableDynamicObjectCount(
 }
 
 // GetService dispatches through ISpatialAudioObjectRenderStreamBase's vtable slot 4.
-func (self *ISpatialAudioObjectRenderStreamBase) GetService(riid *win32.GUID, service *unsafe.Pointer) error {
+func (self *ISpatialAudioObjectRenderStreamBase) GetService(riid *win32.GUID, service **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(service)))
 	return win32.HRESULTError(int32(r1))
 }

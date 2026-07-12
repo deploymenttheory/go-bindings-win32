@@ -47,15 +47,17 @@ type IPrintManagerInterop struct {
 var IID_IPrintManagerInterop = win32.GUID{Data1: 0xc5435a42, Data2: 0x8d43, Data3: 0x4e7b, Data4: [8]byte{0xa6, 0x8a, 0xef, 0x31, 0x1e, 0x39, 0x20, 0x87}}
 
 // GetForWindow dispatches through IPrintManagerInterop's vtable slot 6.
-func (self *IPrintManagerInterop) GetForWindow(appWindow foundation.HWND, riid *win32.GUID, printManager *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(printManager)))
-	return win32.HRESULTError(int32(r1))
+func (self *IPrintManagerInterop) GetForWindow(appWindow foundation.HWND, riid *win32.GUID) (*win32.IUnknown, error) {
+	var _printManager *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_printManager)))
+	return _printManager, win32.HRESULTError(int32(r1))
 }
 
 // ShowPrintUIForWindowAsync dispatches through IPrintManagerInterop's vtable slot 7.
-func (self *IPrintManagerInterop) ShowPrintUIForWindowAsync(appWindow foundation.HWND, riid *win32.GUID, asyncOperation *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(asyncOperation)))
-	return win32.HRESULTError(int32(r1))
+func (self *IPrintManagerInterop) ShowPrintUIForWindowAsync(appWindow foundation.HWND, riid *win32.GUID) (*win32.IUnknown, error) {
+	var _asyncOperation *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_asyncOperation)))
+	return _asyncOperation, win32.HRESULTError(int32(r1))
 }
 
 // IID: 0b31cc62-d7ec-4747-9d6e-f2537d870f2b
@@ -202,13 +204,15 @@ type IPrinting3DManagerInterop struct {
 var IID_IPrinting3DManagerInterop = win32.GUID{Data1: 0x9ca31010, Data2: 0x1484, Data3: 0x4587, Data4: [8]byte{0xb2, 0x6b, 0xdd, 0xdf, 0x9f, 0x9c, 0xae, 0xcd}}
 
 // GetForWindow dispatches through IPrinting3DManagerInterop's vtable slot 6.
-func (self *IPrinting3DManagerInterop) GetForWindow(appWindow foundation.HWND, riid *win32.GUID, printManager *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(printManager)))
-	return win32.HRESULTError(int32(r1))
+func (self *IPrinting3DManagerInterop) GetForWindow(appWindow foundation.HWND, riid *win32.GUID) (*win32.IUnknown, error) {
+	var _printManager *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_printManager)))
+	return _printManager, win32.HRESULTError(int32(r1))
 }
 
 // ShowPrintUIForWindowAsync dispatches through IPrinting3DManagerInterop's vtable slot 7.
-func (self *IPrinting3DManagerInterop) ShowPrintUIForWindowAsync(appWindow foundation.HWND, riid *win32.GUID, asyncOperation *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(asyncOperation)))
-	return win32.HRESULTError(int32(r1))
+func (self *IPrinting3DManagerInterop) ShowPrintUIForWindowAsync(appWindow foundation.HWND, riid *win32.GUID) (*win32.IUnknown, error) {
+	var _asyncOperation *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_asyncOperation)))
+	return _asyncOperation, win32.HRESULTError(int32(r1))
 }

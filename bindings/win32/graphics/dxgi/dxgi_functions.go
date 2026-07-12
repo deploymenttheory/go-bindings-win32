@@ -26,7 +26,7 @@ var (
 
 // CreateDXGIFactory calls dxgi!CreateDXGIFactory.
 // https://learn.microsoft.com/windows/win32/api/dxgi/nf-dxgi-createdxgifactory
-func CreateDXGIFactory(riid *win32.GUID, ppFactory *unsafe.Pointer) error {
+func CreateDXGIFactory(riid *win32.GUID, ppFactory **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCreateDXGIFactory.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppFactory)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -34,7 +34,7 @@ func CreateDXGIFactory(riid *win32.GUID, ppFactory *unsafe.Pointer) error {
 // CreateDXGIFactory1 calls dxgi!CreateDXGIFactory1.
 // https://learn.microsoft.com/windows/win32/api/dxgi/nf-dxgi-createdxgifactory1
 // Minimum OS: windows6.1.
-func CreateDXGIFactory1(riid *win32.GUID, ppFactory *unsafe.Pointer) error {
+func CreateDXGIFactory1(riid *win32.GUID, ppFactory **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCreateDXGIFactory1.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppFactory)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -42,7 +42,7 @@ func CreateDXGIFactory1(riid *win32.GUID, ppFactory *unsafe.Pointer) error {
 // CreateDXGIFactory2 calls dxgi!CreateDXGIFactory2.
 // https://learn.microsoft.com/windows/win32/api/dxgi1_3/nf-dxgi1_3-createdxgifactory2
 // Minimum OS: windows8.1.
-func CreateDXGIFactory2(Flags DXGI_CREATE_FACTORY_FLAGS, riid *win32.GUID, ppFactory *unsafe.Pointer) error {
+func CreateDXGIFactory2(Flags DXGI_CREATE_FACTORY_FLAGS, riid *win32.GUID, ppFactory **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCreateDXGIFactory2.Addr(), uintptr(Flags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppFactory)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -65,7 +65,7 @@ func DXGIDisableVBlankVirtualization() error {
 // DXGIGetDebugInterface1 calls dxgi!DXGIGetDebugInterface1.
 // https://learn.microsoft.com/windows/win32/api/dxgi1_3/nf-dxgi1_3-dxgigetdebuginterface1
 // Minimum OS: windows8.1.
-func DXGIGetDebugInterface1(Flags uint32, riid *win32.GUID, pDebug *unsafe.Pointer) error {
+func DXGIGetDebugInterface1(Flags uint32, riid *win32.GUID, pDebug **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procDXGIGetDebugInterface1.Addr(), uintptr(Flags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pDebug)))
 	return win32.HRESULTError(int32(r1))
 }

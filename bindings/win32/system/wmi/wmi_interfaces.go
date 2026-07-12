@@ -1953,7 +1953,7 @@ type IWbemClientConnectionTransport struct {
 var IID_IWbemClientConnectionTransport = win32.GUID{Data1: 0xa889c72a, Data2: 0xfcc1, Data3: 0x4a9e, Data4: [8]byte{0xaf, 0x61, 0xed, 0x07, 0x13, 0x33, 0xfb, 0x5b}}
 
 // Open dispatches through IWbemClientConnectionTransport's vtable slot 3.
-func (self *IWbemClientConnectionTransport) Open(strAddressType foundation.BSTR, abBinaryAddress []byte, strObject foundation.BSTR, strUser foundation.BSTR, strPassword foundation.BSTR, strLocale foundation.BSTR, lFlags int32, pCtx *IWbemContext, riid *win32.GUID, pInterface *unsafe.Pointer, pCallRes **IWbemCallResult) error {
+func (self *IWbemClientConnectionTransport) Open(strAddressType foundation.BSTR, abBinaryAddress []byte, strObject foundation.BSTR, strUser foundation.BSTR, strPassword foundation.BSTR, strLocale foundation.BSTR, lFlags int32, pCtx *IWbemContext, riid *win32.GUID, pInterface **win32.IUnknown, pCallRes **IWbemCallResult) error {
 	var _abBinaryAddress *byte
 	if len(abBinaryAddress) > 0 {
 		_abBinaryAddress = &abBinaryAddress[0]
@@ -2046,7 +2046,7 @@ type IWbemConnectorLogin struct {
 var IID_IWbemConnectorLogin = win32.GUID{Data1: 0xd8ec9cb1, Data2: 0xb135, Data3: 0x4f10, Data4: [8]byte{0x8b, 0x1b, 0xc7, 0x18, 0x8b, 0xb0, 0xd1, 0x86}}
 
 // ConnectorLogin dispatches through IWbemConnectorLogin's vtable slot 3.
-func (self *IWbemConnectorLogin) ConnectorLogin(wszNetworkResource string, wszPreferredLocale string, lFlags int32, pCtx *IWbemContext, riid *win32.GUID, pInterface *unsafe.Pointer) error {
+func (self *IWbemConnectorLogin) ConnectorLogin(wszNetworkResource string, wszPreferredLocale string, lFlags int32, pCtx *IWbemContext, riid *win32.GUID, pInterface **win32.IUnknown) error {
 	_wszNetworkResource := win32.UTF16Ptr(wszNetworkResource)
 	_wszPreferredLocale := win32.UTF16Ptr(wszPreferredLocale)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszNetworkResource)), uintptr(unsafe.Pointer(_wszPreferredLocale)), uintptr(lFlags), uintptr(unsafe.Pointer(pCtx)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pInterface)))

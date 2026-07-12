@@ -6,6 +6,8 @@ import (
 	"testing"
 	"unsafe"
 
+	win32 "github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
+	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/dxgi"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/structuredstorage"
 )
@@ -56,19 +58,48 @@ func TestComStreamRoundTrip(t *testing.T) {
 	}
 
 	// QueryInterface for IUnknown promoted from IUnknown through the generated
-	// IID constant — returns error.
-	var unknownPtr unsafe.Pointer
-	if err := stream.QueryInterface(&com.IID_IUnknown, &unknownPtr); err != nil {
+	// IID constant — the [ComOutPtr] void** out-param is typed **win32.IUnknown,
+	// usable (Release, further QueryInterface) without a cast.
+	var unknown *win32.IUnknown
+	if err := stream.QueryInterface(&com.IID_IUnknown, &unknown); err != nil {
 		t.Fatalf("QueryInterface(IID_IUnknown): %v", err)
 	}
-	if unknownPtr == nil {
+	if unknown == nil {
 		t.Fatal("QueryInterface returned nil without error")
 	}
-	unknown := (*com.IUnknown)(unknownPtr)
 
 	// Release the QI reference; the object must survive (stream still holds
 	// one), so the returned refcount is non-zero.
 	if refs := unknown.Release(); refs == 0 {
 		t.Fatal("Release after QueryInterface freed the object while a reference remained")
+	}
+}
+
+// TestComOutPtrFactory drives a flat riid/ppv factory: the [ComOutPtr] void**
+// out-param is typed **win32.IUnknown, then cast to the concrete interface
+// the riid selected.
+func TestComOutPtrFactory(t *testing.T) {
+	var out *win32.IUnknown
+	if err := dxgi.CreateDXGIFactory1(&dxgi.IID_IDXGIFactory1, &out); err != nil {
+		t.Fatalf("CreateDXGIFactory1: %v", err)
+	}
+	if out == nil {
+		t.Fatal("CreateDXGIFactory1 returned nil factory without error")
+	}
+	factory := (*dxgi.IDXGIFactory1)(unsafe.Pointer(out))
+	defer factory.Release()
+
+	// Exercise a method through the cast pointer to prove the vtable lines up.
+	var adapter *dxgi.IDXGIAdapter1
+	if err := factory.EnumAdapters1(0, &adapter); err != nil {
+		t.Fatalf("EnumAdapters1(0): %v", err)
+	}
+	defer adapter.Release()
+	desc, err := adapter.GetDesc1()
+	if err != nil {
+		t.Fatalf("GetDesc1: %v", err)
+	}
+	if win32.UTF16ToString(&desc.Description[0]) == "" {
+		t.Error("adapter description is empty")
 	}
 }

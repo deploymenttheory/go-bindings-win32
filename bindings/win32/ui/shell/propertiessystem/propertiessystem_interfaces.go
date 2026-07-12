@@ -25,7 +25,7 @@ type ICreateObject struct {
 var IID_ICreateObject = win32.GUID{Data1: 0x75121952, Data2: 0xe0d0, Data3: 0x43e5, Data4: [8]byte{0x93, 0x80, 0x1d, 0x80, 0x48, 0x3a, 0xcf, 0x72}}
 
 // CreateObject dispatches through ICreateObject's vtable slot 3.
-func (self *ICreateObject) CreateObject(clsid *win32.GUID, pUnkOuter *systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *ICreateObject) CreateObject(clsid *win32.GUID, pUnkOuter *systemcom.IUnknown, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -40,7 +40,7 @@ type IDelayedPropertyStoreFactory struct {
 var IID_IDelayedPropertyStoreFactory = win32.GUID{Data1: 0x40d4577f, Data2: 0xe237, Data3: 0x4bdb, Data4: [8]byte{0xbd, 0x69, 0x58, 0xf0, 0x89, 0x43, 0x1b, 0x6a}}
 
 // GetDelayedPropertyStore dispatches through IDelayedPropertyStoreFactory's vtable slot 5.
-func (self *IDelayedPropertyStoreFactory) GetDelayedPropertyStore(flags GETPROPERTYSTOREFLAGS, dwStoreId uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IDelayedPropertyStoreFactory) GetDelayedPropertyStore(flags GETPROPERTYSTOREFLAGS, dwStoreId uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(flags), uintptr(dwStoreId), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -211,7 +211,7 @@ func (self *IPropertyChangeArray) GetCount(pcOperations *uint32) error {
 }
 
 // GetAt dispatches through IPropertyChangeArray's vtable slot 4.
-func (self *IPropertyChangeArray) GetAt(iIndex uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IPropertyChangeArray) GetAt(iIndex uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(iIndex), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -359,7 +359,7 @@ func (self *IPropertyDescription) GetConditionType(pcontype *PROPDESC_CONDITION_
 }
 
 // GetEnumTypeList dispatches through IPropertyDescription's vtable slot 20.
-func (self *IPropertyDescription) GetEnumTypeList(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IPropertyDescription) GetEnumTypeList(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -407,13 +407,13 @@ type IPropertyDescriptionAliasInfo struct {
 var IID_IPropertyDescriptionAliasInfo = win32.GUID{Data1: 0xf67104fc, Data2: 0x2af9, Data3: 0x46fd, Data4: [8]byte{0xb3, 0x2d, 0x24, 0x3c, 0x14, 0x04, 0xf3, 0xd1}}
 
 // GetSortByAlias dispatches through IPropertyDescriptionAliasInfo's vtable slot 24.
-func (self *IPropertyDescriptionAliasInfo) GetSortByAlias(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IPropertyDescriptionAliasInfo) GetSortByAlias(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetAdditionalSortByAliases dispatches through IPropertyDescriptionAliasInfo's vtable slot 25.
-func (self *IPropertyDescriptionAliasInfo) GetAdditionalSortByAliases(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IPropertyDescriptionAliasInfo) GetAdditionalSortByAliases(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -434,7 +434,7 @@ func (self *IPropertyDescriptionList) GetCount(pcElem *uint32) error {
 }
 
 // GetAt dispatches through IPropertyDescriptionList's vtable slot 4.
-func (self *IPropertyDescriptionList) GetAt(iElem uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IPropertyDescriptionList) GetAt(iElem uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(iElem), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -449,7 +449,7 @@ type IPropertyDescriptionRelatedPropertyInfo struct {
 var IID_IPropertyDescriptionRelatedPropertyInfo = win32.GUID{Data1: 0x507393f4, Data2: 0x2a3d, Data3: 0x4a60, Data4: [8]byte{0xb5, 0x9e, 0xd9, 0xc7, 0x57, 0x16, 0xc2, 0xdd}}
 
 // GetRelatedProperty dispatches through IPropertyDescriptionRelatedPropertyInfo's vtable slot 24.
-func (self *IPropertyDescriptionRelatedPropertyInfo) GetRelatedProperty(pszRelationshipName string, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IPropertyDescriptionRelatedPropertyInfo) GetRelatedProperty(pszRelationshipName string, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszRelationshipName := win32.UTF16Ptr(pszRelationshipName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszRelationshipName)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
@@ -558,13 +558,13 @@ func (self *IPropertyEnumTypeList) GetCount(pctypes *uint32) error {
 }
 
 // GetAt dispatches through IPropertyEnumTypeList's vtable slot 4.
-func (self *IPropertyEnumTypeList) GetAt(itype uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IPropertyEnumTypeList) GetAt(itype uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(itype), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetConditionAt dispatches through IPropertyEnumTypeList's vtable slot 5.
-func (self *IPropertyEnumTypeList) GetConditionAt(nIndex uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IPropertyEnumTypeList) GetConditionAt(nIndex uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(nIndex), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -672,13 +672,13 @@ type IPropertyStoreFactory struct {
 var IID_IPropertyStoreFactory = win32.GUID{Data1: 0xbc110b6d, Data2: 0x57e8, Data3: 0x4148, Data4: [8]byte{0xa9, 0xc6, 0x91, 0x01, 0x5a, 0xb2, 0xf3, 0xa5}}
 
 // GetPropertyStore dispatches through IPropertyStoreFactory's vtable slot 3.
-func (self *IPropertyStoreFactory) GetPropertyStore(flags GETPROPERTYSTOREFLAGS, pUnkFactory *systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IPropertyStoreFactory) GetPropertyStore(flags GETPROPERTYSTOREFLAGS, pUnkFactory *systemcom.IUnknown, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(flags), uintptr(unsafe.Pointer(pUnkFactory)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetPropertyStoreForKeys dispatches through IPropertyStoreFactory's vtable slot 4.
-func (self *IPropertyStoreFactory) GetPropertyStoreForKeys(rgKeys *foundation.PROPERTYKEY, cKeys uint32, flags GETPROPERTYSTOREFLAGS, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IPropertyStoreFactory) GetPropertyStoreForKeys(rgKeys *foundation.PROPERTYKEY, cKeys uint32, flags GETPROPERTYSTOREFLAGS, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rgKeys)), uintptr(cKeys), uintptr(flags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -693,27 +693,27 @@ type IPropertySystem struct {
 var IID_IPropertySystem = win32.GUID{Data1: 0xca724e8a, Data2: 0xc3e6, Data3: 0x442b, Data4: [8]byte{0x88, 0xa4, 0x6f, 0xb0, 0xdb, 0x80, 0x35, 0xa3}}
 
 // GetPropertyDescription dispatches through IPropertySystem's vtable slot 3.
-func (self *IPropertySystem) GetPropertyDescription(propkey *foundation.PROPERTYKEY, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IPropertySystem) GetPropertyDescription(propkey *foundation.PROPERTYKEY, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propkey)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetPropertyDescriptionByName dispatches through IPropertySystem's vtable slot 4.
-func (self *IPropertySystem) GetPropertyDescriptionByName(pszCanonicalName string, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IPropertySystem) GetPropertyDescriptionByName(pszCanonicalName string, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszCanonicalName := win32.UTF16Ptr(pszCanonicalName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszCanonicalName)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetPropertyDescriptionListFromString dispatches through IPropertySystem's vtable slot 5.
-func (self *IPropertySystem) GetPropertyDescriptionListFromString(pszPropList string, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IPropertySystem) GetPropertyDescriptionListFromString(pszPropList string, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszPropList := win32.UTF16Ptr(pszPropList)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPropList)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // EnumeratePropertyDescriptions dispatches through IPropertySystem's vtable slot 6.
-func (self *IPropertySystem) EnumeratePropertyDescriptions(filterOn PROPDESC_ENUMFILTER, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IPropertySystem) EnumeratePropertyDescriptions(filterOn PROPDESC_ENUMFILTER, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(filterOn), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }

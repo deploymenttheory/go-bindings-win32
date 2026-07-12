@@ -23,7 +23,7 @@ type IRadialControllerConfigurationInterop struct {
 var IID_IRadialControllerConfigurationInterop = win32.GUID{Data1: 0x787cdaac, Data2: 0x3186, Data3: 0x476d, Data4: [8]byte{0x87, 0xe4, 0xb9, 0x37, 0x4a, 0x7b, 0x99, 0x70}}
 
 // GetForWindow dispatches through IRadialControllerConfigurationInterop's vtable slot 6.
-func (self *IRadialControllerConfigurationInterop) GetForWindow(hwnd foundation.HWND, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IRadialControllerConfigurationInterop) GetForWindow(hwnd foundation.HWND, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -37,7 +37,7 @@ type IRadialControllerIndependentInputSourceInterop struct {
 var IID_IRadialControllerIndependentInputSourceInterop = win32.GUID{Data1: 0x3d577eff, Data2: 0x4cee, Data3: 0x11e6, Data4: [8]byte{0xb5, 0x35, 0x00, 0x1b, 0xdc, 0x06, 0xab, 0x3b}}
 
 // CreateForWindow dispatches through IRadialControllerIndependentInputSourceInterop's vtable slot 6.
-func (self *IRadialControllerIndependentInputSourceInterop) CreateForWindow(hwnd foundation.HWND, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IRadialControllerIndependentInputSourceInterop) CreateForWindow(hwnd foundation.HWND, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -52,7 +52,7 @@ type IRadialControllerInterop struct {
 var IID_IRadialControllerInterop = win32.GUID{Data1: 0x1b0535c9, Data2: 0x57ad, Data3: 0x45c1, Data4: [8]byte{0x9d, 0x79, 0xad, 0x5c, 0x34, 0x36, 0x05, 0x13}}
 
 // CreateForWindow dispatches through IRadialControllerInterop's vtable slot 6.
-func (self *IRadialControllerInterop) CreateForWindow(hwnd foundation.HWND, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IRadialControllerInterop) CreateForWindow(hwnd foundation.HWND, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }

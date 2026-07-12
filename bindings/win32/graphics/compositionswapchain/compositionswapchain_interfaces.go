@@ -218,9 +218,10 @@ func (self *IPresentationManager) Present() error {
 }
 
 // GetPresentRetiringFence dispatches through IPresentationManager's vtable slot 10.
-func (self *IPresentationManager) GetPresentRetiringFence(riid *win32.GUID, fence *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(fence)))
-	return win32.HRESULTError(int32(r1))
+func (self *IPresentationManager) GetPresentRetiringFence(riid *win32.GUID) (*win32.IUnknown, error) {
+	var _fence *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_fence)))
+	return _fence, win32.HRESULTError(int32(r1))
 }
 
 // CancelPresentsFrom dispatches through IPresentationManager's vtable slot 11.

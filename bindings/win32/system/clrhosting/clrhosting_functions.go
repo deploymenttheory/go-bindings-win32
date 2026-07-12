@@ -49,7 +49,7 @@ var (
 )
 
 // CLRCreateInstance calls MSCorEE!CLRCreateInstance.
-func CLRCreateInstance(clsid *win32.GUID, riid *win32.GUID, ppInterface *unsafe.Pointer) error {
+func CLRCreateInstance(clsid *win32.GUID, riid *win32.GUID, ppInterface **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCLRCreateInstance.Addr(), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppInterface)))
 	return win32.HRESULTError(int32(r1))
 }

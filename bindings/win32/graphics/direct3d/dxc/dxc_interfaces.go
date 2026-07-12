@@ -181,7 +181,7 @@ type IDxcCompiler3 struct {
 var IID_IDxcCompiler3 = win32.GUID{Data1: 0x228b4687, Data2: 0x5a6a, Data3: 0x4730, Data4: [8]byte{0x90, 0x0c, 0x97, 0x02, 0xb2, 0x20, 0x3f, 0x54}}
 
 // Compile dispatches through IDxcCompiler3's vtable slot 3.
-func (self *IDxcCompiler3) Compile(pSource *DxcBuffer, pArguments []foundation.PWSTR, pIncludeHandler *IDxcIncludeHandler, riid *win32.GUID, ppResult *unsafe.Pointer) error {
+func (self *IDxcCompiler3) Compile(pSource *DxcBuffer, pArguments []foundation.PWSTR, pIncludeHandler *IDxcIncludeHandler, riid *win32.GUID, ppResult **win32.IUnknown) error {
 	var _pArguments *foundation.PWSTR
 	if len(pArguments) > 0 {
 		_pArguments = &pArguments[0]
@@ -191,7 +191,7 @@ func (self *IDxcCompiler3) Compile(pSource *DxcBuffer, pArguments []foundation.P
 }
 
 // Disassemble dispatches through IDxcCompiler3's vtable slot 4.
-func (self *IDxcCompiler3) Disassemble(pObject *DxcBuffer, riid *win32.GUID, ppResult *unsafe.Pointer) error {
+func (self *IDxcCompiler3) Disassemble(pObject *DxcBuffer, riid *win32.GUID, ppResult **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObject)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppResult)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -337,7 +337,7 @@ func (self *IDxcExtraOutputs) GetOutputCount() uint32 {
 }
 
 // GetOutput dispatches through IDxcExtraOutputs's vtable slot 4.
-func (self *IDxcExtraOutputs) GetOutput(uIndex uint32, iid *win32.GUID, ppvObject *unsafe.Pointer, ppOutputType **IDxcBlobUtf16, ppOutputName **IDxcBlobUtf16) error {
+func (self *IDxcExtraOutputs) GetOutput(uIndex uint32, iid *win32.GUID, ppvObject **win32.IUnknown, ppOutputType **IDxcBlobUtf16, ppOutputName **IDxcBlobUtf16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(uIndex), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(ppvObject)), uintptr(unsafe.Pointer(ppOutputType)), uintptr(unsafe.Pointer(ppOutputName)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -889,7 +889,7 @@ func (self *IDxcResult) HasOutput(dxcOutKind DXC_OUT_KIND) foundation.BOOL {
 }
 
 // GetOutput dispatches through IDxcResult's vtable slot 7.
-func (self *IDxcResult) GetOutput(dxcOutKind DXC_OUT_KIND, iid *win32.GUID, ppvObject *unsafe.Pointer, ppOutputName **IDxcBlobUtf16) error {
+func (self *IDxcResult) GetOutput(dxcOutKind DXC_OUT_KIND, iid *win32.GUID, ppvObject **win32.IUnknown, ppOutputName **IDxcBlobUtf16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dxcOutKind), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(ppvObject)), uintptr(unsafe.Pointer(ppOutputName)))
 	return win32.HRESULTError(int32(r1))
 }

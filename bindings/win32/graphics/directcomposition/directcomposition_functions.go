@@ -60,7 +60,7 @@ func DCompositionBoostCompositorClock(enable bool) error {
 // DCompositionCreateDevice calls dcomp!DCompositionCreateDevice.
 // https://learn.microsoft.com/windows/win32/api/dcomp/nf-dcomp-dcompositioncreatedevice
 // Minimum OS: windows8.0.
-func DCompositionCreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, iid *win32.GUID, dcompositionDevice *unsafe.Pointer) error {
+func DCompositionCreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, iid *win32.GUID, dcompositionDevice **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procDCompositionCreateDevice.Addr(), uintptr(unsafe.Pointer(dxgiDevice)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(dcompositionDevice)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -68,14 +68,14 @@ func DCompositionCreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, iid *win32.G
 // DCompositionCreateDevice2 calls dcomp!DCompositionCreateDevice2.
 // https://learn.microsoft.com/windows/win32/api/dcomp/nf-dcomp-dcompositioncreatedevice2
 // Minimum OS: windows8.1.
-func DCompositionCreateDevice2(renderingDevice *systemcom.IUnknown, iid *win32.GUID, dcompositionDevice *unsafe.Pointer) error {
+func DCompositionCreateDevice2(renderingDevice *systemcom.IUnknown, iid *win32.GUID, dcompositionDevice **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procDCompositionCreateDevice2.Addr(), uintptr(unsafe.Pointer(renderingDevice)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(dcompositionDevice)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // DCompositionCreateDevice3 calls dcomp!DCompositionCreateDevice3.
 // https://learn.microsoft.com/windows/win32/api/dcomp/nf-dcomp-dcompositioncreatedevice3
-func DCompositionCreateDevice3(renderingDevice *systemcom.IUnknown, iid *win32.GUID, dcompositionDevice *unsafe.Pointer) error {
+func DCompositionCreateDevice3(renderingDevice *systemcom.IUnknown, iid *win32.GUID, dcompositionDevice **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procDCompositionCreateDevice3.Addr(), uintptr(unsafe.Pointer(renderingDevice)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(dcompositionDevice)))
 	return win32.HRESULTError(int32(r1))
 }

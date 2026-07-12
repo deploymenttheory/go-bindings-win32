@@ -23,7 +23,8 @@ type ICoreFrameworkInputViewInterop struct {
 var IID_ICoreFrameworkInputViewInterop = win32.GUID{Data1: 0x0e3da342, Data2: 0xb11c, Data3: 0x484b, Data4: [8]byte{0x9c, 0x1c, 0xbe, 0x0d, 0x61, 0xc2, 0xf6, 0xc5}}
 
 // GetForWindow dispatches through ICoreFrameworkInputViewInterop's vtable slot 6.
-func (self *ICoreFrameworkInputViewInterop) GetForWindow(appWindow foundation.HWND, riid *win32.GUID, coreFrameworkInputView *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(coreFrameworkInputView)))
-	return win32.HRESULTError(int32(r1))
+func (self *ICoreFrameworkInputViewInterop) GetForWindow(appWindow foundation.HWND, riid *win32.GUID) (*win32.IUnknown, error) {
+	var _coreFrameworkInputView *win32.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_coreFrameworkInputView)))
+	return _coreFrameworkInputView, win32.HRESULTError(int32(r1))
 }

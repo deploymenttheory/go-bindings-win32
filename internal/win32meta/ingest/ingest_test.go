@@ -157,6 +157,16 @@ func TestIngestComInterface(t *testing.T) {
 	if unknown.Methods[0].Name != "QueryInterface" {
 		t.Errorf("vtable[0] = %s, want QueryInterface", unknown.Methods[0].Name)
 	}
+	// QueryInterface's ppvObject is the canonical [ComOutPtr] void** out-param;
+	// IidParameterIndex is absent from the current winmd, so the ingested
+	// default (-1) must survive.
+	ppv := unknown.Methods[0].Params[1]
+	if ppv.Name != "ppvObject" || !ppv.IsComOutPtr || !ppv.IsOut {
+		t.Errorf("ppvObject = %+v, want out [ComOutPtr]", ppv)
+	}
+	if ppv.IidParamIndex != -1 {
+		t.Errorf("ppvObject IidParamIndex = %d, want -1 (attribute absent)", ppv.IidParamIndex)
+	}
 }
 
 func TestIngestEnumAndStruct(t *testing.T) {

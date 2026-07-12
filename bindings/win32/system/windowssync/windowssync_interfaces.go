@@ -126,7 +126,7 @@ func (self *IChangeUnitException) GetChangeUnitId(pbChangeUnitId *byte, pcbIdSiz
 }
 
 // GetClockVector dispatches through IChangeUnitException's vtable slot 5.
-func (self *IChangeUnitException) GetClockVector(riid *win32.GUID, ppUnk *unsafe.Pointer) error {
+func (self *IChangeUnitException) GetClockVector(riid *win32.GUID, ppUnk **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppUnk)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -168,7 +168,7 @@ type IClockVector struct {
 var IID_IClockVector = win32.GUID{Data1: 0x14b2274a, Data2: 0x8698, Data3: 0x4cc6, Data4: [8]byte{0x93, 0x33, 0xf8, 0x9b, 0xd1, 0xd4, 0x7b, 0xc4}}
 
 // GetClockVectorElements dispatches through IClockVector's vtable slot 3.
-func (self *IClockVector) GetClockVectorElements(riid *win32.GUID, ppiEnumClockVector *unsafe.Pointer) error {
+func (self *IClockVector) GetClockVectorElements(riid *win32.GUID, ppiEnumClockVector **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppiEnumClockVector)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1008,7 +1008,7 @@ func (self *IRangeException) GetClosedRangeEnd(pbClosedRangeEnd *byte, pcbIdSize
 }
 
 // GetClockVector dispatches through IRangeException's vtable slot 5.
-func (self *IRangeException) GetClockVector(riid *win32.GUID, ppUnk *unsafe.Pointer) error {
+func (self *IRangeException) GetClockVector(riid *win32.GUID, ppUnk **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppUnk)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1168,7 +1168,7 @@ func (self *ISingleItemException) GetItemId(pbItemId *byte, pcbIdSize *uint32) e
 }
 
 // GetClockVector dispatches through ISingleItemException's vtable slot 4.
-func (self *ISingleItemException) GetClockVector(riid *win32.GUID, ppUnk *unsafe.Pointer) error {
+func (self *ISingleItemException) GetClockVector(riid *win32.GUID, ppUnk **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppUnk)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1948,7 +1948,7 @@ func (self *ISyncKnowledge) ContainsChangeUnit(pbVersionOwnerReplicaId *byte, pb
 }
 
 // GetScopeVector dispatches through ISyncKnowledge's vtable slot 8.
-func (self *ISyncKnowledge) GetScopeVector(riid *win32.GUID, ppUnk *unsafe.Pointer) error {
+func (self *ISyncKnowledge) GetScopeVector(riid *win32.GUID, ppUnk **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppUnk)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -2026,31 +2026,31 @@ func (self *ISyncKnowledge) FindMinTickCountForReplica(pbReplicaId *byte, pullRe
 }
 
 // GetRangeExceptions dispatches through ISyncKnowledge's vtable slot 21.
-func (self *ISyncKnowledge) GetRangeExceptions(riid *win32.GUID, ppUnk *unsafe.Pointer) error {
+func (self *ISyncKnowledge) GetRangeExceptions(riid *win32.GUID, ppUnk **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppUnk)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetSingleItemExceptions dispatches through ISyncKnowledge's vtable slot 22.
-func (self *ISyncKnowledge) GetSingleItemExceptions(riid *win32.GUID, ppUnk *unsafe.Pointer) error {
+func (self *ISyncKnowledge) GetSingleItemExceptions(riid *win32.GUID, ppUnk **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppUnk)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetChangeUnitExceptions dispatches through ISyncKnowledge's vtable slot 23.
-func (self *ISyncKnowledge) GetChangeUnitExceptions(riid *win32.GUID, ppUnk *unsafe.Pointer) error {
+func (self *ISyncKnowledge) GetChangeUnitExceptions(riid *win32.GUID, ppUnk **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppUnk)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // FindClockVectorForItem dispatches through ISyncKnowledge's vtable slot 24.
-func (self *ISyncKnowledge) FindClockVectorForItem(pbItemId *byte, riid *win32.GUID, ppUnk *unsafe.Pointer) error {
+func (self *ISyncKnowledge) FindClockVectorForItem(pbItemId *byte, riid *win32.GUID, ppUnk **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbItemId)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppUnk)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // FindClockVectorForChangeUnit dispatches through ISyncKnowledge's vtable slot 25.
-func (self *ISyncKnowledge) FindClockVectorForChangeUnit(pbItemId *byte, pbChangeUnitId *byte, riid *win32.GUID, ppUnk *unsafe.Pointer) error {
+func (self *ISyncKnowledge) FindClockVectorForChangeUnit(pbItemId *byte, pbChangeUnitId *byte, riid *win32.GUID, ppUnk **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbItemId)), uintptr(unsafe.Pointer(pbChangeUnitId)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppUnk)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -2095,7 +2095,7 @@ func (self *ISyncKnowledge2) GetLowestUncontainedId(piSyncKnowledge *ISyncKnowle
 }
 
 // GetInspector dispatches through ISyncKnowledge2's vtable slot 31.
-func (self *ISyncKnowledge2) GetInspector(riid *win32.GUID, ppiInspector *unsafe.Pointer) error {
+func (self *ISyncKnowledge2) GetInspector(riid *win32.GUID, ppiInspector **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppiInspector)))
 	return win32.HRESULTError(int32(r1))
 }

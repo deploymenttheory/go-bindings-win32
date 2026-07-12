@@ -165,7 +165,7 @@ func AccessibleObjectFromEvent(hwnd foundation.HWND, dwId uint32, dwChildId uint
 // AccessibleObjectFromWindow calls OLEACC!AccessibleObjectFromWindow.
 // https://learn.microsoft.com/windows/win32/api/oleacc/nf-oleacc-accessibleobjectfromwindow
 // Minimum OS: windows5.0.
-func AccessibleObjectFromWindow(hwnd foundation.HWND, dwId uint32, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+func AccessibleObjectFromWindow(hwnd foundation.HWND, dwId uint32, riid *win32.GUID, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procAccessibleObjectFromWindow.Addr(), uintptr(hwnd), uintptr(dwId), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -173,7 +173,7 @@ func AccessibleObjectFromWindow(hwnd foundation.HWND, dwId uint32, riid *win32.G
 // CreateStdAccessibleObject calls OLEACC!CreateStdAccessibleObject.
 // https://learn.microsoft.com/windows/win32/api/oleacc/nf-oleacc-createstdaccessibleobject
 // Minimum OS: windows5.0.
-func CreateStdAccessibleObject(hwnd foundation.HWND, idObject int32, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+func CreateStdAccessibleObject(hwnd foundation.HWND, idObject int32, riid *win32.GUID, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCreateStdAccessibleObject.Addr(), uintptr(hwnd), uintptr(idObject), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -181,7 +181,7 @@ func CreateStdAccessibleObject(hwnd foundation.HWND, idObject int32, riid *win32
 // CreateStdAccessibleProxy calls OLEACC!CreateStdAccessibleProxyW.
 // https://learn.microsoft.com/windows/win32/api/oleacc/nf-oleacc-createstdaccessibleproxyw
 // Minimum OS: windows5.0.
-func CreateStdAccessibleProxy(hwnd foundation.HWND, pClassName string, idObject int32, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+func CreateStdAccessibleProxy(hwnd foundation.HWND, pClassName string, idObject int32, riid *win32.GUID, ppvObject **win32.IUnknown) error {
 	_pClassName := win32.UTF16Ptr(pClassName)
 	r1, _, _ := syscall.SyscallN(procCreateStdAccessibleProxy.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(_pClassName)), uintptr(idObject), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
 	return win32.HRESULTError(int32(r1))
@@ -190,7 +190,7 @@ func CreateStdAccessibleProxy(hwnd foundation.HWND, pClassName string, idObject 
 // CreateStdAccessibleProxyA calls OLEACC!CreateStdAccessibleProxyA.
 // https://learn.microsoft.com/windows/win32/api/oleacc/nf-oleacc-createstdaccessibleproxya
 // Minimum OS: windows5.0.
-func CreateStdAccessibleProxyA(hwnd foundation.HWND, pClassName foundation.PSTR, idObject int32, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+func CreateStdAccessibleProxyA(hwnd foundation.HWND, pClassName foundation.PSTR, idObject int32, riid *win32.GUID, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCreateStdAccessibleProxyA.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pClassName)), uintptr(idObject), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -361,7 +361,7 @@ func NotifyWinEvent(event uint32, hwnd foundation.HWND, idObject int32, idChild 
 // ObjectFromLresult calls OLEACC!ObjectFromLresult.
 // https://learn.microsoft.com/windows/win32/api/oleacc/nf-oleacc-objectfromlresult
 // Minimum OS: windows5.1.2600.
-func ObjectFromLresult(lResult foundation.LRESULT, riid *win32.GUID, wParam foundation.WPARAM, ppvObject *unsafe.Pointer) error {
+func ObjectFromLresult(lResult foundation.LRESULT, riid *win32.GUID, wParam foundation.WPARAM, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procObjectFromLresult.Addr(), uintptr(lResult), uintptr(unsafe.Pointer(riid)), uintptr(wParam), uintptr(unsafe.Pointer(ppvObject)))
 	return win32.HRESULTError(int32(r1))
 }

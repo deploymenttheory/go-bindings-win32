@@ -26,7 +26,7 @@ var (
 )
 
 // CreateXmlReader calls XmlLite!CreateXmlReader.
-func CreateXmlReader(riid *win32.GUID, ppvObject *unsafe.Pointer, pMalloc *systemcom.IMalloc) error {
+func CreateXmlReader(riid *win32.GUID, ppvObject **win32.IUnknown, pMalloc *systemcom.IMalloc) error {
 	r1, _, _ := syscall.SyscallN(procCreateXmlReader.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)), uintptr(unsafe.Pointer(pMalloc)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -49,7 +49,7 @@ func CreateXmlReaderInputWithEncodingName(pInputStream *systemcom.IUnknown, pMal
 }
 
 // CreateXmlWriter calls XmlLite!CreateXmlWriter.
-func CreateXmlWriter(riid *win32.GUID, ppvObject *unsafe.Pointer, pMalloc *systemcom.IMalloc) error {
+func CreateXmlWriter(riid *win32.GUID, ppvObject **win32.IUnknown, pMalloc *systemcom.IMalloc) error {
 	r1, _, _ := syscall.SyscallN(procCreateXmlWriter.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)), uintptr(unsafe.Pointer(pMalloc)))
 	return win32.HRESULTError(int32(r1))
 }

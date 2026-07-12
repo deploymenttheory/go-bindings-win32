@@ -297,7 +297,7 @@ func DXVA2CreateDirect3DDeviceManager9(pResetToken *uint32, ppDeviceManager **ID
 // DXVA2CreateVideoService calls dxva2!DXVA2CreateVideoService.
 // https://learn.microsoft.com/windows/win32/api/dxva2api/nf-dxva2api-dxva2createvideoservice
 // Minimum OS: windows6.0.6000.
-func DXVA2CreateVideoService(pDD *graphicsdirect3d9.IDirect3DDevice9, riid *win32.GUID, ppService *unsafe.Pointer) error {
+func DXVA2CreateVideoService(pDD *graphicsdirect3d9.IDirect3DDevice9, riid *win32.GUID, ppService **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procDXVA2CreateVideoService.Addr(), uintptr(unsafe.Pointer(pDD)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppService)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -717,7 +717,7 @@ func MFCreateCredentialCache(ppCache **IMFNetCredentialCache) error {
 
 // MFCreateD3D12SynchronizationObject calls MFPlat!MFCreateD3D12SynchronizationObject.
 // https://learn.microsoft.com/windows/win32/api/mfd3d12/nf-mfd3d12-mfcreated3d12synchronizationobject
-func MFCreateD3D12SynchronizationObject(pDevice *graphicsdirect3d12.ID3D12Device, riid *win32.GUID, ppvSyncObject *unsafe.Pointer) error {
+func MFCreateD3D12SynchronizationObject(pDevice *graphicsdirect3d12.ID3D12Device, riid *win32.GUID, ppvSyncObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateD3D12SynchronizationObject.Addr(), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvSyncObject)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -899,7 +899,7 @@ func MFCreateMediaEvent(met uint32, guidExtendedType *win32.GUID, hrStatus found
 // MFCreateMediaExtensionActivate calls MFPlat!MFCreateMediaExtensionActivate.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatemediaextensionactivate
 // Minimum OS: windows8.0.
-func MFCreateMediaExtensionActivate(szActivatableClassId string, pConfiguration *systemcom.IUnknown, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+func MFCreateMediaExtensionActivate(szActivatableClassId string, pConfiguration *systemcom.IUnknown, riid *win32.GUID, ppvObject **win32.IUnknown) error {
 	_szActivatableClassId := win32.UTF16Ptr(szActivatableClassId)
 	r1, _, _ := syscall.SyscallN(procMFCreateMediaExtensionActivate.Addr(), uintptr(unsafe.Pointer(_szActivatableClassId)), uintptr(unsafe.Pointer(pConfiguration)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
 	return win32.HRESULTError(int32(r1))
@@ -964,7 +964,7 @@ func MFCreateMuxStreamSample(pSamplesToMux *IMFCollection, ppMuxSample **IMFSamp
 // MFCreateNetSchemePlugin calls MF!MFCreateNetSchemePlugin.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatenetschemeplugin
 // Minimum OS: windows6.0.6000.
-func MFCreateNetSchemePlugin(riid *win32.GUID, ppvHandler *unsafe.Pointer) error {
+func MFCreateNetSchemePlugin(riid *win32.GUID, ppvHandler **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateNetSchemePlugin.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvHandler)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1016,7 +1016,7 @@ func MFCreatePresentationDescriptorFromASFProfile(pIProfile *IMFASFProfile, ppIP
 // MFCreatePropertiesFromMediaType calls MFPlat!MFCreatePropertiesFromMediaType.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatepropertiesfrommediatype
 // Minimum OS: windows8.0.
-func MFCreatePropertiesFromMediaType(pMediaType *IMFMediaType, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func MFCreatePropertiesFromMediaType(pMediaType *IMFMediaType, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procMFCreatePropertiesFromMediaType.Addr(), uintptr(unsafe.Pointer(pMediaType)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1226,7 +1226,7 @@ func MFCreateStreamOnMFByteStream(pByteStream *IMFByteStream, ppStream **systemc
 // MFCreateStreamOnMFByteStreamEx calls MFPlat!MFCreateStreamOnMFByteStreamEx.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatestreamonmfbytestreamex
 // Minimum OS: windows8.0.
-func MFCreateStreamOnMFByteStreamEx(pByteStream *IMFByteStream, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func MFCreateStreamOnMFByteStreamEx(pByteStream *IMFByteStream, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateStreamOnMFByteStreamEx.Addr(), uintptr(unsafe.Pointer(pByteStream)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1354,28 +1354,28 @@ func MFCreateVideoMediaTypeFromSubtype(pAMSubtype *win32.GUID, ppIVideoMediaType
 
 // MFCreateVideoMixer calls EVR!MFCreateVideoMixer.
 // https://learn.microsoft.com/windows/win32/api/evr/nc-evr-mfcreatevideomixer
-func MFCreateVideoMixer(pOwner *systemcom.IUnknown, riidDevice *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func MFCreateVideoMixer(pOwner *systemcom.IUnknown, riidDevice *win32.GUID, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateVideoMixer.Addr(), uintptr(unsafe.Pointer(pOwner)), uintptr(unsafe.Pointer(riidDevice)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateVideoMixerAndPresenter calls EVR!MFCreateVideoMixerAndPresenter.
 // https://learn.microsoft.com/windows/win32/api/evr/nc-evr-mfcreatevideomixerandpresenter
-func MFCreateVideoMixerAndPresenter(pMixerOwner *systemcom.IUnknown, pPresenterOwner *systemcom.IUnknown, riidMixer *win32.GUID, ppvVideoMixer *unsafe.Pointer, riidPresenter *win32.GUID, ppvVideoPresenter *unsafe.Pointer) error {
+func MFCreateVideoMixerAndPresenter(pMixerOwner *systemcom.IUnknown, pPresenterOwner *systemcom.IUnknown, riidMixer *win32.GUID, ppvVideoMixer **win32.IUnknown, riidPresenter *win32.GUID, ppvVideoPresenter **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateVideoMixerAndPresenter.Addr(), uintptr(unsafe.Pointer(pMixerOwner)), uintptr(unsafe.Pointer(pPresenterOwner)), uintptr(unsafe.Pointer(riidMixer)), uintptr(unsafe.Pointer(ppvVideoMixer)), uintptr(unsafe.Pointer(riidPresenter)), uintptr(unsafe.Pointer(ppvVideoPresenter)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateVideoPresenter calls EVR!MFCreateVideoPresenter.
 // https://learn.microsoft.com/windows/win32/api/evr/nc-evr-mfcreatevideopresenter
-func MFCreateVideoPresenter(pOwner *systemcom.IUnknown, riidDevice *win32.GUID, riid *win32.GUID, ppVideoPresenter *unsafe.Pointer) error {
+func MFCreateVideoPresenter(pOwner *systemcom.IUnknown, riidDevice *win32.GUID, riid *win32.GUID, ppVideoPresenter **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateVideoPresenter.Addr(), uintptr(unsafe.Pointer(pOwner)), uintptr(unsafe.Pointer(riidDevice)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppVideoPresenter)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateVideoRenderer calls MF!MFCreateVideoRenderer.
 // https://learn.microsoft.com/windows/win32/api/evr/nc-evr-mfcreatevideorenderer
-func MFCreateVideoRenderer(riidRenderer *win32.GUID, ppVideoRenderer *unsafe.Pointer) error {
+func MFCreateVideoRenderer(riidRenderer *win32.GUID, ppVideoRenderer **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateVideoRenderer.Addr(), uintptr(unsafe.Pointer(riidRenderer)), uintptr(unsafe.Pointer(ppVideoRenderer)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1390,7 +1390,7 @@ func MFCreateVideoRendererActivate(hwndVideo foundation.HWND, ppActivate **IMFAc
 
 // MFCreateVideoSampleAllocator calls EVR!MFCreateVideoSampleAllocator.
 // https://learn.microsoft.com/windows/win32/api/evr/nc-evr-mfcreatevideosampleallocator
-func MFCreateVideoSampleAllocator(riid *win32.GUID, ppSampleAllocator *unsafe.Pointer) error {
+func MFCreateVideoSampleAllocator(riid *win32.GUID, ppSampleAllocator **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateVideoSampleAllocator.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppSampleAllocator)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1398,7 +1398,7 @@ func MFCreateVideoSampleAllocator(riid *win32.GUID, ppSampleAllocator *unsafe.Po
 // MFCreateVideoSampleAllocatorEx calls MFPlat!MFCreateVideoSampleAllocatorEx.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatevideosampleallocatorex
 // Minimum OS: windows8.0.
-func MFCreateVideoSampleAllocatorEx(riid *win32.GUID, ppSampleAllocator *unsafe.Pointer) error {
+func MFCreateVideoSampleAllocatorEx(riid *win32.GUID, ppSampleAllocator **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateVideoSampleAllocatorEx.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppSampleAllocator)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1600,7 +1600,7 @@ func MFGetPluginControl(ppPluginControl **IMFPluginControl) error {
 // MFGetService calls MF!MFGetService.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfgetservice
 // Minimum OS: windows6.0.6000.
-func MFGetService(punkObject *systemcom.IUnknown, guidService *win32.GUID, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+func MFGetService(punkObject *systemcom.IUnknown, guidService *win32.GUID, riid *win32.GUID, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procMFGetService.Addr(), uintptr(unsafe.Pointer(punkObject)), uintptr(unsafe.Pointer(guidService)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
 	return win32.HRESULTError(int32(r1))
 }

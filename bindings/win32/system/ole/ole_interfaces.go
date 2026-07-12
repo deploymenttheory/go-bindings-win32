@@ -1014,7 +1014,7 @@ type IGetOleObject struct {
 var IID_IGetOleObject = win32.GUID{Data1: 0x8a701da0, Data2: 0x4feb, Data3: 0x101b, Data4: [8]byte{0xa8, 0x2e, 0x08, 0x00, 0x2b, 0x2b, 0x23, 0x37}}
 
 // GetOleObject dispatches through IGetOleObject's vtable slot 3.
-func (self *IGetOleObject) GetOleObject(riid *win32.GUID, ppvObj *unsafe.Pointer) error {
+func (self *IGetOleObject) GetOleObject(riid *win32.GUID, ppvObj **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObj)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1029,7 +1029,7 @@ type IGetVBAObject struct {
 var IID_IGetVBAObject = win32.GUID{Data1: 0x91733a60, Data2: 0x3f4c, Data3: 0x101b, Data4: [8]byte{0xa3, 0xf6, 0x00, 0xaa, 0x00, 0x34, 0xe4, 0xe9}}
 
 // GetObject dispatches through IGetVBAObject's vtable slot 3.
-func (self *IGetVBAObject) GetObject(riid *win32.GUID, ppvObj *unsafe.Pointer, dwReserved uint32) error {
+func (self *IGetVBAObject) GetObject(riid *win32.GUID, ppvObj **win32.IUnknown, dwReserved uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObj)), uintptr(dwReserved))
 	return win32.HRESULTError(int32(r1))
 }

@@ -85,13 +85,13 @@ func (self *IImageList) Copy(iDst int32, punkSrc *systemcom.IUnknown, iSrc int32
 }
 
 // Merge dispatches through IImageList's vtable slot 13.
-func (self *IImageList) Merge(i1 int32, punk2 *systemcom.IUnknown, i2 int32, dx int32, dy int32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IImageList) Merge(i1 int32, punk2 *systemcom.IUnknown, i2 int32, dx int32, dy int32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(i1), uintptr(unsafe.Pointer(punk2)), uintptr(i2), uintptr(dx), uintptr(dy), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IImageList's vtable slot 14.
-func (self *IImageList) Clone(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IImageList) Clone(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -182,7 +182,7 @@ func (self *IImageList) DragShowNolock(fShow bool) error {
 }
 
 // GetDragImage dispatches through IImageList's vtable slot 29.
-func (self *IImageList) GetDragImage(ppt *foundation.POINT, pptHotspot *foundation.POINT, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IImageList) GetDragImage(ppt *foundation.POINT, pptHotspot *foundation.POINT, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppt)), uintptr(unsafe.Pointer(pptHotspot)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -233,7 +233,7 @@ func (self *IImageList2) SetCallback(punk *systemcom.IUnknown) error {
 }
 
 // GetCallback dispatches through IImageList2's vtable slot 36.
-func (self *IImageList2) GetCallback(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IImageList2) GetCallback(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }

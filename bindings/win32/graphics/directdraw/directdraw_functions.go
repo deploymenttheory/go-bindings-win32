@@ -42,7 +42,7 @@ func DirectDrawCreateClipper(dwFlags uint32, lplpDDClipper **IDirectDrawClipper,
 
 // DirectDrawCreateEx calls DDRAW!DirectDrawCreateEx.
 // https://learn.microsoft.com/windows/win32/api/ddraw/nf-ddraw-directdrawcreateex
-func DirectDrawCreateEx(lpGuid *win32.GUID, lplpDD *unsafe.Pointer, iid *win32.GUID, pUnkOuter *systemcom.IUnknown) error {
+func DirectDrawCreateEx(lpGuid *win32.GUID, lplpDD **win32.IUnknown, iid *win32.GUID, pUnkOuter *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procDirectDrawCreateEx.Addr(), uintptr(unsafe.Pointer(lpGuid)), uintptr(unsafe.Pointer(lplpDD)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(pUnkOuter)))
 	return win32.HRESULTError(int32(r1))
 }

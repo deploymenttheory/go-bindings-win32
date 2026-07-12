@@ -169,7 +169,11 @@ each call, then the template dispatches via `syscall.SyscallN`:
   compatible with every generated `*IFoo` and carrying QueryInterface/AddRef/
   Release. Cast to the concrete interface selected by the riid argument. A
   `[retval]` one elevates to a `(*win32.IUnknown, error)` return like any
-  typed COM out. Unattributed `void**` outs stay `*unsafe.Pointer`.
+  typed COM out. An un-attributed `void**` `[out]` that pairs with an input
+  `*GUID` param whose name contains `iid` — immediately preceding it, or the
+  signature's unique riid/`void**` pair — is retyped the same way (the
+  windows-rs shape heuristic); other un-attributed `void**` outs stay
+  `*unsafe.Pointer`.
 - a parameter whose name would shadow a type used in the signature (e.g. a
   param `Node` in a method returning `(*Node, error)`) is suffixed with `_`,
   because Go puts parameter names in scope for the result types.

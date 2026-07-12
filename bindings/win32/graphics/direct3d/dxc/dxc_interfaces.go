@@ -317,7 +317,7 @@ func (self *IDxcContainerReflection) FindFirstPartKind(kind uint32, pResult *uin
 }
 
 // GetPartReflection dispatches through IDxcContainerReflection's vtable slot 8.
-func (self *IDxcContainerReflection) GetPartReflection(idx uint32, iid *win32.GUID, ppvObject *unsafe.Pointer) error {
+func (self *IDxcContainerReflection) GetPartReflection(idx uint32, iid *win32.GUID, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(idx), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(ppvObject)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -994,7 +994,7 @@ func (self *IDxcUtils) GetDxilContainerPart(pShader *DxcBuffer, DxcPart uint32, 
 }
 
 // CreateReflection dispatches through IDxcUtils's vtable slot 13.
-func (self *IDxcUtils) CreateReflection(pData *DxcBuffer, iid *win32.GUID, ppvReflection *unsafe.Pointer) error {
+func (self *IDxcUtils) CreateReflection(pData *DxcBuffer, iid *win32.GUID, ppvReflection **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(ppvReflection)))
 	return win32.HRESULTError(int32(r1))
 }

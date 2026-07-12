@@ -1203,7 +1203,7 @@ type IDirect3DSurface9 struct {
 var IID_IDirect3DSurface9 = win32.GUID{Data1: 0x0cfbaf3a, Data2: 0x9ff6, Data3: 0x429a, Data4: [8]byte{0x99, 0xb3, 0xa2, 0x79, 0x6a, 0xf8, 0xb8, 0x9b}}
 
 // GetContainer dispatches through IDirect3DSurface9's vtable slot 11.
-func (self *IDirect3DSurface9) GetContainer(riid *win32.GUID, ppContainer *unsafe.Pointer) error {
+func (self *IDirect3DSurface9) GetContainer(riid *win32.GUID, ppContainer **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppContainer)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1458,7 +1458,7 @@ func (self *IDirect3DVolume9) FreePrivateData(refguid *win32.GUID) error {
 }
 
 // GetContainer dispatches through IDirect3DVolume9's vtable slot 7.
-func (self *IDirect3DVolume9) GetContainer(riid *win32.GUID, ppContainer *unsafe.Pointer) error {
+func (self *IDirect3DVolume9) GetContainer(riid *win32.GUID, ppContainer **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppContainer)))
 	return win32.HRESULTError(int32(r1))
 }

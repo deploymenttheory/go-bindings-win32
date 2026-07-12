@@ -112,7 +112,7 @@ type ICompositionTextureInterop struct {
 var IID_ICompositionTextureInterop = win32.GUID{Data1: 0xd528a265, Data2: 0xf0a5, Data3: 0x422f, Data4: [8]byte{0xa3, 0x9d, 0xef, 0x62, 0xd7, 0xcd, 0x1c, 0xc4}}
 
 // GetAvailableFence dispatches through ICompositionTextureInterop's vtable slot 3.
-func (self *ICompositionTextureInterop) GetAvailableFence(fenceValue *uint64, iid *win32.GUID, availableFence *unsafe.Pointer) error {
+func (self *ICompositionTextureInterop) GetAvailableFence(fenceValue *uint64, iid *win32.GUID, availableFence **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fenceValue)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(availableFence)))
 	return win32.HRESULTError(int32(r1))
 }

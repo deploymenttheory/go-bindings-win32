@@ -33,7 +33,7 @@ var (
 // CoCreateActivity calls comsvcs!CoCreateActivity.
 // https://learn.microsoft.com/windows/win32/api/comsvcs/nf-comsvcs-cocreateactivity
 // Minimum OS: windows5.1.2600.
-func CoCreateActivity(pIUnknown *systemcom.IUnknown, riid *win32.GUID, ppObj *unsafe.Pointer) error {
+func CoCreateActivity(pIUnknown *systemcom.IUnknown, riid *win32.GUID, ppObj **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCoCreateActivity.Addr(), uintptr(unsafe.Pointer(pIUnknown)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppObj)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -49,7 +49,7 @@ func CoEnterServiceDomain(pConfigObject *systemcom.IUnknown) error {
 // CoGetDefaultContext calls OLE32!CoGetDefaultContext.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cogetdefaultcontext
 // Minimum OS: windows5.1.2600.
-func CoGetDefaultContext(aptType systemcom.APTTYPE, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func CoGetDefaultContext(aptType systemcom.APTTYPE, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCoGetDefaultContext.Addr(), uintptr(aptType), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -80,7 +80,7 @@ func GetManagedExtensions(dwExts *uint32) error {
 // MTSCreateActivity calls comsvcs!MTSCreateActivity.
 // https://learn.microsoft.com/windows/win32/api/comsvcs/nf-comsvcs-mtscreateactivity
 // Minimum OS: windows5.0.
-func MTSCreateActivity(riid *win32.GUID, ppobj *unsafe.Pointer) error {
+func MTSCreateActivity(riid *win32.GUID, ppobj **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procMTSCreateActivity.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppobj)))
 	return win32.HRESULTError(int32(r1))
 }

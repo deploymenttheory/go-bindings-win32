@@ -1271,7 +1271,7 @@ type IMMDeviceActivator struct {
 var IID_IMMDeviceActivator = win32.GUID{Data1: 0x3b0d0ea4, Data2: 0xd0a9, Data3: 0x4b0e, Data4: [8]byte{0x93, 0x5b, 0x09, 0x51, 0x67, 0x46, 0xfa, 0xc0}}
 
 // Activate dispatches through IMMDeviceActivator's vtable slot 3.
-func (self *IMMDeviceActivator) Activate(iid *win32.GUID, pDevice *IMMDevice, pActivationParams *systemcomstructuredstorage.PROPVARIANT, ppInterface *unsafe.Pointer) error {
+func (self *IMMDeviceActivator) Activate(iid *win32.GUID, pDevice *IMMDevice, pActivationParams *systemcomstructuredstorage.PROPVARIANT, ppInterface **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(pActivationParams)), uintptr(unsafe.Pointer(ppInterface)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1486,7 +1486,7 @@ func (self *IPart) GetTopologyObject(ppTopology **IDeviceTopology) error {
 }
 
 // Activate dispatches through IPart's vtable slot 13.
-func (self *IPart) Activate(dwClsContext uint32, refiid *win32.GUID, ppvObject *unsafe.Pointer) error {
+func (self *IPart) Activate(dwClsContext uint32, refiid *win32.GUID, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwClsContext), uintptr(unsafe.Pointer(refiid)), uintptr(unsafe.Pointer(ppvObject)))
 	return win32.HRESULTError(int32(r1))
 }

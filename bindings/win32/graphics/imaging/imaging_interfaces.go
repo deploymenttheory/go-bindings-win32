@@ -861,13 +861,13 @@ type IWICD3DTextureSource struct {
 var IID_IWICD3DTextureSource = win32.GUID{Data1: 0xcaf65cc4, Data2: 0x8ebe, Data3: 0x4718, Data4: [8]byte{0xa2, 0x1f, 0x8d, 0xbf, 0x40, 0xbb, 0x7e, 0x25}}
 
 // GetTexture dispatches through IWICD3DTextureSource's vtable slot 3.
-func (self *IWICD3DTextureSource) GetTexture(pD3DDevice *systemcom.IUnknown, pID3DTextureOptions *systemcomstructuredstorage.IPropertyBag2, riid *win32.GUID, ppTexture *unsafe.Pointer) error {
+func (self *IWICD3DTextureSource) GetTexture(pD3DDevice *systemcom.IUnknown, pID3DTextureOptions *systemcomstructuredstorage.IPropertyBag2, riid *win32.GUID, ppTexture **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pD3DDevice)), uintptr(unsafe.Pointer(pID3DTextureOptions)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppTexture)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetTransformedTexture dispatches through IWICD3DTextureSource's vtable slot 4.
-func (self *IWICD3DTextureSource) GetTransformedTexture(prc *WICRect, uiWidth uint32, uiHeight uint32, pguidDstFormat *win32.GUID, dstTransform WICBitmapTransformOptions, pD3DDevice *systemcom.IUnknown, pID3DTextureOptions *systemcomstructuredstorage.IPropertyBag2, riid *win32.GUID, ppTexture *unsafe.Pointer) error {
+func (self *IWICD3DTextureSource) GetTransformedTexture(prc *WICRect, uiWidth uint32, uiHeight uint32, pguidDstFormat *win32.GUID, dstTransform WICBitmapTransformOptions, pD3DDevice *systemcom.IUnknown, pID3DTextureOptions *systemcomstructuredstorage.IPropertyBag2, riid *win32.GUID, ppTexture **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prc)), uintptr(uiWidth), uintptr(uiHeight), uintptr(unsafe.Pointer(pguidDstFormat)), uintptr(dstTransform), uintptr(unsafe.Pointer(pD3DDevice)), uintptr(unsafe.Pointer(pID3DTextureOptions)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppTexture)))
 	return win32.HRESULTError(int32(r1))
 }

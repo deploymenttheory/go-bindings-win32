@@ -1086,7 +1086,7 @@ func StgCreatePropStg(pUnk *systemcom.IUnknown, fmtid *win32.GUID, pclsid *win32
 // StgCreateStorageEx calls OLE32!StgCreateStorageEx.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-stgcreatestorageex
 // Minimum OS: windows5.0.
-func StgCreateStorageEx(pwcsName string, grfMode systemcom.STGM, stgfmt STGFMT, grfAttrs uint32, pStgOptions *STGOPTIONS, pSecurityDescriptor security.PSECURITY_DESCRIPTOR, riid *win32.GUID, ppObjectOpen *unsafe.Pointer) error {
+func StgCreateStorageEx(pwcsName string, grfMode systemcom.STGM, stgfmt STGFMT, grfAttrs uint32, pStgOptions *STGOPTIONS, pSecurityDescriptor security.PSECURITY_DESCRIPTOR, riid *win32.GUID, ppObjectOpen **win32.IUnknown) error {
 	_pwcsName := win32.UTF16Ptr(pwcsName)
 	r1, _, _ := syscall.SyscallN(procStgCreateStorageEx.Addr(), uintptr(unsafe.Pointer(_pwcsName)), uintptr(grfMode), uintptr(stgfmt), uintptr(grfAttrs), uintptr(unsafe.Pointer(pStgOptions)), uintptr(pSecurityDescriptor), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppObjectOpen)))
 	return win32.HRESULTError(int32(r1))
@@ -1167,7 +1167,7 @@ func StgOpenStorage(pwcsName string, pstgPriority *IStorage, grfMode systemcom.S
 // StgOpenStorageEx calls OLE32!StgOpenStorageEx.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-stgopenstorageex
 // Minimum OS: windows5.0.
-func StgOpenStorageEx(pwcsName string, grfMode systemcom.STGM, stgfmt STGFMT, grfAttrs uint32, pStgOptions *STGOPTIONS, pSecurityDescriptor security.PSECURITY_DESCRIPTOR, riid *win32.GUID, ppObjectOpen *unsafe.Pointer) error {
+func StgOpenStorageEx(pwcsName string, grfMode systemcom.STGM, stgfmt STGFMT, grfAttrs uint32, pStgOptions *STGOPTIONS, pSecurityDescriptor security.PSECURITY_DESCRIPTOR, riid *win32.GUID, ppObjectOpen **win32.IUnknown) error {
 	_pwcsName := win32.UTF16Ptr(pwcsName)
 	r1, _, _ := syscall.SyscallN(procStgOpenStorageEx.Addr(), uintptr(unsafe.Pointer(_pwcsName)), uintptr(grfMode), uintptr(stgfmt), uintptr(grfAttrs), uintptr(unsafe.Pointer(pStgOptions)), uintptr(pSecurityDescriptor), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppObjectOpen)))
 	return win32.HRESULTError(int32(r1))

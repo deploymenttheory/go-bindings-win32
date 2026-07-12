@@ -4098,7 +4098,7 @@ func (self *IDsDisplaySpecifier) SetLanguageID(langid uint16) error {
 }
 
 // GetDisplaySpecifier dispatches through IDsDisplaySpecifier's vtable slot 5.
-func (self *IDsDisplaySpecifier) GetDisplaySpecifier(pszObjectClass string, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IDsDisplaySpecifier) GetDisplaySpecifier(pszObjectClass string, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszObjectClass := win32.UTF16Ptr(pszObjectClass)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszObjectClass)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))

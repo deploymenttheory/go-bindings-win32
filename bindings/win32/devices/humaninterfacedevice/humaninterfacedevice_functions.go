@@ -70,7 +70,7 @@ var (
 )
 
 // DirectInput8Create calls DINPUT8!DirectInput8Create.
-func DirectInput8Create(hinst foundation.HINSTANCE, dwVersion uint32, riidltf *win32.GUID, ppvOut *unsafe.Pointer, punkOuter *systemcom.IUnknown) error {
+func DirectInput8Create(hinst foundation.HINSTANCE, dwVersion uint32, riidltf *win32.GUID, ppvOut **win32.IUnknown, punkOuter *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procDirectInput8Create.Addr(), uintptr(hinst), uintptr(dwVersion), uintptr(unsafe.Pointer(riidltf)), uintptr(unsafe.Pointer(ppvOut)), uintptr(unsafe.Pointer(punkOuter)))
 	return win32.HRESULTError(int32(r1))
 }

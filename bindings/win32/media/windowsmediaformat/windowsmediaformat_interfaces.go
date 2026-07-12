@@ -1888,7 +1888,7 @@ type IWMReaderAccelerator struct {
 var IID_IWMReaderAccelerator = win32.GUID{Data1: 0xbddc4d08, Data2: 0x944d, Data3: 0x4d52, Data4: [8]byte{0xa6, 0x12, 0x46, 0xc3, 0xfd, 0xa0, 0x7d, 0xd4}}
 
 // GetCodecInterface dispatches through IWMReaderAccelerator's vtable slot 3.
-func (self *IWMReaderAccelerator) GetCodecInterface(dwOutputNum uint32, riid *win32.GUID, ppvCodecInterface *unsafe.Pointer) error {
+func (self *IWMReaderAccelerator) GetCodecInterface(dwOutputNum uint32, riid *win32.GUID, ppvCodecInterface **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwOutputNum), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvCodecInterface)))
 	return win32.HRESULTError(int32(r1))
 }

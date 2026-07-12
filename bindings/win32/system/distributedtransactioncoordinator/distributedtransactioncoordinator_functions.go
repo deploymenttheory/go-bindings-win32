@@ -24,7 +24,7 @@ var (
 )
 
 // DtcGetTransactionManager calls XOLEHLP!DtcGetTransactionManager.
-func DtcGetTransactionManager(i_pszHost foundation.PSTR, i_pszTmName foundation.PSTR, i_riid *win32.GUID, i_dwReserved1 uint32, i_pvReserved2 []byte, o_ppvObject *unsafe.Pointer) error {
+func DtcGetTransactionManager(i_pszHost foundation.PSTR, i_pszTmName foundation.PSTR, i_riid *win32.GUID, i_dwReserved1 uint32, i_pvReserved2 []byte, o_ppvObject **win32.IUnknown) error {
 	var _i_pvReserved2 *byte
 	if len(i_pvReserved2) > 0 {
 		_i_pvReserved2 = &i_pvReserved2[0]
@@ -34,7 +34,7 @@ func DtcGetTransactionManager(i_pszHost foundation.PSTR, i_pszTmName foundation.
 }
 
 // DtcGetTransactionManagerC calls XOLEHLP!DtcGetTransactionManagerC.
-func DtcGetTransactionManagerC(i_pszHost foundation.PSTR, i_pszTmName foundation.PSTR, i_riid *win32.GUID, i_dwReserved1 uint32, i_pvReserved2 []byte, o_ppvObject *unsafe.Pointer) error {
+func DtcGetTransactionManagerC(i_pszHost foundation.PSTR, i_pszTmName foundation.PSTR, i_riid *win32.GUID, i_dwReserved1 uint32, i_pvReserved2 []byte, o_ppvObject **win32.IUnknown) error {
 	var _i_pvReserved2 *byte
 	if len(i_pvReserved2) > 0 {
 		_i_pvReserved2 = &i_pvReserved2[0]
@@ -44,7 +44,7 @@ func DtcGetTransactionManagerC(i_pszHost foundation.PSTR, i_pszTmName foundation
 }
 
 // DtcGetTransactionManagerEx calls XOLEHLP!DtcGetTransactionManagerExW.
-func DtcGetTransactionManagerEx(i_pwszHost string, i_pwszTmName string, i_riid *win32.GUID, i_grfOptions uint32, i_pvConfigParams unsafe.Pointer, o_ppvObject *unsafe.Pointer) error {
+func DtcGetTransactionManagerEx(i_pwszHost string, i_pwszTmName string, i_riid *win32.GUID, i_grfOptions uint32, i_pvConfigParams unsafe.Pointer, o_ppvObject **win32.IUnknown) error {
 	_i_pwszHost := win32.UTF16Ptr(i_pwszHost)
 	_i_pwszTmName := win32.UTF16Ptr(i_pwszTmName)
 	r1, _, _ := syscall.SyscallN(procDtcGetTransactionManagerEx.Addr(), uintptr(unsafe.Pointer(_i_pwszHost)), uintptr(unsafe.Pointer(_i_pwszTmName)), uintptr(unsafe.Pointer(i_riid)), uintptr(i_grfOptions), uintptr(unsafe.Pointer(i_pvConfigParams)), uintptr(unsafe.Pointer(o_ppvObject)))
@@ -52,7 +52,7 @@ func DtcGetTransactionManagerEx(i_pwszHost string, i_pwszTmName string, i_riid *
 }
 
 // DtcGetTransactionManagerExA calls XOLEHLP!DtcGetTransactionManagerExA.
-func DtcGetTransactionManagerExA(i_pszHost foundation.PSTR, i_pszTmName foundation.PSTR, i_riid *win32.GUID, i_grfOptions uint32, i_pvConfigParams unsafe.Pointer, o_ppvObject *unsafe.Pointer) error {
+func DtcGetTransactionManagerExA(i_pszHost foundation.PSTR, i_pszTmName foundation.PSTR, i_riid *win32.GUID, i_grfOptions uint32, i_pvConfigParams unsafe.Pointer, o_ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procDtcGetTransactionManagerExA.Addr(), uintptr(unsafe.Pointer(i_pszHost)), uintptr(unsafe.Pointer(i_pszTmName)), uintptr(unsafe.Pointer(i_riid)), uintptr(i_grfOptions), uintptr(unsafe.Pointer(i_pvConfigParams)), uintptr(unsafe.Pointer(o_ppvObject)))
 	return win32.HRESULTError(int32(r1))
 }

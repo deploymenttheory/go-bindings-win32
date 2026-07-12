@@ -43,7 +43,7 @@ func (self *IITDatabase) CreateObject(rclsid *win32.GUID, pdwObjInstance *uint32
 }
 
 // GetObject dispatches through IITDatabase's vtable slot 6.
-func (self *IITDatabase) GetObject(dwObjInstance uint32, riid *win32.GUID, ppvObj *unsafe.Pointer) error {
+func (self *IITDatabase) GetObject(dwObjInstance uint32, riid *win32.GUID, ppvObj **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwObjInstance), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObj)))
 	return win32.HRESULTError(int32(r1))
 }

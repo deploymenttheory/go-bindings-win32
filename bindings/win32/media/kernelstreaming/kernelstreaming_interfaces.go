@@ -728,7 +728,7 @@ func (self *IKsTopologyInfo) Get_NodeType(dwNodeId uint32, pNodeType *win32.GUID
 }
 
 // CreateNodeInstance dispatches through IKsTopologyInfo's vtable slot 10.
-func (self *IKsTopologyInfo) CreateNodeInstance(dwNodeId uint32, iid *win32.GUID, ppvObject *unsafe.Pointer) error {
+func (self *IKsTopologyInfo) CreateNodeInstance(dwNodeId uint32, iid *win32.GUID, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(dwNodeId), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(ppvObject)))
 	return win32.HRESULTError(int32(r1))
 }

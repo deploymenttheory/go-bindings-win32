@@ -1065,7 +1065,7 @@ type IAMGraphStreams struct {
 var IID_IAMGraphStreams = win32.GUID{Data1: 0x632105fa, Data2: 0x072e, Data3: 0x11d3, Data4: [8]byte{0x8a, 0xf9, 0x00, 0xc0, 0x4f, 0xb6, 0xbd, 0x3d}}
 
 // FindUpstreamInterface dispatches through IAMGraphStreams's vtable slot 3.
-func (self *IAMGraphStreams) FindUpstreamInterface(pPin *IPin, riid *win32.GUID, ppvInterface *unsafe.Pointer, dwFlags uint32) error {
+func (self *IAMGraphStreams) FindUpstreamInterface(pPin *IPin, riid *win32.GUID, ppvInterface **win32.IUnknown, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPin)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvInterface)), uintptr(dwFlags))
 	return win32.HRESULTError(int32(r1))
 }
@@ -5678,7 +5678,7 @@ func (self *ICaptureGraphBuilder) SetOutputFileName(pType *win32.GUID, lpstrFile
 }
 
 // FindInterface dispatches through ICaptureGraphBuilder's vtable slot 6.
-func (self *ICaptureGraphBuilder) FindInterface(pCategory *win32.GUID, pf *IBaseFilter, riid *win32.GUID, ppint *unsafe.Pointer) error {
+func (self *ICaptureGraphBuilder) FindInterface(pCategory *win32.GUID, pf *IBaseFilter, riid *win32.GUID, ppint **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCategory)), uintptr(unsafe.Pointer(pf)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppint)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -5739,7 +5739,7 @@ func (self *ICaptureGraphBuilder2) SetOutputFileName(pType *win32.GUID, lpstrFil
 }
 
 // FindInterface dispatches through ICaptureGraphBuilder2's vtable slot 6.
-func (self *ICaptureGraphBuilder2) FindInterface(pCategory *win32.GUID, pType *win32.GUID, pf *IBaseFilter, riid *win32.GUID, ppint *unsafe.Pointer) error {
+func (self *ICaptureGraphBuilder2) FindInterface(pCategory *win32.GUID, pType *win32.GUID, pf *IBaseFilter, riid *win32.GUID, ppint **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCategory)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(pf)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppint)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -6905,7 +6905,7 @@ func (self *IDvdGraphBuilder) GetFiltergraph(ppGB **IGraphBuilder) error {
 }
 
 // GetDvdInterface dispatches through IDvdGraphBuilder's vtable slot 4.
-func (self *IDvdGraphBuilder) GetDvdInterface(riid *win32.GUID, ppvIF *unsafe.Pointer) error {
+func (self *IDvdGraphBuilder) GetDvdInterface(riid *win32.GUID, ppvIF **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvIF)))
 	return win32.HRESULTError(int32(r1))
 }

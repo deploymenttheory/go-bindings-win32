@@ -1799,7 +1799,7 @@ func RouterFreePrinterNotifyInfo(pInfo *PRINTER_NOTIFY_INFO) bool {
 }
 
 // RouterGetPrintClassObject calls SPOOLSS!RouterGetPrintClassObject.
-func RouterGetPrintClassObject(pPrinter string, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func RouterGetPrintClassObject(pPrinter string, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pPrinter := win32.UTF16Ptr(pPrinter)
 	r1, _, _ := syscall.SyscallN(procRouterGetPrintClassObject.Addr(), uintptr(unsafe.Pointer(_pPrinter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))

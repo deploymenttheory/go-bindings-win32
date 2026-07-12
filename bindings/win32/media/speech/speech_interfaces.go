@@ -768,7 +768,7 @@ func (self *ISpObjectToken) GetCategory(ppTokenCategory **ISpObjectTokenCategory
 }
 
 // CreateInstance dispatches through ISpObjectToken's vtable slot 18.
-func (self *ISpObjectToken) CreateInstance(pUnkOuter *systemcom.IUnknown, dwClsContext uint32, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+func (self *ISpObjectToken) CreateInstance(pUnkOuter *systemcom.IUnknown, dwClsContext uint32, riid *win32.GUID, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(dwClsContext), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1792,7 +1792,7 @@ func (self *ISpResourceManager) SetObject(guidServiceId *win32.GUID, pUnkObject 
 }
 
 // GetObject dispatches through ISpResourceManager's vtable slot 5.
-func (self *ISpResourceManager) GetObject(guidServiceId *win32.GUID, ObjectCLSID *win32.GUID, ObjectIID *win32.GUID, fReleaseWhenLastExternalRefReleased bool, ppObject *unsafe.Pointer) error {
+func (self *ISpResourceManager) GetObject(guidServiceId *win32.GUID, ObjectCLSID *win32.GUID, ObjectIID *win32.GUID, fReleaseWhenLastExternalRefReleased bool, ppObject **win32.IUnknown) error {
 	_fReleaseWhenLastExternalRefReleased := win32.Bool32(fReleaseWhenLastExternalRefReleased)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidServiceId)), uintptr(unsafe.Pointer(ObjectCLSID)), uintptr(unsafe.Pointer(ObjectIID)), uintptr(_fReleaseWhenLastExternalRefReleased), uintptr(unsafe.Pointer(ppObject)))
 	return win32.HRESULTError(int32(r1))

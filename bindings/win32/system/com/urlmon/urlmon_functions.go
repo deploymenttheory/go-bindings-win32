@@ -94,7 +94,7 @@ var (
 )
 
 // CoGetClassObjectFromURL calls urlmon!CoGetClassObjectFromURL.
-func CoGetClassObjectFromURL(rCLASSID *win32.GUID, szCODE string, dwFileVersionMS uint32, dwFileVersionLS uint32, szTYPE string, pBindCtx *systemcom.IBindCtx, dwClsContext systemcom.CLSCTX, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func CoGetClassObjectFromURL(rCLASSID *win32.GUID, szCODE string, dwFileVersionMS uint32, dwFileVersionLS uint32, szTYPE string, pBindCtx *systemcom.IBindCtx, dwClsContext systemcom.CLSCTX, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_szCODE := win32.UTF16Ptr(szCODE)
 	_szTYPE := win32.UTF16Ptr(szTYPE)
 	r1, _, _ := syscall.SyscallN(procCoGetClassObjectFromURL.Addr(), uintptr(unsafe.Pointer(rCLASSID)), uintptr(unsafe.Pointer(_szCODE)), uintptr(dwFileVersionMS), uintptr(dwFileVersionLS), uintptr(unsafe.Pointer(_szTYPE)), uintptr(unsafe.Pointer(pBindCtx)), uintptr(dwClsContext), 0, uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))

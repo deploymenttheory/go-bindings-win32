@@ -50,7 +50,7 @@ func LoadIFilter(pwcsPath string, pUnkOuter *systemcom.IUnknown, ppIUnk *unsafe.
 }
 
 // LoadIFilterEx calls query!LoadIFilterEx.
-func LoadIFilterEx(pwcsPath string, dwFlags uint32, riid *win32.GUID, ppIUnk *unsafe.Pointer) error {
+func LoadIFilterEx(pwcsPath string, dwFlags uint32, riid *win32.GUID, ppIUnk **win32.IUnknown) error {
 	_pwcsPath := win32.UTF16Ptr(pwcsPath)
 	r1, _, _ := syscall.SyscallN(procLoadIFilterEx.Addr(), uintptr(unsafe.Pointer(_pwcsPath)), uintptr(dwFlags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppIUnk)))
 	return win32.HRESULTError(int32(r1))

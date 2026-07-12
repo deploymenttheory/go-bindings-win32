@@ -1555,7 +1555,7 @@ type ICreatePropBagOnRegKey struct {
 var IID_ICreatePropBagOnRegKey = win32.GUID{Data1: 0x8a674b48, Data2: 0x1f63, Data3: 0x11d3, Data4: [8]byte{0xb6, 0x4c, 0x00, 0xc0, 0x4f, 0x79, 0x49, 0x8e}}
 
 // Create dispatches through ICreatePropBagOnRegKey's vtable slot 3.
-func (self *ICreatePropBagOnRegKey) Create(hkey systemregistry.HKEY, subkey string, ulOptions uint32, samDesired uint32, iid *win32.GUID, ppBag *unsafe.Pointer) error {
+func (self *ICreatePropBagOnRegKey) Create(hkey systemregistry.HKEY, subkey string, ulOptions uint32, samDesired uint32, iid *win32.GUID, ppBag **win32.IUnknown) error {
 	_subkey := win32.UTF16Ptr(subkey)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hkey), uintptr(unsafe.Pointer(_subkey)), uintptr(ulOptions), uintptr(samDesired), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(ppBag)))
 	return win32.HRESULTError(int32(r1))

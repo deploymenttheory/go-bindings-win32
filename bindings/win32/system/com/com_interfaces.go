@@ -288,7 +288,7 @@ type IAddrExclusionControl struct {
 var IID_IAddrExclusionControl = win32.GUID{Data1: 0x00000148, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // GetCurrentAddrExclusionList dispatches through IAddrExclusionControl's vtable slot 3.
-func (self *IAddrExclusionControl) GetCurrentAddrExclusionList(riid *win32.GUID, ppEnumerator *unsafe.Pointer) error {
+func (self *IAddrExclusionControl) GetCurrentAddrExclusionList(riid *win32.GUID, ppEnumerator **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppEnumerator)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -391,7 +391,7 @@ func (self *IAsyncManager) CompleteCall(Result foundation.HRESULT) error {
 }
 
 // GetCallContext dispatches through IAsyncManager's vtable slot 4.
-func (self *IAsyncManager) GetCallContext(riid *win32.GUID, pInterface *unsafe.Pointer) error {
+func (self *IAsyncManager) GetCallContext(riid *win32.GUID, pInterface **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pInterface)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -544,13 +544,13 @@ func (self *IBindHost) CreateMoniker(szName string, pBC *IBindCtx, ppmk **IMonik
 }
 
 // MonikerBindToStorage dispatches through IBindHost's vtable slot 4.
-func (self *IBindHost) MonikerBindToStorage(pMk *IMoniker, pBC *IBindCtx, pBSC *IBindStatusCallback, riid *win32.GUID, ppvObj *unsafe.Pointer) error {
+func (self *IBindHost) MonikerBindToStorage(pMk *IMoniker, pBC *IBindCtx, pBSC *IBindStatusCallback, riid *win32.GUID, ppvObj **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMk)), uintptr(unsafe.Pointer(pBC)), uintptr(unsafe.Pointer(pBSC)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObj)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // MonikerBindToObject dispatches through IBindHost's vtable slot 5.
-func (self *IBindHost) MonikerBindToObject(pMk *IMoniker, pBC *IBindCtx, pBSC *IBindStatusCallback, riid *win32.GUID, ppvObj *unsafe.Pointer) error {
+func (self *IBindHost) MonikerBindToObject(pMk *IMoniker, pBC *IBindCtx, pBSC *IBindStatusCallback, riid *win32.GUID, ppvObj **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMk)), uintptr(unsafe.Pointer(pBC)), uintptr(unsafe.Pointer(pBSC)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObj)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1731,7 +1731,7 @@ func (self *IGlobalInterfaceTable) RevokeInterfaceFromGlobal(dwCookie uint32) er
 }
 
 // GetInterfaceFromGlobal dispatches through IGlobalInterfaceTable's vtable slot 5.
-func (self *IGlobalInterfaceTable) GetInterfaceFromGlobal(dwCookie uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IGlobalInterfaceTable) GetInterfaceFromGlobal(dwCookie uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwCookie), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1800,7 +1800,7 @@ type IInternalUnknown struct {
 var IID_IInternalUnknown = win32.GUID{Data1: 0x00000021, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // QueryInternalInterface dispatches through IInternalUnknown's vtable slot 3.
-func (self *IInternalUnknown) QueryInternalInterface(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IInternalUnknown) QueryInternalInterface(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -2124,7 +2124,7 @@ type IPSFactoryBuffer struct {
 var IID_IPSFactoryBuffer = win32.GUID{Data1: 0xd5f569d0, Data2: 0x593b, Data3: 0x101a, Data4: [8]byte{0xb5, 0x69, 0x08, 0x00, 0x2b, 0x2d, 0xbf, 0x7a}}
 
 // CreateProxy dispatches through IPSFactoryBuffer's vtable slot 3.
-func (self *IPSFactoryBuffer) CreateProxy(pUnkOuter *IUnknown, riid *win32.GUID, ppProxy **IRpcProxyBuffer, ppv *unsafe.Pointer) error {
+func (self *IPSFactoryBuffer) CreateProxy(pUnkOuter *IUnknown, riid *win32.GUID, ppProxy **IRpcProxyBuffer, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppProxy)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -2573,7 +2573,7 @@ func (self *IRpcChannelBuffer3) Cancel(pMsg *RPCOLEMESSAGE) error {
 }
 
 // GetCallContext dispatches through IRpcChannelBuffer3's vtable slot 12.
-func (self *IRpcChannelBuffer3) GetCallContext(pMsg *RPCOLEMESSAGE, riid *win32.GUID, pInterface *unsafe.Pointer) error {
+func (self *IRpcChannelBuffer3) GetCallContext(pMsg *RPCOLEMESSAGE, riid *win32.GUID, pInterface **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMsg)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pInterface)))
 	return win32.HRESULTError(int32(r1))
 }

@@ -63,21 +63,21 @@ func CallFunctionShim(szDllName string, szFunctionName foundation.PSTR, lpvArgum
 }
 
 // ClrCreateManagedInstance calls MSCorEE!ClrCreateManagedInstance.
-func ClrCreateManagedInstance(pTypeName string, riid *win32.GUID, ppObject *unsafe.Pointer) error {
+func ClrCreateManagedInstance(pTypeName string, riid *win32.GUID, ppObject **win32.IUnknown) error {
 	_pTypeName := win32.UTF16Ptr(pTypeName)
 	r1, _, _ := syscall.SyscallN(procClrCreateManagedInstance.Addr(), uintptr(unsafe.Pointer(_pTypeName)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppObject)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CorBindToCurrentRuntime calls MSCorEE!CorBindToCurrentRuntime.
-func CorBindToCurrentRuntime(pwszFileName string, rclsid *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func CorBindToCurrentRuntime(pwszFileName string, rclsid *win32.GUID, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pwszFileName := win32.UTF16Ptr(pwszFileName)
 	r1, _, _ := syscall.SyscallN(procCorBindToCurrentRuntime.Addr(), uintptr(unsafe.Pointer(_pwszFileName)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CorBindToRuntime calls MSCorEE!CorBindToRuntime.
-func CorBindToRuntime(pwszVersion string, pwszBuildFlavor string, rclsid *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func CorBindToRuntime(pwszVersion string, pwszBuildFlavor string, rclsid *win32.GUID, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pwszVersion := win32.UTF16Ptr(pwszVersion)
 	_pwszBuildFlavor := win32.UTF16Ptr(pwszBuildFlavor)
 	r1, _, _ := syscall.SyscallN(procCorBindToRuntime.Addr(), uintptr(unsafe.Pointer(_pwszVersion)), uintptr(unsafe.Pointer(_pwszBuildFlavor)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
@@ -85,13 +85,13 @@ func CorBindToRuntime(pwszVersion string, pwszBuildFlavor string, rclsid *win32.
 }
 
 // CorBindToRuntimeByCfg calls MSCorEE!CorBindToRuntimeByCfg.
-func CorBindToRuntimeByCfg(pCfgStream *systemcom.IStream, reserved uint32, startupFlags uint32, rclsid *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func CorBindToRuntimeByCfg(pCfgStream *systemcom.IStream, reserved uint32, startupFlags uint32, rclsid *win32.GUID, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCorBindToRuntimeByCfg.Addr(), uintptr(unsafe.Pointer(pCfgStream)), uintptr(reserved), uintptr(startupFlags), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CorBindToRuntimeEx calls MSCorEE!CorBindToRuntimeEx.
-func CorBindToRuntimeEx(pwszVersion string, pwszBuildFlavor string, startupFlags uint32, rclsid *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func CorBindToRuntimeEx(pwszVersion string, pwszBuildFlavor string, startupFlags uint32, rclsid *win32.GUID, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pwszVersion := win32.UTF16Ptr(pwszVersion)
 	_pwszBuildFlavor := win32.UTF16Ptr(pwszBuildFlavor)
 	r1, _, _ := syscall.SyscallN(procCorBindToRuntimeEx.Addr(), uintptr(unsafe.Pointer(_pwszVersion)), uintptr(unsafe.Pointer(_pwszBuildFlavor)), uintptr(startupFlags), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
@@ -99,7 +99,7 @@ func CorBindToRuntimeEx(pwszVersion string, pwszBuildFlavor string, startupFlags
 }
 
 // CorBindToRuntimeHost calls MSCorEE!CorBindToRuntimeHost.
-func CorBindToRuntimeHost(pwszVersion string, pwszBuildFlavor string, pwszHostConfigFile string, pReserved unsafe.Pointer, startupFlags uint32, rclsid *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func CorBindToRuntimeHost(pwszVersion string, pwszBuildFlavor string, pwszHostConfigFile string, pReserved unsafe.Pointer, startupFlags uint32, rclsid *win32.GUID, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pwszVersion := win32.UTF16Ptr(pwszVersion)
 	_pwszBuildFlavor := win32.UTF16Ptr(pwszBuildFlavor)
 	_pwszHostConfigFile := win32.UTF16Ptr(pwszHostConfigFile)

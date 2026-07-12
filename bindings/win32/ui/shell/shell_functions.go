@@ -1561,7 +1561,7 @@ func HlinkResolveMonikerForData(pimkReference *systemcom.IMoniker, reserved uint
 }
 
 // HlinkResolveShortcut calls hlink!HlinkResolveShortcut.
-func HlinkResolveShortcut(pwzShortcutFileName string, pihlsite *IHlinkSite, dwSiteData uint32, piunkOuter *systemcom.IUnknown, riid *win32.GUID, ppvObj *unsafe.Pointer) error {
+func HlinkResolveShortcut(pwzShortcutFileName string, pihlsite *IHlinkSite, dwSiteData uint32, piunkOuter *systemcom.IUnknown, riid *win32.GUID, ppvObj **win32.IUnknown) error {
 	_pwzShortcutFileName := win32.UTF16Ptr(pwzShortcutFileName)
 	r1, _, _ := syscall.SyscallN(procHlinkResolveShortcut.Addr(), uintptr(unsafe.Pointer(_pwzShortcutFileName)), uintptr(unsafe.Pointer(pihlsite)), uintptr(dwSiteData), uintptr(unsafe.Pointer(piunkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObj)))
 	return win32.HRESULTError(int32(r1))

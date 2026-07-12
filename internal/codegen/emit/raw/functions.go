@@ -554,18 +554,69 @@ func isVoidDoublePointer(ref *win32meta.TypeRef) bool {
 	return ref.Kind == "PointerTo" && ref.Child != nil && isVoidPointer(ref.Child)
 }
 
-// retypeComOutParams upgrades void** [out] params carrying [ComOutPtr] or an
-// [IidParameterIndex] linkage to **win32.IUnknown: the metadata guarantees
-// the slot receives a COM object pointer (the concrete interface is selected
-// at runtime by the riid argument). The marshaling word is unchanged; a
-// [retval] param retyped here elevates through the normal retValElement path.
+// isGuidPointer reports whether a metadata type is literally GUID*.
+func isGuidPointer(ref *win32meta.TypeRef) bool {
+	return ref.Kind == "PointerTo" && ref.Child != nil &&
+		ref.Child.Kind == "Native" && ref.Child.Name == "Guid"
+}
+
+// iidPairedOutParams detects un-attributed riid/void** pairs: an input GUID
+// pointer whose name contains "iid" selects the interface a void** [out]
+// param receives, but the winmd carries no [ComOutPtr] on it (windows-rs
+// applies the same shape heuristic). A void** out qualifies when the iid
+// param immediately precedes it, or when the signature holds exactly one iid
+// param and exactly one non-reserved void** out (order-agnostic; attributed
+// void** outs count toward uniqueness so they keep the sole riid to
+// themselves). Returns the qualifying param indexes.
+func iidPairedOutParams(params []win32meta.Param) map[int]bool {
+	var iids, candidates, voidPPOuts []int
+	for i := range params {
+		param := &params[i]
+		switch {
+		case isGuidPointer(&param.Type) && param.IsIn && !param.IsOut && !param.IsReserved &&
+			strings.Contains(strings.ToLower(param.Name), "iid"):
+			iids = append(iids, i)
+		case isVoidDoublePointer(&param.Type) && param.IsOut && !param.IsReserved:
+			voidPPOuts = append(voidPPOuts, i)
+			if !param.IsComOutPtr && param.IidParamIndex < 0 {
+				candidates = append(candidates, i)
+			}
+		}
+	}
+	if len(candidates) == 0 || len(iids) == 0 {
+		return nil
+	}
+	uniquePair := len(iids) == 1 && len(voidPPOuts) == 1
+	paired := map[int]bool{}
+	for _, c := range candidates {
+		adjacent := false
+		for _, g := range iids {
+			if g == c-1 {
+				adjacent = true
+			}
+		}
+		if adjacent || uniquePair {
+			paired[c] = true
+		}
+	}
+	return paired
+}
+
+// retypeComOutParams upgrades void** [out] params known to receive a COM
+// object pointer to **win32.IUnknown: either the metadata says so directly
+// ([ComOutPtr] or an [IidParameterIndex] linkage) or the signature carries an
+// un-attributed riid/void** pair (iidPairedOutParams). The concrete interface
+// is selected at runtime by the riid argument; the marshaling word is
+// unchanged, and a [retval] param retyped here elevates through the normal
+// retValElement path.
 func retypeComOutParams(params []win32meta.Param, resolved []typemap.Resolved, imports typemap.ImportSet, modulePath string) {
+	paired := iidPairedOutParams(params)
 	for i := range params {
 		param := &params[i]
 		if !param.IsOut || param.IsReserved {
 			continue
 		}
-		if !param.IsComOutPtr && param.IidParamIndex < 0 {
+		if !param.IsComOutPtr && param.IidParamIndex < 0 && !paired[i] {
 			continue
 		}
 		if !isVoidDoublePointer(&param.Type) {

@@ -169,7 +169,7 @@ func (self *INetCfg) FindComponent(pszwInfId string, pComponent **INetCfgCompone
 }
 
 // QueryNetCfgClass dispatches through INetCfg's vtable slot 9.
-func (self *INetCfg) QueryNetCfgClass(pguidClass *win32.GUID, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+func (self *INetCfg) QueryNetCfgClass(pguidClass *win32.GUID, riid *win32.GUID, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidClass)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
 	return win32.HRESULTError(int32(r1))
 }

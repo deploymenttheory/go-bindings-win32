@@ -1423,7 +1423,7 @@ func (self *IDirect3DDeviceManager9) UnlockDevice(hDevice foundation.HANDLE, fSa
 }
 
 // GetVideoService dispatches through IDirect3DDeviceManager9's vtable slot 9.
-func (self *IDirect3DDeviceManager9) GetVideoService(hDevice foundation.HANDLE, riid *win32.GUID, ppService *unsafe.Pointer) error {
+func (self *IDirect3DDeviceManager9) GetVideoService(hDevice foundation.HANDLE, riid *win32.GUID, ppService **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(hDevice), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppService)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -4477,7 +4477,7 @@ type IMFDXGIBuffer struct {
 var IID_IMFDXGIBuffer = win32.GUID{Data1: 0xe7174cfa, Data2: 0x1c9e, Data3: 0x48b1, Data4: [8]byte{0x88, 0x66, 0x62, 0x62, 0x26, 0xbf, 0xc2, 0x58}}
 
 // GetResource dispatches through IMFDXGIBuffer's vtable slot 3.
-func (self *IMFDXGIBuffer) GetResource(riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+func (self *IMFDXGIBuffer) GetResource(riid *win32.GUID, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -4489,7 +4489,7 @@ func (self *IMFDXGIBuffer) GetSubresourceIndex(puSubresource *uint32) error {
 }
 
 // GetUnknown dispatches through IMFDXGIBuffer's vtable slot 5.
-func (self *IMFDXGIBuffer) GetUnknown(guid *win32.GUID, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+func (self *IMFDXGIBuffer) GetUnknown(guid *win32.GUID, riid *win32.GUID, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -4548,13 +4548,13 @@ func (self *IMFDXGIDeviceManager) CloseDeviceHandle(hDevice foundation.HANDLE) e
 }
 
 // GetVideoService dispatches through IMFDXGIDeviceManager's vtable slot 4.
-func (self *IMFDXGIDeviceManager) GetVideoService(hDevice foundation.HANDLE, riid *win32.GUID, ppService *unsafe.Pointer) error {
+func (self *IMFDXGIDeviceManager) GetVideoService(hDevice foundation.HANDLE, riid *win32.GUID, ppService **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hDevice), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppService)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // LockDevice dispatches through IMFDXGIDeviceManager's vtable slot 5.
-func (self *IMFDXGIDeviceManager) LockDevice(hDevice foundation.HANDLE, riid *win32.GUID, ppUnkDevice *unsafe.Pointer, fBlock bool) error {
+func (self *IMFDXGIDeviceManager) LockDevice(hDevice foundation.HANDLE, riid *win32.GUID, ppUnkDevice **win32.IUnknown, fBlock bool) error {
 	_fBlock := win32.Bool32(fBlock)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hDevice), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppUnkDevice)), uintptr(_fBlock))
 	return win32.HRESULTError(int32(r1))
@@ -5296,7 +5296,7 @@ type IMFInputTrustAuthority struct {
 var IID_IMFInputTrustAuthority = win32.GUID{Data1: 0xd19f8e98, Data2: 0xb126, Data3: 0x4446, Data4: [8]byte{0x89, 0x0c, 0x5d, 0xcb, 0x7a, 0xd7, 0x14, 0x53}}
 
 // GetDecrypter dispatches through IMFInputTrustAuthority's vtable slot 3.
-func (self *IMFInputTrustAuthority) GetDecrypter(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IMFInputTrustAuthority) GetDecrypter(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -5684,7 +5684,7 @@ type IMFMediaEngineClassFactory4 struct {
 var IID_IMFMediaEngineClassFactory4 = win32.GUID{Data1: 0xfbe256c1, Data2: 0x43cf, Data3: 0x4a9b, Data4: [8]byte{0x8c, 0xb8, 0xce, 0x86, 0x32, 0xa3, 0x41, 0x86}}
 
 // CreateContentDecryptionModuleFactory dispatches through IMFMediaEngineClassFactory4's vtable slot 3.
-func (self *IMFMediaEngineClassFactory4) CreateContentDecryptionModuleFactory(keySystem string, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+func (self *IMFMediaEngineClassFactory4) CreateContentDecryptionModuleFactory(keySystem string, riid *win32.GUID, ppvObject **win32.IUnknown) error {
 	_keySystem := win32.UTF16Ptr(keySystem)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_keySystem)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
 	return win32.HRESULTError(int32(r1))
@@ -7601,7 +7601,7 @@ func (self *IMFObjectReferenceStream) SaveReference(riid *win32.GUID, pUnk *syst
 }
 
 // LoadReference dispatches through IMFObjectReferenceStream's vtable slot 4.
-func (self *IMFObjectReferenceStream) LoadReference(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IMFObjectReferenceStream) LoadReference(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -8663,13 +8663,13 @@ type IMFRemoteProxy struct {
 var IID_IMFRemoteProxy = win32.GUID{Data1: 0x994e23ad, Data2: 0x1cc2, Data3: 0x493c, Data4: [8]byte{0xb9, 0xfa, 0x46, 0xf1, 0xcb, 0x04, 0x0f, 0xa4}}
 
 // GetRemoteObject dispatches through IMFRemoteProxy's vtable slot 3.
-func (self *IMFRemoteProxy) GetRemoteObject(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IMFRemoteProxy) GetRemoteObject(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetRemoteHost dispatches through IMFRemoteProxy's vtable slot 4.
-func (self *IMFRemoteProxy) GetRemoteHost(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IMFRemoteProxy) GetRemoteHost(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -9676,7 +9676,7 @@ func (self *IMFSinkWriter) Finalize() error {
 }
 
 // GetServiceForStream dispatches through IMFSinkWriter's vtable slot 12.
-func (self *IMFSinkWriter) GetServiceForStream(dwStreamIndex uint32, guidService *win32.GUID, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+func (self *IMFSinkWriter) GetServiceForStream(dwStreamIndex uint32, guidService *win32.GUID, riid *win32.GUID, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(unsafe.Pointer(guidService)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -9957,7 +9957,7 @@ func (self *IMFSourceReader) Flush(dwStreamIndex uint32) error {
 }
 
 // GetServiceForStream dispatches through IMFSourceReader's vtable slot 11.
-func (self *IMFSourceReader) GetServiceForStream(dwStreamIndex uint32, guidService *win32.GUID, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+func (self *IMFSourceReader) GetServiceForStream(dwStreamIndex uint32, guidService *win32.GUID, riid *win32.GUID, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(unsafe.Pointer(guidService)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -11204,7 +11204,7 @@ type IMFTopologyServiceLookup struct {
 var IID_IMFTopologyServiceLookup = win32.GUID{Data1: 0xfa993889, Data2: 0x4383, Data3: 0x415a, Data4: [8]byte{0xa9, 0x30, 0xdd, 0x47, 0x2a, 0x8c, 0xf6, 0xf7}}
 
 // LookupService dispatches through IMFTopologyServiceLookup's vtable slot 3.
-func (self *IMFTopologyServiceLookup) LookupService(Type MF_SERVICE_LOOKUP_TYPE, dwIndex uint32, guidService *win32.GUID, riid *win32.GUID, ppvObjects *unsafe.Pointer, pnObjects *uint32) error {
+func (self *IMFTopologyServiceLookup) LookupService(Type MF_SERVICE_LOOKUP_TYPE, dwIndex uint32, guidService *win32.GUID, riid *win32.GUID, ppvObjects **win32.IUnknown, pnObjects *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(dwIndex), uintptr(unsafe.Pointer(guidService)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObjects)), uintptr(unsafe.Pointer(pnObjects)))
 	return win32.HRESULTError(int32(r1))
 }

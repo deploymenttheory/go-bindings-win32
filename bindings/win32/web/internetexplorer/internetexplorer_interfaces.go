@@ -1523,7 +1523,7 @@ func (self *ISurfacePresenterFlip) Present() error {
 }
 
 // GetBuffer dispatches through ISurfacePresenterFlip's vtable slot 4.
-func (self *ISurfacePresenterFlip) GetBuffer(backBufferIndex uint32, riid *win32.GUID, ppBuffer *unsafe.Pointer) error {
+func (self *ISurfacePresenterFlip) GetBuffer(backBufferIndex uint32, riid *win32.GUID, ppBuffer **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(backBufferIndex), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1551,7 +1551,7 @@ type ISurfacePresenterFlipBuffer struct {
 var IID_ISurfacePresenterFlipBuffer = win32.GUID{Data1: 0xe43f4a08, Data2: 0x8bbc, Data3: 0x4665, Data4: [8]byte{0xac, 0x92, 0xc5, 0x5c, 0xe6, 0x1f, 0xd7, 0xe7}}
 
 // BeginDraw dispatches through ISurfacePresenterFlipBuffer's vtable slot 3.
-func (self *ISurfacePresenterFlipBuffer) BeginDraw(riid *win32.GUID, ppBuffer *unsafe.Pointer) error {
+func (self *ISurfacePresenterFlipBuffer) BeginDraw(riid *win32.GUID, ppBuffer **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppBuffer)))
 	return win32.HRESULTError(int32(r1))
 }

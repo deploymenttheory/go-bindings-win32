@@ -760,7 +760,7 @@ type IGetDispenser struct {
 var IID_IGetDispenser = win32.GUID{Data1: 0xc23cc370, Data2: 0x87ef, Data3: 0x11ce, Data4: [8]byte{0x80, 0x81, 0x00, 0x80, 0xc7, 0x58, 0x52, 0x7e}}
 
 // GetDispenser dispatches through IGetDispenser's vtable slot 3.
-func (self *IGetDispenser) GetDispenser(iid *win32.GUID, ppvObject *unsafe.Pointer) error {
+func (self *IGetDispenser) GetDispenser(iid *win32.GUID, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(ppvObject)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -893,7 +893,7 @@ func (self *IResourceManager) ReenlistmentComplete() error {
 }
 
 // GetDistributedTransactionManager dispatches through IResourceManager's vtable slot 6.
-func (self *IResourceManager) GetDistributedTransactionManager(iid *win32.GUID, ppvObject *unsafe.Pointer) error {
+func (self *IResourceManager) GetDistributedTransactionManager(iid *win32.GUID, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(ppvObject)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -941,7 +941,7 @@ type IResourceManagerFactory2 struct {
 var IID_IResourceManagerFactory2 = win32.GUID{Data1: 0x6b369c21, Data2: 0xfbd2, Data3: 0x11d1, Data4: [8]byte{0x8f, 0x47, 0x00, 0xc0, 0x4f, 0x8e, 0xe5, 0x7d}}
 
 // CreateEx dispatches through IResourceManagerFactory2's vtable slot 4.
-func (self *IResourceManagerFactory2) CreateEx(pguidRM *win32.GUID, pszRMName foundation.PSTR, pIResMgrSink *IResourceManagerSink, riidRequested *win32.GUID, ppvResMgr *unsafe.Pointer) error {
+func (self *IResourceManagerFactory2) CreateEx(pguidRM *win32.GUID, pszRMName foundation.PSTR, pIResMgrSink *IResourceManagerSink, riidRequested *win32.GUID, ppvResMgr **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidRM)), uintptr(unsafe.Pointer(pszRMName)), uintptr(unsafe.Pointer(pIResMgrSink)), uintptr(unsafe.Pointer(riidRequested)), uintptr(unsafe.Pointer(ppvResMgr)))
 	return win32.HRESULTError(int32(r1))
 }

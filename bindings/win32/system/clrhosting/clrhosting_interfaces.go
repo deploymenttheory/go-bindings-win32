@@ -169,7 +169,7 @@ type ICLRControl struct {
 var IID_ICLRControl = win32.GUID{Data1: 0x9065597e, Data2: 0xd1a1, Data3: 0x4fb2, Data4: [8]byte{0xb6, 0xba, 0x7e, 0x1f, 0xce, 0x23, 0x0f, 0x61}}
 
 // GetCLRManager dispatches through ICLRControl's vtable slot 3.
-func (self *ICLRControl) GetCLRManager(riid *win32.GUID, ppObject *unsafe.Pointer) error {
+func (self *ICLRControl) GetCLRManager(riid *win32.GUID, ppObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppObject)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1658,7 +1658,7 @@ type IHostControl struct {
 var IID_IHostControl = win32.GUID{Data1: 0x02ca073c, Data2: 0x7079, Data3: 0x4860, Data4: [8]byte{0x88, 0x0a, 0xc2, 0xf7, 0xa4, 0x49, 0xc9, 0x91}}
 
 // GetHostManager dispatches through IHostControl's vtable slot 3.
-func (self *IHostControl) GetHostManager(riid *win32.GUID, ppObject *unsafe.Pointer) error {
+func (self *IHostControl) GetHostManager(riid *win32.GUID, ppObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppObject)))
 	return win32.HRESULTError(int32(r1))
 }

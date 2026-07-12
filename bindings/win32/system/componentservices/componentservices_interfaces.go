@@ -1531,7 +1531,7 @@ func (self *IComTrackingInfoCollection) Count(pCount *uint32) error {
 }
 
 // Item dispatches through IComTrackingInfoCollection's vtable slot 5.
-func (self *IComTrackingInfoCollection) Item(ulIndex uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IComTrackingInfoCollection) Item(ulIndex uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(ulIndex), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1770,7 +1770,7 @@ type ICreateWithLocalTransaction struct {
 var IID_ICreateWithLocalTransaction = win32.GUID{Data1: 0x227ac7a8, Data2: 0x8423, Data3: 0x42ce, Data4: [8]byte{0xb7, 0xcf, 0x03, 0x06, 0x1e, 0xc9, 0xaa, 0xa3}}
 
 // CreateInstanceWithSysTx dispatches through ICreateWithLocalTransaction's vtable slot 3.
-func (self *ICreateWithLocalTransaction) CreateInstanceWithSysTx(pTransaction *systemcom.IUnknown, rclsid *win32.GUID, riid *win32.GUID, pObject *unsafe.Pointer) error {
+func (self *ICreateWithLocalTransaction) CreateInstanceWithSysTx(pTransaction *systemcom.IUnknown, rclsid *win32.GUID, riid *win32.GUID, pObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTransaction)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pObject)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -2775,7 +2775,7 @@ type IObjectContext struct {
 var IID_IObjectContext = win32.GUID{Data1: 0x51372ae0, Data2: 0xcae7, Data3: 0x11cf, Data4: [8]byte{0xbe, 0x81, 0x00, 0xaa, 0x00, 0xa2, 0xfa, 0x25}}
 
 // CreateInstance dispatches through IObjectContext's vtable slot 3.
-func (self *IObjectContext) CreateInstance(rclsid *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IObjectContext) CreateInstance(rclsid *win32.GUID, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -3311,7 +3311,7 @@ func (self *IServicePool) Initialize(pPoolConfig *systemcom.IUnknown) error {
 }
 
 // GetObject dispatches through IServicePool's vtable slot 4.
-func (self *IServicePool) GetObject(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IServicePool) GetObject(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }

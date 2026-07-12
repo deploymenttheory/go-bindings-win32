@@ -996,7 +996,7 @@ func (self *IDiscMaster) GetActiveDiscMasterFormat(lpiid *win32.GUID) error {
 }
 
 // SetActiveDiscMasterFormat dispatches through IDiscMaster's vtable slot 6.
-func (self *IDiscMaster) SetActiveDiscMasterFormat(riid *win32.GUID, ppUnk *unsafe.Pointer) error {
+func (self *IDiscMaster) SetActiveDiscMasterFormat(riid *win32.GUID, ppUnk **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppUnk)))
 	return win32.HRESULTError(int32(r1))
 }

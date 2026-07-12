@@ -1690,7 +1690,7 @@ func (self *IBrowserService2) CreateViewWindow(psvNew *IShellView, psvOld *IShel
 }
 
 // CreateBrowserPropSheetExt dispatches through IBrowserService2's vtable slot 46.
-func (self *IBrowserService2) CreateBrowserPropSheetExt(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IBrowserService2) CreateBrowserPropSheetExt(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -3592,7 +3592,7 @@ func (self *IDockingWindowFrame) RemoveToolbar(punkSrc *systemcom.IUnknown, dwRe
 }
 
 // FindToolbar dispatches through IDockingWindowFrame's vtable slot 7.
-func (self *IDockingWindowFrame) FindToolbar(pwszItem string, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IDockingWindowFrame) FindToolbar(pwszItem string, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pwszItem := win32.UTF16Ptr(pwszItem)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszItem)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
@@ -3952,8 +3952,12 @@ type IEnumObjects struct {
 var IID_IEnumObjects = win32.GUID{Data1: 0x2c1c7e2e, Data2: 0x2d0e, Data3: 0x4059, Data4: [8]byte{0x83, 0x1e, 0x1e, 0x6f, 0x82, 0x33, 0x5c, 0x2e}}
 
 // Next dispatches through IEnumObjects's vtable slot 3.
-func (self *IEnumObjects) Next(celt uint32, riid *win32.GUID, rgelt *unsafe.Pointer, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumObjects) Next(riid *win32.GUID, rgelt []*win32.IUnknown, pceltFetched *uint32) error {
+	var _rgelt **win32.IUnknown
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -7576,13 +7580,13 @@ func (self *INameSpaceTreeControlEvents) OnItemDeleted(psi *IShellItem, fIsRoot 
 }
 
 // OnBeforeContextMenu dispatches through INameSpaceTreeControlEvents's vtable slot 17.
-func (self *INameSpaceTreeControlEvents) OnBeforeContextMenu(psi *IShellItem, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *INameSpaceTreeControlEvents) OnBeforeContextMenu(psi *IShellItem, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(psi)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // OnAfterContextMenu dispatches through INameSpaceTreeControlEvents's vtable slot 18.
-func (self *INameSpaceTreeControlEvents) OnAfterContextMenu(psi *IShellItem, pcmIn *IContextMenu, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *INameSpaceTreeControlEvents) OnAfterContextMenu(psi *IShellItem, pcmIn *IContextMenu, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(psi)), uintptr(unsafe.Pointer(pcmIn)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -8823,7 +8827,7 @@ func (self *IQueryAssociations) GetData(flags ASSOCF, data ASSOCDATA, pszExtra s
 }
 
 // GetEnum dispatches through IQueryAssociations's vtable slot 7.
-func (self *IQueryAssociations) GetEnum(flags ASSOCF, assocenum ASSOCENUM, pszExtra string, riid *win32.GUID, ppvOut *unsafe.Pointer) error {
+func (self *IQueryAssociations) GetEnum(flags ASSOCF, assocenum ASSOCENUM, pszExtra string, riid *win32.GUID, ppvOut **win32.IUnknown) error {
 	_pszExtra := win32.UTF16Ptr(pszExtra)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(flags), uintptr(assocenum), uintptr(unsafe.Pointer(_pszExtra)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvOut)))
 	return win32.HRESULTError(int32(r1))
@@ -11596,7 +11600,7 @@ func (self *IShellMenu) SetShellFolder(psf *IShellFolder, pidlFolder *uishellcom
 }
 
 // GetShellFolder dispatches through IShellMenu's vtable slot 6.
-func (self *IShellMenu) GetShellFolder(pdwFlags *uint32, ppidl **uishellcommon.ITEMIDLIST, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IShellMenu) GetShellFolder(pdwFlags *uint32, ppidl **uishellcommon.ITEMIDLIST, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)), uintptr(unsafe.Pointer(ppidl)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -14486,7 +14490,7 @@ func (self *ITransferDestination) Unadvise(dwCookie uint32) error {
 }
 
 // CreateItem dispatches through ITransferDestination's vtable slot 5.
-func (self *ITransferDestination) CreateItem(pszName string, dwAttributes uint32, ullSize uint64, flags uint32, riidItem *win32.GUID, ppvItem *unsafe.Pointer, riidResources *win32.GUID, ppvResources *unsafe.Pointer) error {
+func (self *ITransferDestination) CreateItem(pszName string, dwAttributes uint32, ullSize uint64, flags uint32, riidItem *win32.GUID, ppvItem **win32.IUnknown, riidResources *win32.GUID, ppvResources **win32.IUnknown) error {
 	_pszName := win32.UTF16Ptr(pszName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszName)), uintptr(dwAttributes), uintptr(ullSize), uintptr(flags), uintptr(unsafe.Pointer(riidItem)), uintptr(unsafe.Pointer(ppvItem)), uintptr(unsafe.Pointer(riidResources)), uintptr(unsafe.Pointer(ppvResources)))
 	return win32.HRESULTError(int32(r1))
@@ -14529,7 +14533,7 @@ func (self *ITransferSource) SetProperties(pproparray *uishellpropertiessystem.I
 }
 
 // OpenItem dispatches through ITransferSource's vtable slot 6.
-func (self *ITransferSource) OpenItem(psi *IShellItem, flags uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *ITransferSource) OpenItem(psi *IShellItem, flags uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(psi)), uintptr(flags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }

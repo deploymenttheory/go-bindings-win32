@@ -37,7 +37,7 @@ var (
 // MetaDataGetDispenser calls RoMetadata!MetaDataGetDispenser.
 // https://learn.microsoft.com/windows/win32/api/rometadata/nf-rometadata-metadatagetdispenser
 // Minimum OS: windows8.0.
-func MetaDataGetDispenser(rclsid *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func MetaDataGetDispenser(rclsid *win32.GUID, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procMetaDataGetDispenser.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }

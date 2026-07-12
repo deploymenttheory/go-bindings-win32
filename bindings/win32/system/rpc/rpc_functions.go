@@ -547,7 +547,7 @@ func IUnknown_AddRef_Proxy(This *systemcom.IUnknown) uint32 {
 // IUnknown_QueryInterface_Proxy calls RPCRT4!IUnknown_QueryInterface_Proxy.
 // https://learn.microsoft.com/windows/win32/api/unknwnbase/nf-unknwnbase-iunknown_queryinterface_proxy
 // Minimum OS: windows5.0.
-func IUnknown_QueryInterface_Proxy(This *systemcom.IUnknown, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+func IUnknown_QueryInterface_Proxy(This *systemcom.IUnknown, riid *win32.GUID, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procIUnknown_QueryInterface_Proxy.Addr(), uintptr(unsafe.Pointer(This)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
 	return win32.HRESULTError(int32(r1))
 }

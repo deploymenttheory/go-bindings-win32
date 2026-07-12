@@ -202,7 +202,7 @@ func (self *IUIFramework) LoadUI(instance foundation.HINSTANCE, resourceName str
 }
 
 // GetView dispatches through IUIFramework's vtable slot 6.
-func (self *IUIFramework) GetView(viewId uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IUIFramework) GetView(viewId uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(viewId), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }

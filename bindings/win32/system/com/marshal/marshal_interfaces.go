@@ -40,7 +40,7 @@ func (self *IMarshal) MarshalInterface(pStm *systemcom.IStream, riid *win32.GUID
 }
 
 // UnmarshalInterface dispatches through IMarshal's vtable slot 6.
-func (self *IMarshal) UnmarshalInterface(pStm *systemcom.IStream, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IMarshal) UnmarshalInterface(pStm *systemcom.IStream, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStm)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }

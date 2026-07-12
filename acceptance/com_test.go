@@ -7,6 +7,7 @@ import (
 	"unsafe"
 
 	win32 "github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
+	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/data/xml/xmllite"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/dxgi"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/structuredstorage"
@@ -101,5 +102,30 @@ func TestComOutPtrFactory(t *testing.T) {
 	}
 	if win32.UTF16ToString(&desc.Description[0]) == "" {
 		t.Error("adapter description is empty")
+	}
+}
+
+// TestHeuristicRiidPairFactory drives a factory whose void** out-param carries
+// no [ComOutPtr] in the winmd — the riid/void** pair heuristic types it
+// **win32.IUnknown. xmllite.dll needs no CoInitialize or registration.
+func TestHeuristicRiidPairFactory(t *testing.T) {
+	var out *win32.IUnknown
+	if err := xmllite.CreateXmlReader(&xmllite.IID_IXmlReader, &out, nil); err != nil {
+		t.Fatalf("CreateXmlReader: %v", err)
+	}
+	if out == nil {
+		t.Fatal("CreateXmlReader returned nil reader without error")
+	}
+	reader := (*xmllite.IXmlReader)(unsafe.Pointer(out))
+	defer reader.Release()
+
+	// Exercise a method through the cast pointer to prove the vtable lines up:
+	// a reader with no input source yet reports XmlReadState_Closed.
+	var state uintptr
+	if err := reader.GetProperty(uint32(xmllite.XmlReaderProperty_ReadState), &state); err != nil {
+		t.Fatalf("GetProperty(ReadState): %v", err)
+	}
+	if xmllite.XmlReadState(state) != xmllite.XmlReadState_Closed {
+		t.Errorf("ReadState = %v, want XmlReadState_Closed", xmllite.XmlReadState(state))
 	}
 }

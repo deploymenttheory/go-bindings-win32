@@ -111,7 +111,7 @@ func PSCoerceToCanonicalValue(key *foundation.PROPERTYKEY, ppropvar *systemcomst
 // PSCreateAdapterFromPropertyStore calls PROPSYS!PSCreateAdapterFromPropertyStore.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pscreateadapterfrompropertystore
 // Minimum OS: windows5.1.2600.
-func PSCreateAdapterFromPropertyStore(pps *IPropertyStore, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func PSCreateAdapterFromPropertyStore(pps *IPropertyStore, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procPSCreateAdapterFromPropertyStore.Addr(), uintptr(unsafe.Pointer(pps)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -119,7 +119,7 @@ func PSCreateAdapterFromPropertyStore(pps *IPropertyStore, riid *win32.GUID, ppv
 // PSCreateDelayedMultiplexPropertyStore calls PROPSYS!PSCreateDelayedMultiplexPropertyStore.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pscreatedelayedmultiplexpropertystore
 // Minimum OS: windows5.1.2600.
-func PSCreateDelayedMultiplexPropertyStore(flags GETPROPERTYSTOREFLAGS, pdpsf *IDelayedPropertyStoreFactory, rgStoreIds []uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func PSCreateDelayedMultiplexPropertyStore(flags GETPROPERTYSTOREFLAGS, pdpsf *IDelayedPropertyStoreFactory, rgStoreIds []uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	var _rgStoreIds *uint32
 	if len(rgStoreIds) > 0 {
 		_rgStoreIds = &rgStoreIds[0]
@@ -139,7 +139,7 @@ func PSCreateMemoryPropertyStore(riid *win32.GUID, ppv **win32.IUnknown) error {
 // PSCreateMultiplexPropertyStore calls PROPSYS!PSCreateMultiplexPropertyStore.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pscreatemultiplexpropertystore
 // Minimum OS: windows5.1.2600.
-func PSCreateMultiplexPropertyStore(prgpunkStores []*systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func PSCreateMultiplexPropertyStore(prgpunkStores []*systemcom.IUnknown, riid *win32.GUID, ppv **win32.IUnknown) error {
 	var _prgpunkStores **systemcom.IUnknown
 	if len(prgpunkStores) > 0 {
 		_prgpunkStores = &prgpunkStores[0]
@@ -151,7 +151,7 @@ func PSCreateMultiplexPropertyStore(prgpunkStores []*systemcom.IUnknown, riid *w
 // PSCreatePropertyChangeArray calls PROPSYS!PSCreatePropertyChangeArray.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pscreatepropertychangearray
 // Minimum OS: windows5.1.2600.
-func PSCreatePropertyChangeArray(rgpropkey *foundation.PROPERTYKEY, rgflags *PKA_FLAGS, rgpropvar *systemcomstructuredstorage.PROPVARIANT, cChanges uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func PSCreatePropertyChangeArray(rgpropkey *foundation.PROPERTYKEY, rgflags *PKA_FLAGS, rgpropvar *systemcomstructuredstorage.PROPVARIANT, cChanges uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procPSCreatePropertyChangeArray.Addr(), uintptr(unsafe.Pointer(rgpropkey)), uintptr(unsafe.Pointer(rgflags)), uintptr(unsafe.Pointer(rgpropvar)), uintptr(cChanges), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -159,7 +159,7 @@ func PSCreatePropertyChangeArray(rgpropkey *foundation.PROPERTYKEY, rgflags *PKA
 // PSCreatePropertyStoreFromObject calls PROPSYS!PSCreatePropertyStoreFromObject.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pscreatepropertystorefromobject
 // Minimum OS: windows5.1.2600.
-func PSCreatePropertyStoreFromObject(punk *systemcom.IUnknown, grfMode uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func PSCreatePropertyStoreFromObject(punk *systemcom.IUnknown, grfMode uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procPSCreatePropertyStoreFromObject.Addr(), uintptr(unsafe.Pointer(punk)), uintptr(grfMode), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -167,7 +167,7 @@ func PSCreatePropertyStoreFromObject(punk *systemcom.IUnknown, grfMode uint32, r
 // PSCreatePropertyStoreFromPropertySetStorage calls PROPSYS!PSCreatePropertyStoreFromPropertySetStorage.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pscreatepropertystorefrompropertysetstorage
 // Minimum OS: windows5.1.2600.
-func PSCreatePropertyStoreFromPropertySetStorage(ppss *systemcomstructuredstorage.IPropertySetStorage, grfMode uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func PSCreatePropertyStoreFromPropertySetStorage(ppss *systemcomstructuredstorage.IPropertySetStorage, grfMode uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procPSCreatePropertyStoreFromPropertySetStorage.Addr(), uintptr(unsafe.Pointer(ppss)), uintptr(grfMode), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -175,7 +175,7 @@ func PSCreatePropertyStoreFromPropertySetStorage(ppss *systemcomstructuredstorag
 // PSCreateSimplePropertyChange calls PROPSYS!PSCreateSimplePropertyChange.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pscreatesimplepropertychange
 // Minimum OS: windows5.1.2600.
-func PSCreateSimplePropertyChange(flags PKA_FLAGS, key *foundation.PROPERTYKEY, propvar *systemcomstructuredstorage.PROPVARIANT, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func PSCreateSimplePropertyChange(flags PKA_FLAGS, key *foundation.PROPERTYKEY, propvar *systemcomstructuredstorage.PROPVARIANT, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procPSCreateSimplePropertyChange.Addr(), uintptr(flags), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -183,7 +183,7 @@ func PSCreateSimplePropertyChange(flags PKA_FLAGS, key *foundation.PROPERTYKEY, 
 // PSEnumeratePropertyDescriptions calls PROPSYS!PSEnumeratePropertyDescriptions.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-psenumeratepropertydescriptions
 // Minimum OS: windows5.1.2600.
-func PSEnumeratePropertyDescriptions(filterOn PROPDESC_ENUMFILTER, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func PSEnumeratePropertyDescriptions(filterOn PROPDESC_ENUMFILTER, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procPSEnumeratePropertyDescriptions.Addr(), uintptr(filterOn), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -223,7 +223,7 @@ func PSGetImageReferenceForValue(propkey *foundation.PROPERTYKEY, propvar *syste
 // PSGetItemPropertyHandler calls PROPSYS!PSGetItemPropertyHandler.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-psgetitempropertyhandler
 // Minimum OS: windows5.1.2600.
-func PSGetItemPropertyHandler(punkItem *systemcom.IUnknown, fReadWrite bool, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func PSGetItemPropertyHandler(punkItem *systemcom.IUnknown, fReadWrite bool, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_fReadWrite := win32.Bool32(fReadWrite)
 	r1, _, _ := syscall.SyscallN(procPSGetItemPropertyHandler.Addr(), uintptr(unsafe.Pointer(punkItem)), uintptr(_fReadWrite), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
@@ -232,7 +232,7 @@ func PSGetItemPropertyHandler(punkItem *systemcom.IUnknown, fReadWrite bool, rii
 // PSGetItemPropertyHandlerWithCreateObject calls PROPSYS!PSGetItemPropertyHandlerWithCreateObject.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-psgetitempropertyhandlerwithcreateobject
 // Minimum OS: windows5.1.2600.
-func PSGetItemPropertyHandlerWithCreateObject(punkItem *systemcom.IUnknown, fReadWrite bool, punkCreateObject *systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func PSGetItemPropertyHandlerWithCreateObject(punkItem *systemcom.IUnknown, fReadWrite bool, punkCreateObject *systemcom.IUnknown, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_fReadWrite := win32.Bool32(fReadWrite)
 	r1, _, _ := syscall.SyscallN(procPSGetItemPropertyHandlerWithCreateObject.Addr(), uintptr(unsafe.Pointer(punkItem)), uintptr(_fReadWrite), uintptr(unsafe.Pointer(punkCreateObject)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
@@ -258,7 +258,7 @@ func PSGetNamedPropertyFromPropertyStorage(psps PCUSERIALIZEDPROPSTORAGE, cb uin
 // PSGetPropertyDescription calls PROPSYS!PSGetPropertyDescription.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-psgetpropertydescription
 // Minimum OS: windows5.1.2600.
-func PSGetPropertyDescription(propkey *foundation.PROPERTYKEY, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func PSGetPropertyDescription(propkey *foundation.PROPERTYKEY, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procPSGetPropertyDescription.Addr(), uintptr(unsafe.Pointer(propkey)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -266,7 +266,7 @@ func PSGetPropertyDescription(propkey *foundation.PROPERTYKEY, riid *win32.GUID,
 // PSGetPropertyDescriptionByName calls PROPSYS!PSGetPropertyDescriptionByName.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-psgetpropertydescriptionbyname
 // Minimum OS: windows5.1.2600.
-func PSGetPropertyDescriptionByName(pszCanonicalName string, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func PSGetPropertyDescriptionByName(pszCanonicalName string, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszCanonicalName := win32.UTF16Ptr(pszCanonicalName)
 	r1, _, _ := syscall.SyscallN(procPSGetPropertyDescriptionByName.Addr(), uintptr(unsafe.Pointer(_pszCanonicalName)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
@@ -275,7 +275,7 @@ func PSGetPropertyDescriptionByName(pszCanonicalName string, riid *win32.GUID, p
 // PSGetPropertyDescriptionListFromString calls PROPSYS!PSGetPropertyDescriptionListFromString.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-psgetpropertydescriptionlistfromstring
 // Minimum OS: windows5.1.2600.
-func PSGetPropertyDescriptionListFromString(pszPropList string, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func PSGetPropertyDescriptionListFromString(pszPropList string, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszPropList := win32.UTF16Ptr(pszPropList)
 	r1, _, _ := syscall.SyscallN(procPSGetPropertyDescriptionListFromString.Addr(), uintptr(unsafe.Pointer(_pszPropList)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
@@ -301,7 +301,7 @@ func PSGetPropertyKeyFromName(pszName string, ppropkey *foundation.PROPERTYKEY) 
 // PSGetPropertySystem calls PROPSYS!PSGetPropertySystem.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-psgetpropertysystem
 // Minimum OS: windows5.1.2600.
-func PSGetPropertySystem(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func PSGetPropertySystem(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procPSGetPropertySystem.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -479,7 +479,7 @@ func PSPropertyBag_ReadULONGLONG(propBag *systemcomstructuredstorage.IPropertyBa
 // PSPropertyBag_ReadUnknown calls PROPSYS!PSPropertyBag_ReadUnknown.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_readunknown
 // Minimum OS: windows6.1.
-func PSPropertyBag_ReadUnknown(propBag *systemcomstructuredstorage.IPropertyBag, propName string, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func PSPropertyBag_ReadUnknown(propBag *systemcomstructuredstorage.IPropertyBag, propName string, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_propName := win32.UTF16Ptr(propName)
 	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadUnknown.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
@@ -735,7 +735,7 @@ func SHGetPropertyStoreForWindow(hwnd foundation.HWND, riid *win32.GUID, ppv **w
 // SHGetPropertyStoreFromIDList calls SHELL32!SHGetPropertyStoreFromIDList.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shgetpropertystorefromidlist
 // Minimum OS: windows6.0.6000.
-func SHGetPropertyStoreFromIDList(pidl *uishellcommon.ITEMIDLIST, flags GETPROPERTYSTOREFLAGS, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func SHGetPropertyStoreFromIDList(pidl *uishellcommon.ITEMIDLIST, flags GETPROPERTYSTOREFLAGS, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procSHGetPropertyStoreFromIDList.Addr(), uintptr(unsafe.Pointer(pidl)), uintptr(flags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }

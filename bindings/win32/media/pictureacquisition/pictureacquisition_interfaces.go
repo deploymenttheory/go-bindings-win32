@@ -477,7 +477,7 @@ func (self *IPhotoAcquireSource) GetDeviceId(pbstrDeviceId *foundation.BSTR) err
 }
 
 // BindToObject dispatches through IPhotoAcquireSource's vtable slot 10.
-func (self *IPhotoAcquireSource) BindToObject(riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IPhotoAcquireSource) BindToObject(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }

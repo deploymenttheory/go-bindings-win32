@@ -735,7 +735,7 @@ type IPrintClassObjectFactory struct {
 var IID_IPrintClassObjectFactory = win32.GUID{Data1: 0x9af593dd, Data2: 0x9b02, Data3: 0x48a8, Data4: [8]byte{0x9b, 0xad, 0x69, 0xac, 0xe4, 0x23, 0xf8, 0x8b}}
 
 // GetPrintClassObject dispatches through IPrintClassObjectFactory's vtable slot 3.
-func (self *IPrintClassObjectFactory) GetPrintClassObject(pszPrinterName string, riid *win32.GUID, ppNewObject *unsafe.Pointer) error {
+func (self *IPrintClassObjectFactory) GetPrintClassObject(pszPrinterName string, riid *win32.GUID, ppNewObject **win32.IUnknown) error {
 	_pszPrinterName := win32.UTF16Ptr(pszPrinterName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPrinterName)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppNewObject)))
 	return win32.HRESULTError(int32(r1))
@@ -802,7 +802,7 @@ func (self *IPrintCoreHelper) SetFontSubstitution(pszTrueTypeFontName string, ps
 }
 
 // CreateInstanceOfMSXMLObject dispatches through IPrintCoreHelper's vtable slot 11.
-func (self *IPrintCoreHelper) CreateInstanceOfMSXMLObject(rclsid *win32.GUID, pUnkOuter *systemcom.IUnknown, dwClsContext uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self *IPrintCoreHelper) CreateInstanceOfMSXMLObject(rclsid *win32.GUID, pUnkOuter *systemcom.IUnknown, dwClsContext uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(dwClsContext), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -2577,7 +2577,7 @@ func (self *IXpsDocumentConsumer) CloseSender() error {
 }
 
 // GetNewEmptyPart dispatches through IXpsDocumentConsumer's vtable slot 9.
-func (self *IXpsDocumentConsumer) GetNewEmptyPart(uri string, riid *win32.GUID, ppNewObject *unsafe.Pointer, ppWriteStream **IPrintWriteStream) error {
+func (self *IXpsDocumentConsumer) GetNewEmptyPart(uri string, riid *win32.GUID, ppNewObject **win32.IUnknown, ppWriteStream **IPrintWriteStream) error {
 	_uri := win32.UTF16Ptr(uri)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_uri)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppNewObject)), uintptr(unsafe.Pointer(ppWriteStream)))
 	return win32.HRESULTError(int32(r1))

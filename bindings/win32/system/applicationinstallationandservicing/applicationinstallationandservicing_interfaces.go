@@ -118,7 +118,7 @@ func (self *IAssemblyName) GetDisplayName(szDisplayName foundation.PWSTR, pccDis
 }
 
 // Reserved dispatches through IAssemblyName's vtable slot 7.
-func (self *IAssemblyName) Reserved(refIID *win32.GUID, pUnkReserved1 *systemcom.IUnknown, pUnkReserved2 *systemcom.IUnknown, szReserved string, llReserved int64, pvReserved unsafe.Pointer, cbReserved uint32, ppReserved *unsafe.Pointer) error {
+func (self *IAssemblyName) Reserved(refIID *win32.GUID, pUnkReserved1 *systemcom.IUnknown, pUnkReserved2 *systemcom.IUnknown, szReserved string, llReserved int64, pvReserved unsafe.Pointer, cbReserved uint32, ppReserved **win32.IUnknown) error {
 	_szReserved := win32.UTF16Ptr(szReserved)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(refIID)), uintptr(unsafe.Pointer(pUnkReserved1)), uintptr(unsafe.Pointer(pUnkReserved2)), uintptr(unsafe.Pointer(_szReserved)), uintptr(llReserved), uintptr(unsafe.Pointer(pvReserved)), uintptr(cbReserved), uintptr(unsafe.Pointer(ppReserved)))
 	return win32.HRESULTError(int32(r1))

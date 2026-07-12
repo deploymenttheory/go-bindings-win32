@@ -728,7 +728,7 @@ func (self *IWiaItem2) CheckExtension(lFlags int32, bstrName foundation.BSTR, ri
 }
 
 // GetExtension dispatches through IWiaItem2's vtable slot 13.
-func (self *IWiaItem2) GetExtension(lFlags int32, bstrName foundation.BSTR, riidExtensionInterface *win32.GUID, ppOut *unsafe.Pointer) error {
+func (self *IWiaItem2) GetExtension(lFlags int32, bstrName foundation.BSTR, riidExtensionInterface *win32.GUID, ppOut **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(riidExtensionInterface)), uintptr(unsafe.Pointer(ppOut)))
 	return win32.HRESULTError(int32(r1))
 }

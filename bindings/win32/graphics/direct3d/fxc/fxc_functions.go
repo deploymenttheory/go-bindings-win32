@@ -262,7 +262,7 @@ func D3DReflect(pSrcData []byte, pInterface *win32.GUID, ppReflector *unsafe.Poi
 
 // D3DReflectLibrary calls D3DCOMPILER_47!D3DReflectLibrary.
 // https://learn.microsoft.com/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dreflectlibrary
-func D3DReflectLibrary(pSrcData []byte, riid *win32.GUID, ppReflector *unsafe.Pointer) error {
+func D3DReflectLibrary(pSrcData []byte, riid *win32.GUID, ppReflector **win32.IUnknown) error {
 	var _pSrcData *byte
 	if len(pSrcData) > 0 {
 		_pSrcData = &pSrcData[0]

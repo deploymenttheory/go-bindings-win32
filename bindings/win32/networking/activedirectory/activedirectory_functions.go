@@ -258,7 +258,7 @@ func ADsGetLastError(lpError *uint32, lpErrorBuf foundation.PWSTR, dwErrorBufLen
 // ADsGetObject calls ACTIVEDS!ADsGetObject.
 // https://learn.microsoft.com/windows/win32/api/adshlp/nf-adshlp-adsgetobject
 // Minimum OS: windows6.0.6000.
-func ADsGetObject(lpszPathName string, riid *win32.GUID, ppObject *unsafe.Pointer) error {
+func ADsGetObject(lpszPathName string, riid *win32.GUID, ppObject **win32.IUnknown) error {
 	_lpszPathName := win32.UTF16Ptr(lpszPathName)
 	r1, _, _ := syscall.SyscallN(procADsGetObject.Addr(), uintptr(unsafe.Pointer(_lpszPathName)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppObject)))
 	return win32.HRESULTError(int32(r1))
@@ -267,7 +267,7 @@ func ADsGetObject(lpszPathName string, riid *win32.GUID, ppObject *unsafe.Pointe
 // ADsOpenObject calls ACTIVEDS!ADsOpenObject.
 // https://learn.microsoft.com/windows/win32/api/adshlp/nf-adshlp-adsopenobject
 // Minimum OS: windows6.0.6000.
-func ADsOpenObject(lpszPathName string, lpszUserName string, lpszPassword string, dwReserved ADS_AUTHENTICATION_ENUM, riid *win32.GUID, ppObject *unsafe.Pointer) error {
+func ADsOpenObject(lpszPathName string, lpszUserName string, lpszPassword string, dwReserved ADS_AUTHENTICATION_ENUM, riid *win32.GUID, ppObject **win32.IUnknown) error {
 	_lpszPathName := win32.UTF16Ptr(lpszPathName)
 	_lpszUserName := win32.UTF16Ptr(lpszUserName)
 	_lpszPassword := win32.UTF16Ptr(lpszPassword)

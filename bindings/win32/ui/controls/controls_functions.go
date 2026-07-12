@@ -1402,7 +1402,7 @@ func GetWindowTheme(hwnd foundation.HWND) HTHEME {
 // HIMAGELIST_QueryInterface calls COMCTL32!HIMAGELIST_QueryInterface.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-himagelist_queryinterface
 // Minimum OS: windows6.0.6000.
-func HIMAGELIST_QueryInterface(himl HIMAGELIST, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func HIMAGELIST_QueryInterface(himl HIMAGELIST, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procHIMAGELIST_QueryInterface.Addr(), uintptr(himl), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1619,7 +1619,7 @@ func ImageList_Read(pstm *systemcom.IStream) HIMAGELIST {
 // ImageList_ReadEx calls COMCTL32!ImageList_ReadEx.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-imagelist_readex
 // Minimum OS: windows6.0.6000.
-func ImageList_ReadEx(dwFlags uint32, pstm *systemcom.IStream, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func ImageList_ReadEx(dwFlags uint32, pstm *systemcom.IStream, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procImageList_ReadEx.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(pstm)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }

@@ -554,20 +554,30 @@ degradations via the diagnostics baseline. Add `diff` for winmd version bumps.
 
 ---
 
-## 16. Decisions — resolved & still open
+## 16. Decisions — all resolved
 
 **Resolved (see the "Locked decisions" table in §0):** native `.winmd` reader as
-input · `(T, error)` Go errors · COM in v1 · `x/sys/windows` as the single dep ·
-module path `github.com/deploymenttheory/go-bindings-win32` · **a single
-idiomatic-shaped tier** (`bindings/win32`), the two-tier design collapsed.
+input · `(T, error)` Go errors · COM in v1 · zero external dependencies (the
+original `x/sys/windows` single-dep choice was superseded by a stdlib-only
+runtime with a hand-written System32-only loader) · module path
+`github.com/deploymenttheory/go-bindings-win32` · **a single idiomatic-shaped
+tier** (`bindings/win32`), the two-tier design collapsed.
 
-**Still open (can be decided during M0/M1, don't block the start):**
-1. **winmd version to pin** — which `Microsoft.Windows.SDK.Win32Metadata` release
-   (track the latest stable at bootstrap; record in `PROVENANCE.json`).
-2. **Docs source** — pull the `Microsoft.Windows.SDK.Win32Docs` MessagePack docs
-   for rich doc-comments in v1, or ship with `[Documentation]` URL links only and
-   add prose later.
-3. **Architectures shipped** — amd64 + arm64 from the start (honoring
-   `SupportedArchitecture`), or amd64-only for M1–M3 and add arm64 in M5.
-4. **Float/large-struct-by-value ABI** — whether to include float-heavy namespaces
-   (Direct2D/GDI) in v1 or gate them behind a targeted `SyscallN` ABI shim.
+**Formerly open — how each landed:**
+1. **winmd version to pin** — resolved as designed: `fetch-metadata` pins the
+   current `Microsoft.Windows.SDK.Win32Metadata` release in
+   `metadata/winmd/PROVENANCE.json` (version, NuGet source, sha256, fetch
+   date), and the weekly `winmd-update.yml` workflow opens a regeneration PR
+   when a new release ships.
+2. **Docs source** — decided: `[Documentation]` URL links only; every
+   generated construct carries its learn.microsoft.com link. The
+   `Microsoft.Windows.SDK.Win32Docs` MessagePack prose merge was not built —
+   it remains a candidate enhancement, not an open decision.
+3. **Architectures shipped** — decided: one binding set under
+   `//go:build windows && (amd64 || arm64)` (the two share Win32's LLP64
+   layout), arm64 cross-compiled in CI. Per-arch variant emission for the
+   few arch-specific structs stays parked as M5.
+4. **Float/large-struct-by-value ABI** — decided: no `SyscallN` shim.
+   Functions with float or by-value struct params are skipped with
+   diagnostics tracked in the ratchet baseline; float-heavy namespaces
+   (Direct2D/GDI) ship with those skips.

@@ -113,8 +113,10 @@ Windows.Win32.winmd → .w32meta.json (IR) → Go source
   windows` + grouped imports + `go/format`. All generated files funnel
   through it.
 - **`bindings/runtime/win32/`** — the hand-written runtime: lazy system-DLL
-  loading, `LastError` normalization, `GUID`, UTF-16 helpers. Single external
-  dependency: `golang.org/x/sys/windows`.
+  loading (System32-only via `LoadLibraryExW` +
+  `LOAD_LIBRARY_SEARCH_SYSTEM32`, `loader.go`), `LastError` normalization,
+  the typed `HRESULT` error, `GUID`, UTF-16 helpers. Standard library only —
+  the module has zero external dependencies.
 
 ### Generated output (`bindings/win32/`)
 
@@ -273,7 +275,10 @@ DO-NOT-EDIT header are never touched.
   params, packed structs, struct-initializer constants → diagnostics, never
   broken output. A pre-pass (`computeSkippedTypes`) guarantees no reference
   to a skipped type is ever emitted.
-- **Single external dependency**: `golang.org/x/sys/windows`. Do not add more.
+- **Zero external dependencies**: the module is standard-library-only
+  (`go.mod` has no require lines). Do not add any. Consumers may still use
+  `golang.org/x/sys/windows` constants in `errors.Is` checks — its `ERROR_*`
+  values are typed `syscall.Errno`, which the runtime matches.
 - `metadata/win32/` (the IR cache) is derived and gitignored; the committed
   source of truth is `metadata/winmd/Windows.Win32.winmd` + `PROVENANCE.json`.
   Bump `win32meta.CurrentSchemaVersion` on incompatible IR changes.

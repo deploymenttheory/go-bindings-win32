@@ -111,8 +111,8 @@ Pre-v1: until a tagged release exists, `@latest` resolves a pseudo-version of
 `main` — pin the commit you build against.
 
 **Requirements:** Go 1.25+; runs on **Windows amd64 or arm64** (they share
-Win32's LLP64 layout). The one external dependency is
-`golang.org/x/sys/windows`. The generated files carry
+Win32's LLP64 layout). The module has **zero external dependencies** —
+runtime and bindings are standard-library-only. The generated files carry
 `//go:build windows && (amd64 || arm64)` tags, so you can develop and
 **cross-compile from macOS/Linux** (`GOOS=windows go build ./...`) — only
 running requires Windows.

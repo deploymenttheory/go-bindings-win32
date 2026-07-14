@@ -2,8 +2,7 @@ package win32
 
 import (
 	"fmt"
-
-	"golang.org/x/sys/windows"
+	"syscall"
 )
 
 // HRESULT is a COM/Win32 HRESULT status code: a 32-bit signed value whose
@@ -18,14 +17,15 @@ func (hr HRESULT) Failed() bool { return hr < 0 }
 // Error renders the code and, where the system knows one, its message,
 // e.g. "HRESULT 0x80070005: Access is denied.".
 func (hr HRESULT) Error() string {
-	return fmt.Sprintf("HRESULT 0x%08X: %s", uint32(hr), windows.Errno(uint32(hr)).Error())
+	return fmt.Sprintf("HRESULT 0x%08X: %s", uint32(hr), syscall.Errno(uint32(hr)).Error())
 }
 
 // Is lets errors.Is match a FACILITY_WIN32 HRESULT (0x8007xxxx) against the
-// windows.Errno it wraps, so errors.Is(err, windows.ERROR_ACCESS_DENIED)
-// is true for E_ACCESSDENIED.
+// syscall.Errno it wraps, so errors.Is(err, windows.ERROR_ACCESS_DENIED)
+// is true for E_ACCESSDENIED (x/sys/windows' ERROR_* constants are typed
+// syscall.Errno).
 func (hr HRESULT) Is(target error) bool {
-	if errno, ok := target.(windows.Errno); ok {
+	if errno, ok := target.(syscall.Errno); ok {
 		return uint32(hr)>>16 == 0x8007 && uint32(hr)&0xFFFF == uint32(errno)
 	}
 	return false

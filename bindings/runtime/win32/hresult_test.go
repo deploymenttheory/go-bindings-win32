@@ -3,9 +3,8 @@ package win32
 import (
 	"errors"
 	"strings"
+	"syscall"
 	"testing"
-
-	"golang.org/x/sys/windows"
 )
 
 func TestErrIfFailed(t *testing.T) {
@@ -33,15 +32,16 @@ func TestHRESULTErrorsIs(t *testing.T) {
 	if !errors.Is(err, E_ACCESSDENIED) {
 		t.Error("errors.Is(err, E_ACCESSDENIED) = false")
 	}
-	// FACILITY_WIN32 HRESULTs match the Win32 errno they wrap.
-	if !errors.Is(err, windows.ERROR_ACCESS_DENIED) {
-		t.Error("errors.Is(err, windows.ERROR_ACCESS_DENIED) = false")
+	// FACILITY_WIN32 HRESULTs match the Win32 errno they wrap (stdlib
+	// syscall.Errno — the same type as x/sys/windows' ERROR_* constants).
+	if !errors.Is(err, syscall.ERROR_ACCESS_DENIED) {
+		t.Error("errors.Is(err, syscall.ERROR_ACCESS_DENIED) = false")
 	}
-	if errors.Is(err, windows.ERROR_FILE_NOT_FOUND) {
+	if errors.Is(err, syscall.ERROR_FILE_NOT_FOUND) {
 		t.Error("E_ACCESSDENIED matched ERROR_FILE_NOT_FOUND")
 	}
 	// Non-FACILITY_WIN32 codes never match an errno.
-	if errors.Is(ErrIfFailed(int32(E_FAIL)), windows.Errno(0x4005)) {
+	if errors.Is(ErrIfFailed(int32(E_FAIL)), syscall.Errno(0x4005)) {
 		t.Error("E_FAIL matched an errno by low bits")
 	}
 }

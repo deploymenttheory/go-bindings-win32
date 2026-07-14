@@ -91,7 +91,7 @@ instead of ObjC), and the **runtime** (`syscall` DLL + COM vtable instead of pur
 | **Input source** | Native Go ECMA-335 `.winmd` reader against the official `Microsoft.Windows.SDK.Win32Metadata` NuGet winmd. `win32json` = cross-check oracle only. |
 | **Errors** | Go `error` — `(T, error)`; HRESULT/`SetLastError`/NTSTATUS wrapped in structured, per-domain error types. |
 | **COM** | **In v1** — the COM vtable pipeline (interfaces, `IUnknown`/`IDispatch` embedding, sealed providers) ships in the first release, not deferred. |
-| **Runtime dependency** | `golang.org/x/sys/windows` — the single external dep (mirrors the macOS repo's single `purego` dep). |
+| **Runtime dependency** | None — stdlib-only. (Originally `golang.org/x/sys/windows` as the single external dep; later replaced by a hand-written System32-only loader in the runtime, `loader.go`.) |
 | **Module path** | `github.com/deploymenttheory/go-bindings-win32`. |
 
 **Prior art we lean on:**
@@ -121,7 +121,9 @@ instead of ObjC), and the **runtime** (`syscall` DLL + COM vtable instead of pur
 2. Add `golang.org/x/sys/windows` as the **only** external runtime dependency
    (the Windows analogue of the macOS repo's single `ebitengine/purego` dep). It
    gives us `windows.NewLazyDLL`, `UTF16PtrFromString`, `Errno`, `Handle`,
-   `CoInitializeEx`, etc. (Decision point — see §16.)
+   `CoInitializeEx`, etc. (Decision point — see §16. **Superseded:** the
+   dependency was later removed entirely; the runtime is stdlib-only with a
+   hand-written System32-only loader.)
 3. Port `CLAUDE.md`, `.golangci.yml`, and the docs skeleton.
 
 ---
@@ -367,8 +369,8 @@ Simpler than ObjC (names are already PascalCase — no selector splitting):
 
 ## 9. Runtime (`bindings/runtime/win32`)
 
-The clean 1:1 replacement for `bindings/runtime/purego`. Pure `syscall` +
-`golang.org/x/sys/windows`. Provides:
+The clean 1:1 replacement for `bindings/runtime/purego`. Pure stdlib
+(`syscall` + a hand-written System32-only loader; no external deps). Provides:
 
 - **DLL dispatch** — generated `<pkg>_runtime.go` with a `sync.Once`-guarded
   `_loadLibrary` doing `windows.NewLazyDLL("kernel32.dll")` and lazy `NewProc`

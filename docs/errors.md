@@ -32,7 +32,10 @@ h, err := threading.OpenEvent(access, false, "name")
 if err != nil { /* ... */ }
 ```
 
-You can match specific codes with `errors.Is`:
+You can match specific codes with `errors.Is` — against the standard
+library's `syscall.ERROR_*` set, or `golang.org/x/sys/windows`' larger one
+(its constants are typed `syscall.Errno`, so both work; this module itself
+depends on neither — it is stdlib-only):
 
 ```go
 import "golang.org/x/sys/windows"

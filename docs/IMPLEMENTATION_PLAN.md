@@ -376,7 +376,7 @@ The clean 1:1 replacement for `bindings/runtime/purego`. Pure stdlib
   `_loadLibrary` doing `windows.NewLazyDLL("kernel32.dll")` and lazy `NewProc`
   registration (mirrors the purego `_loadLibrary`+`RegisterLibFunc` template
   shape). Calls via `syscall.SyscallN(proc.Addr(), args…)`.
-- **Error surfacing** — `SetLastError` functions return `windows.Errno`; a helper
+- **Error surfacing** — `SetLastError` functions return `syscall.Errno`; a helper
   `Win32Error(name, errno)` wraps context. `HRESULT` returns → `ErrIfFailed`
   (the failable-call pattern maps exactly onto the macOS `NSError` handling).
   Distinct error domains: Win32 / HRESULT / NTSTATUS (as gowin32 does).

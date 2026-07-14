@@ -11,6 +11,9 @@ go build ./...
 # Unit tests (winmd reader + ingest; needs the committed winmd)
 go test ./internal/...
 
+# Runtime unit tests (loader security, HRESULT error semantics)
+go test ./bindings/runtime/...
+
 # Live acceptance tests (calls real Win32 APIs; Windows only)
 go test ./acceptance/
 
@@ -76,9 +79,16 @@ Windows.Win32.winmd → .w32meta.json (IR) → Go source
 
 - **`internal/winmd/`** — native Go ECMA-335 reader: PE container → metadata
   streams → tables (`tables.go`) → signature blobs (`sig.go`) → custom
-  attributes (`attrs.go`). No .NET, no cgo. The whole winmd (37k types, 318k
-  signatures, 152k attributes) decodes with zero failures; tests brute-force
-  all of it.
+  attributes (`attrs.go`). No .NET, no cgo. Aligned with the ECMA-335 6th
+  edition: exported symbols carry §II.x section references, table IDs are a
+  typed `Table` enum (all 45 tables, spec names), and bitmask columns are
+  typed (`TypeAttributes`, `ParamAttributes`, `PInvokeAttributes`, … in
+  `flags.go`). Untrusted lengths/rows are bounds-checked and
+  allocation-clamped (`corrupt_test.go` covers hostile inputs). The package
+  doc records explicit non-goals (no lazy tables, no CodedIndex tag
+  generics, no microsoft/go-winmd dependency). The whole winmd (37k types,
+  318k signatures, 152k attributes) decodes with zero failures; tests
+  brute-force all of it.
 - **`internal/win32meta/`** — the IR (`model.go`): one `NamespaceMeta` per
   namespace with structs/enums/functions/constants/interfaces/delegates/
   typedefs. `TypeRef` is the recursive type grammar (Native / ApiRef /
@@ -143,7 +153,9 @@ each call, then the template dispatches via `syscall.SyscallN`:
 - input `PWSTR`/`PCWSTR` → Go `string` (UTF-16 at the boundary:
   `_name := win32.UTF16Ptr(name)`)
 - input `BOOL` → Go `bool` (`win32.Bool32`); plain `BOOL` return → `bool`
-- `HRESULT` return → `error`; `BOOL` + SetLastError → `error`
+- `HRESULT` return → `error` (failures surface as the typed `win32.HRESULT`,
+  which `errors.Is`-matches `syscall.Errno` for `FACILITY_WIN32` codes);
+  `BOOL` + SetLastError → `error`
 - a curated set of informational-success APIs (`IEnum*::Next`/`::Skip`,
   `IXmlReader::Read`, `CoInitializeEx` — see `emit/raw/informational.go`)
   returns `(win32.HRESULT, error)` instead: err reflects failure only, the

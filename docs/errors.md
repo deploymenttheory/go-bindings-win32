@@ -7,7 +7,7 @@ honestly — a function's Go signature tells you which domain it uses.
 
 | Domain | How the API reports failure | Go shape |
 |---|---|---|
-| **`GetLastError`** | A `BOOL`/handle return plus a thread-local error code you fetch separately. The metadata marks these `SetLastError`. | `BOOL` + `SetLastError` → **`error`**; a value + `SetLastError` → **`(T, error)`**. The error is a `windows.Errno`. |
+| **`GetLastError`** | A `BOOL`/handle return plus a thread-local error code you fetch separately. The metadata marks these `SetLastError`. | `BOOL` + `SetLastError` → **`error`**; a value + `SetLastError` → **`(T, error)`**. The error is a `syscall.Errno` (the same type as `windows.Errno`). |
 | **`HRESULT`** | A 32-bit status returned directly; negative = failure. Used by COM and many newer flat APIs. | **`error`** via `win32.ErrIfFailed` (nil when the `HRESULT` is ≥ 0). The error is a `win32.HRESULT`. A curated set of APIs whose success codes matter returns **`(win32.HRESULT, error)`** — see below. |
 | **`NTSTATUS`** | A 32-bit status from the native (`ntdll`) layer. | Returned as the typed value; compare against the `STATUS_*` constants. |
 | **`NET_API_STATUS`** and other **domain codes** | A `DWORD` return code specific to a subsystem (networking, setup, registry…). No `SetLastError`. | Returned as **`uint32`** (or the typed enum); compare against the subsystem's constants (`NERR_Success`, `ERROR_*`). |
@@ -22,7 +22,7 @@ information.
 ```go
 // BOOL + SetLastError → error only.
 if err := threading.SetEvent(handle); err != nil {
-	// err is a windows.Errno, e.g. "The handle is invalid."
+	// err is a syscall.Errno, e.g. "The handle is invalid."
 }
 
 // Handle + SetLastError → (T, error). Failure sentinels come from the
@@ -58,7 +58,7 @@ if err := stream.Seek(0, 0, &pos); err != nil { /* ... */ }
 
 The failure error is the typed `win32.HRESULT`, so `errors.Is` works against
 the runtime's sentinels — and a `FACILITY_WIN32` code matches the
-`windows.Errno` it wraps:
+`syscall.Errno` it wraps (the same type as x/sys/windows' `ERROR_*` constants):
 
 ```go
 if errors.Is(err, win32.E_NOINTERFACE) { /* ... */ }

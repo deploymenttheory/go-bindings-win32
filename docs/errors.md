@@ -34,8 +34,8 @@ if err != nil { /* ... */ }
 
 You can match specific codes with `errors.Is` — against the standard
 library's `syscall.ERROR_*` set, or `golang.org/x/sys/windows`' larger one
-(its constants are typed `syscall.Errno`, so both work; this module itself
-depends on neither — it is stdlib-only):
+(its constants are typed `syscall.Errno`, so both work; the bindings link
+nothing beyond the standard library):
 
 ```go
 import "golang.org/x/sys/windows"

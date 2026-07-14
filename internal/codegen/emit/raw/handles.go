@@ -74,7 +74,7 @@ func (g *Generator) buildCloser(meta *win32meta.NamespaceMeta, handleName string
 	if owner.Namespace != meta.Namespace {
 		alias := naming.ImportAlias(owner.Namespace)
 		callee = alias + "." + freeName
-		imports[alias] = g.mapper.ModulePath + "/bindings/win32/" + naming.PackagePath(owner.Namespace)
+		imports[alias] = g.mapper.ImportPathFor(owner.Namespace)
 	}
 	call := callee + "(" + paramResolved.GoType + "(h))"
 
@@ -86,7 +86,7 @@ func (g *Generator) buildCloser(meta *win32meta.NamespaceMeta, handleName string
 	case isBOOL(freeReturn):
 		// Emitted as returning bool.
 		returnStmt = "return win32.BoolErr(win32.Bool32(" + call + "))"
-		imports["win32"] = g.mapper.ModulePath + "/bindings/runtime/win32"
+		imports["win32"] = g.mapper.RuntimeImportPath()
 	case freeReturn.Kind == typemap.KindVoid:
 		returnStmt = call + "\n\treturn nil"
 	default:

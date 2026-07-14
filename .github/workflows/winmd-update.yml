@@ -36,7 +36,7 @@ jobs:
             echo "updated=false" >> "$GITHUB_OUTPUT"
           else
             echo "updated=true" >> "$GITHUB_OUTPUT"
-            echo "version=$(python -c "import json;print(json.load(open('metadata/winmd/PROVENANCE.json'))['version'])")" >> "$GITHUB_OUTPUT"
+            echo "version=$(python -c "import json;d=json.load(open('metadata/winmd/PROVENANCE.json'));print((d[0] if isinstance(d,list) else d)['version'])")" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Re-ingest the new winmd

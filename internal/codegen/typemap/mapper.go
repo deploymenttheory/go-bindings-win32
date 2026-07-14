@@ -61,6 +61,16 @@ type Mapper struct {
 	Registry   *pipeline.Registry
 	ModulePath string
 
+	// Win32ModulePath is the module hosting external (pipeline.IsExternal)
+	// namespaces and the shared runtime. Empty in the win32 repo itself
+	// (everything is local); set by sister generators (wdk) whose metadata
+	// references Windows.Win32 types.
+	Win32ModulePath string
+	// LocalBindingsRoot is the bindings tree root inside ModulePath
+	// ("/bindings/win32/" here; "/bindings/wdk/" in the wdk repo). Empty
+	// defaults to "/bindings/win32/".
+	LocalBindingsRoot string
+
 	// Blocked marks severed cross-namespace edges (import-cycle breaks):
 	// Blocked[src][dst] forces references from src to dst to degrade to raw
 	// types instead of importing.
@@ -242,6 +252,29 @@ func (m *Mapper) resolveArray(ref *win32meta.TypeRef, ctx Context, imports Impor
 	}
 }
 
+// ImportPathFor returns the Go import path of the package that carries the
+// given namespace: the local bindings tree, or — for external namespaces
+// (pipeline.IsExternal) — the published win32 module's tree.
+func (m *Mapper) ImportPathFor(api string) string {
+	if pipeline.IsExternal(api) {
+		return m.Win32ModulePath + "/bindings/" + naming.PackagePath(api)
+	}
+	root := m.LocalBindingsRoot
+	if root == "" {
+		root = "/bindings/win32/"
+	}
+	return m.ModulePath + root + naming.PackagePath(api)
+}
+
+// RuntimeImportPath returns the import path of the hand-written runtime
+// package (win32) — local here, the win32 module's in sister generators.
+func (m *Mapper) RuntimeImportPath() string {
+	if m.Win32ModulePath != "" {
+		return m.Win32ModulePath + "/bindings/runtime/win32"
+	}
+	return m.ModulePath + "/bindings/runtime/win32"
+}
+
 // qualifiedName renders Name qualified by the owning package (recording the
 // import) unless it lives in the namespace being emitted.
 func (m *Mapper) qualifiedName(api, name string, ctx Context, imports ImportSet) string {
@@ -250,7 +283,7 @@ func (m *Mapper) qualifiedName(api, name string, ctx Context, imports ImportSet)
 		return name
 	}
 	alias := naming.ImportAlias(api)
-	imports[alias] = m.ModulePath + "/bindings/win32/" + naming.PackagePath(api)
+	imports[alias] = m.ImportPathFor(api)
 	if m.Referenced == nil {
 		m.Referenced = map[string]bool{}
 	}

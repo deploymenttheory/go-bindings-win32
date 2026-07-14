@@ -64,10 +64,17 @@ func (g *Generator) ABIRecords() []ABIRecord {
 	return records
 }
 
+// ImportPathFor exposes the mapper's namespace → import-path mapping (for
+// BuildABITest callers).
+func (g *Generator) ImportPathFor(namespace string) string {
+	return g.mapper.ImportPathFor(namespace)
+}
+
 // BuildABITest renders the acceptance ABI test source for a deterministic
 // sample of the collected records: every Foundation struct plus every
-// strideth record overall, capped near sampleTarget.
-func BuildABITest(records []ABIRecord, modulePath string, sampleTarget int) string {
+// strideth record overall, capped near sampleTarget. importPathFor maps a
+// namespace to its bindings import path (typemap.Mapper.ImportPathFor).
+func BuildABITest(records []ABIRecord, importPathFor func(namespace string) string, sampleTarget int) string {
 	var sampled []ABIRecord
 	stride := 1
 	if sampleTarget > 0 && len(records) > sampleTarget {
@@ -83,7 +90,7 @@ func BuildABITest(records []ABIRecord, modulePath string, sampleTarget int) stri
 	var body strings.Builder
 	for _, record := range sampled {
 		alias := naming.ImportAlias(record.Namespace)
-		imports[alias] = modulePath + "/bindings/win32/" + naming.PackagePath(record.Namespace)
+		imports[alias] = importPathFor(record.Namespace)
 		qualified := alias + "." + record.TypeName
 		fmt.Fprintf(&body, "\tcheck(%q, unsafe.Sizeof(%s{}), %d)\n", qualified+" size", qualified, record.Size)
 		for _, field := range record.Fields {

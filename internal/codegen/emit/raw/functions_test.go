@@ -53,7 +53,7 @@ func retype(params []win32meta.Param) ([]string, typemap.ImportSet) {
 		resolved[i] = typemap.Resolved{GoType: "*unsafe.Pointer", Kind: typemap.KindPointer}
 	}
 	imports := typemap.ImportSet{}
-	retypeComOutParams(params, resolved, imports, testModulePath)
+	retypeComOutParams(params, resolved, imports, testModulePath+"/bindings/runtime/win32")
 	types := make([]string, len(params))
 	for i := range resolved {
 		types[i] = resolved[i].GoType

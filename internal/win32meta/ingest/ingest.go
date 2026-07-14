@@ -8,7 +8,7 @@ import (
 	"strings"
 
 	"github.com/deploymenttheory/go-bindings-win32/internal/win32meta"
-	"github.com/deploymenttheory/go-bindings-win32/internal/winmd"
+	"github.com/deploymenttheory/go-winmd"
 )
 
 // namespacePrefix scopes ingestion to the Win32 projection; the attribute
@@ -19,10 +19,49 @@ const (
 	interopNamespace   = "Windows.Win32.Interop"
 )
 
+// Options parameterizes a projection run. The zero value reproduces the
+// Win32 projection exactly; sister generators (wdk) set these to project a
+// different assembly root and to resolve cross-assembly references.
+type Options struct {
+	// ProjectPrefix selects which TypeDefs this run projects
+	// (default namespacePrefix, "Windows.Win32.").
+	ProjectPrefix string
+	// ApiName maps a full CLR namespace to its IR Api key ("" = not
+	// projectable). Default: strip ProjectPrefix; other roots unmapped.
+	ApiName func(fullNamespace string) string
+	// ExcludedNamespaces are metadata-plumbing namespaces never emitted
+	// (default: the Win32 attribute/interop namespaces).
+	ExcludedNamespaces []string
+	// ExtraKinds seeds kindIndex with externally-classified TypeDefs
+	// (full-name keys), for cross-assembly TypeRef targeting.
+	ExtraKinds map[string]string
+}
+
+// withDefaults fills unset fields with the Win32 projection behavior.
+func (o Options) withDefaults() Options {
+	if o.ProjectPrefix == "" {
+		o.ProjectPrefix = namespacePrefix
+	}
+	if o.ApiName == nil {
+		prefix := o.ProjectPrefix
+		o.ApiName = func(fullNamespace string) string {
+			if !strings.HasPrefix(fullNamespace, prefix) {
+				return ""
+			}
+			return strings.TrimPrefix(fullNamespace, prefix)
+		}
+	}
+	if o.ExcludedNamespaces == nil {
+		o.ExcludedNamespaces = []string{metadataNamespace, interopNamespace}
+	}
+	return o
+}
+
 // Ingester projects a winmd file into NamespaceMeta values.
 type Ingester struct {
 	file         *winmd.File
 	winmdVersion string
+	opts         Options
 
 	// kindIndex classifies every Windows.Win32 TypeDef by full name
 	// ("Namespace.Name") → TargetKind string.
@@ -44,11 +83,23 @@ type Ingester struct {
 	Diagnostics []string
 }
 
-// New builds an Ingester over a parsed winmd file.
+// New builds an Ingester over a parsed winmd file with the default (Win32)
+// projection options.
 func New(file *winmd.File, winmdVersion string) *Ingester {
-	ingester := &Ingester{file: file, winmdVersion: winmdVersion}
+	return NewWithOptions(file, winmdVersion, Options{})
+}
+
+// NewWithOptions builds an Ingester with explicit projection options.
+func NewWithOptions(file *winmd.File, winmdVersion string, opts Options) *Ingester {
+	ingester := &Ingester{file: file, winmdVersion: winmdVersion, opts: opts.withDefaults()}
 	ingester.buildIndices()
 	return ingester
+}
+
+// KindIndex exposes the full-name → TargetKind classification of this file's
+// TypeDefs, for seeding a sister assembly's ingest (Options.ExtraKinds).
+func (in *Ingester) KindIndex() map[string]string {
+	return in.kindIndex
 }
 
 // Ingest projects every Windows.Win32 namespace, sorted by namespace name.
@@ -62,7 +113,7 @@ func (in *Ingester) Ingest() ([]*win32meta.NamespaceMeta, error) {
 		if !in.isProjectedNamespace(typeDef.Namespace) || in.nestedSet[row] {
 			continue
 		}
-		shortNamespace := strings.TrimPrefix(typeDef.Namespace, namespacePrefix)
+		shortNamespace := in.opts.ApiName(typeDef.Namespace)
 		meta := byNamespace[shortNamespace]
 		if meta == nil {
 			meta = &win32meta.NamespaceMeta{
@@ -93,8 +144,15 @@ func (in *Ingester) Ingest() ([]*win32meta.NamespaceMeta, error) {
 }
 
 func (in *Ingester) isProjectedNamespace(namespace string) bool {
-	return strings.HasPrefix(namespace, namespacePrefix) &&
-		namespace != metadataNamespace && namespace != interopNamespace
+	if !strings.HasPrefix(namespace, in.opts.ProjectPrefix) {
+		return false
+	}
+	for _, excluded := range in.opts.ExcludedNamespaces {
+		if namespace == excluded {
+			return false
+		}
+	}
+	return true
 }
 
 // buildIndices precomputes the lookup tables used during projection.
@@ -136,11 +194,15 @@ func (in *Ingester) buildIndices() {
 	}
 
 	// Classify every projected TypeDef so ApiRef conversion can stamp
-	// TargetKind without re-walking.
-	in.kindIndex = make(map[string]string, len(tables.TypeDefs))
+	// TargetKind without re-walking. ExtraKinds seeds classifications from a
+	// sister assembly (cross-assembly TypeRef targets).
+	in.kindIndex = make(map[string]string, len(tables.TypeDefs)+len(in.opts.ExtraKinds))
+	for fullName, kind := range in.opts.ExtraKinds {
+		in.kindIndex[fullName] = kind
+	}
 	for typeDefRow := range tables.TypeDefs {
 		typeDef := &tables.TypeDefs[typeDefRow]
-		if !strings.HasPrefix(typeDef.Namespace, namespacePrefix) && typeDef.Namespace != "" {
+		if !strings.HasPrefix(typeDef.Namespace, in.opts.ProjectPrefix) && typeDef.Namespace != "" {
 			continue
 		}
 		kind := in.classifyTypeDef(typeDef, uint32(typeDefRow+1))

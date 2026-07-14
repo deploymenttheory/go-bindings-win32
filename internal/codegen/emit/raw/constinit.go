@@ -172,7 +172,7 @@ func (g *Generator) fieldLiteral(ref *win32meta.TypeRef, value initValue, namesp
 			if err != nil {
 				return "", err
 			}
-			imports["win32"] = g.mapper.ModulePath + "/bindings/runtime/win32"
+			imports["win32"] = g.mapper.RuntimeImportPath()
 			return literal, nil
 		}
 	case "Array":

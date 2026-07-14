@@ -77,18 +77,14 @@ Windows.Win32.winmd → .w32meta.json (IR) → Go source
 
 ### Pipeline packages
 
-- **`internal/winmd/`** — native Go ECMA-335 reader: PE container → metadata
-  streams → tables (`tables.go`) → signature blobs (`sig.go`) → custom
-  attributes (`attrs.go`). No .NET, no cgo. Aligned with the ECMA-335 6th
-  edition: exported symbols carry §II.x section references, table IDs are a
-  typed `Table` enum (all 45 tables, spec names), and bitmask columns are
-  typed (`TypeAttributes`, `ParamAttributes`, `PInvokeAttributes`, … in
-  `flags.go`). Untrusted lengths/rows are bounds-checked and
-  allocation-clamped (`corrupt_test.go` covers hostile inputs). The package
-  doc records explicit non-goals (no lazy tables, no CodedIndex tag
-  generics, no microsoft/go-winmd dependency). The whole winmd (37k types,
-  318k signatures, 152k attributes) decodes with zero failures; tests
-  brute-force all of it.
+- **`github.com/deploymenttheory/go-winmd`** (external, first-party) — the
+  native Go ECMA-335 reader, extracted from this repo's former
+  `internal/winmd`: PE container → metadata streams → tables → signature
+  blobs → decoded custom-attribute values. §II.x spec-referenced, typed
+  `Table`/flag enums, hardened against hostile input; its brute-force
+  suites decode the whole winmd (37k types, 318k signatures, 152k
+  attributes) with zero failures. Its `nuget` subpackage powers
+  `fetch-metadata`.
 - **`internal/win32meta/`** — the IR (`model.go`): one `NamespaceMeta` per
   namespace with structs/enums/functions/constants/interfaces/delegates/
   typedefs. `TypeRef` is the recursive type grammar (Native / ApiRef /
@@ -126,7 +122,7 @@ Windows.Win32.winmd → .w32meta.json (IR) → Go source
   loading (System32-only via `LoadLibraryExW` +
   `LOAD_LIBRARY_SEARCH_SYSTEM32`, `loader.go`), `LastError` normalization,
   the typed `HRESULT` error, `GUID`, UTF-16 helpers. Standard library only —
-  the module has zero external dependencies.
+  nothing beyond the stdlib is ever linked into consumer binaries.
 
 ### Generated output (`bindings/win32/`)
 
@@ -287,10 +283,13 @@ DO-NOT-EDIT header are never touched.
   params, packed structs, struct-initializer constants → diagnostics, never
   broken output. A pre-pass (`computeSkippedTypes`) guarantees no reference
   to a skipped type is ever emitted.
-- **Zero external dependencies**: the module is standard-library-only
-  (`go.mod` has no require lines). Do not add any. Consumers may still use
-  `golang.org/x/sys/windows` constants in `errors.Is` checks — its `ERROR_*`
-  values are typed `syscall.Errno`, which the runtime matches.
+- **First-party dependencies only**: the sole require is
+  `github.com/deploymenttheory/go-winmd` (the extracted ECMA-335 reader,
+  used by the generator). The runtime and generated bindings link nothing
+  beyond the standard library. Do not add third-party dependencies.
+  Consumers may still use `golang.org/x/sys/windows` constants in
+  `errors.Is` checks — its `ERROR_*` values are typed `syscall.Errno`,
+  which the runtime matches.
 - `metadata/win32/` (the IR cache) is derived and gitignored; the committed
   source of truth is `metadata/winmd/Windows.Win32.winmd` + `PROVENANCE.json`.
   Bump `win32meta.CurrentSchemaVersion` on incompatible IR changes.

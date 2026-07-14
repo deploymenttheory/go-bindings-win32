@@ -8,7 +8,6 @@
 package main
 
 import (
-	"encoding/json"
 	"flag"
 	"fmt"
 	"os"
@@ -20,7 +19,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/internal/diagnostics"
 	"github.com/deploymenttheory/go-bindings-win32/internal/win32meta"
 	"github.com/deploymenttheory/go-bindings-win32/internal/win32meta/ingest"
-	"github.com/deploymenttheory/go-bindings-win32/internal/winmd"
+	"github.com/deploymenttheory/go-winmd"
+	"github.com/deploymenttheory/go-winmd/nuget"
 )
 
 func main() {
@@ -67,21 +67,20 @@ commands:
   list            list the namespaces in the winmd`)
 }
 
-// provenance mirrors metadata/winmd/PROVENANCE.json.
-type provenance struct {
-	Version string `json:"version"`
-}
-
+// winmdVersion reads the winmd's version from the PROVENANCE.json record
+// whose File matches the winmd's base name.
 func winmdVersion(winmdPath string) string {
-	data, err := os.ReadFile(filepath.Join(filepath.Dir(winmdPath), "PROVENANCE.json"))
-	if err != nil {
+	records, err := nuget.ReadProvenance(filepath.Join(filepath.Dir(winmdPath), "PROVENANCE.json"))
+	if err != nil || len(records) == 0 {
 		return ""
 	}
-	var p provenance
-	if json.Unmarshal(data, &p) != nil {
-		return ""
+	base := filepath.Base(winmdPath)
+	for _, record := range records {
+		if record.File == base {
+			return record.Version
+		}
 	}
-	return p.Version
+	return records[0].Version
 }
 
 func runIngest(args []string) error {
@@ -217,7 +216,7 @@ func runABITest(args []string) error {
 	if _, err := generator.EmitAll(nil); err != nil {
 		return err
 	}
-	source := rawwin.BuildABITest(generator.ABIRecords(), modulePath, *sample)
+	source := rawwin.BuildABITest(generator.ABIRecords(), generator.ImportPathFor, *sample)
 	if err := os.WriteFile(*testPath, []byte(source), 0o644); err != nil {
 		return err
 	}

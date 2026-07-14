@@ -43,14 +43,26 @@ type FunctionRef struct {
 // qualified builds the "Api.Name" index key.
 func qualified(api, name string) string { return api + "." + name }
 
-// LoadAll reads every namespace metadata file in dir into a Registry.
-func LoadAll(dir string) (*Registry, error) {
-	namespaces, err := win32meta.ReadAll(dir)
-	if err != nil {
-		return nil, err
+// IsExternal reports whether the namespace belongs to another module's
+// bindings tree (resolved for types, never emitted). The win32 repo has no
+// external namespaces; sister generators (wdk) key theirs off a reserved
+// name prefix.
+func IsExternal(namespace string) bool { return false }
+
+// LoadAll reads every namespace metadata file in the given dirs into one
+// merged Registry. Multiple dirs exist in sister generators that load a
+// second assembly's IR for cross-assembly type resolution.
+func LoadAll(dirs ...string) (*Registry, error) {
+	var namespaces []*win32meta.NamespaceMeta
+	for _, dir := range dirs {
+		loaded, err := win32meta.ReadAll(dir)
+		if err != nil {
+			return nil, err
+		}
+		namespaces = append(namespaces, loaded...)
 	}
 	if len(namespaces) == 0 {
-		return nil, fmt.Errorf("pipeline: no .w32meta.json files in %s (run 'generate ingest')", dir)
+		return nil, fmt.Errorf("pipeline: no .w32meta.json files in %v (run 'generate ingest')", dirs)
 	}
 	registry := &Registry{
 		Namespaces:     namespaces,
@@ -67,7 +79,18 @@ func LoadAll(dir string) (*Registry, error) {
 		for i := range meta.Functions {
 			function := &meta.Functions[i]
 			if existing, seen := registry.FunctionOwner[function.Name]; seen {
-				if existing.Namespace != meta.Namespace {
+				if existing.Namespace == meta.Namespace {
+					continue
+				}
+				// Cross-namespace duplicate. When exactly one side is local,
+				// prefer it (cross-assembly exports like Nt* exist in both
+				// trees); same-locality collisions stay ambiguous.
+				switch {
+				case existing.Namespace != "" && IsExternal(existing.Namespace) && !IsExternal(meta.Namespace):
+					registry.FunctionOwner[function.Name] = FunctionRef{Namespace: meta.Namespace, Function: function}
+				case existing.Namespace != "" && !IsExternal(existing.Namespace) && IsExternal(meta.Namespace):
+					// keep the existing local owner
+				default:
 					registry.FunctionOwner[function.Name] = FunctionRef{} // ambiguous
 				}
 				continue

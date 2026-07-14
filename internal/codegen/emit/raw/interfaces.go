@@ -61,7 +61,7 @@ func (g *Generator) buildInterface(meta *win32meta.NamespaceMeta, name, goName s
 			if g.claimName(iidVar) {
 				model.IIDVar = iidVar
 				model.IIDLiteral = literal
-				imports["win32"] = g.mapper.ModulePath + "/bindings/runtime/win32"
+				imports["win32"] = g.mapper.RuntimeImportPath()
 			} else {
 				g.diag("interface %s: IID name %s already used", name, iidVar)
 			}
@@ -117,7 +117,7 @@ func (g *Generator) buildComMethod(meta *win32meta.NamespaceMeta, interfaceName 
 	for i := range method.Params {
 		resolvedParams[i] = g.mapper.GoType(&method.Params[i].Type, context, scratch)
 	}
-	retypeComOutParams(method.Params, resolvedParams, scratch, g.mapper.ModulePath)
+	retypeComOutParams(method.Params, resolvedParams, scratch, g.mapper.RuntimeImportPath())
 	slicePlans, elidedCounts := planSliceParams(method.Params, resolvedParams, true)
 	returnContext := context
 	returnContext.IsReturn = true
@@ -206,7 +206,7 @@ func (g *Generator) buildComMethod(meta *win32meta.NamespaceMeta, interfaceName 
 		// HRESULT so S_FALSE-style codes survive.
 		model.ReturnKind = view.RetHResultValueErr
 		model.ReturnSig = "(win32.HRESULT, error)"
-		scratch["win32"] = g.mapper.ModulePath + "/bindings/runtime/win32"
+		scratch["win32"] = g.mapper.RuntimeImportPath()
 	case isHRESULT(returnResolved):
 		model.ReturnKind = view.RetHResultErr
 		model.ReturnSig = "error"

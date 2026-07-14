@@ -12,8 +12,9 @@ go get github.com/deploymenttheory/go-bindings-win32@latest
 
 The bindings target **Windows on amd64 or arm64** (they share the same 64-bit
 LLP64 layout). Every generated file carries `//go:build windows && (amd64 ||
-arm64)`, so a non-Windows or 32-bit build simply skips them. The module has
-zero external dependencies — runtime and bindings are standard-library-only.
+arm64)`, so a non-Windows or 32-bit build simply skips them. The only
+dependency is our own `go-winmd` metadata reader (generator-time); the
+runtime and generated bindings link nothing beyond the standard library.
 
 ## Your first call
 

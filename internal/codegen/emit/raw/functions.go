@@ -152,7 +152,7 @@ func (g *Generator) buildFunction(meta *win32meta.NamespaceMeta, function *win32
 	for i := range function.Params {
 		resolvedParams[i] = g.mapper.GoType(&function.Params[i].Type, context, scratch)
 	}
-	retypeComOutParams(function.Params, resolvedParams, scratch, g.mapper.ModulePath)
+	retypeComOutParams(function.Params, resolvedParams, scratch, g.mapper.RuntimeImportPath())
 	slicePlans, elidedCounts := planSliceParams(function.Params, resolvedParams, true)
 
 	returnContext := context
@@ -280,7 +280,7 @@ func (g *Generator) buildFunction(meta *win32meta.NamespaceMeta, function *win32
 		imports[alias] = path
 	}
 	imports["syscall"] = "syscall"
-	imports["win32"] = g.mapper.ModulePath + "/bindings/runtime/win32"
+	imports["win32"] = g.mapper.RuntimeImportPath()
 	if usesUnsafe {
 		imports["unsafe"] = "unsafe"
 	}
@@ -622,7 +622,7 @@ func iidPairedOutParams(params []win32meta.Param) map[int]bool {
 // is selected at runtime by the riid argument; the marshaling word is
 // unchanged, and a [retval] param retyped here elevates through the normal
 // retValElement path.
-func retypeComOutParams(params []win32meta.Param, resolved []typemap.Resolved, imports typemap.ImportSet, modulePath string) {
+func retypeComOutParams(params []win32meta.Param, resolved []typemap.Resolved, imports typemap.ImportSet, runtimeImportPath string) {
 	paired := iidPairedOutParams(params)
 	for i := range params {
 		param := &params[i]
@@ -636,7 +636,7 @@ func retypeComOutParams(params []win32meta.Param, resolved []typemap.Resolved, i
 			continue
 		}
 		resolved[i] = typemap.Resolved{GoType: "**win32.IUnknown", Kind: typemap.KindPointer}
-		imports["win32"] = modulePath + "/bindings/runtime/win32"
+		imports["win32"] = runtimeImportPath
 	}
 }
 
@@ -698,16 +698,21 @@ func isIntegerCount(resolved typemap.Resolved) bool {
 	return false
 }
 
+// foundationApi is the IR namespace carrying the core status/string typedefs
+// (HRESULT, BOOL, PWSTR). "Foundation" here; "Win32.Foundation" in sister
+// generators whose local tree references the win32 module's types.
+const foundationApi = "Foundation"
+
 func isWideStringPtr(resolved typemap.Resolved) bool {
 	return resolved.Kind == typemap.KindPointerTypedef &&
-		resolved.TypedefApi == "Foundation" &&
+		resolved.TypedefApi == foundationApi &&
 		(resolved.TypedefName == "PWSTR" || resolved.TypedefName == "PCWSTR")
 }
 
 func isBOOL(resolved typemap.Resolved) bool {
-	return resolved.TypedefApi == "Foundation" && resolved.TypedefName == "BOOL"
+	return resolved.TypedefApi == foundationApi && resolved.TypedefName == "BOOL"
 }
 
 func isHRESULT(resolved typemap.Resolved) bool {
-	return resolved.TypedefApi == "Foundation" && resolved.TypedefName == "HRESULT"
+	return resolved.TypedefApi == foundationApi && resolved.TypedefName == "HRESULT"
 }

@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/deploymenttheory/go-bindings-win32/internal/win32meta"
-	"github.com/deploymenttheory/go-bindings-win32/internal/winmd"
+	"github.com/deploymenttheory/go-winmd"
 )
 
 // ── Attribute helpers ─────────────────────────────────────────────────────────
@@ -131,10 +131,11 @@ func (in *Ingester) typeRefOf(sig *winmd.TypeSig) win32meta.TypeRef {
 			// enclosing struct's nested types.
 			return win32meta.TypeRef{Kind: "ApiRef", Name: sig.Name, Api: "", TargetKind: "Struct", IsConst: sig.IsConst}
 		}
-		if !strings.HasPrefix(sig.Namespace, namespacePrefix) {
-			// WinRT types (Windows.Foundation.*, Windows.UI.*) referenced
-			// from Win32 interop APIs: pointer-sized object references the
-			// Win32 projection cannot bind.
+		api := in.opts.ApiName(sig.Namespace)
+		if api == "" {
+			// Unprojectable roots (WinRT Windows.Foundation.*, Windows.UI.*)
+			// referenced from interop APIs: pointer-sized object references
+			// this projection cannot bind.
 			in.Diagnostics = append(in.Diagnostics, "WinRT type "+sig.Namespace+"."+sig.Name+" degraded to UIntPtr")
 			return win32meta.TypeRef{Kind: "Native", Name: "UIntPtr", IsConst: sig.IsConst}
 		}
@@ -142,7 +143,7 @@ func (in *Ingester) typeRefOf(sig *winmd.TypeSig) win32meta.TypeRef {
 		return win32meta.TypeRef{
 			Kind:       "ApiRef",
 			Name:       sig.Name,
-			Api:        strings.TrimPrefix(sig.Namespace, namespacePrefix),
+			Api:        api,
 			TargetKind: in.kindIndex[fullName],
 			IsConst:    sig.IsConst,
 		}
@@ -560,11 +561,11 @@ func (in *Ingester) projectInterface(typeDef *winmd.TypeDefRow, row uint32) win3
 		case winmd.TableTypeRef:
 			ref := &tables.TypeRefs[base.Row-1]
 			comInterface.BaseInterface = ref.Name
-			comInterface.BaseInterfaceApi = strings.TrimPrefix(ref.Namespace, namespacePrefix)
+			comInterface.BaseInterfaceApi = in.opts.ApiName(ref.Namespace)
 		case winmd.TableTypeDef:
 			def := &tables.TypeDefs[base.Row-1]
 			comInterface.BaseInterface = def.Name
-			comInterface.BaseInterfaceApi = strings.TrimPrefix(def.Namespace, namespacePrefix)
+			comInterface.BaseInterfaceApi = in.opts.ApiName(def.Namespace)
 		}
 	}
 	for methodRow := typeDef.MethodFirst; methodRow < typeDef.MethodEnd && int(methodRow) <= len(tables.Methods); methodRow++ {

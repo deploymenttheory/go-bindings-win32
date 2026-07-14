@@ -479,7 +479,7 @@ func (g *Generator) buildConstant(meta *win32meta.NamespaceMeta, constant *win32
 			g.diag("constant %s: %v", constant.Name, err)
 			return view.ConstantModel{}, false
 		}
-		imports["win32"] = g.mapper.ModulePath + "/bindings/runtime/win32"
+		imports["win32"] = g.mapper.RuntimeImportPath()
 		return view.ConstantModel{Name: constant.Name, GoType: "win32.GUID", Literal: literal, IsVar: true}, true
 	case "Int", "UInt", "Float":
 		resolved := g.mapper.GoType(&constant.Type, typemap.Context{Namespace: meta.Namespace}, imports)

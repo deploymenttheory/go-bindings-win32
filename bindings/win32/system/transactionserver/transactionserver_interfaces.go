@@ -24,25 +24,25 @@ var IID_ICatalog = win32.GUID{Data1: 0x6eb22870, Data2: 0x8a19, Data3: 0x11d0, D
 // GetCollection dispatches through ICatalog's vtable slot 7.
 func (self *ICatalog) GetCollection(bstrCollName foundation.BSTR, ppCatalogCollection **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrCollName)), uintptr(unsafe.Pointer(ppCatalogCollection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Connect dispatches through ICatalog's vtable slot 8.
 func (self *ICatalog) Connect(bstrConnectString foundation.BSTR, ppCatalogCollection **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrConnectString)), uintptr(unsafe.Pointer(ppCatalogCollection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MajorVersion dispatches through ICatalog's vtable slot 9.
 func (self *ICatalog) Get_MajorVersion(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MinorVersion dispatches through ICatalog's vtable slot 10.
 func (self *ICatalog) Get_MinorVersion(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 6eb22873-8a19-11d0-81b6-00a0c9231c29
@@ -56,25 +56,25 @@ var IID_IComponentUtil = win32.GUID{Data1: 0x6eb22873, Data2: 0x8a19, Data3: 0x1
 // InstallComponent dispatches through IComponentUtil's vtable slot 7.
 func (self *IComponentUtil) InstallComponent(bstrDLLFile foundation.BSTR, bstrTypelibFile foundation.BSTR, bstrProxyStubDLLFile foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDLLFile)), uintptr(unsafe.Pointer(bstrTypelibFile)), uintptr(unsafe.Pointer(bstrProxyStubDLLFile)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ImportComponent dispatches through IComponentUtil's vtable slot 8.
 func (self *IComponentUtil) ImportComponent(bstrCLSID foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrCLSID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ImportComponentByName dispatches through IComponentUtil's vtable slot 9.
 func (self *IComponentUtil) ImportComponentByName(bstrProgID foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProgID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCLSIDs dispatches through IComponentUtil's vtable slot 10.
 func (self *IComponentUtil) GetCLSIDs(bstrDLLFile foundation.BSTR, bstrTypelibFile foundation.BSTR, aCLSIDs **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDLLFile)), uintptr(unsafe.Pointer(bstrTypelibFile)), uintptr(unsafe.Pointer(aCLSIDs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 6eb22874-8a19-11d0-81b6-00a0c9231c29
@@ -88,19 +88,19 @@ var IID_IPackageUtil = win32.GUID{Data1: 0x6eb22874, Data2: 0x8a19, Data3: 0x11d
 // InstallPackage dispatches through IPackageUtil's vtable slot 7.
 func (self *IPackageUtil) InstallPackage(bstrPackageFile foundation.BSTR, bstrInstallPath foundation.BSTR, lOptions int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPackageFile)), uintptr(unsafe.Pointer(bstrInstallPath)), uintptr(lOptions))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExportPackage dispatches through IPackageUtil's vtable slot 8.
 func (self *IPackageUtil) ExportPackage(bstrPackageID foundation.BSTR, bstrPackageFile foundation.BSTR, lOptions int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPackageID)), uintptr(unsafe.Pointer(bstrPackageFile)), uintptr(lOptions))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ShutdownPackage dispatches through IPackageUtil's vtable slot 9.
 func (self *IPackageUtil) ShutdownPackage(bstrPackageID foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPackageID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 6eb22875-8a19-11d0-81b6-00a0c9231c29
@@ -114,13 +114,13 @@ var IID_IRemoteComponentUtil = win32.GUID{Data1: 0x6eb22875, Data2: 0x8a19, Data
 // InstallRemoteComponent dispatches through IRemoteComponentUtil's vtable slot 7.
 func (self *IRemoteComponentUtil) InstallRemoteComponent(bstrServer foundation.BSTR, bstrPackageID foundation.BSTR, bstrCLSID foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrServer)), uintptr(unsafe.Pointer(bstrPackageID)), uintptr(unsafe.Pointer(bstrCLSID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InstallRemoteComponentByName dispatches through IRemoteComponentUtil's vtable slot 8.
 func (self *IRemoteComponentUtil) InstallRemoteComponentByName(bstrServer foundation.BSTR, bstrPackageName foundation.BSTR, bstrProgID foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrServer)), uintptr(unsafe.Pointer(bstrPackageName)), uintptr(unsafe.Pointer(bstrProgID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 6eb22876-8a19-11d0-81b6-00a0c9231c29
@@ -134,11 +134,11 @@ var IID_IRoleAssociationUtil = win32.GUID{Data1: 0x6eb22876, Data2: 0x8a19, Data
 // AssociateRole dispatches through IRoleAssociationUtil's vtable slot 7.
 func (self *IRoleAssociationUtil) AssociateRole(bstrRoleID foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRoleID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AssociateRoleByName dispatches through IRoleAssociationUtil's vtable slot 8.
 func (self *IRoleAssociationUtil) AssociateRoleByName(bstrRoleName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRoleName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

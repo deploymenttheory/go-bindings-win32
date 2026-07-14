@@ -35,7 +35,7 @@ var (
 // Minimum OS: windows6.1.
 func CertSelectionGetSerializedBlob(pcsi *CERT_SELECTUI_INPUT, ppOutBuffer *unsafe.Pointer, pulOutBufferSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procCertSelectionGetSerializedBlob.Addr(), uintptr(unsafe.Pointer(pcsi)), uintptr(unsafe.Pointer(ppOutBuffer)), uintptr(unsafe.Pointer(pulOutBufferSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CryptUIDlgCertMgr calls CRYPTUI!CryptUIDlgCertMgr.

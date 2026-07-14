@@ -24,5 +24,5 @@ var IID_IDirect3DDxgiInterfaceAccess = win32.GUID{Data1: 0xa9b3d012, Data2: 0x3d
 // GetInterface dispatches through IDirect3DDxgiInterfaceAccess's vtable slot 3.
 func (self *IDirect3DDxgiInterfaceAccess) GetInterface(iid *win32.GUID, p **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(p)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

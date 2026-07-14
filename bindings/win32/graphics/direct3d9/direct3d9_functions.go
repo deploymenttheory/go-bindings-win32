@@ -87,5 +87,5 @@ func Direct3DCreate9(SDKVersion uint32) *IDirect3D9 {
 // https://learn.microsoft.com/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9ex
 func Direct3DCreate9Ex(SDKVersion uint32, param1 **IDirect3D9Ex) error {
 	r1, _, _ := syscall.SyscallN(procDirect3DCreate9Ex.Addr(), uintptr(SDKVersion), uintptr(unsafe.Pointer(param1)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

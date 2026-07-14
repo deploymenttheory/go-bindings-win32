@@ -1149,7 +1149,7 @@ func CreateResourceIndexer(projectRoot string, extensionDllPath string, ppResour
 	_projectRoot := win32.UTF16Ptr(projectRoot)
 	_extensionDllPath := win32.UTF16Ptr(extensionDllPath)
 	r1, _, _ := syscall.SyscallN(procCreateResourceIndexer.Addr(), uintptr(unsafe.Pointer(_projectRoot)), uintptr(unsafe.Pointer(_extensionDllPath)), uintptr(unsafe.Pointer(ppResourceIndexer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateWindowEx calls USER32!CreateWindowExW.
@@ -2583,7 +2583,7 @@ func InSendMessageEx() uint32 {
 func IndexFilePath(resourceIndexer unsafe.Pointer, filePath string, ppResourceUri *foundation.PWSTR, pQualifierCount *uint32, ppQualifiers **IndexedResourceQualifier) error {
 	_filePath := win32.UTF16Ptr(filePath)
 	r1, _, _ := syscall.SyscallN(procIndexFilePath.Addr(), uintptr(unsafe.Pointer(resourceIndexer)), uintptr(unsafe.Pointer(_filePath)), uintptr(unsafe.Pointer(ppResourceUri)), uintptr(unsafe.Pointer(pQualifierCount)), uintptr(unsafe.Pointer(ppQualifiers)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InheritWindowMonitor calls USER32!InheritWindowMonitor.
@@ -3221,7 +3221,7 @@ func MrmCreateConfig(platformVersion MrmPlatformVersion, defaultQualifiers strin
 	_defaultQualifiers := win32.UTF16Ptr(defaultQualifiers)
 	_outputXmlFile := win32.UTF16Ptr(outputXmlFile)
 	r1, _, _ := syscall.SyscallN(procMrmCreateConfig.Addr(), uintptr(platformVersion), uintptr(unsafe.Pointer(_defaultQualifiers)), uintptr(unsafe.Pointer(_outputXmlFile)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MrmCreateConfigInMemory calls MrmSupport!MrmCreateConfigInMemory.
@@ -3229,7 +3229,7 @@ func MrmCreateConfig(platformVersion MrmPlatformVersion, defaultQualifiers strin
 func MrmCreateConfigInMemory(platformVersion MrmPlatformVersion, defaultQualifiers string, outputXmlData **byte, outputXmlSize *uint32) error {
 	_defaultQualifiers := win32.UTF16Ptr(defaultQualifiers)
 	r1, _, _ := syscall.SyscallN(procMrmCreateConfigInMemory.Addr(), uintptr(platformVersion), uintptr(unsafe.Pointer(_defaultQualifiers)), uintptr(unsafe.Pointer(outputXmlData)), uintptr(unsafe.Pointer(outputXmlSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MrmCreateResourceIndexer calls MrmSupport!MrmCreateResourceIndexer.
@@ -3239,7 +3239,7 @@ func MrmCreateResourceIndexer(packageFamilyName string, projectRoot string, plat
 	_projectRoot := win32.UTF16Ptr(projectRoot)
 	_defaultQualifiers := win32.UTF16Ptr(defaultQualifiers)
 	r1, _, _ := syscall.SyscallN(procMrmCreateResourceIndexer.Addr(), uintptr(unsafe.Pointer(_packageFamilyName)), uintptr(unsafe.Pointer(_projectRoot)), uintptr(platformVersion), uintptr(unsafe.Pointer(_defaultQualifiers)), uintptr(unsafe.Pointer(indexer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MrmCreateResourceIndexerFromPreviousPriData calls MrmSupport!MrmCreateResourceIndexerFromPreviousPriData.
@@ -3252,7 +3252,7 @@ func MrmCreateResourceIndexerFromPreviousPriData(projectRoot string, platformVer
 		_priData = &priData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procMrmCreateResourceIndexerFromPreviousPriData.Addr(), uintptr(unsafe.Pointer(_projectRoot)), uintptr(platformVersion), uintptr(unsafe.Pointer(_defaultQualifiers)), uintptr(unsafe.Pointer(_priData)), uintptr(len(priData)), uintptr(unsafe.Pointer(indexer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MrmCreateResourceIndexerFromPreviousPriFile calls MrmSupport!MrmCreateResourceIndexerFromPreviousPriFile.
@@ -3262,7 +3262,7 @@ func MrmCreateResourceIndexerFromPreviousPriFile(projectRoot string, platformVer
 	_defaultQualifiers := win32.UTF16Ptr(defaultQualifiers)
 	_priFile := win32.UTF16Ptr(priFile)
 	r1, _, _ := syscall.SyscallN(procMrmCreateResourceIndexerFromPreviousPriFile.Addr(), uintptr(unsafe.Pointer(_projectRoot)), uintptr(platformVersion), uintptr(unsafe.Pointer(_defaultQualifiers)), uintptr(unsafe.Pointer(_priFile)), uintptr(unsafe.Pointer(indexer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MrmCreateResourceIndexerFromPreviousSchemaData calls MrmSupport!MrmCreateResourceIndexerFromPreviousSchemaData.
@@ -3275,7 +3275,7 @@ func MrmCreateResourceIndexerFromPreviousSchemaData(projectRoot string, platform
 		_schemaXmlData = &schemaXmlData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procMrmCreateResourceIndexerFromPreviousSchemaData.Addr(), uintptr(unsafe.Pointer(_projectRoot)), uintptr(platformVersion), uintptr(unsafe.Pointer(_defaultQualifiers)), uintptr(unsafe.Pointer(_schemaXmlData)), uintptr(len(schemaXmlData)), uintptr(unsafe.Pointer(indexer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MrmCreateResourceIndexerFromPreviousSchemaFile calls MrmSupport!MrmCreateResourceIndexerFromPreviousSchemaFile.
@@ -3285,7 +3285,7 @@ func MrmCreateResourceIndexerFromPreviousSchemaFile(projectRoot string, platform
 	_defaultQualifiers := win32.UTF16Ptr(defaultQualifiers)
 	_schemaFile := win32.UTF16Ptr(schemaFile)
 	r1, _, _ := syscall.SyscallN(procMrmCreateResourceIndexerFromPreviousSchemaFile.Addr(), uintptr(unsafe.Pointer(_projectRoot)), uintptr(platformVersion), uintptr(unsafe.Pointer(_defaultQualifiers)), uintptr(unsafe.Pointer(_schemaFile)), uintptr(unsafe.Pointer(indexer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MrmCreateResourceIndexerWithFlags calls MrmSupport!MrmCreateResourceIndexerWithFlags.
@@ -3294,7 +3294,7 @@ func MrmCreateResourceIndexerWithFlags(packageFamilyName string, projectRoot str
 	_projectRoot := win32.UTF16Ptr(projectRoot)
 	_defaultQualifiers := win32.UTF16Ptr(defaultQualifiers)
 	r1, _, _ := syscall.SyscallN(procMrmCreateResourceIndexerWithFlags.Addr(), uintptr(unsafe.Pointer(_packageFamilyName)), uintptr(unsafe.Pointer(_projectRoot)), uintptr(platformVersion), uintptr(unsafe.Pointer(_defaultQualifiers)), uintptr(flags), uintptr(unsafe.Pointer(indexer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MrmDumpPriDataInMemory calls MrmSupport!MrmDumpPriDataInMemory.
@@ -3309,7 +3309,7 @@ func MrmDumpPriDataInMemory(inputPriData []byte, schemaPriData []byte, dumpType 
 		_schemaPriData = &schemaPriData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procMrmDumpPriDataInMemory.Addr(), uintptr(unsafe.Pointer(_inputPriData)), uintptr(len(inputPriData)), uintptr(unsafe.Pointer(_schemaPriData)), uintptr(len(schemaPriData)), uintptr(dumpType), uintptr(unsafe.Pointer(outputXmlData)), uintptr(unsafe.Pointer(outputXmlSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MrmDumpPriFile calls MrmSupport!MrmDumpPriFile.
@@ -3319,7 +3319,7 @@ func MrmDumpPriFile(indexFileName string, schemaPriFile string, dumpType MrmDump
 	_schemaPriFile := win32.UTF16Ptr(schemaPriFile)
 	_outputXmlFile := win32.UTF16Ptr(outputXmlFile)
 	r1, _, _ := syscall.SyscallN(procMrmDumpPriFile.Addr(), uintptr(unsafe.Pointer(_indexFileName)), uintptr(unsafe.Pointer(_schemaPriFile)), uintptr(dumpType), uintptr(unsafe.Pointer(_outputXmlFile)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MrmDumpPriFileInMemory calls MrmSupport!MrmDumpPriFileInMemory.
@@ -3328,21 +3328,21 @@ func MrmDumpPriFileInMemory(indexFileName string, schemaPriFile string, dumpType
 	_indexFileName := win32.UTF16Ptr(indexFileName)
 	_schemaPriFile := win32.UTF16Ptr(schemaPriFile)
 	r1, _, _ := syscall.SyscallN(procMrmDumpPriFileInMemory.Addr(), uintptr(unsafe.Pointer(_indexFileName)), uintptr(unsafe.Pointer(_schemaPriFile)), uintptr(dumpType), uintptr(unsafe.Pointer(outputXmlData)), uintptr(unsafe.Pointer(outputXmlSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MrmFreeMemory calls MrmSupport!MrmFreeMemory.
 // https://learn.microsoft.com/windows/win32/menurc/mrmfreememory
 func MrmFreeMemory(data *byte) error {
 	r1, _, _ := syscall.SyscallN(procMrmFreeMemory.Addr(), uintptr(unsafe.Pointer(data)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MrmGetPriFileContentChecksum calls MrmSupport!MrmGetPriFileContentChecksum.
 func MrmGetPriFileContentChecksum(priFile string, checksum *uint32) error {
 	_priFile := win32.UTF16Ptr(priFile)
 	r1, _, _ := syscall.SyscallN(procMrmGetPriFileContentChecksum.Addr(), uintptr(unsafe.Pointer(_priFile)), uintptr(unsafe.Pointer(checksum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MsgWaitForMultipleObjects calls USER32!MsgWaitForMultipleObjects.

@@ -26,19 +26,19 @@ var IID_IDirectWriterLock = win32.GUID{Data1: 0x0e6d4d92, Data2: 0x6738, Data3: 
 // WaitForWriteAccess dispatches through IDirectWriterLock's vtable slot 3.
 func (self *IDirectWriterLock) WaitForWriteAccess(dwTimeout uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwTimeout))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReleaseWriteAccess dispatches through IDirectWriterLock's vtable slot 4.
 func (self *IDirectWriterLock) ReleaseWriteAccess() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HaveWriteAccess dispatches through IDirectWriterLock's vtable slot 5.
 func (self *IDirectWriterLock) HaveWriteAccess() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumSTATPROPSETSTG: https://learn.microsoft.com/windows/win32/api/propidlbase/nn-propidlbase-ienumstatpropsetstg
@@ -57,25 +57,25 @@ func (self *IEnumSTATPROPSETSTG) Next(rgelt []STATPROPSETSTG, pceltFetched *uint
 		_rgelt = &rgelt[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumSTATPROPSETSTG's vtable slot 4.
 func (self *IEnumSTATPROPSETSTG) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumSTATPROPSETSTG's vtable slot 5.
 func (self *IEnumSTATPROPSETSTG) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IEnumSTATPROPSETSTG's vtable slot 6.
 func (self *IEnumSTATPROPSETSTG) Clone(ppenum **IEnumSTATPROPSETSTG) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumSTATPROPSTG: https://learn.microsoft.com/windows/win32/api/propidlbase/nn-propidlbase-ienumstatpropstg
@@ -94,25 +94,25 @@ func (self *IEnumSTATPROPSTG) Next(rgelt []STATPROPSTG, pceltFetched *uint32) er
 		_rgelt = &rgelt[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumSTATPROPSTG's vtable slot 4.
 func (self *IEnumSTATPROPSTG) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumSTATPROPSTG's vtable slot 5.
 func (self *IEnumSTATPROPSTG) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IEnumSTATPROPSTG's vtable slot 6.
 func (self *IEnumSTATPROPSTG) Clone(ppenum **IEnumSTATPROPSTG) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumSTATSTG: https://learn.microsoft.com/windows/win32/api/objidl/nn-objidl-ienumstatstg
@@ -131,25 +131,25 @@ func (self *IEnumSTATSTG) Next(rgelt []systemcom.STATSTG, pceltFetched *uint32) 
 		_rgelt = &rgelt[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumSTATSTG's vtable slot 4.
 func (self *IEnumSTATSTG) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumSTATSTG's vtable slot 5.
 func (self *IEnumSTATSTG) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IEnumSTATSTG's vtable slot 6.
 func (self *IEnumSTATSTG) Clone(ppenum **IEnumSTATSTG) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFillLockBytes: https://learn.microsoft.com/windows/win32/api/objidl/nn-objidl-ifilllockbytes
@@ -168,7 +168,7 @@ func (self *IFillLockBytes) FillAppend(pv []byte, pcbWritten *uint32) error {
 		_pv = &pv[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pv)), uintptr(len(pv)), uintptr(unsafe.Pointer(pcbWritten)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FillAt dispatches through IFillLockBytes's vtable slot 4.
@@ -178,20 +178,20 @@ func (self *IFillLockBytes) FillAt(ulOffset uint64, pv []byte, pcbWritten *uint3
 		_pv = &pv[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulOffset), uintptr(unsafe.Pointer(_pv)), uintptr(len(pv)), uintptr(unsafe.Pointer(pcbWritten)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetFillSize dispatches through IFillLockBytes's vtable slot 5.
 func (self *IFillLockBytes) SetFillSize(ulSize uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(ulSize))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Terminate dispatches through IFillLockBytes's vtable slot 6.
 func (self *IFillLockBytes) Terminate(bCanceled bool) error {
 	_bCanceled := win32.Bool32(bCanceled)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(_bCanceled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ILayoutStorage: https://learn.microsoft.com/windows/win32/api/objidl/nn-objidl-ilayoutstorage
@@ -210,32 +210,32 @@ func (self *ILayoutStorage) LayoutScript(pStorageLayout []systemcom.StorageLayou
 		_pStorageLayout = &pStorageLayout[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pStorageLayout)), uintptr(len(pStorageLayout)), 0)
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BeginMonitor dispatches through ILayoutStorage's vtable slot 4.
 func (self *ILayoutStorage) BeginMonitor() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndMonitor dispatches through ILayoutStorage's vtable slot 5.
 func (self *ILayoutStorage) EndMonitor() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReLayoutDocfile dispatches through ILayoutStorage's vtable slot 6.
 func (self *ILayoutStorage) ReLayoutDocfile(pwcsNewDfName string) error {
 	_pwcsNewDfName := win32.UTF16Ptr(pwcsNewDfName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwcsNewDfName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReLayoutDocfileOnILockBytes dispatches through ILayoutStorage's vtable slot 7.
 func (self *ILayoutStorage) ReLayoutDocfileOnILockBytes(pILockBytes *ILockBytes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pILockBytes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ILockBytes: https://learn.microsoft.com/windows/win32/api/objidl/nn-objidl-ilockbytes
@@ -254,7 +254,7 @@ func (self *ILockBytes) ReadAt(ulOffset uint64, pv []byte, pcbRead *uint32) erro
 		_pv = &pv[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulOffset), uintptr(unsafe.Pointer(_pv)), uintptr(len(pv)), uintptr(unsafe.Pointer(pcbRead)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteAt dispatches through ILockBytes's vtable slot 4.
@@ -264,37 +264,37 @@ func (self *ILockBytes) WriteAt(ulOffset uint64, pv []byte, pcbWritten *uint32) 
 		_pv = &pv[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulOffset), uintptr(unsafe.Pointer(_pv)), uintptr(len(pv)), uintptr(unsafe.Pointer(pcbWritten)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Flush dispatches through ILockBytes's vtable slot 5.
 func (self *ILockBytes) Flush() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetSize dispatches through ILockBytes's vtable slot 6.
 func (self *ILockBytes) SetSize(cb uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(cb))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LockRegion dispatches through ILockBytes's vtable slot 7.
 func (self *ILockBytes) LockRegion(libOffset uint64, cb uint64, dwLockType uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(libOffset), uintptr(cb), uintptr(dwLockType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnlockRegion dispatches through ILockBytes's vtable slot 8.
 func (self *ILockBytes) UnlockRegion(libOffset uint64, cb uint64, dwLockType uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(libOffset), uintptr(cb), uintptr(dwLockType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Stat dispatches through ILockBytes's vtable slot 9.
 func (self *ILockBytes) Stat(pstatstg *systemcom.STATSTG, grfStatFlag uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstatstg)), uintptr(grfStatFlag))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMemoryAllocator: https://learn.microsoft.com/windows/win32/Stg/imemoryallocator
@@ -325,38 +325,38 @@ var IID_IPersistStorage = win32.GUID{Data1: 0x0000010a, Data2: 0x0000, Data3: 0x
 // IsDirty dispatches through IPersistStorage's vtable slot 4.
 func (self *IPersistStorage) IsDirty() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitNew dispatches through IPersistStorage's vtable slot 5.
 func (self *IPersistStorage) InitNew(pStg *IStorage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStg)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Load dispatches through IPersistStorage's vtable slot 6.
 func (self *IPersistStorage) Load(pStg *IStorage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStg)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Save dispatches through IPersistStorage's vtable slot 7.
 func (self *IPersistStorage) Save(pStgSave *IStorage, fSameAsLoad bool) error {
 	_fSameAsLoad := win32.Bool32(fSameAsLoad)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStgSave)), uintptr(_fSameAsLoad))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SaveCompleted dispatches through IPersistStorage's vtable slot 8.
 func (self *IPersistStorage) SaveCompleted(pStgNew *IStorage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStgNew)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HandsOffStorage dispatches through IPersistStorage's vtable slot 9.
 func (self *IPersistStorage) HandsOffStorage() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPropertyBag: https://learn.microsoft.com/windows/win32/api/oaidl/nn-oaidl-ipropertybag
@@ -372,14 +372,14 @@ var IID_IPropertyBag = win32.GUID{Data1: 0x55272a00, Data2: 0x42cb, Data3: 0x11c
 func (self *IPropertyBag) Read(pszPropName string, pVar *systemvariant.VARIANT, pErrorLog *systemcom.IErrorLog) error {
 	_pszPropName := win32.UTF16Ptr(pszPropName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPropName)), uintptr(unsafe.Pointer(pVar)), uintptr(unsafe.Pointer(pErrorLog)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Write dispatches through IPropertyBag's vtable slot 4.
 func (self *IPropertyBag) Write(pszPropName string, pVar *systemvariant.VARIANT) error {
 	_pszPropName := win32.UTF16Ptr(pszPropName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPropName)), uintptr(unsafe.Pointer(pVar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 22f55882-280b-11d0-a8a9-00a0c90c2004
@@ -393,19 +393,19 @@ var IID_IPropertyBag2 = win32.GUID{Data1: 0x22f55882, Data2: 0x280b, Data3: 0x11
 // Read dispatches through IPropertyBag2's vtable slot 3.
 func (self *IPropertyBag2) Read(cProperties uint32, pPropBag *PROPBAG2, pErrLog *systemcom.IErrorLog, pvarValue *systemvariant.VARIANT, phrError *foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cProperties), uintptr(unsafe.Pointer(pPropBag)), uintptr(unsafe.Pointer(pErrLog)), uintptr(unsafe.Pointer(pvarValue)), uintptr(unsafe.Pointer(phrError)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Write dispatches through IPropertyBag2's vtable slot 4.
 func (self *IPropertyBag2) Write(cProperties uint32, pPropBag *PROPBAG2, pvarValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cProperties), uintptr(unsafe.Pointer(pPropBag)), uintptr(unsafe.Pointer(pvarValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CountProperties dispatches through IPropertyBag2's vtable slot 5.
 func (self *IPropertyBag2) CountProperties(pcProperties *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcProperties)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPropertyInfo dispatches through IPropertyBag2's vtable slot 6.
@@ -415,14 +415,14 @@ func (self *IPropertyBag2) GetPropertyInfo(iProperty uint32, pPropBag []PROPBAG2
 		_pPropBag = &pPropBag[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(iProperty), uintptr(len(pPropBag)), uintptr(unsafe.Pointer(_pPropBag)), uintptr(unsafe.Pointer(pcProperties)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LoadObject dispatches through IPropertyBag2's vtable slot 7.
 func (self *IPropertyBag2) LoadObject(pstrName string, dwHint uint32, pUnkObject *systemcom.IUnknown, pErrLog *systemcom.IErrorLog) error {
 	_pstrName := win32.UTF16Ptr(pstrName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pstrName)), uintptr(dwHint), uintptr(unsafe.Pointer(pUnkObject)), uintptr(unsafe.Pointer(pErrLog)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPropertySetStorage: https://learn.microsoft.com/windows/win32/api/propidl/nn-propidl-ipropertysetstorage
@@ -437,25 +437,25 @@ var IID_IPropertySetStorage = win32.GUID{Data1: 0x0000013a, Data2: 0x0000, Data3
 // Create dispatches through IPropertySetStorage's vtable slot 3.
 func (self *IPropertySetStorage) Create(rfmtid *win32.GUID, pclsid *win32.GUID, grfFlags uint32, grfMode uint32, ppprstg **IPropertyStorage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rfmtid)), uintptr(unsafe.Pointer(pclsid)), uintptr(grfFlags), uintptr(grfMode), uintptr(unsafe.Pointer(ppprstg)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Open dispatches through IPropertySetStorage's vtable slot 4.
 func (self *IPropertySetStorage) Open(rfmtid *win32.GUID, grfMode uint32, ppprstg **IPropertyStorage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rfmtid)), uintptr(grfMode), uintptr(unsafe.Pointer(ppprstg)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IPropertySetStorage's vtable slot 5.
 func (self *IPropertySetStorage) Delete(rfmtid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rfmtid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Enum dispatches through IPropertySetStorage's vtable slot 6.
 func (self *IPropertySetStorage) Enum(ppenum **IEnumSTATPROPSETSTG) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPropertyStorage: https://learn.microsoft.com/windows/win32/api/propidlbase/nn-propidlbase-ipropertystorage
@@ -470,13 +470,13 @@ var IID_IPropertyStorage = win32.GUID{Data1: 0x00000138, Data2: 0x0000, Data3: 0
 // ReadMultiple dispatches through IPropertyStorage's vtable slot 3.
 func (self *IPropertyStorage) ReadMultiple(cpspec uint32, rgpspec *PROPSPEC, rgpropvar *PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cpspec), uintptr(unsafe.Pointer(rgpspec)), uintptr(unsafe.Pointer(rgpropvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteMultiple dispatches through IPropertyStorage's vtable slot 4.
 func (self *IPropertyStorage) WriteMultiple(cpspec uint32, rgpspec *PROPSPEC, rgpropvar *PROPVARIANT, propidNameFirst uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cpspec), uintptr(unsafe.Pointer(rgpspec)), uintptr(unsafe.Pointer(rgpropvar)), uintptr(propidNameFirst))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteMultiple dispatches through IPropertyStorage's vtable slot 5.
@@ -486,19 +486,19 @@ func (self *IPropertyStorage) DeleteMultiple(rgpspec []PROPSPEC) error {
 		_rgpspec = &rgpspec[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(len(rgpspec)), uintptr(unsafe.Pointer(_rgpspec)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReadPropertyNames dispatches through IPropertyStorage's vtable slot 6.
 func (self *IPropertyStorage) ReadPropertyNames(cpropid uint32, rgpropid *uint32, rglpwstrName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(cpropid), uintptr(unsafe.Pointer(rgpropid)), uintptr(unsafe.Pointer(rglpwstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WritePropertyNames dispatches through IPropertyStorage's vtable slot 7.
 func (self *IPropertyStorage) WritePropertyNames(cpropid uint32, rgpropid *uint32, rglpwstrName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(cpropid), uintptr(unsafe.Pointer(rgpropid)), uintptr(unsafe.Pointer(rglpwstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeletePropertyNames dispatches through IPropertyStorage's vtable slot 8.
@@ -508,43 +508,43 @@ func (self *IPropertyStorage) DeletePropertyNames(rgpropid []uint32) error {
 		_rgpropid = &rgpropid[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(len(rgpropid)), uintptr(unsafe.Pointer(_rgpropid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Commit dispatches through IPropertyStorage's vtable slot 9.
 func (self *IPropertyStorage) Commit(grfCommitFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(grfCommitFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Revert dispatches through IPropertyStorage's vtable slot 10.
 func (self *IPropertyStorage) Revert() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Enum dispatches through IPropertyStorage's vtable slot 11.
 func (self *IPropertyStorage) Enum(ppenum **IEnumSTATPROPSTG) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTimes dispatches through IPropertyStorage's vtable slot 12.
 func (self *IPropertyStorage) SetTimes(pctime *foundation.FILETIME, patime *foundation.FILETIME, pmtime *foundation.FILETIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pctime)), uintptr(unsafe.Pointer(patime)), uintptr(unsafe.Pointer(pmtime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetClass dispatches through IPropertyStorage's vtable slot 13.
 func (self *IPropertyStorage) SetClass(clsid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Stat dispatches through IPropertyStorage's vtable slot 14.
 func (self *IPropertyStorage) Stat(pstatpsstg *STATPROPSETSTG) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstatpsstg)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IRootStorage: https://learn.microsoft.com/windows/win32/api/objidl/nn-objidl-irootstorage
@@ -560,7 +560,7 @@ var IID_IRootStorage = win32.GUID{Data1: 0x00000012, Data2: 0x0000, Data3: 0x000
 func (self *IRootStorage) SwitchToFile(pszFile string) error {
 	_pszFile := win32.UTF16Ptr(pszFile)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFile)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IStorage: https://learn.microsoft.com/windows/win32/api/objidl/nn-objidl-istorage
@@ -576,28 +576,28 @@ var IID_IStorage = win32.GUID{Data1: 0x0000000b, Data2: 0x0000, Data3: 0x0000, D
 func (self *IStorage) CreateStream(pwcsName string, grfMode systemcom.STGM, reserved1 uint32, reserved2 uint32, ppstm **systemcom.IStream) error {
 	_pwcsName := win32.UTF16Ptr(pwcsName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwcsName)), uintptr(grfMode), uintptr(reserved1), uintptr(reserved2), uintptr(unsafe.Pointer(ppstm)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenStream dispatches through IStorage's vtable slot 4.
 func (self *IStorage) OpenStream(pwcsName string, grfMode systemcom.STGM, reserved2 uint32, ppstm **systemcom.IStream) error {
 	_pwcsName := win32.UTF16Ptr(pwcsName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwcsName)), 0, uintptr(grfMode), uintptr(reserved2), uintptr(unsafe.Pointer(ppstm)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateStorage dispatches through IStorage's vtable slot 5.
 func (self *IStorage) CreateStorage(pwcsName string, grfMode systemcom.STGM, reserved1 uint32, reserved2 uint32, ppstg **IStorage) error {
 	_pwcsName := win32.UTF16Ptr(pwcsName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwcsName)), uintptr(grfMode), uintptr(reserved1), uintptr(reserved2), uintptr(unsafe.Pointer(ppstg)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenStorage dispatches through IStorage's vtable slot 6.
 func (self *IStorage) OpenStorage(pwcsName string, pstgPriority *IStorage, grfMode systemcom.STGM, snbExclude **uint16, reserved uint32, ppstg **IStorage) error {
 	_pwcsName := win32.UTF16Ptr(pwcsName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwcsName)), uintptr(unsafe.Pointer(pstgPriority)), uintptr(grfMode), uintptr(unsafe.Pointer(snbExclude)), uintptr(reserved), uintptr(unsafe.Pointer(ppstg)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CopyTo dispatches through IStorage's vtable slot 7.
@@ -607,7 +607,7 @@ func (self *IStorage) CopyTo(rgiidExclude []win32.GUID, snbExclude **uint16, pst
 		_rgiidExclude = &rgiidExclude[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(len(rgiidExclude)), uintptr(unsafe.Pointer(_rgiidExclude)), uintptr(unsafe.Pointer(snbExclude)), uintptr(unsafe.Pointer(pstgDest)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MoveElementTo dispatches through IStorage's vtable slot 8.
@@ -615,32 +615,32 @@ func (self *IStorage) MoveElementTo(pwcsName string, pstgDest *IStorage, pwcsNew
 	_pwcsName := win32.UTF16Ptr(pwcsName)
 	_pwcsNewName := win32.UTF16Ptr(pwcsNewName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwcsName)), uintptr(unsafe.Pointer(pstgDest)), uintptr(unsafe.Pointer(_pwcsNewName)), uintptr(grfFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Commit dispatches through IStorage's vtable slot 9.
 func (self *IStorage) Commit(grfCommitFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(grfCommitFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Revert dispatches through IStorage's vtable slot 10.
 func (self *IStorage) Revert() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumElements dispatches through IStorage's vtable slot 11.
 func (self *IStorage) EnumElements(ppenum **IEnumSTATSTG) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), 0, 0, 0, uintptr(unsafe.Pointer(ppenum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DestroyElement dispatches through IStorage's vtable slot 12.
 func (self *IStorage) DestroyElement(pwcsName string) error {
 	_pwcsName := win32.UTF16Ptr(pwcsName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwcsName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RenameElement dispatches through IStorage's vtable slot 13.
@@ -648,30 +648,30 @@ func (self *IStorage) RenameElement(pwcsOldName string, pwcsNewName string) erro
 	_pwcsOldName := win32.UTF16Ptr(pwcsOldName)
 	_pwcsNewName := win32.UTF16Ptr(pwcsNewName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwcsOldName)), uintptr(unsafe.Pointer(_pwcsNewName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetElementTimes dispatches through IStorage's vtable slot 14.
 func (self *IStorage) SetElementTimes(pwcsName string, pctime *foundation.FILETIME, patime *foundation.FILETIME, pmtime *foundation.FILETIME) error {
 	_pwcsName := win32.UTF16Ptr(pwcsName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwcsName)), uintptr(unsafe.Pointer(pctime)), uintptr(unsafe.Pointer(patime)), uintptr(unsafe.Pointer(pmtime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetClass dispatches through IStorage's vtable slot 15.
 func (self *IStorage) SetClass(clsid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetStateBits dispatches through IStorage's vtable slot 16.
 func (self *IStorage) SetStateBits(grfStateBits uint32, grfMask uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(grfStateBits), uintptr(grfMask))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Stat dispatches through IStorage's vtable slot 17.
 func (self *IStorage) Stat(pstatstg *systemcom.STATSTG, grfStatFlag uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstatstg)), uintptr(grfStatFlag))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

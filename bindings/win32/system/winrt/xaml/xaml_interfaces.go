@@ -27,14 +27,14 @@ var IID_IDesktopWindowXamlSourceNative = win32.GUID{Data1: 0x3cbcf1bf, Data2: 0x
 // AttachToWindow dispatches through IDesktopWindowXamlSourceNative's vtable slot 3.
 func (self *IDesktopWindowXamlSourceNative) AttachToWindow(parentWnd foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(parentWnd))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_WindowHandle dispatches through IDesktopWindowXamlSourceNative's vtable slot 4.
 func (self *IDesktopWindowXamlSourceNative) Get_WindowHandle() (foundation.HWND, error) {
 	var _hWnd foundation.HWND
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hWnd)))
-	return _hWnd, win32.HRESULTError(int32(r1))
+	return _hWnd, win32.ErrIfFailed(int32(r1))
 }
 
 // IDesktopWindowXamlSourceNative2: https://learn.microsoft.com/windows/win32/api/windows.ui.xaml.hosting.desktopwindowxamlsource/nn-windows-ui-xaml-hosting-desktopwindowxamlsource-idesktopwindowxamlsourcenative2
@@ -49,7 +49,7 @@ var IID_IDesktopWindowXamlSourceNative2 = win32.GUID{Data1: 0xe3dcd8c7, Data2: 0
 // PreTranslateMessage dispatches through IDesktopWindowXamlSourceNative2's vtable slot 5.
 func (self *IDesktopWindowXamlSourceNative2) PreTranslateMessage(message *uiwindowsandmessaging.MSG, result *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(result)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFindReferenceTargetsCallback: https://learn.microsoft.com/windows/win32/api/windows.ui.xaml.hosting.referencetracker/nn-windows-ui-xaml-hosting-referencetracker-ifindreferencetargetscallback
@@ -64,7 +64,7 @@ var IID_IFindReferenceTargetsCallback = win32.GUID{Data1: 0x04b3486c, Data2: 0x4
 // FoundTrackerTarget dispatches through IFindReferenceTargetsCallback's vtable slot 3.
 func (self *IFindReferenceTargetsCallback) FoundTrackerTarget(target *IReferenceTrackerTarget) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(target)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IReferenceTracker: https://learn.microsoft.com/windows/win32/api/windows.ui.xaml.hosting.referencetracker/nn-windows-ui-xaml-hosting-referencetracker-ireferencetracker
@@ -79,43 +79,43 @@ var IID_IReferenceTracker = win32.GUID{Data1: 0x11d3b13a, Data2: 0x180e, Data3: 
 // ConnectFromTrackerSource dispatches through IReferenceTracker's vtable slot 3.
 func (self *IReferenceTracker) ConnectFromTrackerSource() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DisconnectFromTrackerSource dispatches through IReferenceTracker's vtable slot 4.
 func (self *IReferenceTracker) DisconnectFromTrackerSource() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FindTrackerTargets dispatches through IReferenceTracker's vtable slot 5.
 func (self *IReferenceTracker) FindTrackerTargets(callback *IFindReferenceTargetsCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(callback)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetReferenceTrackerManager dispatches through IReferenceTracker's vtable slot 6.
 func (self *IReferenceTracker) GetReferenceTrackerManager(value **IReferenceTrackerManager) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddRefFromTrackerSource dispatches through IReferenceTracker's vtable slot 7.
 func (self *IReferenceTracker) AddRefFromTrackerSource() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReleaseFromTrackerSource dispatches through IReferenceTracker's vtable slot 8.
 func (self *IReferenceTracker) ReleaseFromTrackerSource() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PegFromTrackerSource dispatches through IReferenceTracker's vtable slot 9.
 func (self *IReferenceTracker) PegFromTrackerSource() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 4e897caa-59d5-4613-8f8c-f7ebd1f399b0
@@ -138,37 +138,37 @@ var IID_IReferenceTrackerHost = win32.GUID{Data1: 0x29a71c6a, Data2: 0x3c42, Dat
 // DisconnectUnusedReferenceSources dispatches through IReferenceTrackerHost's vtable slot 3.
 func (self *IReferenceTrackerHost) DisconnectUnusedReferenceSources(options XAML_REFERENCETRACKER_DISCONNECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(options))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReleaseDisconnectedReferenceSources dispatches through IReferenceTrackerHost's vtable slot 4.
 func (self *IReferenceTrackerHost) ReleaseDisconnectedReferenceSources() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NotifyEndOfReferenceTrackingOnThread dispatches through IReferenceTrackerHost's vtable slot 5.
 func (self *IReferenceTrackerHost) NotifyEndOfReferenceTrackingOnThread() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTrackerTarget dispatches through IReferenceTrackerHost's vtable slot 6.
 func (self *IReferenceTrackerHost) GetTrackerTarget(unknown *systemcom.IUnknown, newReference **IReferenceTrackerTarget) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(unknown)), uintptr(unsafe.Pointer(newReference)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddMemoryPressure dispatches through IReferenceTrackerHost's vtable slot 7.
 func (self *IReferenceTrackerHost) AddMemoryPressure(bytesAllocated uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(bytesAllocated))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveMemoryPressure dispatches through IReferenceTrackerHost's vtable slot 8.
 func (self *IReferenceTrackerHost) RemoveMemoryPressure(bytesAllocated uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(bytesAllocated))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IReferenceTrackerManager: https://learn.microsoft.com/windows/win32/api/windows.ui.xaml.hosting.referencetracker/nn-windows-ui-xaml-hosting-referencetracker-ireferencetrackermanager
@@ -183,25 +183,25 @@ var IID_IReferenceTrackerManager = win32.GUID{Data1: 0x3cf184b4, Data2: 0x7ccb, 
 // ReferenceTrackingStarted dispatches through IReferenceTrackerManager's vtable slot 3.
 func (self *IReferenceTrackerManager) ReferenceTrackingStarted() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FindTrackerTargetsCompleted dispatches through IReferenceTrackerManager's vtable slot 4.
 func (self *IReferenceTrackerManager) FindTrackerTargetsCompleted(findFailed byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(findFailed))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReferenceTrackingCompleted dispatches through IReferenceTrackerManager's vtable slot 5.
 func (self *IReferenceTrackerManager) ReferenceTrackingCompleted() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetReferenceTrackerHost dispatches through IReferenceTrackerManager's vtable slot 6.
 func (self *IReferenceTrackerManager) SetReferenceTrackerHost(value *IReferenceTrackerHost) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IReferenceTrackerTarget: https://learn.microsoft.com/windows/win32/api/windows.ui.xaml.hosting.referencetracker/nn-windows-ui-xaml-hosting-referencetracker-ireferencetrackertarget
@@ -228,13 +228,13 @@ func (self *IReferenceTrackerTarget) ReleaseFromReferenceTracker() uint32 {
 // Peg dispatches through IReferenceTrackerTarget's vtable slot 5.
 func (self *IReferenceTrackerTarget) Peg() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Unpeg dispatches through IReferenceTrackerTarget's vtable slot 6.
 func (self *IReferenceTrackerTarget) Unpeg() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISurfaceImageSourceManagerNative: https://learn.microsoft.com/windows/win32/api/windows.ui.xaml.media.dxinterop/nn-windows-ui-xaml-media-dxinterop-isurfaceimagesourcemanagernative
@@ -249,7 +249,7 @@ var IID_ISurfaceImageSourceManagerNative = win32.GUID{Data1: 0x4c8798b7, Data2: 
 // FlushAllSurfacesWithDevice dispatches through ISurfaceImageSourceManagerNative's vtable slot 3.
 func (self *ISurfaceImageSourceManagerNative) FlushAllSurfacesWithDevice(device *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(device)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISurfaceImageSourceNative: https://learn.microsoft.com/windows/win32/api/windows.ui.xaml.media.dxinterop/nn-windows-ui-xaml-media-dxinterop-isurfaceimagesourcenative
@@ -264,13 +264,13 @@ var IID_ISurfaceImageSourceNative = win32.GUID{Data1: 0xf2e9edc1, Data2: 0xd307,
 // SetDevice dispatches through ISurfaceImageSourceNative's vtable slot 3.
 func (self *ISurfaceImageSourceNative) SetDevice(device *graphicsdxgi.IDXGIDevice) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(device)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndDraw dispatches through ISurfaceImageSourceNative's vtable slot 5.
 func (self *ISurfaceImageSourceNative) EndDraw() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISurfaceImageSourceNativeWithD2D: https://learn.microsoft.com/windows/win32/api/windows.ui.xaml.media.dxinterop/nn-windows-ui-xaml-media-dxinterop-isurfaceimagesourcenativewithd2d
@@ -285,31 +285,31 @@ var IID_ISurfaceImageSourceNativeWithD2D = win32.GUID{Data1: 0x54298223, Data2: 
 // SetDevice dispatches through ISurfaceImageSourceNativeWithD2D's vtable slot 3.
 func (self *ISurfaceImageSourceNativeWithD2D) SetDevice(device *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(device)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BeginDraw dispatches through ISurfaceImageSourceNativeWithD2D's vtable slot 4.
 func (self *ISurfaceImageSourceNativeWithD2D) BeginDraw(updateRect *foundation.RECT, iid *win32.GUID, updateObject **win32.IUnknown, offset *foundation.POINT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(updateRect)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(updateObject)), uintptr(unsafe.Pointer(offset)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndDraw dispatches through ISurfaceImageSourceNativeWithD2D's vtable slot 5.
 func (self *ISurfaceImageSourceNativeWithD2D) EndDraw() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SuspendDraw dispatches through ISurfaceImageSourceNativeWithD2D's vtable slot 6.
 func (self *ISurfaceImageSourceNativeWithD2D) SuspendDraw() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ResumeDraw dispatches through ISurfaceImageSourceNativeWithD2D's vtable slot 7.
 func (self *ISurfaceImageSourceNativeWithD2D) ResumeDraw() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISwapChainBackgroundPanelNative: https://learn.microsoft.com/windows/win32/api/windows.ui.xaml.media.dxinterop/nn-windows-ui-xaml-media-dxinterop-iswapchainbackgroundpanelnative
@@ -324,7 +324,7 @@ var IID_ISwapChainBackgroundPanelNative = win32.GUID{Data1: 0x43bebd4e, Data2: 0
 // SetSwapChain dispatches through ISwapChainBackgroundPanelNative's vtable slot 3.
 func (self *ISwapChainBackgroundPanelNative) SetSwapChain(swapChain *graphicsdxgi.IDXGISwapChain) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(swapChain)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISwapChainPanelNative: https://learn.microsoft.com/windows/win32/api/windows.ui.xaml.media.dxinterop/nn-windows-ui-xaml-media-dxinterop-iswapchainpanelnative
@@ -339,7 +339,7 @@ var IID_ISwapChainPanelNative = win32.GUID{Data1: 0xf92f19d2, Data2: 0x3ade, Dat
 // SetSwapChain dispatches through ISwapChainPanelNative's vtable slot 3.
 func (self *ISwapChainPanelNative) SetSwapChain(swapChain *graphicsdxgi.IDXGISwapChain) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(swapChain)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISwapChainPanelNative2: https://learn.microsoft.com/windows/win32/api/windows.ui.xaml.media.dxinterop/nn-windows-ui-xaml-media-dxinterop-iswapchainpanelnative2
@@ -354,7 +354,7 @@ var IID_ISwapChainPanelNative2 = win32.GUID{Data1: 0xd5a2f60c, Data2: 0x37b2, Da
 // SetSwapChainHandle dispatches through ISwapChainPanelNative2's vtable slot 4.
 func (self *ISwapChainPanelNative2) SetSwapChainHandle(swapChainHandle foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(swapChainHandle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: eb24c20b-9816-4ac7-8cff-36f67a118f4e
@@ -369,19 +369,19 @@ var IID_ITrackerOwner = win32.GUID{Data1: 0xeb24c20b, Data2: 0x9816, Data3: 0x4a
 func (self *ITrackerOwner) CreateTrackerHandle() (TrackerHandle, error) {
 	var _returnValue TrackerHandle
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_returnValue)))
-	return _returnValue, win32.HRESULTError(int32(r1))
+	return _returnValue, win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteTrackerHandle dispatches through ITrackerOwner's vtable slot 4.
 func (self *ITrackerOwner) DeleteTrackerHandle(handle TrackerHandle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(handle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTrackerValue dispatches through ITrackerOwner's vtable slot 5.
 func (self *ITrackerOwner) SetTrackerValue(handle TrackerHandle, value *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(handle), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TryGetSafeTrackerValue dispatches through ITrackerOwner's vtable slot 6.
@@ -402,7 +402,7 @@ var IID_IVirtualSurfaceImageSourceNative = win32.GUID{Data1: 0xe9550983, Data2: 
 // GetUpdateRectCount dispatches through IVirtualSurfaceImageSourceNative's vtable slot 7.
 func (self *IVirtualSurfaceImageSourceNative) GetUpdateRectCount(count *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(count)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetUpdateRects dispatches through IVirtualSurfaceImageSourceNative's vtable slot 8.
@@ -412,25 +412,25 @@ func (self *IVirtualSurfaceImageSourceNative) GetUpdateRects(updates []foundatio
 		_updates = &updates[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_updates)), uintptr(len(updates)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetVisibleBounds dispatches through IVirtualSurfaceImageSourceNative's vtable slot 9.
 func (self *IVirtualSurfaceImageSourceNative) GetVisibleBounds(bounds *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bounds)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterForUpdatesNeeded dispatches through IVirtualSurfaceImageSourceNative's vtable slot 10.
 func (self *IVirtualSurfaceImageSourceNative) RegisterForUpdatesNeeded(callback *IVirtualSurfaceUpdatesCallbackNative) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(callback)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Resize dispatches through IVirtualSurfaceImageSourceNative's vtable slot 11.
 func (self *IVirtualSurfaceImageSourceNative) Resize(newWidth int32, newHeight int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(newWidth), uintptr(newHeight))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVirtualSurfaceUpdatesCallbackNative: https://learn.microsoft.com/windows/win32/api/windows.ui.xaml.media.dxinterop/nn-windows-ui-xaml-media-dxinterop-ivirtualsurfaceupdatescallbacknative
@@ -445,5 +445,5 @@ var IID_IVirtualSurfaceUpdatesCallbackNative = win32.GUID{Data1: 0xdbf2e947, Dat
 // UpdatesNeeded dispatches through IVirtualSurfaceUpdatesCallbackNative's vtable slot 3.
 func (self *IVirtualSurfaceUpdatesCallbackNative) UpdatesNeeded() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

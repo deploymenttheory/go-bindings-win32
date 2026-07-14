@@ -105,7 +105,7 @@ var (
 // Minimum OS: windows5.1.2600.
 func PSCoerceToCanonicalValue(key *foundation.PROPERTYKEY, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procPSCoerceToCanonicalValue.Addr(), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(ppropvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSCreateAdapterFromPropertyStore calls PROPSYS!PSCreateAdapterFromPropertyStore.
@@ -113,7 +113,7 @@ func PSCoerceToCanonicalValue(key *foundation.PROPERTYKEY, ppropvar *systemcomst
 // Minimum OS: windows5.1.2600.
 func PSCreateAdapterFromPropertyStore(pps *IPropertyStore, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procPSCreateAdapterFromPropertyStore.Addr(), uintptr(unsafe.Pointer(pps)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSCreateDelayedMultiplexPropertyStore calls PROPSYS!PSCreateDelayedMultiplexPropertyStore.
@@ -125,7 +125,7 @@ func PSCreateDelayedMultiplexPropertyStore(flags GETPROPERTYSTOREFLAGS, pdpsf *I
 		_rgStoreIds = &rgStoreIds[0]
 	}
 	r1, _, _ := syscall.SyscallN(procPSCreateDelayedMultiplexPropertyStore.Addr(), uintptr(flags), uintptr(unsafe.Pointer(pdpsf)), uintptr(unsafe.Pointer(_rgStoreIds)), uintptr(len(rgStoreIds)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSCreateMemoryPropertyStore calls PROPSYS!PSCreateMemoryPropertyStore.
@@ -133,7 +133,7 @@ func PSCreateDelayedMultiplexPropertyStore(flags GETPROPERTYSTOREFLAGS, pdpsf *I
 // Minimum OS: windows5.1.2600.
 func PSCreateMemoryPropertyStore(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procPSCreateMemoryPropertyStore.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSCreateMultiplexPropertyStore calls PROPSYS!PSCreateMultiplexPropertyStore.
@@ -145,7 +145,7 @@ func PSCreateMultiplexPropertyStore(prgpunkStores []*systemcom.IUnknown, riid *w
 		_prgpunkStores = &prgpunkStores[0]
 	}
 	r1, _, _ := syscall.SyscallN(procPSCreateMultiplexPropertyStore.Addr(), uintptr(unsafe.Pointer(_prgpunkStores)), uintptr(len(prgpunkStores)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSCreatePropertyChangeArray calls PROPSYS!PSCreatePropertyChangeArray.
@@ -153,7 +153,7 @@ func PSCreateMultiplexPropertyStore(prgpunkStores []*systemcom.IUnknown, riid *w
 // Minimum OS: windows5.1.2600.
 func PSCreatePropertyChangeArray(rgpropkey *foundation.PROPERTYKEY, rgflags *PKA_FLAGS, rgpropvar *systemcomstructuredstorage.PROPVARIANT, cChanges uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procPSCreatePropertyChangeArray.Addr(), uintptr(unsafe.Pointer(rgpropkey)), uintptr(unsafe.Pointer(rgflags)), uintptr(unsafe.Pointer(rgpropvar)), uintptr(cChanges), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSCreatePropertyStoreFromObject calls PROPSYS!PSCreatePropertyStoreFromObject.
@@ -161,7 +161,7 @@ func PSCreatePropertyChangeArray(rgpropkey *foundation.PROPERTYKEY, rgflags *PKA
 // Minimum OS: windows5.1.2600.
 func PSCreatePropertyStoreFromObject(punk *systemcom.IUnknown, grfMode uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procPSCreatePropertyStoreFromObject.Addr(), uintptr(unsafe.Pointer(punk)), uintptr(grfMode), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSCreatePropertyStoreFromPropertySetStorage calls PROPSYS!PSCreatePropertyStoreFromPropertySetStorage.
@@ -169,7 +169,7 @@ func PSCreatePropertyStoreFromObject(punk *systemcom.IUnknown, grfMode uint32, r
 // Minimum OS: windows5.1.2600.
 func PSCreatePropertyStoreFromPropertySetStorage(ppss *systemcomstructuredstorage.IPropertySetStorage, grfMode uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procPSCreatePropertyStoreFromPropertySetStorage.Addr(), uintptr(unsafe.Pointer(ppss)), uintptr(grfMode), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSCreateSimplePropertyChange calls PROPSYS!PSCreateSimplePropertyChange.
@@ -177,7 +177,7 @@ func PSCreatePropertyStoreFromPropertySetStorage(ppss *systemcomstructuredstorag
 // Minimum OS: windows5.1.2600.
 func PSCreateSimplePropertyChange(flags PKA_FLAGS, key *foundation.PROPERTYKEY, propvar *systemcomstructuredstorage.PROPVARIANT, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procPSCreateSimplePropertyChange.Addr(), uintptr(flags), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSEnumeratePropertyDescriptions calls PROPSYS!PSEnumeratePropertyDescriptions.
@@ -185,7 +185,7 @@ func PSCreateSimplePropertyChange(flags PKA_FLAGS, key *foundation.PROPERTYKEY, 
 // Minimum OS: windows5.1.2600.
 func PSEnumeratePropertyDescriptions(filterOn PROPDESC_ENUMFILTER, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procPSEnumeratePropertyDescriptions.Addr(), uintptr(filterOn), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSFormatForDisplay calls PROPSYS!PSFormatForDisplay.
@@ -193,7 +193,7 @@ func PSEnumeratePropertyDescriptions(filterOn PROPDESC_ENUMFILTER, riid *win32.G
 // Minimum OS: windows6.0.6000.
 func PSFormatForDisplay(propkey *foundation.PROPERTYKEY, propvar *systemcomstructuredstorage.PROPVARIANT, pdfFlags PROPDESC_FORMAT_FLAGS, pwszText foundation.PWSTR, cchText uint32) error {
 	r1, _, _ := syscall.SyscallN(procPSFormatForDisplay.Addr(), uintptr(unsafe.Pointer(propkey)), uintptr(unsafe.Pointer(propvar)), uintptr(pdfFlags), uintptr(unsafe.Pointer(pwszText)), uintptr(cchText))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSFormatForDisplayAlloc calls PROPSYS!PSFormatForDisplayAlloc.
@@ -201,7 +201,7 @@ func PSFormatForDisplay(propkey *foundation.PROPERTYKEY, propvar *systemcomstruc
 // Minimum OS: windows6.0.6000.
 func PSFormatForDisplayAlloc(key *foundation.PROPERTYKEY, propvar *systemcomstructuredstorage.PROPVARIANT, pdff PROPDESC_FORMAT_FLAGS, ppszDisplay *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procPSFormatForDisplayAlloc.Addr(), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(propvar)), uintptr(pdff), uintptr(unsafe.Pointer(ppszDisplay)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSFormatPropertyValue calls PROPSYS!PSFormatPropertyValue.
@@ -209,7 +209,7 @@ func PSFormatForDisplayAlloc(key *foundation.PROPERTYKEY, propvar *systemcomstru
 // Minimum OS: windows6.0.6000.
 func PSFormatPropertyValue(pps *IPropertyStore, ppd *IPropertyDescription, pdff PROPDESC_FORMAT_FLAGS, ppszDisplay *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procPSFormatPropertyValue.Addr(), uintptr(unsafe.Pointer(pps)), uintptr(unsafe.Pointer(ppd)), uintptr(pdff), uintptr(unsafe.Pointer(ppszDisplay)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSGetImageReferenceForValue calls PROPSYS!PSGetImageReferenceForValue.
@@ -217,7 +217,7 @@ func PSFormatPropertyValue(pps *IPropertyStore, ppd *IPropertyDescription, pdff 
 // Minimum OS: windows6.1.
 func PSGetImageReferenceForValue(propkey *foundation.PROPERTYKEY, propvar *systemcomstructuredstorage.PROPVARIANT, ppszImageRes *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procPSGetImageReferenceForValue.Addr(), uintptr(unsafe.Pointer(propkey)), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(ppszImageRes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSGetItemPropertyHandler calls PROPSYS!PSGetItemPropertyHandler.
@@ -226,7 +226,7 @@ func PSGetImageReferenceForValue(propkey *foundation.PROPERTYKEY, propvar *syste
 func PSGetItemPropertyHandler(punkItem *systemcom.IUnknown, fReadWrite bool, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_fReadWrite := win32.Bool32(fReadWrite)
 	r1, _, _ := syscall.SyscallN(procPSGetItemPropertyHandler.Addr(), uintptr(unsafe.Pointer(punkItem)), uintptr(_fReadWrite), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSGetItemPropertyHandlerWithCreateObject calls PROPSYS!PSGetItemPropertyHandlerWithCreateObject.
@@ -235,7 +235,7 @@ func PSGetItemPropertyHandler(punkItem *systemcom.IUnknown, fReadWrite bool, rii
 func PSGetItemPropertyHandlerWithCreateObject(punkItem *systemcom.IUnknown, fReadWrite bool, punkCreateObject *systemcom.IUnknown, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_fReadWrite := win32.Bool32(fReadWrite)
 	r1, _, _ := syscall.SyscallN(procPSGetItemPropertyHandlerWithCreateObject.Addr(), uintptr(unsafe.Pointer(punkItem)), uintptr(_fReadWrite), uintptr(unsafe.Pointer(punkCreateObject)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSGetNameFromPropertyKey calls PROPSYS!PSGetNameFromPropertyKey.
@@ -243,7 +243,7 @@ func PSGetItemPropertyHandlerWithCreateObject(punkItem *systemcom.IUnknown, fRea
 // Minimum OS: windows5.1.2600.
 func PSGetNameFromPropertyKey(propkey *foundation.PROPERTYKEY, ppszCanonicalName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procPSGetNameFromPropertyKey.Addr(), uintptr(unsafe.Pointer(propkey)), uintptr(unsafe.Pointer(ppszCanonicalName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSGetNamedPropertyFromPropertyStorage calls PROPSYS!PSGetNamedPropertyFromPropertyStorage.
@@ -252,7 +252,7 @@ func PSGetNameFromPropertyKey(propkey *foundation.PROPERTYKEY, ppszCanonicalName
 func PSGetNamedPropertyFromPropertyStorage(psps PCUSERIALIZEDPROPSTORAGE, cb uint32, pszName string, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
 	_pszName := win32.UTF16Ptr(pszName)
 	r1, _, _ := syscall.SyscallN(procPSGetNamedPropertyFromPropertyStorage.Addr(), uintptr(psps), uintptr(cb), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(ppropvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSGetPropertyDescription calls PROPSYS!PSGetPropertyDescription.
@@ -260,7 +260,7 @@ func PSGetNamedPropertyFromPropertyStorage(psps PCUSERIALIZEDPROPSTORAGE, cb uin
 // Minimum OS: windows5.1.2600.
 func PSGetPropertyDescription(propkey *foundation.PROPERTYKEY, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procPSGetPropertyDescription.Addr(), uintptr(unsafe.Pointer(propkey)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSGetPropertyDescriptionByName calls PROPSYS!PSGetPropertyDescriptionByName.
@@ -269,7 +269,7 @@ func PSGetPropertyDescription(propkey *foundation.PROPERTYKEY, riid *win32.GUID,
 func PSGetPropertyDescriptionByName(pszCanonicalName string, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszCanonicalName := win32.UTF16Ptr(pszCanonicalName)
 	r1, _, _ := syscall.SyscallN(procPSGetPropertyDescriptionByName.Addr(), uintptr(unsafe.Pointer(_pszCanonicalName)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSGetPropertyDescriptionListFromString calls PROPSYS!PSGetPropertyDescriptionListFromString.
@@ -278,7 +278,7 @@ func PSGetPropertyDescriptionByName(pszCanonicalName string, riid *win32.GUID, p
 func PSGetPropertyDescriptionListFromString(pszPropList string, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszPropList := win32.UTF16Ptr(pszPropList)
 	r1, _, _ := syscall.SyscallN(procPSGetPropertyDescriptionListFromString.Addr(), uintptr(unsafe.Pointer(_pszPropList)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSGetPropertyFromPropertyStorage calls PROPSYS!PSGetPropertyFromPropertyStorage.
@@ -286,7 +286,7 @@ func PSGetPropertyDescriptionListFromString(pszPropList string, riid *win32.GUID
 // Minimum OS: windows5.1.2600.
 func PSGetPropertyFromPropertyStorage(psps PCUSERIALIZEDPROPSTORAGE, cb uint32, rpkey *foundation.PROPERTYKEY, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procPSGetPropertyFromPropertyStorage.Addr(), uintptr(psps), uintptr(cb), uintptr(unsafe.Pointer(rpkey)), uintptr(unsafe.Pointer(ppropvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSGetPropertyKeyFromName calls PROPSYS!PSGetPropertyKeyFromName.
@@ -295,7 +295,7 @@ func PSGetPropertyFromPropertyStorage(psps PCUSERIALIZEDPROPSTORAGE, cb uint32, 
 func PSGetPropertyKeyFromName(pszName string, ppropkey *foundation.PROPERTYKEY) error {
 	_pszName := win32.UTF16Ptr(pszName)
 	r1, _, _ := syscall.SyscallN(procPSGetPropertyKeyFromName.Addr(), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(ppropkey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSGetPropertySystem calls PROPSYS!PSGetPropertySystem.
@@ -303,7 +303,7 @@ func PSGetPropertyKeyFromName(pszName string, ppropkey *foundation.PROPERTYKEY) 
 // Minimum OS: windows5.1.2600.
 func PSGetPropertySystem(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procPSGetPropertySystem.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSGetPropertyValue calls PROPSYS!PSGetPropertyValue.
@@ -311,7 +311,7 @@ func PSGetPropertySystem(riid *win32.GUID, ppv **win32.IUnknown) error {
 // Minimum OS: windows5.1.2600.
 func PSGetPropertyValue(pps *IPropertyStore, ppd *IPropertyDescription, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procPSGetPropertyValue.Addr(), uintptr(unsafe.Pointer(pps)), uintptr(unsafe.Pointer(ppd)), uintptr(unsafe.Pointer(ppropvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSLookupPropertyHandlerCLSID calls PROPSYS!PSLookupPropertyHandlerCLSID.
@@ -320,7 +320,7 @@ func PSGetPropertyValue(pps *IPropertyStore, ppd *IPropertyDescription, ppropvar
 func PSLookupPropertyHandlerCLSID(pszFilePath string, pclsid *win32.GUID) error {
 	_pszFilePath := win32.UTF16Ptr(pszFilePath)
 	r1, _, _ := syscall.SyscallN(procPSLookupPropertyHandlerCLSID.Addr(), uintptr(unsafe.Pointer(_pszFilePath)), uintptr(unsafe.Pointer(pclsid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSPropertyBag_Delete calls PROPSYS!PSPropertyBag_Delete.
@@ -329,7 +329,7 @@ func PSLookupPropertyHandlerCLSID(pszFilePath string, pclsid *win32.GUID) error 
 func PSPropertyBag_Delete(propBag *systemcomstructuredstorage.IPropertyBag, propName string) error {
 	_propName := win32.UTF16Ptr(propName)
 	r1, _, _ := syscall.SyscallN(procPSPropertyBag_Delete.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSPropertyBag_ReadBOOL calls PROPSYS!PSPropertyBag_ReadBOOL.
@@ -338,7 +338,7 @@ func PSPropertyBag_Delete(propBag *systemcomstructuredstorage.IPropertyBag, prop
 func PSPropertyBag_ReadBOOL(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *foundation.BOOL) error {
 	_propName := win32.UTF16Ptr(propName)
 	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadBOOL.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSPropertyBag_ReadBSTR calls PROPSYS!PSPropertyBag_ReadBSTR.
@@ -347,7 +347,7 @@ func PSPropertyBag_ReadBOOL(propBag *systemcomstructuredstorage.IPropertyBag, pr
 func PSPropertyBag_ReadBSTR(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *foundation.BSTR) error {
 	_propName := win32.UTF16Ptr(propName)
 	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadBSTR.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSPropertyBag_ReadDWORD calls PROPSYS!PSPropertyBag_ReadDWORD.
@@ -356,7 +356,7 @@ func PSPropertyBag_ReadBSTR(propBag *systemcomstructuredstorage.IPropertyBag, pr
 func PSPropertyBag_ReadDWORD(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *uint32) error {
 	_propName := win32.UTF16Ptr(propName)
 	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadDWORD.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSPropertyBag_ReadGUID calls PROPSYS!PSPropertyBag_ReadGUID.
@@ -365,7 +365,7 @@ func PSPropertyBag_ReadDWORD(propBag *systemcomstructuredstorage.IPropertyBag, p
 func PSPropertyBag_ReadGUID(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *win32.GUID) error {
 	_propName := win32.UTF16Ptr(propName)
 	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadGUID.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSPropertyBag_ReadInt calls PROPSYS!PSPropertyBag_ReadInt.
@@ -374,7 +374,7 @@ func PSPropertyBag_ReadGUID(propBag *systemcomstructuredstorage.IPropertyBag, pr
 func PSPropertyBag_ReadInt(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *int32) error {
 	_propName := win32.UTF16Ptr(propName)
 	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadInt.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSPropertyBag_ReadLONG calls PROPSYS!PSPropertyBag_ReadLONG.
@@ -383,7 +383,7 @@ func PSPropertyBag_ReadInt(propBag *systemcomstructuredstorage.IPropertyBag, pro
 func PSPropertyBag_ReadLONG(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *int32) error {
 	_propName := win32.UTF16Ptr(propName)
 	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadLONG.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSPropertyBag_ReadPOINTL calls PROPSYS!PSPropertyBag_ReadPOINTL.
@@ -392,7 +392,7 @@ func PSPropertyBag_ReadLONG(propBag *systemcomstructuredstorage.IPropertyBag, pr
 func PSPropertyBag_ReadPOINTL(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *foundation.POINTL) error {
 	_propName := win32.UTF16Ptr(propName)
 	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadPOINTL.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSPropertyBag_ReadPOINTS calls PROPSYS!PSPropertyBag_ReadPOINTS.
@@ -401,7 +401,7 @@ func PSPropertyBag_ReadPOINTL(propBag *systemcomstructuredstorage.IPropertyBag, 
 func PSPropertyBag_ReadPOINTS(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *foundation.POINTS) error {
 	_propName := win32.UTF16Ptr(propName)
 	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadPOINTS.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSPropertyBag_ReadPropertyKey calls PROPSYS!PSPropertyBag_ReadPropertyKey.
@@ -410,7 +410,7 @@ func PSPropertyBag_ReadPOINTS(propBag *systemcomstructuredstorage.IPropertyBag, 
 func PSPropertyBag_ReadPropertyKey(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *foundation.PROPERTYKEY) error {
 	_propName := win32.UTF16Ptr(propName)
 	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadPropertyKey.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSPropertyBag_ReadRECTL calls PROPSYS!PSPropertyBag_ReadRECTL.
@@ -419,7 +419,7 @@ func PSPropertyBag_ReadPropertyKey(propBag *systemcomstructuredstorage.IProperty
 func PSPropertyBag_ReadRECTL(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *foundation.RECTL) error {
 	_propName := win32.UTF16Ptr(propName)
 	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadRECTL.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSPropertyBag_ReadSHORT calls PROPSYS!PSPropertyBag_ReadSHORT.
@@ -428,7 +428,7 @@ func PSPropertyBag_ReadRECTL(propBag *systemcomstructuredstorage.IPropertyBag, p
 func PSPropertyBag_ReadSHORT(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *int16) error {
 	_propName := win32.UTF16Ptr(propName)
 	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadSHORT.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSPropertyBag_ReadStr calls PROPSYS!PSPropertyBag_ReadStr.
@@ -437,7 +437,7 @@ func PSPropertyBag_ReadSHORT(propBag *systemcomstructuredstorage.IPropertyBag, p
 func PSPropertyBag_ReadStr(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value foundation.PWSTR, characterCount int32) error {
 	_propName := win32.UTF16Ptr(propName)
 	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadStr.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)), uintptr(characterCount))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSPropertyBag_ReadStrAlloc calls PROPSYS!PSPropertyBag_ReadStrAlloc.
@@ -446,7 +446,7 @@ func PSPropertyBag_ReadStr(propBag *systemcomstructuredstorage.IPropertyBag, pro
 func PSPropertyBag_ReadStrAlloc(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *foundation.PWSTR) error {
 	_propName := win32.UTF16Ptr(propName)
 	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadStrAlloc.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSPropertyBag_ReadStream calls PROPSYS!PSPropertyBag_ReadStream.
@@ -455,7 +455,7 @@ func PSPropertyBag_ReadStrAlloc(propBag *systemcomstructuredstorage.IPropertyBag
 func PSPropertyBag_ReadStream(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value **systemcom.IStream) error {
 	_propName := win32.UTF16Ptr(propName)
 	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadStream.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSPropertyBag_ReadType calls PROPSYS!PSPropertyBag_ReadType.
@@ -464,7 +464,7 @@ func PSPropertyBag_ReadStream(propBag *systemcomstructuredstorage.IPropertyBag, 
 func PSPropertyBag_ReadType(propBag *systemcomstructuredstorage.IPropertyBag, propName string, var_ *systemvariant.VARIANT, type_ systemvariant.VARENUM) error {
 	_propName := win32.UTF16Ptr(propName)
 	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadType.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(var_)), uintptr(type_))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSPropertyBag_ReadULONGLONG calls PROPSYS!PSPropertyBag_ReadULONGLONG.
@@ -473,7 +473,7 @@ func PSPropertyBag_ReadType(propBag *systemcomstructuredstorage.IPropertyBag, pr
 func PSPropertyBag_ReadULONGLONG(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *uint64) error {
 	_propName := win32.UTF16Ptr(propName)
 	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadULONGLONG.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSPropertyBag_ReadUnknown calls PROPSYS!PSPropertyBag_ReadUnknown.
@@ -482,7 +482,7 @@ func PSPropertyBag_ReadULONGLONG(propBag *systemcomstructuredstorage.IPropertyBa
 func PSPropertyBag_ReadUnknown(propBag *systemcomstructuredstorage.IPropertyBag, propName string, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_propName := win32.UTF16Ptr(propName)
 	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadUnknown.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSPropertyBag_WriteBOOL calls PROPSYS!PSPropertyBag_WriteBOOL.
@@ -492,7 +492,7 @@ func PSPropertyBag_WriteBOOL(propBag *systemcomstructuredstorage.IPropertyBag, p
 	_propName := win32.UTF16Ptr(propName)
 	_value := win32.Bool32(value)
 	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WriteBOOL.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(_value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSPropertyBag_WriteBSTR calls PROPSYS!PSPropertyBag_WriteBSTR.
@@ -501,7 +501,7 @@ func PSPropertyBag_WriteBOOL(propBag *systemcomstructuredstorage.IPropertyBag, p
 func PSPropertyBag_WriteBSTR(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value foundation.BSTR) error {
 	_propName := win32.UTF16Ptr(propName)
 	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WriteBSTR.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSPropertyBag_WriteDWORD calls PROPSYS!PSPropertyBag_WriteDWORD.
@@ -510,7 +510,7 @@ func PSPropertyBag_WriteBSTR(propBag *systemcomstructuredstorage.IPropertyBag, p
 func PSPropertyBag_WriteDWORD(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value uint32) error {
 	_propName := win32.UTF16Ptr(propName)
 	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WriteDWORD.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSPropertyBag_WriteGUID calls PROPSYS!PSPropertyBag_WriteGUID.
@@ -519,7 +519,7 @@ func PSPropertyBag_WriteDWORD(propBag *systemcomstructuredstorage.IPropertyBag, 
 func PSPropertyBag_WriteGUID(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *win32.GUID) error {
 	_propName := win32.UTF16Ptr(propName)
 	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WriteGUID.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSPropertyBag_WriteInt calls PROPSYS!PSPropertyBag_WriteInt.
@@ -528,7 +528,7 @@ func PSPropertyBag_WriteGUID(propBag *systemcomstructuredstorage.IPropertyBag, p
 func PSPropertyBag_WriteInt(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value int32) error {
 	_propName := win32.UTF16Ptr(propName)
 	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WriteInt.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSPropertyBag_WriteLONG calls PROPSYS!PSPropertyBag_WriteLONG.
@@ -537,7 +537,7 @@ func PSPropertyBag_WriteInt(propBag *systemcomstructuredstorage.IPropertyBag, pr
 func PSPropertyBag_WriteLONG(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value int32) error {
 	_propName := win32.UTF16Ptr(propName)
 	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WriteLONG.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSPropertyBag_WritePOINTL calls PROPSYS!PSPropertyBag_WritePOINTL.
@@ -546,7 +546,7 @@ func PSPropertyBag_WriteLONG(propBag *systemcomstructuredstorage.IPropertyBag, p
 func PSPropertyBag_WritePOINTL(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *foundation.POINTL) error {
 	_propName := win32.UTF16Ptr(propName)
 	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WritePOINTL.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSPropertyBag_WritePOINTS calls PROPSYS!PSPropertyBag_WritePOINTS.
@@ -555,7 +555,7 @@ func PSPropertyBag_WritePOINTL(propBag *systemcomstructuredstorage.IPropertyBag,
 func PSPropertyBag_WritePOINTS(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *foundation.POINTS) error {
 	_propName := win32.UTF16Ptr(propName)
 	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WritePOINTS.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSPropertyBag_WritePropertyKey calls PROPSYS!PSPropertyBag_WritePropertyKey.
@@ -564,7 +564,7 @@ func PSPropertyBag_WritePOINTS(propBag *systemcomstructuredstorage.IPropertyBag,
 func PSPropertyBag_WritePropertyKey(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *foundation.PROPERTYKEY) error {
 	_propName := win32.UTF16Ptr(propName)
 	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WritePropertyKey.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSPropertyBag_WriteRECTL calls PROPSYS!PSPropertyBag_WriteRECTL.
@@ -573,7 +573,7 @@ func PSPropertyBag_WritePropertyKey(propBag *systemcomstructuredstorage.IPropert
 func PSPropertyBag_WriteRECTL(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *foundation.RECTL) error {
 	_propName := win32.UTF16Ptr(propName)
 	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WriteRECTL.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSPropertyBag_WriteSHORT calls PROPSYS!PSPropertyBag_WriteSHORT.
@@ -582,7 +582,7 @@ func PSPropertyBag_WriteRECTL(propBag *systemcomstructuredstorage.IPropertyBag, 
 func PSPropertyBag_WriteSHORT(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value int16) error {
 	_propName := win32.UTF16Ptr(propName)
 	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WriteSHORT.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSPropertyBag_WriteStr calls PROPSYS!PSPropertyBag_WriteStr.
@@ -592,7 +592,7 @@ func PSPropertyBag_WriteStr(propBag *systemcomstructuredstorage.IPropertyBag, pr
 	_propName := win32.UTF16Ptr(propName)
 	_value := win32.UTF16Ptr(value)
 	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WriteStr.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(_value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSPropertyBag_WriteStream calls PROPSYS!PSPropertyBag_WriteStream.
@@ -601,7 +601,7 @@ func PSPropertyBag_WriteStr(propBag *systemcomstructuredstorage.IPropertyBag, pr
 func PSPropertyBag_WriteStream(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *systemcom.IStream) error {
 	_propName := win32.UTF16Ptr(propName)
 	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WriteStream.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSPropertyBag_WriteULONGLONG calls PROPSYS!PSPropertyBag_WriteULONGLONG.
@@ -610,7 +610,7 @@ func PSPropertyBag_WriteStream(propBag *systemcomstructuredstorage.IPropertyBag,
 func PSPropertyBag_WriteULONGLONG(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value uint64) error {
 	_propName := win32.UTF16Ptr(propName)
 	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WriteULONGLONG.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSPropertyBag_WriteUnknown calls PROPSYS!PSPropertyBag_WriteUnknown.
@@ -619,7 +619,7 @@ func PSPropertyBag_WriteULONGLONG(propBag *systemcomstructuredstorage.IPropertyB
 func PSPropertyBag_WriteUnknown(propBag *systemcomstructuredstorage.IPropertyBag, propName string, punk *systemcom.IUnknown) error {
 	_propName := win32.UTF16Ptr(propName)
 	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WriteUnknown.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(punk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSPropertyKeyFromString calls PROPSYS!PSPropertyKeyFromString.
@@ -628,7 +628,7 @@ func PSPropertyBag_WriteUnknown(propBag *systemcomstructuredstorage.IPropertyBag
 func PSPropertyKeyFromString(pszString string, pkey *foundation.PROPERTYKEY) error {
 	_pszString := win32.UTF16Ptr(pszString)
 	r1, _, _ := syscall.SyscallN(procPSPropertyKeyFromString.Addr(), uintptr(unsafe.Pointer(_pszString)), uintptr(unsafe.Pointer(pkey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSRefreshPropertySchema calls PROPSYS!PSRefreshPropertySchema.
@@ -636,7 +636,7 @@ func PSPropertyKeyFromString(pszString string, pkey *foundation.PROPERTYKEY) err
 // Minimum OS: windows5.1.2600.
 func PSRefreshPropertySchema() error {
 	r1, _, _ := syscall.SyscallN(procPSRefreshPropertySchema.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSRegisterPropertySchema calls PROPSYS!PSRegisterPropertySchema.
@@ -645,7 +645,7 @@ func PSRefreshPropertySchema() error {
 func PSRegisterPropertySchema(pszPath string) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	r1, _, _ := syscall.SyscallN(procPSRegisterPropertySchema.Addr(), uintptr(unsafe.Pointer(_pszPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSSetPropertyValue calls PROPSYS!PSSetPropertyValue.
@@ -653,7 +653,7 @@ func PSRegisterPropertySchema(pszPath string) error {
 // Minimum OS: windows5.1.2600.
 func PSSetPropertyValue(pps *IPropertyStore, ppd *IPropertyDescription, propvar *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procPSSetPropertyValue.Addr(), uintptr(unsafe.Pointer(pps)), uintptr(unsafe.Pointer(ppd)), uintptr(unsafe.Pointer(propvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSStringFromPropertyKey calls PROPSYS!PSStringFromPropertyKey.
@@ -661,7 +661,7 @@ func PSSetPropertyValue(pps *IPropertyStore, ppd *IPropertyDescription, propvar 
 // Minimum OS: windows5.1.2600.
 func PSStringFromPropertyKey(pkey *foundation.PROPERTYKEY, psz foundation.PWSTR, cch uint32) error {
 	r1, _, _ := syscall.SyscallN(procPSStringFromPropertyKey.Addr(), uintptr(unsafe.Pointer(pkey)), uintptr(unsafe.Pointer(psz)), uintptr(cch))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PSUnregisterPropertySchema calls PROPSYS!PSUnregisterPropertySchema.
@@ -670,7 +670,7 @@ func PSStringFromPropertyKey(pkey *foundation.PROPERTYKEY, psz foundation.PWSTR,
 func PSUnregisterPropertySchema(pszPath string) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	r1, _, _ := syscall.SyscallN(procPSUnregisterPropertySchema.Addr(), uintptr(unsafe.Pointer(_pszPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PifMgr_CloseProperties calls SHELL32!PifMgr_CloseProperties.
@@ -721,7 +721,7 @@ func PifMgr_SetProperties(hProps foundation.HANDLE, pszGroup foundation.PSTR, lp
 func SHAddDefaultPropertiesByExt(pszExt string, pPropStore *IPropertyStore) error {
 	_pszExt := win32.UTF16Ptr(pszExt)
 	r1, _, _ := syscall.SyscallN(procSHAddDefaultPropertiesByExt.Addr(), uintptr(unsafe.Pointer(_pszExt)), uintptr(unsafe.Pointer(pPropStore)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SHGetPropertyStoreForWindow calls SHELL32!SHGetPropertyStoreForWindow.
@@ -729,7 +729,7 @@ func SHAddDefaultPropertiesByExt(pszExt string, pPropStore *IPropertyStore) erro
 // Minimum OS: windows6.1.
 func SHGetPropertyStoreForWindow(hwnd foundation.HWND, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procSHGetPropertyStoreForWindow.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SHGetPropertyStoreFromIDList calls SHELL32!SHGetPropertyStoreFromIDList.
@@ -737,7 +737,7 @@ func SHGetPropertyStoreForWindow(hwnd foundation.HWND, riid *win32.GUID, ppv **w
 // Minimum OS: windows6.0.6000.
 func SHGetPropertyStoreFromIDList(pidl *uishellcommon.ITEMIDLIST, flags GETPROPERTYSTOREFLAGS, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procSHGetPropertyStoreFromIDList.Addr(), uintptr(unsafe.Pointer(pidl)), uintptr(flags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SHGetPropertyStoreFromParsingName calls SHELL32!SHGetPropertyStoreFromParsingName.
@@ -746,7 +746,7 @@ func SHGetPropertyStoreFromIDList(pidl *uishellcommon.ITEMIDLIST, flags GETPROPE
 func SHGetPropertyStoreFromParsingName(pszPath string, pbc *systemcom.IBindCtx, flags GETPROPERTYSTOREFLAGS, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	r1, _, _ := syscall.SyscallN(procSHGetPropertyStoreFromParsingName.Addr(), uintptr(unsafe.Pointer(_pszPath)), uintptr(unsafe.Pointer(pbc)), uintptr(flags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SHPropStgCreate calls SHELL32!SHPropStgCreate.
@@ -754,7 +754,7 @@ func SHGetPropertyStoreFromParsingName(pszPath string, pbc *systemcom.IBindCtx, 
 // Minimum OS: windows5.0.
 func SHPropStgCreate(psstg *systemcomstructuredstorage.IPropertySetStorage, fmtid *win32.GUID, pclsid *win32.GUID, grfFlags uint32, grfMode uint32, dwDisposition uint32, ppstg **systemcomstructuredstorage.IPropertyStorage, puCodePage *uint32) error {
 	r1, _, _ := syscall.SyscallN(procSHPropStgCreate.Addr(), uintptr(unsafe.Pointer(psstg)), uintptr(unsafe.Pointer(fmtid)), uintptr(unsafe.Pointer(pclsid)), uintptr(grfFlags), uintptr(grfMode), uintptr(dwDisposition), uintptr(unsafe.Pointer(ppstg)), uintptr(unsafe.Pointer(puCodePage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SHPropStgReadMultiple calls SHELL32!SHPropStgReadMultiple.
@@ -762,7 +762,7 @@ func SHPropStgCreate(psstg *systemcomstructuredstorage.IPropertySetStorage, fmti
 // Minimum OS: windows5.1.2600.
 func SHPropStgReadMultiple(pps *systemcomstructuredstorage.IPropertyStorage, uCodePage uint32, cpspec uint32, rgpspec *systemcomstructuredstorage.PROPSPEC, rgvar *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procSHPropStgReadMultiple.Addr(), uintptr(unsafe.Pointer(pps)), uintptr(uCodePage), uintptr(cpspec), uintptr(unsafe.Pointer(rgpspec)), uintptr(unsafe.Pointer(rgvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SHPropStgWriteMultiple calls SHELL32!SHPropStgWriteMultiple.
@@ -770,5 +770,5 @@ func SHPropStgReadMultiple(pps *systemcomstructuredstorage.IPropertyStorage, uCo
 // Minimum OS: windows5.1.2600.
 func SHPropStgWriteMultiple(pps *systemcomstructuredstorage.IPropertyStorage, puCodePage *uint32, cpspec uint32, rgpspec *systemcomstructuredstorage.PROPSPEC, rgvar *systemcomstructuredstorage.PROPVARIANT, propidNameFirst uint32) error {
 	r1, _, _ := syscall.SyscallN(procSHPropStgWriteMultiple.Addr(), uintptr(unsafe.Pointer(pps)), uintptr(unsafe.Pointer(puCodePage)), uintptr(cpspec), uintptr(unsafe.Pointer(rgpspec)), uintptr(unsafe.Pointer(rgvar)), uintptr(propidNameFirst))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

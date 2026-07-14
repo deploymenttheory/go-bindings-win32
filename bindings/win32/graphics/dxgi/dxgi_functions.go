@@ -28,7 +28,7 @@ var (
 // https://learn.microsoft.com/windows/win32/api/dxgi/nf-dxgi-createdxgifactory
 func CreateDXGIFactory(riid *win32.GUID, ppFactory **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCreateDXGIFactory.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppFactory)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateDXGIFactory1 calls dxgi!CreateDXGIFactory1.
@@ -36,7 +36,7 @@ func CreateDXGIFactory(riid *win32.GUID, ppFactory **win32.IUnknown) error {
 // Minimum OS: windows6.1.
 func CreateDXGIFactory1(riid *win32.GUID, ppFactory **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCreateDXGIFactory1.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppFactory)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateDXGIFactory2 calls dxgi!CreateDXGIFactory2.
@@ -44,7 +44,7 @@ func CreateDXGIFactory1(riid *win32.GUID, ppFactory **win32.IUnknown) error {
 // Minimum OS: windows8.1.
 func CreateDXGIFactory2(Flags DXGI_CREATE_FACTORY_FLAGS, riid *win32.GUID, ppFactory **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCreateDXGIFactory2.Addr(), uintptr(Flags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppFactory)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DXGIDeclareAdapterRemovalSupport calls dxgi!DXGIDeclareAdapterRemovalSupport.
@@ -52,14 +52,14 @@ func CreateDXGIFactory2(Flags DXGI_CREATE_FACTORY_FLAGS, riid *win32.GUID, ppFac
 // Minimum OS: windows10.0.17134.
 func DXGIDeclareAdapterRemovalSupport() error {
 	r1, _, _ := syscall.SyscallN(procDXGIDeclareAdapterRemovalSupport.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DXGIDisableVBlankVirtualization calls dxgi!DXGIDisableVBlankVirtualization.
 // https://learn.microsoft.com/windows/win32/api/dxgi1_6/nf-dxgi1_6-dxgidisablevblankvirtualization
 func DXGIDisableVBlankVirtualization() error {
 	r1, _, _ := syscall.SyscallN(procDXGIDisableVBlankVirtualization.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DXGIGetDebugInterface1 calls dxgi!DXGIGetDebugInterface1.
@@ -67,5 +67,5 @@ func DXGIDisableVBlankVirtualization() error {
 // Minimum OS: windows8.1.
 func DXGIGetDebugInterface1(Flags uint32, riid *win32.GUID, pDebug **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procDXGIGetDebugInterface1.Addr(), uintptr(Flags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pDebug)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

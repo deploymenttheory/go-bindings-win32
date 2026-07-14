@@ -78,7 +78,7 @@ var (
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/builddisplaytable
 func BuildDisplayTable(lpAllocateBuffer LPALLOCATEBUFFER, lpAllocateMore LPALLOCATEMORE, lpFreeBuffer LPFREEBUFFER, lpMalloc *systemcom.IMalloc, hInstance foundation.HINSTANCE, cPages uint32, lpPage *DTPAGE, ulFlags uint32, lppTable **IMAPITable, lppTblData **ITableData) error {
 	r1, _, _ := syscall.SyscallN(procBuildDisplayTable.Addr(), uintptr(lpAllocateBuffer), uintptr(lpAllocateMore), uintptr(lpFreeBuffer), uintptr(unsafe.Pointer(lpMalloc)), uintptr(hInstance), uintptr(cPages), uintptr(unsafe.Pointer(lpPage)), uintptr(ulFlags), uintptr(unsafe.Pointer(lppTable)), uintptr(unsafe.Pointer(lppTblData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ChangeIdleRoutine calls MAPI32!ChangeIdleRoutine.
@@ -171,63 +171,63 @@ func FtgRegisterIdleRoutine(lpfnIdle PFNIDLE, lpvIdleParam unsafe.Pointer, priId
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/hraddcolumns
 func HrAddColumns(lptbl *IMAPITable, lpproptagColumnsNew *SPropTagArray, lpAllocateBuffer LPALLOCATEBUFFER, lpFreeBuffer LPFREEBUFFER) error {
 	r1, _, _ := syscall.SyscallN(procHrAddColumns.Addr(), uintptr(unsafe.Pointer(lptbl)), uintptr(unsafe.Pointer(lpproptagColumnsNew)), uintptr(lpAllocateBuffer), uintptr(lpFreeBuffer))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HrAddColumnsEx calls MAPI32!HrAddColumnsEx.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/hraddcolumnsex
 func HrAddColumnsEx(lptbl *IMAPITable, lpproptagColumnsNew *SPropTagArray, lpAllocateBuffer LPALLOCATEBUFFER, lpFreeBuffer LPFREEBUFFER, lpfnFilterColumns uintptr) error {
 	r1, _, _ := syscall.SyscallN(procHrAddColumnsEx.Addr(), uintptr(unsafe.Pointer(lptbl)), uintptr(unsafe.Pointer(lpproptagColumnsNew)), uintptr(lpAllocateBuffer), uintptr(lpFreeBuffer), uintptr(lpfnFilterColumns))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HrAllocAdviseSink calls MAPI32!HrAllocAdviseSink.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/hrallocadvisesink
 func HrAllocAdviseSink(lpfnCallback LPNOTIFCALLBACK, lpvContext unsafe.Pointer, lppAdviseSink **IMAPIAdviseSink) error {
 	r1, _, _ := syscall.SyscallN(procHrAllocAdviseSink.Addr(), uintptr(lpfnCallback), uintptr(unsafe.Pointer(lpvContext)), uintptr(unsafe.Pointer(lppAdviseSink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HrDispatchNotifications calls MAPI32!HrDispatchNotifications.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/hrdispatchnotifications
 func HrDispatchNotifications(ulFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procHrDispatchNotifications.Addr(), uintptr(ulFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HrGetOneProp calls MAPI32!HrGetOneProp.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/hrgetoneprop
 func HrGetOneProp(lpMapiProp *IMAPIProp, ulPropTag uint32, lppProp **SPropValue) error {
 	r1, _, _ := syscall.SyscallN(procHrGetOneProp.Addr(), uintptr(unsafe.Pointer(lpMapiProp)), uintptr(ulPropTag), uintptr(unsafe.Pointer(lppProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HrIStorageFromStream calls MAPI32!HrIStorageFromStream.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/hristoragefromstream
 func HrIStorageFromStream(lpUnkIn *systemcom.IUnknown, lpInterface *win32.GUID, ulFlags uint32, lppStorageOut **systemcomstructuredstorage.IStorage) error {
 	r1, _, _ := syscall.SyscallN(procHrIStorageFromStream.Addr(), uintptr(unsafe.Pointer(lpUnkIn)), uintptr(unsafe.Pointer(lpInterface)), uintptr(ulFlags), uintptr(unsafe.Pointer(lppStorageOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HrQueryAllRows calls MAPI32!HrQueryAllRows.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/hrqueryallrows
 func HrQueryAllRows(lpTable *IMAPITable, lpPropTags *SPropTagArray, lpRestriction *SRestriction, lpSortOrderSet *SSortOrderSet, crowsMax int32, lppRows **SRowSet) error {
 	r1, _, _ := syscall.SyscallN(procHrQueryAllRows.Addr(), uintptr(unsafe.Pointer(lpTable)), uintptr(unsafe.Pointer(lpPropTags)), uintptr(unsafe.Pointer(lpRestriction)), uintptr(unsafe.Pointer(lpSortOrderSet)), uintptr(crowsMax), uintptr(unsafe.Pointer(lppRows)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HrSetOneProp calls MAPI32!HrSetOneProp.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/hrsetoneprop
 func HrSetOneProp(lpMapiProp *IMAPIProp, lpProp *SPropValue) error {
 	r1, _, _ := syscall.SyscallN(procHrSetOneProp.Addr(), uintptr(unsafe.Pointer(lpMapiProp)), uintptr(unsafe.Pointer(lpProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HrThisThreadAdviseSink calls MAPI32!HrThisThreadAdviseSink.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/hrthisthreadadvisesink
 func HrThisThreadAdviseSink(lpAdviseSink *IMAPIAdviseSink, lppAdviseSink **IMAPIAdviseSink) error {
 	r1, _, _ := syscall.SyscallN(procHrThisThreadAdviseSink.Addr(), uintptr(unsafe.Pointer(lpAdviseSink)), uintptr(unsafe.Pointer(lppAdviseSink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LPropCompareProp calls MAPI32!LPropCompareProp.
@@ -267,7 +267,7 @@ func MAPIInitIdle(lpvReserved unsafe.Pointer) int32 {
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/openstreamonfile
 func OpenStreamOnFile(lpAllocateBuffer LPALLOCATEBUFFER, lpFreeBuffer LPFREEBUFFER, ulFlags uint32, lpszFileName *int8, lpszPrefix *int8, lppStream **systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(procOpenStreamOnFile.Addr(), uintptr(lpAllocateBuffer), uintptr(lpFreeBuffer), uintptr(ulFlags), uintptr(unsafe.Pointer(lpszFileName)), uintptr(unsafe.Pointer(lpszPrefix)), uintptr(unsafe.Pointer(lppStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PpropFindProp calls MAPI32!PpropFindProp.
@@ -288,7 +288,7 @@ func PropCopyMore(lpSPropValueDest *SPropValue, lpSPropValueSrc *SPropValue, lpf
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/rtfsync
 func RTFSync(lpMessage *IMessage, ulFlags uint32, lpfMessageUpdated *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procRTFSync.Addr(), uintptr(unsafe.Pointer(lpMessage)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpfMessageUpdated)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScCopyNotifications calls MAPI32!ScCopyNotifications.
@@ -421,12 +421,12 @@ func UlRelease(lpunk unsafe.Pointer) uint32 {
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/wrapcompressedrtfstream
 func WrapCompressedRTFStream(lpCompressedRTFStream *systemcom.IStream, ulFlags uint32, lpUncompressedRTFStream **systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(procWrapCompressedRTFStream.Addr(), uintptr(unsafe.Pointer(lpCompressedRTFStream)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpUncompressedRTFStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WrapStoreEntryID calls MAPI32!WrapStoreEntryID.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/wrapstoreentryid
 func WrapStoreEntryID(ulFlags uint32, lpszDLLName *int8, cbOrigEntry uint32, lpOrigEntry *ENTRYID, lpcbWrappedEntry *uint32, lppWrappedEntry **ENTRYID) error {
 	r1, _, _ := syscall.SyscallN(procWrapStoreEntryID.Addr(), uintptr(ulFlags), uintptr(unsafe.Pointer(lpszDLLName)), uintptr(cbOrigEntry), uintptr(unsafe.Pointer(lpOrigEntry)), uintptr(unsafe.Pointer(lpcbWrappedEntry)), uintptr(unsafe.Pointer(lppWrappedEntry)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

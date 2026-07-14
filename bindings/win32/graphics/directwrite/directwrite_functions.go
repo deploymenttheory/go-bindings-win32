@@ -24,5 +24,5 @@ var (
 // Minimum OS: windows6.1.
 func DWriteCreateFactory(factoryType DWRITE_FACTORY_TYPE, iid *win32.GUID, factory **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procDWriteCreateFactory.Addr(), uintptr(factoryType), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(factory)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

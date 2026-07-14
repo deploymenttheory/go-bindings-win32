@@ -48,7 +48,7 @@ var (
 // Minimum OS: windows8.0.
 func AddPointerInteractionContext(interactionContext HINTERACTIONCONTEXT, pointerId uint32) error {
 	r1, _, _ := syscall.SyscallN(procAddPointerInteractionContext.Addr(), uintptr(interactionContext), uintptr(pointerId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BufferPointerPacketsInteractionContext calls NInput!BufferPointerPacketsInteractionContext.
@@ -60,7 +60,7 @@ func BufferPointerPacketsInteractionContext(interactionContext HINTERACTIONCONTE
 		_pointerInfo = &pointerInfo[0]
 	}
 	r1, _, _ := syscall.SyscallN(procBufferPointerPacketsInteractionContext.Addr(), uintptr(interactionContext), uintptr(len(pointerInfo)), uintptr(unsafe.Pointer(_pointerInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateInteractionContext calls NInput!CreateInteractionContext.
@@ -68,7 +68,7 @@ func BufferPointerPacketsInteractionContext(interactionContext HINTERACTIONCONTE
 // Minimum OS: windows8.0.
 func CreateInteractionContext(interactionContext *HINTERACTIONCONTEXT) error {
 	r1, _, _ := syscall.SyscallN(procCreateInteractionContext.Addr(), uintptr(unsafe.Pointer(interactionContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DestroyInteractionContext calls NInput!DestroyInteractionContext.
@@ -76,7 +76,7 @@ func CreateInteractionContext(interactionContext *HINTERACTIONCONTEXT) error {
 // Minimum OS: windows8.0.
 func DestroyInteractionContext(interactionContext HINTERACTIONCONTEXT) error {
 	r1, _, _ := syscall.SyscallN(procDestroyInteractionContext.Addr(), uintptr(interactionContext))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCrossSlideParameterInteractionContext calls NInput!GetCrossSlideParameterInteractionContext.
@@ -84,13 +84,13 @@ func DestroyInteractionContext(interactionContext HINTERACTIONCONTEXT) error {
 // Minimum OS: windows8.0.
 func GetCrossSlideParameterInteractionContext(interactionContext HINTERACTIONCONTEXT, threshold CROSS_SLIDE_THRESHOLD, distance *float32) error {
 	r1, _, _ := syscall.SyscallN(procGetCrossSlideParameterInteractionContext.Addr(), uintptr(interactionContext), uintptr(threshold), uintptr(unsafe.Pointer(distance)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetHoldParameterInteractionContext calls NInput!GetHoldParameterInteractionContext.
 func GetHoldParameterInteractionContext(interactionContext HINTERACTIONCONTEXT, parameter HOLD_PARAMETER, value *float32) error {
 	r1, _, _ := syscall.SyscallN(procGetHoldParameterInteractionContext.Addr(), uintptr(interactionContext), uintptr(parameter), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInertiaParameterInteractionContext calls NInput!GetInertiaParameterInteractionContext.
@@ -98,7 +98,7 @@ func GetHoldParameterInteractionContext(interactionContext HINTERACTIONCONTEXT, 
 // Minimum OS: windows8.0.
 func GetInertiaParameterInteractionContext(interactionContext HINTERACTIONCONTEXT, inertiaParameter INERTIA_PARAMETER, value *float32) error {
 	r1, _, _ := syscall.SyscallN(procGetInertiaParameterInteractionContext.Addr(), uintptr(interactionContext), uintptr(inertiaParameter), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInteractionConfigurationInteractionContext calls NInput!GetInteractionConfigurationInteractionContext.
@@ -110,7 +110,7 @@ func GetInteractionConfigurationInteractionContext(interactionContext HINTERACTI
 		_configuration = &configuration[0]
 	}
 	r1, _, _ := syscall.SyscallN(procGetInteractionConfigurationInteractionContext.Addr(), uintptr(interactionContext), uintptr(len(configuration)), uintptr(unsafe.Pointer(_configuration)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMouseWheelParameterInteractionContext calls NInput!GetMouseWheelParameterInteractionContext.
@@ -118,7 +118,7 @@ func GetInteractionConfigurationInteractionContext(interactionContext HINTERACTI
 // Minimum OS: windows8.0.
 func GetMouseWheelParameterInteractionContext(interactionContext HINTERACTIONCONTEXT, parameter MOUSE_WHEEL_PARAMETER, value *float32) error {
 	r1, _, _ := syscall.SyscallN(procGetMouseWheelParameterInteractionContext.Addr(), uintptr(interactionContext), uintptr(parameter), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPropertyInteractionContext calls NInput!GetPropertyInteractionContext.
@@ -126,7 +126,7 @@ func GetMouseWheelParameterInteractionContext(interactionContext HINTERACTIONCON
 // Minimum OS: windows8.0.
 func GetPropertyInteractionContext(interactionContext HINTERACTIONCONTEXT, contextProperty INTERACTION_CONTEXT_PROPERTY, value *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetPropertyInteractionContext.Addr(), uintptr(interactionContext), uintptr(contextProperty), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStateInteractionContext calls NInput!GetStateInteractionContext.
@@ -134,19 +134,19 @@ func GetPropertyInteractionContext(interactionContext HINTERACTIONCONTEXT, conte
 // Minimum OS: windows8.0.
 func GetStateInteractionContext(interactionContext HINTERACTIONCONTEXT, pointerInfo *uiinputpointer.POINTER_INFO, state *INTERACTION_STATE) error {
 	r1, _, _ := syscall.SyscallN(procGetStateInteractionContext.Addr(), uintptr(interactionContext), uintptr(unsafe.Pointer(pointerInfo)), uintptr(unsafe.Pointer(state)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTapParameterInteractionContext calls NInput!GetTapParameterInteractionContext.
 func GetTapParameterInteractionContext(interactionContext HINTERACTIONCONTEXT, parameter TAP_PARAMETER, value *float32) error {
 	r1, _, _ := syscall.SyscallN(procGetTapParameterInteractionContext.Addr(), uintptr(interactionContext), uintptr(parameter), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTranslationParameterInteractionContext calls NInput!GetTranslationParameterInteractionContext.
 func GetTranslationParameterInteractionContext(interactionContext HINTERACTIONCONTEXT, parameter TRANSLATION_PARAMETER, value *float32) error {
 	r1, _, _ := syscall.SyscallN(procGetTranslationParameterInteractionContext.Addr(), uintptr(interactionContext), uintptr(parameter), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ProcessBufferedPacketsInteractionContext calls NInput!ProcessBufferedPacketsInteractionContext.
@@ -154,7 +154,7 @@ func GetTranslationParameterInteractionContext(interactionContext HINTERACTIONCO
 // Minimum OS: windows8.0.
 func ProcessBufferedPacketsInteractionContext(interactionContext HINTERACTIONCONTEXT) error {
 	r1, _, _ := syscall.SyscallN(procProcessBufferedPacketsInteractionContext.Addr(), uintptr(interactionContext))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ProcessInertiaInteractionContext calls NInput!ProcessInertiaInteractionContext.
@@ -162,7 +162,7 @@ func ProcessBufferedPacketsInteractionContext(interactionContext HINTERACTIONCON
 // Minimum OS: windows8.0.
 func ProcessInertiaInteractionContext(interactionContext HINTERACTIONCONTEXT) error {
 	r1, _, _ := syscall.SyscallN(procProcessInertiaInteractionContext.Addr(), uintptr(interactionContext))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ProcessPointerFramesInteractionContext calls NInput!ProcessPointerFramesInteractionContext.
@@ -170,7 +170,7 @@ func ProcessInertiaInteractionContext(interactionContext HINTERACTIONCONTEXT) er
 // Minimum OS: windows8.0.
 func ProcessPointerFramesInteractionContext(interactionContext HINTERACTIONCONTEXT, entriesCount uint32, pointerCount uint32, pointerInfo *uiinputpointer.POINTER_INFO) error {
 	r1, _, _ := syscall.SyscallN(procProcessPointerFramesInteractionContext.Addr(), uintptr(interactionContext), uintptr(entriesCount), uintptr(pointerCount), uintptr(unsafe.Pointer(pointerInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterOutputCallbackInteractionContext calls NInput!RegisterOutputCallbackInteractionContext.
@@ -178,13 +178,13 @@ func ProcessPointerFramesInteractionContext(interactionContext HINTERACTIONCONTE
 // Minimum OS: windows8.0.
 func RegisterOutputCallbackInteractionContext(interactionContext HINTERACTIONCONTEXT, outputCallback INTERACTION_CONTEXT_OUTPUT_CALLBACK, clientData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procRegisterOutputCallbackInteractionContext.Addr(), uintptr(interactionContext), uintptr(outputCallback), uintptr(unsafe.Pointer(clientData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterOutputCallbackInteractionContext2 calls NInput!RegisterOutputCallbackInteractionContext2.
 func RegisterOutputCallbackInteractionContext2(interactionContext HINTERACTIONCONTEXT, outputCallback INTERACTION_CONTEXT_OUTPUT_CALLBACK2, clientData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procRegisterOutputCallbackInteractionContext2.Addr(), uintptr(interactionContext), uintptr(outputCallback), uintptr(unsafe.Pointer(clientData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemovePointerInteractionContext calls NInput!RemovePointerInteractionContext.
@@ -192,7 +192,7 @@ func RegisterOutputCallbackInteractionContext2(interactionContext HINTERACTIONCO
 // Minimum OS: windows8.0.
 func RemovePointerInteractionContext(interactionContext HINTERACTIONCONTEXT, pointerId uint32) error {
 	r1, _, _ := syscall.SyscallN(procRemovePointerInteractionContext.Addr(), uintptr(interactionContext), uintptr(pointerId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ResetInteractionContext calls NInput!ResetInteractionContext.
@@ -200,7 +200,7 @@ func RemovePointerInteractionContext(interactionContext HINTERACTIONCONTEXT, poi
 // Minimum OS: windows8.0.
 func ResetInteractionContext(interactionContext HINTERACTIONCONTEXT) error {
 	r1, _, _ := syscall.SyscallN(procResetInteractionContext.Addr(), uintptr(interactionContext))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCrossSlideParametersInteractionContext calls NInput!SetCrossSlideParametersInteractionContext.
@@ -212,7 +212,7 @@ func SetCrossSlideParametersInteractionContext(interactionContext HINTERACTIONCO
 		_crossSlideParameters = &crossSlideParameters[0]
 	}
 	r1, _, _ := syscall.SyscallN(procSetCrossSlideParametersInteractionContext.Addr(), uintptr(interactionContext), uintptr(len(crossSlideParameters)), uintptr(unsafe.Pointer(_crossSlideParameters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetInteractionConfigurationInteractionContext calls NInput!SetInteractionConfigurationInteractionContext.
@@ -224,7 +224,7 @@ func SetInteractionConfigurationInteractionContext(interactionContext HINTERACTI
 		_configuration = &configuration[0]
 	}
 	r1, _, _ := syscall.SyscallN(procSetInteractionConfigurationInteractionContext.Addr(), uintptr(interactionContext), uintptr(len(configuration)), uintptr(unsafe.Pointer(_configuration)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetPropertyInteractionContext calls NInput!SetPropertyInteractionContext.
@@ -232,7 +232,7 @@ func SetInteractionConfigurationInteractionContext(interactionContext HINTERACTI
 // Minimum OS: windows8.0.
 func SetPropertyInteractionContext(interactionContext HINTERACTIONCONTEXT, contextProperty INTERACTION_CONTEXT_PROPERTY, value uint32) error {
 	r1, _, _ := syscall.SyscallN(procSetPropertyInteractionContext.Addr(), uintptr(interactionContext), uintptr(contextProperty), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StopInteractionContext calls NInput!StopInteractionContext.
@@ -240,5 +240,5 @@ func SetPropertyInteractionContext(interactionContext HINTERACTIONCONTEXT, conte
 // Minimum OS: windows8.0.
 func StopInteractionContext(interactionContext HINTERACTIONCONTEXT) error {
 	r1, _, _ := syscall.SyscallN(procStopInteractionContext.Addr(), uintptr(interactionContext))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

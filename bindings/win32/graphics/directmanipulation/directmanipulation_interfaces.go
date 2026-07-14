@@ -26,7 +26,7 @@ var IID_IDirectManipulationAutoScrollBehavior = win32.GUID{Data1: 0x6d5954d4, Da
 // SetConfiguration dispatches through IDirectManipulationAutoScrollBehavior's vtable slot 3.
 func (self *IDirectManipulationAutoScrollBehavior) SetConfiguration(motionTypes DIRECTMANIPULATION_MOTION_TYPES, scrollMotion DIRECTMANIPULATION_AUTOSCROLL_CONFIGURATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(motionTypes), uintptr(scrollMotion))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDirectManipulationCompositor: https://learn.microsoft.com/windows/win32/api/directmanipulation/nn-directmanipulation-idirectmanipulationcompositor
@@ -41,25 +41,25 @@ var IID_IDirectManipulationCompositor = win32.GUID{Data1: 0x537a0825, Data2: 0x0
 // AddContent dispatches through IDirectManipulationCompositor's vtable slot 3.
 func (self *IDirectManipulationCompositor) AddContent(content *IDirectManipulationContent, device *systemcom.IUnknown, parentVisual *systemcom.IUnknown, childVisual *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(content)), uintptr(unsafe.Pointer(device)), uintptr(unsafe.Pointer(parentVisual)), uintptr(unsafe.Pointer(childVisual)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveContent dispatches through IDirectManipulationCompositor's vtable slot 4.
 func (self *IDirectManipulationCompositor) RemoveContent(content *IDirectManipulationContent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(content)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetUpdateManager dispatches through IDirectManipulationCompositor's vtable slot 5.
 func (self *IDirectManipulationCompositor) SetUpdateManager(updateManager *IDirectManipulationUpdateManager) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(updateManager)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Flush dispatches through IDirectManipulationCompositor's vtable slot 6.
 func (self *IDirectManipulationCompositor) Flush() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDirectManipulationCompositor2: https://learn.microsoft.com/windows/win32/api/directmanipulation/nn-directmanipulation-idirectmanipulationcompositor2
@@ -74,7 +74,7 @@ var IID_IDirectManipulationCompositor2 = win32.GUID{Data1: 0xd38c7822, Data2: 0x
 // AddContentWithCrossProcessChaining dispatches through IDirectManipulationCompositor2's vtable slot 7.
 func (self *IDirectManipulationCompositor2) AddContentWithCrossProcessChaining(content *IDirectManipulationPrimaryContent, device *systemcom.IUnknown, parentVisual *systemcom.IUnknown, childVisual *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(content)), uintptr(unsafe.Pointer(device)), uintptr(unsafe.Pointer(parentVisual)), uintptr(unsafe.Pointer(childVisual)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDirectManipulationContent: https://learn.microsoft.com/windows/win32/api/directmanipulation/nn-directmanipulation-idirectmanipulationcontent
@@ -89,31 +89,31 @@ var IID_IDirectManipulationContent = win32.GUID{Data1: 0xb89962cb, Data2: 0x3d89
 // GetContentRect dispatches through IDirectManipulationContent's vtable slot 3.
 func (self *IDirectManipulationContent) GetContentRect(contentSize *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(contentSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetContentRect dispatches through IDirectManipulationContent's vtable slot 4.
 func (self *IDirectManipulationContent) SetContentRect(contentSize *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(contentSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetViewport dispatches through IDirectManipulationContent's vtable slot 5.
 func (self *IDirectManipulationContent) GetViewport(riid *win32.GUID, object **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(object)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTag dispatches through IDirectManipulationContent's vtable slot 6.
 func (self *IDirectManipulationContent) GetTag(riid *win32.GUID, object **win32.IUnknown, id *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(object)), uintptr(unsafe.Pointer(id)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTag dispatches through IDirectManipulationContent's vtable slot 7.
 func (self *IDirectManipulationContent) SetTag(object *systemcom.IUnknown, id uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(object)), uintptr(id))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOutputTransform dispatches through IDirectManipulationContent's vtable slot 8.
@@ -123,7 +123,7 @@ func (self *IDirectManipulationContent) GetOutputTransform(matrix []float32) err
 		_matrix = &matrix[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_matrix)), uintptr(len(matrix)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetContentTransform dispatches through IDirectManipulationContent's vtable slot 9.
@@ -133,7 +133,7 @@ func (self *IDirectManipulationContent) GetContentTransform(matrix []float32) er
 		_matrix = &matrix[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_matrix)), uintptr(len(matrix)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SyncContentTransform dispatches through IDirectManipulationContent's vtable slot 10.
@@ -143,7 +143,7 @@ func (self *IDirectManipulationContent) SyncContentTransform(matrix []float32) e
 		_matrix = &matrix[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_matrix)), uintptr(len(matrix)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDirectManipulationDeferContactService: https://learn.microsoft.com/windows/win32/api/directmanipulation/nn-directmanipulation-idirectmanipulationdefercontactservice
@@ -158,19 +158,19 @@ var IID_IDirectManipulationDeferContactService = win32.GUID{Data1: 0x652d5c71, D
 // DeferContact dispatches through IDirectManipulationDeferContactService's vtable slot 3.
 func (self *IDirectManipulationDeferContactService) DeferContact(pointerId uint32, timeout uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(pointerId), uintptr(timeout))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CancelContact dispatches through IDirectManipulationDeferContactService's vtable slot 4.
 func (self *IDirectManipulationDeferContactService) CancelContact(pointerId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(pointerId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CancelDeferral dispatches through IDirectManipulationDeferContactService's vtable slot 5.
 func (self *IDirectManipulationDeferContactService) CancelDeferral(pointerId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(pointerId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDirectManipulationDragDropBehavior: https://learn.microsoft.com/windows/win32/api/directmanipulation/nn-directmanipulation-idirectmanipulationdragdropbehavior
@@ -185,13 +185,13 @@ var IID_IDirectManipulationDragDropBehavior = win32.GUID{Data1: 0x814b5af5, Data
 // SetConfiguration dispatches through IDirectManipulationDragDropBehavior's vtable slot 3.
 func (self *IDirectManipulationDragDropBehavior) SetConfiguration(configuration DIRECTMANIPULATION_DRAG_DROP_CONFIGURATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(configuration))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStatus dispatches through IDirectManipulationDragDropBehavior's vtable slot 4.
 func (self *IDirectManipulationDragDropBehavior) GetStatus(status *DIRECTMANIPULATION_DRAG_DROP_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(status)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDirectManipulationDragDropEventHandler: https://learn.microsoft.com/windows/win32/api/directmanipulation/nn-directmanipulation-idirectmanipulationdragdropeventhandler
@@ -206,7 +206,7 @@ var IID_IDirectManipulationDragDropEventHandler = win32.GUID{Data1: 0x1fa11b10, 
 // OnDragDropStatusChange dispatches through IDirectManipulationDragDropEventHandler's vtable slot 3.
 func (self *IDirectManipulationDragDropEventHandler) OnDragDropStatusChange(viewport *IDirectManipulationViewport2, current DIRECTMANIPULATION_DRAG_DROP_STATUS, previous DIRECTMANIPULATION_DRAG_DROP_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(viewport)), uintptr(current), uintptr(previous))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDirectManipulationFrameInfoProvider: https://learn.microsoft.com/windows/win32/api/directmanipulation/nn-directmanipulation-idirectmanipulationframeinfoprovider
@@ -221,7 +221,7 @@ var IID_IDirectManipulationFrameInfoProvider = win32.GUID{Data1: 0xfb759dba, Dat
 // GetNextFrameInfo dispatches through IDirectManipulationFrameInfoProvider's vtable slot 3.
 func (self *IDirectManipulationFrameInfoProvider) GetNextFrameInfo(time *uint64, processTime *uint64, compositionTime *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(time)), uintptr(unsafe.Pointer(processTime)), uintptr(unsafe.Pointer(compositionTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDirectManipulationInteractionEventHandler: https://learn.microsoft.com/windows/win32/api/directmanipulation/nn-directmanipulation-idirectmanipulationinteractioneventhandler
@@ -236,7 +236,7 @@ var IID_IDirectManipulationInteractionEventHandler = win32.GUID{Data1: 0xe43f45b
 // OnInteraction dispatches through IDirectManipulationInteractionEventHandler's vtable slot 3.
 func (self *IDirectManipulationInteractionEventHandler) OnInteraction(viewport *IDirectManipulationViewport2, interaction DIRECTMANIPULATION_INTERACTION_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(viewport)), uintptr(interaction))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDirectManipulationManager: https://learn.microsoft.com/windows/win32/api/directmanipulation/nn-directmanipulation-idirectmanipulationmanager
@@ -251,43 +251,43 @@ var IID_IDirectManipulationManager = win32.GUID{Data1: 0xfbf5d3b4, Data2: 0x70c7
 // Activate dispatches through IDirectManipulationManager's vtable slot 3.
 func (self *IDirectManipulationManager) Activate(window foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(window))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Deactivate dispatches through IDirectManipulationManager's vtable slot 4.
 func (self *IDirectManipulationManager) Deactivate(window foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(window))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterHitTestTarget dispatches through IDirectManipulationManager's vtable slot 5.
 func (self *IDirectManipulationManager) RegisterHitTestTarget(window foundation.HWND, hitTestWindow foundation.HWND, type_ DIRECTMANIPULATION_HITTEST_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(window), uintptr(hitTestWindow), uintptr(type_))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ProcessInput dispatches through IDirectManipulationManager's vtable slot 6.
 func (self *IDirectManipulationManager) ProcessInput(message *uiwindowsandmessaging.MSG, handled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(handled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetUpdateManager dispatches through IDirectManipulationManager's vtable slot 7.
 func (self *IDirectManipulationManager) GetUpdateManager(riid *win32.GUID, object **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(object)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateViewport dispatches through IDirectManipulationManager's vtable slot 8.
 func (self *IDirectManipulationManager) CreateViewport(frameInfo *IDirectManipulationFrameInfoProvider, window foundation.HWND, riid *win32.GUID, object **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(frameInfo)), uintptr(window), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(object)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateContent dispatches through IDirectManipulationManager's vtable slot 9.
 func (self *IDirectManipulationManager) CreateContent(frameInfo *IDirectManipulationFrameInfoProvider, clsid *win32.GUID, riid *win32.GUID, object **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(frameInfo)), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(object)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDirectManipulationManager2: https://learn.microsoft.com/windows/win32/api/directmanipulation/nn-directmanipulation-idirectmanipulationmanager2
@@ -302,7 +302,7 @@ var IID_IDirectManipulationManager2 = win32.GUID{Data1: 0xfa1005e9, Data2: 0x3d1
 // CreateBehavior dispatches through IDirectManipulationManager2's vtable slot 10.
 func (self *IDirectManipulationManager2) CreateBehavior(clsid *win32.GUID, riid *win32.GUID, object **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(object)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDirectManipulationManager3: https://learn.microsoft.com/windows/win32/api/directmanipulation/nn-directmanipulation-idirectmanipulationmanager3
@@ -317,7 +317,7 @@ var IID_IDirectManipulationManager3 = win32.GUID{Data1: 0x2cb6b33d, Data2: 0xffe
 // GetService dispatches through IDirectManipulationManager3's vtable slot 11.
 func (self *IDirectManipulationManager3) GetService(clsid *win32.GUID, riid *win32.GUID, object **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(object)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDirectManipulationPrimaryContent: https://learn.microsoft.com/windows/win32/api/directmanipulation/nn-directmanipulation-idirectmanipulationprimarycontent
@@ -336,25 +336,25 @@ func (self *IDirectManipulationPrimaryContent) SetSnapPoints(motion DIRECTMANIPU
 		_points = &points[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(motion), uintptr(unsafe.Pointer(_points)), uintptr(len(points)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetSnapType dispatches through IDirectManipulationPrimaryContent's vtable slot 5.
 func (self *IDirectManipulationPrimaryContent) SetSnapType(motion DIRECTMANIPULATION_MOTION_TYPES, type_ DIRECTMANIPULATION_SNAPPOINT_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(motion), uintptr(type_))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetHorizontalAlignment dispatches through IDirectManipulationPrimaryContent's vtable slot 8.
 func (self *IDirectManipulationPrimaryContent) SetHorizontalAlignment(alignment DIRECTMANIPULATION_HORIZONTALALIGNMENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(alignment))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetVerticalAlignment dispatches through IDirectManipulationPrimaryContent's vtable slot 9.
 func (self *IDirectManipulationPrimaryContent) SetVerticalAlignment(alignment DIRECTMANIPULATION_VERTICALALIGNMENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(alignment))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInertiaEndTransform dispatches through IDirectManipulationPrimaryContent's vtable slot 10.
@@ -364,13 +364,13 @@ func (self *IDirectManipulationPrimaryContent) GetInertiaEndTransform(matrix []f
 		_matrix = &matrix[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_matrix)), uintptr(len(matrix)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCenterPoint dispatches through IDirectManipulationPrimaryContent's vtable slot 11.
 func (self *IDirectManipulationPrimaryContent) GetCenterPoint(centerX *float32, centerY *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(centerX)), uintptr(unsafe.Pointer(centerY)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDirectManipulationUpdateHandler: https://learn.microsoft.com/windows/win32/api/directmanipulation/nn-directmanipulation-idirectmanipulationupdatehandler
@@ -385,7 +385,7 @@ var IID_IDirectManipulationUpdateHandler = win32.GUID{Data1: 0x790b6337, Data2: 
 // Update dispatches through IDirectManipulationUpdateHandler's vtable slot 3.
 func (self *IDirectManipulationUpdateHandler) Update() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDirectManipulationUpdateManager: https://learn.microsoft.com/windows/win32/api/directmanipulation/nn-directmanipulation-idirectmanipulationupdatemanager
@@ -400,19 +400,19 @@ var IID_IDirectManipulationUpdateManager = win32.GUID{Data1: 0xb0ae62fd, Data2: 
 // RegisterWaitHandleCallback dispatches through IDirectManipulationUpdateManager's vtable slot 3.
 func (self *IDirectManipulationUpdateManager) RegisterWaitHandleCallback(handle foundation.HANDLE, eventHandler *IDirectManipulationUpdateHandler, cookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(handle), uintptr(unsafe.Pointer(eventHandler)), uintptr(unsafe.Pointer(cookie)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnregisterWaitHandleCallback dispatches through IDirectManipulationUpdateManager's vtable slot 4.
 func (self *IDirectManipulationUpdateManager) UnregisterWaitHandleCallback(cookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cookie))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Update dispatches through IDirectManipulationUpdateManager's vtable slot 5.
 func (self *IDirectManipulationUpdateManager) Update(frameInfo *IDirectManipulationFrameInfoProvider) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(frameInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDirectManipulationViewport: https://learn.microsoft.com/windows/win32/api/directmanipulation/nn-directmanipulation-idirectmanipulationviewport
@@ -427,61 +427,61 @@ var IID_IDirectManipulationViewport = win32.GUID{Data1: 0x28b85a3d, Data2: 0x60a
 // Enable dispatches through IDirectManipulationViewport's vtable slot 3.
 func (self *IDirectManipulationViewport) Enable() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Disable dispatches through IDirectManipulationViewport's vtable slot 4.
 func (self *IDirectManipulationViewport) Disable() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetContact dispatches through IDirectManipulationViewport's vtable slot 5.
 func (self *IDirectManipulationViewport) SetContact(pointerId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(pointerId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReleaseContact dispatches through IDirectManipulationViewport's vtable slot 6.
 func (self *IDirectManipulationViewport) ReleaseContact(pointerId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(pointerId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReleaseAllContacts dispatches through IDirectManipulationViewport's vtable slot 7.
 func (self *IDirectManipulationViewport) ReleaseAllContacts() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStatus dispatches through IDirectManipulationViewport's vtable slot 8.
 func (self *IDirectManipulationViewport) GetStatus(status *DIRECTMANIPULATION_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(status)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTag dispatches through IDirectManipulationViewport's vtable slot 9.
 func (self *IDirectManipulationViewport) GetTag(riid *win32.GUID, object **win32.IUnknown, id *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(object)), uintptr(unsafe.Pointer(id)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTag dispatches through IDirectManipulationViewport's vtable slot 10.
 func (self *IDirectManipulationViewport) SetTag(object *systemcom.IUnknown, id uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(object)), uintptr(id))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetViewportRect dispatches through IDirectManipulationViewport's vtable slot 11.
 func (self *IDirectManipulationViewport) GetViewportRect(viewport *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(viewport)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetViewportRect dispatches through IDirectManipulationViewport's vtable slot 12.
 func (self *IDirectManipulationViewport) SetViewportRect(viewport *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(viewport)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetViewportTransform dispatches through IDirectManipulationViewport's vtable slot 14.
@@ -491,7 +491,7 @@ func (self *IDirectManipulationViewport) SetViewportTransform(matrix []float32) 
 		_matrix = &matrix[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_matrix)), uintptr(len(matrix)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SyncDisplayTransform dispatches through IDirectManipulationViewport's vtable slot 15.
@@ -501,97 +501,97 @@ func (self *IDirectManipulationViewport) SyncDisplayTransform(matrix []float32) 
 		_matrix = &matrix[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_matrix)), uintptr(len(matrix)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPrimaryContent dispatches through IDirectManipulationViewport's vtable slot 16.
 func (self *IDirectManipulationViewport) GetPrimaryContent(riid *win32.GUID, object **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(object)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddContent dispatches through IDirectManipulationViewport's vtable slot 17.
 func (self *IDirectManipulationViewport) AddContent(content *IDirectManipulationContent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(content)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveContent dispatches through IDirectManipulationViewport's vtable slot 18.
 func (self *IDirectManipulationViewport) RemoveContent(content *IDirectManipulationContent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(content)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetViewportOptions dispatches through IDirectManipulationViewport's vtable slot 19.
 func (self *IDirectManipulationViewport) SetViewportOptions(options DIRECTMANIPULATION_VIEWPORT_OPTIONS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(options))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddConfiguration dispatches through IDirectManipulationViewport's vtable slot 20.
 func (self *IDirectManipulationViewport) AddConfiguration(configuration DIRECTMANIPULATION_CONFIGURATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(configuration))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveConfiguration dispatches through IDirectManipulationViewport's vtable slot 21.
 func (self *IDirectManipulationViewport) RemoveConfiguration(configuration DIRECTMANIPULATION_CONFIGURATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(configuration))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ActivateConfiguration dispatches through IDirectManipulationViewport's vtable slot 22.
 func (self *IDirectManipulationViewport) ActivateConfiguration(configuration DIRECTMANIPULATION_CONFIGURATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(configuration))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetManualGesture dispatches through IDirectManipulationViewport's vtable slot 23.
 func (self *IDirectManipulationViewport) SetManualGesture(configuration DIRECTMANIPULATION_GESTURE_CONFIGURATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(configuration))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetChaining dispatches through IDirectManipulationViewport's vtable slot 24.
 func (self *IDirectManipulationViewport) SetChaining(enabledTypes DIRECTMANIPULATION_MOTION_TYPES) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(enabledTypes))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddEventHandler dispatches through IDirectManipulationViewport's vtable slot 25.
 func (self *IDirectManipulationViewport) AddEventHandler(window foundation.HWND, eventHandler *IDirectManipulationViewportEventHandler, cookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(window), uintptr(unsafe.Pointer(eventHandler)), uintptr(unsafe.Pointer(cookie)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveEventHandler dispatches through IDirectManipulationViewport's vtable slot 26.
 func (self *IDirectManipulationViewport) RemoveEventHandler(cookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(cookie))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetInputMode dispatches through IDirectManipulationViewport's vtable slot 27.
 func (self *IDirectManipulationViewport) SetInputMode(mode DIRECTMANIPULATION_INPUT_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(mode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetUpdateMode dispatches through IDirectManipulationViewport's vtable slot 28.
 func (self *IDirectManipulationViewport) SetUpdateMode(mode DIRECTMANIPULATION_INPUT_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(mode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Stop dispatches through IDirectManipulationViewport's vtable slot 29.
 func (self *IDirectManipulationViewport) Stop() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Abandon dispatches through IDirectManipulationViewport's vtable slot 30.
 func (self *IDirectManipulationViewport) Abandon() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDirectManipulationViewport2: https://learn.microsoft.com/windows/win32/api/directmanipulation/nn-directmanipulation-idirectmanipulationviewport2
@@ -606,19 +606,19 @@ var IID_IDirectManipulationViewport2 = win32.GUID{Data1: 0x923ccaac, Data2: 0x61
 // AddBehavior dispatches through IDirectManipulationViewport2's vtable slot 31.
 func (self *IDirectManipulationViewport2) AddBehavior(behavior *systemcom.IUnknown, cookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(behavior)), uintptr(unsafe.Pointer(cookie)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveBehavior dispatches through IDirectManipulationViewport2's vtable slot 32.
 func (self *IDirectManipulationViewport2) RemoveBehavior(cookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(cookie))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAllBehaviors dispatches through IDirectManipulationViewport2's vtable slot 33.
 func (self *IDirectManipulationViewport2) RemoveAllBehaviors() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDirectManipulationViewportEventHandler: https://learn.microsoft.com/windows/win32/api/directmanipulation/nn-directmanipulation-idirectmanipulationviewporteventhandler
@@ -633,17 +633,17 @@ var IID_IDirectManipulationViewportEventHandler = win32.GUID{Data1: 0x952121da, 
 // OnViewportStatusChanged dispatches through IDirectManipulationViewportEventHandler's vtable slot 3.
 func (self *IDirectManipulationViewportEventHandler) OnViewportStatusChanged(viewport *IDirectManipulationViewport, current DIRECTMANIPULATION_STATUS, previous DIRECTMANIPULATION_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(viewport)), uintptr(current), uintptr(previous))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnViewportUpdated dispatches through IDirectManipulationViewportEventHandler's vtable slot 4.
 func (self *IDirectManipulationViewportEventHandler) OnViewportUpdated(viewport *IDirectManipulationViewport) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(viewport)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnContentUpdated dispatches through IDirectManipulationViewportEventHandler's vtable slot 5.
 func (self *IDirectManipulationViewportEventHandler) OnContentUpdated(viewport *IDirectManipulationViewport, content *IDirectManipulationContent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(viewport)), uintptr(unsafe.Pointer(content)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

@@ -172,14 +172,14 @@ func PrintDlgA(pPD *PRINTDLGA) bool {
 // https://learn.microsoft.com/windows/win32/api/commdlg/nc-commdlg-printdlgexw
 func PrintDlgEx(pPD *PRINTDLGEXW) error {
 	r1, _, _ := syscall.SyscallN(procPrintDlgEx.Addr(), uintptr(unsafe.Pointer(pPD)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PrintDlgExA calls COMDLG32!PrintDlgExA.
 // https://learn.microsoft.com/windows/win32/api/commdlg/nc-commdlg-printdlgexa
 func PrintDlgExA(pPD *PRINTDLGEXA) error {
 	r1, _, _ := syscall.SyscallN(procPrintDlgExA.Addr(), uintptr(unsafe.Pointer(pPD)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReplaceText calls COMDLG32!ReplaceTextW.

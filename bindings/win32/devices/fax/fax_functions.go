@@ -687,5 +687,5 @@ func SendToFaxRecipient(sndMode SendToMode, lpFileName string) uint32 {
 // StiCreateInstanceW calls STI!StiCreateInstanceW.
 func StiCreateInstanceW(hinst foundation.HINSTANCE, dwVer uint32, ppSti **IStillImageW, punkOuter *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procStiCreateInstanceW.Addr(), uintptr(hinst), uintptr(dwVer), uintptr(unsafe.Pointer(ppSti)), uintptr(unsafe.Pointer(punkOuter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

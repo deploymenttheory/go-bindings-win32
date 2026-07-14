@@ -24,7 +24,7 @@ var IID_IInkCommitRequestHandler = win32.GUID{Data1: 0xfabea3fc, Data2: 0xb108, 
 // OnCommitRequested dispatches through IInkCommitRequestHandler's vtable slot 3.
 func (self *IInkCommitRequestHandler) OnCommitRequested() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkD2DRenderer: https://learn.microsoft.com/windows/win32/api/inkrenderer/nn-inkrenderer-iinkd2drenderer
@@ -40,7 +40,7 @@ var IID_IInkD2DRenderer = win32.GUID{Data1: 0x407fb1de, Data2: 0xf85a, Data3: 0x
 func (self *IInkD2DRenderer) Draw(pD2D1DeviceContext *systemcom.IUnknown, pInkStrokeIterable *systemcom.IUnknown, fHighContrast bool) error {
 	_fHighContrast := win32.Bool32(fHighContrast)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pD2D1DeviceContext)), uintptr(unsafe.Pointer(pInkStrokeIterable)), uintptr(_fHighContrast))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkD2DRenderer2: https://learn.microsoft.com/windows/win32/api/inkrenderer/nn-inkrenderer-iinkd2drenderer2
@@ -55,7 +55,7 @@ var IID_IInkD2DRenderer2 = win32.GUID{Data1: 0x0a95dcd9, Data2: 0x4578, Data3: 0
 // Draw dispatches through IInkD2DRenderer2's vtable slot 3.
 func (self *IInkD2DRenderer2) Draw(pD2D1DeviceContext *systemcom.IUnknown, pInkStrokeIterable *systemcom.IUnknown, highContrastAdjustment INK_HIGH_CONTRAST_ADJUSTMENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pD2D1DeviceContext)), uintptr(unsafe.Pointer(pInkStrokeIterable)), uintptr(highContrastAdjustment))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkDesktopHost: https://learn.microsoft.com/windows/win32/api/inkpresenterdesktop/nn-inkpresenterdesktop-iinkdesktophost
@@ -70,13 +70,13 @@ var IID_IInkDesktopHost = win32.GUID{Data1: 0x4ce7d875, Data2: 0xa981, Data3: 0x
 // QueueWorkItem dispatches through IInkDesktopHost's vtable slot 3.
 func (self *IInkDesktopHost) QueueWorkItem(workItem *IInkHostWorkItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(workItem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateInkPresenter dispatches through IInkDesktopHost's vtable slot 4.
 func (self *IInkDesktopHost) CreateInkPresenter(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkHostWorkItem: https://learn.microsoft.com/windows/win32/api/inkpresenterdesktop/nn-inkpresenterdesktop-iinkhostworkitem
@@ -91,7 +91,7 @@ var IID_IInkHostWorkItem = win32.GUID{Data1: 0xccda0a9a, Data2: 0x1b78, Data3: 0
 // Invoke dispatches through IInkHostWorkItem's vtable slot 3.
 func (self *IInkHostWorkItem) Invoke() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkPresenterDesktop: https://learn.microsoft.com/windows/win32/api/inkpresenterdesktop/nn-inkpresenterdesktop-iinkpresenterdesktop
@@ -106,23 +106,23 @@ var IID_IInkPresenterDesktop = win32.GUID{Data1: 0x73f3c0d9, Data2: 0x2e8b, Data
 // SetRootVisual dispatches through IInkPresenterDesktop's vtable slot 3.
 func (self *IInkPresenterDesktop) SetRootVisual(rootVisual *systemcom.IUnknown, device *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rootVisual)), uintptr(unsafe.Pointer(device)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCommitRequestHandler dispatches through IInkPresenterDesktop's vtable slot 4.
 func (self *IInkPresenterDesktop) SetCommitRequestHandler(handler *IInkCommitRequestHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(handler)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSize dispatches through IInkPresenterDesktop's vtable slot 5.
 func (self *IInkPresenterDesktop) GetSize(width *float32, height *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(width)), uintptr(unsafe.Pointer(height)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnHighContrastChanged dispatches through IInkPresenterDesktop's vtable slot 7.
 func (self *IInkPresenterDesktop) OnHighContrastChanged() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

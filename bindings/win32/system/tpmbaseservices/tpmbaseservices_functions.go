@@ -41,13 +41,13 @@ func GetDeviceID(pbWindowsAIK []byte, pcbResult *uint32, pfProtectedByTPM *found
 		_pbWindowsAIK = &pbWindowsAIK[0]
 	}
 	r1, _, _ := syscall.SyscallN(procGetDeviceID.Addr(), uintptr(unsafe.Pointer(_pbWindowsAIK)), uintptr(len(pbWindowsAIK)), uintptr(unsafe.Pointer(pcbResult)), uintptr(unsafe.Pointer(pfProtectedByTPM)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceIDString calls tbs!GetDeviceIDString.
 func GetDeviceIDString(pszWindowsAIK foundation.PWSTR, cchWindowsAIK uint32, pcchResult *uint32, pfProtectedByTPM *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procGetDeviceIDString.Addr(), uintptr(unsafe.Pointer(pszWindowsAIK)), uintptr(cchWindowsAIK), uintptr(unsafe.Pointer(pcchResult)), uintptr(unsafe.Pointer(pfProtectedByTPM)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Tbsi_Context_Create calls tbs!Tbsi_Context_Create.

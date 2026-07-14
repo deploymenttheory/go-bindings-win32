@@ -28,13 +28,13 @@ func (self *AsyncIFtpAuthenticationProvider) Begin_AuthenticateUser(pszSessionId
 	_pszUserName := win32.UTF16Ptr(pszUserName)
 	_pszPassword := win32.UTF16Ptr(pszPassword)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(_pszSiteName)), uintptr(unsafe.Pointer(_pszUserName)), uintptr(unsafe.Pointer(_pszPassword)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Finish_AuthenticateUser dispatches through AsyncIFtpAuthenticationProvider's vtable slot 4.
 func (self *AsyncIFtpAuthenticationProvider) Finish_AuthenticateUser(ppszCanonicalUserName *foundation.PWSTR, pfAuthenticated *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszCanonicalUserName)), uintptr(unsafe.Pointer(pfAuthenticated)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 860dc339-07e5-4a5c-9c61-8820cea012bc
@@ -52,13 +52,13 @@ func (self *AsyncIFtpAuthorizationProvider) Begin_GetUserAccessPermission(pszSes
 	_pszVirtualPath := win32.UTF16Ptr(pszVirtualPath)
 	_pszUserName := win32.UTF16Ptr(pszUserName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(_pszSiteName)), uintptr(unsafe.Pointer(_pszVirtualPath)), uintptr(unsafe.Pointer(_pszUserName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Finish_GetUserAccessPermission dispatches through AsyncIFtpAuthorizationProvider's vtable slot 4.
 func (self *AsyncIFtpAuthorizationProvider) Finish_GetUserAccessPermission(pFtpAccess *FTP_ACCESS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFtpAccess)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 73f81638-6295-42bd-a2be-4a657f7c479c
@@ -75,13 +75,13 @@ func (self *AsyncIFtpHomeDirectoryProvider) Begin_GetUserHomeDirectoryData(pszSe
 	_pszSiteName := win32.UTF16Ptr(pszSiteName)
 	_pszUserName := win32.UTF16Ptr(pszUserName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(_pszSiteName)), uintptr(unsafe.Pointer(_pszUserName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Finish_GetUserHomeDirectoryData dispatches through AsyncIFtpHomeDirectoryProvider's vtable slot 4.
 func (self *AsyncIFtpHomeDirectoryProvider) Finish_GetUserHomeDirectoryData(ppszHomeDirectoryData *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszHomeDirectoryData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 00a0ae46-2498-48b2-95e6-df678ed7d49f
@@ -95,13 +95,13 @@ var IID_AsyncIFtpLogProvider = win32.GUID{Data1: 0x00a0ae46, Data2: 0x2498, Data
 // Begin_Log dispatches through AsyncIFtpLogProvider's vtable slot 3.
 func (self *AsyncIFtpLogProvider) Begin_Log(pLoggingParameters *LOGGING_PARAMETERS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLoggingParameters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Finish_Log dispatches through AsyncIFtpLogProvider's vtable slot 4.
 func (self *AsyncIFtpLogProvider) Finish_Log() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: a16b2542-9694-4eb1-a564-6c2e91fdc133
@@ -115,13 +115,13 @@ var IID_AsyncIFtpPostprocessProvider = win32.GUID{Data1: 0xa16b2542, Data2: 0x96
 // Begin_HandlePostprocess dispatches through AsyncIFtpPostprocessProvider's vtable slot 3.
 func (self *AsyncIFtpPostprocessProvider) Begin_HandlePostprocess(pPostProcessParameters *POST_PROCESS_PARAMETERS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPostProcessParameters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Finish_HandlePostprocess dispatches through AsyncIFtpPostprocessProvider's vtable slot 4.
 func (self *AsyncIFtpPostprocessProvider) Finish_HandlePostprocess(pFtpProcessStatus *FTP_PROCESS_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFtpProcessStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 6ff5fd8f-fd8e-48b1-a3e0-bf7073db4db5
@@ -135,13 +135,13 @@ var IID_AsyncIFtpPreprocessProvider = win32.GUID{Data1: 0x6ff5fd8f, Data2: 0xfd8
 // Begin_HandlePreprocess dispatches through AsyncIFtpPreprocessProvider's vtable slot 3.
 func (self *AsyncIFtpPreprocessProvider) Begin_HandlePreprocess(pPreProcessParameters *PRE_PROCESS_PARAMETERS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPreProcessParameters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Finish_HandlePreprocess dispatches through AsyncIFtpPreprocessProvider's vtable slot 4.
 func (self *AsyncIFtpPreprocessProvider) Finish_HandlePreprocess(pFtpProcessStatus *FTP_PROCESS_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFtpProcessStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 3e83bf99-70ec-41ca-84b6-aca7c7a62caf
@@ -159,13 +159,13 @@ func (self *AsyncIFtpRoleProvider) Begin_IsUserInRole(pszSessionId string, pszSi
 	_pszUserName := win32.UTF16Ptr(pszUserName)
 	_pszRole := win32.UTF16Ptr(pszRole)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(_pszSiteName)), uintptr(unsafe.Pointer(_pszUserName)), uintptr(unsafe.Pointer(_pszRole)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Finish_IsUserInRole dispatches through AsyncIFtpRoleProvider's vtable slot 4.
 func (self *AsyncIFtpRoleProvider) Finish_IsUserInRole(pfIsInRole *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsInRole)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: a9e69613-b80d-11d0-b9b9-00a0c922e750
@@ -183,25 +183,25 @@ func (self *AsyncIMSAdminBaseSinkW) Begin_SinkNotify(pcoChangeList []MD_CHANGE_O
 		_pcoChangeList = &pcoChangeList[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pcoChangeList)), uintptr(unsafe.Pointer(_pcoChangeList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Finish_SinkNotify dispatches through AsyncIMSAdminBaseSinkW's vtable slot 4.
 func (self *AsyncIMSAdminBaseSinkW) Finish_SinkNotify() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Begin_ShutdownNotify dispatches through AsyncIMSAdminBaseSinkW's vtable slot 5.
 func (self *AsyncIMSAdminBaseSinkW) Begin_ShutdownNotify() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Finish_ShutdownNotify dispatches through AsyncIMSAdminBaseSinkW's vtable slot 6.
 func (self *AsyncIMSAdminBaseSinkW) Finish_ShutdownNotify() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 51dfe970-f6f2-11d0-b9bd-00a0c922e750
@@ -215,19 +215,19 @@ var IID_IADMEXT = win32.GUID{Data1: 0x51dfe970, Data2: 0xf6f2, Data3: 0x11d0, Da
 // Initialize dispatches through IADMEXT's vtable slot 3.
 func (self *IADMEXT) Initialize() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumDcomCLSIDs dispatches through IADMEXT's vtable slot 4.
 func (self *IADMEXT) EnumDcomCLSIDs(pclsidDcom *win32.GUID, dwEnumIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pclsidDcom)), uintptr(dwEnumIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Terminate dispatches through IADMEXT's vtable slot 5.
 func (self *IADMEXT) Terminate() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 4659f95c-d5a8-4707-b2fc-6fd5794246cf
@@ -245,7 +245,7 @@ func (self *IFtpAuthenticationProvider) AuthenticateUser(pszSessionId string, ps
 	_pszUserName := win32.UTF16Ptr(pszUserName)
 	_pszPassword := win32.UTF16Ptr(pszPassword)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(_pszSiteName)), uintptr(unsafe.Pointer(_pszUserName)), uintptr(unsafe.Pointer(_pszPassword)), uintptr(unsafe.Pointer(ppszCanonicalUserName)), uintptr(unsafe.Pointer(pfAuthenticated)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: a50ae7a1-a35a-42b4-a4f3-f4f7057a05d1
@@ -263,7 +263,7 @@ func (self *IFtpAuthorizationProvider) GetUserAccessPermission(pszSessionId stri
 	_pszVirtualPath := win32.UTF16Ptr(pszVirtualPath)
 	_pszUserName := win32.UTF16Ptr(pszUserName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(_pszSiteName)), uintptr(unsafe.Pointer(_pszVirtualPath)), uintptr(unsafe.Pointer(_pszUserName)), uintptr(unsafe.Pointer(pFtpAccess)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 0933b392-18dd-4097-8b9c-83325c35d9a6
@@ -280,7 +280,7 @@ func (self *IFtpHomeDirectoryProvider) GetUserHomeDirectoryData(pszSessionId str
 	_pszSiteName := win32.UTF16Ptr(pszSiteName)
 	_pszUserName := win32.UTF16Ptr(pszUserName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(_pszSiteName)), uintptr(unsafe.Pointer(_pszUserName)), uintptr(unsafe.Pointer(ppszHomeDirectoryData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: a18a94cc-8299-4408-816c-7c3baca1a40e
@@ -294,7 +294,7 @@ var IID_IFtpLogProvider = win32.GUID{Data1: 0xa18a94cc, Data2: 0x8299, Data3: 0x
 // Log dispatches through IFtpLogProvider's vtable slot 3.
 func (self *IFtpLogProvider) Log(pLoggingParameters *LOGGING_PARAMETERS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLoggingParameters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 4522cbc6-16cd-49ad-8653-9a2c579e4280
@@ -308,7 +308,7 @@ var IID_IFtpPostprocessProvider = win32.GUID{Data1: 0x4522cbc6, Data2: 0x16cd, D
 // HandlePostprocess dispatches through IFtpPostprocessProvider's vtable slot 3.
 func (self *IFtpPostprocessProvider) HandlePostprocess(pPostProcessParameters *POST_PROCESS_PARAMETERS, pFtpProcessStatus *FTP_PROCESS_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPostProcessParameters)), uintptr(unsafe.Pointer(pFtpProcessStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: a3c19b60-5a28-471a-8f93-ab30411cee82
@@ -322,7 +322,7 @@ var IID_IFtpPreprocessProvider = win32.GUID{Data1: 0xa3c19b60, Data2: 0x5a28, Da
 // HandlePreprocess dispatches through IFtpPreprocessProvider's vtable slot 3.
 func (self *IFtpPreprocessProvider) HandlePreprocess(pPreProcessParameters *PRE_PROCESS_PARAMETERS, pFtpProcessStatus *FTP_PROCESS_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPreProcessParameters)), uintptr(unsafe.Pointer(pFtpProcessStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 4d1a3f7b-412d-447c-b199-64f967e9a2da
@@ -336,7 +336,7 @@ var IID_IFtpProviderConstruct = win32.GUID{Data1: 0x4d1a3f7b, Data2: 0x412d, Dat
 // Construct dispatches through IFtpProviderConstruct's vtable slot 3.
 func (self *IFtpProviderConstruct) Construct(configurationEntries *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(configurationEntries)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 909c850d-8ca0-4674-96b8-cc2941535725
@@ -354,7 +354,7 @@ func (self *IFtpRoleProvider) IsUserInRole(pszSessionId string, pszSiteName stri
 	_pszUserName := win32.UTF16Ptr(pszUserName)
 	_pszRole := win32.UTF16Ptr(pszRole)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(_pszSiteName)), uintptr(unsafe.Pointer(_pszUserName)), uintptr(unsafe.Pointer(_pszRole)), uintptr(unsafe.Pointer(pfIsInRole)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 8298d101-f992-43b7-8eca-5052d885b995
@@ -370,7 +370,7 @@ func (self *IMSAdminBase2W) BackupWithPasswd(pszMDBackupLocation string, dwMDVer
 	_pszMDBackupLocation := win32.UTF16Ptr(pszMDBackupLocation)
 	_pszPasswd := win32.UTF16Ptr(pszPasswd)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszMDBackupLocation)), uintptr(dwMDVersion), uintptr(dwMDFlags), uintptr(unsafe.Pointer(_pszPasswd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RestoreWithPasswd dispatches through IMSAdminBase2W's vtable slot 35.
@@ -378,7 +378,7 @@ func (self *IMSAdminBase2W) RestoreWithPasswd(pszMDBackupLocation string, dwMDVe
 	_pszMDBackupLocation := win32.UTF16Ptr(pszMDBackupLocation)
 	_pszPasswd := win32.UTF16Ptr(pszPasswd)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszMDBackupLocation)), uintptr(dwMDVersion), uintptr(dwMDFlags), uintptr(unsafe.Pointer(_pszPasswd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Export dispatches through IMSAdminBase2W's vtable slot 36.
@@ -387,7 +387,7 @@ func (self *IMSAdminBase2W) Export(pszPasswd string, pszFileName string, pszSour
 	_pszFileName := win32.UTF16Ptr(pszFileName)
 	_pszSourcePath := win32.UTF16Ptr(pszSourcePath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPasswd)), uintptr(unsafe.Pointer(_pszFileName)), uintptr(unsafe.Pointer(_pszSourcePath)), uintptr(dwMDFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Import dispatches through IMSAdminBase2W's vtable slot 37.
@@ -397,20 +397,20 @@ func (self *IMSAdminBase2W) Import(pszPasswd string, pszFileName string, pszSour
 	_pszSourcePath := win32.UTF16Ptr(pszSourcePath)
 	_pszDestPath := win32.UTF16Ptr(pszDestPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPasswd)), uintptr(unsafe.Pointer(_pszFileName)), uintptr(unsafe.Pointer(_pszSourcePath)), uintptr(unsafe.Pointer(_pszDestPath)), uintptr(dwMDFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RestoreHistory dispatches through IMSAdminBase2W's vtable slot 38.
 func (self *IMSAdminBase2W) RestoreHistory(pszMDHistoryLocation string, dwMDMajorVersion uint32, dwMDMinorVersion uint32, dwMDFlags uint32) error {
 	_pszMDHistoryLocation := win32.UTF16Ptr(pszMDHistoryLocation)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszMDHistoryLocation)), uintptr(dwMDMajorVersion), uintptr(dwMDMinorVersion), uintptr(dwMDFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumHistory dispatches through IMSAdminBase2W's vtable slot 39.
 func (self *IMSAdminBase2W) EnumHistory(pszMDHistoryLocation foundation.PWSTR, pdwMDMajorVersion *uint32, pdwMDMinorVersion *uint32, pftMDHistoryTime *foundation.FILETIME, dwMDEnumIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszMDHistoryLocation)), uintptr(unsafe.Pointer(pdwMDMajorVersion)), uintptr(unsafe.Pointer(pdwMDMinorVersion)), uintptr(unsafe.Pointer(pftMDHistoryTime)), uintptr(dwMDEnumIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f612954d-3b0b-4c56-9563-227b7be624b4
@@ -425,7 +425,7 @@ var IID_IMSAdminBase3W = win32.GUID{Data1: 0xf612954d, Data2: 0x3b0b, Data3: 0x4
 func (self *IMSAdminBase3W) GetChildPaths(hMDHandle uint32, pszMDPath string, cchMDBufferSize uint32, pszBuffer foundation.PWSTR, pcchMDRequiredBufferSize *uint32) error {
 	_pszMDPath := win32.UTF16Ptr(pszMDPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(cchMDBufferSize), uintptr(unsafe.Pointer(pszBuffer)), uintptr(unsafe.Pointer(pcchMDRequiredBufferSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: a9e69612-b80d-11d0-b9b9-00a0c922e750
@@ -443,13 +443,13 @@ func (self *IMSAdminBaseSinkW) SinkNotify(pcoChangeList []MD_CHANGE_OBJECT_W) er
 		_pcoChangeList = &pcoChangeList[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pcoChangeList)), uintptr(unsafe.Pointer(_pcoChangeList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ShutdownNotify dispatches through IMSAdminBaseSinkW's vtable slot 4.
 func (self *IMSAdminBaseSinkW) ShutdownNotify() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 70b51430-b6ca-11d0-b9b9-00a0c922e750
@@ -464,28 +464,28 @@ var IID_IMSAdminBaseW = win32.GUID{Data1: 0x70b51430, Data2: 0xb6ca, Data3: 0x11
 func (self *IMSAdminBaseW) AddKey(hMDHandle uint32, pszMDPath string) error {
 	_pszMDPath := win32.UTF16Ptr(pszMDPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteKey dispatches through IMSAdminBaseW's vtable slot 4.
 func (self *IMSAdminBaseW) DeleteKey(hMDHandle uint32, pszMDPath string) error {
 	_pszMDPath := win32.UTF16Ptr(pszMDPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteChildKeys dispatches through IMSAdminBaseW's vtable slot 5.
 func (self *IMSAdminBaseW) DeleteChildKeys(hMDHandle uint32, pszMDPath string) error {
 	_pszMDPath := win32.UTF16Ptr(pszMDPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumKeys dispatches through IMSAdminBaseW's vtable slot 6.
 func (self *IMSAdminBaseW) EnumKeys(hMDHandle uint32, pszMDPath string, pszMDName foundation.PWSTR, dwMDEnumObjectIndex uint32) error {
 	_pszMDPath := win32.UTF16Ptr(pszMDPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(unsafe.Pointer(pszMDName)), uintptr(dwMDEnumObjectIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CopyKey dispatches through IMSAdminBaseW's vtable slot 7.
@@ -495,7 +495,7 @@ func (self *IMSAdminBaseW) CopyKey(hMDSourceHandle uint32, pszMDSourcePath strin
 	_bMDOverwriteFlag := win32.Bool32(bMDOverwriteFlag)
 	_bMDCopyFlag := win32.Bool32(bMDCopyFlag)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hMDSourceHandle), uintptr(unsafe.Pointer(_pszMDSourcePath)), uintptr(hMDDestHandle), uintptr(unsafe.Pointer(_pszMDDestPath)), uintptr(_bMDOverwriteFlag), uintptr(_bMDCopyFlag))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RenameKey dispatches through IMSAdminBaseW's vtable slot 8.
@@ -503,49 +503,49 @@ func (self *IMSAdminBaseW) RenameKey(hMDHandle uint32, pszMDPath string, pszMDNe
 	_pszMDPath := win32.UTF16Ptr(pszMDPath)
 	_pszMDNewName := win32.UTF16Ptr(pszMDNewName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(unsafe.Pointer(_pszMDNewName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetData dispatches through IMSAdminBaseW's vtable slot 9.
 func (self *IMSAdminBaseW) SetData(hMDHandle uint32, pszMDPath string, pmdrMDData *METADATA_RECORD) error {
 	_pszMDPath := win32.UTF16Ptr(pszMDPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(unsafe.Pointer(pmdrMDData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetData dispatches through IMSAdminBaseW's vtable slot 10.
 func (self *IMSAdminBaseW) GetData(hMDHandle uint32, pszMDPath string, pmdrMDData *METADATA_RECORD, pdwMDRequiredDataLen *uint32) error {
 	_pszMDPath := win32.UTF16Ptr(pszMDPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(unsafe.Pointer(pmdrMDData)), uintptr(unsafe.Pointer(pdwMDRequiredDataLen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteData dispatches through IMSAdminBaseW's vtable slot 11.
 func (self *IMSAdminBaseW) DeleteData(hMDHandle uint32, pszMDPath string, dwMDIdentifier uint32, dwMDDataType uint32) error {
 	_pszMDPath := win32.UTF16Ptr(pszMDPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(dwMDIdentifier), uintptr(dwMDDataType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumData dispatches through IMSAdminBaseW's vtable slot 12.
 func (self *IMSAdminBaseW) EnumData(hMDHandle uint32, pszMDPath string, pmdrMDData *METADATA_RECORD, dwMDEnumDataIndex uint32, pdwMDRequiredDataLen *uint32) error {
 	_pszMDPath := win32.UTF16Ptr(pszMDPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(unsafe.Pointer(pmdrMDData)), uintptr(dwMDEnumDataIndex), uintptr(unsafe.Pointer(pdwMDRequiredDataLen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAllData dispatches through IMSAdminBaseW's vtable slot 13.
 func (self *IMSAdminBaseW) GetAllData(hMDHandle uint32, pszMDPath string, dwMDAttributes uint32, dwMDUserType uint32, dwMDDataType uint32, pdwMDNumDataEntries *uint32, pdwMDDataSetNumber *uint32, dwMDBufferSize uint32, pbMDBuffer *byte, pdwMDRequiredBufferSize *uint32) error {
 	_pszMDPath := win32.UTF16Ptr(pszMDPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(dwMDAttributes), uintptr(dwMDUserType), uintptr(dwMDDataType), uintptr(unsafe.Pointer(pdwMDNumDataEntries)), uintptr(unsafe.Pointer(pdwMDDataSetNumber)), uintptr(dwMDBufferSize), uintptr(unsafe.Pointer(pbMDBuffer)), uintptr(unsafe.Pointer(pdwMDRequiredBufferSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteAllData dispatches through IMSAdminBaseW's vtable slot 14.
 func (self *IMSAdminBaseW) DeleteAllData(hMDHandle uint32, pszMDPath string, dwMDUserType uint32, dwMDDataType uint32) error {
 	_pszMDPath := win32.UTF16Ptr(pszMDPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(dwMDUserType), uintptr(dwMDDataType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CopyData dispatches through IMSAdminBaseW's vtable slot 15.
@@ -554,58 +554,58 @@ func (self *IMSAdminBaseW) CopyData(hMDSourceHandle uint32, pszMDSourcePath stri
 	_pszMDDestPath := win32.UTF16Ptr(pszMDDestPath)
 	_bMDCopyFlag := win32.Bool32(bMDCopyFlag)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(hMDSourceHandle), uintptr(unsafe.Pointer(_pszMDSourcePath)), uintptr(hMDDestHandle), uintptr(unsafe.Pointer(_pszMDDestPath)), uintptr(dwMDAttributes), uintptr(dwMDUserType), uintptr(dwMDDataType), uintptr(_bMDCopyFlag))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDataPaths dispatches through IMSAdminBaseW's vtable slot 16.
 func (self *IMSAdminBaseW) GetDataPaths(hMDHandle uint32, pszMDPath string, dwMDIdentifier uint32, dwMDDataType uint32, dwMDBufferSize uint32, pszBuffer foundation.PWSTR, pdwMDRequiredBufferSize *uint32) error {
 	_pszMDPath := win32.UTF16Ptr(pszMDPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(dwMDIdentifier), uintptr(dwMDDataType), uintptr(dwMDBufferSize), uintptr(unsafe.Pointer(pszBuffer)), uintptr(unsafe.Pointer(pdwMDRequiredBufferSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenKey dispatches through IMSAdminBaseW's vtable slot 17.
 func (self *IMSAdminBaseW) OpenKey(hMDHandle uint32, pszMDPath string, dwMDAccessRequested uint32, dwMDTimeOut uint32, phMDNewHandle *uint32) error {
 	_pszMDPath := win32.UTF16Ptr(pszMDPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(dwMDAccessRequested), uintptr(dwMDTimeOut), uintptr(unsafe.Pointer(phMDNewHandle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CloseKey dispatches through IMSAdminBaseW's vtable slot 18.
 func (self *IMSAdminBaseW) CloseKey(hMDHandle uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ChangePermissions dispatches through IMSAdminBaseW's vtable slot 19.
 func (self *IMSAdminBaseW) ChangePermissions(hMDHandle uint32, dwMDTimeOut uint32, dwMDAccessRequested uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(dwMDTimeOut), uintptr(dwMDAccessRequested))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SaveData dispatches through IMSAdminBaseW's vtable slot 20.
 func (self *IMSAdminBaseW) SaveData() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetHandleInfo dispatches through IMSAdminBaseW's vtable slot 21.
 func (self *IMSAdminBaseW) GetHandleInfo(hMDHandle uint32, pmdhiInfo *METADATA_HANDLE_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(pmdhiInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSystemChangeNumber dispatches through IMSAdminBaseW's vtable slot 22.
 func (self *IMSAdminBaseW) GetSystemChangeNumber(pdwSystemChangeNumber *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwSystemChangeNumber)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDataSetNumber dispatches through IMSAdminBaseW's vtable slot 23.
 func (self *IMSAdminBaseW) GetDataSetNumber(hMDHandle uint32, pszMDPath string, pdwMDDataSetNumber *uint32) error {
 	_pszMDPath := win32.UTF16Ptr(pszMDPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(unsafe.Pointer(pdwMDDataSetNumber)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetLastChangeTime dispatches through IMSAdminBaseW's vtable slot 24.
@@ -613,7 +613,7 @@ func (self *IMSAdminBaseW) SetLastChangeTime(hMDHandle uint32, pszMDPath string,
 	_pszMDPath := win32.UTF16Ptr(pszMDPath)
 	_bLocalTime := win32.Bool32(bLocalTime)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(unsafe.Pointer(pftMDLastChangeTime)), uintptr(_bLocalTime))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLastChangeTime dispatches through IMSAdminBaseW's vtable slot 25.
@@ -621,58 +621,58 @@ func (self *IMSAdminBaseW) GetLastChangeTime(hMDHandle uint32, pszMDPath string,
 	_pszMDPath := win32.UTF16Ptr(pszMDPath)
 	_bLocalTime := win32.Bool32(bLocalTime)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(unsafe.Pointer(pftMDLastChangeTime)), uintptr(_bLocalTime))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KeyExchangePhase1 dispatches through IMSAdminBaseW's vtable slot 26.
 func (self *IMSAdminBaseW) KeyExchangePhase1() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KeyExchangePhase2 dispatches through IMSAdminBaseW's vtable slot 27.
 func (self *IMSAdminBaseW) KeyExchangePhase2() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Backup dispatches through IMSAdminBaseW's vtable slot 28.
 func (self *IMSAdminBaseW) Backup(pszMDBackupLocation string, dwMDVersion uint32, dwMDFlags uint32) error {
 	_pszMDBackupLocation := win32.UTF16Ptr(pszMDBackupLocation)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszMDBackupLocation)), uintptr(dwMDVersion), uintptr(dwMDFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Restore dispatches through IMSAdminBaseW's vtable slot 29.
 func (self *IMSAdminBaseW) Restore(pszMDBackupLocation string, dwMDVersion uint32, dwMDFlags uint32) error {
 	_pszMDBackupLocation := win32.UTF16Ptr(pszMDBackupLocation)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszMDBackupLocation)), uintptr(dwMDVersion), uintptr(dwMDFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumBackups dispatches through IMSAdminBaseW's vtable slot 30.
 func (self *IMSAdminBaseW) EnumBackups(pszMDBackupLocation foundation.PWSTR, pdwMDVersion *uint32, pftMDBackupTime *foundation.FILETIME, dwMDEnumIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszMDBackupLocation)), uintptr(unsafe.Pointer(pdwMDVersion)), uintptr(unsafe.Pointer(pftMDBackupTime)), uintptr(dwMDEnumIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteBackup dispatches through IMSAdminBaseW's vtable slot 31.
 func (self *IMSAdminBaseW) DeleteBackup(pszMDBackupLocation string, dwMDVersion uint32) error {
 	_pszMDBackupLocation := win32.UTF16Ptr(pszMDBackupLocation)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszMDBackupLocation)), uintptr(dwMDVersion))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnmarshalInterface dispatches through IMSAdminBaseW's vtable slot 32.
 func (self *IMSAdminBaseW) UnmarshalInterface(piadmbwInterface **IMSAdminBaseW) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piadmbwInterface)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetServerGuid dispatches through IMSAdminBaseW's vtable slot 33.
 func (self *IMSAdminBaseW) GetServerGuid() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 29ff67ff-8050-480f-9f30-cc41635f2f9d
@@ -688,5 +688,5 @@ func (self *IMSImpExpHelpW) EnumeratePathsInFile(pszFileName string, pszKeyType 
 	_pszFileName := win32.UTF16Ptr(pszFileName)
 	_pszKeyType := win32.UTF16Ptr(pszKeyType)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFileName)), uintptr(unsafe.Pointer(_pszKeyType)), uintptr(dwMDBufferSize), uintptr(unsafe.Pointer(pszBuffer)), uintptr(unsafe.Pointer(pdwMDRequiredBufferSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

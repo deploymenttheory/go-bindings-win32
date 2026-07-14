@@ -30,5 +30,5 @@ func Direct3DCreate9On12(SDKVersion uint32, pOverrideList *D3D9ON12_ARGS, NumOve
 // Direct3DCreate9On12Ex calls d3d9!Direct3DCreate9On12Ex.
 func Direct3DCreate9On12Ex(SDKVersion uint32, pOverrideList *D3D9ON12_ARGS, NumOverrideEntries uint32, ppOutputInterface **graphicsdirect3d9.IDirect3D9Ex) error {
 	r1, _, _ := syscall.SyscallN(procDirect3DCreate9On12Ex.Addr(), uintptr(SDKVersion), uintptr(unsafe.Pointer(pOverrideList)), uintptr(NumOverrideEntries), uintptr(unsafe.Pointer(ppOutputInterface)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

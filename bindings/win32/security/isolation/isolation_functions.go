@@ -48,7 +48,7 @@ func CreateAppContainerProfile(pszAppContainerName string, pszDisplayName string
 		_pCapabilities = &pCapabilities[0]
 	}
 	r1, _, _ := syscall.SyscallN(procCreateAppContainerProfile.Addr(), uintptr(unsafe.Pointer(_pszAppContainerName)), uintptr(unsafe.Pointer(_pszDisplayName)), uintptr(unsafe.Pointer(_pszDescription)), uintptr(unsafe.Pointer(_pCapabilities)), uintptr(len(pCapabilities)), uintptr(unsafe.Pointer(ppSidAppContainerSid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteAppContainerProfile calls USERENV!DeleteAppContainerProfile.
@@ -57,7 +57,7 @@ func CreateAppContainerProfile(pszAppContainerName string, pszDisplayName string
 func DeleteAppContainerProfile(pszAppContainerName string) error {
 	_pszAppContainerName := win32.UTF16Ptr(pszAppContainerName)
 	r1, _, _ := syscall.SyscallN(procDeleteAppContainerProfile.Addr(), uintptr(unsafe.Pointer(_pszAppContainerName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeriveAppContainerSidFromAppContainerName calls USERENV!DeriveAppContainerSidFromAppContainerName.
@@ -66,7 +66,7 @@ func DeleteAppContainerProfile(pszAppContainerName string) error {
 func DeriveAppContainerSidFromAppContainerName(pszAppContainerName string, ppsidAppContainerSid *security.PSID) error {
 	_pszAppContainerName := win32.UTF16Ptr(pszAppContainerName)
 	r1, _, _ := syscall.SyscallN(procDeriveAppContainerSidFromAppContainerName.Addr(), uintptr(unsafe.Pointer(_pszAppContainerName)), uintptr(unsafe.Pointer(ppsidAppContainerSid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeriveRestrictedAppContainerSidFromAppContainerSidAndRestrictedName calls USERENV!DeriveRestrictedAppContainerSidFromAppContainerSidAndRestrictedName.
@@ -75,7 +75,7 @@ func DeriveAppContainerSidFromAppContainerName(pszAppContainerName string, ppsid
 func DeriveRestrictedAppContainerSidFromAppContainerSidAndRestrictedName(psidAppContainerSid security.PSID, pszRestrictedAppContainerName string, ppsidRestrictedAppContainerSid *security.PSID) error {
 	_pszRestrictedAppContainerName := win32.UTF16Ptr(pszRestrictedAppContainerName)
 	r1, _, _ := syscall.SyscallN(procDeriveRestrictedAppContainerSidFromAppContainerSidAndRestrictedName.Addr(), uintptr(psidAppContainerSid), uintptr(unsafe.Pointer(_pszRestrictedAppContainerName)), uintptr(unsafe.Pointer(ppsidRestrictedAppContainerSid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAppContainerFolderPath calls USERENV!GetAppContainerFolderPath.
@@ -84,7 +84,7 @@ func DeriveRestrictedAppContainerSidFromAppContainerSidAndRestrictedName(psidApp
 func GetAppContainerFolderPath(pszAppContainerSid string, ppszPath *foundation.PWSTR) error {
 	_pszAppContainerSid := win32.UTF16Ptr(pszAppContainerSid)
 	r1, _, _ := syscall.SyscallN(procGetAppContainerFolderPath.Addr(), uintptr(unsafe.Pointer(_pszAppContainerSid)), uintptr(unsafe.Pointer(ppszPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAppContainerNamedObjectPath calls KERNEL32!GetAppContainerNamedObjectPath.
@@ -103,31 +103,31 @@ func GetAppContainerNamedObjectPath(Token foundation.HANDLE, AppContainerSid sec
 // Minimum OS: windows8.0.
 func GetAppContainerRegistryLocation(desiredAccess uint32, phAppContainerKey *systemregistry.HKEY) error {
 	r1, _, _ := syscall.SyscallN(procGetAppContainerRegistryLocation.Addr(), uintptr(desiredAccess), uintptr(unsafe.Pointer(phAppContainerKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsCrossIsolatedEnvironmentClipboardContent calls IsolatedWindowsEnvironmentUtils!IsCrossIsolatedEnvironmentClipboardContent.
 // https://learn.microsoft.com/windows/win32/api/isolatedwindowsenvironmentutils/nf-isolatedwindowsenvironmentutils-iscrossisolatedenvironmentclipboardcontent
 func IsCrossIsolatedEnvironmentClipboardContent(isCrossIsolatedEnvironmentClipboardContent *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procIsCrossIsolatedEnvironmentClipboardContent.Addr(), uintptr(unsafe.Pointer(isCrossIsolatedEnvironmentClipboardContent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsProcessInIsolatedContainer calls api-ms-win-security-isolatedcontainer-l1-1-0!IsProcessInIsolatedContainer.
 func IsProcessInIsolatedContainer(isProcessInIsolatedContainer *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procIsProcessInIsolatedContainer.Addr(), uintptr(unsafe.Pointer(isProcessInIsolatedContainer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsProcessInIsolatedWindowsEnvironment calls IsolatedWindowsEnvironmentUtils!IsProcessInIsolatedWindowsEnvironment.
 // https://learn.microsoft.com/windows/win32/api/isolatedwindowsenvironmentutils/nf-isolatedwindowsenvironmentutils-isprocessinisolatedwindowsenvironment
 func IsProcessInIsolatedWindowsEnvironment(isProcessInIsolatedWindowsEnvironment *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procIsProcessInIsolatedWindowsEnvironment.Addr(), uintptr(unsafe.Pointer(isProcessInIsolatedWindowsEnvironment)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsProcessInWDAGContainer calls api-ms-win-security-isolatedcontainer-l1-1-1!IsProcessInWDAGContainer.
 func IsProcessInWDAGContainer(Reserved unsafe.Pointer, isProcessInWDAGContainer *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procIsProcessInWDAGContainer.Addr(), uintptr(unsafe.Pointer(Reserved)), uintptr(unsafe.Pointer(isProcessInWDAGContainer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

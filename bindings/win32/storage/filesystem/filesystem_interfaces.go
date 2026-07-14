@@ -27,131 +27,131 @@ func (self *IDiskQuotaControl) Initialize(pszPath string, bReadWrite bool) error
 	_pszPath := win32.UTF16Ptr(pszPath)
 	_bReadWrite := win32.Bool32(bReadWrite)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)), uintptr(_bReadWrite))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetQuotaState dispatches through IDiskQuotaControl's vtable slot 6.
 func (self *IDiskQuotaControl) SetQuotaState(dwState uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetQuotaState dispatches through IDiskQuotaControl's vtable slot 7.
 func (self *IDiskQuotaControl) GetQuotaState(pdwState *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetQuotaLogFlags dispatches through IDiskQuotaControl's vtable slot 8.
 func (self *IDiskQuotaControl) SetQuotaLogFlags(dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetQuotaLogFlags dispatches through IDiskQuotaControl's vtable slot 9.
 func (self *IDiskQuotaControl) GetQuotaLogFlags(pdwFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDefaultQuotaThreshold dispatches through IDiskQuotaControl's vtable slot 10.
 func (self *IDiskQuotaControl) SetDefaultQuotaThreshold(llThreshold int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(llThreshold))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDefaultQuotaThreshold dispatches through IDiskQuotaControl's vtable slot 11.
 func (self *IDiskQuotaControl) GetDefaultQuotaThreshold(pllThreshold *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pllThreshold)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDefaultQuotaThresholdText dispatches through IDiskQuotaControl's vtable slot 12.
 func (self *IDiskQuotaControl) GetDefaultQuotaThresholdText(pszText string, cchText uint32) error {
 	_pszText := win32.UTF16Ptr(pszText)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszText)), uintptr(cchText))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDefaultQuotaLimit dispatches through IDiskQuotaControl's vtable slot 13.
 func (self *IDiskQuotaControl) SetDefaultQuotaLimit(llLimit int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(llLimit))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDefaultQuotaLimit dispatches through IDiskQuotaControl's vtable slot 14.
 func (self *IDiskQuotaControl) GetDefaultQuotaLimit(pllLimit *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pllLimit)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDefaultQuotaLimitText dispatches through IDiskQuotaControl's vtable slot 15.
 func (self *IDiskQuotaControl) GetDefaultQuotaLimitText(pszText string, cchText uint32) error {
 	_pszText := win32.UTF16Ptr(pszText)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszText)), uintptr(cchText))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddUserSid dispatches through IDiskQuotaControl's vtable slot 16.
 func (self *IDiskQuotaControl) AddUserSid(pUserSid security.PSID, fNameResolution DISKQUOTA_USERNAME_RESOLVE, ppUser **IDiskQuotaUser) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(pUserSid), uintptr(fNameResolution), uintptr(unsafe.Pointer(ppUser)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddUserName dispatches through IDiskQuotaControl's vtable slot 17.
 func (self *IDiskQuotaControl) AddUserName(pszLogonName string, fNameResolution DISKQUOTA_USERNAME_RESOLVE, ppUser **IDiskQuotaUser) error {
 	_pszLogonName := win32.UTF16Ptr(pszLogonName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszLogonName)), uintptr(fNameResolution), uintptr(unsafe.Pointer(ppUser)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteUser dispatches through IDiskQuotaControl's vtable slot 18.
 func (self *IDiskQuotaControl) DeleteUser(pUser *IDiskQuotaUser) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUser)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FindUserSid dispatches through IDiskQuotaControl's vtable slot 19.
 func (self *IDiskQuotaControl) FindUserSid(pUserSid security.PSID, fNameResolution DISKQUOTA_USERNAME_RESOLVE, ppUser **IDiskQuotaUser) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(pUserSid), uintptr(fNameResolution), uintptr(unsafe.Pointer(ppUser)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FindUserName dispatches through IDiskQuotaControl's vtable slot 20.
 func (self *IDiskQuotaControl) FindUserName(pszLogonName string, ppUser **IDiskQuotaUser) error {
 	_pszLogonName := win32.UTF16Ptr(pszLogonName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszLogonName)), uintptr(unsafe.Pointer(ppUser)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateEnumUsers dispatches through IDiskQuotaControl's vtable slot 21.
 func (self *IDiskQuotaControl) CreateEnumUsers(rgpUserSids *security.PSID, cpSids uint32, fNameResolution DISKQUOTA_USERNAME_RESOLVE, ppEnum **IEnumDiskQuotaUsers) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rgpUserSids)), uintptr(cpSids), uintptr(fNameResolution), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateUserBatch dispatches through IDiskQuotaControl's vtable slot 22.
 func (self *IDiskQuotaControl) CreateUserBatch(ppBatch **IDiskQuotaUserBatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppBatch)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InvalidateSidNameCache dispatches through IDiskQuotaControl's vtable slot 23.
 func (self *IDiskQuotaControl) InvalidateSidNameCache() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GiveUserNameResolutionPriority dispatches through IDiskQuotaControl's vtable slot 24.
 func (self *IDiskQuotaControl) GiveUserNameResolutionPriority(pUser *IDiskQuotaUser) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUser)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ShutdownNameResolution dispatches through IDiskQuotaControl's vtable slot 25.
 func (self *IDiskQuotaControl) ShutdownNameResolution() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDiskQuotaEvents: https://learn.microsoft.com/windows/win32/api/dskquota/nn-dskquota-idiskquotaevents
@@ -166,7 +166,7 @@ var IID_IDiskQuotaEvents = win32.GUID{Data1: 0x7988b579, Data2: 0xec89, Data3: 0
 // OnUserNameChanged dispatches through IDiskQuotaEvents's vtable slot 3.
 func (self *IDiskQuotaEvents) OnUserNameChanged(pUser *IDiskQuotaUser) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUser)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDiskQuotaUser: https://learn.microsoft.com/windows/win32/api/dskquota/nn-dskquota-idiskquotauser
@@ -181,7 +181,7 @@ var IID_IDiskQuotaUser = win32.GUID{Data1: 0x7988b574, Data2: 0xec89, Data3: 0x1
 // GetID dispatches through IDiskQuotaUser's vtable slot 3.
 func (self *IDiskQuotaUser) GetID(pulID *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetName dispatches through IDiskQuotaUser's vtable slot 4.
@@ -190,90 +190,90 @@ func (self *IDiskQuotaUser) GetName(pszAccountContainer string, cchAccountContai
 	_pszLogonName := win32.UTF16Ptr(pszLogonName)
 	_pszDisplayName := win32.UTF16Ptr(pszDisplayName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszAccountContainer)), uintptr(cchAccountContainer), uintptr(unsafe.Pointer(_pszLogonName)), uintptr(cchLogonName), uintptr(unsafe.Pointer(_pszDisplayName)), uintptr(cchDisplayName))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSidLength dispatches through IDiskQuotaUser's vtable slot 5.
 func (self *IDiskQuotaUser) GetSidLength(pdwLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwLength)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSid dispatches through IDiskQuotaUser's vtable slot 6.
 func (self *IDiskQuotaUser) GetSid(pbSidBuffer *byte, cbSidBuffer uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbSidBuffer)), uintptr(cbSidBuffer))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetQuotaThreshold dispatches through IDiskQuotaUser's vtable slot 7.
 func (self *IDiskQuotaUser) GetQuotaThreshold(pllThreshold *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pllThreshold)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetQuotaThresholdText dispatches through IDiskQuotaUser's vtable slot 8.
 func (self *IDiskQuotaUser) GetQuotaThresholdText(pszText string, cchText uint32) error {
 	_pszText := win32.UTF16Ptr(pszText)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszText)), uintptr(cchText))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetQuotaLimit dispatches through IDiskQuotaUser's vtable slot 9.
 func (self *IDiskQuotaUser) GetQuotaLimit(pllLimit *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pllLimit)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetQuotaLimitText dispatches through IDiskQuotaUser's vtable slot 10.
 func (self *IDiskQuotaUser) GetQuotaLimitText(pszText string, cchText uint32) error {
 	_pszText := win32.UTF16Ptr(pszText)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszText)), uintptr(cchText))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetQuotaUsed dispatches through IDiskQuotaUser's vtable slot 11.
 func (self *IDiskQuotaUser) GetQuotaUsed(pllUsed *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pllUsed)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetQuotaUsedText dispatches through IDiskQuotaUser's vtable slot 12.
 func (self *IDiskQuotaUser) GetQuotaUsedText(pszText string, cchText uint32) error {
 	_pszText := win32.UTF16Ptr(pszText)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszText)), uintptr(cchText))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetQuotaInformation dispatches through IDiskQuotaUser's vtable slot 13.
 func (self *IDiskQuotaUser) GetQuotaInformation(pbQuotaInfo unsafe.Pointer, cbQuotaInfo uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbQuotaInfo)), uintptr(cbQuotaInfo))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetQuotaThreshold dispatches through IDiskQuotaUser's vtable slot 14.
 func (self *IDiskQuotaUser) SetQuotaThreshold(llThreshold int64, fWriteThrough bool) error {
 	_fWriteThrough := win32.Bool32(fWriteThrough)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(llThreshold), uintptr(_fWriteThrough))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetQuotaLimit dispatches through IDiskQuotaUser's vtable slot 15.
 func (self *IDiskQuotaUser) SetQuotaLimit(llLimit int64, fWriteThrough bool) error {
 	_fWriteThrough := win32.Bool32(fWriteThrough)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(llLimit), uintptr(_fWriteThrough))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Invalidate dispatches through IDiskQuotaUser's vtable slot 16.
 func (self *IDiskQuotaUser) Invalidate() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAccountStatus dispatches through IDiskQuotaUser's vtable slot 17.
 func (self *IDiskQuotaUser) GetAccountStatus(pdwStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDiskQuotaUserBatch: https://learn.microsoft.com/windows/win32/api/dskquota/nn-dskquota-idiskquotauserbatch
@@ -288,25 +288,25 @@ var IID_IDiskQuotaUserBatch = win32.GUID{Data1: 0x7988b576, Data2: 0xec89, Data3
 // Add dispatches through IDiskQuotaUserBatch's vtable slot 3.
 func (self *IDiskQuotaUserBatch) Add(pUser *IDiskQuotaUser) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUser)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through IDiskQuotaUserBatch's vtable slot 4.
 func (self *IDiskQuotaUserBatch) Remove(pUser *IDiskQuotaUser) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUser)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAll dispatches through IDiskQuotaUserBatch's vtable slot 5.
 func (self *IDiskQuotaUserBatch) RemoveAll() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FlushToDisk dispatches through IDiskQuotaUserBatch's vtable slot 6.
 func (self *IDiskQuotaUserBatch) FlushToDisk() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumDiskQuotaUsers: https://learn.microsoft.com/windows/win32/api/dskquota/nn-dskquota-ienumdiskquotausers
@@ -321,23 +321,23 @@ var IID_IEnumDiskQuotaUsers = win32.GUID{Data1: 0x7988b577, Data2: 0xec89, Data3
 // Next dispatches through IEnumDiskQuotaUsers's vtable slot 3.
 func (self *IEnumDiskQuotaUsers) Next(cUsers uint32, rgUsers **IDiskQuotaUser, pcUsersFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cUsers), uintptr(unsafe.Pointer(rgUsers)), uintptr(unsafe.Pointer(pcUsersFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumDiskQuotaUsers's vtable slot 4.
 func (self *IEnumDiskQuotaUsers) Skip(cUsers uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cUsers))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumDiskQuotaUsers's vtable slot 5.
 func (self *IEnumDiskQuotaUsers) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IEnumDiskQuotaUsers's vtable slot 6.
 func (self *IEnumDiskQuotaUsers) Clone(ppEnum **IEnumDiskQuotaUsers) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

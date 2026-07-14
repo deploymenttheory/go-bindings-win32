@@ -24,7 +24,7 @@ var IID_IWindowsDevicesAllJoynBusAttachmentFactoryInterop = win32.GUID{Data1: 0x
 // CreateFromWin32Handle dispatches through IWindowsDevicesAllJoynBusAttachmentFactoryInterop's vtable slot 6.
 func (self *IWindowsDevicesAllJoynBusAttachmentFactoryInterop) CreateFromWin32Handle(win32handle uint64, enableAboutData byte, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32handle), uintptr(enableAboutData), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWindowsDevicesAllJoynBusAttachmentInterop: https://learn.microsoft.com/windows/win32/api/windows.devices.alljoyn.interop/nn-windows-devices-alljoyn-interop-iwindowsdevicesalljoynbusattachmentinterop
@@ -40,7 +40,7 @@ var IID_IWindowsDevicesAllJoynBusAttachmentInterop = win32.GUID{Data1: 0xfd89c65
 func (self *IWindowsDevicesAllJoynBusAttachmentInterop) Get_Win32Handle() (uint64, error) {
 	var _value uint64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 6174e506-8b95-4e36-95c0-b88fed34938c
@@ -54,7 +54,7 @@ var IID_IWindowsDevicesAllJoynBusObjectFactoryInterop = win32.GUID{Data1: 0x6174
 // CreateFromWin32Handle dispatches through IWindowsDevicesAllJoynBusObjectFactoryInterop's vtable slot 6.
 func (self *IWindowsDevicesAllJoynBusObjectFactoryInterop) CreateFromWin32Handle(win32handle uint64, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32handle), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: d78aa3d5-5054-428f-99f2-ec3a5de3c3bc
@@ -68,18 +68,18 @@ var IID_IWindowsDevicesAllJoynBusObjectInterop = win32.GUID{Data1: 0xd78aa3d5, D
 // AddPropertyGetHandler dispatches through IWindowsDevicesAllJoynBusObjectInterop's vtable slot 6.
 func (self *IWindowsDevicesAllJoynBusObjectInterop) AddPropertyGetHandler(context unsafe.Pointer, interfaceName systemwinrt.HSTRING, callback uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(context)), uintptr(interfaceName), uintptr(callback))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddPropertySetHandler dispatches through IWindowsDevicesAllJoynBusObjectInterop's vtable slot 7.
 func (self *IWindowsDevicesAllJoynBusObjectInterop) AddPropertySetHandler(context unsafe.Pointer, interfaceName systemwinrt.HSTRING, callback uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(context)), uintptr(interfaceName), uintptr(callback))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Win32Handle dispatches through IWindowsDevicesAllJoynBusObjectInterop's vtable slot 8.
 func (self *IWindowsDevicesAllJoynBusObjectInterop) Get_Win32Handle() (uint64, error) {
 	var _value uint64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }

@@ -27,13 +27,13 @@ var IID_IXMLGraphBuilder = win32.GUID{Data1: 0x1bb05960, Data2: 0x5fbf, Data3: 0
 // BuildFromXML dispatches through IXMLGraphBuilder's vtable slot 3.
 func (self *IXMLGraphBuilder) BuildFromXML(pGraph *mediadirectshow.IGraphBuilder, pxml *dataxmlmsxml.IXMLElement) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGraph)), uintptr(unsafe.Pointer(pxml)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SaveToXML dispatches through IXMLGraphBuilder's vtable slot 4.
 func (self *IXMLGraphBuilder) SaveToXML(pGraph *mediadirectshow.IGraphBuilder, pbstrxml *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGraph)), uintptr(unsafe.Pointer(pbstrxml)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BuildFromXMLFile dispatches through IXMLGraphBuilder's vtable slot 5.
@@ -41,5 +41,5 @@ func (self *IXMLGraphBuilder) BuildFromXMLFile(pGraph *mediadirectshow.IGraphBui
 	_wszFileName := win32.UTF16Ptr(wszFileName)
 	_wszBaseURL := win32.UTF16Ptr(wszBaseURL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGraph)), uintptr(unsafe.Pointer(_wszFileName)), uintptr(unsafe.Pointer(_wszBaseURL)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

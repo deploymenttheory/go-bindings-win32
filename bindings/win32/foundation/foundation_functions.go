@@ -167,7 +167,7 @@ func SetLastErrorEx(dwErrCode WIN32_ERROR, dwType uint32) {
 // Minimum OS: windows5.1.2600.
 func SysAddRefString(bstrString BSTR) error {
 	r1, _, _ := syscall.SyscallN(procSysAddRefString.Addr(), uintptr(unsafe.Pointer(bstrString)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SysAllocString calls OLEAUT32!SysAllocString.

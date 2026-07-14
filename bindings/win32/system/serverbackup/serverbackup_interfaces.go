@@ -25,13 +25,13 @@ var IID_IWsbApplicationAsync = win32.GUID{Data1: 0x0843f6f7, Data2: 0x895c, Data
 // QueryStatus dispatches through IWsbApplicationAsync's vtable slot 3.
 func (self *IWsbApplicationAsync) QueryStatus(phrResult *foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phrResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Abort dispatches through IWsbApplicationAsync's vtable slot 4.
 func (self *IWsbApplicationAsync) Abort() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWsbApplicationBackupSupport: https://learn.microsoft.com/windows/win32/api/wsbapp/nn-wsbapp-iwsbapplicationbackupsupport
@@ -49,7 +49,7 @@ func (self *IWsbApplicationBackupSupport) CheckConsistency(wszWriterMetadata str
 	_wszComponentName := win32.UTF16Ptr(wszComponentName)
 	_wszComponentLogicalPath := win32.UTF16Ptr(wszComponentLogicalPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszWriterMetadata)), uintptr(unsafe.Pointer(_wszComponentName)), uintptr(unsafe.Pointer(_wszComponentLogicalPath)), uintptr(cVolumes), uintptr(unsafe.Pointer(rgwszSourceVolumePath)), uintptr(unsafe.Pointer(rgwszSnapshotVolumePath)), uintptr(unsafe.Pointer(ppAsync)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWsbApplicationRestoreSupport: https://learn.microsoft.com/windows/win32/api/wsbapp/nn-wsbapp-iwsbapplicationrestoresupport
@@ -67,7 +67,7 @@ func (self *IWsbApplicationRestoreSupport) PreRestore(wszWriterMetadata string, 
 	_wszComponentName := win32.UTF16Ptr(wszComponentName)
 	_wszComponentLogicalPath := win32.UTF16Ptr(wszComponentLogicalPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszWriterMetadata)), uintptr(unsafe.Pointer(_wszComponentName)), uintptr(unsafe.Pointer(_wszComponentLogicalPath)), uintptr(bNoRollForward))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PostRestore dispatches through IWsbApplicationRestoreSupport's vtable slot 4.
@@ -76,17 +76,17 @@ func (self *IWsbApplicationRestoreSupport) PostRestore(wszWriterMetadata string,
 	_wszComponentName := win32.UTF16Ptr(wszComponentName)
 	_wszComponentLogicalPath := win32.UTF16Ptr(wszComponentLogicalPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszWriterMetadata)), uintptr(unsafe.Pointer(_wszComponentName)), uintptr(unsafe.Pointer(_wszComponentLogicalPath)), uintptr(bNoRollForward))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OrderComponents dispatches through IWsbApplicationRestoreSupport's vtable slot 5.
 func (self *IWsbApplicationRestoreSupport) OrderComponents(cComponents uint32, rgComponentName *foundation.PWSTR, rgComponentLogicalPaths *foundation.PWSTR, prgComponentName **foundation.PWSTR, prgComponentLogicalPath **foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(cComponents), uintptr(unsafe.Pointer(rgComponentName)), uintptr(unsafe.Pointer(rgComponentLogicalPaths)), uintptr(unsafe.Pointer(prgComponentName)), uintptr(unsafe.Pointer(prgComponentLogicalPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsRollForwardSupported dispatches through IWsbApplicationRestoreSupport's vtable slot 6.
 func (self *IWsbApplicationRestoreSupport) IsRollForwardSupported(pbRollForwardSupported *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbRollForwardSupported)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

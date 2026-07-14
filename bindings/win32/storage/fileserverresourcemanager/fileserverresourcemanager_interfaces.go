@@ -36,7 +36,7 @@ var IID_IFsrmAccessDeniedRemediationClient = win32.GUID{Data1: 0x40002314, Data2
 func (self *IFsrmAccessDeniedRemediationClient) Show(parentWnd uintptr, accessPath foundation.BSTR, errorType AdrClientErrorType, flags int32, windowTitle foundation.BSTR, windowMessage foundation.BSTR) (int32, error) {
 	var _result int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(parentWnd), uintptr(unsafe.Pointer(accessPath)), uintptr(errorType), uintptr(flags), uintptr(unsafe.Pointer(windowTitle)), uintptr(unsafe.Pointer(windowMessage)), uintptr(unsafe.Pointer(&_result)))
-	return _result, win32.HRESULTError(int32(r1))
+	return _result, win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmAction: https://learn.microsoft.com/windows/win32/api/fsrm/nn-fsrm-ifsrmaction
@@ -52,33 +52,33 @@ var IID_IFsrmAction = win32.GUID{Data1: 0x6cd6408a, Data2: 0xae60, Data3: 0x463b
 func (self *IFsrmAction) Get_Id() (win32.GUID, error) {
 	var _id win32.GUID
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_id)))
-	return _id, win32.HRESULTError(int32(r1))
+	return _id, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ActionType dispatches through IFsrmAction's vtable slot 8.
 func (self *IFsrmAction) Get_ActionType() (FsrmActionType, error) {
 	var _actionType FsrmActionType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_actionType)))
-	return _actionType, win32.HRESULTError(int32(r1))
+	return _actionType, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RunLimitInterval dispatches through IFsrmAction's vtable slot 9.
 func (self *IFsrmAction) Get_RunLimitInterval() (int32, error) {
 	var _minutes int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_minutes)))
-	return _minutes, win32.HRESULTError(int32(r1))
+	return _minutes, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RunLimitInterval dispatches through IFsrmAction's vtable slot 10.
 func (self *IFsrmAction) Put_RunLimitInterval(minutes int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(minutes))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IFsrmAction's vtable slot 11.
 func (self *IFsrmAction) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmActionCommand: https://learn.microsoft.com/windows/win32/api/fsrm/nn-fsrm-ifsrmactioncommand
@@ -94,91 +94,91 @@ var IID_IFsrmActionCommand = win32.GUID{Data1: 0x12937789, Data2: 0xe247, Data3:
 func (self *IFsrmActionCommand) Get_ExecutablePath() (foundation.BSTR, error) {
 	var _executablePath foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_executablePath)))
-	return _executablePath, win32.HRESULTError(int32(r1))
+	return _executablePath, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ExecutablePath dispatches through IFsrmActionCommand's vtable slot 13.
 func (self *IFsrmActionCommand) Put_ExecutablePath(executablePath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(executablePath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Arguments dispatches through IFsrmActionCommand's vtable slot 14.
 func (self *IFsrmActionCommand) Get_Arguments() (foundation.BSTR, error) {
 	var _arguments foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_arguments)))
-	return _arguments, win32.HRESULTError(int32(r1))
+	return _arguments, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Arguments dispatches through IFsrmActionCommand's vtable slot 15.
 func (self *IFsrmActionCommand) Put_Arguments(arguments foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(arguments)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Account dispatches through IFsrmActionCommand's vtable slot 16.
 func (self *IFsrmActionCommand) Get_Account() (FsrmAccountType, error) {
 	var _account FsrmAccountType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_account)))
-	return _account, win32.HRESULTError(int32(r1))
+	return _account, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Account dispatches through IFsrmActionCommand's vtable slot 17.
 func (self *IFsrmActionCommand) Put_Account(account FsrmAccountType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(account))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_WorkingDirectory dispatches through IFsrmActionCommand's vtable slot 18.
 func (self *IFsrmActionCommand) Get_WorkingDirectory() (foundation.BSTR, error) {
 	var _workingDirectory foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_workingDirectory)))
-	return _workingDirectory, win32.HRESULTError(int32(r1))
+	return _workingDirectory, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_WorkingDirectory dispatches through IFsrmActionCommand's vtable slot 19.
 func (self *IFsrmActionCommand) Put_WorkingDirectory(workingDirectory foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(workingDirectory)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MonitorCommand dispatches through IFsrmActionCommand's vtable slot 20.
 func (self *IFsrmActionCommand) Get_MonitorCommand() (foundation.VARIANT_BOOL, error) {
 	var _monitorCommand foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_monitorCommand)))
-	return _monitorCommand, win32.HRESULTError(int32(r1))
+	return _monitorCommand, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MonitorCommand dispatches through IFsrmActionCommand's vtable slot 21.
 func (self *IFsrmActionCommand) Put_MonitorCommand(monitorCommand foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(monitorCommand))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_KillTimeOut dispatches through IFsrmActionCommand's vtable slot 22.
 func (self *IFsrmActionCommand) Get_KillTimeOut() (int32, error) {
 	var _minutes int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_minutes)))
-	return _minutes, win32.HRESULTError(int32(r1))
+	return _minutes, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_KillTimeOut dispatches through IFsrmActionCommand's vtable slot 23.
 func (self *IFsrmActionCommand) Put_KillTimeOut(minutes int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(minutes))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LogResult dispatches through IFsrmActionCommand's vtable slot 24.
 func (self *IFsrmActionCommand) Get_LogResult() (foundation.VARIANT_BOOL, error) {
 	var _logResults foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_logResults)))
-	return _logResults, win32.HRESULTError(int32(r1))
+	return _logResults, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LogResult dispatches through IFsrmActionCommand's vtable slot 25.
 func (self *IFsrmActionCommand) Put_LogResult(logResults foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(logResults))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmActionEmail: https://learn.microsoft.com/windows/win32/api/fsrm/nn-fsrm-ifsrmactionemail
@@ -194,91 +194,91 @@ var IID_IFsrmActionEmail = win32.GUID{Data1: 0xd646567d, Data2: 0x26ae, Data3: 0
 func (self *IFsrmActionEmail) Get_MailFrom() (foundation.BSTR, error) {
 	var _mailFrom foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_mailFrom)))
-	return _mailFrom, win32.HRESULTError(int32(r1))
+	return _mailFrom, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MailFrom dispatches through IFsrmActionEmail's vtable slot 13.
 func (self *IFsrmActionEmail) Put_MailFrom(mailFrom foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(mailFrom)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MailReplyTo dispatches through IFsrmActionEmail's vtable slot 14.
 func (self *IFsrmActionEmail) Get_MailReplyTo() (foundation.BSTR, error) {
 	var _mailReplyTo foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_mailReplyTo)))
-	return _mailReplyTo, win32.HRESULTError(int32(r1))
+	return _mailReplyTo, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MailReplyTo dispatches through IFsrmActionEmail's vtable slot 15.
 func (self *IFsrmActionEmail) Put_MailReplyTo(mailReplyTo foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(mailReplyTo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MailTo dispatches through IFsrmActionEmail's vtable slot 16.
 func (self *IFsrmActionEmail) Get_MailTo() (foundation.BSTR, error) {
 	var _mailTo foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_mailTo)))
-	return _mailTo, win32.HRESULTError(int32(r1))
+	return _mailTo, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MailTo dispatches through IFsrmActionEmail's vtable slot 17.
 func (self *IFsrmActionEmail) Put_MailTo(mailTo foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(mailTo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MailCc dispatches through IFsrmActionEmail's vtable slot 18.
 func (self *IFsrmActionEmail) Get_MailCc() (foundation.BSTR, error) {
 	var _mailCc foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_mailCc)))
-	return _mailCc, win32.HRESULTError(int32(r1))
+	return _mailCc, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MailCc dispatches through IFsrmActionEmail's vtable slot 19.
 func (self *IFsrmActionEmail) Put_MailCc(mailCc foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(mailCc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MailBcc dispatches through IFsrmActionEmail's vtable slot 20.
 func (self *IFsrmActionEmail) Get_MailBcc() (foundation.BSTR, error) {
 	var _mailBcc foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_mailBcc)))
-	return _mailBcc, win32.HRESULTError(int32(r1))
+	return _mailBcc, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MailBcc dispatches through IFsrmActionEmail's vtable slot 21.
 func (self *IFsrmActionEmail) Put_MailBcc(mailBcc foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(mailBcc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MailSubject dispatches through IFsrmActionEmail's vtable slot 22.
 func (self *IFsrmActionEmail) Get_MailSubject() (foundation.BSTR, error) {
 	var _mailSubject foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_mailSubject)))
-	return _mailSubject, win32.HRESULTError(int32(r1))
+	return _mailSubject, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MailSubject dispatches through IFsrmActionEmail's vtable slot 23.
 func (self *IFsrmActionEmail) Put_MailSubject(mailSubject foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(mailSubject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MessageText dispatches through IFsrmActionEmail's vtable slot 24.
 func (self *IFsrmActionEmail) Get_MessageText() (foundation.BSTR, error) {
 	var _messageText foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_messageText)))
-	return _messageText, win32.HRESULTError(int32(r1))
+	return _messageText, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MessageText dispatches through IFsrmActionEmail's vtable slot 25.
 func (self *IFsrmActionEmail) Put_MessageText(messageText foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(messageText)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmActionEmail2: https://learn.microsoft.com/windows/win32/api/fsrm/nn-fsrm-ifsrmactionemail2
@@ -294,13 +294,13 @@ var IID_IFsrmActionEmail2 = win32.GUID{Data1: 0x8276702f, Data2: 0x2532, Data3: 
 func (self *IFsrmActionEmail2) Get_AttachmentFileListSize() (int32, error) {
 	var _attachmentFileListSize int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_attachmentFileListSize)))
-	return _attachmentFileListSize, win32.HRESULTError(int32(r1))
+	return _attachmentFileListSize, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AttachmentFileListSize dispatches through IFsrmActionEmail2's vtable slot 27.
 func (self *IFsrmActionEmail2) Put_AttachmentFileListSize(attachmentFileListSize int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(attachmentFileListSize))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmActionEventLog: https://learn.microsoft.com/windows/win32/api/fsrm/nn-fsrm-ifsrmactioneventlog
@@ -316,26 +316,26 @@ var IID_IFsrmActionEventLog = win32.GUID{Data1: 0x4c8f96c3, Data2: 0x5d94, Data3
 func (self *IFsrmActionEventLog) Get_EventType() (FsrmEventType, error) {
 	var _eventType FsrmEventType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_eventType)))
-	return _eventType, win32.HRESULTError(int32(r1))
+	return _eventType, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EventType dispatches through IFsrmActionEventLog's vtable slot 13.
 func (self *IFsrmActionEventLog) Put_EventType(eventType FsrmEventType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(eventType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MessageText dispatches through IFsrmActionEventLog's vtable slot 14.
 func (self *IFsrmActionEventLog) Get_MessageText() (foundation.BSTR, error) {
 	var _messageText foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_messageText)))
-	return _messageText, win32.HRESULTError(int32(r1))
+	return _messageText, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MessageText dispatches through IFsrmActionEventLog's vtable slot 15.
 func (self *IFsrmActionEventLog) Put_MessageText(messageText foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(messageText)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmActionReport: https://learn.microsoft.com/windows/win32/api/fsrm/nn-fsrm-ifsrmactionreport
@@ -351,26 +351,26 @@ var IID_IFsrmActionReport = win32.GUID{Data1: 0x2dbe63c4, Data2: 0xb340, Data3: 
 func (self *IFsrmActionReport) Get_ReportTypes() (*systemcom.SAFEARRAY, error) {
 	var _reportTypes *systemcom.SAFEARRAY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_reportTypes)))
-	return _reportTypes, win32.HRESULTError(int32(r1))
+	return _reportTypes, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ReportTypes dispatches through IFsrmActionReport's vtable slot 13.
 func (self *IFsrmActionReport) Put_ReportTypes(reportTypes *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(reportTypes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MailTo dispatches through IFsrmActionReport's vtable slot 14.
 func (self *IFsrmActionReport) Get_MailTo() (foundation.BSTR, error) {
 	var _mailTo foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_mailTo)))
-	return _mailTo, win32.HRESULTError(int32(r1))
+	return _mailTo, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MailTo dispatches through IFsrmActionReport's vtable slot 15.
 func (self *IFsrmActionReport) Put_MailTo(mailTo foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(mailTo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmAutoApplyQuota: https://learn.microsoft.com/windows/win32/api/fsrmquota/nn-fsrmquota-ifsrmautoapplyquota
@@ -386,20 +386,20 @@ var IID_IFsrmAutoApplyQuota = win32.GUID{Data1: 0xf82e5729, Data2: 0x6aba, Data3
 func (self *IFsrmAutoApplyQuota) Get_ExcludeFolders() (*systemcom.SAFEARRAY, error) {
 	var _folders *systemcom.SAFEARRAY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_folders)))
-	return _folders, win32.HRESULTError(int32(r1))
+	return _folders, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ExcludeFolders dispatches through IFsrmAutoApplyQuota's vtable slot 29.
 func (self *IFsrmAutoApplyQuota) Put_ExcludeFolders(folders *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(folders)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CommitAndUpdateDerived dispatches through IFsrmAutoApplyQuota's vtable slot 30.
 func (self *IFsrmAutoApplyQuota) CommitAndUpdateDerived(commitOptions FsrmCommitOptions, applyOptions FsrmTemplateApplyOptions) (*IFsrmDerivedObjectsResult, error) {
 	var _derivedObjectsResult *IFsrmDerivedObjectsResult
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(commitOptions), uintptr(applyOptions), uintptr(unsafe.Pointer(&_derivedObjectsResult)))
-	return _derivedObjectsResult, win32.HRESULTError(int32(r1))
+	return _derivedObjectsResult, win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmClassificationManager: https://learn.microsoft.com/windows/win32/api/fsrmpipeline/nn-fsrmpipeline-ifsrmclassificationmanager
@@ -415,181 +415,181 @@ var IID_IFsrmClassificationManager = win32.GUID{Data1: 0xd2dc89da, Data2: 0xee91
 func (self *IFsrmClassificationManager) Get_ClassificationReportFormats() (*systemcom.SAFEARRAY, error) {
 	var _formats *systemcom.SAFEARRAY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_formats)))
-	return _formats, win32.HRESULTError(int32(r1))
+	return _formats, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ClassificationReportFormats dispatches through IFsrmClassificationManager's vtable slot 8.
 func (self *IFsrmClassificationManager) Put_ClassificationReportFormats(formats *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(formats)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Logging dispatches through IFsrmClassificationManager's vtable slot 9.
 func (self *IFsrmClassificationManager) Get_Logging() (int32, error) {
 	var _logging int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_logging)))
-	return _logging, win32.HRESULTError(int32(r1))
+	return _logging, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Logging dispatches through IFsrmClassificationManager's vtable slot 10.
 func (self *IFsrmClassificationManager) Put_Logging(logging int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(logging))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ClassificationReportMailTo dispatches through IFsrmClassificationManager's vtable slot 11.
 func (self *IFsrmClassificationManager) Get_ClassificationReportMailTo() (foundation.BSTR, error) {
 	var _mailTo foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_mailTo)))
-	return _mailTo, win32.HRESULTError(int32(r1))
+	return _mailTo, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ClassificationReportMailTo dispatches through IFsrmClassificationManager's vtable slot 12.
 func (self *IFsrmClassificationManager) Put_ClassificationReportMailTo(mailTo foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(mailTo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ClassificationReportEnabled dispatches through IFsrmClassificationManager's vtable slot 13.
 func (self *IFsrmClassificationManager) Get_ClassificationReportEnabled() (foundation.VARIANT_BOOL, error) {
 	var _reportEnabled foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_reportEnabled)))
-	return _reportEnabled, win32.HRESULTError(int32(r1))
+	return _reportEnabled, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ClassificationReportEnabled dispatches through IFsrmClassificationManager's vtable slot 14.
 func (self *IFsrmClassificationManager) Put_ClassificationReportEnabled(reportEnabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(reportEnabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ClassificationLastReportPathWithoutExtension dispatches through IFsrmClassificationManager's vtable slot 15.
 func (self *IFsrmClassificationManager) Get_ClassificationLastReportPathWithoutExtension() (foundation.BSTR, error) {
 	var _lastReportPath foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lastReportPath)))
-	return _lastReportPath, win32.HRESULTError(int32(r1))
+	return _lastReportPath, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ClassificationLastError dispatches through IFsrmClassificationManager's vtable slot 16.
 func (self *IFsrmClassificationManager) Get_ClassificationLastError() (foundation.BSTR, error) {
 	var _lastError foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lastError)))
-	return _lastError, win32.HRESULTError(int32(r1))
+	return _lastError, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ClassificationRunningStatus dispatches through IFsrmClassificationManager's vtable slot 17.
 func (self *IFsrmClassificationManager) Get_ClassificationRunningStatus() (FsrmReportRunningStatus, error) {
 	var _runningStatus FsrmReportRunningStatus
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_runningStatus)))
-	return _runningStatus, win32.HRESULTError(int32(r1))
+	return _runningStatus, win32.ErrIfFailed(int32(r1))
 }
 
 // EnumPropertyDefinitions dispatches through IFsrmClassificationManager's vtable slot 18.
 func (self *IFsrmClassificationManager) EnumPropertyDefinitions(options FsrmEnumOptions) (*IFsrmCollection, error) {
 	var _propertyDefinitions *IFsrmCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(options), uintptr(unsafe.Pointer(&_propertyDefinitions)))
-	return _propertyDefinitions, win32.HRESULTError(int32(r1))
+	return _propertyDefinitions, win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePropertyDefinition dispatches through IFsrmClassificationManager's vtable slot 19.
 func (self *IFsrmClassificationManager) CreatePropertyDefinition() (*IFsrmPropertyDefinition, error) {
 	var _propertyDefinition *IFsrmPropertyDefinition
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_propertyDefinition)))
-	return _propertyDefinition, win32.HRESULTError(int32(r1))
+	return _propertyDefinition, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPropertyDefinition dispatches through IFsrmClassificationManager's vtable slot 20.
 func (self *IFsrmClassificationManager) GetPropertyDefinition(propertyName foundation.BSTR) (*IFsrmPropertyDefinition, error) {
 	var _propertyDefinition *IFsrmPropertyDefinition
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propertyName)), uintptr(unsafe.Pointer(&_propertyDefinition)))
-	return _propertyDefinition, win32.HRESULTError(int32(r1))
+	return _propertyDefinition, win32.ErrIfFailed(int32(r1))
 }
 
 // EnumRules dispatches through IFsrmClassificationManager's vtable slot 21.
 func (self *IFsrmClassificationManager) EnumRules(ruleType FsrmRuleType, options FsrmEnumOptions) (*IFsrmCollection, error) {
 	var _Rules *IFsrmCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(ruleType), uintptr(options), uintptr(unsafe.Pointer(&_Rules)))
-	return _Rules, win32.HRESULTError(int32(r1))
+	return _Rules, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateRule dispatches through IFsrmClassificationManager's vtable slot 22.
 func (self *IFsrmClassificationManager) CreateRule(ruleType FsrmRuleType) (*IFsrmRule, error) {
 	var _Rule *IFsrmRule
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(ruleType), uintptr(unsafe.Pointer(&_Rule)))
-	return _Rule, win32.HRESULTError(int32(r1))
+	return _Rule, win32.ErrIfFailed(int32(r1))
 }
 
 // GetRule dispatches through IFsrmClassificationManager's vtable slot 23.
 func (self *IFsrmClassificationManager) GetRule(ruleName foundation.BSTR, ruleType FsrmRuleType) (*IFsrmRule, error) {
 	var _Rule *IFsrmRule
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ruleName)), uintptr(ruleType), uintptr(unsafe.Pointer(&_Rule)))
-	return _Rule, win32.HRESULTError(int32(r1))
+	return _Rule, win32.ErrIfFailed(int32(r1))
 }
 
 // EnumModuleDefinitions dispatches through IFsrmClassificationManager's vtable slot 24.
 func (self *IFsrmClassificationManager) EnumModuleDefinitions(moduleType FsrmPipelineModuleType, options FsrmEnumOptions) (*IFsrmCollection, error) {
 	var _moduleDefinitions *IFsrmCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(moduleType), uintptr(options), uintptr(unsafe.Pointer(&_moduleDefinitions)))
-	return _moduleDefinitions, win32.HRESULTError(int32(r1))
+	return _moduleDefinitions, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateModuleDefinition dispatches through IFsrmClassificationManager's vtable slot 25.
 func (self *IFsrmClassificationManager) CreateModuleDefinition(moduleType FsrmPipelineModuleType) (*IFsrmPipelineModuleDefinition, error) {
 	var _moduleDefinition *IFsrmPipelineModuleDefinition
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(moduleType), uintptr(unsafe.Pointer(&_moduleDefinition)))
-	return _moduleDefinition, win32.HRESULTError(int32(r1))
+	return _moduleDefinition, win32.ErrIfFailed(int32(r1))
 }
 
 // GetModuleDefinition dispatches through IFsrmClassificationManager's vtable slot 26.
 func (self *IFsrmClassificationManager) GetModuleDefinition(moduleName foundation.BSTR, moduleType FsrmPipelineModuleType) (*IFsrmPipelineModuleDefinition, error) {
 	var _moduleDefinition *IFsrmPipelineModuleDefinition
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(moduleName)), uintptr(moduleType), uintptr(unsafe.Pointer(&_moduleDefinition)))
-	return _moduleDefinition, win32.HRESULTError(int32(r1))
+	return _moduleDefinition, win32.ErrIfFailed(int32(r1))
 }
 
 // RunClassification dispatches through IFsrmClassificationManager's vtable slot 27.
 func (self *IFsrmClassificationManager) RunClassification(context FsrmReportGenerationContext, reserved foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(context), uintptr(unsafe.Pointer(reserved)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WaitForClassificationCompletion dispatches through IFsrmClassificationManager's vtable slot 28.
 func (self *IFsrmClassificationManager) WaitForClassificationCompletion(waitSeconds int32) (foundation.VARIANT_BOOL, error) {
 	var _completed foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(waitSeconds), uintptr(unsafe.Pointer(&_completed)))
-	return _completed, win32.HRESULTError(int32(r1))
+	return _completed, win32.ErrIfFailed(int32(r1))
 }
 
 // CancelClassification dispatches through IFsrmClassificationManager's vtable slot 29.
 func (self *IFsrmClassificationManager) CancelClassification() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumFileProperties dispatches through IFsrmClassificationManager's vtable slot 30.
 func (self *IFsrmClassificationManager) EnumFileProperties(filePath foundation.BSTR, options FsrmGetFilePropertyOptions) (*IFsrmCollection, error) {
 	var _fileProperties *IFsrmCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(filePath)), uintptr(options), uintptr(unsafe.Pointer(&_fileProperties)))
-	return _fileProperties, win32.HRESULTError(int32(r1))
+	return _fileProperties, win32.ErrIfFailed(int32(r1))
 }
 
 // GetFileProperty dispatches through IFsrmClassificationManager's vtable slot 31.
 func (self *IFsrmClassificationManager) GetFileProperty(filePath foundation.BSTR, propertyName foundation.BSTR, options FsrmGetFilePropertyOptions) (*IFsrmProperty, error) {
 	var _property *IFsrmProperty
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(filePath)), uintptr(unsafe.Pointer(propertyName)), uintptr(options), uintptr(unsafe.Pointer(&_property)))
-	return _property, win32.HRESULTError(int32(r1))
+	return _property, win32.ErrIfFailed(int32(r1))
 }
 
 // SetFileProperty dispatches through IFsrmClassificationManager's vtable slot 32.
 func (self *IFsrmClassificationManager) SetFileProperty(filePath foundation.BSTR, propertyName foundation.BSTR, propertyValue foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(filePath)), uintptr(unsafe.Pointer(propertyName)), uintptr(unsafe.Pointer(propertyValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ClearFileProperty dispatches through IFsrmClassificationManager's vtable slot 33.
 func (self *IFsrmClassificationManager) ClearFileProperty(filePath foundation.BSTR, property foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(filePath)), uintptr(unsafe.Pointer(property)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmClassificationManager2: https://learn.microsoft.com/windows/win32/api/fsrmpipeline/nn-fsrmpipeline-ifsrmclassificationmanager2
@@ -604,7 +604,7 @@ var IID_IFsrmClassificationManager2 = win32.GUID{Data1: 0x0004c1c9, Data2: 0x127
 // ClassifyFiles dispatches through IFsrmClassificationManager2's vtable slot 34.
 func (self *IFsrmClassificationManager2) ClassifyFiles(filePaths *systemcom.SAFEARRAY, propertyNames *systemcom.SAFEARRAY, propertyValues *systemcom.SAFEARRAY, options FsrmGetFilePropertyOptions) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(filePaths)), uintptr(unsafe.Pointer(propertyNames)), uintptr(unsafe.Pointer(propertyValues)), uintptr(options))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmClassificationRule: https://learn.microsoft.com/windows/win32/api/fsrmpipeline/nn-fsrmpipeline-ifsrmclassificationrule
@@ -620,39 +620,39 @@ var IID_IFsrmClassificationRule = win32.GUID{Data1: 0xafc052c2, Data2: 0x5315, D
 func (self *IFsrmClassificationRule) Get_ExecutionOption() (FsrmExecutionOption, error) {
 	var _executionOption FsrmExecutionOption
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_executionOption)))
-	return _executionOption, win32.HRESULTError(int32(r1))
+	return _executionOption, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ExecutionOption dispatches through IFsrmClassificationRule's vtable slot 25.
 func (self *IFsrmClassificationRule) Put_ExecutionOption(executionOption FsrmExecutionOption) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(executionOption))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PropertyAffected dispatches through IFsrmClassificationRule's vtable slot 26.
 func (self *IFsrmClassificationRule) Get_PropertyAffected() (foundation.BSTR, error) {
 	var _property foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_property)))
-	return _property, win32.HRESULTError(int32(r1))
+	return _property, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PropertyAffected dispatches through IFsrmClassificationRule's vtable slot 27.
 func (self *IFsrmClassificationRule) Put_PropertyAffected(property foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(property)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Value dispatches through IFsrmClassificationRule's vtable slot 28.
 func (self *IFsrmClassificationRule) Get_Value() (foundation.BSTR, error) {
 	var _value foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Value dispatches through IFsrmClassificationRule's vtable slot 29.
 func (self *IFsrmClassificationRule) Put_Value(value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmClassifierModuleDefinition: https://learn.microsoft.com/windows/win32/api/fsrmpipeline/nn-fsrmpipeline-ifsrmclassifiermoduledefinition
@@ -668,39 +668,39 @@ var IID_IFsrmClassifierModuleDefinition = win32.GUID{Data1: 0xbb36ea26, Data2: 0
 func (self *IFsrmClassifierModuleDefinition) Get_PropertiesAffected() (*systemcom.SAFEARRAY, error) {
 	var _propertiesAffected *systemcom.SAFEARRAY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_propertiesAffected)))
-	return _propertiesAffected, win32.HRESULTError(int32(r1))
+	return _propertiesAffected, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PropertiesAffected dispatches through IFsrmClassifierModuleDefinition's vtable slot 32.
 func (self *IFsrmClassifierModuleDefinition) Put_PropertiesAffected(propertiesAffected *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propertiesAffected)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PropertiesUsed dispatches through IFsrmClassifierModuleDefinition's vtable slot 33.
 func (self *IFsrmClassifierModuleDefinition) Get_PropertiesUsed() (*systemcom.SAFEARRAY, error) {
 	var _propertiesUsed *systemcom.SAFEARRAY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_propertiesUsed)))
-	return _propertiesUsed, win32.HRESULTError(int32(r1))
+	return _propertiesUsed, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PropertiesUsed dispatches through IFsrmClassifierModuleDefinition's vtable slot 34.
 func (self *IFsrmClassifierModuleDefinition) Put_PropertiesUsed(propertiesUsed *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propertiesUsed)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NeedsExplicitValue dispatches through IFsrmClassifierModuleDefinition's vtable slot 35.
 func (self *IFsrmClassifierModuleDefinition) Get_NeedsExplicitValue() (foundation.VARIANT_BOOL, error) {
 	var _needsExplicitValue foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_needsExplicitValue)))
-	return _needsExplicitValue, win32.HRESULTError(int32(r1))
+	return _needsExplicitValue, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_NeedsExplicitValue dispatches through IFsrmClassifierModuleDefinition's vtable slot 36.
 func (self *IFsrmClassifierModuleDefinition) Put_NeedsExplicitValue(needsExplicitValue foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(needsExplicitValue))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmClassifierModuleImplementation: https://learn.microsoft.com/windows/win32/api/fsrmpipeline/nn-fsrmpipeline-ifsrmclassifiermoduleimplementation
@@ -716,25 +716,25 @@ var IID_IFsrmClassifierModuleImplementation = win32.GUID{Data1: 0x4c968fc6, Data
 func (self *IFsrmClassifierModuleImplementation) Get_LastModified() (systemvariant.VARIANT, error) {
 	var _lastModified systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lastModified)))
-	return _lastModified, win32.HRESULTError(int32(r1))
+	return _lastModified, win32.ErrIfFailed(int32(r1))
 }
 
 // UseRulesAndDefinitions dispatches through IFsrmClassifierModuleImplementation's vtable slot 10.
 func (self *IFsrmClassifierModuleImplementation) UseRulesAndDefinitions(rules *IFsrmCollection, propertyDefinitions *IFsrmCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rules)), uintptr(unsafe.Pointer(propertyDefinitions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnBeginFile dispatches through IFsrmClassifierModuleImplementation's vtable slot 11.
 func (self *IFsrmClassifierModuleImplementation) OnBeginFile(propertyBag *IFsrmPropertyBag, arrayRuleIds *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propertyBag)), uintptr(unsafe.Pointer(arrayRuleIds)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnEndFile dispatches through IFsrmClassifierModuleImplementation's vtable slot 14.
 func (self *IFsrmClassifierModuleImplementation) OnEndFile() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmCollection: https://learn.microsoft.com/windows/win32/api/fsrm/nn-fsrm-ifsrmcollection
@@ -750,41 +750,41 @@ var IID_IFsrmCollection = win32.GUID{Data1: 0xf76fbf3b, Data2: 0x8ddd, Data3: 0x
 func (self *IFsrmCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
 	var _unknown *systemcom.IUnknown
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_unknown)))
-	return _unknown, win32.HRESULTError(int32(r1))
+	return _unknown, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Item dispatches through IFsrmCollection's vtable slot 8.
 func (self *IFsrmCollection) Get_Item(index int32) (systemvariant.VARIANT, error) {
 	var _item systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_item)))
-	return _item, win32.HRESULTError(int32(r1))
+	return _item, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IFsrmCollection's vtable slot 9.
 func (self *IFsrmCollection) Get_Count() (int32, error) {
 	var _count int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
-	return _count, win32.HRESULTError(int32(r1))
+	return _count, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_State dispatches through IFsrmCollection's vtable slot 10.
 func (self *IFsrmCollection) Get_State() (FsrmCollectionState, error) {
 	var _state FsrmCollectionState
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_state)))
-	return _state, win32.HRESULTError(int32(r1))
+	return _state, win32.ErrIfFailed(int32(r1))
 }
 
 // Cancel dispatches through IFsrmCollection's vtable slot 11.
 func (self *IFsrmCollection) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WaitForCompletion dispatches through IFsrmCollection's vtable slot 12.
 func (self *IFsrmCollection) WaitForCompletion(waitSeconds int32) (foundation.VARIANT_BOOL, error) {
 	var _completed foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(waitSeconds), uintptr(unsafe.Pointer(&_completed)))
-	return _completed, win32.HRESULTError(int32(r1))
+	return _completed, win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmCommittableCollection: https://learn.microsoft.com/windows/win32/api/fsrm/nn-fsrm-ifsrmcommittablecollection
@@ -800,7 +800,7 @@ var IID_IFsrmCommittableCollection = win32.GUID{Data1: 0x96deb3b5, Data2: 0x8b91
 func (self *IFsrmCommittableCollection) Commit(options FsrmCommitOptions) (*IFsrmCollection, error) {
 	var _results *IFsrmCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(options), uintptr(unsafe.Pointer(&_results)))
-	return _results, win32.HRESULTError(int32(r1))
+	return _results, win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmDerivedObjectsResult: https://learn.microsoft.com/windows/win32/api/fsrm/nn-fsrm-ifsrmderivedobjectsresult
@@ -816,14 +816,14 @@ var IID_IFsrmDerivedObjectsResult = win32.GUID{Data1: 0x39322a2d, Data2: 0x38ee,
 func (self *IFsrmDerivedObjectsResult) Get_DerivedObjects() (*IFsrmCollection, error) {
 	var _derivedObjects *IFsrmCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_derivedObjects)))
-	return _derivedObjects, win32.HRESULTError(int32(r1))
+	return _derivedObjects, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Results dispatches through IFsrmDerivedObjectsResult's vtable slot 8.
 func (self *IFsrmDerivedObjectsResult) Get_Results() (*IFsrmCollection, error) {
 	var _results *IFsrmCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_results)))
-	return _results, win32.HRESULTError(int32(r1))
+	return _results, win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmExportImport: https://learn.microsoft.com/windows/win32/api/fsrm/nn-fsrm-ifsrmexportimport
@@ -838,40 +838,40 @@ var IID_IFsrmExportImport = win32.GUID{Data1: 0xefcb0ab1, Data2: 0x16c4, Data3: 
 // ExportFileGroups dispatches through IFsrmExportImport's vtable slot 7.
 func (self *IFsrmExportImport) ExportFileGroups(filePath foundation.BSTR, fileGroupNamesSafeArray *systemvariant.VARIANT, remoteHost foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(filePath)), uintptr(unsafe.Pointer(fileGroupNamesSafeArray)), uintptr(unsafe.Pointer(remoteHost)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ImportFileGroups dispatches through IFsrmExportImport's vtable slot 8.
 func (self *IFsrmExportImport) ImportFileGroups(filePath foundation.BSTR, fileGroupNamesSafeArray *systemvariant.VARIANT, remoteHost foundation.BSTR) (*IFsrmCommittableCollection, error) {
 	var _fileGroups *IFsrmCommittableCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(filePath)), uintptr(unsafe.Pointer(fileGroupNamesSafeArray)), uintptr(unsafe.Pointer(remoteHost)), uintptr(unsafe.Pointer(&_fileGroups)))
-	return _fileGroups, win32.HRESULTError(int32(r1))
+	return _fileGroups, win32.ErrIfFailed(int32(r1))
 }
 
 // ExportFileScreenTemplates dispatches through IFsrmExportImport's vtable slot 9.
 func (self *IFsrmExportImport) ExportFileScreenTemplates(filePath foundation.BSTR, templateNamesSafeArray *systemvariant.VARIANT, remoteHost foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(filePath)), uintptr(unsafe.Pointer(templateNamesSafeArray)), uintptr(unsafe.Pointer(remoteHost)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ImportFileScreenTemplates dispatches through IFsrmExportImport's vtable slot 10.
 func (self *IFsrmExportImport) ImportFileScreenTemplates(filePath foundation.BSTR, templateNamesSafeArray *systemvariant.VARIANT, remoteHost foundation.BSTR) (*IFsrmCommittableCollection, error) {
 	var _templates *IFsrmCommittableCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(filePath)), uintptr(unsafe.Pointer(templateNamesSafeArray)), uintptr(unsafe.Pointer(remoteHost)), uintptr(unsafe.Pointer(&_templates)))
-	return _templates, win32.HRESULTError(int32(r1))
+	return _templates, win32.ErrIfFailed(int32(r1))
 }
 
 // ExportQuotaTemplates dispatches through IFsrmExportImport's vtable slot 11.
 func (self *IFsrmExportImport) ExportQuotaTemplates(filePath foundation.BSTR, templateNamesSafeArray *systemvariant.VARIANT, remoteHost foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(filePath)), uintptr(unsafe.Pointer(templateNamesSafeArray)), uintptr(unsafe.Pointer(remoteHost)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ImportQuotaTemplates dispatches through IFsrmExportImport's vtable slot 12.
 func (self *IFsrmExportImport) ImportQuotaTemplates(filePath foundation.BSTR, templateNamesSafeArray *systemvariant.VARIANT, remoteHost foundation.BSTR) (*IFsrmCommittableCollection, error) {
 	var _templates *IFsrmCommittableCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(filePath)), uintptr(unsafe.Pointer(templateNamesSafeArray)), uintptr(unsafe.Pointer(remoteHost)), uintptr(unsafe.Pointer(&_templates)))
-	return _templates, win32.HRESULTError(int32(r1))
+	return _templates, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 70684ffc-691a-4a1a-b922-97752e138cc1
@@ -886,13 +886,13 @@ var IID_IFsrmFileCondition = win32.GUID{Data1: 0x70684ffc, Data2: 0x691a, Data3:
 func (self *IFsrmFileCondition) Get_Type() (FsrmFileConditionType, error) {
 	var _pVal FsrmFileConditionType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IFsrmFileCondition's vtable slot 8.
 func (self *IFsrmFileCondition) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmFileConditionProperty: https://learn.microsoft.com/windows/win32/api/fsrmreports/nn-fsrmreports-ifsrmfileconditionproperty
@@ -908,59 +908,59 @@ var IID_IFsrmFileConditionProperty = win32.GUID{Data1: 0x81926775, Data2: 0xb981
 func (self *IFsrmFileConditionProperty) Get_PropertyName() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PropertyName dispatches through IFsrmFileConditionProperty's vtable slot 10.
 func (self *IFsrmFileConditionProperty) Put_PropertyName(newVal foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PropertyId dispatches through IFsrmFileConditionProperty's vtable slot 11.
 func (self *IFsrmFileConditionProperty) Get_PropertyId() (FsrmFileSystemPropertyId, error) {
 	var _pVal FsrmFileSystemPropertyId
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PropertyId dispatches through IFsrmFileConditionProperty's vtable slot 12.
 func (self *IFsrmFileConditionProperty) Put_PropertyId(newVal FsrmFileSystemPropertyId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(newVal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Operator dispatches through IFsrmFileConditionProperty's vtable slot 13.
 func (self *IFsrmFileConditionProperty) Get_Operator() (FsrmPropertyConditionType, error) {
 	var _pVal FsrmPropertyConditionType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Operator dispatches through IFsrmFileConditionProperty's vtable slot 14.
 func (self *IFsrmFileConditionProperty) Put_Operator(newVal FsrmPropertyConditionType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(newVal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ValueType dispatches through IFsrmFileConditionProperty's vtable slot 15.
 func (self *IFsrmFileConditionProperty) Get_ValueType() (FsrmPropertyValueType, error) {
 	var _pVal FsrmPropertyValueType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ValueType dispatches through IFsrmFileConditionProperty's vtable slot 16.
 func (self *IFsrmFileConditionProperty) Put_ValueType(newVal FsrmPropertyValueType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(newVal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Value dispatches through IFsrmFileConditionProperty's vtable slot 17.
 func (self *IFsrmFileConditionProperty) Get_Value() (systemvariant.VARIANT, error) {
 	var _pVal systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmFileGroup: https://learn.microsoft.com/windows/win32/api/fsrmscreen/nn-fsrmscreen-ifsrmfilegroup
@@ -976,39 +976,39 @@ var IID_IFsrmFileGroup = win32.GUID{Data1: 0x8dd04909, Data2: 0x0e34, Data3: 0x4
 func (self *IFsrmFileGroup) Get_Name() (foundation.BSTR, error) {
 	var _name foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
-	return _name, win32.HRESULTError(int32(r1))
+	return _name, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Name dispatches through IFsrmFileGroup's vtable slot 13.
 func (self *IFsrmFileGroup) Put_Name(name foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Members dispatches through IFsrmFileGroup's vtable slot 14.
 func (self *IFsrmFileGroup) Get_Members() (*IFsrmMutableCollection, error) {
 	var _members *IFsrmMutableCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_members)))
-	return _members, win32.HRESULTError(int32(r1))
+	return _members, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Members dispatches through IFsrmFileGroup's vtable slot 15.
 func (self *IFsrmFileGroup) Put_Members(members *IFsrmMutableCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(members)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NonMembers dispatches through IFsrmFileGroup's vtable slot 16.
 func (self *IFsrmFileGroup) Get_NonMembers() (*IFsrmMutableCollection, error) {
 	var _nonMembers *IFsrmMutableCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_nonMembers)))
-	return _nonMembers, win32.HRESULTError(int32(r1))
+	return _nonMembers, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_NonMembers dispatches through IFsrmFileGroup's vtable slot 17.
 func (self *IFsrmFileGroup) Put_NonMembers(nonMembers *IFsrmMutableCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(nonMembers)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmFileGroupImported: https://learn.microsoft.com/windows/win32/api/fsrmscreen/nn-fsrmscreen-ifsrmfilegroupimported
@@ -1024,13 +1024,13 @@ var IID_IFsrmFileGroupImported = win32.GUID{Data1: 0xad55f10b, Data2: 0x5f11, Da
 func (self *IFsrmFileGroupImported) Get_OverwriteOnCommit() (foundation.VARIANT_BOOL, error) {
 	var _overwrite foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_overwrite)))
-	return _overwrite, win32.HRESULTError(int32(r1))
+	return _overwrite, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_OverwriteOnCommit dispatches through IFsrmFileGroupImported's vtable slot 19.
 func (self *IFsrmFileGroupImported) Put_OverwriteOnCommit(overwrite foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(overwrite))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmFileGroupManager: https://learn.microsoft.com/windows/win32/api/fsrmscreen/nn-fsrmscreen-ifsrmfilegroupmanager
@@ -1046,35 +1046,35 @@ var IID_IFsrmFileGroupManager = win32.GUID{Data1: 0x426677d5, Data2: 0x018c, Dat
 func (self *IFsrmFileGroupManager) CreateFileGroup() (*IFsrmFileGroup, error) {
 	var _fileGroup *IFsrmFileGroup
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_fileGroup)))
-	return _fileGroup, win32.HRESULTError(int32(r1))
+	return _fileGroup, win32.ErrIfFailed(int32(r1))
 }
 
 // GetFileGroup dispatches through IFsrmFileGroupManager's vtable slot 8.
 func (self *IFsrmFileGroupManager) GetFileGroup(name foundation.BSTR) (*IFsrmFileGroup, error) {
 	var _fileGroup *IFsrmFileGroup
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(&_fileGroup)))
-	return _fileGroup, win32.HRESULTError(int32(r1))
+	return _fileGroup, win32.ErrIfFailed(int32(r1))
 }
 
 // EnumFileGroups dispatches through IFsrmFileGroupManager's vtable slot 9.
 func (self *IFsrmFileGroupManager) EnumFileGroups(options FsrmEnumOptions) (*IFsrmCommittableCollection, error) {
 	var _fileGroups *IFsrmCommittableCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(options), uintptr(unsafe.Pointer(&_fileGroups)))
-	return _fileGroups, win32.HRESULTError(int32(r1))
+	return _fileGroups, win32.ErrIfFailed(int32(r1))
 }
 
 // ExportFileGroups dispatches through IFsrmFileGroupManager's vtable slot 10.
 func (self *IFsrmFileGroupManager) ExportFileGroups(fileGroupNamesArray *systemvariant.VARIANT) (foundation.BSTR, error) {
 	var _serializedFileGroups foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fileGroupNamesArray)), uintptr(unsafe.Pointer(&_serializedFileGroups)))
-	return _serializedFileGroups, win32.HRESULTError(int32(r1))
+	return _serializedFileGroups, win32.ErrIfFailed(int32(r1))
 }
 
 // ImportFileGroups dispatches through IFsrmFileGroupManager's vtable slot 11.
 func (self *IFsrmFileGroupManager) ImportFileGroups(serializedFileGroups foundation.BSTR, fileGroupNamesArray *systemvariant.VARIANT) (*IFsrmCommittableCollection, error) {
 	var _fileGroups *IFsrmCommittableCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(serializedFileGroups)), uintptr(unsafe.Pointer(fileGroupNamesArray)), uintptr(unsafe.Pointer(&_fileGroups)))
-	return _fileGroups, win32.HRESULTError(int32(r1))
+	return _fileGroups, win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmFileManagementJob: https://learn.microsoft.com/windows/win32/api/fsrmreports/nn-fsrmreports-ifsrmfilemanagementjob
@@ -1090,316 +1090,316 @@ var IID_IFsrmFileManagementJob = win32.GUID{Data1: 0x0770687e, Data2: 0x9f36, Da
 func (self *IFsrmFileManagementJob) Get_Name() (foundation.BSTR, error) {
 	var _name foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
-	return _name, win32.HRESULTError(int32(r1))
+	return _name, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Name dispatches through IFsrmFileManagementJob's vtable slot 13.
 func (self *IFsrmFileManagementJob) Put_Name(name foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NamespaceRoots dispatches through IFsrmFileManagementJob's vtable slot 14.
 func (self *IFsrmFileManagementJob) Get_NamespaceRoots() (*systemcom.SAFEARRAY, error) {
 	var _namespaceRoots *systemcom.SAFEARRAY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_namespaceRoots)))
-	return _namespaceRoots, win32.HRESULTError(int32(r1))
+	return _namespaceRoots, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_NamespaceRoots dispatches through IFsrmFileManagementJob's vtable slot 15.
 func (self *IFsrmFileManagementJob) Put_NamespaceRoots(namespaceRoots *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(namespaceRoots)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Enabled dispatches through IFsrmFileManagementJob's vtable slot 16.
 func (self *IFsrmFileManagementJob) Get_Enabled() (foundation.VARIANT_BOOL, error) {
 	var _enabled foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_enabled)))
-	return _enabled, win32.HRESULTError(int32(r1))
+	return _enabled, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Enabled dispatches through IFsrmFileManagementJob's vtable slot 17.
 func (self *IFsrmFileManagementJob) Put_Enabled(enabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(enabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OperationType dispatches through IFsrmFileManagementJob's vtable slot 18.
 func (self *IFsrmFileManagementJob) Get_OperationType() (FsrmFileManagementType, error) {
 	var _operationType FsrmFileManagementType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_operationType)))
-	return _operationType, win32.HRESULTError(int32(r1))
+	return _operationType, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_OperationType dispatches through IFsrmFileManagementJob's vtable slot 19.
 func (self *IFsrmFileManagementJob) Put_OperationType(operationType FsrmFileManagementType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(operationType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ExpirationDirectory dispatches through IFsrmFileManagementJob's vtable slot 20.
 func (self *IFsrmFileManagementJob) Get_ExpirationDirectory() (foundation.BSTR, error) {
 	var _expirationDirectory foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_expirationDirectory)))
-	return _expirationDirectory, win32.HRESULTError(int32(r1))
+	return _expirationDirectory, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ExpirationDirectory dispatches through IFsrmFileManagementJob's vtable slot 21.
 func (self *IFsrmFileManagementJob) Put_ExpirationDirectory(expirationDirectory foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(expirationDirectory)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CustomAction dispatches through IFsrmFileManagementJob's vtable slot 22.
 func (self *IFsrmFileManagementJob) Get_CustomAction() (*IFsrmActionCommand, error) {
 	var _action *IFsrmActionCommand
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_action)))
-	return _action, win32.HRESULTError(int32(r1))
+	return _action, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Notifications dispatches through IFsrmFileManagementJob's vtable slot 23.
 func (self *IFsrmFileManagementJob) Get_Notifications() (*systemcom.SAFEARRAY, error) {
 	var _notifications *systemcom.SAFEARRAY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_notifications)))
-	return _notifications, win32.HRESULTError(int32(r1))
+	return _notifications, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Logging dispatches through IFsrmFileManagementJob's vtable slot 24.
 func (self *IFsrmFileManagementJob) Get_Logging() (int32, error) {
 	var _loggingFlags int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_loggingFlags)))
-	return _loggingFlags, win32.HRESULTError(int32(r1))
+	return _loggingFlags, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Logging dispatches through IFsrmFileManagementJob's vtable slot 25.
 func (self *IFsrmFileManagementJob) Put_Logging(loggingFlags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(loggingFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReportEnabled dispatches through IFsrmFileManagementJob's vtable slot 26.
 func (self *IFsrmFileManagementJob) Get_ReportEnabled() (foundation.VARIANT_BOOL, error) {
 	var _reportEnabled foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_reportEnabled)))
-	return _reportEnabled, win32.HRESULTError(int32(r1))
+	return _reportEnabled, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ReportEnabled dispatches through IFsrmFileManagementJob's vtable slot 27.
 func (self *IFsrmFileManagementJob) Put_ReportEnabled(reportEnabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(reportEnabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Formats dispatches through IFsrmFileManagementJob's vtable slot 28.
 func (self *IFsrmFileManagementJob) Get_Formats() (*systemcom.SAFEARRAY, error) {
 	var _formats *systemcom.SAFEARRAY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_formats)))
-	return _formats, win32.HRESULTError(int32(r1))
+	return _formats, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Formats dispatches through IFsrmFileManagementJob's vtable slot 29.
 func (self *IFsrmFileManagementJob) Put_Formats(formats *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(formats)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MailTo dispatches through IFsrmFileManagementJob's vtable slot 30.
 func (self *IFsrmFileManagementJob) Get_MailTo() (foundation.BSTR, error) {
 	var _mailTo foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_mailTo)))
-	return _mailTo, win32.HRESULTError(int32(r1))
+	return _mailTo, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MailTo dispatches through IFsrmFileManagementJob's vtable slot 31.
 func (self *IFsrmFileManagementJob) Put_MailTo(mailTo foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(mailTo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DaysSinceFileCreated dispatches through IFsrmFileManagementJob's vtable slot 32.
 func (self *IFsrmFileManagementJob) Get_DaysSinceFileCreated() (int32, error) {
 	var _daysSinceCreation int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_daysSinceCreation)))
-	return _daysSinceCreation, win32.HRESULTError(int32(r1))
+	return _daysSinceCreation, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DaysSinceFileCreated dispatches through IFsrmFileManagementJob's vtable slot 33.
 func (self *IFsrmFileManagementJob) Put_DaysSinceFileCreated(daysSinceCreation int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(daysSinceCreation))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DaysSinceFileLastAccessed dispatches through IFsrmFileManagementJob's vtable slot 34.
 func (self *IFsrmFileManagementJob) Get_DaysSinceFileLastAccessed() (int32, error) {
 	var _daysSinceAccess int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_daysSinceAccess)))
-	return _daysSinceAccess, win32.HRESULTError(int32(r1))
+	return _daysSinceAccess, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DaysSinceFileLastAccessed dispatches through IFsrmFileManagementJob's vtable slot 35.
 func (self *IFsrmFileManagementJob) Put_DaysSinceFileLastAccessed(daysSinceAccess int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(daysSinceAccess))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DaysSinceFileLastModified dispatches through IFsrmFileManagementJob's vtable slot 36.
 func (self *IFsrmFileManagementJob) Get_DaysSinceFileLastModified() (int32, error) {
 	var _daysSinceModify int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_daysSinceModify)))
-	return _daysSinceModify, win32.HRESULTError(int32(r1))
+	return _daysSinceModify, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DaysSinceFileLastModified dispatches through IFsrmFileManagementJob's vtable slot 37.
 func (self *IFsrmFileManagementJob) Put_DaysSinceFileLastModified(daysSinceModify int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(daysSinceModify))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PropertyConditions dispatches through IFsrmFileManagementJob's vtable slot 38.
 func (self *IFsrmFileManagementJob) Get_PropertyConditions() (*IFsrmCollection, error) {
 	var _propertyConditions *IFsrmCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_propertyConditions)))
-	return _propertyConditions, win32.HRESULTError(int32(r1))
+	return _propertyConditions, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FromDate dispatches through IFsrmFileManagementJob's vtable slot 39.
 func (self *IFsrmFileManagementJob) Get_FromDate() (float64, error) {
 	var _fromDate float64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_fromDate)))
-	return _fromDate, win32.HRESULTError(int32(r1))
+	return _fromDate, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Task dispatches through IFsrmFileManagementJob's vtable slot 41.
 func (self *IFsrmFileManagementJob) Get_Task() (foundation.BSTR, error) {
 	var _taskName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_taskName)))
-	return _taskName, win32.HRESULTError(int32(r1))
+	return _taskName, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Task dispatches through IFsrmFileManagementJob's vtable slot 42.
 func (self *IFsrmFileManagementJob) Put_Task(taskName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(taskName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Parameters dispatches through IFsrmFileManagementJob's vtable slot 43.
 func (self *IFsrmFileManagementJob) Get_Parameters() (*systemcom.SAFEARRAY, error) {
 	var _parameters *systemcom.SAFEARRAY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_parameters)))
-	return _parameters, win32.HRESULTError(int32(r1))
+	return _parameters, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Parameters dispatches through IFsrmFileManagementJob's vtable slot 44.
 func (self *IFsrmFileManagementJob) Put_Parameters(parameters *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(parameters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RunningStatus dispatches through IFsrmFileManagementJob's vtable slot 45.
 func (self *IFsrmFileManagementJob) Get_RunningStatus() (FsrmReportRunningStatus, error) {
 	var _runningStatus FsrmReportRunningStatus
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_runningStatus)))
-	return _runningStatus, win32.HRESULTError(int32(r1))
+	return _runningStatus, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastError dispatches through IFsrmFileManagementJob's vtable slot 46.
 func (self *IFsrmFileManagementJob) Get_LastError() (foundation.BSTR, error) {
 	var _lastError foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lastError)))
-	return _lastError, win32.HRESULTError(int32(r1))
+	return _lastError, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastReportPathWithoutExtension dispatches through IFsrmFileManagementJob's vtable slot 47.
 func (self *IFsrmFileManagementJob) Get_LastReportPathWithoutExtension() (foundation.BSTR, error) {
 	var _path foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_path)))
-	return _path, win32.HRESULTError(int32(r1))
+	return _path, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastRun dispatches through IFsrmFileManagementJob's vtable slot 48.
 func (self *IFsrmFileManagementJob) Get_LastRun() (float64, error) {
 	var _lastRun float64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lastRun)))
-	return _lastRun, win32.HRESULTError(int32(r1))
+	return _lastRun, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FileNamePattern dispatches through IFsrmFileManagementJob's vtable slot 49.
 func (self *IFsrmFileManagementJob) Get_FileNamePattern() (foundation.BSTR, error) {
 	var _fileNamePattern foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_fileNamePattern)))
-	return _fileNamePattern, win32.HRESULTError(int32(r1))
+	return _fileNamePattern, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FileNamePattern dispatches through IFsrmFileManagementJob's vtable slot 50.
 func (self *IFsrmFileManagementJob) Put_FileNamePattern(fileNamePattern foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fileNamePattern)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Run dispatches through IFsrmFileManagementJob's vtable slot 51.
 func (self *IFsrmFileManagementJob) Run(context FsrmReportGenerationContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(context))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WaitForCompletion dispatches through IFsrmFileManagementJob's vtable slot 52.
 func (self *IFsrmFileManagementJob) WaitForCompletion(waitSeconds int32) (foundation.VARIANT_BOOL, error) {
 	var _completed foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(waitSeconds), uintptr(unsafe.Pointer(&_completed)))
-	return _completed, win32.HRESULTError(int32(r1))
+	return _completed, win32.ErrIfFailed(int32(r1))
 }
 
 // Cancel dispatches through IFsrmFileManagementJob's vtable slot 53.
 func (self *IFsrmFileManagementJob) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddNotification dispatches through IFsrmFileManagementJob's vtable slot 54.
 func (self *IFsrmFileManagementJob) AddNotification(days int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(days))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteNotification dispatches through IFsrmFileManagementJob's vtable slot 55.
 func (self *IFsrmFileManagementJob) DeleteNotification(days int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(days))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ModifyNotification dispatches through IFsrmFileManagementJob's vtable slot 56.
 func (self *IFsrmFileManagementJob) ModifyNotification(days int32, newDays int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(days), uintptr(newDays))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateNotificationAction dispatches through IFsrmFileManagementJob's vtable slot 57.
 func (self *IFsrmFileManagementJob) CreateNotificationAction(days int32, actionType FsrmActionType) (*IFsrmAction, error) {
 	var _action *IFsrmAction
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(days), uintptr(actionType), uintptr(unsafe.Pointer(&_action)))
-	return _action, win32.HRESULTError(int32(r1))
+	return _action, win32.ErrIfFailed(int32(r1))
 }
 
 // EnumNotificationActions dispatches through IFsrmFileManagementJob's vtable slot 58.
 func (self *IFsrmFileManagementJob) EnumNotificationActions(days int32) (*IFsrmCollection, error) {
 	var _actions *IFsrmCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(days), uintptr(unsafe.Pointer(&_actions)))
-	return _actions, win32.HRESULTError(int32(r1))
+	return _actions, win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePropertyCondition dispatches through IFsrmFileManagementJob's vtable slot 59.
 func (self *IFsrmFileManagementJob) CreatePropertyCondition(name foundation.BSTR) (*IFsrmPropertyCondition, error) {
 	var _propertyCondition *IFsrmPropertyCondition
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(&_propertyCondition)))
-	return _propertyCondition, win32.HRESULTError(int32(r1))
+	return _propertyCondition, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateCustomAction dispatches through IFsrmFileManagementJob's vtable slot 60.
 func (self *IFsrmFileManagementJob) CreateCustomAction() (*IFsrmActionCommand, error) {
 	var _customAction *IFsrmActionCommand
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_customAction)))
-	return _customAction, win32.HRESULTError(int32(r1))
+	return _customAction, win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmFileManagementJobManager: https://learn.microsoft.com/windows/win32/api/fsrmreports/nn-fsrmreports-ifsrmfilemanagementjobmanager
@@ -1415,35 +1415,35 @@ var IID_IFsrmFileManagementJobManager = win32.GUID{Data1: 0xee321ecb, Data2: 0xd
 func (self *IFsrmFileManagementJobManager) Get_ActionVariables() (*systemcom.SAFEARRAY, error) {
 	var _variables *systemcom.SAFEARRAY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_variables)))
-	return _variables, win32.HRESULTError(int32(r1))
+	return _variables, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ActionVariableDescriptions dispatches through IFsrmFileManagementJobManager's vtable slot 8.
 func (self *IFsrmFileManagementJobManager) Get_ActionVariableDescriptions() (*systemcom.SAFEARRAY, error) {
 	var _descriptions *systemcom.SAFEARRAY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_descriptions)))
-	return _descriptions, win32.HRESULTError(int32(r1))
+	return _descriptions, win32.ErrIfFailed(int32(r1))
 }
 
 // EnumFileManagementJobs dispatches through IFsrmFileManagementJobManager's vtable slot 9.
 func (self *IFsrmFileManagementJobManager) EnumFileManagementJobs(options FsrmEnumOptions) (*IFsrmCollection, error) {
 	var _fileManagementJobs *IFsrmCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(options), uintptr(unsafe.Pointer(&_fileManagementJobs)))
-	return _fileManagementJobs, win32.HRESULTError(int32(r1))
+	return _fileManagementJobs, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateFileManagementJob dispatches through IFsrmFileManagementJobManager's vtable slot 10.
 func (self *IFsrmFileManagementJobManager) CreateFileManagementJob() (*IFsrmFileManagementJob, error) {
 	var _fileManagementJob *IFsrmFileManagementJob
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_fileManagementJob)))
-	return _fileManagementJob, win32.HRESULTError(int32(r1))
+	return _fileManagementJob, win32.ErrIfFailed(int32(r1))
 }
 
 // GetFileManagementJob dispatches through IFsrmFileManagementJobManager's vtable slot 11.
 func (self *IFsrmFileManagementJobManager) GetFileManagementJob(name foundation.BSTR) (*IFsrmFileManagementJob, error) {
 	var _fileManagementJob *IFsrmFileManagementJob
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(&_fileManagementJob)))
-	return _fileManagementJob, win32.HRESULTError(int32(r1))
+	return _fileManagementJob, win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmFileScreen: https://learn.microsoft.com/windows/win32/api/fsrmscreen/nn-fsrmscreen-ifsrmfilescreen
@@ -1459,41 +1459,41 @@ var IID_IFsrmFileScreen = win32.GUID{Data1: 0x5f6325d3, Data2: 0xce88, Data3: 0x
 func (self *IFsrmFileScreen) Get_Path() (foundation.BSTR, error) {
 	var _path foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_path)))
-	return _path, win32.HRESULTError(int32(r1))
+	return _path, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SourceTemplateName dispatches through IFsrmFileScreen's vtable slot 19.
 func (self *IFsrmFileScreen) Get_SourceTemplateName() (foundation.BSTR, error) {
 	var _fileScreenTemplateName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_fileScreenTemplateName)))
-	return _fileScreenTemplateName, win32.HRESULTError(int32(r1))
+	return _fileScreenTemplateName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MatchesSourceTemplate dispatches through IFsrmFileScreen's vtable slot 20.
 func (self *IFsrmFileScreen) Get_MatchesSourceTemplate() (foundation.VARIANT_BOOL, error) {
 	var _matches foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_matches)))
-	return _matches, win32.HRESULTError(int32(r1))
+	return _matches, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UserSid dispatches through IFsrmFileScreen's vtable slot 21.
 func (self *IFsrmFileScreen) Get_UserSid() (foundation.BSTR, error) {
 	var _userSid foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_userSid)))
-	return _userSid, win32.HRESULTError(int32(r1))
+	return _userSid, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UserAccount dispatches through IFsrmFileScreen's vtable slot 22.
 func (self *IFsrmFileScreen) Get_UserAccount() (foundation.BSTR, error) {
 	var _userAccount foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_userAccount)))
-	return _userAccount, win32.HRESULTError(int32(r1))
+	return _userAccount, win32.ErrIfFailed(int32(r1))
 }
 
 // ApplyTemplate dispatches through IFsrmFileScreen's vtable slot 23.
 func (self *IFsrmFileScreen) ApplyTemplate(fileScreenTemplateName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fileScreenTemplateName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmFileScreenBase: https://learn.microsoft.com/windows/win32/api/fsrmscreen/nn-fsrmscreen-ifsrmfilescreenbase
@@ -1509,40 +1509,40 @@ var IID_IFsrmFileScreenBase = win32.GUID{Data1: 0xf3637e80, Data2: 0x5b22, Data3
 func (self *IFsrmFileScreenBase) Get_BlockedFileGroups() (*IFsrmMutableCollection, error) {
 	var _blockList *IFsrmMutableCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_blockList)))
-	return _blockList, win32.HRESULTError(int32(r1))
+	return _blockList, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BlockedFileGroups dispatches through IFsrmFileScreenBase's vtable slot 13.
 func (self *IFsrmFileScreenBase) Put_BlockedFileGroups(blockList *IFsrmMutableCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(blockList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FileScreenFlags dispatches through IFsrmFileScreenBase's vtable slot 14.
 func (self *IFsrmFileScreenBase) Get_FileScreenFlags() (int32, error) {
 	var _fileScreenFlags int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_fileScreenFlags)))
-	return _fileScreenFlags, win32.HRESULTError(int32(r1))
+	return _fileScreenFlags, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FileScreenFlags dispatches through IFsrmFileScreenBase's vtable slot 15.
 func (self *IFsrmFileScreenBase) Put_FileScreenFlags(fileScreenFlags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(fileScreenFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateAction dispatches through IFsrmFileScreenBase's vtable slot 16.
 func (self *IFsrmFileScreenBase) CreateAction(actionType FsrmActionType) (*IFsrmAction, error) {
 	var _action *IFsrmAction
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(actionType), uintptr(unsafe.Pointer(&_action)))
-	return _action, win32.HRESULTError(int32(r1))
+	return _action, win32.ErrIfFailed(int32(r1))
 }
 
 // EnumActions dispatches through IFsrmFileScreenBase's vtable slot 17.
 func (self *IFsrmFileScreenBase) EnumActions() (*IFsrmCollection, error) {
 	var _actions *IFsrmCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_actions)))
-	return _actions, win32.HRESULTError(int32(r1))
+	return _actions, win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmFileScreenException: https://learn.microsoft.com/windows/win32/api/fsrmscreen/nn-fsrmscreen-ifsrmfilescreenexception
@@ -1558,20 +1558,20 @@ var IID_IFsrmFileScreenException = win32.GUID{Data1: 0xbee7ce02, Data2: 0xdf77, 
 func (self *IFsrmFileScreenException) Get_Path() (foundation.BSTR, error) {
 	var _path foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_path)))
-	return _path, win32.HRESULTError(int32(r1))
+	return _path, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AllowedFileGroups dispatches through IFsrmFileScreenException's vtable slot 13.
 func (self *IFsrmFileScreenException) Get_AllowedFileGroups() (*IFsrmMutableCollection, error) {
 	var _allowList *IFsrmMutableCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_allowList)))
-	return _allowList, win32.HRESULTError(int32(r1))
+	return _allowList, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AllowedFileGroups dispatches through IFsrmFileScreenException's vtable slot 14.
 func (self *IFsrmFileScreenException) Put_AllowedFileGroups(allowList *IFsrmMutableCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(allowList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmFileScreenManager: https://learn.microsoft.com/windows/win32/api/fsrmscreen/nn-fsrmscreen-ifsrmfilescreenmanager
@@ -1587,63 +1587,63 @@ var IID_IFsrmFileScreenManager = win32.GUID{Data1: 0xff4fa04e, Data2: 0x5a94, Da
 func (self *IFsrmFileScreenManager) Get_ActionVariables() (*systemcom.SAFEARRAY, error) {
 	var _variables *systemcom.SAFEARRAY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_variables)))
-	return _variables, win32.HRESULTError(int32(r1))
+	return _variables, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ActionVariableDescriptions dispatches through IFsrmFileScreenManager's vtable slot 8.
 func (self *IFsrmFileScreenManager) Get_ActionVariableDescriptions() (*systemcom.SAFEARRAY, error) {
 	var _descriptions *systemcom.SAFEARRAY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_descriptions)))
-	return _descriptions, win32.HRESULTError(int32(r1))
+	return _descriptions, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateFileScreen dispatches through IFsrmFileScreenManager's vtable slot 9.
 func (self *IFsrmFileScreenManager) CreateFileScreen(path foundation.BSTR) (*IFsrmFileScreen, error) {
 	var _fileScreen *IFsrmFileScreen
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(&_fileScreen)))
-	return _fileScreen, win32.HRESULTError(int32(r1))
+	return _fileScreen, win32.ErrIfFailed(int32(r1))
 }
 
 // GetFileScreen dispatches through IFsrmFileScreenManager's vtable slot 10.
 func (self *IFsrmFileScreenManager) GetFileScreen(path foundation.BSTR) (*IFsrmFileScreen, error) {
 	var _fileScreen *IFsrmFileScreen
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(&_fileScreen)))
-	return _fileScreen, win32.HRESULTError(int32(r1))
+	return _fileScreen, win32.ErrIfFailed(int32(r1))
 }
 
 // EnumFileScreens dispatches through IFsrmFileScreenManager's vtable slot 11.
 func (self *IFsrmFileScreenManager) EnumFileScreens(path foundation.BSTR, options FsrmEnumOptions) (*IFsrmCommittableCollection, error) {
 	var _fileScreens *IFsrmCommittableCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)), uintptr(options), uintptr(unsafe.Pointer(&_fileScreens)))
-	return _fileScreens, win32.HRESULTError(int32(r1))
+	return _fileScreens, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateFileScreenException dispatches through IFsrmFileScreenManager's vtable slot 12.
 func (self *IFsrmFileScreenManager) CreateFileScreenException(path foundation.BSTR) (*IFsrmFileScreenException, error) {
 	var _fileScreenException *IFsrmFileScreenException
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(&_fileScreenException)))
-	return _fileScreenException, win32.HRESULTError(int32(r1))
+	return _fileScreenException, win32.ErrIfFailed(int32(r1))
 }
 
 // GetFileScreenException dispatches through IFsrmFileScreenManager's vtable slot 13.
 func (self *IFsrmFileScreenManager) GetFileScreenException(path foundation.BSTR) (*IFsrmFileScreenException, error) {
 	var _fileScreenException *IFsrmFileScreenException
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(&_fileScreenException)))
-	return _fileScreenException, win32.HRESULTError(int32(r1))
+	return _fileScreenException, win32.ErrIfFailed(int32(r1))
 }
 
 // EnumFileScreenExceptions dispatches through IFsrmFileScreenManager's vtable slot 14.
 func (self *IFsrmFileScreenManager) EnumFileScreenExceptions(path foundation.BSTR, options FsrmEnumOptions) (*IFsrmCommittableCollection, error) {
 	var _fileScreenExceptions *IFsrmCommittableCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)), uintptr(options), uintptr(unsafe.Pointer(&_fileScreenExceptions)))
-	return _fileScreenExceptions, win32.HRESULTError(int32(r1))
+	return _fileScreenExceptions, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateFileScreenCollection dispatches through IFsrmFileScreenManager's vtable slot 15.
 func (self *IFsrmFileScreenManager) CreateFileScreenCollection() (*IFsrmCommittableCollection, error) {
 	var _collection *IFsrmCommittableCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_collection)))
-	return _collection, win32.HRESULTError(int32(r1))
+	return _collection, win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmFileScreenTemplate: https://learn.microsoft.com/windows/win32/api/fsrmscreen/nn-fsrmscreen-ifsrmfilescreentemplate
@@ -1659,26 +1659,26 @@ var IID_IFsrmFileScreenTemplate = win32.GUID{Data1: 0x205bebf8, Data2: 0xdd93, D
 func (self *IFsrmFileScreenTemplate) Get_Name() (foundation.BSTR, error) {
 	var _name foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
-	return _name, win32.HRESULTError(int32(r1))
+	return _name, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Name dispatches through IFsrmFileScreenTemplate's vtable slot 19.
 func (self *IFsrmFileScreenTemplate) Put_Name(name foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CopyTemplate dispatches through IFsrmFileScreenTemplate's vtable slot 20.
 func (self *IFsrmFileScreenTemplate) CopyTemplate(fileScreenTemplateName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fileScreenTemplateName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CommitAndUpdateDerived dispatches through IFsrmFileScreenTemplate's vtable slot 21.
 func (self *IFsrmFileScreenTemplate) CommitAndUpdateDerived(commitOptions FsrmCommitOptions, applyOptions FsrmTemplateApplyOptions) (*IFsrmDerivedObjectsResult, error) {
 	var _derivedObjectsResult *IFsrmDerivedObjectsResult
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(commitOptions), uintptr(applyOptions), uintptr(unsafe.Pointer(&_derivedObjectsResult)))
-	return _derivedObjectsResult, win32.HRESULTError(int32(r1))
+	return _derivedObjectsResult, win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmFileScreenTemplateImported: https://learn.microsoft.com/windows/win32/api/fsrmscreen/nn-fsrmscreen-ifsrmfilescreentemplateimported
@@ -1694,13 +1694,13 @@ var IID_IFsrmFileScreenTemplateImported = win32.GUID{Data1: 0xe1010359, Data2: 0
 func (self *IFsrmFileScreenTemplateImported) Get_OverwriteOnCommit() (foundation.VARIANT_BOOL, error) {
 	var _overwrite foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_overwrite)))
-	return _overwrite, win32.HRESULTError(int32(r1))
+	return _overwrite, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_OverwriteOnCommit dispatches through IFsrmFileScreenTemplateImported's vtable slot 23.
 func (self *IFsrmFileScreenTemplateImported) Put_OverwriteOnCommit(overwrite foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(overwrite))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmFileScreenTemplateManager: https://learn.microsoft.com/windows/win32/api/fsrmscreen/nn-fsrmscreen-ifsrmfilescreentemplatemanager
@@ -1716,35 +1716,35 @@ var IID_IFsrmFileScreenTemplateManager = win32.GUID{Data1: 0xcfe36cba, Data2: 0x
 func (self *IFsrmFileScreenTemplateManager) CreateTemplate() (*IFsrmFileScreenTemplate, error) {
 	var _fileScreenTemplate *IFsrmFileScreenTemplate
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_fileScreenTemplate)))
-	return _fileScreenTemplate, win32.HRESULTError(int32(r1))
+	return _fileScreenTemplate, win32.ErrIfFailed(int32(r1))
 }
 
 // GetTemplate dispatches through IFsrmFileScreenTemplateManager's vtable slot 8.
 func (self *IFsrmFileScreenTemplateManager) GetTemplate(name foundation.BSTR) (*IFsrmFileScreenTemplate, error) {
 	var _fileScreenTemplate *IFsrmFileScreenTemplate
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(&_fileScreenTemplate)))
-	return _fileScreenTemplate, win32.HRESULTError(int32(r1))
+	return _fileScreenTemplate, win32.ErrIfFailed(int32(r1))
 }
 
 // EnumTemplates dispatches through IFsrmFileScreenTemplateManager's vtable slot 9.
 func (self *IFsrmFileScreenTemplateManager) EnumTemplates(options FsrmEnumOptions) (*IFsrmCommittableCollection, error) {
 	var _fileScreenTemplates *IFsrmCommittableCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(options), uintptr(unsafe.Pointer(&_fileScreenTemplates)))
-	return _fileScreenTemplates, win32.HRESULTError(int32(r1))
+	return _fileScreenTemplates, win32.ErrIfFailed(int32(r1))
 }
 
 // ExportTemplates dispatches through IFsrmFileScreenTemplateManager's vtable slot 10.
 func (self *IFsrmFileScreenTemplateManager) ExportTemplates(fileScreenTemplateNamesArray *systemvariant.VARIANT) (foundation.BSTR, error) {
 	var _serializedFileScreenTemplates foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fileScreenTemplateNamesArray)), uintptr(unsafe.Pointer(&_serializedFileScreenTemplates)))
-	return _serializedFileScreenTemplates, win32.HRESULTError(int32(r1))
+	return _serializedFileScreenTemplates, win32.ErrIfFailed(int32(r1))
 }
 
 // ImportTemplates dispatches through IFsrmFileScreenTemplateManager's vtable slot 11.
 func (self *IFsrmFileScreenTemplateManager) ImportTemplates(serializedFileScreenTemplates foundation.BSTR, fileScreenTemplateNamesArray *systemvariant.VARIANT) (*IFsrmCommittableCollection, error) {
 	var _fileScreenTemplates *IFsrmCommittableCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(serializedFileScreenTemplates)), uintptr(unsafe.Pointer(fileScreenTemplateNamesArray)), uintptr(unsafe.Pointer(&_fileScreenTemplates)))
-	return _fileScreenTemplates, win32.HRESULTError(int32(r1))
+	return _fileScreenTemplates, win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmMutableCollection: https://learn.microsoft.com/windows/win32/api/fsrm/nn-fsrm-ifsrmmutablecollection
@@ -1759,14 +1759,14 @@ var IID_IFsrmMutableCollection = win32.GUID{Data1: 0x1bb617b8, Data2: 0x3886, Da
 // Remove dispatches through IFsrmMutableCollection's vtable slot 15.
 func (self *IFsrmMutableCollection) Remove(index int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IFsrmMutableCollection's vtable slot 17.
 func (self *IFsrmMutableCollection) Clone() (*IFsrmMutableCollection, error) {
 	var _collection *IFsrmMutableCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_collection)))
-	return _collection, win32.HRESULTError(int32(r1))
+	return _collection, win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmObject: https://learn.microsoft.com/windows/win32/api/fsrm/nn-fsrm-ifsrmobject
@@ -1782,32 +1782,32 @@ var IID_IFsrmObject = win32.GUID{Data1: 0x22bcef93, Data2: 0x4a3f, Data3: 0x4183
 func (self *IFsrmObject) Get_Id() (win32.GUID, error) {
 	var _id win32.GUID
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_id)))
-	return _id, win32.HRESULTError(int32(r1))
+	return _id, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through IFsrmObject's vtable slot 8.
 func (self *IFsrmObject) Get_Description() (foundation.BSTR, error) {
 	var _description foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_description)))
-	return _description, win32.HRESULTError(int32(r1))
+	return _description, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Description dispatches through IFsrmObject's vtable slot 9.
 func (self *IFsrmObject) Put_Description(description foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(description)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IFsrmObject's vtable slot 10.
 func (self *IFsrmObject) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Commit dispatches through IFsrmObject's vtable slot 11.
 func (self *IFsrmObject) Commit() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmPathMapper: https://learn.microsoft.com/windows/win32/api/fsrm/nn-fsrm-ifsrmpathmapper
@@ -1823,7 +1823,7 @@ var IID_IFsrmPathMapper = win32.GUID{Data1: 0x6f4dbfff, Data2: 0x6920, Data3: 0x
 func (self *IFsrmPathMapper) GetSharePathsForLocalPath(localPath foundation.BSTR) (*systemcom.SAFEARRAY, error) {
 	var _sharePaths *systemcom.SAFEARRAY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(localPath)), uintptr(unsafe.Pointer(&_sharePaths)))
-	return _sharePaths, win32.HRESULTError(int32(r1))
+	return _sharePaths, win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmPipelineModuleConnector: https://learn.microsoft.com/windows/win32/api/fsrmpipeline/nn-fsrmpipeline-ifsrmpipelinemoduleconnector
@@ -1839,34 +1839,34 @@ var IID_IFsrmPipelineModuleConnector = win32.GUID{Data1: 0xc16014f3, Data2: 0x9a
 func (self *IFsrmPipelineModuleConnector) Get_ModuleImplementation() (*IFsrmPipelineModuleImplementation, error) {
 	var _pipelineModuleImplementation *IFsrmPipelineModuleImplementation
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pipelineModuleImplementation)))
-	return _pipelineModuleImplementation, win32.HRESULTError(int32(r1))
+	return _pipelineModuleImplementation, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ModuleName dispatches through IFsrmPipelineModuleConnector's vtable slot 8.
 func (self *IFsrmPipelineModuleConnector) Get_ModuleName() (foundation.BSTR, error) {
 	var _userName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_userName)))
-	return _userName, win32.HRESULTError(int32(r1))
+	return _userName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HostingUserAccount dispatches through IFsrmPipelineModuleConnector's vtable slot 9.
 func (self *IFsrmPipelineModuleConnector) Get_HostingUserAccount() (foundation.BSTR, error) {
 	var _userAccount foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_userAccount)))
-	return _userAccount, win32.HRESULTError(int32(r1))
+	return _userAccount, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HostingProcessPid dispatches through IFsrmPipelineModuleConnector's vtable slot 10.
 func (self *IFsrmPipelineModuleConnector) Get_HostingProcessPid() (int32, error) {
 	var _pid int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pid)))
-	return _pid, win32.HRESULTError(int32(r1))
+	return _pid, win32.ErrIfFailed(int32(r1))
 }
 
 // Bind dispatches through IFsrmPipelineModuleConnector's vtable slot 11.
 func (self *IFsrmPipelineModuleConnector) Bind(moduleDefinition *IFsrmPipelineModuleDefinition, moduleImplementation *IFsrmPipelineModuleImplementation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(moduleDefinition)), uintptr(unsafe.Pointer(moduleImplementation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmPipelineModuleDefinition: https://learn.microsoft.com/windows/win32/api/fsrmpipeline/nn-fsrmpipeline-ifsrmpipelinemoduledefinition
@@ -1882,124 +1882,124 @@ var IID_IFsrmPipelineModuleDefinition = win32.GUID{Data1: 0x515c1277, Data2: 0x2
 func (self *IFsrmPipelineModuleDefinition) Get_ModuleClsid() (foundation.BSTR, error) {
 	var _moduleClsid foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_moduleClsid)))
-	return _moduleClsid, win32.HRESULTError(int32(r1))
+	return _moduleClsid, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ModuleClsid dispatches through IFsrmPipelineModuleDefinition's vtable slot 13.
 func (self *IFsrmPipelineModuleDefinition) Put_ModuleClsid(moduleClsid foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(moduleClsid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through IFsrmPipelineModuleDefinition's vtable slot 14.
 func (self *IFsrmPipelineModuleDefinition) Get_Name() (foundation.BSTR, error) {
 	var _name foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
-	return _name, win32.HRESULTError(int32(r1))
+	return _name, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Name dispatches through IFsrmPipelineModuleDefinition's vtable slot 15.
 func (self *IFsrmPipelineModuleDefinition) Put_Name(name foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Company dispatches through IFsrmPipelineModuleDefinition's vtable slot 16.
 func (self *IFsrmPipelineModuleDefinition) Get_Company() (foundation.BSTR, error) {
 	var _company foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_company)))
-	return _company, win32.HRESULTError(int32(r1))
+	return _company, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Company dispatches through IFsrmPipelineModuleDefinition's vtable slot 17.
 func (self *IFsrmPipelineModuleDefinition) Put_Company(company foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(company)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Version dispatches through IFsrmPipelineModuleDefinition's vtable slot 18.
 func (self *IFsrmPipelineModuleDefinition) Get_Version() (foundation.BSTR, error) {
 	var _version foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_version)))
-	return _version, win32.HRESULTError(int32(r1))
+	return _version, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Version dispatches through IFsrmPipelineModuleDefinition's vtable slot 19.
 func (self *IFsrmPipelineModuleDefinition) Put_Version(version foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(version)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ModuleType dispatches through IFsrmPipelineModuleDefinition's vtable slot 20.
 func (self *IFsrmPipelineModuleDefinition) Get_ModuleType() (FsrmPipelineModuleType, error) {
 	var _moduleType FsrmPipelineModuleType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_moduleType)))
-	return _moduleType, win32.HRESULTError(int32(r1))
+	return _moduleType, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Enabled dispatches through IFsrmPipelineModuleDefinition's vtable slot 21.
 func (self *IFsrmPipelineModuleDefinition) Get_Enabled() (foundation.VARIANT_BOOL, error) {
 	var _enabled foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_enabled)))
-	return _enabled, win32.HRESULTError(int32(r1))
+	return _enabled, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Enabled dispatches through IFsrmPipelineModuleDefinition's vtable slot 22.
 func (self *IFsrmPipelineModuleDefinition) Put_Enabled(enabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(enabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NeedsFileContent dispatches through IFsrmPipelineModuleDefinition's vtable slot 23.
 func (self *IFsrmPipelineModuleDefinition) Get_NeedsFileContent() (foundation.VARIANT_BOOL, error) {
 	var _needsFileContent foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_needsFileContent)))
-	return _needsFileContent, win32.HRESULTError(int32(r1))
+	return _needsFileContent, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_NeedsFileContent dispatches through IFsrmPipelineModuleDefinition's vtable slot 24.
 func (self *IFsrmPipelineModuleDefinition) Put_NeedsFileContent(needsFileContent foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(needsFileContent))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Account dispatches through IFsrmPipelineModuleDefinition's vtable slot 25.
 func (self *IFsrmPipelineModuleDefinition) Get_Account() (FsrmAccountType, error) {
 	var _retrievalAccount FsrmAccountType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retrievalAccount)))
-	return _retrievalAccount, win32.HRESULTError(int32(r1))
+	return _retrievalAccount, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Account dispatches through IFsrmPipelineModuleDefinition's vtable slot 26.
 func (self *IFsrmPipelineModuleDefinition) Put_Account(retrievalAccount FsrmAccountType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(retrievalAccount))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SupportedExtensions dispatches through IFsrmPipelineModuleDefinition's vtable slot 27.
 func (self *IFsrmPipelineModuleDefinition) Get_SupportedExtensions() (*systemcom.SAFEARRAY, error) {
 	var _supportedExtensions *systemcom.SAFEARRAY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_supportedExtensions)))
-	return _supportedExtensions, win32.HRESULTError(int32(r1))
+	return _supportedExtensions, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SupportedExtensions dispatches through IFsrmPipelineModuleDefinition's vtable slot 28.
 func (self *IFsrmPipelineModuleDefinition) Put_SupportedExtensions(supportedExtensions *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(supportedExtensions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Parameters dispatches through IFsrmPipelineModuleDefinition's vtable slot 29.
 func (self *IFsrmPipelineModuleDefinition) Get_Parameters() (*systemcom.SAFEARRAY, error) {
 	var _parameters *systemcom.SAFEARRAY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_parameters)))
-	return _parameters, win32.HRESULTError(int32(r1))
+	return _parameters, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Parameters dispatches through IFsrmPipelineModuleDefinition's vtable slot 30.
 func (self *IFsrmPipelineModuleDefinition) Put_Parameters(parameters *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(parameters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmPipelineModuleImplementation: https://learn.microsoft.com/windows/win32/api/fsrmpipeline/nn-fsrmpipeline-ifsrmpipelinemoduleimplementation
@@ -2014,13 +2014,13 @@ var IID_IFsrmPipelineModuleImplementation = win32.GUID{Data1: 0xb7907906, Data2:
 // OnLoad dispatches through IFsrmPipelineModuleImplementation's vtable slot 7.
 func (self *IFsrmPipelineModuleImplementation) OnLoad(moduleDefinition *IFsrmPipelineModuleDefinition, moduleConnector **IFsrmPipelineModuleConnector) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(moduleDefinition)), uintptr(unsafe.Pointer(moduleConnector)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnUnload dispatches through IFsrmPipelineModuleImplementation's vtable slot 8.
 func (self *IFsrmPipelineModuleImplementation) OnUnload() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmProperty: https://learn.microsoft.com/windows/win32/api/fsrmpipeline/nn-fsrmpipeline-ifsrmproperty
@@ -2036,28 +2036,28 @@ var IID_IFsrmProperty = win32.GUID{Data1: 0x4a73fee4, Data2: 0x4102, Data3: 0x4f
 func (self *IFsrmProperty) Get_Name() (foundation.BSTR, error) {
 	var _name foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
-	return _name, win32.HRESULTError(int32(r1))
+	return _name, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Value dispatches through IFsrmProperty's vtable slot 8.
 func (self *IFsrmProperty) Get_Value() (foundation.BSTR, error) {
 	var _value foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Sources dispatches through IFsrmProperty's vtable slot 9.
 func (self *IFsrmProperty) Get_Sources() (*systemcom.SAFEARRAY, error) {
 	var _sources *systemcom.SAFEARRAY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_sources)))
-	return _sources, win32.HRESULTError(int32(r1))
+	return _sources, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PropertyFlags dispatches through IFsrmProperty's vtable slot 10.
 func (self *IFsrmProperty) Get_PropertyFlags() (int32, error) {
 	var _flags int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_flags)))
-	return _flags, win32.HRESULTError(int32(r1))
+	return _flags, win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmPropertyBag: https://learn.microsoft.com/windows/win32/api/fsrmpipeline/nn-fsrmpipeline-ifsrmpropertybag
@@ -2073,145 +2073,145 @@ var IID_IFsrmPropertyBag = win32.GUID{Data1: 0x774589d1, Data2: 0xd300, Data3: 0
 func (self *IFsrmPropertyBag) Get_Name() (foundation.BSTR, error) {
 	var _name foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
-	return _name, win32.HRESULTError(int32(r1))
+	return _name, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RelativePath dispatches through IFsrmPropertyBag's vtable slot 8.
 func (self *IFsrmPropertyBag) Get_RelativePath() (foundation.BSTR, error) {
 	var _path foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_path)))
-	return _path, win32.HRESULTError(int32(r1))
+	return _path, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_VolumeName dispatches through IFsrmPropertyBag's vtable slot 9.
 func (self *IFsrmPropertyBag) Get_VolumeName() (foundation.BSTR, error) {
 	var _volumeName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_volumeName)))
-	return _volumeName, win32.HRESULTError(int32(r1))
+	return _volumeName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RelativeNamespaceRoot dispatches through IFsrmPropertyBag's vtable slot 10.
 func (self *IFsrmPropertyBag) Get_RelativeNamespaceRoot() (foundation.BSTR, error) {
 	var _relativeNamespaceRoot foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_relativeNamespaceRoot)))
-	return _relativeNamespaceRoot, win32.HRESULTError(int32(r1))
+	return _relativeNamespaceRoot, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_VolumeIndex dispatches through IFsrmPropertyBag's vtable slot 11.
 func (self *IFsrmPropertyBag) Get_VolumeIndex() (uint32, error) {
 	var _volumeId uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_volumeId)))
-	return _volumeId, win32.HRESULTError(int32(r1))
+	return _volumeId, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FileId dispatches through IFsrmPropertyBag's vtable slot 12.
 func (self *IFsrmPropertyBag) Get_FileId() (systemvariant.VARIANT, error) {
 	var _fileId systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_fileId)))
-	return _fileId, win32.HRESULTError(int32(r1))
+	return _fileId, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ParentDirectoryId dispatches through IFsrmPropertyBag's vtable slot 13.
 func (self *IFsrmPropertyBag) Get_ParentDirectoryId() (systemvariant.VARIANT, error) {
 	var _parentDirectoryId systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_parentDirectoryId)))
-	return _parentDirectoryId, win32.HRESULTError(int32(r1))
+	return _parentDirectoryId, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Size dispatches through IFsrmPropertyBag's vtable slot 14.
 func (self *IFsrmPropertyBag) Get_Size() (systemvariant.VARIANT, error) {
 	var _size systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_size)))
-	return _size, win32.HRESULTError(int32(r1))
+	return _size, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SizeAllocated dispatches through IFsrmPropertyBag's vtable slot 15.
 func (self *IFsrmPropertyBag) Get_SizeAllocated() (systemvariant.VARIANT, error) {
 	var _sizeAllocated systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_sizeAllocated)))
-	return _sizeAllocated, win32.HRESULTError(int32(r1))
+	return _sizeAllocated, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CreationTime dispatches through IFsrmPropertyBag's vtable slot 16.
 func (self *IFsrmPropertyBag) Get_CreationTime() (systemvariant.VARIANT, error) {
 	var _creationTime systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_creationTime)))
-	return _creationTime, win32.HRESULTError(int32(r1))
+	return _creationTime, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastAccessTime dispatches through IFsrmPropertyBag's vtable slot 17.
 func (self *IFsrmPropertyBag) Get_LastAccessTime() (systemvariant.VARIANT, error) {
 	var _lastAccessTime systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lastAccessTime)))
-	return _lastAccessTime, win32.HRESULTError(int32(r1))
+	return _lastAccessTime, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastModificationTime dispatches through IFsrmPropertyBag's vtable slot 18.
 func (self *IFsrmPropertyBag) Get_LastModificationTime() (systemvariant.VARIANT, error) {
 	var _lastModificationTime systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lastModificationTime)))
-	return _lastModificationTime, win32.HRESULTError(int32(r1))
+	return _lastModificationTime, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Attributes dispatches through IFsrmPropertyBag's vtable slot 19.
 func (self *IFsrmPropertyBag) Get_Attributes() (uint32, error) {
 	var _attributes uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_attributes)))
-	return _attributes, win32.HRESULTError(int32(r1))
+	return _attributes, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OwnerSid dispatches through IFsrmPropertyBag's vtable slot 20.
 func (self *IFsrmPropertyBag) Get_OwnerSid() (foundation.BSTR, error) {
 	var _ownerSid foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ownerSid)))
-	return _ownerSid, win32.HRESULTError(int32(r1))
+	return _ownerSid, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FilePropertyNames dispatches through IFsrmPropertyBag's vtable slot 21.
 func (self *IFsrmPropertyBag) Get_FilePropertyNames() (*systemcom.SAFEARRAY, error) {
 	var _filePropertyNames *systemcom.SAFEARRAY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_filePropertyNames)))
-	return _filePropertyNames, win32.HRESULTError(int32(r1))
+	return _filePropertyNames, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Messages dispatches through IFsrmPropertyBag's vtable slot 22.
 func (self *IFsrmPropertyBag) Get_Messages() (*systemcom.SAFEARRAY, error) {
 	var _messages *systemcom.SAFEARRAY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_messages)))
-	return _messages, win32.HRESULTError(int32(r1))
+	return _messages, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PropertyBagFlags dispatches through IFsrmPropertyBag's vtable slot 23.
 func (self *IFsrmPropertyBag) Get_PropertyBagFlags() (uint32, error) {
 	var _flags uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_flags)))
-	return _flags, win32.HRESULTError(int32(r1))
+	return _flags, win32.ErrIfFailed(int32(r1))
 }
 
 // GetFileProperty dispatches through IFsrmPropertyBag's vtable slot 24.
 func (self *IFsrmPropertyBag) GetFileProperty(name foundation.BSTR) (*IFsrmProperty, error) {
 	var _fileProperty *IFsrmProperty
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(&_fileProperty)))
-	return _fileProperty, win32.HRESULTError(int32(r1))
+	return _fileProperty, win32.ErrIfFailed(int32(r1))
 }
 
 // SetFileProperty dispatches through IFsrmPropertyBag's vtable slot 25.
 func (self *IFsrmPropertyBag) SetFileProperty(name foundation.BSTR, value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddMessage dispatches through IFsrmPropertyBag's vtable slot 26.
 func (self *IFsrmPropertyBag) AddMessage(message foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(message)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFileStreamInterface dispatches through IFsrmPropertyBag's vtable slot 27.
 func (self *IFsrmPropertyBag) GetFileStreamInterface(accessMode FsrmFileStreamingMode, interfaceType FsrmFileStreamingInterfaceType) (systemvariant.VARIANT, error) {
 	var _pStreamInterface systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(accessMode), uintptr(interfaceType), uintptr(unsafe.Pointer(&_pStreamInterface)))
-	return _pStreamInterface, win32.HRESULTError(int32(r1))
+	return _pStreamInterface, win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmPropertyBag2: https://learn.microsoft.com/windows/win32/api/fsrmpipeline/nn-fsrmpipeline-ifsrmpropertybag2
@@ -2227,14 +2227,14 @@ var IID_IFsrmPropertyBag2 = win32.GUID{Data1: 0x0e46bdbd, Data2: 0x2402, Data3: 
 func (self *IFsrmPropertyBag2) GetFieldValue(field FsrmPropertyBagField) (systemvariant.VARIANT, error) {
 	var _value systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(field), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // GetUntrustedInFileProperties dispatches through IFsrmPropertyBag2's vtable slot 29.
 func (self *IFsrmPropertyBag2) GetUntrustedInFileProperties() (*IFsrmCollection, error) {
 	var _props *IFsrmCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_props)))
-	return _props, win32.HRESULTError(int32(r1))
+	return _props, win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmPropertyCondition: https://learn.microsoft.com/windows/win32/api/fsrmreports/nn-fsrmreports-ifsrmpropertycondition
@@ -2250,45 +2250,45 @@ var IID_IFsrmPropertyCondition = win32.GUID{Data1: 0x326af66f, Data2: 0x2ac0, Da
 func (self *IFsrmPropertyCondition) Get_Name() (foundation.BSTR, error) {
 	var _name foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
-	return _name, win32.HRESULTError(int32(r1))
+	return _name, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Name dispatches through IFsrmPropertyCondition's vtable slot 8.
 func (self *IFsrmPropertyCondition) Put_Name(name foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Type dispatches through IFsrmPropertyCondition's vtable slot 9.
 func (self *IFsrmPropertyCondition) Get_Type() (FsrmPropertyConditionType, error) {
 	var _type_ FsrmPropertyConditionType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_type_)))
-	return _type_, win32.HRESULTError(int32(r1))
+	return _type_, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Type dispatches through IFsrmPropertyCondition's vtable slot 10.
 func (self *IFsrmPropertyCondition) Put_Type(type_ FsrmPropertyConditionType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(type_))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Value dispatches through IFsrmPropertyCondition's vtable slot 11.
 func (self *IFsrmPropertyCondition) Get_Value() (foundation.BSTR, error) {
 	var _value foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Value dispatches through IFsrmPropertyCondition's vtable slot 12.
 func (self *IFsrmPropertyCondition) Put_Value(value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IFsrmPropertyCondition's vtable slot 13.
 func (self *IFsrmPropertyCondition) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmPropertyDefinition: https://learn.microsoft.com/windows/win32/api/fsrmpipeline/nn-fsrmpipeline-ifsrmpropertydefinition
@@ -2304,65 +2304,65 @@ var IID_IFsrmPropertyDefinition = win32.GUID{Data1: 0xede0150f, Data2: 0xe9a3, D
 func (self *IFsrmPropertyDefinition) Get_Name() (foundation.BSTR, error) {
 	var _name foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
-	return _name, win32.HRESULTError(int32(r1))
+	return _name, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Name dispatches through IFsrmPropertyDefinition's vtable slot 13.
 func (self *IFsrmPropertyDefinition) Put_Name(name foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Type dispatches through IFsrmPropertyDefinition's vtable slot 14.
 func (self *IFsrmPropertyDefinition) Get_Type() (FsrmPropertyDefinitionType, error) {
 	var _type_ FsrmPropertyDefinitionType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_type_)))
-	return _type_, win32.HRESULTError(int32(r1))
+	return _type_, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Type dispatches through IFsrmPropertyDefinition's vtable slot 15.
 func (self *IFsrmPropertyDefinition) Put_Type(type_ FsrmPropertyDefinitionType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(type_))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PossibleValues dispatches through IFsrmPropertyDefinition's vtable slot 16.
 func (self *IFsrmPropertyDefinition) Get_PossibleValues() (*systemcom.SAFEARRAY, error) {
 	var _possibleValues *systemcom.SAFEARRAY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_possibleValues)))
-	return _possibleValues, win32.HRESULTError(int32(r1))
+	return _possibleValues, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PossibleValues dispatches through IFsrmPropertyDefinition's vtable slot 17.
 func (self *IFsrmPropertyDefinition) Put_PossibleValues(possibleValues *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(possibleValues)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ValueDescriptions dispatches through IFsrmPropertyDefinition's vtable slot 18.
 func (self *IFsrmPropertyDefinition) Get_ValueDescriptions() (*systemcom.SAFEARRAY, error) {
 	var _valueDescriptions *systemcom.SAFEARRAY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_valueDescriptions)))
-	return _valueDescriptions, win32.HRESULTError(int32(r1))
+	return _valueDescriptions, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ValueDescriptions dispatches through IFsrmPropertyDefinition's vtable slot 19.
 func (self *IFsrmPropertyDefinition) Put_ValueDescriptions(valueDescriptions *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(valueDescriptions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Parameters dispatches through IFsrmPropertyDefinition's vtable slot 20.
 func (self *IFsrmPropertyDefinition) Get_Parameters() (*systemcom.SAFEARRAY, error) {
 	var _parameters *systemcom.SAFEARRAY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_parameters)))
-	return _parameters, win32.HRESULTError(int32(r1))
+	return _parameters, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Parameters dispatches through IFsrmPropertyDefinition's vtable slot 21.
 func (self *IFsrmPropertyDefinition) Put_Parameters(parameters *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(parameters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmPropertyDefinition2: https://learn.microsoft.com/windows/win32/api/fsrmpipeline/nn-fsrmpipeline-ifsrmpropertydefinition2
@@ -2378,34 +2378,34 @@ var IID_IFsrmPropertyDefinition2 = win32.GUID{Data1: 0x47782152, Data2: 0xd16c, 
 func (self *IFsrmPropertyDefinition2) Get_PropertyDefinitionFlags() (int32, error) {
 	var _propertyDefinitionFlags int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_propertyDefinitionFlags)))
-	return _propertyDefinitionFlags, win32.HRESULTError(int32(r1))
+	return _propertyDefinitionFlags, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DisplayName dispatches through IFsrmPropertyDefinition2's vtable slot 23.
 func (self *IFsrmPropertyDefinition2) Get_DisplayName() (foundation.BSTR, error) {
 	var _name foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
-	return _name, win32.HRESULTError(int32(r1))
+	return _name, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DisplayName dispatches through IFsrmPropertyDefinition2's vtable slot 24.
 func (self *IFsrmPropertyDefinition2) Put_DisplayName(name foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AppliesTo dispatches through IFsrmPropertyDefinition2's vtable slot 25.
 func (self *IFsrmPropertyDefinition2) Get_AppliesTo() (int32, error) {
 	var _appliesTo int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_appliesTo)))
-	return _appliesTo, win32.HRESULTError(int32(r1))
+	return _appliesTo, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ValueDefinitions dispatches through IFsrmPropertyDefinition2's vtable slot 26.
 func (self *IFsrmPropertyDefinition2) Get_ValueDefinitions() (*IFsrmCollection, error) {
 	var _valueDefinitions *IFsrmCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_valueDefinitions)))
-	return _valueDefinitions, win32.HRESULTError(int32(r1))
+	return _valueDefinitions, win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmPropertyDefinitionValue: https://learn.microsoft.com/windows/win32/api/fsrmpipeline/nn-fsrmpipeline-ifsrmpropertydefinitionvalue
@@ -2421,28 +2421,28 @@ var IID_IFsrmPropertyDefinitionValue = win32.GUID{Data1: 0xe946d148, Data2: 0xbd
 func (self *IFsrmPropertyDefinitionValue) Get_Name() (foundation.BSTR, error) {
 	var _name foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
-	return _name, win32.HRESULTError(int32(r1))
+	return _name, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DisplayName dispatches through IFsrmPropertyDefinitionValue's vtable slot 8.
 func (self *IFsrmPropertyDefinitionValue) Get_DisplayName() (foundation.BSTR, error) {
 	var _displayName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_displayName)))
-	return _displayName, win32.HRESULTError(int32(r1))
+	return _displayName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through IFsrmPropertyDefinitionValue's vtable slot 9.
 func (self *IFsrmPropertyDefinitionValue) Get_Description() (foundation.BSTR, error) {
 	var _description foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_description)))
-	return _description, win32.HRESULTError(int32(r1))
+	return _description, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UniqueID dispatches through IFsrmPropertyDefinitionValue's vtable slot 10.
 func (self *IFsrmPropertyDefinitionValue) Get_UniqueID() (foundation.BSTR, error) {
 	var _uniqueID foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_uniqueID)))
-	return _uniqueID, win32.HRESULTError(int32(r1))
+	return _uniqueID, win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmQuota: https://learn.microsoft.com/windows/win32/api/fsrmquota/nn-fsrmquota-ifsrmquota
@@ -2458,33 +2458,33 @@ var IID_IFsrmQuota = win32.GUID{Data1: 0x377f739d, Data2: 0x9647, Data3: 0x4b8e,
 func (self *IFsrmQuota) Get_QuotaUsed() (systemvariant.VARIANT, error) {
 	var _used systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_used)))
-	return _used, win32.HRESULTError(int32(r1))
+	return _used, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_QuotaPeakUsage dispatches through IFsrmQuota's vtable slot 29.
 func (self *IFsrmQuota) Get_QuotaPeakUsage() (systemvariant.VARIANT, error) {
 	var _peakUsage systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_peakUsage)))
-	return _peakUsage, win32.HRESULTError(int32(r1))
+	return _peakUsage, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_QuotaPeakUsageTime dispatches through IFsrmQuota's vtable slot 30.
 func (self *IFsrmQuota) Get_QuotaPeakUsageTime() (float64, error) {
 	var _peakUsageDateTime float64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_peakUsageDateTime)))
-	return _peakUsageDateTime, win32.HRESULTError(int32(r1))
+	return _peakUsageDateTime, win32.ErrIfFailed(int32(r1))
 }
 
 // ResetPeakUsage dispatches through IFsrmQuota's vtable slot 31.
 func (self *IFsrmQuota) ResetPeakUsage() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RefreshUsageProperties dispatches through IFsrmQuota's vtable slot 32.
 func (self *IFsrmQuota) RefreshUsageProperties() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmQuotaBase: https://learn.microsoft.com/windows/win32/api/fsrmquota/nn-fsrmquota-ifsrmquotabase
@@ -2500,59 +2500,59 @@ var IID_IFsrmQuotaBase = win32.GUID{Data1: 0x1568a795, Data2: 0x3924, Data3: 0x4
 func (self *IFsrmQuotaBase) Get_QuotaLimit() (systemvariant.VARIANT, error) {
 	var _quotaLimit systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_quotaLimit)))
-	return _quotaLimit, win32.HRESULTError(int32(r1))
+	return _quotaLimit, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_QuotaFlags dispatches through IFsrmQuotaBase's vtable slot 14.
 func (self *IFsrmQuotaBase) Get_QuotaFlags() (int32, error) {
 	var _quotaFlags int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_quotaFlags)))
-	return _quotaFlags, win32.HRESULTError(int32(r1))
+	return _quotaFlags, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_QuotaFlags dispatches through IFsrmQuotaBase's vtable slot 15.
 func (self *IFsrmQuotaBase) Put_QuotaFlags(quotaFlags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(quotaFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Thresholds dispatches through IFsrmQuotaBase's vtable slot 16.
 func (self *IFsrmQuotaBase) Get_Thresholds() (*systemcom.SAFEARRAY, error) {
 	var _thresholds *systemcom.SAFEARRAY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_thresholds)))
-	return _thresholds, win32.HRESULTError(int32(r1))
+	return _thresholds, win32.ErrIfFailed(int32(r1))
 }
 
 // AddThreshold dispatches through IFsrmQuotaBase's vtable slot 17.
 func (self *IFsrmQuotaBase) AddThreshold(threshold int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(threshold))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteThreshold dispatches through IFsrmQuotaBase's vtable slot 18.
 func (self *IFsrmQuotaBase) DeleteThreshold(threshold int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(threshold))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ModifyThreshold dispatches through IFsrmQuotaBase's vtable slot 19.
 func (self *IFsrmQuotaBase) ModifyThreshold(threshold int32, newThreshold int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(threshold), uintptr(newThreshold))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateThresholdAction dispatches through IFsrmQuotaBase's vtable slot 20.
 func (self *IFsrmQuotaBase) CreateThresholdAction(threshold int32, actionType FsrmActionType) (*IFsrmAction, error) {
 	var _action *IFsrmAction
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(threshold), uintptr(actionType), uintptr(unsafe.Pointer(&_action)))
-	return _action, win32.HRESULTError(int32(r1))
+	return _action, win32.ErrIfFailed(int32(r1))
 }
 
 // EnumThresholdActions dispatches through IFsrmQuotaBase's vtable slot 21.
 func (self *IFsrmQuotaBase) EnumThresholdActions(threshold int32) (*IFsrmCollection, error) {
 	var _actions *IFsrmCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(threshold), uintptr(unsafe.Pointer(&_actions)))
-	return _actions, win32.HRESULTError(int32(r1))
+	return _actions, win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmQuotaManager: https://learn.microsoft.com/windows/win32/api/fsrmquota/nn-fsrmquota-ifsrmquotamanager
@@ -2568,83 +2568,83 @@ var IID_IFsrmQuotaManager = win32.GUID{Data1: 0x8bb68c7d, Data2: 0x19d8, Data3: 
 func (self *IFsrmQuotaManager) Get_ActionVariables() (*systemcom.SAFEARRAY, error) {
 	var _variables *systemcom.SAFEARRAY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_variables)))
-	return _variables, win32.HRESULTError(int32(r1))
+	return _variables, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ActionVariableDescriptions dispatches through IFsrmQuotaManager's vtable slot 8.
 func (self *IFsrmQuotaManager) Get_ActionVariableDescriptions() (*systemcom.SAFEARRAY, error) {
 	var _descriptions *systemcom.SAFEARRAY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_descriptions)))
-	return _descriptions, win32.HRESULTError(int32(r1))
+	return _descriptions, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateQuota dispatches through IFsrmQuotaManager's vtable slot 9.
 func (self *IFsrmQuotaManager) CreateQuota(path foundation.BSTR) (*IFsrmQuota, error) {
 	var _quota *IFsrmQuota
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(&_quota)))
-	return _quota, win32.HRESULTError(int32(r1))
+	return _quota, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateAutoApplyQuota dispatches through IFsrmQuotaManager's vtable slot 10.
 func (self *IFsrmQuotaManager) CreateAutoApplyQuota(quotaTemplateName foundation.BSTR, path foundation.BSTR) (*IFsrmAutoApplyQuota, error) {
 	var _quota *IFsrmAutoApplyQuota
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(quotaTemplateName)), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(&_quota)))
-	return _quota, win32.HRESULTError(int32(r1))
+	return _quota, win32.ErrIfFailed(int32(r1))
 }
 
 // GetQuota dispatches through IFsrmQuotaManager's vtable slot 11.
 func (self *IFsrmQuotaManager) GetQuota(path foundation.BSTR) (*IFsrmQuota, error) {
 	var _quota *IFsrmQuota
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(&_quota)))
-	return _quota, win32.HRESULTError(int32(r1))
+	return _quota, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAutoApplyQuota dispatches through IFsrmQuotaManager's vtable slot 12.
 func (self *IFsrmQuotaManager) GetAutoApplyQuota(path foundation.BSTR) (*IFsrmAutoApplyQuota, error) {
 	var _quota *IFsrmAutoApplyQuota
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(&_quota)))
-	return _quota, win32.HRESULTError(int32(r1))
+	return _quota, win32.ErrIfFailed(int32(r1))
 }
 
 // GetRestrictiveQuota dispatches through IFsrmQuotaManager's vtable slot 13.
 func (self *IFsrmQuotaManager) GetRestrictiveQuota(path foundation.BSTR) (*IFsrmQuota, error) {
 	var _quota *IFsrmQuota
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(&_quota)))
-	return _quota, win32.HRESULTError(int32(r1))
+	return _quota, win32.ErrIfFailed(int32(r1))
 }
 
 // EnumQuotas dispatches through IFsrmQuotaManager's vtable slot 14.
 func (self *IFsrmQuotaManager) EnumQuotas(path foundation.BSTR, options FsrmEnumOptions) (*IFsrmCommittableCollection, error) {
 	var _quotas *IFsrmCommittableCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)), uintptr(options), uintptr(unsafe.Pointer(&_quotas)))
-	return _quotas, win32.HRESULTError(int32(r1))
+	return _quotas, win32.ErrIfFailed(int32(r1))
 }
 
 // EnumAutoApplyQuotas dispatches through IFsrmQuotaManager's vtable slot 15.
 func (self *IFsrmQuotaManager) EnumAutoApplyQuotas(path foundation.BSTR, options FsrmEnumOptions) (*IFsrmCommittableCollection, error) {
 	var _quotas *IFsrmCommittableCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)), uintptr(options), uintptr(unsafe.Pointer(&_quotas)))
-	return _quotas, win32.HRESULTError(int32(r1))
+	return _quotas, win32.ErrIfFailed(int32(r1))
 }
 
 // EnumEffectiveQuotas dispatches through IFsrmQuotaManager's vtable slot 16.
 func (self *IFsrmQuotaManager) EnumEffectiveQuotas(path foundation.BSTR, options FsrmEnumOptions) (*IFsrmCommittableCollection, error) {
 	var _quotas *IFsrmCommittableCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)), uintptr(options), uintptr(unsafe.Pointer(&_quotas)))
-	return _quotas, win32.HRESULTError(int32(r1))
+	return _quotas, win32.ErrIfFailed(int32(r1))
 }
 
 // Scan dispatches through IFsrmQuotaManager's vtable slot 17.
 func (self *IFsrmQuotaManager) Scan(strPath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateQuotaCollection dispatches through IFsrmQuotaManager's vtable slot 18.
 func (self *IFsrmQuotaManager) CreateQuotaCollection() (*IFsrmCommittableCollection, error) {
 	var _collection *IFsrmCommittableCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_collection)))
-	return _collection, win32.HRESULTError(int32(r1))
+	return _collection, win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmQuotaManagerEx: https://learn.microsoft.com/windows/win32/api/fsrmquota/nn-fsrmquota-ifsrmquotamanagerex
@@ -2660,7 +2660,7 @@ var IID_IFsrmQuotaManagerEx = win32.GUID{Data1: 0x4846cb01, Data2: 0xd430, Data3
 func (self *IFsrmQuotaManagerEx) IsAffectedByQuota(path foundation.BSTR, options FsrmEnumOptions) (foundation.VARIANT_BOOL, error) {
 	var _affected foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)), uintptr(options), uintptr(unsafe.Pointer(&_affected)))
-	return _affected, win32.HRESULTError(int32(r1))
+	return _affected, win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmQuotaObject: https://learn.microsoft.com/windows/win32/api/fsrmquota/nn-fsrmquota-ifsrmquotaobject
@@ -2676,41 +2676,41 @@ var IID_IFsrmQuotaObject = win32.GUID{Data1: 0x42dc3511, Data2: 0x61d5, Data3: 0
 func (self *IFsrmQuotaObject) Get_Path() (foundation.BSTR, error) {
 	var _path foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_path)))
-	return _path, win32.HRESULTError(int32(r1))
+	return _path, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UserSid dispatches through IFsrmQuotaObject's vtable slot 23.
 func (self *IFsrmQuotaObject) Get_UserSid() (foundation.BSTR, error) {
 	var _userSid foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_userSid)))
-	return _userSid, win32.HRESULTError(int32(r1))
+	return _userSid, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UserAccount dispatches through IFsrmQuotaObject's vtable slot 24.
 func (self *IFsrmQuotaObject) Get_UserAccount() (foundation.BSTR, error) {
 	var _userAccount foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_userAccount)))
-	return _userAccount, win32.HRESULTError(int32(r1))
+	return _userAccount, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SourceTemplateName dispatches through IFsrmQuotaObject's vtable slot 25.
 func (self *IFsrmQuotaObject) Get_SourceTemplateName() (foundation.BSTR, error) {
 	var _quotaTemplateName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_quotaTemplateName)))
-	return _quotaTemplateName, win32.HRESULTError(int32(r1))
+	return _quotaTemplateName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MatchesSourceTemplate dispatches through IFsrmQuotaObject's vtable slot 26.
 func (self *IFsrmQuotaObject) Get_MatchesSourceTemplate() (foundation.VARIANT_BOOL, error) {
 	var _matches foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_matches)))
-	return _matches, win32.HRESULTError(int32(r1))
+	return _matches, win32.ErrIfFailed(int32(r1))
 }
 
 // ApplyTemplate dispatches through IFsrmQuotaObject's vtable slot 27.
 func (self *IFsrmQuotaObject) ApplyTemplate(quotaTemplateName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(quotaTemplateName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmQuotaTemplate: https://learn.microsoft.com/windows/win32/api/fsrmquota/nn-fsrmquota-ifsrmquotatemplate
@@ -2726,26 +2726,26 @@ var IID_IFsrmQuotaTemplate = win32.GUID{Data1: 0xa2efab31, Data2: 0x295e, Data3:
 func (self *IFsrmQuotaTemplate) Get_Name() (foundation.BSTR, error) {
 	var _name foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
-	return _name, win32.HRESULTError(int32(r1))
+	return _name, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Name dispatches through IFsrmQuotaTemplate's vtable slot 23.
 func (self *IFsrmQuotaTemplate) Put_Name(name foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CopyTemplate dispatches through IFsrmQuotaTemplate's vtable slot 24.
 func (self *IFsrmQuotaTemplate) CopyTemplate(quotaTemplateName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(quotaTemplateName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CommitAndUpdateDerived dispatches through IFsrmQuotaTemplate's vtable slot 25.
 func (self *IFsrmQuotaTemplate) CommitAndUpdateDerived(commitOptions FsrmCommitOptions, applyOptions FsrmTemplateApplyOptions) (*IFsrmDerivedObjectsResult, error) {
 	var _derivedObjectsResult *IFsrmDerivedObjectsResult
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(commitOptions), uintptr(applyOptions), uintptr(unsafe.Pointer(&_derivedObjectsResult)))
-	return _derivedObjectsResult, win32.HRESULTError(int32(r1))
+	return _derivedObjectsResult, win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmQuotaTemplateImported: https://learn.microsoft.com/windows/win32/api/fsrmquota/nn-fsrmquota-ifsrmquotatemplateimported
@@ -2761,13 +2761,13 @@ var IID_IFsrmQuotaTemplateImported = win32.GUID{Data1: 0x9a2bf113, Data2: 0xa329
 func (self *IFsrmQuotaTemplateImported) Get_OverwriteOnCommit() (foundation.VARIANT_BOOL, error) {
 	var _overwrite foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_overwrite)))
-	return _overwrite, win32.HRESULTError(int32(r1))
+	return _overwrite, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_OverwriteOnCommit dispatches through IFsrmQuotaTemplateImported's vtable slot 27.
 func (self *IFsrmQuotaTemplateImported) Put_OverwriteOnCommit(overwrite foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(overwrite))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmQuotaTemplateManager: https://learn.microsoft.com/windows/win32/api/fsrmquota/nn-fsrmquota-ifsrmquotatemplatemanager
@@ -2783,35 +2783,35 @@ var IID_IFsrmQuotaTemplateManager = win32.GUID{Data1: 0x4173ac41, Data2: 0x172d,
 func (self *IFsrmQuotaTemplateManager) CreateTemplate() (*IFsrmQuotaTemplate, error) {
 	var _quotaTemplate *IFsrmQuotaTemplate
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_quotaTemplate)))
-	return _quotaTemplate, win32.HRESULTError(int32(r1))
+	return _quotaTemplate, win32.ErrIfFailed(int32(r1))
 }
 
 // GetTemplate dispatches through IFsrmQuotaTemplateManager's vtable slot 8.
 func (self *IFsrmQuotaTemplateManager) GetTemplate(name foundation.BSTR) (*IFsrmQuotaTemplate, error) {
 	var _quotaTemplate *IFsrmQuotaTemplate
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(&_quotaTemplate)))
-	return _quotaTemplate, win32.HRESULTError(int32(r1))
+	return _quotaTemplate, win32.ErrIfFailed(int32(r1))
 }
 
 // EnumTemplates dispatches through IFsrmQuotaTemplateManager's vtable slot 9.
 func (self *IFsrmQuotaTemplateManager) EnumTemplates(options FsrmEnumOptions) (*IFsrmCommittableCollection, error) {
 	var _quotaTemplates *IFsrmCommittableCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(options), uintptr(unsafe.Pointer(&_quotaTemplates)))
-	return _quotaTemplates, win32.HRESULTError(int32(r1))
+	return _quotaTemplates, win32.ErrIfFailed(int32(r1))
 }
 
 // ExportTemplates dispatches through IFsrmQuotaTemplateManager's vtable slot 10.
 func (self *IFsrmQuotaTemplateManager) ExportTemplates(quotaTemplateNamesArray *systemvariant.VARIANT) (foundation.BSTR, error) {
 	var _serializedQuotaTemplates foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(quotaTemplateNamesArray)), uintptr(unsafe.Pointer(&_serializedQuotaTemplates)))
-	return _serializedQuotaTemplates, win32.HRESULTError(int32(r1))
+	return _serializedQuotaTemplates, win32.ErrIfFailed(int32(r1))
 }
 
 // ImportTemplates dispatches through IFsrmQuotaTemplateManager's vtable slot 11.
 func (self *IFsrmQuotaTemplateManager) ImportTemplates(serializedQuotaTemplates foundation.BSTR, quotaTemplateNamesArray *systemvariant.VARIANT) (*IFsrmCommittableCollection, error) {
 	var _quotaTemplates *IFsrmCommittableCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(serializedQuotaTemplates)), uintptr(unsafe.Pointer(quotaTemplateNamesArray)), uintptr(unsafe.Pointer(&_quotaTemplates)))
-	return _quotaTemplates, win32.HRESULTError(int32(r1))
+	return _quotaTemplates, win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmReport: https://learn.microsoft.com/windows/win32/api/fsrmreports/nn-fsrmreports-ifsrmreport
@@ -2827,53 +2827,53 @@ var IID_IFsrmReport = win32.GUID{Data1: 0xd8cc81d9, Data2: 0x46b8, Data3: 0x4fa4
 func (self *IFsrmReport) Get_Type() (FsrmReportType, error) {
 	var _reportType FsrmReportType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_reportType)))
-	return _reportType, win32.HRESULTError(int32(r1))
+	return _reportType, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through IFsrmReport's vtable slot 8.
 func (self *IFsrmReport) Get_Name() (foundation.BSTR, error) {
 	var _name foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
-	return _name, win32.HRESULTError(int32(r1))
+	return _name, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Name dispatches through IFsrmReport's vtable slot 9.
 func (self *IFsrmReport) Put_Name(name foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through IFsrmReport's vtable slot 10.
 func (self *IFsrmReport) Get_Description() (foundation.BSTR, error) {
 	var _description foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_description)))
-	return _description, win32.HRESULTError(int32(r1))
+	return _description, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Description dispatches through IFsrmReport's vtable slot 11.
 func (self *IFsrmReport) Put_Description(description foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(description)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastGeneratedFileNamePrefix dispatches through IFsrmReport's vtable slot 12.
 func (self *IFsrmReport) Get_LastGeneratedFileNamePrefix() (foundation.BSTR, error) {
 	var _prefix foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_prefix)))
-	return _prefix, win32.HRESULTError(int32(r1))
+	return _prefix, win32.ErrIfFailed(int32(r1))
 }
 
 // GetFilter dispatches through IFsrmReport's vtable slot 13.
 func (self *IFsrmReport) GetFilter(filter FsrmReportFilter) (systemvariant.VARIANT, error) {
 	var _filterValue systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(filter), uintptr(unsafe.Pointer(&_filterValue)))
-	return _filterValue, win32.HRESULTError(int32(r1))
+	return _filterValue, win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IFsrmReport's vtable slot 15.
 func (self *IFsrmReport) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmReportJob: https://learn.microsoft.com/windows/win32/api/fsrmreports/nn-fsrmreports-ifsrmreportjob
@@ -2889,113 +2889,113 @@ var IID_IFsrmReportJob = win32.GUID{Data1: 0x38e87280, Data2: 0x715c, Data3: 0x4
 func (self *IFsrmReportJob) Get_Task() (foundation.BSTR, error) {
 	var _taskName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_taskName)))
-	return _taskName, win32.HRESULTError(int32(r1))
+	return _taskName, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Task dispatches through IFsrmReportJob's vtable slot 13.
 func (self *IFsrmReportJob) Put_Task(taskName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(taskName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NamespaceRoots dispatches through IFsrmReportJob's vtable slot 14.
 func (self *IFsrmReportJob) Get_NamespaceRoots() (*systemcom.SAFEARRAY, error) {
 	var _namespaceRoots *systemcom.SAFEARRAY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_namespaceRoots)))
-	return _namespaceRoots, win32.HRESULTError(int32(r1))
+	return _namespaceRoots, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_NamespaceRoots dispatches through IFsrmReportJob's vtable slot 15.
 func (self *IFsrmReportJob) Put_NamespaceRoots(namespaceRoots *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(namespaceRoots)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Formats dispatches through IFsrmReportJob's vtable slot 16.
 func (self *IFsrmReportJob) Get_Formats() (*systemcom.SAFEARRAY, error) {
 	var _formats *systemcom.SAFEARRAY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_formats)))
-	return _formats, win32.HRESULTError(int32(r1))
+	return _formats, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Formats dispatches through IFsrmReportJob's vtable slot 17.
 func (self *IFsrmReportJob) Put_Formats(formats *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(formats)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MailTo dispatches through IFsrmReportJob's vtable slot 18.
 func (self *IFsrmReportJob) Get_MailTo() (foundation.BSTR, error) {
 	var _mailTo foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_mailTo)))
-	return _mailTo, win32.HRESULTError(int32(r1))
+	return _mailTo, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MailTo dispatches through IFsrmReportJob's vtable slot 19.
 func (self *IFsrmReportJob) Put_MailTo(mailTo foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(mailTo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RunningStatus dispatches through IFsrmReportJob's vtable slot 20.
 func (self *IFsrmReportJob) Get_RunningStatus() (FsrmReportRunningStatus, error) {
 	var _runningStatus FsrmReportRunningStatus
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_runningStatus)))
-	return _runningStatus, win32.HRESULTError(int32(r1))
+	return _runningStatus, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastRun dispatches through IFsrmReportJob's vtable slot 21.
 func (self *IFsrmReportJob) Get_LastRun() (float64, error) {
 	var _lastRun float64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lastRun)))
-	return _lastRun, win32.HRESULTError(int32(r1))
+	return _lastRun, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastError dispatches through IFsrmReportJob's vtable slot 22.
 func (self *IFsrmReportJob) Get_LastError() (foundation.BSTR, error) {
 	var _lastError foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lastError)))
-	return _lastError, win32.HRESULTError(int32(r1))
+	return _lastError, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastGeneratedInDirectory dispatches through IFsrmReportJob's vtable slot 23.
 func (self *IFsrmReportJob) Get_LastGeneratedInDirectory() (foundation.BSTR, error) {
 	var _path foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_path)))
-	return _path, win32.HRESULTError(int32(r1))
+	return _path, win32.ErrIfFailed(int32(r1))
 }
 
 // EnumReports dispatches through IFsrmReportJob's vtable slot 24.
 func (self *IFsrmReportJob) EnumReports() (*IFsrmCollection, error) {
 	var _reports *IFsrmCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_reports)))
-	return _reports, win32.HRESULTError(int32(r1))
+	return _reports, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateReport dispatches through IFsrmReportJob's vtable slot 25.
 func (self *IFsrmReportJob) CreateReport(reportType FsrmReportType) (*IFsrmReport, error) {
 	var _report *IFsrmReport
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(reportType), uintptr(unsafe.Pointer(&_report)))
-	return _report, win32.HRESULTError(int32(r1))
+	return _report, win32.ErrIfFailed(int32(r1))
 }
 
 // Run dispatches through IFsrmReportJob's vtable slot 26.
 func (self *IFsrmReportJob) Run(context FsrmReportGenerationContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(context))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WaitForCompletion dispatches through IFsrmReportJob's vtable slot 27.
 func (self *IFsrmReportJob) WaitForCompletion(waitSeconds int32) (foundation.VARIANT_BOOL, error) {
 	var _completed foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(waitSeconds), uintptr(unsafe.Pointer(&_completed)))
-	return _completed, win32.HRESULTError(int32(r1))
+	return _completed, win32.ErrIfFailed(int32(r1))
 }
 
 // Cancel dispatches through IFsrmReportJob's vtable slot 28.
 func (self *IFsrmReportJob) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmReportManager: https://learn.microsoft.com/windows/win32/api/fsrmreports/nn-fsrmreports-ifsrmreportmanager
@@ -3011,55 +3011,55 @@ var IID_IFsrmReportManager = win32.GUID{Data1: 0x27b899fe, Data2: 0x6ffa, Data3:
 func (self *IFsrmReportManager) EnumReportJobs(options FsrmEnumOptions) (*IFsrmCollection, error) {
 	var _reportJobs *IFsrmCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(options), uintptr(unsafe.Pointer(&_reportJobs)))
-	return _reportJobs, win32.HRESULTError(int32(r1))
+	return _reportJobs, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateReportJob dispatches through IFsrmReportManager's vtable slot 8.
 func (self *IFsrmReportManager) CreateReportJob() (*IFsrmReportJob, error) {
 	var _reportJob *IFsrmReportJob
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_reportJob)))
-	return _reportJob, win32.HRESULTError(int32(r1))
+	return _reportJob, win32.ErrIfFailed(int32(r1))
 }
 
 // GetReportJob dispatches through IFsrmReportManager's vtable slot 9.
 func (self *IFsrmReportManager) GetReportJob(taskName foundation.BSTR) (*IFsrmReportJob, error) {
 	var _reportJob *IFsrmReportJob
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(taskName)), uintptr(unsafe.Pointer(&_reportJob)))
-	return _reportJob, win32.HRESULTError(int32(r1))
+	return _reportJob, win32.ErrIfFailed(int32(r1))
 }
 
 // GetOutputDirectory dispatches through IFsrmReportManager's vtable slot 10.
 func (self *IFsrmReportManager) GetOutputDirectory(context FsrmReportGenerationContext) (foundation.BSTR, error) {
 	var _path foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(context), uintptr(unsafe.Pointer(&_path)))
-	return _path, win32.HRESULTError(int32(r1))
+	return _path, win32.ErrIfFailed(int32(r1))
 }
 
 // SetOutputDirectory dispatches through IFsrmReportManager's vtable slot 11.
 func (self *IFsrmReportManager) SetOutputDirectory(context FsrmReportGenerationContext, path foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(context), uintptr(unsafe.Pointer(path)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsFilterValidForReportType dispatches through IFsrmReportManager's vtable slot 12.
 func (self *IFsrmReportManager) IsFilterValidForReportType(reportType FsrmReportType, filter FsrmReportFilter) (foundation.VARIANT_BOOL, error) {
 	var _valid foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(reportType), uintptr(filter), uintptr(unsafe.Pointer(&_valid)))
-	return _valid, win32.HRESULTError(int32(r1))
+	return _valid, win32.ErrIfFailed(int32(r1))
 }
 
 // GetDefaultFilter dispatches through IFsrmReportManager's vtable slot 13.
 func (self *IFsrmReportManager) GetDefaultFilter(reportType FsrmReportType, filter FsrmReportFilter) (systemvariant.VARIANT, error) {
 	var _filterValue systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(reportType), uintptr(filter), uintptr(unsafe.Pointer(&_filterValue)))
-	return _filterValue, win32.HRESULTError(int32(r1))
+	return _filterValue, win32.ErrIfFailed(int32(r1))
 }
 
 // GetReportSizeLimit dispatches through IFsrmReportManager's vtable slot 15.
 func (self *IFsrmReportManager) GetReportSizeLimit(limit FsrmReportLimit) (systemvariant.VARIANT, error) {
 	var _limitValue systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(limit), uintptr(unsafe.Pointer(&_limitValue)))
-	return _limitValue, win32.HRESULTError(int32(r1))
+	return _limitValue, win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmReportScheduler: https://learn.microsoft.com/windows/win32/api/fsrmreports/nn-fsrmreports-ifsrmreportscheduler
@@ -3074,25 +3074,25 @@ var IID_IFsrmReportScheduler = win32.GUID{Data1: 0x6879caf9, Data2: 0x6617, Data
 // VerifyNamespaces dispatches through IFsrmReportScheduler's vtable slot 7.
 func (self *IFsrmReportScheduler) VerifyNamespaces(namespacesSafeArray *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(namespacesSafeArray)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateScheduleTask dispatches through IFsrmReportScheduler's vtable slot 8.
 func (self *IFsrmReportScheduler) CreateScheduleTask(taskName foundation.BSTR, namespacesSafeArray *systemvariant.VARIANT, serializedTask foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(taskName)), uintptr(unsafe.Pointer(namespacesSafeArray)), uintptr(unsafe.Pointer(serializedTask)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ModifyScheduleTask dispatches through IFsrmReportScheduler's vtable slot 9.
 func (self *IFsrmReportScheduler) ModifyScheduleTask(taskName foundation.BSTR, namespacesSafeArray *systemvariant.VARIANT, serializedTask foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(taskName)), uintptr(unsafe.Pointer(namespacesSafeArray)), uintptr(unsafe.Pointer(serializedTask)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteScheduleTask dispatches through IFsrmReportScheduler's vtable slot 10.
 func (self *IFsrmReportScheduler) DeleteScheduleTask(taskName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(taskName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmRule: https://learn.microsoft.com/windows/win32/api/fsrmpipeline/nn-fsrmpipeline-ifsrmrule
@@ -3108,79 +3108,79 @@ var IID_IFsrmRule = win32.GUID{Data1: 0xcb0df960, Data2: 0x16f5, Data3: 0x4495, 
 func (self *IFsrmRule) Get_Name() (foundation.BSTR, error) {
 	var _name foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
-	return _name, win32.HRESULTError(int32(r1))
+	return _name, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Name dispatches through IFsrmRule's vtable slot 13.
 func (self *IFsrmRule) Put_Name(name foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RuleType dispatches through IFsrmRule's vtable slot 14.
 func (self *IFsrmRule) Get_RuleType() (FsrmRuleType, error) {
 	var _ruleType FsrmRuleType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ruleType)))
-	return _ruleType, win32.HRESULTError(int32(r1))
+	return _ruleType, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ModuleDefinitionName dispatches through IFsrmRule's vtable slot 15.
 func (self *IFsrmRule) Get_ModuleDefinitionName() (foundation.BSTR, error) {
 	var _moduleDefinitionName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_moduleDefinitionName)))
-	return _moduleDefinitionName, win32.HRESULTError(int32(r1))
+	return _moduleDefinitionName, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ModuleDefinitionName dispatches through IFsrmRule's vtable slot 16.
 func (self *IFsrmRule) Put_ModuleDefinitionName(moduleDefinitionName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(moduleDefinitionName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NamespaceRoots dispatches through IFsrmRule's vtable slot 17.
 func (self *IFsrmRule) Get_NamespaceRoots() (*systemcom.SAFEARRAY, error) {
 	var _namespaceRoots *systemcom.SAFEARRAY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_namespaceRoots)))
-	return _namespaceRoots, win32.HRESULTError(int32(r1))
+	return _namespaceRoots, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_NamespaceRoots dispatches through IFsrmRule's vtable slot 18.
 func (self *IFsrmRule) Put_NamespaceRoots(namespaceRoots *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(namespaceRoots)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RuleFlags dispatches through IFsrmRule's vtable slot 19.
 func (self *IFsrmRule) Get_RuleFlags() (int32, error) {
 	var _ruleFlags int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ruleFlags)))
-	return _ruleFlags, win32.HRESULTError(int32(r1))
+	return _ruleFlags, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RuleFlags dispatches through IFsrmRule's vtable slot 20.
 func (self *IFsrmRule) Put_RuleFlags(ruleFlags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(ruleFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Parameters dispatches through IFsrmRule's vtable slot 21.
 func (self *IFsrmRule) Get_Parameters() (*systemcom.SAFEARRAY, error) {
 	var _parameters *systemcom.SAFEARRAY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_parameters)))
-	return _parameters, win32.HRESULTError(int32(r1))
+	return _parameters, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Parameters dispatches through IFsrmRule's vtable slot 22.
 func (self *IFsrmRule) Put_Parameters(parameters *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(parameters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastModified dispatches through IFsrmRule's vtable slot 23.
 func (self *IFsrmRule) Get_LastModified() (systemvariant.VARIANT, error) {
 	var _lastModified systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lastModified)))
-	return _lastModified, win32.HRESULTError(int32(r1))
+	return _lastModified, win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmSetting: https://learn.microsoft.com/windows/win32/api/fsrm/nn-fsrm-ifsrmsetting
@@ -3196,84 +3196,84 @@ var IID_IFsrmSetting = win32.GUID{Data1: 0xf411d4fd, Data2: 0x14be, Data3: 0x426
 func (self *IFsrmSetting) Get_SmtpServer() (foundation.BSTR, error) {
 	var _smtpServer foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_smtpServer)))
-	return _smtpServer, win32.HRESULTError(int32(r1))
+	return _smtpServer, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SmtpServer dispatches through IFsrmSetting's vtable slot 8.
 func (self *IFsrmSetting) Put_SmtpServer(smtpServer foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(smtpServer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MailFrom dispatches through IFsrmSetting's vtable slot 9.
 func (self *IFsrmSetting) Get_MailFrom() (foundation.BSTR, error) {
 	var _mailFrom foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_mailFrom)))
-	return _mailFrom, win32.HRESULTError(int32(r1))
+	return _mailFrom, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MailFrom dispatches through IFsrmSetting's vtable slot 10.
 func (self *IFsrmSetting) Put_MailFrom(mailFrom foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(mailFrom)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AdminEmail dispatches through IFsrmSetting's vtable slot 11.
 func (self *IFsrmSetting) Get_AdminEmail() (foundation.BSTR, error) {
 	var _adminEmail foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_adminEmail)))
-	return _adminEmail, win32.HRESULTError(int32(r1))
+	return _adminEmail, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AdminEmail dispatches through IFsrmSetting's vtable slot 12.
 func (self *IFsrmSetting) Put_AdminEmail(adminEmail foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(adminEmail)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DisableCommandLine dispatches through IFsrmSetting's vtable slot 13.
 func (self *IFsrmSetting) Get_DisableCommandLine() (foundation.VARIANT_BOOL, error) {
 	var _disableCommandLine foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_disableCommandLine)))
-	return _disableCommandLine, win32.HRESULTError(int32(r1))
+	return _disableCommandLine, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DisableCommandLine dispatches through IFsrmSetting's vtable slot 14.
 func (self *IFsrmSetting) Put_DisableCommandLine(disableCommandLine foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(disableCommandLine))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EnableScreeningAudit dispatches through IFsrmSetting's vtable slot 15.
 func (self *IFsrmSetting) Get_EnableScreeningAudit() (foundation.VARIANT_BOOL, error) {
 	var _enableScreeningAudit foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_enableScreeningAudit)))
-	return _enableScreeningAudit, win32.HRESULTError(int32(r1))
+	return _enableScreeningAudit, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EnableScreeningAudit dispatches through IFsrmSetting's vtable slot 16.
 func (self *IFsrmSetting) Put_EnableScreeningAudit(enableScreeningAudit foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(enableScreeningAudit))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EmailTest dispatches through IFsrmSetting's vtable slot 17.
 func (self *IFsrmSetting) EmailTest(mailTo foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(mailTo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetActionRunLimitInterval dispatches through IFsrmSetting's vtable slot 18.
 func (self *IFsrmSetting) SetActionRunLimitInterval(actionType FsrmActionType, delayTimeMinutes int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(actionType), uintptr(delayTimeMinutes))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetActionRunLimitInterval dispatches through IFsrmSetting's vtable slot 19.
 func (self *IFsrmSetting) GetActionRunLimitInterval(actionType FsrmActionType) (int32, error) {
 	var _delayTimeMinutes int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(actionType), uintptr(unsafe.Pointer(&_delayTimeMinutes)))
-	return _delayTimeMinutes, win32.HRESULTError(int32(r1))
+	return _delayTimeMinutes, win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmStorageModuleDefinition: https://learn.microsoft.com/windows/win32/api/fsrmpipeline/nn-fsrmpipeline-ifsrmstoragemoduledefinition
@@ -3289,39 +3289,39 @@ var IID_IFsrmStorageModuleDefinition = win32.GUID{Data1: 0x15a81350, Data2: 0x49
 func (self *IFsrmStorageModuleDefinition) Get_Capabilities() (FsrmStorageModuleCaps, error) {
 	var _capabilities FsrmStorageModuleCaps
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_capabilities)))
-	return _capabilities, win32.HRESULTError(int32(r1))
+	return _capabilities, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Capabilities dispatches through IFsrmStorageModuleDefinition's vtable slot 32.
 func (self *IFsrmStorageModuleDefinition) Put_Capabilities(capabilities FsrmStorageModuleCaps) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(capabilities))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StorageType dispatches through IFsrmStorageModuleDefinition's vtable slot 33.
 func (self *IFsrmStorageModuleDefinition) Get_StorageType() (FsrmStorageModuleType, error) {
 	var _storageType FsrmStorageModuleType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_storageType)))
-	return _storageType, win32.HRESULTError(int32(r1))
+	return _storageType, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_StorageType dispatches through IFsrmStorageModuleDefinition's vtable slot 34.
 func (self *IFsrmStorageModuleDefinition) Put_StorageType(storageType FsrmStorageModuleType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(storageType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UpdatesFileContent dispatches through IFsrmStorageModuleDefinition's vtable slot 35.
 func (self *IFsrmStorageModuleDefinition) Get_UpdatesFileContent() (foundation.VARIANT_BOOL, error) {
 	var _updatesFileContent foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_updatesFileContent)))
-	return _updatesFileContent, win32.HRESULTError(int32(r1))
+	return _updatesFileContent, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_UpdatesFileContent dispatches through IFsrmStorageModuleDefinition's vtable slot 36.
 func (self *IFsrmStorageModuleDefinition) Put_UpdatesFileContent(updatesFileContent foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(updatesFileContent))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmStorageModuleImplementation: https://learn.microsoft.com/windows/win32/api/fsrmpipeline/nn-fsrmpipeline-ifsrmstoragemoduleimplementation
@@ -3336,17 +3336,17 @@ var IID_IFsrmStorageModuleImplementation = win32.GUID{Data1: 0x0af4a0da, Data2: 
 // UseDefinitions dispatches through IFsrmStorageModuleImplementation's vtable slot 9.
 func (self *IFsrmStorageModuleImplementation) UseDefinitions(propertyDefinitions *IFsrmCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propertyDefinitions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LoadProperties dispatches through IFsrmStorageModuleImplementation's vtable slot 10.
 func (self *IFsrmStorageModuleImplementation) LoadProperties(propertyBag *IFsrmPropertyBag) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propertyBag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SaveProperties dispatches through IFsrmStorageModuleImplementation's vtable slot 11.
 func (self *IFsrmStorageModuleImplementation) SaveProperties(propertyBag *IFsrmPropertyBag) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propertyBag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

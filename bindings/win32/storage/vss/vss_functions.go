@@ -30,7 +30,7 @@ var (
 // Minimum OS: windows5.1.2600.
 func CreateVssBackupComponentsInternal(ppBackup **IVssBackupComponents) error {
 	r1, _, _ := syscall.SyscallN(procCreateVssBackupComponentsInternal.Addr(), uintptr(unsafe.Pointer(ppBackup)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateVssExamineWriterMetadataInternal calls VSSAPI!CreateVssExamineWriterMetadataInternal.
@@ -38,7 +38,7 @@ func CreateVssBackupComponentsInternal(ppBackup **IVssBackupComponents) error {
 // Minimum OS: windows5.1.2600.
 func CreateVssExamineWriterMetadataInternal(bstrXML foundation.BSTR, ppMetadata **IVssExamineWriterMetadata) error {
 	r1, _, _ := syscall.SyscallN(procCreateVssExamineWriterMetadataInternal.Addr(), uintptr(unsafe.Pointer(bstrXML)), uintptr(unsafe.Pointer(ppMetadata)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateVssExpressWriterInternal calls VSSAPI!CreateVssExpressWriterInternal.
@@ -46,7 +46,7 @@ func CreateVssExamineWriterMetadataInternal(bstrXML foundation.BSTR, ppMetadata 
 // Minimum OS: windows6.1.
 func CreateVssExpressWriterInternal(ppWriter **IVssExpressWriter) error {
 	r1, _, _ := syscall.SyscallN(procCreateVssExpressWriterInternal.Addr(), uintptr(unsafe.Pointer(ppWriter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsVolumeSnapshottedInternal calls VSSAPI!IsVolumeSnapshottedInternal.
@@ -54,14 +54,14 @@ func CreateVssExpressWriterInternal(ppWriter **IVssExpressWriter) error {
 // Minimum OS: windows5.1.2600.
 func IsVolumeSnapshottedInternal(pwszVolumeName *uint16, pbSnapshotsPresent *foundation.BOOL, plSnapshotCapability *int32) error {
 	r1, _, _ := syscall.SyscallN(procIsVolumeSnapshottedInternal.Addr(), uintptr(unsafe.Pointer(pwszVolumeName)), uintptr(unsafe.Pointer(pbSnapshotsPresent)), uintptr(unsafe.Pointer(plSnapshotCapability)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ShouldBlockRevertInternal calls VSSAPI!ShouldBlockRevertInternal.
 func ShouldBlockRevertInternal(wszVolumeName string, pbBlock *bool) error {
 	_wszVolumeName := win32.UTF16Ptr(wszVolumeName)
 	r1, _, _ := syscall.SyscallN(procShouldBlockRevertInternal.Addr(), uintptr(unsafe.Pointer(_wszVolumeName)), uintptr(unsafe.Pointer(pbBlock)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // VssFreeSnapshotPropertiesInternal calls VSSAPI!VssFreeSnapshotPropertiesInternal.

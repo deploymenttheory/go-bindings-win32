@@ -26,13 +26,13 @@ var IID_IDialBranding = win32.GUID{Data1: 0x8aecafa9, Data2: 0x4306, Data3: 0x43
 func (self *IDialBranding) Initialize(pwzConnectoid string) error {
 	_pwzConnectoid := win32.UTF16Ptr(pwzConnectoid)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzConnectoid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBitmap dispatches through IDialBranding's vtable slot 4.
 func (self *IDialBranding) GetBitmap(dwIndex uint32, phBitmap *graphicsgdi.HBITMAP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(phBitmap)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 39fd782b-7905-40d5-9148-3c9b190423d5
@@ -47,7 +47,7 @@ var IID_IDialEngine = win32.GUID{Data1: 0x39fd782b, Data2: 0x7905, Data3: 0x40d5
 func (self *IDialEngine) Initialize(pwzConnectoid string, pIDES *IDialEventSink) error {
 	_pwzConnectoid := win32.UTF16Ptr(pwzConnectoid)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzConnectoid)), uintptr(unsafe.Pointer(pIDES)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProperty dispatches through IDialEngine's vtable slot 4.
@@ -55,7 +55,7 @@ func (self *IDialEngine) GetProperty(pwzProperty string, pwzValue string, dwBufS
 	_pwzProperty := win32.UTF16Ptr(pwzProperty)
 	_pwzValue := win32.UTF16Ptr(pwzValue)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzProperty)), uintptr(unsafe.Pointer(_pwzValue)), uintptr(dwBufSize))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetProperty dispatches through IDialEngine's vtable slot 5.
@@ -63,31 +63,31 @@ func (self *IDialEngine) SetProperty(pwzProperty string, pwzValue string) error 
 	_pwzProperty := win32.UTF16Ptr(pwzProperty)
 	_pwzValue := win32.UTF16Ptr(pwzValue)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzProperty)), uintptr(unsafe.Pointer(_pwzValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Dial dispatches through IDialEngine's vtable slot 6.
 func (self *IDialEngine) Dial() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HangUp dispatches through IDialEngine's vtable slot 7.
 func (self *IDialEngine) HangUp() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetConnectedState dispatches through IDialEngine's vtable slot 8.
 func (self *IDialEngine) GetConnectedState(pdwState *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetConnectHandle dispatches through IDialEngine's vtable slot 9.
 func (self *IDialEngine) GetConnectHandle(pdwHandle *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwHandle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 2d86f4ff-6e2d-4488-b2e9-6934afd41bea
@@ -101,7 +101,7 @@ var IID_IDialEventSink = win32.GUID{Data1: 0x2d86f4ff, Data2: 0x6e2d, Data3: 0x4
 // OnEvent dispatches through IDialEventSink's vtable slot 3.
 func (self *IDialEventSink) OnEvent(dwEvent uint32, dwStatus uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwEvent), uintptr(dwStatus))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IProofOfPossessionCookieInfoManager: https://learn.microsoft.com/windows/win32/api/proofofpossessioncookieinfo/nn-proofofpossessioncookieinfo-iproofofpossessioncookieinfomanager
@@ -117,7 +117,7 @@ var IID_IProofOfPossessionCookieInfoManager = win32.GUID{Data1: 0xcdaece56, Data
 func (self *IProofOfPossessionCookieInfoManager) GetCookieInfoForUri(uri string, cookieInfoCount *uint32, cookieInfo **ProofOfPossessionCookieInfo) error {
 	_uri := win32.UTF16Ptr(uri)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_uri)), uintptr(unsafe.Pointer(cookieInfoCount)), uintptr(unsafe.Pointer(cookieInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IProofOfPossessionCookieInfoManager2: https://learn.microsoft.com/windows/win32/api/proofofpossessioncookieinfo/nn-proofofpossessioncookieinfo-iproofofpossessioncookieinfomanager2
@@ -133,7 +133,7 @@ var IID_IProofOfPossessionCookieInfoManager2 = win32.GUID{Data1: 0x15e41407, Dat
 func (self *IProofOfPossessionCookieInfoManager2) GetCookieInfoWithUriForAccount(webAccount *systemwinrt.IInspectable, uri string, cookieInfoCount *uint32, cookieInfo **ProofOfPossessionCookieInfo) error {
 	_uri := win32.UTF16Ptr(uri)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(webAccount)), uintptr(unsafe.Pointer(_uri)), uintptr(unsafe.Pointer(cookieInfoCount)), uintptr(unsafe.Pointer(cookieInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: c8891744-32bd-4a77-b92c-0e79a2823b96
@@ -148,7 +148,7 @@ var IID_IProofOfPossessionCookieInfoManager3 = win32.GUID{Data1: 0xc8891744, Dat
 func (self *IProofOfPossessionCookieInfoManager3) GetCookieInfoForUriWithOptions(uri string, options uint32, cookieInfoCount *uint32, cookieInfo **ProofOfPossessionCookieInfo) error {
 	_uri := win32.UTF16Ptr(uri)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_uri)), uintptr(options), uintptr(unsafe.Pointer(cookieInfoCount)), uintptr(unsafe.Pointer(cookieInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IProofOfPossessionCookieInfoManager4: https://learn.microsoft.com/windows/win32/WinInet/proofofpossessioncookieinfo/nn-proofofpossessioncookieinfo-iproofofpossessioncookieinfomanager4
@@ -165,7 +165,7 @@ func (self *IProofOfPossessionCookieInfoManager4) GetCookieInfoForUriWithUserAge
 	_uri := win32.UTF16Ptr(uri)
 	_uaClientId := win32.UTF16Ptr(uaClientId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_uri)), uintptr(unsafe.Pointer(_uaClientId)), uintptr(unsafe.Pointer(cookieInfoCount)), uintptr(unsafe.Pointer(cookieInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCookieInfoWithUriAndUserAgentIdForAccount dispatches through IProofOfPossessionCookieInfoManager4's vtable slot 4.
@@ -173,5 +173,5 @@ func (self *IProofOfPossessionCookieInfoManager4) GetCookieInfoWithUriAndUserAge
 	_uri := win32.UTF16Ptr(uri)
 	_uaClientId := win32.UTF16Ptr(uaClientId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(webAccount)), uintptr(unsafe.Pointer(_uri)), uintptr(unsafe.Pointer(_uaClientId)), uintptr(unsafe.Pointer(cookieInfoCount)), uintptr(unsafe.Pointer(cookieInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

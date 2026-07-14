@@ -29,61 +29,61 @@ var IID_IADs = win32.GUID{Data1: 0xfd8256d0, Data2: 0xfd15, Data3: 0x11ce, Data4
 // Get_Name dispatches through IADs's vtable slot 7.
 func (self *IADs) Get_Name(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Class dispatches through IADs's vtable slot 8.
 func (self *IADs) Get_Class(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_GUID dispatches through IADs's vtable slot 9.
 func (self *IADs) Get_GUID(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ADsPath dispatches through IADs's vtable slot 10.
 func (self *IADs) Get_ADsPath(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Parent dispatches through IADs's vtable slot 11.
 func (self *IADs) Get_Parent(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Schema dispatches through IADs's vtable slot 12.
 func (self *IADs) Get_Schema(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInfo dispatches through IADs's vtable slot 13.
 func (self *IADs) GetInfo() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetInfo dispatches through IADs's vtable slot 14.
 func (self *IADs) SetInfo() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get dispatches through IADs's vtable slot 15.
 func (self *IADs) Get(bstrName foundation.BSTR, pvProp *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(pvProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEx dispatches through IADs's vtable slot 17.
 func (self *IADs) GetEx(bstrName foundation.BSTR, pvProp *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(pvProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsADSystemInfo: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsadsysteminfo
@@ -98,79 +98,79 @@ var IID_IADsADSystemInfo = win32.GUID{Data1: 0x5bb11929, Data2: 0xafd1, Data3: 0
 // Get_UserName dispatches through IADsADSystemInfo's vtable slot 7.
 func (self *IADsADSystemInfo) Get_UserName(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ComputerName dispatches through IADsADSystemInfo's vtable slot 8.
 func (self *IADsADSystemInfo) Get_ComputerName(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SiteName dispatches through IADsADSystemInfo's vtable slot 9.
 func (self *IADsADSystemInfo) Get_SiteName(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DomainShortName dispatches through IADsADSystemInfo's vtable slot 10.
 func (self *IADsADSystemInfo) Get_DomainShortName(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DomainDNSName dispatches through IADsADSystemInfo's vtable slot 11.
 func (self *IADsADSystemInfo) Get_DomainDNSName(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ForestDNSName dispatches through IADsADSystemInfo's vtable slot 12.
 func (self *IADsADSystemInfo) Get_ForestDNSName(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PDCRoleOwner dispatches through IADsADSystemInfo's vtable slot 13.
 func (self *IADsADSystemInfo) Get_PDCRoleOwner(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SchemaRoleOwner dispatches through IADsADSystemInfo's vtable slot 14.
 func (self *IADsADSystemInfo) Get_SchemaRoleOwner(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsNativeMode dispatches through IADsADSystemInfo's vtable slot 15.
 func (self *IADsADSystemInfo) Get_IsNativeMode(retval *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAnyDCName dispatches through IADsADSystemInfo's vtable slot 16.
 func (self *IADsADSystemInfo) GetAnyDCName(pszDCName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszDCName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDCSiteName dispatches through IADsADSystemInfo's vtable slot 17.
 func (self *IADsADSystemInfo) GetDCSiteName(szServer foundation.BSTR, pszSiteName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szServer)), uintptr(unsafe.Pointer(pszSiteName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RefreshSchemaCache dispatches through IADsADSystemInfo's vtable slot 18.
 func (self *IADsADSystemInfo) RefreshSchemaCache() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTrees dispatches through IADsADSystemInfo's vtable slot 19.
 func (self *IADsADSystemInfo) GetTrees(pvTrees *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvTrees)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsAccessControlEntry: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsaccesscontrolentry
@@ -185,85 +185,85 @@ var IID_IADsAccessControlEntry = win32.GUID{Data1: 0xb4f3a14c, Data2: 0x9bdd, Da
 // Get_AccessMask dispatches through IADsAccessControlEntry's vtable slot 7.
 func (self *IADsAccessControlEntry) Get_AccessMask(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AccessMask dispatches through IADsAccessControlEntry's vtable slot 8.
 func (self *IADsAccessControlEntry) Put_AccessMask(lnAccessMask int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lnAccessMask))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AceType dispatches through IADsAccessControlEntry's vtable slot 9.
 func (self *IADsAccessControlEntry) Get_AceType(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AceType dispatches through IADsAccessControlEntry's vtable slot 10.
 func (self *IADsAccessControlEntry) Put_AceType(lnAceType int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lnAceType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AceFlags dispatches through IADsAccessControlEntry's vtable slot 11.
 func (self *IADsAccessControlEntry) Get_AceFlags(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AceFlags dispatches through IADsAccessControlEntry's vtable slot 12.
 func (self *IADsAccessControlEntry) Put_AceFlags(lnAceFlags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(lnAceFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Flags dispatches through IADsAccessControlEntry's vtable slot 13.
 func (self *IADsAccessControlEntry) Get_Flags(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Flags dispatches through IADsAccessControlEntry's vtable slot 14.
 func (self *IADsAccessControlEntry) Put_Flags(lnFlags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(lnFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ObjectType dispatches through IADsAccessControlEntry's vtable slot 15.
 func (self *IADsAccessControlEntry) Get_ObjectType(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ObjectType dispatches through IADsAccessControlEntry's vtable slot 16.
 func (self *IADsAccessControlEntry) Put_ObjectType(bstrObjectType foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrObjectType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InheritedObjectType dispatches through IADsAccessControlEntry's vtable slot 17.
 func (self *IADsAccessControlEntry) Get_InheritedObjectType(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_InheritedObjectType dispatches through IADsAccessControlEntry's vtable slot 18.
 func (self *IADsAccessControlEntry) Put_InheritedObjectType(bstrInheritedObjectType foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrInheritedObjectType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Trustee dispatches through IADsAccessControlEntry's vtable slot 19.
 func (self *IADsAccessControlEntry) Get_Trustee(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Trustee dispatches through IADsAccessControlEntry's vtable slot 20.
 func (self *IADsAccessControlEntry) Put_Trustee(bstrTrustee foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTrustee)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsAccessControlList: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsaccesscontrollist
@@ -278,49 +278,49 @@ var IID_IADsAccessControlList = win32.GUID{Data1: 0xb7ee91cc, Data2: 0x9bdd, Dat
 // Get_AclRevision dispatches through IADsAccessControlList's vtable slot 7.
 func (self *IADsAccessControlList) Get_AclRevision(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AclRevision dispatches through IADsAccessControlList's vtable slot 8.
 func (self *IADsAccessControlList) Put_AclRevision(lnAclRevision int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lnAclRevision))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AceCount dispatches through IADsAccessControlList's vtable slot 9.
 func (self *IADsAccessControlList) Get_AceCount(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AceCount dispatches through IADsAccessControlList's vtable slot 10.
 func (self *IADsAccessControlList) Put_AceCount(lnAceCount int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lnAceCount))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddAce dispatches through IADsAccessControlList's vtable slot 11.
 func (self *IADsAccessControlList) AddAce(pAccessControlEntry *systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAccessControlEntry)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAce dispatches through IADsAccessControlList's vtable slot 12.
 func (self *IADsAccessControlList) RemoveAce(pAccessControlEntry *systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAccessControlEntry)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CopyAccessList dispatches through IADsAccessControlList's vtable slot 13.
 func (self *IADsAccessControlList) CopyAccessList(ppAccessControlList **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAccessControlList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IADsAccessControlList's vtable slot 14.
 func (self *IADsAccessControlList) Get__NewEnum(retval **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsAcl: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsacl
@@ -335,43 +335,43 @@ var IID_IADsAcl = win32.GUID{Data1: 0x8452d3ab, Data2: 0x0869, Data3: 0x11d1, Da
 // Get_ProtectedAttrName dispatches through IADsAcl's vtable slot 7.
 func (self *IADsAcl) Get_ProtectedAttrName(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ProtectedAttrName dispatches through IADsAcl's vtable slot 8.
 func (self *IADsAcl) Put_ProtectedAttrName(bstrProtectedAttrName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProtectedAttrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SubjectName dispatches through IADsAcl's vtable slot 9.
 func (self *IADsAcl) Get_SubjectName(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SubjectName dispatches through IADsAcl's vtable slot 10.
 func (self *IADsAcl) Put_SubjectName(bstrSubjectName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrSubjectName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Privileges dispatches through IADsAcl's vtable slot 11.
 func (self *IADsAcl) Get_Privileges(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Privileges dispatches through IADsAcl's vtable slot 12.
 func (self *IADsAcl) Put_Privileges(lnPrivileges int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(lnPrivileges))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CopyAcl dispatches through IADsAcl's vtable slot 13.
 func (self *IADsAcl) CopyAcl(ppAcl **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAcl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 1346ce8c-9039-11d0-8528-00c04fd8d503
@@ -385,25 +385,25 @@ var IID_IADsAggregatee = win32.GUID{Data1: 0x1346ce8c, Data2: 0x9039, Data3: 0x1
 // ConnectAsAggregatee dispatches through IADsAggregatee's vtable slot 3.
 func (self *IADsAggregatee) ConnectAsAggregatee(pOuterUnknown *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOuterUnknown)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DisconnectAsAggregatee dispatches through IADsAggregatee's vtable slot 4.
 func (self *IADsAggregatee) DisconnectAsAggregatee() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RelinquishInterface dispatches through IADsAggregatee's vtable slot 5.
 func (self *IADsAggregatee) RelinquishInterface(riid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RestoreInterface dispatches through IADsAggregatee's vtable slot 6.
 func (self *IADsAggregatee) RestoreInterface(riid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 52db5fb0-941f-11d0-8529-00c04fd8d503
@@ -417,13 +417,13 @@ var IID_IADsAggregator = win32.GUID{Data1: 0x52db5fb0, Data2: 0x941f, Data3: 0x1
 // ConnectAsAggregator dispatches through IADsAggregator's vtable slot 3.
 func (self *IADsAggregator) ConnectAsAggregator(pAggregatee *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAggregatee)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DisconnectAsAggregator dispatches through IADsAggregator's vtable slot 4.
 func (self *IADsAggregator) DisconnectAsAggregator() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsBackLink: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsbacklink
@@ -438,25 +438,25 @@ var IID_IADsBackLink = win32.GUID{Data1: 0xfd1302bd, Data2: 0x4080, Data3: 0x11d
 // Get_RemoteID dispatches through IADsBackLink's vtable slot 7.
 func (self *IADsBackLink) Get_RemoteID(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RemoteID dispatches through IADsBackLink's vtable slot 8.
 func (self *IADsBackLink) Put_RemoteID(lnRemoteID int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lnRemoteID))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ObjectName dispatches through IADsBackLink's vtable slot 9.
 func (self *IADsBackLink) Get_ObjectName(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ObjectName dispatches through IADsBackLink's vtable slot 10.
 func (self *IADsBackLink) Put_ObjectName(bstrObjectName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrObjectName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsCaseIgnoreList: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadscaseignorelist
@@ -471,7 +471,7 @@ var IID_IADsCaseIgnoreList = win32.GUID{Data1: 0x7b66b533, Data2: 0x4680, Data3:
 // Get_CaseIgnoreList dispatches through IADsCaseIgnoreList's vtable slot 7.
 func (self *IADsCaseIgnoreList) Get_CaseIgnoreList(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsClass: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsclass
@@ -486,139 +486,139 @@ var IID_IADsClass = win32.GUID{Data1: 0xc8f93dd0, Data2: 0x4ae0, Data3: 0x11cf, 
 // Get_PrimaryInterface dispatches through IADsClass's vtable slot 20.
 func (self *IADsClass) Get_PrimaryInterface(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CLSID dispatches through IADsClass's vtable slot 21.
 func (self *IADsClass) Get_CLSID(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CLSID dispatches through IADsClass's vtable slot 22.
 func (self *IADsClass) Put_CLSID(bstrCLSID foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrCLSID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OID dispatches through IADsClass's vtable slot 23.
 func (self *IADsClass) Get_OID(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_OID dispatches through IADsClass's vtable slot 24.
 func (self *IADsClass) Put_OID(bstrOID foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrOID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Abstract dispatches through IADsClass's vtable slot 25.
 func (self *IADsClass) Get_Abstract(retval *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Abstract dispatches through IADsClass's vtable slot 26.
 func (self *IADsClass) Put_Abstract(fAbstract foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(fAbstract))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Auxiliary dispatches through IADsClass's vtable slot 27.
 func (self *IADsClass) Get_Auxiliary(retval *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Auxiliary dispatches through IADsClass's vtable slot 28.
 func (self *IADsClass) Put_Auxiliary(fAuxiliary foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(fAuxiliary))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MandatoryProperties dispatches through IADsClass's vtable slot 29.
 func (self *IADsClass) Get_MandatoryProperties(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OptionalProperties dispatches through IADsClass's vtable slot 31.
 func (self *IADsClass) Get_OptionalProperties(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NamingProperties dispatches through IADsClass's vtable slot 33.
 func (self *IADsClass) Get_NamingProperties(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DerivedFrom dispatches through IADsClass's vtable slot 35.
 func (self *IADsClass) Get_DerivedFrom(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AuxDerivedFrom dispatches through IADsClass's vtable slot 37.
 func (self *IADsClass) Get_AuxDerivedFrom(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PossibleSuperiors dispatches through IADsClass's vtable slot 39.
 func (self *IADsClass) Get_PossibleSuperiors(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Containment dispatches through IADsClass's vtable slot 41.
 func (self *IADsClass) Get_Containment(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Container dispatches through IADsClass's vtable slot 43.
 func (self *IADsClass) Get_Container(retval *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Container dispatches through IADsClass's vtable slot 44.
 func (self *IADsClass) Put_Container(fContainer foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(fContainer))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HelpFileName dispatches through IADsClass's vtable slot 45.
 func (self *IADsClass) Get_HelpFileName(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_HelpFileName dispatches through IADsClass's vtable slot 46.
 func (self *IADsClass) Put_HelpFileName(bstrHelpFileName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrHelpFileName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HelpFileContext dispatches through IADsClass's vtable slot 47.
 func (self *IADsClass) Get_HelpFileContext(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_HelpFileContext dispatches through IADsClass's vtable slot 48.
 func (self *IADsClass) Put_HelpFileContext(lnHelpFileContext int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(lnHelpFileContext))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Qualifiers dispatches through IADsClass's vtable slot 49.
 func (self *IADsClass) Qualifiers(ppQualifiers **IADsCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppQualifiers)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsCollection: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadscollection
@@ -633,19 +633,19 @@ var IID_IADsCollection = win32.GUID{Data1: 0x72b945e0, Data2: 0x253b, Data3: 0x1
 // Get__NewEnum dispatches through IADsCollection's vtable slot 7.
 func (self *IADsCollection) Get__NewEnum(ppEnumerator **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumerator)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through IADsCollection's vtable slot 9.
 func (self *IADsCollection) Remove(bstrItemToBeRemoved foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrItemToBeRemoved)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetObject dispatches through IADsCollection's vtable slot 10.
 func (self *IADsCollection) GetObject(bstrName foundation.BSTR, pvItem *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(pvItem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsComputer: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadscomputer
@@ -660,187 +660,187 @@ var IID_IADsComputer = win32.GUID{Data1: 0xefe3cc70, Data2: 0x1d9f, Data3: 0x11c
 // Get_ComputerID dispatches through IADsComputer's vtable slot 20.
 func (self *IADsComputer) Get_ComputerID(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Site dispatches through IADsComputer's vtable slot 21.
 func (self *IADsComputer) Get_Site(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through IADsComputer's vtable slot 22.
 func (self *IADsComputer) Get_Description(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Description dispatches through IADsComputer's vtable slot 23.
 func (self *IADsComputer) Put_Description(bstrDescription foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Location dispatches through IADsComputer's vtable slot 24.
 func (self *IADsComputer) Get_Location(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Location dispatches through IADsComputer's vtable slot 25.
 func (self *IADsComputer) Put_Location(bstrLocation foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrLocation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PrimaryUser dispatches through IADsComputer's vtable slot 26.
 func (self *IADsComputer) Get_PrimaryUser(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PrimaryUser dispatches through IADsComputer's vtable slot 27.
 func (self *IADsComputer) Put_PrimaryUser(bstrPrimaryUser foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPrimaryUser)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Owner dispatches through IADsComputer's vtable slot 28.
 func (self *IADsComputer) Get_Owner(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Owner dispatches through IADsComputer's vtable slot 29.
 func (self *IADsComputer) Put_Owner(bstrOwner foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrOwner)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Division dispatches through IADsComputer's vtable slot 30.
 func (self *IADsComputer) Get_Division(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Division dispatches through IADsComputer's vtable slot 31.
 func (self *IADsComputer) Put_Division(bstrDivision foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDivision)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Department dispatches through IADsComputer's vtable slot 32.
 func (self *IADsComputer) Get_Department(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Department dispatches through IADsComputer's vtable slot 33.
 func (self *IADsComputer) Put_Department(bstrDepartment foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDepartment)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Role dispatches through IADsComputer's vtable slot 34.
 func (self *IADsComputer) Get_Role(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Role dispatches through IADsComputer's vtable slot 35.
 func (self *IADsComputer) Put_Role(bstrRole foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRole)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OperatingSystem dispatches through IADsComputer's vtable slot 36.
 func (self *IADsComputer) Get_OperatingSystem(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_OperatingSystem dispatches through IADsComputer's vtable slot 37.
 func (self *IADsComputer) Put_OperatingSystem(bstrOperatingSystem foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrOperatingSystem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OperatingSystemVersion dispatches through IADsComputer's vtable slot 38.
 func (self *IADsComputer) Get_OperatingSystemVersion(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_OperatingSystemVersion dispatches through IADsComputer's vtable slot 39.
 func (self *IADsComputer) Put_OperatingSystemVersion(bstrOperatingSystemVersion foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrOperatingSystemVersion)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Model dispatches through IADsComputer's vtable slot 40.
 func (self *IADsComputer) Get_Model(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Model dispatches through IADsComputer's vtable slot 41.
 func (self *IADsComputer) Put_Model(bstrModel foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrModel)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Processor dispatches through IADsComputer's vtable slot 42.
 func (self *IADsComputer) Get_Processor(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Processor dispatches through IADsComputer's vtable slot 43.
 func (self *IADsComputer) Put_Processor(bstrProcessor foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProcessor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ProcessorCount dispatches through IADsComputer's vtable slot 44.
 func (self *IADsComputer) Get_ProcessorCount(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ProcessorCount dispatches through IADsComputer's vtable slot 45.
 func (self *IADsComputer) Put_ProcessorCount(bstrProcessorCount foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProcessorCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MemorySize dispatches through IADsComputer's vtable slot 46.
 func (self *IADsComputer) Get_MemorySize(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MemorySize dispatches through IADsComputer's vtable slot 47.
 func (self *IADsComputer) Put_MemorySize(bstrMemorySize foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrMemorySize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StorageCapacity dispatches through IADsComputer's vtable slot 48.
 func (self *IADsComputer) Get_StorageCapacity(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_StorageCapacity dispatches through IADsComputer's vtable slot 49.
 func (self *IADsComputer) Put_StorageCapacity(bstrStorageCapacity foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrStorageCapacity)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NetAddresses dispatches through IADsComputer's vtable slot 50.
 func (self *IADsComputer) Get_NetAddresses(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsComputerOperations: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadscomputeroperations
@@ -855,13 +855,13 @@ var IID_IADsComputerOperations = win32.GUID{Data1: 0xef497680, Data2: 0x1d9f, Da
 // Status dispatches through IADsComputerOperations's vtable slot 20.
 func (self *IADsComputerOperations) Status(ppObject **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Shutdown dispatches through IADsComputerOperations's vtable slot 21.
 func (self *IADsComputerOperations) Shutdown(bReboot foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(bReboot))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsContainer: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadscontainer
@@ -876,55 +876,55 @@ var IID_IADsContainer = win32.GUID{Data1: 0x001677d0, Data2: 0xfd16, Data3: 0x11
 // Get_Count dispatches through IADsContainer's vtable slot 7.
 func (self *IADsContainer) Get_Count(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IADsContainer's vtable slot 8.
 func (self *IADsContainer) Get__NewEnum(retval **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Filter dispatches through IADsContainer's vtable slot 9.
 func (self *IADsContainer) Get_Filter(pVar *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Hints dispatches through IADsContainer's vtable slot 11.
 func (self *IADsContainer) Get_Hints(pvFilter *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvFilter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetObject dispatches through IADsContainer's vtable slot 13.
 func (self *IADsContainer) GetObject(ClassName foundation.BSTR, RelativeName foundation.BSTR, ppObject **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ClassName)), uintptr(unsafe.Pointer(RelativeName)), uintptr(unsafe.Pointer(ppObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Create dispatches through IADsContainer's vtable slot 14.
 func (self *IADsContainer) Create(ClassName foundation.BSTR, RelativeName foundation.BSTR, ppObject **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ClassName)), uintptr(unsafe.Pointer(RelativeName)), uintptr(unsafe.Pointer(ppObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IADsContainer's vtable slot 15.
 func (self *IADsContainer) Delete(bstrClassName foundation.BSTR, bstrRelativeName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrClassName)), uintptr(unsafe.Pointer(bstrRelativeName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CopyHere dispatches through IADsContainer's vtable slot 16.
 func (self *IADsContainer) CopyHere(SourceName foundation.BSTR, NewName foundation.BSTR, ppObject **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SourceName)), uintptr(unsafe.Pointer(NewName)), uintptr(unsafe.Pointer(ppObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MoveHere dispatches through IADsContainer's vtable slot 17.
 func (self *IADsContainer) MoveHere(SourceName foundation.BSTR, NewName foundation.BSTR, ppObject **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SourceName)), uintptr(unsafe.Pointer(NewName)), uintptr(unsafe.Pointer(ppObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsDNWithBinary: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsdnwithbinary
@@ -939,19 +939,19 @@ var IID_IADsDNWithBinary = win32.GUID{Data1: 0x7e99c0a2, Data2: 0xf935, Data3: 0
 // Get_BinaryValue dispatches through IADsDNWithBinary's vtable slot 7.
 func (self *IADsDNWithBinary) Get_BinaryValue(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DNString dispatches through IADsDNWithBinary's vtable slot 9.
 func (self *IADsDNWithBinary) Get_DNString(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DNString dispatches through IADsDNWithBinary's vtable slot 10.
 func (self *IADsDNWithBinary) Put_DNString(bstrDNString foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDNString)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsDNWithString: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsdnwithstring
@@ -966,25 +966,25 @@ var IID_IADsDNWithString = win32.GUID{Data1: 0x370df02e, Data2: 0xf934, Data3: 0
 // Get_StringValue dispatches through IADsDNWithString's vtable slot 7.
 func (self *IADsDNWithString) Get_StringValue(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_StringValue dispatches through IADsDNWithString's vtable slot 8.
 func (self *IADsDNWithString) Put_StringValue(bstrStringValue foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrStringValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DNString dispatches through IADsDNWithString's vtable slot 9.
 func (self *IADsDNWithString) Get_DNString(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DNString dispatches through IADsDNWithString's vtable slot 10.
 func (self *IADsDNWithString) Put_DNString(bstrDNString foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDNString)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsDeleteOps: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsdeleteops
@@ -999,7 +999,7 @@ var IID_IADsDeleteOps = win32.GUID{Data1: 0xb2bd0902, Data2: 0x8878, Data3: 0x11
 // DeleteObject dispatches through IADsDeleteOps's vtable slot 7.
 func (self *IADsDeleteOps) DeleteObject(lnFlags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(lnFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsDomain: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsdomain
@@ -1014,103 +1014,103 @@ var IID_IADsDomain = win32.GUID{Data1: 0x00e4c220, Data2: 0xfd16, Data3: 0x11ce,
 // Get_IsWorkgroup dispatches through IADsDomain's vtable slot 20.
 func (self *IADsDomain) Get_IsWorkgroup(retval *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MinPasswordLength dispatches through IADsDomain's vtable slot 21.
 func (self *IADsDomain) Get_MinPasswordLength(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MinPasswordLength dispatches through IADsDomain's vtable slot 22.
 func (self *IADsDomain) Put_MinPasswordLength(lnMinPasswordLength int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(lnMinPasswordLength))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MinPasswordAge dispatches through IADsDomain's vtable slot 23.
 func (self *IADsDomain) Get_MinPasswordAge(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MinPasswordAge dispatches through IADsDomain's vtable slot 24.
 func (self *IADsDomain) Put_MinPasswordAge(lnMinPasswordAge int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(lnMinPasswordAge))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MaxPasswordAge dispatches through IADsDomain's vtable slot 25.
 func (self *IADsDomain) Get_MaxPasswordAge(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MaxPasswordAge dispatches through IADsDomain's vtable slot 26.
 func (self *IADsDomain) Put_MaxPasswordAge(lnMaxPasswordAge int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(lnMaxPasswordAge))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MaxBadPasswordsAllowed dispatches through IADsDomain's vtable slot 27.
 func (self *IADsDomain) Get_MaxBadPasswordsAllowed(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MaxBadPasswordsAllowed dispatches through IADsDomain's vtable slot 28.
 func (self *IADsDomain) Put_MaxBadPasswordsAllowed(lnMaxBadPasswordsAllowed int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(lnMaxBadPasswordsAllowed))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PasswordHistoryLength dispatches through IADsDomain's vtable slot 29.
 func (self *IADsDomain) Get_PasswordHistoryLength(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PasswordHistoryLength dispatches through IADsDomain's vtable slot 30.
 func (self *IADsDomain) Put_PasswordHistoryLength(lnPasswordHistoryLength int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(lnPasswordHistoryLength))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PasswordAttributes dispatches through IADsDomain's vtable slot 31.
 func (self *IADsDomain) Get_PasswordAttributes(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PasswordAttributes dispatches through IADsDomain's vtable slot 32.
 func (self *IADsDomain) Put_PasswordAttributes(lnPasswordAttributes int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(lnPasswordAttributes))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AutoUnlockInterval dispatches through IADsDomain's vtable slot 33.
 func (self *IADsDomain) Get_AutoUnlockInterval(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AutoUnlockInterval dispatches through IADsDomain's vtable slot 34.
 func (self *IADsDomain) Put_AutoUnlockInterval(lnAutoUnlockInterval int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(lnAutoUnlockInterval))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LockoutObservationInterval dispatches through IADsDomain's vtable slot 35.
 func (self *IADsDomain) Get_LockoutObservationInterval(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LockoutObservationInterval dispatches through IADsDomain's vtable slot 36.
 func (self *IADsDomain) Put_LockoutObservationInterval(lnLockoutObservationInterval int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(lnLockoutObservationInterval))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsEmail: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsemail
@@ -1125,25 +1125,25 @@ var IID_IADsEmail = win32.GUID{Data1: 0x97af011a, Data2: 0x478e, Data3: 0x11d1, 
 // Get_Type dispatches through IADsEmail's vtable slot 7.
 func (self *IADsEmail) Get_Type(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Type dispatches through IADsEmail's vtable slot 8.
 func (self *IADsEmail) Put_Type(lnType int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lnType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Address dispatches through IADsEmail's vtable slot 9.
 func (self *IADsEmail) Get_Address(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Address dispatches through IADsEmail's vtable slot 10.
 func (self *IADsEmail) Put_Address(bstrAddress foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAddress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsExtension: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsextension
@@ -1158,13 +1158,13 @@ var IID_IADsExtension = win32.GUID{Data1: 0x3d35553c, Data2: 0xd2b0, Data3: 0x11
 // PrivateGetIDsOfNames dispatches through IADsExtension's vtable slot 4.
 func (self *IADsExtension) PrivateGetIDsOfNames(riid *win32.GUID, rgszNames **uint16, cNames uint32, lcid uint32, rgDispid *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(rgszNames)), uintptr(cNames), uintptr(lcid), uintptr(unsafe.Pointer(rgDispid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PrivateInvoke dispatches through IADsExtension's vtable slot 5.
 func (self *IADsExtension) PrivateInvoke(dispidMember int32, riid *win32.GUID, lcid uint32, wFlags uint16, pdispparams *systemcom.DISPPARAMS, pvarResult *systemvariant.VARIANT, pexcepinfo *systemcom.EXCEPINFO, puArgErr *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dispidMember), uintptr(unsafe.Pointer(riid)), uintptr(lcid), uintptr(wFlags), uintptr(unsafe.Pointer(pdispparams)), uintptr(unsafe.Pointer(pvarResult)), uintptr(unsafe.Pointer(pexcepinfo)), uintptr(unsafe.Pointer(puArgErr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsFaxNumber: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsfaxnumber
@@ -1179,19 +1179,19 @@ var IID_IADsFaxNumber = win32.GUID{Data1: 0xa910dea9, Data2: 0x4680, Data3: 0x11
 // Get_TelephoneNumber dispatches through IADsFaxNumber's vtable slot 7.
 func (self *IADsFaxNumber) Get_TelephoneNumber(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_TelephoneNumber dispatches through IADsFaxNumber's vtable slot 8.
 func (self *IADsFaxNumber) Put_TelephoneNumber(bstrTelephoneNumber foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTelephoneNumber)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Parameters dispatches through IADsFaxNumber's vtable slot 9.
 func (self *IADsFaxNumber) Get_Parameters(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsFileService: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsfileservice
@@ -1206,25 +1206,25 @@ var IID_IADsFileService = win32.GUID{Data1: 0xa89d1900, Data2: 0x31ca, Data3: 0x
 // Get_Description dispatches through IADsFileService's vtable slot 44.
 func (self *IADsFileService) Get_Description(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Description dispatches through IADsFileService's vtable slot 45.
 func (self *IADsFileService) Put_Description(bstrDescription foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MaxUserCount dispatches through IADsFileService's vtable slot 46.
 func (self *IADsFileService) Get_MaxUserCount(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MaxUserCount dispatches through IADsFileService's vtable slot 47.
 func (self *IADsFileService) Put_MaxUserCount(lnMaxUserCount int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(lnMaxUserCount))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsFileServiceOperations: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsfileserviceoperations
@@ -1239,13 +1239,13 @@ var IID_IADsFileServiceOperations = win32.GUID{Data1: 0xa02ded10, Data2: 0x31ca,
 // Sessions dispatches through IADsFileServiceOperations's vtable slot 26.
 func (self *IADsFileServiceOperations) Sessions(ppSessions **IADsCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSessions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Resources dispatches through IADsFileServiceOperations's vtable slot 27.
 func (self *IADsFileServiceOperations) Resources(ppResources **IADsCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResources)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsFileShare: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsfileshare
@@ -1260,55 +1260,55 @@ var IID_IADsFileShare = win32.GUID{Data1: 0xeb6dcaf0, Data2: 0x4b83, Data3: 0x11
 // Get_CurrentUserCount dispatches through IADsFileShare's vtable slot 20.
 func (self *IADsFileShare) Get_CurrentUserCount(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through IADsFileShare's vtable slot 21.
 func (self *IADsFileShare) Get_Description(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Description dispatches through IADsFileShare's vtable slot 22.
 func (self *IADsFileShare) Put_Description(bstrDescription foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HostComputer dispatches through IADsFileShare's vtable slot 23.
 func (self *IADsFileShare) Get_HostComputer(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_HostComputer dispatches through IADsFileShare's vtable slot 24.
 func (self *IADsFileShare) Put_HostComputer(bstrHostComputer foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrHostComputer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Path dispatches through IADsFileShare's vtable slot 25.
 func (self *IADsFileShare) Get_Path(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Path dispatches through IADsFileShare's vtable slot 26.
 func (self *IADsFileShare) Put_Path(bstrPath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MaxUserCount dispatches through IADsFileShare's vtable slot 27.
 func (self *IADsFileShare) Get_MaxUserCount(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MaxUserCount dispatches through IADsFileShare's vtable slot 28.
 func (self *IADsFileShare) Put_MaxUserCount(lnMaxUserCount int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(lnMaxUserCount))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsGroup: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsgroup
@@ -1323,37 +1323,37 @@ var IID_IADsGroup = win32.GUID{Data1: 0x27636b00, Data2: 0x410f, Data3: 0x11cf, 
 // Get_Description dispatches through IADsGroup's vtable slot 20.
 func (self *IADsGroup) Get_Description(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Description dispatches through IADsGroup's vtable slot 21.
 func (self *IADsGroup) Put_Description(bstrDescription foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Members dispatches through IADsGroup's vtable slot 22.
 func (self *IADsGroup) Members(ppMembers **IADsMembers) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppMembers)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsMember dispatches through IADsGroup's vtable slot 23.
 func (self *IADsGroup) IsMember(bstrMember foundation.BSTR, bMember *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrMember)), uintptr(unsafe.Pointer(bMember)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through IADsGroup's vtable slot 24.
 func (self *IADsGroup) Add(bstrNewItem foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrNewItem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through IADsGroup's vtable slot 25.
 func (self *IADsGroup) Remove(bstrItemToBeRemoved foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrItemToBeRemoved)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsHold: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadshold
@@ -1368,25 +1368,25 @@ var IID_IADsHold = win32.GUID{Data1: 0xb3eb3b37, Data2: 0x4080, Data3: 0x11d1, D
 // Get_ObjectName dispatches through IADsHold's vtable slot 7.
 func (self *IADsHold) Get_ObjectName(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ObjectName dispatches through IADsHold's vtable slot 8.
 func (self *IADsHold) Put_ObjectName(bstrObjectName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrObjectName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Amount dispatches through IADsHold's vtable slot 9.
 func (self *IADsHold) Get_Amount(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Amount dispatches through IADsHold's vtable slot 10.
 func (self *IADsHold) Put_Amount(lnAmount int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lnAmount))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsLargeInteger: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadslargeinteger
@@ -1401,25 +1401,25 @@ var IID_IADsLargeInteger = win32.GUID{Data1: 0x9068270b, Data2: 0x0939, Data3: 0
 // Get_HighPart dispatches through IADsLargeInteger's vtable slot 7.
 func (self *IADsLargeInteger) Get_HighPart(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_HighPart dispatches through IADsLargeInteger's vtable slot 8.
 func (self *IADsLargeInteger) Put_HighPart(lnHighPart int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lnHighPart))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LowPart dispatches through IADsLargeInteger's vtable slot 9.
 func (self *IADsLargeInteger) Get_LowPart(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LowPart dispatches through IADsLargeInteger's vtable slot 10.
 func (self *IADsLargeInteger) Put_LowPart(lnLowPart int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lnLowPart))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsLocality: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadslocality
@@ -1434,43 +1434,43 @@ var IID_IADsLocality = win32.GUID{Data1: 0xa05e03a2, Data2: 0xeffe, Data3: 0x11c
 // Get_Description dispatches through IADsLocality's vtable slot 20.
 func (self *IADsLocality) Get_Description(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Description dispatches through IADsLocality's vtable slot 21.
 func (self *IADsLocality) Put_Description(bstrDescription foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LocalityName dispatches through IADsLocality's vtable slot 22.
 func (self *IADsLocality) Get_LocalityName(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LocalityName dispatches through IADsLocality's vtable slot 23.
 func (self *IADsLocality) Put_LocalityName(bstrLocalityName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrLocalityName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PostalAddress dispatches through IADsLocality's vtable slot 24.
 func (self *IADsLocality) Get_PostalAddress(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PostalAddress dispatches through IADsLocality's vtable slot 25.
 func (self *IADsLocality) Put_PostalAddress(bstrPostalAddress foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPostalAddress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SeeAlso dispatches through IADsLocality's vtable slot 26.
 func (self *IADsLocality) Get_SeeAlso(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsMembers: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsmembers
@@ -1485,19 +1485,19 @@ var IID_IADsMembers = win32.GUID{Data1: 0x451a0030, Data2: 0x72ec, Data3: 0x11cf
 // Get_Count dispatches through IADsMembers's vtable slot 7.
 func (self *IADsMembers) Get_Count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IADsMembers's vtable slot 8.
 func (self *IADsMembers) Get__NewEnum(ppEnumerator **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumerator)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Filter dispatches through IADsMembers's vtable slot 9.
 func (self *IADsMembers) Get_Filter(pvFilter *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvFilter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsNameTranslate: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsnametranslate
@@ -1512,37 +1512,37 @@ var IID_IADsNameTranslate = win32.GUID{Data1: 0xb1b272a3, Data2: 0x3625, Data3: 
 // Put_ChaseReferral dispatches through IADsNameTranslate's vtable slot 7.
 func (self *IADsNameTranslate) Put_ChaseReferral(lnChaseReferral int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(lnChaseReferral))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Init dispatches through IADsNameTranslate's vtable slot 8.
 func (self *IADsNameTranslate) Init(lnSetType int32, bstrADsPath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lnSetType), uintptr(unsafe.Pointer(bstrADsPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitEx dispatches through IADsNameTranslate's vtable slot 9.
 func (self *IADsNameTranslate) InitEx(lnSetType int32, bstrADsPath foundation.BSTR, bstrUserID foundation.BSTR, bstrDomain foundation.BSTR, bstrPassword foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(lnSetType), uintptr(unsafe.Pointer(bstrADsPath)), uintptr(unsafe.Pointer(bstrUserID)), uintptr(unsafe.Pointer(bstrDomain)), uintptr(unsafe.Pointer(bstrPassword)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Set dispatches through IADsNameTranslate's vtable slot 10.
 func (self *IADsNameTranslate) Set(lnSetType int32, bstrADsPath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lnSetType), uintptr(unsafe.Pointer(bstrADsPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get dispatches through IADsNameTranslate's vtable slot 11.
 func (self *IADsNameTranslate) Get(lnFormatType int32, pbstrADsPath *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(lnFormatType), uintptr(unsafe.Pointer(pbstrADsPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEx dispatches through IADsNameTranslate's vtable slot 13.
 func (self *IADsNameTranslate) GetEx(lnFormatType int32, pvar *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(lnFormatType), uintptr(unsafe.Pointer(pvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsNamespaces: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsnamespaces
@@ -1557,13 +1557,13 @@ var IID_IADsNamespaces = win32.GUID{Data1: 0x28b96ba0, Data2: 0xb330, Data3: 0x1
 // Get_DefaultContainer dispatches through IADsNamespaces's vtable slot 20.
 func (self *IADsNamespaces) Get_DefaultContainer(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DefaultContainer dispatches through IADsNamespaces's vtable slot 21.
 func (self *IADsNamespaces) Put_DefaultContainer(bstrDefaultContainer foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDefaultContainer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsNetAddress: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsnetaddress
@@ -1578,19 +1578,19 @@ var IID_IADsNetAddress = win32.GUID{Data1: 0xb21a50a9, Data2: 0x4080, Data3: 0x1
 // Get_AddressType dispatches through IADsNetAddress's vtable slot 7.
 func (self *IADsNetAddress) Get_AddressType(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AddressType dispatches through IADsNetAddress's vtable slot 8.
 func (self *IADsNetAddress) Put_AddressType(lnAddressType int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lnAddressType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Address dispatches through IADsNetAddress's vtable slot 9.
 func (self *IADsNetAddress) Get_Address(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsO: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadso
@@ -1605,67 +1605,67 @@ var IID_IADsO = win32.GUID{Data1: 0xa1cd2dc6, Data2: 0xeffe, Data3: 0x11cf, Data
 // Get_Description dispatches through IADsO's vtable slot 20.
 func (self *IADsO) Get_Description(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Description dispatches through IADsO's vtable slot 21.
 func (self *IADsO) Put_Description(bstrDescription foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LocalityName dispatches through IADsO's vtable slot 22.
 func (self *IADsO) Get_LocalityName(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LocalityName dispatches through IADsO's vtable slot 23.
 func (self *IADsO) Put_LocalityName(bstrLocalityName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrLocalityName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PostalAddress dispatches through IADsO's vtable slot 24.
 func (self *IADsO) Get_PostalAddress(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PostalAddress dispatches through IADsO's vtable slot 25.
 func (self *IADsO) Put_PostalAddress(bstrPostalAddress foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPostalAddress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TelephoneNumber dispatches through IADsO's vtable slot 26.
 func (self *IADsO) Get_TelephoneNumber(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_TelephoneNumber dispatches through IADsO's vtable slot 27.
 func (self *IADsO) Put_TelephoneNumber(bstrTelephoneNumber foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTelephoneNumber)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FaxNumber dispatches through IADsO's vtable slot 28.
 func (self *IADsO) Get_FaxNumber(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FaxNumber dispatches through IADsO's vtable slot 29.
 func (self *IADsO) Put_FaxNumber(bstrFaxNumber foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrFaxNumber)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SeeAlso dispatches through IADsO's vtable slot 30.
 func (self *IADsO) Get_SeeAlso(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsOU: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsou
@@ -1680,79 +1680,79 @@ var IID_IADsOU = win32.GUID{Data1: 0xa2f733b8, Data2: 0xeffe, Data3: 0x11cf, Dat
 // Get_Description dispatches through IADsOU's vtable slot 20.
 func (self *IADsOU) Get_Description(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Description dispatches through IADsOU's vtable slot 21.
 func (self *IADsOU) Put_Description(bstrDescription foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LocalityName dispatches through IADsOU's vtable slot 22.
 func (self *IADsOU) Get_LocalityName(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LocalityName dispatches through IADsOU's vtable slot 23.
 func (self *IADsOU) Put_LocalityName(bstrLocalityName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrLocalityName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PostalAddress dispatches through IADsOU's vtable slot 24.
 func (self *IADsOU) Get_PostalAddress(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PostalAddress dispatches through IADsOU's vtable slot 25.
 func (self *IADsOU) Put_PostalAddress(bstrPostalAddress foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPostalAddress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TelephoneNumber dispatches through IADsOU's vtable slot 26.
 func (self *IADsOU) Get_TelephoneNumber(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_TelephoneNumber dispatches through IADsOU's vtable slot 27.
 func (self *IADsOU) Put_TelephoneNumber(bstrTelephoneNumber foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTelephoneNumber)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FaxNumber dispatches through IADsOU's vtable slot 28.
 func (self *IADsOU) Get_FaxNumber(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FaxNumber dispatches through IADsOU's vtable slot 29.
 func (self *IADsOU) Put_FaxNumber(bstrFaxNumber foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrFaxNumber)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SeeAlso dispatches through IADsOU's vtable slot 30.
 func (self *IADsOU) Get_SeeAlso(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BusinessCategory dispatches through IADsOU's vtable slot 32.
 func (self *IADsOU) Get_BusinessCategory(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BusinessCategory dispatches through IADsOU's vtable slot 33.
 func (self *IADsOU) Put_BusinessCategory(bstrBusinessCategory foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrBusinessCategory)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsObjectOptions: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsobjectoptions
@@ -1767,7 +1767,7 @@ var IID_IADsObjectOptions = win32.GUID{Data1: 0x46f14fda, Data2: 0x232b, Data3: 
 // GetOption dispatches through IADsObjectOptions's vtable slot 7.
 func (self *IADsObjectOptions) GetOption(lnOption int32, pvValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(lnOption), uintptr(unsafe.Pointer(pvValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsOctetList: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsoctetlist
@@ -1782,7 +1782,7 @@ var IID_IADsOctetList = win32.GUID{Data1: 0x7b28b80f, Data2: 0x4680, Data3: 0x11
 // Get_OctetList dispatches through IADsOctetList's vtable slot 7.
 func (self *IADsOctetList) Get_OctetList(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsOpenDSObject: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsopendsobject
@@ -1797,7 +1797,7 @@ var IID_IADsOpenDSObject = win32.GUID{Data1: 0xddf2891e, Data2: 0x0f9c, Data3: 0
 // OpenDSObject dispatches through IADsOpenDSObject's vtable slot 7.
 func (self *IADsOpenDSObject) OpenDSObject(lpszDNName foundation.BSTR, lpszUserName foundation.BSTR, lpszPassword foundation.BSTR, lnReserved int32, ppOleDsObj **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpszDNName)), uintptr(unsafe.Pointer(lpszUserName)), uintptr(unsafe.Pointer(lpszPassword)), uintptr(lnReserved), uintptr(unsafe.Pointer(ppOleDsObj)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsPath: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadspath
@@ -1812,37 +1812,37 @@ var IID_IADsPath = win32.GUID{Data1: 0xb287fcd5, Data2: 0x4080, Data3: 0x11d1, D
 // Get_Type dispatches through IADsPath's vtable slot 7.
 func (self *IADsPath) Get_Type(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Type dispatches through IADsPath's vtable slot 8.
 func (self *IADsPath) Put_Type(lnType int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lnType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_VolumeName dispatches through IADsPath's vtable slot 9.
 func (self *IADsPath) Get_VolumeName(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_VolumeName dispatches through IADsPath's vtable slot 10.
 func (self *IADsPath) Put_VolumeName(bstrVolumeName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrVolumeName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Path dispatches through IADsPath's vtable slot 11.
 func (self *IADsPath) Get_Path(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Path dispatches through IADsPath's vtable slot 12.
 func (self *IADsPath) Put_Path(bstrPath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsPathname: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadspathname
@@ -1857,67 +1857,67 @@ var IID_IADsPathname = win32.GUID{Data1: 0xd592aed4, Data2: 0xf420, Data3: 0x11d
 // Set dispatches through IADsPathname's vtable slot 7.
 func (self *IADsPathname) Set(bstrADsPath foundation.BSTR, lnSetType int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrADsPath)), uintptr(lnSetType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDisplayType dispatches through IADsPathname's vtable slot 8.
 func (self *IADsPathname) SetDisplayType(lnDisplayType int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lnDisplayType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Retrieve dispatches through IADsPathname's vtable slot 9.
 func (self *IADsPathname) Retrieve(lnFormatType int32, pbstrADsPath *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(lnFormatType), uintptr(unsafe.Pointer(pbstrADsPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNumElements dispatches through IADsPathname's vtable slot 10.
 func (self *IADsPathname) GetNumElements(plnNumPathElements *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plnNumPathElements)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetElement dispatches through IADsPathname's vtable slot 11.
 func (self *IADsPathname) GetElement(lnElementIndex int32, pbstrElement *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(lnElementIndex), uintptr(unsafe.Pointer(pbstrElement)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddLeafElement dispatches through IADsPathname's vtable slot 12.
 func (self *IADsPathname) AddLeafElement(bstrLeafElement foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrLeafElement)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveLeafElement dispatches through IADsPathname's vtable slot 13.
 func (self *IADsPathname) RemoveLeafElement() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CopyPath dispatches through IADsPathname's vtable slot 14.
 func (self *IADsPathname) CopyPath(ppAdsPath **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAdsPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEscapedElement dispatches through IADsPathname's vtable slot 15.
 func (self *IADsPathname) GetEscapedElement(lnReserved int32, bstrInStr foundation.BSTR, pbstrOutStr *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(lnReserved), uintptr(unsafe.Pointer(bstrInStr)), uintptr(unsafe.Pointer(pbstrOutStr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EscapedMode dispatches through IADsPathname's vtable slot 16.
 func (self *IADsPathname) Get_EscapedMode(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EscapedMode dispatches through IADsPathname's vtable slot 17.
 func (self *IADsPathname) Put_EscapedMode(lnEscapedMode int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(lnEscapedMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsPostalAddress: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadspostaladdress
@@ -1932,7 +1932,7 @@ var IID_IADsPostalAddress = win32.GUID{Data1: 0x7adecf29, Data2: 0x4680, Data3: 
 // Get_PostalAddress dispatches through IADsPostalAddress's vtable slot 7.
 func (self *IADsPostalAddress) Get_PostalAddress(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsPrintJob: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsprintjob
@@ -1947,97 +1947,97 @@ var IID_IADsPrintJob = win32.GUID{Data1: 0x32fb6780, Data2: 0x1ed0, Data3: 0x11c
 // Get_HostPrintQueue dispatches through IADsPrintJob's vtable slot 20.
 func (self *IADsPrintJob) Get_HostPrintQueue(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_User dispatches through IADsPrintJob's vtable slot 21.
 func (self *IADsPrintJob) Get_User(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UserPath dispatches through IADsPrintJob's vtable slot 22.
 func (self *IADsPrintJob) Get_UserPath(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TimeSubmitted dispatches through IADsPrintJob's vtable slot 23.
 func (self *IADsPrintJob) Get_TimeSubmitted(retval *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TotalPages dispatches through IADsPrintJob's vtable slot 24.
 func (self *IADsPrintJob) Get_TotalPages(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Size dispatches through IADsPrintJob's vtable slot 25.
 func (self *IADsPrintJob) Get_Size(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through IADsPrintJob's vtable slot 26.
 func (self *IADsPrintJob) Get_Description(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Description dispatches through IADsPrintJob's vtable slot 27.
 func (self *IADsPrintJob) Put_Description(bstrDescription foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Priority dispatches through IADsPrintJob's vtable slot 28.
 func (self *IADsPrintJob) Get_Priority(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Priority dispatches through IADsPrintJob's vtable slot 29.
 func (self *IADsPrintJob) Put_Priority(lnPriority int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(lnPriority))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StartTime dispatches through IADsPrintJob's vtable slot 30.
 func (self *IADsPrintJob) Get_StartTime(retval *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UntilTime dispatches through IADsPrintJob's vtable slot 32.
 func (self *IADsPrintJob) Get_UntilTime(retval *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Notify dispatches through IADsPrintJob's vtable slot 34.
 func (self *IADsPrintJob) Get_Notify(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Notify dispatches through IADsPrintJob's vtable slot 35.
 func (self *IADsPrintJob) Put_Notify(bstrNotify foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrNotify)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NotifyPath dispatches through IADsPrintJob's vtable slot 36.
 func (self *IADsPrintJob) Get_NotifyPath(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_NotifyPath dispatches through IADsPrintJob's vtable slot 37.
 func (self *IADsPrintJob) Put_NotifyPath(bstrNotifyPath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrNotifyPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsPrintJobOperations: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsprintjoboperations
@@ -2052,43 +2052,43 @@ var IID_IADsPrintJobOperations = win32.GUID{Data1: 0x9a52db30, Data2: 0x1ecf, Da
 // Get_Status dispatches through IADsPrintJobOperations's vtable slot 20.
 func (self *IADsPrintJobOperations) Get_Status(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TimeElapsed dispatches through IADsPrintJobOperations's vtable slot 21.
 func (self *IADsPrintJobOperations) Get_TimeElapsed(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PagesPrinted dispatches through IADsPrintJobOperations's vtable slot 22.
 func (self *IADsPrintJobOperations) Get_PagesPrinted(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Position dispatches through IADsPrintJobOperations's vtable slot 23.
 func (self *IADsPrintJobOperations) Get_Position(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Position dispatches through IADsPrintJobOperations's vtable slot 24.
 func (self *IADsPrintJobOperations) Put_Position(lnPosition int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(lnPosition))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Pause dispatches through IADsPrintJobOperations's vtable slot 25.
 func (self *IADsPrintJobOperations) Pause() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Resume dispatches through IADsPrintJobOperations's vtable slot 26.
 func (self *IADsPrintJobOperations) Resume() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsPrintQueue: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsprintqueue
@@ -2103,133 +2103,133 @@ var IID_IADsPrintQueue = win32.GUID{Data1: 0xb15160d0, Data2: 0x1226, Data3: 0x1
 // Get_PrinterPath dispatches through IADsPrintQueue's vtable slot 20.
 func (self *IADsPrintQueue) Get_PrinterPath(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PrinterPath dispatches through IADsPrintQueue's vtable slot 21.
 func (self *IADsPrintQueue) Put_PrinterPath(bstrPrinterPath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPrinterPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Model dispatches through IADsPrintQueue's vtable slot 22.
 func (self *IADsPrintQueue) Get_Model(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Model dispatches through IADsPrintQueue's vtable slot 23.
 func (self *IADsPrintQueue) Put_Model(bstrModel foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrModel)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Datatype dispatches through IADsPrintQueue's vtable slot 24.
 func (self *IADsPrintQueue) Get_Datatype(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Datatype dispatches through IADsPrintQueue's vtable slot 25.
 func (self *IADsPrintQueue) Put_Datatype(bstrDatatype foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDatatype)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PrintProcessor dispatches through IADsPrintQueue's vtable slot 26.
 func (self *IADsPrintQueue) Get_PrintProcessor(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PrintProcessor dispatches through IADsPrintQueue's vtable slot 27.
 func (self *IADsPrintQueue) Put_PrintProcessor(bstrPrintProcessor foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPrintProcessor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through IADsPrintQueue's vtable slot 28.
 func (self *IADsPrintQueue) Get_Description(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Description dispatches through IADsPrintQueue's vtable slot 29.
 func (self *IADsPrintQueue) Put_Description(bstrDescription foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Location dispatches through IADsPrintQueue's vtable slot 30.
 func (self *IADsPrintQueue) Get_Location(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Location dispatches through IADsPrintQueue's vtable slot 31.
 func (self *IADsPrintQueue) Put_Location(bstrLocation foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrLocation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StartTime dispatches through IADsPrintQueue's vtable slot 32.
 func (self *IADsPrintQueue) Get_StartTime(retval *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UntilTime dispatches through IADsPrintQueue's vtable slot 34.
 func (self *IADsPrintQueue) Get_UntilTime(retval *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DefaultJobPriority dispatches through IADsPrintQueue's vtable slot 36.
 func (self *IADsPrintQueue) Get_DefaultJobPriority(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DefaultJobPriority dispatches through IADsPrintQueue's vtable slot 37.
 func (self *IADsPrintQueue) Put_DefaultJobPriority(lnDefaultJobPriority int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(lnDefaultJobPriority))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Priority dispatches through IADsPrintQueue's vtable slot 38.
 func (self *IADsPrintQueue) Get_Priority(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Priority dispatches through IADsPrintQueue's vtable slot 39.
 func (self *IADsPrintQueue) Put_Priority(lnPriority int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(lnPriority))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BannerPage dispatches through IADsPrintQueue's vtable slot 40.
 func (self *IADsPrintQueue) Get_BannerPage(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BannerPage dispatches through IADsPrintQueue's vtable slot 41.
 func (self *IADsPrintQueue) Put_BannerPage(bstrBannerPage foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrBannerPage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PrintDevices dispatches through IADsPrintQueue's vtable slot 42.
 func (self *IADsPrintQueue) Get_PrintDevices(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NetAddresses dispatches through IADsPrintQueue's vtable slot 44.
 func (self *IADsPrintQueue) Get_NetAddresses(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsPrintQueueOperations: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsprintqueueoperations
@@ -2244,31 +2244,31 @@ var IID_IADsPrintQueueOperations = win32.GUID{Data1: 0x124be5c0, Data2: 0x156e, 
 // Get_Status dispatches through IADsPrintQueueOperations's vtable slot 20.
 func (self *IADsPrintQueueOperations) Get_Status(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PrintJobs dispatches through IADsPrintQueueOperations's vtable slot 21.
 func (self *IADsPrintQueueOperations) PrintJobs(pObject **IADsCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Pause dispatches through IADsPrintQueueOperations's vtable slot 22.
 func (self *IADsPrintQueueOperations) Pause() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Resume dispatches through IADsPrintQueueOperations's vtable slot 23.
 func (self *IADsPrintQueueOperations) Resume() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Purge dispatches through IADsPrintQueueOperations's vtable slot 24.
 func (self *IADsPrintQueueOperations) Purge() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsProperty: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsproperty
@@ -2283,67 +2283,67 @@ var IID_IADsProperty = win32.GUID{Data1: 0xc8f93dd3, Data2: 0x4ae0, Data3: 0x11c
 // Get_OID dispatches through IADsProperty's vtable slot 20.
 func (self *IADsProperty) Get_OID(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_OID dispatches through IADsProperty's vtable slot 21.
 func (self *IADsProperty) Put_OID(bstrOID foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrOID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Syntax dispatches through IADsProperty's vtable slot 22.
 func (self *IADsProperty) Get_Syntax(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Syntax dispatches through IADsProperty's vtable slot 23.
 func (self *IADsProperty) Put_Syntax(bstrSyntax foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrSyntax)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MaxRange dispatches through IADsProperty's vtable slot 24.
 func (self *IADsProperty) Get_MaxRange(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MaxRange dispatches through IADsProperty's vtable slot 25.
 func (self *IADsProperty) Put_MaxRange(lnMaxRange int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(lnMaxRange))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MinRange dispatches through IADsProperty's vtable slot 26.
 func (self *IADsProperty) Get_MinRange(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MinRange dispatches through IADsProperty's vtable slot 27.
 func (self *IADsProperty) Put_MinRange(lnMinRange int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(lnMinRange))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MultiValued dispatches through IADsProperty's vtable slot 28.
 func (self *IADsProperty) Get_MultiValued(retval *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MultiValued dispatches through IADsProperty's vtable slot 29.
 func (self *IADsProperty) Put_MultiValued(fMultiValued foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(fMultiValued))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Qualifiers dispatches through IADsProperty's vtable slot 30.
 func (self *IADsProperty) Qualifiers(ppQualifiers **IADsCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppQualifiers)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsPropertyEntry: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadspropertyentry
@@ -2358,49 +2358,49 @@ var IID_IADsPropertyEntry = win32.GUID{Data1: 0x05792c8e, Data2: 0x941f, Data3: 
 // Clear dispatches through IADsPropertyEntry's vtable slot 7.
 func (self *IADsPropertyEntry) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through IADsPropertyEntry's vtable slot 8.
 func (self *IADsPropertyEntry) Get_Name(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Name dispatches through IADsPropertyEntry's vtable slot 9.
 func (self *IADsPropertyEntry) Put_Name(bstrName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ADsType dispatches through IADsPropertyEntry's vtable slot 10.
 func (self *IADsPropertyEntry) Get_ADsType(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ADsType dispatches through IADsPropertyEntry's vtable slot 11.
 func (self *IADsPropertyEntry) Put_ADsType(lnADsType int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(lnADsType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ControlCode dispatches through IADsPropertyEntry's vtable slot 12.
 func (self *IADsPropertyEntry) Get_ControlCode(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ControlCode dispatches through IADsPropertyEntry's vtable slot 13.
 func (self *IADsPropertyEntry) Put_ControlCode(lnControlCode int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(lnControlCode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Values dispatches through IADsPropertyEntry's vtable slot 14.
 func (self *IADsPropertyEntry) Get_Values(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsPropertyList: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadspropertylist
@@ -2415,37 +2415,37 @@ var IID_IADsPropertyList = win32.GUID{Data1: 0xc6f602b6, Data2: 0x8f69, Data3: 0
 // Get_PropertyCount dispatches through IADsPropertyList's vtable slot 7.
 func (self *IADsPropertyList) Get_PropertyCount(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Next dispatches through IADsPropertyList's vtable slot 8.
 func (self *IADsPropertyList) Next(pVariant *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVariant)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IADsPropertyList's vtable slot 9.
 func (self *IADsPropertyList) Skip(cElements int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(cElements))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IADsPropertyList's vtable slot 10.
 func (self *IADsPropertyList) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPropertyItem dispatches through IADsPropertyList's vtable slot 12.
 func (self *IADsPropertyList) GetPropertyItem(bstrName foundation.BSTR, lnADsType int32, pVariant *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(lnADsType), uintptr(unsafe.Pointer(pVariant)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PurgePropertyList dispatches through IADsPropertyList's vtable slot 15.
 func (self *IADsPropertyList) PurgePropertyList() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsPropertyValue: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadspropertyvalue
@@ -2460,139 +2460,139 @@ var IID_IADsPropertyValue = win32.GUID{Data1: 0x79fa9ad0, Data2: 0xa97c, Data3: 
 // Clear dispatches through IADsPropertyValue's vtable slot 7.
 func (self *IADsPropertyValue) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ADsType dispatches through IADsPropertyValue's vtable slot 8.
 func (self *IADsPropertyValue) Get_ADsType(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ADsType dispatches through IADsPropertyValue's vtable slot 9.
 func (self *IADsPropertyValue) Put_ADsType(lnADsType int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(lnADsType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DNString dispatches through IADsPropertyValue's vtable slot 10.
 func (self *IADsPropertyValue) Get_DNString(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DNString dispatches through IADsPropertyValue's vtable slot 11.
 func (self *IADsPropertyValue) Put_DNString(bstrDNString foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDNString)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CaseExactString dispatches through IADsPropertyValue's vtable slot 12.
 func (self *IADsPropertyValue) Get_CaseExactString(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CaseExactString dispatches through IADsPropertyValue's vtable slot 13.
 func (self *IADsPropertyValue) Put_CaseExactString(bstrCaseExactString foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrCaseExactString)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CaseIgnoreString dispatches through IADsPropertyValue's vtable slot 14.
 func (self *IADsPropertyValue) Get_CaseIgnoreString(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CaseIgnoreString dispatches through IADsPropertyValue's vtable slot 15.
 func (self *IADsPropertyValue) Put_CaseIgnoreString(bstrCaseIgnoreString foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrCaseIgnoreString)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PrintableString dispatches through IADsPropertyValue's vtable slot 16.
 func (self *IADsPropertyValue) Get_PrintableString(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PrintableString dispatches through IADsPropertyValue's vtable slot 17.
 func (self *IADsPropertyValue) Put_PrintableString(bstrPrintableString foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPrintableString)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NumericString dispatches through IADsPropertyValue's vtable slot 18.
 func (self *IADsPropertyValue) Get_NumericString(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_NumericString dispatches through IADsPropertyValue's vtable slot 19.
 func (self *IADsPropertyValue) Put_NumericString(bstrNumericString foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrNumericString)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Boolean dispatches through IADsPropertyValue's vtable slot 20.
 func (self *IADsPropertyValue) Get_Boolean(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Boolean dispatches through IADsPropertyValue's vtable slot 21.
 func (self *IADsPropertyValue) Put_Boolean(lnBoolean int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(lnBoolean))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Integer dispatches through IADsPropertyValue's vtable slot 22.
 func (self *IADsPropertyValue) Get_Integer(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Integer dispatches through IADsPropertyValue's vtable slot 23.
 func (self *IADsPropertyValue) Put_Integer(lnInteger int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(lnInteger))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OctetString dispatches through IADsPropertyValue's vtable slot 24.
 func (self *IADsPropertyValue) Get_OctetString(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SecurityDescriptor dispatches through IADsPropertyValue's vtable slot 26.
 func (self *IADsPropertyValue) Get_SecurityDescriptor(retval **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SecurityDescriptor dispatches through IADsPropertyValue's vtable slot 27.
 func (self *IADsPropertyValue) Put_SecurityDescriptor(pSecurityDescriptor *systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSecurityDescriptor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LargeInteger dispatches through IADsPropertyValue's vtable slot 28.
 func (self *IADsPropertyValue) Get_LargeInteger(retval **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LargeInteger dispatches through IADsPropertyValue's vtable slot 29.
 func (self *IADsPropertyValue) Put_LargeInteger(pLargeInteger *systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLargeInteger)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UTCTime dispatches through IADsPropertyValue's vtable slot 30.
 func (self *IADsPropertyValue) Get_UTCTime(retval *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsPropertyValue2: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadspropertyvalue2
@@ -2607,7 +2607,7 @@ var IID_IADsPropertyValue2 = win32.GUID{Data1: 0x306e831c, Data2: 0x5bc7, Data3:
 // GetObjectProperty dispatches through IADsPropertyValue2's vtable slot 7.
 func (self *IADsPropertyValue2) GetObjectProperty(lnADsType *int32, pvProp *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lnADsType)), uintptr(unsafe.Pointer(pvProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsReplicaPointer: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsreplicapointer
@@ -2622,55 +2622,55 @@ var IID_IADsReplicaPointer = win32.GUID{Data1: 0xf60fb803, Data2: 0x4080, Data3:
 // Get_ServerName dispatches through IADsReplicaPointer's vtable slot 7.
 func (self *IADsReplicaPointer) Get_ServerName(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ServerName dispatches through IADsReplicaPointer's vtable slot 8.
 func (self *IADsReplicaPointer) Put_ServerName(bstrServerName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrServerName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReplicaType dispatches through IADsReplicaPointer's vtable slot 9.
 func (self *IADsReplicaPointer) Get_ReplicaType(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ReplicaType dispatches through IADsReplicaPointer's vtable slot 10.
 func (self *IADsReplicaPointer) Put_ReplicaType(lnReplicaType int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lnReplicaType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReplicaNumber dispatches through IADsReplicaPointer's vtable slot 11.
 func (self *IADsReplicaPointer) Get_ReplicaNumber(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ReplicaNumber dispatches through IADsReplicaPointer's vtable slot 12.
 func (self *IADsReplicaPointer) Put_ReplicaNumber(lnReplicaNumber int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(lnReplicaNumber))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IADsReplicaPointer's vtable slot 13.
 func (self *IADsReplicaPointer) Get_Count(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Count dispatches through IADsReplicaPointer's vtable slot 14.
 func (self *IADsReplicaPointer) Put_Count(lnCount int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(lnCount))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReplicaAddressHints dispatches through IADsReplicaPointer's vtable slot 15.
 func (self *IADsReplicaPointer) Get_ReplicaAddressHints(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsResource: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsresource
@@ -2685,25 +2685,25 @@ var IID_IADsResource = win32.GUID{Data1: 0x34a05b20, Data2: 0x4aab, Data3: 0x11c
 // Get_User dispatches through IADsResource's vtable slot 20.
 func (self *IADsResource) Get_User(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UserPath dispatches through IADsResource's vtable slot 21.
 func (self *IADsResource) Get_UserPath(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Path dispatches through IADsResource's vtable slot 22.
 func (self *IADsResource) Get_Path(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LockCount dispatches through IADsResource's vtable slot 23.
 func (self *IADsResource) Get_LockCount(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsSecurityDescriptor: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadssecuritydescriptor
@@ -2718,127 +2718,127 @@ var IID_IADsSecurityDescriptor = win32.GUID{Data1: 0xb8c787ca, Data2: 0x9bdd, Da
 // Get_Revision dispatches through IADsSecurityDescriptor's vtable slot 7.
 func (self *IADsSecurityDescriptor) Get_Revision(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Revision dispatches through IADsSecurityDescriptor's vtable slot 8.
 func (self *IADsSecurityDescriptor) Put_Revision(lnRevision int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lnRevision))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Control dispatches through IADsSecurityDescriptor's vtable slot 9.
 func (self *IADsSecurityDescriptor) Get_Control(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Control dispatches through IADsSecurityDescriptor's vtable slot 10.
 func (self *IADsSecurityDescriptor) Put_Control(lnControl int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lnControl))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Owner dispatches through IADsSecurityDescriptor's vtable slot 11.
 func (self *IADsSecurityDescriptor) Get_Owner(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Owner dispatches through IADsSecurityDescriptor's vtable slot 12.
 func (self *IADsSecurityDescriptor) Put_Owner(bstrOwner foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrOwner)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OwnerDefaulted dispatches through IADsSecurityDescriptor's vtable slot 13.
 func (self *IADsSecurityDescriptor) Get_OwnerDefaulted(retval *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_OwnerDefaulted dispatches through IADsSecurityDescriptor's vtable slot 14.
 func (self *IADsSecurityDescriptor) Put_OwnerDefaulted(fOwnerDefaulted foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(fOwnerDefaulted))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Group dispatches through IADsSecurityDescriptor's vtable slot 15.
 func (self *IADsSecurityDescriptor) Get_Group(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Group dispatches through IADsSecurityDescriptor's vtable slot 16.
 func (self *IADsSecurityDescriptor) Put_Group(bstrGroup foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGroup)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_GroupDefaulted dispatches through IADsSecurityDescriptor's vtable slot 17.
 func (self *IADsSecurityDescriptor) Get_GroupDefaulted(retval *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_GroupDefaulted dispatches through IADsSecurityDescriptor's vtable slot 18.
 func (self *IADsSecurityDescriptor) Put_GroupDefaulted(fGroupDefaulted foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(fGroupDefaulted))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DiscretionaryAcl dispatches through IADsSecurityDescriptor's vtable slot 19.
 func (self *IADsSecurityDescriptor) Get_DiscretionaryAcl(retval **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DiscretionaryAcl dispatches through IADsSecurityDescriptor's vtable slot 20.
 func (self *IADsSecurityDescriptor) Put_DiscretionaryAcl(pDiscretionaryAcl *systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDiscretionaryAcl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DaclDefaulted dispatches through IADsSecurityDescriptor's vtable slot 21.
 func (self *IADsSecurityDescriptor) Get_DaclDefaulted(retval *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DaclDefaulted dispatches through IADsSecurityDescriptor's vtable slot 22.
 func (self *IADsSecurityDescriptor) Put_DaclDefaulted(fDaclDefaulted foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(fDaclDefaulted))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SystemAcl dispatches through IADsSecurityDescriptor's vtable slot 23.
 func (self *IADsSecurityDescriptor) Get_SystemAcl(retval **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SystemAcl dispatches through IADsSecurityDescriptor's vtable slot 24.
 func (self *IADsSecurityDescriptor) Put_SystemAcl(pSystemAcl *systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSystemAcl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SaclDefaulted dispatches through IADsSecurityDescriptor's vtable slot 25.
 func (self *IADsSecurityDescriptor) Get_SaclDefaulted(retval *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SaclDefaulted dispatches through IADsSecurityDescriptor's vtable slot 26.
 func (self *IADsSecurityDescriptor) Put_SaclDefaulted(fSaclDefaulted foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(fSaclDefaulted))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CopySecurityDescriptor dispatches through IADsSecurityDescriptor's vtable slot 27.
 func (self *IADsSecurityDescriptor) CopySecurityDescriptor(ppSecurityDescriptor **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSecurityDescriptor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsSecurityUtility: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadssecurityutility
@@ -2853,13 +2853,13 @@ var IID_IADsSecurityUtility = win32.GUID{Data1: 0xa63251b2, Data2: 0x5f21, Data3
 // Get_SecurityMask dispatches through IADsSecurityUtility's vtable slot 10.
 func (self *IADsSecurityUtility) Get_SecurityMask(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SecurityMask dispatches through IADsSecurityUtility's vtable slot 11.
 func (self *IADsSecurityUtility) Put_SecurityMask(lnSecurityMask int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(lnSecurityMask))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsService: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsservice
@@ -2874,139 +2874,139 @@ var IID_IADsService = win32.GUID{Data1: 0x68af66e0, Data2: 0x31ca, Data3: 0x11cf
 // Get_HostComputer dispatches through IADsService's vtable slot 20.
 func (self *IADsService) Get_HostComputer(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_HostComputer dispatches through IADsService's vtable slot 21.
 func (self *IADsService) Put_HostComputer(bstrHostComputer foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrHostComputer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DisplayName dispatches through IADsService's vtable slot 22.
 func (self *IADsService) Get_DisplayName(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DisplayName dispatches through IADsService's vtable slot 23.
 func (self *IADsService) Put_DisplayName(bstrDisplayName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDisplayName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Version dispatches through IADsService's vtable slot 24.
 func (self *IADsService) Get_Version(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Version dispatches through IADsService's vtable slot 25.
 func (self *IADsService) Put_Version(bstrVersion foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrVersion)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ServiceType dispatches through IADsService's vtable slot 26.
 func (self *IADsService) Get_ServiceType(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ServiceType dispatches through IADsService's vtable slot 27.
 func (self *IADsService) Put_ServiceType(lnServiceType int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(lnServiceType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StartType dispatches through IADsService's vtable slot 28.
 func (self *IADsService) Get_StartType(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_StartType dispatches through IADsService's vtable slot 29.
 func (self *IADsService) Put_StartType(lnStartType int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(lnStartType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Path dispatches through IADsService's vtable slot 30.
 func (self *IADsService) Get_Path(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Path dispatches through IADsService's vtable slot 31.
 func (self *IADsService) Put_Path(bstrPath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StartupParameters dispatches through IADsService's vtable slot 32.
 func (self *IADsService) Get_StartupParameters(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_StartupParameters dispatches through IADsService's vtable slot 33.
 func (self *IADsService) Put_StartupParameters(bstrStartupParameters foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrStartupParameters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ErrorControl dispatches through IADsService's vtable slot 34.
 func (self *IADsService) Get_ErrorControl(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ErrorControl dispatches through IADsService's vtable slot 35.
 func (self *IADsService) Put_ErrorControl(lnErrorControl int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(lnErrorControl))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LoadOrderGroup dispatches through IADsService's vtable slot 36.
 func (self *IADsService) Get_LoadOrderGroup(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LoadOrderGroup dispatches through IADsService's vtable slot 37.
 func (self *IADsService) Put_LoadOrderGroup(bstrLoadOrderGroup foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrLoadOrderGroup)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ServiceAccountName dispatches through IADsService's vtable slot 38.
 func (self *IADsService) Get_ServiceAccountName(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ServiceAccountName dispatches through IADsService's vtable slot 39.
 func (self *IADsService) Put_ServiceAccountName(bstrServiceAccountName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrServiceAccountName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ServiceAccountPath dispatches through IADsService's vtable slot 40.
 func (self *IADsService) Get_ServiceAccountPath(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ServiceAccountPath dispatches through IADsService's vtable slot 41.
 func (self *IADsService) Put_ServiceAccountPath(bstrServiceAccountPath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrServiceAccountPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Dependencies dispatches through IADsService's vtable slot 42.
 func (self *IADsService) Get_Dependencies(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsServiceOperations: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsserviceoperations
@@ -3021,37 +3021,37 @@ var IID_IADsServiceOperations = win32.GUID{Data1: 0x5d7b33f0, Data2: 0x31ca, Dat
 // Get_Status dispatches through IADsServiceOperations's vtable slot 20.
 func (self *IADsServiceOperations) Get_Status(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Start dispatches through IADsServiceOperations's vtable slot 21.
 func (self *IADsServiceOperations) Start() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Stop dispatches through IADsServiceOperations's vtable slot 22.
 func (self *IADsServiceOperations) Stop() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Pause dispatches through IADsServiceOperations's vtable slot 23.
 func (self *IADsServiceOperations) Pause() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Continue dispatches through IADsServiceOperations's vtable slot 24.
 func (self *IADsServiceOperations) Continue() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetPassword dispatches through IADsServiceOperations's vtable slot 25.
 func (self *IADsServiceOperations) SetPassword(bstrNewPassword foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrNewPassword)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsSession: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadssession
@@ -3066,37 +3066,37 @@ var IID_IADsSession = win32.GUID{Data1: 0x398b7da0, Data2: 0x4aab, Data3: 0x11cf
 // Get_User dispatches through IADsSession's vtable slot 20.
 func (self *IADsSession) Get_User(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UserPath dispatches through IADsSession's vtable slot 21.
 func (self *IADsSession) Get_UserPath(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Computer dispatches through IADsSession's vtable slot 22.
 func (self *IADsSession) Get_Computer(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ComputerPath dispatches through IADsSession's vtable slot 23.
 func (self *IADsSession) Get_ComputerPath(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ConnectTime dispatches through IADsSession's vtable slot 24.
 func (self *IADsSession) Get_ConnectTime(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IdleTime dispatches through IADsSession's vtable slot 25.
 func (self *IADsSession) Get_IdleTime(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsSyntax: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadssyntax
@@ -3111,13 +3111,13 @@ var IID_IADsSyntax = win32.GUID{Data1: 0xc8f93dd2, Data2: 0x4ae0, Data3: 0x11cf,
 // Get_OleAutoDataType dispatches through IADsSyntax's vtable slot 20.
 func (self *IADsSyntax) Get_OleAutoDataType(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_OleAutoDataType dispatches through IADsSyntax's vtable slot 21.
 func (self *IADsSyntax) Put_OleAutoDataType(lnOleAutoDataType int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(lnOleAutoDataType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsTimestamp: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadstimestamp
@@ -3132,25 +3132,25 @@ var IID_IADsTimestamp = win32.GUID{Data1: 0xb2f5a901, Data2: 0x4080, Data3: 0x11
 // Get_WholeSeconds dispatches through IADsTimestamp's vtable slot 7.
 func (self *IADsTimestamp) Get_WholeSeconds(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_WholeSeconds dispatches through IADsTimestamp's vtable slot 8.
 func (self *IADsTimestamp) Put_WholeSeconds(lnWholeSeconds int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lnWholeSeconds))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EventID dispatches through IADsTimestamp's vtable slot 9.
 func (self *IADsTimestamp) Get_EventID(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EventID dispatches through IADsTimestamp's vtable slot 10.
 func (self *IADsTimestamp) Put_EventID(lnEventID int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lnEventID))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsTypedName: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadstypedname
@@ -3165,37 +3165,37 @@ var IID_IADsTypedName = win32.GUID{Data1: 0xb371a349, Data2: 0x4080, Data3: 0x11
 // Get_ObjectName dispatches through IADsTypedName's vtable slot 7.
 func (self *IADsTypedName) Get_ObjectName(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ObjectName dispatches through IADsTypedName's vtable slot 8.
 func (self *IADsTypedName) Put_ObjectName(bstrObjectName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrObjectName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Level dispatches through IADsTypedName's vtable slot 9.
 func (self *IADsTypedName) Get_Level(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Level dispatches through IADsTypedName's vtable slot 10.
 func (self *IADsTypedName) Put_Level(lnLevel int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lnLevel))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Interval dispatches through IADsTypedName's vtable slot 11.
 func (self *IADsTypedName) Get_Interval(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Interval dispatches through IADsTypedName's vtable slot 12.
 func (self *IADsTypedName) Put_Interval(lnInterval int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(lnInterval))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsUser: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsuser
@@ -3210,457 +3210,457 @@ var IID_IADsUser = win32.GUID{Data1: 0x3e37e320, Data2: 0x17e2, Data3: 0x11cf, D
 // Get_BadLoginAddress dispatches through IADsUser's vtable slot 20.
 func (self *IADsUser) Get_BadLoginAddress(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BadLoginCount dispatches through IADsUser's vtable slot 21.
 func (self *IADsUser) Get_BadLoginCount(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastLogin dispatches through IADsUser's vtable slot 22.
 func (self *IADsUser) Get_LastLogin(retval *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastLogoff dispatches through IADsUser's vtable slot 23.
 func (self *IADsUser) Get_LastLogoff(retval *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastFailedLogin dispatches through IADsUser's vtable slot 24.
 func (self *IADsUser) Get_LastFailedLogin(retval *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PasswordLastChanged dispatches through IADsUser's vtable slot 25.
 func (self *IADsUser) Get_PasswordLastChanged(retval *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through IADsUser's vtable slot 26.
 func (self *IADsUser) Get_Description(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Description dispatches through IADsUser's vtable slot 27.
 func (self *IADsUser) Put_Description(bstrDescription foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Division dispatches through IADsUser's vtable slot 28.
 func (self *IADsUser) Get_Division(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Division dispatches through IADsUser's vtable slot 29.
 func (self *IADsUser) Put_Division(bstrDivision foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDivision)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Department dispatches through IADsUser's vtable slot 30.
 func (self *IADsUser) Get_Department(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Department dispatches through IADsUser's vtable slot 31.
 func (self *IADsUser) Put_Department(bstrDepartment foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDepartment)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EmployeeID dispatches through IADsUser's vtable slot 32.
 func (self *IADsUser) Get_EmployeeID(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EmployeeID dispatches through IADsUser's vtable slot 33.
 func (self *IADsUser) Put_EmployeeID(bstrEmployeeID foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrEmployeeID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FullName dispatches through IADsUser's vtable slot 34.
 func (self *IADsUser) Get_FullName(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FullName dispatches through IADsUser's vtable slot 35.
 func (self *IADsUser) Put_FullName(bstrFullName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrFullName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FirstName dispatches through IADsUser's vtable slot 36.
 func (self *IADsUser) Get_FirstName(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FirstName dispatches through IADsUser's vtable slot 37.
 func (self *IADsUser) Put_FirstName(bstrFirstName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrFirstName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastName dispatches through IADsUser's vtable slot 38.
 func (self *IADsUser) Get_LastName(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LastName dispatches through IADsUser's vtable slot 39.
 func (self *IADsUser) Put_LastName(bstrLastName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrLastName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OtherName dispatches through IADsUser's vtable slot 40.
 func (self *IADsUser) Get_OtherName(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_OtherName dispatches through IADsUser's vtable slot 41.
 func (self *IADsUser) Put_OtherName(bstrOtherName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrOtherName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NamePrefix dispatches through IADsUser's vtable slot 42.
 func (self *IADsUser) Get_NamePrefix(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_NamePrefix dispatches through IADsUser's vtable slot 43.
 func (self *IADsUser) Put_NamePrefix(bstrNamePrefix foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrNamePrefix)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NameSuffix dispatches through IADsUser's vtable slot 44.
 func (self *IADsUser) Get_NameSuffix(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_NameSuffix dispatches through IADsUser's vtable slot 45.
 func (self *IADsUser) Put_NameSuffix(bstrNameSuffix foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrNameSuffix)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Title dispatches through IADsUser's vtable slot 46.
 func (self *IADsUser) Get_Title(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Title dispatches through IADsUser's vtable slot 47.
 func (self *IADsUser) Put_Title(bstrTitle foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTitle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Manager dispatches through IADsUser's vtable slot 48.
 func (self *IADsUser) Get_Manager(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Manager dispatches through IADsUser's vtable slot 49.
 func (self *IADsUser) Put_Manager(bstrManager foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrManager)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TelephoneHome dispatches through IADsUser's vtable slot 50.
 func (self *IADsUser) Get_TelephoneHome(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TelephoneMobile dispatches through IADsUser's vtable slot 52.
 func (self *IADsUser) Get_TelephoneMobile(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TelephoneNumber dispatches through IADsUser's vtable slot 54.
 func (self *IADsUser) Get_TelephoneNumber(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TelephonePager dispatches through IADsUser's vtable slot 56.
 func (self *IADsUser) Get_TelephonePager(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FaxNumber dispatches through IADsUser's vtable slot 58.
 func (self *IADsUser) Get_FaxNumber(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OfficeLocations dispatches through IADsUser's vtable slot 60.
 func (self *IADsUser) Get_OfficeLocations(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PostalAddresses dispatches through IADsUser's vtable slot 62.
 func (self *IADsUser) Get_PostalAddresses(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PostalCodes dispatches through IADsUser's vtable slot 64.
 func (self *IADsUser) Get_PostalCodes(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SeeAlso dispatches through IADsUser's vtable slot 66.
 func (self *IADsUser) Get_SeeAlso(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AccountDisabled dispatches through IADsUser's vtable slot 68.
 func (self *IADsUser) Get_AccountDisabled(retval *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AccountDisabled dispatches through IADsUser's vtable slot 69.
 func (self *IADsUser) Put_AccountDisabled(fAccountDisabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(fAccountDisabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AccountExpirationDate dispatches through IADsUser's vtable slot 70.
 func (self *IADsUser) Get_AccountExpirationDate(retval *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_GraceLoginsAllowed dispatches through IADsUser's vtable slot 72.
 func (self *IADsUser) Get_GraceLoginsAllowed(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[72], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_GraceLoginsAllowed dispatches through IADsUser's vtable slot 73.
 func (self *IADsUser) Put_GraceLoginsAllowed(lnGraceLoginsAllowed int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(lnGraceLoginsAllowed))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_GraceLoginsRemaining dispatches through IADsUser's vtable slot 74.
 func (self *IADsUser) Get_GraceLoginsRemaining(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[74], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_GraceLoginsRemaining dispatches through IADsUser's vtable slot 75.
 func (self *IADsUser) Put_GraceLoginsRemaining(lnGraceLoginsRemaining int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[75], uintptr(unsafe.Pointer(self)), uintptr(lnGraceLoginsRemaining))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsAccountLocked dispatches through IADsUser's vtable slot 76.
 func (self *IADsUser) Get_IsAccountLocked(retval *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[76], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_IsAccountLocked dispatches through IADsUser's vtable slot 77.
 func (self *IADsUser) Put_IsAccountLocked(fIsAccountLocked foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[77], uintptr(unsafe.Pointer(self)), uintptr(fIsAccountLocked))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LoginHours dispatches through IADsUser's vtable slot 78.
 func (self *IADsUser) Get_LoginHours(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LoginWorkstations dispatches through IADsUser's vtable slot 80.
 func (self *IADsUser) Get_LoginWorkstations(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[80], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MaxLogins dispatches through IADsUser's vtable slot 82.
 func (self *IADsUser) Get_MaxLogins(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MaxLogins dispatches through IADsUser's vtable slot 83.
 func (self *IADsUser) Put_MaxLogins(lnMaxLogins int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(lnMaxLogins))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MaxStorage dispatches through IADsUser's vtable slot 84.
 func (self *IADsUser) Get_MaxStorage(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MaxStorage dispatches through IADsUser's vtable slot 85.
 func (self *IADsUser) Put_MaxStorage(lnMaxStorage int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(lnMaxStorage))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PasswordExpirationDate dispatches through IADsUser's vtable slot 86.
 func (self *IADsUser) Get_PasswordExpirationDate(retval *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PasswordMinimumLength dispatches through IADsUser's vtable slot 88.
 func (self *IADsUser) Get_PasswordMinimumLength(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[88], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PasswordMinimumLength dispatches through IADsUser's vtable slot 89.
 func (self *IADsUser) Put_PasswordMinimumLength(lnPasswordMinimumLength int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[89], uintptr(unsafe.Pointer(self)), uintptr(lnPasswordMinimumLength))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PasswordRequired dispatches through IADsUser's vtable slot 90.
 func (self *IADsUser) Get_PasswordRequired(retval *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PasswordRequired dispatches through IADsUser's vtable slot 91.
 func (self *IADsUser) Put_PasswordRequired(fPasswordRequired foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[91], uintptr(unsafe.Pointer(self)), uintptr(fPasswordRequired))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RequireUniquePassword dispatches through IADsUser's vtable slot 92.
 func (self *IADsUser) Get_RequireUniquePassword(retval *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[92], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RequireUniquePassword dispatches through IADsUser's vtable slot 93.
 func (self *IADsUser) Put_RequireUniquePassword(fRequireUniquePassword foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[93], uintptr(unsafe.Pointer(self)), uintptr(fRequireUniquePassword))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EmailAddress dispatches through IADsUser's vtable slot 94.
 func (self *IADsUser) Get_EmailAddress(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[94], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EmailAddress dispatches through IADsUser's vtable slot 95.
 func (self *IADsUser) Put_EmailAddress(bstrEmailAddress foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[95], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrEmailAddress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HomeDirectory dispatches through IADsUser's vtable slot 96.
 func (self *IADsUser) Get_HomeDirectory(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[96], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_HomeDirectory dispatches through IADsUser's vtable slot 97.
 func (self *IADsUser) Put_HomeDirectory(bstrHomeDirectory foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[97], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrHomeDirectory)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Languages dispatches through IADsUser's vtable slot 98.
 func (self *IADsUser) Get_Languages(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[98], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Profile dispatches through IADsUser's vtable slot 100.
 func (self *IADsUser) Get_Profile(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[100], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Profile dispatches through IADsUser's vtable slot 101.
 func (self *IADsUser) Put_Profile(bstrProfile foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[101], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProfile)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LoginScript dispatches through IADsUser's vtable slot 102.
 func (self *IADsUser) Get_LoginScript(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[102], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LoginScript dispatches through IADsUser's vtable slot 103.
 func (self *IADsUser) Put_LoginScript(bstrLoginScript foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[103], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrLoginScript)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Picture dispatches through IADsUser's vtable slot 104.
 func (self *IADsUser) Get_Picture(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[104], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HomePage dispatches through IADsUser's vtable slot 106.
 func (self *IADsUser) Get_HomePage(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[106], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_HomePage dispatches through IADsUser's vtable slot 107.
 func (self *IADsUser) Put_HomePage(bstrHomePage foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[107], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrHomePage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Groups dispatches through IADsUser's vtable slot 108.
 func (self *IADsUser) Groups(ppGroups **IADsMembers) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[108], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppGroups)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetPassword dispatches through IADsUser's vtable slot 109.
 func (self *IADsUser) SetPassword(NewPassword foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[109], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(NewPassword)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ChangePassword dispatches through IADsUser's vtable slot 110.
 func (self *IADsUser) ChangePassword(bstrOldPassword foundation.BSTR, bstrNewPassword foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[110], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrOldPassword)), uintptr(unsafe.Pointer(bstrNewPassword)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IADsWinNTSystemInfo: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadswinntsysteminfo
@@ -3675,25 +3675,25 @@ var IID_IADsWinNTSystemInfo = win32.GUID{Data1: 0x6c6d65dc, Data2: 0xafd1, Data3
 // Get_UserName dispatches through IADsWinNTSystemInfo's vtable slot 7.
 func (self *IADsWinNTSystemInfo) Get_UserName(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ComputerName dispatches through IADsWinNTSystemInfo's vtable slot 8.
 func (self *IADsWinNTSystemInfo) Get_ComputerName(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DomainName dispatches through IADsWinNTSystemInfo's vtable slot 9.
 func (self *IADsWinNTSystemInfo) Get_DomainName(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PDC dispatches through IADsWinNTSystemInfo's vtable slot 10.
 func (self *IADsWinNTSystemInfo) Get_PDC(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICommonQuery: https://learn.microsoft.com/windows/win32/api/cmnquery/nn-cmnquery-icommonquery
@@ -3708,7 +3708,7 @@ var IID_ICommonQuery = win32.GUID{Data1: 0xab50dec0, Data2: 0x6f1d, Data3: 0x11d
 // OpenQueryWindow dispatches through ICommonQuery's vtable slot 3.
 func (self *ICommonQuery) OpenQueryWindow(hwndParent foundation.HWND, pQueryWnd *OPENQUERYWINDOW, ppDataObject **systemcom.IDataObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(unsafe.Pointer(pQueryWnd)), uintptr(unsafe.Pointer(ppDataObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDirectoryObject: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-idirectoryobject
@@ -3723,33 +3723,33 @@ var IID_IDirectoryObject = win32.GUID{Data1: 0xe798de2c, Data2: 0x22e4, Data3: 0
 // GetObjectInformation dispatches through IDirectoryObject's vtable slot 3.
 func (self *IDirectoryObject) GetObjectInformation(ppObjInfo **ADS_OBJECT_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppObjInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetObjectAttributes dispatches through IDirectoryObject's vtable slot 4.
 func (self *IDirectoryObject) GetObjectAttributes(pAttributeNames *foundation.PWSTR, dwNumberAttributes uint32, ppAttributeEntries **ADS_ATTR_INFO, pdwNumAttributesReturned *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAttributeNames)), uintptr(dwNumberAttributes), uintptr(unsafe.Pointer(ppAttributeEntries)), uintptr(unsafe.Pointer(pdwNumAttributesReturned)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetObjectAttributes dispatches through IDirectoryObject's vtable slot 5.
 func (self *IDirectoryObject) SetObjectAttributes(pAttributeEntries *ADS_ATTR_INFO, dwNumAttributes uint32, pdwNumAttributesModified *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAttributeEntries)), uintptr(dwNumAttributes), uintptr(unsafe.Pointer(pdwNumAttributesModified)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateDSObject dispatches through IDirectoryObject's vtable slot 6.
 func (self *IDirectoryObject) CreateDSObject(pszRDNName string, pAttributeEntries *ADS_ATTR_INFO, dwNumAttributes uint32, ppObject **systemcom.IDispatch) error {
 	_pszRDNName := win32.UTF16Ptr(pszRDNName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszRDNName)), uintptr(unsafe.Pointer(pAttributeEntries)), uintptr(dwNumAttributes), uintptr(unsafe.Pointer(ppObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteDSObject dispatches through IDirectoryObject's vtable slot 7.
 func (self *IDirectoryObject) DeleteDSObject(pszRDNName string) error {
 	_pszRDNName := win32.UTF16Ptr(pszRDNName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszRDNName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDirectorySchemaMgmt: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-idirectoryschemamgmt
@@ -3764,55 +3764,55 @@ var IID_IDirectorySchemaMgmt = win32.GUID{Data1: 0x75db3b9c, Data2: 0xa4d8, Data
 // EnumAttributes dispatches through IDirectorySchemaMgmt's vtable slot 3.
 func (self *IDirectorySchemaMgmt) EnumAttributes(ppszAttrNames *foundation.PWSTR, dwNumAttributes uint32, ppAttrDefinition **ADS_ATTR_DEF, pdwNumAttributes *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszAttrNames)), uintptr(dwNumAttributes), uintptr(unsafe.Pointer(ppAttrDefinition)), uintptr(unsafe.Pointer(pdwNumAttributes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateAttributeDefinition dispatches through IDirectorySchemaMgmt's vtable slot 4.
 func (self *IDirectorySchemaMgmt) CreateAttributeDefinition(pszAttributeName string, pAttributeDefinition *ADS_ATTR_DEF) error {
 	_pszAttributeName := win32.UTF16Ptr(pszAttributeName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszAttributeName)), uintptr(unsafe.Pointer(pAttributeDefinition)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteAttributeDefinition dispatches through IDirectorySchemaMgmt's vtable slot 5.
 func (self *IDirectorySchemaMgmt) WriteAttributeDefinition(pszAttributeName string, pAttributeDefinition *ADS_ATTR_DEF) error {
 	_pszAttributeName := win32.UTF16Ptr(pszAttributeName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszAttributeName)), uintptr(unsafe.Pointer(pAttributeDefinition)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteAttributeDefinition dispatches through IDirectorySchemaMgmt's vtable slot 6.
 func (self *IDirectorySchemaMgmt) DeleteAttributeDefinition(pszAttributeName string) error {
 	_pszAttributeName := win32.UTF16Ptr(pszAttributeName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszAttributeName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumClasses dispatches through IDirectorySchemaMgmt's vtable slot 7.
 func (self *IDirectorySchemaMgmt) EnumClasses(ppszClassNames *foundation.PWSTR, dwNumClasses uint32, ppClassDefinition **ADS_CLASS_DEF, pdwNumClasses *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszClassNames)), uintptr(dwNumClasses), uintptr(unsafe.Pointer(ppClassDefinition)), uintptr(unsafe.Pointer(pdwNumClasses)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteClassDefinition dispatches through IDirectorySchemaMgmt's vtable slot 8.
 func (self *IDirectorySchemaMgmt) WriteClassDefinition(pszClassName string, pClassDefinition *ADS_CLASS_DEF) error {
 	_pszClassName := win32.UTF16Ptr(pszClassName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszClassName)), uintptr(unsafe.Pointer(pClassDefinition)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateClassDefinition dispatches through IDirectorySchemaMgmt's vtable slot 9.
 func (self *IDirectorySchemaMgmt) CreateClassDefinition(pszClassName string, pClassDefinition *ADS_CLASS_DEF) error {
 	_pszClassName := win32.UTF16Ptr(pszClassName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszClassName)), uintptr(unsafe.Pointer(pClassDefinition)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteClassDefinition dispatches through IDirectorySchemaMgmt's vtable slot 10.
 func (self *IDirectorySchemaMgmt) DeleteClassDefinition(pszClassName string) error {
 	_pszClassName := win32.UTF16Ptr(pszClassName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszClassName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDirectorySearch: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-idirectorysearch
@@ -3827,63 +3827,63 @@ var IID_IDirectorySearch = win32.GUID{Data1: 0x109ba8ec, Data2: 0x92f0, Data3: 0
 // SetSearchPreference dispatches through IDirectorySearch's vtable slot 3.
 func (self *IDirectorySearch) SetSearchPreference(pSearchPrefs *ADS_SEARCHPREF_INFO, dwNumPrefs uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSearchPrefs)), uintptr(dwNumPrefs))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExecuteSearch dispatches through IDirectorySearch's vtable slot 4.
 func (self *IDirectorySearch) ExecuteSearch(pszSearchFilter string, pAttributeNames *foundation.PWSTR, dwNumberAttributes uint32, phSearchResult *ADS_SEARCH_HANDLE) error {
 	_pszSearchFilter := win32.UTF16Ptr(pszSearchFilter)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSearchFilter)), uintptr(unsafe.Pointer(pAttributeNames)), uintptr(dwNumberAttributes), uintptr(unsafe.Pointer(phSearchResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AbandonSearch dispatches through IDirectorySearch's vtable slot 5.
 func (self *IDirectorySearch) AbandonSearch(phSearchResult ADS_SEARCH_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(phSearchResult))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFirstRow dispatches through IDirectorySearch's vtable slot 6.
 func (self *IDirectorySearch) GetFirstRow(hSearchResult ADS_SEARCH_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hSearchResult))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNextRow dispatches through IDirectorySearch's vtable slot 7.
 func (self *IDirectorySearch) GetNextRow(hSearchResult ADS_SEARCH_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hSearchResult))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPreviousRow dispatches through IDirectorySearch's vtable slot 8.
 func (self *IDirectorySearch) GetPreviousRow(hSearchResult ADS_SEARCH_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(hSearchResult))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNextColumnName dispatches through IDirectorySearch's vtable slot 9.
 func (self *IDirectorySearch) GetNextColumnName(hSearchHandle ADS_SEARCH_HANDLE, ppszColumnName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(hSearchHandle), uintptr(unsafe.Pointer(ppszColumnName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetColumn dispatches through IDirectorySearch's vtable slot 10.
 func (self *IDirectorySearch) GetColumn(hSearchResult ADS_SEARCH_HANDLE, szColumnName string, pSearchColumn *ADS_SEARCH_COLUMN) error {
 	_szColumnName := win32.UTF16Ptr(szColumnName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(hSearchResult), uintptr(unsafe.Pointer(_szColumnName)), uintptr(unsafe.Pointer(pSearchColumn)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FreeColumn dispatches through IDirectorySearch's vtable slot 11.
 func (self *IDirectorySearch) FreeColumn(pSearchColumn *ADS_SEARCH_COLUMN) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSearchColumn)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CloseSearchHandle dispatches through IDirectorySearch's vtable slot 12.
 func (self *IDirectorySearch) CloseSearchHandle(hSearchResult ADS_SEARCH_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(hSearchResult))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDsAdminCreateObj: https://learn.microsoft.com/windows/win32/api/dsadmin/nn-dsadmin-idsadmincreateobj
@@ -3899,13 +3899,13 @@ var IID_IDsAdminCreateObj = win32.GUID{Data1: 0x53554a38, Data2: 0xf902, Data3: 
 func (self *IDsAdminCreateObj) Initialize(pADsContainerObj *IADsContainer, pADsCopySource *IADs, lpszClassName string) error {
 	_lpszClassName := win32.UTF16Ptr(lpszClassName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pADsContainerObj)), uintptr(unsafe.Pointer(pADsCopySource)), uintptr(unsafe.Pointer(_lpszClassName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateModal dispatches through IDsAdminCreateObj's vtable slot 4.
 func (self *IDsAdminCreateObj) CreateModal(hwndParent foundation.HWND, ppADsObj **IADs) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(unsafe.Pointer(ppADsObj)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDsAdminNewObj: https://learn.microsoft.com/windows/win32/api/dsadmin/nn-dsadmin-idsadminnewobj
@@ -3921,13 +3921,13 @@ var IID_IDsAdminNewObj = win32.GUID{Data1: 0xf2573587, Data2: 0xe6fc, Data3: 0x1
 func (self *IDsAdminNewObj) SetButtons(nCurrIndex uint32, bValid bool) error {
 	_bValid := win32.Bool32(bValid)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(nCurrIndex), uintptr(_bValid))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPageCounts dispatches through IDsAdminNewObj's vtable slot 4.
 func (self *IDsAdminNewObj) GetPageCounts(pnTotal *int32, pnStartIndex *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnTotal)), uintptr(unsafe.Pointer(pnStartIndex)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDsAdminNewObjExt: https://learn.microsoft.com/windows/win32/api/dsadmin/nn-dsadmin-idsadminnewobjext
@@ -3943,37 +3943,37 @@ var IID_IDsAdminNewObjExt = win32.GUID{Data1: 0x6088eae2, Data2: 0xe7bf, Data3: 
 func (self *IDsAdminNewObjExt) Initialize(pADsContainerObj *IADsContainer, pADsCopySource *IADs, lpszClassName string, pDsAdminNewObj *IDsAdminNewObj, pDispInfo *DSA_NEWOBJ_DISPINFO) error {
 	_lpszClassName := win32.UTF16Ptr(lpszClassName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pADsContainerObj)), uintptr(unsafe.Pointer(pADsCopySource)), uintptr(unsafe.Pointer(_lpszClassName)), uintptr(unsafe.Pointer(pDsAdminNewObj)), uintptr(unsafe.Pointer(pDispInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddPages dispatches through IDsAdminNewObjExt's vtable slot 4.
 func (self *IDsAdminNewObjExt) AddPages(lpfnAddPage uicontrols.LPFNSVADDPROPSHEETPAGE, lParam foundation.LPARAM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(lpfnAddPage), uintptr(lParam))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetObject dispatches through IDsAdminNewObjExt's vtable slot 5.
 func (self *IDsAdminNewObjExt) SetObject(pADsObj *IADs) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pADsObj)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteData dispatches through IDsAdminNewObjExt's vtable slot 6.
 func (self *IDsAdminNewObjExt) WriteData(hWnd foundation.HWND, uContext uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hWnd), uintptr(uContext))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnError dispatches through IDsAdminNewObjExt's vtable slot 7.
 func (self *IDsAdminNewObjExt) OnError(hWnd foundation.HWND, hr foundation.HRESULT, uContext uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hWnd), uintptr(hr), uintptr(uContext))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSummaryInfo dispatches through IDsAdminNewObjExt's vtable slot 8.
 func (self *IDsAdminNewObjExt) GetSummaryInfo(pBstrText *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBstrText)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDsAdminNewObjPrimarySite: https://learn.microsoft.com/windows/win32/api/dsadmin/nn-dsadmin-idsadminnewobjprimarysite
@@ -3989,13 +3989,13 @@ var IID_IDsAdminNewObjPrimarySite = win32.GUID{Data1: 0xbe2b487e, Data2: 0xf904,
 func (self *IDsAdminNewObjPrimarySite) CreateNew(pszName string) error {
 	_pszName := win32.UTF16Ptr(pszName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Commit dispatches through IDsAdminNewObjPrimarySite's vtable slot 4.
 func (self *IDsAdminNewObjPrimarySite) Commit() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDsAdminNotifyHandler: https://learn.microsoft.com/windows/win32/api/dsadmin/nn-dsadmin-idsadminnotifyhandler
@@ -4010,25 +4010,25 @@ var IID_IDsAdminNotifyHandler = win32.GUID{Data1: 0xe4a2b8b3, Data2: 0x5a18, Dat
 // Initialize dispatches through IDsAdminNotifyHandler's vtable slot 3.
 func (self *IDsAdminNotifyHandler) Initialize(pExtraInfo *systemcom.IDataObject, puEventFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pExtraInfo)), uintptr(unsafe.Pointer(puEventFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Begin dispatches through IDsAdminNotifyHandler's vtable slot 4.
 func (self *IDsAdminNotifyHandler) Begin(uEvent uint32, pArg1 *systemcom.IDataObject, pArg2 *systemcom.IDataObject, puFlags *uint32, pBstr *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(uEvent), uintptr(unsafe.Pointer(pArg1)), uintptr(unsafe.Pointer(pArg2)), uintptr(unsafe.Pointer(puFlags)), uintptr(unsafe.Pointer(pBstr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Notify dispatches through IDsAdminNotifyHandler's vtable slot 5.
 func (self *IDsAdminNotifyHandler) Notify(nItem uint32, uFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(nItem), uintptr(uFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // End dispatches through IDsAdminNotifyHandler's vtable slot 6.
 func (self *IDsAdminNotifyHandler) End() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDsBrowseDomainTree: https://learn.microsoft.com/windows/win32/api/dsclient/nn-dsclient-idsbrowsedomaintree
@@ -4043,25 +4043,25 @@ var IID_IDsBrowseDomainTree = win32.GUID{Data1: 0x7cabcf1e, Data2: 0x78f5, Data3
 // BrowseTo dispatches through IDsBrowseDomainTree's vtable slot 3.
 func (self *IDsBrowseDomainTree) BrowseTo(hwndParent foundation.HWND, ppszTargetPath *foundation.PWSTR, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(unsafe.Pointer(ppszTargetPath)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDomains dispatches through IDsBrowseDomainTree's vtable slot 4.
 func (self *IDsBrowseDomainTree) GetDomains(ppDomainTree **DOMAIN_TREE, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDomainTree)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FreeDomains dispatches through IDsBrowseDomainTree's vtable slot 5.
 func (self *IDsBrowseDomainTree) FreeDomains(ppDomainTree **DOMAIN_TREE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDomainTree)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FlushCachedDomains dispatches through IDsBrowseDomainTree's vtable slot 6.
 func (self *IDsBrowseDomainTree) FlushCachedDomains() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetComputer dispatches through IDsBrowseDomainTree's vtable slot 7.
@@ -4070,7 +4070,7 @@ func (self *IDsBrowseDomainTree) SetComputer(pszComputerName string, pszUserName
 	_pszUserName := win32.UTF16Ptr(pszUserName)
 	_pszPassword := win32.UTF16Ptr(pszPassword)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszComputerName)), uintptr(unsafe.Pointer(_pszUserName)), uintptr(unsafe.Pointer(_pszPassword)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDsDisplaySpecifier: https://learn.microsoft.com/windows/win32/api/dsclient/nn-dsclient-idsdisplayspecifier
@@ -4088,27 +4088,27 @@ func (self *IDsDisplaySpecifier) SetServer(pszServer string, pszUserName string,
 	_pszUserName := win32.UTF16Ptr(pszUserName)
 	_pszPassword := win32.UTF16Ptr(pszPassword)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszServer)), uintptr(unsafe.Pointer(_pszUserName)), uintptr(unsafe.Pointer(_pszPassword)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetLanguageID dispatches through IDsDisplaySpecifier's vtable slot 4.
 func (self *IDsDisplaySpecifier) SetLanguageID(langid uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(langid))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDisplaySpecifier dispatches through IDsDisplaySpecifier's vtable slot 5.
 func (self *IDsDisplaySpecifier) GetDisplaySpecifier(pszObjectClass string, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszObjectClass := win32.UTF16Ptr(pszObjectClass)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszObjectClass)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetIconLocation dispatches through IDsDisplaySpecifier's vtable slot 6.
 func (self *IDsDisplaySpecifier) GetIconLocation(pszObjectClass string, dwFlags uint32, pszBuffer foundation.PWSTR, cchBuffer int32, presid *int32) error {
 	_pszObjectClass := win32.UTF16Ptr(pszObjectClass)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszObjectClass)), uintptr(dwFlags), uintptr(unsafe.Pointer(pszBuffer)), uintptr(cchBuffer), uintptr(unsafe.Pointer(presid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetIcon dispatches through IDsDisplaySpecifier's vtable slot 7.
@@ -4122,7 +4122,7 @@ func (self *IDsDisplaySpecifier) GetIcon(pszObjectClass string, dwFlags uint32, 
 func (self *IDsDisplaySpecifier) GetFriendlyClassName(pszObjectClass string, pszBuffer foundation.PWSTR, cchBuffer int32) error {
 	_pszObjectClass := win32.UTF16Ptr(pszObjectClass)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszObjectClass)), uintptr(unsafe.Pointer(pszBuffer)), uintptr(cchBuffer))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFriendlyAttributeName dispatches through IDsDisplaySpecifier's vtable slot 9.
@@ -4130,7 +4130,7 @@ func (self *IDsDisplaySpecifier) GetFriendlyAttributeName(pszObjectClass string,
 	_pszObjectClass := win32.UTF16Ptr(pszObjectClass)
 	_pszAttributeName := win32.UTF16Ptr(pszAttributeName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszObjectClass)), uintptr(unsafe.Pointer(_pszAttributeName)), uintptr(unsafe.Pointer(pszBuffer)), uintptr(cchBuffer))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsClassContainer dispatches through IDsDisplaySpecifier's vtable slot 10.
@@ -4145,14 +4145,14 @@ func (self *IDsDisplaySpecifier) IsClassContainer(pszObjectClass string, pszADsP
 func (self *IDsDisplaySpecifier) GetClassCreationInfo(pszObjectClass string, ppdscci **DSCLASSCREATIONINFO) error {
 	_pszObjectClass := win32.UTF16Ptr(pszObjectClass)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszObjectClass)), uintptr(unsafe.Pointer(ppdscci)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumClassAttributes dispatches through IDsDisplaySpecifier's vtable slot 12.
 func (self *IDsDisplaySpecifier) EnumClassAttributes(pszObjectClass string, pcbEnum LPDSENUMATTRIBUTES, lParam foundation.LPARAM) error {
 	_pszObjectClass := win32.UTF16Ptr(pszObjectClass)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszObjectClass)), uintptr(pcbEnum), uintptr(lParam))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAttributeADsType dispatches through IDsDisplaySpecifier's vtable slot 13.
@@ -4174,13 +4174,13 @@ var IID_IDsObjectPicker = win32.GUID{Data1: 0x0c87e64e, Data2: 0x3b7a, Data3: 0x
 // Initialize dispatches through IDsObjectPicker's vtable slot 3.
 func (self *IDsObjectPicker) Initialize(pInitInfo *DSOP_INIT_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInitInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InvokeDialog dispatches through IDsObjectPicker's vtable slot 4.
 func (self *IDsObjectPicker) InvokeDialog(hwndParent foundation.HWND, ppdoSelections **systemcom.IDataObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(unsafe.Pointer(ppdoSelections)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDsObjectPickerCredentials: https://learn.microsoft.com/windows/win32/api/objsel/nn-objsel-idsobjectpickercredentials
@@ -4197,7 +4197,7 @@ func (self *IDsObjectPickerCredentials) SetCredentials(szUserName string, szPass
 	_szUserName := win32.UTF16Ptr(szUserName)
 	_szPassword := win32.UTF16Ptr(szPassword)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szUserName)), uintptr(unsafe.Pointer(_szPassword)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPersistQuery: https://learn.microsoft.com/windows/win32/api/cmnquery/nn-cmnquery-ipersistquery
@@ -4215,7 +4215,7 @@ func (self *IPersistQuery) WriteString(pSection string, pValueName string, pValu
 	_pValueName := win32.UTF16Ptr(pValueName)
 	_pValue := win32.UTF16Ptr(pValue)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pSection)), uintptr(unsafe.Pointer(_pValueName)), uintptr(unsafe.Pointer(_pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReadString dispatches through IPersistQuery's vtable slot 5.
@@ -4223,7 +4223,7 @@ func (self *IPersistQuery) ReadString(pSection string, pValueName string, pBuffe
 	_pSection := win32.UTF16Ptr(pSection)
 	_pValueName := win32.UTF16Ptr(pValueName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pSection)), uintptr(unsafe.Pointer(_pValueName)), uintptr(unsafe.Pointer(pBuffer)), uintptr(cchBuffer))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteInt dispatches through IPersistQuery's vtable slot 6.
@@ -4231,7 +4231,7 @@ func (self *IPersistQuery) WriteInt(pSection string, pValueName string, value in
 	_pSection := win32.UTF16Ptr(pSection)
 	_pValueName := win32.UTF16Ptr(pValueName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pSection)), uintptr(unsafe.Pointer(_pValueName)), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReadInt dispatches through IPersistQuery's vtable slot 7.
@@ -4239,7 +4239,7 @@ func (self *IPersistQuery) ReadInt(pSection string, pValueName string, pValue *i
 	_pSection := win32.UTF16Ptr(pSection)
 	_pValueName := win32.UTF16Ptr(pValueName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pSection)), uintptr(unsafe.Pointer(_pValueName)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteStruct dispatches through IPersistQuery's vtable slot 8.
@@ -4247,7 +4247,7 @@ func (self *IPersistQuery) WriteStruct(pSection string, pValueName string, pStru
 	_pSection := win32.UTF16Ptr(pSection)
 	_pValueName := win32.UTF16Ptr(pValueName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pSection)), uintptr(unsafe.Pointer(_pValueName)), uintptr(unsafe.Pointer(pStruct)), uintptr(cbStruct))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReadStruct dispatches through IPersistQuery's vtable slot 9.
@@ -4255,13 +4255,13 @@ func (self *IPersistQuery) ReadStruct(pSection string, pValueName string, pStruc
 	_pSection := win32.UTF16Ptr(pSection)
 	_pValueName := win32.UTF16Ptr(pValueName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pSection)), uintptr(unsafe.Pointer(_pValueName)), uintptr(unsafe.Pointer(pStruct)), uintptr(cbStruct))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through IPersistQuery's vtable slot 10.
 func (self *IPersistQuery) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 86ab4bbe-65f6-11d1-8c13-00c04fd8d503
@@ -4275,31 +4275,31 @@ var IID_IPrivateDispatch = win32.GUID{Data1: 0x86ab4bbe, Data2: 0x65f6, Data3: 0
 // ADSIInitializeDispatchManager dispatches through IPrivateDispatch's vtable slot 3.
 func (self *IPrivateDispatch) ADSIInitializeDispatchManager(dwExtensionId int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwExtensionId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ADSIGetTypeInfoCount dispatches through IPrivateDispatch's vtable slot 4.
 func (self *IPrivateDispatch) ADSIGetTypeInfoCount(pctinfo *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pctinfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ADSIGetTypeInfo dispatches through IPrivateDispatch's vtable slot 5.
 func (self *IPrivateDispatch) ADSIGetTypeInfo(itinfo uint32, lcid uint32, pptinfo **systemcom.ITypeInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(itinfo), uintptr(lcid), uintptr(unsafe.Pointer(pptinfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ADSIGetIDsOfNames dispatches through IPrivateDispatch's vtable slot 6.
 func (self *IPrivateDispatch) ADSIGetIDsOfNames(riid *win32.GUID, rgszNames **uint16, cNames uint32, lcid uint32, rgdispid *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(rgszNames)), uintptr(cNames), uintptr(lcid), uintptr(unsafe.Pointer(rgdispid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ADSIInvoke dispatches through IPrivateDispatch's vtable slot 7.
 func (self *IPrivateDispatch) ADSIInvoke(dispidMember int32, riid *win32.GUID, lcid uint32, wFlags uint16, pdispparams *systemcom.DISPPARAMS, pvarResult *systemvariant.VARIANT, pexcepinfo *systemcom.EXCEPINFO, puArgErr *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dispidMember), uintptr(unsafe.Pointer(riid)), uintptr(lcid), uintptr(wFlags), uintptr(unsafe.Pointer(pdispparams)), uintptr(unsafe.Pointer(pvarResult)), uintptr(unsafe.Pointer(pexcepinfo)), uintptr(unsafe.Pointer(puArgErr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 89126bab-6ead-11d1-8c18-00c04fd8d503
@@ -4313,13 +4313,13 @@ var IID_IPrivateUnknown = win32.GUID{Data1: 0x89126bab, Data2: 0x6ead, Data3: 0x
 // ADSIInitializeObject dispatches through IPrivateUnknown's vtable slot 3.
 func (self *IPrivateUnknown) ADSIInitializeObject(lpszUserName foundation.BSTR, lpszPassword foundation.BSTR, lnReserved int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpszUserName)), uintptr(unsafe.Pointer(lpszPassword)), uintptr(lnReserved))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ADSIReleaseObject dispatches through IPrivateUnknown's vtable slot 4.
 func (self *IPrivateUnknown) ADSIReleaseObject() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IQueryForm: https://learn.microsoft.com/windows/win32/api/cmnquery/nn-cmnquery-iqueryform
@@ -4334,17 +4334,17 @@ var IID_IQueryForm = win32.GUID{Data1: 0x8cfcee30, Data2: 0x39bd, Data3: 0x11d0,
 // Initialize dispatches through IQueryForm's vtable slot 3.
 func (self *IQueryForm) Initialize(hkForm systemregistry.HKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hkForm))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddForms dispatches through IQueryForm's vtable slot 4.
 func (self *IQueryForm) AddForms(pAddFormsProc LPCQADDFORMSPROC, lParam foundation.LPARAM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(pAddFormsProc), uintptr(lParam))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddPages dispatches through IQueryForm's vtable slot 5.
 func (self *IQueryForm) AddPages(pAddPagesProc LPCQADDPAGESPROC, lParam foundation.LPARAM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(pAddPagesProc), uintptr(lParam))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

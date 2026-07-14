@@ -589,7 +589,7 @@ func PowerReadValueUnitsSpecifier(RootPowerKey systemregistry.HKEY, SubGroupOfPo
 // Minimum OS: windows10.0.17763.
 func PowerRegisterForEffectivePowerModeNotifications(Version uint32, Callback EFFECTIVE_POWER_MODE_CALLBACK, Context unsafe.Pointer, RegistrationHandle *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPowerRegisterForEffectivePowerModeNotifications.Addr(), uintptr(Version), uintptr(Callback), uintptr(unsafe.Pointer(Context)), uintptr(unsafe.Pointer(RegistrationHandle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PowerRegisterSuspendResumeNotification calls POWRPROF!PowerRegisterSuspendResumeNotification.
@@ -708,7 +708,7 @@ func PowerSettingUnregisterNotification(RegistrationHandle HPOWERNOTIFY) foundat
 // Minimum OS: windows10.0.17763.
 func PowerUnregisterFromEffectivePowerModeNotifications(RegistrationHandle unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPowerUnregisterFromEffectivePowerModeNotifications.Addr(), uintptr(unsafe.Pointer(RegistrationHandle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PowerUnregisterSuspendResumeNotification calls POWRPROF!PowerUnregisterSuspendResumeNotification.

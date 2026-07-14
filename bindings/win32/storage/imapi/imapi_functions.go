@@ -37,7 +37,7 @@ func CloseIMsgSession(lpMsgSess LPMSGSESS) {
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/getattribimsgonistg
 func GetAttribIMsgOnIStg(lpObject unsafe.Pointer, lpPropTagArray *systemaddressbook.SPropTagArray, lppPropAttrArray **SPropAttrArray) error {
 	r1, _, _ := syscall.SyscallN(procGetAttribIMsgOnIStg.Addr(), uintptr(unsafe.Pointer(lpObject)), uintptr(unsafe.Pointer(lpPropTagArray)), uintptr(unsafe.Pointer(lppPropAttrArray)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MapStorageSCode calls MAPI32!MapStorageSCode.
@@ -65,5 +65,5 @@ func OpenIMsgSession(lpMalloc *systemcom.IMalloc, ulFlags uint32, lppMsgSess *LP
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/setattribimsgonistg
 func SetAttribIMsgOnIStg(lpObject unsafe.Pointer, lpPropTags *systemaddressbook.SPropTagArray, lpPropAttrs *SPropAttrArray, lppPropProblems **systemaddressbook.SPropProblemArray) error {
 	r1, _, _ := syscall.SyscallN(procSetAttribIMsgOnIStg.Addr(), uintptr(unsafe.Pointer(lpObject)), uintptr(unsafe.Pointer(lpPropTags)), uintptr(unsafe.Pointer(lpPropAttrs)), uintptr(unsafe.Pointer(lppPropProblems)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

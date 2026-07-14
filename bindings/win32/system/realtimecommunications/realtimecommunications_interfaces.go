@@ -31,7 +31,7 @@ func (self *INetworkTransportSettings) ApplySetting(SettingId *networkingwinsock
 		_ValueIn = &ValueIn[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SettingId)), uintptr(len(ValueIn)), uintptr(unsafe.Pointer(_ValueIn)), uintptr(unsafe.Pointer(LengthOut)), uintptr(unsafe.Pointer(ValueOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QuerySetting dispatches through INetworkTransportSettings's vtable slot 4.
@@ -41,7 +41,7 @@ func (self *INetworkTransportSettings) QuerySetting(SettingId *networkingwinsock
 		_ValueIn = &ValueIn[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SettingId)), uintptr(len(ValueIn)), uintptr(unsafe.Pointer(_ValueIn)), uintptr(unsafe.Pointer(LengthOut)), uintptr(unsafe.Pointer(ValueOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 79eb1402-0ab8-49c0-9e14-a1ae4ba93058
@@ -55,13 +55,13 @@ var IID_INotificationTransportSync = win32.GUID{Data1: 0x79eb1402, Data2: 0x0ab8
 // CompleteDelivery dispatches through INotificationTransportSync's vtable slot 3.
 func (self *INotificationTransportSync) CompleteDelivery() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Flush dispatches through INotificationTransportSync's vtable slot 4.
 func (self *INotificationTransportSync) Flush() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: fcb136c8-7b90-4e0c-befe-56edf0ba6f1c
@@ -76,14 +76,14 @@ var IID_IRTCBuddy = win32.GUID{Data1: 0xfcb136c8, Data2: 0x7b90, Data3: 0x4e0c, 
 func (self *IRTCBuddy) Get_Status() (RTC_PRESENCE_STATUS, error) {
 	var _penStatus RTC_PRESENCE_STATUS
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penStatus)))
-	return _penStatus, win32.HRESULTError(int32(r1))
+	return _penStatus, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Notes dispatches through IRTCBuddy's vtable slot 12.
 func (self *IRTCBuddy) Get_Notes() (foundation.BSTR, error) {
 	var _pbstrNotes foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrNotes)))
-	return _pbstrNotes, win32.HRESULTError(int32(r1))
+	return _pbstrNotes, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 102f9588-23e7-40e3-954d-cd7a1d5c0361
@@ -98,55 +98,55 @@ var IID_IRTCBuddy2 = win32.GUID{Data1: 0x102f9588, Data2: 0x23e7, Data3: 0x40e3,
 func (self *IRTCBuddy2) Get_Profile() (*IRTCProfile2, error) {
 	var _ppProfile *IRTCProfile2
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProfile)))
-	return _ppProfile, win32.HRESULTError(int32(r1))
+	return _ppProfile, win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through IRTCBuddy2's vtable slot 14.
 func (self *IRTCBuddy2) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumerateGroups dispatches through IRTCBuddy2's vtable slot 15.
 func (self *IRTCBuddy2) EnumerateGroups() (*IRTCEnumGroups, error) {
 	var _ppEnum *IRTCEnumGroups
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
-	return _ppEnum, win32.HRESULTError(int32(r1))
+	return _ppEnum, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Groups dispatches through IRTCBuddy2's vtable slot 16.
 func (self *IRTCBuddy2) Get_Groups() (*IRTCCollection, error) {
 	var _ppCollection *IRTCCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCollection)))
-	return _ppCollection, win32.HRESULTError(int32(r1))
+	return _ppCollection, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PresenceProperty dispatches through IRTCBuddy2's vtable slot 17.
 func (self *IRTCBuddy2) Get_PresenceProperty(enProperty RTC_PRESENCE_PROPERTY) (foundation.BSTR, error) {
 	var _pbstrProperty foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(enProperty), uintptr(unsafe.Pointer(&_pbstrProperty)))
-	return _pbstrProperty, win32.HRESULTError(int32(r1))
+	return _pbstrProperty, win32.ErrIfFailed(int32(r1))
 }
 
 // EnumeratePresenceDevices dispatches through IRTCBuddy2's vtable slot 18.
 func (self *IRTCBuddy2) EnumeratePresenceDevices() (*IRTCEnumPresenceDevices, error) {
 	var _ppEnumDevices *IRTCEnumPresenceDevices
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnumDevices)))
-	return _ppEnumDevices, win32.HRESULTError(int32(r1))
+	return _ppEnumDevices, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PresenceDevices dispatches through IRTCBuddy2's vtable slot 19.
 func (self *IRTCBuddy2) Get_PresenceDevices() (*IRTCCollection, error) {
 	var _ppDevicesCollection *IRTCCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppDevicesCollection)))
-	return _ppDevicesCollection, win32.HRESULTError(int32(r1))
+	return _ppDevicesCollection, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SubscriptionType dispatches through IRTCBuddy2's vtable slot 20.
 func (self *IRTCBuddy2) Get_SubscriptionType() (RTC_BUDDY_SUBSCRIPTION_TYPE, error) {
 	var _penSubscriptionType RTC_BUDDY_SUBSCRIPTION_TYPE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penSubscriptionType)))
-	return _penSubscriptionType, win32.HRESULTError(int32(r1))
+	return _penSubscriptionType, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f36d755d-17e6-404e-954f-0fc07574c78d
@@ -161,7 +161,7 @@ var IID_IRTCBuddyEvent = win32.GUID{Data1: 0xf36d755d, Data2: 0x17e6, Data3: 0x4
 func (self *IRTCBuddyEvent) Get_Buddy() (*IRTCBuddy, error) {
 	var _ppBuddy *IRTCBuddy
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppBuddy)))
-	return _ppBuddy, win32.HRESULTError(int32(r1))
+	return _ppBuddy, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 484a7f1e-73f0-4990-bfc2-60bc3978a720
@@ -176,21 +176,21 @@ var IID_IRTCBuddyEvent2 = win32.GUID{Data1: 0x484a7f1e, Data2: 0x73f0, Data3: 0x
 func (self *IRTCBuddyEvent2) Get_EventType() (RTC_BUDDY_EVENT_TYPE, error) {
 	var _pEventType RTC_BUDDY_EVENT_TYPE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pEventType)))
-	return _pEventType, win32.HRESULTError(int32(r1))
+	return _pEventType, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StatusCode dispatches through IRTCBuddyEvent2's vtable slot 9.
 func (self *IRTCBuddyEvent2) Get_StatusCode() (int32, error) {
 	var _plStatusCode int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plStatusCode)))
-	return _plStatusCode, win32.HRESULTError(int32(r1))
+	return _plStatusCode, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StatusText dispatches through IRTCBuddyEvent2's vtable slot 10.
 func (self *IRTCBuddyEvent2) Get_StatusText() (foundation.BSTR, error) {
 	var _pbstrStatusText foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrStatusText)))
-	return _pbstrStatusText, win32.HRESULTError(int32(r1))
+	return _pbstrStatusText, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 60361e68-9164-4389-a4c6-d0b3925bda5e
@@ -205,59 +205,59 @@ var IID_IRTCBuddyGroup = win32.GUID{Data1: 0x60361e68, Data2: 0x9164, Data3: 0x4
 func (self *IRTCBuddyGroup) Get_Name() (foundation.BSTR, error) {
 	var _pbstrGroupName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrGroupName)))
-	return _pbstrGroupName, win32.HRESULTError(int32(r1))
+	return _pbstrGroupName, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Name dispatches through IRTCBuddyGroup's vtable slot 4.
 func (self *IRTCBuddyGroup) Put_Name(bstrGroupName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGroupName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddBuddy dispatches through IRTCBuddyGroup's vtable slot 5.
 func (self *IRTCBuddyGroup) AddBuddy(pBuddy *IRTCBuddy) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBuddy)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveBuddy dispatches through IRTCBuddyGroup's vtable slot 6.
 func (self *IRTCBuddyGroup) RemoveBuddy(pBuddy *IRTCBuddy) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBuddy)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumerateBuddies dispatches through IRTCBuddyGroup's vtable slot 7.
 func (self *IRTCBuddyGroup) EnumerateBuddies() (*IRTCEnumBuddies, error) {
 	var _ppEnum *IRTCEnumBuddies
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
-	return _ppEnum, win32.HRESULTError(int32(r1))
+	return _ppEnum, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Buddies dispatches through IRTCBuddyGroup's vtable slot 8.
 func (self *IRTCBuddyGroup) Get_Buddies() (*IRTCCollection, error) {
 	var _ppCollection *IRTCCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCollection)))
-	return _ppCollection, win32.HRESULTError(int32(r1))
+	return _ppCollection, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Data dispatches through IRTCBuddyGroup's vtable slot 9.
 func (self *IRTCBuddyGroup) Get_Data() (foundation.BSTR, error) {
 	var _pbstrData foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrData)))
-	return _pbstrData, win32.HRESULTError(int32(r1))
+	return _pbstrData, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Data dispatches through IRTCBuddyGroup's vtable slot 10.
 func (self *IRTCBuddyGroup) Put_Data(bstrData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Profile dispatches through IRTCBuddyGroup's vtable slot 11.
 func (self *IRTCBuddyGroup) Get_Profile() (*IRTCProfile2, error) {
 	var _ppProfile *IRTCProfile2
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProfile)))
-	return _ppProfile, win32.HRESULTError(int32(r1))
+	return _ppProfile, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 3a79e1d1-b736-4414-96f8-bbc7f08863e4
@@ -272,28 +272,28 @@ var IID_IRTCBuddyGroupEvent = win32.GUID{Data1: 0x3a79e1d1, Data2: 0xb736, Data3
 func (self *IRTCBuddyGroupEvent) Get_EventType() (RTC_GROUP_EVENT_TYPE, error) {
 	var _pEventType RTC_GROUP_EVENT_TYPE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pEventType)))
-	return _pEventType, win32.HRESULTError(int32(r1))
+	return _pEventType, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Group dispatches through IRTCBuddyGroupEvent's vtable slot 8.
 func (self *IRTCBuddyGroupEvent) Get_Group() (*IRTCBuddyGroup, error) {
 	var _ppGroup *IRTCBuddyGroup
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppGroup)))
-	return _ppGroup, win32.HRESULTError(int32(r1))
+	return _ppGroup, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Buddy dispatches through IRTCBuddyGroupEvent's vtable slot 9.
 func (self *IRTCBuddyGroupEvent) Get_Buddy() (*IRTCBuddy2, error) {
 	var _ppBuddy *IRTCBuddy2
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppBuddy)))
-	return _ppBuddy, win32.HRESULTError(int32(r1))
+	return _ppBuddy, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StatusCode dispatches through IRTCBuddyGroupEvent's vtable slot 10.
 func (self *IRTCBuddyGroupEvent) Get_StatusCode() (int32, error) {
 	var _plStatusCode int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plStatusCode)))
-	return _plStatusCode, win32.HRESULTError(int32(r1))
+	return _plStatusCode, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 07829e45-9a34-408e-a011-bddf13487cd1
@@ -307,274 +307,274 @@ var IID_IRTCClient = win32.GUID{Data1: 0x07829e45, Data2: 0x9a34, Data3: 0x408e,
 // Initialize dispatches through IRTCClient's vtable slot 3.
 func (self *IRTCClient) Initialize() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Shutdown dispatches through IRTCClient's vtable slot 4.
 func (self *IRTCClient) Shutdown() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PrepareForShutdown dispatches through IRTCClient's vtable slot 5.
 func (self *IRTCClient) PrepareForShutdown() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EventFilter dispatches through IRTCClient's vtable slot 6.
 func (self *IRTCClient) Put_EventFilter(lFilter int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(lFilter))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EventFilter dispatches through IRTCClient's vtable slot 7.
 func (self *IRTCClient) Get_EventFilter() (int32, error) {
 	var _plFilter int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plFilter)))
-	return _plFilter, win32.HRESULTError(int32(r1))
+	return _plFilter, win32.ErrIfFailed(int32(r1))
 }
 
 // SetPreferredMediaTypes dispatches through IRTCClient's vtable slot 8.
 func (self *IRTCClient) SetPreferredMediaTypes(lMediaTypes int32, fPersistent foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lMediaTypes), uintptr(fPersistent))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PreferredMediaTypes dispatches through IRTCClient's vtable slot 9.
 func (self *IRTCClient) Get_PreferredMediaTypes() (int32, error) {
 	var _plMediaTypes int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plMediaTypes)))
-	return _plMediaTypes, win32.HRESULTError(int32(r1))
+	return _plMediaTypes, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MediaCapabilities dispatches through IRTCClient's vtable slot 10.
 func (self *IRTCClient) Get_MediaCapabilities() (int32, error) {
 	var _plMediaTypes int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plMediaTypes)))
-	return _plMediaTypes, win32.HRESULTError(int32(r1))
+	return _plMediaTypes, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSession dispatches through IRTCClient's vtable slot 11.
 func (self *IRTCClient) CreateSession(enType RTC_SESSION_TYPE, bstrLocalPhoneURI foundation.BSTR, pProfile *IRTCProfile, lFlags int32) (*IRTCSession, error) {
 	var _ppSession *IRTCSession
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(enType), uintptr(unsafe.Pointer(bstrLocalPhoneURI)), uintptr(unsafe.Pointer(pProfile)), uintptr(lFlags), uintptr(unsafe.Pointer(&_ppSession)))
-	return _ppSession, win32.HRESULTError(int32(r1))
+	return _ppSession, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ListenForIncomingSessions dispatches through IRTCClient's vtable slot 12.
 func (self *IRTCClient) Put_ListenForIncomingSessions(enListen RTC_LISTEN_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(enListen))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ListenForIncomingSessions dispatches through IRTCClient's vtable slot 13.
 func (self *IRTCClient) Get_ListenForIncomingSessions() (RTC_LISTEN_MODE, error) {
 	var _penListen RTC_LISTEN_MODE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penListen)))
-	return _penListen, win32.HRESULTError(int32(r1))
+	return _penListen, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NetworkAddresses dispatches through IRTCClient's vtable slot 14.
 func (self *IRTCClient) Get_NetworkAddresses(fTCP foundation.VARIANT_BOOL, fExternal foundation.VARIANT_BOOL) (systemvariant.VARIANT, error) {
 	var _pvAddresses systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(fTCP), uintptr(fExternal), uintptr(unsafe.Pointer(&_pvAddresses)))
-	return _pvAddresses, win32.HRESULTError(int32(r1))
+	return _pvAddresses, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Volume dispatches through IRTCClient's vtable slot 15.
 func (self *IRTCClient) Put_Volume(enDevice RTC_AUDIO_DEVICE, lVolume int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(enDevice), uintptr(lVolume))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Volume dispatches through IRTCClient's vtable slot 16.
 func (self *IRTCClient) Get_Volume(enDevice RTC_AUDIO_DEVICE) (int32, error) {
 	var _plVolume int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(enDevice), uintptr(unsafe.Pointer(&_plVolume)))
-	return _plVolume, win32.HRESULTError(int32(r1))
+	return _plVolume, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AudioMuted dispatches through IRTCClient's vtable slot 17.
 func (self *IRTCClient) Put_AudioMuted(enDevice RTC_AUDIO_DEVICE, fMuted foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(enDevice), uintptr(fMuted))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AudioMuted dispatches through IRTCClient's vtable slot 18.
 func (self *IRTCClient) Get_AudioMuted(enDevice RTC_AUDIO_DEVICE) (foundation.VARIANT_BOOL, error) {
 	var _pfMuted foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(enDevice), uintptr(unsafe.Pointer(&_pfMuted)))
-	return _pfMuted, win32.HRESULTError(int32(r1))
+	return _pfMuted, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IVideoWindow dispatches through IRTCClient's vtable slot 19.
 func (self *IRTCClient) Get_IVideoWindow(enDevice RTC_VIDEO_DEVICE) (*mediadirectshow.IVideoWindow, error) {
 	var _ppIVideoWindow *mediadirectshow.IVideoWindow
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(enDevice), uintptr(unsafe.Pointer(&_ppIVideoWindow)))
-	return _ppIVideoWindow, win32.HRESULTError(int32(r1))
+	return _ppIVideoWindow, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PreferredAudioDevice dispatches through IRTCClient's vtable slot 20.
 func (self *IRTCClient) Put_PreferredAudioDevice(enDevice RTC_AUDIO_DEVICE, bstrDeviceName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(enDevice), uintptr(unsafe.Pointer(bstrDeviceName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PreferredAudioDevice dispatches through IRTCClient's vtable slot 21.
 func (self *IRTCClient) Get_PreferredAudioDevice(enDevice RTC_AUDIO_DEVICE) (foundation.BSTR, error) {
 	var _pbstrDeviceName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(enDevice), uintptr(unsafe.Pointer(&_pbstrDeviceName)))
-	return _pbstrDeviceName, win32.HRESULTError(int32(r1))
+	return _pbstrDeviceName, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PreferredVolume dispatches through IRTCClient's vtable slot 22.
 func (self *IRTCClient) Put_PreferredVolume(enDevice RTC_AUDIO_DEVICE, lVolume int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(enDevice), uintptr(lVolume))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PreferredVolume dispatches through IRTCClient's vtable slot 23.
 func (self *IRTCClient) Get_PreferredVolume(enDevice RTC_AUDIO_DEVICE) (int32, error) {
 	var _plVolume int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(enDevice), uintptr(unsafe.Pointer(&_plVolume)))
-	return _plVolume, win32.HRESULTError(int32(r1))
+	return _plVolume, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PreferredAEC dispatches through IRTCClient's vtable slot 24.
 func (self *IRTCClient) Put_PreferredAEC(bEnable foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(bEnable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PreferredAEC dispatches through IRTCClient's vtable slot 25.
 func (self *IRTCClient) Get_PreferredAEC() (foundation.VARIANT_BOOL, error) {
 	var _pbEnabled foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbEnabled)))
-	return _pbEnabled, win32.HRESULTError(int32(r1))
+	return _pbEnabled, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PreferredVideoDevice dispatches through IRTCClient's vtable slot 26.
 func (self *IRTCClient) Put_PreferredVideoDevice(bstrDeviceName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDeviceName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PreferredVideoDevice dispatches through IRTCClient's vtable slot 27.
 func (self *IRTCClient) Get_PreferredVideoDevice() (foundation.BSTR, error) {
 	var _pbstrDeviceName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrDeviceName)))
-	return _pbstrDeviceName, win32.HRESULTError(int32(r1))
+	return _pbstrDeviceName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ActiveMedia dispatches through IRTCClient's vtable slot 28.
 func (self *IRTCClient) Get_ActiveMedia() (int32, error) {
 	var _plMediaType int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plMediaType)))
-	return _plMediaType, win32.HRESULTError(int32(r1))
+	return _plMediaType, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MaxBitrate dispatches through IRTCClient's vtable slot 29.
 func (self *IRTCClient) Put_MaxBitrate(lMaxBitrate int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(lMaxBitrate))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MaxBitrate dispatches through IRTCClient's vtable slot 30.
 func (self *IRTCClient) Get_MaxBitrate() (int32, error) {
 	var _plMaxBitrate int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plMaxBitrate)))
-	return _plMaxBitrate, win32.HRESULTError(int32(r1))
+	return _plMaxBitrate, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_TemporalSpatialTradeOff dispatches through IRTCClient's vtable slot 31.
 func (self *IRTCClient) Put_TemporalSpatialTradeOff(lValue int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(lValue))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TemporalSpatialTradeOff dispatches through IRTCClient's vtable slot 32.
 func (self *IRTCClient) Get_TemporalSpatialTradeOff() (int32, error) {
 	var _plValue int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plValue)))
-	return _plValue, win32.HRESULTError(int32(r1))
+	return _plValue, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NetworkQuality dispatches through IRTCClient's vtable slot 33.
 func (self *IRTCClient) Get_NetworkQuality() (int32, error) {
 	var _plNetworkQuality int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plNetworkQuality)))
-	return _plNetworkQuality, win32.HRESULTError(int32(r1))
+	return _plNetworkQuality, win32.ErrIfFailed(int32(r1))
 }
 
 // StartT120Applet dispatches through IRTCClient's vtable slot 34.
 func (self *IRTCClient) StartT120Applet(enApplet RTC_T120_APPLET) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(enApplet))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StopT120Applets dispatches through IRTCClient's vtable slot 35.
 func (self *IRTCClient) StopT120Applets() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsT120AppletRunning dispatches through IRTCClient's vtable slot 36.
 func (self *IRTCClient) Get_IsT120AppletRunning(enApplet RTC_T120_APPLET) (foundation.VARIANT_BOOL, error) {
 	var _pfRunning foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(enApplet), uintptr(unsafe.Pointer(&_pfRunning)))
-	return _pfRunning, win32.HRESULTError(int32(r1))
+	return _pfRunning, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LocalUserURI dispatches through IRTCClient's vtable slot 37.
 func (self *IRTCClient) Get_LocalUserURI() (foundation.BSTR, error) {
 	var _pbstrUserURI foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrUserURI)))
-	return _pbstrUserURI, win32.HRESULTError(int32(r1))
+	return _pbstrUserURI, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LocalUserURI dispatches through IRTCClient's vtable slot 38.
 func (self *IRTCClient) Put_LocalUserURI(bstrUserURI foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUserURI)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LocalUserName dispatches through IRTCClient's vtable slot 39.
 func (self *IRTCClient) Get_LocalUserName() (foundation.BSTR, error) {
 	var _pbstrUserName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrUserName)))
-	return _pbstrUserName, win32.HRESULTError(int32(r1))
+	return _pbstrUserName, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LocalUserName dispatches through IRTCClient's vtable slot 40.
 func (self *IRTCClient) Put_LocalUserName(bstrUserName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUserName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PlayRing dispatches through IRTCClient's vtable slot 41.
 func (self *IRTCClient) PlayRing(enType RTC_RING_TYPE, bPlay foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(enType), uintptr(bPlay))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendDTMF dispatches through IRTCClient's vtable slot 42.
 func (self *IRTCClient) SendDTMF(enDTMF RTC_DTMF) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(enDTMF))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InvokeTuningWizard dispatches through IRTCClient's vtable slot 43.
 func (self *IRTCClient) InvokeTuningWizard(hwndParent uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(hwndParent))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsTuned dispatches through IRTCClient's vtable slot 44.
 func (self *IRTCClient) Get_IsTuned() (foundation.VARIANT_BOOL, error) {
 	var _pfTuned foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfTuned)))
-	return _pfTuned, win32.HRESULTError(int32(r1))
+	return _pfTuned, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 0c91d71d-1064-42da-bfa5-572beb8eea84
@@ -588,84 +588,84 @@ var IID_IRTCClient2 = win32.GUID{Data1: 0x0c91d71d, Data2: 0x1064, Data3: 0x42da
 // Put_AnswerMode dispatches through IRTCClient2's vtable slot 45.
 func (self *IRTCClient2) Put_AnswerMode(enType RTC_SESSION_TYPE, enMode RTC_ANSWER_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(enType), uintptr(enMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AnswerMode dispatches through IRTCClient2's vtable slot 46.
 func (self *IRTCClient2) Get_AnswerMode(enType RTC_SESSION_TYPE) (RTC_ANSWER_MODE, error) {
 	var _penMode RTC_ANSWER_MODE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(enType), uintptr(unsafe.Pointer(&_penMode)))
-	return _penMode, win32.HRESULTError(int32(r1))
+	return _penMode, win32.ErrIfFailed(int32(r1))
 }
 
 // InvokeTuningWizardEx dispatches through IRTCClient2's vtable slot 47.
 func (self *IRTCClient2) InvokeTuningWizardEx(hwndParent uintptr, fAllowAudio foundation.VARIANT_BOOL, fAllowVideo foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(fAllowAudio), uintptr(fAllowVideo))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Version dispatches through IRTCClient2's vtable slot 48.
 func (self *IRTCClient2) Get_Version() (int32, error) {
 	var _plVersion int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plVersion)))
-	return _plVersion, win32.HRESULTError(int32(r1))
+	return _plVersion, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ClientName dispatches through IRTCClient2's vtable slot 49.
 func (self *IRTCClient2) Put_ClientName(bstrClientName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrClientName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ClientCurVer dispatches through IRTCClient2's vtable slot 50.
 func (self *IRTCClient2) Put_ClientCurVer(bstrClientCurVer foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrClientCurVer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeEx dispatches through IRTCClient2's vtable slot 51.
 func (self *IRTCClient2) InitializeEx(lFlags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(lFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSessionWithDescription dispatches through IRTCClient2's vtable slot 52.
 func (self *IRTCClient2) CreateSessionWithDescription(bstrContentType foundation.BSTR, bstrSessionDescription foundation.BSTR, pProfile *IRTCProfile, lFlags int32) (*IRTCSession2, error) {
 	var _ppSession2 *IRTCSession2
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrContentType)), uintptr(unsafe.Pointer(bstrSessionDescription)), uintptr(unsafe.Pointer(pProfile)), uintptr(lFlags), uintptr(unsafe.Pointer(&_ppSession2)))
-	return _ppSession2, win32.HRESULTError(int32(r1))
+	return _ppSession2, win32.ErrIfFailed(int32(r1))
 }
 
 // SetSessionDescriptionManager dispatches through IRTCClient2's vtable slot 53.
 func (self *IRTCClient2) SetSessionDescriptionManager(pSessionDescriptionManager *IRTCSessionDescriptionManager) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSessionDescriptionManager)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PreferredSecurityLevel dispatches through IRTCClient2's vtable slot 54.
 func (self *IRTCClient2) Put_PreferredSecurityLevel(enSecurityType RTC_SECURITY_TYPE, enSecurityLevel RTC_SECURITY_LEVEL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(enSecurityType), uintptr(enSecurityLevel))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PreferredSecurityLevel dispatches through IRTCClient2's vtable slot 55.
 func (self *IRTCClient2) Get_PreferredSecurityLevel(enSecurityType RTC_SECURITY_TYPE) (RTC_SECURITY_LEVEL, error) {
 	var _penSecurityLevel RTC_SECURITY_LEVEL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(enSecurityType), uintptr(unsafe.Pointer(&_penSecurityLevel)))
-	return _penSecurityLevel, win32.HRESULTError(int32(r1))
+	return _penSecurityLevel, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AllowedPorts dispatches through IRTCClient2's vtable slot 56.
 func (self *IRTCClient2) Put_AllowedPorts(lTransport int32, enListenMode RTC_LISTEN_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(lTransport), uintptr(enListenMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AllowedPorts dispatches through IRTCClient2's vtable slot 57.
 func (self *IRTCClient2) Get_AllowedPorts(lTransport int32) (RTC_LISTEN_MODE, error) {
 	var _penListenMode RTC_LISTEN_MODE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(lTransport), uintptr(unsafe.Pointer(&_penListenMode)))
-	return _penListenMode, win32.HRESULTError(int32(r1))
+	return _penListenMode, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 2b493b7a-3cba-4170-9c8b-76a9dacdd644
@@ -680,14 +680,14 @@ var IID_IRTCClientEvent = win32.GUID{Data1: 0x2b493b7a, Data2: 0x3cba, Data3: 0x
 func (self *IRTCClientEvent) Get_EventType() (RTC_CLIENT_EVENT_TYPE, error) {
 	var _penEventType RTC_CLIENT_EVENT_TYPE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penEventType)))
-	return _penEventType, win32.HRESULTError(int32(r1))
+	return _penEventType, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Client dispatches through IRTCClientEvent's vtable slot 8.
 func (self *IRTCClientEvent) Get_Client() (*IRTCClient, error) {
 	var _ppClient *IRTCClient
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppClient)))
-	return _ppClient, win32.HRESULTError(int32(r1))
+	return _ppClient, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: d5df3f03-4bde-4417-aefe-71177bdaea66
@@ -701,19 +701,19 @@ var IID_IRTCClientPortManagement = win32.GUID{Data1: 0xd5df3f03, Data2: 0x4bde, 
 // StartListenAddressAndPort dispatches through IRTCClientPortManagement's vtable slot 3.
 func (self *IRTCClientPortManagement) StartListenAddressAndPort(bstrInternalLocalAddress foundation.BSTR, lInternalLocalPort int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrInternalLocalAddress)), uintptr(lInternalLocalPort))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StopListenAddressAndPort dispatches through IRTCClientPortManagement's vtable slot 4.
 func (self *IRTCClientPortManagement) StopListenAddressAndPort(bstrInternalLocalAddress foundation.BSTR, lInternalLocalPort int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrInternalLocalAddress)), uintptr(lInternalLocalPort))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPortRange dispatches through IRTCClientPortManagement's vtable slot 5.
 func (self *IRTCClientPortManagement) GetPortRange(enPortType RTC_PORT_TYPE, plMinValue *int32, plMaxValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(enPortType), uintptr(unsafe.Pointer(plMinValue)), uintptr(unsafe.Pointer(plMaxValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 11c3cbcc-0744-42d1-968a-51aa1bb274c6
@@ -728,100 +728,100 @@ var IID_IRTCClientPresence = win32.GUID{Data1: 0x11c3cbcc, Data2: 0x0744, Data3:
 func (self *IRTCClientPresence) EnumerateBuddies() (*IRTCEnumBuddies, error) {
 	var _ppEnum *IRTCEnumBuddies
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
-	return _ppEnum, win32.HRESULTError(int32(r1))
+	return _ppEnum, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Buddies dispatches through IRTCClientPresence's vtable slot 7.
 func (self *IRTCClientPresence) Get_Buddies() (*IRTCCollection, error) {
 	var _ppCollection *IRTCCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCollection)))
-	return _ppCollection, win32.HRESULTError(int32(r1))
+	return _ppCollection, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Buddy dispatches through IRTCClientPresence's vtable slot 8.
 func (self *IRTCClientPresence) Get_Buddy(bstrPresentityURI foundation.BSTR) (*IRTCBuddy, error) {
 	var _ppBuddy *IRTCBuddy
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPresentityURI)), uintptr(unsafe.Pointer(&_ppBuddy)))
-	return _ppBuddy, win32.HRESULTError(int32(r1))
+	return _ppBuddy, win32.ErrIfFailed(int32(r1))
 }
 
 // AddBuddy dispatches through IRTCClientPresence's vtable slot 9.
 func (self *IRTCClientPresence) AddBuddy(bstrPresentityURI foundation.BSTR, bstrUserName foundation.BSTR, bstrData foundation.BSTR, fPersistent foundation.VARIANT_BOOL, pProfile *IRTCProfile, lFlags int32) (*IRTCBuddy, error) {
 	var _ppBuddy *IRTCBuddy
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPresentityURI)), uintptr(unsafe.Pointer(bstrUserName)), uintptr(unsafe.Pointer(bstrData)), uintptr(fPersistent), uintptr(unsafe.Pointer(pProfile)), uintptr(lFlags), uintptr(unsafe.Pointer(&_ppBuddy)))
-	return _ppBuddy, win32.HRESULTError(int32(r1))
+	return _ppBuddy, win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveBuddy dispatches through IRTCClientPresence's vtable slot 10.
 func (self *IRTCClientPresence) RemoveBuddy(pBuddy *IRTCBuddy) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBuddy)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumerateWatchers dispatches through IRTCClientPresence's vtable slot 11.
 func (self *IRTCClientPresence) EnumerateWatchers() (*IRTCEnumWatchers, error) {
 	var _ppEnum *IRTCEnumWatchers
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
-	return _ppEnum, win32.HRESULTError(int32(r1))
+	return _ppEnum, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Watchers dispatches through IRTCClientPresence's vtable slot 12.
 func (self *IRTCClientPresence) Get_Watchers() (*IRTCCollection, error) {
 	var _ppCollection *IRTCCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCollection)))
-	return _ppCollection, win32.HRESULTError(int32(r1))
+	return _ppCollection, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Watcher dispatches through IRTCClientPresence's vtable slot 13.
 func (self *IRTCClientPresence) Get_Watcher(bstrPresentityURI foundation.BSTR) (*IRTCWatcher, error) {
 	var _ppWatcher *IRTCWatcher
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPresentityURI)), uintptr(unsafe.Pointer(&_ppWatcher)))
-	return _ppWatcher, win32.HRESULTError(int32(r1))
+	return _ppWatcher, win32.ErrIfFailed(int32(r1))
 }
 
 // AddWatcher dispatches through IRTCClientPresence's vtable slot 14.
 func (self *IRTCClientPresence) AddWatcher(bstrPresentityURI foundation.BSTR, bstrUserName foundation.BSTR, bstrData foundation.BSTR, fBlocked foundation.VARIANT_BOOL, fPersistent foundation.VARIANT_BOOL) (*IRTCWatcher, error) {
 	var _ppWatcher *IRTCWatcher
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPresentityURI)), uintptr(unsafe.Pointer(bstrUserName)), uintptr(unsafe.Pointer(bstrData)), uintptr(fBlocked), uintptr(fPersistent), uintptr(unsafe.Pointer(&_ppWatcher)))
-	return _ppWatcher, win32.HRESULTError(int32(r1))
+	return _ppWatcher, win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveWatcher dispatches through IRTCClientPresence's vtable slot 15.
 func (self *IRTCClientPresence) RemoveWatcher(pWatcher *IRTCWatcher) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWatcher)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetLocalPresenceInfo dispatches through IRTCClientPresence's vtable slot 16.
 func (self *IRTCClientPresence) SetLocalPresenceInfo(enStatus RTC_PRESENCE_STATUS, bstrNotes foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(enStatus), uintptr(unsafe.Pointer(bstrNotes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OfferWatcherMode dispatches through IRTCClientPresence's vtable slot 17.
 func (self *IRTCClientPresence) Get_OfferWatcherMode() (RTC_OFFER_WATCHER_MODE, error) {
 	var _penMode RTC_OFFER_WATCHER_MODE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penMode)))
-	return _penMode, win32.HRESULTError(int32(r1))
+	return _penMode, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_OfferWatcherMode dispatches through IRTCClientPresence's vtable slot 18.
 func (self *IRTCClientPresence) Put_OfferWatcherMode(enMode RTC_OFFER_WATCHER_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(enMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PrivacyMode dispatches through IRTCClientPresence's vtable slot 19.
 func (self *IRTCClientPresence) Get_PrivacyMode() (RTC_PRIVACY_MODE, error) {
 	var _penMode RTC_PRIVACY_MODE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penMode)))
-	return _penMode, win32.HRESULTError(int32(r1))
+	return _penMode, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PrivacyMode dispatches through IRTCClientPresence's vtable slot 20.
 func (self *IRTCClientPresence) Put_PrivacyMode(enMode RTC_PRIVACY_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(enMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: ad1809e8-62f7-4783-909a-29c9d2cb1d34
@@ -835,93 +835,93 @@ var IID_IRTCClientPresence2 = win32.GUID{Data1: 0xad1809e8, Data2: 0x62f7, Data3
 // DisablePresence dispatches through IRTCClientPresence2's vtable slot 22.
 func (self *IRTCClientPresence2) DisablePresence() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddGroup dispatches through IRTCClientPresence2's vtable slot 23.
 func (self *IRTCClientPresence2) AddGroup(bstrGroupName foundation.BSTR, bstrData foundation.BSTR, pProfile *IRTCProfile, lFlags int32) (*IRTCBuddyGroup, error) {
 	var _ppGroup *IRTCBuddyGroup
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGroupName)), uintptr(unsafe.Pointer(bstrData)), uintptr(unsafe.Pointer(pProfile)), uintptr(lFlags), uintptr(unsafe.Pointer(&_ppGroup)))
-	return _ppGroup, win32.HRESULTError(int32(r1))
+	return _ppGroup, win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveGroup dispatches through IRTCClientPresence2's vtable slot 24.
 func (self *IRTCClientPresence2) RemoveGroup(pGroup *IRTCBuddyGroup) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGroup)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumerateGroups dispatches through IRTCClientPresence2's vtable slot 25.
 func (self *IRTCClientPresence2) EnumerateGroups() (*IRTCEnumGroups, error) {
 	var _ppEnum *IRTCEnumGroups
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
-	return _ppEnum, win32.HRESULTError(int32(r1))
+	return _ppEnum, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Groups dispatches through IRTCClientPresence2's vtable slot 26.
 func (self *IRTCClientPresence2) Get_Groups() (*IRTCCollection, error) {
 	var _ppCollection *IRTCCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCollection)))
-	return _ppCollection, win32.HRESULTError(int32(r1))
+	return _ppCollection, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Group dispatches through IRTCClientPresence2's vtable slot 27.
 func (self *IRTCClientPresence2) Get_Group(bstrGroupName foundation.BSTR) (*IRTCBuddyGroup, error) {
 	var _ppGroup *IRTCBuddyGroup
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGroupName)), uintptr(unsafe.Pointer(&_ppGroup)))
-	return _ppGroup, win32.HRESULTError(int32(r1))
+	return _ppGroup, win32.ErrIfFailed(int32(r1))
 }
 
 // AddWatcherEx dispatches through IRTCClientPresence2's vtable slot 28.
 func (self *IRTCClientPresence2) AddWatcherEx(bstrPresentityURI foundation.BSTR, bstrUserName foundation.BSTR, bstrData foundation.BSTR, enState RTC_WATCHER_STATE, fPersistent foundation.VARIANT_BOOL, enScope RTC_ACE_SCOPE, pProfile *IRTCProfile, lFlags int32) (*IRTCWatcher2, error) {
 	var _ppWatcher *IRTCWatcher2
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPresentityURI)), uintptr(unsafe.Pointer(bstrUserName)), uintptr(unsafe.Pointer(bstrData)), uintptr(enState), uintptr(fPersistent), uintptr(enScope), uintptr(unsafe.Pointer(pProfile)), uintptr(lFlags), uintptr(unsafe.Pointer(&_ppWatcher)))
-	return _ppWatcher, win32.HRESULTError(int32(r1))
+	return _ppWatcher, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_WatcherEx dispatches through IRTCClientPresence2's vtable slot 29.
 func (self *IRTCClientPresence2) Get_WatcherEx(enMode RTC_WATCHER_MATCH_MODE, bstrPresentityURI foundation.BSTR) (*IRTCWatcher2, error) {
 	var _ppWatcher *IRTCWatcher2
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(enMode), uintptr(unsafe.Pointer(bstrPresentityURI)), uintptr(unsafe.Pointer(&_ppWatcher)))
-	return _ppWatcher, win32.HRESULTError(int32(r1))
+	return _ppWatcher, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PresenceProperty dispatches through IRTCClientPresence2's vtable slot 30.
 func (self *IRTCClientPresence2) Put_PresenceProperty(enProperty RTC_PRESENCE_PROPERTY, bstrProperty foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(enProperty), uintptr(unsafe.Pointer(bstrProperty)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PresenceProperty dispatches through IRTCClientPresence2's vtable slot 31.
 func (self *IRTCClientPresence2) Get_PresenceProperty(enProperty RTC_PRESENCE_PROPERTY) (foundation.BSTR, error) {
 	var _pbstrProperty foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(enProperty), uintptr(unsafe.Pointer(&_pbstrProperty)))
-	return _pbstrProperty, win32.HRESULTError(int32(r1))
+	return _pbstrProperty, win32.ErrIfFailed(int32(r1))
 }
 
 // SetPresenceData dispatches through IRTCClientPresence2's vtable slot 32.
 func (self *IRTCClientPresence2) SetPresenceData(bstrNamespace foundation.BSTR, bstrData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrNamespace)), uintptr(unsafe.Pointer(bstrData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPresenceData dispatches through IRTCClientPresence2's vtable slot 33.
 func (self *IRTCClientPresence2) GetPresenceData(pbstrNamespace *foundation.BSTR, pbstrData *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrNamespace)), uintptr(unsafe.Pointer(pbstrData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLocalPresenceInfo dispatches through IRTCClientPresence2's vtable slot 34.
 func (self *IRTCClientPresence2) GetLocalPresenceInfo(penStatus *RTC_PRESENCE_STATUS, pbstrNotes *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(penStatus)), uintptr(unsafe.Pointer(pbstrNotes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddBuddyEx dispatches through IRTCClientPresence2's vtable slot 35.
 func (self *IRTCClientPresence2) AddBuddyEx(bstrPresentityURI foundation.BSTR, bstrUserName foundation.BSTR, bstrData foundation.BSTR, fPersistent foundation.VARIANT_BOOL, enSubscriptionType RTC_BUDDY_SUBSCRIPTION_TYPE, pProfile *IRTCProfile, lFlags int32) (*IRTCBuddy2, error) {
 	var _ppBuddy *IRTCBuddy2
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPresentityURI)), uintptr(unsafe.Pointer(bstrUserName)), uintptr(unsafe.Pointer(bstrData)), uintptr(fPersistent), uintptr(enSubscriptionType), uintptr(unsafe.Pointer(pProfile)), uintptr(lFlags), uintptr(unsafe.Pointer(&_ppBuddy)))
-	return _ppBuddy, win32.HRESULTError(int32(r1))
+	return _ppBuddy, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: b9f5cf06-65b9-4a80-a0e6-73cae3ef3822
@@ -936,46 +936,46 @@ var IID_IRTCClientProvisioning = win32.GUID{Data1: 0xb9f5cf06, Data2: 0x65b9, Da
 func (self *IRTCClientProvisioning) CreateProfile(bstrProfileXML foundation.BSTR) (*IRTCProfile, error) {
 	var _ppProfile *IRTCProfile
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProfileXML)), uintptr(unsafe.Pointer(&_ppProfile)))
-	return _ppProfile, win32.HRESULTError(int32(r1))
+	return _ppProfile, win32.ErrIfFailed(int32(r1))
 }
 
 // EnableProfile dispatches through IRTCClientProvisioning's vtable slot 4.
 func (self *IRTCClientProvisioning) EnableProfile(pProfile *IRTCProfile, lRegisterFlags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProfile)), uintptr(lRegisterFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DisableProfile dispatches through IRTCClientProvisioning's vtable slot 5.
 func (self *IRTCClientProvisioning) DisableProfile(pProfile *IRTCProfile) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProfile)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumerateProfiles dispatches through IRTCClientProvisioning's vtable slot 6.
 func (self *IRTCClientProvisioning) EnumerateProfiles() (*IRTCEnumProfiles, error) {
 	var _ppEnum *IRTCEnumProfiles
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
-	return _ppEnum, win32.HRESULTError(int32(r1))
+	return _ppEnum, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Profiles dispatches through IRTCClientProvisioning's vtable slot 7.
 func (self *IRTCClientProvisioning) Get_Profiles() (*IRTCCollection, error) {
 	var _ppCollection *IRTCCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCollection)))
-	return _ppCollection, win32.HRESULTError(int32(r1))
+	return _ppCollection, win32.ErrIfFailed(int32(r1))
 }
 
 // GetProfile dispatches through IRTCClientProvisioning's vtable slot 8.
 func (self *IRTCClientProvisioning) GetProfile(bstrUserAccount foundation.BSTR, bstrUserPassword foundation.BSTR, bstrUserURI foundation.BSTR, bstrServer foundation.BSTR, lTransport int32, lCookie uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUserAccount)), uintptr(unsafe.Pointer(bstrUserPassword)), uintptr(unsafe.Pointer(bstrUserURI)), uintptr(unsafe.Pointer(bstrServer)), uintptr(lTransport), uintptr(lCookie))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SessionCapabilities dispatches through IRTCClientProvisioning's vtable slot 9.
 func (self *IRTCClientProvisioning) Get_SessionCapabilities() (int32, error) {
 	var _plSupportedSessions int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plSupportedSessions)))
-	return _plSupportedSessions, win32.HRESULTError(int32(r1))
+	return _plSupportedSessions, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: a70909b5-f40e-4587-bb75-e6bc0845023e
@@ -989,7 +989,7 @@ var IID_IRTCClientProvisioning2 = win32.GUID{Data1: 0xa70909b5, Data2: 0xf40e, D
 // EnableProfileEx dispatches through IRTCClientProvisioning2's vtable slot 10.
 func (self *IRTCClientProvisioning2) EnableProfileEx(pProfile *IRTCProfile, lRegisterFlags int32, lRoamingFlags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProfile)), uintptr(lRegisterFlags), uintptr(lRoamingFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: ec7c8096-b918-4044-94f1-e4fba0361d5c
@@ -1004,21 +1004,21 @@ var IID_IRTCCollection = win32.GUID{Data1: 0xec7c8096, Data2: 0xb918, Data3: 0x4
 func (self *IRTCCollection) Get_Count() (int32, error) {
 	var _lCount int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lCount)))
-	return _lCount, win32.HRESULTError(int32(r1))
+	return _lCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Item dispatches through IRTCCollection's vtable slot 8.
 func (self *IRTCCollection) Get_Item(Index int32) (systemvariant.VARIANT, error) {
 	var _pVariant systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(&_pVariant)))
-	return _pVariant, win32.HRESULTError(int32(r1))
+	return _pVariant, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IRTCCollection's vtable slot 9.
 func (self *IRTCCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
 	var _ppNewEnum *systemcom.IUnknown
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppNewEnum)))
-	return _ppNewEnum, win32.HRESULTError(int32(r1))
+	return _ppNewEnum, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 176ddfbe-fec0-4d55-bc87-84cff1ef7f91
@@ -1044,26 +1044,26 @@ func (self *IRTCEnumBuddies) Next(ppElements []*IRTCBuddy, pceltFetched *uint32)
 		_ppElements = &ppElements[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppElements)), uintptr(unsafe.Pointer(_ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IRTCEnumBuddies's vtable slot 4.
 func (self *IRTCEnumBuddies) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IRTCEnumBuddies's vtable slot 5.
 func (self *IRTCEnumBuddies) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IRTCEnumBuddies's vtable slot 6.
 func (self *IRTCEnumBuddies) Clone() (*IRTCEnumBuddies, error) {
 	var _ppEnum *IRTCEnumBuddies
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
-	return _ppEnum, win32.HRESULTError(int32(r1))
+	return _ppEnum, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 742378d6-a141-4415-8f27-35d99076cf5d
@@ -1081,26 +1081,26 @@ func (self *IRTCEnumGroups) Next(ppElements []*IRTCBuddyGroup, pceltFetched *uin
 		_ppElements = &ppElements[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppElements)), uintptr(unsafe.Pointer(_ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IRTCEnumGroups's vtable slot 4.
 func (self *IRTCEnumGroups) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IRTCEnumGroups's vtable slot 5.
 func (self *IRTCEnumGroups) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IRTCEnumGroups's vtable slot 6.
 func (self *IRTCEnumGroups) Clone() (*IRTCEnumGroups, error) {
 	var _ppEnum *IRTCEnumGroups
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
-	return _ppEnum, win32.HRESULTError(int32(r1))
+	return _ppEnum, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: fcd56f29-4a4f-41b2-ba5c-f5bccc060bf6
@@ -1118,26 +1118,26 @@ func (self *IRTCEnumParticipants) Next(ppElements []*IRTCParticipant, pceltFetch
 		_ppElements = &ppElements[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppElements)), uintptr(unsafe.Pointer(_ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IRTCEnumParticipants's vtable slot 4.
 func (self *IRTCEnumParticipants) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IRTCEnumParticipants's vtable slot 5.
 func (self *IRTCEnumParticipants) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IRTCEnumParticipants's vtable slot 6.
 func (self *IRTCEnumParticipants) Clone() (*IRTCEnumParticipants, error) {
 	var _ppEnum *IRTCEnumParticipants
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
-	return _ppEnum, win32.HRESULTError(int32(r1))
+	return _ppEnum, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 708c2ab7-8bf8-42f8-8c7d-635197ad5539
@@ -1155,26 +1155,26 @@ func (self *IRTCEnumPresenceDevices) Next(ppElements []*IRTCPresenceDevice, pcel
 		_ppElements = &ppElements[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppElements)), uintptr(unsafe.Pointer(_ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IRTCEnumPresenceDevices's vtable slot 4.
 func (self *IRTCEnumPresenceDevices) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IRTCEnumPresenceDevices's vtable slot 5.
 func (self *IRTCEnumPresenceDevices) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IRTCEnumPresenceDevices's vtable slot 6.
 func (self *IRTCEnumPresenceDevices) Clone() (*IRTCEnumPresenceDevices, error) {
 	var _ppEnum *IRTCEnumPresenceDevices
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
-	return _ppEnum, win32.HRESULTError(int32(r1))
+	return _ppEnum, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 29b7c41c-ed82-4bca-84ad-39d5101b58e3
@@ -1192,26 +1192,26 @@ func (self *IRTCEnumProfiles) Next(ppElements []*IRTCProfile, pceltFetched *uint
 		_ppElements = &ppElements[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppElements)), uintptr(unsafe.Pointer(_ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IRTCEnumProfiles's vtable slot 4.
 func (self *IRTCEnumProfiles) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IRTCEnumProfiles's vtable slot 5.
 func (self *IRTCEnumProfiles) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IRTCEnumProfiles's vtable slot 6.
 func (self *IRTCEnumProfiles) Clone() (*IRTCEnumProfiles, error) {
 	var _ppEnum *IRTCEnumProfiles
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
-	return _ppEnum, win32.HRESULTError(int32(r1))
+	return _ppEnum, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 83d4d877-aa5d-4a5b-8d0e-002a8067e0e8
@@ -1229,26 +1229,26 @@ func (self *IRTCEnumUserSearchResults) Next(ppElements []*IRTCUserSearchResult, 
 		_ppElements = &ppElements[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppElements)), uintptr(unsafe.Pointer(_ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IRTCEnumUserSearchResults's vtable slot 4.
 func (self *IRTCEnumUserSearchResults) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IRTCEnumUserSearchResults's vtable slot 5.
 func (self *IRTCEnumUserSearchResults) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IRTCEnumUserSearchResults's vtable slot 6.
 func (self *IRTCEnumUserSearchResults) Clone() (*IRTCEnumUserSearchResults, error) {
 	var _ppEnum *IRTCEnumUserSearchResults
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
-	return _ppEnum, win32.HRESULTError(int32(r1))
+	return _ppEnum, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: a87d55d7-db74-4ed1-9ca4-77a0e41b413e
@@ -1266,26 +1266,26 @@ func (self *IRTCEnumWatchers) Next(ppElements []*IRTCWatcher, pceltFetched *uint
 		_ppElements = &ppElements[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppElements)), uintptr(unsafe.Pointer(_ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IRTCEnumWatchers's vtable slot 4.
 func (self *IRTCEnumWatchers) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IRTCEnumWatchers's vtable slot 5.
 func (self *IRTCEnumWatchers) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IRTCEnumWatchers's vtable slot 6.
 func (self *IRTCEnumWatchers) Clone() (*IRTCEnumWatchers, error) {
 	var _ppEnum *IRTCEnumWatchers
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
-	return _ppEnum, win32.HRESULTError(int32(r1))
+	return _ppEnum, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 13fa24c7-5748-4b21-91f5-7397609ce747
@@ -1299,7 +1299,7 @@ var IID_IRTCEventNotification = win32.GUID{Data1: 0x13fa24c7, Data2: 0x5748, Dat
 // Event dispatches through IRTCEventNotification's vtable slot 3.
 func (self *IRTCEventNotification) Event(RTCEvent RTC_EVENT, pEvent *systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(RTCEvent), uintptr(unsafe.Pointer(pEvent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 4e1d68ae-1912-4f49-b2c3-594fadfd425f
@@ -1314,28 +1314,28 @@ var IID_IRTCInfoEvent = win32.GUID{Data1: 0x4e1d68ae, Data2: 0x1912, Data3: 0x4f
 func (self *IRTCInfoEvent) Get_Session() (*IRTCSession2, error) {
 	var _ppSession *IRTCSession2
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppSession)))
-	return _ppSession, win32.HRESULTError(int32(r1))
+	return _ppSession, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Participant dispatches through IRTCInfoEvent's vtable slot 8.
 func (self *IRTCInfoEvent) Get_Participant() (*IRTCParticipant, error) {
 	var _ppParticipant *IRTCParticipant
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppParticipant)))
-	return _ppParticipant, win32.HRESULTError(int32(r1))
+	return _ppParticipant, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Info dispatches through IRTCInfoEvent's vtable slot 9.
 func (self *IRTCInfoEvent) Get_Info() (foundation.BSTR, error) {
 	var _pbstrInfo foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrInfo)))
-	return _pbstrInfo, win32.HRESULTError(int32(r1))
+	return _pbstrInfo, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InfoHeader dispatches through IRTCInfoEvent's vtable slot 10.
 func (self *IRTCInfoEvent) Get_InfoHeader() (foundation.BSTR, error) {
 	var _pbstrInfoHeader foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrInfoHeader)))
-	return _pbstrInfoHeader, win32.HRESULTError(int32(r1))
+	return _pbstrInfoHeader, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 4c23bf51-390c-4992-a41d-41eec05b2a4b
@@ -1350,28 +1350,28 @@ var IID_IRTCIntensityEvent = win32.GUID{Data1: 0x4c23bf51, Data2: 0x390c, Data3:
 func (self *IRTCIntensityEvent) Get_Level() (int32, error) {
 	var _plLevel int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plLevel)))
-	return _plLevel, win32.HRESULTError(int32(r1))
+	return _plLevel, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Min dispatches through IRTCIntensityEvent's vtable slot 8.
 func (self *IRTCIntensityEvent) Get_Min() (int32, error) {
 	var _plMin int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plMin)))
-	return _plMin, win32.HRESULTError(int32(r1))
+	return _plMin, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Max dispatches through IRTCIntensityEvent's vtable slot 9.
 func (self *IRTCIntensityEvent) Get_Max() (int32, error) {
 	var _plMax int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plMax)))
-	return _plMax, win32.HRESULTError(int32(r1))
+	return _plMax, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Direction dispatches through IRTCIntensityEvent's vtable slot 10.
 func (self *IRTCIntensityEvent) Get_Direction() (RTC_AUDIO_DEVICE, error) {
 	var _penDirection RTC_AUDIO_DEVICE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penDirection)))
-	return _penDirection, win32.HRESULTError(int32(r1))
+	return _penDirection, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 099944fb-bcda-453e-8c41-e13da2adf7f3
@@ -1386,21 +1386,21 @@ var IID_IRTCMediaEvent = win32.GUID{Data1: 0x099944fb, Data2: 0xbcda, Data3: 0x4
 func (self *IRTCMediaEvent) Get_MediaType() (int32, error) {
 	var _pMediaType int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pMediaType)))
-	return _pMediaType, win32.HRESULTError(int32(r1))
+	return _pMediaType, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EventType dispatches through IRTCMediaEvent's vtable slot 8.
 func (self *IRTCMediaEvent) Get_EventType() (RTC_MEDIA_EVENT_TYPE, error) {
 	var _penEventType RTC_MEDIA_EVENT_TYPE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penEventType)))
-	return _penEventType, win32.HRESULTError(int32(r1))
+	return _penEventType, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EventReason dispatches through IRTCMediaEvent's vtable slot 9.
 func (self *IRTCMediaEvent) Get_EventReason() (RTC_MEDIA_EVENT_REASON, error) {
 	var _penEventReason RTC_MEDIA_EVENT_REASON
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penEventReason)))
-	return _penEventReason, win32.HRESULTError(int32(r1))
+	return _penEventReason, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 52572d15-148c-4d97-a36c-2da55c289d63
@@ -1415,47 +1415,47 @@ var IID_IRTCMediaRequestEvent = win32.GUID{Data1: 0x52572d15, Data2: 0x148c, Dat
 func (self *IRTCMediaRequestEvent) Get_Session() (*IRTCSession2, error) {
 	var _ppSession *IRTCSession2
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppSession)))
-	return _ppSession, win32.HRESULTError(int32(r1))
+	return _ppSession, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ProposedMedia dispatches through IRTCMediaRequestEvent's vtable slot 8.
 func (self *IRTCMediaRequestEvent) Get_ProposedMedia() (int32, error) {
 	var _plMediaTypes int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plMediaTypes)))
-	return _plMediaTypes, win32.HRESULTError(int32(r1))
+	return _plMediaTypes, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentMedia dispatches through IRTCMediaRequestEvent's vtable slot 9.
 func (self *IRTCMediaRequestEvent) Get_CurrentMedia() (int32, error) {
 	var _plMediaTypes int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plMediaTypes)))
-	return _plMediaTypes, win32.HRESULTError(int32(r1))
+	return _plMediaTypes, win32.ErrIfFailed(int32(r1))
 }
 
 // Accept dispatches through IRTCMediaRequestEvent's vtable slot 10.
 func (self *IRTCMediaRequestEvent) Accept(lMediaTypes int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lMediaTypes))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RemotePreferredSecurityLevel dispatches through IRTCMediaRequestEvent's vtable slot 11.
 func (self *IRTCMediaRequestEvent) Get_RemotePreferredSecurityLevel(enSecurityType RTC_SECURITY_TYPE) (RTC_SECURITY_LEVEL, error) {
 	var _penSecurityLevel RTC_SECURITY_LEVEL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(enSecurityType), uintptr(unsafe.Pointer(&_penSecurityLevel)))
-	return _penSecurityLevel, win32.HRESULTError(int32(r1))
+	return _penSecurityLevel, win32.ErrIfFailed(int32(r1))
 }
 
 // Reject dispatches through IRTCMediaRequestEvent's vtable slot 12.
 func (self *IRTCMediaRequestEvent) Reject() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_State dispatches through IRTCMediaRequestEvent's vtable slot 13.
 func (self *IRTCMediaRequestEvent) Get_State() (RTC_REINVITE_STATE, error) {
 	var _pState RTC_REINVITE_STATE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pState)))
-	return _pState, win32.HRESULTError(int32(r1))
+	return _pState, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: d3609541-1b29-4de5-a4ad-5aebaf319512
@@ -1470,42 +1470,42 @@ var IID_IRTCMessagingEvent = win32.GUID{Data1: 0xd3609541, Data2: 0x1b29, Data3:
 func (self *IRTCMessagingEvent) Get_Session() (*IRTCSession, error) {
 	var _ppSession *IRTCSession
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppSession)))
-	return _ppSession, win32.HRESULTError(int32(r1))
+	return _ppSession, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Participant dispatches through IRTCMessagingEvent's vtable slot 8.
 func (self *IRTCMessagingEvent) Get_Participant() (*IRTCParticipant, error) {
 	var _ppParticipant *IRTCParticipant
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppParticipant)))
-	return _ppParticipant, win32.HRESULTError(int32(r1))
+	return _ppParticipant, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EventType dispatches through IRTCMessagingEvent's vtable slot 9.
 func (self *IRTCMessagingEvent) Get_EventType() (RTC_MESSAGING_EVENT_TYPE, error) {
 	var _penEventType RTC_MESSAGING_EVENT_TYPE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penEventType)))
-	return _penEventType, win32.HRESULTError(int32(r1))
+	return _penEventType, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Message dispatches through IRTCMessagingEvent's vtable slot 10.
 func (self *IRTCMessagingEvent) Get_Message() (foundation.BSTR, error) {
 	var _pbstrMessage foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrMessage)))
-	return _pbstrMessage, win32.HRESULTError(int32(r1))
+	return _pbstrMessage, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MessageHeader dispatches through IRTCMessagingEvent's vtable slot 11.
 func (self *IRTCMessagingEvent) Get_MessageHeader() (foundation.BSTR, error) {
 	var _pbstrMessageHeader foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrMessageHeader)))
-	return _pbstrMessageHeader, win32.HRESULTError(int32(r1))
+	return _pbstrMessageHeader, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UserStatus dispatches through IRTCMessagingEvent's vtable slot 12.
 func (self *IRTCMessagingEvent) Get_UserStatus() (RTC_MESSAGING_USER_STATUS, error) {
 	var _penUserStatus RTC_MESSAGING_USER_STATUS
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penUserStatus)))
-	return _penUserStatus, win32.HRESULTError(int32(r1))
+	return _penUserStatus, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: ae86add5-26b1-4414-af1d-b94cd938d739
@@ -1520,35 +1520,35 @@ var IID_IRTCParticipant = win32.GUID{Data1: 0xae86add5, Data2: 0x26b1, Data3: 0x
 func (self *IRTCParticipant) Get_UserURI() (foundation.BSTR, error) {
 	var _pbstrUserURI foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrUserURI)))
-	return _pbstrUserURI, win32.HRESULTError(int32(r1))
+	return _pbstrUserURI, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through IRTCParticipant's vtable slot 4.
 func (self *IRTCParticipant) Get_Name() (foundation.BSTR, error) {
 	var _pbstrName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrName)))
-	return _pbstrName, win32.HRESULTError(int32(r1))
+	return _pbstrName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Removable dispatches through IRTCParticipant's vtable slot 5.
 func (self *IRTCParticipant) Get_Removable() (foundation.VARIANT_BOOL, error) {
 	var _pfRemovable foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfRemovable)))
-	return _pfRemovable, win32.HRESULTError(int32(r1))
+	return _pfRemovable, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_State dispatches through IRTCParticipant's vtable slot 6.
 func (self *IRTCParticipant) Get_State() (RTC_PARTICIPANT_STATE, error) {
 	var _penState RTC_PARTICIPANT_STATE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penState)))
-	return _penState, win32.HRESULTError(int32(r1))
+	return _penState, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Session dispatches through IRTCParticipant's vtable slot 7.
 func (self *IRTCParticipant) Get_Session() (*IRTCSession, error) {
 	var _ppSession *IRTCSession
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppSession)))
-	return _ppSession, win32.HRESULTError(int32(r1))
+	return _ppSession, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 09bcb597-f0fa-48f9-b420-468cea7fde04
@@ -1563,21 +1563,21 @@ var IID_IRTCParticipantStateChangeEvent = win32.GUID{Data1: 0x09bcb597, Data2: 0
 func (self *IRTCParticipantStateChangeEvent) Get_Participant() (*IRTCParticipant, error) {
 	var _ppParticipant *IRTCParticipant
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppParticipant)))
-	return _ppParticipant, win32.HRESULTError(int32(r1))
+	return _ppParticipant, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_State dispatches through IRTCParticipantStateChangeEvent's vtable slot 8.
 func (self *IRTCParticipantStateChangeEvent) Get_State() (RTC_PARTICIPANT_STATE, error) {
 	var _penState RTC_PARTICIPANT_STATE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penState)))
-	return _penState, win32.HRESULTError(int32(r1))
+	return _penState, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StatusCode dispatches through IRTCParticipantStateChangeEvent's vtable slot 9.
 func (self *IRTCParticipantStateChangeEvent) Get_StatusCode() (int32, error) {
 	var _plStatusCode int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plStatusCode)))
-	return _plStatusCode, win32.HRESULTError(int32(r1))
+	return _plStatusCode, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: da77c14b-6208-43ca-8ddf-5b60a0a69fac
@@ -1591,19 +1591,19 @@ var IID_IRTCPortManager = win32.GUID{Data1: 0xda77c14b, Data2: 0x6208, Data3: 0x
 // GetMapping dispatches through IRTCPortManager's vtable slot 3.
 func (self *IRTCPortManager) GetMapping(bstrRemoteAddress foundation.BSTR, enPortType RTC_PORT_TYPE, pbstrInternalLocalAddress *foundation.BSTR, plInternalLocalPort *int32, pbstrExternalLocalAddress *foundation.BSTR, plExternalLocalPort *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRemoteAddress)), uintptr(enPortType), uintptr(unsafe.Pointer(pbstrInternalLocalAddress)), uintptr(unsafe.Pointer(plInternalLocalPort)), uintptr(unsafe.Pointer(pbstrExternalLocalAddress)), uintptr(unsafe.Pointer(plExternalLocalPort)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UpdateRemoteAddress dispatches through IRTCPortManager's vtable slot 4.
 func (self *IRTCPortManager) UpdateRemoteAddress(bstrRemoteAddress foundation.BSTR, bstrInternalLocalAddress foundation.BSTR, lInternalLocalPort int32, bstrExternalLocalAddress foundation.BSTR, lExternalLocalPort int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRemoteAddress)), uintptr(unsafe.Pointer(bstrInternalLocalAddress)), uintptr(lInternalLocalPort), uintptr(unsafe.Pointer(bstrExternalLocalAddress)), uintptr(lExternalLocalPort))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReleaseMapping dispatches through IRTCPortManager's vtable slot 5.
 func (self *IRTCPortManager) ReleaseMapping(bstrInternalLocalAddress foundation.BSTR, lInternalLocalPort int32, bstrExternalLocalAddress foundation.BSTR, lExternalLocalAddress int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrInternalLocalAddress)), uintptr(lInternalLocalPort), uintptr(unsafe.Pointer(bstrExternalLocalAddress)), uintptr(lExternalLocalAddress))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 8b22f92c-cd90-42db-a733-212205c3e3df
@@ -1618,52 +1618,52 @@ var IID_IRTCPresenceContact = win32.GUID{Data1: 0x8b22f92c, Data2: 0xcd90, Data3
 func (self *IRTCPresenceContact) Get_PresentityURI() (foundation.BSTR, error) {
 	var _pbstrPresentityURI foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrPresentityURI)))
-	return _pbstrPresentityURI, win32.HRESULTError(int32(r1))
+	return _pbstrPresentityURI, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PresentityURI dispatches through IRTCPresenceContact's vtable slot 4.
 func (self *IRTCPresenceContact) Put_PresentityURI(bstrPresentityURI foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPresentityURI)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through IRTCPresenceContact's vtable slot 5.
 func (self *IRTCPresenceContact) Get_Name() (foundation.BSTR, error) {
 	var _pbstrName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrName)))
-	return _pbstrName, win32.HRESULTError(int32(r1))
+	return _pbstrName, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Name dispatches through IRTCPresenceContact's vtable slot 6.
 func (self *IRTCPresenceContact) Put_Name(bstrName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Data dispatches through IRTCPresenceContact's vtable slot 7.
 func (self *IRTCPresenceContact) Get_Data() (foundation.BSTR, error) {
 	var _pbstrData foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrData)))
-	return _pbstrData, win32.HRESULTError(int32(r1))
+	return _pbstrData, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Data dispatches through IRTCPresenceContact's vtable slot 8.
 func (self *IRTCPresenceContact) Put_Data(bstrData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Persistent dispatches through IRTCPresenceContact's vtable slot 9.
 func (self *IRTCPresenceContact) Get_Persistent() (foundation.VARIANT_BOOL, error) {
 	var _pfPersistent foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfPersistent)))
-	return _pfPersistent, win32.HRESULTError(int32(r1))
+	return _pfPersistent, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Persistent dispatches through IRTCPresenceContact's vtable slot 10.
 func (self *IRTCPresenceContact) Put_Persistent(fPersistent foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(fPersistent))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 38f0e78c-8b87-4c04-a82d-aedd83c909bb
@@ -1678,20 +1678,20 @@ var IID_IRTCPresenceDataEvent = win32.GUID{Data1: 0x38f0e78c, Data2: 0x8b87, Dat
 func (self *IRTCPresenceDataEvent) Get_StatusCode() (int32, error) {
 	var _plStatusCode int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plStatusCode)))
-	return _plStatusCode, win32.HRESULTError(int32(r1))
+	return _plStatusCode, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StatusText dispatches through IRTCPresenceDataEvent's vtable slot 8.
 func (self *IRTCPresenceDataEvent) Get_StatusText() (foundation.BSTR, error) {
 	var _pbstrStatusText foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrStatusText)))
-	return _pbstrStatusText, win32.HRESULTError(int32(r1))
+	return _pbstrStatusText, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPresenceData dispatches through IRTCPresenceDataEvent's vtable slot 9.
 func (self *IRTCPresenceDataEvent) GetPresenceData(pbstrNamespace *foundation.BSTR, pbstrData *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrNamespace)), uintptr(unsafe.Pointer(pbstrData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: bc6a90dd-ad9a-48da-9b0c-2515e38521ad
@@ -1706,27 +1706,27 @@ var IID_IRTCPresenceDevice = win32.GUID{Data1: 0xbc6a90dd, Data2: 0xad9a, Data3:
 func (self *IRTCPresenceDevice) Get_Status() (RTC_PRESENCE_STATUS, error) {
 	var _penStatus RTC_PRESENCE_STATUS
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penStatus)))
-	return _penStatus, win32.HRESULTError(int32(r1))
+	return _penStatus, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Notes dispatches through IRTCPresenceDevice's vtable slot 4.
 func (self *IRTCPresenceDevice) Get_Notes() (foundation.BSTR, error) {
 	var _pbstrNotes foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrNotes)))
-	return _pbstrNotes, win32.HRESULTError(int32(r1))
+	return _pbstrNotes, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PresenceProperty dispatches through IRTCPresenceDevice's vtable slot 5.
 func (self *IRTCPresenceDevice) Get_PresenceProperty(enProperty RTC_PRESENCE_PROPERTY) (foundation.BSTR, error) {
 	var _pbstrProperty foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(enProperty), uintptr(unsafe.Pointer(&_pbstrProperty)))
-	return _pbstrProperty, win32.HRESULTError(int32(r1))
+	return _pbstrProperty, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPresenceData dispatches through IRTCPresenceDevice's vtable slot 6.
 func (self *IRTCPresenceDevice) GetPresenceData(pbstrNamespace *foundation.BSTR, pbstrData *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrNamespace)), uintptr(unsafe.Pointer(pbstrData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f777f570-a820-49d5-86bd-e099493f1518
@@ -1741,28 +1741,28 @@ var IID_IRTCPresencePropertyEvent = win32.GUID{Data1: 0xf777f570, Data2: 0xa820,
 func (self *IRTCPresencePropertyEvent) Get_StatusCode() (int32, error) {
 	var _plStatusCode int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plStatusCode)))
-	return _plStatusCode, win32.HRESULTError(int32(r1))
+	return _plStatusCode, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StatusText dispatches through IRTCPresencePropertyEvent's vtable slot 8.
 func (self *IRTCPresencePropertyEvent) Get_StatusText() (foundation.BSTR, error) {
 	var _pbstrStatusText foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrStatusText)))
-	return _pbstrStatusText, win32.HRESULTError(int32(r1))
+	return _pbstrStatusText, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PresenceProperty dispatches through IRTCPresencePropertyEvent's vtable slot 9.
 func (self *IRTCPresencePropertyEvent) Get_PresenceProperty() (RTC_PRESENCE_PROPERTY, error) {
 	var _penPresProp RTC_PRESENCE_PROPERTY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penPresProp)))
-	return _penPresProp, win32.HRESULTError(int32(r1))
+	return _penPresProp, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Value dispatches through IRTCPresencePropertyEvent's vtable slot 10.
 func (self *IRTCPresencePropertyEvent) Get_Value() (foundation.BSTR, error) {
 	var _pbstrValue foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrValue)))
-	return _pbstrValue, win32.HRESULTError(int32(r1))
+	return _pbstrValue, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 78673f32-4a0f-462c-89aa-ee7706707678
@@ -1777,20 +1777,20 @@ var IID_IRTCPresenceStatusEvent = win32.GUID{Data1: 0x78673f32, Data2: 0x4a0f, D
 func (self *IRTCPresenceStatusEvent) Get_StatusCode() (int32, error) {
 	var _plStatusCode int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plStatusCode)))
-	return _plStatusCode, win32.HRESULTError(int32(r1))
+	return _plStatusCode, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StatusText dispatches through IRTCPresenceStatusEvent's vtable slot 8.
 func (self *IRTCPresenceStatusEvent) Get_StatusText() (foundation.BSTR, error) {
 	var _pbstrStatusText foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrStatusText)))
-	return _pbstrStatusText, win32.HRESULTError(int32(r1))
+	return _pbstrStatusText, win32.ErrIfFailed(int32(r1))
 }
 
 // GetLocalPresenceInfo dispatches through IRTCPresenceStatusEvent's vtable slot 9.
 func (self *IRTCPresenceStatusEvent) GetLocalPresenceInfo(penStatus *RTC_PRESENCE_STATUS, pbstrNotes *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(penStatus)), uintptr(unsafe.Pointer(pbstrNotes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: d07eca9e-4062-4dd4-9e7d-722a49ba7303
@@ -1805,125 +1805,125 @@ var IID_IRTCProfile = win32.GUID{Data1: 0xd07eca9e, Data2: 0x4062, Data3: 0x4dd4
 func (self *IRTCProfile) Get_Key() (foundation.BSTR, error) {
 	var _pbstrKey foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrKey)))
-	return _pbstrKey, win32.HRESULTError(int32(r1))
+	return _pbstrKey, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through IRTCProfile's vtable slot 4.
 func (self *IRTCProfile) Get_Name() (foundation.BSTR, error) {
 	var _pbstrName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrName)))
-	return _pbstrName, win32.HRESULTError(int32(r1))
+	return _pbstrName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_XML dispatches through IRTCProfile's vtable slot 5.
 func (self *IRTCProfile) Get_XML() (foundation.BSTR, error) {
 	var _pbstrXML foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrXML)))
-	return _pbstrXML, win32.HRESULTError(int32(r1))
+	return _pbstrXML, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ProviderName dispatches through IRTCProfile's vtable slot 6.
 func (self *IRTCProfile) Get_ProviderName() (foundation.BSTR, error) {
 	var _pbstrName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrName)))
-	return _pbstrName, win32.HRESULTError(int32(r1))
+	return _pbstrName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ProviderURI dispatches through IRTCProfile's vtable slot 7.
 func (self *IRTCProfile) Get_ProviderURI(enURI RTC_PROVIDER_URI) (foundation.BSTR, error) {
 	var _pbstrURI foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(enURI), uintptr(unsafe.Pointer(&_pbstrURI)))
-	return _pbstrURI, win32.HRESULTError(int32(r1))
+	return _pbstrURI, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ProviderData dispatches through IRTCProfile's vtable slot 8.
 func (self *IRTCProfile) Get_ProviderData() (foundation.BSTR, error) {
 	var _pbstrData foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrData)))
-	return _pbstrData, win32.HRESULTError(int32(r1))
+	return _pbstrData, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ClientName dispatches through IRTCProfile's vtable slot 9.
 func (self *IRTCProfile) Get_ClientName() (foundation.BSTR, error) {
 	var _pbstrName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrName)))
-	return _pbstrName, win32.HRESULTError(int32(r1))
+	return _pbstrName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ClientBanner dispatches through IRTCProfile's vtable slot 10.
 func (self *IRTCProfile) Get_ClientBanner() (foundation.VARIANT_BOOL, error) {
 	var _pfBanner foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfBanner)))
-	return _pfBanner, win32.HRESULTError(int32(r1))
+	return _pfBanner, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ClientMinVer dispatches through IRTCProfile's vtable slot 11.
 func (self *IRTCProfile) Get_ClientMinVer() (foundation.BSTR, error) {
 	var _pbstrMinVer foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrMinVer)))
-	return _pbstrMinVer, win32.HRESULTError(int32(r1))
+	return _pbstrMinVer, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ClientCurVer dispatches through IRTCProfile's vtable slot 12.
 func (self *IRTCProfile) Get_ClientCurVer() (foundation.BSTR, error) {
 	var _pbstrCurVer foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrCurVer)))
-	return _pbstrCurVer, win32.HRESULTError(int32(r1))
+	return _pbstrCurVer, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ClientUpdateURI dispatches through IRTCProfile's vtable slot 13.
 func (self *IRTCProfile) Get_ClientUpdateURI() (foundation.BSTR, error) {
 	var _pbstrUpdateURI foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrUpdateURI)))
-	return _pbstrUpdateURI, win32.HRESULTError(int32(r1))
+	return _pbstrUpdateURI, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ClientData dispatches through IRTCProfile's vtable slot 14.
 func (self *IRTCProfile) Get_ClientData() (foundation.BSTR, error) {
 	var _pbstrData foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrData)))
-	return _pbstrData, win32.HRESULTError(int32(r1))
+	return _pbstrData, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UserURI dispatches through IRTCProfile's vtable slot 15.
 func (self *IRTCProfile) Get_UserURI() (foundation.BSTR, error) {
 	var _pbstrUserURI foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrUserURI)))
-	return _pbstrUserURI, win32.HRESULTError(int32(r1))
+	return _pbstrUserURI, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UserName dispatches through IRTCProfile's vtable slot 16.
 func (self *IRTCProfile) Get_UserName() (foundation.BSTR, error) {
 	var _pbstrUserName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrUserName)))
-	return _pbstrUserName, win32.HRESULTError(int32(r1))
+	return _pbstrUserName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UserAccount dispatches through IRTCProfile's vtable slot 17.
 func (self *IRTCProfile) Get_UserAccount() (foundation.BSTR, error) {
 	var _pbstrUserAccount foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrUserAccount)))
-	return _pbstrUserAccount, win32.HRESULTError(int32(r1))
+	return _pbstrUserAccount, win32.ErrIfFailed(int32(r1))
 }
 
 // SetCredentials dispatches through IRTCProfile's vtable slot 18.
 func (self *IRTCProfile) SetCredentials(bstrUserURI foundation.BSTR, bstrUserAccount foundation.BSTR, bstrPassword foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUserURI)), uintptr(unsafe.Pointer(bstrUserAccount)), uintptr(unsafe.Pointer(bstrPassword)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SessionCapabilities dispatches through IRTCProfile's vtable slot 19.
 func (self *IRTCProfile) Get_SessionCapabilities() (int32, error) {
 	var _plSupportedSessions int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plSupportedSessions)))
-	return _plSupportedSessions, win32.HRESULTError(int32(r1))
+	return _plSupportedSessions, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_State dispatches through IRTCProfile's vtable slot 20.
 func (self *IRTCProfile) Get_State() (RTC_REGISTRATION_STATE, error) {
 	var _penState RTC_REGISTRATION_STATE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penState)))
-	return _penState, win32.HRESULTError(int32(r1))
+	return _penState, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 4b81f84e-bdc7-4184-9154-3cb2dd7917fb
@@ -1938,26 +1938,26 @@ var IID_IRTCProfile2 = win32.GUID{Data1: 0x4b81f84e, Data2: 0xbdc7, Data3: 0x418
 func (self *IRTCProfile2) Get_Realm() (foundation.BSTR, error) {
 	var _pbstrRealm foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrRealm)))
-	return _pbstrRealm, win32.HRESULTError(int32(r1))
+	return _pbstrRealm, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Realm dispatches through IRTCProfile2's vtable slot 22.
 func (self *IRTCProfile2) Put_Realm(bstrRealm foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRealm)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AllowedAuth dispatches through IRTCProfile2's vtable slot 23.
 func (self *IRTCProfile2) Get_AllowedAuth() (int32, error) {
 	var _plAllowedAuth int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plAllowedAuth)))
-	return _plAllowedAuth, win32.HRESULTError(int32(r1))
+	return _plAllowedAuth, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AllowedAuth dispatches through IRTCProfile2's vtable slot 24.
 func (self *IRTCProfile2) Put_AllowedAuth(lAllowedAuth int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(lAllowedAuth))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: d6d5ab3b-770e-43e8-800a-79b062395fca
@@ -1972,21 +1972,21 @@ var IID_IRTCProfileEvent = win32.GUID{Data1: 0xd6d5ab3b, Data2: 0x770e, Data3: 0
 func (self *IRTCProfileEvent) Get_Profile() (*IRTCProfile, error) {
 	var _ppProfile *IRTCProfile
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProfile)))
-	return _ppProfile, win32.HRESULTError(int32(r1))
+	return _ppProfile, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Cookie dispatches through IRTCProfileEvent's vtable slot 8.
 func (self *IRTCProfileEvent) Get_Cookie() (uintptr, error) {
 	var _plCookie uintptr
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCookie)))
-	return _plCookie, win32.HRESULTError(int32(r1))
+	return _plCookie, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StatusCode dispatches through IRTCProfileEvent's vtable slot 9.
 func (self *IRTCProfileEvent) Get_StatusCode() (int32, error) {
 	var _plStatusCode int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plStatusCode)))
-	return _plStatusCode, win32.HRESULTError(int32(r1))
+	return _plStatusCode, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 62e56edc-03fa-4121-94fb-23493fd0ae64
@@ -2001,7 +2001,7 @@ var IID_IRTCProfileEvent2 = win32.GUID{Data1: 0x62e56edc, Data2: 0x03fa, Data3: 
 func (self *IRTCProfileEvent2) Get_EventType() (RTC_PROFILE_EVENT_TYPE, error) {
 	var _pEventType RTC_PROFILE_EVENT_TYPE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pEventType)))
-	return _pEventType, win32.HRESULTError(int32(r1))
+	return _pEventType, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 11558d84-204c-43e7-99b0-2034e9417f7d
@@ -2016,32 +2016,32 @@ var IID_IRTCReInviteEvent = win32.GUID{Data1: 0x11558d84, Data2: 0x204c, Data3: 
 func (self *IRTCReInviteEvent) Get_Session() (*IRTCSession2, error) {
 	var _ppSession2 *IRTCSession2
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppSession2)))
-	return _ppSession2, win32.HRESULTError(int32(r1))
+	return _ppSession2, win32.ErrIfFailed(int32(r1))
 }
 
 // Accept dispatches through IRTCReInviteEvent's vtable slot 8.
 func (self *IRTCReInviteEvent) Accept(bstrContentType foundation.BSTR, bstrSessionDescription foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrContentType)), uintptr(unsafe.Pointer(bstrSessionDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reject dispatches through IRTCReInviteEvent's vtable slot 9.
 func (self *IRTCReInviteEvent) Reject() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_State dispatches through IRTCReInviteEvent's vtable slot 10.
 func (self *IRTCReInviteEvent) Get_State() (RTC_REINVITE_STATE, error) {
 	var _pState RTC_REINVITE_STATE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pState)))
-	return _pState, win32.HRESULTError(int32(r1))
+	return _pState, win32.ErrIfFailed(int32(r1))
 }
 
 // GetRemoteSessionDescription dispatches through IRTCReInviteEvent's vtable slot 11.
 func (self *IRTCReInviteEvent) GetRemoteSessionDescription(pbstrContentType *foundation.BSTR, pbstrSessionDescription *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrContentType)), uintptr(unsafe.Pointer(pbstrSessionDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 62d0991b-50ab-4f02-b948-ca94f26f8f95
@@ -2056,28 +2056,28 @@ var IID_IRTCRegistrationStateChangeEvent = win32.GUID{Data1: 0x62d0991b, Data2: 
 func (self *IRTCRegistrationStateChangeEvent) Get_Profile() (*IRTCProfile, error) {
 	var _ppProfile *IRTCProfile
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProfile)))
-	return _ppProfile, win32.HRESULTError(int32(r1))
+	return _ppProfile, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_State dispatches through IRTCRegistrationStateChangeEvent's vtable slot 8.
 func (self *IRTCRegistrationStateChangeEvent) Get_State() (RTC_REGISTRATION_STATE, error) {
 	var _penState RTC_REGISTRATION_STATE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penState)))
-	return _penState, win32.HRESULTError(int32(r1))
+	return _penState, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StatusCode dispatches through IRTCRegistrationStateChangeEvent's vtable slot 9.
 func (self *IRTCRegistrationStateChangeEvent) Get_StatusCode() (int32, error) {
 	var _plStatusCode int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plStatusCode)))
-	return _plStatusCode, win32.HRESULTError(int32(r1))
+	return _plStatusCode, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StatusText dispatches through IRTCRegistrationStateChangeEvent's vtable slot 10.
 func (self *IRTCRegistrationStateChangeEvent) Get_StatusText() (foundation.BSTR, error) {
 	var _pbstrStatusText foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrStatusText)))
-	return _pbstrStatusText, win32.HRESULTError(int32(r1))
+	return _pbstrStatusText, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 79960a6b-0cb1-4dc8-a805-7318e99902e8
@@ -2092,28 +2092,28 @@ var IID_IRTCRoamingEvent = win32.GUID{Data1: 0x79960a6b, Data2: 0x0cb1, Data3: 0
 func (self *IRTCRoamingEvent) Get_EventType() (RTC_ROAMING_EVENT_TYPE, error) {
 	var _pEventType RTC_ROAMING_EVENT_TYPE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pEventType)))
-	return _pEventType, win32.HRESULTError(int32(r1))
+	return _pEventType, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Profile dispatches through IRTCRoamingEvent's vtable slot 8.
 func (self *IRTCRoamingEvent) Get_Profile() (*IRTCProfile2, error) {
 	var _ppProfile *IRTCProfile2
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProfile)))
-	return _ppProfile, win32.HRESULTError(int32(r1))
+	return _ppProfile, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StatusCode dispatches through IRTCRoamingEvent's vtable slot 9.
 func (self *IRTCRoamingEvent) Get_StatusCode() (int32, error) {
 	var _plStatusCode int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plStatusCode)))
-	return _plStatusCode, win32.HRESULTError(int32(r1))
+	return _plStatusCode, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StatusText dispatches through IRTCRoamingEvent's vtable slot 10.
 func (self *IRTCRoamingEvent) Get_StatusText() (foundation.BSTR, error) {
 	var _pbstrStatusText foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrStatusText)))
-	return _pbstrStatusText, win32.HRESULTError(int32(r1))
+	return _pbstrStatusText, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 387c8086-99be-42fb-9973-7c0fc0ca9fa8
@@ -2128,130 +2128,130 @@ var IID_IRTCSession = win32.GUID{Data1: 0x387c8086, Data2: 0x99be, Data3: 0x42fb
 func (self *IRTCSession) Get_Client() (*IRTCClient, error) {
 	var _ppClient *IRTCClient
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppClient)))
-	return _ppClient, win32.HRESULTError(int32(r1))
+	return _ppClient, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_State dispatches through IRTCSession's vtable slot 4.
 func (self *IRTCSession) Get_State() (RTC_SESSION_STATE, error) {
 	var _penState RTC_SESSION_STATE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penState)))
-	return _penState, win32.HRESULTError(int32(r1))
+	return _penState, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Type dispatches through IRTCSession's vtable slot 5.
 func (self *IRTCSession) Get_Type() (RTC_SESSION_TYPE, error) {
 	var _penType RTC_SESSION_TYPE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penType)))
-	return _penType, win32.HRESULTError(int32(r1))
+	return _penType, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Profile dispatches through IRTCSession's vtable slot 6.
 func (self *IRTCSession) Get_Profile() (*IRTCProfile, error) {
 	var _ppProfile *IRTCProfile
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProfile)))
-	return _ppProfile, win32.HRESULTError(int32(r1))
+	return _ppProfile, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Participants dispatches through IRTCSession's vtable slot 7.
 func (self *IRTCSession) Get_Participants() (*IRTCCollection, error) {
 	var _ppCollection *IRTCCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCollection)))
-	return _ppCollection, win32.HRESULTError(int32(r1))
+	return _ppCollection, win32.ErrIfFailed(int32(r1))
 }
 
 // Answer dispatches through IRTCSession's vtable slot 8.
 func (self *IRTCSession) Answer() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Terminate dispatches through IRTCSession's vtable slot 9.
 func (self *IRTCSession) Terminate(enReason RTC_TERMINATE_REASON) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(enReason))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Redirect dispatches through IRTCSession's vtable slot 10.
 func (self *IRTCSession) Redirect(enType RTC_SESSION_TYPE, bstrLocalPhoneURI foundation.BSTR, pProfile *IRTCProfile, lFlags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(enType), uintptr(unsafe.Pointer(bstrLocalPhoneURI)), uintptr(unsafe.Pointer(pProfile)), uintptr(lFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddParticipant dispatches through IRTCSession's vtable slot 11.
 func (self *IRTCSession) AddParticipant(bstrAddress foundation.BSTR, bstrName foundation.BSTR) (*IRTCParticipant, error) {
 	var _ppParticipant *IRTCParticipant
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAddress)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(&_ppParticipant)))
-	return _ppParticipant, win32.HRESULTError(int32(r1))
+	return _ppParticipant, win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveParticipant dispatches through IRTCSession's vtable slot 12.
 func (self *IRTCSession) RemoveParticipant(pParticipant *IRTCParticipant) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pParticipant)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumerateParticipants dispatches through IRTCSession's vtable slot 13.
 func (self *IRTCSession) EnumerateParticipants() (*IRTCEnumParticipants, error) {
 	var _ppEnum *IRTCEnumParticipants
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
-	return _ppEnum, win32.HRESULTError(int32(r1))
+	return _ppEnum, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CanAddParticipants dispatches through IRTCSession's vtable slot 14.
 func (self *IRTCSession) Get_CanAddParticipants() (foundation.VARIANT_BOOL, error) {
 	var _pfCanAdd foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfCanAdd)))
-	return _pfCanAdd, win32.HRESULTError(int32(r1))
+	return _pfCanAdd, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RedirectedUserURI dispatches through IRTCSession's vtable slot 15.
 func (self *IRTCSession) Get_RedirectedUserURI() (foundation.BSTR, error) {
 	var _pbstrUserURI foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrUserURI)))
-	return _pbstrUserURI, win32.HRESULTError(int32(r1))
+	return _pbstrUserURI, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RedirectedUserName dispatches through IRTCSession's vtable slot 16.
 func (self *IRTCSession) Get_RedirectedUserName() (foundation.BSTR, error) {
 	var _pbstrUserName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrUserName)))
-	return _pbstrUserName, win32.HRESULTError(int32(r1))
+	return _pbstrUserName, win32.ErrIfFailed(int32(r1))
 }
 
 // NextRedirectedUser dispatches through IRTCSession's vtable slot 17.
 func (self *IRTCSession) NextRedirectedUser() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendMessage dispatches through IRTCSession's vtable slot 18.
 func (self *IRTCSession) SendMessage(bstrMessageHeader foundation.BSTR, bstrMessage foundation.BSTR, lCookie uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrMessageHeader)), uintptr(unsafe.Pointer(bstrMessage)), uintptr(lCookie))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendMessageStatus dispatches through IRTCSession's vtable slot 19.
 func (self *IRTCSession) SendMessageStatus(enUserStatus RTC_MESSAGING_USER_STATUS, lCookie uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(enUserStatus), uintptr(lCookie))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddStream dispatches through IRTCSession's vtable slot 20.
 func (self *IRTCSession) AddStream(lMediaType int32, lCookie uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(lMediaType), uintptr(lCookie))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveStream dispatches through IRTCSession's vtable slot 21.
 func (self *IRTCSession) RemoveStream(lMediaType int32, lCookie uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(lMediaType), uintptr(lCookie))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EncryptionKey dispatches through IRTCSession's vtable slot 22.
 func (self *IRTCSession) Put_EncryptionKey(lMediaType int32, EncryptionKey foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(lMediaType), uintptr(unsafe.Pointer(EncryptionKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 17d7cdfc-b007-484c-99d2-86a8a820991d
@@ -2265,39 +2265,39 @@ var IID_IRTCSession2 = win32.GUID{Data1: 0x17d7cdfc, Data2: 0xb007, Data3: 0x484
 // SendInfo dispatches through IRTCSession2's vtable slot 23.
 func (self *IRTCSession2) SendInfo(bstrInfoHeader foundation.BSTR, bstrInfo foundation.BSTR, lCookie uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrInfoHeader)), uintptr(unsafe.Pointer(bstrInfo)), uintptr(lCookie))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PreferredSecurityLevel dispatches through IRTCSession2's vtable slot 24.
 func (self *IRTCSession2) Put_PreferredSecurityLevel(enSecurityType RTC_SECURITY_TYPE, enSecurityLevel RTC_SECURITY_LEVEL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(enSecurityType), uintptr(enSecurityLevel))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PreferredSecurityLevel dispatches through IRTCSession2's vtable slot 25.
 func (self *IRTCSession2) Get_PreferredSecurityLevel(enSecurityType RTC_SECURITY_TYPE) (RTC_SECURITY_LEVEL, error) {
 	var _penSecurityLevel RTC_SECURITY_LEVEL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(enSecurityType), uintptr(unsafe.Pointer(&_penSecurityLevel)))
-	return _penSecurityLevel, win32.HRESULTError(int32(r1))
+	return _penSecurityLevel, win32.ErrIfFailed(int32(r1))
 }
 
 // IsSecurityEnabled dispatches through IRTCSession2's vtable slot 26.
 func (self *IRTCSession2) IsSecurityEnabled(enSecurityType RTC_SECURITY_TYPE) (foundation.VARIANT_BOOL, error) {
 	var _pfSecurityEnabled foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(enSecurityType), uintptr(unsafe.Pointer(&_pfSecurityEnabled)))
-	return _pfSecurityEnabled, win32.HRESULTError(int32(r1))
+	return _pfSecurityEnabled, win32.ErrIfFailed(int32(r1))
 }
 
 // AnswerWithSessionDescription dispatches through IRTCSession2's vtable slot 27.
 func (self *IRTCSession2) AnswerWithSessionDescription(bstrContentType foundation.BSTR, bstrSessionDescription foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrContentType)), uintptr(unsafe.Pointer(bstrSessionDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReInviteWithSessionDescription dispatches through IRTCSession2's vtable slot 28.
 func (self *IRTCSession2) ReInviteWithSessionDescription(bstrContentType foundation.BSTR, bstrSessionDescription foundation.BSTR, lCookie uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrContentType)), uintptr(unsafe.Pointer(bstrSessionDescription)), uintptr(lCookie))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: e9a50d94-190b-4f82-9530-3b8ebf60758a
@@ -2311,58 +2311,58 @@ var IID_IRTCSessionCallControl = win32.GUID{Data1: 0xe9a50d94, Data2: 0x190b, Da
 // Hold dispatches through IRTCSessionCallControl's vtable slot 3.
 func (self *IRTCSessionCallControl) Hold(lCookie uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lCookie))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnHold dispatches through IRTCSessionCallControl's vtable slot 4.
 func (self *IRTCSessionCallControl) UnHold(lCookie uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(lCookie))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Forward dispatches through IRTCSessionCallControl's vtable slot 5.
 func (self *IRTCSessionCallControl) Forward(bstrForwardToURI foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrForwardToURI)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Refer dispatches through IRTCSessionCallControl's vtable slot 6.
 func (self *IRTCSessionCallControl) Refer(bstrReferToURI foundation.BSTR, bstrReferCookie foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrReferToURI)), uintptr(unsafe.Pointer(bstrReferCookie)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ReferredByURI dispatches through IRTCSessionCallControl's vtable slot 7.
 func (self *IRTCSessionCallControl) Put_ReferredByURI(bstrReferredByURI foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrReferredByURI)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReferredByURI dispatches through IRTCSessionCallControl's vtable slot 8.
 func (self *IRTCSessionCallControl) Get_ReferredByURI() (foundation.BSTR, error) {
 	var _pbstrReferredByURI foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrReferredByURI)))
-	return _pbstrReferredByURI, win32.HRESULTError(int32(r1))
+	return _pbstrReferredByURI, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ReferCookie dispatches through IRTCSessionCallControl's vtable slot 9.
 func (self *IRTCSessionCallControl) Put_ReferCookie(bstrReferCookie foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrReferCookie)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReferCookie dispatches through IRTCSessionCallControl's vtable slot 10.
 func (self *IRTCSessionCallControl) Get_ReferCookie() (foundation.BSTR, error) {
 	var _pbstrReferCookie foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrReferCookie)))
-	return _pbstrReferCookie, win32.HRESULTError(int32(r1))
+	return _pbstrReferCookie, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsReferred dispatches through IRTCSessionCallControl's vtable slot 11.
 func (self *IRTCSessionCallControl) Get_IsReferred() (foundation.VARIANT_BOOL, error) {
 	var _pfIsReferred foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfIsReferred)))
-	return _pfIsReferred, win32.HRESULTError(int32(r1))
+	return _pfIsReferred, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: ba7f518e-d336-4070-93a6-865395c843f9
@@ -2376,7 +2376,7 @@ var IID_IRTCSessionDescriptionManager = win32.GUID{Data1: 0xba7f518e, Data2: 0xd
 // EvaluateSessionDescription dispatches through IRTCSessionDescriptionManager's vtable slot 3.
 func (self *IRTCSessionDescriptionManager) EvaluateSessionDescription(bstrContentType foundation.BSTR, bstrSessionDescription foundation.BSTR, pfApplicationSession *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrContentType)), uintptr(unsafe.Pointer(bstrSessionDescription)), uintptr(unsafe.Pointer(pfApplicationSession)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: a6bff4c0-f7c8-4d3c-9a41-3550f78a95b0
@@ -2391,28 +2391,28 @@ var IID_IRTCSessionOperationCompleteEvent = win32.GUID{Data1: 0xa6bff4c0, Data2:
 func (self *IRTCSessionOperationCompleteEvent) Get_Session() (*IRTCSession, error) {
 	var _ppSession *IRTCSession
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppSession)))
-	return _ppSession, win32.HRESULTError(int32(r1))
+	return _ppSession, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Cookie dispatches through IRTCSessionOperationCompleteEvent's vtable slot 8.
 func (self *IRTCSessionOperationCompleteEvent) Get_Cookie() (uintptr, error) {
 	var _plCookie uintptr
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCookie)))
-	return _plCookie, win32.HRESULTError(int32(r1))
+	return _plCookie, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StatusCode dispatches through IRTCSessionOperationCompleteEvent's vtable slot 9.
 func (self *IRTCSessionOperationCompleteEvent) Get_StatusCode() (int32, error) {
 	var _plStatusCode int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plStatusCode)))
-	return _plStatusCode, win32.HRESULTError(int32(r1))
+	return _plStatusCode, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StatusText dispatches through IRTCSessionOperationCompleteEvent's vtable slot 10.
 func (self *IRTCSessionOperationCompleteEvent) Get_StatusText() (foundation.BSTR, error) {
 	var _pbstrStatusText foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrStatusText)))
-	return _pbstrStatusText, win32.HRESULTError(int32(r1))
+	return _pbstrStatusText, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f6fc2a9b-d5bc-4241-b436-1b8460c13832
@@ -2427,13 +2427,13 @@ var IID_IRTCSessionOperationCompleteEvent2 = win32.GUID{Data1: 0xf6fc2a9b, Data2
 func (self *IRTCSessionOperationCompleteEvent2) Get_Participant() (*IRTCParticipant, error) {
 	var _ppParticipant *IRTCParticipant
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppParticipant)))
-	return _ppParticipant, win32.HRESULTError(int32(r1))
+	return _ppParticipant, win32.ErrIfFailed(int32(r1))
 }
 
 // GetRemoteSessionDescription dispatches through IRTCSessionOperationCompleteEvent2's vtable slot 12.
 func (self *IRTCSessionOperationCompleteEvent2) GetRemoteSessionDescription(pbstrContentType *foundation.BSTR, pbstrSessionDescription *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrContentType)), uintptr(unsafe.Pointer(pbstrSessionDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: a072f1d6-0286-4e1f-85f2-17a2948456ec
@@ -2447,7 +2447,7 @@ var IID_IRTCSessionPortManagement = win32.GUID{Data1: 0xa072f1d6, Data2: 0x0286,
 // SetPortManager dispatches through IRTCSessionPortManagement's vtable slot 3.
 func (self *IRTCSessionPortManagement) SetPortManager(pPortManager *IRTCPortManager) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPortManager)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 3d8fc2cd-5d76-44ab-bb68-2a80353b34a2
@@ -2462,28 +2462,28 @@ var IID_IRTCSessionReferStatusEvent = win32.GUID{Data1: 0x3d8fc2cd, Data2: 0x5d7
 func (self *IRTCSessionReferStatusEvent) Get_Session() (*IRTCSession2, error) {
 	var _ppSession *IRTCSession2
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppSession)))
-	return _ppSession, win32.HRESULTError(int32(r1))
+	return _ppSession, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReferStatus dispatches through IRTCSessionReferStatusEvent's vtable slot 8.
 func (self *IRTCSessionReferStatusEvent) Get_ReferStatus() (RTC_SESSION_REFER_STATUS, error) {
 	var _penReferStatus RTC_SESSION_REFER_STATUS
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penReferStatus)))
-	return _penReferStatus, win32.HRESULTError(int32(r1))
+	return _penReferStatus, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StatusCode dispatches through IRTCSessionReferStatusEvent's vtable slot 9.
 func (self *IRTCSessionReferStatusEvent) Get_StatusCode() (int32, error) {
 	var _plStatusCode int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plStatusCode)))
-	return _plStatusCode, win32.HRESULTError(int32(r1))
+	return _plStatusCode, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StatusText dispatches through IRTCSessionReferStatusEvent's vtable slot 10.
 func (self *IRTCSessionReferStatusEvent) Get_StatusText() (foundation.BSTR, error) {
 	var _pbstrStatusText foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrStatusText)))
-	return _pbstrStatusText, win32.HRESULTError(int32(r1))
+	return _pbstrStatusText, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 176a6828-4fcc-4f28-a862-04597a6cf1c4
@@ -2498,46 +2498,46 @@ var IID_IRTCSessionReferredEvent = win32.GUID{Data1: 0x176a6828, Data2: 0x4fcc, 
 func (self *IRTCSessionReferredEvent) Get_Session() (*IRTCSession2, error) {
 	var _ppSession *IRTCSession2
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppSession)))
-	return _ppSession, win32.HRESULTError(int32(r1))
+	return _ppSession, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReferredByURI dispatches through IRTCSessionReferredEvent's vtable slot 8.
 func (self *IRTCSessionReferredEvent) Get_ReferredByURI() (foundation.BSTR, error) {
 	var _pbstrReferredByURI foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrReferredByURI)))
-	return _pbstrReferredByURI, win32.HRESULTError(int32(r1))
+	return _pbstrReferredByURI, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReferToURI dispatches through IRTCSessionReferredEvent's vtable slot 9.
 func (self *IRTCSessionReferredEvent) Get_ReferToURI() (foundation.BSTR, error) {
 	var _pbstrReferoURI foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrReferoURI)))
-	return _pbstrReferoURI, win32.HRESULTError(int32(r1))
+	return _pbstrReferoURI, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReferCookie dispatches through IRTCSessionReferredEvent's vtable slot 10.
 func (self *IRTCSessionReferredEvent) Get_ReferCookie() (foundation.BSTR, error) {
 	var _pbstrReferCookie foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrReferCookie)))
-	return _pbstrReferCookie, win32.HRESULTError(int32(r1))
+	return _pbstrReferCookie, win32.ErrIfFailed(int32(r1))
 }
 
 // Accept dispatches through IRTCSessionReferredEvent's vtable slot 11.
 func (self *IRTCSessionReferredEvent) Accept() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reject dispatches through IRTCSessionReferredEvent's vtable slot 12.
 func (self *IRTCSessionReferredEvent) Reject() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetReferredSessionState dispatches through IRTCSessionReferredEvent's vtable slot 13.
 func (self *IRTCSessionReferredEvent) SetReferredSessionState(enState RTC_SESSION_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(enState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: b5bad703-5952-48b3-9321-7f4500521506
@@ -2552,28 +2552,28 @@ var IID_IRTCSessionStateChangeEvent = win32.GUID{Data1: 0xb5bad703, Data2: 0x595
 func (self *IRTCSessionStateChangeEvent) Get_Session() (*IRTCSession, error) {
 	var _ppSession *IRTCSession
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppSession)))
-	return _ppSession, win32.HRESULTError(int32(r1))
+	return _ppSession, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_State dispatches through IRTCSessionStateChangeEvent's vtable slot 8.
 func (self *IRTCSessionStateChangeEvent) Get_State() (RTC_SESSION_STATE, error) {
 	var _penState RTC_SESSION_STATE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penState)))
-	return _penState, win32.HRESULTError(int32(r1))
+	return _penState, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StatusCode dispatches through IRTCSessionStateChangeEvent's vtable slot 9.
 func (self *IRTCSessionStateChangeEvent) Get_StatusCode() (int32, error) {
 	var _plStatusCode int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plStatusCode)))
-	return _plStatusCode, win32.HRESULTError(int32(r1))
+	return _plStatusCode, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StatusText dispatches through IRTCSessionStateChangeEvent's vtable slot 10.
 func (self *IRTCSessionStateChangeEvent) Get_StatusText() (foundation.BSTR, error) {
 	var _pbstrStatusText foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrStatusText)))
-	return _pbstrStatusText, win32.HRESULTError(int32(r1))
+	return _pbstrStatusText, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 4f933171-6f95-4880-80d9-2ec8d495d261
@@ -2588,27 +2588,27 @@ var IID_IRTCSessionStateChangeEvent2 = win32.GUID{Data1: 0x4f933171, Data2: 0x6f
 func (self *IRTCSessionStateChangeEvent2) Get_MediaTypes() (int32, error) {
 	var _pMediaTypes int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pMediaTypes)))
-	return _pMediaTypes, win32.HRESULTError(int32(r1))
+	return _pMediaTypes, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RemotePreferredSecurityLevel dispatches through IRTCSessionStateChangeEvent2's vtable slot 12.
 func (self *IRTCSessionStateChangeEvent2) Get_RemotePreferredSecurityLevel(enSecurityType RTC_SECURITY_TYPE) (RTC_SECURITY_LEVEL, error) {
 	var _penSecurityLevel RTC_SECURITY_LEVEL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(enSecurityType), uintptr(unsafe.Pointer(&_penSecurityLevel)))
-	return _penSecurityLevel, win32.HRESULTError(int32(r1))
+	return _penSecurityLevel, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsForked dispatches through IRTCSessionStateChangeEvent2's vtable slot 13.
 func (self *IRTCSessionStateChangeEvent2) Get_IsForked() (foundation.VARIANT_BOOL, error) {
 	var _pfIsForked foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfIsForked)))
-	return _pfIsForked, win32.HRESULTError(int32(r1))
+	return _pfIsForked, win32.ErrIfFailed(int32(r1))
 }
 
 // GetRemoteSessionDescription dispatches through IRTCSessionStateChangeEvent2's vtable slot 14.
 func (self *IRTCSessionStateChangeEvent2) GetRemoteSessionDescription(pbstrContentType *foundation.BSTR, pbstrSessionDescription *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrContentType)), uintptr(unsafe.Pointer(pbstrSessionDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: b619882b-860c-4db4-be1b-693b6505bbe5
@@ -2623,13 +2623,13 @@ var IID_IRTCUserSearch = win32.GUID{Data1: 0xb619882b, Data2: 0x860c, Data3: 0x4
 func (self *IRTCUserSearch) CreateQuery() (*IRTCUserSearchQuery, error) {
 	var _ppQuery *IRTCUserSearchQuery
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppQuery)))
-	return _ppQuery, win32.HRESULTError(int32(r1))
+	return _ppQuery, win32.ErrIfFailed(int32(r1))
 }
 
 // ExecuteSearch dispatches through IRTCUserSearch's vtable slot 4.
 func (self *IRTCUserSearch) ExecuteSearch(pQuery *IRTCUserSearchQuery, pProfile *IRTCProfile, lCookie uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pQuery)), uintptr(unsafe.Pointer(pProfile)), uintptr(lCookie))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 288300f5-d23a-4365-9a73-9985c98c2881
@@ -2643,47 +2643,47 @@ var IID_IRTCUserSearchQuery = win32.GUID{Data1: 0x288300f5, Data2: 0xd23a, Data3
 // Put_SearchTerm dispatches through IRTCUserSearchQuery's vtable slot 3.
 func (self *IRTCUserSearchQuery) Put_SearchTerm(bstrName foundation.BSTR, bstrValue foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(bstrValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SearchTerm dispatches through IRTCUserSearchQuery's vtable slot 4.
 func (self *IRTCUserSearchQuery) Get_SearchTerm(bstrName foundation.BSTR) (foundation.BSTR, error) {
 	var _pbstrValue foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(&_pbstrValue)))
-	return _pbstrValue, win32.HRESULTError(int32(r1))
+	return _pbstrValue, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SearchTerms dispatches through IRTCUserSearchQuery's vtable slot 5.
 func (self *IRTCUserSearchQuery) Get_SearchTerms() (foundation.BSTR, error) {
 	var _pbstrNames foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrNames)))
-	return _pbstrNames, win32.HRESULTError(int32(r1))
+	return _pbstrNames, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SearchPreference dispatches through IRTCUserSearchQuery's vtable slot 6.
 func (self *IRTCUserSearchQuery) Put_SearchPreference(enPreference RTC_USER_SEARCH_PREFERENCE, lValue int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(enPreference), uintptr(lValue))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SearchPreference dispatches through IRTCUserSearchQuery's vtable slot 7.
 func (self *IRTCUserSearchQuery) Get_SearchPreference(enPreference RTC_USER_SEARCH_PREFERENCE) (int32, error) {
 	var _plValue int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(enPreference), uintptr(unsafe.Pointer(&_plValue)))
-	return _plValue, win32.HRESULTError(int32(r1))
+	return _plValue, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SearchDomain dispatches through IRTCUserSearchQuery's vtable slot 8.
 func (self *IRTCUserSearchQuery) Put_SearchDomain(bstrDomain foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDomain)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SearchDomain dispatches through IRTCUserSearchQuery's vtable slot 9.
 func (self *IRTCUserSearchQuery) Get_SearchDomain() (foundation.BSTR, error) {
 	var _pbstrDomain foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrDomain)))
-	return _pbstrDomain, win32.HRESULTError(int32(r1))
+	return _pbstrDomain, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 851278b2-9592-480f-8db5-2de86b26b54d
@@ -2698,7 +2698,7 @@ var IID_IRTCUserSearchResult = win32.GUID{Data1: 0x851278b2, Data2: 0x9592, Data
 func (self *IRTCUserSearchResult) Get_Value(enColumn RTC_USER_SEARCH_COLUMN) (foundation.BSTR, error) {
 	var _pbstrValue foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(enColumn), uintptr(unsafe.Pointer(&_pbstrValue)))
-	return _pbstrValue, win32.HRESULTError(int32(r1))
+	return _pbstrValue, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: d8c8c3cd-7fac-4088-81c5-c24cbc0938e3
@@ -2713,49 +2713,49 @@ var IID_IRTCUserSearchResultsEvent = win32.GUID{Data1: 0xd8c8c3cd, Data2: 0x7fac
 func (self *IRTCUserSearchResultsEvent) EnumerateResults() (*IRTCEnumUserSearchResults, error) {
 	var _ppEnum *IRTCEnumUserSearchResults
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
-	return _ppEnum, win32.HRESULTError(int32(r1))
+	return _ppEnum, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Results dispatches through IRTCUserSearchResultsEvent's vtable slot 8.
 func (self *IRTCUserSearchResultsEvent) Get_Results() (*IRTCCollection, error) {
 	var _ppCollection *IRTCCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCollection)))
-	return _ppCollection, win32.HRESULTError(int32(r1))
+	return _ppCollection, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Profile dispatches through IRTCUserSearchResultsEvent's vtable slot 9.
 func (self *IRTCUserSearchResultsEvent) Get_Profile() (*IRTCProfile2, error) {
 	var _ppProfile *IRTCProfile2
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProfile)))
-	return _ppProfile, win32.HRESULTError(int32(r1))
+	return _ppProfile, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Query dispatches through IRTCUserSearchResultsEvent's vtable slot 10.
 func (self *IRTCUserSearchResultsEvent) Get_Query() (*IRTCUserSearchQuery, error) {
 	var _ppQuery *IRTCUserSearchQuery
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppQuery)))
-	return _ppQuery, win32.HRESULTError(int32(r1))
+	return _ppQuery, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Cookie dispatches through IRTCUserSearchResultsEvent's vtable slot 11.
 func (self *IRTCUserSearchResultsEvent) Get_Cookie() (uintptr, error) {
 	var _plCookie uintptr
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCookie)))
-	return _plCookie, win32.HRESULTError(int32(r1))
+	return _plCookie, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StatusCode dispatches through IRTCUserSearchResultsEvent's vtable slot 12.
 func (self *IRTCUserSearchResultsEvent) Get_StatusCode() (int32, error) {
 	var _plStatusCode int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plStatusCode)))
-	return _plStatusCode, win32.HRESULTError(int32(r1))
+	return _plStatusCode, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MoreAvailable dispatches through IRTCUserSearchResultsEvent's vtable slot 13.
 func (self *IRTCUserSearchResultsEvent) Get_MoreAvailable() (foundation.VARIANT_BOOL, error) {
 	var _pfMoreAvailable foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfMoreAvailable)))
-	return _pfMoreAvailable, win32.HRESULTError(int32(r1))
+	return _pfMoreAvailable, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: c7cedad8-346b-4d1b-ac02-a2088df9be4f
@@ -2770,13 +2770,13 @@ var IID_IRTCWatcher = win32.GUID{Data1: 0xc7cedad8, Data2: 0x346b, Data3: 0x4d1b
 func (self *IRTCWatcher) Get_State() (RTC_WATCHER_STATE, error) {
 	var _penState RTC_WATCHER_STATE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penState)))
-	return _penState, win32.HRESULTError(int32(r1))
+	return _penState, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_State dispatches through IRTCWatcher's vtable slot 12.
 func (self *IRTCWatcher) Put_State(enState RTC_WATCHER_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(enState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: d4d9967f-d011-4b1d-91e3-aba78f96393d
@@ -2791,14 +2791,14 @@ var IID_IRTCWatcher2 = win32.GUID{Data1: 0xd4d9967f, Data2: 0xd011, Data3: 0x4b1
 func (self *IRTCWatcher2) Get_Profile() (*IRTCProfile2, error) {
 	var _ppProfile *IRTCProfile2
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProfile)))
-	return _ppProfile, win32.HRESULTError(int32(r1))
+	return _ppProfile, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Scope dispatches through IRTCWatcher2's vtable slot 14.
 func (self *IRTCWatcher2) Get_Scope() (RTC_ACE_SCOPE, error) {
 	var _penScope RTC_ACE_SCOPE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penScope)))
-	return _penScope, win32.HRESULTError(int32(r1))
+	return _penScope, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f30d7261-587a-424f-822c-312788f43548
@@ -2813,7 +2813,7 @@ var IID_IRTCWatcherEvent = win32.GUID{Data1: 0xf30d7261, Data2: 0x587a, Data3: 0
 func (self *IRTCWatcherEvent) Get_Watcher() (*IRTCWatcher, error) {
 	var _ppWatcher *IRTCWatcher
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppWatcher)))
-	return _ppWatcher, win32.HRESULTError(int32(r1))
+	return _ppWatcher, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: e52891e8-188c-49af-b005-98ed13f83f9c
@@ -2828,14 +2828,14 @@ var IID_IRTCWatcherEvent2 = win32.GUID{Data1: 0xe52891e8, Data2: 0x188c, Data3: 
 func (self *IRTCWatcherEvent2) Get_EventType() (RTC_WATCHER_EVENT_TYPE, error) {
 	var _pEventType RTC_WATCHER_EVENT_TYPE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pEventType)))
-	return _pEventType, win32.HRESULTError(int32(r1))
+	return _pEventType, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StatusCode dispatches through IRTCWatcherEvent2's vtable slot 9.
 func (self *IRTCWatcherEvent2) Get_StatusCode() (int32, error) {
 	var _plStatusCode int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plStatusCode)))
-	return _plStatusCode, win32.HRESULTError(int32(r1))
+	return _plStatusCode, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 5123e076-29e3-4bfd-84fe-0192d411e3e8
@@ -2849,11 +2849,11 @@ var IID_ITransportSettingsInternal = win32.GUID{Data1: 0x5123e076, Data2: 0x29e3
 // ApplySetting dispatches through ITransportSettingsInternal's vtable slot 3.
 func (self *ITransportSettingsInternal) ApplySetting(Setting *TRANSPORT_SETTING) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Setting)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QuerySetting dispatches through ITransportSettingsInternal's vtable slot 4.
 func (self *ITransportSettingsInternal) QuerySetting(Setting *TRANSPORT_SETTING) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Setting)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

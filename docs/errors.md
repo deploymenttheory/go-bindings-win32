@@ -8,7 +8,7 @@ honestly — a function's Go signature tells you which domain it uses.
 | Domain | How the API reports failure | Go shape |
 |---|---|---|
 | **`GetLastError`** | A `BOOL`/handle return plus a thread-local error code you fetch separately. The metadata marks these `SetLastError`. | `BOOL` + `SetLastError` → **`error`**; a value + `SetLastError` → **`(T, error)`**. The error is a `windows.Errno`. |
-| **`HRESULT`** | A 32-bit status returned directly; negative = failure. Used by COM and many newer flat APIs. | **`error`** via `win32.HRESULTError` (nil when the `HRESULT` is ≥ 0). |
+| **`HRESULT`** | A 32-bit status returned directly; negative = failure. Used by COM and many newer flat APIs. | **`error`** via `win32.ErrIfFailed` (nil when the `HRESULT` is ≥ 0). |
 | **`NTSTATUS`** | A 32-bit status from the native (`ntdll`) layer. | Returned as the typed value; compare against the `STATUS_*` constants. |
 | **`NET_API_STATUS`** and other **domain codes** | A `DWORD` return code specific to a subsystem (networking, setup, registry…). No `SetLastError`. | Returned as **`uint32`** (or the typed enum); compare against the subsystem's constants (`NERR_Success`, `ERROR_*`). |
 
@@ -48,13 +48,13 @@ Flat functions and COM methods that return `HRESULT` become error-returning:
 var stream *systemcom.IStream
 if hr := structuredstorage.CreateStreamOnHGlobal(0, 1, &stream); hr != 0 {
 	// raw HRESULT still available as a value; or:
-	return win32.HRESULTError(int32(hr))
+	return win32.ErrIfFailed(int32(hr))
 }
 // COM methods already return error:
 if err := stream.Seek(0, 0, &pos); err != nil { /* ... */ }
 ```
 
-`win32.Succeeded(hr)` and `win32.HRESULTError(hr)` are in the runtime.
+`win32.Succeeded(hr)` and `win32.ErrIfFailed(hr)` are in the runtime.
 
 ## Domain codes (NET_API_STATUS etc.)
 

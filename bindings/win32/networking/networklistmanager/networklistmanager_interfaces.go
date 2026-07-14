@@ -27,7 +27,7 @@ var IID_IEnumNetworkConnections = win32.GUID{Data1: 0xdcb00006, Data2: 0x570f, D
 func (self *IEnumNetworkConnections) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
 	var _ppEnumVar *systemole.IEnumVARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnumVar)))
-	return _ppEnumVar, win32.HRESULTError(int32(r1))
+	return _ppEnumVar, win32.ErrIfFailed(int32(r1))
 }
 
 // Next dispatches through IEnumNetworkConnections's vtable slot 8.
@@ -37,26 +37,26 @@ func (self *IEnumNetworkConnections) Next(rgelt []*INetworkConnection, pceltFetc
 		_rgelt = &rgelt[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumNetworkConnections's vtable slot 9.
 func (self *IEnumNetworkConnections) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumNetworkConnections's vtable slot 10.
 func (self *IEnumNetworkConnections) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IEnumNetworkConnections's vtable slot 11.
 func (self *IEnumNetworkConnections) Clone() (*IEnumNetworkConnections, error) {
 	var _ppEnumNetwork *IEnumNetworkConnections
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnumNetwork)))
-	return _ppEnumNetwork, win32.HRESULTError(int32(r1))
+	return _ppEnumNetwork, win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumNetworks: https://learn.microsoft.com/windows/win32/api/netlistmgr/nn-netlistmgr-ienumnetworks
@@ -72,7 +72,7 @@ var IID_IEnumNetworks = win32.GUID{Data1: 0xdcb00003, Data2: 0x570f, Data3: 0x4a
 func (self *IEnumNetworks) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
 	var _ppEnumVar *systemole.IEnumVARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnumVar)))
-	return _ppEnumVar, win32.HRESULTError(int32(r1))
+	return _ppEnumVar, win32.ErrIfFailed(int32(r1))
 }
 
 // Next dispatches through IEnumNetworks's vtable slot 8.
@@ -82,26 +82,26 @@ func (self *IEnumNetworks) Next(rgelt []*INetwork, pceltFetched *uint32) error {
 		_rgelt = &rgelt[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumNetworks's vtable slot 9.
 func (self *IEnumNetworks) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumNetworks's vtable slot 10.
 func (self *IEnumNetworks) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IEnumNetworks's vtable slot 11.
 func (self *IEnumNetworks) Clone() (*IEnumNetworks, error) {
 	var _ppEnumNetwork *IEnumNetworks
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnumNetwork)))
-	return _ppEnumNetwork, win32.HRESULTError(int32(r1))
+	return _ppEnumNetwork, win32.ErrIfFailed(int32(r1))
 }
 
 // INetwork: https://learn.microsoft.com/windows/win32/api/netlistmgr/nn-netlistmgr-inetwork
@@ -117,87 +117,87 @@ var IID_INetwork = win32.GUID{Data1: 0xdcb00002, Data2: 0x570f, Data3: 0x4a9b, D
 func (self *INetwork) GetName() (foundation.BSTR, error) {
 	var _pszNetworkName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszNetworkName)))
-	return _pszNetworkName, win32.HRESULTError(int32(r1))
+	return _pszNetworkName, win32.ErrIfFailed(int32(r1))
 }
 
 // SetName dispatches through INetwork's vtable slot 8.
 func (self *INetwork) SetName(szNetworkNewName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szNetworkNewName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDescription dispatches through INetwork's vtable slot 9.
 func (self *INetwork) GetDescription() (foundation.BSTR, error) {
 	var _pszDescription foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszDescription)))
-	return _pszDescription, win32.HRESULTError(int32(r1))
+	return _pszDescription, win32.ErrIfFailed(int32(r1))
 }
 
 // SetDescription dispatches through INetwork's vtable slot 10.
 func (self *INetwork) SetDescription(szDescription foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNetworkId dispatches through INetwork's vtable slot 11.
 func (self *INetwork) GetNetworkId() (win32.GUID, error) {
 	var _pgdGuidNetworkId win32.GUID
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pgdGuidNetworkId)))
-	return _pgdGuidNetworkId, win32.HRESULTError(int32(r1))
+	return _pgdGuidNetworkId, win32.ErrIfFailed(int32(r1))
 }
 
 // GetDomainType dispatches through INetwork's vtable slot 12.
 func (self *INetwork) GetDomainType() (NLM_DOMAIN_TYPE, error) {
 	var _pNetworkType NLM_DOMAIN_TYPE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pNetworkType)))
-	return _pNetworkType, win32.HRESULTError(int32(r1))
+	return _pNetworkType, win32.ErrIfFailed(int32(r1))
 }
 
 // GetNetworkConnections dispatches through INetwork's vtable slot 13.
 func (self *INetwork) GetNetworkConnections() (*IEnumNetworkConnections, error) {
 	var _ppEnumNetworkConnection *IEnumNetworkConnections
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnumNetworkConnection)))
-	return _ppEnumNetworkConnection, win32.HRESULTError(int32(r1))
+	return _ppEnumNetworkConnection, win32.ErrIfFailed(int32(r1))
 }
 
 // GetTimeCreatedAndConnected dispatches through INetwork's vtable slot 14.
 func (self *INetwork) GetTimeCreatedAndConnected(pdwLowDateTimeCreated *uint32, pdwHighDateTimeCreated *uint32, pdwLowDateTimeConnected *uint32, pdwHighDateTimeConnected *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwLowDateTimeCreated)), uintptr(unsafe.Pointer(pdwHighDateTimeCreated)), uintptr(unsafe.Pointer(pdwLowDateTimeConnected)), uintptr(unsafe.Pointer(pdwHighDateTimeConnected)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsConnectedToInternet dispatches through INetwork's vtable slot 15.
 func (self *INetwork) Get_IsConnectedToInternet() (foundation.VARIANT_BOOL, error) {
 	var _pbIsConnected foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbIsConnected)))
-	return _pbIsConnected, win32.HRESULTError(int32(r1))
+	return _pbIsConnected, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsConnected dispatches through INetwork's vtable slot 16.
 func (self *INetwork) Get_IsConnected() (foundation.VARIANT_BOOL, error) {
 	var _pbIsConnected foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbIsConnected)))
-	return _pbIsConnected, win32.HRESULTError(int32(r1))
+	return _pbIsConnected, win32.ErrIfFailed(int32(r1))
 }
 
 // GetConnectivity dispatches through INetwork's vtable slot 17.
 func (self *INetwork) GetConnectivity() (NLM_CONNECTIVITY, error) {
 	var _pConnectivity NLM_CONNECTIVITY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pConnectivity)))
-	return _pConnectivity, win32.HRESULTError(int32(r1))
+	return _pConnectivity, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCategory dispatches through INetwork's vtable slot 18.
 func (self *INetwork) GetCategory() (NLM_NETWORK_CATEGORY, error) {
 	var _pCategory NLM_NETWORK_CATEGORY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pCategory)))
-	return _pCategory, win32.HRESULTError(int32(r1))
+	return _pCategory, win32.ErrIfFailed(int32(r1))
 }
 
 // SetCategory dispatches through INetwork's vtable slot 19.
 func (self *INetwork) SetCategory(NewCategory NLM_NETWORK_CATEGORY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(NewCategory))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // INetwork2: https://learn.microsoft.com/windows/win32/api/netlistmgr/nn-netlistmgr-inetwork2
@@ -213,7 +213,7 @@ var IID_INetwork2 = win32.GUID{Data1: 0xb5550abb, Data2: 0x3391, Data3: 0x4310, 
 func (self *INetwork2) IsDomainAuthenticatedBy(domainAuthenticationKind NLM_DOMAIN_AUTHENTICATION_KIND) (foundation.BOOL, error) {
 	var _pValue foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(domainAuthenticationKind), uintptr(unsafe.Pointer(&_pValue)))
-	return _pValue, win32.HRESULTError(int32(r1))
+	return _pValue, win32.ErrIfFailed(int32(r1))
 }
 
 // INetworkConnection: https://learn.microsoft.com/windows/win32/api/netlistmgr/nn-netlistmgr-inetworkconnection
@@ -229,49 +229,49 @@ var IID_INetworkConnection = win32.GUID{Data1: 0xdcb00005, Data2: 0x570f, Data3:
 func (self *INetworkConnection) GetNetwork() (*INetwork, error) {
 	var _ppNetwork *INetwork
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppNetwork)))
-	return _ppNetwork, win32.HRESULTError(int32(r1))
+	return _ppNetwork, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsConnectedToInternet dispatches through INetworkConnection's vtable slot 8.
 func (self *INetworkConnection) Get_IsConnectedToInternet() (foundation.VARIANT_BOOL, error) {
 	var _pbIsConnected foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbIsConnected)))
-	return _pbIsConnected, win32.HRESULTError(int32(r1))
+	return _pbIsConnected, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsConnected dispatches through INetworkConnection's vtable slot 9.
 func (self *INetworkConnection) Get_IsConnected() (foundation.VARIANT_BOOL, error) {
 	var _pbIsConnected foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbIsConnected)))
-	return _pbIsConnected, win32.HRESULTError(int32(r1))
+	return _pbIsConnected, win32.ErrIfFailed(int32(r1))
 }
 
 // GetConnectivity dispatches through INetworkConnection's vtable slot 10.
 func (self *INetworkConnection) GetConnectivity() (NLM_CONNECTIVITY, error) {
 	var _pConnectivity NLM_CONNECTIVITY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pConnectivity)))
-	return _pConnectivity, win32.HRESULTError(int32(r1))
+	return _pConnectivity, win32.ErrIfFailed(int32(r1))
 }
 
 // GetConnectionId dispatches through INetworkConnection's vtable slot 11.
 func (self *INetworkConnection) GetConnectionId() (win32.GUID, error) {
 	var _pgdConnectionId win32.GUID
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pgdConnectionId)))
-	return _pgdConnectionId, win32.HRESULTError(int32(r1))
+	return _pgdConnectionId, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAdapterId dispatches through INetworkConnection's vtable slot 12.
 func (self *INetworkConnection) GetAdapterId() (win32.GUID, error) {
 	var _pgdAdapterId win32.GUID
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pgdAdapterId)))
-	return _pgdAdapterId, win32.HRESULTError(int32(r1))
+	return _pgdAdapterId, win32.ErrIfFailed(int32(r1))
 }
 
 // GetDomainType dispatches through INetworkConnection's vtable slot 13.
 func (self *INetworkConnection) GetDomainType() (NLM_DOMAIN_TYPE, error) {
 	var _pDomainType NLM_DOMAIN_TYPE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDomainType)))
-	return _pDomainType, win32.HRESULTError(int32(r1))
+	return _pDomainType, win32.ErrIfFailed(int32(r1))
 }
 
 // INetworkConnection2: https://learn.microsoft.com/windows/win32/api/netlistmgr/nn-netlistmgr-inetworkconnection2
@@ -286,7 +286,7 @@ var IID_INetworkConnection2 = win32.GUID{Data1: 0x00e676ed, Data2: 0x5a35, Data3
 // IsDomainAuthenticatedBy dispatches through INetworkConnection2's vtable slot 14.
 func (self *INetworkConnection2) IsDomainAuthenticatedBy(domainAuthenticationKind NLM_DOMAIN_AUTHENTICATION_KIND, pValue *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(domainAuthenticationKind), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // INetworkConnectionCost: https://learn.microsoft.com/windows/win32/api/netlistmgr/nn-netlistmgr-inetworkconnectioncost
@@ -301,13 +301,13 @@ var IID_INetworkConnectionCost = win32.GUID{Data1: 0xdcb0000a, Data2: 0x570f, Da
 // GetCost dispatches through INetworkConnectionCost's vtable slot 3.
 func (self *INetworkConnectionCost) GetCost(pCost *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCost)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDataPlanStatus dispatches through INetworkConnectionCost's vtable slot 4.
 func (self *INetworkConnectionCost) GetDataPlanStatus(pDataPlanStatus *NLM_DATAPLAN_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDataPlanStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // INetworkConnectionCostEvents: https://learn.microsoft.com/windows/win32/api/netlistmgr/nn-netlistmgr-inetworkconnectioncostevents
@@ -340,13 +340,13 @@ var IID_INetworkCostManager = win32.GUID{Data1: 0xdcb00008, Data2: 0x570f, Data3
 // GetCost dispatches through INetworkCostManager's vtable slot 3.
 func (self *INetworkCostManager) GetCost(pCost *uint32, pDestIPAddr *NLM_SOCKADDR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCost)), uintptr(unsafe.Pointer(pDestIPAddr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDataPlanStatus dispatches through INetworkCostManager's vtable slot 4.
 func (self *INetworkCostManager) GetDataPlanStatus(pDataPlanStatus *NLM_DATAPLAN_STATUS, pDestIPAddr *NLM_SOCKADDR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDataPlanStatus)), uintptr(unsafe.Pointer(pDestIPAddr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDestinationAddresses dispatches through INetworkCostManager's vtable slot 5.
@@ -356,7 +356,7 @@ func (self *INetworkCostManager) SetDestinationAddresses(pDestIPAddrList []NLM_S
 		_pDestIPAddrList = &pDestIPAddrList[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(len(pDestIPAddrList)), uintptr(unsafe.Pointer(_pDestIPAddrList)), uintptr(bAppend))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // INetworkCostManagerEvents: https://learn.microsoft.com/windows/win32/api/netlistmgr/nn-netlistmgr-inetworkcostmanagerevents
@@ -371,13 +371,13 @@ var IID_INetworkCostManagerEvents = win32.GUID{Data1: 0xdcb00009, Data2: 0x570f,
 // CostChanged dispatches through INetworkCostManagerEvents's vtable slot 3.
 func (self *INetworkCostManagerEvents) CostChanged(newCost uint32, pDestAddr *NLM_SOCKADDR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(newCost), uintptr(unsafe.Pointer(pDestAddr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DataPlanStatusChanged dispatches through INetworkCostManagerEvents's vtable slot 4.
 func (self *INetworkCostManagerEvents) DataPlanStatusChanged(pDestAddr *NLM_SOCKADDR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDestAddr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // INetworkEvents: https://learn.microsoft.com/windows/win32/api/netlistmgr/nn-netlistmgr-inetworkevents
@@ -402,47 +402,47 @@ var IID_INetworkListManager = win32.GUID{Data1: 0xdcb00000, Data2: 0x570f, Data3
 func (self *INetworkListManager) GetNetworks(Flags NLM_ENUM_NETWORK) (*IEnumNetworks, error) {
 	var _ppEnumNetwork *IEnumNetworks
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(&_ppEnumNetwork)))
-	return _ppEnumNetwork, win32.HRESULTError(int32(r1))
+	return _ppEnumNetwork, win32.ErrIfFailed(int32(r1))
 }
 
 // GetNetworkConnections dispatches through INetworkListManager's vtable slot 9.
 func (self *INetworkListManager) GetNetworkConnections() (*IEnumNetworkConnections, error) {
 	var _ppEnum *IEnumNetworkConnections
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
-	return _ppEnum, win32.HRESULTError(int32(r1))
+	return _ppEnum, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsConnectedToInternet dispatches through INetworkListManager's vtable slot 11.
 func (self *INetworkListManager) Get_IsConnectedToInternet() (foundation.VARIANT_BOOL, error) {
 	var _pbIsConnected foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbIsConnected)))
-	return _pbIsConnected, win32.HRESULTError(int32(r1))
+	return _pbIsConnected, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsConnected dispatches through INetworkListManager's vtable slot 12.
 func (self *INetworkListManager) Get_IsConnected() (foundation.VARIANT_BOOL, error) {
 	var _pbIsConnected foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbIsConnected)))
-	return _pbIsConnected, win32.HRESULTError(int32(r1))
+	return _pbIsConnected, win32.ErrIfFailed(int32(r1))
 }
 
 // GetConnectivity dispatches through INetworkListManager's vtable slot 13.
 func (self *INetworkListManager) GetConnectivity() (NLM_CONNECTIVITY, error) {
 	var _pConnectivity NLM_CONNECTIVITY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pConnectivity)))
-	return _pConnectivity, win32.HRESULTError(int32(r1))
+	return _pConnectivity, win32.ErrIfFailed(int32(r1))
 }
 
 // SetSimulatedProfileInfo dispatches through INetworkListManager's vtable slot 14.
 func (self *INetworkListManager) SetSimulatedProfileInfo(pSimulatedInfo *NLM_SIMULATED_PROFILE_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSimulatedInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ClearSimulatedProfileInfo dispatches through INetworkListManager's vtable slot 15.
 func (self *INetworkListManager) ClearSimulatedProfileInfo() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // INetworkListManagerEvents: https://learn.microsoft.com/windows/win32/api/netlistmgr/nn-netlistmgr-inetworklistmanagerevents
@@ -457,5 +457,5 @@ var IID_INetworkListManagerEvents = win32.GUID{Data1: 0xdcb00001, Data2: 0x570f,
 // ConnectivityChanged dispatches through INetworkListManagerEvents's vtable slot 3.
 func (self *INetworkListManagerEvents) ConnectivityChanged(newConnectivity NLM_CONNECTIVITY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(newConnectivity))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

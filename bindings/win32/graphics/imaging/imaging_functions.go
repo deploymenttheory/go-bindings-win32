@@ -34,7 +34,7 @@ var (
 // Minimum OS: windows5.1.2600.
 func WICConvertBitmapSource(dstFormat *win32.GUID, pISrc *IWICBitmapSource, ppIDst **IWICBitmapSource) error {
 	r1, _, _ := syscall.SyscallN(procWICConvertBitmapSource.Addr(), uintptr(unsafe.Pointer(dstFormat)), uintptr(unsafe.Pointer(pISrc)), uintptr(unsafe.Pointer(ppIDst)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WICCreateBitmapFromSection calls WindowsCodecs!WICCreateBitmapFromSection.
@@ -42,7 +42,7 @@ func WICConvertBitmapSource(dstFormat *win32.GUID, pISrc *IWICBitmapSource, ppID
 // Minimum OS: windows5.1.2600.
 func WICCreateBitmapFromSection(width uint32, height uint32, pixelFormat *win32.GUID, hSection foundation.HANDLE, stride uint32, offset uint32, ppIBitmap **IWICBitmap) error {
 	r1, _, _ := syscall.SyscallN(procWICCreateBitmapFromSection.Addr(), uintptr(width), uintptr(height), uintptr(unsafe.Pointer(pixelFormat)), uintptr(hSection), uintptr(stride), uintptr(offset), uintptr(unsafe.Pointer(ppIBitmap)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WICCreateBitmapFromSectionEx calls WindowsCodecs!WICCreateBitmapFromSectionEx.
@@ -50,7 +50,7 @@ func WICCreateBitmapFromSection(width uint32, height uint32, pixelFormat *win32.
 // Minimum OS: windows6.1.
 func WICCreateBitmapFromSectionEx(width uint32, height uint32, pixelFormat *win32.GUID, hSection foundation.HANDLE, stride uint32, offset uint32, desiredAccessLevel WICSectionAccessLevel, ppIBitmap **IWICBitmap) error {
 	r1, _, _ := syscall.SyscallN(procWICCreateBitmapFromSectionEx.Addr(), uintptr(width), uintptr(height), uintptr(unsafe.Pointer(pixelFormat)), uintptr(hSection), uintptr(stride), uintptr(offset), uintptr(desiredAccessLevel), uintptr(unsafe.Pointer(ppIBitmap)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WICGetMetadataContentSize calls WindowsCodecs!WICGetMetadataContentSize.
@@ -58,7 +58,7 @@ func WICCreateBitmapFromSectionEx(width uint32, height uint32, pixelFormat *win3
 // Minimum OS: windows5.1.2600.
 func WICGetMetadataContentSize(guidContainerFormat *win32.GUID, pIWriter *IWICMetadataWriter, pcbSize *uint64) error {
 	r1, _, _ := syscall.SyscallN(procWICGetMetadataContentSize.Addr(), uintptr(unsafe.Pointer(guidContainerFormat)), uintptr(unsafe.Pointer(pIWriter)), uintptr(unsafe.Pointer(pcbSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WICMapGuidToShortName calls WindowsCodecs!WICMapGuidToShortName.
@@ -66,7 +66,7 @@ func WICGetMetadataContentSize(guidContainerFormat *win32.GUID, pIWriter *IWICMe
 // Minimum OS: windows5.1.2600.
 func WICMapGuidToShortName(guid *win32.GUID, cchName uint32, wzName foundation.PWSTR, pcchActual *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWICMapGuidToShortName.Addr(), uintptr(unsafe.Pointer(guid)), uintptr(cchName), uintptr(unsafe.Pointer(wzName)), uintptr(unsafe.Pointer(pcchActual)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WICMapSchemaToName calls WindowsCodecs!WICMapSchemaToName.
@@ -75,7 +75,7 @@ func WICMapGuidToShortName(guid *win32.GUID, cchName uint32, wzName foundation.P
 func WICMapSchemaToName(guidMetadataFormat *win32.GUID, pwzSchema string, cchName uint32, wzName foundation.PWSTR, pcchActual *uint32) error {
 	_pwzSchema := win32.UTF16Ptr(pwzSchema)
 	r1, _, _ := syscall.SyscallN(procWICMapSchemaToName.Addr(), uintptr(unsafe.Pointer(guidMetadataFormat)), uintptr(unsafe.Pointer(_pwzSchema)), uintptr(cchName), uintptr(unsafe.Pointer(wzName)), uintptr(unsafe.Pointer(pcchActual)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WICMapShortNameToGuid calls WindowsCodecs!WICMapShortNameToGuid.
@@ -84,7 +84,7 @@ func WICMapSchemaToName(guidMetadataFormat *win32.GUID, pwzSchema string, cchNam
 func WICMapShortNameToGuid(wzName string, pguid *win32.GUID) error {
 	_wzName := win32.UTF16Ptr(wzName)
 	r1, _, _ := syscall.SyscallN(procWICMapShortNameToGuid.Addr(), uintptr(unsafe.Pointer(_wzName)), uintptr(unsafe.Pointer(pguid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WICMatchMetadataContent calls WindowsCodecs!WICMatchMetadataContent.
@@ -92,7 +92,7 @@ func WICMapShortNameToGuid(wzName string, pguid *win32.GUID) error {
 // Minimum OS: windows5.1.2600.
 func WICMatchMetadataContent(guidContainerFormat *win32.GUID, pguidVendor *win32.GUID, pIStream *systemcom.IStream, pguidMetadataFormat *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procWICMatchMetadataContent.Addr(), uintptr(unsafe.Pointer(guidContainerFormat)), uintptr(unsafe.Pointer(pguidVendor)), uintptr(unsafe.Pointer(pIStream)), uintptr(unsafe.Pointer(pguidMetadataFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WICSerializeMetadataContent calls WindowsCodecs!WICSerializeMetadataContent.
@@ -100,5 +100,5 @@ func WICMatchMetadataContent(guidContainerFormat *win32.GUID, pguidVendor *win32
 // Minimum OS: windows5.1.2600.
 func WICSerializeMetadataContent(guidContainerFormat *win32.GUID, pIWriter *IWICMetadataWriter, dwPersistOptions uint32, pIStream *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(procWICSerializeMetadataContent.Addr(), uintptr(unsafe.Pointer(guidContainerFormat)), uintptr(unsafe.Pointer(pIWriter)), uintptr(dwPersistOptions), uintptr(unsafe.Pointer(pIStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

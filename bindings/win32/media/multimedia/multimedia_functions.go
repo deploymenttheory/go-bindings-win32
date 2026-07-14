@@ -201,7 +201,7 @@ var (
 func AVIBuildFilter(lpszFilter foundation.PWSTR, cbFilter int32, fSaving bool) error {
 	_fSaving := win32.Bool32(fSaving)
 	r1, _, _ := syscall.SyscallN(procAVIBuildFilter.Addr(), uintptr(unsafe.Pointer(lpszFilter)), uintptr(cbFilter), uintptr(_fSaving))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AVIBuildFilterA calls AVIFIL32!AVIBuildFilterA.
@@ -210,7 +210,7 @@ func AVIBuildFilter(lpszFilter foundation.PWSTR, cbFilter int32, fSaving bool) e
 func AVIBuildFilterA(lpszFilter foundation.PSTR, cbFilter int32, fSaving bool) error {
 	_fSaving := win32.Bool32(fSaving)
 	r1, _, _ := syscall.SyscallN(procAVIBuildFilterA.Addr(), uintptr(unsafe.Pointer(lpszFilter)), uintptr(cbFilter), uintptr(_fSaving))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AVIClearClipboard calls AVIFIL32!AVIClearClipboard.
@@ -218,7 +218,7 @@ func AVIBuildFilterA(lpszFilter foundation.PSTR, cbFilter int32, fSaving bool) e
 // Minimum OS: windows5.0.
 func AVIClearClipboard() error {
 	r1, _, _ := syscall.SyscallN(procAVIClearClipboard.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AVIFileAddRef calls AVIFIL32!AVIFileAddRef.
@@ -234,7 +234,7 @@ func AVIFileAddRef(pfile *IAVIFile) uint32 {
 // Minimum OS: windows5.0.
 func AVIFileCreateStream(pfile *IAVIFile, ppavi **IAVIStream, psi *AVISTREAMINFOW) error {
 	r1, _, _ := syscall.SyscallN(procAVIFileCreateStream.Addr(), uintptr(unsafe.Pointer(pfile)), uintptr(unsafe.Pointer(ppavi)), uintptr(unsafe.Pointer(psi)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AVIFileCreateStreamA calls AVIFIL32!AVIFileCreateStreamA.
@@ -242,7 +242,7 @@ func AVIFileCreateStream(pfile *IAVIFile, ppavi **IAVIStream, psi *AVISTREAMINFO
 // Minimum OS: windows5.0.
 func AVIFileCreateStreamA(pfile *IAVIFile, ppavi **IAVIStream, psi *AVISTREAMINFOA) error {
 	r1, _, _ := syscall.SyscallN(procAVIFileCreateStreamA.Addr(), uintptr(unsafe.Pointer(pfile)), uintptr(unsafe.Pointer(ppavi)), uintptr(unsafe.Pointer(psi)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AVIFileEndRecord calls AVIFIL32!AVIFileEndRecord.
@@ -250,7 +250,7 @@ func AVIFileCreateStreamA(pfile *IAVIFile, ppavi **IAVIStream, psi *AVISTREAMINF
 // Minimum OS: windows5.0.
 func AVIFileEndRecord(pfile *IAVIFile) error {
 	r1, _, _ := syscall.SyscallN(procAVIFileEndRecord.Addr(), uintptr(unsafe.Pointer(pfile)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AVIFileExit calls AVIFIL32!AVIFileExit.
@@ -265,7 +265,7 @@ func AVIFileExit() {
 // Minimum OS: windows5.0.
 func AVIFileGetStream(pfile *IAVIFile, ppavi **IAVIStream, fccType uint32, lParam int32) error {
 	r1, _, _ := syscall.SyscallN(procAVIFileGetStream.Addr(), uintptr(unsafe.Pointer(pfile)), uintptr(unsafe.Pointer(ppavi)), uintptr(fccType), uintptr(lParam))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AVIFileInfo calls AVIFIL32!AVIFileInfoW.
@@ -273,7 +273,7 @@ func AVIFileGetStream(pfile *IAVIFile, ppavi **IAVIStream, fccType uint32, lPara
 // Minimum OS: windows5.0.
 func AVIFileInfo(pfile *IAVIFile, pfi *AVIFILEINFOW, lSize int32) error {
 	r1, _, _ := syscall.SyscallN(procAVIFileInfo.Addr(), uintptr(unsafe.Pointer(pfile)), uintptr(unsafe.Pointer(pfi)), uintptr(lSize))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AVIFileInfoA calls AVIFIL32!AVIFileInfoA.
@@ -281,7 +281,7 @@ func AVIFileInfo(pfile *IAVIFile, pfi *AVIFILEINFOW, lSize int32) error {
 // Minimum OS: windows5.0.
 func AVIFileInfoA(pfile *IAVIFile, pfi *AVIFILEINFOA, lSize int32) error {
 	r1, _, _ := syscall.SyscallN(procAVIFileInfoA.Addr(), uintptr(unsafe.Pointer(pfile)), uintptr(unsafe.Pointer(pfi)), uintptr(lSize))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AVIFileInit calls AVIFIL32!AVIFileInit.
@@ -297,7 +297,7 @@ func AVIFileInit() {
 func AVIFileOpen(ppfile **IAVIFile, szFile string, uMode uint32, lpHandler *win32.GUID) error {
 	_szFile := win32.UTF16Ptr(szFile)
 	r1, _, _ := syscall.SyscallN(procAVIFileOpen.Addr(), uintptr(unsafe.Pointer(ppfile)), uintptr(unsafe.Pointer(_szFile)), uintptr(uMode), uintptr(unsafe.Pointer(lpHandler)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AVIFileOpenA calls AVIFIL32!AVIFileOpenA.
@@ -305,7 +305,7 @@ func AVIFileOpen(ppfile **IAVIFile, szFile string, uMode uint32, lpHandler *win3
 // Minimum OS: windows5.0.
 func AVIFileOpenA(ppfile **IAVIFile, szFile foundation.PSTR, uMode uint32, lpHandler *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procAVIFileOpenA.Addr(), uintptr(unsafe.Pointer(ppfile)), uintptr(unsafe.Pointer(szFile)), uintptr(uMode), uintptr(unsafe.Pointer(lpHandler)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AVIFileReadData calls AVIFIL32!AVIFileReadData.
@@ -313,7 +313,7 @@ func AVIFileOpenA(ppfile **IAVIFile, szFile foundation.PSTR, uMode uint32, lpHan
 // Minimum OS: windows5.0.
 func AVIFileReadData(pfile *IAVIFile, ckid uint32, lpData unsafe.Pointer, lpcbData *int32) error {
 	r1, _, _ := syscall.SyscallN(procAVIFileReadData.Addr(), uintptr(unsafe.Pointer(pfile)), uintptr(ckid), uintptr(unsafe.Pointer(lpData)), uintptr(unsafe.Pointer(lpcbData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AVIFileRelease calls AVIFIL32!AVIFileRelease.
@@ -333,7 +333,7 @@ func AVIFileWriteData(pfile *IAVIFile, ckid uint32, lpData []byte) error {
 		_lpData = &lpData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procAVIFileWriteData.Addr(), uintptr(unsafe.Pointer(pfile)), uintptr(ckid), uintptr(unsafe.Pointer(_lpData)), uintptr(len(lpData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AVIGetFromClipboard calls AVIFIL32!AVIGetFromClipboard.
@@ -341,7 +341,7 @@ func AVIFileWriteData(pfile *IAVIFile, ckid uint32, lpData []byte) error {
 // Minimum OS: windows5.0.
 func AVIGetFromClipboard(lppf **IAVIFile) error {
 	r1, _, _ := syscall.SyscallN(procAVIGetFromClipboard.Addr(), uintptr(unsafe.Pointer(lppf)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AVIMakeCompressedStream calls AVIFIL32!AVIMakeCompressedStream.
@@ -349,7 +349,7 @@ func AVIGetFromClipboard(lppf **IAVIFile) error {
 // Minimum OS: windows5.0.
 func AVIMakeCompressedStream(ppsCompressed **IAVIStream, ppsSource *IAVIStream, lpOptions *AVICOMPRESSOPTIONS, pclsidHandler *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procAVIMakeCompressedStream.Addr(), uintptr(unsafe.Pointer(ppsCompressed)), uintptr(unsafe.Pointer(ppsSource)), uintptr(unsafe.Pointer(lpOptions)), uintptr(unsafe.Pointer(pclsidHandler)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AVIMakeFileFromStreams calls AVIFIL32!AVIMakeFileFromStreams.
@@ -361,7 +361,7 @@ func AVIMakeFileFromStreams(ppfile **IAVIFile, papStreams []*IAVIStream) error {
 		_papStreams = &papStreams[0]
 	}
 	r1, _, _ := syscall.SyscallN(procAVIMakeFileFromStreams.Addr(), uintptr(unsafe.Pointer(ppfile)), uintptr(len(papStreams)), uintptr(unsafe.Pointer(_papStreams)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AVIMakeStreamFromClipboard calls AVIFIL32!AVIMakeStreamFromClipboard.
@@ -369,7 +369,7 @@ func AVIMakeFileFromStreams(ppfile **IAVIFile, papStreams []*IAVIStream) error {
 // Minimum OS: windows5.0.
 func AVIMakeStreamFromClipboard(cfFormat uint32, hGlobal foundation.HANDLE, ppstream **IAVIStream) error {
 	r1, _, _ := syscall.SyscallN(procAVIMakeStreamFromClipboard.Addr(), uintptr(cfFormat), uintptr(hGlobal), uintptr(unsafe.Pointer(ppstream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AVIPutFileOnClipboard calls AVIFIL32!AVIPutFileOnClipboard.
@@ -377,7 +377,7 @@ func AVIMakeStreamFromClipboard(cfFormat uint32, hGlobal foundation.HANDLE, ppst
 // Minimum OS: windows5.0.
 func AVIPutFileOnClipboard(pf *IAVIFile) error {
 	r1, _, _ := syscall.SyscallN(procAVIPutFileOnClipboard.Addr(), uintptr(unsafe.Pointer(pf)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AVISave calls AVIFIL32!AVISaveW.
@@ -386,7 +386,7 @@ func AVIPutFileOnClipboard(pf *IAVIFile) error {
 func AVISave(szFile string, pclsidHandler *win32.GUID, lpfnCallback AVISAVECALLBACK, nStreams int32, pfile *IAVIStream, lpOptions *AVICOMPRESSOPTIONS) error {
 	_szFile := win32.UTF16Ptr(szFile)
 	r1, _, _ := syscall.SyscallN(procAVISave.Addr(), uintptr(unsafe.Pointer(_szFile)), uintptr(unsafe.Pointer(pclsidHandler)), uintptr(lpfnCallback), uintptr(nStreams), uintptr(unsafe.Pointer(pfile)), uintptr(unsafe.Pointer(lpOptions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AVISaveA calls AVIFIL32!AVISaveA.
@@ -394,7 +394,7 @@ func AVISave(szFile string, pclsidHandler *win32.GUID, lpfnCallback AVISAVECALLB
 // Minimum OS: windows5.0.
 func AVISaveA(szFile foundation.PSTR, pclsidHandler *win32.GUID, lpfnCallback AVISAVECALLBACK, nStreams int32, pfile *IAVIStream, lpOptions *AVICOMPRESSOPTIONS) error {
 	r1, _, _ := syscall.SyscallN(procAVISaveA.Addr(), uintptr(unsafe.Pointer(szFile)), uintptr(unsafe.Pointer(pclsidHandler)), uintptr(lpfnCallback), uintptr(nStreams), uintptr(unsafe.Pointer(pfile)), uintptr(unsafe.Pointer(lpOptions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AVISaveOptions calls AVIFIL32!AVISaveOptions.
@@ -414,7 +414,7 @@ func AVISaveOptionsFree(plpOptions []*AVICOMPRESSOPTIONS) error {
 		_plpOptions = &plpOptions[0]
 	}
 	r1, _, _ := syscall.SyscallN(procAVISaveOptionsFree.Addr(), uintptr(len(plpOptions)), uintptr(unsafe.Pointer(_plpOptions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AVISaveV calls AVIFIL32!AVISaveVW.
@@ -423,7 +423,7 @@ func AVISaveOptionsFree(plpOptions []*AVICOMPRESSOPTIONS) error {
 func AVISaveV(szFile string, pclsidHandler *win32.GUID, lpfnCallback AVISAVECALLBACK, nStreams int32, ppavi **IAVIStream, plpOptions **AVICOMPRESSOPTIONS) error {
 	_szFile := win32.UTF16Ptr(szFile)
 	r1, _, _ := syscall.SyscallN(procAVISaveV.Addr(), uintptr(unsafe.Pointer(_szFile)), uintptr(unsafe.Pointer(pclsidHandler)), uintptr(lpfnCallback), uintptr(nStreams), uintptr(unsafe.Pointer(ppavi)), uintptr(unsafe.Pointer(plpOptions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AVISaveVA calls AVIFIL32!AVISaveVA.
@@ -431,7 +431,7 @@ func AVISaveV(szFile string, pclsidHandler *win32.GUID, lpfnCallback AVISAVECALL
 // Minimum OS: windows5.0.
 func AVISaveVA(szFile foundation.PSTR, pclsidHandler *win32.GUID, lpfnCallback AVISAVECALLBACK, nStreams int32, ppavi **IAVIStream, plpOptions **AVICOMPRESSOPTIONS) error {
 	r1, _, _ := syscall.SyscallN(procAVISaveVA.Addr(), uintptr(unsafe.Pointer(szFile)), uintptr(unsafe.Pointer(pclsidHandler)), uintptr(lpfnCallback), uintptr(nStreams), uintptr(unsafe.Pointer(ppavi)), uintptr(unsafe.Pointer(plpOptions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AVIStreamAddRef calls AVIFIL32!AVIStreamAddRef.
@@ -447,7 +447,7 @@ func AVIStreamAddRef(pavi *IAVIStream) uint32 {
 // Minimum OS: windows5.0.
 func AVIStreamBeginStreaming(pavi *IAVIStream, lStart int32, lEnd int32, lRate int32) error {
 	r1, _, _ := syscall.SyscallN(procAVIStreamBeginStreaming.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(lStart), uintptr(lEnd), uintptr(lRate))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AVIStreamCreate calls AVIFIL32!AVIStreamCreate.
@@ -455,7 +455,7 @@ func AVIStreamBeginStreaming(pavi *IAVIStream, lStart int32, lEnd int32, lRate i
 // Minimum OS: windows5.0.
 func AVIStreamCreate(ppavi **IAVIStream, lParam1 int32, lParam2 int32, pclsidHandler *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procAVIStreamCreate.Addr(), uintptr(unsafe.Pointer(ppavi)), uintptr(lParam1), uintptr(lParam2), uintptr(unsafe.Pointer(pclsidHandler)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AVIStreamEndStreaming calls AVIFIL32!AVIStreamEndStreaming.
@@ -463,7 +463,7 @@ func AVIStreamCreate(ppavi **IAVIStream, lParam1 int32, lParam2 int32, pclsidHan
 // Minimum OS: windows5.0.
 func AVIStreamEndStreaming(pavi *IAVIStream) error {
 	r1, _, _ := syscall.SyscallN(procAVIStreamEndStreaming.Addr(), uintptr(unsafe.Pointer(pavi)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AVIStreamFindSample calls AVIFIL32!AVIStreamFindSample.
@@ -487,7 +487,7 @@ func AVIStreamGetFrame(pg *IGetFrame, lPos int32) unsafe.Pointer {
 // Minimum OS: windows5.0.
 func AVIStreamGetFrameClose(pg *IGetFrame) error {
 	r1, _, _ := syscall.SyscallN(procAVIStreamGetFrameClose.Addr(), uintptr(unsafe.Pointer(pg)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AVIStreamGetFrameOpen calls AVIFIL32!AVIStreamGetFrameOpen.
@@ -503,7 +503,7 @@ func AVIStreamGetFrameOpen(pavi *IAVIStream, lpbiWanted *graphicsgdi.BITMAPINFOH
 // Minimum OS: windows5.0.
 func AVIStreamInfo(pavi *IAVIStream, psi *AVISTREAMINFOW, lSize int32) error {
 	r1, _, _ := syscall.SyscallN(procAVIStreamInfo.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(unsafe.Pointer(psi)), uintptr(lSize))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AVIStreamInfoA calls AVIFIL32!AVIStreamInfoA.
@@ -511,7 +511,7 @@ func AVIStreamInfo(pavi *IAVIStream, psi *AVISTREAMINFOW, lSize int32) error {
 // Minimum OS: windows5.0.
 func AVIStreamInfoA(pavi *IAVIStream, psi *AVISTREAMINFOA, lSize int32) error {
 	r1, _, _ := syscall.SyscallN(procAVIStreamInfoA.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(unsafe.Pointer(psi)), uintptr(lSize))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AVIStreamLength calls AVIFIL32!AVIStreamLength.
@@ -528,7 +528,7 @@ func AVIStreamLength(pavi *IAVIStream) int32 {
 func AVIStreamOpenFromFile(ppavi **IAVIStream, szFile string, fccType uint32, lParam int32, mode uint32, pclsidHandler *win32.GUID) error {
 	_szFile := win32.UTF16Ptr(szFile)
 	r1, _, _ := syscall.SyscallN(procAVIStreamOpenFromFile.Addr(), uintptr(unsafe.Pointer(ppavi)), uintptr(unsafe.Pointer(_szFile)), uintptr(fccType), uintptr(lParam), uintptr(mode), uintptr(unsafe.Pointer(pclsidHandler)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AVIStreamOpenFromFileA calls AVIFIL32!AVIStreamOpenFromFileA.
@@ -536,7 +536,7 @@ func AVIStreamOpenFromFile(ppavi **IAVIStream, szFile string, fccType uint32, lP
 // Minimum OS: windows5.0.
 func AVIStreamOpenFromFileA(ppavi **IAVIStream, szFile foundation.PSTR, fccType uint32, lParam int32, mode uint32, pclsidHandler *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procAVIStreamOpenFromFileA.Addr(), uintptr(unsafe.Pointer(ppavi)), uintptr(unsafe.Pointer(szFile)), uintptr(fccType), uintptr(lParam), uintptr(mode), uintptr(unsafe.Pointer(pclsidHandler)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AVIStreamRead calls AVIFIL32!AVIStreamRead.
@@ -548,7 +548,7 @@ func AVIStreamRead(pavi *IAVIStream, lStart int32, lSamples int32, lpBuffer []by
 		_lpBuffer = &lpBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(procAVIStreamRead.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(lStart), uintptr(lSamples), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(plBytes)), uintptr(unsafe.Pointer(plSamples)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AVIStreamReadData calls AVIFIL32!AVIStreamReadData.
@@ -556,7 +556,7 @@ func AVIStreamRead(pavi *IAVIStream, lStart int32, lSamples int32, lpBuffer []by
 // Minimum OS: windows5.0.
 func AVIStreamReadData(pavi *IAVIStream, fcc uint32, lp unsafe.Pointer, lpcb *int32) error {
 	r1, _, _ := syscall.SyscallN(procAVIStreamReadData.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(fcc), uintptr(unsafe.Pointer(lp)), uintptr(unsafe.Pointer(lpcb)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AVIStreamReadFormat calls AVIFIL32!AVIStreamReadFormat.
@@ -564,7 +564,7 @@ func AVIStreamReadData(pavi *IAVIStream, fcc uint32, lp unsafe.Pointer, lpcb *in
 // Minimum OS: windows5.0.
 func AVIStreamReadFormat(pavi *IAVIStream, lPos int32, lpFormat unsafe.Pointer, lpcbFormat *int32) error {
 	r1, _, _ := syscall.SyscallN(procAVIStreamReadFormat.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(lPos), uintptr(unsafe.Pointer(lpFormat)), uintptr(unsafe.Pointer(lpcbFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AVIStreamRelease calls AVIFIL32!AVIStreamRelease.
@@ -592,7 +592,7 @@ func AVIStreamSetFormat(pavi *IAVIStream, lPos int32, lpFormat []byte) error {
 		_lpFormat = &lpFormat[0]
 	}
 	r1, _, _ := syscall.SyscallN(procAVIStreamSetFormat.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(lPos), uintptr(unsafe.Pointer(_lpFormat)), uintptr(len(lpFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AVIStreamStart calls AVIFIL32!AVIStreamStart.
@@ -620,7 +620,7 @@ func AVIStreamWrite(pavi *IAVIStream, lStart int32, lSamples int32, lpBuffer []b
 		_lpBuffer = &lpBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(procAVIStreamWrite.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(lStart), uintptr(lSamples), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(dwFlags), uintptr(unsafe.Pointer(plSampWritten)), uintptr(unsafe.Pointer(plBytesWritten)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AVIStreamWriteData calls AVIFIL32!AVIStreamWriteData.
@@ -632,7 +632,7 @@ func AVIStreamWriteData(pavi *IAVIStream, fcc uint32, lp []byte) error {
 		_lp = &lp[0]
 	}
 	r1, _, _ := syscall.SyscallN(procAVIStreamWriteData.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(fcc), uintptr(unsafe.Pointer(_lp)), uintptr(len(lp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CapCreateCaptureWindow calls AVICAP32!capCreateCaptureWindowW.
@@ -681,7 +681,7 @@ func CloseDriver(hDriver HDRVR, lParam1 foundation.LPARAM, lParam2 foundation.LP
 // Minimum OS: windows5.0.
 func CreateEditableStream(ppsEditable **IAVIStream, psSource *IAVIStream) error {
 	r1, _, _ := syscall.SyscallN(procCreateEditableStream.Addr(), uintptr(unsafe.Pointer(ppsEditable)), uintptr(unsafe.Pointer(psSource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DefDriverProc calls WINMM!DefDriverProc.
@@ -830,7 +830,7 @@ func DrvGetModuleHandle(hDriver HDRVR) foundation.HMODULE {
 // Minimum OS: windows5.0.
 func EditStreamClone(pavi *IAVIStream, ppResult **IAVIStream) error {
 	r1, _, _ := syscall.SyscallN(procEditStreamClone.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EditStreamCopy calls AVIFIL32!EditStreamCopy.
@@ -838,7 +838,7 @@ func EditStreamClone(pavi *IAVIStream, ppResult **IAVIStream) error {
 // Minimum OS: windows5.0.
 func EditStreamCopy(pavi *IAVIStream, plStart *int32, plLength *int32, ppResult **IAVIStream) error {
 	r1, _, _ := syscall.SyscallN(procEditStreamCopy.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(unsafe.Pointer(plStart)), uintptr(unsafe.Pointer(plLength)), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EditStreamCut calls AVIFIL32!EditStreamCut.
@@ -846,7 +846,7 @@ func EditStreamCopy(pavi *IAVIStream, plStart *int32, plLength *int32, ppResult 
 // Minimum OS: windows5.0.
 func EditStreamCut(pavi *IAVIStream, plStart *int32, plLength *int32, ppResult **IAVIStream) error {
 	r1, _, _ := syscall.SyscallN(procEditStreamCut.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(unsafe.Pointer(plStart)), uintptr(unsafe.Pointer(plLength)), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EditStreamPaste calls AVIFIL32!EditStreamPaste.
@@ -854,7 +854,7 @@ func EditStreamCut(pavi *IAVIStream, plStart *int32, plLength *int32, ppResult *
 // Minimum OS: windows5.0.
 func EditStreamPaste(pavi *IAVIStream, plPos *int32, plLength *int32, pstream *IAVIStream, lStart int32, lEnd int32) error {
 	r1, _, _ := syscall.SyscallN(procEditStreamPaste.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(unsafe.Pointer(plPos)), uintptr(unsafe.Pointer(plLength)), uintptr(unsafe.Pointer(pstream)), uintptr(lStart), uintptr(lEnd))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EditStreamSetInfo calls AVIFIL32!EditStreamSetInfoW.
@@ -862,7 +862,7 @@ func EditStreamPaste(pavi *IAVIStream, plPos *int32, plLength *int32, pstream *I
 // Minimum OS: windows5.0.
 func EditStreamSetInfo(pavi *IAVIStream, lpInfo *AVISTREAMINFOW, cbInfo int32) error {
 	r1, _, _ := syscall.SyscallN(procEditStreamSetInfo.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(unsafe.Pointer(lpInfo)), uintptr(cbInfo))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EditStreamSetInfoA calls AVIFIL32!EditStreamSetInfoA.
@@ -870,7 +870,7 @@ func EditStreamSetInfo(pavi *IAVIStream, lpInfo *AVISTREAMINFOW, cbInfo int32) e
 // Minimum OS: windows5.0.
 func EditStreamSetInfoA(pavi *IAVIStream, lpInfo *AVISTREAMINFOA, cbInfo int32) error {
 	r1, _, _ := syscall.SyscallN(procEditStreamSetInfoA.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(unsafe.Pointer(lpInfo)), uintptr(cbInfo))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EditStreamSetName calls AVIFIL32!EditStreamSetNameW.
@@ -879,7 +879,7 @@ func EditStreamSetInfoA(pavi *IAVIStream, lpInfo *AVISTREAMINFOA, cbInfo int32) 
 func EditStreamSetName(pavi *IAVIStream, lpszName string) error {
 	_lpszName := win32.UTF16Ptr(lpszName)
 	r1, _, _ := syscall.SyscallN(procEditStreamSetName.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(unsafe.Pointer(_lpszName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EditStreamSetNameA calls AVIFIL32!EditStreamSetNameA.
@@ -887,7 +887,7 @@ func EditStreamSetName(pavi *IAVIStream, lpszName string) error {
 // Minimum OS: windows5.0.
 func EditStreamSetNameA(pavi *IAVIStream, lpszName foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(procEditStreamSetNameA.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(unsafe.Pointer(lpszName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDriverModuleHandle calls WINMM!GetDriverModuleHandle.

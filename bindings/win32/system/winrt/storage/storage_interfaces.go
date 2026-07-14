@@ -25,7 +25,7 @@ var IID_IOplockBreakingHandler = win32.GUID{Data1: 0x826abe3d, Data2: 0x3acd, Da
 // OplockBreaking dispatches through IOplockBreakingHandler's vtable slot 3.
 func (self *IOplockBreakingHandler) OplockBreaking() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IRandomAccessStreamFileAccessMode: https://learn.microsoft.com/windows/win32/api/windowsstoragecom/nn-windowsstoragecom-irandomaccessstreamfileaccessmode
@@ -40,7 +40,7 @@ var IID_IRandomAccessStreamFileAccessMode = win32.GUID{Data1: 0x332e5848, Data2:
 // GetMode dispatches through IRandomAccessStreamFileAccessMode's vtable slot 3.
 func (self *IRandomAccessStreamFileAccessMode) GetMode(fileAccessMode *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fileAccessMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IStorageFolderHandleAccess: https://learn.microsoft.com/windows/win32/api/windowsstoragecom/nn-windowsstoragecom-istoragefolderhandleaccess
@@ -56,7 +56,7 @@ var IID_IStorageFolderHandleAccess = win32.GUID{Data1: 0xdf19938f, Data2: 0x5462
 func (self *IStorageFolderHandleAccess) Create(fileName string, creationOptions HANDLE_CREATION_OPTIONS, accessOptions HANDLE_ACCESS_OPTIONS, sharingOptions HANDLE_SHARING_OPTIONS, options HANDLE_OPTIONS, oplockBreakingHandler *IOplockBreakingHandler, interopHandle *foundation.HANDLE) error {
 	_fileName := win32.UTF16Ptr(fileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fileName)), uintptr(creationOptions), uintptr(accessOptions), uintptr(sharingOptions), uintptr(options), uintptr(unsafe.Pointer(oplockBreakingHandler)), uintptr(unsafe.Pointer(interopHandle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IStorageItemHandleAccess: https://learn.microsoft.com/windows/win32/api/windowsstoragecom/nn-windowsstoragecom-istorageitemhandleaccess
@@ -71,7 +71,7 @@ var IID_IStorageItemHandleAccess = win32.GUID{Data1: 0x5ca296b2, Data2: 0x2c25, 
 // Create dispatches through IStorageItemHandleAccess's vtable slot 3.
 func (self *IStorageItemHandleAccess) Create(accessOptions HANDLE_ACCESS_OPTIONS, sharingOptions HANDLE_SHARING_OPTIONS, options HANDLE_OPTIONS, oplockBreakingHandler *IOplockBreakingHandler, interopHandle *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(accessOptions), uintptr(sharingOptions), uintptr(options), uintptr(unsafe.Pointer(oplockBreakingHandler)), uintptr(unsafe.Pointer(interopHandle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IUnbufferedFileHandleOplockCallback: https://learn.microsoft.com/windows/win32/api/windowsstoragecom/nn-windowsstoragecom-iunbufferedfilehandleoplockcallback
@@ -86,7 +86,7 @@ var IID_IUnbufferedFileHandleOplockCallback = win32.GUID{Data1: 0xd1019a0e, Data
 // OnBrokenCallback dispatches through IUnbufferedFileHandleOplockCallback's vtable slot 3.
 func (self *IUnbufferedFileHandleOplockCallback) OnBrokenCallback() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IUnbufferedFileHandleProvider: https://learn.microsoft.com/windows/win32/api/windowsstoragecom/nn-windowsstoragecom-iunbufferedfilehandleprovider
@@ -102,11 +102,11 @@ var IID_IUnbufferedFileHandleProvider = win32.GUID{Data1: 0xa65c9109, Data2: 0x4
 func (self *IUnbufferedFileHandleProvider) OpenUnbufferedFileHandle(oplockBreakCallback *IUnbufferedFileHandleOplockCallback) (uintptr, error) {
 	var _fileHandle uintptr
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(oplockBreakCallback)), uintptr(unsafe.Pointer(&_fileHandle)))
-	return _fileHandle, win32.HRESULTError(int32(r1))
+	return _fileHandle, win32.ErrIfFailed(int32(r1))
 }
 
 // CloseUnbufferedFileHandle dispatches through IUnbufferedFileHandleProvider's vtable slot 4.
 func (self *IUnbufferedFileHandleProvider) CloseUnbufferedFileHandle() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

@@ -77,7 +77,7 @@ var (
 // Minimum OS: windows6.1.
 func WinBioAcquireFocus() error {
 	r1, _, _ := syscall.SyscallN(procWinBioAcquireFocus.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioAsyncEnumBiometricUnits calls winbio!WinBioAsyncEnumBiometricUnits.
@@ -85,7 +85,7 @@ func WinBioAcquireFocus() error {
 // Minimum OS: windows8.0.
 func WinBioAsyncEnumBiometricUnits(FrameworkHandle uint32, Factor uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioAsyncEnumBiometricUnits.Addr(), uintptr(FrameworkHandle), uintptr(Factor))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioAsyncEnumDatabases calls winbio!WinBioAsyncEnumDatabases.
@@ -93,7 +93,7 @@ func WinBioAsyncEnumBiometricUnits(FrameworkHandle uint32, Factor uint32) error 
 // Minimum OS: windows8.0.
 func WinBioAsyncEnumDatabases(FrameworkHandle uint32, Factor uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioAsyncEnumDatabases.Addr(), uintptr(FrameworkHandle), uintptr(Factor))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioAsyncEnumServiceProviders calls winbio!WinBioAsyncEnumServiceProviders.
@@ -101,7 +101,7 @@ func WinBioAsyncEnumDatabases(FrameworkHandle uint32, Factor uint32) error {
 // Minimum OS: windows8.0.
 func WinBioAsyncEnumServiceProviders(FrameworkHandle uint32, Factor uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioAsyncEnumServiceProviders.Addr(), uintptr(FrameworkHandle), uintptr(Factor))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioAsyncMonitorFrameworkChanges calls winbio!WinBioAsyncMonitorFrameworkChanges.
@@ -109,7 +109,7 @@ func WinBioAsyncEnumServiceProviders(FrameworkHandle uint32, Factor uint32) erro
 // Minimum OS: windows8.0.
 func WinBioAsyncMonitorFrameworkChanges(FrameworkHandle uint32, ChangeTypes uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioAsyncMonitorFrameworkChanges.Addr(), uintptr(FrameworkHandle), uintptr(ChangeTypes))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioAsyncOpenFramework calls winbio!WinBioAsyncOpenFramework.
@@ -118,7 +118,7 @@ func WinBioAsyncMonitorFrameworkChanges(FrameworkHandle uint32, ChangeTypes uint
 func WinBioAsyncOpenFramework(NotificationMethod WINBIO_ASYNC_NOTIFICATION_METHOD, TargetWindow foundation.HWND, MessageCode uint32, CallbackRoutine PWINBIO_ASYNC_COMPLETION_CALLBACK, UserData unsafe.Pointer, AsynchronousOpen bool, FrameworkHandle *uint32) error {
 	_AsynchronousOpen := win32.Bool32(AsynchronousOpen)
 	r1, _, _ := syscall.SyscallN(procWinBioAsyncOpenFramework.Addr(), uintptr(NotificationMethod), uintptr(TargetWindow), uintptr(MessageCode), uintptr(CallbackRoutine), uintptr(unsafe.Pointer(UserData)), uintptr(_AsynchronousOpen), uintptr(unsafe.Pointer(FrameworkHandle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioAsyncOpenSession calls winbio!WinBioAsyncOpenSession.
@@ -131,7 +131,7 @@ func WinBioAsyncOpenSession(Factor uint32, PoolType WINBIO_POOL, Flags uint32, U
 	}
 	_AsynchronousOpen := win32.Bool32(AsynchronousOpen)
 	r1, _, _ := syscall.SyscallN(procWinBioAsyncOpenSession.Addr(), uintptr(Factor), uintptr(PoolType), uintptr(Flags), uintptr(unsafe.Pointer(_UnitArray)), uintptr(len(UnitArray)), uintptr(unsafe.Pointer(DatabaseId)), uintptr(NotificationMethod), uintptr(TargetWindow), uintptr(MessageCode), uintptr(CallbackRoutine), uintptr(unsafe.Pointer(UserData)), uintptr(_AsynchronousOpen), uintptr(unsafe.Pointer(SessionHandle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioCancel calls winbio!WinBioCancel.
@@ -139,7 +139,7 @@ func WinBioAsyncOpenSession(Factor uint32, PoolType WINBIO_POOL, Flags uint32, U
 // Minimum OS: windows6.1.
 func WinBioCancel(SessionHandle uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioCancel.Addr(), uintptr(SessionHandle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioCaptureSample calls winbio!WinBioCaptureSample.
@@ -147,7 +147,7 @@ func WinBioCancel(SessionHandle uint32) error {
 // Minimum OS: windows6.1.
 func WinBioCaptureSample(SessionHandle uint32, Purpose byte, Flags byte, UnitId *uint32, Sample **WINBIO_BIR, SampleSize *uintptr, RejectDetail *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioCaptureSample.Addr(), uintptr(SessionHandle), uintptr(Purpose), uintptr(Flags), uintptr(unsafe.Pointer(UnitId)), uintptr(unsafe.Pointer(Sample)), uintptr(unsafe.Pointer(SampleSize)), uintptr(unsafe.Pointer(RejectDetail)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioCaptureSampleWithCallback calls winbio!WinBioCaptureSampleWithCallback.
@@ -155,7 +155,7 @@ func WinBioCaptureSample(SessionHandle uint32, Purpose byte, Flags byte, UnitId 
 // Minimum OS: windows6.1.
 func WinBioCaptureSampleWithCallback(SessionHandle uint32, Purpose byte, Flags byte, CaptureCallback PWINBIO_CAPTURE_CALLBACK, CaptureCallbackContext unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWinBioCaptureSampleWithCallback.Addr(), uintptr(SessionHandle), uintptr(Purpose), uintptr(Flags), uintptr(CaptureCallback), uintptr(unsafe.Pointer(CaptureCallbackContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioCloseFramework calls winbio!WinBioCloseFramework.
@@ -163,7 +163,7 @@ func WinBioCaptureSampleWithCallback(SessionHandle uint32, Purpose byte, Flags b
 // Minimum OS: windows8.0.
 func WinBioCloseFramework(FrameworkHandle uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioCloseFramework.Addr(), uintptr(FrameworkHandle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioCloseSession calls winbio!WinBioCloseSession.
@@ -171,7 +171,7 @@ func WinBioCloseFramework(FrameworkHandle uint32) error {
 // Minimum OS: windows6.1.
 func WinBioCloseSession(SessionHandle uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioCloseSession.Addr(), uintptr(SessionHandle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioControlUnit calls winbio!WinBioControlUnit.
@@ -187,7 +187,7 @@ func WinBioControlUnit(SessionHandle uint32, UnitId uint32, Component WINBIO_COM
 		_ReceiveBuffer = &ReceiveBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWinBioControlUnit.Addr(), uintptr(SessionHandle), uintptr(UnitId), uintptr(Component), uintptr(ControlCode), uintptr(unsafe.Pointer(_SendBuffer)), uintptr(len(SendBuffer)), uintptr(unsafe.Pointer(_ReceiveBuffer)), uintptr(len(ReceiveBuffer)), uintptr(unsafe.Pointer(ReceiveDataSize)), uintptr(unsafe.Pointer(OperationStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioControlUnitPrivileged calls winbio!WinBioControlUnitPrivileged.
@@ -203,7 +203,7 @@ func WinBioControlUnitPrivileged(SessionHandle uint32, UnitId uint32, Component 
 		_ReceiveBuffer = &ReceiveBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWinBioControlUnitPrivileged.Addr(), uintptr(SessionHandle), uintptr(UnitId), uintptr(Component), uintptr(ControlCode), uintptr(unsafe.Pointer(_SendBuffer)), uintptr(len(SendBuffer)), uintptr(unsafe.Pointer(_ReceiveBuffer)), uintptr(len(ReceiveBuffer)), uintptr(unsafe.Pointer(ReceiveDataSize)), uintptr(unsafe.Pointer(OperationStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioDeleteTemplate calls winbio!WinBioDeleteTemplate.
@@ -211,7 +211,7 @@ func WinBioControlUnitPrivileged(SessionHandle uint32, UnitId uint32, Component 
 // Minimum OS: windows6.1.
 func WinBioDeleteTemplate(SessionHandle uint32, UnitId uint32, Identity *WINBIO_IDENTITY, SubFactor byte) error {
 	r1, _, _ := syscall.SyscallN(procWinBioDeleteTemplate.Addr(), uintptr(SessionHandle), uintptr(UnitId), uintptr(unsafe.Pointer(Identity)), uintptr(SubFactor))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioEnrollBegin calls winbio!WinBioEnrollBegin.
@@ -219,7 +219,7 @@ func WinBioDeleteTemplate(SessionHandle uint32, UnitId uint32, Identity *WINBIO_
 // Minimum OS: windows6.1.
 func WinBioEnrollBegin(SessionHandle uint32, SubFactor byte, UnitId uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioEnrollBegin.Addr(), uintptr(SessionHandle), uintptr(SubFactor), uintptr(UnitId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioEnrollCapture calls winbio!WinBioEnrollCapture.
@@ -227,7 +227,7 @@ func WinBioEnrollBegin(SessionHandle uint32, SubFactor byte, UnitId uint32) erro
 // Minimum OS: windows6.1.
 func WinBioEnrollCapture(SessionHandle uint32, RejectDetail *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioEnrollCapture.Addr(), uintptr(SessionHandle), uintptr(unsafe.Pointer(RejectDetail)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioEnrollCaptureWithCallback calls winbio!WinBioEnrollCaptureWithCallback.
@@ -235,7 +235,7 @@ func WinBioEnrollCapture(SessionHandle uint32, RejectDetail *uint32) error {
 // Minimum OS: windows6.1.
 func WinBioEnrollCaptureWithCallback(SessionHandle uint32, EnrollCallback PWINBIO_ENROLL_CAPTURE_CALLBACK, EnrollCallbackContext unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWinBioEnrollCaptureWithCallback.Addr(), uintptr(SessionHandle), uintptr(EnrollCallback), uintptr(unsafe.Pointer(EnrollCallbackContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioEnrollCommit calls winbio!WinBioEnrollCommit.
@@ -243,7 +243,7 @@ func WinBioEnrollCaptureWithCallback(SessionHandle uint32, EnrollCallback PWINBI
 // Minimum OS: windows6.1.
 func WinBioEnrollCommit(SessionHandle uint32, Identity *WINBIO_IDENTITY, IsNewTemplate *byte) error {
 	r1, _, _ := syscall.SyscallN(procWinBioEnrollCommit.Addr(), uintptr(SessionHandle), uintptr(unsafe.Pointer(Identity)), uintptr(unsafe.Pointer(IsNewTemplate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioEnrollDiscard calls winbio!WinBioEnrollDiscard.
@@ -251,7 +251,7 @@ func WinBioEnrollCommit(SessionHandle uint32, Identity *WINBIO_IDENTITY, IsNewTe
 // Minimum OS: windows6.1.
 func WinBioEnrollDiscard(SessionHandle uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioEnrollDiscard.Addr(), uintptr(SessionHandle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioEnrollSelect calls winbio!WinBioEnrollSelect.
@@ -259,7 +259,7 @@ func WinBioEnrollDiscard(SessionHandle uint32) error {
 // Minimum OS: windows10.0.10240.
 func WinBioEnrollSelect(SessionHandle uint32, SelectorValue uint64) error {
 	r1, _, _ := syscall.SyscallN(procWinBioEnrollSelect.Addr(), uintptr(SessionHandle), uintptr(SelectorValue))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioEnumBiometricUnits calls winbio!WinBioEnumBiometricUnits.
@@ -267,7 +267,7 @@ func WinBioEnrollSelect(SessionHandle uint32, SelectorValue uint64) error {
 // Minimum OS: windows6.1.
 func WinBioEnumBiometricUnits(Factor uint32, UnitSchemaArray **WINBIO_UNIT_SCHEMA, UnitCount *uintptr) error {
 	r1, _, _ := syscall.SyscallN(procWinBioEnumBiometricUnits.Addr(), uintptr(Factor), uintptr(unsafe.Pointer(UnitSchemaArray)), uintptr(unsafe.Pointer(UnitCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioEnumDatabases calls winbio!WinBioEnumDatabases.
@@ -275,7 +275,7 @@ func WinBioEnumBiometricUnits(Factor uint32, UnitSchemaArray **WINBIO_UNIT_SCHEM
 // Minimum OS: windows6.1.
 func WinBioEnumDatabases(Factor uint32, StorageSchemaArray **WINBIO_STORAGE_SCHEMA, StorageCount *uintptr) error {
 	r1, _, _ := syscall.SyscallN(procWinBioEnumDatabases.Addr(), uintptr(Factor), uintptr(unsafe.Pointer(StorageSchemaArray)), uintptr(unsafe.Pointer(StorageCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioEnumEnrollments calls winbio!WinBioEnumEnrollments.
@@ -283,7 +283,7 @@ func WinBioEnumDatabases(Factor uint32, StorageSchemaArray **WINBIO_STORAGE_SCHE
 // Minimum OS: windows6.1.
 func WinBioEnumEnrollments(SessionHandle uint32, UnitId uint32, Identity *WINBIO_IDENTITY, SubFactorArray **byte, SubFactorCount *uintptr) error {
 	r1, _, _ := syscall.SyscallN(procWinBioEnumEnrollments.Addr(), uintptr(SessionHandle), uintptr(UnitId), uintptr(unsafe.Pointer(Identity)), uintptr(unsafe.Pointer(SubFactorArray)), uintptr(unsafe.Pointer(SubFactorCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioEnumServiceProviders calls winbio!WinBioEnumServiceProviders.
@@ -291,7 +291,7 @@ func WinBioEnumEnrollments(SessionHandle uint32, UnitId uint32, Identity *WINBIO
 // Minimum OS: windows6.1.
 func WinBioEnumServiceProviders(Factor uint32, BspSchemaArray **WINBIO_BSP_SCHEMA, BspCount *uintptr) error {
 	r1, _, _ := syscall.SyscallN(procWinBioEnumServiceProviders.Addr(), uintptr(Factor), uintptr(unsafe.Pointer(BspSchemaArray)), uintptr(unsafe.Pointer(BspCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioFree calls winbio!WinBioFree.
@@ -299,7 +299,7 @@ func WinBioEnumServiceProviders(Factor uint32, BspSchemaArray **WINBIO_BSP_SCHEM
 // Minimum OS: windows6.1.
 func WinBioFree(Address unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWinBioFree.Addr(), uintptr(unsafe.Pointer(Address)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioGetDomainLogonSetting calls winbio!WinBioGetDomainLogonSetting.
@@ -321,7 +321,7 @@ func WinBioGetEnabledSetting(Value *byte, Source *WINBIO_SETTING_SOURCE) {
 // Minimum OS: windows10.0.10240.
 func WinBioGetEnrolledFactors(AccountOwner *WINBIO_IDENTITY, EnrolledFactors *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioGetEnrolledFactors.Addr(), uintptr(unsafe.Pointer(AccountOwner)), uintptr(unsafe.Pointer(EnrolledFactors)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioGetLogonSetting calls winbio!WinBioGetLogonSetting.
@@ -336,7 +336,7 @@ func WinBioGetLogonSetting(Value *byte, Source *WINBIO_SETTING_SOURCE) {
 // Minimum OS: windows6.1.
 func WinBioGetProperty(SessionHandle uint32, PropertyType uint32, PropertyId uint32, UnitId uint32, Identity *WINBIO_IDENTITY, SubFactor byte, PropertyBuffer *unsafe.Pointer, PropertyBufferSize *uintptr) error {
 	r1, _, _ := syscall.SyscallN(procWinBioGetProperty.Addr(), uintptr(SessionHandle), uintptr(PropertyType), uintptr(PropertyId), uintptr(UnitId), uintptr(unsafe.Pointer(Identity)), uintptr(SubFactor), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(unsafe.Pointer(PropertyBufferSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioIdentify calls winbio!WinBioIdentify.
@@ -344,7 +344,7 @@ func WinBioGetProperty(SessionHandle uint32, PropertyType uint32, PropertyId uin
 // Minimum OS: windows6.1.
 func WinBioIdentify(SessionHandle uint32, UnitId *uint32, Identity *WINBIO_IDENTITY, SubFactor *byte, RejectDetail *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioIdentify.Addr(), uintptr(SessionHandle), uintptr(unsafe.Pointer(UnitId)), uintptr(unsafe.Pointer(Identity)), uintptr(unsafe.Pointer(SubFactor)), uintptr(unsafe.Pointer(RejectDetail)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioIdentifyWithCallback calls winbio!WinBioIdentifyWithCallback.
@@ -352,25 +352,25 @@ func WinBioIdentify(SessionHandle uint32, UnitId *uint32, Identity *WINBIO_IDENT
 // Minimum OS: windows6.1.
 func WinBioIdentifyWithCallback(SessionHandle uint32, IdentifyCallback PWINBIO_IDENTIFY_CALLBACK, IdentifyCallbackContext unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWinBioIdentifyWithCallback.Addr(), uintptr(SessionHandle), uintptr(IdentifyCallback), uintptr(unsafe.Pointer(IdentifyCallbackContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioImproveBegin calls winbio!WinBioImproveBegin.
 func WinBioImproveBegin(SessionHandle uint32, UnitId uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioImproveBegin.Addr(), uintptr(SessionHandle), uintptr(UnitId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioImproveEnd calls winbio!WinBioImproveEnd.
 func WinBioImproveEnd(SessionHandle uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioImproveEnd.Addr(), uintptr(SessionHandle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioIsESSCapable calls winbio!WinBioIsESSCapable.
 func WinBioIsESSCapable(Value *byte) error {
 	r1, _, _ := syscall.SyscallN(procWinBioIsESSCapable.Addr(), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioLocateSensor calls winbio!WinBioLocateSensor.
@@ -378,7 +378,7 @@ func WinBioIsESSCapable(Value *byte) error {
 // Minimum OS: windows6.1.
 func WinBioLocateSensor(SessionHandle uint32, UnitId *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioLocateSensor.Addr(), uintptr(SessionHandle), uintptr(unsafe.Pointer(UnitId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioLocateSensorWithCallback calls winbio!WinBioLocateSensorWithCallback.
@@ -386,7 +386,7 @@ func WinBioLocateSensor(SessionHandle uint32, UnitId *uint32) error {
 // Minimum OS: windows6.1.
 func WinBioLocateSensorWithCallback(SessionHandle uint32, LocateCallback PWINBIO_LOCATE_SENSOR_CALLBACK, LocateCallbackContext unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWinBioLocateSensorWithCallback.Addr(), uintptr(SessionHandle), uintptr(LocateCallback), uintptr(unsafe.Pointer(LocateCallbackContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioLockUnit calls winbio!WinBioLockUnit.
@@ -394,7 +394,7 @@ func WinBioLocateSensorWithCallback(SessionHandle uint32, LocateCallback PWINBIO
 // Minimum OS: windows6.1.
 func WinBioLockUnit(SessionHandle uint32, UnitId uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioLockUnit.Addr(), uintptr(SessionHandle), uintptr(UnitId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioLogonIdentifiedUser calls winbio!WinBioLogonIdentifiedUser.
@@ -402,7 +402,7 @@ func WinBioLockUnit(SessionHandle uint32, UnitId uint32) error {
 // Minimum OS: windows6.1.
 func WinBioLogonIdentifiedUser(SessionHandle uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioLogonIdentifiedUser.Addr(), uintptr(SessionHandle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioMonitorPresence calls winbio!WinBioMonitorPresence.
@@ -410,7 +410,7 @@ func WinBioLogonIdentifiedUser(SessionHandle uint32) error {
 // Minimum OS: windows10.0.10240.
 func WinBioMonitorPresence(SessionHandle uint32, UnitId uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioMonitorPresence.Addr(), uintptr(SessionHandle), uintptr(UnitId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioOpenSession calls winbio!WinBioOpenSession.
@@ -422,7 +422,7 @@ func WinBioOpenSession(Factor uint32, PoolType WINBIO_POOL, Flags uint32, UnitAr
 		_UnitArray = &UnitArray[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWinBioOpenSession.Addr(), uintptr(Factor), uintptr(PoolType), uintptr(Flags), uintptr(unsafe.Pointer(_UnitArray)), uintptr(len(UnitArray)), uintptr(unsafe.Pointer(DatabaseId)), uintptr(unsafe.Pointer(SessionHandle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioRegisterEventMonitor calls winbio!WinBioRegisterEventMonitor.
@@ -430,7 +430,7 @@ func WinBioOpenSession(Factor uint32, PoolType WINBIO_POOL, Flags uint32, UnitAr
 // Minimum OS: windows6.1.
 func WinBioRegisterEventMonitor(SessionHandle uint32, EventMask uint32, EventCallback PWINBIO_EVENT_CALLBACK, EventCallbackContext unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWinBioRegisterEventMonitor.Addr(), uintptr(SessionHandle), uintptr(EventMask), uintptr(EventCallback), uintptr(unsafe.Pointer(EventCallbackContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioReleaseFocus calls winbio!WinBioReleaseFocus.
@@ -438,7 +438,7 @@ func WinBioRegisterEventMonitor(SessionHandle uint32, EventMask uint32, EventCal
 // Minimum OS: windows6.1.
 func WinBioReleaseFocus() error {
 	r1, _, _ := syscall.SyscallN(procWinBioReleaseFocus.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioRemoveAllCredentials calls winbio!WinBioRemoveAllCredentials.
@@ -446,7 +446,7 @@ func WinBioReleaseFocus() error {
 // Minimum OS: windows6.1.
 func WinBioRemoveAllCredentials() error {
 	r1, _, _ := syscall.SyscallN(procWinBioRemoveAllCredentials.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioRemoveAllDomainCredentials calls winbio!WinBioRemoveAllDomainCredentials.
@@ -454,7 +454,7 @@ func WinBioRemoveAllCredentials() error {
 // Minimum OS: windows6.1.
 func WinBioRemoveAllDomainCredentials() error {
 	r1, _, _ := syscall.SyscallN(procWinBioRemoveAllDomainCredentials.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioSetCredential calls winbio!WinBioSetCredential.
@@ -466,7 +466,7 @@ func WinBioSetCredential(Type WINBIO_CREDENTIAL_TYPE, Credential []byte, Format 
 		_Credential = &Credential[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWinBioSetCredential.Addr(), uintptr(Type), uintptr(unsafe.Pointer(_Credential)), uintptr(len(Credential)), uintptr(Format))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioSetProperty calls winbio!WinBioSetProperty.
@@ -478,7 +478,7 @@ func WinBioSetProperty(SessionHandle uint32, PropertyType uint32, PropertyId uin
 		_PropertyBuffer = &PropertyBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWinBioSetProperty.Addr(), uintptr(SessionHandle), uintptr(PropertyType), uintptr(PropertyId), uintptr(UnitId), uintptr(unsafe.Pointer(Identity)), uintptr(SubFactor), uintptr(unsafe.Pointer(_PropertyBuffer)), uintptr(len(PropertyBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioUnlockUnit calls winbio!WinBioUnlockUnit.
@@ -486,7 +486,7 @@ func WinBioSetProperty(SessionHandle uint32, PropertyType uint32, PropertyId uin
 // Minimum OS: windows6.1.
 func WinBioUnlockUnit(SessionHandle uint32, UnitId uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioUnlockUnit.Addr(), uintptr(SessionHandle), uintptr(UnitId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioUnregisterEventMonitor calls winbio!WinBioUnregisterEventMonitor.
@@ -494,7 +494,7 @@ func WinBioUnlockUnit(SessionHandle uint32, UnitId uint32) error {
 // Minimum OS: windows6.1.
 func WinBioUnregisterEventMonitor(SessionHandle uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioUnregisterEventMonitor.Addr(), uintptr(SessionHandle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioVerify calls winbio!WinBioVerify.
@@ -502,7 +502,7 @@ func WinBioUnregisterEventMonitor(SessionHandle uint32) error {
 // Minimum OS: windows6.1.
 func WinBioVerify(SessionHandle uint32, Identity *WINBIO_IDENTITY, SubFactor byte, UnitId *uint32, Match *byte, RejectDetail *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioVerify.Addr(), uintptr(SessionHandle), uintptr(unsafe.Pointer(Identity)), uintptr(SubFactor), uintptr(unsafe.Pointer(UnitId)), uintptr(unsafe.Pointer(Match)), uintptr(unsafe.Pointer(RejectDetail)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioVerifyWithCallback calls winbio!WinBioVerifyWithCallback.
@@ -510,7 +510,7 @@ func WinBioVerify(SessionHandle uint32, Identity *WINBIO_IDENTITY, SubFactor byt
 // Minimum OS: windows6.1.
 func WinBioVerifyWithCallback(SessionHandle uint32, Identity *WINBIO_IDENTITY, SubFactor byte, VerifyCallback PWINBIO_VERIFY_CALLBACK, VerifyCallbackContext unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWinBioVerifyWithCallback.Addr(), uintptr(SessionHandle), uintptr(unsafe.Pointer(Identity)), uintptr(SubFactor), uintptr(VerifyCallback), uintptr(unsafe.Pointer(VerifyCallbackContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinBioWait calls winbio!WinBioWait.
@@ -518,5 +518,5 @@ func WinBioVerifyWithCallback(SessionHandle uint32, Identity *WINBIO_IDENTITY, S
 // Minimum OS: windows6.1.
 func WinBioWait(SessionHandle uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioWait.Addr(), uintptr(SessionHandle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

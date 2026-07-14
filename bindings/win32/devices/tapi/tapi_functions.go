@@ -279,7 +279,7 @@ var (
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/gettnefstreamcodepage
 func GetTnefStreamCodepage(lpStream *systemcom.IStream, lpulCodepage *uint32, lpulSubCodepage *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetTnefStreamCodepage.Addr(), uintptr(unsafe.Pointer(lpStream)), uintptr(unsafe.Pointer(lpulCodepage)), uintptr(unsafe.Pointer(lpulSubCodepage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LineAccept calls TAPI32!lineAccept.
@@ -1659,14 +1659,14 @@ func LineUnparkW(hLine uint32, dwAddressID uint32, lphCall *uint32, lpszDestAddr
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/opentnefstream
 func OpenTnefStream(lpvSupport unsafe.Pointer, lpStream *systemcom.IStream, lpszStreamName *int8, ulFlags uint32, lpMessage *systemaddressbook.IMessage, wKeyVal uint16, lppTNEF **ITnef) error {
 	r1, _, _ := syscall.SyscallN(procOpenTnefStream.Addr(), uintptr(unsafe.Pointer(lpvSupport)), uintptr(unsafe.Pointer(lpStream)), uintptr(unsafe.Pointer(lpszStreamName)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpMessage)), uintptr(wKeyVal), uintptr(unsafe.Pointer(lppTNEF)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenTnefStreamEx calls MAPI32!OpenTnefStreamEx.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/opentnefstreamex
 func OpenTnefStreamEx(lpvSupport unsafe.Pointer, lpStream *systemcom.IStream, lpszStreamName *int8, ulFlags uint32, lpMessage *systemaddressbook.IMessage, wKeyVal uint16, lpAdressBook *systemaddressbook.IAddrBook, lppTNEF **ITnef) error {
 	r1, _, _ := syscall.SyscallN(procOpenTnefStreamEx.Addr(), uintptr(unsafe.Pointer(lpvSupport)), uintptr(unsafe.Pointer(lpStream)), uintptr(unsafe.Pointer(lpszStreamName)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpMessage)), uintptr(wKeyVal), uintptr(unsafe.Pointer(lpAdressBook)), uintptr(unsafe.Pointer(lppTNEF)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PhoneClose calls TAPI32!phoneClose.

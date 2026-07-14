@@ -97,7 +97,7 @@ var (
 // ActivatePackageVirtualizationContext calls KERNEL32!ActivatePackageVirtualizationContext.
 func ActivatePackageVirtualizationContext(context PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE, cookie *uintptr) error {
 	r1, _, _ := syscall.SyscallN(procActivatePackageVirtualizationContext.Addr(), uintptr(context), uintptr(unsafe.Pointer(cookie)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddPackageDependency calls KERNELBASE!AddPackageDependency.
@@ -105,14 +105,14 @@ func ActivatePackageVirtualizationContext(context PACKAGE_VIRTUALIZATION_CONTEXT
 func AddPackageDependency(packageDependencyId string, rank int32, options AddPackageDependencyOptions, packageDependencyContext *PACKAGEDEPENDENCY_CONTEXT, packageFullName *foundation.PWSTR) error {
 	_packageDependencyId := win32.UTF16Ptr(packageDependencyId)
 	r1, _, _ := syscall.SyscallN(procAddPackageDependency.Addr(), uintptr(unsafe.Pointer(_packageDependencyId)), uintptr(rank), uintptr(options), uintptr(unsafe.Pointer(packageDependencyContext)), uintptr(unsafe.Pointer(packageFullName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddPackageDependency2 calls api-ms-win-appmodel-runtime-l1-1-7!AddPackageDependency2.
 func AddPackageDependency2(packageDependencyId string, rank int32, options AddPackageDependencyOptions2, packageDependencyContext *PACKAGEDEPENDENCY_CONTEXT, packageFullName *foundation.PWSTR) error {
 	_packageDependencyId := win32.UTF16Ptr(packageDependencyId)
 	r1, _, _ := syscall.SyscallN(procAddPackageDependency2.Addr(), uintptr(unsafe.Pointer(_packageDependencyId)), uintptr(rank), uintptr(options), uintptr(unsafe.Pointer(packageDependencyContext)), uintptr(unsafe.Pointer(packageFullName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AppPolicyGetClrCompat calls KERNEL32!AppPolicyGetClrCompat.
@@ -175,7 +175,7 @@ func AppPolicyGetWindowingModel(processToken foundation.HANDLE, policy *AppPolic
 func CheckIsMSIXPackage(packageFullName string, isMSIXPackage *foundation.BOOL) error {
 	_packageFullName := win32.UTF16Ptr(packageFullName)
 	r1, _, _ := syscall.SyscallN(procCheckIsMSIXPackage.Addr(), uintptr(unsafe.Pointer(_packageFullName)), uintptr(unsafe.Pointer(isMSIXPackage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ClosePackageInfo calls KERNEL32!ClosePackageInfo.
@@ -190,7 +190,7 @@ func ClosePackageInfo(packageInfoReference *PACKAGE_INFO_REFERENCE) foundation.W
 func CreatePackageVirtualizationContext(packageFamilyName string, context *PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE) error {
 	_packageFamilyName := win32.UTF16Ptr(packageFamilyName)
 	r1, _, _ := syscall.SyscallN(procCreatePackageVirtualizationContext.Addr(), uintptr(unsafe.Pointer(_packageFamilyName)), uintptr(unsafe.Pointer(context)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeactivatePackageVirtualizationContext calls KERNEL32!DeactivatePackageVirtualizationContext.
@@ -203,19 +203,19 @@ func DeactivatePackageVirtualizationContext(cookie uintptr) {
 func DeletePackageDependency(packageDependencyId string) error {
 	_packageDependencyId := win32.UTF16Ptr(packageDependencyId)
 	r1, _, _ := syscall.SyscallN(procDeletePackageDependency.Addr(), uintptr(unsafe.Pointer(_packageDependencyId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DuplicatePackageVirtualizationContext calls KERNEL32!DuplicatePackageVirtualizationContext.
 func DuplicatePackageVirtualizationContext(sourceContext PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE, destContext *PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procDuplicatePackageVirtualizationContext.Addr(), uintptr(sourceContext), uintptr(unsafe.Pointer(destContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FindPackageDependency calls api-ms-win-appmodel-runtime-l1-1-7!FindPackageDependency.
 func FindPackageDependency(findPackageDependencyCriteria *FindPackageDependencyCriteria, packageDependencyIdsCount *uint32, packageDependencyIds **foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procFindPackageDependency.Addr(), uintptr(unsafe.Pointer(findPackageDependencyCriteria)), uintptr(unsafe.Pointer(packageDependencyIdsCount)), uintptr(unsafe.Pointer(packageDependencyIds)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FindPackagesByPackageFamily calls KERNEL32!FindPackagesByPackageFamily.
@@ -302,7 +302,7 @@ func GetCurrentPackageInfo2(flags uint32, packagePathType PackagePathType, buffe
 // https://learn.microsoft.com/windows/win32/appxpkg/appmodel/nf-appmodel-getcurrentpackageinfo3
 func GetCurrentPackageInfo3(flags uint32, packageInfoType PackageInfo3Type, bufferLength *uint32, buffer unsafe.Pointer, count *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetCurrentPackageInfo3.Addr(), uintptr(flags), uintptr(packageInfoType), uintptr(unsafe.Pointer(bufferLength)), uintptr(unsafe.Pointer(buffer)), uintptr(unsafe.Pointer(count)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentPackagePath calls KERNEL32!GetCurrentPackagePath.
@@ -331,7 +331,7 @@ func GetCurrentPackageVirtualizationContext() PACKAGE_VIRTUALIZATION_CONTEXT_HAN
 // https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getidforpackagedependencycontext
 func GetIdForPackageDependencyContext(packageDependencyContext PACKAGEDEPENDENCY_CONTEXT, packageDependencyId *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procGetIdForPackageDependencyContext.Addr(), uintptr(packageDependencyContext), uintptr(unsafe.Pointer(packageDependencyId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPackageApplicationIds calls KERNEL32!GetPackageApplicationIds.
@@ -346,7 +346,7 @@ func GetPackageApplicationIds(packageInfoReference *PACKAGE_INFO_REFERENCE, buff
 func GetPackageDependencyInformation(packageDependencyId string, user *security.PSID, packageFamilyName *foundation.PWSTR, minVersion *PACKAGE_VERSION, packageDependencyProcessorArchitectures *PackageDependencyProcessorArchitectures, lifetimeKind *PackageDependencyLifetimeKind, lifetimeArtifact *foundation.PWSTR, options *CreatePackageDependencyOptions, lifetimeExpiration *foundation.FILETIME) error {
 	_packageDependencyId := win32.UTF16Ptr(packageDependencyId)
 	r1, _, _ := syscall.SyscallN(procGetPackageDependencyInformation.Addr(), uintptr(unsafe.Pointer(_packageDependencyId)), uintptr(unsafe.Pointer(user)), uintptr(unsafe.Pointer(packageFamilyName)), uintptr(unsafe.Pointer(minVersion)), uintptr(unsafe.Pointer(packageDependencyProcessorArchitectures)), uintptr(unsafe.Pointer(lifetimeKind)), uintptr(unsafe.Pointer(lifetimeArtifact)), uintptr(unsafe.Pointer(options)), uintptr(unsafe.Pointer(lifetimeExpiration)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPackageFamilyName calls KERNEL32!GetPackageFamilyName.
@@ -450,7 +450,7 @@ func GetPackagesByPackageFamily(packageFamilyName string, count *uint32, package
 func GetProcessesInVirtualizationContext(packageFamilyName string, count *uint32, processes **foundation.HANDLE) error {
 	_packageFamilyName := win32.UTF16Ptr(packageFamilyName)
 	r1, _, _ := syscall.SyscallN(procGetProcessesInVirtualizationContext.Addr(), uintptr(unsafe.Pointer(_packageFamilyName)), uintptr(unsafe.Pointer(count)), uintptr(unsafe.Pointer(processes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProcessesUsingPackageDependency calls api-ms-win-appmodel-runtime-l1-1-7!GetProcessesUsingPackageDependency.
@@ -458,7 +458,7 @@ func GetProcessesUsingPackageDependency(packageDependencyId string, user securit
 	_packageDependencyId := win32.UTF16Ptr(packageDependencyId)
 	_scopeIsSystem := win32.Bool32(scopeIsSystem)
 	r1, _, _ := syscall.SyscallN(procGetProcessesUsingPackageDependency.Addr(), uintptr(unsafe.Pointer(_packageDependencyId)), uintptr(user), uintptr(_scopeIsSystem), uintptr(unsafe.Pointer(processIdsCount)), uintptr(unsafe.Pointer(processIds)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetResolvedPackageFullNameForPackageDependency calls KERNELBASE!GetResolvedPackageFullNameForPackageDependency.
@@ -466,14 +466,14 @@ func GetProcessesUsingPackageDependency(packageDependencyId string, user securit
 func GetResolvedPackageFullNameForPackageDependency(packageDependencyId string, packageFullName *foundation.PWSTR) error {
 	_packageDependencyId := win32.UTF16Ptr(packageDependencyId)
 	r1, _, _ := syscall.SyscallN(procGetResolvedPackageFullNameForPackageDependency.Addr(), uintptr(unsafe.Pointer(_packageDependencyId)), uintptr(unsafe.Pointer(packageFullName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetResolvedPackageFullNameForPackageDependency2 calls api-ms-win-appmodel-runtime-l1-1-7!GetResolvedPackageFullNameForPackageDependency2.
 func GetResolvedPackageFullNameForPackageDependency2(packageDependencyId string, packageFullName *foundation.PWSTR) error {
 	_packageDependencyId := win32.UTF16Ptr(packageDependencyId)
 	r1, _, _ := syscall.SyscallN(procGetResolvedPackageFullNameForPackageDependency2.Addr(), uintptr(unsafe.Pointer(_packageDependencyId)), uintptr(unsafe.Pointer(packageFullName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStagedPackageOrigin calls api-ms-win-appmodel-runtime-l1-1-1!GetStagedPackageOrigin.
@@ -580,7 +580,7 @@ func ReleasePackageVirtualizationContext(context PACKAGE_VIRTUALIZATION_CONTEXT_
 // https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-removepackagedependency
 func RemovePackageDependency(packageDependencyContext PACKAGEDEPENDENCY_CONTEXT) error {
 	r1, _, _ := syscall.SyscallN(procRemovePackageDependency.Addr(), uintptr(packageDependencyContext))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // VerifyApplicationUserModelId calls api-ms-win-appmodel-runtime-l1-1-1!VerifyApplicationUserModelId.

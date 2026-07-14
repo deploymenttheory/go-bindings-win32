@@ -28,31 +28,31 @@ var IID_IDCompositionAffineTransform2DEffect = win32.GUID{Data1: 0x0b74b9e8, Dat
 // SetInterpolationMode dispatches through IDCompositionAffineTransform2DEffect's vtable slot 4.
 func (self *IDCompositionAffineTransform2DEffect) SetInterpolationMode(interpolationMode graphicsdirect2dcommon.D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(interpolationMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBorderMode dispatches through IDCompositionAffineTransform2DEffect's vtable slot 5.
 func (self *IDCompositionAffineTransform2DEffect) SetBorderMode(borderMode graphicsdirect2dcommon.D2D1_BORDER_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(borderMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTransformMatrix dispatches through IDCompositionAffineTransform2DEffect's vtable slot 6.
 func (self *IDCompositionAffineTransform2DEffect) SetTransformMatrix(transformMatrix *graphicsdirect2dcommon.D2D_MATRIX_3X2_F) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(transformMatrix)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTransformMatrixElement dispatches through IDCompositionAffineTransform2DEffect's vtable slot 7.
 func (self *IDCompositionAffineTransform2DEffect) SetTransformMatrixElement(row int32, column int32, animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(row), uintptr(column), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetSharpness dispatches through IDCompositionAffineTransform2DEffect's vtable slot 9.
 func (self *IDCompositionAffineTransform2DEffect) SetSharpness(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionAnimation: https://learn.microsoft.com/windows/win32/api/dcompanimation/nn-dcompanimation-idcompositionanimation
@@ -67,13 +67,13 @@ var IID_IDCompositionAnimation = win32.GUID{Data1: 0xcbfd91d9, Data2: 0x51b2, Da
 // Reset dispatches through IDCompositionAnimation's vtable slot 3.
 func (self *IDCompositionAnimation) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAbsoluteBeginTime dispatches through IDCompositionAnimation's vtable slot 4.
 func (self *IDCompositionAnimation) SetAbsoluteBeginTime(beginTime int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(beginTime))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionArithmeticCompositeEffect: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositionarithmeticcompositeeffect
@@ -88,38 +88,38 @@ var IID_IDCompositionArithmeticCompositeEffect = win32.GUID{Data1: 0x3b67dfa8, D
 // SetCoefficients dispatches through IDCompositionArithmeticCompositeEffect's vtable slot 4.
 func (self *IDCompositionArithmeticCompositeEffect) SetCoefficients(coefficients *graphicsdirect2dcommon.D2D_VECTOR_4F) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(coefficients)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetClampOutput dispatches through IDCompositionArithmeticCompositeEffect's vtable slot 5.
 func (self *IDCompositionArithmeticCompositeEffect) SetClampOutput(clampoutput bool) error {
 	_clampoutput := win32.Bool32(clampoutput)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(_clampoutput))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCoefficient1 dispatches through IDCompositionArithmeticCompositeEffect's vtable slot 6.
 func (self *IDCompositionArithmeticCompositeEffect) SetCoefficient1(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCoefficient2 dispatches through IDCompositionArithmeticCompositeEffect's vtable slot 8.
 func (self *IDCompositionArithmeticCompositeEffect) SetCoefficient2(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCoefficient3 dispatches through IDCompositionArithmeticCompositeEffect's vtable slot 10.
 func (self *IDCompositionArithmeticCompositeEffect) SetCoefficient3(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCoefficient4 dispatches through IDCompositionArithmeticCompositeEffect's vtable slot 12.
 func (self *IDCompositionArithmeticCompositeEffect) SetCoefficient4(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionBlendEffect: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositionblendeffect
@@ -134,7 +134,7 @@ var IID_IDCompositionBlendEffect = win32.GUID{Data1: 0x33ecdc0a, Data2: 0x578a, 
 // SetMode dispatches through IDCompositionBlendEffect's vtable slot 4.
 func (self *IDCompositionBlendEffect) SetMode(mode graphicsdirect2dcommon.D2D1_BLEND_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(mode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionBrightnessEffect: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositionbrightnesseffect
@@ -149,37 +149,37 @@ var IID_IDCompositionBrightnessEffect = win32.GUID{Data1: 0x6027496e, Data2: 0xc
 // SetWhitePoint dispatches through IDCompositionBrightnessEffect's vtable slot 4.
 func (self *IDCompositionBrightnessEffect) SetWhitePoint(whitePoint *graphicsdirect2dcommon.D2D_VECTOR_2F) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(whitePoint)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBlackPoint dispatches through IDCompositionBrightnessEffect's vtable slot 5.
 func (self *IDCompositionBrightnessEffect) SetBlackPoint(blackPoint *graphicsdirect2dcommon.D2D_VECTOR_2F) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(blackPoint)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetWhitePointX dispatches through IDCompositionBrightnessEffect's vtable slot 6.
 func (self *IDCompositionBrightnessEffect) SetWhitePointX(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetWhitePointY dispatches through IDCompositionBrightnessEffect's vtable slot 8.
 func (self *IDCompositionBrightnessEffect) SetWhitePointY(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBlackPointX dispatches through IDCompositionBrightnessEffect's vtable slot 10.
 func (self *IDCompositionBrightnessEffect) SetBlackPointX(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBlackPointY dispatches through IDCompositionBrightnessEffect's vtable slot 12.
 func (self *IDCompositionBrightnessEffect) SetBlackPointY(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionClip: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositionclip
@@ -203,26 +203,26 @@ var IID_IDCompositionColorMatrixEffect = win32.GUID{Data1: 0xc1170a22, Data2: 0x
 // SetMatrix dispatches through IDCompositionColorMatrixEffect's vtable slot 4.
 func (self *IDCompositionColorMatrixEffect) SetMatrix(matrix *graphicsdirect2dcommon.D2D_MATRIX_5X4_F) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(matrix)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMatrixElement dispatches through IDCompositionColorMatrixEffect's vtable slot 5.
 func (self *IDCompositionColorMatrixEffect) SetMatrixElement(row int32, column int32, animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(row), uintptr(column), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAlphaMode dispatches through IDCompositionColorMatrixEffect's vtable slot 7.
 func (self *IDCompositionColorMatrixEffect) SetAlphaMode(mode graphicsdirect2dcommon.D2D1_COLORMATRIX_ALPHA_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(mode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetClampOutput dispatches through IDCompositionColorMatrixEffect's vtable slot 8.
 func (self *IDCompositionColorMatrixEffect) SetClampOutput(clamp bool) error {
 	_clamp := win32.Bool32(clamp)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(_clamp))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionCompositeEffect: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositioncompositeeffect
@@ -237,7 +237,7 @@ var IID_IDCompositionCompositeEffect = win32.GUID{Data1: 0x576616c0, Data2: 0xa2
 // SetMode dispatches through IDCompositionCompositeEffect's vtable slot 4.
 func (self *IDCompositionCompositeEffect) SetMode(mode graphicsdirect2dcommon.D2D1_COMPOSITE_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(mode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: c2448e9b-547d-4057-8cf5-8144ede1c2da
@@ -255,7 +255,7 @@ func (self *IDCompositionDelegatedInkTrail) AddTrailPoints(inkPoints []DComposit
 		_inkPoints = &inkPoints[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_inkPoints)), uintptr(len(inkPoints)), uintptr(unsafe.Pointer(generationId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddTrailPointsWithPrediction dispatches through IDCompositionDelegatedInkTrail's vtable slot 4.
@@ -269,19 +269,19 @@ func (self *IDCompositionDelegatedInkTrail) AddTrailPointsWithPrediction(inkPoin
 		_predictedInkPoints = &predictedInkPoints[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_inkPoints)), uintptr(len(inkPoints)), uintptr(unsafe.Pointer(_predictedInkPoints)), uintptr(len(predictedInkPoints)), uintptr(unsafe.Pointer(generationId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveTrailPoints dispatches through IDCompositionDelegatedInkTrail's vtable slot 5.
 func (self *IDCompositionDelegatedInkTrail) RemoveTrailPoints(generationId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(generationId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StartNewTrail dispatches through IDCompositionDelegatedInkTrail's vtable slot 6.
 func (self *IDCompositionDelegatedInkTrail) StartNewTrail(color *graphicsdirect2dcommon.D2D1_COLOR_F) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(color)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionDesktopDevice: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositiondesktopdevice
@@ -297,19 +297,19 @@ var IID_IDCompositionDesktopDevice = win32.GUID{Data1: 0x5f4633fe, Data2: 0x1e08
 func (self *IDCompositionDesktopDevice) CreateTargetForHwnd(hwnd foundation.HWND, topmost bool, target **IDCompositionTarget) error {
 	_topmost := win32.Bool32(topmost)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(_topmost), uintptr(unsafe.Pointer(target)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSurfaceFromHandle dispatches through IDCompositionDesktopDevice's vtable slot 25.
 func (self *IDCompositionDesktopDevice) CreateSurfaceFromHandle(handle foundation.HANDLE, surface **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(handle), uintptr(unsafe.Pointer(surface)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSurfaceFromHwnd dispatches through IDCompositionDesktopDevice's vtable slot 26.
 func (self *IDCompositionDesktopDevice) CreateSurfaceFromHwnd(hwnd foundation.HWND, surface **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(unsafe.Pointer(surface)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionDevice: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositiondevice
@@ -324,87 +324,87 @@ var IID_IDCompositionDevice = win32.GUID{Data1: 0xc37ea93a, Data2: 0xe7aa, Data3
 // Commit dispatches through IDCompositionDevice's vtable slot 3.
 func (self *IDCompositionDevice) Commit() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WaitForCommitCompletion dispatches through IDCompositionDevice's vtable slot 4.
 func (self *IDCompositionDevice) WaitForCommitCompletion() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFrameStatistics dispatches through IDCompositionDevice's vtable slot 5.
 func (self *IDCompositionDevice) GetFrameStatistics() (DCOMPOSITION_FRAME_STATISTICS, error) {
 	var _statistics DCOMPOSITION_FRAME_STATISTICS
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_statistics)))
-	return _statistics, win32.HRESULTError(int32(r1))
+	return _statistics, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateTargetForHwnd dispatches through IDCompositionDevice's vtable slot 6.
 func (self *IDCompositionDevice) CreateTargetForHwnd(hwnd foundation.HWND, topmost bool, target **IDCompositionTarget) error {
 	_topmost := win32.Bool32(topmost)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(_topmost), uintptr(unsafe.Pointer(target)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateVisual dispatches through IDCompositionDevice's vtable slot 7.
 func (self *IDCompositionDevice) CreateVisual(visual **IDCompositionVisual) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(visual)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSurface dispatches through IDCompositionDevice's vtable slot 8.
 func (self *IDCompositionDevice) CreateSurface(width uint32, height uint32, pixelFormat graphicsdxgicommon.DXGI_FORMAT, alphaMode graphicsdxgicommon.DXGI_ALPHA_MODE, surface **IDCompositionSurface) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(width), uintptr(height), uintptr(pixelFormat), uintptr(alphaMode), uintptr(unsafe.Pointer(surface)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateVirtualSurface dispatches through IDCompositionDevice's vtable slot 9.
 func (self *IDCompositionDevice) CreateVirtualSurface(initialWidth uint32, initialHeight uint32, pixelFormat graphicsdxgicommon.DXGI_FORMAT, alphaMode graphicsdxgicommon.DXGI_ALPHA_MODE, virtualSurface **IDCompositionVirtualSurface) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(initialWidth), uintptr(initialHeight), uintptr(pixelFormat), uintptr(alphaMode), uintptr(unsafe.Pointer(virtualSurface)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSurfaceFromHandle dispatches through IDCompositionDevice's vtable slot 10.
 func (self *IDCompositionDevice) CreateSurfaceFromHandle(handle foundation.HANDLE, surface **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(handle), uintptr(unsafe.Pointer(surface)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSurfaceFromHwnd dispatches through IDCompositionDevice's vtable slot 11.
 func (self *IDCompositionDevice) CreateSurfaceFromHwnd(hwnd foundation.HWND, surface **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(unsafe.Pointer(surface)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateTranslateTransform dispatches through IDCompositionDevice's vtable slot 12.
 func (self *IDCompositionDevice) CreateTranslateTransform(translateTransform **IDCompositionTranslateTransform) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(translateTransform)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateScaleTransform dispatches through IDCompositionDevice's vtable slot 13.
 func (self *IDCompositionDevice) CreateScaleTransform(scaleTransform **IDCompositionScaleTransform) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(scaleTransform)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateRotateTransform dispatches through IDCompositionDevice's vtable slot 14.
 func (self *IDCompositionDevice) CreateRotateTransform(rotateTransform **IDCompositionRotateTransform) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rotateTransform)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSkewTransform dispatches through IDCompositionDevice's vtable slot 15.
 func (self *IDCompositionDevice) CreateSkewTransform(skewTransform **IDCompositionSkewTransform) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(skewTransform)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateMatrixTransform dispatches through IDCompositionDevice's vtable slot 16.
 func (self *IDCompositionDevice) CreateMatrixTransform(matrixTransform **IDCompositionMatrixTransform) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(matrixTransform)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateTransformGroup dispatches through IDCompositionDevice's vtable slot 17.
@@ -414,31 +414,31 @@ func (self *IDCompositionDevice) CreateTransformGroup(transforms []*IDCompositio
 		_transforms = &transforms[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_transforms)), uintptr(len(transforms)), uintptr(unsafe.Pointer(transformGroup)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateTranslateTransform3D dispatches through IDCompositionDevice's vtable slot 18.
 func (self *IDCompositionDevice) CreateTranslateTransform3D(translateTransform3D **IDCompositionTranslateTransform3D) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(translateTransform3D)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateScaleTransform3D dispatches through IDCompositionDevice's vtable slot 19.
 func (self *IDCompositionDevice) CreateScaleTransform3D(scaleTransform3D **IDCompositionScaleTransform3D) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(scaleTransform3D)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateRotateTransform3D dispatches through IDCompositionDevice's vtable slot 20.
 func (self *IDCompositionDevice) CreateRotateTransform3D(rotateTransform3D **IDCompositionRotateTransform3D) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rotateTransform3D)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateMatrixTransform3D dispatches through IDCompositionDevice's vtable slot 21.
 func (self *IDCompositionDevice) CreateMatrixTransform3D(matrixTransform3D **IDCompositionMatrixTransform3D) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(matrixTransform3D)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateTransform3DGroup dispatches through IDCompositionDevice's vtable slot 22.
@@ -448,31 +448,31 @@ func (self *IDCompositionDevice) CreateTransform3DGroup(transforms3D []*IDCompos
 		_transforms3D = &transforms3D[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_transforms3D)), uintptr(len(transforms3D)), uintptr(unsafe.Pointer(transform3DGroup)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateEffectGroup dispatches through IDCompositionDevice's vtable slot 23.
 func (self *IDCompositionDevice) CreateEffectGroup(effectGroup **IDCompositionEffectGroup) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(effectGroup)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateRectangleClip dispatches through IDCompositionDevice's vtable slot 24.
 func (self *IDCompositionDevice) CreateRectangleClip(clip **IDCompositionRectangleClip) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clip)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateAnimation dispatches through IDCompositionDevice's vtable slot 25.
 func (self *IDCompositionDevice) CreateAnimation(animation **IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CheckDeviceState dispatches through IDCompositionDevice's vtable slot 26.
 func (self *IDCompositionDevice) CheckDeviceState(pfValid *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfValid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionDevice2: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositiondevice2
@@ -487,74 +487,74 @@ var IID_IDCompositionDevice2 = win32.GUID{Data1: 0x75f6468d, Data2: 0x1b8e, Data
 // Commit dispatches through IDCompositionDevice2's vtable slot 3.
 func (self *IDCompositionDevice2) Commit() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WaitForCommitCompletion dispatches through IDCompositionDevice2's vtable slot 4.
 func (self *IDCompositionDevice2) WaitForCommitCompletion() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFrameStatistics dispatches through IDCompositionDevice2's vtable slot 5.
 func (self *IDCompositionDevice2) GetFrameStatistics() (DCOMPOSITION_FRAME_STATISTICS, error) {
 	var _statistics DCOMPOSITION_FRAME_STATISTICS
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_statistics)))
-	return _statistics, win32.HRESULTError(int32(r1))
+	return _statistics, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateVisual dispatches through IDCompositionDevice2's vtable slot 6.
 func (self *IDCompositionDevice2) CreateVisual(visual **IDCompositionVisual2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(visual)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSurfaceFactory dispatches through IDCompositionDevice2's vtable slot 7.
 func (self *IDCompositionDevice2) CreateSurfaceFactory(renderingDevice *systemcom.IUnknown, surfaceFactory **IDCompositionSurfaceFactory) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(renderingDevice)), uintptr(unsafe.Pointer(surfaceFactory)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSurface dispatches through IDCompositionDevice2's vtable slot 8.
 func (self *IDCompositionDevice2) CreateSurface(width uint32, height uint32, pixelFormat graphicsdxgicommon.DXGI_FORMAT, alphaMode graphicsdxgicommon.DXGI_ALPHA_MODE, surface **IDCompositionSurface) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(width), uintptr(height), uintptr(pixelFormat), uintptr(alphaMode), uintptr(unsafe.Pointer(surface)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateVirtualSurface dispatches through IDCompositionDevice2's vtable slot 9.
 func (self *IDCompositionDevice2) CreateVirtualSurface(initialWidth uint32, initialHeight uint32, pixelFormat graphicsdxgicommon.DXGI_FORMAT, alphaMode graphicsdxgicommon.DXGI_ALPHA_MODE, virtualSurface **IDCompositionVirtualSurface) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(initialWidth), uintptr(initialHeight), uintptr(pixelFormat), uintptr(alphaMode), uintptr(unsafe.Pointer(virtualSurface)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateTranslateTransform dispatches through IDCompositionDevice2's vtable slot 10.
 func (self *IDCompositionDevice2) CreateTranslateTransform(translateTransform **IDCompositionTranslateTransform) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(translateTransform)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateScaleTransform dispatches through IDCompositionDevice2's vtable slot 11.
 func (self *IDCompositionDevice2) CreateScaleTransform(scaleTransform **IDCompositionScaleTransform) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(scaleTransform)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateRotateTransform dispatches through IDCompositionDevice2's vtable slot 12.
 func (self *IDCompositionDevice2) CreateRotateTransform(rotateTransform **IDCompositionRotateTransform) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rotateTransform)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSkewTransform dispatches through IDCompositionDevice2's vtable slot 13.
 func (self *IDCompositionDevice2) CreateSkewTransform(skewTransform **IDCompositionSkewTransform) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(skewTransform)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateMatrixTransform dispatches through IDCompositionDevice2's vtable slot 14.
 func (self *IDCompositionDevice2) CreateMatrixTransform(matrixTransform **IDCompositionMatrixTransform) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(matrixTransform)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateTransformGroup dispatches through IDCompositionDevice2's vtable slot 15.
@@ -564,31 +564,31 @@ func (self *IDCompositionDevice2) CreateTransformGroup(transforms []*IDCompositi
 		_transforms = &transforms[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_transforms)), uintptr(len(transforms)), uintptr(unsafe.Pointer(transformGroup)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateTranslateTransform3D dispatches through IDCompositionDevice2's vtable slot 16.
 func (self *IDCompositionDevice2) CreateTranslateTransform3D(translateTransform3D **IDCompositionTranslateTransform3D) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(translateTransform3D)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateScaleTransform3D dispatches through IDCompositionDevice2's vtable slot 17.
 func (self *IDCompositionDevice2) CreateScaleTransform3D(scaleTransform3D **IDCompositionScaleTransform3D) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(scaleTransform3D)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateRotateTransform3D dispatches through IDCompositionDevice2's vtable slot 18.
 func (self *IDCompositionDevice2) CreateRotateTransform3D(rotateTransform3D **IDCompositionRotateTransform3D) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rotateTransform3D)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateMatrixTransform3D dispatches through IDCompositionDevice2's vtable slot 19.
 func (self *IDCompositionDevice2) CreateMatrixTransform3D(matrixTransform3D **IDCompositionMatrixTransform3D) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(matrixTransform3D)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateTransform3DGroup dispatches through IDCompositionDevice2's vtable slot 20.
@@ -598,25 +598,25 @@ func (self *IDCompositionDevice2) CreateTransform3DGroup(transforms3D []*IDCompo
 		_transforms3D = &transforms3D[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_transforms3D)), uintptr(len(transforms3D)), uintptr(unsafe.Pointer(transform3DGroup)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateEffectGroup dispatches through IDCompositionDevice2's vtable slot 21.
 func (self *IDCompositionDevice2) CreateEffectGroup(effectGroup **IDCompositionEffectGroup) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(effectGroup)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateRectangleClip dispatches through IDCompositionDevice2's vtable slot 22.
 func (self *IDCompositionDevice2) CreateRectangleClip(clip **IDCompositionRectangleClip) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clip)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateAnimation dispatches through IDCompositionDevice2's vtable slot 23.
 func (self *IDCompositionDevice2) CreateAnimation(animation **IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionDevice3: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositiondevice3
@@ -631,79 +631,79 @@ var IID_IDCompositionDevice3 = win32.GUID{Data1: 0x0987cb06, Data2: 0xf916, Data
 // CreateGaussianBlurEffect dispatches through IDCompositionDevice3's vtable slot 24.
 func (self *IDCompositionDevice3) CreateGaussianBlurEffect(gaussianBlurEffect **IDCompositionGaussianBlurEffect) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(gaussianBlurEffect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateBrightnessEffect dispatches through IDCompositionDevice3's vtable slot 25.
 func (self *IDCompositionDevice3) CreateBrightnessEffect(brightnessEffect **IDCompositionBrightnessEffect) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(brightnessEffect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateColorMatrixEffect dispatches through IDCompositionDevice3's vtable slot 26.
 func (self *IDCompositionDevice3) CreateColorMatrixEffect(colorMatrixEffect **IDCompositionColorMatrixEffect) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(colorMatrixEffect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateShadowEffect dispatches through IDCompositionDevice3's vtable slot 27.
 func (self *IDCompositionDevice3) CreateShadowEffect(shadowEffect **IDCompositionShadowEffect) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(shadowEffect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateHueRotationEffect dispatches through IDCompositionDevice3's vtable slot 28.
 func (self *IDCompositionDevice3) CreateHueRotationEffect(hueRotationEffect **IDCompositionHueRotationEffect) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hueRotationEffect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSaturationEffect dispatches through IDCompositionDevice3's vtable slot 29.
 func (self *IDCompositionDevice3) CreateSaturationEffect(saturationEffect **IDCompositionSaturationEffect) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(saturationEffect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateTurbulenceEffect dispatches through IDCompositionDevice3's vtable slot 30.
 func (self *IDCompositionDevice3) CreateTurbulenceEffect(turbulenceEffect **IDCompositionTurbulenceEffect) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(turbulenceEffect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateLinearTransferEffect dispatches through IDCompositionDevice3's vtable slot 31.
 func (self *IDCompositionDevice3) CreateLinearTransferEffect(linearTransferEffect **IDCompositionLinearTransferEffect) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(linearTransferEffect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateTableTransferEffect dispatches through IDCompositionDevice3's vtable slot 32.
 func (self *IDCompositionDevice3) CreateTableTransferEffect(tableTransferEffect **IDCompositionTableTransferEffect) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(tableTransferEffect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateCompositeEffect dispatches through IDCompositionDevice3's vtable slot 33.
 func (self *IDCompositionDevice3) CreateCompositeEffect(compositeEffect **IDCompositionCompositeEffect) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(compositeEffect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateBlendEffect dispatches through IDCompositionDevice3's vtable slot 34.
 func (self *IDCompositionDevice3) CreateBlendEffect(blendEffect **IDCompositionBlendEffect) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(blendEffect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateArithmeticCompositeEffect dispatches through IDCompositionDevice3's vtable slot 35.
 func (self *IDCompositionDevice3) CreateArithmeticCompositeEffect(arithmeticCompositeEffect **IDCompositionArithmeticCompositeEffect) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(arithmeticCompositeEffect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateAffineTransform2DEffect dispatches through IDCompositionDevice3's vtable slot 36.
 func (self *IDCompositionDevice3) CreateAffineTransform2DEffect(affineTransform2dEffect **IDCompositionAffineTransform2DEffect) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(affineTransform2dEffect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 85fc5cca-2da6-494c-86b6-4a775c049b8a
@@ -717,13 +717,13 @@ var IID_IDCompositionDevice4 = win32.GUID{Data1: 0x85fc5cca, Data2: 0x2da6, Data
 // CheckCompositionTextureSupport dispatches through IDCompositionDevice4's vtable slot 37.
 func (self *IDCompositionDevice4) CheckCompositionTextureSupport(renderingDevice *systemcom.IUnknown, supportsCompositionTextures *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(renderingDevice)), uintptr(unsafe.Pointer(supportsCompositionTextures)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateCompositionTexture dispatches through IDCompositionDevice4's vtable slot 38.
 func (self *IDCompositionDevice4) CreateCompositionTexture(d3dTexture *systemcom.IUnknown, compositionTexture **IDCompositionTexture) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(d3dTexture)), uintptr(unsafe.Pointer(compositionTexture)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 2c6bebfe-a603-472f-af34-d2443356e61b
@@ -737,7 +737,7 @@ var IID_IDCompositionDevice5 = win32.GUID{Data1: 0x2c6bebfe, Data2: 0xa603, Data
 // CreateDynamicTexture dispatches through IDCompositionDevice5's vtable slot 39.
 func (self *IDCompositionDevice5) CreateDynamicTexture(compositionDynamicTexture **IDCompositionDynamicTexture) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(compositionDynamicTexture)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionDeviceDebug: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositiondevicedebug
@@ -752,13 +752,13 @@ var IID_IDCompositionDeviceDebug = win32.GUID{Data1: 0xa1a3c64a, Data2: 0x224f, 
 // EnableDebugCounters dispatches through IDCompositionDeviceDebug's vtable slot 3.
 func (self *IDCompositionDeviceDebug) EnableDebugCounters() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DisableDebugCounters dispatches through IDCompositionDeviceDebug's vtable slot 4.
 func (self *IDCompositionDeviceDebug) DisableDebugCounters() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: a1de1d3f-6405-447f-8e95-1383a34b0277
@@ -776,13 +776,13 @@ func (self *IDCompositionDynamicTexture) SetTexture(pTexture *IDCompositionTextu
 		_pRects = &pRects[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTexture)), uintptr(unsafe.Pointer(_pRects)), uintptr(len(pRects)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTexture dispatches through IDCompositionDynamicTexture's vtable slot 4.
 func (self *IDCompositionDynamicTexture) SetTexture_(pTexture *IDCompositionTexture) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTexture)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionEffect: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositioneffect
@@ -806,13 +806,13 @@ var IID_IDCompositionEffectGroup = win32.GUID{Data1: 0xa7929a74, Data2: 0xe6b2, 
 // SetOpacity dispatches through IDCompositionEffectGroup's vtable slot 3.
 func (self *IDCompositionEffectGroup) SetOpacity(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTransform3D dispatches through IDCompositionEffectGroup's vtable slot 5.
 func (self *IDCompositionEffectGroup) SetTransform3D(transform3D *IDCompositionTransform3D) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(transform3D)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionFilterEffect: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositionfiltereffect
@@ -827,7 +827,7 @@ var IID_IDCompositionFilterEffect = win32.GUID{Data1: 0x30c421d5, Data2: 0x8cb2,
 // SetInput dispatches through IDCompositionFilterEffect's vtable slot 3.
 func (self *IDCompositionFilterEffect) SetInput(index uint32, input *systemcom.IUnknown, flags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(input)), uintptr(flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionGaussianBlurEffect: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositiongaussianblureffect
@@ -842,13 +842,13 @@ var IID_IDCompositionGaussianBlurEffect = win32.GUID{Data1: 0x45d4d0b7, Data2: 0
 // SetStandardDeviation dispatches through IDCompositionGaussianBlurEffect's vtable slot 4.
 func (self *IDCompositionGaussianBlurEffect) SetStandardDeviation(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBorderMode dispatches through IDCompositionGaussianBlurEffect's vtable slot 6.
 func (self *IDCompositionGaussianBlurEffect) SetBorderMode(mode graphicsdirect2dcommon.D2D1_BORDER_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(mode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionHueRotationEffect: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositionhuerotationeffect
@@ -863,7 +863,7 @@ var IID_IDCompositionHueRotationEffect = win32.GUID{Data1: 0x6db9f920, Data2: 0x
 // SetAngle dispatches through IDCompositionHueRotationEffect's vtable slot 4.
 func (self *IDCompositionHueRotationEffect) SetAngle(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: df0c7cec-cdeb-4d4a-b91c-721bf22f4e6c
@@ -877,13 +877,13 @@ var IID_IDCompositionInkTrailDevice = win32.GUID{Data1: 0xdf0c7cec, Data2: 0xcde
 // CreateDelegatedInkTrail dispatches through IDCompositionInkTrailDevice's vtable slot 3.
 func (self *IDCompositionInkTrailDevice) CreateDelegatedInkTrail(inkTrail **IDCompositionDelegatedInkTrail) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inkTrail)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateDelegatedInkTrailForSwapChain dispatches through IDCompositionInkTrailDevice's vtable slot 4.
 func (self *IDCompositionInkTrailDevice) CreateDelegatedInkTrailForSwapChain(swapChain *systemcom.IUnknown, inkTrail **IDCompositionDelegatedInkTrail) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(swapChain)), uintptr(unsafe.Pointer(inkTrail)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionLinearTransferEffect: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositionlineartransfereffect
@@ -898,84 +898,84 @@ var IID_IDCompositionLinearTransferEffect = win32.GUID{Data1: 0x4305ee5b, Data2:
 // SetRedYIntercept dispatches through IDCompositionLinearTransferEffect's vtable slot 4.
 func (self *IDCompositionLinearTransferEffect) SetRedYIntercept(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetRedSlope dispatches through IDCompositionLinearTransferEffect's vtable slot 6.
 func (self *IDCompositionLinearTransferEffect) SetRedSlope(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetRedDisable dispatches through IDCompositionLinearTransferEffect's vtable slot 8.
 func (self *IDCompositionLinearTransferEffect) SetRedDisable(redDisable bool) error {
 	_redDisable := win32.Bool32(redDisable)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(_redDisable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetGreenYIntercept dispatches through IDCompositionLinearTransferEffect's vtable slot 9.
 func (self *IDCompositionLinearTransferEffect) SetGreenYIntercept(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetGreenSlope dispatches through IDCompositionLinearTransferEffect's vtable slot 11.
 func (self *IDCompositionLinearTransferEffect) SetGreenSlope(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetGreenDisable dispatches through IDCompositionLinearTransferEffect's vtable slot 13.
 func (self *IDCompositionLinearTransferEffect) SetGreenDisable(greenDisable bool) error {
 	_greenDisable := win32.Bool32(greenDisable)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(_greenDisable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBlueYIntercept dispatches through IDCompositionLinearTransferEffect's vtable slot 14.
 func (self *IDCompositionLinearTransferEffect) SetBlueYIntercept(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBlueSlope dispatches through IDCompositionLinearTransferEffect's vtable slot 16.
 func (self *IDCompositionLinearTransferEffect) SetBlueSlope(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBlueDisable dispatches through IDCompositionLinearTransferEffect's vtable slot 18.
 func (self *IDCompositionLinearTransferEffect) SetBlueDisable(blueDisable bool) error {
 	_blueDisable := win32.Bool32(blueDisable)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(_blueDisable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAlphaYIntercept dispatches through IDCompositionLinearTransferEffect's vtable slot 19.
 func (self *IDCompositionLinearTransferEffect) SetAlphaYIntercept(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAlphaSlope dispatches through IDCompositionLinearTransferEffect's vtable slot 21.
 func (self *IDCompositionLinearTransferEffect) SetAlphaSlope(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAlphaDisable dispatches through IDCompositionLinearTransferEffect's vtable slot 23.
 func (self *IDCompositionLinearTransferEffect) SetAlphaDisable(alphaDisable bool) error {
 	_alphaDisable := win32.Bool32(alphaDisable)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(_alphaDisable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetClampOutput dispatches through IDCompositionLinearTransferEffect's vtable slot 24.
 func (self *IDCompositionLinearTransferEffect) SetClampOutput(clampOutput bool) error {
 	_clampOutput := win32.Bool32(clampOutput)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(_clampOutput))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionMatrixTransform: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositionmatrixtransform
@@ -990,13 +990,13 @@ var IID_IDCompositionMatrixTransform = win32.GUID{Data1: 0x16cdff07, Data2: 0xc5
 // SetMatrix dispatches through IDCompositionMatrixTransform's vtable slot 3.
 func (self *IDCompositionMatrixTransform) SetMatrix(matrix *graphicsdirect2dcommon.D2D_MATRIX_3X2_F) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(matrix)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMatrixElement dispatches through IDCompositionMatrixTransform's vtable slot 4.
 func (self *IDCompositionMatrixTransform) SetMatrixElement(row int32, column int32, animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(row), uintptr(column), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionMatrixTransform3D: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositionmatrixtransform3d
@@ -1011,13 +1011,13 @@ var IID_IDCompositionMatrixTransform3D = win32.GUID{Data1: 0x4b3363f0, Data2: 0x
 // SetMatrix dispatches through IDCompositionMatrixTransform3D's vtable slot 3.
 func (self *IDCompositionMatrixTransform3D) SetMatrix(matrix *graphicsdirect3d.D3DMATRIX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(matrix)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMatrixElement dispatches through IDCompositionMatrixTransform3D's vtable slot 4.
 func (self *IDCompositionMatrixTransform3D) SetMatrixElement(row int32, column int32, animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(row), uintptr(column), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionRectangleClip: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositionrectangleclip
@@ -1032,73 +1032,73 @@ var IID_IDCompositionRectangleClip = win32.GUID{Data1: 0x9842ad7d, Data2: 0xd9cf
 // SetLeft dispatches through IDCompositionRectangleClip's vtable slot 3.
 func (self *IDCompositionRectangleClip) SetLeft(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTop dispatches through IDCompositionRectangleClip's vtable slot 5.
 func (self *IDCompositionRectangleClip) SetTop(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetRight dispatches through IDCompositionRectangleClip's vtable slot 7.
 func (self *IDCompositionRectangleClip) SetRight(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBottom dispatches through IDCompositionRectangleClip's vtable slot 9.
 func (self *IDCompositionRectangleClip) SetBottom(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTopLeftRadiusX dispatches through IDCompositionRectangleClip's vtable slot 11.
 func (self *IDCompositionRectangleClip) SetTopLeftRadiusX(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTopLeftRadiusY dispatches through IDCompositionRectangleClip's vtable slot 13.
 func (self *IDCompositionRectangleClip) SetTopLeftRadiusY(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTopRightRadiusX dispatches through IDCompositionRectangleClip's vtable slot 15.
 func (self *IDCompositionRectangleClip) SetTopRightRadiusX(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTopRightRadiusY dispatches through IDCompositionRectangleClip's vtable slot 17.
 func (self *IDCompositionRectangleClip) SetTopRightRadiusY(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBottomLeftRadiusX dispatches through IDCompositionRectangleClip's vtable slot 19.
 func (self *IDCompositionRectangleClip) SetBottomLeftRadiusX(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBottomLeftRadiusY dispatches through IDCompositionRectangleClip's vtable slot 21.
 func (self *IDCompositionRectangleClip) SetBottomLeftRadiusY(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBottomRightRadiusX dispatches through IDCompositionRectangleClip's vtable slot 23.
 func (self *IDCompositionRectangleClip) SetBottomRightRadiusX(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBottomRightRadiusY dispatches through IDCompositionRectangleClip's vtable slot 25.
 func (self *IDCompositionRectangleClip) SetBottomRightRadiusY(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionRotateTransform: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositionrotatetransform
@@ -1113,19 +1113,19 @@ var IID_IDCompositionRotateTransform = win32.GUID{Data1: 0x641ed83c, Data2: 0xae
 // SetAngle dispatches through IDCompositionRotateTransform's vtable slot 3.
 func (self *IDCompositionRotateTransform) SetAngle(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCenterX dispatches through IDCompositionRotateTransform's vtable slot 5.
 func (self *IDCompositionRotateTransform) SetCenterX(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCenterY dispatches through IDCompositionRotateTransform's vtable slot 7.
 func (self *IDCompositionRotateTransform) SetCenterY(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionRotateTransform3D: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositionrotatetransform3d
@@ -1140,43 +1140,43 @@ var IID_IDCompositionRotateTransform3D = win32.GUID{Data1: 0xd8f5b23f, Data2: 0x
 // SetAngle dispatches through IDCompositionRotateTransform3D's vtable slot 3.
 func (self *IDCompositionRotateTransform3D) SetAngle(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAxisX dispatches through IDCompositionRotateTransform3D's vtable slot 5.
 func (self *IDCompositionRotateTransform3D) SetAxisX(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAxisY dispatches through IDCompositionRotateTransform3D's vtable slot 7.
 func (self *IDCompositionRotateTransform3D) SetAxisY(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAxisZ dispatches through IDCompositionRotateTransform3D's vtable slot 9.
 func (self *IDCompositionRotateTransform3D) SetAxisZ(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCenterX dispatches through IDCompositionRotateTransform3D's vtable slot 11.
 func (self *IDCompositionRotateTransform3D) SetCenterX(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCenterY dispatches through IDCompositionRotateTransform3D's vtable slot 13.
 func (self *IDCompositionRotateTransform3D) SetCenterY(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCenterZ dispatches through IDCompositionRotateTransform3D's vtable slot 15.
 func (self *IDCompositionRotateTransform3D) SetCenterZ(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionSaturationEffect: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositionsaturationeffect
@@ -1191,7 +1191,7 @@ var IID_IDCompositionSaturationEffect = win32.GUID{Data1: 0xa08debda, Data2: 0x3
 // SetSaturation dispatches through IDCompositionSaturationEffect's vtable slot 4.
 func (self *IDCompositionSaturationEffect) SetSaturation(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionScaleTransform: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositionscaletransform
@@ -1206,25 +1206,25 @@ var IID_IDCompositionScaleTransform = win32.GUID{Data1: 0x71fde914, Data2: 0x40e
 // SetScaleX dispatches through IDCompositionScaleTransform's vtable slot 3.
 func (self *IDCompositionScaleTransform) SetScaleX(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetScaleY dispatches through IDCompositionScaleTransform's vtable slot 5.
 func (self *IDCompositionScaleTransform) SetScaleY(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCenterX dispatches through IDCompositionScaleTransform's vtable slot 7.
 func (self *IDCompositionScaleTransform) SetCenterX(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCenterY dispatches through IDCompositionScaleTransform's vtable slot 9.
 func (self *IDCompositionScaleTransform) SetCenterY(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionScaleTransform3D: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositionscaletransform3d
@@ -1239,37 +1239,37 @@ var IID_IDCompositionScaleTransform3D = win32.GUID{Data1: 0x2a9e9ead, Data2: 0x3
 // SetScaleX dispatches through IDCompositionScaleTransform3D's vtable slot 3.
 func (self *IDCompositionScaleTransform3D) SetScaleX(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetScaleY dispatches through IDCompositionScaleTransform3D's vtable slot 5.
 func (self *IDCompositionScaleTransform3D) SetScaleY(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetScaleZ dispatches through IDCompositionScaleTransform3D's vtable slot 7.
 func (self *IDCompositionScaleTransform3D) SetScaleZ(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCenterX dispatches through IDCompositionScaleTransform3D's vtable slot 9.
 func (self *IDCompositionScaleTransform3D) SetCenterX(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCenterY dispatches through IDCompositionScaleTransform3D's vtable slot 11.
 func (self *IDCompositionScaleTransform3D) SetCenterY(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCenterZ dispatches through IDCompositionScaleTransform3D's vtable slot 13.
 func (self *IDCompositionScaleTransform3D) SetCenterZ(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionShadowEffect: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositionshadoweffect
@@ -1284,37 +1284,37 @@ var IID_IDCompositionShadowEffect = win32.GUID{Data1: 0x4ad18ac0, Data2: 0xcfd2,
 // SetStandardDeviation dispatches through IDCompositionShadowEffect's vtable slot 4.
 func (self *IDCompositionShadowEffect) SetStandardDeviation(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetColor dispatches through IDCompositionShadowEffect's vtable slot 6.
 func (self *IDCompositionShadowEffect) SetColor(color *graphicsdirect2dcommon.D2D_VECTOR_4F) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(color)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetRed dispatches through IDCompositionShadowEffect's vtable slot 7.
 func (self *IDCompositionShadowEffect) SetRed(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetGreen dispatches through IDCompositionShadowEffect's vtable slot 9.
 func (self *IDCompositionShadowEffect) SetGreen(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBlue dispatches through IDCompositionShadowEffect's vtable slot 11.
 func (self *IDCompositionShadowEffect) SetBlue(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAlpha dispatches through IDCompositionShadowEffect's vtable slot 13.
 func (self *IDCompositionShadowEffect) SetAlpha(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionSkewTransform: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositionskewtransform
@@ -1329,25 +1329,25 @@ var IID_IDCompositionSkewTransform = win32.GUID{Data1: 0xe57aa735, Data2: 0xdcdb
 // SetAngleX dispatches through IDCompositionSkewTransform's vtable slot 3.
 func (self *IDCompositionSkewTransform) SetAngleX(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAngleY dispatches through IDCompositionSkewTransform's vtable slot 5.
 func (self *IDCompositionSkewTransform) SetAngleY(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCenterX dispatches through IDCompositionSkewTransform's vtable slot 7.
 func (self *IDCompositionSkewTransform) SetCenterX(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCenterY dispatches through IDCompositionSkewTransform's vtable slot 9.
 func (self *IDCompositionSkewTransform) SetCenterY(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionSurface: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositionsurface
@@ -1362,31 +1362,31 @@ var IID_IDCompositionSurface = win32.GUID{Data1: 0xbb8a4953, Data2: 0x2c99, Data
 // BeginDraw dispatches through IDCompositionSurface's vtable slot 3.
 func (self *IDCompositionSurface) BeginDraw(updateRect *foundation.RECT, iid *win32.GUID, updateObject **win32.IUnknown, updateOffset *foundation.POINT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(updateRect)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(updateObject)), uintptr(unsafe.Pointer(updateOffset)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndDraw dispatches through IDCompositionSurface's vtable slot 4.
 func (self *IDCompositionSurface) EndDraw() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SuspendDraw dispatches through IDCompositionSurface's vtable slot 5.
 func (self *IDCompositionSurface) SuspendDraw() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ResumeDraw dispatches through IDCompositionSurface's vtable slot 6.
 func (self *IDCompositionSurface) ResumeDraw() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Scroll dispatches through IDCompositionSurface's vtable slot 7.
 func (self *IDCompositionSurface) Scroll(scrollRect *foundation.RECT, clipRect *foundation.RECT, offsetX int32, offsetY int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(scrollRect)), uintptr(unsafe.Pointer(clipRect)), uintptr(offsetX), uintptr(offsetY))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionSurfaceFactory: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositionsurfacefactory
@@ -1401,13 +1401,13 @@ var IID_IDCompositionSurfaceFactory = win32.GUID{Data1: 0xe334bc12, Data2: 0x393
 // CreateSurface dispatches through IDCompositionSurfaceFactory's vtable slot 3.
 func (self *IDCompositionSurfaceFactory) CreateSurface(width uint32, height uint32, pixelFormat graphicsdxgicommon.DXGI_FORMAT, alphaMode graphicsdxgicommon.DXGI_ALPHA_MODE, surface **IDCompositionSurface) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(width), uintptr(height), uintptr(pixelFormat), uintptr(alphaMode), uintptr(unsafe.Pointer(surface)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateVirtualSurface dispatches through IDCompositionSurfaceFactory's vtable slot 4.
 func (self *IDCompositionSurfaceFactory) CreateVirtualSurface(initialWidth uint32, initialHeight uint32, pixelFormat graphicsdxgicommon.DXGI_FORMAT, alphaMode graphicsdxgicommon.DXGI_ALPHA_MODE, virtualSurface **IDCompositionVirtualSurface) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(initialWidth), uintptr(initialHeight), uintptr(pixelFormat), uintptr(alphaMode), uintptr(unsafe.Pointer(virtualSurface)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionTableTransferEffect: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositiontabletransfereffect
@@ -1426,7 +1426,7 @@ func (self *IDCompositionTableTransferEffect) SetRedTable(tableValues []float32)
 		_tableValues = &tableValues[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_tableValues)), uintptr(len(tableValues)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetGreenTable dispatches through IDCompositionTableTransferEffect's vtable slot 5.
@@ -1436,7 +1436,7 @@ func (self *IDCompositionTableTransferEffect) SetGreenTable(tableValues []float3
 		_tableValues = &tableValues[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_tableValues)), uintptr(len(tableValues)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBlueTable dispatches through IDCompositionTableTransferEffect's vtable slot 6.
@@ -1446,7 +1446,7 @@ func (self *IDCompositionTableTransferEffect) SetBlueTable(tableValues []float32
 		_tableValues = &tableValues[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_tableValues)), uintptr(len(tableValues)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAlphaTable dispatches through IDCompositionTableTransferEffect's vtable slot 7.
@@ -1456,66 +1456,66 @@ func (self *IDCompositionTableTransferEffect) SetAlphaTable(tableValues []float3
 		_tableValues = &tableValues[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_tableValues)), uintptr(len(tableValues)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetRedDisable dispatches through IDCompositionTableTransferEffect's vtable slot 8.
 func (self *IDCompositionTableTransferEffect) SetRedDisable(redDisable bool) error {
 	_redDisable := win32.Bool32(redDisable)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(_redDisable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetGreenDisable dispatches through IDCompositionTableTransferEffect's vtable slot 9.
 func (self *IDCompositionTableTransferEffect) SetGreenDisable(greenDisable bool) error {
 	_greenDisable := win32.Bool32(greenDisable)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(_greenDisable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBlueDisable dispatches through IDCompositionTableTransferEffect's vtable slot 10.
 func (self *IDCompositionTableTransferEffect) SetBlueDisable(blueDisable bool) error {
 	_blueDisable := win32.Bool32(blueDisable)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(_blueDisable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAlphaDisable dispatches through IDCompositionTableTransferEffect's vtable slot 11.
 func (self *IDCompositionTableTransferEffect) SetAlphaDisable(alphaDisable bool) error {
 	_alphaDisable := win32.Bool32(alphaDisable)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(_alphaDisable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetClampOutput dispatches through IDCompositionTableTransferEffect's vtable slot 12.
 func (self *IDCompositionTableTransferEffect) SetClampOutput(clampOutput bool) error {
 	_clampOutput := win32.Bool32(clampOutput)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(_clampOutput))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetRedTableValue dispatches through IDCompositionTableTransferEffect's vtable slot 13.
 func (self *IDCompositionTableTransferEffect) SetRedTableValue(index uint32, animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetGreenTableValue dispatches through IDCompositionTableTransferEffect's vtable slot 15.
 func (self *IDCompositionTableTransferEffect) SetGreenTableValue(index uint32, animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBlueTableValue dispatches through IDCompositionTableTransferEffect's vtable slot 17.
 func (self *IDCompositionTableTransferEffect) SetBlueTableValue(index uint32, animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAlphaTableValue dispatches through IDCompositionTableTransferEffect's vtable slot 19.
 func (self *IDCompositionTableTransferEffect) SetAlphaTableValue(index uint32, animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionTarget: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositiontarget
@@ -1530,7 +1530,7 @@ var IID_IDCompositionTarget = win32.GUID{Data1: 0xeacdd04c, Data2: 0x117e, Data3
 // SetRoot dispatches through IDCompositionTarget's vtable slot 3.
 func (self *IDCompositionTarget) SetRoot(visual *IDCompositionVisual) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(visual)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 929bb1aa-725f-433b-abd7-273075a835f2
@@ -1544,25 +1544,25 @@ var IID_IDCompositionTexture = win32.GUID{Data1: 0x929bb1aa, Data2: 0x725f, Data
 // SetSourceRect dispatches through IDCompositionTexture's vtable slot 3.
 func (self *IDCompositionTexture) SetSourceRect(sourceRect *graphicsdirect2dcommon.D2D_RECT_U) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sourceRect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetColorSpace dispatches through IDCompositionTexture's vtable slot 4.
 func (self *IDCompositionTexture) SetColorSpace(colorSpace graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(colorSpace))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAlphaMode dispatches through IDCompositionTexture's vtable slot 5.
 func (self *IDCompositionTexture) SetAlphaMode(alphaMode graphicsdxgicommon.DXGI_ALPHA_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(alphaMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAvailableFence dispatches through IDCompositionTexture's vtable slot 6.
 func (self *IDCompositionTexture) GetAvailableFence(fenceValue *uint64, iid *win32.GUID, availableFence **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fenceValue)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(availableFence)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionTransform: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositiontransform
@@ -1595,13 +1595,13 @@ var IID_IDCompositionTranslateTransform = win32.GUID{Data1: 0x06791122, Data2: 0
 // SetOffsetX dispatches through IDCompositionTranslateTransform's vtable slot 3.
 func (self *IDCompositionTranslateTransform) SetOffsetX(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetOffsetY dispatches through IDCompositionTranslateTransform's vtable slot 5.
 func (self *IDCompositionTranslateTransform) SetOffsetY(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionTranslateTransform3D: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositiontranslatetransform3d
@@ -1616,19 +1616,19 @@ var IID_IDCompositionTranslateTransform3D = win32.GUID{Data1: 0x91636d4b, Data2:
 // SetOffsetX dispatches through IDCompositionTranslateTransform3D's vtable slot 3.
 func (self *IDCompositionTranslateTransform3D) SetOffsetX(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetOffsetY dispatches through IDCompositionTranslateTransform3D's vtable slot 5.
 func (self *IDCompositionTranslateTransform3D) SetOffsetY(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetOffsetZ dispatches through IDCompositionTranslateTransform3D's vtable slot 7.
 func (self *IDCompositionTranslateTransform3D) SetOffsetZ(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionTurbulenceEffect: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositionturbulenceeffect
@@ -1643,44 +1643,44 @@ var IID_IDCompositionTurbulenceEffect = win32.GUID{Data1: 0xa6a55bda, Data2: 0xc
 // SetOffset dispatches through IDCompositionTurbulenceEffect's vtable slot 4.
 func (self *IDCompositionTurbulenceEffect) SetOffset(offset *graphicsdirect2dcommon.D2D_VECTOR_2F) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(offset)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBaseFrequency dispatches through IDCompositionTurbulenceEffect's vtable slot 5.
 func (self *IDCompositionTurbulenceEffect) SetBaseFrequency(frequency *graphicsdirect2dcommon.D2D_VECTOR_2F) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(frequency)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetSize dispatches through IDCompositionTurbulenceEffect's vtable slot 6.
 func (self *IDCompositionTurbulenceEffect) SetSize(size *graphicsdirect2dcommon.D2D_VECTOR_2F) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(size)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetNumOctaves dispatches through IDCompositionTurbulenceEffect's vtable slot 7.
 func (self *IDCompositionTurbulenceEffect) SetNumOctaves(numOctaves uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(numOctaves))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetSeed dispatches through IDCompositionTurbulenceEffect's vtable slot 8.
 func (self *IDCompositionTurbulenceEffect) SetSeed(seed uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(seed))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetNoise dispatches through IDCompositionTurbulenceEffect's vtable slot 9.
 func (self *IDCompositionTurbulenceEffect) SetNoise(noise graphicsdirect2dcommon.D2D1_TURBULENCE_NOISE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(noise))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetStitchable dispatches through IDCompositionTurbulenceEffect's vtable slot 10.
 func (self *IDCompositionTurbulenceEffect) SetStitchable(stitchable bool) error {
 	_stitchable := win32.Bool32(stitchable)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(_stitchable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionVirtualSurface: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositionvirtualsurface
@@ -1695,7 +1695,7 @@ var IID_IDCompositionVirtualSurface = win32.GUID{Data1: 0xae471c51, Data2: 0x5f5
 // Resize dispatches through IDCompositionVirtualSurface's vtable slot 8.
 func (self *IDCompositionVirtualSurface) Resize(width uint32, height uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(width), uintptr(height))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Trim dispatches through IDCompositionVirtualSurface's vtable slot 9.
@@ -1705,7 +1705,7 @@ func (self *IDCompositionVirtualSurface) Trim(rectangles []foundation.RECT) erro
 		_rectangles = &rectangles[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_rectangles)), uintptr(len(rectangles)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionVisual: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositionvisual
@@ -1720,92 +1720,92 @@ var IID_IDCompositionVisual = win32.GUID{Data1: 0x4d93059d, Data2: 0x097b, Data3
 // SetOffsetX dispatches through IDCompositionVisual's vtable slot 3.
 func (self *IDCompositionVisual) SetOffsetX(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetOffsetY dispatches through IDCompositionVisual's vtable slot 5.
 func (self *IDCompositionVisual) SetOffsetY(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTransform dispatches through IDCompositionVisual's vtable slot 7.
 func (self *IDCompositionVisual) SetTransform(transform *IDCompositionTransform) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(transform)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTransform dispatches through IDCompositionVisual's vtable slot 8.
 func (self *IDCompositionVisual) SetTransform_(matrix *graphicsdirect2dcommon.D2D_MATRIX_3X2_F) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(matrix)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTransformParent dispatches through IDCompositionVisual's vtable slot 9.
 func (self *IDCompositionVisual) SetTransformParent(visual *IDCompositionVisual) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(visual)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetEffect dispatches through IDCompositionVisual's vtable slot 10.
 func (self *IDCompositionVisual) SetEffect(effect *IDCompositionEffect) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(effect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBitmapInterpolationMode dispatches through IDCompositionVisual's vtable slot 11.
 func (self *IDCompositionVisual) SetBitmapInterpolationMode(interpolationMode DCOMPOSITION_BITMAP_INTERPOLATION_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(interpolationMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBorderMode dispatches through IDCompositionVisual's vtable slot 12.
 func (self *IDCompositionVisual) SetBorderMode(borderMode DCOMPOSITION_BORDER_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(borderMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetClip dispatches through IDCompositionVisual's vtable slot 13.
 func (self *IDCompositionVisual) SetClip(clip *IDCompositionClip) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clip)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetClip dispatches through IDCompositionVisual's vtable slot 14.
 func (self *IDCompositionVisual) SetClip_(rect *graphicsdirect2dcommon.D2D_RECT_F) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetContent dispatches through IDCompositionVisual's vtable slot 15.
 func (self *IDCompositionVisual) SetContent(content *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(content)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddVisual dispatches through IDCompositionVisual's vtable slot 16.
 func (self *IDCompositionVisual) AddVisual(visual *IDCompositionVisual, insertAbove bool, referenceVisual *IDCompositionVisual) error {
 	_insertAbove := win32.Bool32(insertAbove)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(visual)), uintptr(_insertAbove), uintptr(unsafe.Pointer(referenceVisual)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveVisual dispatches through IDCompositionVisual's vtable slot 17.
 func (self *IDCompositionVisual) RemoveVisual(visual *IDCompositionVisual) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(visual)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAllVisuals dispatches through IDCompositionVisual's vtable slot 18.
 func (self *IDCompositionVisual) RemoveAllVisuals() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCompositeMode dispatches through IDCompositionVisual's vtable slot 19.
 func (self *IDCompositionVisual) SetCompositeMode(compositeMode DCOMPOSITION_COMPOSITE_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(compositeMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionVisual2: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositionvisual2
@@ -1820,13 +1820,13 @@ var IID_IDCompositionVisual2 = win32.GUID{Data1: 0xe8de1639, Data2: 0x4331, Data
 // SetOpacityMode dispatches through IDCompositionVisual2's vtable slot 20.
 func (self *IDCompositionVisual2) SetOpacityMode(mode DCOMPOSITION_OPACITY_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(mode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBackFaceVisibility dispatches through IDCompositionVisual2's vtable slot 21.
 func (self *IDCompositionVisual2) SetBackFaceVisibility(visibility DCOMPOSITION_BACKFACE_VISIBILITY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(visibility))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionVisual3: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositionvisual3
@@ -1841,38 +1841,38 @@ var IID_IDCompositionVisual3 = win32.GUID{Data1: 0x2775f462, Data2: 0xb6c1, Data
 // SetDepthMode dispatches through IDCompositionVisual3's vtable slot 26.
 func (self *IDCompositionVisual3) SetDepthMode(mode DCOMPOSITION_DEPTH_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(mode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetOffsetZ dispatches through IDCompositionVisual3's vtable slot 27.
 func (self *IDCompositionVisual3) SetOffsetZ(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetOpacity dispatches through IDCompositionVisual3's vtable slot 29.
 func (self *IDCompositionVisual3) SetOpacity(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTransform dispatches through IDCompositionVisual3's vtable slot 31.
 func (self *IDCompositionVisual3) SetTransform(transform *IDCompositionTransform3D) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(transform)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTransform dispatches through IDCompositionVisual3's vtable slot 32.
 func (self *IDCompositionVisual3) SetTransform_(matrix *graphicsdirect2dcommon.D2D_MATRIX_4X4_F) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(matrix)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetVisible dispatches through IDCompositionVisual3's vtable slot 33.
 func (self *IDCompositionVisual3) SetVisible(visible bool) error {
 	_visible := win32.Bool32(visible)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(_visible))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDCompositionVisualDebug: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositionvisualdebug
@@ -1887,23 +1887,23 @@ var IID_IDCompositionVisualDebug = win32.GUID{Data1: 0xfed2b808, Data2: 0x5eb4, 
 // EnableHeatMap dispatches through IDCompositionVisualDebug's vtable slot 22.
 func (self *IDCompositionVisualDebug) EnableHeatMap(color *graphicsdirect2dcommon.D2D1_COLOR_F) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(color)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DisableHeatMap dispatches through IDCompositionVisualDebug's vtable slot 23.
 func (self *IDCompositionVisualDebug) DisableHeatMap() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnableRedrawRegions dispatches through IDCompositionVisualDebug's vtable slot 24.
 func (self *IDCompositionVisualDebug) EnableRedrawRegions() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DisableRedrawRegions dispatches through IDCompositionVisualDebug's vtable slot 25.
 func (self *IDCompositionVisualDebug) DisableRedrawRegions() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

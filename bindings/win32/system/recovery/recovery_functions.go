@@ -41,7 +41,7 @@ func ApplicationRecoveryFinished(bSuccess bool) {
 // Minimum OS: windows6.0.6000.
 func ApplicationRecoveryInProgress(pbCancelled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procApplicationRecoveryInProgress.Addr(), uintptr(unsafe.Pointer(pbCancelled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetApplicationRecoveryCallback calls KERNEL32!GetApplicationRecoveryCallback.
@@ -49,7 +49,7 @@ func ApplicationRecoveryInProgress(pbCancelled *foundation.BOOL) error {
 // Minimum OS: windows6.0.6000.
 func GetApplicationRecoveryCallback(hProcess foundation.HANDLE, pRecoveryCallback *systemwindowsprogramming.APPLICATION_RECOVERY_CALLBACK, ppvParameter *unsafe.Pointer, pdwPingInterval *uint32, pdwFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetApplicationRecoveryCallback.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(pRecoveryCallback)), uintptr(unsafe.Pointer(ppvParameter)), uintptr(unsafe.Pointer(pdwPingInterval)), uintptr(unsafe.Pointer(pdwFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetApplicationRestartSettings calls KERNEL32!GetApplicationRestartSettings.
@@ -57,7 +57,7 @@ func GetApplicationRecoveryCallback(hProcess foundation.HANDLE, pRecoveryCallbac
 // Minimum OS: windows6.0.6000.
 func GetApplicationRestartSettings(hProcess foundation.HANDLE, pwzCommandline foundation.PWSTR, pcchSize *uint32, pdwFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetApplicationRestartSettings.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(pwzCommandline)), uintptr(unsafe.Pointer(pcchSize)), uintptr(unsafe.Pointer(pdwFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterApplicationRecoveryCallback calls KERNEL32!RegisterApplicationRecoveryCallback.
@@ -65,7 +65,7 @@ func GetApplicationRestartSettings(hProcess foundation.HANDLE, pwzCommandline fo
 // Minimum OS: windows6.0.6000.
 func RegisterApplicationRecoveryCallback(pRecoveyCallback systemwindowsprogramming.APPLICATION_RECOVERY_CALLBACK, pvParameter unsafe.Pointer, dwPingInterval uint32, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procRegisterApplicationRecoveryCallback.Addr(), uintptr(pRecoveyCallback), uintptr(unsafe.Pointer(pvParameter)), uintptr(dwPingInterval), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterApplicationRestart calls KERNEL32!RegisterApplicationRestart.
@@ -74,7 +74,7 @@ func RegisterApplicationRecoveryCallback(pRecoveyCallback systemwindowsprogrammi
 func RegisterApplicationRestart(pwzCommandline string, dwFlags REGISTER_APPLICATION_RESTART_FLAGS) error {
 	_pwzCommandline := win32.UTF16Ptr(pwzCommandline)
 	r1, _, _ := syscall.SyscallN(procRegisterApplicationRestart.Addr(), uintptr(unsafe.Pointer(_pwzCommandline)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnregisterApplicationRecoveryCallback calls KERNEL32!UnregisterApplicationRecoveryCallback.
@@ -82,7 +82,7 @@ func RegisterApplicationRestart(pwzCommandline string, dwFlags REGISTER_APPLICAT
 // Minimum OS: windows6.0.6000.
 func UnregisterApplicationRecoveryCallback() error {
 	r1, _, _ := syscall.SyscallN(procUnregisterApplicationRecoveryCallback.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnregisterApplicationRestart calls KERNEL32!UnregisterApplicationRestart.
@@ -90,5 +90,5 @@ func UnregisterApplicationRecoveryCallback() error {
 // Minimum OS: windows6.0.6000.
 func UnregisterApplicationRestart() error {
 	r1, _, _ := syscall.SyscallN(procUnregisterApplicationRestart.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

@@ -24,13 +24,13 @@ var IID_IObjectArray = win32.GUID{Data1: 0x92ca9dcd, Data2: 0x5622, Data3: 0x4bb
 // GetCount dispatches through IObjectArray's vtable slot 3.
 func (self *IObjectArray) GetCount(pcObjects *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcObjects)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAt dispatches through IObjectArray's vtable slot 4.
 func (self *IObjectArray) GetAt(uiIndex uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(uiIndex), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IObjectCollection: https://learn.microsoft.com/windows/win32/api/objectarray/nn-objectarray-iobjectcollection
@@ -45,23 +45,23 @@ var IID_IObjectCollection = win32.GUID{Data1: 0x5632b1a4, Data2: 0xe38a, Data3: 
 // AddObject dispatches through IObjectCollection's vtable slot 5.
 func (self *IObjectCollection) AddObject(punk *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(punk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddFromArray dispatches through IObjectCollection's vtable slot 6.
 func (self *IObjectCollection) AddFromArray(poaSource *IObjectArray) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(poaSource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveObjectAt dispatches through IObjectCollection's vtable slot 7.
 func (self *IObjectCollection) RemoveObjectAt(uiIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(uiIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through IObjectCollection's vtable slot 8.
 func (self *IObjectCollection) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

@@ -25,7 +25,7 @@ var IID_IRadialControllerConfigurationInterop = win32.GUID{Data1: 0x787cdaac, Da
 // GetForWindow dispatches through IRadialControllerConfigurationInterop's vtable slot 6.
 func (self *IRadialControllerConfigurationInterop) GetForWindow(hwnd foundation.HWND, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 3d577eff-4cee-11e6-b535-001bdc06ab3b
@@ -39,7 +39,7 @@ var IID_IRadialControllerIndependentInputSourceInterop = win32.GUID{Data1: 0x3d5
 // CreateForWindow dispatches through IRadialControllerIndependentInputSourceInterop's vtable slot 6.
 func (self *IRadialControllerIndependentInputSourceInterop) CreateForWindow(hwnd foundation.HWND, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IRadialControllerInterop: https://learn.microsoft.com/windows/win32/api/radialcontrollerinterop/nn-radialcontrollerinterop-iradialcontrollerinterop
@@ -54,5 +54,5 @@ var IID_IRadialControllerInterop = win32.GUID{Data1: 0x1b0535c9, Data2: 0x57ad, 
 // CreateForWindow dispatches through IRadialControllerInterop's vtable slot 6.
 func (self *IRadialControllerInterop) CreateForWindow(hwnd foundation.HWND, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

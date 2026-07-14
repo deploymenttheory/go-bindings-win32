@@ -25,7 +25,7 @@ var IID_IAudioFrameNative = win32.GUID{Data1: 0x20be1e2e, Data2: 0x930f, Data3: 
 // GetData dispatches through IAudioFrameNative's vtable slot 6.
 func (self *IAudioFrameNative) GetData(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioFrameNativeFactory: https://learn.microsoft.com/windows/win32/api/windows.media.core.interop/nn-windows-media-core-interop-iaudioframenativefactory
@@ -41,7 +41,7 @@ var IID_IAudioFrameNativeFactory = win32.GUID{Data1: 0x7bd67cf8, Data2: 0xbf7d, 
 func (self *IAudioFrameNativeFactory) CreateFromMFSample(data *mediamediafoundation.IMFSample, forceReadOnly bool, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_forceReadOnly := win32.Bool32(forceReadOnly)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(data)), uintptr(_forceReadOnly), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVideoFrameNative: https://learn.microsoft.com/windows/win32/api/windows.media.core.interop/nn-windows-media-core-interop-ivideoframenative
@@ -56,13 +56,13 @@ var IID_IVideoFrameNative = win32.GUID{Data1: 0x26ba702b, Data2: 0x314a, Data3: 
 // GetData dispatches through IVideoFrameNative's vtable slot 6.
 func (self *IVideoFrameNative) GetData(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDevice dispatches through IVideoFrameNative's vtable slot 7.
 func (self *IVideoFrameNative) GetDevice(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVideoFrameNativeFactory: https://learn.microsoft.com/windows/win32/api/windows.media.core.interop/nn-windows-media-core-interop-ivideoframenativefactory
@@ -78,5 +78,5 @@ var IID_IVideoFrameNativeFactory = win32.GUID{Data1: 0x69e3693e, Data2: 0x8e1e, 
 func (self *IVideoFrameNativeFactory) CreateFromMFSample(data *mediamediafoundation.IMFSample, subtype *win32.GUID, width uint32, height uint32, forceReadOnly bool, minDisplayAperture *mediamediafoundation.MFVideoArea, device *mediamediafoundation.IMFDXGIDeviceManager, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_forceReadOnly := win32.Bool32(forceReadOnly)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(data)), uintptr(unsafe.Pointer(subtype)), uintptr(width), uintptr(height), uintptr(_forceReadOnly), uintptr(unsafe.Pointer(minDisplayAperture)), uintptr(unsafe.Pointer(device)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

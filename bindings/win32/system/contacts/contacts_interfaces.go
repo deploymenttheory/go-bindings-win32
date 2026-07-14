@@ -25,19 +25,19 @@ var IID_IContact = win32.GUID{Data1: 0xf941b671, Data2: 0xbda7, Data3: 0x4f77, D
 // GetContactID dispatches through IContact's vtable slot 3.
 func (self *IContact) GetContactID(pszContactID foundation.PWSTR, cchContactID uint32, pdwcchContactIDRequired *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszContactID)), uintptr(cchContactID), uintptr(unsafe.Pointer(pdwcchContactIDRequired)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPath dispatches through IContact's vtable slot 4.
 func (self *IContact) GetPath(pszPath foundation.PWSTR, cchPath uint32, pdwcchPathRequired *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszPath)), uintptr(cchPath), uintptr(unsafe.Pointer(pdwcchPathRequired)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CommitChanges dispatches through IContact's vtable slot 5.
 func (self *IContact) CommitChanges(dwCommitFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwCommitFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 7ed1c814-cd30-43c8-9b8d-2e489e53d54b
@@ -51,60 +51,60 @@ var IID_IContactAggregationAggregate = win32.GUID{Data1: 0x7ed1c814, Data2: 0xcd
 // Save dispatches through IContactAggregationAggregate's vtable slot 3.
 func (self *IContactAggregationAggregate) Save() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetComponentItems dispatches through IContactAggregationAggregate's vtable slot 4.
 func (self *IContactAggregationAggregate) GetComponentItems(pComponentItems **IContactAggregationContactCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pComponentItems)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Link dispatches through IContactAggregationAggregate's vtable slot 5.
 func (self *IContactAggregationAggregate) Link(pAggregateId string) error {
 	_pAggregateId := win32.UTF16Ptr(pAggregateId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pAggregateId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Groups dispatches through IContactAggregationAggregate's vtable slot 6.
 func (self *IContactAggregationAggregate) Get_Groups(options CONTACT_AGGREGATION_COLLECTION_OPTIONS, ppGroups **IContactAggregationGroupCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(options), uintptr(unsafe.Pointer(ppGroups)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AntiLink dispatches through IContactAggregationAggregate's vtable slot 7.
 func (self *IContactAggregationAggregate) Get_AntiLink() (foundation.PWSTR, error) {
 	var _ppAntiLink foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppAntiLink)))
-	return _ppAntiLink, win32.HRESULTError(int32(r1))
+	return _ppAntiLink, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AntiLink dispatches through IContactAggregationAggregate's vtable slot 8.
 func (self *IContactAggregationAggregate) Put_AntiLink(pAntiLink string) error {
 	_pAntiLink := win32.UTF16Ptr(pAntiLink)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pAntiLink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FavoriteOrder dispatches through IContactAggregationAggregate's vtable slot 9.
 func (self *IContactAggregationAggregate) Get_FavoriteOrder() (uint32, error) {
 	var _pFavoriteOrder uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pFavoriteOrder)))
-	return _pFavoriteOrder, win32.HRESULTError(int32(r1))
+	return _pFavoriteOrder, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FavoriteOrder dispatches through IContactAggregationAggregate's vtable slot 10.
 func (self *IContactAggregationAggregate) Put_FavoriteOrder(favoriteOrder uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(favoriteOrder))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Id dispatches through IContactAggregationAggregate's vtable slot 11.
 func (self *IContactAggregationAggregate) Get_Id() (foundation.PWSTR, error) {
 	var _ppItemId foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppItemId)))
-	return _ppItemId, win32.HRESULTError(int32(r1))
+	return _ppItemId, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 2359f3a6-3a68-40af-98db-0f9eb143c3bb
@@ -119,7 +119,7 @@ var IID_IContactAggregationAggregateCollection = win32.GUID{Data1: 0x2359f3a6, D
 func (self *IContactAggregationAggregateCollection) FindFirst() (*IContactAggregationAggregate, error) {
 	var _ppAggregate *IContactAggregationAggregate
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppAggregate)))
-	return _ppAggregate, win32.HRESULTError(int32(r1))
+	return _ppAggregate, win32.ErrIfFailed(int32(r1))
 }
 
 // FindFirstByAntiLinkId dispatches through IContactAggregationAggregateCollection's vtable slot 4.
@@ -127,21 +127,21 @@ func (self *IContactAggregationAggregateCollection) FindFirstByAntiLinkId(pAntiL
 	_pAntiLinkId := win32.UTF16Ptr(pAntiLinkId)
 	var _ppAggregate *IContactAggregationAggregate
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pAntiLinkId)), uintptr(unsafe.Pointer(&_ppAggregate)))
-	return _ppAggregate, win32.HRESULTError(int32(r1))
+	return _ppAggregate, win32.ErrIfFailed(int32(r1))
 }
 
 // FindNext dispatches through IContactAggregationAggregateCollection's vtable slot 5.
 func (self *IContactAggregationAggregateCollection) FindNext() (*IContactAggregationAggregate, error) {
 	var _ppAggregate *IContactAggregationAggregate
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppAggregate)))
-	return _ppAggregate, win32.HRESULTError(int32(r1))
+	return _ppAggregate, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IContactAggregationAggregateCollection's vtable slot 6.
 func (self *IContactAggregationAggregateCollection) Get_Count() (int32, error) {
 	var _pCount int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pCount)))
-	return _pCount, win32.HRESULTError(int32(r1))
+	return _pCount, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 1eb22e86-4c86-41f0-9f9f-c251e9fda6c3
@@ -155,120 +155,120 @@ var IID_IContactAggregationContact = win32.GUID{Data1: 0x1eb22e86, Data2: 0x4c86
 // Delete dispatches through IContactAggregationContact's vtable slot 3.
 func (self *IContactAggregationContact) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Save dispatches through IContactAggregationContact's vtable slot 4.
 func (self *IContactAggregationContact) Save() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MoveToAggregate dispatches through IContactAggregationContact's vtable slot 5.
 func (self *IContactAggregationContact) MoveToAggregate(pAggregateId string) error {
 	_pAggregateId := win32.UTF16Ptr(pAggregateId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pAggregateId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Unlink dispatches through IContactAggregationContact's vtable slot 6.
 func (self *IContactAggregationContact) Unlink() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AccountId dispatches through IContactAggregationContact's vtable slot 7.
 func (self *IContactAggregationContact) Get_AccountId() (foundation.PWSTR, error) {
 	var _ppAccountId foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppAccountId)))
-	return _ppAccountId, win32.HRESULTError(int32(r1))
+	return _ppAccountId, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AccountId dispatches through IContactAggregationContact's vtable slot 8.
 func (self *IContactAggregationContact) Put_AccountId(pAccountId string) error {
 	_pAccountId := win32.UTF16Ptr(pAccountId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pAccountId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AggregateId dispatches through IContactAggregationContact's vtable slot 9.
 func (self *IContactAggregationContact) Get_AggregateId(ppAggregateId *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAggregateId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Id dispatches through IContactAggregationContact's vtable slot 10.
 func (self *IContactAggregationContact) Get_Id() (foundation.PWSTR, error) {
 	var _ppItemId foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppItemId)))
-	return _ppItemId, win32.HRESULTError(int32(r1))
+	return _ppItemId, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsMe dispatches through IContactAggregationContact's vtable slot 11.
 func (self *IContactAggregationContact) Get_IsMe() (foundation.BOOL, error) {
 	var _pIsMe foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pIsMe)))
-	return _pIsMe, win32.HRESULTError(int32(r1))
+	return _pIsMe, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsExternal dispatches through IContactAggregationContact's vtable slot 12.
 func (self *IContactAggregationContact) Get_IsExternal() (foundation.BOOL, error) {
 	var _pIsExternal foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pIsExternal)))
-	return _pIsExternal, win32.HRESULTError(int32(r1))
+	return _pIsExternal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NetworkSourceId dispatches through IContactAggregationContact's vtable slot 13.
 func (self *IContactAggregationContact) Get_NetworkSourceId() (uint32, error) {
 	var _pNetworkSourceId uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pNetworkSourceId)))
-	return _pNetworkSourceId, win32.HRESULTError(int32(r1))
+	return _pNetworkSourceId, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_NetworkSourceId dispatches through IContactAggregationContact's vtable slot 14.
 func (self *IContactAggregationContact) Put_NetworkSourceId(networkSourceId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(networkSourceId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NetworkSourceIdString dispatches through IContactAggregationContact's vtable slot 15.
 func (self *IContactAggregationContact) Get_NetworkSourceIdString() (foundation.PWSTR, error) {
 	var _ppNetworkSourceId foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppNetworkSourceId)))
-	return _ppNetworkSourceId, win32.HRESULTError(int32(r1))
+	return _ppNetworkSourceId, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_NetworkSourceIdString dispatches through IContactAggregationContact's vtable slot 16.
 func (self *IContactAggregationContact) Put_NetworkSourceIdString(pNetworkSourceId string) error {
 	_pNetworkSourceId := win32.UTF16Ptr(pNetworkSourceId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pNetworkSourceId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RemoteObjectId dispatches through IContactAggregationContact's vtable slot 17.
 func (self *IContactAggregationContact) Get_RemoteObjectId() (*CONTACT_AGGREGATION_BLOB, error) {
 	var _ppRemoteObjectId *CONTACT_AGGREGATION_BLOB
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppRemoteObjectId)))
-	return _ppRemoteObjectId, win32.HRESULTError(int32(r1))
+	return _ppRemoteObjectId, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RemoteObjectId dispatches through IContactAggregationContact's vtable slot 18.
 func (self *IContactAggregationContact) Put_RemoteObjectId(pRemoteObjectId *CONTACT_AGGREGATION_BLOB) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRemoteObjectId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SyncIdentityHash dispatches through IContactAggregationContact's vtable slot 19.
 func (self *IContactAggregationContact) Get_SyncIdentityHash() (*CONTACT_AGGREGATION_BLOB, error) {
 	var _ppSyncIdentityHash *CONTACT_AGGREGATION_BLOB
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppSyncIdentityHash)))
-	return _ppSyncIdentityHash, win32.HRESULTError(int32(r1))
+	return _ppSyncIdentityHash, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SyncIdentityHash dispatches through IContactAggregationContact's vtable slot 20.
 func (self *IContactAggregationContact) Put_SyncIdentityHash(pSyncIdentityHash *CONTACT_AGGREGATION_BLOB) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSyncIdentityHash)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 826e66fa-81de-43ca-a6fb-8c785cd996c6
@@ -283,14 +283,14 @@ var IID_IContactAggregationContactCollection = win32.GUID{Data1: 0x826e66fa, Dat
 func (self *IContactAggregationContactCollection) FindFirst() (*IContactAggregationContact, error) {
 	var _ppItem *IContactAggregationContact
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppItem)))
-	return _ppItem, win32.HRESULTError(int32(r1))
+	return _ppItem, win32.ErrIfFailed(int32(r1))
 }
 
 // FindNext dispatches through IContactAggregationContactCollection's vtable slot 4.
 func (self *IContactAggregationContactCollection) FindNext() (*IContactAggregationContact, error) {
 	var _ppItem *IContactAggregationContact
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppItem)))
-	return _ppItem, win32.HRESULTError(int32(r1))
+	return _ppItem, win32.ErrIfFailed(int32(r1))
 }
 
 // FindFirstByIdentityHash dispatches through IContactAggregationContactCollection's vtable slot 5.
@@ -299,14 +299,14 @@ func (self *IContactAggregationContactCollection) FindFirstByIdentityHash(pSourc
 	_pAccountId := win32.UTF16Ptr(pAccountId)
 	var _ppItem *IContactAggregationContact
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pSourceType)), uintptr(unsafe.Pointer(_pAccountId)), uintptr(unsafe.Pointer(pIdentityHash)), uintptr(unsafe.Pointer(&_ppItem)))
-	return _ppItem, win32.HRESULTError(int32(r1))
+	return _ppItem, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IContactAggregationContactCollection's vtable slot 6.
 func (self *IContactAggregationContactCollection) Get_Count() (int32, error) {
 	var _pCount int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pCount)))
-	return _pCount, win32.HRESULTError(int32(r1))
+	return _pCount, win32.ErrIfFailed(int32(r1))
 }
 
 // FindFirstByRemoteId dispatches through IContactAggregationContactCollection's vtable slot 7.
@@ -315,7 +315,7 @@ func (self *IContactAggregationContactCollection) FindFirstByRemoteId(pSourceTyp
 	_pAccountId := win32.UTF16Ptr(pAccountId)
 	var _ppItem *IContactAggregationContact
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pSourceType)), uintptr(unsafe.Pointer(_pAccountId)), uintptr(unsafe.Pointer(pRemoteObjectId)), uintptr(unsafe.Pointer(&_ppItem)))
-	return _ppItem, win32.HRESULTError(int32(r1))
+	return _ppItem, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: c93c545f-1284-499b-96af-07372af473e0
@@ -329,68 +329,68 @@ var IID_IContactAggregationGroup = win32.GUID{Data1: 0xc93c545f, Data2: 0x1284, 
 // Delete dispatches through IContactAggregationGroup's vtable slot 3.
 func (self *IContactAggregationGroup) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Save dispatches through IContactAggregationGroup's vtable slot 4.
 func (self *IContactAggregationGroup) Save() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through IContactAggregationGroup's vtable slot 5.
 func (self *IContactAggregationGroup) Add(pAggregateId string) error {
 	_pAggregateId := win32.UTF16Ptr(pAggregateId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pAggregateId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through IContactAggregationGroup's vtable slot 6.
 func (self *IContactAggregationGroup) Remove(pAggregateId string) error {
 	_pAggregateId := win32.UTF16Ptr(pAggregateId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pAggregateId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Members dispatches through IContactAggregationGroup's vtable slot 7.
 func (self *IContactAggregationGroup) Get_Members() (*IContactAggregationAggregateCollection, error) {
 	var _ppAggregateContactCollection *IContactAggregationAggregateCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppAggregateContactCollection)))
-	return _ppAggregateContactCollection, win32.HRESULTError(int32(r1))
+	return _ppAggregateContactCollection, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_GlobalObjectId dispatches through IContactAggregationGroup's vtable slot 8.
 func (self *IContactAggregationGroup) Get_GlobalObjectId() (win32.GUID, error) {
 	var _pGlobalObjectId win32.GUID
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pGlobalObjectId)))
-	return _pGlobalObjectId, win32.HRESULTError(int32(r1))
+	return _pGlobalObjectId, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_GlobalObjectId dispatches through IContactAggregationGroup's vtable slot 9.
 func (self *IContactAggregationGroup) Put_GlobalObjectId(pGlobalObjectId *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGlobalObjectId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Id dispatches through IContactAggregationGroup's vtable slot 10.
 func (self *IContactAggregationGroup) Get_Id() (foundation.PWSTR, error) {
 	var _ppItemId foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppItemId)))
-	return _ppItemId, win32.HRESULTError(int32(r1))
+	return _ppItemId, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through IContactAggregationGroup's vtable slot 11.
 func (self *IContactAggregationGroup) Get_Name() (foundation.PWSTR, error) {
 	var _ppName foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppName)))
-	return _ppName, win32.HRESULTError(int32(r1))
+	return _ppName, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Name dispatches through IContactAggregationGroup's vtable slot 12.
 func (self *IContactAggregationGroup) Put_Name(pName string) error {
 	_pName := win32.UTF16Ptr(pName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 20a19a9c-d2f3-4b83-9143-beffd2cc226d
@@ -405,28 +405,28 @@ var IID_IContactAggregationGroupCollection = win32.GUID{Data1: 0x20a19a9c, Data2
 func (self *IContactAggregationGroupCollection) FindFirst() (*IContactAggregationGroup, error) {
 	var _ppGroup *IContactAggregationGroup
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppGroup)))
-	return _ppGroup, win32.HRESULTError(int32(r1))
+	return _ppGroup, win32.ErrIfFailed(int32(r1))
 }
 
 // FindFirstByGlobalObjectId dispatches through IContactAggregationGroupCollection's vtable slot 4.
 func (self *IContactAggregationGroupCollection) FindFirstByGlobalObjectId(pGlobalObjectId *win32.GUID) (*IContactAggregationGroup, error) {
 	var _ppGroup *IContactAggregationGroup
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGlobalObjectId)), uintptr(unsafe.Pointer(&_ppGroup)))
-	return _ppGroup, win32.HRESULTError(int32(r1))
+	return _ppGroup, win32.ErrIfFailed(int32(r1))
 }
 
 // FindNext dispatches through IContactAggregationGroupCollection's vtable slot 5.
 func (self *IContactAggregationGroupCollection) FindNext() (*IContactAggregationGroup, error) {
 	var _ppGroup *IContactAggregationGroup
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppGroup)))
-	return _ppGroup, win32.HRESULTError(int32(r1))
+	return _ppGroup, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IContactAggregationGroupCollection's vtable slot 6.
 func (self *IContactAggregationGroupCollection) Get_Count() (uint32, error) {
 	var _pCount uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pCount)))
-	return _pCount, win32.HRESULTError(int32(r1))
+	return _pCount, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: b6813323-a183-4654-8627-79b30de3a0ec
@@ -440,116 +440,116 @@ var IID_IContactAggregationLink = win32.GUID{Data1: 0xb6813323, Data2: 0xa183, D
 // Delete dispatches through IContactAggregationLink's vtable slot 3.
 func (self *IContactAggregationLink) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Save dispatches through IContactAggregationLink's vtable slot 4.
 func (self *IContactAggregationLink) Save() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AccountId dispatches through IContactAggregationLink's vtable slot 5.
 func (self *IContactAggregationLink) Get_AccountId() (foundation.PWSTR, error) {
 	var _ppAccountId foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppAccountId)))
-	return _ppAccountId, win32.HRESULTError(int32(r1))
+	return _ppAccountId, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AccountId dispatches through IContactAggregationLink's vtable slot 6.
 func (self *IContactAggregationLink) Put_AccountId(pAccountId string) error {
 	_pAccountId := win32.UTF16Ptr(pAccountId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pAccountId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Id dispatches through IContactAggregationLink's vtable slot 7.
 func (self *IContactAggregationLink) Get_Id() (foundation.PWSTR, error) {
 	var _ppItemId foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppItemId)))
-	return _ppItemId, win32.HRESULTError(int32(r1))
+	return _ppItemId, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsLinkResolved dispatches through IContactAggregationLink's vtable slot 8.
 func (self *IContactAggregationLink) Get_IsLinkResolved() (foundation.BOOL, error) {
 	var _pIsLinkResolved foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pIsLinkResolved)))
-	return _pIsLinkResolved, win32.HRESULTError(int32(r1))
+	return _pIsLinkResolved, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_IsLinkResolved dispatches through IContactAggregationLink's vtable slot 9.
 func (self *IContactAggregationLink) Put_IsLinkResolved(isLinkResolved bool) error {
 	_isLinkResolved := win32.Bool32(isLinkResolved)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(_isLinkResolved))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NetworkSourceIdString dispatches through IContactAggregationLink's vtable slot 10.
 func (self *IContactAggregationLink) Get_NetworkSourceIdString() (foundation.PWSTR, error) {
 	var _ppNetworkSourceId foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppNetworkSourceId)))
-	return _ppNetworkSourceId, win32.HRESULTError(int32(r1))
+	return _ppNetworkSourceId, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_NetworkSourceIdString dispatches through IContactAggregationLink's vtable slot 11.
 func (self *IContactAggregationLink) Put_NetworkSourceIdString(pNetworkSourceId string) error {
 	_pNetworkSourceId := win32.UTF16Ptr(pNetworkSourceId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pNetworkSourceId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RemoteObjectId dispatches through IContactAggregationLink's vtable slot 12.
 func (self *IContactAggregationLink) Get_RemoteObjectId() (*CONTACT_AGGREGATION_BLOB, error) {
 	var _ppRemoteObjectId *CONTACT_AGGREGATION_BLOB
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppRemoteObjectId)))
-	return _ppRemoteObjectId, win32.HRESULTError(int32(r1))
+	return _ppRemoteObjectId, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RemoteObjectId dispatches through IContactAggregationLink's vtable slot 13.
 func (self *IContactAggregationLink) Put_RemoteObjectId(pRemoteObjectId *CONTACT_AGGREGATION_BLOB) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRemoteObjectId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ServerPerson dispatches through IContactAggregationLink's vtable slot 14.
 func (self *IContactAggregationLink) Get_ServerPerson() (foundation.PWSTR, error) {
 	var _ppServerPersonId foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppServerPersonId)))
-	return _ppServerPersonId, win32.HRESULTError(int32(r1))
+	return _ppServerPersonId, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ServerPerson dispatches through IContactAggregationLink's vtable slot 15.
 func (self *IContactAggregationLink) Put_ServerPerson(pServerPersonId string) error {
 	_pServerPersonId := win32.UTF16Ptr(pServerPersonId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pServerPersonId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ServerPersonBaseline dispatches through IContactAggregationLink's vtable slot 16.
 func (self *IContactAggregationLink) Get_ServerPersonBaseline() (foundation.PWSTR, error) {
 	var _ppServerPersonId foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppServerPersonId)))
-	return _ppServerPersonId, win32.HRESULTError(int32(r1))
+	return _ppServerPersonId, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ServerPersonBaseline dispatches through IContactAggregationLink's vtable slot 17.
 func (self *IContactAggregationLink) Put_ServerPersonBaseline(pServerPersonId string) error {
 	_pServerPersonId := win32.UTF16Ptr(pServerPersonId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pServerPersonId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SyncIdentityHash dispatches through IContactAggregationLink's vtable slot 18.
 func (self *IContactAggregationLink) Get_SyncIdentityHash() (*CONTACT_AGGREGATION_BLOB, error) {
 	var _ppSyncIdentityHash *CONTACT_AGGREGATION_BLOB
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppSyncIdentityHash)))
-	return _ppSyncIdentityHash, win32.HRESULTError(int32(r1))
+	return _ppSyncIdentityHash, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SyncIdentityHash dispatches through IContactAggregationLink's vtable slot 19.
 func (self *IContactAggregationLink) Put_SyncIdentityHash(pSyncIdentityHash *CONTACT_AGGREGATION_BLOB) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSyncIdentityHash)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f8bc0e93-fb55-4f28-b9fa-b1c274153292
@@ -564,7 +564,7 @@ var IID_IContactAggregationLinkCollection = win32.GUID{Data1: 0xf8bc0e93, Data2:
 func (self *IContactAggregationLinkCollection) FindFirst() (*IContactAggregationLink, error) {
 	var _ppServerContactLink *IContactAggregationLink
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppServerContactLink)))
-	return _ppServerContactLink, win32.HRESULTError(int32(r1))
+	return _ppServerContactLink, win32.ErrIfFailed(int32(r1))
 }
 
 // FindFirstByRemoteId dispatches through IContactAggregationLinkCollection's vtable slot 4.
@@ -573,21 +573,21 @@ func (self *IContactAggregationLinkCollection) FindFirstByRemoteId(pSourceType s
 	_pAccountId := win32.UTF16Ptr(pAccountId)
 	var _ppServerContactLink *IContactAggregationLink
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pSourceType)), uintptr(unsafe.Pointer(_pAccountId)), uintptr(unsafe.Pointer(pRemoteId)), uintptr(unsafe.Pointer(&_ppServerContactLink)))
-	return _ppServerContactLink, win32.HRESULTError(int32(r1))
+	return _ppServerContactLink, win32.ErrIfFailed(int32(r1))
 }
 
 // FindNext dispatches through IContactAggregationLinkCollection's vtable slot 5.
 func (self *IContactAggregationLinkCollection) FindNext() (*IContactAggregationLink, error) {
 	var _ppServerContactLink *IContactAggregationLink
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppServerContactLink)))
-	return _ppServerContactLink, win32.HRESULTError(int32(r1))
+	return _ppServerContactLink, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IContactAggregationLinkCollection's vtable slot 6.
 func (self *IContactAggregationLinkCollection) Get_Count() (uint32, error) {
 	var _pCount uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pCount)))
-	return _pCount, win32.HRESULTError(int32(r1))
+	return _pCount, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 1d865989-4b1f-4b60-8f34-c2ad468b2b50
@@ -601,7 +601,7 @@ var IID_IContactAggregationManager = win32.GUID{Data1: 0x1d865989, Data2: 0x4b1f
 // GetVersionInfo dispatches through IContactAggregationManager's vtable slot 3.
 func (self *IContactAggregationManager) GetVersionInfo(plMajorVersion *int32, plMinorVersion *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMajorVersion)), uintptr(unsafe.Pointer(plMinorVersion)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateOrOpenGroup dispatches through IContactAggregationManager's vtable slot 4.
@@ -609,92 +609,92 @@ func (self *IContactAggregationManager) CreateOrOpenGroup(pGroupName string, opt
 	_pGroupName := win32.UTF16Ptr(pGroupName)
 	var _ppGroup *IContactAggregationGroup
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pGroupName)), uintptr(options), uintptr(unsafe.Pointer(pCreatedGroup)), uintptr(unsafe.Pointer(&_ppGroup)))
-	return _ppGroup, win32.HRESULTError(int32(r1))
+	return _ppGroup, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateExternalContact dispatches through IContactAggregationManager's vtable slot 5.
 func (self *IContactAggregationManager) CreateExternalContact() (*IContactAggregationContact, error) {
 	var _ppItem *IContactAggregationContact
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppItem)))
-	return _ppItem, win32.HRESULTError(int32(r1))
+	return _ppItem, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateServerPerson dispatches through IContactAggregationManager's vtable slot 6.
 func (self *IContactAggregationManager) CreateServerPerson(ppServerPerson **IContactAggregationServerPerson) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppServerPerson)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateServerContactLink dispatches through IContactAggregationManager's vtable slot 7.
 func (self *IContactAggregationManager) CreateServerContactLink(ppServerContactLink **IContactAggregationLink) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppServerContactLink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Flush dispatches through IContactAggregationManager's vtable slot 8.
 func (self *IContactAggregationManager) Flush() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenAggregateContact dispatches through IContactAggregationManager's vtable slot 9.
 func (self *IContactAggregationManager) OpenAggregateContact(pItemId string, ppItem **IContactAggregationAggregate) error {
 	_pItemId := win32.UTF16Ptr(pItemId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pItemId)), uintptr(unsafe.Pointer(ppItem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenContact dispatches through IContactAggregationManager's vtable slot 10.
 func (self *IContactAggregationManager) OpenContact(pItemId string, ppItem **IContactAggregationContact) error {
 	_pItemId := win32.UTF16Ptr(pItemId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pItemId)), uintptr(unsafe.Pointer(ppItem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenServerContactLink dispatches through IContactAggregationManager's vtable slot 11.
 func (self *IContactAggregationManager) OpenServerContactLink(pItemId string, ppItem **IContactAggregationLink) error {
 	_pItemId := win32.UTF16Ptr(pItemId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pItemId)), uintptr(unsafe.Pointer(ppItem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenServerPerson dispatches through IContactAggregationManager's vtable slot 12.
 func (self *IContactAggregationManager) OpenServerPerson(pItemId string, ppItem **IContactAggregationServerPerson) error {
 	_pItemId := win32.UTF16Ptr(pItemId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pItemId)), uintptr(unsafe.Pointer(ppItem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Contacts dispatches through IContactAggregationManager's vtable slot 13.
 func (self *IContactAggregationManager) Get_Contacts(options CONTACT_AGGREGATION_COLLECTION_OPTIONS) (*IContactAggregationContactCollection, error) {
 	var _ppItems *IContactAggregationContactCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(options), uintptr(unsafe.Pointer(&_ppItems)))
-	return _ppItems, win32.HRESULTError(int32(r1))
+	return _ppItems, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AggregateContacts dispatches through IContactAggregationManager's vtable slot 14.
 func (self *IContactAggregationManager) Get_AggregateContacts(options CONTACT_AGGREGATION_COLLECTION_OPTIONS, ppAggregates **IContactAggregationAggregateCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(options), uintptr(unsafe.Pointer(ppAggregates)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Groups dispatches through IContactAggregationManager's vtable slot 15.
 func (self *IContactAggregationManager) Get_Groups(options CONTACT_AGGREGATION_COLLECTION_OPTIONS, ppGroups **IContactAggregationGroupCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(options), uintptr(unsafe.Pointer(ppGroups)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ServerPersons dispatches through IContactAggregationManager's vtable slot 16.
 func (self *IContactAggregationManager) Get_ServerPersons(ppServerPersonCollection **IContactAggregationServerPersonCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppServerPersonCollection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ServerContactLinks dispatches through IContactAggregationManager's vtable slot 17.
 func (self *IContactAggregationManager) Get_ServerContactLinks(pPersonItemId string, ppServerContactLinkCollection **IContactAggregationLinkCollection) error {
 	_pPersonItemId := win32.UTF16Ptr(pPersonItemId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pPersonItemId)), uintptr(unsafe.Pointer(ppServerContactLinkCollection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 7fdc3d4b-1b82-4334-85c5-25184ee5a5f2
@@ -708,156 +708,156 @@ var IID_IContactAggregationServerPerson = win32.GUID{Data1: 0x7fdc3d4b, Data2: 0
 // Delete dispatches through IContactAggregationServerPerson's vtable slot 3.
 func (self *IContactAggregationServerPerson) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Save dispatches through IContactAggregationServerPerson's vtable slot 4.
 func (self *IContactAggregationServerPerson) Save() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AggregateId dispatches through IContactAggregationServerPerson's vtable slot 5.
 func (self *IContactAggregationServerPerson) Get_AggregateId() (foundation.PWSTR, error) {
 	var _ppAggregateId foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppAggregateId)))
-	return _ppAggregateId, win32.HRESULTError(int32(r1))
+	return _ppAggregateId, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AggregateId dispatches through IContactAggregationServerPerson's vtable slot 6.
 func (self *IContactAggregationServerPerson) Put_AggregateId(pAggregateId string) error {
 	_pAggregateId := win32.UTF16Ptr(pAggregateId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pAggregateId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AntiLink dispatches through IContactAggregationServerPerson's vtable slot 7.
 func (self *IContactAggregationServerPerson) Get_AntiLink() (foundation.PWSTR, error) {
 	var _ppAntiLink foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppAntiLink)))
-	return _ppAntiLink, win32.HRESULTError(int32(r1))
+	return _ppAntiLink, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AntiLink dispatches through IContactAggregationServerPerson's vtable slot 8.
 func (self *IContactAggregationServerPerson) Put_AntiLink(pAntiLink string) error {
 	_pAntiLink := win32.UTF16Ptr(pAntiLink)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pAntiLink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AntiLinkBaseline dispatches through IContactAggregationServerPerson's vtable slot 9.
 func (self *IContactAggregationServerPerson) Get_AntiLinkBaseline() (foundation.PWSTR, error) {
 	var _ppAntiLink foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppAntiLink)))
-	return _ppAntiLink, win32.HRESULTError(int32(r1))
+	return _ppAntiLink, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AntiLinkBaseline dispatches through IContactAggregationServerPerson's vtable slot 10.
 func (self *IContactAggregationServerPerson) Put_AntiLinkBaseline(pAntiLink string) error {
 	_pAntiLink := win32.UTF16Ptr(pAntiLink)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pAntiLink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FavoriteOrder dispatches through IContactAggregationServerPerson's vtable slot 11.
 func (self *IContactAggregationServerPerson) Get_FavoriteOrder() (uint32, error) {
 	var _pFavoriteOrder uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pFavoriteOrder)))
-	return _pFavoriteOrder, win32.HRESULTError(int32(r1))
+	return _pFavoriteOrder, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FavoriteOrder dispatches through IContactAggregationServerPerson's vtable slot 12.
 func (self *IContactAggregationServerPerson) Put_FavoriteOrder(favoriteOrder uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(favoriteOrder))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FavoriteOrderBaseline dispatches through IContactAggregationServerPerson's vtable slot 13.
 func (self *IContactAggregationServerPerson) Get_FavoriteOrderBaseline() (uint32, error) {
 	var _pFavoriteOrder uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pFavoriteOrder)))
-	return _pFavoriteOrder, win32.HRESULTError(int32(r1))
+	return _pFavoriteOrder, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FavoriteOrderBaseline dispatches through IContactAggregationServerPerson's vtable slot 14.
 func (self *IContactAggregationServerPerson) Put_FavoriteOrderBaseline(favoriteOrder uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(favoriteOrder))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Groups dispatches through IContactAggregationServerPerson's vtable slot 15.
 func (self *IContactAggregationServerPerson) Get_Groups() (*CONTACT_AGGREGATION_BLOB, error) {
 	var _pGroups *CONTACT_AGGREGATION_BLOB
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pGroups)))
-	return _pGroups, win32.HRESULTError(int32(r1))
+	return _pGroups, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Groups dispatches through IContactAggregationServerPerson's vtable slot 16.
 func (self *IContactAggregationServerPerson) Put_Groups(pGroups *CONTACT_AGGREGATION_BLOB) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGroups)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_GroupsBaseline dispatches through IContactAggregationServerPerson's vtable slot 17.
 func (self *IContactAggregationServerPerson) Get_GroupsBaseline() (*CONTACT_AGGREGATION_BLOB, error) {
 	var _ppGroups *CONTACT_AGGREGATION_BLOB
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppGroups)))
-	return _ppGroups, win32.HRESULTError(int32(r1))
+	return _ppGroups, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_GroupsBaseline dispatches through IContactAggregationServerPerson's vtable slot 18.
 func (self *IContactAggregationServerPerson) Put_GroupsBaseline(pGroups *CONTACT_AGGREGATION_BLOB) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGroups)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Id dispatches through IContactAggregationServerPerson's vtable slot 19.
 func (self *IContactAggregationServerPerson) Get_Id() (foundation.PWSTR, error) {
 	var _ppId foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppId)))
-	return _ppId, win32.HRESULTError(int32(r1))
+	return _ppId, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsTombstone dispatches through IContactAggregationServerPerson's vtable slot 20.
 func (self *IContactAggregationServerPerson) Get_IsTombstone() (foundation.BOOL, error) {
 	var _pIsTombstone foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pIsTombstone)))
-	return _pIsTombstone, win32.HRESULTError(int32(r1))
+	return _pIsTombstone, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_IsTombstone dispatches through IContactAggregationServerPerson's vtable slot 21.
 func (self *IContactAggregationServerPerson) Put_IsTombstone(isTombstone bool) error {
 	_isTombstone := win32.Bool32(isTombstone)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(_isTombstone))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LinkedAggregateId dispatches through IContactAggregationServerPerson's vtable slot 22.
 func (self *IContactAggregationServerPerson) Get_LinkedAggregateId() (foundation.PWSTR, error) {
 	var _ppLinkedAggregateId foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppLinkedAggregateId)))
-	return _ppLinkedAggregateId, win32.HRESULTError(int32(r1))
+	return _ppLinkedAggregateId, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LinkedAggregateId dispatches through IContactAggregationServerPerson's vtable slot 23.
 func (self *IContactAggregationServerPerson) Put_LinkedAggregateId(pLinkedAggregateId string) error {
 	_pLinkedAggregateId := win32.UTF16Ptr(pLinkedAggregateId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pLinkedAggregateId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ObjectId dispatches through IContactAggregationServerPerson's vtable slot 24.
 func (self *IContactAggregationServerPerson) Get_ObjectId() (foundation.PWSTR, error) {
 	var _ppObjectId foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppObjectId)))
-	return _ppObjectId, win32.HRESULTError(int32(r1))
+	return _ppObjectId, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ObjectId dispatches through IContactAggregationServerPerson's vtable slot 25.
 func (self *IContactAggregationServerPerson) Put_ObjectId(pObjectId string) error {
 	_pObjectId := win32.UTF16Ptr(pObjectId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pObjectId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 4f730a4a-6604-47b6-a987-669ecf1e5751
@@ -872,7 +872,7 @@ var IID_IContactAggregationServerPersonCollection = win32.GUID{Data1: 0x4f730a4a
 func (self *IContactAggregationServerPersonCollection) FindFirst() (*IContactAggregationServerPerson, error) {
 	var _ppServerPerson *IContactAggregationServerPerson
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppServerPerson)))
-	return _ppServerPerson, win32.HRESULTError(int32(r1))
+	return _ppServerPerson, win32.ErrIfFailed(int32(r1))
 }
 
 // FindFirstByServerId dispatches through IContactAggregationServerPersonCollection's vtable slot 4.
@@ -880,7 +880,7 @@ func (self *IContactAggregationServerPersonCollection) FindFirstByServerId(pServ
 	_pServerId := win32.UTF16Ptr(pServerId)
 	var _ppServerPerson *IContactAggregationServerPerson
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pServerId)), uintptr(unsafe.Pointer(&_ppServerPerson)))
-	return _ppServerPerson, win32.HRESULTError(int32(r1))
+	return _ppServerPerson, win32.ErrIfFailed(int32(r1))
 }
 
 // FindFirstByAggregateId dispatches through IContactAggregationServerPersonCollection's vtable slot 5.
@@ -888,7 +888,7 @@ func (self *IContactAggregationServerPersonCollection) FindFirstByAggregateId(pA
 	_pAggregateId := win32.UTF16Ptr(pAggregateId)
 	var _ppServerPerson *IContactAggregationServerPerson
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pAggregateId)), uintptr(unsafe.Pointer(&_ppServerPerson)))
-	return _ppServerPerson, win32.HRESULTError(int32(r1))
+	return _ppServerPerson, win32.ErrIfFailed(int32(r1))
 }
 
 // FindFirstByLinkedAggregateId dispatches through IContactAggregationServerPersonCollection's vtable slot 6.
@@ -896,21 +896,21 @@ func (self *IContactAggregationServerPersonCollection) FindFirstByLinkedAggregat
 	_pAggregateId := win32.UTF16Ptr(pAggregateId)
 	var _ppServerPerson *IContactAggregationServerPerson
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pAggregateId)), uintptr(unsafe.Pointer(&_ppServerPerson)))
-	return _ppServerPerson, win32.HRESULTError(int32(r1))
+	return _ppServerPerson, win32.ErrIfFailed(int32(r1))
 }
 
 // FindNext dispatches through IContactAggregationServerPersonCollection's vtable slot 7.
 func (self *IContactAggregationServerPersonCollection) FindNext() (*IContactAggregationServerPerson, error) {
 	var _ppServerPerson *IContactAggregationServerPerson
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppServerPerson)))
-	return _ppServerPerson, win32.HRESULTError(int32(r1))
+	return _ppServerPerson, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IContactAggregationServerPersonCollection's vtable slot 8.
 func (self *IContactAggregationServerPersonCollection) Get_Count() (uint32, error) {
 	var _pCount uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pCount)))
-	return _pCount, win32.HRESULTError(int32(r1))
+	return _pCount, win32.ErrIfFailed(int32(r1))
 }
 
 // IContactCollection: https://learn.microsoft.com/windows/win32/api/icontact/nn-icontact-icontactcollection
@@ -925,19 +925,19 @@ var IID_IContactCollection = win32.GUID{Data1: 0xb6afa338, Data2: 0xd779, Data3:
 // Reset dispatches through IContactCollection's vtable slot 3.
 func (self *IContactCollection) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Next dispatches through IContactCollection's vtable slot 4.
 func (self *IContactCollection) Next() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrent dispatches through IContactCollection's vtable slot 5.
 func (self *IContactCollection) GetCurrent(ppContact **IContact) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppContact)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IContactManager: https://learn.microsoft.com/windows/win32/api/icontact/nn-icontact-icontactmanager
@@ -954,14 +954,14 @@ func (self *IContactManager) Initialize(pszAppName string, pszAppVersion string)
 	_pszAppName := win32.UTF16Ptr(pszAppName)
 	_pszAppVersion := win32.UTF16Ptr(pszAppVersion)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszAppName)), uintptr(unsafe.Pointer(_pszAppVersion)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Load dispatches through IContactManager's vtable slot 4.
 func (self *IContactManager) Load(pszContactID string, ppContact **IContact) error {
 	_pszContactID := win32.UTF16Ptr(pszContactID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszContactID)), uintptr(unsafe.Pointer(ppContact)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MergeContactIDs dispatches through IContactManager's vtable slot 5.
@@ -969,25 +969,25 @@ func (self *IContactManager) MergeContactIDs(pszNewContactID string, pszOldConta
 	_pszNewContactID := win32.UTF16Ptr(pszNewContactID)
 	_pszOldContactID := win32.UTF16Ptr(pszOldContactID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszNewContactID)), uintptr(unsafe.Pointer(_pszOldContactID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMeContact dispatches through IContactManager's vtable slot 6.
 func (self *IContactManager) GetMeContact(ppMeContact **IContact) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppMeContact)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMeContact dispatches through IContactManager's vtable slot 7.
 func (self *IContactManager) SetMeContact(pMeContact *IContact) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMeContact)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetContactCollection dispatches through IContactManager's vtable slot 8.
 func (self *IContactManager) GetContactCollection(ppContactCollection **IContactCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppContactCollection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IContactProperties: https://learn.microsoft.com/windows/win32/api/icontact/nn-icontact-icontactproperties
@@ -1003,28 +1003,28 @@ var IID_IContactProperties = win32.GUID{Data1: 0x70dd27dd, Data2: 0x5cbd, Data3:
 func (self *IContactProperties) GetString(pszPropertyName string, dwFlags uint32, pszValue foundation.PWSTR, cchValue uint32, pdwcchPropertyValueRequired *uint32) error {
 	_pszPropertyName := win32.UTF16Ptr(pszPropertyName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(dwFlags), uintptr(unsafe.Pointer(pszValue)), uintptr(cchValue), uintptr(unsafe.Pointer(pdwcchPropertyValueRequired)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDate dispatches through IContactProperties's vtable slot 4.
 func (self *IContactProperties) GetDate(pszPropertyName string, dwFlags uint32, pftDateTime *foundation.FILETIME) error {
 	_pszPropertyName := win32.UTF16Ptr(pszPropertyName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(dwFlags), uintptr(unsafe.Pointer(pftDateTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBinary dispatches through IContactProperties's vtable slot 5.
 func (self *IContactProperties) GetBinary(pszPropertyName string, dwFlags uint32, pszContentType foundation.PWSTR, cchContentType uint32, pdwcchContentTypeRequired *uint32, ppStream **systemcom.IStream) error {
 	_pszPropertyName := win32.UTF16Ptr(pszPropertyName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(dwFlags), uintptr(unsafe.Pointer(pszContentType)), uintptr(cchContentType), uintptr(unsafe.Pointer(pdwcchContentTypeRequired)), uintptr(unsafe.Pointer(ppStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLabels dispatches through IContactProperties's vtable slot 6.
 func (self *IContactProperties) GetLabels(pszArrayElementName string, dwFlags uint32, pszLabels foundation.PWSTR, cchLabels uint32, pdwcchLabelsRequired *uint32) error {
 	_pszArrayElementName := win32.UTF16Ptr(pszArrayElementName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszArrayElementName)), uintptr(dwFlags), uintptr(unsafe.Pointer(pszLabels)), uintptr(cchLabels), uintptr(unsafe.Pointer(pdwcchLabelsRequired)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetString dispatches through IContactProperties's vtable slot 7.
@@ -1032,7 +1032,7 @@ func (self *IContactProperties) SetString(pszPropertyName string, dwFlags uint32
 	_pszPropertyName := win32.UTF16Ptr(pszPropertyName)
 	_pszValue := win32.UTF16Ptr(pszValue)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(dwFlags), uintptr(unsafe.Pointer(_pszValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBinary dispatches through IContactProperties's vtable slot 9.
@@ -1040,7 +1040,7 @@ func (self *IContactProperties) SetBinary(pszPropertyName string, dwFlags uint32
 	_pszPropertyName := win32.UTF16Ptr(pszPropertyName)
 	_pszContentType := win32.UTF16Ptr(pszContentType)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(dwFlags), uintptr(unsafe.Pointer(_pszContentType)), uintptr(unsafe.Pointer(pStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetLabels dispatches through IContactProperties's vtable slot 10.
@@ -1051,7 +1051,7 @@ func (self *IContactProperties) SetLabels(pszArrayElementName string, dwFlags ui
 		_ppszLabels = &ppszLabels[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszArrayElementName)), uintptr(dwFlags), uintptr(len(ppszLabels)), uintptr(unsafe.Pointer(_ppszLabels)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateArrayNode dispatches through IContactProperties's vtable slot 11.
@@ -1059,28 +1059,28 @@ func (self *IContactProperties) CreateArrayNode(pszArrayName string, dwFlags uin
 	_pszArrayName := win32.UTF16Ptr(pszArrayName)
 	_fAppend := win32.Bool32(fAppend)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszArrayName)), uintptr(dwFlags), uintptr(_fAppend), uintptr(unsafe.Pointer(pszNewArrayElementName)), uintptr(cchNewArrayElementName), uintptr(unsafe.Pointer(pdwcchNewArrayElementNameRequired)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteProperty dispatches through IContactProperties's vtable slot 12.
 func (self *IContactProperties) DeleteProperty(pszPropertyName string, dwFlags uint32) error {
 	_pszPropertyName := win32.UTF16Ptr(pszPropertyName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteArrayNode dispatches through IContactProperties's vtable slot 13.
 func (self *IContactProperties) DeleteArrayNode(pszArrayElementName string, dwFlags uint32) error {
 	_pszArrayElementName := win32.UTF16Ptr(pszArrayElementName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszArrayElementName)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteLabels dispatches through IContactProperties's vtable slot 14.
 func (self *IContactProperties) DeleteLabels(pszArrayElementName string, dwFlags uint32) error {
 	_pszArrayElementName := win32.UTF16Ptr(pszArrayElementName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszArrayElementName)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPropertyCollection dispatches through IContactProperties's vtable slot 15.
@@ -1092,7 +1092,7 @@ func (self *IContactProperties) GetPropertyCollection(ppPropertyCollection **ICo
 	}
 	_fAnyLabelMatches := win32.Bool32(fAnyLabelMatches)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPropertyCollection)), uintptr(dwFlags), uintptr(unsafe.Pointer(_pszMultiValueName)), uintptr(len(ppszLabels)), uintptr(unsafe.Pointer(_ppszLabels)), uintptr(_fAnyLabelMatches))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IContactPropertyCollection: https://learn.microsoft.com/windows/win32/api/icontact/nn-icontact-icontactpropertycollection
@@ -1107,41 +1107,41 @@ var IID_IContactPropertyCollection = win32.GUID{Data1: 0xffd3adf8, Data2: 0xfa64
 // Reset dispatches through IContactPropertyCollection's vtable slot 3.
 func (self *IContactPropertyCollection) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Next dispatches through IContactPropertyCollection's vtable slot 4.
 func (self *IContactPropertyCollection) Next() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPropertyName dispatches through IContactPropertyCollection's vtable slot 5.
 func (self *IContactPropertyCollection) GetPropertyName(pszPropertyName foundation.PWSTR, cchPropertyName uint32, pdwcchPropertyNameRequired *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszPropertyName)), uintptr(cchPropertyName), uintptr(unsafe.Pointer(pdwcchPropertyNameRequired)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPropertyType dispatches through IContactPropertyCollection's vtable slot 6.
 func (self *IContactPropertyCollection) GetPropertyType(pdwType *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPropertyVersion dispatches through IContactPropertyCollection's vtable slot 7.
 func (self *IContactPropertyCollection) GetPropertyVersion(pdwVersion *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwVersion)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPropertyModificationDate dispatches through IContactPropertyCollection's vtable slot 8.
 func (self *IContactPropertyCollection) GetPropertyModificationDate(pftModificationDate *foundation.FILETIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pftModificationDate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPropertyArrayElementID dispatches through IContactPropertyCollection's vtable slot 9.
 func (self *IContactPropertyCollection) GetPropertyArrayElementID(pszArrayElementID foundation.PWSTR, cchArrayElementID uint32, pdwcchArrayElementIDRequired *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszArrayElementID)), uintptr(cchArrayElementID), uintptr(unsafe.Pointer(pdwcchArrayElementIDRequired)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

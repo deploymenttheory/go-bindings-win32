@@ -206,7 +206,7 @@ func BluetoothFindRadioClose(hFind HBLUETOOTH_RADIO_FIND) error {
 // Minimum OS: windows8.0.
 func BluetoothGATTAbortReliableWrite(hDevice foundation.HANDLE, ReliableWriteContext uint64, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(procBluetoothGATTAbortReliableWrite.Addr(), uintptr(hDevice), uintptr(ReliableWriteContext), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BluetoothGATTBeginReliableWrite calls BluetoothApis!BluetoothGATTBeginReliableWrite.
@@ -214,7 +214,7 @@ func BluetoothGATTAbortReliableWrite(hDevice foundation.HANDLE, ReliableWriteCon
 // Minimum OS: windows8.0.
 func BluetoothGATTBeginReliableWrite(hDevice foundation.HANDLE, ReliableWriteContext *uint64, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(procBluetoothGATTBeginReliableWrite.Addr(), uintptr(hDevice), uintptr(unsafe.Pointer(ReliableWriteContext)), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BluetoothGATTEndReliableWrite calls BluetoothApis!BluetoothGATTEndReliableWrite.
@@ -222,7 +222,7 @@ func BluetoothGATTBeginReliableWrite(hDevice foundation.HANDLE, ReliableWriteCon
 // Minimum OS: windows8.0.
 func BluetoothGATTEndReliableWrite(hDevice foundation.HANDLE, ReliableWriteContext uint64, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(procBluetoothGATTEndReliableWrite.Addr(), uintptr(hDevice), uintptr(ReliableWriteContext), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BluetoothGATTGetCharacteristicValue calls BluetoothApis!BluetoothGATTGetCharacteristicValue.
@@ -230,7 +230,7 @@ func BluetoothGATTEndReliableWrite(hDevice foundation.HANDLE, ReliableWriteConte
 // Minimum OS: windows8.0.
 func BluetoothGATTGetCharacteristicValue(hDevice foundation.HANDLE, Characteristic *BTH_LE_GATT_CHARACTERISTIC, CharacteristicValueDataSize uint32, CharacteristicValue *BTH_LE_GATT_CHARACTERISTIC_VALUE, CharacteristicValueSizeRequired *uint16, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(procBluetoothGATTGetCharacteristicValue.Addr(), uintptr(hDevice), uintptr(unsafe.Pointer(Characteristic)), uintptr(CharacteristicValueDataSize), uintptr(unsafe.Pointer(CharacteristicValue)), uintptr(unsafe.Pointer(CharacteristicValueSizeRequired)), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BluetoothGATTGetCharacteristics calls BluetoothApis!BluetoothGATTGetCharacteristics.
@@ -242,7 +242,7 @@ func BluetoothGATTGetCharacteristics(hDevice foundation.HANDLE, Service *BTH_LE_
 		_CharacteristicsBuffer = &CharacteristicsBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(procBluetoothGATTGetCharacteristics.Addr(), uintptr(hDevice), uintptr(unsafe.Pointer(Service)), uintptr(len(CharacteristicsBuffer)), uintptr(unsafe.Pointer(_CharacteristicsBuffer)), uintptr(unsafe.Pointer(CharacteristicsBufferActual)), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BluetoothGATTGetDescriptorValue calls BluetoothApis!BluetoothGATTGetDescriptorValue.
@@ -250,7 +250,7 @@ func BluetoothGATTGetCharacteristics(hDevice foundation.HANDLE, Service *BTH_LE_
 // Minimum OS: windows8.0.
 func BluetoothGATTGetDescriptorValue(hDevice foundation.HANDLE, Descriptor *BTH_LE_GATT_DESCRIPTOR, DescriptorValueDataSize uint32, DescriptorValue *BTH_LE_GATT_DESCRIPTOR_VALUE, DescriptorValueSizeRequired *uint16, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(procBluetoothGATTGetDescriptorValue.Addr(), uintptr(hDevice), uintptr(unsafe.Pointer(Descriptor)), uintptr(DescriptorValueDataSize), uintptr(unsafe.Pointer(DescriptorValue)), uintptr(unsafe.Pointer(DescriptorValueSizeRequired)), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BluetoothGATTGetDescriptors calls BluetoothApis!BluetoothGATTGetDescriptors.
@@ -262,7 +262,7 @@ func BluetoothGATTGetDescriptors(hDevice foundation.HANDLE, Characteristic *BTH_
 		_DescriptorsBuffer = &DescriptorsBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(procBluetoothGATTGetDescriptors.Addr(), uintptr(hDevice), uintptr(unsafe.Pointer(Characteristic)), uintptr(len(DescriptorsBuffer)), uintptr(unsafe.Pointer(_DescriptorsBuffer)), uintptr(unsafe.Pointer(DescriptorsBufferActual)), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BluetoothGATTGetIncludedServices calls BluetoothApis!BluetoothGATTGetIncludedServices.
@@ -274,7 +274,7 @@ func BluetoothGATTGetIncludedServices(hDevice foundation.HANDLE, ParentService *
 		_IncludedServicesBuffer = &IncludedServicesBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(procBluetoothGATTGetIncludedServices.Addr(), uintptr(hDevice), uintptr(unsafe.Pointer(ParentService)), uintptr(len(IncludedServicesBuffer)), uintptr(unsafe.Pointer(_IncludedServicesBuffer)), uintptr(unsafe.Pointer(IncludedServicesBufferActual)), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BluetoothGATTGetServices calls BluetoothApis!BluetoothGATTGetServices.
@@ -286,7 +286,7 @@ func BluetoothGATTGetServices(hDevice foundation.HANDLE, ServicesBuffer []BTH_LE
 		_ServicesBuffer = &ServicesBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(procBluetoothGATTGetServices.Addr(), uintptr(hDevice), uintptr(len(ServicesBuffer)), uintptr(unsafe.Pointer(_ServicesBuffer)), uintptr(unsafe.Pointer(ServicesBufferActual)), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BluetoothGATTRegisterEvent calls BluetoothApis!BluetoothGATTRegisterEvent.
@@ -294,7 +294,7 @@ func BluetoothGATTGetServices(hDevice foundation.HANDLE, ServicesBuffer []BTH_LE
 // Minimum OS: windows8.0.
 func BluetoothGATTRegisterEvent(hService foundation.HANDLE, EventType BTH_LE_GATT_EVENT_TYPE, EventParameterIn unsafe.Pointer, Callback PFNBLUETOOTH_GATT_EVENT_CALLBACK, CallbackContext unsafe.Pointer, pEventHandle *uintptr, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(procBluetoothGATTRegisterEvent.Addr(), uintptr(hService), uintptr(EventType), uintptr(unsafe.Pointer(EventParameterIn)), uintptr(Callback), uintptr(unsafe.Pointer(CallbackContext)), uintptr(unsafe.Pointer(pEventHandle)), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BluetoothGATTSetCharacteristicValue calls BluetoothApis!BluetoothGATTSetCharacteristicValue.
@@ -302,7 +302,7 @@ func BluetoothGATTRegisterEvent(hService foundation.HANDLE, EventType BTH_LE_GAT
 // Minimum OS: windows8.0.
 func BluetoothGATTSetCharacteristicValue(hDevice foundation.HANDLE, Characteristic *BTH_LE_GATT_CHARACTERISTIC, CharacteristicValue *BTH_LE_GATT_CHARACTERISTIC_VALUE, ReliableWriteContext uint64, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(procBluetoothGATTSetCharacteristicValue.Addr(), uintptr(hDevice), uintptr(unsafe.Pointer(Characteristic)), uintptr(unsafe.Pointer(CharacteristicValue)), uintptr(ReliableWriteContext), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BluetoothGATTSetDescriptorValue calls BluetoothApis!BluetoothGATTSetDescriptorValue.
@@ -310,7 +310,7 @@ func BluetoothGATTSetCharacteristicValue(hDevice foundation.HANDLE, Characterist
 // Minimum OS: windows8.0.
 func BluetoothGATTSetDescriptorValue(hDevice foundation.HANDLE, Descriptor *BTH_LE_GATT_DESCRIPTOR, DescriptorValue *BTH_LE_GATT_DESCRIPTOR_VALUE, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(procBluetoothGATTSetDescriptorValue.Addr(), uintptr(hDevice), uintptr(unsafe.Pointer(Descriptor)), uintptr(unsafe.Pointer(DescriptorValue)), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BluetoothGATTUnregisterEvent calls BluetoothApis!BluetoothGATTUnregisterEvent.
@@ -318,7 +318,7 @@ func BluetoothGATTSetDescriptorValue(hDevice foundation.HANDLE, Descriptor *BTH_
 // Minimum OS: windows8.0.
 func BluetoothGATTUnregisterEvent(EventHandle uintptr, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(procBluetoothGATTUnregisterEvent.Addr(), uintptr(EventHandle), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BluetoothGetDeviceInfo calls BluetoothApis!BluetoothGetDeviceInfo.

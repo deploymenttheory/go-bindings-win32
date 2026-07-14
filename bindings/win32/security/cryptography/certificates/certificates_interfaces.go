@@ -27,43 +27,43 @@ var IID_IAlternativeName = win32.GUID{Data1: 0x728ab313, Data2: 0x217d, Data3: 0
 // InitializeFromString dispatches through IAlternativeName's vtable slot 7.
 func (self *IAlternativeName) InitializeFromString(Type AlternativeNameType, strValue foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(unsafe.Pointer(strValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeFromRawData dispatches through IAlternativeName's vtable slot 8.
 func (self *IAlternativeName) InitializeFromRawData(Type AlternativeNameType, Encoding EncodingType, strRawData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(Encoding), uintptr(unsafe.Pointer(strRawData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeFromOtherName dispatches through IAlternativeName's vtable slot 9.
 func (self *IAlternativeName) InitializeFromOtherName(pObjectId *IObjectId, Encoding EncodingType, strRawData foundation.BSTR, ToBeWrapped foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObjectId)), uintptr(Encoding), uintptr(unsafe.Pointer(strRawData)), uintptr(ToBeWrapped))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Type dispatches through IAlternativeName's vtable slot 10.
 func (self *IAlternativeName) Get_Type(pValue *AlternativeNameType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StrValue dispatches through IAlternativeName's vtable slot 11.
 func (self *IAlternativeName) Get_StrValue(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ObjectId dispatches through IAlternativeName's vtable slot 12.
 func (self *IAlternativeName) Get_ObjectId(ppValue **IObjectId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RawData dispatches through IAlternativeName's vtable slot 13.
 func (self *IAlternativeName) Get_RawData(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAlternativeNames: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ialternativenames
@@ -78,37 +78,37 @@ var IID_IAlternativeNames = win32.GUID{Data1: 0x728ab314, Data2: 0x217d, Data3: 
 // Get_ItemByIndex dispatches through IAlternativeNames's vtable slot 7.
 func (self *IAlternativeNames) Get_ItemByIndex(Index int32, pVal **IAlternativeName) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IAlternativeNames's vtable slot 8.
 func (self *IAlternativeNames) Get_Count(pVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IAlternativeNames's vtable slot 9.
 func (self *IAlternativeNames) Get__NewEnum(pVal **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through IAlternativeNames's vtable slot 10.
 func (self *IAlternativeNames) Add(pVal *IAlternativeName) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through IAlternativeNames's vtable slot 11.
 func (self *IAlternativeNames) Remove(Index int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through IAlternativeNames's vtable slot 12.
 func (self *IAlternativeNames) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBinaryConverter: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ibinaryconverter
@@ -123,19 +123,19 @@ var IID_IBinaryConverter = win32.GUID{Data1: 0x728ab302, Data2: 0x217d, Data3: 0
 // StringToString dispatches through IBinaryConverter's vtable slot 7.
 func (self *IBinaryConverter) StringToString(strEncodedIn foundation.BSTR, EncodingIn EncodingType, Encoding EncodingType, pstrEncoded *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strEncodedIn)), uintptr(EncodingIn), uintptr(Encoding), uintptr(unsafe.Pointer(pstrEncoded)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // VariantByteArrayToString dispatches through IBinaryConverter's vtable slot 8.
 func (self *IBinaryConverter) VariantByteArrayToString(pvarByteArray *systemvariant.VARIANT, Encoding EncodingType, pstrEncoded *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarByteArray)), uintptr(Encoding), uintptr(unsafe.Pointer(pstrEncoded)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StringToVariantByteArray dispatches through IBinaryConverter's vtable slot 9.
 func (self *IBinaryConverter) StringToVariantByteArray(strEncoded foundation.BSTR, Encoding EncodingType, pvarByteArray *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strEncoded)), uintptr(Encoding), uintptr(unsafe.Pointer(pvarByteArray)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 8d7928b4-4e17-428d-9a17-728df00d1b2b
@@ -149,13 +149,13 @@ var IID_IBinaryConverter2 = win32.GUID{Data1: 0x8d7928b4, Data2: 0x4e17, Data3: 
 // StringArrayToVariantArray dispatches through IBinaryConverter2's vtable slot 10.
 func (self *IBinaryConverter2) StringArrayToVariantArray(pvarStringArray *systemvariant.VARIANT, pvarVariantArray *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarStringArray)), uintptr(unsafe.Pointer(pvarVariantArray)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // VariantArrayToStringArray dispatches through IBinaryConverter2's vtable slot 11.
 func (self *IBinaryConverter2) VariantArrayToStringArray(pvarVariantArray *systemvariant.VARIANT, pvarStringArray *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarVariantArray)), uintptr(unsafe.Pointer(pvarStringArray)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICEnroll: https://learn.microsoft.com/windows/win32/api/xenroll/nn-xenroll-icenroll
@@ -170,340 +170,340 @@ var IID_ICEnroll = win32.GUID{Data1: 0x43f8f288, Data2: 0x7a20, Data3: 0x11d0, D
 // CreateFilePKCS10 dispatches through ICEnroll's vtable slot 7.
 func (self *ICEnroll) CreateFilePKCS10(DNName foundation.BSTR, Usage foundation.BSTR, wszPKCS10FileName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(DNName)), uintptr(unsafe.Pointer(Usage)), uintptr(unsafe.Pointer(wszPKCS10FileName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AcceptFilePKCS7 dispatches through ICEnroll's vtable slot 8.
 func (self *ICEnroll) AcceptFilePKCS7(wszPKCS7FileName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszPKCS7FileName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePKCS10 dispatches through ICEnroll's vtable slot 9.
 func (self *ICEnroll) CreatePKCS10(DNName foundation.BSTR, Usage foundation.BSTR, pPKCS10 *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(DNName)), uintptr(unsafe.Pointer(Usage)), uintptr(unsafe.Pointer(pPKCS10)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AcceptPKCS7 dispatches through ICEnroll's vtable slot 10.
 func (self *ICEnroll) AcceptPKCS7(PKCS7 foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PKCS7)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCertFromPKCS7 dispatches through ICEnroll's vtable slot 11.
 func (self *ICEnroll) GetCertFromPKCS7(wszPKCS7 foundation.BSTR, pbstrCert *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszPKCS7)), uintptr(unsafe.Pointer(pbstrCert)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumProviders dispatches through ICEnroll's vtable slot 12.
 func (self *ICEnroll) EnumProviders(dwIndex int32, dwFlags int32, pbstrProvName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(dwFlags), uintptr(unsafe.Pointer(pbstrProvName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumContainers dispatches through ICEnroll's vtable slot 13.
 func (self *ICEnroll) EnumContainers(dwIndex int32, pbstr *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(pbstr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FreeRequestInfo dispatches through ICEnroll's vtable slot 14.
 func (self *ICEnroll) FreeRequestInfo(PKCS7OrPKCS10 foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PKCS7OrPKCS10)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MyStoreName dispatches through ICEnroll's vtable slot 15.
 func (self *ICEnroll) Get_MyStoreName(pbstrName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MyStoreName dispatches through ICEnroll's vtable slot 16.
 func (self *ICEnroll) Put_MyStoreName(bstrName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MyStoreType dispatches through ICEnroll's vtable slot 17.
 func (self *ICEnroll) Get_MyStoreType(pbstrType *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MyStoreType dispatches through ICEnroll's vtable slot 18.
 func (self *ICEnroll) Put_MyStoreType(bstrType foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MyStoreFlags dispatches through ICEnroll's vtable slot 19.
 func (self *ICEnroll) Get_MyStoreFlags(pdwFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MyStoreFlags dispatches through ICEnroll's vtable slot 20.
 func (self *ICEnroll) Put_MyStoreFlags(dwFlags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CAStoreName dispatches through ICEnroll's vtable slot 21.
 func (self *ICEnroll) Get_CAStoreName(pbstrName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CAStoreName dispatches through ICEnroll's vtable slot 22.
 func (self *ICEnroll) Put_CAStoreName(bstrName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CAStoreType dispatches through ICEnroll's vtable slot 23.
 func (self *ICEnroll) Get_CAStoreType(pbstrType *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CAStoreType dispatches through ICEnroll's vtable slot 24.
 func (self *ICEnroll) Put_CAStoreType(bstrType foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CAStoreFlags dispatches through ICEnroll's vtable slot 25.
 func (self *ICEnroll) Get_CAStoreFlags(pdwFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CAStoreFlags dispatches through ICEnroll's vtable slot 26.
 func (self *ICEnroll) Put_CAStoreFlags(dwFlags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RootStoreName dispatches through ICEnroll's vtable slot 27.
 func (self *ICEnroll) Get_RootStoreName(pbstrName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RootStoreName dispatches through ICEnroll's vtable slot 28.
 func (self *ICEnroll) Put_RootStoreName(bstrName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RootStoreType dispatches through ICEnroll's vtable slot 29.
 func (self *ICEnroll) Get_RootStoreType(pbstrType *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RootStoreType dispatches through ICEnroll's vtable slot 30.
 func (self *ICEnroll) Put_RootStoreType(bstrType foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RootStoreFlags dispatches through ICEnroll's vtable slot 31.
 func (self *ICEnroll) Get_RootStoreFlags(pdwFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RootStoreFlags dispatches through ICEnroll's vtable slot 32.
 func (self *ICEnroll) Put_RootStoreFlags(dwFlags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RequestStoreName dispatches through ICEnroll's vtable slot 33.
 func (self *ICEnroll) Get_RequestStoreName(pbstrName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RequestStoreName dispatches through ICEnroll's vtable slot 34.
 func (self *ICEnroll) Put_RequestStoreName(bstrName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RequestStoreType dispatches through ICEnroll's vtable slot 35.
 func (self *ICEnroll) Get_RequestStoreType(pbstrType *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RequestStoreType dispatches through ICEnroll's vtable slot 36.
 func (self *ICEnroll) Put_RequestStoreType(bstrType foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RequestStoreFlags dispatches through ICEnroll's vtable slot 37.
 func (self *ICEnroll) Get_RequestStoreFlags(pdwFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RequestStoreFlags dispatches through ICEnroll's vtable slot 38.
 func (self *ICEnroll) Put_RequestStoreFlags(dwFlags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ContainerName dispatches through ICEnroll's vtable slot 39.
 func (self *ICEnroll) Get_ContainerName(pbstrContainer *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrContainer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ContainerName dispatches through ICEnroll's vtable slot 40.
 func (self *ICEnroll) Put_ContainerName(bstrContainer foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrContainer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ProviderName dispatches through ICEnroll's vtable slot 41.
 func (self *ICEnroll) Get_ProviderName(pbstrProvider *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrProvider)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ProviderName dispatches through ICEnroll's vtable slot 42.
 func (self *ICEnroll) Put_ProviderName(bstrProvider foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProvider)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ProviderType dispatches through ICEnroll's vtable slot 43.
 func (self *ICEnroll) Get_ProviderType(pdwType *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ProviderType dispatches through ICEnroll's vtable slot 44.
 func (self *ICEnroll) Put_ProviderType(dwType int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(dwType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_KeySpec dispatches through ICEnroll's vtable slot 45.
 func (self *ICEnroll) Get_KeySpec(pdw *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdw)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_KeySpec dispatches through ICEnroll's vtable slot 46.
 func (self *ICEnroll) Put_KeySpec(dw int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(dw))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ProviderFlags dispatches through ICEnroll's vtable slot 47.
 func (self *ICEnroll) Get_ProviderFlags(pdwFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ProviderFlags dispatches through ICEnroll's vtable slot 48.
 func (self *ICEnroll) Put_ProviderFlags(dwFlags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UseExistingKeySet dispatches through ICEnroll's vtable slot 49.
 func (self *ICEnroll) Get_UseExistingKeySet(fUseExistingKeys *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fUseExistingKeys)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_UseExistingKeySet dispatches through ICEnroll's vtable slot 50.
 func (self *ICEnroll) Put_UseExistingKeySet(fUseExistingKeys bool) error {
 	_fUseExistingKeys := win32.Bool32(fUseExistingKeys)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(_fUseExistingKeys))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_GenKeyFlags dispatches through ICEnroll's vtable slot 51.
 func (self *ICEnroll) Get_GenKeyFlags(pdwFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_GenKeyFlags dispatches through ICEnroll's vtable slot 52.
 func (self *ICEnroll) Put_GenKeyFlags(dwFlags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DeleteRequestCert dispatches through ICEnroll's vtable slot 53.
 func (self *ICEnroll) Get_DeleteRequestCert(fDelete *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fDelete)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DeleteRequestCert dispatches through ICEnroll's vtable slot 54.
 func (self *ICEnroll) Put_DeleteRequestCert(fDelete bool) error {
 	_fDelete := win32.Bool32(fDelete)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(_fDelete))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_WriteCertToCSP dispatches through ICEnroll's vtable slot 55.
 func (self *ICEnroll) Get_WriteCertToCSP(fBool *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fBool)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_WriteCertToCSP dispatches through ICEnroll's vtable slot 56.
 func (self *ICEnroll) Put_WriteCertToCSP(fBool bool) error {
 	_fBool := win32.Bool32(fBool)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(_fBool))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SPCFileName dispatches through ICEnroll's vtable slot 57.
 func (self *ICEnroll) Get_SPCFileName(pbstr *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SPCFileName dispatches through ICEnroll's vtable slot 58.
 func (self *ICEnroll) Put_SPCFileName(bstr foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PVKFileName dispatches through ICEnroll's vtable slot 59.
 func (self *ICEnroll) Get_PVKFileName(pbstr *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PVKFileName dispatches through ICEnroll's vtable slot 60.
 func (self *ICEnroll) Put_PVKFileName(bstr foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HashAlgorithm dispatches through ICEnroll's vtable slot 61.
 func (self *ICEnroll) Get_HashAlgorithm(pbstr *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_HashAlgorithm dispatches through ICEnroll's vtable slot 62.
 func (self *ICEnroll) Put_HashAlgorithm(bstr foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICEnroll2: https://learn.microsoft.com/windows/win32/api/xenroll/nn-xenroll-icenroll2
@@ -518,39 +518,39 @@ var IID_ICEnroll2 = win32.GUID{Data1: 0x704ca730, Data2: 0xc90b, Data3: 0x11d1, 
 // AddCertTypeToRequest dispatches through ICEnroll2's vtable slot 63.
 func (self *ICEnroll2) AddCertTypeToRequest(CertType foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CertType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddNameValuePairToSignature dispatches through ICEnroll2's vtable slot 64.
 func (self *ICEnroll2) AddNameValuePairToSignature(Name foundation.BSTR, Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Name)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_WriteCertToUserDS dispatches through ICEnroll2's vtable slot 65.
 func (self *ICEnroll2) Get_WriteCertToUserDS(fBool *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fBool)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_WriteCertToUserDS dispatches through ICEnroll2's vtable slot 66.
 func (self *ICEnroll2) Put_WriteCertToUserDS(fBool bool) error {
 	_fBool := win32.Bool32(fBool)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(_fBool))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EnableT61DNEncoding dispatches through ICEnroll2's vtable slot 67.
 func (self *ICEnroll2) Get_EnableT61DNEncoding(fBool *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fBool)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EnableT61DNEncoding dispatches through ICEnroll2's vtable slot 68.
 func (self *ICEnroll2) Put_EnableT61DNEncoding(fBool bool) error {
 	_fBool := win32.Bool32(fBool)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(_fBool))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICEnroll3: https://learn.microsoft.com/windows/win32/api/xenroll/nn-xenroll-icenroll3
@@ -565,19 +565,19 @@ var IID_ICEnroll3 = win32.GUID{Data1: 0xc28c2d95, Data2: 0xb7de, Data3: 0x11d2, 
 // InstallPKCS7 dispatches through ICEnroll3's vtable slot 69.
 func (self *ICEnroll3) InstallPKCS7(PKCS7 foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PKCS7)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through ICEnroll3's vtable slot 70.
 func (self *ICEnroll3) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSupportedKeySpec dispatches through ICEnroll3's vtable slot 71.
 func (self *ICEnroll3) GetSupportedKeySpec(pdwKeySpec *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwKeySpec)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetKeyLen dispatches through ICEnroll3's vtable slot 72.
@@ -585,70 +585,70 @@ func (self *ICEnroll3) GetKeyLen(fMin bool, fExchange bool, pdwKeySize *int32) e
 	_fMin := win32.Bool32(fMin)
 	_fExchange := win32.Bool32(fExchange)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[72], uintptr(unsafe.Pointer(self)), uintptr(_fMin), uintptr(_fExchange), uintptr(unsafe.Pointer(pdwKeySize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumAlgs dispatches through ICEnroll3's vtable slot 73.
 func (self *ICEnroll3) EnumAlgs(dwIndex int32, algClass int32, pdwAlgID *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(algClass), uintptr(unsafe.Pointer(pdwAlgID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAlgName dispatches through ICEnroll3's vtable slot 74.
 func (self *ICEnroll3) GetAlgName(algID int32, pbstr *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[74], uintptr(unsafe.Pointer(self)), uintptr(algID), uintptr(unsafe.Pointer(pbstr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ReuseHardwareKeyIfUnableToGenNew dispatches through ICEnroll3's vtable slot 75.
 func (self *ICEnroll3) Put_ReuseHardwareKeyIfUnableToGenNew(fReuseHardwareKeyIfUnableToGenNew bool) error {
 	_fReuseHardwareKeyIfUnableToGenNew := win32.Bool32(fReuseHardwareKeyIfUnableToGenNew)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[75], uintptr(unsafe.Pointer(self)), uintptr(_fReuseHardwareKeyIfUnableToGenNew))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReuseHardwareKeyIfUnableToGenNew dispatches through ICEnroll3's vtable slot 76.
 func (self *ICEnroll3) Get_ReuseHardwareKeyIfUnableToGenNew(fReuseHardwareKeyIfUnableToGenNew *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[76], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fReuseHardwareKeyIfUnableToGenNew)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_HashAlgID dispatches through ICEnroll3's vtable slot 77.
 func (self *ICEnroll3) Put_HashAlgID(hashAlgID int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[77], uintptr(unsafe.Pointer(self)), uintptr(hashAlgID))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HashAlgID dispatches through ICEnroll3's vtable slot 78.
 func (self *ICEnroll3) Get_HashAlgID(hashAlgID *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hashAlgID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LimitExchangeKeyToEncipherment dispatches through ICEnroll3's vtable slot 79.
 func (self *ICEnroll3) Put_LimitExchangeKeyToEncipherment(fLimitExchangeKeyToEncipherment bool) error {
 	_fLimitExchangeKeyToEncipherment := win32.Bool32(fLimitExchangeKeyToEncipherment)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[79], uintptr(unsafe.Pointer(self)), uintptr(_fLimitExchangeKeyToEncipherment))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LimitExchangeKeyToEncipherment dispatches through ICEnroll3's vtable slot 80.
 func (self *ICEnroll3) Get_LimitExchangeKeyToEncipherment(fLimitExchangeKeyToEncipherment *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[80], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fLimitExchangeKeyToEncipherment)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EnableSMIMECapabilities dispatches through ICEnroll3's vtable slot 81.
 func (self *ICEnroll3) Put_EnableSMIMECapabilities(fEnableSMIMECapabilities bool) error {
 	_fEnableSMIMECapabilities := win32.Bool32(fEnableSMIMECapabilities)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(_fEnableSMIMECapabilities))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EnableSMIMECapabilities dispatches through ICEnroll3's vtable slot 82.
 func (self *ICEnroll3) Get_EnableSMIMECapabilities(fEnableSMIMECapabilities *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fEnableSMIMECapabilities)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICEnroll4: https://learn.microsoft.com/windows/win32/api/xenroll/nn-xenroll-icenroll4
@@ -663,201 +663,201 @@ var IID_ICEnroll4 = win32.GUID{Data1: 0xc1f1188a, Data2: 0x2eb5, Data3: 0x4a80, 
 // Put_PrivateKeyArchiveCertificate dispatches through ICEnroll4's vtable slot 83.
 func (self *ICEnroll4) Put_PrivateKeyArchiveCertificate(bstrCert foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrCert)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PrivateKeyArchiveCertificate dispatches through ICEnroll4's vtable slot 84.
 func (self *ICEnroll4) Get_PrivateKeyArchiveCertificate(pbstrCert *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrCert)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ThumbPrint dispatches through ICEnroll4's vtable slot 85.
 func (self *ICEnroll4) Put_ThumbPrint(bstrThumbPrint foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrThumbPrint)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ThumbPrint dispatches through ICEnroll4's vtable slot 86.
 func (self *ICEnroll4) Get_ThumbPrint(pbstrThumbPrint *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrThumbPrint)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BinaryToString dispatches through ICEnroll4's vtable slot 87.
 func (self *ICEnroll4) BinaryToString(Flags int32, strBinary foundation.BSTR, pstrEncoded *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[87], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(strBinary)), uintptr(unsafe.Pointer(pstrEncoded)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StringToBinary dispatches through ICEnroll4's vtable slot 88.
 func (self *ICEnroll4) StringToBinary(Flags int32, strEncoded foundation.BSTR, pstrBinary *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[88], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(strEncoded)), uintptr(unsafe.Pointer(pstrBinary)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddExtensionToRequest dispatches through ICEnroll4's vtable slot 89.
 func (self *ICEnroll4) AddExtensionToRequest(Flags int32, strName foundation.BSTR, strValue foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[89], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(strName)), uintptr(unsafe.Pointer(strValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddAttributeToRequest dispatches through ICEnroll4's vtable slot 90.
 func (self *ICEnroll4) AddAttributeToRequest(Flags int32, strName foundation.BSTR, strValue foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(strName)), uintptr(unsafe.Pointer(strValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddNameValuePairToRequest dispatches through ICEnroll4's vtable slot 91.
 func (self *ICEnroll4) AddNameValuePairToRequest(Flags int32, strName foundation.BSTR, strValue foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[91], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(strName)), uintptr(unsafe.Pointer(strValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ResetExtensions dispatches through ICEnroll4's vtable slot 92.
 func (self *ICEnroll4) ResetExtensions() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[92], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ResetAttributes dispatches through ICEnroll4's vtable slot 93.
 func (self *ICEnroll4) ResetAttributes() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[93], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateRequest dispatches through ICEnroll4's vtable slot 94.
 func (self *ICEnroll4) CreateRequest(Flags CERT_CREATE_REQUEST_FLAGS, strDNName foundation.BSTR, Usage foundation.BSTR, pstrRequest *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[94], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(strDNName)), uintptr(unsafe.Pointer(Usage)), uintptr(unsafe.Pointer(pstrRequest)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateFileRequest dispatches through ICEnroll4's vtable slot 95.
 func (self *ICEnroll4) CreateFileRequest(Flags CERT_CREATE_REQUEST_FLAGS, strDNName foundation.BSTR, strUsage foundation.BSTR, strRequestFileName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[95], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(strDNName)), uintptr(unsafe.Pointer(strUsage)), uintptr(unsafe.Pointer(strRequestFileName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AcceptResponse dispatches through ICEnroll4's vtable slot 96.
 func (self *ICEnroll4) AcceptResponse(strResponse foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[96], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strResponse)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AcceptFileResponse dispatches through ICEnroll4's vtable slot 97.
 func (self *ICEnroll4) AcceptFileResponse(strResponseFileName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[97], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strResponseFileName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCertFromResponse dispatches through ICEnroll4's vtable slot 98.
 func (self *ICEnroll4) GetCertFromResponse(strResponse foundation.BSTR, pstrCert *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[98], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strResponse)), uintptr(unsafe.Pointer(pstrCert)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCertFromFileResponse dispatches through ICEnroll4's vtable slot 99.
 func (self *ICEnroll4) GetCertFromFileResponse(strResponseFileName foundation.BSTR, pstrCert *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[99], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strResponseFileName)), uintptr(unsafe.Pointer(pstrCert)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePFX dispatches through ICEnroll4's vtable slot 100.
 func (self *ICEnroll4) CreatePFX(strPassword foundation.BSTR, pstrPFX *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[100], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strPassword)), uintptr(unsafe.Pointer(pstrPFX)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateFilePFX dispatches through ICEnroll4's vtable slot 101.
 func (self *ICEnroll4) CreateFilePFX(strPassword foundation.BSTR, strPFXFileName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[101], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strPassword)), uintptr(unsafe.Pointer(strPFXFileName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetPendingRequestInfo dispatches through ICEnroll4's vtable slot 102.
 func (self *ICEnroll4) SetPendingRequestInfo(lRequestID int32, strCADNS foundation.BSTR, strCAName foundation.BSTR, strFriendlyName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[102], uintptr(unsafe.Pointer(self)), uintptr(lRequestID), uintptr(unsafe.Pointer(strCADNS)), uintptr(unsafe.Pointer(strCAName)), uintptr(unsafe.Pointer(strFriendlyName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumPendingRequest dispatches through ICEnroll4's vtable slot 103.
 func (self *ICEnroll4) EnumPendingRequest(lIndex int32, lDesiredProperty PENDING_REQUEST_DESIRED_PROPERTY, pvarProperty *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[103], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(lDesiredProperty), uintptr(unsafe.Pointer(pvarProperty)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemovePendingRequest dispatches through ICEnroll4's vtable slot 104.
 func (self *ICEnroll4) RemovePendingRequest(strThumbprint foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[104], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strThumbprint)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetKeyLenEx dispatches through ICEnroll4's vtable slot 105.
 func (self *ICEnroll4) GetKeyLenEx(lSizeSpec XEKL_KEYSIZE, lKeySpec XEKL_KEYSPEC, pdwKeySize *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[105], uintptr(unsafe.Pointer(self)), uintptr(lSizeSpec), uintptr(lKeySpec), uintptr(unsafe.Pointer(pdwKeySize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InstallPKCS7Ex dispatches through ICEnroll4's vtable slot 106.
 func (self *ICEnroll4) InstallPKCS7Ex(PKCS7 foundation.BSTR, plCertInstalled *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[106], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PKCS7)), uintptr(unsafe.Pointer(plCertInstalled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddCertTypeToRequestEx dispatches through ICEnroll4's vtable slot 107.
 func (self *ICEnroll4) AddCertTypeToRequestEx(lType ADDED_CERT_TYPE, bstrOIDOrName foundation.BSTR, lMajorVersion int32, fMinorVersion bool, lMinorVersion int32) error {
 	_fMinorVersion := win32.Bool32(fMinorVersion)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[107], uintptr(unsafe.Pointer(self)), uintptr(lType), uintptr(unsafe.Pointer(bstrOIDOrName)), uintptr(lMajorVersion), uintptr(_fMinorVersion), uintptr(lMinorVersion))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProviderType dispatches through ICEnroll4's vtable slot 108.
 func (self *ICEnroll4) GetProviderType(strProvName foundation.BSTR, plProvType *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[108], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strProvName)), uintptr(unsafe.Pointer(plProvType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SignerCertificate dispatches through ICEnroll4's vtable slot 109.
 func (self *ICEnroll4) Put_SignerCertificate(bstrCert foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[109], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrCert)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ClientId dispatches through ICEnroll4's vtable slot 110.
 func (self *ICEnroll4) Put_ClientId(lClientId int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[110], uintptr(unsafe.Pointer(self)), uintptr(lClientId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ClientId dispatches through ICEnroll4's vtable slot 111.
 func (self *ICEnroll4) Get_ClientId(plClientId *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[111], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plClientId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddBlobPropertyToCertificate dispatches through ICEnroll4's vtable slot 112.
 func (self *ICEnroll4) AddBlobPropertyToCertificate(lPropertyId int32, lReserved int32, bstrProperty foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[112], uintptr(unsafe.Pointer(self)), uintptr(lPropertyId), uintptr(lReserved), uintptr(unsafe.Pointer(bstrProperty)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ResetBlobProperties dispatches through ICEnroll4's vtable slot 113.
 func (self *ICEnroll4) ResetBlobProperties() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[113], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_IncludeSubjectKeyID dispatches through ICEnroll4's vtable slot 114.
 func (self *ICEnroll4) Put_IncludeSubjectKeyID(fInclude bool) error {
 	_fInclude := win32.Bool32(fInclude)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[114], uintptr(unsafe.Pointer(self)), uintptr(_fInclude))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IncludeSubjectKeyID dispatches through ICEnroll4's vtable slot 115.
 func (self *ICEnroll4) Get_IncludeSubjectKeyID(pfInclude *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[115], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfInclude)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertAdmin: https://learn.microsoft.com/windows/win32/api/certadm/nn-certadm-icertadmin
@@ -872,49 +872,49 @@ var IID_ICertAdmin = win32.GUID{Data1: 0x34df6950, Data2: 0x7fb6, Data3: 0x11d0,
 // IsValidCertificate dispatches through ICertAdmin's vtable slot 7.
 func (self *ICertAdmin) IsValidCertificate(strConfig foundation.BSTR, strSerialNumber foundation.BSTR, pDisposition *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strConfig)), uintptr(unsafe.Pointer(strSerialNumber)), uintptr(unsafe.Pointer(pDisposition)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRevocationReason dispatches through ICertAdmin's vtable slot 8.
 func (self *ICertAdmin) GetRevocationReason(pReason *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pReason)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetRequestAttributes dispatches through ICertAdmin's vtable slot 10.
 func (self *ICertAdmin) SetRequestAttributes(strConfig foundation.BSTR, RequestId int32, strAttributes foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strConfig)), uintptr(RequestId), uintptr(unsafe.Pointer(strAttributes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCertificateExtension dispatches through ICertAdmin's vtable slot 11.
 func (self *ICertAdmin) SetCertificateExtension(strConfig foundation.BSTR, RequestId int32, strExtensionName foundation.BSTR, Type CERT_PROPERTY_TYPE, Flags int32, pvarValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strConfig)), uintptr(RequestId), uintptr(unsafe.Pointer(strExtensionName)), uintptr(Type), uintptr(Flags), uintptr(unsafe.Pointer(pvarValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DenyRequest dispatches through ICertAdmin's vtable slot 12.
 func (self *ICertAdmin) DenyRequest(strConfig foundation.BSTR, RequestId int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strConfig)), uintptr(RequestId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ResubmitRequest dispatches through ICertAdmin's vtable slot 13.
 func (self *ICertAdmin) ResubmitRequest(strConfig foundation.BSTR, RequestId int32, pDisposition *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strConfig)), uintptr(RequestId), uintptr(unsafe.Pointer(pDisposition)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCRL dispatches through ICertAdmin's vtable slot 15.
 func (self *ICertAdmin) GetCRL(strConfig foundation.BSTR, Flags int32, pstrCRL *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strConfig)), uintptr(Flags), uintptr(unsafe.Pointer(pstrCRL)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ImportCertificate dispatches through ICertAdmin's vtable slot 16.
 func (self *ICertAdmin) ImportCertificate(strConfig foundation.BSTR, strCertificate foundation.BSTR, Flags CERT_IMPORT_FLAGS, pRequestId *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strConfig)), uintptr(unsafe.Pointer(strCertificate)), uintptr(Flags), uintptr(unsafe.Pointer(pRequestId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertAdmin2: https://learn.microsoft.com/windows/win32/api/certadm/nn-certadm-icertadmin2
@@ -929,55 +929,55 @@ var IID_ICertAdmin2 = win32.GUID{Data1: 0xf7c3ac41, Data2: 0xb8ce, Data3: 0x4fb4
 // GetCAProperty dispatches through ICertAdmin2's vtable slot 18.
 func (self *ICertAdmin2) GetCAProperty(strConfig foundation.BSTR, PropId int32, PropIndex int32, PropType int32, Flags int32, pvarPropertyValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strConfig)), uintptr(PropId), uintptr(PropIndex), uintptr(PropType), uintptr(Flags), uintptr(unsafe.Pointer(pvarPropertyValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCAProperty dispatches through ICertAdmin2's vtable slot 19.
 func (self *ICertAdmin2) SetCAProperty(strConfig foundation.BSTR, PropId int32, PropIndex int32, PropType CERT_PROPERTY_TYPE, pvarPropertyValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strConfig)), uintptr(PropId), uintptr(PropIndex), uintptr(PropType), uintptr(unsafe.Pointer(pvarPropertyValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCAPropertyFlags dispatches through ICertAdmin2's vtable slot 20.
 func (self *ICertAdmin2) GetCAPropertyFlags(strConfig foundation.BSTR, PropId int32, pPropFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strConfig)), uintptr(PropId), uintptr(unsafe.Pointer(pPropFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCAPropertyDisplayName dispatches through ICertAdmin2's vtable slot 21.
 func (self *ICertAdmin2) GetCAPropertyDisplayName(strConfig foundation.BSTR, PropId int32, pstrDisplayName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strConfig)), uintptr(PropId), uintptr(unsafe.Pointer(pstrDisplayName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetArchivedKey dispatches through ICertAdmin2's vtable slot 22.
 func (self *ICertAdmin2) GetArchivedKey(strConfig foundation.BSTR, RequestId int32, Flags int32, pstrArchivedKey *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strConfig)), uintptr(RequestId), uintptr(Flags), uintptr(unsafe.Pointer(pstrArchivedKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetConfigEntry dispatches through ICertAdmin2's vtable slot 23.
 func (self *ICertAdmin2) GetConfigEntry(strConfig foundation.BSTR, strNodePath foundation.BSTR, strEntryName foundation.BSTR, pvarEntry *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strConfig)), uintptr(unsafe.Pointer(strNodePath)), uintptr(unsafe.Pointer(strEntryName)), uintptr(unsafe.Pointer(pvarEntry)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetConfigEntry dispatches through ICertAdmin2's vtable slot 24.
 func (self *ICertAdmin2) SetConfigEntry(strConfig foundation.BSTR, strNodePath foundation.BSTR, strEntryName foundation.BSTR, pvarEntry *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strConfig)), uintptr(unsafe.Pointer(strNodePath)), uintptr(unsafe.Pointer(strEntryName)), uintptr(unsafe.Pointer(pvarEntry)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ImportKey dispatches through ICertAdmin2's vtable slot 25.
 func (self *ICertAdmin2) ImportKey(strConfig foundation.BSTR, RequestId int32, strCertHash foundation.BSTR, Flags CERT_IMPORT_FLAGS, strKey foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strConfig)), uintptr(RequestId), uintptr(unsafe.Pointer(strCertHash)), uintptr(Flags), uintptr(unsafe.Pointer(strKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMyRoles dispatches through ICertAdmin2's vtable slot 26.
 func (self *ICertAdmin2) GetMyRoles(strConfig foundation.BSTR, pRoles *CERTADMIN_GET_ROLES_FLAGS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strConfig)), uintptr(unsafe.Pointer(pRoles)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertConfig: https://learn.microsoft.com/windows/win32/api/certcli/nn-certcli-icertconfig
@@ -992,25 +992,25 @@ var IID_ICertConfig = win32.GUID{Data1: 0x372fce34, Data2: 0x4324, Data3: 0x11d0
 // Reset dispatches through ICertConfig's vtable slot 7.
 func (self *ICertConfig) Reset(Index int32, pCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Next dispatches through ICertConfig's vtable slot 8.
 func (self *ICertConfig) Next(pIndex *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIndex)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetField dispatches through ICertConfig's vtable slot 9.
 func (self *ICertConfig) GetField(strFieldName foundation.BSTR, pstrOut *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strFieldName)), uintptr(unsafe.Pointer(pstrOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetConfig dispatches through ICertConfig's vtable slot 10.
 func (self *ICertConfig) GetConfig(Flags int32, pstrOut *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(pstrOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertConfig2: https://learn.microsoft.com/windows/win32/api/certcli/nn-certcli-icertconfig2
@@ -1025,7 +1025,7 @@ var IID_ICertConfig2 = win32.GUID{Data1: 0x7a18edde, Data2: 0x7e78, Data3: 0x416
 // SetSharedFolder dispatches through ICertConfig2's vtable slot 11.
 func (self *ICertConfig2) SetSharedFolder(strSharedFolder foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strSharedFolder)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertEncodeAltName: https://learn.microsoft.com/windows/win32/api/certenc/nn-certenc-icertencodealtname
@@ -1040,43 +1040,43 @@ var IID_ICertEncodeAltName = win32.GUID{Data1: 0x1c9a8c70, Data2: 0x1271, Data3:
 // Decode dispatches through ICertEncodeAltName's vtable slot 7.
 func (self *ICertEncodeAltName) Decode(strBinary foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strBinary)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNameCount dispatches through ICertEncodeAltName's vtable slot 8.
 func (self *ICertEncodeAltName) GetNameCount(pNameCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNameCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNameChoice dispatches through ICertEncodeAltName's vtable slot 9.
 func (self *ICertEncodeAltName) GetNameChoice(NameIndex int32, pNameChoice *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(NameIndex), uintptr(unsafe.Pointer(pNameChoice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetName dispatches through ICertEncodeAltName's vtable slot 10.
 func (self *ICertEncodeAltName) GetName(NameIndex int32, pstrName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(NameIndex), uintptr(unsafe.Pointer(pstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through ICertEncodeAltName's vtable slot 11.
 func (self *ICertEncodeAltName) Reset(NameCount int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(NameCount))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetNameEntry dispatches through ICertEncodeAltName's vtable slot 12.
 func (self *ICertEncodeAltName) SetNameEntry(NameIndex int32, NameChoice CERT_ALT_NAME, strName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(NameIndex), uintptr(NameChoice), uintptr(unsafe.Pointer(strName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Encode dispatches through ICertEncodeAltName's vtable slot 13.
 func (self *ICertEncodeAltName) Encode(pstrBinary *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrBinary)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f67fe177-5ef1-4535-b4ce-29df15e2e0c3
@@ -1090,25 +1090,25 @@ var IID_ICertEncodeAltName2 = win32.GUID{Data1: 0xf67fe177, Data2: 0x5ef1, Data3
 // DecodeBlob dispatches through ICertEncodeAltName2's vtable slot 14.
 func (self *ICertEncodeAltName2) DecodeBlob(strEncodedData foundation.BSTR, Encoding EncodingType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strEncodedData)), uintptr(Encoding))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EncodeBlob dispatches through ICertEncodeAltName2's vtable slot 15.
 func (self *ICertEncodeAltName2) EncodeBlob(Encoding EncodingType, pstrEncodedData *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pstrEncodedData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNameBlob dispatches through ICertEncodeAltName2's vtable slot 16.
 func (self *ICertEncodeAltName2) GetNameBlob(NameIndex int32, Encoding EncodingType, pstrName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(NameIndex), uintptr(Encoding), uintptr(unsafe.Pointer(pstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetNameEntryBlob dispatches through ICertEncodeAltName2's vtable slot 17.
 func (self *ICertEncodeAltName2) SetNameEntryBlob(NameIndex int32, NameChoice int32, strName foundation.BSTR, Encoding EncodingType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(NameIndex), uintptr(NameChoice), uintptr(unsafe.Pointer(strName)), uintptr(Encoding))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertEncodeBitString: https://learn.microsoft.com/windows/win32/api/certenc/nn-certenc-icertencodebitstring
@@ -1123,25 +1123,25 @@ var IID_ICertEncodeBitString = win32.GUID{Data1: 0x6db525be, Data2: 0x1278, Data
 // Decode dispatches through ICertEncodeBitString's vtable slot 7.
 func (self *ICertEncodeBitString) Decode(strBinary foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strBinary)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBitCount dispatches through ICertEncodeBitString's vtable slot 8.
 func (self *ICertEncodeBitString) GetBitCount(pBitCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBitCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBitString dispatches through ICertEncodeBitString's vtable slot 9.
 func (self *ICertEncodeBitString) GetBitString(pstrBitString *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrBitString)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Encode dispatches through ICertEncodeBitString's vtable slot 10.
 func (self *ICertEncodeBitString) Encode(BitCount int32, strBitString foundation.BSTR, pstrBinary *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(BitCount), uintptr(unsafe.Pointer(strBitString)), uintptr(unsafe.Pointer(pstrBinary)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: e070d6e7-23ef-4dd2-8242-ebd9c928cb30
@@ -1155,19 +1155,19 @@ var IID_ICertEncodeBitString2 = win32.GUID{Data1: 0xe070d6e7, Data2: 0x23ef, Dat
 // DecodeBlob dispatches through ICertEncodeBitString2's vtable slot 11.
 func (self *ICertEncodeBitString2) DecodeBlob(strEncodedData foundation.BSTR, Encoding EncodingType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strEncodedData)), uintptr(Encoding))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EncodeBlob dispatches through ICertEncodeBitString2's vtable slot 12.
 func (self *ICertEncodeBitString2) EncodeBlob(BitCount int32, strBitString foundation.BSTR, EncodingIn EncodingType, Encoding EncodingType, pstrEncodedData *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(BitCount), uintptr(unsafe.Pointer(strBitString)), uintptr(EncodingIn), uintptr(Encoding), uintptr(unsafe.Pointer(pstrEncodedData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBitStringBlob dispatches through ICertEncodeBitString2's vtable slot 13.
 func (self *ICertEncodeBitString2) GetBitStringBlob(Encoding EncodingType, pstrBitString *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pstrBitString)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertEncodeCRLDistInfo: https://learn.microsoft.com/windows/win32/api/certenc/nn-certenc-icertencodecrldistinfo
@@ -1182,55 +1182,55 @@ var IID_ICertEncodeCRLDistInfo = win32.GUID{Data1: 0x01958640, Data2: 0xbbff, Da
 // Decode dispatches through ICertEncodeCRLDistInfo's vtable slot 7.
 func (self *ICertEncodeCRLDistInfo) Decode(strBinary foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strBinary)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDistPointCount dispatches through ICertEncodeCRLDistInfo's vtable slot 8.
 func (self *ICertEncodeCRLDistInfo) GetDistPointCount(pDistPointCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDistPointCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNameCount dispatches through ICertEncodeCRLDistInfo's vtable slot 9.
 func (self *ICertEncodeCRLDistInfo) GetNameCount(DistPointIndex int32, pNameCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(DistPointIndex), uintptr(unsafe.Pointer(pNameCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNameChoice dispatches through ICertEncodeCRLDistInfo's vtable slot 10.
 func (self *ICertEncodeCRLDistInfo) GetNameChoice(DistPointIndex int32, NameIndex int32, pNameChoice *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(DistPointIndex), uintptr(NameIndex), uintptr(unsafe.Pointer(pNameChoice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetName dispatches through ICertEncodeCRLDistInfo's vtable slot 11.
 func (self *ICertEncodeCRLDistInfo) GetName(DistPointIndex int32, NameIndex int32, pstrName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(DistPointIndex), uintptr(NameIndex), uintptr(unsafe.Pointer(pstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through ICertEncodeCRLDistInfo's vtable slot 12.
 func (self *ICertEncodeCRLDistInfo) Reset(DistPointCount int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(DistPointCount))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetNameCount dispatches through ICertEncodeCRLDistInfo's vtable slot 13.
 func (self *ICertEncodeCRLDistInfo) SetNameCount(DistPointIndex int32, NameCount int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(DistPointIndex), uintptr(NameCount))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetNameEntry dispatches through ICertEncodeCRLDistInfo's vtable slot 14.
 func (self *ICertEncodeCRLDistInfo) SetNameEntry(DistPointIndex int32, NameIndex int32, NameChoice CERT_ALT_NAME, strName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(DistPointIndex), uintptr(NameIndex), uintptr(NameChoice), uintptr(unsafe.Pointer(strName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Encode dispatches through ICertEncodeCRLDistInfo's vtable slot 15.
 func (self *ICertEncodeCRLDistInfo) Encode(pstrBinary *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrBinary)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: b4275d4b-3e30-446f-ad36-09d03120b078
@@ -1244,13 +1244,13 @@ var IID_ICertEncodeCRLDistInfo2 = win32.GUID{Data1: 0xb4275d4b, Data2: 0x3e30, D
 // DecodeBlob dispatches through ICertEncodeCRLDistInfo2's vtable slot 16.
 func (self *ICertEncodeCRLDistInfo2) DecodeBlob(strEncodedData foundation.BSTR, Encoding EncodingType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strEncodedData)), uintptr(Encoding))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EncodeBlob dispatches through ICertEncodeCRLDistInfo2's vtable slot 17.
 func (self *ICertEncodeCRLDistInfo2) EncodeBlob(Encoding EncodingType, pstrEncodedData *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pstrEncodedData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertEncodeDateArray: https://learn.microsoft.com/windows/win32/api/certenc/nn-certenc-icertencodedatearray
@@ -1265,31 +1265,31 @@ var IID_ICertEncodeDateArray = win32.GUID{Data1: 0x2f9469a0, Data2: 0xa470, Data
 // Decode dispatches through ICertEncodeDateArray's vtable slot 7.
 func (self *ICertEncodeDateArray) Decode(strBinary foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strBinary)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCount dispatches through ICertEncodeDateArray's vtable slot 8.
 func (self *ICertEncodeDateArray) GetCount(pCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetValue dispatches through ICertEncodeDateArray's vtable slot 9.
 func (self *ICertEncodeDateArray) GetValue(Index int32, pValue *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through ICertEncodeDateArray's vtable slot 10.
 func (self *ICertEncodeDateArray) Reset(Count int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Count))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Encode dispatches through ICertEncodeDateArray's vtable slot 12.
 func (self *ICertEncodeDateArray) Encode(pstrBinary *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrBinary)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 99a4edb5-2b8e-448d-bf95-bba8d7789dc8
@@ -1303,13 +1303,13 @@ var IID_ICertEncodeDateArray2 = win32.GUID{Data1: 0x99a4edb5, Data2: 0x2b8e, Dat
 // DecodeBlob dispatches through ICertEncodeDateArray2's vtable slot 13.
 func (self *ICertEncodeDateArray2) DecodeBlob(strEncodedData foundation.BSTR, Encoding EncodingType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strEncodedData)), uintptr(Encoding))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EncodeBlob dispatches through ICertEncodeDateArray2's vtable slot 14.
 func (self *ICertEncodeDateArray2) EncodeBlob(Encoding EncodingType, pstrEncodedData *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pstrEncodedData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertEncodeLongArray: https://learn.microsoft.com/windows/win32/api/certenc/nn-certenc-icertencodelongarray
@@ -1324,37 +1324,37 @@ var IID_ICertEncodeLongArray = win32.GUID{Data1: 0x15e2f230, Data2: 0xa0a2, Data
 // Decode dispatches through ICertEncodeLongArray's vtable slot 7.
 func (self *ICertEncodeLongArray) Decode(strBinary foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strBinary)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCount dispatches through ICertEncodeLongArray's vtable slot 8.
 func (self *ICertEncodeLongArray) GetCount(pCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetValue dispatches through ICertEncodeLongArray's vtable slot 9.
 func (self *ICertEncodeLongArray) GetValue(Index int32, pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through ICertEncodeLongArray's vtable slot 10.
 func (self *ICertEncodeLongArray) Reset(Count int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Count))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetValue dispatches through ICertEncodeLongArray's vtable slot 11.
 func (self *ICertEncodeLongArray) SetValue(Index int32, Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Encode dispatches through ICertEncodeLongArray's vtable slot 12.
 func (self *ICertEncodeLongArray) Encode(pstrBinary *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrBinary)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 4efde84a-bd9b-4fc2-a108-c347d478840f
@@ -1368,13 +1368,13 @@ var IID_ICertEncodeLongArray2 = win32.GUID{Data1: 0x4efde84a, Data2: 0xbd9b, Dat
 // DecodeBlob dispatches through ICertEncodeLongArray2's vtable slot 13.
 func (self *ICertEncodeLongArray2) DecodeBlob(strEncodedData foundation.BSTR, Encoding EncodingType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strEncodedData)), uintptr(Encoding))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EncodeBlob dispatches through ICertEncodeLongArray2's vtable slot 14.
 func (self *ICertEncodeLongArray2) EncodeBlob(Encoding EncodingType, pstrEncodedData *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pstrEncodedData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertEncodeStringArray: https://learn.microsoft.com/windows/win32/api/certenc/nn-certenc-icertencodestringarray
@@ -1389,43 +1389,43 @@ var IID_ICertEncodeStringArray = win32.GUID{Data1: 0x12a88820, Data2: 0x7494, Da
 // Decode dispatches through ICertEncodeStringArray's vtable slot 7.
 func (self *ICertEncodeStringArray) Decode(strBinary foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strBinary)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStringType dispatches through ICertEncodeStringArray's vtable slot 8.
 func (self *ICertEncodeStringArray) GetStringType(pStringType *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStringType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCount dispatches through ICertEncodeStringArray's vtable slot 9.
 func (self *ICertEncodeStringArray) GetCount(pCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetValue dispatches through ICertEncodeStringArray's vtable slot 10.
 func (self *ICertEncodeStringArray) GetValue(Index int32, pstr *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pstr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through ICertEncodeStringArray's vtable slot 11.
 func (self *ICertEncodeStringArray) Reset(Count int32, StringType securitycryptography.CERT_RDN_ATTR_VALUE_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Count), uintptr(StringType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetValue dispatches through ICertEncodeStringArray's vtable slot 12.
 func (self *ICertEncodeStringArray) SetValue(Index int32, str foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(str)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Encode dispatches through ICertEncodeStringArray's vtable slot 13.
 func (self *ICertEncodeStringArray) Encode(pstrBinary *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrBinary)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 9c680d93-9b7d-4e95-9018-4ffe10ba5ada
@@ -1439,13 +1439,13 @@ var IID_ICertEncodeStringArray2 = win32.GUID{Data1: 0x9c680d93, Data2: 0x9b7d, D
 // DecodeBlob dispatches through ICertEncodeStringArray2's vtable slot 14.
 func (self *ICertEncodeStringArray2) DecodeBlob(strEncodedData foundation.BSTR, Encoding EncodingType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strEncodedData)), uintptr(Encoding))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EncodeBlob dispatches through ICertEncodeStringArray2's vtable slot 15.
 func (self *ICertEncodeStringArray2) EncodeBlob(Encoding EncodingType, pstrEncodedData *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pstrEncodedData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertExit: https://learn.microsoft.com/windows/win32/api/certexit/nn-certexit-icertexit
@@ -1461,20 +1461,20 @@ var IID_ICertExit = win32.GUID{Data1: 0xe19ae1a0, Data2: 0x7364, Data3: 0x11d0, 
 func (self *ICertExit) Initialize(strConfig foundation.BSTR) (CERT_EXIT_EVENT_MASK, error) {
 	var _pEventMask CERT_EXIT_EVENT_MASK
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strConfig)), uintptr(unsafe.Pointer(&_pEventMask)))
-	return _pEventMask, win32.HRESULTError(int32(r1))
+	return _pEventMask, win32.ErrIfFailed(int32(r1))
 }
 
 // Notify dispatches through ICertExit's vtable slot 8.
 func (self *ICertExit) Notify(ExitEvent int32, Context int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(ExitEvent), uintptr(Context))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDescription dispatches through ICertExit's vtable slot 9.
 func (self *ICertExit) GetDescription() (foundation.BSTR, error) {
 	var _pstrDescription foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pstrDescription)))
-	return _pstrDescription, win32.HRESULTError(int32(r1))
+	return _pstrDescription, win32.ErrIfFailed(int32(r1))
 }
 
 // ICertExit2: https://learn.microsoft.com/windows/win32/api/certexit/nn-certexit-icertexit2
@@ -1490,7 +1490,7 @@ var IID_ICertExit2 = win32.GUID{Data1: 0x0abf484b, Data2: 0xd049, Data3: 0x464d,
 func (self *ICertExit2) GetManageModule() (*ICertManageModule, error) {
 	var _ppManageModule *ICertManageModule
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppManageModule)))
-	return _ppManageModule, win32.HRESULTError(int32(r1))
+	return _ppManageModule, win32.ErrIfFailed(int32(r1))
 }
 
 // ICertGetConfig: https://learn.microsoft.com/windows/win32/api/certcli/nn-certcli-icertgetconfig
@@ -1505,7 +1505,7 @@ var IID_ICertGetConfig = win32.GUID{Data1: 0xc7ea09c0, Data2: 0xce17, Data3: 0x1
 // GetConfig dispatches through ICertGetConfig's vtable slot 7.
 func (self *ICertGetConfig) GetConfig(Flags CERT_GET_CONFIG_FLAGS, pstrOut *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(pstrOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertManageModule: https://learn.microsoft.com/windows/win32/api/certmod/nn-certmod-icertmanagemodule
@@ -1521,19 +1521,19 @@ var IID_ICertManageModule = win32.GUID{Data1: 0xe7d7ad42, Data2: 0xbd3d, Data3: 
 func (self *ICertManageModule) GetProperty(strConfig foundation.BSTR, strStorageLocation foundation.BSTR, strPropertyName foundation.BSTR, Flags int32) (systemvariant.VARIANT, error) {
 	var _pvarProperty systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strConfig)), uintptr(unsafe.Pointer(strStorageLocation)), uintptr(unsafe.Pointer(strPropertyName)), uintptr(Flags), uintptr(unsafe.Pointer(&_pvarProperty)))
-	return _pvarProperty, win32.HRESULTError(int32(r1))
+	return _pvarProperty, win32.ErrIfFailed(int32(r1))
 }
 
 // SetProperty dispatches through ICertManageModule's vtable slot 8.
 func (self *ICertManageModule) SetProperty(strConfig foundation.BSTR, strStorageLocation foundation.BSTR, strPropertyName foundation.BSTR, Flags int32, pvarProperty *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strConfig)), uintptr(unsafe.Pointer(strStorageLocation)), uintptr(unsafe.Pointer(strPropertyName)), uintptr(Flags), uintptr(unsafe.Pointer(pvarProperty)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Configure dispatches through ICertManageModule's vtable slot 9.
 func (self *ICertManageModule) Configure(strConfig foundation.BSTR, strStorageLocation foundation.BSTR, Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strConfig)), uintptr(unsafe.Pointer(strStorageLocation)), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertPolicy: https://learn.microsoft.com/windows/win32/api/certpol/nn-certpol-icertpolicy
@@ -1548,27 +1548,27 @@ var IID_ICertPolicy = win32.GUID{Data1: 0x38bb5a00, Data2: 0x7636, Data3: 0x11d0
 // Initialize dispatches through ICertPolicy's vtable slot 7.
 func (self *ICertPolicy) Initialize(strConfig foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strConfig)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // VerifyRequest dispatches through ICertPolicy's vtable slot 8.
 func (self *ICertPolicy) VerifyRequest(strConfig foundation.BSTR, Context int32, bNewRequest int32, Flags int32) (int32, error) {
 	var _pDisposition int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strConfig)), uintptr(Context), uintptr(bNewRequest), uintptr(Flags), uintptr(unsafe.Pointer(&_pDisposition)))
-	return _pDisposition, win32.HRESULTError(int32(r1))
+	return _pDisposition, win32.ErrIfFailed(int32(r1))
 }
 
 // GetDescription dispatches through ICertPolicy's vtable slot 9.
 func (self *ICertPolicy) GetDescription() (foundation.BSTR, error) {
 	var _pstrDescription foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pstrDescription)))
-	return _pstrDescription, win32.HRESULTError(int32(r1))
+	return _pstrDescription, win32.ErrIfFailed(int32(r1))
 }
 
 // ShutDown dispatches through ICertPolicy's vtable slot 10.
 func (self *ICertPolicy) ShutDown() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertPolicy2: https://learn.microsoft.com/windows/win32/api/certpol/nn-certpol-icertpolicy2
@@ -1584,7 +1584,7 @@ var IID_ICertPolicy2 = win32.GUID{Data1: 0x3db4910e, Data2: 0x8001, Data3: 0x4bf
 func (self *ICertPolicy2) GetManageModule() (*ICertManageModule, error) {
 	var _ppManageModule *ICertManageModule
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppManageModule)))
-	return _ppManageModule, win32.HRESULTError(int32(r1))
+	return _ppManageModule, win32.ErrIfFailed(int32(r1))
 }
 
 // ICertProperties: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-icertproperties
@@ -1599,43 +1599,43 @@ var IID_ICertProperties = win32.GUID{Data1: 0x728ab32f, Data2: 0x217d, Data3: 0x
 // Get_ItemByIndex dispatches through ICertProperties's vtable slot 7.
 func (self *ICertProperties) Get_ItemByIndex(Index int32, pVal **ICertProperty) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through ICertProperties's vtable slot 8.
 func (self *ICertProperties) Get_Count(pVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ICertProperties's vtable slot 9.
 func (self *ICertProperties) Get__NewEnum(pVal **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through ICertProperties's vtable slot 10.
 func (self *ICertProperties) Add(pVal *ICertProperty) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through ICertProperties's vtable slot 11.
 func (self *ICertProperties) Remove(Index int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through ICertProperties's vtable slot 12.
 func (self *ICertProperties) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeFromCertificate dispatches through ICertProperties's vtable slot 13.
 func (self *ICertProperties) InitializeFromCertificate(MachineContext foundation.VARIANT_BOOL, Encoding EncodingType, strCertificate foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(MachineContext), uintptr(Encoding), uintptr(unsafe.Pointer(strCertificate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertProperty: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-icertproperty
@@ -1650,43 +1650,43 @@ var IID_ICertProperty = win32.GUID{Data1: 0x728ab32e, Data2: 0x217d, Data3: 0x11
 // InitializeFromCertificate dispatches through ICertProperty's vtable slot 7.
 func (self *ICertProperty) InitializeFromCertificate(MachineContext foundation.VARIANT_BOOL, Encoding EncodingType, strCertificate foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(MachineContext), uintptr(Encoding), uintptr(unsafe.Pointer(strCertificate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeDecode dispatches through ICertProperty's vtable slot 8.
 func (self *ICertProperty) InitializeDecode(Encoding EncodingType, strEncodedData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(strEncodedData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PropertyId dispatches through ICertProperty's vtable slot 9.
 func (self *ICertProperty) Get_PropertyId(pValue *CERTENROLL_PROPERTYID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PropertyId dispatches through ICertProperty's vtable slot 10.
 func (self *ICertProperty) Put_PropertyId(Value CERTENROLL_PROPERTYID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RawData dispatches through ICertProperty's vtable slot 11.
 func (self *ICertProperty) Get_RawData(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveFromCertificate dispatches through ICertProperty's vtable slot 12.
 func (self *ICertProperty) RemoveFromCertificate(MachineContext foundation.VARIANT_BOOL, Encoding EncodingType, strCertificate foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(MachineContext), uintptr(Encoding), uintptr(unsafe.Pointer(strCertificate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetValueOnCertificate dispatches through ICertProperty's vtable slot 13.
 func (self *ICertProperty) SetValueOnCertificate(MachineContext foundation.VARIANT_BOOL, Encoding EncodingType, strCertificate foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(MachineContext), uintptr(Encoding), uintptr(unsafe.Pointer(strCertificate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertPropertyArchived: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-icertpropertyarchived
@@ -1701,13 +1701,13 @@ var IID_ICertPropertyArchived = win32.GUID{Data1: 0x728ab337, Data2: 0x217d, Dat
 // Initialize dispatches through ICertPropertyArchived's vtable slot 14.
 func (self *ICertPropertyArchived) Initialize(ArchivedValue foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(ArchivedValue))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Archived dispatches through ICertPropertyArchived's vtable slot 15.
 func (self *ICertPropertyArchived) Get_Archived(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertPropertyArchivedKeyHash: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-icertpropertyarchivedkeyhash
@@ -1722,13 +1722,13 @@ var IID_ICertPropertyArchivedKeyHash = win32.GUID{Data1: 0x728ab33b, Data2: 0x21
 // Initialize dispatches through ICertPropertyArchivedKeyHash's vtable slot 14.
 func (self *ICertPropertyArchivedKeyHash) Initialize(Encoding EncodingType, strArchivedKeyHashValue foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(strArchivedKeyHashValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ArchivedKeyHash dispatches through ICertPropertyArchivedKeyHash's vtable slot 15.
 func (self *ICertPropertyArchivedKeyHash) Get_ArchivedKeyHash(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertPropertyAutoEnroll: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-icertpropertyautoenroll
@@ -1743,13 +1743,13 @@ var IID_ICertPropertyAutoEnroll = win32.GUID{Data1: 0x728ab332, Data2: 0x217d, D
 // Initialize dispatches through ICertPropertyAutoEnroll's vtable slot 14.
 func (self *ICertPropertyAutoEnroll) Initialize(strTemplateName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strTemplateName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TemplateName dispatches through ICertPropertyAutoEnroll's vtable slot 15.
 func (self *ICertPropertyAutoEnroll) Get_TemplateName(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertPropertyBackedUp: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-icertpropertybackedup
@@ -1764,19 +1764,19 @@ var IID_ICertPropertyBackedUp = win32.GUID{Data1: 0x728ab338, Data2: 0x217d, Dat
 // InitializeFromCurrentTime dispatches through ICertPropertyBackedUp's vtable slot 14.
 func (self *ICertPropertyBackedUp) InitializeFromCurrentTime(BackedUpValue foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(BackedUpValue))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BackedUpValue dispatches through ICertPropertyBackedUp's vtable slot 16.
 func (self *ICertPropertyBackedUp) Get_BackedUpValue(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BackedUpTime dispatches through ICertPropertyBackedUp's vtable slot 17.
 func (self *ICertPropertyBackedUp) Get_BackedUpTime(pDate *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertPropertyDescription: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-icertpropertydescription
@@ -1791,13 +1791,13 @@ var IID_ICertPropertyDescription = win32.GUID{Data1: 0x728ab331, Data2: 0x217d, 
 // Initialize dispatches through ICertPropertyDescription's vtable slot 14.
 func (self *ICertPropertyDescription) Initialize(strDescription foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through ICertPropertyDescription's vtable slot 15.
 func (self *ICertPropertyDescription) Get_Description(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertPropertyEnrollment: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-icertpropertyenrollment
@@ -1812,31 +1812,31 @@ var IID_ICertPropertyEnrollment = win32.GUID{Data1: 0x728ab339, Data2: 0x217d, D
 // Initialize dispatches through ICertPropertyEnrollment's vtable slot 14.
 func (self *ICertPropertyEnrollment) Initialize(RequestId int32, strCADnsName foundation.BSTR, strCAName foundation.BSTR, strFriendlyName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(RequestId), uintptr(unsafe.Pointer(strCADnsName)), uintptr(unsafe.Pointer(strCAName)), uintptr(unsafe.Pointer(strFriendlyName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RequestId dispatches through ICertPropertyEnrollment's vtable slot 15.
 func (self *ICertPropertyEnrollment) Get_RequestId(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CADnsName dispatches through ICertPropertyEnrollment's vtable slot 16.
 func (self *ICertPropertyEnrollment) Get_CADnsName(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CAName dispatches through ICertPropertyEnrollment's vtable slot 17.
 func (self *ICertPropertyEnrollment) Get_CAName(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FriendlyName dispatches through ICertPropertyEnrollment's vtable slot 18.
 func (self *ICertPropertyEnrollment) Get_FriendlyName(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertPropertyEnrollmentPolicyServer: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-icertpropertyenrollmentpolicyserver
@@ -1851,55 +1851,55 @@ var IID_ICertPropertyEnrollmentPolicyServer = win32.GUID{Data1: 0x728ab34a, Data
 // Initialize dispatches through ICertPropertyEnrollmentPolicyServer's vtable slot 14.
 func (self *ICertPropertyEnrollmentPolicyServer) Initialize(PropertyFlags EnrollmentPolicyServerPropertyFlags, AuthFlags X509EnrollmentAuthFlags, EnrollmentServerAuthFlags X509EnrollmentAuthFlags, UrlFlags PolicyServerUrlFlags, strRequestId foundation.BSTR, strUrl foundation.BSTR, strId foundation.BSTR, strEnrollmentServerUrl foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(PropertyFlags), uintptr(AuthFlags), uintptr(EnrollmentServerAuthFlags), uintptr(UrlFlags), uintptr(unsafe.Pointer(strRequestId)), uintptr(unsafe.Pointer(strUrl)), uintptr(unsafe.Pointer(strId)), uintptr(unsafe.Pointer(strEnrollmentServerUrl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPolicyServerUrl dispatches through ICertPropertyEnrollmentPolicyServer's vtable slot 15.
 func (self *ICertPropertyEnrollmentPolicyServer) GetPolicyServerUrl(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPolicyServerId dispatches through ICertPropertyEnrollmentPolicyServer's vtable slot 16.
 func (self *ICertPropertyEnrollmentPolicyServer) GetPolicyServerId(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEnrollmentServerUrl dispatches through ICertPropertyEnrollmentPolicyServer's vtable slot 17.
 func (self *ICertPropertyEnrollmentPolicyServer) GetEnrollmentServerUrl(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRequestIdString dispatches through ICertPropertyEnrollmentPolicyServer's vtable slot 18.
 func (self *ICertPropertyEnrollmentPolicyServer) GetRequestIdString(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPropertyFlags dispatches through ICertPropertyEnrollmentPolicyServer's vtable slot 19.
 func (self *ICertPropertyEnrollmentPolicyServer) GetPropertyFlags(pValue *EnrollmentPolicyServerPropertyFlags) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetUrlFlags dispatches through ICertPropertyEnrollmentPolicyServer's vtable slot 20.
 func (self *ICertPropertyEnrollmentPolicyServer) GetUrlFlags(pValue *PolicyServerUrlFlags) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAuthentication dispatches through ICertPropertyEnrollmentPolicyServer's vtable slot 21.
 func (self *ICertPropertyEnrollmentPolicyServer) GetAuthentication(pValue *X509EnrollmentAuthFlags) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEnrollmentServerAuthentication dispatches through ICertPropertyEnrollmentPolicyServer's vtable slot 22.
 func (self *ICertPropertyEnrollmentPolicyServer) GetEnrollmentServerAuthentication(pValue *X509EnrollmentAuthFlags) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertPropertyFriendlyName: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-icertpropertyfriendlyname
@@ -1914,13 +1914,13 @@ var IID_ICertPropertyFriendlyName = win32.GUID{Data1: 0x728ab330, Data2: 0x217d,
 // Initialize dispatches through ICertPropertyFriendlyName's vtable slot 14.
 func (self *ICertPropertyFriendlyName) Initialize(strFriendlyName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strFriendlyName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FriendlyName dispatches through ICertPropertyFriendlyName's vtable slot 15.
 func (self *ICertPropertyFriendlyName) Get_FriendlyName(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertPropertyKeyProvInfo: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-icertpropertykeyprovinfo
@@ -1935,13 +1935,13 @@ var IID_ICertPropertyKeyProvInfo = win32.GUID{Data1: 0x728ab336, Data2: 0x217d, 
 // Initialize dispatches through ICertPropertyKeyProvInfo's vtable slot 14.
 func (self *ICertPropertyKeyProvInfo) Initialize(pValue *IX509PrivateKey) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PrivateKey dispatches through ICertPropertyKeyProvInfo's vtable slot 15.
 func (self *ICertPropertyKeyProvInfo) Get_PrivateKey(ppValue **IX509PrivateKey) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertPropertyRenewal: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-icertpropertyrenewal
@@ -1956,19 +1956,19 @@ var IID_ICertPropertyRenewal = win32.GUID{Data1: 0x728ab33a, Data2: 0x217d, Data
 // Initialize dispatches through ICertPropertyRenewal's vtable slot 14.
 func (self *ICertPropertyRenewal) Initialize(Encoding EncodingType, strRenewalValue foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(strRenewalValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeFromCertificateHash dispatches through ICertPropertyRenewal's vtable slot 15.
 func (self *ICertPropertyRenewal) InitializeFromCertificateHash(MachineContext foundation.VARIANT_BOOL, Encoding EncodingType, strCertificate foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(MachineContext), uintptr(Encoding), uintptr(unsafe.Pointer(strCertificate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Renewal dispatches through ICertPropertyRenewal's vtable slot 16.
 func (self *ICertPropertyRenewal) Get_Renewal(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertPropertyRequestOriginator: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-icertpropertyrequestoriginator
@@ -1983,19 +1983,19 @@ var IID_ICertPropertyRequestOriginator = win32.GUID{Data1: 0x728ab333, Data2: 0x
 // Initialize dispatches through ICertPropertyRequestOriginator's vtable slot 14.
 func (self *ICertPropertyRequestOriginator) Initialize(strRequestOriginator foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strRequestOriginator)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeFromLocalRequestOriginator dispatches through ICertPropertyRequestOriginator's vtable slot 15.
 func (self *ICertPropertyRequestOriginator) InitializeFromLocalRequestOriginator() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RequestOriginator dispatches through ICertPropertyRequestOriginator's vtable slot 16.
 func (self *ICertPropertyRequestOriginator) Get_RequestOriginator(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertPropertySHA1Hash: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-icertpropertysha1hash
@@ -2010,13 +2010,13 @@ var IID_ICertPropertySHA1Hash = win32.GUID{Data1: 0x728ab334, Data2: 0x217d, Dat
 // Initialize dispatches through ICertPropertySHA1Hash's vtable slot 14.
 func (self *ICertPropertySHA1Hash) Initialize(Encoding EncodingType, strRenewalValue foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(strRenewalValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SHA1Hash dispatches through ICertPropertySHA1Hash's vtable slot 15.
 func (self *ICertPropertySHA1Hash) Get_SHA1Hash(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertRequest: https://learn.microsoft.com/windows/win32/api/certcli/nn-certcli-icertrequest
@@ -2031,43 +2031,43 @@ var IID_ICertRequest = win32.GUID{Data1: 0x014e4840, Data2: 0x5523, Data3: 0x11d
 // Submit dispatches through ICertRequest's vtable slot 7.
 func (self *ICertRequest) Submit(Flags int32, strRequest foundation.BSTR, strAttributes foundation.BSTR, strConfig foundation.BSTR, pDisposition *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(strRequest)), uintptr(unsafe.Pointer(strAttributes)), uintptr(unsafe.Pointer(strConfig)), uintptr(unsafe.Pointer(pDisposition)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RetrievePending dispatches through ICertRequest's vtable slot 8.
 func (self *ICertRequest) RetrievePending(RequestId int32, strConfig foundation.BSTR, pDisposition *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(RequestId), uintptr(unsafe.Pointer(strConfig)), uintptr(unsafe.Pointer(pDisposition)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLastStatus dispatches through ICertRequest's vtable slot 9.
 func (self *ICertRequest) GetLastStatus(pStatus *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRequestId dispatches through ICertRequest's vtable slot 10.
 func (self *ICertRequest) GetRequestId(pRequestId *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRequestId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDispositionMessage dispatches through ICertRequest's vtable slot 11.
 func (self *ICertRequest) GetDispositionMessage(pstrDispositionMessage *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrDispositionMessage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCACertificate dispatches through ICertRequest's vtable slot 12.
 func (self *ICertRequest) GetCACertificate(fExchangeCertificate int32, strConfig foundation.BSTR, Flags int32, pstrCertificate *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(fExchangeCertificate), uintptr(unsafe.Pointer(strConfig)), uintptr(Flags), uintptr(unsafe.Pointer(pstrCertificate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCertificate dispatches through ICertRequest's vtable slot 13.
 func (self *ICertRequest) GetCertificate(Flags int32, pstrCertificate *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(pstrCertificate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertRequest2: https://learn.microsoft.com/windows/win32/api/certcli/nn-certcli-icertrequest2
@@ -2082,37 +2082,37 @@ var IID_ICertRequest2 = win32.GUID{Data1: 0xa4772988, Data2: 0x4a85, Data3: 0x4f
 // GetIssuedCertificate dispatches through ICertRequest2's vtable slot 14.
 func (self *ICertRequest2) GetIssuedCertificate(strConfig foundation.BSTR, RequestId int32, strSerialNumber foundation.BSTR, pDisposition *CR_DISP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strConfig)), uintptr(RequestId), uintptr(unsafe.Pointer(strSerialNumber)), uintptr(unsafe.Pointer(pDisposition)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetErrorMessageText dispatches through ICertRequest2's vtable slot 15.
 func (self *ICertRequest2) GetErrorMessageText(hrMessage int32, Flags int32, pstrErrorMessageText *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(hrMessage), uintptr(Flags), uintptr(unsafe.Pointer(pstrErrorMessageText)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCAProperty dispatches through ICertRequest2's vtable slot 16.
 func (self *ICertRequest2) GetCAProperty(strConfig foundation.BSTR, PropId int32, PropIndex int32, PropType int32, Flags int32, pvarPropertyValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strConfig)), uintptr(PropId), uintptr(PropIndex), uintptr(PropType), uintptr(Flags), uintptr(unsafe.Pointer(pvarPropertyValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCAPropertyFlags dispatches through ICertRequest2's vtable slot 17.
 func (self *ICertRequest2) GetCAPropertyFlags(strConfig foundation.BSTR, PropId int32, pPropFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strConfig)), uintptr(PropId), uintptr(unsafe.Pointer(pPropFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCAPropertyDisplayName dispatches through ICertRequest2's vtable slot 18.
 func (self *ICertRequest2) GetCAPropertyDisplayName(strConfig foundation.BSTR, PropId int32, pstrDisplayName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strConfig)), uintptr(PropId), uintptr(unsafe.Pointer(pstrDisplayName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFullResponseProperty dispatches through ICertRequest2's vtable slot 19.
 func (self *ICertRequest2) GetFullResponseProperty(PropId FULL_RESPONSE_PROPERTY_ID, PropIndex int32, PropType CERT_PROPERTY_TYPE, Flags CERT_REQUEST_OUT_TYPE, pvarPropertyValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(PropId), uintptr(PropIndex), uintptr(PropType), uintptr(Flags), uintptr(unsafe.Pointer(pvarPropertyValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertRequest3: https://learn.microsoft.com/windows/win32/api/certcli/nn-certcli-icertrequest3
@@ -2127,25 +2127,25 @@ var IID_ICertRequest3 = win32.GUID{Data1: 0xafc8f92b, Data2: 0x33a2, Data3: 0x48
 // SetCredential dispatches through ICertRequest3's vtable slot 20.
 func (self *ICertRequest3) SetCredential(hWnd int32, AuthType X509EnrollmentAuthFlags, strCredential foundation.BSTR, strPassword foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(hWnd), uintptr(AuthType), uintptr(unsafe.Pointer(strCredential)), uintptr(unsafe.Pointer(strPassword)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRequestIdString dispatches through ICertRequest3's vtable slot 21.
 func (self *ICertRequest3) GetRequestIdString(pstrRequestId *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrRequestId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetIssuedCertificate2 dispatches through ICertRequest3's vtable slot 22.
 func (self *ICertRequest3) GetIssuedCertificate2(strConfig foundation.BSTR, strRequestId foundation.BSTR, strSerialNumber foundation.BSTR, pDisposition *CR_DISP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strConfig)), uintptr(unsafe.Pointer(strRequestId)), uintptr(unsafe.Pointer(strSerialNumber)), uintptr(unsafe.Pointer(pDisposition)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRefreshPolicy dispatches through ICertRequest3's vtable slot 23.
 func (self *ICertRequest3) GetRefreshPolicy(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: d99e6e70-fc88-11d0-b498-00a0c90312f3
@@ -2161,21 +2161,21 @@ func (self *ICertRequestD) Request(dwFlags uint32, pwszAuthority string, pdwRequ
 	_pwszAuthority := win32.UTF16Ptr(pwszAuthority)
 	_pwszAttributes := win32.UTF16Ptr(pwszAttributes)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(_pwszAuthority)), uintptr(unsafe.Pointer(pdwRequestId)), uintptr(unsafe.Pointer(pdwDisposition)), uintptr(unsafe.Pointer(_pwszAttributes)), uintptr(unsafe.Pointer(pctbRequest)), uintptr(unsafe.Pointer(pctbCertChain)), uintptr(unsafe.Pointer(pctbEncodedCert)), uintptr(unsafe.Pointer(pctbDispositionMessage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCACert dispatches through ICertRequestD's vtable slot 4.
 func (self *ICertRequestD) GetCACert(fchain uint32, pwszAuthority string, pctbOut *CERTTRANSBLOB) error {
 	_pwszAuthority := win32.UTF16Ptr(pwszAuthority)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(fchain), uintptr(unsafe.Pointer(_pwszAuthority)), uintptr(unsafe.Pointer(pctbOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Ping dispatches through ICertRequestD's vtable slot 5.
 func (self *ICertRequestD) Ping(pwszAuthority string) error {
 	_pwszAuthority := win32.UTF16Ptr(pwszAuthority)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszAuthority)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 5422fd3a-d4b8-4cef-a12e-e87d4ca22e90
@@ -2192,28 +2192,28 @@ func (self *ICertRequestD2) Request2(pwszAuthority string, dwFlags uint32, pwszS
 	_pwszSerialNumber := win32.UTF16Ptr(pwszSerialNumber)
 	_pwszAttributes := win32.UTF16Ptr(pwszAttributes)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszAuthority)), uintptr(dwFlags), uintptr(unsafe.Pointer(_pwszSerialNumber)), uintptr(unsafe.Pointer(pdwRequestId)), uintptr(unsafe.Pointer(pdwDisposition)), uintptr(unsafe.Pointer(_pwszAttributes)), uintptr(unsafe.Pointer(pctbRequest)), uintptr(unsafe.Pointer(pctbFullResponse)), uintptr(unsafe.Pointer(pctbEncodedCert)), uintptr(unsafe.Pointer(pctbDispositionMessage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCAProperty dispatches through ICertRequestD2's vtable slot 7.
 func (self *ICertRequestD2) GetCAProperty(pwszAuthority string, PropId int32, PropIndex int32, PropType int32, pctbPropertyValue *CERTTRANSBLOB) error {
 	_pwszAuthority := win32.UTF16Ptr(pwszAuthority)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszAuthority)), uintptr(PropId), uintptr(PropIndex), uintptr(PropType), uintptr(unsafe.Pointer(pctbPropertyValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCAPropertyInfo dispatches through ICertRequestD2's vtable slot 8.
 func (self *ICertRequestD2) GetCAPropertyInfo(pwszAuthority string, pcProperty *int32, pctbPropInfo *CERTTRANSBLOB) error {
 	_pwszAuthority := win32.UTF16Ptr(pwszAuthority)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszAuthority)), uintptr(unsafe.Pointer(pcProperty)), uintptr(unsafe.Pointer(pctbPropInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Ping2 dispatches through ICertRequestD2's vtable slot 9.
 func (self *ICertRequestD2) Ping2(pwszAuthority string) error {
 	_pwszAuthority := win32.UTF16Ptr(pwszAuthority)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszAuthority)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertServerExit: https://learn.microsoft.com/windows/win32/api/certif/nn-certif-icertserverexit
@@ -2228,73 +2228,73 @@ var IID_ICertServerExit = win32.GUID{Data1: 0x4ba9eb90, Data2: 0x732c, Data3: 0x
 // SetContext dispatches through ICertServerExit's vtable slot 7.
 func (self *ICertServerExit) SetContext(Context int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Context))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRequestProperty dispatches through ICertServerExit's vtable slot 8.
 func (self *ICertServerExit) GetRequestProperty(strPropertyName foundation.BSTR, PropertyType int32, pvarPropertyValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strPropertyName)), uintptr(PropertyType), uintptr(unsafe.Pointer(pvarPropertyValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRequestAttribute dispatches through ICertServerExit's vtable slot 9.
 func (self *ICertServerExit) GetRequestAttribute(strAttributeName foundation.BSTR, pstrAttributeValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strAttributeName)), uintptr(unsafe.Pointer(pstrAttributeValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCertificateProperty dispatches through ICertServerExit's vtable slot 10.
 func (self *ICertServerExit) GetCertificateProperty(strPropertyName foundation.BSTR, PropertyType int32, pvarPropertyValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strPropertyName)), uintptr(PropertyType), uintptr(unsafe.Pointer(pvarPropertyValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCertificateExtension dispatches through ICertServerExit's vtable slot 11.
 func (self *ICertServerExit) GetCertificateExtension(strExtensionName foundation.BSTR, Type int32, pvarValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strExtensionName)), uintptr(Type), uintptr(unsafe.Pointer(pvarValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCertificateExtensionFlags dispatches through ICertServerExit's vtable slot 12.
 func (self *ICertServerExit) GetCertificateExtensionFlags(pExtFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pExtFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumerateExtensionsSetup dispatches through ICertServerExit's vtable slot 13.
 func (self *ICertServerExit) EnumerateExtensionsSetup(Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumerateExtensions dispatches through ICertServerExit's vtable slot 14.
 func (self *ICertServerExit) EnumerateExtensions(pstrExtensionName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrExtensionName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumerateExtensionsClose dispatches through ICertServerExit's vtable slot 15.
 func (self *ICertServerExit) EnumerateExtensionsClose() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumerateAttributesSetup dispatches through ICertServerExit's vtable slot 16.
 func (self *ICertServerExit) EnumerateAttributesSetup(Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumerateAttributes dispatches through ICertServerExit's vtable slot 17.
 func (self *ICertServerExit) EnumerateAttributes(pstrAttributeName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrAttributeName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumerateAttributesClose dispatches through ICertServerExit's vtable slot 18.
 func (self *ICertServerExit) EnumerateAttributesClose() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertServerPolicy: https://learn.microsoft.com/windows/win32/api/certif/nn-certif-icertserverpolicy
@@ -2309,85 +2309,85 @@ var IID_ICertServerPolicy = win32.GUID{Data1: 0xaa000922, Data2: 0xffbe, Data3: 
 // SetContext dispatches through ICertServerPolicy's vtable slot 7.
 func (self *ICertServerPolicy) SetContext(Context int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Context))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRequestProperty dispatches through ICertServerPolicy's vtable slot 8.
 func (self *ICertServerPolicy) GetRequestProperty(strPropertyName foundation.BSTR, PropertyType int32, pvarPropertyValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strPropertyName)), uintptr(PropertyType), uintptr(unsafe.Pointer(pvarPropertyValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRequestAttribute dispatches through ICertServerPolicy's vtable slot 9.
 func (self *ICertServerPolicy) GetRequestAttribute(strAttributeName foundation.BSTR, pstrAttributeValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strAttributeName)), uintptr(unsafe.Pointer(pstrAttributeValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCertificateProperty dispatches through ICertServerPolicy's vtable slot 10.
 func (self *ICertServerPolicy) GetCertificateProperty(strPropertyName foundation.BSTR, PropertyType CERT_PROPERTY_TYPE, pvarPropertyValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strPropertyName)), uintptr(PropertyType), uintptr(unsafe.Pointer(pvarPropertyValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCertificateProperty dispatches through ICertServerPolicy's vtable slot 11.
 func (self *ICertServerPolicy) SetCertificateProperty(strPropertyName foundation.BSTR, PropertyType int32, pvarPropertyValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strPropertyName)), uintptr(PropertyType), uintptr(unsafe.Pointer(pvarPropertyValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCertificateExtension dispatches through ICertServerPolicy's vtable slot 12.
 func (self *ICertServerPolicy) GetCertificateExtension(strExtensionName foundation.BSTR, Type CERT_PROPERTY_TYPE, pvarValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strExtensionName)), uintptr(Type), uintptr(unsafe.Pointer(pvarValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCertificateExtensionFlags dispatches through ICertServerPolicy's vtable slot 13.
 func (self *ICertServerPolicy) GetCertificateExtensionFlags(pExtFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pExtFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCertificateExtension dispatches through ICertServerPolicy's vtable slot 14.
 func (self *ICertServerPolicy) SetCertificateExtension(strExtensionName foundation.BSTR, Type int32, ExtFlags int32, pvarValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strExtensionName)), uintptr(Type), uintptr(ExtFlags), uintptr(unsafe.Pointer(pvarValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumerateExtensionsSetup dispatches through ICertServerPolicy's vtable slot 15.
 func (self *ICertServerPolicy) EnumerateExtensionsSetup(Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumerateExtensions dispatches through ICertServerPolicy's vtable slot 16.
 func (self *ICertServerPolicy) EnumerateExtensions(pstrExtensionName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrExtensionName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumerateExtensionsClose dispatches through ICertServerPolicy's vtable slot 17.
 func (self *ICertServerPolicy) EnumerateExtensionsClose() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumerateAttributesSetup dispatches through ICertServerPolicy's vtable slot 18.
 func (self *ICertServerPolicy) EnumerateAttributesSetup(Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumerateAttributes dispatches through ICertServerPolicy's vtable slot 19.
 func (self *ICertServerPolicy) EnumerateAttributes(pstrAttributeName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrAttributeName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumerateAttributesClose dispatches through ICertServerPolicy's vtable slot 20.
 func (self *ICertServerPolicy) EnumerateAttributesClose() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertView: https://learn.microsoft.com/windows/win32/api/certview/nn-certview-icertview
@@ -2402,49 +2402,49 @@ var IID_ICertView = win32.GUID{Data1: 0xc3fac344, Data2: 0x1e84, Data3: 0x11d1, 
 // OpenConnection dispatches through ICertView's vtable slot 7.
 func (self *ICertView) OpenConnection(strConfig foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strConfig)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumCertViewColumn dispatches through ICertView's vtable slot 8.
 func (self *ICertView) EnumCertViewColumn(fResultColumn CVRC_COLUMN, ppenum **IEnumCERTVIEWCOLUMN) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(fResultColumn), uintptr(unsafe.Pointer(ppenum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetColumnCount dispatches through ICertView's vtable slot 9.
 func (self *ICertView) GetColumnCount(fResultColumn CVRC_COLUMN, pcColumn *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(fResultColumn), uintptr(unsafe.Pointer(pcColumn)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetColumnIndex dispatches through ICertView's vtable slot 10.
 func (self *ICertView) GetColumnIndex(fResultColumn CVRC_COLUMN, strColumnName foundation.BSTR, pColumnIndex *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(fResultColumn), uintptr(unsafe.Pointer(strColumnName)), uintptr(unsafe.Pointer(pColumnIndex)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetResultColumnCount dispatches through ICertView's vtable slot 11.
 func (self *ICertView) SetResultColumnCount(cResultColumn int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(cResultColumn))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetResultColumn dispatches through ICertView's vtable slot 12.
 func (self *ICertView) SetResultColumn(ColumnIndex int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(ColumnIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetRestriction dispatches through ICertView's vtable slot 13.
 func (self *ICertView) SetRestriction(ColumnIndex CERT_VIEW_COLUMN_INDEX, SeekOperator CERT_VIEW_SEEK_OPERATOR_FLAGS, SortOrder int32, pvarValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(ColumnIndex), uintptr(SeekOperator), uintptr(SortOrder), uintptr(unsafe.Pointer(pvarValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenView dispatches through ICertView's vtable slot 14.
 func (self *ICertView) OpenView(ppenum **IEnumCERTVIEWROW) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertView2: https://learn.microsoft.com/windows/win32/api/certview/nn-certview-icertview2
@@ -2459,7 +2459,7 @@ var IID_ICertView2 = win32.GUID{Data1: 0xd594b282, Data2: 0x8851, Data3: 0x4b61,
 // SetTable dispatches through ICertView2's vtable slot 15.
 func (self *ICertView2) SetTable(Table CVRC_TABLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(Table))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertificateAttestationChallenge: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-icertificateattestationchallenge
@@ -2474,19 +2474,19 @@ var IID_ICertificateAttestationChallenge = win32.GUID{Data1: 0x6f175a7c, Data2: 
 // Initialize dispatches through ICertificateAttestationChallenge's vtable slot 7.
 func (self *ICertificateAttestationChallenge) Initialize(Encoding EncodingType, strPendingFullCmcResponseWithChallenge foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(strPendingFullCmcResponseWithChallenge)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DecryptChallenge dispatches through ICertificateAttestationChallenge's vtable slot 8.
 func (self *ICertificateAttestationChallenge) DecryptChallenge(Encoding EncodingType, pstrEnvelopedPkcs7ReencryptedToCA *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pstrEnvelopedPkcs7ReencryptedToCA)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RequestID dispatches through ICertificateAttestationChallenge's vtable slot 9.
 func (self *ICertificateAttestationChallenge) Get_RequestID(pstrRequestID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrRequestID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 4631334d-e266-47d6-bd79-be53cb2e2753
@@ -2500,13 +2500,13 @@ var IID_ICertificateAttestationChallenge2 = win32.GUID{Data1: 0x4631334d, Data2:
 // Put_KeyContainerName dispatches through ICertificateAttestationChallenge2's vtable slot 10.
 func (self *ICertificateAttestationChallenge2) Put_KeyContainerName(Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_KeyBlob dispatches through ICertificateAttestationChallenge2's vtable slot 11.
 func (self *ICertificateAttestationChallenge2) Put_KeyBlob(Encoding EncodingType, Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertificatePolicies: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-icertificatepolicies
@@ -2521,37 +2521,37 @@ var IID_ICertificatePolicies = win32.GUID{Data1: 0x728ab31f, Data2: 0x217d, Data
 // Get_ItemByIndex dispatches through ICertificatePolicies's vtable slot 7.
 func (self *ICertificatePolicies) Get_ItemByIndex(Index int32, pVal **ICertificatePolicy) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through ICertificatePolicies's vtable slot 8.
 func (self *ICertificatePolicies) Get_Count(pVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ICertificatePolicies's vtable slot 9.
 func (self *ICertificatePolicies) Get__NewEnum(pVal **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through ICertificatePolicies's vtable slot 10.
 func (self *ICertificatePolicies) Add(pVal *ICertificatePolicy) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through ICertificatePolicies's vtable slot 11.
 func (self *ICertificatePolicies) Remove(Index int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through ICertificatePolicies's vtable slot 12.
 func (self *ICertificatePolicies) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertificatePolicy: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-icertificatepolicy
@@ -2566,19 +2566,19 @@ var IID_ICertificatePolicy = win32.GUID{Data1: 0x728ab31e, Data2: 0x217d, Data3:
 // Initialize dispatches through ICertificatePolicy's vtable slot 7.
 func (self *ICertificatePolicy) Initialize(pValue *IObjectId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ObjectId dispatches through ICertificatePolicy's vtable slot 8.
 func (self *ICertificatePolicy) Get_ObjectId(ppValue **IObjectId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PolicyQualifiers dispatches through ICertificatePolicy's vtable slot 9.
 func (self *ICertificatePolicy) Get_PolicyQualifiers(ppValue **IPolicyQualifiers) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertificationAuthorities: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-icertificationauthorities
@@ -2593,49 +2593,49 @@ var IID_ICertificationAuthorities = win32.GUID{Data1: 0x13b79005, Data2: 0x2181,
 // Get_ItemByIndex dispatches through ICertificationAuthorities's vtable slot 7.
 func (self *ICertificationAuthorities) Get_ItemByIndex(Index int32, pVal **ICertificationAuthority) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through ICertificationAuthorities's vtable slot 8.
 func (self *ICertificationAuthorities) Get_Count(pVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ICertificationAuthorities's vtable slot 9.
 func (self *ICertificationAuthorities) Get__NewEnum(pVal **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through ICertificationAuthorities's vtable slot 10.
 func (self *ICertificationAuthorities) Add(pVal *ICertificationAuthority) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through ICertificationAuthorities's vtable slot 11.
 func (self *ICertificationAuthorities) Remove(Index int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through ICertificationAuthorities's vtable slot 12.
 func (self *ICertificationAuthorities) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ComputeSiteCosts dispatches through ICertificationAuthorities's vtable slot 13.
 func (self *ICertificationAuthorities) ComputeSiteCosts() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ItemByName dispatches through ICertificationAuthorities's vtable slot 14.
 func (self *ICertificationAuthorities) Get_ItemByName(strName foundation.BSTR, ppValue **ICertificationAuthority) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strName)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICertificationAuthority: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-icertificationauthority
@@ -2650,7 +2650,7 @@ var IID_ICertificationAuthority = win32.GUID{Data1: 0x835d1f61, Data2: 0x1e95, D
 // Get_Property dispatches through ICertificationAuthority's vtable slot 7.
 func (self *ICertificationAuthority) Get_Property(property EnrollmentCAProperty, pValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(property), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICryptAttribute: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-icryptattribute
@@ -2665,25 +2665,25 @@ var IID_ICryptAttribute = win32.GUID{Data1: 0x728ab32c, Data2: 0x217d, Data3: 0x
 // InitializeFromObjectId dispatches through ICryptAttribute's vtable slot 7.
 func (self *ICryptAttribute) InitializeFromObjectId(pObjectId *IObjectId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObjectId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeFromValues dispatches through ICryptAttribute's vtable slot 8.
 func (self *ICryptAttribute) InitializeFromValues(pAttributes *IX509Attributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAttributes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ObjectId dispatches through ICryptAttribute's vtable slot 9.
 func (self *ICryptAttribute) Get_ObjectId(ppValue **IObjectId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Values dispatches through ICryptAttribute's vtable slot 10.
 func (self *ICryptAttribute) Get_Values(ppValue **IX509Attributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICryptAttributes: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-icryptattributes
@@ -2698,49 +2698,49 @@ var IID_ICryptAttributes = win32.GUID{Data1: 0x728ab32d, Data2: 0x217d, Data3: 0
 // Get_ItemByIndex dispatches through ICryptAttributes's vtable slot 7.
 func (self *ICryptAttributes) Get_ItemByIndex(Index int32, pVal **ICryptAttribute) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through ICryptAttributes's vtable slot 8.
 func (self *ICryptAttributes) Get_Count(pVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ICryptAttributes's vtable slot 9.
 func (self *ICryptAttributes) Get__NewEnum(pVal **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through ICryptAttributes's vtable slot 10.
 func (self *ICryptAttributes) Add(pVal *ICryptAttribute) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through ICryptAttributes's vtable slot 11.
 func (self *ICryptAttributes) Remove(Index int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through ICryptAttributes's vtable slot 12.
 func (self *ICryptAttributes) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IndexByObjectId dispatches through ICryptAttributes's vtable slot 13.
 func (self *ICryptAttributes) Get_IndexByObjectId(pObjectId *IObjectId, pIndex *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObjectId)), uintptr(unsafe.Pointer(pIndex)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddRange dispatches through ICryptAttributes's vtable slot 14.
 func (self *ICryptAttributes) AddRange(pValue *ICryptAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICspAlgorithm: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-icspalgorithm
@@ -2755,61 +2755,61 @@ var IID_ICspAlgorithm = win32.GUID{Data1: 0x728ab305, Data2: 0x217d, Data3: 0x11
 // GetAlgorithmOid dispatches through ICspAlgorithm's vtable slot 7.
 func (self *ICspAlgorithm) GetAlgorithmOid(Length int32, AlgFlags AlgorithmFlags, ppValue **IObjectId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Length), uintptr(AlgFlags), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DefaultLength dispatches through ICspAlgorithm's vtable slot 8.
 func (self *ICspAlgorithm) Get_DefaultLength(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IncrementLength dispatches through ICspAlgorithm's vtable slot 9.
 func (self *ICspAlgorithm) Get_IncrementLength(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LongName dispatches through ICspAlgorithm's vtable slot 10.
 func (self *ICspAlgorithm) Get_LongName(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Valid dispatches through ICspAlgorithm's vtable slot 11.
 func (self *ICspAlgorithm) Get_Valid(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MaxLength dispatches through ICspAlgorithm's vtable slot 12.
 func (self *ICspAlgorithm) Get_MaxLength(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MinLength dispatches through ICspAlgorithm's vtable slot 13.
 func (self *ICspAlgorithm) Get_MinLength(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through ICspAlgorithm's vtable slot 14.
 func (self *ICspAlgorithm) Get_Name(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Type dispatches through ICspAlgorithm's vtable slot 15.
 func (self *ICspAlgorithm) Get_Type(pValue *AlgorithmType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Operations dispatches through ICspAlgorithm's vtable slot 16.
 func (self *ICspAlgorithm) Get_Operations(pValue *AlgorithmOperationFlags) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICspAlgorithms: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-icspalgorithms
@@ -2824,49 +2824,49 @@ var IID_ICspAlgorithms = win32.GUID{Data1: 0x728ab306, Data2: 0x217d, Data3: 0x1
 // Get_ItemByIndex dispatches through ICspAlgorithms's vtable slot 7.
 func (self *ICspAlgorithms) Get_ItemByIndex(Index int32, pVal **ICspAlgorithm) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through ICspAlgorithms's vtable slot 8.
 func (self *ICspAlgorithms) Get_Count(pVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ICspAlgorithms's vtable slot 9.
 func (self *ICspAlgorithms) Get__NewEnum(pVal **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through ICspAlgorithms's vtable slot 10.
 func (self *ICspAlgorithms) Add(pVal *ICspAlgorithm) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through ICspAlgorithms's vtable slot 11.
 func (self *ICspAlgorithms) Remove(Index int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through ICspAlgorithms's vtable slot 12.
 func (self *ICspAlgorithms) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ItemByName dispatches through ICspAlgorithms's vtable slot 13.
 func (self *ICspAlgorithms) Get_ItemByName(strName foundation.BSTR, ppValue **ICspAlgorithm) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strName)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IndexByObjectId dispatches through ICspAlgorithms's vtable slot 14.
 func (self *ICspAlgorithms) Get_IndexByObjectId(pObjectId *IObjectId, pIndex *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObjectId)), uintptr(unsafe.Pointer(pIndex)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICspInformation: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-icspinformation
@@ -2881,103 +2881,103 @@ var IID_ICspInformation = win32.GUID{Data1: 0x728ab307, Data2: 0x217d, Data3: 0x
 // InitializeFromName dispatches through ICspInformation's vtable slot 7.
 func (self *ICspInformation) InitializeFromName(strName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeFromType dispatches through ICspInformation's vtable slot 8.
 func (self *ICspInformation) InitializeFromType(Type X509ProviderType, pAlgorithm *IObjectId, MachineContext foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(unsafe.Pointer(pAlgorithm)), uintptr(MachineContext))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CspAlgorithms dispatches through ICspInformation's vtable slot 9.
 func (self *ICspInformation) Get_CspAlgorithms(ppValue **ICspAlgorithms) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HasHardwareRandomNumberGenerator dispatches through ICspInformation's vtable slot 10.
 func (self *ICspInformation) Get_HasHardwareRandomNumberGenerator(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsHardwareDevice dispatches through ICspInformation's vtable slot 11.
 func (self *ICspInformation) Get_IsHardwareDevice(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsRemovable dispatches through ICspInformation's vtable slot 12.
 func (self *ICspInformation) Get_IsRemovable(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsSoftwareDevice dispatches through ICspInformation's vtable slot 13.
 func (self *ICspInformation) Get_IsSoftwareDevice(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Valid dispatches through ICspInformation's vtable slot 14.
 func (self *ICspInformation) Get_Valid(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MaxKeyContainerNameLength dispatches through ICspInformation's vtable slot 15.
 func (self *ICspInformation) Get_MaxKeyContainerNameLength(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through ICspInformation's vtable slot 16.
 func (self *ICspInformation) Get_Name(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Type dispatches through ICspInformation's vtable slot 17.
 func (self *ICspInformation) Get_Type(pValue *X509ProviderType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Version dispatches through ICspInformation's vtable slot 18.
 func (self *ICspInformation) Get_Version(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_KeySpec dispatches through ICspInformation's vtable slot 19.
 func (self *ICspInformation) Get_KeySpec(pValue *X509KeySpec) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsSmartCard dispatches through ICspInformation's vtable slot 20.
 func (self *ICspInformation) Get_IsSmartCard(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDefaultSecurityDescriptor dispatches through ICspInformation's vtable slot 21.
 func (self *ICspInformation) GetDefaultSecurityDescriptor(MachineContext foundation.VARIANT_BOOL, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(MachineContext), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LegacyCsp dispatches through ICspInformation's vtable slot 22.
 func (self *ICspInformation) Get_LegacyCsp(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCspStatusFromOperations dispatches through ICspInformation's vtable slot 23.
 func (self *ICspInformation) GetCspStatusFromOperations(pAlgorithm *IObjectId, Operations AlgorithmOperationFlags, ppValue **ICspStatus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAlgorithm)), uintptr(Operations), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICspInformations: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-icspinformations
@@ -2992,73 +2992,73 @@ var IID_ICspInformations = win32.GUID{Data1: 0x728ab308, Data2: 0x217d, Data3: 0
 // Get_ItemByIndex dispatches through ICspInformations's vtable slot 7.
 func (self *ICspInformations) Get_ItemByIndex(Index int32, pVal **ICspInformation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through ICspInformations's vtable slot 8.
 func (self *ICspInformations) Get_Count(pVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ICspInformations's vtable slot 9.
 func (self *ICspInformations) Get__NewEnum(pVal **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through ICspInformations's vtable slot 10.
 func (self *ICspInformations) Add(pVal *ICspInformation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through ICspInformations's vtable slot 11.
 func (self *ICspInformations) Remove(Index int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through ICspInformations's vtable slot 12.
 func (self *ICspInformations) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddAvailableCsps dispatches through ICspInformations's vtable slot 13.
 func (self *ICspInformations) AddAvailableCsps() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ItemByName dispatches through ICspInformations's vtable slot 14.
 func (self *ICspInformations) Get_ItemByName(strName foundation.BSTR, ppCspInformation **ICspInformation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strName)), uintptr(unsafe.Pointer(ppCspInformation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCspStatusFromProviderName dispatches through ICspInformations's vtable slot 15.
 func (self *ICspInformations) GetCspStatusFromProviderName(strProviderName foundation.BSTR, LegacyKeySpec X509KeySpec, ppValue **ICspStatus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strProviderName)), uintptr(LegacyKeySpec), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCspStatusesFromOperations dispatches through ICspInformations's vtable slot 16.
 func (self *ICspInformations) GetCspStatusesFromOperations(Operations AlgorithmOperationFlags, pCspInformation *ICspInformation, ppValue **ICspStatuses) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(Operations), uintptr(unsafe.Pointer(pCspInformation)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEncryptionCspAlgorithms dispatches through ICspInformations's vtable slot 17.
 func (self *ICspInformations) GetEncryptionCspAlgorithms(pCspInformation *ICspInformation, ppValue **ICspAlgorithms) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCspInformation)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetHashAlgorithms dispatches through ICspInformations's vtable slot 18.
 func (self *ICspInformations) GetHashAlgorithms(pCspInformation *ICspInformation, ppValue **IObjectIds) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCspInformation)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICspStatus: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-icspstatus
@@ -3073,43 +3073,43 @@ var IID_ICspStatus = win32.GUID{Data1: 0x728ab309, Data2: 0x217d, Data3: 0x11da,
 // Initialize dispatches through ICspStatus's vtable slot 7.
 func (self *ICspStatus) Initialize(pCsp *ICspInformation, pAlgorithm *ICspAlgorithm) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCsp)), uintptr(unsafe.Pointer(pAlgorithm)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Ordinal dispatches through ICspStatus's vtable slot 8.
 func (self *ICspStatus) Get_Ordinal(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Ordinal dispatches through ICspStatus's vtable slot 9.
 func (self *ICspStatus) Put_Ordinal(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CspAlgorithm dispatches through ICspStatus's vtable slot 10.
 func (self *ICspStatus) Get_CspAlgorithm(ppValue **ICspAlgorithm) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CspInformation dispatches through ICspStatus's vtable slot 11.
 func (self *ICspStatus) Get_CspInformation(ppValue **ICspInformation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EnrollmentStatus dispatches through ICspStatus's vtable slot 12.
 func (self *ICspStatus) Get_EnrollmentStatus(ppValue **IX509EnrollmentStatus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DisplayName dispatches through ICspStatus's vtable slot 13.
 func (self *ICspStatus) Get_DisplayName(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICspStatuses: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-icspstatuses
@@ -3124,61 +3124,61 @@ var IID_ICspStatuses = win32.GUID{Data1: 0x728ab30a, Data2: 0x217d, Data3: 0x11d
 // Get_ItemByIndex dispatches through ICspStatuses's vtable slot 7.
 func (self *ICspStatuses) Get_ItemByIndex(Index int32, pVal **ICspStatus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through ICspStatuses's vtable slot 8.
 func (self *ICspStatuses) Get_Count(pVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ICspStatuses's vtable slot 9.
 func (self *ICspStatuses) Get__NewEnum(pVal **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through ICspStatuses's vtable slot 10.
 func (self *ICspStatuses) Add(pVal *ICspStatus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through ICspStatuses's vtable slot 11.
 func (self *ICspStatuses) Remove(Index int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through ICspStatuses's vtable slot 12.
 func (self *ICspStatuses) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ItemByName dispatches through ICspStatuses's vtable slot 13.
 func (self *ICspStatuses) Get_ItemByName(strCspName foundation.BSTR, strAlgorithmName foundation.BSTR, ppValue **ICspStatus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strCspName)), uintptr(unsafe.Pointer(strAlgorithmName)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ItemByOrdinal dispatches through ICspStatuses's vtable slot 14.
 func (self *ICspStatuses) Get_ItemByOrdinal(Ordinal int32, ppValue **ICspStatus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(Ordinal), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ItemByOperations dispatches through ICspStatuses's vtable slot 15.
 func (self *ICspStatuses) Get_ItemByOperations(strCspName foundation.BSTR, strAlgorithmName foundation.BSTR, Operations AlgorithmOperationFlags, ppValue **ICspStatus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strCspName)), uintptr(unsafe.Pointer(strAlgorithmName)), uintptr(Operations), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ItemByProvider dispatches through ICspStatuses's vtable slot 16.
 func (self *ICspStatuses) Get_ItemByProvider(pCspStatus *ICspStatus, ppValue **ICspStatus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCspStatus)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEnroll: https://learn.microsoft.com/windows/win32/api/xenroll/nn-xenroll-ienroll
@@ -3196,14 +3196,14 @@ func (self *IEnroll) CreateFilePKCS10WStr(DNName string, Usage string, wszPKCS10
 	_Usage := win32.UTF16Ptr(Usage)
 	_wszPKCS10FileName := win32.UTF16Ptr(wszPKCS10FileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_DNName)), uintptr(unsafe.Pointer(_Usage)), uintptr(unsafe.Pointer(_wszPKCS10FileName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AcceptFilePKCS7WStr dispatches through IEnroll's vtable slot 4.
 func (self *IEnroll) AcceptFilePKCS7WStr(wszPKCS7FileName string) error {
 	_wszPKCS7FileName := win32.UTF16Ptr(wszPKCS7FileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszPKCS7FileName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePKCS10WStr dispatches through IEnroll's vtable slot 5.
@@ -3211,13 +3211,13 @@ func (self *IEnroll) CreatePKCS10WStr(DNName string, Usage string, pPkcs10Blob *
 	_DNName := win32.UTF16Ptr(DNName)
 	_Usage := win32.UTF16Ptr(Usage)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_DNName)), uintptr(unsafe.Pointer(_Usage)), uintptr(unsafe.Pointer(pPkcs10Blob)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AcceptPKCS7Blob dispatches through IEnroll's vtable slot 6.
 func (self *IEnroll) AcceptPKCS7Blob(pBlobPKCS7 *securitycryptography.CRYPT_INTEGER_BLOB) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBlobPKCS7)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCertContextFromPKCS7 dispatches through IEnroll's vtable slot 7.
@@ -3247,362 +3247,362 @@ func (self *IEnroll) GetROOTHStore() securitycryptography.HCERTSTORE {
 // EnumProvidersWStr dispatches through IEnroll's vtable slot 11.
 func (self *IEnroll) EnumProvidersWStr(dwIndex int32, dwFlags int32, pbstrProvName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(dwFlags), uintptr(unsafe.Pointer(pbstrProvName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumContainersWStr dispatches through IEnroll's vtable slot 12.
 func (self *IEnroll) EnumContainersWStr(dwIndex int32, pbstr *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(pbstr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MyStoreNameWStr dispatches through IEnroll's vtable slot 14.
 func (self *IEnroll) Get_MyStoreNameWStr(szwName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szwName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MyStoreNameWStr dispatches through IEnroll's vtable slot 15.
 func (self *IEnroll) Put_MyStoreNameWStr(szwName string) error {
 	_szwName := win32.UTF16Ptr(szwName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szwName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MyStoreTypeWStr dispatches through IEnroll's vtable slot 16.
 func (self *IEnroll) Get_MyStoreTypeWStr(szwType *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szwType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MyStoreTypeWStr dispatches through IEnroll's vtable slot 17.
 func (self *IEnroll) Put_MyStoreTypeWStr(szwType string) error {
 	_szwType := win32.UTF16Ptr(szwType)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szwType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MyStoreFlags dispatches through IEnroll's vtable slot 18.
 func (self *IEnroll) Get_MyStoreFlags(pdwFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MyStoreFlags dispatches through IEnroll's vtable slot 19.
 func (self *IEnroll) Put_MyStoreFlags(dwFlags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CAStoreNameWStr dispatches through IEnroll's vtable slot 20.
 func (self *IEnroll) Get_CAStoreNameWStr(szwName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szwName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CAStoreNameWStr dispatches through IEnroll's vtable slot 21.
 func (self *IEnroll) Put_CAStoreNameWStr(szwName string) error {
 	_szwName := win32.UTF16Ptr(szwName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szwName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CAStoreTypeWStr dispatches through IEnroll's vtable slot 22.
 func (self *IEnroll) Get_CAStoreTypeWStr(szwType *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szwType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CAStoreTypeWStr dispatches through IEnroll's vtable slot 23.
 func (self *IEnroll) Put_CAStoreTypeWStr(szwType string) error {
 	_szwType := win32.UTF16Ptr(szwType)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szwType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CAStoreFlags dispatches through IEnroll's vtable slot 24.
 func (self *IEnroll) Get_CAStoreFlags(pdwFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CAStoreFlags dispatches through IEnroll's vtable slot 25.
 func (self *IEnroll) Put_CAStoreFlags(dwFlags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RootStoreNameWStr dispatches through IEnroll's vtable slot 26.
 func (self *IEnroll) Get_RootStoreNameWStr(szwName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szwName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RootStoreNameWStr dispatches through IEnroll's vtable slot 27.
 func (self *IEnroll) Put_RootStoreNameWStr(szwName string) error {
 	_szwName := win32.UTF16Ptr(szwName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szwName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RootStoreTypeWStr dispatches through IEnroll's vtable slot 28.
 func (self *IEnroll) Get_RootStoreTypeWStr(szwType *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szwType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RootStoreTypeWStr dispatches through IEnroll's vtable slot 29.
 func (self *IEnroll) Put_RootStoreTypeWStr(szwType string) error {
 	_szwType := win32.UTF16Ptr(szwType)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szwType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RootStoreFlags dispatches through IEnroll's vtable slot 30.
 func (self *IEnroll) Get_RootStoreFlags(pdwFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RootStoreFlags dispatches through IEnroll's vtable slot 31.
 func (self *IEnroll) Put_RootStoreFlags(dwFlags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RequestStoreNameWStr dispatches through IEnroll's vtable slot 32.
 func (self *IEnroll) Get_RequestStoreNameWStr(szwName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szwName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RequestStoreNameWStr dispatches through IEnroll's vtable slot 33.
 func (self *IEnroll) Put_RequestStoreNameWStr(szwName string) error {
 	_szwName := win32.UTF16Ptr(szwName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szwName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RequestStoreTypeWStr dispatches through IEnroll's vtable slot 34.
 func (self *IEnroll) Get_RequestStoreTypeWStr(szwType *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szwType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RequestStoreTypeWStr dispatches through IEnroll's vtable slot 35.
 func (self *IEnroll) Put_RequestStoreTypeWStr(szwType string) error {
 	_szwType := win32.UTF16Ptr(szwType)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szwType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RequestStoreFlags dispatches through IEnroll's vtable slot 36.
 func (self *IEnroll) Get_RequestStoreFlags(pdwFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RequestStoreFlags dispatches through IEnroll's vtable slot 37.
 func (self *IEnroll) Put_RequestStoreFlags(dwFlags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ContainerNameWStr dispatches through IEnroll's vtable slot 38.
 func (self *IEnroll) Get_ContainerNameWStr(szwContainer *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szwContainer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ContainerNameWStr dispatches through IEnroll's vtable slot 39.
 func (self *IEnroll) Put_ContainerNameWStr(szwContainer string) error {
 	_szwContainer := win32.UTF16Ptr(szwContainer)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szwContainer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ProviderNameWStr dispatches through IEnroll's vtable slot 40.
 func (self *IEnroll) Get_ProviderNameWStr(szwProvider *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szwProvider)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ProviderNameWStr dispatches through IEnroll's vtable slot 41.
 func (self *IEnroll) Put_ProviderNameWStr(szwProvider string) error {
 	_szwProvider := win32.UTF16Ptr(szwProvider)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szwProvider)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ProviderType dispatches through IEnroll's vtable slot 42.
 func (self *IEnroll) Get_ProviderType(pdwType *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ProviderType dispatches through IEnroll's vtable slot 43.
 func (self *IEnroll) Put_ProviderType(dwType int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(dwType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_KeySpec dispatches through IEnroll's vtable slot 44.
 func (self *IEnroll) Get_KeySpec(pdw *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdw)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_KeySpec dispatches through IEnroll's vtable slot 45.
 func (self *IEnroll) Put_KeySpec(dw int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(dw))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ProviderFlags dispatches through IEnroll's vtable slot 46.
 func (self *IEnroll) Get_ProviderFlags(pdwFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ProviderFlags dispatches through IEnroll's vtable slot 47.
 func (self *IEnroll) Put_ProviderFlags(dwFlags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UseExistingKeySet dispatches through IEnroll's vtable slot 48.
 func (self *IEnroll) Get_UseExistingKeySet(fUseExistingKeys *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fUseExistingKeys)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_UseExistingKeySet dispatches through IEnroll's vtable slot 49.
 func (self *IEnroll) Put_UseExistingKeySet(fUseExistingKeys bool) error {
 	_fUseExistingKeys := win32.Bool32(fUseExistingKeys)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(_fUseExistingKeys))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_GenKeyFlags dispatches through IEnroll's vtable slot 50.
 func (self *IEnroll) Get_GenKeyFlags(pdwFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_GenKeyFlags dispatches through IEnroll's vtable slot 51.
 func (self *IEnroll) Put_GenKeyFlags(dwFlags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DeleteRequestCert dispatches through IEnroll's vtable slot 52.
 func (self *IEnroll) Get_DeleteRequestCert(fDelete *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fDelete)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DeleteRequestCert dispatches through IEnroll's vtable slot 53.
 func (self *IEnroll) Put_DeleteRequestCert(fDelete bool) error {
 	_fDelete := win32.Bool32(fDelete)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(_fDelete))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_WriteCertToUserDS dispatches through IEnroll's vtable slot 54.
 func (self *IEnroll) Get_WriteCertToUserDS(fBool *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fBool)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_WriteCertToUserDS dispatches through IEnroll's vtable slot 55.
 func (self *IEnroll) Put_WriteCertToUserDS(fBool bool) error {
 	_fBool := win32.Bool32(fBool)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(_fBool))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EnableT61DNEncoding dispatches through IEnroll's vtable slot 56.
 func (self *IEnroll) Get_EnableT61DNEncoding(fBool *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fBool)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EnableT61DNEncoding dispatches through IEnroll's vtable slot 57.
 func (self *IEnroll) Put_EnableT61DNEncoding(fBool bool) error {
 	_fBool := win32.Bool32(fBool)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(_fBool))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_WriteCertToCSP dispatches through IEnroll's vtable slot 58.
 func (self *IEnroll) Get_WriteCertToCSP(fBool *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fBool)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_WriteCertToCSP dispatches through IEnroll's vtable slot 59.
 func (self *IEnroll) Put_WriteCertToCSP(fBool bool) error {
 	_fBool := win32.Bool32(fBool)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(_fBool))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SPCFileNameWStr dispatches through IEnroll's vtable slot 60.
 func (self *IEnroll) Get_SPCFileNameWStr(szw *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szw)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SPCFileNameWStr dispatches through IEnroll's vtable slot 61.
 func (self *IEnroll) Put_SPCFileNameWStr(szw string) error {
 	_szw := win32.UTF16Ptr(szw)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szw)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PVKFileNameWStr dispatches through IEnroll's vtable slot 62.
 func (self *IEnroll) Get_PVKFileNameWStr(szw *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szw)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PVKFileNameWStr dispatches through IEnroll's vtable slot 63.
 func (self *IEnroll) Put_PVKFileNameWStr(szw string) error {
 	_szw := win32.UTF16Ptr(szw)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szw)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HashAlgorithmWStr dispatches through IEnroll's vtable slot 64.
 func (self *IEnroll) Get_HashAlgorithmWStr(szw *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szw)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_HashAlgorithmWStr dispatches through IEnroll's vtable slot 65.
 func (self *IEnroll) Put_HashAlgorithmWStr(szw string) error {
 	_szw := win32.UTF16Ptr(szw)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szw)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RenewalCertificate dispatches through IEnroll's vtable slot 66.
 func (self *IEnroll) Get_RenewalCertificate(ppCertContext **securitycryptography.CERT_CONTEXT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCertContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RenewalCertificate dispatches through IEnroll's vtable slot 67.
 func (self *IEnroll) Put_RenewalCertificate(pCertContext *securitycryptography.CERT_CONTEXT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCertContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddCertTypeToRequestWStr dispatches through IEnroll's vtable slot 68.
 func (self *IEnroll) AddCertTypeToRequestWStr(szw string) error {
 	_szw := win32.UTF16Ptr(szw)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szw)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddNameValuePairToSignatureWStr dispatches through IEnroll's vtable slot 69.
@@ -3610,25 +3610,25 @@ func (self *IEnroll) AddNameValuePairToSignatureWStr(Name string, Value string) 
 	_Name := win32.UTF16Ptr(Name)
 	_Value := win32.UTF16Ptr(Value)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Name)), uintptr(unsafe.Pointer(_Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddExtensionsToRequest dispatches through IEnroll's vtable slot 70.
 func (self *IEnroll) AddExtensionsToRequest(pCertExtensions *securitycryptography.CERT_EXTENSIONS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCertExtensions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddAuthenticatedAttributesToPKCS7Request dispatches through IEnroll's vtable slot 71.
 func (self *IEnroll) AddAuthenticatedAttributesToPKCS7Request(pAttributes *securitycryptography.CRYPT_ATTRIBUTES) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAttributes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePKCS7RequestFromRequest dispatches through IEnroll's vtable slot 72.
 func (self *IEnroll) CreatePKCS7RequestFromRequest(pRequest *securitycryptography.CRYPT_INTEGER_BLOB, pSigningCertContext *securitycryptography.CERT_CONTEXT, pPkcs7Blob *securitycryptography.CRYPT_INTEGER_BLOB) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[72], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRequest)), uintptr(unsafe.Pointer(pSigningCertContext)), uintptr(unsafe.Pointer(pPkcs7Blob)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEnroll2: https://learn.microsoft.com/windows/win32/api/xenroll/nn-xenroll-ienroll2
@@ -3643,19 +3643,19 @@ var IID_IEnroll2 = win32.GUID{Data1: 0xc080e199, Data2: 0xb7df, Data3: 0x11d2, D
 // InstallPKCS7Blob dispatches through IEnroll2's vtable slot 73.
 func (self *IEnroll2) InstallPKCS7Blob(pBlobPKCS7 *securitycryptography.CRYPT_INTEGER_BLOB) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBlobPKCS7)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnroll2's vtable slot 74.
 func (self *IEnroll2) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[74], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSupportedKeySpec dispatches through IEnroll2's vtable slot 75.
 func (self *IEnroll2) GetSupportedKeySpec(pdwKeySpec *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[75], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwKeySpec)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetKeyLen dispatches through IEnroll2's vtable slot 76.
@@ -3663,94 +3663,94 @@ func (self *IEnroll2) GetKeyLen(fMin bool, fExchange bool, pdwKeySize *int32) er
 	_fMin := win32.Bool32(fMin)
 	_fExchange := win32.Bool32(fExchange)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[76], uintptr(unsafe.Pointer(self)), uintptr(_fMin), uintptr(_fExchange), uintptr(unsafe.Pointer(pdwKeySize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumAlgs dispatches through IEnroll2's vtable slot 77.
 func (self *IEnroll2) EnumAlgs(dwIndex int32, algClass int32, pdwAlgID *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[77], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(algClass), uintptr(unsafe.Pointer(pdwAlgID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAlgNameWStr dispatches through IEnroll2's vtable slot 78.
 func (self *IEnroll2) GetAlgNameWStr(algID int32, ppwsz *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(algID), uintptr(unsafe.Pointer(ppwsz)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ReuseHardwareKeyIfUnableToGenNew dispatches through IEnroll2's vtable slot 79.
 func (self *IEnroll2) Put_ReuseHardwareKeyIfUnableToGenNew(fReuseHardwareKeyIfUnableToGenNew bool) error {
 	_fReuseHardwareKeyIfUnableToGenNew := win32.Bool32(fReuseHardwareKeyIfUnableToGenNew)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[79], uintptr(unsafe.Pointer(self)), uintptr(_fReuseHardwareKeyIfUnableToGenNew))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReuseHardwareKeyIfUnableToGenNew dispatches through IEnroll2's vtable slot 80.
 func (self *IEnroll2) Get_ReuseHardwareKeyIfUnableToGenNew(fReuseHardwareKeyIfUnableToGenNew *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[80], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fReuseHardwareKeyIfUnableToGenNew)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_HashAlgID dispatches through IEnroll2's vtable slot 81.
 func (self *IEnroll2) Put_HashAlgID(hashAlgID int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(hashAlgID))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HashAlgID dispatches through IEnroll2's vtable slot 82.
 func (self *IEnroll2) Get_HashAlgID(hashAlgID *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hashAlgID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetHStoreMy dispatches through IEnroll2's vtable slot 83.
 func (self *IEnroll2) SetHStoreMy(hStore securitycryptography.HCERTSTORE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(hStore))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetHStoreCA dispatches through IEnroll2's vtable slot 84.
 func (self *IEnroll2) SetHStoreCA(hStore securitycryptography.HCERTSTORE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(hStore))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetHStoreROOT dispatches through IEnroll2's vtable slot 85.
 func (self *IEnroll2) SetHStoreROOT(hStore securitycryptography.HCERTSTORE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(hStore))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetHStoreRequest dispatches through IEnroll2's vtable slot 86.
 func (self *IEnroll2) SetHStoreRequest(hStore securitycryptography.HCERTSTORE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(hStore))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LimitExchangeKeyToEncipherment dispatches through IEnroll2's vtable slot 87.
 func (self *IEnroll2) Put_LimitExchangeKeyToEncipherment(fLimitExchangeKeyToEncipherment bool) error {
 	_fLimitExchangeKeyToEncipherment := win32.Bool32(fLimitExchangeKeyToEncipherment)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[87], uintptr(unsafe.Pointer(self)), uintptr(_fLimitExchangeKeyToEncipherment))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LimitExchangeKeyToEncipherment dispatches through IEnroll2's vtable slot 88.
 func (self *IEnroll2) Get_LimitExchangeKeyToEncipherment(fLimitExchangeKeyToEncipherment *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[88], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fLimitExchangeKeyToEncipherment)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EnableSMIMECapabilities dispatches through IEnroll2's vtable slot 89.
 func (self *IEnroll2) Put_EnableSMIMECapabilities(fEnableSMIMECapabilities bool) error {
 	_fEnableSMIMECapabilities := win32.Bool32(fEnableSMIMECapabilities)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[89], uintptr(unsafe.Pointer(self)), uintptr(_fEnableSMIMECapabilities))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EnableSMIMECapabilities dispatches through IEnroll2's vtable slot 90.
 func (self *IEnroll2) Get_EnableSMIMECapabilities(fEnableSMIMECapabilities *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fEnableSMIMECapabilities)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEnroll4: https://learn.microsoft.com/windows/win32/api/xenroll/nn-xenroll-ienroll4
@@ -3765,13 +3765,13 @@ var IID_IEnroll4 = win32.GUID{Data1: 0xf8053fe5, Data2: 0x78f4, Data3: 0x448f, D
 // Get_ThumbPrintWStr dispatches through IEnroll4's vtable slot 92.
 func (self *IEnroll4) Get_ThumbPrintWStr(thumbPrintBlob *securitycryptography.CRYPT_INTEGER_BLOB) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[92], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(thumbPrintBlob)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetPrivateKeyArchiveCertificate dispatches through IEnroll4's vtable slot 93.
 func (self *IEnroll4) SetPrivateKeyArchiveCertificate(pPrivateKeyArchiveCert *securitycryptography.CERT_CONTEXT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[93], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPrivateKeyArchiveCert)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPrivateKeyArchiveCertificate dispatches through IEnroll4's vtable slot 94.
@@ -3783,28 +3783,28 @@ func (self *IEnroll4) GetPrivateKeyArchiveCertificate() *securitycryptography.CE
 // BinaryBlobToString dispatches through IEnroll4's vtable slot 95.
 func (self *IEnroll4) BinaryBlobToString(Flags int32, pblobBinary *securitycryptography.CRYPT_INTEGER_BLOB, ppwszString *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[95], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(pblobBinary)), uintptr(unsafe.Pointer(ppwszString)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StringToBinaryBlob dispatches through IEnroll4's vtable slot 96.
 func (self *IEnroll4) StringToBinaryBlob(Flags int32, pwszString string, pblobBinary *securitycryptography.CRYPT_INTEGER_BLOB, pdwSkip *int32, pdwFlags *int32) error {
 	_pwszString := win32.UTF16Ptr(pwszString)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[96], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(_pwszString)), uintptr(unsafe.Pointer(pblobBinary)), uintptr(unsafe.Pointer(pdwSkip)), uintptr(unsafe.Pointer(pdwFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddExtensionToRequestWStr dispatches through IEnroll4's vtable slot 97.
 func (self *IEnroll4) AddExtensionToRequestWStr(Flags int32, pwszName string, pblobValue *securitycryptography.CRYPT_INTEGER_BLOB) error {
 	_pwszName := win32.UTF16Ptr(pwszName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[97], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(_pwszName)), uintptr(unsafe.Pointer(pblobValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddAttributeToRequestWStr dispatches through IEnroll4's vtable slot 98.
 func (self *IEnroll4) AddAttributeToRequestWStr(Flags int32, pwszName string, pblobValue *securitycryptography.CRYPT_INTEGER_BLOB) error {
 	_pwszName := win32.UTF16Ptr(pwszName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[98], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(_pwszName)), uintptr(unsafe.Pointer(pblobValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddNameValuePairToRequestWStr dispatches through IEnroll4's vtable slot 99.
@@ -3812,19 +3812,19 @@ func (self *IEnroll4) AddNameValuePairToRequestWStr(Flags int32, pwszName string
 	_pwszName := win32.UTF16Ptr(pwszName)
 	_pwszValue := win32.UTF16Ptr(pwszValue)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[99], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(_pwszName)), uintptr(unsafe.Pointer(_pwszValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ResetExtensions dispatches through IEnroll4's vtable slot 100.
 func (self *IEnroll4) ResetExtensions() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[100], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ResetAttributes dispatches through IEnroll4's vtable slot 101.
 func (self *IEnroll4) ResetAttributes() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[101], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateRequestWStr dispatches through IEnroll4's vtable slot 102.
@@ -3832,7 +3832,7 @@ func (self *IEnroll4) CreateRequestWStr(Flags CERT_CREATE_REQUEST_FLAGS, pwszDNN
 	_pwszDNName := win32.UTF16Ptr(pwszDNName)
 	_pwszUsage := win32.UTF16Ptr(pwszUsage)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[102], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(_pwszDNName)), uintptr(unsafe.Pointer(_pwszUsage)), uintptr(unsafe.Pointer(pblobRequest)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateFileRequestWStr dispatches through IEnroll4's vtable slot 103.
@@ -3841,40 +3841,40 @@ func (self *IEnroll4) CreateFileRequestWStr(Flags CERT_CREATE_REQUEST_FLAGS, pws
 	_pwszUsage := win32.UTF16Ptr(pwszUsage)
 	_pwszRequestFileName := win32.UTF16Ptr(pwszRequestFileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[103], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(_pwszDNName)), uintptr(unsafe.Pointer(_pwszUsage)), uintptr(unsafe.Pointer(_pwszRequestFileName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AcceptResponseBlob dispatches through IEnroll4's vtable slot 104.
 func (self *IEnroll4) AcceptResponseBlob(pblobResponse *securitycryptography.CRYPT_INTEGER_BLOB) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[104], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pblobResponse)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AcceptFileResponseWStr dispatches through IEnroll4's vtable slot 105.
 func (self *IEnroll4) AcceptFileResponseWStr(pwszResponseFileName string) error {
 	_pwszResponseFileName := win32.UTF16Ptr(pwszResponseFileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[105], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszResponseFileName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCertContextFromResponseBlob dispatches through IEnroll4's vtable slot 106.
 func (self *IEnroll4) GetCertContextFromResponseBlob(pblobResponse *securitycryptography.CRYPT_INTEGER_BLOB, ppCertContext **securitycryptography.CERT_CONTEXT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[106], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pblobResponse)), uintptr(unsafe.Pointer(ppCertContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCertContextFromFileResponseWStr dispatches through IEnroll4's vtable slot 107.
 func (self *IEnroll4) GetCertContextFromFileResponseWStr(pwszResponseFileName string, ppCertContext **securitycryptography.CERT_CONTEXT) error {
 	_pwszResponseFileName := win32.UTF16Ptr(pwszResponseFileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[107], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszResponseFileName)), uintptr(unsafe.Pointer(ppCertContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePFXWStr dispatches through IEnroll4's vtable slot 108.
 func (self *IEnroll4) CreatePFXWStr(pwszPassword string, pblobPFX *securitycryptography.CRYPT_INTEGER_BLOB) error {
 	_pwszPassword := win32.UTF16Ptr(pwszPassword)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[108], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszPassword)), uintptr(unsafe.Pointer(pblobPFX)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateFilePFXWStr dispatches through IEnroll4's vtable slot 109.
@@ -3882,7 +3882,7 @@ func (self *IEnroll4) CreateFilePFXWStr(pwszPassword string, pwszPFXFileName str
 	_pwszPassword := win32.UTF16Ptr(pwszPassword)
 	_pwszPFXFileName := win32.UTF16Ptr(pwszPFXFileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[109], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszPassword)), uintptr(unsafe.Pointer(_pwszPFXFileName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetPendingRequestInfoWStr dispatches through IEnroll4's vtable slot 110.
@@ -3891,25 +3891,25 @@ func (self *IEnroll4) SetPendingRequestInfoWStr(lRequestID int32, pwszCADNS stri
 	_pwszCAName := win32.UTF16Ptr(pwszCAName)
 	_pwszFriendlyName := win32.UTF16Ptr(pwszFriendlyName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[110], uintptr(unsafe.Pointer(self)), uintptr(lRequestID), uintptr(unsafe.Pointer(_pwszCADNS)), uintptr(unsafe.Pointer(_pwszCAName)), uintptr(unsafe.Pointer(_pwszFriendlyName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumPendingRequestWStr dispatches through IEnroll4's vtable slot 111.
 func (self *IEnroll4) EnumPendingRequestWStr(lIndex int32, lDesiredProperty PENDING_REQUEST_DESIRED_PROPERTY, ppProperty unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[111], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(lDesiredProperty), uintptr(unsafe.Pointer(ppProperty)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetKeyLenEx dispatches through IEnroll4's vtable slot 113.
 func (self *IEnroll4) GetKeyLenEx(lSizeSpec XEKL_KEYSIZE, lKeySpec XEKL_KEYSPEC, pdwKeySize *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[113], uintptr(unsafe.Pointer(self)), uintptr(lSizeSpec), uintptr(lKeySpec), uintptr(unsafe.Pointer(pdwKeySize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InstallPKCS7BlobEx dispatches through IEnroll4's vtable slot 114.
 func (self *IEnroll4) InstallPKCS7BlobEx(pBlobPKCS7 *securitycryptography.CRYPT_INTEGER_BLOB, plCertInstalled *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[114], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBlobPKCS7)), uintptr(unsafe.Pointer(plCertInstalled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddCertTypeToRequestWStrEx dispatches through IEnroll4's vtable slot 115.
@@ -3917,51 +3917,51 @@ func (self *IEnroll4) AddCertTypeToRequestWStrEx(lType ADDED_CERT_TYPE, pwszOIDO
 	_pwszOIDOrName := win32.UTF16Ptr(pwszOIDOrName)
 	_fMinorVersion := win32.Bool32(fMinorVersion)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[115], uintptr(unsafe.Pointer(self)), uintptr(lType), uintptr(unsafe.Pointer(_pwszOIDOrName)), uintptr(lMajorVersion), uintptr(_fMinorVersion), uintptr(lMinorVersion))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProviderTypeWStr dispatches through IEnroll4's vtable slot 116.
 func (self *IEnroll4) GetProviderTypeWStr(pwszProvName string, plProvType *int32) error {
 	_pwszProvName := win32.UTF16Ptr(pwszProvName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[116], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszProvName)), uintptr(unsafe.Pointer(plProvType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddBlobPropertyToCertificateWStr dispatches through IEnroll4's vtable slot 117.
 func (self *IEnroll4) AddBlobPropertyToCertificateWStr(lPropertyId int32, lReserved int32, pBlobProperty *securitycryptography.CRYPT_INTEGER_BLOB) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[117], uintptr(unsafe.Pointer(self)), uintptr(lPropertyId), uintptr(lReserved), uintptr(unsafe.Pointer(pBlobProperty)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetSignerCertificate dispatches through IEnroll4's vtable slot 118.
 func (self *IEnroll4) SetSignerCertificate(pSignerCert *securitycryptography.CERT_CONTEXT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[118], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSignerCert)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ClientId dispatches through IEnroll4's vtable slot 119.
 func (self *IEnroll4) Put_ClientId(lClientId int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[119], uintptr(unsafe.Pointer(self)), uintptr(lClientId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ClientId dispatches through IEnroll4's vtable slot 120.
 func (self *IEnroll4) Get_ClientId(plClientId *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[120], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plClientId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_IncludeSubjectKeyID dispatches through IEnroll4's vtable slot 121.
 func (self *IEnroll4) Put_IncludeSubjectKeyID(fInclude bool) error {
 	_fInclude := win32.Bool32(fInclude)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[121], uintptr(unsafe.Pointer(self)), uintptr(_fInclude))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IncludeSubjectKeyID dispatches through IEnroll4's vtable slot 122.
 func (self *IEnroll4) Get_IncludeSubjectKeyID(pfInclude *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[122], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfInclude)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumCERTVIEWATTRIBUTE: https://learn.microsoft.com/windows/win32/api/certview/nn-certview-ienumcertviewattribute
@@ -3976,37 +3976,37 @@ var IID_IEnumCERTVIEWATTRIBUTE = win32.GUID{Data1: 0xe77db656, Data2: 0x7653, Da
 // Next dispatches through IEnumCERTVIEWATTRIBUTE's vtable slot 7.
 func (self *IEnumCERTVIEWATTRIBUTE) Next(pIndex *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIndex)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetName dispatches through IEnumCERTVIEWATTRIBUTE's vtable slot 8.
 func (self *IEnumCERTVIEWATTRIBUTE) GetName(pstrOut *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetValue dispatches through IEnumCERTVIEWATTRIBUTE's vtable slot 9.
 func (self *IEnumCERTVIEWATTRIBUTE) GetValue(pstrOut *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumCERTVIEWATTRIBUTE's vtable slot 10.
 func (self *IEnumCERTVIEWATTRIBUTE) Skip(celt int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumCERTVIEWATTRIBUTE's vtable slot 11.
 func (self *IEnumCERTVIEWATTRIBUTE) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IEnumCERTVIEWATTRIBUTE's vtable slot 12.
 func (self *IEnumCERTVIEWATTRIBUTE) Clone(ppenum **IEnumCERTVIEWATTRIBUTE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumCERTVIEWCOLUMN: https://learn.microsoft.com/windows/win32/api/certview/nn-certview-ienumcertviewcolumn
@@ -4021,61 +4021,61 @@ var IID_IEnumCERTVIEWCOLUMN = win32.GUID{Data1: 0x9c735be2, Data2: 0x57a5, Data3
 // Next dispatches through IEnumCERTVIEWCOLUMN's vtable slot 7.
 func (self *IEnumCERTVIEWCOLUMN) Next(pIndex *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIndex)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetName dispatches through IEnumCERTVIEWCOLUMN's vtable slot 8.
 func (self *IEnumCERTVIEWCOLUMN) GetName(pstrOut *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDisplayName dispatches through IEnumCERTVIEWCOLUMN's vtable slot 9.
 func (self *IEnumCERTVIEWCOLUMN) GetDisplayName(pstrOut *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetType dispatches through IEnumCERTVIEWCOLUMN's vtable slot 10.
 func (self *IEnumCERTVIEWCOLUMN) GetType(pType *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsIndexed dispatches through IEnumCERTVIEWCOLUMN's vtable slot 11.
 func (self *IEnumCERTVIEWCOLUMN) IsIndexed(pIndexed *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIndexed)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMaxLength dispatches through IEnumCERTVIEWCOLUMN's vtable slot 12.
 func (self *IEnumCERTVIEWCOLUMN) GetMaxLength(pMaxLength *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMaxLength)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetValue dispatches through IEnumCERTVIEWCOLUMN's vtable slot 13.
 func (self *IEnumCERTVIEWCOLUMN) GetValue(Flags ENUM_CERT_COLUMN_VALUE_FLAGS, pvarValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(pvarValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumCERTVIEWCOLUMN's vtable slot 14.
 func (self *IEnumCERTVIEWCOLUMN) Skip(celt int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumCERTVIEWCOLUMN's vtable slot 15.
 func (self *IEnumCERTVIEWCOLUMN) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IEnumCERTVIEWCOLUMN's vtable slot 16.
 func (self *IEnumCERTVIEWCOLUMN) Clone(ppenum **IEnumCERTVIEWCOLUMN) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumCERTVIEWEXTENSION: https://learn.microsoft.com/windows/win32/api/certview/nn-certview-ienumcertviewextension
@@ -4090,43 +4090,43 @@ var IID_IEnumCERTVIEWEXTENSION = win32.GUID{Data1: 0xe7dd1466, Data2: 0x7653, Da
 // Next dispatches through IEnumCERTVIEWEXTENSION's vtable slot 7.
 func (self *IEnumCERTVIEWEXTENSION) Next(pIndex *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIndex)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetName dispatches through IEnumCERTVIEWEXTENSION's vtable slot 8.
 func (self *IEnumCERTVIEWEXTENSION) GetName(pstrOut *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFlags dispatches through IEnumCERTVIEWEXTENSION's vtable slot 9.
 func (self *IEnumCERTVIEWEXTENSION) GetFlags(pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetValue dispatches through IEnumCERTVIEWEXTENSION's vtable slot 10.
 func (self *IEnumCERTVIEWEXTENSION) GetValue(Type CERT_PROPERTY_TYPE, Flags ENUM_CERT_COLUMN_VALUE_FLAGS, pvarValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(Flags), uintptr(unsafe.Pointer(pvarValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumCERTVIEWEXTENSION's vtable slot 11.
 func (self *IEnumCERTVIEWEXTENSION) Skip(celt int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumCERTVIEWEXTENSION's vtable slot 12.
 func (self *IEnumCERTVIEWEXTENSION) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IEnumCERTVIEWEXTENSION's vtable slot 13.
 func (self *IEnumCERTVIEWEXTENSION) Clone(ppenum **IEnumCERTVIEWEXTENSION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumCERTVIEWROW: https://learn.microsoft.com/windows/win32/api/certview/nn-certview-ienumcertviewrow
@@ -4141,49 +4141,49 @@ var IID_IEnumCERTVIEWROW = win32.GUID{Data1: 0xd1157f4c, Data2: 0x5af2, Data3: 0
 // Next dispatches through IEnumCERTVIEWROW's vtable slot 7.
 func (self *IEnumCERTVIEWROW) Next(pIndex *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIndex)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumCertViewColumn dispatches through IEnumCERTVIEWROW's vtable slot 8.
 func (self *IEnumCERTVIEWROW) EnumCertViewColumn(ppenum **IEnumCERTVIEWCOLUMN) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumCertViewAttribute dispatches through IEnumCERTVIEWROW's vtable slot 9.
 func (self *IEnumCERTVIEWROW) EnumCertViewAttribute(Flags int32, ppenum **IEnumCERTVIEWATTRIBUTE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(ppenum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumCertViewExtension dispatches through IEnumCERTVIEWROW's vtable slot 10.
 func (self *IEnumCERTVIEWROW) EnumCertViewExtension(Flags int32, ppenum **IEnumCERTVIEWEXTENSION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(ppenum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumCERTVIEWROW's vtable slot 11.
 func (self *IEnumCERTVIEWROW) Skip(celt int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumCERTVIEWROW's vtable slot 12.
 func (self *IEnumCERTVIEWROW) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IEnumCERTVIEWROW's vtable slot 13.
 func (self *IEnumCERTVIEWROW) Clone(ppenum **IEnumCERTVIEWROW) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMaxIndex dispatches through IEnumCERTVIEWROW's vtable slot 14.
 func (self *IEnumCERTVIEWROW) GetMaxIndex(pIndex *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIndex)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // INDESPolicy: https://learn.microsoft.com/windows/win32/api/certpol/nn-certpol-indespolicy
@@ -4198,13 +4198,13 @@ var IID_INDESPolicy = win32.GUID{Data1: 0x13ca515d, Data2: 0x431d, Data3: 0x46cc
 // Initialize dispatches through INDESPolicy's vtable slot 3.
 func (self *INDESPolicy) Initialize() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Uninitialize dispatches through INDESPolicy's vtable slot 4.
 func (self *INDESPolicy) Uninitialize() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GenerateChallenge dispatches through INDESPolicy's vtable slot 5.
@@ -4213,7 +4213,7 @@ func (self *INDESPolicy) GenerateChallenge(pwszTemplate string, pwszParams strin
 	_pwszParams := win32.UTF16Ptr(pwszParams)
 	var _ppwszResponse foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszTemplate)), uintptr(unsafe.Pointer(_pwszParams)), uintptr(unsafe.Pointer(&_ppwszResponse)))
-	return _ppwszResponse, win32.HRESULTError(int32(r1))
+	return _ppwszResponse, win32.ErrIfFailed(int32(r1))
 }
 
 // VerifyRequest dispatches through INDESPolicy's vtable slot 6.
@@ -4222,7 +4222,7 @@ func (self *INDESPolicy) VerifyRequest(pctbRequest *CERTTRANSBLOB, pctbSigningCe
 	_pwszTransactionId := win32.UTF16Ptr(pwszTransactionId)
 	var _pfVerified foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pctbRequest)), uintptr(unsafe.Pointer(pctbSigningCertEncoded)), uintptr(unsafe.Pointer(_pwszTemplate)), uintptr(unsafe.Pointer(_pwszTransactionId)), uintptr(unsafe.Pointer(&_pfVerified)))
-	return _pfVerified, win32.HRESULTError(int32(r1))
+	return _pfVerified, win32.ErrIfFailed(int32(r1))
 }
 
 // Notify dispatches through INDESPolicy's vtable slot 7.
@@ -4230,7 +4230,7 @@ func (self *INDESPolicy) Notify(pwszChallenge string, pwszTransactionId string, 
 	_pwszChallenge := win32.UTF16Ptr(pwszChallenge)
 	_pwszTransactionId := win32.UTF16Ptr(pwszTransactionId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszChallenge)), uintptr(unsafe.Pointer(_pwszTransactionId)), uintptr(disposition), uintptr(lastHResult), uintptr(unsafe.Pointer(pctbIssuedCertEncoded)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IOCSPAdmin: https://learn.microsoft.com/windows/win32/api/certadm/nn-certadm-iocspadmin
@@ -4245,61 +4245,61 @@ var IID_IOCSPAdmin = win32.GUID{Data1: 0x322e830d, Data2: 0x67db, Data3: 0x4fe9,
 // Get_OCSPServiceProperties dispatches through IOCSPAdmin's vtable slot 7.
 func (self *IOCSPAdmin) Get_OCSPServiceProperties(ppVal **IOCSPPropertyCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OCSPCAConfigurationCollection dispatches through IOCSPAdmin's vtable slot 8.
 func (self *IOCSPAdmin) Get_OCSPCAConfigurationCollection(pVal **IOCSPCAConfigurationCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetConfiguration dispatches through IOCSPAdmin's vtable slot 9.
 func (self *IOCSPAdmin) GetConfiguration(bstrServerName foundation.BSTR, bForce foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrServerName)), uintptr(bForce))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetConfiguration dispatches through IOCSPAdmin's vtable slot 10.
 func (self *IOCSPAdmin) SetConfiguration(bstrServerName foundation.BSTR, bForce foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrServerName)), uintptr(bForce))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMyRoles dispatches through IOCSPAdmin's vtable slot 11.
 func (self *IOCSPAdmin) GetMyRoles(bstrServerName foundation.BSTR, pRoles *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrServerName)), uintptr(unsafe.Pointer(pRoles)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Ping dispatches through IOCSPAdmin's vtable slot 12.
 func (self *IOCSPAdmin) Ping(bstrServerName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrServerName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetSecurity dispatches through IOCSPAdmin's vtable slot 13.
 func (self *IOCSPAdmin) SetSecurity(bstrServerName foundation.BSTR, bstrVal foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrServerName)), uintptr(unsafe.Pointer(bstrVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSecurity dispatches through IOCSPAdmin's vtable slot 14.
 func (self *IOCSPAdmin) GetSecurity(bstrServerName foundation.BSTR, pVal *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrServerName)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSigningCertificates dispatches through IOCSPAdmin's vtable slot 15.
 func (self *IOCSPAdmin) GetSigningCertificates(bstrServerName foundation.BSTR, pCACertVar *systemvariant.VARIANT, pVal *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrServerName)), uintptr(unsafe.Pointer(pCACertVar)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetHashAlgorithms dispatches through IOCSPAdmin's vtable slot 16.
 func (self *IOCSPAdmin) GetHashAlgorithms(bstrServerName foundation.BSTR, bstrCAId foundation.BSTR, pVal *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrServerName)), uintptr(unsafe.Pointer(bstrCAId)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IOCSPCAConfiguration: https://learn.microsoft.com/windows/win32/api/certadm/nn-certadm-iocspcaconfiguration
@@ -4314,127 +4314,127 @@ var IID_IOCSPCAConfiguration = win32.GUID{Data1: 0xaec92b40, Data2: 0x3d46, Data
 // Get_Identifier dispatches through IOCSPCAConfiguration's vtable slot 7.
 func (self *IOCSPCAConfiguration) Get_Identifier(pVal *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CACertificate dispatches through IOCSPCAConfiguration's vtable slot 8.
 func (self *IOCSPCAConfiguration) Get_CACertificate(pVal *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HashAlgorithm dispatches through IOCSPCAConfiguration's vtable slot 9.
 func (self *IOCSPCAConfiguration) Get_HashAlgorithm(pVal *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_HashAlgorithm dispatches through IOCSPCAConfiguration's vtable slot 10.
 func (self *IOCSPCAConfiguration) Put_HashAlgorithm(newVal foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SigningFlags dispatches through IOCSPCAConfiguration's vtable slot 11.
 func (self *IOCSPCAConfiguration) Get_SigningFlags(pVal *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SigningFlags dispatches through IOCSPCAConfiguration's vtable slot 12.
 func (self *IOCSPCAConfiguration) Put_SigningFlags(newVal uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(newVal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SigningCertificate dispatches through IOCSPCAConfiguration's vtable slot 13.
 func (self *IOCSPCAConfiguration) Get_SigningCertificate(pVal *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReminderDuration dispatches through IOCSPCAConfiguration's vtable slot 15.
 func (self *IOCSPCAConfiguration) Get_ReminderDuration(pVal *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ReminderDuration dispatches through IOCSPCAConfiguration's vtable slot 16.
 func (self *IOCSPCAConfiguration) Put_ReminderDuration(newVal uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(newVal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ErrorCode dispatches through IOCSPCAConfiguration's vtable slot 17.
 func (self *IOCSPCAConfiguration) Get_ErrorCode(pVal *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CSPName dispatches through IOCSPCAConfiguration's vtable slot 18.
 func (self *IOCSPCAConfiguration) Get_CSPName(pVal *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_KeySpec dispatches through IOCSPCAConfiguration's vtable slot 19.
 func (self *IOCSPCAConfiguration) Get_KeySpec(pVal *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ProviderCLSID dispatches through IOCSPCAConfiguration's vtable slot 20.
 func (self *IOCSPCAConfiguration) Get_ProviderCLSID(pVal *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ProviderCLSID dispatches through IOCSPCAConfiguration's vtable slot 21.
 func (self *IOCSPCAConfiguration) Put_ProviderCLSID(newVal foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ProviderProperties dispatches through IOCSPCAConfiguration's vtable slot 22.
 func (self *IOCSPCAConfiguration) Get_ProviderProperties(pVal *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Modified dispatches through IOCSPCAConfiguration's vtable slot 24.
 func (self *IOCSPCAConfiguration) Get_Modified(pVal *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LocalRevocationInformation dispatches through IOCSPCAConfiguration's vtable slot 25.
 func (self *IOCSPCAConfiguration) Get_LocalRevocationInformation(pVal *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SigningCertificateTemplate dispatches through IOCSPCAConfiguration's vtable slot 27.
 func (self *IOCSPCAConfiguration) Get_SigningCertificateTemplate(pVal *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SigningCertificateTemplate dispatches through IOCSPCAConfiguration's vtable slot 28.
 func (self *IOCSPCAConfiguration) Put_SigningCertificateTemplate(newVal foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CAConfig dispatches through IOCSPCAConfiguration's vtable slot 29.
 func (self *IOCSPCAConfiguration) Get_CAConfig(pVal *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CAConfig dispatches through IOCSPCAConfiguration's vtable slot 30.
 func (self *IOCSPCAConfiguration) Put_CAConfig(newVal foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IOCSPCAConfigurationCollection: https://learn.microsoft.com/windows/win32/api/certadm/nn-certadm-iocspcaconfigurationcollection
@@ -4449,31 +4449,31 @@ var IID_IOCSPCAConfigurationCollection = win32.GUID{Data1: 0x2bebea0b, Data2: 0x
 // Get__NewEnum dispatches through IOCSPCAConfigurationCollection's vtable slot 7.
 func (self *IOCSPCAConfigurationCollection) Get__NewEnum(pVal **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Item dispatches through IOCSPCAConfigurationCollection's vtable slot 8.
 func (self *IOCSPCAConfigurationCollection) Get_Item(Index int32, pVal *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IOCSPCAConfigurationCollection's vtable slot 9.
 func (self *IOCSPCAConfigurationCollection) Get_Count(pVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ItemByName dispatches through IOCSPCAConfigurationCollection's vtable slot 10.
 func (self *IOCSPCAConfigurationCollection) Get_ItemByName(bstrIdentifier foundation.BSTR, pVal *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrIdentifier)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteCAConfiguration dispatches through IOCSPCAConfigurationCollection's vtable slot 12.
 func (self *IOCSPCAConfigurationCollection) DeleteCAConfiguration(bstrIdentifier foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrIdentifier)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IOCSPProperty: https://learn.microsoft.com/windows/win32/api/certadm/nn-certadm-iocspproperty
@@ -4488,19 +4488,19 @@ var IID_IOCSPProperty = win32.GUID{Data1: 0x66fb7839, Data2: 0x5f04, Data3: 0x4c
 // Get_Name dispatches through IOCSPProperty's vtable slot 7.
 func (self *IOCSPProperty) Get_Name(pVal *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Value dispatches through IOCSPProperty's vtable slot 8.
 func (self *IOCSPProperty) Get_Value(pVal *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Modified dispatches through IOCSPProperty's vtable slot 10.
 func (self *IOCSPProperty) Get_Modified(pVal *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IOCSPPropertyCollection: https://learn.microsoft.com/windows/win32/api/certadm/nn-certadm-iocsppropertycollection
@@ -4515,49 +4515,49 @@ var IID_IOCSPPropertyCollection = win32.GUID{Data1: 0x2597c18d, Data2: 0x54e6, D
 // Get__NewEnum dispatches through IOCSPPropertyCollection's vtable slot 7.
 func (self *IOCSPPropertyCollection) Get__NewEnum(ppVal **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Item dispatches through IOCSPPropertyCollection's vtable slot 8.
 func (self *IOCSPPropertyCollection) Get_Item(Index int32, pVal *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IOCSPPropertyCollection's vtable slot 9.
 func (self *IOCSPPropertyCollection) Get_Count(pVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ItemByName dispatches through IOCSPPropertyCollection's vtable slot 10.
 func (self *IOCSPPropertyCollection) Get_ItemByName(bstrPropName foundation.BSTR, pVal *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPropName)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateProperty dispatches through IOCSPPropertyCollection's vtable slot 11.
 func (self *IOCSPPropertyCollection) CreateProperty(bstrPropName foundation.BSTR, pVarPropValue *systemvariant.VARIANT, ppVal **IOCSPProperty) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPropName)), uintptr(unsafe.Pointer(pVarPropValue)), uintptr(unsafe.Pointer(ppVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteProperty dispatches through IOCSPPropertyCollection's vtable slot 12.
 func (self *IOCSPPropertyCollection) DeleteProperty(bstrPropName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPropName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeFromProperties dispatches through IOCSPPropertyCollection's vtable slot 13.
 func (self *IOCSPPropertyCollection) InitializeFromProperties(pVarProperties *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVarProperties)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAllProperties dispatches through IOCSPPropertyCollection's vtable slot 14.
 func (self *IOCSPPropertyCollection) GetAllProperties(pVarProperties *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVarProperties)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IObjectId: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-iobjectid
@@ -4572,49 +4572,49 @@ var IID_IObjectId = win32.GUID{Data1: 0x728ab300, Data2: 0x217d, Data3: 0x11da, 
 // InitializeFromName dispatches through IObjectId's vtable slot 7.
 func (self *IObjectId) InitializeFromName(Name CERTENROLL_OBJECTID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Name))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeFromValue dispatches through IObjectId's vtable slot 8.
 func (self *IObjectId) InitializeFromValue(strValue foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeFromAlgorithmName dispatches through IObjectId's vtable slot 9.
 func (self *IObjectId) InitializeFromAlgorithmName(GroupId ObjectIdGroupId, KeyFlags ObjectIdPublicKeyFlags, AlgFlags AlgorithmFlags, strAlgorithmName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(GroupId), uintptr(KeyFlags), uintptr(AlgFlags), uintptr(unsafe.Pointer(strAlgorithmName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through IObjectId's vtable slot 10.
 func (self *IObjectId) Get_Name(pValue *CERTENROLL_OBJECTID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FriendlyName dispatches through IObjectId's vtable slot 11.
 func (self *IObjectId) Get_FriendlyName(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FriendlyName dispatches through IObjectId's vtable slot 12.
 func (self *IObjectId) Put_FriendlyName(Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Value dispatches through IObjectId's vtable slot 13.
 func (self *IObjectId) Get_Value(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAlgorithmName dispatches through IObjectId's vtable slot 14.
 func (self *IObjectId) GetAlgorithmName(GroupId ObjectIdGroupId, KeyFlags ObjectIdPublicKeyFlags, pstrAlgorithmName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(GroupId), uintptr(KeyFlags), uintptr(unsafe.Pointer(pstrAlgorithmName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IObjectIds: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-iobjectids
@@ -4629,43 +4629,43 @@ var IID_IObjectIds = win32.GUID{Data1: 0x728ab301, Data2: 0x217d, Data3: 0x11da,
 // Get_ItemByIndex dispatches through IObjectIds's vtable slot 7.
 func (self *IObjectIds) Get_ItemByIndex(Index int32, pVal **IObjectId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IObjectIds's vtable slot 8.
 func (self *IObjectIds) Get_Count(pVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IObjectIds's vtable slot 9.
 func (self *IObjectIds) Get__NewEnum(pVal **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through IObjectIds's vtable slot 10.
 func (self *IObjectIds) Add(pVal *IObjectId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through IObjectIds's vtable slot 11.
 func (self *IObjectIds) Remove(Index int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through IObjectIds's vtable slot 12.
 func (self *IObjectIds) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddRange dispatches through IObjectIds's vtable slot 13.
 func (self *IObjectIds) AddRange(pValue *IObjectIds) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPolicyQualifier: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ipolicyqualifier
@@ -4680,31 +4680,31 @@ var IID_IPolicyQualifier = win32.GUID{Data1: 0x728ab31c, Data2: 0x217d, Data3: 0
 // InitializeEncode dispatches through IPolicyQualifier's vtable slot 7.
 func (self *IPolicyQualifier) InitializeEncode(strQualifier foundation.BSTR, Type PolicyQualifierType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strQualifier)), uintptr(Type))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ObjectId dispatches through IPolicyQualifier's vtable slot 8.
 func (self *IPolicyQualifier) Get_ObjectId(ppValue **IObjectId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Qualifier dispatches through IPolicyQualifier's vtable slot 9.
 func (self *IPolicyQualifier) Get_Qualifier(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Type dispatches through IPolicyQualifier's vtable slot 10.
 func (self *IPolicyQualifier) Get_Type(pValue *PolicyQualifierType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RawData dispatches through IPolicyQualifier's vtable slot 11.
 func (self *IPolicyQualifier) Get_RawData(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPolicyQualifiers: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ipolicyqualifiers
@@ -4719,37 +4719,37 @@ var IID_IPolicyQualifiers = win32.GUID{Data1: 0x728ab31d, Data2: 0x217d, Data3: 
 // Get_ItemByIndex dispatches through IPolicyQualifiers's vtable slot 7.
 func (self *IPolicyQualifiers) Get_ItemByIndex(Index int32, pVal **IPolicyQualifier) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IPolicyQualifiers's vtable slot 8.
 func (self *IPolicyQualifiers) Get_Count(pVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IPolicyQualifiers's vtable slot 9.
 func (self *IPolicyQualifiers) Get__NewEnum(pVal **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through IPolicyQualifiers's vtable slot 10.
 func (self *IPolicyQualifiers) Add(pVal *IPolicyQualifier) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through IPolicyQualifiers's vtable slot 11.
 func (self *IPolicyQualifiers) Remove(Index int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through IPolicyQualifiers's vtable slot 12.
 func (self *IPolicyQualifiers) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISignerCertificate: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-isignercertificate
@@ -4764,67 +4764,67 @@ var IID_ISignerCertificate = win32.GUID{Data1: 0x728ab33d, Data2: 0x217d, Data3:
 // Initialize dispatches through ISignerCertificate's vtable slot 7.
 func (self *ISignerCertificate) Initialize(MachineContext foundation.VARIANT_BOOL, VerifyType X509PrivateKeyVerify, Encoding EncodingType, strCertificate foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(MachineContext), uintptr(VerifyType), uintptr(Encoding), uintptr(unsafe.Pointer(strCertificate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Certificate dispatches through ISignerCertificate's vtable slot 8.
 func (self *ISignerCertificate) Get_Certificate(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PrivateKey dispatches through ISignerCertificate's vtable slot 9.
 func (self *ISignerCertificate) Get_PrivateKey(ppValue **IX509PrivateKey) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Silent dispatches through ISignerCertificate's vtable slot 10.
 func (self *ISignerCertificate) Get_Silent(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Silent dispatches through ISignerCertificate's vtable slot 11.
 func (self *ISignerCertificate) Put_Silent(Value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ParentWindow dispatches through ISignerCertificate's vtable slot 12.
 func (self *ISignerCertificate) Get_ParentWindow(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ParentWindow dispatches through ISignerCertificate's vtable slot 13.
 func (self *ISignerCertificate) Put_ParentWindow(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UIContextMessage dispatches through ISignerCertificate's vtable slot 14.
 func (self *ISignerCertificate) Get_UIContextMessage(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_UIContextMessage dispatches through ISignerCertificate's vtable slot 15.
 func (self *ISignerCertificate) Put_UIContextMessage(Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Pin dispatches through ISignerCertificate's vtable slot 16.
 func (self *ISignerCertificate) Put_Pin(Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SignatureInformation dispatches through ISignerCertificate's vtable slot 17.
 func (self *ISignerCertificate) Get_SignatureInformation(ppValue **IX509SignatureInformation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISignerCertificates: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-isignercertificates
@@ -4839,43 +4839,43 @@ var IID_ISignerCertificates = win32.GUID{Data1: 0x728ab33e, Data2: 0x217d, Data3
 // Get_ItemByIndex dispatches through ISignerCertificates's vtable slot 7.
 func (self *ISignerCertificates) Get_ItemByIndex(Index int32, pVal **ISignerCertificate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through ISignerCertificates's vtable slot 8.
 func (self *ISignerCertificates) Get_Count(pVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISignerCertificates's vtable slot 9.
 func (self *ISignerCertificates) Get__NewEnum(pVal **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through ISignerCertificates's vtable slot 10.
 func (self *ISignerCertificates) Add(pVal *ISignerCertificate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through ISignerCertificates's vtable slot 11.
 func (self *ISignerCertificates) Remove(Index int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through ISignerCertificates's vtable slot 12.
 func (self *ISignerCertificates) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Find dispatches through ISignerCertificates's vtable slot 13.
 func (self *ISignerCertificates) Find(pSignerCert *ISignerCertificate, piSignerCert *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSignerCert)), uintptr(unsafe.Pointer(piSignerCert)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISmimeCapabilities: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ismimecapabilities
@@ -4890,49 +4890,49 @@ var IID_ISmimeCapabilities = win32.GUID{Data1: 0x728ab31a, Data2: 0x217d, Data3:
 // Get_ItemByIndex dispatches through ISmimeCapabilities's vtable slot 7.
 func (self *ISmimeCapabilities) Get_ItemByIndex(Index int32, pVal **ISmimeCapability) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through ISmimeCapabilities's vtable slot 8.
 func (self *ISmimeCapabilities) Get_Count(pVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISmimeCapabilities's vtable slot 9.
 func (self *ISmimeCapabilities) Get__NewEnum(pVal **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through ISmimeCapabilities's vtable slot 10.
 func (self *ISmimeCapabilities) Add(pVal *ISmimeCapability) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through ISmimeCapabilities's vtable slot 11.
 func (self *ISmimeCapabilities) Remove(Index int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through ISmimeCapabilities's vtable slot 12.
 func (self *ISmimeCapabilities) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddFromCsp dispatches through ISmimeCapabilities's vtable slot 13.
 func (self *ISmimeCapabilities) AddFromCsp(pValue *ICspInformation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddAvailableSmimeCapabilities dispatches through ISmimeCapabilities's vtable slot 14.
 func (self *ISmimeCapabilities) AddAvailableSmimeCapabilities(MachineContext foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(MachineContext))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISmimeCapability: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ismimecapability
@@ -4947,19 +4947,19 @@ var IID_ISmimeCapability = win32.GUID{Data1: 0x728ab319, Data2: 0x217d, Data3: 0
 // Initialize dispatches through ISmimeCapability's vtable slot 7.
 func (self *ISmimeCapability) Initialize(pObjectId *IObjectId, BitCount int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObjectId)), uintptr(BitCount))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ObjectId dispatches through ISmimeCapability's vtable slot 8.
 func (self *ISmimeCapability) Get_ObjectId(ppValue **IObjectId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BitCount dispatches through ISmimeCapability's vtable slot 9.
 func (self *ISmimeCapability) Get_BitCount(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX500DistinguishedName: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix500distinguishedname
@@ -4974,25 +4974,25 @@ var IID_IX500DistinguishedName = win32.GUID{Data1: 0x728ab303, Data2: 0x217d, Da
 // Decode dispatches through IX500DistinguishedName's vtable slot 7.
 func (self *IX500DistinguishedName) Decode(strEncodedName foundation.BSTR, Encoding EncodingType, NameFlags X500NameFlags) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strEncodedName)), uintptr(Encoding), uintptr(NameFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Encode dispatches through IX500DistinguishedName's vtable slot 8.
 func (self *IX500DistinguishedName) Encode(strName foundation.BSTR, NameFlags X500NameFlags) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strName)), uintptr(NameFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through IX500DistinguishedName's vtable slot 9.
 func (self *IX500DistinguishedName) Get_Name(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EncodedName dispatches through IX500DistinguishedName's vtable slot 10.
 func (self *IX500DistinguishedName) Get_EncodedName(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509Attribute: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509attribute
@@ -5007,19 +5007,19 @@ var IID_IX509Attribute = win32.GUID{Data1: 0x728ab322, Data2: 0x217d, Data3: 0x1
 // Initialize dispatches through IX509Attribute's vtable slot 7.
 func (self *IX509Attribute) Initialize(pObjectId *IObjectId, Encoding EncodingType, strEncodedData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObjectId)), uintptr(Encoding), uintptr(unsafe.Pointer(strEncodedData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ObjectId dispatches through IX509Attribute's vtable slot 8.
 func (self *IX509Attribute) Get_ObjectId(ppValue **IObjectId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RawData dispatches through IX509Attribute's vtable slot 9.
 func (self *IX509Attribute) Get_RawData(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509AttributeArchiveKey: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509attributearchivekey
@@ -5034,31 +5034,31 @@ var IID_IX509AttributeArchiveKey = win32.GUID{Data1: 0x728ab327, Data2: 0x217d, 
 // InitializeEncode dispatches through IX509AttributeArchiveKey's vtable slot 10.
 func (self *IX509AttributeArchiveKey) InitializeEncode(pKey *IX509PrivateKey, Encoding EncodingType, strCAXCert foundation.BSTR, pAlgorithm *IObjectId, EncryptionStrength int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pKey)), uintptr(Encoding), uintptr(unsafe.Pointer(strCAXCert)), uintptr(unsafe.Pointer(pAlgorithm)), uintptr(EncryptionStrength))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeDecode dispatches through IX509AttributeArchiveKey's vtable slot 11.
 func (self *IX509AttributeArchiveKey) InitializeDecode(Encoding EncodingType, strEncodedData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(strEncodedData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EncryptedKeyBlob dispatches through IX509AttributeArchiveKey's vtable slot 12.
 func (self *IX509AttributeArchiveKey) Get_EncryptedKeyBlob(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EncryptionAlgorithm dispatches through IX509AttributeArchiveKey's vtable slot 13.
 func (self *IX509AttributeArchiveKey) Get_EncryptionAlgorithm(ppValue **IObjectId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EncryptionStrength dispatches through IX509AttributeArchiveKey's vtable slot 14.
 func (self *IX509AttributeArchiveKey) Get_EncryptionStrength(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509AttributeArchiveKeyHash: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509attributearchivekeyhash
@@ -5073,19 +5073,19 @@ var IID_IX509AttributeArchiveKeyHash = win32.GUID{Data1: 0x728ab328, Data2: 0x21
 // InitializeEncodeFromEncryptedKeyBlob dispatches through IX509AttributeArchiveKeyHash's vtable slot 10.
 func (self *IX509AttributeArchiveKeyHash) InitializeEncodeFromEncryptedKeyBlob(Encoding EncodingType, strEncryptedKeyBlob foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(strEncryptedKeyBlob)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeDecode dispatches through IX509AttributeArchiveKeyHash's vtable slot 11.
 func (self *IX509AttributeArchiveKeyHash) InitializeDecode(Encoding EncodingType, strEncodedData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(strEncodedData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EncryptedKeyHashBlob dispatches through IX509AttributeArchiveKeyHash's vtable slot 12.
 func (self *IX509AttributeArchiveKeyHash) Get_EncryptedKeyHashBlob(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509AttributeClientId: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509attributeclientid
@@ -5100,37 +5100,37 @@ var IID_IX509AttributeClientId = win32.GUID{Data1: 0x728ab325, Data2: 0x217d, Da
 // InitializeEncode dispatches through IX509AttributeClientId's vtable slot 10.
 func (self *IX509AttributeClientId) InitializeEncode(ClientId RequestClientInfoClientId, strMachineDnsName foundation.BSTR, strUserSamName foundation.BSTR, strProcessName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(ClientId), uintptr(unsafe.Pointer(strMachineDnsName)), uintptr(unsafe.Pointer(strUserSamName)), uintptr(unsafe.Pointer(strProcessName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeDecode dispatches through IX509AttributeClientId's vtable slot 11.
 func (self *IX509AttributeClientId) InitializeDecode(Encoding EncodingType, strEncodedData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(strEncodedData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ClientId dispatches through IX509AttributeClientId's vtable slot 12.
 func (self *IX509AttributeClientId) Get_ClientId(pValue *RequestClientInfoClientId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MachineDnsName dispatches through IX509AttributeClientId's vtable slot 13.
 func (self *IX509AttributeClientId) Get_MachineDnsName(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UserSamName dispatches through IX509AttributeClientId's vtable slot 14.
 func (self *IX509AttributeClientId) Get_UserSamName(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ProcessName dispatches through IX509AttributeClientId's vtable slot 15.
 func (self *IX509AttributeClientId) Get_ProcessName(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509AttributeCspProvider: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509attributecspprovider
@@ -5145,31 +5145,31 @@ var IID_IX509AttributeCspProvider = win32.GUID{Data1: 0x728ab32b, Data2: 0x217d,
 // InitializeEncode dispatches through IX509AttributeCspProvider's vtable slot 10.
 func (self *IX509AttributeCspProvider) InitializeEncode(KeySpec X509KeySpec, strProviderName foundation.BSTR, Encoding EncodingType, strSignature foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(KeySpec), uintptr(unsafe.Pointer(strProviderName)), uintptr(Encoding), uintptr(unsafe.Pointer(strSignature)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeDecode dispatches through IX509AttributeCspProvider's vtable slot 11.
 func (self *IX509AttributeCspProvider) InitializeDecode(Encoding EncodingType, strEncodedData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(strEncodedData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_KeySpec dispatches through IX509AttributeCspProvider's vtable slot 12.
 func (self *IX509AttributeCspProvider) Get_KeySpec(pValue *X509KeySpec) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ProviderName dispatches through IX509AttributeCspProvider's vtable slot 13.
 func (self *IX509AttributeCspProvider) Get_ProviderName(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Signature dispatches through IX509AttributeCspProvider's vtable slot 14.
 func (self *IX509AttributeCspProvider) Get_Signature(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509AttributeExtensions: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509attributeextensions
@@ -5184,19 +5184,19 @@ var IID_IX509AttributeExtensions = win32.GUID{Data1: 0x728ab324, Data2: 0x217d, 
 // InitializeEncode dispatches through IX509AttributeExtensions's vtable slot 10.
 func (self *IX509AttributeExtensions) InitializeEncode(pExtensions *IX509Extensions) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pExtensions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeDecode dispatches through IX509AttributeExtensions's vtable slot 11.
 func (self *IX509AttributeExtensions) InitializeDecode(Encoding EncodingType, strEncodedData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(strEncodedData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_X509Extensions dispatches through IX509AttributeExtensions's vtable slot 12.
 func (self *IX509AttributeExtensions) Get_X509Extensions(ppValue **IX509Extensions) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509AttributeOSVersion: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509attributeosversion
@@ -5211,19 +5211,19 @@ var IID_IX509AttributeOSVersion = win32.GUID{Data1: 0x728ab32a, Data2: 0x217d, D
 // InitializeEncode dispatches through IX509AttributeOSVersion's vtable slot 10.
 func (self *IX509AttributeOSVersion) InitializeEncode(strOSVersion foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strOSVersion)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeDecode dispatches through IX509AttributeOSVersion's vtable slot 11.
 func (self *IX509AttributeOSVersion) InitializeDecode(Encoding EncodingType, strEncodedData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(strEncodedData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OSVersion dispatches through IX509AttributeOSVersion's vtable slot 12.
 func (self *IX509AttributeOSVersion) Get_OSVersion(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509AttributeRenewalCertificate: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509attributerenewalcertificate
@@ -5238,19 +5238,19 @@ var IID_IX509AttributeRenewalCertificate = win32.GUID{Data1: 0x728ab326, Data2: 
 // InitializeEncode dispatches through IX509AttributeRenewalCertificate's vtable slot 10.
 func (self *IX509AttributeRenewalCertificate) InitializeEncode(Encoding EncodingType, strCert foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(strCert)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeDecode dispatches through IX509AttributeRenewalCertificate's vtable slot 11.
 func (self *IX509AttributeRenewalCertificate) InitializeDecode(Encoding EncodingType, strEncodedData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(strEncodedData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RenewalCertificate dispatches through IX509AttributeRenewalCertificate's vtable slot 12.
 func (self *IX509AttributeRenewalCertificate) Get_RenewalCertificate(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509Attributes: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509attributes
@@ -5265,37 +5265,37 @@ var IID_IX509Attributes = win32.GUID{Data1: 0x728ab323, Data2: 0x217d, Data3: 0x
 // Get_ItemByIndex dispatches through IX509Attributes's vtable slot 7.
 func (self *IX509Attributes) Get_ItemByIndex(Index int32, pVal **IX509Attribute) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IX509Attributes's vtable slot 8.
 func (self *IX509Attributes) Get_Count(pVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IX509Attributes's vtable slot 9.
 func (self *IX509Attributes) Get__NewEnum(pVal **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through IX509Attributes's vtable slot 10.
 func (self *IX509Attributes) Add(pVal *IX509Attribute) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through IX509Attributes's vtable slot 11.
 func (self *IX509Attributes) Remove(Index int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through IX509Attributes's vtable slot 12.
 func (self *IX509Attributes) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509CertificateRequest: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509certificaterequest
@@ -5310,151 +5310,151 @@ var IID_IX509CertificateRequest = win32.GUID{Data1: 0x728ab341, Data2: 0x217d, D
 // Initialize dispatches through IX509CertificateRequest's vtable slot 7.
 func (self *IX509CertificateRequest) Initialize(Context X509CertificateEnrollmentContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Context))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Encode dispatches through IX509CertificateRequest's vtable slot 8.
 func (self *IX509CertificateRequest) Encode() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ResetForEncode dispatches through IX509CertificateRequest's vtable slot 9.
 func (self *IX509CertificateRequest) ResetForEncode() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInnerRequest dispatches through IX509CertificateRequest's vtable slot 10.
 func (self *IX509CertificateRequest) GetInnerRequest(Level InnerRequestLevel, ppValue **IX509CertificateRequest) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Level), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Type dispatches through IX509CertificateRequest's vtable slot 11.
 func (self *IX509CertificateRequest) Get_Type(pValue *X509RequestType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EnrollmentContext dispatches through IX509CertificateRequest's vtable slot 12.
 func (self *IX509CertificateRequest) Get_EnrollmentContext(pValue *X509CertificateEnrollmentContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Silent dispatches through IX509CertificateRequest's vtable slot 13.
 func (self *IX509CertificateRequest) Get_Silent(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Silent dispatches through IX509CertificateRequest's vtable slot 14.
 func (self *IX509CertificateRequest) Put_Silent(Value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ParentWindow dispatches through IX509CertificateRequest's vtable slot 15.
 func (self *IX509CertificateRequest) Get_ParentWindow(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ParentWindow dispatches through IX509CertificateRequest's vtable slot 16.
 func (self *IX509CertificateRequest) Put_ParentWindow(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UIContextMessage dispatches through IX509CertificateRequest's vtable slot 17.
 func (self *IX509CertificateRequest) Get_UIContextMessage(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_UIContextMessage dispatches through IX509CertificateRequest's vtable slot 18.
 func (self *IX509CertificateRequest) Put_UIContextMessage(Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SuppressDefaults dispatches through IX509CertificateRequest's vtable slot 19.
 func (self *IX509CertificateRequest) Get_SuppressDefaults(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SuppressDefaults dispatches through IX509CertificateRequest's vtable slot 20.
 func (self *IX509CertificateRequest) Put_SuppressDefaults(Value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RenewalCertificate dispatches through IX509CertificateRequest's vtable slot 21.
 func (self *IX509CertificateRequest) Get_RenewalCertificate(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RenewalCertificate dispatches through IX509CertificateRequest's vtable slot 22.
 func (self *IX509CertificateRequest) Put_RenewalCertificate(Encoding EncodingType, Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ClientId dispatches through IX509CertificateRequest's vtable slot 23.
 func (self *IX509CertificateRequest) Get_ClientId(pValue *RequestClientInfoClientId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ClientId dispatches through IX509CertificateRequest's vtable slot 24.
 func (self *IX509CertificateRequest) Put_ClientId(Value RequestClientInfoClientId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CspInformations dispatches through IX509CertificateRequest's vtable slot 25.
 func (self *IX509CertificateRequest) Get_CspInformations(ppValue **ICspInformations) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CspInformations dispatches through IX509CertificateRequest's vtable slot 26.
 func (self *IX509CertificateRequest) Put_CspInformations(pValue *ICspInformations) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HashAlgorithm dispatches through IX509CertificateRequest's vtable slot 27.
 func (self *IX509CertificateRequest) Get_HashAlgorithm(ppValue **IObjectId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_HashAlgorithm dispatches through IX509CertificateRequest's vtable slot 28.
 func (self *IX509CertificateRequest) Put_HashAlgorithm(pValue *IObjectId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AlternateSignatureAlgorithm dispatches through IX509CertificateRequest's vtable slot 29.
 func (self *IX509CertificateRequest) Get_AlternateSignatureAlgorithm(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AlternateSignatureAlgorithm dispatches through IX509CertificateRequest's vtable slot 30.
 func (self *IX509CertificateRequest) Put_AlternateSignatureAlgorithm(Value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RawData dispatches through IX509CertificateRequest's vtable slot 31.
 func (self *IX509CertificateRequest) Get_RawData(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509CertificateRequestCertificate: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509certificaterequestcertificate
@@ -5469,55 +5469,55 @@ var IID_IX509CertificateRequestCertificate = win32.GUID{Data1: 0x728ab343, Data2
 // CheckPublicKeySignature dispatches through IX509CertificateRequestCertificate's vtable slot 60.
 func (self *IX509CertificateRequestCertificate) CheckPublicKeySignature(pPublicKey *IX509PublicKey) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPublicKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Issuer dispatches through IX509CertificateRequestCertificate's vtable slot 61.
 func (self *IX509CertificateRequestCertificate) Get_Issuer(ppValue **IX500DistinguishedName) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Issuer dispatches through IX509CertificateRequestCertificate's vtable slot 62.
 func (self *IX509CertificateRequestCertificate) Put_Issuer(pValue *IX500DistinguishedName) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NotBefore dispatches through IX509CertificateRequestCertificate's vtable slot 63.
 func (self *IX509CertificateRequestCertificate) Get_NotBefore(pValue *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NotAfter dispatches through IX509CertificateRequestCertificate's vtable slot 65.
 func (self *IX509CertificateRequestCertificate) Get_NotAfter(pValue *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SerialNumber dispatches through IX509CertificateRequestCertificate's vtable slot 67.
 func (self *IX509CertificateRequestCertificate) Get_SerialNumber(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SerialNumber dispatches through IX509CertificateRequestCertificate's vtable slot 68.
 func (self *IX509CertificateRequestCertificate) Put_SerialNumber(Encoding EncodingType, Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SignerCertificate dispatches through IX509CertificateRequestCertificate's vtable slot 69.
 func (self *IX509CertificateRequestCertificate) Get_SignerCertificate(ppValue **ISignerCertificate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SignerCertificate dispatches through IX509CertificateRequestCertificate's vtable slot 70.
 func (self *IX509CertificateRequestCertificate) Put_SignerCertificate(pValue *ISignerCertificate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509CertificateRequestCertificate2: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509certificaterequestcertificate2
@@ -5532,25 +5532,25 @@ var IID_IX509CertificateRequestCertificate2 = win32.GUID{Data1: 0x728ab35a, Data
 // InitializeFromTemplate dispatches through IX509CertificateRequestCertificate2's vtable slot 71.
 func (self *IX509CertificateRequestCertificate2) InitializeFromTemplate(context X509CertificateEnrollmentContext, pPolicyServer *IX509EnrollmentPolicyServer, pTemplate *IX509CertificateTemplate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(context), uintptr(unsafe.Pointer(pPolicyServer)), uintptr(unsafe.Pointer(pTemplate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeFromPrivateKeyTemplate dispatches through IX509CertificateRequestCertificate2's vtable slot 72.
 func (self *IX509CertificateRequestCertificate2) InitializeFromPrivateKeyTemplate(Context X509CertificateEnrollmentContext, pPrivateKey *IX509PrivateKey, pPolicyServer *IX509EnrollmentPolicyServer, pTemplate *IX509CertificateTemplate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[72], uintptr(unsafe.Pointer(self)), uintptr(Context), uintptr(unsafe.Pointer(pPrivateKey)), uintptr(unsafe.Pointer(pPolicyServer)), uintptr(unsafe.Pointer(pTemplate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PolicyServer dispatches through IX509CertificateRequestCertificate2's vtable slot 73.
 func (self *IX509CertificateRequestCertificate2) Get_PolicyServer(ppPolicyServer **IX509EnrollmentPolicyServer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPolicyServer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Template dispatches through IX509CertificateRequestCertificate2's vtable slot 74.
 func (self *IX509CertificateRequestCertificate2) Get_Template(ppTemplate **IX509CertificateTemplate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[74], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTemplate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509CertificateRequestCmc: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509certificaterequestcmc
@@ -5565,139 +5565,139 @@ var IID_IX509CertificateRequestCmc = win32.GUID{Data1: 0x728ab345, Data2: 0x217d
 // InitializeFromInnerRequestTemplateName dispatches through IX509CertificateRequestCmc's vtable slot 40.
 func (self *IX509CertificateRequestCmc) InitializeFromInnerRequestTemplateName(pInnerRequest *IX509CertificateRequest, strTemplateName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInnerRequest)), uintptr(unsafe.Pointer(strTemplateName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TemplateObjectId dispatches through IX509CertificateRequestCmc's vtable slot 41.
 func (self *IX509CertificateRequestCmc) Get_TemplateObjectId(ppValue **IObjectId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NullSigned dispatches through IX509CertificateRequestCmc's vtable slot 42.
 func (self *IX509CertificateRequestCmc) Get_NullSigned(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CryptAttributes dispatches through IX509CertificateRequestCmc's vtable slot 43.
 func (self *IX509CertificateRequestCmc) Get_CryptAttributes(ppValue **ICryptAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NameValuePairs dispatches through IX509CertificateRequestCmc's vtable slot 44.
 func (self *IX509CertificateRequestCmc) Get_NameValuePairs(ppValue **IX509NameValuePairs) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_X509Extensions dispatches through IX509CertificateRequestCmc's vtable slot 45.
 func (self *IX509CertificateRequestCmc) Get_X509Extensions(ppValue **IX509Extensions) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CriticalExtensions dispatches through IX509CertificateRequestCmc's vtable slot 46.
 func (self *IX509CertificateRequestCmc) Get_CriticalExtensions(ppValue **IObjectIds) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SuppressOids dispatches through IX509CertificateRequestCmc's vtable slot 47.
 func (self *IX509CertificateRequestCmc) Get_SuppressOids(ppValue **IObjectIds) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TransactionId dispatches through IX509CertificateRequestCmc's vtable slot 48.
 func (self *IX509CertificateRequestCmc) Get_TransactionId(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_TransactionId dispatches through IX509CertificateRequestCmc's vtable slot 49.
 func (self *IX509CertificateRequestCmc) Put_TransactionId(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SenderNonce dispatches through IX509CertificateRequestCmc's vtable slot 50.
 func (self *IX509CertificateRequestCmc) Get_SenderNonce(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SenderNonce dispatches through IX509CertificateRequestCmc's vtable slot 51.
 func (self *IX509CertificateRequestCmc) Put_SenderNonce(Encoding EncodingType, Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SignatureInformation dispatches through IX509CertificateRequestCmc's vtable slot 52.
 func (self *IX509CertificateRequestCmc) Get_SignatureInformation(ppValue **IX509SignatureInformation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ArchivePrivateKey dispatches through IX509CertificateRequestCmc's vtable slot 53.
 func (self *IX509CertificateRequestCmc) Get_ArchivePrivateKey(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ArchivePrivateKey dispatches through IX509CertificateRequestCmc's vtable slot 54.
 func (self *IX509CertificateRequestCmc) Put_ArchivePrivateKey(Value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_KeyArchivalCertificate dispatches through IX509CertificateRequestCmc's vtable slot 55.
 func (self *IX509CertificateRequestCmc) Get_KeyArchivalCertificate(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_KeyArchivalCertificate dispatches through IX509CertificateRequestCmc's vtable slot 56.
 func (self *IX509CertificateRequestCmc) Put_KeyArchivalCertificate(Encoding EncodingType, Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EncryptionAlgorithm dispatches through IX509CertificateRequestCmc's vtable slot 57.
 func (self *IX509CertificateRequestCmc) Get_EncryptionAlgorithm(ppValue **IObjectId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EncryptionAlgorithm dispatches through IX509CertificateRequestCmc's vtable slot 58.
 func (self *IX509CertificateRequestCmc) Put_EncryptionAlgorithm(pValue *IObjectId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EncryptionStrength dispatches through IX509CertificateRequestCmc's vtable slot 59.
 func (self *IX509CertificateRequestCmc) Get_EncryptionStrength(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EncryptionStrength dispatches through IX509CertificateRequestCmc's vtable slot 60.
 func (self *IX509CertificateRequestCmc) Put_EncryptionStrength(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EncryptedKeyHash dispatches through IX509CertificateRequestCmc's vtable slot 61.
 func (self *IX509CertificateRequestCmc) Get_EncryptedKeyHash(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SignerCertificates dispatches through IX509CertificateRequestCmc's vtable slot 62.
 func (self *IX509CertificateRequestCmc) Get_SignerCertificates(ppValue **ISignerCertificates) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509CertificateRequestCmc2: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509certificaterequestcmc2
@@ -5712,37 +5712,37 @@ var IID_IX509CertificateRequestCmc2 = win32.GUID{Data1: 0x728ab35d, Data2: 0x217
 // InitializeFromTemplate dispatches through IX509CertificateRequestCmc2's vtable slot 63.
 func (self *IX509CertificateRequestCmc2) InitializeFromTemplate(context X509CertificateEnrollmentContext, pPolicyServer *IX509EnrollmentPolicyServer, pTemplate *IX509CertificateTemplate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(context), uintptr(unsafe.Pointer(pPolicyServer)), uintptr(unsafe.Pointer(pTemplate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeFromInnerRequestTemplate dispatches through IX509CertificateRequestCmc2's vtable slot 64.
 func (self *IX509CertificateRequestCmc2) InitializeFromInnerRequestTemplate(pInnerRequest *IX509CertificateRequest, pPolicyServer *IX509EnrollmentPolicyServer, pTemplate *IX509CertificateTemplate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInnerRequest)), uintptr(unsafe.Pointer(pPolicyServer)), uintptr(unsafe.Pointer(pTemplate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PolicyServer dispatches through IX509CertificateRequestCmc2's vtable slot 65.
 func (self *IX509CertificateRequestCmc2) Get_PolicyServer(ppPolicyServer **IX509EnrollmentPolicyServer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPolicyServer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Template dispatches through IX509CertificateRequestCmc2's vtable slot 66.
 func (self *IX509CertificateRequestCmc2) Get_Template(ppTemplate **IX509CertificateTemplate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTemplate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CheckSignature dispatches through IX509CertificateRequestCmc2's vtable slot 67.
 func (self *IX509CertificateRequestCmc2) CheckSignature(AllowedSignatureTypes Pkcs10AllowedSignatureTypes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(AllowedSignatureTypes))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CheckCertificateSignature dispatches through IX509CertificateRequestCmc2's vtable slot 68.
 func (self *IX509CertificateRequestCmc2) CheckCertificateSignature(pSignerCertificate *ISignerCertificate, ValidateCertificateChain foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSignerCertificate)), uintptr(ValidateCertificateChain))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509CertificateRequestPkcs10: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509certificaterequestpkcs10
@@ -5757,169 +5757,169 @@ var IID_IX509CertificateRequestPkcs10 = win32.GUID{Data1: 0x728ab342, Data2: 0x2
 // InitializeFromTemplateName dispatches through IX509CertificateRequestPkcs10's vtable slot 32.
 func (self *IX509CertificateRequestPkcs10) InitializeFromTemplateName(Context X509CertificateEnrollmentContext, strTemplateName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(Context), uintptr(unsafe.Pointer(strTemplateName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeFromPrivateKey dispatches through IX509CertificateRequestPkcs10's vtable slot 33.
 func (self *IX509CertificateRequestPkcs10) InitializeFromPrivateKey(Context X509CertificateEnrollmentContext, pPrivateKey *IX509PrivateKey, strTemplateName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(Context), uintptr(unsafe.Pointer(pPrivateKey)), uintptr(unsafe.Pointer(strTemplateName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeFromPublicKey dispatches through IX509CertificateRequestPkcs10's vtable slot 34.
 func (self *IX509CertificateRequestPkcs10) InitializeFromPublicKey(Context X509CertificateEnrollmentContext, pPublicKey *IX509PublicKey, strTemplateName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(Context), uintptr(unsafe.Pointer(pPublicKey)), uintptr(unsafe.Pointer(strTemplateName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeFromCertificate dispatches through IX509CertificateRequestPkcs10's vtable slot 35.
 func (self *IX509CertificateRequestPkcs10) InitializeFromCertificate(Context X509CertificateEnrollmentContext, strCertificate foundation.BSTR, Encoding EncodingType, InheritOptions X509RequestInheritOptions) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(Context), uintptr(unsafe.Pointer(strCertificate)), uintptr(Encoding), uintptr(InheritOptions))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeDecode dispatches through IX509CertificateRequestPkcs10's vtable slot 36.
 func (self *IX509CertificateRequestPkcs10) InitializeDecode(strEncodedData foundation.BSTR, Encoding EncodingType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strEncodedData)), uintptr(Encoding))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CheckSignature dispatches through IX509CertificateRequestPkcs10's vtable slot 37.
 func (self *IX509CertificateRequestPkcs10) CheckSignature(AllowedSignatureTypes Pkcs10AllowedSignatureTypes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(AllowedSignatureTypes))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsSmartCard dispatches through IX509CertificateRequestPkcs10's vtable slot 38.
 func (self *IX509CertificateRequestPkcs10) IsSmartCard(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TemplateObjectId dispatches through IX509CertificateRequestPkcs10's vtable slot 39.
 func (self *IX509CertificateRequestPkcs10) Get_TemplateObjectId(ppValue **IObjectId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PublicKey dispatches through IX509CertificateRequestPkcs10's vtable slot 40.
 func (self *IX509CertificateRequestPkcs10) Get_PublicKey(ppValue **IX509PublicKey) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PrivateKey dispatches through IX509CertificateRequestPkcs10's vtable slot 41.
 func (self *IX509CertificateRequestPkcs10) Get_PrivateKey(ppValue **IX509PrivateKey) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NullSigned dispatches through IX509CertificateRequestPkcs10's vtable slot 42.
 func (self *IX509CertificateRequestPkcs10) Get_NullSigned(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReuseKey dispatches through IX509CertificateRequestPkcs10's vtable slot 43.
 func (self *IX509CertificateRequestPkcs10) Get_ReuseKey(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OldCertificate dispatches through IX509CertificateRequestPkcs10's vtable slot 44.
 func (self *IX509CertificateRequestPkcs10) Get_OldCertificate(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Subject dispatches through IX509CertificateRequestPkcs10's vtable slot 45.
 func (self *IX509CertificateRequestPkcs10) Get_Subject(ppValue **IX500DistinguishedName) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Subject dispatches through IX509CertificateRequestPkcs10's vtable slot 46.
 func (self *IX509CertificateRequestPkcs10) Put_Subject(pValue *IX500DistinguishedName) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CspStatuses dispatches through IX509CertificateRequestPkcs10's vtable slot 47.
 func (self *IX509CertificateRequestPkcs10) Get_CspStatuses(ppValue **ICspStatuses) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SmimeCapabilities dispatches through IX509CertificateRequestPkcs10's vtable slot 48.
 func (self *IX509CertificateRequestPkcs10) Get_SmimeCapabilities(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SmimeCapabilities dispatches through IX509CertificateRequestPkcs10's vtable slot 49.
 func (self *IX509CertificateRequestPkcs10) Put_SmimeCapabilities(Value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SignatureInformation dispatches through IX509CertificateRequestPkcs10's vtable slot 50.
 func (self *IX509CertificateRequestPkcs10) Get_SignatureInformation(ppValue **IX509SignatureInformation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_KeyContainerNamePrefix dispatches through IX509CertificateRequestPkcs10's vtable slot 51.
 func (self *IX509CertificateRequestPkcs10) Get_KeyContainerNamePrefix(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_KeyContainerNamePrefix dispatches through IX509CertificateRequestPkcs10's vtable slot 52.
 func (self *IX509CertificateRequestPkcs10) Put_KeyContainerNamePrefix(Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CryptAttributes dispatches through IX509CertificateRequestPkcs10's vtable slot 53.
 func (self *IX509CertificateRequestPkcs10) Get_CryptAttributes(ppValue **ICryptAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_X509Extensions dispatches through IX509CertificateRequestPkcs10's vtable slot 54.
 func (self *IX509CertificateRequestPkcs10) Get_X509Extensions(ppValue **IX509Extensions) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CriticalExtensions dispatches through IX509CertificateRequestPkcs10's vtable slot 55.
 func (self *IX509CertificateRequestPkcs10) Get_CriticalExtensions(ppValue **IObjectIds) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SuppressOids dispatches through IX509CertificateRequestPkcs10's vtable slot 56.
 func (self *IX509CertificateRequestPkcs10) Get_SuppressOids(ppValue **IObjectIds) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RawDataToBeSigned dispatches through IX509CertificateRequestPkcs10's vtable slot 57.
 func (self *IX509CertificateRequestPkcs10) Get_RawDataToBeSigned(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Signature dispatches through IX509CertificateRequestPkcs10's vtable slot 58.
 func (self *IX509CertificateRequestPkcs10) Get_Signature(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCspStatuses dispatches through IX509CertificateRequestPkcs10's vtable slot 59.
 func (self *IX509CertificateRequestPkcs10) GetCspStatuses(KeySpec X509KeySpec, ppCspStatuses **ICspStatuses) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(KeySpec), uintptr(unsafe.Pointer(ppCspStatuses)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509CertificateRequestPkcs10V2: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509certificaterequestpkcs10v2
@@ -5934,31 +5934,31 @@ var IID_IX509CertificateRequestPkcs10V2 = win32.GUID{Data1: 0x728ab35b, Data2: 0
 // InitializeFromTemplate dispatches through IX509CertificateRequestPkcs10V2's vtable slot 60.
 func (self *IX509CertificateRequestPkcs10V2) InitializeFromTemplate(context X509CertificateEnrollmentContext, pPolicyServer *IX509EnrollmentPolicyServer, pTemplate *IX509CertificateTemplate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(context), uintptr(unsafe.Pointer(pPolicyServer)), uintptr(unsafe.Pointer(pTemplate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeFromPrivateKeyTemplate dispatches through IX509CertificateRequestPkcs10V2's vtable slot 61.
 func (self *IX509CertificateRequestPkcs10V2) InitializeFromPrivateKeyTemplate(Context X509CertificateEnrollmentContext, pPrivateKey *IX509PrivateKey, pPolicyServer *IX509EnrollmentPolicyServer, pTemplate *IX509CertificateTemplate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(Context), uintptr(unsafe.Pointer(pPrivateKey)), uintptr(unsafe.Pointer(pPolicyServer)), uintptr(unsafe.Pointer(pTemplate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeFromPublicKeyTemplate dispatches through IX509CertificateRequestPkcs10V2's vtable slot 62.
 func (self *IX509CertificateRequestPkcs10V2) InitializeFromPublicKeyTemplate(Context X509CertificateEnrollmentContext, pPublicKey *IX509PublicKey, pPolicyServer *IX509EnrollmentPolicyServer, pTemplate *IX509CertificateTemplate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(Context), uintptr(unsafe.Pointer(pPublicKey)), uintptr(unsafe.Pointer(pPolicyServer)), uintptr(unsafe.Pointer(pTemplate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PolicyServer dispatches through IX509CertificateRequestPkcs10V2's vtable slot 63.
 func (self *IX509CertificateRequestPkcs10V2) Get_PolicyServer(ppPolicyServer **IX509EnrollmentPolicyServer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPolicyServer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Template dispatches through IX509CertificateRequestPkcs10V2's vtable slot 64.
 func (self *IX509CertificateRequestPkcs10V2) Get_Template(ppTemplate **IX509CertificateTemplate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTemplate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509CertificateRequestPkcs10V3: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509certificaterequestpkcs10v3
@@ -5973,67 +5973,67 @@ var IID_IX509CertificateRequestPkcs10V3 = win32.GUID{Data1: 0x54ea9942, Data2: 0
 // Get_AttestPrivateKey dispatches through IX509CertificateRequestPkcs10V3's vtable slot 65.
 func (self *IX509CertificateRequestPkcs10V3) Get_AttestPrivateKey(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AttestPrivateKey dispatches through IX509CertificateRequestPkcs10V3's vtable slot 66.
 func (self *IX509CertificateRequestPkcs10V3) Put_AttestPrivateKey(Value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AttestationEncryptionCertificate dispatches through IX509CertificateRequestPkcs10V3's vtable slot 67.
 func (self *IX509CertificateRequestPkcs10V3) Get_AttestationEncryptionCertificate(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AttestationEncryptionCertificate dispatches through IX509CertificateRequestPkcs10V3's vtable slot 68.
 func (self *IX509CertificateRequestPkcs10V3) Put_AttestationEncryptionCertificate(Encoding EncodingType, Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EncryptionAlgorithm dispatches through IX509CertificateRequestPkcs10V3's vtable slot 69.
 func (self *IX509CertificateRequestPkcs10V3) Get_EncryptionAlgorithm(ppValue **IObjectId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EncryptionAlgorithm dispatches through IX509CertificateRequestPkcs10V3's vtable slot 70.
 func (self *IX509CertificateRequestPkcs10V3) Put_EncryptionAlgorithm(pValue *IObjectId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EncryptionStrength dispatches through IX509CertificateRequestPkcs10V3's vtable slot 71.
 func (self *IX509CertificateRequestPkcs10V3) Get_EncryptionStrength(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EncryptionStrength dispatches through IX509CertificateRequestPkcs10V3's vtable slot 72.
 func (self *IX509CertificateRequestPkcs10V3) Put_EncryptionStrength(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[72], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ChallengePassword dispatches through IX509CertificateRequestPkcs10V3's vtable slot 73.
 func (self *IX509CertificateRequestPkcs10V3) Get_ChallengePassword(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ChallengePassword dispatches through IX509CertificateRequestPkcs10V3's vtable slot 74.
 func (self *IX509CertificateRequestPkcs10V3) Put_ChallengePassword(Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[74], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NameValuePairs dispatches through IX509CertificateRequestPkcs10V3's vtable slot 75.
 func (self *IX509CertificateRequestPkcs10V3) Get_NameValuePairs(ppValue **IX509NameValuePairs) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[75], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 728ab363-217d-11da-b2a4-000e7bbb2b09
@@ -6047,25 +6047,25 @@ var IID_IX509CertificateRequestPkcs10V4 = win32.GUID{Data1: 0x728ab363, Data2: 0
 // Get_ClaimType dispatches through IX509CertificateRequestPkcs10V4's vtable slot 76.
 func (self *IX509CertificateRequestPkcs10V4) Get_ClaimType(pValue *KeyAttestationClaimType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[76], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ClaimType dispatches through IX509CertificateRequestPkcs10V4's vtable slot 77.
 func (self *IX509CertificateRequestPkcs10V4) Put_ClaimType(Value KeyAttestationClaimType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[77], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AttestPrivateKeyPreferred dispatches through IX509CertificateRequestPkcs10V4's vtable slot 78.
 func (self *IX509CertificateRequestPkcs10V4) Get_AttestPrivateKeyPreferred(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AttestPrivateKeyPreferred dispatches through IX509CertificateRequestPkcs10V4's vtable slot 79.
 func (self *IX509CertificateRequestPkcs10V4) Put_AttestPrivateKeyPreferred(Value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[79], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509CertificateRequestPkcs7: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509certificaterequestpkcs7
@@ -6080,49 +6080,49 @@ var IID_IX509CertificateRequestPkcs7 = win32.GUID{Data1: 0x728ab344, Data2: 0x21
 // InitializeFromTemplateName dispatches through IX509CertificateRequestPkcs7's vtable slot 32.
 func (self *IX509CertificateRequestPkcs7) InitializeFromTemplateName(Context X509CertificateEnrollmentContext, strTemplateName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(Context), uintptr(unsafe.Pointer(strTemplateName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeFromCertificate dispatches through IX509CertificateRequestPkcs7's vtable slot 33.
 func (self *IX509CertificateRequestPkcs7) InitializeFromCertificate(Context X509CertificateEnrollmentContext, RenewalRequest foundation.VARIANT_BOOL, strCertificate foundation.BSTR, Encoding EncodingType, InheritOptions X509RequestInheritOptions) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(Context), uintptr(RenewalRequest), uintptr(unsafe.Pointer(strCertificate)), uintptr(Encoding), uintptr(InheritOptions))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeFromInnerRequest dispatches through IX509CertificateRequestPkcs7's vtable slot 34.
 func (self *IX509CertificateRequestPkcs7) InitializeFromInnerRequest(pInnerRequest *IX509CertificateRequest) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInnerRequest)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeDecode dispatches through IX509CertificateRequestPkcs7's vtable slot 35.
 func (self *IX509CertificateRequestPkcs7) InitializeDecode(strEncodedData foundation.BSTR, Encoding EncodingType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strEncodedData)), uintptr(Encoding))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RequesterName dispatches through IX509CertificateRequestPkcs7's vtable slot 36.
 func (self *IX509CertificateRequestPkcs7) Get_RequesterName(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RequesterName dispatches through IX509CertificateRequestPkcs7's vtable slot 37.
 func (self *IX509CertificateRequestPkcs7) Put_RequesterName(Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SignerCertificate dispatches through IX509CertificateRequestPkcs7's vtable slot 38.
 func (self *IX509CertificateRequestPkcs7) Get_SignerCertificate(ppValue **ISignerCertificate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SignerCertificate dispatches through IX509CertificateRequestPkcs7's vtable slot 39.
 func (self *IX509CertificateRequestPkcs7) Put_SignerCertificate(pValue *ISignerCertificate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509CertificateRequestPkcs7V2: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509certificaterequestpkcs7v2
@@ -6137,25 +6137,25 @@ var IID_IX509CertificateRequestPkcs7V2 = win32.GUID{Data1: 0x728ab35c, Data2: 0x
 // InitializeFromTemplate dispatches through IX509CertificateRequestPkcs7V2's vtable slot 40.
 func (self *IX509CertificateRequestPkcs7V2) InitializeFromTemplate(context X509CertificateEnrollmentContext, pPolicyServer *IX509EnrollmentPolicyServer, pTemplate *IX509CertificateTemplate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(context), uintptr(unsafe.Pointer(pPolicyServer)), uintptr(unsafe.Pointer(pTemplate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PolicyServer dispatches through IX509CertificateRequestPkcs7V2's vtable slot 41.
 func (self *IX509CertificateRequestPkcs7V2) Get_PolicyServer(ppPolicyServer **IX509EnrollmentPolicyServer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPolicyServer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Template dispatches through IX509CertificateRequestPkcs7V2's vtable slot 42.
 func (self *IX509CertificateRequestPkcs7V2) Get_Template(ppTemplate **IX509CertificateTemplate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTemplate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CheckCertificateSignature dispatches through IX509CertificateRequestPkcs7V2's vtable slot 43.
 func (self *IX509CertificateRequestPkcs7V2) CheckCertificateSignature(ValidateCertificateChain foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(ValidateCertificateChain))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 728ab360-217d-11da-b2a4-000e7bbb2b09
@@ -6169,175 +6169,175 @@ var IID_IX509CertificateRevocationList = win32.GUID{Data1: 0x728ab360, Data2: 0x
 // Initialize dispatches through IX509CertificateRevocationList's vtable slot 7.
 func (self *IX509CertificateRevocationList) Initialize() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeDecode dispatches through IX509CertificateRevocationList's vtable slot 8.
 func (self *IX509CertificateRevocationList) InitializeDecode(strEncodedData foundation.BSTR, Encoding EncodingType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strEncodedData)), uintptr(Encoding))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Encode dispatches through IX509CertificateRevocationList's vtable slot 9.
 func (self *IX509CertificateRevocationList) Encode() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ResetForEncode dispatches through IX509CertificateRevocationList's vtable slot 10.
 func (self *IX509CertificateRevocationList) ResetForEncode() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CheckPublicKeySignature dispatches through IX509CertificateRevocationList's vtable slot 11.
 func (self *IX509CertificateRevocationList) CheckPublicKeySignature(pPublicKey *IX509PublicKey) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPublicKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CheckSignature dispatches through IX509CertificateRevocationList's vtable slot 12.
 func (self *IX509CertificateRevocationList) CheckSignature() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Issuer dispatches through IX509CertificateRevocationList's vtable slot 13.
 func (self *IX509CertificateRevocationList) Get_Issuer(ppValue **IX500DistinguishedName) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Issuer dispatches through IX509CertificateRevocationList's vtable slot 14.
 func (self *IX509CertificateRevocationList) Put_Issuer(pValue *IX500DistinguishedName) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ThisUpdate dispatches through IX509CertificateRevocationList's vtable slot 15.
 func (self *IX509CertificateRevocationList) Get_ThisUpdate(pValue *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NextUpdate dispatches through IX509CertificateRevocationList's vtable slot 17.
 func (self *IX509CertificateRevocationList) Get_NextUpdate(pValue *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_X509CRLEntries dispatches through IX509CertificateRevocationList's vtable slot 19.
 func (self *IX509CertificateRevocationList) Get_X509CRLEntries(ppValue **IX509CertificateRevocationListEntries) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_X509Extensions dispatches through IX509CertificateRevocationList's vtable slot 20.
 func (self *IX509CertificateRevocationList) Get_X509Extensions(ppValue **IX509Extensions) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CriticalExtensions dispatches through IX509CertificateRevocationList's vtable slot 21.
 func (self *IX509CertificateRevocationList) Get_CriticalExtensions(ppValue **IObjectIds) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SignerCertificate dispatches through IX509CertificateRevocationList's vtable slot 22.
 func (self *IX509CertificateRevocationList) Get_SignerCertificate(ppValue **ISignerCertificate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SignerCertificate dispatches through IX509CertificateRevocationList's vtable slot 23.
 func (self *IX509CertificateRevocationList) Put_SignerCertificate(pValue *ISignerCertificate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CRLNumber dispatches through IX509CertificateRevocationList's vtable slot 24.
 func (self *IX509CertificateRevocationList) Get_CRLNumber(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CRLNumber dispatches through IX509CertificateRevocationList's vtable slot 25.
 func (self *IX509CertificateRevocationList) Put_CRLNumber(Encoding EncodingType, Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CAVersion dispatches through IX509CertificateRevocationList's vtable slot 26.
 func (self *IX509CertificateRevocationList) Get_CAVersion(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CAVersion dispatches through IX509CertificateRevocationList's vtable slot 27.
 func (self *IX509CertificateRevocationList) Put_CAVersion(pValue int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(pValue))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BaseCRL dispatches through IX509CertificateRevocationList's vtable slot 28.
 func (self *IX509CertificateRevocationList) Get_BaseCRL(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NullSigned dispatches through IX509CertificateRevocationList's vtable slot 29.
 func (self *IX509CertificateRevocationList) Get_NullSigned(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HashAlgorithm dispatches through IX509CertificateRevocationList's vtable slot 30.
 func (self *IX509CertificateRevocationList) Get_HashAlgorithm(ppValue **IObjectId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_HashAlgorithm dispatches through IX509CertificateRevocationList's vtable slot 31.
 func (self *IX509CertificateRevocationList) Put_HashAlgorithm(pValue *IObjectId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AlternateSignatureAlgorithm dispatches through IX509CertificateRevocationList's vtable slot 32.
 func (self *IX509CertificateRevocationList) Get_AlternateSignatureAlgorithm(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AlternateSignatureAlgorithm dispatches through IX509CertificateRevocationList's vtable slot 33.
 func (self *IX509CertificateRevocationList) Put_AlternateSignatureAlgorithm(Value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SignatureInformation dispatches through IX509CertificateRevocationList's vtable slot 34.
 func (self *IX509CertificateRevocationList) Get_SignatureInformation(ppValue **IX509SignatureInformation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RawData dispatches through IX509CertificateRevocationList's vtable slot 35.
 func (self *IX509CertificateRevocationList) Get_RawData(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RawDataToBeSigned dispatches through IX509CertificateRevocationList's vtable slot 36.
 func (self *IX509CertificateRevocationList) Get_RawDataToBeSigned(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Signature dispatches through IX509CertificateRevocationList's vtable slot 37.
 func (self *IX509CertificateRevocationList) Get_Signature(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 728ab35f-217d-11da-b2a4-000e7bbb2b09
@@ -6351,49 +6351,49 @@ var IID_IX509CertificateRevocationListEntries = win32.GUID{Data1: 0x728ab35f, Da
 // Get_ItemByIndex dispatches through IX509CertificateRevocationListEntries's vtable slot 7.
 func (self *IX509CertificateRevocationListEntries) Get_ItemByIndex(Index int32, pVal **IX509CertificateRevocationListEntry) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IX509CertificateRevocationListEntries's vtable slot 8.
 func (self *IX509CertificateRevocationListEntries) Get_Count(pVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IX509CertificateRevocationListEntries's vtable slot 9.
 func (self *IX509CertificateRevocationListEntries) Get__NewEnum(pVal **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through IX509CertificateRevocationListEntries's vtable slot 10.
 func (self *IX509CertificateRevocationListEntries) Add(pVal *IX509CertificateRevocationListEntry) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through IX509CertificateRevocationListEntries's vtable slot 11.
 func (self *IX509CertificateRevocationListEntries) Remove(Index int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through IX509CertificateRevocationListEntries's vtable slot 12.
 func (self *IX509CertificateRevocationListEntries) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IndexBySerialNumber dispatches through IX509CertificateRevocationListEntries's vtable slot 13.
 func (self *IX509CertificateRevocationListEntries) Get_IndexBySerialNumber(Encoding EncodingType, SerialNumber foundation.BSTR, pIndex *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(SerialNumber)), uintptr(unsafe.Pointer(pIndex)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddRange dispatches through IX509CertificateRevocationListEntries's vtable slot 14.
 func (self *IX509CertificateRevocationListEntries) AddRange(pValue *IX509CertificateRevocationListEntries) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 728ab35e-217d-11da-b2a4-000e7bbb2b09
@@ -6407,37 +6407,37 @@ var IID_IX509CertificateRevocationListEntry = win32.GUID{Data1: 0x728ab35e, Data
 // Get_SerialNumber dispatches through IX509CertificateRevocationListEntry's vtable slot 8.
 func (self *IX509CertificateRevocationListEntry) Get_SerialNumber(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RevocationDate dispatches through IX509CertificateRevocationListEntry's vtable slot 9.
 func (self *IX509CertificateRevocationListEntry) Get_RevocationDate(pValue *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RevocationReason dispatches through IX509CertificateRevocationListEntry's vtable slot 10.
 func (self *IX509CertificateRevocationListEntry) Get_RevocationReason(pValue *CRLRevocationReason) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RevocationReason dispatches through IX509CertificateRevocationListEntry's vtable slot 11.
 func (self *IX509CertificateRevocationListEntry) Put_RevocationReason(Value CRLRevocationReason) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_X509Extensions dispatches through IX509CertificateRevocationListEntry's vtable slot 12.
 func (self *IX509CertificateRevocationListEntry) Get_X509Extensions(ppValue **IX509Extensions) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CriticalExtensions dispatches through IX509CertificateRevocationListEntry's vtable slot 13.
 func (self *IX509CertificateRevocationListEntry) Get_CriticalExtensions(ppValue **IObjectIds) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509CertificateTemplate: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509certificatetemplate
@@ -6452,7 +6452,7 @@ var IID_IX509CertificateTemplate = win32.GUID{Data1: 0x54244a13, Data2: 0x555a, 
 // Get_Property dispatches through IX509CertificateTemplate's vtable slot 7.
 func (self *IX509CertificateTemplate) Get_Property(property EnrollmentTemplateProperty, pValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(property), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509CertificateTemplateWritable: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509certificatetemplatewritable
@@ -6467,25 +6467,25 @@ var IID_IX509CertificateTemplateWritable = win32.GUID{Data1: 0xf49466a7, Data2: 
 // Initialize dispatches through IX509CertificateTemplateWritable's vtable slot 7.
 func (self *IX509CertificateTemplateWritable) Initialize(pValue *IX509CertificateTemplate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Commit dispatches through IX509CertificateTemplateWritable's vtable slot 8.
 func (self *IX509CertificateTemplateWritable) Commit(commitFlags CommitTemplateFlags, strServerContext foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(commitFlags), uintptr(unsafe.Pointer(strServerContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Property dispatches through IX509CertificateTemplateWritable's vtable slot 9.
 func (self *IX509CertificateTemplateWritable) Get_Property(property EnrollmentTemplateProperty, pValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(property), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Template dispatches through IX509CertificateTemplateWritable's vtable slot 11.
 func (self *IX509CertificateTemplateWritable) Get_Template(ppValue **IX509CertificateTemplate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509CertificateTemplates: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509certificatetemplates
@@ -6500,49 +6500,49 @@ var IID_IX509CertificateTemplates = win32.GUID{Data1: 0x13b79003, Data2: 0x2181,
 // Get_ItemByIndex dispatches through IX509CertificateTemplates's vtable slot 7.
 func (self *IX509CertificateTemplates) Get_ItemByIndex(Index int32, pVal **IX509CertificateTemplate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IX509CertificateTemplates's vtable slot 8.
 func (self *IX509CertificateTemplates) Get_Count(pVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IX509CertificateTemplates's vtable slot 9.
 func (self *IX509CertificateTemplates) Get__NewEnum(pVal **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through IX509CertificateTemplates's vtable slot 10.
 func (self *IX509CertificateTemplates) Add(pVal *IX509CertificateTemplate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through IX509CertificateTemplates's vtable slot 11.
 func (self *IX509CertificateTemplates) Remove(Index int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through IX509CertificateTemplates's vtable slot 12.
 func (self *IX509CertificateTemplates) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ItemByName dispatches through IX509CertificateTemplates's vtable slot 13.
 func (self *IX509CertificateTemplates) Get_ItemByName(bstrName foundation.BSTR, ppValue **IX509CertificateTemplate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ItemByOid dispatches through IX509CertificateTemplates's vtable slot 14.
 func (self *IX509CertificateTemplates) Get_ItemByOid(pOid *IObjectId, ppValue **IX509CertificateTemplate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOid)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509EndorsementKey: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509endorsementkey
@@ -6557,67 +6557,67 @@ var IID_IX509EndorsementKey = win32.GUID{Data1: 0xb11cd855, Data2: 0xf4c4, Data3
 // Get_ProviderName dispatches through IX509EndorsementKey's vtable slot 7.
 func (self *IX509EndorsementKey) Get_ProviderName(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ProviderName dispatches through IX509EndorsementKey's vtable slot 8.
 func (self *IX509EndorsementKey) Put_ProviderName(Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Length dispatches through IX509EndorsementKey's vtable slot 9.
 func (self *IX509EndorsementKey) Get_Length(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Opened dispatches through IX509EndorsementKey's vtable slot 10.
 func (self *IX509EndorsementKey) Get_Opened(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddCertificate dispatches through IX509EndorsementKey's vtable slot 11.
 func (self *IX509EndorsementKey) AddCertificate(Encoding EncodingType, strCertificate foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(strCertificate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveCertificate dispatches through IX509EndorsementKey's vtable slot 12.
 func (self *IX509EndorsementKey) RemoveCertificate(Encoding EncodingType, strCertificate foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(strCertificate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCertificateByIndex dispatches through IX509EndorsementKey's vtable slot 13.
 func (self *IX509EndorsementKey) GetCertificateByIndex(ManufacturerOnly foundation.VARIANT_BOOL, dwIndex int32, Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(ManufacturerOnly), uintptr(dwIndex), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCertificateCount dispatches through IX509EndorsementKey's vtable slot 14.
 func (self *IX509EndorsementKey) GetCertificateCount(ManufacturerOnly foundation.VARIANT_BOOL, pCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(ManufacturerOnly), uintptr(unsafe.Pointer(pCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExportPublicKey dispatches through IX509EndorsementKey's vtable slot 15.
 func (self *IX509EndorsementKey) ExportPublicKey(ppPublicKey **IX509PublicKey) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPublicKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Open dispatches through IX509EndorsementKey's vtable slot 16.
 func (self *IX509EndorsementKey) Open() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Close dispatches through IX509EndorsementKey's vtable slot 17.
 func (self *IX509EndorsementKey) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509Enrollment: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509enrollment
@@ -6632,139 +6632,139 @@ var IID_IX509Enrollment = win32.GUID{Data1: 0x728ab346, Data2: 0x217d, Data3: 0x
 // Initialize dispatches through IX509Enrollment's vtable slot 7.
 func (self *IX509Enrollment) Initialize(Context X509CertificateEnrollmentContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Context))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeFromTemplateName dispatches through IX509Enrollment's vtable slot 8.
 func (self *IX509Enrollment) InitializeFromTemplateName(Context X509CertificateEnrollmentContext, strTemplateName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Context), uintptr(unsafe.Pointer(strTemplateName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeFromRequest dispatches through IX509Enrollment's vtable slot 9.
 func (self *IX509Enrollment) InitializeFromRequest(pRequest *IX509CertificateRequest) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRequest)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateRequest dispatches through IX509Enrollment's vtable slot 10.
 func (self *IX509Enrollment) CreateRequest(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Enroll dispatches through IX509Enrollment's vtable slot 11.
 func (self *IX509Enrollment) Enroll() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InstallResponse dispatches through IX509Enrollment's vtable slot 12.
 func (self *IX509Enrollment) InstallResponse(Restrictions InstallResponseRestrictionFlags, strResponse foundation.BSTR, Encoding EncodingType, strPassword foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Restrictions), uintptr(unsafe.Pointer(strResponse)), uintptr(Encoding), uintptr(unsafe.Pointer(strPassword)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePFX dispatches through IX509Enrollment's vtable slot 13.
 func (self *IX509Enrollment) CreatePFX(strPassword foundation.BSTR, ExportOptions PFXExportOptions, Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strPassword)), uintptr(ExportOptions), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Request dispatches through IX509Enrollment's vtable slot 14.
 func (self *IX509Enrollment) Get_Request(pValue **IX509CertificateRequest) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Silent dispatches through IX509Enrollment's vtable slot 15.
 func (self *IX509Enrollment) Get_Silent(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Silent dispatches through IX509Enrollment's vtable slot 16.
 func (self *IX509Enrollment) Put_Silent(Value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ParentWindow dispatches through IX509Enrollment's vtable slot 17.
 func (self *IX509Enrollment) Get_ParentWindow(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ParentWindow dispatches through IX509Enrollment's vtable slot 18.
 func (self *IX509Enrollment) Put_ParentWindow(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NameValuePairs dispatches through IX509Enrollment's vtable slot 19.
 func (self *IX509Enrollment) Get_NameValuePairs(ppValue **IX509NameValuePairs) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EnrollmentContext dispatches through IX509Enrollment's vtable slot 20.
 func (self *IX509Enrollment) Get_EnrollmentContext(pValue *X509CertificateEnrollmentContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Status dispatches through IX509Enrollment's vtable slot 21.
 func (self *IX509Enrollment) Get_Status(ppValue **IX509EnrollmentStatus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Certificate dispatches through IX509Enrollment's vtable slot 22.
 func (self *IX509Enrollment) Get_Certificate(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Response dispatches through IX509Enrollment's vtable slot 23.
 func (self *IX509Enrollment) Get_Response(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CertificateFriendlyName dispatches through IX509Enrollment's vtable slot 24.
 func (self *IX509Enrollment) Get_CertificateFriendlyName(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CertificateFriendlyName dispatches through IX509Enrollment's vtable slot 25.
 func (self *IX509Enrollment) Put_CertificateFriendlyName(strValue foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CertificateDescription dispatches through IX509Enrollment's vtable slot 26.
 func (self *IX509Enrollment) Get_CertificateDescription(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CertificateDescription dispatches through IX509Enrollment's vtable slot 27.
 func (self *IX509Enrollment) Put_CertificateDescription(strValue foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RequestId dispatches through IX509Enrollment's vtable slot 28.
 func (self *IX509Enrollment) Get_RequestId(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CAConfigString dispatches through IX509Enrollment's vtable slot 29.
 func (self *IX509Enrollment) Get_CAConfigString(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509Enrollment2: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509enrollment2
@@ -6779,31 +6779,31 @@ var IID_IX509Enrollment2 = win32.GUID{Data1: 0x728ab350, Data2: 0x217d, Data3: 0
 // InitializeFromTemplate dispatches through IX509Enrollment2's vtable slot 30.
 func (self *IX509Enrollment2) InitializeFromTemplate(context X509CertificateEnrollmentContext, pPolicyServer *IX509EnrollmentPolicyServer, pTemplate *IX509CertificateTemplate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(context), uintptr(unsafe.Pointer(pPolicyServer)), uintptr(unsafe.Pointer(pTemplate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InstallResponse2 dispatches through IX509Enrollment2's vtable slot 31.
 func (self *IX509Enrollment2) InstallResponse2(Restrictions InstallResponseRestrictionFlags, strResponse foundation.BSTR, Encoding EncodingType, strPassword foundation.BSTR, strEnrollmentPolicyServerUrl foundation.BSTR, strEnrollmentPolicyServerID foundation.BSTR, EnrollmentPolicyServerFlags PolicyServerUrlFlags, authFlags X509EnrollmentAuthFlags) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(Restrictions), uintptr(unsafe.Pointer(strResponse)), uintptr(Encoding), uintptr(unsafe.Pointer(strPassword)), uintptr(unsafe.Pointer(strEnrollmentPolicyServerUrl)), uintptr(unsafe.Pointer(strEnrollmentPolicyServerID)), uintptr(EnrollmentPolicyServerFlags), uintptr(authFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PolicyServer dispatches through IX509Enrollment2's vtable slot 32.
 func (self *IX509Enrollment2) Get_PolicyServer(ppPolicyServer **IX509EnrollmentPolicyServer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPolicyServer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Template dispatches through IX509Enrollment2's vtable slot 33.
 func (self *IX509Enrollment2) Get_Template(ppTemplate **IX509CertificateTemplate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTemplate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RequestIdString dispatches through IX509Enrollment2's vtable slot 34.
 func (self *IX509Enrollment2) Get_RequestIdString(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509EnrollmentHelper: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509enrollmenthelper
@@ -6818,25 +6818,25 @@ var IID_IX509EnrollmentHelper = win32.GUID{Data1: 0x728ab351, Data2: 0x217d, Dat
 // AddPolicyServer dispatches through IX509EnrollmentHelper's vtable slot 7.
 func (self *IX509EnrollmentHelper) AddPolicyServer(strEnrollmentPolicyServerURI foundation.BSTR, strEnrollmentPolicyID foundation.BSTR, EnrollmentPolicyServerFlags PolicyServerUrlFlags, authFlags X509EnrollmentAuthFlags, strCredential foundation.BSTR, strPassword foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strEnrollmentPolicyServerURI)), uintptr(unsafe.Pointer(strEnrollmentPolicyID)), uintptr(EnrollmentPolicyServerFlags), uintptr(authFlags), uintptr(unsafe.Pointer(strCredential)), uintptr(unsafe.Pointer(strPassword)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddEnrollmentServer dispatches through IX509EnrollmentHelper's vtable slot 8.
 func (self *IX509EnrollmentHelper) AddEnrollmentServer(strEnrollmentServerURI foundation.BSTR, authFlags X509EnrollmentAuthFlags, strCredential foundation.BSTR, strPassword foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strEnrollmentServerURI)), uintptr(authFlags), uintptr(unsafe.Pointer(strCredential)), uintptr(unsafe.Pointer(strPassword)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Enroll dispatches through IX509EnrollmentHelper's vtable slot 9.
 func (self *IX509EnrollmentHelper) Enroll(strEnrollmentPolicyServerURI foundation.BSTR, strTemplateName foundation.BSTR, Encoding EncodingType, enrollFlags WebEnrollmentFlags, pstrCertificate *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strEnrollmentPolicyServerURI)), uintptr(unsafe.Pointer(strTemplateName)), uintptr(Encoding), uintptr(enrollFlags), uintptr(unsafe.Pointer(pstrCertificate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Initialize dispatches through IX509EnrollmentHelper's vtable slot 10.
 func (self *IX509EnrollmentHelper) Initialize(Context X509CertificateEnrollmentContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Context))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509EnrollmentPolicyServer: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509enrollmentpolicyserver
@@ -6851,139 +6851,139 @@ var IID_IX509EnrollmentPolicyServer = win32.GUID{Data1: 0x13b79026, Data2: 0x218
 // Initialize dispatches through IX509EnrollmentPolicyServer's vtable slot 7.
 func (self *IX509EnrollmentPolicyServer) Initialize(bstrPolicyServerUrl foundation.BSTR, bstrPolicyServerId foundation.BSTR, authFlags X509EnrollmentAuthFlags, fIsUnTrusted foundation.VARIANT_BOOL, context X509CertificateEnrollmentContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPolicyServerUrl)), uintptr(unsafe.Pointer(bstrPolicyServerId)), uintptr(authFlags), uintptr(fIsUnTrusted), uintptr(context))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LoadPolicy dispatches through IX509EnrollmentPolicyServer's vtable slot 8.
 func (self *IX509EnrollmentPolicyServer) LoadPolicy(option X509EnrollmentPolicyLoadOption) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(option))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTemplates dispatches through IX509EnrollmentPolicyServer's vtable slot 9.
 func (self *IX509EnrollmentPolicyServer) GetTemplates(pTemplates **IX509CertificateTemplates) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTemplates)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCAsForTemplate dispatches through IX509EnrollmentPolicyServer's vtable slot 10.
 func (self *IX509EnrollmentPolicyServer) GetCAsForTemplate(pTemplate *IX509CertificateTemplate, ppCAs **ICertificationAuthorities) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTemplate)), uintptr(unsafe.Pointer(ppCAs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCAs dispatches through IX509EnrollmentPolicyServer's vtable slot 11.
 func (self *IX509EnrollmentPolicyServer) GetCAs(ppCAs **ICertificationAuthorities) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCAs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Validate dispatches through IX509EnrollmentPolicyServer's vtable slot 12.
 func (self *IX509EnrollmentPolicyServer) Validate() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCustomOids dispatches through IX509EnrollmentPolicyServer's vtable slot 13.
 func (self *IX509EnrollmentPolicyServer) GetCustomOids(ppObjectIds **IObjectIds) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppObjectIds)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNextUpdateTime dispatches through IX509EnrollmentPolicyServer's vtable slot 14.
 func (self *IX509EnrollmentPolicyServer) GetNextUpdateTime(pDate *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLastUpdateTime dispatches through IX509EnrollmentPolicyServer's vtable slot 15.
 func (self *IX509EnrollmentPolicyServer) GetLastUpdateTime(pDate *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPolicyServerUrl dispatches through IX509EnrollmentPolicyServer's vtable slot 16.
 func (self *IX509EnrollmentPolicyServer) GetPolicyServerUrl(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPolicyServerId dispatches through IX509EnrollmentPolicyServer's vtable slot 17.
 func (self *IX509EnrollmentPolicyServer) GetPolicyServerId(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFriendlyName dispatches through IX509EnrollmentPolicyServer's vtable slot 18.
 func (self *IX509EnrollmentPolicyServer) GetFriendlyName(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetIsDefaultCEP dispatches through IX509EnrollmentPolicyServer's vtable slot 19.
 func (self *IX509EnrollmentPolicyServer) GetIsDefaultCEP(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetUseClientId dispatches through IX509EnrollmentPolicyServer's vtable slot 20.
 func (self *IX509EnrollmentPolicyServer) GetUseClientId(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAllowUnTrustedCA dispatches through IX509EnrollmentPolicyServer's vtable slot 21.
 func (self *IX509EnrollmentPolicyServer) GetAllowUnTrustedCA(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCachePath dispatches through IX509EnrollmentPolicyServer's vtable slot 22.
 func (self *IX509EnrollmentPolicyServer) GetCachePath(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCacheDir dispatches through IX509EnrollmentPolicyServer's vtable slot 23.
 func (self *IX509EnrollmentPolicyServer) GetCacheDir(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAuthFlags dispatches through IX509EnrollmentPolicyServer's vtable slot 24.
 func (self *IX509EnrollmentPolicyServer) GetAuthFlags(pValue *X509EnrollmentAuthFlags) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCredential dispatches through IX509EnrollmentPolicyServer's vtable slot 25.
 func (self *IX509EnrollmentPolicyServer) SetCredential(hWndParent int32, flag X509EnrollmentAuthFlags, strCredential foundation.BSTR, strPassword foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(hWndParent), uintptr(flag), uintptr(unsafe.Pointer(strCredential)), uintptr(unsafe.Pointer(strPassword)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryChanges dispatches through IX509EnrollmentPolicyServer's vtable slot 26.
 func (self *IX509EnrollmentPolicyServer) QueryChanges(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Export dispatches through IX509EnrollmentPolicyServer's vtable slot 28.
 func (self *IX509EnrollmentPolicyServer) Export(exportFlags X509EnrollmentPolicyExportFlags, pVal *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(exportFlags), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Cost dispatches through IX509EnrollmentPolicyServer's vtable slot 29.
 func (self *IX509EnrollmentPolicyServer) Get_Cost(pValue *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Cost dispatches through IX509EnrollmentPolicyServer's vtable slot 30.
 func (self *IX509EnrollmentPolicyServer) Put_Cost(value uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509EnrollmentStatus: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509enrollmentstatus
@@ -6998,73 +6998,73 @@ var IID_IX509EnrollmentStatus = win32.GUID{Data1: 0x728ab304, Data2: 0x217d, Dat
 // AppendText dispatches through IX509EnrollmentStatus's vtable slot 7.
 func (self *IX509EnrollmentStatus) AppendText(strText foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strText)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Text dispatches through IX509EnrollmentStatus's vtable slot 8.
 func (self *IX509EnrollmentStatus) Get_Text(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Text dispatches through IX509EnrollmentStatus's vtable slot 9.
 func (self *IX509EnrollmentStatus) Put_Text(Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Selected dispatches through IX509EnrollmentStatus's vtable slot 10.
 func (self *IX509EnrollmentStatus) Get_Selected(pValue *EnrollmentSelectionStatus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Selected dispatches through IX509EnrollmentStatus's vtable slot 11.
 func (self *IX509EnrollmentStatus) Put_Selected(Value EnrollmentSelectionStatus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Display dispatches through IX509EnrollmentStatus's vtable slot 12.
 func (self *IX509EnrollmentStatus) Get_Display(pValue *EnrollmentDisplayStatus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Display dispatches through IX509EnrollmentStatus's vtable slot 13.
 func (self *IX509EnrollmentStatus) Put_Display(Value EnrollmentDisplayStatus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Status dispatches through IX509EnrollmentStatus's vtable slot 14.
 func (self *IX509EnrollmentStatus) Get_Status(pValue *EnrollmentEnrollStatus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Status dispatches through IX509EnrollmentStatus's vtable slot 15.
 func (self *IX509EnrollmentStatus) Put_Status(Value EnrollmentEnrollStatus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Error dispatches through IX509EnrollmentStatus's vtable slot 16.
 func (self *IX509EnrollmentStatus) Get_Error(pValue *foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Error dispatches through IX509EnrollmentStatus's vtable slot 17.
 func (self *IX509EnrollmentStatus) Put_Error(Value foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ErrorText dispatches through IX509EnrollmentStatus's vtable slot 18.
 func (self *IX509EnrollmentStatus) Get_ErrorText(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509EnrollmentWebClassFactory: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509enrollmentwebclassfactory
@@ -7079,7 +7079,7 @@ var IID_IX509EnrollmentWebClassFactory = win32.GUID{Data1: 0x728ab349, Data2: 0x
 // CreateObject dispatches through IX509EnrollmentWebClassFactory's vtable slot 7.
 func (self *IX509EnrollmentWebClassFactory) CreateObject(strProgID foundation.BSTR, ppIUnknown **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strProgID)), uintptr(unsafe.Pointer(ppIUnknown)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509Extension: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509extension
@@ -7094,31 +7094,31 @@ var IID_IX509Extension = win32.GUID{Data1: 0x728ab30d, Data2: 0x217d, Data3: 0x1
 // Initialize dispatches through IX509Extension's vtable slot 7.
 func (self *IX509Extension) Initialize(pObjectId *IObjectId, Encoding EncodingType, strEncodedData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObjectId)), uintptr(Encoding), uintptr(unsafe.Pointer(strEncodedData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ObjectId dispatches through IX509Extension's vtable slot 8.
 func (self *IX509Extension) Get_ObjectId(ppValue **IObjectId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RawData dispatches through IX509Extension's vtable slot 9.
 func (self *IX509Extension) Get_RawData(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Critical dispatches through IX509Extension's vtable slot 10.
 func (self *IX509Extension) Get_Critical(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Critical dispatches through IX509Extension's vtable slot 11.
 func (self *IX509Extension) Put_Critical(Value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509ExtensionAlternativeNames: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509extensionalternativenames
@@ -7133,19 +7133,19 @@ var IID_IX509ExtensionAlternativeNames = win32.GUID{Data1: 0x728ab315, Data2: 0x
 // InitializeEncode dispatches through IX509ExtensionAlternativeNames's vtable slot 12.
 func (self *IX509ExtensionAlternativeNames) InitializeEncode(pValue *IAlternativeNames) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeDecode dispatches through IX509ExtensionAlternativeNames's vtable slot 13.
 func (self *IX509ExtensionAlternativeNames) InitializeDecode(Encoding EncodingType, strEncodedData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(strEncodedData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AlternativeNames dispatches through IX509ExtensionAlternativeNames's vtable slot 14.
 func (self *IX509ExtensionAlternativeNames) Get_AlternativeNames(ppValue **IAlternativeNames) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509ExtensionAuthorityKeyIdentifier: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509extensionauthoritykeyidentifier
@@ -7160,19 +7160,19 @@ var IID_IX509ExtensionAuthorityKeyIdentifier = win32.GUID{Data1: 0x728ab318, Dat
 // InitializeEncode dispatches through IX509ExtensionAuthorityKeyIdentifier's vtable slot 12.
 func (self *IX509ExtensionAuthorityKeyIdentifier) InitializeEncode(Encoding EncodingType, strKeyIdentifier foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(strKeyIdentifier)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeDecode dispatches through IX509ExtensionAuthorityKeyIdentifier's vtable slot 13.
 func (self *IX509ExtensionAuthorityKeyIdentifier) InitializeDecode(Encoding EncodingType, strEncodedData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(strEncodedData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AuthorityKeyIdentifier dispatches through IX509ExtensionAuthorityKeyIdentifier's vtable slot 14.
 func (self *IX509ExtensionAuthorityKeyIdentifier) Get_AuthorityKeyIdentifier(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509ExtensionBasicConstraints: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509extensionbasicconstraints
@@ -7187,25 +7187,25 @@ var IID_IX509ExtensionBasicConstraints = win32.GUID{Data1: 0x728ab316, Data2: 0x
 // InitializeEncode dispatches through IX509ExtensionBasicConstraints's vtable slot 12.
 func (self *IX509ExtensionBasicConstraints) InitializeEncode(IsCA foundation.VARIANT_BOOL, PathLenConstraint int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(IsCA), uintptr(PathLenConstraint))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeDecode dispatches through IX509ExtensionBasicConstraints's vtable slot 13.
 func (self *IX509ExtensionBasicConstraints) InitializeDecode(Encoding EncodingType, strEncodedData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(strEncodedData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsCA dispatches through IX509ExtensionBasicConstraints's vtable slot 14.
 func (self *IX509ExtensionBasicConstraints) Get_IsCA(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PathLenConstraint dispatches through IX509ExtensionBasicConstraints's vtable slot 15.
 func (self *IX509ExtensionBasicConstraints) Get_PathLenConstraint(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509ExtensionCertificatePolicies: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509extensioncertificatepolicies
@@ -7220,19 +7220,19 @@ var IID_IX509ExtensionCertificatePolicies = win32.GUID{Data1: 0x728ab320, Data2:
 // InitializeEncode dispatches through IX509ExtensionCertificatePolicies's vtable slot 12.
 func (self *IX509ExtensionCertificatePolicies) InitializeEncode(pValue *ICertificatePolicies) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeDecode dispatches through IX509ExtensionCertificatePolicies's vtable slot 13.
 func (self *IX509ExtensionCertificatePolicies) InitializeDecode(Encoding EncodingType, strEncodedData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(strEncodedData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Policies dispatches through IX509ExtensionCertificatePolicies's vtable slot 14.
 func (self *IX509ExtensionCertificatePolicies) Get_Policies(ppValue **ICertificatePolicies) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509ExtensionEnhancedKeyUsage: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509extensionenhancedkeyusage
@@ -7247,19 +7247,19 @@ var IID_IX509ExtensionEnhancedKeyUsage = win32.GUID{Data1: 0x728ab310, Data2: 0x
 // InitializeEncode dispatches through IX509ExtensionEnhancedKeyUsage's vtable slot 12.
 func (self *IX509ExtensionEnhancedKeyUsage) InitializeEncode(pValue *IObjectIds) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeDecode dispatches through IX509ExtensionEnhancedKeyUsage's vtable slot 13.
 func (self *IX509ExtensionEnhancedKeyUsage) InitializeDecode(Encoding EncodingType, strEncodedData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(strEncodedData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EnhancedKeyUsage dispatches through IX509ExtensionEnhancedKeyUsage's vtable slot 14.
 func (self *IX509ExtensionEnhancedKeyUsage) Get_EnhancedKeyUsage(ppValue **IObjectIds) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509ExtensionKeyUsage: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509extensionkeyusage
@@ -7274,19 +7274,19 @@ var IID_IX509ExtensionKeyUsage = win32.GUID{Data1: 0x728ab30f, Data2: 0x217d, Da
 // InitializeEncode dispatches through IX509ExtensionKeyUsage's vtable slot 12.
 func (self *IX509ExtensionKeyUsage) InitializeEncode(UsageFlags X509KeyUsageFlags) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(UsageFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeDecode dispatches through IX509ExtensionKeyUsage's vtable slot 13.
 func (self *IX509ExtensionKeyUsage) InitializeDecode(Encoding EncodingType, strEncodedData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(strEncodedData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_KeyUsage dispatches through IX509ExtensionKeyUsage's vtable slot 14.
 func (self *IX509ExtensionKeyUsage) Get_KeyUsage(pValue *X509KeyUsageFlags) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509ExtensionMSApplicationPolicies: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509extensionmsapplicationpolicies
@@ -7301,19 +7301,19 @@ var IID_IX509ExtensionMSApplicationPolicies = win32.GUID{Data1: 0x728ab321, Data
 // InitializeEncode dispatches through IX509ExtensionMSApplicationPolicies's vtable slot 12.
 func (self *IX509ExtensionMSApplicationPolicies) InitializeEncode(pValue *ICertificatePolicies) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeDecode dispatches through IX509ExtensionMSApplicationPolicies's vtable slot 13.
 func (self *IX509ExtensionMSApplicationPolicies) InitializeDecode(Encoding EncodingType, strEncodedData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(strEncodedData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Policies dispatches through IX509ExtensionMSApplicationPolicies's vtable slot 14.
 func (self *IX509ExtensionMSApplicationPolicies) Get_Policies(ppValue **ICertificatePolicies) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509ExtensionSmimeCapabilities: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509extensionsmimecapabilities
@@ -7328,19 +7328,19 @@ var IID_IX509ExtensionSmimeCapabilities = win32.GUID{Data1: 0x728ab31b, Data2: 0
 // InitializeEncode dispatches through IX509ExtensionSmimeCapabilities's vtable slot 12.
 func (self *IX509ExtensionSmimeCapabilities) InitializeEncode(pValue *ISmimeCapabilities) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeDecode dispatches through IX509ExtensionSmimeCapabilities's vtable slot 13.
 func (self *IX509ExtensionSmimeCapabilities) InitializeDecode(Encoding EncodingType, strEncodedData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(strEncodedData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SmimeCapabilities dispatches through IX509ExtensionSmimeCapabilities's vtable slot 14.
 func (self *IX509ExtensionSmimeCapabilities) Get_SmimeCapabilities(ppValue **ISmimeCapabilities) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509ExtensionSubjectKeyIdentifier: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509extensionsubjectkeyidentifier
@@ -7355,19 +7355,19 @@ var IID_IX509ExtensionSubjectKeyIdentifier = win32.GUID{Data1: 0x728ab317, Data2
 // InitializeEncode dispatches through IX509ExtensionSubjectKeyIdentifier's vtable slot 12.
 func (self *IX509ExtensionSubjectKeyIdentifier) InitializeEncode(Encoding EncodingType, strKeyIdentifier foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(strKeyIdentifier)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeDecode dispatches through IX509ExtensionSubjectKeyIdentifier's vtable slot 13.
 func (self *IX509ExtensionSubjectKeyIdentifier) InitializeDecode(Encoding EncodingType, strEncodedData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(strEncodedData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SubjectKeyIdentifier dispatches through IX509ExtensionSubjectKeyIdentifier's vtable slot 14.
 func (self *IX509ExtensionSubjectKeyIdentifier) Get_SubjectKeyIdentifier(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509ExtensionTemplate: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509extensiontemplate
@@ -7382,31 +7382,31 @@ var IID_IX509ExtensionTemplate = win32.GUID{Data1: 0x728ab312, Data2: 0x217d, Da
 // InitializeEncode dispatches through IX509ExtensionTemplate's vtable slot 12.
 func (self *IX509ExtensionTemplate) InitializeEncode(pTemplateOid *IObjectId, MajorVersion int32, MinorVersion int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTemplateOid)), uintptr(MajorVersion), uintptr(MinorVersion))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeDecode dispatches through IX509ExtensionTemplate's vtable slot 13.
 func (self *IX509ExtensionTemplate) InitializeDecode(Encoding EncodingType, strEncodedData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(strEncodedData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TemplateOid dispatches through IX509ExtensionTemplate's vtable slot 14.
 func (self *IX509ExtensionTemplate) Get_TemplateOid(ppValue **IObjectId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MajorVersion dispatches through IX509ExtensionTemplate's vtable slot 15.
 func (self *IX509ExtensionTemplate) Get_MajorVersion(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MinorVersion dispatches through IX509ExtensionTemplate's vtable slot 16.
 func (self *IX509ExtensionTemplate) Get_MinorVersion(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509ExtensionTemplateName: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509extensiontemplatename
@@ -7421,19 +7421,19 @@ var IID_IX509ExtensionTemplateName = win32.GUID{Data1: 0x728ab311, Data2: 0x217d
 // InitializeEncode dispatches through IX509ExtensionTemplateName's vtable slot 12.
 func (self *IX509ExtensionTemplateName) InitializeEncode(strTemplateName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strTemplateName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeDecode dispatches through IX509ExtensionTemplateName's vtable slot 13.
 func (self *IX509ExtensionTemplateName) InitializeDecode(Encoding EncodingType, strEncodedData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(strEncodedData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TemplateName dispatches through IX509ExtensionTemplateName's vtable slot 14.
 func (self *IX509ExtensionTemplateName) Get_TemplateName(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509Extensions: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509extensions
@@ -7448,49 +7448,49 @@ var IID_IX509Extensions = win32.GUID{Data1: 0x728ab30e, Data2: 0x217d, Data3: 0x
 // Get_ItemByIndex dispatches through IX509Extensions's vtable slot 7.
 func (self *IX509Extensions) Get_ItemByIndex(Index int32, pVal **IX509Extension) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IX509Extensions's vtable slot 8.
 func (self *IX509Extensions) Get_Count(pVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IX509Extensions's vtable slot 9.
 func (self *IX509Extensions) Get__NewEnum(pVal **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through IX509Extensions's vtable slot 10.
 func (self *IX509Extensions) Add(pVal *IX509Extension) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through IX509Extensions's vtable slot 11.
 func (self *IX509Extensions) Remove(Index int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through IX509Extensions's vtable slot 12.
 func (self *IX509Extensions) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IndexByObjectId dispatches through IX509Extensions's vtable slot 13.
 func (self *IX509Extensions) Get_IndexByObjectId(pObjectId *IObjectId, pIndex *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObjectId)), uintptr(unsafe.Pointer(pIndex)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddRange dispatches through IX509Extensions's vtable slot 14.
 func (self *IX509Extensions) AddRange(pValue *IX509Extensions) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509MachineEnrollmentFactory: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509machineenrollmentfactory
@@ -7505,7 +7505,7 @@ var IID_IX509MachineEnrollmentFactory = win32.GUID{Data1: 0x728ab352, Data2: 0x2
 // CreateObject dispatches through IX509MachineEnrollmentFactory's vtable slot 7.
 func (self *IX509MachineEnrollmentFactory) CreateObject(strProgID foundation.BSTR, ppIHelper **IX509EnrollmentHelper) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strProgID)), uintptr(unsafe.Pointer(ppIHelper)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509NameValuePair: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509namevaluepair
@@ -7520,19 +7520,19 @@ var IID_IX509NameValuePair = win32.GUID{Data1: 0x728ab33f, Data2: 0x217d, Data3:
 // Initialize dispatches through IX509NameValuePair's vtable slot 7.
 func (self *IX509NameValuePair) Initialize(strName foundation.BSTR, strValue foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strName)), uintptr(unsafe.Pointer(strValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Value dispatches through IX509NameValuePair's vtable slot 8.
 func (self *IX509NameValuePair) Get_Value(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through IX509NameValuePair's vtable slot 9.
 func (self *IX509NameValuePair) Get_Name(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509NameValuePairs: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509namevaluepairs
@@ -7547,37 +7547,37 @@ var IID_IX509NameValuePairs = win32.GUID{Data1: 0x728ab340, Data2: 0x217d, Data3
 // Get_ItemByIndex dispatches through IX509NameValuePairs's vtable slot 7.
 func (self *IX509NameValuePairs) Get_ItemByIndex(Index int32, pVal **IX509NameValuePair) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IX509NameValuePairs's vtable slot 8.
 func (self *IX509NameValuePairs) Get_Count(pVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IX509NameValuePairs's vtable slot 9.
 func (self *IX509NameValuePairs) Get__NewEnum(pVal **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through IX509NameValuePairs's vtable slot 10.
 func (self *IX509NameValuePairs) Add(pVal *IX509NameValuePair) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through IX509NameValuePairs's vtable slot 11.
 func (self *IX509NameValuePairs) Remove(Index int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through IX509NameValuePairs's vtable slot 12.
 func (self *IX509NameValuePairs) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509PolicyServerListManager: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509policyserverlistmanager
@@ -7592,43 +7592,43 @@ var IID_IX509PolicyServerListManager = win32.GUID{Data1: 0x884e204b, Data2: 0x21
 // Get_ItemByIndex dispatches through IX509PolicyServerListManager's vtable slot 7.
 func (self *IX509PolicyServerListManager) Get_ItemByIndex(Index int32, pVal **IX509PolicyServerUrl) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IX509PolicyServerListManager's vtable slot 8.
 func (self *IX509PolicyServerListManager) Get_Count(pVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IX509PolicyServerListManager's vtable slot 9.
 func (self *IX509PolicyServerListManager) Get__NewEnum(pVal **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through IX509PolicyServerListManager's vtable slot 10.
 func (self *IX509PolicyServerListManager) Add(pVal *IX509PolicyServerUrl) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through IX509PolicyServerListManager's vtable slot 11.
 func (self *IX509PolicyServerListManager) Remove(Index int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through IX509PolicyServerListManager's vtable slot 12.
 func (self *IX509PolicyServerListManager) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Initialize dispatches through IX509PolicyServerListManager's vtable slot 13.
 func (self *IX509PolicyServerListManager) Initialize(context X509CertificateEnrollmentContext, Flags PolicyServerUrlFlags) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(context), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509PolicyServerUrl: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509policyserverurl
@@ -7643,91 +7643,91 @@ var IID_IX509PolicyServerUrl = win32.GUID{Data1: 0x884e204a, Data2: 0x217d, Data
 // Initialize dispatches through IX509PolicyServerUrl's vtable slot 7.
 func (self *IX509PolicyServerUrl) Initialize(context X509CertificateEnrollmentContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(context))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Url dispatches through IX509PolicyServerUrl's vtable slot 8.
 func (self *IX509PolicyServerUrl) Get_Url(ppValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Url dispatches through IX509PolicyServerUrl's vtable slot 9.
 func (self *IX509PolicyServerUrl) Put_Url(pValue foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Default dispatches through IX509PolicyServerUrl's vtable slot 10.
 func (self *IX509PolicyServerUrl) Get_Default(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Default dispatches through IX509PolicyServerUrl's vtable slot 11.
 func (self *IX509PolicyServerUrl) Put_Default(value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Flags dispatches through IX509PolicyServerUrl's vtable slot 12.
 func (self *IX509PolicyServerUrl) Get_Flags(pValue *PolicyServerUrlFlags) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Flags dispatches through IX509PolicyServerUrl's vtable slot 13.
 func (self *IX509PolicyServerUrl) Put_Flags(Flags PolicyServerUrlFlags) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AuthFlags dispatches through IX509PolicyServerUrl's vtable slot 14.
 func (self *IX509PolicyServerUrl) Get_AuthFlags(pValue *X509EnrollmentAuthFlags) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AuthFlags dispatches through IX509PolicyServerUrl's vtable slot 15.
 func (self *IX509PolicyServerUrl) Put_AuthFlags(Flags X509EnrollmentAuthFlags) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Cost dispatches through IX509PolicyServerUrl's vtable slot 16.
 func (self *IX509PolicyServerUrl) Get_Cost(pValue *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Cost dispatches through IX509PolicyServerUrl's vtable slot 17.
 func (self *IX509PolicyServerUrl) Put_Cost(value uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStringProperty dispatches through IX509PolicyServerUrl's vtable slot 18.
 func (self *IX509PolicyServerUrl) GetStringProperty(propertyId PolicyServerUrlPropertyID, ppValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(propertyId), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetStringProperty dispatches through IX509PolicyServerUrl's vtable slot 19.
 func (self *IX509PolicyServerUrl) SetStringProperty(propertyId PolicyServerUrlPropertyID, pValue foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(propertyId), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UpdateRegistry dispatches through IX509PolicyServerUrl's vtable slot 20.
 func (self *IX509PolicyServerUrl) UpdateRegistry(context X509CertificateEnrollmentContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(context))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveFromRegistry dispatches through IX509PolicyServerUrl's vtable slot 21.
 func (self *IX509PolicyServerUrl) RemoveFromRegistry(context X509CertificateEnrollmentContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(context))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509PrivateKey: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509privatekey
@@ -7742,349 +7742,349 @@ var IID_IX509PrivateKey = win32.GUID{Data1: 0x728ab30c, Data2: 0x217d, Data3: 0x
 // Open dispatches through IX509PrivateKey's vtable slot 7.
 func (self *IX509PrivateKey) Open() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Create dispatches through IX509PrivateKey's vtable slot 8.
 func (self *IX509PrivateKey) Create() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Close dispatches through IX509PrivateKey's vtable slot 9.
 func (self *IX509PrivateKey) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IX509PrivateKey's vtable slot 10.
 func (self *IX509PrivateKey) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Verify dispatches through IX509PrivateKey's vtable slot 11.
 func (self *IX509PrivateKey) Verify(VerifyType X509PrivateKeyVerify) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(VerifyType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Import dispatches through IX509PrivateKey's vtable slot 12.
 func (self *IX509PrivateKey) Import(strExportType foundation.BSTR, strEncodedKey foundation.BSTR, Encoding EncodingType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strExportType)), uintptr(unsafe.Pointer(strEncodedKey)), uintptr(Encoding))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Export dispatches through IX509PrivateKey's vtable slot 13.
 func (self *IX509PrivateKey) Export(strExportType foundation.BSTR, Encoding EncodingType, pstrEncodedKey *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strExportType)), uintptr(Encoding), uintptr(unsafe.Pointer(pstrEncodedKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExportPublicKey dispatches through IX509PrivateKey's vtable slot 14.
 func (self *IX509PrivateKey) ExportPublicKey(ppPublicKey **IX509PublicKey) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPublicKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ContainerName dispatches through IX509PrivateKey's vtable slot 15.
 func (self *IX509PrivateKey) Get_ContainerName(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ContainerName dispatches through IX509PrivateKey's vtable slot 16.
 func (self *IX509PrivateKey) Put_ContainerName(Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ContainerNamePrefix dispatches through IX509PrivateKey's vtable slot 17.
 func (self *IX509PrivateKey) Get_ContainerNamePrefix(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ContainerNamePrefix dispatches through IX509PrivateKey's vtable slot 18.
 func (self *IX509PrivateKey) Put_ContainerNamePrefix(Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReaderName dispatches through IX509PrivateKey's vtable slot 19.
 func (self *IX509PrivateKey) Get_ReaderName(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ReaderName dispatches through IX509PrivateKey's vtable slot 20.
 func (self *IX509PrivateKey) Put_ReaderName(Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CspInformations dispatches through IX509PrivateKey's vtable slot 21.
 func (self *IX509PrivateKey) Get_CspInformations(ppValue **ICspInformations) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CspInformations dispatches through IX509PrivateKey's vtable slot 22.
 func (self *IX509PrivateKey) Put_CspInformations(pValue *ICspInformations) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CspStatus dispatches through IX509PrivateKey's vtable slot 23.
 func (self *IX509PrivateKey) Get_CspStatus(ppValue **ICspStatus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CspStatus dispatches through IX509PrivateKey's vtable slot 24.
 func (self *IX509PrivateKey) Put_CspStatus(pValue *ICspStatus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ProviderName dispatches through IX509PrivateKey's vtable slot 25.
 func (self *IX509PrivateKey) Get_ProviderName(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ProviderName dispatches through IX509PrivateKey's vtable slot 26.
 func (self *IX509PrivateKey) Put_ProviderName(Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ProviderType dispatches through IX509PrivateKey's vtable slot 27.
 func (self *IX509PrivateKey) Get_ProviderType(pValue *X509ProviderType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ProviderType dispatches through IX509PrivateKey's vtable slot 28.
 func (self *IX509PrivateKey) Put_ProviderType(Value X509ProviderType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LegacyCsp dispatches through IX509PrivateKey's vtable slot 29.
 func (self *IX509PrivateKey) Get_LegacyCsp(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LegacyCsp dispatches through IX509PrivateKey's vtable slot 30.
 func (self *IX509PrivateKey) Put_LegacyCsp(Value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Algorithm dispatches through IX509PrivateKey's vtable slot 31.
 func (self *IX509PrivateKey) Get_Algorithm(ppValue **IObjectId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Algorithm dispatches through IX509PrivateKey's vtable slot 32.
 func (self *IX509PrivateKey) Put_Algorithm(pValue *IObjectId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_KeySpec dispatches through IX509PrivateKey's vtable slot 33.
 func (self *IX509PrivateKey) Get_KeySpec(pValue *X509KeySpec) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_KeySpec dispatches through IX509PrivateKey's vtable slot 34.
 func (self *IX509PrivateKey) Put_KeySpec(Value X509KeySpec) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Length dispatches through IX509PrivateKey's vtable slot 35.
 func (self *IX509PrivateKey) Get_Length(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Length dispatches through IX509PrivateKey's vtable slot 36.
 func (self *IX509PrivateKey) Put_Length(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ExportPolicy dispatches through IX509PrivateKey's vtable slot 37.
 func (self *IX509PrivateKey) Get_ExportPolicy(pValue *X509PrivateKeyExportFlags) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ExportPolicy dispatches through IX509PrivateKey's vtable slot 38.
 func (self *IX509PrivateKey) Put_ExportPolicy(Value X509PrivateKeyExportFlags) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_KeyUsage dispatches through IX509PrivateKey's vtable slot 39.
 func (self *IX509PrivateKey) Get_KeyUsage(pValue *X509PrivateKeyUsageFlags) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_KeyUsage dispatches through IX509PrivateKey's vtable slot 40.
 func (self *IX509PrivateKey) Put_KeyUsage(Value X509PrivateKeyUsageFlags) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_KeyProtection dispatches through IX509PrivateKey's vtable slot 41.
 func (self *IX509PrivateKey) Get_KeyProtection(pValue *X509PrivateKeyProtection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_KeyProtection dispatches through IX509PrivateKey's vtable slot 42.
 func (self *IX509PrivateKey) Put_KeyProtection(Value X509PrivateKeyProtection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MachineContext dispatches through IX509PrivateKey's vtable slot 43.
 func (self *IX509PrivateKey) Get_MachineContext(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MachineContext dispatches through IX509PrivateKey's vtable slot 44.
 func (self *IX509PrivateKey) Put_MachineContext(Value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SecurityDescriptor dispatches through IX509PrivateKey's vtable slot 45.
 func (self *IX509PrivateKey) Get_SecurityDescriptor(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SecurityDescriptor dispatches through IX509PrivateKey's vtable slot 46.
 func (self *IX509PrivateKey) Put_SecurityDescriptor(Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Certificate dispatches through IX509PrivateKey's vtable slot 47.
 func (self *IX509PrivateKey) Get_Certificate(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Certificate dispatches through IX509PrivateKey's vtable slot 48.
 func (self *IX509PrivateKey) Put_Certificate(Encoding EncodingType, Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UniqueContainerName dispatches through IX509PrivateKey's vtable slot 49.
 func (self *IX509PrivateKey) Get_UniqueContainerName(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Opened dispatches through IX509PrivateKey's vtable slot 50.
 func (self *IX509PrivateKey) Get_Opened(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DefaultContainer dispatches through IX509PrivateKey's vtable slot 51.
 func (self *IX509PrivateKey) Get_DefaultContainer(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Existing dispatches through IX509PrivateKey's vtable slot 52.
 func (self *IX509PrivateKey) Get_Existing(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Existing dispatches through IX509PrivateKey's vtable slot 53.
 func (self *IX509PrivateKey) Put_Existing(Value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Silent dispatches through IX509PrivateKey's vtable slot 54.
 func (self *IX509PrivateKey) Get_Silent(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Silent dispatches through IX509PrivateKey's vtable slot 55.
 func (self *IX509PrivateKey) Put_Silent(Value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ParentWindow dispatches through IX509PrivateKey's vtable slot 56.
 func (self *IX509PrivateKey) Get_ParentWindow(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ParentWindow dispatches through IX509PrivateKey's vtable slot 57.
 func (self *IX509PrivateKey) Put_ParentWindow(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UIContextMessage dispatches through IX509PrivateKey's vtable slot 58.
 func (self *IX509PrivateKey) Get_UIContextMessage(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_UIContextMessage dispatches through IX509PrivateKey's vtable slot 59.
 func (self *IX509PrivateKey) Put_UIContextMessage(Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Pin dispatches through IX509PrivateKey's vtable slot 60.
 func (self *IX509PrivateKey) Put_Pin(Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FriendlyName dispatches through IX509PrivateKey's vtable slot 61.
 func (self *IX509PrivateKey) Get_FriendlyName(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FriendlyName dispatches through IX509PrivateKey's vtable slot 62.
 func (self *IX509PrivateKey) Put_FriendlyName(Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through IX509PrivateKey's vtable slot 63.
 func (self *IX509PrivateKey) Get_Description(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Description dispatches through IX509PrivateKey's vtable slot 64.
 func (self *IX509PrivateKey) Put_Description(Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 728ab362-217d-11da-b2a4-000e7bbb2b09
@@ -8098,61 +8098,61 @@ var IID_IX509PrivateKey2 = win32.GUID{Data1: 0x728ab362, Data2: 0x217d, Data3: 0
 // Get_HardwareKeyUsage dispatches through IX509PrivateKey2's vtable slot 65.
 func (self *IX509PrivateKey2) Get_HardwareKeyUsage(pValue *X509HardwareKeyUsageFlags) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_HardwareKeyUsage dispatches through IX509PrivateKey2's vtable slot 66.
 func (self *IX509PrivateKey2) Put_HardwareKeyUsage(Value X509HardwareKeyUsageFlags) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AlternateStorageLocation dispatches through IX509PrivateKey2's vtable slot 67.
 func (self *IX509PrivateKey2) Get_AlternateStorageLocation(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AlternateStorageLocation dispatches through IX509PrivateKey2's vtable slot 68.
 func (self *IX509PrivateKey2) Put_AlternateStorageLocation(Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AlgorithmName dispatches through IX509PrivateKey2's vtable slot 69.
 func (self *IX509PrivateKey2) Get_AlgorithmName(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AlgorithmName dispatches through IX509PrivateKey2's vtable slot 70.
 func (self *IX509PrivateKey2) Put_AlgorithmName(Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AlgorithmParameters dispatches through IX509PrivateKey2's vtable slot 71.
 func (self *IX509PrivateKey2) Get_AlgorithmParameters(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AlgorithmParameters dispatches through IX509PrivateKey2's vtable slot 72.
 func (self *IX509PrivateKey2) Put_AlgorithmParameters(Encoding EncodingType, Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[72], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ParametersExportType dispatches through IX509PrivateKey2's vtable slot 73.
 func (self *IX509PrivateKey2) Get_ParametersExportType(pValue *X509KeyParametersExportType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ParametersExportType dispatches through IX509PrivateKey2's vtable slot 74.
 func (self *IX509PrivateKey2) Put_ParametersExportType(Value X509KeyParametersExportType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[74], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509PublicKey: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509publickey
@@ -8167,43 +8167,43 @@ var IID_IX509PublicKey = win32.GUID{Data1: 0x728ab30b, Data2: 0x217d, Data3: 0x1
 // Initialize dispatches through IX509PublicKey's vtable slot 7.
 func (self *IX509PublicKey) Initialize(pObjectId *IObjectId, strEncodedKey foundation.BSTR, strEncodedParameters foundation.BSTR, Encoding EncodingType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObjectId)), uintptr(unsafe.Pointer(strEncodedKey)), uintptr(unsafe.Pointer(strEncodedParameters)), uintptr(Encoding))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeFromEncodedPublicKeyInfo dispatches through IX509PublicKey's vtable slot 8.
 func (self *IX509PublicKey) InitializeFromEncodedPublicKeyInfo(strEncodedPublicKeyInfo foundation.BSTR, Encoding EncodingType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strEncodedPublicKeyInfo)), uintptr(Encoding))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Algorithm dispatches through IX509PublicKey's vtable slot 9.
 func (self *IX509PublicKey) Get_Algorithm(ppValue **IObjectId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Length dispatches through IX509PublicKey's vtable slot 10.
 func (self *IX509PublicKey) Get_Length(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EncodedKey dispatches through IX509PublicKey's vtable slot 11.
 func (self *IX509PublicKey) Get_EncodedKey(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EncodedParameters dispatches through IX509PublicKey's vtable slot 12.
 func (self *IX509PublicKey) Get_EncodedParameters(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ComputeKeyIdentifier dispatches through IX509PublicKey's vtable slot 13.
 func (self *IX509PublicKey) ComputeKeyIdentifier(Algorithm KeyIdentifierHashAlgorithm, Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Algorithm), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509SCEPEnrollment: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509scepenrollment
@@ -8218,133 +8218,133 @@ var IID_IX509SCEPEnrollment = win32.GUID{Data1: 0x728ab361, Data2: 0x217d, Data3
 // Initialize dispatches through IX509SCEPEnrollment's vtable slot 7.
 func (self *IX509SCEPEnrollment) Initialize(pRequest *IX509CertificateRequestPkcs10, strThumbprint foundation.BSTR, ThumprintEncoding EncodingType, strServerCertificates foundation.BSTR, Encoding EncodingType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRequest)), uintptr(unsafe.Pointer(strThumbprint)), uintptr(ThumprintEncoding), uintptr(unsafe.Pointer(strServerCertificates)), uintptr(Encoding))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeForPending dispatches through IX509SCEPEnrollment's vtable slot 8.
 func (self *IX509SCEPEnrollment) InitializeForPending(Context X509CertificateEnrollmentContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Context))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateRequestMessage dispatches through IX509SCEPEnrollment's vtable slot 9.
 func (self *IX509SCEPEnrollment) CreateRequestMessage(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateRetrievePendingMessage dispatches through IX509SCEPEnrollment's vtable slot 10.
 func (self *IX509SCEPEnrollment) CreateRetrievePendingMessage(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateRetrieveCertificateMessage dispatches through IX509SCEPEnrollment's vtable slot 11.
 func (self *IX509SCEPEnrollment) CreateRetrieveCertificateMessage(Context X509CertificateEnrollmentContext, strIssuer foundation.BSTR, IssuerEncoding EncodingType, strSerialNumber foundation.BSTR, SerialNumberEncoding EncodingType, Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Context), uintptr(unsafe.Pointer(strIssuer)), uintptr(IssuerEncoding), uintptr(unsafe.Pointer(strSerialNumber)), uintptr(SerialNumberEncoding), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ProcessResponseMessage dispatches through IX509SCEPEnrollment's vtable slot 12.
 func (self *IX509SCEPEnrollment) ProcessResponseMessage(strResponse foundation.BSTR, Encoding EncodingType, pDisposition *X509SCEPDisposition) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strResponse)), uintptr(Encoding), uintptr(unsafe.Pointer(pDisposition)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ServerCapabilities dispatches through IX509SCEPEnrollment's vtable slot 13.
 func (self *IX509SCEPEnrollment) Put_ServerCapabilities(Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FailInfo dispatches through IX509SCEPEnrollment's vtable slot 14.
 func (self *IX509SCEPEnrollment) Get_FailInfo(pValue *X509SCEPFailInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SignerCertificate dispatches through IX509SCEPEnrollment's vtable slot 15.
 func (self *IX509SCEPEnrollment) Get_SignerCertificate(ppValue **ISignerCertificate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SignerCertificate dispatches through IX509SCEPEnrollment's vtable slot 16.
 func (self *IX509SCEPEnrollment) Put_SignerCertificate(pValue *ISignerCertificate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OldCertificate dispatches through IX509SCEPEnrollment's vtable slot 17.
 func (self *IX509SCEPEnrollment) Get_OldCertificate(ppValue **ISignerCertificate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_OldCertificate dispatches through IX509SCEPEnrollment's vtable slot 18.
 func (self *IX509SCEPEnrollment) Put_OldCertificate(pValue *ISignerCertificate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TransactionId dispatches through IX509SCEPEnrollment's vtable slot 19.
 func (self *IX509SCEPEnrollment) Get_TransactionId(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_TransactionId dispatches through IX509SCEPEnrollment's vtable slot 20.
 func (self *IX509SCEPEnrollment) Put_TransactionId(Encoding EncodingType, Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Request dispatches through IX509SCEPEnrollment's vtable slot 21.
 func (self *IX509SCEPEnrollment) Get_Request(ppValue **IX509CertificateRequestPkcs10) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CertificateFriendlyName dispatches through IX509SCEPEnrollment's vtable slot 22.
 func (self *IX509SCEPEnrollment) Get_CertificateFriendlyName(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CertificateFriendlyName dispatches through IX509SCEPEnrollment's vtable slot 23.
 func (self *IX509SCEPEnrollment) Put_CertificateFriendlyName(Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Status dispatches through IX509SCEPEnrollment's vtable slot 24.
 func (self *IX509SCEPEnrollment) Get_Status(ppValue **IX509EnrollmentStatus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Certificate dispatches through IX509SCEPEnrollment's vtable slot 25.
 func (self *IX509SCEPEnrollment) Get_Certificate(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Silent dispatches through IX509SCEPEnrollment's vtable slot 26.
 func (self *IX509SCEPEnrollment) Get_Silent(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Silent dispatches through IX509SCEPEnrollment's vtable slot 27.
 func (self *IX509SCEPEnrollment) Put_Silent(Value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteRequest dispatches through IX509SCEPEnrollment's vtable slot 28.
 func (self *IX509SCEPEnrollment) DeleteRequest() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 728ab364-217d-11da-b2a4-000e7bbb2b09
@@ -8358,37 +8358,37 @@ var IID_IX509SCEPEnrollment2 = win32.GUID{Data1: 0x728ab364, Data2: 0x217d, Data
 // CreateChallengeAnswerMessage dispatches through IX509SCEPEnrollment2's vtable slot 29.
 func (self *IX509SCEPEnrollment2) CreateChallengeAnswerMessage(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ProcessResponseMessage2 dispatches through IX509SCEPEnrollment2's vtable slot 30.
 func (self *IX509SCEPEnrollment2) ProcessResponseMessage2(Flags X509SCEPProcessMessageFlags, strResponse foundation.BSTR, Encoding EncodingType, pDisposition *X509SCEPDisposition) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(strResponse)), uintptr(Encoding), uintptr(unsafe.Pointer(pDisposition)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ResultMessageText dispatches through IX509SCEPEnrollment2's vtable slot 31.
 func (self *IX509SCEPEnrollment2) Get_ResultMessageText(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DelayRetry dispatches through IX509SCEPEnrollment2's vtable slot 32.
 func (self *IX509SCEPEnrollment2) Get_DelayRetry(pValue *DelayRetryAction) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ActivityId dispatches through IX509SCEPEnrollment2's vtable slot 33.
 func (self *IX509SCEPEnrollment2) Get_ActivityId(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ActivityId dispatches through IX509SCEPEnrollment2's vtable slot 34.
 func (self *IX509SCEPEnrollment2) Put_ActivityId(Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 728ab365-217d-11da-b2a4-000e7bbb2b09
@@ -8402,37 +8402,37 @@ var IID_IX509SCEPEnrollmentHelper = win32.GUID{Data1: 0x728ab365, Data2: 0x217d,
 // Initialize dispatches through IX509SCEPEnrollmentHelper's vtable slot 7.
 func (self *IX509SCEPEnrollmentHelper) Initialize(strServerUrl foundation.BSTR, strRequestHeaders foundation.BSTR, pRequest *IX509CertificateRequestPkcs10, strCACertificateThumbprint foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strServerUrl)), uintptr(unsafe.Pointer(strRequestHeaders)), uintptr(unsafe.Pointer(pRequest)), uintptr(unsafe.Pointer(strCACertificateThumbprint)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeForPending dispatches through IX509SCEPEnrollmentHelper's vtable slot 8.
 func (self *IX509SCEPEnrollmentHelper) InitializeForPending(strServerUrl foundation.BSTR, strRequestHeaders foundation.BSTR, Context X509CertificateEnrollmentContext, strTransactionId foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strServerUrl)), uintptr(unsafe.Pointer(strRequestHeaders)), uintptr(Context), uintptr(unsafe.Pointer(strTransactionId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Enroll dispatches through IX509SCEPEnrollmentHelper's vtable slot 9.
 func (self *IX509SCEPEnrollmentHelper) Enroll(ProcessFlags X509SCEPProcessMessageFlags, pDisposition *X509SCEPDisposition) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(ProcessFlags), uintptr(unsafe.Pointer(pDisposition)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FetchPending dispatches through IX509SCEPEnrollmentHelper's vtable slot 10.
 func (self *IX509SCEPEnrollmentHelper) FetchPending(ProcessFlags X509SCEPProcessMessageFlags, pDisposition *X509SCEPDisposition) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(ProcessFlags), uintptr(unsafe.Pointer(pDisposition)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_X509SCEPEnrollment dispatches through IX509SCEPEnrollmentHelper's vtable slot 11.
 func (self *IX509SCEPEnrollmentHelper) Get_X509SCEPEnrollment(ppValue **IX509SCEPEnrollment) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ResultMessageText dispatches through IX509SCEPEnrollmentHelper's vtable slot 12.
 func (self *IX509SCEPEnrollmentHelper) Get_ResultMessageText(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IX509SignatureInformation: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-ix509signatureinformation
@@ -8447,77 +8447,77 @@ var IID_IX509SignatureInformation = win32.GUID{Data1: 0x728ab33c, Data2: 0x217d,
 // Get_HashAlgorithm dispatches through IX509SignatureInformation's vtable slot 7.
 func (self *IX509SignatureInformation) Get_HashAlgorithm(ppValue **IObjectId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_HashAlgorithm dispatches through IX509SignatureInformation's vtable slot 8.
 func (self *IX509SignatureInformation) Put_HashAlgorithm(pValue *IObjectId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PublicKeyAlgorithm dispatches through IX509SignatureInformation's vtable slot 9.
 func (self *IX509SignatureInformation) Get_PublicKeyAlgorithm(ppValue **IObjectId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PublicKeyAlgorithm dispatches through IX509SignatureInformation's vtable slot 10.
 func (self *IX509SignatureInformation) Put_PublicKeyAlgorithm(pValue *IObjectId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Parameters dispatches through IX509SignatureInformation's vtable slot 11.
 func (self *IX509SignatureInformation) Get_Parameters(Encoding EncodingType, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Parameters dispatches through IX509SignatureInformation's vtable slot 12.
 func (self *IX509SignatureInformation) Put_Parameters(Encoding EncodingType, Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Encoding), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AlternateSignatureAlgorithm dispatches through IX509SignatureInformation's vtable slot 13.
 func (self *IX509SignatureInformation) Get_AlternateSignatureAlgorithm(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AlternateSignatureAlgorithm dispatches through IX509SignatureInformation's vtable slot 14.
 func (self *IX509SignatureInformation) Put_AlternateSignatureAlgorithm(Value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AlternateSignatureAlgorithmSet dispatches through IX509SignatureInformation's vtable slot 15.
 func (self *IX509SignatureInformation) Get_AlternateSignatureAlgorithmSet(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NullSigned dispatches through IX509SignatureInformation's vtable slot 16.
 func (self *IX509SignatureInformation) Get_NullSigned(pValue *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_NullSigned dispatches through IX509SignatureInformation's vtable slot 17.
 func (self *IX509SignatureInformation) Put_NullSigned(Value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSignatureAlgorithm dispatches through IX509SignatureInformation's vtable slot 18.
 func (self *IX509SignatureInformation) GetSignatureAlgorithm(Pkcs7Signature foundation.VARIANT_BOOL, SignatureKey foundation.VARIANT_BOOL, ppValue **IObjectId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(Pkcs7Signature), uintptr(SignatureKey), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDefaultValues dispatches through IX509SignatureInformation's vtable slot 19.
 func (self *IX509SignatureInformation) SetDefaultValues() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

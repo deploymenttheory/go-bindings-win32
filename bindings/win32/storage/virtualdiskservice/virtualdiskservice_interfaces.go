@@ -30,25 +30,25 @@ func (self *IEnumVdsObject) Next(ppObjectArray []*systemcom.IUnknown, pcFetched 
 		_ppObjectArray = &ppObjectArray[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppObjectArray)), uintptr(unsafe.Pointer(_ppObjectArray)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumVdsObject's vtable slot 4.
 func (self *IEnumVdsObject) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumVdsObject's vtable slot 5.
 func (self *IEnumVdsObject) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IEnumVdsObject's vtable slot 6.
 func (self *IEnumVdsObject) Clone(ppEnum **IEnumVdsObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsAdmin: https://learn.microsoft.com/windows/win32/api/vdshwprv/nn-vdshwprv-ivdsadmin
@@ -72,19 +72,19 @@ var IID_IVdsAdvancedDisk = win32.GUID{Data1: 0x6e6f6b40, Data2: 0x977c, Data3: 0
 // GetPartitionProperties dispatches through IVdsAdvancedDisk's vtable slot 3.
 func (self *IVdsAdvancedDisk) GetPartitionProperties(ullOffset uint64, pPartitionProp *VDS_PARTITION_PROP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ullOffset), uintptr(unsafe.Pointer(pPartitionProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryPartitions dispatches through IVdsAdvancedDisk's vtable slot 4.
 func (self *IVdsAdvancedDisk) QueryPartitions(ppPartitionPropArray **VDS_PARTITION_PROP, plNumberOfPartitions *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPartitionPropArray)), uintptr(unsafe.Pointer(plNumberOfPartitions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePartition dispatches through IVdsAdvancedDisk's vtable slot 5.
 func (self *IVdsAdvancedDisk) CreatePartition(ullOffset uint64, ullSize uint64, para *CREATE_PARTITION_PARAMETERS, ppAsync **IVdsAsync) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(ullOffset), uintptr(ullSize), uintptr(unsafe.Pointer(para)), uintptr(unsafe.Pointer(ppAsync)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeletePartition dispatches through IVdsAdvancedDisk's vtable slot 6.
@@ -92,31 +92,31 @@ func (self *IVdsAdvancedDisk) DeletePartition(ullOffset uint64, bForce bool, bFo
 	_bForce := win32.Bool32(bForce)
 	_bForceProtected := win32.Bool32(bForceProtected)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ullOffset), uintptr(_bForce), uintptr(_bForceProtected))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ChangeAttributes dispatches through IVdsAdvancedDisk's vtable slot 7.
 func (self *IVdsAdvancedDisk) ChangeAttributes(ullOffset uint64, para *CHANGE_ATTRIBUTES_PARAMETERS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(ullOffset), uintptr(unsafe.Pointer(para)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AssignDriveLetter dispatches through IVdsAdvancedDisk's vtable slot 8.
 func (self *IVdsAdvancedDisk) AssignDriveLetter(ullOffset uint64, wcLetter uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(ullOffset), uintptr(wcLetter))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteDriveLetter dispatches through IVdsAdvancedDisk's vtable slot 9.
 func (self *IVdsAdvancedDisk) DeleteDriveLetter(ullOffset uint64, wcLetter uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(ullOffset), uintptr(wcLetter))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDriveLetter dispatches through IVdsAdvancedDisk's vtable slot 10.
 func (self *IVdsAdvancedDisk) GetDriveLetter(ullOffset uint64, pwcLetter foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(ullOffset), uintptr(unsafe.Pointer(pwcLetter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FormatPartition dispatches through IVdsAdvancedDisk's vtable slot 11.
@@ -126,7 +126,7 @@ func (self *IVdsAdvancedDisk) FormatPartition(ullOffset uint64, type_ VDS_FILE_S
 	_bQuickFormat := win32.Bool32(bQuickFormat)
 	_bEnableCompression := win32.Bool32(bEnableCompression)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(ullOffset), uintptr(type_), uintptr(unsafe.Pointer(_pwszLabel)), uintptr(dwUnitAllocationSize), uintptr(_bForce), uintptr(_bQuickFormat), uintptr(_bEnableCompression), uintptr(unsafe.Pointer(ppAsync)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clean dispatches through IVdsAdvancedDisk's vtable slot 12.
@@ -135,7 +135,7 @@ func (self *IVdsAdvancedDisk) Clean(bForce bool, bForceOEM bool, bFullClean bool
 	_bForceOEM := win32.Bool32(bForceOEM)
 	_bFullClean := win32.Bool32(bFullClean)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(_bForce), uintptr(_bForceOEM), uintptr(_bFullClean), uintptr(unsafe.Pointer(ppAsync)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsAdvancedDisk2: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdsadvanceddisk2
@@ -151,7 +151,7 @@ var IID_IVdsAdvancedDisk2 = win32.GUID{Data1: 0x9723f420, Data2: 0x9355, Data3: 
 func (self *IVdsAdvancedDisk2) ChangePartitionType(ullOffset uint64, bForce bool, para *CHANGE_PARTITION_TYPE_PARAMETERS) error {
 	_bForce := win32.Bool32(bForce)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ullOffset), uintptr(_bForce), uintptr(unsafe.Pointer(para)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 3858c0d5-0f35-4bf5-9714-69874963bc36
@@ -165,13 +165,13 @@ var IID_IVdsAdvancedDisk3 = win32.GUID{Data1: 0x3858c0d5, Data2: 0x0f35, Data3: 
 // GetProperties dispatches through IVdsAdvancedDisk3's vtable slot 3.
 func (self *IVdsAdvancedDisk3) GetProperties(pAdvDiskProp *VDS_ADVANCEDDISK_PROP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAdvDiskProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetUniqueId dispatches through IVdsAdvancedDisk3's vtable slot 4.
 func (self *IVdsAdvancedDisk3) GetUniqueId(ppwszId *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwszId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsAdviseSink: https://learn.microsoft.com/windows/win32/api/vdshwprv/nn-vdshwprv-ivdsadvisesink
@@ -190,7 +190,7 @@ func (self *IVdsAdviseSink) OnNotify(pNotificationArray []VDS_NOTIFICATION) erro
 		_pNotificationArray = &pNotificationArray[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pNotificationArray)), uintptr(unsafe.Pointer(_pNotificationArray)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsAsync: https://learn.microsoft.com/windows/win32/api/vdshwprv/nn-vdshwprv-ivdsasync
@@ -205,19 +205,19 @@ var IID_IVdsAsync = win32.GUID{Data1: 0xd5d23b6d, Data2: 0x5a55, Data3: 0x4492, 
 // Cancel dispatches through IVdsAsync's vtable slot 3.
 func (self *IVdsAsync) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Wait dispatches through IVdsAsync's vtable slot 4.
 func (self *IVdsAsync) Wait(pHrResult *foundation.HRESULT, pAsyncOut *VDS_ASYNC_OUTPUT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHrResult)), uintptr(unsafe.Pointer(pAsyncOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryStatus dispatches through IVdsAsync's vtable slot 5.
 func (self *IVdsAsync) QueryStatus(pHrResult *foundation.HRESULT, pulPercentCompleted *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHrResult)), uintptr(unsafe.Pointer(pulPercentCompleted)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsController: https://learn.microsoft.com/windows/win32/api/vdshwprv/nn-vdshwprv-ivdscontroller
@@ -232,49 +232,49 @@ var IID_IVdsController = win32.GUID{Data1: 0xcb53d96e, Data2: 0xdffb, Data3: 0x4
 // GetProperties dispatches through IVdsController's vtable slot 3.
 func (self *IVdsController) GetProperties(pControllerProp *VDS_CONTROLLER_PROP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pControllerProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSubSystem dispatches through IVdsController's vtable slot 4.
 func (self *IVdsController) GetSubSystem(ppSubSystem **IVdsSubSystem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSubSystem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPortProperties dispatches through IVdsController's vtable slot 5.
 func (self *IVdsController) GetPortProperties(sPortNumber int16, pPortProp *VDS_PORT_PROP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(sPortNumber), uintptr(unsafe.Pointer(pPortProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FlushCache dispatches through IVdsController's vtable slot 6.
 func (self *IVdsController) FlushCache() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InvalidateCache dispatches through IVdsController's vtable slot 7.
 func (self *IVdsController) InvalidateCache() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IVdsController's vtable slot 8.
 func (self *IVdsController) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryAssociatedLuns dispatches through IVdsController's vtable slot 9.
 func (self *IVdsController) QueryAssociatedLuns(ppEnum **IEnumVdsObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetStatus dispatches through IVdsController's vtable slot 10.
 func (self *IVdsController) SetStatus(status VDS_CONTROLLER_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(status))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsControllerControllerPort: https://learn.microsoft.com/windows/win32/api/vdshwprv/nn-vdshwprv-ivdscontrollercontrollerport
@@ -289,7 +289,7 @@ var IID_IVdsControllerControllerPort = win32.GUID{Data1: 0xca5d735f, Data2: 0x6b
 // QueryControllerPorts dispatches through IVdsControllerControllerPort's vtable slot 3.
 func (self *IVdsControllerControllerPort) QueryControllerPorts(ppEnum **IEnumVdsObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsControllerPort: https://learn.microsoft.com/windows/win32/api/vdshwprv/nn-vdshwprv-ivdscontrollerport
@@ -304,31 +304,31 @@ var IID_IVdsControllerPort = win32.GUID{Data1: 0x18691d0d, Data2: 0x4e7f, Data3:
 // GetProperties dispatches through IVdsControllerPort's vtable slot 3.
 func (self *IVdsControllerPort) GetProperties(pPortProp *VDS_PORT_PROP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPortProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetController dispatches through IVdsControllerPort's vtable slot 4.
 func (self *IVdsControllerPort) GetController(ppController **IVdsController) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppController)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryAssociatedLuns dispatches through IVdsControllerPort's vtable slot 5.
 func (self *IVdsControllerPort) QueryAssociatedLuns(ppEnum **IEnumVdsObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IVdsControllerPort's vtable slot 6.
 func (self *IVdsControllerPort) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetStatus dispatches through IVdsControllerPort's vtable slot 7.
 func (self *IVdsControllerPort) SetStatus(status VDS_PORT_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(status))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsCreatePartitionEx: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdscreatepartitionex
@@ -343,7 +343,7 @@ var IID_IVdsCreatePartitionEx = win32.GUID{Data1: 0x9882f547, Data2: 0xcfc3, Dat
 // CreatePartitionEx dispatches through IVdsCreatePartitionEx's vtable slot 3.
 func (self *IVdsCreatePartitionEx) CreatePartitionEx(ullOffset uint64, ullSize uint64, ulAlign uint32, para *CREATE_PARTITION_PARAMETERS, ppAsync **IVdsAsync) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ullOffset), uintptr(ullSize), uintptr(ulAlign), uintptr(unsafe.Pointer(para)), uintptr(unsafe.Pointer(ppAsync)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsDisk: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdsdisk
@@ -358,43 +358,43 @@ var IID_IVdsDisk = win32.GUID{Data1: 0x07e5c822, Data2: 0xf00c, Data3: 0x47a1, D
 // GetProperties dispatches through IVdsDisk's vtable slot 3.
 func (self *IVdsDisk) GetProperties(pDiskProperties *VDS_DISK_PROP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDiskProperties)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPack dispatches through IVdsDisk's vtable slot 4.
 func (self *IVdsDisk) GetPack(ppPack **IVdsPack) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPack)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetIdentificationData dispatches through IVdsDisk's vtable slot 5.
 func (self *IVdsDisk) GetIdentificationData(pLunInfo *VDS_LUN_INFORMATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLunInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryExtents dispatches through IVdsDisk's vtable slot 6.
 func (self *IVdsDisk) QueryExtents(ppExtentArray **VDS_DISK_EXTENT, plNumberOfExtents *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppExtentArray)), uintptr(unsafe.Pointer(plNumberOfExtents)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ConvertStyle dispatches through IVdsDisk's vtable slot 7.
 func (self *IVdsDisk) ConvertStyle(NewStyle VDS_PARTITION_STYLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(NewStyle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetFlags dispatches through IVdsDisk's vtable slot 8.
 func (self *IVdsDisk) SetFlags(ulFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(ulFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ClearFlags dispatches through IVdsDisk's vtable slot 9.
 func (self *IVdsDisk) ClearFlags(ulFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(ulFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsDisk2: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdsdisk2
@@ -410,7 +410,7 @@ var IID_IVdsDisk2 = win32.GUID{Data1: 0x40f73c8b, Data2: 0x687d, Data3: 0x4a13, 
 func (self *IVdsDisk2) SetSANMode(bEnable bool) error {
 	_bEnable := win32.Bool32(bEnable)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(_bEnable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsDisk3: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdsdisk3
@@ -425,13 +425,13 @@ var IID_IVdsDisk3 = win32.GUID{Data1: 0x8f4b2f5d, Data2: 0xec15, Data3: 0x4357, 
 // GetProperties2 dispatches through IVdsDisk3's vtable slot 3.
 func (self *IVdsDisk3) GetProperties2(pDiskProperties *VDS_DISK_PROP2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDiskProperties)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryFreeExtents dispatches through IVdsDisk3's vtable slot 4.
 func (self *IVdsDisk3) QueryFreeExtents(ulAlign uint32, ppFreeExtentArray **VDS_DISK_FREE_EXTENT, plNumberOfFreeExtents *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulAlign), uintptr(unsafe.Pointer(ppFreeExtentArray)), uintptr(unsafe.Pointer(plNumberOfFreeExtents)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsDiskOnline: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdsdiskonline
@@ -446,13 +446,13 @@ var IID_IVdsDiskOnline = win32.GUID{Data1: 0x90681b1d, Data2: 0x6a7f, Data3: 0x4
 // Online dispatches through IVdsDiskOnline's vtable slot 3.
 func (self *IVdsDiskOnline) Online() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Offline dispatches through IVdsDiskOnline's vtable slot 4.
 func (self *IVdsDiskOnline) Offline() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsDiskPartitionMF: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdsdiskpartitionmf
@@ -467,19 +467,19 @@ var IID_IVdsDiskPartitionMF = win32.GUID{Data1: 0x538684e0, Data2: 0xba3d, Data3
 // GetPartitionFileSystemProperties dispatches through IVdsDiskPartitionMF's vtable slot 3.
 func (self *IVdsDiskPartitionMF) GetPartitionFileSystemProperties(ullOffset uint64, pFileSystemProp *VDS_FILE_SYSTEM_PROP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ullOffset), uintptr(unsafe.Pointer(pFileSystemProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPartitionFileSystemTypeName dispatches through IVdsDiskPartitionMF's vtable slot 4.
 func (self *IVdsDiskPartitionMF) GetPartitionFileSystemTypeName(ullOffset uint64, ppwszFileSystemTypeName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ullOffset), uintptr(unsafe.Pointer(ppwszFileSystemTypeName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryPartitionFileSystemFormatSupport dispatches through IVdsDiskPartitionMF's vtable slot 5.
 func (self *IVdsDiskPartitionMF) QueryPartitionFileSystemFormatSupport(ullOffset uint64, ppFileSystemSupportProps **VDS_FILE_SYSTEM_FORMAT_SUPPORT_PROP, plNumberOfFileSystems *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(ullOffset), uintptr(unsafe.Pointer(ppFileSystemSupportProps)), uintptr(unsafe.Pointer(plNumberOfFileSystems)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FormatPartitionEx dispatches through IVdsDiskPartitionMF's vtable slot 6.
@@ -490,7 +490,7 @@ func (self *IVdsDiskPartitionMF) FormatPartitionEx(ullOffset uint64, pwszFileSys
 	_bQuickFormat := win32.Bool32(bQuickFormat)
 	_bEnableCompression := win32.Bool32(bEnableCompression)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ullOffset), uintptr(unsafe.Pointer(_pwszFileSystemTypeName)), uintptr(usFileSystemRevision), uintptr(ulDesiredUnitAllocationSize), uintptr(unsafe.Pointer(_pwszLabel)), uintptr(_bForce), uintptr(_bQuickFormat), uintptr(_bEnableCompression), uintptr(unsafe.Pointer(ppAsync)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsDiskPartitionMF2: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdsdiskpartitionmf2
@@ -507,7 +507,7 @@ func (self *IVdsDiskPartitionMF2) FormatPartitionEx2(ullOffset uint64, pwszFileS
 	_pwszFileSystemTypeName := win32.UTF16Ptr(pwszFileSystemTypeName)
 	_pwszLabel := win32.UTF16Ptr(pwszLabel)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ullOffset), uintptr(unsafe.Pointer(_pwszFileSystemTypeName)), uintptr(usFileSystemRevision), uintptr(ulDesiredUnitAllocationSize), uintptr(unsafe.Pointer(_pwszLabel)), uintptr(Options), uintptr(unsafe.Pointer(ppAsync)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsDrive: https://learn.microsoft.com/windows/win32/api/vdshwprv/nn-vdshwprv-ivdsdrive
@@ -522,37 +522,37 @@ var IID_IVdsDrive = win32.GUID{Data1: 0xff24efa4, Data2: 0xaade, Data3: 0x4b6b, 
 // GetProperties dispatches through IVdsDrive's vtable slot 3.
 func (self *IVdsDrive) GetProperties(pDriveProp *VDS_DRIVE_PROP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDriveProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSubSystem dispatches through IVdsDrive's vtable slot 4.
 func (self *IVdsDrive) GetSubSystem(ppSubSystem **IVdsSubSystem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSubSystem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryExtents dispatches through IVdsDrive's vtable slot 5.
 func (self *IVdsDrive) QueryExtents(ppExtentArray **VDS_DRIVE_EXTENT, plNumberOfExtents *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppExtentArray)), uintptr(unsafe.Pointer(plNumberOfExtents)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetFlags dispatches through IVdsDrive's vtable slot 6.
 func (self *IVdsDrive) SetFlags(ulFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ulFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ClearFlags dispatches through IVdsDrive's vtable slot 7.
 func (self *IVdsDrive) ClearFlags(ulFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(ulFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetStatus dispatches through IVdsDrive's vtable slot 8.
 func (self *IVdsDrive) SetStatus(status VDS_DRIVE_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(status))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsDrive2: https://learn.microsoft.com/windows/win32/api/vdshwprv/nn-vdshwprv-ivdsdrive2
@@ -567,7 +567,7 @@ var IID_IVdsDrive2 = win32.GUID{Data1: 0x60b5a730, Data2: 0xaddf, Data3: 0x4436,
 // GetProperties2 dispatches through IVdsDrive2's vtable slot 3.
 func (self *IVdsDrive2) GetProperties2(pDriveProp2 *VDS_DRIVE_PROP2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDriveProp2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsHbaPort: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdshbaport
@@ -582,13 +582,13 @@ var IID_IVdsHbaPort = win32.GUID{Data1: 0x2abd757f, Data2: 0x2851, Data3: 0x4997
 // GetProperties dispatches through IVdsHbaPort's vtable slot 3.
 func (self *IVdsHbaPort) GetProperties(pHbaPortProp *VDS_HBAPORT_PROP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHbaPortProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAllPathStatuses dispatches through IVdsHbaPort's vtable slot 4.
 func (self *IVdsHbaPort) SetAllPathStatuses(status VDS_PATH_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(status))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsHwProvider: https://learn.microsoft.com/windows/win32/api/vdshwprv/nn-vdshwprv-ivdshwprovider
@@ -603,19 +603,19 @@ var IID_IVdsHwProvider = win32.GUID{Data1: 0xd99bdaae, Data2: 0xb13a, Data3: 0x4
 // QuerySubSystems dispatches through IVdsHwProvider's vtable slot 3.
 func (self *IVdsHwProvider) QuerySubSystems(ppEnum **IEnumVdsObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reenumerate dispatches through IVdsHwProvider's vtable slot 4.
 func (self *IVdsHwProvider) Reenumerate() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through IVdsHwProvider's vtable slot 5.
 func (self *IVdsHwProvider) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsHwProviderPrivate: https://learn.microsoft.com/windows/win32/api/vdshwprv/nn-vdshwprv-ivdshwproviderprivate
@@ -631,7 +631,7 @@ var IID_IVdsHwProviderPrivate = win32.GUID{Data1: 0x98f17bf3, Data2: 0x9f33, Dat
 func (self *IVdsHwProviderPrivate) QueryIfCreatedLun(pwszDevicePath string, pVdsLunInformation *VDS_LUN_INFORMATION, pLunId *win32.GUID) error {
 	_pwszDevicePath := win32.UTF16Ptr(pwszDevicePath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszDevicePath)), uintptr(unsafe.Pointer(pVdsLunInformation)), uintptr(unsafe.Pointer(pLunId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsHwProviderPrivateMpio: https://learn.microsoft.com/windows/win32/api/vdshwprv/nn-vdshwprv-ivdshwproviderprivatempio
@@ -655,7 +655,7 @@ var IID_IVdsHwProviderStoragePools = win32.GUID{Data1: 0xd5b5937a, Data2: 0xf188
 // QueryStoragePools dispatches through IVdsHwProviderStoragePools's vtable slot 3.
 func (self *IVdsHwProviderStoragePools) QueryStoragePools(ulFlags uint32, ullRemainingFreeSpace uint64, pPoolAttributes *VDS_POOL_ATTRIBUTES, ppEnum **IEnumVdsObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulFlags), uintptr(ullRemainingFreeSpace), uintptr(unsafe.Pointer(pPoolAttributes)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsHwProviderType: https://learn.microsoft.com/windows/win32/api/vdshwprv/nn-vdshwprv-ivdshwprovidertype
@@ -670,7 +670,7 @@ var IID_IVdsHwProviderType = win32.GUID{Data1: 0x3e0f5166, Data2: 0x542d, Data3:
 // GetProviderType dispatches through IVdsHwProviderType's vtable slot 3.
 func (self *IVdsHwProviderType) GetProviderType(pType *VDS_HWPROVIDER_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsHwProviderType2: https://learn.microsoft.com/windows/win32/api/vdshwprv/nn-vdshwprv-ivdshwprovidertype2
@@ -685,7 +685,7 @@ var IID_IVdsHwProviderType2 = win32.GUID{Data1: 0x8190236f, Data2: 0xc4d0, Data3
 // GetProviderType2 dispatches through IVdsHwProviderType2's vtable slot 3.
 func (self *IVdsHwProviderType2) GetProviderType2(pType *VDS_HWPROVIDER_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsIscsiInitiatorAdapter: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdsiscsiinitiatoradapter
@@ -700,13 +700,13 @@ var IID_IVdsIscsiInitiatorAdapter = win32.GUID{Data1: 0xb07fedd4, Data2: 0x1682,
 // GetProperties dispatches through IVdsIscsiInitiatorAdapter's vtable slot 3.
 func (self *IVdsIscsiInitiatorAdapter) GetProperties(pInitiatorAdapterProp *VDS_ISCSI_INITIATOR_ADAPTER_PROP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInitiatorAdapterProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryInitiatorPortals dispatches through IVdsIscsiInitiatorAdapter's vtable slot 4.
 func (self *IVdsIscsiInitiatorAdapter) QueryInitiatorPortals(ppEnum **IEnumVdsObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsIscsiInitiatorPortal: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdsiscsiinitiatorportal
@@ -721,19 +721,19 @@ var IID_IVdsIscsiInitiatorPortal = win32.GUID{Data1: 0x38a0a9ab, Data2: 0x7cc8, 
 // GetProperties dispatches through IVdsIscsiInitiatorPortal's vtable slot 3.
 func (self *IVdsIscsiInitiatorPortal) GetProperties(pInitiatorPortalProp *VDS_ISCSI_INITIATOR_PORTAL_PROP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInitiatorPortalProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInitiatorAdapter dispatches through IVdsIscsiInitiatorPortal's vtable slot 4.
 func (self *IVdsIscsiInitiatorPortal) GetInitiatorAdapter(ppInitiatorAdapter **IVdsIscsiInitiatorAdapter) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppInitiatorAdapter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetIpsecTunnelAddress dispatches through IVdsIscsiInitiatorPortal's vtable slot 5.
 func (self *IVdsIscsiInitiatorPortal) SetIpsecTunnelAddress(pTunnelAddress *VDS_IPADDRESS, pDestinationAddress *VDS_IPADDRESS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTunnelAddress)), uintptr(unsafe.Pointer(pDestinationAddress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsIscsiPortal: https://learn.microsoft.com/windows/win32/api/vdshwprv/nn-vdshwprv-ivdsiscsiportal
@@ -748,43 +748,43 @@ var IID_IVdsIscsiPortal = win32.GUID{Data1: 0x7fa1499d, Data2: 0xec85, Data3: 0x
 // GetProperties dispatches through IVdsIscsiPortal's vtable slot 3.
 func (self *IVdsIscsiPortal) GetProperties(pPortalProp *VDS_ISCSI_PORTAL_PROP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPortalProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSubSystem dispatches through IVdsIscsiPortal's vtable slot 4.
 func (self *IVdsIscsiPortal) GetSubSystem(ppSubSystem **IVdsSubSystem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSubSystem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryAssociatedPortalGroups dispatches through IVdsIscsiPortal's vtable slot 5.
 func (self *IVdsIscsiPortal) QueryAssociatedPortalGroups(ppEnum **IEnumVdsObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetStatus dispatches through IVdsIscsiPortal's vtable slot 6.
 func (self *IVdsIscsiPortal) SetStatus(status VDS_ISCSI_PORTAL_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(status))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetIpsecTunnelAddress dispatches through IVdsIscsiPortal's vtable slot 7.
 func (self *IVdsIscsiPortal) SetIpsecTunnelAddress(pTunnelAddress *VDS_IPADDRESS, pDestinationAddress *VDS_IPADDRESS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTunnelAddress)), uintptr(unsafe.Pointer(pDestinationAddress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetIpsecSecurity dispatches through IVdsIscsiPortal's vtable slot 8.
 func (self *IVdsIscsiPortal) GetIpsecSecurity(pInitiatorPortalAddress *VDS_IPADDRESS, pullSecurityFlags *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInitiatorPortalAddress)), uintptr(unsafe.Pointer(pullSecurityFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetIpsecSecurity dispatches through IVdsIscsiPortal's vtable slot 9.
 func (self *IVdsIscsiPortal) SetIpsecSecurity(pInitiatorPortalAddress *VDS_IPADDRESS, ullSecurityFlags uint64, pIpsecKey *VDS_ISCSI_IPSEC_KEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInitiatorPortalAddress)), uintptr(ullSecurityFlags), uintptr(unsafe.Pointer(pIpsecKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsIscsiPortalGroup: https://learn.microsoft.com/windows/win32/api/vdshwprv/nn-vdshwprv-ivdsiscsiportalgroup
@@ -799,25 +799,25 @@ var IID_IVdsIscsiPortalGroup = win32.GUID{Data1: 0xfef5f89d, Data2: 0xa3dd, Data
 // GetProperties dispatches through IVdsIscsiPortalGroup's vtable slot 3.
 func (self *IVdsIscsiPortalGroup) GetProperties(pPortalGroupProp *VDS_ISCSI_PORTALGROUP_PROP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPortalGroupProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTarget dispatches through IVdsIscsiPortalGroup's vtable slot 4.
 func (self *IVdsIscsiPortalGroup) GetTarget(ppTarget **IVdsIscsiTarget) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTarget)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryAssociatedPortals dispatches through IVdsIscsiPortalGroup's vtable slot 5.
 func (self *IVdsIscsiPortalGroup) QueryAssociatedPortals(ppEnum **IEnumVdsObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IVdsIscsiPortalGroup's vtable slot 8.
 func (self *IVdsIscsiPortalGroup) Delete(ppAsync **IVdsAsync) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAsync)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsIscsiPortalLocal: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdsiscsiportallocal
@@ -832,7 +832,7 @@ var IID_IVdsIscsiPortalLocal = win32.GUID{Data1: 0xad837c28, Data2: 0x52c1, Data
 // SetIpsecSecurityLocal dispatches through IVdsIscsiPortalLocal's vtable slot 3.
 func (self *IVdsIscsiPortalLocal) SetIpsecSecurityLocal(ullSecurityFlags uint64, pIpsecKey *VDS_ISCSI_IPSEC_KEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ullSecurityFlags), uintptr(unsafe.Pointer(pIpsecKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsIscsiTarget: https://learn.microsoft.com/windows/win32/api/vdshwprv/nn-vdshwprv-ivdsiscsitarget
@@ -847,64 +847,64 @@ var IID_IVdsIscsiTarget = win32.GUID{Data1: 0xaa8f5055, Data2: 0x83e5, Data3: 0x
 // GetProperties dispatches through IVdsIscsiTarget's vtable slot 3.
 func (self *IVdsIscsiTarget) GetProperties(pTargetProp *VDS_ISCSI_TARGET_PROP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTargetProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSubSystem dispatches through IVdsIscsiTarget's vtable slot 4.
 func (self *IVdsIscsiTarget) GetSubSystem(ppSubSystem **IVdsSubSystem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSubSystem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryPortalGroups dispatches through IVdsIscsiTarget's vtable slot 5.
 func (self *IVdsIscsiTarget) QueryPortalGroups(ppEnum **IEnumVdsObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryAssociatedLuns dispatches through IVdsIscsiTarget's vtable slot 6.
 func (self *IVdsIscsiTarget) QueryAssociatedLuns(ppEnum **IEnumVdsObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePortalGroup dispatches through IVdsIscsiTarget's vtable slot 7.
 func (self *IVdsIscsiTarget) CreatePortalGroup(ppAsync **IVdsAsync) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAsync)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IVdsIscsiTarget's vtable slot 8.
 func (self *IVdsIscsiTarget) Delete(ppAsync **IVdsAsync) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAsync)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetFriendlyName dispatches through IVdsIscsiTarget's vtable slot 9.
 func (self *IVdsIscsiTarget) SetFriendlyName(pwszFriendlyName string) error {
 	_pwszFriendlyName := win32.UTF16Ptr(pwszFriendlyName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszFriendlyName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetSharedSecret dispatches through IVdsIscsiTarget's vtable slot 10.
 func (self *IVdsIscsiTarget) SetSharedSecret(pTargetSharedSecret *VDS_ISCSI_SHARED_SECRET, pwszInitiatorName string) error {
 	_pwszInitiatorName := win32.UTF16Ptr(pwszInitiatorName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTargetSharedSecret)), uintptr(unsafe.Pointer(_pwszInitiatorName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RememberInitiatorSharedSecret dispatches through IVdsIscsiTarget's vtable slot 11.
 func (self *IVdsIscsiTarget) RememberInitiatorSharedSecret(pwszInitiatorName string, pInitiatorSharedSecret *VDS_ISCSI_SHARED_SECRET) error {
 	_pwszInitiatorName := win32.UTF16Ptr(pwszInitiatorName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszInitiatorName)), uintptr(unsafe.Pointer(pInitiatorSharedSecret)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetConnectedInitiators dispatches through IVdsIscsiTarget's vtable slot 12.
 func (self *IVdsIscsiTarget) GetConnectedInitiators(pppwszInitiatorList **foundation.PWSTR, plNumberOfInitiators *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pppwszInitiatorList)), uintptr(unsafe.Pointer(plNumberOfInitiators)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsLun: https://learn.microsoft.com/windows/win32/api/vdshwprv/nn-vdshwprv-ivdslun
@@ -919,25 +919,25 @@ var IID_IVdsLun = win32.GUID{Data1: 0x3540a9c7, Data2: 0xe60f, Data3: 0x4111, Da
 // GetProperties dispatches through IVdsLun's vtable slot 3.
 func (self *IVdsLun) GetProperties(pLunProp *VDS_LUN_PROP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLunProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSubSystem dispatches through IVdsLun's vtable slot 4.
 func (self *IVdsLun) GetSubSystem(ppSubSystem **IVdsSubSystem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSubSystem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetIdentificationData dispatches through IVdsLun's vtable slot 5.
 func (self *IVdsLun) GetIdentificationData(pLunInfo *VDS_LUN_INFORMATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLunInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryActiveControllers dispatches through IVdsLun's vtable slot 6.
 func (self *IVdsLun) QueryActiveControllers(ppEnum **IEnumVdsObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Extend dispatches through IVdsLun's vtable slot 7.
@@ -947,38 +947,38 @@ func (self *IVdsLun) Extend(ullNumberOfBytesToAdd uint64, pDriveIdArray []win32.
 		_pDriveIdArray = &pDriveIdArray[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(ullNumberOfBytesToAdd), uintptr(unsafe.Pointer(_pDriveIdArray)), uintptr(len(pDriveIdArray)), uintptr(unsafe.Pointer(ppAsync)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Shrink dispatches through IVdsLun's vtable slot 8.
 func (self *IVdsLun) Shrink(ullNumberOfBytesToRemove uint64, ppAsync **IVdsAsync) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(ullNumberOfBytesToRemove), uintptr(unsafe.Pointer(ppAsync)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryPlexes dispatches through IVdsLun's vtable slot 9.
 func (self *IVdsLun) QueryPlexes(ppEnum **IEnumVdsObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Recover dispatches through IVdsLun's vtable slot 12.
 func (self *IVdsLun) Recover(ppAsync **IVdsAsync) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAsync)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMask dispatches through IVdsLun's vtable slot 13.
 func (self *IVdsLun) SetMask(pwszUnmaskingList string) error {
 	_pwszUnmaskingList := win32.UTF16Ptr(pwszUnmaskingList)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszUnmaskingList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IVdsLun's vtable slot 14.
 func (self *IVdsLun) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AssociateControllers dispatches through IVdsLun's vtable slot 15.
@@ -992,25 +992,25 @@ func (self *IVdsLun) AssociateControllers(pActiveControllerIdArray []win32.GUID,
 		_pInactiveControllerIdArray = &pInactiveControllerIdArray[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pActiveControllerIdArray)), uintptr(len(pActiveControllerIdArray)), uintptr(unsafe.Pointer(_pInactiveControllerIdArray)), uintptr(len(pInactiveControllerIdArray)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryHints dispatches through IVdsLun's vtable slot 16.
 func (self *IVdsLun) QueryHints(pHints *VDS_HINTS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHints)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ApplyHints dispatches through IVdsLun's vtable slot 17.
 func (self *IVdsLun) ApplyHints(pHints *VDS_HINTS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHints)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetStatus dispatches through IVdsLun's vtable slot 18.
 func (self *IVdsLun) SetStatus(status VDS_LUN_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(status))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryMaxLunExtendSize dispatches through IVdsLun's vtable slot 19.
@@ -1020,7 +1020,7 @@ func (self *IVdsLun) QueryMaxLunExtendSize(pDriveIdArray []win32.GUID, pullMaxBy
 		_pDriveIdArray = &pDriveIdArray[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pDriveIdArray)), uintptr(len(pDriveIdArray)), uintptr(unsafe.Pointer(pullMaxBytesToBeAdded)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsLun2: https://learn.microsoft.com/windows/win32/api/vdshwprv/nn-vdshwprv-ivdslun2
@@ -1035,13 +1035,13 @@ var IID_IVdsLun2 = win32.GUID{Data1: 0xe5b3a735, Data2: 0x9efb, Data3: 0x499a, D
 // QueryHints2 dispatches through IVdsLun2's vtable slot 3.
 func (self *IVdsLun2) QueryHints2(pHints2 *VDS_HINTS2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHints2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ApplyHints2 dispatches through IVdsLun2's vtable slot 4.
 func (self *IVdsLun2) ApplyHints2(pHints2 *VDS_HINTS2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHints2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsLunControllerPorts: https://learn.microsoft.com/windows/win32/api/vdshwprv/nn-vdshwprv-ivdsluncontrollerports
@@ -1064,13 +1064,13 @@ func (self *IVdsLunControllerPorts) AssociateControllerPorts(pActiveControllerPo
 		_pInactiveControllerPortIdArray = &pInactiveControllerPortIdArray[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pActiveControllerPortIdArray)), uintptr(len(pActiveControllerPortIdArray)), uintptr(unsafe.Pointer(_pInactiveControllerPortIdArray)), uintptr(len(pInactiveControllerPortIdArray)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryActiveControllerPorts dispatches through IVdsLunControllerPorts's vtable slot 4.
 func (self *IVdsLunControllerPorts) QueryActiveControllerPorts(ppEnum **IEnumVdsObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsLunIscsi: https://learn.microsoft.com/windows/win32/api/vdshwprv/nn-vdshwprv-ivdsluniscsi
@@ -1089,13 +1089,13 @@ func (self *IVdsLunIscsi) AssociateTargets(pTargetIdArray []win32.GUID) error {
 		_pTargetIdArray = &pTargetIdArray[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pTargetIdArray)), uintptr(len(pTargetIdArray)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryAssociatedTargets dispatches through IVdsLunIscsi's vtable slot 4.
 func (self *IVdsLunIscsi) QueryAssociatedTargets(ppEnum **IEnumVdsObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsLunMpio: https://learn.microsoft.com/windows/win32/api/vdshwprv/nn-vdshwprv-ivdslunmpio
@@ -1110,13 +1110,13 @@ var IID_IVdsLunMpio = win32.GUID{Data1: 0x7c5fbae3, Data2: 0x333a, Data3: 0x48a1
 // GetPathInfo dispatches through IVdsLunMpio's vtable slot 3.
 func (self *IVdsLunMpio) GetPathInfo(ppPaths **VDS_PATH_INFO, plNumberOfPaths *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPaths)), uintptr(unsafe.Pointer(plNumberOfPaths)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLoadBalancePolicy dispatches through IVdsLunMpio's vtable slot 4.
 func (self *IVdsLunMpio) GetLoadBalancePolicy(pPolicy *VDS_LOADBALANCE_POLICY_ENUM, ppPaths **VDS_PATH_POLICY, plNumberOfPaths *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPolicy)), uintptr(unsafe.Pointer(ppPaths)), uintptr(unsafe.Pointer(plNumberOfPaths)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetLoadBalancePolicy dispatches through IVdsLunMpio's vtable slot 5.
@@ -1126,13 +1126,13 @@ func (self *IVdsLunMpio) SetLoadBalancePolicy(policy VDS_LOADBALANCE_POLICY_ENUM
 		_pPaths = &pPaths[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(policy), uintptr(unsafe.Pointer(_pPaths)), uintptr(len(pPaths)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSupportedLbPolicies dispatches through IVdsLunMpio's vtable slot 6.
 func (self *IVdsLunMpio) GetSupportedLbPolicies(pulLbFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulLbFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsLunNaming: https://learn.microsoft.com/windows/win32/api/vdshwprv/nn-vdshwprv-ivdslunnaming
@@ -1148,7 +1148,7 @@ var IID_IVdsLunNaming = win32.GUID{Data1: 0x907504cb, Data2: 0x6b4e, Data3: 0x4d
 func (self *IVdsLunNaming) SetFriendlyName(pwszFriendlyName string) error {
 	_pwszFriendlyName := win32.UTF16Ptr(pwszFriendlyName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszFriendlyName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsLunNumber: https://learn.microsoft.com/windows/win32/api/vdshwprv/nn-vdshwprv-ivdslunnumber
@@ -1163,7 +1163,7 @@ var IID_IVdsLunNumber = win32.GUID{Data1: 0xd3f95e46, Data2: 0x54b3, Data3: 0x41
 // GetLunNumber dispatches through IVdsLunNumber's vtable slot 3.
 func (self *IVdsLunNumber) GetLunNumber(pulLunNumber *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulLunNumber)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsLunPlex: https://learn.microsoft.com/windows/win32/api/vdshwprv/nn-vdshwprv-ivdslunplex
@@ -1178,31 +1178,31 @@ var IID_IVdsLunPlex = win32.GUID{Data1: 0x0ee1a790, Data2: 0x5d2e, Data3: 0x4abb
 // GetProperties dispatches through IVdsLunPlex's vtable slot 3.
 func (self *IVdsLunPlex) GetProperties(pPlexProp *VDS_LUN_PLEX_PROP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPlexProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLun dispatches through IVdsLunPlex's vtable slot 4.
 func (self *IVdsLunPlex) GetLun(ppLun **IVdsLun) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppLun)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryExtents dispatches through IVdsLunPlex's vtable slot 5.
 func (self *IVdsLunPlex) QueryExtents(ppExtentArray **VDS_DRIVE_EXTENT, plNumberOfExtents *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppExtentArray)), uintptr(unsafe.Pointer(plNumberOfExtents)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryHints dispatches through IVdsLunPlex's vtable slot 6.
 func (self *IVdsLunPlex) QueryHints(pHints *VDS_HINTS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHints)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ApplyHints dispatches through IVdsLunPlex's vtable slot 7.
 func (self *IVdsLunPlex) ApplyHints(pHints *VDS_HINTS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHints)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsMaintenance: https://learn.microsoft.com/windows/win32/api/vdshwprv/nn-vdshwprv-ivdsmaintenance
@@ -1217,19 +1217,19 @@ var IID_IVdsMaintenance = win32.GUID{Data1: 0xdaebeef3, Data2: 0x8523, Data3: 0x
 // StartMaintenance dispatches through IVdsMaintenance's vtable slot 3.
 func (self *IVdsMaintenance) StartMaintenance(operation VDS_MAINTENANCE_OPERATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(operation))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StopMaintenance dispatches through IVdsMaintenance's vtable slot 4.
 func (self *IVdsMaintenance) StopMaintenance(operation VDS_MAINTENANCE_OPERATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(operation))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PulseMaintenance dispatches through IVdsMaintenance's vtable slot 5.
 func (self *IVdsMaintenance) PulseMaintenance(operation VDS_MAINTENANCE_OPERATION, ulCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(operation), uintptr(ulCount))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsOpenVDisk: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdsopenvdisk
@@ -1245,37 +1245,37 @@ var IID_IVdsOpenVDisk = win32.GUID{Data1: 0x75c8f324, Data2: 0xf715, Data3: 0x4f
 func (self *IVdsOpenVDisk) Attach(pStringSecurityDescriptor string, Flags storagevhd.ATTACH_VIRTUAL_DISK_FLAG, ProviderSpecificFlags uint32, TimeoutInMs uint32, ppAsync **IVdsAsync) error {
 	_pStringSecurityDescriptor := win32.UTF16Ptr(pStringSecurityDescriptor)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pStringSecurityDescriptor)), uintptr(Flags), uintptr(ProviderSpecificFlags), uintptr(TimeoutInMs), uintptr(unsafe.Pointer(ppAsync)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Detach dispatches through IVdsOpenVDisk's vtable slot 4.
 func (self *IVdsOpenVDisk) Detach(Flags storagevhd.DETACH_VIRTUAL_DISK_FLAG, ProviderSpecificFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(ProviderSpecificFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DetachAndDelete dispatches through IVdsOpenVDisk's vtable slot 5.
 func (self *IVdsOpenVDisk) DetachAndDelete(Flags storagevhd.DETACH_VIRTUAL_DISK_FLAG, ProviderSpecificFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(ProviderSpecificFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Compact dispatches through IVdsOpenVDisk's vtable slot 6.
 func (self *IVdsOpenVDisk) Compact(Flags storagevhd.COMPACT_VIRTUAL_DISK_FLAG, Reserved uint32, ppAsync **IVdsAsync) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(Reserved), uintptr(unsafe.Pointer(ppAsync)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Merge dispatches through IVdsOpenVDisk's vtable slot 7.
 func (self *IVdsOpenVDisk) Merge(Flags storagevhd.MERGE_VIRTUAL_DISK_FLAG, MergeDepth uint32, ppAsync **IVdsAsync) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(MergeDepth), uintptr(unsafe.Pointer(ppAsync)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Expand dispatches through IVdsOpenVDisk's vtable slot 8.
 func (self *IVdsOpenVDisk) Expand(Flags storagevhd.EXPAND_VIRTUAL_DISK_FLAG, NewSize uint64, ppAsync **IVdsAsync) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(NewSize), uintptr(unsafe.Pointer(ppAsync)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsPack: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdspack
@@ -1290,25 +1290,25 @@ var IID_IVdsPack = win32.GUID{Data1: 0x3b69d7f5, Data2: 0x9d94, Data3: 0x4648, D
 // GetProperties dispatches through IVdsPack's vtable slot 3.
 func (self *IVdsPack) GetProperties(pPackProp *VDS_PACK_PROP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPackProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProvider dispatches through IVdsPack's vtable slot 4.
 func (self *IVdsPack) GetProvider(ppProvider **IVdsProvider) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProvider)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryVolumes dispatches through IVdsPack's vtable slot 5.
 func (self *IVdsPack) QueryVolumes(ppEnum **IEnumVdsObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryDisks dispatches through IVdsPack's vtable slot 6.
 func (self *IVdsPack) QueryDisks(ppEnum **IEnumVdsObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateVolume dispatches through IVdsPack's vtable slot 7.
@@ -1318,13 +1318,13 @@ func (self *IVdsPack) CreateVolume(type_ VDS_VOLUME_TYPE, pInputDiskArray []VDS_
 		_pInputDiskArray = &pInputDiskArray[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(unsafe.Pointer(_pInputDiskArray)), uintptr(len(pInputDiskArray)), uintptr(ulStripeSize), uintptr(unsafe.Pointer(ppAsync)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Recover dispatches through IVdsPack's vtable slot 12.
 func (self *IVdsPack) Recover(ppAsync **IVdsAsync) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAsync)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsPack2: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdspack2
@@ -1343,7 +1343,7 @@ func (self *IVdsPack2) CreateVolume2(type_ VDS_VOLUME_TYPE, pInputDiskArray []VD
 		_pInputDiskArray = &pInputDiskArray[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(unsafe.Pointer(_pInputDiskArray)), uintptr(len(pInputDiskArray)), uintptr(ulStripeSize), uintptr(ulAlign), uintptr(unsafe.Pointer(ppAsync)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsProvider: https://learn.microsoft.com/windows/win32/api/vdshwprv/nn-vdshwprv-ivdsprovider
@@ -1358,7 +1358,7 @@ var IID_IVdsProvider = win32.GUID{Data1: 0x10c5e575, Data2: 0x7984, Data3: 0x4e8
 // GetProperties dispatches through IVdsProvider's vtable slot 3.
 func (self *IVdsProvider) GetProperties(pProviderProp *VDS_PROVIDER_PROP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProviderProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsProviderPrivate: https://learn.microsoft.com/windows/win32/api/vdshwprv/nn-vdshwprv-ivdsproviderprivate
@@ -1374,14 +1374,14 @@ var IID_IVdsProviderPrivate = win32.GUID{Data1: 0x11f3cd41, Data2: 0xb7e8, Data3
 func (self *IVdsProviderPrivate) OnLoad(pwszMachineName string, pCallbackObject *systemcom.IUnknown) error {
 	_pwszMachineName := win32.UTF16Ptr(pwszMachineName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszMachineName)), uintptr(unsafe.Pointer(pCallbackObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnUnload dispatches through IVdsProviderPrivate's vtable slot 5.
 func (self *IVdsProviderPrivate) OnUnload(bForceUnload bool) error {
 	_bForceUnload := win32.Bool32(bForceUnload)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(_bForceUnload))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsProviderSupport: https://learn.microsoft.com/windows/win32/api/vdshwprv/nn-vdshwprv-ivdsprovidersupport
@@ -1396,7 +1396,7 @@ var IID_IVdsProviderSupport = win32.GUID{Data1: 0x1732be13, Data2: 0xe8f9, Data3
 // GetVersionSupport dispatches through IVdsProviderSupport's vtable slot 3.
 func (self *IVdsProviderSupport) GetVersionSupport(ulVersionSupport *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ulVersionSupport)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsRemovable: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdsremovable
@@ -1411,13 +1411,13 @@ var IID_IVdsRemovable = win32.GUID{Data1: 0x0316560b, Data2: 0x5db4, Data3: 0x4e
 // QueryMedia dispatches through IVdsRemovable's vtable slot 3.
 func (self *IVdsRemovable) QueryMedia() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Eject dispatches through IVdsRemovable's vtable slot 4.
 func (self *IVdsRemovable) Eject() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsService: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdsservice
@@ -1432,37 +1432,37 @@ var IID_IVdsService = win32.GUID{Data1: 0x0818a8ef, Data2: 0x9ba9, Data3: 0x40d8
 // IsServiceReady dispatches through IVdsService's vtable slot 3.
 func (self *IVdsService) IsServiceReady() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WaitForServiceReady dispatches through IVdsService's vtable slot 4.
 func (self *IVdsService) WaitForServiceReady() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProperties dispatches through IVdsService's vtable slot 5.
 func (self *IVdsService) GetProperties(pServiceProp *VDS_SERVICE_PROP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pServiceProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryProviders dispatches through IVdsService's vtable slot 6.
 func (self *IVdsService) QueryProviders(masks uint32, ppEnum **IEnumVdsObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(masks), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryMaskedDisks dispatches through IVdsService's vtable slot 7.
 func (self *IVdsService) QueryMaskedDisks(ppEnum **IEnumVdsObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryUnallocatedDisks dispatches through IVdsService's vtable slot 8.
 func (self *IVdsService) QueryUnallocatedDisks(ppEnum **IEnumVdsObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryDriveLetters dispatches through IVdsService's vtable slot 10.
@@ -1472,61 +1472,61 @@ func (self *IVdsService) QueryDriveLetters(wcFirstLetter uint16, pDriveLetterPro
 		_pDriveLetterPropArray = &pDriveLetterPropArray[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(wcFirstLetter), uintptr(len(pDriveLetterPropArray)), uintptr(unsafe.Pointer(_pDriveLetterPropArray)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryFileSystemTypes dispatches through IVdsService's vtable slot 11.
 func (self *IVdsService) QueryFileSystemTypes(ppFileSystemTypeProps **VDS_FILE_SYSTEM_TYPE_PROP, plNumberOfFileSystems *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFileSystemTypeProps)), uintptr(unsafe.Pointer(plNumberOfFileSystems)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reenumerate dispatches through IVdsService's vtable slot 12.
 func (self *IVdsService) Reenumerate() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through IVdsService's vtable slot 13.
 func (self *IVdsService) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CleanupObsoleteMountPoints dispatches through IVdsService's vtable slot 14.
 func (self *IVdsService) CleanupObsoleteMountPoints() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Advise dispatches through IVdsService's vtable slot 15.
 func (self *IVdsService) Advise(pSink *IVdsAdviseSink, pdwCookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSink)), uintptr(unsafe.Pointer(pdwCookie)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Unadvise dispatches through IVdsService's vtable slot 16.
 func (self *IVdsService) Unadvise(dwCookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(dwCookie))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reboot dispatches through IVdsService's vtable slot 17.
 func (self *IVdsService) Reboot() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetFlags dispatches through IVdsService's vtable slot 18.
 func (self *IVdsService) SetFlags(ulFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(ulFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ClearFlags dispatches through IVdsService's vtable slot 19.
 func (self *IVdsService) ClearFlags(ulFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(ulFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsServiceHba: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdsservicehba
@@ -1541,7 +1541,7 @@ var IID_IVdsServiceHba = win32.GUID{Data1: 0x0ac13689, Data2: 0x3134, Data3: 0x4
 // QueryHbaPorts dispatches through IVdsServiceHba's vtable slot 3.
 func (self *IVdsServiceHba) QueryHbaPorts(ppEnum **IEnumVdsObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsServiceInitialization: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdsserviceinitialization
@@ -1557,7 +1557,7 @@ var IID_IVdsServiceInitialization = win32.GUID{Data1: 0x4afc3636, Data2: 0xdb01,
 func (self *IVdsServiceInitialization) Initialize(pwszMachineName string) error {
 	_pwszMachineName := win32.UTF16Ptr(pwszMachineName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszMachineName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsServiceIscsi: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdsserviceiscsi
@@ -1572,25 +1572,25 @@ var IID_IVdsServiceIscsi = win32.GUID{Data1: 0x14fbe036, Data2: 0x3ed7, Data3: 0
 // GetInitiatorName dispatches through IVdsServiceIscsi's vtable slot 3.
 func (self *IVdsServiceIscsi) GetInitiatorName(ppwszIscsiName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwszIscsiName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryInitiatorAdapters dispatches through IVdsServiceIscsi's vtable slot 4.
 func (self *IVdsServiceIscsi) QueryInitiatorAdapters(ppEnum **IEnumVdsObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetIpsecGroupPresharedKey dispatches through IVdsServiceIscsi's vtable slot 5.
 func (self *IVdsServiceIscsi) SetIpsecGroupPresharedKey(pIpsecKey *VDS_ISCSI_IPSEC_KEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIpsecKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAllIpsecTunnelAddresses dispatches through IVdsServiceIscsi's vtable slot 6.
 func (self *IVdsServiceIscsi) SetAllIpsecTunnelAddresses(pTunnelAddress *VDS_IPADDRESS, pDestinationAddress *VDS_IPADDRESS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTunnelAddress)), uintptr(unsafe.Pointer(pDestinationAddress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsServiceLoader: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdsserviceloader
@@ -1606,7 +1606,7 @@ var IID_IVdsServiceLoader = win32.GUID{Data1: 0xe0393303, Data2: 0x90d4, Data3: 
 func (self *IVdsServiceLoader) LoadService(pwszMachineName string, ppService **IVdsService) error {
 	_pwszMachineName := win32.UTF16Ptr(pwszMachineName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszMachineName)), uintptr(unsafe.Pointer(ppService)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsServiceSAN: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdsservicesan
@@ -1621,13 +1621,13 @@ var IID_IVdsServiceSAN = win32.GUID{Data1: 0xfc5d23e8, Data2: 0xa88b, Data3: 0x4
 // GetSANPolicy dispatches through IVdsServiceSAN's vtable slot 3.
 func (self *IVdsServiceSAN) GetSANPolicy(pSanPolicy *VDS_SAN_POLICY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSanPolicy)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetSANPolicy dispatches through IVdsServiceSAN's vtable slot 4.
 func (self *IVdsServiceSAN) SetSANPolicy(SanPolicy VDS_SAN_POLICY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(SanPolicy))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 15fc031c-0652-4306-b2c3-f558b8f837e2
@@ -1642,7 +1642,7 @@ var IID_IVdsServiceSw = win32.GUID{Data1: 0x15fc031c, Data2: 0x0652, Data3: 0x43
 func (self *IVdsServiceSw) GetDiskObject(pwszDeviceID string, ppDiskUnk **systemcom.IUnknown) error {
 	_pwszDeviceID := win32.UTF16Ptr(pwszDeviceID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszDeviceID)), uintptr(unsafe.Pointer(ppDiskUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsServiceUninstallDisk: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdsserviceuninstalldisk
@@ -1657,13 +1657,13 @@ var IID_IVdsServiceUninstallDisk = win32.GUID{Data1: 0xb6b22da8, Data2: 0xf903, 
 // GetDiskIdFromLunInfo dispatches through IVdsServiceUninstallDisk's vtable slot 3.
 func (self *IVdsServiceUninstallDisk) GetDiskIdFromLunInfo(pLunInfo *VDS_LUN_INFORMATION, pDiskId *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLunInfo)), uintptr(unsafe.Pointer(pDiskId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UninstallDisks dispatches through IVdsServiceUninstallDisk's vtable slot 4.
 func (self *IVdsServiceUninstallDisk) UninstallDisks(pDiskIdArray *win32.GUID, ulCount uint32, bForce foundation.BOOLEAN, pbReboot *byte, pResults *foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDiskIdArray)), uintptr(ulCount), uintptr(bForce), uintptr(unsafe.Pointer(pbReboot)), uintptr(unsafe.Pointer(pResults)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsStoragePool: https://learn.microsoft.com/windows/win32/api/vdshwprv/nn-vdshwprv-ivdsstoragepool
@@ -1678,37 +1678,37 @@ var IID_IVdsStoragePool = win32.GUID{Data1: 0x932ca8cf, Data2: 0x0eb3, Data3: 0x
 // GetProvider dispatches through IVdsStoragePool's vtable slot 3.
 func (self *IVdsStoragePool) GetProvider(ppProvider **IVdsProvider) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProvider)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProperties dispatches through IVdsStoragePool's vtable slot 4.
 func (self *IVdsStoragePool) GetProperties(pStoragePoolProp *VDS_STORAGE_POOL_PROP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStoragePoolProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAttributes dispatches through IVdsStoragePool's vtable slot 5.
 func (self *IVdsStoragePool) GetAttributes(pStoragePoolAttributes *VDS_POOL_ATTRIBUTES) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStoragePoolAttributes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryDriveExtents dispatches through IVdsStoragePool's vtable slot 6.
 func (self *IVdsStoragePool) QueryDriveExtents(ppExtentArray **VDS_STORAGE_POOL_DRIVE_EXTENT, plNumberOfExtents *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppExtentArray)), uintptr(unsafe.Pointer(plNumberOfExtents)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryAllocatedLuns dispatches through IVdsStoragePool's vtable slot 7.
 func (self *IVdsStoragePool) QueryAllocatedLuns(ppEnum **IEnumVdsObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryAllocatedStoragePools dispatches through IVdsStoragePool's vtable slot 8.
 func (self *IVdsStoragePool) QueryAllocatedStoragePools(ppEnum **IEnumVdsObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsSubSystem: https://learn.microsoft.com/windows/win32/api/vdshwprv/nn-vdshwprv-ivdssubsystem
@@ -1723,43 +1723,43 @@ var IID_IVdsSubSystem = win32.GUID{Data1: 0x6fcee2d3, Data2: 0x6d90, Data3: 0x4f
 // GetProperties dispatches through IVdsSubSystem's vtable slot 3.
 func (self *IVdsSubSystem) GetProperties(pSubSystemProp *VDS_SUB_SYSTEM_PROP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSubSystemProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProvider dispatches through IVdsSubSystem's vtable slot 4.
 func (self *IVdsSubSystem) GetProvider(ppProvider **IVdsProvider) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProvider)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryControllers dispatches through IVdsSubSystem's vtable slot 5.
 func (self *IVdsSubSystem) QueryControllers(ppEnum **IEnumVdsObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryLuns dispatches through IVdsSubSystem's vtable slot 6.
 func (self *IVdsSubSystem) QueryLuns(ppEnum **IEnumVdsObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryDrives dispatches through IVdsSubSystem's vtable slot 7.
 func (self *IVdsSubSystem) QueryDrives(ppEnum **IEnumVdsObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDrive dispatches through IVdsSubSystem's vtable slot 8.
 func (self *IVdsSubSystem) GetDrive(sBusNumber int16, sSlotNumber int16, ppDrive **IVdsDrive) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(sBusNumber), uintptr(sSlotNumber), uintptr(unsafe.Pointer(ppDrive)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reenumerate dispatches through IVdsSubSystem's vtable slot 9.
 func (self *IVdsSubSystem) Reenumerate() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetControllerStatus dispatches through IVdsSubSystem's vtable slot 10.
@@ -1773,7 +1773,7 @@ func (self *IVdsSubSystem) SetControllerStatus(pOnlineControllerIdArray []win32.
 		_pOfflineControllerIdArray = &pOfflineControllerIdArray[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pOnlineControllerIdArray)), uintptr(len(pOnlineControllerIdArray)), uintptr(unsafe.Pointer(_pOfflineControllerIdArray)), uintptr(len(pOfflineControllerIdArray)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateLun dispatches through IVdsSubSystem's vtable slot 11.
@@ -1784,13 +1784,13 @@ func (self *IVdsSubSystem) CreateLun(type_ VDS_LUN_TYPE, ullSizeInBytes uint64, 
 	}
 	_pwszUnmaskingList := win32.UTF16Ptr(pwszUnmaskingList)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(ullSizeInBytes), uintptr(unsafe.Pointer(_pDriveIdArray)), uintptr(len(pDriveIdArray)), uintptr(unsafe.Pointer(_pwszUnmaskingList)), uintptr(unsafe.Pointer(pHints)), uintptr(unsafe.Pointer(ppAsync)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetStatus dispatches through IVdsSubSystem's vtable slot 13.
 func (self *IVdsSubSystem) SetStatus(status VDS_SUB_SYSTEM_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(status))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryMaxLunCreateSize dispatches through IVdsSubSystem's vtable slot 14.
@@ -1800,7 +1800,7 @@ func (self *IVdsSubSystem) QueryMaxLunCreateSize(type_ VDS_LUN_TYPE, pDriveIdArr
 		_pDriveIdArray = &pDriveIdArray[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(unsafe.Pointer(_pDriveIdArray)), uintptr(len(pDriveIdArray)), uintptr(unsafe.Pointer(pHints)), uintptr(unsafe.Pointer(pullMaxLunSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsSubSystem2: https://learn.microsoft.com/windows/win32/api/vdshwprv/nn-vdshwprv-ivdssubsystem2
@@ -1815,13 +1815,13 @@ var IID_IVdsSubSystem2 = win32.GUID{Data1: 0xbe666735, Data2: 0x7800, Data3: 0x4
 // GetProperties2 dispatches through IVdsSubSystem2's vtable slot 3.
 func (self *IVdsSubSystem2) GetProperties2(pSubSystemProp2 *VDS_SUB_SYSTEM_PROP2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSubSystemProp2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDrive2 dispatches through IVdsSubSystem2's vtable slot 4.
 func (self *IVdsSubSystem2) GetDrive2(sBusNumber int16, sSlotNumber int16, ulEnclosureNumber uint32, ppDrive **IVdsDrive) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(sBusNumber), uintptr(sSlotNumber), uintptr(ulEnclosureNumber), uintptr(unsafe.Pointer(ppDrive)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateLun2 dispatches through IVdsSubSystem2's vtable slot 5.
@@ -1832,7 +1832,7 @@ func (self *IVdsSubSystem2) CreateLun2(type_ VDS_LUN_TYPE, ullSizeInBytes uint64
 	}
 	_pwszUnmaskingList := win32.UTF16Ptr(pwszUnmaskingList)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(ullSizeInBytes), uintptr(unsafe.Pointer(_pDriveIdArray)), uintptr(len(pDriveIdArray)), uintptr(unsafe.Pointer(_pwszUnmaskingList)), uintptr(unsafe.Pointer(pHints2)), uintptr(unsafe.Pointer(ppAsync)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryMaxLunCreateSize2 dispatches through IVdsSubSystem2's vtable slot 6.
@@ -1842,7 +1842,7 @@ func (self *IVdsSubSystem2) QueryMaxLunCreateSize2(type_ VDS_LUN_TYPE, pDriveIdA
 		_pDriveIdArray = &pDriveIdArray[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(unsafe.Pointer(_pDriveIdArray)), uintptr(len(pDriveIdArray)), uintptr(unsafe.Pointer(pHints2)), uintptr(unsafe.Pointer(pullMaxLunSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsSubSystemImportTarget: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdssubsystemimporttarget
@@ -1857,14 +1857,14 @@ var IID_IVdsSubSystemImportTarget = win32.GUID{Data1: 0x83bfb87f, Data2: 0x43fb,
 // GetImportTarget dispatches through IVdsSubSystemImportTarget's vtable slot 3.
 func (self *IVdsSubSystemImportTarget) GetImportTarget(ppwszIscsiName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwszIscsiName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetImportTarget dispatches through IVdsSubSystemImportTarget's vtable slot 4.
 func (self *IVdsSubSystemImportTarget) SetImportTarget(pwszIscsiName string) error {
 	_pwszIscsiName := win32.UTF16Ptr(pwszIscsiName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszIscsiName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsSubSystemInterconnect: https://learn.microsoft.com/windows/win32/api/vdshwprv/nn-vdshwprv-ivdssubsysteminterconnect
@@ -1879,7 +1879,7 @@ var IID_IVdsSubSystemInterconnect = win32.GUID{Data1: 0x9e6fa560, Data2: 0xc141,
 // GetSupportedInterconnects dispatches through IVdsSubSystemInterconnect's vtable slot 3.
 func (self *IVdsSubSystemInterconnect) GetSupportedInterconnects(pulSupportedInterconnectsFlag *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulSupportedInterconnectsFlag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsSubSystemIscsi: https://learn.microsoft.com/windows/win32/api/vdshwprv/nn-vdshwprv-ivdssubsystemiscsi
@@ -1894,13 +1894,13 @@ var IID_IVdsSubSystemIscsi = win32.GUID{Data1: 0x0027346f, Data2: 0x40d0, Data3:
 // QueryTargets dispatches through IVdsSubSystemIscsi's vtable slot 3.
 func (self *IVdsSubSystemIscsi) QueryTargets(ppEnum **IEnumVdsObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryPortals dispatches through IVdsSubSystemIscsi's vtable slot 4.
 func (self *IVdsSubSystemIscsi) QueryPortals(ppEnum **IEnumVdsObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateTarget dispatches through IVdsSubSystemIscsi's vtable slot 5.
@@ -1908,13 +1908,13 @@ func (self *IVdsSubSystemIscsi) CreateTarget(pwszIscsiName string, pwszFriendlyN
 	_pwszIscsiName := win32.UTF16Ptr(pwszIscsiName)
 	_pwszFriendlyName := win32.UTF16Ptr(pwszFriendlyName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszIscsiName)), uintptr(unsafe.Pointer(_pwszFriendlyName)), uintptr(unsafe.Pointer(ppAsync)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetIpsecGroupPresharedKey dispatches through IVdsSubSystemIscsi's vtable slot 6.
 func (self *IVdsSubSystemIscsi) SetIpsecGroupPresharedKey(pIpsecKey *VDS_ISCSI_IPSEC_KEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIpsecKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsSubSystemNaming: https://learn.microsoft.com/windows/win32/api/vdshwprv/nn-vdshwprv-ivdssubsystemnaming
@@ -1930,7 +1930,7 @@ var IID_IVdsSubSystemNaming = win32.GUID{Data1: 0x0d70faa3, Data2: 0x9cd4, Data3
 func (self *IVdsSubSystemNaming) SetFriendlyName(pwszFriendlyName string) error {
 	_pwszFriendlyName := win32.UTF16Ptr(pwszFriendlyName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszFriendlyName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsSwProvider: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdsswprovider
@@ -1945,13 +1945,13 @@ var IID_IVdsSwProvider = win32.GUID{Data1: 0x9aa58360, Data2: 0xce33, Data3: 0x4
 // QueryPacks dispatches through IVdsSwProvider's vtable slot 3.
 func (self *IVdsSwProvider) QueryPacks(ppEnum **IEnumVdsObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePack dispatches through IVdsSwProvider's vtable slot 4.
 func (self *IVdsSwProvider) CreatePack(ppPack **IVdsPack) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPack)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsVDisk: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdsvdisk
@@ -1966,25 +1966,25 @@ var IID_IVdsVDisk = win32.GUID{Data1: 0x1e062b84, Data2: 0xe5e6, Data3: 0x4b4b, 
 // Open dispatches through IVdsVDisk's vtable slot 3.
 func (self *IVdsVDisk) Open(AccessMask storagevhd.VIRTUAL_DISK_ACCESS_MASK, Flags storagevhd.OPEN_VIRTUAL_DISK_FLAG, ReadWriteDepth uint32, ppOpenVDisk **IVdsOpenVDisk) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(AccessMask), uintptr(Flags), uintptr(ReadWriteDepth), uintptr(unsafe.Pointer(ppOpenVDisk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProperties dispatches through IVdsVDisk's vtable slot 4.
 func (self *IVdsVDisk) GetProperties(pDiskProperties *VDS_VDISK_PROPERTIES) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDiskProperties)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetHostVolume dispatches through IVdsVDisk's vtable slot 5.
 func (self *IVdsVDisk) GetHostVolume(ppVolume **IVdsVolume) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppVolume)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceName dispatches through IVdsVDisk's vtable slot 6.
 func (self *IVdsVDisk) GetDeviceName(ppDeviceName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDeviceName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsVdProvider: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdsvdprovider
@@ -1999,7 +1999,7 @@ var IID_IVdsVdProvider = win32.GUID{Data1: 0xb481498c, Data2: 0x8354, Data3: 0x4
 // QueryVDisks dispatches through IVdsVdProvider's vtable slot 3.
 func (self *IVdsVdProvider) QueryVDisks(ppEnum **IEnumVdsObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateVDisk dispatches through IVdsVdProvider's vtable slot 4.
@@ -2007,26 +2007,26 @@ func (self *IVdsVdProvider) CreateVDisk(VirtualDeviceType *storagevhd.VIRTUAL_ST
 	_pPath := win32.UTF16Ptr(pPath)
 	_pStringSecurityDescriptor := win32.UTF16Ptr(pStringSecurityDescriptor)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(VirtualDeviceType)), uintptr(unsafe.Pointer(_pPath)), uintptr(unsafe.Pointer(_pStringSecurityDescriptor)), uintptr(Flags), uintptr(ProviderSpecificFlags), uintptr(Reserved), uintptr(unsafe.Pointer(pCreateDiskParameters)), uintptr(unsafe.Pointer(ppAsync)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddVDisk dispatches through IVdsVdProvider's vtable slot 5.
 func (self *IVdsVdProvider) AddVDisk(VirtualDeviceType *storagevhd.VIRTUAL_STORAGE_TYPE, pPath string, ppVDisk **IVdsVDisk) error {
 	_pPath := win32.UTF16Ptr(pPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(VirtualDeviceType)), uintptr(unsafe.Pointer(_pPath)), uintptr(unsafe.Pointer(ppVDisk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDiskFromVDisk dispatches through IVdsVdProvider's vtable slot 6.
 func (self *IVdsVdProvider) GetDiskFromVDisk(pVDisk *IVdsVDisk, ppDisk **IVdsDisk) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVDisk)), uintptr(unsafe.Pointer(ppDisk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetVDiskFromDisk dispatches through IVdsVdProvider's vtable slot 7.
 func (self *IVdsVdProvider) GetVDiskFromDisk(pDisk *IVdsDisk, ppVDisk **IVdsVDisk) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDisk)), uintptr(unsafe.Pointer(ppVDisk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsVolume: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdsvolume
@@ -2041,19 +2041,19 @@ var IID_IVdsVolume = win32.GUID{Data1: 0x88306bb2, Data2: 0xe71f, Data3: 0x478c,
 // GetProperties dispatches through IVdsVolume's vtable slot 3.
 func (self *IVdsVolume) GetProperties(pVolumeProperties *VDS_VOLUME_PROP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVolumeProperties)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPack dispatches through IVdsVolume's vtable slot 4.
 func (self *IVdsVolume) GetPack(ppPack **IVdsPack) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPack)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryPlexes dispatches through IVdsVolume's vtable slot 5.
 func (self *IVdsVolume) QueryPlexes(ppEnum **IEnumVdsObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Extend dispatches through IVdsVolume's vtable slot 6.
@@ -2063,33 +2063,33 @@ func (self *IVdsVolume) Extend(pInputDiskArray []VDS_INPUT_DISK, ppAsync **IVdsA
 		_pInputDiskArray = &pInputDiskArray[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pInputDiskArray)), uintptr(len(pInputDiskArray)), uintptr(unsafe.Pointer(ppAsync)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Shrink dispatches through IVdsVolume's vtable slot 7.
 func (self *IVdsVolume) Shrink(ullNumberOfBytesToRemove uint64, ppAsync **IVdsAsync) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(ullNumberOfBytesToRemove), uintptr(unsafe.Pointer(ppAsync)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IVdsVolume's vtable slot 11.
 func (self *IVdsVolume) Delete(bForce bool) error {
 	_bForce := win32.Bool32(bForce)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(_bForce))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetFlags dispatches through IVdsVolume's vtable slot 12.
 func (self *IVdsVolume) SetFlags(ulFlags uint32, bRevertOnClose bool) error {
 	_bRevertOnClose := win32.Bool32(bRevertOnClose)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(ulFlags), uintptr(_bRevertOnClose))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ClearFlags dispatches through IVdsVolume's vtable slot 13.
 func (self *IVdsVolume) ClearFlags(ulFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(ulFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsVolume2: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdsvolume2
@@ -2104,7 +2104,7 @@ var IID_IVdsVolume2 = win32.GUID{Data1: 0x72ae6713, Data2: 0xdcbb, Data3: 0x4a03
 // GetProperties2 dispatches through IVdsVolume2's vtable slot 3.
 func (self *IVdsVolume2) GetProperties2(pVolumeProperties *VDS_VOLUME_PROP2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVolumeProperties)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsVolumeMF: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdsvolumemf
@@ -2119,7 +2119,7 @@ var IID_IVdsVolumeMF = win32.GUID{Data1: 0xee2d5ded, Data2: 0x6236, Data3: 0x416
 // GetFileSystemProperties dispatches through IVdsVolumeMF's vtable slot 3.
 func (self *IVdsVolumeMF) GetFileSystemProperties(pFileSystemProp *VDS_FILE_SYSTEM_PROP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFileSystemProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Format dispatches through IVdsVolumeMF's vtable slot 4.
@@ -2129,26 +2129,26 @@ func (self *IVdsVolumeMF) Format(type_ VDS_FILE_SYSTEM_TYPE, pwszLabel string, d
 	_bQuickFormat := win32.Bool32(bQuickFormat)
 	_bEnableCompression := win32.Bool32(bEnableCompression)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(unsafe.Pointer(_pwszLabel)), uintptr(dwUnitAllocationSize), uintptr(_bForce), uintptr(_bQuickFormat), uintptr(_bEnableCompression), uintptr(unsafe.Pointer(ppAsync)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddAccessPath dispatches through IVdsVolumeMF's vtable slot 5.
 func (self *IVdsVolumeMF) AddAccessPath(pwszPath string) error {
 	_pwszPath := win32.UTF16Ptr(pwszPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryAccessPaths dispatches through IVdsVolumeMF's vtable slot 6.
 func (self *IVdsVolumeMF) QueryAccessPaths(pwszPathArray **foundation.PWSTR, plNumberOfAccessPaths *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszPathArray)), uintptr(unsafe.Pointer(plNumberOfAccessPaths)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryReparsePoints dispatches through IVdsVolumeMF's vtable slot 7.
 func (self *IVdsVolumeMF) QueryReparsePoints(ppReparsePointProps **VDS_REPARSE_POINT_PROP, plNumberOfReparsePointProps *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppReparsePointProps)), uintptr(unsafe.Pointer(plNumberOfReparsePointProps)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteAccessPath dispatches through IVdsVolumeMF's vtable slot 8.
@@ -2156,13 +2156,13 @@ func (self *IVdsVolumeMF) DeleteAccessPath(pwszPath string, bForce bool) error {
 	_pwszPath := win32.UTF16Ptr(pwszPath)
 	_bForce := win32.Bool32(bForce)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszPath)), uintptr(_bForce))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Mount dispatches through IVdsVolumeMF's vtable slot 9.
 func (self *IVdsVolumeMF) Mount() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Dismount dispatches through IVdsVolumeMF's vtable slot 10.
@@ -2170,19 +2170,19 @@ func (self *IVdsVolumeMF) Dismount(bForce bool, bPermanent bool) error {
 	_bForce := win32.Bool32(bForce)
 	_bPermanent := win32.Bool32(bPermanent)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(_bForce), uintptr(_bPermanent))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetFileSystemFlags dispatches through IVdsVolumeMF's vtable slot 11.
 func (self *IVdsVolumeMF) SetFileSystemFlags(ulFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(ulFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ClearFileSystemFlags dispatches through IVdsVolumeMF's vtable slot 12.
 func (self *IVdsVolumeMF) ClearFileSystemFlags(ulFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(ulFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsVolumeMF2: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdsvolumemf2
@@ -2197,13 +2197,13 @@ var IID_IVdsVolumeMF2 = win32.GUID{Data1: 0x4dbcee9a, Data2: 0x6343, Data3: 0x46
 // GetFileSystemTypeName dispatches through IVdsVolumeMF2's vtable slot 3.
 func (self *IVdsVolumeMF2) GetFileSystemTypeName(ppwszFileSystemTypeName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwszFileSystemTypeName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryFileSystemFormatSupport dispatches through IVdsVolumeMF2's vtable slot 4.
 func (self *IVdsVolumeMF2) QueryFileSystemFormatSupport(ppFileSystemSupportProps **VDS_FILE_SYSTEM_FORMAT_SUPPORT_PROP, plNumberOfFileSystems *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFileSystemSupportProps)), uintptr(unsafe.Pointer(plNumberOfFileSystems)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FormatEx dispatches through IVdsVolumeMF2's vtable slot 5.
@@ -2214,7 +2214,7 @@ func (self *IVdsVolumeMF2) FormatEx(pwszFileSystemTypeName string, usFileSystemR
 	_bQuickFormat := win32.Bool32(bQuickFormat)
 	_bEnableCompression := win32.Bool32(bEnableCompression)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszFileSystemTypeName)), uintptr(usFileSystemRevision), uintptr(ulDesiredUnitAllocationSize), uintptr(unsafe.Pointer(_pwszLabel)), uintptr(_bForce), uintptr(_bQuickFormat), uintptr(_bEnableCompression), uintptr(unsafe.Pointer(ppAsync)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsVolumeMF3: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdsvolumemf3
@@ -2229,7 +2229,7 @@ var IID_IVdsVolumeMF3 = win32.GUID{Data1: 0x6788faf9, Data2: 0x214e, Data3: 0x4b
 // QueryVolumeGuidPathnames dispatches through IVdsVolumeMF3's vtable slot 3.
 func (self *IVdsVolumeMF3) QueryVolumeGuidPathnames(pwszPathArray **foundation.PWSTR, pulNumberOfPaths *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszPathArray)), uintptr(unsafe.Pointer(pulNumberOfPaths)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FormatEx2 dispatches through IVdsVolumeMF3's vtable slot 4.
@@ -2237,13 +2237,13 @@ func (self *IVdsVolumeMF3) FormatEx2(pwszFileSystemTypeName string, usFileSystem
 	_pwszFileSystemTypeName := win32.UTF16Ptr(pwszFileSystemTypeName)
 	_pwszLabel := win32.UTF16Ptr(pwszLabel)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszFileSystemTypeName)), uintptr(usFileSystemRevision), uintptr(ulDesiredUnitAllocationSize), uintptr(unsafe.Pointer(_pwszLabel)), uintptr(Options), uintptr(unsafe.Pointer(ppAsync)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OfflineVolume dispatches through IVdsVolumeMF3's vtable slot 5.
 func (self *IVdsVolumeMF3) OfflineVolume() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsVolumeOnline: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdsvolumeonline
@@ -2258,7 +2258,7 @@ var IID_IVdsVolumeOnline = win32.GUID{Data1: 0x1be2275a, Data2: 0xb315, Data3: 0
 // Online dispatches through IVdsVolumeOnline's vtable slot 3.
 func (self *IVdsVolumeOnline) Online() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsVolumePlex: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdsvolumeplex
@@ -2273,19 +2273,19 @@ var IID_IVdsVolumePlex = win32.GUID{Data1: 0x4daa0135, Data2: 0xe1d1, Data3: 0x4
 // GetProperties dispatches through IVdsVolumePlex's vtable slot 3.
 func (self *IVdsVolumePlex) GetProperties(pPlexProperties *VDS_VOLUME_PLEX_PROP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPlexProperties)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetVolume dispatches through IVdsVolumePlex's vtable slot 4.
 func (self *IVdsVolumePlex) GetVolume(ppVolume **IVdsVolume) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppVolume)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryExtents dispatches through IVdsVolumePlex's vtable slot 5.
 func (self *IVdsVolumePlex) QueryExtents(ppExtentArray **VDS_DISK_EXTENT, plNumberOfExtents *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppExtentArray)), uintptr(unsafe.Pointer(plNumberOfExtents)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Repair dispatches through IVdsVolumePlex's vtable slot 6.
@@ -2295,7 +2295,7 @@ func (self *IVdsVolumePlex) Repair(pInputDiskArray []VDS_INPUT_DISK, ppAsync **I
 		_pInputDiskArray = &pInputDiskArray[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pInputDiskArray)), uintptr(len(pInputDiskArray)), uintptr(unsafe.Pointer(ppAsync)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVdsVolumeShrink: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdsvolumeshrink
@@ -2310,11 +2310,11 @@ var IID_IVdsVolumeShrink = win32.GUID{Data1: 0xd68168c9, Data2: 0x82a2, Data3: 0
 // QueryMaxReclaimableBytes dispatches through IVdsVolumeShrink's vtable slot 3.
 func (self *IVdsVolumeShrink) QueryMaxReclaimableBytes(pullMaxNumberOfReclaimableBytes *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pullMaxNumberOfReclaimableBytes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Shrink dispatches through IVdsVolumeShrink's vtable slot 4.
 func (self *IVdsVolumeShrink) Shrink(ullDesiredNumberOfReclaimableBytes uint64, ullMinNumberOfReclaimableBytes uint64, ppAsync **IVdsAsync) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ullDesiredNumberOfReclaimableBytes), uintptr(ullMinNumberOfReclaimableBytes), uintptr(unsafe.Pointer(ppAsync)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

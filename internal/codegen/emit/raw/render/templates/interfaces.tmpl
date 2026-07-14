@@ -28,10 +28,10 @@ func (self *{{$.TypeName}}) {{.GoName}}({{.ParamStr}}){{with .ReturnSig}} {{.}}{
 	syscall.SyscallN(self.LpVtbl[{{.Slot}}], uintptr(unsafe.Pointer(self)){{range .ArgExprs}}, {{.}}{{end}})
 {{- else if eq .ReturnKind 5}}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[{{.Slot}}], uintptr(unsafe.Pointer(self)){{range .ArgExprs}}, {{.}}{{end}})
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 {{- else if eq .ReturnKind 7}}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[{{.Slot}}], uintptr(unsafe.Pointer(self)){{range .ArgExprs}}, {{.}}{{end}})
-	return {{range .ReturnValues}}{{.}}, {{end}}win32.HRESULTError(int32(r1))
+	return {{range .ReturnValues}}{{.}}, {{end}}win32.ErrIfFailed(int32(r1))
 {{- else}}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[{{.Slot}}], uintptr(unsafe.Pointer(self)){{range .ArgExprs}}, {{.}}{{end}})
 	return {{.RetExpr}}

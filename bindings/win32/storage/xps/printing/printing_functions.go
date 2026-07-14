@@ -34,7 +34,7 @@ func StartXpsPrintJob(printerName string, jobName string, outputFileName string,
 		_printablePagesOn = &printablePagesOn[0]
 	}
 	r1, _, _ := syscall.SyscallN(procStartXpsPrintJob.Addr(), uintptr(unsafe.Pointer(_printerName)), uintptr(unsafe.Pointer(_jobName)), uintptr(unsafe.Pointer(_outputFileName)), uintptr(progressEvent), uintptr(completionEvent), uintptr(unsafe.Pointer(_printablePagesOn)), uintptr(len(printablePagesOn)), uintptr(unsafe.Pointer(xpsPrintJob)), uintptr(unsafe.Pointer(documentStream)), uintptr(unsafe.Pointer(printTicketStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StartXpsPrintJob1 calls XPSPRINT!StartXpsPrintJob1.
@@ -45,5 +45,5 @@ func StartXpsPrintJob1(printerName string, jobName string, outputFileName string
 	_jobName := win32.UTF16Ptr(jobName)
 	_outputFileName := win32.UTF16Ptr(outputFileName)
 	r1, _, _ := syscall.SyscallN(procStartXpsPrintJob1.Addr(), uintptr(unsafe.Pointer(_printerName)), uintptr(unsafe.Pointer(_jobName)), uintptr(unsafe.Pointer(_outputFileName)), uintptr(progressEvent), uintptr(completionEvent), uintptr(unsafe.Pointer(xpsPrintJob)), uintptr(unsafe.Pointer(printContentReceiver)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

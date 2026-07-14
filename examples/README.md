@@ -26,7 +26,7 @@ generated package for each namespace you use, plus the runtime.
 | Package | Import path | What it gives you |
 |---|---|---|
 | **Bindings** | `bindings/win32/<namespace>` | The generated Win32 surface, shaped for Go: Go strings for `PWSTR`, Go `bool` for `BOOL`, `error` for `HRESULT`/`SetLastError`, `[]T` for array+count pairs, `[out,retval]` lifted to return values, `Close<Handle>` helpers, and COM interfaces as method-bearing wrapper types. Every struct, typed constant, and pass-through function lives here too. Each call dispatches through `syscall.SyscallN` inline. |
-| **Runtime** | `bindings/runtime/win32` | Shared, low-level helpers the bindings rely on: `UTF16Ptr`/`UTF16ToString`, `GUID`, `HRESULTError`, `Bool32`. Not a binding — a small toolbox for the boundary. |
+| **Runtime** | `bindings/runtime/win32` | Shared, low-level helpers the bindings rely on: `UTF16Ptr`/`UTF16ToString`, `GUID`, `ErrIfFailed`, `Bool32`. Not a binding — a small toolbox for the boundary. |
 
 The rule of thumb: **import the `bindings/win32/<namespace>` packages you need
 and the runtime.** Everything — the improved signatures and the structs and

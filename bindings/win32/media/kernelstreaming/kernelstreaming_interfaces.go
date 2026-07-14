@@ -26,13 +26,13 @@ var IID_IKsAggregateControl = win32.GUID{Data1: 0x7f40eac0, Data2: 0x3947, Data3
 // KsAddAggregate dispatches through IKsAggregateControl's vtable slot 3.
 func (self *IKsAggregateControl) KsAddAggregate(AggregateClass *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AggregateClass)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KsRemoveAggregate dispatches through IKsAggregateControl's vtable slot 4.
 func (self *IKsAggregateControl) KsRemoveAggregate(AggregateClass *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AggregateClass)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 8da64899-c0d9-11d0-8413-0000f822fe8a
@@ -58,7 +58,7 @@ func (self *IKsAllocator) KsGetAllocatorMode() KSALLOCATORMODE {
 // KsGetAllocatorStatus dispatches through IKsAllocator's vtable slot 5.
 func (self *IKsAllocator) KsGetAllocatorStatus(AllocatorStatus *KSSTREAMALLOCATOR_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AllocatorStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KsSetAllocatorMode dispatches through IKsAllocator's vtable slot 6.
@@ -107,61 +107,61 @@ var IID_IKsClockPropertySet = win32.GUID{Data1: 0x5c5cbd84, Data2: 0xe755, Data3
 // KsGetTime dispatches through IKsClockPropertySet's vtable slot 3.
 func (self *IKsClockPropertySet) KsGetTime(Time *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Time)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KsSetTime dispatches through IKsClockPropertySet's vtable slot 4.
 func (self *IKsClockPropertySet) KsSetTime(Time int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Time))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KsGetPhysicalTime dispatches through IKsClockPropertySet's vtable slot 5.
 func (self *IKsClockPropertySet) KsGetPhysicalTime(Time *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Time)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KsSetPhysicalTime dispatches through IKsClockPropertySet's vtable slot 6.
 func (self *IKsClockPropertySet) KsSetPhysicalTime(Time int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(Time))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KsGetCorrelatedTime dispatches through IKsClockPropertySet's vtable slot 7.
 func (self *IKsClockPropertySet) KsGetCorrelatedTime(CorrelatedTime *KSCORRELATED_TIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CorrelatedTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KsSetCorrelatedTime dispatches through IKsClockPropertySet's vtable slot 8.
 func (self *IKsClockPropertySet) KsSetCorrelatedTime(CorrelatedTime *KSCORRELATED_TIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CorrelatedTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KsGetCorrelatedPhysicalTime dispatches through IKsClockPropertySet's vtable slot 9.
 func (self *IKsClockPropertySet) KsGetCorrelatedPhysicalTime(CorrelatedTime *KSCORRELATED_TIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CorrelatedTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KsSetCorrelatedPhysicalTime dispatches through IKsClockPropertySet's vtable slot 10.
 func (self *IKsClockPropertySet) KsSetCorrelatedPhysicalTime(CorrelatedTime *KSCORRELATED_TIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CorrelatedTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KsGetResolution dispatches through IKsClockPropertySet's vtable slot 11.
 func (self *IKsClockPropertySet) KsGetResolution(Resolution *KSRESOLUTION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Resolution)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KsGetState dispatches through IKsClockPropertySet's vtable slot 12.
 func (self *IKsClockPropertySet) KsGetState(State *KSSTATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(State)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 28f54685-06fd-11d2-b27a-00a0c9223196
@@ -175,19 +175,19 @@ var IID_IKsControl = win32.GUID{Data1: 0x28f54685, Data2: 0x06fd, Data3: 0x11d2,
 // KsProperty dispatches through IKsControl's vtable slot 3.
 func (self *IKsControl) KsProperty(Property *KSIDENTIFIER, PropertyLength uint32, PropertyData unsafe.Pointer, DataLength uint32, BytesReturned *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Property)), uintptr(PropertyLength), uintptr(unsafe.Pointer(PropertyData)), uintptr(DataLength), uintptr(unsafe.Pointer(BytesReturned)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KsMethod dispatches through IKsControl's vtable slot 4.
 func (self *IKsControl) KsMethod(Method *KSIDENTIFIER, MethodLength uint32, MethodData unsafe.Pointer, DataLength uint32, BytesReturned *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Method)), uintptr(MethodLength), uintptr(unsafe.Pointer(MethodData)), uintptr(DataLength), uintptr(unsafe.Pointer(BytesReturned)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KsEvent dispatches through IKsControl's vtable slot 5.
 func (self *IKsControl) KsEvent(Event *KSIDENTIFIER, EventLength uint32, EventData unsafe.Pointer, DataLength uint32, BytesReturned *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Event)), uintptr(EventLength), uintptr(unsafe.Pointer(EventData)), uintptr(DataLength), uintptr(unsafe.Pointer(BytesReturned)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 827d1a0e-0f73-11d2-b27a-00a0c9223196
@@ -201,7 +201,7 @@ var IID_IKsDataTypeCompletion = win32.GUID{Data1: 0x827d1a0e, Data2: 0x0f73, Dat
 // KsCompleteMediaType dispatches through IKsDataTypeCompletion's vtable slot 3.
 func (self *IKsDataTypeCompletion) KsCompleteMediaType(FilterHandle foundation.HANDLE, PinFactoryId uint32, AmMediaType *mediamediafoundation.AM_MEDIA_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(FilterHandle), uintptr(PinFactoryId), uintptr(unsafe.Pointer(AmMediaType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 5ffbaa02-49a3-11d0-9f36-00aa00a216a1
@@ -216,31 +216,31 @@ var IID_IKsDataTypeHandler = win32.GUID{Data1: 0x5ffbaa02, Data2: 0x49a3, Data3:
 func (self *IKsDataTypeHandler) KsCompleteIoOperation(Sample *mediadirectshow.IMediaSample, StreamHeader unsafe.Pointer, IoOperation KSIOOPERATION, Cancelled bool) error {
 	_Cancelled := win32.Bool32(Cancelled)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Sample)), uintptr(unsafe.Pointer(StreamHeader)), uintptr(IoOperation), uintptr(_Cancelled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KsIsMediaTypeInRanges dispatches through IKsDataTypeHandler's vtable slot 4.
 func (self *IKsDataTypeHandler) KsIsMediaTypeInRanges(DataRanges unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(DataRanges)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KsPrepareIoOperation dispatches through IKsDataTypeHandler's vtable slot 5.
 func (self *IKsDataTypeHandler) KsPrepareIoOperation(Sample *mediadirectshow.IMediaSample, StreamHeader unsafe.Pointer, IoOperation KSIOOPERATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Sample)), uintptr(unsafe.Pointer(StreamHeader)), uintptr(IoOperation))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KsQueryExtendedSize dispatches through IKsDataTypeHandler's vtable slot 6.
 func (self *IKsDataTypeHandler) KsQueryExtendedSize(ExtendedSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ExtendedSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KsSetMediaType dispatches through IKsDataTypeHandler's vtable slot 7.
 func (self *IKsDataTypeHandler) KsSetMediaType(AmMediaType *mediamediafoundation.AM_MEDIA_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AmMediaType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IKsFormatSupport: https://learn.microsoft.com/windows/win32/api/devicetopology/nn-devicetopology-iksformatsupport
@@ -255,13 +255,13 @@ var IID_IKsFormatSupport = win32.GUID{Data1: 0x3cb4a69d, Data2: 0xbb6f, Data3: 0
 // IsFormatSupported dispatches through IKsFormatSupport's vtable slot 3.
 func (self *IKsFormatSupport) IsFormatSupported(pKsFormat *KSDATAFORMAT, cbFormat uint32, pbSupported *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pKsFormat)), uintptr(cbFormat), uintptr(unsafe.Pointer(pbSupported)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDevicePreferredFormat dispatches through IKsFormatSupport's vtable slot 4.
 func (self *IKsFormatSupport) GetDevicePreferredFormat(ppKsFormat **KSDATAFORMAT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppKsFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: d3abc7e0-9a61-11d0-a40d-00a0c9223196
@@ -275,19 +275,19 @@ var IID_IKsInterfaceHandler = win32.GUID{Data1: 0xd3abc7e0, Data2: 0x9a61, Data3
 // KsSetPin dispatches through IKsInterfaceHandler's vtable slot 3.
 func (self *IKsInterfaceHandler) KsSetPin(KsPin *IKsPin) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(KsPin)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KsProcessMediaSamples dispatches through IKsInterfaceHandler's vtable slot 4.
 func (self *IKsInterfaceHandler) KsProcessMediaSamples(KsDataTypeHandler *IKsDataTypeHandler, SampleList **mediadirectshow.IMediaSample, SampleCount *int32, IoOperation KSIOOPERATION, StreamSegment **KSSTREAM_SEGMENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(KsDataTypeHandler)), uintptr(unsafe.Pointer(SampleList)), uintptr(unsafe.Pointer(SampleCount)), uintptr(IoOperation), uintptr(unsafe.Pointer(StreamSegment)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KsCompleteIo dispatches through IKsInterfaceHandler's vtable slot 5.
 func (self *IKsInterfaceHandler) KsCompleteIo(StreamSegment *KSSTREAM_SEGMENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(StreamSegment)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: c99af463-d629-4ec4-8c00-e54d68154248
@@ -301,7 +301,7 @@ var IID_IKsJackContainerId = win32.GUID{Data1: 0xc99af463, Data2: 0xd629, Data3:
 // GetJackContainerId dispatches through IKsJackContainerId's vtable slot 3.
 func (self *IKsJackContainerId) GetJackContainerId(pJackContainerId *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pJackContainerId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IKsJackDescription: https://learn.microsoft.com/windows/win32/api/devicetopology/nn-devicetopology-iksjackdescription
@@ -316,13 +316,13 @@ var IID_IKsJackDescription = win32.GUID{Data1: 0x4509f757, Data2: 0x2d46, Data3:
 // GetJackCount dispatches through IKsJackDescription's vtable slot 3.
 func (self *IKsJackDescription) GetJackCount(pcJacks *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcJacks)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetJackDescription dispatches through IKsJackDescription's vtable slot 4.
 func (self *IKsJackDescription) GetJackDescription(nJack uint32, pDescription *KSJACK_DESCRIPTION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(nJack), uintptr(unsafe.Pointer(pDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IKsJackDescription2: https://learn.microsoft.com/windows/win32/api/devicetopology/nn-devicetopology-iksjackdescription2
@@ -337,13 +337,13 @@ var IID_IKsJackDescription2 = win32.GUID{Data1: 0x478f3a9b, Data2: 0xe0c9, Data3
 // GetJackCount dispatches through IKsJackDescription2's vtable slot 3.
 func (self *IKsJackDescription2) GetJackCount(pcJacks *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcJacks)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetJackDescription2 dispatches through IKsJackDescription2's vtable slot 4.
 func (self *IKsJackDescription2) GetJackDescription2(nJack uint32, pDescription2 *KSJACK_DESCRIPTION2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(nJack), uintptr(unsafe.Pointer(pDescription2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: e3f6778b-6660-4cc8-a291-ecc4192d9967
@@ -357,13 +357,13 @@ var IID_IKsJackDescription3 = win32.GUID{Data1: 0xe3f6778b, Data2: 0x6660, Data3
 // GetJackCount dispatches through IKsJackDescription3's vtable slot 3.
 func (self *IKsJackDescription3) GetJackCount(pcJacks *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcJacks)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetJackDescription3 dispatches through IKsJackDescription3's vtable slot 4.
 func (self *IKsJackDescription3) GetJackDescription3(nJack uint32, pDescription3 *KSJACK_DESCRIPTION3) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(nJack), uintptr(unsafe.Pointer(pDescription3)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IKsJackSinkInformation: https://learn.microsoft.com/windows/win32/api/devicetopology/nn-devicetopology-iksjacksinkinformation
@@ -378,7 +378,7 @@ var IID_IKsJackSinkInformation = win32.GUID{Data1: 0xd9bd72ed, Data2: 0x290f, Da
 // GetJackSinkInformation dispatches through IKsJackSinkInformation's vtable slot 3.
 func (self *IKsJackSinkInformation) GetJackSinkInformation(pJackSinkInformation *KSJACK_SINK_INFORMATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pJackSinkInformation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IKsNodeControl: https://learn.microsoft.com/windows/win32/api/vidcap/nn-vidcap-iksnodecontrol
@@ -393,13 +393,13 @@ var IID_IKsNodeControl = win32.GUID{Data1: 0x11737c14, Data2: 0x24a7, Data3: 0x4
 // Put_NodeId dispatches through IKsNodeControl's vtable slot 3.
 func (self *IKsNodeControl) Put_NodeId(dwNodeId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwNodeId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_KsControl dispatches through IKsNodeControl's vtable slot 4.
 func (self *IKsNodeControl) Put_KsControl(pKsControl unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pKsControl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 412bd695-f84b-46c1-ac73-54196dbc8fa7
@@ -413,7 +413,7 @@ var IID_IKsNotifyEvent = win32.GUID{Data1: 0x412bd695, Data2: 0xf84b, Data3: 0x4
 // KsNotifyEvent dispatches through IKsNotifyEvent's vtable slot 3.
 func (self *IKsNotifyEvent) KsNotifyEvent(Event uint32, lParam1 uintptr, lParam2 uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Event), uintptr(lParam1), uintptr(lParam2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 423c13a2-2070-11d0-9ef7-00aa00a216a1
@@ -442,43 +442,43 @@ var IID_IKsPin = win32.GUID{Data1: 0xb61178d1, Data2: 0xa2d9, Data3: 0x11cf, Dat
 // KsQueryMediums dispatches through IKsPin's vtable slot 3.
 func (self *IKsPin) KsQueryMediums(MediumList **KSMULTIPLE_ITEM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(MediumList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KsQueryInterfaces dispatches through IKsPin's vtable slot 4.
 func (self *IKsPin) KsQueryInterfaces(InterfaceList **KSMULTIPLE_ITEM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(InterfaceList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KsCreateSinkPinHandle dispatches through IKsPin's vtable slot 5.
 func (self *IKsPin) KsCreateSinkPinHandle(Interface *KSIDENTIFIER, Medium *KSIDENTIFIER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Interface)), uintptr(unsafe.Pointer(Medium)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KsGetCurrentCommunication dispatches through IKsPin's vtable slot 6.
 func (self *IKsPin) KsGetCurrentCommunication(Communication *KSPIN_COMMUNICATION, Interface *KSIDENTIFIER, Medium *KSIDENTIFIER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Communication)), uintptr(unsafe.Pointer(Interface)), uintptr(unsafe.Pointer(Medium)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KsPropagateAcquire dispatches through IKsPin's vtable slot 7.
 func (self *IKsPin) KsPropagateAcquire() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KsDeliver dispatches through IKsPin's vtable slot 8.
 func (self *IKsPin) KsDeliver(Sample *mediadirectshow.IMediaSample, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Sample)), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KsMediaSamplesCompleted dispatches through IKsPin's vtable slot 9.
 func (self *IKsPin) KsMediaSamplesCompleted(StreamSegment *KSSTREAM_SEGMENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(StreamSegment)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KsPeekAllocator dispatches through IKsPin's vtable slot 10.
@@ -490,13 +490,13 @@ func (self *IKsPin) KsPeekAllocator(Operation KSPEEKOPERATION) *mediadirectshow.
 // KsReceiveAllocator dispatches through IKsPin's vtable slot 11.
 func (self *IKsPin) KsReceiveAllocator(MemAllocator *mediadirectshow.IMemAllocator) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(MemAllocator)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KsRenegotiateAllocator dispatches through IKsPin's vtable slot 12.
 func (self *IKsPin) KsRenegotiateAllocator() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KsIncrementPendingIoCount dispatches through IKsPin's vtable slot 13.
@@ -514,7 +514,7 @@ func (self *IKsPin) KsDecrementPendingIoCount() int32 {
 // KsQualityNotify dispatches through IKsPin's vtable slot 15.
 func (self *IKsPin) KsQualityNotify(Proportion uint32, TimeDelta int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(Proportion), uintptr(TimeDelta))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 7bb38260-d19c-11d2-b38a-00a0c95ec22e
@@ -541,7 +541,7 @@ var IID_IKsPinFactory = win32.GUID{Data1: 0xcd5ebe6b, Data2: 0x8b6e, Data3: 0x11
 // KsPinFactory dispatches through IKsPinFactory's vtable slot 3.
 func (self *IKsPinFactory) KsPinFactory(PinFactory *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PinFactory)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: e539cd90-a8b4-11d1-8189-00a0c9062802
@@ -555,13 +555,13 @@ var IID_IKsPinPipe = win32.GUID{Data1: 0xe539cd90, Data2: 0xa8b4, Data3: 0x11d1,
 // KsGetPinFramingCache dispatches through IKsPinPipe's vtable slot 3.
 func (self *IKsPinPipe) KsGetPinFramingCache(FramingEx **KSALLOCATOR_FRAMING_EX, FramingProp *FRAMING_PROP, Option FRAMING_CACHE_OPS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(FramingEx)), uintptr(unsafe.Pointer(FramingProp)), uintptr(Option))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KsSetPinFramingCache dispatches through IKsPinPipe's vtable slot 4.
 func (self *IKsPinPipe) KsSetPinFramingCache(FramingEx *KSALLOCATOR_FRAMING_EX, FramingProp *FRAMING_PROP, Option FRAMING_CACHE_OPS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(FramingEx)), uintptr(unsafe.Pointer(FramingProp)), uintptr(Option))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KsGetConnectedPin dispatches through IKsPinPipe's vtable slot 5.
@@ -579,7 +579,7 @@ func (self *IKsPinPipe) KsGetPipe(Operation KSPEEKOPERATION) *IKsAllocatorEx {
 // KsSetPipe dispatches through IKsPinPipe's vtable slot 7.
 func (self *IKsPinPipe) KsSetPipe(KsAllocator *IKsAllocatorEx) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(KsAllocator)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KsGetPipeAllocatorFlag dispatches through IKsPinPipe's vtable slot 8.
@@ -591,7 +591,7 @@ func (self *IKsPinPipe) KsGetPipeAllocatorFlag() uint32 {
 // KsSetPipeAllocatorFlag dispatches through IKsPinPipe's vtable slot 9.
 func (self *IKsPinPipe) KsSetPipeAllocatorFlag(Flag uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Flag))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KsGetPinName dispatches through IKsPinPipe's vtable slot 12.
@@ -626,7 +626,7 @@ func (self *IKsPropertySet) Set(guidPropSet *win32.GUID, dwPropID uint32, pInsta
 		_pPropData = &pPropData[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidPropSet)), uintptr(dwPropID), uintptr(unsafe.Pointer(_pInstanceData)), uintptr(len(pInstanceData)), uintptr(unsafe.Pointer(_pPropData)), uintptr(len(pPropData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get dispatches through IKsPropertySet's vtable slot 4.
@@ -640,13 +640,13 @@ func (self *IKsPropertySet) Get(guidPropSet *win32.GUID, dwPropID uint32, pInsta
 		_pPropData = &pPropData[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidPropSet)), uintptr(dwPropID), uintptr(unsafe.Pointer(_pInstanceData)), uintptr(len(pInstanceData)), uintptr(unsafe.Pointer(_pPropData)), uintptr(len(pPropData)), uintptr(unsafe.Pointer(pcbReturned)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QuerySupported dispatches through IKsPropertySet's vtable slot 5.
 func (self *IKsPropertySet) QuerySupported(guidPropSet *win32.GUID, dwPropID uint32, pTypeSupport *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidPropSet)), uintptr(dwPropID), uintptr(unsafe.Pointer(pTypeSupport)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 97ebaacb-95bd-11d0-a3ea-00a0c9223196
@@ -673,7 +673,7 @@ var IID_IKsTopology = win32.GUID{Data1: 0x28f54683, Data2: 0x06fd, Data3: 0x11d2
 // CreateNodeInstance dispatches through IKsTopology's vtable slot 3.
 func (self *IKsTopology) CreateNodeInstance(NodeId uint32, Flags uint32, DesiredAccess uint32, UnkOuter *systemcom.IUnknown, InterfaceId *win32.GUID, Interface *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(NodeId), uintptr(Flags), uintptr(DesiredAccess), uintptr(unsafe.Pointer(UnkOuter)), uintptr(unsafe.Pointer(InterfaceId)), uintptr(unsafe.Pointer(Interface)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IKsTopologyInfo: https://learn.microsoft.com/windows/win32/api/vidcap/nn-vidcap-ikstopologyinfo
@@ -688,47 +688,47 @@ var IID_IKsTopologyInfo = win32.GUID{Data1: 0x720d4ac0, Data2: 0x7533, Data3: 0x
 // Get_NumCategories dispatches through IKsTopologyInfo's vtable slot 3.
 func (self *IKsTopologyInfo) Get_NumCategories(pdwNumCategories *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwNumCategories)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Category dispatches through IKsTopologyInfo's vtable slot 4.
 func (self *IKsTopologyInfo) Get_Category(dwIndex uint32, pCategory *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(pCategory)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NumConnections dispatches through IKsTopologyInfo's vtable slot 5.
 func (self *IKsTopologyInfo) Get_NumConnections(pdwNumConnections *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwNumConnections)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ConnectionInfo dispatches through IKsTopologyInfo's vtable slot 6.
 func (self *IKsTopologyInfo) Get_ConnectionInfo(dwIndex uint32, pConnectionInfo *KSTOPOLOGY_CONNECTION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(pConnectionInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NodeName dispatches through IKsTopologyInfo's vtable slot 7.
 func (self *IKsTopologyInfo) Get_NodeName(dwNodeId uint32, pwchNodeName foundation.PWSTR, dwBufSize uint32, pdwNameLen *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwNodeId), uintptr(unsafe.Pointer(pwchNodeName)), uintptr(dwBufSize), uintptr(unsafe.Pointer(pdwNameLen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NumNodes dispatches through IKsTopologyInfo's vtable slot 8.
 func (self *IKsTopologyInfo) Get_NumNodes(pdwNumNodes *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwNumNodes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NodeType dispatches through IKsTopologyInfo's vtable slot 9.
 func (self *IKsTopologyInfo) Get_NodeType(dwNodeId uint32, pNodeType *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwNodeId), uintptr(unsafe.Pointer(pNodeType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateNodeInstance dispatches through IKsTopologyInfo's vtable slot 10.
 func (self *IKsTopologyInfo) CreateNodeInstance(dwNodeId uint32, iid *win32.GUID, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(dwNodeId), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(ppvObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

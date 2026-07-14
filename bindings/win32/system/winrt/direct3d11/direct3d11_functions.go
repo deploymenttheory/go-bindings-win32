@@ -26,12 +26,12 @@ var (
 // https://learn.microsoft.com/windows/win32/api/windows.graphics.directx.direct3d11.interop/nf-windows-graphics-directx-direct3d11-interop-createdirect3d11devicefromdxgidevice
 func CreateDirect3D11DeviceFromDXGIDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, graphicsDevice **systemwinrt.IInspectable) error {
 	r1, _, _ := syscall.SyscallN(procCreateDirect3D11DeviceFromDXGIDevice.Addr(), uintptr(unsafe.Pointer(dxgiDevice)), uintptr(unsafe.Pointer(graphicsDevice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateDirect3D11SurfaceFromDXGISurface calls d3d11!CreateDirect3D11SurfaceFromDXGISurface.
 // https://learn.microsoft.com/windows/win32/api/windows.graphics.directx.direct3d11.interop/nf-windows-graphics-directx-direct3d11-interop-createdirect3d11surfacefromdxgisurface
 func CreateDirect3D11SurfaceFromDXGISurface(dgxiSurface *graphicsdxgi.IDXGISurface, graphicsSurface **systemwinrt.IInspectable) error {
 	r1, _, _ := syscall.SyscallN(procCreateDirect3D11SurfaceFromDXGISurface.Addr(), uintptr(unsafe.Pointer(dgxiSurface)), uintptr(unsafe.Pointer(graphicsSurface)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

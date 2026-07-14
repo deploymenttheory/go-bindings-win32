@@ -98,7 +98,7 @@ var (
 func HcsAddResourceToOperation(operation HCS_OPERATION, type_ HCS_RESOURCE_TYPE, uri string, handle foundation.HANDLE) error {
 	_uri := win32.UTF16Ptr(uri)
 	r1, _, _ := syscall.SyscallN(procHcsAddResourceToOperation.Addr(), uintptr(operation), uintptr(type_), uintptr(unsafe.Pointer(_uri)), uintptr(handle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsAttachLayerStorageFilter calls computestorage!HcsAttachLayerStorageFilter.
@@ -107,7 +107,7 @@ func HcsAttachLayerStorageFilter(layerPath string, layerData string) error {
 	_layerPath := win32.UTF16Ptr(layerPath)
 	_layerData := win32.UTF16Ptr(layerData)
 	r1, _, _ := syscall.SyscallN(procHcsAttachLayerStorageFilter.Addr(), uintptr(unsafe.Pointer(_layerPath)), uintptr(unsafe.Pointer(_layerData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsAttachOverlayFilter calls computestorage!HcsAttachOverlayFilter.
@@ -115,14 +115,14 @@ func HcsAttachOverlayFilter(VolumeMountPoint string, LayerData string) error {
 	_VolumeMountPoint := win32.UTF16Ptr(VolumeMountPoint)
 	_LayerData := win32.UTF16Ptr(LayerData)
 	r1, _, _ := syscall.SyscallN(procHcsAttachOverlayFilter.Addr(), uintptr(unsafe.Pointer(_VolumeMountPoint)), uintptr(unsafe.Pointer(_LayerData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsCancelOperation calls computecore!HcsCancelOperation.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/HcsCancelOperation
 func HcsCancelOperation(operation HCS_OPERATION) error {
 	r1, _, _ := syscall.SyscallN(procHcsCancelOperation.Addr(), uintptr(operation))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsCloseComputeSystem calls computecore!HcsCloseComputeSystem.
@@ -148,7 +148,7 @@ func HcsCloseProcess(process HCS_PROCESS) {
 func HcsCrashComputeSystem(computeSystem HCS_SYSTEM, operation HCS_OPERATION, options string) error {
 	_options := win32.UTF16Ptr(options)
 	r1, _, _ := syscall.SyscallN(procHcsCrashComputeSystem.Addr(), uintptr(computeSystem), uintptr(operation), uintptr(unsafe.Pointer(_options)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsCreateComputeSystem calls computecore!HcsCreateComputeSystem.
@@ -157,7 +157,7 @@ func HcsCreateComputeSystem(id string, configuration string, operation HCS_OPERA
 	_id := win32.UTF16Ptr(id)
 	_configuration := win32.UTF16Ptr(configuration)
 	r1, _, _ := syscall.SyscallN(procHcsCreateComputeSystem.Addr(), uintptr(unsafe.Pointer(_id)), uintptr(unsafe.Pointer(_configuration)), uintptr(operation), uintptr(unsafe.Pointer(securityDescriptor)), uintptr(unsafe.Pointer(computeSystem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsCreateComputeSystemInNamespace calls computecore!HcsCreateComputeSystemInNamespace.
@@ -166,7 +166,7 @@ func HcsCreateComputeSystemInNamespace(idNamespace string, id string, configurat
 	_id := win32.UTF16Ptr(id)
 	_configuration := win32.UTF16Ptr(configuration)
 	r1, _, _ := syscall.SyscallN(procHcsCreateComputeSystemInNamespace.Addr(), uintptr(unsafe.Pointer(_idNamespace)), uintptr(unsafe.Pointer(_id)), uintptr(unsafe.Pointer(_configuration)), uintptr(operation), uintptr(unsafe.Pointer(options)), uintptr(unsafe.Pointer(computeSystem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsCreateEmptyGuestStateFile calls computecore!HcsCreateEmptyGuestStateFile.
@@ -174,14 +174,14 @@ func HcsCreateComputeSystemInNamespace(idNamespace string, id string, configurat
 func HcsCreateEmptyGuestStateFile(guestStateFilePath string) error {
 	_guestStateFilePath := win32.UTF16Ptr(guestStateFilePath)
 	r1, _, _ := syscall.SyscallN(procHcsCreateEmptyGuestStateFile.Addr(), uintptr(unsafe.Pointer(_guestStateFilePath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsCreateEmptyRuntimeStateFile calls computecore!HcsCreateEmptyRuntimeStateFile.
 func HcsCreateEmptyRuntimeStateFile(runtimeStateFilePath string) error {
 	_runtimeStateFilePath := win32.UTF16Ptr(runtimeStateFilePath)
 	r1, _, _ := syscall.SyscallN(procHcsCreateEmptyRuntimeStateFile.Addr(), uintptr(unsafe.Pointer(_runtimeStateFilePath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsCreateOperation calls computecore!HcsCreateOperation.
@@ -202,7 +202,7 @@ func HcsCreateOperationWithNotifications(eventTypes HCS_OPERATION_OPTIONS, conte
 func HcsCreateProcess(computeSystem HCS_SYSTEM, processParameters string, operation HCS_OPERATION, securityDescriptor *security.SECURITY_DESCRIPTOR, process *HCS_PROCESS) error {
 	_processParameters := win32.UTF16Ptr(processParameters)
 	r1, _, _ := syscall.SyscallN(procHcsCreateProcess.Addr(), uintptr(computeSystem), uintptr(unsafe.Pointer(_processParameters)), uintptr(operation), uintptr(unsafe.Pointer(securityDescriptor)), uintptr(unsafe.Pointer(process)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsDestroyLayer calls computestorage!HcsDestroyLayer.
@@ -210,7 +210,7 @@ func HcsCreateProcess(computeSystem HCS_SYSTEM, processParameters string, operat
 func HcsDestroyLayer(layerPath string) error {
 	_layerPath := win32.UTF16Ptr(layerPath)
 	r1, _, _ := syscall.SyscallN(procHcsDestroyLayer.Addr(), uintptr(unsafe.Pointer(_layerPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsDetachLayerStorageFilter calls computestorage!HcsDetachLayerStorageFilter.
@@ -218,7 +218,7 @@ func HcsDestroyLayer(layerPath string) error {
 func HcsDetachLayerStorageFilter(layerPath string) error {
 	_layerPath := win32.UTF16Ptr(layerPath)
 	r1, _, _ := syscall.SyscallN(procHcsDetachLayerStorageFilter.Addr(), uintptr(unsafe.Pointer(_layerPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsDetachOverlayFilter calls computestorage!HcsDetachOverlayFilter.
@@ -226,7 +226,7 @@ func HcsDetachOverlayFilter(VolumeMountPoint string, LayerData string) error {
 	_VolumeMountPoint := win32.UTF16Ptr(VolumeMountPoint)
 	_LayerData := win32.UTF16Ptr(LayerData)
 	r1, _, _ := syscall.SyscallN(procHcsDetachOverlayFilter.Addr(), uintptr(unsafe.Pointer(_VolumeMountPoint)), uintptr(unsafe.Pointer(_LayerData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsEnumerateComputeSystems calls computecore!HcsEnumerateComputeSystems.
@@ -234,7 +234,7 @@ func HcsDetachOverlayFilter(VolumeMountPoint string, LayerData string) error {
 func HcsEnumerateComputeSystems(query string, operation HCS_OPERATION) error {
 	_query := win32.UTF16Ptr(query)
 	r1, _, _ := syscall.SyscallN(procHcsEnumerateComputeSystems.Addr(), uintptr(unsafe.Pointer(_query)), uintptr(operation))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsEnumerateComputeSystemsInNamespace calls computecore!HcsEnumerateComputeSystemsInNamespace.
@@ -242,7 +242,7 @@ func HcsEnumerateComputeSystemsInNamespace(idNamespace string, query string, ope
 	_idNamespace := win32.UTF16Ptr(idNamespace)
 	_query := win32.UTF16Ptr(query)
 	r1, _, _ := syscall.SyscallN(procHcsEnumerateComputeSystemsInNamespace.Addr(), uintptr(unsafe.Pointer(_idNamespace)), uintptr(unsafe.Pointer(_query)), uintptr(operation))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsExportLayer calls computestorage!HcsExportLayer.
@@ -253,7 +253,7 @@ func HcsExportLayer(layerPath string, exportFolderPath string, layerData string,
 	_layerData := win32.UTF16Ptr(layerData)
 	_options := win32.UTF16Ptr(options)
 	r1, _, _ := syscall.SyscallN(procHcsExportLayer.Addr(), uintptr(unsafe.Pointer(_layerPath)), uintptr(unsafe.Pointer(_exportFolderPath)), uintptr(unsafe.Pointer(_layerData)), uintptr(unsafe.Pointer(_options)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsExportLegacyWritableLayer calls computestorage!HcsExportLegacyWritableLayer.
@@ -264,21 +264,21 @@ func HcsExportLegacyWritableLayer(writableLayerMountPath string, writableLayerFo
 	_exportFolderPath := win32.UTF16Ptr(exportFolderPath)
 	_layerData := win32.UTF16Ptr(layerData)
 	r1, _, _ := syscall.SyscallN(procHcsExportLegacyWritableLayer.Addr(), uintptr(unsafe.Pointer(_writableLayerMountPath)), uintptr(unsafe.Pointer(_writableLayerFolderPath)), uintptr(unsafe.Pointer(_exportFolderPath)), uintptr(unsafe.Pointer(_layerData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsFinalizeLiveMigration calls computecore!HcsFinalizeLiveMigration.
 func HcsFinalizeLiveMigration(computeSystem HCS_SYSTEM, operation HCS_OPERATION, options string) error {
 	_options := win32.UTF16Ptr(options)
 	r1, _, _ := syscall.SyscallN(procHcsFinalizeLiveMigration.Addr(), uintptr(computeSystem), uintptr(operation), uintptr(unsafe.Pointer(_options)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsFormatWritableLayerVhd calls computestorage!HcsFormatWritableLayerVhd.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/HcsFormatWritableLayerVhd
 func HcsFormatWritableLayerVhd(vhdHandle foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procHcsFormatWritableLayerVhd.Addr(), uintptr(vhdHandle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsGetComputeSystemFromOperation calls computecore!HcsGetComputeSystemFromOperation.
@@ -293,14 +293,14 @@ func HcsGetComputeSystemFromOperation(operation HCS_OPERATION) HCS_SYSTEM {
 func HcsGetComputeSystemProperties(computeSystem HCS_SYSTEM, operation HCS_OPERATION, propertyQuery string) error {
 	_propertyQuery := win32.UTF16Ptr(propertyQuery)
 	r1, _, _ := syscall.SyscallN(procHcsGetComputeSystemProperties.Addr(), uintptr(computeSystem), uintptr(operation), uintptr(unsafe.Pointer(_propertyQuery)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsGetLayerVhdMountPath calls computestorage!HcsGetLayerVhdMountPath.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/HcsGetLayerVhdMountPath
 func HcsGetLayerVhdMountPath(vhdHandle foundation.HANDLE, mountPath *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procHcsGetLayerVhdMountPath.Addr(), uintptr(vhdHandle), uintptr(unsafe.Pointer(mountPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsGetOperationContext calls computecore!HcsGetOperationContext.
@@ -321,21 +321,21 @@ func HcsGetOperationId(operation HCS_OPERATION) uint64 {
 func HcsGetOperationProperties(operation HCS_OPERATION, options string, resultDocument *foundation.PWSTR) error {
 	_options := win32.UTF16Ptr(options)
 	r1, _, _ := syscall.SyscallN(procHcsGetOperationProperties.Addr(), uintptr(operation), uintptr(unsafe.Pointer(_options)), uintptr(unsafe.Pointer(resultDocument)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsGetOperationResult calls computecore!HcsGetOperationResult.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/HcsGetOperationResult
 func HcsGetOperationResult(operation HCS_OPERATION, resultDocument *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procHcsGetOperationResult.Addr(), uintptr(operation), uintptr(unsafe.Pointer(resultDocument)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsGetOperationResultAndProcessInfo calls computecore!HcsGetOperationResultAndProcessInfo.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/HcsGetOperationResultAndProcessInfo
 func HcsGetOperationResultAndProcessInfo(operation HCS_OPERATION, processInformation *HCS_PROCESS_INFORMATION, resultDocument *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procHcsGetOperationResultAndProcessInfo.Addr(), uintptr(operation), uintptr(unsafe.Pointer(processInformation)), uintptr(unsafe.Pointer(resultDocument)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsGetOperationType calls computecore!HcsGetOperationType.
@@ -356,7 +356,7 @@ func HcsGetProcessFromOperation(operation HCS_OPERATION) HCS_PROCESS {
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/HcsGetProcessInfo
 func HcsGetProcessInfo(process HCS_PROCESS, operation HCS_OPERATION) error {
 	r1, _, _ := syscall.SyscallN(procHcsGetProcessInfo.Addr(), uintptr(process), uintptr(operation))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsGetProcessProperties calls computecore!HcsGetProcessProperties.
@@ -364,7 +364,7 @@ func HcsGetProcessInfo(process HCS_PROCESS, operation HCS_OPERATION) error {
 func HcsGetProcessProperties(process HCS_PROCESS, operation HCS_OPERATION, propertyQuery string) error {
 	_propertyQuery := win32.UTF16Ptr(propertyQuery)
 	r1, _, _ := syscall.SyscallN(procHcsGetProcessProperties.Addr(), uintptr(process), uintptr(operation), uintptr(unsafe.Pointer(_propertyQuery)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsGetProcessorCompatibilityFromSavedState calls computecore!HcsGetProcessorCompatibilityFromSavedState.
@@ -372,7 +372,7 @@ func HcsGetProcessProperties(process HCS_PROCESS, operation HCS_OPERATION, prope
 func HcsGetProcessorCompatibilityFromSavedState(RuntimeFileName string, ProcessorFeaturesString *foundation.PWSTR) error {
 	_RuntimeFileName := win32.UTF16Ptr(RuntimeFileName)
 	r1, _, _ := syscall.SyscallN(procHcsGetProcessorCompatibilityFromSavedState.Addr(), uintptr(unsafe.Pointer(_RuntimeFileName)), uintptr(unsafe.Pointer(ProcessorFeaturesString)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsGetServiceProperties calls computecore!HcsGetServiceProperties.
@@ -380,7 +380,7 @@ func HcsGetProcessorCompatibilityFromSavedState(RuntimeFileName string, Processo
 func HcsGetServiceProperties(propertyQuery string, result *foundation.PWSTR) error {
 	_propertyQuery := win32.UTF16Ptr(propertyQuery)
 	r1, _, _ := syscall.SyscallN(procHcsGetServiceProperties.Addr(), uintptr(unsafe.Pointer(_propertyQuery)), uintptr(unsafe.Pointer(result)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsGrantVmAccess calls computecore!HcsGrantVmAccess.
@@ -389,7 +389,7 @@ func HcsGrantVmAccess(vmId string, filePath string) error {
 	_vmId := win32.UTF16Ptr(vmId)
 	_filePath := win32.UTF16Ptr(filePath)
 	r1, _, _ := syscall.SyscallN(procHcsGrantVmAccess.Addr(), uintptr(unsafe.Pointer(_vmId)), uintptr(unsafe.Pointer(_filePath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsGrantVmGroupAccess calls computecore!HcsGrantVmGroupAccess.
@@ -397,7 +397,7 @@ func HcsGrantVmAccess(vmId string, filePath string) error {
 func HcsGrantVmGroupAccess(filePath string) error {
 	_filePath := win32.UTF16Ptr(filePath)
 	r1, _, _ := syscall.SyscallN(procHcsGrantVmGroupAccess.Addr(), uintptr(unsafe.Pointer(_filePath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsImportLayer calls computestorage!HcsImportLayer.
@@ -407,7 +407,7 @@ func HcsImportLayer(layerPath string, sourceFolderPath string, layerData string)
 	_sourceFolderPath := win32.UTF16Ptr(sourceFolderPath)
 	_layerData := win32.UTF16Ptr(layerData)
 	r1, _, _ := syscall.SyscallN(procHcsImportLayer.Addr(), uintptr(unsafe.Pointer(_layerPath)), uintptr(unsafe.Pointer(_sourceFolderPath)), uintptr(unsafe.Pointer(_layerData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsInitializeLegacyWritableLayer calls computestorage!HcsInitializeLegacyWritableLayer.
@@ -418,14 +418,14 @@ func HcsInitializeLegacyWritableLayer(writableLayerMountPath string, writableLay
 	_layerData := win32.UTF16Ptr(layerData)
 	_options := win32.UTF16Ptr(options)
 	r1, _, _ := syscall.SyscallN(procHcsInitializeLegacyWritableLayer.Addr(), uintptr(unsafe.Pointer(_writableLayerMountPath)), uintptr(unsafe.Pointer(_writableLayerFolderPath)), uintptr(unsafe.Pointer(_layerData)), uintptr(unsafe.Pointer(_options)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsInitializeLiveMigrationOnSource calls computecore!HcsInitializeLiveMigrationOnSource.
 func HcsInitializeLiveMigrationOnSource(computeSystem HCS_SYSTEM, operation HCS_OPERATION, options string) error {
 	_options := win32.UTF16Ptr(options)
 	r1, _, _ := syscall.SyscallN(procHcsInitializeLiveMigrationOnSource.Addr(), uintptr(computeSystem), uintptr(operation), uintptr(unsafe.Pointer(_options)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsInitializeWritableLayer calls computestorage!HcsInitializeWritableLayer.
@@ -435,7 +435,7 @@ func HcsInitializeWritableLayer(writableLayerPath string, layerData string, opti
 	_layerData := win32.UTF16Ptr(layerData)
 	_options := win32.UTF16Ptr(options)
 	r1, _, _ := syscall.SyscallN(procHcsInitializeWritableLayer.Addr(), uintptr(unsafe.Pointer(_writableLayerPath)), uintptr(unsafe.Pointer(_layerData)), uintptr(unsafe.Pointer(_options)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsModifyComputeSystem calls computecore!HcsModifyComputeSystem.
@@ -443,7 +443,7 @@ func HcsInitializeWritableLayer(writableLayerPath string, layerData string, opti
 func HcsModifyComputeSystem(computeSystem HCS_SYSTEM, operation HCS_OPERATION, configuration string, identity foundation.HANDLE) error {
 	_configuration := win32.UTF16Ptr(configuration)
 	r1, _, _ := syscall.SyscallN(procHcsModifyComputeSystem.Addr(), uintptr(computeSystem), uintptr(operation), uintptr(unsafe.Pointer(_configuration)), uintptr(identity))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsModifyProcess calls computecore!HcsModifyProcess.
@@ -451,7 +451,7 @@ func HcsModifyComputeSystem(computeSystem HCS_SYSTEM, operation HCS_OPERATION, c
 func HcsModifyProcess(process HCS_PROCESS, operation HCS_OPERATION, settings string) error {
 	_settings := win32.UTF16Ptr(settings)
 	r1, _, _ := syscall.SyscallN(procHcsModifyProcess.Addr(), uintptr(process), uintptr(operation), uintptr(unsafe.Pointer(_settings)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsModifyServiceSettings calls computecore!HcsModifyServiceSettings.
@@ -459,7 +459,7 @@ func HcsModifyProcess(process HCS_PROCESS, operation HCS_OPERATION, settings str
 func HcsModifyServiceSettings(settings string, result *foundation.PWSTR) error {
 	_settings := win32.UTF16Ptr(settings)
 	r1, _, _ := syscall.SyscallN(procHcsModifyServiceSettings.Addr(), uintptr(unsafe.Pointer(_settings)), uintptr(unsafe.Pointer(result)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsOpenComputeSystem calls computecore!HcsOpenComputeSystem.
@@ -467,7 +467,7 @@ func HcsModifyServiceSettings(settings string, result *foundation.PWSTR) error {
 func HcsOpenComputeSystem(id string, requestedAccess uint32, computeSystem *HCS_SYSTEM) error {
 	_id := win32.UTF16Ptr(id)
 	r1, _, _ := syscall.SyscallN(procHcsOpenComputeSystem.Addr(), uintptr(unsafe.Pointer(_id)), uintptr(requestedAccess), uintptr(unsafe.Pointer(computeSystem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsOpenComputeSystemInNamespace calls computecore!HcsOpenComputeSystemInNamespace.
@@ -475,14 +475,14 @@ func HcsOpenComputeSystemInNamespace(idNamespace string, id string, requestedAcc
 	_idNamespace := win32.UTF16Ptr(idNamespace)
 	_id := win32.UTF16Ptr(id)
 	r1, _, _ := syscall.SyscallN(procHcsOpenComputeSystemInNamespace.Addr(), uintptr(unsafe.Pointer(_idNamespace)), uintptr(unsafe.Pointer(_id)), uintptr(requestedAccess), uintptr(unsafe.Pointer(computeSystem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsOpenProcess calls computecore!HcsOpenProcess.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/HcsOpenProcess
 func HcsOpenProcess(computeSystem HCS_SYSTEM, processId uint32, requestedAccess uint32, process *HCS_PROCESS) error {
 	r1, _, _ := syscall.SyscallN(procHcsOpenProcess.Addr(), uintptr(computeSystem), uintptr(processId), uintptr(requestedAccess), uintptr(unsafe.Pointer(process)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsPauseComputeSystem calls computecore!HcsPauseComputeSystem.
@@ -490,7 +490,7 @@ func HcsOpenProcess(computeSystem HCS_SYSTEM, processId uint32, requestedAccess 
 func HcsPauseComputeSystem(computeSystem HCS_SYSTEM, operation HCS_OPERATION, options string) error {
 	_options := win32.UTF16Ptr(options)
 	r1, _, _ := syscall.SyscallN(procHcsPauseComputeSystem.Addr(), uintptr(computeSystem), uintptr(operation), uintptr(unsafe.Pointer(_options)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsResumeComputeSystem calls computecore!HcsResumeComputeSystem.
@@ -498,7 +498,7 @@ func HcsPauseComputeSystem(computeSystem HCS_SYSTEM, operation HCS_OPERATION, op
 func HcsResumeComputeSystem(computeSystem HCS_SYSTEM, operation HCS_OPERATION, options string) error {
 	_options := win32.UTF16Ptr(options)
 	r1, _, _ := syscall.SyscallN(procHcsResumeComputeSystem.Addr(), uintptr(computeSystem), uintptr(operation), uintptr(unsafe.Pointer(_options)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsRevokeVmAccess calls computecore!HcsRevokeVmAccess.
@@ -507,7 +507,7 @@ func HcsRevokeVmAccess(vmId string, filePath string) error {
 	_vmId := win32.UTF16Ptr(vmId)
 	_filePath := win32.UTF16Ptr(filePath)
 	r1, _, _ := syscall.SyscallN(procHcsRevokeVmAccess.Addr(), uintptr(unsafe.Pointer(_vmId)), uintptr(unsafe.Pointer(_filePath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsRevokeVmGroupAccess calls computecore!HcsRevokeVmGroupAccess.
@@ -515,7 +515,7 @@ func HcsRevokeVmAccess(vmId string, filePath string) error {
 func HcsRevokeVmGroupAccess(filePath string) error {
 	_filePath := win32.UTF16Ptr(filePath)
 	r1, _, _ := syscall.SyscallN(procHcsRevokeVmGroupAccess.Addr(), uintptr(unsafe.Pointer(_filePath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsSaveComputeSystem calls computecore!HcsSaveComputeSystem.
@@ -523,35 +523,35 @@ func HcsRevokeVmGroupAccess(filePath string) error {
 func HcsSaveComputeSystem(computeSystem HCS_SYSTEM, operation HCS_OPERATION, options string) error {
 	_options := win32.UTF16Ptr(options)
 	r1, _, _ := syscall.SyscallN(procHcsSaveComputeSystem.Addr(), uintptr(computeSystem), uintptr(operation), uintptr(unsafe.Pointer(_options)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsSetComputeSystemCallback calls computecore!HcsSetComputeSystemCallback.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/HcsSetComputeSystemCallback
 func HcsSetComputeSystemCallback(computeSystem HCS_SYSTEM, callbackOptions HCS_EVENT_OPTIONS, context unsafe.Pointer, callback HCS_EVENT_CALLBACK) error {
 	r1, _, _ := syscall.SyscallN(procHcsSetComputeSystemCallback.Addr(), uintptr(computeSystem), uintptr(callbackOptions), uintptr(unsafe.Pointer(context)), uintptr(callback))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsSetOperationCallback calls computecore!HcsSetOperationCallback.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/HcsSetOperationCallback
 func HcsSetOperationCallback(operation HCS_OPERATION, context unsafe.Pointer, callback HCS_OPERATION_COMPLETION) error {
 	r1, _, _ := syscall.SyscallN(procHcsSetOperationCallback.Addr(), uintptr(operation), uintptr(unsafe.Pointer(context)), uintptr(callback))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsSetOperationContext calls computecore!HcsSetOperationContext.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/HcsSetOperationContext
 func HcsSetOperationContext(operation HCS_OPERATION, context unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procHcsSetOperationContext.Addr(), uintptr(operation), uintptr(unsafe.Pointer(context)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsSetProcessCallback calls computecore!HcsSetProcessCallback.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/HcsSetProcessCallback
 func HcsSetProcessCallback(process HCS_PROCESS, callbackOptions HCS_EVENT_OPTIONS, context unsafe.Pointer, callback HCS_EVENT_CALLBACK) error {
 	r1, _, _ := syscall.SyscallN(procHcsSetProcessCallback.Addr(), uintptr(process), uintptr(callbackOptions), uintptr(unsafe.Pointer(context)), uintptr(callback))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsSetupBaseOSLayer calls computestorage!HcsSetupBaseOSLayer.
@@ -560,7 +560,7 @@ func HcsSetupBaseOSLayer(layerPath string, vhdHandle foundation.HANDLE, options 
 	_layerPath := win32.UTF16Ptr(layerPath)
 	_options := win32.UTF16Ptr(options)
 	r1, _, _ := syscall.SyscallN(procHcsSetupBaseOSLayer.Addr(), uintptr(unsafe.Pointer(_layerPath)), uintptr(vhdHandle), uintptr(unsafe.Pointer(_options)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsSetupBaseOSVolume calls computestorage!HcsSetupBaseOSVolume.
@@ -570,7 +570,7 @@ func HcsSetupBaseOSVolume(layerPath string, volumePath string, options string) e
 	_volumePath := win32.UTF16Ptr(volumePath)
 	_options := win32.UTF16Ptr(options)
 	r1, _, _ := syscall.SyscallN(procHcsSetupBaseOSVolume.Addr(), uintptr(unsafe.Pointer(_layerPath)), uintptr(unsafe.Pointer(_volumePath)), uintptr(unsafe.Pointer(_options)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsShutDownComputeSystem calls computecore!HcsShutDownComputeSystem.
@@ -578,7 +578,7 @@ func HcsSetupBaseOSVolume(layerPath string, volumePath string, options string) e
 func HcsShutDownComputeSystem(computeSystem HCS_SYSTEM, operation HCS_OPERATION, options string) error {
 	_options := win32.UTF16Ptr(options)
 	r1, _, _ := syscall.SyscallN(procHcsShutDownComputeSystem.Addr(), uintptr(computeSystem), uintptr(operation), uintptr(unsafe.Pointer(_options)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsSignalProcess calls computecore!HcsSignalProcess.
@@ -586,7 +586,7 @@ func HcsShutDownComputeSystem(computeSystem HCS_SYSTEM, operation HCS_OPERATION,
 func HcsSignalProcess(process HCS_PROCESS, operation HCS_OPERATION, options string) error {
 	_options := win32.UTF16Ptr(options)
 	r1, _, _ := syscall.SyscallN(procHcsSignalProcess.Addr(), uintptr(process), uintptr(operation), uintptr(unsafe.Pointer(_options)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsStartComputeSystem calls computecore!HcsStartComputeSystem.
@@ -594,21 +594,21 @@ func HcsSignalProcess(process HCS_PROCESS, operation HCS_OPERATION, options stri
 func HcsStartComputeSystem(computeSystem HCS_SYSTEM, operation HCS_OPERATION, options string) error {
 	_options := win32.UTF16Ptr(options)
 	r1, _, _ := syscall.SyscallN(procHcsStartComputeSystem.Addr(), uintptr(computeSystem), uintptr(operation), uintptr(unsafe.Pointer(_options)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsStartLiveMigrationOnSource calls computecore!HcsStartLiveMigrationOnSource.
 func HcsStartLiveMigrationOnSource(computeSystem HCS_SYSTEM, operation HCS_OPERATION, options string) error {
 	_options := win32.UTF16Ptr(options)
 	r1, _, _ := syscall.SyscallN(procHcsStartLiveMigrationOnSource.Addr(), uintptr(computeSystem), uintptr(operation), uintptr(unsafe.Pointer(_options)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsStartLiveMigrationTransfer calls computecore!HcsStartLiveMigrationTransfer.
 func HcsStartLiveMigrationTransfer(computeSystem HCS_SYSTEM, operation HCS_OPERATION, options string) error {
 	_options := win32.UTF16Ptr(options)
 	r1, _, _ := syscall.SyscallN(procHcsStartLiveMigrationTransfer.Addr(), uintptr(computeSystem), uintptr(operation), uintptr(unsafe.Pointer(_options)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsSubmitWerReport calls computecore!HcsSubmitWerReport.
@@ -616,7 +616,7 @@ func HcsStartLiveMigrationTransfer(computeSystem HCS_SYSTEM, operation HCS_OPERA
 func HcsSubmitWerReport(settings string) error {
 	_settings := win32.UTF16Ptr(settings)
 	r1, _, _ := syscall.SyscallN(procHcsSubmitWerReport.Addr(), uintptr(unsafe.Pointer(_settings)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsTerminateComputeSystem calls computecore!HcsTerminateComputeSystem.
@@ -624,7 +624,7 @@ func HcsSubmitWerReport(settings string) error {
 func HcsTerminateComputeSystem(computeSystem HCS_SYSTEM, operation HCS_OPERATION, options string) error {
 	_options := win32.UTF16Ptr(options)
 	r1, _, _ := syscall.SyscallN(procHcsTerminateComputeSystem.Addr(), uintptr(computeSystem), uintptr(operation), uintptr(unsafe.Pointer(_options)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsTerminateProcess calls computecore!HcsTerminateProcess.
@@ -632,33 +632,33 @@ func HcsTerminateComputeSystem(computeSystem HCS_SYSTEM, operation HCS_OPERATION
 func HcsTerminateProcess(process HCS_PROCESS, operation HCS_OPERATION, options string) error {
 	_options := win32.UTF16Ptr(options)
 	r1, _, _ := syscall.SyscallN(procHcsTerminateProcess.Addr(), uintptr(process), uintptr(operation), uintptr(unsafe.Pointer(_options)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsWaitForComputeSystemExit calls computecore!HcsWaitForComputeSystemExit.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/HcsWaitForComputeSystemExit
 func HcsWaitForComputeSystemExit(computeSystem HCS_SYSTEM, timeoutMs uint32, result *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procHcsWaitForComputeSystemExit.Addr(), uintptr(computeSystem), uintptr(timeoutMs), uintptr(unsafe.Pointer(result)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsWaitForOperationResult calls computecore!HcsWaitForOperationResult.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/HcsWaitForOperationResult
 func HcsWaitForOperationResult(operation HCS_OPERATION, timeoutMs uint32, resultDocument *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procHcsWaitForOperationResult.Addr(), uintptr(operation), uintptr(timeoutMs), uintptr(unsafe.Pointer(resultDocument)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsWaitForOperationResultAndProcessInfo calls computecore!HcsWaitForOperationResultAndProcessInfo.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/HcsWaitForOperationResultAndProcessInfo
 func HcsWaitForOperationResultAndProcessInfo(operation HCS_OPERATION, timeoutMs uint32, processInformation *HCS_PROCESS_INFORMATION, resultDocument *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procHcsWaitForOperationResultAndProcessInfo.Addr(), uintptr(operation), uintptr(timeoutMs), uintptr(unsafe.Pointer(processInformation)), uintptr(unsafe.Pointer(resultDocument)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsWaitForProcessExit calls computecore!HcsWaitForProcessExit.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/HcsWaitForProcessExit
 func HcsWaitForProcessExit(computeSystem HCS_PROCESS, timeoutMs uint32, result *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procHcsWaitForProcessExit.Addr(), uintptr(computeSystem), uintptr(timeoutMs), uintptr(unsafe.Pointer(result)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

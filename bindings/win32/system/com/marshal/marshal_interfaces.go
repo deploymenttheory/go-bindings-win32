@@ -24,37 +24,37 @@ var IID_IMarshal = win32.GUID{Data1: 0x00000003, Data2: 0x0000, Data3: 0x0000, D
 // GetUnmarshalClass dispatches through IMarshal's vtable slot 3.
 func (self *IMarshal) GetUnmarshalClass(riid *win32.GUID, pv unsafe.Pointer, dwDestContext uint32, mshlflags uint32, pCid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pv)), uintptr(dwDestContext), 0, uintptr(mshlflags), uintptr(unsafe.Pointer(pCid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMarshalSizeMax dispatches through IMarshal's vtable slot 4.
 func (self *IMarshal) GetMarshalSizeMax(riid *win32.GUID, pv unsafe.Pointer, dwDestContext uint32, mshlflags uint32, pSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pv)), uintptr(dwDestContext), 0, uintptr(mshlflags), uintptr(unsafe.Pointer(pSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MarshalInterface dispatches through IMarshal's vtable slot 5.
 func (self *IMarshal) MarshalInterface(pStm *systemcom.IStream, riid *win32.GUID, pv unsafe.Pointer, dwDestContext uint32, mshlflags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStm)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pv)), uintptr(dwDestContext), 0, uintptr(mshlflags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnmarshalInterface dispatches through IMarshal's vtable slot 6.
 func (self *IMarshal) UnmarshalInterface(pStm *systemcom.IStream, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStm)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReleaseMarshalData dispatches through IMarshal's vtable slot 7.
 func (self *IMarshal) ReleaseMarshalData(pStm *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStm)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DisconnectObject dispatches through IMarshal's vtable slot 8.
 func (self *IMarshal) DisconnectObject(dwReserved uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwReserved))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 000001cf-0000-0000-c000-000000000046
@@ -77,5 +77,5 @@ var IID_IMarshalingStream = win32.GUID{Data1: 0xd8f2f5e6, Data2: 0x6102, Data3: 
 // GetMarshalingContextAttribute dispatches through IMarshalingStream's vtable slot 14.
 func (self *IMarshalingStream) GetMarshalingContextAttribute(attribute systemcom.CO_MARSHALING_CONTEXT_ATTRIBUTES, pAttributeValue *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(attribute), uintptr(unsafe.Pointer(pAttributeValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

@@ -65,14 +65,14 @@ func (self *IPhraseSink) PutSmallPhrase(pwcNoun string, cwcNoun uint32, pwcModif
 	_pwcNoun := win32.UTF16Ptr(pwcNoun)
 	_pwcModifier := win32.UTF16Ptr(pwcModifier)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwcNoun)), uintptr(cwcNoun), uintptr(unsafe.Pointer(_pwcModifier)), uintptr(cwcModifier), uintptr(ulAttachmentType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PutPhrase dispatches through IPhraseSink's vtable slot 4.
 func (self *IPhraseSink) PutPhrase(pwcPhrase string, cwcPhrase uint32) error {
 	_pwcPhrase := win32.UTF16Ptr(pwcPhrase)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwcPhrase)), uintptr(cwcPhrase))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 3d7df9a7-8da6-4fbf-a45b-7592f06d93a9
@@ -86,5 +86,5 @@ var IID_IPixelFilter = win32.GUID{Data1: 0x3d7df9a7, Data2: 0x8da6, Data3: 0x4fb
 // GetImageInfo dispatches through IPixelFilter's vtable slot 8.
 func (self *IPixelFilter) GetImageInfo(imageInfo *IMAGE_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(imageInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

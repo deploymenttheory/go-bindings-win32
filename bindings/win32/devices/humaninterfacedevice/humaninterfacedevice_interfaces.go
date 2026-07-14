@@ -25,7 +25,7 @@ var IID_IDirectInput2A = win32.GUID{Data1: 0x5944e662, Data2: 0xaa8a, Data3: 0x1
 // FindDevice dispatches through IDirectInput2A's vtable slot 8.
 func (self *IDirectInput2A) FindDevice(param0 *win32.GUID, param1 foundation.PSTR, param2 *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 5944e663-aa8a-11cf-bfc7-444553540000
@@ -40,7 +40,7 @@ var IID_IDirectInput2W = win32.GUID{Data1: 0x5944e663, Data2: 0xaa8a, Data3: 0x1
 func (self *IDirectInput2W) FindDevice(param0 *win32.GUID, param1 string, param2 *win32.GUID) error {
 	_param1 := win32.UTF16Ptr(param1)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(_param1)), uintptr(unsafe.Pointer(param2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 9a4cb684-236d-11d3-8e9d-00c04f6844ae
@@ -54,7 +54,7 @@ var IID_IDirectInput7A = win32.GUID{Data1: 0x9a4cb684, Data2: 0x236d, Data3: 0x1
 // CreateDeviceEx dispatches through IDirectInput7A's vtable slot 9.
 func (self *IDirectInput7A) CreateDeviceEx(param0 *win32.GUID, param1 *win32.GUID, param2 *unsafe.Pointer, param3 *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(unsafe.Pointer(param3)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 9a4cb685-236d-11d3-8e9d-00c04f6844ae
@@ -68,7 +68,7 @@ var IID_IDirectInput7W = win32.GUID{Data1: 0x9a4cb685, Data2: 0x236d, Data3: 0x1
 // CreateDeviceEx dispatches through IDirectInput7W's vtable slot 9.
 func (self *IDirectInput7W) CreateDeviceEx(param0 *win32.GUID, param1 *win32.GUID, param2 *unsafe.Pointer, param3 *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(unsafe.Pointer(param3)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: bf798030-483a-4da2-aa99-5d64ed369700
@@ -82,49 +82,49 @@ var IID_IDirectInput8A = win32.GUID{Data1: 0xbf798030, Data2: 0x483a, Data3: 0x4
 // CreateDevice dispatches through IDirectInput8A's vtable slot 3.
 func (self *IDirectInput8A) CreateDevice(param0 *win32.GUID, param1 **IDirectInputDevice8A, param2 *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumDevices dispatches through IDirectInput8A's vtable slot 4.
 func (self *IDirectInput8A) EnumDevices(param0 uint32, param1 LPDIENUMDEVICESCALLBACKA, param2 unsafe.Pointer, param3 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1), uintptr(unsafe.Pointer(param2)), uintptr(param3))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceStatus dispatches through IDirectInput8A's vtable slot 5.
 func (self *IDirectInput8A) GetDeviceStatus(param0 *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RunControlPanel dispatches through IDirectInput8A's vtable slot 6.
 func (self *IDirectInput8A) RunControlPanel(param0 foundation.HWND, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Initialize dispatches through IDirectInput8A's vtable slot 7.
 func (self *IDirectInput8A) Initialize(param0 foundation.HINSTANCE, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FindDevice dispatches through IDirectInput8A's vtable slot 8.
 func (self *IDirectInput8A) FindDevice(param0 *win32.GUID, param1 foundation.PSTR, param2 *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumDevicesBySemantics dispatches through IDirectInput8A's vtable slot 9.
 func (self *IDirectInput8A) EnumDevicesBySemantics(param0 foundation.PSTR, param1 *DIACTIONFORMATA, param2 LPDIENUMDEVICESBYSEMANTICSCBA, param3 unsafe.Pointer, param4 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(param2), uintptr(unsafe.Pointer(param3)), uintptr(param4))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ConfigureDevices dispatches through IDirectInput8A's vtable slot 10.
 func (self *IDirectInput8A) ConfigureDevices(param0 LPDICONFIGUREDEVICESCALLBACK, param1 *DICONFIGUREDEVICESPARAMSA, param2 uint32, param3 unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(param2), uintptr(unsafe.Pointer(param3)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: bf798031-483a-4da2-aa99-5d64ed369700
@@ -138,51 +138,51 @@ var IID_IDirectInput8W = win32.GUID{Data1: 0xbf798031, Data2: 0x483a, Data3: 0x4
 // CreateDevice dispatches through IDirectInput8W's vtable slot 3.
 func (self *IDirectInput8W) CreateDevice(param0 *win32.GUID, param1 **IDirectInputDevice8W, param2 *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumDevices dispatches through IDirectInput8W's vtable slot 4.
 func (self *IDirectInput8W) EnumDevices(param0 uint32, param1 LPDIENUMDEVICESCALLBACKW, param2 unsafe.Pointer, param3 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1), uintptr(unsafe.Pointer(param2)), uintptr(param3))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceStatus dispatches through IDirectInput8W's vtable slot 5.
 func (self *IDirectInput8W) GetDeviceStatus(param0 *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RunControlPanel dispatches through IDirectInput8W's vtable slot 6.
 func (self *IDirectInput8W) RunControlPanel(param0 foundation.HWND, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Initialize dispatches through IDirectInput8W's vtable slot 7.
 func (self *IDirectInput8W) Initialize(param0 foundation.HINSTANCE, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FindDevice dispatches through IDirectInput8W's vtable slot 8.
 func (self *IDirectInput8W) FindDevice(param0 *win32.GUID, param1 string, param2 *win32.GUID) error {
 	_param1 := win32.UTF16Ptr(param1)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(_param1)), uintptr(unsafe.Pointer(param2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumDevicesBySemantics dispatches through IDirectInput8W's vtable slot 9.
 func (self *IDirectInput8W) EnumDevicesBySemantics(param0 string, param1 *DIACTIONFORMATW, param2 LPDIENUMDEVICESBYSEMANTICSCBW, param3 unsafe.Pointer, param4 uint32) error {
 	_param0 := win32.UTF16Ptr(param0)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_param0)), uintptr(unsafe.Pointer(param1)), uintptr(param2), uintptr(unsafe.Pointer(param3)), uintptr(param4))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ConfigureDevices dispatches through IDirectInput8W's vtable slot 10.
 func (self *IDirectInput8W) ConfigureDevices(param0 LPDICONFIGUREDEVICESCALLBACK, param1 *DICONFIGUREDEVICESPARAMSW, param2 uint32, param3 unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(param2), uintptr(unsafe.Pointer(param3)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 89521360-aa8a-11cf-bfc7-444553540000
@@ -196,31 +196,31 @@ var IID_IDirectInputA = win32.GUID{Data1: 0x89521360, Data2: 0xaa8a, Data3: 0x11
 // CreateDevice dispatches through IDirectInputA's vtable slot 3.
 func (self *IDirectInputA) CreateDevice(param0 *win32.GUID, param1 **IDirectInputDeviceA, param2 *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumDevices dispatches through IDirectInputA's vtable slot 4.
 func (self *IDirectInputA) EnumDevices(param0 uint32, param1 LPDIENUMDEVICESCALLBACKA, param2 unsafe.Pointer, param3 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1), uintptr(unsafe.Pointer(param2)), uintptr(param3))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceStatus dispatches through IDirectInputA's vtable slot 5.
 func (self *IDirectInputA) GetDeviceStatus(param0 *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RunControlPanel dispatches through IDirectInputA's vtable slot 6.
 func (self *IDirectInputA) RunControlPanel(param0 foundation.HWND, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Initialize dispatches through IDirectInputA's vtable slot 7.
 func (self *IDirectInputA) Initialize(param0 foundation.HINSTANCE, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 5944e682-c92e-11cf-bfc7-444553540000
@@ -234,55 +234,55 @@ var IID_IDirectInputDevice2A = win32.GUID{Data1: 0x5944e682, Data2: 0xc92e, Data
 // CreateEffect dispatches through IDirectInputDevice2A's vtable slot 18.
 func (self *IDirectInputDevice2A) CreateEffect(param0 *win32.GUID, param1 *DIEFFECT, param2 **IDirectInputEffect, param3 *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(unsafe.Pointer(param3)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumEffects dispatches through IDirectInputDevice2A's vtable slot 19.
 func (self *IDirectInputDevice2A) EnumEffects(param0 LPDIENUMEFFECTSCALLBACKA, param1 unsafe.Pointer, param2 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(param2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEffectInfo dispatches through IDirectInputDevice2A's vtable slot 20.
 func (self *IDirectInputDevice2A) GetEffectInfo(param0 *DIEFFECTINFOA, param1 *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetForceFeedbackState dispatches through IDirectInputDevice2A's vtable slot 21.
 func (self *IDirectInputDevice2A) GetForceFeedbackState(param0 *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendForceFeedbackCommand dispatches through IDirectInputDevice2A's vtable slot 22.
 func (self *IDirectInputDevice2A) SendForceFeedbackCommand(param0 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumCreatedEffectObjects dispatches through IDirectInputDevice2A's vtable slot 23.
 func (self *IDirectInputDevice2A) EnumCreatedEffectObjects(param0 LPDIENUMCREATEDEFFECTOBJECTSCALLBACK, param1 unsafe.Pointer, param2 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(param2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Escape dispatches through IDirectInputDevice2A's vtable slot 24.
 func (self *IDirectInputDevice2A) Escape(param0 *DIEFFESCAPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Poll dispatches through IDirectInputDevice2A's vtable slot 25.
 func (self *IDirectInputDevice2A) Poll() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendDeviceData dispatches through IDirectInputDevice2A's vtable slot 26.
 func (self *IDirectInputDevice2A) SendDeviceData(param0 uint32, param1 *DIDEVICEOBJECTDATA, param2 *uint32, param3 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 5944e683-c92e-11cf-bfc7-444553540000
@@ -296,55 +296,55 @@ var IID_IDirectInputDevice2W = win32.GUID{Data1: 0x5944e683, Data2: 0xc92e, Data
 // CreateEffect dispatches through IDirectInputDevice2W's vtable slot 18.
 func (self *IDirectInputDevice2W) CreateEffect(param0 *win32.GUID, param1 *DIEFFECT, param2 **IDirectInputEffect, param3 *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(unsafe.Pointer(param3)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumEffects dispatches through IDirectInputDevice2W's vtable slot 19.
 func (self *IDirectInputDevice2W) EnumEffects(param0 LPDIENUMEFFECTSCALLBACKW, param1 unsafe.Pointer, param2 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(param2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEffectInfo dispatches through IDirectInputDevice2W's vtable slot 20.
 func (self *IDirectInputDevice2W) GetEffectInfo(param0 *DIEFFECTINFOW, param1 *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetForceFeedbackState dispatches through IDirectInputDevice2W's vtable slot 21.
 func (self *IDirectInputDevice2W) GetForceFeedbackState(param0 *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendForceFeedbackCommand dispatches through IDirectInputDevice2W's vtable slot 22.
 func (self *IDirectInputDevice2W) SendForceFeedbackCommand(param0 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumCreatedEffectObjects dispatches through IDirectInputDevice2W's vtable slot 23.
 func (self *IDirectInputDevice2W) EnumCreatedEffectObjects(param0 LPDIENUMCREATEDEFFECTOBJECTSCALLBACK, param1 unsafe.Pointer, param2 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(param2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Escape dispatches through IDirectInputDevice2W's vtable slot 24.
 func (self *IDirectInputDevice2W) Escape(param0 *DIEFFESCAPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Poll dispatches through IDirectInputDevice2W's vtable slot 25.
 func (self *IDirectInputDevice2W) Poll() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendDeviceData dispatches through IDirectInputDevice2W's vtable slot 26.
 func (self *IDirectInputDevice2W) SendDeviceData(param0 uint32, param1 *DIDEVICEOBJECTDATA, param2 *uint32, param3 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 57d7c6bc-2356-11d3-8e9d-00c04f6844ae
@@ -358,13 +358,13 @@ var IID_IDirectInputDevice7A = win32.GUID{Data1: 0x57d7c6bc, Data2: 0x2356, Data
 // EnumEffectsInFile dispatches through IDirectInputDevice7A's vtable slot 27.
 func (self *IDirectInputDevice7A) EnumEffectsInFile(param0 foundation.PSTR, param1 LPDIENUMEFFECTSINFILECALLBACK, param2 unsafe.Pointer, param3 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1), uintptr(unsafe.Pointer(param2)), uintptr(param3))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteEffectToFile dispatches through IDirectInputDevice7A's vtable slot 28.
 func (self *IDirectInputDevice7A) WriteEffectToFile(param0 foundation.PSTR, param1 uint32, param2 *DIFILEEFFECT, param3 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1), uintptr(unsafe.Pointer(param2)), uintptr(param3))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 57d7c6bd-2356-11d3-8e9d-00c04f6844ae
@@ -379,14 +379,14 @@ var IID_IDirectInputDevice7W = win32.GUID{Data1: 0x57d7c6bd, Data2: 0x2356, Data
 func (self *IDirectInputDevice7W) EnumEffectsInFile(param0 string, param1 LPDIENUMEFFECTSINFILECALLBACK, param2 unsafe.Pointer, param3 uint32) error {
 	_param0 := win32.UTF16Ptr(param0)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_param0)), uintptr(param1), uintptr(unsafe.Pointer(param2)), uintptr(param3))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteEffectToFile dispatches through IDirectInputDevice7W's vtable slot 28.
 func (self *IDirectInputDevice7W) WriteEffectToFile(param0 string, param1 uint32, param2 *DIFILEEFFECT, param3 uint32) error {
 	_param0 := win32.UTF16Ptr(param0)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_param0)), uintptr(param1), uintptr(unsafe.Pointer(param2)), uintptr(param3))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 54d41080-dc15-4833-a41b-748f73a38179
@@ -400,175 +400,175 @@ var IID_IDirectInputDevice8A = win32.GUID{Data1: 0x54d41080, Data2: 0xdc15, Data
 // GetCapabilities dispatches through IDirectInputDevice8A's vtable slot 3.
 func (self *IDirectInputDevice8A) GetCapabilities(param0 *DIDEVCAPS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumObjects dispatches through IDirectInputDevice8A's vtable slot 4.
 func (self *IDirectInputDevice8A) EnumObjects(param0 LPDIENUMDEVICEOBJECTSCALLBACKA, param1 unsafe.Pointer, param2 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(param2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProperty dispatches through IDirectInputDevice8A's vtable slot 5.
 func (self *IDirectInputDevice8A) GetProperty(param0 *win32.GUID, param1 *DIPROPHEADER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetProperty dispatches through IDirectInputDevice8A's vtable slot 6.
 func (self *IDirectInputDevice8A) SetProperty(param0 *win32.GUID, param1 *DIPROPHEADER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Acquire dispatches through IDirectInputDevice8A's vtable slot 7.
 func (self *IDirectInputDevice8A) Acquire() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Unacquire dispatches through IDirectInputDevice8A's vtable slot 8.
 func (self *IDirectInputDevice8A) Unacquire() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceState dispatches through IDirectInputDevice8A's vtable slot 9.
 func (self *IDirectInputDevice8A) GetDeviceState(param0 uint32, param1 unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceData dispatches through IDirectInputDevice8A's vtable slot 10.
 func (self *IDirectInputDevice8A) GetDeviceData(param0 uint32, param1 *DIDEVICEOBJECTDATA, param2 *uint32, param3 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDataFormat dispatches through IDirectInputDevice8A's vtable slot 11.
 func (self *IDirectInputDevice8A) SetDataFormat(param0 *DIDATAFORMAT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetEventNotification dispatches through IDirectInputDevice8A's vtable slot 12.
 func (self *IDirectInputDevice8A) SetEventNotification(param0 foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCooperativeLevel dispatches through IDirectInputDevice8A's vtable slot 13.
 func (self *IDirectInputDevice8A) SetCooperativeLevel(param0 foundation.HWND, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetObjectInfo dispatches through IDirectInputDevice8A's vtable slot 14.
 func (self *IDirectInputDevice8A) GetObjectInfo(param0 *DIDEVICEOBJECTINSTANCEA, param1 uint32, param2 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1), uintptr(param2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceInfo dispatches through IDirectInputDevice8A's vtable slot 15.
 func (self *IDirectInputDevice8A) GetDeviceInfo(param0 *DIDEVICEINSTANCEA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RunControlPanel dispatches through IDirectInputDevice8A's vtable slot 16.
 func (self *IDirectInputDevice8A) RunControlPanel(param0 foundation.HWND, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Initialize dispatches through IDirectInputDevice8A's vtable slot 17.
 func (self *IDirectInputDevice8A) Initialize(param0 foundation.HINSTANCE, param1 uint32, param2 *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1), uintptr(unsafe.Pointer(param2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateEffect dispatches through IDirectInputDevice8A's vtable slot 18.
 func (self *IDirectInputDevice8A) CreateEffect(param0 *win32.GUID, param1 *DIEFFECT, param2 **IDirectInputEffect, param3 *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(unsafe.Pointer(param3)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumEffects dispatches through IDirectInputDevice8A's vtable slot 19.
 func (self *IDirectInputDevice8A) EnumEffects(param0 LPDIENUMEFFECTSCALLBACKA, param1 unsafe.Pointer, param2 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(param2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEffectInfo dispatches through IDirectInputDevice8A's vtable slot 20.
 func (self *IDirectInputDevice8A) GetEffectInfo(param0 *DIEFFECTINFOA, param1 *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetForceFeedbackState dispatches through IDirectInputDevice8A's vtable slot 21.
 func (self *IDirectInputDevice8A) GetForceFeedbackState(param0 *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendForceFeedbackCommand dispatches through IDirectInputDevice8A's vtable slot 22.
 func (self *IDirectInputDevice8A) SendForceFeedbackCommand(param0 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumCreatedEffectObjects dispatches through IDirectInputDevice8A's vtable slot 23.
 func (self *IDirectInputDevice8A) EnumCreatedEffectObjects(param0 LPDIENUMCREATEDEFFECTOBJECTSCALLBACK, param1 unsafe.Pointer, param2 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(param2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Escape dispatches through IDirectInputDevice8A's vtable slot 24.
 func (self *IDirectInputDevice8A) Escape(param0 *DIEFFESCAPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Poll dispatches through IDirectInputDevice8A's vtable slot 25.
 func (self *IDirectInputDevice8A) Poll() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendDeviceData dispatches through IDirectInputDevice8A's vtable slot 26.
 func (self *IDirectInputDevice8A) SendDeviceData(param0 uint32, param1 *DIDEVICEOBJECTDATA, param2 *uint32, param3 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumEffectsInFile dispatches through IDirectInputDevice8A's vtable slot 27.
 func (self *IDirectInputDevice8A) EnumEffectsInFile(param0 foundation.PSTR, param1 LPDIENUMEFFECTSINFILECALLBACK, param2 unsafe.Pointer, param3 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1), uintptr(unsafe.Pointer(param2)), uintptr(param3))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteEffectToFile dispatches through IDirectInputDevice8A's vtable slot 28.
 func (self *IDirectInputDevice8A) WriteEffectToFile(param0 foundation.PSTR, param1 uint32, param2 *DIFILEEFFECT, param3 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1), uintptr(unsafe.Pointer(param2)), uintptr(param3))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BuildActionMap dispatches through IDirectInputDevice8A's vtable slot 29.
 func (self *IDirectInputDevice8A) BuildActionMap(param0 *DIACTIONFORMATA, param1 foundation.PSTR, param2 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(param2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetActionMap dispatches through IDirectInputDevice8A's vtable slot 30.
 func (self *IDirectInputDevice8A) SetActionMap(param0 *DIACTIONFORMATA, param1 foundation.PSTR, param2 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(param2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetImageInfo dispatches through IDirectInputDevice8A's vtable slot 31.
 func (self *IDirectInputDevice8A) GetImageInfo(param0 *DIDEVICEIMAGEINFOHEADERA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 54d41081-dc15-4833-a41b-748f73a38179
@@ -582,179 +582,179 @@ var IID_IDirectInputDevice8W = win32.GUID{Data1: 0x54d41081, Data2: 0xdc15, Data
 // GetCapabilities dispatches through IDirectInputDevice8W's vtable slot 3.
 func (self *IDirectInputDevice8W) GetCapabilities(param0 *DIDEVCAPS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumObjects dispatches through IDirectInputDevice8W's vtable slot 4.
 func (self *IDirectInputDevice8W) EnumObjects(param0 LPDIENUMDEVICEOBJECTSCALLBACKW, param1 unsafe.Pointer, param2 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(param2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProperty dispatches through IDirectInputDevice8W's vtable slot 5.
 func (self *IDirectInputDevice8W) GetProperty(param0 *win32.GUID, param1 *DIPROPHEADER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetProperty dispatches through IDirectInputDevice8W's vtable slot 6.
 func (self *IDirectInputDevice8W) SetProperty(param0 *win32.GUID, param1 *DIPROPHEADER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Acquire dispatches through IDirectInputDevice8W's vtable slot 7.
 func (self *IDirectInputDevice8W) Acquire() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Unacquire dispatches through IDirectInputDevice8W's vtable slot 8.
 func (self *IDirectInputDevice8W) Unacquire() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceState dispatches through IDirectInputDevice8W's vtable slot 9.
 func (self *IDirectInputDevice8W) GetDeviceState(param0 uint32, param1 unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceData dispatches through IDirectInputDevice8W's vtable slot 10.
 func (self *IDirectInputDevice8W) GetDeviceData(param0 uint32, param1 *DIDEVICEOBJECTDATA, param2 *uint32, param3 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDataFormat dispatches through IDirectInputDevice8W's vtable slot 11.
 func (self *IDirectInputDevice8W) SetDataFormat(param0 *DIDATAFORMAT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetEventNotification dispatches through IDirectInputDevice8W's vtable slot 12.
 func (self *IDirectInputDevice8W) SetEventNotification(param0 foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCooperativeLevel dispatches through IDirectInputDevice8W's vtable slot 13.
 func (self *IDirectInputDevice8W) SetCooperativeLevel(param0 foundation.HWND, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetObjectInfo dispatches through IDirectInputDevice8W's vtable slot 14.
 func (self *IDirectInputDevice8W) GetObjectInfo(param0 *DIDEVICEOBJECTINSTANCEW, param1 uint32, param2 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1), uintptr(param2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceInfo dispatches through IDirectInputDevice8W's vtable slot 15.
 func (self *IDirectInputDevice8W) GetDeviceInfo(param0 *DIDEVICEINSTANCEW) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RunControlPanel dispatches through IDirectInputDevice8W's vtable slot 16.
 func (self *IDirectInputDevice8W) RunControlPanel(param0 foundation.HWND, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Initialize dispatches through IDirectInputDevice8W's vtable slot 17.
 func (self *IDirectInputDevice8W) Initialize(param0 foundation.HINSTANCE, param1 uint32, param2 *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1), uintptr(unsafe.Pointer(param2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateEffect dispatches through IDirectInputDevice8W's vtable slot 18.
 func (self *IDirectInputDevice8W) CreateEffect(param0 *win32.GUID, param1 *DIEFFECT, param2 **IDirectInputEffect, param3 *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(unsafe.Pointer(param3)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumEffects dispatches through IDirectInputDevice8W's vtable slot 19.
 func (self *IDirectInputDevice8W) EnumEffects(param0 LPDIENUMEFFECTSCALLBACKW, param1 unsafe.Pointer, param2 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(param2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEffectInfo dispatches through IDirectInputDevice8W's vtable slot 20.
 func (self *IDirectInputDevice8W) GetEffectInfo(param0 *DIEFFECTINFOW, param1 *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetForceFeedbackState dispatches through IDirectInputDevice8W's vtable slot 21.
 func (self *IDirectInputDevice8W) GetForceFeedbackState(param0 *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendForceFeedbackCommand dispatches through IDirectInputDevice8W's vtable slot 22.
 func (self *IDirectInputDevice8W) SendForceFeedbackCommand(param0 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumCreatedEffectObjects dispatches through IDirectInputDevice8W's vtable slot 23.
 func (self *IDirectInputDevice8W) EnumCreatedEffectObjects(param0 LPDIENUMCREATEDEFFECTOBJECTSCALLBACK, param1 unsafe.Pointer, param2 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(param2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Escape dispatches through IDirectInputDevice8W's vtable slot 24.
 func (self *IDirectInputDevice8W) Escape(param0 *DIEFFESCAPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Poll dispatches through IDirectInputDevice8W's vtable slot 25.
 func (self *IDirectInputDevice8W) Poll() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendDeviceData dispatches through IDirectInputDevice8W's vtable slot 26.
 func (self *IDirectInputDevice8W) SendDeviceData(param0 uint32, param1 *DIDEVICEOBJECTDATA, param2 *uint32, param3 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumEffectsInFile dispatches through IDirectInputDevice8W's vtable slot 27.
 func (self *IDirectInputDevice8W) EnumEffectsInFile(param0 string, param1 LPDIENUMEFFECTSINFILECALLBACK, param2 unsafe.Pointer, param3 uint32) error {
 	_param0 := win32.UTF16Ptr(param0)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_param0)), uintptr(param1), uintptr(unsafe.Pointer(param2)), uintptr(param3))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteEffectToFile dispatches through IDirectInputDevice8W's vtable slot 28.
 func (self *IDirectInputDevice8W) WriteEffectToFile(param0 string, param1 uint32, param2 *DIFILEEFFECT, param3 uint32) error {
 	_param0 := win32.UTF16Ptr(param0)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_param0)), uintptr(param1), uintptr(unsafe.Pointer(param2)), uintptr(param3))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BuildActionMap dispatches through IDirectInputDevice8W's vtable slot 29.
 func (self *IDirectInputDevice8W) BuildActionMap(param0 *DIACTIONFORMATW, param1 string, param2 uint32) error {
 	_param1 := win32.UTF16Ptr(param1)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(_param1)), uintptr(param2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetActionMap dispatches through IDirectInputDevice8W's vtable slot 30.
 func (self *IDirectInputDevice8W) SetActionMap(param0 *DIACTIONFORMATW, param1 string, param2 uint32) error {
 	_param1 := win32.UTF16Ptr(param1)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(_param1)), uintptr(param2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetImageInfo dispatches through IDirectInputDevice8W's vtable slot 31.
 func (self *IDirectInputDevice8W) GetImageInfo(param0 *DIDEVICEIMAGEINFOHEADERW) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 5944e680-c92e-11cf-bfc7-444553540000
@@ -768,91 +768,91 @@ var IID_IDirectInputDeviceA = win32.GUID{Data1: 0x5944e680, Data2: 0xc92e, Data3
 // GetCapabilities dispatches through IDirectInputDeviceA's vtable slot 3.
 func (self *IDirectInputDeviceA) GetCapabilities(param0 *DIDEVCAPS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumObjects dispatches through IDirectInputDeviceA's vtable slot 4.
 func (self *IDirectInputDeviceA) EnumObjects(param0 LPDIENUMDEVICEOBJECTSCALLBACKA, param1 unsafe.Pointer, param2 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(param2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProperty dispatches through IDirectInputDeviceA's vtable slot 5.
 func (self *IDirectInputDeviceA) GetProperty(param0 *win32.GUID, param1 *DIPROPHEADER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetProperty dispatches through IDirectInputDeviceA's vtable slot 6.
 func (self *IDirectInputDeviceA) SetProperty(param0 *win32.GUID, param1 *DIPROPHEADER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Acquire dispatches through IDirectInputDeviceA's vtable slot 7.
 func (self *IDirectInputDeviceA) Acquire() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Unacquire dispatches through IDirectInputDeviceA's vtable slot 8.
 func (self *IDirectInputDeviceA) Unacquire() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceState dispatches through IDirectInputDeviceA's vtable slot 9.
 func (self *IDirectInputDeviceA) GetDeviceState(param0 uint32, param1 unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceData dispatches through IDirectInputDeviceA's vtable slot 10.
 func (self *IDirectInputDeviceA) GetDeviceData(param0 uint32, param1 *DIDEVICEOBJECTDATA, param2 *uint32, param3 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDataFormat dispatches through IDirectInputDeviceA's vtable slot 11.
 func (self *IDirectInputDeviceA) SetDataFormat(param0 *DIDATAFORMAT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetEventNotification dispatches through IDirectInputDeviceA's vtable slot 12.
 func (self *IDirectInputDeviceA) SetEventNotification(param0 foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCooperativeLevel dispatches through IDirectInputDeviceA's vtable slot 13.
 func (self *IDirectInputDeviceA) SetCooperativeLevel(param0 foundation.HWND, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetObjectInfo dispatches through IDirectInputDeviceA's vtable slot 14.
 func (self *IDirectInputDeviceA) GetObjectInfo(param0 *DIDEVICEOBJECTINSTANCEA, param1 uint32, param2 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1), uintptr(param2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceInfo dispatches through IDirectInputDeviceA's vtable slot 15.
 func (self *IDirectInputDeviceA) GetDeviceInfo(param0 *DIDEVICEINSTANCEA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RunControlPanel dispatches through IDirectInputDeviceA's vtable slot 16.
 func (self *IDirectInputDeviceA) RunControlPanel(param0 foundation.HWND, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Initialize dispatches through IDirectInputDeviceA's vtable slot 17.
 func (self *IDirectInputDeviceA) Initialize(param0 foundation.HINSTANCE, param1 uint32, param2 *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1), uintptr(unsafe.Pointer(param2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 5944e681-c92e-11cf-bfc7-444553540000
@@ -866,91 +866,91 @@ var IID_IDirectInputDeviceW = win32.GUID{Data1: 0x5944e681, Data2: 0xc92e, Data3
 // GetCapabilities dispatches through IDirectInputDeviceW's vtable slot 3.
 func (self *IDirectInputDeviceW) GetCapabilities(param0 *DIDEVCAPS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumObjects dispatches through IDirectInputDeviceW's vtable slot 4.
 func (self *IDirectInputDeviceW) EnumObjects(param0 LPDIENUMDEVICEOBJECTSCALLBACKW, param1 unsafe.Pointer, param2 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(param2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProperty dispatches through IDirectInputDeviceW's vtable slot 5.
 func (self *IDirectInputDeviceW) GetProperty(param0 *win32.GUID, param1 *DIPROPHEADER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetProperty dispatches through IDirectInputDeviceW's vtable slot 6.
 func (self *IDirectInputDeviceW) SetProperty(param0 *win32.GUID, param1 *DIPROPHEADER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Acquire dispatches through IDirectInputDeviceW's vtable slot 7.
 func (self *IDirectInputDeviceW) Acquire() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Unacquire dispatches through IDirectInputDeviceW's vtable slot 8.
 func (self *IDirectInputDeviceW) Unacquire() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceState dispatches through IDirectInputDeviceW's vtable slot 9.
 func (self *IDirectInputDeviceW) GetDeviceState(param0 uint32, param1 unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceData dispatches through IDirectInputDeviceW's vtable slot 10.
 func (self *IDirectInputDeviceW) GetDeviceData(param0 uint32, param1 *DIDEVICEOBJECTDATA, param2 *uint32, param3 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDataFormat dispatches through IDirectInputDeviceW's vtable slot 11.
 func (self *IDirectInputDeviceW) SetDataFormat(param0 *DIDATAFORMAT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetEventNotification dispatches through IDirectInputDeviceW's vtable slot 12.
 func (self *IDirectInputDeviceW) SetEventNotification(param0 foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCooperativeLevel dispatches through IDirectInputDeviceW's vtable slot 13.
 func (self *IDirectInputDeviceW) SetCooperativeLevel(param0 foundation.HWND, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetObjectInfo dispatches through IDirectInputDeviceW's vtable slot 14.
 func (self *IDirectInputDeviceW) GetObjectInfo(param0 *DIDEVICEOBJECTINSTANCEW, param1 uint32, param2 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1), uintptr(param2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceInfo dispatches through IDirectInputDeviceW's vtable slot 15.
 func (self *IDirectInputDeviceW) GetDeviceInfo(param0 *DIDEVICEINSTANCEW) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RunControlPanel dispatches through IDirectInputDeviceW's vtable slot 16.
 func (self *IDirectInputDeviceW) RunControlPanel(param0 foundation.HWND, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Initialize dispatches through IDirectInputDeviceW's vtable slot 17.
 func (self *IDirectInputDeviceW) Initialize(param0 foundation.HINSTANCE, param1 uint32, param2 *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1), uintptr(unsafe.Pointer(param2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: e7e1f7c0-88d2-11d0-9ad0-00a0c9a06e35
@@ -964,61 +964,61 @@ var IID_IDirectInputEffect = win32.GUID{Data1: 0xe7e1f7c0, Data2: 0x88d2, Data3:
 // Initialize dispatches through IDirectInputEffect's vtable slot 3.
 func (self *IDirectInputEffect) Initialize(param0 foundation.HINSTANCE, param1 uint32, param2 *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1), uintptr(unsafe.Pointer(param2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEffectGuid dispatches through IDirectInputEffect's vtable slot 4.
 func (self *IDirectInputEffect) GetEffectGuid(param0 *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetParameters dispatches through IDirectInputEffect's vtable slot 5.
 func (self *IDirectInputEffect) GetParameters(param0 *DIEFFECT, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetParameters dispatches through IDirectInputEffect's vtable slot 6.
 func (self *IDirectInputEffect) SetParameters(param0 *DIEFFECT, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Start dispatches through IDirectInputEffect's vtable slot 7.
 func (self *IDirectInputEffect) Start(param0 uint32, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Stop dispatches through IDirectInputEffect's vtable slot 8.
 func (self *IDirectInputEffect) Stop() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEffectStatus dispatches through IDirectInputEffect's vtable slot 9.
 func (self *IDirectInputEffect) GetEffectStatus(param0 *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Download dispatches through IDirectInputEffect's vtable slot 10.
 func (self *IDirectInputEffect) Download() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Unload dispatches through IDirectInputEffect's vtable slot 11.
 func (self *IDirectInputEffect) Unload() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Escape dispatches through IDirectInputEffect's vtable slot 12.
 func (self *IDirectInputEffect) Escape(param0 *DIEFFESCAPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDirectInputEffectDriver: https://learn.microsoft.com/windows/win32/api/dinputd/nn-dinputd-idirectinputeffectdriver
@@ -1033,67 +1033,67 @@ var IID_IDirectInputEffectDriver = win32.GUID{Data1: 0x02538130, Data2: 0x898f, 
 // DeviceID dispatches through IDirectInputEffectDriver's vtable slot 3.
 func (self *IDirectInputEffectDriver) DeviceID(param0 uint32, param1 uint32, param2 uint32, param3 uint32, param4 unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1), uintptr(param2), uintptr(param3), uintptr(unsafe.Pointer(param4)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetVersions dispatches through IDirectInputEffectDriver's vtable slot 4.
 func (self *IDirectInputEffectDriver) GetVersions(param0 *DIDRIVERVERSIONS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Escape dispatches through IDirectInputEffectDriver's vtable slot 5.
 func (self *IDirectInputEffectDriver) Escape(param0 uint32, param1 uint32, param2 *DIEFFESCAPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1), uintptr(unsafe.Pointer(param2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetGain dispatches through IDirectInputEffectDriver's vtable slot 6.
 func (self *IDirectInputEffectDriver) SetGain(param0 uint32, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendForceFeedbackCommand dispatches through IDirectInputEffectDriver's vtable slot 7.
 func (self *IDirectInputEffectDriver) SendForceFeedbackCommand(param0 uint32, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetForceFeedbackState dispatches through IDirectInputEffectDriver's vtable slot 8.
 func (self *IDirectInputEffectDriver) GetForceFeedbackState(param0 uint32, param1 *DIDEVICESTATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DownloadEffect dispatches through IDirectInputEffectDriver's vtable slot 9.
 func (self *IDirectInputEffectDriver) DownloadEffect(param0 uint32, param1 uint32, param2 *uint32, param3 *DIEFFECT, param4 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1), uintptr(unsafe.Pointer(param2)), uintptr(unsafe.Pointer(param3)), uintptr(param4))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DestroyEffect dispatches through IDirectInputEffectDriver's vtable slot 10.
 func (self *IDirectInputEffectDriver) DestroyEffect(param0 uint32, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StartEffect dispatches through IDirectInputEffectDriver's vtable slot 11.
 func (self *IDirectInputEffectDriver) StartEffect(param0 uint32, param1 uint32, param2 uint32, param3 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1), uintptr(param2), uintptr(param3))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StopEffect dispatches through IDirectInputEffectDriver's vtable slot 12.
 func (self *IDirectInputEffectDriver) StopEffect(param0 uint32, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEffectStatus dispatches through IDirectInputEffectDriver's vtable slot 13.
 func (self *IDirectInputEffectDriver) GetEffectStatus(param0 uint32, param1 uint32, param2 *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1), uintptr(unsafe.Pointer(param2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 1de12ab1-c9f5-11cf-bfc7-444553540000
@@ -1107,101 +1107,101 @@ var IID_IDirectInputJoyConfig = win32.GUID{Data1: 0x1de12ab1, Data2: 0xc9f5, Dat
 // Acquire dispatches through IDirectInputJoyConfig's vtable slot 3.
 func (self *IDirectInputJoyConfig) Acquire() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Unacquire dispatches through IDirectInputJoyConfig's vtable slot 4.
 func (self *IDirectInputJoyConfig) Unacquire() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCooperativeLevel dispatches through IDirectInputJoyConfig's vtable slot 5.
 func (self *IDirectInputJoyConfig) SetCooperativeLevel(param0 foundation.HWND, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendNotify dispatches through IDirectInputJoyConfig's vtable slot 6.
 func (self *IDirectInputJoyConfig) SendNotify() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumTypes dispatches through IDirectInputJoyConfig's vtable slot 7.
 func (self *IDirectInputJoyConfig) EnumTypes(param0 LPDIJOYTYPECALLBACK, param1 unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTypeInfo dispatches through IDirectInputJoyConfig's vtable slot 8.
 func (self *IDirectInputJoyConfig) GetTypeInfo(param0 string, param1 *DIJOYTYPEINFO, param2 uint32) error {
 	_param0 := win32.UTF16Ptr(param0)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_param0)), uintptr(unsafe.Pointer(param1)), uintptr(param2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTypeInfo dispatches through IDirectInputJoyConfig's vtable slot 9.
 func (self *IDirectInputJoyConfig) SetTypeInfo(param0 string, param1 *DIJOYTYPEINFO, param2 uint32) error {
 	_param0 := win32.UTF16Ptr(param0)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_param0)), uintptr(unsafe.Pointer(param1)), uintptr(param2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteType dispatches through IDirectInputJoyConfig's vtable slot 10.
 func (self *IDirectInputJoyConfig) DeleteType(param0 string) error {
 	_param0 := win32.UTF16Ptr(param0)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_param0)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetConfig dispatches through IDirectInputJoyConfig's vtable slot 11.
 func (self *IDirectInputJoyConfig) GetConfig(param0 uint32, param1 *DIJOYCONFIG, param2 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(param2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetConfig dispatches through IDirectInputJoyConfig's vtable slot 12.
 func (self *IDirectInputJoyConfig) SetConfig(param0 uint32, param1 *DIJOYCONFIG, param2 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(param2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteConfig dispatches through IDirectInputJoyConfig's vtable slot 13.
 func (self *IDirectInputJoyConfig) DeleteConfig(param0 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetUserValues dispatches through IDirectInputJoyConfig's vtable slot 14.
 func (self *IDirectInputJoyConfig) GetUserValues(param0 *DIJOYUSERVALUES, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetUserValues dispatches through IDirectInputJoyConfig's vtable slot 15.
 func (self *IDirectInputJoyConfig) SetUserValues(param0 *DIJOYUSERVALUES, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddNewHardware dispatches through IDirectInputJoyConfig's vtable slot 16.
 func (self *IDirectInputJoyConfig) AddNewHardware(param0 foundation.HWND, param1 *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenTypeKey dispatches through IDirectInputJoyConfig's vtable slot 17.
 func (self *IDirectInputJoyConfig) OpenTypeKey(param0 string, param1 uint32, param2 *systemregistry.HKEY) error {
 	_param0 := win32.UTF16Ptr(param0)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_param0)), uintptr(param1), uintptr(unsafe.Pointer(param2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenConfigKey dispatches through IDirectInputJoyConfig's vtable slot 18.
 func (self *IDirectInputJoyConfig) OpenConfigKey(param0 uint32, param1 uint32, param2 *systemregistry.HKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1), uintptr(unsafe.Pointer(param2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDirectInputJoyConfig8: https://learn.microsoft.com/windows/win32/api/dinputd/nn-dinputd-idirectinputjoyconfig8
@@ -1216,38 +1216,38 @@ var IID_IDirectInputJoyConfig8 = win32.GUID{Data1: 0xeb0d7dfa, Data2: 0x1990, Da
 // Acquire dispatches through IDirectInputJoyConfig8's vtable slot 3.
 func (self *IDirectInputJoyConfig8) Acquire() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Unacquire dispatches through IDirectInputJoyConfig8's vtable slot 4.
 func (self *IDirectInputJoyConfig8) Unacquire() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCooperativeLevel dispatches through IDirectInputJoyConfig8's vtable slot 5.
 func (self *IDirectInputJoyConfig8) SetCooperativeLevel(param0 foundation.HWND, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendNotify dispatches through IDirectInputJoyConfig8's vtable slot 6.
 func (self *IDirectInputJoyConfig8) SendNotify() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumTypes dispatches through IDirectInputJoyConfig8's vtable slot 7.
 func (self *IDirectInputJoyConfig8) EnumTypes(param0 LPDIJOYTYPECALLBACK, param1 unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTypeInfo dispatches through IDirectInputJoyConfig8's vtable slot 8.
 func (self *IDirectInputJoyConfig8) GetTypeInfo(param0 string, param1 *DIJOYTYPEINFO, param2 uint32) error {
 	_param0 := win32.UTF16Ptr(param0)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_param0)), uintptr(unsafe.Pointer(param1)), uintptr(param2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTypeInfo dispatches through IDirectInputJoyConfig8's vtable slot 9.
@@ -1255,63 +1255,63 @@ func (self *IDirectInputJoyConfig8) SetTypeInfo(param0 string, param1 *DIJOYTYPE
 	_param0 := win32.UTF16Ptr(param0)
 	_param3 := win32.UTF16Ptr(param3)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_param0)), uintptr(unsafe.Pointer(param1)), uintptr(param2), uintptr(unsafe.Pointer(_param3)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteType dispatches through IDirectInputJoyConfig8's vtable slot 10.
 func (self *IDirectInputJoyConfig8) DeleteType(param0 string) error {
 	_param0 := win32.UTF16Ptr(param0)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_param0)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetConfig dispatches through IDirectInputJoyConfig8's vtable slot 11.
 func (self *IDirectInputJoyConfig8) GetConfig(param0 uint32, param1 *DIJOYCONFIG, param2 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(param2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetConfig dispatches through IDirectInputJoyConfig8's vtable slot 12.
 func (self *IDirectInputJoyConfig8) SetConfig(param0 uint32, param1 *DIJOYCONFIG, param2 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(param2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteConfig dispatches through IDirectInputJoyConfig8's vtable slot 13.
 func (self *IDirectInputJoyConfig8) DeleteConfig(param0 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetUserValues dispatches through IDirectInputJoyConfig8's vtable slot 14.
 func (self *IDirectInputJoyConfig8) GetUserValues(param0 *DIJOYUSERVALUES, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetUserValues dispatches through IDirectInputJoyConfig8's vtable slot 15.
 func (self *IDirectInputJoyConfig8) SetUserValues(param0 *DIJOYUSERVALUES, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddNewHardware dispatches through IDirectInputJoyConfig8's vtable slot 16.
 func (self *IDirectInputJoyConfig8) AddNewHardware(param0 foundation.HWND, param1 *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenTypeKey dispatches through IDirectInputJoyConfig8's vtable slot 17.
 func (self *IDirectInputJoyConfig8) OpenTypeKey(param0 string, param1 uint32, param2 *systemregistry.HKEY) error {
 	_param0 := win32.UTF16Ptr(param0)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_param0)), uintptr(param1), uintptr(unsafe.Pointer(param2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenAppStatusKey dispatches through IDirectInputJoyConfig8's vtable slot 18.
 func (self *IDirectInputJoyConfig8) OpenAppStatusKey(param0 *systemregistry.HKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 89521361-aa8a-11cf-bfc7-444553540000
@@ -1325,29 +1325,29 @@ var IID_IDirectInputW = win32.GUID{Data1: 0x89521361, Data2: 0xaa8a, Data3: 0x11
 // CreateDevice dispatches through IDirectInputW's vtable slot 3.
 func (self *IDirectInputW) CreateDevice(param0 *win32.GUID, param1 **IDirectInputDeviceW, param2 *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumDevices dispatches through IDirectInputW's vtable slot 4.
 func (self *IDirectInputW) EnumDevices(param0 uint32, param1 LPDIENUMDEVICESCALLBACKW, param2 unsafe.Pointer, param3 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1), uintptr(unsafe.Pointer(param2)), uintptr(param3))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceStatus dispatches through IDirectInputW's vtable slot 5.
 func (self *IDirectInputW) GetDeviceStatus(param0 *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RunControlPanel dispatches through IDirectInputW's vtable slot 6.
 func (self *IDirectInputW) RunControlPanel(param0 foundation.HWND, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Initialize dispatches through IDirectInputW's vtable slot 7.
 func (self *IDirectInputW) Initialize(param0 foundation.HINSTANCE, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

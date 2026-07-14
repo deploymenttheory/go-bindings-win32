@@ -59,7 +59,7 @@ func OpenPersonalTrustDBDialogEx(hwndParent foundation.HWND, dwFlags uint32, pvR
 // Minimum OS: windows6.0.6000.
 func WTHelperCertCheckValidSignature(pProvData *CRYPT_PROVIDER_DATA) error {
 	r1, _, _ := syscall.SyscallN(procWTHelperCertCheckValidSignature.Addr(), uintptr(unsafe.Pointer(pProvData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WTHelperCertIsSelfSigned calls WINTRUST!WTHelperCertIsSelfSigned.

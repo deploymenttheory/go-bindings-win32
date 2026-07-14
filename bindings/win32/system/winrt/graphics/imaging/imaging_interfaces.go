@@ -26,7 +26,7 @@ var IID_ISoftwareBitmapNative = win32.GUID{Data1: 0x94bc8415, Data2: 0x04ea, Dat
 // GetData dispatches through ISoftwareBitmapNative's vtable slot 6.
 func (self *ISoftwareBitmapNative) GetData(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISoftwareBitmapNativeFactory: https://learn.microsoft.com/windows/win32/api/windows.graphics.imaging.interop/nn-windows-graphics-imaging-interop-isoftwarebitmapnativefactory
@@ -42,12 +42,12 @@ var IID_ISoftwareBitmapNativeFactory = win32.GUID{Data1: 0xc3c181ec, Data2: 0x29
 func (self *ISoftwareBitmapNativeFactory) CreateFromWICBitmap(data *graphicsimaging.IWICBitmap, forceReadOnly bool, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_forceReadOnly := win32.Bool32(forceReadOnly)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(data)), uintptr(_forceReadOnly), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateFromMF2DBuffer2 dispatches through ISoftwareBitmapNativeFactory's vtable slot 7.
 func (self *ISoftwareBitmapNativeFactory) CreateFromMF2DBuffer2(data *mediamediafoundation.IMF2DBuffer2, subtype *win32.GUID, width uint32, height uint32, forceReadOnly bool, minDisplayAperture *mediamediafoundation.MFVideoArea, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_forceReadOnly := win32.Bool32(forceReadOnly)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(data)), uintptr(unsafe.Pointer(subtype)), uintptr(width), uintptr(height), uintptr(_forceReadOnly), uintptr(unsafe.Pointer(minDisplayAperture)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

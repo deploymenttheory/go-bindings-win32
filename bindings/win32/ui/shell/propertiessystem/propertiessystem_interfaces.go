@@ -27,7 +27,7 @@ var IID_ICreateObject = win32.GUID{Data1: 0x75121952, Data2: 0xe0d0, Data3: 0x43
 // CreateObject dispatches through ICreateObject's vtable slot 3.
 func (self *ICreateObject) CreateObject(clsid *win32.GUID, pUnkOuter *systemcom.IUnknown, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDelayedPropertyStoreFactory: https://learn.microsoft.com/windows/win32/api/propsys/nn-propsys-idelayedpropertystorefactory
@@ -42,7 +42,7 @@ var IID_IDelayedPropertyStoreFactory = win32.GUID{Data1: 0x40d4577f, Data2: 0xe2
 // GetDelayedPropertyStore dispatches through IDelayedPropertyStoreFactory's vtable slot 5.
 func (self *IDelayedPropertyStoreFactory) GetDelayedPropertyStore(flags GETPROPERTYSTOREFLAGS, dwStoreId uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(flags), uintptr(dwStoreId), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInitializeWithFile: https://learn.microsoft.com/windows/win32/api/propsys/nn-propsys-iinitializewithfile
@@ -58,7 +58,7 @@ var IID_IInitializeWithFile = win32.GUID{Data1: 0xb7d14566, Data2: 0x0509, Data3
 func (self *IInitializeWithFile) Initialize(pszFilePath string, grfMode uint32) error {
 	_pszFilePath := win32.UTF16Ptr(pszFilePath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFilePath)), uintptr(grfMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInitializeWithStream: https://learn.microsoft.com/windows/win32/api/propsys/nn-propsys-iinitializewithstream
@@ -73,7 +73,7 @@ var IID_IInitializeWithStream = win32.GUID{Data1: 0xb824b49d, Data2: 0x22ac, Dat
 // Initialize dispatches through IInitializeWithStream's vtable slot 3.
 func (self *IInitializeWithStream) Initialize(pstream *systemcom.IStream, grfMode uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstream)), uintptr(grfMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // INamedPropertyStore: https://learn.microsoft.com/windows/win32/api/propsys/nn-propsys-inamedpropertystore
@@ -89,26 +89,26 @@ var IID_INamedPropertyStore = win32.GUID{Data1: 0x71604b0f, Data2: 0x97b0, Data3
 func (self *INamedPropertyStore) GetNamedValue(pszName string, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
 	_pszName := win32.UTF16Ptr(pszName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(ppropvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetNamedValue dispatches through INamedPropertyStore's vtable slot 4.
 func (self *INamedPropertyStore) SetNamedValue(pszName string, propvar *systemcomstructuredstorage.PROPVARIANT) error {
 	_pszName := win32.UTF16Ptr(pszName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(propvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNameCount dispatches through INamedPropertyStore's vtable slot 5.
 func (self *INamedPropertyStore) GetNameCount(pdwCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNameAt dispatches through INamedPropertyStore's vtable slot 6.
 func (self *INamedPropertyStore) GetNameAt(iProp uint32, pbstrName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(iProp), uintptr(unsafe.Pointer(pbstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IObjectWithPropertyKey: https://learn.microsoft.com/windows/win32/api/propsys/nn-propsys-iobjectwithpropertykey
@@ -123,13 +123,13 @@ var IID_IObjectWithPropertyKey = win32.GUID{Data1: 0xfc0ca0a7, Data2: 0xc316, Da
 // SetPropertyKey dispatches through IObjectWithPropertyKey's vtable slot 3.
 func (self *IObjectWithPropertyKey) SetPropertyKey(key *foundation.PROPERTYKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPropertyKey dispatches through IObjectWithPropertyKey's vtable slot 4.
 func (self *IObjectWithPropertyKey) GetPropertyKey(pkey *foundation.PROPERTYKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pkey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPersistSerializedPropStorage: https://learn.microsoft.com/windows/win32/api/propsys/nn-propsys-ipersistserializedpropstorage
@@ -144,19 +144,19 @@ var IID_IPersistSerializedPropStorage = win32.GUID{Data1: 0xe318ad57, Data2: 0x0
 // SetFlags dispatches through IPersistSerializedPropStorage's vtable slot 3.
 func (self *IPersistSerializedPropStorage) SetFlags(flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetPropertyStorage dispatches through IPersistSerializedPropStorage's vtable slot 4.
 func (self *IPersistSerializedPropStorage) SetPropertyStorage(psps PCUSERIALIZEDPROPSTORAGE, cb uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(psps), uintptr(cb))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPropertyStorage dispatches through IPersistSerializedPropStorage's vtable slot 5.
 func (self *IPersistSerializedPropStorage) GetPropertyStorage(ppsps **SERIALIZEDPROPSTORAGE, pcb *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppsps)), uintptr(unsafe.Pointer(pcb)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPersistSerializedPropStorage2: https://learn.microsoft.com/windows/win32/api/propsys/nn-propsys-ipersistserializedpropstorage2
@@ -171,13 +171,13 @@ var IID_IPersistSerializedPropStorage2 = win32.GUID{Data1: 0x77effa68, Data2: 0x
 // GetPropertyStorageSize dispatches through IPersistSerializedPropStorage2's vtable slot 6.
 func (self *IPersistSerializedPropStorage2) GetPropertyStorageSize(pcb *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcb)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPropertyStorageBuffer dispatches through IPersistSerializedPropStorage2's vtable slot 7.
 func (self *IPersistSerializedPropStorage2) GetPropertyStorageBuffer(psps *SERIALIZEDPROPSTORAGE, cb uint32, pcbWritten *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(psps)), uintptr(cb), uintptr(unsafe.Pointer(pcbWritten)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPropertyChange: https://learn.microsoft.com/windows/win32/api/propsys/nn-propsys-ipropertychange
@@ -192,7 +192,7 @@ var IID_IPropertyChange = win32.GUID{Data1: 0xf917bc8a, Data2: 0x1bba, Data3: 0x
 // ApplyToPropVariant dispatches through IPropertyChange's vtable slot 5.
 func (self *IPropertyChange) ApplyToPropVariant(propvarIn *systemcomstructuredstorage.PROPVARIANT, ppropvarOut *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propvarIn)), uintptr(unsafe.Pointer(ppropvarOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPropertyChangeArray: https://learn.microsoft.com/windows/win32/api/propsys/nn-propsys-ipropertychangearray
@@ -207,43 +207,43 @@ var IID_IPropertyChangeArray = win32.GUID{Data1: 0x380f5cad, Data2: 0x1b5e, Data
 // GetCount dispatches through IPropertyChangeArray's vtable slot 3.
 func (self *IPropertyChangeArray) GetCount(pcOperations *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcOperations)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAt dispatches through IPropertyChangeArray's vtable slot 4.
 func (self *IPropertyChangeArray) GetAt(iIndex uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(iIndex), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InsertAt dispatches through IPropertyChangeArray's vtable slot 5.
 func (self *IPropertyChangeArray) InsertAt(iIndex uint32, ppropChange *IPropertyChange) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(iIndex), uintptr(unsafe.Pointer(ppropChange)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Append dispatches through IPropertyChangeArray's vtable slot 6.
 func (self *IPropertyChangeArray) Append(ppropChange *IPropertyChange) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppropChange)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AppendOrReplace dispatches through IPropertyChangeArray's vtable slot 7.
 func (self *IPropertyChangeArray) AppendOrReplace(ppropChange *IPropertyChange) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppropChange)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAt dispatches through IPropertyChangeArray's vtable slot 8.
 func (self *IPropertyChangeArray) RemoveAt(iIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(iIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsKeyInArray dispatches through IPropertyChangeArray's vtable slot 9.
 func (self *IPropertyChangeArray) IsKeyInArray(key *foundation.PROPERTYKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPropertyDescription: https://learn.microsoft.com/windows/win32/api/propsys/nn-propsys-ipropertydescription
@@ -258,128 +258,128 @@ var IID_IPropertyDescription = win32.GUID{Data1: 0x6f79d558, Data2: 0x3e96, Data
 // GetPropertyKey dispatches through IPropertyDescription's vtable slot 3.
 func (self *IPropertyDescription) GetPropertyKey(pkey *foundation.PROPERTYKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pkey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCanonicalName dispatches through IPropertyDescription's vtable slot 4.
 func (self *IPropertyDescription) GetCanonicalName(ppszName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPropertyType dispatches through IPropertyDescription's vtable slot 5.
 func (self *IPropertyDescription) GetPropertyType(pvartype *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvartype)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDisplayName dispatches through IPropertyDescription's vtable slot 6.
 func (self *IPropertyDescription) GetDisplayName(ppszName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEditInvitation dispatches through IPropertyDescription's vtable slot 7.
 func (self *IPropertyDescription) GetEditInvitation(ppszInvite *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszInvite)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTypeFlags dispatches through IPropertyDescription's vtable slot 8.
 func (self *IPropertyDescription) GetTypeFlags(mask PROPDESC_TYPE_FLAGS, ppdtFlags *PROPDESC_TYPE_FLAGS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(mask), uintptr(unsafe.Pointer(ppdtFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetViewFlags dispatches through IPropertyDescription's vtable slot 9.
 func (self *IPropertyDescription) GetViewFlags(ppdvFlags *PROPDESC_VIEW_FLAGS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppdvFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDefaultColumnWidth dispatches through IPropertyDescription's vtable slot 10.
 func (self *IPropertyDescription) GetDefaultColumnWidth(pcxChars *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcxChars)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDisplayType dispatches through IPropertyDescription's vtable slot 11.
 func (self *IPropertyDescription) GetDisplayType(pdisplaytype *PROPDESC_DISPLAYTYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdisplaytype)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetColumnState dispatches through IPropertyDescription's vtable slot 12.
 func (self *IPropertyDescription) GetColumnState(pcsFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcsFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetGroupingRange dispatches through IPropertyDescription's vtable slot 13.
 func (self *IPropertyDescription) GetGroupingRange(pgr *PROPDESC_GROUPING_RANGE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pgr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRelativeDescriptionType dispatches through IPropertyDescription's vtable slot 14.
 func (self *IPropertyDescription) GetRelativeDescriptionType(prdt *PROPDESC_RELATIVEDESCRIPTION_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prdt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRelativeDescription dispatches through IPropertyDescription's vtable slot 15.
 func (self *IPropertyDescription) GetRelativeDescription(propvar1 *systemcomstructuredstorage.PROPVARIANT, propvar2 *systemcomstructuredstorage.PROPVARIANT, ppszDesc1 *foundation.PWSTR, ppszDesc2 *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propvar1)), uintptr(unsafe.Pointer(propvar2)), uintptr(unsafe.Pointer(ppszDesc1)), uintptr(unsafe.Pointer(ppszDesc2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSortDescription dispatches through IPropertyDescription's vtable slot 16.
 func (self *IPropertyDescription) GetSortDescription(psd *PROPDESC_SORTDESCRIPTION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(psd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSortDescriptionLabel dispatches through IPropertyDescription's vtable slot 17.
 func (self *IPropertyDescription) GetSortDescriptionLabel(fDescending bool, ppszDescription *foundation.PWSTR) error {
 	_fDescending := win32.Bool32(fDescending)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(_fDescending), uintptr(unsafe.Pointer(ppszDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAggregationType dispatches through IPropertyDescription's vtable slot 18.
 func (self *IPropertyDescription) GetAggregationType(paggtype *PROPDESC_AGGREGATION_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(paggtype)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetConditionType dispatches through IPropertyDescription's vtable slot 19.
 func (self *IPropertyDescription) GetConditionType(pcontype *PROPDESC_CONDITION_TYPE, popDefault *systemsearchcommon.CONDITION_OPERATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcontype)), uintptr(unsafe.Pointer(popDefault)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEnumTypeList dispatches through IPropertyDescription's vtable slot 20.
 func (self *IPropertyDescription) GetEnumTypeList(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoerceToCanonicalValue dispatches through IPropertyDescription's vtable slot 21.
 func (self *IPropertyDescription) CoerceToCanonicalValue(ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppropvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FormatForDisplay dispatches through IPropertyDescription's vtable slot 22.
 func (self *IPropertyDescription) FormatForDisplay(propvar *systemcomstructuredstorage.PROPVARIANT, pdfFlags PROPDESC_FORMAT_FLAGS, ppszDisplay *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propvar)), uintptr(pdfFlags), uintptr(unsafe.Pointer(ppszDisplay)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsValueCanonical dispatches through IPropertyDescription's vtable slot 23.
 func (self *IPropertyDescription) IsValueCanonical(propvar *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPropertyDescription2: https://learn.microsoft.com/windows/win32/api/propsys/nn-propsys-ipropertydescription2
@@ -394,7 +394,7 @@ var IID_IPropertyDescription2 = win32.GUID{Data1: 0x57d2eded, Data2: 0x5062, Dat
 // GetImageReferenceForValue dispatches through IPropertyDescription2's vtable slot 24.
 func (self *IPropertyDescription2) GetImageReferenceForValue(propvar *systemcomstructuredstorage.PROPVARIANT, ppszImageRes *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(ppszImageRes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPropertyDescriptionAliasInfo: https://learn.microsoft.com/windows/win32/api/propsys/nn-propsys-ipropertydescriptionaliasinfo
@@ -409,13 +409,13 @@ var IID_IPropertyDescriptionAliasInfo = win32.GUID{Data1: 0xf67104fc, Data2: 0x2
 // GetSortByAlias dispatches through IPropertyDescriptionAliasInfo's vtable slot 24.
 func (self *IPropertyDescriptionAliasInfo) GetSortByAlias(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAdditionalSortByAliases dispatches through IPropertyDescriptionAliasInfo's vtable slot 25.
 func (self *IPropertyDescriptionAliasInfo) GetAdditionalSortByAliases(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPropertyDescriptionList: https://learn.microsoft.com/windows/win32/api/propsys/nn-propsys-ipropertydescriptionlist
@@ -430,13 +430,13 @@ var IID_IPropertyDescriptionList = win32.GUID{Data1: 0x1f9fc1d0, Data2: 0xc39b, 
 // GetCount dispatches through IPropertyDescriptionList's vtable slot 3.
 func (self *IPropertyDescriptionList) GetCount(pcElem *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcElem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAt dispatches through IPropertyDescriptionList's vtable slot 4.
 func (self *IPropertyDescriptionList) GetAt(iElem uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(iElem), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPropertyDescriptionRelatedPropertyInfo: https://learn.microsoft.com/windows/win32/api/propsys/nn-propsys-ipropertydescriptionrelatedpropertyinfo
@@ -452,7 +452,7 @@ var IID_IPropertyDescriptionRelatedPropertyInfo = win32.GUID{Data1: 0x507393f4, 
 func (self *IPropertyDescriptionRelatedPropertyInfo) GetRelatedProperty(pszRelationshipName string, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszRelationshipName := win32.UTF16Ptr(pszRelationshipName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszRelationshipName)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPropertyDescriptionSearchInfo: https://learn.microsoft.com/windows/win32/api/propsys/nn-propsys-ipropertydescriptionsearchinfo
@@ -467,25 +467,25 @@ var IID_IPropertyDescriptionSearchInfo = win32.GUID{Data1: 0x078f91bd, Data2: 0x
 // GetSearchInfoFlags dispatches through IPropertyDescriptionSearchInfo's vtable slot 24.
 func (self *IPropertyDescriptionSearchInfo) GetSearchInfoFlags(ppdsiFlags *PROPDESC_SEARCHINFO_FLAGS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppdsiFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetColumnIndexType dispatches through IPropertyDescriptionSearchInfo's vtable slot 25.
 func (self *IPropertyDescriptionSearchInfo) GetColumnIndexType(ppdciType *PROPDESC_COLUMNINDEX_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppdciType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProjectionString dispatches through IPropertyDescriptionSearchInfo's vtable slot 26.
 func (self *IPropertyDescriptionSearchInfo) GetProjectionString(ppszProjection *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszProjection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMaxSize dispatches through IPropertyDescriptionSearchInfo's vtable slot 27.
 func (self *IPropertyDescriptionSearchInfo) GetMaxSize(pcbMaxSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcbMaxSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPropertyEnumType: https://learn.microsoft.com/windows/win32/api/propsys/nn-propsys-ipropertyenumtype
@@ -500,31 +500,31 @@ var IID_IPropertyEnumType = win32.GUID{Data1: 0x11e1fbf9, Data2: 0x2d56, Data3: 
 // GetEnumType dispatches through IPropertyEnumType's vtable slot 3.
 func (self *IPropertyEnumType) GetEnumType(penumtype *PROPENUMTYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(penumtype)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetValue dispatches through IPropertyEnumType's vtable slot 4.
 func (self *IPropertyEnumType) GetValue(ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppropvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRangeMinValue dispatches through IPropertyEnumType's vtable slot 5.
 func (self *IPropertyEnumType) GetRangeMinValue(ppropvarMin *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppropvarMin)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRangeSetValue dispatches through IPropertyEnumType's vtable slot 6.
 func (self *IPropertyEnumType) GetRangeSetValue(ppropvarSet *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppropvarSet)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDisplayText dispatches through IPropertyEnumType's vtable slot 7.
 func (self *IPropertyEnumType) GetDisplayText(ppszDisplay *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszDisplay)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPropertyEnumType2: https://learn.microsoft.com/windows/win32/api/propsys/nn-propsys-ipropertyenumtype2
@@ -539,7 +539,7 @@ var IID_IPropertyEnumType2 = win32.GUID{Data1: 0x9b6e051c, Data2: 0x5ddd, Data3:
 // GetImageReference dispatches through IPropertyEnumType2's vtable slot 8.
 func (self *IPropertyEnumType2) GetImageReference(ppszImageRes *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszImageRes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPropertyEnumTypeList: https://learn.microsoft.com/windows/win32/api/propsys/nn-propsys-ipropertyenumtypelist
@@ -554,25 +554,25 @@ var IID_IPropertyEnumTypeList = win32.GUID{Data1: 0xa99400f4, Data2: 0x3d84, Dat
 // GetCount dispatches through IPropertyEnumTypeList's vtable slot 3.
 func (self *IPropertyEnumTypeList) GetCount(pctypes *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pctypes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAt dispatches through IPropertyEnumTypeList's vtable slot 4.
 func (self *IPropertyEnumTypeList) GetAt(itype uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(itype), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetConditionAt dispatches through IPropertyEnumTypeList's vtable slot 5.
 func (self *IPropertyEnumTypeList) GetConditionAt(nIndex uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(nIndex), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FindMatchingIndex dispatches through IPropertyEnumTypeList's vtable slot 6.
 func (self *IPropertyEnumTypeList) FindMatchingIndex(propvarCmp *systemcomstructuredstorage.PROPVARIANT, pnIndex *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propvarCmp)), uintptr(unsafe.Pointer(pnIndex)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPropertyStore: https://learn.microsoft.com/windows/win32/api/propsys/nn-propsys-ipropertystore
@@ -587,31 +587,31 @@ var IID_IPropertyStore = win32.GUID{Data1: 0x886d8eeb, Data2: 0x8cf2, Data3: 0x4
 // GetCount dispatches through IPropertyStore's vtable slot 3.
 func (self *IPropertyStore) GetCount(cProps *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cProps)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAt dispatches through IPropertyStore's vtable slot 4.
 func (self *IPropertyStore) GetAt(iProp uint32, pkey *foundation.PROPERTYKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(iProp), uintptr(unsafe.Pointer(pkey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetValue dispatches through IPropertyStore's vtable slot 5.
 func (self *IPropertyStore) GetValue(key *foundation.PROPERTYKEY, pv *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetValue dispatches through IPropertyStore's vtable slot 6.
 func (self *IPropertyStore) SetValue(key *foundation.PROPERTYKEY, propvar *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(propvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Commit dispatches through IPropertyStore's vtable slot 7.
 func (self *IPropertyStore) Commit() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPropertyStoreCache: https://learn.microsoft.com/windows/win32/api/propsys/nn-propsys-ipropertystorecache
@@ -626,25 +626,25 @@ var IID_IPropertyStoreCache = win32.GUID{Data1: 0x3017056d, Data2: 0x9a91, Data3
 // GetState dispatches through IPropertyStoreCache's vtable slot 8.
 func (self *IPropertyStoreCache) GetState(key *foundation.PROPERTYKEY, pstate *PSC_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pstate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetValueAndState dispatches through IPropertyStoreCache's vtable slot 9.
 func (self *IPropertyStoreCache) GetValueAndState(key *foundation.PROPERTYKEY, ppropvar *systemcomstructuredstorage.PROPVARIANT, pstate *PSC_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(ppropvar)), uintptr(unsafe.Pointer(pstate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetState dispatches through IPropertyStoreCache's vtable slot 10.
 func (self *IPropertyStoreCache) SetState(key *foundation.PROPERTYKEY, state PSC_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(state))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetValueAndState dispatches through IPropertyStoreCache's vtable slot 11.
 func (self *IPropertyStoreCache) SetValueAndState(key *foundation.PROPERTYKEY, ppropvar *systemcomstructuredstorage.PROPVARIANT, state PSC_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(ppropvar)), uintptr(state))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPropertyStoreCapabilities: https://learn.microsoft.com/windows/win32/api/propsys/nn-propsys-ipropertystorecapabilities
@@ -659,7 +659,7 @@ var IID_IPropertyStoreCapabilities = win32.GUID{Data1: 0xc8e2d566, Data2: 0x186e
 // IsPropertyWritable dispatches through IPropertyStoreCapabilities's vtable slot 3.
 func (self *IPropertyStoreCapabilities) IsPropertyWritable(key *foundation.PROPERTYKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPropertyStoreFactory: https://learn.microsoft.com/windows/win32/api/propsys/nn-propsys-ipropertystorefactory
@@ -674,13 +674,13 @@ var IID_IPropertyStoreFactory = win32.GUID{Data1: 0xbc110b6d, Data2: 0x57e8, Dat
 // GetPropertyStore dispatches through IPropertyStoreFactory's vtable slot 3.
 func (self *IPropertyStoreFactory) GetPropertyStore(flags GETPROPERTYSTOREFLAGS, pUnkFactory *systemcom.IUnknown, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(flags), uintptr(unsafe.Pointer(pUnkFactory)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPropertyStoreForKeys dispatches through IPropertyStoreFactory's vtable slot 4.
 func (self *IPropertyStoreFactory) GetPropertyStoreForKeys(rgKeys *foundation.PROPERTYKEY, cKeys uint32, flags GETPROPERTYSTOREFLAGS, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rgKeys)), uintptr(cKeys), uintptr(flags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPropertySystem: https://learn.microsoft.com/windows/win32/api/propsys/nn-propsys-ipropertysystem
@@ -695,59 +695,59 @@ var IID_IPropertySystem = win32.GUID{Data1: 0xca724e8a, Data2: 0xc3e6, Data3: 0x
 // GetPropertyDescription dispatches through IPropertySystem's vtable slot 3.
 func (self *IPropertySystem) GetPropertyDescription(propkey *foundation.PROPERTYKEY, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propkey)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPropertyDescriptionByName dispatches through IPropertySystem's vtable slot 4.
 func (self *IPropertySystem) GetPropertyDescriptionByName(pszCanonicalName string, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszCanonicalName := win32.UTF16Ptr(pszCanonicalName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszCanonicalName)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPropertyDescriptionListFromString dispatches through IPropertySystem's vtable slot 5.
 func (self *IPropertySystem) GetPropertyDescriptionListFromString(pszPropList string, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszPropList := win32.UTF16Ptr(pszPropList)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPropList)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumeratePropertyDescriptions dispatches through IPropertySystem's vtable slot 6.
 func (self *IPropertySystem) EnumeratePropertyDescriptions(filterOn PROPDESC_ENUMFILTER, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(filterOn), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FormatForDisplay dispatches through IPropertySystem's vtable slot 7.
 func (self *IPropertySystem) FormatForDisplay(key *foundation.PROPERTYKEY, propvar *systemcomstructuredstorage.PROPVARIANT, pdff PROPDESC_FORMAT_FLAGS, pszText foundation.PWSTR, cchText uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(propvar)), uintptr(pdff), uintptr(unsafe.Pointer(pszText)), uintptr(cchText))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FormatForDisplayAlloc dispatches through IPropertySystem's vtable slot 8.
 func (self *IPropertySystem) FormatForDisplayAlloc(key *foundation.PROPERTYKEY, propvar *systemcomstructuredstorage.PROPVARIANT, pdff PROPDESC_FORMAT_FLAGS, ppszDisplay *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(propvar)), uintptr(pdff), uintptr(unsafe.Pointer(ppszDisplay)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterPropertySchema dispatches through IPropertySystem's vtable slot 9.
 func (self *IPropertySystem) RegisterPropertySchema(pszPath string) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnregisterPropertySchema dispatches through IPropertySystem's vtable slot 10.
 func (self *IPropertySystem) UnregisterPropertySchema(pszPath string) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RefreshPropertySchema dispatches through IPropertySystem's vtable slot 11.
 func (self *IPropertySystem) RefreshPropertySchema() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: fa955fd9-38be-4879-a6ce-824cf52d609f
@@ -761,7 +761,7 @@ var IID_IPropertySystemChangeNotify = win32.GUID{Data1: 0xfa955fd9, Data2: 0x38b
 // SchemaRefreshed dispatches through IPropertySystemChangeNotify's vtable slot 3.
 func (self *IPropertySystemChangeNotify) SchemaRefreshed() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPropertyUI: https://learn.microsoft.com/windows/win32/api/shobjidl_core/nn-shobjidl_core-ipropertyui
@@ -777,47 +777,47 @@ var IID_IPropertyUI = win32.GUID{Data1: 0x757a7d9f, Data2: 0x919a, Data3: 0x4118
 func (self *IPropertyUI) ParsePropertyName(pszName string, pfmtid *win32.GUID, ppid *uint32, pchEaten *uint32) error {
 	_pszName := win32.UTF16Ptr(pszName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(pfmtid)), uintptr(unsafe.Pointer(ppid)), uintptr(unsafe.Pointer(pchEaten)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCannonicalName dispatches through IPropertyUI's vtable slot 4.
 func (self *IPropertyUI) GetCannonicalName(fmtid *win32.GUID, pid uint32, pwszText foundation.PWSTR, cchText uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fmtid)), uintptr(pid), uintptr(unsafe.Pointer(pwszText)), uintptr(cchText))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDisplayName dispatches through IPropertyUI's vtable slot 5.
 func (self *IPropertyUI) GetDisplayName(fmtid *win32.GUID, pid uint32, flags PROPERTYUI_NAME_FLAGS, pwszText foundation.PWSTR, cchText uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fmtid)), uintptr(pid), uintptr(flags), uintptr(unsafe.Pointer(pwszText)), uintptr(cchText))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPropertyDescription dispatches through IPropertyUI's vtable slot 6.
 func (self *IPropertyUI) GetPropertyDescription(fmtid *win32.GUID, pid uint32, pwszText foundation.PWSTR, cchText uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fmtid)), uintptr(pid), uintptr(unsafe.Pointer(pwszText)), uintptr(cchText))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDefaultWidth dispatches through IPropertyUI's vtable slot 7.
 func (self *IPropertyUI) GetDefaultWidth(fmtid *win32.GUID, pid uint32, pcxChars *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fmtid)), uintptr(pid), uintptr(unsafe.Pointer(pcxChars)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFlags dispatches through IPropertyUI's vtable slot 8.
 func (self *IPropertyUI) GetFlags(fmtid *win32.GUID, pid uint32, pflags *PROPERTYUI_FLAGS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fmtid)), uintptr(pid), uintptr(unsafe.Pointer(pflags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FormatForDisplay dispatches through IPropertyUI's vtable slot 9.
 func (self *IPropertyUI) FormatForDisplay(fmtid *win32.GUID, pid uint32, ppropvar *systemcomstructuredstorage.PROPVARIANT, puiff PROPERTYUI_FORMAT_FLAGS, pwszText foundation.PWSTR, cchText uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fmtid)), uintptr(pid), uintptr(unsafe.Pointer(ppropvar)), uintptr(puiff), uintptr(unsafe.Pointer(pwszText)), uintptr(cchText))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetHelpInfo dispatches through IPropertyUI's vtable slot 10.
 func (self *IPropertyUI) GetHelpInfo(fmtid *win32.GUID, pid uint32, pwszHelpFile foundation.PWSTR, cch uint32, puHelpID *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fmtid)), uintptr(pid), uintptr(unsafe.Pointer(pwszHelpFile)), uintptr(cch), uintptr(unsafe.Pointer(puHelpID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

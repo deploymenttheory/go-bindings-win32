@@ -25,13 +25,13 @@ var IID_IDeviceModelPlugIn = win32.GUID{Data1: 0x1cd63475, Data2: 0x07c4, Data3:
 // Initialize dispatches through IDeviceModelPlugIn's vtable slot 3.
 func (self *IDeviceModelPlugIn) Initialize(bstrXml foundation.BSTR, cNumModels uint32, iModelPosition uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrXml)), uintptr(cNumModels), uintptr(iModelPosition))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNumChannels dispatches through IDeviceModelPlugIn's vtable slot 4.
 func (self *IDeviceModelPlugIn) GetNumChannels(pNumChannels *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNumChannels)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeviceToColorimetricColors dispatches through IDeviceModelPlugIn's vtable slot 5.
@@ -41,7 +41,7 @@ func (self *IDeviceModelPlugIn) DeviceToColorimetricColors(cChannels uint32, pDe
 		_pXYZColors = &pXYZColors[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(len(pXYZColors)), uintptr(cChannels), uintptr(unsafe.Pointer(pDeviceValues)), uintptr(unsafe.Pointer(_pXYZColors)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ColorimetricToDeviceColors dispatches through IDeviceModelPlugIn's vtable slot 6.
@@ -51,31 +51,31 @@ func (self *IDeviceModelPlugIn) ColorimetricToDeviceColors(cChannels uint32, pXY
 		_pXYZColors = &pXYZColors[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(len(pXYZColors)), uintptr(cChannels), uintptr(unsafe.Pointer(_pXYZColors)), uintptr(unsafe.Pointer(pDeviceValues)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ColorimetricToDeviceColorsWithBlack dispatches through IDeviceModelPlugIn's vtable slot 7.
 func (self *IDeviceModelPlugIn) ColorimetricToDeviceColorsWithBlack(cColors uint32, cChannels uint32, pXYZColors *XYZColorF, pBlackInformation *BlackInformation, pDeviceValues *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(cColors), uintptr(cChannels), uintptr(unsafe.Pointer(pXYZColors)), uintptr(unsafe.Pointer(pBlackInformation)), uintptr(unsafe.Pointer(pDeviceValues)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTransformDeviceModelInfo dispatches through IDeviceModelPlugIn's vtable slot 8.
 func (self *IDeviceModelPlugIn) SetTransformDeviceModelInfo(iModelPosition uint32, pIDeviceModelOther *IDeviceModelPlugIn) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(iModelPosition), uintptr(unsafe.Pointer(pIDeviceModelOther)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPrimarySamples dispatches through IDeviceModelPlugIn's vtable slot 9.
 func (self *IDeviceModelPlugIn) GetPrimarySamples(pPrimaryColor *PrimaryXYZColors) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPrimaryColor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetGamutBoundaryMeshSize dispatches through IDeviceModelPlugIn's vtable slot 10.
 func (self *IDeviceModelPlugIn) GetGamutBoundaryMeshSize(pNumVertices *uint32, pNumTriangles *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNumVertices)), uintptr(unsafe.Pointer(pNumTriangles)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetGamutBoundaryMesh dispatches through IDeviceModelPlugIn's vtable slot 11.
@@ -85,13 +85,13 @@ func (self *IDeviceModelPlugIn) GetGamutBoundaryMesh(cChannels uint32, cVertices
 		_pTriangles = &pTriangles[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(cChannels), uintptr(cVertices), uintptr(len(pTriangles)), uintptr(unsafe.Pointer(pVertices)), uintptr(unsafe.Pointer(_pTriangles)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNeutralAxisSize dispatches through IDeviceModelPlugIn's vtable slot 12.
 func (self *IDeviceModelPlugIn) GetNeutralAxisSize(pcColors *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcColors)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNeutralAxis dispatches through IDeviceModelPlugIn's vtable slot 13.
@@ -101,7 +101,7 @@ func (self *IDeviceModelPlugIn) GetNeutralAxis(pXYZColors []XYZColorF) error {
 		_pXYZColors = &pXYZColors[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(len(pXYZColors)), uintptr(unsafe.Pointer(_pXYZColors)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IGamutMapModelPlugIn: https://learn.microsoft.com/windows/win32/api/wcsplugin/nn-wcsplugin-igamutmapmodelplugin
@@ -116,11 +116,11 @@ var IID_IGamutMapModelPlugIn = win32.GUID{Data1: 0x2dd80115, Data2: 0xad1e, Data
 // Initialize dispatches through IGamutMapModelPlugIn's vtable slot 3.
 func (self *IGamutMapModelPlugIn) Initialize(bstrXml foundation.BSTR, pSrcPlugIn *IDeviceModelPlugIn, pDestPlugIn *IDeviceModelPlugIn, pSrcGBD *GamutBoundaryDescription, pDestGBD *GamutBoundaryDescription) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrXml)), uintptr(unsafe.Pointer(pSrcPlugIn)), uintptr(unsafe.Pointer(pDestPlugIn)), uintptr(unsafe.Pointer(pSrcGBD)), uintptr(unsafe.Pointer(pDestGBD)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SourceToDestinationAppearanceColors dispatches through IGamutMapModelPlugIn's vtable slot 4.
 func (self *IGamutMapModelPlugIn) SourceToDestinationAppearanceColors(cColors uint32, pInputColors *JChColorF, pOutputColors *JChColorF) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cColors), uintptr(unsafe.Pointer(pInputColors)), uintptr(unsafe.Pointer(pOutputColors)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

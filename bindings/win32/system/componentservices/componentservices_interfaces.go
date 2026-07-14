@@ -28,31 +28,31 @@ var IID_ContextInfo = win32.GUID{Data1: 0x19a5a02c, Data2: 0x0ac8, Data3: 0x11d2
 // IsInTransaction dispatches through ContextInfo's vtable slot 7.
 func (self *ContextInfo) IsInTransaction(pbIsInTx *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbIsInTx)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTransaction dispatches through ContextInfo's vtable slot 8.
 func (self *ContextInfo) GetTransaction(ppTx **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTx)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTransactionId dispatches through ContextInfo's vtable slot 9.
 func (self *ContextInfo) GetTransactionId(pbstrTxId *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrTxId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetActivityId dispatches through ContextInfo's vtable slot 10.
 func (self *ContextInfo) GetActivityId(pbstrActivityId *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrActivityId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetContextId dispatches through ContextInfo's vtable slot 11.
 func (self *ContextInfo) GetContextId(pbstrCtxId *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrCtxId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ContextInfo2: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-contextinfo2
@@ -67,19 +67,19 @@ var IID_ContextInfo2 = win32.GUID{Data1: 0xc99d6e75, Data2: 0x2375, Data3: 0x11d
 // GetPartitionId dispatches through ContextInfo2's vtable slot 12.
 func (self *ContextInfo2) GetPartitionId(__MIDL__ContextInfo20000 *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__ContextInfo20000)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetApplicationId dispatches through ContextInfo2's vtable slot 13.
 func (self *ContextInfo2) GetApplicationId(__MIDL__ContextInfo20001 *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__ContextInfo20001)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetApplicationInstanceId dispatches through ContextInfo2's vtable slot 14.
 func (self *ContextInfo2) GetApplicationInstanceId(__MIDL__ContextInfo20002 *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__ContextInfo20002)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAppDomainHelper: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-iappdomainhelper
@@ -94,13 +94,13 @@ var IID_IAppDomainHelper = win32.GUID{Data1: 0xc7b67079, Data2: 0x8255, Data3: 0
 // Initialize dispatches through IAppDomainHelper's vtable slot 7.
 func (self *IAppDomainHelper) Initialize(pUnkAD *systemcom.IUnknown, __MIDL__IAppDomainHelper0000 uintptr, pPool unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkAD)), uintptr(__MIDL__IAppDomainHelper0000), uintptr(unsafe.Pointer(pPool)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DoCallback dispatches through IAppDomainHelper's vtable slot 8.
 func (self *IAppDomainHelper) DoCallback(pUnkAD *systemcom.IUnknown, __MIDL__IAppDomainHelper0001 uintptr, pPool unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkAD)), uintptr(__MIDL__IAppDomainHelper0001), uintptr(unsafe.Pointer(pPool)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAssemblyLocator: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-iassemblylocator
@@ -115,7 +115,7 @@ var IID_IAssemblyLocator = win32.GUID{Data1: 0x391ffbb9, Data2: 0xa8ee, Data3: 0
 // GetModules dispatches through IAssemblyLocator's vtable slot 7.
 func (self *IAssemblyLocator) GetModules(applicationDir foundation.BSTR, applicationName foundation.BSTR, assemblyName foundation.BSTR, pModules **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(applicationDir)), uintptr(unsafe.Pointer(applicationName)), uintptr(unsafe.Pointer(assemblyName)), uintptr(unsafe.Pointer(pModules)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAsyncErrorNotify: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-iasyncerrornotify
@@ -130,7 +130,7 @@ var IID_IAsyncErrorNotify = win32.GUID{Data1: 0xfe6777fb, Data2: 0xa674, Data3: 
 // OnError dispatches through IAsyncErrorNotify's vtable slot 3.
 func (self *IAsyncErrorNotify) OnError(hr foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hr))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICOMAdminCatalog: https://learn.microsoft.com/windows/win32/api/comadmin/nn-comadmin-icomadmincatalog
@@ -146,162 +146,162 @@ var IID_ICOMAdminCatalog = win32.GUID{Data1: 0xdd662187, Data2: 0xdfc2, Data3: 0
 func (self *ICOMAdminCatalog) GetCollection(bstrCollName foundation.BSTR) (*systemcom.IDispatch, error) {
 	var _ppCatalogCollection *systemcom.IDispatch
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrCollName)), uintptr(unsafe.Pointer(&_ppCatalogCollection)))
-	return _ppCatalogCollection, win32.HRESULTError(int32(r1))
+	return _ppCatalogCollection, win32.ErrIfFailed(int32(r1))
 }
 
 // Connect dispatches through ICOMAdminCatalog's vtable slot 8.
 func (self *ICOMAdminCatalog) Connect(bstrCatalogServerName foundation.BSTR) (*systemcom.IDispatch, error) {
 	var _ppCatalogCollection *systemcom.IDispatch
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrCatalogServerName)), uintptr(unsafe.Pointer(&_ppCatalogCollection)))
-	return _ppCatalogCollection, win32.HRESULTError(int32(r1))
+	return _ppCatalogCollection, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MajorVersion dispatches through ICOMAdminCatalog's vtable slot 9.
 func (self *ICOMAdminCatalog) Get_MajorVersion() (int32, error) {
 	var _plMajorVersion int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plMajorVersion)))
-	return _plMajorVersion, win32.HRESULTError(int32(r1))
+	return _plMajorVersion, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MinorVersion dispatches through ICOMAdminCatalog's vtable slot 10.
 func (self *ICOMAdminCatalog) Get_MinorVersion() (int32, error) {
 	var _plMinorVersion int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plMinorVersion)))
-	return _plMinorVersion, win32.HRESULTError(int32(r1))
+	return _plMinorVersion, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCollectionByQuery dispatches through ICOMAdminCatalog's vtable slot 11.
 func (self *ICOMAdminCatalog) GetCollectionByQuery(bstrCollName foundation.BSTR, ppsaVarQuery **systemcom.SAFEARRAY) (*systemcom.IDispatch, error) {
 	var _ppCatalogCollection *systemcom.IDispatch
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrCollName)), uintptr(unsafe.Pointer(ppsaVarQuery)), uintptr(unsafe.Pointer(&_ppCatalogCollection)))
-	return _ppCatalogCollection, win32.HRESULTError(int32(r1))
+	return _ppCatalogCollection, win32.ErrIfFailed(int32(r1))
 }
 
 // ImportComponent dispatches through ICOMAdminCatalog's vtable slot 12.
 func (self *ICOMAdminCatalog) ImportComponent(bstrApplIDOrName foundation.BSTR, bstrCLSIDOrProgID foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplIDOrName)), uintptr(unsafe.Pointer(bstrCLSIDOrProgID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InstallComponent dispatches through ICOMAdminCatalog's vtable slot 13.
 func (self *ICOMAdminCatalog) InstallComponent(bstrApplIDOrName foundation.BSTR, bstrDLL foundation.BSTR, bstrTLB foundation.BSTR, bstrPSDLL foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplIDOrName)), uintptr(unsafe.Pointer(bstrDLL)), uintptr(unsafe.Pointer(bstrTLB)), uintptr(unsafe.Pointer(bstrPSDLL)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ShutdownApplication dispatches through ICOMAdminCatalog's vtable slot 14.
 func (self *ICOMAdminCatalog) ShutdownApplication(bstrApplIDOrName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplIDOrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExportApplication dispatches through ICOMAdminCatalog's vtable slot 15.
 func (self *ICOMAdminCatalog) ExportApplication(bstrApplIDOrName foundation.BSTR, bstrApplicationFile foundation.BSTR, lOptions COMAdminApplicationExportOptions) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplIDOrName)), uintptr(unsafe.Pointer(bstrApplicationFile)), uintptr(lOptions))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InstallApplication dispatches through ICOMAdminCatalog's vtable slot 16.
 func (self *ICOMAdminCatalog) InstallApplication(bstrApplicationFile foundation.BSTR, bstrDestinationDirectory foundation.BSTR, lOptions COMAdminApplicationInstallOptions, bstrUserId foundation.BSTR, bstrPassword foundation.BSTR, bstrRSN foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplicationFile)), uintptr(unsafe.Pointer(bstrDestinationDirectory)), uintptr(lOptions), uintptr(unsafe.Pointer(bstrUserId)), uintptr(unsafe.Pointer(bstrPassword)), uintptr(unsafe.Pointer(bstrRSN)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StopRouter dispatches through ICOMAdminCatalog's vtable slot 17.
 func (self *ICOMAdminCatalog) StopRouter() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RefreshRouter dispatches through ICOMAdminCatalog's vtable slot 18.
 func (self *ICOMAdminCatalog) RefreshRouter() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StartRouter dispatches through ICOMAdminCatalog's vtable slot 19.
 func (self *ICOMAdminCatalog) StartRouter() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reserved1 dispatches through ICOMAdminCatalog's vtable slot 20.
 func (self *ICOMAdminCatalog) Reserved1() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reserved2 dispatches through ICOMAdminCatalog's vtable slot 21.
 func (self *ICOMAdminCatalog) Reserved2() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InstallMultipleComponents dispatches through ICOMAdminCatalog's vtable slot 22.
 func (self *ICOMAdminCatalog) InstallMultipleComponents(bstrApplIDOrName foundation.BSTR, ppsaVarFileNames **systemcom.SAFEARRAY, ppsaVarCLSIDs **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplIDOrName)), uintptr(unsafe.Pointer(ppsaVarFileNames)), uintptr(unsafe.Pointer(ppsaVarCLSIDs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMultipleComponentsInfo dispatches through ICOMAdminCatalog's vtable slot 23.
 func (self *ICOMAdminCatalog) GetMultipleComponentsInfo(bstrApplIdOrName foundation.BSTR, ppsaVarFileNames **systemcom.SAFEARRAY, ppsaVarCLSIDs **systemcom.SAFEARRAY, ppsaVarClassNames **systemcom.SAFEARRAY, ppsaVarFileFlags **systemcom.SAFEARRAY, ppsaVarComponentFlags **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplIdOrName)), uintptr(unsafe.Pointer(ppsaVarFileNames)), uintptr(unsafe.Pointer(ppsaVarCLSIDs)), uintptr(unsafe.Pointer(ppsaVarClassNames)), uintptr(unsafe.Pointer(ppsaVarFileFlags)), uintptr(unsafe.Pointer(ppsaVarComponentFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RefreshComponents dispatches through ICOMAdminCatalog's vtable slot 24.
 func (self *ICOMAdminCatalog) RefreshComponents() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BackupREGDB dispatches through ICOMAdminCatalog's vtable slot 25.
 func (self *ICOMAdminCatalog) BackupREGDB(bstrBackupFilePath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrBackupFilePath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RestoreREGDB dispatches through ICOMAdminCatalog's vtable slot 26.
 func (self *ICOMAdminCatalog) RestoreREGDB(bstrBackupFilePath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrBackupFilePath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryApplicationFile dispatches through ICOMAdminCatalog's vtable slot 27.
 func (self *ICOMAdminCatalog) QueryApplicationFile(bstrApplicationFile foundation.BSTR, pbstrApplicationName *foundation.BSTR, pbstrApplicationDescription *foundation.BSTR, pbHasUsers *foundation.VARIANT_BOOL, pbIsProxy *foundation.VARIANT_BOOL, ppsaVarFileNames **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplicationFile)), uintptr(unsafe.Pointer(pbstrApplicationName)), uintptr(unsafe.Pointer(pbstrApplicationDescription)), uintptr(unsafe.Pointer(pbHasUsers)), uintptr(unsafe.Pointer(pbIsProxy)), uintptr(unsafe.Pointer(ppsaVarFileNames)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StartApplication dispatches through ICOMAdminCatalog's vtable slot 28.
 func (self *ICOMAdminCatalog) StartApplication(bstrApplIdOrName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplIdOrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ServiceCheck dispatches through ICOMAdminCatalog's vtable slot 29.
 func (self *ICOMAdminCatalog) ServiceCheck(lService int32) (int32, error) {
 	var _plStatus int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(lService), uintptr(unsafe.Pointer(&_plStatus)))
-	return _plStatus, win32.HRESULTError(int32(r1))
+	return _plStatus, win32.ErrIfFailed(int32(r1))
 }
 
 // InstallMultipleEventClasses dispatches through ICOMAdminCatalog's vtable slot 30.
 func (self *ICOMAdminCatalog) InstallMultipleEventClasses(bstrApplIdOrName foundation.BSTR, ppsaVarFileNames **systemcom.SAFEARRAY, ppsaVarCLSIDS **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplIdOrName)), uintptr(unsafe.Pointer(ppsaVarFileNames)), uintptr(unsafe.Pointer(ppsaVarCLSIDS)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InstallEventClass dispatches through ICOMAdminCatalog's vtable slot 31.
 func (self *ICOMAdminCatalog) InstallEventClass(bstrApplIdOrName foundation.BSTR, bstrDLL foundation.BSTR, bstrTLB foundation.BSTR, bstrPSDLL foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplIdOrName)), uintptr(unsafe.Pointer(bstrDLL)), uintptr(unsafe.Pointer(bstrTLB)), uintptr(unsafe.Pointer(bstrPSDLL)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEventClassesForIID dispatches through ICOMAdminCatalog's vtable slot 32.
 func (self *ICOMAdminCatalog) GetEventClassesForIID(bstrIID foundation.BSTR, ppsaVarCLSIDs **systemcom.SAFEARRAY, ppsaVarProgIDs **systemcom.SAFEARRAY, ppsaVarDescriptions **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrIID)), uintptr(unsafe.Pointer(ppsaVarCLSIDs)), uintptr(unsafe.Pointer(ppsaVarProgIDs)), uintptr(unsafe.Pointer(ppsaVarDescriptions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICOMAdminCatalog2: https://learn.microsoft.com/windows/win32/api/comadmin/nn-comadmin-icomadmincatalog2
@@ -317,200 +317,200 @@ var IID_ICOMAdminCatalog2 = win32.GUID{Data1: 0x790c6e0b, Data2: 0x9194, Data3: 
 func (self *ICOMAdminCatalog2) GetCollectionByQuery2(bstrCollectionName foundation.BSTR, pVarQueryStrings *systemvariant.VARIANT) (*systemcom.IDispatch, error) {
 	var _ppCatalogCollection *systemcom.IDispatch
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrCollectionName)), uintptr(unsafe.Pointer(pVarQueryStrings)), uintptr(unsafe.Pointer(&_ppCatalogCollection)))
-	return _ppCatalogCollection, win32.HRESULTError(int32(r1))
+	return _ppCatalogCollection, win32.ErrIfFailed(int32(r1))
 }
 
 // GetApplicationInstanceIDFromProcessID dispatches through ICOMAdminCatalog2's vtable slot 34.
 func (self *ICOMAdminCatalog2) GetApplicationInstanceIDFromProcessID(lProcessID int32) (foundation.BSTR, error) {
 	var _pbstrApplicationInstanceID foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(lProcessID), uintptr(unsafe.Pointer(&_pbstrApplicationInstanceID)))
-	return _pbstrApplicationInstanceID, win32.HRESULTError(int32(r1))
+	return _pbstrApplicationInstanceID, win32.ErrIfFailed(int32(r1))
 }
 
 // ShutdownApplicationInstances dispatches through ICOMAdminCatalog2's vtable slot 35.
 func (self *ICOMAdminCatalog2) ShutdownApplicationInstances(pVarApplicationInstanceID *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVarApplicationInstanceID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PauseApplicationInstances dispatches through ICOMAdminCatalog2's vtable slot 36.
 func (self *ICOMAdminCatalog2) PauseApplicationInstances(pVarApplicationInstanceID *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVarApplicationInstanceID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ResumeApplicationInstances dispatches through ICOMAdminCatalog2's vtable slot 37.
 func (self *ICOMAdminCatalog2) ResumeApplicationInstances(pVarApplicationInstanceID *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVarApplicationInstanceID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RecycleApplicationInstances dispatches through ICOMAdminCatalog2's vtable slot 38.
 func (self *ICOMAdminCatalog2) RecycleApplicationInstances(pVarApplicationInstanceID *systemvariant.VARIANT, lReasonCode int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVarApplicationInstanceID)), uintptr(lReasonCode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AreApplicationInstancesPaused dispatches through ICOMAdminCatalog2's vtable slot 39.
 func (self *ICOMAdminCatalog2) AreApplicationInstancesPaused(pVarApplicationInstanceID *systemvariant.VARIANT) (foundation.VARIANT_BOOL, error) {
 	var _pVarBoolPaused foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVarApplicationInstanceID)), uintptr(unsafe.Pointer(&_pVarBoolPaused)))
-	return _pVarBoolPaused, win32.HRESULTError(int32(r1))
+	return _pVarBoolPaused, win32.ErrIfFailed(int32(r1))
 }
 
 // DumpApplicationInstance dispatches through ICOMAdminCatalog2's vtable slot 40.
 func (self *ICOMAdminCatalog2) DumpApplicationInstance(bstrApplicationInstanceID foundation.BSTR, bstrDirectory foundation.BSTR, lMaxImages int32) (foundation.BSTR, error) {
 	var _pbstrDumpFile foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplicationInstanceID)), uintptr(unsafe.Pointer(bstrDirectory)), uintptr(lMaxImages), uintptr(unsafe.Pointer(&_pbstrDumpFile)))
-	return _pbstrDumpFile, win32.HRESULTError(int32(r1))
+	return _pbstrDumpFile, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsApplicationInstanceDumpSupported dispatches through ICOMAdminCatalog2's vtable slot 41.
 func (self *ICOMAdminCatalog2) Get_IsApplicationInstanceDumpSupported() (foundation.VARIANT_BOOL, error) {
 	var _pVarBoolDumpSupported foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVarBoolDumpSupported)))
-	return _pVarBoolDumpSupported, win32.HRESULTError(int32(r1))
+	return _pVarBoolDumpSupported, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateServiceForApplication dispatches through ICOMAdminCatalog2's vtable slot 42.
 func (self *ICOMAdminCatalog2) CreateServiceForApplication(bstrApplicationIDOrName foundation.BSTR, bstrServiceName foundation.BSTR, bstrStartType foundation.BSTR, bstrErrorControl foundation.BSTR, bstrDependencies foundation.BSTR, bstrRunAs foundation.BSTR, bstrPassword foundation.BSTR, bDesktopOk foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplicationIDOrName)), uintptr(unsafe.Pointer(bstrServiceName)), uintptr(unsafe.Pointer(bstrStartType)), uintptr(unsafe.Pointer(bstrErrorControl)), uintptr(unsafe.Pointer(bstrDependencies)), uintptr(unsafe.Pointer(bstrRunAs)), uintptr(unsafe.Pointer(bstrPassword)), uintptr(bDesktopOk))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteServiceForApplication dispatches through ICOMAdminCatalog2's vtable slot 43.
 func (self *ICOMAdminCatalog2) DeleteServiceForApplication(bstrApplicationIDOrName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplicationIDOrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPartitionID dispatches through ICOMAdminCatalog2's vtable slot 44.
 func (self *ICOMAdminCatalog2) GetPartitionID(bstrApplicationIDOrName foundation.BSTR) (foundation.BSTR, error) {
 	var _pbstrPartitionID foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplicationIDOrName)), uintptr(unsafe.Pointer(&_pbstrPartitionID)))
-	return _pbstrPartitionID, win32.HRESULTError(int32(r1))
+	return _pbstrPartitionID, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPartitionName dispatches through ICOMAdminCatalog2's vtable slot 45.
 func (self *ICOMAdminCatalog2) GetPartitionName(bstrApplicationIDOrName foundation.BSTR) (foundation.BSTR, error) {
 	var _pbstrPartitionName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplicationIDOrName)), uintptr(unsafe.Pointer(&_pbstrPartitionName)))
-	return _pbstrPartitionName, win32.HRESULTError(int32(r1))
+	return _pbstrPartitionName, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CurrentPartition dispatches through ICOMAdminCatalog2's vtable slot 46.
 func (self *ICOMAdminCatalog2) Put_CurrentPartition(bstrPartitionIDOrName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPartitionIDOrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentPartitionID dispatches through ICOMAdminCatalog2's vtable slot 47.
 func (self *ICOMAdminCatalog2) Get_CurrentPartitionID() (foundation.BSTR, error) {
 	var _pbstrPartitionID foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrPartitionID)))
-	return _pbstrPartitionID, win32.HRESULTError(int32(r1))
+	return _pbstrPartitionID, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentPartitionName dispatches through ICOMAdminCatalog2's vtable slot 48.
 func (self *ICOMAdminCatalog2) Get_CurrentPartitionName() (foundation.BSTR, error) {
 	var _pbstrPartitionName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrPartitionName)))
-	return _pbstrPartitionName, win32.HRESULTError(int32(r1))
+	return _pbstrPartitionName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_GlobalPartitionID dispatches through ICOMAdminCatalog2's vtable slot 49.
 func (self *ICOMAdminCatalog2) Get_GlobalPartitionID() (foundation.BSTR, error) {
 	var _pbstrGlobalPartitionID foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrGlobalPartitionID)))
-	return _pbstrGlobalPartitionID, win32.HRESULTError(int32(r1))
+	return _pbstrGlobalPartitionID, win32.ErrIfFailed(int32(r1))
 }
 
 // FlushPartitionCache dispatches through ICOMAdminCatalog2's vtable slot 50.
 func (self *ICOMAdminCatalog2) FlushPartitionCache() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CopyApplications dispatches through ICOMAdminCatalog2's vtable slot 51.
 func (self *ICOMAdminCatalog2) CopyApplications(bstrSourcePartitionIDOrName foundation.BSTR, pVarApplicationID *systemvariant.VARIANT, bstrDestinationPartitionIDOrName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrSourcePartitionIDOrName)), uintptr(unsafe.Pointer(pVarApplicationID)), uintptr(unsafe.Pointer(bstrDestinationPartitionIDOrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CopyComponents dispatches through ICOMAdminCatalog2's vtable slot 52.
 func (self *ICOMAdminCatalog2) CopyComponents(bstrSourceApplicationIDOrName foundation.BSTR, pVarCLSIDOrProgID *systemvariant.VARIANT, bstrDestinationApplicationIDOrName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrSourceApplicationIDOrName)), uintptr(unsafe.Pointer(pVarCLSIDOrProgID)), uintptr(unsafe.Pointer(bstrDestinationApplicationIDOrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MoveComponents dispatches through ICOMAdminCatalog2's vtable slot 53.
 func (self *ICOMAdminCatalog2) MoveComponents(bstrSourceApplicationIDOrName foundation.BSTR, pVarCLSIDOrProgID *systemvariant.VARIANT, bstrDestinationApplicationIDOrName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrSourceApplicationIDOrName)), uintptr(unsafe.Pointer(pVarCLSIDOrProgID)), uintptr(unsafe.Pointer(bstrDestinationApplicationIDOrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AliasComponent dispatches through ICOMAdminCatalog2's vtable slot 54.
 func (self *ICOMAdminCatalog2) AliasComponent(bstrSrcApplicationIDOrName foundation.BSTR, bstrCLSIDOrProgID foundation.BSTR, bstrDestApplicationIDOrName foundation.BSTR, bstrNewProgId foundation.BSTR, bstrNewClsid foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrSrcApplicationIDOrName)), uintptr(unsafe.Pointer(bstrCLSIDOrProgID)), uintptr(unsafe.Pointer(bstrDestApplicationIDOrName)), uintptr(unsafe.Pointer(bstrNewProgId)), uintptr(unsafe.Pointer(bstrNewClsid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsSafeToDelete dispatches through ICOMAdminCatalog2's vtable slot 55.
 func (self *ICOMAdminCatalog2) IsSafeToDelete(bstrDllName foundation.BSTR) (COMAdminInUse, error) {
 	var _pCOMAdminInUse COMAdminInUse
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDllName)), uintptr(unsafe.Pointer(&_pCOMAdminInUse)))
-	return _pCOMAdminInUse, win32.HRESULTError(int32(r1))
+	return _pCOMAdminInUse, win32.ErrIfFailed(int32(r1))
 }
 
 // ImportUnconfiguredComponents dispatches through ICOMAdminCatalog2's vtable slot 56.
 func (self *ICOMAdminCatalog2) ImportUnconfiguredComponents(bstrApplicationIDOrName foundation.BSTR, pVarCLSIDOrProgID *systemvariant.VARIANT, pVarComponentType *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplicationIDOrName)), uintptr(unsafe.Pointer(pVarCLSIDOrProgID)), uintptr(unsafe.Pointer(pVarComponentType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PromoteUnconfiguredComponents dispatches through ICOMAdminCatalog2's vtable slot 57.
 func (self *ICOMAdminCatalog2) PromoteUnconfiguredComponents(bstrApplicationIDOrName foundation.BSTR, pVarCLSIDOrProgID *systemvariant.VARIANT, pVarComponentType *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplicationIDOrName)), uintptr(unsafe.Pointer(pVarCLSIDOrProgID)), uintptr(unsafe.Pointer(pVarComponentType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ImportComponents dispatches through ICOMAdminCatalog2's vtable slot 58.
 func (self *ICOMAdminCatalog2) ImportComponents(bstrApplicationIDOrName foundation.BSTR, pVarCLSIDOrProgID *systemvariant.VARIANT, pVarComponentType *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplicationIDOrName)), uintptr(unsafe.Pointer(pVarCLSIDOrProgID)), uintptr(unsafe.Pointer(pVarComponentType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Is64BitCatalogServer dispatches through ICOMAdminCatalog2's vtable slot 59.
 func (self *ICOMAdminCatalog2) Get_Is64BitCatalogServer() (foundation.VARIANT_BOOL, error) {
 	var _pbIs64Bit foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbIs64Bit)))
-	return _pbIs64Bit, win32.HRESULTError(int32(r1))
+	return _pbIs64Bit, win32.ErrIfFailed(int32(r1))
 }
 
 // ExportPartition dispatches through ICOMAdminCatalog2's vtable slot 60.
 func (self *ICOMAdminCatalog2) ExportPartition(bstrPartitionIDOrName foundation.BSTR, bstrPartitionFileName foundation.BSTR, lOptions COMAdminApplicationExportOptions) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPartitionIDOrName)), uintptr(unsafe.Pointer(bstrPartitionFileName)), uintptr(lOptions))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InstallPartition dispatches through ICOMAdminCatalog2's vtable slot 61.
 func (self *ICOMAdminCatalog2) InstallPartition(bstrFileName foundation.BSTR, bstrDestDirectory foundation.BSTR, lOptions COMAdminApplicationInstallOptions, bstrUserID foundation.BSTR, bstrPassword foundation.BSTR, bstrRSN foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrFileName)), uintptr(unsafe.Pointer(bstrDestDirectory)), uintptr(lOptions), uintptr(unsafe.Pointer(bstrUserID)), uintptr(unsafe.Pointer(bstrPassword)), uintptr(unsafe.Pointer(bstrRSN)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryApplicationFile2 dispatches through ICOMAdminCatalog2's vtable slot 62.
 func (self *ICOMAdminCatalog2) QueryApplicationFile2(bstrApplicationFile foundation.BSTR) (*systemcom.IDispatch, error) {
 	var _ppFilesForImport *systemcom.IDispatch
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplicationFile)), uintptr(unsafe.Pointer(&_ppFilesForImport)))
-	return _ppFilesForImport, win32.HRESULTError(int32(r1))
+	return _ppFilesForImport, win32.ErrIfFailed(int32(r1))
 }
 
 // GetComponentVersionCount dispatches through ICOMAdminCatalog2's vtable slot 63.
 func (self *ICOMAdminCatalog2) GetComponentVersionCount(bstrCLSIDOrProgID foundation.BSTR) (int32, error) {
 	var _plVersionCount int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrCLSIDOrProgID)), uintptr(unsafe.Pointer(&_plVersionCount)))
-	return _plVersionCount, win32.HRESULTError(int32(r1))
+	return _plVersionCount, win32.ErrIfFailed(int32(r1))
 }
 
 // ICOMLBArguments: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icomlbarguments
@@ -525,26 +525,26 @@ var IID_ICOMLBArguments = win32.GUID{Data1: 0x3a0f150f, Data2: 0x8ee5, Data3: 0x
 // GetCLSID dispatches through ICOMLBArguments's vtable slot 3.
 func (self *ICOMLBArguments) GetCLSID(pCLSID *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCLSID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCLSID dispatches through ICOMLBArguments's vtable slot 4.
 func (self *ICOMLBArguments) SetCLSID(pCLSID *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCLSID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMachineName dispatches through ICOMLBArguments's vtable slot 5.
 func (self *ICOMLBArguments) GetMachineName(cchSvr uint32, szServerName foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(cchSvr), uintptr(unsafe.Pointer(szServerName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMachineName dispatches through ICOMLBArguments's vtable slot 6.
 func (self *ICOMLBArguments) SetMachineName(cchSvr uint32, szServerName string) error {
 	_szServerName := win32.UTF16Ptr(szServerName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(cchSvr), uintptr(unsafe.Pointer(_szServerName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICatalogCollection: https://learn.microsoft.com/windows/win32/api/comadmin/nn-comadmin-icatalogcollection
@@ -560,101 +560,101 @@ var IID_ICatalogCollection = win32.GUID{Data1: 0x6eb22872, Data2: 0x8a19, Data3:
 func (self *ICatalogCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
 	var _ppEnumVariant *systemcom.IUnknown
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnumVariant)))
-	return _ppEnumVariant, win32.HRESULTError(int32(r1))
+	return _ppEnumVariant, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Item dispatches through ICatalogCollection's vtable slot 8.
 func (self *ICatalogCollection) Get_Item(lIndex int32) (*systemcom.IDispatch, error) {
 	var _ppCatalogObject *systemcom.IDispatch
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(&_ppCatalogObject)))
-	return _ppCatalogObject, win32.HRESULTError(int32(r1))
+	return _ppCatalogObject, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through ICatalogCollection's vtable slot 9.
 func (self *ICatalogCollection) Get_Count() (int32, error) {
 	var _plObjectCount int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plObjectCount)))
-	return _plObjectCount, win32.HRESULTError(int32(r1))
+	return _plObjectCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through ICatalogCollection's vtable slot 10.
 func (self *ICatalogCollection) Remove(lIndex int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through ICatalogCollection's vtable slot 11.
 func (self *ICatalogCollection) Add() (*systemcom.IDispatch, error) {
 	var _ppCatalogObject *systemcom.IDispatch
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCatalogObject)))
-	return _ppCatalogObject, win32.HRESULTError(int32(r1))
+	return _ppCatalogObject, win32.ErrIfFailed(int32(r1))
 }
 
 // Populate dispatches through ICatalogCollection's vtable slot 12.
 func (self *ICatalogCollection) Populate() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SaveChanges dispatches through ICatalogCollection's vtable slot 13.
 func (self *ICatalogCollection) SaveChanges() (int32, error) {
 	var _pcChanges int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pcChanges)))
-	return _pcChanges, win32.HRESULTError(int32(r1))
+	return _pcChanges, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through ICatalogCollection's vtable slot 15.
 func (self *ICatalogCollection) Get_Name() (systemvariant.VARIANT, error) {
 	var _pVarNamel systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVarNamel)))
-	return _pVarNamel, win32.HRESULTError(int32(r1))
+	return _pVarNamel, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AddEnabled dispatches through ICatalogCollection's vtable slot 16.
 func (self *ICatalogCollection) Get_AddEnabled() (foundation.VARIANT_BOOL, error) {
 	var _pVarBool foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVarBool)))
-	return _pVarBool, win32.HRESULTError(int32(r1))
+	return _pVarBool, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RemoveEnabled dispatches through ICatalogCollection's vtable slot 17.
 func (self *ICatalogCollection) Get_RemoveEnabled() (foundation.VARIANT_BOOL, error) {
 	var _pVarBool foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVarBool)))
-	return _pVarBool, win32.HRESULTError(int32(r1))
+	return _pVarBool, win32.ErrIfFailed(int32(r1))
 }
 
 // GetUtilInterface dispatches through ICatalogCollection's vtable slot 18.
 func (self *ICatalogCollection) GetUtilInterface() (*systemcom.IDispatch, error) {
 	var _ppIDispatch *systemcom.IDispatch
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppIDispatch)))
-	return _ppIDispatch, win32.HRESULTError(int32(r1))
+	return _ppIDispatch, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DataStoreMajorVersion dispatches through ICatalogCollection's vtable slot 19.
 func (self *ICatalogCollection) Get_DataStoreMajorVersion() (int32, error) {
 	var _plMajorVersion int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plMajorVersion)))
-	return _plMajorVersion, win32.HRESULTError(int32(r1))
+	return _plMajorVersion, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DataStoreMinorVersion dispatches through ICatalogCollection's vtable slot 20.
 func (self *ICatalogCollection) Get_DataStoreMinorVersion() (int32, error) {
 	var _plMinorVersionl int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plMinorVersionl)))
-	return _plMinorVersionl, win32.HRESULTError(int32(r1))
+	return _plMinorVersionl, win32.ErrIfFailed(int32(r1))
 }
 
 // PopulateByKey dispatches through ICatalogCollection's vtable slot 21.
 func (self *ICatalogCollection) PopulateByKey(psaKeys *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(psaKeys)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PopulateByQuery dispatches through ICatalogCollection's vtable slot 22.
 func (self *ICatalogCollection) PopulateByQuery(bstrQueryString foundation.BSTR, lQueryType int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrQueryString)), uintptr(lQueryType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICatalogObject: https://learn.microsoft.com/windows/win32/api/comadmin/nn-comadmin-icatalogobject
@@ -670,42 +670,42 @@ var IID_ICatalogObject = win32.GUID{Data1: 0x6eb22871, Data2: 0x8a19, Data3: 0x1
 func (self *ICatalogObject) Get_Value(bstrPropName foundation.BSTR) (systemvariant.VARIANT, error) {
 	var _pvarRetVal systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPropName)), uintptr(unsafe.Pointer(&_pvarRetVal)))
-	return _pvarRetVal, win32.HRESULTError(int32(r1))
+	return _pvarRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Key dispatches through ICatalogObject's vtable slot 9.
 func (self *ICatalogObject) Get_Key() (systemvariant.VARIANT, error) {
 	var _pvarRetVal systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarRetVal)))
-	return _pvarRetVal, win32.HRESULTError(int32(r1))
+	return _pvarRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through ICatalogObject's vtable slot 10.
 func (self *ICatalogObject) Get_Name() (systemvariant.VARIANT, error) {
 	var _pvarRetVal systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarRetVal)))
-	return _pvarRetVal, win32.HRESULTError(int32(r1))
+	return _pvarRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IsPropertyReadOnly dispatches through ICatalogObject's vtable slot 11.
 func (self *ICatalogObject) IsPropertyReadOnly(bstrPropName foundation.BSTR) (foundation.VARIANT_BOOL, error) {
 	var _pbRetVal foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPropName)), uintptr(unsafe.Pointer(&_pbRetVal)))
-	return _pbRetVal, win32.HRESULTError(int32(r1))
+	return _pbRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Valid dispatches through ICatalogObject's vtable slot 12.
 func (self *ICatalogObject) Get_Valid() (foundation.VARIANT_BOOL, error) {
 	var _pbRetVal foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbRetVal)))
-	return _pbRetVal, win32.HRESULTError(int32(r1))
+	return _pbRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IsPropertyWriteOnly dispatches through ICatalogObject's vtable slot 13.
 func (self *ICatalogObject) IsPropertyWriteOnly(bstrPropName foundation.BSTR) (foundation.VARIANT_BOOL, error) {
 	var _pbRetVal foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPropName)), uintptr(unsafe.Pointer(&_pbRetVal)))
-	return _pbRetVal, win32.HRESULTError(int32(r1))
+	return _pbRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // ICheckSxsConfig: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-ichecksxsconfig
@@ -723,7 +723,7 @@ func (self *ICheckSxsConfig) IsSameSxsConfig(wszSxsName string, wszSxsDirectory 
 	_wszSxsDirectory := win32.UTF16Ptr(wszSxsDirectory)
 	_wszSxsAppName := win32.UTF16Ptr(wszSxsAppName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszSxsName)), uintptr(unsafe.Pointer(_wszSxsDirectory)), uintptr(unsafe.Pointer(_wszSxsAppName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IComActivityEvents: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icomactivityevents
@@ -738,43 +738,43 @@ var IID_IComActivityEvents = win32.GUID{Data1: 0x683130b0, Data2: 0x2e50, Data3:
 // OnActivityCreate dispatches through IComActivityEvents's vtable slot 3.
 func (self *IComActivityEvents) OnActivityCreate(pInfo *COMSVCSEVENTINFO, guidActivity *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidActivity)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnActivityDestroy dispatches through IComActivityEvents's vtable slot 4.
 func (self *IComActivityEvents) OnActivityDestroy(pInfo *COMSVCSEVENTINFO, guidActivity *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidActivity)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnActivityEnter dispatches through IComActivityEvents's vtable slot 5.
 func (self *IComActivityEvents) OnActivityEnter(pInfo *COMSVCSEVENTINFO, guidCurrent *win32.GUID, guidEntered *win32.GUID, dwThread uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidCurrent)), uintptr(unsafe.Pointer(guidEntered)), uintptr(dwThread))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnActivityTimeout dispatches through IComActivityEvents's vtable slot 6.
 func (self *IComActivityEvents) OnActivityTimeout(pInfo *COMSVCSEVENTINFO, guidCurrent *win32.GUID, guidEntered *win32.GUID, dwThread uint32, dwTimeout uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidCurrent)), uintptr(unsafe.Pointer(guidEntered)), uintptr(dwThread), uintptr(dwTimeout))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnActivityReenter dispatches through IComActivityEvents's vtable slot 7.
 func (self *IComActivityEvents) OnActivityReenter(pInfo *COMSVCSEVENTINFO, guidCurrent *win32.GUID, dwThread uint32, dwCallDepth uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidCurrent)), uintptr(dwThread), uintptr(dwCallDepth))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnActivityLeave dispatches through IComActivityEvents's vtable slot 8.
 func (self *IComActivityEvents) OnActivityLeave(pInfo *COMSVCSEVENTINFO, guidCurrent *win32.GUID, guidLeft *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidCurrent)), uintptr(unsafe.Pointer(guidLeft)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnActivityLeaveSame dispatches through IComActivityEvents's vtable slot 9.
 func (self *IComActivityEvents) OnActivityLeaveSame(pInfo *COMSVCSEVENTINFO, guidCurrent *win32.GUID, dwCallDepth uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidCurrent)), uintptr(dwCallDepth))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IComApp2Events: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icomapp2events
@@ -817,7 +817,7 @@ var IID_IComExceptionEvents = win32.GUID{Data1: 0x683130b3, Data2: 0x2e50, Data3
 func (self *IComExceptionEvents) OnExceptionUser(pInfo *COMSVCSEVENTINFO, code uint32, address uint64, pszStackTrace string) error {
 	_pszStackTrace := win32.UTF16Ptr(pszStackTrace)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(code), uintptr(address), uintptr(unsafe.Pointer(_pszStackTrace)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IComIdentityEvents: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icomidentityevents
@@ -835,7 +835,7 @@ func (self *IComIdentityEvents) OnIISRequestInfo(pInfo *COMSVCSEVENTINFO, ObjId 
 	_pszServerIP := win32.UTF16Ptr(pszServerIP)
 	_pszURL := win32.UTF16Ptr(pszURL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(ObjId), uintptr(unsafe.Pointer(_pszClientIP)), uintptr(unsafe.Pointer(_pszServerIP)), uintptr(unsafe.Pointer(_pszURL)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IComInstance2Events: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icominstance2events
@@ -850,13 +850,13 @@ var IID_IComInstance2Events = win32.GUID{Data1: 0x20e3bf07, Data2: 0xb506, Data3
 // OnObjectCreate2 dispatches through IComInstance2Events's vtable slot 3.
 func (self *IComInstance2Events) OnObjectCreate2(pInfo *COMSVCSEVENTINFO, guidActivity *win32.GUID, clsid *win32.GUID, tsid *win32.GUID, CtxtID uint64, ObjectID uint64, guidPartition *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidActivity)), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(tsid)), uintptr(CtxtID), uintptr(ObjectID), uintptr(unsafe.Pointer(guidPartition)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnObjectDestroy2 dispatches through IComInstance2Events's vtable slot 4.
 func (self *IComInstance2Events) OnObjectDestroy2(pInfo *COMSVCSEVENTINFO, CtxtID uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(CtxtID))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IComInstanceEvents: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icominstanceevents
@@ -871,13 +871,13 @@ var IID_IComInstanceEvents = win32.GUID{Data1: 0x683130a7, Data2: 0x2e50, Data3:
 // OnObjectCreate dispatches through IComInstanceEvents's vtable slot 3.
 func (self *IComInstanceEvents) OnObjectCreate(pInfo *COMSVCSEVENTINFO, guidActivity *win32.GUID, clsid *win32.GUID, tsid *win32.GUID, CtxtID uint64, ObjectID uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidActivity)), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(tsid)), uintptr(CtxtID), uintptr(ObjectID))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnObjectDestroy dispatches through IComInstanceEvents's vtable slot 4.
 func (self *IComInstanceEvents) OnObjectDestroy(pInfo *COMSVCSEVENTINFO, CtxtID uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(CtxtID))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IComLTxEvents: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icomltxevents
@@ -901,19 +901,19 @@ var IID_IComMethod2Events = win32.GUID{Data1: 0xfb388aaa, Data2: 0x567d, Data3: 
 // OnMethodCall2 dispatches through IComMethod2Events's vtable slot 3.
 func (self *IComMethod2Events) OnMethodCall2(pInfo *COMSVCSEVENTINFO, oid uint64, guidCid *win32.GUID, guidRid *win32.GUID, dwThread uint32, iMeth uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(oid), uintptr(unsafe.Pointer(guidCid)), uintptr(unsafe.Pointer(guidRid)), uintptr(dwThread), uintptr(iMeth))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnMethodReturn2 dispatches through IComMethod2Events's vtable slot 4.
 func (self *IComMethod2Events) OnMethodReturn2(pInfo *COMSVCSEVENTINFO, oid uint64, guidCid *win32.GUID, guidRid *win32.GUID, dwThread uint32, iMeth uint32, hresult foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(oid), uintptr(unsafe.Pointer(guidCid)), uintptr(unsafe.Pointer(guidRid)), uintptr(dwThread), uintptr(iMeth), uintptr(hresult))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnMethodException2 dispatches through IComMethod2Events's vtable slot 5.
 func (self *IComMethod2Events) OnMethodException2(pInfo *COMSVCSEVENTINFO, oid uint64, guidCid *win32.GUID, guidRid *win32.GUID, dwThread uint32, iMeth uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(oid), uintptr(unsafe.Pointer(guidCid)), uintptr(unsafe.Pointer(guidRid)), uintptr(dwThread), uintptr(iMeth))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IComMethodEvents: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icommethodevents
@@ -928,19 +928,19 @@ var IID_IComMethodEvents = win32.GUID{Data1: 0x683130a9, Data2: 0x2e50, Data3: 0
 // OnMethodCall dispatches through IComMethodEvents's vtable slot 3.
 func (self *IComMethodEvents) OnMethodCall(pInfo *COMSVCSEVENTINFO, oid uint64, guidCid *win32.GUID, guidRid *win32.GUID, iMeth uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(oid), uintptr(unsafe.Pointer(guidCid)), uintptr(unsafe.Pointer(guidRid)), uintptr(iMeth))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnMethodReturn dispatches through IComMethodEvents's vtable slot 4.
 func (self *IComMethodEvents) OnMethodReturn(pInfo *COMSVCSEVENTINFO, oid uint64, guidCid *win32.GUID, guidRid *win32.GUID, iMeth uint32, hresult foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(oid), uintptr(unsafe.Pointer(guidCid)), uintptr(unsafe.Pointer(guidRid)), uintptr(iMeth), uintptr(hresult))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnMethodException dispatches through IComMethodEvents's vtable slot 5.
 func (self *IComMethodEvents) OnMethodException(pInfo *COMSVCSEVENTINFO, oid uint64, guidCid *win32.GUID, guidRid *win32.GUID, iMeth uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(oid), uintptr(unsafe.Pointer(guidCid)), uintptr(unsafe.Pointer(guidRid)), uintptr(iMeth))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f9a76d2e-76a5-43eb-a0c4-49bec8e48480
@@ -954,25 +954,25 @@ var IID_IComMtaThreadPoolKnobs = win32.GUID{Data1: 0xf9a76d2e, Data2: 0x76a5, Da
 // MTASetMaxThreadCount dispatches through IComMtaThreadPoolKnobs's vtable slot 3.
 func (self *IComMtaThreadPoolKnobs) MTASetMaxThreadCount(dwMaxThreads uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwMaxThreads))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MTAGetMaxThreadCount dispatches through IComMtaThreadPoolKnobs's vtable slot 4.
 func (self *IComMtaThreadPoolKnobs) MTAGetMaxThreadCount(pdwMaxThreads *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwMaxThreads)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MTASetThrottleValue dispatches through IComMtaThreadPoolKnobs's vtable slot 5.
 func (self *IComMtaThreadPoolKnobs) MTASetThrottleValue(dwThrottle uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwThrottle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MTAGetThrottleValue dispatches through IComMtaThreadPoolKnobs's vtable slot 6.
 func (self *IComMtaThreadPoolKnobs) MTAGetThrottleValue(pdwThrottle *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwThrottle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IComObjectConstruction2Events: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icomobjectconstruction2events
@@ -988,7 +988,7 @@ var IID_IComObjectConstruction2Events = win32.GUID{Data1: 0x4b5a7827, Data2: 0x8
 func (self *IComObjectConstruction2Events) OnObjectConstruct2(pInfo *COMSVCSEVENTINFO, guidObject *win32.GUID, sConstructString string, oid uint64, guidPartition *win32.GUID) error {
 	_sConstructString := win32.UTF16Ptr(sConstructString)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidObject)), uintptr(unsafe.Pointer(_sConstructString)), uintptr(oid), uintptr(unsafe.Pointer(guidPartition)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IComObjectConstructionEvents: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icomobjectconstructionevents
@@ -1004,7 +1004,7 @@ var IID_IComObjectConstructionEvents = win32.GUID{Data1: 0x683130af, Data2: 0x2e
 func (self *IComObjectConstructionEvents) OnObjectConstruct(pInfo *COMSVCSEVENTINFO, guidObject *win32.GUID, sConstructString string, oid uint64) error {
 	_sConstructString := win32.UTF16Ptr(sConstructString)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidObject)), uintptr(unsafe.Pointer(_sConstructString)), uintptr(oid))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IComObjectEvents: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icomobjectevents
@@ -1019,37 +1019,37 @@ var IID_IComObjectEvents = win32.GUID{Data1: 0x683130aa, Data2: 0x2e50, Data3: 0
 // OnObjectActivate dispatches through IComObjectEvents's vtable slot 3.
 func (self *IComObjectEvents) OnObjectActivate(pInfo *COMSVCSEVENTINFO, CtxtID uint64, ObjectID uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(CtxtID), uintptr(ObjectID))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnObjectDeactivate dispatches through IComObjectEvents's vtable slot 4.
 func (self *IComObjectEvents) OnObjectDeactivate(pInfo *COMSVCSEVENTINFO, CtxtID uint64, ObjectID uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(CtxtID), uintptr(ObjectID))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnDisableCommit dispatches through IComObjectEvents's vtable slot 5.
 func (self *IComObjectEvents) OnDisableCommit(pInfo *COMSVCSEVENTINFO, CtxtID uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(CtxtID))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnEnableCommit dispatches through IComObjectEvents's vtable slot 6.
 func (self *IComObjectEvents) OnEnableCommit(pInfo *COMSVCSEVENTINFO, CtxtID uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(CtxtID))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnSetComplete dispatches through IComObjectEvents's vtable slot 7.
 func (self *IComObjectEvents) OnSetComplete(pInfo *COMSVCSEVENTINFO, CtxtID uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(CtxtID))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnSetAbort dispatches through IComObjectEvents's vtable slot 8.
 func (self *IComObjectEvents) OnSetAbort(pInfo *COMSVCSEVENTINFO, CtxtID uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(CtxtID))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IComObjectPool2Events: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icomobjectpool2events
@@ -1064,25 +1064,25 @@ var IID_IComObjectPool2Events = win32.GUID{Data1: 0x65bf6534, Data2: 0x85ea, Dat
 // OnObjPoolPutObject2 dispatches through IComObjectPool2Events's vtable slot 3.
 func (self *IComObjectPool2Events) OnObjPoolPutObject2(pInfo *COMSVCSEVENTINFO, guidObject *win32.GUID, nReason int32, dwAvailable uint32, oid uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidObject)), uintptr(nReason), uintptr(dwAvailable), uintptr(oid))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnObjPoolGetObject2 dispatches through IComObjectPool2Events's vtable slot 4.
 func (self *IComObjectPool2Events) OnObjPoolGetObject2(pInfo *COMSVCSEVENTINFO, guidActivity *win32.GUID, guidObject *win32.GUID, dwAvailable uint32, oid uint64, guidPartition *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidActivity)), uintptr(unsafe.Pointer(guidObject)), uintptr(dwAvailable), uintptr(oid), uintptr(unsafe.Pointer(guidPartition)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnObjPoolRecycleToTx2 dispatches through IComObjectPool2Events's vtable slot 5.
 func (self *IComObjectPool2Events) OnObjPoolRecycleToTx2(pInfo *COMSVCSEVENTINFO, guidActivity *win32.GUID, guidObject *win32.GUID, guidTx *win32.GUID, objid uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidActivity)), uintptr(unsafe.Pointer(guidObject)), uintptr(unsafe.Pointer(guidTx)), uintptr(objid))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnObjPoolGetFromTx2 dispatches through IComObjectPool2Events's vtable slot 6.
 func (self *IComObjectPool2Events) OnObjPoolGetFromTx2(pInfo *COMSVCSEVENTINFO, guidActivity *win32.GUID, guidObject *win32.GUID, guidTx *win32.GUID, objid uint64, guidPartition *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidActivity)), uintptr(unsafe.Pointer(guidObject)), uintptr(unsafe.Pointer(guidTx)), uintptr(objid), uintptr(unsafe.Pointer(guidPartition)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IComObjectPoolEvents: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icomobjectpoolevents
@@ -1097,25 +1097,25 @@ var IID_IComObjectPoolEvents = win32.GUID{Data1: 0x683130ad, Data2: 0x2e50, Data
 // OnObjPoolPutObject dispatches through IComObjectPoolEvents's vtable slot 3.
 func (self *IComObjectPoolEvents) OnObjPoolPutObject(pInfo *COMSVCSEVENTINFO, guidObject *win32.GUID, nReason int32, dwAvailable uint32, oid uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidObject)), uintptr(nReason), uintptr(dwAvailable), uintptr(oid))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnObjPoolGetObject dispatches through IComObjectPoolEvents's vtable slot 4.
 func (self *IComObjectPoolEvents) OnObjPoolGetObject(pInfo *COMSVCSEVENTINFO, guidActivity *win32.GUID, guidObject *win32.GUID, dwAvailable uint32, oid uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidActivity)), uintptr(unsafe.Pointer(guidObject)), uintptr(dwAvailable), uintptr(oid))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnObjPoolRecycleToTx dispatches through IComObjectPoolEvents's vtable slot 5.
 func (self *IComObjectPoolEvents) OnObjPoolRecycleToTx(pInfo *COMSVCSEVENTINFO, guidActivity *win32.GUID, guidObject *win32.GUID, guidTx *win32.GUID, objid uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidActivity)), uintptr(unsafe.Pointer(guidObject)), uintptr(unsafe.Pointer(guidTx)), uintptr(objid))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnObjPoolGetFromTx dispatches through IComObjectPoolEvents's vtable slot 6.
 func (self *IComObjectPoolEvents) OnObjPoolGetFromTx(pInfo *COMSVCSEVENTINFO, guidActivity *win32.GUID, guidObject *win32.GUID, guidTx *win32.GUID, objid uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidActivity)), uintptr(unsafe.Pointer(guidObject)), uintptr(unsafe.Pointer(guidTx)), uintptr(objid))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IComObjectPoolEvents2: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icomobjectpoolevents2
@@ -1130,31 +1130,31 @@ var IID_IComObjectPoolEvents2 = win32.GUID{Data1: 0x683130ae, Data2: 0x2e50, Dat
 // OnObjPoolCreateObject dispatches through IComObjectPoolEvents2's vtable slot 3.
 func (self *IComObjectPoolEvents2) OnObjPoolCreateObject(pInfo *COMSVCSEVENTINFO, guidObject *win32.GUID, dwObjsCreated uint32, oid uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidObject)), uintptr(dwObjsCreated), uintptr(oid))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnObjPoolDestroyObject dispatches through IComObjectPoolEvents2's vtable slot 4.
 func (self *IComObjectPoolEvents2) OnObjPoolDestroyObject(pInfo *COMSVCSEVENTINFO, guidObject *win32.GUID, dwObjsCreated uint32, oid uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidObject)), uintptr(dwObjsCreated), uintptr(oid))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnObjPoolCreateDecision dispatches through IComObjectPoolEvents2's vtable slot 5.
 func (self *IComObjectPoolEvents2) OnObjPoolCreateDecision(pInfo *COMSVCSEVENTINFO, dwThreadsWaiting uint32, dwAvail uint32, dwCreated uint32, dwMin uint32, dwMax uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(dwThreadsWaiting), uintptr(dwAvail), uintptr(dwCreated), uintptr(dwMin), uintptr(dwMax))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnObjPoolTimeout dispatches through IComObjectPoolEvents2's vtable slot 6.
 func (self *IComObjectPoolEvents2) OnObjPoolTimeout(pInfo *COMSVCSEVENTINFO, guidObject *win32.GUID, guidActivity *win32.GUID, dwTimeout uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidObject)), uintptr(unsafe.Pointer(guidActivity)), uintptr(dwTimeout))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnObjPoolCreatePool dispatches through IComObjectPoolEvents2's vtable slot 7.
 func (self *IComObjectPoolEvents2) OnObjPoolCreatePool(pInfo *COMSVCSEVENTINFO, guidObject *win32.GUID, dwMin uint32, dwMax uint32, dwTimeout uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidObject)), uintptr(dwMin), uintptr(dwMax), uintptr(dwTimeout))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IComQCEvents: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icomqcevents
@@ -1170,44 +1170,44 @@ var IID_IComQCEvents = win32.GUID{Data1: 0x683130b2, Data2: 0x2e50, Data3: 0x11d
 func (self *IComQCEvents) OnQCRecord(pInfo *COMSVCSEVENTINFO, objid uint64, szQueue string, guidMsgId *win32.GUID, guidWorkFlowId *win32.GUID, msmqhr foundation.HRESULT) error {
 	_szQueue := win32.UTF16Ptr(szQueue)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(objid), uintptr(unsafe.Pointer(_szQueue)), uintptr(unsafe.Pointer(guidMsgId)), uintptr(unsafe.Pointer(guidWorkFlowId)), uintptr(msmqhr))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnQCQueueOpen dispatches through IComQCEvents's vtable slot 4.
 func (self *IComQCEvents) OnQCQueueOpen(pInfo *COMSVCSEVENTINFO, szQueue string, QueueID uint64, hr foundation.HRESULT) error {
 	_szQueue := win32.UTF16Ptr(szQueue)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(_szQueue)), uintptr(QueueID), uintptr(hr))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnQCReceive dispatches through IComQCEvents's vtable slot 5.
 func (self *IComQCEvents) OnQCReceive(pInfo *COMSVCSEVENTINFO, QueueID uint64, guidMsgId *win32.GUID, guidWorkFlowId *win32.GUID, hr foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(QueueID), uintptr(unsafe.Pointer(guidMsgId)), uintptr(unsafe.Pointer(guidWorkFlowId)), uintptr(hr))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnQCReceiveFail dispatches through IComQCEvents's vtable slot 6.
 func (self *IComQCEvents) OnQCReceiveFail(pInfo *COMSVCSEVENTINFO, QueueID uint64, msmqhr foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(QueueID), uintptr(msmqhr))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnQCMoveToReTryQueue dispatches through IComQCEvents's vtable slot 7.
 func (self *IComQCEvents) OnQCMoveToReTryQueue(pInfo *COMSVCSEVENTINFO, guidMsgId *win32.GUID, guidWorkFlowId *win32.GUID, RetryIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidMsgId)), uintptr(unsafe.Pointer(guidWorkFlowId)), uintptr(RetryIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnQCMoveToDeadQueue dispatches through IComQCEvents's vtable slot 8.
 func (self *IComQCEvents) OnQCMoveToDeadQueue(pInfo *COMSVCSEVENTINFO, guidMsgId *win32.GUID, guidWorkFlowId *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidMsgId)), uintptr(unsafe.Pointer(guidWorkFlowId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnQCPlayback dispatches through IComQCEvents's vtable slot 9.
 func (self *IComQCEvents) OnQCPlayback(pInfo *COMSVCSEVENTINFO, objid uint64, guidMsgId *win32.GUID, guidWorkFlowId *win32.GUID, hr foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(objid), uintptr(unsafe.Pointer(guidMsgId)), uintptr(unsafe.Pointer(guidWorkFlowId)), uintptr(hr))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IComResourceEvents: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icomresourceevents
@@ -1224,7 +1224,7 @@ func (self *IComResourceEvents) OnResourceCreate(pInfo *COMSVCSEVENTINFO, Object
 	_pszType := win32.UTF16Ptr(pszType)
 	_enlisted := win32.Bool32(enlisted)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(ObjectID), uintptr(unsafe.Pointer(_pszType)), uintptr(resId), uintptr(_enlisted))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnResourceAllocate dispatches through IComResourceEvents's vtable slot 4.
@@ -1232,21 +1232,21 @@ func (self *IComResourceEvents) OnResourceAllocate(pInfo *COMSVCSEVENTINFO, Obje
 	_pszType := win32.UTF16Ptr(pszType)
 	_enlisted := win32.Bool32(enlisted)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(ObjectID), uintptr(unsafe.Pointer(_pszType)), uintptr(resId), uintptr(_enlisted), uintptr(NumRated), uintptr(Rating))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnResourceRecycle dispatches through IComResourceEvents's vtable slot 5.
 func (self *IComResourceEvents) OnResourceRecycle(pInfo *COMSVCSEVENTINFO, ObjectID uint64, pszType string, resId uint64) error {
 	_pszType := win32.UTF16Ptr(pszType)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(ObjectID), uintptr(unsafe.Pointer(_pszType)), uintptr(resId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnResourceDestroy dispatches through IComResourceEvents's vtable slot 6.
 func (self *IComResourceEvents) OnResourceDestroy(pInfo *COMSVCSEVENTINFO, ObjectID uint64, hr foundation.HRESULT, pszType string, resId uint64) error {
 	_pszType := win32.UTF16Ptr(pszType)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(ObjectID), uintptr(hr), uintptr(unsafe.Pointer(_pszType)), uintptr(resId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnResourceTrack dispatches through IComResourceEvents's vtable slot 7.
@@ -1254,7 +1254,7 @@ func (self *IComResourceEvents) OnResourceTrack(pInfo *COMSVCSEVENTINFO, ObjectI
 	_pszType := win32.UTF16Ptr(pszType)
 	_enlisted := win32.Bool32(enlisted)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(ObjectID), uintptr(unsafe.Pointer(_pszType)), uintptr(resId), uintptr(_enlisted))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IComSecurityEvents: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icomsecurityevents
@@ -1278,7 +1278,7 @@ func (self *IComSecurityEvents) OnAuthenticate(pInfo *COMSVCSEVENTINFO, guidActi
 	}
 	_bCurrentUserInpersonatingInProc := win32.Bool32(bCurrentUserInpersonatingInProc)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidActivity)), uintptr(ObjectID), uintptr(unsafe.Pointer(guidIID)), uintptr(iMeth), uintptr(len(pSidOriginalUser)), uintptr(unsafe.Pointer(_pSidOriginalUser)), uintptr(len(pSidCurrentUser)), uintptr(unsafe.Pointer(_pSidCurrentUser)), uintptr(_bCurrentUserInpersonatingInProc))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnAuthenticateFail dispatches through IComSecurityEvents's vtable slot 4.
@@ -1293,7 +1293,7 @@ func (self *IComSecurityEvents) OnAuthenticateFail(pInfo *COMSVCSEVENTINFO, guid
 	}
 	_bCurrentUserInpersonatingInProc := win32.Bool32(bCurrentUserInpersonatingInProc)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidActivity)), uintptr(ObjectID), uintptr(unsafe.Pointer(guidIID)), uintptr(iMeth), uintptr(len(pSidOriginalUser)), uintptr(unsafe.Pointer(_pSidOriginalUser)), uintptr(len(pSidCurrentUser)), uintptr(unsafe.Pointer(_pSidCurrentUser)), uintptr(_bCurrentUserInpersonatingInProc))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 324b64fa-33b6-11d2-98b7-00c04f8ee1c4
@@ -1307,61 +1307,61 @@ var IID_IComStaThreadPoolKnobs = win32.GUID{Data1: 0x324b64fa, Data2: 0x33b6, Da
 // SetMinThreadCount dispatches through IComStaThreadPoolKnobs's vtable slot 3.
 func (self *IComStaThreadPoolKnobs) SetMinThreadCount(minThreads uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(minThreads))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMinThreadCount dispatches through IComStaThreadPoolKnobs's vtable slot 4.
 func (self *IComStaThreadPoolKnobs) GetMinThreadCount(minThreads *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(minThreads)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMaxThreadCount dispatches through IComStaThreadPoolKnobs's vtable slot 5.
 func (self *IComStaThreadPoolKnobs) SetMaxThreadCount(maxThreads uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(maxThreads))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMaxThreadCount dispatches through IComStaThreadPoolKnobs's vtable slot 6.
 func (self *IComStaThreadPoolKnobs) GetMaxThreadCount(maxThreads *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(maxThreads)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetActivityPerThread dispatches through IComStaThreadPoolKnobs's vtable slot 7.
 func (self *IComStaThreadPoolKnobs) SetActivityPerThread(activitiesPerThread uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(activitiesPerThread))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetActivityPerThread dispatches through IComStaThreadPoolKnobs's vtable slot 8.
 func (self *IComStaThreadPoolKnobs) GetActivityPerThread(activitiesPerThread *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(activitiesPerThread)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetActivityRatio dispatches through IComStaThreadPoolKnobs's vtable slot 10.
 func (self *IComStaThreadPoolKnobs) GetActivityRatio(activityRatio *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(activityRatio)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThreadCount dispatches through IComStaThreadPoolKnobs's vtable slot 11.
 func (self *IComStaThreadPoolKnobs) GetThreadCount(pdwThreads *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwThreads)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetQueueDepth dispatches through IComStaThreadPoolKnobs's vtable slot 12.
 func (self *IComStaThreadPoolKnobs) GetQueueDepth(pdwQDepth *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwQDepth)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetQueueDepth dispatches through IComStaThreadPoolKnobs's vtable slot 13.
 func (self *IComStaThreadPoolKnobs) SetQueueDepth(dwQDepth int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwQDepth))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 73707523-ff9a-4974-bf84-2108dc213740
@@ -1375,63 +1375,63 @@ var IID_IComStaThreadPoolKnobs2 = win32.GUID{Data1: 0x73707523, Data2: 0xff9a, D
 // GetMaxCPULoad dispatches through IComStaThreadPoolKnobs2's vtable slot 14.
 func (self *IComStaThreadPoolKnobs2) GetMaxCPULoad(pdwLoad *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwLoad)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMaxCPULoad dispatches through IComStaThreadPoolKnobs2's vtable slot 15.
 func (self *IComStaThreadPoolKnobs2) SetMaxCPULoad(pdwLoad int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(pdwLoad))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCPUMetricEnabled dispatches through IComStaThreadPoolKnobs2's vtable slot 16.
 func (self *IComStaThreadPoolKnobs2) GetCPUMetricEnabled(pbMetricEnabled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbMetricEnabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCPUMetricEnabled dispatches through IComStaThreadPoolKnobs2's vtable slot 17.
 func (self *IComStaThreadPoolKnobs2) SetCPUMetricEnabled(bMetricEnabled bool) error {
 	_bMetricEnabled := win32.Bool32(bMetricEnabled)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(_bMetricEnabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCreateThreadsAggressively dispatches through IComStaThreadPoolKnobs2's vtable slot 18.
 func (self *IComStaThreadPoolKnobs2) GetCreateThreadsAggressively(pbMetricEnabled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbMetricEnabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCreateThreadsAggressively dispatches through IComStaThreadPoolKnobs2's vtable slot 19.
 func (self *IComStaThreadPoolKnobs2) SetCreateThreadsAggressively(bMetricEnabled bool) error {
 	_bMetricEnabled := win32.Bool32(bMetricEnabled)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(_bMetricEnabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMaxCSR dispatches through IComStaThreadPoolKnobs2's vtable slot 20.
 func (self *IComStaThreadPoolKnobs2) GetMaxCSR(pdwCSR *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCSR)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMaxCSR dispatches through IComStaThreadPoolKnobs2's vtable slot 21.
 func (self *IComStaThreadPoolKnobs2) SetMaxCSR(dwCSR int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(dwCSR))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetWaitTimeForThreadCleanup dispatches through IComStaThreadPoolKnobs2's vtable slot 22.
 func (self *IComStaThreadPoolKnobs2) GetWaitTimeForThreadCleanup(pdwThreadCleanupWaitTime *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwThreadCleanupWaitTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetWaitTimeForThreadCleanup dispatches through IComStaThreadPoolKnobs2's vtable slot 23.
 func (self *IComStaThreadPoolKnobs2) SetWaitTimeForThreadCleanup(dwThreadCleanupWaitTime int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(dwThreadCleanupWaitTime))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IComThreadEvents: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icomthreadevents
@@ -1446,67 +1446,67 @@ var IID_IComThreadEvents = win32.GUID{Data1: 0x683130a5, Data2: 0x2e50, Data3: 0
 // OnThreadStart dispatches through IComThreadEvents's vtable slot 3.
 func (self *IComThreadEvents) OnThreadStart(pInfo *COMSVCSEVENTINFO, ThreadID uint64, dwThread uint32, dwTheadCnt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(ThreadID), uintptr(dwThread), uintptr(dwTheadCnt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnThreadTerminate dispatches through IComThreadEvents's vtable slot 4.
 func (self *IComThreadEvents) OnThreadTerminate(pInfo *COMSVCSEVENTINFO, ThreadID uint64, dwThread uint32, dwTheadCnt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(ThreadID), uintptr(dwThread), uintptr(dwTheadCnt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnThreadBindToApartment dispatches through IComThreadEvents's vtable slot 5.
 func (self *IComThreadEvents) OnThreadBindToApartment(pInfo *COMSVCSEVENTINFO, ThreadID uint64, AptID uint64, dwActCnt uint32, dwLowCnt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(ThreadID), uintptr(AptID), uintptr(dwActCnt), uintptr(dwLowCnt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnThreadUnBind dispatches through IComThreadEvents's vtable slot 6.
 func (self *IComThreadEvents) OnThreadUnBind(pInfo *COMSVCSEVENTINFO, ThreadID uint64, AptID uint64, dwActCnt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(ThreadID), uintptr(AptID), uintptr(dwActCnt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnThreadWorkEnque dispatches through IComThreadEvents's vtable slot 7.
 func (self *IComThreadEvents) OnThreadWorkEnque(pInfo *COMSVCSEVENTINFO, ThreadID uint64, MsgWorkID uint64, QueueLen uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(ThreadID), uintptr(MsgWorkID), uintptr(QueueLen))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnThreadWorkPrivate dispatches through IComThreadEvents's vtable slot 8.
 func (self *IComThreadEvents) OnThreadWorkPrivate(pInfo *COMSVCSEVENTINFO, ThreadID uint64, MsgWorkID uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(ThreadID), uintptr(MsgWorkID))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnThreadWorkPublic dispatches through IComThreadEvents's vtable slot 9.
 func (self *IComThreadEvents) OnThreadWorkPublic(pInfo *COMSVCSEVENTINFO, ThreadID uint64, MsgWorkID uint64, QueueLen uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(ThreadID), uintptr(MsgWorkID), uintptr(QueueLen))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnThreadWorkRedirect dispatches through IComThreadEvents's vtable slot 10.
 func (self *IComThreadEvents) OnThreadWorkRedirect(pInfo *COMSVCSEVENTINFO, ThreadID uint64, MsgWorkID uint64, QueueLen uint32, ThreadNum uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(ThreadID), uintptr(MsgWorkID), uintptr(QueueLen), uintptr(ThreadNum))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnThreadWorkReject dispatches through IComThreadEvents's vtable slot 11.
 func (self *IComThreadEvents) OnThreadWorkReject(pInfo *COMSVCSEVENTINFO, ThreadID uint64, MsgWorkID uint64, QueueLen uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(ThreadID), uintptr(MsgWorkID), uintptr(QueueLen))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnThreadAssignApartment dispatches through IComThreadEvents's vtable slot 12.
 func (self *IComThreadEvents) OnThreadAssignApartment(pInfo *COMSVCSEVENTINFO, guidActivity *win32.GUID, AptID uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidActivity)), uintptr(AptID))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnThreadUnassignApartment dispatches through IComThreadEvents's vtable slot 13.
 func (self *IComThreadEvents) OnThreadUnassignApartment(pInfo *COMSVCSEVENTINFO, AptID uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(AptID))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IComTrackingInfoCollection: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icomtrackinginfocollection
@@ -1521,19 +1521,19 @@ var IID_IComTrackingInfoCollection = win32.GUID{Data1: 0xc266c677, Data2: 0xc9ad
 // Type dispatches through IComTrackingInfoCollection's vtable slot 3.
 func (self *IComTrackingInfoCollection) Type(pType *TRACKING_COLL_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Count dispatches through IComTrackingInfoCollection's vtable slot 4.
 func (self *IComTrackingInfoCollection) Count(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Item dispatches through IComTrackingInfoCollection's vtable slot 5.
 func (self *IComTrackingInfoCollection) Item(ulIndex uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(ulIndex), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IComTrackingInfoEvents: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icomtrackinginfoevents
@@ -1548,7 +1548,7 @@ var IID_IComTrackingInfoEvents = win32.GUID{Data1: 0x4e6cdcc9, Data2: 0xfb25, Da
 // OnNewTrackingInfo dispatches through IComTrackingInfoEvents's vtable slot 3.
 func (self *IComTrackingInfoEvents) OnNewTrackingInfo(pToplevelCollection *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pToplevelCollection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IComTrackingInfoObject: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icomtrackinginfoobject
@@ -1564,7 +1564,7 @@ var IID_IComTrackingInfoObject = win32.GUID{Data1: 0x116e42c5, Data2: 0xd8b1, Da
 func (self *IComTrackingInfoObject) GetValue(szPropertyName string, pvarOut *systemvariant.VARIANT) error {
 	_szPropertyName := win32.UTF16Ptr(szPropertyName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szPropertyName)), uintptr(unsafe.Pointer(pvarOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IComTrackingInfoProperties: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icomtrackinginfoproperties
@@ -1579,13 +1579,13 @@ var IID_IComTrackingInfoProperties = win32.GUID{Data1: 0x789b42be, Data2: 0x6f6b
 // PropCount dispatches through IComTrackingInfoProperties's vtable slot 3.
 func (self *IComTrackingInfoProperties) PropCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPropName dispatches through IComTrackingInfoProperties's vtable slot 4.
 func (self *IComTrackingInfoProperties) GetPropName(ulIndex uint32, ppszPropName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulIndex), uintptr(unsafe.Pointer(ppszPropName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IComTransaction2Events: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icomtransaction2events
@@ -1601,26 +1601,26 @@ var IID_IComTransaction2Events = win32.GUID{Data1: 0xa136f62a, Data2: 0x2f94, Da
 func (self *IComTransaction2Events) OnTransactionStart2(pInfo *COMSVCSEVENTINFO, guidTx *win32.GUID, tsid *win32.GUID, fRoot bool, nIsolationLevel int32) error {
 	_fRoot := win32.Bool32(fRoot)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidTx)), uintptr(unsafe.Pointer(tsid)), uintptr(_fRoot), uintptr(nIsolationLevel))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnTransactionPrepare2 dispatches through IComTransaction2Events's vtable slot 4.
 func (self *IComTransaction2Events) OnTransactionPrepare2(pInfo *COMSVCSEVENTINFO, guidTx *win32.GUID, fVoteYes bool) error {
 	_fVoteYes := win32.Bool32(fVoteYes)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidTx)), uintptr(_fVoteYes))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnTransactionAbort2 dispatches through IComTransaction2Events's vtable slot 5.
 func (self *IComTransaction2Events) OnTransactionAbort2(pInfo *COMSVCSEVENTINFO, guidTx *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidTx)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnTransactionCommit2 dispatches through IComTransaction2Events's vtable slot 6.
 func (self *IComTransaction2Events) OnTransactionCommit2(pInfo *COMSVCSEVENTINFO, guidTx *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidTx)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IComTransactionEvents: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icomtransactionevents
@@ -1636,26 +1636,26 @@ var IID_IComTransactionEvents = win32.GUID{Data1: 0x683130a8, Data2: 0x2e50, Dat
 func (self *IComTransactionEvents) OnTransactionStart(pInfo *COMSVCSEVENTINFO, guidTx *win32.GUID, tsid *win32.GUID, fRoot bool) error {
 	_fRoot := win32.Bool32(fRoot)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidTx)), uintptr(unsafe.Pointer(tsid)), uintptr(_fRoot))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnTransactionPrepare dispatches through IComTransactionEvents's vtable slot 4.
 func (self *IComTransactionEvents) OnTransactionPrepare(pInfo *COMSVCSEVENTINFO, guidTx *win32.GUID, fVoteYes bool) error {
 	_fVoteYes := win32.Bool32(fVoteYes)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidTx)), uintptr(_fVoteYes))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnTransactionAbort dispatches through IComTransactionEvents's vtable slot 5.
 func (self *IComTransactionEvents) OnTransactionAbort(pInfo *COMSVCSEVENTINFO, guidTx *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidTx)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnTransactionCommit dispatches through IComTransactionEvents's vtable slot 6.
 func (self *IComTransactionEvents) OnTransactionCommit(pInfo *COMSVCSEVENTINFO, guidTx *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidTx)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IComUserEvent: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icomuserevent
@@ -1670,7 +1670,7 @@ var IID_IComUserEvent = win32.GUID{Data1: 0x683130a4, Data2: 0x2e50, Data3: 0x11
 // OnUserEvent dispatches through IComUserEvent's vtable slot 3.
 func (self *IComUserEvent) OnUserEvent(pInfo *COMSVCSEVENTINFO, pvarEvent *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(pvarEvent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IContextProperties: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icontextproperties
@@ -1685,25 +1685,25 @@ var IID_IContextProperties = win32.GUID{Data1: 0xd396da85, Data2: 0xbf8f, Data3:
 // Count dispatches through IContextProperties's vtable slot 3.
 func (self *IContextProperties) Count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProperty dispatches through IContextProperties's vtable slot 4.
 func (self *IContextProperties) GetProperty(name foundation.BSTR, pProperty *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(pProperty)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumNames dispatches through IContextProperties's vtable slot 5.
 func (self *IContextProperties) EnumNames(ppenum **IEnumNames) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveProperty dispatches through IContextProperties's vtable slot 7.
 func (self *IContextProperties) RemoveProperty(name foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: a7549a29-a7c4-42e1-8dc1-7e3d748dc24a
@@ -1717,14 +1717,14 @@ var IID_IContextSecurityPerimeter = win32.GUID{Data1: 0xa7549a29, Data2: 0xa7c4,
 // GetPerimeterFlag dispatches through IContextSecurityPerimeter's vtable slot 3.
 func (self *IContextSecurityPerimeter) GetPerimeterFlag(pFlag *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFlag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetPerimeterFlag dispatches through IContextSecurityPerimeter's vtable slot 4.
 func (self *IContextSecurityPerimeter) SetPerimeterFlag(fFlag bool) error {
 	_fFlag := win32.Bool32(fFlag)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(_fFlag))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IContextState: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icontextstate
@@ -1739,25 +1739,25 @@ var IID_IContextState = win32.GUID{Data1: 0x3c05e54b, Data2: 0xa42a, Data3: 0x11
 // SetDeactivateOnReturn dispatches through IContextState's vtable slot 3.
 func (self *IContextState) SetDeactivateOnReturn(bDeactivate foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(bDeactivate))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeactivateOnReturn dispatches through IContextState's vtable slot 4.
 func (self *IContextState) GetDeactivateOnReturn(pbDeactivate *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbDeactivate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMyTransactionVote dispatches through IContextState's vtable slot 5.
 func (self *IContextState) SetMyTransactionVote(txVote TransactionVote) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(txVote))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMyTransactionVote dispatches through IContextState's vtable slot 6.
 func (self *IContextState) GetMyTransactionVote(ptxVote *TransactionVote) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ptxVote)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICreateWithLocalTransaction: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icreatewithlocaltransaction
@@ -1772,7 +1772,7 @@ var IID_ICreateWithLocalTransaction = win32.GUID{Data1: 0x227ac7a8, Data2: 0x842
 // CreateInstanceWithSysTx dispatches through ICreateWithLocalTransaction's vtable slot 3.
 func (self *ICreateWithLocalTransaction) CreateInstanceWithSysTx(pTransaction *systemcom.IUnknown, rclsid *win32.GUID, riid *win32.GUID, pObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTransaction)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICreateWithTipTransactionEx: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icreatewithtiptransactionex
@@ -1787,7 +1787,7 @@ var IID_ICreateWithTipTransactionEx = win32.GUID{Data1: 0x455acf59, Data2: 0x534
 // CreateInstance dispatches through ICreateWithTipTransactionEx's vtable slot 3.
 func (self *ICreateWithTipTransactionEx) CreateInstance(bstrTipUrl foundation.BSTR, rclsid *win32.GUID, riid *win32.GUID, pObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTipUrl)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICreateWithTransactionEx: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icreatewithtransactionex
@@ -1802,7 +1802,7 @@ var IID_ICreateWithTransactionEx = win32.GUID{Data1: 0x455acf57, Data2: 0x5345, 
 // CreateInstance dispatches through ICreateWithTransactionEx's vtable slot 3.
 func (self *ICreateWithTransactionEx) CreateInstance(pTransaction *systemdistributedtransactioncoordinator.ITransaction, rclsid *win32.GUID, riid *win32.GUID, pObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTransaction)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICrmCompensator: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icrmcompensator
@@ -1817,45 +1817,45 @@ var IID_ICrmCompensator = win32.GUID{Data1: 0xbbc01830, Data2: 0x8d3b, Data3: 0x
 // SetLogControl dispatches through ICrmCompensator's vtable slot 3.
 func (self *ICrmCompensator) SetLogControl(pLogControl *ICrmLogControl) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLogControl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BeginPrepare dispatches through ICrmCompensator's vtable slot 4.
 func (self *ICrmCompensator) BeginPrepare() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndPrepare dispatches through ICrmCompensator's vtable slot 6.
 func (self *ICrmCompensator) EndPrepare(pfOkToPrepare *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfOkToPrepare)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BeginCommit dispatches through ICrmCompensator's vtable slot 7.
 func (self *ICrmCompensator) BeginCommit(fRecovery bool) error {
 	_fRecovery := win32.Bool32(fRecovery)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(_fRecovery))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndCommit dispatches through ICrmCompensator's vtable slot 9.
 func (self *ICrmCompensator) EndCommit() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BeginAbort dispatches through ICrmCompensator's vtable slot 10.
 func (self *ICrmCompensator) BeginAbort(fRecovery bool) error {
 	_fRecovery := win32.Bool32(fRecovery)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(_fRecovery))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndAbort dispatches through ICrmCompensator's vtable slot 12.
 func (self *ICrmCompensator) EndAbort() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICrmCompensatorVariants: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icrmcompensatorvariants
@@ -1870,61 +1870,61 @@ var IID_ICrmCompensatorVariants = win32.GUID{Data1: 0xf0baf8e4, Data2: 0x7804, D
 // SetLogControlVariants dispatches through ICrmCompensatorVariants's vtable slot 3.
 func (self *ICrmCompensatorVariants) SetLogControlVariants(pLogControl *ICrmLogControl) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLogControl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BeginPrepareVariants dispatches through ICrmCompensatorVariants's vtable slot 4.
 func (self *ICrmCompensatorVariants) BeginPrepareVariants() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PrepareRecordVariants dispatches through ICrmCompensatorVariants's vtable slot 5.
 func (self *ICrmCompensatorVariants) PrepareRecordVariants(pLogRecord *systemvariant.VARIANT, pbForget *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLogRecord)), uintptr(unsafe.Pointer(pbForget)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndPrepareVariants dispatches through ICrmCompensatorVariants's vtable slot 6.
 func (self *ICrmCompensatorVariants) EndPrepareVariants(pbOkToPrepare *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbOkToPrepare)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BeginCommitVariants dispatches through ICrmCompensatorVariants's vtable slot 7.
 func (self *ICrmCompensatorVariants) BeginCommitVariants(bRecovery foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(bRecovery))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CommitRecordVariants dispatches through ICrmCompensatorVariants's vtable slot 8.
 func (self *ICrmCompensatorVariants) CommitRecordVariants(pLogRecord *systemvariant.VARIANT, pbForget *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLogRecord)), uintptr(unsafe.Pointer(pbForget)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndCommitVariants dispatches through ICrmCompensatorVariants's vtable slot 9.
 func (self *ICrmCompensatorVariants) EndCommitVariants() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BeginAbortVariants dispatches through ICrmCompensatorVariants's vtable slot 10.
 func (self *ICrmCompensatorVariants) BeginAbortVariants(bRecovery foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(bRecovery))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AbortRecordVariants dispatches through ICrmCompensatorVariants's vtable slot 11.
 func (self *ICrmCompensatorVariants) AbortRecordVariants(pLogRecord *systemvariant.VARIANT, pbForget *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLogRecord)), uintptr(unsafe.Pointer(pbForget)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndAbortVariants dispatches through ICrmCompensatorVariants's vtable slot 12.
 func (self *ICrmCompensatorVariants) EndAbortVariants() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICrmFormatLogRecords: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icrmformatlogrecords
@@ -1939,13 +1939,13 @@ var IID_ICrmFormatLogRecords = win32.GUID{Data1: 0x9c51d821, Data2: 0xc98b, Data
 // GetColumnCount dispatches through ICrmFormatLogRecords's vtable slot 3.
 func (self *ICrmFormatLogRecords) GetColumnCount(plColumnCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plColumnCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetColumnHeaders dispatches through ICrmFormatLogRecords's vtable slot 4.
 func (self *ICrmFormatLogRecords) GetColumnHeaders(pHeaders *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHeaders)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICrmLogControl: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icrmlogcontrol
@@ -1960,7 +1960,7 @@ var IID_ICrmLogControl = win32.GUID{Data1: 0xa0e174b3, Data2: 0xd26e, Data3: 0x1
 // Get_TransactionUOW dispatches through ICrmLogControl's vtable slot 3.
 func (self *ICrmLogControl) Get_TransactionUOW(pVal *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterCompensator dispatches through ICrmLogControl's vtable slot 4.
@@ -1968,31 +1968,31 @@ func (self *ICrmLogControl) RegisterCompensator(lpcwstrProgIdCompensator string,
 	_lpcwstrProgIdCompensator := win32.UTF16Ptr(lpcwstrProgIdCompensator)
 	_lpcwstrDescription := win32.UTF16Ptr(lpcwstrDescription)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpcwstrProgIdCompensator)), uintptr(unsafe.Pointer(_lpcwstrDescription)), uintptr(lCrmRegFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteLogRecordVariants dispatches through ICrmLogControl's vtable slot 5.
 func (self *ICrmLogControl) WriteLogRecordVariants(pLogRecord *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLogRecord)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ForceLog dispatches through ICrmLogControl's vtable slot 6.
 func (self *ICrmLogControl) ForceLog() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ForgetLogRecord dispatches through ICrmLogControl's vtable slot 7.
 func (self *ICrmLogControl) ForgetLogRecord() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ForceTransactionToAbort dispatches through ICrmLogControl's vtable slot 8.
 func (self *ICrmLogControl) ForceTransactionToAbort() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteLogRecord dispatches through ICrmLogControl's vtable slot 9.
@@ -2002,7 +2002,7 @@ func (self *ICrmLogControl) WriteLogRecord(rgBlob []systemcom.BLOB) error {
 		_rgBlob = &rgBlob[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_rgBlob)), uintptr(len(rgBlob)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICrmMonitor: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icrmmonitor
@@ -2017,7 +2017,7 @@ var IID_ICrmMonitor = win32.GUID{Data1: 0x70c8e443, Data2: 0xc7ed, Data3: 0x11d1
 // GetClerks dispatches through ICrmMonitor's vtable slot 3.
 func (self *ICrmMonitor) GetClerks(pClerks **ICrmMonitorClerks) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pClerks)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICrmMonitorClerks: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icrmmonitorclerks
@@ -2032,13 +2032,13 @@ var IID_ICrmMonitorClerks = win32.GUID{Data1: 0x70c8e442, Data2: 0xc7ed, Data3: 
 // Get__NewEnum dispatches through ICrmMonitorClerks's vtable slot 8.
 func (self *ICrmMonitorClerks) Get__NewEnum(pVal **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through ICrmMonitorClerks's vtable slot 9.
 func (self *ICrmMonitorClerks) Get_Count(pVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICrmMonitorLogRecords: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icrmmonitorlogrecords
@@ -2053,25 +2053,25 @@ var IID_ICrmMonitorLogRecords = win32.GUID{Data1: 0x70c8e441, Data2: 0xc7ed, Dat
 // Get_Count dispatches through ICrmMonitorLogRecords's vtable slot 3.
 func (self *ICrmMonitorLogRecords) Get_Count(pVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TransactionState dispatches through ICrmMonitorLogRecords's vtable slot 4.
 func (self *ICrmMonitorLogRecords) Get_TransactionState(pVal *CrmTransactionState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StructuredRecords dispatches through ICrmMonitorLogRecords's vtable slot 5.
 func (self *ICrmMonitorLogRecords) Get_StructuredRecords(pVal *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLogRecord dispatches through ICrmMonitorLogRecords's vtable slot 6.
 func (self *ICrmMonitorLogRecords) GetLogRecord(dwIndex uint32, pCrmLogRec *CrmLogRecordRead) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(pCrmLogRec)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDispenserDriver: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-idispenserdriver
@@ -2086,38 +2086,38 @@ var IID_IDispenserDriver = win32.GUID{Data1: 0x208b3651, Data2: 0x2b48, Data3: 0
 // CreateResource dispatches through IDispenserDriver's vtable slot 3.
 func (self *IDispenserDriver) CreateResource(ResTypId uintptr, pResId *uintptr, pSecsFreeBeforeDestroy *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ResTypId), uintptr(unsafe.Pointer(pResId)), uintptr(unsafe.Pointer(pSecsFreeBeforeDestroy)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RateResource dispatches through IDispenserDriver's vtable slot 4.
 func (self *IDispenserDriver) RateResource(ResTypId uintptr, ResId uintptr, fRequiresTransactionEnlistment bool, pRating *uint32) error {
 	_fRequiresTransactionEnlistment := win32.Bool32(fRequiresTransactionEnlistment)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ResTypId), uintptr(ResId), uintptr(_fRequiresTransactionEnlistment), uintptr(unsafe.Pointer(pRating)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnlistResource dispatches through IDispenserDriver's vtable slot 5.
 func (self *IDispenserDriver) EnlistResource(ResId uintptr, TransId uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(ResId), uintptr(TransId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ResetResource dispatches through IDispenserDriver's vtable slot 6.
 func (self *IDispenserDriver) ResetResource(ResId uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ResId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DestroyResource dispatches through IDispenserDriver's vtable slot 7.
 func (self *IDispenserDriver) DestroyResource(ResId uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(ResId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DestroyResourceS dispatches through IDispenserDriver's vtable slot 8.
 func (self *IDispenserDriver) DestroyResourceS(ResId *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ResId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDispenserManager: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-idispensermanager
@@ -2133,13 +2133,13 @@ var IID_IDispenserManager = win32.GUID{Data1: 0x5cb31e10, Data2: 0x2b5f, Data3: 
 func (self *IDispenserManager) RegisterDispenser(__MIDL__IDispenserManager0000 *IDispenserDriver, szDispenserName string, __MIDL__IDispenserManager0001 **IHolder) error {
 	_szDispenserName := win32.UTF16Ptr(szDispenserName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__IDispenserManager0000)), uintptr(unsafe.Pointer(_szDispenserName)), uintptr(unsafe.Pointer(__MIDL__IDispenserManager0001)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetContext dispatches through IDispenserManager's vtable slot 4.
 func (self *IDispenserManager) GetContext(__MIDL__IDispenserManager0002 *uintptr, __MIDL__IDispenserManager0003 *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__IDispenserManager0002)), uintptr(unsafe.Pointer(__MIDL__IDispenserManager0003)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumNames: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-ienumnames
@@ -2154,25 +2154,25 @@ var IID_IEnumNames = win32.GUID{Data1: 0x51372af2, Data2: 0xcae7, Data3: 0x11cf,
 // Next dispatches through IEnumNames's vtable slot 3.
 func (self *IEnumNames) Next(celt uint32, rgname *foundation.BSTR, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgname)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumNames's vtable slot 4.
 func (self *IEnumNames) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumNames's vtable slot 5.
 func (self *IEnumNames) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IEnumNames's vtable slot 6.
 func (self *IEnumNames) Clone(ppenum **IEnumNames) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 9a9f12b8-80af-47ab-a579-35ea57725370
@@ -2186,19 +2186,19 @@ var IID_IEventServerTrace = win32.GUID{Data1: 0x9a9f12b8, Data2: 0x80af, Data3: 
 // StartTraceGuid dispatches through IEventServerTrace's vtable slot 7.
 func (self *IEventServerTrace) StartTraceGuid(bstrguidEvent foundation.BSTR, bstrguidFilter foundation.BSTR, lPidFilter int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrguidEvent)), uintptr(unsafe.Pointer(bstrguidFilter)), uintptr(lPidFilter))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StopTraceGuid dispatches through IEventServerTrace's vtable slot 8.
 func (self *IEventServerTrace) StopTraceGuid(bstrguidEvent foundation.BSTR, bstrguidFilter foundation.BSTR, lPidFilter int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrguidEvent)), uintptr(unsafe.Pointer(bstrguidFilter)), uintptr(lPidFilter))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumTraceGuid dispatches through IEventServerTrace's vtable slot 9.
 func (self *IEventServerTrace) EnumTraceGuid(plCntGuids *int32, pbstrGuidList *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCntGuids)), uintptr(unsafe.Pointer(pbstrGuidList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IGetAppTrackerData: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-igetapptrackerdata
@@ -2213,43 +2213,43 @@ var IID_IGetAppTrackerData = win32.GUID{Data1: 0x507c3ac8, Data2: 0x3e12, Data3:
 // GetApplicationProcesses dispatches through IGetAppTrackerData's vtable slot 3.
 func (self *IGetAppTrackerData) GetApplicationProcesses(PartitionId *win32.GUID, ApplicationId *win32.GUID, Flags uint32, NumApplicationProcesses *uint32, ApplicationProcesses **ApplicationProcessSummary) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PartitionId)), uintptr(unsafe.Pointer(ApplicationId)), uintptr(Flags), uintptr(unsafe.Pointer(NumApplicationProcesses)), uintptr(unsafe.Pointer(ApplicationProcesses)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetApplicationProcessDetails dispatches through IGetAppTrackerData's vtable slot 4.
 func (self *IGetAppTrackerData) GetApplicationProcessDetails(ApplicationInstanceId *win32.GUID, ProcessId uint32, Flags uint32, Summary *ApplicationProcessSummary, Statistics *ApplicationProcessStatistics, RecycleInfo *ApplicationProcessRecycleInfo, AnyComponentsHangMonitored *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ApplicationInstanceId)), uintptr(ProcessId), uintptr(Flags), uintptr(unsafe.Pointer(Summary)), uintptr(unsafe.Pointer(Statistics)), uintptr(unsafe.Pointer(RecycleInfo)), uintptr(unsafe.Pointer(AnyComponentsHangMonitored)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetApplicationsInProcess dispatches through IGetAppTrackerData's vtable slot 5.
 func (self *IGetAppTrackerData) GetApplicationsInProcess(ApplicationInstanceId *win32.GUID, ProcessId uint32, PartitionId *win32.GUID, Flags uint32, NumApplicationsInProcess *uint32, Applications **ApplicationSummary) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ApplicationInstanceId)), uintptr(ProcessId), uintptr(unsafe.Pointer(PartitionId)), uintptr(Flags), uintptr(unsafe.Pointer(NumApplicationsInProcess)), uintptr(unsafe.Pointer(Applications)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetComponentsInProcess dispatches through IGetAppTrackerData's vtable slot 6.
 func (self *IGetAppTrackerData) GetComponentsInProcess(ApplicationInstanceId *win32.GUID, ProcessId uint32, PartitionId *win32.GUID, ApplicationId *win32.GUID, Flags uint32, NumComponentsInProcess *uint32, Components **ComponentSummary) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ApplicationInstanceId)), uintptr(ProcessId), uintptr(unsafe.Pointer(PartitionId)), uintptr(unsafe.Pointer(ApplicationId)), uintptr(Flags), uintptr(unsafe.Pointer(NumComponentsInProcess)), uintptr(unsafe.Pointer(Components)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetComponentDetails dispatches through IGetAppTrackerData's vtable slot 7.
 func (self *IGetAppTrackerData) GetComponentDetails(ApplicationInstanceId *win32.GUID, ProcessId uint32, Clsid *win32.GUID, Flags uint32, Summary *ComponentSummary, Statistics *ComponentStatistics, HangMonitorInfo *ComponentHangMonitorInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ApplicationInstanceId)), uintptr(ProcessId), uintptr(unsafe.Pointer(Clsid)), uintptr(Flags), uintptr(unsafe.Pointer(Summary)), uintptr(unsafe.Pointer(Statistics)), uintptr(unsafe.Pointer(HangMonitorInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTrackerDataAsCollectionObject dispatches through IGetAppTrackerData's vtable slot 8.
 func (self *IGetAppTrackerData) GetTrackerDataAsCollectionObject(TopLevelCollection **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(TopLevelCollection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSuggestedPollingInterval dispatches through IGetAppTrackerData's vtable slot 9.
 func (self *IGetAppTrackerData) GetSuggestedPollingInterval(PollingIntervalInSeconds *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PollingIntervalInSeconds)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IGetContextProperties: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-igetcontextproperties
@@ -2264,19 +2264,19 @@ var IID_IGetContextProperties = win32.GUID{Data1: 0x51372af4, Data2: 0xcae7, Dat
 // Count dispatches through IGetContextProperties's vtable slot 3.
 func (self *IGetContextProperties) Count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProperty dispatches through IGetContextProperties's vtable slot 4.
 func (self *IGetContextProperties) GetProperty(name foundation.BSTR, pProperty *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(pProperty)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumNames dispatches through IGetContextProperties's vtable slot 5.
 func (self *IGetContextProperties) EnumNames(ppenum **IEnumNames) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IGetSecurityCallContext: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-igetsecuritycallcontext
@@ -2291,7 +2291,7 @@ var IID_IGetSecurityCallContext = win32.GUID{Data1: 0xcafc823f, Data2: 0xb441, D
 // GetSecurityCallContext dispatches through IGetSecurityCallContext's vtable slot 7.
 func (self *IGetSecurityCallContext) GetSecurityCallContext(ppObject **ISecurityCallContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IHolder: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-iholder
@@ -2306,51 +2306,51 @@ var IID_IHolder = win32.GUID{Data1: 0xbf6a1850, Data2: 0x2b45, Data3: 0x11cf, Da
 // AllocResource dispatches through IHolder's vtable slot 3.
 func (self *IHolder) AllocResource(__MIDL__IHolder0000 uintptr, __MIDL__IHolder0001 *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(__MIDL__IHolder0000), uintptr(unsafe.Pointer(__MIDL__IHolder0001)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FreeResource dispatches through IHolder's vtable slot 4.
 func (self *IHolder) FreeResource(__MIDL__IHolder0002 uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(__MIDL__IHolder0002))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TrackResource dispatches through IHolder's vtable slot 5.
 func (self *IHolder) TrackResource(__MIDL__IHolder0003 uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(__MIDL__IHolder0003))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TrackResourceS dispatches through IHolder's vtable slot 6.
 func (self *IHolder) TrackResourceS(__MIDL__IHolder0004 *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__IHolder0004)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UntrackResource dispatches through IHolder's vtable slot 7.
 func (self *IHolder) UntrackResource(__MIDL__IHolder0005 uintptr, __MIDL__IHolder0006 bool) error {
 	___MIDL__IHolder0006 := win32.Bool32(__MIDL__IHolder0006)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(__MIDL__IHolder0005), uintptr(___MIDL__IHolder0006))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UntrackResourceS dispatches through IHolder's vtable slot 8.
 func (self *IHolder) UntrackResourceS(__MIDL__IHolder0007 *uint16, __MIDL__IHolder0008 bool) error {
 	___MIDL__IHolder0008 := win32.Bool32(__MIDL__IHolder0008)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__IHolder0007)), uintptr(___MIDL__IHolder0008))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Close dispatches through IHolder's vtable slot 9.
 func (self *IHolder) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RequestDestroyResource dispatches through IHolder's vtable slot 10.
 func (self *IHolder) RequestDestroyResource(__MIDL__IHolder0009 uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(__MIDL__IHolder0009))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 683130b4-2e50-11d2-98a5-00c04f8ee1c4
@@ -2364,19 +2364,19 @@ var IID_ILBEvents = win32.GUID{Data1: 0x683130b4, Data2: 0x2e50, Data3: 0x11d2, 
 // TargetUp dispatches through ILBEvents's vtable slot 3.
 func (self *ILBEvents) TargetUp(bstrServerName foundation.BSTR, bstrClsidEng foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrServerName)), uintptr(unsafe.Pointer(bstrClsidEng)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TargetDown dispatches through ILBEvents's vtable slot 4.
 func (self *ILBEvents) TargetDown(bstrServerName foundation.BSTR, bstrClsidEng foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrServerName)), uintptr(unsafe.Pointer(bstrClsidEng)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EngineDefined dispatches through ILBEvents's vtable slot 5.
 func (self *ILBEvents) EngineDefined(bstrPropName foundation.BSTR, varPropValue *systemvariant.VARIANT, bstrClsidEng foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPropName)), uintptr(unsafe.Pointer(varPropValue)), uintptr(unsafe.Pointer(bstrClsidEng)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMTSActivity: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-imtsactivity
@@ -2391,13 +2391,13 @@ var IID_IMTSActivity = win32.GUID{Data1: 0x51372af0, Data2: 0xcae7, Data3: 0x11c
 // SynchronousCall dispatches through IMTSActivity's vtable slot 3.
 func (self *IMTSActivity) SynchronousCall(pCall *IMTSCall) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCall)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AsyncCall dispatches through IMTSActivity's vtable slot 4.
 func (self *IMTSActivity) AsyncCall(pCall *IMTSCall) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCall)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reserved1 dispatches through IMTSActivity's vtable slot 5.
@@ -2408,13 +2408,13 @@ func (self *IMTSActivity) Reserved1() {
 // BindToCurrentThread dispatches through IMTSActivity's vtable slot 6.
 func (self *IMTSActivity) BindToCurrentThread() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnbindFromThread dispatches through IMTSActivity's vtable slot 7.
 func (self *IMTSActivity) UnbindFromThread() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMTSCall: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-imtscall
@@ -2429,7 +2429,7 @@ var IID_IMTSCall = win32.GUID{Data1: 0x51372aef, Data2: 0xcae7, Data3: 0x11cf, D
 // OnCall dispatches through IMTSCall's vtable slot 3.
 func (self *IMTSCall) OnCall() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMTSLocator: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-imtslocator
@@ -2444,7 +2444,7 @@ var IID_IMTSLocator = win32.GUID{Data1: 0xd19b8bfd, Data2: 0x7f88, Data3: 0x11d0
 // GetEventDispatcher dispatches through IMTSLocator's vtable slot 7.
 func (self *IMTSLocator) GetEventDispatcher(pUnk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IManagedActivationEvents: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-imanagedactivationevents
@@ -2460,13 +2460,13 @@ var IID_IManagedActivationEvents = win32.GUID{Data1: 0xa5f325af, Data2: 0x572f, 
 func (self *IManagedActivationEvents) CreateManagedStub(pInfo *IManagedObjectInfo, fDist bool) error {
 	_fDist := win32.Bool32(fDist)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(_fDist))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DestroyManagedStub dispatches through IManagedActivationEvents's vtable slot 4.
 func (self *IManagedActivationEvents) DestroyManagedStub(pInfo *IManagedObjectInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IManagedObjectInfo: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-imanagedobjectinfo
@@ -2481,27 +2481,27 @@ var IID_IManagedObjectInfo = win32.GUID{Data1: 0x1427c51a, Data2: 0x4584, Data3:
 // GetIUnknown dispatches through IManagedObjectInfo's vtable slot 3.
 func (self *IManagedObjectInfo) GetIUnknown(pUnk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetIObjectControl dispatches through IManagedObjectInfo's vtable slot 4.
 func (self *IManagedObjectInfo) GetIObjectControl(pCtrl **IObjectControl) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCtrl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetInPool dispatches through IManagedObjectInfo's vtable slot 5.
 func (self *IManagedObjectInfo) SetInPool(bInPool bool, pPooledObj *IManagedPooledObj) error {
 	_bInPool := win32.Bool32(bInPool)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(_bInPool), uintptr(unsafe.Pointer(pPooledObj)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetWrapperStrength dispatches through IManagedObjectInfo's vtable slot 6.
 func (self *IManagedObjectInfo) SetWrapperStrength(bStrong bool) error {
 	_bStrong := win32.Bool32(bStrong)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(_bStrong))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IManagedPoolAction: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-imanagedpoolaction
@@ -2516,7 +2516,7 @@ var IID_IManagedPoolAction = win32.GUID{Data1: 0xda91b74e, Data2: 0x5388, Data3:
 // LastRelease dispatches through IManagedPoolAction's vtable slot 3.
 func (self *IManagedPoolAction) LastRelease() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IManagedPooledObj: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-imanagedpooledobj
@@ -2532,7 +2532,7 @@ var IID_IManagedPooledObj = win32.GUID{Data1: 0xc5da4bea, Data2: 0x1b42, Data3: 
 func (self *IManagedPooledObj) SetHeld(m_bHeld bool) error {
 	_m_bHeld := win32.Bool32(m_bHeld)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(_m_bHeld))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMessageMover: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-imessagemover
@@ -2547,43 +2547,43 @@ var IID_IMessageMover = win32.GUID{Data1: 0x588a085a, Data2: 0xb795, Data3: 0x11
 // Get_SourcePath dispatches through IMessageMover's vtable slot 7.
 func (self *IMessageMover) Get_SourcePath(pVal *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SourcePath dispatches through IMessageMover's vtable slot 8.
 func (self *IMessageMover) Put_SourcePath(newVal foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DestPath dispatches through IMessageMover's vtable slot 9.
 func (self *IMessageMover) Get_DestPath(pVal *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DestPath dispatches through IMessageMover's vtable slot 10.
 func (self *IMessageMover) Put_DestPath(newVal foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CommitBatchSize dispatches through IMessageMover's vtable slot 11.
 func (self *IMessageMover) Get_CommitBatchSize(pVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CommitBatchSize dispatches through IMessageMover's vtable slot 12.
 func (self *IMessageMover) Put_CommitBatchSize(newVal int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(newVal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MoveMessages dispatches through IMessageMover's vtable slot 13.
 func (self *IMessageMover) MoveMessages(plMessagesMoved *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMessagesMoved)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMtsEventInfo: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-imtseventinfo
@@ -2598,31 +2598,31 @@ var IID_IMtsEventInfo = win32.GUID{Data1: 0xd56c3dc1, Data2: 0x8482, Data3: 0x11
 // Get_Names dispatches through IMtsEventInfo's vtable slot 7.
 func (self *IMtsEventInfo) Get_Names(pUnk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DisplayName dispatches through IMtsEventInfo's vtable slot 8.
 func (self *IMtsEventInfo) Get_DisplayName(sDisplayName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sDisplayName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EventID dispatches through IMtsEventInfo's vtable slot 9.
 func (self *IMtsEventInfo) Get_EventID(sGuidEventID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sGuidEventID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IMtsEventInfo's vtable slot 10.
 func (self *IMtsEventInfo) Get_Count(lCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Value dispatches through IMtsEventInfo's vtable slot 11.
 func (self *IMtsEventInfo) Get_Value(sKey foundation.BSTR, pVal *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sKey)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMtsEvents: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-imtsevents
@@ -2637,31 +2637,31 @@ var IID_IMtsEvents = win32.GUID{Data1: 0xbacedf4d, Data2: 0x74ab, Data3: 0x11d0,
 // Get_PackageName dispatches through IMtsEvents's vtable slot 7.
 func (self *IMtsEvents) Get_PackageName(pVal *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PackageGuid dispatches through IMtsEvents's vtable slot 8.
 func (self *IMtsEvents) Get_PackageGuid(pVal *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PostEvent dispatches through IMtsEvents's vtable slot 9.
 func (self *IMtsEvents) PostEvent(vEvent *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(vEvent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FireEvents dispatches through IMtsEvents's vtable slot 10.
 func (self *IMtsEvents) Get_FireEvents(pVal *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProcessID dispatches through IMtsEvents's vtable slot 11.
 func (self *IMtsEvents) GetProcessID(id *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(id)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMtsGrp: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-imtsgrp
@@ -2676,19 +2676,19 @@ var IID_IMtsGrp = win32.GUID{Data1: 0x4b2e958c, Data2: 0x0393, Data3: 0x11d1, Da
 // Get_Count dispatches through IMtsGrp's vtable slot 7.
 func (self *IMtsGrp) Get_Count(pVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Item dispatches through IMtsGrp's vtable slot 8.
 func (self *IMtsGrp) Item(lIndex int32, ppUnkDispatcher **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(ppUnkDispatcher)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through IMtsGrp's vtable slot 9.
 func (self *IMtsGrp) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IObjPool: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-iobjpool
@@ -2747,7 +2747,7 @@ var IID_IObjectConstruct = win32.GUID{Data1: 0x41c4f8b3, Data2: 0x7439, Data3: 0
 // Construct dispatches through IObjectConstruct's vtable slot 3.
 func (self *IObjectConstruct) Construct(pCtorObj *systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCtorObj)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IObjectConstructString: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-iobjectconstructstring
@@ -2762,7 +2762,7 @@ var IID_IObjectConstructString = win32.GUID{Data1: 0x41c4f8b2, Data2: 0x7439, Da
 // Get_ConstructString dispatches through IObjectConstructString's vtable slot 7.
 func (self *IObjectConstructString) Get_ConstructString(pVal *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IObjectContext: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-iobjectcontext
@@ -2777,31 +2777,31 @@ var IID_IObjectContext = win32.GUID{Data1: 0x51372ae0, Data2: 0xcae7, Data3: 0x1
 // CreateInstance dispatches through IObjectContext's vtable slot 3.
 func (self *IObjectContext) CreateInstance(rclsid *win32.GUID, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetComplete dispatches through IObjectContext's vtable slot 4.
 func (self *IObjectContext) SetComplete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAbort dispatches through IObjectContext's vtable slot 5.
 func (self *IObjectContext) SetAbort() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnableCommit dispatches through IObjectContext's vtable slot 6.
 func (self *IObjectContext) EnableCommit() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DisableCommit dispatches through IObjectContext's vtable slot 7.
 func (self *IObjectContext) DisableCommit() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsInTransaction dispatches through IObjectContext's vtable slot 8.
@@ -2819,7 +2819,7 @@ func (self *IObjectContext) IsSecurityEnabled() foundation.BOOL {
 // IsCallerInRole dispatches through IObjectContext's vtable slot 10.
 func (self *IObjectContext) IsCallerInRole(bstrRole foundation.BSTR, pfIsInRole *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRole)), uintptr(unsafe.Pointer(pfIsInRole)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IObjectContextActivity: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-iobjectcontextactivity
@@ -2834,7 +2834,7 @@ var IID_IObjectContextActivity = win32.GUID{Data1: 0x51372afc, Data2: 0xcae7, Da
 // GetActivityId dispatches through IObjectContextActivity's vtable slot 3.
 func (self *IObjectContextActivity) GetActivityId(pGUID *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGUID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IObjectContextInfo: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-iobjectcontextinfo
@@ -2855,25 +2855,25 @@ func (self *IObjectContextInfo) IsInTransaction() foundation.BOOL {
 // GetTransaction dispatches through IObjectContextInfo's vtable slot 4.
 func (self *IObjectContextInfo) GetTransaction(pptrans **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pptrans)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTransactionId dispatches through IObjectContextInfo's vtable slot 5.
 func (self *IObjectContextInfo) GetTransactionId(pGuid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGuid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetActivityId dispatches through IObjectContextInfo's vtable slot 6.
 func (self *IObjectContextInfo) GetActivityId(pGUID *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGUID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetContextId dispatches through IObjectContextInfo's vtable slot 7.
 func (self *IObjectContextInfo) GetContextId(pGuid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGuid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IObjectContextInfo2: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-iobjectcontextinfo2
@@ -2888,19 +2888,19 @@ var IID_IObjectContextInfo2 = win32.GUID{Data1: 0x594be71a, Data2: 0x4bc4, Data3
 // GetPartitionId dispatches through IObjectContextInfo2's vtable slot 8.
 func (self *IObjectContextInfo2) GetPartitionId(pGuid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGuid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetApplicationId dispatches through IObjectContextInfo2's vtable slot 9.
 func (self *IObjectContextInfo2) GetApplicationId(pGuid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGuid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetApplicationInstanceId dispatches through IObjectContextInfo2's vtable slot 10.
 func (self *IObjectContextInfo2) GetApplicationInstanceId(pGuid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGuid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IObjectContextTip: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-iobjectcontexttip
@@ -2915,7 +2915,7 @@ var IID_IObjectContextTip = win32.GUID{Data1: 0x92fd41ca, Data2: 0xbad9, Data3: 
 // GetTipUrl dispatches through IObjectContextTip's vtable slot 3.
 func (self *IObjectContextTip) GetTipUrl(pTipUrl *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTipUrl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IObjectControl: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-iobjectcontrol
@@ -2930,7 +2930,7 @@ var IID_IObjectControl = win32.GUID{Data1: 0x51372aec, Data2: 0xcae7, Data3: 0x1
 // Activate dispatches through IObjectControl's vtable slot 3.
 func (self *IObjectControl) Activate() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Deactivate dispatches through IObjectControl's vtable slot 4.
@@ -2956,13 +2956,13 @@ var IID_IPlaybackControl = win32.GUID{Data1: 0x51372afd, Data2: 0xcae7, Data3: 0
 // FinalClientRetry dispatches through IPlaybackControl's vtable slot 3.
 func (self *IPlaybackControl) FinalClientRetry() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FinalServerRetry dispatches through IPlaybackControl's vtable slot 4.
 func (self *IPlaybackControl) FinalServerRetry() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPoolManager: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-ipoolmanager
@@ -2977,7 +2977,7 @@ var IID_IPoolManager = win32.GUID{Data1: 0x0a469861, Data2: 0x5a91, Data3: 0x43a
 // ShutdownPool dispatches through IPoolManager's vtable slot 7.
 func (self *IPoolManager) ShutdownPool(CLSIDOrProgID foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CLSIDOrProgID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IProcessInitializer: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-iprocessinitializer
@@ -2992,13 +2992,13 @@ var IID_IProcessInitializer = win32.GUID{Data1: 0x1113f52d, Data2: 0xdc7f, Data3
 // Startup dispatches through IProcessInitializer's vtable slot 3.
 func (self *IProcessInitializer) Startup(punkProcessControl *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(punkProcessControl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Shutdown dispatches through IProcessInitializer's vtable slot 4.
 func (self *IProcessInitializer) Shutdown() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISecurityCallContext: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-isecuritycallcontext
@@ -3013,37 +3013,37 @@ var IID_ISecurityCallContext = win32.GUID{Data1: 0xcafc823e, Data2: 0xb441, Data
 // Get_Count dispatches through ISecurityCallContext's vtable slot 7.
 func (self *ISecurityCallContext) Get_Count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Item dispatches through ISecurityCallContext's vtable slot 8.
 func (self *ISecurityCallContext) Get_Item(name foundation.BSTR, pItem *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(pItem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISecurityCallContext's vtable slot 9.
 func (self *ISecurityCallContext) Get__NewEnum(ppEnum **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsCallerInRole dispatches through ISecurityCallContext's vtable slot 10.
 func (self *ISecurityCallContext) IsCallerInRole(bstrRole foundation.BSTR, pfInRole *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRole)), uintptr(unsafe.Pointer(pfInRole)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsSecurityEnabled dispatches through ISecurityCallContext's vtable slot 11.
 func (self *ISecurityCallContext) IsSecurityEnabled(pfIsEnabled *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsEnabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsUserInRole dispatches through ISecurityCallContext's vtable slot 12.
 func (self *ISecurityCallContext) IsUserInRole(pUser *systemvariant.VARIANT, bstrRole foundation.BSTR, pfInRole *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUser)), uintptr(unsafe.Pointer(bstrRole)), uintptr(unsafe.Pointer(pfInRole)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISecurityCallersColl: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-isecuritycallerscoll
@@ -3058,19 +3058,19 @@ var IID_ISecurityCallersColl = win32.GUID{Data1: 0xcafc823d, Data2: 0xb441, Data
 // Get_Count dispatches through ISecurityCallersColl's vtable slot 7.
 func (self *ISecurityCallersColl) Get_Count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Item dispatches through ISecurityCallersColl's vtable slot 8.
 func (self *ISecurityCallersColl) Get_Item(lIndex int32, pObj **ISecurityIdentityColl) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(pObj)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISecurityCallersColl's vtable slot 9.
 func (self *ISecurityCallersColl) Get__NewEnum(ppEnum **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISecurityIdentityColl: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-isecurityidentitycoll
@@ -3085,19 +3085,19 @@ var IID_ISecurityIdentityColl = win32.GUID{Data1: 0xcafc823c, Data2: 0xb441, Dat
 // Get_Count dispatches through ISecurityIdentityColl's vtable slot 7.
 func (self *ISecurityIdentityColl) Get_Count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Item dispatches through ISecurityIdentityColl's vtable slot 8.
 func (self *ISecurityIdentityColl) Get_Item(name foundation.BSTR, pItem *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(pItem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISecurityIdentityColl's vtable slot 9.
 func (self *ISecurityIdentityColl) Get__NewEnum(ppEnum **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISecurityProperty: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-isecurityproperty
@@ -3112,31 +3112,31 @@ var IID_ISecurityProperty = win32.GUID{Data1: 0x51372aea, Data2: 0xcae7, Data3: 
 // GetDirectCreatorSID dispatches through ISecurityProperty's vtable slot 3.
 func (self *ISecurityProperty) GetDirectCreatorSID(pSID *security.PSID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOriginalCreatorSID dispatches through ISecurityProperty's vtable slot 4.
 func (self *ISecurityProperty) GetOriginalCreatorSID(pSID *security.PSID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDirectCallerSID dispatches through ISecurityProperty's vtable slot 5.
 func (self *ISecurityProperty) GetDirectCallerSID(pSID *security.PSID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOriginalCallerSID dispatches through ISecurityProperty's vtable slot 6.
 func (self *ISecurityProperty) GetOriginalCallerSID(pSID *security.PSID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReleaseSID dispatches through ISecurityProperty's vtable slot 7.
 func (self *ISecurityProperty) ReleaseSID(pSID security.PSID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(pSID))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISelectCOMLBServer: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-iselectcomlbserver
@@ -3151,13 +3151,13 @@ var IID_ISelectCOMLBServer = win32.GUID{Data1: 0xdcf443f4, Data2: 0x3f8a, Data3:
 // Init dispatches through ISelectCOMLBServer's vtable slot 3.
 func (self *ISelectCOMLBServer) Init() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLBServer dispatches through ISelectCOMLBServer's vtable slot 4.
 func (self *ISelectCOMLBServer) GetLBServer(pUnk *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISendMethodEvents: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-isendmethodevents
@@ -3172,13 +3172,13 @@ var IID_ISendMethodEvents = win32.GUID{Data1: 0x2732fd59, Data2: 0xb2b4, Data3: 
 // SendMethodCall dispatches through ISendMethodEvents's vtable slot 3.
 func (self *ISendMethodEvents) SendMethodCall(pIdentity unsafe.Pointer, riid *win32.GUID, dwMeth uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIdentity)), uintptr(unsafe.Pointer(riid)), uintptr(dwMeth))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendMethodReturn dispatches through ISendMethodEvents's vtable slot 4.
 func (self *ISendMethodEvents) SendMethodReturn(pIdentity unsafe.Pointer, riid *win32.GUID, dwMeth uint32, hrCall foundation.HRESULT, hrServer foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIdentity)), uintptr(unsafe.Pointer(riid)), uintptr(dwMeth), uintptr(hrCall), uintptr(hrServer))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IServiceActivity: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-iserviceactivity
@@ -3193,25 +3193,25 @@ var IID_IServiceActivity = win32.GUID{Data1: 0x67532e0c, Data2: 0x9e2f, Data3: 0
 // SynchronousCall dispatches through IServiceActivity's vtable slot 3.
 func (self *IServiceActivity) SynchronousCall(pIServiceCall *IServiceCall) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIServiceCall)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AsynchronousCall dispatches through IServiceActivity's vtable slot 4.
 func (self *IServiceActivity) AsynchronousCall(pIServiceCall *IServiceCall) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIServiceCall)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BindToCurrentThread dispatches through IServiceActivity's vtable slot 5.
 func (self *IServiceActivity) BindToCurrentThread() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnbindFromThread dispatches through IServiceActivity's vtable slot 6.
 func (self *IServiceActivity) UnbindFromThread() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IServiceCall: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-iservicecall
@@ -3226,7 +3226,7 @@ var IID_IServiceCall = win32.GUID{Data1: 0xbd3e2e12, Data2: 0x42dd, Data3: 0x40f
 // OnCall dispatches through IServiceCall's vtable slot 3.
 func (self *IServiceCall) OnCall() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IServiceComTIIntrinsicsConfig: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-iservicecomtiintrinsicsconfig
@@ -3241,7 +3241,7 @@ var IID_IServiceComTIIntrinsicsConfig = win32.GUID{Data1: 0x09e6831e, Data2: 0x0
 // ComTIIntrinsicsConfig dispatches through IServiceComTIIntrinsicsConfig's vtable slot 3.
 func (self *IServiceComTIIntrinsicsConfig) ComTIIntrinsicsConfig(comtiIntrinsicsConfig CSC_COMTIIntrinsicsConfig) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(comtiIntrinsicsConfig))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IServiceIISIntrinsicsConfig: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-iserviceiisintrinsicsconfig
@@ -3256,7 +3256,7 @@ var IID_IServiceIISIntrinsicsConfig = win32.GUID{Data1: 0x1a0cf920, Data2: 0xd45
 // IISIntrinsicsConfig dispatches through IServiceIISIntrinsicsConfig's vtable slot 3.
 func (self *IServiceIISIntrinsicsConfig) IISIntrinsicsConfig(iisIntrinsicsConfig CSC_IISIntrinsicsConfig) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(iisIntrinsicsConfig))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IServiceInheritanceConfig: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-iserviceinheritanceconfig
@@ -3271,7 +3271,7 @@ var IID_IServiceInheritanceConfig = win32.GUID{Data1: 0x92186771, Data2: 0xd3b4,
 // ContainingContextTreatment dispatches through IServiceInheritanceConfig's vtable slot 3.
 func (self *IServiceInheritanceConfig) ContainingContextTreatment(inheritanceConfig CSC_InheritanceConfig) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(inheritanceConfig))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IServicePartitionConfig: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-iservicepartitionconfig
@@ -3286,13 +3286,13 @@ var IID_IServicePartitionConfig = win32.GUID{Data1: 0x80182d03, Data2: 0x5ea4, D
 // PartitionConfig dispatches through IServicePartitionConfig's vtable slot 3.
 func (self *IServicePartitionConfig) PartitionConfig(partitionConfig CSC_PartitionConfig) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(partitionConfig))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PartitionID dispatches through IServicePartitionConfig's vtable slot 4.
 func (self *IServicePartitionConfig) PartitionID(guidPartitionID *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidPartitionID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IServicePool: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-iservicepool
@@ -3307,19 +3307,19 @@ var IID_IServicePool = win32.GUID{Data1: 0xb302df81, Data2: 0xea45, Data3: 0x451
 // Initialize dispatches through IServicePool's vtable slot 3.
 func (self *IServicePool) Initialize(pPoolConfig *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPoolConfig)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetObject dispatches through IServicePool's vtable slot 4.
 func (self *IServicePool) GetObject(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Shutdown dispatches through IServicePool's vtable slot 5.
 func (self *IServicePool) Shutdown() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IServicePoolConfig: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-iservicepoolconfig
@@ -3334,62 +3334,62 @@ var IID_IServicePoolConfig = win32.GUID{Data1: 0xa9690656, Data2: 0x5bca, Data3:
 // Put_MaxPoolSize dispatches through IServicePoolConfig's vtable slot 3.
 func (self *IServicePoolConfig) Put_MaxPoolSize(dwMaxPool uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwMaxPool))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MaxPoolSize dispatches through IServicePoolConfig's vtable slot 4.
 func (self *IServicePoolConfig) Get_MaxPoolSize(pdwMaxPool *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwMaxPool)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MinPoolSize dispatches through IServicePoolConfig's vtable slot 5.
 func (self *IServicePoolConfig) Put_MinPoolSize(dwMinPool uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwMinPool))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MinPoolSize dispatches through IServicePoolConfig's vtable slot 6.
 func (self *IServicePoolConfig) Get_MinPoolSize(pdwMinPool *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwMinPool)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CreationTimeout dispatches through IServicePoolConfig's vtable slot 7.
 func (self *IServicePoolConfig) Put_CreationTimeout(dwCreationTimeout uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwCreationTimeout))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CreationTimeout dispatches through IServicePoolConfig's vtable slot 8.
 func (self *IServicePoolConfig) Get_CreationTimeout(pdwCreationTimeout *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCreationTimeout)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_TransactionAffinity dispatches through IServicePoolConfig's vtable slot 9.
 func (self *IServicePoolConfig) Put_TransactionAffinity(fTxAffinity bool) error {
 	_fTxAffinity := win32.Bool32(fTxAffinity)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(_fTxAffinity))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TransactionAffinity dispatches through IServicePoolConfig's vtable slot 10.
 func (self *IServicePoolConfig) Get_TransactionAffinity(pfTxAffinity *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfTxAffinity)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ClassFactory dispatches through IServicePoolConfig's vtable slot 11.
 func (self *IServicePoolConfig) Put_ClassFactory(pFactory *systemcom.IClassFactory) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFactory)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ClassFactory dispatches through IServicePoolConfig's vtable slot 12.
 func (self *IServicePoolConfig) Get_ClassFactory(pFactory **systemcom.IClassFactory) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFactory)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IServiceSxsConfig: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-iservicesxsconfig
@@ -3404,21 +3404,21 @@ var IID_IServiceSxsConfig = win32.GUID{Data1: 0xc7cd7379, Data2: 0xf3f2, Data3: 
 // SxsConfig dispatches through IServiceSxsConfig's vtable slot 3.
 func (self *IServiceSxsConfig) SxsConfig(scsConfig CSC_SxsConfig) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(scsConfig))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SxsName dispatches through IServiceSxsConfig's vtable slot 4.
 func (self *IServiceSxsConfig) SxsName(szSxsName string) error {
 	_szSxsName := win32.UTF16Ptr(szSxsName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szSxsName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SxsDirectory dispatches through IServiceSxsConfig's vtable slot 5.
 func (self *IServiceSxsConfig) SxsDirectory(szSxsDirectory string) error {
 	_szSxsDirectory := win32.UTF16Ptr(szSxsDirectory)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szSxsDirectory)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IServiceSynchronizationConfig: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-iservicesynchronizationconfig
@@ -3433,7 +3433,7 @@ var IID_IServiceSynchronizationConfig = win32.GUID{Data1: 0xfd880e81, Data2: 0x6
 // ConfigureSynchronization dispatches through IServiceSynchronizationConfig's vtable slot 3.
 func (self *IServiceSynchronizationConfig) ConfigureSynchronization(synchConfig CSC_SynchronizationConfig) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(synchConfig))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IServiceSysTxnConfig: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-iservicesystxnconfig
@@ -3448,7 +3448,7 @@ var IID_IServiceSysTxnConfig = win32.GUID{Data1: 0x33caf1a1, Data2: 0xfcb8, Data
 // ConfigureBYOTSysTxn dispatches through IServiceSysTxnConfig's vtable slot 9.
 func (self *IServiceSysTxnConfig) ConfigureBYOTSysTxn(pTxProxy *ITransactionProxy) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTxProxy)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IServiceThreadPoolConfig: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-iservicethreadpoolconfig
@@ -3463,13 +3463,13 @@ var IID_IServiceThreadPoolConfig = win32.GUID{Data1: 0x186d89bc, Data2: 0xf277, 
 // SelectThreadPool dispatches through IServiceThreadPoolConfig's vtable slot 3.
 func (self *IServiceThreadPoolConfig) SelectThreadPool(threadPool CSC_ThreadPool) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(threadPool))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBindingInfo dispatches through IServiceThreadPoolConfig's vtable slot 4.
 func (self *IServiceThreadPoolConfig) SetBindingInfo(binding CSC_Binding) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(binding))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IServiceTrackerConfig: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-iservicetrackerconfig
@@ -3486,7 +3486,7 @@ func (self *IServiceTrackerConfig) TrackerConfig(trackerConfig CSC_TrackerConfig
 	_szTrackerAppName := win32.UTF16Ptr(szTrackerAppName)
 	_szTrackerCtxName := win32.UTF16Ptr(szTrackerCtxName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(trackerConfig), uintptr(unsafe.Pointer(_szTrackerAppName)), uintptr(unsafe.Pointer(_szTrackerCtxName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IServiceTransactionConfig: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-iservicetransactionconfig
@@ -3501,7 +3501,7 @@ var IID_IServiceTransactionConfig = win32.GUID{Data1: 0x59f4c2a3, Data2: 0xd3d7,
 // ConfigureBYOT dispatches through IServiceTransactionConfig's vtable slot 8.
 func (self *IServiceTransactionConfig) ConfigureBYOT(pITxByot *systemdistributedtransactioncoordinator.ITransaction) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pITxByot)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IServiceTransactionConfigBase: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-iservicetransactionconfigbase
@@ -3516,33 +3516,33 @@ var IID_IServiceTransactionConfigBase = win32.GUID{Data1: 0x772b3fbe, Data2: 0x6
 // ConfigureTransaction dispatches through IServiceTransactionConfigBase's vtable slot 3.
 func (self *IServiceTransactionConfigBase) ConfigureTransaction(transactionConfig CSC_TransactionConfig) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(transactionConfig))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsolationLevel dispatches through IServiceTransactionConfigBase's vtable slot 4.
 func (self *IServiceTransactionConfigBase) IsolationLevel(option COMAdminTxIsolationLevelOptions) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(option))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TransactionTimeout dispatches through IServiceTransactionConfigBase's vtable slot 5.
 func (self *IServiceTransactionConfigBase) TransactionTimeout(ulTimeoutSec uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(ulTimeoutSec))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BringYourOwnTransaction dispatches through IServiceTransactionConfigBase's vtable slot 6.
 func (self *IServiceTransactionConfigBase) BringYourOwnTransaction(szTipURL string) error {
 	_szTipURL := win32.UTF16Ptr(szTipURL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szTipURL)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NewTransactionDescription dispatches through IServiceTransactionConfigBase's vtable slot 7.
 func (self *IServiceTransactionConfigBase) NewTransactionDescription(szTxDesc string) error {
 	_szTxDesc := win32.UTF16Ptr(szTxDesc)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szTxDesc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISharedProperty: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-isharedproperty
@@ -3557,7 +3557,7 @@ var IID_ISharedProperty = win32.GUID{Data1: 0x2a005c01, Data2: 0xa5de, Data3: 0x
 // Get_Value dispatches through ISharedProperty's vtable slot 7.
 func (self *ISharedProperty) Get_Value(pVal *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISharedPropertyGroup: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-isharedpropertygroup
@@ -3572,25 +3572,25 @@ var IID_ISharedPropertyGroup = win32.GUID{Data1: 0x2a005c07, Data2: 0xa5de, Data
 // CreatePropertyByPosition dispatches through ISharedPropertyGroup's vtable slot 7.
 func (self *ISharedPropertyGroup) CreatePropertyByPosition(Index int32, fExists *foundation.VARIANT_BOOL, ppProp **ISharedProperty) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(fExists)), uintptr(unsafe.Pointer(ppProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PropertyByPosition dispatches through ISharedPropertyGroup's vtable slot 8.
 func (self *ISharedPropertyGroup) Get_PropertyByPosition(Index int32, ppProperty **ISharedProperty) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(ppProperty)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateProperty dispatches through ISharedPropertyGroup's vtable slot 9.
 func (self *ISharedPropertyGroup) CreateProperty(Name foundation.BSTR, fExists *foundation.VARIANT_BOOL, ppProp **ISharedProperty) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Name)), uintptr(unsafe.Pointer(fExists)), uintptr(unsafe.Pointer(ppProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Property dispatches through ISharedPropertyGroup's vtable slot 10.
 func (self *ISharedPropertyGroup) Get_Property(Name foundation.BSTR, ppProperty **ISharedProperty) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Name)), uintptr(unsafe.Pointer(ppProperty)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISharedPropertyGroupManager: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-isharedpropertygroupmanager
@@ -3605,19 +3605,19 @@ var IID_ISharedPropertyGroupManager = win32.GUID{Data1: 0x2a005c0d, Data2: 0xa5d
 // CreatePropertyGroup dispatches through ISharedPropertyGroupManager's vtable slot 7.
 func (self *ISharedPropertyGroupManager) CreatePropertyGroup(Name foundation.BSTR, dwIsoMode *int32, dwRelMode *int32, fExists *foundation.VARIANT_BOOL, ppGroup **ISharedPropertyGroup) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Name)), uintptr(unsafe.Pointer(dwIsoMode)), uintptr(unsafe.Pointer(dwRelMode)), uintptr(unsafe.Pointer(fExists)), uintptr(unsafe.Pointer(ppGroup)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Group dispatches through ISharedPropertyGroupManager's vtable slot 8.
 func (self *ISharedPropertyGroupManager) Get_Group(Name foundation.BSTR, ppGroup **ISharedPropertyGroup) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Name)), uintptr(unsafe.Pointer(ppGroup)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISharedPropertyGroupManager's vtable slot 9.
 func (self *ISharedPropertyGroupManager) Get__NewEnum(retval **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISystemAppEventData: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-isystemappeventdata
@@ -3632,13 +3632,13 @@ var IID_ISystemAppEventData = win32.GUID{Data1: 0xd6d48a3c, Data2: 0xd5c5, Data3
 // Startup dispatches through ISystemAppEventData's vtable slot 3.
 func (self *ISystemAppEventData) Startup() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnDataChanged dispatches through ISystemAppEventData's vtable slot 4.
 func (self *ISystemAppEventData) OnDataChanged(dwPID uint32, dwMask uint32, dwNumberSinks uint32, bstrDwMethodMask foundation.BSTR, dwReason uint32, u64TraceHandle uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwPID), uintptr(dwMask), uintptr(dwNumberSinks), uintptr(unsafe.Pointer(bstrDwMethodMask)), uintptr(dwReason), uintptr(u64TraceHandle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IThreadPoolKnobs: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-ithreadpoolknobs
@@ -3653,61 +3653,61 @@ var IID_IThreadPoolKnobs = win32.GUID{Data1: 0x51372af7, Data2: 0xcae7, Data3: 0
 // GetMaxThreads dispatches through IThreadPoolKnobs's vtable slot 3.
 func (self *IThreadPoolKnobs) GetMaxThreads(plcMaxThreads *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plcMaxThreads)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentThreads dispatches through IThreadPoolKnobs's vtable slot 4.
 func (self *IThreadPoolKnobs) GetCurrentThreads(plcCurrentThreads *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plcCurrentThreads)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMaxThreads dispatches through IThreadPoolKnobs's vtable slot 5.
 func (self *IThreadPoolKnobs) SetMaxThreads(lcMaxThreads int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(lcMaxThreads))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeleteDelay dispatches through IThreadPoolKnobs's vtable slot 6.
 func (self *IThreadPoolKnobs) GetDeleteDelay(pmsecDeleteDelay *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pmsecDeleteDelay)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDeleteDelay dispatches through IThreadPoolKnobs's vtable slot 7.
 func (self *IThreadPoolKnobs) SetDeleteDelay(msecDeleteDelay int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(msecDeleteDelay))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMaxQueuedRequests dispatches through IThreadPoolKnobs's vtable slot 8.
 func (self *IThreadPoolKnobs) GetMaxQueuedRequests(plcMaxQueuedRequests *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plcMaxQueuedRequests)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentQueuedRequests dispatches through IThreadPoolKnobs's vtable slot 9.
 func (self *IThreadPoolKnobs) GetCurrentQueuedRequests(plcCurrentQueuedRequests *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plcCurrentQueuedRequests)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMaxQueuedRequests dispatches through IThreadPoolKnobs's vtable slot 10.
 func (self *IThreadPoolKnobs) SetMaxQueuedRequests(lcMaxQueuedRequests int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lcMaxQueuedRequests))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMinThreads dispatches through IThreadPoolKnobs's vtable slot 11.
 func (self *IThreadPoolKnobs) SetMinThreads(lcMinThreads int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(lcMinThreads))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetQueueDepth dispatches through IThreadPoolKnobs's vtable slot 12.
 func (self *IThreadPoolKnobs) SetQueueDepth(lcQueueDepth int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(lcQueueDepth))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ITransactionContext: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-itransactioncontext
@@ -3722,19 +3722,19 @@ var IID_ITransactionContext = win32.GUID{Data1: 0x7999fc21, Data2: 0xd3c6, Data3
 // CreateInstance dispatches through ITransactionContext's vtable slot 7.
 func (self *ITransactionContext) CreateInstance(pszProgId foundation.BSTR, pObject *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszProgId)), uintptr(unsafe.Pointer(pObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Commit dispatches through ITransactionContext's vtable slot 8.
 func (self *ITransactionContext) Commit() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Abort dispatches through ITransactionContext's vtable slot 9.
 func (self *ITransactionContext) Abort() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ITransactionContextEx: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-itransactioncontextex
@@ -3749,19 +3749,19 @@ var IID_ITransactionContextEx = win32.GUID{Data1: 0x7999fc22, Data2: 0xd3c6, Dat
 // CreateInstance dispatches through ITransactionContextEx's vtable slot 3.
 func (self *ITransactionContextEx) CreateInstance(rclsid *win32.GUID, riid *win32.GUID, pObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Commit dispatches through ITransactionContextEx's vtable slot 4.
 func (self *ITransactionContextEx) Commit() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Abort dispatches through ITransactionContextEx's vtable slot 5.
 func (self *ITransactionContextEx) Abort() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ITransactionProperty: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-itransactionproperty
@@ -3821,7 +3821,7 @@ func (self *ITransactionProperty) Reserved9() {
 // GetTransactionResourcePool dispatches through ITransactionProperty's vtable slot 12.
 func (self *ITransactionProperty) GetTransactionResourcePool(ppTxPool **ITransactionResourcePool) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTxPool)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reserved10 dispatches through ITransactionProperty's vtable slot 13.
@@ -3876,37 +3876,37 @@ var IID_ITransactionProxy = win32.GUID{Data1: 0x02558374, Data2: 0xdf2e, Data3: 
 // Abort dispatches through ITransactionProxy's vtable slot 4.
 func (self *ITransactionProxy) Abort() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Promote dispatches through ITransactionProxy's vtable slot 5.
 func (self *ITransactionProxy) Promote(pTransaction **systemdistributedtransactioncoordinator.ITransaction) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTransaction)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateVoter dispatches through ITransactionProxy's vtable slot 6.
 func (self *ITransactionProxy) CreateVoter(pTxAsync *systemdistributedtransactioncoordinator.ITransactionVoterNotifyAsync2, ppBallot **systemdistributedtransactioncoordinator.ITransactionVoterBallotAsync2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTxAsync)), uintptr(unsafe.Pointer(ppBallot)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetIsolationLevel dispatches through ITransactionProxy's vtable slot 7.
 func (self *ITransactionProxy) GetIsolationLevel(__MIDL__ITransactionProxy0000 *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__ITransactionProxy0000)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetIdentifier dispatches through ITransactionProxy's vtable slot 8.
 func (self *ITransactionProxy) GetIdentifier(pbstrIdentifier *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrIdentifier)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsReusable dispatches through ITransactionProxy's vtable slot 9.
 func (self *ITransactionProxy) IsReusable(pfIsReusable *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsReusable)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ITransactionResourcePool: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-itransactionresourcepool
@@ -3921,13 +3921,13 @@ var IID_ITransactionResourcePool = win32.GUID{Data1: 0xc5feb7c1, Data2: 0x346a, 
 // PutResource dispatches through ITransactionResourcePool's vtable slot 3.
 func (self *ITransactionResourcePool) PutResource(pPool *IObjPool, pUnk *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPool)), uintptr(unsafe.Pointer(pUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetResource dispatches through ITransactionResourcePool's vtable slot 4.
 func (self *ITransactionResourcePool) GetResource(pPool *IObjPool, ppUnk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPool)), uintptr(unsafe.Pointer(ppUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ITransactionStatus: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-itransactionstatus
@@ -3942,13 +3942,13 @@ var IID_ITransactionStatus = win32.GUID{Data1: 0x61f589e8, Data2: 0x3724, Data3:
 // SetTransactionStatus dispatches through ITransactionStatus's vtable slot 3.
 func (self *ITransactionStatus) SetTransactionStatus(hrStatus foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hrStatus))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTransactionStatus dispatches through ITransactionStatus's vtable slot 4.
 func (self *ITransactionStatus) GetTransactionStatus(pHrStatus *foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHrStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 13d86f31-0139-41af-bcad-c7d50435fe9f
@@ -3976,79 +3976,79 @@ var IID_ObjectContext = win32.GUID{Data1: 0x74c08646, Data2: 0xcedb, Data3: 0x11
 // CreateInstance dispatches through ObjectContext's vtable slot 7.
 func (self *ObjectContext) CreateInstance(bstrProgID foundation.BSTR, pObject *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProgID)), uintptr(unsafe.Pointer(pObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetComplete dispatches through ObjectContext's vtable slot 8.
 func (self *ObjectContext) SetComplete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAbort dispatches through ObjectContext's vtable slot 9.
 func (self *ObjectContext) SetAbort() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnableCommit dispatches through ObjectContext's vtable slot 10.
 func (self *ObjectContext) EnableCommit() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DisableCommit dispatches through ObjectContext's vtable slot 11.
 func (self *ObjectContext) DisableCommit() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsInTransaction dispatches through ObjectContext's vtable slot 12.
 func (self *ObjectContext) IsInTransaction(pbIsInTx *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbIsInTx)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsSecurityEnabled dispatches through ObjectContext's vtable slot 13.
 func (self *ObjectContext) IsSecurityEnabled(pbIsEnabled *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbIsEnabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsCallerInRole dispatches through ObjectContext's vtable slot 14.
 func (self *ObjectContext) IsCallerInRole(bstrRole foundation.BSTR, pbInRole *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRole)), uintptr(unsafe.Pointer(pbInRole)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through ObjectContext's vtable slot 15.
 func (self *ObjectContext) Get_Count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Item dispatches through ObjectContext's vtable slot 16.
 func (self *ObjectContext) Get_Item(name foundation.BSTR, pItem *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(pItem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ObjectContext's vtable slot 17.
 func (self *ObjectContext) Get__NewEnum(ppEnum **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Security dispatches through ObjectContext's vtable slot 18.
 func (self *ObjectContext) Get_Security(ppSecurityProperty **SecurityProperty) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSecurityProperty)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ContextInfo dispatches through ObjectContext's vtable slot 19.
 func (self *ObjectContext) Get_ContextInfo(ppContextInfo **ContextInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppContextInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ObjectControl: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-objectcontrol
@@ -4063,19 +4063,19 @@ var IID_ObjectControl = win32.GUID{Data1: 0x7dc41850, Data2: 0x0c31, Data3: 0x11
 // Activate dispatches through ObjectControl's vtable slot 3.
 func (self *ObjectControl) Activate() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Deactivate dispatches through ObjectControl's vtable slot 4.
 func (self *ObjectControl) Deactivate() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CanBePooled dispatches through ObjectControl's vtable slot 5.
 func (self *ObjectControl) CanBePooled(pbPoolable *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbPoolable)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SecurityProperty: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-securityproperty
@@ -4090,23 +4090,23 @@ var IID_SecurityProperty = win32.GUID{Data1: 0xe74a7215, Data2: 0x014d, Data3: 0
 // GetDirectCallerName dispatches through SecurityProperty's vtable slot 7.
 func (self *SecurityProperty) GetDirectCallerName(bstrUserName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUserName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDirectCreatorName dispatches through SecurityProperty's vtable slot 8.
 func (self *SecurityProperty) GetDirectCreatorName(bstrUserName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUserName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOriginalCallerName dispatches through SecurityProperty's vtable slot 9.
 func (self *SecurityProperty) GetOriginalCallerName(bstrUserName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUserName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOriginalCreatorName dispatches through SecurityProperty's vtable slot 10.
 func (self *SecurityProperty) GetOriginalCreatorName(bstrUserName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUserName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

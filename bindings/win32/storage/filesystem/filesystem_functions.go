@@ -581,7 +581,7 @@ func BuildIoRingRegisterBuffers(ioRing HIORING, buffers []IORING_BUFFER_INFO, us
 		_buffers = &buffers[0]
 	}
 	r1, _, _ := syscall.SyscallN(procBuildIoRingRegisterBuffers.Addr(), uintptr(ioRing), uintptr(len(buffers)), uintptr(unsafe.Pointer(_buffers)), uintptr(userData))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BuildIoRingRegisterFileHandles calls api-ms-win-core-ioring-l1-1-0!BuildIoRingRegisterFileHandles.
@@ -592,7 +592,7 @@ func BuildIoRingRegisterFileHandles(ioRing HIORING, handles []foundation.HANDLE,
 		_handles = &handles[0]
 	}
 	r1, _, _ := syscall.SyscallN(procBuildIoRingRegisterFileHandles.Addr(), uintptr(ioRing), uintptr(len(handles)), uintptr(unsafe.Pointer(_handles)), uintptr(userData))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CheckNameLegalDOS8Dot3 calls KERNEL32!CheckNameLegalDOS8Dot3W.
@@ -640,7 +640,7 @@ func CloseEncryptedFileRaw(pvContext unsafe.Pointer) {
 // https://learn.microsoft.com/windows/win32/api/ioringapi/nf-ioringapi-closeioring
 func CloseIoRing(ioRing HIORING) error {
 	r1, _, _ := syscall.SyscallN(procCloseIoRing.Addr(), uintptr(ioRing))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CommitComplete calls ktmw32!CommitComplete.
@@ -716,7 +716,7 @@ func CopyFile2(pwszExistingFileName string, pwszNewFileName string, pExtendedPar
 	_pwszExistingFileName := win32.UTF16Ptr(pwszExistingFileName)
 	_pwszNewFileName := win32.UTF16Ptr(pwszNewFileName)
 	r1, _, _ := syscall.SyscallN(procCopyFile2.Addr(), uintptr(unsafe.Pointer(_pwszExistingFileName)), uintptr(unsafe.Pointer(_pwszNewFileName)), uintptr(unsafe.Pointer(pExtendedParameters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CopyFileA calls KERNEL32!CopyFileA.
@@ -804,7 +804,7 @@ func CreateBindLink(virtualPath string, backingPath string, createBindLinkFlags 
 		_exceptionPaths = &exceptionPaths[0]
 	}
 	r1, _, _ := syscall.SyscallN(procCreateBindLink.Addr(), uintptr(unsafe.Pointer(_virtualPath)), uintptr(unsafe.Pointer(_backingPath)), uintptr(createBindLinkFlags), uintptr(len(exceptionPaths)), uintptr(unsafe.Pointer(_exceptionPaths)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateDirectory calls KERNEL32!CreateDirectoryW.
@@ -1987,14 +1987,14 @@ func GetDiskFreeSpaceExA(lpDirectoryName foundation.PSTR, lpFreeBytesAvailableTo
 func GetDiskSpaceInformation(rootPath string, diskSpaceInfo *DISK_SPACE_INFORMATION) error {
 	_rootPath := win32.UTF16Ptr(rootPath)
 	r1, _, _ := syscall.SyscallN(procGetDiskSpaceInformation.Addr(), uintptr(unsafe.Pointer(_rootPath)), uintptr(unsafe.Pointer(diskSpaceInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDiskSpaceInformationA calls KERNEL32!GetDiskSpaceInformationA.
 // https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getdiskspaceinformationa
 func GetDiskSpaceInformationA(rootPath foundation.PSTR, diskSpaceInfo *DISK_SPACE_INFORMATION) error {
 	r1, _, _ := syscall.SyscallN(procGetDiskSpaceInformationA.Addr(), uintptr(unsafe.Pointer(rootPath)), uintptr(unsafe.Pointer(diskSpaceInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDriveType calls KERNEL32!GetDriveTypeW.
@@ -2415,7 +2415,7 @@ func GetFullPathNameTransactedA(lpFileName foundation.PSTR, nBufferLength uint32
 // https://learn.microsoft.com/windows/win32/api/ioringapi/nf-ioringapi-getioringinfo
 func GetIoRingInfo(ioRing HIORING, info *IORING_INFO) error {
 	r1, _, _ := syscall.SyscallN(procGetIoRingInfo.Addr(), uintptr(ioRing), uintptr(unsafe.Pointer(info)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLogContainerName calls clfsw32!GetLogContainerName.
@@ -3400,7 +3400,7 @@ func OpenTransactionManagerById(TransactionManagerId *win32.GUID, DesiredAccess 
 // https://learn.microsoft.com/windows/win32/api/ioringapi/nf-ioringapi-popioringcompletion
 func PopIoRingCompletion(ioRing HIORING, cqe *IORING_CQE) error {
 	r1, _, _ := syscall.SyscallN(procPopIoRingCompletion.Addr(), uintptr(ioRing), uintptr(unsafe.Pointer(cqe)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PrePrepareComplete calls ktmw32!PrePrepareComplete.
@@ -3494,7 +3494,7 @@ func QueryDosDeviceA(lpDeviceName foundation.PSTR, lpTargetPath foundation.PSTR,
 // https://learn.microsoft.com/windows/win32/api/ioringapi/nf-ioringapi-queryioringcapabilities
 func QueryIoRingCapabilities(capabilities *IORING_CAPABILITIES) error {
 	r1, _, _ := syscall.SyscallN(procQueryIoRingCapabilities.Addr(), uintptr(unsafe.Pointer(capabilities)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryLogPolicy calls clfsw32!QueryLogPolicy.
@@ -3756,7 +3756,7 @@ func RegisterManageableLogClient(hLog foundation.HANDLE, pCallbacks *LOG_MANAGEM
 func RemoveBindLink(virtualPath string) error {
 	_virtualPath := win32.UTF16Ptr(virtualPath)
 	r1, _, _ := syscall.SyscallN(procRemoveBindLink.Addr(), uintptr(unsafe.Pointer(_virtualPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveDirectory calls KERNEL32!RemoveDirectoryW.
@@ -4263,7 +4263,7 @@ func SetFileValidData(hFile foundation.HANDLE, ValidDataLength int64) error {
 // https://learn.microsoft.com/windows/win32/api/ioringapi/nf-ioringapi-setioringcompletionevent
 func SetIoRingCompletionEvent(ioRing HIORING, hEvent foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procSetIoRingCompletionEvent.Addr(), uintptr(ioRing), uintptr(hEvent))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetLogArchiveMode calls clfsw32!SetLogArchiveMode.
@@ -4427,7 +4427,7 @@ func SinglePhaseReject(EnlistmentHandle foundation.HANDLE, TmVirtualClock *int64
 // https://learn.microsoft.com/windows/win32/api/ioringapi/nf-ioringapi-submitioring
 func SubmitIoRing(ioRing HIORING, waitOperations uint32, milliseconds uint32, submittedEntries *uint32) error {
 	r1, _, _ := syscall.SyscallN(procSubmitIoRing.Addr(), uintptr(ioRing), uintptr(waitOperations), uintptr(milliseconds), uintptr(unsafe.Pointer(submittedEntries)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TerminateLogArchive calls clfsw32!TerminateLogArchive.
@@ -4635,7 +4635,7 @@ func VerQueryValueA(pBlock unsafe.Pointer, lpSubBlock foundation.PSTR, lplpBuffe
 func WofEnumEntries(VolumeName string, Provider uint32, EnumProc WofEnumEntryProc, UserData unsafe.Pointer) error {
 	_VolumeName := win32.UTF16Ptr(VolumeName)
 	r1, _, _ := syscall.SyscallN(procWofEnumEntries.Addr(), uintptr(unsafe.Pointer(_VolumeName)), uintptr(Provider), uintptr(EnumProc), uintptr(unsafe.Pointer(UserData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WofFileEnumFiles calls WOFUTIL!WofFileEnumFiles.
@@ -4643,14 +4643,14 @@ func WofEnumEntries(VolumeName string, Provider uint32, EnumProc WofEnumEntryPro
 func WofFileEnumFiles(VolumeName string, Algorithm uint32, EnumProc WofEnumFilesProc, UserData unsafe.Pointer) error {
 	_VolumeName := win32.UTF16Ptr(VolumeName)
 	r1, _, _ := syscall.SyscallN(procWofFileEnumFiles.Addr(), uintptr(unsafe.Pointer(_VolumeName)), uintptr(Algorithm), uintptr(EnumProc), uintptr(unsafe.Pointer(UserData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WofGetDriverVersion calls WOFUTIL!WofGetDriverVersion.
 // https://learn.microsoft.com/windows/win32/api/wofapi/nf-wofapi-wofgetdriverversion
 func WofGetDriverVersion(FileOrVolumeHandle foundation.HANDLE, Provider uint32, WofVersion *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWofGetDriverVersion.Addr(), uintptr(FileOrVolumeHandle), uintptr(Provider), uintptr(unsafe.Pointer(WofVersion)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WofIsExternalFile calls WOFUTIL!WofIsExternalFile.
@@ -4658,14 +4658,14 @@ func WofGetDriverVersion(FileOrVolumeHandle foundation.HANDLE, Provider uint32, 
 func WofIsExternalFile(FilePath string, IsExternalFile *foundation.BOOL, Provider *uint32, ExternalFileInfo unsafe.Pointer, BufferLength *uint32) error {
 	_FilePath := win32.UTF16Ptr(FilePath)
 	r1, _, _ := syscall.SyscallN(procWofIsExternalFile.Addr(), uintptr(unsafe.Pointer(_FilePath)), uintptr(unsafe.Pointer(IsExternalFile)), uintptr(unsafe.Pointer(Provider)), uintptr(unsafe.Pointer(ExternalFileInfo)), uintptr(unsafe.Pointer(BufferLength)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WofSetFileDataLocation calls WOFUTIL!WofSetFileDataLocation.
 // https://learn.microsoft.com/windows/win32/api/wofapi/nf-wofapi-wofsetfiledatalocation
 func WofSetFileDataLocation(FileHandle foundation.HANDLE, Provider uint32, ExternalFileInfo unsafe.Pointer, Length uint32) error {
 	r1, _, _ := syscall.SyscallN(procWofSetFileDataLocation.Addr(), uintptr(FileHandle), uintptr(Provider), uintptr(unsafe.Pointer(ExternalFileInfo)), uintptr(Length))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WofShouldCompressBinaries calls WOFUTIL!WofShouldCompressBinaries.
@@ -4682,7 +4682,7 @@ func WofWimAddEntry(VolumeName string, WimPath string, WimType uint32, WimIndex 
 	_VolumeName := win32.UTF16Ptr(VolumeName)
 	_WimPath := win32.UTF16Ptr(WimPath)
 	r1, _, _ := syscall.SyscallN(procWofWimAddEntry.Addr(), uintptr(unsafe.Pointer(_VolumeName)), uintptr(unsafe.Pointer(_WimPath)), uintptr(WimType), uintptr(WimIndex), uintptr(unsafe.Pointer(DataSourceId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WofWimEnumFiles calls WOFUTIL!WofWimEnumFiles.
@@ -4690,7 +4690,7 @@ func WofWimAddEntry(VolumeName string, WimPath string, WimType uint32, WimIndex 
 func WofWimEnumFiles(VolumeName string, DataSourceId int64, EnumProc WofEnumFilesProc, UserData unsafe.Pointer) error {
 	_VolumeName := win32.UTF16Ptr(VolumeName)
 	r1, _, _ := syscall.SyscallN(procWofWimEnumFiles.Addr(), uintptr(unsafe.Pointer(_VolumeName)), uintptr(DataSourceId), uintptr(EnumProc), uintptr(unsafe.Pointer(UserData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WofWimRemoveEntry calls WOFUTIL!WofWimRemoveEntry.
@@ -4698,7 +4698,7 @@ func WofWimEnumFiles(VolumeName string, DataSourceId int64, EnumProc WofEnumFile
 func WofWimRemoveEntry(VolumeName string, DataSourceId int64) error {
 	_VolumeName := win32.UTF16Ptr(VolumeName)
 	r1, _, _ := syscall.SyscallN(procWofWimRemoveEntry.Addr(), uintptr(unsafe.Pointer(_VolumeName)), uintptr(DataSourceId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WofWimSuspendEntry calls WOFUTIL!WofWimSuspendEntry.
@@ -4706,7 +4706,7 @@ func WofWimRemoveEntry(VolumeName string, DataSourceId int64) error {
 func WofWimSuspendEntry(VolumeName string, DataSourceId int64) error {
 	_VolumeName := win32.UTF16Ptr(VolumeName)
 	r1, _, _ := syscall.SyscallN(procWofWimSuspendEntry.Addr(), uintptr(unsafe.Pointer(_VolumeName)), uintptr(DataSourceId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WofWimUpdateEntry calls WOFUTIL!WofWimUpdateEntry.
@@ -4715,7 +4715,7 @@ func WofWimUpdateEntry(VolumeName string, DataSourceId int64, NewWimPath string)
 	_VolumeName := win32.UTF16Ptr(VolumeName)
 	_NewWimPath := win32.UTF16Ptr(NewWimPath)
 	r1, _, _ := syscall.SyscallN(procWofWimUpdateEntry.Addr(), uintptr(unsafe.Pointer(_VolumeName)), uintptr(DataSourceId), uintptr(unsafe.Pointer(_NewWimPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Wow64DisableWow64FsRedirection calls KERNEL32!Wow64DisableWow64FsRedirection.

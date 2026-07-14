@@ -275,7 +275,7 @@ var (
 // Minimum OS: windows6.0.6000.
 func CreateNamedPropertyStore(ppStore **uishellpropertiessystem.INamedPropertyStore) error {
 	r1, _, _ := syscall.SyscallN(procCreateNamedPropertyStore.Addr(), uintptr(unsafe.Pointer(ppStore)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePropertyStore calls MFPlat!CreatePropertyStore.
@@ -283,7 +283,7 @@ func CreateNamedPropertyStore(ppStore **uishellpropertiessystem.INamedPropertySt
 // Minimum OS: windows6.0.6000.
 func CreatePropertyStore(ppStore **uishellpropertiessystem.IPropertyStore) error {
 	r1, _, _ := syscall.SyscallN(procCreatePropertyStore.Addr(), uintptr(unsafe.Pointer(ppStore)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DXVA2CreateDirect3DDeviceManager9 calls dxva2!DXVA2CreateDirect3DDeviceManager9.
@@ -291,7 +291,7 @@ func CreatePropertyStore(ppStore **uishellpropertiessystem.IPropertyStore) error
 // Minimum OS: windows6.0.6000.
 func DXVA2CreateDirect3DDeviceManager9(pResetToken *uint32, ppDeviceManager **IDirect3DDeviceManager9) error {
 	r1, _, _ := syscall.SyscallN(procDXVA2CreateDirect3DDeviceManager9.Addr(), uintptr(unsafe.Pointer(pResetToken)), uintptr(unsafe.Pointer(ppDeviceManager)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DXVA2CreateVideoService calls dxva2!DXVA2CreateVideoService.
@@ -299,7 +299,7 @@ func DXVA2CreateDirect3DDeviceManager9(pResetToken *uint32, ppDeviceManager **ID
 // Minimum OS: windows6.0.6000.
 func DXVA2CreateVideoService(pDD *graphicsdirect3d9.IDirect3DDevice9, riid *win32.GUID, ppService **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procDXVA2CreateVideoService.Addr(), uintptr(unsafe.Pointer(pDD)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppService)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DXVAHD_CreateDevice calls dxva2!DXVAHD_CreateDevice.
@@ -307,7 +307,7 @@ func DXVA2CreateVideoService(pDD *graphicsdirect3d9.IDirect3DDevice9, riid *win3
 // Minimum OS: windows6.1.
 func DXVAHD_CreateDevice(pD3DDevice *graphicsdirect3d9.IDirect3DDevice9Ex, pContentDesc *DXVAHD_CONTENT_DESC, Usage DXVAHD_DEVICE_USAGE, pPlugin PDXVAHDSW_Plugin, ppDevice **IDXVAHD_Device) error {
 	r1, _, _ := syscall.SyscallN(procDXVAHD_CreateDevice.Addr(), uintptr(unsafe.Pointer(pD3DDevice)), uintptr(unsafe.Pointer(pContentDesc)), uintptr(Usage), uintptr(pPlugin), uintptr(unsafe.Pointer(ppDevice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFAddPeriodicCallback calls MFPlat!MFAddPeriodicCallback.
@@ -315,7 +315,7 @@ func DXVAHD_CreateDevice(pD3DDevice *graphicsdirect3d9.IDirect3DDevice9Ex, pCont
 // Minimum OS: windows6.0.6000.
 func MFAddPeriodicCallback(Callback MFPERIODICCALLBACK, pContext *systemcom.IUnknown, pdwKey *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFAddPeriodicCallback.Addr(), uintptr(Callback), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(pdwKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFAllocateSerialWorkQueue calls MFPlat!MFAllocateSerialWorkQueue.
@@ -323,7 +323,7 @@ func MFAddPeriodicCallback(Callback MFPERIODICCALLBACK, pContext *systemcom.IUnk
 // Minimum OS: windows8.0.
 func MFAllocateSerialWorkQueue(dwWorkQueue uint32, pdwWorkQueue *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFAllocateSerialWorkQueue.Addr(), uintptr(dwWorkQueue), uintptr(unsafe.Pointer(pdwWorkQueue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFAllocateWorkQueue calls MFPlat!MFAllocateWorkQueue.
@@ -331,7 +331,7 @@ func MFAllocateSerialWorkQueue(dwWorkQueue uint32, pdwWorkQueue *uint32) error {
 // Minimum OS: windows6.0.6000.
 func MFAllocateWorkQueue(pdwWorkQueue *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFAllocateWorkQueue.Addr(), uintptr(unsafe.Pointer(pdwWorkQueue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFAllocateWorkQueueEx calls MFPlat!MFAllocateWorkQueueEx.
@@ -339,7 +339,7 @@ func MFAllocateWorkQueue(pdwWorkQueue *uint32) error {
 // Minimum OS: windows6.1.
 func MFAllocateWorkQueueEx(WorkQueueType MFASYNC_WORKQUEUE_TYPE, pdwWorkQueue *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFAllocateWorkQueueEx.Addr(), uintptr(WorkQueueType), uintptr(unsafe.Pointer(pdwWorkQueue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFAverageTimePerFrameToFrameRate calls MFPlat!MFAverageTimePerFrameToFrameRate.
@@ -347,7 +347,7 @@ func MFAllocateWorkQueueEx(WorkQueueType MFASYNC_WORKQUEUE_TYPE, pdwWorkQueue *u
 // Minimum OS: windows6.0.6000.
 func MFAverageTimePerFrameToFrameRate(unAverageTimePerFrame uint64, punNumerator *uint32, punDenominator *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFAverageTimePerFrameToFrameRate.Addr(), uintptr(unAverageTimePerFrame), uintptr(unsafe.Pointer(punNumerator)), uintptr(unsafe.Pointer(punDenominator)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFBeginCreateFile calls MFPlat!MFBeginCreateFile.
@@ -356,7 +356,7 @@ func MFAverageTimePerFrameToFrameRate(unAverageTimePerFrame uint64, punNumerator
 func MFBeginCreateFile(AccessMode MF_FILE_ACCESSMODE, OpenMode MF_FILE_OPENMODE, fFlags MF_FILE_FLAGS, pwszFilePath string, pCallback *IMFAsyncCallback, pState *systemcom.IUnknown, ppCancelCookie **systemcom.IUnknown) error {
 	_pwszFilePath := win32.UTF16Ptr(pwszFilePath)
 	r1, _, _ := syscall.SyscallN(procMFBeginCreateFile.Addr(), uintptr(AccessMode), uintptr(OpenMode), uintptr(fFlags), uintptr(unsafe.Pointer(_pwszFilePath)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pState)), uintptr(unsafe.Pointer(ppCancelCookie)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFBeginRegisterWorkQueueWithMMCSS calls MFPlat!MFBeginRegisterWorkQueueWithMMCSS.
@@ -365,7 +365,7 @@ func MFBeginCreateFile(AccessMode MF_FILE_ACCESSMODE, OpenMode MF_FILE_OPENMODE,
 func MFBeginRegisterWorkQueueWithMMCSS(dwWorkQueueId uint32, wszClass string, dwTaskId uint32, pDoneCallback *IMFAsyncCallback, pDoneState *systemcom.IUnknown) error {
 	_wszClass := win32.UTF16Ptr(wszClass)
 	r1, _, _ := syscall.SyscallN(procMFBeginRegisterWorkQueueWithMMCSS.Addr(), uintptr(dwWorkQueueId), uintptr(unsafe.Pointer(_wszClass)), uintptr(dwTaskId), uintptr(unsafe.Pointer(pDoneCallback)), uintptr(unsafe.Pointer(pDoneState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFBeginRegisterWorkQueueWithMMCSSEx calls MFPlat!MFBeginRegisterWorkQueueWithMMCSSEx.
@@ -374,7 +374,7 @@ func MFBeginRegisterWorkQueueWithMMCSS(dwWorkQueueId uint32, wszClass string, dw
 func MFBeginRegisterWorkQueueWithMMCSSEx(dwWorkQueueId uint32, wszClass string, dwTaskId uint32, lPriority int32, pDoneCallback *IMFAsyncCallback, pDoneState *systemcom.IUnknown) error {
 	_wszClass := win32.UTF16Ptr(wszClass)
 	r1, _, _ := syscall.SyscallN(procMFBeginRegisterWorkQueueWithMMCSSEx.Addr(), uintptr(dwWorkQueueId), uintptr(unsafe.Pointer(_wszClass)), uintptr(dwTaskId), uintptr(lPriority), uintptr(unsafe.Pointer(pDoneCallback)), uintptr(unsafe.Pointer(pDoneState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFBeginUnregisterWorkQueueWithMMCSS calls MFPlat!MFBeginUnregisterWorkQueueWithMMCSS.
@@ -382,7 +382,7 @@ func MFBeginRegisterWorkQueueWithMMCSSEx(dwWorkQueueId uint32, wszClass string, 
 // Minimum OS: windows6.0.6000.
 func MFBeginUnregisterWorkQueueWithMMCSS(dwWorkQueueId uint32, pDoneCallback *IMFAsyncCallback, pDoneState *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procMFBeginUnregisterWorkQueueWithMMCSS.Addr(), uintptr(dwWorkQueueId), uintptr(unsafe.Pointer(pDoneCallback)), uintptr(unsafe.Pointer(pDoneState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCalculateBitmapImageSize calls MFPlat!MFCalculateBitmapImageSize.
@@ -390,7 +390,7 @@ func MFBeginUnregisterWorkQueueWithMMCSS(dwWorkQueueId uint32, pDoneCallback *IM
 // Minimum OS: windows6.0.6000.
 func MFCalculateBitmapImageSize(pBMIH *graphicsgdi.BITMAPINFOHEADER, cbBufSize uint32, pcbImageSize *uint32, pbKnown *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procMFCalculateBitmapImageSize.Addr(), uintptr(unsafe.Pointer(pBMIH)), uintptr(cbBufSize), uintptr(unsafe.Pointer(pcbImageSize)), uintptr(unsafe.Pointer(pbKnown)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCalculateImageSize calls MFPlat!MFCalculateImageSize.
@@ -398,7 +398,7 @@ func MFCalculateBitmapImageSize(pBMIH *graphicsgdi.BITMAPINFOHEADER, cbBufSize u
 // Minimum OS: windows6.0.6000.
 func MFCalculateImageSize(guidSubtype *win32.GUID, unWidth uint32, unHeight uint32, pcbImageSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFCalculateImageSize.Addr(), uintptr(unsafe.Pointer(guidSubtype)), uintptr(unWidth), uintptr(unHeight), uintptr(unsafe.Pointer(pcbImageSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCancelCreateFile calls MFPlat!MFCancelCreateFile.
@@ -406,7 +406,7 @@ func MFCalculateImageSize(guidSubtype *win32.GUID, unWidth uint32, unHeight uint
 // Minimum OS: windows6.0.6000.
 func MFCancelCreateFile(pCancelCookie *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procMFCancelCreateFile.Addr(), uintptr(unsafe.Pointer(pCancelCookie)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCancelWorkItem calls MFPlat!MFCancelWorkItem.
@@ -414,7 +414,7 @@ func MFCancelCreateFile(pCancelCookie *systemcom.IUnknown) error {
 // Minimum OS: windows6.0.6000.
 func MFCancelWorkItem(Key uint64) error {
 	r1, _, _ := syscall.SyscallN(procMFCancelWorkItem.Addr(), uintptr(Key))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCombineSamples calls MFPlat!MFCombineSamples.
@@ -422,7 +422,7 @@ func MFCancelWorkItem(Key uint64) error {
 // Minimum OS: windows10.0.19041.
 func MFCombineSamples(pSample *IMFSample, pSampleToAdd *IMFSample, dwMaxMergedDurationInMS uint32, pMerged *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procMFCombineSamples.Addr(), uintptr(unsafe.Pointer(pSample)), uintptr(unsafe.Pointer(pSampleToAdd)), uintptr(dwMaxMergedDurationInMS), uintptr(unsafe.Pointer(pMerged)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCompareFullToPartialMediaType calls MFPlat!MFCompareFullToPartialMediaType.
@@ -438,7 +438,7 @@ func MFCompareFullToPartialMediaType(pMFTypeFull *IMFMediaType, pMFTypePartial *
 // Minimum OS: windows6.0.6000.
 func MFConvertColorInfoFromDXVA(pToFormat *MFVIDEOFORMAT, dwFromDXVA uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFConvertColorInfoFromDXVA.Addr(), uintptr(unsafe.Pointer(pToFormat)), uintptr(dwFromDXVA))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFConvertColorInfoToDXVA calls MFPlat!MFConvertColorInfoToDXVA.
@@ -446,7 +446,7 @@ func MFConvertColorInfoFromDXVA(pToFormat *MFVIDEOFORMAT, dwFromDXVA uint32) err
 // Minimum OS: windows6.0.6000.
 func MFConvertColorInfoToDXVA(pdwToDXVA *uint32, pFromFormat *MFVIDEOFORMAT) error {
 	r1, _, _ := syscall.SyscallN(procMFConvertColorInfoToDXVA.Addr(), uintptr(unsafe.Pointer(pdwToDXVA)), uintptr(unsafe.Pointer(pFromFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFConvertFromFP16Array calls MFPlat!MFConvertFromFP16Array.
@@ -454,7 +454,7 @@ func MFConvertColorInfoToDXVA(pdwToDXVA *uint32, pFromFormat *MFVIDEOFORMAT) err
 // Minimum OS: windows6.0.6000.
 func MFConvertFromFP16Array(pDest *float32, pSrc *uint16, dwCount uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFConvertFromFP16Array.Addr(), uintptr(unsafe.Pointer(pDest)), uintptr(unsafe.Pointer(pSrc)), uintptr(dwCount))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFConvertToFP16Array calls MFPlat!MFConvertToFP16Array.
@@ -462,7 +462,7 @@ func MFConvertFromFP16Array(pDest *float32, pSrc *uint16, dwCount uint32) error 
 // Minimum OS: windows6.0.6000.
 func MFConvertToFP16Array(pDest *uint16, pSrc *float32, dwCount uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFConvertToFP16Array.Addr(), uintptr(unsafe.Pointer(pDest)), uintptr(unsafe.Pointer(pSrc)), uintptr(dwCount))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCopyImage calls MFPlat!MFCopyImage.
@@ -470,7 +470,7 @@ func MFConvertToFP16Array(pDest *uint16, pSrc *float32, dwCount uint32) error {
 // Minimum OS: windows6.0.6000.
 func MFCopyImage(pDest *byte, lDestStride int32, pSrc *byte, lSrcStride int32, dwWidthInBytes uint32, dwLines uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFCopyImage.Addr(), uintptr(unsafe.Pointer(pDest)), uintptr(lDestStride), uintptr(unsafe.Pointer(pSrc)), uintptr(lSrcStride), uintptr(dwWidthInBytes), uintptr(dwLines))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreate2DMediaBuffer calls MFPlat!MFCreate2DMediaBuffer.
@@ -479,7 +479,7 @@ func MFCopyImage(pDest *byte, lDestStride int32, pSrc *byte, lSrcStride int32, d
 func MFCreate2DMediaBuffer(dwWidth uint32, dwHeight uint32, dwFourCC uint32, fBottomUp bool, ppBuffer **IMFMediaBuffer) error {
 	_fBottomUp := win32.Bool32(fBottomUp)
 	r1, _, _ := syscall.SyscallN(procMFCreate2DMediaBuffer.Addr(), uintptr(dwWidth), uintptr(dwHeight), uintptr(dwFourCC), uintptr(_fBottomUp), uintptr(unsafe.Pointer(ppBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreate3GPMediaSink calls MF!MFCreate3GPMediaSink.
@@ -487,7 +487,7 @@ func MFCreate2DMediaBuffer(dwWidth uint32, dwHeight uint32, dwFourCC uint32, fBo
 // Minimum OS: windows6.1.
 func MFCreate3GPMediaSink(pIByteStream *IMFByteStream, pVideoMediaType *IMFMediaType, pAudioMediaType *IMFMediaType, ppIMediaSink **IMFMediaSink) error {
 	r1, _, _ := syscall.SyscallN(procMFCreate3GPMediaSink.Addr(), uintptr(unsafe.Pointer(pIByteStream)), uintptr(unsafe.Pointer(pVideoMediaType)), uintptr(unsafe.Pointer(pAudioMediaType)), uintptr(unsafe.Pointer(ppIMediaSink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateAC3MediaSink calls MF!MFCreateAC3MediaSink.
@@ -495,7 +495,7 @@ func MFCreate3GPMediaSink(pIByteStream *IMFByteStream, pVideoMediaType *IMFMedia
 // Minimum OS: windows8.0.
 func MFCreateAC3MediaSink(pTargetByteStream *IMFByteStream, pAudioMediaType *IMFMediaType, ppMediaSink **IMFMediaSink) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateAC3MediaSink.Addr(), uintptr(unsafe.Pointer(pTargetByteStream)), uintptr(unsafe.Pointer(pAudioMediaType)), uintptr(unsafe.Pointer(ppMediaSink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateADTSMediaSink calls MF!MFCreateADTSMediaSink.
@@ -503,7 +503,7 @@ func MFCreateAC3MediaSink(pTargetByteStream *IMFByteStream, pAudioMediaType *IMF
 // Minimum OS: windows8.0.
 func MFCreateADTSMediaSink(pTargetByteStream *IMFByteStream, pAudioMediaType *IMFMediaType, ppMediaSink **IMFMediaSink) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateADTSMediaSink.Addr(), uintptr(unsafe.Pointer(pTargetByteStream)), uintptr(unsafe.Pointer(pAudioMediaType)), uintptr(unsafe.Pointer(ppMediaSink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateASFContentInfo calls MF!MFCreateASFContentInfo.
@@ -511,7 +511,7 @@ func MFCreateADTSMediaSink(pTargetByteStream *IMFByteStream, pAudioMediaType *IM
 // Minimum OS: windows6.0.6000.
 func MFCreateASFContentInfo(ppIContentInfo **IMFASFContentInfo) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateASFContentInfo.Addr(), uintptr(unsafe.Pointer(ppIContentInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateASFIndexer calls MF!MFCreateASFIndexer.
@@ -519,7 +519,7 @@ func MFCreateASFContentInfo(ppIContentInfo **IMFASFContentInfo) error {
 // Minimum OS: windows6.0.6000.
 func MFCreateASFIndexer(ppIIndexer **IMFASFIndexer) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateASFIndexer.Addr(), uintptr(unsafe.Pointer(ppIIndexer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateASFIndexerByteStream calls MF!MFCreateASFIndexerByteStream.
@@ -527,7 +527,7 @@ func MFCreateASFIndexer(ppIIndexer **IMFASFIndexer) error {
 // Minimum OS: windows6.0.6000.
 func MFCreateASFIndexerByteStream(pIContentByteStream *IMFByteStream, cbIndexStartOffset uint64, pIIndexByteStream **IMFByteStream) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateASFIndexerByteStream.Addr(), uintptr(unsafe.Pointer(pIContentByteStream)), uintptr(cbIndexStartOffset), uintptr(unsafe.Pointer(pIIndexByteStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateASFMediaSink calls MF!MFCreateASFMediaSink.
@@ -535,7 +535,7 @@ func MFCreateASFIndexerByteStream(pIContentByteStream *IMFByteStream, cbIndexSta
 // Minimum OS: windows6.0.6000.
 func MFCreateASFMediaSink(pIByteStream *IMFByteStream, ppIMediaSink **IMFMediaSink) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateASFMediaSink.Addr(), uintptr(unsafe.Pointer(pIByteStream)), uintptr(unsafe.Pointer(ppIMediaSink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateASFMediaSinkActivate calls MF!MFCreateASFMediaSinkActivate.
@@ -544,7 +544,7 @@ func MFCreateASFMediaSink(pIByteStream *IMFByteStream, ppIMediaSink **IMFMediaSi
 func MFCreateASFMediaSinkActivate(pwszFileName string, pContentInfo *IMFASFContentInfo, ppIActivate **IMFActivate) error {
 	_pwszFileName := win32.UTF16Ptr(pwszFileName)
 	r1, _, _ := syscall.SyscallN(procMFCreateASFMediaSinkActivate.Addr(), uintptr(unsafe.Pointer(_pwszFileName)), uintptr(unsafe.Pointer(pContentInfo)), uintptr(unsafe.Pointer(ppIActivate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateASFMultiplexer calls MF!MFCreateASFMultiplexer.
@@ -552,7 +552,7 @@ func MFCreateASFMediaSinkActivate(pwszFileName string, pContentInfo *IMFASFConte
 // Minimum OS: windows6.0.6000.
 func MFCreateASFMultiplexer(ppIMultiplexer **IMFASFMultiplexer) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateASFMultiplexer.Addr(), uintptr(unsafe.Pointer(ppIMultiplexer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateASFProfile calls MF!MFCreateASFProfile.
@@ -560,7 +560,7 @@ func MFCreateASFMultiplexer(ppIMultiplexer **IMFASFMultiplexer) error {
 // Minimum OS: windows6.0.6000.
 func MFCreateASFProfile(ppIProfile **IMFASFProfile) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateASFProfile.Addr(), uintptr(unsafe.Pointer(ppIProfile)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateASFProfileFromPresentationDescriptor calls MF!MFCreateASFProfileFromPresentationDescriptor.
@@ -568,7 +568,7 @@ func MFCreateASFProfile(ppIProfile **IMFASFProfile) error {
 // Minimum OS: windows6.0.6000.
 func MFCreateASFProfileFromPresentationDescriptor(pIPD *IMFPresentationDescriptor, ppIProfile **IMFASFProfile) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateASFProfileFromPresentationDescriptor.Addr(), uintptr(unsafe.Pointer(pIPD)), uintptr(unsafe.Pointer(ppIProfile)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateASFSplitter calls MF!MFCreateASFSplitter.
@@ -576,7 +576,7 @@ func MFCreateASFProfileFromPresentationDescriptor(pIPD *IMFPresentationDescripto
 // Minimum OS: windows6.0.6000.
 func MFCreateASFSplitter(ppISplitter **IMFASFSplitter) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateASFSplitter.Addr(), uintptr(unsafe.Pointer(ppISplitter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateASFStreamSelector calls MF!MFCreateASFStreamSelector.
@@ -584,7 +584,7 @@ func MFCreateASFSplitter(ppISplitter **IMFASFSplitter) error {
 // Minimum OS: windows6.0.6000.
 func MFCreateASFStreamSelector(pIASFProfile *IMFASFProfile, ppSelector **IMFASFStreamSelector) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateASFStreamSelector.Addr(), uintptr(unsafe.Pointer(pIASFProfile)), uintptr(unsafe.Pointer(ppSelector)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateASFStreamingMediaSink calls MF!MFCreateASFStreamingMediaSink.
@@ -592,7 +592,7 @@ func MFCreateASFStreamSelector(pIASFProfile *IMFASFProfile, ppSelector **IMFASFS
 // Minimum OS: windows6.1.
 func MFCreateASFStreamingMediaSink(pIByteStream *IMFByteStream, ppIMediaSink **IMFMediaSink) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateASFStreamingMediaSink.Addr(), uintptr(unsafe.Pointer(pIByteStream)), uintptr(unsafe.Pointer(ppIMediaSink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateASFStreamingMediaSinkActivate calls MF!MFCreateASFStreamingMediaSinkActivate.
@@ -600,7 +600,7 @@ func MFCreateASFStreamingMediaSink(pIByteStream *IMFByteStream, ppIMediaSink **I
 // Minimum OS: windows6.1.
 func MFCreateASFStreamingMediaSinkActivate(pByteStreamActivate *IMFActivate, pContentInfo *IMFASFContentInfo, ppIActivate **IMFActivate) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateASFStreamingMediaSinkActivate.Addr(), uintptr(unsafe.Pointer(pByteStreamActivate)), uintptr(unsafe.Pointer(pContentInfo)), uintptr(unsafe.Pointer(ppIActivate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateAVIMediaSink calls mfsrcsnk!MFCreateAVIMediaSink.
@@ -608,7 +608,7 @@ func MFCreateASFStreamingMediaSinkActivate(pByteStreamActivate *IMFActivate, pCo
 // Minimum OS: windows8.1.
 func MFCreateAVIMediaSink(pIByteStream *IMFByteStream, pVideoMediaType *IMFMediaType, pAudioMediaType *IMFMediaType, ppIMediaSink **IMFMediaSink) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateAVIMediaSink.Addr(), uintptr(unsafe.Pointer(pIByteStream)), uintptr(unsafe.Pointer(pVideoMediaType)), uintptr(unsafe.Pointer(pAudioMediaType)), uintptr(unsafe.Pointer(ppIMediaSink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateAggregateSource calls MF!MFCreateAggregateSource.
@@ -616,7 +616,7 @@ func MFCreateAVIMediaSink(pIByteStream *IMFByteStream, pVideoMediaType *IMFMedia
 // Minimum OS: windows6.1.
 func MFCreateAggregateSource(pSourceCollection *IMFCollection, ppAggSource **IMFMediaSource) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateAggregateSource.Addr(), uintptr(unsafe.Pointer(pSourceCollection)), uintptr(unsafe.Pointer(ppAggSource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateAlignedMemoryBuffer calls MFPlat!MFCreateAlignedMemoryBuffer.
@@ -624,7 +624,7 @@ func MFCreateAggregateSource(pSourceCollection *IMFCollection, ppAggSource **IMF
 // Minimum OS: windows6.0.6000.
 func MFCreateAlignedMemoryBuffer(cbMaxLength uint32, cbAligment uint32, ppBuffer **IMFMediaBuffer) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateAlignedMemoryBuffer.Addr(), uintptr(cbMaxLength), uintptr(cbAligment), uintptr(unsafe.Pointer(ppBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateAsyncResult calls MFPlat!MFCreateAsyncResult.
@@ -632,7 +632,7 @@ func MFCreateAlignedMemoryBuffer(cbMaxLength uint32, cbAligment uint32, ppBuffer
 // Minimum OS: windows6.0.6000.
 func MFCreateAsyncResult(punkObject *systemcom.IUnknown, pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown, ppAsyncResult **IMFAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateAsyncResult.Addr(), uintptr(unsafe.Pointer(punkObject)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(punkState)), uintptr(unsafe.Pointer(ppAsyncResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateAttributes calls MFPlat!MFCreateAttributes.
@@ -640,7 +640,7 @@ func MFCreateAsyncResult(punkObject *systemcom.IUnknown, pCallback *IMFAsyncCall
 // Minimum OS: windows6.0.6000.
 func MFCreateAttributes(ppMFAttributes **IMFAttributes, cInitialSize uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateAttributes.Addr(), uintptr(unsafe.Pointer(ppMFAttributes)), uintptr(cInitialSize))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateAudioMediaType calls MFPlat!MFCreateAudioMediaType.
@@ -648,7 +648,7 @@ func MFCreateAttributes(ppMFAttributes **IMFAttributes, cInitialSize uint32) err
 // Minimum OS: windows6.0.6000.
 func MFCreateAudioMediaType(pAudioFormat *mediaaudio.WAVEFORMATEX, ppIAudioMediaType **IMFAudioMediaType) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateAudioMediaType.Addr(), uintptr(unsafe.Pointer(pAudioFormat)), uintptr(unsafe.Pointer(ppIAudioMediaType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateAudioRenderer calls MF!MFCreateAudioRenderer.
@@ -656,7 +656,7 @@ func MFCreateAudioMediaType(pAudioFormat *mediaaudio.WAVEFORMATEX, ppIAudioMedia
 // Minimum OS: windows6.0.6000.
 func MFCreateAudioRenderer(pAudioAttributes *IMFAttributes, ppSink **IMFMediaSink) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateAudioRenderer.Addr(), uintptr(unsafe.Pointer(pAudioAttributes)), uintptr(unsafe.Pointer(ppSink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateAudioRendererActivate calls MF!MFCreateAudioRendererActivate.
@@ -664,7 +664,7 @@ func MFCreateAudioRenderer(pAudioAttributes *IMFAttributes, ppSink **IMFMediaSin
 // Minimum OS: windows6.0.6000.
 func MFCreateAudioRendererActivate(ppActivate **IMFActivate) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateAudioRendererActivate.Addr(), uintptr(unsafe.Pointer(ppActivate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateCameraControlMonitor calls MFSENSORGROUP!MFCreateCameraControlMonitor.
@@ -672,7 +672,7 @@ func MFCreateAudioRendererActivate(ppActivate **IMFActivate) error {
 func MFCreateCameraControlMonitor(symbolicLink string, callback *IMFCameraControlNotify, ppCameraControlMonitor **IMFCameraControlMonitor) error {
 	_symbolicLink := win32.UTF16Ptr(symbolicLink)
 	r1, _, _ := syscall.SyscallN(procMFCreateCameraControlMonitor.Addr(), uintptr(unsafe.Pointer(_symbolicLink)), uintptr(unsafe.Pointer(callback)), uintptr(unsafe.Pointer(ppCameraControlMonitor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateCameraOcclusionStateMonitor calls MFSENSORGROUP!MFCreateCameraOcclusionStateMonitor.
@@ -680,7 +680,7 @@ func MFCreateCameraControlMonitor(symbolicLink string, callback *IMFCameraContro
 func MFCreateCameraOcclusionStateMonitor(symbolicLink string, callback *IMFCameraOcclusionStateReportCallback, occlusionStateMonitor **IMFCameraOcclusionStateMonitor) error {
 	_symbolicLink := win32.UTF16Ptr(symbolicLink)
 	r1, _, _ := syscall.SyscallN(procMFCreateCameraOcclusionStateMonitor.Addr(), uintptr(unsafe.Pointer(_symbolicLink)), uintptr(unsafe.Pointer(callback)), uintptr(unsafe.Pointer(occlusionStateMonitor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateCollection calls MFPlat!MFCreateCollection.
@@ -688,7 +688,7 @@ func MFCreateCameraOcclusionStateMonitor(symbolicLink string, callback *IMFCamer
 // Minimum OS: windows6.0.6000.
 func MFCreateCollection(ppIMFCollection **IMFCollection) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateCollection.Addr(), uintptr(unsafe.Pointer(ppIMFCollection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateContentDecryptorContext calls MFPlat!MFCreateContentDecryptorContext.
@@ -696,7 +696,7 @@ func MFCreateCollection(ppIMFCollection **IMFCollection) error {
 // Minimum OS: windows10.0.10240.
 func MFCreateContentDecryptorContext(guidMediaProtectionSystemId *win32.GUID, pD3DManager *IMFDXGIDeviceManager, pContentProtectionDevice *IMFContentProtectionDevice, ppContentDecryptorContext **IMFContentDecryptorContext) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateContentDecryptorContext.Addr(), uintptr(unsafe.Pointer(guidMediaProtectionSystemId)), uintptr(unsafe.Pointer(pD3DManager)), uintptr(unsafe.Pointer(pContentProtectionDevice)), uintptr(unsafe.Pointer(ppContentDecryptorContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateContentProtectionDevice calls MFPlat!MFCreateContentProtectionDevice.
@@ -704,7 +704,7 @@ func MFCreateContentDecryptorContext(guidMediaProtectionSystemId *win32.GUID, pD
 // Minimum OS: windows10.0.10240.
 func MFCreateContentProtectionDevice(ProtectionSystemId *win32.GUID, ContentProtectionDevice **IMFContentProtectionDevice) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateContentProtectionDevice.Addr(), uintptr(unsafe.Pointer(ProtectionSystemId)), uintptr(unsafe.Pointer(ContentProtectionDevice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateCredentialCache calls MF!MFCreateCredentialCache.
@@ -712,20 +712,20 @@ func MFCreateContentProtectionDevice(ProtectionSystemId *win32.GUID, ContentProt
 // Minimum OS: windows6.0.6000.
 func MFCreateCredentialCache(ppCache **IMFNetCredentialCache) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateCredentialCache.Addr(), uintptr(unsafe.Pointer(ppCache)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateD3D12SynchronizationObject calls MFPlat!MFCreateD3D12SynchronizationObject.
 // https://learn.microsoft.com/windows/win32/api/mfd3d12/nf-mfd3d12-mfcreated3d12synchronizationobject
 func MFCreateD3D12SynchronizationObject(pDevice *graphicsdirect3d12.ID3D12Device, riid *win32.GUID, ppvSyncObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateD3D12SynchronizationObject.Addr(), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvSyncObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateDXGICrossAdapterBuffer calls MFPlat.DLL!MFCreateDXGICrossAdapterBuffer.
 func MFCreateDXGICrossAdapterBuffer(riid *win32.GUID, punkDevice *systemcom.IUnknown, pMediaType *IMFMediaType, uSubresource uint32, ppBuffer **IMFMediaBuffer) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateDXGICrossAdapterBuffer.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(punkDevice)), uintptr(unsafe.Pointer(pMediaType)), uintptr(uSubresource), uintptr(unsafe.Pointer(ppBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateDXGIDeviceManager calls MFPlat!MFCreateDXGIDeviceManager.
@@ -733,7 +733,7 @@ func MFCreateDXGICrossAdapterBuffer(riid *win32.GUID, punkDevice *systemcom.IUnk
 // Minimum OS: windows8.0.
 func MFCreateDXGIDeviceManager(resetToken *uint32, ppDeviceManager **IMFDXGIDeviceManager) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateDXGIDeviceManager.Addr(), uintptr(unsafe.Pointer(resetToken)), uintptr(unsafe.Pointer(ppDeviceManager)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateDXGISurfaceBuffer calls MFPlat!MFCreateDXGISurfaceBuffer.
@@ -742,7 +742,7 @@ func MFCreateDXGIDeviceManager(resetToken *uint32, ppDeviceManager **IMFDXGIDevi
 func MFCreateDXGISurfaceBuffer(riid *win32.GUID, punkSurface *systemcom.IUnknown, uSubresourceIndex uint32, fBottomUpWhenLinear bool, ppBuffer **IMFMediaBuffer) error {
 	_fBottomUpWhenLinear := win32.Bool32(fBottomUpWhenLinear)
 	r1, _, _ := syscall.SyscallN(procMFCreateDXGISurfaceBuffer.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(punkSurface)), uintptr(uSubresourceIndex), uintptr(_fBottomUpWhenLinear), uintptr(unsafe.Pointer(ppBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateDXSurfaceBuffer calls MFPlat!MFCreateDXSurfaceBuffer.
@@ -751,7 +751,7 @@ func MFCreateDXGISurfaceBuffer(riid *win32.GUID, punkSurface *systemcom.IUnknown
 func MFCreateDXSurfaceBuffer(riid *win32.GUID, punkSurface *systemcom.IUnknown, fBottomUpWhenLinear bool, ppBuffer **IMFMediaBuffer) error {
 	_fBottomUpWhenLinear := win32.Bool32(fBottomUpWhenLinear)
 	r1, _, _ := syscall.SyscallN(procMFCreateDXSurfaceBuffer.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(punkSurface)), uintptr(_fBottomUpWhenLinear), uintptr(unsafe.Pointer(ppBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateDeviceSource calls MF!MFCreateDeviceSource.
@@ -759,7 +759,7 @@ func MFCreateDXSurfaceBuffer(riid *win32.GUID, punkSurface *systemcom.IUnknown, 
 // Minimum OS: windows6.1.
 func MFCreateDeviceSource(pAttributes *IMFAttributes, ppSource **IMFMediaSource) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateDeviceSource.Addr(), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(ppSource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateDeviceSourceActivate calls MF!MFCreateDeviceSourceActivate.
@@ -767,7 +767,7 @@ func MFCreateDeviceSource(pAttributes *IMFAttributes, ppSource **IMFMediaSource)
 // Minimum OS: windows6.1.
 func MFCreateDeviceSourceActivate(pAttributes *IMFAttributes, ppActivate **IMFActivate) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateDeviceSourceActivate.Addr(), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(ppActivate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateEncryptedMediaExtensionsStoreActivate calls MF!MFCreateEncryptedMediaExtensionsStoreActivate.
@@ -776,7 +776,7 @@ func MFCreateDeviceSourceActivate(pAttributes *IMFAttributes, ppActivate **IMFAc
 func MFCreateEncryptedMediaExtensionsStoreActivate(pmpHost *IMFPMPHostApp, objectStream *systemcom.IStream, classId string, activate **IMFActivate) error {
 	_classId := win32.UTF16Ptr(classId)
 	r1, _, _ := syscall.SyscallN(procMFCreateEncryptedMediaExtensionsStoreActivate.Addr(), uintptr(unsafe.Pointer(pmpHost)), uintptr(unsafe.Pointer(objectStream)), uintptr(unsafe.Pointer(_classId)), uintptr(unsafe.Pointer(activate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateEventQueue calls MFPlat!MFCreateEventQueue.
@@ -784,19 +784,19 @@ func MFCreateEncryptedMediaExtensionsStoreActivate(pmpHost *IMFPMPHostApp, objec
 // Minimum OS: windows6.0.6000.
 func MFCreateEventQueue(ppMediaEventQueue **IMFMediaEventQueue) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateEventQueue.Addr(), uintptr(unsafe.Pointer(ppMediaEventQueue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateExtendedCameraIntrinsicModel calls MFCORE!MFCreateExtendedCameraIntrinsicModel.
 func MFCreateExtendedCameraIntrinsicModel(distortionModelType MFCameraIntrinsic_DistortionModelType, ppExtendedCameraIntrinsicModel **IMFExtendedCameraIntrinsicModel) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateExtendedCameraIntrinsicModel.Addr(), uintptr(distortionModelType), uintptr(unsafe.Pointer(ppExtendedCameraIntrinsicModel)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateExtendedCameraIntrinsics calls MFCORE!MFCreateExtendedCameraIntrinsics.
 func MFCreateExtendedCameraIntrinsics(ppExtendedCameraIntrinsics **IMFExtendedCameraIntrinsics) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateExtendedCameraIntrinsics.Addr(), uintptr(unsafe.Pointer(ppExtendedCameraIntrinsics)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateFMPEG4MediaSink calls MF!MFCreateFMPEG4MediaSink.
@@ -804,7 +804,7 @@ func MFCreateExtendedCameraIntrinsics(ppExtendedCameraIntrinsics **IMFExtendedCa
 // Minimum OS: windows8.0.
 func MFCreateFMPEG4MediaSink(pIByteStream *IMFByteStream, pVideoMediaType *IMFMediaType, pAudioMediaType *IMFMediaType, ppIMediaSink **IMFMediaSink) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateFMPEG4MediaSink.Addr(), uintptr(unsafe.Pointer(pIByteStream)), uintptr(unsafe.Pointer(pVideoMediaType)), uintptr(unsafe.Pointer(pAudioMediaType)), uintptr(unsafe.Pointer(ppIMediaSink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateFile calls MFPlat!MFCreateFile.
@@ -813,7 +813,7 @@ func MFCreateFMPEG4MediaSink(pIByteStream *IMFByteStream, pVideoMediaType *IMFMe
 func MFCreateFile(AccessMode MF_FILE_ACCESSMODE, OpenMode MF_FILE_OPENMODE, fFlags MF_FILE_FLAGS, pwszFileURL string, ppIByteStream **IMFByteStream) error {
 	_pwszFileURL := win32.UTF16Ptr(pwszFileURL)
 	r1, _, _ := syscall.SyscallN(procMFCreateFile.Addr(), uintptr(AccessMode), uintptr(OpenMode), uintptr(fFlags), uintptr(unsafe.Pointer(_pwszFileURL)), uintptr(unsafe.Pointer(ppIByteStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateLegacyMediaBufferOnMFMediaBuffer calls MFPlat!MFCreateLegacyMediaBufferOnMFMediaBuffer.
@@ -821,7 +821,7 @@ func MFCreateFile(AccessMode MF_FILE_ACCESSMODE, OpenMode MF_FILE_OPENMODE, fFla
 // Minimum OS: windows6.0.6000.
 func MFCreateLegacyMediaBufferOnMFMediaBuffer(pSample *IMFSample, pMFMediaBuffer *IMFMediaBuffer, cbOffset uint32, ppMediaBuffer **mediadxmediaobjects.IMediaBuffer) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateLegacyMediaBufferOnMFMediaBuffer.Addr(), uintptr(unsafe.Pointer(pSample)), uintptr(unsafe.Pointer(pMFMediaBuffer)), uintptr(cbOffset), uintptr(unsafe.Pointer(ppMediaBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateMFByteStreamOnStream calls MFPlat!MFCreateMFByteStreamOnStream.
@@ -829,7 +829,7 @@ func MFCreateLegacyMediaBufferOnMFMediaBuffer(pSample *IMFSample, pMFMediaBuffer
 // Minimum OS: windows6.1.
 func MFCreateMFByteStreamOnStream(pStream *systemcom.IStream, ppByteStream **IMFByteStream) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateMFByteStreamOnStream.Addr(), uintptr(unsafe.Pointer(pStream)), uintptr(unsafe.Pointer(ppByteStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateMFByteStreamOnStreamEx calls MFPlat!MFCreateMFByteStreamOnStreamEx.
@@ -837,7 +837,7 @@ func MFCreateMFByteStreamOnStream(pStream *systemcom.IStream, ppByteStream **IMF
 // Minimum OS: windows8.0.
 func MFCreateMFByteStreamOnStreamEx(punkStream *systemcom.IUnknown, ppByteStream **IMFByteStream) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateMFByteStreamOnStreamEx.Addr(), uintptr(unsafe.Pointer(punkStream)), uintptr(unsafe.Pointer(ppByteStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateMFByteStreamWrapper calls MFPlat!MFCreateMFByteStreamWrapper.
@@ -845,7 +845,7 @@ func MFCreateMFByteStreamOnStreamEx(punkStream *systemcom.IUnknown, ppByteStream
 // Minimum OS: windows8.0.
 func MFCreateMFByteStreamWrapper(pStream *IMFByteStream, ppStreamWrapper **IMFByteStream) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateMFByteStreamWrapper.Addr(), uintptr(unsafe.Pointer(pStream)), uintptr(unsafe.Pointer(ppStreamWrapper)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateMFVideoFormatFromMFMediaType calls MFPlat!MFCreateMFVideoFormatFromMFMediaType.
@@ -853,7 +853,7 @@ func MFCreateMFByteStreamWrapper(pStream *IMFByteStream, ppStreamWrapper **IMFBy
 // Minimum OS: windows6.0.6000.
 func MFCreateMFVideoFormatFromMFMediaType(pMFType *IMFMediaType, ppMFVF **MFVIDEOFORMAT, pcbSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateMFVideoFormatFromMFMediaType.Addr(), uintptr(unsafe.Pointer(pMFType)), uintptr(unsafe.Pointer(ppMFVF)), uintptr(unsafe.Pointer(pcbSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateMP3MediaSink calls MF!MFCreateMP3MediaSink.
@@ -861,7 +861,7 @@ func MFCreateMFVideoFormatFromMFMediaType(pMFType *IMFMediaType, ppMFVF **MFVIDE
 // Minimum OS: windows6.1.
 func MFCreateMP3MediaSink(pTargetByteStream *IMFByteStream, ppMediaSink **IMFMediaSink) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateMP3MediaSink.Addr(), uintptr(unsafe.Pointer(pTargetByteStream)), uintptr(unsafe.Pointer(ppMediaSink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateMPEG4MediaSink calls MF!MFCreateMPEG4MediaSink.
@@ -869,7 +869,7 @@ func MFCreateMP3MediaSink(pTargetByteStream *IMFByteStream, ppMediaSink **IMFMed
 // Minimum OS: windows6.1.
 func MFCreateMPEG4MediaSink(pIByteStream *IMFByteStream, pVideoMediaType *IMFMediaType, pAudioMediaType *IMFMediaType, ppIMediaSink **IMFMediaSink) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateMPEG4MediaSink.Addr(), uintptr(unsafe.Pointer(pIByteStream)), uintptr(unsafe.Pointer(pVideoMediaType)), uintptr(unsafe.Pointer(pAudioMediaType)), uintptr(unsafe.Pointer(ppIMediaSink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateMediaBufferFromMediaType calls MFPlat!MFCreateMediaBufferFromMediaType.
@@ -877,7 +877,7 @@ func MFCreateMPEG4MediaSink(pIByteStream *IMFByteStream, pVideoMediaType *IMFMed
 // Minimum OS: windows8.0.
 func MFCreateMediaBufferFromMediaType(pMediaType *IMFMediaType, llDuration int64, dwMinLength uint32, dwMinAlignment uint32, ppBuffer **IMFMediaBuffer) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateMediaBufferFromMediaType.Addr(), uintptr(unsafe.Pointer(pMediaType)), uintptr(llDuration), uintptr(dwMinLength), uintptr(dwMinAlignment), uintptr(unsafe.Pointer(ppBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateMediaBufferWrapper calls MFPlat!MFCreateMediaBufferWrapper.
@@ -885,7 +885,7 @@ func MFCreateMediaBufferFromMediaType(pMediaType *IMFMediaType, llDuration int64
 // Minimum OS: windows6.0.6000.
 func MFCreateMediaBufferWrapper(pBuffer *IMFMediaBuffer, cbOffset uint32, dwLength uint32, ppBuffer **IMFMediaBuffer) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateMediaBufferWrapper.Addr(), uintptr(unsafe.Pointer(pBuffer)), uintptr(cbOffset), uintptr(dwLength), uintptr(unsafe.Pointer(ppBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateMediaEvent calls MFPlat!MFCreateMediaEvent.
@@ -893,7 +893,7 @@ func MFCreateMediaBufferWrapper(pBuffer *IMFMediaBuffer, cbOffset uint32, dwLeng
 // Minimum OS: windows6.0.6000.
 func MFCreateMediaEvent(met uint32, guidExtendedType *win32.GUID, hrStatus foundation.HRESULT, pvValue *systemcomstructuredstorage.PROPVARIANT, ppEvent **IMFMediaEvent) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateMediaEvent.Addr(), uintptr(met), uintptr(unsafe.Pointer(guidExtendedType)), uintptr(hrStatus), uintptr(unsafe.Pointer(pvValue)), uintptr(unsafe.Pointer(ppEvent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateMediaExtensionActivate calls MFPlat!MFCreateMediaExtensionActivate.
@@ -902,7 +902,7 @@ func MFCreateMediaEvent(met uint32, guidExtendedType *win32.GUID, hrStatus found
 func MFCreateMediaExtensionActivate(szActivatableClassId string, pConfiguration *systemcom.IUnknown, riid *win32.GUID, ppvObject **win32.IUnknown) error {
 	_szActivatableClassId := win32.UTF16Ptr(szActivatableClassId)
 	r1, _, _ := syscall.SyscallN(procMFCreateMediaExtensionActivate.Addr(), uintptr(unsafe.Pointer(_szActivatableClassId)), uintptr(unsafe.Pointer(pConfiguration)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateMediaSession calls MF!MFCreateMediaSession.
@@ -910,7 +910,7 @@ func MFCreateMediaExtensionActivate(szActivatableClassId string, pConfiguration 
 // Minimum OS: windows6.0.6000.
 func MFCreateMediaSession(pConfiguration *IMFAttributes, ppMediaSession **IMFMediaSession) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateMediaSession.Addr(), uintptr(unsafe.Pointer(pConfiguration)), uintptr(unsafe.Pointer(ppMediaSession)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateMediaType calls MFPlat!MFCreateMediaType.
@@ -918,7 +918,7 @@ func MFCreateMediaSession(pConfiguration *IMFAttributes, ppMediaSession **IMFMed
 // Minimum OS: windows6.0.6000.
 func MFCreateMediaType(ppMFType **IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateMediaType.Addr(), uintptr(unsafe.Pointer(ppMFType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateMediaTypeFromProperties calls MFPlat!MFCreateMediaTypeFromProperties.
@@ -926,7 +926,7 @@ func MFCreateMediaType(ppMFType **IMFMediaType) error {
 // Minimum OS: windows8.0.
 func MFCreateMediaTypeFromProperties(punkStream *systemcom.IUnknown, ppMediaType **IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateMediaTypeFromProperties.Addr(), uintptr(unsafe.Pointer(punkStream)), uintptr(unsafe.Pointer(ppMediaType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateMemoryBuffer calls MFPlat!MFCreateMemoryBuffer.
@@ -934,7 +934,7 @@ func MFCreateMediaTypeFromProperties(punkStream *systemcom.IUnknown, ppMediaType
 // Minimum OS: windows6.0.6000.
 func MFCreateMemoryBuffer(cbMaxLength uint32, ppBuffer **IMFMediaBuffer) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateMemoryBuffer.Addr(), uintptr(cbMaxLength), uintptr(unsafe.Pointer(ppBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateMuxStreamAttributes calls MFPlat!MFCreateMuxStreamAttributes.
@@ -942,7 +942,7 @@ func MFCreateMemoryBuffer(cbMaxLength uint32, ppBuffer **IMFMediaBuffer) error {
 // Minimum OS: windows10.0.15063.
 func MFCreateMuxStreamAttributes(pAttributesToMux *IMFCollection, ppMuxAttribs **IMFAttributes) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateMuxStreamAttributes.Addr(), uintptr(unsafe.Pointer(pAttributesToMux)), uintptr(unsafe.Pointer(ppMuxAttribs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateMuxStreamMediaType calls MFPlat!MFCreateMuxStreamMediaType.
@@ -950,7 +950,7 @@ func MFCreateMuxStreamAttributes(pAttributesToMux *IMFCollection, ppMuxAttribs *
 // Minimum OS: windows10.0.15063.
 func MFCreateMuxStreamMediaType(pMediaTypesToMux *IMFCollection, ppMuxMediaType **IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateMuxStreamMediaType.Addr(), uintptr(unsafe.Pointer(pMediaTypesToMux)), uintptr(unsafe.Pointer(ppMuxMediaType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateMuxStreamSample calls MFPlat!MFCreateMuxStreamSample.
@@ -958,7 +958,7 @@ func MFCreateMuxStreamMediaType(pMediaTypesToMux *IMFCollection, ppMuxMediaType 
 // Minimum OS: windows10.0.15063.
 func MFCreateMuxStreamSample(pSamplesToMux *IMFCollection, ppMuxSample **IMFSample) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateMuxStreamSample.Addr(), uintptr(unsafe.Pointer(pSamplesToMux)), uintptr(unsafe.Pointer(ppMuxSample)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateNetSchemePlugin calls MF!MFCreateNetSchemePlugin.
@@ -966,7 +966,7 @@ func MFCreateMuxStreamSample(pSamplesToMux *IMFCollection, ppMuxSample **IMFSamp
 // Minimum OS: windows6.0.6000.
 func MFCreateNetSchemePlugin(riid *win32.GUID, ppvHandler **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateNetSchemePlugin.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvHandler)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreatePMPMediaSession calls MF!MFCreatePMPMediaSession.
@@ -974,7 +974,7 @@ func MFCreateNetSchemePlugin(riid *win32.GUID, ppvHandler **win32.IUnknown) erro
 // Minimum OS: windows6.0.6000.
 func MFCreatePMPMediaSession(dwCreationFlags uint32, pConfiguration *IMFAttributes, ppMediaSession **IMFMediaSession, ppEnablerActivate **IMFActivate) error {
 	r1, _, _ := syscall.SyscallN(procMFCreatePMPMediaSession.Addr(), uintptr(dwCreationFlags), uintptr(unsafe.Pointer(pConfiguration)), uintptr(unsafe.Pointer(ppMediaSession)), uintptr(unsafe.Pointer(ppEnablerActivate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreatePMPServer calls MF!MFCreatePMPServer.
@@ -982,7 +982,7 @@ func MFCreatePMPMediaSession(dwCreationFlags uint32, pConfiguration *IMFAttribut
 // Minimum OS: windows6.0.6000.
 func MFCreatePMPServer(dwCreationFlags uint32, ppPMPServer **IMFPMPServer) error {
 	r1, _, _ := syscall.SyscallN(procMFCreatePMPServer.Addr(), uintptr(dwCreationFlags), uintptr(unsafe.Pointer(ppPMPServer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreatePresentationClock calls MF!MFCreatePresentationClock.
@@ -990,7 +990,7 @@ func MFCreatePMPServer(dwCreationFlags uint32, ppPMPServer **IMFPMPServer) error
 // Minimum OS: windows6.0.6000.
 func MFCreatePresentationClock(ppPresentationClock **IMFPresentationClock) error {
 	r1, _, _ := syscall.SyscallN(procMFCreatePresentationClock.Addr(), uintptr(unsafe.Pointer(ppPresentationClock)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreatePresentationDescriptor calls MFPlat!MFCreatePresentationDescriptor.
@@ -1002,7 +1002,7 @@ func MFCreatePresentationDescriptor(apStreamDescriptors []*IMFStreamDescriptor, 
 		_apStreamDescriptors = &apStreamDescriptors[0]
 	}
 	r1, _, _ := syscall.SyscallN(procMFCreatePresentationDescriptor.Addr(), uintptr(len(apStreamDescriptors)), uintptr(unsafe.Pointer(_apStreamDescriptors)), uintptr(unsafe.Pointer(ppPresentationDescriptor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreatePresentationDescriptorFromASFProfile calls MF!MFCreatePresentationDescriptorFromASFProfile.
@@ -1010,7 +1010,7 @@ func MFCreatePresentationDescriptor(apStreamDescriptors []*IMFStreamDescriptor, 
 // Minimum OS: windows6.0.6000.
 func MFCreatePresentationDescriptorFromASFProfile(pIProfile *IMFASFProfile, ppIPD **IMFPresentationDescriptor) error {
 	r1, _, _ := syscall.SyscallN(procMFCreatePresentationDescriptorFromASFProfile.Addr(), uintptr(unsafe.Pointer(pIProfile)), uintptr(unsafe.Pointer(ppIPD)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreatePropertiesFromMediaType calls MFPlat!MFCreatePropertiesFromMediaType.
@@ -1018,7 +1018,7 @@ func MFCreatePresentationDescriptorFromASFProfile(pIProfile *IMFASFProfile, ppIP
 // Minimum OS: windows8.0.
 func MFCreatePropertiesFromMediaType(pMediaType *IMFMediaType, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procMFCreatePropertiesFromMediaType.Addr(), uintptr(unsafe.Pointer(pMediaType)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateProtectedEnvironmentAccess calls MF!MFCreateProtectedEnvironmentAccess.
@@ -1026,7 +1026,7 @@ func MFCreatePropertiesFromMediaType(pMediaType *IMFMediaType, riid *win32.GUID,
 // Minimum OS: windows8.0.
 func MFCreateProtectedEnvironmentAccess(ppAccess **IMFProtectedEnvironmentAccess) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateProtectedEnvironmentAccess.Addr(), uintptr(unsafe.Pointer(ppAccess)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateProxyLocator calls MF!MFCreateProxyLocator.
@@ -1035,7 +1035,7 @@ func MFCreateProtectedEnvironmentAccess(ppAccess **IMFProtectedEnvironmentAccess
 func MFCreateProxyLocator(pszProtocol string, pProxyConfig *uishellpropertiessystem.IPropertyStore, ppProxyLocator **IMFNetProxyLocator) error {
 	_pszProtocol := win32.UTF16Ptr(pszProtocol)
 	r1, _, _ := syscall.SyscallN(procMFCreateProxyLocator.Addr(), uintptr(unsafe.Pointer(_pszProtocol)), uintptr(unsafe.Pointer(pProxyConfig)), uintptr(unsafe.Pointer(ppProxyLocator)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateRelativePanelWatcher calls MFSENSORGROUP!MFCreateRelativePanelWatcher.
@@ -1045,7 +1045,7 @@ func MFCreateRelativePanelWatcher(videoDeviceId string, displayMonitorDeviceId s
 	_videoDeviceId := win32.UTF16Ptr(videoDeviceId)
 	_displayMonitorDeviceId := win32.UTF16Ptr(displayMonitorDeviceId)
 	r1, _, _ := syscall.SyscallN(procMFCreateRelativePanelWatcher.Addr(), uintptr(unsafe.Pointer(_videoDeviceId)), uintptr(unsafe.Pointer(_displayMonitorDeviceId)), uintptr(unsafe.Pointer(ppRelativePanelWatcher)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateRemoteDesktopPlugin calls MF!MFCreateRemoteDesktopPlugin.
@@ -1053,7 +1053,7 @@ func MFCreateRelativePanelWatcher(videoDeviceId string, displayMonitorDeviceId s
 // Minimum OS: windows6.0.6000.
 func MFCreateRemoteDesktopPlugin(ppPlugin **IMFRemoteDesktopPlugin) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateRemoteDesktopPlugin.Addr(), uintptr(unsafe.Pointer(ppPlugin)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateSample calls MFPlat!MFCreateSample.
@@ -1061,7 +1061,7 @@ func MFCreateRemoteDesktopPlugin(ppPlugin **IMFRemoteDesktopPlugin) error {
 // Minimum OS: windows6.0.6000.
 func MFCreateSample(ppIMFSample **IMFSample) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateSample.Addr(), uintptr(unsafe.Pointer(ppIMFSample)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateSampleCopierMFT calls MF!MFCreateSampleCopierMFT.
@@ -1069,7 +1069,7 @@ func MFCreateSample(ppIMFSample **IMFSample) error {
 // Minimum OS: windows6.1.
 func MFCreateSampleCopierMFT(ppCopierMFT **IMFTransform) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateSampleCopierMFT.Addr(), uintptr(unsafe.Pointer(ppCopierMFT)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateSampleGrabberSinkActivate calls MF!MFCreateSampleGrabberSinkActivate.
@@ -1077,14 +1077,14 @@ func MFCreateSampleCopierMFT(ppCopierMFT **IMFTransform) error {
 // Minimum OS: windows6.0.6000.
 func MFCreateSampleGrabberSinkActivate(pIMFMediaType *IMFMediaType, pIMFSampleGrabberSinkCallback *IMFSampleGrabberSinkCallback, ppIActivate **IMFActivate) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateSampleGrabberSinkActivate.Addr(), uintptr(unsafe.Pointer(pIMFMediaType)), uintptr(unsafe.Pointer(pIMFSampleGrabberSinkCallback)), uintptr(unsafe.Pointer(ppIActivate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateSensorActivityMonitor calls MFSENSORGROUP!MFCreateSensorActivityMonitor.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatesensoractivitymonitor
 func MFCreateSensorActivityMonitor(pCallback *IMFSensorActivitiesReportCallback, ppActivityMonitor **IMFSensorActivityMonitor) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateSensorActivityMonitor.Addr(), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(ppActivityMonitor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateSensorGroup calls MFSENSORGROUP!MFCreateSensorGroup.
@@ -1093,7 +1093,7 @@ func MFCreateSensorActivityMonitor(pCallback *IMFSensorActivitiesReportCallback,
 func MFCreateSensorGroup(SensorGroupSymbolicLink string, ppSensorGroup **IMFSensorGroup) error {
 	_SensorGroupSymbolicLink := win32.UTF16Ptr(SensorGroupSymbolicLink)
 	r1, _, _ := syscall.SyscallN(procMFCreateSensorGroup.Addr(), uintptr(unsafe.Pointer(_SensorGroupSymbolicLink)), uintptr(unsafe.Pointer(ppSensorGroup)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateSensorProfile calls MFSENSORGROUP!MFCreateSensorProfile.
@@ -1102,7 +1102,7 @@ func MFCreateSensorGroup(SensorGroupSymbolicLink string, ppSensorGroup **IMFSens
 func MFCreateSensorProfile(ProfileType *win32.GUID, ProfileIndex uint32, Constraints string, ppProfile **IMFSensorProfile) error {
 	_Constraints := win32.UTF16Ptr(Constraints)
 	r1, _, _ := syscall.SyscallN(procMFCreateSensorProfile.Addr(), uintptr(unsafe.Pointer(ProfileType)), uintptr(ProfileIndex), uintptr(unsafe.Pointer(_Constraints)), uintptr(unsafe.Pointer(ppProfile)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateSensorProfileCollection calls MFSENSORGROUP!MFCreateSensorProfileCollection.
@@ -1110,7 +1110,7 @@ func MFCreateSensorProfile(ProfileType *win32.GUID, ProfileIndex uint32, Constra
 // Minimum OS: windows10.0.15063.
 func MFCreateSensorProfileCollection(ppSensorProfile **IMFSensorProfileCollection) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateSensorProfileCollection.Addr(), uintptr(unsafe.Pointer(ppSensorProfile)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateSensorStream calls MFSENSORGROUP!MFCreateSensorStream.
@@ -1118,7 +1118,7 @@ func MFCreateSensorProfileCollection(ppSensorProfile **IMFSensorProfileCollectio
 // Minimum OS: windows10.0.15063.
 func MFCreateSensorStream(StreamId uint32, pAttributes *IMFAttributes, pMediaTypeCollection *IMFCollection, ppStream **IMFSensorStream) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateSensorStream.Addr(), uintptr(StreamId), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(pMediaTypeCollection)), uintptr(unsafe.Pointer(ppStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateSequencerSegmentOffset calls MF!MFCreateSequencerSegmentOffset.
@@ -1126,7 +1126,7 @@ func MFCreateSensorStream(StreamId uint32, pAttributes *IMFAttributes, pMediaTyp
 // Minimum OS: windows6.0.6000.
 func MFCreateSequencerSegmentOffset(dwId uint32, hnsOffset int64, pvarSegmentOffset *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateSequencerSegmentOffset.Addr(), uintptr(dwId), uintptr(hnsOffset), uintptr(unsafe.Pointer(pvarSegmentOffset)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateSequencerSource calls MF!MFCreateSequencerSource.
@@ -1134,7 +1134,7 @@ func MFCreateSequencerSegmentOffset(dwId uint32, hnsOffset int64, pvarSegmentOff
 // Minimum OS: windows6.0.6000.
 func MFCreateSequencerSource(pReserved *systemcom.IUnknown, ppSequencerSource **IMFSequencerSource) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateSequencerSource.Addr(), uintptr(unsafe.Pointer(pReserved)), uintptr(unsafe.Pointer(ppSequencerSource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateSimpleTypeHandler calls MF!MFCreateSimpleTypeHandler.
@@ -1142,7 +1142,7 @@ func MFCreateSequencerSource(pReserved *systemcom.IUnknown, ppSequencerSource **
 // Minimum OS: windows6.0.6000.
 func MFCreateSimpleTypeHandler(ppHandler **IMFMediaTypeHandler) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateSimpleTypeHandler.Addr(), uintptr(unsafe.Pointer(ppHandler)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateSinkWriterFromMediaSink calls MFReadWrite!MFCreateSinkWriterFromMediaSink.
@@ -1150,7 +1150,7 @@ func MFCreateSimpleTypeHandler(ppHandler **IMFMediaTypeHandler) error {
 // Minimum OS: windows6.1.
 func MFCreateSinkWriterFromMediaSink(pMediaSink *IMFMediaSink, pAttributes *IMFAttributes, ppSinkWriter **IMFSinkWriter) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateSinkWriterFromMediaSink.Addr(), uintptr(unsafe.Pointer(pMediaSink)), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(ppSinkWriter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateSinkWriterFromURL calls MFReadWrite!MFCreateSinkWriterFromURL.
@@ -1159,7 +1159,7 @@ func MFCreateSinkWriterFromMediaSink(pMediaSink *IMFMediaSink, pAttributes *IMFA
 func MFCreateSinkWriterFromURL(pwszOutputURL string, pByteStream *IMFByteStream, pAttributes *IMFAttributes, ppSinkWriter **IMFSinkWriter) error {
 	_pwszOutputURL := win32.UTF16Ptr(pwszOutputURL)
 	r1, _, _ := syscall.SyscallN(procMFCreateSinkWriterFromURL.Addr(), uintptr(unsafe.Pointer(_pwszOutputURL)), uintptr(unsafe.Pointer(pByteStream)), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(ppSinkWriter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateSourceReaderFromByteStream calls MFReadWrite!MFCreateSourceReaderFromByteStream.
@@ -1167,7 +1167,7 @@ func MFCreateSinkWriterFromURL(pwszOutputURL string, pByteStream *IMFByteStream,
 // Minimum OS: windows6.1.
 func MFCreateSourceReaderFromByteStream(pByteStream *IMFByteStream, pAttributes *IMFAttributes, ppSourceReader **IMFSourceReader) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateSourceReaderFromByteStream.Addr(), uintptr(unsafe.Pointer(pByteStream)), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(ppSourceReader)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateSourceReaderFromMediaSource calls MFReadWrite!MFCreateSourceReaderFromMediaSource.
@@ -1175,7 +1175,7 @@ func MFCreateSourceReaderFromByteStream(pByteStream *IMFByteStream, pAttributes 
 // Minimum OS: windows6.1.
 func MFCreateSourceReaderFromMediaSource(pMediaSource *IMFMediaSource, pAttributes *IMFAttributes, ppSourceReader **IMFSourceReader) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateSourceReaderFromMediaSource.Addr(), uintptr(unsafe.Pointer(pMediaSource)), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(ppSourceReader)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateSourceReaderFromURL calls MFReadWrite!MFCreateSourceReaderFromURL.
@@ -1184,7 +1184,7 @@ func MFCreateSourceReaderFromMediaSource(pMediaSource *IMFMediaSource, pAttribut
 func MFCreateSourceReaderFromURL(pwszURL string, pAttributes *IMFAttributes, ppSourceReader **IMFSourceReader) error {
 	_pwszURL := win32.UTF16Ptr(pwszURL)
 	r1, _, _ := syscall.SyscallN(procMFCreateSourceReaderFromURL.Addr(), uintptr(unsafe.Pointer(_pwszURL)), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(ppSourceReader)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateSourceResolver calls MFPlat!MFCreateSourceResolver.
@@ -1192,7 +1192,7 @@ func MFCreateSourceReaderFromURL(pwszURL string, pAttributes *IMFAttributes, ppS
 // Minimum OS: windows6.0.6000.
 func MFCreateSourceResolver(ppISourceResolver **IMFSourceResolver) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateSourceResolver.Addr(), uintptr(unsafe.Pointer(ppISourceResolver)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateStandardQualityManager calls MF!MFCreateStandardQualityManager.
@@ -1200,7 +1200,7 @@ func MFCreateSourceResolver(ppISourceResolver **IMFSourceResolver) error {
 // Minimum OS: windows6.0.6000.
 func MFCreateStandardQualityManager(ppQualityManager **IMFQualityManager) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateStandardQualityManager.Addr(), uintptr(unsafe.Pointer(ppQualityManager)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateStreamDescriptor calls MFPlat!MFCreateStreamDescriptor.
@@ -1212,7 +1212,7 @@ func MFCreateStreamDescriptor(dwStreamIdentifier uint32, apMediaTypes []*IMFMedi
 		_apMediaTypes = &apMediaTypes[0]
 	}
 	r1, _, _ := syscall.SyscallN(procMFCreateStreamDescriptor.Addr(), uintptr(dwStreamIdentifier), uintptr(len(apMediaTypes)), uintptr(unsafe.Pointer(_apMediaTypes)), uintptr(unsafe.Pointer(ppDescriptor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateStreamOnMFByteStream calls MFPlat!MFCreateStreamOnMFByteStream.
@@ -1220,7 +1220,7 @@ func MFCreateStreamDescriptor(dwStreamIdentifier uint32, apMediaTypes []*IMFMedi
 // Minimum OS: windows8.0.
 func MFCreateStreamOnMFByteStream(pByteStream *IMFByteStream, ppStream **systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateStreamOnMFByteStream.Addr(), uintptr(unsafe.Pointer(pByteStream)), uintptr(unsafe.Pointer(ppStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateStreamOnMFByteStreamEx calls MFPlat!MFCreateStreamOnMFByteStreamEx.
@@ -1228,7 +1228,7 @@ func MFCreateStreamOnMFByteStream(pByteStream *IMFByteStream, ppStream **systemc
 // Minimum OS: windows8.0.
 func MFCreateStreamOnMFByteStreamEx(pByteStream *IMFByteStream, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateStreamOnMFByteStreamEx.Addr(), uintptr(unsafe.Pointer(pByteStream)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateSystemTimeSource calls MFPlat!MFCreateSystemTimeSource.
@@ -1236,7 +1236,7 @@ func MFCreateStreamOnMFByteStreamEx(pByteStream *IMFByteStream, riid *win32.GUID
 // Minimum OS: windows6.0.6000.
 func MFCreateSystemTimeSource(ppSystemTimeSource **IMFPresentationTimeSource) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateSystemTimeSource.Addr(), uintptr(unsafe.Pointer(ppSystemTimeSource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateTempFile calls MFPlat!MFCreateTempFile.
@@ -1244,7 +1244,7 @@ func MFCreateSystemTimeSource(ppSystemTimeSource **IMFPresentationTimeSource) er
 // Minimum OS: windows6.0.6000.
 func MFCreateTempFile(AccessMode MF_FILE_ACCESSMODE, OpenMode MF_FILE_OPENMODE, fFlags MF_FILE_FLAGS, ppIByteStream **IMFByteStream) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateTempFile.Addr(), uintptr(AccessMode), uintptr(OpenMode), uintptr(fFlags), uintptr(unsafe.Pointer(ppIByteStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateTopoLoader calls MF!MFCreateTopoLoader.
@@ -1252,7 +1252,7 @@ func MFCreateTempFile(AccessMode MF_FILE_ACCESSMODE, OpenMode MF_FILE_OPENMODE, 
 // Minimum OS: windows6.0.6000.
 func MFCreateTopoLoader(ppObj **IMFTopoLoader) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateTopoLoader.Addr(), uintptr(unsafe.Pointer(ppObj)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateTopology calls MF!MFCreateTopology.
@@ -1260,7 +1260,7 @@ func MFCreateTopoLoader(ppObj **IMFTopoLoader) error {
 // Minimum OS: windows6.0.6000.
 func MFCreateTopology(ppTopo **IMFTopology) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateTopology.Addr(), uintptr(unsafe.Pointer(ppTopo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateTopologyNode calls MF!MFCreateTopologyNode.
@@ -1268,7 +1268,7 @@ func MFCreateTopology(ppTopo **IMFTopology) error {
 // Minimum OS: windows6.0.6000.
 func MFCreateTopologyNode(NodeType MF_TOPOLOGY_TYPE, ppNode **IMFTopologyNode) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateTopologyNode.Addr(), uintptr(NodeType), uintptr(unsafe.Pointer(ppNode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateTrackedSample calls MFPlat!MFCreateTrackedSample.
@@ -1276,7 +1276,7 @@ func MFCreateTopologyNode(NodeType MF_TOPOLOGY_TYPE, ppNode **IMFTopologyNode) e
 // Minimum OS: windows8.0.
 func MFCreateTrackedSample(ppMFSample **IMFTrackedSample) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateTrackedSample.Addr(), uintptr(unsafe.Pointer(ppMFSample)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateTranscodeProfile calls MF!MFCreateTranscodeProfile.
@@ -1284,7 +1284,7 @@ func MFCreateTrackedSample(ppMFSample **IMFTrackedSample) error {
 // Minimum OS: windows6.1.
 func MFCreateTranscodeProfile(ppTranscodeProfile **IMFTranscodeProfile) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateTranscodeProfile.Addr(), uintptr(unsafe.Pointer(ppTranscodeProfile)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateTranscodeSinkActivate calls MF!MFCreateTranscodeSinkActivate.
@@ -1292,7 +1292,7 @@ func MFCreateTranscodeProfile(ppTranscodeProfile **IMFTranscodeProfile) error {
 // Minimum OS: windows6.1.
 func MFCreateTranscodeSinkActivate(ppActivate **IMFActivate) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateTranscodeSinkActivate.Addr(), uintptr(unsafe.Pointer(ppActivate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateTranscodeTopology calls MF!MFCreateTranscodeTopology.
@@ -1301,7 +1301,7 @@ func MFCreateTranscodeSinkActivate(ppActivate **IMFActivate) error {
 func MFCreateTranscodeTopology(pSrc *IMFMediaSource, pwszOutputFilePath string, pProfile *IMFTranscodeProfile, ppTranscodeTopo **IMFTopology) error {
 	_pwszOutputFilePath := win32.UTF16Ptr(pwszOutputFilePath)
 	r1, _, _ := syscall.SyscallN(procMFCreateTranscodeTopology.Addr(), uintptr(unsafe.Pointer(pSrc)), uintptr(unsafe.Pointer(_pwszOutputFilePath)), uintptr(unsafe.Pointer(pProfile)), uintptr(unsafe.Pointer(ppTranscodeTopo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateTranscodeTopologyFromByteStream calls MF!MFCreateTranscodeTopologyFromByteStream.
@@ -1309,7 +1309,7 @@ func MFCreateTranscodeTopology(pSrc *IMFMediaSource, pwszOutputFilePath string, 
 // Minimum OS: windows8.0.
 func MFCreateTranscodeTopologyFromByteStream(pSrc *IMFMediaSource, pOutputStream *IMFByteStream, pProfile *IMFTranscodeProfile, ppTranscodeTopo **IMFTopology) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateTranscodeTopologyFromByteStream.Addr(), uintptr(unsafe.Pointer(pSrc)), uintptr(unsafe.Pointer(pOutputStream)), uintptr(unsafe.Pointer(pProfile)), uintptr(unsafe.Pointer(ppTranscodeTopo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateTransformActivate calls MFPlat!MFCreateTransformActivate.
@@ -1317,7 +1317,7 @@ func MFCreateTranscodeTopologyFromByteStream(pSrc *IMFMediaSource, pOutputStream
 // Minimum OS: windows6.1.
 func MFCreateTransformActivate(ppActivate **IMFActivate) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateTransformActivate.Addr(), uintptr(unsafe.Pointer(ppActivate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateVideoMediaType calls MFPlat!MFCreateVideoMediaType.
@@ -1325,7 +1325,7 @@ func MFCreateTransformActivate(ppActivate **IMFActivate) error {
 // Minimum OS: windows6.0.6000.
 func MFCreateVideoMediaType(pVideoFormat *MFVIDEOFORMAT, ppIVideoMediaType **IMFVideoMediaType) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateVideoMediaType.Addr(), uintptr(unsafe.Pointer(pVideoFormat)), uintptr(unsafe.Pointer(ppIVideoMediaType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateVideoMediaTypeFromBitMapInfoHeader calls MFPlat!MFCreateVideoMediaTypeFromBitMapInfoHeader.
@@ -1333,7 +1333,7 @@ func MFCreateVideoMediaType(pVideoFormat *MFVIDEOFORMAT, ppIVideoMediaType **IMF
 // Minimum OS: windows6.0.6000.
 func MFCreateVideoMediaTypeFromBitMapInfoHeader(pbmihBitMapInfoHeader *graphicsgdi.BITMAPINFOHEADER, dwPixelAspectRatioX uint32, dwPixelAspectRatioY uint32, InterlaceMode MFVideoInterlaceMode, VideoFlags uint64, qwFramesPerSecondNumerator uint64, qwFramesPerSecondDenominator uint64, dwMaxBitRate uint32, ppIVideoMediaType **IMFVideoMediaType) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateVideoMediaTypeFromBitMapInfoHeader.Addr(), uintptr(unsafe.Pointer(pbmihBitMapInfoHeader)), uintptr(dwPixelAspectRatioX), uintptr(dwPixelAspectRatioY), uintptr(InterlaceMode), uintptr(VideoFlags), uintptr(qwFramesPerSecondNumerator), uintptr(qwFramesPerSecondDenominator), uintptr(dwMaxBitRate), uintptr(unsafe.Pointer(ppIVideoMediaType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateVideoMediaTypeFromBitMapInfoHeaderEx calls MFPlat!MFCreateVideoMediaTypeFromBitMapInfoHeaderEx.
@@ -1341,7 +1341,7 @@ func MFCreateVideoMediaTypeFromBitMapInfoHeader(pbmihBitMapInfoHeader *graphicsg
 // Minimum OS: windows6.1.
 func MFCreateVideoMediaTypeFromBitMapInfoHeaderEx(pbmihBitMapInfoHeader *graphicsgdi.BITMAPINFOHEADER, cbBitMapInfoHeader uint32, dwPixelAspectRatioX uint32, dwPixelAspectRatioY uint32, InterlaceMode MFVideoInterlaceMode, VideoFlags uint64, dwFramesPerSecondNumerator uint32, dwFramesPerSecondDenominator uint32, dwMaxBitRate uint32, ppIVideoMediaType **IMFVideoMediaType) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateVideoMediaTypeFromBitMapInfoHeaderEx.Addr(), uintptr(unsafe.Pointer(pbmihBitMapInfoHeader)), uintptr(cbBitMapInfoHeader), uintptr(dwPixelAspectRatioX), uintptr(dwPixelAspectRatioY), uintptr(InterlaceMode), uintptr(VideoFlags), uintptr(dwFramesPerSecondNumerator), uintptr(dwFramesPerSecondDenominator), uintptr(dwMaxBitRate), uintptr(unsafe.Pointer(ppIVideoMediaType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateVideoMediaTypeFromSubtype calls MFPlat!MFCreateVideoMediaTypeFromSubtype.
@@ -1349,35 +1349,35 @@ func MFCreateVideoMediaTypeFromBitMapInfoHeaderEx(pbmihBitMapInfoHeader *graphic
 // Minimum OS: windows6.0.6000.
 func MFCreateVideoMediaTypeFromSubtype(pAMSubtype *win32.GUID, ppIVideoMediaType **IMFVideoMediaType) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateVideoMediaTypeFromSubtype.Addr(), uintptr(unsafe.Pointer(pAMSubtype)), uintptr(unsafe.Pointer(ppIVideoMediaType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateVideoMixer calls EVR!MFCreateVideoMixer.
 // https://learn.microsoft.com/windows/win32/api/evr/nc-evr-mfcreatevideomixer
 func MFCreateVideoMixer(pOwner *systemcom.IUnknown, riidDevice *win32.GUID, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateVideoMixer.Addr(), uintptr(unsafe.Pointer(pOwner)), uintptr(unsafe.Pointer(riidDevice)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateVideoMixerAndPresenter calls EVR!MFCreateVideoMixerAndPresenter.
 // https://learn.microsoft.com/windows/win32/api/evr/nc-evr-mfcreatevideomixerandpresenter
 func MFCreateVideoMixerAndPresenter(pMixerOwner *systemcom.IUnknown, pPresenterOwner *systemcom.IUnknown, riidMixer *win32.GUID, ppvVideoMixer **win32.IUnknown, riidPresenter *win32.GUID, ppvVideoPresenter **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateVideoMixerAndPresenter.Addr(), uintptr(unsafe.Pointer(pMixerOwner)), uintptr(unsafe.Pointer(pPresenterOwner)), uintptr(unsafe.Pointer(riidMixer)), uintptr(unsafe.Pointer(ppvVideoMixer)), uintptr(unsafe.Pointer(riidPresenter)), uintptr(unsafe.Pointer(ppvVideoPresenter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateVideoPresenter calls EVR!MFCreateVideoPresenter.
 // https://learn.microsoft.com/windows/win32/api/evr/nc-evr-mfcreatevideopresenter
 func MFCreateVideoPresenter(pOwner *systemcom.IUnknown, riidDevice *win32.GUID, riid *win32.GUID, ppVideoPresenter **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateVideoPresenter.Addr(), uintptr(unsafe.Pointer(pOwner)), uintptr(unsafe.Pointer(riidDevice)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppVideoPresenter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateVideoRenderer calls MF!MFCreateVideoRenderer.
 // https://learn.microsoft.com/windows/win32/api/evr/nc-evr-mfcreatevideorenderer
 func MFCreateVideoRenderer(riidRenderer *win32.GUID, ppVideoRenderer **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateVideoRenderer.Addr(), uintptr(unsafe.Pointer(riidRenderer)), uintptr(unsafe.Pointer(ppVideoRenderer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateVideoRendererActivate calls MF!MFCreateVideoRendererActivate.
@@ -1385,14 +1385,14 @@ func MFCreateVideoRenderer(riidRenderer *win32.GUID, ppVideoRenderer **win32.IUn
 // Minimum OS: windows6.0.6000.
 func MFCreateVideoRendererActivate(hwndVideo foundation.HWND, ppActivate **IMFActivate) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateVideoRendererActivate.Addr(), uintptr(hwndVideo), uintptr(unsafe.Pointer(ppActivate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateVideoSampleAllocator calls EVR!MFCreateVideoSampleAllocator.
 // https://learn.microsoft.com/windows/win32/api/evr/nc-evr-mfcreatevideosampleallocator
 func MFCreateVideoSampleAllocator(riid *win32.GUID, ppSampleAllocator **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateVideoSampleAllocator.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppSampleAllocator)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateVideoSampleAllocatorEx calls MFPlat!MFCreateVideoSampleAllocatorEx.
@@ -1400,14 +1400,14 @@ func MFCreateVideoSampleAllocator(riid *win32.GUID, ppSampleAllocator **win32.IU
 // Minimum OS: windows8.0.
 func MFCreateVideoSampleAllocatorEx(riid *win32.GUID, ppSampleAllocator **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateVideoSampleAllocatorEx.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppSampleAllocator)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateVideoSampleFromSurface calls EVR!MFCreateVideoSampleFromSurface.
 // https://learn.microsoft.com/windows/win32/api/evr/nc-evr-mfcreatevideosamplefromsurface
 func MFCreateVideoSampleFromSurface(pUnkSurface *systemcom.IUnknown, ppSample **IMFSample) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateVideoSampleFromSurface.Addr(), uintptr(unsafe.Pointer(pUnkSurface)), uintptr(unsafe.Pointer(ppSample)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateVirtualCamera calls MFSENSORGROUP!MFCreateVirtualCamera.
@@ -1420,7 +1420,7 @@ func MFCreateVirtualCamera(type_ MFVirtualCameraType, lifetime MFVirtualCameraLi
 		_categories = &categories[0]
 	}
 	r1, _, _ := syscall.SyscallN(procMFCreateVirtualCamera.Addr(), uintptr(type_), uintptr(lifetime), uintptr(access), uintptr(unsafe.Pointer(_friendlyName)), uintptr(unsafe.Pointer(_sourceId)), uintptr(unsafe.Pointer(_categories)), uintptr(len(categories)), uintptr(unsafe.Pointer(virtualCamera)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateWAVEMediaSink calls mfsrcsnk!MFCreateWAVEMediaSink.
@@ -1428,7 +1428,7 @@ func MFCreateVirtualCamera(type_ MFVirtualCameraType, lifetime MFVirtualCameraLi
 // Minimum OS: windows8.1.
 func MFCreateWAVEMediaSink(pTargetByteStream *IMFByteStream, pAudioMediaType *IMFMediaType, ppMediaSink **IMFMediaSink) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateWAVEMediaSink.Addr(), uintptr(unsafe.Pointer(pTargetByteStream)), uintptr(unsafe.Pointer(pAudioMediaType)), uintptr(unsafe.Pointer(ppMediaSink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateWICBitmapBuffer calls MFPlat!MFCreateWICBitmapBuffer.
@@ -1436,7 +1436,7 @@ func MFCreateWAVEMediaSink(pTargetByteStream *IMFByteStream, pAudioMediaType *IM
 // Minimum OS: windows8.0.
 func MFCreateWICBitmapBuffer(riid *win32.GUID, punkSurface *systemcom.IUnknown, ppBuffer **IMFMediaBuffer) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateWICBitmapBuffer.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(punkSurface)), uintptr(unsafe.Pointer(ppBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateWMAEncoderActivate calls MF!MFCreateWMAEncoderActivate.
@@ -1444,7 +1444,7 @@ func MFCreateWICBitmapBuffer(riid *win32.GUID, punkSurface *systemcom.IUnknown, 
 // Minimum OS: windows6.0.6000.
 func MFCreateWMAEncoderActivate(pMediaType *IMFMediaType, pEncodingConfigurationProperties *uishellpropertiessystem.IPropertyStore, ppActivate **IMFActivate) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateWMAEncoderActivate.Addr(), uintptr(unsafe.Pointer(pMediaType)), uintptr(unsafe.Pointer(pEncodingConfigurationProperties)), uintptr(unsafe.Pointer(ppActivate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateWMVEncoderActivate calls MF!MFCreateWMVEncoderActivate.
@@ -1452,7 +1452,7 @@ func MFCreateWMAEncoderActivate(pMediaType *IMFMediaType, pEncodingConfiguration
 // Minimum OS: windows6.0.6000.
 func MFCreateWMVEncoderActivate(pMediaType *IMFMediaType, pEncodingConfigurationProperties *uishellpropertiessystem.IPropertyStore, ppActivate **IMFActivate) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateWMVEncoderActivate.Addr(), uintptr(unsafe.Pointer(pMediaType)), uintptr(unsafe.Pointer(pEncodingConfigurationProperties)), uintptr(unsafe.Pointer(ppActivate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFCreateWaveFormatExFromMFMediaType calls MFPlat!MFCreateWaveFormatExFromMFMediaType.
@@ -1460,7 +1460,7 @@ func MFCreateWMVEncoderActivate(pMediaType *IMFMediaType, pEncodingConfiguration
 // Minimum OS: windows6.0.6000.
 func MFCreateWaveFormatExFromMFMediaType(pMFType *IMFMediaType, ppWF **mediaaudio.WAVEFORMATEX, pcbSize *uint32, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateWaveFormatExFromMFMediaType.Addr(), uintptr(unsafe.Pointer(pMFType)), uintptr(unsafe.Pointer(ppWF)), uintptr(unsafe.Pointer(pcbSize)), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFDeserializeAttributesFromStream calls MFPlat!MFDeserializeAttributesFromStream.
@@ -1468,7 +1468,7 @@ func MFCreateWaveFormatExFromMFMediaType(pMFType *IMFMediaType, ppWF **mediaaudi
 // Minimum OS: windows6.0.6000.
 func MFDeserializeAttributesFromStream(pAttr *IMFAttributes, dwOptions uint32, pStm *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(procMFDeserializeAttributesFromStream.Addr(), uintptr(unsafe.Pointer(pAttr)), uintptr(dwOptions), uintptr(unsafe.Pointer(pStm)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFDeserializePresentationDescriptor calls MFPlat!MFDeserializePresentationDescriptor.
@@ -1480,7 +1480,7 @@ func MFDeserializePresentationDescriptor(pbData []byte, ppPD **IMFPresentationDe
 		_pbData = &pbData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procMFDeserializePresentationDescriptor.Addr(), uintptr(len(pbData)), uintptr(unsafe.Pointer(_pbData)), uintptr(unsafe.Pointer(ppPD)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFEndCreateFile calls MFPlat!MFEndCreateFile.
@@ -1488,7 +1488,7 @@ func MFDeserializePresentationDescriptor(pbData []byte, ppPD **IMFPresentationDe
 // Minimum OS: windows6.0.6000.
 func MFEndCreateFile(pResult *IMFAsyncResult, ppFile **IMFByteStream) error {
 	r1, _, _ := syscall.SyscallN(procMFEndCreateFile.Addr(), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(ppFile)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFEndRegisterWorkQueueWithMMCSS calls MFPlat!MFEndRegisterWorkQueueWithMMCSS.
@@ -1496,7 +1496,7 @@ func MFEndCreateFile(pResult *IMFAsyncResult, ppFile **IMFByteStream) error {
 // Minimum OS: windows6.0.6000.
 func MFEndRegisterWorkQueueWithMMCSS(pResult *IMFAsyncResult, pdwTaskId *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFEndRegisterWorkQueueWithMMCSS.Addr(), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(pdwTaskId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFEndUnregisterWorkQueueWithMMCSS calls MFPlat!MFEndUnregisterWorkQueueWithMMCSS.
@@ -1504,7 +1504,7 @@ func MFEndRegisterWorkQueueWithMMCSS(pResult *IMFAsyncResult, pdwTaskId *uint32)
 // Minimum OS: windows6.0.6000.
 func MFEndUnregisterWorkQueueWithMMCSS(pResult *IMFAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(procMFEndUnregisterWorkQueueWithMMCSS.Addr(), uintptr(unsafe.Pointer(pResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFEnumDeviceSources calls MF!MFEnumDeviceSources.
@@ -1512,7 +1512,7 @@ func MFEndUnregisterWorkQueueWithMMCSS(pResult *IMFAsyncResult) error {
 // Minimum OS: windows6.1.
 func MFEnumDeviceSources(pAttributes *IMFAttributes, pppSourceActivate ***IMFActivate, pcSourceActivate *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFEnumDeviceSources.Addr(), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(pppSourceActivate)), uintptr(unsafe.Pointer(pcSourceActivate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFFrameRateToAverageTimePerFrame calls MFPlat!MFFrameRateToAverageTimePerFrame.
@@ -1520,7 +1520,7 @@ func MFEnumDeviceSources(pAttributes *IMFAttributes, pppSourceActivate ***IMFAct
 // Minimum OS: windows6.0.6000.
 func MFFrameRateToAverageTimePerFrame(unNumerator uint32, unDenominator uint32, punAverageTimePerFrame *uint64) error {
 	r1, _, _ := syscall.SyscallN(procMFFrameRateToAverageTimePerFrame.Addr(), uintptr(unNumerator), uintptr(unDenominator), uintptr(unsafe.Pointer(punAverageTimePerFrame)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFGetAttributesAsBlob calls MFPlat!MFGetAttributesAsBlob.
@@ -1532,7 +1532,7 @@ func MFGetAttributesAsBlob(pAttributes *IMFAttributes, pBuf []byte) error {
 		_pBuf = &pBuf[0]
 	}
 	r1, _, _ := syscall.SyscallN(procMFGetAttributesAsBlob.Addr(), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(_pBuf)), uintptr(len(pBuf)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFGetAttributesAsBlobSize calls MFPlat!MFGetAttributesAsBlobSize.
@@ -1540,7 +1540,7 @@ func MFGetAttributesAsBlob(pAttributes *IMFAttributes, pBuf []byte) error {
 // Minimum OS: windows6.0.6000.
 func MFGetAttributesAsBlobSize(pAttributes *IMFAttributes, pcbBufSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFGetAttributesAsBlobSize.Addr(), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(pcbBufSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFGetContentProtectionSystemCLSID calls MFPlat!MFGetContentProtectionSystemCLSID.
@@ -1548,13 +1548,13 @@ func MFGetAttributesAsBlobSize(pAttributes *IMFAttributes, pcbBufSize *uint32) e
 // Minimum OS: windows8.0.
 func MFGetContentProtectionSystemCLSID(guidProtectionSystemID *win32.GUID, pclsid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procMFGetContentProtectionSystemCLSID.Addr(), uintptr(unsafe.Pointer(guidProtectionSystemID)), uintptr(unsafe.Pointer(pclsid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFGetDXGIDeviceManageMode calls MFPlat.DLL!MFGetDXGIDeviceManageMode.
 func MFGetDXGIDeviceManageMode(pDeviceManager *systemcom.IUnknown, mode *MF_DXGI_DEVICE_MANAGER_MODE) error {
 	r1, _, _ := syscall.SyscallN(procMFGetDXGIDeviceManageMode.Addr(), uintptr(unsafe.Pointer(pDeviceManager)), uintptr(unsafe.Pointer(mode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFGetLocalId calls MF!MFGetLocalId.
@@ -1566,7 +1566,7 @@ func MFGetLocalId(verifier []byte, id *foundation.PWSTR) error {
 		_verifier = &verifier[0]
 	}
 	r1, _, _ := syscall.SyscallN(procMFGetLocalId.Addr(), uintptr(unsafe.Pointer(_verifier)), uintptr(len(verifier)), uintptr(unsafe.Pointer(id)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFGetMFTMerit calls MFPlat!MFGetMFTMerit.
@@ -1578,7 +1578,7 @@ func MFGetMFTMerit(pMFT *systemcom.IUnknown, verifier []byte, merit *uint32) err
 		_verifier = &verifier[0]
 	}
 	r1, _, _ := syscall.SyscallN(procMFGetMFTMerit.Addr(), uintptr(unsafe.Pointer(pMFT)), uintptr(len(verifier)), uintptr(unsafe.Pointer(_verifier)), uintptr(unsafe.Pointer(merit)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFGetPlaneSize calls EVR!MFGetPlaneSize.
@@ -1586,7 +1586,7 @@ func MFGetMFTMerit(pMFT *systemcom.IUnknown, verifier []byte, merit *uint32) err
 // Minimum OS: windows6.0.6000.
 func MFGetPlaneSize(format uint32, dwWidth uint32, dwHeight uint32, pdwPlaneSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFGetPlaneSize.Addr(), uintptr(format), uintptr(dwWidth), uintptr(dwHeight), uintptr(unsafe.Pointer(pdwPlaneSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFGetPluginControl calls MFPlat!MFGetPluginControl.
@@ -1594,7 +1594,7 @@ func MFGetPlaneSize(format uint32, dwWidth uint32, dwHeight uint32, pdwPlaneSize
 // Minimum OS: windows6.1.
 func MFGetPluginControl(ppPluginControl **IMFPluginControl) error {
 	r1, _, _ := syscall.SyscallN(procMFGetPluginControl.Addr(), uintptr(unsafe.Pointer(ppPluginControl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFGetService calls MF!MFGetService.
@@ -1602,7 +1602,7 @@ func MFGetPluginControl(ppPluginControl **IMFPluginControl) error {
 // Minimum OS: windows6.0.6000.
 func MFGetService(punkObject *systemcom.IUnknown, guidService *win32.GUID, riid *win32.GUID, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procMFGetService.Addr(), uintptr(unsafe.Pointer(punkObject)), uintptr(unsafe.Pointer(guidService)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFGetStrideForBitmapInfoHeader calls MFPlat!MFGetStrideForBitmapInfoHeader.
@@ -1610,7 +1610,7 @@ func MFGetService(punkObject *systemcom.IUnknown, guidService *win32.GUID, riid 
 // Minimum OS: windows6.0.6000.
 func MFGetStrideForBitmapInfoHeader(format uint32, dwWidth uint32, pStride *int32) error {
 	r1, _, _ := syscall.SyscallN(procMFGetStrideForBitmapInfoHeader.Addr(), uintptr(format), uintptr(dwWidth), uintptr(unsafe.Pointer(pStride)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFGetSupportedMimeTypes calls MFPlat!MFGetSupportedMimeTypes.
@@ -1618,7 +1618,7 @@ func MFGetStrideForBitmapInfoHeader(format uint32, dwWidth uint32, pStride *int3
 // Minimum OS: windows6.0.6000.
 func MFGetSupportedMimeTypes(pPropVarMimeTypeArray *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procMFGetSupportedMimeTypes.Addr(), uintptr(unsafe.Pointer(pPropVarMimeTypeArray)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFGetSupportedSchemes calls MFPlat!MFGetSupportedSchemes.
@@ -1626,7 +1626,7 @@ func MFGetSupportedMimeTypes(pPropVarMimeTypeArray *systemcomstructuredstorage.P
 // Minimum OS: windows6.0.6000.
 func MFGetSupportedSchemes(pPropVarSchemeArray *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procMFGetSupportedSchemes.Addr(), uintptr(unsafe.Pointer(pPropVarSchemeArray)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFGetSystemId calls MF!MFGetSystemId.
@@ -1634,7 +1634,7 @@ func MFGetSupportedSchemes(pPropVarSchemeArray *systemcomstructuredstorage.PROPV
 // Minimum OS: windows8.0.
 func MFGetSystemId(ppId **IMFSystemId) error {
 	r1, _, _ := syscall.SyscallN(procMFGetSystemId.Addr(), uintptr(unsafe.Pointer(ppId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFGetSystemTime calls MFPlat!MFGetSystemTime.
@@ -1650,7 +1650,7 @@ func MFGetSystemTime() int64 {
 // Minimum OS: windows6.0.6000.
 func MFGetTimerPeriodicity(Periodicity *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFGetTimerPeriodicity.Addr(), uintptr(unsafe.Pointer(Periodicity)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFGetTopoNodeCurrentType calls MF!MFGetTopoNodeCurrentType.
@@ -1659,7 +1659,7 @@ func MFGetTimerPeriodicity(Periodicity *uint32) error {
 func MFGetTopoNodeCurrentType(pNode *IMFTopologyNode, dwStreamIndex uint32, fOutput bool, ppType **IMFMediaType) error {
 	_fOutput := win32.Bool32(fOutput)
 	r1, _, _ := syscall.SyscallN(procMFGetTopoNodeCurrentType.Addr(), uintptr(unsafe.Pointer(pNode)), uintptr(dwStreamIndex), uintptr(_fOutput), uintptr(unsafe.Pointer(ppType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFGetUncompressedVideoFormat calls MFPlat!MFGetUncompressedVideoFormat.
@@ -1675,7 +1675,7 @@ func MFGetUncompressedVideoFormat(pVideoFormat *MFVIDEOFORMAT) uint32 {
 // Minimum OS: windows6.0.6000.
 func MFGetWorkQueueMMCSSClass(dwWorkQueueId uint32, pwszClass foundation.PWSTR, pcchClass *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFGetWorkQueueMMCSSClass.Addr(), uintptr(dwWorkQueueId), uintptr(unsafe.Pointer(pwszClass)), uintptr(unsafe.Pointer(pcchClass)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFGetWorkQueueMMCSSPriority calls MFPlat!MFGetWorkQueueMMCSSPriority.
@@ -1683,7 +1683,7 @@ func MFGetWorkQueueMMCSSClass(dwWorkQueueId uint32, pwszClass foundation.PWSTR, 
 // Minimum OS: windows8.0.
 func MFGetWorkQueueMMCSSPriority(dwWorkQueueId uint32, lPriority *int32) error {
 	r1, _, _ := syscall.SyscallN(procMFGetWorkQueueMMCSSPriority.Addr(), uintptr(dwWorkQueueId), uintptr(unsafe.Pointer(lPriority)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFGetWorkQueueMMCSSTaskId calls MFPlat!MFGetWorkQueueMMCSSTaskId.
@@ -1691,7 +1691,7 @@ func MFGetWorkQueueMMCSSPriority(dwWorkQueueId uint32, lPriority *int32) error {
 // Minimum OS: windows6.0.6000.
 func MFGetWorkQueueMMCSSTaskId(dwWorkQueueId uint32, pdwTaskId *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFGetWorkQueueMMCSSTaskId.Addr(), uintptr(dwWorkQueueId), uintptr(unsafe.Pointer(pdwTaskId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFHeapAlloc calls MFPlat!MFHeapAlloc.
@@ -1718,7 +1718,7 @@ func MFInitAttributesFromBlob(pAttributes *IMFAttributes, pBuf []byte) error {
 		_pBuf = &pBuf[0]
 	}
 	r1, _, _ := syscall.SyscallN(procMFInitAttributesFromBlob.Addr(), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(_pBuf)), uintptr(len(pBuf)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFInitMediaTypeFromAMMediaType calls MFPlat!MFInitMediaTypeFromAMMediaType.
@@ -1726,7 +1726,7 @@ func MFInitAttributesFromBlob(pAttributes *IMFAttributes, pBuf []byte) error {
 // Minimum OS: windows6.0.6000.
 func MFInitMediaTypeFromAMMediaType(pMFType *IMFMediaType, pAMType *AM_MEDIA_TYPE) error {
 	r1, _, _ := syscall.SyscallN(procMFInitMediaTypeFromAMMediaType.Addr(), uintptr(unsafe.Pointer(pMFType)), uintptr(unsafe.Pointer(pAMType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFInitMediaTypeFromMFVideoFormat calls MFPlat!MFInitMediaTypeFromMFVideoFormat.
@@ -1734,7 +1734,7 @@ func MFInitMediaTypeFromAMMediaType(pMFType *IMFMediaType, pAMType *AM_MEDIA_TYP
 // Minimum OS: windows6.0.6000.
 func MFInitMediaTypeFromMFVideoFormat(pMFType *IMFMediaType, pMFVF *MFVIDEOFORMAT, cbBufSize uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFInitMediaTypeFromMFVideoFormat.Addr(), uintptr(unsafe.Pointer(pMFType)), uintptr(unsafe.Pointer(pMFVF)), uintptr(cbBufSize))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFInitMediaTypeFromMPEG1VideoInfo calls MFPlat!MFInitMediaTypeFromMPEG1VideoInfo.
@@ -1742,7 +1742,7 @@ func MFInitMediaTypeFromMFVideoFormat(pMFType *IMFMediaType, pMFVF *MFVIDEOFORMA
 // Minimum OS: windows6.0.6000.
 func MFInitMediaTypeFromMPEG1VideoInfo(pMFType *IMFMediaType, pMP1VI *MPEG1VIDEOINFO, cbBufSize uint32, pSubtype *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procMFInitMediaTypeFromMPEG1VideoInfo.Addr(), uintptr(unsafe.Pointer(pMFType)), uintptr(unsafe.Pointer(pMP1VI)), uintptr(cbBufSize), uintptr(unsafe.Pointer(pSubtype)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFInitMediaTypeFromMPEG2VideoInfo calls MFPlat!MFInitMediaTypeFromMPEG2VideoInfo.
@@ -1750,7 +1750,7 @@ func MFInitMediaTypeFromMPEG1VideoInfo(pMFType *IMFMediaType, pMP1VI *MPEG1VIDEO
 // Minimum OS: windows6.0.6000.
 func MFInitMediaTypeFromMPEG2VideoInfo(pMFType *IMFMediaType, pMP2VI *MPEG2VIDEOINFO, cbBufSize uint32, pSubtype *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procMFInitMediaTypeFromMPEG2VideoInfo.Addr(), uintptr(unsafe.Pointer(pMFType)), uintptr(unsafe.Pointer(pMP2VI)), uintptr(cbBufSize), uintptr(unsafe.Pointer(pSubtype)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFInitMediaTypeFromVideoInfoHeader calls MFPlat!MFInitMediaTypeFromVideoInfoHeader.
@@ -1758,7 +1758,7 @@ func MFInitMediaTypeFromMPEG2VideoInfo(pMFType *IMFMediaType, pMP2VI *MPEG2VIDEO
 // Minimum OS: windows6.0.6000.
 func MFInitMediaTypeFromVideoInfoHeader(pMFType *IMFMediaType, pVIH *VIDEOINFOHEADER, cbBufSize uint32, pSubtype *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procMFInitMediaTypeFromVideoInfoHeader.Addr(), uintptr(unsafe.Pointer(pMFType)), uintptr(unsafe.Pointer(pVIH)), uintptr(cbBufSize), uintptr(unsafe.Pointer(pSubtype)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFInitMediaTypeFromVideoInfoHeader2 calls MFPlat!MFInitMediaTypeFromVideoInfoHeader2.
@@ -1766,7 +1766,7 @@ func MFInitMediaTypeFromVideoInfoHeader(pMFType *IMFMediaType, pVIH *VIDEOINFOHE
 // Minimum OS: windows6.0.6000.
 func MFInitMediaTypeFromVideoInfoHeader2(pMFType *IMFMediaType, pVIH2 *VIDEOINFOHEADER2, cbBufSize uint32, pSubtype *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procMFInitMediaTypeFromVideoInfoHeader2.Addr(), uintptr(unsafe.Pointer(pMFType)), uintptr(unsafe.Pointer(pVIH2)), uintptr(cbBufSize), uintptr(unsafe.Pointer(pSubtype)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFInitMediaTypeFromWaveFormatEx calls MFPlat!MFInitMediaTypeFromWaveFormatEx.
@@ -1774,7 +1774,7 @@ func MFInitMediaTypeFromVideoInfoHeader2(pMFType *IMFMediaType, pVIH2 *VIDEOINFO
 // Minimum OS: windows6.0.6000.
 func MFInitMediaTypeFromWaveFormatEx(pMFType *IMFMediaType, pWaveFormat *mediaaudio.WAVEFORMATEX, cbBufSize uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFInitMediaTypeFromWaveFormatEx.Addr(), uintptr(unsafe.Pointer(pMFType)), uintptr(unsafe.Pointer(pWaveFormat)), uintptr(cbBufSize))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFInitVideoFormat calls MFPlat!MFInitVideoFormat.
@@ -1782,7 +1782,7 @@ func MFInitMediaTypeFromWaveFormatEx(pMFType *IMFMediaType, pWaveFormat *mediaau
 // Minimum OS: windows6.0.6000.
 func MFInitVideoFormat(pVideoFormat *MFVIDEOFORMAT, type_ MFStandardVideoFormat) error {
 	r1, _, _ := syscall.SyscallN(procMFInitVideoFormat.Addr(), uintptr(unsafe.Pointer(pVideoFormat)), uintptr(type_))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFInitVideoFormat_RGB calls MFPlat!MFInitVideoFormat_RGB.
@@ -1790,7 +1790,7 @@ func MFInitVideoFormat(pVideoFormat *MFVIDEOFORMAT, type_ MFStandardVideoFormat)
 // Minimum OS: windows6.0.6000.
 func MFInitVideoFormat_RGB(pVideoFormat *MFVIDEOFORMAT, dwWidth uint32, dwHeight uint32, D3Dfmt uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFInitVideoFormat_RGB.Addr(), uintptr(unsafe.Pointer(pVideoFormat)), uintptr(dwWidth), uintptr(dwHeight), uintptr(D3Dfmt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFInvokeCallback calls MFPlat!MFInvokeCallback.
@@ -1798,7 +1798,7 @@ func MFInitVideoFormat_RGB(pVideoFormat *MFVIDEOFORMAT, dwWidth uint32, dwHeight
 // Minimum OS: windows6.0.6000.
 func MFInvokeCallback(pAsyncResult *IMFAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(procMFInvokeCallback.Addr(), uintptr(unsafe.Pointer(pAsyncResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFIsContentProtectionDeviceSupported calls MFPlat!MFIsContentProtectionDeviceSupported.
@@ -1806,7 +1806,7 @@ func MFInvokeCallback(pAsyncResult *IMFAsyncResult) error {
 // Minimum OS: windows10.0.10240.
 func MFIsContentProtectionDeviceSupported(ProtectionSystemId *win32.GUID, isSupported *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procMFIsContentProtectionDeviceSupported.Addr(), uintptr(unsafe.Pointer(ProtectionSystemId)), uintptr(unsafe.Pointer(isSupported)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFIsFormatYUV calls EVR!MFIsFormatYUV.
@@ -1821,7 +1821,7 @@ func MFIsFormatYUV(Format uint32) bool {
 // https://learn.microsoft.com/windows/win32/api/mfvirtualcamera/nf-mfvirtualcamera-mfisvirtualcameratypesupported
 func MFIsVirtualCameraTypeSupported(type_ MFVirtualCameraType, supported *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procMFIsVirtualCameraTypeSupported.Addr(), uintptr(type_), uintptr(unsafe.Pointer(supported)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFLoadSignedLibrary calls MF!MFLoadSignedLibrary.
@@ -1830,7 +1830,7 @@ func MFIsVirtualCameraTypeSupported(type_ MFVirtualCameraType, supported *founda
 func MFLoadSignedLibrary(pszName string, ppLib **IMFSignedLibrary) error {
 	_pszName := win32.UTF16Ptr(pszName)
 	r1, _, _ := syscall.SyscallN(procMFLoadSignedLibrary.Addr(), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(ppLib)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFLockDXGIDeviceManager calls MFPlat!MFLockDXGIDeviceManager.
@@ -1838,7 +1838,7 @@ func MFLoadSignedLibrary(pszName string, ppLib **IMFSignedLibrary) error {
 // Minimum OS: windows8.0.
 func MFLockDXGIDeviceManager(pResetToken *uint32, ppManager **IMFDXGIDeviceManager) error {
 	r1, _, _ := syscall.SyscallN(procMFLockDXGIDeviceManager.Addr(), uintptr(unsafe.Pointer(pResetToken)), uintptr(unsafe.Pointer(ppManager)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFLockPlatform calls MFPlat!MFLockPlatform.
@@ -1846,7 +1846,7 @@ func MFLockDXGIDeviceManager(pResetToken *uint32, ppManager **IMFDXGIDeviceManag
 // Minimum OS: windows6.0.6000.
 func MFLockPlatform() error {
 	r1, _, _ := syscall.SyscallN(procMFLockPlatform.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFLockSharedWorkQueue calls MFPlat!MFLockSharedWorkQueue.
@@ -1855,7 +1855,7 @@ func MFLockPlatform() error {
 func MFLockSharedWorkQueue(wszClass string, BasePriority int32, pdwTaskId *uint32, pID *uint32) error {
 	_wszClass := win32.UTF16Ptr(wszClass)
 	r1, _, _ := syscall.SyscallN(procMFLockSharedWorkQueue.Addr(), uintptr(unsafe.Pointer(_wszClass)), uintptr(BasePriority), uintptr(unsafe.Pointer(pdwTaskId)), uintptr(unsafe.Pointer(pID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFLockWorkQueue calls MFPlat!MFLockWorkQueue.
@@ -1863,7 +1863,7 @@ func MFLockSharedWorkQueue(wszClass string, BasePriority int32, pdwTaskId *uint3
 // Minimum OS: windows6.0.6000.
 func MFLockWorkQueue(dwWorkQueue uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFLockWorkQueue.Addr(), uintptr(dwWorkQueue))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFMapDX9FormatToDXGIFormat calls MFPlat!MFMapDX9FormatToDXGIFormat.
@@ -1889,7 +1889,7 @@ func MFPCreateMediaPlayer(pwszURL string, fStartPlayback bool, creationOptions M
 	_pwszURL := win32.UTF16Ptr(pwszURL)
 	_fStartPlayback := win32.Bool32(fStartPlayback)
 	r1, _, _ := syscall.SyscallN(procMFPCreateMediaPlayer.Addr(), uintptr(unsafe.Pointer(_pwszURL)), uintptr(_fStartPlayback), uintptr(creationOptions), uintptr(unsafe.Pointer(pCallback)), uintptr(hWnd), uintptr(unsafe.Pointer(ppMediaPlayer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFPutWaitingWorkItem calls MFPlat!MFPutWaitingWorkItem.
@@ -1897,7 +1897,7 @@ func MFPCreateMediaPlayer(pwszURL string, fStartPlayback bool, creationOptions M
 // Minimum OS: windows8.0.
 func MFPutWaitingWorkItem(hEvent foundation.HANDLE, Priority int32, pResult *IMFAsyncResult, pKey *uint64) error {
 	r1, _, _ := syscall.SyscallN(procMFPutWaitingWorkItem.Addr(), uintptr(hEvent), uintptr(Priority), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(pKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFPutWorkItem calls MFPlat!MFPutWorkItem.
@@ -1905,7 +1905,7 @@ func MFPutWaitingWorkItem(hEvent foundation.HANDLE, Priority int32, pResult *IMF
 // Minimum OS: windows6.0.6000.
 func MFPutWorkItem(dwQueue uint32, pCallback *IMFAsyncCallback, pState *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procMFPutWorkItem.Addr(), uintptr(dwQueue), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFPutWorkItem2 calls MFPlat!MFPutWorkItem2.
@@ -1913,7 +1913,7 @@ func MFPutWorkItem(dwQueue uint32, pCallback *IMFAsyncCallback, pState *systemco
 // Minimum OS: windows8.0.
 func MFPutWorkItem2(dwQueue uint32, Priority int32, pCallback *IMFAsyncCallback, pState *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procMFPutWorkItem2.Addr(), uintptr(dwQueue), uintptr(Priority), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFPutWorkItemEx calls MFPlat!MFPutWorkItemEx.
@@ -1921,7 +1921,7 @@ func MFPutWorkItem2(dwQueue uint32, Priority int32, pCallback *IMFAsyncCallback,
 // Minimum OS: windows6.0.6000.
 func MFPutWorkItemEx(dwQueue uint32, pResult *IMFAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(procMFPutWorkItemEx.Addr(), uintptr(dwQueue), uintptr(unsafe.Pointer(pResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFPutWorkItemEx2 calls MFPlat!MFPutWorkItemEx2.
@@ -1929,7 +1929,7 @@ func MFPutWorkItemEx(dwQueue uint32, pResult *IMFAsyncResult) error {
 // Minimum OS: windows8.0.
 func MFPutWorkItemEx2(dwQueue uint32, Priority int32, pResult *IMFAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(procMFPutWorkItemEx2.Addr(), uintptr(dwQueue), uintptr(Priority), uintptr(unsafe.Pointer(pResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFRegisterLocalByteStreamHandler calls MFPlat!MFRegisterLocalByteStreamHandler.
@@ -1939,7 +1939,7 @@ func MFRegisterLocalByteStreamHandler(szFileExtension string, szMimeType string,
 	_szFileExtension := win32.UTF16Ptr(szFileExtension)
 	_szMimeType := win32.UTF16Ptr(szMimeType)
 	r1, _, _ := syscall.SyscallN(procMFRegisterLocalByteStreamHandler.Addr(), uintptr(unsafe.Pointer(_szFileExtension)), uintptr(unsafe.Pointer(_szMimeType)), uintptr(unsafe.Pointer(pActivate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFRegisterLocalSchemeHandler calls MFPlat!MFRegisterLocalSchemeHandler.
@@ -1948,7 +1948,7 @@ func MFRegisterLocalByteStreamHandler(szFileExtension string, szMimeType string,
 func MFRegisterLocalSchemeHandler(szScheme string, pActivate *IMFActivate) error {
 	_szScheme := win32.UTF16Ptr(szScheme)
 	r1, _, _ := syscall.SyscallN(procMFRegisterLocalSchemeHandler.Addr(), uintptr(unsafe.Pointer(_szScheme)), uintptr(unsafe.Pointer(pActivate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFRegisterPlatformWithMMCSS calls MFPlat!MFRegisterPlatformWithMMCSS.
@@ -1957,7 +1957,7 @@ func MFRegisterLocalSchemeHandler(szScheme string, pActivate *IMFActivate) error
 func MFRegisterPlatformWithMMCSS(wszClass string, pdwTaskId *uint32, lPriority int32) error {
 	_wszClass := win32.UTF16Ptr(wszClass)
 	r1, _, _ := syscall.SyscallN(procMFRegisterPlatformWithMMCSS.Addr(), uintptr(unsafe.Pointer(_wszClass)), uintptr(unsafe.Pointer(pdwTaskId)), uintptr(lPriority))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFRemovePeriodicCallback calls MFPlat!MFRemovePeriodicCallback.
@@ -1965,7 +1965,7 @@ func MFRegisterPlatformWithMMCSS(wszClass string, pdwTaskId *uint32, lPriority i
 // Minimum OS: windows6.0.6000.
 func MFRemovePeriodicCallback(dwKey uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFRemovePeriodicCallback.Addr(), uintptr(dwKey))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFRequireProtectedEnvironment calls MF!MFRequireProtectedEnvironment.
@@ -1973,7 +1973,7 @@ func MFRemovePeriodicCallback(dwKey uint32) error {
 // Minimum OS: windows6.0.6000.
 func MFRequireProtectedEnvironment(pPresentationDescriptor *IMFPresentationDescriptor) error {
 	r1, _, _ := syscall.SyscallN(procMFRequireProtectedEnvironment.Addr(), uintptr(unsafe.Pointer(pPresentationDescriptor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFScheduleWorkItem calls MFPlat!MFScheduleWorkItem.
@@ -1981,7 +1981,7 @@ func MFRequireProtectedEnvironment(pPresentationDescriptor *IMFPresentationDescr
 // Minimum OS: windows6.0.6000.
 func MFScheduleWorkItem(pCallback *IMFAsyncCallback, pState *systemcom.IUnknown, Timeout int64, pKey *uint64) error {
 	r1, _, _ := syscall.SyscallN(procMFScheduleWorkItem.Addr(), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pState)), uintptr(Timeout), uintptr(unsafe.Pointer(pKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFScheduleWorkItemEx calls MFPlat!MFScheduleWorkItemEx.
@@ -1989,7 +1989,7 @@ func MFScheduleWorkItem(pCallback *IMFAsyncCallback, pState *systemcom.IUnknown,
 // Minimum OS: windows6.0.6000.
 func MFScheduleWorkItemEx(pResult *IMFAsyncResult, Timeout int64, pKey *uint64) error {
 	r1, _, _ := syscall.SyscallN(procMFScheduleWorkItemEx.Addr(), uintptr(unsafe.Pointer(pResult)), uintptr(Timeout), uintptr(unsafe.Pointer(pKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFSerializeAttributesToStream calls MFPlat!MFSerializeAttributesToStream.
@@ -1997,7 +1997,7 @@ func MFScheduleWorkItemEx(pResult *IMFAsyncResult, Timeout int64, pKey *uint64) 
 // Minimum OS: windows6.0.6000.
 func MFSerializeAttributesToStream(pAttr *IMFAttributes, dwOptions uint32, pStm *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(procMFSerializeAttributesToStream.Addr(), uintptr(unsafe.Pointer(pAttr)), uintptr(dwOptions), uintptr(unsafe.Pointer(pStm)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFSerializePresentationDescriptor calls MFPlat!MFSerializePresentationDescriptor.
@@ -2005,7 +2005,7 @@ func MFSerializeAttributesToStream(pAttr *IMFAttributes, dwOptions uint32, pStm 
 // Minimum OS: windows6.0.6000.
 func MFSerializePresentationDescriptor(pPD *IMFPresentationDescriptor, pcbData *uint32, ppbData **byte) error {
 	r1, _, _ := syscall.SyscallN(procMFSerializePresentationDescriptor.Addr(), uintptr(unsafe.Pointer(pPD)), uintptr(unsafe.Pointer(pcbData)), uintptr(unsafe.Pointer(ppbData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFShutdown calls MFPlat!MFShutdown.
@@ -2013,7 +2013,7 @@ func MFSerializePresentationDescriptor(pPD *IMFPresentationDescriptor, pcbData *
 // Minimum OS: windows6.0.6000.
 func MFShutdown() error {
 	r1, _, _ := syscall.SyscallN(procMFShutdown.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFShutdownObject calls MF!MFShutdownObject.
@@ -2021,7 +2021,7 @@ func MFShutdown() error {
 // Minimum OS: windows6.0.6000.
 func MFShutdownObject(pUnk *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procMFShutdownObject.Addr(), uintptr(unsafe.Pointer(pUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFSplitSample calls MFPlat!MFSplitSample.
@@ -2033,7 +2033,7 @@ func MFSplitSample(pSample *IMFSample, pOutputSamples []*IMFSample, pdwOutputSam
 		_pOutputSamples = &pOutputSamples[0]
 	}
 	r1, _, _ := syscall.SyscallN(procMFSplitSample.Addr(), uintptr(unsafe.Pointer(pSample)), uintptr(unsafe.Pointer(_pOutputSamples)), uintptr(len(pOutputSamples)), uintptr(unsafe.Pointer(pdwOutputSampleCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFStartup calls MFPlat!MFStartup.
@@ -2041,7 +2041,7 @@ func MFSplitSample(pSample *IMFSample, pOutputSamples []*IMFSample, pdwOutputSam
 // Minimum OS: windows6.0.6000.
 func MFStartup(Version uint32, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFStartup.Addr(), uintptr(Version), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFTRegisterLocal calls MFPlat!MFTRegisterLocal.
@@ -2058,7 +2058,7 @@ func MFTRegisterLocal(pClassFactory *systemcom.IClassFactory, guidCategory *win3
 		_pOutputTypes = &pOutputTypes[0]
 	}
 	r1, _, _ := syscall.SyscallN(procMFTRegisterLocal.Addr(), uintptr(unsafe.Pointer(pClassFactory)), uintptr(unsafe.Pointer(guidCategory)), uintptr(unsafe.Pointer(_pszName)), uintptr(Flags), uintptr(len(pInputTypes)), uintptr(unsafe.Pointer(_pInputTypes)), uintptr(len(pOutputTypes)), uintptr(unsafe.Pointer(_pOutputTypes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFTRegisterLocalByCLSID calls MFPlat!MFTRegisterLocalByCLSID.
@@ -2075,7 +2075,7 @@ func MFTRegisterLocalByCLSID(clisdMFT *win32.GUID, guidCategory *win32.GUID, psz
 		_pOutputTypes = &pOutputTypes[0]
 	}
 	r1, _, _ := syscall.SyscallN(procMFTRegisterLocalByCLSID.Addr(), uintptr(unsafe.Pointer(clisdMFT)), uintptr(unsafe.Pointer(guidCategory)), uintptr(unsafe.Pointer(_pszName)), uintptr(Flags), uintptr(len(pInputTypes)), uintptr(unsafe.Pointer(_pInputTypes)), uintptr(len(pOutputTypes)), uintptr(unsafe.Pointer(_pOutputTypes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFTUnregisterLocal calls MFPlat!MFTUnregisterLocal.
@@ -2083,7 +2083,7 @@ func MFTRegisterLocalByCLSID(clisdMFT *win32.GUID, guidCategory *win32.GUID, psz
 // Minimum OS: windows6.1.
 func MFTUnregisterLocal(pClassFactory *systemcom.IClassFactory) error {
 	r1, _, _ := syscall.SyscallN(procMFTUnregisterLocal.Addr(), uintptr(unsafe.Pointer(pClassFactory)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFTranscodeGetAudioOutputAvailableTypes calls MF!MFTranscodeGetAudioOutputAvailableTypes.
@@ -2091,7 +2091,7 @@ func MFTUnregisterLocal(pClassFactory *systemcom.IClassFactory) error {
 // Minimum OS: windows6.1.
 func MFTranscodeGetAudioOutputAvailableTypes(guidSubType *win32.GUID, dwMFTFlags uint32, pCodecConfig *IMFAttributes, ppAvailableTypes **IMFCollection) error {
 	r1, _, _ := syscall.SyscallN(procMFTranscodeGetAudioOutputAvailableTypes.Addr(), uintptr(unsafe.Pointer(guidSubType)), uintptr(dwMFTFlags), uintptr(unsafe.Pointer(pCodecConfig)), uintptr(unsafe.Pointer(ppAvailableTypes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFUnlockDXGIDeviceManager calls MFPlat!MFUnlockDXGIDeviceManager.
@@ -2099,7 +2099,7 @@ func MFTranscodeGetAudioOutputAvailableTypes(guidSubType *win32.GUID, dwMFTFlags
 // Minimum OS: windows8.0.
 func MFUnlockDXGIDeviceManager() error {
 	r1, _, _ := syscall.SyscallN(procMFUnlockDXGIDeviceManager.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFUnlockPlatform calls MFPlat!MFUnlockPlatform.
@@ -2107,7 +2107,7 @@ func MFUnlockDXGIDeviceManager() error {
 // Minimum OS: windows6.0.6000.
 func MFUnlockPlatform() error {
 	r1, _, _ := syscall.SyscallN(procMFUnlockPlatform.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFUnlockWorkQueue calls MFPlat!MFUnlockWorkQueue.
@@ -2115,7 +2115,7 @@ func MFUnlockPlatform() error {
 // Minimum OS: windows6.0.6000.
 func MFUnlockWorkQueue(dwWorkQueue uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFUnlockWorkQueue.Addr(), uintptr(dwWorkQueue))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFUnregisterPlatformFromMMCSS calls MFPlat!MFUnregisterPlatformFromMMCSS.
@@ -2123,7 +2123,7 @@ func MFUnlockWorkQueue(dwWorkQueue uint32) error {
 // Minimum OS: windows8.0.
 func MFUnregisterPlatformFromMMCSS() error {
 	r1, _, _ := syscall.SyscallN(procMFUnregisterPlatformFromMMCSS.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFUnwrapMediaType calls MFPlat!MFUnwrapMediaType.
@@ -2131,7 +2131,7 @@ func MFUnregisterPlatformFromMMCSS() error {
 // Minimum OS: windows6.0.6000.
 func MFUnwrapMediaType(pWrap *IMFMediaType, ppOrig **IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(procMFUnwrapMediaType.Addr(), uintptr(unsafe.Pointer(pWrap)), uintptr(unsafe.Pointer(ppOrig)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFWrapMediaType calls MFPlat!MFWrapMediaType.
@@ -2139,7 +2139,7 @@ func MFUnwrapMediaType(pWrap *IMFMediaType, ppOrig **IMFMediaType) error {
 // Minimum OS: windows6.0.6000.
 func MFWrapMediaType(pOrig *IMFMediaType, MajorType *win32.GUID, SubType *win32.GUID, ppWrap **IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(procMFWrapMediaType.Addr(), uintptr(unsafe.Pointer(pOrig)), uintptr(unsafe.Pointer(MajorType)), uintptr(unsafe.Pointer(SubType)), uintptr(unsafe.Pointer(ppWrap)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MFllMulDiv calls MFPlat!MFllMulDiv.
@@ -2155,7 +2155,7 @@ func MFllMulDiv(a int64, b int64, c int64, d int64) int64 {
 // Minimum OS: windows6.0.6000.
 func OPMGetVideoOutputForTarget(pAdapterLuid *foundation.LUID, VidPnTarget uint32, vos OPM_VIDEO_OUTPUT_SEMANTICS, ppOPMVideoOutput **IOPMVideoOutput) error {
 	r1, _, _ := syscall.SyscallN(procOPMGetVideoOutputForTarget.Addr(), uintptr(unsafe.Pointer(pAdapterLuid)), uintptr(VidPnTarget), uintptr(vos), uintptr(unsafe.Pointer(ppOPMVideoOutput)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OPMGetVideoOutputsFromHMONITOR calls dxva2!OPMGetVideoOutputsFromHMONITOR.
@@ -2163,7 +2163,7 @@ func OPMGetVideoOutputForTarget(pAdapterLuid *foundation.LUID, VidPnTarget uint3
 // Minimum OS: windows6.0.6000.
 func OPMGetVideoOutputsFromHMONITOR(hMonitor graphicsgdi.HMONITOR, vos OPM_VIDEO_OUTPUT_SEMANTICS, pulNumVideoOutputs *uint32, pppOPMVideoOutputArray ***IOPMVideoOutput) error {
 	r1, _, _ := syscall.SyscallN(procOPMGetVideoOutputsFromHMONITOR.Addr(), uintptr(hMonitor), uintptr(vos), uintptr(unsafe.Pointer(pulNumVideoOutputs)), uintptr(unsafe.Pointer(pppOPMVideoOutputArray)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OPMGetVideoOutputsFromIDirect3DDevice9Object calls dxva2!OPMGetVideoOutputsFromIDirect3DDevice9Object.
@@ -2171,23 +2171,23 @@ func OPMGetVideoOutputsFromHMONITOR(hMonitor graphicsgdi.HMONITOR, vos OPM_VIDEO
 // Minimum OS: windows6.0.6000.
 func OPMGetVideoOutputsFromIDirect3DDevice9Object(pDirect3DDevice9 *graphicsdirect3d9.IDirect3DDevice9, vos OPM_VIDEO_OUTPUT_SEMANTICS, pulNumVideoOutputs *uint32, pppOPMVideoOutputArray ***IOPMVideoOutput) error {
 	r1, _, _ := syscall.SyscallN(procOPMGetVideoOutputsFromIDirect3DDevice9Object.Addr(), uintptr(unsafe.Pointer(pDirect3DDevice9)), uintptr(vos), uintptr(unsafe.Pointer(pulNumVideoOutputs)), uintptr(unsafe.Pointer(pppOPMVideoOutputArray)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OPMXboxEnableHDCP calls OPMXbox!OPMXboxEnableHDCP.
 func OPMXboxEnableHDCP(HDCPType OPM_HDCP_TYPE) error {
 	r1, _, _ := syscall.SyscallN(procOPMXboxEnableHDCP.Addr(), uintptr(HDCPType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OPMXboxGetHDCPStatus calls OPMXbox!OPMXboxGetHDCPStatus.
 func OPMXboxGetHDCPStatus(pHDCPStatus *OPM_HDCP_STATUS) error {
 	r1, _, _ := syscall.SyscallN(procOPMXboxGetHDCPStatus.Addr(), uintptr(unsafe.Pointer(pHDCPStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OPMXboxGetHDCPStatusAndType calls OPMXbox!OPMXboxGetHDCPStatusAndType.
 func OPMXboxGetHDCPStatusAndType(pHDCPStatus *OPM_HDCP_STATUS, pHDCPType *OPM_HDCP_TYPE) error {
 	r1, _, _ := syscall.SyscallN(procOPMXboxGetHDCPStatusAndType.Addr(), uintptr(unsafe.Pointer(pHDCPStatus)), uintptr(unsafe.Pointer(pHDCPType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

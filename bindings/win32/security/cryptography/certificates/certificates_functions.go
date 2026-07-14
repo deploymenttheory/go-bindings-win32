@@ -53,7 +53,7 @@ var (
 // Minimum OS: windowsserver2003.
 func CertSrvBackupClose(hbc unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procCertSrvBackupClose.Addr(), uintptr(unsafe.Pointer(hbc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CertSrvBackupEnd calls certadm!CertSrvBackupEnd.
@@ -61,7 +61,7 @@ func CertSrvBackupClose(hbc unsafe.Pointer) error {
 // Minimum OS: windowsserver2003.
 func CertSrvBackupEnd(hbc unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procCertSrvBackupEnd.Addr(), uintptr(unsafe.Pointer(hbc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CertSrvBackupFree calls certadm!CertSrvBackupFree.
@@ -76,7 +76,7 @@ func CertSrvBackupFree(pv unsafe.Pointer) {
 // Minimum OS: windowsserver2003.
 func CertSrvBackupGetBackupLogsW(hbc unsafe.Pointer, ppwszzBackupLogFiles *foundation.PWSTR, pcbSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procCertSrvBackupGetBackupLogsW.Addr(), uintptr(unsafe.Pointer(hbc)), uintptr(unsafe.Pointer(ppwszzBackupLogFiles)), uintptr(unsafe.Pointer(pcbSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CertSrvBackupGetDatabaseNamesW calls certadm!CertSrvBackupGetDatabaseNamesW.
@@ -84,7 +84,7 @@ func CertSrvBackupGetBackupLogsW(hbc unsafe.Pointer, ppwszzBackupLogFiles *found
 // Minimum OS: windowsserver2003.
 func CertSrvBackupGetDatabaseNamesW(hbc unsafe.Pointer, ppwszzAttachmentInformation *foundation.PWSTR, pcbSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procCertSrvBackupGetDatabaseNamesW.Addr(), uintptr(unsafe.Pointer(hbc)), uintptr(unsafe.Pointer(ppwszzAttachmentInformation)), uintptr(unsafe.Pointer(pcbSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CertSrvBackupGetDynamicFileListW calls certadm!CertSrvBackupGetDynamicFileListW.
@@ -92,7 +92,7 @@ func CertSrvBackupGetDatabaseNamesW(hbc unsafe.Pointer, ppwszzAttachmentInformat
 // Minimum OS: windowsserver2003.
 func CertSrvBackupGetDynamicFileListW(hbc unsafe.Pointer, ppwszzFileList *foundation.PWSTR, pcbSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procCertSrvBackupGetDynamicFileListW.Addr(), uintptr(unsafe.Pointer(hbc)), uintptr(unsafe.Pointer(ppwszzFileList)), uintptr(unsafe.Pointer(pcbSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CertSrvBackupOpenFileW calls certadm!CertSrvBackupOpenFileW.
@@ -101,7 +101,7 @@ func CertSrvBackupGetDynamicFileListW(hbc unsafe.Pointer, ppwszzFileList *founda
 func CertSrvBackupOpenFileW(hbc unsafe.Pointer, pwszAttachmentName string, cbReadHintSize uint32, pliFileSize *int64) error {
 	_pwszAttachmentName := win32.UTF16Ptr(pwszAttachmentName)
 	r1, _, _ := syscall.SyscallN(procCertSrvBackupOpenFileW.Addr(), uintptr(unsafe.Pointer(hbc)), uintptr(unsafe.Pointer(_pwszAttachmentName)), uintptr(cbReadHintSize), uintptr(unsafe.Pointer(pliFileSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CertSrvBackupPrepareW calls certadm!CertSrvBackupPrepareW.
@@ -110,7 +110,7 @@ func CertSrvBackupOpenFileW(hbc unsafe.Pointer, pwszAttachmentName string, cbRea
 func CertSrvBackupPrepareW(pwszServerName string, grbitJet uint32, dwBackupFlags CSBACKUP_TYPE, phbc *unsafe.Pointer) error {
 	_pwszServerName := win32.UTF16Ptr(pwszServerName)
 	r1, _, _ := syscall.SyscallN(procCertSrvBackupPrepareW.Addr(), uintptr(unsafe.Pointer(_pwszServerName)), uintptr(grbitJet), uintptr(dwBackupFlags), uintptr(unsafe.Pointer(phbc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CertSrvBackupRead calls certadm!CertSrvBackupRead.
@@ -118,7 +118,7 @@ func CertSrvBackupPrepareW(pwszServerName string, grbitJet uint32, dwBackupFlags
 // Minimum OS: windowsserver2003.
 func CertSrvBackupRead(hbc unsafe.Pointer, pvBuffer unsafe.Pointer, cbBuffer uint32, pcbRead *uint32) error {
 	r1, _, _ := syscall.SyscallN(procCertSrvBackupRead.Addr(), uintptr(unsafe.Pointer(hbc)), uintptr(unsafe.Pointer(pvBuffer)), uintptr(cbBuffer), uintptr(unsafe.Pointer(pcbRead)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CertSrvBackupTruncateLogs calls certadm!CertSrvBackupTruncateLogs.
@@ -126,7 +126,7 @@ func CertSrvBackupRead(hbc unsafe.Pointer, pvBuffer unsafe.Pointer, cbBuffer uin
 // Minimum OS: windowsserver2003.
 func CertSrvBackupTruncateLogs(hbc unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procCertSrvBackupTruncateLogs.Addr(), uintptr(unsafe.Pointer(hbc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CertSrvIsServerOnlineW calls certadm!CertSrvIsServerOnlineW.
@@ -135,7 +135,7 @@ func CertSrvBackupTruncateLogs(hbc unsafe.Pointer) error {
 func CertSrvIsServerOnlineW(pwszServerName string, pfServerOnline *foundation.BOOL) error {
 	_pwszServerName := win32.UTF16Ptr(pwszServerName)
 	r1, _, _ := syscall.SyscallN(procCertSrvIsServerOnlineW.Addr(), uintptr(unsafe.Pointer(_pwszServerName)), uintptr(unsafe.Pointer(pfServerOnline)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CertSrvRestoreEnd calls certadm!CertSrvRestoreEnd.
@@ -143,7 +143,7 @@ func CertSrvIsServerOnlineW(pwszServerName string, pfServerOnline *foundation.BO
 // Minimum OS: windowsserver2003.
 func CertSrvRestoreEnd(hbc unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procCertSrvRestoreEnd.Addr(), uintptr(unsafe.Pointer(hbc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CertSrvRestoreGetDatabaseLocationsW calls certadm!CertSrvRestoreGetDatabaseLocationsW.
@@ -151,7 +151,7 @@ func CertSrvRestoreEnd(hbc unsafe.Pointer) error {
 // Minimum OS: windowsserver2003.
 func CertSrvRestoreGetDatabaseLocationsW(hbc unsafe.Pointer, ppwszzDatabaseLocationList *foundation.PWSTR, pcbSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procCertSrvRestoreGetDatabaseLocationsW.Addr(), uintptr(unsafe.Pointer(hbc)), uintptr(unsafe.Pointer(ppwszzDatabaseLocationList)), uintptr(unsafe.Pointer(pcbSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CertSrvRestorePrepareW calls certadm!CertSrvRestorePrepareW.
@@ -160,7 +160,7 @@ func CertSrvRestoreGetDatabaseLocationsW(hbc unsafe.Pointer, ppwszzDatabaseLocat
 func CertSrvRestorePrepareW(pwszServerName string, dwRestoreFlags uint32, phbc *unsafe.Pointer) error {
 	_pwszServerName := win32.UTF16Ptr(pwszServerName)
 	r1, _, _ := syscall.SyscallN(procCertSrvRestorePrepareW.Addr(), uintptr(unsafe.Pointer(_pwszServerName)), uintptr(dwRestoreFlags), uintptr(unsafe.Pointer(phbc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CertSrvRestoreRegisterComplete calls certadm!CertSrvRestoreRegisterComplete.
@@ -168,7 +168,7 @@ func CertSrvRestorePrepareW(pwszServerName string, dwRestoreFlags uint32, phbc *
 // Minimum OS: windowsserver2003.
 func CertSrvRestoreRegisterComplete(hbc unsafe.Pointer, hrRestoreState foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(procCertSrvRestoreRegisterComplete.Addr(), uintptr(unsafe.Pointer(hbc)), uintptr(hrRestoreState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CertSrvRestoreRegisterThroughFile calls certadm!CertSrvRestoreRegisterThroughFile.
@@ -179,7 +179,7 @@ func CertSrvRestoreRegisterThroughFile(hbc unsafe.Pointer, pwszCheckPointFilePat
 	_pwszLogPath := win32.UTF16Ptr(pwszLogPath)
 	_pwszBackupLogPath := win32.UTF16Ptr(pwszBackupLogPath)
 	r1, _, _ := syscall.SyscallN(procCertSrvRestoreRegisterThroughFile.Addr(), uintptr(unsafe.Pointer(hbc)), uintptr(unsafe.Pointer(_pwszCheckPointFilePath)), uintptr(unsafe.Pointer(_pwszLogPath)), uintptr(unsafe.Pointer(rgrstmap)), uintptr(crstmap), uintptr(unsafe.Pointer(_pwszBackupLogPath)), uintptr(genLow), uintptr(genHigh))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CertSrvRestoreRegisterW calls certadm!CertSrvRestoreRegisterW.
@@ -190,7 +190,7 @@ func CertSrvRestoreRegisterW(hbc unsafe.Pointer, pwszCheckPointFilePath string, 
 	_pwszLogPath := win32.UTF16Ptr(pwszLogPath)
 	_pwszBackupLogPath := win32.UTF16Ptr(pwszBackupLogPath)
 	r1, _, _ := syscall.SyscallN(procCertSrvRestoreRegisterW.Addr(), uintptr(unsafe.Pointer(hbc)), uintptr(unsafe.Pointer(_pwszCheckPointFilePath)), uintptr(unsafe.Pointer(_pwszLogPath)), uintptr(unsafe.Pointer(rgrstmap)), uintptr(crstmap), uintptr(unsafe.Pointer(_pwszBackupLogPath)), uintptr(genLow), uintptr(genHigh))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CertSrvServerControlW calls certadm!CertSrvServerControlW.
@@ -199,7 +199,7 @@ func CertSrvRestoreRegisterW(hbc unsafe.Pointer, pwszCheckPointFilePath string, 
 func CertSrvServerControlW(pwszServerName string, dwControlFlags uint32, pcbOut *uint32, ppbOut **byte) error {
 	_pwszServerName := win32.UTF16Ptr(pwszServerName)
 	r1, _, _ := syscall.SyscallN(procCertSrvServerControlW.Addr(), uintptr(unsafe.Pointer(_pwszServerName)), uintptr(dwControlFlags), uintptr(unsafe.Pointer(pcbOut)), uintptr(unsafe.Pointer(ppbOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PstAcquirePrivateKey calls certpoleng!PstAcquirePrivateKey.

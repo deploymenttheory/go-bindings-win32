@@ -59,7 +59,7 @@ var (
 // Minimum OS: windows10.0.19041.
 func DdqCancelDiagnosticRecordOperation(hSession HDIAGNOSTIC_DATA_QUERY_SESSION) error {
 	r1, _, _ := syscall.SyscallN(procDdqCancelDiagnosticRecordOperation.Addr(), uintptr(hSession))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DdqCloseSession calls DiagnosticDataQuery!DdqCloseSession.
@@ -67,7 +67,7 @@ func DdqCancelDiagnosticRecordOperation(hSession HDIAGNOSTIC_DATA_QUERY_SESSION)
 // Minimum OS: windows10.0.19041.
 func DdqCloseSession(hSession HDIAGNOSTIC_DATA_QUERY_SESSION) error {
 	r1, _, _ := syscall.SyscallN(procDdqCloseSession.Addr(), uintptr(hSession))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DdqCreateSession calls DiagnosticDataQuery!DdqCreateSession.
@@ -75,7 +75,7 @@ func DdqCloseSession(hSession HDIAGNOSTIC_DATA_QUERY_SESSION) error {
 // Minimum OS: windows10.0.19041.
 func DdqCreateSession(accessLevel DdqAccessLevel, hSession *HDIAGNOSTIC_DATA_QUERY_SESSION) error {
 	r1, _, _ := syscall.SyscallN(procDdqCreateSession.Addr(), uintptr(accessLevel), uintptr(unsafe.Pointer(hSession)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DdqExtractDiagnosticReport calls DiagnosticDataQuery!DdqExtractDiagnosticReport.
@@ -85,7 +85,7 @@ func DdqExtractDiagnosticReport(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, reportS
 	_reportKey := win32.UTF16Ptr(reportKey)
 	_destinationPath := win32.UTF16Ptr(destinationPath)
 	r1, _, _ := syscall.SyscallN(procDdqExtractDiagnosticReport.Addr(), uintptr(hSession), uintptr(reportStoreType), uintptr(unsafe.Pointer(_reportKey)), uintptr(unsafe.Pointer(_destinationPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DdqFreeDiagnosticRecordLocaleTags calls DiagnosticDataQuery!DdqFreeDiagnosticRecordLocaleTags.
@@ -93,7 +93,7 @@ func DdqExtractDiagnosticReport(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, reportS
 // Minimum OS: windows10.0.19041.
 func DdqFreeDiagnosticRecordLocaleTags(hTagDescription HDIAGNOSTIC_EVENT_TAG_DESCRIPTION) error {
 	r1, _, _ := syscall.SyscallN(procDdqFreeDiagnosticRecordLocaleTags.Addr(), uintptr(hTagDescription))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DdqFreeDiagnosticRecordPage calls DiagnosticDataQuery!DdqFreeDiagnosticRecordPage.
@@ -101,7 +101,7 @@ func DdqFreeDiagnosticRecordLocaleTags(hTagDescription HDIAGNOSTIC_EVENT_TAG_DES
 // Minimum OS: windows10.0.19041.
 func DdqFreeDiagnosticRecordPage(hRecord HDIAGNOSTIC_RECORD) error {
 	r1, _, _ := syscall.SyscallN(procDdqFreeDiagnosticRecordPage.Addr(), uintptr(hRecord))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DdqFreeDiagnosticRecordProducerCategories calls DiagnosticDataQuery!DdqFreeDiagnosticRecordProducerCategories.
@@ -109,7 +109,7 @@ func DdqFreeDiagnosticRecordPage(hRecord HDIAGNOSTIC_RECORD) error {
 // Minimum OS: windows10.0.19041.
 func DdqFreeDiagnosticRecordProducerCategories(hCategoryDescription HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION) error {
 	r1, _, _ := syscall.SyscallN(procDdqFreeDiagnosticRecordProducerCategories.Addr(), uintptr(hCategoryDescription))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DdqFreeDiagnosticRecordProducers calls DiagnosticDataQuery!DdqFreeDiagnosticRecordProducers.
@@ -117,7 +117,7 @@ func DdqFreeDiagnosticRecordProducerCategories(hCategoryDescription HDIAGNOSTIC_
 // Minimum OS: windows10.0.19041.
 func DdqFreeDiagnosticRecordProducers(hProducerDescription HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION) error {
 	r1, _, _ := syscall.SyscallN(procDdqFreeDiagnosticRecordProducers.Addr(), uintptr(hProducerDescription))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DdqFreeDiagnosticReport calls DiagnosticDataQuery!DdqFreeDiagnosticReport.
@@ -125,7 +125,7 @@ func DdqFreeDiagnosticRecordProducers(hProducerDescription HDIAGNOSTIC_EVENT_PRO
 // Minimum OS: windows10.0.19041.
 func DdqFreeDiagnosticReport(hReport HDIAGNOSTIC_REPORT) error {
 	r1, _, _ := syscall.SyscallN(procDdqFreeDiagnosticReport.Addr(), uintptr(hReport))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DdqGetDiagnosticDataAccessLevelAllowed calls DiagnosticDataQuery!DdqGetDiagnosticDataAccessLevelAllowed.
@@ -133,7 +133,7 @@ func DdqFreeDiagnosticReport(hReport HDIAGNOSTIC_REPORT) error {
 // Minimum OS: windows10.0.19041.
 func DdqGetDiagnosticDataAccessLevelAllowed(accessLevel *DdqAccessLevel) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticDataAccessLevelAllowed.Addr(), uintptr(unsafe.Pointer(accessLevel)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DdqGetDiagnosticRecordAtIndex calls DiagnosticDataQuery!DdqGetDiagnosticRecordAtIndex.
@@ -141,7 +141,7 @@ func DdqGetDiagnosticDataAccessLevelAllowed(accessLevel *DdqAccessLevel) error {
 // Minimum OS: windows10.0.19041.
 func DdqGetDiagnosticRecordAtIndex(hRecord HDIAGNOSTIC_RECORD, index uint32, record *DIAGNOSTIC_DATA_RECORD) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordAtIndex.Addr(), uintptr(hRecord), uintptr(index), uintptr(unsafe.Pointer(record)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DdqGetDiagnosticRecordBinaryDistribution calls DiagnosticDataQuery!DdqGetDiagnosticRecordBinaryDistribution.
@@ -153,7 +153,7 @@ func DdqGetDiagnosticRecordBinaryDistribution(hSession HDIAGNOSTIC_DATA_QUERY_SE
 		_producerNames = &producerNames[0]
 	}
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordBinaryDistribution.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(_producerNames)), uintptr(len(producerNames)), uintptr(topNBinaries), uintptr(unsafe.Pointer(binaryStats)), uintptr(unsafe.Pointer(statCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DdqGetDiagnosticRecordCategoryAtIndex calls DiagnosticDataQuery!DdqGetDiagnosticRecordCategoryAtIndex.
@@ -161,7 +161,7 @@ func DdqGetDiagnosticRecordBinaryDistribution(hSession HDIAGNOSTIC_DATA_QUERY_SE
 // Minimum OS: windows10.0.19041.
 func DdqGetDiagnosticRecordCategoryAtIndex(hCategoryDescription HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION, index uint32, categoryDescription *DIAGNOSTIC_DATA_EVENT_CATEGORY_DESCRIPTION) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordCategoryAtIndex.Addr(), uintptr(hCategoryDescription), uintptr(index), uintptr(unsafe.Pointer(categoryDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DdqGetDiagnosticRecordCategoryCount calls DiagnosticDataQuery!DdqGetDiagnosticRecordCategoryCount.
@@ -169,7 +169,7 @@ func DdqGetDiagnosticRecordCategoryAtIndex(hCategoryDescription HDIAGNOSTIC_EVEN
 // Minimum OS: windows10.0.19041.
 func DdqGetDiagnosticRecordCategoryCount(hCategoryDescription HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION, categoryDescriptionCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordCategoryCount.Addr(), uintptr(hCategoryDescription), uintptr(unsafe.Pointer(categoryDescriptionCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DdqGetDiagnosticRecordCount calls DiagnosticDataQuery!DdqGetDiagnosticRecordCount.
@@ -177,7 +177,7 @@ func DdqGetDiagnosticRecordCategoryCount(hCategoryDescription HDIAGNOSTIC_EVENT_
 // Minimum OS: windows10.0.19041.
 func DdqGetDiagnosticRecordCount(hRecord HDIAGNOSTIC_RECORD, recordCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordCount.Addr(), uintptr(hRecord), uintptr(unsafe.Pointer(recordCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DdqGetDiagnosticRecordLocaleTagAtIndex calls DiagnosticDataQuery!DdqGetDiagnosticRecordLocaleTagAtIndex.
@@ -185,7 +185,7 @@ func DdqGetDiagnosticRecordCount(hRecord HDIAGNOSTIC_RECORD, recordCount *uint32
 // Minimum OS: windows10.0.19041.
 func DdqGetDiagnosticRecordLocaleTagAtIndex(hTagDescription HDIAGNOSTIC_EVENT_TAG_DESCRIPTION, index uint32, tagDescription *DIAGNOSTIC_DATA_EVENT_TAG_DESCRIPTION) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordLocaleTagAtIndex.Addr(), uintptr(hTagDescription), uintptr(index), uintptr(unsafe.Pointer(tagDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DdqGetDiagnosticRecordLocaleTagCount calls DiagnosticDataQuery!DdqGetDiagnosticRecordLocaleTagCount.
@@ -193,7 +193,7 @@ func DdqGetDiagnosticRecordLocaleTagAtIndex(hTagDescription HDIAGNOSTIC_EVENT_TA
 // Minimum OS: windows10.0.19041.
 func DdqGetDiagnosticRecordLocaleTagCount(hTagDescription HDIAGNOSTIC_EVENT_TAG_DESCRIPTION, tagDescriptionCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordLocaleTagCount.Addr(), uintptr(hTagDescription), uintptr(unsafe.Pointer(tagDescriptionCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DdqGetDiagnosticRecordLocaleTags calls DiagnosticDataQuery!DdqGetDiagnosticRecordLocaleTags.
@@ -202,7 +202,7 @@ func DdqGetDiagnosticRecordLocaleTagCount(hTagDescription HDIAGNOSTIC_EVENT_TAG_
 func DdqGetDiagnosticRecordLocaleTags(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, locale string, hTagDescription *HDIAGNOSTIC_EVENT_TAG_DESCRIPTION) error {
 	_locale := win32.UTF16Ptr(locale)
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordLocaleTags.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(_locale)), uintptr(unsafe.Pointer(hTagDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DdqGetDiagnosticRecordPage calls DiagnosticDataQuery!DdqGetDiagnosticRecordPage.
@@ -210,7 +210,7 @@ func DdqGetDiagnosticRecordLocaleTags(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, l
 // Minimum OS: windows10.0.19041.
 func DdqGetDiagnosticRecordPage(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, searchCriteria *DIAGNOSTIC_DATA_SEARCH_CRITERIA, offset uint32, pageRecordCount uint32, baseRowId int64, hRecord *HDIAGNOSTIC_RECORD) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordPage.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(searchCriteria)), uintptr(offset), uintptr(pageRecordCount), uintptr(baseRowId), uintptr(unsafe.Pointer(hRecord)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DdqGetDiagnosticRecordPayload calls DiagnosticDataQuery!DdqGetDiagnosticRecordPayload.
@@ -218,7 +218,7 @@ func DdqGetDiagnosticRecordPage(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, searchC
 // Minimum OS: windows10.0.19041.
 func DdqGetDiagnosticRecordPayload(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, rowId int64, payload *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordPayload.Addr(), uintptr(hSession), uintptr(rowId), uintptr(unsafe.Pointer(payload)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DdqGetDiagnosticRecordProducerAtIndex calls DiagnosticDataQuery!DdqGetDiagnosticRecordProducerAtIndex.
@@ -226,7 +226,7 @@ func DdqGetDiagnosticRecordPayload(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, rowI
 // Minimum OS: windows10.0.19041.
 func DdqGetDiagnosticRecordProducerAtIndex(hProducerDescription HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION, index uint32, producerDescription *DIAGNOSTIC_DATA_EVENT_PRODUCER_DESCRIPTION) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordProducerAtIndex.Addr(), uintptr(hProducerDescription), uintptr(index), uintptr(unsafe.Pointer(producerDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DdqGetDiagnosticRecordProducerCategories calls DiagnosticDataQuery!DdqGetDiagnosticRecordProducerCategories.
@@ -235,7 +235,7 @@ func DdqGetDiagnosticRecordProducerAtIndex(hProducerDescription HDIAGNOSTIC_EVEN
 func DdqGetDiagnosticRecordProducerCategories(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, producerName string, hCategoryDescription *HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION) error {
 	_producerName := win32.UTF16Ptr(producerName)
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordProducerCategories.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(_producerName)), uintptr(unsafe.Pointer(hCategoryDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DdqGetDiagnosticRecordProducerCount calls DiagnosticDataQuery!DdqGetDiagnosticRecordProducerCount.
@@ -243,7 +243,7 @@ func DdqGetDiagnosticRecordProducerCategories(hSession HDIAGNOSTIC_DATA_QUERY_SE
 // Minimum OS: windows10.0.19041.
 func DdqGetDiagnosticRecordProducerCount(hProducerDescription HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION, producerDescriptionCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordProducerCount.Addr(), uintptr(hProducerDescription), uintptr(unsafe.Pointer(producerDescriptionCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DdqGetDiagnosticRecordProducers calls DiagnosticDataQuery!DdqGetDiagnosticRecordProducers.
@@ -251,7 +251,7 @@ func DdqGetDiagnosticRecordProducerCount(hProducerDescription HDIAGNOSTIC_EVENT_
 // Minimum OS: windows10.0.19041.
 func DdqGetDiagnosticRecordProducers(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, hProducerDescription *HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordProducers.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(hProducerDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DdqGetDiagnosticRecordStats calls DiagnosticDataQuery!DdqGetDiagnosticRecordStats.
@@ -259,7 +259,7 @@ func DdqGetDiagnosticRecordProducers(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, hP
 // Minimum OS: windows10.0.19041.
 func DdqGetDiagnosticRecordStats(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, searchCriteria *DIAGNOSTIC_DATA_SEARCH_CRITERIA, recordCount *uint32, minRowId *int64, maxRowId *int64) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordStats.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(searchCriteria)), uintptr(unsafe.Pointer(recordCount)), uintptr(unsafe.Pointer(minRowId)), uintptr(unsafe.Pointer(maxRowId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DdqGetDiagnosticRecordSummary calls DiagnosticDataQuery!DdqGetDiagnosticRecordSummary.
@@ -271,7 +271,7 @@ func DdqGetDiagnosticRecordSummary(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, prod
 		_producerNames = &producerNames[0]
 	}
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordSummary.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(_producerNames)), uintptr(len(producerNames)), uintptr(unsafe.Pointer(generalStats)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DdqGetDiagnosticRecordTagDistribution calls DiagnosticDataQuery!DdqGetDiagnosticRecordTagDistribution.
@@ -283,7 +283,7 @@ func DdqGetDiagnosticRecordTagDistribution(hSession HDIAGNOSTIC_DATA_QUERY_SESSI
 		_producerNames = &producerNames[0]
 	}
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordTagDistribution.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(_producerNames)), uintptr(len(producerNames)), uintptr(unsafe.Pointer(tagStats)), uintptr(unsafe.Pointer(statCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DdqGetDiagnosticReport calls DiagnosticDataQuery!DdqGetDiagnosticReport.
@@ -291,7 +291,7 @@ func DdqGetDiagnosticRecordTagDistribution(hSession HDIAGNOSTIC_DATA_QUERY_SESSI
 // Minimum OS: windows10.0.19041.
 func DdqGetDiagnosticReport(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, reportStoreType uint32, hReport *HDIAGNOSTIC_REPORT) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticReport.Addr(), uintptr(hSession), uintptr(reportStoreType), uintptr(unsafe.Pointer(hReport)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DdqGetDiagnosticReportAtIndex calls DiagnosticDataQuery!DdqGetDiagnosticReportAtIndex.
@@ -299,7 +299,7 @@ func DdqGetDiagnosticReport(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, reportStore
 // Minimum OS: windows10.0.19041.
 func DdqGetDiagnosticReportAtIndex(hReport HDIAGNOSTIC_REPORT, index uint32, report *DIAGNOSTIC_REPORT_DATA) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticReportAtIndex.Addr(), uintptr(hReport), uintptr(index), uintptr(unsafe.Pointer(report)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DdqGetDiagnosticReportCount calls DiagnosticDataQuery!DdqGetDiagnosticReportCount.
@@ -307,7 +307,7 @@ func DdqGetDiagnosticReportAtIndex(hReport HDIAGNOSTIC_REPORT, index uint32, rep
 // Minimum OS: windows10.0.19041.
 func DdqGetDiagnosticReportCount(hReport HDIAGNOSTIC_REPORT, reportCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticReportCount.Addr(), uintptr(hReport), uintptr(unsafe.Pointer(reportCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DdqGetDiagnosticReportStoreReportCount calls DiagnosticDataQuery!DdqGetDiagnosticReportStoreReportCount.
@@ -315,7 +315,7 @@ func DdqGetDiagnosticReportCount(hReport HDIAGNOSTIC_REPORT, reportCount *uint32
 // Minimum OS: windows10.0.19041.
 func DdqGetDiagnosticReportStoreReportCount(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, reportStoreType uint32, reportCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticReportStoreReportCount.Addr(), uintptr(hSession), uintptr(reportStoreType), uintptr(unsafe.Pointer(reportCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DdqGetSessionAccessLevel calls DiagnosticDataQuery!DdqGetSessionAccessLevel.
@@ -323,7 +323,7 @@ func DdqGetDiagnosticReportStoreReportCount(hSession HDIAGNOSTIC_DATA_QUERY_SESS
 // Minimum OS: windows10.0.19041.
 func DdqGetSessionAccessLevel(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, accessLevel *DdqAccessLevel) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetSessionAccessLevel.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(accessLevel)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DdqGetTranscriptConfiguration calls DiagnosticDataQuery!DdqGetTranscriptConfiguration.
@@ -331,7 +331,7 @@ func DdqGetSessionAccessLevel(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, accessLev
 // Minimum OS: windows10.0.19041.
 func DdqGetTranscriptConfiguration(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, currentConfig *DIAGNOSTIC_DATA_EVENT_TRANSCRIPT_CONFIGURATION) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetTranscriptConfiguration.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(currentConfig)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DdqIsDiagnosticRecordSampledIn calls DiagnosticDataQuery!DdqIsDiagnosticRecordSampledIn.
@@ -341,7 +341,7 @@ func DdqIsDiagnosticRecordSampledIn(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, pro
 	_providerName := win32.UTF16Ptr(providerName)
 	_eventName := win32.UTF16Ptr(eventName)
 	r1, _, _ := syscall.SyscallN(procDdqIsDiagnosticRecordSampledIn.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(providerGroup)), uintptr(unsafe.Pointer(providerId)), uintptr(unsafe.Pointer(_providerName)), uintptr(unsafe.Pointer(eventId)), uintptr(unsafe.Pointer(_eventName)), uintptr(unsafe.Pointer(eventVersion)), uintptr(unsafe.Pointer(eventKeywords)), uintptr(unsafe.Pointer(isSampledIn)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DdqSetTranscriptConfiguration calls DiagnosticDataQuery!DdqSetTranscriptConfiguration.
@@ -349,5 +349,5 @@ func DdqIsDiagnosticRecordSampledIn(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, pro
 // Minimum OS: windows10.0.19041.
 func DdqSetTranscriptConfiguration(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, desiredConfig *DIAGNOSTIC_DATA_EVENT_TRANSCRIPT_CONFIGURATION) error {
 	r1, _, _ := syscall.SyscallN(procDdqSetTranscriptConfiguration.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(desiredConfig)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

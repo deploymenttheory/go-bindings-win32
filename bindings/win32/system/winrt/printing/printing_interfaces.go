@@ -28,13 +28,13 @@ var IID_IPrintDocumentPageSource = win32.GUID{Data1: 0xa96bb1db, Data2: 0x172e, 
 // GetPreviewPageCollection dispatches through IPrintDocumentPageSource's vtable slot 3.
 func (self *IPrintDocumentPageSource) GetPreviewPageCollection(docPackageTarget *storagexpsprinting.IPrintDocumentPackageTarget, docPageCollection **IPrintPreviewPageCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(docPackageTarget)), uintptr(unsafe.Pointer(docPageCollection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MakeDocument dispatches through IPrintDocumentPageSource's vtable slot 4.
 func (self *IPrintDocumentPageSource) MakeDocument(printTaskOptions *systemwinrt.IInspectable, docPackageTarget *storagexpsprinting.IPrintDocumentPackageTarget) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(printTaskOptions)), uintptr(unsafe.Pointer(docPackageTarget)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPrintManagerInterop: https://learn.microsoft.com/windows/win32/api/printmanagerinterop/nn-printmanagerinterop-iprintmanagerinterop
@@ -50,14 +50,14 @@ var IID_IPrintManagerInterop = win32.GUID{Data1: 0xc5435a42, Data2: 0x8d43, Data
 func (self *IPrintManagerInterop) GetForWindow(appWindow foundation.HWND, riid *win32.GUID) (*win32.IUnknown, error) {
 	var _printManager *win32.IUnknown
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_printManager)))
-	return _printManager, win32.HRESULTError(int32(r1))
+	return _printManager, win32.ErrIfFailed(int32(r1))
 }
 
 // ShowPrintUIForWindowAsync dispatches through IPrintManagerInterop's vtable slot 7.
 func (self *IPrintManagerInterop) ShowPrintUIForWindowAsync(appWindow foundation.HWND, riid *win32.GUID) (*win32.IUnknown, error) {
 	var _asyncOperation *win32.IUnknown
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_asyncOperation)))
-	return _asyncOperation, win32.HRESULTError(int32(r1))
+	return _asyncOperation, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 0b31cc62-d7ec-4747-9d6e-f2537d870f2b
@@ -71,7 +71,7 @@ var IID_IPrintPreviewPageCollection = win32.GUID{Data1: 0x0b31cc62, Data2: 0xd7e
 // Paginate dispatches through IPrintPreviewPageCollection's vtable slot 3.
 func (self *IPrintPreviewPageCollection) Paginate(currentJobPage uint32, printTaskOptions *systemwinrt.IInspectable) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(currentJobPage), uintptr(unsafe.Pointer(printTaskOptions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: c056be0a-9ee2-450a-9823-964f0006f2bb
@@ -86,21 +86,21 @@ var IID_IPrintWorkflowConfigurationNative = win32.GUID{Data1: 0xc056be0a, Data2:
 func (self *IPrintWorkflowConfigurationNative) Get_PrinterQueue() (*graphicsprinting.IPrinterQueue, error) {
 	var _value *graphicsprinting.IPrinterQueue
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DriverProperties dispatches through IPrintWorkflowConfigurationNative's vtable slot 4.
 func (self *IPrintWorkflowConfigurationNative) Get_DriverProperties() (*graphicsprinting.IPrinterPropertyBag, error) {
 	var _value *graphicsprinting.IPrinterPropertyBag
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UserProperties dispatches through IPrintWorkflowConfigurationNative's vtable slot 5.
 func (self *IPrintWorkflowConfigurationNative) Get_UserProperties() (*graphicsprinting.IPrinterPropertyBag, error) {
 	var _value *graphicsprinting.IPrinterPropertyBag
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 68c9e477-993e-4052-8ac6-454eff58db9d
@@ -114,14 +114,14 @@ var IID_IPrintWorkflowObjectModelSourceFileContentNative = win32.GUID{Data1: 0x6
 // StartXpsOMGeneration dispatches through IPrintWorkflowObjectModelSourceFileContentNative's vtable slot 3.
 func (self *IPrintWorkflowObjectModelSourceFileContentNative) StartXpsOMGeneration(receiver *IPrintWorkflowXpsReceiver) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(receiver)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ObjectFactory dispatches through IPrintWorkflowObjectModelSourceFileContentNative's vtable slot 4.
 func (self *IPrintWorkflowObjectModelSourceFileContentNative) Get_ObjectFactory() (*storagexps.IXpsOMObjectFactory1, error) {
 	var _value *storagexps.IXpsOMObjectFactory1
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 7d96bc74-9b54-4ca1-ad3a-979c3d44ddac
@@ -136,7 +136,7 @@ var IID_IPrintWorkflowXpsObjectModelTargetPackageNative = win32.GUID{Data1: 0x7d
 func (self *IPrintWorkflowXpsObjectModelTargetPackageNative) Get_DocumentPackageTarget() (*storagexps.IXpsDocumentPackageTarget, error) {
 	var _value *storagexps.IXpsDocumentPackageTarget
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 04097374-77b8-47f6-8167-aae29d4cf84b
@@ -150,34 +150,34 @@ var IID_IPrintWorkflowXpsReceiver = win32.GUID{Data1: 0x04097374, Data2: 0x77b8,
 // SetDocumentSequencePrintTicket dispatches through IPrintWorkflowXpsReceiver's vtable slot 3.
 func (self *IPrintWorkflowXpsReceiver) SetDocumentSequencePrintTicket(documentSequencePrintTicket *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(documentSequencePrintTicket)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDocumentSequenceUri dispatches through IPrintWorkflowXpsReceiver's vtable slot 4.
 func (self *IPrintWorkflowXpsReceiver) SetDocumentSequenceUri(documentSequenceUri string) error {
 	_documentSequenceUri := win32.UTF16Ptr(documentSequenceUri)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_documentSequenceUri)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddDocumentData dispatches through IPrintWorkflowXpsReceiver's vtable slot 5.
 func (self *IPrintWorkflowXpsReceiver) AddDocumentData(documentId uint32, documentPrintTicket *systemcom.IStream, documentUri string) error {
 	_documentUri := win32.UTF16Ptr(documentUri)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(documentId), uintptr(unsafe.Pointer(documentPrintTicket)), uintptr(unsafe.Pointer(_documentUri)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddPage dispatches through IPrintWorkflowXpsReceiver's vtable slot 6.
 func (self *IPrintWorkflowXpsReceiver) AddPage(documentId uint32, pageId uint32, pageReference *storagexps.IXpsOMPageReference, pageUri string) error {
 	_pageUri := win32.UTF16Ptr(pageUri)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(documentId), uintptr(pageId), uintptr(unsafe.Pointer(pageReference)), uintptr(unsafe.Pointer(_pageUri)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Close dispatches through IPrintWorkflowXpsReceiver's vtable slot 7.
 func (self *IPrintWorkflowXpsReceiver) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 023bcc0c-dfab-4a61-b074-490c6995580d
@@ -191,7 +191,7 @@ var IID_IPrintWorkflowXpsReceiver2 = win32.GUID{Data1: 0x023bcc0c, Data2: 0xdfab
 // Failed dispatches through IPrintWorkflowXpsReceiver2's vtable slot 8.
 func (self *IPrintWorkflowXpsReceiver2) Failed(XpsError foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(XpsError))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPrinting3DManagerInterop: https://learn.microsoft.com/windows/win32/api/print3dmanagerinterop/nn-print3dmanagerinterop-iprinting3dmanagerinterop
@@ -207,12 +207,12 @@ var IID_IPrinting3DManagerInterop = win32.GUID{Data1: 0x9ca31010, Data2: 0x1484,
 func (self *IPrinting3DManagerInterop) GetForWindow(appWindow foundation.HWND, riid *win32.GUID) (*win32.IUnknown, error) {
 	var _printManager *win32.IUnknown
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_printManager)))
-	return _printManager, win32.HRESULTError(int32(r1))
+	return _printManager, win32.ErrIfFailed(int32(r1))
 }
 
 // ShowPrintUIForWindowAsync dispatches through IPrinting3DManagerInterop's vtable slot 7.
 func (self *IPrinting3DManagerInterop) ShowPrintUIForWindowAsync(appWindow foundation.HWND, riid *win32.GUID) (*win32.IUnknown, error) {
 	var _asyncOperation *win32.IUnknown
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_asyncOperation)))
-	return _asyncOperation, win32.HRESULTError(int32(r1))
+	return _asyncOperation, win32.ErrIfFailed(int32(r1))
 }

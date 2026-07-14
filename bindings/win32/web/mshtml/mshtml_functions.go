@@ -25,5 +25,5 @@ func DoPrivacyDlg(hwndOwner foundation.HWND, pszUrl string, pPrivacyEnum *IEnumP
 	_pszUrl := win32.UTF16Ptr(pszUrl)
 	_fReportAllSites := win32.Bool32(fReportAllSites)
 	r1, _, _ := syscall.SyscallN(procDoPrivacyDlg.Addr(), uintptr(hwndOwner), uintptr(unsafe.Pointer(_pszUrl)), uintptr(unsafe.Pointer(pPrivacyEnum)), uintptr(_fReportAllSites))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

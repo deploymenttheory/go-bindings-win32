@@ -24,5 +24,5 @@ var (
 func CreateDeviceAccessInstance(deviceInterfacePath string, desiredAccess uint32, createAsync **ICreateDeviceAccessAsync) error {
 	_deviceInterfacePath := win32.UTF16Ptr(deviceInterfacePath)
 	r1, _, _ := syscall.SyscallN(procCreateDeviceAccessInstance.Addr(), uintptr(unsafe.Pointer(_deviceInterfacePath)), uintptr(desiredAccess), uintptr(unsafe.Pointer(createAsync)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

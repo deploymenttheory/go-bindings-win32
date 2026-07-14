@@ -26,37 +26,37 @@ var IID_IEnhancedStorageACT = win32.GUID{Data1: 0x6e7781f4, Data2: 0xe0f2, Data3
 // Authorize dispatches through IEnhancedStorageACT's vtable slot 3.
 func (self *IEnhancedStorageACT) Authorize(hwndParent uint32, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Unauthorize dispatches through IEnhancedStorageACT's vtable slot 4.
 func (self *IEnhancedStorageACT) Unauthorize() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAuthorizationState dispatches through IEnhancedStorageACT's vtable slot 5.
 func (self *IEnhancedStorageACT) GetAuthorizationState(pState *ACT_AUTHORIZATION_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMatchingVolume dispatches through IEnhancedStorageACT's vtable slot 6.
 func (self *IEnhancedStorageACT) GetMatchingVolume(ppwszVolume *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwszVolume)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetUniqueIdentity dispatches through IEnhancedStorageACT's vtable slot 7.
 func (self *IEnhancedStorageACT) GetUniqueIdentity(ppwszIdentity *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwszIdentity)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSilos dispatches through IEnhancedStorageACT's vtable slot 8.
 func (self *IEnhancedStorageACT) GetSilos(pppIEnhancedStorageSilos ***IEnhancedStorageSilo, pcEnhancedStorageSilos *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pppIEnhancedStorageSilos)), uintptr(unsafe.Pointer(pcEnhancedStorageSilos)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEnhancedStorageACT2: https://learn.microsoft.com/windows/win32/api/ehstorapi/nn-ehstorapi-ienhancedstorageact2
@@ -71,13 +71,13 @@ var IID_IEnhancedStorageACT2 = win32.GUID{Data1: 0x4da57d2e, Data2: 0x8eb3, Data
 // GetDeviceName dispatches through IEnhancedStorageACT2's vtable slot 9.
 func (self *IEnhancedStorageACT2) GetDeviceName(ppwszDeviceName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwszDeviceName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsDeviceRemovable dispatches through IEnhancedStorageACT2's vtable slot 10.
 func (self *IEnhancedStorageACT2) IsDeviceRemovable(pIsDeviceRemovable *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsDeviceRemovable)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 022150a1-113d-11df-bb61-001aa01bbc58
@@ -91,19 +91,19 @@ var IID_IEnhancedStorageACT3 = win32.GUID{Data1: 0x022150a1, Data2: 0x113d, Data
 // UnauthorizeEx dispatches through IEnhancedStorageACT3's vtable slot 11.
 func (self *IEnhancedStorageACT3) UnauthorizeEx(dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsQueueFrozen dispatches through IEnhancedStorageACT3's vtable slot 12.
 func (self *IEnhancedStorageACT3) IsQueueFrozen(pIsQueueFrozen *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsQueueFrozen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetShellExtSupport dispatches through IEnhancedStorageACT3's vtable slot 13.
 func (self *IEnhancedStorageACT3) GetShellExtSupport(pShellExtSupport *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pShellExtSupport)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEnhancedStorageSilo: https://learn.microsoft.com/windows/win32/api/ehstorapi/nn-ehstorapi-ienhancedstoragesilo
@@ -118,13 +118,13 @@ var IID_IEnhancedStorageSilo = win32.GUID{Data1: 0x5aef78c6, Data2: 0x2242, Data
 // GetInfo dispatches through IEnhancedStorageSilo's vtable slot 3.
 func (self *IEnhancedStorageSilo) GetInfo(pSiloInfo *SILO_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSiloInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetActions dispatches through IEnhancedStorageSilo's vtable slot 4.
 func (self *IEnhancedStorageSilo) GetActions(pppIEnhancedStorageSiloActions ***IEnhancedStorageSiloAction, pcEnhancedStorageSiloActions *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pppIEnhancedStorageSiloActions)), uintptr(unsafe.Pointer(pcEnhancedStorageSiloActions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendCommand dispatches through IEnhancedStorageSilo's vtable slot 5.
@@ -134,19 +134,19 @@ func (self *IEnhancedStorageSilo) SendCommand(Command byte, pbCommandBuffer []by
 		_pbCommandBuffer = &pbCommandBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Command), uintptr(unsafe.Pointer(_pbCommandBuffer)), uintptr(len(pbCommandBuffer)), uintptr(unsafe.Pointer(pbResponseBuffer)), uintptr(unsafe.Pointer(pcbResponseBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPortableDevice dispatches through IEnhancedStorageSilo's vtable slot 6.
 func (self *IEnhancedStorageSilo) GetPortableDevice(ppIPortableDevice **devicesportabledevices.IPortableDevice) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIPortableDevice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDevicePath dispatches through IEnhancedStorageSilo's vtable slot 7.
 func (self *IEnhancedStorageSilo) GetDevicePath(ppwszSiloDevicePath *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwszSiloDevicePath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEnhancedStorageSiloAction: https://learn.microsoft.com/windows/win32/api/ehstorapi/nn-ehstorapi-ienhancedstoragesiloaction
@@ -161,19 +161,19 @@ var IID_IEnhancedStorageSiloAction = win32.GUID{Data1: 0xb6f7f311, Data2: 0x206f
 // GetName dispatches through IEnhancedStorageSiloAction's vtable slot 3.
 func (self *IEnhancedStorageSiloAction) GetName(ppwszActionName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwszActionName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDescription dispatches through IEnhancedStorageSiloAction's vtable slot 4.
 func (self *IEnhancedStorageSiloAction) GetDescription(ppwszActionDescription *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwszActionDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Invoke dispatches through IEnhancedStorageSiloAction's vtable slot 5.
 func (self *IEnhancedStorageSiloAction) Invoke() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumEnhancedStorageACT: https://learn.microsoft.com/windows/win32/api/ehstorapi/nn-ehstorapi-ienumenhancedstorageact
@@ -188,12 +188,12 @@ var IID_IEnumEnhancedStorageACT = win32.GUID{Data1: 0x09b224bd, Data2: 0x1335, D
 // GetACTs dispatches through IEnumEnhancedStorageACT's vtable slot 3.
 func (self *IEnumEnhancedStorageACT) GetACTs(pppIEnhancedStorageACTs ***IEnhancedStorageACT, pcEnhancedStorageACTs *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pppIEnhancedStorageACTs)), uintptr(unsafe.Pointer(pcEnhancedStorageACTs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMatchingACT dispatches through IEnumEnhancedStorageACT's vtable slot 4.
 func (self *IEnumEnhancedStorageACT) GetMatchingACT(szVolume string, ppIEnhancedStorageACT **IEnhancedStorageACT) error {
 	_szVolume := win32.UTF16Ptr(szVolume)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szVolume)), uintptr(unsafe.Pointer(ppIEnhancedStorageACT)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

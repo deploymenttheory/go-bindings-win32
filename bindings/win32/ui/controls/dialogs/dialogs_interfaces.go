@@ -26,19 +26,19 @@ var IID_IPrintDialogCallback = win32.GUID{Data1: 0x5852a2c3, Data2: 0x6530, Data
 // InitDone dispatches through IPrintDialogCallback's vtable slot 3.
 func (self *IPrintDialogCallback) InitDone() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SelectionChange dispatches through IPrintDialogCallback's vtable slot 4.
 func (self *IPrintDialogCallback) SelectionChange() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HandleMessage dispatches through IPrintDialogCallback's vtable slot 5.
 func (self *IPrintDialogCallback) HandleMessage(hDlg foundation.HWND, uMsg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM, pResult *foundation.LRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hDlg), uintptr(uMsg), uintptr(wParam), uintptr(lParam), uintptr(unsafe.Pointer(pResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPrintDialogServices: https://learn.microsoft.com/windows/win32/api/commdlg/nn-commdlg-iprintdialogservices
@@ -53,17 +53,17 @@ var IID_IPrintDialogServices = win32.GUID{Data1: 0x509aaeda, Data2: 0x5639, Data
 // GetCurrentDevMode dispatches through IPrintDialogServices's vtable slot 3.
 func (self *IPrintDialogServices) GetCurrentDevMode(pDevMode *graphicsgdi.DEVMODEA, pcbSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevMode)), uintptr(unsafe.Pointer(pcbSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentPrinterName dispatches through IPrintDialogServices's vtable slot 4.
 func (self *IPrintDialogServices) GetCurrentPrinterName(pPrinterName foundation.PWSTR, pcchSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPrinterName)), uintptr(unsafe.Pointer(pcchSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentPortName dispatches through IPrintDialogServices's vtable slot 5.
 func (self *IPrintDialogServices) GetCurrentPortName(pPortName foundation.PWSTR, pcchSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPortName)), uintptr(unsafe.Pointer(pcchSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

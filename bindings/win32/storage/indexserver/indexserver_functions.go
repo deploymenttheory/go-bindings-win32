@@ -29,7 +29,7 @@ var (
 // Minimum OS: windows5.0.
 func BindIFilterFromStorage(pStg *systemcomstructuredstorage.IStorage, pUnkOuter *systemcom.IUnknown, ppIUnk *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procBindIFilterFromStorage.Addr(), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(ppIUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BindIFilterFromStream calls query!BindIFilterFromStream.
@@ -37,7 +37,7 @@ func BindIFilterFromStorage(pStg *systemcomstructuredstorage.IStorage, pUnkOuter
 // Minimum OS: windows5.0.
 func BindIFilterFromStream(pStm *systemcom.IStream, pUnkOuter *systemcom.IUnknown, ppIUnk *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procBindIFilterFromStream.Addr(), uintptr(unsafe.Pointer(pStm)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(ppIUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LoadIFilter calls query!LoadIFilter.
@@ -46,12 +46,12 @@ func BindIFilterFromStream(pStm *systemcom.IStream, pUnkOuter *systemcom.IUnknow
 func LoadIFilter(pwcsPath string, pUnkOuter *systemcom.IUnknown, ppIUnk *unsafe.Pointer) error {
 	_pwcsPath := win32.UTF16Ptr(pwcsPath)
 	r1, _, _ := syscall.SyscallN(procLoadIFilter.Addr(), uintptr(unsafe.Pointer(_pwcsPath)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(ppIUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LoadIFilterEx calls query!LoadIFilterEx.
 func LoadIFilterEx(pwcsPath string, dwFlags uint32, riid *win32.GUID, ppIUnk **win32.IUnknown) error {
 	_pwcsPath := win32.UTF16Ptr(pwcsPath)
 	r1, _, _ := syscall.SyscallN(procLoadIFilterEx.Addr(), uintptr(unsafe.Pointer(_pwcsPath)), uintptr(dwFlags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppIUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

@@ -25,7 +25,7 @@ var IID_IPrintDocumentPackageStatusEvent = win32.GUID{Data1: 0xed90c8ad, Data2: 
 // PackageStatusUpdated dispatches through IPrintDocumentPackageStatusEvent's vtable slot 7.
 func (self *IPrintDocumentPackageStatusEvent) PackageStatusUpdated(packageStatus *PrintDocumentPackageStatus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(packageStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPrintDocumentPackageTarget: https://learn.microsoft.com/windows/win32/api/documenttarget/nn-documenttarget-iprintdocumentpackagetarget
@@ -40,19 +40,19 @@ var IID_IPrintDocumentPackageTarget = win32.GUID{Data1: 0x1b8efec4, Data2: 0x301
 // GetPackageTargetTypes dispatches through IPrintDocumentPackageTarget's vtable slot 3.
 func (self *IPrintDocumentPackageTarget) GetPackageTargetTypes(targetCount *uint32, targetTypes **win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(targetCount)), uintptr(unsafe.Pointer(targetTypes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPackageTarget dispatches through IPrintDocumentPackageTarget's vtable slot 4.
 func (self *IPrintDocumentPackageTarget) GetPackageTarget(guidTargetType *win32.GUID, riid *win32.GUID, ppvTarget **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidTargetType)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvTarget)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Cancel dispatches through IPrintDocumentPackageTarget's vtable slot 5.
 func (self *IPrintDocumentPackageTarget) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: c560298a-535c-48f9-866a-632540660cb4
@@ -66,13 +66,13 @@ var IID_IPrintDocumentPackageTarget2 = win32.GUID{Data1: 0xc560298a, Data2: 0x53
 // GetIsTargetIppPrinter dispatches through IPrintDocumentPackageTarget2's vtable slot 3.
 func (self *IPrintDocumentPackageTarget2) GetIsTargetIppPrinter(isIppPrinter *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(isIppPrinter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTargetIppPrintDevice dispatches through IPrintDocumentPackageTarget2's vtable slot 4.
 func (self *IPrintDocumentPackageTarget2) GetTargetIppPrintDevice(riid *win32.GUID, ppvTarget **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvTarget)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPrintDocumentPackageTargetFactory: https://learn.microsoft.com/windows/win32/api/documenttarget/nn-documenttarget-iprintdocumentpackagetargetfactory
@@ -89,7 +89,7 @@ func (self *IPrintDocumentPackageTargetFactory) CreateDocumentPackageTargetForPr
 	_printerName := win32.UTF16Ptr(printerName)
 	_jobName := win32.UTF16Ptr(jobName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_printerName)), uintptr(unsafe.Pointer(_jobName)), uintptr(unsafe.Pointer(jobOutputStream)), uintptr(unsafe.Pointer(jobPrintTicketStream)), uintptr(unsafe.Pointer(docPackageTarget)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsPrintJob: https://learn.microsoft.com/windows/win32/api/xpsprint/nn-xpsprint-ixpsprintjob
@@ -104,13 +104,13 @@ var IID_IXpsPrintJob = win32.GUID{Data1: 0x5ab89b06, Data2: 0x8194, Data3: 0x425
 // Cancel dispatches through IXpsPrintJob's vtable slot 3.
 func (self *IXpsPrintJob) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetJobStatus dispatches through IXpsPrintJob's vtable slot 4.
 func (self *IXpsPrintJob) GetJobStatus(jobStatus *XPS_JOB_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(jobStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsPrintJobStream: https://learn.microsoft.com/windows/win32/api/xpsprint/nn-xpsprint-ixpsprintjobstream
@@ -125,5 +125,5 @@ var IID_IXpsPrintJobStream = win32.GUID{Data1: 0x7a77dc5f, Data2: 0x45d6, Data3:
 // Close dispatches through IXpsPrintJobStream's vtable slot 5.
 func (self *IXpsPrintJobStream) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

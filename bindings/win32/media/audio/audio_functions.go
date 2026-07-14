@@ -525,7 +525,7 @@ func AcmStreamUnprepareHeader(has HACMSTREAM, pash *ACMSTREAMHEADER, fdwUnprepar
 func ActivateAudioInterfaceAsync(deviceInterfacePath string, riid *win32.GUID, activationParams *systemcomstructuredstorage.PROPVARIANT, completionHandler *IActivateAudioInterfaceCompletionHandler, activationOperation **IActivateAudioInterfaceAsyncOperation) error {
 	_deviceInterfacePath := win32.UTF16Ptr(deviceInterfacePath)
 	r1, _, _ := syscall.SyscallN(procActivateAudioInterfaceAsync.Addr(), uintptr(unsafe.Pointer(_deviceInterfacePath)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(activationParams)), uintptr(unsafe.Pointer(completionHandler)), uintptr(unsafe.Pointer(activationOperation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AuxGetDevCaps calls WINMM!auxGetDevCapsW.
@@ -581,57 +581,57 @@ func AuxSetVolume(uDeviceID uint32, dwVolume uint32) uint32 {
 // Minimum OS: windows5.0.
 func CoRegisterMessageFilter(lpMessageFilter *IMessageFilter, lplpMessageFilter **IMessageFilter) error {
 	r1, _, _ := syscall.SyscallN(procCoRegisterMessageFilter.Addr(), uintptr(unsafe.Pointer(lpMessageFilter)), uintptr(unsafe.Pointer(lplpMessageFilter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateCaptureAudioStateMonitor calls Windows.Media.MediaControl!CreateCaptureAudioStateMonitor.
 func CreateCaptureAudioStateMonitor(audioStateMonitor **IAudioStateMonitor) error {
 	r1, _, _ := syscall.SyscallN(procCreateCaptureAudioStateMonitor.Addr(), uintptr(unsafe.Pointer(audioStateMonitor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateCaptureAudioStateMonitorForCategory calls Windows.Media.MediaControl!CreateCaptureAudioStateMonitorForCategory.
 func CreateCaptureAudioStateMonitorForCategory(category AUDIO_STREAM_CATEGORY, audioStateMonitor **IAudioStateMonitor) error {
 	r1, _, _ := syscall.SyscallN(procCreateCaptureAudioStateMonitorForCategory.Addr(), uintptr(category), uintptr(unsafe.Pointer(audioStateMonitor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateCaptureAudioStateMonitorForCategoryAndDeviceId calls Windows.Media.MediaControl!CreateCaptureAudioStateMonitorForCategoryAndDeviceId.
 func CreateCaptureAudioStateMonitorForCategoryAndDeviceId(category AUDIO_STREAM_CATEGORY, deviceId string, audioStateMonitor **IAudioStateMonitor) error {
 	_deviceId := win32.UTF16Ptr(deviceId)
 	r1, _, _ := syscall.SyscallN(procCreateCaptureAudioStateMonitorForCategoryAndDeviceId.Addr(), uintptr(category), uintptr(unsafe.Pointer(_deviceId)), uintptr(unsafe.Pointer(audioStateMonitor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateCaptureAudioStateMonitorForCategoryAndDeviceRole calls Windows.Media.MediaControl!CreateCaptureAudioStateMonitorForCategoryAndDeviceRole.
 func CreateCaptureAudioStateMonitorForCategoryAndDeviceRole(category AUDIO_STREAM_CATEGORY, role ERole, audioStateMonitor **IAudioStateMonitor) error {
 	r1, _, _ := syscall.SyscallN(procCreateCaptureAudioStateMonitorForCategoryAndDeviceRole.Addr(), uintptr(category), uintptr(role), uintptr(unsafe.Pointer(audioStateMonitor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateRenderAudioStateMonitor calls Windows.Media.MediaControl!CreateRenderAudioStateMonitor.
 func CreateRenderAudioStateMonitor(audioStateMonitor **IAudioStateMonitor) error {
 	r1, _, _ := syscall.SyscallN(procCreateRenderAudioStateMonitor.Addr(), uintptr(unsafe.Pointer(audioStateMonitor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateRenderAudioStateMonitorForCategory calls Windows.Media.MediaControl!CreateRenderAudioStateMonitorForCategory.
 func CreateRenderAudioStateMonitorForCategory(category AUDIO_STREAM_CATEGORY, audioStateMonitor **IAudioStateMonitor) error {
 	r1, _, _ := syscall.SyscallN(procCreateRenderAudioStateMonitorForCategory.Addr(), uintptr(category), uintptr(unsafe.Pointer(audioStateMonitor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateRenderAudioStateMonitorForCategoryAndDeviceId calls Windows.Media.MediaControl!CreateRenderAudioStateMonitorForCategoryAndDeviceId.
 func CreateRenderAudioStateMonitorForCategoryAndDeviceId(category AUDIO_STREAM_CATEGORY, deviceId string, audioStateMonitor **IAudioStateMonitor) error {
 	_deviceId := win32.UTF16Ptr(deviceId)
 	r1, _, _ := syscall.SyscallN(procCreateRenderAudioStateMonitorForCategoryAndDeviceId.Addr(), uintptr(category), uintptr(unsafe.Pointer(_deviceId)), uintptr(unsafe.Pointer(audioStateMonitor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateRenderAudioStateMonitorForCategoryAndDeviceRole calls Windows.Media.MediaControl!CreateRenderAudioStateMonitorForCategoryAndDeviceRole.
 func CreateRenderAudioStateMonitorForCategoryAndDeviceRole(category AUDIO_STREAM_CATEGORY, role ERole, audioStateMonitor **IAudioStateMonitor) error {
 	r1, _, _ := syscall.SyscallN(procCreateRenderAudioStateMonitorForCategoryAndDeviceRole.Addr(), uintptr(category), uintptr(role), uintptr(unsafe.Pointer(audioStateMonitor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MidiConnect calls WINMM!midiConnect.

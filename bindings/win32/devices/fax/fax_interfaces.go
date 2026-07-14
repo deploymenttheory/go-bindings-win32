@@ -28,25 +28,25 @@ var IID_IFaxAccount = win32.GUID{Data1: 0x68535b33, Data2: 0x5dc4, Data3: 0x4086
 // Get_AccountName dispatches through IFaxAccount's vtable slot 7.
 func (self *IFaxAccount) Get_AccountName(pbstrAccountName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrAccountName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Folders dispatches through IFaxAccount's vtable slot 8.
 func (self *IFaxAccount) Get_Folders(ppFolders **IFaxAccountFolders) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFolders)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ListenToAccountEvents dispatches through IFaxAccount's vtable slot 9.
 func (self *IFaxAccount) ListenToAccountEvents(EventTypes FAX_ACCOUNT_EVENTS_TYPE_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(EventTypes))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RegisteredEvents dispatches through IFaxAccount's vtable slot 10.
 func (self *IFaxAccount) Get_RegisteredEvents(pRegisteredEvents *FAX_ACCOUNT_EVENTS_TYPE_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRegisteredEvents)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxAccountFolders: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxaccountfolders
@@ -61,25 +61,25 @@ var IID_IFaxAccountFolders = win32.GUID{Data1: 0x6463f89d, Data2: 0x23d8, Data3:
 // Get_OutgoingQueue dispatches through IFaxAccountFolders's vtable slot 7.
 func (self *IFaxAccountFolders) Get_OutgoingQueue(pFaxOutgoingQueue **IFaxAccountOutgoingQueue) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxOutgoingQueue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IncomingQueue dispatches through IFaxAccountFolders's vtable slot 8.
 func (self *IFaxAccountFolders) Get_IncomingQueue(pFaxIncomingQueue **IFaxAccountIncomingQueue) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxIncomingQueue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IncomingArchive dispatches through IFaxAccountFolders's vtable slot 9.
 func (self *IFaxAccountFolders) Get_IncomingArchive(pFaxIncomingArchive **IFaxAccountIncomingArchive) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxIncomingArchive)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OutgoingArchive dispatches through IFaxAccountFolders's vtable slot 10.
 func (self *IFaxAccountFolders) Get_OutgoingArchive(pFaxOutgoingArchive **IFaxAccountOutgoingArchive) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxOutgoingArchive)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxAccountIncomingArchive: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxaccountincomingarchive
@@ -94,31 +94,31 @@ var IID_IFaxAccountIncomingArchive = win32.GUID{Data1: 0xa8a5b6ef, Data2: 0xe0d6
 // Get_SizeLow dispatches through IFaxAccountIncomingArchive's vtable slot 7.
 func (self *IFaxAccountIncomingArchive) Get_SizeLow(plSizeLow *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plSizeLow)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SizeHigh dispatches through IFaxAccountIncomingArchive's vtable slot 8.
 func (self *IFaxAccountIncomingArchive) Get_SizeHigh(plSizeHigh *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plSizeHigh)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through IFaxAccountIncomingArchive's vtable slot 9.
 func (self *IFaxAccountIncomingArchive) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMessages dispatches through IFaxAccountIncomingArchive's vtable slot 10.
 func (self *IFaxAccountIncomingArchive) GetMessages(lPrefetchSize int32, pFaxIncomingMessageIterator **IFaxIncomingMessageIterator) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lPrefetchSize), uintptr(unsafe.Pointer(pFaxIncomingMessageIterator)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMessage dispatches through IFaxAccountIncomingArchive's vtable slot 11.
 func (self *IFaxAccountIncomingArchive) GetMessage(bstrMessageId foundation.BSTR, pFaxIncomingMessage **IFaxIncomingMessage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrMessageId)), uintptr(unsafe.Pointer(pFaxIncomingMessage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxAccountIncomingQueue: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxaccountincomingqueue
@@ -133,13 +133,13 @@ var IID_IFaxAccountIncomingQueue = win32.GUID{Data1: 0xdd142d92, Data2: 0x0186, 
 // GetJobs dispatches through IFaxAccountIncomingQueue's vtable slot 7.
 func (self *IFaxAccountIncomingQueue) GetJobs(pFaxIncomingJobs **IFaxIncomingJobs) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxIncomingJobs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetJob dispatches through IFaxAccountIncomingQueue's vtable slot 8.
 func (self *IFaxAccountIncomingQueue) GetJob(bstrJobId foundation.BSTR, pFaxIncomingJob **IFaxIncomingJob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrJobId)), uintptr(unsafe.Pointer(pFaxIncomingJob)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxAccountNotify: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxaccountnotify
@@ -154,67 +154,67 @@ var IID_IFaxAccountNotify = win32.GUID{Data1: 0xb9b3bc81, Data2: 0xac1b, Data3: 
 // OnIncomingJobAdded dispatches through IFaxAccountNotify's vtable slot 7.
 func (self *IFaxAccountNotify) OnIncomingJobAdded(pFaxAccount *IFaxAccount, bstrJobId foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxAccount)), uintptr(unsafe.Pointer(bstrJobId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnIncomingJobRemoved dispatches through IFaxAccountNotify's vtable slot 8.
 func (self *IFaxAccountNotify) OnIncomingJobRemoved(pFaxAccount *IFaxAccount, bstrJobId foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxAccount)), uintptr(unsafe.Pointer(bstrJobId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnIncomingJobChanged dispatches through IFaxAccountNotify's vtable slot 9.
 func (self *IFaxAccountNotify) OnIncomingJobChanged(pFaxAccount *IFaxAccount, bstrJobId foundation.BSTR, pJobStatus *IFaxJobStatus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxAccount)), uintptr(unsafe.Pointer(bstrJobId)), uintptr(unsafe.Pointer(pJobStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnOutgoingJobAdded dispatches through IFaxAccountNotify's vtable slot 10.
 func (self *IFaxAccountNotify) OnOutgoingJobAdded(pFaxAccount *IFaxAccount, bstrJobId foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxAccount)), uintptr(unsafe.Pointer(bstrJobId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnOutgoingJobRemoved dispatches through IFaxAccountNotify's vtable slot 11.
 func (self *IFaxAccountNotify) OnOutgoingJobRemoved(pFaxAccount *IFaxAccount, bstrJobId foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxAccount)), uintptr(unsafe.Pointer(bstrJobId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnOutgoingJobChanged dispatches through IFaxAccountNotify's vtable slot 12.
 func (self *IFaxAccountNotify) OnOutgoingJobChanged(pFaxAccount *IFaxAccount, bstrJobId foundation.BSTR, pJobStatus *IFaxJobStatus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxAccount)), uintptr(unsafe.Pointer(bstrJobId)), uintptr(unsafe.Pointer(pJobStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnIncomingMessageAdded dispatches through IFaxAccountNotify's vtable slot 13.
 func (self *IFaxAccountNotify) OnIncomingMessageAdded(pFaxAccount *IFaxAccount, bstrMessageId foundation.BSTR, fAddedToReceiveFolder foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxAccount)), uintptr(unsafe.Pointer(bstrMessageId)), uintptr(fAddedToReceiveFolder))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnIncomingMessageRemoved dispatches through IFaxAccountNotify's vtable slot 14.
 func (self *IFaxAccountNotify) OnIncomingMessageRemoved(pFaxAccount *IFaxAccount, bstrMessageId foundation.BSTR, fRemovedFromReceiveFolder foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxAccount)), uintptr(unsafe.Pointer(bstrMessageId)), uintptr(fRemovedFromReceiveFolder))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnOutgoingMessageAdded dispatches through IFaxAccountNotify's vtable slot 15.
 func (self *IFaxAccountNotify) OnOutgoingMessageAdded(pFaxAccount *IFaxAccount, bstrMessageId foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxAccount)), uintptr(unsafe.Pointer(bstrMessageId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnOutgoingMessageRemoved dispatches through IFaxAccountNotify's vtable slot 16.
 func (self *IFaxAccountNotify) OnOutgoingMessageRemoved(pFaxAccount *IFaxAccount, bstrMessageId foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxAccount)), uintptr(unsafe.Pointer(bstrMessageId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnServerShutDown dispatches through IFaxAccountNotify's vtable slot 17.
 func (self *IFaxAccountNotify) OnServerShutDown(pFaxServer *IFaxServer2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxServer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxAccountOutgoingArchive: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxaccountoutgoingarchive
@@ -229,31 +229,31 @@ var IID_IFaxAccountOutgoingArchive = win32.GUID{Data1: 0x5463076d, Data2: 0xec14
 // Get_SizeLow dispatches through IFaxAccountOutgoingArchive's vtable slot 7.
 func (self *IFaxAccountOutgoingArchive) Get_SizeLow(plSizeLow *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plSizeLow)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SizeHigh dispatches through IFaxAccountOutgoingArchive's vtable slot 8.
 func (self *IFaxAccountOutgoingArchive) Get_SizeHigh(plSizeHigh *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plSizeHigh)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through IFaxAccountOutgoingArchive's vtable slot 9.
 func (self *IFaxAccountOutgoingArchive) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMessages dispatches through IFaxAccountOutgoingArchive's vtable slot 10.
 func (self *IFaxAccountOutgoingArchive) GetMessages(lPrefetchSize int32, pFaxOutgoingMessageIterator **IFaxOutgoingMessageIterator) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lPrefetchSize), uintptr(unsafe.Pointer(pFaxOutgoingMessageIterator)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMessage dispatches through IFaxAccountOutgoingArchive's vtable slot 11.
 func (self *IFaxAccountOutgoingArchive) GetMessage(bstrMessageId foundation.BSTR, pFaxOutgoingMessage **IFaxOutgoingMessage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrMessageId)), uintptr(unsafe.Pointer(pFaxOutgoingMessage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxAccountOutgoingQueue: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxaccountoutgoingqueue
@@ -268,13 +268,13 @@ var IID_IFaxAccountOutgoingQueue = win32.GUID{Data1: 0x0f1424e9, Data2: 0xf22d, 
 // GetJobs dispatches through IFaxAccountOutgoingQueue's vtable slot 7.
 func (self *IFaxAccountOutgoingQueue) GetJobs(pFaxOutgoingJobs **IFaxOutgoingJobs) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxOutgoingJobs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetJob dispatches through IFaxAccountOutgoingQueue's vtable slot 8.
 func (self *IFaxAccountOutgoingQueue) GetJob(bstrJobId foundation.BSTR, pFaxOutgoingJob **IFaxOutgoingJob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrJobId)), uintptr(unsafe.Pointer(pFaxOutgoingJob)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxAccountSet: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxaccountset
@@ -289,25 +289,25 @@ var IID_IFaxAccountSet = win32.GUID{Data1: 0x7428fbae, Data2: 0x841e, Data3: 0x4
 // GetAccounts dispatches through IFaxAccountSet's vtable slot 7.
 func (self *IFaxAccountSet) GetAccounts(ppFaxAccounts **IFaxAccounts) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFaxAccounts)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAccount dispatches through IFaxAccountSet's vtable slot 8.
 func (self *IFaxAccountSet) GetAccount(bstrAccountName foundation.BSTR, pFaxAccount **IFaxAccount) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAccountName)), uintptr(unsafe.Pointer(pFaxAccount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddAccount dispatches through IFaxAccountSet's vtable slot 9.
 func (self *IFaxAccountSet) AddAccount(bstrAccountName foundation.BSTR, pFaxAccount **IFaxAccount) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAccountName)), uintptr(unsafe.Pointer(pFaxAccount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAccount dispatches through IFaxAccountSet's vtable slot 10.
 func (self *IFaxAccountSet) RemoveAccount(bstrAccountName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAccountName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxAccounts: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxaccounts
@@ -322,13 +322,13 @@ var IID_IFaxAccounts = win32.GUID{Data1: 0x93ea8162, Data2: 0x8be7, Data3: 0x42d
 // Get__NewEnum dispatches through IFaxAccounts's vtable slot 7.
 func (self *IFaxAccounts) Get__NewEnum(ppUnk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IFaxAccounts's vtable slot 9.
 func (self *IFaxAccounts) Get_Count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxActivity: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxactivity
@@ -343,31 +343,31 @@ var IID_IFaxActivity = win32.GUID{Data1: 0x4b106f97, Data2: 0x3df5, Data3: 0x40f
 // Get_IncomingMessages dispatches through IFaxActivity's vtable slot 7.
 func (self *IFaxActivity) Get_IncomingMessages(plIncomingMessages *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plIncomingMessages)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RoutingMessages dispatches through IFaxActivity's vtable slot 8.
 func (self *IFaxActivity) Get_RoutingMessages(plRoutingMessages *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plRoutingMessages)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OutgoingMessages dispatches through IFaxActivity's vtable slot 9.
 func (self *IFaxActivity) Get_OutgoingMessages(plOutgoingMessages *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plOutgoingMessages)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_QueuedMessages dispatches through IFaxActivity's vtable slot 10.
 func (self *IFaxActivity) Get_QueuedMessages(plQueuedMessages *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plQueuedMessages)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through IFaxActivity's vtable slot 11.
 func (self *IFaxActivity) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxActivityLogging: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxactivitylogging
@@ -382,49 +382,49 @@ var IID_IFaxActivityLogging = win32.GUID{Data1: 0x1e29078b, Data2: 0x5a69, Data3
 // Get_LogIncoming dispatches through IFaxActivityLogging's vtable slot 7.
 func (self *IFaxActivityLogging) Get_LogIncoming(pbLogIncoming *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbLogIncoming)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LogIncoming dispatches through IFaxActivityLogging's vtable slot 8.
 func (self *IFaxActivityLogging) Put_LogIncoming(bLogIncoming foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(bLogIncoming))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LogOutgoing dispatches through IFaxActivityLogging's vtable slot 9.
 func (self *IFaxActivityLogging) Get_LogOutgoing(pbLogOutgoing *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbLogOutgoing)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LogOutgoing dispatches through IFaxActivityLogging's vtable slot 10.
 func (self *IFaxActivityLogging) Put_LogOutgoing(bLogOutgoing foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(bLogOutgoing))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DatabasePath dispatches through IFaxActivityLogging's vtable slot 11.
 func (self *IFaxActivityLogging) Get_DatabasePath(pbstrDatabasePath *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDatabasePath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DatabasePath dispatches through IFaxActivityLogging's vtable slot 12.
 func (self *IFaxActivityLogging) Put_DatabasePath(bstrDatabasePath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDatabasePath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through IFaxActivityLogging's vtable slot 13.
 func (self *IFaxActivityLogging) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Save dispatches through IFaxActivityLogging's vtable slot 14.
 func (self *IFaxActivityLogging) Save() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxConfiguration: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxconfiguration
@@ -439,241 +439,241 @@ var IID_IFaxConfiguration = win32.GUID{Data1: 0x10f4d0f7, Data2: 0x0994, Data3: 
 // Get_UseArchive dispatches through IFaxConfiguration's vtable slot 7.
 func (self *IFaxConfiguration) Get_UseArchive(pbUseArchive *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbUseArchive)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_UseArchive dispatches through IFaxConfiguration's vtable slot 8.
 func (self *IFaxConfiguration) Put_UseArchive(bUseArchive foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(bUseArchive))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ArchiveLocation dispatches through IFaxConfiguration's vtable slot 9.
 func (self *IFaxConfiguration) Get_ArchiveLocation(pbstrArchiveLocation *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrArchiveLocation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ArchiveLocation dispatches through IFaxConfiguration's vtable slot 10.
 func (self *IFaxConfiguration) Put_ArchiveLocation(bstrArchiveLocation foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrArchiveLocation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SizeQuotaWarning dispatches through IFaxConfiguration's vtable slot 11.
 func (self *IFaxConfiguration) Get_SizeQuotaWarning(pbSizeQuotaWarning *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbSizeQuotaWarning)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SizeQuotaWarning dispatches through IFaxConfiguration's vtable slot 12.
 func (self *IFaxConfiguration) Put_SizeQuotaWarning(bSizeQuotaWarning foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(bSizeQuotaWarning))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HighQuotaWaterMark dispatches through IFaxConfiguration's vtable slot 13.
 func (self *IFaxConfiguration) Get_HighQuotaWaterMark(plHighQuotaWaterMark *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plHighQuotaWaterMark)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_HighQuotaWaterMark dispatches through IFaxConfiguration's vtable slot 14.
 func (self *IFaxConfiguration) Put_HighQuotaWaterMark(lHighQuotaWaterMark int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(lHighQuotaWaterMark))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LowQuotaWaterMark dispatches through IFaxConfiguration's vtable slot 15.
 func (self *IFaxConfiguration) Get_LowQuotaWaterMark(plLowQuotaWaterMark *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plLowQuotaWaterMark)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LowQuotaWaterMark dispatches through IFaxConfiguration's vtable slot 16.
 func (self *IFaxConfiguration) Put_LowQuotaWaterMark(lLowQuotaWaterMark int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(lLowQuotaWaterMark))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ArchiveAgeLimit dispatches through IFaxConfiguration's vtable slot 17.
 func (self *IFaxConfiguration) Get_ArchiveAgeLimit(plArchiveAgeLimit *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plArchiveAgeLimit)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ArchiveAgeLimit dispatches through IFaxConfiguration's vtable slot 18.
 func (self *IFaxConfiguration) Put_ArchiveAgeLimit(lArchiveAgeLimit int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(lArchiveAgeLimit))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ArchiveSizeLow dispatches through IFaxConfiguration's vtable slot 19.
 func (self *IFaxConfiguration) Get_ArchiveSizeLow(plSizeLow *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plSizeLow)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ArchiveSizeHigh dispatches through IFaxConfiguration's vtable slot 20.
 func (self *IFaxConfiguration) Get_ArchiveSizeHigh(plSizeHigh *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plSizeHigh)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OutgoingQueueBlocked dispatches through IFaxConfiguration's vtable slot 21.
 func (self *IFaxConfiguration) Get_OutgoingQueueBlocked(pbOutgoingBlocked *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbOutgoingBlocked)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_OutgoingQueueBlocked dispatches through IFaxConfiguration's vtable slot 22.
 func (self *IFaxConfiguration) Put_OutgoingQueueBlocked(bOutgoingBlocked foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(bOutgoingBlocked))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OutgoingQueuePaused dispatches through IFaxConfiguration's vtable slot 23.
 func (self *IFaxConfiguration) Get_OutgoingQueuePaused(pbOutgoingPaused *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbOutgoingPaused)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_OutgoingQueuePaused dispatches through IFaxConfiguration's vtable slot 24.
 func (self *IFaxConfiguration) Put_OutgoingQueuePaused(bOutgoingPaused foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(bOutgoingPaused))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AllowPersonalCoverPages dispatches through IFaxConfiguration's vtable slot 25.
 func (self *IFaxConfiguration) Get_AllowPersonalCoverPages(pbAllowPersonalCoverPages *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbAllowPersonalCoverPages)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AllowPersonalCoverPages dispatches through IFaxConfiguration's vtable slot 26.
 func (self *IFaxConfiguration) Put_AllowPersonalCoverPages(bAllowPersonalCoverPages foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(bAllowPersonalCoverPages))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UseDeviceTSID dispatches through IFaxConfiguration's vtable slot 27.
 func (self *IFaxConfiguration) Get_UseDeviceTSID(pbUseDeviceTSID *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbUseDeviceTSID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_UseDeviceTSID dispatches through IFaxConfiguration's vtable slot 28.
 func (self *IFaxConfiguration) Put_UseDeviceTSID(bUseDeviceTSID foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(bUseDeviceTSID))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Retries dispatches through IFaxConfiguration's vtable slot 29.
 func (self *IFaxConfiguration) Get_Retries(plRetries *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plRetries)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Retries dispatches through IFaxConfiguration's vtable slot 30.
 func (self *IFaxConfiguration) Put_Retries(lRetries int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(lRetries))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RetryDelay dispatches through IFaxConfiguration's vtable slot 31.
 func (self *IFaxConfiguration) Get_RetryDelay(plRetryDelay *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plRetryDelay)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RetryDelay dispatches through IFaxConfiguration's vtable slot 32.
 func (self *IFaxConfiguration) Put_RetryDelay(lRetryDelay int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(lRetryDelay))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DiscountRateStart dispatches through IFaxConfiguration's vtable slot 33.
 func (self *IFaxConfiguration) Get_DiscountRateStart(pdateDiscountRateStart *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdateDiscountRateStart)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DiscountRateEnd dispatches through IFaxConfiguration's vtable slot 35.
 func (self *IFaxConfiguration) Get_DiscountRateEnd(pdateDiscountRateEnd *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdateDiscountRateEnd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OutgoingQueueAgeLimit dispatches through IFaxConfiguration's vtable slot 37.
 func (self *IFaxConfiguration) Get_OutgoingQueueAgeLimit(plOutgoingQueueAgeLimit *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plOutgoingQueueAgeLimit)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_OutgoingQueueAgeLimit dispatches through IFaxConfiguration's vtable slot 38.
 func (self *IFaxConfiguration) Put_OutgoingQueueAgeLimit(lOutgoingQueueAgeLimit int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(lOutgoingQueueAgeLimit))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Branding dispatches through IFaxConfiguration's vtable slot 39.
 func (self *IFaxConfiguration) Get_Branding(pbBranding *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbBranding)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Branding dispatches through IFaxConfiguration's vtable slot 40.
 func (self *IFaxConfiguration) Put_Branding(bBranding foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(bBranding))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IncomingQueueBlocked dispatches through IFaxConfiguration's vtable slot 41.
 func (self *IFaxConfiguration) Get_IncomingQueueBlocked(pbIncomingBlocked *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbIncomingBlocked)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_IncomingQueueBlocked dispatches through IFaxConfiguration's vtable slot 42.
 func (self *IFaxConfiguration) Put_IncomingQueueBlocked(bIncomingBlocked foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(bIncomingBlocked))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AutoCreateAccountOnConnect dispatches through IFaxConfiguration's vtable slot 43.
 func (self *IFaxConfiguration) Get_AutoCreateAccountOnConnect(pbAutoCreateAccountOnConnect *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbAutoCreateAccountOnConnect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AutoCreateAccountOnConnect dispatches through IFaxConfiguration's vtable slot 44.
 func (self *IFaxConfiguration) Put_AutoCreateAccountOnConnect(bAutoCreateAccountOnConnect foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(bAutoCreateAccountOnConnect))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IncomingFaxesArePublic dispatches through IFaxConfiguration's vtable slot 45.
 func (self *IFaxConfiguration) Get_IncomingFaxesArePublic(pbIncomingFaxesArePublic *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbIncomingFaxesArePublic)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_IncomingFaxesArePublic dispatches through IFaxConfiguration's vtable slot 46.
 func (self *IFaxConfiguration) Put_IncomingFaxesArePublic(bIncomingFaxesArePublic foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(bIncomingFaxesArePublic))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through IFaxConfiguration's vtable slot 47.
 func (self *IFaxConfiguration) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Save dispatches through IFaxConfiguration's vtable slot 48.
 func (self *IFaxConfiguration) Save() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxDevice: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxdevice
@@ -688,151 +688,151 @@ var IID_IFaxDevice = win32.GUID{Data1: 0x49306c59, Data2: 0xb52e, Data3: 0x4867,
 // Get_Id dispatches through IFaxDevice's vtable slot 7.
 func (self *IFaxDevice) Get_Id(plId *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DeviceName dispatches through IFaxDevice's vtable slot 8.
 func (self *IFaxDevice) Get_DeviceName(pbstrDeviceName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDeviceName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ProviderUniqueName dispatches through IFaxDevice's vtable slot 9.
 func (self *IFaxDevice) Get_ProviderUniqueName(pbstrProviderUniqueName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrProviderUniqueName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PoweredOff dispatches through IFaxDevice's vtable slot 10.
 func (self *IFaxDevice) Get_PoweredOff(pbPoweredOff *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbPoweredOff)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReceivingNow dispatches through IFaxDevice's vtable slot 11.
 func (self *IFaxDevice) Get_ReceivingNow(pbReceivingNow *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbReceivingNow)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SendingNow dispatches through IFaxDevice's vtable slot 12.
 func (self *IFaxDevice) Get_SendingNow(pbSendingNow *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbSendingNow)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UsedRoutingMethods dispatches through IFaxDevice's vtable slot 13.
 func (self *IFaxDevice) Get_UsedRoutingMethods(pvUsedRoutingMethods *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvUsedRoutingMethods)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through IFaxDevice's vtable slot 14.
 func (self *IFaxDevice) Get_Description(pbstrDescription *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Description dispatches through IFaxDevice's vtable slot 15.
 func (self *IFaxDevice) Put_Description(bstrDescription foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SendEnabled dispatches through IFaxDevice's vtable slot 16.
 func (self *IFaxDevice) Get_SendEnabled(pbSendEnabled *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbSendEnabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SendEnabled dispatches through IFaxDevice's vtable slot 17.
 func (self *IFaxDevice) Put_SendEnabled(bSendEnabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(bSendEnabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReceiveMode dispatches through IFaxDevice's vtable slot 18.
 func (self *IFaxDevice) Get_ReceiveMode(pReceiveMode *FAX_DEVICE_RECEIVE_MODE_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pReceiveMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ReceiveMode dispatches through IFaxDevice's vtable slot 19.
 func (self *IFaxDevice) Put_ReceiveMode(ReceiveMode FAX_DEVICE_RECEIVE_MODE_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(ReceiveMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RingsBeforeAnswer dispatches through IFaxDevice's vtable slot 20.
 func (self *IFaxDevice) Get_RingsBeforeAnswer(plRingsBeforeAnswer *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plRingsBeforeAnswer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RingsBeforeAnswer dispatches through IFaxDevice's vtable slot 21.
 func (self *IFaxDevice) Put_RingsBeforeAnswer(lRingsBeforeAnswer int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(lRingsBeforeAnswer))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CSID dispatches through IFaxDevice's vtable slot 22.
 func (self *IFaxDevice) Get_CSID(pbstrCSID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrCSID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CSID dispatches through IFaxDevice's vtable slot 23.
 func (self *IFaxDevice) Put_CSID(bstrCSID foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrCSID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TSID dispatches through IFaxDevice's vtable slot 24.
 func (self *IFaxDevice) Get_TSID(pbstrTSID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrTSID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_TSID dispatches through IFaxDevice's vtable slot 25.
 func (self *IFaxDevice) Put_TSID(bstrTSID foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTSID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through IFaxDevice's vtable slot 26.
 func (self *IFaxDevice) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Save dispatches through IFaxDevice's vtable slot 27.
 func (self *IFaxDevice) Save() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetExtensionProperty dispatches through IFaxDevice's vtable slot 28.
 func (self *IFaxDevice) GetExtensionProperty(bstrGUID foundation.BSTR, pvProperty *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGUID)), uintptr(unsafe.Pointer(pvProperty)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UseRoutingMethod dispatches through IFaxDevice's vtable slot 30.
 func (self *IFaxDevice) UseRoutingMethod(bstrMethodGUID foundation.BSTR, bUse foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrMethodGUID)), uintptr(bUse))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RingingNow dispatches through IFaxDevice's vtable slot 31.
 func (self *IFaxDevice) Get_RingingNow(pbRingingNow *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbRingingNow)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AnswerCall dispatches through IFaxDevice's vtable slot 32.
 func (self *IFaxDevice) AnswerCall() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxDeviceIds: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxdeviceids
@@ -847,37 +847,37 @@ var IID_IFaxDeviceIds = win32.GUID{Data1: 0x2f0f813f, Data2: 0x4ce9, Data3: 0x44
 // Get__NewEnum dispatches through IFaxDeviceIds's vtable slot 7.
 func (self *IFaxDeviceIds) Get__NewEnum(ppUnk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Item dispatches through IFaxDeviceIds's vtable slot 8.
 func (self *IFaxDeviceIds) Get_Item(lIndex int32, plDeviceId *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(plDeviceId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IFaxDeviceIds's vtable slot 9.
 func (self *IFaxDeviceIds) Get_Count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through IFaxDeviceIds's vtable slot 10.
 func (self *IFaxDeviceIds) Add(lDeviceId int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lDeviceId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through IFaxDeviceIds's vtable slot 11.
 func (self *IFaxDeviceIds) Remove(lIndex int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(lIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetOrder dispatches through IFaxDeviceIds's vtable slot 12.
 func (self *IFaxDeviceIds) SetOrder(lDeviceId int32, lNewOrder int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(lDeviceId), uintptr(lNewOrder))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxDeviceProvider: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxdeviceprovider
@@ -892,73 +892,73 @@ var IID_IFaxDeviceProvider = win32.GUID{Data1: 0x290eac63, Data2: 0x83ec, Data3:
 // Get_FriendlyName dispatches through IFaxDeviceProvider's vtable slot 7.
 func (self *IFaxDeviceProvider) Get_FriendlyName(pbstrFriendlyName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrFriendlyName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ImageName dispatches through IFaxDeviceProvider's vtable slot 8.
 func (self *IFaxDeviceProvider) Get_ImageName(pbstrImageName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrImageName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UniqueName dispatches through IFaxDeviceProvider's vtable slot 9.
 func (self *IFaxDeviceProvider) Get_UniqueName(pbstrUniqueName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrUniqueName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TapiProviderName dispatches through IFaxDeviceProvider's vtable slot 10.
 func (self *IFaxDeviceProvider) Get_TapiProviderName(pbstrTapiProviderName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrTapiProviderName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MajorVersion dispatches through IFaxDeviceProvider's vtable slot 11.
 func (self *IFaxDeviceProvider) Get_MajorVersion(plMajorVersion *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMajorVersion)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MinorVersion dispatches through IFaxDeviceProvider's vtable slot 12.
 func (self *IFaxDeviceProvider) Get_MinorVersion(plMinorVersion *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMinorVersion)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MajorBuild dispatches through IFaxDeviceProvider's vtable slot 13.
 func (self *IFaxDeviceProvider) Get_MajorBuild(plMajorBuild *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMajorBuild)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MinorBuild dispatches through IFaxDeviceProvider's vtable slot 14.
 func (self *IFaxDeviceProvider) Get_MinorBuild(plMinorBuild *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMinorBuild)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Debug dispatches through IFaxDeviceProvider's vtable slot 15.
 func (self *IFaxDeviceProvider) Get_Debug(pbDebug *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbDebug)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Status dispatches through IFaxDeviceProvider's vtable slot 16.
 func (self *IFaxDeviceProvider) Get_Status(pStatus *FAX_PROVIDER_STATUS_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InitErrorCode dispatches through IFaxDeviceProvider's vtable slot 17.
 func (self *IFaxDeviceProvider) Get_InitErrorCode(plInitErrorCode *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plInitErrorCode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DeviceIds dispatches through IFaxDeviceProvider's vtable slot 18.
 func (self *IFaxDeviceProvider) Get_DeviceIds(pvDeviceIds *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvDeviceIds)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxDeviceProviders: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxdeviceproviders
@@ -973,13 +973,13 @@ var IID_IFaxDeviceProviders = win32.GUID{Data1: 0x9fb76f62, Data2: 0x4c7e, Data3
 // Get__NewEnum dispatches through IFaxDeviceProviders's vtable slot 7.
 func (self *IFaxDeviceProviders) Get__NewEnum(ppUnk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IFaxDeviceProviders's vtable slot 9.
 func (self *IFaxDeviceProviders) Get_Count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxDevices: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxdevices
@@ -994,19 +994,19 @@ var IID_IFaxDevices = win32.GUID{Data1: 0x9e46783e, Data2: 0xf34f, Data3: 0x482e
 // Get__NewEnum dispatches through IFaxDevices's vtable slot 7.
 func (self *IFaxDevices) Get__NewEnum(ppUnk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IFaxDevices's vtable slot 9.
 func (self *IFaxDevices) Get_Count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ItemById dispatches through IFaxDevices's vtable slot 10.
 func (self *IFaxDevices) Get_ItemById(lId int32, ppFaxDevice **IFaxDevice) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lId), uintptr(unsafe.Pointer(ppFaxDevice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxDocument: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxdocument
@@ -1021,199 +1021,199 @@ var IID_IFaxDocument = win32.GUID{Data1: 0xb207a246, Data2: 0x09e3, Data3: 0x4a4
 // Get_Body dispatches through IFaxDocument's vtable slot 7.
 func (self *IFaxDocument) Get_Body(pbstrBody *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrBody)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Body dispatches through IFaxDocument's vtable slot 8.
 func (self *IFaxDocument) Put_Body(bstrBody foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrBody)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Sender dispatches through IFaxDocument's vtable slot 9.
 func (self *IFaxDocument) Get_Sender(ppFaxSender **IFaxSender) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFaxSender)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Recipients dispatches through IFaxDocument's vtable slot 10.
 func (self *IFaxDocument) Get_Recipients(ppFaxRecipients **IFaxRecipients) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFaxRecipients)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CoverPage dispatches through IFaxDocument's vtable slot 11.
 func (self *IFaxDocument) Get_CoverPage(pbstrCoverPage *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrCoverPage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CoverPage dispatches through IFaxDocument's vtable slot 12.
 func (self *IFaxDocument) Put_CoverPage(bstrCoverPage foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrCoverPage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Subject dispatches through IFaxDocument's vtable slot 13.
 func (self *IFaxDocument) Get_Subject(pbstrSubject *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrSubject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Subject dispatches through IFaxDocument's vtable slot 14.
 func (self *IFaxDocument) Put_Subject(bstrSubject foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrSubject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Note dispatches through IFaxDocument's vtable slot 15.
 func (self *IFaxDocument) Get_Note(pbstrNote *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrNote)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Note dispatches through IFaxDocument's vtable slot 16.
 func (self *IFaxDocument) Put_Note(bstrNote foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrNote)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ScheduleTime dispatches through IFaxDocument's vtable slot 17.
 func (self *IFaxDocument) Get_ScheduleTime(pdateScheduleTime *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdateScheduleTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReceiptAddress dispatches through IFaxDocument's vtable slot 19.
 func (self *IFaxDocument) Get_ReceiptAddress(pbstrReceiptAddress *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrReceiptAddress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ReceiptAddress dispatches through IFaxDocument's vtable slot 20.
 func (self *IFaxDocument) Put_ReceiptAddress(bstrReceiptAddress foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrReceiptAddress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DocumentName dispatches through IFaxDocument's vtable slot 21.
 func (self *IFaxDocument) Get_DocumentName(pbstrDocumentName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDocumentName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DocumentName dispatches through IFaxDocument's vtable slot 22.
 func (self *IFaxDocument) Put_DocumentName(bstrDocumentName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDocumentName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CallHandle dispatches through IFaxDocument's vtable slot 23.
 func (self *IFaxDocument) Get_CallHandle(plCallHandle *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCallHandle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CallHandle dispatches through IFaxDocument's vtable slot 24.
 func (self *IFaxDocument) Put_CallHandle(lCallHandle int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(lCallHandle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CoverPageType dispatches through IFaxDocument's vtable slot 25.
 func (self *IFaxDocument) Get_CoverPageType(pCoverPageType *FAX_COVERPAGE_TYPE_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCoverPageType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CoverPageType dispatches through IFaxDocument's vtable slot 26.
 func (self *IFaxDocument) Put_CoverPageType(CoverPageType FAX_COVERPAGE_TYPE_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(CoverPageType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ScheduleType dispatches through IFaxDocument's vtable slot 27.
 func (self *IFaxDocument) Get_ScheduleType(pScheduleType *FAX_SCHEDULE_TYPE_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pScheduleType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ScheduleType dispatches through IFaxDocument's vtable slot 28.
 func (self *IFaxDocument) Put_ScheduleType(ScheduleType FAX_SCHEDULE_TYPE_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(ScheduleType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReceiptType dispatches through IFaxDocument's vtable slot 29.
 func (self *IFaxDocument) Get_ReceiptType(pReceiptType *FAX_RECEIPT_TYPE_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pReceiptType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ReceiptType dispatches through IFaxDocument's vtable slot 30.
 func (self *IFaxDocument) Put_ReceiptType(ReceiptType FAX_RECEIPT_TYPE_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(ReceiptType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_GroupBroadcastReceipts dispatches through IFaxDocument's vtable slot 31.
 func (self *IFaxDocument) Get_GroupBroadcastReceipts(pbUseGrouping *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbUseGrouping)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_GroupBroadcastReceipts dispatches through IFaxDocument's vtable slot 32.
 func (self *IFaxDocument) Put_GroupBroadcastReceipts(bUseGrouping foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(bUseGrouping))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Priority dispatches through IFaxDocument's vtable slot 33.
 func (self *IFaxDocument) Get_Priority(pPriority *FAX_PRIORITY_TYPE_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPriority)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Priority dispatches through IFaxDocument's vtable slot 34.
 func (self *IFaxDocument) Put_Priority(Priority FAX_PRIORITY_TYPE_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(Priority))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TapiConnection dispatches through IFaxDocument's vtable slot 35.
 func (self *IFaxDocument) Get_TapiConnection(ppTapiConnection **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTapiConnection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_TapiConnection dispatches through IFaxDocument's vtable slot 36.
 func (self *IFaxDocument) Putref_TapiConnection(pTapiConnection *systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTapiConnection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Submit dispatches through IFaxDocument's vtable slot 37.
 func (self *IFaxDocument) Submit(bstrFaxServerName foundation.BSTR, pvFaxOutgoingJobIDs *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrFaxServerName)), uintptr(unsafe.Pointer(pvFaxOutgoingJobIDs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ConnectedSubmit dispatches through IFaxDocument's vtable slot 38.
 func (self *IFaxDocument) ConnectedSubmit(pFaxServer *IFaxServer, pvFaxOutgoingJobIDs *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxServer)), uintptr(unsafe.Pointer(pvFaxOutgoingJobIDs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AttachFaxToReceipt dispatches through IFaxDocument's vtable slot 39.
 func (self *IFaxDocument) Get_AttachFaxToReceipt(pbAttachFax *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbAttachFax)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AttachFaxToReceipt dispatches through IFaxDocument's vtable slot 40.
 func (self *IFaxDocument) Put_AttachFaxToReceipt(bAttachFax foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(bAttachFax))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxDocument2: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxdocument2
@@ -1228,25 +1228,25 @@ var IID_IFaxDocument2 = win32.GUID{Data1: 0xe1347661, Data2: 0xf9ef, Data3: 0x4d
 // Get_SubmissionId dispatches through IFaxDocument2's vtable slot 41.
 func (self *IFaxDocument2) Get_SubmissionId(pbstrSubmissionId *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrSubmissionId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Bodies dispatches through IFaxDocument2's vtable slot 42.
 func (self *IFaxDocument2) Get_Bodies(pvBodies *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvBodies)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Submit2 dispatches through IFaxDocument2's vtable slot 44.
 func (self *IFaxDocument2) Submit2(bstrFaxServerName foundation.BSTR, pvFaxOutgoingJobIDs *systemvariant.VARIANT, plErrorBodyFile *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrFaxServerName)), uintptr(unsafe.Pointer(pvFaxOutgoingJobIDs)), uintptr(unsafe.Pointer(plErrorBodyFile)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ConnectedSubmit2 dispatches through IFaxDocument2's vtable slot 45.
 func (self *IFaxDocument2) ConnectedSubmit2(pFaxServer *IFaxServer, pvFaxOutgoingJobIDs *systemvariant.VARIANT, plErrorBodyFile *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxServer)), uintptr(unsafe.Pointer(pvFaxOutgoingJobIDs)), uintptr(unsafe.Pointer(plErrorBodyFile)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxEventLogging: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxeventlogging
@@ -1261,61 +1261,61 @@ var IID_IFaxEventLogging = win32.GUID{Data1: 0x0880d965, Data2: 0x20e8, Data3: 0
 // Get_InitEventsLevel dispatches through IFaxEventLogging's vtable slot 7.
 func (self *IFaxEventLogging) Get_InitEventsLevel(pInitEventLevel *FAX_LOG_LEVEL_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInitEventLevel)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_InitEventsLevel dispatches through IFaxEventLogging's vtable slot 8.
 func (self *IFaxEventLogging) Put_InitEventsLevel(InitEventLevel FAX_LOG_LEVEL_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(InitEventLevel))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InboundEventsLevel dispatches through IFaxEventLogging's vtable slot 9.
 func (self *IFaxEventLogging) Get_InboundEventsLevel(pInboundEventLevel *FAX_LOG_LEVEL_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInboundEventLevel)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_InboundEventsLevel dispatches through IFaxEventLogging's vtable slot 10.
 func (self *IFaxEventLogging) Put_InboundEventsLevel(InboundEventLevel FAX_LOG_LEVEL_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(InboundEventLevel))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OutboundEventsLevel dispatches through IFaxEventLogging's vtable slot 11.
 func (self *IFaxEventLogging) Get_OutboundEventsLevel(pOutboundEventLevel *FAX_LOG_LEVEL_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOutboundEventLevel)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_OutboundEventsLevel dispatches through IFaxEventLogging's vtable slot 12.
 func (self *IFaxEventLogging) Put_OutboundEventsLevel(OutboundEventLevel FAX_LOG_LEVEL_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(OutboundEventLevel))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_GeneralEventsLevel dispatches through IFaxEventLogging's vtable slot 13.
 func (self *IFaxEventLogging) Get_GeneralEventsLevel(pGeneralEventLevel *FAX_LOG_LEVEL_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGeneralEventLevel)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_GeneralEventsLevel dispatches through IFaxEventLogging's vtable slot 14.
 func (self *IFaxEventLogging) Put_GeneralEventsLevel(GeneralEventLevel FAX_LOG_LEVEL_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(GeneralEventLevel))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through IFaxEventLogging's vtable slot 15.
 func (self *IFaxEventLogging) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Save dispatches through IFaxEventLogging's vtable slot 16.
 func (self *IFaxEventLogging) Save() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxFolders: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxfolders
@@ -1330,25 +1330,25 @@ var IID_IFaxFolders = win32.GUID{Data1: 0xdce3b2a8, Data2: 0xa7ab, Data3: 0x42bc
 // Get_OutgoingQueue dispatches through IFaxFolders's vtable slot 7.
 func (self *IFaxFolders) Get_OutgoingQueue(pFaxOutgoingQueue **IFaxOutgoingQueue) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxOutgoingQueue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IncomingQueue dispatches through IFaxFolders's vtable slot 8.
 func (self *IFaxFolders) Get_IncomingQueue(pFaxIncomingQueue **IFaxIncomingQueue) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxIncomingQueue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IncomingArchive dispatches through IFaxFolders's vtable slot 9.
 func (self *IFaxFolders) Get_IncomingArchive(pFaxIncomingArchive **IFaxIncomingArchive) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxIncomingArchive)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OutgoingArchive dispatches through IFaxFolders's vtable slot 10.
 func (self *IFaxFolders) Get_OutgoingArchive(pFaxOutgoingArchive **IFaxOutgoingArchive) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxOutgoingArchive)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxInboundRouting: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxinboundrouting
@@ -1363,13 +1363,13 @@ var IID_IFaxInboundRouting = win32.GUID{Data1: 0x8148c20f, Data2: 0x9d52, Data3:
 // GetExtensions dispatches through IFaxInboundRouting's vtable slot 7.
 func (self *IFaxInboundRouting) GetExtensions(pFaxInboundRoutingExtensions **IFaxInboundRoutingExtensions) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxInboundRoutingExtensions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMethods dispatches through IFaxInboundRouting's vtable slot 8.
 func (self *IFaxInboundRouting) GetMethods(pFaxInboundRoutingMethods **IFaxInboundRoutingMethods) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxInboundRoutingMethods)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxInboundRoutingExtension: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxinboundroutingextension
@@ -1384,67 +1384,67 @@ var IID_IFaxInboundRoutingExtension = win32.GUID{Data1: 0x885b5e08, Data2: 0xc26
 // Get_FriendlyName dispatches through IFaxInboundRoutingExtension's vtable slot 7.
 func (self *IFaxInboundRoutingExtension) Get_FriendlyName(pbstrFriendlyName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrFriendlyName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ImageName dispatches through IFaxInboundRoutingExtension's vtable slot 8.
 func (self *IFaxInboundRoutingExtension) Get_ImageName(pbstrImageName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrImageName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UniqueName dispatches through IFaxInboundRoutingExtension's vtable slot 9.
 func (self *IFaxInboundRoutingExtension) Get_UniqueName(pbstrUniqueName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrUniqueName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MajorVersion dispatches through IFaxInboundRoutingExtension's vtable slot 10.
 func (self *IFaxInboundRoutingExtension) Get_MajorVersion(plMajorVersion *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMajorVersion)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MinorVersion dispatches through IFaxInboundRoutingExtension's vtable slot 11.
 func (self *IFaxInboundRoutingExtension) Get_MinorVersion(plMinorVersion *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMinorVersion)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MajorBuild dispatches through IFaxInboundRoutingExtension's vtable slot 12.
 func (self *IFaxInboundRoutingExtension) Get_MajorBuild(plMajorBuild *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMajorBuild)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MinorBuild dispatches through IFaxInboundRoutingExtension's vtable slot 13.
 func (self *IFaxInboundRoutingExtension) Get_MinorBuild(plMinorBuild *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMinorBuild)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Debug dispatches through IFaxInboundRoutingExtension's vtable slot 14.
 func (self *IFaxInboundRoutingExtension) Get_Debug(pbDebug *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbDebug)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Status dispatches through IFaxInboundRoutingExtension's vtable slot 15.
 func (self *IFaxInboundRoutingExtension) Get_Status(pStatus *FAX_PROVIDER_STATUS_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InitErrorCode dispatches through IFaxInboundRoutingExtension's vtable slot 16.
 func (self *IFaxInboundRoutingExtension) Get_InitErrorCode(plInitErrorCode *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plInitErrorCode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Methods dispatches through IFaxInboundRoutingExtension's vtable slot 17.
 func (self *IFaxInboundRoutingExtension) Get_Methods(pvMethods *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvMethods)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxInboundRoutingExtensions: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxinboundroutingextensions
@@ -1459,13 +1459,13 @@ var IID_IFaxInboundRoutingExtensions = win32.GUID{Data1: 0x2f6c9673, Data2: 0x7b
 // Get__NewEnum dispatches through IFaxInboundRoutingExtensions's vtable slot 7.
 func (self *IFaxInboundRoutingExtensions) Get__NewEnum(ppUnk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IFaxInboundRoutingExtensions's vtable slot 9.
 func (self *IFaxInboundRoutingExtensions) Get_Count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxInboundRoutingMethod: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxinboundroutingmethod
@@ -1480,55 +1480,55 @@ var IID_IFaxInboundRoutingMethod = win32.GUID{Data1: 0x45700061, Data2: 0xad9d, 
 // Get_Name dispatches through IFaxInboundRoutingMethod's vtable slot 7.
 func (self *IFaxInboundRoutingMethod) Get_Name(pbstrName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_GUID dispatches through IFaxInboundRoutingMethod's vtable slot 8.
 func (self *IFaxInboundRoutingMethod) Get_GUID(pbstrGUID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrGUID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FunctionName dispatches through IFaxInboundRoutingMethod's vtable slot 9.
 func (self *IFaxInboundRoutingMethod) Get_FunctionName(pbstrFunctionName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrFunctionName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ExtensionFriendlyName dispatches through IFaxInboundRoutingMethod's vtable slot 10.
 func (self *IFaxInboundRoutingMethod) Get_ExtensionFriendlyName(pbstrExtensionFriendlyName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrExtensionFriendlyName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ExtensionImageName dispatches through IFaxInboundRoutingMethod's vtable slot 11.
 func (self *IFaxInboundRoutingMethod) Get_ExtensionImageName(pbstrExtensionImageName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrExtensionImageName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Priority dispatches through IFaxInboundRoutingMethod's vtable slot 12.
 func (self *IFaxInboundRoutingMethod) Get_Priority(plPriority *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plPriority)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Priority dispatches through IFaxInboundRoutingMethod's vtable slot 13.
 func (self *IFaxInboundRoutingMethod) Put_Priority(lPriority int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(lPriority))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through IFaxInboundRoutingMethod's vtable slot 14.
 func (self *IFaxInboundRoutingMethod) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Save dispatches through IFaxInboundRoutingMethod's vtable slot 15.
 func (self *IFaxInboundRoutingMethod) Save() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxInboundRoutingMethods: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxinboundroutingmethods
@@ -1543,13 +1543,13 @@ var IID_IFaxInboundRoutingMethods = win32.GUID{Data1: 0x783fca10, Data2: 0x8908,
 // Get__NewEnum dispatches through IFaxInboundRoutingMethods's vtable slot 7.
 func (self *IFaxInboundRoutingMethods) Get__NewEnum(ppUnk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IFaxInboundRoutingMethods's vtable slot 9.
 func (self *IFaxInboundRoutingMethods) Get_Count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxIncomingArchive: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxincomingarchive
@@ -1564,109 +1564,109 @@ var IID_IFaxIncomingArchive = win32.GUID{Data1: 0x76062cc7, Data2: 0xf714, Data3
 // Get_UseArchive dispatches through IFaxIncomingArchive's vtable slot 7.
 func (self *IFaxIncomingArchive) Get_UseArchive(pbUseArchive *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbUseArchive)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_UseArchive dispatches through IFaxIncomingArchive's vtable slot 8.
 func (self *IFaxIncomingArchive) Put_UseArchive(bUseArchive foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(bUseArchive))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ArchiveFolder dispatches through IFaxIncomingArchive's vtable slot 9.
 func (self *IFaxIncomingArchive) Get_ArchiveFolder(pbstrArchiveFolder *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrArchiveFolder)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ArchiveFolder dispatches through IFaxIncomingArchive's vtable slot 10.
 func (self *IFaxIncomingArchive) Put_ArchiveFolder(bstrArchiveFolder foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrArchiveFolder)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SizeQuotaWarning dispatches through IFaxIncomingArchive's vtable slot 11.
 func (self *IFaxIncomingArchive) Get_SizeQuotaWarning(pbSizeQuotaWarning *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbSizeQuotaWarning)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SizeQuotaWarning dispatches through IFaxIncomingArchive's vtable slot 12.
 func (self *IFaxIncomingArchive) Put_SizeQuotaWarning(bSizeQuotaWarning foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(bSizeQuotaWarning))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HighQuotaWaterMark dispatches through IFaxIncomingArchive's vtable slot 13.
 func (self *IFaxIncomingArchive) Get_HighQuotaWaterMark(plHighQuotaWaterMark *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plHighQuotaWaterMark)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_HighQuotaWaterMark dispatches through IFaxIncomingArchive's vtable slot 14.
 func (self *IFaxIncomingArchive) Put_HighQuotaWaterMark(lHighQuotaWaterMark int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(lHighQuotaWaterMark))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LowQuotaWaterMark dispatches through IFaxIncomingArchive's vtable slot 15.
 func (self *IFaxIncomingArchive) Get_LowQuotaWaterMark(plLowQuotaWaterMark *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plLowQuotaWaterMark)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LowQuotaWaterMark dispatches through IFaxIncomingArchive's vtable slot 16.
 func (self *IFaxIncomingArchive) Put_LowQuotaWaterMark(lLowQuotaWaterMark int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(lLowQuotaWaterMark))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AgeLimit dispatches through IFaxIncomingArchive's vtable slot 17.
 func (self *IFaxIncomingArchive) Get_AgeLimit(plAgeLimit *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAgeLimit)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AgeLimit dispatches through IFaxIncomingArchive's vtable slot 18.
 func (self *IFaxIncomingArchive) Put_AgeLimit(lAgeLimit int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(lAgeLimit))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SizeLow dispatches through IFaxIncomingArchive's vtable slot 19.
 func (self *IFaxIncomingArchive) Get_SizeLow(plSizeLow *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plSizeLow)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SizeHigh dispatches through IFaxIncomingArchive's vtable slot 20.
 func (self *IFaxIncomingArchive) Get_SizeHigh(plSizeHigh *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plSizeHigh)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through IFaxIncomingArchive's vtable slot 21.
 func (self *IFaxIncomingArchive) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Save dispatches through IFaxIncomingArchive's vtable slot 22.
 func (self *IFaxIncomingArchive) Save() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMessages dispatches through IFaxIncomingArchive's vtable slot 23.
 func (self *IFaxIncomingArchive) GetMessages(lPrefetchSize int32, pFaxIncomingMessageIterator **IFaxIncomingMessageIterator) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(lPrefetchSize), uintptr(unsafe.Pointer(pFaxIncomingMessageIterator)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMessage dispatches through IFaxIncomingArchive's vtable slot 24.
 func (self *IFaxIncomingArchive) GetMessage(bstrMessageId foundation.BSTR, pFaxIncomingMessage **IFaxIncomingMessage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrMessageId)), uintptr(unsafe.Pointer(pFaxIncomingMessage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxIncomingJob: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxincomingjob
@@ -1681,115 +1681,115 @@ var IID_IFaxIncomingJob = win32.GUID{Data1: 0x207529e6, Data2: 0x654a, Data3: 0x
 // Get_Size dispatches through IFaxIncomingJob's vtable slot 7.
 func (self *IFaxIncomingJob) Get_Size(plSize *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Id dispatches through IFaxIncomingJob's vtable slot 8.
 func (self *IFaxIncomingJob) Get_Id(pbstrId *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentPage dispatches through IFaxIncomingJob's vtable slot 9.
 func (self *IFaxIncomingJob) Get_CurrentPage(plCurrentPage *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCurrentPage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DeviceId dispatches through IFaxIncomingJob's vtable slot 10.
 func (self *IFaxIncomingJob) Get_DeviceId(plDeviceId *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plDeviceId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Status dispatches through IFaxIncomingJob's vtable slot 11.
 func (self *IFaxIncomingJob) Get_Status(pStatus *FAX_JOB_STATUS_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ExtendedStatusCode dispatches through IFaxIncomingJob's vtable slot 12.
 func (self *IFaxIncomingJob) Get_ExtendedStatusCode(pExtendedStatusCode *FAX_JOB_EXTENDED_STATUS_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pExtendedStatusCode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ExtendedStatus dispatches through IFaxIncomingJob's vtable slot 13.
 func (self *IFaxIncomingJob) Get_ExtendedStatus(pbstrExtendedStatus *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrExtendedStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AvailableOperations dispatches through IFaxIncomingJob's vtable slot 14.
 func (self *IFaxIncomingJob) Get_AvailableOperations(pAvailableOperations *FAX_JOB_OPERATIONS_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAvailableOperations)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Retries dispatches through IFaxIncomingJob's vtable slot 15.
 func (self *IFaxIncomingJob) Get_Retries(plRetries *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plRetries)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TransmissionStart dispatches through IFaxIncomingJob's vtable slot 16.
 func (self *IFaxIncomingJob) Get_TransmissionStart(pdateTransmissionStart *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdateTransmissionStart)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TransmissionEnd dispatches through IFaxIncomingJob's vtable slot 17.
 func (self *IFaxIncomingJob) Get_TransmissionEnd(pdateTransmissionEnd *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdateTransmissionEnd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CSID dispatches through IFaxIncomingJob's vtable slot 18.
 func (self *IFaxIncomingJob) Get_CSID(pbstrCSID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrCSID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TSID dispatches through IFaxIncomingJob's vtable slot 19.
 func (self *IFaxIncomingJob) Get_TSID(pbstrTSID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrTSID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CallerId dispatches through IFaxIncomingJob's vtable slot 20.
 func (self *IFaxIncomingJob) Get_CallerId(pbstrCallerId *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrCallerId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RoutingInformation dispatches through IFaxIncomingJob's vtable slot 21.
 func (self *IFaxIncomingJob) Get_RoutingInformation(pbstrRoutingInformation *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrRoutingInformation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_JobType dispatches through IFaxIncomingJob's vtable slot 22.
 func (self *IFaxIncomingJob) Get_JobType(pJobType *FAX_JOB_TYPE_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pJobType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Cancel dispatches through IFaxIncomingJob's vtable slot 23.
 func (self *IFaxIncomingJob) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through IFaxIncomingJob's vtable slot 24.
 func (self *IFaxIncomingJob) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CopyTiff dispatches through IFaxIncomingJob's vtable slot 25.
 func (self *IFaxIncomingJob) CopyTiff(bstrTiffPath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTiffPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxIncomingJobs: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxincomingjobs
@@ -1804,13 +1804,13 @@ var IID_IFaxIncomingJobs = win32.GUID{Data1: 0x011f04e9, Data2: 0x4fd6, Data3: 0
 // Get__NewEnum dispatches through IFaxIncomingJobs's vtable slot 7.
 func (self *IFaxIncomingJobs) Get__NewEnum(ppUnk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IFaxIncomingJobs's vtable slot 9.
 func (self *IFaxIncomingJobs) Get_Count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxIncomingMessage: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxincomingmessage
@@ -1825,79 +1825,79 @@ var IID_IFaxIncomingMessage = win32.GUID{Data1: 0x7cab88fa, Data2: 0x2ef9, Data3
 // Get_Id dispatches through IFaxIncomingMessage's vtable slot 7.
 func (self *IFaxIncomingMessage) Get_Id(pbstrId *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Pages dispatches through IFaxIncomingMessage's vtable slot 8.
 func (self *IFaxIncomingMessage) Get_Pages(plPages *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plPages)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Size dispatches through IFaxIncomingMessage's vtable slot 9.
 func (self *IFaxIncomingMessage) Get_Size(plSize *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DeviceName dispatches through IFaxIncomingMessage's vtable slot 10.
 func (self *IFaxIncomingMessage) Get_DeviceName(pbstrDeviceName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDeviceName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Retries dispatches through IFaxIncomingMessage's vtable slot 11.
 func (self *IFaxIncomingMessage) Get_Retries(plRetries *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plRetries)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TransmissionStart dispatches through IFaxIncomingMessage's vtable slot 12.
 func (self *IFaxIncomingMessage) Get_TransmissionStart(pdateTransmissionStart *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdateTransmissionStart)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TransmissionEnd dispatches through IFaxIncomingMessage's vtable slot 13.
 func (self *IFaxIncomingMessage) Get_TransmissionEnd(pdateTransmissionEnd *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdateTransmissionEnd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CSID dispatches through IFaxIncomingMessage's vtable slot 14.
 func (self *IFaxIncomingMessage) Get_CSID(pbstrCSID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrCSID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TSID dispatches through IFaxIncomingMessage's vtable slot 15.
 func (self *IFaxIncomingMessage) Get_TSID(pbstrTSID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrTSID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CallerId dispatches through IFaxIncomingMessage's vtable slot 16.
 func (self *IFaxIncomingMessage) Get_CallerId(pbstrCallerId *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrCallerId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RoutingInformation dispatches through IFaxIncomingMessage's vtable slot 17.
 func (self *IFaxIncomingMessage) Get_RoutingInformation(pbstrRoutingInformation *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrRoutingInformation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CopyTiff dispatches through IFaxIncomingMessage's vtable slot 18.
 func (self *IFaxIncomingMessage) CopyTiff(bstrTiffPath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTiffPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IFaxIncomingMessage's vtable slot 19.
 func (self *IFaxIncomingMessage) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxIncomingMessage2: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxincomingmessage2
@@ -1912,97 +1912,97 @@ var IID_IFaxIncomingMessage2 = win32.GUID{Data1: 0xf9208503, Data2: 0xe2bc, Data
 // Get_Subject dispatches through IFaxIncomingMessage2's vtable slot 20.
 func (self *IFaxIncomingMessage2) Get_Subject(pbstrSubject *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrSubject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Subject dispatches through IFaxIncomingMessage2's vtable slot 21.
 func (self *IFaxIncomingMessage2) Put_Subject(bstrSubject foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrSubject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SenderName dispatches through IFaxIncomingMessage2's vtable slot 22.
 func (self *IFaxIncomingMessage2) Get_SenderName(pbstrSenderName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrSenderName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SenderName dispatches through IFaxIncomingMessage2's vtable slot 23.
 func (self *IFaxIncomingMessage2) Put_SenderName(bstrSenderName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrSenderName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SenderFaxNumber dispatches through IFaxIncomingMessage2's vtable slot 24.
 func (self *IFaxIncomingMessage2) Get_SenderFaxNumber(pbstrSenderFaxNumber *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrSenderFaxNumber)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SenderFaxNumber dispatches through IFaxIncomingMessage2's vtable slot 25.
 func (self *IFaxIncomingMessage2) Put_SenderFaxNumber(bstrSenderFaxNumber foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrSenderFaxNumber)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HasCoverPage dispatches through IFaxIncomingMessage2's vtable slot 26.
 func (self *IFaxIncomingMessage2) Get_HasCoverPage(pbHasCoverPage *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbHasCoverPage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_HasCoverPage dispatches through IFaxIncomingMessage2's vtable slot 27.
 func (self *IFaxIncomingMessage2) Put_HasCoverPage(bHasCoverPage foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(bHasCoverPage))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Recipients dispatches through IFaxIncomingMessage2's vtable slot 28.
 func (self *IFaxIncomingMessage2) Get_Recipients(pbstrRecipients *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrRecipients)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Recipients dispatches through IFaxIncomingMessage2's vtable slot 29.
 func (self *IFaxIncomingMessage2) Put_Recipients(bstrRecipients foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRecipients)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_WasReAssigned dispatches through IFaxIncomingMessage2's vtable slot 30.
 func (self *IFaxIncomingMessage2) Get_WasReAssigned(pbWasReAssigned *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbWasReAssigned)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Read dispatches through IFaxIncomingMessage2's vtable slot 31.
 func (self *IFaxIncomingMessage2) Get_Read(pbRead *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbRead)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Read dispatches through IFaxIncomingMessage2's vtable slot 32.
 func (self *IFaxIncomingMessage2) Put_Read(bRead foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(bRead))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReAssign dispatches through IFaxIncomingMessage2's vtable slot 33.
 func (self *IFaxIncomingMessage2) ReAssign() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Save dispatches through IFaxIncomingMessage2's vtable slot 34.
 func (self *IFaxIncomingMessage2) Save() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through IFaxIncomingMessage2's vtable slot 35.
 func (self *IFaxIncomingMessage2) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxIncomingMessageIterator: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxincomingmessageiterator
@@ -2017,37 +2017,37 @@ var IID_IFaxIncomingMessageIterator = win32.GUID{Data1: 0xfd73ecc4, Data2: 0x6f0
 // Get_Message dispatches through IFaxIncomingMessageIterator's vtable slot 7.
 func (self *IFaxIncomingMessageIterator) Get_Message(pFaxIncomingMessage **IFaxIncomingMessage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxIncomingMessage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PrefetchSize dispatches through IFaxIncomingMessageIterator's vtable slot 8.
 func (self *IFaxIncomingMessageIterator) Get_PrefetchSize(plPrefetchSize *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plPrefetchSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PrefetchSize dispatches through IFaxIncomingMessageIterator's vtable slot 9.
 func (self *IFaxIncomingMessageIterator) Put_PrefetchSize(lPrefetchSize int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(lPrefetchSize))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AtEOF dispatches through IFaxIncomingMessageIterator's vtable slot 10.
 func (self *IFaxIncomingMessageIterator) Get_AtEOF(pbEOF *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbEOF)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MoveFirst dispatches through IFaxIncomingMessageIterator's vtable slot 11.
 func (self *IFaxIncomingMessageIterator) MoveFirst() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IFaxIncomingMessageIterator's vtable slot 12.
 func (self *IFaxIncomingMessageIterator) MoveNext() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxIncomingQueue: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxincomingqueue
@@ -2062,37 +2062,37 @@ var IID_IFaxIncomingQueue = win32.GUID{Data1: 0x902e64ef, Data2: 0x8fd8, Data3: 
 // Get_Blocked dispatches through IFaxIncomingQueue's vtable slot 7.
 func (self *IFaxIncomingQueue) Get_Blocked(pbBlocked *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbBlocked)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Blocked dispatches through IFaxIncomingQueue's vtable slot 8.
 func (self *IFaxIncomingQueue) Put_Blocked(bBlocked foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(bBlocked))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through IFaxIncomingQueue's vtable slot 9.
 func (self *IFaxIncomingQueue) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Save dispatches through IFaxIncomingQueue's vtable slot 10.
 func (self *IFaxIncomingQueue) Save() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetJobs dispatches through IFaxIncomingQueue's vtable slot 11.
 func (self *IFaxIncomingQueue) GetJobs(pFaxIncomingJobs **IFaxIncomingJobs) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxIncomingJobs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetJob dispatches through IFaxIncomingQueue's vtable slot 12.
 func (self *IFaxIncomingQueue) GetJob(bstrJobId foundation.BSTR, pFaxIncomingJob **IFaxIncomingJob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrJobId)), uintptr(unsafe.Pointer(pFaxIncomingJob)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxJobStatus: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxjobstatus
@@ -2107,103 +2107,103 @@ var IID_IFaxJobStatus = win32.GUID{Data1: 0x8b86f485, Data2: 0xfd7f, Data3: 0x48
 // Get_Status dispatches through IFaxJobStatus's vtable slot 7.
 func (self *IFaxJobStatus) Get_Status(pStatus *FAX_JOB_STATUS_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Pages dispatches through IFaxJobStatus's vtable slot 8.
 func (self *IFaxJobStatus) Get_Pages(plPages *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plPages)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Size dispatches through IFaxJobStatus's vtable slot 9.
 func (self *IFaxJobStatus) Get_Size(plSize *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentPage dispatches through IFaxJobStatus's vtable slot 10.
 func (self *IFaxJobStatus) Get_CurrentPage(plCurrentPage *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCurrentPage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DeviceId dispatches through IFaxJobStatus's vtable slot 11.
 func (self *IFaxJobStatus) Get_DeviceId(plDeviceId *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plDeviceId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CSID dispatches through IFaxJobStatus's vtable slot 12.
 func (self *IFaxJobStatus) Get_CSID(pbstrCSID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrCSID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TSID dispatches through IFaxJobStatus's vtable slot 13.
 func (self *IFaxJobStatus) Get_TSID(pbstrTSID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrTSID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ExtendedStatusCode dispatches through IFaxJobStatus's vtable slot 14.
 func (self *IFaxJobStatus) Get_ExtendedStatusCode(pExtendedStatusCode *FAX_JOB_EXTENDED_STATUS_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pExtendedStatusCode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ExtendedStatus dispatches through IFaxJobStatus's vtable slot 15.
 func (self *IFaxJobStatus) Get_ExtendedStatus(pbstrExtendedStatus *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrExtendedStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AvailableOperations dispatches through IFaxJobStatus's vtable slot 16.
 func (self *IFaxJobStatus) Get_AvailableOperations(pAvailableOperations *FAX_JOB_OPERATIONS_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAvailableOperations)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Retries dispatches through IFaxJobStatus's vtable slot 17.
 func (self *IFaxJobStatus) Get_Retries(plRetries *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plRetries)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_JobType dispatches through IFaxJobStatus's vtable slot 18.
 func (self *IFaxJobStatus) Get_JobType(pJobType *FAX_JOB_TYPE_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pJobType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ScheduledTime dispatches through IFaxJobStatus's vtable slot 19.
 func (self *IFaxJobStatus) Get_ScheduledTime(pdateScheduledTime *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdateScheduledTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TransmissionStart dispatches through IFaxJobStatus's vtable slot 20.
 func (self *IFaxJobStatus) Get_TransmissionStart(pdateTransmissionStart *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdateTransmissionStart)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TransmissionEnd dispatches through IFaxJobStatus's vtable slot 21.
 func (self *IFaxJobStatus) Get_TransmissionEnd(pdateTransmissionEnd *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdateTransmissionEnd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CallerId dispatches through IFaxJobStatus's vtable slot 22.
 func (self *IFaxJobStatus) Get_CallerId(pbstrCallerId *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrCallerId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RoutingInformation dispatches through IFaxJobStatus's vtable slot 23.
 func (self *IFaxJobStatus) Get_RoutingInformation(pbstrRoutingInformation *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrRoutingInformation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxLoggingOptions: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxloggingoptions
@@ -2218,13 +2218,13 @@ var IID_IFaxLoggingOptions = win32.GUID{Data1: 0x34e64fb9, Data2: 0x6b31, Data3:
 // Get_EventLogging dispatches through IFaxLoggingOptions's vtable slot 7.
 func (self *IFaxLoggingOptions) Get_EventLogging(pFaxEventLogging **IFaxEventLogging) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxEventLogging)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ActivityLogging dispatches through IFaxLoggingOptions's vtable slot 8.
 func (self *IFaxLoggingOptions) Get_ActivityLogging(pFaxActivityLogging **IFaxActivityLogging) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxActivityLogging)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxOutboundRouting: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxoutboundrouting
@@ -2239,13 +2239,13 @@ var IID_IFaxOutboundRouting = win32.GUID{Data1: 0x25dc05a4, Data2: 0x9909, Data3
 // GetGroups dispatches through IFaxOutboundRouting's vtable slot 7.
 func (self *IFaxOutboundRouting) GetGroups(pFaxOutboundRoutingGroups **IFaxOutboundRoutingGroups) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxOutboundRoutingGroups)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRules dispatches through IFaxOutboundRouting's vtable slot 8.
 func (self *IFaxOutboundRouting) GetRules(pFaxOutboundRoutingRules **IFaxOutboundRoutingRules) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxOutboundRoutingRules)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxOutboundRoutingGroup: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxoutboundroutinggroup
@@ -2260,19 +2260,19 @@ var IID_IFaxOutboundRoutingGroup = win32.GUID{Data1: 0xca6289a1, Data2: 0x7e25, 
 // Get_Name dispatches through IFaxOutboundRoutingGroup's vtable slot 7.
 func (self *IFaxOutboundRoutingGroup) Get_Name(pbstrName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Status dispatches through IFaxOutboundRoutingGroup's vtable slot 8.
 func (self *IFaxOutboundRoutingGroup) Get_Status(pStatus *FAX_GROUP_STATUS_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DeviceIds dispatches through IFaxOutboundRoutingGroup's vtable slot 9.
 func (self *IFaxOutboundRoutingGroup) Get_DeviceIds(pFaxDeviceIds **IFaxDeviceIds) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxDeviceIds)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxOutboundRoutingGroups: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxoutboundroutinggroups
@@ -2287,19 +2287,19 @@ var IID_IFaxOutboundRoutingGroups = win32.GUID{Data1: 0x235cbef7, Data2: 0xc2de,
 // Get__NewEnum dispatches through IFaxOutboundRoutingGroups's vtable slot 7.
 func (self *IFaxOutboundRoutingGroups) Get__NewEnum(ppUnk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IFaxOutboundRoutingGroups's vtable slot 9.
 func (self *IFaxOutboundRoutingGroups) Get_Count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through IFaxOutboundRoutingGroups's vtable slot 10.
 func (self *IFaxOutboundRoutingGroups) Add(bstrName foundation.BSTR, pFaxOutboundRoutingGroup **IFaxOutboundRoutingGroup) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(pFaxOutboundRoutingGroup)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxOutboundRoutingRule: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxoutboundroutingrule
@@ -2314,67 +2314,67 @@ var IID_IFaxOutboundRoutingRule = win32.GUID{Data1: 0xe1f795d5, Data2: 0x07c2, D
 // Get_CountryCode dispatches through IFaxOutboundRoutingRule's vtable slot 7.
 func (self *IFaxOutboundRoutingRule) Get_CountryCode(plCountryCode *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCountryCode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AreaCode dispatches through IFaxOutboundRoutingRule's vtable slot 8.
 func (self *IFaxOutboundRoutingRule) Get_AreaCode(plAreaCode *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAreaCode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Status dispatches through IFaxOutboundRoutingRule's vtable slot 9.
 func (self *IFaxOutboundRoutingRule) Get_Status(pStatus *FAX_RULE_STATUS_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UseDevice dispatches through IFaxOutboundRoutingRule's vtable slot 10.
 func (self *IFaxOutboundRoutingRule) Get_UseDevice(pbUseDevice *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbUseDevice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_UseDevice dispatches through IFaxOutboundRoutingRule's vtable slot 11.
 func (self *IFaxOutboundRoutingRule) Put_UseDevice(bUseDevice foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(bUseDevice))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DeviceId dispatches through IFaxOutboundRoutingRule's vtable slot 12.
 func (self *IFaxOutboundRoutingRule) Get_DeviceId(plDeviceId *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plDeviceId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DeviceId dispatches through IFaxOutboundRoutingRule's vtable slot 13.
 func (self *IFaxOutboundRoutingRule) Put_DeviceId(DeviceId int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(DeviceId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_GroupName dispatches through IFaxOutboundRoutingRule's vtable slot 14.
 func (self *IFaxOutboundRoutingRule) Get_GroupName(pbstrGroupName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrGroupName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_GroupName dispatches through IFaxOutboundRoutingRule's vtable slot 15.
 func (self *IFaxOutboundRoutingRule) Put_GroupName(bstrGroupName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGroupName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through IFaxOutboundRoutingRule's vtable slot 16.
 func (self *IFaxOutboundRoutingRule) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Save dispatches through IFaxOutboundRoutingRule's vtable slot 17.
 func (self *IFaxOutboundRoutingRule) Save() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxOutboundRoutingRules: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxoutboundroutingrules
@@ -2389,43 +2389,43 @@ var IID_IFaxOutboundRoutingRules = win32.GUID{Data1: 0xdcefa1e7, Data2: 0xae7d, 
 // Get__NewEnum dispatches through IFaxOutboundRoutingRules's vtable slot 7.
 func (self *IFaxOutboundRoutingRules) Get__NewEnum(ppUnk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Item dispatches through IFaxOutboundRoutingRules's vtable slot 8.
 func (self *IFaxOutboundRoutingRules) Get_Item(lIndex int32, pFaxOutboundRoutingRule **IFaxOutboundRoutingRule) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(pFaxOutboundRoutingRule)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IFaxOutboundRoutingRules's vtable slot 9.
 func (self *IFaxOutboundRoutingRules) Get_Count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ItemByCountryAndArea dispatches through IFaxOutboundRoutingRules's vtable slot 10.
 func (self *IFaxOutboundRoutingRules) ItemByCountryAndArea(lCountryCode int32, lAreaCode int32, pFaxOutboundRoutingRule **IFaxOutboundRoutingRule) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lCountryCode), uintptr(lAreaCode), uintptr(unsafe.Pointer(pFaxOutboundRoutingRule)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveByCountryAndArea dispatches through IFaxOutboundRoutingRules's vtable slot 11.
 func (self *IFaxOutboundRoutingRules) RemoveByCountryAndArea(lCountryCode int32, lAreaCode int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(lCountryCode), uintptr(lAreaCode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through IFaxOutboundRoutingRules's vtable slot 12.
 func (self *IFaxOutboundRoutingRules) Remove(lIndex int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(lIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through IFaxOutboundRoutingRules's vtable slot 13.
 func (self *IFaxOutboundRoutingRules) Add(lCountryCode int32, lAreaCode int32, bUseDevice foundation.VARIANT_BOOL, bstrGroupName foundation.BSTR, lDeviceId int32, pFaxOutboundRoutingRule **IFaxOutboundRoutingRule) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(lCountryCode), uintptr(lAreaCode), uintptr(bUseDevice), uintptr(unsafe.Pointer(bstrGroupName)), uintptr(lDeviceId), uintptr(unsafe.Pointer(pFaxOutboundRoutingRule)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxOutgoingArchive: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxoutgoingarchive
@@ -2440,109 +2440,109 @@ var IID_IFaxOutgoingArchive = win32.GUID{Data1: 0xc9c28f40, Data2: 0x8d80, Data3
 // Get_UseArchive dispatches through IFaxOutgoingArchive's vtable slot 7.
 func (self *IFaxOutgoingArchive) Get_UseArchive(pbUseArchive *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbUseArchive)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_UseArchive dispatches through IFaxOutgoingArchive's vtable slot 8.
 func (self *IFaxOutgoingArchive) Put_UseArchive(bUseArchive foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(bUseArchive))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ArchiveFolder dispatches through IFaxOutgoingArchive's vtable slot 9.
 func (self *IFaxOutgoingArchive) Get_ArchiveFolder(pbstrArchiveFolder *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrArchiveFolder)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ArchiveFolder dispatches through IFaxOutgoingArchive's vtable slot 10.
 func (self *IFaxOutgoingArchive) Put_ArchiveFolder(bstrArchiveFolder foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrArchiveFolder)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SizeQuotaWarning dispatches through IFaxOutgoingArchive's vtable slot 11.
 func (self *IFaxOutgoingArchive) Get_SizeQuotaWarning(pbSizeQuotaWarning *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbSizeQuotaWarning)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SizeQuotaWarning dispatches through IFaxOutgoingArchive's vtable slot 12.
 func (self *IFaxOutgoingArchive) Put_SizeQuotaWarning(bSizeQuotaWarning foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(bSizeQuotaWarning))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HighQuotaWaterMark dispatches through IFaxOutgoingArchive's vtable slot 13.
 func (self *IFaxOutgoingArchive) Get_HighQuotaWaterMark(plHighQuotaWaterMark *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plHighQuotaWaterMark)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_HighQuotaWaterMark dispatches through IFaxOutgoingArchive's vtable slot 14.
 func (self *IFaxOutgoingArchive) Put_HighQuotaWaterMark(lHighQuotaWaterMark int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(lHighQuotaWaterMark))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LowQuotaWaterMark dispatches through IFaxOutgoingArchive's vtable slot 15.
 func (self *IFaxOutgoingArchive) Get_LowQuotaWaterMark(plLowQuotaWaterMark *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plLowQuotaWaterMark)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LowQuotaWaterMark dispatches through IFaxOutgoingArchive's vtable slot 16.
 func (self *IFaxOutgoingArchive) Put_LowQuotaWaterMark(lLowQuotaWaterMark int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(lLowQuotaWaterMark))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AgeLimit dispatches through IFaxOutgoingArchive's vtable slot 17.
 func (self *IFaxOutgoingArchive) Get_AgeLimit(plAgeLimit *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAgeLimit)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AgeLimit dispatches through IFaxOutgoingArchive's vtable slot 18.
 func (self *IFaxOutgoingArchive) Put_AgeLimit(lAgeLimit int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(lAgeLimit))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SizeLow dispatches through IFaxOutgoingArchive's vtable slot 19.
 func (self *IFaxOutgoingArchive) Get_SizeLow(plSizeLow *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plSizeLow)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SizeHigh dispatches through IFaxOutgoingArchive's vtable slot 20.
 func (self *IFaxOutgoingArchive) Get_SizeHigh(plSizeHigh *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plSizeHigh)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through IFaxOutgoingArchive's vtable slot 21.
 func (self *IFaxOutgoingArchive) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Save dispatches through IFaxOutgoingArchive's vtable slot 22.
 func (self *IFaxOutgoingArchive) Save() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMessages dispatches through IFaxOutgoingArchive's vtable slot 23.
 func (self *IFaxOutgoingArchive) GetMessages(lPrefetchSize int32, pFaxOutgoingMessageIterator **IFaxOutgoingMessageIterator) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(lPrefetchSize), uintptr(unsafe.Pointer(pFaxOutgoingMessageIterator)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMessage dispatches through IFaxOutgoingArchive's vtable slot 24.
 func (self *IFaxOutgoingArchive) GetMessage(bstrMessageId foundation.BSTR, pFaxOutgoingMessage **IFaxOutgoingMessage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrMessageId)), uintptr(unsafe.Pointer(pFaxOutgoingMessage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxOutgoingJob: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxoutgoingjob
@@ -2557,187 +2557,187 @@ var IID_IFaxOutgoingJob = win32.GUID{Data1: 0x6356daad, Data2: 0x6614, Data3: 0x
 // Get_Subject dispatches through IFaxOutgoingJob's vtable slot 7.
 func (self *IFaxOutgoingJob) Get_Subject(pbstrSubject *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrSubject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DocumentName dispatches through IFaxOutgoingJob's vtable slot 8.
 func (self *IFaxOutgoingJob) Get_DocumentName(pbstrDocumentName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDocumentName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Pages dispatches through IFaxOutgoingJob's vtable slot 9.
 func (self *IFaxOutgoingJob) Get_Pages(plPages *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plPages)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Size dispatches through IFaxOutgoingJob's vtable slot 10.
 func (self *IFaxOutgoingJob) Get_Size(plSize *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SubmissionId dispatches through IFaxOutgoingJob's vtable slot 11.
 func (self *IFaxOutgoingJob) Get_SubmissionId(pbstrSubmissionId *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrSubmissionId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Id dispatches through IFaxOutgoingJob's vtable slot 12.
 func (self *IFaxOutgoingJob) Get_Id(pbstrId *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OriginalScheduledTime dispatches through IFaxOutgoingJob's vtable slot 13.
 func (self *IFaxOutgoingJob) Get_OriginalScheduledTime(pdateOriginalScheduledTime *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdateOriginalScheduledTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SubmissionTime dispatches through IFaxOutgoingJob's vtable slot 14.
 func (self *IFaxOutgoingJob) Get_SubmissionTime(pdateSubmissionTime *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdateSubmissionTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReceiptType dispatches through IFaxOutgoingJob's vtable slot 15.
 func (self *IFaxOutgoingJob) Get_ReceiptType(pReceiptType *FAX_RECEIPT_TYPE_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pReceiptType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Priority dispatches through IFaxOutgoingJob's vtable slot 16.
 func (self *IFaxOutgoingJob) Get_Priority(pPriority *FAX_PRIORITY_TYPE_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPriority)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Sender dispatches through IFaxOutgoingJob's vtable slot 17.
 func (self *IFaxOutgoingJob) Get_Sender(ppFaxSender **IFaxSender) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFaxSender)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Recipient dispatches through IFaxOutgoingJob's vtable slot 18.
 func (self *IFaxOutgoingJob) Get_Recipient(ppFaxRecipient **IFaxRecipient) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFaxRecipient)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentPage dispatches through IFaxOutgoingJob's vtable slot 19.
 func (self *IFaxOutgoingJob) Get_CurrentPage(plCurrentPage *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCurrentPage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DeviceId dispatches through IFaxOutgoingJob's vtable slot 20.
 func (self *IFaxOutgoingJob) Get_DeviceId(plDeviceId *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plDeviceId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Status dispatches through IFaxOutgoingJob's vtable slot 21.
 func (self *IFaxOutgoingJob) Get_Status(pStatus *FAX_JOB_STATUS_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ExtendedStatusCode dispatches through IFaxOutgoingJob's vtable slot 22.
 func (self *IFaxOutgoingJob) Get_ExtendedStatusCode(pExtendedStatusCode *FAX_JOB_EXTENDED_STATUS_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pExtendedStatusCode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ExtendedStatus dispatches through IFaxOutgoingJob's vtable slot 23.
 func (self *IFaxOutgoingJob) Get_ExtendedStatus(pbstrExtendedStatus *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrExtendedStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AvailableOperations dispatches through IFaxOutgoingJob's vtable slot 24.
 func (self *IFaxOutgoingJob) Get_AvailableOperations(pAvailableOperations *FAX_JOB_OPERATIONS_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAvailableOperations)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Retries dispatches through IFaxOutgoingJob's vtable slot 25.
 func (self *IFaxOutgoingJob) Get_Retries(plRetries *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plRetries)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ScheduledTime dispatches through IFaxOutgoingJob's vtable slot 26.
 func (self *IFaxOutgoingJob) Get_ScheduledTime(pdateScheduledTime *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdateScheduledTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TransmissionStart dispatches through IFaxOutgoingJob's vtable slot 27.
 func (self *IFaxOutgoingJob) Get_TransmissionStart(pdateTransmissionStart *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdateTransmissionStart)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TransmissionEnd dispatches through IFaxOutgoingJob's vtable slot 28.
 func (self *IFaxOutgoingJob) Get_TransmissionEnd(pdateTransmissionEnd *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdateTransmissionEnd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CSID dispatches through IFaxOutgoingJob's vtable slot 29.
 func (self *IFaxOutgoingJob) Get_CSID(pbstrCSID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrCSID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TSID dispatches through IFaxOutgoingJob's vtable slot 30.
 func (self *IFaxOutgoingJob) Get_TSID(pbstrTSID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrTSID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_GroupBroadcastReceipts dispatches through IFaxOutgoingJob's vtable slot 31.
 func (self *IFaxOutgoingJob) Get_GroupBroadcastReceipts(pbGroupBroadcastReceipts *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbGroupBroadcastReceipts)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Pause dispatches through IFaxOutgoingJob's vtable slot 32.
 func (self *IFaxOutgoingJob) Pause() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Resume dispatches through IFaxOutgoingJob's vtable slot 33.
 func (self *IFaxOutgoingJob) Resume() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Restart dispatches through IFaxOutgoingJob's vtable slot 34.
 func (self *IFaxOutgoingJob) Restart() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CopyTiff dispatches through IFaxOutgoingJob's vtable slot 35.
 func (self *IFaxOutgoingJob) CopyTiff(bstrTiffPath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTiffPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through IFaxOutgoingJob's vtable slot 36.
 func (self *IFaxOutgoingJob) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Cancel dispatches through IFaxOutgoingJob's vtable slot 37.
 func (self *IFaxOutgoingJob) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxOutgoingJob2: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxoutgoingjob2
@@ -2752,19 +2752,19 @@ var IID_IFaxOutgoingJob2 = win32.GUID{Data1: 0x418a8d96, Data2: 0x59a0, Data3: 0
 // Get_HasCoverPage dispatches through IFaxOutgoingJob2's vtable slot 38.
 func (self *IFaxOutgoingJob2) Get_HasCoverPage(pbHasCoverPage *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbHasCoverPage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReceiptAddress dispatches through IFaxOutgoingJob2's vtable slot 39.
 func (self *IFaxOutgoingJob2) Get_ReceiptAddress(pbstrReceiptAddress *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrReceiptAddress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ScheduleType dispatches through IFaxOutgoingJob2's vtable slot 40.
 func (self *IFaxOutgoingJob2) Get_ScheduleType(pScheduleType *FAX_SCHEDULE_TYPE_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pScheduleType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxOutgoingJobs: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxoutgoingjobs
@@ -2779,13 +2779,13 @@ var IID_IFaxOutgoingJobs = win32.GUID{Data1: 0x2c56d8e6, Data2: 0x8c2f, Data3: 0
 // Get__NewEnum dispatches through IFaxOutgoingJobs's vtable slot 7.
 func (self *IFaxOutgoingJobs) Get__NewEnum(ppUnk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IFaxOutgoingJobs's vtable slot 9.
 func (self *IFaxOutgoingJobs) Get_Count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxOutgoingMessage: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxoutgoingmessage
@@ -2800,115 +2800,115 @@ var IID_IFaxOutgoingMessage = win32.GUID{Data1: 0xf0ea35de, Data2: 0xcaa5, Data3
 // Get_SubmissionId dispatches through IFaxOutgoingMessage's vtable slot 7.
 func (self *IFaxOutgoingMessage) Get_SubmissionId(pbstrSubmissionId *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrSubmissionId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Id dispatches through IFaxOutgoingMessage's vtable slot 8.
 func (self *IFaxOutgoingMessage) Get_Id(pbstrId *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Subject dispatches through IFaxOutgoingMessage's vtable slot 9.
 func (self *IFaxOutgoingMessage) Get_Subject(pbstrSubject *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrSubject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DocumentName dispatches through IFaxOutgoingMessage's vtable slot 10.
 func (self *IFaxOutgoingMessage) Get_DocumentName(pbstrDocumentName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDocumentName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Retries dispatches through IFaxOutgoingMessage's vtable slot 11.
 func (self *IFaxOutgoingMessage) Get_Retries(plRetries *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plRetries)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Pages dispatches through IFaxOutgoingMessage's vtable slot 12.
 func (self *IFaxOutgoingMessage) Get_Pages(plPages *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plPages)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Size dispatches through IFaxOutgoingMessage's vtable slot 13.
 func (self *IFaxOutgoingMessage) Get_Size(plSize *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OriginalScheduledTime dispatches through IFaxOutgoingMessage's vtable slot 14.
 func (self *IFaxOutgoingMessage) Get_OriginalScheduledTime(pdateOriginalScheduledTime *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdateOriginalScheduledTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SubmissionTime dispatches through IFaxOutgoingMessage's vtable slot 15.
 func (self *IFaxOutgoingMessage) Get_SubmissionTime(pdateSubmissionTime *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdateSubmissionTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Priority dispatches through IFaxOutgoingMessage's vtable slot 16.
 func (self *IFaxOutgoingMessage) Get_Priority(pPriority *FAX_PRIORITY_TYPE_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPriority)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Sender dispatches through IFaxOutgoingMessage's vtable slot 17.
 func (self *IFaxOutgoingMessage) Get_Sender(ppFaxSender **IFaxSender) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFaxSender)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Recipient dispatches through IFaxOutgoingMessage's vtable slot 18.
 func (self *IFaxOutgoingMessage) Get_Recipient(ppFaxRecipient **IFaxRecipient) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFaxRecipient)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DeviceName dispatches through IFaxOutgoingMessage's vtable slot 19.
 func (self *IFaxOutgoingMessage) Get_DeviceName(pbstrDeviceName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDeviceName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TransmissionStart dispatches through IFaxOutgoingMessage's vtable slot 20.
 func (self *IFaxOutgoingMessage) Get_TransmissionStart(pdateTransmissionStart *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdateTransmissionStart)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TransmissionEnd dispatches through IFaxOutgoingMessage's vtable slot 21.
 func (self *IFaxOutgoingMessage) Get_TransmissionEnd(pdateTransmissionEnd *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdateTransmissionEnd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CSID dispatches through IFaxOutgoingMessage's vtable slot 22.
 func (self *IFaxOutgoingMessage) Get_CSID(pbstrCSID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrCSID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TSID dispatches through IFaxOutgoingMessage's vtable slot 23.
 func (self *IFaxOutgoingMessage) Get_TSID(pbstrTSID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrTSID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CopyTiff dispatches through IFaxOutgoingMessage's vtable slot 24.
 func (self *IFaxOutgoingMessage) CopyTiff(bstrTiffPath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTiffPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IFaxOutgoingMessage's vtable slot 25.
 func (self *IFaxOutgoingMessage) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxOutgoingMessage2: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxoutgoingmessage2
@@ -2923,43 +2923,43 @@ var IID_IFaxOutgoingMessage2 = win32.GUID{Data1: 0xb37df687, Data2: 0xbc88, Data
 // Get_HasCoverPage dispatches through IFaxOutgoingMessage2's vtable slot 26.
 func (self *IFaxOutgoingMessage2) Get_HasCoverPage(pbHasCoverPage *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbHasCoverPage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReceiptType dispatches through IFaxOutgoingMessage2's vtable slot 27.
 func (self *IFaxOutgoingMessage2) Get_ReceiptType(pReceiptType *FAX_RECEIPT_TYPE_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pReceiptType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReceiptAddress dispatches through IFaxOutgoingMessage2's vtable slot 28.
 func (self *IFaxOutgoingMessage2) Get_ReceiptAddress(pbstrReceiptAddress *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrReceiptAddress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Read dispatches through IFaxOutgoingMessage2's vtable slot 29.
 func (self *IFaxOutgoingMessage2) Get_Read(pbRead *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbRead)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Read dispatches through IFaxOutgoingMessage2's vtable slot 30.
 func (self *IFaxOutgoingMessage2) Put_Read(bRead foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(bRead))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Save dispatches through IFaxOutgoingMessage2's vtable slot 31.
 func (self *IFaxOutgoingMessage2) Save() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through IFaxOutgoingMessage2's vtable slot 32.
 func (self *IFaxOutgoingMessage2) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxOutgoingMessageIterator: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxoutgoingmessageiterator
@@ -2974,37 +2974,37 @@ var IID_IFaxOutgoingMessageIterator = win32.GUID{Data1: 0xf5ec5d4f, Data2: 0xb84
 // Get_Message dispatches through IFaxOutgoingMessageIterator's vtable slot 7.
 func (self *IFaxOutgoingMessageIterator) Get_Message(pFaxOutgoingMessage **IFaxOutgoingMessage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxOutgoingMessage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AtEOF dispatches through IFaxOutgoingMessageIterator's vtable slot 8.
 func (self *IFaxOutgoingMessageIterator) Get_AtEOF(pbEOF *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbEOF)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PrefetchSize dispatches through IFaxOutgoingMessageIterator's vtable slot 9.
 func (self *IFaxOutgoingMessageIterator) Get_PrefetchSize(plPrefetchSize *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plPrefetchSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PrefetchSize dispatches through IFaxOutgoingMessageIterator's vtable slot 10.
 func (self *IFaxOutgoingMessageIterator) Put_PrefetchSize(lPrefetchSize int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lPrefetchSize))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MoveFirst dispatches through IFaxOutgoingMessageIterator's vtable slot 11.
 func (self *IFaxOutgoingMessageIterator) MoveFirst() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IFaxOutgoingMessageIterator's vtable slot 12.
 func (self *IFaxOutgoingMessageIterator) MoveNext() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxOutgoingQueue: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxoutgoingqueue
@@ -3019,133 +3019,133 @@ var IID_IFaxOutgoingQueue = win32.GUID{Data1: 0x80b1df24, Data2: 0xd9ac, Data3: 
 // Get_Blocked dispatches through IFaxOutgoingQueue's vtable slot 7.
 func (self *IFaxOutgoingQueue) Get_Blocked(pbBlocked *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbBlocked)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Blocked dispatches through IFaxOutgoingQueue's vtable slot 8.
 func (self *IFaxOutgoingQueue) Put_Blocked(bBlocked foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(bBlocked))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Paused dispatches through IFaxOutgoingQueue's vtable slot 9.
 func (self *IFaxOutgoingQueue) Get_Paused(pbPaused *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbPaused)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Paused dispatches through IFaxOutgoingQueue's vtable slot 10.
 func (self *IFaxOutgoingQueue) Put_Paused(bPaused foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(bPaused))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AllowPersonalCoverPages dispatches through IFaxOutgoingQueue's vtable slot 11.
 func (self *IFaxOutgoingQueue) Get_AllowPersonalCoverPages(pbAllowPersonalCoverPages *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbAllowPersonalCoverPages)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AllowPersonalCoverPages dispatches through IFaxOutgoingQueue's vtable slot 12.
 func (self *IFaxOutgoingQueue) Put_AllowPersonalCoverPages(bAllowPersonalCoverPages foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(bAllowPersonalCoverPages))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UseDeviceTSID dispatches through IFaxOutgoingQueue's vtable slot 13.
 func (self *IFaxOutgoingQueue) Get_UseDeviceTSID(pbUseDeviceTSID *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbUseDeviceTSID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_UseDeviceTSID dispatches through IFaxOutgoingQueue's vtable slot 14.
 func (self *IFaxOutgoingQueue) Put_UseDeviceTSID(bUseDeviceTSID foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(bUseDeviceTSID))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Retries dispatches through IFaxOutgoingQueue's vtable slot 15.
 func (self *IFaxOutgoingQueue) Get_Retries(plRetries *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plRetries)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Retries dispatches through IFaxOutgoingQueue's vtable slot 16.
 func (self *IFaxOutgoingQueue) Put_Retries(lRetries int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(lRetries))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RetryDelay dispatches through IFaxOutgoingQueue's vtable slot 17.
 func (self *IFaxOutgoingQueue) Get_RetryDelay(plRetryDelay *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plRetryDelay)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RetryDelay dispatches through IFaxOutgoingQueue's vtable slot 18.
 func (self *IFaxOutgoingQueue) Put_RetryDelay(lRetryDelay int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(lRetryDelay))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DiscountRateStart dispatches through IFaxOutgoingQueue's vtable slot 19.
 func (self *IFaxOutgoingQueue) Get_DiscountRateStart(pdateDiscountRateStart *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdateDiscountRateStart)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DiscountRateEnd dispatches through IFaxOutgoingQueue's vtable slot 21.
 func (self *IFaxOutgoingQueue) Get_DiscountRateEnd(pdateDiscountRateEnd *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdateDiscountRateEnd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AgeLimit dispatches through IFaxOutgoingQueue's vtable slot 23.
 func (self *IFaxOutgoingQueue) Get_AgeLimit(plAgeLimit *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAgeLimit)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AgeLimit dispatches through IFaxOutgoingQueue's vtable slot 24.
 func (self *IFaxOutgoingQueue) Put_AgeLimit(lAgeLimit int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(lAgeLimit))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Branding dispatches through IFaxOutgoingQueue's vtable slot 25.
 func (self *IFaxOutgoingQueue) Get_Branding(pbBranding *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbBranding)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Branding dispatches through IFaxOutgoingQueue's vtable slot 26.
 func (self *IFaxOutgoingQueue) Put_Branding(bBranding foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(bBranding))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through IFaxOutgoingQueue's vtable slot 27.
 func (self *IFaxOutgoingQueue) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Save dispatches through IFaxOutgoingQueue's vtable slot 28.
 func (self *IFaxOutgoingQueue) Save() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetJobs dispatches through IFaxOutgoingQueue's vtable slot 29.
 func (self *IFaxOutgoingQueue) GetJobs(pFaxOutgoingJobs **IFaxOutgoingJobs) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxOutgoingJobs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetJob dispatches through IFaxOutgoingQueue's vtable slot 30.
 func (self *IFaxOutgoingQueue) GetJob(bstrJobId foundation.BSTR, pFaxOutgoingJob **IFaxOutgoingJob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrJobId)), uintptr(unsafe.Pointer(pFaxOutgoingJob)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxReceiptOptions: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxreceiptoptions
@@ -3160,109 +3160,109 @@ var IID_IFaxReceiptOptions = win32.GUID{Data1: 0x378efaeb, Data2: 0x5fcb, Data3:
 // Get_AuthenticationType dispatches through IFaxReceiptOptions's vtable slot 7.
 func (self *IFaxReceiptOptions) Get_AuthenticationType(pType *FAX_SMTP_AUTHENTICATION_TYPE_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AuthenticationType dispatches through IFaxReceiptOptions's vtable slot 8.
 func (self *IFaxReceiptOptions) Put_AuthenticationType(Type FAX_SMTP_AUTHENTICATION_TYPE_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Type))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SMTPServer dispatches through IFaxReceiptOptions's vtable slot 9.
 func (self *IFaxReceiptOptions) Get_SMTPServer(pbstrSMTPServer *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrSMTPServer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SMTPServer dispatches through IFaxReceiptOptions's vtable slot 10.
 func (self *IFaxReceiptOptions) Put_SMTPServer(bstrSMTPServer foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrSMTPServer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SMTPPort dispatches through IFaxReceiptOptions's vtable slot 11.
 func (self *IFaxReceiptOptions) Get_SMTPPort(plSMTPPort *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plSMTPPort)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SMTPPort dispatches through IFaxReceiptOptions's vtable slot 12.
 func (self *IFaxReceiptOptions) Put_SMTPPort(lSMTPPort int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(lSMTPPort))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SMTPSender dispatches through IFaxReceiptOptions's vtable slot 13.
 func (self *IFaxReceiptOptions) Get_SMTPSender(pbstrSMTPSender *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrSMTPSender)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SMTPSender dispatches through IFaxReceiptOptions's vtable slot 14.
 func (self *IFaxReceiptOptions) Put_SMTPSender(bstrSMTPSender foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrSMTPSender)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SMTPUser dispatches through IFaxReceiptOptions's vtable slot 15.
 func (self *IFaxReceiptOptions) Get_SMTPUser(pbstrSMTPUser *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrSMTPUser)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SMTPUser dispatches through IFaxReceiptOptions's vtable slot 16.
 func (self *IFaxReceiptOptions) Put_SMTPUser(bstrSMTPUser foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrSMTPUser)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AllowedReceipts dispatches through IFaxReceiptOptions's vtable slot 17.
 func (self *IFaxReceiptOptions) Get_AllowedReceipts(pAllowedReceipts *FAX_RECEIPT_TYPE_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAllowedReceipts)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AllowedReceipts dispatches through IFaxReceiptOptions's vtable slot 18.
 func (self *IFaxReceiptOptions) Put_AllowedReceipts(AllowedReceipts FAX_RECEIPT_TYPE_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(AllowedReceipts))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SMTPPassword dispatches through IFaxReceiptOptions's vtable slot 19.
 func (self *IFaxReceiptOptions) Get_SMTPPassword(pbstrSMTPPassword *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrSMTPPassword)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SMTPPassword dispatches through IFaxReceiptOptions's vtable slot 20.
 func (self *IFaxReceiptOptions) Put_SMTPPassword(bstrSMTPPassword foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrSMTPPassword)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through IFaxReceiptOptions's vtable slot 21.
 func (self *IFaxReceiptOptions) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Save dispatches through IFaxReceiptOptions's vtable slot 22.
 func (self *IFaxReceiptOptions) Save() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UseForInboundRouting dispatches through IFaxReceiptOptions's vtable slot 23.
 func (self *IFaxReceiptOptions) Get_UseForInboundRouting(pbUseForInboundRouting *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbUseForInboundRouting)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_UseForInboundRouting dispatches through IFaxReceiptOptions's vtable slot 24.
 func (self *IFaxReceiptOptions) Put_UseForInboundRouting(bUseForInboundRouting foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(bUseForInboundRouting))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxRecipient: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxrecipient
@@ -3277,25 +3277,25 @@ var IID_IFaxRecipient = win32.GUID{Data1: 0x9a3da3a0, Data2: 0x538d, Data3: 0x42
 // Get_FaxNumber dispatches through IFaxRecipient's vtable slot 7.
 func (self *IFaxRecipient) Get_FaxNumber(pbstrFaxNumber *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrFaxNumber)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FaxNumber dispatches through IFaxRecipient's vtable slot 8.
 func (self *IFaxRecipient) Put_FaxNumber(bstrFaxNumber foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrFaxNumber)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through IFaxRecipient's vtable slot 9.
 func (self *IFaxRecipient) Get_Name(pbstrName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Name dispatches through IFaxRecipient's vtable slot 10.
 func (self *IFaxRecipient) Put_Name(bstrName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxRecipients: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxrecipients
@@ -3310,31 +3310,31 @@ var IID_IFaxRecipients = win32.GUID{Data1: 0xb9c9de5a, Data2: 0x894e, Data3: 0x4
 // Get__NewEnum dispatches through IFaxRecipients's vtable slot 7.
 func (self *IFaxRecipients) Get__NewEnum(ppUnk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Item dispatches through IFaxRecipients's vtable slot 8.
 func (self *IFaxRecipients) Get_Item(lIndex int32, ppFaxRecipient **IFaxRecipient) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(ppFaxRecipient)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IFaxRecipients's vtable slot 9.
 func (self *IFaxRecipients) Get_Count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through IFaxRecipients's vtable slot 10.
 func (self *IFaxRecipients) Add(bstrFaxNumber foundation.BSTR, bstrRecipientName foundation.BSTR, ppFaxRecipient **IFaxRecipient) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrFaxNumber)), uintptr(unsafe.Pointer(bstrRecipientName)), uintptr(unsafe.Pointer(ppFaxRecipient)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through IFaxRecipients's vtable slot 11.
 func (self *IFaxRecipients) Remove(lIndex int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(lIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxSecurity: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxsecurity
@@ -3349,37 +3349,37 @@ var IID_IFaxSecurity = win32.GUID{Data1: 0x77b508c1, Data2: 0x09c0, Data3: 0x47a
 // Get_Descriptor dispatches through IFaxSecurity's vtable slot 7.
 func (self *IFaxSecurity) Get_Descriptor(pvDescriptor *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvDescriptor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_GrantedRights dispatches through IFaxSecurity's vtable slot 9.
 func (self *IFaxSecurity) Get_GrantedRights(pGrantedRights *FAX_ACCESS_RIGHTS_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGrantedRights)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through IFaxSecurity's vtable slot 10.
 func (self *IFaxSecurity) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Save dispatches through IFaxSecurity's vtable slot 11.
 func (self *IFaxSecurity) Save() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InformationType dispatches through IFaxSecurity's vtable slot 12.
 func (self *IFaxSecurity) Get_InformationType(plInformationType *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plInformationType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_InformationType dispatches through IFaxSecurity's vtable slot 13.
 func (self *IFaxSecurity) Put_InformationType(lInformationType int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(lInformationType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxSecurity2: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxsecurity2
@@ -3394,37 +3394,37 @@ var IID_IFaxSecurity2 = win32.GUID{Data1: 0x17d851f4, Data2: 0xd09b, Data3: 0x48
 // Get_Descriptor dispatches through IFaxSecurity2's vtable slot 7.
 func (self *IFaxSecurity2) Get_Descriptor(pvDescriptor *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvDescriptor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_GrantedRights dispatches through IFaxSecurity2's vtable slot 9.
 func (self *IFaxSecurity2) Get_GrantedRights(pGrantedRights *FAX_ACCESS_RIGHTS_ENUM_2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGrantedRights)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through IFaxSecurity2's vtable slot 10.
 func (self *IFaxSecurity2) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Save dispatches through IFaxSecurity2's vtable slot 11.
 func (self *IFaxSecurity2) Save() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InformationType dispatches through IFaxSecurity2's vtable slot 12.
 func (self *IFaxSecurity2) Get_InformationType(plInformationType *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plInformationType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_InformationType dispatches through IFaxSecurity2's vtable slot 13.
 func (self *IFaxSecurity2) Put_InformationType(lInformationType int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(lInformationType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxSender: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxsender
@@ -3439,205 +3439,205 @@ var IID_IFaxSender = win32.GUID{Data1: 0x0d879d7d, Data2: 0xf57a, Data3: 0x4cc6,
 // Get_BillingCode dispatches through IFaxSender's vtable slot 7.
 func (self *IFaxSender) Get_BillingCode(pbstrBillingCode *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrBillingCode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BillingCode dispatches through IFaxSender's vtable slot 8.
 func (self *IFaxSender) Put_BillingCode(bstrBillingCode foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrBillingCode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_City dispatches through IFaxSender's vtable slot 9.
 func (self *IFaxSender) Get_City(pbstrCity *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrCity)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_City dispatches through IFaxSender's vtable slot 10.
 func (self *IFaxSender) Put_City(bstrCity foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrCity)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Company dispatches through IFaxSender's vtable slot 11.
 func (self *IFaxSender) Get_Company(pbstrCompany *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrCompany)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Company dispatches through IFaxSender's vtable slot 12.
 func (self *IFaxSender) Put_Company(bstrCompany foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrCompany)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Country dispatches through IFaxSender's vtable slot 13.
 func (self *IFaxSender) Get_Country(pbstrCountry *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrCountry)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Country dispatches through IFaxSender's vtable slot 14.
 func (self *IFaxSender) Put_Country(bstrCountry foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrCountry)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Department dispatches through IFaxSender's vtable slot 15.
 func (self *IFaxSender) Get_Department(pbstrDepartment *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDepartment)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Department dispatches through IFaxSender's vtable slot 16.
 func (self *IFaxSender) Put_Department(bstrDepartment foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDepartment)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Email dispatches through IFaxSender's vtable slot 17.
 func (self *IFaxSender) Get_Email(pbstrEmail *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrEmail)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Email dispatches through IFaxSender's vtable slot 18.
 func (self *IFaxSender) Put_Email(bstrEmail foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrEmail)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FaxNumber dispatches through IFaxSender's vtable slot 19.
 func (self *IFaxSender) Get_FaxNumber(pbstrFaxNumber *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrFaxNumber)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FaxNumber dispatches through IFaxSender's vtable slot 20.
 func (self *IFaxSender) Put_FaxNumber(bstrFaxNumber foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrFaxNumber)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HomePhone dispatches through IFaxSender's vtable slot 21.
 func (self *IFaxSender) Get_HomePhone(pbstrHomePhone *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrHomePhone)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_HomePhone dispatches through IFaxSender's vtable slot 22.
 func (self *IFaxSender) Put_HomePhone(bstrHomePhone foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrHomePhone)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through IFaxSender's vtable slot 23.
 func (self *IFaxSender) Get_Name(pbstrName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Name dispatches through IFaxSender's vtable slot 24.
 func (self *IFaxSender) Put_Name(bstrName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TSID dispatches through IFaxSender's vtable slot 25.
 func (self *IFaxSender) Get_TSID(pbstrTSID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrTSID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_TSID dispatches through IFaxSender's vtable slot 26.
 func (self *IFaxSender) Put_TSID(bstrTSID foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTSID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OfficePhone dispatches through IFaxSender's vtable slot 27.
 func (self *IFaxSender) Get_OfficePhone(pbstrOfficePhone *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrOfficePhone)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_OfficePhone dispatches through IFaxSender's vtable slot 28.
 func (self *IFaxSender) Put_OfficePhone(bstrOfficePhone foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrOfficePhone)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OfficeLocation dispatches through IFaxSender's vtable slot 29.
 func (self *IFaxSender) Get_OfficeLocation(pbstrOfficeLocation *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrOfficeLocation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_OfficeLocation dispatches through IFaxSender's vtable slot 30.
 func (self *IFaxSender) Put_OfficeLocation(bstrOfficeLocation foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrOfficeLocation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_State dispatches through IFaxSender's vtable slot 31.
 func (self *IFaxSender) Get_State(pbstrState *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_State dispatches through IFaxSender's vtable slot 32.
 func (self *IFaxSender) Put_State(bstrState foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StreetAddress dispatches through IFaxSender's vtable slot 33.
 func (self *IFaxSender) Get_StreetAddress(pbstrStreetAddress *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrStreetAddress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_StreetAddress dispatches through IFaxSender's vtable slot 34.
 func (self *IFaxSender) Put_StreetAddress(bstrStreetAddress foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrStreetAddress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Title dispatches through IFaxSender's vtable slot 35.
 func (self *IFaxSender) Get_Title(pbstrTitle *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrTitle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Title dispatches through IFaxSender's vtable slot 36.
 func (self *IFaxSender) Put_Title(bstrTitle foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTitle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ZipCode dispatches through IFaxSender's vtable slot 37.
 func (self *IFaxSender) Get_ZipCode(pbstrZipCode *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrZipCode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ZipCode dispatches through IFaxSender's vtable slot 38.
 func (self *IFaxSender) Put_ZipCode(bstrZipCode foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrZipCode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LoadDefaultSender dispatches through IFaxSender's vtable slot 39.
 func (self *IFaxSender) LoadDefaultSender() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SaveDefaultSender dispatches through IFaxSender's vtable slot 40.
 func (self *IFaxSender) SaveDefaultSender() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxServer: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxserver
@@ -3652,145 +3652,145 @@ var IID_IFaxServer = win32.GUID{Data1: 0x475b6469, Data2: 0x90a5, Data3: 0x4878,
 // Connect dispatches through IFaxServer's vtable slot 7.
 func (self *IFaxServer) Connect(bstrServerName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrServerName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ServerName dispatches through IFaxServer's vtable slot 8.
 func (self *IFaxServer) Get_ServerName(pbstrServerName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrServerName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceProviders dispatches through IFaxServer's vtable slot 9.
 func (self *IFaxServer) GetDeviceProviders(ppFaxDeviceProviders **IFaxDeviceProviders) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFaxDeviceProviders)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDevices dispatches through IFaxServer's vtable slot 10.
 func (self *IFaxServer) GetDevices(ppFaxDevices **IFaxDevices) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFaxDevices)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InboundRouting dispatches through IFaxServer's vtable slot 11.
 func (self *IFaxServer) Get_InboundRouting(ppFaxInboundRouting **IFaxInboundRouting) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFaxInboundRouting)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Folders dispatches through IFaxServer's vtable slot 12.
 func (self *IFaxServer) Get_Folders(pFaxFolders **IFaxFolders) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxFolders)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LoggingOptions dispatches through IFaxServer's vtable slot 13.
 func (self *IFaxServer) Get_LoggingOptions(ppFaxLoggingOptions **IFaxLoggingOptions) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFaxLoggingOptions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MajorVersion dispatches through IFaxServer's vtable slot 14.
 func (self *IFaxServer) Get_MajorVersion(plMajorVersion *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMajorVersion)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MinorVersion dispatches through IFaxServer's vtable slot 15.
 func (self *IFaxServer) Get_MinorVersion(plMinorVersion *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMinorVersion)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MajorBuild dispatches through IFaxServer's vtable slot 16.
 func (self *IFaxServer) Get_MajorBuild(plMajorBuild *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMajorBuild)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MinorBuild dispatches through IFaxServer's vtable slot 17.
 func (self *IFaxServer) Get_MinorBuild(plMinorBuild *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMinorBuild)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Debug dispatches through IFaxServer's vtable slot 18.
 func (self *IFaxServer) Get_Debug(pbDebug *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbDebug)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Activity dispatches through IFaxServer's vtable slot 19.
 func (self *IFaxServer) Get_Activity(ppFaxActivity **IFaxActivity) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFaxActivity)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OutboundRouting dispatches through IFaxServer's vtable slot 20.
 func (self *IFaxServer) Get_OutboundRouting(ppFaxOutboundRouting **IFaxOutboundRouting) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFaxOutboundRouting)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReceiptOptions dispatches through IFaxServer's vtable slot 21.
 func (self *IFaxServer) Get_ReceiptOptions(ppFaxReceiptOptions **IFaxReceiptOptions) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFaxReceiptOptions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Security dispatches through IFaxServer's vtable slot 22.
 func (self *IFaxServer) Get_Security(ppFaxSecurity **IFaxSecurity) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFaxSecurity)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Disconnect dispatches through IFaxServer's vtable slot 23.
 func (self *IFaxServer) Disconnect() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetExtensionProperty dispatches through IFaxServer's vtable slot 24.
 func (self *IFaxServer) GetExtensionProperty(bstrGUID foundation.BSTR, pvProperty *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGUID)), uintptr(unsafe.Pointer(pvProperty)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ListenToServerEvents dispatches through IFaxServer's vtable slot 26.
 func (self *IFaxServer) ListenToServerEvents(EventTypes FAX_SERVER_EVENTS_TYPE_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(EventTypes))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterDeviceProvider dispatches through IFaxServer's vtable slot 27.
 func (self *IFaxServer) RegisterDeviceProvider(bstrGUID foundation.BSTR, bstrFriendlyName foundation.BSTR, bstrImageName foundation.BSTR, TspName foundation.BSTR, lFSPIVersion int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGUID)), uintptr(unsafe.Pointer(bstrFriendlyName)), uintptr(unsafe.Pointer(bstrImageName)), uintptr(unsafe.Pointer(TspName)), uintptr(lFSPIVersion))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnregisterDeviceProvider dispatches through IFaxServer's vtable slot 28.
 func (self *IFaxServer) UnregisterDeviceProvider(bstrUniqueName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUniqueName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnregisterInboundRoutingExtension dispatches through IFaxServer's vtable slot 30.
 func (self *IFaxServer) UnregisterInboundRoutingExtension(bstrExtensionUniqueName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrExtensionUniqueName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RegisteredEvents dispatches through IFaxServer's vtable slot 31.
 func (self *IFaxServer) Get_RegisteredEvents(pEventTypes *FAX_SERVER_EVENTS_TYPE_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEventTypes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_APIVersion dispatches through IFaxServer's vtable slot 32.
 func (self *IFaxServer) Get_APIVersion(pAPIVersion *FAX_SERVER_APIVERSION_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAPIVersion)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFaxServer2: https://learn.microsoft.com/windows/win32/api/faxcomex/nn-faxcomex-ifaxserver2
@@ -3805,25 +3805,25 @@ var IID_IFaxServer2 = win32.GUID{Data1: 0x571ced0f, Data2: 0x5609, Data3: 0x4f40
 // Get_Configuration dispatches through IFaxServer2's vtable slot 33.
 func (self *IFaxServer2) Get_Configuration(ppFaxConfiguration **IFaxConfiguration) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFaxConfiguration)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentAccount dispatches through IFaxServer2's vtable slot 34.
 func (self *IFaxServer2) Get_CurrentAccount(ppCurrentAccount **IFaxAccount) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCurrentAccount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FaxAccountSet dispatches through IFaxServer2's vtable slot 35.
 func (self *IFaxServer2) Get_FaxAccountSet(ppFaxAccountSet **IFaxAccountSet) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFaxAccountSet)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Security2 dispatches through IFaxServer2's vtable slot 36.
 func (self *IFaxServer2) Get_Security2(ppFaxSecurity2 **IFaxSecurity2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFaxSecurity2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 2e037b27-cf8a-4abd-b1e0-5704943bea6f
@@ -3846,157 +3846,157 @@ var IID_IFaxServerNotify2 = win32.GUID{Data1: 0xec9c69b9, Data2: 0x5fe7, Data3: 
 // OnIncomingJobAdded dispatches through IFaxServerNotify2's vtable slot 7.
 func (self *IFaxServerNotify2) OnIncomingJobAdded(pFaxServer *IFaxServer2, bstrJobId foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxServer)), uintptr(unsafe.Pointer(bstrJobId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnIncomingJobRemoved dispatches through IFaxServerNotify2's vtable slot 8.
 func (self *IFaxServerNotify2) OnIncomingJobRemoved(pFaxServer *IFaxServer2, bstrJobId foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxServer)), uintptr(unsafe.Pointer(bstrJobId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnIncomingJobChanged dispatches through IFaxServerNotify2's vtable slot 9.
 func (self *IFaxServerNotify2) OnIncomingJobChanged(pFaxServer *IFaxServer2, bstrJobId foundation.BSTR, pJobStatus *IFaxJobStatus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxServer)), uintptr(unsafe.Pointer(bstrJobId)), uintptr(unsafe.Pointer(pJobStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnOutgoingJobAdded dispatches through IFaxServerNotify2's vtable slot 10.
 func (self *IFaxServerNotify2) OnOutgoingJobAdded(pFaxServer *IFaxServer2, bstrJobId foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxServer)), uintptr(unsafe.Pointer(bstrJobId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnOutgoingJobRemoved dispatches through IFaxServerNotify2's vtable slot 11.
 func (self *IFaxServerNotify2) OnOutgoingJobRemoved(pFaxServer *IFaxServer2, bstrJobId foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxServer)), uintptr(unsafe.Pointer(bstrJobId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnOutgoingJobChanged dispatches through IFaxServerNotify2's vtable slot 12.
 func (self *IFaxServerNotify2) OnOutgoingJobChanged(pFaxServer *IFaxServer2, bstrJobId foundation.BSTR, pJobStatus *IFaxJobStatus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxServer)), uintptr(unsafe.Pointer(bstrJobId)), uintptr(unsafe.Pointer(pJobStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnIncomingMessageAdded dispatches through IFaxServerNotify2's vtable slot 13.
 func (self *IFaxServerNotify2) OnIncomingMessageAdded(pFaxServer *IFaxServer2, bstrMessageId foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxServer)), uintptr(unsafe.Pointer(bstrMessageId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnIncomingMessageRemoved dispatches through IFaxServerNotify2's vtable slot 14.
 func (self *IFaxServerNotify2) OnIncomingMessageRemoved(pFaxServer *IFaxServer2, bstrMessageId foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxServer)), uintptr(unsafe.Pointer(bstrMessageId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnOutgoingMessageAdded dispatches through IFaxServerNotify2's vtable slot 15.
 func (self *IFaxServerNotify2) OnOutgoingMessageAdded(pFaxServer *IFaxServer2, bstrMessageId foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxServer)), uintptr(unsafe.Pointer(bstrMessageId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnOutgoingMessageRemoved dispatches through IFaxServerNotify2's vtable slot 16.
 func (self *IFaxServerNotify2) OnOutgoingMessageRemoved(pFaxServer *IFaxServer2, bstrMessageId foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxServer)), uintptr(unsafe.Pointer(bstrMessageId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnReceiptOptionsChange dispatches through IFaxServerNotify2's vtable slot 17.
 func (self *IFaxServerNotify2) OnReceiptOptionsChange(pFaxServer *IFaxServer2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxServer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnActivityLoggingConfigChange dispatches through IFaxServerNotify2's vtable slot 18.
 func (self *IFaxServerNotify2) OnActivityLoggingConfigChange(pFaxServer *IFaxServer2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxServer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnSecurityConfigChange dispatches through IFaxServerNotify2's vtable slot 19.
 func (self *IFaxServerNotify2) OnSecurityConfigChange(pFaxServer *IFaxServer2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxServer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnEventLoggingConfigChange dispatches through IFaxServerNotify2's vtable slot 20.
 func (self *IFaxServerNotify2) OnEventLoggingConfigChange(pFaxServer *IFaxServer2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxServer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnOutgoingQueueConfigChange dispatches through IFaxServerNotify2's vtable slot 21.
 func (self *IFaxServerNotify2) OnOutgoingQueueConfigChange(pFaxServer *IFaxServer2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxServer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnOutgoingArchiveConfigChange dispatches through IFaxServerNotify2's vtable slot 22.
 func (self *IFaxServerNotify2) OnOutgoingArchiveConfigChange(pFaxServer *IFaxServer2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxServer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnIncomingArchiveConfigChange dispatches through IFaxServerNotify2's vtable slot 23.
 func (self *IFaxServerNotify2) OnIncomingArchiveConfigChange(pFaxServer *IFaxServer2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxServer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnDevicesConfigChange dispatches through IFaxServerNotify2's vtable slot 24.
 func (self *IFaxServerNotify2) OnDevicesConfigChange(pFaxServer *IFaxServer2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxServer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnOutboundRoutingGroupsConfigChange dispatches through IFaxServerNotify2's vtable slot 25.
 func (self *IFaxServerNotify2) OnOutboundRoutingGroupsConfigChange(pFaxServer *IFaxServer2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxServer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnOutboundRoutingRulesConfigChange dispatches through IFaxServerNotify2's vtable slot 26.
 func (self *IFaxServerNotify2) OnOutboundRoutingRulesConfigChange(pFaxServer *IFaxServer2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxServer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnServerActivityChange dispatches through IFaxServerNotify2's vtable slot 27.
 func (self *IFaxServerNotify2) OnServerActivityChange(pFaxServer *IFaxServer2, lIncomingMessages int32, lRoutingMessages int32, lOutgoingMessages int32, lQueuedMessages int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxServer)), uintptr(lIncomingMessages), uintptr(lRoutingMessages), uintptr(lOutgoingMessages), uintptr(lQueuedMessages))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnQueuesStatusChange dispatches through IFaxServerNotify2's vtable slot 28.
 func (self *IFaxServerNotify2) OnQueuesStatusChange(pFaxServer *IFaxServer2, bOutgoingQueueBlocked foundation.VARIANT_BOOL, bOutgoingQueuePaused foundation.VARIANT_BOOL, bIncomingQueueBlocked foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxServer)), uintptr(bOutgoingQueueBlocked), uintptr(bOutgoingQueuePaused), uintptr(bIncomingQueueBlocked))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnNewCall dispatches through IFaxServerNotify2's vtable slot 29.
 func (self *IFaxServerNotify2) OnNewCall(pFaxServer *IFaxServer2, lCallId int32, lDeviceId int32, bstrCallerId foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxServer)), uintptr(lCallId), uintptr(lDeviceId), uintptr(unsafe.Pointer(bstrCallerId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnServerShutDown dispatches through IFaxServerNotify2's vtable slot 30.
 func (self *IFaxServerNotify2) OnServerShutDown(pFaxServer *IFaxServer2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxServer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnDeviceStatusChange dispatches through IFaxServerNotify2's vtable slot 31.
 func (self *IFaxServerNotify2) OnDeviceStatusChange(pFaxServer *IFaxServer2, lDeviceId int32, bPoweredOff foundation.VARIANT_BOOL, bSending foundation.VARIANT_BOOL, bReceiving foundation.VARIANT_BOOL, bRinging foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxServer)), uintptr(lDeviceId), uintptr(bPoweredOff), uintptr(bSending), uintptr(bReceiving), uintptr(bRinging))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnGeneralServerConfigChanged dispatches through IFaxServerNotify2's vtable slot 32.
 func (self *IFaxServerNotify2) OnGeneralServerConfigChanged(pFaxServer *IFaxServer2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFaxServer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 6cfa5a80-2dc8-11d0-90ea-00aa0060f86c
@@ -4011,31 +4011,31 @@ var IID_IStiDevice = win32.GUID{Data1: 0x6cfa5a80, Data2: 0x2dc8, Data3: 0x11d0,
 func (self *IStiDevice) Initialize(hinst foundation.HINSTANCE, pwszDeviceName string, dwVersion uint32, dwMode uint32) error {
 	_pwszDeviceName := win32.UTF16Ptr(pwszDeviceName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hinst), uintptr(unsafe.Pointer(_pwszDeviceName)), uintptr(dwVersion), uintptr(dwMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCapabilities dispatches through IStiDevice's vtable slot 4.
 func (self *IStiDevice) GetCapabilities(pDevCaps *STI_DEV_CAPS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevCaps)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStatus dispatches through IStiDevice's vtable slot 5.
 func (self *IStiDevice) GetStatus(pDevStatus *STI_DEVICE_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeviceReset dispatches through IStiDevice's vtable slot 6.
 func (self *IStiDevice) DeviceReset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Diagnostic dispatches through IStiDevice's vtable slot 7.
 func (self *IStiDevice) Diagnostic(pBuffer *STI_DIAG) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Escape dispatches through IStiDevice's vtable slot 8.
@@ -4049,31 +4049,31 @@ func (self *IStiDevice) Escape(EscapeFunction uint32, lpInData []byte, pOutData 
 		_pOutData = &pOutData[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(EscapeFunction), uintptr(unsafe.Pointer(_lpInData)), uintptr(len(lpInData)), uintptr(unsafe.Pointer(_pOutData)), uintptr(len(pOutData)), uintptr(unsafe.Pointer(pdwActualData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLastError dispatches through IStiDevice's vtable slot 9.
 func (self *IStiDevice) GetLastError(pdwLastDeviceError *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwLastDeviceError)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LockDevice dispatches through IStiDevice's vtable slot 10.
 func (self *IStiDevice) LockDevice(dwTimeOut uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(dwTimeOut))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnLockDevice dispatches through IStiDevice's vtable slot 11.
 func (self *IStiDevice) UnLockDevice() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RawReadData dispatches through IStiDevice's vtable slot 12.
 func (self *IStiDevice) RawReadData(lpBuffer unsafe.Pointer, lpdwNumberOfBytes *uint32, lpOverlapped *systemio.OVERLAPPED) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpdwNumberOfBytes)), uintptr(unsafe.Pointer(lpOverlapped)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RawWriteData dispatches through IStiDevice's vtable slot 13.
@@ -4083,13 +4083,13 @@ func (self *IStiDevice) RawWriteData(lpBuffer []byte, lpOverlapped *systemio.OVE
 		_lpBuffer = &lpBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpOverlapped)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RawReadCommand dispatches through IStiDevice's vtable slot 14.
 func (self *IStiDevice) RawReadCommand(lpBuffer unsafe.Pointer, lpdwNumberOfBytes *uint32, lpOverlapped *systemio.OVERLAPPED) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpdwNumberOfBytes)), uintptr(unsafe.Pointer(lpOverlapped)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RawWriteCommand dispatches through IStiDevice's vtable slot 15.
@@ -4099,31 +4099,31 @@ func (self *IStiDevice) RawWriteCommand(lpBuffer []byte, lpOverlapped *systemio.
 		_lpBuffer = &lpBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpOverlapped)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Subscribe dispatches through IStiDevice's vtable slot 16.
 func (self *IStiDevice) Subscribe(lpSubsribe *STISUBSCRIBE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpSubsribe)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLastNotificationData dispatches through IStiDevice's vtable slot 17.
 func (self *IStiDevice) GetLastNotificationData(lpNotify *STINOTIFY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpNotify)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnSubscribe dispatches through IStiDevice's vtable slot 18.
 func (self *IStiDevice) UnSubscribe() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLastErrorInfo dispatches through IStiDevice's vtable slot 19.
 func (self *IStiDevice) GetLastErrorInfo(pLastErrorInfo *ERROR_INFOW) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLastErrorInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 128a9860-52dc-11d0-9edf-444553540000
@@ -4138,68 +4138,68 @@ var IID_IStiDeviceControl = win32.GUID{Data1: 0x128a9860, Data2: 0x52dc, Data3: 
 func (self *IStiDeviceControl) Initialize(dwDeviceType uint32, dwMode uint32, pwszPortName string, dwFlags uint32) error {
 	_pwszPortName := win32.UTF16Ptr(pwszPortName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwDeviceType), uintptr(dwMode), uintptr(unsafe.Pointer(_pwszPortName)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RawReadData dispatches through IStiDeviceControl's vtable slot 4.
 func (self *IStiDeviceControl) RawReadData(lpBuffer unsafe.Pointer, lpdwNumberOfBytes *uint32, lpOverlapped *systemio.OVERLAPPED) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpdwNumberOfBytes)), uintptr(unsafe.Pointer(lpOverlapped)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RawWriteData dispatches through IStiDeviceControl's vtable slot 5.
 func (self *IStiDeviceControl) RawWriteData(lpBuffer unsafe.Pointer, nNumberOfBytes uint32, lpOverlapped *systemio.OVERLAPPED) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nNumberOfBytes), uintptr(unsafe.Pointer(lpOverlapped)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RawReadCommand dispatches through IStiDeviceControl's vtable slot 6.
 func (self *IStiDeviceControl) RawReadCommand(lpBuffer unsafe.Pointer, lpdwNumberOfBytes *uint32, lpOverlapped *systemio.OVERLAPPED) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpdwNumberOfBytes)), uintptr(unsafe.Pointer(lpOverlapped)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RawWriteCommand dispatches through IStiDeviceControl's vtable slot 7.
 func (self *IStiDeviceControl) RawWriteCommand(lpBuffer unsafe.Pointer, nNumberOfBytes uint32, lpOverlapped *systemio.OVERLAPPED) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nNumberOfBytes), uintptr(unsafe.Pointer(lpOverlapped)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RawDeviceControl dispatches through IStiDeviceControl's vtable slot 8.
 func (self *IStiDeviceControl) RawDeviceControl(EscapeFunction uint32, lpInData unsafe.Pointer, cbInDataSize uint32, pOutData unsafe.Pointer, dwOutDataSize uint32, pdwActualData *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(EscapeFunction), uintptr(unsafe.Pointer(lpInData)), uintptr(cbInDataSize), uintptr(unsafe.Pointer(pOutData)), uintptr(dwOutDataSize), uintptr(unsafe.Pointer(pdwActualData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLastError dispatches through IStiDeviceControl's vtable slot 9.
 func (self *IStiDeviceControl) GetLastError(lpdwLastError *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpdwLastError)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMyDevicePortName dispatches through IStiDeviceControl's vtable slot 10.
 func (self *IStiDeviceControl) GetMyDevicePortName(lpszDevicePath foundation.PWSTR, cwDevicePathSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpszDevicePath)), uintptr(cwDevicePathSize))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMyDeviceHandle dispatches through IStiDeviceControl's vtable slot 11.
 func (self *IStiDeviceControl) GetMyDeviceHandle(lph *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lph)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMyDeviceOpenMode dispatches through IStiDeviceControl's vtable slot 12.
 func (self *IStiDeviceControl) GetMyDeviceOpenMode(pdwOpenMode *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwOpenMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteToErrorLog dispatches through IStiDeviceControl's vtable slot 13.
 func (self *IStiDeviceControl) WriteToErrorLog(dwMessageType uint32, pszMessage string, dwErrorCode uint32) error {
 	_pszMessage := win32.UTF16Ptr(pszMessage)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwMessageType), uintptr(unsafe.Pointer(_pszMessage)), uintptr(dwErrorCode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 0c9bb460-51ac-11d0-90ea-00aa0060f86c
@@ -4213,31 +4213,31 @@ var IID_IStiUSD = win32.GUID{Data1: 0x0c9bb460, Data2: 0x51ac, Data3: 0x11d0, Da
 // Initialize dispatches through IStiUSD's vtable slot 3.
 func (self *IStiUSD) Initialize(pHelDcb *IStiDeviceControl, dwStiVersion uint32, hParametersKey systemregistry.HKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHelDcb)), uintptr(dwStiVersion), uintptr(hParametersKey))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCapabilities dispatches through IStiUSD's vtable slot 4.
 func (self *IStiUSD) GetCapabilities(pDevCaps *STI_USD_CAPS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevCaps)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStatus dispatches through IStiUSD's vtable slot 5.
 func (self *IStiUSD) GetStatus(pDevStatus *STI_DEVICE_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeviceReset dispatches through IStiUSD's vtable slot 6.
 func (self *IStiUSD) DeviceReset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Diagnostic dispatches through IStiUSD's vtable slot 7.
 func (self *IStiUSD) Diagnostic(pBuffer *STI_DIAG) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Escape dispatches through IStiUSD's vtable slot 8.
@@ -4251,31 +4251,31 @@ func (self *IStiUSD) Escape(EscapeFunction uint32, lpInData []byte, pOutData []b
 		_pOutData = &pOutData[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(EscapeFunction), uintptr(unsafe.Pointer(_lpInData)), uintptr(len(lpInData)), uintptr(unsafe.Pointer(_pOutData)), uintptr(len(pOutData)), uintptr(unsafe.Pointer(pdwActualData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLastError dispatches through IStiUSD's vtable slot 9.
 func (self *IStiUSD) GetLastError(pdwLastDeviceError *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwLastDeviceError)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LockDevice dispatches through IStiUSD's vtable slot 10.
 func (self *IStiUSD) LockDevice() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnLockDevice dispatches through IStiUSD's vtable slot 11.
 func (self *IStiUSD) UnLockDevice() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RawReadData dispatches through IStiUSD's vtable slot 12.
 func (self *IStiUSD) RawReadData(lpBuffer unsafe.Pointer, lpdwNumberOfBytes *uint32, lpOverlapped *systemio.OVERLAPPED) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpdwNumberOfBytes)), uintptr(unsafe.Pointer(lpOverlapped)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RawWriteData dispatches through IStiUSD's vtable slot 13.
@@ -4285,13 +4285,13 @@ func (self *IStiUSD) RawWriteData(lpBuffer []byte, lpOverlapped *systemio.OVERLA
 		_lpBuffer = &lpBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpOverlapped)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RawReadCommand dispatches through IStiUSD's vtable slot 14.
 func (self *IStiUSD) RawReadCommand(lpBuffer unsafe.Pointer, lpdwNumberOfBytes *uint32, lpOverlapped *systemio.OVERLAPPED) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpdwNumberOfBytes)), uintptr(unsafe.Pointer(lpOverlapped)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RawWriteCommand dispatches through IStiUSD's vtable slot 15.
@@ -4301,25 +4301,25 @@ func (self *IStiUSD) RawWriteCommand(lpBuffer []byte, lpOverlapped *systemio.OVE
 		_lpBuffer = &lpBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpOverlapped)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetNotificationHandle dispatches through IStiUSD's vtable slot 16.
 func (self *IStiUSD) SetNotificationHandle(hEvent foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(hEvent))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNotificationData dispatches through IStiUSD's vtable slot 17.
 func (self *IStiUSD) GetNotificationData(lpNotify *STINOTIFY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpNotify)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLastErrorInfo dispatches through IStiUSD's vtable slot 18.
 func (self *IStiUSD) GetLastErrorInfo(pLastErrorInfo *ERROR_INFOW) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLastErrorInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 641bd880-2dc8-11d0-90ea-00aa0060f86c
@@ -4333,27 +4333,27 @@ var IID_IStillImageW = win32.GUID{Data1: 0x641bd880, Data2: 0x2dc8, Data3: 0x11d
 // Initialize dispatches through IStillImageW's vtable slot 3.
 func (self *IStillImageW) Initialize(hinst foundation.HINSTANCE, dwVersion uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hinst), uintptr(dwVersion))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceList dispatches through IStillImageW's vtable slot 4.
 func (self *IStillImageW) GetDeviceList(dwType uint32, dwFlags uint32, pdwItemsReturned *uint32, ppBuffer *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwType), uintptr(dwFlags), uintptr(unsafe.Pointer(pdwItemsReturned)), uintptr(unsafe.Pointer(ppBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceInfo dispatches through IStillImageW's vtable slot 5.
 func (self *IStillImageW) GetDeviceInfo(pwszDeviceName string, ppBuffer *unsafe.Pointer) error {
 	_pwszDeviceName := win32.UTF16Ptr(pwszDeviceName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszDeviceName)), uintptr(unsafe.Pointer(ppBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateDevice dispatches through IStillImageW's vtable slot 6.
 func (self *IStillImageW) CreateDevice(pwszDeviceName string, dwMode uint32, pDevice **IStiDevice, punkOuter *systemcom.IUnknown) error {
 	_pwszDeviceName := win32.UTF16Ptr(pwszDeviceName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszDeviceName)), uintptr(dwMode), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(punkOuter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceValue dispatches through IStillImageW's vtable slot 7.
@@ -4361,7 +4361,7 @@ func (self *IStillImageW) GetDeviceValue(pwszDeviceName string, pValueName strin
 	_pwszDeviceName := win32.UTF16Ptr(pwszDeviceName)
 	_pValueName := win32.UTF16Ptr(pValueName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszDeviceName)), uintptr(unsafe.Pointer(_pValueName)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(cbData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDeviceValue dispatches through IStillImageW's vtable slot 8.
@@ -4373,13 +4373,13 @@ func (self *IStillImageW) SetDeviceValue(pwszDeviceName string, pValueName strin
 		_pData = &pData[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszDeviceName)), uintptr(unsafe.Pointer(_pValueName)), uintptr(Type), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSTILaunchInformation dispatches through IStillImageW's vtable slot 9.
 func (self *IStillImageW) GetSTILaunchInformation(pwszDeviceName foundation.PWSTR, pdwEventCode *uint32, pwszEventName foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszDeviceName)), uintptr(unsafe.Pointer(pdwEventCode)), uintptr(unsafe.Pointer(pwszEventName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterLaunchApplication dispatches through IStillImageW's vtable slot 10.
@@ -4387,14 +4387,14 @@ func (self *IStillImageW) RegisterLaunchApplication(pwszAppName string, pwszComm
 	_pwszAppName := win32.UTF16Ptr(pwszAppName)
 	_pwszCommandLine := win32.UTF16Ptr(pwszCommandLine)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszAppName)), uintptr(unsafe.Pointer(_pwszCommandLine)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnregisterLaunchApplication dispatches through IStillImageW's vtable slot 11.
 func (self *IStillImageW) UnregisterLaunchApplication(pwszAppName string) error {
 	_pwszAppName := win32.UTF16Ptr(pwszAppName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszAppName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnableHwNotifications dispatches through IStillImageW's vtable slot 12.
@@ -4402,21 +4402,21 @@ func (self *IStillImageW) EnableHwNotifications(pwszDeviceName string, bNewState
 	_pwszDeviceName := win32.UTF16Ptr(pwszDeviceName)
 	_bNewState := win32.Bool32(bNewState)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszDeviceName)), uintptr(_bNewState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetHwNotificationState dispatches through IStillImageW's vtable slot 13.
 func (self *IStillImageW) GetHwNotificationState(pwszDeviceName string, pbCurrentState *foundation.BOOL) error {
 	_pwszDeviceName := win32.UTF16Ptr(pwszDeviceName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszDeviceName)), uintptr(unsafe.Pointer(pbCurrentState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RefreshDeviceBus dispatches through IStillImageW's vtable slot 14.
 func (self *IStillImageW) RefreshDeviceBus(pwszDeviceName string) error {
 	_pwszDeviceName := win32.UTF16Ptr(pwszDeviceName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszDeviceName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LaunchApplicationForDevice dispatches through IStillImageW's vtable slot 15.
@@ -4424,18 +4424,18 @@ func (self *IStillImageW) LaunchApplicationForDevice(pwszDeviceName string, pwsz
 	_pwszDeviceName := win32.UTF16Ptr(pwszDeviceName)
 	_pwszAppName := win32.UTF16Ptr(pwszAppName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszDeviceName)), uintptr(unsafe.Pointer(_pwszAppName)), uintptr(unsafe.Pointer(pStiNotify)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetupDeviceParameters dispatches through IStillImageW's vtable slot 16.
 func (self *IStillImageW) SetupDeviceParameters(param0 *STI_DEVICE_INFORMATIONW) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteToErrorLog dispatches through IStillImageW's vtable slot 17.
 func (self *IStillImageW) WriteToErrorLog(dwMessageType uint32, pszMessage string) error {
 	_pszMessage := win32.UTF16Ptr(pszMessage)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(dwMessageType), uintptr(unsafe.Pointer(_pszMessage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

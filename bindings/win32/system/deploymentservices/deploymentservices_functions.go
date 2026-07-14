@@ -566,7 +566,7 @@ func WdsBpQueryOption(hHandle foundation.HANDLE, uOption uint32, pValue []byte, 
 // Minimum OS: windows6.0.6000.
 func WdsCliAuthorizeSession(hSession foundation.HANDLE, pCred *WDS_CLI_CRED) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliAuthorizeSession.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(pCred)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsCliCancelTransfer calls WDSCLIENTAPI!WdsCliCancelTransfer.
@@ -574,7 +574,7 @@ func WdsCliAuthorizeSession(hSession foundation.HANDLE, pCred *WDS_CLI_CRED) err
 // Minimum OS: windows6.0.6000.
 func WdsCliCancelTransfer(hTransfer foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliCancelTransfer.Addr(), uintptr(hTransfer))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsCliClose calls WDSCLIENTAPI!WdsCliClose.
@@ -582,7 +582,7 @@ func WdsCliCancelTransfer(hTransfer foundation.HANDLE) error {
 // Minimum OS: windows6.0.6000.
 func WdsCliClose(Handle foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliClose.Addr(), uintptr(Handle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsCliCreateSession calls WDSCLIENTAPI!WdsCliCreateSession.
@@ -591,7 +591,7 @@ func WdsCliClose(Handle foundation.HANDLE) error {
 func WdsCliCreateSession(pwszServer string, pCred *WDS_CLI_CRED, phSession *foundation.HANDLE) error {
 	_pwszServer := win32.UTF16Ptr(pwszServer)
 	r1, _, _ := syscall.SyscallN(procWdsCliCreateSession.Addr(), uintptr(unsafe.Pointer(_pwszServer)), uintptr(unsafe.Pointer(pCred)), uintptr(unsafe.Pointer(phSession)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsCliFindFirstImage calls WDSCLIENTAPI!WdsCliFindFirstImage.
@@ -599,7 +599,7 @@ func WdsCliCreateSession(pwszServer string, pCred *WDS_CLI_CRED, phSession *foun
 // Minimum OS: windows6.0.6000.
 func WdsCliFindFirstImage(hSession foundation.HANDLE, phFindHandle *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliFindFirstImage.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(phFindHandle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsCliFindNextImage calls WDSCLIENTAPI!WdsCliFindNextImage.
@@ -607,7 +607,7 @@ func WdsCliFindFirstImage(hSession foundation.HANDLE, phFindHandle *foundation.H
 // Minimum OS: windows6.0.6000.
 func WdsCliFindNextImage(Handle foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliFindNextImage.Addr(), uintptr(Handle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsCliFreeStringArray calls WDSCLIENTAPI!WdsCliFreeStringArray.
@@ -619,7 +619,7 @@ func WdsCliFreeStringArray(ppwszArray []foundation.PWSTR) error {
 		_ppwszArray = &ppwszArray[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWdsCliFreeStringArray.Addr(), uintptr(unsafe.Pointer(_ppwszArray)), uintptr(len(ppwszArray)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsCliGetDriverQueryXml calls WDSCLIENTAPI!WdsCliGetDriverQueryXml.
@@ -628,7 +628,7 @@ func WdsCliFreeStringArray(ppwszArray []foundation.PWSTR) error {
 func WdsCliGetDriverQueryXml(pwszWinDirPath string, ppwszDriverQuery *foundation.PWSTR) error {
 	_pwszWinDirPath := win32.UTF16Ptr(pwszWinDirPath)
 	r1, _, _ := syscall.SyscallN(procWdsCliGetDriverQueryXml.Addr(), uintptr(unsafe.Pointer(_pwszWinDirPath)), uintptr(unsafe.Pointer(ppwszDriverQuery)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsCliGetEnumerationFlags calls WDSCLIENTAPI!WdsCliGetEnumerationFlags.
@@ -636,7 +636,7 @@ func WdsCliGetDriverQueryXml(pwszWinDirPath string, ppwszDriverQuery *foundation
 // Minimum OS: windows6.0.6000.
 func WdsCliGetEnumerationFlags(Handle foundation.HANDLE, pdwFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetEnumerationFlags.Addr(), uintptr(Handle), uintptr(unsafe.Pointer(pdwFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsCliGetImageArchitecture calls WDSCLIENTAPI!WdsCliGetImageArchitecture.
@@ -644,7 +644,7 @@ func WdsCliGetEnumerationFlags(Handle foundation.HANDLE, pdwFlags *uint32) error
 // Minimum OS: windows6.0.6000.
 func WdsCliGetImageArchitecture(hIfh foundation.HANDLE, pdwValue *CPU_ARCHITECTURE) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetImageArchitecture.Addr(), uintptr(hIfh), uintptr(unsafe.Pointer(pdwValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsCliGetImageDescription calls WDSCLIENTAPI!WdsCliGetImageDescription.
@@ -652,13 +652,13 @@ func WdsCliGetImageArchitecture(hIfh foundation.HANDLE, pdwValue *CPU_ARCHITECTU
 // Minimum OS: windows6.0.6000.
 func WdsCliGetImageDescription(hIfh foundation.HANDLE, ppwszValue *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetImageDescription.Addr(), uintptr(hIfh), uintptr(unsafe.Pointer(ppwszValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsCliGetImageFiles calls WDSCLIENTAPI!WdsCliGetImageFiles.
 func WdsCliGetImageFiles(hIfh foundation.HANDLE, pppwszFiles **foundation.PWSTR, pdwCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetImageFiles.Addr(), uintptr(hIfh), uintptr(unsafe.Pointer(pppwszFiles)), uintptr(unsafe.Pointer(pdwCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsCliGetImageGroup calls WDSCLIENTAPI!WdsCliGetImageGroup.
@@ -666,7 +666,7 @@ func WdsCliGetImageFiles(hIfh foundation.HANDLE, pppwszFiles **foundation.PWSTR,
 // Minimum OS: windows6.0.6000.
 func WdsCliGetImageGroup(hIfh foundation.HANDLE, ppwszValue *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetImageGroup.Addr(), uintptr(hIfh), uintptr(unsafe.Pointer(ppwszValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsCliGetImageHalName calls WDSCLIENTAPI!WdsCliGetImageHalName.
@@ -674,7 +674,7 @@ func WdsCliGetImageGroup(hIfh foundation.HANDLE, ppwszValue *foundation.PWSTR) e
 // Minimum OS: windows6.0.6000.
 func WdsCliGetImageHalName(hIfh foundation.HANDLE, ppwszValue *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetImageHalName.Addr(), uintptr(hIfh), uintptr(unsafe.Pointer(ppwszValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsCliGetImageHandleFromFindHandle calls WDSCLIENTAPI!WdsCliGetImageHandleFromFindHandle.
@@ -682,7 +682,7 @@ func WdsCliGetImageHalName(hIfh foundation.HANDLE, ppwszValue *foundation.PWSTR)
 // Minimum OS: windows6.0.6000.
 func WdsCliGetImageHandleFromFindHandle(FindHandle foundation.HANDLE, phImageHandle *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetImageHandleFromFindHandle.Addr(), uintptr(FindHandle), uintptr(unsafe.Pointer(phImageHandle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsCliGetImageHandleFromTransferHandle calls WDSCLIENTAPI!WdsCliGetImageHandleFromTransferHandle.
@@ -690,7 +690,7 @@ func WdsCliGetImageHandleFromFindHandle(FindHandle foundation.HANDLE, phImageHan
 // Minimum OS: windows6.0.6000.
 func WdsCliGetImageHandleFromTransferHandle(hTransfer foundation.HANDLE, phImageHandle *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetImageHandleFromTransferHandle.Addr(), uintptr(hTransfer), uintptr(unsafe.Pointer(phImageHandle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsCliGetImageIndex calls WDSCLIENTAPI!WdsCliGetImageIndex.
@@ -698,7 +698,7 @@ func WdsCliGetImageHandleFromTransferHandle(hTransfer foundation.HANDLE, phImage
 // Minimum OS: windows6.0.6000.
 func WdsCliGetImageIndex(hIfh foundation.HANDLE, pdwValue *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetImageIndex.Addr(), uintptr(hIfh), uintptr(unsafe.Pointer(pdwValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsCliGetImageLanguage calls WDSCLIENTAPI!WdsCliGetImageLanguage.
@@ -706,7 +706,7 @@ func WdsCliGetImageIndex(hIfh foundation.HANDLE, pdwValue *uint32) error {
 // Minimum OS: windows6.0.6000.
 func WdsCliGetImageLanguage(hIfh foundation.HANDLE, ppwszValue *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetImageLanguage.Addr(), uintptr(hIfh), uintptr(unsafe.Pointer(ppwszValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsCliGetImageLanguages calls WDSCLIENTAPI!WdsCliGetImageLanguages.
@@ -714,7 +714,7 @@ func WdsCliGetImageLanguage(hIfh foundation.HANDLE, ppwszValue *foundation.PWSTR
 // Minimum OS: windows6.0.6000.
 func WdsCliGetImageLanguages(hIfh foundation.HANDLE, pppszValues ***int8, pdwNumValues *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetImageLanguages.Addr(), uintptr(hIfh), uintptr(unsafe.Pointer(pppszValues)), uintptr(unsafe.Pointer(pdwNumValues)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsCliGetImageLastModifiedTime calls WDSCLIENTAPI!WdsCliGetImageLastModifiedTime.
@@ -722,7 +722,7 @@ func WdsCliGetImageLanguages(hIfh foundation.HANDLE, pppszValues ***int8, pdwNum
 // Minimum OS: windows6.0.6000.
 func WdsCliGetImageLastModifiedTime(hIfh foundation.HANDLE, ppSysTimeValue **foundation.SYSTEMTIME) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetImageLastModifiedTime.Addr(), uintptr(hIfh), uintptr(unsafe.Pointer(ppSysTimeValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsCliGetImageName calls WDSCLIENTAPI!WdsCliGetImageName.
@@ -730,7 +730,7 @@ func WdsCliGetImageLastModifiedTime(hIfh foundation.HANDLE, ppSysTimeValue **fou
 // Minimum OS: windows6.0.6000.
 func WdsCliGetImageName(hIfh foundation.HANDLE, ppwszValue *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetImageName.Addr(), uintptr(hIfh), uintptr(unsafe.Pointer(ppwszValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsCliGetImageNamespace calls WDSCLIENTAPI!WdsCliGetImageNamespace.
@@ -738,7 +738,7 @@ func WdsCliGetImageName(hIfh foundation.HANDLE, ppwszValue *foundation.PWSTR) er
 // Minimum OS: windows6.0.6000.
 func WdsCliGetImageNamespace(hIfh foundation.HANDLE, ppwszValue *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetImageNamespace.Addr(), uintptr(hIfh), uintptr(unsafe.Pointer(ppwszValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsCliGetImageParameter calls WDSCLIENTAPI!WdsCliGetImageParameter.
@@ -748,7 +748,7 @@ func WdsCliGetImageParameter(hIfh foundation.HANDLE, ParamType WDS_CLI_IMAGE_PAR
 		_pResponse = &pResponse[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWdsCliGetImageParameter.Addr(), uintptr(hIfh), uintptr(ParamType), uintptr(unsafe.Pointer(_pResponse)), uintptr(len(pResponse)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsCliGetImagePath calls WDSCLIENTAPI!WdsCliGetImagePath.
@@ -756,7 +756,7 @@ func WdsCliGetImageParameter(hIfh foundation.HANDLE, ParamType WDS_CLI_IMAGE_PAR
 // Minimum OS: windows6.0.6000.
 func WdsCliGetImagePath(hIfh foundation.HANDLE, ppwszValue *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetImagePath.Addr(), uintptr(hIfh), uintptr(unsafe.Pointer(ppwszValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsCliGetImageSize calls WDSCLIENTAPI!WdsCliGetImageSize.
@@ -764,13 +764,13 @@ func WdsCliGetImagePath(hIfh foundation.HANDLE, ppwszValue *foundation.PWSTR) er
 // Minimum OS: windows6.0.6000.
 func WdsCliGetImageSize(hIfh foundation.HANDLE, pullValue *uint64) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetImageSize.Addr(), uintptr(hIfh), uintptr(unsafe.Pointer(pullValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsCliGetImageType calls WDSCLIENTAPI!WdsCliGetImageType.
 func WdsCliGetImageType(hIfh foundation.HANDLE, pImageType *WDS_CLI_IMAGE_TYPE) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetImageType.Addr(), uintptr(hIfh), uintptr(unsafe.Pointer(pImageType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsCliGetImageVersion calls WDSCLIENTAPI!WdsCliGetImageVersion.
@@ -778,7 +778,7 @@ func WdsCliGetImageType(hIfh foundation.HANDLE, pImageType *WDS_CLI_IMAGE_TYPE) 
 // Minimum OS: windows6.0.6000.
 func WdsCliGetImageVersion(hIfh foundation.HANDLE, ppwszValue *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetImageVersion.Addr(), uintptr(hIfh), uintptr(unsafe.Pointer(ppwszValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsCliGetTransferSize calls WDSCLIENTAPI!WdsCliGetTransferSize.
@@ -786,7 +786,7 @@ func WdsCliGetImageVersion(hIfh foundation.HANDLE, ppwszValue *foundation.PWSTR)
 // Minimum OS: windows6.0.6000.
 func WdsCliGetTransferSize(hIfh foundation.HANDLE, pullValue *uint64) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetTransferSize.Addr(), uintptr(hIfh), uintptr(unsafe.Pointer(pullValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsCliInitializeLog calls WDSCLIENTAPI!WdsCliInitializeLog.
@@ -796,7 +796,7 @@ func WdsCliInitializeLog(hSession foundation.HANDLE, ulClientArchitecture CPU_AR
 	_pwszClientId := win32.UTF16Ptr(pwszClientId)
 	_pwszClientAddress := win32.UTF16Ptr(pwszClientAddress)
 	r1, _, _ := syscall.SyscallN(procWdsCliInitializeLog.Addr(), uintptr(hSession), uintptr(ulClientArchitecture), uintptr(unsafe.Pointer(_pwszClientId)), uintptr(unsafe.Pointer(_pwszClientAddress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsCliLog calls WDSCLIENTAPI!WdsCliLog.
@@ -804,7 +804,7 @@ func WdsCliInitializeLog(hSession foundation.HANDLE, ulClientArchitecture CPU_AR
 // Minimum OS: windows6.0.6000.
 func WdsCliLog(hSession foundation.HANDLE, ulLogLevel uint32, ulMessageCode uint32) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliLog.Addr(), uintptr(hSession), uintptr(ulLogLevel), uintptr(ulMessageCode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsCliObtainDriverPackages calls WDSCLIENTAPI!WdsCliObtainDriverPackages.
@@ -812,7 +812,7 @@ func WdsCliLog(hSession foundation.HANDLE, ulLogLevel uint32, ulMessageCode uint
 // Minimum OS: windows6.1.
 func WdsCliObtainDriverPackages(hImage foundation.HANDLE, ppwszServerName *foundation.PWSTR, pppwszDriverPackages **foundation.PWSTR, pulCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliObtainDriverPackages.Addr(), uintptr(hImage), uintptr(unsafe.Pointer(ppwszServerName)), uintptr(unsafe.Pointer(pppwszDriverPackages)), uintptr(unsafe.Pointer(pulCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsCliObtainDriverPackagesEx calls WDSCLIENTAPI!WdsCliObtainDriverPackagesEx.
@@ -821,7 +821,7 @@ func WdsCliObtainDriverPackages(hImage foundation.HANDLE, ppwszServerName *found
 func WdsCliObtainDriverPackagesEx(hSession foundation.HANDLE, pwszMachineInfo string, ppwszServerName *foundation.PWSTR, pppwszDriverPackages **foundation.PWSTR, pulCount *uint32) error {
 	_pwszMachineInfo := win32.UTF16Ptr(pwszMachineInfo)
 	r1, _, _ := syscall.SyscallN(procWdsCliObtainDriverPackagesEx.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(_pwszMachineInfo)), uintptr(unsafe.Pointer(ppwszServerName)), uintptr(unsafe.Pointer(pppwszDriverPackages)), uintptr(unsafe.Pointer(pulCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsCliRegisterTrace calls WDSCLIENTAPI!WdsCliRegisterTrace.
@@ -829,7 +829,7 @@ func WdsCliObtainDriverPackagesEx(hSession foundation.HANDLE, pwszMachineInfo st
 // Minimum OS: windows6.0.6000.
 func WdsCliRegisterTrace(pfn PFN_WdsCliTraceFunction) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliRegisterTrace.Addr(), uintptr(pfn))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsCliSetTransferBufferSize calls WDSCLIENTAPI!WdsCliSetTransferBufferSize.
@@ -846,7 +846,7 @@ func WdsCliTransferFile(pwszServer string, pwszNamespace string, pwszRemoteFileP
 	_pwszRemoteFilePath := win32.UTF16Ptr(pwszRemoteFilePath)
 	_pwszLocalFilePath := win32.UTF16Ptr(pwszLocalFilePath)
 	r1, _, _ := syscall.SyscallN(procWdsCliTransferFile.Addr(), uintptr(unsafe.Pointer(_pwszServer)), uintptr(unsafe.Pointer(_pwszNamespace)), uintptr(unsafe.Pointer(_pwszRemoteFilePath)), uintptr(unsafe.Pointer(_pwszLocalFilePath)), uintptr(dwFlags), uintptr(dwReserved), uintptr(pfnWdsCliCallback), uintptr(unsafe.Pointer(pvUserData)), uintptr(unsafe.Pointer(phTransfer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsCliTransferImage calls WDSCLIENTAPI!WdsCliTransferImage.
@@ -855,7 +855,7 @@ func WdsCliTransferFile(pwszServer string, pwszNamespace string, pwszRemoteFileP
 func WdsCliTransferImage(hImage foundation.HANDLE, pwszLocalPath string, dwFlags uint32, dwReserved uint32, pfnWdsCliCallback PFN_WdsCliCallback, pvUserData unsafe.Pointer, phTransfer *foundation.HANDLE) error {
 	_pwszLocalPath := win32.UTF16Ptr(pwszLocalPath)
 	r1, _, _ := syscall.SyscallN(procWdsCliTransferImage.Addr(), uintptr(hImage), uintptr(unsafe.Pointer(_pwszLocalPath)), uintptr(dwFlags), uintptr(dwReserved), uintptr(pfnWdsCliCallback), uintptr(unsafe.Pointer(pvUserData)), uintptr(unsafe.Pointer(phTransfer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsCliWaitForTransfer calls WDSCLIENTAPI!WdsCliWaitForTransfer.
@@ -863,7 +863,7 @@ func WdsCliTransferImage(hImage foundation.HANDLE, pwszLocalPath string, dwFlags
 // Minimum OS: windows6.0.6000.
 func WdsCliWaitForTransfer(hTransfer foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliWaitForTransfer.Addr(), uintptr(hTransfer))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsTransportClientAddRefBuffer calls WDSTPTC!WdsTransportClientAddRefBuffer.
@@ -981,7 +981,7 @@ func WdsTransportServerAllocateBuffer(hProvider foundation.HANDLE, ulBufferSize 
 // Minimum OS: windowsserver2008.
 func WdsTransportServerCompleteRead(hProvider foundation.HANDLE, ulBytesRead uint32, pvUserData unsafe.Pointer, hReadResult foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(procWdsTransportServerCompleteRead.Addr(), uintptr(hProvider), uintptr(ulBytesRead), uintptr(unsafe.Pointer(pvUserData)), uintptr(hReadResult))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsTransportServerFreeBuffer calls WDSMC!WdsTransportServerFreeBuffer.
@@ -989,7 +989,7 @@ func WdsTransportServerCompleteRead(hProvider foundation.HANDLE, ulBytesRead uin
 // Minimum OS: windowsserver2008.
 func WdsTransportServerFreeBuffer(hProvider foundation.HANDLE, pvBuffer unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWdsTransportServerFreeBuffer.Addr(), uintptr(hProvider), uintptr(unsafe.Pointer(pvBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsTransportServerRegisterCallback calls WDSMC!WdsTransportServerRegisterCallback.
@@ -997,7 +997,7 @@ func WdsTransportServerFreeBuffer(hProvider foundation.HANDLE, pvBuffer unsafe.P
 // Minimum OS: windowsserver2008.
 func WdsTransportServerRegisterCallback(hProvider foundation.HANDLE, CallbackId TRANSPORTPROVIDER_CALLBACK_ID, pfnCallback unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWdsTransportServerRegisterCallback.Addr(), uintptr(hProvider), uintptr(CallbackId), uintptr(unsafe.Pointer(pfnCallback)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsTransportServerTrace calls WDSMC!WdsTransportServerTrace.
@@ -1006,7 +1006,7 @@ func WdsTransportServerRegisterCallback(hProvider foundation.HANDLE, CallbackId 
 func WdsTransportServerTrace(hProvider foundation.HANDLE, Severity uint32, pwszFormat string) error {
 	_pwszFormat := win32.UTF16Ptr(pwszFormat)
 	r1, _, _ := syscall.SyscallN(procWdsTransportServerTrace.Addr(), uintptr(hProvider), uintptr(Severity), uintptr(unsafe.Pointer(_pwszFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WdsTransportServerTraceV calls WDSMC!WdsTransportServerTraceV.
@@ -1015,5 +1015,5 @@ func WdsTransportServerTrace(hProvider foundation.HANDLE, Severity uint32, pwszF
 func WdsTransportServerTraceV(hProvider foundation.HANDLE, Severity uint32, pwszFormat string, Params *int8) error {
 	_pwszFormat := win32.UTF16Ptr(pwszFormat)
 	r1, _, _ := syscall.SyscallN(procWdsTransportServerTraceV.Addr(), uintptr(hProvider), uintptr(Severity), uintptr(unsafe.Pointer(_pwszFormat)), uintptr(unsafe.Pointer(Params)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

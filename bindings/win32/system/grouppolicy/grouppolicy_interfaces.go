@@ -29,49 +29,49 @@ var IID_IGPEInformation = win32.GUID{Data1: 0x8fc0b735, Data2: 0xa0e1, Data3: 0x
 // GetName dispatches through IGPEInformation's vtable slot 3.
 func (self *IGPEInformation) GetName(pszName foundation.PWSTR, cchMaxLength int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszName)), uintptr(cchMaxLength))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDisplayName dispatches through IGPEInformation's vtable slot 4.
 func (self *IGPEInformation) GetDisplayName(pszName foundation.PWSTR, cchMaxLength int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszName)), uintptr(cchMaxLength))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRegistryKey dispatches through IGPEInformation's vtable slot 5.
 func (self *IGPEInformation) GetRegistryKey(dwSection uint32, hKey *systemregistry.HKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwSection), uintptr(unsafe.Pointer(hKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDSPath dispatches through IGPEInformation's vtable slot 6.
 func (self *IGPEInformation) GetDSPath(dwSection uint32, pszPath foundation.PWSTR, cchMaxPath int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwSection), uintptr(unsafe.Pointer(pszPath)), uintptr(cchMaxPath))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFileSysPath dispatches through IGPEInformation's vtable slot 7.
 func (self *IGPEInformation) GetFileSysPath(dwSection uint32, pszPath foundation.PWSTR, cchMaxPath int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwSection), uintptr(unsafe.Pointer(pszPath)), uintptr(cchMaxPath))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOptions dispatches through IGPEInformation's vtable slot 8.
 func (self *IGPEInformation) GetOptions(dwOptions *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dwOptions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetType dispatches through IGPEInformation's vtable slot 9.
 func (self *IGPEInformation) GetType(gpoType *GROUP_POLICY_OBJECT_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(gpoType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetHint dispatches through IGPEInformation's vtable slot 10.
 func (self *IGPEInformation) GetHint(gpHint *GROUP_POLICY_HINT_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(gpHint)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PolicyChanged dispatches through IGPEInformation's vtable slot 11.
@@ -79,7 +79,7 @@ func (self *IGPEInformation) PolicyChanged(bMachine bool, bAdd bool, pGuidExtens
 	_bMachine := win32.Bool32(bMachine)
 	_bAdd := win32.Bool32(bAdd)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(_bMachine), uintptr(_bAdd), uintptr(unsafe.Pointer(pGuidExtension)), uintptr(unsafe.Pointer(pGuidSnapin)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IGPM: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpm
@@ -95,83 +95,83 @@ var IID_IGPM = win32.GUID{Data1: 0xf5fae809, Data2: 0x3bd6, Data3: 0x4da9, Data4
 func (self *IGPM) GetDomain(bstrDomain foundation.BSTR, bstrDomainController foundation.BSTR, lDCFlags int32) (*IGPMDomain, error) {
 	var _pIGPMDomain *IGPMDomain
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDomain)), uintptr(unsafe.Pointer(bstrDomainController)), uintptr(lDCFlags), uintptr(unsafe.Pointer(&_pIGPMDomain)))
-	return _pIGPMDomain, win32.HRESULTError(int32(r1))
+	return _pIGPMDomain, win32.ErrIfFailed(int32(r1))
 }
 
 // GetBackupDir dispatches through IGPM's vtable slot 8.
 func (self *IGPM) GetBackupDir(bstrBackupDir foundation.BSTR) (*IGPMBackupDir, error) {
 	var _pIGPMBackupDir *IGPMBackupDir
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrBackupDir)), uintptr(unsafe.Pointer(&_pIGPMBackupDir)))
-	return _pIGPMBackupDir, win32.HRESULTError(int32(r1))
+	return _pIGPMBackupDir, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSitesContainer dispatches through IGPM's vtable slot 9.
 func (self *IGPM) GetSitesContainer(bstrForest foundation.BSTR, bstrDomain foundation.BSTR, bstrDomainController foundation.BSTR, lDCFlags int32) (*IGPMSitesContainer, error) {
 	var _ppIGPMSitesContainer *IGPMSitesContainer
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrForest)), uintptr(unsafe.Pointer(bstrDomain)), uintptr(unsafe.Pointer(bstrDomainController)), uintptr(lDCFlags), uintptr(unsafe.Pointer(&_ppIGPMSitesContainer)))
-	return _ppIGPMSitesContainer, win32.HRESULTError(int32(r1))
+	return _ppIGPMSitesContainer, win32.ErrIfFailed(int32(r1))
 }
 
 // GetRSOP dispatches through IGPM's vtable slot 10.
 func (self *IGPM) GetRSOP(gpmRSoPMode GPMRSOPMode, bstrNamespace foundation.BSTR, lFlags int32) (*IGPMRSOP, error) {
 	var _ppIGPMRSOP *IGPMRSOP
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(gpmRSoPMode), uintptr(unsafe.Pointer(bstrNamespace)), uintptr(lFlags), uintptr(unsafe.Pointer(&_ppIGPMRSOP)))
-	return _ppIGPMRSOP, win32.HRESULTError(int32(r1))
+	return _ppIGPMRSOP, win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePermission dispatches through IGPM's vtable slot 11.
 func (self *IGPM) CreatePermission(bstrTrustee foundation.BSTR, perm GPMPermissionType, bInheritable foundation.VARIANT_BOOL) (*IGPMPermission, error) {
 	var _ppPerm *IGPMPermission
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTrustee)), uintptr(perm), uintptr(bInheritable), uintptr(unsafe.Pointer(&_ppPerm)))
-	return _ppPerm, win32.HRESULTError(int32(r1))
+	return _ppPerm, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSearchCriteria dispatches through IGPM's vtable slot 12.
 func (self *IGPM) CreateSearchCriteria() (*IGPMSearchCriteria, error) {
 	var _ppIGPMSearchCriteria *IGPMSearchCriteria
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppIGPMSearchCriteria)))
-	return _ppIGPMSearchCriteria, win32.HRESULTError(int32(r1))
+	return _ppIGPMSearchCriteria, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateTrustee dispatches through IGPM's vtable slot 13.
 func (self *IGPM) CreateTrustee(bstrTrustee foundation.BSTR) (*IGPMTrustee, error) {
 	var _ppIGPMTrustee *IGPMTrustee
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTrustee)), uintptr(unsafe.Pointer(&_ppIGPMTrustee)))
-	return _ppIGPMTrustee, win32.HRESULTError(int32(r1))
+	return _ppIGPMTrustee, win32.ErrIfFailed(int32(r1))
 }
 
 // GetClientSideExtensions dispatches through IGPM's vtable slot 14.
 func (self *IGPM) GetClientSideExtensions() (*IGPMCSECollection, error) {
 	var _ppIGPMCSECollection *IGPMCSECollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppIGPMCSECollection)))
-	return _ppIGPMCSECollection, win32.HRESULTError(int32(r1))
+	return _ppIGPMCSECollection, win32.ErrIfFailed(int32(r1))
 }
 
 // GetConstants dispatches through IGPM's vtable slot 15.
 func (self *IGPM) GetConstants() (*IGPMConstants, error) {
 	var _ppIGPMConstants *IGPMConstants
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppIGPMConstants)))
-	return _ppIGPMConstants, win32.HRESULTError(int32(r1))
+	return _ppIGPMConstants, win32.ErrIfFailed(int32(r1))
 }
 
 // GetMigrationTable dispatches through IGPM's vtable slot 16.
 func (self *IGPM) GetMigrationTable(bstrMigrationTablePath foundation.BSTR) (*IGPMMigrationTable, error) {
 	var _ppMigrationTable *IGPMMigrationTable
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrMigrationTablePath)), uintptr(unsafe.Pointer(&_ppMigrationTable)))
-	return _ppMigrationTable, win32.HRESULTError(int32(r1))
+	return _ppMigrationTable, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateMigrationTable dispatches through IGPM's vtable slot 17.
 func (self *IGPM) CreateMigrationTable() (*IGPMMigrationTable, error) {
 	var _ppMigrationTable *IGPMMigrationTable
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppMigrationTable)))
-	return _ppMigrationTable, win32.HRESULTError(int32(r1))
+	return _ppMigrationTable, win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeReporting dispatches through IGPM's vtable slot 18.
 func (self *IGPM) InitializeReporting(bstrAdmPath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAdmPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IGPM2: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpm2
@@ -187,13 +187,13 @@ var IID_IGPM2 = win32.GUID{Data1: 0x00238f8a, Data2: 0x3d86, Data3: 0x41ac, Data
 func (self *IGPM2) GetBackupDirEx(bstrBackupDir foundation.BSTR, backupDirType GPMBackupType) (*IGPMBackupDirEx, error) {
 	var _ppIGPMBackupDirEx *IGPMBackupDirEx
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrBackupDir)), uintptr(backupDirType), uintptr(unsafe.Pointer(&_ppIGPMBackupDirEx)))
-	return _ppIGPMBackupDirEx, win32.HRESULTError(int32(r1))
+	return _ppIGPMBackupDirEx, win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeReportingEx dispatches through IGPM2's vtable slot 20.
 func (self *IGPM2) InitializeReportingEx(bstrAdmPath foundation.BSTR, reportingOptions int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAdmPath)), uintptr(reportingOptions))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IGPMAsyncCancel: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmasynccancel
@@ -208,7 +208,7 @@ var IID_IGPMAsyncCancel = win32.GUID{Data1: 0xddc67754, Data2: 0xbe67, Data3: 0x
 // Cancel dispatches through IGPMAsyncCancel's vtable slot 7.
 func (self *IGPMAsyncCancel) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IGPMAsyncProgress: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmasyncprogress
@@ -223,7 +223,7 @@ var IID_IGPMAsyncProgress = win32.GUID{Data1: 0x6aac29f8, Data2: 0x5948, Data3: 
 // Status dispatches through IGPMAsyncProgress's vtable slot 7.
 func (self *IGPMAsyncProgress) Status(lProgressNumerator int32, lProgressDenominator int32, hrStatus foundation.HRESULT, pResult *systemvariant.VARIANT, ppIGPMStatusMsgCollection *IGPMStatusMsgCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(lProgressNumerator), uintptr(lProgressDenominator), uintptr(hrStatus), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(ppIGPMStatusMsgCollection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IGPMBackup: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmbackup
@@ -239,69 +239,69 @@ var IID_IGPMBackup = win32.GUID{Data1: 0xd8a16a35, Data2: 0x3b0d, Data3: 0x416b,
 func (self *IGPMBackup) Get_ID() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_GPOID dispatches through IGPMBackup's vtable slot 8.
 func (self *IGPMBackup) Get_GPOID() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_GPODomain dispatches through IGPMBackup's vtable slot 9.
 func (self *IGPMBackup) Get_GPODomain() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_GPODisplayName dispatches through IGPMBackup's vtable slot 10.
 func (self *IGPMBackup) Get_GPODisplayName() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Timestamp dispatches through IGPMBackup's vtable slot 11.
 func (self *IGPMBackup) Get_Timestamp() (float64, error) {
 	var _pVal float64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Comment dispatches through IGPMBackup's vtable slot 12.
 func (self *IGPMBackup) Get_Comment() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BackupDir dispatches through IGPMBackup's vtable slot 13.
 func (self *IGPMBackup) Get_BackupDir() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IGPMBackup's vtable slot 14.
 func (self *IGPMBackup) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GenerateReport dispatches through IGPMBackup's vtable slot 15.
 func (self *IGPMBackup) GenerateReport(gpmReportType GPMReportType, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (*IGPMResult, error) {
 	var _ppIGPMResult *IGPMResult
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(gpmReportType), uintptr(unsafe.Pointer(pvarGPMProgress)), uintptr(unsafe.Pointer(pvarGPMCancel)), uintptr(unsafe.Pointer(&_ppIGPMResult)))
-	return _ppIGPMResult, win32.HRESULTError(int32(r1))
+	return _ppIGPMResult, win32.ErrIfFailed(int32(r1))
 }
 
 // GenerateReportToFile dispatches through IGPMBackup's vtable slot 16.
 func (self *IGPMBackup) GenerateReportToFile(gpmReportType GPMReportType, bstrTargetFilePath foundation.BSTR) (*IGPMResult, error) {
 	var _ppIGPMResult *IGPMResult
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(gpmReportType), uintptr(unsafe.Pointer(bstrTargetFilePath)), uintptr(unsafe.Pointer(&_ppIGPMResult)))
-	return _ppIGPMResult, win32.HRESULTError(int32(r1))
+	return _ppIGPMResult, win32.ErrIfFailed(int32(r1))
 }
 
 // IGPMBackupCollection: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmbackupcollection
@@ -317,21 +317,21 @@ var IID_IGPMBackupCollection = win32.GUID{Data1: 0xc786fc0f, Data2: 0x26d8, Data
 func (self *IGPMBackupCollection) Get_Count() (int32, error) {
 	var _pVal int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Item dispatches through IGPMBackupCollection's vtable slot 8.
 func (self *IGPMBackupCollection) Get_Item(lIndex int32) (systemvariant.VARIANT, error) {
 	var _pVal systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IGPMBackupCollection's vtable slot 9.
 func (self *IGPMBackupCollection) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
 	var _ppIGPMBackup *systemole.IEnumVARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppIGPMBackup)))
-	return _ppIGPMBackup, win32.HRESULTError(int32(r1))
+	return _ppIGPMBackup, win32.ErrIfFailed(int32(r1))
 }
 
 // IGPMBackupDir: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmbackupdir
@@ -347,21 +347,21 @@ var IID_IGPMBackupDir = win32.GUID{Data1: 0xb1568bed, Data2: 0x0a93, Data3: 0x4a
 func (self *IGPMBackupDir) Get_BackupDirectory() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetBackup dispatches through IGPMBackupDir's vtable slot 8.
 func (self *IGPMBackupDir) GetBackup(bstrID foundation.BSTR) (*IGPMBackup, error) {
 	var _ppBackup *IGPMBackup
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrID)), uintptr(unsafe.Pointer(&_ppBackup)))
-	return _ppBackup, win32.HRESULTError(int32(r1))
+	return _ppBackup, win32.ErrIfFailed(int32(r1))
 }
 
 // SearchBackups dispatches through IGPMBackupDir's vtable slot 9.
 func (self *IGPMBackupDir) SearchBackups(pIGPMSearchCriteria *IGPMSearchCriteria) (*IGPMBackupCollection, error) {
 	var _ppIGPMBackupCollection *IGPMBackupCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIGPMSearchCriteria)), uintptr(unsafe.Pointer(&_ppIGPMBackupCollection)))
-	return _ppIGPMBackupCollection, win32.HRESULTError(int32(r1))
+	return _ppIGPMBackupCollection, win32.ErrIfFailed(int32(r1))
 }
 
 // IGPMBackupDirEx: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmbackupdirex
@@ -377,28 +377,28 @@ var IID_IGPMBackupDirEx = win32.GUID{Data1: 0xf8dc55ed, Data2: 0x3ba0, Data3: 0x
 func (self *IGPMBackupDirEx) Get_BackupDir() (foundation.BSTR, error) {
 	var _pbstrBackupDir foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrBackupDir)))
-	return _pbstrBackupDir, win32.HRESULTError(int32(r1))
+	return _pbstrBackupDir, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BackupType dispatches through IGPMBackupDirEx's vtable slot 8.
 func (self *IGPMBackupDirEx) Get_BackupType() (GPMBackupType, error) {
 	var _pgpmBackupType GPMBackupType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pgpmBackupType)))
-	return _pgpmBackupType, win32.HRESULTError(int32(r1))
+	return _pgpmBackupType, win32.ErrIfFailed(int32(r1))
 }
 
 // GetBackup dispatches through IGPMBackupDirEx's vtable slot 9.
 func (self *IGPMBackupDirEx) GetBackup(bstrID foundation.BSTR) (systemvariant.VARIANT, error) {
 	var _pvarBackup systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrID)), uintptr(unsafe.Pointer(&_pvarBackup)))
-	return _pvarBackup, win32.HRESULTError(int32(r1))
+	return _pvarBackup, win32.ErrIfFailed(int32(r1))
 }
 
 // SearchBackups dispatches through IGPMBackupDirEx's vtable slot 10.
 func (self *IGPMBackupDirEx) SearchBackups(pIGPMSearchCriteria *IGPMSearchCriteria) (systemvariant.VARIANT, error) {
 	var _pvarBackupCollection systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIGPMSearchCriteria)), uintptr(unsafe.Pointer(&_pvarBackupCollection)))
-	return _pvarBackupCollection, win32.HRESULTError(int32(r1))
+	return _pvarBackupCollection, win32.ErrIfFailed(int32(r1))
 }
 
 // IGPMCSECollection: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmcsecollection
@@ -414,21 +414,21 @@ var IID_IGPMCSECollection = win32.GUID{Data1: 0x2e52a97d, Data2: 0x0a4a, Data3: 
 func (self *IGPMCSECollection) Get_Count() (int32, error) {
 	var _pVal int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Item dispatches through IGPMCSECollection's vtable slot 8.
 func (self *IGPMCSECollection) Get_Item(lIndex int32) (systemvariant.VARIANT, error) {
 	var _pVal systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IGPMCSECollection's vtable slot 9.
 func (self *IGPMCSECollection) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
 	var _ppIGPMCSEs *systemole.IEnumVARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppIGPMCSEs)))
-	return _ppIGPMCSEs, win32.HRESULTError(int32(r1))
+	return _ppIGPMCSEs, win32.ErrIfFailed(int32(r1))
 }
 
 // IGPMClientSideExtension: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmclientsideextension
@@ -444,28 +444,28 @@ var IID_IGPMClientSideExtension = win32.GUID{Data1: 0x69da7488, Data2: 0xb8db, D
 func (self *IGPMClientSideExtension) Get_ID() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DisplayName dispatches through IGPMClientSideExtension's vtable slot 8.
 func (self *IGPMClientSideExtension) Get_DisplayName() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IsUserEnabled dispatches through IGPMClientSideExtension's vtable slot 9.
 func (self *IGPMClientSideExtension) IsUserEnabled() (foundation.VARIANT_BOOL, error) {
 	var _pvbEnabled foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvbEnabled)))
-	return _pvbEnabled, win32.HRESULTError(int32(r1))
+	return _pvbEnabled, win32.ErrIfFailed(int32(r1))
 }
 
 // IsComputerEnabled dispatches through IGPMClientSideExtension's vtable slot 10.
 func (self *IGPMClientSideExtension) IsComputerEnabled() (foundation.VARIANT_BOOL, error) {
 	var _pvbEnabled foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvbEnabled)))
-	return _pvbEnabled, win32.HRESULTError(int32(r1))
+	return _pvbEnabled, win32.ErrIfFailed(int32(r1))
 }
 
 // IGPMConstants: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmconstants
@@ -481,420 +481,420 @@ var IID_IGPMConstants = win32.GUID{Data1: 0x50ef73e6, Data2: 0xd35c, Data3: 0x4c
 func (self *IGPMConstants) Get_PermGPOApply() (GPMPermissionType, error) {
 	var _pVal GPMPermissionType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PermGPORead dispatches through IGPMConstants's vtable slot 8.
 func (self *IGPMConstants) Get_PermGPORead() (GPMPermissionType, error) {
 	var _pVal GPMPermissionType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PermGPOEdit dispatches through IGPMConstants's vtable slot 9.
 func (self *IGPMConstants) Get_PermGPOEdit() (GPMPermissionType, error) {
 	var _pVal GPMPermissionType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PermGPOEditSecurityAndDelete dispatches through IGPMConstants's vtable slot 10.
 func (self *IGPMConstants) Get_PermGPOEditSecurityAndDelete() (GPMPermissionType, error) {
 	var _pVal GPMPermissionType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PermGPOCustom dispatches through IGPMConstants's vtable slot 11.
 func (self *IGPMConstants) Get_PermGPOCustom() (GPMPermissionType, error) {
 	var _pVal GPMPermissionType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PermWMIFilterEdit dispatches through IGPMConstants's vtable slot 12.
 func (self *IGPMConstants) Get_PermWMIFilterEdit() (GPMPermissionType, error) {
 	var _pVal GPMPermissionType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PermWMIFilterFullControl dispatches through IGPMConstants's vtable slot 13.
 func (self *IGPMConstants) Get_PermWMIFilterFullControl() (GPMPermissionType, error) {
 	var _pVal GPMPermissionType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PermWMIFilterCustom dispatches through IGPMConstants's vtable slot 14.
 func (self *IGPMConstants) Get_PermWMIFilterCustom() (GPMPermissionType, error) {
 	var _pVal GPMPermissionType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PermSOMLink dispatches through IGPMConstants's vtable slot 15.
 func (self *IGPMConstants) Get_PermSOMLink() (GPMPermissionType, error) {
 	var _pVal GPMPermissionType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PermSOMLogging dispatches through IGPMConstants's vtable slot 16.
 func (self *IGPMConstants) Get_PermSOMLogging() (GPMPermissionType, error) {
 	var _pVal GPMPermissionType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PermSOMPlanning dispatches through IGPMConstants's vtable slot 17.
 func (self *IGPMConstants) Get_PermSOMPlanning() (GPMPermissionType, error) {
 	var _pVal GPMPermissionType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PermSOMGPOCreate dispatches through IGPMConstants's vtable slot 18.
 func (self *IGPMConstants) Get_PermSOMGPOCreate() (GPMPermissionType, error) {
 	var _pVal GPMPermissionType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PermSOMWMICreate dispatches through IGPMConstants's vtable slot 19.
 func (self *IGPMConstants) Get_PermSOMWMICreate() (GPMPermissionType, error) {
 	var _pVal GPMPermissionType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PermSOMWMIFullControl dispatches through IGPMConstants's vtable slot 20.
 func (self *IGPMConstants) Get_PermSOMWMIFullControl() (GPMPermissionType, error) {
 	var _pVal GPMPermissionType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SearchPropertyGPOPermissions dispatches through IGPMConstants's vtable slot 21.
 func (self *IGPMConstants) Get_SearchPropertyGPOPermissions() (GPMSearchProperty, error) {
 	var _pVal GPMSearchProperty
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SearchPropertyGPOEffectivePermissions dispatches through IGPMConstants's vtable slot 22.
 func (self *IGPMConstants) Get_SearchPropertyGPOEffectivePermissions() (GPMSearchProperty, error) {
 	var _pVal GPMSearchProperty
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SearchPropertyGPODisplayName dispatches through IGPMConstants's vtable slot 23.
 func (self *IGPMConstants) Get_SearchPropertyGPODisplayName() (GPMSearchProperty, error) {
 	var _pVal GPMSearchProperty
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SearchPropertyGPOWMIFilter dispatches through IGPMConstants's vtable slot 24.
 func (self *IGPMConstants) Get_SearchPropertyGPOWMIFilter() (GPMSearchProperty, error) {
 	var _pVal GPMSearchProperty
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SearchPropertyGPOID dispatches through IGPMConstants's vtable slot 25.
 func (self *IGPMConstants) Get_SearchPropertyGPOID() (GPMSearchProperty, error) {
 	var _pVal GPMSearchProperty
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SearchPropertyGPOComputerExtensions dispatches through IGPMConstants's vtable slot 26.
 func (self *IGPMConstants) Get_SearchPropertyGPOComputerExtensions() (GPMSearchProperty, error) {
 	var _pVal GPMSearchProperty
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SearchPropertyGPOUserExtensions dispatches through IGPMConstants's vtable slot 27.
 func (self *IGPMConstants) Get_SearchPropertyGPOUserExtensions() (GPMSearchProperty, error) {
 	var _pVal GPMSearchProperty
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SearchPropertySOMLinks dispatches through IGPMConstants's vtable slot 28.
 func (self *IGPMConstants) Get_SearchPropertySOMLinks() (GPMSearchProperty, error) {
 	var _pVal GPMSearchProperty
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SearchPropertyGPODomain dispatches through IGPMConstants's vtable slot 29.
 func (self *IGPMConstants) Get_SearchPropertyGPODomain() (GPMSearchProperty, error) {
 	var _pVal GPMSearchProperty
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SearchPropertyBackupMostRecent dispatches through IGPMConstants's vtable slot 30.
 func (self *IGPMConstants) Get_SearchPropertyBackupMostRecent() (GPMSearchProperty, error) {
 	var _pVal GPMSearchProperty
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SearchOpEquals dispatches through IGPMConstants's vtable slot 31.
 func (self *IGPMConstants) Get_SearchOpEquals() (GPMSearchOperation, error) {
 	var _pVal GPMSearchOperation
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SearchOpContains dispatches through IGPMConstants's vtable slot 32.
 func (self *IGPMConstants) Get_SearchOpContains() (GPMSearchOperation, error) {
 	var _pVal GPMSearchOperation
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SearchOpNotContains dispatches through IGPMConstants's vtable slot 33.
 func (self *IGPMConstants) Get_SearchOpNotContains() (GPMSearchOperation, error) {
 	var _pVal GPMSearchOperation
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SearchOpNotEquals dispatches through IGPMConstants's vtable slot 34.
 func (self *IGPMConstants) Get_SearchOpNotEquals() (GPMSearchOperation, error) {
 	var _pVal GPMSearchOperation
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UsePDC dispatches through IGPMConstants's vtable slot 35.
 func (self *IGPMConstants) Get_UsePDC() (int32, error) {
 	var _pVal int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UseAnyDC dispatches through IGPMConstants's vtable slot 36.
 func (self *IGPMConstants) Get_UseAnyDC() (int32, error) {
 	var _pVal int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DoNotUseW2KDC dispatches through IGPMConstants's vtable slot 37.
 func (self *IGPMConstants) Get_DoNotUseW2KDC() (int32, error) {
 	var _pVal int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SOMSite dispatches through IGPMConstants's vtable slot 38.
 func (self *IGPMConstants) Get_SOMSite() (GPMSOMType, error) {
 	var _pVal GPMSOMType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SOMDomain dispatches through IGPMConstants's vtable slot 39.
 func (self *IGPMConstants) Get_SOMDomain() (GPMSOMType, error) {
 	var _pVal GPMSOMType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SOMOU dispatches through IGPMConstants's vtable slot 40.
 func (self *IGPMConstants) Get_SOMOU() (GPMSOMType, error) {
 	var _pVal GPMSOMType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SecurityFlags dispatches through IGPMConstants's vtable slot 41.
 func (self *IGPMConstants) Get_SecurityFlags(vbOwner foundation.VARIANT_BOOL, vbGroup foundation.VARIANT_BOOL, vbDACL foundation.VARIANT_BOOL, vbSACL foundation.VARIANT_BOOL) (int32, error) {
 	var _pVal int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(vbOwner), uintptr(vbGroup), uintptr(vbDACL), uintptr(vbSACL), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DoNotValidateDC dispatches through IGPMConstants's vtable slot 42.
 func (self *IGPMConstants) Get_DoNotValidateDC() (int32, error) {
 	var _pVal int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReportHTML dispatches through IGPMConstants's vtable slot 43.
 func (self *IGPMConstants) Get_ReportHTML() (GPMReportType, error) {
 	var _pVal GPMReportType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReportXML dispatches through IGPMConstants's vtable slot 44.
 func (self *IGPMConstants) Get_ReportXML() (GPMReportType, error) {
 	var _pVal GPMReportType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RSOPModeUnknown dispatches through IGPMConstants's vtable slot 45.
 func (self *IGPMConstants) Get_RSOPModeUnknown() (GPMRSOPMode, error) {
 	var _pVal GPMRSOPMode
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RSOPModePlanning dispatches through IGPMConstants's vtable slot 46.
 func (self *IGPMConstants) Get_RSOPModePlanning() (GPMRSOPMode, error) {
 	var _pVal GPMRSOPMode
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RSOPModeLogging dispatches through IGPMConstants's vtable slot 47.
 func (self *IGPMConstants) Get_RSOPModeLogging() (GPMRSOPMode, error) {
 	var _pVal GPMRSOPMode
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EntryTypeUser dispatches through IGPMConstants's vtable slot 48.
 func (self *IGPMConstants) Get_EntryTypeUser() (GPMEntryType, error) {
 	var _pVal GPMEntryType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EntryTypeComputer dispatches through IGPMConstants's vtable slot 49.
 func (self *IGPMConstants) Get_EntryTypeComputer() (GPMEntryType, error) {
 	var _pVal GPMEntryType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EntryTypeLocalGroup dispatches through IGPMConstants's vtable slot 50.
 func (self *IGPMConstants) Get_EntryTypeLocalGroup() (GPMEntryType, error) {
 	var _pVal GPMEntryType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EntryTypeGlobalGroup dispatches through IGPMConstants's vtable slot 51.
 func (self *IGPMConstants) Get_EntryTypeGlobalGroup() (GPMEntryType, error) {
 	var _pVal GPMEntryType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EntryTypeUniversalGroup dispatches through IGPMConstants's vtable slot 52.
 func (self *IGPMConstants) Get_EntryTypeUniversalGroup() (GPMEntryType, error) {
 	var _pVal GPMEntryType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EntryTypeUNCPath dispatches through IGPMConstants's vtable slot 53.
 func (self *IGPMConstants) Get_EntryTypeUNCPath() (GPMEntryType, error) {
 	var _pVal GPMEntryType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EntryTypeUnknown dispatches through IGPMConstants's vtable slot 54.
 func (self *IGPMConstants) Get_EntryTypeUnknown() (GPMEntryType, error) {
 	var _pVal GPMEntryType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DestinationOptionSameAsSource dispatches through IGPMConstants's vtable slot 55.
 func (self *IGPMConstants) Get_DestinationOptionSameAsSource() (GPMDestinationOption, error) {
 	var _pVal GPMDestinationOption
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DestinationOptionNone dispatches through IGPMConstants's vtable slot 56.
 func (self *IGPMConstants) Get_DestinationOptionNone() (GPMDestinationOption, error) {
 	var _pVal GPMDestinationOption
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DestinationOptionByRelativeName dispatches through IGPMConstants's vtable slot 57.
 func (self *IGPMConstants) Get_DestinationOptionByRelativeName() (GPMDestinationOption, error) {
 	var _pVal GPMDestinationOption
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DestinationOptionSet dispatches through IGPMConstants's vtable slot 58.
 func (self *IGPMConstants) Get_DestinationOptionSet() (GPMDestinationOption, error) {
 	var _pVal GPMDestinationOption
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MigrationTableOnly dispatches through IGPMConstants's vtable slot 59.
 func (self *IGPMConstants) Get_MigrationTableOnly() (int32, error) {
 	var _pVal int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ProcessSecurity dispatches through IGPMConstants's vtable slot 60.
 func (self *IGPMConstants) Get_ProcessSecurity() (int32, error) {
 	var _pVal int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RsopLoggingNoComputer dispatches through IGPMConstants's vtable slot 61.
 func (self *IGPMConstants) Get_RsopLoggingNoComputer() (int32, error) {
 	var _pVal int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RsopLoggingNoUser dispatches through IGPMConstants's vtable slot 62.
 func (self *IGPMConstants) Get_RsopLoggingNoUser() (int32, error) {
 	var _pVal int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RsopPlanningAssumeSlowLink dispatches through IGPMConstants's vtable slot 63.
 func (self *IGPMConstants) Get_RsopPlanningAssumeSlowLink() (int32, error) {
 	var _pVal int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RsopPlanningLoopbackOption dispatches through IGPMConstants's vtable slot 64.
 func (self *IGPMConstants) Get_RsopPlanningLoopbackOption(vbMerge foundation.VARIANT_BOOL) (int32, error) {
 	var _pVal int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(vbMerge), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RsopPlanningAssumeUserWQLFilterTrue dispatches through IGPMConstants's vtable slot 65.
 func (self *IGPMConstants) Get_RsopPlanningAssumeUserWQLFilterTrue() (int32, error) {
 	var _pVal int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RsopPlanningAssumeCompWQLFilterTrue dispatches through IGPMConstants's vtable slot 66.
 func (self *IGPMConstants) Get_RsopPlanningAssumeCompWQLFilterTrue() (int32, error) {
 	var _pVal int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IGPMConstants2: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmconstants2
@@ -910,105 +910,105 @@ var IID_IGPMConstants2 = win32.GUID{Data1: 0x05ae21b0, Data2: 0xac09, Data3: 0x4
 func (self *IGPMConstants2) Get_BackupTypeGPO() (GPMBackupType, error) {
 	var _pVal GPMBackupType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BackupTypeStarterGPO dispatches through IGPMConstants2's vtable slot 68.
 func (self *IGPMConstants2) Get_BackupTypeStarterGPO() (GPMBackupType, error) {
 	var _pVal GPMBackupType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StarterGPOTypeSystem dispatches through IGPMConstants2's vtable slot 69.
 func (self *IGPMConstants2) Get_StarterGPOTypeSystem() (GPMStarterGPOType, error) {
 	var _pVal GPMStarterGPOType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StarterGPOTypeCustom dispatches through IGPMConstants2's vtable slot 70.
 func (self *IGPMConstants2) Get_StarterGPOTypeCustom() (GPMStarterGPOType, error) {
 	var _pVal GPMStarterGPOType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SearchPropertyStarterGPOPermissions dispatches through IGPMConstants2's vtable slot 71.
 func (self *IGPMConstants2) Get_SearchPropertyStarterGPOPermissions() (GPMSearchProperty, error) {
 	var _pVal GPMSearchProperty
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SearchPropertyStarterGPOEffectivePermissions dispatches through IGPMConstants2's vtable slot 72.
 func (self *IGPMConstants2) Get_SearchPropertyStarterGPOEffectivePermissions() (GPMSearchProperty, error) {
 	var _pVal GPMSearchProperty
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[72], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SearchPropertyStarterGPODisplayName dispatches through IGPMConstants2's vtable slot 73.
 func (self *IGPMConstants2) Get_SearchPropertyStarterGPODisplayName() (GPMSearchProperty, error) {
 	var _pVal GPMSearchProperty
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SearchPropertyStarterGPOID dispatches through IGPMConstants2's vtable slot 74.
 func (self *IGPMConstants2) Get_SearchPropertyStarterGPOID() (GPMSearchProperty, error) {
 	var _pVal GPMSearchProperty
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[74], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SearchPropertyStarterGPODomain dispatches through IGPMConstants2's vtable slot 75.
 func (self *IGPMConstants2) Get_SearchPropertyStarterGPODomain() (GPMSearchProperty, error) {
 	var _pVal GPMSearchProperty
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[75], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PermStarterGPORead dispatches through IGPMConstants2's vtable slot 76.
 func (self *IGPMConstants2) Get_PermStarterGPORead() (GPMPermissionType, error) {
 	var _pVal GPMPermissionType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[76], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PermStarterGPOEdit dispatches through IGPMConstants2's vtable slot 77.
 func (self *IGPMConstants2) Get_PermStarterGPOEdit() (GPMPermissionType, error) {
 	var _pVal GPMPermissionType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[77], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PermStarterGPOFullControl dispatches through IGPMConstants2's vtable slot 78.
 func (self *IGPMConstants2) Get_PermStarterGPOFullControl() (GPMPermissionType, error) {
 	var _pVal GPMPermissionType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PermStarterGPOCustom dispatches through IGPMConstants2's vtable slot 79.
 func (self *IGPMConstants2) Get_PermStarterGPOCustom() (GPMPermissionType, error) {
 	var _pVal GPMPermissionType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[79], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReportLegacy dispatches through IGPMConstants2's vtable slot 80.
 func (self *IGPMConstants2) Get_ReportLegacy() (GPMReportingOptions, error) {
 	var _pVal GPMReportingOptions
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[80], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReportComments dispatches through IGPMConstants2's vtable slot 81.
 func (self *IGPMConstants2) Get_ReportComments() (GPMReportingOptions, error) {
 	var _pVal GPMReportingOptions
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IGPMDomain: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmdomain
@@ -1024,70 +1024,70 @@ var IID_IGPMDomain = win32.GUID{Data1: 0x6b21cc14, Data2: 0x5a00, Data3: 0x4f44,
 func (self *IGPMDomain) Get_DomainController() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Domain dispatches through IGPMDomain's vtable slot 8.
 func (self *IGPMDomain) Get_Domain() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateGPO dispatches through IGPMDomain's vtable slot 9.
 func (self *IGPMDomain) CreateGPO() (*IGPMGPO, error) {
 	var _ppNewGPO *IGPMGPO
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppNewGPO)))
-	return _ppNewGPO, win32.HRESULTError(int32(r1))
+	return _ppNewGPO, win32.ErrIfFailed(int32(r1))
 }
 
 // GetGPO dispatches through IGPMDomain's vtable slot 10.
 func (self *IGPMDomain) GetGPO(bstrGuid foundation.BSTR) (*IGPMGPO, error) {
 	var _ppGPO *IGPMGPO
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGuid)), uintptr(unsafe.Pointer(&_ppGPO)))
-	return _ppGPO, win32.HRESULTError(int32(r1))
+	return _ppGPO, win32.ErrIfFailed(int32(r1))
 }
 
 // SearchGPOs dispatches through IGPMDomain's vtable slot 11.
 func (self *IGPMDomain) SearchGPOs(pIGPMSearchCriteria *IGPMSearchCriteria) (*IGPMGPOCollection, error) {
 	var _ppIGPMGPOCollection *IGPMGPOCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIGPMSearchCriteria)), uintptr(unsafe.Pointer(&_ppIGPMGPOCollection)))
-	return _ppIGPMGPOCollection, win32.HRESULTError(int32(r1))
+	return _ppIGPMGPOCollection, win32.ErrIfFailed(int32(r1))
 }
 
 // RestoreGPO dispatches through IGPMDomain's vtable slot 12.
 func (self *IGPMDomain) RestoreGPO(pIGPMBackup *IGPMBackup, lDCFlags int32, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (*IGPMResult, error) {
 	var _ppIGPMResult *IGPMResult
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIGPMBackup)), uintptr(lDCFlags), uintptr(unsafe.Pointer(pvarGPMProgress)), uintptr(unsafe.Pointer(pvarGPMCancel)), uintptr(unsafe.Pointer(&_ppIGPMResult)))
-	return _ppIGPMResult, win32.HRESULTError(int32(r1))
+	return _ppIGPMResult, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSOM dispatches through IGPMDomain's vtable slot 13.
 func (self *IGPMDomain) GetSOM(bstrPath foundation.BSTR) (*IGPMSOM, error) {
 	var _ppSOM *IGPMSOM
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPath)), uintptr(unsafe.Pointer(&_ppSOM)))
-	return _ppSOM, win32.HRESULTError(int32(r1))
+	return _ppSOM, win32.ErrIfFailed(int32(r1))
 }
 
 // SearchSOMs dispatches through IGPMDomain's vtable slot 14.
 func (self *IGPMDomain) SearchSOMs(pIGPMSearchCriteria *IGPMSearchCriteria) (*IGPMSOMCollection, error) {
 	var _ppIGPMSOMCollection *IGPMSOMCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIGPMSearchCriteria)), uintptr(unsafe.Pointer(&_ppIGPMSOMCollection)))
-	return _ppIGPMSOMCollection, win32.HRESULTError(int32(r1))
+	return _ppIGPMSOMCollection, win32.ErrIfFailed(int32(r1))
 }
 
 // GetWMIFilter dispatches through IGPMDomain's vtable slot 15.
 func (self *IGPMDomain) GetWMIFilter(bstrPath foundation.BSTR) (*IGPMWMIFilter, error) {
 	var _ppWMIFilter *IGPMWMIFilter
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPath)), uintptr(unsafe.Pointer(&_ppWMIFilter)))
-	return _ppWMIFilter, win32.HRESULTError(int32(r1))
+	return _ppWMIFilter, win32.ErrIfFailed(int32(r1))
 }
 
 // SearchWMIFilters dispatches through IGPMDomain's vtable slot 16.
 func (self *IGPMDomain) SearchWMIFilters(pIGPMSearchCriteria *IGPMSearchCriteria) (*IGPMWMIFilterCollection, error) {
 	var _ppIGPMWMIFilterCollection *IGPMWMIFilterCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIGPMSearchCriteria)), uintptr(unsafe.Pointer(&_ppIGPMWMIFilterCollection)))
-	return _ppIGPMWMIFilterCollection, win32.HRESULTError(int32(r1))
+	return _ppIGPMWMIFilterCollection, win32.ErrIfFailed(int32(r1))
 }
 
 // IGPMDomain2: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmdomain2
@@ -1103,42 +1103,42 @@ var IID_IGPMDomain2 = win32.GUID{Data1: 0x7ca6bb8b, Data2: 0xf1eb, Data3: 0x490a
 func (self *IGPMDomain2) CreateStarterGPO() (*IGPMStarterGPO, error) {
 	var _ppnewTemplate *IGPMStarterGPO
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppnewTemplate)))
-	return _ppnewTemplate, win32.HRESULTError(int32(r1))
+	return _ppnewTemplate, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateGPOFromStarterGPO dispatches through IGPMDomain2's vtable slot 18.
 func (self *IGPMDomain2) CreateGPOFromStarterGPO(pGPOTemplate *IGPMStarterGPO) (*IGPMGPO, error) {
 	var _ppnewGPO *IGPMGPO
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGPOTemplate)), uintptr(unsafe.Pointer(&_ppnewGPO)))
-	return _ppnewGPO, win32.HRESULTError(int32(r1))
+	return _ppnewGPO, win32.ErrIfFailed(int32(r1))
 }
 
 // GetStarterGPO dispatches through IGPMDomain2's vtable slot 19.
 func (self *IGPMDomain2) GetStarterGPO(bstrGuid foundation.BSTR) (*IGPMStarterGPO, error) {
 	var _ppTemplate *IGPMStarterGPO
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGuid)), uintptr(unsafe.Pointer(&_ppTemplate)))
-	return _ppTemplate, win32.HRESULTError(int32(r1))
+	return _ppTemplate, win32.ErrIfFailed(int32(r1))
 }
 
 // SearchStarterGPOs dispatches through IGPMDomain2's vtable slot 20.
 func (self *IGPMDomain2) SearchStarterGPOs(pIGPMSearchCriteria *IGPMSearchCriteria) (*IGPMStarterGPOCollection, error) {
 	var _ppIGPMTemplateCollection *IGPMStarterGPOCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIGPMSearchCriteria)), uintptr(unsafe.Pointer(&_ppIGPMTemplateCollection)))
-	return _ppIGPMTemplateCollection, win32.HRESULTError(int32(r1))
+	return _ppIGPMTemplateCollection, win32.ErrIfFailed(int32(r1))
 }
 
 // LoadStarterGPO dispatches through IGPMDomain2's vtable slot 21.
 func (self *IGPMDomain2) LoadStarterGPO(bstrLoadFile foundation.BSTR, bOverwrite foundation.VARIANT_BOOL, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (*IGPMResult, error) {
 	var _ppIGPMResult *IGPMResult
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrLoadFile)), uintptr(bOverwrite), uintptr(unsafe.Pointer(pvarGPMProgress)), uintptr(unsafe.Pointer(pvarGPMCancel)), uintptr(unsafe.Pointer(&_ppIGPMResult)))
-	return _ppIGPMResult, win32.HRESULTError(int32(r1))
+	return _ppIGPMResult, win32.ErrIfFailed(int32(r1))
 }
 
 // RestoreStarterGPO dispatches through IGPMDomain2's vtable slot 22.
 func (self *IGPMDomain2) RestoreStarterGPO(pIGPMTmplBackup *IGPMStarterGPOBackup, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (*IGPMResult, error) {
 	var _ppIGPMResult *IGPMResult
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIGPMTmplBackup)), uintptr(unsafe.Pointer(pvarGPMProgress)), uintptr(unsafe.Pointer(pvarGPMCancel)), uintptr(unsafe.Pointer(&_ppIGPMResult)))
-	return _ppIGPMResult, win32.HRESULTError(int32(r1))
+	return _ppIGPMResult, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 0077fdfe-88c7-4acf-a11d-d10a7c310a03
@@ -1153,26 +1153,26 @@ var IID_IGPMDomain3 = win32.GUID{Data1: 0x0077fdfe, Data2: 0x88c7, Data3: 0x4acf
 func (self *IGPMDomain3) GenerateReport(gpmReportType GPMReportType, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (*IGPMResult, error) {
 	var _ppIGPMResult *IGPMResult
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(gpmReportType), uintptr(unsafe.Pointer(pvarGPMProgress)), uintptr(unsafe.Pointer(pvarGPMCancel)), uintptr(unsafe.Pointer(&_ppIGPMResult)))
-	return _ppIGPMResult, win32.HRESULTError(int32(r1))
+	return _ppIGPMResult, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InfrastructureDC dispatches through IGPMDomain3's vtable slot 24.
 func (self *IGPMDomain3) Get_InfrastructureDC() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_InfrastructureDC dispatches through IGPMDomain3's vtable slot 25.
 func (self *IGPMDomain3) Put_InfrastructureDC(newVal foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_InfrastructureFlags dispatches through IGPMDomain3's vtable slot 26.
 func (self *IGPMDomain3) Put_InfrastructureFlags(dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IGPMGPO: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmgpo
@@ -1188,195 +1188,195 @@ var IID_IGPMGPO = win32.GUID{Data1: 0x58cc4352, Data2: 0x1ca3, Data3: 0x48e5, Da
 func (self *IGPMGPO) Get_DisplayName() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DisplayName dispatches through IGPMGPO's vtable slot 8.
 func (self *IGPMGPO) Put_DisplayName(newVal foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Path dispatches through IGPMGPO's vtable slot 9.
 func (self *IGPMGPO) Get_Path() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ID dispatches through IGPMGPO's vtable slot 10.
 func (self *IGPMGPO) Get_ID() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DomainName dispatches through IGPMGPO's vtable slot 11.
 func (self *IGPMGPO) Get_DomainName() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CreationTime dispatches through IGPMGPO's vtable slot 12.
 func (self *IGPMGPO) Get_CreationTime() (float64, error) {
 	var _pDate float64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDate)))
-	return _pDate, win32.HRESULTError(int32(r1))
+	return _pDate, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ModificationTime dispatches through IGPMGPO's vtable slot 13.
 func (self *IGPMGPO) Get_ModificationTime() (float64, error) {
 	var _pDate float64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDate)))
-	return _pDate, win32.HRESULTError(int32(r1))
+	return _pDate, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UserDSVersionNumber dispatches through IGPMGPO's vtable slot 14.
 func (self *IGPMGPO) Get_UserDSVersionNumber() (int32, error) {
 	var _pVal int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ComputerDSVersionNumber dispatches through IGPMGPO's vtable slot 15.
 func (self *IGPMGPO) Get_ComputerDSVersionNumber() (int32, error) {
 	var _pVal int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UserSysvolVersionNumber dispatches through IGPMGPO's vtable slot 16.
 func (self *IGPMGPO) Get_UserSysvolVersionNumber() (int32, error) {
 	var _pVal int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ComputerSysvolVersionNumber dispatches through IGPMGPO's vtable slot 17.
 func (self *IGPMGPO) Get_ComputerSysvolVersionNumber() (int32, error) {
 	var _pVal int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetWMIFilter dispatches through IGPMGPO's vtable slot 18.
 func (self *IGPMGPO) GetWMIFilter() (*IGPMWMIFilter, error) {
 	var _ppIGPMWMIFilter *IGPMWMIFilter
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppIGPMWMIFilter)))
-	return _ppIGPMWMIFilter, win32.HRESULTError(int32(r1))
+	return _ppIGPMWMIFilter, win32.ErrIfFailed(int32(r1))
 }
 
 // SetWMIFilter dispatches through IGPMGPO's vtable slot 19.
 func (self *IGPMGPO) SetWMIFilter(pIGPMWMIFilter *IGPMWMIFilter) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIGPMWMIFilter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetUserEnabled dispatches through IGPMGPO's vtable slot 20.
 func (self *IGPMGPO) SetUserEnabled(vbEnabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(vbEnabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetComputerEnabled dispatches through IGPMGPO's vtable slot 21.
 func (self *IGPMGPO) SetComputerEnabled(vbEnabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(vbEnabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsUserEnabled dispatches through IGPMGPO's vtable slot 22.
 func (self *IGPMGPO) IsUserEnabled() (foundation.VARIANT_BOOL, error) {
 	var _pvbEnabled foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvbEnabled)))
-	return _pvbEnabled, win32.HRESULTError(int32(r1))
+	return _pvbEnabled, win32.ErrIfFailed(int32(r1))
 }
 
 // IsComputerEnabled dispatches through IGPMGPO's vtable slot 23.
 func (self *IGPMGPO) IsComputerEnabled() (foundation.VARIANT_BOOL, error) {
 	var _pvbEnabled foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvbEnabled)))
-	return _pvbEnabled, win32.HRESULTError(int32(r1))
+	return _pvbEnabled, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSecurityInfo dispatches through IGPMGPO's vtable slot 24.
 func (self *IGPMGPO) GetSecurityInfo() (*IGPMSecurityInfo, error) {
 	var _ppSecurityInfo *IGPMSecurityInfo
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppSecurityInfo)))
-	return _ppSecurityInfo, win32.HRESULTError(int32(r1))
+	return _ppSecurityInfo, win32.ErrIfFailed(int32(r1))
 }
 
 // SetSecurityInfo dispatches through IGPMGPO's vtable slot 25.
 func (self *IGPMGPO) SetSecurityInfo(pSecurityInfo *IGPMSecurityInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSecurityInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IGPMGPO's vtable slot 26.
 func (self *IGPMGPO) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Backup dispatches through IGPMGPO's vtable slot 27.
 func (self *IGPMGPO) Backup(bstrBackupDir foundation.BSTR, bstrComment foundation.BSTR, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (*IGPMResult, error) {
 	var _ppIGPMResult *IGPMResult
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrBackupDir)), uintptr(unsafe.Pointer(bstrComment)), uintptr(unsafe.Pointer(pvarGPMProgress)), uintptr(unsafe.Pointer(pvarGPMCancel)), uintptr(unsafe.Pointer(&_ppIGPMResult)))
-	return _ppIGPMResult, win32.HRESULTError(int32(r1))
+	return _ppIGPMResult, win32.ErrIfFailed(int32(r1))
 }
 
 // Import dispatches through IGPMGPO's vtable slot 28.
 func (self *IGPMGPO) Import(lFlags int32, pIGPMBackup *IGPMBackup, pvarMigrationTable *systemvariant.VARIANT, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (*IGPMResult, error) {
 	var _ppIGPMResult *IGPMResult
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(pIGPMBackup)), uintptr(unsafe.Pointer(pvarMigrationTable)), uintptr(unsafe.Pointer(pvarGPMProgress)), uintptr(unsafe.Pointer(pvarGPMCancel)), uintptr(unsafe.Pointer(&_ppIGPMResult)))
-	return _ppIGPMResult, win32.HRESULTError(int32(r1))
+	return _ppIGPMResult, win32.ErrIfFailed(int32(r1))
 }
 
 // GenerateReport dispatches through IGPMGPO's vtable slot 29.
 func (self *IGPMGPO) GenerateReport(gpmReportType GPMReportType, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (*IGPMResult, error) {
 	var _ppIGPMResult *IGPMResult
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(gpmReportType), uintptr(unsafe.Pointer(pvarGPMProgress)), uintptr(unsafe.Pointer(pvarGPMCancel)), uintptr(unsafe.Pointer(&_ppIGPMResult)))
-	return _ppIGPMResult, win32.HRESULTError(int32(r1))
+	return _ppIGPMResult, win32.ErrIfFailed(int32(r1))
 }
 
 // GenerateReportToFile dispatches through IGPMGPO's vtable slot 30.
 func (self *IGPMGPO) GenerateReportToFile(gpmReportType GPMReportType, bstrTargetFilePath foundation.BSTR) (*IGPMResult, error) {
 	var _ppIGPMResult *IGPMResult
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(gpmReportType), uintptr(unsafe.Pointer(bstrTargetFilePath)), uintptr(unsafe.Pointer(&_ppIGPMResult)))
-	return _ppIGPMResult, win32.HRESULTError(int32(r1))
+	return _ppIGPMResult, win32.ErrIfFailed(int32(r1))
 }
 
 // CopyTo dispatches through IGPMGPO's vtable slot 31.
 func (self *IGPMGPO) CopyTo(lFlags int32, pIGPMDomain *IGPMDomain, pvarNewDisplayName *systemvariant.VARIANT, pvarMigrationTable *systemvariant.VARIANT, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (*IGPMResult, error) {
 	var _ppIGPMResult *IGPMResult
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(pIGPMDomain)), uintptr(unsafe.Pointer(pvarNewDisplayName)), uintptr(unsafe.Pointer(pvarMigrationTable)), uintptr(unsafe.Pointer(pvarGPMProgress)), uintptr(unsafe.Pointer(pvarGPMCancel)), uintptr(unsafe.Pointer(&_ppIGPMResult)))
-	return _ppIGPMResult, win32.HRESULTError(int32(r1))
+	return _ppIGPMResult, win32.ErrIfFailed(int32(r1))
 }
 
 // SetSecurityDescriptor dispatches through IGPMGPO's vtable slot 32.
 func (self *IGPMGPO) SetSecurityDescriptor(lFlags int32, pSD *systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(pSD)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSecurityDescriptor dispatches through IGPMGPO's vtable slot 33.
 func (self *IGPMGPO) GetSecurityDescriptor(lFlags int32) (*systemcom.IDispatch, error) {
 	var _ppSD *systemcom.IDispatch
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(&_ppSD)))
-	return _ppSD, win32.HRESULTError(int32(r1))
+	return _ppSD, win32.ErrIfFailed(int32(r1))
 }
 
 // IsACLConsistent dispatches through IGPMGPO's vtable slot 34.
 func (self *IGPMGPO) IsACLConsistent() (foundation.VARIANT_BOOL, error) {
 	var _pvbConsistent foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvbConsistent)))
-	return _pvbConsistent, win32.HRESULTError(int32(r1))
+	return _pvbConsistent, win32.ErrIfFailed(int32(r1))
 }
 
 // MakeACLConsistent dispatches through IGPMGPO's vtable slot 35.
 func (self *IGPMGPO) MakeACLConsistent() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IGPMGPO2: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmgpo2
@@ -1392,13 +1392,13 @@ var IID_IGPMGPO2 = win32.GUID{Data1: 0x8a66a210, Data2: 0xb78b, Data3: 0x4d99, D
 func (self *IGPMGPO2) Get_Description() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Description dispatches through IGPMGPO2's vtable slot 37.
 func (self *IGPMGPO2) Put_Description(newVal foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 7cf123a1-f94a-4112-bfae-6aa1db9cb248
@@ -1413,19 +1413,19 @@ var IID_IGPMGPO3 = win32.GUID{Data1: 0x7cf123a1, Data2: 0xf94a, Data3: 0x4112, D
 func (self *IGPMGPO3) Get_InfrastructureDC() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_InfrastructureDC dispatches through IGPMGPO3's vtable slot 39.
 func (self *IGPMGPO3) Put_InfrastructureDC(newVal foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_InfrastructureFlags dispatches through IGPMGPO3's vtable slot 40.
 func (self *IGPMGPO3) Put_InfrastructureFlags(dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IGPMGPOCollection: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmgpocollection
@@ -1441,21 +1441,21 @@ var IID_IGPMGPOCollection = win32.GUID{Data1: 0xf0f0d5cf, Data2: 0x70ca, Data3: 
 func (self *IGPMGPOCollection) Get_Count() (int32, error) {
 	var _pVal int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Item dispatches through IGPMGPOCollection's vtable slot 8.
 func (self *IGPMGPOCollection) Get_Item(lIndex int32) (systemvariant.VARIANT, error) {
 	var _pVal systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IGPMGPOCollection's vtable slot 9.
 func (self *IGPMGPOCollection) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
 	var _ppIGPMGPOs *systemole.IEnumVARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppIGPMGPOs)))
-	return _ppIGPMGPOs, win32.HRESULTError(int32(r1))
+	return _ppIGPMGPOs, win32.ErrIfFailed(int32(r1))
 }
 
 // IGPMGPOLink: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmgpolink
@@ -1471,60 +1471,60 @@ var IID_IGPMGPOLink = win32.GUID{Data1: 0x434b99bd, Data2: 0x5de7, Data3: 0x478a
 func (self *IGPMGPOLink) Get_GPOID() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_GPODomain dispatches through IGPMGPOLink's vtable slot 8.
 func (self *IGPMGPOLink) Get_GPODomain() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Enabled dispatches through IGPMGPOLink's vtable slot 9.
 func (self *IGPMGPOLink) Get_Enabled() (foundation.VARIANT_BOOL, error) {
 	var _pVal foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Enabled dispatches through IGPMGPOLink's vtable slot 10.
 func (self *IGPMGPOLink) Put_Enabled(newVal foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(newVal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Enforced dispatches through IGPMGPOLink's vtable slot 11.
 func (self *IGPMGPOLink) Get_Enforced() (foundation.VARIANT_BOOL, error) {
 	var _pVal foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Enforced dispatches through IGPMGPOLink's vtable slot 12.
 func (self *IGPMGPOLink) Put_Enforced(newVal foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(newVal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SOMLinkOrder dispatches through IGPMGPOLink's vtable slot 13.
 func (self *IGPMGPOLink) Get_SOMLinkOrder() (int32, error) {
 	var _lVal int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lVal)))
-	return _lVal, win32.HRESULTError(int32(r1))
+	return _lVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SOM dispatches through IGPMGPOLink's vtable slot 14.
 func (self *IGPMGPOLink) Get_SOM() (*IGPMSOM, error) {
 	var _ppIGPMSOM *IGPMSOM
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppIGPMSOM)))
-	return _ppIGPMSOM, win32.HRESULTError(int32(r1))
+	return _ppIGPMSOM, win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IGPMGPOLink's vtable slot 15.
 func (self *IGPMGPOLink) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IGPMGPOLinksCollection: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmgpolinkscollection
@@ -1540,21 +1540,21 @@ var IID_IGPMGPOLinksCollection = win32.GUID{Data1: 0x189d7b68, Data2: 0x16bd, Da
 func (self *IGPMGPOLinksCollection) Get_Count() (int32, error) {
 	var _pVal int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Item dispatches through IGPMGPOLinksCollection's vtable slot 8.
 func (self *IGPMGPOLinksCollection) Get_Item(lIndex int32) (systemvariant.VARIANT, error) {
 	var _pVal systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IGPMGPOLinksCollection's vtable slot 9.
 func (self *IGPMGPOLinksCollection) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
 	var _ppIGPMLinks *systemole.IEnumVARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppIGPMLinks)))
-	return _ppIGPMLinks, win32.HRESULTError(int32(r1))
+	return _ppIGPMLinks, win32.ErrIfFailed(int32(r1))
 }
 
 // IGPMMapEntry: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmmapentry
@@ -1570,28 +1570,28 @@ var IID_IGPMMapEntry = win32.GUID{Data1: 0x8e79ad06, Data2: 0x2381, Data3: 0x444
 func (self *IGPMMapEntry) Get_Source() (foundation.BSTR, error) {
 	var _pbstrSource foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrSource)))
-	return _pbstrSource, win32.HRESULTError(int32(r1))
+	return _pbstrSource, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Destination dispatches through IGPMMapEntry's vtable slot 8.
 func (self *IGPMMapEntry) Get_Destination() (foundation.BSTR, error) {
 	var _pbstrDestination foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrDestination)))
-	return _pbstrDestination, win32.HRESULTError(int32(r1))
+	return _pbstrDestination, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DestinationOption dispatches through IGPMMapEntry's vtable slot 9.
 func (self *IGPMMapEntry) Get_DestinationOption() (GPMDestinationOption, error) {
 	var _pgpmDestOption GPMDestinationOption
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pgpmDestOption)))
-	return _pgpmDestOption, win32.HRESULTError(int32(r1))
+	return _pgpmDestOption, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EntryType dispatches through IGPMMapEntry's vtable slot 10.
 func (self *IGPMMapEntry) Get_EntryType() (GPMEntryType, error) {
 	var _pgpmEntryType GPMEntryType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pgpmEntryType)))
-	return _pgpmEntryType, win32.HRESULTError(int32(r1))
+	return _pgpmEntryType, win32.ErrIfFailed(int32(r1))
 }
 
 // IGPMMapEntryCollection: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmmapentrycollection
@@ -1607,21 +1607,21 @@ var IID_IGPMMapEntryCollection = win32.GUID{Data1: 0xbb0bf49b, Data2: 0xe53f, Da
 func (self *IGPMMapEntryCollection) Get_Count() (int32, error) {
 	var _pVal int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Item dispatches through IGPMMapEntryCollection's vtable slot 8.
 func (self *IGPMMapEntryCollection) Get_Item(lIndex int32) (systemvariant.VARIANT, error) {
 	var _pVal systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IGPMMapEntryCollection's vtable slot 9.
 func (self *IGPMMapEntryCollection) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
 	var _pVal *systemole.IEnumVARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IGPMMigrationTable: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmmigrationtable
@@ -1636,48 +1636,48 @@ var IID_IGPMMigrationTable = win32.GUID{Data1: 0x48f823b1, Data2: 0xefaf, Data3:
 // Save dispatches through IGPMMigrationTable's vtable slot 7.
 func (self *IGPMMigrationTable) Save(bstrMigrationTablePath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrMigrationTablePath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddEntry dispatches through IGPMMigrationTable's vtable slot 9.
 func (self *IGPMMigrationTable) AddEntry(bstrSource foundation.BSTR, gpmEntryType GPMEntryType, pvarDestination *systemvariant.VARIANT) (*IGPMMapEntry, error) {
 	var _ppEntry *IGPMMapEntry
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrSource)), uintptr(gpmEntryType), uintptr(unsafe.Pointer(pvarDestination)), uintptr(unsafe.Pointer(&_ppEntry)))
-	return _ppEntry, win32.HRESULTError(int32(r1))
+	return _ppEntry, win32.ErrIfFailed(int32(r1))
 }
 
 // GetEntry dispatches through IGPMMigrationTable's vtable slot 10.
 func (self *IGPMMigrationTable) GetEntry(bstrSource foundation.BSTR) (*IGPMMapEntry, error) {
 	var _ppEntry *IGPMMapEntry
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrSource)), uintptr(unsafe.Pointer(&_ppEntry)))
-	return _ppEntry, win32.HRESULTError(int32(r1))
+	return _ppEntry, win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteEntry dispatches through IGPMMigrationTable's vtable slot 11.
 func (self *IGPMMigrationTable) DeleteEntry(bstrSource foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrSource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UpdateDestination dispatches through IGPMMigrationTable's vtable slot 12.
 func (self *IGPMMigrationTable) UpdateDestination(bstrSource foundation.BSTR, pvarDestination *systemvariant.VARIANT) (*IGPMMapEntry, error) {
 	var _ppEntry *IGPMMapEntry
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrSource)), uintptr(unsafe.Pointer(pvarDestination)), uintptr(unsafe.Pointer(&_ppEntry)))
-	return _ppEntry, win32.HRESULTError(int32(r1))
+	return _ppEntry, win32.ErrIfFailed(int32(r1))
 }
 
 // Validate dispatches through IGPMMigrationTable's vtable slot 13.
 func (self *IGPMMigrationTable) Validate() (*IGPMResult, error) {
 	var _ppResult *IGPMResult
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppResult)))
-	return _ppResult, win32.HRESULTError(int32(r1))
+	return _ppResult, win32.ErrIfFailed(int32(r1))
 }
 
 // GetEntries dispatches through IGPMMigrationTable's vtable slot 14.
 func (self *IGPMMigrationTable) GetEntries() (*IGPMMapEntryCollection, error) {
 	var _ppEntries *IGPMMapEntryCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEntries)))
-	return _ppEntries, win32.HRESULTError(int32(r1))
+	return _ppEntries, win32.ErrIfFailed(int32(r1))
 }
 
 // IGPMPermission: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmpermission
@@ -1693,35 +1693,35 @@ var IID_IGPMPermission = win32.GUID{Data1: 0x35ebca40, Data2: 0xe1a1, Data3: 0x4
 func (self *IGPMPermission) Get_Inherited() (foundation.VARIANT_BOOL, error) {
 	var _pVal foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Inheritable dispatches through IGPMPermission's vtable slot 8.
 func (self *IGPMPermission) Get_Inheritable() (foundation.VARIANT_BOOL, error) {
 	var _pVal foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Denied dispatches through IGPMPermission's vtable slot 9.
 func (self *IGPMPermission) Get_Denied() (foundation.VARIANT_BOOL, error) {
 	var _pVal foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Permission dispatches through IGPMPermission's vtable slot 10.
 func (self *IGPMPermission) Get_Permission() (GPMPermissionType, error) {
 	var _pVal GPMPermissionType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Trustee dispatches through IGPMPermission's vtable slot 11.
 func (self *IGPMPermission) Get_Trustee() (*IGPMTrustee, error) {
 	var _ppIGPMTrustee *IGPMTrustee
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppIGPMTrustee)))
-	return _ppIGPMTrustee, win32.HRESULTError(int32(r1))
+	return _ppIGPMTrustee, win32.ErrIfFailed(int32(r1))
 }
 
 // IGPMRSOP: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmrsop
@@ -1737,205 +1737,205 @@ var IID_IGPMRSOP = win32.GUID{Data1: 0x49ed785a, Data2: 0x3237, Data3: 0x4ff2, D
 func (self *IGPMRSOP) Get_Mode() (GPMRSOPMode, error) {
 	var _pVal GPMRSOPMode
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Namespace dispatches through IGPMRSOP's vtable slot 8.
 func (self *IGPMRSOP) Get_Namespace() (foundation.BSTR, error) {
 	var _bstrVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bstrVal)))
-	return _bstrVal, win32.HRESULTError(int32(r1))
+	return _bstrVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LoggingComputer dispatches through IGPMRSOP's vtable slot 9.
 func (self *IGPMRSOP) Put_LoggingComputer(bstrVal foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LoggingComputer dispatches through IGPMRSOP's vtable slot 10.
 func (self *IGPMRSOP) Get_LoggingComputer() (foundation.BSTR, error) {
 	var _bstrVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bstrVal)))
-	return _bstrVal, win32.HRESULTError(int32(r1))
+	return _bstrVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LoggingUser dispatches through IGPMRSOP's vtable slot 11.
 func (self *IGPMRSOP) Put_LoggingUser(bstrVal foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LoggingUser dispatches through IGPMRSOP's vtable slot 12.
 func (self *IGPMRSOP) Get_LoggingUser() (foundation.BSTR, error) {
 	var _bstrVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bstrVal)))
-	return _bstrVal, win32.HRESULTError(int32(r1))
+	return _bstrVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LoggingFlags dispatches through IGPMRSOP's vtable slot 13.
 func (self *IGPMRSOP) Put_LoggingFlags(lVal int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(lVal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LoggingFlags dispatches through IGPMRSOP's vtable slot 14.
 func (self *IGPMRSOP) Get_LoggingFlags() (int32, error) {
 	var _lVal int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lVal)))
-	return _lVal, win32.HRESULTError(int32(r1))
+	return _lVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PlanningFlags dispatches through IGPMRSOP's vtable slot 15.
 func (self *IGPMRSOP) Put_PlanningFlags(lVal int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(lVal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PlanningFlags dispatches through IGPMRSOP's vtable slot 16.
 func (self *IGPMRSOP) Get_PlanningFlags() (int32, error) {
 	var _lVal int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lVal)))
-	return _lVal, win32.HRESULTError(int32(r1))
+	return _lVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PlanningDomainController dispatches through IGPMRSOP's vtable slot 17.
 func (self *IGPMRSOP) Put_PlanningDomainController(bstrVal foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PlanningDomainController dispatches through IGPMRSOP's vtable slot 18.
 func (self *IGPMRSOP) Get_PlanningDomainController() (foundation.BSTR, error) {
 	var _bstrVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bstrVal)))
-	return _bstrVal, win32.HRESULTError(int32(r1))
+	return _bstrVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PlanningSiteName dispatches through IGPMRSOP's vtable slot 19.
 func (self *IGPMRSOP) Put_PlanningSiteName(bstrVal foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PlanningSiteName dispatches through IGPMRSOP's vtable slot 20.
 func (self *IGPMRSOP) Get_PlanningSiteName() (foundation.BSTR, error) {
 	var _bstrVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bstrVal)))
-	return _bstrVal, win32.HRESULTError(int32(r1))
+	return _bstrVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PlanningUser dispatches through IGPMRSOP's vtable slot 21.
 func (self *IGPMRSOP) Put_PlanningUser(bstrVal foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PlanningUser dispatches through IGPMRSOP's vtable slot 22.
 func (self *IGPMRSOP) Get_PlanningUser() (foundation.BSTR, error) {
 	var _bstrVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bstrVal)))
-	return _bstrVal, win32.HRESULTError(int32(r1))
+	return _bstrVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PlanningUserSOM dispatches through IGPMRSOP's vtable slot 23.
 func (self *IGPMRSOP) Put_PlanningUserSOM(bstrVal foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PlanningUserSOM dispatches through IGPMRSOP's vtable slot 24.
 func (self *IGPMRSOP) Get_PlanningUserSOM() (foundation.BSTR, error) {
 	var _bstrVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bstrVal)))
-	return _bstrVal, win32.HRESULTError(int32(r1))
+	return _bstrVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PlanningUserWMIFilters dispatches through IGPMRSOP's vtable slot 26.
 func (self *IGPMRSOP) Get_PlanningUserWMIFilters() (systemvariant.VARIANT, error) {
 	var _varVal systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_varVal)))
-	return _varVal, win32.HRESULTError(int32(r1))
+	return _varVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PlanningUserSecurityGroups dispatches through IGPMRSOP's vtable slot 28.
 func (self *IGPMRSOP) Get_PlanningUserSecurityGroups() (systemvariant.VARIANT, error) {
 	var _varVal systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_varVal)))
-	return _varVal, win32.HRESULTError(int32(r1))
+	return _varVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PlanningComputer dispatches through IGPMRSOP's vtable slot 29.
 func (self *IGPMRSOP) Put_PlanningComputer(bstrVal foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PlanningComputer dispatches through IGPMRSOP's vtable slot 30.
 func (self *IGPMRSOP) Get_PlanningComputer() (foundation.BSTR, error) {
 	var _bstrVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bstrVal)))
-	return _bstrVal, win32.HRESULTError(int32(r1))
+	return _bstrVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PlanningComputerSOM dispatches through IGPMRSOP's vtable slot 31.
 func (self *IGPMRSOP) Put_PlanningComputerSOM(bstrVal foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PlanningComputerSOM dispatches through IGPMRSOP's vtable slot 32.
 func (self *IGPMRSOP) Get_PlanningComputerSOM() (foundation.BSTR, error) {
 	var _bstrVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bstrVal)))
-	return _bstrVal, win32.HRESULTError(int32(r1))
+	return _bstrVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PlanningComputerWMIFilters dispatches through IGPMRSOP's vtable slot 34.
 func (self *IGPMRSOP) Get_PlanningComputerWMIFilters() (systemvariant.VARIANT, error) {
 	var _varVal systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_varVal)))
-	return _varVal, win32.HRESULTError(int32(r1))
+	return _varVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PlanningComputerSecurityGroups dispatches through IGPMRSOP's vtable slot 36.
 func (self *IGPMRSOP) Get_PlanningComputerSecurityGroups() (systemvariant.VARIANT, error) {
 	var _varVal systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_varVal)))
-	return _varVal, win32.HRESULTError(int32(r1))
+	return _varVal, win32.ErrIfFailed(int32(r1))
 }
 
 // LoggingEnumerateUsers dispatches through IGPMRSOP's vtable slot 37.
 func (self *IGPMRSOP) LoggingEnumerateUsers() (systemvariant.VARIANT, error) {
 	var _varVal systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_varVal)))
-	return _varVal, win32.HRESULTError(int32(r1))
+	return _varVal, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateQueryResults dispatches through IGPMRSOP's vtable slot 38.
 func (self *IGPMRSOP) CreateQueryResults() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReleaseQueryResults dispatches through IGPMRSOP's vtable slot 39.
 func (self *IGPMRSOP) ReleaseQueryResults() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GenerateReport dispatches through IGPMRSOP's vtable slot 40.
 func (self *IGPMRSOP) GenerateReport(gpmReportType GPMReportType, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (*IGPMResult, error) {
 	var _ppIGPMResult *IGPMResult
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(gpmReportType), uintptr(unsafe.Pointer(pvarGPMProgress)), uintptr(unsafe.Pointer(pvarGPMCancel)), uintptr(unsafe.Pointer(&_ppIGPMResult)))
-	return _ppIGPMResult, win32.HRESULTError(int32(r1))
+	return _ppIGPMResult, win32.ErrIfFailed(int32(r1))
 }
 
 // GenerateReportToFile dispatches through IGPMRSOP's vtable slot 41.
 func (self *IGPMRSOP) GenerateReportToFile(gpmReportType GPMReportType, bstrTargetFilePath foundation.BSTR) (*IGPMResult, error) {
 	var _ppIGPMResult *IGPMResult
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(gpmReportType), uintptr(unsafe.Pointer(bstrTargetFilePath)), uintptr(unsafe.Pointer(&_ppIGPMResult)))
-	return _ppIGPMResult, win32.HRESULTError(int32(r1))
+	return _ppIGPMResult, win32.ErrIfFailed(int32(r1))
 }
 
 // IGPMResult: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmresult
@@ -1951,20 +1951,20 @@ var IID_IGPMResult = win32.GUID{Data1: 0x86dff7e9, Data2: 0xf76f, Data3: 0x42ab,
 func (self *IGPMResult) Get_Status() (*IGPMStatusMsgCollection, error) {
 	var _ppIGPMStatusMsgCollection *IGPMStatusMsgCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppIGPMStatusMsgCollection)))
-	return _ppIGPMStatusMsgCollection, win32.HRESULTError(int32(r1))
+	return _ppIGPMStatusMsgCollection, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Result dispatches through IGPMResult's vtable slot 8.
 func (self *IGPMResult) Get_Result() (systemvariant.VARIANT, error) {
 	var _pvarResult systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarResult)))
-	return _pvarResult, win32.HRESULTError(int32(r1))
+	return _pvarResult, win32.ErrIfFailed(int32(r1))
 }
 
 // OverallStatus dispatches through IGPMResult's vtable slot 9.
 func (self *IGPMResult) OverallStatus() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IGPMSOM: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmsom
@@ -1980,68 +1980,68 @@ var IID_IGPMSOM = win32.GUID{Data1: 0xc0a7f09e, Data2: 0x05a1, Data3: 0x4f0c, Da
 func (self *IGPMSOM) Get_GPOInheritanceBlocked() (foundation.VARIANT_BOOL, error) {
 	var _pVal foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_GPOInheritanceBlocked dispatches through IGPMSOM's vtable slot 8.
 func (self *IGPMSOM) Put_GPOInheritanceBlocked(newVal foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(newVal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through IGPMSOM's vtable slot 9.
 func (self *IGPMSOM) Get_Name() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Path dispatches through IGPMSOM's vtable slot 10.
 func (self *IGPMSOM) Get_Path() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateGPOLink dispatches through IGPMSOM's vtable slot 11.
 func (self *IGPMSOM) CreateGPOLink(lLinkPos int32, pGPO *IGPMGPO) (*IGPMGPOLink, error) {
 	var _ppNewGPOLink *IGPMGPOLink
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(lLinkPos), uintptr(unsafe.Pointer(pGPO)), uintptr(unsafe.Pointer(&_ppNewGPOLink)))
-	return _ppNewGPOLink, win32.HRESULTError(int32(r1))
+	return _ppNewGPOLink, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Type dispatches through IGPMSOM's vtable slot 12.
 func (self *IGPMSOM) Get_Type() (GPMSOMType, error) {
 	var _pVal GPMSOMType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetGPOLinks dispatches through IGPMSOM's vtable slot 13.
 func (self *IGPMSOM) GetGPOLinks() (*IGPMGPOLinksCollection, error) {
 	var _ppGPOLinks *IGPMGPOLinksCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppGPOLinks)))
-	return _ppGPOLinks, win32.HRESULTError(int32(r1))
+	return _ppGPOLinks, win32.ErrIfFailed(int32(r1))
 }
 
 // GetInheritedGPOLinks dispatches through IGPMSOM's vtable slot 14.
 func (self *IGPMSOM) GetInheritedGPOLinks() (*IGPMGPOLinksCollection, error) {
 	var _ppGPOLinks *IGPMGPOLinksCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppGPOLinks)))
-	return _ppGPOLinks, win32.HRESULTError(int32(r1))
+	return _ppGPOLinks, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSecurityInfo dispatches through IGPMSOM's vtable slot 15.
 func (self *IGPMSOM) GetSecurityInfo() (*IGPMSecurityInfo, error) {
 	var _ppSecurityInfo *IGPMSecurityInfo
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppSecurityInfo)))
-	return _ppSecurityInfo, win32.HRESULTError(int32(r1))
+	return _ppSecurityInfo, win32.ErrIfFailed(int32(r1))
 }
 
 // SetSecurityInfo dispatches through IGPMSOM's vtable slot 16.
 func (self *IGPMSOM) SetSecurityInfo(pSecurityInfo *IGPMSecurityInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSecurityInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IGPMSOMCollection: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmsomcollection
@@ -2057,21 +2057,21 @@ var IID_IGPMSOMCollection = win32.GUID{Data1: 0xadc1688e, Data2: 0x00e4, Data3: 
 func (self *IGPMSOMCollection) Get_Count() (int32, error) {
 	var _pVal int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Item dispatches through IGPMSOMCollection's vtable slot 8.
 func (self *IGPMSOMCollection) Get_Item(lIndex int32) (systemvariant.VARIANT, error) {
 	var _pVal systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IGPMSOMCollection's vtable slot 9.
 func (self *IGPMSOMCollection) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
 	var _ppIGPMSOM *systemole.IEnumVARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppIGPMSOM)))
-	return _ppIGPMSOM, win32.HRESULTError(int32(r1))
+	return _ppIGPMSOM, win32.ErrIfFailed(int32(r1))
 }
 
 // IGPMSearchCriteria: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmsearchcriteria
@@ -2096,39 +2096,39 @@ var IID_IGPMSecurityInfo = win32.GUID{Data1: 0xb6c31ed4, Data2: 0x1c93, Data3: 0
 func (self *IGPMSecurityInfo) Get_Count() (int32, error) {
 	var _pVal int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Item dispatches through IGPMSecurityInfo's vtable slot 8.
 func (self *IGPMSecurityInfo) Get_Item(lIndex int32) (systemvariant.VARIANT, error) {
 	var _pVal systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IGPMSecurityInfo's vtable slot 9.
 func (self *IGPMSecurityInfo) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
 	var _ppEnum *systemole.IEnumVARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
-	return _ppEnum, win32.HRESULTError(int32(r1))
+	return _ppEnum, win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through IGPMSecurityInfo's vtable slot 10.
 func (self *IGPMSecurityInfo) Add(pPerm *IGPMPermission) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPerm)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through IGPMSecurityInfo's vtable slot 11.
 func (self *IGPMSecurityInfo) Remove(pPerm *IGPMPermission) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPerm)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveTrustee dispatches through IGPMSecurityInfo's vtable slot 12.
 func (self *IGPMSecurityInfo) RemoveTrustee(bstrTrustee foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTrustee)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IGPMSitesContainer: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmsitescontainer
@@ -2144,35 +2144,35 @@ var IID_IGPMSitesContainer = win32.GUID{Data1: 0x4725a899, Data2: 0x2782, Data3:
 func (self *IGPMSitesContainer) Get_DomainController() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Domain dispatches through IGPMSitesContainer's vtable slot 8.
 func (self *IGPMSitesContainer) Get_Domain() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Forest dispatches through IGPMSitesContainer's vtable slot 9.
 func (self *IGPMSitesContainer) Get_Forest() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSite dispatches through IGPMSitesContainer's vtable slot 10.
 func (self *IGPMSitesContainer) GetSite(bstrSiteName foundation.BSTR) (*IGPMSOM, error) {
 	var _ppSOM *IGPMSOM
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrSiteName)), uintptr(unsafe.Pointer(&_ppSOM)))
-	return _ppSOM, win32.HRESULTError(int32(r1))
+	return _ppSOM, win32.ErrIfFailed(int32(r1))
 }
 
 // SearchSites dispatches through IGPMSitesContainer's vtable slot 11.
 func (self *IGPMSitesContainer) SearchSites(pIGPMSearchCriteria *IGPMSearchCriteria) (*IGPMSOMCollection, error) {
 	var _ppIGPMSOMCollection *IGPMSOMCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIGPMSearchCriteria)), uintptr(unsafe.Pointer(&_ppIGPMSOMCollection)))
-	return _ppIGPMSOMCollection, win32.HRESULTError(int32(r1))
+	return _ppIGPMSOMCollection, win32.ErrIfFailed(int32(r1))
 }
 
 // IGPMStarterGPO: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmstartergpo
@@ -2188,143 +2188,143 @@ var IID_IGPMStarterGPO = win32.GUID{Data1: 0xdfc3f61b, Data2: 0x8880, Data3: 0x4
 func (self *IGPMStarterGPO) Get_DisplayName() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DisplayName dispatches through IGPMStarterGPO's vtable slot 8.
 func (self *IGPMStarterGPO) Put_DisplayName(newVal foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through IGPMStarterGPO's vtable slot 9.
 func (self *IGPMStarterGPO) Get_Description() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Description dispatches through IGPMStarterGPO's vtable slot 10.
 func (self *IGPMStarterGPO) Put_Description(newVal foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Author dispatches through IGPMStarterGPO's vtable slot 11.
 func (self *IGPMStarterGPO) Get_Author() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Product dispatches through IGPMStarterGPO's vtable slot 12.
 func (self *IGPMStarterGPO) Get_Product() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CreationTime dispatches through IGPMStarterGPO's vtable slot 13.
 func (self *IGPMStarterGPO) Get_CreationTime() (float64, error) {
 	var _pVal float64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ID dispatches through IGPMStarterGPO's vtable slot 14.
 func (self *IGPMStarterGPO) Get_ID() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ModifiedTime dispatches through IGPMStarterGPO's vtable slot 15.
 func (self *IGPMStarterGPO) Get_ModifiedTime() (float64, error) {
 	var _pVal float64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Type dispatches through IGPMStarterGPO's vtable slot 16.
 func (self *IGPMStarterGPO) Get_Type() (GPMStarterGPOType, error) {
 	var _pVal GPMStarterGPOType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ComputerVersion dispatches through IGPMStarterGPO's vtable slot 17.
 func (self *IGPMStarterGPO) Get_ComputerVersion() (uint16, error) {
 	var _pVal uint16
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UserVersion dispatches through IGPMStarterGPO's vtable slot 18.
 func (self *IGPMStarterGPO) Get_UserVersion() (uint16, error) {
 	var _pVal uint16
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StarterGPOVersion dispatches through IGPMStarterGPO's vtable slot 19.
 func (self *IGPMStarterGPO) Get_StarterGPOVersion() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IGPMStarterGPO's vtable slot 20.
 func (self *IGPMStarterGPO) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Save dispatches through IGPMStarterGPO's vtable slot 21.
 func (self *IGPMStarterGPO) Save(bstrSaveFile foundation.BSTR, bOverwrite foundation.VARIANT_BOOL, bSaveAsSystem foundation.VARIANT_BOOL, bstrLanguage *systemvariant.VARIANT, bstrAuthor *systemvariant.VARIANT, bstrProduct *systemvariant.VARIANT, bstrUniqueID *systemvariant.VARIANT, bstrVersion *systemvariant.VARIANT, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (*IGPMResult, error) {
 	var _ppIGPMResult *IGPMResult
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrSaveFile)), uintptr(bOverwrite), uintptr(bSaveAsSystem), uintptr(unsafe.Pointer(bstrLanguage)), uintptr(unsafe.Pointer(bstrAuthor)), uintptr(unsafe.Pointer(bstrProduct)), uintptr(unsafe.Pointer(bstrUniqueID)), uintptr(unsafe.Pointer(bstrVersion)), uintptr(unsafe.Pointer(pvarGPMProgress)), uintptr(unsafe.Pointer(pvarGPMCancel)), uintptr(unsafe.Pointer(&_ppIGPMResult)))
-	return _ppIGPMResult, win32.HRESULTError(int32(r1))
+	return _ppIGPMResult, win32.ErrIfFailed(int32(r1))
 }
 
 // Backup dispatches through IGPMStarterGPO's vtable slot 22.
 func (self *IGPMStarterGPO) Backup(bstrBackupDir foundation.BSTR, bstrComment foundation.BSTR, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (*IGPMResult, error) {
 	var _ppIGPMResult *IGPMResult
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrBackupDir)), uintptr(unsafe.Pointer(bstrComment)), uintptr(unsafe.Pointer(pvarGPMProgress)), uintptr(unsafe.Pointer(pvarGPMCancel)), uintptr(unsafe.Pointer(&_ppIGPMResult)))
-	return _ppIGPMResult, win32.HRESULTError(int32(r1))
+	return _ppIGPMResult, win32.ErrIfFailed(int32(r1))
 }
 
 // CopyTo dispatches through IGPMStarterGPO's vtable slot 23.
 func (self *IGPMStarterGPO) CopyTo(pvarNewDisplayName *systemvariant.VARIANT, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (*IGPMResult, error) {
 	var _ppIGPMResult *IGPMResult
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarNewDisplayName)), uintptr(unsafe.Pointer(pvarGPMProgress)), uintptr(unsafe.Pointer(pvarGPMCancel)), uintptr(unsafe.Pointer(&_ppIGPMResult)))
-	return _ppIGPMResult, win32.HRESULTError(int32(r1))
+	return _ppIGPMResult, win32.ErrIfFailed(int32(r1))
 }
 
 // GenerateReport dispatches through IGPMStarterGPO's vtable slot 24.
 func (self *IGPMStarterGPO) GenerateReport(gpmReportType GPMReportType, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (*IGPMResult, error) {
 	var _ppIGPMResult *IGPMResult
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(gpmReportType), uintptr(unsafe.Pointer(pvarGPMProgress)), uintptr(unsafe.Pointer(pvarGPMCancel)), uintptr(unsafe.Pointer(&_ppIGPMResult)))
-	return _ppIGPMResult, win32.HRESULTError(int32(r1))
+	return _ppIGPMResult, win32.ErrIfFailed(int32(r1))
 }
 
 // GenerateReportToFile dispatches through IGPMStarterGPO's vtable slot 25.
 func (self *IGPMStarterGPO) GenerateReportToFile(gpmReportType GPMReportType, bstrTargetFilePath foundation.BSTR) (*IGPMResult, error) {
 	var _ppIGPMResult *IGPMResult
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(gpmReportType), uintptr(unsafe.Pointer(bstrTargetFilePath)), uintptr(unsafe.Pointer(&_ppIGPMResult)))
-	return _ppIGPMResult, win32.HRESULTError(int32(r1))
+	return _ppIGPMResult, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSecurityInfo dispatches through IGPMStarterGPO's vtable slot 26.
 func (self *IGPMStarterGPO) GetSecurityInfo() (*IGPMSecurityInfo, error) {
 	var _ppSecurityInfo *IGPMSecurityInfo
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppSecurityInfo)))
-	return _ppSecurityInfo, win32.HRESULTError(int32(r1))
+	return _ppSecurityInfo, win32.ErrIfFailed(int32(r1))
 }
 
 // SetSecurityInfo dispatches through IGPMStarterGPO's vtable slot 27.
 func (self *IGPMStarterGPO) SetSecurityInfo(pSecurityInfo *IGPMSecurityInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSecurityInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IGPMStarterGPOBackup: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmstartergpobackup
@@ -2340,76 +2340,76 @@ var IID_IGPMStarterGPOBackup = win32.GUID{Data1: 0x51d98eda, Data2: 0xa87e, Data
 func (self *IGPMStarterGPOBackup) Get_BackupDir() (foundation.BSTR, error) {
 	var _pbstrBackupDir foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrBackupDir)))
-	return _pbstrBackupDir, win32.HRESULTError(int32(r1))
+	return _pbstrBackupDir, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Comment dispatches through IGPMStarterGPOBackup's vtable slot 8.
 func (self *IGPMStarterGPOBackup) Get_Comment() (foundation.BSTR, error) {
 	var _pbstrComment foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrComment)))
-	return _pbstrComment, win32.HRESULTError(int32(r1))
+	return _pbstrComment, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DisplayName dispatches through IGPMStarterGPOBackup's vtable slot 9.
 func (self *IGPMStarterGPOBackup) Get_DisplayName() (foundation.BSTR, error) {
 	var _pbstrDisplayName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrDisplayName)))
-	return _pbstrDisplayName, win32.HRESULTError(int32(r1))
+	return _pbstrDisplayName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Domain dispatches through IGPMStarterGPOBackup's vtable slot 10.
 func (self *IGPMStarterGPOBackup) Get_Domain() (foundation.BSTR, error) {
 	var _pbstrTemplateDomain foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrTemplateDomain)))
-	return _pbstrTemplateDomain, win32.HRESULTError(int32(r1))
+	return _pbstrTemplateDomain, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StarterGPOID dispatches through IGPMStarterGPOBackup's vtable slot 11.
 func (self *IGPMStarterGPOBackup) Get_StarterGPOID() (foundation.BSTR, error) {
 	var _pbstrTemplateID foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrTemplateID)))
-	return _pbstrTemplateID, win32.HRESULTError(int32(r1))
+	return _pbstrTemplateID, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ID dispatches through IGPMStarterGPOBackup's vtable slot 12.
 func (self *IGPMStarterGPOBackup) Get_ID() (foundation.BSTR, error) {
 	var _pbstrID foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrID)))
-	return _pbstrID, win32.HRESULTError(int32(r1))
+	return _pbstrID, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Timestamp dispatches through IGPMStarterGPOBackup's vtable slot 13.
 func (self *IGPMStarterGPOBackup) Get_Timestamp() (float64, error) {
 	var _pTimestamp float64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pTimestamp)))
-	return _pTimestamp, win32.HRESULTError(int32(r1))
+	return _pTimestamp, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Type dispatches through IGPMStarterGPOBackup's vtable slot 14.
 func (self *IGPMStarterGPOBackup) Get_Type() (GPMStarterGPOType, error) {
 	var _pType GPMStarterGPOType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pType)))
-	return _pType, win32.HRESULTError(int32(r1))
+	return _pType, win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IGPMStarterGPOBackup's vtable slot 15.
 func (self *IGPMStarterGPOBackup) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GenerateReport dispatches through IGPMStarterGPOBackup's vtable slot 16.
 func (self *IGPMStarterGPOBackup) GenerateReport(gpmReportType GPMReportType, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (*IGPMResult, error) {
 	var _ppIGPMResult *IGPMResult
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(gpmReportType), uintptr(unsafe.Pointer(pvarGPMProgress)), uintptr(unsafe.Pointer(pvarGPMCancel)), uintptr(unsafe.Pointer(&_ppIGPMResult)))
-	return _ppIGPMResult, win32.HRESULTError(int32(r1))
+	return _ppIGPMResult, win32.ErrIfFailed(int32(r1))
 }
 
 // GenerateReportToFile dispatches through IGPMStarterGPOBackup's vtable slot 17.
 func (self *IGPMStarterGPOBackup) GenerateReportToFile(gpmReportType GPMReportType, bstrTargetFilePath foundation.BSTR) (*IGPMResult, error) {
 	var _ppIGPMResult *IGPMResult
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(gpmReportType), uintptr(unsafe.Pointer(bstrTargetFilePath)), uintptr(unsafe.Pointer(&_ppIGPMResult)))
-	return _ppIGPMResult, win32.HRESULTError(int32(r1))
+	return _ppIGPMResult, win32.ErrIfFailed(int32(r1))
 }
 
 // IGPMStarterGPOBackupCollection: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmstartergpobackupcollection
@@ -2425,21 +2425,21 @@ var IID_IGPMStarterGPOBackupCollection = win32.GUID{Data1: 0xc998031d, Data2: 0x
 func (self *IGPMStarterGPOBackupCollection) Get_Count() (int32, error) {
 	var _pVal int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Item dispatches through IGPMStarterGPOBackupCollection's vtable slot 8.
 func (self *IGPMStarterGPOBackupCollection) Get_Item(lIndex int32) (systemvariant.VARIANT, error) {
 	var _pVal systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IGPMStarterGPOBackupCollection's vtable slot 9.
 func (self *IGPMStarterGPOBackupCollection) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
 	var _ppIGPMTmplBackup *systemole.IEnumVARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppIGPMTmplBackup)))
-	return _ppIGPMTmplBackup, win32.HRESULTError(int32(r1))
+	return _ppIGPMTmplBackup, win32.ErrIfFailed(int32(r1))
 }
 
 // IGPMStarterGPOCollection: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmstartergpocollection
@@ -2455,21 +2455,21 @@ var IID_IGPMStarterGPOCollection = win32.GUID{Data1: 0x2e522729, Data2: 0x2219, 
 func (self *IGPMStarterGPOCollection) Get_Count() (int32, error) {
 	var _pVal int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Item dispatches through IGPMStarterGPOCollection's vtable slot 8.
 func (self *IGPMStarterGPOCollection) Get_Item(lIndex int32) (systemvariant.VARIANT, error) {
 	var _pVal systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IGPMStarterGPOCollection's vtable slot 9.
 func (self *IGPMStarterGPOCollection) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
 	var _ppIGPMTemplates *systemole.IEnumVARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppIGPMTemplates)))
-	return _ppIGPMTemplates, win32.HRESULTError(int32(r1))
+	return _ppIGPMTemplates, win32.ErrIfFailed(int32(r1))
 }
 
 // IGPMStatusMessage: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmstatusmessage
@@ -2485,40 +2485,40 @@ var IID_IGPMStatusMessage = win32.GUID{Data1: 0x8496c22f, Data2: 0xf3de, Data3: 
 func (self *IGPMStatusMessage) Get_ObjectPath() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // ErrorCode dispatches through IGPMStatusMessage's vtable slot 8.
 func (self *IGPMStatusMessage) ErrorCode() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ExtensionName dispatches through IGPMStatusMessage's vtable slot 9.
 func (self *IGPMStatusMessage) Get_ExtensionName() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SettingsName dispatches through IGPMStatusMessage's vtable slot 10.
 func (self *IGPMStatusMessage) Get_SettingsName() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // OperationCode dispatches through IGPMStatusMessage's vtable slot 11.
 func (self *IGPMStatusMessage) OperationCode() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Message dispatches through IGPMStatusMessage's vtable slot 12.
 func (self *IGPMStatusMessage) Get_Message() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IGPMStatusMsgCollection: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmstatusmsgcollection
@@ -2534,21 +2534,21 @@ var IID_IGPMStatusMsgCollection = win32.GUID{Data1: 0x9b6e1af0, Data2: 0x1a92, D
 func (self *IGPMStatusMsgCollection) Get_Count() (int32, error) {
 	var _pVal int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Item dispatches through IGPMStatusMsgCollection's vtable slot 8.
 func (self *IGPMStatusMsgCollection) Get_Item(lIndex int32) (systemvariant.VARIANT, error) {
 	var _pVal systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IGPMStatusMsgCollection's vtable slot 9.
 func (self *IGPMStatusMsgCollection) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
 	var _pVal *systemole.IEnumVARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IGPMTrustee: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmtrustee
@@ -2564,35 +2564,35 @@ var IID_IGPMTrustee = win32.GUID{Data1: 0x3b466da8, Data2: 0xc1a4, Data3: 0x4b2a
 func (self *IGPMTrustee) Get_TrusteeSid() (foundation.BSTR, error) {
 	var _bstrVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bstrVal)))
-	return _bstrVal, win32.HRESULTError(int32(r1))
+	return _bstrVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TrusteeName dispatches through IGPMTrustee's vtable slot 8.
 func (self *IGPMTrustee) Get_TrusteeName() (foundation.BSTR, error) {
 	var _bstrVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bstrVal)))
-	return _bstrVal, win32.HRESULTError(int32(r1))
+	return _bstrVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TrusteeDomain dispatches through IGPMTrustee's vtable slot 9.
 func (self *IGPMTrustee) Get_TrusteeDomain() (foundation.BSTR, error) {
 	var _bstrVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bstrVal)))
-	return _bstrVal, win32.HRESULTError(int32(r1))
+	return _bstrVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TrusteeDSPath dispatches through IGPMTrustee's vtable slot 10.
 func (self *IGPMTrustee) Get_TrusteeDSPath() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TrusteeType dispatches through IGPMTrustee's vtable slot 11.
 func (self *IGPMTrustee) Get_TrusteeType() (int32, error) {
 	var _lVal int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lVal)))
-	return _lVal, win32.HRESULTError(int32(r1))
+	return _lVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IGPMWMIFilter: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmwmifilter
@@ -2608,53 +2608,53 @@ var IID_IGPMWMIFilter = win32.GUID{Data1: 0xef2ff9b4, Data2: 0x3c27, Data3: 0x45
 func (self *IGPMWMIFilter) Get_Path() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Name dispatches through IGPMWMIFilter's vtable slot 8.
 func (self *IGPMWMIFilter) Put_Name(newVal foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through IGPMWMIFilter's vtable slot 9.
 func (self *IGPMWMIFilter) Get_Name() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Description dispatches through IGPMWMIFilter's vtable slot 10.
 func (self *IGPMWMIFilter) Put_Description(newVal foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through IGPMWMIFilter's vtable slot 11.
 func (self *IGPMWMIFilter) Get_Description() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetQueryList dispatches through IGPMWMIFilter's vtable slot 12.
 func (self *IGPMWMIFilter) GetQueryList() (systemvariant.VARIANT, error) {
 	var _pQryList systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pQryList)))
-	return _pQryList, win32.HRESULTError(int32(r1))
+	return _pQryList, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSecurityInfo dispatches through IGPMWMIFilter's vtable slot 13.
 func (self *IGPMWMIFilter) GetSecurityInfo() (*IGPMSecurityInfo, error) {
 	var _ppSecurityInfo *IGPMSecurityInfo
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppSecurityInfo)))
-	return _ppSecurityInfo, win32.HRESULTError(int32(r1))
+	return _ppSecurityInfo, win32.ErrIfFailed(int32(r1))
 }
 
 // SetSecurityInfo dispatches through IGPMWMIFilter's vtable slot 14.
 func (self *IGPMWMIFilter) SetSecurityInfo(pSecurityInfo *IGPMSecurityInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSecurityInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IGPMWMIFilterCollection: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmwmifiltercollection
@@ -2670,21 +2670,21 @@ var IID_IGPMWMIFilterCollection = win32.GUID{Data1: 0x5782d582, Data2: 0x1a36, D
 func (self *IGPMWMIFilterCollection) Get_Count() (int32, error) {
 	var _pVal int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Item dispatches through IGPMWMIFilterCollection's vtable slot 8.
 func (self *IGPMWMIFilterCollection) Get_Item(lIndex int32) (systemvariant.VARIANT, error) {
 	var _pVal systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IGPMWMIFilterCollection's vtable slot 9.
 func (self *IGPMWMIFilterCollection) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
 	var _pVal *systemole.IEnumVARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IGroupPolicyObject: https://learn.microsoft.com/windows/win32/api/gpedit/nn-gpedit-igrouppolicyobject
@@ -2701,27 +2701,27 @@ func (self *IGroupPolicyObject) New(pszDomainName string, pszDisplayName string,
 	_pszDomainName := win32.UTF16Ptr(pszDomainName)
 	_pszDisplayName := win32.UTF16Ptr(pszDisplayName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszDomainName)), uintptr(unsafe.Pointer(_pszDisplayName)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenDSGPO dispatches through IGroupPolicyObject's vtable slot 4.
 func (self *IGroupPolicyObject) OpenDSGPO(pszPath string, dwFlags GPO_OPEN_FLAGS) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenLocalMachineGPO dispatches through IGroupPolicyObject's vtable slot 5.
 func (self *IGroupPolicyObject) OpenLocalMachineGPO(dwFlags GPO_OPEN_FLAGS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenRemoteMachineGPO dispatches through IGroupPolicyObject's vtable slot 6.
 func (self *IGroupPolicyObject) OpenRemoteMachineGPO(pszComputerName string, dwFlags GPO_OPEN_FLAGS) error {
 	_pszComputerName := win32.UTF16Ptr(pszComputerName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszComputerName)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Save dispatches through IGroupPolicyObject's vtable slot 7.
@@ -2729,86 +2729,86 @@ func (self *IGroupPolicyObject) Save(bMachine bool, bAdd bool, pGuidExtension *w
 	_bMachine := win32.Bool32(bMachine)
 	_bAdd := win32.Bool32(bAdd)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(_bMachine), uintptr(_bAdd), uintptr(unsafe.Pointer(pGuidExtension)), uintptr(unsafe.Pointer(pGuid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IGroupPolicyObject's vtable slot 8.
 func (self *IGroupPolicyObject) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetName dispatches through IGroupPolicyObject's vtable slot 9.
 func (self *IGroupPolicyObject) GetName(pszName foundation.PWSTR, cchMaxLength int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszName)), uintptr(cchMaxLength))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDisplayName dispatches through IGroupPolicyObject's vtable slot 10.
 func (self *IGroupPolicyObject) GetDisplayName(pszName foundation.PWSTR, cchMaxLength int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszName)), uintptr(cchMaxLength))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDisplayName dispatches through IGroupPolicyObject's vtable slot 11.
 func (self *IGroupPolicyObject) SetDisplayName(pszName string) error {
 	_pszName := win32.UTF16Ptr(pszName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPath dispatches through IGroupPolicyObject's vtable slot 12.
 func (self *IGroupPolicyObject) GetPath(pszPath foundation.PWSTR, cchMaxLength int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszPath)), uintptr(cchMaxLength))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDSPath dispatches through IGroupPolicyObject's vtable slot 13.
 func (self *IGroupPolicyObject) GetDSPath(dwSection uint32, pszPath foundation.PWSTR, cchMaxPath int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwSection), uintptr(unsafe.Pointer(pszPath)), uintptr(cchMaxPath))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFileSysPath dispatches through IGroupPolicyObject's vtable slot 14.
 func (self *IGroupPolicyObject) GetFileSysPath(dwSection uint32, pszPath foundation.PWSTR, cchMaxPath int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(dwSection), uintptr(unsafe.Pointer(pszPath)), uintptr(cchMaxPath))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRegistryKey dispatches through IGroupPolicyObject's vtable slot 15.
 func (self *IGroupPolicyObject) GetRegistryKey(dwSection GPO_SECTION, hKey *systemregistry.HKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwSection), uintptr(unsafe.Pointer(hKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOptions dispatches through IGroupPolicyObject's vtable slot 16.
 func (self *IGroupPolicyObject) GetOptions(dwOptions *GPO_OPTIONS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dwOptions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetOptions dispatches through IGroupPolicyObject's vtable slot 17.
 func (self *IGroupPolicyObject) SetOptions(dwOptions GPO_OPTIONS, dwMask uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(dwOptions), uintptr(dwMask))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetType dispatches through IGroupPolicyObject's vtable slot 18.
 func (self *IGroupPolicyObject) GetType(gpoType *GROUP_POLICY_OBJECT_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(gpoType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMachineName dispatches through IGroupPolicyObject's vtable slot 19.
 func (self *IGroupPolicyObject) GetMachineName(pszName foundation.PWSTR, cchMaxLength int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszName)), uintptr(cchMaxLength))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPropertySheetPages dispatches through IGroupPolicyObject's vtable slot 20.
 func (self *IGroupPolicyObject) GetPropertySheetPages(hPages **uicontrols.HPROPSHEETPAGE, uPageCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hPages)), uintptr(unsafe.Pointer(uPageCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IRSOPInformation: https://learn.microsoft.com/windows/win32/api/gpedit/nn-gpedit-irsopinformation
@@ -2823,13 +2823,13 @@ var IID_IRSOPInformation = win32.GUID{Data1: 0x9a5a81b5, Data2: 0xd9c7, Data3: 0
 // GetNamespace dispatches through IRSOPInformation's vtable slot 3.
 func (self *IRSOPInformation) GetNamespace(dwSection uint32, pszName foundation.PWSTR, cchMaxLength int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwSection), uintptr(unsafe.Pointer(pszName)), uintptr(cchMaxLength))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFlags dispatches through IRSOPInformation's vtable slot 4.
 func (self *IRSOPInformation) GetFlags(pdwFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEventLogEntryText dispatches through IRSOPInformation's vtable slot 5.
@@ -2838,5 +2838,5 @@ func (self *IRSOPInformation) GetEventLogEntryText(pszEventSource string, pszEve
 	_pszEventLogName := win32.UTF16Ptr(pszEventLogName)
 	_pszEventTime := win32.UTF16Ptr(pszEventTime)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszEventSource)), uintptr(unsafe.Pointer(_pszEventLogName)), uintptr(unsafe.Pointer(_pszEventTime)), uintptr(dwEventID), uintptr(unsafe.Pointer(ppszText)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

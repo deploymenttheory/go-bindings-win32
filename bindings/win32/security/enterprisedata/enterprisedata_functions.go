@@ -42,7 +42,7 @@ func ProtectFileToEnterpriseIdentity(fileOrFolderPath string, identity string) e
 	_fileOrFolderPath := win32.UTF16Ptr(fileOrFolderPath)
 	_identity := win32.UTF16Ptr(identity)
 	r1, _, _ := syscall.SyscallN(procProtectFileToEnterpriseIdentity.Addr(), uintptr(unsafe.Pointer(_fileOrFolderPath)), uintptr(unsafe.Pointer(_identity)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SrpCloseThreadNetworkContext calls srpapi!SrpCloseThreadNetworkContext.
@@ -50,7 +50,7 @@ func ProtectFileToEnterpriseIdentity(fileOrFolderPath string, identity string) e
 // Minimum OS: windows10.0.10240.
 func SrpCloseThreadNetworkContext(threadNetworkContext *HTHREAD_NETWORK_CONTEXT) error {
 	r1, _, _ := syscall.SyscallN(procSrpCloseThreadNetworkContext.Addr(), uintptr(unsafe.Pointer(threadNetworkContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SrpCreateThreadNetworkContext calls srpapi!SrpCreateThreadNetworkContext.
@@ -59,7 +59,7 @@ func SrpCloseThreadNetworkContext(threadNetworkContext *HTHREAD_NETWORK_CONTEXT)
 func SrpCreateThreadNetworkContext(enterpriseId string, threadNetworkContext *HTHREAD_NETWORK_CONTEXT) error {
 	_enterpriseId := win32.UTF16Ptr(enterpriseId)
 	r1, _, _ := syscall.SyscallN(procSrpCreateThreadNetworkContext.Addr(), uintptr(unsafe.Pointer(_enterpriseId)), uintptr(unsafe.Pointer(threadNetworkContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SrpDisablePermissiveModeFileEncryption calls srpapi!SrpDisablePermissiveModeFileEncryption.
@@ -67,7 +67,7 @@ func SrpCreateThreadNetworkContext(enterpriseId string, threadNetworkContext *HT
 // Minimum OS: windows10.0.10240.
 func SrpDisablePermissiveModeFileEncryption() error {
 	r1, _, _ := syscall.SyscallN(procSrpDisablePermissiveModeFileEncryption.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SrpDoesPolicyAllowAppExecution calls srpapi!SrpDoesPolicyAllowAppExecution.
@@ -75,7 +75,7 @@ func SrpDisablePermissiveModeFileEncryption() error {
 // Minimum OS: windows10.0.10240.
 func SrpDoesPolicyAllowAppExecution(packageId *storagepackagingappx.PACKAGE_ID, isAllowed *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procSrpDoesPolicyAllowAppExecution.Addr(), uintptr(unsafe.Pointer(packageId)), uintptr(unsafe.Pointer(isAllowed)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SrpEnablePermissiveModeFileEncryption calls srpapi!SrpEnablePermissiveModeFileEncryption.
@@ -84,7 +84,7 @@ func SrpDoesPolicyAllowAppExecution(packageId *storagepackagingappx.PACKAGE_ID, 
 func SrpEnablePermissiveModeFileEncryption(enterpriseId string) error {
 	_enterpriseId := win32.UTF16Ptr(enterpriseId)
 	r1, _, _ := syscall.SyscallN(procSrpEnablePermissiveModeFileEncryption.Addr(), uintptr(unsafe.Pointer(_enterpriseId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SrpGetEnterpriseIds calls srpapi!SrpGetEnterpriseIds.
@@ -92,7 +92,7 @@ func SrpEnablePermissiveModeFileEncryption(enterpriseId string) error {
 // Minimum OS: windows10.0.10240.
 func SrpGetEnterpriseIds(tokenHandle foundation.HANDLE, numberOfBytes *uint32, enterpriseIds *foundation.PWSTR, enterpriseIdCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(procSrpGetEnterpriseIds.Addr(), uintptr(tokenHandle), uintptr(unsafe.Pointer(numberOfBytes)), uintptr(unsafe.Pointer(enterpriseIds)), uintptr(unsafe.Pointer(enterpriseIdCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SrpGetEnterprisePolicy calls srpapi!SrpGetEnterprisePolicy.
@@ -100,13 +100,13 @@ func SrpGetEnterpriseIds(tokenHandle foundation.HANDLE, numberOfBytes *uint32, e
 // Minimum OS: windows10.0.10240.
 func SrpGetEnterprisePolicy(tokenHandle foundation.HANDLE, policyFlags *ENTERPRISE_DATA_POLICIES) error {
 	r1, _, _ := syscall.SyscallN(procSrpGetEnterprisePolicy.Addr(), uintptr(tokenHandle), uintptr(unsafe.Pointer(policyFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SrpHostingInitialize calls srpapi!SrpHostingInitialize.
 func SrpHostingInitialize(Version SRPHOSTING_VERSION, Type SRPHOSTING_TYPE, pvData unsafe.Pointer, cbData uint32) error {
 	r1, _, _ := syscall.SyscallN(procSrpHostingInitialize.Addr(), uintptr(Version), uintptr(Type), uintptr(unsafe.Pointer(pvData)), uintptr(cbData))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SrpHostingTerminate calls srpapi!SrpHostingTerminate.
@@ -134,12 +134,12 @@ func SrpIsTokenService(TokenHandle foundation.HANDLE, IsTokenService *byte) foun
 func SrpSetTokenEnterpriseId(tokenHandle foundation.HANDLE, enterpriseId string) error {
 	_enterpriseId := win32.UTF16Ptr(enterpriseId)
 	r1, _, _ := syscall.SyscallN(procSrpSetTokenEnterpriseId.Addr(), uintptr(tokenHandle), uintptr(unsafe.Pointer(_enterpriseId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnprotectFile calls efswrt!UnprotectFile.
 func UnprotectFile(fileOrFolderPath string, options *FILE_UNPROTECT_OPTIONS) error {
 	_fileOrFolderPath := win32.UTF16Ptr(fileOrFolderPath)
 	r1, _, _ := syscall.SyscallN(procUnprotectFile.Addr(), uintptr(unsafe.Pointer(_fileOrFolderPath)), uintptr(unsafe.Pointer(options)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

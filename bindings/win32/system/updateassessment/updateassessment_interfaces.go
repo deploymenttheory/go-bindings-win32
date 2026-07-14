@@ -25,5 +25,5 @@ var IID_IWaaSAssessor = win32.GUID{Data1: 0x2347bbef, Data2: 0x1a3b, Data3: 0x45
 func (self *IWaaSAssessor) GetOSUpdateAssessment() (OSUpdateAssessment, error) {
 	var _result OSUpdateAssessment
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_result)))
-	return _result, win32.HRESULTError(int32(r1))
+	return _result, win32.ErrIfFailed(int32(r1))
 }

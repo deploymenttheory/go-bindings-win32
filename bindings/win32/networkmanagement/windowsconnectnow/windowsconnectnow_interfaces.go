@@ -25,13 +25,13 @@ var IID_IWCNConnectNotify = win32.GUID{Data1: 0xc100be9f, Data2: 0xd33a, Data3: 
 // ConnectSucceeded dispatches through IWCNConnectNotify's vtable slot 3.
 func (self *IWCNConnectNotify) ConnectSucceeded() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ConnectFailed dispatches through IWCNConnectNotify's vtable slot 4.
 func (self *IWCNConnectNotify) ConnectFailed(hrFailure foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hrFailure))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWCNDevice: https://learn.microsoft.com/windows/win32/api/wcndevice/nn-wcndevice-iwcndevice
@@ -50,13 +50,13 @@ func (self *IWCNDevice) SetPassword(Type WCN_PASSWORD_TYPE, pbPassword []byte) e
 		_pbPassword = &pbPassword[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(len(pbPassword)), uintptr(unsafe.Pointer(_pbPassword)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Connect dispatches through IWCNDevice's vtable slot 4.
 func (self *IWCNDevice) Connect(pNotify *IWCNConnectNotify) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNotify)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAttribute dispatches through IWCNDevice's vtable slot 5.
@@ -66,32 +66,32 @@ func (self *IWCNDevice) GetAttribute(AttributeType WCN_ATTRIBUTE_TYPE, pbBuffer 
 		_pbBuffer = &pbBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(AttributeType), uintptr(len(pbBuffer)), uintptr(unsafe.Pointer(_pbBuffer)), uintptr(unsafe.Pointer(pdwBufferUsed)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetIntegerAttribute dispatches through IWCNDevice's vtable slot 6.
 func (self *IWCNDevice) GetIntegerAttribute(AttributeType WCN_ATTRIBUTE_TYPE, puInteger *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(AttributeType), uintptr(unsafe.Pointer(puInteger)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStringAttribute dispatches through IWCNDevice's vtable slot 7.
 func (self *IWCNDevice) GetStringAttribute(AttributeType WCN_ATTRIBUTE_TYPE, cchMaxString uint32, wszString foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(AttributeType), uintptr(cchMaxString), uintptr(unsafe.Pointer(wszString)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNetworkProfile dispatches through IWCNDevice's vtable slot 8.
 func (self *IWCNDevice) GetNetworkProfile(cchMaxStringLength uint32, wszProfile foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(cchMaxStringLength), uintptr(unsafe.Pointer(wszProfile)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetNetworkProfile dispatches through IWCNDevice's vtable slot 9.
 func (self *IWCNDevice) SetNetworkProfile(pszProfileXml string) error {
 	_pszProfileXml := win32.UTF16Ptr(pszProfileXml)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszProfileXml)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetVendorExtension dispatches through IWCNDevice's vtable slot 10.
@@ -101,7 +101,7 @@ func (self *IWCNDevice) GetVendorExtension(pVendorExtSpec *WCN_VENDOR_EXTENSION_
 		_pbBuffer = &pbBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVendorExtSpec)), uintptr(len(pbBuffer)), uintptr(unsafe.Pointer(_pbBuffer)), uintptr(unsafe.Pointer(pdwBufferUsed)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetVendorExtension dispatches through IWCNDevice's vtable slot 11.
@@ -111,13 +111,13 @@ func (self *IWCNDevice) SetVendorExtension(pVendorExtSpec *WCN_VENDOR_EXTENSION_
 		_pbBuffer = &pbBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVendorExtSpec)), uintptr(len(pbBuffer)), uintptr(unsafe.Pointer(_pbBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Unadvise dispatches through IWCNDevice's vtable slot 12.
 func (self *IWCNDevice) Unadvise() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetNFCPasswordParams dispatches through IWCNDevice's vtable slot 13.
@@ -135,5 +135,5 @@ func (self *IWCNDevice) SetNFCPasswordParams(Type WCN_PASSWORD_TYPE, dwOOBPasswo
 		_pbDHKeyBlob = &pbDHKeyBlob[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(dwOOBPasswordID), uintptr(len(pbPassword)), uintptr(unsafe.Pointer(_pbPassword)), uintptr(len(pbRemotePublicKeyHash)), uintptr(unsafe.Pointer(_pbRemotePublicKeyHash)), uintptr(len(pbDHKeyBlob)), uintptr(unsafe.Pointer(_pbDHKeyBlob)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

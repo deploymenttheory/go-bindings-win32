@@ -28,20 +28,20 @@ var IID_IDXGIAdapter = win32.GUID{Data1: 0x2411e7e1, Data2: 0x12ac, Data3: 0x4cc
 // EnumOutputs dispatches through IDXGIAdapter's vtable slot 7.
 func (self *IDXGIAdapter) EnumOutputs(Output uint32, ppOutput **IDXGIOutput) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Output), uintptr(unsafe.Pointer(ppOutput)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDesc dispatches through IDXGIAdapter's vtable slot 8.
 func (self *IDXGIAdapter) GetDesc() (DXGI_ADAPTER_DESC, error) {
 	var _pDesc DXGI_ADAPTER_DESC
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDesc)))
-	return _pDesc, win32.HRESULTError(int32(r1))
+	return _pDesc, win32.ErrIfFailed(int32(r1))
 }
 
 // CheckInterfaceSupport dispatches through IDXGIAdapter's vtable slot 9.
 func (self *IDXGIAdapter) CheckInterfaceSupport(InterfaceName *win32.GUID, pUMDVersion *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(InterfaceName)), uintptr(unsafe.Pointer(pUMDVersion)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGIAdapter1: https://learn.microsoft.com/windows/win32/api/dxgi/nn-dxgi-idxgiadapter1
@@ -57,7 +57,7 @@ var IID_IDXGIAdapter1 = win32.GUID{Data1: 0x29038f61, Data2: 0x3839, Data3: 0x46
 func (self *IDXGIAdapter1) GetDesc1() (DXGI_ADAPTER_DESC1, error) {
 	var _pDesc DXGI_ADAPTER_DESC1
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDesc)))
-	return _pDesc, win32.HRESULTError(int32(r1))
+	return _pDesc, win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGIAdapter2: https://learn.microsoft.com/windows/win32/api/dxgi1_2/nn-dxgi1_2-idxgiadapter2
@@ -73,7 +73,7 @@ var IID_IDXGIAdapter2 = win32.GUID{Data1: 0x0aa1ae0a, Data2: 0xfa0e, Data3: 0x4b
 func (self *IDXGIAdapter2) GetDesc2() (DXGI_ADAPTER_DESC2, error) {
 	var _pDesc DXGI_ADAPTER_DESC2
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDesc)))
-	return _pDesc, win32.HRESULTError(int32(r1))
+	return _pDesc, win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGIAdapter3: https://learn.microsoft.com/windows/win32/api/dxgi1_4/nn-dxgi1_4-idxgiadapter3
@@ -88,7 +88,7 @@ var IID_IDXGIAdapter3 = win32.GUID{Data1: 0x645967a4, Data2: 0x1392, Data3: 0x43
 // RegisterHardwareContentProtectionTeardownStatusEvent dispatches through IDXGIAdapter3's vtable slot 12.
 func (self *IDXGIAdapter3) RegisterHardwareContentProtectionTeardownStatusEvent(hEvent foundation.HANDLE, pdwCookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(hEvent), uintptr(unsafe.Pointer(pdwCookie)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnregisterHardwareContentProtectionTeardownStatus dispatches through IDXGIAdapter3's vtable slot 13.
@@ -99,19 +99,19 @@ func (self *IDXGIAdapter3) UnregisterHardwareContentProtectionTeardownStatus(dwC
 // QueryVideoMemoryInfo dispatches through IDXGIAdapter3's vtable slot 14.
 func (self *IDXGIAdapter3) QueryVideoMemoryInfo(NodeIndex uint32, MemorySegmentGroup DXGI_MEMORY_SEGMENT_GROUP, pVideoMemoryInfo *DXGI_QUERY_VIDEO_MEMORY_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(NodeIndex), uintptr(MemorySegmentGroup), uintptr(unsafe.Pointer(pVideoMemoryInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetVideoMemoryReservation dispatches through IDXGIAdapter3's vtable slot 15.
 func (self *IDXGIAdapter3) SetVideoMemoryReservation(NodeIndex uint32, MemorySegmentGroup DXGI_MEMORY_SEGMENT_GROUP, Reservation uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(NodeIndex), uintptr(MemorySegmentGroup), uintptr(Reservation))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterVideoMemoryBudgetChangeNotificationEvent dispatches through IDXGIAdapter3's vtable slot 16.
 func (self *IDXGIAdapter3) RegisterVideoMemoryBudgetChangeNotificationEvent(hEvent foundation.HANDLE, pdwCookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(hEvent), uintptr(unsafe.Pointer(pdwCookie)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnregisterVideoMemoryBudgetChangeNotification dispatches through IDXGIAdapter3's vtable slot 17.
@@ -132,7 +132,7 @@ var IID_IDXGIAdapter4 = win32.GUID{Data1: 0x3c8d99d1, Data2: 0x4fbf, Data3: 0x41
 func (self *IDXGIAdapter4) GetDesc3() (DXGI_ADAPTER_DESC3, error) {
 	var _pDesc DXGI_ADAPTER_DESC3
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDesc)))
-	return _pDesc, win32.HRESULTError(int32(r1))
+	return _pDesc, win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGIDebug: https://learn.microsoft.com/windows/win32/api/dxgidebug/nn-dxgidebug-idxgidebug
@@ -181,49 +181,49 @@ var IID_IDXGIDecodeSwapChain = win32.GUID{Data1: 0x2633066b, Data2: 0x4514, Data
 // PresentBuffer dispatches through IDXGIDecodeSwapChain's vtable slot 3.
 func (self *IDXGIDecodeSwapChain) PresentBuffer(BufferToPresent uint32, SyncInterval uint32, Flags DXGI_PRESENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(BufferToPresent), uintptr(SyncInterval), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetSourceRect dispatches through IDXGIDecodeSwapChain's vtable slot 4.
 func (self *IDXGIDecodeSwapChain) SetSourceRect(pRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTargetRect dispatches through IDXGIDecodeSwapChain's vtable slot 5.
 func (self *IDXGIDecodeSwapChain) SetTargetRect(pRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDestSize dispatches through IDXGIDecodeSwapChain's vtable slot 6.
 func (self *IDXGIDecodeSwapChain) SetDestSize(Width uint32, Height uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(Width), uintptr(Height))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSourceRect dispatches through IDXGIDecodeSwapChain's vtable slot 7.
 func (self *IDXGIDecodeSwapChain) GetSourceRect(pRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTargetRect dispatches through IDXGIDecodeSwapChain's vtable slot 8.
 func (self *IDXGIDecodeSwapChain) GetTargetRect(pRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDestSize dispatches through IDXGIDecodeSwapChain's vtable slot 9.
 func (self *IDXGIDecodeSwapChain) GetDestSize(pWidth *uint32, pHeight *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWidth)), uintptr(unsafe.Pointer(pHeight)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetColorSpace dispatches through IDXGIDecodeSwapChain's vtable slot 10.
 func (self *IDXGIDecodeSwapChain) SetColorSpace(ColorSpace DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(ColorSpace))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetColorSpace dispatches through IDXGIDecodeSwapChain's vtable slot 11.
@@ -244,7 +244,7 @@ var IID_IDXGIDevice = win32.GUID{Data1: 0x54ec77fa, Data2: 0x1377, Data3: 0x44e6
 // GetAdapter dispatches through IDXGIDevice's vtable slot 7.
 func (self *IDXGIDevice) GetAdapter(pAdapter **IDXGIAdapter) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAdapter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSurface dispatches through IDXGIDevice's vtable slot 8.
@@ -254,25 +254,25 @@ func (self *IDXGIDevice) CreateSurface(pDesc *DXGI_SURFACE_DESC, Usage DXGI_USAG
 		_ppSurface = &ppSurface[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)), uintptr(len(ppSurface)), uintptr(Usage), uintptr(unsafe.Pointer(pSharedResource)), uintptr(unsafe.Pointer(_ppSurface)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryResourceResidency dispatches through IDXGIDevice's vtable slot 9.
 func (self *IDXGIDevice) QueryResourceResidency(ppResources **systemcom.IUnknown, pResidencyStatus *DXGI_RESIDENCY, NumResources uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResources)), uintptr(unsafe.Pointer(pResidencyStatus)), uintptr(NumResources))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetGPUThreadPriority dispatches through IDXGIDevice's vtable slot 10.
 func (self *IDXGIDevice) SetGPUThreadPriority(Priority int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Priority))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetGPUThreadPriority dispatches through IDXGIDevice's vtable slot 11.
 func (self *IDXGIDevice) GetGPUThreadPriority(pPriority *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPriority)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGIDevice1: https://learn.microsoft.com/windows/win32/api/dxgi/nn-dxgi-idxgidevice1
@@ -287,13 +287,13 @@ var IID_IDXGIDevice1 = win32.GUID{Data1: 0x77db970f, Data2: 0x6276, Data3: 0x48b
 // SetMaximumFrameLatency dispatches through IDXGIDevice1's vtable slot 12.
 func (self *IDXGIDevice1) SetMaximumFrameLatency(MaxLatency uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(MaxLatency))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMaximumFrameLatency dispatches through IDXGIDevice1's vtable slot 13.
 func (self *IDXGIDevice1) GetMaximumFrameLatency(pMaxLatency *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMaxLatency)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGIDevice2: https://learn.microsoft.com/windows/win32/api/dxgi1_2/nn-dxgi1_2-idxgidevice2
@@ -312,19 +312,19 @@ func (self *IDXGIDevice2) OfferResources(ppResources []*IDXGIResource, Priority 
 		_ppResources = &ppResources[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(len(ppResources)), uintptr(unsafe.Pointer(_ppResources)), uintptr(Priority))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReclaimResources dispatches through IDXGIDevice2's vtable slot 15.
 func (self *IDXGIDevice2) ReclaimResources(NumResources uint32, ppResources **IDXGIResource, pDiscarded *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(NumResources), uintptr(unsafe.Pointer(ppResources)), uintptr(unsafe.Pointer(pDiscarded)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnqueueSetEvent dispatches through IDXGIDevice2's vtable slot 16.
 func (self *IDXGIDevice2) EnqueueSetEvent(hEvent foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(hEvent))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGIDevice3: https://learn.microsoft.com/windows/win32/api/dxgi1_3/nn-dxgi1_3-idxgidevice3
@@ -357,13 +357,13 @@ func (self *IDXGIDevice4) OfferResources1(ppResources []*IDXGIResource, Priority
 		_ppResources = &ppResources[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(len(ppResources)), uintptr(unsafe.Pointer(_ppResources)), uintptr(Priority), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReclaimResources1 dispatches through IDXGIDevice4's vtable slot 19.
 func (self *IDXGIDevice4) ReclaimResources1(NumResources uint32, ppResources **IDXGIResource, pResults *DXGI_RECLAIM_RESOURCE_RESULTS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(NumResources), uintptr(unsafe.Pointer(ppResources)), uintptr(unsafe.Pointer(pResults)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGIDeviceSubObject: https://learn.microsoft.com/windows/win32/api/dxgi/nn-dxgi-idxgidevicesubobject
@@ -378,7 +378,7 @@ var IID_IDXGIDeviceSubObject = win32.GUID{Data1: 0x3d3e0379, Data2: 0xf9de, Data
 // GetDevice dispatches through IDXGIDeviceSubObject's vtable slot 7.
 func (self *IDXGIDeviceSubObject) GetDevice(riid *win32.GUID, ppDevice **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppDevice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGIDisplayControl: https://learn.microsoft.com/windows/win32/api/dxgi1_2/nn-dxgi1_2-idxgidisplaycontrol
@@ -414,31 +414,31 @@ var IID_IDXGIFactory = win32.GUID{Data1: 0x7b7166ec, Data2: 0x21c7, Data3: 0x44a
 // EnumAdapters dispatches through IDXGIFactory's vtable slot 7.
 func (self *IDXGIFactory) EnumAdapters(Adapter uint32, ppAdapter **IDXGIAdapter) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Adapter), uintptr(unsafe.Pointer(ppAdapter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MakeWindowAssociation dispatches through IDXGIFactory's vtable slot 8.
 func (self *IDXGIFactory) MakeWindowAssociation(WindowHandle foundation.HWND, Flags DXGI_MWA_FLAGS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(WindowHandle), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetWindowAssociation dispatches through IDXGIFactory's vtable slot 9.
 func (self *IDXGIFactory) GetWindowAssociation(pWindowHandle *foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWindowHandle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSwapChain dispatches through IDXGIFactory's vtable slot 10.
 func (self *IDXGIFactory) CreateSwapChain(pDevice *systemcom.IUnknown, pDesc *DXGI_SWAP_CHAIN_DESC, ppSwapChain **IDXGISwapChain) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(ppSwapChain)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSoftwareAdapter dispatches through IDXGIFactory's vtable slot 11.
 func (self *IDXGIFactory) CreateSoftwareAdapter(Module foundation.HMODULE, ppAdapter **IDXGIAdapter) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Module), uintptr(unsafe.Pointer(ppAdapter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGIFactory1: https://learn.microsoft.com/windows/win32/api/dxgi/nn-dxgi-idxgifactory1
@@ -453,7 +453,7 @@ var IID_IDXGIFactory1 = win32.GUID{Data1: 0x770aae78, Data2: 0xf26f, Data3: 0x4d
 // EnumAdapters1 dispatches through IDXGIFactory1's vtable slot 12.
 func (self *IDXGIFactory1) EnumAdapters1(Adapter uint32, ppAdapter **IDXGIAdapter1) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Adapter), uintptr(unsafe.Pointer(ppAdapter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsCurrent dispatches through IDXGIFactory1's vtable slot 13.
@@ -480,31 +480,31 @@ func (self *IDXGIFactory2) IsWindowedStereoEnabled() foundation.BOOL {
 // CreateSwapChainForHwnd dispatches through IDXGIFactory2's vtable slot 15.
 func (self *IDXGIFactory2) CreateSwapChainForHwnd(pDevice *systemcom.IUnknown, hWnd foundation.HWND, pDesc *DXGI_SWAP_CHAIN_DESC1, pFullscreenDesc *DXGI_SWAP_CHAIN_FULLSCREEN_DESC, pRestrictToOutput *IDXGIOutput, ppSwapChain **IDXGISwapChain1) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(hWnd), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(pFullscreenDesc)), uintptr(unsafe.Pointer(pRestrictToOutput)), uintptr(unsafe.Pointer(ppSwapChain)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSwapChainForCoreWindow dispatches through IDXGIFactory2's vtable slot 16.
 func (self *IDXGIFactory2) CreateSwapChainForCoreWindow(pDevice *systemcom.IUnknown, pWindow *systemcom.IUnknown, pDesc *DXGI_SWAP_CHAIN_DESC1, pRestrictToOutput *IDXGIOutput, ppSwapChain **IDXGISwapChain1) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(pWindow)), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(pRestrictToOutput)), uintptr(unsafe.Pointer(ppSwapChain)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSharedResourceAdapterLuid dispatches through IDXGIFactory2's vtable slot 17.
 func (self *IDXGIFactory2) GetSharedResourceAdapterLuid(hResource foundation.HANDLE, pLuid *foundation.LUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(hResource), uintptr(unsafe.Pointer(pLuid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterStereoStatusWindow dispatches through IDXGIFactory2's vtable slot 18.
 func (self *IDXGIFactory2) RegisterStereoStatusWindow(WindowHandle foundation.HWND, wMsg uint32, pdwCookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(WindowHandle), uintptr(wMsg), uintptr(unsafe.Pointer(pdwCookie)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterStereoStatusEvent dispatches through IDXGIFactory2's vtable slot 19.
 func (self *IDXGIFactory2) RegisterStereoStatusEvent(hEvent foundation.HANDLE, pdwCookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(hEvent), uintptr(unsafe.Pointer(pdwCookie)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnregisterStereoStatus dispatches through IDXGIFactory2's vtable slot 20.
@@ -515,13 +515,13 @@ func (self *IDXGIFactory2) UnregisterStereoStatus(dwCookie uint32) {
 // RegisterOcclusionStatusWindow dispatches through IDXGIFactory2's vtable slot 21.
 func (self *IDXGIFactory2) RegisterOcclusionStatusWindow(WindowHandle foundation.HWND, wMsg uint32, pdwCookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(WindowHandle), uintptr(wMsg), uintptr(unsafe.Pointer(pdwCookie)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterOcclusionStatusEvent dispatches through IDXGIFactory2's vtable slot 22.
 func (self *IDXGIFactory2) RegisterOcclusionStatusEvent(hEvent foundation.HANDLE, pdwCookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(hEvent), uintptr(unsafe.Pointer(pdwCookie)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnregisterOcclusionStatus dispatches through IDXGIFactory2's vtable slot 23.
@@ -532,7 +532,7 @@ func (self *IDXGIFactory2) UnregisterOcclusionStatus(dwCookie uint32) {
 // CreateSwapChainForComposition dispatches through IDXGIFactory2's vtable slot 24.
 func (self *IDXGIFactory2) CreateSwapChainForComposition(pDevice *systemcom.IUnknown, pDesc *DXGI_SWAP_CHAIN_DESC1, pRestrictToOutput *IDXGIOutput, ppSwapChain **IDXGISwapChain1) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(pRestrictToOutput)), uintptr(unsafe.Pointer(ppSwapChain)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGIFactory3: https://learn.microsoft.com/windows/win32/api/dxgi1_3/nn-dxgi1_3-idxgifactory3
@@ -562,7 +562,7 @@ var IID_IDXGIFactory4 = win32.GUID{Data1: 0x1bc6ea02, Data2: 0xef36, Data3: 0x46
 // EnumWarpAdapter dispatches through IDXGIFactory4's vtable slot 27.
 func (self *IDXGIFactory4) EnumWarpAdapter(riid *win32.GUID, ppvAdapter **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvAdapter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGIFactory5: https://learn.microsoft.com/windows/win32/api/dxgi1_5/nn-dxgi1_5-idxgifactory5
@@ -581,7 +581,7 @@ func (self *IDXGIFactory5) CheckFeatureSupport(Feature DXGI_FEATURE, pFeatureSup
 		_pFeatureSupportData = &pFeatureSupportData[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(Feature), uintptr(unsafe.Pointer(_pFeatureSupportData)), uintptr(len(pFeatureSupportData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGIFactory6: https://learn.microsoft.com/windows/win32/api/dxgi1_6/nn-dxgi1_6-idxgifactory6
@@ -596,7 +596,7 @@ var IID_IDXGIFactory6 = win32.GUID{Data1: 0xc1b6694f, Data2: 0xff09, Data3: 0x44
 // EnumAdapterByGpuPreference dispatches through IDXGIFactory6's vtable slot 29.
 func (self *IDXGIFactory6) EnumAdapterByGpuPreference(Adapter uint32, GpuPreference DXGI_GPU_PREFERENCE, riid *win32.GUID, ppvAdapter **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(Adapter), uintptr(GpuPreference), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvAdapter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGIFactory7: https://learn.microsoft.com/windows/win32/api/dxgi1_6/nn-dxgi1_6-idxgifactory7
@@ -611,13 +611,13 @@ var IID_IDXGIFactory7 = win32.GUID{Data1: 0xa4966eed, Data2: 0x76db, Data3: 0x44
 // RegisterAdaptersChangedEvent dispatches through IDXGIFactory7's vtable slot 30.
 func (self *IDXGIFactory7) RegisterAdaptersChangedEvent(hEvent foundation.HANDLE, pdwCookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(hEvent), uintptr(unsafe.Pointer(pdwCookie)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnregisterAdaptersChangedEvent dispatches through IDXGIFactory7's vtable slot 31.
 func (self *IDXGIFactory7) UnregisterAdaptersChangedEvent(dwCookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(dwCookie))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGIFactoryMedia: https://learn.microsoft.com/windows/win32/api/dxgi1_3/nn-dxgi1_3-idxgifactorymedia
@@ -632,13 +632,13 @@ var IID_IDXGIFactoryMedia = win32.GUID{Data1: 0x41e7d1f2, Data2: 0xa591, Data3: 
 // CreateSwapChainForCompositionSurfaceHandle dispatches through IDXGIFactoryMedia's vtable slot 3.
 func (self *IDXGIFactoryMedia) CreateSwapChainForCompositionSurfaceHandle(pDevice *systemcom.IUnknown, hSurface foundation.HANDLE, pDesc *DXGI_SWAP_CHAIN_DESC1, pRestrictToOutput *IDXGIOutput, ppSwapChain **IDXGISwapChain1) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(hSurface), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(pRestrictToOutput)), uintptr(unsafe.Pointer(ppSwapChain)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateDecodeSwapChainForCompositionSurfaceHandle dispatches through IDXGIFactoryMedia's vtable slot 4.
 func (self *IDXGIFactoryMedia) CreateDecodeSwapChainForCompositionSurfaceHandle(pDevice *systemcom.IUnknown, hSurface foundation.HANDLE, pDesc *DXGI_DECODE_SWAP_CHAIN_DESC, pYuvDecodeBuffers *IDXGIResource, pRestrictToOutput *IDXGIOutput, ppSwapChain **IDXGIDecodeSwapChain) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(hSurface), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(pYuvDecodeBuffers)), uintptr(unsafe.Pointer(pRestrictToOutput)), uintptr(unsafe.Pointer(ppSwapChain)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGIInfoQueue: https://learn.microsoft.com/windows/win32/api/dxgidebug/nn-dxgidebug-idxgiinfoqueue
@@ -653,7 +653,7 @@ var IID_IDXGIInfoQueue = win32.GUID{Data1: 0xd67441c7, Data2: 0x672a, Data3: 0x4
 // AddApplicationMessage dispatches through IDXGIInfoQueue's vtable slot 31.
 func (self *IDXGIInfoQueue) AddApplicationMessage(Severity DXGI_INFO_QUEUE_MESSAGE_SEVERITY, pDescription foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(Severity), uintptr(unsafe.Pointer(pDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGIKeyedMutex: https://learn.microsoft.com/windows/win32/api/dxgi/nn-dxgi-idxgikeyedmutex
@@ -668,13 +668,13 @@ var IID_IDXGIKeyedMutex = win32.GUID{Data1: 0x9d8e1289, Data2: 0xd7b3, Data3: 0x
 // AcquireSync dispatches through IDXGIKeyedMutex's vtable slot 8.
 func (self *IDXGIKeyedMutex) AcquireSync(Key uint64, dwMilliseconds uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Key), uintptr(dwMilliseconds))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReleaseSync dispatches through IDXGIKeyedMutex's vtable slot 9.
 func (self *IDXGIKeyedMutex) ReleaseSync(Key uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Key))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGIObject: https://learn.microsoft.com/windows/win32/api/dxgi/nn-dxgi-idxgiobject
@@ -693,25 +693,25 @@ func (self *IDXGIObject) SetPrivateData(Name *win32.GUID, pData []byte) error {
 		_pData = &pData[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Name)), uintptr(len(pData)), uintptr(unsafe.Pointer(_pData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetPrivateDataInterface dispatches through IDXGIObject's vtable slot 4.
 func (self *IDXGIObject) SetPrivateDataInterface(Name *win32.GUID, pUnknown *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Name)), uintptr(unsafe.Pointer(pUnknown)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPrivateData dispatches through IDXGIObject's vtable slot 5.
 func (self *IDXGIObject) GetPrivateData(Name *win32.GUID, pDataSize *uint32, pData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Name)), uintptr(unsafe.Pointer(pDataSize)), uintptr(unsafe.Pointer(pData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetParent dispatches through IDXGIObject's vtable slot 6.
 func (self *IDXGIObject) GetParent(riid *win32.GUID, ppParent **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppParent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGIOutput: https://learn.microsoft.com/windows/win32/api/dxgi/nn-dxgi-idxgioutput
@@ -727,32 +727,32 @@ var IID_IDXGIOutput = win32.GUID{Data1: 0xae02eedb, Data2: 0xc735, Data3: 0x4690
 func (self *IDXGIOutput) GetDesc() (DXGI_OUTPUT_DESC, error) {
 	var _pDesc DXGI_OUTPUT_DESC
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDesc)))
-	return _pDesc, win32.HRESULTError(int32(r1))
+	return _pDesc, win32.ErrIfFailed(int32(r1))
 }
 
 // GetDisplayModeList dispatches through IDXGIOutput's vtable slot 8.
 func (self *IDXGIOutput) GetDisplayModeList(EnumFormat graphicsdxgicommon.DXGI_FORMAT, Flags DXGI_ENUM_MODES, pNumModes *uint32, pDesc *graphicsdxgicommon.DXGI_MODE_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(EnumFormat), uintptr(Flags), uintptr(unsafe.Pointer(pNumModes)), uintptr(unsafe.Pointer(pDesc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FindClosestMatchingMode dispatches through IDXGIOutput's vtable slot 9.
 func (self *IDXGIOutput) FindClosestMatchingMode(pModeToMatch *graphicsdxgicommon.DXGI_MODE_DESC, pClosestMatch *graphicsdxgicommon.DXGI_MODE_DESC, pConcernedDevice *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pModeToMatch)), uintptr(unsafe.Pointer(pClosestMatch)), uintptr(unsafe.Pointer(pConcernedDevice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WaitForVBlank dispatches through IDXGIOutput's vtable slot 10.
 func (self *IDXGIOutput) WaitForVBlank() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TakeOwnership dispatches through IDXGIOutput's vtable slot 11.
 func (self *IDXGIOutput) TakeOwnership(pDevice *systemcom.IUnknown, Exclusive bool) error {
 	_Exclusive := win32.Bool32(Exclusive)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(_Exclusive))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReleaseOwnership dispatches through IDXGIOutput's vtable slot 12.
@@ -763,37 +763,37 @@ func (self *IDXGIOutput) ReleaseOwnership() {
 // GetGammaControlCapabilities dispatches through IDXGIOutput's vtable slot 13.
 func (self *IDXGIOutput) GetGammaControlCapabilities(pGammaCaps *graphicsdxgicommon.DXGI_GAMMA_CONTROL_CAPABILITIES) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGammaCaps)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetGammaControl dispatches through IDXGIOutput's vtable slot 14.
 func (self *IDXGIOutput) SetGammaControl(pArray *graphicsdxgicommon.DXGI_GAMMA_CONTROL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pArray)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetGammaControl dispatches through IDXGIOutput's vtable slot 15.
 func (self *IDXGIOutput) GetGammaControl(pArray *graphicsdxgicommon.DXGI_GAMMA_CONTROL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pArray)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDisplaySurface dispatches through IDXGIOutput's vtable slot 16.
 func (self *IDXGIOutput) SetDisplaySurface(pScanoutSurface *IDXGISurface) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pScanoutSurface)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDisplaySurfaceData dispatches through IDXGIOutput's vtable slot 17.
 func (self *IDXGIOutput) GetDisplaySurfaceData(pDestination *IDXGISurface) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDestination)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFrameStatistics dispatches through IDXGIOutput's vtable slot 18.
 func (self *IDXGIOutput) GetFrameStatistics(pStats *DXGI_FRAME_STATISTICS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStats)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGIOutput1: https://learn.microsoft.com/windows/win32/api/dxgi1_2/nn-dxgi1_2-idxgioutput1
@@ -808,25 +808,25 @@ var IID_IDXGIOutput1 = win32.GUID{Data1: 0x00cddea8, Data2: 0x939b, Data3: 0x4b8
 // GetDisplayModeList1 dispatches through IDXGIOutput1's vtable slot 19.
 func (self *IDXGIOutput1) GetDisplayModeList1(EnumFormat graphicsdxgicommon.DXGI_FORMAT, Flags DXGI_ENUM_MODES, pNumModes *uint32, pDesc *DXGI_MODE_DESC1) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(EnumFormat), uintptr(Flags), uintptr(unsafe.Pointer(pNumModes)), uintptr(unsafe.Pointer(pDesc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FindClosestMatchingMode1 dispatches through IDXGIOutput1's vtable slot 20.
 func (self *IDXGIOutput1) FindClosestMatchingMode1(pModeToMatch *DXGI_MODE_DESC1, pClosestMatch *DXGI_MODE_DESC1, pConcernedDevice *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pModeToMatch)), uintptr(unsafe.Pointer(pClosestMatch)), uintptr(unsafe.Pointer(pConcernedDevice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDisplaySurfaceData1 dispatches through IDXGIOutput1's vtable slot 21.
 func (self *IDXGIOutput1) GetDisplaySurfaceData1(pDestination *IDXGIResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDestination)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DuplicateOutput dispatches through IDXGIOutput1's vtable slot 22.
 func (self *IDXGIOutput1) DuplicateOutput(pDevice *systemcom.IUnknown, ppOutputDuplication **IDXGIOutputDuplication) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(ppOutputDuplication)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGIOutput2: https://learn.microsoft.com/windows/win32/api/dxgi1_3/nn-dxgi1_3-idxgioutput2
@@ -856,7 +856,7 @@ var IID_IDXGIOutput3 = win32.GUID{Data1: 0x8a6bb301, Data2: 0x7e7e, Data3: 0x41f
 // CheckOverlaySupport dispatches through IDXGIOutput3's vtable slot 24.
 func (self *IDXGIOutput3) CheckOverlaySupport(EnumFormat graphicsdxgicommon.DXGI_FORMAT, pConcernedDevice *systemcom.IUnknown, pFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(EnumFormat), uintptr(unsafe.Pointer(pConcernedDevice)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGIOutput4: https://learn.microsoft.com/windows/win32/api/dxgi1_4/nn-dxgi1_4-idxgioutput4
@@ -871,7 +871,7 @@ var IID_IDXGIOutput4 = win32.GUID{Data1: 0xdc7dca35, Data2: 0x2196, Data3: 0x414
 // CheckOverlayColorSpaceSupport dispatches through IDXGIOutput4's vtable slot 25.
 func (self *IDXGIOutput4) CheckOverlayColorSpaceSupport(Format graphicsdxgicommon.DXGI_FORMAT, ColorSpace graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE, pConcernedDevice *systemcom.IUnknown, pFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(Format), uintptr(ColorSpace), uintptr(unsafe.Pointer(pConcernedDevice)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGIOutput5: https://learn.microsoft.com/windows/win32/api/dxgi1_5/nn-dxgi1_5-idxgioutput5
@@ -890,7 +890,7 @@ func (self *IDXGIOutput5) DuplicateOutput1(pDevice *systemcom.IUnknown, Flags ui
 		_pSupportedFormats = &pSupportedFormats[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(Flags), uintptr(len(pSupportedFormats)), uintptr(unsafe.Pointer(_pSupportedFormats)), uintptr(unsafe.Pointer(ppOutputDuplication)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGIOutput6: https://learn.microsoft.com/windows/win32/api/dxgi1_6/nn-dxgi1_6-idxgioutput6
@@ -906,13 +906,13 @@ var IID_IDXGIOutput6 = win32.GUID{Data1: 0x068346e8, Data2: 0xaaec, Data3: 0x4b8
 func (self *IDXGIOutput6) GetDesc1() (DXGI_OUTPUT_DESC1, error) {
 	var _pDesc DXGI_OUTPUT_DESC1
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDesc)))
-	return _pDesc, win32.HRESULTError(int32(r1))
+	return _pDesc, win32.ErrIfFailed(int32(r1))
 }
 
 // CheckHardwareCompositionSupport dispatches through IDXGIOutput6's vtable slot 28.
 func (self *IDXGIOutput6) CheckHardwareCompositionSupport(pFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGIOutputDuplication: https://learn.microsoft.com/windows/win32/api/dxgi1_2/nn-dxgi1_2-idxgioutputduplication
@@ -932,19 +932,19 @@ func (self *IDXGIOutputDuplication) GetDesc(pDesc *DXGI_OUTDUPL_DESC) {
 // AcquireNextFrame dispatches through IDXGIOutputDuplication's vtable slot 8.
 func (self *IDXGIOutputDuplication) AcquireNextFrame(TimeoutInMilliseconds uint32, pFrameInfo *DXGI_OUTDUPL_FRAME_INFO, ppDesktopResource **IDXGIResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(TimeoutInMilliseconds), uintptr(unsafe.Pointer(pFrameInfo)), uintptr(unsafe.Pointer(ppDesktopResource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFrameDirtyRects dispatches through IDXGIOutputDuplication's vtable slot 9.
 func (self *IDXGIOutputDuplication) GetFrameDirtyRects(DirtyRectsBufferSize uint32, pDirtyRectsBuffer *foundation.RECT, pDirtyRectsBufferSizeRequired *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(DirtyRectsBufferSize), uintptr(unsafe.Pointer(pDirtyRectsBuffer)), uintptr(unsafe.Pointer(pDirtyRectsBufferSizeRequired)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFrameMoveRects dispatches through IDXGIOutputDuplication's vtable slot 10.
 func (self *IDXGIOutputDuplication) GetFrameMoveRects(MoveRectsBufferSize uint32, pMoveRectBuffer *DXGI_OUTDUPL_MOVE_RECT, pMoveRectsBufferSizeRequired *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(MoveRectsBufferSize), uintptr(unsafe.Pointer(pMoveRectBuffer)), uintptr(unsafe.Pointer(pMoveRectsBufferSizeRequired)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFramePointerShape dispatches through IDXGIOutputDuplication's vtable slot 11.
@@ -954,25 +954,25 @@ func (self *IDXGIOutputDuplication) GetFramePointerShape(pPointerShapeBuffer []b
 		_pPointerShapeBuffer = &pPointerShapeBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(len(pPointerShapeBuffer)), uintptr(unsafe.Pointer(_pPointerShapeBuffer)), uintptr(unsafe.Pointer(pPointerShapeBufferSizeRequired)), uintptr(unsafe.Pointer(pPointerShapeInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MapDesktopSurface dispatches through IDXGIOutputDuplication's vtable slot 12.
 func (self *IDXGIOutputDuplication) MapDesktopSurface(pLockedRect *DXGI_MAPPED_RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLockedRect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnMapDesktopSurface dispatches through IDXGIOutputDuplication's vtable slot 13.
 func (self *IDXGIOutputDuplication) UnMapDesktopSurface() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReleaseFrame dispatches through IDXGIOutputDuplication's vtable slot 14.
 func (self *IDXGIOutputDuplication) ReleaseFrame() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGIResource: https://learn.microsoft.com/windows/win32/api/dxgi/nn-dxgi-idxgiresource
@@ -987,25 +987,25 @@ var IID_IDXGIResource = win32.GUID{Data1: 0x035f3ab4, Data2: 0x482e, Data3: 0x4e
 // GetSharedHandle dispatches through IDXGIResource's vtable slot 8.
 func (self *IDXGIResource) GetSharedHandle(pSharedHandle *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSharedHandle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetUsage dispatches through IDXGIResource's vtable slot 9.
 func (self *IDXGIResource) GetUsage(pUsage *DXGI_USAGE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUsage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetEvictionPriority dispatches through IDXGIResource's vtable slot 10.
 func (self *IDXGIResource) SetEvictionPriority(EvictionPriority DXGI_RESOURCE_PRIORITY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(EvictionPriority))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEvictionPriority dispatches through IDXGIResource's vtable slot 11.
 func (self *IDXGIResource) GetEvictionPriority(pEvictionPriority *DXGI_RESOURCE_PRIORITY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEvictionPriority)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGIResource1: https://learn.microsoft.com/windows/win32/api/dxgi1_2/nn-dxgi1_2-idxgiresource1
@@ -1020,14 +1020,14 @@ var IID_IDXGIResource1 = win32.GUID{Data1: 0x30961379, Data2: 0x4609, Data3: 0x4
 // CreateSubresourceSurface dispatches through IDXGIResource1's vtable slot 12.
 func (self *IDXGIResource1) CreateSubresourceSurface(index uint32, ppSurface **IDXGISurface2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(ppSurface)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSharedHandle dispatches through IDXGIResource1's vtable slot 13.
 func (self *IDXGIResource1) CreateSharedHandle(pAttributes *security.SECURITY_ATTRIBUTES, dwAccess uint32, lpName string, pHandle *foundation.HANDLE) error {
 	_lpName := win32.UTF16Ptr(lpName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAttributes)), uintptr(dwAccess), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(pHandle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGISurface: https://learn.microsoft.com/windows/win32/api/dxgi/nn-dxgi-idxgisurface
@@ -1043,19 +1043,19 @@ var IID_IDXGISurface = win32.GUID{Data1: 0xcafcb56c, Data2: 0x6ac3, Data3: 0x488
 func (self *IDXGISurface) GetDesc() (DXGI_SURFACE_DESC, error) {
 	var _pDesc DXGI_SURFACE_DESC
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDesc)))
-	return _pDesc, win32.HRESULTError(int32(r1))
+	return _pDesc, win32.ErrIfFailed(int32(r1))
 }
 
 // Map dispatches through IDXGISurface's vtable slot 9.
 func (self *IDXGISurface) Map(pLockedRect *DXGI_MAPPED_RECT, MapFlags DXGI_MAP_FLAGS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLockedRect)), uintptr(MapFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Unmap dispatches through IDXGISurface's vtable slot 10.
 func (self *IDXGISurface) Unmap() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGISurface1: https://learn.microsoft.com/windows/win32/api/dxgi/nn-dxgi-idxgisurface1
@@ -1071,13 +1071,13 @@ var IID_IDXGISurface1 = win32.GUID{Data1: 0x4ae63092, Data2: 0x6327, Data3: 0x4c
 func (self *IDXGISurface1) GetDC(Discard bool, phdc *graphicsgdi.HDC) error {
 	_Discard := win32.Bool32(Discard)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(_Discard), uintptr(unsafe.Pointer(phdc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReleaseDC dispatches through IDXGISurface1's vtable slot 12.
 func (self *IDXGISurface1) ReleaseDC(pDirtyRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDirtyRect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGISurface2: https://learn.microsoft.com/windows/win32/api/dxgi1_2/nn-dxgi1_2-idxgisurface2
@@ -1092,7 +1092,7 @@ var IID_IDXGISurface2 = win32.GUID{Data1: 0xaba496dd, Data2: 0xb617, Data3: 0x4c
 // GetResource dispatches through IDXGISurface2's vtable slot 13.
 func (self *IDXGISurface2) GetResource(riid *win32.GUID, ppParentResource **win32.IUnknown, pSubresourceIndex *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppParentResource)), uintptr(unsafe.Pointer(pSubresourceIndex)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGISwapChain: https://learn.microsoft.com/windows/win32/api/dxgi/nn-dxgi-idxgiswapchain
@@ -1107,63 +1107,63 @@ var IID_IDXGISwapChain = win32.GUID{Data1: 0x310d36a0, Data2: 0xd2e7, Data3: 0x4
 // Present dispatches through IDXGISwapChain's vtable slot 8.
 func (self *IDXGISwapChain) Present(SyncInterval uint32, Flags DXGI_PRESENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(SyncInterval), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBuffer dispatches through IDXGISwapChain's vtable slot 9.
 func (self *IDXGISwapChain) GetBuffer(Buffer uint32, riid *win32.GUID, ppSurface **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Buffer), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppSurface)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetFullscreenState dispatches through IDXGISwapChain's vtable slot 10.
 func (self *IDXGISwapChain) SetFullscreenState(Fullscreen bool, pTarget *IDXGIOutput) error {
 	_Fullscreen := win32.Bool32(Fullscreen)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(_Fullscreen), uintptr(unsafe.Pointer(pTarget)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFullscreenState dispatches through IDXGISwapChain's vtable slot 11.
 func (self *IDXGISwapChain) GetFullscreenState(pFullscreen *foundation.BOOL, ppTarget **IDXGIOutput) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFullscreen)), uintptr(unsafe.Pointer(ppTarget)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDesc dispatches through IDXGISwapChain's vtable slot 12.
 func (self *IDXGISwapChain) GetDesc() (DXGI_SWAP_CHAIN_DESC, error) {
 	var _pDesc DXGI_SWAP_CHAIN_DESC
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDesc)))
-	return _pDesc, win32.HRESULTError(int32(r1))
+	return _pDesc, win32.ErrIfFailed(int32(r1))
 }
 
 // ResizeBuffers dispatches through IDXGISwapChain's vtable slot 13.
 func (self *IDXGISwapChain) ResizeBuffers(BufferCount uint32, Width uint32, Height uint32, NewFormat graphicsdxgicommon.DXGI_FORMAT, SwapChainFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(BufferCount), uintptr(Width), uintptr(Height), uintptr(NewFormat), uintptr(SwapChainFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ResizeTarget dispatches through IDXGISwapChain's vtable slot 14.
 func (self *IDXGISwapChain) ResizeTarget(pNewTargetParameters *graphicsdxgicommon.DXGI_MODE_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNewTargetParameters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetContainingOutput dispatches through IDXGISwapChain's vtable slot 15.
 func (self *IDXGISwapChain) GetContainingOutput(ppOutput **IDXGIOutput) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppOutput)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFrameStatistics dispatches through IDXGISwapChain's vtable slot 16.
 func (self *IDXGISwapChain) GetFrameStatistics(pStats *DXGI_FRAME_STATISTICS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStats)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLastPresentCount dispatches through IDXGISwapChain's vtable slot 17.
 func (self *IDXGISwapChain) GetLastPresentCount(pLastPresentCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLastPresentCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGISwapChain1: https://learn.microsoft.com/windows/win32/api/dxgi1_2/nn-dxgi1_2-idxgiswapchain1
@@ -1179,32 +1179,32 @@ var IID_IDXGISwapChain1 = win32.GUID{Data1: 0x790a45f7, Data2: 0x0d42, Data3: 0x
 func (self *IDXGISwapChain1) GetDesc1() (DXGI_SWAP_CHAIN_DESC1, error) {
 	var _pDesc DXGI_SWAP_CHAIN_DESC1
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDesc)))
-	return _pDesc, win32.HRESULTError(int32(r1))
+	return _pDesc, win32.ErrIfFailed(int32(r1))
 }
 
 // GetFullscreenDesc dispatches through IDXGISwapChain1's vtable slot 19.
 func (self *IDXGISwapChain1) GetFullscreenDesc() (DXGI_SWAP_CHAIN_FULLSCREEN_DESC, error) {
 	var _pDesc DXGI_SWAP_CHAIN_FULLSCREEN_DESC
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDesc)))
-	return _pDesc, win32.HRESULTError(int32(r1))
+	return _pDesc, win32.ErrIfFailed(int32(r1))
 }
 
 // GetHwnd dispatches through IDXGISwapChain1's vtable slot 20.
 func (self *IDXGISwapChain1) GetHwnd(pHwnd *foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHwnd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCoreWindow dispatches through IDXGISwapChain1's vtable slot 21.
 func (self *IDXGISwapChain1) GetCoreWindow(refiid *win32.GUID, ppUnk **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(refiid)), uintptr(unsafe.Pointer(ppUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Present1 dispatches through IDXGISwapChain1's vtable slot 22.
 func (self *IDXGISwapChain1) Present1(SyncInterval uint32, PresentFlags DXGI_PRESENT, pPresentParameters *DXGI_PRESENT_PARAMETERS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(SyncInterval), uintptr(PresentFlags), uintptr(unsafe.Pointer(pPresentParameters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsTemporaryMonoSupported dispatches through IDXGISwapChain1's vtable slot 23.
@@ -1216,31 +1216,31 @@ func (self *IDXGISwapChain1) IsTemporaryMonoSupported() foundation.BOOL {
 // GetRestrictToOutput dispatches through IDXGISwapChain1's vtable slot 24.
 func (self *IDXGISwapChain1) GetRestrictToOutput(ppRestrictToOutput **IDXGIOutput) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppRestrictToOutput)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBackgroundColor dispatches through IDXGISwapChain1's vtable slot 25.
 func (self *IDXGISwapChain1) SetBackgroundColor(pColor *DXGI_RGBA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pColor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBackgroundColor dispatches through IDXGISwapChain1's vtable slot 26.
 func (self *IDXGISwapChain1) GetBackgroundColor(pColor *DXGI_RGBA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pColor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetRotation dispatches through IDXGISwapChain1's vtable slot 27.
 func (self *IDXGISwapChain1) SetRotation(Rotation graphicsdxgicommon.DXGI_MODE_ROTATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(Rotation))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRotation dispatches through IDXGISwapChain1's vtable slot 28.
 func (self *IDXGISwapChain1) GetRotation(pRotation *graphicsdxgicommon.DXGI_MODE_ROTATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRotation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGISwapChain2: https://learn.microsoft.com/windows/win32/api/dxgi1_3/nn-dxgi1_3-idxgiswapchain2
@@ -1255,25 +1255,25 @@ var IID_IDXGISwapChain2 = win32.GUID{Data1: 0xa8be2ac4, Data2: 0x199f, Data3: 0x
 // SetSourceSize dispatches through IDXGISwapChain2's vtable slot 29.
 func (self *IDXGISwapChain2) SetSourceSize(Width uint32, Height uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(Width), uintptr(Height))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSourceSize dispatches through IDXGISwapChain2's vtable slot 30.
 func (self *IDXGISwapChain2) GetSourceSize(pWidth *uint32, pHeight *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWidth)), uintptr(unsafe.Pointer(pHeight)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMaximumFrameLatency dispatches through IDXGISwapChain2's vtable slot 31.
 func (self *IDXGISwapChain2) SetMaximumFrameLatency(MaxLatency uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(MaxLatency))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMaximumFrameLatency dispatches through IDXGISwapChain2's vtable slot 32.
 func (self *IDXGISwapChain2) GetMaximumFrameLatency(pMaxLatency *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMaxLatency)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFrameLatencyWaitableObject dispatches through IDXGISwapChain2's vtable slot 33.
@@ -1285,13 +1285,13 @@ func (self *IDXGISwapChain2) GetFrameLatencyWaitableObject() foundation.HANDLE {
 // SetMatrixTransform dispatches through IDXGISwapChain2's vtable slot 34.
 func (self *IDXGISwapChain2) SetMatrixTransform(pMatrix *DXGI_MATRIX_3X2_F) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMatrix)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMatrixTransform dispatches through IDXGISwapChain2's vtable slot 35.
 func (self *IDXGISwapChain2) GetMatrixTransform(pMatrix *DXGI_MATRIX_3X2_F) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMatrix)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGISwapChain3: https://learn.microsoft.com/windows/win32/api/dxgi1_4/nn-dxgi1_4-idxgiswapchain3
@@ -1312,19 +1312,19 @@ func (self *IDXGISwapChain3) GetCurrentBackBufferIndex() uint32 {
 // CheckColorSpaceSupport dispatches through IDXGISwapChain3's vtable slot 37.
 func (self *IDXGISwapChain3) CheckColorSpaceSupport(ColorSpace graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE, pColorSpaceSupport *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(ColorSpace), uintptr(unsafe.Pointer(pColorSpaceSupport)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetColorSpace1 dispatches through IDXGISwapChain3's vtable slot 38.
 func (self *IDXGISwapChain3) SetColorSpace1(ColorSpace graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(ColorSpace))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ResizeBuffers1 dispatches through IDXGISwapChain3's vtable slot 39.
 func (self *IDXGISwapChain3) ResizeBuffers1(BufferCount uint32, Width uint32, Height uint32, Format graphicsdxgicommon.DXGI_FORMAT, SwapChainFlags uint32, pCreationNodeMask *uint32, ppPresentQueue **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(BufferCount), uintptr(Width), uintptr(Height), uintptr(Format), uintptr(SwapChainFlags), uintptr(unsafe.Pointer(pCreationNodeMask)), uintptr(unsafe.Pointer(ppPresentQueue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGISwapChain4: https://learn.microsoft.com/windows/win32/api/dxgi1_5/nn-dxgi1_5-idxgiswapchain4
@@ -1339,7 +1339,7 @@ var IID_IDXGISwapChain4 = win32.GUID{Data1: 0x3d585d5a, Data2: 0xbd4a, Data3: 0x
 // SetHDRMetaData dispatches through IDXGISwapChain4's vtable slot 40.
 func (self *IDXGISwapChain4) SetHDRMetaData(Type DXGI_HDR_METADATA_TYPE, Size uint32, pMetaData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(Size), uintptr(unsafe.Pointer(pMetaData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGISwapChainMedia: https://learn.microsoft.com/windows/win32/api/dxgi1_3/nn-dxgi1_3-idxgiswapchainmedia
@@ -1354,19 +1354,19 @@ var IID_IDXGISwapChainMedia = win32.GUID{Data1: 0xdd95b90b, Data2: 0xf05f, Data3
 // GetFrameStatisticsMedia dispatches through IDXGISwapChainMedia's vtable slot 3.
 func (self *IDXGISwapChainMedia) GetFrameStatisticsMedia(pStats *DXGI_FRAME_STATISTICS_MEDIA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStats)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetPresentDuration dispatches through IDXGISwapChainMedia's vtable slot 4.
 func (self *IDXGISwapChainMedia) SetPresentDuration(Duration uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Duration))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CheckPresentDurationSupport dispatches through IDXGISwapChainMedia's vtable slot 5.
 func (self *IDXGISwapChainMedia) CheckPresentDurationSupport(DesiredPresentDuration uint32, pClosestSmallerPresentDuration *uint32, pClosestLargerPresentDuration *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(DesiredPresentDuration), uintptr(unsafe.Pointer(pClosestSmallerPresentDuration)), uintptr(unsafe.Pointer(pClosestLargerPresentDuration)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 9f251514-9d4d-4902-9d60-18988ab7d4b5

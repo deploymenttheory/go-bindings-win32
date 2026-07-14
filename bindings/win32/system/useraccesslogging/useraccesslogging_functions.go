@@ -27,7 +27,7 @@ var (
 // Minimum OS: windows8.0.
 func UalInstrument(Data *UAL_DATA_BLOB) error {
 	r1, _, _ := syscall.SyscallN(procUalInstrument.Addr(), uintptr(unsafe.Pointer(Data)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UalRegisterProduct calls ualapi!UalRegisterProduct.
@@ -38,7 +38,7 @@ func UalRegisterProduct(wszProductName string, wszRoleName string, wszGuid strin
 	_wszRoleName := win32.UTF16Ptr(wszRoleName)
 	_wszGuid := win32.UTF16Ptr(wszGuid)
 	r1, _, _ := syscall.SyscallN(procUalRegisterProduct.Addr(), uintptr(unsafe.Pointer(_wszProductName)), uintptr(unsafe.Pointer(_wszRoleName)), uintptr(unsafe.Pointer(_wszGuid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UalStart calls ualapi!UalStart.
@@ -46,7 +46,7 @@ func UalRegisterProduct(wszProductName string, wszRoleName string, wszGuid strin
 // Minimum OS: windows8.0.
 func UalStart(Data *UAL_DATA_BLOB) error {
 	r1, _, _ := syscall.SyscallN(procUalStart.Addr(), uintptr(unsafe.Pointer(Data)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UalStop calls ualapi!UalStop.
@@ -54,5 +54,5 @@ func UalStart(Data *UAL_DATA_BLOB) error {
 // Minimum OS: windows8.0.
 func UalStop(Data *UAL_DATA_BLOB) error {
 	r1, _, _ := syscall.SyscallN(procUalStop.Addr(), uintptr(unsafe.Pointer(Data)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

@@ -25,19 +25,19 @@ var IID_IDMOQualityControl = win32.GUID{Data1: 0x65abea96, Data2: 0xcf36, Data3:
 // SetNow dispatches through IDMOQualityControl's vtable slot 3.
 func (self *IDMOQualityControl) SetNow(rtNow int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(rtNow))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetStatus dispatches through IDMOQualityControl's vtable slot 4.
 func (self *IDMOQualityControl) SetStatus(dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStatus dispatches through IDMOQualityControl's vtable slot 5.
 func (self *IDMOQualityControl) GetStatus(pdwFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDMOVideoOutputOptimizations: https://learn.microsoft.com/windows/win32/api/mediaobj/nn-mediaobj-idmovideooutputoptimizations
@@ -52,25 +52,25 @@ var IID_IDMOVideoOutputOptimizations = win32.GUID{Data1: 0xbe8f4f4e, Data2: 0x5b
 // QueryOperationModePreferences dispatches through IDMOVideoOutputOptimizations's vtable slot 3.
 func (self *IDMOVideoOutputOptimizations) QueryOperationModePreferences(ulOutputStreamIndex uint32, pdwRequestedCapabilities *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulOutputStreamIndex), uintptr(unsafe.Pointer(pdwRequestedCapabilities)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetOperationMode dispatches through IDMOVideoOutputOptimizations's vtable slot 4.
 func (self *IDMOVideoOutputOptimizations) SetOperationMode(ulOutputStreamIndex uint32, dwEnabledFeatures uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulOutputStreamIndex), uintptr(dwEnabledFeatures))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentOperationMode dispatches through IDMOVideoOutputOptimizations's vtable slot 5.
 func (self *IDMOVideoOutputOptimizations) GetCurrentOperationMode(ulOutputStreamIndex uint32, pdwEnabledFeatures *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(ulOutputStreamIndex), uintptr(unsafe.Pointer(pdwEnabledFeatures)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentSampleRequirements dispatches through IDMOVideoOutputOptimizations's vtable slot 6.
 func (self *IDMOVideoOutputOptimizations) GetCurrentSampleRequirements(ulOutputStreamIndex uint32, pdwRequestedFeatures *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ulOutputStreamIndex), uintptr(unsafe.Pointer(pdwRequestedFeatures)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumDMO: https://learn.microsoft.com/windows/win32/api/mediaobj/nn-mediaobj-ienumdmo
@@ -85,25 +85,25 @@ var IID_IEnumDMO = win32.GUID{Data1: 0x2c3cd98a, Data2: 0x2bfa, Data3: 0x4a53, D
 // Next dispatches through IEnumDMO's vtable slot 3.
 func (self *IEnumDMO) Next(cItemsToFetch uint32, pCLSID *win32.GUID, Names *foundation.PWSTR, pcItemsFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cItemsToFetch), uintptr(unsafe.Pointer(pCLSID)), uintptr(unsafe.Pointer(Names)), uintptr(unsafe.Pointer(pcItemsFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumDMO's vtable slot 4.
 func (self *IEnumDMO) Skip(cItemsToSkip uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cItemsToSkip))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumDMO's vtable slot 5.
 func (self *IEnumDMO) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IEnumDMO's vtable slot 6.
 func (self *IEnumDMO) Clone(ppEnum **IEnumDMO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMediaBuffer: https://learn.microsoft.com/windows/win32/api/mediaobj/nn-mediaobj-imediabuffer
@@ -118,19 +118,19 @@ var IID_IMediaBuffer = win32.GUID{Data1: 0x59eff8b9, Data2: 0x938c, Data3: 0x4a2
 // SetLength dispatches through IMediaBuffer's vtable slot 3.
 func (self *IMediaBuffer) SetLength(cbLength uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cbLength))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMaxLength dispatches through IMediaBuffer's vtable slot 4.
 func (self *IMediaBuffer) GetMaxLength(pcbMaxLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcbMaxLength)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBufferAndLength dispatches through IMediaBuffer's vtable slot 5.
 func (self *IMediaBuffer) GetBufferAndLength(ppBuffer **byte, pcbLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppBuffer)), uintptr(unsafe.Pointer(pcbLength)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMediaObject: https://learn.microsoft.com/windows/win32/api/mediaobj/nn-mediaobj-imediaobject
@@ -145,115 +145,115 @@ var IID_IMediaObject = win32.GUID{Data1: 0xd8ad0f58, Data2: 0x5494, Data3: 0x410
 // GetStreamCount dispatches through IMediaObject's vtable slot 3.
 func (self *IMediaObject) GetStreamCount(pcInputStreams *uint32, pcOutputStreams *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcInputStreams)), uintptr(unsafe.Pointer(pcOutputStreams)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInputStreamInfo dispatches through IMediaObject's vtable slot 4.
 func (self *IMediaObject) GetInputStreamInfo(dwInputStreamIndex uint32, pdwFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwInputStreamIndex), uintptr(unsafe.Pointer(pdwFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOutputStreamInfo dispatches through IMediaObject's vtable slot 5.
 func (self *IMediaObject) GetOutputStreamInfo(dwOutputStreamIndex uint32, pdwFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwOutputStreamIndex), uintptr(unsafe.Pointer(pdwFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInputType dispatches through IMediaObject's vtable slot 6.
 func (self *IMediaObject) GetInputType(dwInputStreamIndex uint32, dwTypeIndex uint32, pmt *DMO_MEDIA_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwInputStreamIndex), uintptr(dwTypeIndex), uintptr(unsafe.Pointer(pmt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOutputType dispatches through IMediaObject's vtable slot 7.
 func (self *IMediaObject) GetOutputType(dwOutputStreamIndex uint32, dwTypeIndex uint32, pmt *DMO_MEDIA_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwOutputStreamIndex), uintptr(dwTypeIndex), uintptr(unsafe.Pointer(pmt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetInputType dispatches through IMediaObject's vtable slot 8.
 func (self *IMediaObject) SetInputType(dwInputStreamIndex uint32, pmt *DMO_MEDIA_TYPE, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwInputStreamIndex), uintptr(unsafe.Pointer(pmt)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetOutputType dispatches through IMediaObject's vtable slot 9.
 func (self *IMediaObject) SetOutputType(dwOutputStreamIndex uint32, pmt *DMO_MEDIA_TYPE, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwOutputStreamIndex), uintptr(unsafe.Pointer(pmt)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInputCurrentType dispatches through IMediaObject's vtable slot 10.
 func (self *IMediaObject) GetInputCurrentType(dwInputStreamIndex uint32, pmt *DMO_MEDIA_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(dwInputStreamIndex), uintptr(unsafe.Pointer(pmt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOutputCurrentType dispatches through IMediaObject's vtable slot 11.
 func (self *IMediaObject) GetOutputCurrentType(dwOutputStreamIndex uint32, pmt *DMO_MEDIA_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(dwOutputStreamIndex), uintptr(unsafe.Pointer(pmt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInputSizeInfo dispatches through IMediaObject's vtable slot 12.
 func (self *IMediaObject) GetInputSizeInfo(dwInputStreamIndex uint32, pcbSize *uint32, pcbMaxLookahead *uint32, pcbAlignment *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(dwInputStreamIndex), uintptr(unsafe.Pointer(pcbSize)), uintptr(unsafe.Pointer(pcbMaxLookahead)), uintptr(unsafe.Pointer(pcbAlignment)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOutputSizeInfo dispatches through IMediaObject's vtable slot 13.
 func (self *IMediaObject) GetOutputSizeInfo(dwOutputStreamIndex uint32, pcbSize *uint32, pcbAlignment *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwOutputStreamIndex), uintptr(unsafe.Pointer(pcbSize)), uintptr(unsafe.Pointer(pcbAlignment)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInputMaxLatency dispatches through IMediaObject's vtable slot 14.
 func (self *IMediaObject) GetInputMaxLatency(dwInputStreamIndex uint32, prtMaxLatency *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(dwInputStreamIndex), uintptr(unsafe.Pointer(prtMaxLatency)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetInputMaxLatency dispatches through IMediaObject's vtable slot 15.
 func (self *IMediaObject) SetInputMaxLatency(dwInputStreamIndex uint32, rtMaxLatency int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwInputStreamIndex), uintptr(rtMaxLatency))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Flush dispatches through IMediaObject's vtable slot 16.
 func (self *IMediaObject) Flush() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Discontinuity dispatches through IMediaObject's vtable slot 17.
 func (self *IMediaObject) Discontinuity(dwInputStreamIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(dwInputStreamIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AllocateStreamingResources dispatches through IMediaObject's vtable slot 18.
 func (self *IMediaObject) AllocateStreamingResources() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FreeStreamingResources dispatches through IMediaObject's vtable slot 19.
 func (self *IMediaObject) FreeStreamingResources() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInputStatus dispatches through IMediaObject's vtable slot 20.
 func (self *IMediaObject) GetInputStatus(dwInputStreamIndex uint32, dwFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(dwInputStreamIndex), uintptr(unsafe.Pointer(dwFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ProcessInput dispatches through IMediaObject's vtable slot 21.
 func (self *IMediaObject) ProcessInput(dwInputStreamIndex uint32, pBuffer *IMediaBuffer, dwFlags uint32, rtTimestamp int64, rtTimelength int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(dwInputStreamIndex), uintptr(unsafe.Pointer(pBuffer)), uintptr(dwFlags), uintptr(rtTimestamp), uintptr(rtTimelength))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ProcessOutput dispatches through IMediaObject's vtable slot 22.
@@ -263,13 +263,13 @@ func (self *IMediaObject) ProcessOutput(dwFlags uint32, pOutputBuffers []DMO_OUT
 		_pOutputBuffers = &pOutputBuffers[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(len(pOutputBuffers)), uintptr(unsafe.Pointer(_pOutputBuffers)), uintptr(unsafe.Pointer(pdwStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Lock dispatches through IMediaObject's vtable slot 23.
 func (self *IMediaObject) Lock(bLock int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(bLock))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMediaObjectInPlace: https://learn.microsoft.com/windows/win32/api/mediaobj/nn-mediaobj-imediaobjectinplace
@@ -288,17 +288,17 @@ func (self *IMediaObjectInPlace) Process(pData []byte, refTimeStart int64, dwFla
 		_pData = &pData[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pData)), uintptr(unsafe.Pointer(_pData)), uintptr(refTimeStart), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IMediaObjectInPlace's vtable slot 4.
 func (self *IMediaObjectInPlace) Clone(ppMediaObject **IMediaObjectInPlace) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppMediaObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLatency dispatches through IMediaObjectInPlace's vtable slot 5.
 func (self *IMediaObjectInPlace) GetLatency(pLatencyTime *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLatencyTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

@@ -27,19 +27,19 @@ var IID_IUIApplication = win32.GUID{Data1: 0xd428903c, Data2: 0x729a, Data3: 0x4
 // OnViewChanged dispatches through IUIApplication's vtable slot 3.
 func (self *IUIApplication) OnViewChanged(viewId uint32, typeID UI_VIEWTYPE, view *systemcom.IUnknown, verb UI_VIEWVERB, uReasonCode int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(viewId), uintptr(typeID), uintptr(unsafe.Pointer(view)), uintptr(verb), uintptr(uReasonCode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnCreateUICommand dispatches through IUIApplication's vtable slot 4.
 func (self *IUIApplication) OnCreateUICommand(commandId uint32, typeID UI_COMMANDTYPE, commandHandler **IUICommandHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(commandId), uintptr(typeID), uintptr(unsafe.Pointer(commandHandler)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnDestroyUICommand dispatches through IUIApplication's vtable slot 5.
 func (self *IUIApplication) OnDestroyUICommand(commandId uint32, typeID UI_COMMANDTYPE, commandHandler *IUICommandHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(commandId), uintptr(typeID), uintptr(unsafe.Pointer(commandHandler)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IUICollection: https://learn.microsoft.com/windows/win32/api/uiribbon/nn-uiribbon-iuicollection
@@ -54,43 +54,43 @@ var IID_IUICollection = win32.GUID{Data1: 0xdf4f45bf, Data2: 0x6f9d, Data3: 0x4d
 // GetCount dispatches through IUICollection's vtable slot 3.
 func (self *IUICollection) GetCount(count *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(count)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetItem dispatches through IUICollection's vtable slot 4.
 func (self *IUICollection) GetItem(index uint32, item **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(item)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through IUICollection's vtable slot 5.
 func (self *IUICollection) Add(item *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(item)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Insert dispatches through IUICollection's vtable slot 6.
 func (self *IUICollection) Insert(index uint32, item *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(item)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAt dispatches through IUICollection's vtable slot 7.
 func (self *IUICollection) RemoveAt(index uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Replace dispatches through IUICollection's vtable slot 8.
 func (self *IUICollection) Replace(indexReplaced uint32, itemReplaceWith *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(indexReplaced), uintptr(unsafe.Pointer(itemReplaceWith)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through IUICollection's vtable slot 9.
 func (self *IUICollection) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IUICollectionChangedEvent: https://learn.microsoft.com/windows/win32/api/uiribbon/nn-uiribbon-iuicollectionchangedevent
@@ -105,7 +105,7 @@ var IID_IUICollectionChangedEvent = win32.GUID{Data1: 0x6502ae91, Data2: 0xa14d,
 // OnChanged dispatches through IUICollectionChangedEvent's vtable slot 3.
 func (self *IUICollectionChangedEvent) OnChanged(action UI_COLLECTIONCHANGE, oldIndex uint32, oldItem *systemcom.IUnknown, newIndex uint32, newItem *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(action), uintptr(oldIndex), uintptr(unsafe.Pointer(oldItem)), uintptr(newIndex), uintptr(unsafe.Pointer(newItem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IUICommandHandler: https://learn.microsoft.com/windows/win32/api/uiribbon/nn-uiribbon-iuicommandhandler
@@ -120,13 +120,13 @@ var IID_IUICommandHandler = win32.GUID{Data1: 0x75ae0a2d, Data2: 0xdc03, Data3: 
 // Execute dispatches through IUICommandHandler's vtable slot 3.
 func (self *IUICommandHandler) Execute(commandId uint32, verb UI_EXECUTIONVERB, key *foundation.PROPERTYKEY, currentValue *systemcomstructuredstorage.PROPVARIANT, commandExecutionProperties *IUISimplePropertySet) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(commandId), uintptr(verb), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(currentValue)), uintptr(unsafe.Pointer(commandExecutionProperties)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UpdateProperty dispatches through IUICommandHandler's vtable slot 4.
 func (self *IUICommandHandler) UpdateProperty(commandId uint32, key *foundation.PROPERTYKEY, currentValue *systemcomstructuredstorage.PROPVARIANT, newValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(commandId), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(currentValue)), uintptr(unsafe.Pointer(newValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IUIContextualUI: https://learn.microsoft.com/windows/win32/api/uiribbon/nn-uiribbon-iuicontextualui
@@ -141,7 +141,7 @@ var IID_IUIContextualUI = win32.GUID{Data1: 0xeea11f37, Data2: 0x7c46, Data3: 0x
 // ShowAtLocation dispatches through IUIContextualUI's vtable slot 3.
 func (self *IUIContextualUI) ShowAtLocation(x int32, y int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(x), uintptr(y))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IUIEventLogger: https://learn.microsoft.com/windows/win32/api/uiribbon/nn-uiribbon-iuieventlogger
@@ -170,7 +170,7 @@ var IID_IUIEventingManager = win32.GUID{Data1: 0x3be6ea7f, Data2: 0x9a9b, Data3:
 // SetEventLogger dispatches through IUIEventingManager's vtable slot 3.
 func (self *IUIEventingManager) SetEventLogger(eventLogger *IUIEventLogger) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(eventLogger)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IUIFramework: https://learn.microsoft.com/windows/win32/api/uiribbon/nn-uiribbon-iuiframework
@@ -185,56 +185,56 @@ var IID_IUIFramework = win32.GUID{Data1: 0xf4f0385d, Data2: 0x6872, Data3: 0x43a
 // Initialize dispatches through IUIFramework's vtable slot 3.
 func (self *IUIFramework) Initialize(frameWnd foundation.HWND, application *IUIApplication) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(frameWnd), uintptr(unsafe.Pointer(application)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Destroy dispatches through IUIFramework's vtable slot 4.
 func (self *IUIFramework) Destroy() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LoadUI dispatches through IUIFramework's vtable slot 5.
 func (self *IUIFramework) LoadUI(instance foundation.HINSTANCE, resourceName string) error {
 	_resourceName := win32.UTF16Ptr(resourceName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(instance), uintptr(unsafe.Pointer(_resourceName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetView dispatches through IUIFramework's vtable slot 6.
 func (self *IUIFramework) GetView(viewId uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(viewId), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetUICommandProperty dispatches through IUIFramework's vtable slot 7.
 func (self *IUIFramework) GetUICommandProperty(commandId uint32, key *foundation.PROPERTYKEY, value *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(commandId), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetUICommandProperty dispatches through IUIFramework's vtable slot 8.
 func (self *IUIFramework) SetUICommandProperty(commandId uint32, key *foundation.PROPERTYKEY, value *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(commandId), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InvalidateUICommand dispatches through IUIFramework's vtable slot 9.
 func (self *IUIFramework) InvalidateUICommand(commandId uint32, flags UI_INVALIDATIONS, key *foundation.PROPERTYKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(commandId), uintptr(flags), uintptr(unsafe.Pointer(key)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FlushPendingInvalidations dispatches through IUIFramework's vtable slot 10.
 func (self *IUIFramework) FlushPendingInvalidations() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetModes dispatches through IUIFramework's vtable slot 11.
 func (self *IUIFramework) SetModes(iModes int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(iModes))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IUIImage: https://learn.microsoft.com/windows/win32/api/uiribbon/nn-uiribbon-iuiimage
@@ -249,7 +249,7 @@ var IID_IUIImage = win32.GUID{Data1: 0x23c8c838, Data2: 0x4de6, Data3: 0x436b, D
 // GetBitmap dispatches through IUIImage's vtable slot 3.
 func (self *IUIImage) GetBitmap(bitmap *graphicsgdi.HBITMAP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bitmap)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IUIImageFromBitmap: https://learn.microsoft.com/windows/win32/api/uiribbon/nn-uiribbon-iuiimagefrombitmap
@@ -264,7 +264,7 @@ var IID_IUIImageFromBitmap = win32.GUID{Data1: 0x18aba7f3, Data2: 0x4c1c, Data3:
 // CreateImage dispatches through IUIImageFromBitmap's vtable slot 3.
 func (self *IUIImageFromBitmap) CreateImage(bitmap graphicsgdi.HBITMAP, options UI_OWNERSHIP, image **IUIImage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(bitmap), uintptr(options), uintptr(unsafe.Pointer(image)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IUIRibbon: https://learn.microsoft.com/windows/win32/api/uiribbon/nn-uiribbon-iuiribbon
@@ -279,19 +279,19 @@ var IID_IUIRibbon = win32.GUID{Data1: 0x803982ab, Data2: 0x370a, Data3: 0x4f7e, 
 // GetHeight dispatches through IUIRibbon's vtable slot 3.
 func (self *IUIRibbon) GetHeight(cy *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cy)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LoadSettingsFromStream dispatches through IUIRibbon's vtable slot 4.
 func (self *IUIRibbon) LoadSettingsFromStream(pStream *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SaveSettingsToStream dispatches through IUIRibbon's vtable slot 5.
 func (self *IUIRibbon) SaveSettingsToStream(pStream *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IUISimplePropertySet: https://learn.microsoft.com/windows/win32/api/uiribbon/nn-uiribbon-iuisimplepropertyset
@@ -306,5 +306,5 @@ var IID_IUISimplePropertySet = win32.GUID{Data1: 0xc205bb48, Data2: 0x5b1c, Data
 // GetValue dispatches through IUISimplePropertySet's vtable slot 3.
 func (self *IUISimplePropertySet) GetValue(key *foundation.PROPERTYKEY, value *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

@@ -24,5 +24,5 @@ var (
 // https://learn.microsoft.com/windows/win32/api/windows.data.pdf.interop/nf-windows-data-pdf-interop-pdfcreaterenderer
 func PdfCreateRenderer(pDevice *graphicsdxgi.IDXGIDevice, ppRenderer **IPdfRendererNative) error {
 	r1, _, _ := syscall.SyscallN(procPdfCreateRenderer.Addr(), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(ppRenderer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

@@ -156,7 +156,7 @@ func GetFirmwareType(FirmwareType *FIRMWARE_TYPE) error {
 // Minimum OS: windows10.0.10240.
 func GetIntegratedDisplaySize(sizeInInches *float64) error {
 	r1, _, _ := syscall.SyscallN(procGetIntegratedDisplaySize.Addr(), uintptr(unsafe.Pointer(sizeInInches)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLocalTime calls KERNEL32!GetLocalTime.
@@ -515,7 +515,7 @@ func IsUserCetAvailableInEnvironment(UserCetEnvironment USER_CET_ENVIRONMENT) bo
 // Minimum OS: windows10.0.16299.
 func IsWow64GuestMachineSupported(WowGuestMachine IMAGE_FILE_MACHINE, MachineIsSupported *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procIsWow64GuestMachineSupported.Addr(), uintptr(WowGuestMachine), uintptr(unsafe.Pointer(MachineIsSupported)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RtlConvertDeviceFamilyInfoToString calls ntdll!RtlConvertDeviceFamilyInfoToString.

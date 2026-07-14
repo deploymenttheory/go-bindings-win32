@@ -549,7 +549,7 @@ func IUnknown_AddRef_Proxy(This *systemcom.IUnknown) uint32 {
 // Minimum OS: windows5.0.
 func IUnknown_QueryInterface_Proxy(This *systemcom.IUnknown, riid *win32.GUID, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procIUnknown_QueryInterface_Proxy.Addr(), uintptr(unsafe.Pointer(This)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IUnknown_Release_Proxy calls RPCRT4!IUnknown_Release_Proxy.
@@ -1540,7 +1540,7 @@ func NdrGetBuffer(pStubMsg *MIDL_STUB_MESSAGE, BufferLength uint32, Handle unsaf
 // NdrGetDcomProtocolVersion calls RPCRT4!NdrGetDcomProtocolVersion.
 func NdrGetDcomProtocolVersion(pStubMsg *MIDL_STUB_MESSAGE, pVersion *RPC_VERSION) error {
 	r1, _, _ := syscall.SyscallN(procNdrGetDcomProtocolVersion.Addr(), uintptr(unsafe.Pointer(pStubMsg)), uintptr(unsafe.Pointer(pVersion)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NdrGetUserMarshalInfo calls RPCRT4!NdrGetUserMarshalInfo.

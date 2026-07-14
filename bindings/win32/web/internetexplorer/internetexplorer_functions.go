@@ -85,56 +85,56 @@ var (
 // ComputeInvCMAP calls ImgUtil!ComputeInvCMAP.
 func ComputeInvCMAP(pRGBColors *graphicsgdi.RGBQUAD, nColors uint32, pInvTable *byte, cbTable uint32) error {
 	r1, _, _ := syscall.SyscallN(procComputeInvCMAP.Addr(), uintptr(unsafe.Pointer(pRGBColors)), uintptr(nColors), uintptr(unsafe.Pointer(pInvTable)), uintptr(cbTable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateDDrawSurfaceOnDIB calls ImgUtil!CreateDDrawSurfaceOnDIB.
 func CreateDDrawSurfaceOnDIB(hbmDib graphicsgdi.HBITMAP, ppSurface **graphicsdirectdraw.IDirectDrawSurface) error {
 	r1, _, _ := syscall.SyscallN(procCreateDDrawSurfaceOnDIB.Addr(), uintptr(hbmDib), uintptr(unsafe.Pointer(ppSurface)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateMIMEMap calls ImgUtil!CreateMIMEMap.
 func CreateMIMEMap(ppMap **IMapMIMEToCLSID) error {
 	r1, _, _ := syscall.SyscallN(procCreateMIMEMap.Addr(), uintptr(unsafe.Pointer(ppMap)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DecodeImage calls ImgUtil!DecodeImage.
 func DecodeImage(pStream *systemcom.IStream, pMap *IMapMIMEToCLSID, pEventSink *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procDecodeImage.Addr(), uintptr(unsafe.Pointer(pStream)), uintptr(unsafe.Pointer(pMap)), uintptr(unsafe.Pointer(pEventSink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DecodeImageEx calls ImgUtil!DecodeImageEx.
 func DecodeImageEx(pStream *systemcom.IStream, pMap *IMapMIMEToCLSID, pEventSink *systemcom.IUnknown, pszMIMETypeParam string) error {
 	_pszMIMETypeParam := win32.UTF16Ptr(pszMIMETypeParam)
 	r1, _, _ := syscall.SyscallN(procDecodeImageEx.Addr(), uintptr(unsafe.Pointer(pStream)), uintptr(unsafe.Pointer(pMap)), uintptr(unsafe.Pointer(pEventSink)), uintptr(unsafe.Pointer(_pszMIMETypeParam)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DitherTo8 calls ImgUtil!DitherTo8.
 func DitherTo8(pDestBits *byte, nDestPitch int32, pSrcBits *byte, nSrcPitch int32, bfidSrc *win32.GUID, prgbDestColors *graphicsgdi.RGBQUAD, prgbSrcColors *graphicsgdi.RGBQUAD, pbDestInvMap *byte, x int32, y int32, cx int32, cy int32, lDestTrans int32, lSrcTrans int32) error {
 	r1, _, _ := syscall.SyscallN(procDitherTo8.Addr(), uintptr(unsafe.Pointer(pDestBits)), uintptr(nDestPitch), uintptr(unsafe.Pointer(pSrcBits)), uintptr(nSrcPitch), uintptr(unsafe.Pointer(bfidSrc)), uintptr(unsafe.Pointer(prgbDestColors)), uintptr(unsafe.Pointer(prgbSrcColors)), uintptr(unsafe.Pointer(pbDestInvMap)), uintptr(x), uintptr(y), uintptr(cx), uintptr(cy), uintptr(lDestTrans), uintptr(lSrcTrans))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMaxMIMEIDBytes calls ImgUtil!GetMaxMIMEIDBytes.
 func GetMaxMIMEIDBytes(pnMaxBytes *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetMaxMIMEIDBytes.Addr(), uintptr(unsafe.Pointer(pnMaxBytes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEAssociateThreadWithTab calls Ieframe!IEAssociateThreadWithTab.
 func IEAssociateThreadWithTab(dwTabThreadID uint32, dwAssociatedThreadID uint32) error {
 	r1, _, _ := syscall.SyscallN(procIEAssociateThreadWithTab.Addr(), uintptr(dwTabThreadID), uintptr(dwAssociatedThreadID))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IECancelSaveFile calls Ieframe!IECancelSaveFile.
 func IECancelSaveFile(hState foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procIECancelSaveFile.Addr(), uintptr(hState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IECreateDirectory calls Ieframe!IECreateDirectory.
@@ -161,7 +161,7 @@ func IEDeleteFile(lpFileName string) bool {
 // IEDisassociateThreadWithTab calls Ieframe!IEDisassociateThreadWithTab.
 func IEDisassociateThreadWithTab(dwTabThreadID uint32, dwAssociatedThreadID uint32) error {
 	r1, _, _ := syscall.SyscallN(procIEDisassociateThreadWithTab.Addr(), uintptr(dwTabThreadID), uintptr(dwAssociatedThreadID))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEFindFirstFile calls Ieframe!IEFindFirstFile.
@@ -183,19 +183,19 @@ func IEGetProtectedModeCookie(lpszURL string, lpszCookieName string, lpszCookieD
 	_lpszURL := win32.UTF16Ptr(lpszURL)
 	_lpszCookieName := win32.UTF16Ptr(lpszCookieName)
 	r1, _, _ := syscall.SyscallN(procIEGetProtectedModeCookie.Addr(), uintptr(unsafe.Pointer(_lpszURL)), uintptr(unsafe.Pointer(_lpszCookieName)), uintptr(unsafe.Pointer(lpszCookieData)), uintptr(unsafe.Pointer(pcchCookieData)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEGetWriteableFolderPath calls Ieframe!IEGetWriteableFolderPath.
 func IEGetWriteableFolderPath(clsidFolderID *win32.GUID, lppwstrPath *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procIEGetWriteableFolderPath.Addr(), uintptr(unsafe.Pointer(clsidFolderID)), uintptr(unsafe.Pointer(lppwstrPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEGetWriteableLowHKCU calls Ieframe!IEGetWriteableLowHKCU.
 func IEGetWriteableLowHKCU(pHKey *systemregistry.HKEY) error {
 	r1, _, _ := syscall.SyscallN(procIEGetWriteableLowHKCU.Addr(), uintptr(unsafe.Pointer(pHKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEInPrivateFilteringEnabled calls Ieframe!IEInPrivateFilteringEnabled.
@@ -213,21 +213,21 @@ func IEIsInPrivateBrowsing() bool {
 // IEIsProtectedModeProcess calls Ieframe!IEIsProtectedModeProcess.
 func IEIsProtectedModeProcess(pbResult *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procIEIsProtectedModeProcess.Addr(), uintptr(unsafe.Pointer(pbResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEIsProtectedModeURL calls Ieframe!IEIsProtectedModeURL.
 func IEIsProtectedModeURL(lpwstrUrl string) error {
 	_lpwstrUrl := win32.UTF16Ptr(lpwstrUrl)
 	r1, _, _ := syscall.SyscallN(procIEIsProtectedModeURL.Addr(), uintptr(unsafe.Pointer(_lpwstrUrl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IELaunchURL calls Ieframe!IELaunchURL.
 func IELaunchURL(lpwstrUrl string, lpProcInfo *systemthreading.PROCESS_INFORMATION, lpInfo unsafe.Pointer) error {
 	_lpwstrUrl := win32.UTF16Ptr(lpwstrUrl)
 	r1, _, _ := syscall.SyscallN(procIELaunchURL.Addr(), uintptr(unsafe.Pointer(_lpwstrUrl)), uintptr(unsafe.Pointer(lpProcInfo)), uintptr(unsafe.Pointer(lpInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEMoveFileEx calls Ieframe!IEMoveFileEx.
@@ -241,7 +241,7 @@ func IEMoveFileEx(lpExistingFileName string, lpNewFileName string, dwFlags uint3
 // IERefreshElevationPolicy calls Ieframe!IERefreshElevationPolicy.
 func IERefreshElevationPolicy() error {
 	r1, _, _ := syscall.SyscallN(procIERefreshElevationPolicy.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IERegCreateKeyEx calls Ieframe!IERegCreateKeyEx.
@@ -249,7 +249,7 @@ func IERegCreateKeyEx(lpSubKey string, Reserved uint32, lpClass string, dwOption
 	_lpSubKey := win32.UTF16Ptr(lpSubKey)
 	_lpClass := win32.UTF16Ptr(lpClass)
 	r1, _, _ := syscall.SyscallN(procIERegCreateKeyEx.Addr(), uintptr(unsafe.Pointer(_lpSubKey)), uintptr(Reserved), uintptr(unsafe.Pointer(_lpClass)), uintptr(dwOptions), uintptr(samDesired), uintptr(unsafe.Pointer(lpSecurityAttributes)), uintptr(unsafe.Pointer(phkResult)), uintptr(unsafe.Pointer(lpdwDisposition)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IERegSetValueEx calls Ieframe!IERegSetValueEx.
@@ -261,7 +261,7 @@ func IERegSetValueEx(lpSubKey string, lpValueName string, Reserved uint32, dwTyp
 		_lpData = &lpData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procIERegSetValueEx.Addr(), uintptr(unsafe.Pointer(_lpSubKey)), uintptr(unsafe.Pointer(_lpValueName)), uintptr(Reserved), uintptr(dwType), uintptr(unsafe.Pointer(_lpData)), uintptr(len(lpData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IERemoveDirectory calls Ieframe!IERemoveDirectory.
@@ -275,7 +275,7 @@ func IERemoveDirectory(lpPathName string) bool {
 func IESaveFile(hState foundation.HANDLE, lpwstrSourceFile string) error {
 	_lpwstrSourceFile := win32.UTF16Ptr(lpwstrSourceFile)
 	r1, _, _ := syscall.SyscallN(procIESaveFile.Addr(), uintptr(hState), uintptr(unsafe.Pointer(_lpwstrSourceFile)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IESetProtectedModeCookie calls Ieframe!IESetProtectedModeCookie.
@@ -284,7 +284,7 @@ func IESetProtectedModeCookie(lpszURL string, lpszCookieName string, lpszCookieD
 	_lpszCookieName := win32.UTF16Ptr(lpszCookieName)
 	_lpszCookieData := win32.UTF16Ptr(lpszCookieData)
 	r1, _, _ := syscall.SyscallN(procIESetProtectedModeCookie.Addr(), uintptr(unsafe.Pointer(_lpszURL)), uintptr(unsafe.Pointer(_lpszCookieName)), uintptr(unsafe.Pointer(_lpszCookieData)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEShowOpenFileDialog calls Ieframe!IEShowOpenFileDialog.
@@ -293,7 +293,7 @@ func IEShowOpenFileDialog(hwnd foundation.HWND, lpwstrFileName foundation.PWSTR,
 	_lpwstrFilter := win32.UTF16Ptr(lpwstrFilter)
 	_lpwstrDefExt := win32.UTF16Ptr(lpwstrDefExt)
 	r1, _, _ := syscall.SyscallN(procIEShowOpenFileDialog.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(lpwstrFileName)), uintptr(cchMaxFileName), uintptr(unsafe.Pointer(_lpwstrInitialDir)), uintptr(unsafe.Pointer(_lpwstrFilter)), uintptr(unsafe.Pointer(_lpwstrDefExt)), uintptr(dwFilterIndex), uintptr(dwFlags), uintptr(unsafe.Pointer(phFile)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEShowSaveFileDialog calls Ieframe!IEShowSaveFileDialog.
@@ -303,7 +303,7 @@ func IEShowSaveFileDialog(hwnd foundation.HWND, lpwstrInitialFileName string, lp
 	_lpwstrFilter := win32.UTF16Ptr(lpwstrFilter)
 	_lpwstrDefExt := win32.UTF16Ptr(lpwstrDefExt)
 	r1, _, _ := syscall.SyscallN(procIEShowSaveFileDialog.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(_lpwstrInitialFileName)), uintptr(unsafe.Pointer(_lpwstrInitialDir)), uintptr(unsafe.Pointer(_lpwstrFilter)), uintptr(unsafe.Pointer(_lpwstrDefExt)), uintptr(dwFilterIndex), uintptr(dwFlags), uintptr(unsafe.Pointer(lppwstrDestinationFilePath)), uintptr(unsafe.Pointer(phState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IETrackingProtectionEnabled calls Ieframe!IETrackingProtectionEnabled.
@@ -315,26 +315,26 @@ func IETrackingProtectionEnabled() bool {
 // IdentifyMIMEType calls ImgUtil!IdentifyMIMEType.
 func IdentifyMIMEType(pbBytes *byte, nBytes uint32, pnFormat *uint32) error {
 	r1, _, _ := syscall.SyscallN(procIdentifyMIMEType.Addr(), uintptr(unsafe.Pointer(pbBytes)), uintptr(nBytes), uintptr(unsafe.Pointer(pnFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RatingAccessDeniedDialog calls MSRATING!RatingAccessDeniedDialog.
 func RatingAccessDeniedDialog(hDlg foundation.HWND, pszUsername foundation.PSTR, pszContentDescription foundation.PSTR, pRatingDetails unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procRatingAccessDeniedDialog.Addr(), uintptr(hDlg), uintptr(unsafe.Pointer(pszUsername)), uintptr(unsafe.Pointer(pszContentDescription)), uintptr(unsafe.Pointer(pRatingDetails)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RatingAccessDeniedDialog2 calls MSRATING!RatingAccessDeniedDialog2.
 func RatingAccessDeniedDialog2(hDlg foundation.HWND, pszUsername foundation.PSTR, pRatingDetails unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procRatingAccessDeniedDialog2.Addr(), uintptr(hDlg), uintptr(unsafe.Pointer(pszUsername)), uintptr(unsafe.Pointer(pRatingDetails)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RatingAccessDeniedDialog2W calls MSRATING!RatingAccessDeniedDialog2W.
 func RatingAccessDeniedDialog2W(hDlg foundation.HWND, pszUsername string, pRatingDetails unsafe.Pointer) error {
 	_pszUsername := win32.UTF16Ptr(pszUsername)
 	r1, _, _ := syscall.SyscallN(procRatingAccessDeniedDialog2W.Addr(), uintptr(hDlg), uintptr(unsafe.Pointer(_pszUsername)), uintptr(unsafe.Pointer(pRatingDetails)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RatingAccessDeniedDialogW calls MSRATING!RatingAccessDeniedDialogW.
@@ -342,7 +342,7 @@ func RatingAccessDeniedDialogW(hDlg foundation.HWND, pszUsername string, pszCont
 	_pszUsername := win32.UTF16Ptr(pszUsername)
 	_pszContentDescription := win32.UTF16Ptr(pszContentDescription)
 	r1, _, _ := syscall.SyscallN(procRatingAccessDeniedDialogW.Addr(), uintptr(hDlg), uintptr(unsafe.Pointer(_pszUsername)), uintptr(unsafe.Pointer(_pszContentDescription)), uintptr(unsafe.Pointer(pRatingDetails)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RatingAddToApprovedSites calls MSRATING!RatingAddToApprovedSites.
@@ -356,7 +356,7 @@ func RatingAddToApprovedSites(hDlg foundation.HWND, pbPasswordBlob []byte, lpszU
 	_fSitePage := win32.Bool32(fSitePage)
 	_fApprovedSitesEnforced := win32.Bool32(fApprovedSitesEnforced)
 	r1, _, _ := syscall.SyscallN(procRatingAddToApprovedSites.Addr(), uintptr(hDlg), uintptr(len(pbPasswordBlob)), uintptr(unsafe.Pointer(_pbPasswordBlob)), uintptr(unsafe.Pointer(_lpszUrl)), uintptr(_fAlwaysNever), uintptr(_fSitePage), uintptr(_fApprovedSitesEnforced))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RatingCheckUserAccess calls MSRATING!RatingCheckUserAccess.
@@ -366,7 +366,7 @@ func RatingCheckUserAccess(pszUsername foundation.PSTR, pszURL foundation.PSTR, 
 		_pData = &pData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procRatingCheckUserAccess.Addr(), uintptr(unsafe.Pointer(pszUsername)), uintptr(unsafe.Pointer(pszURL)), uintptr(unsafe.Pointer(pszRatingInfo)), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(unsafe.Pointer(ppRatingDetails)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RatingCheckUserAccessW calls MSRATING!RatingCheckUserAccessW.
@@ -379,26 +379,26 @@ func RatingCheckUserAccessW(pszUsername string, pszURL string, pszRatingInfo str
 		_pData = &pData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procRatingCheckUserAccessW.Addr(), uintptr(unsafe.Pointer(_pszUsername)), uintptr(unsafe.Pointer(_pszURL)), uintptr(unsafe.Pointer(_pszRatingInfo)), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(unsafe.Pointer(ppRatingDetails)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RatingClickedOnPRFInternal calls MSRATING!RatingClickedOnPRFInternal.
 func RatingClickedOnPRFInternal(hWndOwner foundation.HWND, param1 foundation.HINSTANCE, lpszFileName foundation.PSTR, nShow int32) error {
 	r1, _, _ := syscall.SyscallN(procRatingClickedOnPRFInternal.Addr(), uintptr(hWndOwner), uintptr(param1), uintptr(unsafe.Pointer(lpszFileName)), uintptr(nShow))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RatingClickedOnRATInternal calls MSRATING!RatingClickedOnRATInternal.
 func RatingClickedOnRATInternal(hWndOwner foundation.HWND, param1 foundation.HINSTANCE, lpszFileName foundation.PSTR, nShow int32) error {
 	r1, _, _ := syscall.SyscallN(procRatingClickedOnRATInternal.Addr(), uintptr(hWndOwner), uintptr(param1), uintptr(unsafe.Pointer(lpszFileName)), uintptr(nShow))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RatingEnable calls MSRATING!RatingEnable.
 func RatingEnable(hwndParent foundation.HWND, pszUsername foundation.PSTR, fEnable bool) error {
 	_fEnable := win32.Bool32(fEnable)
 	r1, _, _ := syscall.SyscallN(procRatingEnable.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(pszUsername)), uintptr(_fEnable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RatingEnableW calls MSRATING!RatingEnableW.
@@ -406,61 +406,61 @@ func RatingEnableW(hwndParent foundation.HWND, pszUsername string, fEnable bool)
 	_pszUsername := win32.UTF16Ptr(pszUsername)
 	_fEnable := win32.Bool32(fEnable)
 	r1, _, _ := syscall.SyscallN(procRatingEnableW.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(_pszUsername)), uintptr(_fEnable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RatingEnabledQuery calls MSRATING!RatingEnabledQuery.
 func RatingEnabledQuery() error {
 	r1, _, _ := syscall.SyscallN(procRatingEnabledQuery.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RatingFreeDetails calls MSRATING!RatingFreeDetails.
 func RatingFreeDetails(pRatingDetails unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procRatingFreeDetails.Addr(), uintptr(unsafe.Pointer(pRatingDetails)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RatingInit calls MSRATING!RatingInit.
 func RatingInit() error {
 	r1, _, _ := syscall.SyscallN(procRatingInit.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RatingObtainCancel calls MSRATING!RatingObtainCancel.
 func RatingObtainCancel(hRatingObtainQuery foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procRatingObtainCancel.Addr(), uintptr(hRatingObtainQuery))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RatingObtainQuery calls MSRATING!RatingObtainQuery.
 func RatingObtainQuery(pszTargetUrl foundation.PSTR, dwUserData uint32, fCallback uintptr, phRatingObtainQuery *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procRatingObtainQuery.Addr(), uintptr(unsafe.Pointer(pszTargetUrl)), uintptr(dwUserData), uintptr(fCallback), uintptr(unsafe.Pointer(phRatingObtainQuery)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RatingObtainQueryW calls MSRATING!RatingObtainQueryW.
 func RatingObtainQueryW(pszTargetUrl string, dwUserData uint32, fCallback uintptr, phRatingObtainQuery *foundation.HANDLE) error {
 	_pszTargetUrl := win32.UTF16Ptr(pszTargetUrl)
 	r1, _, _ := syscall.SyscallN(procRatingObtainQueryW.Addr(), uintptr(unsafe.Pointer(_pszTargetUrl)), uintptr(dwUserData), uintptr(fCallback), uintptr(unsafe.Pointer(phRatingObtainQuery)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RatingSetupUI calls MSRATING!RatingSetupUI.
 func RatingSetupUI(hDlg foundation.HWND, pszUsername foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(procRatingSetupUI.Addr(), uintptr(hDlg), uintptr(unsafe.Pointer(pszUsername)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RatingSetupUIW calls MSRATING!RatingSetupUIW.
 func RatingSetupUIW(hDlg foundation.HWND, pszUsername string) error {
 	_pszUsername := win32.UTF16Ptr(pszUsername)
 	r1, _, _ := syscall.SyscallN(procRatingSetupUIW.Addr(), uintptr(hDlg), uintptr(unsafe.Pointer(_pszUsername)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SniffStream calls ImgUtil!SniffStream.
 func SniffStream(pInStream *systemcom.IStream, pnFormat *uint32, ppOutStream **systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(procSniffStream.Addr(), uintptr(unsafe.Pointer(pInStream)), uintptr(unsafe.Pointer(pnFormat)), uintptr(unsafe.Pointer(ppOutStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

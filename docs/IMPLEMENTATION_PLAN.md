@@ -375,7 +375,7 @@ The clean 1:1 replacement for `bindings/runtime/purego`. Pure `syscall` +
   registration (mirrors the purego `_loadLibrary`+`RegisterLibFunc` template
   shape). Calls via `syscall.SyscallN(proc.Addr(), args…)`.
 - **Error surfacing** — `SetLastError` functions return `windows.Errno`; a helper
-  `Win32Error(name, errno)` wraps context. `HRESULT` returns → `HRESULTError`
+  `Win32Error(name, errno)` wraps context. `HRESULT` returns → `ErrIfFailed`
   (the failable-call pattern maps exactly onto the macOS `NSError` handling).
   Distinct error domains: Win32 / HRESULT / NTSTATUS (as gowin32 does).
 - **Strings** — `UTF16PtrFromString` / `UTF16ToString` helpers (the `GoString`/

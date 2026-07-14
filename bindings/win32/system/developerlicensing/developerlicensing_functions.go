@@ -26,19 +26,19 @@ var (
 // https://learn.microsoft.com/windows/win32/api/wsdevlicensing/nf-wsdevlicensing-acquiredeveloperlicense
 func AcquireDeveloperLicense(hwndParent foundation.HWND, pExpiration *foundation.FILETIME) error {
 	r1, _, _ := syscall.SyscallN(procAcquireDeveloperLicense.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(pExpiration)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CheckDeveloperLicense calls WSClient!CheckDeveloperLicense.
 // https://learn.microsoft.com/windows/win32/api/wsdevlicensing/nf-wsdevlicensing-checkdeveloperlicense
 func CheckDeveloperLicense(pExpiration *foundation.FILETIME) error {
 	r1, _, _ := syscall.SyscallN(procCheckDeveloperLicense.Addr(), uintptr(unsafe.Pointer(pExpiration)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveDeveloperLicense calls WSClient!RemoveDeveloperLicense.
 // https://learn.microsoft.com/windows/win32/api/wsdevlicensing/nf-wsdevlicensing-removedeveloperlicense
 func RemoveDeveloperLicense(hwndParent foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(procRemoveDeveloperLicense.Addr(), uintptr(hwndParent))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

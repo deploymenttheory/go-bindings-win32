@@ -168,7 +168,7 @@ func CoGetInstanceFromFile(pServerInfo *systemcom.COSERVERINFO, pClsid *win32.GU
 		_pResults = &pResults[0]
 	}
 	r1, _, _ := syscall.SyscallN(procCoGetInstanceFromFile.Addr(), uintptr(unsafe.Pointer(pServerInfo)), uintptr(unsafe.Pointer(pClsid)), uintptr(unsafe.Pointer(punkOuter)), uintptr(dwClsCtx), uintptr(grfMode), uintptr(unsafe.Pointer(_pwszName)), uintptr(len(pResults)), uintptr(unsafe.Pointer(_pResults)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoGetInstanceFromIStorage calls OLE32!CoGetInstanceFromIStorage.
@@ -180,7 +180,7 @@ func CoGetInstanceFromIStorage(pServerInfo *systemcom.COSERVERINFO, pClsid *win3
 		_pResults = &pResults[0]
 	}
 	r1, _, _ := syscall.SyscallN(procCoGetInstanceFromIStorage.Addr(), uintptr(unsafe.Pointer(pServerInfo)), uintptr(unsafe.Pointer(pClsid)), uintptr(unsafe.Pointer(punkOuter)), uintptr(dwClsCtx), uintptr(unsafe.Pointer(pstg)), uintptr(len(pResults)), uintptr(unsafe.Pointer(_pResults)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoGetInterfaceAndReleaseStream calls OLE32!CoGetInterfaceAndReleaseStream.
@@ -188,7 +188,7 @@ func CoGetInstanceFromIStorage(pServerInfo *systemcom.COSERVERINFO, pClsid *win3
 // Minimum OS: windows5.0.
 func CoGetInterfaceAndReleaseStream(pStm *systemcom.IStream, iid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCoGetInterfaceAndReleaseStream.Addr(), uintptr(unsafe.Pointer(pStm)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateILockBytesOnHGlobal calls OLE32!CreateILockBytesOnHGlobal.
@@ -197,7 +197,7 @@ func CoGetInterfaceAndReleaseStream(pStm *systemcom.IStream, iid *win32.GUID, pp
 func CreateILockBytesOnHGlobal(hGlobal foundation.HGLOBAL, fDeleteOnRelease bool, pplkbyt **ILockBytes) error {
 	_fDeleteOnRelease := win32.Bool32(fDeleteOnRelease)
 	r1, _, _ := syscall.SyscallN(procCreateILockBytesOnHGlobal.Addr(), uintptr(hGlobal), uintptr(_fDeleteOnRelease), uintptr(unsafe.Pointer(pplkbyt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateStreamOnHGlobal calls OLE32!CreateStreamOnHGlobal.
@@ -206,7 +206,7 @@ func CreateILockBytesOnHGlobal(hGlobal foundation.HGLOBAL, fDeleteOnRelease bool
 func CreateStreamOnHGlobal(hGlobal foundation.HGLOBAL, fDeleteOnRelease bool, ppstm **systemcom.IStream) error {
 	_fDeleteOnRelease := win32.Bool32(fDeleteOnRelease)
 	r1, _, _ := syscall.SyscallN(procCreateStreamOnHGlobal.Addr(), uintptr(hGlobal), uintptr(_fDeleteOnRelease), uintptr(unsafe.Pointer(ppstm)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FmtIdToPropStgName calls OLE32!FmtIdToPropStgName.
@@ -214,7 +214,7 @@ func CreateStreamOnHGlobal(hGlobal foundation.HGLOBAL, fDeleteOnRelease bool, pp
 // Minimum OS: windows5.0.
 func FmtIdToPropStgName(pfmtid *win32.GUID, oszName foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procFmtIdToPropStgName.Addr(), uintptr(unsafe.Pointer(pfmtid)), uintptr(unsafe.Pointer(oszName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FreePropVariantArray calls OLE32!FreePropVariantArray.
@@ -226,7 +226,7 @@ func FreePropVariantArray(rgvars []PROPVARIANT) error {
 		_rgvars = &rgvars[0]
 	}
 	r1, _, _ := syscall.SyscallN(procFreePropVariantArray.Addr(), uintptr(len(rgvars)), uintptr(unsafe.Pointer(_rgvars)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetConvertStg calls OLE32!GetConvertStg.
@@ -234,7 +234,7 @@ func FreePropVariantArray(rgvars []PROPVARIANT) error {
 // Minimum OS: windows5.0.
 func GetConvertStg(pStg *IStorage) error {
 	r1, _, _ := syscall.SyscallN(procGetConvertStg.Addr(), uintptr(unsafe.Pointer(pStg)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetHGlobalFromILockBytes calls OLE32!GetHGlobalFromILockBytes.
@@ -242,7 +242,7 @@ func GetConvertStg(pStg *IStorage) error {
 // Minimum OS: windows5.0.
 func GetHGlobalFromILockBytes(plkbyt *ILockBytes, phglobal *foundation.HGLOBAL) error {
 	r1, _, _ := syscall.SyscallN(procGetHGlobalFromILockBytes.Addr(), uintptr(unsafe.Pointer(plkbyt)), uintptr(unsafe.Pointer(phglobal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetHGlobalFromStream calls OLE32!GetHGlobalFromStream.
@@ -250,7 +250,7 @@ func GetHGlobalFromILockBytes(plkbyt *ILockBytes, phglobal *foundation.HGLOBAL) 
 // Minimum OS: windows5.0.
 func GetHGlobalFromStream(pstm *systemcom.IStream, phglobal *foundation.HGLOBAL) error {
 	r1, _, _ := syscall.SyscallN(procGetHGlobalFromStream.Addr(), uintptr(unsafe.Pointer(pstm)), uintptr(unsafe.Pointer(phglobal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitPropVariantFromBooleanVector calls PROPSYS!InitPropVariantFromBooleanVector.
@@ -262,7 +262,7 @@ func InitPropVariantFromBooleanVector(prgf []foundation.BOOL, ppropvar *PROPVARI
 		_prgf = &prgf[0]
 	}
 	r1, _, _ := syscall.SyscallN(procInitPropVariantFromBooleanVector.Addr(), uintptr(unsafe.Pointer(_prgf)), uintptr(len(prgf)), uintptr(unsafe.Pointer(ppropvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitPropVariantFromBuffer calls PROPSYS!InitPropVariantFromBuffer.
@@ -274,7 +274,7 @@ func InitPropVariantFromBuffer(pv []byte, ppropvar *PROPVARIANT) error {
 		_pv = &pv[0]
 	}
 	r1, _, _ := syscall.SyscallN(procInitPropVariantFromBuffer.Addr(), uintptr(unsafe.Pointer(_pv)), uintptr(len(pv)), uintptr(unsafe.Pointer(ppropvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitPropVariantFromCLSID calls PROPSYS!InitPropVariantFromCLSID.
@@ -282,7 +282,7 @@ func InitPropVariantFromBuffer(pv []byte, ppropvar *PROPVARIANT) error {
 // Minimum OS: windows5.1.2600.
 func InitPropVariantFromCLSID(clsid *win32.GUID, ppropvar *PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procInitPropVariantFromCLSID.Addr(), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(ppropvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitPropVariantFromDoubleVector calls PROPSYS!InitPropVariantFromDoubleVector.
@@ -294,7 +294,7 @@ func InitPropVariantFromDoubleVector(prgn []float64, ppropvar *PROPVARIANT) erro
 		_prgn = &prgn[0]
 	}
 	r1, _, _ := syscall.SyscallN(procInitPropVariantFromDoubleVector.Addr(), uintptr(unsafe.Pointer(_prgn)), uintptr(len(prgn)), uintptr(unsafe.Pointer(ppropvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitPropVariantFromFileTime calls PROPSYS!InitPropVariantFromFileTime.
@@ -302,7 +302,7 @@ func InitPropVariantFromDoubleVector(prgn []float64, ppropvar *PROPVARIANT) erro
 // Minimum OS: windows5.1.2600.
 func InitPropVariantFromFileTime(pftIn *foundation.FILETIME, ppropvar *PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procInitPropVariantFromFileTime.Addr(), uintptr(unsafe.Pointer(pftIn)), uintptr(unsafe.Pointer(ppropvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitPropVariantFromFileTimeVector calls PROPSYS!InitPropVariantFromFileTimeVector.
@@ -314,7 +314,7 @@ func InitPropVariantFromFileTimeVector(prgft []foundation.FILETIME, ppropvar *PR
 		_prgft = &prgft[0]
 	}
 	r1, _, _ := syscall.SyscallN(procInitPropVariantFromFileTimeVector.Addr(), uintptr(unsafe.Pointer(_prgft)), uintptr(len(prgft)), uintptr(unsafe.Pointer(ppropvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitPropVariantFromGUIDAsString calls PROPSYS!InitPropVariantFromGUIDAsString.
@@ -322,7 +322,7 @@ func InitPropVariantFromFileTimeVector(prgft []foundation.FILETIME, ppropvar *PR
 // Minimum OS: windows5.1.2600.
 func InitPropVariantFromGUIDAsString(guid *win32.GUID, ppropvar *PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procInitPropVariantFromGUIDAsString.Addr(), uintptr(unsafe.Pointer(guid)), uintptr(unsafe.Pointer(ppropvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitPropVariantFromInt16Vector calls PROPSYS!InitPropVariantFromInt16Vector.
@@ -334,7 +334,7 @@ func InitPropVariantFromInt16Vector(prgn []int16, ppropvar *PROPVARIANT) error {
 		_prgn = &prgn[0]
 	}
 	r1, _, _ := syscall.SyscallN(procInitPropVariantFromInt16Vector.Addr(), uintptr(unsafe.Pointer(_prgn)), uintptr(len(prgn)), uintptr(unsafe.Pointer(ppropvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitPropVariantFromInt32Vector calls PROPSYS!InitPropVariantFromInt32Vector.
@@ -346,7 +346,7 @@ func InitPropVariantFromInt32Vector(prgn []int32, ppropvar *PROPVARIANT) error {
 		_prgn = &prgn[0]
 	}
 	r1, _, _ := syscall.SyscallN(procInitPropVariantFromInt32Vector.Addr(), uintptr(unsafe.Pointer(_prgn)), uintptr(len(prgn)), uintptr(unsafe.Pointer(ppropvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitPropVariantFromInt64Vector calls PROPSYS!InitPropVariantFromInt64Vector.
@@ -358,7 +358,7 @@ func InitPropVariantFromInt64Vector(prgn []int64, ppropvar *PROPVARIANT) error {
 		_prgn = &prgn[0]
 	}
 	r1, _, _ := syscall.SyscallN(procInitPropVariantFromInt64Vector.Addr(), uintptr(unsafe.Pointer(_prgn)), uintptr(len(prgn)), uintptr(unsafe.Pointer(ppropvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitPropVariantFromPropVariantVectorElem calls PROPSYS!InitPropVariantFromPropVariantVectorElem.
@@ -366,7 +366,7 @@ func InitPropVariantFromInt64Vector(prgn []int64, ppropvar *PROPVARIANT) error {
 // Minimum OS: windows5.1.2600.
 func InitPropVariantFromPropVariantVectorElem(propvarIn *PROPVARIANT, iElem uint32, ppropvar *PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procInitPropVariantFromPropVariantVectorElem.Addr(), uintptr(unsafe.Pointer(propvarIn)), uintptr(iElem), uintptr(unsafe.Pointer(ppropvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitPropVariantFromResource calls PROPSYS!InitPropVariantFromResource.
@@ -374,7 +374,7 @@ func InitPropVariantFromPropVariantVectorElem(propvarIn *PROPVARIANT, iElem uint
 // Minimum OS: windows5.1.2600.
 func InitPropVariantFromResource(hinst foundation.HINSTANCE, id uint32, ppropvar *PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procInitPropVariantFromResource.Addr(), uintptr(hinst), uintptr(id), uintptr(unsafe.Pointer(ppropvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitPropVariantFromStringAsVector calls PROPSYS!InitPropVariantFromStringAsVector.
@@ -383,7 +383,7 @@ func InitPropVariantFromResource(hinst foundation.HINSTANCE, id uint32, ppropvar
 func InitPropVariantFromStringAsVector(psz string, ppropvar *PROPVARIANT) error {
 	_psz := win32.UTF16Ptr(psz)
 	r1, _, _ := syscall.SyscallN(procInitPropVariantFromStringAsVector.Addr(), uintptr(unsafe.Pointer(_psz)), uintptr(unsafe.Pointer(ppropvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitPropVariantFromStringVector calls PROPSYS!InitPropVariantFromStringVector.
@@ -395,7 +395,7 @@ func InitPropVariantFromStringVector(prgsz []foundation.PWSTR, ppropvar *PROPVAR
 		_prgsz = &prgsz[0]
 	}
 	r1, _, _ := syscall.SyscallN(procInitPropVariantFromStringVector.Addr(), uintptr(unsafe.Pointer(_prgsz)), uintptr(len(prgsz)), uintptr(unsafe.Pointer(ppropvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitPropVariantFromUInt16Vector calls PROPSYS!InitPropVariantFromUInt16Vector.
@@ -407,7 +407,7 @@ func InitPropVariantFromUInt16Vector(prgn []uint16, ppropvar *PROPVARIANT) error
 		_prgn = &prgn[0]
 	}
 	r1, _, _ := syscall.SyscallN(procInitPropVariantFromUInt16Vector.Addr(), uintptr(unsafe.Pointer(_prgn)), uintptr(len(prgn)), uintptr(unsafe.Pointer(ppropvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitPropVariantFromUInt32Vector calls PROPSYS!InitPropVariantFromUInt32Vector.
@@ -419,7 +419,7 @@ func InitPropVariantFromUInt32Vector(prgn []uint32, ppropvar *PROPVARIANT) error
 		_prgn = &prgn[0]
 	}
 	r1, _, _ := syscall.SyscallN(procInitPropVariantFromUInt32Vector.Addr(), uintptr(unsafe.Pointer(_prgn)), uintptr(len(prgn)), uintptr(unsafe.Pointer(ppropvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitPropVariantFromUInt64Vector calls PROPSYS!InitPropVariantFromUInt64Vector.
@@ -431,7 +431,7 @@ func InitPropVariantFromUInt64Vector(prgn []uint64, ppropvar *PROPVARIANT) error
 		_prgn = &prgn[0]
 	}
 	r1, _, _ := syscall.SyscallN(procInitPropVariantFromUInt64Vector.Addr(), uintptr(unsafe.Pointer(_prgn)), uintptr(len(prgn)), uintptr(unsafe.Pointer(ppropvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitPropVariantVectorFromPropVariant calls PROPSYS!InitPropVariantVectorFromPropVariant.
@@ -439,7 +439,7 @@ func InitPropVariantFromUInt64Vector(prgn []uint64, ppropvar *PROPVARIANT) error
 // Minimum OS: windows5.1.2600.
 func InitPropVariantVectorFromPropVariant(propvarSingle *PROPVARIANT, ppropvarVector *PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procInitPropVariantVectorFromPropVariant.Addr(), uintptr(unsafe.Pointer(propvarSingle)), uintptr(unsafe.Pointer(ppropvarVector)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OleConvertIStorageToOLESTREAM calls ole32!OleConvertIStorageToOLESTREAM.
@@ -447,7 +447,7 @@ func InitPropVariantVectorFromPropVariant(propvarSingle *PROPVARIANT, ppropvarVe
 // Minimum OS: windows5.0.
 func OleConvertIStorageToOLESTREAM(pstg *IStorage, lpolestream *OLESTREAM) error {
 	r1, _, _ := syscall.SyscallN(procOleConvertIStorageToOLESTREAM.Addr(), uintptr(unsafe.Pointer(pstg)), uintptr(unsafe.Pointer(lpolestream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OleConvertIStorageToOLESTREAMEx calls ole32!OleConvertIStorageToOLESTREAMEx.
@@ -455,7 +455,7 @@ func OleConvertIStorageToOLESTREAM(pstg *IStorage, lpolestream *OLESTREAM) error
 // Minimum OS: windows5.0.
 func OleConvertIStorageToOLESTREAMEx(pstg *IStorage, cfFormat uint16, lWidth int32, lHeight int32, dwSize uint32, pmedium *systemcom.STGMEDIUM, polestm *OLESTREAM) error {
 	r1, _, _ := syscall.SyscallN(procOleConvertIStorageToOLESTREAMEx.Addr(), uintptr(unsafe.Pointer(pstg)), uintptr(cfFormat), uintptr(lWidth), uintptr(lHeight), uintptr(dwSize), uintptr(unsafe.Pointer(pmedium)), uintptr(unsafe.Pointer(polestm)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OleConvertOLESTREAMToIStorage calls ole32!OleConvertOLESTREAMToIStorage.
@@ -463,7 +463,7 @@ func OleConvertIStorageToOLESTREAMEx(pstg *IStorage, cfFormat uint16, lWidth int
 // Minimum OS: windows5.0.
 func OleConvertOLESTREAMToIStorage(lpolestream *OLESTREAM, pstg *IStorage, ptd *systemcom.DVTARGETDEVICE) error {
 	r1, _, _ := syscall.SyscallN(procOleConvertOLESTREAMToIStorage.Addr(), uintptr(unsafe.Pointer(lpolestream)), uintptr(unsafe.Pointer(pstg)), uintptr(unsafe.Pointer(ptd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OleConvertOLESTREAMToIStorageEx calls ole32!OleConvertOLESTREAMToIStorageEx.
@@ -471,7 +471,7 @@ func OleConvertOLESTREAMToIStorage(lpolestream *OLESTREAM, pstg *IStorage, ptd *
 // Minimum OS: windows5.0.
 func OleConvertOLESTREAMToIStorageEx(polestm *OLESTREAM, pstg *IStorage, pcfFormat *uint16, plwWidth *int32, plHeight *int32, pdwSize *uint32, pmedium *systemcom.STGMEDIUM) error {
 	r1, _, _ := syscall.SyscallN(procOleConvertOLESTREAMToIStorageEx.Addr(), uintptr(unsafe.Pointer(polestm)), uintptr(unsafe.Pointer(pstg)), uintptr(unsafe.Pointer(pcfFormat)), uintptr(unsafe.Pointer(plwWidth)), uintptr(unsafe.Pointer(plHeight)), uintptr(unsafe.Pointer(pdwSize)), uintptr(unsafe.Pointer(pmedium)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropStgNameToFmtId calls OLE32!PropStgNameToFmtId.
@@ -480,7 +480,7 @@ func OleConvertOLESTREAMToIStorageEx(polestm *OLESTREAM, pstg *IStorage, pcfForm
 func PropStgNameToFmtId(oszName string, pfmtid *win32.GUID) error {
 	_oszName := win32.UTF16Ptr(oszName)
 	r1, _, _ := syscall.SyscallN(procPropStgNameToFmtId.Addr(), uintptr(unsafe.Pointer(_oszName)), uintptr(unsafe.Pointer(pfmtid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantChangeType calls PROPSYS!PropVariantChangeType.
@@ -488,7 +488,7 @@ func PropStgNameToFmtId(oszName string, pfmtid *win32.GUID) error {
 // Minimum OS: windows5.1.2600.
 func PropVariantChangeType(ppropvarDest *PROPVARIANT, propvarSrc *PROPVARIANT, flags PROPVAR_CHANGE_FLAGS, vt systemvariant.VARENUM) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantChangeType.Addr(), uintptr(unsafe.Pointer(ppropvarDest)), uintptr(unsafe.Pointer(propvarSrc)), uintptr(flags), uintptr(vt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantClear calls OLE32!PropVariantClear.
@@ -496,7 +496,7 @@ func PropVariantChangeType(ppropvarDest *PROPVARIANT, propvarSrc *PROPVARIANT, f
 // Minimum OS: windows5.0.
 func PropVariantClear(pvar *PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantClear.Addr(), uintptr(unsafe.Pointer(pvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantCompareEx calls PROPSYS!PropVariantCompareEx.
@@ -512,7 +512,7 @@ func PropVariantCompareEx(propvar1 *PROPVARIANT, propvar2 *PROPVARIANT, unit PRO
 // Minimum OS: windows5.0.
 func PropVariantCopy(pvarDest *PROPVARIANT, pvarSrc *PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantCopy.Addr(), uintptr(unsafe.Pointer(pvarDest)), uintptr(unsafe.Pointer(pvarSrc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantGetBooleanElem calls PROPSYS!PropVariantGetBooleanElem.
@@ -520,7 +520,7 @@ func PropVariantCopy(pvarDest *PROPVARIANT, pvarSrc *PROPVARIANT) error {
 // Minimum OS: windows5.1.2600.
 func PropVariantGetBooleanElem(propvar *PROPVARIANT, iElem uint32, pfVal *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantGetBooleanElem.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(iElem), uintptr(unsafe.Pointer(pfVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantGetDoubleElem calls PROPSYS!PropVariantGetDoubleElem.
@@ -528,7 +528,7 @@ func PropVariantGetBooleanElem(propvar *PROPVARIANT, iElem uint32, pfVal *founda
 // Minimum OS: windows5.1.2600.
 func PropVariantGetDoubleElem(propvar *PROPVARIANT, iElem uint32, pnVal *float64) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantGetDoubleElem.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(iElem), uintptr(unsafe.Pointer(pnVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantGetElementCount calls PROPSYS!PropVariantGetElementCount.
@@ -544,7 +544,7 @@ func PropVariantGetElementCount(propvar *PROPVARIANT) uint32 {
 // Minimum OS: windows5.1.2600.
 func PropVariantGetFileTimeElem(propvar *PROPVARIANT, iElem uint32, pftVal *foundation.FILETIME) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantGetFileTimeElem.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(iElem), uintptr(unsafe.Pointer(pftVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantGetInt16Elem calls PROPSYS!PropVariantGetInt16Elem.
@@ -552,7 +552,7 @@ func PropVariantGetFileTimeElem(propvar *PROPVARIANT, iElem uint32, pftVal *foun
 // Minimum OS: windows5.1.2600.
 func PropVariantGetInt16Elem(propvar *PROPVARIANT, iElem uint32, pnVal *int16) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantGetInt16Elem.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(iElem), uintptr(unsafe.Pointer(pnVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantGetInt32Elem calls PROPSYS!PropVariantGetInt32Elem.
@@ -560,7 +560,7 @@ func PropVariantGetInt16Elem(propvar *PROPVARIANT, iElem uint32, pnVal *int16) e
 // Minimum OS: windows5.1.2600.
 func PropVariantGetInt32Elem(propvar *PROPVARIANT, iElem uint32, pnVal *int32) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantGetInt32Elem.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(iElem), uintptr(unsafe.Pointer(pnVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantGetInt64Elem calls PROPSYS!PropVariantGetInt64Elem.
@@ -568,7 +568,7 @@ func PropVariantGetInt32Elem(propvar *PROPVARIANT, iElem uint32, pnVal *int32) e
 // Minimum OS: windows5.1.2600.
 func PropVariantGetInt64Elem(propvar *PROPVARIANT, iElem uint32, pnVal *int64) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantGetInt64Elem.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(iElem), uintptr(unsafe.Pointer(pnVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantGetStringElem calls PROPSYS!PropVariantGetStringElem.
@@ -576,7 +576,7 @@ func PropVariantGetInt64Elem(propvar *PROPVARIANT, iElem uint32, pnVal *int64) e
 // Minimum OS: windows5.1.2600.
 func PropVariantGetStringElem(propvar *PROPVARIANT, iElem uint32, ppszVal *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantGetStringElem.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(iElem), uintptr(unsafe.Pointer(ppszVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantGetUInt16Elem calls PROPSYS!PropVariantGetUInt16Elem.
@@ -584,7 +584,7 @@ func PropVariantGetStringElem(propvar *PROPVARIANT, iElem uint32, ppszVal *found
 // Minimum OS: windows5.1.2600.
 func PropVariantGetUInt16Elem(propvar *PROPVARIANT, iElem uint32, pnVal *uint16) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantGetUInt16Elem.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(iElem), uintptr(unsafe.Pointer(pnVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantGetUInt32Elem calls PROPSYS!PropVariantGetUInt32Elem.
@@ -592,7 +592,7 @@ func PropVariantGetUInt16Elem(propvar *PROPVARIANT, iElem uint32, pnVal *uint16)
 // Minimum OS: windows5.1.2600.
 func PropVariantGetUInt32Elem(propvar *PROPVARIANT, iElem uint32, pnVal *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantGetUInt32Elem.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(iElem), uintptr(unsafe.Pointer(pnVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantGetUInt64Elem calls PROPSYS!PropVariantGetUInt64Elem.
@@ -600,7 +600,7 @@ func PropVariantGetUInt32Elem(propvar *PROPVARIANT, iElem uint32, pnVal *uint32)
 // Minimum OS: windows5.1.2600.
 func PropVariantGetUInt64Elem(propvar *PROPVARIANT, iElem uint32, pnVal *uint64) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantGetUInt64Elem.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(iElem), uintptr(unsafe.Pointer(pnVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantToBSTR calls PROPSYS!PropVariantToBSTR.
@@ -608,7 +608,7 @@ func PropVariantGetUInt64Elem(propvar *PROPVARIANT, iElem uint32, pnVal *uint64)
 // Minimum OS: windows5.1.2600.
 func PropVariantToBSTR(propvar *PROPVARIANT, pbstrOut *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToBSTR.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(pbstrOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantToBoolean calls PROPSYS!PropVariantToBoolean.
@@ -616,7 +616,7 @@ func PropVariantToBSTR(propvar *PROPVARIANT, pbstrOut *foundation.BSTR) error {
 // Minimum OS: windows5.1.2600.
 func PropVariantToBoolean(propvarIn *PROPVARIANT, pfRet *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToBoolean.Addr(), uintptr(unsafe.Pointer(propvarIn)), uintptr(unsafe.Pointer(pfRet)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantToBooleanVector calls PROPSYS!PropVariantToBooleanVector.
@@ -628,7 +628,7 @@ func PropVariantToBooleanVector(propvar *PROPVARIANT, prgf []foundation.BOOL, pc
 		_prgf = &prgf[0]
 	}
 	r1, _, _ := syscall.SyscallN(procPropVariantToBooleanVector.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(_prgf)), uintptr(len(prgf)), uintptr(unsafe.Pointer(pcElem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantToBooleanVectorAlloc calls PROPSYS!PropVariantToBooleanVectorAlloc.
@@ -636,7 +636,7 @@ func PropVariantToBooleanVector(propvar *PROPVARIANT, prgf []foundation.BOOL, pc
 // Minimum OS: windows5.1.2600.
 func PropVariantToBooleanVectorAlloc(propvar *PROPVARIANT, pprgf **foundation.BOOL, pcElem *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToBooleanVectorAlloc.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(pprgf)), uintptr(unsafe.Pointer(pcElem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantToBooleanWithDefault calls PROPSYS!PropVariantToBooleanWithDefault.
@@ -657,7 +657,7 @@ func PropVariantToBuffer(propvar *PROPVARIANT, pv []byte) error {
 		_pv = &pv[0]
 	}
 	r1, _, _ := syscall.SyscallN(procPropVariantToBuffer.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(_pv)), uintptr(len(pv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantToDouble calls PROPSYS!PropVariantToDouble.
@@ -665,7 +665,7 @@ func PropVariantToBuffer(propvar *PROPVARIANT, pv []byte) error {
 // Minimum OS: windows5.1.2600.
 func PropVariantToDouble(propvarIn *PROPVARIANT, pdblRet *float64) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToDouble.Addr(), uintptr(unsafe.Pointer(propvarIn)), uintptr(unsafe.Pointer(pdblRet)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantToDoubleVector calls PROPSYS!PropVariantToDoubleVector.
@@ -677,7 +677,7 @@ func PropVariantToDoubleVector(propvar *PROPVARIANT, prgn []float64, pcElem *uin
 		_prgn = &prgn[0]
 	}
 	r1, _, _ := syscall.SyscallN(procPropVariantToDoubleVector.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(_prgn)), uintptr(len(prgn)), uintptr(unsafe.Pointer(pcElem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantToDoubleVectorAlloc calls PROPSYS!PropVariantToDoubleVectorAlloc.
@@ -685,7 +685,7 @@ func PropVariantToDoubleVector(propvar *PROPVARIANT, prgn []float64, pcElem *uin
 // Minimum OS: windows5.1.2600.
 func PropVariantToDoubleVectorAlloc(propvar *PROPVARIANT, pprgn **float64, pcElem *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToDoubleVectorAlloc.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(pprgn)), uintptr(unsafe.Pointer(pcElem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantToFileTime calls PROPSYS!PropVariantToFileTime.
@@ -693,7 +693,7 @@ func PropVariantToDoubleVectorAlloc(propvar *PROPVARIANT, pprgn **float64, pcEle
 // Minimum OS: windows5.1.2600.
 func PropVariantToFileTime(propvar *PROPVARIANT, pstfOut systemvariant.PSTIME_FLAGS, pftOut *foundation.FILETIME) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToFileTime.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(pstfOut), uintptr(unsafe.Pointer(pftOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantToFileTimeVector calls PROPSYS!PropVariantToFileTimeVector.
@@ -705,7 +705,7 @@ func PropVariantToFileTimeVector(propvar *PROPVARIANT, prgft []foundation.FILETI
 		_prgft = &prgft[0]
 	}
 	r1, _, _ := syscall.SyscallN(procPropVariantToFileTimeVector.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(_prgft)), uintptr(len(prgft)), uintptr(unsafe.Pointer(pcElem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantToFileTimeVectorAlloc calls PROPSYS!PropVariantToFileTimeVectorAlloc.
@@ -713,7 +713,7 @@ func PropVariantToFileTimeVector(propvar *PROPVARIANT, prgft []foundation.FILETI
 // Minimum OS: windows5.1.2600.
 func PropVariantToFileTimeVectorAlloc(propvar *PROPVARIANT, pprgft **foundation.FILETIME, pcElem *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToFileTimeVectorAlloc.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(pprgft)), uintptr(unsafe.Pointer(pcElem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantToGUID calls PROPSYS!PropVariantToGUID.
@@ -721,7 +721,7 @@ func PropVariantToFileTimeVectorAlloc(propvar *PROPVARIANT, pprgft **foundation.
 // Minimum OS: windows5.1.2600.
 func PropVariantToGUID(propvar *PROPVARIANT, pguid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToGUID.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(pguid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantToInt16 calls PROPSYS!PropVariantToInt16.
@@ -729,7 +729,7 @@ func PropVariantToGUID(propvar *PROPVARIANT, pguid *win32.GUID) error {
 // Minimum OS: windows5.1.2600.
 func PropVariantToInt16(propvarIn *PROPVARIANT, piRet *int16) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToInt16.Addr(), uintptr(unsafe.Pointer(propvarIn)), uintptr(unsafe.Pointer(piRet)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantToInt16Vector calls PROPSYS!PropVariantToInt16Vector.
@@ -741,7 +741,7 @@ func PropVariantToInt16Vector(propvar *PROPVARIANT, prgn []int16, pcElem *uint32
 		_prgn = &prgn[0]
 	}
 	r1, _, _ := syscall.SyscallN(procPropVariantToInt16Vector.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(_prgn)), uintptr(len(prgn)), uintptr(unsafe.Pointer(pcElem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantToInt16VectorAlloc calls PROPSYS!PropVariantToInt16VectorAlloc.
@@ -749,7 +749,7 @@ func PropVariantToInt16Vector(propvar *PROPVARIANT, prgn []int16, pcElem *uint32
 // Minimum OS: windows5.1.2600.
 func PropVariantToInt16VectorAlloc(propvar *PROPVARIANT, pprgn **int16, pcElem *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToInt16VectorAlloc.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(pprgn)), uintptr(unsafe.Pointer(pcElem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantToInt16WithDefault calls PROPSYS!PropVariantToInt16WithDefault.
@@ -765,7 +765,7 @@ func PropVariantToInt16WithDefault(propvarIn *PROPVARIANT, iDefault int16) int16
 // Minimum OS: windows5.1.2600.
 func PropVariantToInt32(propvarIn *PROPVARIANT, plRet *int32) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToInt32.Addr(), uintptr(unsafe.Pointer(propvarIn)), uintptr(unsafe.Pointer(plRet)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantToInt32Vector calls PROPSYS!PropVariantToInt32Vector.
@@ -777,7 +777,7 @@ func PropVariantToInt32Vector(propvar *PROPVARIANT, prgn []int32, pcElem *uint32
 		_prgn = &prgn[0]
 	}
 	r1, _, _ := syscall.SyscallN(procPropVariantToInt32Vector.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(_prgn)), uintptr(len(prgn)), uintptr(unsafe.Pointer(pcElem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantToInt32VectorAlloc calls PROPSYS!PropVariantToInt32VectorAlloc.
@@ -785,7 +785,7 @@ func PropVariantToInt32Vector(propvar *PROPVARIANT, prgn []int32, pcElem *uint32
 // Minimum OS: windows5.1.2600.
 func PropVariantToInt32VectorAlloc(propvar *PROPVARIANT, pprgn **int32, pcElem *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToInt32VectorAlloc.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(pprgn)), uintptr(unsafe.Pointer(pcElem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantToInt32WithDefault calls PROPSYS!PropVariantToInt32WithDefault.
@@ -801,7 +801,7 @@ func PropVariantToInt32WithDefault(propvarIn *PROPVARIANT, lDefault int32) int32
 // Minimum OS: windows5.1.2600.
 func PropVariantToInt64(propvarIn *PROPVARIANT, pllRet *int64) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToInt64.Addr(), uintptr(unsafe.Pointer(propvarIn)), uintptr(unsafe.Pointer(pllRet)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantToInt64Vector calls PROPSYS!PropVariantToInt64Vector.
@@ -813,7 +813,7 @@ func PropVariantToInt64Vector(propvar *PROPVARIANT, prgn []int64, pcElem *uint32
 		_prgn = &prgn[0]
 	}
 	r1, _, _ := syscall.SyscallN(procPropVariantToInt64Vector.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(_prgn)), uintptr(len(prgn)), uintptr(unsafe.Pointer(pcElem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantToInt64VectorAlloc calls PROPSYS!PropVariantToInt64VectorAlloc.
@@ -821,7 +821,7 @@ func PropVariantToInt64Vector(propvar *PROPVARIANT, prgn []int64, pcElem *uint32
 // Minimum OS: windows5.1.2600.
 func PropVariantToInt64VectorAlloc(propvar *PROPVARIANT, pprgn **int64, pcElem *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToInt64VectorAlloc.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(pprgn)), uintptr(unsafe.Pointer(pcElem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantToInt64WithDefault calls PROPSYS!PropVariantToInt64WithDefault.
@@ -837,7 +837,7 @@ func PropVariantToInt64WithDefault(propvarIn *PROPVARIANT, llDefault int64) int6
 // Minimum OS: windows5.1.2600.
 func PropVariantToString(propvar *PROPVARIANT, psz foundation.PWSTR, cch uint32) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToString.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(psz)), uintptr(cch))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantToStringAlloc calls PROPSYS!PropVariantToStringAlloc.
@@ -845,7 +845,7 @@ func PropVariantToString(propvar *PROPVARIANT, psz foundation.PWSTR, cch uint32)
 // Minimum OS: windows5.1.2600.
 func PropVariantToStringAlloc(propvar *PROPVARIANT, ppszOut *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToStringAlloc.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(ppszOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantToStringVector calls PROPSYS!PropVariantToStringVector.
@@ -857,7 +857,7 @@ func PropVariantToStringVector(propvar *PROPVARIANT, prgsz []foundation.PWSTR, p
 		_prgsz = &prgsz[0]
 	}
 	r1, _, _ := syscall.SyscallN(procPropVariantToStringVector.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(_prgsz)), uintptr(len(prgsz)), uintptr(unsafe.Pointer(pcElem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantToStringVectorAlloc calls PROPSYS!PropVariantToStringVectorAlloc.
@@ -865,7 +865,7 @@ func PropVariantToStringVector(propvar *PROPVARIANT, prgsz []foundation.PWSTR, p
 // Minimum OS: windows5.1.2600.
 func PropVariantToStringVectorAlloc(propvar *PROPVARIANT, pprgsz **foundation.PWSTR, pcElem *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToStringVectorAlloc.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(pprgsz)), uintptr(unsafe.Pointer(pcElem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantToStringWithDefault calls PROPSYS!PropVariantToStringWithDefault.
@@ -882,7 +882,7 @@ func PropVariantToStringWithDefault(propvarIn *PROPVARIANT, pszDefault string) f
 // Minimum OS: windows5.1.2600.
 func PropVariantToUInt16(propvarIn *PROPVARIANT, puiRet *uint16) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToUInt16.Addr(), uintptr(unsafe.Pointer(propvarIn)), uintptr(unsafe.Pointer(puiRet)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantToUInt16Vector calls PROPSYS!PropVariantToUInt16Vector.
@@ -894,7 +894,7 @@ func PropVariantToUInt16Vector(propvar *PROPVARIANT, prgn []uint16, pcElem *uint
 		_prgn = &prgn[0]
 	}
 	r1, _, _ := syscall.SyscallN(procPropVariantToUInt16Vector.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(_prgn)), uintptr(len(prgn)), uintptr(unsafe.Pointer(pcElem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantToUInt16VectorAlloc calls PROPSYS!PropVariantToUInt16VectorAlloc.
@@ -902,7 +902,7 @@ func PropVariantToUInt16Vector(propvar *PROPVARIANT, prgn []uint16, pcElem *uint
 // Minimum OS: windows5.1.2600.
 func PropVariantToUInt16VectorAlloc(propvar *PROPVARIANT, pprgn **uint16, pcElem *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToUInt16VectorAlloc.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(pprgn)), uintptr(unsafe.Pointer(pcElem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantToUInt16WithDefault calls PROPSYS!PropVariantToUInt16WithDefault.
@@ -918,7 +918,7 @@ func PropVariantToUInt16WithDefault(propvarIn *PROPVARIANT, uiDefault uint16) ui
 // Minimum OS: windows5.1.2600.
 func PropVariantToUInt32(propvarIn *PROPVARIANT, pulRet *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToUInt32.Addr(), uintptr(unsafe.Pointer(propvarIn)), uintptr(unsafe.Pointer(pulRet)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantToUInt32Vector calls PROPSYS!PropVariantToUInt32Vector.
@@ -930,7 +930,7 @@ func PropVariantToUInt32Vector(propvar *PROPVARIANT, prgn []uint32, pcElem *uint
 		_prgn = &prgn[0]
 	}
 	r1, _, _ := syscall.SyscallN(procPropVariantToUInt32Vector.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(_prgn)), uintptr(len(prgn)), uintptr(unsafe.Pointer(pcElem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantToUInt32VectorAlloc calls PROPSYS!PropVariantToUInt32VectorAlloc.
@@ -938,7 +938,7 @@ func PropVariantToUInt32Vector(propvar *PROPVARIANT, prgn []uint32, pcElem *uint
 // Minimum OS: windows5.1.2600.
 func PropVariantToUInt32VectorAlloc(propvar *PROPVARIANT, pprgn **uint32, pcElem *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToUInt32VectorAlloc.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(pprgn)), uintptr(unsafe.Pointer(pcElem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantToUInt32WithDefault calls PROPSYS!PropVariantToUInt32WithDefault.
@@ -954,7 +954,7 @@ func PropVariantToUInt32WithDefault(propvarIn *PROPVARIANT, ulDefault uint32) ui
 // Minimum OS: windows5.1.2600.
 func PropVariantToUInt64(propvarIn *PROPVARIANT, pullRet *uint64) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToUInt64.Addr(), uintptr(unsafe.Pointer(propvarIn)), uintptr(unsafe.Pointer(pullRet)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantToUInt64Vector calls PROPSYS!PropVariantToUInt64Vector.
@@ -966,7 +966,7 @@ func PropVariantToUInt64Vector(propvar *PROPVARIANT, prgn []uint64, pcElem *uint
 		_prgn = &prgn[0]
 	}
 	r1, _, _ := syscall.SyscallN(procPropVariantToUInt64Vector.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(_prgn)), uintptr(len(prgn)), uintptr(unsafe.Pointer(pcElem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantToUInt64VectorAlloc calls PROPSYS!PropVariantToUInt64VectorAlloc.
@@ -974,7 +974,7 @@ func PropVariantToUInt64Vector(propvar *PROPVARIANT, prgn []uint64, pcElem *uint
 // Minimum OS: windows5.1.2600.
 func PropVariantToUInt64VectorAlloc(propvar *PROPVARIANT, pprgn **uint64, pcElem *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToUInt64VectorAlloc.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(pprgn)), uintptr(unsafe.Pointer(pcElem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantToUInt64WithDefault calls PROPSYS!PropVariantToUInt64WithDefault.
@@ -990,7 +990,7 @@ func PropVariantToUInt64WithDefault(propvarIn *PROPVARIANT, ullDefault uint64) u
 // Minimum OS: windows6.0.6000.
 func PropVariantToVariant(pPropVar *PROPVARIANT, pVar *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToVariant.Addr(), uintptr(unsafe.Pointer(pPropVar)), uintptr(unsafe.Pointer(pVar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PropVariantToWinRTPropertyValue calls PROPSYS!PropVariantToWinRTPropertyValue.
@@ -998,7 +998,7 @@ func PropVariantToVariant(pPropVar *PROPVARIANT, pVar *systemvariant.VARIANT) er
 // Minimum OS: windows8.0.
 func PropVariantToWinRTPropertyValue(propvar *PROPVARIANT, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToWinRTPropertyValue.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReadClassStg calls OLE32!ReadClassStg.
@@ -1006,7 +1006,7 @@ func PropVariantToWinRTPropertyValue(propvar *PROPVARIANT, riid *win32.GUID, ppv
 // Minimum OS: windows5.0.
 func ReadClassStg(pStg *IStorage, pclsid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procReadClassStg.Addr(), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(pclsid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReadClassStm calls OLE32!ReadClassStm.
@@ -1014,7 +1014,7 @@ func ReadClassStg(pStg *IStorage, pclsid *win32.GUID) error {
 // Minimum OS: windows5.0.
 func ReadClassStm(pStm *systemcom.IStream, pclsid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procReadClassStm.Addr(), uintptr(unsafe.Pointer(pStm)), uintptr(unsafe.Pointer(pclsid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReadFmtUserTypeStg calls OLE32!ReadFmtUserTypeStg.
@@ -1022,7 +1022,7 @@ func ReadClassStm(pStm *systemcom.IStream, pclsid *win32.GUID) error {
 // Minimum OS: windows5.0.
 func ReadFmtUserTypeStg(pstg *IStorage, pcf *uint16, lplpszUserType *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procReadFmtUserTypeStg.Addr(), uintptr(unsafe.Pointer(pstg)), uintptr(unsafe.Pointer(pcf)), uintptr(unsafe.Pointer(lplpszUserType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetConvertStg calls OLE32!SetConvertStg.
@@ -1031,7 +1031,7 @@ func ReadFmtUserTypeStg(pstg *IStorage, pcf *uint16, lplpszUserType *foundation.
 func SetConvertStg(pStg *IStorage, fConvert bool) error {
 	_fConvert := win32.Bool32(fConvert)
 	r1, _, _ := syscall.SyscallN(procSetConvertStg.Addr(), uintptr(unsafe.Pointer(pStg)), uintptr(_fConvert))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StgConvertPropertyToVariant calls ole32!StgConvertPropertyToVariant.
@@ -1056,7 +1056,7 @@ func StgConvertVariantToProperty(pvar *PROPVARIANT, CodePage uint16, pprop *SERI
 func StgCreateDocfile(pwcsName string, grfMode systemcom.STGM, ppstgOpen **IStorage) error {
 	_pwcsName := win32.UTF16Ptr(pwcsName)
 	r1, _, _ := syscall.SyscallN(procStgCreateDocfile.Addr(), uintptr(unsafe.Pointer(_pwcsName)), uintptr(grfMode), 0, uintptr(unsafe.Pointer(ppstgOpen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StgCreateDocfileOnILockBytes calls OLE32!StgCreateDocfileOnILockBytes.
@@ -1064,7 +1064,7 @@ func StgCreateDocfile(pwcsName string, grfMode systemcom.STGM, ppstgOpen **IStor
 // Minimum OS: windows5.0.
 func StgCreateDocfileOnILockBytes(plkbyt *ILockBytes, grfMode systemcom.STGM, reserved uint32, ppstgOpen **IStorage) error {
 	r1, _, _ := syscall.SyscallN(procStgCreateDocfileOnILockBytes.Addr(), uintptr(unsafe.Pointer(plkbyt)), uintptr(grfMode), uintptr(reserved), uintptr(unsafe.Pointer(ppstgOpen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StgCreatePropSetStg calls OLE32!StgCreatePropSetStg.
@@ -1072,7 +1072,7 @@ func StgCreateDocfileOnILockBytes(plkbyt *ILockBytes, grfMode systemcom.STGM, re
 // Minimum OS: windows5.0.
 func StgCreatePropSetStg(pStorage *IStorage, ppPropSetStg **IPropertySetStorage) error {
 	r1, _, _ := syscall.SyscallN(procStgCreatePropSetStg.Addr(), uintptr(unsafe.Pointer(pStorage)), 0, uintptr(unsafe.Pointer(ppPropSetStg)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StgCreatePropStg calls OLE32!StgCreatePropStg.
@@ -1080,7 +1080,7 @@ func StgCreatePropSetStg(pStorage *IStorage, ppPropSetStg **IPropertySetStorage)
 // Minimum OS: windows5.0.
 func StgCreatePropStg(pUnk *systemcom.IUnknown, fmtid *win32.GUID, pclsid *win32.GUID, grfFlags uint32, ppPropStg **IPropertyStorage) error {
 	r1, _, _ := syscall.SyscallN(procStgCreatePropStg.Addr(), uintptr(unsafe.Pointer(pUnk)), uintptr(unsafe.Pointer(fmtid)), uintptr(unsafe.Pointer(pclsid)), uintptr(grfFlags), 0, uintptr(unsafe.Pointer(ppPropStg)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StgCreateStorageEx calls OLE32!StgCreateStorageEx.
@@ -1089,7 +1089,7 @@ func StgCreatePropStg(pUnk *systemcom.IUnknown, fmtid *win32.GUID, pclsid *win32
 func StgCreateStorageEx(pwcsName string, grfMode systemcom.STGM, stgfmt STGFMT, grfAttrs uint32, pStgOptions *STGOPTIONS, pSecurityDescriptor security.PSECURITY_DESCRIPTOR, riid *win32.GUID, ppObjectOpen **win32.IUnknown) error {
 	_pwcsName := win32.UTF16Ptr(pwcsName)
 	r1, _, _ := syscall.SyscallN(procStgCreateStorageEx.Addr(), uintptr(unsafe.Pointer(_pwcsName)), uintptr(grfMode), uintptr(stgfmt), uintptr(grfAttrs), uintptr(unsafe.Pointer(pStgOptions)), uintptr(pSecurityDescriptor), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppObjectOpen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StgDeserializePropVariant calls PROPSYS!StgDeserializePropVariant.
@@ -1097,7 +1097,7 @@ func StgCreateStorageEx(pwcsName string, grfMode systemcom.STGM, stgfmt STGFMT, 
 // Minimum OS: windows5.0.
 func StgDeserializePropVariant(pprop *SERIALIZEDPROPERTYVALUE, cbMax uint32, ppropvar *PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procStgDeserializePropVariant.Addr(), uintptr(unsafe.Pointer(pprop)), uintptr(cbMax), uintptr(unsafe.Pointer(ppropvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StgGetIFillLockBytesOnFile calls ole32!StgGetIFillLockBytesOnFile.
@@ -1105,14 +1105,14 @@ func StgDeserializePropVariant(pprop *SERIALIZEDPROPERTYVALUE, cbMax uint32, ppr
 func StgGetIFillLockBytesOnFile(pwcsName string, ppflb **IFillLockBytes) error {
 	_pwcsName := win32.UTF16Ptr(pwcsName)
 	r1, _, _ := syscall.SyscallN(procStgGetIFillLockBytesOnFile.Addr(), uintptr(unsafe.Pointer(_pwcsName)), uintptr(unsafe.Pointer(ppflb)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StgGetIFillLockBytesOnILockBytes calls ole32!StgGetIFillLockBytesOnILockBytes.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-stggetifilllockbytesonilockbytes
 func StgGetIFillLockBytesOnILockBytes(pilb *ILockBytes, ppflb **IFillLockBytes) error {
 	r1, _, _ := syscall.SyscallN(procStgGetIFillLockBytesOnILockBytes.Addr(), uintptr(unsafe.Pointer(pilb)), uintptr(unsafe.Pointer(ppflb)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StgIsStorageFile calls OLE32!StgIsStorageFile.
@@ -1121,7 +1121,7 @@ func StgGetIFillLockBytesOnILockBytes(pilb *ILockBytes, ppflb **IFillLockBytes) 
 func StgIsStorageFile(pwcsName string) error {
 	_pwcsName := win32.UTF16Ptr(pwcsName)
 	r1, _, _ := syscall.SyscallN(procStgIsStorageFile.Addr(), uintptr(unsafe.Pointer(_pwcsName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StgIsStorageILockBytes calls OLE32!StgIsStorageILockBytes.
@@ -1129,14 +1129,14 @@ func StgIsStorageFile(pwcsName string) error {
 // Minimum OS: windows5.0.
 func StgIsStorageILockBytes(plkbyt *ILockBytes) error {
 	r1, _, _ := syscall.SyscallN(procStgIsStorageILockBytes.Addr(), uintptr(unsafe.Pointer(plkbyt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StgOpenAsyncDocfileOnIFillLockBytes calls ole32!StgOpenAsyncDocfileOnIFillLockBytes.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-stgopenasyncdocfileonifilllockbytes
 func StgOpenAsyncDocfileOnIFillLockBytes(pflb *IFillLockBytes, grfMode uint32, asyncFlags uint32, ppstgOpen **IStorage) error {
 	r1, _, _ := syscall.SyscallN(procStgOpenAsyncDocfileOnIFillLockBytes.Addr(), uintptr(unsafe.Pointer(pflb)), uintptr(grfMode), uintptr(asyncFlags), uintptr(unsafe.Pointer(ppstgOpen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StgOpenLayoutDocfile calls dflayout!StgOpenLayoutDocfile.
@@ -1144,7 +1144,7 @@ func StgOpenAsyncDocfileOnIFillLockBytes(pflb *IFillLockBytes, grfMode uint32, a
 func StgOpenLayoutDocfile(pwcsDfName string, grfMode uint32, reserved uint32, ppstgOpen **IStorage) error {
 	_pwcsDfName := win32.UTF16Ptr(pwcsDfName)
 	r1, _, _ := syscall.SyscallN(procStgOpenLayoutDocfile.Addr(), uintptr(unsafe.Pointer(_pwcsDfName)), uintptr(grfMode), uintptr(reserved), uintptr(unsafe.Pointer(ppstgOpen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StgOpenPropStg calls OLE32!StgOpenPropStg.
@@ -1152,7 +1152,7 @@ func StgOpenLayoutDocfile(pwcsDfName string, grfMode uint32, reserved uint32, pp
 // Minimum OS: windows5.0.
 func StgOpenPropStg(pUnk *systemcom.IUnknown, fmtid *win32.GUID, grfFlags uint32, ppPropStg **IPropertyStorage) error {
 	r1, _, _ := syscall.SyscallN(procStgOpenPropStg.Addr(), uintptr(unsafe.Pointer(pUnk)), uintptr(unsafe.Pointer(fmtid)), uintptr(grfFlags), 0, uintptr(unsafe.Pointer(ppPropStg)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StgOpenStorage calls OLE32!StgOpenStorage.
@@ -1161,7 +1161,7 @@ func StgOpenPropStg(pUnk *systemcom.IUnknown, fmtid *win32.GUID, grfFlags uint32
 func StgOpenStorage(pwcsName string, pstgPriority *IStorage, grfMode systemcom.STGM, snbExclude **uint16, reserved uint32, ppstgOpen **IStorage) error {
 	_pwcsName := win32.UTF16Ptr(pwcsName)
 	r1, _, _ := syscall.SyscallN(procStgOpenStorage.Addr(), uintptr(unsafe.Pointer(_pwcsName)), uintptr(unsafe.Pointer(pstgPriority)), uintptr(grfMode), uintptr(unsafe.Pointer(snbExclude)), uintptr(reserved), uintptr(unsafe.Pointer(ppstgOpen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StgOpenStorageEx calls OLE32!StgOpenStorageEx.
@@ -1170,7 +1170,7 @@ func StgOpenStorage(pwcsName string, pstgPriority *IStorage, grfMode systemcom.S
 func StgOpenStorageEx(pwcsName string, grfMode systemcom.STGM, stgfmt STGFMT, grfAttrs uint32, pStgOptions *STGOPTIONS, pSecurityDescriptor security.PSECURITY_DESCRIPTOR, riid *win32.GUID, ppObjectOpen **win32.IUnknown) error {
 	_pwcsName := win32.UTF16Ptr(pwcsName)
 	r1, _, _ := syscall.SyscallN(procStgOpenStorageEx.Addr(), uintptr(unsafe.Pointer(_pwcsName)), uintptr(grfMode), uintptr(stgfmt), uintptr(grfAttrs), uintptr(unsafe.Pointer(pStgOptions)), uintptr(pSecurityDescriptor), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppObjectOpen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StgOpenStorageOnILockBytes calls OLE32!StgOpenStorageOnILockBytes.
@@ -1178,7 +1178,7 @@ func StgOpenStorageEx(pwcsName string, grfMode systemcom.STGM, stgfmt STGFMT, gr
 // Minimum OS: windows5.0.
 func StgOpenStorageOnILockBytes(plkbyt *ILockBytes, pstgPriority *IStorage, grfMode systemcom.STGM, snbExclude **uint16, ppstgOpen **IStorage) error {
 	r1, _, _ := syscall.SyscallN(procStgOpenStorageOnILockBytes.Addr(), uintptr(unsafe.Pointer(plkbyt)), uintptr(unsafe.Pointer(pstgPriority)), uintptr(grfMode), uintptr(unsafe.Pointer(snbExclude)), 0, uintptr(unsafe.Pointer(ppstgOpen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StgPropertyLengthAsVariant calls ole32!StgPropertyLengthAsVariant.
@@ -1194,7 +1194,7 @@ func StgPropertyLengthAsVariant(pProp *SERIALIZEDPROPERTYVALUE, cbProp uint32, C
 // Minimum OS: windows5.0.
 func StgSerializePropVariant(ppropvar *PROPVARIANT, ppProp **SERIALIZEDPROPERTYVALUE, pcb *uint32) error {
 	r1, _, _ := syscall.SyscallN(procStgSerializePropVariant.Addr(), uintptr(unsafe.Pointer(ppropvar)), uintptr(unsafe.Pointer(ppProp)), uintptr(unsafe.Pointer(pcb)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StgSetTimes calls OLE32!StgSetTimes.
@@ -1203,7 +1203,7 @@ func StgSerializePropVariant(ppropvar *PROPVARIANT, ppProp **SERIALIZEDPROPERTYV
 func StgSetTimes(lpszName string, pctime *foundation.FILETIME, patime *foundation.FILETIME, pmtime *foundation.FILETIME) error {
 	_lpszName := win32.UTF16Ptr(lpszName)
 	r1, _, _ := syscall.SyscallN(procStgSetTimes.Addr(), uintptr(unsafe.Pointer(_lpszName)), uintptr(unsafe.Pointer(pctime)), uintptr(unsafe.Pointer(patime)), uintptr(unsafe.Pointer(pmtime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // VariantToPropVariant calls PROPSYS!VariantToPropVariant.
@@ -1211,7 +1211,7 @@ func StgSetTimes(lpszName string, pctime *foundation.FILETIME, patime *foundatio
 // Minimum OS: windows6.0.6000.
 func VariantToPropVariant(pVar *systemvariant.VARIANT, pPropVar *PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procVariantToPropVariant.Addr(), uintptr(unsafe.Pointer(pVar)), uintptr(unsafe.Pointer(pPropVar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinRTPropertyValueToPropVariant calls PROPSYS!WinRTPropertyValueToPropVariant.
@@ -1219,7 +1219,7 @@ func VariantToPropVariant(pVar *systemvariant.VARIANT, pPropVar *PROPVARIANT) er
 // Minimum OS: windows8.0.
 func WinRTPropertyValueToPropVariant(punkPropertyValue *systemcom.IUnknown, ppropvar *PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procWinRTPropertyValueToPropVariant.Addr(), uintptr(unsafe.Pointer(punkPropertyValue)), uintptr(unsafe.Pointer(ppropvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteClassStg calls OLE32!WriteClassStg.
@@ -1227,7 +1227,7 @@ func WinRTPropertyValueToPropVariant(punkPropertyValue *systemcom.IUnknown, ppro
 // Minimum OS: windows5.0.
 func WriteClassStg(pStg *IStorage, rclsid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procWriteClassStg.Addr(), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(rclsid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteClassStm calls OLE32!WriteClassStm.
@@ -1235,7 +1235,7 @@ func WriteClassStg(pStg *IStorage, rclsid *win32.GUID) error {
 // Minimum OS: windows5.0.
 func WriteClassStm(pStm *systemcom.IStream, rclsid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procWriteClassStm.Addr(), uintptr(unsafe.Pointer(pStm)), uintptr(unsafe.Pointer(rclsid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteFmtUserTypeStg calls OLE32!WriteFmtUserTypeStg.
@@ -1244,5 +1244,5 @@ func WriteClassStm(pStm *systemcom.IStream, rclsid *win32.GUID) error {
 func WriteFmtUserTypeStg(pstg *IStorage, cf uint16, lpszUserType string) error {
 	_lpszUserType := win32.UTF16Ptr(lpszUserType)
 	r1, _, _ := syscall.SyscallN(procWriteFmtUserTypeStg.Addr(), uintptr(unsafe.Pointer(pstg)), uintptr(cf), uintptr(unsafe.Pointer(_lpszUserType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

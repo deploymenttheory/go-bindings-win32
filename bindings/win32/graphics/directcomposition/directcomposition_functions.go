@@ -38,7 +38,7 @@ var (
 func DCompositionAttachMouseDragToHwnd(visual *IDCompositionVisual, hwnd foundation.HWND, enable bool) error {
 	_enable := win32.Bool32(enable)
 	r1, _, _ := syscall.SyscallN(procDCompositionAttachMouseDragToHwnd.Addr(), uintptr(unsafe.Pointer(visual)), uintptr(hwnd), uintptr(_enable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DCompositionAttachMouseWheelToHwnd calls dcomp!DCompositionAttachMouseWheelToHwnd.
@@ -46,7 +46,7 @@ func DCompositionAttachMouseDragToHwnd(visual *IDCompositionVisual, hwnd foundat
 func DCompositionAttachMouseWheelToHwnd(visual *IDCompositionVisual, hwnd foundation.HWND, enable bool) error {
 	_enable := win32.Bool32(enable)
 	r1, _, _ := syscall.SyscallN(procDCompositionAttachMouseWheelToHwnd.Addr(), uintptr(unsafe.Pointer(visual)), uintptr(hwnd), uintptr(_enable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DCompositionBoostCompositorClock calls dcomp!DCompositionBoostCompositorClock.
@@ -54,7 +54,7 @@ func DCompositionAttachMouseWheelToHwnd(visual *IDCompositionVisual, hwnd founda
 func DCompositionBoostCompositorClock(enable bool) error {
 	_enable := win32.Bool32(enable)
 	r1, _, _ := syscall.SyscallN(procDCompositionBoostCompositorClock.Addr(), uintptr(_enable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DCompositionCreateDevice calls dcomp!DCompositionCreateDevice.
@@ -62,7 +62,7 @@ func DCompositionBoostCompositorClock(enable bool) error {
 // Minimum OS: windows8.0.
 func DCompositionCreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, iid *win32.GUID, dcompositionDevice **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procDCompositionCreateDevice.Addr(), uintptr(unsafe.Pointer(dxgiDevice)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(dcompositionDevice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DCompositionCreateDevice2 calls dcomp!DCompositionCreateDevice2.
@@ -70,14 +70,14 @@ func DCompositionCreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, iid *win32.G
 // Minimum OS: windows8.1.
 func DCompositionCreateDevice2(renderingDevice *systemcom.IUnknown, iid *win32.GUID, dcompositionDevice **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procDCompositionCreateDevice2.Addr(), uintptr(unsafe.Pointer(renderingDevice)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(dcompositionDevice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DCompositionCreateDevice3 calls dcomp!DCompositionCreateDevice3.
 // https://learn.microsoft.com/windows/win32/api/dcomp/nf-dcomp-dcompositioncreatedevice3
 func DCompositionCreateDevice3(renderingDevice *systemcom.IUnknown, iid *win32.GUID, dcompositionDevice **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procDCompositionCreateDevice3.Addr(), uintptr(unsafe.Pointer(renderingDevice)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(dcompositionDevice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DCompositionCreateSurfaceHandle calls dcomp!DCompositionCreateSurfaceHandle.
@@ -85,28 +85,28 @@ func DCompositionCreateDevice3(renderingDevice *systemcom.IUnknown, iid *win32.G
 // Minimum OS: windows8.0.
 func DCompositionCreateSurfaceHandle(desiredAccess uint32, securityAttributes *security.SECURITY_ATTRIBUTES, surfaceHandle *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procDCompositionCreateSurfaceHandle.Addr(), uintptr(desiredAccess), uintptr(unsafe.Pointer(securityAttributes)), uintptr(unsafe.Pointer(surfaceHandle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DCompositionGetFrameId calls dcomp!DCompositionGetFrameId.
 // https://learn.microsoft.com/windows/win32/api/dcomp/nf-dcomp-dcompositiongetframeid
 func DCompositionGetFrameId(frameIdType COMPOSITION_FRAME_ID_TYPE, frameId *uint64) error {
 	r1, _, _ := syscall.SyscallN(procDCompositionGetFrameId.Addr(), uintptr(frameIdType), uintptr(unsafe.Pointer(frameId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DCompositionGetStatistics calls dcomp!DCompositionGetStatistics.
 // https://learn.microsoft.com/windows/win32/api/dcomp/nf-dcomp-dcompositiongetstatistics
 func DCompositionGetStatistics(frameId uint64, frameStats *COMPOSITION_FRAME_STATS, targetIdCount uint32, targetIds *COMPOSITION_TARGET_ID, actualTargetIdCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(procDCompositionGetStatistics.Addr(), uintptr(frameId), uintptr(unsafe.Pointer(frameStats)), uintptr(targetIdCount), uintptr(unsafe.Pointer(targetIds)), uintptr(unsafe.Pointer(actualTargetIdCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DCompositionGetTargetStatistics calls dcomp!DCompositionGetTargetStatistics.
 func DCompositionGetTargetStatistics(frameId uint64, targetId *COMPOSITION_TARGET_ID) (COMPOSITION_TARGET_STATS, error) {
 	var _targetStats COMPOSITION_TARGET_STATS
 	r1, _, _ := syscall.SyscallN(procDCompositionGetTargetStatistics.Addr(), uintptr(frameId), uintptr(unsafe.Pointer(targetId)), uintptr(unsafe.Pointer(&_targetStats)))
-	return _targetStats, win32.HRESULTError(int32(r1))
+	return _targetStats, win32.ErrIfFailed(int32(r1))
 }
 
 // DCompositionWaitForCompositorClock calls dcomp!DCompositionWaitForCompositorClock.

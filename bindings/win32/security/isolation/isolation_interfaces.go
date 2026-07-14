@@ -27,7 +27,7 @@ func (self *IIsolatedAppLauncher) Launch(appUserModelId string, arguments string
 	_appUserModelId := win32.UTF16Ptr(appUserModelId)
 	_arguments := win32.UTF16Ptr(arguments)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_appUserModelId)), uintptr(unsafe.Pointer(_arguments)), uintptr(unsafe.Pointer(telemetryParameters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 1aa24232-9a91-4201-88cb-122f9d6522e0
@@ -44,7 +44,7 @@ func (self *IIsolatedProcessLauncher) LaunchProcess(process string, arguments st
 	_arguments := win32.UTF16Ptr(arguments)
 	_workingDirectory := win32.UTF16Ptr(workingDirectory)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_process)), uintptr(unsafe.Pointer(_arguments)), uintptr(unsafe.Pointer(_workingDirectory)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ShareDirectory dispatches through IIsolatedProcessLauncher's vtable slot 4.
@@ -53,25 +53,25 @@ func (self *IIsolatedProcessLauncher) ShareDirectory(hostPath string, containerP
 	_containerPath := win32.UTF16Ptr(containerPath)
 	_readOnly := win32.Bool32(readOnly)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_hostPath)), uintptr(unsafe.Pointer(_containerPath)), uintptr(_readOnly))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetContainerGuid dispatches through IIsolatedProcessLauncher's vtable slot 5.
 func (self *IIsolatedProcessLauncher) GetContainerGuid(guid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AllowSetForegroundAccess dispatches through IIsolatedProcessLauncher's vtable slot 6.
 func (self *IIsolatedProcessLauncher) AllowSetForegroundAccess(pid uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(pid))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsContainerRunning dispatches through IIsolatedProcessLauncher's vtable slot 7.
 func (self *IIsolatedProcessLauncher) IsContainerRunning(running *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(running)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 780e4416-5e72-4123-808e-66dc6479feef
@@ -88,5 +88,5 @@ func (self *IIsolatedProcessLauncher2) LaunchProcess2(process string, arguments 
 	_arguments := win32.UTF16Ptr(arguments)
 	_workingDirectory := win32.UTF16Ptr(workingDirectory)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_process)), uintptr(unsafe.Pointer(_arguments)), uintptr(unsafe.Pointer(_workingDirectory)), uintptr(unsafe.Pointer(correlationGuid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

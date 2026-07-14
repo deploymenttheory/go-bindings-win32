@@ -25,43 +25,43 @@ var IID_IDODownload = win32.GUID{Data1: 0xfbbd7fc0, Data2: 0xc147, Data3: 0x4727
 // Start dispatches through IDODownload's vtable slot 3.
 func (self *IDODownload) Start(ranges *DO_DOWNLOAD_RANGES_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ranges)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Pause dispatches through IDODownload's vtable slot 4.
 func (self *IDODownload) Pause() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Abort dispatches through IDODownload's vtable slot 5.
 func (self *IDODownload) Abort() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Finalize dispatches through IDODownload's vtable slot 6.
 func (self *IDODownload) Finalize() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStatus dispatches through IDODownload's vtable slot 7.
 func (self *IDODownload) GetStatus(status *DO_DOWNLOAD_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(status)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProperty dispatches through IDODownload's vtable slot 8.
 func (self *IDODownload) GetProperty(propId DODownloadProperty, propVal *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(propId), uintptr(unsafe.Pointer(propVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetProperty dispatches through IDODownload's vtable slot 9.
 func (self *IDODownload) SetProperty(propId DODownloadProperty, propVal *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(propId), uintptr(unsafe.Pointer(propVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDODownloadStatusCallback: https://learn.microsoft.com/windows/win32/api/deliveryoptimization/nn-deliveryoptimization-idodownloadstatuscallback
@@ -76,7 +76,7 @@ var IID_IDODownloadStatusCallback = win32.GUID{Data1: 0xd166e8e3, Data2: 0xa90e,
 // OnStatusChange dispatches through IDODownloadStatusCallback's vtable slot 3.
 func (self *IDODownloadStatusCallback) OnStatusChange(download *IDODownload, status *DO_DOWNLOAD_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(download)), uintptr(unsafe.Pointer(status)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDOManager: https://learn.microsoft.com/windows/win32/api/deliveryoptimization/nn-deliveryoptimization-idomanager
@@ -91,11 +91,11 @@ var IID_IDOManager = win32.GUID{Data1: 0x400e2d4a, Data2: 0x1431, Data3: 0x4c1a,
 // CreateDownload dispatches through IDOManager's vtable slot 3.
 func (self *IDOManager) CreateDownload(download **IDODownload) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(download)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumDownloads dispatches through IDOManager's vtable slot 4.
 func (self *IDOManager) EnumDownloads(category *DO_DOWNLOAD_ENUM_CATEGORY, ppEnum **systemcom.IEnumUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(category)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

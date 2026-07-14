@@ -56,7 +56,7 @@ var (
 // Minimum OS: windows6.0.6000.
 func DwmAttachMilContent(hwnd foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(procDwmAttachMilContent.Addr(), uintptr(hwnd))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DwmDefWindowProc calls dwmapi!DwmDefWindowProc.
@@ -72,7 +72,7 @@ func DwmDefWindowProc(hWnd foundation.HWND, msg uint32, wParam foundation.WPARAM
 // Minimum OS: windows6.0.6000.
 func DwmDetachMilContent(hwnd foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(procDwmDetachMilContent.Addr(), uintptr(hwnd))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DwmEnableBlurBehindWindow calls dwmapi!DwmEnableBlurBehindWindow.
@@ -80,7 +80,7 @@ func DwmDetachMilContent(hwnd foundation.HWND) error {
 // Minimum OS: windows6.0.6000.
 func DwmEnableBlurBehindWindow(hWnd foundation.HWND, pBlurBehind *DWM_BLURBEHIND) error {
 	r1, _, _ := syscall.SyscallN(procDwmEnableBlurBehindWindow.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(pBlurBehind)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DwmEnableComposition calls dwmapi!DwmEnableComposition.
@@ -88,7 +88,7 @@ func DwmEnableBlurBehindWindow(hWnd foundation.HWND, pBlurBehind *DWM_BLURBEHIND
 // Minimum OS: windows6.0.6000.
 func DwmEnableComposition(uCompositionAction uint32) error {
 	r1, _, _ := syscall.SyscallN(procDwmEnableComposition.Addr(), uintptr(uCompositionAction))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DwmEnableMMCSS calls dwmapi!DwmEnableMMCSS.
@@ -97,7 +97,7 @@ func DwmEnableComposition(uCompositionAction uint32) error {
 func DwmEnableMMCSS(fEnableMMCSS bool) error {
 	_fEnableMMCSS := win32.Bool32(fEnableMMCSS)
 	r1, _, _ := syscall.SyscallN(procDwmEnableMMCSS.Addr(), uintptr(_fEnableMMCSS))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DwmExtendFrameIntoClientArea calls dwmapi!DwmExtendFrameIntoClientArea.
@@ -105,7 +105,7 @@ func DwmEnableMMCSS(fEnableMMCSS bool) error {
 // Minimum OS: windows6.0.6000.
 func DwmExtendFrameIntoClientArea(hWnd foundation.HWND, pMarInset *uicontrols.MARGINS) error {
 	r1, _, _ := syscall.SyscallN(procDwmExtendFrameIntoClientArea.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(pMarInset)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DwmFlush calls dwmapi!DwmFlush.
@@ -113,7 +113,7 @@ func DwmExtendFrameIntoClientArea(hWnd foundation.HWND, pMarInset *uicontrols.MA
 // Minimum OS: windows6.0.6000.
 func DwmFlush() error {
 	r1, _, _ := syscall.SyscallN(procDwmFlush.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DwmGetColorizationColor calls dwmapi!DwmGetColorizationColor.
@@ -121,7 +121,7 @@ func DwmFlush() error {
 // Minimum OS: windows6.0.6000.
 func DwmGetColorizationColor(pcrColorization *uint32, pfOpaqueBlend *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procDwmGetColorizationColor.Addr(), uintptr(unsafe.Pointer(pcrColorization)), uintptr(unsafe.Pointer(pfOpaqueBlend)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DwmGetCompositionTimingInfo calls dwmapi!DwmGetCompositionTimingInfo.
@@ -129,7 +129,7 @@ func DwmGetColorizationColor(pcrColorization *uint32, pfOpaqueBlend *foundation.
 // Minimum OS: windows6.0.6000.
 func DwmGetCompositionTimingInfo(hwnd foundation.HWND, pTimingInfo *DWM_TIMING_INFO) error {
 	r1, _, _ := syscall.SyscallN(procDwmGetCompositionTimingInfo.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pTimingInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DwmGetGraphicsStreamClient calls dwmapi!DwmGetGraphicsStreamClient.
@@ -137,7 +137,7 @@ func DwmGetCompositionTimingInfo(hwnd foundation.HWND, pTimingInfo *DWM_TIMING_I
 // Minimum OS: windows6.0.6000.
 func DwmGetGraphicsStreamClient(uIndex uint32, pClientUuid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procDwmGetGraphicsStreamClient.Addr(), uintptr(uIndex), uintptr(unsafe.Pointer(pClientUuid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DwmGetGraphicsStreamTransformHint calls dwmapi!DwmGetGraphicsStreamTransformHint.
@@ -145,7 +145,7 @@ func DwmGetGraphicsStreamClient(uIndex uint32, pClientUuid *win32.GUID) error {
 // Minimum OS: windows6.0.6000.
 func DwmGetGraphicsStreamTransformHint(uIndex uint32, pTransform *MilMatrix3x2D) error {
 	r1, _, _ := syscall.SyscallN(procDwmGetGraphicsStreamTransformHint.Addr(), uintptr(uIndex), uintptr(unsafe.Pointer(pTransform)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DwmGetTransportAttributes calls dwmapi!DwmGetTransportAttributes.
@@ -153,7 +153,7 @@ func DwmGetGraphicsStreamTransformHint(uIndex uint32, pTransform *MilMatrix3x2D)
 // Minimum OS: windows6.0.6000.
 func DwmGetTransportAttributes(pfIsRemoting *foundation.BOOL, pfIsConnected *foundation.BOOL, pDwGeneration *uint32) error {
 	r1, _, _ := syscall.SyscallN(procDwmGetTransportAttributes.Addr(), uintptr(unsafe.Pointer(pfIsRemoting)), uintptr(unsafe.Pointer(pfIsConnected)), uintptr(unsafe.Pointer(pDwGeneration)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DwmGetUnmetTabRequirements calls dwmapi!DwmGetUnmetTabRequirements.
@@ -161,7 +161,7 @@ func DwmGetTransportAttributes(pfIsRemoting *foundation.BOOL, pfIsConnected *fou
 // Minimum OS: windows10.0.17134.
 func DwmGetUnmetTabRequirements(appWindow foundation.HWND, value *DWM_TAB_WINDOW_REQUIREMENTS) error {
 	r1, _, _ := syscall.SyscallN(procDwmGetUnmetTabRequirements.Addr(), uintptr(appWindow), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DwmGetWindowAttribute calls dwmapi!DwmGetWindowAttribute.
@@ -173,7 +173,7 @@ func DwmGetWindowAttribute(hwnd foundation.HWND, dwAttribute uint32, pvAttribute
 		_pvAttribute = &pvAttribute[0]
 	}
 	r1, _, _ := syscall.SyscallN(procDwmGetWindowAttribute.Addr(), uintptr(hwnd), uintptr(dwAttribute), uintptr(unsafe.Pointer(_pvAttribute)), uintptr(len(pvAttribute)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DwmInvalidateIconicBitmaps calls dwmapi!DwmInvalidateIconicBitmaps.
@@ -181,7 +181,7 @@ func DwmGetWindowAttribute(hwnd foundation.HWND, dwAttribute uint32, pvAttribute
 // Minimum OS: windows6.1.
 func DwmInvalidateIconicBitmaps(hwnd foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(procDwmInvalidateIconicBitmaps.Addr(), uintptr(hwnd))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DwmIsCompositionEnabled calls dwmapi!DwmIsCompositionEnabled.
@@ -189,7 +189,7 @@ func DwmInvalidateIconicBitmaps(hwnd foundation.HWND) error {
 // Minimum OS: windows6.0.6000.
 func DwmIsCompositionEnabled(pfEnabled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procDwmIsCompositionEnabled.Addr(), uintptr(unsafe.Pointer(pfEnabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DwmModifyPreviousDxFrameDuration calls dwmapi!DwmModifyPreviousDxFrameDuration.
@@ -198,7 +198,7 @@ func DwmIsCompositionEnabled(pfEnabled *foundation.BOOL) error {
 func DwmModifyPreviousDxFrameDuration(hwnd foundation.HWND, cRefreshes int32, fRelative bool) error {
 	_fRelative := win32.Bool32(fRelative)
 	r1, _, _ := syscall.SyscallN(procDwmModifyPreviousDxFrameDuration.Addr(), uintptr(hwnd), uintptr(cRefreshes), uintptr(_fRelative))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DwmQueryThumbnailSourceSize calls dwmapi!DwmQueryThumbnailSourceSize.
@@ -206,7 +206,7 @@ func DwmModifyPreviousDxFrameDuration(hwnd foundation.HWND, cRefreshes int32, fR
 // Minimum OS: windows6.0.6000.
 func DwmQueryThumbnailSourceSize(hThumbnail uintptr, pSize *foundation.SIZE) error {
 	r1, _, _ := syscall.SyscallN(procDwmQueryThumbnailSourceSize.Addr(), uintptr(hThumbnail), uintptr(unsafe.Pointer(pSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DwmRegisterThumbnail calls dwmapi!DwmRegisterThumbnail.
@@ -214,7 +214,7 @@ func DwmQueryThumbnailSourceSize(hThumbnail uintptr, pSize *foundation.SIZE) err
 // Minimum OS: windows6.0.6000.
 func DwmRegisterThumbnail(hwndDestination foundation.HWND, hwndSource foundation.HWND, phThumbnailId *uintptr) error {
 	r1, _, _ := syscall.SyscallN(procDwmRegisterThumbnail.Addr(), uintptr(hwndDestination), uintptr(hwndSource), uintptr(unsafe.Pointer(phThumbnailId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DwmRenderGesture calls dwmapi!DwmRenderGesture.
@@ -222,7 +222,7 @@ func DwmRegisterThumbnail(hwndDestination foundation.HWND, hwndSource foundation
 // Minimum OS: windows8.0.
 func DwmRenderGesture(gt GESTURE_TYPE, cContacts uint32, pdwPointerID *uint32, pPoints *foundation.POINT) error {
 	r1, _, _ := syscall.SyscallN(procDwmRenderGesture.Addr(), uintptr(gt), uintptr(cContacts), uintptr(unsafe.Pointer(pdwPointerID)), uintptr(unsafe.Pointer(pPoints)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DwmSetDxFrameDuration calls dwmapi!DwmSetDxFrameDuration.
@@ -230,7 +230,7 @@ func DwmRenderGesture(gt GESTURE_TYPE, cContacts uint32, pdwPointerID *uint32, p
 // Minimum OS: windows6.0.6000.
 func DwmSetDxFrameDuration(hwnd foundation.HWND, cRefreshes int32) error {
 	r1, _, _ := syscall.SyscallN(procDwmSetDxFrameDuration.Addr(), uintptr(hwnd), uintptr(cRefreshes))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DwmSetIconicLivePreviewBitmap calls dwmapi!DwmSetIconicLivePreviewBitmap.
@@ -238,7 +238,7 @@ func DwmSetDxFrameDuration(hwnd foundation.HWND, cRefreshes int32) error {
 // Minimum OS: windows6.1.
 func DwmSetIconicLivePreviewBitmap(hwnd foundation.HWND, hbmp graphicsgdi.HBITMAP, pptClient *foundation.POINT, dwSITFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procDwmSetIconicLivePreviewBitmap.Addr(), uintptr(hwnd), uintptr(hbmp), uintptr(unsafe.Pointer(pptClient)), uintptr(dwSITFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DwmSetIconicThumbnail calls dwmapi!DwmSetIconicThumbnail.
@@ -246,7 +246,7 @@ func DwmSetIconicLivePreviewBitmap(hwnd foundation.HWND, hbmp graphicsgdi.HBITMA
 // Minimum OS: windows6.1.
 func DwmSetIconicThumbnail(hwnd foundation.HWND, hbmp graphicsgdi.HBITMAP, dwSITFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procDwmSetIconicThumbnail.Addr(), uintptr(hwnd), uintptr(hbmp), uintptr(dwSITFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DwmSetPresentParameters calls dwmapi!DwmSetPresentParameters.
@@ -254,7 +254,7 @@ func DwmSetIconicThumbnail(hwnd foundation.HWND, hbmp graphicsgdi.HBITMAP, dwSIT
 // Minimum OS: windows6.0.6000.
 func DwmSetPresentParameters(hwnd foundation.HWND, pPresentParams *DWM_PRESENT_PARAMETERS) error {
 	r1, _, _ := syscall.SyscallN(procDwmSetPresentParameters.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pPresentParams)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DwmSetWindowAttribute calls dwmapi!DwmSetWindowAttribute.
@@ -266,7 +266,7 @@ func DwmSetWindowAttribute(hwnd foundation.HWND, dwAttribute uint32, pvAttribute
 		_pvAttribute = &pvAttribute[0]
 	}
 	r1, _, _ := syscall.SyscallN(procDwmSetWindowAttribute.Addr(), uintptr(hwnd), uintptr(dwAttribute), uintptr(unsafe.Pointer(_pvAttribute)), uintptr(len(pvAttribute)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DwmShowContact calls dwmapi!DwmShowContact.
@@ -274,7 +274,7 @@ func DwmSetWindowAttribute(hwnd foundation.HWND, dwAttribute uint32, pvAttribute
 // Minimum OS: windows8.0.
 func DwmShowContact(dwPointerID uint32, eShowContact DWM_SHOWCONTACT) error {
 	r1, _, _ := syscall.SyscallN(procDwmShowContact.Addr(), uintptr(dwPointerID), uintptr(eShowContact))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DwmTransitionOwnedWindow calls dwmapi!DwmTransitionOwnedWindow.
@@ -282,7 +282,7 @@ func DwmShowContact(dwPointerID uint32, eShowContact DWM_SHOWCONTACT) error {
 // Minimum OS: windows8.0.
 func DwmTransitionOwnedWindow(hwnd foundation.HWND, target DWMTRANSITION_OWNEDWINDOW_TARGET) error {
 	r1, _, _ := syscall.SyscallN(procDwmTransitionOwnedWindow.Addr(), uintptr(hwnd), uintptr(target))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DwmUnregisterThumbnail calls dwmapi!DwmUnregisterThumbnail.
@@ -290,7 +290,7 @@ func DwmTransitionOwnedWindow(hwnd foundation.HWND, target DWMTRANSITION_OWNEDWI
 // Minimum OS: windows6.0.6000.
 func DwmUnregisterThumbnail(hThumbnailId uintptr) error {
 	r1, _, _ := syscall.SyscallN(procDwmUnregisterThumbnail.Addr(), uintptr(hThumbnailId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DwmUpdateThumbnailProperties calls dwmapi!DwmUpdateThumbnailProperties.
@@ -298,5 +298,5 @@ func DwmUnregisterThumbnail(hThumbnailId uintptr) error {
 // Minimum OS: windows6.0.6000.
 func DwmUpdateThumbnailProperties(hThumbnailId uintptr, ptnProperties *DWM_THUMBNAIL_PROPERTIES) error {
 	r1, _, _ := syscall.SyscallN(procDwmUpdateThumbnailProperties.Addr(), uintptr(hThumbnailId), uintptr(unsafe.Pointer(ptnProperties)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

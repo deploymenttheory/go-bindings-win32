@@ -25,31 +25,31 @@ var IID_IAccountingProviderConfig = win32.GUID{Data1: 0x66a2db18, Data2: 0xd706,
 func (self *IAccountingProviderConfig) Initialize(pszMachineName string, puConnectionParam *uintptr) error {
 	_pszMachineName := win32.UTF16Ptr(pszMachineName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszMachineName)), uintptr(unsafe.Pointer(puConnectionParam)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Uninitialize dispatches through IAccountingProviderConfig's vtable slot 4.
 func (self *IAccountingProviderConfig) Uninitialize(uConnectionParam uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(uConnectionParam))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Configure dispatches through IAccountingProviderConfig's vtable slot 5.
 func (self *IAccountingProviderConfig) Configure(uConnectionParam uintptr, hWnd foundation.HWND, dwFlags uint32, uReserved1 uintptr, uReserved2 uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(uConnectionParam), uintptr(hWnd), uintptr(dwFlags), uintptr(uReserved1), uintptr(uReserved2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Activate dispatches through IAccountingProviderConfig's vtable slot 6.
 func (self *IAccountingProviderConfig) Activate(uConnectionParam uintptr, uReserved1 uintptr, uReserved2 uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(uConnectionParam), uintptr(uReserved1), uintptr(uReserved2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Deactivate dispatches through IAccountingProviderConfig's vtable slot 7.
 func (self *IAccountingProviderConfig) Deactivate(uConnectionParam uintptr, uReserved1 uintptr, uReserved2 uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(uConnectionParam), uintptr(uReserved1), uintptr(uReserved2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 66a2db17-d706-11d0-a37b-00c04fc9da04
@@ -64,31 +64,31 @@ var IID_IAuthenticationProviderConfig = win32.GUID{Data1: 0x66a2db17, Data2: 0xd
 func (self *IAuthenticationProviderConfig) Initialize(pszMachineName string, puConnectionParam *uintptr) error {
 	_pszMachineName := win32.UTF16Ptr(pszMachineName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszMachineName)), uintptr(unsafe.Pointer(puConnectionParam)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Uninitialize dispatches through IAuthenticationProviderConfig's vtable slot 4.
 func (self *IAuthenticationProviderConfig) Uninitialize(uConnectionParam uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(uConnectionParam))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Configure dispatches through IAuthenticationProviderConfig's vtable slot 5.
 func (self *IAuthenticationProviderConfig) Configure(uConnectionParam uintptr, hWnd foundation.HWND, dwFlags uint32, uReserved1 uintptr, uReserved2 uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(uConnectionParam), uintptr(hWnd), uintptr(dwFlags), uintptr(uReserved1), uintptr(uReserved2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Activate dispatches through IAuthenticationProviderConfig's vtable slot 6.
 func (self *IAuthenticationProviderConfig) Activate(uConnectionParam uintptr, uReserved1 uintptr, uReserved2 uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(uConnectionParam), uintptr(uReserved1), uintptr(uReserved2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Deactivate dispatches through IAuthenticationProviderConfig's vtable slot 7.
 func (self *IAuthenticationProviderConfig) Deactivate(uConnectionParam uintptr, uReserved1 uintptr, uReserved2 uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(uConnectionParam), uintptr(uReserved1), uintptr(uReserved2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEAPProviderConfig: https://learn.microsoft.com/windows/win32/api/rrascfg/nn-rrascfg-ieapproviderconfig
@@ -104,19 +104,19 @@ var IID_IEAPProviderConfig = win32.GUID{Data1: 0x66a2db19, Data2: 0xd706, Data3:
 func (self *IEAPProviderConfig) Initialize(pszMachineName string, dwEapTypeId uint32, puConnectionParam *uintptr) error {
 	_pszMachineName := win32.UTF16Ptr(pszMachineName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszMachineName)), uintptr(dwEapTypeId), uintptr(unsafe.Pointer(puConnectionParam)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Uninitialize dispatches through IEAPProviderConfig's vtable slot 4.
 func (self *IEAPProviderConfig) Uninitialize(dwEapTypeId uint32, uConnectionParam uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwEapTypeId), uintptr(uConnectionParam))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ServerInvokeConfigUI dispatches through IEAPProviderConfig's vtable slot 5.
 func (self *IEAPProviderConfig) ServerInvokeConfigUI(dwEapTypeId uint32, uConnectionParam uintptr, hWnd foundation.HWND, uReserved1 uintptr, uReserved2 uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwEapTypeId), uintptr(uConnectionParam), uintptr(hWnd), uintptr(uReserved1), uintptr(uReserved2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RouterInvokeConfigUI dispatches through IEAPProviderConfig's vtable slot 6.
@@ -126,7 +126,7 @@ func (self *IEAPProviderConfig) RouterInvokeConfigUI(dwEapTypeId uint32, uConnec
 		_pConnectionDataIn = &pConnectionDataIn[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwEapTypeId), uintptr(uConnectionParam), uintptr(hwndParent), uintptr(dwFlags), uintptr(unsafe.Pointer(_pConnectionDataIn)), uintptr(len(pConnectionDataIn)), uintptr(unsafe.Pointer(ppConnectionDataOut)), uintptr(unsafe.Pointer(pdwSizeOfConnectionDataOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RouterInvokeCredentialsUI dispatches through IEAPProviderConfig's vtable slot 7.
@@ -140,7 +140,7 @@ func (self *IEAPProviderConfig) RouterInvokeCredentialsUI(dwEapTypeId uint32, uC
 		_pUserDataIn = &pUserDataIn[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwEapTypeId), uintptr(uConnectionParam), uintptr(hwndParent), uintptr(dwFlags), uintptr(unsafe.Pointer(_pConnectionDataIn)), uintptr(len(pConnectionDataIn)), uintptr(unsafe.Pointer(_pUserDataIn)), uintptr(len(pUserDataIn)), uintptr(unsafe.Pointer(ppUserDataOut)), uintptr(unsafe.Pointer(pdwSizeOfUserDataOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: d565917a-85c4-4466-856e-671c3742ea9a
@@ -154,13 +154,13 @@ var IID_IEAPProviderConfig2 = win32.GUID{Data1: 0xd565917a, Data2: 0x85c4, Data3
 // ServerInvokeConfigUI2 dispatches through IEAPProviderConfig2's vtable slot 8.
 func (self *IEAPProviderConfig2) ServerInvokeConfigUI2(dwEapTypeId uint32, uConnectionParam uintptr, hWnd foundation.HWND, pConfigDataIn *byte, dwSizeOfConfigDataIn uint32, ppConfigDataOut **byte, pdwSizeOfConfigDataOut *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwEapTypeId), uintptr(uConnectionParam), uintptr(hWnd), uintptr(unsafe.Pointer(pConfigDataIn)), uintptr(dwSizeOfConfigDataIn), uintptr(unsafe.Pointer(ppConfigDataOut)), uintptr(unsafe.Pointer(pdwSizeOfConfigDataOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetGlobalConfig dispatches through IEAPProviderConfig2's vtable slot 9.
 func (self *IEAPProviderConfig2) GetGlobalConfig(dwEapTypeId uint32, ppConfigDataOut **byte, pdwSizeOfConfigDataOut *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwEapTypeId), uintptr(unsafe.Pointer(ppConfigDataOut)), uintptr(unsafe.Pointer(pdwSizeOfConfigDataOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: b78ecd12-68bb-4f86-9bf0-8438dd3be982
@@ -174,7 +174,7 @@ var IID_IEAPProviderConfig3 = win32.GUID{Data1: 0xb78ecd12, Data2: 0x68bb, Data3
 // ServerInvokeCertificateConfigUI dispatches through IEAPProviderConfig3's vtable slot 10.
 func (self *IEAPProviderConfig3) ServerInvokeCertificateConfigUI(dwEapTypeId uint32, uConnectionParam uintptr, hWnd foundation.HWND, pConfigDataIn *byte, dwSizeOfConfigDataIn uint32, ppConfigDataOut **byte, pdwSizeOfConfigDataOut *uint32, uReserved uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(dwEapTypeId), uintptr(uConnectionParam), uintptr(hWnd), uintptr(unsafe.Pointer(pConfigDataIn)), uintptr(dwSizeOfConfigDataIn), uintptr(unsafe.Pointer(ppConfigDataOut)), uintptr(unsafe.Pointer(pdwSizeOfConfigDataOut)), uintptr(uReserved))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 66a2db16-d706-11d0-a37b-00c04fc9da04
@@ -189,12 +189,12 @@ var IID_IRouterProtocolConfig = win32.GUID{Data1: 0x66a2db16, Data2: 0xd706, Dat
 func (self *IRouterProtocolConfig) AddProtocol(pszMachineName string, dwTransportId uint32, dwProtocolId uint32, hWnd foundation.HWND, dwFlags uint32, pRouter *systemcom.IUnknown, uReserved1 uintptr) error {
 	_pszMachineName := win32.UTF16Ptr(pszMachineName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszMachineName)), uintptr(dwTransportId), uintptr(dwProtocolId), uintptr(hWnd), uintptr(dwFlags), uintptr(unsafe.Pointer(pRouter)), uintptr(uReserved1))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveProtocol dispatches through IRouterProtocolConfig's vtable slot 4.
 func (self *IRouterProtocolConfig) RemoveProtocol(pszMachineName string, dwTransportId uint32, dwProtocolId uint32, hWnd foundation.HWND, dwFlags uint32, pRouter *systemcom.IUnknown, uReserved1 uintptr) error {
 	_pszMachineName := win32.UTF16Ptr(pszMachineName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszMachineName)), uintptr(dwTransportId), uintptr(dwProtocolId), uintptr(hWnd), uintptr(dwFlags), uintptr(unsafe.Pointer(pRouter)), uintptr(uReserved1))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

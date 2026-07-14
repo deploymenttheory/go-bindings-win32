@@ -32,7 +32,7 @@ var (
 // https://learn.microsoft.com/windows/win32/api/d3d12/nf-d3d12-d3d12createdevice
 func D3D12CreateDevice(pAdapter *systemcom.IUnknown, MinimumFeatureLevel graphicsdirect3d.D3D_FEATURE_LEVEL, riid *win32.GUID, ppDevice **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procD3D12CreateDevice.Addr(), uintptr(unsafe.Pointer(pAdapter)), uintptr(MinimumFeatureLevel), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppDevice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // D3D12CreateRootSignatureDeserializer calls d3d12!D3D12CreateRootSignatureDeserializer.
@@ -43,7 +43,7 @@ func D3D12CreateRootSignatureDeserializer(pSrcData []byte, pRootSignatureDeseria
 		_pSrcData = &pSrcData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procD3D12CreateRootSignatureDeserializer.Addr(), uintptr(unsafe.Pointer(_pSrcData)), uintptr(len(pSrcData)), uintptr(unsafe.Pointer(pRootSignatureDeserializerInterface)), uintptr(unsafe.Pointer(ppRootSignatureDeserializer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // D3D12CreateVersionedRootSignatureDeserializer calls d3d12!D3D12CreateVersionedRootSignatureDeserializer.
@@ -54,40 +54,40 @@ func D3D12CreateVersionedRootSignatureDeserializer(pSrcData []byte, pRootSignatu
 		_pSrcData = &pSrcData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procD3D12CreateVersionedRootSignatureDeserializer.Addr(), uintptr(unsafe.Pointer(_pSrcData)), uintptr(len(pSrcData)), uintptr(unsafe.Pointer(pRootSignatureDeserializerInterface)), uintptr(unsafe.Pointer(ppRootSignatureDeserializer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // D3D12EnableExperimentalFeatures calls d3d12!D3D12EnableExperimentalFeatures.
 // https://learn.microsoft.com/windows/win32/api/d3d12/nf-d3d12-d3d12enableexperimentalfeatures
 func D3D12EnableExperimentalFeatures(NumFeatures uint32, pIIDs *win32.GUID, pConfigurationStructs unsafe.Pointer, pConfigurationStructSizes *uint32) error {
 	r1, _, _ := syscall.SyscallN(procD3D12EnableExperimentalFeatures.Addr(), uintptr(NumFeatures), uintptr(unsafe.Pointer(pIIDs)), uintptr(unsafe.Pointer(pConfigurationStructs)), uintptr(unsafe.Pointer(pConfigurationStructSizes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // D3D12GetDebugInterface calls d3d12!D3D12GetDebugInterface.
 // https://learn.microsoft.com/windows/win32/api/d3d12/nf-d3d12-d3d12getdebuginterface
 func D3D12GetDebugInterface(riid *win32.GUID, ppvDebug **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procD3D12GetDebugInterface.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvDebug)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // D3D12GetInterface calls d3d12!D3D12GetInterface.
 // https://learn.microsoft.com/windows/win32/api/d3d12/nf-d3d12-d3d12getinterface
 func D3D12GetInterface(rclsid *win32.GUID, riid *win32.GUID, ppvDebug **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procD3D12GetInterface.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvDebug)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // D3D12SerializeRootSignature calls d3d12!D3D12SerializeRootSignature.
 // https://learn.microsoft.com/windows/win32/api/d3d12/nf-d3d12-d3d12serializerootsignature
 func D3D12SerializeRootSignature(pRootSignature *D3D12_ROOT_SIGNATURE_DESC, Version D3D_ROOT_SIGNATURE_VERSION, ppBlob **graphicsdirect3d.ID3DBlob, ppErrorBlob **graphicsdirect3d.ID3DBlob) error {
 	r1, _, _ := syscall.SyscallN(procD3D12SerializeRootSignature.Addr(), uintptr(unsafe.Pointer(pRootSignature)), uintptr(Version), uintptr(unsafe.Pointer(ppBlob)), uintptr(unsafe.Pointer(ppErrorBlob)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // D3D12SerializeVersionedRootSignature calls d3d12!D3D12SerializeVersionedRootSignature.
 // https://learn.microsoft.com/windows/win32/api/d3d12/nf-d3d12-d3d12serializeversionedrootsignature
 func D3D12SerializeVersionedRootSignature(pRootSignature *D3D12_VERSIONED_ROOT_SIGNATURE_DESC, ppBlob **graphicsdirect3d.ID3DBlob, ppErrorBlob **graphicsdirect3d.ID3DBlob) error {
 	r1, _, _ := syscall.SyscallN(procD3D12SerializeVersionedRootSignature.Addr(), uintptr(unsafe.Pointer(pRootSignature)), uintptr(unsafe.Pointer(ppBlob)), uintptr(unsafe.Pointer(ppErrorBlob)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

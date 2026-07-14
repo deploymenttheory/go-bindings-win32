@@ -43,14 +43,14 @@ func (self *ITpmVirtualSmartCardManager) CreateVirtualSmartCard(pszFriendlyName 
 	}
 	_fGenerate := win32.Bool32(fGenerate)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFriendlyName)), uintptr(bAdminAlgId), uintptr(unsafe.Pointer(_pbAdminKey)), uintptr(len(pbAdminKey)), uintptr(unsafe.Pointer(_pbAdminKcv)), uintptr(len(pbAdminKcv)), uintptr(unsafe.Pointer(_pbPuk)), uintptr(len(pbPuk)), uintptr(unsafe.Pointer(_pbPin)), uintptr(len(pbPin)), uintptr(_fGenerate), uintptr(unsafe.Pointer(pStatusCallback)), uintptr(unsafe.Pointer(ppszInstanceId)), uintptr(unsafe.Pointer(pfNeedReboot)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DestroyVirtualSmartCard dispatches through ITpmVirtualSmartCardManager's vtable slot 4.
 func (self *ITpmVirtualSmartCardManager) DestroyVirtualSmartCard(pszInstanceId string, pStatusCallback *ITpmVirtualSmartCardManagerStatusCallback, pfNeedReboot *foundation.BOOL) error {
 	_pszInstanceId := win32.UTF16Ptr(pszInstanceId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszInstanceId)), uintptr(unsafe.Pointer(pStatusCallback)), uintptr(unsafe.Pointer(pfNeedReboot)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: fdf8a2b9-02de-47f4-bc26-aa85ab5e5267
@@ -86,7 +86,7 @@ func (self *ITpmVirtualSmartCardManager2) CreateVirtualSmartCardWithPinPolicy(ps
 	}
 	_fGenerate := win32.Bool32(fGenerate)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFriendlyName)), uintptr(bAdminAlgId), uintptr(unsafe.Pointer(_pbAdminKey)), uintptr(len(pbAdminKey)), uintptr(unsafe.Pointer(_pbAdminKcv)), uintptr(len(pbAdminKcv)), uintptr(unsafe.Pointer(_pbPuk)), uintptr(len(pbPuk)), uintptr(unsafe.Pointer(_pbPin)), uintptr(len(pbPin)), uintptr(unsafe.Pointer(_pbPinPolicy)), uintptr(len(pbPinPolicy)), uintptr(_fGenerate), uintptr(unsafe.Pointer(pStatusCallback)), uintptr(unsafe.Pointer(ppszInstanceId)), uintptr(unsafe.Pointer(pfNeedReboot)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 3c745a97-f375-4150-be17-5950f694c699
@@ -122,7 +122,7 @@ func (self *ITpmVirtualSmartCardManager3) CreateVirtualSmartCardWithAttestation(
 	}
 	_fGenerate := win32.Bool32(fGenerate)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFriendlyName)), uintptr(bAdminAlgId), uintptr(unsafe.Pointer(_pbAdminKey)), uintptr(len(pbAdminKey)), uintptr(unsafe.Pointer(_pbAdminKcv)), uintptr(len(pbAdminKcv)), uintptr(unsafe.Pointer(_pbPuk)), uintptr(len(pbPuk)), uintptr(unsafe.Pointer(_pbPin)), uintptr(len(pbPin)), uintptr(unsafe.Pointer(_pbPinPolicy)), uintptr(len(pbPinPolicy)), uintptr(attestationType), uintptr(_fGenerate), uintptr(unsafe.Pointer(pStatusCallback)), uintptr(unsafe.Pointer(ppszInstanceId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ITpmVirtualSmartCardManagerStatusCallback: https://learn.microsoft.com/windows/win32/api/tpmvscmgr/nn-tpmvscmgr-itpmvirtualsmartcardmanagerstatuscallback
@@ -137,11 +137,11 @@ var IID_ITpmVirtualSmartCardManagerStatusCallback = win32.GUID{Data1: 0x1a1bb35f
 // ReportProgress dispatches through ITpmVirtualSmartCardManagerStatusCallback's vtable slot 3.
 func (self *ITpmVirtualSmartCardManagerStatusCallback) ReportProgress(Status TPMVSCMGR_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Status))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReportError dispatches through ITpmVirtualSmartCardManagerStatusCallback's vtable slot 4.
 func (self *ITpmVirtualSmartCardManagerStatusCallback) ReportError(Error TPMVSCMGR_ERROR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Error))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

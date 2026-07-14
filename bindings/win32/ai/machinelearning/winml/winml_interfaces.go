@@ -25,25 +25,25 @@ var IID_IMLOperatorAttributes = win32.GUID{Data1: 0x4b1b1759, Data2: 0xec40, Dat
 // GetAttributeElementCount dispatches through IMLOperatorAttributes's vtable slot 3.
 func (self *IMLOperatorAttributes) GetAttributeElementCount(name foundation.PSTR, type_ MLOperatorAttributeType, elementCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(type_), uintptr(unsafe.Pointer(elementCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAttribute dispatches through IMLOperatorAttributes's vtable slot 4.
 func (self *IMLOperatorAttributes) GetAttribute(name foundation.PSTR, type_ MLOperatorAttributeType, elementCount uint32, elementByteSize uintptr, value unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(type_), uintptr(elementCount), uintptr(elementByteSize), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStringAttributeElementLength dispatches through IMLOperatorAttributes's vtable slot 5.
 func (self *IMLOperatorAttributes) GetStringAttributeElementLength(name foundation.PSTR, elementIndex uint32, attributeElementByteSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(elementIndex), uintptr(unsafe.Pointer(attributeElementByteSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStringAttributeElement dispatches through IMLOperatorAttributes's vtable slot 6.
 func (self *IMLOperatorAttributes) GetStringAttributeElement(name foundation.PSTR, elementIndex uint32, attributeElementByteSize uint32, attributeElement foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(elementIndex), uintptr(attributeElementByteSize), uintptr(unsafe.Pointer(attributeElement)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 11c4b4a0-b467-4eaa-a1a6-b961d8d0ed79
@@ -57,7 +57,7 @@ var IID_IMLOperatorKernel = win32.GUID{Data1: 0x11c4b4a0, Data2: 0xb467, Data3: 
 // Compute dispatches through IMLOperatorKernel's vtable slot 3.
 func (self *IMLOperatorKernel) Compute(context *IMLOperatorKernelContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(context)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 82536a28-f022-4769-9d3f-8b278f84c0c3
@@ -71,7 +71,7 @@ var IID_IMLOperatorKernelContext = win32.GUID{Data1: 0x82536a28, Data2: 0xf022, 
 // GetInputTensor dispatches through IMLOperatorKernelContext's vtable slot 3.
 func (self *IMLOperatorKernelContext) GetInputTensor(inputIndex uint32, tensor **IMLOperatorTensor) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(inputIndex), uintptr(unsafe.Pointer(tensor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOutputTensor dispatches through IMLOperatorKernelContext's vtable slot 4.
@@ -81,19 +81,19 @@ func (self *IMLOperatorKernelContext) GetOutputTensor(outputIndex uint32, dimens
 		_dimensionSizes = &dimensionSizes[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(outputIndex), uintptr(len(dimensionSizes)), uintptr(unsafe.Pointer(_dimensionSizes)), uintptr(unsafe.Pointer(tensor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOutputTensor dispatches through IMLOperatorKernelContext's vtable slot 5.
 func (self *IMLOperatorKernelContext) GetOutputTensor_(outputIndex uint32, tensor **IMLOperatorTensor) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(outputIndex), uintptr(unsafe.Pointer(tensor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AllocateTemporaryData dispatches through IMLOperatorKernelContext's vtable slot 6.
 func (self *IMLOperatorKernelContext) AllocateTemporaryData(size uintptr, data **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(size), uintptr(unsafe.Pointer(data)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetExecutionInterface dispatches through IMLOperatorKernelContext's vtable slot 7.
@@ -124,19 +124,19 @@ func (self *IMLOperatorKernelCreationContext) GetOutputCount() uint32 {
 // GetInputEdgeDescription dispatches through IMLOperatorKernelCreationContext's vtable slot 11.
 func (self *IMLOperatorKernelCreationContext) GetInputEdgeDescription(inputIndex uint32, edgeDescription *MLOperatorEdgeDescription) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(inputIndex), uintptr(unsafe.Pointer(edgeDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOutputEdgeDescription dispatches through IMLOperatorKernelCreationContext's vtable slot 12.
 func (self *IMLOperatorKernelCreationContext) GetOutputEdgeDescription(outputIndex uint32, edgeDescription *MLOperatorEdgeDescription) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(outputIndex), uintptr(unsafe.Pointer(edgeDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTensorShapeDescription dispatches through IMLOperatorKernelCreationContext's vtable slot 14.
 func (self *IMLOperatorKernelCreationContext) GetTensorShapeDescription(shapeDescription **IMLOperatorTensorShapeDescription) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(shapeDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetExecutionInterface dispatches through IMLOperatorKernelCreationContext's vtable slot 15.
@@ -155,7 +155,7 @@ var IID_IMLOperatorKernelFactory = win32.GUID{Data1: 0xef15ad6f, Data2: 0x0dc9, 
 // CreateKernel dispatches through IMLOperatorKernelFactory's vtable slot 3.
 func (self *IMLOperatorKernelFactory) CreateKernel(context *IMLOperatorKernelCreationContext, kernel **IMLOperatorKernel) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(kernel)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 2af9dd2d-b516-4672-9ab5-530c208493ad
@@ -173,13 +173,13 @@ func (self *IMLOperatorRegistry) RegisterOperatorSetSchema(operatorSetId *MLOper
 		_schema = &schema[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(operatorSetId)), uintptr(baselineVersion), uintptr(unsafe.Pointer(_schema)), uintptr(len(schema)), uintptr(unsafe.Pointer(typeInferrer)), uintptr(unsafe.Pointer(shapeInferrer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterOperatorKernel dispatches through IMLOperatorRegistry's vtable slot 4.
 func (self *IMLOperatorRegistry) RegisterOperatorKernel(operatorKernel *MLOperatorKernelDescription, operatorKernelFactory *IMLOperatorKernelFactory, shapeInferrer *IMLOperatorShapeInferrer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(operatorKernel)), uintptr(unsafe.Pointer(operatorKernelFactory)), uintptr(unsafe.Pointer(shapeInferrer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 105b6b29-5408-4a68-9959-09b5955a3492
@@ -205,13 +205,13 @@ func (self *IMLOperatorShapeInferenceContext) GetOutputCount() uint32 {
 // GetInputEdgeDescription dispatches through IMLOperatorShapeInferenceContext's vtable slot 11.
 func (self *IMLOperatorShapeInferenceContext) GetInputEdgeDescription(inputIndex uint32, edgeDescription *MLOperatorEdgeDescription) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(inputIndex), uintptr(unsafe.Pointer(edgeDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInputTensorDimensionCount dispatches through IMLOperatorShapeInferenceContext's vtable slot 12.
 func (self *IMLOperatorShapeInferenceContext) GetInputTensorDimensionCount(inputIndex uint32, dimensionCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(inputIndex), uintptr(unsafe.Pointer(dimensionCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInputTensorShape dispatches through IMLOperatorShapeInferenceContext's vtable slot 13.
@@ -221,13 +221,13 @@ func (self *IMLOperatorShapeInferenceContext) GetInputTensorShape(inputIndex uin
 		_dimensions = &dimensions[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(inputIndex), uintptr(len(dimensions)), uintptr(unsafe.Pointer(_dimensions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetOutputTensorShape dispatches through IMLOperatorShapeInferenceContext's vtable slot 14.
 func (self *IMLOperatorShapeInferenceContext) SetOutputTensorShape(outputIndex uint32, dimensionCount uint32, dimensions *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(outputIndex), uintptr(dimensionCount), uintptr(unsafe.Pointer(dimensions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 540be5be-a6c9-40ee-83f6-d2b8b40a7798
@@ -241,7 +241,7 @@ var IID_IMLOperatorShapeInferrer = win32.GUID{Data1: 0x540be5be, Data2: 0xa6c9, 
 // InferOutputShapes dispatches through IMLOperatorShapeInferrer's vtable slot 3.
 func (self *IMLOperatorShapeInferrer) InferOutputShapes(context *IMLOperatorShapeInferenceContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(context)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 7fe41f41-f430-440e-aece-54416dc8b9db
@@ -265,7 +265,7 @@ func (self *IMLOperatorTensor) GetShape(dimensions []uint32) error {
 		_dimensions = &dimensions[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(dimensions)), uintptr(unsafe.Pointer(_dimensions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTensorDataType dispatches through IMLOperatorTensor's vtable slot 5.
@@ -296,7 +296,7 @@ var IID_IMLOperatorTensorShapeDescription = win32.GUID{Data1: 0xf20e8cbe, Data2:
 // GetInputTensorDimensionCount dispatches through IMLOperatorTensorShapeDescription's vtable slot 3.
 func (self *IMLOperatorTensorShapeDescription) GetInputTensorDimensionCount(inputIndex uint32, dimensionCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(inputIndex), uintptr(unsafe.Pointer(dimensionCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInputTensorShape dispatches through IMLOperatorTensorShapeDescription's vtable slot 4.
@@ -306,13 +306,13 @@ func (self *IMLOperatorTensorShapeDescription) GetInputTensorShape(inputIndex ui
 		_dimensions = &dimensions[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(inputIndex), uintptr(len(dimensions)), uintptr(unsafe.Pointer(_dimensions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOutputTensorDimensionCount dispatches through IMLOperatorTensorShapeDescription's vtable slot 6.
 func (self *IMLOperatorTensorShapeDescription) GetOutputTensorDimensionCount(outputIndex uint32, dimensionCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(outputIndex), uintptr(unsafe.Pointer(dimensionCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOutputTensorShape dispatches through IMLOperatorTensorShapeDescription's vtable slot 7.
@@ -322,7 +322,7 @@ func (self *IMLOperatorTensorShapeDescription) GetOutputTensorShape(outputIndex 
 		_dimensions = &dimensions[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(outputIndex), uintptr(len(dimensions)), uintptr(unsafe.Pointer(_dimensions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: ec893bb1-f938-427b-8488-c8dcf775f138
@@ -348,13 +348,13 @@ func (self *IMLOperatorTypeInferenceContext) GetOutputCount() uint32 {
 // GetInputEdgeDescription dispatches through IMLOperatorTypeInferenceContext's vtable slot 11.
 func (self *IMLOperatorTypeInferenceContext) GetInputEdgeDescription(inputIndex uint32, edgeDescription *MLOperatorEdgeDescription) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(inputIndex), uintptr(unsafe.Pointer(edgeDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetOutputEdgeDescription dispatches through IMLOperatorTypeInferenceContext's vtable slot 12.
 func (self *IMLOperatorTypeInferenceContext) SetOutputEdgeDescription(outputIndex uint32, edgeDescription *MLOperatorEdgeDescription) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(outputIndex), uintptr(unsafe.Pointer(edgeDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 781aeb48-9bcb-4797-bf77-8bf455217beb
@@ -368,7 +368,7 @@ var IID_IMLOperatorTypeInferrer = win32.GUID{Data1: 0x781aeb48, Data2: 0x9bcb, D
 // InferOutputTypes dispatches through IMLOperatorTypeInferrer's vtable slot 3.
 func (self *IMLOperatorTypeInferrer) InferOutputTypes(context *IMLOperatorTypeInferenceContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(context)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWinMLEvaluationContext: https://learn.microsoft.com/windows/win32/api/winml/nn-winml-iwinmlevaluationcontext
@@ -383,20 +383,20 @@ var IID_IWinMLEvaluationContext = win32.GUID{Data1: 0x95848f9e, Data2: 0x583d, D
 // BindValue dispatches through IWinMLEvaluationContext's vtable slot 3.
 func (self *IWinMLEvaluationContext) BindValue(pDescriptor *WINML_BINDING_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDescriptor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetValueByName dispatches through IWinMLEvaluationContext's vtable slot 4.
 func (self *IWinMLEvaluationContext) GetValueByName(Name string, pDescriptor **WINML_BINDING_DESC) error {
 	_Name := win32.UTF16Ptr(Name)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Name)), uintptr(unsafe.Pointer(pDescriptor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through IWinMLEvaluationContext's vtable slot 5.
 func (self *IWinMLEvaluationContext) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWinMLModel: https://learn.microsoft.com/windows/win32/api/winml/nn-winml-iwinmlmodel
@@ -411,25 +411,25 @@ var IID_IWinMLModel = win32.GUID{Data1: 0xe2eeb6a9, Data2: 0xf31f, Data3: 0x4055
 // GetDescription dispatches through IWinMLModel's vtable slot 3.
 func (self *IWinMLModel) GetDescription(ppDescription **WINML_MODEL_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumerateMetadata dispatches through IWinMLModel's vtable slot 4.
 func (self *IWinMLModel) EnumerateMetadata(Index uint32, pKey *foundation.PWSTR, pValue *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pKey)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumerateModelInputs dispatches through IWinMLModel's vtable slot 5.
 func (self *IWinMLModel) EnumerateModelInputs(Index uint32, ppInputDescriptor **WINML_VARIABLE_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(ppInputDescriptor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumerateModelOutputs dispatches through IWinMLModel's vtable slot 6.
 func (self *IWinMLModel) EnumerateModelOutputs(Index uint32, ppOutputDescriptor **WINML_VARIABLE_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(ppOutputDescriptor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWinMLRuntime: https://learn.microsoft.com/windows/win32/api/winml/nn-winml-iwinmlruntime
@@ -445,19 +445,19 @@ var IID_IWinMLRuntime = win32.GUID{Data1: 0xa0425329, Data2: 0x40ae, Data3: 0x48
 func (self *IWinMLRuntime) LoadModel(Path string, ppModel **IWinMLModel) error {
 	_Path := win32.UTF16Ptr(Path)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Path)), uintptr(unsafe.Pointer(ppModel)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateEvaluationContext dispatches through IWinMLRuntime's vtable slot 4.
 func (self *IWinMLRuntime) CreateEvaluationContext(device *graphicsdirect3d12.ID3D12Device, ppContext **IWinMLEvaluationContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(device)), uintptr(unsafe.Pointer(ppContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EvaluateModel dispatches through IWinMLRuntime's vtable slot 5.
 func (self *IWinMLRuntime) EvaluateModel(pContext *IWinMLEvaluationContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWinMLRuntimeFactory: https://learn.microsoft.com/windows/win32/api/winml/nn-winml-iwinmlruntimefactory
@@ -472,5 +472,5 @@ var IID_IWinMLRuntimeFactory = win32.GUID{Data1: 0xa807b84d, Data2: 0x4ae5, Data
 // CreateRuntime dispatches through IWinMLRuntimeFactory's vtable slot 3.
 func (self *IWinMLRuntimeFactory) CreateRuntime(RuntimeType WINML_RUNTIME_TYPE, ppRuntime **IWinMLRuntime) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(RuntimeType), uintptr(unsafe.Pointer(ppRuntime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

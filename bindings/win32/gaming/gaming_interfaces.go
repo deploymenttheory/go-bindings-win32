@@ -24,13 +24,13 @@ var IID_IGameExplorer = win32.GUID{Data1: 0xe7b2fb72, Data2: 0xd728, Data3: 0x49
 // AddGame dispatches through IGameExplorer's vtable slot 3.
 func (self *IGameExplorer) AddGame(bstrGDFBinaryPath foundation.BSTR, bstrGameInstallDirectory foundation.BSTR, installScope GAME_INSTALL_SCOPE, pguidInstanceID *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGDFBinaryPath)), uintptr(unsafe.Pointer(bstrGameInstallDirectory)), uintptr(installScope), uintptr(unsafe.Pointer(pguidInstanceID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // VerifyAccess dispatches through IGameExplorer's vtable slot 6.
 func (self *IGameExplorer) VerifyAccess(bstrGDFBinaryPath foundation.BSTR, pfHasAccess *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGDFBinaryPath)), uintptr(unsafe.Pointer(pfHasAccess)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 86874aa7-a1ed-450d-a7eb-b89e20b2fff3
@@ -46,21 +46,21 @@ func (self *IGameExplorer2) InstallGame(binaryGDFPath string, installDirectory s
 	_binaryGDFPath := win32.UTF16Ptr(binaryGDFPath)
 	_installDirectory := win32.UTF16Ptr(installDirectory)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_binaryGDFPath)), uintptr(unsafe.Pointer(_installDirectory)), uintptr(installScope))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UninstallGame dispatches through IGameExplorer2's vtable slot 4.
 func (self *IGameExplorer2) UninstallGame(binaryGDFPath string) error {
 	_binaryGDFPath := win32.UTF16Ptr(binaryGDFPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_binaryGDFPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CheckAccess dispatches through IGameExplorer2's vtable slot 5.
 func (self *IGameExplorer2) CheckAccess(binaryGDFPath string, pHasAccess *foundation.BOOL) error {
 	_binaryGDFPath := win32.UTF16Ptr(binaryGDFPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_binaryGDFPath)), uintptr(unsafe.Pointer(pHasAccess)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 3887c9ca-04a0-42ae-bc4c-5fa6c7721145
@@ -74,50 +74,50 @@ var IID_IGameStatistics = win32.GUID{Data1: 0x3887c9ca, Data2: 0x04a0, Data3: 0x
 // GetMaxCategoryLength dispatches through IGameStatistics's vtable slot 3.
 func (self *IGameStatistics) GetMaxCategoryLength(cch *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cch)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMaxNameLength dispatches through IGameStatistics's vtable slot 4.
 func (self *IGameStatistics) GetMaxNameLength(cch *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cch)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMaxValueLength dispatches through IGameStatistics's vtable slot 5.
 func (self *IGameStatistics) GetMaxValueLength(cch *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cch)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMaxCategories dispatches through IGameStatistics's vtable slot 6.
 func (self *IGameStatistics) GetMaxCategories(pMax *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMax)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMaxStatsPerCategory dispatches through IGameStatistics's vtable slot 7.
 func (self *IGameStatistics) GetMaxStatsPerCategory(pMax *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMax)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCategoryTitle dispatches through IGameStatistics's vtable slot 8.
 func (self *IGameStatistics) SetCategoryTitle(categoryIndex uint16, title string) error {
 	_title := win32.UTF16Ptr(title)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(categoryIndex), uintptr(unsafe.Pointer(_title)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCategoryTitle dispatches through IGameStatistics's vtable slot 9.
 func (self *IGameStatistics) GetCategoryTitle(categoryIndex uint16, pTitle *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(categoryIndex), uintptr(unsafe.Pointer(pTitle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStatistic dispatches through IGameStatistics's vtable slot 10.
 func (self *IGameStatistics) GetStatistic(categoryIndex uint16, statIndex uint16, pName *foundation.PWSTR, pValue *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(categoryIndex), uintptr(statIndex), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetStatistic dispatches through IGameStatistics's vtable slot 11.
@@ -125,26 +125,26 @@ func (self *IGameStatistics) SetStatistic(categoryIndex uint16, statIndex uint16
 	_name := win32.UTF16Ptr(name)
 	_value := win32.UTF16Ptr(value)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(categoryIndex), uintptr(statIndex), uintptr(unsafe.Pointer(_name)), uintptr(unsafe.Pointer(_value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Save dispatches through IGameStatistics's vtable slot 12.
 func (self *IGameStatistics) Save(trackChanges bool) error {
 	_trackChanges := win32.Bool32(trackChanges)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(_trackChanges))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetLastPlayedCategory dispatches through IGameStatistics's vtable slot 13.
 func (self *IGameStatistics) SetLastPlayedCategory(categoryIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(categoryIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLastPlayedCategory dispatches through IGameStatistics's vtable slot 14.
 func (self *IGameStatistics) GetLastPlayedCategory(pCategoryIndex *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCategoryIndex)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: aff3ea11-e70e-407d-95dd-35e612c41ce2
@@ -159,14 +159,14 @@ var IID_IGameStatisticsMgr = win32.GUID{Data1: 0xaff3ea11, Data2: 0xe70e, Data3:
 func (self *IGameStatisticsMgr) GetGameStatistics(GDFBinaryPath string, openType GAMESTATS_OPEN_TYPE, pOpenResult *GAMESTATS_OPEN_RESULT, ppiStats **IGameStatistics) error {
 	_GDFBinaryPath := win32.UTF16Ptr(GDFBinaryPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_GDFBinaryPath)), uintptr(openType), uintptr(unsafe.Pointer(pOpenResult)), uintptr(unsafe.Pointer(ppiStats)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveGameStatistics dispatches through IGameStatisticsMgr's vtable slot 4.
 func (self *IGameStatisticsMgr) RemoveGameStatistics(GDFBinaryPath string) error {
 	_GDFBinaryPath := win32.UTF16Ptr(GDFBinaryPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_GDFBinaryPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXblIdpAuthManager: https://learn.microsoft.com/windows/win32/api/xblidpauthmanager/nn-xblidpauthmanager-ixblidpauthmanager
@@ -183,13 +183,13 @@ func (self *IXblIdpAuthManager) SetGamerAccount(msaAccountId string, xuid string
 	_msaAccountId := win32.UTF16Ptr(msaAccountId)
 	_xuid := win32.UTF16Ptr(xuid)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_msaAccountId)), uintptr(unsafe.Pointer(_xuid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetGamerAccount dispatches through IXblIdpAuthManager's vtable slot 4.
 func (self *IXblIdpAuthManager) GetGamerAccount(msaAccountId *foundation.PWSTR, xuid *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(msaAccountId)), uintptr(unsafe.Pointer(xuid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAppViewInitialized dispatches through IXblIdpAuthManager's vtable slot 5.
@@ -197,19 +197,19 @@ func (self *IXblIdpAuthManager) SetAppViewInitialized(appSid string, msaAccountI
 	_appSid := win32.UTF16Ptr(appSid)
 	_msaAccountId := win32.UTF16Ptr(msaAccountId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_appSid)), uintptr(unsafe.Pointer(_msaAccountId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEnvironment dispatches through IXblIdpAuthManager's vtable slot 6.
 func (self *IXblIdpAuthManager) GetEnvironment(environment *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(environment)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSandbox dispatches through IXblIdpAuthManager's vtable slot 7.
 func (self *IXblIdpAuthManager) GetSandbox(sandbox *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sandbox)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTokenAndSignatureWithTokenResult dispatches through IXblIdpAuthManager's vtable slot 8.
@@ -227,7 +227,7 @@ func (self *IXblIdpAuthManager) GetTokenAndSignatureWithTokenResult(msaAccountId
 	}
 	_forceRefresh := win32.Bool32(forceRefresh)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_msaAccountId)), uintptr(unsafe.Pointer(_appSid)), uintptr(unsafe.Pointer(_msaTarget)), uintptr(unsafe.Pointer(_msaPolicy)), uintptr(unsafe.Pointer(_httpMethod)), uintptr(unsafe.Pointer(_uri)), uintptr(unsafe.Pointer(_headers)), uintptr(unsafe.Pointer(_body)), uintptr(len(body)), uintptr(_forceRefresh), uintptr(unsafe.Pointer(result)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: bf8c0950-8389-43dd-9a76-a19728ec5dc5
@@ -252,7 +252,7 @@ func (self *IXblIdpAuthManager2) GetUserlessTokenAndSignatureWithTokenResult(app
 	}
 	_forceRefresh := win32.Bool32(forceRefresh)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_appSid)), uintptr(unsafe.Pointer(_msaTarget)), uintptr(unsafe.Pointer(_msaPolicy)), uintptr(unsafe.Pointer(_httpMethod)), uintptr(unsafe.Pointer(_uri)), uintptr(unsafe.Pointer(_headers)), uintptr(unsafe.Pointer(_body)), uintptr(len(body)), uintptr(_forceRefresh), uintptr(unsafe.Pointer(result)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXblIdpAuthTokenResult: https://learn.microsoft.com/windows/win32/api/xblidpauthmanager/nn-xblidpauthmanager-ixblidpauthtokenresult
@@ -267,139 +267,139 @@ var IID_IXblIdpAuthTokenResult = win32.GUID{Data1: 0x46ce0225, Data2: 0xf267, Da
 // GetStatus dispatches through IXblIdpAuthTokenResult's vtable slot 3.
 func (self *IXblIdpAuthTokenResult) GetStatus(status *XBL_IDP_AUTH_TOKEN_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(status)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetErrorCode dispatches through IXblIdpAuthTokenResult's vtable slot 4.
 func (self *IXblIdpAuthTokenResult) GetErrorCode(errorCode *foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(errorCode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetToken dispatches through IXblIdpAuthTokenResult's vtable slot 5.
 func (self *IXblIdpAuthTokenResult) GetToken() (foundation.PWSTR, error) {
 	var _token foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_token)))
-	return _token, win32.HRESULTError(int32(r1))
+	return _token, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSignature dispatches through IXblIdpAuthTokenResult's vtable slot 6.
 func (self *IXblIdpAuthTokenResult) GetSignature() (foundation.PWSTR, error) {
 	var _signature foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_signature)))
-	return _signature, win32.HRESULTError(int32(r1))
+	return _signature, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSandbox dispatches through IXblIdpAuthTokenResult's vtable slot 7.
 func (self *IXblIdpAuthTokenResult) GetSandbox() (foundation.PWSTR, error) {
 	var _sandbox foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_sandbox)))
-	return _sandbox, win32.HRESULTError(int32(r1))
+	return _sandbox, win32.ErrIfFailed(int32(r1))
 }
 
 // GetEnvironment dispatches through IXblIdpAuthTokenResult's vtable slot 8.
 func (self *IXblIdpAuthTokenResult) GetEnvironment() (foundation.PWSTR, error) {
 	var _environment foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_environment)))
-	return _environment, win32.HRESULTError(int32(r1))
+	return _environment, win32.ErrIfFailed(int32(r1))
 }
 
 // GetMsaAccountId dispatches through IXblIdpAuthTokenResult's vtable slot 9.
 func (self *IXblIdpAuthTokenResult) GetMsaAccountId() (foundation.PWSTR, error) {
 	var _msaAccountId foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_msaAccountId)))
-	return _msaAccountId, win32.HRESULTError(int32(r1))
+	return _msaAccountId, win32.ErrIfFailed(int32(r1))
 }
 
 // GetXuid dispatches through IXblIdpAuthTokenResult's vtable slot 10.
 func (self *IXblIdpAuthTokenResult) GetXuid() (foundation.PWSTR, error) {
 	var _xuid foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_xuid)))
-	return _xuid, win32.HRESULTError(int32(r1))
+	return _xuid, win32.ErrIfFailed(int32(r1))
 }
 
 // GetGamertag dispatches through IXblIdpAuthTokenResult's vtable slot 11.
 func (self *IXblIdpAuthTokenResult) GetGamertag() (foundation.PWSTR, error) {
 	var _gamertag foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_gamertag)))
-	return _gamertag, win32.HRESULTError(int32(r1))
+	return _gamertag, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAgeGroup dispatches through IXblIdpAuthTokenResult's vtable slot 12.
 func (self *IXblIdpAuthTokenResult) GetAgeGroup() (foundation.PWSTR, error) {
 	var _ageGroup foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ageGroup)))
-	return _ageGroup, win32.HRESULTError(int32(r1))
+	return _ageGroup, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPrivileges dispatches through IXblIdpAuthTokenResult's vtable slot 13.
 func (self *IXblIdpAuthTokenResult) GetPrivileges() (foundation.PWSTR, error) {
 	var _privileges foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_privileges)))
-	return _privileges, win32.HRESULTError(int32(r1))
+	return _privileges, win32.ErrIfFailed(int32(r1))
 }
 
 // GetMsaTarget dispatches through IXblIdpAuthTokenResult's vtable slot 14.
 func (self *IXblIdpAuthTokenResult) GetMsaTarget() (foundation.PWSTR, error) {
 	var _msaTarget foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_msaTarget)))
-	return _msaTarget, win32.HRESULTError(int32(r1))
+	return _msaTarget, win32.ErrIfFailed(int32(r1))
 }
 
 // GetMsaPolicy dispatches through IXblIdpAuthTokenResult's vtable slot 15.
 func (self *IXblIdpAuthTokenResult) GetMsaPolicy() (foundation.PWSTR, error) {
 	var _msaPolicy foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_msaPolicy)))
-	return _msaPolicy, win32.HRESULTError(int32(r1))
+	return _msaPolicy, win32.ErrIfFailed(int32(r1))
 }
 
 // GetMsaAppId dispatches through IXblIdpAuthTokenResult's vtable slot 16.
 func (self *IXblIdpAuthTokenResult) GetMsaAppId() (foundation.PWSTR, error) {
 	var _msaAppId foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_msaAppId)))
-	return _msaAppId, win32.HRESULTError(int32(r1))
+	return _msaAppId, win32.ErrIfFailed(int32(r1))
 }
 
 // GetRedirect dispatches through IXblIdpAuthTokenResult's vtable slot 17.
 func (self *IXblIdpAuthTokenResult) GetRedirect() (foundation.PWSTR, error) {
 	var _redirect foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_redirect)))
-	return _redirect, win32.HRESULTError(int32(r1))
+	return _redirect, win32.ErrIfFailed(int32(r1))
 }
 
 // GetMessage dispatches through IXblIdpAuthTokenResult's vtable slot 18.
 func (self *IXblIdpAuthTokenResult) GetMessage() (foundation.PWSTR, error) {
 	var _message foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_message)))
-	return _message, win32.HRESULTError(int32(r1))
+	return _message, win32.ErrIfFailed(int32(r1))
 }
 
 // GetHelpId dispatches through IXblIdpAuthTokenResult's vtable slot 19.
 func (self *IXblIdpAuthTokenResult) GetHelpId() (foundation.PWSTR, error) {
 	var _helpId foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_helpId)))
-	return _helpId, win32.HRESULTError(int32(r1))
+	return _helpId, win32.ErrIfFailed(int32(r1))
 }
 
 // GetEnforcementBans dispatches through IXblIdpAuthTokenResult's vtable slot 20.
 func (self *IXblIdpAuthTokenResult) GetEnforcementBans() (foundation.PWSTR, error) {
 	var _enforcementBans foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_enforcementBans)))
-	return _enforcementBans, win32.HRESULTError(int32(r1))
+	return _enforcementBans, win32.ErrIfFailed(int32(r1))
 }
 
 // GetRestrictions dispatches through IXblIdpAuthTokenResult's vtable slot 21.
 func (self *IXblIdpAuthTokenResult) GetRestrictions() (foundation.PWSTR, error) {
 	var _restrictions foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_restrictions)))
-	return _restrictions, win32.HRESULTError(int32(r1))
+	return _restrictions, win32.ErrIfFailed(int32(r1))
 }
 
 // GetTitleRestrictions dispatches through IXblIdpAuthTokenResult's vtable slot 22.
 func (self *IXblIdpAuthTokenResult) GetTitleRestrictions() (foundation.PWSTR, error) {
 	var _titleRestrictions foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_titleRestrictions)))
-	return _titleRestrictions, win32.HRESULTError(int32(r1))
+	return _titleRestrictions, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 75d760b0-60b9-412d-994f-26b2cd5f7812
@@ -414,19 +414,19 @@ var IID_IXblIdpAuthTokenResult2 = win32.GUID{Data1: 0x75d760b0, Data2: 0x60b9, D
 func (self *IXblIdpAuthTokenResult2) GetModernGamertag() (foundation.PWSTR, error) {
 	var _value foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // GetModernGamertagSuffix dispatches through IXblIdpAuthTokenResult2's vtable slot 4.
 func (self *IXblIdpAuthTokenResult2) GetModernGamertagSuffix() (foundation.PWSTR, error) {
 	var _value foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // GetUniqueModernGamertag dispatches through IXblIdpAuthTokenResult2's vtable slot 5.
 func (self *IXblIdpAuthTokenResult2) GetUniqueModernGamertag() (foundation.PWSTR, error) {
 	var _value foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }

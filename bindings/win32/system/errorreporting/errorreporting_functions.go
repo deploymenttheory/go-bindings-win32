@@ -101,7 +101,7 @@ func WerAddExcludedApplication(pwzExeName string, bAllUsers bool) error {
 	_pwzExeName := win32.UTF16Ptr(pwzExeName)
 	_bAllUsers := win32.Bool32(bAllUsers)
 	r1, _, _ := syscall.SyscallN(procWerAddExcludedApplication.Addr(), uintptr(unsafe.Pointer(_pwzExeName)), uintptr(_bAllUsers))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WerFreeString calls wer!WerFreeString.
@@ -117,7 +117,7 @@ func WerFreeString(pwszStr string) {
 // Minimum OS: windows6.0.6000.
 func WerGetFlags(hProcess foundation.HANDLE, pdwFlags *WER_FAULT_REPORTING) error {
 	r1, _, _ := syscall.SyscallN(procWerGetFlags.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(pdwFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WerRegisterAdditionalProcess calls KERNEL32!WerRegisterAdditionalProcess.
@@ -125,7 +125,7 @@ func WerGetFlags(hProcess foundation.HANDLE, pdwFlags *WER_FAULT_REPORTING) erro
 // Minimum OS: windows10.0.15063.
 func WerRegisterAdditionalProcess(processId uint32, captureExtraInfoForThreadId uint32) error {
 	r1, _, _ := syscall.SyscallN(procWerRegisterAdditionalProcess.Addr(), uintptr(processId), uintptr(captureExtraInfoForThreadId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WerRegisterAppLocalDump calls KERNEL32!WerRegisterAppLocalDump.
@@ -134,7 +134,7 @@ func WerRegisterAdditionalProcess(processId uint32, captureExtraInfoForThreadId 
 func WerRegisterAppLocalDump(localAppDataRelativePath string) error {
 	_localAppDataRelativePath := win32.UTF16Ptr(localAppDataRelativePath)
 	r1, _, _ := syscall.SyscallN(procWerRegisterAppLocalDump.Addr(), uintptr(unsafe.Pointer(_localAppDataRelativePath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WerRegisterCustomMetadata calls KERNEL32!WerRegisterCustomMetadata.
@@ -144,7 +144,7 @@ func WerRegisterCustomMetadata(key string, value string) error {
 	_key := win32.UTF16Ptr(key)
 	_value := win32.UTF16Ptr(value)
 	r1, _, _ := syscall.SyscallN(procWerRegisterCustomMetadata.Addr(), uintptr(unsafe.Pointer(_key)), uintptr(unsafe.Pointer(_value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WerRegisterExcludedMemoryBlock calls KERNEL32!WerRegisterExcludedMemoryBlock.
@@ -152,7 +152,7 @@ func WerRegisterCustomMetadata(key string, value string) error {
 // Minimum OS: windows10.0.15063.
 func WerRegisterExcludedMemoryBlock(address unsafe.Pointer, size uint32) error {
 	r1, _, _ := syscall.SyscallN(procWerRegisterExcludedMemoryBlock.Addr(), uintptr(unsafe.Pointer(address)), uintptr(size))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WerRegisterFile calls KERNEL32!WerRegisterFile.
@@ -161,7 +161,7 @@ func WerRegisterExcludedMemoryBlock(address unsafe.Pointer, size uint32) error {
 func WerRegisterFile(pwzFile string, regFileType WER_REGISTER_FILE_TYPE, dwFlags WER_FILE) error {
 	_pwzFile := win32.UTF16Ptr(pwzFile)
 	r1, _, _ := syscall.SyscallN(procWerRegisterFile.Addr(), uintptr(unsafe.Pointer(_pwzFile)), uintptr(regFileType), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WerRegisterMemoryBlock calls KERNEL32!WerRegisterMemoryBlock.
@@ -169,7 +169,7 @@ func WerRegisterFile(pwzFile string, regFileType WER_REGISTER_FILE_TYPE, dwFlags
 // Minimum OS: windows6.0.6000.
 func WerRegisterMemoryBlock(pvAddress unsafe.Pointer, dwSize uint32) error {
 	r1, _, _ := syscall.SyscallN(procWerRegisterMemoryBlock.Addr(), uintptr(unsafe.Pointer(pvAddress)), uintptr(dwSize))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WerRegisterRuntimeExceptionModule calls KERNEL32!WerRegisterRuntimeExceptionModule.
@@ -178,7 +178,7 @@ func WerRegisterMemoryBlock(pvAddress unsafe.Pointer, dwSize uint32) error {
 func WerRegisterRuntimeExceptionModule(pwszOutOfProcessCallbackDll string, pContext unsafe.Pointer) error {
 	_pwszOutOfProcessCallbackDll := win32.UTF16Ptr(pwszOutOfProcessCallbackDll)
 	r1, _, _ := syscall.SyscallN(procWerRegisterRuntimeExceptionModule.Addr(), uintptr(unsafe.Pointer(_pwszOutOfProcessCallbackDll)), uintptr(unsafe.Pointer(pContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WerRemoveExcludedApplication calls wer!WerRemoveExcludedApplication.
@@ -188,7 +188,7 @@ func WerRemoveExcludedApplication(pwzExeName string, bAllUsers bool) error {
 	_pwzExeName := win32.UTF16Ptr(pwzExeName)
 	_bAllUsers := win32.Bool32(bAllUsers)
 	r1, _, _ := syscall.SyscallN(procWerRemoveExcludedApplication.Addr(), uintptr(unsafe.Pointer(_pwzExeName)), uintptr(_bAllUsers))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WerReportAddDump calls wer!WerReportAddDump.
@@ -196,7 +196,7 @@ func WerRemoveExcludedApplication(pwzExeName string, bAllUsers bool) error {
 // Minimum OS: windows6.0.6000.
 func WerReportAddDump(hReportHandle HREPORT, hProcess foundation.HANDLE, hThread foundation.HANDLE, dumpType WER_DUMP_TYPE, pExceptionParam *WER_EXCEPTION_INFORMATION, pDumpCustomOptions *WER_DUMP_CUSTOM_OPTIONS, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procWerReportAddDump.Addr(), uintptr(hReportHandle), uintptr(hProcess), uintptr(hThread), uintptr(dumpType), uintptr(unsafe.Pointer(pExceptionParam)), uintptr(unsafe.Pointer(pDumpCustomOptions)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WerReportAddFile calls wer!WerReportAddFile.
@@ -205,7 +205,7 @@ func WerReportAddDump(hReportHandle HREPORT, hProcess foundation.HANDLE, hThread
 func WerReportAddFile(hReportHandle HREPORT, pwzPath string, repFileType WER_FILE_TYPE, dwFileFlags WER_FILE) error {
 	_pwzPath := win32.UTF16Ptr(pwzPath)
 	r1, _, _ := syscall.SyscallN(procWerReportAddFile.Addr(), uintptr(hReportHandle), uintptr(unsafe.Pointer(_pwzPath)), uintptr(repFileType), uintptr(dwFileFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WerReportCloseHandle calls wer!WerReportCloseHandle.
@@ -213,7 +213,7 @@ func WerReportAddFile(hReportHandle HREPORT, pwzPath string, repFileType WER_FIL
 // Minimum OS: windows6.0.6000.
 func WerReportCloseHandle(hReportHandle HREPORT) error {
 	r1, _, _ := syscall.SyscallN(procWerReportCloseHandle.Addr(), uintptr(hReportHandle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WerReportCreate calls wer!WerReportCreate.
@@ -222,7 +222,7 @@ func WerReportCloseHandle(hReportHandle HREPORT) error {
 func WerReportCreate(pwzEventType string, repType WER_REPORT_TYPE, pReportInformation *WER_REPORT_INFORMATION, phReportHandle *HREPORT) error {
 	_pwzEventType := win32.UTF16Ptr(pwzEventType)
 	r1, _, _ := syscall.SyscallN(procWerReportCreate.Addr(), uintptr(unsafe.Pointer(_pwzEventType)), uintptr(repType), uintptr(unsafe.Pointer(pReportInformation)), uintptr(unsafe.Pointer(phReportHandle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WerReportHang calls faultrep!WerReportHang.
@@ -231,7 +231,7 @@ func WerReportCreate(pwzEventType string, repType WER_REPORT_TYPE, pReportInform
 func WerReportHang(hwndHungApp foundation.HWND, pwzHungApplicationName string) error {
 	_pwzHungApplicationName := win32.UTF16Ptr(pwzHungApplicationName)
 	r1, _, _ := syscall.SyscallN(procWerReportHang.Addr(), uintptr(hwndHungApp), uintptr(unsafe.Pointer(_pwzHungApplicationName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WerReportSetParameter calls wer!WerReportSetParameter.
@@ -241,7 +241,7 @@ func WerReportSetParameter(hReportHandle HREPORT, dwparamID uint32, pwzName stri
 	_pwzName := win32.UTF16Ptr(pwzName)
 	_pwzValue := win32.UTF16Ptr(pwzValue)
 	r1, _, _ := syscall.SyscallN(procWerReportSetParameter.Addr(), uintptr(hReportHandle), uintptr(dwparamID), uintptr(unsafe.Pointer(_pwzName)), uintptr(unsafe.Pointer(_pwzValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WerReportSetUIOption calls wer!WerReportSetUIOption.
@@ -250,7 +250,7 @@ func WerReportSetParameter(hReportHandle HREPORT, dwparamID uint32, pwzName stri
 func WerReportSetUIOption(hReportHandle HREPORT, repUITypeID WER_REPORT_UI, pwzValue string) error {
 	_pwzValue := win32.UTF16Ptr(pwzValue)
 	r1, _, _ := syscall.SyscallN(procWerReportSetUIOption.Addr(), uintptr(hReportHandle), uintptr(repUITypeID), uintptr(unsafe.Pointer(_pwzValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WerReportSubmit calls wer!WerReportSubmit.
@@ -258,7 +258,7 @@ func WerReportSetUIOption(hReportHandle HREPORT, repUITypeID WER_REPORT_UI, pwzV
 // Minimum OS: windows6.0.6000.
 func WerReportSubmit(hReportHandle HREPORT, consent WER_CONSENT, dwFlags WER_SUBMIT_FLAGS, pSubmitResult *WER_SUBMIT_RESULT) error {
 	r1, _, _ := syscall.SyscallN(procWerReportSubmit.Addr(), uintptr(hReportHandle), uintptr(consent), uintptr(dwFlags), uintptr(unsafe.Pointer(pSubmitResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WerSetFlags calls KERNEL32!WerSetFlags.
@@ -266,7 +266,7 @@ func WerReportSubmit(hReportHandle HREPORT, consent WER_CONSENT, dwFlags WER_SUB
 // Minimum OS: windows6.0.6000.
 func WerSetFlags(dwFlags WER_FAULT_REPORTING) error {
 	r1, _, _ := syscall.SyscallN(procWerSetFlags.Addr(), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WerStoreClose calls wer!WerStoreClose.
@@ -281,7 +281,7 @@ func WerStoreClose(hReportStore HREPORTSTORE) {
 // Minimum OS: windows10.0.15063.
 func WerStoreGetFirstReportKey(hReportStore HREPORTSTORE, ppszReportKey *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procWerStoreGetFirstReportKey.Addr(), uintptr(hReportStore), uintptr(unsafe.Pointer(ppszReportKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WerStoreGetNextReportKey calls wer!WerStoreGetNextReportKey.
@@ -289,19 +289,19 @@ func WerStoreGetFirstReportKey(hReportStore HREPORTSTORE, ppszReportKey *foundat
 // Minimum OS: windows10.0.15063.
 func WerStoreGetNextReportKey(hReportStore HREPORTSTORE, ppszReportKey *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procWerStoreGetNextReportKey.Addr(), uintptr(hReportStore), uintptr(unsafe.Pointer(ppszReportKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WerStoreGetReportCount calls wer!WerStoreGetReportCount.
 func WerStoreGetReportCount(hReportStore HREPORTSTORE, pdwReportCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWerStoreGetReportCount.Addr(), uintptr(hReportStore), uintptr(unsafe.Pointer(pdwReportCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WerStoreGetSizeOnDisk calls wer!WerStoreGetSizeOnDisk.
 func WerStoreGetSizeOnDisk(hReportStore HREPORTSTORE, pqwSizeInBytes *uint64) error {
 	r1, _, _ := syscall.SyscallN(procWerStoreGetSizeOnDisk.Addr(), uintptr(hReportStore), uintptr(unsafe.Pointer(pqwSizeInBytes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WerStoreOpen calls wer!WerStoreOpen.
@@ -309,20 +309,20 @@ func WerStoreGetSizeOnDisk(hReportStore HREPORTSTORE, pqwSizeInBytes *uint64) er
 // Minimum OS: windows10.0.15063.
 func WerStoreOpen(repStoreType REPORT_STORE_TYPES, phReportStore *HREPORTSTORE) error {
 	r1, _, _ := syscall.SyscallN(procWerStoreOpen.Addr(), uintptr(repStoreType), uintptr(unsafe.Pointer(phReportStore)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WerStorePurge calls wer!WerStorePurge.
 func WerStorePurge() error {
 	r1, _, _ := syscall.SyscallN(procWerStorePurge.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WerStoreQueryReportMetadataV1 calls wer!WerStoreQueryReportMetadataV1.
 func WerStoreQueryReportMetadataV1(hReportStore HREPORTSTORE, pszReportKey string, pReportMetadata *WER_REPORT_METADATA_V1) error {
 	_pszReportKey := win32.UTF16Ptr(pszReportKey)
 	r1, _, _ := syscall.SyscallN(procWerStoreQueryReportMetadataV1.Addr(), uintptr(hReportStore), uintptr(unsafe.Pointer(_pszReportKey)), uintptr(unsafe.Pointer(pReportMetadata)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WerStoreQueryReportMetadataV2 calls wer!WerStoreQueryReportMetadataV2.
@@ -331,21 +331,21 @@ func WerStoreQueryReportMetadataV1(hReportStore HREPORTSTORE, pszReportKey strin
 func WerStoreQueryReportMetadataV2(hReportStore HREPORTSTORE, pszReportKey string, pReportMetadata *WER_REPORT_METADATA_V2) error {
 	_pszReportKey := win32.UTF16Ptr(pszReportKey)
 	r1, _, _ := syscall.SyscallN(procWerStoreQueryReportMetadataV2.Addr(), uintptr(hReportStore), uintptr(unsafe.Pointer(_pszReportKey)), uintptr(unsafe.Pointer(pReportMetadata)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WerStoreQueryReportMetadataV3 calls wer!WerStoreQueryReportMetadataV3.
 func WerStoreQueryReportMetadataV3(hReportStore HREPORTSTORE, pszReportKey string, pReportMetadata *WER_REPORT_METADATA_V3) error {
 	_pszReportKey := win32.UTF16Ptr(pszReportKey)
 	r1, _, _ := syscall.SyscallN(procWerStoreQueryReportMetadataV3.Addr(), uintptr(hReportStore), uintptr(unsafe.Pointer(_pszReportKey)), uintptr(unsafe.Pointer(pReportMetadata)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WerStoreUploadReport calls wer!WerStoreUploadReport.
 func WerStoreUploadReport(hReportStore HREPORTSTORE, pszReportKey string, dwFlags uint32, pSubmitResult *WER_SUBMIT_RESULT) error {
 	_pszReportKey := win32.UTF16Ptr(pszReportKey)
 	r1, _, _ := syscall.SyscallN(procWerStoreUploadReport.Addr(), uintptr(hReportStore), uintptr(unsafe.Pointer(_pszReportKey)), uintptr(dwFlags), uintptr(unsafe.Pointer(pSubmitResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WerUnregisterAdditionalProcess calls KERNEL32!WerUnregisterAdditionalProcess.
@@ -353,7 +353,7 @@ func WerStoreUploadReport(hReportStore HREPORTSTORE, pszReportKey string, dwFlag
 // Minimum OS: windows10.0.15063.
 func WerUnregisterAdditionalProcess(processId uint32) error {
 	r1, _, _ := syscall.SyscallN(procWerUnregisterAdditionalProcess.Addr(), uintptr(processId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WerUnregisterAppLocalDump calls KERNEL32!WerUnregisterAppLocalDump.
@@ -361,7 +361,7 @@ func WerUnregisterAdditionalProcess(processId uint32) error {
 // Minimum OS: windows10.0.16299.
 func WerUnregisterAppLocalDump() error {
 	r1, _, _ := syscall.SyscallN(procWerUnregisterAppLocalDump.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WerUnregisterCustomMetadata calls KERNEL32!WerUnregisterCustomMetadata.
@@ -370,7 +370,7 @@ func WerUnregisterAppLocalDump() error {
 func WerUnregisterCustomMetadata(key string) error {
 	_key := win32.UTF16Ptr(key)
 	r1, _, _ := syscall.SyscallN(procWerUnregisterCustomMetadata.Addr(), uintptr(unsafe.Pointer(_key)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WerUnregisterExcludedMemoryBlock calls KERNEL32!WerUnregisterExcludedMemoryBlock.
@@ -378,7 +378,7 @@ func WerUnregisterCustomMetadata(key string) error {
 // Minimum OS: windows10.0.15063.
 func WerUnregisterExcludedMemoryBlock(address unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWerUnregisterExcludedMemoryBlock.Addr(), uintptr(unsafe.Pointer(address)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WerUnregisterFile calls KERNEL32!WerUnregisterFile.
@@ -387,7 +387,7 @@ func WerUnregisterExcludedMemoryBlock(address unsafe.Pointer) error {
 func WerUnregisterFile(pwzFilePath string) error {
 	_pwzFilePath := win32.UTF16Ptr(pwzFilePath)
 	r1, _, _ := syscall.SyscallN(procWerUnregisterFile.Addr(), uintptr(unsafe.Pointer(_pwzFilePath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WerUnregisterMemoryBlock calls KERNEL32!WerUnregisterMemoryBlock.
@@ -395,7 +395,7 @@ func WerUnregisterFile(pwzFilePath string) error {
 // Minimum OS: windows6.0.6000.
 func WerUnregisterMemoryBlock(pvAddress unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWerUnregisterMemoryBlock.Addr(), uintptr(unsafe.Pointer(pvAddress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WerUnregisterRuntimeExceptionModule calls KERNEL32!WerUnregisterRuntimeExceptionModule.
@@ -404,5 +404,5 @@ func WerUnregisterMemoryBlock(pvAddress unsafe.Pointer) error {
 func WerUnregisterRuntimeExceptionModule(pwszOutOfProcessCallbackDll string, pContext unsafe.Pointer) error {
 	_pwszOutOfProcessCallbackDll := win32.UTF16Ptr(pwszOutOfProcessCallbackDll)
 	r1, _, _ := syscall.SyscallN(procWerUnregisterRuntimeExceptionModule.Addr(), uintptr(unsafe.Pointer(_pwszOutOfProcessCallbackDll)), uintptr(unsafe.Pointer(pContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

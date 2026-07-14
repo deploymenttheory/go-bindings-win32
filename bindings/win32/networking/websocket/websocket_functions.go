@@ -56,7 +56,7 @@ func WebSocketBeginClientHandshake(hWebSocket WEB_SOCKET_HANDLE, pszSubprotocols
 		_pInitialHeaders = &pInitialHeaders[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWebSocketBeginClientHandshake.Addr(), uintptr(hWebSocket), uintptr(unsafe.Pointer(_pszSubprotocols)), uintptr(len(pszSubprotocols)), uintptr(unsafe.Pointer(_pszExtensions)), uintptr(len(pszExtensions)), uintptr(unsafe.Pointer(_pInitialHeaders)), uintptr(len(pInitialHeaders)), uintptr(unsafe.Pointer(pAdditionalHeaders)), uintptr(unsafe.Pointer(pulAdditionalHeaderCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WebSocketBeginServerHandshake calls websocket!WebSocketBeginServerHandshake.
@@ -72,7 +72,7 @@ func WebSocketBeginServerHandshake(hWebSocket WEB_SOCKET_HANDLE, pszSubprotocolS
 		_pRequestHeaders = &pRequestHeaders[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWebSocketBeginServerHandshake.Addr(), uintptr(hWebSocket), uintptr(unsafe.Pointer(pszSubprotocolSelected)), uintptr(unsafe.Pointer(_pszExtensionSelected)), uintptr(len(pszExtensionSelected)), uintptr(unsafe.Pointer(_pRequestHeaders)), uintptr(len(pRequestHeaders)), uintptr(unsafe.Pointer(pResponseHeaders)), uintptr(unsafe.Pointer(pulResponseHeaderCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WebSocketCompleteAction calls websocket!WebSocketCompleteAction.
@@ -91,7 +91,7 @@ func WebSocketCreateClientHandle(pProperties []WEB_SOCKET_PROPERTY, phWebSocket 
 		_pProperties = &pProperties[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWebSocketCreateClientHandle.Addr(), uintptr(unsafe.Pointer(_pProperties)), uintptr(len(pProperties)), uintptr(unsafe.Pointer(phWebSocket)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WebSocketCreateServerHandle calls websocket!WebSocketCreateServerHandle.
@@ -103,7 +103,7 @@ func WebSocketCreateServerHandle(pProperties []WEB_SOCKET_PROPERTY, phWebSocket 
 		_pProperties = &pProperties[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWebSocketCreateServerHandle.Addr(), uintptr(unsafe.Pointer(_pProperties)), uintptr(len(pProperties)), uintptr(unsafe.Pointer(phWebSocket)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WebSocketDeleteHandle calls websocket!WebSocketDeleteHandle.
@@ -122,7 +122,7 @@ func WebSocketEndClientHandshake(hWebSocket WEB_SOCKET_HANDLE, pResponseHeaders 
 		_pResponseHeaders = &pResponseHeaders[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWebSocketEndClientHandshake.Addr(), uintptr(hWebSocket), uintptr(unsafe.Pointer(_pResponseHeaders)), uintptr(len(pResponseHeaders)), uintptr(unsafe.Pointer(pulSelectedExtensions)), uintptr(unsafe.Pointer(pulSelectedExtensionCount)), uintptr(unsafe.Pointer(pulSelectedSubprotocol)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WebSocketEndServerHandshake calls websocket!WebSocketEndServerHandshake.
@@ -130,7 +130,7 @@ func WebSocketEndClientHandshake(hWebSocket WEB_SOCKET_HANDLE, pResponseHeaders 
 // Minimum OS: windows8.0.
 func WebSocketEndServerHandshake(hWebSocket WEB_SOCKET_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procWebSocketEndServerHandshake.Addr(), uintptr(hWebSocket))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WebSocketGetAction calls websocket!WebSocketGetAction.
@@ -138,7 +138,7 @@ func WebSocketEndServerHandshake(hWebSocket WEB_SOCKET_HANDLE) error {
 // Minimum OS: windows8.0.
 func WebSocketGetAction(hWebSocket WEB_SOCKET_HANDLE, eActionQueue WEB_SOCKET_ACTION_QUEUE, pDataBuffers *WEB_SOCKET_BUFFER, pulDataBufferCount *uint32, pAction *WEB_SOCKET_ACTION, pBufferType *WEB_SOCKET_BUFFER_TYPE, pvApplicationContext *unsafe.Pointer, pvActionContext *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWebSocketGetAction.Addr(), uintptr(hWebSocket), uintptr(eActionQueue), uintptr(unsafe.Pointer(pDataBuffers)), uintptr(unsafe.Pointer(pulDataBufferCount)), uintptr(unsafe.Pointer(pAction)), uintptr(unsafe.Pointer(pBufferType)), uintptr(unsafe.Pointer(pvApplicationContext)), uintptr(unsafe.Pointer(pvActionContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WebSocketGetGlobalProperty calls websocket!WebSocketGetGlobalProperty.
@@ -146,7 +146,7 @@ func WebSocketGetAction(hWebSocket WEB_SOCKET_HANDLE, eActionQueue WEB_SOCKET_AC
 // Minimum OS: windows8.0.
 func WebSocketGetGlobalProperty(eType WEB_SOCKET_PROPERTY_TYPE, pvValue unsafe.Pointer, ulSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWebSocketGetGlobalProperty.Addr(), uintptr(eType), uintptr(unsafe.Pointer(pvValue)), uintptr(unsafe.Pointer(ulSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WebSocketReceive calls websocket!WebSocketReceive.
@@ -154,7 +154,7 @@ func WebSocketGetGlobalProperty(eType WEB_SOCKET_PROPERTY_TYPE, pvValue unsafe.P
 // Minimum OS: windows8.0.
 func WebSocketReceive(hWebSocket WEB_SOCKET_HANDLE, pBuffer *WEB_SOCKET_BUFFER, pvContext unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWebSocketReceive.Addr(), uintptr(hWebSocket), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(pvContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WebSocketSend calls websocket!WebSocketSend.
@@ -162,5 +162,5 @@ func WebSocketReceive(hWebSocket WEB_SOCKET_HANDLE, pBuffer *WEB_SOCKET_BUFFER, 
 // Minimum OS: windows8.0.
 func WebSocketSend(hWebSocket WEB_SOCKET_HANDLE, BufferType WEB_SOCKET_BUFFER_TYPE, pBuffer *WEB_SOCKET_BUFFER, Context unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWebSocketSend.Addr(), uintptr(hWebSocket), uintptr(BufferType), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(Context)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

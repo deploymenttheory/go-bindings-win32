@@ -26,34 +26,34 @@ var IID_IAssemblyCache = win32.GUID{Data1: 0xe707dcde, Data2: 0xd1cd, Data3: 0x1
 func (self *IAssemblyCache) UninstallAssembly(dwFlags uint32, pszAssemblyName string, pRefData *FUSION_INSTALL_REFERENCE, pulDisposition *IASSEMBLYCACHE_UNINSTALL_DISPOSITION) error {
 	_pszAssemblyName := win32.UTF16Ptr(pszAssemblyName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(_pszAssemblyName)), uintptr(unsafe.Pointer(pRefData)), uintptr(unsafe.Pointer(pulDisposition)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryAssemblyInfo dispatches through IAssemblyCache's vtable slot 4.
 func (self *IAssemblyCache) QueryAssemblyInfo(dwFlags QUERYASMINFO_FLAGS, pszAssemblyName string, pAsmInfo *ASSEMBLY_INFO) error {
 	_pszAssemblyName := win32.UTF16Ptr(pszAssemblyName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(_pszAssemblyName)), uintptr(unsafe.Pointer(pAsmInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateAssemblyCacheItem dispatches through IAssemblyCache's vtable slot 5.
 func (self *IAssemblyCache) CreateAssemblyCacheItem(dwFlags uint32, pvReserved unsafe.Pointer, ppAsmItem **IAssemblyCacheItem, pszAssemblyName string) error {
 	_pszAssemblyName := win32.UTF16Ptr(pszAssemblyName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(pvReserved)), uintptr(unsafe.Pointer(ppAsmItem)), uintptr(unsafe.Pointer(_pszAssemblyName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reserved dispatches through IAssemblyCache's vtable slot 6.
 func (self *IAssemblyCache) Reserved(ppUnk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InstallAssembly dispatches through IAssemblyCache's vtable slot 7.
 func (self *IAssemblyCache) InstallAssembly(dwFlags uint32, pszManifestFilePath string, pRefData *FUSION_INSTALL_REFERENCE) error {
 	_pszManifestFilePath := win32.UTF16Ptr(pszManifestFilePath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(_pszManifestFilePath)), uintptr(unsafe.Pointer(pRefData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAssemblyCacheItem: https://learn.microsoft.com/windows/win32/api/winsxs/nn-winsxs-iassemblycacheitem
@@ -69,19 +69,19 @@ var IID_IAssemblyCacheItem = win32.GUID{Data1: 0x9e3aaeb4, Data2: 0xd1cd, Data3:
 func (self *IAssemblyCacheItem) CreateStream(dwFlags uint32, pszStreamName string, dwFormat uint32, dwFormatFlags uint32, ppIStream **systemcom.IStream, puliMaxSize *uint64) error {
 	_pszStreamName := win32.UTF16Ptr(pszStreamName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(_pszStreamName)), uintptr(dwFormat), uintptr(dwFormatFlags), uintptr(unsafe.Pointer(ppIStream)), uintptr(unsafe.Pointer(puliMaxSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Commit dispatches through IAssemblyCacheItem's vtable slot 4.
 func (self *IAssemblyCacheItem) Commit(dwFlags uint32, pulDisposition *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(pulDisposition)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AbortItem dispatches through IAssemblyCacheItem's vtable slot 5.
 func (self *IAssemblyCacheItem) AbortItem() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAssemblyName: https://learn.microsoft.com/windows/win32/api/winsxs/nn-winsxs-iassemblyname
@@ -96,56 +96,56 @@ var IID_IAssemblyName = win32.GUID{Data1: 0xcd193bc0, Data2: 0xb4bc, Data3: 0x11
 // SetProperty dispatches through IAssemblyName's vtable slot 3.
 func (self *IAssemblyName) SetProperty(PropertyId uint32, pvProperty unsafe.Pointer, cbProperty uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(PropertyId), uintptr(unsafe.Pointer(pvProperty)), uintptr(cbProperty))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProperty dispatches through IAssemblyName's vtable slot 4.
 func (self *IAssemblyName) GetProperty(PropertyId uint32, pvProperty unsafe.Pointer, pcbProperty *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(PropertyId), uintptr(unsafe.Pointer(pvProperty)), uintptr(unsafe.Pointer(pcbProperty)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Finalize dispatches through IAssemblyName's vtable slot 5.
 func (self *IAssemblyName) Finalize() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDisplayName dispatches through IAssemblyName's vtable slot 6.
 func (self *IAssemblyName) GetDisplayName(szDisplayName foundation.PWSTR, pccDisplayName *uint32, dwDisplayFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szDisplayName)), uintptr(unsafe.Pointer(pccDisplayName)), uintptr(dwDisplayFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reserved dispatches through IAssemblyName's vtable slot 7.
 func (self *IAssemblyName) Reserved(refIID *win32.GUID, pUnkReserved1 *systemcom.IUnknown, pUnkReserved2 *systemcom.IUnknown, szReserved string, llReserved int64, pvReserved unsafe.Pointer, cbReserved uint32, ppReserved **win32.IUnknown) error {
 	_szReserved := win32.UTF16Ptr(szReserved)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(refIID)), uintptr(unsafe.Pointer(pUnkReserved1)), uintptr(unsafe.Pointer(pUnkReserved2)), uintptr(unsafe.Pointer(_szReserved)), uintptr(llReserved), uintptr(unsafe.Pointer(pvReserved)), uintptr(cbReserved), uintptr(unsafe.Pointer(ppReserved)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetName dispatches through IAssemblyName's vtable slot 8.
 func (self *IAssemblyName) GetName(lpcwBuffer *uint32, pwzName foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpcwBuffer)), uintptr(unsafe.Pointer(pwzName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetVersion dispatches through IAssemblyName's vtable slot 9.
 func (self *IAssemblyName) GetVersion(pdwVersionHi *uint32, pdwVersionLow *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwVersionHi)), uintptr(unsafe.Pointer(pdwVersionLow)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsEqual dispatches through IAssemblyName's vtable slot 10.
 func (self *IAssemblyName) IsEqual(pName *IAssemblyName, dwCmpFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pName)), uintptr(dwCmpFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IAssemblyName's vtable slot 11.
 func (self *IAssemblyName) Clone(pName **IAssemblyName) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 0adda82c-2c26-11d2-ad65-00a0c9af11a6
@@ -159,25 +159,25 @@ var IID_IEnumMsmDependency = win32.GUID{Data1: 0x0adda82c, Data2: 0x2c26, Data3:
 // Next dispatches through IEnumMsmDependency's vtable slot 3.
 func (self *IEnumMsmDependency) Next(cFetch uint32, rgmsmDependencies **IMsmDependency, pcFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cFetch), uintptr(unsafe.Pointer(rgmsmDependencies)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumMsmDependency's vtable slot 4.
 func (self *IEnumMsmDependency) Skip(cSkip uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cSkip))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumMsmDependency's vtable slot 5.
 func (self *IEnumMsmDependency) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IEnumMsmDependency's vtable slot 6.
 func (self *IEnumMsmDependency) Clone(pemsmDependencies **IEnumMsmDependency) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pemsmDependencies)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 0adda829-2c26-11d2-ad65-00a0c9af11a6
@@ -191,25 +191,25 @@ var IID_IEnumMsmError = win32.GUID{Data1: 0x0adda829, Data2: 0x2c26, Data3: 0x11
 // Next dispatches through IEnumMsmError's vtable slot 3.
 func (self *IEnumMsmError) Next(cFetch uint32, rgmsmErrors **IMsmError, pcFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cFetch), uintptr(unsafe.Pointer(rgmsmErrors)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumMsmError's vtable slot 4.
 func (self *IEnumMsmError) Skip(cSkip uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cSkip))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumMsmError's vtable slot 5.
 func (self *IEnumMsmError) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IEnumMsmError's vtable slot 6.
 func (self *IEnumMsmError) Clone(pemsmErrors **IEnumMsmError) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pemsmErrors)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 0adda826-2c26-11d2-ad65-00a0c9af11a6
@@ -223,25 +223,25 @@ var IID_IEnumMsmString = win32.GUID{Data1: 0x0adda826, Data2: 0x2c26, Data3: 0x1
 // Next dispatches through IEnumMsmString's vtable slot 3.
 func (self *IEnumMsmString) Next(cFetch uint32, rgbstrStrings *foundation.BSTR, pcFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cFetch), uintptr(unsafe.Pointer(rgbstrStrings)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumMsmString's vtable slot 4.
 func (self *IEnumMsmString) Skip(cSkip uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cSkip))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumMsmString's vtable slot 5.
 func (self *IEnumMsmString) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IEnumMsmString's vtable slot 6.
 func (self *IEnumMsmString) Clone(pemsmStrings **IEnumMsmString) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pemsmStrings)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 0adda82d-2c26-11d2-ad65-00a0c9af11a6
@@ -255,19 +255,19 @@ var IID_IMsmDependencies = win32.GUID{Data1: 0x0adda82d, Data2: 0x2c26, Data3: 0
 // Get_Item dispatches through IMsmDependencies's vtable slot 7.
 func (self *IMsmDependencies) Get_Item(Item int32, Return **IMsmDependency) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Item), uintptr(unsafe.Pointer(Return)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IMsmDependencies's vtable slot 8.
 func (self *IMsmDependencies) Get_Count(Count *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Count)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IMsmDependencies's vtable slot 9.
 func (self *IMsmDependencies) Get__NewEnum(NewEnum **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(NewEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMsmDependency: https://learn.microsoft.com/windows/win32/api/mergemod/nn-mergemod-imsmdependency
@@ -282,19 +282,19 @@ var IID_IMsmDependency = win32.GUID{Data1: 0x0adda82b, Data2: 0x2c26, Data3: 0x1
 // Get_Module dispatches through IMsmDependency's vtable slot 7.
 func (self *IMsmDependency) Get_Module(Module *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Module)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Language dispatches through IMsmDependency's vtable slot 8.
 func (self *IMsmDependency) Get_Language(Language *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Language)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Version dispatches through IMsmDependency's vtable slot 9.
 func (self *IMsmDependency) Get_Version(Version *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Version)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMsmError: https://learn.microsoft.com/windows/win32/api/mergemod/nn-mergemod-imsmerror
@@ -309,43 +309,43 @@ var IID_IMsmError = win32.GUID{Data1: 0x0adda828, Data2: 0x2c26, Data3: 0x11d2, 
 // Get_Type dispatches through IMsmError's vtable slot 7.
 func (self *IMsmError) Get_Type(ErrorType *MsmErrorType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ErrorType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Path dispatches through IMsmError's vtable slot 8.
 func (self *IMsmError) Get_Path(ErrorPath *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ErrorPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Language dispatches through IMsmError's vtable slot 9.
 func (self *IMsmError) Get_Language(ErrorLanguage *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ErrorLanguage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DatabaseTable dispatches through IMsmError's vtable slot 10.
 func (self *IMsmError) Get_DatabaseTable(ErrorTable *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ErrorTable)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DatabaseKeys dispatches through IMsmError's vtable slot 11.
 func (self *IMsmError) Get_DatabaseKeys(ErrorKeys **IMsmStrings) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ErrorKeys)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ModuleTable dispatches through IMsmError's vtable slot 12.
 func (self *IMsmError) Get_ModuleTable(ErrorTable *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ErrorTable)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ModuleKeys dispatches through IMsmError's vtable slot 13.
 func (self *IMsmError) Get_ModuleKeys(ErrorKeys **IMsmStrings) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ErrorKeys)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 0adda82a-2c26-11d2-ad65-00a0c9af11a6
@@ -359,19 +359,19 @@ var IID_IMsmErrors = win32.GUID{Data1: 0x0adda82a, Data2: 0x2c26, Data3: 0x11d2,
 // Get_Item dispatches through IMsmErrors's vtable slot 7.
 func (self *IMsmErrors) Get_Item(Item int32, Return **IMsmError) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Item), uintptr(unsafe.Pointer(Return)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IMsmErrors's vtable slot 8.
 func (self *IMsmErrors) Get_Count(Count *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Count)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IMsmErrors's vtable slot 9.
 func (self *IMsmErrors) Get__NewEnum(NewEnum **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(NewEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMsmGetFiles: https://learn.microsoft.com/windows/win32/api/mergemod/nn-mergemod-imsmgetfiles
@@ -386,7 +386,7 @@ var IID_IMsmGetFiles = win32.GUID{Data1: 0x7041ae26, Data2: 0x2d78, Data3: 0x11d
 // Get_ModuleFiles dispatches through IMsmGetFiles's vtable slot 7.
 func (self *IMsmGetFiles) Get_ModuleFiles(Files **IMsmStrings) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Files)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMsmMerge: https://learn.microsoft.com/windows/win32/api/mergemod/nn-mergemod-imsmmerge
@@ -401,79 +401,79 @@ var IID_IMsmMerge = win32.GUID{Data1: 0x0adda82e, Data2: 0x2c26, Data3: 0x11d2, 
 // OpenDatabase dispatches through IMsmMerge's vtable slot 7.
 func (self *IMsmMerge) OpenDatabase(Path foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Path)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenModule dispatches through IMsmMerge's vtable slot 8.
 func (self *IMsmMerge) OpenModule(Path foundation.BSTR, Language int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Path)), uintptr(Language))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CloseDatabase dispatches through IMsmMerge's vtable slot 9.
 func (self *IMsmMerge) CloseDatabase(Commit foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Commit))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CloseModule dispatches through IMsmMerge's vtable slot 10.
 func (self *IMsmMerge) CloseModule() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenLog dispatches through IMsmMerge's vtable slot 11.
 func (self *IMsmMerge) OpenLog(Path foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Path)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CloseLog dispatches through IMsmMerge's vtable slot 12.
 func (self *IMsmMerge) CloseLog() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Log dispatches through IMsmMerge's vtable slot 13.
 func (self *IMsmMerge) Log(Message foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Message)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Errors dispatches through IMsmMerge's vtable slot 14.
 func (self *IMsmMerge) Get_Errors(Errors **IMsmErrors) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Errors)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Dependencies dispatches through IMsmMerge's vtable slot 15.
 func (self *IMsmMerge) Get_Dependencies(Dependencies **IMsmDependencies) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Dependencies)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Merge dispatches through IMsmMerge's vtable slot 16.
 func (self *IMsmMerge) Merge(Feature foundation.BSTR, RedirectDir foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Feature)), uintptr(unsafe.Pointer(RedirectDir)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Connect dispatches through IMsmMerge's vtable slot 17.
 func (self *IMsmMerge) Connect(Feature foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Feature)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExtractCAB dispatches through IMsmMerge's vtable slot 18.
 func (self *IMsmMerge) ExtractCAB(FileName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(FileName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExtractFiles dispatches through IMsmMerge's vtable slot 19.
 func (self *IMsmMerge) ExtractFiles(Path foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Path)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 0adda827-2c26-11d2-ad65-00a0c9af11a6
@@ -487,19 +487,19 @@ var IID_IMsmStrings = win32.GUID{Data1: 0x0adda827, Data2: 0x2c26, Data3: 0x11d2
 // Get_Item dispatches through IMsmStrings's vtable slot 7.
 func (self *IMsmStrings) Get_Item(Item int32, Return *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Item), uintptr(unsafe.Pointer(Return)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IMsmStrings's vtable slot 8.
 func (self *IMsmStrings) Get_Count(Count *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Count)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IMsmStrings's vtable slot 9.
 func (self *IMsmStrings) Get__NewEnum(NewEnum **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(NewEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 50afb58a-438c-4088-9789-f8c4899829c7
@@ -513,337 +513,337 @@ var IID_IPMApplicationInfo = win32.GUID{Data1: 0x50afb58a, Data2: 0x438c, Data3:
 // Get_ProductID dispatches through IPMApplicationInfo's vtable slot 3.
 func (self *IPMApplicationInfo) Get_ProductID(pProductID *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProductID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InstanceID dispatches through IPMApplicationInfo's vtable slot 4.
 func (self *IPMApplicationInfo) Get_InstanceID(pInstanceID *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInstanceID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OfferID dispatches through IPMApplicationInfo's vtable slot 5.
 func (self *IPMApplicationInfo) Get_OfferID(pOfferID *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOfferID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DefaultTask dispatches through IPMApplicationInfo's vtable slot 6.
 func (self *IPMApplicationInfo) Get_DefaultTask(pDefaultTask *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDefaultTask)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AppTitle dispatches through IPMApplicationInfo's vtable slot 7.
 func (self *IPMApplicationInfo) Get_AppTitle(pAppTitle *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAppTitle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IconPath dispatches through IPMApplicationInfo's vtable slot 8.
 func (self *IPMApplicationInfo) Get_IconPath(pAppIconPath *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAppIconPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NotificationState dispatches through IPMApplicationInfo's vtable slot 9.
 func (self *IPMApplicationInfo) Get_NotificationState(pIsNotified *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsNotified)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AppInstallType dispatches through IPMApplicationInfo's vtable slot 10.
 func (self *IPMApplicationInfo) Get_AppInstallType(pAppInstallType *PM_APPLICATION_INSTALL_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAppInstallType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_State dispatches through IPMApplicationInfo's vtable slot 11.
 func (self *IPMApplicationInfo) Get_State(pState *PM_APPLICATION_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsRevoked dispatches through IPMApplicationInfo's vtable slot 12.
 func (self *IPMApplicationInfo) Get_IsRevoked(pIsRevoked *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsRevoked)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UpdateAvailable dispatches through IPMApplicationInfo's vtable slot 13.
 func (self *IPMApplicationInfo) Get_UpdateAvailable(pIsUpdateAvailable *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsUpdateAvailable)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InstallDate dispatches through IPMApplicationInfo's vtable slot 14.
 func (self *IPMApplicationInfo) Get_InstallDate(pInstallDate *foundation.FILETIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInstallDate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsUninstallable dispatches through IPMApplicationInfo's vtable slot 15.
 func (self *IPMApplicationInfo) Get_IsUninstallable(pIsUninstallable *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsUninstallable)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsThemable dispatches through IPMApplicationInfo's vtable slot 16.
 func (self *IPMApplicationInfo) Get_IsThemable(pIsThemable *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsThemable)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsTrial dispatches through IPMApplicationInfo's vtable slot 17.
 func (self *IPMApplicationInfo) Get_IsTrial(pIsTrial *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsTrial)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InstallPath dispatches through IPMApplicationInfo's vtable slot 18.
 func (self *IPMApplicationInfo) Get_InstallPath(pInstallPath *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInstallPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DataRoot dispatches through IPMApplicationInfo's vtable slot 19.
 func (self *IPMApplicationInfo) Get_DataRoot(pDataRoot *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDataRoot)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Genre dispatches through IPMApplicationInfo's vtable slot 20.
 func (self *IPMApplicationInfo) Get_Genre(pGenre *PM_APP_GENRE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGenre)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Publisher dispatches through IPMApplicationInfo's vtable slot 21.
 func (self *IPMApplicationInfo) Get_Publisher(pPublisher *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPublisher)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Author dispatches through IPMApplicationInfo's vtable slot 22.
 func (self *IPMApplicationInfo) Get_Author(pAuthor *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAuthor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through IPMApplicationInfo's vtable slot 23.
 func (self *IPMApplicationInfo) Get_Description(pDescription *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Version dispatches through IPMApplicationInfo's vtable slot 24.
 func (self *IPMApplicationInfo) Get_Version(pVersion *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVersion)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InvocationInfo dispatches through IPMApplicationInfo's vtable slot 25.
 func (self *IPMApplicationInfo) Get_InvocationInfo(pImageUrn *foundation.BSTR, pParameters *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pImageUrn)), uintptr(unsafe.Pointer(pParameters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AppPlatMajorVersion dispatches through IPMApplicationInfo's vtable slot 26.
 func (self *IPMApplicationInfo) Get_AppPlatMajorVersion(pMajorVer *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMajorVer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AppPlatMinorVersion dispatches through IPMApplicationInfo's vtable slot 27.
 func (self *IPMApplicationInfo) Get_AppPlatMinorVersion(pMinorVer *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMinorVer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PublisherID dispatches through IPMApplicationInfo's vtable slot 28.
 func (self *IPMApplicationInfo) Get_PublisherID(pPublisherID *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPublisherID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsMultiCore dispatches through IPMApplicationInfo's vtable slot 29.
 func (self *IPMApplicationInfo) Get_IsMultiCore(pIsMultiCore *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsMultiCore)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SID dispatches through IPMApplicationInfo's vtable slot 30.
 func (self *IPMApplicationInfo) Get_SID(pSID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AppPlatMajorVersionLightUp dispatches through IPMApplicationInfo's vtable slot 31.
 func (self *IPMApplicationInfo) Get_AppPlatMajorVersionLightUp(pMajorVer *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMajorVer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AppPlatMinorVersionLightUp dispatches through IPMApplicationInfo's vtable slot 32.
 func (self *IPMApplicationInfo) Get_AppPlatMinorVersionLightUp(pMinorVer *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMinorVer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Set_UpdateAvailable dispatches through IPMApplicationInfo's vtable slot 33.
 func (self *IPMApplicationInfo) Set_UpdateAvailable(IsUpdateAvailable bool) error {
 	_IsUpdateAvailable := win32.Bool32(IsUpdateAvailable)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(_IsUpdateAvailable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Set_NotificationState dispatches through IPMApplicationInfo's vtable slot 34.
 func (self *IPMApplicationInfo) Set_NotificationState(IsNotified bool) error {
 	_IsNotified := win32.Bool32(IsNotified)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(_IsNotified))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Set_IconPath dispatches through IPMApplicationInfo's vtable slot 35.
 func (self *IPMApplicationInfo) Set_IconPath(AppIconPath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AppIconPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Set_UninstallableState dispatches through IPMApplicationInfo's vtable slot 36.
 func (self *IPMApplicationInfo) Set_UninstallableState(IsUninstallable bool) error {
 	_IsUninstallable := win32.Bool32(IsUninstallable)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(_IsUninstallable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsPinableOnKidZone dispatches through IPMApplicationInfo's vtable slot 37.
 func (self *IPMApplicationInfo) Get_IsPinableOnKidZone(pIsPinable *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsPinable)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsOriginallyPreInstalled dispatches through IPMApplicationInfo's vtable slot 38.
 func (self *IPMApplicationInfo) Get_IsOriginallyPreInstalled(pIsPreinstalled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsPreinstalled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsInstallOnSD dispatches through IPMApplicationInfo's vtable slot 39.
 func (self *IPMApplicationInfo) Get_IsInstallOnSD(pIsInstallOnSD *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsInstallOnSD)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsOptoutOnSD dispatches through IPMApplicationInfo's vtable slot 40.
 func (self *IPMApplicationInfo) Get_IsOptoutOnSD(pIsOptoutOnSD *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsOptoutOnSD)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsOptoutBackupRestore dispatches through IPMApplicationInfo's vtable slot 41.
 func (self *IPMApplicationInfo) Get_IsOptoutBackupRestore(pIsOptoutBackupRestore *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsOptoutBackupRestore)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Set_EnterpriseDisabled dispatches through IPMApplicationInfo's vtable slot 42.
 func (self *IPMApplicationInfo) Set_EnterpriseDisabled(IsDisabled bool) error {
 	_IsDisabled := win32.Bool32(IsDisabled)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(_IsDisabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Set_EnterpriseUninstallable dispatches through IPMApplicationInfo's vtable slot 43.
 func (self *IPMApplicationInfo) Set_EnterpriseUninstallable(IsUninstallable bool) error {
 	_IsUninstallable := win32.Bool32(IsUninstallable)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(_IsUninstallable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EnterpriseDisabled dispatches through IPMApplicationInfo's vtable slot 44.
 func (self *IPMApplicationInfo) Get_EnterpriseDisabled(IsDisabled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(IsDisabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EnterpriseUninstallable dispatches through IPMApplicationInfo's vtable slot 45.
 func (self *IPMApplicationInfo) Get_EnterpriseUninstallable(IsUninstallable *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(IsUninstallable)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsVisibleOnAppList dispatches through IPMApplicationInfo's vtable slot 46.
 func (self *IPMApplicationInfo) Get_IsVisibleOnAppList(pIsVisible *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsVisible)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsInboxApp dispatches through IPMApplicationInfo's vtable slot 47.
 func (self *IPMApplicationInfo) Get_IsInboxApp(pIsInboxApp *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsInboxApp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StorageID dispatches through IPMApplicationInfo's vtable slot 48.
 func (self *IPMApplicationInfo) Get_StorageID(pStorageID *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStorageID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StartAppBlob dispatches through IPMApplicationInfo's vtable slot 49.
 func (self *IPMApplicationInfo) Get_StartAppBlob(pBlob *PM_STARTAPPBLOB) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBlob)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsMovable dispatches through IPMApplicationInfo's vtable slot 50.
 func (self *IPMApplicationInfo) Get_IsMovable(pIsMovable *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsMovable)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DeploymentAppEnumerationHubFilter dispatches through IPMApplicationInfo's vtable slot 51.
 func (self *IPMApplicationInfo) Get_DeploymentAppEnumerationHubFilter(HubType *PM_TILE_HUBTYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(HubType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ModifiedDate dispatches through IPMApplicationInfo's vtable slot 52.
 func (self *IPMApplicationInfo) Get_ModifiedDate(pModifiedDate *foundation.FILETIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pModifiedDate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsOriginallyRestored dispatches through IPMApplicationInfo's vtable slot 53.
 func (self *IPMApplicationInfo) Get_IsOriginallyRestored(pIsRestored *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsRestored)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ShouldDeferMdilBind dispatches through IPMApplicationInfo's vtable slot 54.
 func (self *IPMApplicationInfo) Get_ShouldDeferMdilBind(pfDeferMdilBind *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfDeferMdilBind)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsFullyPreInstall dispatches through IPMApplicationInfo's vtable slot 55.
 func (self *IPMApplicationInfo) Get_IsFullyPreInstall(pfIsFullyPreInstall *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsFullyPreInstall)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Set_IsMdilMaintenanceNeeded dispatches through IPMApplicationInfo's vtable slot 56.
 func (self *IPMApplicationInfo) Set_IsMdilMaintenanceNeeded(fIsMdilMaintenanceNeeded bool) error {
 	_fIsMdilMaintenanceNeeded := win32.Bool32(fIsMdilMaintenanceNeeded)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(_fIsMdilMaintenanceNeeded))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Set_Title dispatches through IPMApplicationInfo's vtable slot 57.
 func (self *IPMApplicationInfo) Set_Title(AppTitle foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AppTitle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 0ec42a96-4d46-4dc6-a3d9-a7acaac0f5fa
@@ -857,7 +857,7 @@ var IID_IPMApplicationInfoEnumerator = win32.GUID{Data1: 0x0ec42a96, Data2: 0x4d
 // Get_Next dispatches through IPMApplicationInfoEnumerator's vtable slot 3.
 func (self *IPMApplicationInfoEnumerator) Get_Next(ppAppInfo **IPMApplicationInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAppInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 3a8b46da-928c-4879-998c-09dc96f3d490
@@ -871,87 +871,87 @@ var IID_IPMBackgroundServiceAgentInfo = win32.GUID{Data1: 0x3a8b46da, Data2: 0x9
 // Get_ProductID dispatches through IPMBackgroundServiceAgentInfo's vtable slot 3.
 func (self *IPMBackgroundServiceAgentInfo) Get_ProductID(pProductID *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProductID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TaskID dispatches through IPMBackgroundServiceAgentInfo's vtable slot 4.
 func (self *IPMBackgroundServiceAgentInfo) Get_TaskID(pTaskID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTaskID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BSAID dispatches through IPMBackgroundServiceAgentInfo's vtable slot 5.
 func (self *IPMBackgroundServiceAgentInfo) Get_BSAID(pBSAID *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBSAID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BGSpecifier dispatches through IPMBackgroundServiceAgentInfo's vtable slot 6.
 func (self *IPMBackgroundServiceAgentInfo) Get_BGSpecifier(pBGSpecifier *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBGSpecifier)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BGName dispatches through IPMBackgroundServiceAgentInfo's vtable slot 7.
 func (self *IPMBackgroundServiceAgentInfo) Get_BGName(pBGName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBGName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BGSource dispatches through IPMBackgroundServiceAgentInfo's vtable slot 8.
 func (self *IPMBackgroundServiceAgentInfo) Get_BGSource(pBGSource *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBGSource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BGType dispatches through IPMBackgroundServiceAgentInfo's vtable slot 9.
 func (self *IPMBackgroundServiceAgentInfo) Get_BGType(pBGType *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBGType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsPeriodic dispatches through IPMBackgroundServiceAgentInfo's vtable slot 10.
 func (self *IPMBackgroundServiceAgentInfo) Get_IsPeriodic(pIsPeriodic *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsPeriodic)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsScheduled dispatches through IPMBackgroundServiceAgentInfo's vtable slot 11.
 func (self *IPMBackgroundServiceAgentInfo) Get_IsScheduled(pIsScheduled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsScheduled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsScheduleAllowed dispatches through IPMBackgroundServiceAgentInfo's vtable slot 12.
 func (self *IPMBackgroundServiceAgentInfo) Get_IsScheduleAllowed(pIsScheduleAllowed *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsScheduleAllowed)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through IPMBackgroundServiceAgentInfo's vtable slot 13.
 func (self *IPMBackgroundServiceAgentInfo) Get_Description(pDescription *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsLaunchOnBoot dispatches through IPMBackgroundServiceAgentInfo's vtable slot 14.
 func (self *IPMBackgroundServiceAgentInfo) Get_IsLaunchOnBoot(pLaunchOnBoot *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLaunchOnBoot)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Set_IsScheduled dispatches through IPMBackgroundServiceAgentInfo's vtable slot 15.
 func (self *IPMBackgroundServiceAgentInfo) Set_IsScheduled(IsScheduled bool) error {
 	_IsScheduled := win32.Bool32(IsScheduled)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(_IsScheduled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Set_IsScheduleAllowed dispatches through IPMBackgroundServiceAgentInfo's vtable slot 16.
 func (self *IPMBackgroundServiceAgentInfo) Set_IsScheduleAllowed(IsScheduleAllowed bool) error {
 	_IsScheduleAllowed := win32.Bool32(IsScheduleAllowed)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(_IsScheduleAllowed))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 18eb2072-ab56-43b3-872c-beafb7a6b391
@@ -965,7 +965,7 @@ var IID_IPMBackgroundServiceAgentInfoEnumerator = win32.GUID{Data1: 0x18eb2072, 
 // Get_Next dispatches through IPMBackgroundServiceAgentInfoEnumerator's vtable slot 3.
 func (self *IPMBackgroundServiceAgentInfoEnumerator) Get_Next(ppBSAInfo **IPMBackgroundServiceAgentInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppBSAInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 7dd4531b-d3bf-4b6b-94f3-69c098b1497d
@@ -979,37 +979,37 @@ var IID_IPMBackgroundWorkerInfo = win32.GUID{Data1: 0x7dd4531b, Data2: 0xd3bf, D
 // Get_ProductID dispatches through IPMBackgroundWorkerInfo's vtable slot 3.
 func (self *IPMBackgroundWorkerInfo) Get_ProductID(pProductID *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProductID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TaskID dispatches through IPMBackgroundWorkerInfo's vtable slot 4.
 func (self *IPMBackgroundWorkerInfo) Get_TaskID(pTaskID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTaskID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BGName dispatches through IPMBackgroundWorkerInfo's vtable slot 5.
 func (self *IPMBackgroundWorkerInfo) Get_BGName(pBGName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBGName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MaxStartupLatency dispatches through IPMBackgroundWorkerInfo's vtable slot 6.
 func (self *IPMBackgroundWorkerInfo) Get_MaxStartupLatency(pMaxStartupLatency *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMaxStartupLatency)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ExpectedRuntime dispatches through IPMBackgroundWorkerInfo's vtable slot 7.
 func (self *IPMBackgroundWorkerInfo) Get_ExpectedRuntime(pExpectedRuntime *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pExpectedRuntime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsBootWorker dispatches through IPMBackgroundWorkerInfo's vtable slot 8.
 func (self *IPMBackgroundWorkerInfo) Get_IsBootWorker(pIsBootWorker *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsBootWorker)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 87f479f8-90d8-4ec7-92b9-72787e2f636b
@@ -1023,7 +1023,7 @@ var IID_IPMBackgroundWorkerInfoEnumerator = win32.GUID{Data1: 0x87f479f8, Data2:
 // Get_Next dispatches through IPMBackgroundWorkerInfoEnumerator's vtable slot 3.
 func (self *IPMBackgroundWorkerInfoEnumerator) Get_Next(ppBWInfo **IPMBackgroundWorkerInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppBWInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 35f785fa-1979-4a8b-bc8f-fd70eb0d1544
@@ -1037,86 +1037,86 @@ var IID_IPMDeploymentManager = win32.GUID{Data1: 0x35f785fa, Data2: 0x1979, Data
 // BeginInstall dispatches through IPMDeploymentManager's vtable slot 6.
 func (self *IPMDeploymentManager) BeginInstall(pInstallInfo *PM_INSTALLINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInstallInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BeginUpdate dispatches through IPMDeploymentManager's vtable slot 7.
 func (self *IPMDeploymentManager) BeginUpdate(pUpdateInfo *PM_UPDATEINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUpdateInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BeginDeployPackage dispatches through IPMDeploymentManager's vtable slot 8.
 func (self *IPMDeploymentManager) BeginDeployPackage(pInstallInfo *PM_INSTALLINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInstallInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BeginUpdateDeployedPackageLegacy dispatches through IPMDeploymentManager's vtable slot 9.
 func (self *IPMDeploymentManager) BeginUpdateDeployedPackageLegacy(pUpdateInfo *PM_UPDATEINFO_LEGACY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUpdateInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BeginEnterpriseAppInstall dispatches through IPMDeploymentManager's vtable slot 11.
 func (self *IPMDeploymentManager) BeginEnterpriseAppInstall(pInstallInfo *PM_INSTALLINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInstallInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BeginEnterpriseAppUpdate dispatches through IPMDeploymentManager's vtable slot 12.
 func (self *IPMDeploymentManager) BeginEnterpriseAppUpdate(pUpdateInfo *PM_UPDATEINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUpdateInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLicenseChallenge dispatches through IPMDeploymentManager's vtable slot 14.
 func (self *IPMDeploymentManager) GetLicenseChallenge(PackagePath foundation.BSTR, ppbChallenge **byte, pcbChallenge *uint32, ppbKID **byte, pcbKID *uint32, ppbDeviceID **byte, pcbDeviceID *uint32, ppbSaltValue **byte, pcbSaltValue *uint32, ppbKGVValue **byte, pcbKGVValue *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PackagePath)), uintptr(unsafe.Pointer(ppbChallenge)), uintptr(unsafe.Pointer(pcbChallenge)), uintptr(unsafe.Pointer(ppbKID)), uintptr(unsafe.Pointer(pcbKID)), uintptr(unsafe.Pointer(ppbDeviceID)), uintptr(unsafe.Pointer(pcbDeviceID)), uintptr(unsafe.Pointer(ppbSaltValue)), uintptr(unsafe.Pointer(pcbSaltValue)), uintptr(unsafe.Pointer(ppbKGVValue)), uintptr(unsafe.Pointer(pcbKGVValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetApplicationsNeedMaintenance dispatches through IPMDeploymentManager's vtable slot 25.
 func (self *IPMDeploymentManager) SetApplicationsNeedMaintenance(RequiredMaintenanceOperations uint32, pcApplications *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(RequiredMaintenanceOperations), uintptr(unsafe.Pointer(pcApplications)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BeginUpdateDeployedPackage dispatches through IPMDeploymentManager's vtable slot 28.
 func (self *IPMDeploymentManager) BeginUpdateDeployedPackage(pUpdateInfo *PM_UPDATEINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUpdateInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ResolveResourceString dispatches through IPMDeploymentManager's vtable slot 30.
 func (self *IPMDeploymentManager) ResolveResourceString(resourceString string, pResolvedResourceString *foundation.BSTR) error {
 	_resourceString := win32.UTF16Ptr(resourceString)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_resourceString)), uintptr(unsafe.Pointer(pResolvedResourceString)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UpdateCapabilitiesForModernApps dispatches through IPMDeploymentManager's vtable slot 31.
 func (self *IPMDeploymentManager) UpdateCapabilitiesForModernApps() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BindDeferredMdilBinaries dispatches through IPMDeploymentManager's vtable slot 34.
 func (self *IPMDeploymentManager) BindDeferredMdilBinaries() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GenerateXamlLightupXbfForCurrentLocale dispatches through IPMDeploymentManager's vtable slot 35.
 func (self *IPMDeploymentManager) GenerateXamlLightupXbfForCurrentLocale(PackageFamilyName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PackageFamilyName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FixJunctionsForAppsOnSDCard dispatches through IPMDeploymentManager's vtable slot 37.
 func (self *IPMDeploymentManager) FixJunctionsForAppsOnSDCard() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 698d57c2-292d-4cf3-b73c-d95a6922ed9a
@@ -1130,25 +1130,25 @@ var IID_IPMEnumerationManager = win32.GUID{Data1: 0x698d57c2, Data2: 0x292d, Dat
 // Get_BackgroundServiceAgentInfo dispatches through IPMEnumerationManager's vtable slot 13.
 func (self *IPMEnumerationManager) Get_BackgroundServiceAgentInfo(BSAID uint32, ppTaskInfo **IPMBackgroundServiceAgentInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(BSAID), uintptr(unsafe.Pointer(ppTaskInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AllLiveTileJobs dispatches through IPMEnumerationManager's vtable slot 14.
 func (self *IPMEnumerationManager) Get_AllLiveTileJobs(ppLiveTileJobEnum **IPMLiveTileJobInfoEnumerator) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppLiveTileJobEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FileHandlerGenericLogo dispatches through IPMEnumerationManager's vtable slot 17.
 func (self *IPMEnumerationManager) Get_FileHandlerGenericLogo(FileType foundation.BSTR, LogoSize PM_LOGO_SIZE, pLogo *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(FileType)), uintptr(LogoSize), uintptr(unsafe.Pointer(pLogo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ApplicationInfoFromAccessClaims dispatches through IPMEnumerationManager's vtable slot 18.
 func (self *IPMEnumerationManager) Get_ApplicationInfoFromAccessClaims(SysAppID0 foundation.BSTR, SysAppID1 foundation.BSTR, ppAppInfo **IPMApplicationInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SysAppID0)), uintptr(unsafe.Pointer(SysAppID1)), uintptr(unsafe.Pointer(ppAppInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: e2d77509-4e58-4ba9-af7e-b642e370e1b0
@@ -1162,7 +1162,7 @@ var IID_IPMExtensionCachedFileUpdaterInfo = win32.GUID{Data1: 0xe2d77509, Data2:
 // Get_SupportsUpdates dispatches through IPMExtensionCachedFileUpdaterInfo's vtable slot 3.
 func (self *IPMExtensionCachedFileUpdaterInfo) Get_SupportsUpdates(pSupportsUpdates *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSupportsUpdates)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: e5666373-7ba1-467c-b819-b175db1c295b
@@ -1176,7 +1176,7 @@ var IID_IPMExtensionContractInfo = win32.GUID{Data1: 0xe5666373, Data2: 0x7ba1, 
 // Get_InvocationInfo dispatches through IPMExtensionContractInfo's vtable slot 3.
 func (self *IPMExtensionContractInfo) Get_InvocationInfo(pAUMID *foundation.BSTR, pArgs *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAUMID)), uintptr(unsafe.Pointer(pArgs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 6b87cb6c-0b88-4989-a4ec-033714f710d4
@@ -1190,43 +1190,43 @@ var IID_IPMExtensionFileExtensionInfo = win32.GUID{Data1: 0x6b87cb6c, Data2: 0x0
 // Get_Name dispatches through IPMExtensionFileExtensionInfo's vtable slot 3.
 func (self *IPMExtensionFileExtensionInfo) Get_Name(pName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DisplayName dispatches through IPMExtensionFileExtensionInfo's vtable slot 4.
 func (self *IPMExtensionFileExtensionInfo) Get_DisplayName(pDisplayName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDisplayName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Logo dispatches through IPMExtensionFileExtensionInfo's vtable slot 5.
 func (self *IPMExtensionFileExtensionInfo) Get_Logo(LogoSize PM_LOGO_SIZE, pLogo *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(LogoSize), uintptr(unsafe.Pointer(pLogo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ContentType dispatches through IPMExtensionFileExtensionInfo's vtable slot 6.
 func (self *IPMExtensionFileExtensionInfo) Get_ContentType(FileType foundation.BSTR, pContentType *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(FileType)), uintptr(unsafe.Pointer(pContentType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FileType dispatches through IPMExtensionFileExtensionInfo's vtable slot 7.
 func (self *IPMExtensionFileExtensionInfo) Get_FileType(ContentType foundation.BSTR, pFileType *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ContentType)), uintptr(unsafe.Pointer(pFileType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InvocationInfo dispatches through IPMExtensionFileExtensionInfo's vtable slot 8.
 func (self *IPMExtensionFileExtensionInfo) Get_InvocationInfo(pImageUrn *foundation.BSTR, pParameters *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pImageUrn)), uintptr(unsafe.Pointer(pParameters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AllFileTypes dispatches through IPMExtensionFileExtensionInfo's vtable slot 9.
 func (self *IPMExtensionFileExtensionInfo) Get_AllFileTypes(pcbTypes *uint32, ppTypes **foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcbTypes)), uintptr(unsafe.Pointer(ppTypes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 6dc91d25-9606-420c-9a78-e034a3418345
@@ -1240,13 +1240,13 @@ var IID_IPMExtensionFileOpenPickerInfo = win32.GUID{Data1: 0x6dc91d25, Data2: 0x
 // Get_AllFileTypes dispatches through IPMExtensionFileOpenPickerInfo's vtable slot 3.
 func (self *IPMExtensionFileOpenPickerInfo) Get_AllFileTypes(pcTypes *uint32, ppTypes **foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcTypes)), uintptr(unsafe.Pointer(ppTypes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SupportsAllFileTypes dispatches through IPMExtensionFileOpenPickerInfo's vtable slot 4.
 func (self *IPMExtensionFileOpenPickerInfo) Get_SupportsAllFileTypes(pSupportsAllTypes *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSupportsAllTypes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 38005cba-f81a-493e-a0f8-922c8680da43
@@ -1260,13 +1260,13 @@ var IID_IPMExtensionFileSavePickerInfo = win32.GUID{Data1: 0x38005cba, Data2: 0x
 // Get_AllFileTypes dispatches through IPMExtensionFileSavePickerInfo's vtable slot 3.
 func (self *IPMExtensionFileSavePickerInfo) Get_AllFileTypes(pcTypes *uint32, ppTypes **foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcTypes)), uintptr(unsafe.Pointer(ppTypes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SupportsAllFileTypes dispatches through IPMExtensionFileSavePickerInfo's vtable slot 4.
 func (self *IPMExtensionFileSavePickerInfo) Get_SupportsAllFileTypes(pSupportsAllTypes *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSupportsAllTypes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 49acde79-9788-4d0a-8aa0-1746afdb9e9d
@@ -1280,37 +1280,37 @@ var IID_IPMExtensionInfo = win32.GUID{Data1: 0x49acde79, Data2: 0x9788, Data3: 0
 // Get_SupplierPID dispatches through IPMExtensionInfo's vtable slot 3.
 func (self *IPMExtensionInfo) Get_SupplierPID(pSupplierPID *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSupplierPID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SupplierTaskID dispatches through IPMExtensionInfo's vtable slot 4.
 func (self *IPMExtensionInfo) Get_SupplierTaskID(pSupplierTID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSupplierTID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Title dispatches through IPMExtensionInfo's vtable slot 5.
 func (self *IPMExtensionInfo) Get_Title(pTitle *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTitle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IconPath dispatches through IPMExtensionInfo's vtable slot 6.
 func (self *IPMExtensionInfo) Get_IconPath(pIconPath *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIconPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ExtraFile dispatches through IPMExtensionInfo's vtable slot 7.
 func (self *IPMExtensionInfo) Get_ExtraFile(pFilePath *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFilePath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InvocationInfo dispatches through IPMExtensionInfo's vtable slot 8.
 func (self *IPMExtensionInfo) Get_InvocationInfo(pImageUrn *foundation.BSTR, pParameters *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pImageUrn)), uintptr(unsafe.Pointer(pParameters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 403b9e82-1171-4573-8e6f-6f33f39b83dd
@@ -1324,7 +1324,7 @@ var IID_IPMExtensionInfoEnumerator = win32.GUID{Data1: 0x403b9e82, Data2: 0x1171
 // Get_Next dispatches through IPMExtensionInfoEnumerator's vtable slot 3.
 func (self *IPMExtensionInfoEnumerator) Get_Next(ppExtensionInfo **IPMExtensionInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppExtensionInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 1e3fa036-51eb-4453-baff-b8d8e4b46c8e
@@ -1338,13 +1338,13 @@ var IID_IPMExtensionProtocolInfo = win32.GUID{Data1: 0x1e3fa036, Data2: 0x51eb, 
 // Get_Protocol dispatches through IPMExtensionProtocolInfo's vtable slot 3.
 func (self *IPMExtensionProtocolInfo) Get_Protocol(pProtocol *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProtocol)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InvocationInfo dispatches through IPMExtensionProtocolInfo's vtable slot 4.
 func (self *IPMExtensionProtocolInfo) Get_InvocationInfo(pImageUrn *foundation.BSTR, pParameters *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pImageUrn)), uintptr(unsafe.Pointer(pParameters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 5471f48b-c65c-4656-8c70-242e31195fea
@@ -1358,19 +1358,19 @@ var IID_IPMExtensionShareTargetInfo = win32.GUID{Data1: 0x5471f48b, Data2: 0xc65
 // Get_AllFileTypes dispatches through IPMExtensionShareTargetInfo's vtable slot 3.
 func (self *IPMExtensionShareTargetInfo) Get_AllFileTypes(pcTypes *uint32, ppTypes **foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcTypes)), uintptr(unsafe.Pointer(ppTypes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AllDataFormats dispatches through IPMExtensionShareTargetInfo's vtable slot 4.
 func (self *IPMExtensionShareTargetInfo) Get_AllDataFormats(pcDataFormats *uint32, ppDataFormats **foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcDataFormats)), uintptr(unsafe.Pointer(ppDataFormats)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SupportsAllFileTypes dispatches through IPMExtensionShareTargetInfo's vtable slot 5.
 func (self *IPMExtensionShareTargetInfo) Get_SupportsAllFileTypes(pSupportsAllTypes *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSupportsAllTypes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 6009a81f-4710-4697-b5f6-2208f6057b8e
@@ -1384,92 +1384,92 @@ var IID_IPMLiveTileJobInfo = win32.GUID{Data1: 0x6009a81f, Data2: 0x4710, Data3:
 // Get_ProductID dispatches through IPMLiveTileJobInfo's vtable slot 3.
 func (self *IPMLiveTileJobInfo) Get_ProductID(pProductID *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProductID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TileID dispatches through IPMLiveTileJobInfo's vtable slot 4.
 func (self *IPMLiveTileJobInfo) Get_TileID(pTileID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTileID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NextSchedule dispatches through IPMLiveTileJobInfo's vtable slot 5.
 func (self *IPMLiveTileJobInfo) Get_NextSchedule(pNextSchedule *foundation.FILETIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNextSchedule)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StartSchedule dispatches through IPMLiveTileJobInfo's vtable slot 7.
 func (self *IPMLiveTileJobInfo) Get_StartSchedule(pStartSchedule *foundation.FILETIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStartSchedule)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IntervalDuration dispatches through IPMLiveTileJobInfo's vtable slot 9.
 func (self *IPMLiveTileJobInfo) Get_IntervalDuration(pIntervalDuration *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIntervalDuration)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Set_IntervalDuration dispatches through IPMLiveTileJobInfo's vtable slot 10.
 func (self *IPMLiveTileJobInfo) Set_IntervalDuration(ulIntervalDuration uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(ulIntervalDuration))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RunForever dispatches through IPMLiveTileJobInfo's vtable slot 11.
 func (self *IPMLiveTileJobInfo) Get_RunForever(IsRunForever *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(IsRunForever)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Set_RunForever dispatches through IPMLiveTileJobInfo's vtable slot 12.
 func (self *IPMLiveTileJobInfo) Set_RunForever(fRunForever bool) error {
 	_fRunForever := win32.Bool32(fRunForever)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(_fRunForever))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MaxRunCount dispatches through IPMLiveTileJobInfo's vtable slot 13.
 func (self *IPMLiveTileJobInfo) Get_MaxRunCount(pMaxRunCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMaxRunCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Set_MaxRunCount dispatches through IPMLiveTileJobInfo's vtable slot 14.
 func (self *IPMLiveTileJobInfo) Set_MaxRunCount(ulMaxRunCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(ulMaxRunCount))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RunCount dispatches through IPMLiveTileJobInfo's vtable slot 15.
 func (self *IPMLiveTileJobInfo) Get_RunCount(pRunCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRunCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Set_RunCount dispatches through IPMLiveTileJobInfo's vtable slot 16.
 func (self *IPMLiveTileJobInfo) Set_RunCount(ulRunCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(ulRunCount))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RecurrenceType dispatches through IPMLiveTileJobInfo's vtable slot 17.
 func (self *IPMLiveTileJobInfo) Get_RecurrenceType(pRecurrenceType *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRecurrenceType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Set_RecurrenceType dispatches through IPMLiveTileJobInfo's vtable slot 18.
 func (self *IPMLiveTileJobInfo) Set_RecurrenceType(ulRecurrenceType uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(ulRecurrenceType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TileXML dispatches through IPMLiveTileJobInfo's vtable slot 19.
 func (self *IPMLiveTileJobInfo) Get_TileXML(pTileXml **byte, pcbTileXml *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTileXml)), uintptr(unsafe.Pointer(pcbTileXml)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Set_TileXML dispatches through IPMLiveTileJobInfo's vtable slot 20.
@@ -1479,13 +1479,13 @@ func (self *IPMLiveTileJobInfo) Set_TileXML(pTileXml []byte) error {
 		_pTileXml = &pTileXml[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pTileXml)), uintptr(len(pTileXml)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UrlXML dispatches through IPMLiveTileJobInfo's vtable slot 21.
 func (self *IPMLiveTileJobInfo) Get_UrlXML(pUrlXML **byte, pcbUrlXML *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUrlXML)), uintptr(unsafe.Pointer(pcbUrlXML)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Set_UrlXML dispatches through IPMLiveTileJobInfo's vtable slot 22.
@@ -1495,31 +1495,31 @@ func (self *IPMLiveTileJobInfo) Set_UrlXML(pUrlXML []byte) error {
 		_pUrlXML = &pUrlXML[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pUrlXML)), uintptr(len(pUrlXML)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AttemptCount dispatches through IPMLiveTileJobInfo's vtable slot 23.
 func (self *IPMLiveTileJobInfo) Get_AttemptCount(pAttemptCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAttemptCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Set_AttemptCount dispatches through IPMLiveTileJobInfo's vtable slot 24.
 func (self *IPMLiveTileJobInfo) Set_AttemptCount(ulAttemptCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(ulAttemptCount))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DownloadState dispatches through IPMLiveTileJobInfo's vtable slot 25.
 func (self *IPMLiveTileJobInfo) Get_DownloadState(pDownloadState *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDownloadState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Set_DownloadState dispatches through IPMLiveTileJobInfo's vtable slot 26.
 func (self *IPMLiveTileJobInfo) Set_DownloadState(ulDownloadState uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(ulDownloadState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: bc042582-9415-4f36-9f99-06f104c07c03
@@ -1533,7 +1533,7 @@ var IID_IPMLiveTileJobInfoEnumerator = win32.GUID{Data1: 0xbc042582, Data2: 0x94
 // Get_Next dispatches through IPMLiveTileJobInfoEnumerator's vtable slot 3.
 func (self *IPMLiveTileJobInfoEnumerator) Get_Next(ppLiveTileJobInfo **IPMLiveTileJobInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppLiveTileJobInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: bf1d8c33-1bf5-4ee0-b549-6b9dd3834942
@@ -1547,127 +1547,127 @@ var IID_IPMTaskInfo = win32.GUID{Data1: 0xbf1d8c33, Data2: 0x1bf5, Data3: 0x4ee0
 // Get_ProductID dispatches through IPMTaskInfo's vtable slot 3.
 func (self *IPMTaskInfo) Get_ProductID(pProductID *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProductID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TaskID dispatches through IPMTaskInfo's vtable slot 4.
 func (self *IPMTaskInfo) Get_TaskID(pTaskID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTaskID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NavigationPage dispatches through IPMTaskInfo's vtable slot 5.
 func (self *IPMTaskInfo) Get_NavigationPage(pNavigationPage *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNavigationPage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TaskTransition dispatches through IPMTaskInfo's vtable slot 6.
 func (self *IPMTaskInfo) Get_TaskTransition(pTaskTransition *PM_TASK_TRANSITION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTaskTransition)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RuntimeType dispatches through IPMTaskInfo's vtable slot 7.
 func (self *IPMTaskInfo) Get_RuntimeType(pRuntimetype *PACKMAN_RUNTIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRuntimetype)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ActivationPolicy dispatches through IPMTaskInfo's vtable slot 8.
 func (self *IPMTaskInfo) Get_ActivationPolicy(pActivationPolicy *PM_ACTIVATION_POLICY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pActivationPolicy)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TaskType dispatches through IPMTaskInfo's vtable slot 9.
 func (self *IPMTaskInfo) Get_TaskType(pTaskType *PM_TASK_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTaskType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InvocationInfo dispatches through IPMTaskInfo's vtable slot 10.
 func (self *IPMTaskInfo) Get_InvocationInfo(pImageUrn *foundation.BSTR, pParameters *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pImageUrn)), uintptr(unsafe.Pointer(pParameters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ImagePath dispatches through IPMTaskInfo's vtable slot 11.
 func (self *IPMTaskInfo) Get_ImagePath(pImagePath *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pImagePath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ImageParams dispatches through IPMTaskInfo's vtable slot 12.
 func (self *IPMTaskInfo) Get_ImageParams(pImageParams *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pImageParams)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InstallRootFolder dispatches through IPMTaskInfo's vtable slot 13.
 func (self *IPMTaskInfo) Get_InstallRootFolder(pInstallRootFolder *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInstallRootFolder)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DataRootFolder dispatches through IPMTaskInfo's vtable slot 14.
 func (self *IPMTaskInfo) Get_DataRootFolder(pDataRootFolder *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDataRootFolder)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsSingleInstanceHost dispatches through IPMTaskInfo's vtable slot 15.
 func (self *IPMTaskInfo) Get_IsSingleInstanceHost(pIsSingleInstanceHost *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsSingleInstanceHost)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsInteropEnabled dispatches through IPMTaskInfo's vtable slot 16.
 func (self *IPMTaskInfo) Get_IsInteropEnabled(pIsInteropEnabled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsInteropEnabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ApplicationState dispatches through IPMTaskInfo's vtable slot 17.
 func (self *IPMTaskInfo) Get_ApplicationState(pApplicationState *PM_APPLICATION_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pApplicationState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InstallType dispatches through IPMTaskInfo's vtable slot 18.
 func (self *IPMTaskInfo) Get_InstallType(pInstallType *PM_APPLICATION_INSTALL_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInstallType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Version dispatches through IPMTaskInfo's vtable slot 19.
 func (self *IPMTaskInfo) Get_Version(pTargetMajorVersion *byte, pTargetMinorVersion *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTargetMajorVersion)), uintptr(unsafe.Pointer(pTargetMinorVersion)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BitsPerPixel dispatches through IPMTaskInfo's vtable slot 20.
 func (self *IPMTaskInfo) Get_BitsPerPixel(pBitsPerPixel *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBitsPerPixel)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SuppressesDehydration dispatches through IPMTaskInfo's vtable slot 21.
 func (self *IPMTaskInfo) Get_SuppressesDehydration(pSuppressesDehydration *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSuppressesDehydration)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BackgroundExecutionAbilities dispatches through IPMTaskInfo's vtable slot 22.
 func (self *IPMTaskInfo) Get_BackgroundExecutionAbilities(pBackgroundExecutionAbilities *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBackgroundExecutionAbilities)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsOptedForExtendedMem dispatches through IPMTaskInfo's vtable slot 23.
 func (self *IPMTaskInfo) Get_IsOptedForExtendedMem(pIsOptedIn *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsOptedIn)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 0630b0f8-0bbc-4821-be74-c7995166ed2a
@@ -1681,7 +1681,7 @@ var IID_IPMTaskInfoEnumerator = win32.GUID{Data1: 0x0630b0f8, Data2: 0x0bbc, Dat
 // Get_Next dispatches through IPMTaskInfoEnumerator's vtable slot 3.
 func (self *IPMTaskInfoEnumerator) Get_Next(ppTaskInfo **IPMTaskInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTaskInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: d1604833-2b08-4001-82cd-183ad734f752
@@ -1695,149 +1695,149 @@ var IID_IPMTileInfo = win32.GUID{Data1: 0xd1604833, Data2: 0x2b08, Data3: 0x4001
 // Get_ProductID dispatches through IPMTileInfo's vtable slot 3.
 func (self *IPMTileInfo) Get_ProductID(pProductID *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProductID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TileID dispatches through IPMTileInfo's vtable slot 4.
 func (self *IPMTileInfo) Get_TileID(pTileID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTileID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TemplateType dispatches through IPMTileInfo's vtable slot 5.
 func (self *IPMTileInfo) Get_TemplateType(pTemplateType *TILE_TEMPLATE_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTemplateType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HubPinnedState dispatches through IPMTileInfo's vtable slot 6.
 func (self *IPMTileInfo) Get_HubPinnedState(HubType PM_TILE_HUBTYPE, pPinned *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(HubType), uintptr(unsafe.Pointer(pPinned)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HubPosition dispatches through IPMTileInfo's vtable slot 7.
 func (self *IPMTileInfo) Get_HubPosition(HubType PM_TILE_HUBTYPE, pPosition *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(HubType), uintptr(unsafe.Pointer(pPosition)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsNotified dispatches through IPMTileInfo's vtable slot 8.
 func (self *IPMTileInfo) Get_IsNotified(pIsNotified *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsNotified)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsDefault dispatches through IPMTileInfo's vtable slot 9.
 func (self *IPMTileInfo) Get_IsDefault(pIsDefault *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsDefault)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TaskID dispatches through IPMTileInfo's vtable slot 10.
 func (self *IPMTileInfo) Get_TaskID(pTaskID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTaskID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TileType dispatches through IPMTileInfo's vtable slot 11.
 func (self *IPMTileInfo) Get_TileType(pStartTileType *PM_STARTTILE_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStartTileType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsThemable dispatches through IPMTileInfo's vtable slot 12.
 func (self *IPMTileInfo) Get_IsThemable(pIsThemable *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsThemable)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PropertyById dispatches through IPMTileInfo's vtable slot 13.
 func (self *IPMTileInfo) Get_PropertyById(PropID uint32, ppPropInfo **IPMTilePropertyInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(PropID), uintptr(unsafe.Pointer(ppPropInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InvocationInfo dispatches through IPMTileInfo's vtable slot 14.
 func (self *IPMTileInfo) Get_InvocationInfo(pImageUrn *foundation.BSTR, pParameters *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pImageUrn)), uintptr(unsafe.Pointer(pParameters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PropertyEnum dispatches through IPMTileInfo's vtable slot 15.
 func (self *IPMTileInfo) Get_PropertyEnum(ppTilePropEnum **IPMTilePropertyEnumerator) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTilePropEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HubTileSize dispatches through IPMTileInfo's vtable slot 16.
 func (self *IPMTileInfo) Get_HubTileSize(HubType PM_TILE_HUBTYPE, pSize *PM_TILE_SIZE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(HubType), uintptr(unsafe.Pointer(pSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Set_HubPosition dispatches through IPMTileInfo's vtable slot 17.
 func (self *IPMTileInfo) Set_HubPosition(HubType PM_TILE_HUBTYPE, Position uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(HubType), uintptr(Position))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Set_NotifiedState dispatches through IPMTileInfo's vtable slot 18.
 func (self *IPMTileInfo) Set_NotifiedState(Notified bool) error {
 	_Notified := win32.Bool32(Notified)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(_Notified))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Set_HubPinnedState dispatches through IPMTileInfo's vtable slot 19.
 func (self *IPMTileInfo) Set_HubPinnedState(HubType PM_TILE_HUBTYPE, Pinned bool) error {
 	_Pinned := win32.Bool32(Pinned)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(HubType), uintptr(_Pinned))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Set_HubTileSize dispatches through IPMTileInfo's vtable slot 20.
 func (self *IPMTileInfo) Set_HubTileSize(HubType PM_TILE_HUBTYPE, Size PM_TILE_SIZE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(HubType), uintptr(Size))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Set_InvocationInfo dispatches through IPMTileInfo's vtable slot 21.
 func (self *IPMTileInfo) Set_InvocationInfo(TaskName foundation.BSTR, TaskParameters foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(TaskName)), uintptr(unsafe.Pointer(TaskParameters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StartTileBlob dispatches through IPMTileInfo's vtable slot 22.
 func (self *IPMTileInfo) Get_StartTileBlob(pBlob *PM_STARTTILEBLOB) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBlob)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsRestoring dispatches through IPMTileInfo's vtable slot 23.
 func (self *IPMTileInfo) Get_IsRestoring(pIsRestoring *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsRestoring)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsAutoRestoreDisabled dispatches through IPMTileInfo's vtable slot 24.
 func (self *IPMTileInfo) Get_IsAutoRestoreDisabled(pIsAutoRestoreDisabled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsAutoRestoreDisabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Set_IsRestoring dispatches through IPMTileInfo's vtable slot 25.
 func (self *IPMTileInfo) Set_IsRestoring(Restoring bool) error {
 	_Restoring := win32.Bool32(Restoring)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(_Restoring))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Set_IsAutoRestoreDisabled dispatches through IPMTileInfo's vtable slot 26.
 func (self *IPMTileInfo) Set_IsAutoRestoreDisabled(AutoRestoreDisabled bool) error {
 	_AutoRestoreDisabled := win32.Bool32(AutoRestoreDisabled)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(_AutoRestoreDisabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: ded83065-e462-4b2c-acb5-e39cea61c874
@@ -1851,7 +1851,7 @@ var IID_IPMTileInfoEnumerator = win32.GUID{Data1: 0xded83065, Data2: 0xe462, Dat
 // Get_Next dispatches through IPMTileInfoEnumerator's vtable slot 3.
 func (self *IPMTileInfoEnumerator) Get_Next(ppTileInfo **IPMTileInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTileInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: cc4cd629-9047-4250-aac8-930e47812421
@@ -1865,7 +1865,7 @@ var IID_IPMTilePropertyEnumerator = win32.GUID{Data1: 0xcc4cd629, Data2: 0x9047,
 // Get_Next dispatches through IPMTilePropertyEnumerator's vtable slot 3.
 func (self *IPMTilePropertyEnumerator) Get_Next(ppPropInfo **IPMTilePropertyInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPropInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 6c2b8017-1efa-42a7-86c0-6d4b640bf528
@@ -1879,19 +1879,19 @@ var IID_IPMTilePropertyInfo = win32.GUID{Data1: 0x6c2b8017, Data2: 0x1efa, Data3
 // Get_PropertyID dispatches through IPMTilePropertyInfo's vtable slot 3.
 func (self *IPMTilePropertyInfo) Get_PropertyID(pPropID *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPropID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PropertyValue dispatches through IPMTilePropertyInfo's vtable slot 4.
 func (self *IPMTilePropertyInfo) Get_PropertyValue(pPropValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPropValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Set_Property dispatches through IPMTilePropertyInfo's vtable slot 5.
 func (self *IPMTilePropertyInfo) Set_Property(PropValue foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PropValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IValidate: https://learn.microsoft.com/windows/win32/api/evalcom2/nn-evalcom2-ivalidate
@@ -1907,43 +1907,43 @@ var IID_IValidate = win32.GUID{Data1: 0xe482e5c6, Data2: 0xe31e, Data3: 0x4143, 
 func (self *IValidate) OpenDatabase(szDatabase string) error {
 	_szDatabase := win32.UTF16Ptr(szDatabase)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szDatabase)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenCUB dispatches through IValidate's vtable slot 4.
 func (self *IValidate) OpenCUB(szCUBFile string) error {
 	_szCUBFile := win32.UTF16Ptr(szCUBFile)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szCUBFile)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CloseDatabase dispatches through IValidate's vtable slot 5.
 func (self *IValidate) CloseDatabase() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CloseCUB dispatches through IValidate's vtable slot 6.
 func (self *IValidate) CloseCUB() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDisplay dispatches through IValidate's vtable slot 7.
 func (self *IValidate) SetDisplay(pDisplayFunction LPDISPLAYVAL, pContext unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(pDisplayFunction), uintptr(unsafe.Pointer(pContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetStatus dispatches through IValidate's vtable slot 8.
 func (self *IValidate) SetStatus(pStatusFunction LPEVALCOMCALLBACK, pContext unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(pStatusFunction), uintptr(unsafe.Pointer(pContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Validate dispatches through IValidate's vtable slot 9.
 func (self *IValidate) Validate(wzICEs string) error {
 	_wzICEs := win32.UTF16Ptr(wzICEs)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wzICEs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

@@ -26,7 +26,7 @@ var IID_ISideShowBulkCapabilities = win32.GUID{Data1: 0x3a2b7fbc, Data2: 0x3ad5,
 // GetCapabilities dispatches through ISideShowBulkCapabilities's vtable slot 4.
 func (self *ISideShowBulkCapabilities) GetCapabilities(in_keyCollection *ISideShowKeyCollection, inout_pValues **ISideShowPropVariantCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(in_keyCollection)), uintptr(unsafe.Pointer(inout_pValues)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 535e1379-c09e-4a54-a511-597bab3a72b8
@@ -40,7 +40,7 @@ var IID_ISideShowCapabilities = win32.GUID{Data1: 0x535e1379, Data2: 0xc09e, Dat
 // GetCapability dispatches through ISideShowCapabilities's vtable slot 3.
 func (self *ISideShowCapabilities) GetCapability(in_keyCapability *foundation.PROPERTYKEY, inout_pValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(in_keyCapability)), uintptr(unsafe.Pointer(inout_pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 50305597-5e0d-4ff7-b3af-33d0d9bd52dd
@@ -54,13 +54,13 @@ var IID_ISideShowCapabilitiesCollection = win32.GUID{Data1: 0x50305597, Data2: 0
 // GetCount dispatches through ISideShowCapabilitiesCollection's vtable slot 3.
 func (self *ISideShowCapabilitiesCollection) GetCount(out_pdwCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(out_pdwCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAt dispatches through ISideShowCapabilitiesCollection's vtable slot 4.
 func (self *ISideShowCapabilitiesCollection) GetAt(in_dwIndex uint32, out_ppCapabilities **ISideShowCapabilities) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(in_dwIndex), uintptr(unsafe.Pointer(out_ppCapabilities)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: c18552ed-74ff-4fec-be07-4cfed29d4887
@@ -74,19 +74,19 @@ var IID_ISideShowContent = win32.GUID{Data1: 0xc18552ed, Data2: 0x74ff, Data3: 0
 // GetContent dispatches through ISideShowContent's vtable slot 3.
 func (self *ISideShowContent) GetContent(in_pICapabilities *ISideShowCapabilities, out_pdwSize *uint32, out_ppbData **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(in_pICapabilities)), uintptr(unsafe.Pointer(out_pdwSize)), uintptr(unsafe.Pointer(out_ppbData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ContentId dispatches through ISideShowContent's vtable slot 4.
 func (self *ISideShowContent) Get_ContentId(out_pcontentId *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(out_pcontentId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DifferentiateContent dispatches through ISideShowContent's vtable slot 5.
 func (self *ISideShowContent) Get_DifferentiateContent(out_pfDifferentiateContent *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(out_pfDifferentiateContent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: a5d5b66b-eef9-41db-8d7e-e17c33ab10b0
@@ -100,31 +100,31 @@ var IID_ISideShowContentManager = win32.GUID{Data1: 0xa5d5b66b, Data2: 0xeef9, D
 // Add dispatches through ISideShowContentManager's vtable slot 3.
 func (self *ISideShowContentManager) Add(in_pIContent *ISideShowContent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(in_pIContent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through ISideShowContentManager's vtable slot 4.
 func (self *ISideShowContentManager) Remove(in_contentId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(in_contentId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAll dispatches through ISideShowContentManager's vtable slot 5.
 func (self *ISideShowContentManager) RemoveAll() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetEventSink dispatches through ISideShowContentManager's vtable slot 6.
 func (self *ISideShowContentManager) SetEventSink(in_pIEvents *ISideShowEvents) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(in_pIEvents)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceCapabilities dispatches through ISideShowContentManager's vtable slot 7.
 func (self *ISideShowContentManager) GetDeviceCapabilities(out_ppCollection **ISideShowCapabilitiesCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(out_ppCollection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 61feca4c-deb4-4a7e-8d75-51f1132d615b
@@ -138,7 +138,7 @@ var IID_ISideShowEvents = win32.GUID{Data1: 0x61feca4c, Data2: 0xdeb4, Data3: 0x
 // ContentMissing dispatches through ISideShowEvents's vtable slot 3.
 func (self *ISideShowEvents) ContentMissing(in_contentId uint32, out_ppIContent **ISideShowContent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(in_contentId), uintptr(unsafe.Pointer(out_ppIContent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ApplicationEvent dispatches through ISideShowEvents's vtable slot 4.
@@ -148,19 +148,19 @@ func (self *ISideShowEvents) ApplicationEvent(in_pICapabilities *ISideShowCapabi
 		_in_pbEventData = &in_pbEventData[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(in_pICapabilities)), uintptr(in_dwEventId), uintptr(len(in_pbEventData)), uintptr(unsafe.Pointer(_in_pbEventData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeviceAdded dispatches through ISideShowEvents's vtable slot 5.
 func (self *ISideShowEvents) DeviceAdded(in_pIDevice *ISideShowCapabilities) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(in_pIDevice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeviceRemoved dispatches through ISideShowEvents's vtable slot 6.
 func (self *ISideShowEvents) DeviceRemoved(in_pIDevice *ISideShowCapabilities) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(in_pIDevice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 045473bc-a37b-4957-b144-68105411ed8e
@@ -174,31 +174,31 @@ var IID_ISideShowKeyCollection = win32.GUID{Data1: 0x045473bc, Data2: 0xa37b, Da
 // Add dispatches through ISideShowKeyCollection's vtable slot 3.
 func (self *ISideShowKeyCollection) Add(Key *foundation.PROPERTYKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Key)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through ISideShowKeyCollection's vtable slot 4.
 func (self *ISideShowKeyCollection) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAt dispatches through ISideShowKeyCollection's vtable slot 5.
 func (self *ISideShowKeyCollection) GetAt(dwIndex uint32, pKey *foundation.PROPERTYKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(pKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCount dispatches through ISideShowKeyCollection's vtable slot 6.
 func (self *ISideShowKeyCollection) GetCount(pcElems *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcElems)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAt dispatches through ISideShowKeyCollection's vtable slot 7.
 func (self *ISideShowKeyCollection) RemoveAt(dwIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 03c93300-8ab2-41c5-9b79-46127a30e148
@@ -212,63 +212,63 @@ var IID_ISideShowNotification = win32.GUID{Data1: 0x03c93300, Data2: 0x8ab2, Dat
 // Get_NotificationId dispatches through ISideShowNotification's vtable slot 3.
 func (self *ISideShowNotification) Get_NotificationId(out_pNotificationId *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(out_pNotificationId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_NotificationId dispatches through ISideShowNotification's vtable slot 4.
 func (self *ISideShowNotification) Put_NotificationId(in_notificationId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(in_notificationId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Title dispatches through ISideShowNotification's vtable slot 5.
 func (self *ISideShowNotification) Get_Title(out_ppwszTitle *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(out_ppwszTitle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Title dispatches through ISideShowNotification's vtable slot 6.
 func (self *ISideShowNotification) Put_Title(in_pwszTitle string) error {
 	_in_pwszTitle := win32.UTF16Ptr(in_pwszTitle)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_in_pwszTitle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Message dispatches through ISideShowNotification's vtable slot 7.
 func (self *ISideShowNotification) Get_Message(out_ppwszMessage *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(out_ppwszMessage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Message dispatches through ISideShowNotification's vtable slot 8.
 func (self *ISideShowNotification) Put_Message(in_pwszMessage string) error {
 	_in_pwszMessage := win32.UTF16Ptr(in_pwszMessage)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_in_pwszMessage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Image dispatches through ISideShowNotification's vtable slot 9.
 func (self *ISideShowNotification) Get_Image(out_phIcon *uiwindowsandmessaging.HICON) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(out_phIcon)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Image dispatches through ISideShowNotification's vtable slot 10.
 func (self *ISideShowNotification) Put_Image(in_hIcon uiwindowsandmessaging.HICON) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(in_hIcon))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ExpirationTime dispatches through ISideShowNotification's vtable slot 11.
 func (self *ISideShowNotification) Get_ExpirationTime(out_pTime *foundation.SYSTEMTIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(out_pTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ExpirationTime dispatches through ISideShowNotification's vtable slot 12.
 func (self *ISideShowNotification) Put_ExpirationTime(in_pTime *foundation.SYSTEMTIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(in_pTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 63cea909-f2b9-4302-b5e1-c68e6d9ab833
@@ -282,19 +282,19 @@ var IID_ISideShowNotificationManager = win32.GUID{Data1: 0x63cea909, Data2: 0xf2
 // Show dispatches through ISideShowNotificationManager's vtable slot 3.
 func (self *ISideShowNotificationManager) Show(in_pINotification *ISideShowNotification) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(in_pINotification)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Revoke dispatches through ISideShowNotificationManager's vtable slot 4.
 func (self *ISideShowNotificationManager) Revoke(in_notificationId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(in_notificationId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RevokeAll dispatches through ISideShowNotificationManager's vtable slot 5.
 func (self *ISideShowNotificationManager) RevokeAll() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 2ea7a549-7bff-4aae-bab0-22d43111de49
@@ -308,31 +308,31 @@ var IID_ISideShowPropVariantCollection = win32.GUID{Data1: 0x2ea7a549, Data2: 0x
 // Add dispatches through ISideShowPropVariantCollection's vtable slot 3.
 func (self *ISideShowPropVariantCollection) Add(pValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through ISideShowPropVariantCollection's vtable slot 4.
 func (self *ISideShowPropVariantCollection) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAt dispatches through ISideShowPropVariantCollection's vtable slot 5.
 func (self *ISideShowPropVariantCollection) GetAt(dwIndex uint32, pValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCount dispatches through ISideShowPropVariantCollection's vtable slot 6.
 func (self *ISideShowPropVariantCollection) GetCount(pcElems *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcElems)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAt dispatches through ISideShowPropVariantCollection's vtable slot 7.
 func (self *ISideShowPropVariantCollection) RemoveAt(dwIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: e22331ee-9e7d-4922-9fc2-ab7aa41ce491
@@ -346,11 +346,11 @@ var IID_ISideShowSession = win32.GUID{Data1: 0xe22331ee, Data2: 0x9e7d, Data3: 0
 // RegisterContent dispatches through ISideShowSession's vtable slot 3.
 func (self *ISideShowSession) RegisterContent(in_applicationId *win32.GUID, in_endpointId *win32.GUID, out_ppIContent **ISideShowContentManager) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(in_applicationId)), uintptr(unsafe.Pointer(in_endpointId)), uintptr(unsafe.Pointer(out_ppIContent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterNotifications dispatches through ISideShowSession's vtable slot 4.
 func (self *ISideShowSession) RegisterNotifications(in_applicationId *win32.GUID, out_ppINotification **ISideShowNotificationManager) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(in_applicationId)), uintptr(unsafe.Pointer(out_ppINotification)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

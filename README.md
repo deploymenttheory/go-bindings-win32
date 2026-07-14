@@ -35,7 +35,7 @@ faithful.
 | Package | Import | What you get |
 |---|---|---|
 | **Bindings** | `bindings/win32/<namespace>` | The full typed surface — structs, enums, constants, COM interfaces — with idiomatic-shaped calls: Go `string` for `PWSTR`, `bool` for `BOOL`, `error` for `HRESULT`/`SetLastError`, `[]T` for array+count pairs, `[out,retval]` lifted to returns, `Close<Handle>` RAII helpers, and COM interfaces as method-bearing vtable structs. Each function dispatches through `syscall` inline — no wrapper layer. |
-| **Runtime** | `bindings/runtime/win32` | Shared helpers: `UTF16Ptr`, `UTF16ToString`, `GUID`, `HRESULTError`, `Bool32`. |
+| **Runtime** | `bindings/runtime/win32` | Shared helpers: `UTF16Ptr`, `UTF16ToString`, `GUID`, `ErrIfFailed`, `Bool32`. |
 
 Everything lives in one tree: import `bindings/win32/<namespace>` and the runtime.
 

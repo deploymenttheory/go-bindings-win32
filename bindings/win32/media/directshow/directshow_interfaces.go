@@ -38,55 +38,55 @@ var IID_IAMAnalogVideoDecoder = win32.GUID{Data1: 0xc6e13350, Data2: 0x30ac, Dat
 // Get_AvailableTVFormats dispatches through IAMAnalogVideoDecoder's vtable slot 3.
 func (self *IAMAnalogVideoDecoder) Get_AvailableTVFormats(lAnalogVideoStandard *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lAnalogVideoStandard)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_TVFormat dispatches through IAMAnalogVideoDecoder's vtable slot 4.
 func (self *IAMAnalogVideoDecoder) Put_TVFormat(lAnalogVideoStandard int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(lAnalogVideoStandard))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TVFormat dispatches through IAMAnalogVideoDecoder's vtable slot 5.
 func (self *IAMAnalogVideoDecoder) Get_TVFormat(plAnalogVideoStandard *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAnalogVideoStandard)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HorizontalLocked dispatches through IAMAnalogVideoDecoder's vtable slot 6.
 func (self *IAMAnalogVideoDecoder) Get_HorizontalLocked(plLocked *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plLocked)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_VCRHorizontalLocking dispatches through IAMAnalogVideoDecoder's vtable slot 7.
 func (self *IAMAnalogVideoDecoder) Put_VCRHorizontalLocking(lVCRHorizontalLocking int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(lVCRHorizontalLocking))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_VCRHorizontalLocking dispatches through IAMAnalogVideoDecoder's vtable slot 8.
 func (self *IAMAnalogVideoDecoder) Get_VCRHorizontalLocking(plVCRHorizontalLocking *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plVCRHorizontalLocking)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NumberOfLines dispatches through IAMAnalogVideoDecoder's vtable slot 9.
 func (self *IAMAnalogVideoDecoder) Get_NumberOfLines(plNumberOfLines *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plNumberOfLines)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_OutputEnable dispatches through IAMAnalogVideoDecoder's vtable slot 10.
 func (self *IAMAnalogVideoDecoder) Put_OutputEnable(lOutputEnable int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lOutputEnable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OutputEnable dispatches through IAMAnalogVideoDecoder's vtable slot 11.
 func (self *IAMAnalogVideoDecoder) Get_OutputEnable(plOutputEnable *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plOutputEnable)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMAnalogVideoEncoder: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamanalogvideoencoder
@@ -101,43 +101,43 @@ var IID_IAMAnalogVideoEncoder = win32.GUID{Data1: 0xc6e133b0, Data2: 0x30ac, Dat
 // Get_AvailableTVFormats dispatches through IAMAnalogVideoEncoder's vtable slot 3.
 func (self *IAMAnalogVideoEncoder) Get_AvailableTVFormats(lAnalogVideoStandard *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lAnalogVideoStandard)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_TVFormat dispatches through IAMAnalogVideoEncoder's vtable slot 4.
 func (self *IAMAnalogVideoEncoder) Put_TVFormat(lAnalogVideoStandard int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(lAnalogVideoStandard))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TVFormat dispatches through IAMAnalogVideoEncoder's vtable slot 5.
 func (self *IAMAnalogVideoEncoder) Get_TVFormat(plAnalogVideoStandard *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAnalogVideoStandard)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CopyProtection dispatches through IAMAnalogVideoEncoder's vtable slot 6.
 func (self *IAMAnalogVideoEncoder) Put_CopyProtection(lVideoCopyProtection int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(lVideoCopyProtection))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CopyProtection dispatches through IAMAnalogVideoEncoder's vtable slot 7.
 func (self *IAMAnalogVideoEncoder) Get_CopyProtection(lVideoCopyProtection *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lVideoCopyProtection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CCEnable dispatches through IAMAnalogVideoEncoder's vtable slot 8.
 func (self *IAMAnalogVideoEncoder) Put_CCEnable(lCCEnable int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lCCEnable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CCEnable dispatches through IAMAnalogVideoEncoder's vtable slot 9.
 func (self *IAMAnalogVideoEncoder) Get_CCEnable(lCCEnable *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lCCEnable)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMAsyncReaderTimestampScaling: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamasyncreadertimestampscaling
@@ -152,14 +152,14 @@ var IID_IAMAsyncReaderTimestampScaling = win32.GUID{Data1: 0xcf7b26fc, Data2: 0x
 // GetTimestampMode dispatches through IAMAsyncReaderTimestampScaling's vtable slot 3.
 func (self *IAMAsyncReaderTimestampScaling) GetTimestampMode(pfRaw *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfRaw)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTimestampMode dispatches through IAMAsyncReaderTimestampScaling's vtable slot 4.
 func (self *IAMAsyncReaderTimestampScaling) SetTimestampMode(fRaw bool) error {
 	_fRaw := win32.Bool32(fRaw)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(_fRaw))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMAudioInputMixer: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamaudioinputmixer
@@ -175,75 +175,75 @@ var IID_IAMAudioInputMixer = win32.GUID{Data1: 0x54c39221, Data2: 0x8380, Data3:
 func (self *IAMAudioInputMixer) Put_Enable(fEnable bool) error {
 	_fEnable := win32.Bool32(fEnable)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(_fEnable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Enable dispatches through IAMAudioInputMixer's vtable slot 4.
 func (self *IAMAudioInputMixer) Get_Enable(pfEnable *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEnable)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Mono dispatches through IAMAudioInputMixer's vtable slot 5.
 func (self *IAMAudioInputMixer) Put_Mono(fMono bool) error {
 	_fMono := win32.Bool32(fMono)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(_fMono))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Mono dispatches through IAMAudioInputMixer's vtable slot 6.
 func (self *IAMAudioInputMixer) Get_Mono(pfMono *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfMono)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MixLevel dispatches through IAMAudioInputMixer's vtable slot 8.
 func (self *IAMAudioInputMixer) Get_MixLevel(pLevel *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLevel)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Pan dispatches through IAMAudioInputMixer's vtable slot 10.
 func (self *IAMAudioInputMixer) Get_Pan(pPan *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPan)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Loudness dispatches through IAMAudioInputMixer's vtable slot 11.
 func (self *IAMAudioInputMixer) Put_Loudness(fLoudness bool) error {
 	_fLoudness := win32.Bool32(fLoudness)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(_fLoudness))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Loudness dispatches through IAMAudioInputMixer's vtable slot 12.
 func (self *IAMAudioInputMixer) Get_Loudness(pfLoudness *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfLoudness)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Treble dispatches through IAMAudioInputMixer's vtable slot 14.
 func (self *IAMAudioInputMixer) Get_Treble(pTreble *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTreble)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TrebleRange dispatches through IAMAudioInputMixer's vtable slot 15.
 func (self *IAMAudioInputMixer) Get_TrebleRange(pRange *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRange)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Bass dispatches through IAMAudioInputMixer's vtable slot 17.
 func (self *IAMAudioInputMixer) Get_Bass(pBass *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBass)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BassRange dispatches through IAMAudioInputMixer's vtable slot 18.
 func (self *IAMAudioInputMixer) Get_BassRange(pRange *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRange)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMAudioRendererStats: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamaudiorendererstats
@@ -258,7 +258,7 @@ var IID_IAMAudioRendererStats = win32.GUID{Data1: 0x22320cb2, Data2: 0xd41a, Dat
 // GetStatParam dispatches through IAMAudioRendererStats's vtable slot 3.
 func (self *IAMAudioRendererStats) GetStatParam(dwParam uint32, pdwParam1 *uint32, pdwParam2 *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwParam), uintptr(unsafe.Pointer(pdwParam1)), uintptr(unsafe.Pointer(pdwParam2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMBufferNegotiation: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iambuffernegotiation
@@ -273,13 +273,13 @@ var IID_IAMBufferNegotiation = win32.GUID{Data1: 0x56ed71a0, Data2: 0xaf5f, Data
 // SuggestAllocatorProperties dispatches through IAMBufferNegotiation's vtable slot 3.
 func (self *IAMBufferNegotiation) SuggestAllocatorProperties(pprop *ALLOCATOR_PROPERTIES) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pprop)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAllocatorProperties dispatches through IAMBufferNegotiation's vtable slot 4.
 func (self *IAMBufferNegotiation) GetAllocatorProperties(pprop *ALLOCATOR_PROPERTIES) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pprop)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMCameraControl: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamcameracontrol
@@ -294,19 +294,19 @@ var IID_IAMCameraControl = win32.GUID{Data1: 0xc6e13370, Data2: 0x30ac, Data3: 0
 // GetRange dispatches through IAMCameraControl's vtable slot 3.
 func (self *IAMCameraControl) GetRange(Property int32, pMin *int32, pMax *int32, pSteppingDelta *int32, pDefault *int32, pCapsFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Property), uintptr(unsafe.Pointer(pMin)), uintptr(unsafe.Pointer(pMax)), uintptr(unsafe.Pointer(pSteppingDelta)), uintptr(unsafe.Pointer(pDefault)), uintptr(unsafe.Pointer(pCapsFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Set dispatches through IAMCameraControl's vtable slot 4.
 func (self *IAMCameraControl) Set(Property int32, lValue int32, Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Property), uintptr(lValue), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get dispatches through IAMCameraControl's vtable slot 5.
 func (self *IAMCameraControl) Get(Property int32, lValue *int32, Flags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Property), uintptr(unsafe.Pointer(lValue)), uintptr(unsafe.Pointer(Flags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMCertifiedOutputProtection: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamcertifiedoutputprotection
@@ -321,25 +321,25 @@ var IID_IAMCertifiedOutputProtection = win32.GUID{Data1: 0x6feded3e, Data2: 0x0f
 // KeyExchange dispatches through IAMCertifiedOutputProtection's vtable slot 3.
 func (self *IAMCertifiedOutputProtection) KeyExchange(pRandom *win32.GUID, VarLenCertGH **byte, pdwLengthCertGH *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRandom)), uintptr(unsafe.Pointer(VarLenCertGH)), uintptr(unsafe.Pointer(pdwLengthCertGH)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SessionSequenceStart dispatches through IAMCertifiedOutputProtection's vtable slot 4.
 func (self *IAMCertifiedOutputProtection) SessionSequenceStart(pSig *AMCOPPSignature) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSig)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ProtectionCommand dispatches through IAMCertifiedOutputProtection's vtable slot 5.
 func (self *IAMCertifiedOutputProtection) ProtectionCommand(cmd *AMCOPPCommand) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cmd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ProtectionStatus dispatches through IAMCertifiedOutputProtection's vtable slot 6.
 func (self *IAMCertifiedOutputProtection) ProtectionStatus(pStatusInput *AMCOPPStatusInput, pStatusOutput *AMCOPPStatusOutput) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStatusInput)), uintptr(unsafe.Pointer(pStatusOutput)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMChannelInfo: https://learn.microsoft.com/windows/win32/api/qnetwork/nn-qnetwork-iamchannelinfo
@@ -354,37 +354,37 @@ var IID_IAMChannelInfo = win32.GUID{Data1: 0xfa2aa8f2, Data2: 0x8b62, Data3: 0x1
 // Get_ChannelName dispatches through IAMChannelInfo's vtable slot 7.
 func (self *IAMChannelInfo) Get_ChannelName(pbstrChannelName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrChannelName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ChannelDescription dispatches through IAMChannelInfo's vtable slot 8.
 func (self *IAMChannelInfo) Get_ChannelDescription(pbstrChannelDescription *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrChannelDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ChannelURL dispatches through IAMChannelInfo's vtable slot 9.
 func (self *IAMChannelInfo) Get_ChannelURL(pbstrChannelURL *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrChannelURL)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ContactAddress dispatches through IAMChannelInfo's vtable slot 10.
 func (self *IAMChannelInfo) Get_ContactAddress(pbstrContactAddress *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrContactAddress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ContactPhone dispatches through IAMChannelInfo's vtable slot 11.
 func (self *IAMChannelInfo) Get_ContactPhone(pbstrContactPhone *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrContactPhone)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ContactEmail dispatches through IAMChannelInfo's vtable slot 12.
 func (self *IAMChannelInfo) Get_ContactEmail(pbstrContactEmail *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrContactEmail)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMClockAdjust: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamclockadjust
@@ -399,7 +399,7 @@ var IID_IAMClockAdjust = win32.GUID{Data1: 0x4d5466b0, Data2: 0xa49c, Data3: 0x1
 // SetClockDelta dispatches through IAMClockAdjust's vtable slot 3.
 func (self *IAMClockAdjust) SetClockDelta(rtDelta int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(rtDelta))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMClockSlave: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamclockslave
@@ -414,13 +414,13 @@ var IID_IAMClockSlave = win32.GUID{Data1: 0x9fd52741, Data2: 0x176d, Data3: 0x4b
 // SetErrorTolerance dispatches through IAMClockSlave's vtable slot 3.
 func (self *IAMClockSlave) SetErrorTolerance(dwTolerance uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwTolerance))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetErrorTolerance dispatches through IAMClockSlave's vtable slot 4.
 func (self *IAMClockSlave) GetErrorTolerance(pdwTolerance *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwTolerance)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 56a868b9-0ad4-11ce-b03a-0020af0ba770
@@ -434,19 +434,19 @@ var IID_IAMCollection = win32.GUID{Data1: 0x56a868b9, Data2: 0x0ad4, Data3: 0x11
 // Get_Count dispatches through IAMCollection's vtable slot 7.
 func (self *IAMCollection) Get_Count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Item dispatches through IAMCollection's vtable slot 8.
 func (self *IAMCollection) Item(lItem int32, ppUnk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lItem), uintptr(unsafe.Pointer(ppUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IAMCollection's vtable slot 9.
 func (self *IAMCollection) Get__NewEnum(ppUnk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMCopyCaptureFileProgress: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamcopycapturefileprogress
@@ -461,7 +461,7 @@ var IID_IAMCopyCaptureFileProgress = win32.GUID{Data1: 0x670d1d20, Data2: 0xa068
 // Progress dispatches through IAMCopyCaptureFileProgress's vtable slot 3.
 func (self *IAMCopyCaptureFileProgress) Progress(iProgress int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(iProgress))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMCrossbar: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamcrossbar
@@ -476,32 +476,32 @@ var IID_IAMCrossbar = win32.GUID{Data1: 0xc6e13380, Data2: 0x30ac, Data3: 0x11d0
 // Get_PinCounts dispatches through IAMCrossbar's vtable slot 3.
 func (self *IAMCrossbar) Get_PinCounts(OutputPinCount *int32, InputPinCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(OutputPinCount)), uintptr(unsafe.Pointer(InputPinCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CanRoute dispatches through IAMCrossbar's vtable slot 4.
 func (self *IAMCrossbar) CanRoute(OutputPinIndex int32, InputPinIndex int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(OutputPinIndex), uintptr(InputPinIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Route dispatches through IAMCrossbar's vtable slot 5.
 func (self *IAMCrossbar) Route(OutputPinIndex int32, InputPinIndex int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(OutputPinIndex), uintptr(InputPinIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsRoutedTo dispatches through IAMCrossbar's vtable slot 6.
 func (self *IAMCrossbar) Get_IsRoutedTo(OutputPinIndex int32, InputPinIndex *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(OutputPinIndex), uintptr(unsafe.Pointer(InputPinIndex)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CrossbarPinInfo dispatches through IAMCrossbar's vtable slot 7.
 func (self *IAMCrossbar) Get_CrossbarPinInfo(IsInputPin bool, PinIndex int32, PinIndexRelated *int32, PhysicalType *int32) error {
 	_IsInputPin := win32.Bool32(IsInputPin)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(_IsInputPin), uintptr(PinIndex), uintptr(unsafe.Pointer(PinIndexRelated)), uintptr(unsafe.Pointer(PhysicalType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMDecoderCaps: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamdecodercaps
@@ -516,7 +516,7 @@ var IID_IAMDecoderCaps = win32.GUID{Data1: 0xc0dff467, Data2: 0xd499, Data3: 0x4
 // GetDecoderCaps dispatches through IAMDecoderCaps's vtable slot 3.
 func (self *IAMDecoderCaps) GetDecoderCaps(dwCapIndex uint32, lpdwCap *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwCapIndex), uintptr(unsafe.Pointer(lpdwCap)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMDevMemoryAllocator: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamdevmemoryallocator
@@ -531,31 +531,31 @@ var IID_IAMDevMemoryAllocator = win32.GUID{Data1: 0xc6545bf0, Data2: 0xe76b, Dat
 // GetInfo dispatches through IAMDevMemoryAllocator's vtable slot 3.
 func (self *IAMDevMemoryAllocator) GetInfo(pdwcbTotalFree *uint32, pdwcbLargestFree *uint32, pdwcbTotalMemory *uint32, pdwcbMinimumChunk *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwcbTotalFree)), uintptr(unsafe.Pointer(pdwcbLargestFree)), uintptr(unsafe.Pointer(pdwcbTotalMemory)), uintptr(unsafe.Pointer(pdwcbMinimumChunk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CheckMemory dispatches through IAMDevMemoryAllocator's vtable slot 4.
 func (self *IAMDevMemoryAllocator) CheckMemory(pBuffer *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Alloc dispatches through IAMDevMemoryAllocator's vtable slot 5.
 func (self *IAMDevMemoryAllocator) Alloc(ppBuffer **byte, pdwcbBuffer *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppBuffer)), uintptr(unsafe.Pointer(pdwcbBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Free dispatches through IAMDevMemoryAllocator's vtable slot 6.
 func (self *IAMDevMemoryAllocator) Free(pBuffer *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDevMemoryObject dispatches through IAMDevMemoryAllocator's vtable slot 7.
 func (self *IAMDevMemoryAllocator) GetDevMemoryObject(ppUnkInnner **systemcom.IUnknown, pUnkOuter *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppUnkInnner)), uintptr(unsafe.Pointer(pUnkOuter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMDevMemoryControl: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamdevmemorycontrol
@@ -570,19 +570,19 @@ var IID_IAMDevMemoryControl = win32.GUID{Data1: 0xc6545bf1, Data2: 0xe76b, Data3
 // QueryWriteSync dispatches through IAMDevMemoryControl's vtable slot 3.
 func (self *IAMDevMemoryControl) QueryWriteSync() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteSync dispatches through IAMDevMemoryControl's vtable slot 4.
 func (self *IAMDevMemoryControl) WriteSync() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDevId dispatches through IAMDevMemoryControl's vtable slot 5.
 func (self *IAMDevMemoryControl) GetDevId(pdwDevId *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwDevId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMDeviceRemoval: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamdeviceremoval
@@ -597,19 +597,19 @@ var IID_IAMDeviceRemoval = win32.GUID{Data1: 0xf90a6130, Data2: 0xb658, Data3: 0
 // DeviceInfo dispatches through IAMDeviceRemoval's vtable slot 3.
 func (self *IAMDeviceRemoval) DeviceInfo(pclsidInterfaceClass *win32.GUID, pwszSymbolicLink *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pclsidInterfaceClass)), uintptr(unsafe.Pointer(pwszSymbolicLink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reassociate dispatches through IAMDeviceRemoval's vtable slot 4.
 func (self *IAMDeviceRemoval) Reassociate() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Disassociate dispatches through IAMDeviceRemoval's vtable slot 5.
 func (self *IAMDeviceRemoval) Disassociate() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMDirectSound: https://learn.microsoft.com/windows/win32/api/amaudio/nn-amaudio-iamdirectsound
@@ -624,50 +624,50 @@ var IID_IAMDirectSound = win32.GUID{Data1: 0x546f4260, Data2: 0xd53e, Data3: 0x1
 // GetDirectSoundInterface dispatches through IAMDirectSound's vtable slot 3.
 func (self *IAMDirectSound) GetDirectSoundInterface(lplpds **mediaaudiodirectsound.IDirectSound) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lplpds)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPrimaryBufferInterface dispatches through IAMDirectSound's vtable slot 4.
 func (self *IAMDirectSound) GetPrimaryBufferInterface(lplpdsb **mediaaudiodirectsound.IDirectSoundBuffer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lplpdsb)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSecondaryBufferInterface dispatches through IAMDirectSound's vtable slot 5.
 func (self *IAMDirectSound) GetSecondaryBufferInterface(lplpdsb **mediaaudiodirectsound.IDirectSoundBuffer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lplpdsb)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReleaseDirectSoundInterface dispatches through IAMDirectSound's vtable slot 6.
 func (self *IAMDirectSound) ReleaseDirectSoundInterface(lpds *mediaaudiodirectsound.IDirectSound) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpds)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReleasePrimaryBufferInterface dispatches through IAMDirectSound's vtable slot 7.
 func (self *IAMDirectSound) ReleasePrimaryBufferInterface(lpdsb *mediaaudiodirectsound.IDirectSoundBuffer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpdsb)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReleaseSecondaryBufferInterface dispatches through IAMDirectSound's vtable slot 8.
 func (self *IAMDirectSound) ReleaseSecondaryBufferInterface(lpdsb *mediaaudiodirectsound.IDirectSoundBuffer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpdsb)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetFocusWindow dispatches through IAMDirectSound's vtable slot 9.
 func (self *IAMDirectSound) SetFocusWindow(param0 foundation.HWND, param1 bool) error {
 	_param1 := win32.Bool32(param1)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(_param1))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFocusWindow dispatches through IAMDirectSound's vtable slot 10.
 func (self *IAMDirectSound) GetFocusWindow(param0 *foundation.HWND, param1 *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMDroppedFrames: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamdroppedframes
@@ -682,25 +682,25 @@ var IID_IAMDroppedFrames = win32.GUID{Data1: 0xc6e13344, Data2: 0x30ac, Data3: 0
 // GetNumDropped dispatches through IAMDroppedFrames's vtable slot 3.
 func (self *IAMDroppedFrames) GetNumDropped(plDropped *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plDropped)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNumNotDropped dispatches through IAMDroppedFrames's vtable slot 4.
 func (self *IAMDroppedFrames) GetNumNotDropped(plNotDropped *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plNotDropped)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDroppedInfo dispatches through IAMDroppedFrames's vtable slot 5.
 func (self *IAMDroppedFrames) GetDroppedInfo(lSize int32, plArray *int32, plNumCopied *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(lSize), uintptr(unsafe.Pointer(plArray)), uintptr(unsafe.Pointer(plNumCopied)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAverageFrameSize dispatches through IAMDroppedFrames's vtable slot 6.
 func (self *IAMDroppedFrames) GetAverageFrameSize(plAverageSize *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAverageSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMExtDevice: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamextdevice
@@ -715,49 +715,49 @@ var IID_IAMExtDevice = win32.GUID{Data1: 0xb5730a90, Data2: 0x1a2c, Data3: 0x11c
 // GetCapability dispatches through IAMExtDevice's vtable slot 3.
 func (self *IAMExtDevice) GetCapability(Capability int32, pValue *int32, pdblValue *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Capability), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pdblValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ExternalDeviceID dispatches through IAMExtDevice's vtable slot 4.
 func (self *IAMExtDevice) Get_ExternalDeviceID(ppszData *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ExternalDeviceVersion dispatches through IAMExtDevice's vtable slot 5.
 func (self *IAMExtDevice) Get_ExternalDeviceVersion(ppszData *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DevicePower dispatches through IAMExtDevice's vtable slot 6.
 func (self *IAMExtDevice) Put_DevicePower(PowerMode int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(PowerMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DevicePower dispatches through IAMExtDevice's vtable slot 7.
 func (self *IAMExtDevice) Get_DevicePower(pPowerMode *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPowerMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Calibrate dispatches through IAMExtDevice's vtable slot 8.
 func (self *IAMExtDevice) Calibrate(hEvent uintptr, Mode int32, pStatus *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(hEvent), uintptr(Mode), uintptr(unsafe.Pointer(pStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DevicePort dispatches through IAMExtDevice's vtable slot 9.
 func (self *IAMExtDevice) Put_DevicePort(DevicePort int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(DevicePort))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DevicePort dispatches through IAMExtDevice's vtable slot 10.
 func (self *IAMExtDevice) Get_DevicePort(pDevicePort *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevicePort)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMExtTransport: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamexttransport
@@ -772,164 +772,164 @@ var IID_IAMExtTransport = win32.GUID{Data1: 0xa03cd5f0, Data2: 0x3045, Data3: 0x
 // GetCapability dispatches through IAMExtTransport's vtable slot 3.
 func (self *IAMExtTransport) GetCapability(Capability int32, pValue *int32, pdblValue *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Capability), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pdblValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MediaState dispatches through IAMExtTransport's vtable slot 4.
 func (self *IAMExtTransport) Put_MediaState(State int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(State))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MediaState dispatches through IAMExtTransport's vtable slot 5.
 func (self *IAMExtTransport) Get_MediaState(pState *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LocalControl dispatches through IAMExtTransport's vtable slot 6.
 func (self *IAMExtTransport) Put_LocalControl(State int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(State))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LocalControl dispatches through IAMExtTransport's vtable slot 7.
 func (self *IAMExtTransport) Get_LocalControl(pState *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStatus dispatches through IAMExtTransport's vtable slot 8.
 func (self *IAMExtTransport) GetStatus(StatusItem int32, pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(StatusItem), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTransportBasicParameters dispatches through IAMExtTransport's vtable slot 9.
 func (self *IAMExtTransport) GetTransportBasicParameters(Param int32, pValue *int32, ppszData *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Param), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(ppszData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTransportBasicParameters dispatches through IAMExtTransport's vtable slot 10.
 func (self *IAMExtTransport) SetTransportBasicParameters(Param int32, Value int32, pszData string) error {
 	_pszData := win32.UTF16Ptr(pszData)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Param), uintptr(Value), uintptr(unsafe.Pointer(_pszData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTransportVideoParameters dispatches through IAMExtTransport's vtable slot 11.
 func (self *IAMExtTransport) GetTransportVideoParameters(Param int32, pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Param), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTransportVideoParameters dispatches through IAMExtTransport's vtable slot 12.
 func (self *IAMExtTransport) SetTransportVideoParameters(Param int32, Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Param), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTransportAudioParameters dispatches through IAMExtTransport's vtable slot 13.
 func (self *IAMExtTransport) GetTransportAudioParameters(Param int32, pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Param), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTransportAudioParameters dispatches through IAMExtTransport's vtable slot 14.
 func (self *IAMExtTransport) SetTransportAudioParameters(Param int32, Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(Param), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Mode dispatches through IAMExtTransport's vtable slot 15.
 func (self *IAMExtTransport) Put_Mode(Mode int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(Mode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Mode dispatches through IAMExtTransport's vtable slot 16.
 func (self *IAMExtTransport) Get_Mode(pMode *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Rate dispatches through IAMExtTransport's vtable slot 18.
 func (self *IAMExtTransport) Get_Rate(pdblRate *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdblRate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetChase dispatches through IAMExtTransport's vtable slot 19.
 func (self *IAMExtTransport) GetChase(pEnabled *int32, pOffset *int32, phEvent *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEnabled)), uintptr(unsafe.Pointer(pOffset)), uintptr(unsafe.Pointer(phEvent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetChase dispatches through IAMExtTransport's vtable slot 20.
 func (self *IAMExtTransport) SetChase(Enable int32, Offset int32, hEvent uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(Enable), uintptr(Offset), uintptr(hEvent))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBump dispatches through IAMExtTransport's vtable slot 21.
 func (self *IAMExtTransport) GetBump(pSpeed *int32, pDuration *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSpeed)), uintptr(unsafe.Pointer(pDuration)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBump dispatches through IAMExtTransport's vtable slot 22.
 func (self *IAMExtTransport) SetBump(Speed int32, Duration int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(Speed), uintptr(Duration))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AntiClogControl dispatches through IAMExtTransport's vtable slot 23.
 func (self *IAMExtTransport) Get_AntiClogControl(pEnabled *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEnabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AntiClogControl dispatches through IAMExtTransport's vtable slot 24.
 func (self *IAMExtTransport) Put_AntiClogControl(Enable int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(Enable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEditPropertySet dispatches through IAMExtTransport's vtable slot 25.
 func (self *IAMExtTransport) GetEditPropertySet(EditID int32, pState *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(EditID), uintptr(unsafe.Pointer(pState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetEditPropertySet dispatches through IAMExtTransport's vtable slot 26.
 func (self *IAMExtTransport) SetEditPropertySet(pEditID *int32, State int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEditID)), uintptr(State))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEditProperty dispatches through IAMExtTransport's vtable slot 27.
 func (self *IAMExtTransport) GetEditProperty(EditID int32, Param int32, pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(EditID), uintptr(Param), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetEditProperty dispatches through IAMExtTransport's vtable slot 28.
 func (self *IAMExtTransport) SetEditProperty(EditID int32, Param int32, Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(EditID), uintptr(Param), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EditStart dispatches through IAMExtTransport's vtable slot 29.
 func (self *IAMExtTransport) Get_EditStart(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EditStart dispatches through IAMExtTransport's vtable slot 30.
 func (self *IAMExtTransport) Put_EditStart(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMExtendedErrorInfo: https://learn.microsoft.com/windows/win32/api/qnetwork/nn-qnetwork-iamextendederrorinfo
@@ -944,19 +944,19 @@ var IID_IAMExtendedErrorInfo = win32.GUID{Data1: 0xfa2aa8f6, Data2: 0x8b62, Data
 // Get_HasError dispatches through IAMExtendedErrorInfo's vtable slot 7.
 func (self *IAMExtendedErrorInfo) Get_HasError(pHasError *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHasError)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ErrorDescription dispatches through IAMExtendedErrorInfo's vtable slot 8.
 func (self *IAMExtendedErrorInfo) Get_ErrorDescription(pbstrErrorDescription *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrErrorDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ErrorCode dispatches through IAMExtendedErrorInfo's vtable slot 9.
 func (self *IAMExtendedErrorInfo) Get_ErrorCode(pErrorCode *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pErrorCode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMExtendedSeeking: https://learn.microsoft.com/windows/win32/api/qnetwork/nn-qnetwork-iamextendedseeking
@@ -971,37 +971,37 @@ var IID_IAMExtendedSeeking = win32.GUID{Data1: 0xfa2aa8f9, Data2: 0x8b62, Data3:
 // Get_ExSeekCapabilities dispatches through IAMExtendedSeeking's vtable slot 7.
 func (self *IAMExtendedSeeking) Get_ExSeekCapabilities(pExCapabilities *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pExCapabilities)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MarkerCount dispatches through IAMExtendedSeeking's vtable slot 8.
 func (self *IAMExtendedSeeking) Get_MarkerCount(pMarkerCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMarkerCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentMarker dispatches through IAMExtendedSeeking's vtable slot 9.
 func (self *IAMExtendedSeeking) Get_CurrentMarker(pCurrentMarker *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCurrentMarker)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMarkerTime dispatches through IAMExtendedSeeking's vtable slot 10.
 func (self *IAMExtendedSeeking) GetMarkerTime(MarkerNum int32, pMarkerTime *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(MarkerNum), uintptr(unsafe.Pointer(pMarkerTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMarkerName dispatches through IAMExtendedSeeking's vtable slot 11.
 func (self *IAMExtendedSeeking) GetMarkerName(MarkerNum int32, pbstrMarkerName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(MarkerNum), uintptr(unsafe.Pointer(pbstrMarkerName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PlaybackSpeed dispatches through IAMExtendedSeeking's vtable slot 13.
 func (self *IAMExtendedSeeking) Get_PlaybackSpeed(pSpeed *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSpeed)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMFilterGraphCallback: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamfiltergraphcallback
@@ -1016,7 +1016,7 @@ var IID_IAMFilterGraphCallback = win32.GUID{Data1: 0x56a868fd, Data2: 0x0ad4, Da
 // UnableToRender dispatches through IAMFilterGraphCallback's vtable slot 3.
 func (self *IAMFilterGraphCallback) UnableToRender(pPin *IPin) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPin)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMFilterMiscFlags: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamfiltermiscflags
@@ -1046,13 +1046,13 @@ var IID_IAMGraphBuilderCallback = win32.GUID{Data1: 0x4995f511, Data2: 0x9ddb, D
 // SelectedFilter dispatches through IAMGraphBuilderCallback's vtable slot 3.
 func (self *IAMGraphBuilderCallback) SelectedFilter(pMon *systemcom.IMoniker) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMon)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreatedFilter dispatches through IAMGraphBuilderCallback's vtable slot 4.
 func (self *IAMGraphBuilderCallback) CreatedFilter(pFil *IBaseFilter) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFil)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMGraphStreams: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamgraphstreams
@@ -1067,20 +1067,20 @@ var IID_IAMGraphStreams = win32.GUID{Data1: 0x632105fa, Data2: 0x072e, Data3: 0x
 // FindUpstreamInterface dispatches through IAMGraphStreams's vtable slot 3.
 func (self *IAMGraphStreams) FindUpstreamInterface(pPin *IPin, riid *win32.GUID, ppvInterface **win32.IUnknown, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPin)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvInterface)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SyncUsingStreamOffset dispatches through IAMGraphStreams's vtable slot 4.
 func (self *IAMGraphStreams) SyncUsingStreamOffset(bUseStreamOffset bool) error {
 	_bUseStreamOffset := win32.Bool32(bUseStreamOffset)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(_bUseStreamOffset))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMaxGraphLatency dispatches through IAMGraphStreams's vtable slot 5.
 func (self *IAMGraphStreams) SetMaxGraphLatency(rtMaxGraphLatency int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(rtMaxGraphLatency))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMLatency: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamlatency
@@ -1095,7 +1095,7 @@ var IID_IAMLatency = win32.GUID{Data1: 0x62ea93ba, Data2: 0xec62, Data3: 0x11d2,
 // GetLatency dispatches through IAMLatency's vtable slot 3.
 func (self *IAMLatency) GetLatency(prtLatency *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prtLatency)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMLine21Decoder: https://learn.microsoft.com/windows/win32/api/il21dec/nn-il21dec-iamline21decoder
@@ -1110,80 +1110,80 @@ var IID_IAMLine21Decoder = win32.GUID{Data1: 0x6e8d4a21, Data2: 0x310c, Data3: 0
 // GetDecoderLevel dispatches through IAMLine21Decoder's vtable slot 3.
 func (self *IAMLine21Decoder) GetDecoderLevel(lpLevel *AM_LINE21_CCLEVEL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpLevel)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentService dispatches through IAMLine21Decoder's vtable slot 4.
 func (self *IAMLine21Decoder) GetCurrentService(lpService *AM_LINE21_CCSERVICE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpService)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCurrentService dispatches through IAMLine21Decoder's vtable slot 5.
 func (self *IAMLine21Decoder) SetCurrentService(Service AM_LINE21_CCSERVICE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Service))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetServiceState dispatches through IAMLine21Decoder's vtable slot 6.
 func (self *IAMLine21Decoder) GetServiceState(lpState *AM_LINE21_CCSTATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetServiceState dispatches through IAMLine21Decoder's vtable slot 7.
 func (self *IAMLine21Decoder) SetServiceState(State AM_LINE21_CCSTATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(State))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOutputFormat dispatches through IAMLine21Decoder's vtable slot 8.
 func (self *IAMLine21Decoder) GetOutputFormat(lpbmih *graphicsgdi.BITMAPINFOHEADER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpbmih)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetOutputFormat dispatches through IAMLine21Decoder's vtable slot 9.
 func (self *IAMLine21Decoder) SetOutputFormat(lpbmi *graphicsgdi.BITMAPINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpbmi)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBackgroundColor dispatches through IAMLine21Decoder's vtable slot 10.
 func (self *IAMLine21Decoder) GetBackgroundColor(pdwPhysColor *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwPhysColor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBackgroundColor dispatches through IAMLine21Decoder's vtable slot 11.
 func (self *IAMLine21Decoder) SetBackgroundColor(dwPhysColor uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(dwPhysColor))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRedrawAlways dispatches through IAMLine21Decoder's vtable slot 12.
 func (self *IAMLine21Decoder) GetRedrawAlways(lpbOption *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpbOption)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetRedrawAlways dispatches through IAMLine21Decoder's vtable slot 13.
 func (self *IAMLine21Decoder) SetRedrawAlways(bOption bool) error {
 	_bOption := win32.Bool32(bOption)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(_bOption))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDrawBackgroundMode dispatches through IAMLine21Decoder's vtable slot 14.
 func (self *IAMLine21Decoder) GetDrawBackgroundMode(lpMode *AM_LINE21_DRAWBGMODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDrawBackgroundMode dispatches through IAMLine21Decoder's vtable slot 15.
 func (self *IAMLine21Decoder) SetDrawBackgroundMode(Mode AM_LINE21_DRAWBGMODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(Mode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMMediaContent: https://learn.microsoft.com/windows/win32/api/qnetwork/nn-qnetwork-iammediacontent
@@ -1198,79 +1198,79 @@ var IID_IAMMediaContent = win32.GUID{Data1: 0xfa2aa8f4, Data2: 0x8b62, Data3: 0x
 // Get_AuthorName dispatches through IAMMediaContent's vtable slot 7.
 func (self *IAMMediaContent) Get_AuthorName(pbstrAuthorName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrAuthorName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Title dispatches through IAMMediaContent's vtable slot 8.
 func (self *IAMMediaContent) Get_Title(pbstrTitle *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrTitle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Rating dispatches through IAMMediaContent's vtable slot 9.
 func (self *IAMMediaContent) Get_Rating(pbstrRating *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrRating)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through IAMMediaContent's vtable slot 10.
 func (self *IAMMediaContent) Get_Description(pbstrDescription *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Copyright dispatches through IAMMediaContent's vtable slot 11.
 func (self *IAMMediaContent) Get_Copyright(pbstrCopyright *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrCopyright)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BaseURL dispatches through IAMMediaContent's vtable slot 12.
 func (self *IAMMediaContent) Get_BaseURL(pbstrBaseURL *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrBaseURL)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LogoURL dispatches through IAMMediaContent's vtable slot 13.
 func (self *IAMMediaContent) Get_LogoURL(pbstrLogoURL *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrLogoURL)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LogoIconURL dispatches through IAMMediaContent's vtable slot 14.
 func (self *IAMMediaContent) Get_LogoIconURL(pbstrLogoURL *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrLogoURL)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_WatermarkURL dispatches through IAMMediaContent's vtable slot 15.
 func (self *IAMMediaContent) Get_WatermarkURL(pbstrWatermarkURL *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrWatermarkURL)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MoreInfoURL dispatches through IAMMediaContent's vtable slot 16.
 func (self *IAMMediaContent) Get_MoreInfoURL(pbstrMoreInfoURL *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrMoreInfoURL)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MoreInfoBannerImage dispatches through IAMMediaContent's vtable slot 17.
 func (self *IAMMediaContent) Get_MoreInfoBannerImage(pbstrMoreInfoBannerImage *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrMoreInfoBannerImage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MoreInfoBannerURL dispatches through IAMMediaContent's vtable slot 18.
 func (self *IAMMediaContent) Get_MoreInfoBannerURL(pbstrMoreInfoBannerURL *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrMoreInfoBannerURL)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MoreInfoText dispatches through IAMMediaContent's vtable slot 19.
 func (self *IAMMediaContent) Get_MoreInfoText(pbstrMoreInfoText *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrMoreInfoText)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMMediaContent2: https://learn.microsoft.com/windows/win32/api/qnetwork/nn-qnetwork-iammediacontent2
@@ -1285,19 +1285,19 @@ var IID_IAMMediaContent2 = win32.GUID{Data1: 0xce8f78c1, Data2: 0x74d9, Data3: 0
 // Get_MediaParameter dispatches through IAMMediaContent2's vtable slot 7.
 func (self *IAMMediaContent2) Get_MediaParameter(EntryNum int32, bstrName foundation.BSTR, pbstrValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(EntryNum), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(pbstrValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MediaParameterName dispatches through IAMMediaContent2's vtable slot 8.
 func (self *IAMMediaContent2) Get_MediaParameterName(EntryNum int32, Index int32, pbstrName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(EntryNum), uintptr(Index), uintptr(unsafe.Pointer(pbstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PlaylistCount dispatches through IAMMediaContent2's vtable slot 9.
 func (self *IAMMediaContent2) Get_PlaylistCount(pNumberEntries *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNumberEntries)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMMediaStream: https://learn.microsoft.com/windows/win32/api/amstream/nn-amstream-iammediastream
@@ -1312,31 +1312,31 @@ var IID_IAMMediaStream = win32.GUID{Data1: 0xbebe595d, Data2: 0x9a6f, Data3: 0x1
 // Initialize dispatches through IAMMediaStream's vtable slot 9.
 func (self *IAMMediaStream) Initialize(pSourceObject *systemcom.IUnknown, dwFlags uint32, PurposeId *win32.GUID, StreamType STREAM_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSourceObject)), uintptr(dwFlags), uintptr(unsafe.Pointer(PurposeId)), uintptr(StreamType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetState dispatches through IAMMediaStream's vtable slot 10.
 func (self *IAMMediaStream) SetState(State FILTER_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(State))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // JoinAMMultiMediaStream dispatches through IAMMediaStream's vtable slot 11.
 func (self *IAMMediaStream) JoinAMMultiMediaStream(pAMMultiMediaStream *IAMMultiMediaStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAMMultiMediaStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // JoinFilter dispatches through IAMMediaStream's vtable slot 12.
 func (self *IAMMediaStream) JoinFilter(pMediaStreamFilter *IMediaStreamFilter) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMediaStreamFilter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // JoinFilterGraph dispatches through IAMMediaStream's vtable slot 13.
 func (self *IAMMediaStream) JoinFilterGraph(pFilterGraph *IFilterGraph) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFilterGraph)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMMediaTypeSample: https://learn.microsoft.com/windows/win32/api/amstream/nn-amstream-iammediatypesample
@@ -1355,13 +1355,13 @@ func (self *IAMMediaTypeSample) SetPointer(pBuffer []byte) error {
 		_pBuffer = &pBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPointer dispatches through IAMMediaTypeSample's vtable slot 9.
 func (self *IAMMediaTypeSample) GetPointer(ppBuffer **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSize dispatches through IAMMediaTypeSample's vtable slot 10.
@@ -1373,39 +1373,39 @@ func (self *IAMMediaTypeSample) GetSize() int32 {
 // GetTime dispatches through IAMMediaTypeSample's vtable slot 11.
 func (self *IAMMediaTypeSample) GetTime(pTimeStart *int64, pTimeEnd *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTimeStart)), uintptr(unsafe.Pointer(pTimeEnd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTime dispatches through IAMMediaTypeSample's vtable slot 12.
 func (self *IAMMediaTypeSample) SetTime(pTimeStart *int64, pTimeEnd *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTimeStart)), uintptr(unsafe.Pointer(pTimeEnd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsSyncPoint dispatches through IAMMediaTypeSample's vtable slot 13.
 func (self *IAMMediaTypeSample) IsSyncPoint() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetSyncPoint dispatches through IAMMediaTypeSample's vtable slot 14.
 func (self *IAMMediaTypeSample) SetSyncPoint(bIsSyncPoint bool) error {
 	_bIsSyncPoint := win32.Bool32(bIsSyncPoint)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(_bIsSyncPoint))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsPreroll dispatches through IAMMediaTypeSample's vtable slot 15.
 func (self *IAMMediaTypeSample) IsPreroll() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetPreroll dispatches through IAMMediaTypeSample's vtable slot 16.
 func (self *IAMMediaTypeSample) SetPreroll(bIsPreroll bool) error {
 	_bIsPreroll := win32.Bool32(bIsPreroll)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(_bIsPreroll))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetActualDataLength dispatches through IAMMediaTypeSample's vtable slot 17.
@@ -1417,44 +1417,44 @@ func (self *IAMMediaTypeSample) GetActualDataLength() int32 {
 // SetActualDataLength dispatches through IAMMediaTypeSample's vtable slot 18.
 func (self *IAMMediaTypeSample) SetActualDataLength(__MIDL__IAMMediaTypeSample0000 int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(__MIDL__IAMMediaTypeSample0000))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMediaType dispatches through IAMMediaTypeSample's vtable slot 19.
 func (self *IAMMediaTypeSample) GetMediaType(ppMediaType **mediamediafoundation.AM_MEDIA_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppMediaType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMediaType dispatches through IAMMediaTypeSample's vtable slot 20.
 func (self *IAMMediaTypeSample) SetMediaType(pMediaType *mediamediafoundation.AM_MEDIA_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMediaType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsDiscontinuity dispatches through IAMMediaTypeSample's vtable slot 21.
 func (self *IAMMediaTypeSample) IsDiscontinuity() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDiscontinuity dispatches through IAMMediaTypeSample's vtable slot 22.
 func (self *IAMMediaTypeSample) SetDiscontinuity(bDiscontinuity bool) error {
 	_bDiscontinuity := win32.Bool32(bDiscontinuity)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(_bDiscontinuity))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMediaTime dispatches through IAMMediaTypeSample's vtable slot 23.
 func (self *IAMMediaTypeSample) GetMediaTime(pTimeStart *int64, pTimeEnd *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTimeStart)), uintptr(unsafe.Pointer(pTimeEnd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMediaTime dispatches through IAMMediaTypeSample's vtable slot 24.
 func (self *IAMMediaTypeSample) SetMediaTime(pTimeStart *int64, pTimeEnd *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTimeStart)), uintptr(unsafe.Pointer(pTimeEnd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMMediaTypeStream: https://learn.microsoft.com/windows/win32/api/amstream/nn-amstream-iammediatypestream
@@ -1469,31 +1469,31 @@ var IID_IAMMediaTypeStream = win32.GUID{Data1: 0xab6b4afa, Data2: 0xf6e4, Data3:
 // GetFormat dispatches through IAMMediaTypeStream's vtable slot 9.
 func (self *IAMMediaTypeStream) GetFormat(pMediaType *mediamediafoundation.AM_MEDIA_TYPE, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMediaType)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetFormat dispatches through IAMMediaTypeStream's vtable slot 10.
 func (self *IAMMediaTypeStream) SetFormat(pMediaType *mediamediafoundation.AM_MEDIA_TYPE, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMediaType)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSample dispatches through IAMMediaTypeStream's vtable slot 11.
 func (self *IAMMediaTypeStream) CreateSample(lSampleSize int32, pbBuffer *byte, dwFlags uint32, pUnkOuter *systemcom.IUnknown, ppAMMediaTypeSample **IAMMediaTypeSample) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(lSampleSize), uintptr(unsafe.Pointer(pbBuffer)), uintptr(dwFlags), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(ppAMMediaTypeSample)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStreamAllocatorRequirements dispatches through IAMMediaTypeStream's vtable slot 12.
 func (self *IAMMediaTypeStream) GetStreamAllocatorRequirements(pProps *ALLOCATOR_PROPERTIES) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProps)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetStreamAllocatorRequirements dispatches through IAMMediaTypeStream's vtable slot 13.
 func (self *IAMMediaTypeStream) SetStreamAllocatorRequirements(pProps *ALLOCATOR_PROPERTIES) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProps)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMMultiMediaStream: https://learn.microsoft.com/windows/win32/api/amstream/nn-amstream-iammultimediastream
@@ -1508,44 +1508,44 @@ var IID_IAMMultiMediaStream = win32.GUID{Data1: 0xbebe595c, Data2: 0x9a6f, Data3
 // Initialize dispatches through IAMMultiMediaStream's vtable slot 12.
 func (self *IAMMultiMediaStream) Initialize(StreamType STREAM_TYPE, dwFlags uint32, pFilterGraph *IGraphBuilder) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(StreamType), uintptr(dwFlags), uintptr(unsafe.Pointer(pFilterGraph)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFilterGraph dispatches through IAMMultiMediaStream's vtable slot 13.
 func (self *IAMMultiMediaStream) GetFilterGraph(ppGraphBuilder **IGraphBuilder) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppGraphBuilder)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFilter dispatches through IAMMultiMediaStream's vtable slot 14.
 func (self *IAMMultiMediaStream) GetFilter(ppFilter **IMediaStreamFilter) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFilter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddMediaStream dispatches through IAMMultiMediaStream's vtable slot 15.
 func (self *IAMMultiMediaStream) AddMediaStream(pStreamObject *systemcom.IUnknown, PurposeId *win32.GUID, dwFlags uint32, ppNewStream **IMediaStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStreamObject)), uintptr(unsafe.Pointer(PurposeId)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppNewStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenFile dispatches through IAMMultiMediaStream's vtable slot 16.
 func (self *IAMMultiMediaStream) OpenFile(pszFileName string, dwFlags uint32) error {
 	_pszFileName := win32.UTF16Ptr(pszFileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFileName)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenMoniker dispatches through IAMMultiMediaStream's vtable slot 17.
 func (self *IAMMultiMediaStream) OpenMoniker(pCtx *systemcom.IBindCtx, pMoniker *systemcom.IMoniker, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCtx)), uintptr(unsafe.Pointer(pMoniker)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Render dispatches through IAMMultiMediaStream's vtable slot 18.
 func (self *IAMMultiMediaStream) Render(dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMNetShowConfig: https://learn.microsoft.com/windows/win32/api/qnetwork/nn-qnetwork-iamnetshowconfig
@@ -1560,127 +1560,127 @@ var IID_IAMNetShowConfig = win32.GUID{Data1: 0xfa2aa8f1, Data2: 0x8b62, Data3: 0
 // Get_BufferingTime dispatches through IAMNetShowConfig's vtable slot 7.
 func (self *IAMNetShowConfig) Get_BufferingTime(pBufferingTime *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBufferingTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UseFixedUDPPort dispatches through IAMNetShowConfig's vtable slot 9.
 func (self *IAMNetShowConfig) Get_UseFixedUDPPort(pUseFixedUDPPort *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUseFixedUDPPort)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_UseFixedUDPPort dispatches through IAMNetShowConfig's vtable slot 10.
 func (self *IAMNetShowConfig) Put_UseFixedUDPPort(UseFixedUDPPort foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(UseFixedUDPPort))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FixedUDPPort dispatches through IAMNetShowConfig's vtable slot 11.
 func (self *IAMNetShowConfig) Get_FixedUDPPort(pFixedUDPPort *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFixedUDPPort)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FixedUDPPort dispatches through IAMNetShowConfig's vtable slot 12.
 func (self *IAMNetShowConfig) Put_FixedUDPPort(FixedUDPPort int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(FixedUDPPort))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UseHTTPProxy dispatches through IAMNetShowConfig's vtable slot 13.
 func (self *IAMNetShowConfig) Get_UseHTTPProxy(pUseHTTPProxy *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUseHTTPProxy)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_UseHTTPProxy dispatches through IAMNetShowConfig's vtable slot 14.
 func (self *IAMNetShowConfig) Put_UseHTTPProxy(UseHTTPProxy foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(UseHTTPProxy))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EnableAutoProxy dispatches through IAMNetShowConfig's vtable slot 15.
 func (self *IAMNetShowConfig) Get_EnableAutoProxy(pEnableAutoProxy *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEnableAutoProxy)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EnableAutoProxy dispatches through IAMNetShowConfig's vtable slot 16.
 func (self *IAMNetShowConfig) Put_EnableAutoProxy(EnableAutoProxy foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(EnableAutoProxy))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HTTPProxyHost dispatches through IAMNetShowConfig's vtable slot 17.
 func (self *IAMNetShowConfig) Get_HTTPProxyHost(pbstrHTTPProxyHost *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrHTTPProxyHost)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_HTTPProxyHost dispatches through IAMNetShowConfig's vtable slot 18.
 func (self *IAMNetShowConfig) Put_HTTPProxyHost(bstrHTTPProxyHost foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrHTTPProxyHost)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HTTPProxyPort dispatches through IAMNetShowConfig's vtable slot 19.
 func (self *IAMNetShowConfig) Get_HTTPProxyPort(pHTTPProxyPort *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHTTPProxyPort)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_HTTPProxyPort dispatches through IAMNetShowConfig's vtable slot 20.
 func (self *IAMNetShowConfig) Put_HTTPProxyPort(HTTPProxyPort int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(HTTPProxyPort))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EnableMulticast dispatches through IAMNetShowConfig's vtable slot 21.
 func (self *IAMNetShowConfig) Get_EnableMulticast(pEnableMulticast *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEnableMulticast)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EnableMulticast dispatches through IAMNetShowConfig's vtable slot 22.
 func (self *IAMNetShowConfig) Put_EnableMulticast(EnableMulticast foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(EnableMulticast))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EnableUDP dispatches through IAMNetShowConfig's vtable slot 23.
 func (self *IAMNetShowConfig) Get_EnableUDP(pEnableUDP *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEnableUDP)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EnableUDP dispatches through IAMNetShowConfig's vtable slot 24.
 func (self *IAMNetShowConfig) Put_EnableUDP(EnableUDP foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(EnableUDP))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EnableTCP dispatches through IAMNetShowConfig's vtable slot 25.
 func (self *IAMNetShowConfig) Get_EnableTCP(pEnableTCP *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEnableTCP)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EnableTCP dispatches through IAMNetShowConfig's vtable slot 26.
 func (self *IAMNetShowConfig) Put_EnableTCP(EnableTCP foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(EnableTCP))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EnableHTTP dispatches through IAMNetShowConfig's vtable slot 27.
 func (self *IAMNetShowConfig) Get_EnableHTTP(pEnableHTTP *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEnableHTTP)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EnableHTTP dispatches through IAMNetShowConfig's vtable slot 28.
 func (self *IAMNetShowConfig) Put_EnableHTTP(EnableHTTP foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(EnableHTTP))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMNetShowExProps: https://learn.microsoft.com/windows/win32/api/qnetwork/nn-qnetwork-iamnetshowexprops
@@ -1695,55 +1695,55 @@ var IID_IAMNetShowExProps = win32.GUID{Data1: 0xfa2aa8f5, Data2: 0x8b62, Data3: 
 // Get_SourceProtocol dispatches through IAMNetShowExProps's vtable slot 7.
 func (self *IAMNetShowExProps) Get_SourceProtocol(pSourceProtocol *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSourceProtocol)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Bandwidth dispatches through IAMNetShowExProps's vtable slot 8.
 func (self *IAMNetShowExProps) Get_Bandwidth(pBandwidth *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBandwidth)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ErrorCorrection dispatches through IAMNetShowExProps's vtable slot 9.
 func (self *IAMNetShowExProps) Get_ErrorCorrection(pbstrErrorCorrection *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrErrorCorrection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CodecCount dispatches through IAMNetShowExProps's vtable slot 10.
 func (self *IAMNetShowExProps) Get_CodecCount(pCodecCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCodecCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCodecInstalled dispatches through IAMNetShowExProps's vtable slot 11.
 func (self *IAMNetShowExProps) GetCodecInstalled(CodecNum int32, pCodecInstalled *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(CodecNum), uintptr(unsafe.Pointer(pCodecInstalled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCodecDescription dispatches through IAMNetShowExProps's vtable slot 12.
 func (self *IAMNetShowExProps) GetCodecDescription(CodecNum int32, pbstrCodecDescription *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(CodecNum), uintptr(unsafe.Pointer(pbstrCodecDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCodecURL dispatches through IAMNetShowExProps's vtable slot 13.
 func (self *IAMNetShowExProps) GetCodecURL(CodecNum int32, pbstrCodecURL *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(CodecNum), uintptr(unsafe.Pointer(pbstrCodecURL)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CreationDate dispatches through IAMNetShowExProps's vtable slot 14.
 func (self *IAMNetShowExProps) Get_CreationDate(pCreationDate *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCreationDate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SourceLink dispatches through IAMNetShowExProps's vtable slot 15.
 func (self *IAMNetShowExProps) Get_SourceLink(pbstrSourceLink *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrSourceLink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMNetShowPreroll: https://learn.microsoft.com/windows/win32/api/qnetwork/nn-qnetwork-iamnetshowpreroll
@@ -1758,13 +1758,13 @@ var IID_IAMNetShowPreroll = win32.GUID{Data1: 0xaae7e4e2, Data2: 0x6388, Data3: 
 // Put_Preroll dispatches through IAMNetShowPreroll's vtable slot 7.
 func (self *IAMNetShowPreroll) Put_Preroll(fPreroll foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(fPreroll))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Preroll dispatches through IAMNetShowPreroll's vtable slot 8.
 func (self *IAMNetShowPreroll) Get_Preroll(pfPreroll *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfPreroll)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMNetworkStatus: https://learn.microsoft.com/windows/win32/api/qnetwork/nn-qnetwork-iamnetworkstatus
@@ -1779,43 +1779,43 @@ var IID_IAMNetworkStatus = win32.GUID{Data1: 0xfa2aa8f3, Data2: 0x8b62, Data3: 0
 // Get_ReceivedPackets dispatches through IAMNetworkStatus's vtable slot 7.
 func (self *IAMNetworkStatus) Get_ReceivedPackets(pReceivedPackets *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pReceivedPackets)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RecoveredPackets dispatches through IAMNetworkStatus's vtable slot 8.
 func (self *IAMNetworkStatus) Get_RecoveredPackets(pRecoveredPackets *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRecoveredPackets)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LostPackets dispatches through IAMNetworkStatus's vtable slot 9.
 func (self *IAMNetworkStatus) Get_LostPackets(pLostPackets *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLostPackets)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReceptionQuality dispatches through IAMNetworkStatus's vtable slot 10.
 func (self *IAMNetworkStatus) Get_ReceptionQuality(pReceptionQuality *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pReceptionQuality)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BufferingCount dispatches through IAMNetworkStatus's vtable slot 11.
 func (self *IAMNetworkStatus) Get_BufferingCount(pBufferingCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBufferingCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsBroadcast dispatches through IAMNetworkStatus's vtable slot 12.
 func (self *IAMNetworkStatus) Get_IsBroadcast(pIsBroadcast *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsBroadcast)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BufferingProgress dispatches through IAMNetworkStatus's vtable slot 13.
 func (self *IAMNetworkStatus) Get_BufferingProgress(pBufferingProgress *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBufferingProgress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMOpenProgress: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamopenprogress
@@ -1830,13 +1830,13 @@ var IID_IAMOpenProgress = win32.GUID{Data1: 0x8e1c39a1, Data2: 0xde53, Data3: 0x
 // QueryProgress dispatches through IAMOpenProgress's vtable slot 3.
 func (self *IAMOpenProgress) QueryProgress(pllTotal *int64, pllCurrent *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pllTotal)), uintptr(unsafe.Pointer(pllCurrent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AbortOperation dispatches through IAMOpenProgress's vtable slot 4.
 func (self *IAMOpenProgress) AbortOperation() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMOverlayFX: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamoverlayfx
@@ -1851,19 +1851,19 @@ var IID_IAMOverlayFX = win32.GUID{Data1: 0x62fae250, Data2: 0x7e65, Data3: 0x446
 // QueryOverlayFXCaps dispatches through IAMOverlayFX's vtable slot 3.
 func (self *IAMOverlayFX) QueryOverlayFXCaps(lpdwOverlayFXCaps *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpdwOverlayFXCaps)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetOverlayFX dispatches through IAMOverlayFX's vtable slot 4.
 func (self *IAMOverlayFX) SetOverlayFX(dwOverlayFX uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwOverlayFX))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOverlayFX dispatches through IAMOverlayFX's vtable slot 5.
 func (self *IAMOverlayFX) GetOverlayFX(lpdwOverlayFX *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpdwOverlayFX)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMParse: https://learn.microsoft.com/windows/win32/api/amparse/nn-amparse-iamparse
@@ -1878,19 +1878,19 @@ var IID_IAMParse = win32.GUID{Data1: 0xc47a3420, Data2: 0x005c, Data3: 0x11d2, D
 // GetParseTime dispatches through IAMParse's vtable slot 3.
 func (self *IAMParse) GetParseTime(prtCurrent *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prtCurrent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetParseTime dispatches through IAMParse's vtable slot 4.
 func (self *IAMParse) SetParseTime(rtCurrent int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(rtCurrent))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Flush dispatches through IAMParse's vtable slot 5.
 func (self *IAMParse) Flush() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMPhysicalPinInfo: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamphysicalpininfo
@@ -1905,7 +1905,7 @@ var IID_IAMPhysicalPinInfo = win32.GUID{Data1: 0xf938c991, Data2: 0x3029, Data3:
 // GetPhysicalType dispatches through IAMPhysicalPinInfo's vtable slot 3.
 func (self *IAMPhysicalPinInfo) GetPhysicalType(pType *int32, ppszType *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(ppszType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 56a868fe-0ad4-11ce-b03a-0020af0ba770
@@ -1919,32 +1919,32 @@ var IID_IAMPlayList = win32.GUID{Data1: 0x56a868fe, Data2: 0x0ad4, Data3: 0x11ce
 // GetFlags dispatches through IAMPlayList's vtable slot 3.
 func (self *IAMPlayList) GetFlags(pdwFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetItemCount dispatches through IAMPlayList's vtable slot 4.
 func (self *IAMPlayList) GetItemCount(pdwItems *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwItems)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetItem dispatches through IAMPlayList's vtable slot 5.
 func (self *IAMPlayList) GetItem(dwItemIndex uint32, ppItem **IAMPlayListItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwItemIndex), uintptr(unsafe.Pointer(ppItem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNamedEvent dispatches through IAMPlayList's vtable slot 6.
 func (self *IAMPlayList) GetNamedEvent(pwszEventName string, dwItemIndex uint32, ppItem **IAMPlayListItem, pdwFlags *uint32) error {
 	_pwszEventName := win32.UTF16Ptr(pwszEventName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszEventName)), uintptr(dwItemIndex), uintptr(unsafe.Pointer(ppItem)), uintptr(unsafe.Pointer(pdwFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRepeatInfo dispatches through IAMPlayList's vtable slot 7.
 func (self *IAMPlayList) GetRepeatInfo(pdwRepeatCount *uint32, pdwRepeatStart *uint32, pdwRepeatEnd *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwRepeatCount)), uintptr(unsafe.Pointer(pdwRepeatStart)), uintptr(unsafe.Pointer(pdwRepeatEnd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 56a868ff-0ad4-11ce-b03a-0020af0ba770
@@ -1958,67 +1958,67 @@ var IID_IAMPlayListItem = win32.GUID{Data1: 0x56a868ff, Data2: 0x0ad4, Data3: 0x
 // GetFlags dispatches through IAMPlayListItem's vtable slot 3.
 func (self *IAMPlayListItem) GetFlags(pdwFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSourceCount dispatches through IAMPlayListItem's vtable slot 4.
 func (self *IAMPlayListItem) GetSourceCount(pdwSources *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwSources)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSourceURL dispatches through IAMPlayListItem's vtable slot 5.
 func (self *IAMPlayListItem) GetSourceURL(dwSourceIndex uint32, pbstrURL *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwSourceIndex), uintptr(unsafe.Pointer(pbstrURL)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSourceStart dispatches through IAMPlayListItem's vtable slot 6.
 func (self *IAMPlayListItem) GetSourceStart(dwSourceIndex uint32, prtStart *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwSourceIndex), uintptr(unsafe.Pointer(prtStart)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSourceDuration dispatches through IAMPlayListItem's vtable slot 7.
 func (self *IAMPlayListItem) GetSourceDuration(dwSourceIndex uint32, prtDuration *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwSourceIndex), uintptr(unsafe.Pointer(prtDuration)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSourceStartMarker dispatches through IAMPlayListItem's vtable slot 8.
 func (self *IAMPlayListItem) GetSourceStartMarker(dwSourceIndex uint32, pdwMarker *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwSourceIndex), uintptr(unsafe.Pointer(pdwMarker)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSourceEndMarker dispatches through IAMPlayListItem's vtable slot 9.
 func (self *IAMPlayListItem) GetSourceEndMarker(dwSourceIndex uint32, pdwMarker *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwSourceIndex), uintptr(unsafe.Pointer(pdwMarker)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSourceStartMarkerName dispatches through IAMPlayListItem's vtable slot 10.
 func (self *IAMPlayListItem) GetSourceStartMarkerName(dwSourceIndex uint32, pbstrStartMarker *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(dwSourceIndex), uintptr(unsafe.Pointer(pbstrStartMarker)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSourceEndMarkerName dispatches through IAMPlayListItem's vtable slot 11.
 func (self *IAMPlayListItem) GetSourceEndMarkerName(dwSourceIndex uint32, pbstrEndMarker *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(dwSourceIndex), uintptr(unsafe.Pointer(pbstrEndMarker)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLinkURL dispatches through IAMPlayListItem's vtable slot 12.
 func (self *IAMPlayListItem) GetLinkURL(pbstrURL *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrURL)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetScanDuration dispatches through IAMPlayListItem's vtable slot 13.
 func (self *IAMPlayListItem) GetScanDuration(dwSourceIndex uint32, prtScanDuration *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwSourceIndex), uintptr(unsafe.Pointer(prtScanDuration)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMPluginControl: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamplugincontrol
@@ -2033,45 +2033,45 @@ var IID_IAMPluginControl = win32.GUID{Data1: 0x0e26a181, Data2: 0xf40c, Data3: 0
 // GetPreferredClsid dispatches through IAMPluginControl's vtable slot 3.
 func (self *IAMPluginControl) GetPreferredClsid(subType *win32.GUID, clsid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(subType)), uintptr(unsafe.Pointer(clsid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPreferredClsidByIndex dispatches through IAMPluginControl's vtable slot 4.
 func (self *IAMPluginControl) GetPreferredClsidByIndex(index uint32, subType *win32.GUID, clsid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(subType)), uintptr(unsafe.Pointer(clsid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetPreferredClsid dispatches through IAMPluginControl's vtable slot 5.
 func (self *IAMPluginControl) SetPreferredClsid(subType *win32.GUID, clsid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(subType)), uintptr(unsafe.Pointer(clsid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsDisabled dispatches through IAMPluginControl's vtable slot 6.
 func (self *IAMPluginControl) IsDisabled(clsid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDisabledByIndex dispatches through IAMPluginControl's vtable slot 7.
 func (self *IAMPluginControl) GetDisabledByIndex(index uint32, clsid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(clsid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDisabled dispatches through IAMPluginControl's vtable slot 8.
 func (self *IAMPluginControl) SetDisabled(clsid *win32.GUID, disabled bool) error {
 	_disabled := win32.Bool32(disabled)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsid)), uintptr(_disabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsLegacyDisabled dispatches through IAMPluginControl's vtable slot 9.
 func (self *IAMPluginControl) IsLegacyDisabled(dllName string) error {
 	_dllName := win32.UTF16Ptr(dllName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_dllName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMPushSource: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iampushsource
@@ -2086,37 +2086,37 @@ var IID_IAMPushSource = win32.GUID{Data1: 0xf185fe76, Data2: 0xe64e, Data3: 0x11
 // GetPushSourceFlags dispatches through IAMPushSource's vtable slot 4.
 func (self *IAMPushSource) GetPushSourceFlags(pFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetPushSourceFlags dispatches through IAMPushSource's vtable slot 5.
 func (self *IAMPushSource) SetPushSourceFlags(Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetStreamOffset dispatches through IAMPushSource's vtable slot 6.
 func (self *IAMPushSource) SetStreamOffset(rtOffset int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(rtOffset))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStreamOffset dispatches through IAMPushSource's vtable slot 7.
 func (self *IAMPushSource) GetStreamOffset(prtOffset *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prtOffset)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMaxStreamOffset dispatches through IAMPushSource's vtable slot 8.
 func (self *IAMPushSource) GetMaxStreamOffset(prtMaxOffset *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prtMaxOffset)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMaxStreamOffset dispatches through IAMPushSource's vtable slot 9.
 func (self *IAMPushSource) SetMaxStreamOffset(rtMaxOffset int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(rtMaxOffset))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 02ef04dd-7580-11d1-bece-00c04fb6e937
@@ -2130,7 +2130,7 @@ var IID_IAMRebuild = win32.GUID{Data1: 0x02ef04dd, Data2: 0x7580, Data3: 0x11d1,
 // RebuildNow dispatches through IAMRebuild's vtable slot 3.
 func (self *IAMRebuild) RebuildNow() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMResourceControl: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamresourcecontrol
@@ -2145,7 +2145,7 @@ var IID_IAMResourceControl = win32.GUID{Data1: 0x8389d2d0, Data2: 0x77d7, Data3:
 // Reserve dispatches through IAMResourceControl's vtable slot 3.
 func (self *IAMResourceControl) Reserve(dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), 0)
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMStats: https://learn.microsoft.com/windows/win32/api/control/nn-control-iamstats
@@ -2160,31 +2160,31 @@ var IID_IAMStats = win32.GUID{Data1: 0xbc9bcf80, Data2: 0xdcd2, Data3: 0x11d2, D
 // Reset dispatches through IAMStats's vtable slot 7.
 func (self *IAMStats) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IAMStats's vtable slot 8.
 func (self *IAMStats) Get_Count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetValueByIndex dispatches through IAMStats's vtable slot 9.
 func (self *IAMStats) GetValueByIndex(lIndex int32, szName *foundation.BSTR, lCount *int32, dLast *float64, dAverage *float64, dStdDev *float64, dMin *float64, dMax *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(szName)), uintptr(unsafe.Pointer(lCount)), uintptr(unsafe.Pointer(dLast)), uintptr(unsafe.Pointer(dAverage)), uintptr(unsafe.Pointer(dStdDev)), uintptr(unsafe.Pointer(dMin)), uintptr(unsafe.Pointer(dMax)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetValueByName dispatches through IAMStats's vtable slot 10.
 func (self *IAMStats) GetValueByName(szName foundation.BSTR, lIndex *int32, lCount *int32, dLast *float64, dAverage *float64, dStdDev *float64, dMin *float64, dMax *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szName)), uintptr(unsafe.Pointer(lIndex)), uintptr(unsafe.Pointer(lCount)), uintptr(unsafe.Pointer(dLast)), uintptr(unsafe.Pointer(dAverage)), uintptr(unsafe.Pointer(dStdDev)), uintptr(unsafe.Pointer(dMin)), uintptr(unsafe.Pointer(dMax)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetIndex dispatches through IAMStats's vtable slot 11.
 func (self *IAMStats) GetIndex(szName foundation.BSTR, lCreate int32, plIndex *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szName)), uintptr(lCreate), uintptr(unsafe.Pointer(plIndex)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMStreamConfig: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamstreamconfig
@@ -2199,25 +2199,25 @@ var IID_IAMStreamConfig = win32.GUID{Data1: 0xc6e13340, Data2: 0x30ac, Data3: 0x
 // SetFormat dispatches through IAMStreamConfig's vtable slot 3.
 func (self *IAMStreamConfig) SetFormat(pmt *mediamediafoundation.AM_MEDIA_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pmt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFormat dispatches through IAMStreamConfig's vtable slot 4.
 func (self *IAMStreamConfig) GetFormat(ppmt **mediamediafoundation.AM_MEDIA_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppmt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNumberOfCapabilities dispatches through IAMStreamConfig's vtable slot 5.
 func (self *IAMStreamConfig) GetNumberOfCapabilities(piCount *int32, piSize *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piCount)), uintptr(unsafe.Pointer(piSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStreamCaps dispatches through IAMStreamConfig's vtable slot 6.
 func (self *IAMStreamConfig) GetStreamCaps(iIndex int32, ppmt **mediamediafoundation.AM_MEDIA_TYPE, pSCC *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(iIndex), uintptr(unsafe.Pointer(ppmt)), uintptr(unsafe.Pointer(pSCC)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMStreamControl: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamstreamcontrol
@@ -2232,20 +2232,20 @@ var IID_IAMStreamControl = win32.GUID{Data1: 0x36b73881, Data2: 0xc2c8, Data3: 0
 // StartAt dispatches through IAMStreamControl's vtable slot 3.
 func (self *IAMStreamControl) StartAt(ptStart *int64, dwCookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ptStart)), uintptr(dwCookie))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StopAt dispatches through IAMStreamControl's vtable slot 4.
 func (self *IAMStreamControl) StopAt(ptStop *int64, bSendExtra bool, dwCookie uint32) error {
 	_bSendExtra := win32.Bool32(bSendExtra)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ptStop)), uintptr(_bSendExtra), uintptr(dwCookie))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInfo dispatches through IAMStreamControl's vtable slot 5.
 func (self *IAMStreamControl) GetInfo(pInfo *AM_STREAM_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMStreamSelect: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamstreamselect
@@ -2260,19 +2260,19 @@ var IID_IAMStreamSelect = win32.GUID{Data1: 0xc1960960, Data2: 0x17f5, Data3: 0x
 // Count dispatches through IAMStreamSelect's vtable slot 3.
 func (self *IAMStreamSelect) Count(pcStreams *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcStreams)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Info dispatches through IAMStreamSelect's vtable slot 4.
 func (self *IAMStreamSelect) Info(lIndex int32, ppmt **mediamediafoundation.AM_MEDIA_TYPE, pdwFlags *uint32, plcid *uint32, pdwGroup *uint32, ppszName *foundation.PWSTR, ppObject **systemcom.IUnknown, ppUnk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(ppmt)), uintptr(unsafe.Pointer(pdwFlags)), uintptr(unsafe.Pointer(plcid)), uintptr(unsafe.Pointer(pdwGroup)), uintptr(unsafe.Pointer(ppszName)), uintptr(unsafe.Pointer(ppObject)), uintptr(unsafe.Pointer(ppUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Enable dispatches through IAMStreamSelect's vtable slot 5.
 func (self *IAMStreamSelect) Enable(lIndex int32, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMTVAudio: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamtvaudio
@@ -2287,37 +2287,37 @@ var IID_IAMTVAudio = win32.GUID{Data1: 0x83ec1c30, Data2: 0x23d1, Data3: 0x11d1,
 // GetHardwareSupportedTVAudioModes dispatches through IAMTVAudio's vtable slot 3.
 func (self *IAMTVAudio) GetHardwareSupportedTVAudioModes(plModes *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plModes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAvailableTVAudioModes dispatches through IAMTVAudio's vtable slot 4.
 func (self *IAMTVAudio) GetAvailableTVAudioModes(plModes *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plModes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TVAudioMode dispatches through IAMTVAudio's vtable slot 5.
 func (self *IAMTVAudio) Get_TVAudioMode(plMode *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_TVAudioMode dispatches through IAMTVAudio's vtable slot 6.
 func (self *IAMTVAudio) Put_TVAudioMode(lMode int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(lMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterNotificationCallBack dispatches through IAMTVAudio's vtable slot 7.
 func (self *IAMTVAudio) RegisterNotificationCallBack(pNotify *IAMTunerNotification, lEvents int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNotify)), uintptr(lEvents))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnRegisterNotificationCallBack dispatches through IAMTVAudio's vtable slot 8.
 func (self *IAMTVAudio) UnRegisterNotificationCallBack(pNotify *IAMTunerNotification) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNotify)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMTVAudioNotification: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamtvaudionotification
@@ -2332,7 +2332,7 @@ var IID_IAMTVAudioNotification = win32.GUID{Data1: 0x83ec1c33, Data2: 0x23d1, Da
 // OnEvent dispatches through IAMTVAudioNotification's vtable slot 3.
 func (self *IAMTVAudioNotification) OnEvent(Event AMTVAudioEventType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Event))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMTVTuner: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamtvtuner
@@ -2347,67 +2347,67 @@ var IID_IAMTVTuner = win32.GUID{Data1: 0x211a8766, Data2: 0x03ac, Data3: 0x11d1,
 // Get_AvailableTVFormats dispatches through IAMTVTuner's vtable slot 18.
 func (self *IAMTVTuner) Get_AvailableTVFormats(lAnalogVideoStandard *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lAnalogVideoStandard)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TVFormat dispatches through IAMTVTuner's vtable slot 19.
 func (self *IAMTVTuner) Get_TVFormat(plAnalogVideoStandard *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAnalogVideoStandard)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AutoTune dispatches through IAMTVTuner's vtable slot 20.
 func (self *IAMTVTuner) AutoTune(lChannel int32, plFoundSignal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(lChannel), uintptr(unsafe.Pointer(plFoundSignal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StoreAutoTune dispatches through IAMTVTuner's vtable slot 21.
 func (self *IAMTVTuner) StoreAutoTune() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NumInputConnections dispatches through IAMTVTuner's vtable slot 22.
 func (self *IAMTVTuner) Get_NumInputConnections(plNumInputConnections *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plNumInputConnections)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_InputType dispatches through IAMTVTuner's vtable slot 23.
 func (self *IAMTVTuner) Put_InputType(lIndex int32, InputType TunerInputType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(InputType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InputType dispatches through IAMTVTuner's vtable slot 24.
 func (self *IAMTVTuner) Get_InputType(lIndex int32, pInputType *TunerInputType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(pInputType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ConnectInput dispatches through IAMTVTuner's vtable slot 25.
 func (self *IAMTVTuner) Put_ConnectInput(lIndex int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(lIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ConnectInput dispatches through IAMTVTuner's vtable slot 26.
 func (self *IAMTVTuner) Get_ConnectInput(plIndex *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plIndex)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_VideoFrequency dispatches through IAMTVTuner's vtable slot 27.
 func (self *IAMTVTuner) Get_VideoFrequency(lFreq *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lFreq)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AudioFrequency dispatches through IAMTVTuner's vtable slot 28.
 func (self *IAMTVTuner) Get_AudioFrequency(lFreq *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lFreq)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMTimecodeDisplay: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamtimecodedisplay
@@ -2422,25 +2422,25 @@ var IID_IAMTimecodeDisplay = win32.GUID{Data1: 0x9b496ce2, Data2: 0x811b, Data3:
 // GetTCDisplayEnable dispatches through IAMTimecodeDisplay's vtable slot 3.
 func (self *IAMTimecodeDisplay) GetTCDisplayEnable(pState *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTCDisplayEnable dispatches through IAMTimecodeDisplay's vtable slot 4.
 func (self *IAMTimecodeDisplay) SetTCDisplayEnable(State int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(State))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTCDisplay dispatches through IAMTimecodeDisplay's vtable slot 5.
 func (self *IAMTimecodeDisplay) GetTCDisplay(Param int32, pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Param), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTCDisplay dispatches through IAMTimecodeDisplay's vtable slot 6.
 func (self *IAMTimecodeDisplay) SetTCDisplay(Param int32, Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(Param), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMTimecodeGenerator: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamtimecodegenerator
@@ -2455,37 +2455,37 @@ var IID_IAMTimecodeGenerator = win32.GUID{Data1: 0x9b496ce0, Data2: 0x811b, Data
 // GetTCGMode dispatches through IAMTimecodeGenerator's vtable slot 3.
 func (self *IAMTimecodeGenerator) GetTCGMode(Param int32, pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Param), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTCGMode dispatches through IAMTimecodeGenerator's vtable slot 4.
 func (self *IAMTimecodeGenerator) SetTCGMode(Param int32, Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Param), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_VITCLine dispatches through IAMTimecodeGenerator's vtable slot 5.
 func (self *IAMTimecodeGenerator) Put_VITCLine(Line int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Line))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_VITCLine dispatches through IAMTimecodeGenerator's vtable slot 6.
 func (self *IAMTimecodeGenerator) Get_VITCLine(pLine *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLine)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTimecode dispatches through IAMTimecodeGenerator's vtable slot 7.
 func (self *IAMTimecodeGenerator) SetTimecode(pTimecodeSample *media.TIMECODE_SAMPLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTimecodeSample)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTimecode dispatches through IAMTimecodeGenerator's vtable slot 8.
 func (self *IAMTimecodeGenerator) GetTimecode(pTimecodeSample *media.TIMECODE_SAMPLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTimecodeSample)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMTimecodeReader: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamtimecodereader
@@ -2500,31 +2500,31 @@ var IID_IAMTimecodeReader = win32.GUID{Data1: 0x9b496ce1, Data2: 0x811b, Data3: 
 // GetTCRMode dispatches through IAMTimecodeReader's vtable slot 3.
 func (self *IAMTimecodeReader) GetTCRMode(Param int32, pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Param), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTCRMode dispatches through IAMTimecodeReader's vtable slot 4.
 func (self *IAMTimecodeReader) SetTCRMode(Param int32, Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Param), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_VITCLine dispatches through IAMTimecodeReader's vtable slot 5.
 func (self *IAMTimecodeReader) Put_VITCLine(Line int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Line))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_VITCLine dispatches through IAMTimecodeReader's vtable slot 6.
 func (self *IAMTimecodeReader) Get_VITCLine(pLine *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLine)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTimecode dispatches through IAMTimecodeReader's vtable slot 7.
 func (self *IAMTimecodeReader) GetTimecode(pTimecodeSample *media.TIMECODE_SAMPLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTimecodeSample)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMTuner: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamtuner
@@ -2539,91 +2539,91 @@ var IID_IAMTuner = win32.GUID{Data1: 0x211a8761, Data2: 0x03ac, Data3: 0x11d1, D
 // Put_Channel dispatches through IAMTuner's vtable slot 3.
 func (self *IAMTuner) Put_Channel(lChannel int32, lVideoSubChannel int32, lAudioSubChannel int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lChannel), uintptr(lVideoSubChannel), uintptr(lAudioSubChannel))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Channel dispatches through IAMTuner's vtable slot 4.
 func (self *IAMTuner) Get_Channel(plChannel *int32, plVideoSubChannel *int32, plAudioSubChannel *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plChannel)), uintptr(unsafe.Pointer(plVideoSubChannel)), uintptr(unsafe.Pointer(plAudioSubChannel)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ChannelMinMax dispatches through IAMTuner's vtable slot 5.
 func (self *IAMTuner) ChannelMinMax(lChannelMin *int32, lChannelMax *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lChannelMin)), uintptr(unsafe.Pointer(lChannelMax)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CountryCode dispatches through IAMTuner's vtable slot 6.
 func (self *IAMTuner) Put_CountryCode(lCountryCode int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(lCountryCode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CountryCode dispatches through IAMTuner's vtable slot 7.
 func (self *IAMTuner) Get_CountryCode(plCountryCode *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCountryCode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_TuningSpace dispatches through IAMTuner's vtable slot 8.
 func (self *IAMTuner) Put_TuningSpace(lTuningSpace int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lTuningSpace))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TuningSpace dispatches through IAMTuner's vtable slot 9.
 func (self *IAMTuner) Get_TuningSpace(plTuningSpace *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plTuningSpace)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Logon dispatches through IAMTuner's vtable slot 10.
 func (self *IAMTuner) Logon(hCurrentUser foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(hCurrentUser))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Logout dispatches through IAMTuner's vtable slot 11.
 func (self *IAMTuner) Logout() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SignalPresent dispatches through IAMTuner's vtable slot 12.
 func (self *IAMTuner) SignalPresent(plSignalStrength *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plSignalStrength)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Mode dispatches through IAMTuner's vtable slot 13.
 func (self *IAMTuner) Put_Mode(lMode AMTunerModeType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(lMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Mode dispatches through IAMTuner's vtable slot 14.
 func (self *IAMTuner) Get_Mode(plMode *AMTunerModeType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAvailableModes dispatches through IAMTuner's vtable slot 15.
 func (self *IAMTuner) GetAvailableModes(plModes *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plModes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterNotificationCallBack dispatches through IAMTuner's vtable slot 16.
 func (self *IAMTuner) RegisterNotificationCallBack(pNotify *IAMTunerNotification, lEvents int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNotify)), uintptr(lEvents))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnRegisterNotificationCallBack dispatches through IAMTuner's vtable slot 17.
 func (self *IAMTuner) UnRegisterNotificationCallBack(pNotify *IAMTunerNotification) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNotify)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMTunerNotification: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamtunernotification
@@ -2638,7 +2638,7 @@ var IID_IAMTunerNotification = win32.GUID{Data1: 0x211a8760, Data2: 0x03ac, Data
 // OnEvent dispatches through IAMTunerNotification's vtable slot 3.
 func (self *IAMTunerNotification) OnEvent(Event AMTunerEventType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Event))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMVfwCaptureDialogs: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamvfwcapturedialogs
@@ -2653,19 +2653,19 @@ var IID_IAMVfwCaptureDialogs = win32.GUID{Data1: 0xd8d715a0, Data2: 0x6e5e, Data
 // HasDialog dispatches through IAMVfwCaptureDialogs's vtable slot 3.
 func (self *IAMVfwCaptureDialogs) HasDialog(iDialog int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(iDialog))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ShowDialog dispatches through IAMVfwCaptureDialogs's vtable slot 4.
 func (self *IAMVfwCaptureDialogs) ShowDialog(iDialog int32, hwnd foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(iDialog), uintptr(hwnd))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendDriverMessage dispatches through IAMVfwCaptureDialogs's vtable slot 5.
 func (self *IAMVfwCaptureDialogs) SendDriverMessage(iDialog int32, uMsg int32, dw1 int32, dw2 int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(iDialog), uintptr(uMsg), uintptr(dw1), uintptr(dw2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMVfwCompressDialogs: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamvfwcompressdialogs
@@ -2680,13 +2680,13 @@ var IID_IAMVfwCompressDialogs = win32.GUID{Data1: 0xd8d715a3, Data2: 0x6e5e, Dat
 // ShowDialog dispatches through IAMVfwCompressDialogs's vtable slot 3.
 func (self *IAMVfwCompressDialogs) ShowDialog(iDialog int32, hwnd foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(iDialog), uintptr(hwnd))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetState dispatches through IAMVfwCompressDialogs's vtable slot 4.
 func (self *IAMVfwCompressDialogs) GetState(pState unsafe.Pointer, pcbState *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pState)), uintptr(unsafe.Pointer(pcbState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetState dispatches through IAMVfwCompressDialogs's vtable slot 5.
@@ -2696,13 +2696,13 @@ func (self *IAMVfwCompressDialogs) SetState(pState []byte) error {
 		_pState = &pState[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pState)), uintptr(len(pState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendDriverMessage dispatches through IAMVfwCompressDialogs's vtable slot 6.
 func (self *IAMVfwCompressDialogs) SendDriverMessage(uMsg int32, dw1 int32, dw2 int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(uMsg), uintptr(dw1), uintptr(dw2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMVideoAccelerator: https://learn.microsoft.com/windows/win32/api/videoacc/nn-videoacc-iamvideoaccelerator
@@ -2717,56 +2717,56 @@ var IID_IAMVideoAccelerator = win32.GUID{Data1: 0x256a6a22, Data2: 0xfbad, Data3
 // GetVideoAcceleratorGUIDs dispatches through IAMVideoAccelerator's vtable slot 3.
 func (self *IAMVideoAccelerator) GetVideoAcceleratorGUIDs(pdwNumGuidsSupported *uint32, pGuidsSupported *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwNumGuidsSupported)), uintptr(unsafe.Pointer(pGuidsSupported)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetUncompFormatsSupported dispatches through IAMVideoAccelerator's vtable slot 4.
 func (self *IAMVideoAccelerator) GetUncompFormatsSupported(pGuid *win32.GUID, pdwNumFormatsSupported *uint32, pFormatsSupported *graphicsdirectdraw.DDPIXELFORMAT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGuid)), uintptr(unsafe.Pointer(pdwNumFormatsSupported)), uintptr(unsafe.Pointer(pFormatsSupported)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInternalMemInfo dispatches through IAMVideoAccelerator's vtable slot 5.
 func (self *IAMVideoAccelerator) GetInternalMemInfo(pGuid *win32.GUID, pamvaUncompDataInfo *AMVAUncompDataInfo, pamvaInternalMemInfo *AMVAInternalMemInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGuid)), uintptr(unsafe.Pointer(pamvaUncompDataInfo)), uintptr(unsafe.Pointer(pamvaInternalMemInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCompBufferInfo dispatches through IAMVideoAccelerator's vtable slot 6.
 func (self *IAMVideoAccelerator) GetCompBufferInfo(pGuid *win32.GUID, pamvaUncompDataInfo *AMVAUncompDataInfo, pdwNumTypesCompBuffers *uint32, pamvaCompBufferInfo *AMVACompBufferInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGuid)), uintptr(unsafe.Pointer(pamvaUncompDataInfo)), uintptr(unsafe.Pointer(pdwNumTypesCompBuffers)), uintptr(unsafe.Pointer(pamvaCompBufferInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInternalCompBufferInfo dispatches through IAMVideoAccelerator's vtable slot 7.
 func (self *IAMVideoAccelerator) GetInternalCompBufferInfo(pdwNumTypesCompBuffers *uint32, pamvaCompBufferInfo *AMVACompBufferInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwNumTypesCompBuffers)), uintptr(unsafe.Pointer(pamvaCompBufferInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BeginFrame dispatches through IAMVideoAccelerator's vtable slot 8.
 func (self *IAMVideoAccelerator) BeginFrame(amvaBeginFrameInfo *AMVABeginFrameInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(amvaBeginFrameInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndFrame dispatches through IAMVideoAccelerator's vtable slot 9.
 func (self *IAMVideoAccelerator) EndFrame(pEndFrameInfo *AMVAEndFrameInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEndFrameInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBuffer dispatches through IAMVideoAccelerator's vtable slot 10.
 func (self *IAMVideoAccelerator) GetBuffer(dwTypeIndex uint32, dwBufferIndex uint32, bReadOnly bool, ppBuffer *unsafe.Pointer, lpStride *int32) error {
 	_bReadOnly := win32.Bool32(bReadOnly)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(dwTypeIndex), uintptr(dwBufferIndex), uintptr(_bReadOnly), uintptr(unsafe.Pointer(ppBuffer)), uintptr(unsafe.Pointer(lpStride)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReleaseBuffer dispatches through IAMVideoAccelerator's vtable slot 11.
 func (self *IAMVideoAccelerator) ReleaseBuffer(dwTypeIndex uint32, dwBufferIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(dwTypeIndex), uintptr(dwBufferIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Execute dispatches through IAMVideoAccelerator's vtable slot 12.
@@ -2776,19 +2776,19 @@ func (self *IAMVideoAccelerator) Execute(dwFunction uint32, lpPrivateInputData u
 		_pamvaBufferInfo = &pamvaBufferInfo[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(dwFunction), uintptr(unsafe.Pointer(lpPrivateInputData)), uintptr(cbPrivateInputData), uintptr(unsafe.Pointer(lpPrivateOutputDat)), uintptr(cbPrivateOutputData), uintptr(len(pamvaBufferInfo)), uintptr(unsafe.Pointer(_pamvaBufferInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryRenderStatus dispatches through IAMVideoAccelerator's vtable slot 13.
 func (self *IAMVideoAccelerator) QueryRenderStatus(dwTypeIndex uint32, dwBufferIndex uint32, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwTypeIndex), uintptr(dwBufferIndex), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DisplayFrame dispatches through IAMVideoAccelerator's vtable slot 14.
 func (self *IAMVideoAccelerator) DisplayFrame(dwFlipToIndex uint32, pMediaSample *IMediaSample) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(dwFlipToIndex), uintptr(unsafe.Pointer(pMediaSample)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMVideoAcceleratorNotify: https://learn.microsoft.com/windows/win32/api/videoacc/nn-videoacc-iamvideoacceleratornotify
@@ -2803,19 +2803,19 @@ var IID_IAMVideoAcceleratorNotify = win32.GUID{Data1: 0x256a6a21, Data2: 0xfbad,
 // GetUncompSurfacesInfo dispatches through IAMVideoAcceleratorNotify's vtable slot 3.
 func (self *IAMVideoAcceleratorNotify) GetUncompSurfacesInfo(pGuid *win32.GUID, pUncompBufferInfo *AMVAUncompBufferInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGuid)), uintptr(unsafe.Pointer(pUncompBufferInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetUncompSurfacesInfo dispatches through IAMVideoAcceleratorNotify's vtable slot 4.
 func (self *IAMVideoAcceleratorNotify) SetUncompSurfacesInfo(dwActualUncompSurfacesAllocated uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwActualUncompSurfacesAllocated))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCreateVideoAcceleratorData dispatches through IAMVideoAcceleratorNotify's vtable slot 5.
 func (self *IAMVideoAcceleratorNotify) GetCreateVideoAcceleratorData(pGuid *win32.GUID, pdwSizeMiscData *uint32, ppMiscData *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGuid)), uintptr(unsafe.Pointer(pdwSizeMiscData)), uintptr(unsafe.Pointer(ppMiscData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMVideoCompression: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamvideocompression
@@ -2830,61 +2830,61 @@ var IID_IAMVideoCompression = win32.GUID{Data1: 0xc6e13343, Data2: 0x30ac, Data3
 // Put_KeyFrameRate dispatches through IAMVideoCompression's vtable slot 3.
 func (self *IAMVideoCompression) Put_KeyFrameRate(KeyFrameRate int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(KeyFrameRate))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_KeyFrameRate dispatches through IAMVideoCompression's vtable slot 4.
 func (self *IAMVideoCompression) Get_KeyFrameRate(pKeyFrameRate *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pKeyFrameRate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PFramesPerKeyFrame dispatches through IAMVideoCompression's vtable slot 5.
 func (self *IAMVideoCompression) Put_PFramesPerKeyFrame(PFramesPerKeyFrame int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(PFramesPerKeyFrame))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PFramesPerKeyFrame dispatches through IAMVideoCompression's vtable slot 6.
 func (self *IAMVideoCompression) Get_PFramesPerKeyFrame(pPFramesPerKeyFrame *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPFramesPerKeyFrame)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Quality dispatches through IAMVideoCompression's vtable slot 8.
 func (self *IAMVideoCompression) Get_Quality(pQuality *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pQuality)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_WindowSize dispatches through IAMVideoCompression's vtable slot 9.
 func (self *IAMVideoCompression) Put_WindowSize(WindowSize uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(WindowSize))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_WindowSize dispatches through IAMVideoCompression's vtable slot 10.
 func (self *IAMVideoCompression) Get_WindowSize(pWindowSize *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWindowSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInfo dispatches through IAMVideoCompression's vtable slot 11.
 func (self *IAMVideoCompression) GetInfo(pszVersion foundation.PWSTR, pcbVersion *int32, pszDescription foundation.PWSTR, pcbDescription *int32, pDefaultKeyFrameRate *int32, pDefaultPFramesPerKey *int32, pDefaultQuality *float64, pCapabilities *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszVersion)), uintptr(unsafe.Pointer(pcbVersion)), uintptr(unsafe.Pointer(pszDescription)), uintptr(unsafe.Pointer(pcbDescription)), uintptr(unsafe.Pointer(pDefaultKeyFrameRate)), uintptr(unsafe.Pointer(pDefaultPFramesPerKey)), uintptr(unsafe.Pointer(pDefaultQuality)), uintptr(unsafe.Pointer(pCapabilities)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OverrideKeyFrame dispatches through IAMVideoCompression's vtable slot 12.
 func (self *IAMVideoCompression) OverrideKeyFrame(FrameNumber int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(FrameNumber))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OverrideFrameSize dispatches through IAMVideoCompression's vtable slot 13.
 func (self *IAMVideoCompression) OverrideFrameSize(FrameNumber int32, Size int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(FrameNumber), uintptr(Size))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMVideoControl: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamvideocontrol
@@ -2899,25 +2899,25 @@ var IID_IAMVideoControl = win32.GUID{Data1: 0x6a2e0670, Data2: 0x28e4, Data3: 0x
 // GetCaps dispatches through IAMVideoControl's vtable slot 3.
 func (self *IAMVideoControl) GetCaps(pPin *IPin, pCapsFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPin)), uintptr(unsafe.Pointer(pCapsFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMode dispatches through IAMVideoControl's vtable slot 4.
 func (self *IAMVideoControl) SetMode(pPin *IPin, Mode int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPin)), uintptr(Mode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMode dispatches through IAMVideoControl's vtable slot 5.
 func (self *IAMVideoControl) GetMode(pPin *IPin, Mode *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPin)), uintptr(unsafe.Pointer(Mode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentActualFrameRate dispatches through IAMVideoControl's vtable slot 6.
 func (self *IAMVideoControl) GetCurrentActualFrameRate(pPin *IPin, ActualFrameRate *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPin)), uintptr(unsafe.Pointer(ActualFrameRate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMVideoDecimationProperties: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamvideodecimationproperties
@@ -2932,13 +2932,13 @@ var IID_IAMVideoDecimationProperties = win32.GUID{Data1: 0x60d32930, Data2: 0x13
 // QueryDecimationUsage dispatches through IAMVideoDecimationProperties's vtable slot 3.
 func (self *IAMVideoDecimationProperties) QueryDecimationUsage(lpUsage *DECIMATION_USAGE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpUsage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDecimationUsage dispatches through IAMVideoDecimationProperties's vtable slot 4.
 func (self *IAMVideoDecimationProperties) SetDecimationUsage(Usage DECIMATION_USAGE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Usage))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMVideoProcAmp: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamvideoprocamp
@@ -2953,19 +2953,19 @@ var IID_IAMVideoProcAmp = win32.GUID{Data1: 0xc6e13360, Data2: 0x30ac, Data3: 0x
 // GetRange dispatches through IAMVideoProcAmp's vtable slot 3.
 func (self *IAMVideoProcAmp) GetRange(Property int32, pMin *int32, pMax *int32, pSteppingDelta *int32, pDefault *int32, pCapsFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Property), uintptr(unsafe.Pointer(pMin)), uintptr(unsafe.Pointer(pMax)), uintptr(unsafe.Pointer(pSteppingDelta)), uintptr(unsafe.Pointer(pDefault)), uintptr(unsafe.Pointer(pCapsFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Set dispatches through IAMVideoProcAmp's vtable slot 4.
 func (self *IAMVideoProcAmp) Set(Property int32, lValue int32, Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Property), uintptr(lValue), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get dispatches through IAMVideoProcAmp's vtable slot 5.
 func (self *IAMVideoProcAmp) Get(Property int32, lValue *int32, Flags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Property), uintptr(unsafe.Pointer(lValue)), uintptr(unsafe.Pointer(Flags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMWMBufferPass: https://learn.microsoft.com/windows/win32/api/dshowasf/nn-dshowasf-iamwmbufferpass
@@ -2980,7 +2980,7 @@ var IID_IAMWMBufferPass = win32.GUID{Data1: 0x6dd816d7, Data2: 0xe740, Data3: 0x
 // SetNotify dispatches through IAMWMBufferPass's vtable slot 3.
 func (self *IAMWMBufferPass) SetNotify(pCallback *IAMWMBufferPassCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallback)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMWMBufferPassCallback: https://learn.microsoft.com/windows/win32/api/dshowasf/nn-dshowasf-iamwmbufferpasscallback
@@ -2995,7 +2995,7 @@ var IID_IAMWMBufferPassCallback = win32.GUID{Data1: 0xb25b8372, Data2: 0xd2d2, D
 // Notify dispatches through IAMWMBufferPassCallback's vtable slot 3.
 func (self *IAMWMBufferPassCallback) Notify(pNSSBuffer3 *mediawindowsmediaformat.INSSBuffer3, pPin *IPin, prtStart *int64, prtEnd *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNSSBuffer3)), uintptr(unsafe.Pointer(pPin)), uintptr(unsafe.Pointer(prtStart)), uintptr(unsafe.Pointer(prtEnd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMWstDecoder: https://learn.microsoft.com/windows/win32/api/iwstdec/nn-iwstdec-iamwstdecoder
@@ -3010,106 +3010,106 @@ var IID_IAMWstDecoder = win32.GUID{Data1: 0xc056de21, Data2: 0x75c2, Data3: 0x11
 // GetDecoderLevel dispatches through IAMWstDecoder's vtable slot 3.
 func (self *IAMWstDecoder) GetDecoderLevel(lpLevel *AM_WST_LEVEL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpLevel)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentService dispatches through IAMWstDecoder's vtable slot 4.
 func (self *IAMWstDecoder) GetCurrentService(lpService *AM_WST_SERVICE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpService)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetServiceState dispatches through IAMWstDecoder's vtable slot 5.
 func (self *IAMWstDecoder) GetServiceState(lpState *AM_WST_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetServiceState dispatches through IAMWstDecoder's vtable slot 6.
 func (self *IAMWstDecoder) SetServiceState(State AM_WST_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(State))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOutputFormat dispatches through IAMWstDecoder's vtable slot 7.
 func (self *IAMWstDecoder) GetOutputFormat(lpbmih *graphicsgdi.BITMAPINFOHEADER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpbmih)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetOutputFormat dispatches through IAMWstDecoder's vtable slot 8.
 func (self *IAMWstDecoder) SetOutputFormat(lpbmi *graphicsgdi.BITMAPINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpbmi)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBackgroundColor dispatches through IAMWstDecoder's vtable slot 9.
 func (self *IAMWstDecoder) GetBackgroundColor(pdwPhysColor *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwPhysColor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBackgroundColor dispatches through IAMWstDecoder's vtable slot 10.
 func (self *IAMWstDecoder) SetBackgroundColor(dwPhysColor uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(dwPhysColor))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRedrawAlways dispatches through IAMWstDecoder's vtable slot 11.
 func (self *IAMWstDecoder) GetRedrawAlways(lpbOption *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpbOption)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetRedrawAlways dispatches through IAMWstDecoder's vtable slot 12.
 func (self *IAMWstDecoder) SetRedrawAlways(bOption bool) error {
 	_bOption := win32.Bool32(bOption)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(_bOption))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDrawBackgroundMode dispatches through IAMWstDecoder's vtable slot 13.
 func (self *IAMWstDecoder) GetDrawBackgroundMode(lpMode *AM_WST_DRAWBGMODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDrawBackgroundMode dispatches through IAMWstDecoder's vtable slot 14.
 func (self *IAMWstDecoder) SetDrawBackgroundMode(Mode AM_WST_DRAWBGMODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(Mode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAnswerMode dispatches through IAMWstDecoder's vtable slot 15.
 func (self *IAMWstDecoder) SetAnswerMode(bAnswer bool) error {
 	_bAnswer := win32.Bool32(bAnswer)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(_bAnswer))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAnswerMode dispatches through IAMWstDecoder's vtable slot 16.
 func (self *IAMWstDecoder) GetAnswerMode(pbAnswer *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbAnswer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetHoldPage dispatches through IAMWstDecoder's vtable slot 17.
 func (self *IAMWstDecoder) SetHoldPage(bHoldPage bool) error {
 	_bHoldPage := win32.Bool32(bHoldPage)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(_bHoldPage))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetHoldPage dispatches through IAMWstDecoder's vtable slot 18.
 func (self *IAMWstDecoder) GetHoldPage(pbHoldPage *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbHoldPage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentPage dispatches through IAMWstDecoder's vtable slot 19.
 func (self *IAMWstDecoder) GetCurrentPage(pWstPage *AM_WST_PAGE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWstPage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAMovieSetup: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamoviesetup
@@ -3124,13 +3124,13 @@ var IID_IAMovieSetup = win32.GUID{Data1: 0xa3d8cec0, Data2: 0x7e5a, Data3: 0x11c
 // Register dispatches through IAMovieSetup's vtable slot 3.
 func (self *IAMovieSetup) Register() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Unregister dispatches through IAMovieSetup's vtable slot 4.
 func (self *IAMovieSetup) Unregister() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAsyncReader: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iasyncreader
@@ -3145,25 +3145,25 @@ var IID_IAsyncReader = win32.GUID{Data1: 0x56a868aa, Data2: 0x0ad4, Data3: 0x11c
 // RequestAllocator dispatches through IAsyncReader's vtable slot 3.
 func (self *IAsyncReader) RequestAllocator(pPreferred *IMemAllocator, pProps *ALLOCATOR_PROPERTIES, ppActual **IMemAllocator) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPreferred)), uintptr(unsafe.Pointer(pProps)), uintptr(unsafe.Pointer(ppActual)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Request dispatches through IAsyncReader's vtable slot 4.
 func (self *IAsyncReader) Request(pSample *IMediaSample, dwUser uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSample)), uintptr(dwUser))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WaitForNext dispatches through IAsyncReader's vtable slot 5.
 func (self *IAsyncReader) WaitForNext(dwTimeout uint32, ppSample **IMediaSample, pdwUser *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwTimeout), uintptr(unsafe.Pointer(ppSample)), uintptr(unsafe.Pointer(pdwUser)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SyncReadAligned dispatches through IAsyncReader's vtable slot 6.
 func (self *IAsyncReader) SyncReadAligned(pSample *IMediaSample) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSample)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SyncRead dispatches through IAsyncReader's vtable slot 7.
@@ -3173,25 +3173,25 @@ func (self *IAsyncReader) SyncRead(llPosition int64, pBuffer []byte) error {
 		_pBuffer = &pBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(llPosition), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(_pBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Length dispatches through IAsyncReader's vtable slot 8.
 func (self *IAsyncReader) Length(pTotal *int64, pAvailable *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTotal)), uintptr(unsafe.Pointer(pAvailable)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BeginFlush dispatches through IAsyncReader's vtable slot 9.
 func (self *IAsyncReader) BeginFlush() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndFlush dispatches through IAsyncReader's vtable slot 10.
 func (self *IAsyncReader) EndFlush() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioData: https://learn.microsoft.com/windows/win32/api/austream/nn-austream-iaudiodata
@@ -3206,13 +3206,13 @@ var IID_IAudioData = win32.GUID{Data1: 0x54c719c0, Data2: 0xaf60, Data3: 0x11d0,
 // GetFormat dispatches through IAudioData's vtable slot 6.
 func (self *IAudioData) GetFormat(pWaveFormatCurrent *mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWaveFormatCurrent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetFormat dispatches through IAudioData's vtable slot 7.
 func (self *IAudioData) SetFormat(lpWaveFormat *mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpWaveFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioMediaStream: https://learn.microsoft.com/windows/win32/api/austream/nn-austream-iaudiomediastream
@@ -3227,19 +3227,19 @@ var IID_IAudioMediaStream = win32.GUID{Data1: 0xf7537560, Data2: 0xa3be, Data3: 
 // GetFormat dispatches through IAudioMediaStream's vtable slot 9.
 func (self *IAudioMediaStream) GetFormat(pWaveFormatCurrent *mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWaveFormatCurrent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetFormat dispatches through IAudioMediaStream's vtable slot 10.
 func (self *IAudioMediaStream) SetFormat(lpWaveFormat *mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpWaveFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSample dispatches through IAudioMediaStream's vtable slot 11.
 func (self *IAudioMediaStream) CreateSample(pAudioData *IAudioData, dwFlags uint32, ppSample **IAudioStreamSample) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAudioData)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppSample)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioStreamSample: https://learn.microsoft.com/windows/win32/api/austream/nn-austream-iaudiostreamsample
@@ -3254,7 +3254,7 @@ var IID_IAudioStreamSample = win32.GUID{Data1: 0x345fee00, Data2: 0xaba5, Data3:
 // GetAudioData dispatches through IAudioStreamSample's vtable slot 8.
 func (self *IAudioStreamSample) GetAudioData(ppAudio **IAudioData) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAudio)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBDA_AUX: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ibda_aux
@@ -3269,13 +3269,13 @@ var IID_IBDA_AUX = win32.GUID{Data1: 0x7def4c09, Data2: 0x6e66, Data3: 0x4567, D
 // QueryCapabilities dispatches through IBDA_AUX's vtable slot 3.
 func (self *IBDA_AUX) QueryCapabilities(pdwNumAuxInputsBSTR *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwNumAuxInputsBSTR)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumCapability dispatches through IBDA_AUX's vtable slot 4.
 func (self *IBDA_AUX) EnumCapability(dwIndex uint32, dwInputID *uint32, pConnectorType *win32.GUID, ConnTypeNum *uint32, NumVideoStds *uint32, AnalogStds *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(dwInputID)), uintptr(unsafe.Pointer(pConnectorType)), uintptr(unsafe.Pointer(ConnTypeNum)), uintptr(unsafe.Pointer(NumVideoStds)), uintptr(unsafe.Pointer(AnalogStds)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBDA_AutoDemodulate: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ibda_autodemodulate
@@ -3290,7 +3290,7 @@ var IID_IBDA_AutoDemodulate = win32.GUID{Data1: 0xddf15b12, Data2: 0xbd25, Data3
 // Put_AutoDemodulate dispatches through IBDA_AutoDemodulate's vtable slot 3.
 func (self *IBDA_AutoDemodulate) Put_AutoDemodulate() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBDA_AutoDemodulateEx: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ibda_autodemodulateex
@@ -3305,19 +3305,19 @@ var IID_IBDA_AutoDemodulateEx = win32.GUID{Data1: 0x34518d13, Data2: 0x1182, Dat
 // Get_SupportedDeviceNodeTypes dispatches through IBDA_AutoDemodulateEx's vtable slot 4.
 func (self *IBDA_AutoDemodulateEx) Get_SupportedDeviceNodeTypes(ulcDeviceNodeTypesMax uint32, pulcDeviceNodeTypes *uint32, pguidDeviceNodeTypes *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulcDeviceNodeTypesMax), uintptr(unsafe.Pointer(pulcDeviceNodeTypes)), uintptr(unsafe.Pointer(pguidDeviceNodeTypes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SupportedVideoFormats dispatches through IBDA_AutoDemodulateEx's vtable slot 5.
 func (self *IBDA_AutoDemodulateEx) Get_SupportedVideoFormats(pulAMTunerModeType *uint32, pulAnalogVideoStandard *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulAMTunerModeType)), uintptr(unsafe.Pointer(pulAnalogVideoStandard)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AuxInputCount dispatches through IBDA_AutoDemodulateEx's vtable slot 6.
 func (self *IBDA_AutoDemodulateEx) Get_AuxInputCount(pulCompositeCount *uint32, pulSvideoCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulCompositeCount)), uintptr(unsafe.Pointer(pulSvideoCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBDA_ConditionalAccess: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ibda_conditionalaccess
@@ -3332,13 +3332,13 @@ var IID_IBDA_ConditionalAccess = win32.GUID{Data1: 0xcd51f1e0, Data2: 0x7be9, Da
 // Get_SmartCardStatus dispatches through IBDA_ConditionalAccess's vtable slot 3.
 func (self *IBDA_ConditionalAccess) Get_SmartCardStatus(pCardStatus *SmartCardStatusType, pCardAssociation *SmartCardAssociationType, pbstrCardError *foundation.BSTR, pfOOBLocked *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCardStatus)), uintptr(unsafe.Pointer(pCardAssociation)), uintptr(unsafe.Pointer(pbstrCardError)), uintptr(unsafe.Pointer(pfOOBLocked)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SmartCardInfo dispatches through IBDA_ConditionalAccess's vtable slot 4.
 func (self *IBDA_ConditionalAccess) Get_SmartCardInfo(pbstrCardName *foundation.BSTR, pbstrCardManufacturer *foundation.BSTR, pfDaylightSavings *foundation.VARIANT_BOOL, pbyRatingRegion *byte, plTimeZoneOffsetMinutes *int32, pbstrLanguage *foundation.BSTR, pEALocationCode *EALocationCodeType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrCardName)), uintptr(unsafe.Pointer(pbstrCardManufacturer)), uintptr(unsafe.Pointer(pfDaylightSavings)), uintptr(unsafe.Pointer(pbyRatingRegion)), uintptr(unsafe.Pointer(plTimeZoneOffsetMinutes)), uintptr(unsafe.Pointer(pbstrLanguage)), uintptr(unsafe.Pointer(pEALocationCode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SmartCardApplications dispatches through IBDA_ConditionalAccess's vtable slot 5.
@@ -3348,49 +3348,49 @@ func (self *IBDA_ConditionalAccess) Get_SmartCardApplications(pulcApplications *
 		_rgApplications = &rgApplications[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulcApplications)), uintptr(len(rgApplications)), uintptr(unsafe.Pointer(_rgApplications)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Entitlement dispatches through IBDA_ConditionalAccess's vtable slot 6.
 func (self *IBDA_ConditionalAccess) Get_Entitlement(usVirtualChannel uint16, pEntitlement *EntitlementType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(usVirtualChannel), uintptr(unsafe.Pointer(pEntitlement)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TuneByChannel dispatches through IBDA_ConditionalAccess's vtable slot 7.
 func (self *IBDA_ConditionalAccess) TuneByChannel(usVirtualChannel uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(usVirtualChannel))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetProgram dispatches through IBDA_ConditionalAccess's vtable slot 8.
 func (self *IBDA_ConditionalAccess) SetProgram(usProgramNumber uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(usProgramNumber))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddProgram dispatches through IBDA_ConditionalAccess's vtable slot 9.
 func (self *IBDA_ConditionalAccess) AddProgram(usProgramNumber uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(usProgramNumber))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveProgram dispatches through IBDA_ConditionalAccess's vtable slot 10.
 func (self *IBDA_ConditionalAccess) RemoveProgram(usProgramNumber uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(usProgramNumber))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetModuleUI dispatches through IBDA_ConditionalAccess's vtable slot 11.
 func (self *IBDA_ConditionalAccess) GetModuleUI(byDialogNumber byte, pbstrURL *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(byDialogNumber), uintptr(unsafe.Pointer(pbstrURL)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InformUIClosed dispatches through IBDA_ConditionalAccess's vtable slot 12.
 func (self *IBDA_ConditionalAccess) InformUIClosed(byDialogNumber byte, CloseReason UICloseReasonType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(byDialogNumber), uintptr(CloseReason))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBDA_ConditionalAccessEx: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ibda_conditionalaccessex
@@ -3409,7 +3409,7 @@ func (self *IBDA_ConditionalAccessEx) CheckEntitlementToken(ulDialogRequest uint
 		_pbEntitlementToken = &pbEntitlementToken[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulDialogRequest), uintptr(unsafe.Pointer(bstrLanguage)), uintptr(RequestType), uintptr(len(pbEntitlementToken)), uintptr(unsafe.Pointer(_pbEntitlementToken)), uintptr(unsafe.Pointer(pulDescrambleStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCaptureToken dispatches through IBDA_ConditionalAccessEx's vtable slot 4.
@@ -3419,25 +3419,25 @@ func (self *IBDA_ConditionalAccessEx) SetCaptureToken(pbCaptureToken []byte) err
 		_pbCaptureToken = &pbCaptureToken[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(pbCaptureToken)), uintptr(unsafe.Pointer(_pbCaptureToken)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenBroadcastMmi dispatches through IBDA_ConditionalAccessEx's vtable slot 5.
 func (self *IBDA_ConditionalAccessEx) OpenBroadcastMmi(ulDialogRequest uint32, bstrLanguage foundation.BSTR, EventId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(ulDialogRequest), uintptr(unsafe.Pointer(bstrLanguage)), uintptr(EventId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CloseMmiDialog dispatches through IBDA_ConditionalAccessEx's vtable slot 6.
 func (self *IBDA_ConditionalAccessEx) CloseMmiDialog(ulDialogRequest uint32, bstrLanguage foundation.BSTR, ulDialogNumber uint32, ReasonCode BDA_CONDITIONALACCESS_MMICLOSEREASON, pulSessionResult *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ulDialogRequest), uintptr(unsafe.Pointer(bstrLanguage)), uintptr(ulDialogNumber), uintptr(ReasonCode), uintptr(unsafe.Pointer(pulSessionResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateDialogRequestNumber dispatches through IBDA_ConditionalAccessEx's vtable slot 7.
 func (self *IBDA_ConditionalAccessEx) CreateDialogRequestNumber(pulDialogRequestNumber *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulDialogRequestNumber)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBDA_DRIDRMService: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ibda_dridrmservice
@@ -3452,19 +3452,19 @@ var IID_IBDA_DRIDRMService = win32.GUID{Data1: 0x1f9bc2a5, Data2: 0x44a3, Data3:
 // SetDRM dispatches through IBDA_DRIDRMService's vtable slot 3.
 func (self *IBDA_DRIDRMService) SetDRM(bstrNewDrm foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrNewDrm)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDRMStatus dispatches through IBDA_DRIDRMService's vtable slot 4.
 func (self *IBDA_DRIDRMService) GetDRMStatus(pbstrDrmUuidList *foundation.BSTR, DrmUuid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDrmUuidList)), uintptr(unsafe.Pointer(DrmUuid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPairingStatus dispatches through IBDA_DRIDRMService's vtable slot 5.
 func (self *IBDA_DRIDRMService) GetPairingStatus(penumPairingStatus *BDA_DrmPairingError) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(penumPairingStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 05c690f8-56db-4bb2-b053-79c12098bb26
@@ -3478,7 +3478,7 @@ var IID_IBDA_DRIWMDRMSession = win32.GUID{Data1: 0x05c690f8, Data2: 0x56db, Data
 // AcknowledgeLicense dispatches through IBDA_DRIWMDRMSession's vtable slot 3.
 func (self *IBDA_DRIWMDRMSession) AcknowledgeLicense(hrLicenseAck foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hrLicenseAck))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ProcessLicenseChallenge dispatches through IBDA_DRIWMDRMSession's vtable slot 4.
@@ -3488,7 +3488,7 @@ func (self *IBDA_DRIWMDRMSession) ProcessLicenseChallenge(pbLicenseMessage []byt
 		_pbLicenseMessage = &pbLicenseMessage[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(pbLicenseMessage)), uintptr(unsafe.Pointer(_pbLicenseMessage)), uintptr(unsafe.Pointer(pdwcbLicenseResponse)), uintptr(unsafe.Pointer(ppbLicenseResponse)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ProcessRegistrationChallenge dispatches through IBDA_DRIWMDRMSession's vtable slot 5.
@@ -3498,7 +3498,7 @@ func (self *IBDA_DRIWMDRMSession) ProcessRegistrationChallenge(pbRegistrationMes
 		_pbRegistrationMessage = &pbRegistrationMessage[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(len(pbRegistrationMessage)), uintptr(unsafe.Pointer(_pbRegistrationMessage)), uintptr(unsafe.Pointer(pdwcbRegistrationResponse)), uintptr(unsafe.Pointer(ppbRegistrationResponse)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetRevInfo dispatches through IBDA_DRIWMDRMSession's vtable slot 6.
@@ -3508,7 +3508,7 @@ func (self *IBDA_DRIWMDRMSession) SetRevInfo(pbRevInfo []byte, pdwResponse *uint
 		_pbRevInfo = &pbRevInfo[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(len(pbRevInfo)), uintptr(unsafe.Pointer(_pbRevInfo)), uintptr(unsafe.Pointer(pdwResponse)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCrl dispatches through IBDA_DRIWMDRMSession's vtable slot 7.
@@ -3518,19 +3518,19 @@ func (self *IBDA_DRIWMDRMSession) SetCrl(pbCrlLen []byte, pdwResponse *uint32) e
 		_pbCrlLen = &pbCrlLen[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(len(pbCrlLen)), uintptr(unsafe.Pointer(_pbCrlLen)), uintptr(unsafe.Pointer(pdwResponse)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetHMSAssociationData dispatches through IBDA_DRIWMDRMSession's vtable slot 8.
 func (self *IBDA_DRIWMDRMSession) GetHMSAssociationData() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLastCardeaError dispatches through IBDA_DRIWMDRMSession's vtable slot 9.
 func (self *IBDA_DRIWMDRMSession) GetLastCardeaError(pdwError *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwError)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBDA_DRM: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ibda_drm
@@ -3545,14 +3545,14 @@ var IID_IBDA_DRM = win32.GUID{Data1: 0xf98d88b0, Data2: 0x1992, Data3: 0x4cd6, D
 // GetDRMPairingStatus dispatches through IBDA_DRM's vtable slot 3.
 func (self *IBDA_DRM) GetDRMPairingStatus(pdwStatus *uint32, phError *foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwStatus)), uintptr(unsafe.Pointer(phError)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PerformDRMPairing dispatches through IBDA_DRM's vtable slot 4.
 func (self *IBDA_DRM) PerformDRMPairing(fSync bool) error {
 	_fSync := win32.Bool32(fSync)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(_fSync))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBDA_DRMService: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ibda_drmservice
@@ -3567,13 +3567,13 @@ var IID_IBDA_DRMService = win32.GUID{Data1: 0xbff6b5bb, Data2: 0xb0ae, Data3: 0x
 // SetDRM dispatches through IBDA_DRMService's vtable slot 3.
 func (self *IBDA_DRMService) SetDRM(puuidNewDrm *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(puuidNewDrm)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDRMStatus dispatches through IBDA_DRMService's vtable slot 4.
 func (self *IBDA_DRMService) GetDRMStatus(pbstrDrmUuidList *foundation.BSTR, DrmUuid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDrmUuidList)), uintptr(unsafe.Pointer(DrmUuid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBDA_DeviceControl: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ibda_devicecontrol
@@ -3588,25 +3588,25 @@ var IID_IBDA_DeviceControl = win32.GUID{Data1: 0xfd0a5af3, Data2: 0xb41d, Data3:
 // StartChanges dispatches through IBDA_DeviceControl's vtable slot 3.
 func (self *IBDA_DeviceControl) StartChanges() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CheckChanges dispatches through IBDA_DeviceControl's vtable slot 4.
 func (self *IBDA_DeviceControl) CheckChanges() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CommitChanges dispatches through IBDA_DeviceControl's vtable slot 5.
 func (self *IBDA_DeviceControl) CommitChanges() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetChangeState dispatches through IBDA_DeviceControl's vtable slot 6.
 func (self *IBDA_DeviceControl) GetChangeState(pState *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBDA_DiagnosticProperties: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ibda_diagnosticproperties
@@ -3630,85 +3630,85 @@ var IID_IBDA_DigitalDemodulator = win32.GUID{Data1: 0xef30f379, Data2: 0x985b, D
 // Put_ModulationType dispatches through IBDA_DigitalDemodulator's vtable slot 3.
 func (self *IBDA_DigitalDemodulator) Put_ModulationType(pModulationType *ModulationType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pModulationType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ModulationType dispatches through IBDA_DigitalDemodulator's vtable slot 4.
 func (self *IBDA_DigitalDemodulator) Get_ModulationType(pModulationType *ModulationType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pModulationType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_InnerFECMethod dispatches through IBDA_DigitalDemodulator's vtable slot 5.
 func (self *IBDA_DigitalDemodulator) Put_InnerFECMethod(pFECMethod *FECMethod) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFECMethod)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InnerFECMethod dispatches through IBDA_DigitalDemodulator's vtable slot 6.
 func (self *IBDA_DigitalDemodulator) Get_InnerFECMethod(pFECMethod *FECMethod) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFECMethod)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_InnerFECRate dispatches through IBDA_DigitalDemodulator's vtable slot 7.
 func (self *IBDA_DigitalDemodulator) Put_InnerFECRate(pFECRate *BinaryConvolutionCodeRate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFECRate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InnerFECRate dispatches through IBDA_DigitalDemodulator's vtable slot 8.
 func (self *IBDA_DigitalDemodulator) Get_InnerFECRate(pFECRate *BinaryConvolutionCodeRate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFECRate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_OuterFECMethod dispatches through IBDA_DigitalDemodulator's vtable slot 9.
 func (self *IBDA_DigitalDemodulator) Put_OuterFECMethod(pFECMethod *FECMethod) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFECMethod)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OuterFECMethod dispatches through IBDA_DigitalDemodulator's vtable slot 10.
 func (self *IBDA_DigitalDemodulator) Get_OuterFECMethod(pFECMethod *FECMethod) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFECMethod)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_OuterFECRate dispatches through IBDA_DigitalDemodulator's vtable slot 11.
 func (self *IBDA_DigitalDemodulator) Put_OuterFECRate(pFECRate *BinaryConvolutionCodeRate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFECRate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OuterFECRate dispatches through IBDA_DigitalDemodulator's vtable slot 12.
 func (self *IBDA_DigitalDemodulator) Get_OuterFECRate(pFECRate *BinaryConvolutionCodeRate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFECRate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SymbolRate dispatches through IBDA_DigitalDemodulator's vtable slot 13.
 func (self *IBDA_DigitalDemodulator) Put_SymbolRate(pSymbolRate *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSymbolRate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SymbolRate dispatches through IBDA_DigitalDemodulator's vtable slot 14.
 func (self *IBDA_DigitalDemodulator) Get_SymbolRate(pSymbolRate *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSymbolRate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SpectralInversion dispatches through IBDA_DigitalDemodulator's vtable slot 15.
 func (self *IBDA_DigitalDemodulator) Put_SpectralInversion(pSpectralInversion *SpectralInversion) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSpectralInversion)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SpectralInversion dispatches through IBDA_DigitalDemodulator's vtable slot 16.
 func (self *IBDA_DigitalDemodulator) Get_SpectralInversion(pSpectralInversion *SpectralInversion) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSpectralInversion)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBDA_DigitalDemodulator2: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ibda_digitaldemodulator2
@@ -3723,49 +3723,49 @@ var IID_IBDA_DigitalDemodulator2 = win32.GUID{Data1: 0x525ed3ee, Data2: 0x5cf3, 
 // Put_GuardInterval dispatches through IBDA_DigitalDemodulator2's vtable slot 17.
 func (self *IBDA_DigitalDemodulator2) Put_GuardInterval(pGuardInterval *GuardInterval) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGuardInterval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_GuardInterval dispatches through IBDA_DigitalDemodulator2's vtable slot 18.
 func (self *IBDA_DigitalDemodulator2) Get_GuardInterval(pGuardInterval *GuardInterval) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGuardInterval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_TransmissionMode dispatches through IBDA_DigitalDemodulator2's vtable slot 19.
 func (self *IBDA_DigitalDemodulator2) Put_TransmissionMode(pTransmissionMode *TransmissionMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTransmissionMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TransmissionMode dispatches through IBDA_DigitalDemodulator2's vtable slot 20.
 func (self *IBDA_DigitalDemodulator2) Get_TransmissionMode(pTransmissionMode *TransmissionMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTransmissionMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RollOff dispatches through IBDA_DigitalDemodulator2's vtable slot 21.
 func (self *IBDA_DigitalDemodulator2) Put_RollOff(pRollOff *RollOff) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRollOff)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RollOff dispatches through IBDA_DigitalDemodulator2's vtable slot 22.
 func (self *IBDA_DigitalDemodulator2) Get_RollOff(pRollOff *RollOff) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRollOff)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Pilot dispatches through IBDA_DigitalDemodulator2's vtable slot 23.
 func (self *IBDA_DigitalDemodulator2) Put_Pilot(pPilot *Pilot) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPilot)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Pilot dispatches through IBDA_DigitalDemodulator2's vtable slot 24.
 func (self *IBDA_DigitalDemodulator2) Get_Pilot(pPilot *Pilot) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPilot)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 13f19604-7d32-4359-93a2-a05205d90ac9
@@ -3779,25 +3779,25 @@ var IID_IBDA_DigitalDemodulator3 = win32.GUID{Data1: 0x13f19604, Data2: 0x7d32, 
 // Put_SignalTimeouts dispatches through IBDA_DigitalDemodulator3's vtable slot 25.
 func (self *IBDA_DigitalDemodulator3) Put_SignalTimeouts(pSignalTimeouts *BDA_SIGNAL_TIMEOUTS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSignalTimeouts)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SignalTimeouts dispatches through IBDA_DigitalDemodulator3's vtable slot 26.
 func (self *IBDA_DigitalDemodulator3) Get_SignalTimeouts(pSignalTimeouts *BDA_SIGNAL_TIMEOUTS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSignalTimeouts)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PLPNumber dispatches through IBDA_DigitalDemodulator3's vtable slot 27.
 func (self *IBDA_DigitalDemodulator3) Put_PLPNumber(pPLPNumber *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPLPNumber)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PLPNumber dispatches through IBDA_DigitalDemodulator3's vtable slot 28.
 func (self *IBDA_DigitalDemodulator3) Get_PLPNumber(pPLPNumber *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPLPNumber)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBDA_DiseqCommand: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ibda_diseqcommand
@@ -3812,25 +3812,25 @@ var IID_IBDA_DiseqCommand = win32.GUID{Data1: 0xf84e2ab0, Data2: 0x3c6b, Data3: 
 // Put_EnableDiseqCommands dispatches through IBDA_DiseqCommand's vtable slot 3.
 func (self *IBDA_DiseqCommand) Put_EnableDiseqCommands(bEnable foundation.BOOLEAN) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(bEnable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DiseqLNBSource dispatches through IBDA_DiseqCommand's vtable slot 4.
 func (self *IBDA_DiseqCommand) Put_DiseqLNBSource(ulLNBSource uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulLNBSource))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DiseqUseToneBurst dispatches through IBDA_DiseqCommand's vtable slot 5.
 func (self *IBDA_DiseqCommand) Put_DiseqUseToneBurst(bUseToneBurst foundation.BOOLEAN) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(bUseToneBurst))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DiseqRepeats dispatches through IBDA_DiseqCommand's vtable slot 6.
 func (self *IBDA_DiseqCommand) Put_DiseqRepeats(ulRepeats uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ulRepeats))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DiseqSendCommand dispatches through IBDA_DiseqCommand's vtable slot 7.
@@ -3840,13 +3840,13 @@ func (self *IBDA_DiseqCommand) Put_DiseqSendCommand(ulRequestId uint32, pbComman
 		_pbCommand = &pbCommand[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(ulRequestId), uintptr(len(pbCommand)), uintptr(unsafe.Pointer(_pbCommand)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DiseqResponse dispatches through IBDA_DiseqCommand's vtable slot 8.
 func (self *IBDA_DiseqCommand) Get_DiseqResponse(ulRequestId uint32, pulcbResponseLen *uint32, pbResponse *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(ulRequestId), uintptr(unsafe.Pointer(pulcbResponseLen)), uintptr(unsafe.Pointer(pbResponse)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBDA_EasMessage: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ibda_easmessage
@@ -3861,7 +3861,7 @@ var IID_IBDA_EasMessage = win32.GUID{Data1: 0xd806973d, Data2: 0x3ebe, Data3: 0x
 // Get_EasMessage dispatches through IBDA_EasMessage's vtable slot 3.
 func (self *IBDA_EasMessage) Get_EasMessage(ulEventID uint32, ppEASObject **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulEventID), uintptr(unsafe.Pointer(ppEASObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBDA_Encoder: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ibda_encoder
@@ -3876,31 +3876,31 @@ var IID_IBDA_Encoder = win32.GUID{Data1: 0x3a8bad59, Data2: 0x59fe, Data3: 0x455
 // QueryCapabilities dispatches through IBDA_Encoder's vtable slot 3.
 func (self *IBDA_Encoder) QueryCapabilities(NumAudioFmts *uint32, NumVideoFmts *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(NumAudioFmts)), uintptr(unsafe.Pointer(NumVideoFmts)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumAudioCapability dispatches through IBDA_Encoder's vtable slot 4.
 func (self *IBDA_Encoder) EnumAudioCapability(FmtIndex uint32, MethodID *uint32, AlgorithmType *uint32, SamplingRate *uint32, BitDepth *uint32, NumChannels *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(FmtIndex), uintptr(unsafe.Pointer(MethodID)), uintptr(unsafe.Pointer(AlgorithmType)), uintptr(unsafe.Pointer(SamplingRate)), uintptr(unsafe.Pointer(BitDepth)), uintptr(unsafe.Pointer(NumChannels)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumVideoCapability dispatches through IBDA_Encoder's vtable slot 5.
 func (self *IBDA_Encoder) EnumVideoCapability(FmtIndex uint32, MethodID *uint32, AlgorithmType *uint32, VerticalSize *uint32, HorizontalSize *uint32, AspectRatio *uint32, FrameRateCode *uint32, ProgressiveSequence *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(FmtIndex), uintptr(unsafe.Pointer(MethodID)), uintptr(unsafe.Pointer(AlgorithmType)), uintptr(unsafe.Pointer(VerticalSize)), uintptr(unsafe.Pointer(HorizontalSize)), uintptr(unsafe.Pointer(AspectRatio)), uintptr(unsafe.Pointer(FrameRateCode)), uintptr(unsafe.Pointer(ProgressiveSequence)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetParameters dispatches through IBDA_Encoder's vtable slot 6.
 func (self *IBDA_Encoder) SetParameters(AudioBitrateMode uint32, AudioBitrate uint32, AudioMethodID uint32, AudioProgram uint32, VideoBitrateMode uint32, VideoBitrate uint32, VideoMethodID uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(AudioBitrateMode), uintptr(AudioBitrate), uintptr(AudioMethodID), uintptr(AudioProgram), uintptr(VideoBitrateMode), uintptr(VideoBitrate), uintptr(VideoMethodID))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetState dispatches through IBDA_Encoder's vtable slot 7.
 func (self *IBDA_Encoder) GetState(AudioBitrateMax *uint32, AudioBitrateMin *uint32, AudioBitrateMode *uint32, AudioBitrateStepping *uint32, AudioBitrate *uint32, AudioMethodID *uint32, AvailableAudioPrograms *uint32, AudioProgram *uint32, VideoBitrateMax *uint32, VideoBitrateMin *uint32, VideoBitrateMode *uint32, VideoBitrate *uint32, VideoBitrateStepping *uint32, VideoMethodID *uint32, SignalSourceID *uint32, SignalFormat *uint64, SignalLock *foundation.BOOL, SignalLevel *int32, SignalToNoiseRatio *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AudioBitrateMax)), uintptr(unsafe.Pointer(AudioBitrateMin)), uintptr(unsafe.Pointer(AudioBitrateMode)), uintptr(unsafe.Pointer(AudioBitrateStepping)), uintptr(unsafe.Pointer(AudioBitrate)), uintptr(unsafe.Pointer(AudioMethodID)), uintptr(unsafe.Pointer(AvailableAudioPrograms)), uintptr(unsafe.Pointer(AudioProgram)), uintptr(unsafe.Pointer(VideoBitrateMax)), uintptr(unsafe.Pointer(VideoBitrateMin)), uintptr(unsafe.Pointer(VideoBitrateMode)), uintptr(unsafe.Pointer(VideoBitrate)), uintptr(unsafe.Pointer(VideoBitrateStepping)), uintptr(unsafe.Pointer(VideoMethodID)), uintptr(unsafe.Pointer(SignalSourceID)), uintptr(unsafe.Pointer(SignalFormat)), uintptr(unsafe.Pointer(SignalLock)), uintptr(unsafe.Pointer(SignalLevel)), uintptr(unsafe.Pointer(SignalToNoiseRatio)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBDA_EthernetFilter: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ibda_ethernetfilter
@@ -3915,7 +3915,7 @@ var IID_IBDA_EthernetFilter = win32.GUID{Data1: 0x71985f43, Data2: 0x1ca1, Data3
 // GetMulticastListSize dispatches through IBDA_EthernetFilter's vtable slot 3.
 func (self *IBDA_EthernetFilter) GetMulticastListSize(pulcbAddresses *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulcbAddresses)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PutMulticastList dispatches through IBDA_EthernetFilter's vtable slot 4.
@@ -3925,25 +3925,25 @@ func (self *IBDA_EthernetFilter) PutMulticastList(pAddressList []byte) error {
 		_pAddressList = &pAddressList[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(pAddressList)), uintptr(unsafe.Pointer(_pAddressList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMulticastList dispatches through IBDA_EthernetFilter's vtable slot 5.
 func (self *IBDA_EthernetFilter) GetMulticastList(pulcbAddresses *uint32, pAddressList *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulcbAddresses)), uintptr(unsafe.Pointer(pAddressList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PutMulticastMode dispatches through IBDA_EthernetFilter's vtable slot 6.
 func (self *IBDA_EthernetFilter) PutMulticastMode(ulModeMask uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ulModeMask))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMulticastMode dispatches through IBDA_EthernetFilter's vtable slot 7.
 func (self *IBDA_EthernetFilter) GetMulticastMode(pulModeMask *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulModeMask)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBDA_EventingService: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ibda_eventingservice
@@ -3958,7 +3958,7 @@ var IID_IBDA_EventingService = win32.GUID{Data1: 0x207c413f, Data2: 0x00dc, Data
 // CompleteEvent dispatches through IBDA_EventingService's vtable slot 3.
 func (self *IBDA_EventingService) CompleteEvent(ulEventID uint32, ulEventResult uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulEventID), uintptr(ulEventResult))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBDA_FDC: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ibda_fdc
@@ -3973,43 +3973,43 @@ var IID_IBDA_FDC = win32.GUID{Data1: 0x138adc7e, Data2: 0x58ae, Data3: 0x437f, D
 // GetStatus dispatches through IBDA_FDC's vtable slot 3.
 func (self *IBDA_FDC) GetStatus(CurrentBitrate *uint32, CarrierLock *foundation.BOOL, CurrentFrequency *uint32, CurrentSpectrumInversion *foundation.BOOL, CurrentPIDList *foundation.BSTR, CurrentTIDList *foundation.BSTR, Overflow *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CurrentBitrate)), uintptr(unsafe.Pointer(CarrierLock)), uintptr(unsafe.Pointer(CurrentFrequency)), uintptr(unsafe.Pointer(CurrentSpectrumInversion)), uintptr(unsafe.Pointer(CurrentPIDList)), uintptr(unsafe.Pointer(CurrentTIDList)), uintptr(unsafe.Pointer(Overflow)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RequestTables dispatches through IBDA_FDC's vtable slot 4.
 func (self *IBDA_FDC) RequestTables(TableIDs foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(TableIDs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddPid dispatches through IBDA_FDC's vtable slot 5.
 func (self *IBDA_FDC) AddPid(PidsToAdd foundation.BSTR, RemainingFilterEntries *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PidsToAdd)), uintptr(unsafe.Pointer(RemainingFilterEntries)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemovePid dispatches through IBDA_FDC's vtable slot 6.
 func (self *IBDA_FDC) RemovePid(PidsToRemove foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PidsToRemove)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddTid dispatches through IBDA_FDC's vtable slot 7.
 func (self *IBDA_FDC) AddTid(TidsToAdd foundation.BSTR, CurrentTidList *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(TidsToAdd)), uintptr(unsafe.Pointer(CurrentTidList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveTid dispatches through IBDA_FDC's vtable slot 8.
 func (self *IBDA_FDC) RemoveTid(TidsToRemove foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(TidsToRemove)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTableSection dispatches through IBDA_FDC's vtable slot 9.
 func (self *IBDA_FDC) GetTableSection(Pid *uint32, MaxBufferSize uint32, ActualSize *uint32, SecBuffer *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Pid)), uintptr(MaxBufferSize), uintptr(unsafe.Pointer(ActualSize)), uintptr(unsafe.Pointer(SecBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBDA_FrequencyFilter: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ibda_frequencyfilter
@@ -4024,73 +4024,73 @@ var IID_IBDA_FrequencyFilter = win32.GUID{Data1: 0x71985f47, Data2: 0x1ca1, Data
 // Put_Autotune dispatches through IBDA_FrequencyFilter's vtable slot 3.
 func (self *IBDA_FrequencyFilter) Put_Autotune(ulTransponder uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulTransponder))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Autotune dispatches through IBDA_FrequencyFilter's vtable slot 4.
 func (self *IBDA_FrequencyFilter) Get_Autotune(pulTransponder *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulTransponder)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Frequency dispatches through IBDA_FrequencyFilter's vtable slot 5.
 func (self *IBDA_FrequencyFilter) Put_Frequency(ulFrequency uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(ulFrequency))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Frequency dispatches through IBDA_FrequencyFilter's vtable slot 6.
 func (self *IBDA_FrequencyFilter) Get_Frequency(pulFrequency *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulFrequency)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Polarity dispatches through IBDA_FrequencyFilter's vtable slot 7.
 func (self *IBDA_FrequencyFilter) Put_Polarity(Polarity Polarisation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Polarity))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Polarity dispatches through IBDA_FrequencyFilter's vtable slot 8.
 func (self *IBDA_FrequencyFilter) Get_Polarity(pPolarity *Polarisation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPolarity)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Range dispatches through IBDA_FrequencyFilter's vtable slot 9.
 func (self *IBDA_FrequencyFilter) Put_Range(ulRange uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(ulRange))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Range dispatches through IBDA_FrequencyFilter's vtable slot 10.
 func (self *IBDA_FrequencyFilter) Get_Range(pulRange *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulRange)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Bandwidth dispatches through IBDA_FrequencyFilter's vtable slot 11.
 func (self *IBDA_FrequencyFilter) Put_Bandwidth(ulBandwidth uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(ulBandwidth))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Bandwidth dispatches through IBDA_FrequencyFilter's vtable slot 12.
 func (self *IBDA_FrequencyFilter) Get_Bandwidth(pulBandwidth *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulBandwidth)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FrequencyMultiplier dispatches through IBDA_FrequencyFilter's vtable slot 13.
 func (self *IBDA_FrequencyFilter) Put_FrequencyMultiplier(ulMultiplier uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(ulMultiplier))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FrequencyMultiplier dispatches through IBDA_FrequencyFilter's vtable slot 14.
 func (self *IBDA_FrequencyFilter) Get_FrequencyMultiplier(pulMultiplier *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulMultiplier)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBDA_GuideDataDeliveryService: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ibda_guidedatadeliveryservice
@@ -4105,37 +4105,37 @@ var IID_IBDA_GuideDataDeliveryService = win32.GUID{Data1: 0xc0afcb73, Data2: 0x2
 // GetGuideDataType dispatches through IBDA_GuideDataDeliveryService's vtable slot 3.
 func (self *IBDA_GuideDataDeliveryService) GetGuideDataType(pguidDataType *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidDataType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetGuideData dispatches through IBDA_GuideDataDeliveryService's vtable slot 4.
 func (self *IBDA_GuideDataDeliveryService) GetGuideData(pulcbBufferLen *uint32, pbBuffer *byte, pulGuideDataPercentageProgress *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulcbBufferLen)), uintptr(unsafe.Pointer(pbBuffer)), uintptr(unsafe.Pointer(pulGuideDataPercentageProgress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RequestGuideDataUpdate dispatches through IBDA_GuideDataDeliveryService's vtable slot 5.
 func (self *IBDA_GuideDataDeliveryService) RequestGuideDataUpdate() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTuneXmlFromServiceIdx dispatches through IBDA_GuideDataDeliveryService's vtable slot 6.
 func (self *IBDA_GuideDataDeliveryService) GetTuneXmlFromServiceIdx(ul64ServiceIdx uint64, pbstrTuneXml *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ul64ServiceIdx), uintptr(unsafe.Pointer(pbstrTuneXml)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetServices dispatches through IBDA_GuideDataDeliveryService's vtable slot 7.
 func (self *IBDA_GuideDataDeliveryService) GetServices(pulcbBufferLen *uint32, pbBuffer *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulcbBufferLen)), uintptr(unsafe.Pointer(pbBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetServiceInfoFromTuneXml dispatches through IBDA_GuideDataDeliveryService's vtable slot 8.
 func (self *IBDA_GuideDataDeliveryService) GetServiceInfoFromTuneXml(bstrTuneXml foundation.BSTR, pbstrServiceDescription *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTuneXml)), uintptr(unsafe.Pointer(pbstrServiceDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBDA_IPSinkControl: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ibda_ipsinkcontrol
@@ -4150,13 +4150,13 @@ var IID_IBDA_IPSinkControl = win32.GUID{Data1: 0x3f4dc8e2, Data2: 0x4050, Data3:
 // GetMulticastList dispatches through IBDA_IPSinkControl's vtable slot 3.
 func (self *IBDA_IPSinkControl) GetMulticastList(pulcbSize *uint32, pbBuffer **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulcbSize)), uintptr(unsafe.Pointer(pbBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAdapterIPAddress dispatches through IBDA_IPSinkControl's vtable slot 4.
 func (self *IBDA_IPSinkControl) GetAdapterIPAddress(pulcbSize *uint32, pbBuffer **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulcbSize)), uintptr(unsafe.Pointer(pbBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBDA_IPSinkInfo: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ibda_ipsinkinfo
@@ -4171,19 +4171,19 @@ var IID_IBDA_IPSinkInfo = win32.GUID{Data1: 0xa750108f, Data2: 0x492e, Data3: 0x
 // Get_MulticastList dispatches through IBDA_IPSinkInfo's vtable slot 3.
 func (self *IBDA_IPSinkInfo) Get_MulticastList(pulcbAddresses *uint32, ppbAddressList **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulcbAddresses)), uintptr(unsafe.Pointer(ppbAddressList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AdapterIPAddress dispatches through IBDA_IPSinkInfo's vtable slot 4.
 func (self *IBDA_IPSinkInfo) Get_AdapterIPAddress(pbstrBuffer *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AdapterDescription dispatches through IBDA_IPSinkInfo's vtable slot 5.
 func (self *IBDA_IPSinkInfo) Get_AdapterDescription(pbstrBuffer *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBDA_IPV4Filter: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ibda_ipv4filter
@@ -4198,7 +4198,7 @@ var IID_IBDA_IPV4Filter = win32.GUID{Data1: 0x71985f44, Data2: 0x1ca1, Data3: 0x
 // GetMulticastListSize dispatches through IBDA_IPV4Filter's vtable slot 3.
 func (self *IBDA_IPV4Filter) GetMulticastListSize(pulcbAddresses *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulcbAddresses)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PutMulticastList dispatches through IBDA_IPV4Filter's vtable slot 4.
@@ -4208,25 +4208,25 @@ func (self *IBDA_IPV4Filter) PutMulticastList(pAddressList []byte) error {
 		_pAddressList = &pAddressList[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(pAddressList)), uintptr(unsafe.Pointer(_pAddressList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMulticastList dispatches through IBDA_IPV4Filter's vtable slot 5.
 func (self *IBDA_IPV4Filter) GetMulticastList(pulcbAddresses *uint32, pAddressList *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulcbAddresses)), uintptr(unsafe.Pointer(pAddressList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PutMulticastMode dispatches through IBDA_IPV4Filter's vtable slot 6.
 func (self *IBDA_IPV4Filter) PutMulticastMode(ulModeMask uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ulModeMask))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMulticastMode dispatches through IBDA_IPV4Filter's vtable slot 7.
 func (self *IBDA_IPV4Filter) GetMulticastMode(pulModeMask *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulModeMask)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBDA_IPV6Filter: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ibda_ipv6filter
@@ -4241,7 +4241,7 @@ var IID_IBDA_IPV6Filter = win32.GUID{Data1: 0xe1785a74, Data2: 0x2a23, Data3: 0x
 // GetMulticastListSize dispatches through IBDA_IPV6Filter's vtable slot 3.
 func (self *IBDA_IPV6Filter) GetMulticastListSize(pulcbAddresses *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulcbAddresses)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PutMulticastList dispatches through IBDA_IPV6Filter's vtable slot 4.
@@ -4251,25 +4251,25 @@ func (self *IBDA_IPV6Filter) PutMulticastList(pAddressList []byte) error {
 		_pAddressList = &pAddressList[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(pAddressList)), uintptr(unsafe.Pointer(_pAddressList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMulticastList dispatches through IBDA_IPV6Filter's vtable slot 5.
 func (self *IBDA_IPV6Filter) GetMulticastList(pulcbAddresses *uint32, pAddressList *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulcbAddresses)), uintptr(unsafe.Pointer(pAddressList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PutMulticastMode dispatches through IBDA_IPV6Filter's vtable slot 6.
 func (self *IBDA_IPV6Filter) PutMulticastMode(ulModeMask uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ulModeMask))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMulticastMode dispatches through IBDA_IPV6Filter's vtable slot 7.
 func (self *IBDA_IPV6Filter) GetMulticastMode(pulModeMask *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulModeMask)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBDA_ISDBConditionalAccess: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ibda_isdbconditionalaccess
@@ -4288,7 +4288,7 @@ func (self *IBDA_ISDBConditionalAccess) SetIsdbCasRequest(ulRequestId uint32, pb
 		_pbRequestBuffer = &pbRequestBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulRequestId), uintptr(len(pbRequestBuffer)), uintptr(unsafe.Pointer(_pbRequestBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBDA_LNBInfo: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ibda_lnbinfo
@@ -4303,37 +4303,37 @@ var IID_IBDA_LNBInfo = win32.GUID{Data1: 0x992cf102, Data2: 0x49f9, Data3: 0x471
 // Put_LocalOscilatorFrequencyLowBand dispatches through IBDA_LNBInfo's vtable slot 3.
 func (self *IBDA_LNBInfo) Put_LocalOscilatorFrequencyLowBand(ulLOFLow uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulLOFLow))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LocalOscilatorFrequencyLowBand dispatches through IBDA_LNBInfo's vtable slot 4.
 func (self *IBDA_LNBInfo) Get_LocalOscilatorFrequencyLowBand(pulLOFLow *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulLOFLow)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LocalOscilatorFrequencyHighBand dispatches through IBDA_LNBInfo's vtable slot 5.
 func (self *IBDA_LNBInfo) Put_LocalOscilatorFrequencyHighBand(ulLOFHigh uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(ulLOFHigh))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LocalOscilatorFrequencyHighBand dispatches through IBDA_LNBInfo's vtable slot 6.
 func (self *IBDA_LNBInfo) Get_LocalOscilatorFrequencyHighBand(pulLOFHigh *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulLOFHigh)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_HighLowSwitchFrequency dispatches through IBDA_LNBInfo's vtable slot 7.
 func (self *IBDA_LNBInfo) Put_HighLowSwitchFrequency(ulSwitchFrequency uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(ulSwitchFrequency))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HighLowSwitchFrequency dispatches through IBDA_LNBInfo's vtable slot 8.
 func (self *IBDA_LNBInfo) Get_HighLowSwitchFrequency(pulSwitchFrequency *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulSwitchFrequency)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBDA_MUX: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ibda_mux
@@ -4352,13 +4352,13 @@ func (self *IBDA_MUX) SetPidList(pbPidListBuffer []BDA_MUX_PIDLISTITEM) error {
 		_pbPidListBuffer = &pbPidListBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pbPidListBuffer)), uintptr(unsafe.Pointer(_pbPidListBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPidList dispatches through IBDA_MUX's vtable slot 4.
 func (self *IBDA_MUX) GetPidList(pulPidListCount *uint32, pbPidListBuffer *BDA_MUX_PIDLISTITEM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulPidListCount)), uintptr(unsafe.Pointer(pbPidListBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBDA_NameValueService: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ibda_namevalueservice
@@ -4373,19 +4373,19 @@ var IID_IBDA_NameValueService = win32.GUID{Data1: 0x7f0b3150, Data2: 0x7b81, Dat
 // GetValueNameByIndex dispatches through IBDA_NameValueService's vtable slot 3.
 func (self *IBDA_NameValueService) GetValueNameByIndex(ulIndex uint32, pbstrName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulIndex), uintptr(unsafe.Pointer(pbstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetValue dispatches through IBDA_NameValueService's vtable slot 4.
 func (self *IBDA_NameValueService) GetValue(bstrName foundation.BSTR, bstrLanguage foundation.BSTR, pbstrValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(bstrLanguage)), uintptr(unsafe.Pointer(pbstrValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetValue dispatches through IBDA_NameValueService's vtable slot 5.
 func (self *IBDA_NameValueService) SetValue(ulDialogRequest uint32, bstrLanguage foundation.BSTR, bstrName foundation.BSTR, bstrValue foundation.BSTR, ulReserved uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(ulDialogRequest), uintptr(unsafe.Pointer(bstrLanguage)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(bstrValue)), uintptr(ulReserved))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBDA_NetworkProvider: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ibda_networkprovider
@@ -4400,43 +4400,43 @@ var IID_IBDA_NetworkProvider = win32.GUID{Data1: 0xfd501041, Data2: 0x8ebe, Data
 // PutSignalSource dispatches through IBDA_NetworkProvider's vtable slot 3.
 func (self *IBDA_NetworkProvider) PutSignalSource(ulSignalSource uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulSignalSource))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSignalSource dispatches through IBDA_NetworkProvider's vtable slot 4.
 func (self *IBDA_NetworkProvider) GetSignalSource(pulSignalSource *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulSignalSource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNetworkType dispatches through IBDA_NetworkProvider's vtable slot 5.
 func (self *IBDA_NetworkProvider) GetNetworkType(pguidNetworkType *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidNetworkType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PutTuningSpace dispatches through IBDA_NetworkProvider's vtable slot 6.
 func (self *IBDA_NetworkProvider) PutTuningSpace(guidTuningSpace *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidTuningSpace)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTuningSpace dispatches through IBDA_NetworkProvider's vtable slot 7.
 func (self *IBDA_NetworkProvider) GetTuningSpace(pguidTuingSpace *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidTuingSpace)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterDeviceFilter dispatches through IBDA_NetworkProvider's vtable slot 8.
 func (self *IBDA_NetworkProvider) RegisterDeviceFilter(pUnkFilterControl *systemcom.IUnknown, ppvRegisitrationContext *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkFilterControl)), uintptr(unsafe.Pointer(ppvRegisitrationContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnRegisterDeviceFilter dispatches through IBDA_NetworkProvider's vtable slot 9.
 func (self *IBDA_NetworkProvider) UnRegisterDeviceFilter(pvRegistrationContext uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(pvRegistrationContext))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBDA_NullTransform: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ibda_nulltransform
@@ -4451,13 +4451,13 @@ var IID_IBDA_NullTransform = win32.GUID{Data1: 0xddf15b0d, Data2: 0xbd25, Data3:
 // Start dispatches through IBDA_NullTransform's vtable slot 3.
 func (self *IBDA_NullTransform) Start() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Stop dispatches through IBDA_NullTransform's vtable slot 4.
 func (self *IBDA_NullTransform) Stop() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBDA_PinControl: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ibda_pincontrol
@@ -4472,19 +4472,19 @@ var IID_IBDA_PinControl = win32.GUID{Data1: 0x0ded49d5, Data2: 0xa8b7, Data3: 0x
 // GetPinID dispatches through IBDA_PinControl's vtable slot 3.
 func (self *IBDA_PinControl) GetPinID(pulPinID *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulPinID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPinType dispatches through IBDA_PinControl's vtable slot 4.
 func (self *IBDA_PinControl) GetPinType(pulPinType *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulPinType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegistrationContext dispatches through IBDA_PinControl's vtable slot 5.
 func (self *IBDA_PinControl) RegistrationContext(pulRegistrationCtx *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulRegistrationCtx)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBDA_SignalProperties: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ibda_signalproperties
@@ -4499,37 +4499,37 @@ var IID_IBDA_SignalProperties = win32.GUID{Data1: 0xd2f1644b, Data2: 0xb409, Dat
 // PutNetworkType dispatches through IBDA_SignalProperties's vtable slot 3.
 func (self *IBDA_SignalProperties) PutNetworkType(guidNetworkType *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidNetworkType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNetworkType dispatches through IBDA_SignalProperties's vtable slot 4.
 func (self *IBDA_SignalProperties) GetNetworkType(pguidNetworkType *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidNetworkType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PutSignalSource dispatches through IBDA_SignalProperties's vtable slot 5.
 func (self *IBDA_SignalProperties) PutSignalSource(ulSignalSource uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(ulSignalSource))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSignalSource dispatches through IBDA_SignalProperties's vtable slot 6.
 func (self *IBDA_SignalProperties) GetSignalSource(pulSignalSource *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulSignalSource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PutTuningSpace dispatches through IBDA_SignalProperties's vtable slot 7.
 func (self *IBDA_SignalProperties) PutTuningSpace(guidTuningSpace *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidTuningSpace)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTuningSpace dispatches through IBDA_SignalProperties's vtable slot 8.
 func (self *IBDA_SignalProperties) GetTuningSpace(pguidTuingSpace *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidTuingSpace)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBDA_SignalStatistics: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ibda_signalstatistics
@@ -4544,61 +4544,61 @@ var IID_IBDA_SignalStatistics = win32.GUID{Data1: 0x1347d106, Data2: 0xcf3a, Dat
 // Put_SignalStrength dispatches through IBDA_SignalStatistics's vtable slot 3.
 func (self *IBDA_SignalStatistics) Put_SignalStrength(lDbStrength int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lDbStrength))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SignalStrength dispatches through IBDA_SignalStatistics's vtable slot 4.
 func (self *IBDA_SignalStatistics) Get_SignalStrength(plDbStrength *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plDbStrength)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SignalQuality dispatches through IBDA_SignalStatistics's vtable slot 5.
 func (self *IBDA_SignalStatistics) Put_SignalQuality(lPercentQuality int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(lPercentQuality))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SignalQuality dispatches through IBDA_SignalStatistics's vtable slot 6.
 func (self *IBDA_SignalStatistics) Get_SignalQuality(plPercentQuality *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plPercentQuality)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SignalPresent dispatches through IBDA_SignalStatistics's vtable slot 7.
 func (self *IBDA_SignalStatistics) Put_SignalPresent(fPresent foundation.BOOLEAN) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(fPresent))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SignalPresent dispatches through IBDA_SignalStatistics's vtable slot 8.
 func (self *IBDA_SignalStatistics) Get_SignalPresent(pfPresent *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfPresent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SignalLocked dispatches through IBDA_SignalStatistics's vtable slot 9.
 func (self *IBDA_SignalStatistics) Put_SignalLocked(fLocked foundation.BOOLEAN) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(fLocked))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SignalLocked dispatches through IBDA_SignalStatistics's vtable slot 10.
 func (self *IBDA_SignalStatistics) Get_SignalLocked(pfLocked *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfLocked)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SampleTime dispatches through IBDA_SignalStatistics's vtable slot 11.
 func (self *IBDA_SignalStatistics) Put_SampleTime(lmsSampleTime int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(lmsSampleTime))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SampleTime dispatches through IBDA_SignalStatistics's vtable slot 12.
 func (self *IBDA_SignalStatistics) Get_SampleTime(plmsSampleTime *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plmsSampleTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBDA_Topology: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ibda_topology
@@ -4617,7 +4617,7 @@ func (self *IBDA_Topology) GetNodeTypes(pulcNodeTypes *uint32, rgulNodeTypes []u
 		_rgulNodeTypes = &rgulNodeTypes[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulcNodeTypes)), uintptr(len(rgulNodeTypes)), uintptr(unsafe.Pointer(_rgulNodeTypes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNodeDescriptors dispatches through IBDA_Topology's vtable slot 4.
@@ -4627,7 +4627,7 @@ func (self *IBDA_Topology) GetNodeDescriptors(ulcNodeDescriptors *uint32, rgNode
 		_rgNodeDescriptors = &rgNodeDescriptors[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ulcNodeDescriptors)), uintptr(len(rgNodeDescriptors)), uintptr(unsafe.Pointer(_rgNodeDescriptors)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNodeInterfaces dispatches through IBDA_Topology's vtable slot 5.
@@ -4637,7 +4637,7 @@ func (self *IBDA_Topology) GetNodeInterfaces(ulNodeType uint32, pulcInterfaces *
 		_rgguidInterfaces = &rgguidInterfaces[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(ulNodeType), uintptr(unsafe.Pointer(pulcInterfaces)), uintptr(len(rgguidInterfaces)), uintptr(unsafe.Pointer(_rgguidInterfaces)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPinTypes dispatches through IBDA_Topology's vtable slot 6.
@@ -4647,7 +4647,7 @@ func (self *IBDA_Topology) GetPinTypes(pulcPinTypes *uint32, rgulPinTypes []uint
 		_rgulPinTypes = &rgulPinTypes[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulcPinTypes)), uintptr(len(rgulPinTypes)), uintptr(unsafe.Pointer(_rgulPinTypes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTemplateConnections dispatches through IBDA_Topology's vtable slot 7.
@@ -4657,43 +4657,43 @@ func (self *IBDA_Topology) GetTemplateConnections(pulcConnections *uint32, rgCon
 		_rgConnections = &rgConnections[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulcConnections)), uintptr(len(rgConnections)), uintptr(unsafe.Pointer(_rgConnections)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePin dispatches through IBDA_Topology's vtable slot 8.
 func (self *IBDA_Topology) CreatePin(ulPinType uint32, pulPinId *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(ulPinType), uintptr(unsafe.Pointer(pulPinId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeletePin dispatches through IBDA_Topology's vtable slot 9.
 func (self *IBDA_Topology) DeletePin(ulPinId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(ulPinId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMediaType dispatches through IBDA_Topology's vtable slot 10.
 func (self *IBDA_Topology) SetMediaType(ulPinId uint32, pMediaType *mediamediafoundation.AM_MEDIA_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(ulPinId), uintptr(unsafe.Pointer(pMediaType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMedium dispatches through IBDA_Topology's vtable slot 11.
 func (self *IBDA_Topology) SetMedium(ulPinId uint32, pMedium *REGPINMEDIUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(ulPinId), uintptr(unsafe.Pointer(pMedium)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateTopology dispatches through IBDA_Topology's vtable slot 12.
 func (self *IBDA_Topology) CreateTopology(ulInputPinId uint32, ulOutputPinId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(ulInputPinId), uintptr(ulOutputPinId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetControlNode dispatches through IBDA_Topology's vtable slot 13.
 func (self *IBDA_Topology) GetControlNode(ulInputPinId uint32, ulOutputPinId uint32, ulNodeType uint32, ppControlNode **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(ulInputPinId), uintptr(ulOutputPinId), uintptr(ulNodeType), uintptr(unsafe.Pointer(ppControlNode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBDA_TransportStreamInfo: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ibda_transportstreaminfo
@@ -4708,7 +4708,7 @@ var IID_IBDA_TransportStreamInfo = win32.GUID{Data1: 0x8e882535, Data2: 0x5f86, 
 // Get_PatTableTickCount dispatches through IBDA_TransportStreamInfo's vtable slot 3.
 func (self *IBDA_TransportStreamInfo) Get_PatTableTickCount(pPatTickCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPatTickCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 1dcfafe9-b45e-41b3-bb2a-561eb129ae98
@@ -4722,13 +4722,13 @@ var IID_IBDA_TransportStreamSelector = win32.GUID{Data1: 0x1dcfafe9, Data2: 0xb4
 // SetTSID dispatches through IBDA_TransportStreamSelector's vtable slot 3.
 func (self *IBDA_TransportStreamSelector) SetTSID(usTSID uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(usTSID))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTSInformation dispatches through IBDA_TransportStreamSelector's vtable slot 4.
 func (self *IBDA_TransportStreamSelector) GetTSInformation(pulTSInformationBufferLen *uint32, pbTSInformationBuffer *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulTSInformationBufferLen)), uintptr(unsafe.Pointer(pbTSInformationBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBDA_UserActivityService: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ibda_useractivityservice
@@ -4743,19 +4743,19 @@ var IID_IBDA_UserActivityService = win32.GUID{Data1: 0x53b14189, Data2: 0xe478, 
 // SetCurrentTunerUseReason dispatches through IBDA_UserActivityService's vtable slot 3.
 func (self *IBDA_UserActivityService) SetCurrentTunerUseReason(dwUseReason uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwUseReason))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetUserActivityInterval dispatches through IBDA_UserActivityService's vtable slot 4.
 func (self *IBDA_UserActivityService) GetUserActivityInterval(pdwActivityInterval *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwActivityInterval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UserActivityDetected dispatches through IBDA_UserActivityService's vtable slot 5.
 func (self *IBDA_UserActivityService) UserActivityDetected() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBDA_VoidTransform: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ibda_voidtransform
@@ -4770,13 +4770,13 @@ var IID_IBDA_VoidTransform = win32.GUID{Data1: 0x71985f46, Data2: 0x1ca1, Data3:
 // Start dispatches through IBDA_VoidTransform's vtable slot 3.
 func (self *IBDA_VoidTransform) Start() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Stop dispatches through IBDA_VoidTransform's vtable slot 4.
 func (self *IBDA_VoidTransform) Stop() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 4be6fa3d-07cd-4139-8b80-8c18ba3aec88
@@ -4790,7 +4790,7 @@ var IID_IBDA_WMDRMSession = win32.GUID{Data1: 0x4be6fa3d, Data2: 0x07cd, Data3: 
 // GetStatus dispatches through IBDA_WMDRMSession's vtable slot 3.
 func (self *IBDA_WMDRMSession) GetStatus(MaxCaptureToken *uint32, MaxStreamingPid *uint32, MaxLicense *uint32, MinSecurityLevel *uint32, RevInfoSequenceNumber *uint32, RevInfoIssuedTime *uint64, RevInfoTTL *uint32, RevListVersion *uint32, ulState *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(MaxCaptureToken)), uintptr(unsafe.Pointer(MaxStreamingPid)), uintptr(unsafe.Pointer(MaxLicense)), uintptr(unsafe.Pointer(MinSecurityLevel)), uintptr(unsafe.Pointer(RevInfoSequenceNumber)), uintptr(unsafe.Pointer(RevInfoIssuedTime)), uintptr(unsafe.Pointer(RevInfoTTL)), uintptr(unsafe.Pointer(RevListVersion)), uintptr(unsafe.Pointer(ulState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetRevInfo dispatches through IBDA_WMDRMSession's vtable slot 4.
@@ -4800,7 +4800,7 @@ func (self *IBDA_WMDRMSession) SetRevInfo(pbRevInfo []byte) error {
 		_pbRevInfo = &pbRevInfo[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(pbRevInfo)), uintptr(unsafe.Pointer(_pbRevInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCrl dispatches through IBDA_WMDRMSession's vtable slot 5.
@@ -4810,7 +4810,7 @@ func (self *IBDA_WMDRMSession) SetCrl(pbCrlLen []byte) error {
 		_pbCrlLen = &pbCrlLen[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(len(pbCrlLen)), uintptr(unsafe.Pointer(_pbCrlLen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TransactMessage dispatches through IBDA_WMDRMSession's vtable slot 6.
@@ -4820,19 +4820,19 @@ func (self *IBDA_WMDRMSession) TransactMessage(pbRequest []byte, pulcbResponse *
 		_pbRequest = &pbRequest[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(len(pbRequest)), uintptr(unsafe.Pointer(_pbRequest)), uintptr(unsafe.Pointer(pulcbResponse)), uintptr(unsafe.Pointer(pbResponse)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLicense dispatches through IBDA_WMDRMSession's vtable slot 7.
 func (self *IBDA_WMDRMSession) GetLicense(uuidKey *win32.GUID, pulPackageLen *uint32, pbPackage *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(uuidKey)), uintptr(unsafe.Pointer(pulPackageLen)), uintptr(unsafe.Pointer(pbPackage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReissueLicense dispatches through IBDA_WMDRMSession's vtable slot 8.
 func (self *IBDA_WMDRMSession) ReissueLicense(uuidKey *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(uuidKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RenewLicense dispatches through IBDA_WMDRMSession's vtable slot 9.
@@ -4846,13 +4846,13 @@ func (self *IBDA_WMDRMSession) RenewLicense(pbInXmrLicense []byte, pbEntitlement
 		_pbEntitlementToken = &pbEntitlementToken[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(len(pbInXmrLicense)), uintptr(unsafe.Pointer(_pbInXmrLicense)), uintptr(len(pbEntitlementToken)), uintptr(unsafe.Pointer(_pbEntitlementToken)), uintptr(unsafe.Pointer(pulDescrambleStatus)), uintptr(unsafe.Pointer(pulOutXmrLicenseLen)), uintptr(unsafe.Pointer(pbOutXmrLicense)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetKeyInfo dispatches through IBDA_WMDRMSession's vtable slot 10.
 func (self *IBDA_WMDRMSession) GetKeyInfo(pulKeyInfoLen *uint32, pbKeyInfo *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulKeyInfoLen)), uintptr(unsafe.Pointer(pbKeyInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 86d979cf-a8a7-4f94-b5fb-14c0aca68fe6
@@ -4870,7 +4870,7 @@ func (self *IBDA_WMDRMTuner) PurchaseEntitlement(ulDialogRequest uint32, bstrLan
 		_pbPurchaseToken = &pbPurchaseToken[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulDialogRequest), uintptr(unsafe.Pointer(bstrLanguage)), uintptr(len(pbPurchaseToken)), uintptr(unsafe.Pointer(_pbPurchaseToken)), uintptr(unsafe.Pointer(pulDescrambleStatus)), uintptr(unsafe.Pointer(pulCaptureTokenLen)), uintptr(unsafe.Pointer(pbCaptureToken)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CancelCaptureToken dispatches through IBDA_WMDRMTuner's vtable slot 4.
@@ -4880,31 +4880,31 @@ func (self *IBDA_WMDRMTuner) CancelCaptureToken(pbCaptureToken []byte) error {
 		_pbCaptureToken = &pbCaptureToken[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(pbCaptureToken)), uintptr(unsafe.Pointer(_pbCaptureToken)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetPidProtection dispatches through IBDA_WMDRMTuner's vtable slot 5.
 func (self *IBDA_WMDRMTuner) SetPidProtection(ulPid uint32, uuidKey *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(ulPid), uintptr(unsafe.Pointer(uuidKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPidProtection dispatches through IBDA_WMDRMTuner's vtable slot 6.
 func (self *IBDA_WMDRMTuner) GetPidProtection(pulPid uint32, uuidKey *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(pulPid), uintptr(unsafe.Pointer(uuidKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetSyncValue dispatches through IBDA_WMDRMTuner's vtable slot 7.
 func (self *IBDA_WMDRMTuner) SetSyncValue(ulSyncValue uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(ulSyncValue))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStartCodeProfile dispatches through IBDA_WMDRMTuner's vtable slot 8.
 func (self *IBDA_WMDRMTuner) GetStartCodeProfile(pulStartCodeProfileLen *uint32, pbStartCodeProfile *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulStartCodeProfileLen)), uintptr(unsafe.Pointer(pbStartCodeProfile)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBPCSatelliteTuner: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ibpcsatellitetuner
@@ -4919,19 +4919,19 @@ var IID_IBPCSatelliteTuner = win32.GUID{Data1: 0x211a8765, Data2: 0x03ac, Data3:
 // Get_DefaultSubChannelTypes dispatches through IBPCSatelliteTuner's vtable slot 18.
 func (self *IBPCSatelliteTuner) Get_DefaultSubChannelTypes(plDefaultVideoType *int32, plDefaultAudioType *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plDefaultVideoType)), uintptr(unsafe.Pointer(plDefaultAudioType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DefaultSubChannelTypes dispatches through IBPCSatelliteTuner's vtable slot 19.
 func (self *IBPCSatelliteTuner) Put_DefaultSubChannelTypes(lDefaultVideoType int32, lDefaultAudioType int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(lDefaultVideoType), uintptr(lDefaultAudioType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsTapingPermitted dispatches through IBPCSatelliteTuner's vtable slot 20.
 func (self *IBPCSatelliteTuner) IsTapingPermitted() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBaseFilter: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ibasefilter
@@ -4946,33 +4946,33 @@ var IID_IBaseFilter = win32.GUID{Data1: 0x56a86895, Data2: 0x0ad4, Data3: 0x11ce
 // EnumPins dispatches through IBaseFilter's vtable slot 10.
 func (self *IBaseFilter) EnumPins(ppEnum **IEnumPins) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FindPin dispatches through IBaseFilter's vtable slot 11.
 func (self *IBaseFilter) FindPin(Id string, ppPin **IPin) error {
 	_Id := win32.UTF16Ptr(Id)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Id)), uintptr(unsafe.Pointer(ppPin)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryFilterInfo dispatches through IBaseFilter's vtable slot 12.
 func (self *IBaseFilter) QueryFilterInfo(pInfo *FILTER_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // JoinFilterGraph dispatches through IBaseFilter's vtable slot 13.
 func (self *IBaseFilter) JoinFilterGraph(pGraph *IFilterGraph, pName string) error {
 	_pName := win32.UTF16Ptr(pName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGraph)), uintptr(unsafe.Pointer(_pName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryVendorInfo dispatches through IBaseFilter's vtable slot 14.
 func (self *IBaseFilter) QueryVendorInfo(pVendorInfo *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVendorInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 61ded640-e912-11ce-a099-00aa00479a58
@@ -4986,43 +4986,43 @@ var IID_IBaseVideoMixer = win32.GUID{Data1: 0x61ded640, Data2: 0xe912, Data3: 0x
 // SetLeadPin dispatches through IBaseVideoMixer's vtable slot 3.
 func (self *IBaseVideoMixer) SetLeadPin(iPin int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(iPin))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLeadPin dispatches through IBaseVideoMixer's vtable slot 4.
 func (self *IBaseVideoMixer) GetLeadPin(piPin *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piPin)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInputPinCount dispatches through IBaseVideoMixer's vtable slot 5.
 func (self *IBaseVideoMixer) GetInputPinCount(piPinCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piPinCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsUsingClock dispatches through IBaseVideoMixer's vtable slot 6.
 func (self *IBaseVideoMixer) IsUsingClock(pbValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetUsingClock dispatches through IBaseVideoMixer's vtable slot 7.
 func (self *IBaseVideoMixer) SetUsingClock(bValue int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(bValue))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetClockPeriod dispatches through IBaseVideoMixer's vtable slot 8.
 func (self *IBaseVideoMixer) GetClockPeriod(pbValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetClockPeriod dispatches through IBaseVideoMixer's vtable slot 9.
 func (self *IBaseVideoMixer) SetClockPeriod(bValue int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(bValue))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBasicAudio: https://learn.microsoft.com/windows/win32/api/control/nn-control-ibasicaudio
@@ -5037,25 +5037,25 @@ var IID_IBasicAudio = win32.GUID{Data1: 0x56a868b3, Data2: 0x0ad4, Data3: 0x11ce
 // Put_Volume dispatches through IBasicAudio's vtable slot 7.
 func (self *IBasicAudio) Put_Volume(lVolume int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(lVolume))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Volume dispatches through IBasicAudio's vtable slot 8.
 func (self *IBasicAudio) Get_Volume(plVolume *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plVolume)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Balance dispatches through IBasicAudio's vtable slot 9.
 func (self *IBasicAudio) Put_Balance(lBalance int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(lBalance))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Balance dispatches through IBasicAudio's vtable slot 10.
 func (self *IBasicAudio) Get_Balance(plBalance *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plBalance)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBasicVideo: https://learn.microsoft.com/windows/win32/api/control/nn-control-ibasicvideo
@@ -5070,193 +5070,193 @@ var IID_IBasicVideo = win32.GUID{Data1: 0x56a868b5, Data2: 0x0ad4, Data3: 0x11ce
 // Get_AvgTimePerFrame dispatches through IBasicVideo's vtable slot 7.
 func (self *IBasicVideo) Get_AvgTimePerFrame(pAvgTimePerFrame *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAvgTimePerFrame)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BitRate dispatches through IBasicVideo's vtable slot 8.
 func (self *IBasicVideo) Get_BitRate(pBitRate *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBitRate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BitErrorRate dispatches through IBasicVideo's vtable slot 9.
 func (self *IBasicVideo) Get_BitErrorRate(pBitErrorRate *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBitErrorRate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_VideoWidth dispatches through IBasicVideo's vtable slot 10.
 func (self *IBasicVideo) Get_VideoWidth(pVideoWidth *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoWidth)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_VideoHeight dispatches through IBasicVideo's vtable slot 11.
 func (self *IBasicVideo) Get_VideoHeight(pVideoHeight *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoHeight)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SourceLeft dispatches through IBasicVideo's vtable slot 12.
 func (self *IBasicVideo) Put_SourceLeft(SourceLeft int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(SourceLeft))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SourceLeft dispatches through IBasicVideo's vtable slot 13.
 func (self *IBasicVideo) Get_SourceLeft(pSourceLeft *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSourceLeft)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SourceWidth dispatches through IBasicVideo's vtable slot 14.
 func (self *IBasicVideo) Put_SourceWidth(SourceWidth int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(SourceWidth))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SourceWidth dispatches through IBasicVideo's vtable slot 15.
 func (self *IBasicVideo) Get_SourceWidth(pSourceWidth *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSourceWidth)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SourceTop dispatches through IBasicVideo's vtable slot 16.
 func (self *IBasicVideo) Put_SourceTop(SourceTop int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(SourceTop))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SourceTop dispatches through IBasicVideo's vtable slot 17.
 func (self *IBasicVideo) Get_SourceTop(pSourceTop *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSourceTop)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SourceHeight dispatches through IBasicVideo's vtable slot 18.
 func (self *IBasicVideo) Put_SourceHeight(SourceHeight int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(SourceHeight))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SourceHeight dispatches through IBasicVideo's vtable slot 19.
 func (self *IBasicVideo) Get_SourceHeight(pSourceHeight *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSourceHeight)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DestinationLeft dispatches through IBasicVideo's vtable slot 20.
 func (self *IBasicVideo) Put_DestinationLeft(DestinationLeft int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(DestinationLeft))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DestinationLeft dispatches through IBasicVideo's vtable slot 21.
 func (self *IBasicVideo) Get_DestinationLeft(pDestinationLeft *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDestinationLeft)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DestinationWidth dispatches through IBasicVideo's vtable slot 22.
 func (self *IBasicVideo) Put_DestinationWidth(DestinationWidth int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(DestinationWidth))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DestinationWidth dispatches through IBasicVideo's vtable slot 23.
 func (self *IBasicVideo) Get_DestinationWidth(pDestinationWidth *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDestinationWidth)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DestinationTop dispatches through IBasicVideo's vtable slot 24.
 func (self *IBasicVideo) Put_DestinationTop(DestinationTop int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(DestinationTop))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DestinationTop dispatches through IBasicVideo's vtable slot 25.
 func (self *IBasicVideo) Get_DestinationTop(pDestinationTop *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDestinationTop)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DestinationHeight dispatches through IBasicVideo's vtable slot 26.
 func (self *IBasicVideo) Put_DestinationHeight(DestinationHeight int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(DestinationHeight))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DestinationHeight dispatches through IBasicVideo's vtable slot 27.
 func (self *IBasicVideo) Get_DestinationHeight(pDestinationHeight *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDestinationHeight)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetSourcePosition dispatches through IBasicVideo's vtable slot 28.
 func (self *IBasicVideo) SetSourcePosition(Left int32, Top int32, Width int32, Height int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(Left), uintptr(Top), uintptr(Width), uintptr(Height))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSourcePosition dispatches through IBasicVideo's vtable slot 29.
 func (self *IBasicVideo) GetSourcePosition(pLeft *int32, pTop *int32, pWidth *int32, pHeight *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLeft)), uintptr(unsafe.Pointer(pTop)), uintptr(unsafe.Pointer(pWidth)), uintptr(unsafe.Pointer(pHeight)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDefaultSourcePosition dispatches through IBasicVideo's vtable slot 30.
 func (self *IBasicVideo) SetDefaultSourcePosition() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDestinationPosition dispatches through IBasicVideo's vtable slot 31.
 func (self *IBasicVideo) SetDestinationPosition(Left int32, Top int32, Width int32, Height int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(Left), uintptr(Top), uintptr(Width), uintptr(Height))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDestinationPosition dispatches through IBasicVideo's vtable slot 32.
 func (self *IBasicVideo) GetDestinationPosition(pLeft *int32, pTop *int32, pWidth *int32, pHeight *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLeft)), uintptr(unsafe.Pointer(pTop)), uintptr(unsafe.Pointer(pWidth)), uintptr(unsafe.Pointer(pHeight)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDefaultDestinationPosition dispatches through IBasicVideo's vtable slot 33.
 func (self *IBasicVideo) SetDefaultDestinationPosition() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetVideoSize dispatches through IBasicVideo's vtable slot 34.
 func (self *IBasicVideo) GetVideoSize(pWidth *int32, pHeight *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWidth)), uintptr(unsafe.Pointer(pHeight)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetVideoPaletteEntries dispatches through IBasicVideo's vtable slot 35.
 func (self *IBasicVideo) GetVideoPaletteEntries(StartIndex int32, Entries int32, pRetrieved *int32, pPalette *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(StartIndex), uintptr(Entries), uintptr(unsafe.Pointer(pRetrieved)), uintptr(unsafe.Pointer(pPalette)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentImage dispatches through IBasicVideo's vtable slot 36.
 func (self *IBasicVideo) GetCurrentImage(pBufferSize *int32, pDIBImage *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBufferSize)), uintptr(unsafe.Pointer(pDIBImage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsUsingDefaultSource dispatches through IBasicVideo's vtable slot 37.
 func (self *IBasicVideo) IsUsingDefaultSource() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsUsingDefaultDestination dispatches through IBasicVideo's vtable slot 38.
 func (self *IBasicVideo) IsUsingDefaultDestination() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBasicVideo2: https://learn.microsoft.com/windows/win32/api/control/nn-control-ibasicvideo2
@@ -5271,7 +5271,7 @@ var IID_IBasicVideo2 = win32.GUID{Data1: 0x329bb360, Data2: 0xf6ea, Data3: 0x11d
 // GetPreferredAspectRatio dispatches through IBasicVideo2's vtable slot 39.
 func (self *IBasicVideo2) GetPreferredAspectRatio(plAspectX *int32, plAspectY *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAspectX)), uintptr(unsafe.Pointer(plAspectY)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBroadcastEvent: https://learn.microsoft.com/windows/win32/api/tuner/nn-tuner-ibroadcastevent
@@ -5303,13 +5303,13 @@ var IID_IBufferingTime = win32.GUID{Data1: 0x1e00486a, Data2: 0x78dd, Data3: 0x1
 // GetBufferingTime dispatches through IBufferingTime's vtable slot 3.
 func (self *IBufferingTime) GetBufferingTime(pdwMilliseconds *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwMilliseconds)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBufferingTime dispatches through IBufferingTime's vtable slot 4.
 func (self *IBufferingTime) SetBufferingTime(dwMilliseconds uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwMilliseconds))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICCSubStreamFiltering: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-iccsubstreamfiltering
@@ -5325,13 +5325,13 @@ var IID_ICCSubStreamFiltering = win32.GUID{Data1: 0x4b2bd7ea, Data2: 0x8347, Dat
 func (self *ICCSubStreamFiltering) Get_SubstreamTypes() (int32, error) {
 	var _pTypes int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pTypes)))
-	return _pTypes, win32.HRESULTError(int32(r1))
+	return _pTypes, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SubstreamTypes dispatches through ICCSubStreamFiltering's vtable slot 4.
 func (self *ICCSubStreamFiltering) Put_SubstreamTypes(Types int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Types))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICameraControl: https://learn.microsoft.com/windows/win32/api/vidcap/nn-vidcap-icameracontrol
@@ -5346,307 +5346,307 @@ var IID_ICameraControl = win32.GUID{Data1: 0x2ba1785d, Data2: 0x4d1b, Data3: 0x4
 // Get_Exposure dispatches through ICameraControl's vtable slot 3.
 func (self *ICameraControl) Get_Exposure(pValue *int32, pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Exposure dispatches through ICameraControl's vtable slot 4.
 func (self *ICameraControl) Put_Exposure(Value int32, Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Value), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRange_Exposure dispatches through ICameraControl's vtable slot 5.
 func (self *ICameraControl) GetRange_Exposure(pMin *int32, pMax *int32, pSteppingDelta *int32, pDefault *int32, pCapsFlag *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMin)), uintptr(unsafe.Pointer(pMax)), uintptr(unsafe.Pointer(pSteppingDelta)), uintptr(unsafe.Pointer(pDefault)), uintptr(unsafe.Pointer(pCapsFlag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Focus dispatches through ICameraControl's vtable slot 6.
 func (self *ICameraControl) Get_Focus(pValue *int32, pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Focus dispatches through ICameraControl's vtable slot 7.
 func (self *ICameraControl) Put_Focus(Value int32, Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Value), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRange_Focus dispatches through ICameraControl's vtable slot 8.
 func (self *ICameraControl) GetRange_Focus(pMin *int32, pMax *int32, pSteppingDelta *int32, pDefault *int32, pCapsFlag *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMin)), uintptr(unsafe.Pointer(pMax)), uintptr(unsafe.Pointer(pSteppingDelta)), uintptr(unsafe.Pointer(pDefault)), uintptr(unsafe.Pointer(pCapsFlag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Iris dispatches through ICameraControl's vtable slot 9.
 func (self *ICameraControl) Get_Iris(pValue *int32, pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Iris dispatches through ICameraControl's vtable slot 10.
 func (self *ICameraControl) Put_Iris(Value int32, Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Value), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRange_Iris dispatches through ICameraControl's vtable slot 11.
 func (self *ICameraControl) GetRange_Iris(pMin *int32, pMax *int32, pSteppingDelta *int32, pDefault *int32, pCapsFlag *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMin)), uintptr(unsafe.Pointer(pMax)), uintptr(unsafe.Pointer(pSteppingDelta)), uintptr(unsafe.Pointer(pDefault)), uintptr(unsafe.Pointer(pCapsFlag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Zoom dispatches through ICameraControl's vtable slot 12.
 func (self *ICameraControl) Get_Zoom(pValue *int32, pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Zoom dispatches through ICameraControl's vtable slot 13.
 func (self *ICameraControl) Put_Zoom(Value int32, Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Value), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRange_Zoom dispatches through ICameraControl's vtable slot 14.
 func (self *ICameraControl) GetRange_Zoom(pMin *int32, pMax *int32, pSteppingDelta *int32, pDefault *int32, pCapsFlag *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMin)), uintptr(unsafe.Pointer(pMax)), uintptr(unsafe.Pointer(pSteppingDelta)), uintptr(unsafe.Pointer(pDefault)), uintptr(unsafe.Pointer(pCapsFlag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FocalLengths dispatches through ICameraControl's vtable slot 15.
 func (self *ICameraControl) Get_FocalLengths(plOcularFocalLength *int32, plObjectiveFocalLengthMin *int32, plObjectiveFocalLengthMax *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plOcularFocalLength)), uintptr(unsafe.Pointer(plObjectiveFocalLengthMin)), uintptr(unsafe.Pointer(plObjectiveFocalLengthMax)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Pan dispatches through ICameraControl's vtable slot 16.
 func (self *ICameraControl) Get_Pan(pValue *int32, pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Pan dispatches through ICameraControl's vtable slot 17.
 func (self *ICameraControl) Put_Pan(Value int32, Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(Value), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRange_Pan dispatches through ICameraControl's vtable slot 18.
 func (self *ICameraControl) GetRange_Pan(pMin *int32, pMax *int32, pSteppingDelta *int32, pDefault *int32, pCapsFlag *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMin)), uintptr(unsafe.Pointer(pMax)), uintptr(unsafe.Pointer(pSteppingDelta)), uintptr(unsafe.Pointer(pDefault)), uintptr(unsafe.Pointer(pCapsFlag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Tilt dispatches through ICameraControl's vtable slot 19.
 func (self *ICameraControl) Get_Tilt(pValue *int32, pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Tilt dispatches through ICameraControl's vtable slot 20.
 func (self *ICameraControl) Put_Tilt(Value int32, Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(Value), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRange_Tilt dispatches through ICameraControl's vtable slot 21.
 func (self *ICameraControl) GetRange_Tilt(pMin *int32, pMax *int32, pSteppingDelta *int32, pDefault *int32, pCapsFlag *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMin)), uintptr(unsafe.Pointer(pMax)), uintptr(unsafe.Pointer(pSteppingDelta)), uintptr(unsafe.Pointer(pDefault)), uintptr(unsafe.Pointer(pCapsFlag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PanTilt dispatches through ICameraControl's vtable slot 22.
 func (self *ICameraControl) Get_PanTilt(pPanValue *int32, pTiltValue *int32, pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPanValue)), uintptr(unsafe.Pointer(pTiltValue)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PanTilt dispatches through ICameraControl's vtable slot 23.
 func (self *ICameraControl) Put_PanTilt(PanValue int32, TiltValue int32, Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(PanValue), uintptr(TiltValue), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Roll dispatches through ICameraControl's vtable slot 24.
 func (self *ICameraControl) Get_Roll(pValue *int32, pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Roll dispatches through ICameraControl's vtable slot 25.
 func (self *ICameraControl) Put_Roll(Value int32, Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(Value), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRange_Roll dispatches through ICameraControl's vtable slot 26.
 func (self *ICameraControl) GetRange_Roll(pMin *int32, pMax *int32, pSteppingDelta *int32, pDefault *int32, pCapsFlag *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMin)), uintptr(unsafe.Pointer(pMax)), uintptr(unsafe.Pointer(pSteppingDelta)), uintptr(unsafe.Pointer(pDefault)), uintptr(unsafe.Pointer(pCapsFlag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ExposureRelative dispatches through ICameraControl's vtable slot 27.
 func (self *ICameraControl) Get_ExposureRelative(pValue *int32, pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ExposureRelative dispatches through ICameraControl's vtable slot 28.
 func (self *ICameraControl) Put_ExposureRelative(Value int32, Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(Value), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRange_ExposureRelative dispatches through ICameraControl's vtable slot 29.
 func (self *ICameraControl) GetRange_ExposureRelative(pMin *int32, pMax *int32, pSteppingDelta *int32, pDefault *int32, pCapsFlag *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMin)), uintptr(unsafe.Pointer(pMax)), uintptr(unsafe.Pointer(pSteppingDelta)), uintptr(unsafe.Pointer(pDefault)), uintptr(unsafe.Pointer(pCapsFlag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FocusRelative dispatches through ICameraControl's vtable slot 30.
 func (self *ICameraControl) Get_FocusRelative(pValue *int32, pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FocusRelative dispatches through ICameraControl's vtable slot 31.
 func (self *ICameraControl) Put_FocusRelative(Value int32, Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(Value), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRange_FocusRelative dispatches through ICameraControl's vtable slot 32.
 func (self *ICameraControl) GetRange_FocusRelative(pMin *int32, pMax *int32, pSteppingDelta *int32, pDefault *int32, pCapsFlag *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMin)), uintptr(unsafe.Pointer(pMax)), uintptr(unsafe.Pointer(pSteppingDelta)), uintptr(unsafe.Pointer(pDefault)), uintptr(unsafe.Pointer(pCapsFlag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IrisRelative dispatches through ICameraControl's vtable slot 33.
 func (self *ICameraControl) Get_IrisRelative(pValue *int32, pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_IrisRelative dispatches through ICameraControl's vtable slot 34.
 func (self *ICameraControl) Put_IrisRelative(Value int32, Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(Value), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRange_IrisRelative dispatches through ICameraControl's vtable slot 35.
 func (self *ICameraControl) GetRange_IrisRelative(pMin *int32, pMax *int32, pSteppingDelta *int32, pDefault *int32, pCapsFlag *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMin)), uintptr(unsafe.Pointer(pMax)), uintptr(unsafe.Pointer(pSteppingDelta)), uintptr(unsafe.Pointer(pDefault)), uintptr(unsafe.Pointer(pCapsFlag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ZoomRelative dispatches through ICameraControl's vtable slot 36.
 func (self *ICameraControl) Get_ZoomRelative(pValue *int32, pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ZoomRelative dispatches through ICameraControl's vtable slot 37.
 func (self *ICameraControl) Put_ZoomRelative(Value int32, Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(Value), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRange_ZoomRelative dispatches through ICameraControl's vtable slot 38.
 func (self *ICameraControl) GetRange_ZoomRelative(pMin *int32, pMax *int32, pSteppingDelta *int32, pDefault *int32, pCapsFlag *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMin)), uintptr(unsafe.Pointer(pMax)), uintptr(unsafe.Pointer(pSteppingDelta)), uintptr(unsafe.Pointer(pDefault)), uintptr(unsafe.Pointer(pCapsFlag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PanRelative dispatches through ICameraControl's vtable slot 39.
 func (self *ICameraControl) Get_PanRelative(pValue *int32, pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PanRelative dispatches through ICameraControl's vtable slot 40.
 func (self *ICameraControl) Put_PanRelative(Value int32, Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(Value), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TiltRelative dispatches through ICameraControl's vtable slot 41.
 func (self *ICameraControl) Get_TiltRelative(pValue *int32, pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_TiltRelative dispatches through ICameraControl's vtable slot 42.
 func (self *ICameraControl) Put_TiltRelative(Value int32, Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(Value), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRange_TiltRelative dispatches through ICameraControl's vtable slot 43.
 func (self *ICameraControl) GetRange_TiltRelative(pMin *int32, pMax *int32, pSteppingDelta *int32, pDefault *int32, pCapsFlag *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMin)), uintptr(unsafe.Pointer(pMax)), uintptr(unsafe.Pointer(pSteppingDelta)), uintptr(unsafe.Pointer(pDefault)), uintptr(unsafe.Pointer(pCapsFlag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PanTiltRelative dispatches through ICameraControl's vtable slot 44.
 func (self *ICameraControl) Get_PanTiltRelative(pPanValue *int32, pTiltValue *int32, pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPanValue)), uintptr(unsafe.Pointer(pTiltValue)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PanTiltRelative dispatches through ICameraControl's vtable slot 45.
 func (self *ICameraControl) Put_PanTiltRelative(PanValue int32, TiltValue int32, Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(PanValue), uintptr(TiltValue), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRange_PanRelative dispatches through ICameraControl's vtable slot 46.
 func (self *ICameraControl) GetRange_PanRelative(pMin *int32, pMax *int32, pSteppingDelta *int32, pDefault *int32, pCapsFlag *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMin)), uintptr(unsafe.Pointer(pMax)), uintptr(unsafe.Pointer(pSteppingDelta)), uintptr(unsafe.Pointer(pDefault)), uintptr(unsafe.Pointer(pCapsFlag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RollRelative dispatches through ICameraControl's vtable slot 47.
 func (self *ICameraControl) Get_RollRelative(pValue *int32, pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RollRelative dispatches through ICameraControl's vtable slot 48.
 func (self *ICameraControl) Put_RollRelative(Value int32, Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(Value), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRange_RollRelative dispatches through ICameraControl's vtable slot 49.
 func (self *ICameraControl) GetRange_RollRelative(pMin *int32, pMax *int32, pSteppingDelta *int32, pDefault *int32, pCapsFlag *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMin)), uintptr(unsafe.Pointer(pMax)), uintptr(unsafe.Pointer(pSteppingDelta)), uintptr(unsafe.Pointer(pDefault)), uintptr(unsafe.Pointer(pCapsFlag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ScanMode dispatches through ICameraControl's vtable slot 50.
 func (self *ICameraControl) Get_ScanMode(pValue *int32, pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ScanMode dispatches through ICameraControl's vtable slot 51.
 func (self *ICameraControl) Put_ScanMode(Value int32, Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(Value), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PrivacyMode dispatches through ICameraControl's vtable slot 52.
 func (self *ICameraControl) Get_PrivacyMode(pValue *int32, pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PrivacyMode dispatches through ICameraControl's vtable slot 53.
 func (self *ICameraControl) Put_PrivacyMode(Value int32, Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(Value), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICaptureGraphBuilder: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-icapturegraphbuilder
@@ -5661,45 +5661,45 @@ var IID_ICaptureGraphBuilder = win32.GUID{Data1: 0xbf87b6e0, Data2: 0x8c27, Data
 // SetFiltergraph dispatches through ICaptureGraphBuilder's vtable slot 3.
 func (self *ICaptureGraphBuilder) SetFiltergraph(pfg *IGraphBuilder) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfg)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFiltergraph dispatches through ICaptureGraphBuilder's vtable slot 4.
 func (self *ICaptureGraphBuilder) GetFiltergraph(ppfg **IGraphBuilder) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppfg)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetOutputFileName dispatches through ICaptureGraphBuilder's vtable slot 5.
 func (self *ICaptureGraphBuilder) SetOutputFileName(pType *win32.GUID, lpstrFile string, ppf **IBaseFilter, ppSink **IFileSinkFilter) error {
 	_lpstrFile := win32.UTF16Ptr(lpstrFile)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(_lpstrFile)), uintptr(unsafe.Pointer(ppf)), uintptr(unsafe.Pointer(ppSink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FindInterface dispatches through ICaptureGraphBuilder's vtable slot 6.
 func (self *ICaptureGraphBuilder) FindInterface(pCategory *win32.GUID, pf *IBaseFilter, riid *win32.GUID, ppint **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCategory)), uintptr(unsafe.Pointer(pf)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppint)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RenderStream dispatches through ICaptureGraphBuilder's vtable slot 7.
 func (self *ICaptureGraphBuilder) RenderStream(pCategory *win32.GUID, pSource *systemcom.IUnknown, pfCompressor *IBaseFilter, pfRenderer *IBaseFilter) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCategory)), uintptr(unsafe.Pointer(pSource)), uintptr(unsafe.Pointer(pfCompressor)), uintptr(unsafe.Pointer(pfRenderer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ControlStream dispatches through ICaptureGraphBuilder's vtable slot 8.
 func (self *ICaptureGraphBuilder) ControlStream(pCategory *win32.GUID, pFilter *IBaseFilter, pstart *int64, pstop *int64, wStartCookie uint16, wStopCookie uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCategory)), uintptr(unsafe.Pointer(pFilter)), uintptr(unsafe.Pointer(pstart)), uintptr(unsafe.Pointer(pstop)), uintptr(wStartCookie), uintptr(wStopCookie))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AllocCapFile dispatches through ICaptureGraphBuilder's vtable slot 9.
 func (self *ICaptureGraphBuilder) AllocCapFile(lpstr string, dwlSize uint64) error {
 	_lpstr := win32.UTF16Ptr(lpstr)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpstr)), uintptr(dwlSize))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CopyCaptureFile dispatches through ICaptureGraphBuilder's vtable slot 10.
@@ -5707,7 +5707,7 @@ func (self *ICaptureGraphBuilder) CopyCaptureFile(lpwstrOld string, lpwstrNew st
 	_lpwstrOld := win32.UTF16Ptr(lpwstrOld)
 	_lpwstrNew := win32.UTF16Ptr(lpwstrNew)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpwstrOld)), uintptr(unsafe.Pointer(_lpwstrNew)), uintptr(fAllowEscAbort), uintptr(unsafe.Pointer(pCallback)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICaptureGraphBuilder2: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-icapturegraphbuilder2
@@ -5722,45 +5722,45 @@ var IID_ICaptureGraphBuilder2 = win32.GUID{Data1: 0x93e5a4e0, Data2: 0x2d50, Dat
 // SetFiltergraph dispatches through ICaptureGraphBuilder2's vtable slot 3.
 func (self *ICaptureGraphBuilder2) SetFiltergraph(pfg *IGraphBuilder) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfg)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFiltergraph dispatches through ICaptureGraphBuilder2's vtable slot 4.
 func (self *ICaptureGraphBuilder2) GetFiltergraph(ppfg **IGraphBuilder) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppfg)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetOutputFileName dispatches through ICaptureGraphBuilder2's vtable slot 5.
 func (self *ICaptureGraphBuilder2) SetOutputFileName(pType *win32.GUID, lpstrFile string, ppf **IBaseFilter, ppSink **IFileSinkFilter) error {
 	_lpstrFile := win32.UTF16Ptr(lpstrFile)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(_lpstrFile)), uintptr(unsafe.Pointer(ppf)), uintptr(unsafe.Pointer(ppSink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FindInterface dispatches through ICaptureGraphBuilder2's vtable slot 6.
 func (self *ICaptureGraphBuilder2) FindInterface(pCategory *win32.GUID, pType *win32.GUID, pf *IBaseFilter, riid *win32.GUID, ppint **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCategory)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(pf)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppint)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RenderStream dispatches through ICaptureGraphBuilder2's vtable slot 7.
 func (self *ICaptureGraphBuilder2) RenderStream(pCategory *win32.GUID, pType *win32.GUID, pSource *systemcom.IUnknown, pfCompressor *IBaseFilter, pfRenderer *IBaseFilter) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCategory)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(pSource)), uintptr(unsafe.Pointer(pfCompressor)), uintptr(unsafe.Pointer(pfRenderer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ControlStream dispatches through ICaptureGraphBuilder2's vtable slot 8.
 func (self *ICaptureGraphBuilder2) ControlStream(pCategory *win32.GUID, pType *win32.GUID, pFilter *IBaseFilter, pstart *int64, pstop *int64, wStartCookie uint16, wStopCookie uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCategory)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(pFilter)), uintptr(unsafe.Pointer(pstart)), uintptr(unsafe.Pointer(pstop)), uintptr(wStartCookie), uintptr(wStopCookie))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AllocCapFile dispatches through ICaptureGraphBuilder2's vtable slot 9.
 func (self *ICaptureGraphBuilder2) AllocCapFile(lpstr string, dwlSize uint64) error {
 	_lpstr := win32.UTF16Ptr(lpstr)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpstr)), uintptr(dwlSize))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CopyCaptureFile dispatches through ICaptureGraphBuilder2's vtable slot 10.
@@ -5768,14 +5768,14 @@ func (self *ICaptureGraphBuilder2) CopyCaptureFile(lpwstrOld string, lpwstrNew s
 	_lpwstrOld := win32.UTF16Ptr(lpwstrOld)
 	_lpwstrNew := win32.UTF16Ptr(lpwstrNew)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpwstrOld)), uintptr(unsafe.Pointer(_lpwstrNew)), uintptr(fAllowEscAbort), uintptr(unsafe.Pointer(pCallback)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FindPin dispatches through ICaptureGraphBuilder2's vtable slot 11.
 func (self *ICaptureGraphBuilder2) FindPin(pSource *systemcom.IUnknown, pindir PIN_DIRECTION, pCategory *win32.GUID, pType *win32.GUID, fUnconnected bool, num int32, ppPin **IPin) error {
 	_fUnconnected := win32.Bool32(fUnconnected)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSource)), uintptr(pindir), uintptr(unsafe.Pointer(pCategory)), uintptr(unsafe.Pointer(pType)), uintptr(_fUnconnected), uintptr(num), uintptr(unsafe.Pointer(ppPin)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IConfigAsfWriter: https://learn.microsoft.com/windows/win32/api/dshowasf/nn-dshowasf-iconfigasfwriter
@@ -5790,50 +5790,50 @@ var IID_IConfigAsfWriter = win32.GUID{Data1: 0x45086030, Data2: 0xf7e4, Data3: 0
 // ConfigureFilterUsingProfileId dispatches through IConfigAsfWriter's vtable slot 3.
 func (self *IConfigAsfWriter) ConfigureFilterUsingProfileId(dwProfileId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwProfileId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentProfileId dispatches through IConfigAsfWriter's vtable slot 4.
 func (self *IConfigAsfWriter) GetCurrentProfileId(pdwProfileId *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwProfileId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ConfigureFilterUsingProfileGuid dispatches through IConfigAsfWriter's vtable slot 5.
 func (self *IConfigAsfWriter) ConfigureFilterUsingProfileGuid(guidProfile *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidProfile)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentProfileGuid dispatches through IConfigAsfWriter's vtable slot 6.
 func (self *IConfigAsfWriter) GetCurrentProfileGuid(pProfileGuid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProfileGuid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ConfigureFilterUsingProfile dispatches through IConfigAsfWriter's vtable slot 7.
 func (self *IConfigAsfWriter) ConfigureFilterUsingProfile(pProfile *mediawindowsmediaformat.IWMProfile) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProfile)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentProfile dispatches through IConfigAsfWriter's vtable slot 8.
 func (self *IConfigAsfWriter) GetCurrentProfile(ppProfile **mediawindowsmediaformat.IWMProfile) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProfile)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetIndexMode dispatches through IConfigAsfWriter's vtable slot 9.
 func (self *IConfigAsfWriter) SetIndexMode(bIndexFile bool) error {
 	_bIndexFile := win32.Bool32(bIndexFile)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(_bIndexFile))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetIndexMode dispatches through IConfigAsfWriter's vtable slot 10.
 func (self *IConfigAsfWriter) GetIndexMode(pbIndexFile *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbIndexFile)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IConfigAsfWriter2: https://learn.microsoft.com/windows/win32/api/dshowasf/nn-dshowasf-iconfigasfwriter2
@@ -5848,25 +5848,25 @@ var IID_IConfigAsfWriter2 = win32.GUID{Data1: 0x7989ccaa, Data2: 0x53f0, Data3: 
 // StreamNumFromPin dispatches through IConfigAsfWriter2's vtable slot 11.
 func (self *IConfigAsfWriter2) StreamNumFromPin(pPin *IPin, pwStreamNum *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPin)), uintptr(unsafe.Pointer(pwStreamNum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetParam dispatches through IConfigAsfWriter2's vtable slot 12.
 func (self *IConfigAsfWriter2) SetParam(dwParam uint32, dwParam1 uint32, dwParam2 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(dwParam), uintptr(dwParam1), uintptr(dwParam2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetParam dispatches through IConfigAsfWriter2's vtable slot 13.
 func (self *IConfigAsfWriter2) GetParam(dwParam uint32, pdwParam1 *uint32, pdwParam2 *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwParam), uintptr(unsafe.Pointer(pdwParam1)), uintptr(unsafe.Pointer(pdwParam2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ResetMultiPassState dispatches through IConfigAsfWriter2's vtable slot 14.
 func (self *IConfigAsfWriter2) ResetMultiPassState() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IConfigAviMux: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iconfigavimux
@@ -5881,26 +5881,26 @@ var IID_IConfigAviMux = win32.GUID{Data1: 0x5acd6aa0, Data2: 0xf482, Data3: 0x11
 // SetMasterStream dispatches through IConfigAviMux's vtable slot 3.
 func (self *IConfigAviMux) SetMasterStream(iStream int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(iStream))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMasterStream dispatches through IConfigAviMux's vtable slot 4.
 func (self *IConfigAviMux) GetMasterStream(pStream *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetOutputCompatibilityIndex dispatches through IConfigAviMux's vtable slot 5.
 func (self *IConfigAviMux) SetOutputCompatibilityIndex(fOldIndex bool) error {
 	_fOldIndex := win32.Bool32(fOldIndex)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(_fOldIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOutputCompatibilityIndex dispatches through IConfigAviMux's vtable slot 6.
 func (self *IConfigAviMux) GetOutputCompatibilityIndex(pfOldIndex *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfOldIndex)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IConfigInterleaving: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iconfiginterleaving
@@ -5915,25 +5915,25 @@ var IID_IConfigInterleaving = win32.GUID{Data1: 0xbee3d220, Data2: 0x157b, Data3
 // Put_Mode dispatches through IConfigInterleaving's vtable slot 3.
 func (self *IConfigInterleaving) Put_Mode(mode InterleavingMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(mode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Mode dispatches through IConfigInterleaving's vtable slot 4.
 func (self *IConfigInterleaving) Get_Mode(pMode *InterleavingMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Interleaving dispatches through IConfigInterleaving's vtable slot 5.
 func (self *IConfigInterleaving) Put_Interleaving(prtInterleave *int64, prtPreroll *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prtInterleave)), uintptr(unsafe.Pointer(prtPreroll)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Interleaving dispatches through IConfigInterleaving's vtable slot 6.
 func (self *IConfigInterleaving) Get_Interleaving(prtInterleave *int64, prtPreroll *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prtInterleave)), uintptr(unsafe.Pointer(prtPreroll)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICreateDevEnum: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-icreatedevenum
@@ -5948,7 +5948,7 @@ var IID_ICreateDevEnum = win32.GUID{Data1: 0x29840822, Data2: 0x5b84, Data3: 0x1
 // CreateClassEnumerator dispatches through ICreateDevEnum's vtable slot 3.
 func (self *ICreateDevEnum) CreateClassEnumerator(clsidDeviceClass *win32.GUID, ppEnumMoniker **systemcom.IEnumMoniker, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsidDeviceClass)), uintptr(unsafe.Pointer(ppEnumMoniker)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDDrawExclModeVideo: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iddrawexclmodevideo
@@ -5963,43 +5963,43 @@ var IID_IDDrawExclModeVideo = win32.GUID{Data1: 0x153acc21, Data2: 0xd83b, Data3
 // SetDDrawObject dispatches through IDDrawExclModeVideo's vtable slot 3.
 func (self *IDDrawExclModeVideo) SetDDrawObject(pDDrawObject *graphicsdirectdraw.IDirectDraw) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDDrawObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDDrawObject dispatches through IDDrawExclModeVideo's vtable slot 4.
 func (self *IDDrawExclModeVideo) GetDDrawObject(ppDDrawObject **graphicsdirectdraw.IDirectDraw, pbUsingExternal *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDDrawObject)), uintptr(unsafe.Pointer(pbUsingExternal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDDrawSurface dispatches through IDDrawExclModeVideo's vtable slot 5.
 func (self *IDDrawExclModeVideo) SetDDrawSurface(pDDrawSurface *graphicsdirectdraw.IDirectDrawSurface) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDDrawSurface)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDDrawSurface dispatches through IDDrawExclModeVideo's vtable slot 6.
 func (self *IDDrawExclModeVideo) GetDDrawSurface(ppDDrawSurface **graphicsdirectdraw.IDirectDrawSurface, pbUsingExternal *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDDrawSurface)), uintptr(unsafe.Pointer(pbUsingExternal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDrawParameters dispatches through IDDrawExclModeVideo's vtable slot 7.
 func (self *IDDrawExclModeVideo) SetDrawParameters(prcSource *foundation.RECT, prcTarget *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prcSource)), uintptr(unsafe.Pointer(prcTarget)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNativeVideoProps dispatches through IDDrawExclModeVideo's vtable slot 8.
 func (self *IDDrawExclModeVideo) GetNativeVideoProps(pdwVideoWidth *uint32, pdwVideoHeight *uint32, pdwPictAspectRatioX *uint32, pdwPictAspectRatioY *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwVideoWidth)), uintptr(unsafe.Pointer(pdwVideoHeight)), uintptr(unsafe.Pointer(pdwPictAspectRatioX)), uintptr(unsafe.Pointer(pdwPictAspectRatioY)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCallbackInterface dispatches through IDDrawExclModeVideo's vtable slot 9.
 func (self *IDDrawExclModeVideo) SetCallbackInterface(pCallback *IDDrawExclModeVideoCallback, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallback)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDDrawExclModeVideoCallback: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iddrawexclmodevideocallback
@@ -6017,19 +6017,19 @@ func (self *IDDrawExclModeVideoCallback) OnUpdateOverlay(bBefore bool, dwFlags u
 	_bOldVisible := win32.Bool32(bOldVisible)
 	_bNewVisible := win32.Bool32(bNewVisible)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(_bBefore), uintptr(dwFlags), uintptr(_bOldVisible), uintptr(unsafe.Pointer(prcOldSrc)), uintptr(unsafe.Pointer(prcOldDest)), uintptr(_bNewVisible), uintptr(unsafe.Pointer(prcNewSrc)), uintptr(unsafe.Pointer(prcNewDest)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnUpdateColorKey dispatches through IDDrawExclModeVideoCallback's vtable slot 4.
 func (self *IDDrawExclModeVideoCallback) OnUpdateColorKey(pKey *COLORKEY, dwColor uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pKey)), uintptr(dwColor))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnUpdateSize dispatches through IDDrawExclModeVideoCallback's vtable slot 5.
 func (self *IDDrawExclModeVideoCallback) OnUpdateSize(dwWidth uint32, dwHeight uint32, dwARWidth uint32, dwARHeight uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwWidth), uintptr(dwHeight), uintptr(dwARWidth), uintptr(dwARHeight))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDMOWrapperFilter: https://learn.microsoft.com/windows/win32/api/dmodshow/nn-dmodshow-idmowrapperfilter
@@ -6044,7 +6044,7 @@ var IID_IDMOWrapperFilter = win32.GUID{Data1: 0x52d6f586, Data2: 0x9f0f, Data3: 
 // Init dispatches through IDMOWrapperFilter's vtable slot 3.
 func (self *IDMOWrapperFilter) Init(clsidDMO *win32.GUID, catDMO *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsidDMO)), uintptr(unsafe.Pointer(catDMO)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDShowPlugin: https://learn.microsoft.com/windows/win32/api/qnetwork/nn-qnetwork-idshowplugin
@@ -6059,13 +6059,13 @@ var IID_IDShowPlugin = win32.GUID{Data1: 0x4746b7c8, Data2: 0x700e, Data3: 0x11d
 // Get_URL dispatches through IDShowPlugin's vtable slot 3.
 func (self *IDShowPlugin) Get_URL(pURL *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pURL)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UserAgent dispatches through IDShowPlugin's vtable slot 4.
 func (self *IDShowPlugin) Get_UserAgent(pUserAgent *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUserAgent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDVEnc: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-idvenc
@@ -6080,13 +6080,13 @@ var IID_IDVEnc = win32.GUID{Data1: 0xd18e17a0, Data2: 0xaacb, Data3: 0x11d0, Dat
 // Get_IFormatResolution dispatches through IDVEnc's vtable slot 3.
 func (self *IDVEnc) Get_IFormatResolution(VideoFormat *int32, DVFormat *int32, Resolution *int32, fDVInfo byte, sDVInfo *DVINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(VideoFormat)), uintptr(unsafe.Pointer(DVFormat)), uintptr(unsafe.Pointer(Resolution)), uintptr(fDVInfo), uintptr(unsafe.Pointer(sDVInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_IFormatResolution dispatches through IDVEnc's vtable slot 4.
 func (self *IDVEnc) Put_IFormatResolution(VideoFormat int32, DVFormat int32, Resolution int32, fDVInfo byte, sDVInfo *DVINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(VideoFormat), uintptr(DVFormat), uintptr(Resolution), uintptr(fDVInfo), uintptr(unsafe.Pointer(sDVInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDVRGB219: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-idvrgb219
@@ -6102,7 +6102,7 @@ var IID_IDVRGB219 = win32.GUID{Data1: 0x58473a19, Data2: 0x2bc8, Data3: 0x4663, 
 func (self *IDVRGB219) SetRGB219(bState bool) error {
 	_bState := win32.Bool32(bState)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(_bState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDVSplitter: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-idvsplitter
@@ -6117,7 +6117,7 @@ var IID_IDVSplitter = win32.GUID{Data1: 0x92a3a302, Data2: 0xda7c, Data3: 0x4a1f
 // DiscardAlternateVideoFrames dispatches through IDVSplitter's vtable slot 3.
 func (self *IDVSplitter) DiscardAlternateVideoFrames(nDiscard int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(nDiscard))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDecimateVideoImage: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-idecimatevideoimage
@@ -6132,13 +6132,13 @@ var IID_IDecimateVideoImage = win32.GUID{Data1: 0x2e5ea3e0, Data2: 0xe924, Data3
 // SetDecimationImageSize dispatches through IDecimateVideoImage's vtable slot 3.
 func (self *IDecimateVideoImage) SetDecimationImageSize(lWidth int32, lHeight int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lWidth), uintptr(lHeight))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ResetDecimationImageSize dispatches through IDecimateVideoImage's vtable slot 4.
 func (self *IDecimateVideoImage) ResetDecimationImageSize() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDeferredCommand: https://learn.microsoft.com/windows/win32/api/control/nn-control-ideferredcommand
@@ -6153,19 +6153,19 @@ var IID_IDeferredCommand = win32.GUID{Data1: 0x56a868b8, Data2: 0x0ad4, Data3: 0
 // Cancel dispatches through IDeferredCommand's vtable slot 3.
 func (self *IDeferredCommand) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Confidence dispatches through IDeferredCommand's vtable slot 4.
 func (self *IDeferredCommand) Confidence(pConfidence *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pConfidence)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetHResult dispatches through IDeferredCommand's vtable slot 6.
 func (self *IDeferredCommand) GetHResult(phrResult *foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phrResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDirectDrawMediaSample: https://learn.microsoft.com/windows/win32/api/amstream/nn-amstream-idirectdrawmediasample
@@ -6180,13 +6180,13 @@ var IID_IDirectDrawMediaSample = win32.GUID{Data1: 0xab6b4afe, Data2: 0xf6e4, Da
 // GetSurfaceAndReleaseLock dispatches through IDirectDrawMediaSample's vtable slot 3.
 func (self *IDirectDrawMediaSample) GetSurfaceAndReleaseLock(ppDirectDrawSurface **graphicsdirectdraw.IDirectDrawSurface, pRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDirectDrawSurface)), uintptr(unsafe.Pointer(pRect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LockMediaSamplePointer dispatches through IDirectDrawMediaSample's vtable slot 4.
 func (self *IDirectDrawMediaSample) LockMediaSamplePointer() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDirectDrawMediaSampleAllocator: https://learn.microsoft.com/windows/win32/api/amstream/nn-amstream-idirectdrawmediasampleallocator
@@ -6201,7 +6201,7 @@ var IID_IDirectDrawMediaSampleAllocator = win32.GUID{Data1: 0xab6b4afc, Data2: 0
 // GetDirectDraw dispatches through IDirectDrawMediaSampleAllocator's vtable slot 3.
 func (self *IDirectDrawMediaSampleAllocator) GetDirectDraw(ppDirectDraw **graphicsdirectdraw.IDirectDraw) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDirectDraw)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDirectDrawMediaStream: https://learn.microsoft.com/windows/win32/api/ddstream/nn-ddstream-idirectdrawmediastream
@@ -6216,37 +6216,37 @@ var IID_IDirectDrawMediaStream = win32.GUID{Data1: 0xf4104fce, Data2: 0x9a70, Da
 // GetFormat dispatches through IDirectDrawMediaStream's vtable slot 9.
 func (self *IDirectDrawMediaStream) GetFormat(pDDSDCurrent *graphicsdirectdraw.DDSURFACEDESC, ppDirectDrawPalette **graphicsdirectdraw.IDirectDrawPalette, pDDSDDesired *graphicsdirectdraw.DDSURFACEDESC, pdwFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDDSDCurrent)), uintptr(unsafe.Pointer(ppDirectDrawPalette)), uintptr(unsafe.Pointer(pDDSDDesired)), uintptr(unsafe.Pointer(pdwFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetFormat dispatches through IDirectDrawMediaStream's vtable slot 10.
 func (self *IDirectDrawMediaStream) SetFormat(pDDSurfaceDesc *graphicsdirectdraw.DDSURFACEDESC, pDirectDrawPalette *graphicsdirectdraw.IDirectDrawPalette) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDDSurfaceDesc)), uintptr(unsafe.Pointer(pDirectDrawPalette)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDirectDraw dispatches through IDirectDrawMediaStream's vtable slot 11.
 func (self *IDirectDrawMediaStream) GetDirectDraw(ppDirectDraw **graphicsdirectdraw.IDirectDraw) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDirectDraw)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDirectDraw dispatches through IDirectDrawMediaStream's vtable slot 12.
 func (self *IDirectDrawMediaStream) SetDirectDraw(pDirectDraw *graphicsdirectdraw.IDirectDraw) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDirectDraw)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSample dispatches through IDirectDrawMediaStream's vtable slot 13.
 func (self *IDirectDrawMediaStream) CreateSample(pSurface *graphicsdirectdraw.IDirectDrawSurface, pRect *foundation.RECT, dwFlags uint32, ppSample **IDirectDrawStreamSample) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSurface)), uintptr(unsafe.Pointer(pRect)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppSample)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTimePerFrame dispatches through IDirectDrawMediaStream's vtable slot 14.
 func (self *IDirectDrawMediaStream) GetTimePerFrame(pFrameTime *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFrameTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDirectDrawStreamSample: https://learn.microsoft.com/windows/win32/api/ddstream/nn-ddstream-idirectdrawstreamsample
@@ -6261,13 +6261,13 @@ var IID_IDirectDrawStreamSample = win32.GUID{Data1: 0xf4104fcf, Data2: 0x9a70, D
 // GetSurface dispatches through IDirectDrawStreamSample's vtable slot 8.
 func (self *IDirectDrawStreamSample) GetSurface(ppDirectDrawSurface **graphicsdirectdraw.IDirectDrawSurface, pRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDirectDrawSurface)), uintptr(unsafe.Pointer(pRect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetRect dispatches through IDirectDrawStreamSample's vtable slot 9.
 func (self *IDirectDrawStreamSample) SetRect(pRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDirectDrawVideo: https://learn.microsoft.com/windows/win32/api/amvideo/nn-amvideo-idirectdrawvideo
@@ -6282,97 +6282,97 @@ var IID_IDirectDrawVideo = win32.GUID{Data1: 0x36d39eb0, Data2: 0xdd75, Data3: 0
 // GetSwitches dispatches through IDirectDrawVideo's vtable slot 3.
 func (self *IDirectDrawVideo) GetSwitches(pSwitches *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSwitches)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetSwitches dispatches through IDirectDrawVideo's vtable slot 4.
 func (self *IDirectDrawVideo) SetSwitches(Switches uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Switches))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCaps dispatches through IDirectDrawVideo's vtable slot 5.
 func (self *IDirectDrawVideo) GetCaps(pCaps *graphicsdirectdraw.DDCAPS_DX7) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCaps)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEmulatedCaps dispatches through IDirectDrawVideo's vtable slot 6.
 func (self *IDirectDrawVideo) GetEmulatedCaps(pCaps *graphicsdirectdraw.DDCAPS_DX7) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCaps)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSurfaceDesc dispatches through IDirectDrawVideo's vtable slot 7.
 func (self *IDirectDrawVideo) GetSurfaceDesc(pSurfaceDesc *graphicsdirectdraw.DDSURFACEDESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSurfaceDesc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFourCCCodes dispatches through IDirectDrawVideo's vtable slot 8.
 func (self *IDirectDrawVideo) GetFourCCCodes(pCount *uint32, pCodes *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)), uintptr(unsafe.Pointer(pCodes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDirectDraw dispatches through IDirectDrawVideo's vtable slot 9.
 func (self *IDirectDrawVideo) SetDirectDraw(pDirectDraw *graphicsdirectdraw.IDirectDraw) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDirectDraw)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDirectDraw dispatches through IDirectDrawVideo's vtable slot 10.
 func (self *IDirectDrawVideo) GetDirectDraw(ppDirectDraw **graphicsdirectdraw.IDirectDraw) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDirectDraw)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSurfaceType dispatches through IDirectDrawVideo's vtable slot 11.
 func (self *IDirectDrawVideo) GetSurfaceType(pSurfaceType *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSurfaceType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDefault dispatches through IDirectDrawVideo's vtable slot 12.
 func (self *IDirectDrawVideo) SetDefault() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UseScanLine dispatches through IDirectDrawVideo's vtable slot 13.
 func (self *IDirectDrawVideo) UseScanLine(UseScanLine int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(UseScanLine))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CanUseScanLine dispatches through IDirectDrawVideo's vtable slot 14.
 func (self *IDirectDrawVideo) CanUseScanLine(UseScanLine *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(UseScanLine)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UseOverlayStretch dispatches through IDirectDrawVideo's vtable slot 15.
 func (self *IDirectDrawVideo) UseOverlayStretch(UseOverlayStretch int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(UseOverlayStretch))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CanUseOverlayStretch dispatches through IDirectDrawVideo's vtable slot 16.
 func (self *IDirectDrawVideo) CanUseOverlayStretch(UseOverlayStretch *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(UseOverlayStretch)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UseWhenFullScreen dispatches through IDirectDrawVideo's vtable slot 17.
 func (self *IDirectDrawVideo) UseWhenFullScreen(UseWhenFullScreen int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(UseWhenFullScreen))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WillUseFullScreen dispatches through IDirectDrawVideo's vtable slot 18.
 func (self *IDirectDrawVideo) WillUseFullScreen(UseWhenFullScreen *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(UseWhenFullScreen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDistributorNotify: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-idistributornotify
@@ -6387,31 +6387,31 @@ var IID_IDistributorNotify = win32.GUID{Data1: 0x56a868af, Data2: 0x0ad4, Data3:
 // Stop dispatches through IDistributorNotify's vtable slot 3.
 func (self *IDistributorNotify) Stop() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Pause dispatches through IDistributorNotify's vtable slot 4.
 func (self *IDistributorNotify) Pause() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Run dispatches through IDistributorNotify's vtable slot 5.
 func (self *IDistributorNotify) Run(tStart int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(tStart))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetSyncSource dispatches through IDistributorNotify's vtable slot 6.
 func (self *IDistributorNotify) SetSyncSource(pClock *media.IReferenceClock) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pClock)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NotifyGraphChange dispatches through IDistributorNotify's vtable slot 7.
 func (self *IDistributorNotify) NotifyGraphChange() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDrawVideoImage: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-idrawvideoimage
@@ -6426,19 +6426,19 @@ var IID_IDrawVideoImage = win32.GUID{Data1: 0x48efb120, Data2: 0xab49, Data3: 0x
 // DrawVideoImageBegin dispatches through IDrawVideoImage's vtable slot 3.
 func (self *IDrawVideoImage) DrawVideoImageBegin() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrawVideoImageEnd dispatches through IDrawVideoImage's vtable slot 4.
 func (self *IDrawVideoImage) DrawVideoImageEnd() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrawVideoImageDraw dispatches through IDrawVideoImage's vtable slot 5.
 func (self *IDrawVideoImage) DrawVideoImageDraw(hdc graphicsgdi.HDC, lprcSrc *foundation.RECT, lprcDst *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hdc), uintptr(unsafe.Pointer(lprcSrc)), uintptr(unsafe.Pointer(lprcDst)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDvdCmd: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-idvdcmd
@@ -6453,13 +6453,13 @@ var IID_IDvdCmd = win32.GUID{Data1: 0x5a4a97e4, Data2: 0x94ee, Data3: 0x4a55, Da
 // WaitForStart dispatches through IDvdCmd's vtable slot 3.
 func (self *IDvdCmd) WaitForStart() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WaitForEnd dispatches through IDvdCmd's vtable slot 4.
 func (self *IDvdCmd) WaitForEnd() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDvdControl: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-idvdcontrol
@@ -6474,189 +6474,189 @@ var IID_IDvdControl = win32.GUID{Data1: 0xa70efe61, Data2: 0xe2a3, Data3: 0x11d0
 // TitlePlay dispatches through IDvdControl's vtable slot 3.
 func (self *IDvdControl) TitlePlay(ulTitle uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulTitle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ChapterPlay dispatches through IDvdControl's vtable slot 4.
 func (self *IDvdControl) ChapterPlay(ulTitle uint32, ulChapter uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulTitle), uintptr(ulChapter))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TimePlay dispatches through IDvdControl's vtable slot 5.
 func (self *IDvdControl) TimePlay(ulTitle uint32, bcdTime uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(ulTitle), uintptr(bcdTime))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StopForResume dispatches through IDvdControl's vtable slot 6.
 func (self *IDvdControl) StopForResume() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GoUp dispatches through IDvdControl's vtable slot 7.
 func (self *IDvdControl) GoUp() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TimeSearch dispatches through IDvdControl's vtable slot 8.
 func (self *IDvdControl) TimeSearch(bcdTime uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(bcdTime))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ChapterSearch dispatches through IDvdControl's vtable slot 9.
 func (self *IDvdControl) ChapterSearch(ulChapter uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(ulChapter))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PrevPGSearch dispatches through IDvdControl's vtable slot 10.
 func (self *IDvdControl) PrevPGSearch() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TopPGSearch dispatches through IDvdControl's vtable slot 11.
 func (self *IDvdControl) TopPGSearch() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NextPGSearch dispatches through IDvdControl's vtable slot 12.
 func (self *IDvdControl) NextPGSearch() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MenuCall dispatches through IDvdControl's vtable slot 15.
 func (self *IDvdControl) MenuCall(MenuID DVD_MENU_ID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(MenuID))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Resume dispatches through IDvdControl's vtable slot 16.
 func (self *IDvdControl) Resume() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UpperButtonSelect dispatches through IDvdControl's vtable slot 17.
 func (self *IDvdControl) UpperButtonSelect() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LowerButtonSelect dispatches through IDvdControl's vtable slot 18.
 func (self *IDvdControl) LowerButtonSelect() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LeftButtonSelect dispatches through IDvdControl's vtable slot 19.
 func (self *IDvdControl) LeftButtonSelect() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RightButtonSelect dispatches through IDvdControl's vtable slot 20.
 func (self *IDvdControl) RightButtonSelect() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ButtonActivate dispatches through IDvdControl's vtable slot 21.
 func (self *IDvdControl) ButtonActivate() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ButtonSelectAndActivate dispatches through IDvdControl's vtable slot 22.
 func (self *IDvdControl) ButtonSelectAndActivate(ulButton uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(ulButton))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StillOff dispatches through IDvdControl's vtable slot 23.
 func (self *IDvdControl) StillOff() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PauseOn dispatches through IDvdControl's vtable slot 24.
 func (self *IDvdControl) PauseOn() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PauseOff dispatches through IDvdControl's vtable slot 25.
 func (self *IDvdControl) PauseOff() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MenuLanguageSelect dispatches through IDvdControl's vtable slot 26.
 func (self *IDvdControl) MenuLanguageSelect(Language uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(Language))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AudioStreamChange dispatches through IDvdControl's vtable slot 27.
 func (self *IDvdControl) AudioStreamChange(ulAudio uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(ulAudio))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SubpictureStreamChange dispatches through IDvdControl's vtable slot 28.
 func (self *IDvdControl) SubpictureStreamChange(ulSubPicture uint32, bDisplay bool) error {
 	_bDisplay := win32.Bool32(bDisplay)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(ulSubPicture), uintptr(_bDisplay))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AngleChange dispatches through IDvdControl's vtable slot 29.
 func (self *IDvdControl) AngleChange(ulAngle uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(ulAngle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ParentalLevelSelect dispatches through IDvdControl's vtable slot 30.
 func (self *IDvdControl) ParentalLevelSelect(ulParentalLevel uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(ulParentalLevel))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ParentalCountrySelect dispatches through IDvdControl's vtable slot 31.
 func (self *IDvdControl) ParentalCountrySelect(wCountry uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(wCountry))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KaraokeAudioPresentationModeChange dispatches through IDvdControl's vtable slot 32.
 func (self *IDvdControl) KaraokeAudioPresentationModeChange(ulMode uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(ulMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // VideoModePreferrence dispatches through IDvdControl's vtable slot 33.
 func (self *IDvdControl) VideoModePreferrence(ulPreferredDisplayMode uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(ulPreferredDisplayMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetRoot dispatches through IDvdControl's vtable slot 34.
 func (self *IDvdControl) SetRoot(pszPath string) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ChapterPlayAutoStop dispatches through IDvdControl's vtable slot 37.
 func (self *IDvdControl) ChapterPlayAutoStop(ulTitle uint32, ulChapter uint32, ulChaptersToPlay uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(ulTitle), uintptr(ulChapter), uintptr(ulChaptersToPlay))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDvdControl2: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-idvdcontrol2
@@ -6671,222 +6671,222 @@ var IID_IDvdControl2 = win32.GUID{Data1: 0x33bc7430, Data2: 0xeec0, Data3: 0x11d
 // PlayTitle dispatches through IDvdControl2's vtable slot 3.
 func (self *IDvdControl2) PlayTitle(ulTitle uint32, dwFlags uint32, ppCmd **IDvdCmd) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulTitle), uintptr(dwFlags), uintptr(unsafe.Pointer(ppCmd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PlayChapterInTitle dispatches through IDvdControl2's vtable slot 4.
 func (self *IDvdControl2) PlayChapterInTitle(ulTitle uint32, ulChapter uint32, dwFlags uint32, ppCmd **IDvdCmd) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulTitle), uintptr(ulChapter), uintptr(dwFlags), uintptr(unsafe.Pointer(ppCmd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PlayAtTimeInTitle dispatches through IDvdControl2's vtable slot 5.
 func (self *IDvdControl2) PlayAtTimeInTitle(ulTitle uint32, pStartTime *DVD_HMSF_TIMECODE, dwFlags uint32, ppCmd **IDvdCmd) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(ulTitle), uintptr(unsafe.Pointer(pStartTime)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppCmd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Stop dispatches through IDvdControl2's vtable slot 6.
 func (self *IDvdControl2) Stop() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReturnFromSubmenu dispatches through IDvdControl2's vtable slot 7.
 func (self *IDvdControl2) ReturnFromSubmenu(dwFlags uint32, ppCmd **IDvdCmd) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppCmd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PlayAtTime dispatches through IDvdControl2's vtable slot 8.
 func (self *IDvdControl2) PlayAtTime(pTime *DVD_HMSF_TIMECODE, dwFlags uint32, ppCmd **IDvdCmd) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTime)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppCmd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PlayChapter dispatches through IDvdControl2's vtable slot 9.
 func (self *IDvdControl2) PlayChapter(ulChapter uint32, dwFlags uint32, ppCmd **IDvdCmd) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(ulChapter), uintptr(dwFlags), uintptr(unsafe.Pointer(ppCmd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PlayPrevChapter dispatches through IDvdControl2's vtable slot 10.
 func (self *IDvdControl2) PlayPrevChapter(dwFlags uint32, ppCmd **IDvdCmd) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppCmd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReplayChapter dispatches through IDvdControl2's vtable slot 11.
 func (self *IDvdControl2) ReplayChapter(dwFlags uint32, ppCmd **IDvdCmd) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppCmd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PlayNextChapter dispatches through IDvdControl2's vtable slot 12.
 func (self *IDvdControl2) PlayNextChapter(dwFlags uint32, ppCmd **IDvdCmd) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppCmd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ShowMenu dispatches through IDvdControl2's vtable slot 15.
 func (self *IDvdControl2) ShowMenu(MenuID DVD_MENU_ID, dwFlags uint32, ppCmd **IDvdCmd) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(MenuID), uintptr(dwFlags), uintptr(unsafe.Pointer(ppCmd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Resume dispatches through IDvdControl2's vtable slot 16.
 func (self *IDvdControl2) Resume(dwFlags uint32, ppCmd **IDvdCmd) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppCmd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SelectRelativeButton dispatches through IDvdControl2's vtable slot 17.
 func (self *IDvdControl2) SelectRelativeButton(buttonDir DVD_RELATIVE_BUTTON) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(buttonDir))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ActivateButton dispatches through IDvdControl2's vtable slot 18.
 func (self *IDvdControl2) ActivateButton() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SelectButton dispatches through IDvdControl2's vtable slot 19.
 func (self *IDvdControl2) SelectButton(ulButton uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(ulButton))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SelectAndActivateButton dispatches through IDvdControl2's vtable slot 20.
 func (self *IDvdControl2) SelectAndActivateButton(ulButton uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(ulButton))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StillOff dispatches through IDvdControl2's vtable slot 21.
 func (self *IDvdControl2) StillOff() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Pause dispatches through IDvdControl2's vtable slot 22.
 func (self *IDvdControl2) Pause(bState bool) error {
 	_bState := win32.Bool32(bState)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(_bState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SelectAudioStream dispatches through IDvdControl2's vtable slot 23.
 func (self *IDvdControl2) SelectAudioStream(ulAudio uint32, dwFlags uint32, ppCmd **IDvdCmd) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(ulAudio), uintptr(dwFlags), uintptr(unsafe.Pointer(ppCmd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SelectSubpictureStream dispatches through IDvdControl2's vtable slot 24.
 func (self *IDvdControl2) SelectSubpictureStream(ulSubPicture uint32, dwFlags uint32, ppCmd **IDvdCmd) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(ulSubPicture), uintptr(dwFlags), uintptr(unsafe.Pointer(ppCmd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetSubpictureState dispatches through IDvdControl2's vtable slot 25.
 func (self *IDvdControl2) SetSubpictureState(bState bool, dwFlags uint32, ppCmd **IDvdCmd) error {
 	_bState := win32.Bool32(bState)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(_bState), uintptr(dwFlags), uintptr(unsafe.Pointer(ppCmd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SelectAngle dispatches through IDvdControl2's vtable slot 26.
 func (self *IDvdControl2) SelectAngle(ulAngle uint32, dwFlags uint32, ppCmd **IDvdCmd) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(ulAngle), uintptr(dwFlags), uintptr(unsafe.Pointer(ppCmd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SelectParentalLevel dispatches through IDvdControl2's vtable slot 27.
 func (self *IDvdControl2) SelectParentalLevel(ulParentalLevel uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(ulParentalLevel))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SelectParentalCountry dispatches through IDvdControl2's vtable slot 28.
 func (self *IDvdControl2) SelectParentalCountry(bCountry *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bCountry)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SelectKaraokeAudioPresentationMode dispatches through IDvdControl2's vtable slot 29.
 func (self *IDvdControl2) SelectKaraokeAudioPresentationMode(ulMode uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(ulMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SelectVideoModePreference dispatches through IDvdControl2's vtable slot 30.
 func (self *IDvdControl2) SelectVideoModePreference(ulPreferredDisplayMode uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(ulPreferredDisplayMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDVDDirectory dispatches through IDvdControl2's vtable slot 31.
 func (self *IDvdControl2) SetDVDDirectory(pszwPath string) error {
 	_pszwPath := win32.UTF16Ptr(pszwPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszwPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PlayChaptersAutoStop dispatches through IDvdControl2's vtable slot 34.
 func (self *IDvdControl2) PlayChaptersAutoStop(ulTitle uint32, ulChapter uint32, ulChaptersToPlay uint32, dwFlags uint32, ppCmd **IDvdCmd) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(ulTitle), uintptr(ulChapter), uintptr(ulChaptersToPlay), uintptr(dwFlags), uintptr(unsafe.Pointer(ppCmd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AcceptParentalLevelChange dispatches through IDvdControl2's vtable slot 35.
 func (self *IDvdControl2) AcceptParentalLevelChange(bAccept bool) error {
 	_bAccept := win32.Bool32(bAccept)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(_bAccept))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetOption dispatches through IDvdControl2's vtable slot 36.
 func (self *IDvdControl2) SetOption(flag DVD_OPTION_FLAG, fState bool) error {
 	_fState := win32.Bool32(fState)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(flag), uintptr(_fState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetState dispatches through IDvdControl2's vtable slot 37.
 func (self *IDvdControl2) SetState(pState *IDvdState, dwFlags uint32, ppCmd **IDvdCmd) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pState)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppCmd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PlayPeriodInTitleAutoStop dispatches through IDvdControl2's vtable slot 38.
 func (self *IDvdControl2) PlayPeriodInTitleAutoStop(ulTitle uint32, pStartTime *DVD_HMSF_TIMECODE, pEndTime *DVD_HMSF_TIMECODE, dwFlags uint32, ppCmd **IDvdCmd) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(ulTitle), uintptr(unsafe.Pointer(pStartTime)), uintptr(unsafe.Pointer(pEndTime)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppCmd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetGPRM dispatches through IDvdControl2's vtable slot 39.
 func (self *IDvdControl2) SetGPRM(ulIndex uint32, wValue uint16, dwFlags uint32, ppCmd **IDvdCmd) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(ulIndex), uintptr(wValue), uintptr(dwFlags), uintptr(unsafe.Pointer(ppCmd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SelectDefaultMenuLanguage dispatches through IDvdControl2's vtable slot 40.
 func (self *IDvdControl2) SelectDefaultMenuLanguage(Language uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(Language))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SelectDefaultAudioLanguage dispatches through IDvdControl2's vtable slot 41.
 func (self *IDvdControl2) SelectDefaultAudioLanguage(Language uint32, audioExtension DVD_AUDIO_LANG_EXT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(Language), uintptr(audioExtension))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SelectDefaultSubpictureLanguage dispatches through IDvdControl2's vtable slot 42.
 func (self *IDvdControl2) SelectDefaultSubpictureLanguage(Language uint32, subpictureExtension DVD_SUBPICTURE_LANG_EXT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(Language), uintptr(subpictureExtension))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDvdGraphBuilder: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-idvdgraphbuilder
@@ -6901,20 +6901,20 @@ var IID_IDvdGraphBuilder = win32.GUID{Data1: 0xfcc152b6, Data2: 0xf372, Data3: 0
 // GetFiltergraph dispatches through IDvdGraphBuilder's vtable slot 3.
 func (self *IDvdGraphBuilder) GetFiltergraph(ppGB **IGraphBuilder) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppGB)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDvdInterface dispatches through IDvdGraphBuilder's vtable slot 4.
 func (self *IDvdGraphBuilder) GetDvdInterface(riid *win32.GUID, ppvIF **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvIF)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RenderDvdVideoVolume dispatches through IDvdGraphBuilder's vtable slot 5.
 func (self *IDvdGraphBuilder) RenderDvdVideoVolume(lpcwszPathName string, dwFlags uint32, pStatus *AM_DVD_RENDERSTATUS) error {
 	_lpcwszPathName := win32.UTF16Ptr(lpcwszPathName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpcwszPathName)), uintptr(dwFlags), uintptr(unsafe.Pointer(pStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDvdInfo: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-idvdinfo
@@ -6929,109 +6929,109 @@ var IID_IDvdInfo = win32.GUID{Data1: 0xa70efe60, Data2: 0xe2a3, Data3: 0x11d0, D
 // GetCurrentDomain dispatches through IDvdInfo's vtable slot 3.
 func (self *IDvdInfo) GetCurrentDomain(pDomain *DVD_DOMAIN) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDomain)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentLocation dispatches through IDvdInfo's vtable slot 4.
 func (self *IDvdInfo) GetCurrentLocation(pLocation *DVD_PLAYBACK_LOCATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLocation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTotalTitleTime dispatches through IDvdInfo's vtable slot 5.
 func (self *IDvdInfo) GetTotalTitleTime(pulTotalTime *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulTotalTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentButton dispatches through IDvdInfo's vtable slot 6.
 func (self *IDvdInfo) GetCurrentButton(pulButtonsAvailable *uint32, pulCurrentButton *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulButtonsAvailable)), uintptr(unsafe.Pointer(pulCurrentButton)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentAngle dispatches through IDvdInfo's vtable slot 7.
 func (self *IDvdInfo) GetCurrentAngle(pulAnglesAvailable *uint32, pulCurrentAngle *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulAnglesAvailable)), uintptr(unsafe.Pointer(pulCurrentAngle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentAudio dispatches through IDvdInfo's vtable slot 8.
 func (self *IDvdInfo) GetCurrentAudio(pulStreamsAvailable *uint32, pulCurrentStream *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulStreamsAvailable)), uintptr(unsafe.Pointer(pulCurrentStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentSubpicture dispatches through IDvdInfo's vtable slot 9.
 func (self *IDvdInfo) GetCurrentSubpicture(pulStreamsAvailable *uint32, pulCurrentStream *uint32, pIsDisabled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulStreamsAvailable)), uintptr(unsafe.Pointer(pulCurrentStream)), uintptr(unsafe.Pointer(pIsDisabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentUOPS dispatches through IDvdInfo's vtable slot 10.
 func (self *IDvdInfo) GetCurrentUOPS(pUOP *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUOP)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAllSPRMs dispatches through IDvdInfo's vtable slot 11.
 func (self *IDvdInfo) GetAllSPRMs(pRegisterArray **uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRegisterArray)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAllGPRMs dispatches through IDvdInfo's vtable slot 12.
 func (self *IDvdInfo) GetAllGPRMs(pRegisterArray **uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRegisterArray)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAudioLanguage dispatches through IDvdInfo's vtable slot 13.
 func (self *IDvdInfo) GetAudioLanguage(ulStream uint32, pLanguage *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(ulStream), uintptr(unsafe.Pointer(pLanguage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSubpictureLanguage dispatches through IDvdInfo's vtable slot 14.
 func (self *IDvdInfo) GetSubpictureLanguage(ulStream uint32, pLanguage *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(ulStream), uintptr(unsafe.Pointer(pLanguage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTitleAttributes dispatches through IDvdInfo's vtable slot 15.
 func (self *IDvdInfo) GetTitleAttributes(ulTitle uint32, pATR *DVD_ATR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(ulTitle), uintptr(unsafe.Pointer(pATR)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetVMGAttributes dispatches through IDvdInfo's vtable slot 16.
 func (self *IDvdInfo) GetVMGAttributes(pATR *DVD_ATR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pATR)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentVideoAttributes dispatches through IDvdInfo's vtable slot 17.
 func (self *IDvdInfo) GetCurrentVideoAttributes(pATR **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pATR)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentAudioAttributes dispatches through IDvdInfo's vtable slot 18.
 func (self *IDvdInfo) GetCurrentAudioAttributes(pATR **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pATR)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentSubpictureAttributes dispatches through IDvdInfo's vtable slot 19.
 func (self *IDvdInfo) GetCurrentSubpictureAttributes(pATR **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pATR)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentVolumeInfo dispatches through IDvdInfo's vtable slot 20.
 func (self *IDvdInfo) GetCurrentVolumeInfo(pulNumOfVol *uint32, pulThisVolNum *uint32, pSide *DVD_DISC_SIDE, pulNumOfTitles *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulNumOfVol)), uintptr(unsafe.Pointer(pulThisVolNum)), uintptr(unsafe.Pointer(pSide)), uintptr(unsafe.Pointer(pulNumOfTitles)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDVDTextInfo dispatches through IDvdInfo's vtable slot 21.
@@ -7041,31 +7041,31 @@ func (self *IDvdInfo) GetDVDTextInfo(pTextManager []byte, pulActualSize *uint32)
 		_pTextManager = &pTextManager[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pTextManager)), uintptr(len(pTextManager)), uintptr(unsafe.Pointer(pulActualSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPlayerParentalLevel dispatches through IDvdInfo's vtable slot 22.
 func (self *IDvdInfo) GetPlayerParentalLevel(pulParentalLevel *uint32, pulCountryCode *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulParentalLevel)), uintptr(unsafe.Pointer(pulCountryCode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNumberOfChapters dispatches through IDvdInfo's vtable slot 23.
 func (self *IDvdInfo) GetNumberOfChapters(ulTitle uint32, pulNumberOfChapters *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(ulTitle), uintptr(unsafe.Pointer(pulNumberOfChapters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTitleParentalLevels dispatches through IDvdInfo's vtable slot 24.
 func (self *IDvdInfo) GetTitleParentalLevels(ulTitle uint32, pulParentalLevels *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(ulTitle), uintptr(unsafe.Pointer(pulParentalLevels)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRoot dispatches through IDvdInfo's vtable slot 25.
 func (self *IDvdInfo) GetRoot(pRoot foundation.PSTR, ulBufSize uint32, pulActualSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRoot)), uintptr(ulBufSize), uintptr(unsafe.Pointer(pulActualSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDvdInfo2: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-idvdinfo2
@@ -7080,230 +7080,230 @@ var IID_IDvdInfo2 = win32.GUID{Data1: 0x34151510, Data2: 0xeec0, Data3: 0x11d2, 
 // GetCurrentDomain dispatches through IDvdInfo2's vtable slot 3.
 func (self *IDvdInfo2) GetCurrentDomain(pDomain *DVD_DOMAIN) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDomain)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentLocation dispatches through IDvdInfo2's vtable slot 4.
 func (self *IDvdInfo2) GetCurrentLocation(pLocation *DVD_PLAYBACK_LOCATION2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLocation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTotalTitleTime dispatches through IDvdInfo2's vtable slot 5.
 func (self *IDvdInfo2) GetTotalTitleTime(pTotalTime *DVD_HMSF_TIMECODE, ulTimeCodeFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTotalTime)), uintptr(unsafe.Pointer(ulTimeCodeFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentButton dispatches through IDvdInfo2's vtable slot 6.
 func (self *IDvdInfo2) GetCurrentButton(pulButtonsAvailable *uint32, pulCurrentButton *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulButtonsAvailable)), uintptr(unsafe.Pointer(pulCurrentButton)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentAngle dispatches through IDvdInfo2's vtable slot 7.
 func (self *IDvdInfo2) GetCurrentAngle(pulAnglesAvailable *uint32, pulCurrentAngle *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulAnglesAvailable)), uintptr(unsafe.Pointer(pulCurrentAngle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentAudio dispatches through IDvdInfo2's vtable slot 8.
 func (self *IDvdInfo2) GetCurrentAudio(pulStreamsAvailable *uint32, pulCurrentStream *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulStreamsAvailable)), uintptr(unsafe.Pointer(pulCurrentStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentSubpicture dispatches through IDvdInfo2's vtable slot 9.
 func (self *IDvdInfo2) GetCurrentSubpicture(pulStreamsAvailable *uint32, pulCurrentStream *uint32, pbIsDisabled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulStreamsAvailable)), uintptr(unsafe.Pointer(pulCurrentStream)), uintptr(unsafe.Pointer(pbIsDisabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentUOPS dispatches through IDvdInfo2's vtable slot 10.
 func (self *IDvdInfo2) GetCurrentUOPS(pulUOPs *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulUOPs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAllSPRMs dispatches through IDvdInfo2's vtable slot 11.
 func (self *IDvdInfo2) GetAllSPRMs(pRegisterArray **uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRegisterArray)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAllGPRMs dispatches through IDvdInfo2's vtable slot 12.
 func (self *IDvdInfo2) GetAllGPRMs(pRegisterArray **uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRegisterArray)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAudioLanguage dispatches through IDvdInfo2's vtable slot 13.
 func (self *IDvdInfo2) GetAudioLanguage(ulStream uint32, pLanguage *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(ulStream), uintptr(unsafe.Pointer(pLanguage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSubpictureLanguage dispatches through IDvdInfo2's vtable slot 14.
 func (self *IDvdInfo2) GetSubpictureLanguage(ulStream uint32, pLanguage *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(ulStream), uintptr(unsafe.Pointer(pLanguage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTitleAttributes dispatches through IDvdInfo2's vtable slot 15.
 func (self *IDvdInfo2) GetTitleAttributes(ulTitle uint32, pMenu *DVD_MenuAttributes, pTitle *DVD_TitleAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(ulTitle), uintptr(unsafe.Pointer(pMenu)), uintptr(unsafe.Pointer(pTitle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetVMGAttributes dispatches through IDvdInfo2's vtable slot 16.
 func (self *IDvdInfo2) GetVMGAttributes(pATR *DVD_MenuAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pATR)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentVideoAttributes dispatches through IDvdInfo2's vtable slot 17.
 func (self *IDvdInfo2) GetCurrentVideoAttributes(pATR *DVD_VideoAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pATR)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAudioAttributes dispatches through IDvdInfo2's vtable slot 18.
 func (self *IDvdInfo2) GetAudioAttributes(ulStream uint32, pATR *DVD_AudioAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(ulStream), uintptr(unsafe.Pointer(pATR)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetKaraokeAttributes dispatches through IDvdInfo2's vtable slot 19.
 func (self *IDvdInfo2) GetKaraokeAttributes(ulStream uint32, pAttributes *DVD_KaraokeAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(ulStream), uintptr(unsafe.Pointer(pAttributes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSubpictureAttributes dispatches through IDvdInfo2's vtable slot 20.
 func (self *IDvdInfo2) GetSubpictureAttributes(ulStream uint32, pATR *DVD_SubpictureAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(ulStream), uintptr(unsafe.Pointer(pATR)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDVDVolumeInfo dispatches through IDvdInfo2's vtable slot 21.
 func (self *IDvdInfo2) GetDVDVolumeInfo(pulNumOfVolumes *uint32, pulVolume *uint32, pSide *DVD_DISC_SIDE, pulNumOfTitles *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulNumOfVolumes)), uintptr(unsafe.Pointer(pulVolume)), uintptr(unsafe.Pointer(pSide)), uintptr(unsafe.Pointer(pulNumOfTitles)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDVDTextNumberOfLanguages dispatches through IDvdInfo2's vtable slot 22.
 func (self *IDvdInfo2) GetDVDTextNumberOfLanguages(pulNumOfLangs *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulNumOfLangs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDVDTextLanguageInfo dispatches through IDvdInfo2's vtable slot 23.
 func (self *IDvdInfo2) GetDVDTextLanguageInfo(ulLangIndex uint32, pulNumOfStrings *uint32, pLangCode *uint32, pbCharacterSet *DVD_TextCharSet) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(ulLangIndex), uintptr(unsafe.Pointer(pulNumOfStrings)), uintptr(unsafe.Pointer(pLangCode)), uintptr(unsafe.Pointer(pbCharacterSet)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDVDTextStringAsNative dispatches through IDvdInfo2's vtable slot 24.
 func (self *IDvdInfo2) GetDVDTextStringAsNative(ulLangIndex uint32, ulStringIndex uint32, pbBuffer *byte, ulMaxBufferSize uint32, pulActualSize *uint32, pType *DVD_TextStringType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(ulLangIndex), uintptr(ulStringIndex), uintptr(unsafe.Pointer(pbBuffer)), uintptr(ulMaxBufferSize), uintptr(unsafe.Pointer(pulActualSize)), uintptr(unsafe.Pointer(pType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDVDTextStringAsUnicode dispatches through IDvdInfo2's vtable slot 25.
 func (self *IDvdInfo2) GetDVDTextStringAsUnicode(ulLangIndex uint32, ulStringIndex uint32, pchwBuffer foundation.PWSTR, ulMaxBufferSize uint32, pulActualSize *uint32, pType *DVD_TextStringType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(ulLangIndex), uintptr(ulStringIndex), uintptr(unsafe.Pointer(pchwBuffer)), uintptr(ulMaxBufferSize), uintptr(unsafe.Pointer(pulActualSize)), uintptr(unsafe.Pointer(pType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPlayerParentalLevel dispatches through IDvdInfo2's vtable slot 26.
 func (self *IDvdInfo2) GetPlayerParentalLevel(pulParentalLevel *uint32, pbCountryCode *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulParentalLevel)), uintptr(unsafe.Pointer(pbCountryCode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNumberOfChapters dispatches through IDvdInfo2's vtable slot 27.
 func (self *IDvdInfo2) GetNumberOfChapters(ulTitle uint32, pulNumOfChapters *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(ulTitle), uintptr(unsafe.Pointer(pulNumOfChapters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTitleParentalLevels dispatches through IDvdInfo2's vtable slot 28.
 func (self *IDvdInfo2) GetTitleParentalLevels(ulTitle uint32, pulParentalLevels *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(ulTitle), uintptr(unsafe.Pointer(pulParentalLevels)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDVDDirectory dispatches through IDvdInfo2's vtable slot 29.
 func (self *IDvdInfo2) GetDVDDirectory(pszwPath foundation.PWSTR, ulMaxSize uint32, pulActualSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszwPath)), uintptr(ulMaxSize), uintptr(unsafe.Pointer(pulActualSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsAudioStreamEnabled dispatches through IDvdInfo2's vtable slot 30.
 func (self *IDvdInfo2) IsAudioStreamEnabled(ulStreamNum uint32, pbEnabled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(ulStreamNum), uintptr(unsafe.Pointer(pbEnabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDiscID dispatches through IDvdInfo2's vtable slot 31.
 func (self *IDvdInfo2) GetDiscID(pszwPath string, pullDiscID *uint64) error {
 	_pszwPath := win32.UTF16Ptr(pszwPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszwPath)), uintptr(unsafe.Pointer(pullDiscID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetState dispatches through IDvdInfo2's vtable slot 32.
 func (self *IDvdInfo2) GetState(pStateData **IDvdState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStateData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMenuLanguages dispatches through IDvdInfo2's vtable slot 33.
 func (self *IDvdInfo2) GetMenuLanguages(pLanguages *uint32, ulMaxLanguages uint32, pulActualLanguages *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLanguages)), uintptr(ulMaxLanguages), uintptr(unsafe.Pointer(pulActualLanguages)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCmdFromEvent dispatches through IDvdInfo2's vtable slot 35.
 func (self *IDvdInfo2) GetCmdFromEvent(lParam1 uintptr, pCmdObj **IDvdCmd) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(lParam1), uintptr(unsafe.Pointer(pCmdObj)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDefaultMenuLanguage dispatches through IDvdInfo2's vtable slot 36.
 func (self *IDvdInfo2) GetDefaultMenuLanguage(pLanguage *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLanguage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDefaultAudioLanguage dispatches through IDvdInfo2's vtable slot 37.
 func (self *IDvdInfo2) GetDefaultAudioLanguage(pLanguage *uint32, pAudioExtension *DVD_AUDIO_LANG_EXT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLanguage)), uintptr(unsafe.Pointer(pAudioExtension)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDefaultSubpictureLanguage dispatches through IDvdInfo2's vtable slot 38.
 func (self *IDvdInfo2) GetDefaultSubpictureLanguage(pLanguage *uint32, pSubpictureExtension *DVD_SUBPICTURE_LANG_EXT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLanguage)), uintptr(unsafe.Pointer(pSubpictureExtension)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDecoderCaps dispatches through IDvdInfo2's vtable slot 39.
 func (self *IDvdInfo2) GetDecoderCaps(pCaps *DVD_DECODER_CAPS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCaps)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetButtonRect dispatches through IDvdInfo2's vtable slot 40.
 func (self *IDvdInfo2) GetButtonRect(ulButton uint32, pRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(ulButton), uintptr(unsafe.Pointer(pRect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsSubpictureStreamEnabled dispatches through IDvdInfo2's vtable slot 41.
 func (self *IDvdInfo2) IsSubpictureStreamEnabled(ulStreamNum uint32, pbEnabled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(ulStreamNum), uintptr(unsafe.Pointer(pbEnabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDvdState: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-idvdstate
@@ -7318,13 +7318,13 @@ var IID_IDvdState = win32.GUID{Data1: 0x86303d6d, Data2: 0x1c4a, Data3: 0x4087, 
 // GetDiscID dispatches through IDvdState's vtable slot 3.
 func (self *IDvdState) GetDiscID(pullUniqueID *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pullUniqueID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetParentalLevel dispatches through IDvdState's vtable slot 4.
 func (self *IDvdState) GetParentalLevel(pulParentalLevel *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulParentalLevel)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IESEvent: https://learn.microsoft.com/windows/win32/api/tuner/nn-tuner-iesevent
@@ -7340,34 +7340,34 @@ var IID_IESEvent = win32.GUID{Data1: 0x1f0e5357, Data2: 0xaf43, Data3: 0x44e6, D
 func (self *IESEvent) GetEventId() (uint32, error) {
 	var _pdwEventId uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pdwEventId)))
-	return _pdwEventId, win32.HRESULTError(int32(r1))
+	return _pdwEventId, win32.ErrIfFailed(int32(r1))
 }
 
 // GetEventType dispatches through IESEvent's vtable slot 4.
 func (self *IESEvent) GetEventType() (win32.GUID, error) {
 	var _pguidEventType win32.GUID
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pguidEventType)))
-	return _pguidEventType, win32.HRESULTError(int32(r1))
+	return _pguidEventType, win32.ErrIfFailed(int32(r1))
 }
 
 // SetCompletionStatus dispatches through IESEvent's vtable slot 5.
 func (self *IESEvent) SetCompletionStatus(dwResult uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwResult))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetData dispatches through IESEvent's vtable slot 6.
 func (self *IESEvent) GetData() (*systemcom.SAFEARRAY, error) {
 	var _pbData *systemcom.SAFEARRAY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbData)))
-	return _pbData, win32.HRESULTError(int32(r1))
+	return _pbData, win32.ErrIfFailed(int32(r1))
 }
 
 // GetStringData dispatches through IESEvent's vtable slot 7.
 func (self *IESEvent) GetStringData() (foundation.BSTR, error) {
 	var _pbstrData foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrData)))
-	return _pbstrData, win32.HRESULTError(int32(r1))
+	return _pbstrData, win32.ErrIfFailed(int32(r1))
 }
 
 // IESEvents: https://learn.microsoft.com/windows/win32/api/tuner/nn-tuner-iesevents
@@ -7391,43 +7391,43 @@ var IID_IEncoderAPI = win32.GUID{Data1: 0x70423839, Data2: 0x6acc, Data3: 0x4b23
 // IsSupported dispatches through IEncoderAPI's vtable slot 3.
 func (self *IEncoderAPI) IsSupported(Api *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Api)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsAvailable dispatches through IEncoderAPI's vtable slot 4.
 func (self *IEncoderAPI) IsAvailable(Api *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Api)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetParameterRange dispatches through IEncoderAPI's vtable slot 5.
 func (self *IEncoderAPI) GetParameterRange(Api *win32.GUID, ValueMin *systemvariant.VARIANT, ValueMax *systemvariant.VARIANT, SteppingDelta *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Api)), uintptr(unsafe.Pointer(ValueMin)), uintptr(unsafe.Pointer(ValueMax)), uintptr(unsafe.Pointer(SteppingDelta)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetParameterValues dispatches through IEncoderAPI's vtable slot 6.
 func (self *IEncoderAPI) GetParameterValues(Api *win32.GUID, Values **systemvariant.VARIANT, ValuesCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Api)), uintptr(unsafe.Pointer(Values)), uintptr(unsafe.Pointer(ValuesCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDefaultValue dispatches through IEncoderAPI's vtable slot 7.
 func (self *IEncoderAPI) GetDefaultValue(Api *win32.GUID, Value *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Api)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetValue dispatches through IEncoderAPI's vtable slot 8.
 func (self *IEncoderAPI) GetValue(Api *win32.GUID, Value *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Api)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetValue dispatches through IEncoderAPI's vtable slot 9.
 func (self *IEncoderAPI) SetValue(Api *win32.GUID, Value *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Api)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumFilters: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ienumfilters
@@ -7446,25 +7446,25 @@ func (self *IEnumFilters) Next(ppFilter []*IBaseFilter, pcFetched *uint32) error
 		_ppFilter = &ppFilter[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppFilter)), uintptr(unsafe.Pointer(_ppFilter)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumFilters's vtable slot 4.
 func (self *IEnumFilters) Skip(cFilters uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cFilters))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumFilters's vtable slot 5.
 func (self *IEnumFilters) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IEnumFilters's vtable slot 6.
 func (self *IEnumFilters) Clone(ppEnum **IEnumFilters) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumMediaTypes: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ienummediatypes
@@ -7483,25 +7483,25 @@ func (self *IEnumMediaTypes) Next(ppMediaTypes []*mediamediafoundation.AM_MEDIA_
 		_ppMediaTypes = &ppMediaTypes[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppMediaTypes)), uintptr(unsafe.Pointer(_ppMediaTypes)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumMediaTypes's vtable slot 4.
 func (self *IEnumMediaTypes) Skip(cMediaTypes uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cMediaTypes))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumMediaTypes's vtable slot 5.
 func (self *IEnumMediaTypes) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IEnumMediaTypes's vtable slot 6.
 func (self *IEnumMediaTypes) Clone(ppEnum **IEnumMediaTypes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumPIDMap: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ienumpidmap
@@ -7520,25 +7520,25 @@ func (self *IEnumPIDMap) Next(pPIDMap []PID_MAP, pcReceived *uint32) error {
 		_pPIDMap = &pPIDMap[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pPIDMap)), uintptr(unsafe.Pointer(_pPIDMap)), uintptr(unsafe.Pointer(pcReceived)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumPIDMap's vtable slot 4.
 func (self *IEnumPIDMap) Skip(cRecords uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cRecords))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumPIDMap's vtable slot 5.
 func (self *IEnumPIDMap) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IEnumPIDMap's vtable slot 6.
 func (self *IEnumPIDMap) Clone(ppIEnumPIDMap **IEnumPIDMap) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIEnumPIDMap)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumPins: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ienumpins
@@ -7557,25 +7557,25 @@ func (self *IEnumPins) Next(ppPins []*IPin, pcFetched *uint32) error {
 		_ppPins = &ppPins[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppPins)), uintptr(unsafe.Pointer(_ppPins)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumPins's vtable slot 4.
 func (self *IEnumPins) Skip(cPins uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cPins))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumPins's vtable slot 5.
 func (self *IEnumPins) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IEnumPins's vtable slot 6.
 func (self *IEnumPins) Clone(ppEnum **IEnumPins) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumRegFilters: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ienumregfilters
@@ -7594,25 +7594,25 @@ func (self *IEnumRegFilters) Next(apRegFilter []*REGFILTER, pcFetched *uint32) e
 		_apRegFilter = &apRegFilter[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(apRegFilter)), uintptr(unsafe.Pointer(_apRegFilter)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumRegFilters's vtable slot 4.
 func (self *IEnumRegFilters) Skip(cFilters uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cFilters))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumRegFilters's vtable slot 5.
 func (self *IEnumRegFilters) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IEnumRegFilters's vtable slot 6.
 func (self *IEnumRegFilters) Clone(ppEnum **IEnumRegFilters) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumStreamIdMap: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ienumstreamidmap
@@ -7631,25 +7631,25 @@ func (self *IEnumStreamIdMap) Next(pStreamIdMap []STREAM_ID_MAP, pcReceived *uin
 		_pStreamIdMap = &pStreamIdMap[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pStreamIdMap)), uintptr(unsafe.Pointer(_pStreamIdMap)), uintptr(unsafe.Pointer(pcReceived)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumStreamIdMap's vtable slot 4.
 func (self *IEnumStreamIdMap) Skip(cRecords uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cRecords))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumStreamIdMap's vtable slot 5.
 func (self *IEnumStreamIdMap) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IEnumStreamIdMap's vtable slot 6.
 func (self *IEnumStreamIdMap) Clone(ppIEnumStreamIdMap **IEnumStreamIdMap) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIEnumStreamIdMap)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFileSinkFilter: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ifilesinkfilter
@@ -7665,13 +7665,13 @@ var IID_IFileSinkFilter = win32.GUID{Data1: 0xa2104830, Data2: 0x7c70, Data3: 0x
 func (self *IFileSinkFilter) SetFileName(pszFileName string, pmt *mediamediafoundation.AM_MEDIA_TYPE) error {
 	_pszFileName := win32.UTF16Ptr(pszFileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFileName)), uintptr(unsafe.Pointer(pmt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurFile dispatches through IFileSinkFilter's vtable slot 4.
 func (self *IFileSinkFilter) GetCurFile(ppszFileName *foundation.PWSTR, pmt *mediamediafoundation.AM_MEDIA_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszFileName)), uintptr(unsafe.Pointer(pmt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFileSinkFilter2: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ifilesinkfilter2
@@ -7686,13 +7686,13 @@ var IID_IFileSinkFilter2 = win32.GUID{Data1: 0x00855b90, Data2: 0xce1b, Data3: 0
 // SetMode dispatches through IFileSinkFilter2's vtable slot 5.
 func (self *IFileSinkFilter2) SetMode(dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMode dispatches through IFileSinkFilter2's vtable slot 6.
 func (self *IFileSinkFilter2) GetMode(pdwFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFileSourceFilter: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ifilesourcefilter
@@ -7708,13 +7708,13 @@ var IID_IFileSourceFilter = win32.GUID{Data1: 0x56a868a6, Data2: 0x0ad4, Data3: 
 func (self *IFileSourceFilter) Load(pszFileName string, pmt *mediamediafoundation.AM_MEDIA_TYPE) error {
 	_pszFileName := win32.UTF16Ptr(pszFileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFileName)), uintptr(unsafe.Pointer(pmt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurFile dispatches through IFileSourceFilter's vtable slot 4.
 func (self *IFileSourceFilter) GetCurFile(ppszFileName *foundation.PWSTR, pmt *mediamediafoundation.AM_MEDIA_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszFileName)), uintptr(unsafe.Pointer(pmt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFilterChain: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ifilterchain
@@ -7729,25 +7729,25 @@ var IID_IFilterChain = win32.GUID{Data1: 0xdcfbdcf6, Data2: 0x0dc2, Data3: 0x45f
 // StartChain dispatches through IFilterChain's vtable slot 3.
 func (self *IFilterChain) StartChain(pStartFilter *IBaseFilter, pEndFilter *IBaseFilter) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStartFilter)), uintptr(unsafe.Pointer(pEndFilter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PauseChain dispatches through IFilterChain's vtable slot 4.
 func (self *IFilterChain) PauseChain(pStartFilter *IBaseFilter, pEndFilter *IBaseFilter) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStartFilter)), uintptr(unsafe.Pointer(pEndFilter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StopChain dispatches through IFilterChain's vtable slot 5.
 func (self *IFilterChain) StopChain(pStartFilter *IBaseFilter, pEndFilter *IBaseFilter) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStartFilter)), uintptr(unsafe.Pointer(pEndFilter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveChain dispatches through IFilterChain's vtable slot 6.
 func (self *IFilterChain) RemoveChain(pStartFilter *IBaseFilter, pEndFilter *IBaseFilter) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStartFilter)), uintptr(unsafe.Pointer(pEndFilter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFilterGraph: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ifiltergraph
@@ -7763,50 +7763,50 @@ var IID_IFilterGraph = win32.GUID{Data1: 0x56a8689f, Data2: 0x0ad4, Data3: 0x11c
 func (self *IFilterGraph) AddFilter(pFilter *IBaseFilter, pName string) error {
 	_pName := win32.UTF16Ptr(pName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFilter)), uintptr(unsafe.Pointer(_pName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveFilter dispatches through IFilterGraph's vtable slot 4.
 func (self *IFilterGraph) RemoveFilter(pFilter *IBaseFilter) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFilter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumFilters dispatches through IFilterGraph's vtable slot 5.
 func (self *IFilterGraph) EnumFilters(ppEnum **IEnumFilters) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FindFilterByName dispatches through IFilterGraph's vtable slot 6.
 func (self *IFilterGraph) FindFilterByName(pName string, ppFilter **IBaseFilter) error {
 	_pName := win32.UTF16Ptr(pName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(ppFilter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ConnectDirect dispatches through IFilterGraph's vtable slot 7.
 func (self *IFilterGraph) ConnectDirect(ppinOut *IPin, ppinIn *IPin, pmt *mediamediafoundation.AM_MEDIA_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppinOut)), uintptr(unsafe.Pointer(ppinIn)), uintptr(unsafe.Pointer(pmt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reconnect dispatches through IFilterGraph's vtable slot 8.
 func (self *IFilterGraph) Reconnect(ppin *IPin) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppin)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Disconnect dispatches through IFilterGraph's vtable slot 9.
 func (self *IFilterGraph) Disconnect(ppin *IPin) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppin)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDefaultSyncSource dispatches through IFilterGraph's vtable slot 10.
 func (self *IFilterGraph) SetDefaultSyncSource() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFilterGraph2: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ifiltergraph2
@@ -7822,19 +7822,19 @@ var IID_IFilterGraph2 = win32.GUID{Data1: 0x36b73882, Data2: 0xc2c8, Data3: 0x11
 func (self *IFilterGraph2) AddSourceFilterForMoniker(pMoniker *systemcom.IMoniker, pCtx *systemcom.IBindCtx, lpcwstrFilterName string, ppFilter **IBaseFilter) error {
 	_lpcwstrFilterName := win32.UTF16Ptr(lpcwstrFilterName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMoniker)), uintptr(unsafe.Pointer(pCtx)), uintptr(unsafe.Pointer(_lpcwstrFilterName)), uintptr(unsafe.Pointer(ppFilter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReconnectEx dispatches through IFilterGraph2's vtable slot 19.
 func (self *IFilterGraph2) ReconnectEx(ppin *IPin, pmt *mediamediafoundation.AM_MEDIA_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppin)), uintptr(unsafe.Pointer(pmt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RenderEx dispatches through IFilterGraph2's vtable slot 20.
 func (self *IFilterGraph2) RenderEx(pPinOut *IPin, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPinOut)), uintptr(dwFlags), 0)
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFilterGraph3: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ifiltergraph3
@@ -7849,7 +7849,7 @@ var IID_IFilterGraph3 = win32.GUID{Data1: 0xaaf38154, Data2: 0xb80b, Data3: 0x42
 // SetSyncSourceEx dispatches through IFilterGraph3's vtable slot 21.
 func (self *IFilterGraph3) SetSyncSourceEx(pClockForMostOfFilterGraph *media.IReferenceClock, pClockForFilter *media.IReferenceClock, pFilter *IBaseFilter) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pClockForMostOfFilterGraph)), uintptr(unsafe.Pointer(pClockForFilter)), uintptr(unsafe.Pointer(pFilter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 56a868ba-0ad4-11ce-b03a-0020af0ba770
@@ -7863,49 +7863,49 @@ var IID_IFilterInfo = win32.GUID{Data1: 0x56a868ba, Data2: 0x0ad4, Data3: 0x11ce
 // FindPin dispatches through IFilterInfo's vtable slot 7.
 func (self *IFilterInfo) FindPin(strPinID foundation.BSTR, ppUnk **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strPinID)), uintptr(unsafe.Pointer(ppUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through IFilterInfo's vtable slot 8.
 func (self *IFilterInfo) Get_Name(strName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_VendorInfo dispatches through IFilterInfo's vtable slot 9.
 func (self *IFilterInfo) Get_VendorInfo(strVendorInfo *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strVendorInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Filter dispatches through IFilterInfo's vtable slot 10.
 func (self *IFilterInfo) Get_Filter(ppUnk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Pins dispatches through IFilterInfo's vtable slot 11.
 func (self *IFilterInfo) Get_Pins(ppUnk **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsFileSource dispatches through IFilterInfo's vtable slot 12.
 func (self *IFilterInfo) Get_IsFileSource(pbIsSource *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbIsSource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Filename dispatches through IFilterInfo's vtable slot 13.
 func (self *IFilterInfo) Get_Filename(pstrFilename *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrFilename)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Filename dispatches through IFilterInfo's vtable slot 14.
 func (self *IFilterInfo) Put_Filename(strFilename foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strFilename)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFilterMapper: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ifiltermapper
@@ -7930,14 +7930,14 @@ var IID_IFilterMapper2 = win32.GUID{Data1: 0xb79bb0b0, Data2: 0x33c1, Data3: 0x1
 func (self *IFilterMapper2) CreateCategory(clsidCategory *win32.GUID, dwCategoryMerit uint32, Description string) error {
 	_Description := win32.UTF16Ptr(Description)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsidCategory)), uintptr(dwCategoryMerit), uintptr(unsafe.Pointer(_Description)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnregisterFilter dispatches through IFilterMapper2's vtable slot 4.
 func (self *IFilterMapper2) UnregisterFilter(pclsidCategory *win32.GUID, szInstance string, Filter *win32.GUID) error {
 	_szInstance := win32.UTF16Ptr(szInstance)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pclsidCategory)), uintptr(unsafe.Pointer(_szInstance)), uintptr(unsafe.Pointer(Filter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterFilter dispatches through IFilterMapper2's vtable slot 5.
@@ -7945,7 +7945,7 @@ func (self *IFilterMapper2) RegisterFilter(clsidFilter *win32.GUID, Name string,
 	_Name := win32.UTF16Ptr(Name)
 	_szInstance := win32.UTF16Ptr(szInstance)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsidFilter)), uintptr(unsafe.Pointer(_Name)), uintptr(unsafe.Pointer(ppMoniker)), uintptr(unsafe.Pointer(pclsidCategory)), uintptr(unsafe.Pointer(_szInstance)), uintptr(unsafe.Pointer(prf2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumMatchingFilters dispatches through IFilterMapper2's vtable slot 6.
@@ -7955,7 +7955,7 @@ func (self *IFilterMapper2) EnumMatchingFilters(ppEnum **systemcom.IEnumMoniker,
 	_bRender := win32.Bool32(bRender)
 	_bOutputNeeded := win32.Bool32(bOutputNeeded)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)), uintptr(dwFlags), uintptr(_bExactMatch), uintptr(dwMerit), uintptr(_bInputNeeded), uintptr(cInputTypes), uintptr(unsafe.Pointer(pInputTypes)), uintptr(unsafe.Pointer(pMedIn)), uintptr(unsafe.Pointer(pPinCategoryIn)), uintptr(_bRender), uintptr(_bOutputNeeded), uintptr(cOutputTypes), uintptr(unsafe.Pointer(pOutputTypes)), uintptr(unsafe.Pointer(pMedOut)), uintptr(unsafe.Pointer(pPinCategoryOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFilterMapper3: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ifiltermapper3
@@ -7970,7 +7970,7 @@ var IID_IFilterMapper3 = win32.GUID{Data1: 0xb79bb0b1, Data2: 0x33c1, Data3: 0x1
 // GetICreateDevEnum dispatches through IFilterMapper3's vtable slot 7.
 func (self *IFilterMapper3) GetICreateDevEnum(ppEnum **ICreateDevEnum) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFrequencyMap: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-ifrequencymap
@@ -7985,7 +7985,7 @@ var IID_IFrequencyMap = win32.GUID{Data1: 0x06fb45c1, Data2: 0x693c, Data3: 0x4e
 // Get_FrequencyMapping dispatches through IFrequencyMap's vtable slot 3.
 func (self *IFrequencyMap) Get_FrequencyMapping(ulCount *uint32, ppulList **uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ulCount)), uintptr(unsafe.Pointer(ppulList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FrequencyMapping dispatches through IFrequencyMap's vtable slot 4.
@@ -7995,31 +7995,31 @@ func (self *IFrequencyMap) Put_FrequencyMapping(pList []uint32) error {
 		_pList = &pList[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(pList)), uintptr(unsafe.Pointer(_pList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CountryCode dispatches through IFrequencyMap's vtable slot 5.
 func (self *IFrequencyMap) Get_CountryCode(pulCountryCode *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulCountryCode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CountryCode dispatches through IFrequencyMap's vtable slot 6.
 func (self *IFrequencyMap) Put_CountryCode(ulCountryCode uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ulCountryCode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DefaultFrequencyMapping dispatches through IFrequencyMap's vtable slot 7.
 func (self *IFrequencyMap) Get_DefaultFrequencyMapping(ulCountryCode uint32, pulCount *uint32, ppulList **uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(ulCountryCode), uintptr(unsafe.Pointer(pulCount)), uintptr(unsafe.Pointer(ppulList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CountryCodeList dispatches through IFrequencyMap's vtable slot 8.
 func (self *IFrequencyMap) Get_CountryCodeList(pulCount *uint32, ppulList **uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulCount)), uintptr(unsafe.Pointer(ppulList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: dd1d7110-7836-11cf-bf47-00aa0055595a
@@ -8033,103 +8033,103 @@ var IID_IFullScreenVideo = win32.GUID{Data1: 0xdd1d7110, Data2: 0x7836, Data3: 0
 // CountModes dispatches through IFullScreenVideo's vtable slot 3.
 func (self *IFullScreenVideo) CountModes(pModes *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pModes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetModeInfo dispatches through IFullScreenVideo's vtable slot 4.
 func (self *IFullScreenVideo) GetModeInfo(Mode int32, pWidth *int32, pHeight *int32, pDepth *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Mode), uintptr(unsafe.Pointer(pWidth)), uintptr(unsafe.Pointer(pHeight)), uintptr(unsafe.Pointer(pDepth)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentMode dispatches through IFullScreenVideo's vtable slot 5.
 func (self *IFullScreenVideo) GetCurrentMode(pMode *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsModeAvailable dispatches through IFullScreenVideo's vtable slot 6.
 func (self *IFullScreenVideo) IsModeAvailable(Mode int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(Mode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsModeEnabled dispatches through IFullScreenVideo's vtable slot 7.
 func (self *IFullScreenVideo) IsModeEnabled(Mode int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Mode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetEnabled dispatches through IFullScreenVideo's vtable slot 8.
 func (self *IFullScreenVideo) SetEnabled(Mode int32, bEnabled int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Mode), uintptr(bEnabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetClipFactor dispatches through IFullScreenVideo's vtable slot 9.
 func (self *IFullScreenVideo) GetClipFactor(pClipFactor *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pClipFactor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetClipFactor dispatches through IFullScreenVideo's vtable slot 10.
 func (self *IFullScreenVideo) SetClipFactor(ClipFactor int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(ClipFactor))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMessageDrain dispatches through IFullScreenVideo's vtable slot 11.
 func (self *IFullScreenVideo) SetMessageDrain(hwnd foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(hwnd))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMessageDrain dispatches through IFullScreenVideo's vtable slot 12.
 func (self *IFullScreenVideo) GetMessageDrain(hwnd *foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hwnd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMonitor dispatches through IFullScreenVideo's vtable slot 13.
 func (self *IFullScreenVideo) SetMonitor(Monitor int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Monitor))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMonitor dispatches through IFullScreenVideo's vtable slot 14.
 func (self *IFullScreenVideo) GetMonitor(Monitor *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Monitor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HideOnDeactivate dispatches through IFullScreenVideo's vtable slot 15.
 func (self *IFullScreenVideo) HideOnDeactivate(Hide int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(Hide))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsHideOnDeactivate dispatches through IFullScreenVideo's vtable slot 16.
 func (self *IFullScreenVideo) IsHideOnDeactivate() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCaption dispatches through IFullScreenVideo's vtable slot 17.
 func (self *IFullScreenVideo) SetCaption(strCaption foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strCaption)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCaption dispatches through IFullScreenVideo's vtable slot 18.
 func (self *IFullScreenVideo) GetCaption(pstrCaption *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrCaption)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDefault dispatches through IFullScreenVideo's vtable slot 19.
 func (self *IFullScreenVideo) SetDefault() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFullScreenVideoEx: https://learn.microsoft.com/windows/win32/api/amvideo/nn-amvideo-ifullscreenvideoex
@@ -8144,25 +8144,25 @@ var IID_IFullScreenVideoEx = win32.GUID{Data1: 0x53479470, Data2: 0xf1dd, Data3:
 // SetAcceleratorTable dispatches through IFullScreenVideoEx's vtable slot 20.
 func (self *IFullScreenVideoEx) SetAcceleratorTable(hwnd foundation.HWND, hAccel uiwindowsandmessaging.HACCEL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(hAccel))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAcceleratorTable dispatches through IFullScreenVideoEx's vtable slot 21.
 func (self *IFullScreenVideoEx) GetAcceleratorTable(phwnd *foundation.HWND, phAccel *uiwindowsandmessaging.HACCEL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phwnd)), uintptr(unsafe.Pointer(phAccel)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KeepPixelAspectRatio dispatches through IFullScreenVideoEx's vtable slot 22.
 func (self *IFullScreenVideoEx) KeepPixelAspectRatio(KeepAspect int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(KeepAspect))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsKeepPixelAspectRatio dispatches through IFullScreenVideoEx's vtable slot 23.
 func (self *IFullScreenVideoEx) IsKeepPixelAspectRatio(pKeepAspect *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pKeepAspect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IGetCapabilitiesKey: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-igetcapabilitieskey
@@ -8177,7 +8177,7 @@ var IID_IGetCapabilitiesKey = win32.GUID{Data1: 0xa8809222, Data2: 0x07bb, Data3
 // GetCapabilitiesKey dispatches through IGetCapabilitiesKey's vtable slot 3.
 func (self *IGetCapabilitiesKey) GetCapabilitiesKey(pHKey *systemregistry.HKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IGraphBuilder: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-igraphbuilder
@@ -8192,13 +8192,13 @@ var IID_IGraphBuilder = win32.GUID{Data1: 0x56a868a9, Data2: 0x0ad4, Data3: 0x11
 // Connect dispatches through IGraphBuilder's vtable slot 11.
 func (self *IGraphBuilder) Connect(ppinOut *IPin, ppinIn *IPin) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppinOut)), uintptr(unsafe.Pointer(ppinIn)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Render dispatches through IGraphBuilder's vtable slot 12.
 func (self *IGraphBuilder) Render(ppinOut *IPin) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppinOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RenderFile dispatches through IGraphBuilder's vtable slot 13.
@@ -8206,7 +8206,7 @@ func (self *IGraphBuilder) RenderFile(lpcwstrFile string, lpcwstrPlayList string
 	_lpcwstrFile := win32.UTF16Ptr(lpcwstrFile)
 	_lpcwstrPlayList := win32.UTF16Ptr(lpcwstrPlayList)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpcwstrFile)), uintptr(unsafe.Pointer(_lpcwstrPlayList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddSourceFilter dispatches through IGraphBuilder's vtable slot 14.
@@ -8214,25 +8214,25 @@ func (self *IGraphBuilder) AddSourceFilter(lpcwstrFileName string, lpcwstrFilter
 	_lpcwstrFileName := win32.UTF16Ptr(lpcwstrFileName)
 	_lpcwstrFilterName := win32.UTF16Ptr(lpcwstrFilterName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpcwstrFileName)), uintptr(unsafe.Pointer(_lpcwstrFilterName)), uintptr(unsafe.Pointer(ppFilter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetLogFile dispatches through IGraphBuilder's vtable slot 15.
 func (self *IGraphBuilder) SetLogFile(hFile uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(hFile))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Abort dispatches through IGraphBuilder's vtable slot 16.
 func (self *IGraphBuilder) Abort() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ShouldOperationContinue dispatches through IGraphBuilder's vtable slot 17.
 func (self *IGraphBuilder) ShouldOperationContinue() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IGraphConfig: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-igraphconfig
@@ -8247,61 +8247,61 @@ var IID_IGraphConfig = win32.GUID{Data1: 0x03a1eb8e, Data2: 0x32bf, Data3: 0x424
 // Reconnect dispatches through IGraphConfig's vtable slot 3.
 func (self *IGraphConfig) Reconnect(pOutputPin *IPin, pInputPin *IPin, pmtFirstConnection *mediamediafoundation.AM_MEDIA_TYPE, pUsingFilter *IBaseFilter, hAbortEvent foundation.HANDLE, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOutputPin)), uintptr(unsafe.Pointer(pInputPin)), uintptr(unsafe.Pointer(pmtFirstConnection)), uintptr(unsafe.Pointer(pUsingFilter)), uintptr(hAbortEvent), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reconfigure dispatches through IGraphConfig's vtable slot 4.
 func (self *IGraphConfig) Reconfigure(pCallback *IGraphConfigCallback, pvContext unsafe.Pointer, dwFlags uint32, hAbortEvent foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pvContext)), uintptr(dwFlags), uintptr(hAbortEvent))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddFilterToCache dispatches through IGraphConfig's vtable slot 5.
 func (self *IGraphConfig) AddFilterToCache(pFilter *IBaseFilter) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFilter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumCacheFilter dispatches through IGraphConfig's vtable slot 6.
 func (self *IGraphConfig) EnumCacheFilter(pEnum **IEnumFilters) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveFilterFromCache dispatches through IGraphConfig's vtable slot 7.
 func (self *IGraphConfig) RemoveFilterFromCache(pFilter *IBaseFilter) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFilter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStartTime dispatches through IGraphConfig's vtable slot 8.
 func (self *IGraphConfig) GetStartTime(prtStart *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prtStart)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PushThroughData dispatches through IGraphConfig's vtable slot 9.
 func (self *IGraphConfig) PushThroughData(pOutputPin *IPin, pConnection *IPinConnection, hEventAbort foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOutputPin)), uintptr(unsafe.Pointer(pConnection)), uintptr(hEventAbort))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetFilterFlags dispatches through IGraphConfig's vtable slot 10.
 func (self *IGraphConfig) SetFilterFlags(pFilter *IBaseFilter, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFilter)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFilterFlags dispatches through IGraphConfig's vtable slot 11.
 func (self *IGraphConfig) GetFilterFlags(pFilter *IBaseFilter, pdwFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFilter)), uintptr(unsafe.Pointer(pdwFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveFilterEx dispatches through IGraphConfig's vtable slot 12.
 func (self *IGraphConfig) RemoveFilterEx(pFilter *IBaseFilter, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFilter)), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IGraphConfigCallback: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-igraphconfigcallback
@@ -8316,7 +8316,7 @@ var IID_IGraphConfigCallback = win32.GUID{Data1: 0xade0fd60, Data2: 0xd19d, Data
 // Reconfigure dispatches through IGraphConfigCallback's vtable slot 3.
 func (self *IGraphConfigCallback) Reconfigure(pvContext unsafe.Pointer, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvContext)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IGraphVersion: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-igraphversion
@@ -8331,7 +8331,7 @@ var IID_IGraphVersion = win32.GUID{Data1: 0x56a868ab, Data2: 0x0ad4, Data3: 0x11
 // QueryVersion dispatches through IGraphVersion's vtable slot 3.
 func (self *IGraphVersion) QueryVersion(pVersion *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVersion)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IIPDVDec: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iipdvdec
@@ -8346,13 +8346,13 @@ var IID_IIPDVDec = win32.GUID{Data1: 0xb8e8bd60, Data2: 0x0bfe, Data3: 0x11d0, D
 // Get_IPDisplay dispatches through IIPDVDec's vtable slot 3.
 func (self *IIPDVDec) Get_IPDisplay(displayPix *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(displayPix)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_IPDisplay dispatches through IIPDVDec's vtable slot 4.
 func (self *IIPDVDec) Put_IPDisplay(displayPix int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(displayPix))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMPEG2PIDMap: https://learn.microsoft.com/windows/win32/api/bdaiface/nn-bdaiface-impeg2pidmap
@@ -8367,19 +8367,19 @@ var IID_IMPEG2PIDMap = win32.GUID{Data1: 0xafb6c2a1, Data2: 0x2c41, Data3: 0x11d
 // MapPID dispatches through IMPEG2PIDMap's vtable slot 3.
 func (self *IMPEG2PIDMap) MapPID(culPID uint32, pulPID *uint32, MediaSampleContent MEDIA_SAMPLE_CONTENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(culPID), uintptr(unsafe.Pointer(pulPID)), uintptr(MediaSampleContent))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnmapPID dispatches through IMPEG2PIDMap's vtable slot 4.
 func (self *IMPEG2PIDMap) UnmapPID(culPID uint32, pulPID *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(culPID), uintptr(unsafe.Pointer(pulPID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumPIDMap dispatches through IMPEG2PIDMap's vtable slot 5.
 func (self *IMPEG2PIDMap) EnumPIDMap(pIEnumPIDMap **IEnumPIDMap) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIEnumPIDMap)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMPEG2StreamIdMap: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-impeg2streamidmap
@@ -8394,7 +8394,7 @@ var IID_IMPEG2StreamIdMap = win32.GUID{Data1: 0xd0e04c47, Data2: 0x25b8, Data3: 
 // MapStreamId dispatches through IMPEG2StreamIdMap's vtable slot 3.
 func (self *IMPEG2StreamIdMap) MapStreamId(ulStreamId uint32, MediaSampleContent uint32, ulSubstreamFilterValue uint32, iDataOffset int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulStreamId), uintptr(MediaSampleContent), uintptr(ulSubstreamFilterValue), uintptr(iDataOffset))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnmapStreamId dispatches through IMPEG2StreamIdMap's vtable slot 4.
@@ -8404,13 +8404,13 @@ func (self *IMPEG2StreamIdMap) UnmapStreamId(pulStreamId []uint32) error {
 		_pulStreamId = &pulStreamId[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(pulStreamId)), uintptr(unsafe.Pointer(_pulStreamId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumStreamIdMap dispatches through IMPEG2StreamIdMap's vtable slot 5.
 func (self *IMPEG2StreamIdMap) EnumStreamIdMap(ppIEnumStreamIdMap **IEnumStreamIdMap) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIEnumStreamIdMap)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMediaControl: https://learn.microsoft.com/windows/win32/api/control/nn-control-imediacontrol
@@ -8425,55 +8425,55 @@ var IID_IMediaControl = win32.GUID{Data1: 0x56a868b1, Data2: 0x0ad4, Data3: 0x11
 // Run dispatches through IMediaControl's vtable slot 7.
 func (self *IMediaControl) Run() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Pause dispatches through IMediaControl's vtable slot 8.
 func (self *IMediaControl) Pause() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Stop dispatches through IMediaControl's vtable slot 9.
 func (self *IMediaControl) Stop() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetState dispatches through IMediaControl's vtable slot 10.
 func (self *IMediaControl) GetState(msTimeout int32, pfs *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(msTimeout), uintptr(unsafe.Pointer(pfs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RenderFile dispatches through IMediaControl's vtable slot 11.
 func (self *IMediaControl) RenderFile(strFilename foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strFilename)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddSourceFilter dispatches through IMediaControl's vtable slot 12.
 func (self *IMediaControl) AddSourceFilter(strFilename foundation.BSTR, ppUnk **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strFilename)), uintptr(unsafe.Pointer(ppUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FilterCollection dispatches through IMediaControl's vtable slot 13.
 func (self *IMediaControl) Get_FilterCollection(ppUnk **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RegFilterCollection dispatches through IMediaControl's vtable slot 14.
 func (self *IMediaControl) Get_RegFilterCollection(ppUnk **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StopWhenReady dispatches through IMediaControl's vtable slot 15.
 func (self *IMediaControl) StopWhenReady() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMediaEvent: https://learn.microsoft.com/windows/win32/api/control/nn-control-imediaevent
@@ -8488,37 +8488,37 @@ var IID_IMediaEvent = win32.GUID{Data1: 0x56a868b6, Data2: 0x0ad4, Data3: 0x11ce
 // GetEventHandle dispatches through IMediaEvent's vtable slot 7.
 func (self *IMediaEvent) GetEventHandle(hEvent *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hEvent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEvent dispatches through IMediaEvent's vtable slot 8.
 func (self *IMediaEvent) GetEvent(lEventCode *int32, lParam1 *uintptr, lParam2 *uintptr, msTimeout int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lEventCode)), uintptr(unsafe.Pointer(lParam1)), uintptr(unsafe.Pointer(lParam2)), uintptr(msTimeout))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WaitForCompletion dispatches through IMediaEvent's vtable slot 9.
 func (self *IMediaEvent) WaitForCompletion(msTimeout int32, pEvCode *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(msTimeout), uintptr(unsafe.Pointer(pEvCode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CancelDefaultHandling dispatches through IMediaEvent's vtable slot 10.
 func (self *IMediaEvent) CancelDefaultHandling(lEvCode int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lEvCode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RestoreDefaultHandling dispatches through IMediaEvent's vtable slot 11.
 func (self *IMediaEvent) RestoreDefaultHandling(lEvCode int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(lEvCode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FreeEventParams dispatches through IMediaEvent's vtable slot 12.
 func (self *IMediaEvent) FreeEventParams(lEvCode int32, lParam1 uintptr, lParam2 uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(lEvCode), uintptr(lParam1), uintptr(lParam2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMediaEventEx: https://learn.microsoft.com/windows/win32/api/control/nn-control-imediaeventex
@@ -8533,19 +8533,19 @@ var IID_IMediaEventEx = win32.GUID{Data1: 0x56a868c0, Data2: 0x0ad4, Data3: 0x11
 // SetNotifyWindow dispatches through IMediaEventEx's vtable slot 13.
 func (self *IMediaEventEx) SetNotifyWindow(hwnd uintptr, lMsg int32, lInstanceData uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(lMsg), uintptr(lInstanceData))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetNotifyFlags dispatches through IMediaEventEx's vtable slot 14.
 func (self *IMediaEventEx) SetNotifyFlags(lNoNotifyFlags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(lNoNotifyFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNotifyFlags dispatches through IMediaEventEx's vtable slot 15.
 func (self *IMediaEventEx) GetNotifyFlags(lplNoNotifyFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lplNoNotifyFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMediaEventSink: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-imediaeventsink
@@ -8560,7 +8560,7 @@ var IID_IMediaEventSink = win32.GUID{Data1: 0x56a868a2, Data2: 0x0ad4, Data3: 0x
 // Notify dispatches through IMediaEventSink's vtable slot 3.
 func (self *IMediaEventSink) Notify(EventCode int32, EventParam1 uintptr, EventParam2 uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(EventCode), uintptr(EventParam1), uintptr(EventParam2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMediaFilter: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-imediafilter
@@ -8575,37 +8575,37 @@ var IID_IMediaFilter = win32.GUID{Data1: 0x56a86899, Data2: 0x0ad4, Data3: 0x11c
 // Stop dispatches through IMediaFilter's vtable slot 4.
 func (self *IMediaFilter) Stop() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Pause dispatches through IMediaFilter's vtable slot 5.
 func (self *IMediaFilter) Pause() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Run dispatches through IMediaFilter's vtable slot 6.
 func (self *IMediaFilter) Run(tStart int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(tStart))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetState dispatches through IMediaFilter's vtable slot 7.
 func (self *IMediaFilter) GetState(dwMilliSecsTimeout uint32, State *FILTER_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwMilliSecsTimeout), uintptr(unsafe.Pointer(State)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetSyncSource dispatches through IMediaFilter's vtable slot 8.
 func (self *IMediaFilter) SetSyncSource(pClock *media.IReferenceClock) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pClock)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSyncSource dispatches through IMediaFilter's vtable slot 9.
 func (self *IMediaFilter) GetSyncSource(pClock **media.IReferenceClock) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pClock)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMediaParamInfo: https://learn.microsoft.com/windows/win32/api/medparam/nn-medparam-imediaparaminfo
@@ -8620,37 +8620,37 @@ var IID_IMediaParamInfo = win32.GUID{Data1: 0x6d6cbb60, Data2: 0xa223, Data3: 0x
 // GetParamCount dispatches through IMediaParamInfo's vtable slot 3.
 func (self *IMediaParamInfo) GetParamCount(pdwParams *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwParams)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetParamInfo dispatches through IMediaParamInfo's vtable slot 4.
 func (self *IMediaParamInfo) GetParamInfo(dwParamIndex uint32, pInfo *MP_PARAMINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwParamIndex), uintptr(unsafe.Pointer(pInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetParamText dispatches through IMediaParamInfo's vtable slot 5.
 func (self *IMediaParamInfo) GetParamText(dwParamIndex uint32, ppwchText **uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwParamIndex), uintptr(unsafe.Pointer(ppwchText)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNumTimeFormats dispatches through IMediaParamInfo's vtable slot 6.
 func (self *IMediaParamInfo) GetNumTimeFormats(pdwNumTimeFormats *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwNumTimeFormats)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSupportedTimeFormat dispatches through IMediaParamInfo's vtable slot 7.
 func (self *IMediaParamInfo) GetSupportedTimeFormat(dwFormatIndex uint32, pguidTimeFormat *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwFormatIndex), uintptr(unsafe.Pointer(pguidTimeFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentTimeFormat dispatches through IMediaParamInfo's vtable slot 8.
 func (self *IMediaParamInfo) GetCurrentTimeFormat(pguidTimeFormat *win32.GUID, pTimeData *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidTimeFormat)), uintptr(unsafe.Pointer(pTimeData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMediaParams: https://learn.microsoft.com/windows/win32/api/medparam/nn-medparam-imediaparams
@@ -8665,19 +8665,19 @@ var IID_IMediaParams = win32.GUID{Data1: 0x6d6cbb61, Data2: 0xa223, Data3: 0x44a
 // GetParam dispatches through IMediaParams's vtable slot 3.
 func (self *IMediaParams) GetParam(dwParamIndex uint32, pValue *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwParamIndex), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddEnvelope dispatches through IMediaParams's vtable slot 5.
 func (self *IMediaParams) AddEnvelope(dwParamIndex uint32, cSegments uint32, pEnvelopeSegments *MP_ENVELOPE_SEGMENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwParamIndex), uintptr(cSegments), uintptr(unsafe.Pointer(pEnvelopeSegments)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FlushEnvelope dispatches through IMediaParams's vtable slot 6.
 func (self *IMediaParams) FlushEnvelope(dwParamIndex uint32, refTimeStart int64, refTimeEnd int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwParamIndex), uintptr(refTimeStart), uintptr(refTimeEnd))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMediaPosition: https://learn.microsoft.com/windows/win32/api/control/nn-control-imediaposition
@@ -8692,43 +8692,43 @@ var IID_IMediaPosition = win32.GUID{Data1: 0x56a868b2, Data2: 0x0ad4, Data3: 0x1
 // Get_Duration dispatches through IMediaPosition's vtable slot 7.
 func (self *IMediaPosition) Get_Duration(plength *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plength)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentPosition dispatches through IMediaPosition's vtable slot 9.
 func (self *IMediaPosition) Get_CurrentPosition(pllTime *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pllTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StopTime dispatches through IMediaPosition's vtable slot 10.
 func (self *IMediaPosition) Get_StopTime(pllTime *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pllTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PrerollTime dispatches through IMediaPosition's vtable slot 12.
 func (self *IMediaPosition) Get_PrerollTime(pllTime *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pllTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Rate dispatches through IMediaPosition's vtable slot 15.
 func (self *IMediaPosition) Get_Rate(pdRate *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdRate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CanSeekForward dispatches through IMediaPosition's vtable slot 16.
 func (self *IMediaPosition) CanSeekForward(pCanSeekForward *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCanSeekForward)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CanSeekBackward dispatches through IMediaPosition's vtable slot 17.
 func (self *IMediaPosition) CanSeekBackward(pCanSeekBackward *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCanSeekBackward)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMediaPropertyBag: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-imediapropertybag
@@ -8743,7 +8743,7 @@ var IID_IMediaPropertyBag = win32.GUID{Data1: 0x6025a880, Data2: 0xc0d5, Data3: 
 // EnumProperty dispatches through IMediaPropertyBag's vtable slot 5.
 func (self *IMediaPropertyBag) EnumProperty(iProperty uint32, pvarPropertyName *systemvariant.VARIANT, pvarPropertyValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(iProperty), uintptr(unsafe.Pointer(pvarPropertyName)), uintptr(unsafe.Pointer(pvarPropertyValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMediaSample: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-imediasample
@@ -8758,7 +8758,7 @@ var IID_IMediaSample = win32.GUID{Data1: 0x56a8689a, Data2: 0x0ad4, Data3: 0x11c
 // GetPointer dispatches through IMediaSample's vtable slot 3.
 func (self *IMediaSample) GetPointer(ppBuffer **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSize dispatches through IMediaSample's vtable slot 4.
@@ -8770,39 +8770,39 @@ func (self *IMediaSample) GetSize() int32 {
 // GetTime dispatches through IMediaSample's vtable slot 5.
 func (self *IMediaSample) GetTime(pTimeStart *int64, pTimeEnd *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTimeStart)), uintptr(unsafe.Pointer(pTimeEnd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTime dispatches through IMediaSample's vtable slot 6.
 func (self *IMediaSample) SetTime(pTimeStart *int64, pTimeEnd *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTimeStart)), uintptr(unsafe.Pointer(pTimeEnd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsSyncPoint dispatches through IMediaSample's vtable slot 7.
 func (self *IMediaSample) IsSyncPoint() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetSyncPoint dispatches through IMediaSample's vtable slot 8.
 func (self *IMediaSample) SetSyncPoint(bIsSyncPoint bool) error {
 	_bIsSyncPoint := win32.Bool32(bIsSyncPoint)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(_bIsSyncPoint))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsPreroll dispatches through IMediaSample's vtable slot 9.
 func (self *IMediaSample) IsPreroll() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetPreroll dispatches through IMediaSample's vtable slot 10.
 func (self *IMediaSample) SetPreroll(bIsPreroll bool) error {
 	_bIsPreroll := win32.Bool32(bIsPreroll)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(_bIsPreroll))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetActualDataLength dispatches through IMediaSample's vtable slot 11.
@@ -8814,44 +8814,44 @@ func (self *IMediaSample) GetActualDataLength() int32 {
 // SetActualDataLength dispatches through IMediaSample's vtable slot 12.
 func (self *IMediaSample) SetActualDataLength(__MIDL__IMediaSample0000 int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(__MIDL__IMediaSample0000))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMediaType dispatches through IMediaSample's vtable slot 13.
 func (self *IMediaSample) GetMediaType(ppMediaType **mediamediafoundation.AM_MEDIA_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppMediaType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMediaType dispatches through IMediaSample's vtable slot 14.
 func (self *IMediaSample) SetMediaType(pMediaType *mediamediafoundation.AM_MEDIA_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMediaType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsDiscontinuity dispatches through IMediaSample's vtable slot 15.
 func (self *IMediaSample) IsDiscontinuity() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDiscontinuity dispatches through IMediaSample's vtable slot 16.
 func (self *IMediaSample) SetDiscontinuity(bDiscontinuity bool) error {
 	_bDiscontinuity := win32.Bool32(bDiscontinuity)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(_bDiscontinuity))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMediaTime dispatches through IMediaSample's vtable slot 17.
 func (self *IMediaSample) GetMediaTime(pTimeStart *int64, pTimeEnd *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTimeStart)), uintptr(unsafe.Pointer(pTimeEnd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMediaTime dispatches through IMediaSample's vtable slot 18.
 func (self *IMediaSample) SetMediaTime(pTimeStart *int64, pTimeEnd *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTimeStart)), uintptr(unsafe.Pointer(pTimeEnd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMediaSample2: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-imediasample2
@@ -8870,7 +8870,7 @@ func (self *IMediaSample2) GetProperties(pbProperties []byte) error {
 		_pbProperties = &pbProperties[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(len(pbProperties)), uintptr(unsafe.Pointer(_pbProperties)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetProperties dispatches through IMediaSample2's vtable slot 20.
@@ -8880,7 +8880,7 @@ func (self *IMediaSample2) SetProperties(pbProperties []byte) error {
 		_pbProperties = &pbProperties[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(len(pbProperties)), uintptr(unsafe.Pointer(_pbProperties)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMediaSample2Config: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-imediasample2config
@@ -8895,7 +8895,7 @@ var IID_IMediaSample2Config = win32.GUID{Data1: 0x68961e68, Data2: 0x832b, Data3
 // GetSurface dispatches through IMediaSample2Config's vtable slot 3.
 func (self *IMediaSample2Config) GetSurface(ppDirect3DSurface9 **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDirect3DSurface9)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMediaSeeking: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-imediaseeking
@@ -8910,97 +8910,97 @@ var IID_IMediaSeeking = win32.GUID{Data1: 0x36b73880, Data2: 0xc2c8, Data3: 0x11
 // GetCapabilities dispatches through IMediaSeeking's vtable slot 3.
 func (self *IMediaSeeking) GetCapabilities(pCapabilities *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCapabilities)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CheckCapabilities dispatches through IMediaSeeking's vtable slot 4.
 func (self *IMediaSeeking) CheckCapabilities(pCapabilities *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCapabilities)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsFormatSupported dispatches through IMediaSeeking's vtable slot 5.
 func (self *IMediaSeeking) IsFormatSupported(pFormat *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryPreferredFormat dispatches through IMediaSeeking's vtable slot 6.
 func (self *IMediaSeeking) QueryPreferredFormat(pFormat *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTimeFormat dispatches through IMediaSeeking's vtable slot 7.
 func (self *IMediaSeeking) GetTimeFormat(pFormat *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsUsingTimeFormat dispatches through IMediaSeeking's vtable slot 8.
 func (self *IMediaSeeking) IsUsingTimeFormat(pFormat *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTimeFormat dispatches through IMediaSeeking's vtable slot 9.
 func (self *IMediaSeeking) SetTimeFormat(pFormat *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDuration dispatches through IMediaSeeking's vtable slot 10.
 func (self *IMediaSeeking) GetDuration(pDuration *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDuration)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStopPosition dispatches through IMediaSeeking's vtable slot 11.
 func (self *IMediaSeeking) GetStopPosition(pStop *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStop)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentPosition dispatches through IMediaSeeking's vtable slot 12.
 func (self *IMediaSeeking) GetCurrentPosition(pCurrent *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCurrent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ConvertTimeFormat dispatches through IMediaSeeking's vtable slot 13.
 func (self *IMediaSeeking) ConvertTimeFormat(pTarget *int64, pTargetFormat *win32.GUID, Source int64, pSourceFormat *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTarget)), uintptr(unsafe.Pointer(pTargetFormat)), uintptr(Source), uintptr(unsafe.Pointer(pSourceFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetPositions dispatches through IMediaSeeking's vtable slot 14.
 func (self *IMediaSeeking) SetPositions(pCurrent *int64, dwCurrentFlags uint32, pStop *int64, dwStopFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCurrent)), uintptr(dwCurrentFlags), uintptr(unsafe.Pointer(pStop)), uintptr(dwStopFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPositions dispatches through IMediaSeeking's vtable slot 15.
 func (self *IMediaSeeking) GetPositions(pCurrent *int64, pStop *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCurrent)), uintptr(unsafe.Pointer(pStop)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAvailable dispatches through IMediaSeeking's vtable slot 16.
 func (self *IMediaSeeking) GetAvailable(pEarliest *int64, pLatest *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEarliest)), uintptr(unsafe.Pointer(pLatest)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRate dispatches through IMediaSeeking's vtable slot 18.
 func (self *IMediaSeeking) GetRate(pdRate *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdRate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPreroll dispatches through IMediaSeeking's vtable slot 19.
 func (self *IMediaSeeking) GetPreroll(pllPreroll *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pllPreroll)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMediaStream: https://learn.microsoft.com/windows/win32/api/mmstream/nn-mmstream-imediastream
@@ -9015,37 +9015,37 @@ var IID_IMediaStream = win32.GUID{Data1: 0xb502d1bd, Data2: 0x9a57, Data3: 0x11d
 // GetMultiMediaStream dispatches through IMediaStream's vtable slot 3.
 func (self *IMediaStream) GetMultiMediaStream(ppMultiMediaStream **IMultiMediaStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppMultiMediaStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInformation dispatches through IMediaStream's vtable slot 4.
 func (self *IMediaStream) GetInformation(pPurposeId *win32.GUID, pType *STREAM_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPurposeId)), uintptr(unsafe.Pointer(pType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetSameFormat dispatches through IMediaStream's vtable slot 5.
 func (self *IMediaStream) SetSameFormat(pStreamThatHasDesiredFormat *IMediaStream, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStreamThatHasDesiredFormat)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AllocateSample dispatches through IMediaStream's vtable slot 6.
 func (self *IMediaStream) AllocateSample(dwFlags uint32, ppSample **IStreamSample) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppSample)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSharedSample dispatches through IMediaStream's vtable slot 7.
 func (self *IMediaStream) CreateSharedSample(pExistingSample *IStreamSample, dwFlags uint32, ppNewSample **IStreamSample) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pExistingSample)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppNewSample)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendEndOfStream dispatches through IMediaStream's vtable slot 8.
 func (self *IMediaStream) SendEndOfStream(dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMediaStreamFilter: https://learn.microsoft.com/windows/win32/api/amstream/nn-amstream-imediastreamfilter
@@ -9060,57 +9060,57 @@ var IID_IMediaStreamFilter = win32.GUID{Data1: 0xbebe595e, Data2: 0x9a6f, Data3:
 // AddMediaStream dispatches through IMediaStreamFilter's vtable slot 15.
 func (self *IMediaStreamFilter) AddMediaStream(pAMMediaStream *IAMMediaStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAMMediaStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMediaStream dispatches through IMediaStreamFilter's vtable slot 16.
 func (self *IMediaStreamFilter) GetMediaStream(idPurpose *win32.GUID, ppMediaStream **IMediaStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(idPurpose)), uintptr(unsafe.Pointer(ppMediaStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumMediaStreams dispatches through IMediaStreamFilter's vtable slot 17.
 func (self *IMediaStreamFilter) EnumMediaStreams(Index int32, ppMediaStream **IMediaStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(ppMediaStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SupportSeeking dispatches through IMediaStreamFilter's vtable slot 18.
 func (self *IMediaStreamFilter) SupportSeeking(bRenderer bool) error {
 	_bRenderer := win32.Bool32(bRenderer)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(_bRenderer))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReferenceTimeToStreamTime dispatches through IMediaStreamFilter's vtable slot 19.
 func (self *IMediaStreamFilter) ReferenceTimeToStreamTime(pTime *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentStreamTime dispatches through IMediaStreamFilter's vtable slot 20.
 func (self *IMediaStreamFilter) GetCurrentStreamTime(pCurrentStreamTime *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCurrentStreamTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WaitUntil dispatches through IMediaStreamFilter's vtable slot 21.
 func (self *IMediaStreamFilter) WaitUntil(WaitStreamTime int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(WaitStreamTime))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Flush dispatches through IMediaStreamFilter's vtable slot 22.
 func (self *IMediaStreamFilter) Flush(bCancelEOS bool) error {
 	_bCancelEOS := win32.Bool32(bCancelEOS)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(_bCancelEOS))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndOfStream dispatches through IMediaStreamFilter's vtable slot 23.
 func (self *IMediaStreamFilter) EndOfStream() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 56a868bc-0ad4-11ce-b03a-0020af0ba770
@@ -9124,13 +9124,13 @@ var IID_IMediaTypeInfo = win32.GUID{Data1: 0x56a868bc, Data2: 0x0ad4, Data3: 0x1
 // Get_Type dispatches through IMediaTypeInfo's vtable slot 7.
 func (self *IMediaTypeInfo) Get_Type(strType *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Subtype dispatches through IMediaTypeInfo's vtable slot 8.
 func (self *IMediaTypeInfo) Get_Subtype(strType *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMemAllocator: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-imemallocator
@@ -9145,37 +9145,37 @@ var IID_IMemAllocator = win32.GUID{Data1: 0x56a8689c, Data2: 0x0ad4, Data3: 0x11
 // SetProperties dispatches through IMemAllocator's vtable slot 3.
 func (self *IMemAllocator) SetProperties(pRequest *ALLOCATOR_PROPERTIES, pActual *ALLOCATOR_PROPERTIES) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRequest)), uintptr(unsafe.Pointer(pActual)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProperties dispatches through IMemAllocator's vtable slot 4.
 func (self *IMemAllocator) GetProperties(pProps *ALLOCATOR_PROPERTIES) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProps)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Commit dispatches through IMemAllocator's vtable slot 5.
 func (self *IMemAllocator) Commit() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Decommit dispatches through IMemAllocator's vtable slot 6.
 func (self *IMemAllocator) Decommit() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBuffer dispatches through IMemAllocator's vtable slot 7.
 func (self *IMemAllocator) GetBuffer(ppBuffer **IMediaSample, pStartTime *int64, pEndTime *int64, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppBuffer)), uintptr(unsafe.Pointer(pStartTime)), uintptr(unsafe.Pointer(pEndTime)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReleaseBuffer dispatches through IMemAllocator's vtable slot 8.
 func (self *IMemAllocator) ReleaseBuffer(pBuffer *IMediaSample) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMemAllocatorCallbackTemp: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-imemallocatorcallbacktemp
@@ -9190,13 +9190,13 @@ var IID_IMemAllocatorCallbackTemp = win32.GUID{Data1: 0x379a0cf0, Data2: 0xc1de,
 // SetNotify dispatches through IMemAllocatorCallbackTemp's vtable slot 9.
 func (self *IMemAllocatorCallbackTemp) SetNotify(pNotify *IMemAllocatorNotifyCallbackTemp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNotify)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFreeCount dispatches through IMemAllocatorCallbackTemp's vtable slot 10.
 func (self *IMemAllocatorCallbackTemp) GetFreeCount(plBuffersFree *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plBuffersFree)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMemAllocatorNotifyCallbackTemp: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-imemallocatornotifycallbacktemp
@@ -9211,7 +9211,7 @@ var IID_IMemAllocatorNotifyCallbackTemp = win32.GUID{Data1: 0x92980b30, Data2: 0
 // NotifyRelease dispatches through IMemAllocatorNotifyCallbackTemp's vtable slot 3.
 func (self *IMemAllocatorNotifyCallbackTemp) NotifyRelease() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMemInputPin: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-imeminputpin
@@ -9226,26 +9226,26 @@ var IID_IMemInputPin = win32.GUID{Data1: 0x56a8689d, Data2: 0x0ad4, Data3: 0x11c
 // GetAllocator dispatches through IMemInputPin's vtable slot 3.
 func (self *IMemInputPin) GetAllocator(ppAllocator **IMemAllocator) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAllocator)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NotifyAllocator dispatches through IMemInputPin's vtable slot 4.
 func (self *IMemInputPin) NotifyAllocator(pAllocator *IMemAllocator, bReadOnly bool) error {
 	_bReadOnly := win32.Bool32(bReadOnly)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAllocator)), uintptr(_bReadOnly))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAllocatorRequirements dispatches through IMemInputPin's vtable slot 5.
 func (self *IMemInputPin) GetAllocatorRequirements(pProps *ALLOCATOR_PROPERTIES) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProps)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Receive dispatches through IMemInputPin's vtable slot 6.
 func (self *IMemInputPin) Receive(pSample *IMediaSample) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSample)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReceiveMultiple dispatches through IMemInputPin's vtable slot 7.
@@ -9255,13 +9255,13 @@ func (self *IMemInputPin) ReceiveMultiple(pSamples []*IMediaSample, nSamplesProc
 		_pSamples = &pSamples[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pSamples)), uintptr(len(pSamples)), uintptr(unsafe.Pointer(nSamplesProcessed)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReceiveCanBlock dispatches through IMemInputPin's vtable slot 8.
 func (self *IMemInputPin) ReceiveCanBlock() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMemoryData: https://learn.microsoft.com/windows/win32/api/austream/nn-austream-imemorydata
@@ -9276,19 +9276,19 @@ var IID_IMemoryData = win32.GUID{Data1: 0x327fc560, Data2: 0xaf60, Data3: 0x11d0
 // SetBuffer dispatches through IMemoryData's vtable slot 3.
 func (self *IMemoryData) SetBuffer(cbSize uint32, pbData *byte, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cbSize), uintptr(unsafe.Pointer(pbData)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInfo dispatches through IMemoryData's vtable slot 4.
 func (self *IMemoryData) GetInfo(pdwLength *uint32, ppbData **byte, pcbActualData *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwLength)), uintptr(unsafe.Pointer(ppbData)), uintptr(unsafe.Pointer(pcbActualData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetActual dispatches through IMemoryData's vtable slot 5.
 func (self *IMemoryData) SetActual(cbDataValid uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(cbDataValid))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMixerOCX: https://learn.microsoft.com/windows/win32/api/mixerocx/nn-mixerocx-imixerocx
@@ -9303,49 +9303,49 @@ var IID_IMixerOCX = win32.GUID{Data1: 0x81a3bd32, Data2: 0xdee1, Data3: 0x11d1, 
 // OnDisplayChange dispatches through IMixerOCX's vtable slot 3.
 func (self *IMixerOCX) OnDisplayChange(ulBitsPerPixel uint32, ulScreenWidth uint32, ulScreenHeight uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulBitsPerPixel), uintptr(ulScreenWidth), uintptr(ulScreenHeight))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAspectRatio dispatches through IMixerOCX's vtable slot 4.
 func (self *IMixerOCX) GetAspectRatio(pdwPictAspectRatioX *uint32, pdwPictAspectRatioY *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwPictAspectRatioX)), uintptr(unsafe.Pointer(pdwPictAspectRatioY)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetVideoSize dispatches through IMixerOCX's vtable slot 5.
 func (self *IMixerOCX) GetVideoSize(pdwVideoWidth *uint32, pdwVideoHeight *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwVideoWidth)), uintptr(unsafe.Pointer(pdwVideoHeight)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStatus dispatches through IMixerOCX's vtable slot 6.
 func (self *IMixerOCX) GetStatus(pdwStatus **uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnDraw dispatches through IMixerOCX's vtable slot 7.
 func (self *IMixerOCX) OnDraw(hdcDraw graphicsgdi.HDC, prcDraw *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hdcDraw), uintptr(unsafe.Pointer(prcDraw)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDrawRegion dispatches through IMixerOCX's vtable slot 8.
 func (self *IMixerOCX) SetDrawRegion(lpptTopLeftSC *foundation.POINT, prcDrawCC *foundation.RECT, lprcClip *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpptTopLeftSC)), uintptr(unsafe.Pointer(prcDrawCC)), uintptr(unsafe.Pointer(lprcClip)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Advise dispatches through IMixerOCX's vtable slot 9.
 func (self *IMixerOCX) Advise(pmdns *IMixerOCXNotify) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pmdns)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnAdvise dispatches through IMixerOCX's vtable slot 10.
 func (self *IMixerOCX) UnAdvise() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMixerOCXNotify: https://learn.microsoft.com/windows/win32/api/mixerocx/nn-mixerocx-imixerocxnotify
@@ -9360,19 +9360,19 @@ var IID_IMixerOCXNotify = win32.GUID{Data1: 0x81a3bd31, Data2: 0xdee1, Data3: 0x
 // OnInvalidateRect dispatches through IMixerOCXNotify's vtable slot 3.
 func (self *IMixerOCXNotify) OnInvalidateRect(lpcRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpcRect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnStatusChange dispatches through IMixerOCXNotify's vtable slot 4.
 func (self *IMixerOCXNotify) OnStatusChange(ulStatusFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulStatusFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnDataChange dispatches through IMixerOCXNotify's vtable slot 5.
 func (self *IMixerOCXNotify) OnDataChange(ulDataFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(ulDataFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMixerPinConfig: https://learn.microsoft.com/windows/win32/api/mpconfig/nn-mpconfig-imixerpinconfig
@@ -9387,74 +9387,74 @@ var IID_IMixerPinConfig = win32.GUID{Data1: 0x593cdde1, Data2: 0x0759, Data3: 0x
 // SetRelativePosition dispatches through IMixerPinConfig's vtable slot 3.
 func (self *IMixerPinConfig) SetRelativePosition(dwLeft uint32, dwTop uint32, dwRight uint32, dwBottom uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwLeft), uintptr(dwTop), uintptr(dwRight), uintptr(dwBottom))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRelativePosition dispatches through IMixerPinConfig's vtable slot 4.
 func (self *IMixerPinConfig) GetRelativePosition(pdwLeft *uint32, pdwTop *uint32, pdwRight *uint32, pdwBottom *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwLeft)), uintptr(unsafe.Pointer(pdwTop)), uintptr(unsafe.Pointer(pdwRight)), uintptr(unsafe.Pointer(pdwBottom)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetZOrder dispatches through IMixerPinConfig's vtable slot 5.
 func (self *IMixerPinConfig) SetZOrder(dwZOrder uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwZOrder))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetZOrder dispatches through IMixerPinConfig's vtable slot 6.
 func (self *IMixerPinConfig) GetZOrder(pdwZOrder *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwZOrder)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetColorKey dispatches through IMixerPinConfig's vtable slot 7.
 func (self *IMixerPinConfig) SetColorKey(pColorKey *COLORKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pColorKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetColorKey dispatches through IMixerPinConfig's vtable slot 8.
 func (self *IMixerPinConfig) GetColorKey(pColorKey *COLORKEY, pColor *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pColorKey)), uintptr(unsafe.Pointer(pColor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBlendingParameter dispatches through IMixerPinConfig's vtable slot 9.
 func (self *IMixerPinConfig) SetBlendingParameter(dwBlendingParameter uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwBlendingParameter))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBlendingParameter dispatches through IMixerPinConfig's vtable slot 10.
 func (self *IMixerPinConfig) GetBlendingParameter(pdwBlendingParameter *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwBlendingParameter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAspectRatioMode dispatches through IMixerPinConfig's vtable slot 11.
 func (self *IMixerPinConfig) SetAspectRatioMode(amAspectRatioMode AM_ASPECT_RATIO_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(amAspectRatioMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAspectRatioMode dispatches through IMixerPinConfig's vtable slot 12.
 func (self *IMixerPinConfig) GetAspectRatioMode(pamAspectRatioMode *AM_ASPECT_RATIO_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pamAspectRatioMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetStreamTransparent dispatches through IMixerPinConfig's vtable slot 13.
 func (self *IMixerPinConfig) SetStreamTransparent(bStreamTransparent bool) error {
 	_bStreamTransparent := win32.Bool32(bStreamTransparent)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(_bStreamTransparent))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStreamTransparent dispatches through IMixerPinConfig's vtable slot 14.
 func (self *IMixerPinConfig) GetStreamTransparent(pbStreamTransparent *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbStreamTransparent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMixerPinConfig2: https://learn.microsoft.com/windows/win32/api/mpconfig/nn-mpconfig-imixerpinconfig2
@@ -9469,13 +9469,13 @@ var IID_IMixerPinConfig2 = win32.GUID{Data1: 0xebf47182, Data2: 0x8764, Data3: 0
 // SetOverlaySurfaceColorControls dispatches through IMixerPinConfig2's vtable slot 15.
 func (self *IMixerPinConfig2) SetOverlaySurfaceColorControls(pColorControl *graphicsdirectdraw.DDCOLORCONTROL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pColorControl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOverlaySurfaceColorControls dispatches through IMixerPinConfig2's vtable slot 16.
 func (self *IMixerPinConfig2) GetOverlaySurfaceColorControls(pColorControl *graphicsdirectdraw.DDCOLORCONTROL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pColorControl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMpeg2Demultiplexer: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-impeg2demultiplexer
@@ -9491,21 +9491,21 @@ var IID_IMpeg2Demultiplexer = win32.GUID{Data1: 0x436eee9c, Data2: 0x264f, Data3
 func (self *IMpeg2Demultiplexer) CreateOutputPin(pMediaType *mediamediafoundation.AM_MEDIA_TYPE, pszPinName string, ppIPin **IPin) error {
 	_pszPinName := win32.UTF16Ptr(pszPinName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMediaType)), uintptr(unsafe.Pointer(_pszPinName)), uintptr(unsafe.Pointer(ppIPin)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetOutputPinMediaType dispatches through IMpeg2Demultiplexer's vtable slot 4.
 func (self *IMpeg2Demultiplexer) SetOutputPinMediaType(pszPinName string, pMediaType *mediamediafoundation.AM_MEDIA_TYPE) error {
 	_pszPinName := win32.UTF16Ptr(pszPinName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPinName)), uintptr(unsafe.Pointer(pMediaType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteOutputPin dispatches through IMpeg2Demultiplexer's vtable slot 5.
 func (self *IMpeg2Demultiplexer) DeleteOutputPin(pszPinName string) error {
 	_pszPinName := win32.UTF16Ptr(pszPinName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPinName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMpegAudioDecoder: https://learn.microsoft.com/windows/win32/api/mpegtype/nn-mpegtype-impegaudiodecoder
@@ -9520,79 +9520,79 @@ var IID_IMpegAudioDecoder = win32.GUID{Data1: 0xb45dd570, Data2: 0x3c77, Data3: 
 // Get_FrequencyDivider dispatches through IMpegAudioDecoder's vtable slot 3.
 func (self *IMpegAudioDecoder) Get_FrequencyDivider(pDivider *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDivider)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FrequencyDivider dispatches through IMpegAudioDecoder's vtable slot 4.
 func (self *IMpegAudioDecoder) Put_FrequencyDivider(Divider uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Divider))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DecoderAccuracy dispatches through IMpegAudioDecoder's vtable slot 5.
 func (self *IMpegAudioDecoder) Get_DecoderAccuracy(pAccuracy *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAccuracy)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DecoderAccuracy dispatches through IMpegAudioDecoder's vtable slot 6.
 func (self *IMpegAudioDecoder) Put_DecoderAccuracy(Accuracy uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(Accuracy))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Stereo dispatches through IMpegAudioDecoder's vtable slot 7.
 func (self *IMpegAudioDecoder) Get_Stereo(pStereo *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStereo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Stereo dispatches through IMpegAudioDecoder's vtable slot 8.
 func (self *IMpegAudioDecoder) Put_Stereo(Stereo uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Stereo))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DecoderWordSize dispatches through IMpegAudioDecoder's vtable slot 9.
 func (self *IMpegAudioDecoder) Get_DecoderWordSize(pWordSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWordSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DecoderWordSize dispatches through IMpegAudioDecoder's vtable slot 10.
 func (self *IMpegAudioDecoder) Put_DecoderWordSize(WordSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(WordSize))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IntegerDecode dispatches through IMpegAudioDecoder's vtable slot 11.
 func (self *IMpegAudioDecoder) Get_IntegerDecode(pIntDecode *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIntDecode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_IntegerDecode dispatches through IMpegAudioDecoder's vtable slot 12.
 func (self *IMpegAudioDecoder) Put_IntegerDecode(IntDecode uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(IntDecode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DualMode dispatches through IMpegAudioDecoder's vtable slot 13.
 func (self *IMpegAudioDecoder) Get_DualMode(pIntDecode *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIntDecode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DualMode dispatches through IMpegAudioDecoder's vtable slot 14.
 func (self *IMpegAudioDecoder) Put_DualMode(IntDecode uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(IntDecode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AudioFormat dispatches through IMpegAudioDecoder's vtable slot 15.
 func (self *IMpegAudioDecoder) Get_AudioFormat(lpFmt *MPEG1WAVEFORMAT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpFmt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMultiMediaStream: https://learn.microsoft.com/windows/win32/api/mmstream/nn-mmstream-imultimediastream
@@ -9607,55 +9607,55 @@ var IID_IMultiMediaStream = win32.GUID{Data1: 0xb502d1bc, Data2: 0x9a57, Data3: 
 // GetInformation dispatches through IMultiMediaStream's vtable slot 3.
 func (self *IMultiMediaStream) GetInformation(pdwFlags *MMSSF_GET_INFORMATION_FLAGS, pStreamType *STREAM_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)), uintptr(unsafe.Pointer(pStreamType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMediaStream dispatches through IMultiMediaStream's vtable slot 4.
 func (self *IMultiMediaStream) GetMediaStream(idPurpose *win32.GUID, ppMediaStream **IMediaStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(idPurpose)), uintptr(unsafe.Pointer(ppMediaStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumMediaStreams dispatches through IMultiMediaStream's vtable slot 5.
 func (self *IMultiMediaStream) EnumMediaStreams(Index int32, ppMediaStream **IMediaStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(ppMediaStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetState dispatches through IMultiMediaStream's vtable slot 6.
 func (self *IMultiMediaStream) GetState(pCurrentState *STREAM_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCurrentState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetState dispatches through IMultiMediaStream's vtable slot 7.
 func (self *IMultiMediaStream) SetState(NewState STREAM_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(NewState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTime dispatches through IMultiMediaStream's vtable slot 8.
 func (self *IMultiMediaStream) GetTime(pCurrentTime *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCurrentTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDuration dispatches through IMultiMediaStream's vtable slot 9.
 func (self *IMultiMediaStream) GetDuration(pDuration *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDuration)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Seek dispatches through IMultiMediaStream's vtable slot 10.
 func (self *IMultiMediaStream) Seek(SeekTime int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(SeekTime))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEndOfStreamEventHandle dispatches through IMultiMediaStream's vtable slot 11.
 func (self *IMultiMediaStream) GetEndOfStreamEventHandle(phEOS *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phEOS)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IOverlay: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ioverlay
@@ -9670,7 +9670,7 @@ var IID_IOverlay = win32.GUID{Data1: 0x56a868a1, Data2: 0x0ad4, Data3: 0x11ce, D
 // GetPalette dispatches through IOverlay's vtable slot 3.
 func (self *IOverlay) GetPalette(pdwColors *uint32, ppPalette **graphicsgdi.PALETTEENTRY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwColors)), uintptr(unsafe.Pointer(ppPalette)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetPalette dispatches through IOverlay's vtable slot 4.
@@ -9680,55 +9680,55 @@ func (self *IOverlay) SetPalette(pPalette []graphicsgdi.PALETTEENTRY) error {
 		_pPalette = &pPalette[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(pPalette)), uintptr(unsafe.Pointer(_pPalette)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDefaultColorKey dispatches through IOverlay's vtable slot 5.
 func (self *IOverlay) GetDefaultColorKey(pColorKey *COLORKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pColorKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetColorKey dispatches through IOverlay's vtable slot 6.
 func (self *IOverlay) GetColorKey(pColorKey *COLORKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pColorKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetColorKey dispatches through IOverlay's vtable slot 7.
 func (self *IOverlay) SetColorKey(pColorKey *COLORKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pColorKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetWindowHandle dispatches through IOverlay's vtable slot 8.
 func (self *IOverlay) GetWindowHandle(pHwnd *foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHwnd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetClipList dispatches through IOverlay's vtable slot 9.
 func (self *IOverlay) GetClipList(pSourceRect *foundation.RECT, pDestinationRect *foundation.RECT, ppRgnData **graphicsgdi.RGNDATA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSourceRect)), uintptr(unsafe.Pointer(pDestinationRect)), uintptr(unsafe.Pointer(ppRgnData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetVideoPosition dispatches through IOverlay's vtable slot 10.
 func (self *IOverlay) GetVideoPosition(pSourceRect *foundation.RECT, pDestinationRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSourceRect)), uintptr(unsafe.Pointer(pDestinationRect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Advise dispatches through IOverlay's vtable slot 11.
 func (self *IOverlay) Advise(pOverlayNotify *IOverlayNotify, dwInterests uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOverlayNotify)), uintptr(dwInterests))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Unadvise dispatches through IOverlay's vtable slot 12.
 func (self *IOverlay) Unadvise() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IOverlayNotify: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ioverlaynotify
@@ -9743,25 +9743,25 @@ var IID_IOverlayNotify = win32.GUID{Data1: 0x56a868a0, Data2: 0x0ad4, Data3: 0x1
 // OnPaletteChange dispatches through IOverlayNotify's vtable slot 3.
 func (self *IOverlayNotify) OnPaletteChange(dwColors uint32, pPalette *graphicsgdi.PALETTEENTRY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwColors), uintptr(unsafe.Pointer(pPalette)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnClipChange dispatches through IOverlayNotify's vtable slot 4.
 func (self *IOverlayNotify) OnClipChange(pSourceRect *foundation.RECT, pDestinationRect *foundation.RECT, pRgnData *graphicsgdi.RGNDATA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSourceRect)), uintptr(unsafe.Pointer(pDestinationRect)), uintptr(unsafe.Pointer(pRgnData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnColorKeyChange dispatches through IOverlayNotify's vtable slot 5.
 func (self *IOverlayNotify) OnColorKeyChange(pColorKey *COLORKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pColorKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnPositionChange dispatches through IOverlayNotify's vtable slot 6.
 func (self *IOverlayNotify) OnPositionChange(pSourceRect *foundation.RECT, pDestinationRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSourceRect)), uintptr(unsafe.Pointer(pDestinationRect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IOverlayNotify2: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ioverlaynotify2
@@ -9776,7 +9776,7 @@ var IID_IOverlayNotify2 = win32.GUID{Data1: 0x680efa10, Data2: 0xd535, Data3: 0x
 // OnDisplayChange dispatches through IOverlayNotify2's vtable slot 7.
 func (self *IOverlayNotify2) OnDisplayChange(hMonitor graphicsgdi.HMONITOR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hMonitor))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPersistMediaPropertyBag: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ipersistmediapropertybag
@@ -9791,13 +9791,13 @@ var IID_IPersistMediaPropertyBag = win32.GUID{Data1: 0x5738e040, Data2: 0xb67f, 
 // InitNew dispatches through IPersistMediaPropertyBag's vtable slot 4.
 func (self *IPersistMediaPropertyBag) InitNew() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Load dispatches through IPersistMediaPropertyBag's vtable slot 5.
 func (self *IPersistMediaPropertyBag) Load(pPropBag *IMediaPropertyBag, pErrorLog *systemcom.IErrorLog) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPropBag)), uintptr(unsafe.Pointer(pErrorLog)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Save dispatches through IPersistMediaPropertyBag's vtable slot 6.
@@ -9805,7 +9805,7 @@ func (self *IPersistMediaPropertyBag) Save(pPropBag *IMediaPropertyBag, fClearDi
 	_fClearDirty := win32.Bool32(fClearDirty)
 	_fSaveAllProperties := win32.Bool32(fSaveAllProperties)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPropBag)), uintptr(_fClearDirty), uintptr(_fSaveAllProperties))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPin: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ipin
@@ -9820,85 +9820,85 @@ var IID_IPin = win32.GUID{Data1: 0x56a86891, Data2: 0x0ad4, Data3: 0x11ce, Data4
 // Connect dispatches through IPin's vtable slot 3.
 func (self *IPin) Connect(pReceivePin *IPin, pmt *mediamediafoundation.AM_MEDIA_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pReceivePin)), uintptr(unsafe.Pointer(pmt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReceiveConnection dispatches through IPin's vtable slot 4.
 func (self *IPin) ReceiveConnection(pConnector *IPin, pmt *mediamediafoundation.AM_MEDIA_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pConnector)), uintptr(unsafe.Pointer(pmt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Disconnect dispatches through IPin's vtable slot 5.
 func (self *IPin) Disconnect() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ConnectedTo dispatches through IPin's vtable slot 6.
 func (self *IPin) ConnectedTo(pPin **IPin) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPin)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ConnectionMediaType dispatches through IPin's vtable slot 7.
 func (self *IPin) ConnectionMediaType(pmt *mediamediafoundation.AM_MEDIA_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pmt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryPinInfo dispatches through IPin's vtable slot 8.
 func (self *IPin) QueryPinInfo(pInfo *PIN_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryDirection dispatches through IPin's vtable slot 9.
 func (self *IPin) QueryDirection(pPinDir *PIN_DIRECTION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPinDir)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryId dispatches through IPin's vtable slot 10.
 func (self *IPin) QueryId(Id *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Id)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryAccept dispatches through IPin's vtable slot 11.
 func (self *IPin) QueryAccept(pmt *mediamediafoundation.AM_MEDIA_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pmt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumMediaTypes dispatches through IPin's vtable slot 12.
 func (self *IPin) EnumMediaTypes(ppEnum **IEnumMediaTypes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryInternalConnections dispatches through IPin's vtable slot 13.
 func (self *IPin) QueryInternalConnections(apPin **IPin, nPin *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(apPin)), uintptr(unsafe.Pointer(nPin)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndOfStream dispatches through IPin's vtable slot 14.
 func (self *IPin) EndOfStream() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BeginFlush dispatches through IPin's vtable slot 15.
 func (self *IPin) BeginFlush() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndFlush dispatches through IPin's vtable slot 16.
 func (self *IPin) EndFlush() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPinConnection: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ipinconnection
@@ -9913,25 +9913,25 @@ var IID_IPinConnection = win32.GUID{Data1: 0x4a9a62d3, Data2: 0x27d4, Data3: 0x4
 // DynamicQueryAccept dispatches through IPinConnection's vtable slot 3.
 func (self *IPinConnection) DynamicQueryAccept(pmt *mediamediafoundation.AM_MEDIA_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pmt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NotifyEndOfStream dispatches through IPinConnection's vtable slot 4.
 func (self *IPinConnection) NotifyEndOfStream(hNotifyEvent foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hNotifyEvent))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsEndPin dispatches through IPinConnection's vtable slot 5.
 func (self *IPinConnection) IsEndPin() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DynamicDisconnect dispatches through IPinConnection's vtable slot 6.
 func (self *IPinConnection) DynamicDisconnect() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPinFlowControl: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ipinflowcontrol
@@ -9946,7 +9946,7 @@ var IID_IPinFlowControl = win32.GUID{Data1: 0xc56e9858, Data2: 0xdbf3, Data3: 0x
 // Block dispatches through IPinFlowControl's vtable slot 3.
 func (self *IPinFlowControl) Block(dwBlockFlags uint32, hEvent foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwBlockFlags), uintptr(hEvent))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 56a868bd-0ad4-11ce-b03a-0020af0ba770
@@ -9960,79 +9960,79 @@ var IID_IPinInfo = win32.GUID{Data1: 0x56a868bd, Data2: 0x0ad4, Data3: 0x11ce, D
 // Get_Pin dispatches through IPinInfo's vtable slot 7.
 func (self *IPinInfo) Get_Pin(ppUnk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ConnectedTo dispatches through IPinInfo's vtable slot 8.
 func (self *IPinInfo) Get_ConnectedTo(ppUnk **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ConnectionMediaType dispatches through IPinInfo's vtable slot 9.
 func (self *IPinInfo) Get_ConnectionMediaType(ppUnk **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FilterInfo dispatches through IPinInfo's vtable slot 10.
 func (self *IPinInfo) Get_FilterInfo(ppUnk **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through IPinInfo's vtable slot 11.
 func (self *IPinInfo) Get_Name(ppUnk *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Direction dispatches through IPinInfo's vtable slot 12.
 func (self *IPinInfo) Get_Direction(ppDirection *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDirection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PinID dispatches through IPinInfo's vtable slot 13.
 func (self *IPinInfo) Get_PinID(strPinID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strPinID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MediaTypes dispatches through IPinInfo's vtable slot 14.
 func (self *IPinInfo) Get_MediaTypes(ppUnk **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Connect dispatches through IPinInfo's vtable slot 15.
 func (self *IPinInfo) Connect(pPin *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPin)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ConnectDirect dispatches through IPinInfo's vtable slot 16.
 func (self *IPinInfo) ConnectDirect(pPin *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPin)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ConnectWithType dispatches through IPinInfo's vtable slot 17.
 func (self *IPinInfo) ConnectWithType(pPin *systemcom.IUnknown, pMediaType *systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPin)), uintptr(unsafe.Pointer(pMediaType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Disconnect dispatches through IPinInfo's vtable slot 18.
 func (self *IPinInfo) Disconnect() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Render dispatches through IPinInfo's vtable slot 19.
 func (self *IPinInfo) Render() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IQualProp: https://learn.microsoft.com/windows/win32/api/amvideo/nn-amvideo-iqualprop
@@ -10047,37 +10047,37 @@ var IID_IQualProp = win32.GUID{Data1: 0x1bd0ecb0, Data2: 0xf8e2, Data3: 0x11ce, 
 // Get_FramesDroppedInRenderer dispatches through IQualProp's vtable slot 3.
 func (self *IQualProp) Get_FramesDroppedInRenderer(pcFrames *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcFrames)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FramesDrawn dispatches through IQualProp's vtable slot 4.
 func (self *IQualProp) Get_FramesDrawn(pcFramesDrawn *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcFramesDrawn)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AvgFrameRate dispatches through IQualProp's vtable slot 5.
 func (self *IQualProp) Get_AvgFrameRate(piAvgFrameRate *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piAvgFrameRate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Jitter dispatches through IQualProp's vtable slot 6.
 func (self *IQualProp) Get_Jitter(iJitter *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(iJitter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AvgSyncOffset dispatches through IQualProp's vtable slot 7.
 func (self *IQualProp) Get_AvgSyncOffset(piAvg *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piAvg)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DevSyncOffset dispatches through IQualProp's vtable slot 8.
 func (self *IQualProp) Get_DevSyncOffset(piDev *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piDev)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IQualityControl: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iqualitycontrol
@@ -10092,7 +10092,7 @@ var IID_IQualityControl = win32.GUID{Data1: 0x56a868a5, Data2: 0x0ad4, Data3: 0x
 // SetSink dispatches through IQualityControl's vtable slot 4.
 func (self *IQualityControl) SetSink(piqc *IQualityControl) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piqc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IQueueCommand: https://learn.microsoft.com/windows/win32/api/control/nn-control-iqueuecommand
@@ -10115,13 +10115,13 @@ var IID_IRegFilterInfo = win32.GUID{Data1: 0x56a868bb, Data2: 0x0ad4, Data3: 0x1
 // Get_Name dispatches through IRegFilterInfo's vtable slot 7.
 func (self *IRegFilterInfo) Get_Name(strName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Filter dispatches through IRegFilterInfo's vtable slot 8.
 func (self *IRegFilterInfo) Filter(ppUnk **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IRegisterServiceProvider: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iregisterserviceprovider
@@ -10136,7 +10136,7 @@ var IID_IRegisterServiceProvider = win32.GUID{Data1: 0x7b3a2f01, Data2: 0x0751, 
 // RegisterService dispatches through IRegisterServiceProvider's vtable slot 3.
 func (self *IRegisterServiceProvider) RegisterService(guidService *win32.GUID, pUnkObject *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidService)), uintptr(unsafe.Pointer(pUnkObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IResourceConsumer: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iresourceconsumer
@@ -10151,13 +10151,13 @@ var IID_IResourceConsumer = win32.GUID{Data1: 0x56a868ad, Data2: 0x0ad4, Data3: 
 // AcquireResource dispatches through IResourceConsumer's vtable slot 3.
 func (self *IResourceConsumer) AcquireResource(idResource int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(idResource))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReleaseResource dispatches through IResourceConsumer's vtable slot 4.
 func (self *IResourceConsumer) ReleaseResource(idResource int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(idResource))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IResourceManager: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iresourcemanager
@@ -10173,7 +10173,7 @@ var IID_IResourceManager = win32.GUID{Data1: 0x56a868ac, Data2: 0x0ad4, Data3: 0
 func (self *IResourceManager) Register(pName string, cResource int32, plToken *int32) error {
 	_pName := win32.UTF16Ptr(pName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pName)), uintptr(cResource), uintptr(unsafe.Pointer(plToken)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterGroup dispatches through IResourceManager's vtable slot 4.
@@ -10184,44 +10184,44 @@ func (self *IResourceManager) RegisterGroup(pName string, palTokens []int32, plT
 		_palTokens = &palTokens[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pName)), uintptr(len(palTokens)), uintptr(unsafe.Pointer(_palTokens)), uintptr(unsafe.Pointer(plToken)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RequestResource dispatches through IResourceManager's vtable slot 5.
 func (self *IResourceManager) RequestResource(idResource int32, pFocusObject *systemcom.IUnknown, pConsumer *IResourceConsumer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(idResource), uintptr(unsafe.Pointer(pFocusObject)), uintptr(unsafe.Pointer(pConsumer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NotifyAcquire dispatches through IResourceManager's vtable slot 6.
 func (self *IResourceManager) NotifyAcquire(idResource int32, pConsumer *IResourceConsumer, hr foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(idResource), uintptr(unsafe.Pointer(pConsumer)), uintptr(hr))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NotifyRelease dispatches through IResourceManager's vtable slot 7.
 func (self *IResourceManager) NotifyRelease(idResource int32, pConsumer *IResourceConsumer, bStillWant bool) error {
 	_bStillWant := win32.Bool32(bStillWant)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(idResource), uintptr(unsafe.Pointer(pConsumer)), uintptr(_bStillWant))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CancelRequest dispatches through IResourceManager's vtable slot 8.
 func (self *IResourceManager) CancelRequest(idResource int32, pConsumer *IResourceConsumer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(idResource), uintptr(unsafe.Pointer(pConsumer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetFocus dispatches through IResourceManager's vtable slot 9.
 func (self *IResourceManager) SetFocus(pFocusObject *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFocusObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReleaseFocus dispatches through IResourceManager's vtable slot 10.
 func (self *IResourceManager) ReleaseFocus(pFocusObject *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFocusObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISeekingPassThru: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iseekingpassthru
@@ -10237,7 +10237,7 @@ var IID_ISeekingPassThru = win32.GUID{Data1: 0x36b73883, Data2: 0xc2c8, Data3: 0
 func (self *ISeekingPassThru) Init(bSupportRendering bool, pPin *IPin) error {
 	_bSupportRendering := win32.Bool32(bSupportRendering)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(_bSupportRendering), uintptr(unsafe.Pointer(pPin)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISelector: https://learn.microsoft.com/windows/win32/api/vidcap/nn-vidcap-iselector
@@ -10252,19 +10252,19 @@ var IID_ISelector = win32.GUID{Data1: 0x1abdaeca, Data2: 0x68b6, Data3: 0x4f83, 
 // Get_NumSources dispatches through ISelector's vtable slot 3.
 func (self *ISelector) Get_NumSources(pdwNumSources *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwNumSources)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SourceNodeId dispatches through ISelector's vtable slot 4.
 func (self *ISelector) Get_SourceNodeId(pdwPinId *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwPinId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SourceNodeId dispatches through ISelector's vtable slot 5.
 func (self *ISelector) Put_SourceNodeId(dwPinId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwPinId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 4c437b91-6e9e-11d1-a704-006097c4e476
@@ -10278,7 +10278,7 @@ var IID_ISpecifyParticularPages = win32.GUID{Data1: 0x4c437b91, Data2: 0x6e9e, D
 // GetPages dispatches through ISpecifyParticularPages's vtable slot 3.
 func (self *ISpecifyParticularPages) GetPages(guidWhatPages *win32.GUID, pPages *systemole.CAUUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidWhatPages)), uintptr(unsafe.Pointer(pPages)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IStreamBuilder: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-istreambuilder
@@ -10293,13 +10293,13 @@ var IID_IStreamBuilder = win32.GUID{Data1: 0x56a868bf, Data2: 0x0ad4, Data3: 0x1
 // Render dispatches through IStreamBuilder's vtable slot 3.
 func (self *IStreamBuilder) Render(ppinOut *IPin, pGraph *IGraphBuilder) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppinOut)), uintptr(unsafe.Pointer(pGraph)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Backout dispatches through IStreamBuilder's vtable slot 4.
 func (self *IStreamBuilder) Backout(ppinOut *IPin, pGraph *IGraphBuilder) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppinOut)), uintptr(unsafe.Pointer(pGraph)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IStreamSample: https://learn.microsoft.com/windows/win32/api/mmstream/nn-mmstream-istreamsample
@@ -10314,31 +10314,31 @@ var IID_IStreamSample = win32.GUID{Data1: 0xb502d1be, Data2: 0x9a57, Data3: 0x11
 // GetMediaStream dispatches through IStreamSample's vtable slot 3.
 func (self *IStreamSample) GetMediaStream(ppMediaStream **IMediaStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppMediaStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSampleTimes dispatches through IStreamSample's vtable slot 4.
 func (self *IStreamSample) GetSampleTimes(pStartTime *int64, pEndTime *int64, pCurrentTime *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStartTime)), uintptr(unsafe.Pointer(pEndTime)), uintptr(unsafe.Pointer(pCurrentTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetSampleTimes dispatches through IStreamSample's vtable slot 5.
 func (self *IStreamSample) SetSampleTimes(pStartTime *int64, pEndTime *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStartTime)), uintptr(unsafe.Pointer(pEndTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Update dispatches through IStreamSample's vtable slot 6.
 func (self *IStreamSample) Update(dwFlags uint32, hEvent foundation.HANDLE, pfnAPC foundation.PAPCFUNC, dwAPCData uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(hEvent), uintptr(pfnAPC), uintptr(dwAPCData))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CompletionStatus dispatches through IStreamSample's vtable slot 7.
 func (self *IStreamSample) CompletionStatus(dwFlags uint32, dwMilliseconds uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(dwMilliseconds))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVMRAspectRatioControl: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ivmraspectratiocontrol
@@ -10353,13 +10353,13 @@ var IID_IVMRAspectRatioControl = win32.GUID{Data1: 0xede80b5c, Data2: 0xbad6, Da
 // GetAspectRatioMode dispatches through IVMRAspectRatioControl's vtable slot 3.
 func (self *IVMRAspectRatioControl) GetAspectRatioMode(lpdwARMode *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpdwARMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAspectRatioMode dispatches through IVMRAspectRatioControl's vtable slot 4.
 func (self *IVMRAspectRatioControl) SetAspectRatioMode(dwARMode uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwARMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVMRAspectRatioControl9: https://learn.microsoft.com/windows/win32/api/vmr9/nn-vmr9-ivmraspectratiocontrol9
@@ -10374,13 +10374,13 @@ var IID_IVMRAspectRatioControl9 = win32.GUID{Data1: 0x00d96c29, Data2: 0xbbde, D
 // GetAspectRatioMode dispatches through IVMRAspectRatioControl9's vtable slot 3.
 func (self *IVMRAspectRatioControl9) GetAspectRatioMode(lpdwARMode *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpdwARMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAspectRatioMode dispatches through IVMRAspectRatioControl9's vtable slot 4.
 func (self *IVMRAspectRatioControl9) SetAspectRatioMode(dwARMode uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwARMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVMRDeinterlaceControl: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ivmrdeinterlacecontrol
@@ -10395,43 +10395,43 @@ var IID_IVMRDeinterlaceControl = win32.GUID{Data1: 0xbb057577, Data2: 0x0db8, Da
 // GetNumberOfDeinterlaceModes dispatches through IVMRDeinterlaceControl's vtable slot 3.
 func (self *IVMRDeinterlaceControl) GetNumberOfDeinterlaceModes(lpVideoDescription *VMRVideoDesc, lpdwNumDeinterlaceModes *uint32, lpDeinterlaceModes *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpVideoDescription)), uintptr(unsafe.Pointer(lpdwNumDeinterlaceModes)), uintptr(unsafe.Pointer(lpDeinterlaceModes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeinterlaceModeCaps dispatches through IVMRDeinterlaceControl's vtable slot 4.
 func (self *IVMRDeinterlaceControl) GetDeinterlaceModeCaps(lpDeinterlaceMode *win32.GUID, lpVideoDescription *VMRVideoDesc, lpDeinterlaceCaps *VMRDeinterlaceCaps) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpDeinterlaceMode)), uintptr(unsafe.Pointer(lpVideoDescription)), uintptr(unsafe.Pointer(lpDeinterlaceCaps)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeinterlaceMode dispatches through IVMRDeinterlaceControl's vtable slot 5.
 func (self *IVMRDeinterlaceControl) GetDeinterlaceMode(dwStreamID uint32, lpDeinterlaceMode *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwStreamID), uintptr(unsafe.Pointer(lpDeinterlaceMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDeinterlaceMode dispatches through IVMRDeinterlaceControl's vtable slot 6.
 func (self *IVMRDeinterlaceControl) SetDeinterlaceMode(dwStreamID uint32, lpDeinterlaceMode *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwStreamID), uintptr(unsafe.Pointer(lpDeinterlaceMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeinterlacePrefs dispatches through IVMRDeinterlaceControl's vtable slot 7.
 func (self *IVMRDeinterlaceControl) GetDeinterlacePrefs(lpdwDeinterlacePrefs *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpdwDeinterlacePrefs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDeinterlacePrefs dispatches through IVMRDeinterlaceControl's vtable slot 8.
 func (self *IVMRDeinterlaceControl) SetDeinterlacePrefs(dwDeinterlacePrefs uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwDeinterlacePrefs))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetActualDeinterlaceMode dispatches through IVMRDeinterlaceControl's vtable slot 9.
 func (self *IVMRDeinterlaceControl) GetActualDeinterlaceMode(dwStreamID uint32, lpDeinterlaceMode *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwStreamID), uintptr(unsafe.Pointer(lpDeinterlaceMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVMRDeinterlaceControl9: https://learn.microsoft.com/windows/win32/api/vmr9/nn-vmr9-ivmrdeinterlacecontrol9
@@ -10446,43 +10446,43 @@ var IID_IVMRDeinterlaceControl9 = win32.GUID{Data1: 0xa215fb8d, Data2: 0x13c2, D
 // GetNumberOfDeinterlaceModes dispatches through IVMRDeinterlaceControl9's vtable slot 3.
 func (self *IVMRDeinterlaceControl9) GetNumberOfDeinterlaceModes(lpVideoDescription *VMR9VideoDesc, lpdwNumDeinterlaceModes *uint32, lpDeinterlaceModes *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpVideoDescription)), uintptr(unsafe.Pointer(lpdwNumDeinterlaceModes)), uintptr(unsafe.Pointer(lpDeinterlaceModes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeinterlaceModeCaps dispatches through IVMRDeinterlaceControl9's vtable slot 4.
 func (self *IVMRDeinterlaceControl9) GetDeinterlaceModeCaps(lpDeinterlaceMode *win32.GUID, lpVideoDescription *VMR9VideoDesc, lpDeinterlaceCaps *VMR9DeinterlaceCaps) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpDeinterlaceMode)), uintptr(unsafe.Pointer(lpVideoDescription)), uintptr(unsafe.Pointer(lpDeinterlaceCaps)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeinterlaceMode dispatches through IVMRDeinterlaceControl9's vtable slot 5.
 func (self *IVMRDeinterlaceControl9) GetDeinterlaceMode(dwStreamID uint32, lpDeinterlaceMode *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwStreamID), uintptr(unsafe.Pointer(lpDeinterlaceMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDeinterlaceMode dispatches through IVMRDeinterlaceControl9's vtable slot 6.
 func (self *IVMRDeinterlaceControl9) SetDeinterlaceMode(dwStreamID uint32, lpDeinterlaceMode *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwStreamID), uintptr(unsafe.Pointer(lpDeinterlaceMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeinterlacePrefs dispatches through IVMRDeinterlaceControl9's vtable slot 7.
 func (self *IVMRDeinterlaceControl9) GetDeinterlacePrefs(lpdwDeinterlacePrefs *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpdwDeinterlacePrefs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDeinterlacePrefs dispatches through IVMRDeinterlaceControl9's vtable slot 8.
 func (self *IVMRDeinterlaceControl9) SetDeinterlacePrefs(dwDeinterlacePrefs uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwDeinterlacePrefs))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetActualDeinterlaceMode dispatches through IVMRDeinterlaceControl9's vtable slot 9.
 func (self *IVMRDeinterlaceControl9) GetActualDeinterlaceMode(dwStreamID uint32, lpDeinterlaceMode *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwStreamID), uintptr(unsafe.Pointer(lpDeinterlaceMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVMRFilterConfig: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ivmrfilterconfig
@@ -10497,43 +10497,43 @@ var IID_IVMRFilterConfig = win32.GUID{Data1: 0x9e5530c5, Data2: 0x7034, Data3: 0
 // SetImageCompositor dispatches through IVMRFilterConfig's vtable slot 3.
 func (self *IVMRFilterConfig) SetImageCompositor(lpVMRImgCompositor *IVMRImageCompositor) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpVMRImgCompositor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetNumberOfStreams dispatches through IVMRFilterConfig's vtable slot 4.
 func (self *IVMRFilterConfig) SetNumberOfStreams(dwMaxStreams uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwMaxStreams))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNumberOfStreams dispatches through IVMRFilterConfig's vtable slot 5.
 func (self *IVMRFilterConfig) GetNumberOfStreams(pdwMaxStreams *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwMaxStreams)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetRenderingPrefs dispatches through IVMRFilterConfig's vtable slot 6.
 func (self *IVMRFilterConfig) SetRenderingPrefs(dwRenderFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwRenderFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRenderingPrefs dispatches through IVMRFilterConfig's vtable slot 7.
 func (self *IVMRFilterConfig) GetRenderingPrefs(pdwRenderFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwRenderFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetRenderingMode dispatches through IVMRFilterConfig's vtable slot 8.
 func (self *IVMRFilterConfig) SetRenderingMode(Mode uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Mode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRenderingMode dispatches through IVMRFilterConfig's vtable slot 9.
 func (self *IVMRFilterConfig) GetRenderingMode(pMode *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVMRFilterConfig9: https://learn.microsoft.com/windows/win32/api/vmr9/nn-vmr9-ivmrfilterconfig9
@@ -10548,43 +10548,43 @@ var IID_IVMRFilterConfig9 = win32.GUID{Data1: 0x5a804648, Data2: 0x4f66, Data3: 
 // SetImageCompositor dispatches through IVMRFilterConfig9's vtable slot 3.
 func (self *IVMRFilterConfig9) SetImageCompositor(lpVMRImgCompositor *IVMRImageCompositor9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpVMRImgCompositor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetNumberOfStreams dispatches through IVMRFilterConfig9's vtable slot 4.
 func (self *IVMRFilterConfig9) SetNumberOfStreams(dwMaxStreams uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwMaxStreams))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNumberOfStreams dispatches through IVMRFilterConfig9's vtable slot 5.
 func (self *IVMRFilterConfig9) GetNumberOfStreams(pdwMaxStreams *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwMaxStreams)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetRenderingPrefs dispatches through IVMRFilterConfig9's vtable slot 6.
 func (self *IVMRFilterConfig9) SetRenderingPrefs(dwRenderFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwRenderFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRenderingPrefs dispatches through IVMRFilterConfig9's vtable slot 7.
 func (self *IVMRFilterConfig9) GetRenderingPrefs(pdwRenderFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwRenderFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetRenderingMode dispatches through IVMRFilterConfig9's vtable slot 8.
 func (self *IVMRFilterConfig9) SetRenderingMode(Mode uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Mode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRenderingMode dispatches through IVMRFilterConfig9's vtable slot 9.
 func (self *IVMRFilterConfig9) GetRenderingMode(pMode *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVMRImageCompositor: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ivmrimagecompositor
@@ -10599,26 +10599,26 @@ var IID_IVMRImageCompositor = win32.GUID{Data1: 0x7a4fb5af, Data2: 0x479f, Data3
 // InitCompositionTarget dispatches through IVMRImageCompositor's vtable slot 3.
 func (self *IVMRImageCompositor) InitCompositionTarget(pD3DDevice *systemcom.IUnknown, pddsRenderTarget *graphicsdirectdraw.IDirectDrawSurface7) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pD3DDevice)), uintptr(unsafe.Pointer(pddsRenderTarget)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TermCompositionTarget dispatches through IVMRImageCompositor's vtable slot 4.
 func (self *IVMRImageCompositor) TermCompositionTarget(pD3DDevice *systemcom.IUnknown, pddsRenderTarget *graphicsdirectdraw.IDirectDrawSurface7) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pD3DDevice)), uintptr(unsafe.Pointer(pddsRenderTarget)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetStreamMediaType dispatches through IVMRImageCompositor's vtable slot 5.
 func (self *IVMRImageCompositor) SetStreamMediaType(dwStrmID uint32, pmt *mediamediafoundation.AM_MEDIA_TYPE, fTexture bool) error {
 	_fTexture := win32.Bool32(fTexture)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwStrmID), uintptr(unsafe.Pointer(pmt)), uintptr(_fTexture))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CompositeImage dispatches through IVMRImageCompositor's vtable slot 6.
 func (self *IVMRImageCompositor) CompositeImage(pD3DDevice *systemcom.IUnknown, pddsRenderTarget *graphicsdirectdraw.IDirectDrawSurface7, pmtRenderTarget *mediamediafoundation.AM_MEDIA_TYPE, rtStart int64, rtEnd int64, dwClrBkGnd uint32, pVideoStreamInfo *VMRVIDEOSTREAMINFO, cStreams uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pD3DDevice)), uintptr(unsafe.Pointer(pddsRenderTarget)), uintptr(unsafe.Pointer(pmtRenderTarget)), uintptr(rtStart), uintptr(rtEnd), uintptr(dwClrBkGnd), uintptr(unsafe.Pointer(pVideoStreamInfo)), uintptr(cStreams))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVMRImageCompositor9: https://learn.microsoft.com/windows/win32/api/vmr9/nn-vmr9-ivmrimagecompositor9
@@ -10633,26 +10633,26 @@ var IID_IVMRImageCompositor9 = win32.GUID{Data1: 0x4a5c89eb, Data2: 0xdf51, Data
 // InitCompositionDevice dispatches through IVMRImageCompositor9's vtable slot 3.
 func (self *IVMRImageCompositor9) InitCompositionDevice(pD3DDevice *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pD3DDevice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TermCompositionDevice dispatches through IVMRImageCompositor9's vtable slot 4.
 func (self *IVMRImageCompositor9) TermCompositionDevice(pD3DDevice *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pD3DDevice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetStreamMediaType dispatches through IVMRImageCompositor9's vtable slot 5.
 func (self *IVMRImageCompositor9) SetStreamMediaType(dwStrmID uint32, pmt *mediamediafoundation.AM_MEDIA_TYPE, fTexture bool) error {
 	_fTexture := win32.Bool32(fTexture)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwStrmID), uintptr(unsafe.Pointer(pmt)), uintptr(_fTexture))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CompositeImage dispatches through IVMRImageCompositor9's vtable slot 6.
 func (self *IVMRImageCompositor9) CompositeImage(pD3DDevice *systemcom.IUnknown, pddsRenderTarget *graphicsdirect3d9.IDirect3DSurface9, pmtRenderTarget *mediamediafoundation.AM_MEDIA_TYPE, rtStart int64, rtEnd int64, dwClrBkGnd uint32, pVideoStreamInfo *VMR9VideoStreamInfo, cStreams uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pD3DDevice)), uintptr(unsafe.Pointer(pddsRenderTarget)), uintptr(unsafe.Pointer(pmtRenderTarget)), uintptr(rtStart), uintptr(rtEnd), uintptr(dwClrBkGnd), uintptr(unsafe.Pointer(pVideoStreamInfo)), uintptr(cStreams))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVMRImagePresenter: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ivmrimagepresenter
@@ -10667,19 +10667,19 @@ var IID_IVMRImagePresenter = win32.GUID{Data1: 0xce704fe7, Data2: 0xe71e, Data3:
 // StartPresenting dispatches through IVMRImagePresenter's vtable slot 3.
 func (self *IVMRImagePresenter) StartPresenting(dwUserID uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwUserID))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StopPresenting dispatches through IVMRImagePresenter's vtable slot 4.
 func (self *IVMRImagePresenter) StopPresenting(dwUserID uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwUserID))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PresentImage dispatches through IVMRImagePresenter's vtable slot 5.
 func (self *IVMRImagePresenter) PresentImage(dwUserID uintptr, lpPresInfo *VMRPRESENTATIONINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwUserID), uintptr(unsafe.Pointer(lpPresInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVMRImagePresenter9: https://learn.microsoft.com/windows/win32/api/vmr9/nn-vmr9-ivmrimagepresenter9
@@ -10694,19 +10694,19 @@ var IID_IVMRImagePresenter9 = win32.GUID{Data1: 0x69188c61, Data2: 0x12a3, Data3
 // StartPresenting dispatches through IVMRImagePresenter9's vtable slot 3.
 func (self *IVMRImagePresenter9) StartPresenting(dwUserID uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwUserID))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StopPresenting dispatches through IVMRImagePresenter9's vtable slot 4.
 func (self *IVMRImagePresenter9) StopPresenting(dwUserID uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwUserID))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PresentImage dispatches through IVMRImagePresenter9's vtable slot 5.
 func (self *IVMRImagePresenter9) PresentImage(dwUserID uintptr, lpPresInfo *VMR9PresentationInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwUserID), uintptr(unsafe.Pointer(lpPresInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVMRImagePresenterConfig: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ivmrimagepresenterconfig
@@ -10721,13 +10721,13 @@ var IID_IVMRImagePresenterConfig = win32.GUID{Data1: 0x9f3a1c85, Data2: 0x8555, 
 // SetRenderingPrefs dispatches through IVMRImagePresenterConfig's vtable slot 3.
 func (self *IVMRImagePresenterConfig) SetRenderingPrefs(dwRenderFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwRenderFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRenderingPrefs dispatches through IVMRImagePresenterConfig's vtable slot 4.
 func (self *IVMRImagePresenterConfig) GetRenderingPrefs(dwRenderFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dwRenderFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVMRImagePresenterConfig9: https://learn.microsoft.com/windows/win32/api/vmr9/nn-vmr9-ivmrimagepresenterconfig9
@@ -10742,13 +10742,13 @@ var IID_IVMRImagePresenterConfig9 = win32.GUID{Data1: 0x45c15cab, Data2: 0x6e22,
 // SetRenderingPrefs dispatches through IVMRImagePresenterConfig9's vtable slot 3.
 func (self *IVMRImagePresenterConfig9) SetRenderingPrefs(dwRenderFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwRenderFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRenderingPrefs dispatches through IVMRImagePresenterConfig9's vtable slot 4.
 func (self *IVMRImagePresenterConfig9) GetRenderingPrefs(dwRenderFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dwRenderFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVMRImagePresenterExclModeConfig: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ivmrimagepresenterexclmodeconfig
@@ -10763,13 +10763,13 @@ var IID_IVMRImagePresenterExclModeConfig = win32.GUID{Data1: 0xe6f7ce40, Data2: 
 // SetXlcModeDDObjAndPrimarySurface dispatches through IVMRImagePresenterExclModeConfig's vtable slot 5.
 func (self *IVMRImagePresenterExclModeConfig) SetXlcModeDDObjAndPrimarySurface(lpDDObj *graphicsdirectdraw.IDirectDraw7, lpPrimarySurf *graphicsdirectdraw.IDirectDrawSurface7) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpDDObj)), uintptr(unsafe.Pointer(lpPrimarySurf)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetXlcModeDDObjAndPrimarySurface dispatches through IVMRImagePresenterExclModeConfig's vtable slot 6.
 func (self *IVMRImagePresenterExclModeConfig) GetXlcModeDDObjAndPrimarySurface(lpDDObj **graphicsdirectdraw.IDirectDraw7, lpPrimarySurf **graphicsdirectdraw.IDirectDrawSurface7) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpDDObj)), uintptr(unsafe.Pointer(lpPrimarySurf)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVMRMixerBitmap: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ivmrmixerbitmap
@@ -10784,19 +10784,19 @@ var IID_IVMRMixerBitmap = win32.GUID{Data1: 0x1e673275, Data2: 0x0257, Data3: 0x
 // SetAlphaBitmap dispatches through IVMRMixerBitmap's vtable slot 3.
 func (self *IVMRMixerBitmap) SetAlphaBitmap(pBmpParms *VMRALPHABITMAP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBmpParms)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UpdateAlphaBitmapParameters dispatches through IVMRMixerBitmap's vtable slot 4.
 func (self *IVMRMixerBitmap) UpdateAlphaBitmapParameters(pBmpParms *VMRALPHABITMAP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBmpParms)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAlphaBitmapParameters dispatches through IVMRMixerBitmap's vtable slot 5.
 func (self *IVMRMixerBitmap) GetAlphaBitmapParameters(pBmpParms *VMRALPHABITMAP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBmpParms)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVMRMixerBitmap9: https://learn.microsoft.com/windows/win32/api/vmr9/nn-vmr9-ivmrmixerbitmap9
@@ -10811,19 +10811,19 @@ var IID_IVMRMixerBitmap9 = win32.GUID{Data1: 0xced175e5, Data2: 0x1935, Data3: 0
 // SetAlphaBitmap dispatches through IVMRMixerBitmap9's vtable slot 3.
 func (self *IVMRMixerBitmap9) SetAlphaBitmap(pBmpParms *VMR9AlphaBitmap) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBmpParms)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UpdateAlphaBitmapParameters dispatches through IVMRMixerBitmap9's vtable slot 4.
 func (self *IVMRMixerBitmap9) UpdateAlphaBitmapParameters(pBmpParms *VMR9AlphaBitmap) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBmpParms)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAlphaBitmapParameters dispatches through IVMRMixerBitmap9's vtable slot 5.
 func (self *IVMRMixerBitmap9) GetAlphaBitmapParameters(pBmpParms *VMR9AlphaBitmap) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBmpParms)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVMRMixerControl: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ivmrmixercontrol
@@ -10838,55 +10838,55 @@ var IID_IVMRMixerControl = win32.GUID{Data1: 0x1c1a17b0, Data2: 0xbed0, Data3: 0
 // GetAlpha dispatches through IVMRMixerControl's vtable slot 4.
 func (self *IVMRMixerControl) GetAlpha(dwStreamID uint32, pAlpha *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwStreamID), uintptr(unsafe.Pointer(pAlpha)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetZOrder dispatches through IVMRMixerControl's vtable slot 5.
 func (self *IVMRMixerControl) SetZOrder(dwStreamID uint32, dwZ uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwStreamID), uintptr(dwZ))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetZOrder dispatches through IVMRMixerControl's vtable slot 6.
 func (self *IVMRMixerControl) GetZOrder(dwStreamID uint32, pZ *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwStreamID), uintptr(unsafe.Pointer(pZ)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetOutputRect dispatches through IVMRMixerControl's vtable slot 7.
 func (self *IVMRMixerControl) SetOutputRect(dwStreamID uint32, pRect *NORMALIZEDRECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwStreamID), uintptr(unsafe.Pointer(pRect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOutputRect dispatches through IVMRMixerControl's vtable slot 8.
 func (self *IVMRMixerControl) GetOutputRect(dwStreamID uint32, pRect *NORMALIZEDRECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwStreamID), uintptr(unsafe.Pointer(pRect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBackgroundClr dispatches through IVMRMixerControl's vtable slot 9.
 func (self *IVMRMixerControl) SetBackgroundClr(ClrBkg foundation.COLORREF) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(ClrBkg))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBackgroundClr dispatches through IVMRMixerControl's vtable slot 10.
 func (self *IVMRMixerControl) GetBackgroundClr(lpClrBkg *foundation.COLORREF) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpClrBkg)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMixingPrefs dispatches through IVMRMixerControl's vtable slot 11.
 func (self *IVMRMixerControl) SetMixingPrefs(dwMixerPrefs uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(dwMixerPrefs))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMixingPrefs dispatches through IVMRMixerControl's vtable slot 12.
 func (self *IVMRMixerControl) GetMixingPrefs(pdwMixerPrefs *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwMixerPrefs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVMRMixerControl9: https://learn.microsoft.com/windows/win32/api/vmr9/nn-vmr9-ivmrmixercontrol9
@@ -10901,73 +10901,73 @@ var IID_IVMRMixerControl9 = win32.GUID{Data1: 0x1a777eaa, Data2: 0x47c8, Data3: 
 // GetAlpha dispatches through IVMRMixerControl9's vtable slot 4.
 func (self *IVMRMixerControl9) GetAlpha(dwStreamID uint32, pAlpha *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwStreamID), uintptr(unsafe.Pointer(pAlpha)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetZOrder dispatches through IVMRMixerControl9's vtable slot 5.
 func (self *IVMRMixerControl9) SetZOrder(dwStreamID uint32, dwZ uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwStreamID), uintptr(dwZ))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetZOrder dispatches through IVMRMixerControl9's vtable slot 6.
 func (self *IVMRMixerControl9) GetZOrder(dwStreamID uint32, pZ *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwStreamID), uintptr(unsafe.Pointer(pZ)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetOutputRect dispatches through IVMRMixerControl9's vtable slot 7.
 func (self *IVMRMixerControl9) SetOutputRect(dwStreamID uint32, pRect *VMR9NormalizedRect) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwStreamID), uintptr(unsafe.Pointer(pRect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOutputRect dispatches through IVMRMixerControl9's vtable slot 8.
 func (self *IVMRMixerControl9) GetOutputRect(dwStreamID uint32, pRect *VMR9NormalizedRect) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwStreamID), uintptr(unsafe.Pointer(pRect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBackgroundClr dispatches through IVMRMixerControl9's vtable slot 9.
 func (self *IVMRMixerControl9) SetBackgroundClr(ClrBkg foundation.COLORREF) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(ClrBkg))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBackgroundClr dispatches through IVMRMixerControl9's vtable slot 10.
 func (self *IVMRMixerControl9) GetBackgroundClr(lpClrBkg *foundation.COLORREF) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpClrBkg)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMixingPrefs dispatches through IVMRMixerControl9's vtable slot 11.
 func (self *IVMRMixerControl9) SetMixingPrefs(dwMixerPrefs uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(dwMixerPrefs))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMixingPrefs dispatches through IVMRMixerControl9's vtable slot 12.
 func (self *IVMRMixerControl9) GetMixingPrefs(pdwMixerPrefs *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwMixerPrefs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetProcAmpControl dispatches through IVMRMixerControl9's vtable slot 13.
 func (self *IVMRMixerControl9) SetProcAmpControl(dwStreamID uint32, lpClrControl *VMR9ProcAmpControl) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwStreamID), uintptr(unsafe.Pointer(lpClrControl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProcAmpControl dispatches through IVMRMixerControl9's vtable slot 14.
 func (self *IVMRMixerControl9) GetProcAmpControl(dwStreamID uint32, lpClrControl *VMR9ProcAmpControl) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(dwStreamID), uintptr(unsafe.Pointer(lpClrControl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProcAmpControlRange dispatches through IVMRMixerControl9's vtable slot 15.
 func (self *IVMRMixerControl9) GetProcAmpControlRange(dwStreamID uint32, lpClrControl *VMR9ProcAmpControlRange) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwStreamID), uintptr(unsafe.Pointer(lpClrControl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVMRMonitorConfig: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ivmrmonitorconfig
@@ -10982,25 +10982,25 @@ var IID_IVMRMonitorConfig = win32.GUID{Data1: 0x9cf0b1b6, Data2: 0xfbaa, Data3: 
 // SetMonitor dispatches through IVMRMonitorConfig's vtable slot 3.
 func (self *IVMRMonitorConfig) SetMonitor(pGUID *VMRGUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGUID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMonitor dispatches through IVMRMonitorConfig's vtable slot 4.
 func (self *IVMRMonitorConfig) GetMonitor(pGUID *VMRGUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGUID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDefaultMonitor dispatches through IVMRMonitorConfig's vtable slot 5.
 func (self *IVMRMonitorConfig) SetDefaultMonitor(pGUID *VMRGUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGUID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDefaultMonitor dispatches through IVMRMonitorConfig's vtable slot 6.
 func (self *IVMRMonitorConfig) GetDefaultMonitor(pGUID *VMRGUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGUID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAvailableMonitors dispatches through IVMRMonitorConfig's vtable slot 7.
@@ -11010,7 +11010,7 @@ func (self *IVMRMonitorConfig) GetAvailableMonitors(pInfo []VMRMONITORINFO, pdwN
 		_pInfo = &pInfo[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pInfo)), uintptr(len(pInfo)), uintptr(unsafe.Pointer(pdwNumDevices)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVMRMonitorConfig9: https://learn.microsoft.com/windows/win32/api/vmr9/nn-vmr9-ivmrmonitorconfig9
@@ -11025,25 +11025,25 @@ var IID_IVMRMonitorConfig9 = win32.GUID{Data1: 0x46c2e457, Data2: 0x8ba0, Data3:
 // SetMonitor dispatches through IVMRMonitorConfig9's vtable slot 3.
 func (self *IVMRMonitorConfig9) SetMonitor(uDev uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(uDev))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMonitor dispatches through IVMRMonitorConfig9's vtable slot 4.
 func (self *IVMRMonitorConfig9) GetMonitor(puDev *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(puDev)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDefaultMonitor dispatches through IVMRMonitorConfig9's vtable slot 5.
 func (self *IVMRMonitorConfig9) SetDefaultMonitor(uDev uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(uDev))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDefaultMonitor dispatches through IVMRMonitorConfig9's vtable slot 6.
 func (self *IVMRMonitorConfig9) GetDefaultMonitor(puDev *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(puDev)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAvailableMonitors dispatches through IVMRMonitorConfig9's vtable slot 7.
@@ -11053,7 +11053,7 @@ func (self *IVMRMonitorConfig9) GetAvailableMonitors(pInfo []VMR9MonitorInfo, pd
 		_pInfo = &pInfo[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pInfo)), uintptr(len(pInfo)), uintptr(unsafe.Pointer(pdwNumDevices)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVMRSurface: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ivmrsurface
@@ -11068,25 +11068,25 @@ var IID_IVMRSurface = win32.GUID{Data1: 0xa9849bbe, Data2: 0x9ec8, Data3: 0x4263
 // IsSurfaceLocked dispatches through IVMRSurface's vtable slot 3.
 func (self *IVMRSurface) IsSurfaceLocked() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LockSurface dispatches through IVMRSurface's vtable slot 4.
 func (self *IVMRSurface) LockSurface(lpSurface **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpSurface)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnlockSurface dispatches through IVMRSurface's vtable slot 5.
 func (self *IVMRSurface) UnlockSurface() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSurface dispatches through IVMRSurface's vtable slot 6.
 func (self *IVMRSurface) GetSurface(lplpSurface **graphicsdirectdraw.IDirectDrawSurface7) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lplpSurface)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVMRSurface9: https://learn.microsoft.com/windows/win32/api/vmr9/nn-vmr9-ivmrsurface9
@@ -11101,25 +11101,25 @@ var IID_IVMRSurface9 = win32.GUID{Data1: 0xdfc581a1, Data2: 0x6e1f, Data3: 0x4c3
 // IsSurfaceLocked dispatches through IVMRSurface9's vtable slot 3.
 func (self *IVMRSurface9) IsSurfaceLocked() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LockSurface dispatches through IVMRSurface9's vtable slot 4.
 func (self *IVMRSurface9) LockSurface(lpSurface **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpSurface)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnlockSurface dispatches through IVMRSurface9's vtable slot 5.
 func (self *IVMRSurface9) UnlockSurface() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSurface dispatches through IVMRSurface9's vtable slot 6.
 func (self *IVMRSurface9) GetSurface(lplpSurface **graphicsdirect3d9.IDirect3DSurface9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lplpSurface)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVMRSurfaceAllocator: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ivmrsurfaceallocator
@@ -11134,25 +11134,25 @@ var IID_IVMRSurfaceAllocator = win32.GUID{Data1: 0x31ce832e, Data2: 0x4484, Data
 // AllocateSurface dispatches through IVMRSurfaceAllocator's vtable slot 3.
 func (self *IVMRSurfaceAllocator) AllocateSurface(dwUserID uintptr, lpAllocInfo *VMRALLOCATIONINFO, lpdwActualBuffers *uint32, lplpSurface **graphicsdirectdraw.IDirectDrawSurface7) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwUserID), uintptr(unsafe.Pointer(lpAllocInfo)), uintptr(unsafe.Pointer(lpdwActualBuffers)), uintptr(unsafe.Pointer(lplpSurface)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FreeSurface dispatches through IVMRSurfaceAllocator's vtable slot 4.
 func (self *IVMRSurfaceAllocator) FreeSurface(dwID uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwID))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PrepareSurface dispatches through IVMRSurfaceAllocator's vtable slot 5.
 func (self *IVMRSurfaceAllocator) PrepareSurface(dwUserID uintptr, lpSurface *graphicsdirectdraw.IDirectDrawSurface7, dwSurfaceFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwUserID), uintptr(unsafe.Pointer(lpSurface)), uintptr(dwSurfaceFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AdviseNotify dispatches through IVMRSurfaceAllocator's vtable slot 6.
 func (self *IVMRSurfaceAllocator) AdviseNotify(lpIVMRSurfAllocNotify *IVMRSurfaceAllocatorNotify) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpIVMRSurfAllocNotify)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVMRSurfaceAllocator9: https://learn.microsoft.com/windows/win32/api/vmr9/nn-vmr9-ivmrsurfaceallocator9
@@ -11167,25 +11167,25 @@ var IID_IVMRSurfaceAllocator9 = win32.GUID{Data1: 0x8d5148ea, Data2: 0x3f5d, Dat
 // InitializeDevice dispatches through IVMRSurfaceAllocator9's vtable slot 3.
 func (self *IVMRSurfaceAllocator9) InitializeDevice(dwUserID uintptr, lpAllocInfo *VMR9AllocationInfo, lpNumBuffers *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwUserID), uintptr(unsafe.Pointer(lpAllocInfo)), uintptr(unsafe.Pointer(lpNumBuffers)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TerminateDevice dispatches through IVMRSurfaceAllocator9's vtable slot 4.
 func (self *IVMRSurfaceAllocator9) TerminateDevice(dwID uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwID))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSurface dispatches through IVMRSurfaceAllocator9's vtable slot 5.
 func (self *IVMRSurfaceAllocator9) GetSurface(dwUserID uintptr, SurfaceIndex uint32, SurfaceFlags uint32, lplpSurface **graphicsdirect3d9.IDirect3DSurface9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwUserID), uintptr(SurfaceIndex), uintptr(SurfaceFlags), uintptr(unsafe.Pointer(lplpSurface)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AdviseNotify dispatches through IVMRSurfaceAllocator9's vtable slot 6.
 func (self *IVMRSurfaceAllocator9) AdviseNotify(lpIVMRSurfAllocNotify *IVMRSurfaceAllocatorNotify9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpIVMRSurfAllocNotify)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVMRSurfaceAllocatorEx9: https://learn.microsoft.com/windows/win32/api/vmr9/nn-vmr9-ivmrsurfaceallocatorex9
@@ -11200,7 +11200,7 @@ var IID_IVMRSurfaceAllocatorEx9 = win32.GUID{Data1: 0x6de9a68a, Data2: 0xa928, D
 // GetSurfaceEx dispatches through IVMRSurfaceAllocatorEx9's vtable slot 7.
 func (self *IVMRSurfaceAllocatorEx9) GetSurfaceEx(dwUserID uintptr, SurfaceIndex uint32, SurfaceFlags uint32, lplpSurface **graphicsdirect3d9.IDirect3DSurface9, lprcDst *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwUserID), uintptr(SurfaceIndex), uintptr(SurfaceFlags), uintptr(unsafe.Pointer(lplpSurface)), uintptr(unsafe.Pointer(lprcDst)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVMRSurfaceAllocatorNotify: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ivmrsurfaceallocatornotify
@@ -11215,37 +11215,37 @@ var IID_IVMRSurfaceAllocatorNotify = win32.GUID{Data1: 0xaada05a8, Data2: 0x5a4e
 // AdviseSurfaceAllocator dispatches through IVMRSurfaceAllocatorNotify's vtable slot 3.
 func (self *IVMRSurfaceAllocatorNotify) AdviseSurfaceAllocator(dwUserID uintptr, lpIVRMSurfaceAllocator *IVMRSurfaceAllocator) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwUserID), uintptr(unsafe.Pointer(lpIVRMSurfaceAllocator)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDDrawDevice dispatches through IVMRSurfaceAllocatorNotify's vtable slot 4.
 func (self *IVMRSurfaceAllocatorNotify) SetDDrawDevice(lpDDrawDevice *graphicsdirectdraw.IDirectDraw7, hMonitor graphicsgdi.HMONITOR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpDDrawDevice)), uintptr(hMonitor))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ChangeDDrawDevice dispatches through IVMRSurfaceAllocatorNotify's vtable slot 5.
 func (self *IVMRSurfaceAllocatorNotify) ChangeDDrawDevice(lpDDrawDevice *graphicsdirectdraw.IDirectDraw7, hMonitor graphicsgdi.HMONITOR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpDDrawDevice)), uintptr(hMonitor))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RestoreDDrawSurfaces dispatches through IVMRSurfaceAllocatorNotify's vtable slot 6.
 func (self *IVMRSurfaceAllocatorNotify) RestoreDDrawSurfaces() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NotifyEvent dispatches through IVMRSurfaceAllocatorNotify's vtable slot 7.
 func (self *IVMRSurfaceAllocatorNotify) NotifyEvent(EventCode int32, Param1 uintptr, Param2 uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(EventCode), uintptr(Param1), uintptr(Param2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBorderColor dispatches through IVMRSurfaceAllocatorNotify's vtable slot 8.
 func (self *IVMRSurfaceAllocatorNotify) SetBorderColor(clrBorder foundation.COLORREF) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(clrBorder))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVMRSurfaceAllocatorNotify9: https://learn.microsoft.com/windows/win32/api/vmr9/nn-vmr9-ivmrsurfaceallocatornotify9
@@ -11260,31 +11260,31 @@ var IID_IVMRSurfaceAllocatorNotify9 = win32.GUID{Data1: 0xdca3f5df, Data2: 0xbb3
 // AdviseSurfaceAllocator dispatches through IVMRSurfaceAllocatorNotify9's vtable slot 3.
 func (self *IVMRSurfaceAllocatorNotify9) AdviseSurfaceAllocator(dwUserID uintptr, lpIVRMSurfaceAllocator *IVMRSurfaceAllocator9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwUserID), uintptr(unsafe.Pointer(lpIVRMSurfaceAllocator)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetD3DDevice dispatches through IVMRSurfaceAllocatorNotify9's vtable slot 4.
 func (self *IVMRSurfaceAllocatorNotify9) SetD3DDevice(lpD3DDevice *graphicsdirect3d9.IDirect3DDevice9, hMonitor graphicsgdi.HMONITOR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpD3DDevice)), uintptr(hMonitor))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ChangeD3DDevice dispatches through IVMRSurfaceAllocatorNotify9's vtable slot 5.
 func (self *IVMRSurfaceAllocatorNotify9) ChangeD3DDevice(lpD3DDevice *graphicsdirect3d9.IDirect3DDevice9, hMonitor graphicsgdi.HMONITOR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpD3DDevice)), uintptr(hMonitor))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AllocateSurfaceHelper dispatches through IVMRSurfaceAllocatorNotify9's vtable slot 6.
 func (self *IVMRSurfaceAllocatorNotify9) AllocateSurfaceHelper(lpAllocInfo *VMR9AllocationInfo, lpNumBuffers *uint32, lplpSurface **graphicsdirect3d9.IDirect3DSurface9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpAllocInfo)), uintptr(unsafe.Pointer(lpNumBuffers)), uintptr(unsafe.Pointer(lplpSurface)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NotifyEvent dispatches through IVMRSurfaceAllocatorNotify9's vtable slot 7.
 func (self *IVMRSurfaceAllocatorNotify9) NotifyEvent(EventCode int32, Param1 uintptr, Param2 uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(EventCode), uintptr(Param1), uintptr(Param2))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVMRVideoStreamControl: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ivmrvideostreamcontrol
@@ -11299,26 +11299,26 @@ var IID_IVMRVideoStreamControl = win32.GUID{Data1: 0x058d1f11, Data2: 0x2a54, Da
 // SetColorKey dispatches through IVMRVideoStreamControl's vtable slot 3.
 func (self *IVMRVideoStreamControl) SetColorKey(lpClrKey *graphicsdirectdraw.DDCOLORKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpClrKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetColorKey dispatches through IVMRVideoStreamControl's vtable slot 4.
 func (self *IVMRVideoStreamControl) GetColorKey(lpClrKey *graphicsdirectdraw.DDCOLORKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpClrKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetStreamActiveState dispatches through IVMRVideoStreamControl's vtable slot 5.
 func (self *IVMRVideoStreamControl) SetStreamActiveState(fActive bool) error {
 	_fActive := win32.Bool32(fActive)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(_fActive))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStreamActiveState dispatches through IVMRVideoStreamControl's vtable slot 6.
 func (self *IVMRVideoStreamControl) GetStreamActiveState(lpfActive *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpfActive)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVMRVideoStreamControl9: https://learn.microsoft.com/windows/win32/api/vmr9/nn-vmr9-ivmrvideostreamcontrol9
@@ -11334,13 +11334,13 @@ var IID_IVMRVideoStreamControl9 = win32.GUID{Data1: 0xd0cfe38b, Data2: 0x93e7, D
 func (self *IVMRVideoStreamControl9) SetStreamActiveState(fActive bool) error {
 	_fActive := win32.Bool32(fActive)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(_fActive))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStreamActiveState dispatches through IVMRVideoStreamControl9's vtable slot 4.
 func (self *IVMRVideoStreamControl9) GetStreamActiveState(lpfActive *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpfActive)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVMRWindowlessControl: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ivmrwindowlesscontrol
@@ -11355,91 +11355,91 @@ var IID_IVMRWindowlessControl = win32.GUID{Data1: 0x0eb1088c, Data2: 0x4dcd, Dat
 // GetNativeVideoSize dispatches through IVMRWindowlessControl's vtable slot 3.
 func (self *IVMRWindowlessControl) GetNativeVideoSize(lpWidth *int32, lpHeight *int32, lpARWidth *int32, lpARHeight *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpWidth)), uintptr(unsafe.Pointer(lpHeight)), uintptr(unsafe.Pointer(lpARWidth)), uintptr(unsafe.Pointer(lpARHeight)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMinIdealVideoSize dispatches through IVMRWindowlessControl's vtable slot 4.
 func (self *IVMRWindowlessControl) GetMinIdealVideoSize(lpWidth *int32, lpHeight *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpWidth)), uintptr(unsafe.Pointer(lpHeight)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMaxIdealVideoSize dispatches through IVMRWindowlessControl's vtable slot 5.
 func (self *IVMRWindowlessControl) GetMaxIdealVideoSize(lpWidth *int32, lpHeight *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpWidth)), uintptr(unsafe.Pointer(lpHeight)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetVideoPosition dispatches through IVMRWindowlessControl's vtable slot 6.
 func (self *IVMRWindowlessControl) SetVideoPosition(lpSRCRect *foundation.RECT, lpDSTRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpSRCRect)), uintptr(unsafe.Pointer(lpDSTRect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetVideoPosition dispatches through IVMRWindowlessControl's vtable slot 7.
 func (self *IVMRWindowlessControl) GetVideoPosition(lpSRCRect *foundation.RECT, lpDSTRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpSRCRect)), uintptr(unsafe.Pointer(lpDSTRect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAspectRatioMode dispatches through IVMRWindowlessControl's vtable slot 8.
 func (self *IVMRWindowlessControl) GetAspectRatioMode(lpAspectRatioMode *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpAspectRatioMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAspectRatioMode dispatches through IVMRWindowlessControl's vtable slot 9.
 func (self *IVMRWindowlessControl) SetAspectRatioMode(AspectRatioMode uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(AspectRatioMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetVideoClippingWindow dispatches through IVMRWindowlessControl's vtable slot 10.
 func (self *IVMRWindowlessControl) SetVideoClippingWindow(hwnd foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(hwnd))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RepaintVideo dispatches through IVMRWindowlessControl's vtable slot 11.
 func (self *IVMRWindowlessControl) RepaintVideo(hwnd foundation.HWND, hdc graphicsgdi.HDC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(hdc))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DisplayModeChanged dispatches through IVMRWindowlessControl's vtable slot 12.
 func (self *IVMRWindowlessControl) DisplayModeChanged() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentImage dispatches through IVMRWindowlessControl's vtable slot 13.
 func (self *IVMRWindowlessControl) GetCurrentImage(lpDib **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpDib)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBorderColor dispatches through IVMRWindowlessControl's vtable slot 14.
 func (self *IVMRWindowlessControl) SetBorderColor(Clr foundation.COLORREF) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(Clr))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBorderColor dispatches through IVMRWindowlessControl's vtable slot 15.
 func (self *IVMRWindowlessControl) GetBorderColor(lpClr *foundation.COLORREF) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpClr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetColorKey dispatches through IVMRWindowlessControl's vtable slot 16.
 func (self *IVMRWindowlessControl) SetColorKey(Clr foundation.COLORREF) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(Clr))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetColorKey dispatches through IVMRWindowlessControl's vtable slot 17.
 func (self *IVMRWindowlessControl) GetColorKey(lpClr *foundation.COLORREF) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpClr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVMRWindowlessControl9: https://learn.microsoft.com/windows/win32/api/vmr9/nn-vmr9-ivmrwindowlesscontrol9
@@ -11454,79 +11454,79 @@ var IID_IVMRWindowlessControl9 = win32.GUID{Data1: 0x8f537d09, Data2: 0xf85e, Da
 // GetNativeVideoSize dispatches through IVMRWindowlessControl9's vtable slot 3.
 func (self *IVMRWindowlessControl9) GetNativeVideoSize(lpWidth *int32, lpHeight *int32, lpARWidth *int32, lpARHeight *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpWidth)), uintptr(unsafe.Pointer(lpHeight)), uintptr(unsafe.Pointer(lpARWidth)), uintptr(unsafe.Pointer(lpARHeight)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMinIdealVideoSize dispatches through IVMRWindowlessControl9's vtable slot 4.
 func (self *IVMRWindowlessControl9) GetMinIdealVideoSize(lpWidth *int32, lpHeight *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpWidth)), uintptr(unsafe.Pointer(lpHeight)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMaxIdealVideoSize dispatches through IVMRWindowlessControl9's vtable slot 5.
 func (self *IVMRWindowlessControl9) GetMaxIdealVideoSize(lpWidth *int32, lpHeight *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpWidth)), uintptr(unsafe.Pointer(lpHeight)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetVideoPosition dispatches through IVMRWindowlessControl9's vtable slot 6.
 func (self *IVMRWindowlessControl9) SetVideoPosition(lpSRCRect *foundation.RECT, lpDSTRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpSRCRect)), uintptr(unsafe.Pointer(lpDSTRect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetVideoPosition dispatches through IVMRWindowlessControl9's vtable slot 7.
 func (self *IVMRWindowlessControl9) GetVideoPosition(lpSRCRect *foundation.RECT, lpDSTRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpSRCRect)), uintptr(unsafe.Pointer(lpDSTRect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAspectRatioMode dispatches through IVMRWindowlessControl9's vtable slot 8.
 func (self *IVMRWindowlessControl9) GetAspectRatioMode(lpAspectRatioMode *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpAspectRatioMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAspectRatioMode dispatches through IVMRWindowlessControl9's vtable slot 9.
 func (self *IVMRWindowlessControl9) SetAspectRatioMode(AspectRatioMode uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(AspectRatioMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetVideoClippingWindow dispatches through IVMRWindowlessControl9's vtable slot 10.
 func (self *IVMRWindowlessControl9) SetVideoClippingWindow(hwnd foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(hwnd))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RepaintVideo dispatches through IVMRWindowlessControl9's vtable slot 11.
 func (self *IVMRWindowlessControl9) RepaintVideo(hwnd foundation.HWND, hdc graphicsgdi.HDC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(hdc))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DisplayModeChanged dispatches through IVMRWindowlessControl9's vtable slot 12.
 func (self *IVMRWindowlessControl9) DisplayModeChanged() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentImage dispatches through IVMRWindowlessControl9's vtable slot 13.
 func (self *IVMRWindowlessControl9) GetCurrentImage(lpDib **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpDib)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBorderColor dispatches through IVMRWindowlessControl9's vtable slot 14.
 func (self *IVMRWindowlessControl9) SetBorderColor(Clr foundation.COLORREF) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(Clr))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBorderColor dispatches through IVMRWindowlessControl9's vtable slot 15.
 func (self *IVMRWindowlessControl9) GetBorderColor(lpClr *foundation.COLORREF) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpClr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVPBaseConfig: https://learn.microsoft.com/windows/win32/api/vpconfig/nn-vpconfig-ivpbaseconfig
@@ -11537,79 +11537,79 @@ type IVPBaseConfig struct {
 // GetConnectInfo dispatches through IVPBaseConfig's vtable slot 3.
 func (self *IVPBaseConfig) GetConnectInfo(pdwNumConnectInfo *uint32, pddVPConnectInfo *graphicsdirectdraw.DDVIDEOPORTCONNECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwNumConnectInfo)), uintptr(unsafe.Pointer(pddVPConnectInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetConnectInfo dispatches through IVPBaseConfig's vtable slot 4.
 func (self *IVPBaseConfig) SetConnectInfo(dwChosenEntry uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwChosenEntry))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetVPDataInfo dispatches through IVPBaseConfig's vtable slot 5.
 func (self *IVPBaseConfig) GetVPDataInfo(pamvpDataInfo *AMVPDATAINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pamvpDataInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMaxPixelRate dispatches through IVPBaseConfig's vtable slot 6.
 func (self *IVPBaseConfig) GetMaxPixelRate(pamvpSize *AMVPSIZE, pdwMaxPixelsPerSecond *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pamvpSize)), uintptr(unsafe.Pointer(pdwMaxPixelsPerSecond)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InformVPInputFormats dispatches through IVPBaseConfig's vtable slot 7.
 func (self *IVPBaseConfig) InformVPInputFormats(dwNumFormats uint32, pDDPixelFormats *graphicsdirectdraw.DDPIXELFORMAT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwNumFormats), uintptr(unsafe.Pointer(pDDPixelFormats)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetVideoFormats dispatches through IVPBaseConfig's vtable slot 8.
 func (self *IVPBaseConfig) GetVideoFormats(pdwNumFormats *uint32, pddPixelFormats *graphicsdirectdraw.DDPIXELFORMAT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwNumFormats)), uintptr(unsafe.Pointer(pddPixelFormats)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetVideoFormat dispatches through IVPBaseConfig's vtable slot 9.
 func (self *IVPBaseConfig) SetVideoFormat(dwChosenEntry uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwChosenEntry))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetInvertPolarity dispatches through IVPBaseConfig's vtable slot 10.
 func (self *IVPBaseConfig) SetInvertPolarity() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOverlaySurface dispatches through IVPBaseConfig's vtable slot 11.
 func (self *IVPBaseConfig) GetOverlaySurface(ppddOverlaySurface **graphicsdirectdraw.IDirectDrawSurface) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppddOverlaySurface)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDirectDrawKernelHandle dispatches through IVPBaseConfig's vtable slot 12.
 func (self *IVPBaseConfig) SetDirectDrawKernelHandle(dwDDKernelHandle uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(dwDDKernelHandle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetVideoPortID dispatches through IVPBaseConfig's vtable slot 13.
 func (self *IVPBaseConfig) SetVideoPortID(dwVideoPortID uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwVideoPortID))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDDSurfaceKernelHandles dispatches through IVPBaseConfig's vtable slot 14.
 func (self *IVPBaseConfig) SetDDSurfaceKernelHandles(cHandles uint32, rgDDKernelHandles *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(cHandles), uintptr(unsafe.Pointer(rgDDKernelHandles)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetSurfaceParameters dispatches through IVPBaseConfig's vtable slot 15.
 func (self *IVPBaseConfig) SetSurfaceParameters(dwPitch uint32, dwXOrigin uint32, dwYOrigin uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwPitch), uintptr(dwXOrigin), uintptr(dwYOrigin))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVPBaseNotify: https://learn.microsoft.com/windows/win32/api/vpnotify/nn-vpnotify-ivpbasenotify
@@ -11620,7 +11620,7 @@ type IVPBaseNotify struct {
 // RenegotiateVPParameters dispatches through IVPBaseNotify's vtable slot 3.
 func (self *IVPBaseNotify) RenegotiateVPParameters() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVPConfig: https://learn.microsoft.com/windows/win32/api/vpconfig/nn-vpconfig-ivpconfig
@@ -11635,13 +11635,13 @@ var IID_IVPConfig = win32.GUID{Data1: 0xbc29a660, Data2: 0x30e3, Data3: 0x11d0, 
 // IsVPDecimationAllowed dispatches through IVPConfig's vtable slot 16.
 func (self *IVPConfig) IsVPDecimationAllowed(pbIsDecimationAllowed *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbIsDecimationAllowed)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetScalingFactors dispatches through IVPConfig's vtable slot 17.
 func (self *IVPConfig) SetScalingFactors(pamvpSize *AMVPSIZE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pamvpSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVPManager: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ivpmanager
@@ -11656,13 +11656,13 @@ var IID_IVPManager = win32.GUID{Data1: 0xaac18c18, Data2: 0xe186, Data3: 0x46d2,
 // SetVideoPortIndex dispatches through IVPManager's vtable slot 3.
 func (self *IVPManager) SetVideoPortIndex(dwVideoPortIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwVideoPortIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetVideoPortIndex dispatches through IVPManager's vtable slot 4.
 func (self *IVPManager) GetVideoPortIndex(pdwVideoPortIndex *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwVideoPortIndex)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVPNotify: https://learn.microsoft.com/windows/win32/api/vpnotify/nn-vpnotify-ivpnotify
@@ -11677,13 +11677,13 @@ var IID_IVPNotify = win32.GUID{Data1: 0xc76794a1, Data2: 0xd6c5, Data3: 0x11d0, 
 // SetDeinterlaceMode dispatches through IVPNotify's vtable slot 4.
 func (self *IVPNotify) SetDeinterlaceMode(mode AMVP_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(mode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeinterlaceMode dispatches through IVPNotify's vtable slot 5.
 func (self *IVPNotify) GetDeinterlaceMode(pMode *AMVP_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVPNotify2: https://learn.microsoft.com/windows/win32/api/vpnotify/nn-vpnotify-ivpnotify2
@@ -11699,13 +11699,13 @@ var IID_IVPNotify2 = win32.GUID{Data1: 0xebf47183, Data2: 0x8764, Data3: 0x11d1,
 func (self *IVPNotify2) SetVPSyncMaster(bVPSyncMaster bool) error {
 	_bVPSyncMaster := win32.Bool32(bVPSyncMaster)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(_bVPSyncMaster))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetVPSyncMaster dispatches through IVPNotify2's vtable slot 7.
 func (self *IVPNotify2) GetVPSyncMaster(pbVPSyncMaster *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbVPSyncMaster)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: ec529b00-1a1f-11d1-bad9-00609744111a
@@ -11745,19 +11745,19 @@ var IID_IVideoFrameStep = win32.GUID{Data1: 0xe46a9787, Data2: 0x2b71, Data3: 0x
 // Step dispatches through IVideoFrameStep's vtable slot 3.
 func (self *IVideoFrameStep) Step(dwFrames uint32, pStepObject *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwFrames), uintptr(unsafe.Pointer(pStepObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CanStep dispatches through IVideoFrameStep's vtable slot 4.
 func (self *IVideoFrameStep) CanStep(bMultiple int32, pStepObject *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(bMultiple), uintptr(unsafe.Pointer(pStepObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CancelStep dispatches through IVideoFrameStep's vtable slot 5.
 func (self *IVideoFrameStep) CancelStep() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVideoProcAmp: https://learn.microsoft.com/windows/win32/api/vidcap/nn-vidcap-ivideoprocamp
@@ -11772,235 +11772,235 @@ var IID_IVideoProcAmp = win32.GUID{Data1: 0x4050560e, Data2: 0x42a7, Data3: 0x41
 // Get_BacklightCompensation dispatches through IVideoProcAmp's vtable slot 3.
 func (self *IVideoProcAmp) Get_BacklightCompensation(pValue *int32, pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BacklightCompensation dispatches through IVideoProcAmp's vtable slot 4.
 func (self *IVideoProcAmp) Put_BacklightCompensation(Value int32, Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Value), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRange_BacklightCompensation dispatches through IVideoProcAmp's vtable slot 5.
 func (self *IVideoProcAmp) GetRange_BacklightCompensation(pMin *int32, pMax *int32, pSteppingDelta *int32, pDefault *int32, pCapsFlag *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMin)), uintptr(unsafe.Pointer(pMax)), uintptr(unsafe.Pointer(pSteppingDelta)), uintptr(unsafe.Pointer(pDefault)), uintptr(unsafe.Pointer(pCapsFlag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Brightness dispatches through IVideoProcAmp's vtable slot 6.
 func (self *IVideoProcAmp) Get_Brightness(pValue *int32, pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Brightness dispatches through IVideoProcAmp's vtable slot 7.
 func (self *IVideoProcAmp) Put_Brightness(Value int32, Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Value), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRange_Brightness dispatches through IVideoProcAmp's vtable slot 8.
 func (self *IVideoProcAmp) GetRange_Brightness(pMin *int32, pMax *int32, pSteppingDelta *int32, pDefault *int32, pCapsFlag *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMin)), uintptr(unsafe.Pointer(pMax)), uintptr(unsafe.Pointer(pSteppingDelta)), uintptr(unsafe.Pointer(pDefault)), uintptr(unsafe.Pointer(pCapsFlag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ColorEnable dispatches through IVideoProcAmp's vtable slot 9.
 func (self *IVideoProcAmp) Get_ColorEnable(pValue *int32, pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ColorEnable dispatches through IVideoProcAmp's vtable slot 10.
 func (self *IVideoProcAmp) Put_ColorEnable(Value int32, Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Value), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRange_ColorEnable dispatches through IVideoProcAmp's vtable slot 11.
 func (self *IVideoProcAmp) GetRange_ColorEnable(pMin *int32, pMax *int32, pSteppingDelta *int32, pDefault *int32, pCapsFlag *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMin)), uintptr(unsafe.Pointer(pMax)), uintptr(unsafe.Pointer(pSteppingDelta)), uintptr(unsafe.Pointer(pDefault)), uintptr(unsafe.Pointer(pCapsFlag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Contrast dispatches through IVideoProcAmp's vtable slot 12.
 func (self *IVideoProcAmp) Get_Contrast(pValue *int32, pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Contrast dispatches through IVideoProcAmp's vtable slot 13.
 func (self *IVideoProcAmp) Put_Contrast(Value int32, Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Value), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRange_Contrast dispatches through IVideoProcAmp's vtable slot 14.
 func (self *IVideoProcAmp) GetRange_Contrast(pMin *int32, pMax *int32, pSteppingDelta *int32, pDefault *int32, pCapsFlag *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMin)), uintptr(unsafe.Pointer(pMax)), uintptr(unsafe.Pointer(pSteppingDelta)), uintptr(unsafe.Pointer(pDefault)), uintptr(unsafe.Pointer(pCapsFlag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Gamma dispatches through IVideoProcAmp's vtable slot 15.
 func (self *IVideoProcAmp) Get_Gamma(pValue *int32, pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Gamma dispatches through IVideoProcAmp's vtable slot 16.
 func (self *IVideoProcAmp) Put_Gamma(Value int32, Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(Value), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRange_Gamma dispatches through IVideoProcAmp's vtable slot 17.
 func (self *IVideoProcAmp) GetRange_Gamma(pMin *int32, pMax *int32, pSteppingDelta *int32, pDefault *int32, pCapsFlag *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMin)), uintptr(unsafe.Pointer(pMax)), uintptr(unsafe.Pointer(pSteppingDelta)), uintptr(unsafe.Pointer(pDefault)), uintptr(unsafe.Pointer(pCapsFlag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Saturation dispatches through IVideoProcAmp's vtable slot 18.
 func (self *IVideoProcAmp) Get_Saturation(pValue *int32, pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Saturation dispatches through IVideoProcAmp's vtable slot 19.
 func (self *IVideoProcAmp) Put_Saturation(Value int32, Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(Value), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRange_Saturation dispatches through IVideoProcAmp's vtable slot 20.
 func (self *IVideoProcAmp) GetRange_Saturation(pMin *int32, pMax *int32, pSteppingDelta *int32, pDefault *int32, pCapsFlag *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMin)), uintptr(unsafe.Pointer(pMax)), uintptr(unsafe.Pointer(pSteppingDelta)), uintptr(unsafe.Pointer(pDefault)), uintptr(unsafe.Pointer(pCapsFlag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Sharpness dispatches through IVideoProcAmp's vtable slot 21.
 func (self *IVideoProcAmp) Get_Sharpness(pValue *int32, pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Sharpness dispatches through IVideoProcAmp's vtable slot 22.
 func (self *IVideoProcAmp) Put_Sharpness(Value int32, Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(Value), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRange_Sharpness dispatches through IVideoProcAmp's vtable slot 23.
 func (self *IVideoProcAmp) GetRange_Sharpness(pMin *int32, pMax *int32, pSteppingDelta *int32, pDefault *int32, pCapsFlag *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMin)), uintptr(unsafe.Pointer(pMax)), uintptr(unsafe.Pointer(pSteppingDelta)), uintptr(unsafe.Pointer(pDefault)), uintptr(unsafe.Pointer(pCapsFlag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_WhiteBalance dispatches through IVideoProcAmp's vtable slot 24.
 func (self *IVideoProcAmp) Get_WhiteBalance(pValue *int32, pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_WhiteBalance dispatches through IVideoProcAmp's vtable slot 25.
 func (self *IVideoProcAmp) Put_WhiteBalance(Value int32, Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(Value), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRange_WhiteBalance dispatches through IVideoProcAmp's vtable slot 26.
 func (self *IVideoProcAmp) GetRange_WhiteBalance(pMin *int32, pMax *int32, pSteppingDelta *int32, pDefault *int32, pCapsFlag *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMin)), uintptr(unsafe.Pointer(pMax)), uintptr(unsafe.Pointer(pSteppingDelta)), uintptr(unsafe.Pointer(pDefault)), uintptr(unsafe.Pointer(pCapsFlag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Gain dispatches through IVideoProcAmp's vtable slot 27.
 func (self *IVideoProcAmp) Get_Gain(pValue *int32, pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Gain dispatches through IVideoProcAmp's vtable slot 28.
 func (self *IVideoProcAmp) Put_Gain(Value int32, Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(Value), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRange_Gain dispatches through IVideoProcAmp's vtable slot 29.
 func (self *IVideoProcAmp) GetRange_Gain(pMin *int32, pMax *int32, pSteppingDelta *int32, pDefault *int32, pCapsFlag *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMin)), uintptr(unsafe.Pointer(pMax)), uintptr(unsafe.Pointer(pSteppingDelta)), uintptr(unsafe.Pointer(pDefault)), uintptr(unsafe.Pointer(pCapsFlag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Hue dispatches through IVideoProcAmp's vtable slot 30.
 func (self *IVideoProcAmp) Get_Hue(pValue *int32, pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Hue dispatches through IVideoProcAmp's vtable slot 31.
 func (self *IVideoProcAmp) Put_Hue(Value int32, Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(Value), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRange_Hue dispatches through IVideoProcAmp's vtable slot 32.
 func (self *IVideoProcAmp) GetRange_Hue(pMin *int32, pMax *int32, pSteppingDelta *int32, pDefault *int32, pCapsFlag *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMin)), uintptr(unsafe.Pointer(pMax)), uintptr(unsafe.Pointer(pSteppingDelta)), uintptr(unsafe.Pointer(pDefault)), uintptr(unsafe.Pointer(pCapsFlag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DigitalMultiplier dispatches through IVideoProcAmp's vtable slot 33.
 func (self *IVideoProcAmp) Get_DigitalMultiplier(pValue *int32, pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DigitalMultiplier dispatches through IVideoProcAmp's vtable slot 34.
 func (self *IVideoProcAmp) Put_DigitalMultiplier(Value int32, Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(Value), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRange_DigitalMultiplier dispatches through IVideoProcAmp's vtable slot 35.
 func (self *IVideoProcAmp) GetRange_DigitalMultiplier(pMin *int32, pMax *int32, pSteppingDelta *int32, pDefault *int32, pCapsFlag *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMin)), uintptr(unsafe.Pointer(pMax)), uintptr(unsafe.Pointer(pSteppingDelta)), uintptr(unsafe.Pointer(pDefault)), uintptr(unsafe.Pointer(pCapsFlag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PowerlineFrequency dispatches through IVideoProcAmp's vtable slot 36.
 func (self *IVideoProcAmp) Get_PowerlineFrequency(pValue *int32, pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PowerlineFrequency dispatches through IVideoProcAmp's vtable slot 37.
 func (self *IVideoProcAmp) Put_PowerlineFrequency(Value int32, Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(Value), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRange_PowerlineFrequency dispatches through IVideoProcAmp's vtable slot 38.
 func (self *IVideoProcAmp) GetRange_PowerlineFrequency(pMin *int32, pMax *int32, pSteppingDelta *int32, pDefault *int32, pCapsFlag *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMin)), uintptr(unsafe.Pointer(pMax)), uintptr(unsafe.Pointer(pSteppingDelta)), uintptr(unsafe.Pointer(pDefault)), uintptr(unsafe.Pointer(pCapsFlag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_WhiteBalanceComponent dispatches through IVideoProcAmp's vtable slot 39.
 func (self *IVideoProcAmp) Get_WhiteBalanceComponent(pValue1 *int32, pValue2 *int32, pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue1)), uintptr(unsafe.Pointer(pValue2)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_WhiteBalanceComponent dispatches through IVideoProcAmp's vtable slot 40.
 func (self *IVideoProcAmp) Put_WhiteBalanceComponent(Value1 int32, Value2 int32, Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(Value1), uintptr(Value2), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRange_WhiteBalanceComponent dispatches through IVideoProcAmp's vtable slot 41.
 func (self *IVideoProcAmp) GetRange_WhiteBalanceComponent(pMin *int32, pMax *int32, pSteppingDelta *int32, pDefault *int32, pCapsFlag *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMin)), uintptr(unsafe.Pointer(pMax)), uintptr(unsafe.Pointer(pSteppingDelta)), uintptr(unsafe.Pointer(pDefault)), uintptr(unsafe.Pointer(pCapsFlag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVideoWindow: https://learn.microsoft.com/windows/win32/api/control/nn-control-ivideowindow
@@ -12015,235 +12015,235 @@ var IID_IVideoWindow = win32.GUID{Data1: 0x56a868b4, Data2: 0x0ad4, Data3: 0x11c
 // Put_Caption dispatches through IVideoWindow's vtable slot 7.
 func (self *IVideoWindow) Put_Caption(strCaption foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strCaption)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Caption dispatches through IVideoWindow's vtable slot 8.
 func (self *IVideoWindow) Get_Caption(strCaption *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strCaption)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_WindowStyle dispatches through IVideoWindow's vtable slot 9.
 func (self *IVideoWindow) Put_WindowStyle(WindowStyle int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(WindowStyle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_WindowStyle dispatches through IVideoWindow's vtable slot 10.
 func (self *IVideoWindow) Get_WindowStyle(WindowStyle *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WindowStyle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_WindowStyleEx dispatches through IVideoWindow's vtable slot 11.
 func (self *IVideoWindow) Put_WindowStyleEx(WindowStyleEx int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(WindowStyleEx))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_WindowStyleEx dispatches through IVideoWindow's vtable slot 12.
 func (self *IVideoWindow) Get_WindowStyleEx(WindowStyleEx *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WindowStyleEx)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AutoShow dispatches through IVideoWindow's vtable slot 13.
 func (self *IVideoWindow) Put_AutoShow(AutoShow int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(AutoShow))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AutoShow dispatches through IVideoWindow's vtable slot 14.
 func (self *IVideoWindow) Get_AutoShow(AutoShow *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AutoShow)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_WindowState dispatches through IVideoWindow's vtable slot 15.
 func (self *IVideoWindow) Put_WindowState(WindowState int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(WindowState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_WindowState dispatches through IVideoWindow's vtable slot 16.
 func (self *IVideoWindow) Get_WindowState(WindowState *uiwindowsandmessaging.SHOW_WINDOW_CMD) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WindowState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BackgroundPalette dispatches through IVideoWindow's vtable slot 17.
 func (self *IVideoWindow) Put_BackgroundPalette(BackgroundPalette int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(BackgroundPalette))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BackgroundPalette dispatches through IVideoWindow's vtable slot 18.
 func (self *IVideoWindow) Get_BackgroundPalette(pBackgroundPalette *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBackgroundPalette)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Visible dispatches through IVideoWindow's vtable slot 19.
 func (self *IVideoWindow) Put_Visible(Visible int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(Visible))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Visible dispatches through IVideoWindow's vtable slot 20.
 func (self *IVideoWindow) Get_Visible(pVisible *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVisible)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Left dispatches through IVideoWindow's vtable slot 21.
 func (self *IVideoWindow) Put_Left(Left int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(Left))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Left dispatches through IVideoWindow's vtable slot 22.
 func (self *IVideoWindow) Get_Left(pLeft *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLeft)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Width dispatches through IVideoWindow's vtable slot 23.
 func (self *IVideoWindow) Put_Width(Width int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(Width))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Width dispatches through IVideoWindow's vtable slot 24.
 func (self *IVideoWindow) Get_Width(pWidth *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWidth)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Top dispatches through IVideoWindow's vtable slot 25.
 func (self *IVideoWindow) Put_Top(Top int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(Top))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Top dispatches through IVideoWindow's vtable slot 26.
 func (self *IVideoWindow) Get_Top(pTop *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTop)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Height dispatches through IVideoWindow's vtable slot 27.
 func (self *IVideoWindow) Put_Height(Height int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(Height))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Height dispatches through IVideoWindow's vtable slot 28.
 func (self *IVideoWindow) Get_Height(pHeight *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHeight)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Owner dispatches through IVideoWindow's vtable slot 29.
 func (self *IVideoWindow) Put_Owner(Owner uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(Owner))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Owner dispatches through IVideoWindow's vtable slot 30.
 func (self *IVideoWindow) Get_Owner(Owner *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Owner)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MessageDrain dispatches through IVideoWindow's vtable slot 31.
 func (self *IVideoWindow) Put_MessageDrain(Drain uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(Drain))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MessageDrain dispatches through IVideoWindow's vtable slot 32.
 func (self *IVideoWindow) Get_MessageDrain(Drain *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Drain)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BorderColor dispatches through IVideoWindow's vtable slot 33.
 func (self *IVideoWindow) Get_BorderColor(Color *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Color)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BorderColor dispatches through IVideoWindow's vtable slot 34.
 func (self *IVideoWindow) Put_BorderColor(Color int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(Color))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FullScreenMode dispatches through IVideoWindow's vtable slot 35.
 func (self *IVideoWindow) Get_FullScreenMode(FullScreenMode *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(FullScreenMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FullScreenMode dispatches through IVideoWindow's vtable slot 36.
 func (self *IVideoWindow) Put_FullScreenMode(FullScreenMode int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(FullScreenMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetWindowForeground dispatches through IVideoWindow's vtable slot 37.
 func (self *IVideoWindow) SetWindowForeground(Focus int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(Focus))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NotifyOwnerMessage dispatches through IVideoWindow's vtable slot 38.
 func (self *IVideoWindow) NotifyOwnerMessage(hwnd uintptr, uMsg int32, wParam uintptr, lParam uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(uMsg), uintptr(wParam), uintptr(lParam))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetWindowPosition dispatches through IVideoWindow's vtable slot 39.
 func (self *IVideoWindow) SetWindowPosition(Left int32, Top int32, Width int32, Height int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(Left), uintptr(Top), uintptr(Width), uintptr(Height))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetWindowPosition dispatches through IVideoWindow's vtable slot 40.
 func (self *IVideoWindow) GetWindowPosition(pLeft *int32, pTop *int32, pWidth *int32, pHeight *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLeft)), uintptr(unsafe.Pointer(pTop)), uintptr(unsafe.Pointer(pWidth)), uintptr(unsafe.Pointer(pHeight)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMinIdealImageSize dispatches through IVideoWindow's vtable slot 41.
 func (self *IVideoWindow) GetMinIdealImageSize(pWidth *int32, pHeight *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWidth)), uintptr(unsafe.Pointer(pHeight)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMaxIdealImageSize dispatches through IVideoWindow's vtable slot 42.
 func (self *IVideoWindow) GetMaxIdealImageSize(pWidth *int32, pHeight *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWidth)), uintptr(unsafe.Pointer(pHeight)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRestorePosition dispatches through IVideoWindow's vtable slot 43.
 func (self *IVideoWindow) GetRestorePosition(pLeft *int32, pTop *int32, pWidth *int32, pHeight *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLeft)), uintptr(unsafe.Pointer(pTop)), uintptr(unsafe.Pointer(pWidth)), uintptr(unsafe.Pointer(pHeight)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HideCursor dispatches through IVideoWindow's vtable slot 44.
 func (self *IVideoWindow) HideCursor(HideCursor OA_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(HideCursor))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsCursorHidden dispatches through IVideoWindow's vtable slot 45.
 func (self *IVideoWindow) IsCursorHidden(CursorHidden *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CursorHidden)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMCodecAMVideoAccelerator: https://learn.microsoft.com/windows/win32/api/wmdxva/nn-wmdxva-iwmcodecamvideoaccelerator
@@ -12258,19 +12258,19 @@ var IID_IWMCodecAMVideoAccelerator = win32.GUID{Data1: 0xd98ee251, Data2: 0x34e0
 // SetAcceleratorInterface dispatches through IWMCodecAMVideoAccelerator's vtable slot 3.
 func (self *IWMCodecAMVideoAccelerator) SetAcceleratorInterface(pIAMVA *IAMVideoAccelerator) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIAMVA)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NegotiateConnection dispatches through IWMCodecAMVideoAccelerator's vtable slot 4.
 func (self *IWMCodecAMVideoAccelerator) NegotiateConnection(pMediaType *mediamediafoundation.AM_MEDIA_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMediaType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetPlayerNotify dispatches through IWMCodecAMVideoAccelerator's vtable slot 5.
 func (self *IWMCodecAMVideoAccelerator) SetPlayerNotify(pHook *mediawindowsmediaformat.IWMPlayerTimestampHook) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHook)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 990641b0-739f-4e94-a808-9888da8f75af
@@ -12284,11 +12284,11 @@ var IID_IWMCodecVideoAccelerator = win32.GUID{Data1: 0x990641b0, Data2: 0x739f, 
 // NegotiateConnection dispatches through IWMCodecVideoAccelerator's vtable slot 3.
 func (self *IWMCodecVideoAccelerator) NegotiateConnection(pIAMVA *IAMVideoAccelerator, pMediaType *mediamediafoundation.AM_MEDIA_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIAMVA)), uintptr(unsafe.Pointer(pMediaType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetPlayerNotify dispatches through IWMCodecVideoAccelerator's vtable slot 4.
 func (self *IWMCodecVideoAccelerator) SetPlayerNotify(pHook *mediawindowsmediaformat.IWMPlayerTimestampHook) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHook)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

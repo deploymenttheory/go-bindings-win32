@@ -253,7 +253,7 @@ func CLIPFORMAT_UserUnmarshal64(param0 *uint32, param1 *byte, param2 *uint16) *b
 // Minimum OS: windows5.0.
 func CoGetMarshalSizeMax(pulSize *uint32, riid *win32.GUID, pUnk *systemcom.IUnknown, dwDestContext uint32, pvDestContext unsafe.Pointer, mshlflags uint32) error {
 	r1, _, _ := syscall.SyscallN(procCoGetMarshalSizeMax.Addr(), uintptr(unsafe.Pointer(pulSize)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pUnk)), uintptr(dwDestContext), uintptr(unsafe.Pointer(pvDestContext)), uintptr(mshlflags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoGetStandardMarshal calls OLE32!CoGetStandardMarshal.
@@ -261,7 +261,7 @@ func CoGetMarshalSizeMax(pulSize *uint32, riid *win32.GUID, pUnk *systemcom.IUnk
 // Minimum OS: windows5.0.
 func CoGetStandardMarshal(riid *win32.GUID, pUnk *systemcom.IUnknown, dwDestContext uint32, pvDestContext unsafe.Pointer, mshlflags uint32, ppMarshal **IMarshal) error {
 	r1, _, _ := syscall.SyscallN(procCoGetStandardMarshal.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pUnk)), uintptr(dwDestContext), uintptr(unsafe.Pointer(pvDestContext)), uintptr(mshlflags), uintptr(unsafe.Pointer(ppMarshal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoGetStdMarshalEx calls OLE32!CoGetStdMarshalEx.
@@ -269,7 +269,7 @@ func CoGetStandardMarshal(riid *win32.GUID, pUnk *systemcom.IUnknown, dwDestCont
 // Minimum OS: windows5.0.
 func CoGetStdMarshalEx(pUnkOuter *systemcom.IUnknown, smexflags uint32, ppUnkInner **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCoGetStdMarshalEx.Addr(), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(smexflags), uintptr(unsafe.Pointer(ppUnkInner)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoMarshalHresult calls OLE32!CoMarshalHresult.
@@ -277,7 +277,7 @@ func CoGetStdMarshalEx(pUnkOuter *systemcom.IUnknown, smexflags uint32, ppUnkInn
 // Minimum OS: windows5.0.
 func CoMarshalHresult(pstm *systemcom.IStream, hresult foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(procCoMarshalHresult.Addr(), uintptr(unsafe.Pointer(pstm)), uintptr(hresult))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoMarshalInterThreadInterfaceInStream calls OLE32!CoMarshalInterThreadInterfaceInStream.
@@ -285,7 +285,7 @@ func CoMarshalHresult(pstm *systemcom.IStream, hresult foundation.HRESULT) error
 // Minimum OS: windows5.0.
 func CoMarshalInterThreadInterfaceInStream(riid *win32.GUID, pUnk *systemcom.IUnknown, ppStm **systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(procCoMarshalInterThreadInterfaceInStream.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pUnk)), uintptr(unsafe.Pointer(ppStm)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoMarshalInterface calls OLE32!CoMarshalInterface.
@@ -293,7 +293,7 @@ func CoMarshalInterThreadInterfaceInStream(riid *win32.GUID, pUnk *systemcom.IUn
 // Minimum OS: windows5.0.
 func CoMarshalInterface(pStm *systemcom.IStream, riid *win32.GUID, pUnk *systemcom.IUnknown, dwDestContext uint32, pvDestContext unsafe.Pointer, mshlflags uint32) error {
 	r1, _, _ := syscall.SyscallN(procCoMarshalInterface.Addr(), uintptr(unsafe.Pointer(pStm)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pUnk)), uintptr(dwDestContext), uintptr(unsafe.Pointer(pvDestContext)), uintptr(mshlflags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoReleaseMarshalData calls OLE32!CoReleaseMarshalData.
@@ -301,7 +301,7 @@ func CoMarshalInterface(pStm *systemcom.IStream, riid *win32.GUID, pUnk *systemc
 // Minimum OS: windows5.0.
 func CoReleaseMarshalData(pStm *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(procCoReleaseMarshalData.Addr(), uintptr(unsafe.Pointer(pStm)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoUnmarshalHresult calls OLE32!CoUnmarshalHresult.
@@ -309,7 +309,7 @@ func CoReleaseMarshalData(pStm *systemcom.IStream) error {
 // Minimum OS: windows5.0.
 func CoUnmarshalHresult(pstm *systemcom.IStream, phresult *foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(procCoUnmarshalHresult.Addr(), uintptr(unsafe.Pointer(pstm)), uintptr(unsafe.Pointer(phresult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoUnmarshalInterface calls OLE32!CoUnmarshalInterface.
@@ -317,7 +317,7 @@ func CoUnmarshalHresult(pstm *systemcom.IStream, phresult *foundation.HRESULT) e
 // Minimum OS: windows5.0.
 func CoUnmarshalInterface(pStm *systemcom.IStream, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCoUnmarshalInterface.Addr(), uintptr(unsafe.Pointer(pStm)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HACCEL_UserFree calls OLE32!HACCEL_UserFree.

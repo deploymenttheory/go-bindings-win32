@@ -1575,7 +1575,7 @@ func GetGuiResources(hProcess foundation.HANDLE, uiFlags GET_GUI_RESOURCES_FLAGS
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getmachinetypeattributes
 func GetMachineTypeAttributes(Machine uint16, MachineTypeAttributes *MACHINE_ATTRIBUTES) error {
 	r1, _, _ := syscall.SyscallN(procGetMachineTypeAttributes.Addr(), uintptr(Machine), uintptr(unsafe.Pointer(MachineTypeAttributes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMaximumProcessorCount calls KERNEL32!GetMaximumProcessorCount.
@@ -1952,7 +1952,7 @@ func GetSystemTimes(lpIdleTime *foundation.FILETIME, lpKernelTime *foundation.FI
 // Minimum OS: windows10.0.14393.
 func GetThreadDescription(hThread foundation.HANDLE, ppszThreadDescription *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procGetThreadDescription.Addr(), uintptr(hThread), uintptr(unsafe.Pointer(ppszThreadDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThreadGroupAffinity calls KERNEL32!GetThreadGroupAffinity.
@@ -2656,7 +2656,7 @@ func ResumeThread(hThread foundation.HANDLE) (uint32, error) {
 // Minimum OS: windows8.1.
 func RtwqAddPeriodicCallback(Callback RTWQPERIODICCALLBACK, context *systemcom.IUnknown, key *uint32) error {
 	r1, _, _ := syscall.SyscallN(procRtwqAddPeriodicCallback.Addr(), uintptr(Callback), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(key)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RtwqAllocateSerialWorkQueue calls RTWorkQ!RtwqAllocateSerialWorkQueue.
@@ -2664,7 +2664,7 @@ func RtwqAddPeriodicCallback(Callback RTWQPERIODICCALLBACK, context *systemcom.I
 // Minimum OS: windows8.1.
 func RtwqAllocateSerialWorkQueue(workQueueIdIn uint32, workQueueIdOut *uint32) error {
 	r1, _, _ := syscall.SyscallN(procRtwqAllocateSerialWorkQueue.Addr(), uintptr(workQueueIdIn), uintptr(unsafe.Pointer(workQueueIdOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RtwqAllocateWorkQueue calls RTWorkQ!RtwqAllocateWorkQueue.
@@ -2672,7 +2672,7 @@ func RtwqAllocateSerialWorkQueue(workQueueIdIn uint32, workQueueIdOut *uint32) e
 // Minimum OS: windows8.1.
 func RtwqAllocateWorkQueue(WorkQueueType RTWQ_WORKQUEUE_TYPE, workQueueId *uint32) error {
 	r1, _, _ := syscall.SyscallN(procRtwqAllocateWorkQueue.Addr(), uintptr(WorkQueueType), uintptr(unsafe.Pointer(workQueueId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RtwqBeginRegisterWorkQueueWithMMCSS calls RTWorkQ!RtwqBeginRegisterWorkQueueWithMMCSS.
@@ -2681,7 +2681,7 @@ func RtwqAllocateWorkQueue(WorkQueueType RTWQ_WORKQUEUE_TYPE, workQueueId *uint3
 func RtwqBeginRegisterWorkQueueWithMMCSS(workQueueId uint32, usageClass string, dwTaskId uint32, lPriority int32, doneCallback *IRtwqAsyncCallback, doneState *systemcom.IUnknown) error {
 	_usageClass := win32.UTF16Ptr(usageClass)
 	r1, _, _ := syscall.SyscallN(procRtwqBeginRegisterWorkQueueWithMMCSS.Addr(), uintptr(workQueueId), uintptr(unsafe.Pointer(_usageClass)), uintptr(dwTaskId), uintptr(lPriority), uintptr(unsafe.Pointer(doneCallback)), uintptr(unsafe.Pointer(doneState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RtwqBeginUnregisterWorkQueueWithMMCSS calls RTWorkQ!RtwqBeginUnregisterWorkQueueWithMMCSS.
@@ -2689,14 +2689,14 @@ func RtwqBeginRegisterWorkQueueWithMMCSS(workQueueId uint32, usageClass string, 
 // Minimum OS: windows8.1.
 func RtwqBeginUnregisterWorkQueueWithMMCSS(workQueueId uint32, doneCallback *IRtwqAsyncCallback, doneState *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procRtwqBeginUnregisterWorkQueueWithMMCSS.Addr(), uintptr(workQueueId), uintptr(unsafe.Pointer(doneCallback)), uintptr(unsafe.Pointer(doneState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RtwqCancelDeadline calls RTWorkQ!RtwqCancelDeadline.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqcanceldeadline
 func RtwqCancelDeadline(pRequest foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procRtwqCancelDeadline.Addr(), uintptr(pRequest))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RtwqCancelWorkItem calls RTWorkQ!RtwqCancelWorkItem.
@@ -2704,7 +2704,7 @@ func RtwqCancelDeadline(pRequest foundation.HANDLE) error {
 // Minimum OS: windows8.1.
 func RtwqCancelWorkItem(Key uint64) error {
 	r1, _, _ := syscall.SyscallN(procRtwqCancelWorkItem.Addr(), uintptr(Key))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RtwqCreateAsyncResult calls RTWorkQ!RtwqCreateAsyncResult.
@@ -2712,7 +2712,7 @@ func RtwqCancelWorkItem(Key uint64) error {
 // Minimum OS: windows8.1.
 func RtwqCreateAsyncResult(appObject *systemcom.IUnknown, callback *IRtwqAsyncCallback, appState *systemcom.IUnknown, asyncResult **IRtwqAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(procRtwqCreateAsyncResult.Addr(), uintptr(unsafe.Pointer(appObject)), uintptr(unsafe.Pointer(callback)), uintptr(unsafe.Pointer(appState)), uintptr(unsafe.Pointer(asyncResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RtwqEndRegisterWorkQueueWithMMCSS calls RTWorkQ!RtwqEndRegisterWorkQueueWithMMCSS.
@@ -2720,7 +2720,7 @@ func RtwqCreateAsyncResult(appObject *systemcom.IUnknown, callback *IRtwqAsyncCa
 // Minimum OS: windows8.1.
 func RtwqEndRegisterWorkQueueWithMMCSS(result *IRtwqAsyncResult, taskId *uint32) error {
 	r1, _, _ := syscall.SyscallN(procRtwqEndRegisterWorkQueueWithMMCSS.Addr(), uintptr(unsafe.Pointer(result)), uintptr(unsafe.Pointer(taskId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RtwqGetWorkQueueMMCSSClass calls RTWorkQ!RtwqGetWorkQueueMMCSSClass.
@@ -2728,7 +2728,7 @@ func RtwqEndRegisterWorkQueueWithMMCSS(result *IRtwqAsyncResult, taskId *uint32)
 // Minimum OS: windows8.1.
 func RtwqGetWorkQueueMMCSSClass(workQueueId uint32, usageClass foundation.PWSTR, usageClassLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(procRtwqGetWorkQueueMMCSSClass.Addr(), uintptr(workQueueId), uintptr(unsafe.Pointer(usageClass)), uintptr(unsafe.Pointer(usageClassLength)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RtwqGetWorkQueueMMCSSPriority calls RTWorkQ!RtwqGetWorkQueueMMCSSPriority.
@@ -2736,7 +2736,7 @@ func RtwqGetWorkQueueMMCSSClass(workQueueId uint32, usageClass foundation.PWSTR,
 // Minimum OS: windows8.1.
 func RtwqGetWorkQueueMMCSSPriority(workQueueId uint32, priority *int32) error {
 	r1, _, _ := syscall.SyscallN(procRtwqGetWorkQueueMMCSSPriority.Addr(), uintptr(workQueueId), uintptr(unsafe.Pointer(priority)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RtwqGetWorkQueueMMCSSTaskId calls RTWorkQ!RtwqGetWorkQueueMMCSSTaskId.
@@ -2744,7 +2744,7 @@ func RtwqGetWorkQueueMMCSSPriority(workQueueId uint32, priority *int32) error {
 // Minimum OS: windows8.1.
 func RtwqGetWorkQueueMMCSSTaskId(workQueueId uint32, taskId *uint32) error {
 	r1, _, _ := syscall.SyscallN(procRtwqGetWorkQueueMMCSSTaskId.Addr(), uintptr(workQueueId), uintptr(unsafe.Pointer(taskId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RtwqInvokeCallback calls RTWorkQ!RtwqInvokeCallback.
@@ -2752,7 +2752,7 @@ func RtwqGetWorkQueueMMCSSTaskId(workQueueId uint32, taskId *uint32) error {
 // Minimum OS: windows8.1.
 func RtwqInvokeCallback(result *IRtwqAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(procRtwqInvokeCallback.Addr(), uintptr(unsafe.Pointer(result)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RtwqJoinWorkQueue calls RTWorkQ!RtwqJoinWorkQueue.
@@ -2760,7 +2760,7 @@ func RtwqInvokeCallback(result *IRtwqAsyncResult) error {
 // Minimum OS: windows8.1.
 func RtwqJoinWorkQueue(workQueueId uint32, hFile foundation.HANDLE, out *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procRtwqJoinWorkQueue.Addr(), uintptr(workQueueId), uintptr(hFile), uintptr(unsafe.Pointer(out)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RtwqLockPlatform calls RTWorkQ!RtwqLockPlatform.
@@ -2768,7 +2768,7 @@ func RtwqJoinWorkQueue(workQueueId uint32, hFile foundation.HANDLE, out *foundat
 // Minimum OS: windows8.1.
 func RtwqLockPlatform() error {
 	r1, _, _ := syscall.SyscallN(procRtwqLockPlatform.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RtwqLockSharedWorkQueue calls RTWorkQ!RtwqLockSharedWorkQueue.
@@ -2777,7 +2777,7 @@ func RtwqLockPlatform() error {
 func RtwqLockSharedWorkQueue(usageClass string, basePriority int32, taskId *uint32, id *uint32) error {
 	_usageClass := win32.UTF16Ptr(usageClass)
 	r1, _, _ := syscall.SyscallN(procRtwqLockSharedWorkQueue.Addr(), uintptr(unsafe.Pointer(_usageClass)), uintptr(basePriority), uintptr(unsafe.Pointer(taskId)), uintptr(unsafe.Pointer(id)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RtwqLockWorkQueue calls RTWorkQ!RtwqLockWorkQueue.
@@ -2785,7 +2785,7 @@ func RtwqLockSharedWorkQueue(usageClass string, basePriority int32, taskId *uint
 // Minimum OS: windows8.1.
 func RtwqLockWorkQueue(workQueueId uint32) error {
 	r1, _, _ := syscall.SyscallN(procRtwqLockWorkQueue.Addr(), uintptr(workQueueId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RtwqPutWaitingWorkItem calls RTWorkQ!RtwqPutWaitingWorkItem.
@@ -2793,7 +2793,7 @@ func RtwqLockWorkQueue(workQueueId uint32) error {
 // Minimum OS: windows8.1.
 func RtwqPutWaitingWorkItem(hEvent foundation.HANDLE, lPriority int32, result *IRtwqAsyncResult, key *uint64) error {
 	r1, _, _ := syscall.SyscallN(procRtwqPutWaitingWorkItem.Addr(), uintptr(hEvent), uintptr(lPriority), uintptr(unsafe.Pointer(result)), uintptr(unsafe.Pointer(key)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RtwqPutWorkItem calls RTWorkQ!RtwqPutWorkItem.
@@ -2801,7 +2801,7 @@ func RtwqPutWaitingWorkItem(hEvent foundation.HANDLE, lPriority int32, result *I
 // Minimum OS: windows8.1.
 func RtwqPutWorkItem(dwQueue uint32, lPriority int32, result *IRtwqAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(procRtwqPutWorkItem.Addr(), uintptr(dwQueue), uintptr(lPriority), uintptr(unsafe.Pointer(result)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RtwqRegisterPlatformEvents calls RTWorkQ!RtwqRegisterPlatformEvents.
@@ -2809,7 +2809,7 @@ func RtwqPutWorkItem(dwQueue uint32, lPriority int32, result *IRtwqAsyncResult) 
 // Minimum OS: windows8.1.
 func RtwqRegisterPlatformEvents(platformEvents *IRtwqPlatformEvents) error {
 	r1, _, _ := syscall.SyscallN(procRtwqRegisterPlatformEvents.Addr(), uintptr(unsafe.Pointer(platformEvents)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RtwqRegisterPlatformWithMMCSS calls RTWorkQ!RtwqRegisterPlatformWithMMCSS.
@@ -2818,7 +2818,7 @@ func RtwqRegisterPlatformEvents(platformEvents *IRtwqPlatformEvents) error {
 func RtwqRegisterPlatformWithMMCSS(usageClass string, taskId *uint32, lPriority int32) error {
 	_usageClass := win32.UTF16Ptr(usageClass)
 	r1, _, _ := syscall.SyscallN(procRtwqRegisterPlatformWithMMCSS.Addr(), uintptr(unsafe.Pointer(_usageClass)), uintptr(unsafe.Pointer(taskId)), uintptr(lPriority))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RtwqRemovePeriodicCallback calls RTWorkQ!RtwqRemovePeriodicCallback.
@@ -2826,7 +2826,7 @@ func RtwqRegisterPlatformWithMMCSS(usageClass string, taskId *uint32, lPriority 
 // Minimum OS: windows8.1.
 func RtwqRemovePeriodicCallback(dwKey uint32) error {
 	r1, _, _ := syscall.SyscallN(procRtwqRemovePeriodicCallback.Addr(), uintptr(dwKey))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RtwqScheduleWorkItem calls RTWorkQ!RtwqScheduleWorkItem.
@@ -2834,7 +2834,7 @@ func RtwqRemovePeriodicCallback(dwKey uint32) error {
 // Minimum OS: windows8.1.
 func RtwqScheduleWorkItem(result *IRtwqAsyncResult, Timeout int64, key *uint64) error {
 	r1, _, _ := syscall.SyscallN(procRtwqScheduleWorkItem.Addr(), uintptr(unsafe.Pointer(result)), uintptr(Timeout), uintptr(unsafe.Pointer(key)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RtwqSetDeadline calls RTWorkQ!RtwqSetDeadline.
@@ -2842,7 +2842,7 @@ func RtwqScheduleWorkItem(result *IRtwqAsyncResult, Timeout int64, key *uint64) 
 // Minimum OS: windows10.0.10240.
 func RtwqSetDeadline(workQueueId uint32, deadlineInHNS int64, pRequest *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procRtwqSetDeadline.Addr(), uintptr(workQueueId), uintptr(deadlineInHNS), uintptr(unsafe.Pointer(pRequest)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RtwqSetDeadline2 calls RTWorkQ!RtwqSetDeadline2.
@@ -2850,7 +2850,7 @@ func RtwqSetDeadline(workQueueId uint32, deadlineInHNS int64, pRequest *foundati
 // Minimum OS: windows10.0.10240.
 func RtwqSetDeadline2(workQueueId uint32, deadlineInHNS int64, preDeadlineInHNS int64, pRequest *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procRtwqSetDeadline2.Addr(), uintptr(workQueueId), uintptr(deadlineInHNS), uintptr(preDeadlineInHNS), uintptr(unsafe.Pointer(pRequest)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RtwqSetLongRunning calls RTWorkQ!RtwqSetLongRunning.
@@ -2859,7 +2859,7 @@ func RtwqSetDeadline2(workQueueId uint32, deadlineInHNS int64, preDeadlineInHNS 
 func RtwqSetLongRunning(workQueueId uint32, enable bool) error {
 	_enable := win32.Bool32(enable)
 	r1, _, _ := syscall.SyscallN(procRtwqSetLongRunning.Addr(), uintptr(workQueueId), uintptr(_enable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RtwqShutdown calls RTWorkQ!RtwqShutdown.
@@ -2867,7 +2867,7 @@ func RtwqSetLongRunning(workQueueId uint32, enable bool) error {
 // Minimum OS: windows8.1.
 func RtwqShutdown() error {
 	r1, _, _ := syscall.SyscallN(procRtwqShutdown.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RtwqStartup calls RTWorkQ!RtwqStartup.
@@ -2875,7 +2875,7 @@ func RtwqShutdown() error {
 // Minimum OS: windows8.1.
 func RtwqStartup() error {
 	r1, _, _ := syscall.SyscallN(procRtwqStartup.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RtwqUnjoinWorkQueue calls RTWorkQ!RtwqUnjoinWorkQueue.
@@ -2883,7 +2883,7 @@ func RtwqStartup() error {
 // Minimum OS: windows8.1.
 func RtwqUnjoinWorkQueue(workQueueId uint32, hFile foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procRtwqUnjoinWorkQueue.Addr(), uintptr(workQueueId), uintptr(hFile))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RtwqUnlockPlatform calls RTWorkQ!RtwqUnlockPlatform.
@@ -2891,7 +2891,7 @@ func RtwqUnjoinWorkQueue(workQueueId uint32, hFile foundation.HANDLE) error {
 // Minimum OS: windows8.1.
 func RtwqUnlockPlatform() error {
 	r1, _, _ := syscall.SyscallN(procRtwqUnlockPlatform.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RtwqUnlockWorkQueue calls RTWorkQ!RtwqUnlockWorkQueue.
@@ -2899,7 +2899,7 @@ func RtwqUnlockPlatform() error {
 // Minimum OS: windows8.1.
 func RtwqUnlockWorkQueue(workQueueId uint32) error {
 	r1, _, _ := syscall.SyscallN(procRtwqUnlockWorkQueue.Addr(), uintptr(workQueueId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RtwqUnregisterPlatformEvents calls RTWorkQ!RtwqUnregisterPlatformEvents.
@@ -2907,7 +2907,7 @@ func RtwqUnlockWorkQueue(workQueueId uint32) error {
 // Minimum OS: windows8.1.
 func RtwqUnregisterPlatformEvents(platformEvents *IRtwqPlatformEvents) error {
 	r1, _, _ := syscall.SyscallN(procRtwqUnregisterPlatformEvents.Addr(), uintptr(unsafe.Pointer(platformEvents)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RtwqUnregisterPlatformFromMMCSS calls RTWorkQ!RtwqUnregisterPlatformFromMMCSS.
@@ -2915,7 +2915,7 @@ func RtwqUnregisterPlatformEvents(platformEvents *IRtwqPlatformEvents) error {
 // Minimum OS: windows8.1.
 func RtwqUnregisterPlatformFromMMCSS() error {
 	r1, _, _ := syscall.SyscallN(procRtwqUnregisterPlatformFromMMCSS.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCriticalSectionSpinCount calls KERNEL32!SetCriticalSectionSpinCount.
@@ -3139,7 +3139,7 @@ func SetThreadAffinityMask(hThread foundation.HANDLE, dwThreadAffinityMask uintp
 func SetThreadDescription(hThread foundation.HANDLE, lpThreadDescription string) error {
 	_lpThreadDescription := win32.UTF16Ptr(lpThreadDescription)
 	r1, _, _ := syscall.SyscallN(procSetThreadDescription.Addr(), uintptr(hThread), uintptr(unsafe.Pointer(_lpThreadDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetThreadGroupAffinity calls KERNEL32!SetThreadGroupAffinity.

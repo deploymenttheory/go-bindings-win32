@@ -61,7 +61,7 @@ var (
 // Minimum OS: windows6.0.6000.
 func BrowseForGPO(lpBrowseInfo *GPOBROWSEINFO) error {
 	r1, _, _ := syscall.SyscallN(procBrowseForGPO.Addr(), uintptr(unsafe.Pointer(lpBrowseInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CommandLineFromMsiDescriptor calls ADVAPI32!CommandLineFromMsiDescriptor.
@@ -79,7 +79,7 @@ func CreateGPOLink(lpGPO string, lpContainer string, fHighPriority bool) error {
 	_lpContainer := win32.UTF16Ptr(lpContainer)
 	_fHighPriority := win32.Bool32(fHighPriority)
 	r1, _, _ := syscall.SyscallN(procCreateGPOLink.Addr(), uintptr(unsafe.Pointer(_lpGPO)), uintptr(unsafe.Pointer(_lpContainer)), uintptr(_fHighPriority))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteAllGPOLinks calls GPEDIT!DeleteAllGPOLinks.
@@ -88,7 +88,7 @@ func CreateGPOLink(lpGPO string, lpContainer string, fHighPriority bool) error {
 func DeleteAllGPOLinks(lpContainer string) error {
 	_lpContainer := win32.UTF16Ptr(lpContainer)
 	r1, _, _ := syscall.SyscallN(procDeleteAllGPOLinks.Addr(), uintptr(unsafe.Pointer(_lpContainer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteGPOLink calls GPEDIT!DeleteGPOLink.
@@ -98,7 +98,7 @@ func DeleteGPOLink(lpGPO string, lpContainer string) error {
 	_lpGPO := win32.UTF16Ptr(lpGPO)
 	_lpContainer := win32.UTF16Ptr(lpContainer)
 	r1, _, _ := syscall.SyscallN(procDeleteGPOLink.Addr(), uintptr(unsafe.Pointer(_lpGPO)), uintptr(unsafe.Pointer(_lpContainer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnterCriticalPolicySection calls USERENV!EnterCriticalPolicySection.
@@ -121,7 +121,7 @@ func ExportRSoPData(lpNameSpace string, lpFileName string) error {
 	_lpNameSpace := win32.UTF16Ptr(lpNameSpace)
 	_lpFileName := win32.UTF16Ptr(lpFileName)
 	r1, _, _ := syscall.SyscallN(procExportRSoPData.Addr(), uintptr(unsafe.Pointer(_lpNameSpace)), uintptr(unsafe.Pointer(_lpFileName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FreeGPOList calls USERENV!FreeGPOListW.
@@ -234,7 +234,7 @@ func ImportRSoPData(lpNameSpace string, lpFileName string) error {
 	_lpNameSpace := win32.UTF16Ptr(lpNameSpace)
 	_lpFileName := win32.UTF16Ptr(lpFileName)
 	r1, _, _ := syscall.SyscallN(procImportRSoPData.Addr(), uintptr(unsafe.Pointer(_lpNameSpace)), uintptr(unsafe.Pointer(_lpFileName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InstallApplication calls ADVAPI32!InstallApplication.
@@ -317,7 +317,7 @@ func RsopAccessCheckByType(pSecurityDescriptor security.PSECURITY_DESCRIPTOR, pP
 		_pObjectTypeList = &pObjectTypeList[0]
 	}
 	r1, _, _ := syscall.SyscallN(procRsopAccessCheckByType.Addr(), uintptr(pSecurityDescriptor), uintptr(pPrincipalSelfSid), uintptr(unsafe.Pointer(pRsopToken)), uintptr(dwDesiredAccessMask), uintptr(unsafe.Pointer(_pObjectTypeList)), uintptr(len(pObjectTypeList)), uintptr(unsafe.Pointer(pGenericMapping)), uintptr(unsafe.Pointer(pPrivilegeSet)), uintptr(unsafe.Pointer(pdwPrivilegeSetLength)), uintptr(unsafe.Pointer(pdwGrantedAccessMask)), uintptr(unsafe.Pointer(pbAccessStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RsopFileAccessCheck calls USERENV!RsopFileAccessCheck.
@@ -326,7 +326,7 @@ func RsopAccessCheckByType(pSecurityDescriptor security.PSECURITY_DESCRIPTOR, pP
 func RsopFileAccessCheck(pszFileName string, pRsopToken unsafe.Pointer, dwDesiredAccessMask uint32, pdwGrantedAccessMask *uint32, pbAccessStatus *foundation.BOOL) error {
 	_pszFileName := win32.UTF16Ptr(pszFileName)
 	r1, _, _ := syscall.SyscallN(procRsopFileAccessCheck.Addr(), uintptr(unsafe.Pointer(_pszFileName)), uintptr(unsafe.Pointer(pRsopToken)), uintptr(dwDesiredAccessMask), uintptr(unsafe.Pointer(pdwGrantedAccessMask)), uintptr(unsafe.Pointer(pbAccessStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RsopResetPolicySettingStatus calls USERENV!RsopResetPolicySettingStatus.
@@ -334,7 +334,7 @@ func RsopFileAccessCheck(pszFileName string, pRsopToken unsafe.Pointer, dwDesire
 // Minimum OS: windows6.0.6000.
 func RsopResetPolicySettingStatus(dwFlags uint32, pServices *systemwmi.IWbemServices, pSettingInstance *systemwmi.IWbemClassObject) error {
 	r1, _, _ := syscall.SyscallN(procRsopResetPolicySettingStatus.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(pServices)), uintptr(unsafe.Pointer(pSettingInstance)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RsopSetPolicySettingStatus calls USERENV!RsopSetPolicySettingStatus.
@@ -346,7 +346,7 @@ func RsopSetPolicySettingStatus(dwFlags uint32, pServices *systemwmi.IWbemServic
 		_pStatus = &pStatus[0]
 	}
 	r1, _, _ := syscall.SyscallN(procRsopSetPolicySettingStatus.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(pServices)), uintptr(unsafe.Pointer(pSettingInstance)), uintptr(len(pStatus)), uintptr(unsafe.Pointer(_pStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UninstallApplication calls ADVAPI32!UninstallApplication.

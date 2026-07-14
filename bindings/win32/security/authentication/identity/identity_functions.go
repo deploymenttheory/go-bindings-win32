@@ -254,7 +254,7 @@ var (
 // Minimum OS: windows6.0.6000.
 func AcceptSecurityContext(phCredential *securitycredentials.SecHandle, phContext *securitycredentials.SecHandle, pInput *SecBufferDesc, fContextReq ASC_REQ_FLAGS, TargetDataRep uint32, phNewContext *securitycredentials.SecHandle, pOutput *SecBufferDesc, pfContextAttr *uint32, ptsExpiry *int64) error {
 	r1, _, _ := syscall.SyscallN(procAcceptSecurityContext.Addr(), uintptr(unsafe.Pointer(phCredential)), uintptr(unsafe.Pointer(phContext)), uintptr(unsafe.Pointer(pInput)), uintptr(fContextReq), uintptr(TargetDataRep), uintptr(unsafe.Pointer(phNewContext)), uintptr(unsafe.Pointer(pOutput)), uintptr(unsafe.Pointer(pfContextAttr)), uintptr(unsafe.Pointer(ptsExpiry)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AcquireCredentialsHandle calls SECUR32!AcquireCredentialsHandleW.
@@ -264,7 +264,7 @@ func AcquireCredentialsHandle(pszPrincipal string, pszPackage string, fCredentia
 	_pszPrincipal := win32.UTF16Ptr(pszPrincipal)
 	_pszPackage := win32.UTF16Ptr(pszPackage)
 	r1, _, _ := syscall.SyscallN(procAcquireCredentialsHandle.Addr(), uintptr(unsafe.Pointer(_pszPrincipal)), uintptr(unsafe.Pointer(_pszPackage)), uintptr(fCredentialUse), uintptr(unsafe.Pointer(pvLogonId)), uintptr(unsafe.Pointer(pAuthData)), uintptr(pGetKeyFn), uintptr(unsafe.Pointer(pvGetKeyArgument)), uintptr(unsafe.Pointer(phCredential)), uintptr(unsafe.Pointer(ptsExpiry)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AcquireCredentialsHandleA calls SECUR32!AcquireCredentialsHandleA.
@@ -272,7 +272,7 @@ func AcquireCredentialsHandle(pszPrincipal string, pszPackage string, fCredentia
 // Minimum OS: windows6.0.6000.
 func AcquireCredentialsHandleA(pszPrincipal foundation.PSTR, pszPackage foundation.PSTR, fCredentialUse SECPKG_CRED, pvLogonId unsafe.Pointer, pAuthData unsafe.Pointer, pGetKeyFn SEC_GET_KEY_FN, pvGetKeyArgument unsafe.Pointer, phCredential *securitycredentials.SecHandle, ptsExpiry *int64) error {
 	r1, _, _ := syscall.SyscallN(procAcquireCredentialsHandleA.Addr(), uintptr(unsafe.Pointer(pszPrincipal)), uintptr(unsafe.Pointer(pszPackage)), uintptr(fCredentialUse), uintptr(unsafe.Pointer(pvLogonId)), uintptr(unsafe.Pointer(pAuthData)), uintptr(pGetKeyFn), uintptr(unsafe.Pointer(pvGetKeyArgument)), uintptr(unsafe.Pointer(phCredential)), uintptr(unsafe.Pointer(ptsExpiry)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddCredentials calls SECUR32!AddCredentialsW.
@@ -281,14 +281,14 @@ func AddCredentials(hCredentials *securitycredentials.SecHandle, pszPrincipal st
 	_pszPrincipal := win32.UTF16Ptr(pszPrincipal)
 	_pszPackage := win32.UTF16Ptr(pszPackage)
 	r1, _, _ := syscall.SyscallN(procAddCredentials.Addr(), uintptr(unsafe.Pointer(hCredentials)), uintptr(unsafe.Pointer(_pszPrincipal)), uintptr(unsafe.Pointer(_pszPackage)), uintptr(fCredentialUse), uintptr(unsafe.Pointer(pAuthData)), uintptr(pGetKeyFn), uintptr(unsafe.Pointer(pvGetKeyArgument)), uintptr(unsafe.Pointer(ptsExpiry)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddCredentialsA calls SECUR32!AddCredentialsA.
 // https://learn.microsoft.com/windows/win32/api/sspi/nf-sspi-addcredentialsa
 func AddCredentialsA(hCredentials *securitycredentials.SecHandle, pszPrincipal foundation.PSTR, pszPackage foundation.PSTR, fCredentialUse uint32, pAuthData unsafe.Pointer, pGetKeyFn SEC_GET_KEY_FN, pvGetKeyArgument unsafe.Pointer, ptsExpiry *int64) error {
 	r1, _, _ := syscall.SyscallN(procAddCredentialsA.Addr(), uintptr(unsafe.Pointer(hCredentials)), uintptr(unsafe.Pointer(pszPrincipal)), uintptr(unsafe.Pointer(pszPackage)), uintptr(fCredentialUse), uintptr(unsafe.Pointer(pAuthData)), uintptr(pGetKeyFn), uintptr(unsafe.Pointer(pvGetKeyArgument)), uintptr(unsafe.Pointer(ptsExpiry)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddSecurityPackage calls SECUR32!AddSecurityPackageW.
@@ -297,7 +297,7 @@ func AddCredentialsA(hCredentials *securitycredentials.SecHandle, pszPrincipal f
 func AddSecurityPackage(pszPackageName string, pOptions *SECURITY_PACKAGE_OPTIONS) error {
 	_pszPackageName := win32.UTF16Ptr(pszPackageName)
 	r1, _, _ := syscall.SyscallN(procAddSecurityPackage.Addr(), uintptr(unsafe.Pointer(_pszPackageName)), uintptr(unsafe.Pointer(pOptions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddSecurityPackageA calls SECUR32!AddSecurityPackageA.
@@ -305,7 +305,7 @@ func AddSecurityPackage(pszPackageName string, pOptions *SECURITY_PACKAGE_OPTION
 // Minimum OS: windows6.1.
 func AddSecurityPackageA(pszPackageName foundation.PSTR, pOptions *SECURITY_PACKAGE_OPTIONS) error {
 	r1, _, _ := syscall.SyscallN(procAddSecurityPackageA.Addr(), uintptr(unsafe.Pointer(pszPackageName)), uintptr(unsafe.Pointer(pOptions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ApplyControlToken calls SECUR32!ApplyControlToken.
@@ -313,7 +313,7 @@ func AddSecurityPackageA(pszPackageName foundation.PSTR, pOptions *SECURITY_PACK
 // Minimum OS: windows5.1.2600.
 func ApplyControlToken(phContext *securitycredentials.SecHandle, pInput *SecBufferDesc) error {
 	r1, _, _ := syscall.SyscallN(procApplyControlToken.Addr(), uintptr(unsafe.Pointer(phContext)), uintptr(unsafe.Pointer(pInput)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AuditComputeEffectivePolicyBySid calls ADVAPI32!AuditComputeEffectivePolicyBySid.
@@ -585,7 +585,7 @@ func AuditSetSystemPolicy(pAuditPolicy []AUDIT_POLICY_INFORMATION) (foundation.B
 // Minimum OS: windows6.0.6000.
 func ChangeAccountPassword(pszPackageName *uint16, pszDomainName *uint16, pszAccountName *uint16, pszOldPassword *uint16, pszNewPassword *uint16, bImpersonating foundation.BOOLEAN, dwReserved uint32, pOutput *SecBufferDesc) error {
 	r1, _, _ := syscall.SyscallN(procChangeAccountPassword.Addr(), uintptr(unsafe.Pointer(pszPackageName)), uintptr(unsafe.Pointer(pszDomainName)), uintptr(unsafe.Pointer(pszAccountName)), uintptr(unsafe.Pointer(pszOldPassword)), uintptr(unsafe.Pointer(pszNewPassword)), uintptr(bImpersonating), uintptr(dwReserved), uintptr(unsafe.Pointer(pOutput)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ChangeAccountPasswordA calls SECUR32!ChangeAccountPasswordA.
@@ -593,7 +593,7 @@ func ChangeAccountPassword(pszPackageName *uint16, pszDomainName *uint16, pszAcc
 // Minimum OS: windows6.0.6000.
 func ChangeAccountPasswordA(pszPackageName *int8, pszDomainName *int8, pszAccountName *int8, pszOldPassword *int8, pszNewPassword *int8, bImpersonating foundation.BOOLEAN, dwReserved uint32, pOutput *SecBufferDesc) error {
 	r1, _, _ := syscall.SyscallN(procChangeAccountPasswordA.Addr(), uintptr(unsafe.Pointer(pszPackageName)), uintptr(unsafe.Pointer(pszDomainName)), uintptr(unsafe.Pointer(pszAccountName)), uintptr(unsafe.Pointer(pszOldPassword)), uintptr(unsafe.Pointer(pszNewPassword)), uintptr(bImpersonating), uintptr(dwReserved), uintptr(unsafe.Pointer(pOutput)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CompleteAuthToken calls SECUR32!CompleteAuthToken.
@@ -601,7 +601,7 @@ func ChangeAccountPasswordA(pszPackageName *int8, pszDomainName *int8, pszAccoun
 // Minimum OS: windows5.1.2600.
 func CompleteAuthToken(phContext *securitycredentials.SecHandle, pToken *SecBufferDesc) error {
 	r1, _, _ := syscall.SyscallN(procCompleteAuthToken.Addr(), uintptr(unsafe.Pointer(phContext)), uintptr(unsafe.Pointer(pToken)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CredMarshalTargetInfo calls SECUR32!CredMarshalTargetInfo.
@@ -623,7 +623,7 @@ func CredUnmarshalTargetInfo(Buffer *uint16, BufferSize uint32, RetTargetInfo **
 // Minimum OS: windows5.1.2600.
 func DecryptMessage(phContext *securitycredentials.SecHandle, pMessage *SecBufferDesc, MessageSeqNo uint32, pfQOP *uint32) error {
 	r1, _, _ := syscall.SyscallN(procDecryptMessage.Addr(), uintptr(unsafe.Pointer(phContext)), uintptr(unsafe.Pointer(pMessage)), uintptr(MessageSeqNo), uintptr(unsafe.Pointer(pfQOP)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteSecurityContext calls SECUR32!DeleteSecurityContext.
@@ -631,7 +631,7 @@ func DecryptMessage(phContext *securitycredentials.SecHandle, pMessage *SecBuffe
 // Minimum OS: windows5.1.2600.
 func DeleteSecurityContext(phContext *securitycredentials.SecHandle) error {
 	r1, _, _ := syscall.SyscallN(procDeleteSecurityContext.Addr(), uintptr(unsafe.Pointer(phContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteSecurityPackage calls SECUR32!DeleteSecurityPackageW.
@@ -640,7 +640,7 @@ func DeleteSecurityContext(phContext *securitycredentials.SecHandle) error {
 func DeleteSecurityPackage(pszPackageName string) error {
 	_pszPackageName := win32.UTF16Ptr(pszPackageName)
 	r1, _, _ := syscall.SyscallN(procDeleteSecurityPackage.Addr(), uintptr(unsafe.Pointer(_pszPackageName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteSecurityPackageA calls SECUR32!DeleteSecurityPackageA.
@@ -648,7 +648,7 @@ func DeleteSecurityPackage(pszPackageName string) error {
 // Minimum OS: windows6.1.
 func DeleteSecurityPackageA(pszPackageName foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(procDeleteSecurityPackageA.Addr(), uintptr(unsafe.Pointer(pszPackageName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EncryptMessage calls SECUR32!EncryptMessage.
@@ -656,7 +656,7 @@ func DeleteSecurityPackageA(pszPackageName foundation.PSTR) error {
 // Minimum OS: windows5.1.2600.
 func EncryptMessage(phContext *securitycredentials.SecHandle, fQOP uint32, pMessage *SecBufferDesc, MessageSeqNo uint32) error {
 	r1, _, _ := syscall.SyscallN(procEncryptMessage.Addr(), uintptr(unsafe.Pointer(phContext)), uintptr(fQOP), uintptr(unsafe.Pointer(pMessage)), uintptr(MessageSeqNo))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumerateSecurityPackages calls SECUR32!EnumerateSecurityPackagesW.
@@ -664,7 +664,7 @@ func EncryptMessage(phContext *securitycredentials.SecHandle, fQOP uint32, pMess
 // Minimum OS: windows5.1.2600.
 func EnumerateSecurityPackages(pcPackages *uint32, ppPackageInfo **SecPkgInfoW) error {
 	r1, _, _ := syscall.SyscallN(procEnumerateSecurityPackages.Addr(), uintptr(unsafe.Pointer(pcPackages)), uintptr(unsafe.Pointer(ppPackageInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumerateSecurityPackagesA calls SECUR32!EnumerateSecurityPackagesA.
@@ -672,7 +672,7 @@ func EnumerateSecurityPackages(pcPackages *uint32, ppPackageInfo **SecPkgInfoW) 
 // Minimum OS: windows5.1.2600.
 func EnumerateSecurityPackagesA(pcPackages *uint32, ppPackageInfo **SecPkgInfoA) error {
 	r1, _, _ := syscall.SyscallN(procEnumerateSecurityPackagesA.Addr(), uintptr(unsafe.Pointer(pcPackages)), uintptr(unsafe.Pointer(ppPackageInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExportSecurityContext calls SECUR32!ExportSecurityContext.
@@ -680,7 +680,7 @@ func EnumerateSecurityPackagesA(pcPackages *uint32, ppPackageInfo **SecPkgInfoA)
 // Minimum OS: windows5.1.2600.
 func ExportSecurityContext(phContext *securitycredentials.SecHandle, fFlags EXPORT_SECURITY_CONTEXT_FLAGS, pPackedContext *SecBuffer, pToken *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procExportSecurityContext.Addr(), uintptr(unsafe.Pointer(phContext)), uintptr(fFlags), uintptr(unsafe.Pointer(pPackedContext)), uintptr(unsafe.Pointer(pToken)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FreeContextBuffer calls SECUR32!FreeContextBuffer.
@@ -688,7 +688,7 @@ func ExportSecurityContext(phContext *securitycredentials.SecHandle, fFlags EXPO
 // Minimum OS: windows5.1.2600.
 func FreeContextBuffer(pvContextBuffer unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procFreeContextBuffer.Addr(), uintptr(unsafe.Pointer(pvContextBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FreeCredentialsHandle calls SECUR32!FreeCredentialsHandle.
@@ -696,7 +696,7 @@ func FreeContextBuffer(pvContextBuffer unsafe.Pointer) error {
 // Minimum OS: windows5.1.2600.
 func FreeCredentialsHandle(phCredential *securitycredentials.SecHandle) error {
 	r1, _, _ := syscall.SyscallN(procFreeCredentialsHandle.Addr(), uintptr(unsafe.Pointer(phCredential)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetComputerObjectName calls SECUR32!GetComputerObjectNameW.
@@ -748,7 +748,7 @@ func GetUserNameExA(NameFormat EXTENDED_NAME_FORMAT, lpNameBuffer foundation.PST
 // Minimum OS: windows5.1.2600.
 func ImpersonateSecurityContext(phContext *securitycredentials.SecHandle) error {
 	r1, _, _ := syscall.SyscallN(procImpersonateSecurityContext.Addr(), uintptr(unsafe.Pointer(phContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ImportSecurityContext calls SECUR32!ImportSecurityContextW.
@@ -757,7 +757,7 @@ func ImpersonateSecurityContext(phContext *securitycredentials.SecHandle) error 
 func ImportSecurityContext(pszPackage string, pPackedContext *SecBuffer, Token unsafe.Pointer, phContext *securitycredentials.SecHandle) error {
 	_pszPackage := win32.UTF16Ptr(pszPackage)
 	r1, _, _ := syscall.SyscallN(procImportSecurityContext.Addr(), uintptr(unsafe.Pointer(_pszPackage)), uintptr(unsafe.Pointer(pPackedContext)), uintptr(unsafe.Pointer(Token)), uintptr(unsafe.Pointer(phContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ImportSecurityContextA calls SECUR32!ImportSecurityContextA.
@@ -765,7 +765,7 @@ func ImportSecurityContext(pszPackage string, pPackedContext *SecBuffer, Token u
 // Minimum OS: windows5.1.2600.
 func ImportSecurityContextA(pszPackage foundation.PSTR, pPackedContext *SecBuffer, Token unsafe.Pointer, phContext *securitycredentials.SecHandle) error {
 	r1, _, _ := syscall.SyscallN(procImportSecurityContextA.Addr(), uintptr(unsafe.Pointer(pszPackage)), uintptr(unsafe.Pointer(pPackedContext)), uintptr(unsafe.Pointer(Token)), uintptr(unsafe.Pointer(phContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitSecurityInterface calls SECUR32!InitSecurityInterfaceW.
@@ -789,7 +789,7 @@ func InitSecurityInterfaceA() *SecurityFunctionTableA {
 // Minimum OS: windows5.1.2600.
 func InitializeSecurityContext(phCredential *securitycredentials.SecHandle, phContext *securitycredentials.SecHandle, pszTargetName *uint16, fContextReq ISC_REQ_FLAGS, Reserved1 uint32, TargetDataRep uint32, pInput *SecBufferDesc, Reserved2 uint32, phNewContext *securitycredentials.SecHandle, pOutput *SecBufferDesc, pfContextAttr *uint32, ptsExpiry *int64) error {
 	r1, _, _ := syscall.SyscallN(procInitializeSecurityContext.Addr(), uintptr(unsafe.Pointer(phCredential)), uintptr(unsafe.Pointer(phContext)), uintptr(unsafe.Pointer(pszTargetName)), uintptr(fContextReq), uintptr(Reserved1), uintptr(TargetDataRep), uintptr(unsafe.Pointer(pInput)), uintptr(Reserved2), uintptr(unsafe.Pointer(phNewContext)), uintptr(unsafe.Pointer(pOutput)), uintptr(unsafe.Pointer(pfContextAttr)), uintptr(unsafe.Pointer(ptsExpiry)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeSecurityContextA calls SECUR32!InitializeSecurityContextA.
@@ -797,7 +797,7 @@ func InitializeSecurityContext(phCredential *securitycredentials.SecHandle, phCo
 // Minimum OS: windows5.1.2600.
 func InitializeSecurityContextA(phCredential *securitycredentials.SecHandle, phContext *securitycredentials.SecHandle, pszTargetName *int8, fContextReq ISC_REQ_FLAGS, Reserved1 uint32, TargetDataRep uint32, pInput *SecBufferDesc, Reserved2 uint32, phNewContext *securitycredentials.SecHandle, pOutput *SecBufferDesc, pfContextAttr *uint32, ptsExpiry *int64) error {
 	r1, _, _ := syscall.SyscallN(procInitializeSecurityContextA.Addr(), uintptr(unsafe.Pointer(phCredential)), uintptr(unsafe.Pointer(phContext)), uintptr(unsafe.Pointer(pszTargetName)), uintptr(fContextReq), uintptr(Reserved1), uintptr(TargetDataRep), uintptr(unsafe.Pointer(pInput)), uintptr(Reserved2), uintptr(unsafe.Pointer(phNewContext)), uintptr(unsafe.Pointer(pOutput)), uintptr(unsafe.Pointer(pfContextAttr)), uintptr(unsafe.Pointer(ptsExpiry)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LsaAddAccountRights calls ADVAPI32!LsaAddAccountRights.
@@ -1183,7 +1183,7 @@ func LsaUnregisterPolicyChangeNotification(InformationClass POLICY_NOTIFICATION_
 // Minimum OS: windows5.1.2600.
 func MakeSignature(phContext *securitycredentials.SecHandle, fQOP uint32, pMessage *SecBufferDesc, MessageSeqNo uint32) error {
 	r1, _, _ := syscall.SyscallN(procMakeSignature.Addr(), uintptr(unsafe.Pointer(phContext)), uintptr(fQOP), uintptr(unsafe.Pointer(pMessage)), uintptr(MessageSeqNo))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryContextAttributes calls SECUR32!QueryContextAttributesW.
@@ -1191,7 +1191,7 @@ func MakeSignature(phContext *securitycredentials.SecHandle, fQOP uint32, pMessa
 // Minimum OS: windows6.0.6000.
 func QueryContextAttributes(phContext *securitycredentials.SecHandle, ulAttribute SECPKG_ATTR, pBuffer unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procQueryContextAttributes.Addr(), uintptr(unsafe.Pointer(phContext)), uintptr(ulAttribute), uintptr(unsafe.Pointer(pBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryContextAttributesA calls SECUR32!QueryContextAttributesA.
@@ -1199,7 +1199,7 @@ func QueryContextAttributes(phContext *securitycredentials.SecHandle, ulAttribut
 // Minimum OS: windows6.0.6000.
 func QueryContextAttributesA(phContext *securitycredentials.SecHandle, ulAttribute SECPKG_ATTR, pBuffer unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procQueryContextAttributesA.Addr(), uintptr(unsafe.Pointer(phContext)), uintptr(ulAttribute), uintptr(unsafe.Pointer(pBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryContextAttributesEx calls SspiCli!QueryContextAttributesExW.
@@ -1211,7 +1211,7 @@ func QueryContextAttributesEx(phContext *securitycredentials.SecHandle, ulAttrib
 		_pBuffer = &pBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(procQueryContextAttributesEx.Addr(), uintptr(unsafe.Pointer(phContext)), uintptr(ulAttribute), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryContextAttributesExA calls SspiCli!QueryContextAttributesExA.
@@ -1223,7 +1223,7 @@ func QueryContextAttributesExA(phContext *securitycredentials.SecHandle, ulAttri
 		_pBuffer = &pBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(procQueryContextAttributesExA.Addr(), uintptr(unsafe.Pointer(phContext)), uintptr(ulAttribute), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryCredentialsAttributes calls SECUR32!QueryCredentialsAttributesW.
@@ -1231,7 +1231,7 @@ func QueryContextAttributesExA(phContext *securitycredentials.SecHandle, ulAttri
 // Minimum OS: windows5.1.2600.
 func QueryCredentialsAttributes(phCredential *securitycredentials.SecHandle, ulAttribute uint32, pBuffer unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procQueryCredentialsAttributes.Addr(), uintptr(unsafe.Pointer(phCredential)), uintptr(ulAttribute), uintptr(unsafe.Pointer(pBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryCredentialsAttributesA calls SECUR32!QueryCredentialsAttributesA.
@@ -1239,7 +1239,7 @@ func QueryCredentialsAttributes(phCredential *securitycredentials.SecHandle, ulA
 // Minimum OS: windows5.1.2600.
 func QueryCredentialsAttributesA(phCredential *securitycredentials.SecHandle, ulAttribute uint32, pBuffer unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procQueryCredentialsAttributesA.Addr(), uintptr(unsafe.Pointer(phCredential)), uintptr(ulAttribute), uintptr(unsafe.Pointer(pBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryCredentialsAttributesEx calls SspiCli!QueryCredentialsAttributesExW.
@@ -1250,7 +1250,7 @@ func QueryCredentialsAttributesEx(phCredential *securitycredentials.SecHandle, u
 		_pBuffer = &pBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(procQueryCredentialsAttributesEx.Addr(), uintptr(unsafe.Pointer(phCredential)), uintptr(ulAttribute), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryCredentialsAttributesExA calls SspiCli!QueryCredentialsAttributesExA.
@@ -1261,7 +1261,7 @@ func QueryCredentialsAttributesExA(phCredential *securitycredentials.SecHandle, 
 		_pBuffer = &pBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(procQueryCredentialsAttributesExA.Addr(), uintptr(unsafe.Pointer(phCredential)), uintptr(ulAttribute), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QuerySecurityContextToken calls SECUR32!QuerySecurityContextToken.
@@ -1269,7 +1269,7 @@ func QueryCredentialsAttributesExA(phCredential *securitycredentials.SecHandle, 
 // Minimum OS: windows5.1.2600.
 func QuerySecurityContextToken(phContext *securitycredentials.SecHandle, Token *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procQuerySecurityContextToken.Addr(), uintptr(unsafe.Pointer(phContext)), uintptr(unsafe.Pointer(Token)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QuerySecurityPackageInfo calls SECUR32!QuerySecurityPackageInfoW.
@@ -1278,7 +1278,7 @@ func QuerySecurityContextToken(phContext *securitycredentials.SecHandle, Token *
 func QuerySecurityPackageInfo(pszPackageName string, ppPackageInfo **SecPkgInfoW) error {
 	_pszPackageName := win32.UTF16Ptr(pszPackageName)
 	r1, _, _ := syscall.SyscallN(procQuerySecurityPackageInfo.Addr(), uintptr(unsafe.Pointer(_pszPackageName)), uintptr(unsafe.Pointer(ppPackageInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QuerySecurityPackageInfoA calls SECUR32!QuerySecurityPackageInfoA.
@@ -1286,7 +1286,7 @@ func QuerySecurityPackageInfo(pszPackageName string, ppPackageInfo **SecPkgInfoW
 // Minimum OS: windows5.1.2600.
 func QuerySecurityPackageInfoA(pszPackageName foundation.PSTR, ppPackageInfo **SecPkgInfoA) error {
 	r1, _, _ := syscall.SyscallN(procQuerySecurityPackageInfoA.Addr(), uintptr(unsafe.Pointer(pszPackageName)), uintptr(unsafe.Pointer(ppPackageInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RevertSecurityContext calls SECUR32!RevertSecurityContext.
@@ -1294,7 +1294,7 @@ func QuerySecurityPackageInfoA(pszPackageName foundation.PSTR, ppPackageInfo **S
 // Minimum OS: windows5.1.2600.
 func RevertSecurityContext(phContext *securitycredentials.SecHandle) error {
 	r1, _, _ := syscall.SyscallN(procRevertSecurityContext.Addr(), uintptr(unsafe.Pointer(phContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RtlDecryptMemory calls ADVAPI32!SystemFunction041.
@@ -1338,7 +1338,7 @@ func SLAcquireGenuineTicket(ppTicketBlob *unsafe.Pointer, pcbTicketBlob *uint32,
 	_pwszServerUrl := win32.UTF16Ptr(pwszServerUrl)
 	_pwszClientToken := win32.UTF16Ptr(pwszClientToken)
 	r1, _, _ := syscall.SyscallN(procSLAcquireGenuineTicket.Addr(), uintptr(unsafe.Pointer(ppTicketBlob)), uintptr(unsafe.Pointer(pcbTicketBlob)), uintptr(unsafe.Pointer(_pwszTemplateId)), uintptr(unsafe.Pointer(_pwszServerUrl)), uintptr(unsafe.Pointer(_pwszClientToken)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLActivateProduct calls slcext!SLActivateProduct.
@@ -1347,7 +1347,7 @@ func SLAcquireGenuineTicket(ppTicketBlob *unsafe.Pointer, pcbTicketBlob *uint32,
 func SLActivateProduct(hSLC unsafe.Pointer, pProductSkuId *win32.GUID, cbAppSpecificData uint32, pvAppSpecificData unsafe.Pointer, pActivationInfo *SL_ACTIVATION_INFO_HEADER, pwszProxyServer string, wProxyPort uint16) error {
 	_pwszProxyServer := win32.UTF16Ptr(pwszProxyServer)
 	r1, _, _ := syscall.SyscallN(procSLActivateProduct.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(unsafe.Pointer(pProductSkuId)), uintptr(cbAppSpecificData), uintptr(unsafe.Pointer(pvAppSpecificData)), uintptr(unsafe.Pointer(pActivationInfo)), uintptr(unsafe.Pointer(_pwszProxyServer)), uintptr(wProxyPort))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLClose calls SLC!SLClose.
@@ -1355,7 +1355,7 @@ func SLActivateProduct(hSLC unsafe.Pointer, pProductSkuId *win32.GUID, cbAppSpec
 // Minimum OS: windows8.0.
 func SLClose(hSLC unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procSLClose.Addr(), uintptr(unsafe.Pointer(hSLC)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLConsumeRight calls SLC!SLConsumeRight.
@@ -1364,7 +1364,7 @@ func SLClose(hSLC unsafe.Pointer) error {
 func SLConsumeRight(hSLC unsafe.Pointer, pAppId *win32.GUID, pProductSkuId *win32.GUID, pwszRightName string) error {
 	_pwszRightName := win32.UTF16Ptr(pwszRightName)
 	r1, _, _ := syscall.SyscallN(procSLConsumeRight.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(unsafe.Pointer(pAppId)), uintptr(unsafe.Pointer(pProductSkuId)), uintptr(unsafe.Pointer(_pwszRightName)), 0)
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLDepositOfflineConfirmationId calls SLC!SLDepositOfflineConfirmationId.
@@ -1374,7 +1374,7 @@ func SLDepositOfflineConfirmationId(hSLC unsafe.Pointer, pProductSkuId *win32.GU
 	_pwszInstallationId := win32.UTF16Ptr(pwszInstallationId)
 	_pwszConfirmationId := win32.UTF16Ptr(pwszConfirmationId)
 	r1, _, _ := syscall.SyscallN(procSLDepositOfflineConfirmationId.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(unsafe.Pointer(pProductSkuId)), uintptr(unsafe.Pointer(_pwszInstallationId)), uintptr(unsafe.Pointer(_pwszConfirmationId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLDepositOfflineConfirmationIdEx calls SLC!SLDepositOfflineConfirmationIdEx.
@@ -1384,7 +1384,7 @@ func SLDepositOfflineConfirmationIdEx(hSLC unsafe.Pointer, pProductSkuId *win32.
 	_pwszInstallationId := win32.UTF16Ptr(pwszInstallationId)
 	_pwszConfirmationId := win32.UTF16Ptr(pwszConfirmationId)
 	r1, _, _ := syscall.SyscallN(procSLDepositOfflineConfirmationIdEx.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(unsafe.Pointer(pProductSkuId)), uintptr(unsafe.Pointer(pActivationInfo)), uintptr(unsafe.Pointer(_pwszInstallationId)), uintptr(unsafe.Pointer(_pwszConfirmationId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLFireEvent calls SLC!SLFireEvent.
@@ -1393,7 +1393,7 @@ func SLDepositOfflineConfirmationIdEx(hSLC unsafe.Pointer, pProductSkuId *win32.
 func SLFireEvent(hSLC unsafe.Pointer, pwszEventId string, pApplicationId *win32.GUID) error {
 	_pwszEventId := win32.UTF16Ptr(pwszEventId)
 	r1, _, _ := syscall.SyscallN(procSLFireEvent.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(unsafe.Pointer(_pwszEventId)), uintptr(unsafe.Pointer(pApplicationId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLGenerateOfflineInstallationId calls SLC!SLGenerateOfflineInstallationId.
@@ -1401,7 +1401,7 @@ func SLFireEvent(hSLC unsafe.Pointer, pwszEventId string, pApplicationId *win32.
 // Minimum OS: windows8.0.
 func SLGenerateOfflineInstallationId(hSLC unsafe.Pointer, pProductSkuId *win32.GUID, ppwszInstallationId *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procSLGenerateOfflineInstallationId.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(unsafe.Pointer(pProductSkuId)), uintptr(unsafe.Pointer(ppwszInstallationId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLGenerateOfflineInstallationIdEx calls SLC!SLGenerateOfflineInstallationIdEx.
@@ -1409,7 +1409,7 @@ func SLGenerateOfflineInstallationId(hSLC unsafe.Pointer, pProductSkuId *win32.G
 // Minimum OS: windows8.0.
 func SLGenerateOfflineInstallationIdEx(hSLC unsafe.Pointer, pProductSkuId *win32.GUID, pActivationInfo *SL_ACTIVATION_INFO_HEADER, ppwszInstallationId *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procSLGenerateOfflineInstallationIdEx.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(unsafe.Pointer(pProductSkuId)), uintptr(unsafe.Pointer(pActivationInfo)), uintptr(unsafe.Pointer(ppwszInstallationId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLGetApplicationInformation calls SLC!SLGetApplicationInformation.
@@ -1418,7 +1418,7 @@ func SLGenerateOfflineInstallationIdEx(hSLC unsafe.Pointer, pProductSkuId *win32
 func SLGetApplicationInformation(hSLC unsafe.Pointer, pApplicationId *win32.GUID, pwszValueName string, peDataType *SLDATATYPE, pcbValue *uint32, ppbValue **byte) error {
 	_pwszValueName := win32.UTF16Ptr(pwszValueName)
 	r1, _, _ := syscall.SyscallN(procSLGetApplicationInformation.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(unsafe.Pointer(pApplicationId)), uintptr(unsafe.Pointer(_pwszValueName)), uintptr(unsafe.Pointer(peDataType)), uintptr(unsafe.Pointer(pcbValue)), uintptr(unsafe.Pointer(ppbValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLGetGenuineInformation calls SLC!SLGetGenuineInformation.
@@ -1427,7 +1427,7 @@ func SLGetApplicationInformation(hSLC unsafe.Pointer, pApplicationId *win32.GUID
 func SLGetGenuineInformation(pQueryId *win32.GUID, pwszValueName string, peDataType *SLDATATYPE, pcbValue *uint32, ppbValue **byte) error {
 	_pwszValueName := win32.UTF16Ptr(pwszValueName)
 	r1, _, _ := syscall.SyscallN(procSLGetGenuineInformation.Addr(), uintptr(unsafe.Pointer(pQueryId)), uintptr(unsafe.Pointer(_pwszValueName)), uintptr(unsafe.Pointer(peDataType)), uintptr(unsafe.Pointer(pcbValue)), uintptr(unsafe.Pointer(ppbValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLGetInstalledProductKeyIds calls SLC!SLGetInstalledProductKeyIds.
@@ -1435,7 +1435,7 @@ func SLGetGenuineInformation(pQueryId *win32.GUID, pwszValueName string, peDataT
 // Minimum OS: windows8.0.
 func SLGetInstalledProductKeyIds(hSLC unsafe.Pointer, pProductSkuId *win32.GUID, pnProductKeyIds *uint32, ppProductKeyIds **win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procSLGetInstalledProductKeyIds.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(unsafe.Pointer(pProductSkuId)), uintptr(unsafe.Pointer(pnProductKeyIds)), uintptr(unsafe.Pointer(ppProductKeyIds)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLGetLicense calls SLC!SLGetLicense.
@@ -1443,7 +1443,7 @@ func SLGetInstalledProductKeyIds(hSLC unsafe.Pointer, pProductSkuId *win32.GUID,
 // Minimum OS: windows8.0.
 func SLGetLicense(hSLC unsafe.Pointer, pLicenseFileId *win32.GUID, pcbLicenseFile *uint32, ppbLicenseFile **byte) error {
 	r1, _, _ := syscall.SyscallN(procSLGetLicense.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(unsafe.Pointer(pLicenseFileId)), uintptr(unsafe.Pointer(pcbLicenseFile)), uintptr(unsafe.Pointer(ppbLicenseFile)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLGetLicenseFileId calls SLC!SLGetLicenseFileId.
@@ -1455,7 +1455,7 @@ func SLGetLicenseFileId(hSLC unsafe.Pointer, pbLicenseBlob []byte, pLicenseFileI
 		_pbLicenseBlob = &pbLicenseBlob[0]
 	}
 	r1, _, _ := syscall.SyscallN(procSLGetLicenseFileId.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(len(pbLicenseBlob)), uintptr(unsafe.Pointer(_pbLicenseBlob)), uintptr(unsafe.Pointer(pLicenseFileId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLGetLicenseInformation calls SLC!SLGetLicenseInformation.
@@ -1464,7 +1464,7 @@ func SLGetLicenseFileId(hSLC unsafe.Pointer, pbLicenseBlob []byte, pLicenseFileI
 func SLGetLicenseInformation(hSLC unsafe.Pointer, pSLLicenseId *win32.GUID, pwszValueName string, peDataType *SLDATATYPE, pcbValue *uint32, ppbValue **byte) error {
 	_pwszValueName := win32.UTF16Ptr(pwszValueName)
 	r1, _, _ := syscall.SyscallN(procSLGetLicenseInformation.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(unsafe.Pointer(pSLLicenseId)), uintptr(unsafe.Pointer(_pwszValueName)), uintptr(unsafe.Pointer(peDataType)), uintptr(unsafe.Pointer(pcbValue)), uintptr(unsafe.Pointer(ppbValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLGetLicensingStatusInformation calls SLC!SLGetLicensingStatusInformation.
@@ -1473,7 +1473,7 @@ func SLGetLicenseInformation(hSLC unsafe.Pointer, pSLLicenseId *win32.GUID, pwsz
 func SLGetLicensingStatusInformation(hSLC unsafe.Pointer, pAppID *win32.GUID, pProductSkuId *win32.GUID, pwszRightName string, pnStatusCount *uint32, ppLicensingStatus **SL_LICENSING_STATUS) error {
 	_pwszRightName := win32.UTF16Ptr(pwszRightName)
 	r1, _, _ := syscall.SyscallN(procSLGetLicensingStatusInformation.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(unsafe.Pointer(pAppID)), uintptr(unsafe.Pointer(pProductSkuId)), uintptr(unsafe.Pointer(_pwszRightName)), uintptr(unsafe.Pointer(pnStatusCount)), uintptr(unsafe.Pointer(ppLicensingStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLGetPKeyId calls SLC!SLGetPKeyId.
@@ -1487,7 +1487,7 @@ func SLGetPKeyId(hSLC unsafe.Pointer, pwszPKeyAlgorithm string, pwszPKeyString s
 		_pbPKeySpecificData = &pbPKeySpecificData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procSLGetPKeyId.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(unsafe.Pointer(_pwszPKeyAlgorithm)), uintptr(unsafe.Pointer(_pwszPKeyString)), uintptr(len(pbPKeySpecificData)), uintptr(unsafe.Pointer(_pbPKeySpecificData)), uintptr(unsafe.Pointer(pPKeyId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLGetPKeyInformation calls SLC!SLGetPKeyInformation.
@@ -1496,7 +1496,7 @@ func SLGetPKeyId(hSLC unsafe.Pointer, pwszPKeyAlgorithm string, pwszPKeyString s
 func SLGetPKeyInformation(hSLC unsafe.Pointer, pPKeyId *win32.GUID, pwszValueName string, peDataType *SLDATATYPE, pcbValue *uint32, ppbValue **byte) error {
 	_pwszValueName := win32.UTF16Ptr(pwszValueName)
 	r1, _, _ := syscall.SyscallN(procSLGetPKeyInformation.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(unsafe.Pointer(pPKeyId)), uintptr(unsafe.Pointer(_pwszValueName)), uintptr(unsafe.Pointer(peDataType)), uintptr(unsafe.Pointer(pcbValue)), uintptr(unsafe.Pointer(ppbValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLGetPolicyInformation calls SLC!SLGetPolicyInformation.
@@ -1505,7 +1505,7 @@ func SLGetPKeyInformation(hSLC unsafe.Pointer, pPKeyId *win32.GUID, pwszValueNam
 func SLGetPolicyInformation(hSLC unsafe.Pointer, pwszValueName string, peDataType *SLDATATYPE, pcbValue *uint32, ppbValue **byte) error {
 	_pwszValueName := win32.UTF16Ptr(pwszValueName)
 	r1, _, _ := syscall.SyscallN(procSLGetPolicyInformation.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(unsafe.Pointer(_pwszValueName)), uintptr(unsafe.Pointer(peDataType)), uintptr(unsafe.Pointer(pcbValue)), uintptr(unsafe.Pointer(ppbValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLGetPolicyInformationDWORD calls SLC!SLGetPolicyInformationDWORD.
@@ -1514,7 +1514,7 @@ func SLGetPolicyInformation(hSLC unsafe.Pointer, pwszValueName string, peDataTyp
 func SLGetPolicyInformationDWORD(hSLC unsafe.Pointer, pwszValueName string, pdwValue *uint32) error {
 	_pwszValueName := win32.UTF16Ptr(pwszValueName)
 	r1, _, _ := syscall.SyscallN(procSLGetPolicyInformationDWORD.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(unsafe.Pointer(_pwszValueName)), uintptr(unsafe.Pointer(pdwValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLGetProductSkuInformation calls SLC!SLGetProductSkuInformation.
@@ -1523,7 +1523,7 @@ func SLGetPolicyInformationDWORD(hSLC unsafe.Pointer, pwszValueName string, pdwV
 func SLGetProductSkuInformation(hSLC unsafe.Pointer, pProductSkuId *win32.GUID, pwszValueName string, peDataType *SLDATATYPE, pcbValue *uint32, ppbValue **byte) error {
 	_pwszValueName := win32.UTF16Ptr(pwszValueName)
 	r1, _, _ := syscall.SyscallN(procSLGetProductSkuInformation.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(unsafe.Pointer(pProductSkuId)), uintptr(unsafe.Pointer(_pwszValueName)), uintptr(unsafe.Pointer(peDataType)), uintptr(unsafe.Pointer(pcbValue)), uintptr(unsafe.Pointer(ppbValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLGetReferralInformation calls slcext!SLGetReferralInformation.
@@ -1532,7 +1532,7 @@ func SLGetProductSkuInformation(hSLC unsafe.Pointer, pProductSkuId *win32.GUID, 
 func SLGetReferralInformation(hSLC unsafe.Pointer, eReferralType SLREFERRALTYPE, pSkuOrAppId *win32.GUID, pwszValueName string, ppwszValue *foundation.PWSTR) error {
 	_pwszValueName := win32.UTF16Ptr(pwszValueName)
 	r1, _, _ := syscall.SyscallN(procSLGetReferralInformation.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(eReferralType), uintptr(unsafe.Pointer(pSkuOrAppId)), uintptr(unsafe.Pointer(_pwszValueName)), uintptr(unsafe.Pointer(ppwszValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLGetSLIDList calls SLC!SLGetSLIDList.
@@ -1540,7 +1540,7 @@ func SLGetReferralInformation(hSLC unsafe.Pointer, eReferralType SLREFERRALTYPE,
 // Minimum OS: windows8.0.
 func SLGetSLIDList(hSLC unsafe.Pointer, eQueryIdType SLIDTYPE, pQueryId *win32.GUID, eReturnIdType SLIDTYPE, pnReturnIds *uint32, ppReturnIds **win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procSLGetSLIDList.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(eQueryIdType), uintptr(unsafe.Pointer(pQueryId)), uintptr(eReturnIdType), uintptr(unsafe.Pointer(pnReturnIds)), uintptr(unsafe.Pointer(ppReturnIds)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLGetServerStatus calls slcext!SLGetServerStatus.
@@ -1551,7 +1551,7 @@ func SLGetServerStatus(pwszServerURL string, pwszAcquisitionType string, pwszPro
 	_pwszAcquisitionType := win32.UTF16Ptr(pwszAcquisitionType)
 	_pwszProxyServer := win32.UTF16Ptr(pwszProxyServer)
 	r1, _, _ := syscall.SyscallN(procSLGetServerStatus.Addr(), uintptr(unsafe.Pointer(_pwszServerURL)), uintptr(unsafe.Pointer(_pwszAcquisitionType)), uintptr(unsafe.Pointer(_pwszProxyServer)), uintptr(wProxyPort), uintptr(unsafe.Pointer(phrStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLGetServiceInformation calls SLC!SLGetServiceInformation.
@@ -1560,7 +1560,7 @@ func SLGetServerStatus(pwszServerURL string, pwszAcquisitionType string, pwszPro
 func SLGetServiceInformation(hSLC unsafe.Pointer, pwszValueName string, peDataType *SLDATATYPE, pcbValue *uint32, ppbValue **byte) error {
 	_pwszValueName := win32.UTF16Ptr(pwszValueName)
 	r1, _, _ := syscall.SyscallN(procSLGetServiceInformation.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(unsafe.Pointer(_pwszValueName)), uintptr(unsafe.Pointer(peDataType)), uintptr(unsafe.Pointer(pcbValue)), uintptr(unsafe.Pointer(ppbValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLGetWindowsInformation calls SLC!SLGetWindowsInformation.
@@ -1569,7 +1569,7 @@ func SLGetServiceInformation(hSLC unsafe.Pointer, pwszValueName string, peDataTy
 func SLGetWindowsInformation(pwszValueName string, peDataType *SLDATATYPE, pcbValue *uint32, ppbValue **byte) error {
 	_pwszValueName := win32.UTF16Ptr(pwszValueName)
 	r1, _, _ := syscall.SyscallN(procSLGetWindowsInformation.Addr(), uintptr(unsafe.Pointer(_pwszValueName)), uintptr(unsafe.Pointer(peDataType)), uintptr(unsafe.Pointer(pcbValue)), uintptr(unsafe.Pointer(ppbValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLGetWindowsInformationDWORD calls SLC!SLGetWindowsInformationDWORD.
@@ -1578,7 +1578,7 @@ func SLGetWindowsInformation(pwszValueName string, peDataType *SLDATATYPE, pcbVa
 func SLGetWindowsInformationDWORD(pwszValueName string, pdwValue *uint32) error {
 	_pwszValueName := win32.UTF16Ptr(pwszValueName)
 	r1, _, _ := syscall.SyscallN(procSLGetWindowsInformationDWORD.Addr(), uintptr(unsafe.Pointer(_pwszValueName)), uintptr(unsafe.Pointer(pdwValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLInstallLicense calls SLC!SLInstallLicense.
@@ -1590,7 +1590,7 @@ func SLInstallLicense(hSLC unsafe.Pointer, pbLicenseBlob []byte, pLicenseFileId 
 		_pbLicenseBlob = &pbLicenseBlob[0]
 	}
 	r1, _, _ := syscall.SyscallN(procSLInstallLicense.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(len(pbLicenseBlob)), uintptr(unsafe.Pointer(_pbLicenseBlob)), uintptr(unsafe.Pointer(pLicenseFileId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLInstallProofOfPurchase calls SLC!SLInstallProofOfPurchase.
@@ -1604,7 +1604,7 @@ func SLInstallProofOfPurchase(hSLC unsafe.Pointer, pwszPKeyAlgorithm string, pws
 		_pbPKeySpecificData = &pbPKeySpecificData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procSLInstallProofOfPurchase.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(unsafe.Pointer(_pwszPKeyAlgorithm)), uintptr(unsafe.Pointer(_pwszPKeyString)), uintptr(len(pbPKeySpecificData)), uintptr(unsafe.Pointer(_pbPKeySpecificData)), uintptr(unsafe.Pointer(pPkeyId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLIsGenuineLocal calls SLWGA!SLIsGenuineLocal.
@@ -1612,7 +1612,7 @@ func SLInstallProofOfPurchase(hSLC unsafe.Pointer, pwszPKeyAlgorithm string, pws
 // Minimum OS: windows6.0.6000.
 func SLIsGenuineLocal(pAppId *win32.GUID, pGenuineState *SL_GENUINE_STATE, pUIOptions *SL_NONGENUINE_UI_OPTIONS) error {
 	r1, _, _ := syscall.SyscallN(procSLIsGenuineLocal.Addr(), uintptr(unsafe.Pointer(pAppId)), uintptr(unsafe.Pointer(pGenuineState)), uintptr(unsafe.Pointer(pUIOptions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLOpen calls SLC!SLOpen.
@@ -1620,7 +1620,7 @@ func SLIsGenuineLocal(pAppId *win32.GUID, pGenuineState *SL_GENUINE_STATE, pUIOp
 // Minimum OS: windows8.0.
 func SLOpen(phSLC *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procSLOpen.Addr(), uintptr(unsafe.Pointer(phSLC)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLQueryLicenseValueFromApp calls api-ms-win-core-slapi-l1-1-0!SLQueryLicenseValueFromApp.
@@ -1633,7 +1633,7 @@ func SLQueryLicenseValueFromApp(valueName string, valueType *uint32, dataBuffer 
 		_dataBuffer = &dataBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(procSLQueryLicenseValueFromApp.Addr(), uintptr(unsafe.Pointer(_valueName)), uintptr(unsafe.Pointer(valueType)), uintptr(unsafe.Pointer(_dataBuffer)), uintptr(len(dataBuffer)), uintptr(unsafe.Pointer(resultDataSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLRegisterEvent calls SLC!SLRegisterEvent.
@@ -1642,7 +1642,7 @@ func SLQueryLicenseValueFromApp(valueName string, valueType *uint32, dataBuffer 
 func SLRegisterEvent(hSLC unsafe.Pointer, pwszEventId string, pApplicationId *win32.GUID, hEvent foundation.HANDLE) error {
 	_pwszEventId := win32.UTF16Ptr(pwszEventId)
 	r1, _, _ := syscall.SyscallN(procSLRegisterEvent.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(unsafe.Pointer(_pwszEventId)), uintptr(unsafe.Pointer(pApplicationId)), uintptr(hEvent))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLSetCurrentProductKey calls SLC!SLSetCurrentProductKey.
@@ -1650,7 +1650,7 @@ func SLRegisterEvent(hSLC unsafe.Pointer, pwszEventId string, pApplicationId *wi
 // Minimum OS: windows8.0.
 func SLSetCurrentProductKey(hSLC unsafe.Pointer, pProductSkuId *win32.GUID, pProductKeyId *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procSLSetCurrentProductKey.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(unsafe.Pointer(pProductSkuId)), uintptr(unsafe.Pointer(pProductKeyId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLSetGenuineInformation calls SLC!SLSetGenuineInformation.
@@ -1663,7 +1663,7 @@ func SLSetGenuineInformation(pQueryId *win32.GUID, pwszValueName string, eDataTy
 		_pbValue = &pbValue[0]
 	}
 	r1, _, _ := syscall.SyscallN(procSLSetGenuineInformation.Addr(), uintptr(unsafe.Pointer(pQueryId)), uintptr(unsafe.Pointer(_pwszValueName)), uintptr(eDataType), uintptr(len(pbValue)), uintptr(unsafe.Pointer(_pbValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLUninstallLicense calls SLC!SLUninstallLicense.
@@ -1671,7 +1671,7 @@ func SLSetGenuineInformation(pQueryId *win32.GUID, pwszValueName string, eDataTy
 // Minimum OS: windows8.0.
 func SLUninstallLicense(hSLC unsafe.Pointer, pLicenseFileId *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procSLUninstallLicense.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(unsafe.Pointer(pLicenseFileId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLUninstallProofOfPurchase calls SLC!SLUninstallProofOfPurchase.
@@ -1679,7 +1679,7 @@ func SLUninstallLicense(hSLC unsafe.Pointer, pLicenseFileId *win32.GUID) error {
 // Minimum OS: windows8.0.
 func SLUninstallProofOfPurchase(hSLC unsafe.Pointer, pPKeyId *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procSLUninstallProofOfPurchase.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(unsafe.Pointer(pPKeyId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SLUnregisterEvent calls SLC!SLUnregisterEvent.
@@ -1688,7 +1688,7 @@ func SLUninstallProofOfPurchase(hSLC unsafe.Pointer, pPKeyId *win32.GUID) error 
 func SLUnregisterEvent(hSLC unsafe.Pointer, pwszEventId string, pApplicationId *win32.GUID, hEvent foundation.HANDLE) error {
 	_pwszEventId := win32.UTF16Ptr(pwszEventId)
 	r1, _, _ := syscall.SyscallN(procSLUnregisterEvent.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(unsafe.Pointer(_pwszEventId)), uintptr(unsafe.Pointer(pApplicationId)), uintptr(hEvent))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SaslAcceptSecurityContext calls SECUR32!SaslAcceptSecurityContext.
@@ -1696,7 +1696,7 @@ func SLUnregisterEvent(hSLC unsafe.Pointer, pwszEventId string, pApplicationId *
 // Minimum OS: windowsserver2003.
 func SaslAcceptSecurityContext(phCredential *securitycredentials.SecHandle, phContext *securitycredentials.SecHandle, pInput *SecBufferDesc, fContextReq ASC_REQ_FLAGS, TargetDataRep uint32, phNewContext *securitycredentials.SecHandle, pOutput *SecBufferDesc, pfContextAttr *uint32, ptsExpiry *int64) error {
 	r1, _, _ := syscall.SyscallN(procSaslAcceptSecurityContext.Addr(), uintptr(unsafe.Pointer(phCredential)), uintptr(unsafe.Pointer(phContext)), uintptr(unsafe.Pointer(pInput)), uintptr(fContextReq), uintptr(TargetDataRep), uintptr(unsafe.Pointer(phNewContext)), uintptr(unsafe.Pointer(pOutput)), uintptr(unsafe.Pointer(pfContextAttr)), uintptr(unsafe.Pointer(ptsExpiry)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SaslEnumerateProfiles calls SECUR32!SaslEnumerateProfilesW.
@@ -1704,7 +1704,7 @@ func SaslAcceptSecurityContext(phCredential *securitycredentials.SecHandle, phCo
 // Minimum OS: windowsserver2003.
 func SaslEnumerateProfiles(ProfileList *foundation.PWSTR, ProfileCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(procSaslEnumerateProfiles.Addr(), uintptr(unsafe.Pointer(ProfileList)), uintptr(unsafe.Pointer(ProfileCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SaslEnumerateProfilesA calls SECUR32!SaslEnumerateProfilesA.
@@ -1712,7 +1712,7 @@ func SaslEnumerateProfiles(ProfileList *foundation.PWSTR, ProfileCount *uint32) 
 // Minimum OS: windowsserver2003.
 func SaslEnumerateProfilesA(ProfileList *foundation.PSTR, ProfileCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(procSaslEnumerateProfilesA.Addr(), uintptr(unsafe.Pointer(ProfileList)), uintptr(unsafe.Pointer(ProfileCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SaslGetContextOption calls SECUR32!SaslGetContextOption.
@@ -1720,7 +1720,7 @@ func SaslEnumerateProfilesA(ProfileList *foundation.PSTR, ProfileCount *uint32) 
 // Minimum OS: windowsserver2003.
 func SaslGetContextOption(ContextHandle *securitycredentials.SecHandle, Option uint32, Value unsafe.Pointer, Size uint32, Needed *uint32) error {
 	r1, _, _ := syscall.SyscallN(procSaslGetContextOption.Addr(), uintptr(unsafe.Pointer(ContextHandle)), uintptr(Option), uintptr(unsafe.Pointer(Value)), uintptr(Size), uintptr(unsafe.Pointer(Needed)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SaslGetProfilePackage calls SECUR32!SaslGetProfilePackageW.
@@ -1729,7 +1729,7 @@ func SaslGetContextOption(ContextHandle *securitycredentials.SecHandle, Option u
 func SaslGetProfilePackage(ProfileName string, PackageInfo **SecPkgInfoW) error {
 	_ProfileName := win32.UTF16Ptr(ProfileName)
 	r1, _, _ := syscall.SyscallN(procSaslGetProfilePackage.Addr(), uintptr(unsafe.Pointer(_ProfileName)), uintptr(unsafe.Pointer(PackageInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SaslGetProfilePackageA calls SECUR32!SaslGetProfilePackageA.
@@ -1737,7 +1737,7 @@ func SaslGetProfilePackage(ProfileName string, PackageInfo **SecPkgInfoW) error 
 // Minimum OS: windowsserver2003.
 func SaslGetProfilePackageA(ProfileName foundation.PSTR, PackageInfo **SecPkgInfoA) error {
 	r1, _, _ := syscall.SyscallN(procSaslGetProfilePackageA.Addr(), uintptr(unsafe.Pointer(ProfileName)), uintptr(unsafe.Pointer(PackageInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SaslIdentifyPackage calls SECUR32!SaslIdentifyPackageW.
@@ -1745,7 +1745,7 @@ func SaslGetProfilePackageA(ProfileName foundation.PSTR, PackageInfo **SecPkgInf
 // Minimum OS: windowsserver2003.
 func SaslIdentifyPackage(pInput *SecBufferDesc, PackageInfo **SecPkgInfoW) error {
 	r1, _, _ := syscall.SyscallN(procSaslIdentifyPackage.Addr(), uintptr(unsafe.Pointer(pInput)), uintptr(unsafe.Pointer(PackageInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SaslIdentifyPackageA calls SECUR32!SaslIdentifyPackageA.
@@ -1753,7 +1753,7 @@ func SaslIdentifyPackage(pInput *SecBufferDesc, PackageInfo **SecPkgInfoW) error
 // Minimum OS: windowsserver2003.
 func SaslIdentifyPackageA(pInput *SecBufferDesc, PackageInfo **SecPkgInfoA) error {
 	r1, _, _ := syscall.SyscallN(procSaslIdentifyPackageA.Addr(), uintptr(unsafe.Pointer(pInput)), uintptr(unsafe.Pointer(PackageInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SaslInitializeSecurityContext calls SECUR32!SaslInitializeSecurityContextW.
@@ -1762,7 +1762,7 @@ func SaslIdentifyPackageA(pInput *SecBufferDesc, PackageInfo **SecPkgInfoA) erro
 func SaslInitializeSecurityContext(phCredential *securitycredentials.SecHandle, phContext *securitycredentials.SecHandle, pszTargetName string, fContextReq ISC_REQ_FLAGS, Reserved1 uint32, TargetDataRep uint32, pInput *SecBufferDesc, Reserved2 uint32, phNewContext *securitycredentials.SecHandle, pOutput *SecBufferDesc, pfContextAttr *uint32, ptsExpiry *int64) error {
 	_pszTargetName := win32.UTF16Ptr(pszTargetName)
 	r1, _, _ := syscall.SyscallN(procSaslInitializeSecurityContext.Addr(), uintptr(unsafe.Pointer(phCredential)), uintptr(unsafe.Pointer(phContext)), uintptr(unsafe.Pointer(_pszTargetName)), uintptr(fContextReq), uintptr(Reserved1), uintptr(TargetDataRep), uintptr(unsafe.Pointer(pInput)), uintptr(Reserved2), uintptr(unsafe.Pointer(phNewContext)), uintptr(unsafe.Pointer(pOutput)), uintptr(unsafe.Pointer(pfContextAttr)), uintptr(unsafe.Pointer(ptsExpiry)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SaslInitializeSecurityContextA calls SECUR32!SaslInitializeSecurityContextA.
@@ -1770,7 +1770,7 @@ func SaslInitializeSecurityContext(phCredential *securitycredentials.SecHandle, 
 // Minimum OS: windowsserver2003.
 func SaslInitializeSecurityContextA(phCredential *securitycredentials.SecHandle, phContext *securitycredentials.SecHandle, pszTargetName foundation.PSTR, fContextReq ISC_REQ_FLAGS, Reserved1 uint32, TargetDataRep uint32, pInput *SecBufferDesc, Reserved2 uint32, phNewContext *securitycredentials.SecHandle, pOutput *SecBufferDesc, pfContextAttr *uint32, ptsExpiry *int64) error {
 	r1, _, _ := syscall.SyscallN(procSaslInitializeSecurityContextA.Addr(), uintptr(unsafe.Pointer(phCredential)), uintptr(unsafe.Pointer(phContext)), uintptr(unsafe.Pointer(pszTargetName)), uintptr(fContextReq), uintptr(Reserved1), uintptr(TargetDataRep), uintptr(unsafe.Pointer(pInput)), uintptr(Reserved2), uintptr(unsafe.Pointer(phNewContext)), uintptr(unsafe.Pointer(pOutput)), uintptr(unsafe.Pointer(pfContextAttr)), uintptr(unsafe.Pointer(ptsExpiry)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SaslSetContextOption calls SECUR32!SaslSetContextOption.
@@ -1778,7 +1778,7 @@ func SaslInitializeSecurityContextA(phCredential *securitycredentials.SecHandle,
 // Minimum OS: windowsserver2003.
 func SaslSetContextOption(ContextHandle *securitycredentials.SecHandle, Option uint32, Value unsafe.Pointer, Size uint32) error {
 	r1, _, _ := syscall.SyscallN(procSaslSetContextOption.Addr(), uintptr(unsafe.Pointer(ContextHandle)), uintptr(Option), uintptr(unsafe.Pointer(Value)), uintptr(Size))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SecAllocateAndSetCallTarget calls SspiCli!SecAllocateAndSetCallTarget.
@@ -1789,7 +1789,7 @@ func SecAllocateAndSetCallTarget(lpIpAddress []byte, TargetName string, FreeCall
 	}
 	_TargetName := win32.UTF16Ptr(TargetName)
 	r1, _, _ := syscall.SyscallN(procSecAllocateAndSetCallTarget.Addr(), uintptr(unsafe.Pointer(_lpIpAddress)), uintptr(len(lpIpAddress)), uintptr(unsafe.Pointer(_TargetName)), uintptr(unsafe.Pointer(FreeCallContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SecAllocateAndSetIPAddress calls SspiCli!SecAllocateAndSetIPAddress.
@@ -1799,7 +1799,7 @@ func SecAllocateAndSetIPAddress(lpIpAddress []byte, FreeCallContext *int32) erro
 		_lpIpAddress = &lpIpAddress[0]
 	}
 	r1, _, _ := syscall.SyscallN(procSecAllocateAndSetIPAddress.Addr(), uintptr(unsafe.Pointer(_lpIpAddress)), uintptr(len(lpIpAddress)), uintptr(unsafe.Pointer(FreeCallContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SecFreeCallContext calls SspiCli!SecFreeCallContext.
@@ -1824,7 +1824,7 @@ func SetContextAttributes(phContext *securitycredentials.SecHandle, ulAttribute 
 		_pBuffer = &pBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(procSetContextAttributes.Addr(), uintptr(unsafe.Pointer(phContext)), uintptr(ulAttribute), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetContextAttributesA calls SECUR32!SetContextAttributesA.
@@ -1836,7 +1836,7 @@ func SetContextAttributesA(phContext *securitycredentials.SecHandle, ulAttribute
 		_pBuffer = &pBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(procSetContextAttributesA.Addr(), uintptr(unsafe.Pointer(phContext)), uintptr(ulAttribute), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCredentialsAttributes calls SECUR32!SetCredentialsAttributesW.
@@ -1848,7 +1848,7 @@ func SetCredentialsAttributes(phCredential *securitycredentials.SecHandle, ulAtt
 		_pBuffer = &pBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(procSetCredentialsAttributes.Addr(), uintptr(unsafe.Pointer(phCredential)), uintptr(ulAttribute), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCredentialsAttributesA calls SECUR32!SetCredentialsAttributesA.
@@ -1860,7 +1860,7 @@ func SetCredentialsAttributesA(phCredential *securitycredentials.SecHandle, ulAt
 		_pBuffer = &pBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(procSetCredentialsAttributesA.Addr(), uintptr(unsafe.Pointer(phCredential)), uintptr(ulAttribute), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslCrackCertificate calls SCHANNEL!SslCrackCertificate.
@@ -1911,7 +1911,7 @@ func SslGetExtensions(clientHello []byte, genericExtensions []SCH_EXTENSION_DATA
 		_genericExtensions = &genericExtensions[0]
 	}
 	r1, _, _ := syscall.SyscallN(procSslGetExtensions.Addr(), uintptr(unsafe.Pointer(_clientHello)), uintptr(len(clientHello)), uintptr(unsafe.Pointer(_genericExtensions)), uintptr(len(genericExtensions)), uintptr(unsafe.Pointer(bytesToRead)), uintptr(flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslGetMaximumKeySize calls SCHANNEL!SslGetMaximumKeySize.
@@ -1929,7 +1929,7 @@ func SslGetServerIdentity(ClientHello []byte, ServerIdentity **byte, ServerIdent
 		_ClientHello = &ClientHello[0]
 	}
 	r1, _, _ := syscall.SyscallN(procSslGetServerIdentity.Addr(), uintptr(unsafe.Pointer(_ClientHello)), uintptr(len(ClientHello)), uintptr(unsafe.Pointer(ServerIdentity)), uintptr(unsafe.Pointer(ServerIdentitySize)), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SspiCompareAuthIdentities calls SECUR32!SspiCompareAuthIdentities.
@@ -1937,7 +1937,7 @@ func SslGetServerIdentity(ClientHello []byte, ServerIdentity **byte, ServerIdent
 // Minimum OS: windows6.1.
 func SspiCompareAuthIdentities(AuthIdentity1 unsafe.Pointer, AuthIdentity2 unsafe.Pointer, SameSuppliedUser *foundation.BOOLEAN, SameSuppliedIdentity *foundation.BOOLEAN) error {
 	r1, _, _ := syscall.SyscallN(procSspiCompareAuthIdentities.Addr(), uintptr(unsafe.Pointer(AuthIdentity1)), uintptr(unsafe.Pointer(AuthIdentity2)), uintptr(unsafe.Pointer(SameSuppliedUser)), uintptr(unsafe.Pointer(SameSuppliedIdentity)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SspiCopyAuthIdentity calls SECUR32!SspiCopyAuthIdentity.
@@ -1945,7 +1945,7 @@ func SspiCompareAuthIdentities(AuthIdentity1 unsafe.Pointer, AuthIdentity2 unsaf
 // Minimum OS: windows6.1.
 func SspiCopyAuthIdentity(AuthData unsafe.Pointer, AuthDataCopy *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procSspiCopyAuthIdentity.Addr(), uintptr(unsafe.Pointer(AuthData)), uintptr(unsafe.Pointer(AuthDataCopy)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SspiDecryptAuthIdentity calls SECUR32!SspiDecryptAuthIdentity.
@@ -1953,7 +1953,7 @@ func SspiCopyAuthIdentity(AuthData unsafe.Pointer, AuthDataCopy *unsafe.Pointer)
 // Minimum OS: windows6.1.
 func SspiDecryptAuthIdentity(EncryptedAuthData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procSspiDecryptAuthIdentity.Addr(), uintptr(unsafe.Pointer(EncryptedAuthData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SspiDecryptAuthIdentityEx calls SspiCli!SspiDecryptAuthIdentityEx.
@@ -1961,7 +1961,7 @@ func SspiDecryptAuthIdentity(EncryptedAuthData unsafe.Pointer) error {
 // Minimum OS: windows8.0.
 func SspiDecryptAuthIdentityEx(Options uint32, EncryptedAuthData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procSspiDecryptAuthIdentityEx.Addr(), uintptr(Options), uintptr(unsafe.Pointer(EncryptedAuthData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SspiEncodeAuthIdentityAsStrings calls SECUR32!SspiEncodeAuthIdentityAsStrings.
@@ -1969,7 +1969,7 @@ func SspiDecryptAuthIdentityEx(Options uint32, EncryptedAuthData unsafe.Pointer)
 // Minimum OS: windows6.1.
 func SspiEncodeAuthIdentityAsStrings(pAuthIdentity unsafe.Pointer, ppszUserName *foundation.PWSTR, ppszDomainName *foundation.PWSTR, ppszPackedCredentialsString *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procSspiEncodeAuthIdentityAsStrings.Addr(), uintptr(unsafe.Pointer(pAuthIdentity)), uintptr(unsafe.Pointer(ppszUserName)), uintptr(unsafe.Pointer(ppszDomainName)), uintptr(unsafe.Pointer(ppszPackedCredentialsString)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SspiEncodeStringsAsAuthIdentity calls SECUR32!SspiEncodeStringsAsAuthIdentity.
@@ -1980,7 +1980,7 @@ func SspiEncodeStringsAsAuthIdentity(pszUserName string, pszDomainName string, p
 	_pszDomainName := win32.UTF16Ptr(pszDomainName)
 	_pszPackedCredentialsString := win32.UTF16Ptr(pszPackedCredentialsString)
 	r1, _, _ := syscall.SyscallN(procSspiEncodeStringsAsAuthIdentity.Addr(), uintptr(unsafe.Pointer(_pszUserName)), uintptr(unsafe.Pointer(_pszDomainName)), uintptr(unsafe.Pointer(_pszPackedCredentialsString)), uintptr(unsafe.Pointer(ppAuthIdentity)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SspiEncryptAuthIdentity calls SECUR32!SspiEncryptAuthIdentity.
@@ -1988,7 +1988,7 @@ func SspiEncodeStringsAsAuthIdentity(pszUserName string, pszDomainName string, p
 // Minimum OS: windows6.1.
 func SspiEncryptAuthIdentity(AuthData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procSspiEncryptAuthIdentity.Addr(), uintptr(unsafe.Pointer(AuthData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SspiEncryptAuthIdentityEx calls SspiCli!SspiEncryptAuthIdentityEx.
@@ -1996,7 +1996,7 @@ func SspiEncryptAuthIdentity(AuthData unsafe.Pointer) error {
 // Minimum OS: windows8.0.
 func SspiEncryptAuthIdentityEx(Options uint32, AuthData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procSspiEncryptAuthIdentityEx.Addr(), uintptr(Options), uintptr(unsafe.Pointer(AuthData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SspiExcludePackage calls SECUR32!SspiExcludePackage.
@@ -2005,7 +2005,7 @@ func SspiEncryptAuthIdentityEx(Options uint32, AuthData unsafe.Pointer) error {
 func SspiExcludePackage(AuthIdentity unsafe.Pointer, pszPackageName string, ppNewAuthIdentity *unsafe.Pointer) error {
 	_pszPackageName := win32.UTF16Ptr(pszPackageName)
 	r1, _, _ := syscall.SyscallN(procSspiExcludePackage.Addr(), uintptr(unsafe.Pointer(AuthIdentity)), uintptr(unsafe.Pointer(_pszPackageName)), uintptr(unsafe.Pointer(ppNewAuthIdentity)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SspiFreeAuthIdentity calls SECUR32!SspiFreeAuthIdentity.
@@ -2021,7 +2021,7 @@ func SspiFreeAuthIdentity(AuthData unsafe.Pointer) {
 func SspiGetTargetHostName(pszTargetName string, pszHostName *foundation.PWSTR) error {
 	_pszTargetName := win32.UTF16Ptr(pszTargetName)
 	r1, _, _ := syscall.SyscallN(procSspiGetTargetHostName.Addr(), uintptr(unsafe.Pointer(_pszTargetName)), uintptr(unsafe.Pointer(pszHostName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SspiIsAuthIdentityEncrypted calls SECUR32!SspiIsAuthIdentityEncrypted.
@@ -2052,7 +2052,7 @@ func SspiLocalFree(DataBuffer unsafe.Pointer) {
 // Minimum OS: windows6.1.
 func SspiMarshalAuthIdentity(AuthIdentity unsafe.Pointer, AuthIdentityLength *uint32, AuthIdentityByteArray **int8) error {
 	r1, _, _ := syscall.SyscallN(procSspiMarshalAuthIdentity.Addr(), uintptr(unsafe.Pointer(AuthIdentity)), uintptr(unsafe.Pointer(AuthIdentityLength)), uintptr(unsafe.Pointer(AuthIdentityByteArray)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SspiPrepareForCredRead calls SECUR32!SspiPrepareForCredRead.
@@ -2061,7 +2061,7 @@ func SspiMarshalAuthIdentity(AuthIdentity unsafe.Pointer, AuthIdentityLength *ui
 func SspiPrepareForCredRead(AuthIdentity unsafe.Pointer, pszTargetName string, pCredmanCredentialType *uint32, ppszCredmanTargetName *foundation.PWSTR) error {
 	_pszTargetName := win32.UTF16Ptr(pszTargetName)
 	r1, _, _ := syscall.SyscallN(procSspiPrepareForCredRead.Addr(), uintptr(unsafe.Pointer(AuthIdentity)), uintptr(unsafe.Pointer(_pszTargetName)), uintptr(unsafe.Pointer(pCredmanCredentialType)), uintptr(unsafe.Pointer(ppszCredmanTargetName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SspiPrepareForCredWrite calls SECUR32!SspiPrepareForCredWrite.
@@ -2070,7 +2070,7 @@ func SspiPrepareForCredRead(AuthIdentity unsafe.Pointer, pszTargetName string, p
 func SspiPrepareForCredWrite(AuthIdentity unsafe.Pointer, pszTargetName string, pCredmanCredentialType *uint32, ppszCredmanTargetName *foundation.PWSTR, ppszCredmanUserName *foundation.PWSTR, ppCredentialBlob **byte, pCredentialBlobSize *uint32) error {
 	_pszTargetName := win32.UTF16Ptr(pszTargetName)
 	r1, _, _ := syscall.SyscallN(procSspiPrepareForCredWrite.Addr(), uintptr(unsafe.Pointer(AuthIdentity)), uintptr(unsafe.Pointer(_pszTargetName)), uintptr(unsafe.Pointer(pCredmanCredentialType)), uintptr(unsafe.Pointer(ppszCredmanTargetName)), uintptr(unsafe.Pointer(ppszCredmanUserName)), uintptr(unsafe.Pointer(ppCredentialBlob)), uintptr(unsafe.Pointer(pCredentialBlobSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SspiPromptForCredentials calls credui!SspiPromptForCredentialsW.
@@ -2094,7 +2094,7 @@ func SspiPromptForCredentialsA(pszTargetName foundation.PSTR, pUiInfo unsafe.Poi
 // SspiSetChannelBindingFlags calls SspiCli!SspiSetChannelBindingFlags.
 func SspiSetChannelBindingFlags(pBindings *SecPkgContext_Bindings, flags uint32) error {
 	r1, _, _ := syscall.SyscallN(procSspiSetChannelBindingFlags.Addr(), uintptr(unsafe.Pointer(pBindings)), uintptr(flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SspiUnmarshalAuthIdentity calls SECUR32!SspiUnmarshalAuthIdentity.
@@ -2102,7 +2102,7 @@ func SspiSetChannelBindingFlags(pBindings *SecPkgContext_Bindings, flags uint32)
 // Minimum OS: windows6.1.
 func SspiUnmarshalAuthIdentity(AuthIdentityLength uint32, AuthIdentityByteArray foundation.PSTR, ppAuthIdentity *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procSspiUnmarshalAuthIdentity.Addr(), uintptr(AuthIdentityLength), uintptr(unsafe.Pointer(AuthIdentityByteArray)), uintptr(unsafe.Pointer(ppAuthIdentity)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SspiValidateAuthIdentity calls SECUR32!SspiValidateAuthIdentity.
@@ -2110,7 +2110,7 @@ func SspiUnmarshalAuthIdentity(AuthIdentityLength uint32, AuthIdentityByteArray 
 // Minimum OS: windows6.1.
 func SspiValidateAuthIdentity(AuthData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procSspiValidateAuthIdentity.Addr(), uintptr(unsafe.Pointer(AuthData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SspiZeroAuthIdentity calls SECUR32!SspiZeroAuthIdentity.
@@ -2125,7 +2125,7 @@ func SspiZeroAuthIdentity(AuthData unsafe.Pointer) {
 // Minimum OS: windows10.0.10240.
 func TokenBindingDeleteAllBindings() error {
 	r1, _, _ := syscall.SyscallN(procTokenBindingDeleteAllBindings.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TokenBindingDeleteBinding calls TOKENBINDING!TokenBindingDeleteBinding.
@@ -2134,7 +2134,7 @@ func TokenBindingDeleteAllBindings() error {
 func TokenBindingDeleteBinding(targetURL string) error {
 	_targetURL := win32.UTF16Ptr(targetURL)
 	r1, _, _ := syscall.SyscallN(procTokenBindingDeleteBinding.Addr(), uintptr(unsafe.Pointer(_targetURL)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TokenBindingGenerateBinding calls TOKENBINDING!TokenBindingGenerateBinding.
@@ -2147,7 +2147,7 @@ func TokenBindingGenerateBinding(keyType TOKENBINDING_KEY_PARAMETERS_TYPE, targe
 		_tlsEKM = &tlsEKM[0]
 	}
 	r1, _, _ := syscall.SyscallN(procTokenBindingGenerateBinding.Addr(), uintptr(keyType), uintptr(unsafe.Pointer(_targetURL)), uintptr(bindingType), uintptr(unsafe.Pointer(_tlsEKM)), uintptr(len(tlsEKM)), uintptr(extensionFormat), uintptr(unsafe.Pointer(extensionData)), uintptr(unsafe.Pointer(tokenBinding)), uintptr(unsafe.Pointer(tokenBindingSize)), uintptr(unsafe.Pointer(resultData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TokenBindingGenerateID calls TOKENBINDING!TokenBindingGenerateID.
@@ -2159,14 +2159,14 @@ func TokenBindingGenerateID(keyType TOKENBINDING_KEY_PARAMETERS_TYPE, publicKey 
 		_publicKey = &publicKey[0]
 	}
 	r1, _, _ := syscall.SyscallN(procTokenBindingGenerateID.Addr(), uintptr(keyType), uintptr(unsafe.Pointer(_publicKey)), uintptr(len(publicKey)), uintptr(unsafe.Pointer(resultData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TokenBindingGenerateIDForUri calls TOKENBINDING!TokenBindingGenerateIDForUri.
 func TokenBindingGenerateIDForUri(keyType TOKENBINDING_KEY_PARAMETERS_TYPE, targetUri string, resultData **TOKENBINDING_RESULT_DATA) error {
 	_targetUri := win32.UTF16Ptr(targetUri)
 	r1, _, _ := syscall.SyscallN(procTokenBindingGenerateIDForUri.Addr(), uintptr(keyType), uintptr(unsafe.Pointer(_targetUri)), uintptr(unsafe.Pointer(resultData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TokenBindingGenerateMessage calls TOKENBINDING!TokenBindingGenerateMessage.
@@ -2174,13 +2174,13 @@ func TokenBindingGenerateIDForUri(keyType TOKENBINDING_KEY_PARAMETERS_TYPE, targ
 // Minimum OS: windows10.0.10240.
 func TokenBindingGenerateMessage(tokenBindings *unsafe.Pointer, tokenBindingsSize *uint32, tokenBindingsCount uint32, tokenBindingMessage *unsafe.Pointer, tokenBindingMessageSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procTokenBindingGenerateMessage.Addr(), uintptr(unsafe.Pointer(tokenBindings)), uintptr(unsafe.Pointer(tokenBindingsSize)), uintptr(tokenBindingsCount), uintptr(unsafe.Pointer(tokenBindingMessage)), uintptr(unsafe.Pointer(tokenBindingMessageSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TokenBindingGetHighestSupportedVersion calls TOKENBINDING!TokenBindingGetHighestSupportedVersion.
 func TokenBindingGetHighestSupportedVersion(majorVersion *byte, minorVersion *byte) error {
 	r1, _, _ := syscall.SyscallN(procTokenBindingGetHighestSupportedVersion.Addr(), uintptr(unsafe.Pointer(majorVersion)), uintptr(unsafe.Pointer(minorVersion)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TokenBindingGetKeyTypesClient calls TOKENBINDING!TokenBindingGetKeyTypesClient.
@@ -2188,7 +2188,7 @@ func TokenBindingGetHighestSupportedVersion(majorVersion *byte, minorVersion *by
 // Minimum OS: windows10.0.10240.
 func TokenBindingGetKeyTypesClient(keyTypes **TOKENBINDING_KEY_TYPES) error {
 	r1, _, _ := syscall.SyscallN(procTokenBindingGetKeyTypesClient.Addr(), uintptr(unsafe.Pointer(keyTypes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TokenBindingGetKeyTypesServer calls TOKENBINDING!TokenBindingGetKeyTypesServer.
@@ -2196,7 +2196,7 @@ func TokenBindingGetKeyTypesClient(keyTypes **TOKENBINDING_KEY_TYPES) error {
 // Minimum OS: windows10.0.10240.
 func TokenBindingGetKeyTypesServer(keyTypes **TOKENBINDING_KEY_TYPES) error {
 	r1, _, _ := syscall.SyscallN(procTokenBindingGetKeyTypesServer.Addr(), uintptr(unsafe.Pointer(keyTypes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TokenBindingVerifyMessage calls TOKENBINDING!TokenBindingVerifyMessage.
@@ -2212,7 +2212,7 @@ func TokenBindingVerifyMessage(tokenBindingMessage []byte, keyType TOKENBINDING_
 		_tlsEKM = &tlsEKM[0]
 	}
 	r1, _, _ := syscall.SyscallN(procTokenBindingVerifyMessage.Addr(), uintptr(unsafe.Pointer(_tokenBindingMessage)), uintptr(len(tokenBindingMessage)), uintptr(keyType), uintptr(unsafe.Pointer(_tlsEKM)), uintptr(len(tlsEKM)), uintptr(unsafe.Pointer(resultList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TranslateName calls SECUR32!TranslateNameW.
@@ -2243,5 +2243,5 @@ func TranslateNameA(lpAccountName foundation.PSTR, AccountNameFormat EXTENDED_NA
 // Minimum OS: windows5.1.2600.
 func VerifySignature(phContext *securitycredentials.SecHandle, pMessage *SecBufferDesc, MessageSeqNo uint32, pfQOP *uint32) error {
 	r1, _, _ := syscall.SyscallN(procVerifySignature.Addr(), uintptr(unsafe.Pointer(phContext)), uintptr(unsafe.Pointer(pMessage)), uintptr(MessageSeqNo), uintptr(unsafe.Pointer(pfQOP)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

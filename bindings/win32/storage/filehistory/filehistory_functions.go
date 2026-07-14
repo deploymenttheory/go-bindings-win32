@@ -30,7 +30,7 @@ var (
 // Minimum OS: windows8.0.
 func FhServiceBlockBackup(Pipe FH_SERVICE_PIPE_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procFhServiceBlockBackup.Addr(), uintptr(Pipe))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FhServiceClosePipe calls fhsvcctl!FhServiceClosePipe.
@@ -38,7 +38,7 @@ func FhServiceBlockBackup(Pipe FH_SERVICE_PIPE_HANDLE) error {
 // Minimum OS: windows8.0.
 func FhServiceClosePipe(Pipe FH_SERVICE_PIPE_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procFhServiceClosePipe.Addr(), uintptr(Pipe))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FhServiceOpenPipe calls fhsvcctl!FhServiceOpenPipe.
@@ -47,7 +47,7 @@ func FhServiceClosePipe(Pipe FH_SERVICE_PIPE_HANDLE) error {
 func FhServiceOpenPipe(StartServiceIfStopped bool, Pipe *FH_SERVICE_PIPE_HANDLE) error {
 	_StartServiceIfStopped := win32.Bool32(StartServiceIfStopped)
 	r1, _, _ := syscall.SyscallN(procFhServiceOpenPipe.Addr(), uintptr(_StartServiceIfStopped), uintptr(unsafe.Pointer(Pipe)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FhServiceReloadConfiguration calls fhsvcctl!FhServiceReloadConfiguration.
@@ -55,7 +55,7 @@ func FhServiceOpenPipe(StartServiceIfStopped bool, Pipe *FH_SERVICE_PIPE_HANDLE)
 // Minimum OS: windows8.0.
 func FhServiceReloadConfiguration(Pipe FH_SERVICE_PIPE_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procFhServiceReloadConfiguration.Addr(), uintptr(Pipe))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FhServiceStartBackup calls fhsvcctl!FhServiceStartBackup.
@@ -64,7 +64,7 @@ func FhServiceReloadConfiguration(Pipe FH_SERVICE_PIPE_HANDLE) error {
 func FhServiceStartBackup(Pipe FH_SERVICE_PIPE_HANDLE, LowPriorityIo bool) error {
 	_LowPriorityIo := win32.Bool32(LowPriorityIo)
 	r1, _, _ := syscall.SyscallN(procFhServiceStartBackup.Addr(), uintptr(Pipe), uintptr(_LowPriorityIo))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FhServiceStopBackup calls fhsvcctl!FhServiceStopBackup.
@@ -73,7 +73,7 @@ func FhServiceStartBackup(Pipe FH_SERVICE_PIPE_HANDLE, LowPriorityIo bool) error
 func FhServiceStopBackup(Pipe FH_SERVICE_PIPE_HANDLE, StopTracking bool) error {
 	_StopTracking := win32.Bool32(StopTracking)
 	r1, _, _ := syscall.SyscallN(procFhServiceStopBackup.Addr(), uintptr(Pipe), uintptr(_StopTracking))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FhServiceUnblockBackup calls fhsvcctl!FhServiceUnblockBackup.
@@ -81,5 +81,5 @@ func FhServiceStopBackup(Pipe FH_SERVICE_PIPE_HANDLE, StopTracking bool) error {
 // Minimum OS: windows8.0.
 func FhServiceUnblockBackup(Pipe FH_SERVICE_PIPE_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procFhServiceUnblockBackup.Addr(), uintptr(Pipe))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

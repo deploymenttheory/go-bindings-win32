@@ -267,7 +267,7 @@ func BeginPanningFeedback(hwnd foundation.HWND) bool {
 // Minimum OS: windows6.0.6000.
 func BufferedPaintClear(hBufferedPaint uintptr, prc *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(procBufferedPaintClear.Addr(), uintptr(hBufferedPaint), uintptr(unsafe.Pointer(prc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BufferedPaintInit calls UXTHEME!BufferedPaintInit.
@@ -275,7 +275,7 @@ func BufferedPaintClear(hBufferedPaint uintptr, prc *foundation.RECT) error {
 // Minimum OS: windows6.0.6000.
 func BufferedPaintInit() error {
 	r1, _, _ := syscall.SyscallN(procBufferedPaintInit.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BufferedPaintRenderAnimation calls UxTheme!BufferedPaintRenderAnimation.
@@ -291,7 +291,7 @@ func BufferedPaintRenderAnimation(hwnd foundation.HWND, hdcTarget graphicsgdi.HD
 // Minimum OS: windows6.0.6000.
 func BufferedPaintSetAlpha(hBufferedPaint uintptr, prc *foundation.RECT, alpha byte) error {
 	r1, _, _ := syscall.SyscallN(procBufferedPaintSetAlpha.Addr(), uintptr(hBufferedPaint), uintptr(unsafe.Pointer(prc)), uintptr(alpha))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BufferedPaintStopAllAnimations calls UXTHEME!BufferedPaintStopAllAnimations.
@@ -299,7 +299,7 @@ func BufferedPaintSetAlpha(hBufferedPaint uintptr, prc *foundation.RECT, alpha b
 // Minimum OS: windows6.0.6000.
 func BufferedPaintStopAllAnimations(hwnd foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(procBufferedPaintStopAllAnimations.Addr(), uintptr(hwnd))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BufferedPaintUnInit calls UXTHEME!BufferedPaintUnInit.
@@ -307,7 +307,7 @@ func BufferedPaintStopAllAnimations(hwnd foundation.HWND) error {
 // Minimum OS: windows6.0.6000.
 func BufferedPaintUnInit() error {
 	r1, _, _ := syscall.SyscallN(procBufferedPaintUnInit.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CheckDlgButton calls USER32!CheckDlgButton.
@@ -337,7 +337,7 @@ func CheckRadioButton(hDlg foundation.HWND, nIDFirstButton int32, nIDLastButton 
 // Minimum OS: windows6.0.6000.
 func CloseThemeData(hTheme HTHEME) error {
 	r1, _, _ := syscall.SyscallN(procCloseThemeData.Addr(), uintptr(hTheme))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateMappedBitmap calls COMCTL32!CreateMappedBitmap.
@@ -532,7 +532,7 @@ func DPA_InsertPtr(hdpa HDPA, i int32, p unsafe.Pointer) int32 {
 // Minimum OS: windows6.0.6000.
 func DPA_LoadStream(phdpa *HDPA, pfn PFNDPASTREAM, pstream *systemcom.IStream, pvInstData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDPA_LoadStream.Addr(), uintptr(unsafe.Pointer(phdpa)), uintptr(pfn), uintptr(unsafe.Pointer(pstream)), uintptr(unsafe.Pointer(pvInstData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DPA_Merge calls COMCTL32!DPA_Merge.
@@ -548,7 +548,7 @@ func DPA_Merge(hdpaDest HDPA, hdpaSrc HDPA, dwFlags uint32, pfnCompare PFNDACOMP
 // Minimum OS: windows6.0.6000.
 func DPA_SaveStream(hdpa HDPA, pfn PFNDPASTREAM, pstream *systemcom.IStream, pvInstData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDPA_SaveStream.Addr(), uintptr(hdpa), uintptr(pfn), uintptr(unsafe.Pointer(pstream)), uintptr(unsafe.Pointer(pvInstData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DPA_Search calls COMCTL32!DPA_Search.
@@ -803,7 +803,7 @@ func DrawStatusTextA(hDC graphicsgdi.HDC, lprc *foundation.RECT, pszText foundat
 // Minimum OS: windows6.0.6000.
 func DrawThemeBackground(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, pRect *foundation.RECT, pClipRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(procDrawThemeBackground.Addr(), uintptr(hTheme), uintptr(hdc), uintptr(iPartId), uintptr(iStateId), uintptr(unsafe.Pointer(pRect)), uintptr(unsafe.Pointer(pClipRect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrawThemeBackgroundEx calls UXTHEME!DrawThemeBackgroundEx.
@@ -811,7 +811,7 @@ func DrawThemeBackground(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iSta
 // Minimum OS: windows6.0.6000.
 func DrawThemeBackgroundEx(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, pRect *foundation.RECT, pOptions *DTBGOPTS) error {
 	r1, _, _ := syscall.SyscallN(procDrawThemeBackgroundEx.Addr(), uintptr(hTheme), uintptr(hdc), uintptr(iPartId), uintptr(iStateId), uintptr(unsafe.Pointer(pRect)), uintptr(unsafe.Pointer(pOptions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrawThemeEdge calls UxTheme!DrawThemeEdge.
@@ -819,7 +819,7 @@ func DrawThemeBackgroundEx(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iS
 // Minimum OS: windows6.0.6000.
 func DrawThemeEdge(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, pDestRect *foundation.RECT, uEdge graphicsgdi.DRAWEDGE_FLAGS, uFlags graphicsgdi.DRAW_EDGE_FLAGS, pContentRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(procDrawThemeEdge.Addr(), uintptr(hTheme), uintptr(hdc), uintptr(iPartId), uintptr(iStateId), uintptr(unsafe.Pointer(pDestRect)), uintptr(uEdge), uintptr(uFlags), uintptr(unsafe.Pointer(pContentRect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrawThemeIcon calls UxTheme!DrawThemeIcon.
@@ -827,7 +827,7 @@ func DrawThemeEdge(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId i
 // Minimum OS: windows6.0.6000.
 func DrawThemeIcon(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, pRect *foundation.RECT, himl HIMAGELIST, iImageIndex int32) error {
 	r1, _, _ := syscall.SyscallN(procDrawThemeIcon.Addr(), uintptr(hTheme), uintptr(hdc), uintptr(iPartId), uintptr(iStateId), uintptr(unsafe.Pointer(pRect)), uintptr(himl), uintptr(iImageIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrawThemeParentBackground calls UXTHEME!DrawThemeParentBackground.
@@ -835,7 +835,7 @@ func DrawThemeIcon(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId i
 // Minimum OS: windows6.0.6000.
 func DrawThemeParentBackground(hwnd foundation.HWND, hdc graphicsgdi.HDC, prc *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(procDrawThemeParentBackground.Addr(), uintptr(hwnd), uintptr(hdc), uintptr(unsafe.Pointer(prc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrawThemeParentBackgroundEx calls UxTheme!DrawThemeParentBackgroundEx.
@@ -843,7 +843,7 @@ func DrawThemeParentBackground(hwnd foundation.HWND, hdc graphicsgdi.HDC, prc *f
 // Minimum OS: windows6.0.6000.
 func DrawThemeParentBackgroundEx(hwnd foundation.HWND, hdc graphicsgdi.HDC, dwFlags DRAW_THEME_PARENT_BACKGROUND_FLAGS, prc *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(procDrawThemeParentBackgroundEx.Addr(), uintptr(hwnd), uintptr(hdc), uintptr(dwFlags), uintptr(unsafe.Pointer(prc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrawThemeText calls UxTheme!DrawThemeText.
@@ -852,7 +852,7 @@ func DrawThemeParentBackgroundEx(hwnd foundation.HWND, hdc graphicsgdi.HDC, dwFl
 func DrawThemeText(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, pszText string, cchText int32, dwTextFlags graphicsgdi.DRAW_TEXT_FORMAT, dwTextFlags2 uint32, pRect *foundation.RECT) error {
 	_pszText := win32.UTF16Ptr(pszText)
 	r1, _, _ := syscall.SyscallN(procDrawThemeText.Addr(), uintptr(hTheme), uintptr(hdc), uintptr(iPartId), uintptr(iStateId), uintptr(unsafe.Pointer(_pszText)), uintptr(cchText), uintptr(dwTextFlags), uintptr(dwTextFlags2), uintptr(unsafe.Pointer(pRect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrawThemeTextEx calls UXTHEME!DrawThemeTextEx.
@@ -861,7 +861,7 @@ func DrawThemeText(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId i
 func DrawThemeTextEx(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, pszText string, cchText int32, dwTextFlags graphicsgdi.DRAW_TEXT_FORMAT, pRect *foundation.RECT, pOptions *DTTOPTS) error {
 	_pszText := win32.UTF16Ptr(pszText)
 	r1, _, _ := syscall.SyscallN(procDrawThemeTextEx.Addr(), uintptr(hTheme), uintptr(hdc), uintptr(iPartId), uintptr(iStateId), uintptr(unsafe.Pointer(_pszText)), uintptr(cchText), uintptr(dwTextFlags), uintptr(unsafe.Pointer(pRect)), uintptr(unsafe.Pointer(pOptions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnableScrollBar calls USER32!EnableScrollBar.
@@ -880,7 +880,7 @@ func EnableScrollBar(hWnd foundation.HWND, wSBflags uint32, wArrows ENABLE_SCROL
 // Minimum OS: windows6.0.6000.
 func EnableThemeDialogTexture(hwnd foundation.HWND, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procEnableThemeDialogTexture.Addr(), uintptr(hwnd), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnableTheming calls UxTheme!EnableTheming.
@@ -889,7 +889,7 @@ func EnableThemeDialogTexture(hwnd foundation.HWND, dwFlags uint32) error {
 func EnableTheming(fEnable bool) error {
 	_fEnable := win32.Bool32(fEnable)
 	r1, _, _ := syscall.SyscallN(procEnableTheming.Addr(), uintptr(_fEnable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndBufferedAnimation calls UxTheme!EndBufferedAnimation.
@@ -898,7 +898,7 @@ func EnableTheming(fEnable bool) error {
 func EndBufferedAnimation(hbpAnimation uintptr, fUpdateTarget bool) error {
 	_fUpdateTarget := win32.Bool32(fUpdateTarget)
 	r1, _, _ := syscall.SyscallN(procEndBufferedAnimation.Addr(), uintptr(hbpAnimation), uintptr(_fUpdateTarget))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndBufferedPaint calls UXTHEME!EndBufferedPaint.
@@ -907,7 +907,7 @@ func EndBufferedAnimation(hbpAnimation uintptr, fUpdateTarget bool) error {
 func EndBufferedPaint(hBufferedPaint uintptr, fUpdateTarget bool) error {
 	_fUpdateTarget := win32.Bool32(fUpdateTarget)
 	r1, _, _ := syscall.SyscallN(procEndBufferedPaint.Addr(), uintptr(hBufferedPaint), uintptr(_fUpdateTarget))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndPanningFeedback calls UxTheme!EndPanningFeedback.
@@ -1035,7 +1035,7 @@ func FlatSB_ShowScrollBar(param0 foundation.HWND, code uiwindowsandmessaging.SCR
 // Minimum OS: windows6.0.6000.
 func GetBufferedPaintBits(hBufferedPaint uintptr, ppbBuffer **graphicsgdi.RGBQUAD, pcxRow *int32) error {
 	r1, _, _ := syscall.SyscallN(procGetBufferedPaintBits.Addr(), uintptr(hBufferedPaint), uintptr(unsafe.Pointer(ppbBuffer)), uintptr(unsafe.Pointer(pcxRow)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBufferedPaintDC calls UxTheme!GetBufferedPaintDC.
@@ -1059,7 +1059,7 @@ func GetBufferedPaintTargetDC(hBufferedPaint uintptr) graphicsgdi.HDC {
 // Minimum OS: windows6.0.6000.
 func GetBufferedPaintTargetRect(hBufferedPaint uintptr, prc *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(procGetBufferedPaintTargetRect.Addr(), uintptr(hBufferedPaint), uintptr(unsafe.Pointer(prc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetComboBoxInfo calls USER32!GetComboBoxInfo.
@@ -1078,7 +1078,7 @@ func GetComboBoxInfo(hwndCombo foundation.HWND, pcbi *COMBOBOXINFO) error {
 // Minimum OS: windows6.0.6000.
 func GetCurrentThemeName(pszThemeFileName foundation.PWSTR, cchMaxNameChars int32, pszColorBuff foundation.PWSTR, cchMaxColorChars int32, pszSizeBuff foundation.PWSTR, cchMaxSizeChars int32) error {
 	r1, _, _ := syscall.SyscallN(procGetCurrentThemeName.Addr(), uintptr(unsafe.Pointer(pszThemeFileName)), uintptr(cchMaxNameChars), uintptr(unsafe.Pointer(pszColorBuff)), uintptr(cchMaxColorChars), uintptr(unsafe.Pointer(pszSizeBuff)), uintptr(cchMaxSizeChars))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEffectiveClientRect calls COMCTL32!GetEffectiveClientRect.
@@ -1113,7 +1113,7 @@ func GetThemeAnimationProperty(hTheme HTHEME, iStoryboardId int32, iTargetId int
 		_pvProperty = &pvProperty[0]
 	}
 	r1, _, _ := syscall.SyscallN(procGetThemeAnimationProperty.Addr(), uintptr(hTheme), uintptr(iStoryboardId), uintptr(iTargetId), uintptr(eProperty), uintptr(unsafe.Pointer(_pvProperty)), uintptr(len(pvProperty)), uintptr(unsafe.Pointer(pcbSizeOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThemeAnimationTransform calls UXTHEME!GetThemeAnimationTransform.
@@ -1121,7 +1121,7 @@ func GetThemeAnimationProperty(hTheme HTHEME, iStoryboardId int32, iTargetId int
 // Minimum OS: windows8.0.
 func GetThemeAnimationTransform(hTheme HTHEME, iStoryboardId int32, iTargetId int32, dwTransformIndex uint32, pTransform *TA_TRANSFORM, cbSize uint32, pcbSizeOut *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeAnimationTransform.Addr(), uintptr(hTheme), uintptr(iStoryboardId), uintptr(iTargetId), uintptr(dwTransformIndex), uintptr(unsafe.Pointer(pTransform)), uintptr(cbSize), uintptr(unsafe.Pointer(pcbSizeOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThemeAppProperties calls UXTHEME!GetThemeAppProperties.
@@ -1137,7 +1137,7 @@ func GetThemeAppProperties() SET_THEME_APP_PROPERTIES_FLAGS {
 // Minimum OS: windows6.0.6000.
 func GetThemeBackgroundContentRect(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, pBoundingRect *foundation.RECT, pContentRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeBackgroundContentRect.Addr(), uintptr(hTheme), uintptr(hdc), uintptr(iPartId), uintptr(iStateId), uintptr(unsafe.Pointer(pBoundingRect)), uintptr(unsafe.Pointer(pContentRect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThemeBackgroundExtent calls UXTHEME!GetThemeBackgroundExtent.
@@ -1145,7 +1145,7 @@ func GetThemeBackgroundContentRect(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId i
 // Minimum OS: windows6.0.6000.
 func GetThemeBackgroundExtent(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, pContentRect *foundation.RECT, pExtentRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeBackgroundExtent.Addr(), uintptr(hTheme), uintptr(hdc), uintptr(iPartId), uintptr(iStateId), uintptr(unsafe.Pointer(pContentRect)), uintptr(unsafe.Pointer(pExtentRect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThemeBackgroundRegion calls UxTheme!GetThemeBackgroundRegion.
@@ -1153,7 +1153,7 @@ func GetThemeBackgroundExtent(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32,
 // Minimum OS: windows6.0.6000.
 func GetThemeBackgroundRegion(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, pRect *foundation.RECT, pRegion *graphicsgdi.HRGN) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeBackgroundRegion.Addr(), uintptr(hTheme), uintptr(hdc), uintptr(iPartId), uintptr(iStateId), uintptr(unsafe.Pointer(pRect)), uintptr(unsafe.Pointer(pRegion)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThemeBitmap calls UXTHEME!GetThemeBitmap.
@@ -1161,7 +1161,7 @@ func GetThemeBackgroundRegion(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32,
 // Minimum OS: windows6.0.6000.
 func GetThemeBitmap(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, dwFlags GET_THEME_BITMAP_FLAGS, phBitmap *graphicsgdi.HBITMAP) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeBitmap.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(dwFlags), uintptr(unsafe.Pointer(phBitmap)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThemeBool calls UxTheme!GetThemeBool.
@@ -1169,7 +1169,7 @@ func GetThemeBitmap(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32,
 // Minimum OS: windows6.0.6000.
 func GetThemeBool(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, pfVal *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeBool.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(pfVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThemeColor calls UXTHEME!GetThemeColor.
@@ -1177,7 +1177,7 @@ func GetThemeBool(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, p
 // Minimum OS: windows6.0.6000.
 func GetThemeColor(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, pColor *foundation.COLORREF) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeColor.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(pColor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThemeDocumentationProperty calls UxTheme!GetThemeDocumentationProperty.
@@ -1187,7 +1187,7 @@ func GetThemeDocumentationProperty(pszThemeName string, pszPropertyName string, 
 	_pszThemeName := win32.UTF16Ptr(pszThemeName)
 	_pszPropertyName := win32.UTF16Ptr(pszPropertyName)
 	r1, _, _ := syscall.SyscallN(procGetThemeDocumentationProperty.Addr(), uintptr(unsafe.Pointer(_pszThemeName)), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(unsafe.Pointer(pszValueBuff)), uintptr(cchMaxValChars))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThemeEnumValue calls UXTHEME!GetThemeEnumValue.
@@ -1195,7 +1195,7 @@ func GetThemeDocumentationProperty(pszThemeName string, pszPropertyName string, 
 // Minimum OS: windows6.0.6000.
 func GetThemeEnumValue(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, piVal *int32) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeEnumValue.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(piVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThemeFilename calls UxTheme!GetThemeFilename.
@@ -1203,7 +1203,7 @@ func GetThemeEnumValue(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int
 // Minimum OS: windows6.0.6000.
 func GetThemeFilename(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, pszThemeFileName foundation.PWSTR, cchMaxBuffChars int32) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeFilename.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(pszThemeFileName)), uintptr(cchMaxBuffChars))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThemeFont calls UXTHEME!GetThemeFont.
@@ -1211,7 +1211,7 @@ func GetThemeFilename(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int3
 // Minimum OS: windows6.0.6000.
 func GetThemeFont(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, iPropId int32, pFont *graphicsgdi.LOGFONTW) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeFont.Addr(), uintptr(hTheme), uintptr(hdc), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(pFont)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThemeInt calls UXTHEME!GetThemeInt.
@@ -1219,7 +1219,7 @@ func GetThemeFont(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId in
 // Minimum OS: windows6.0.6000.
 func GetThemeInt(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, piVal *int32) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeInt.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(piVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThemeIntList calls UxTheme!GetThemeIntList.
@@ -1227,7 +1227,7 @@ func GetThemeInt(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, pi
 // Minimum OS: windows6.0.6000.
 func GetThemeIntList(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, pIntList *INTLIST) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeIntList.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(pIntList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThemeMargins calls UXTHEME!GetThemeMargins.
@@ -1235,7 +1235,7 @@ func GetThemeIntList(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32
 // Minimum OS: windows6.0.6000.
 func GetThemeMargins(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, iPropId int32, prc *foundation.RECT, pMargins *MARGINS) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeMargins.Addr(), uintptr(hTheme), uintptr(hdc), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(prc)), uintptr(unsafe.Pointer(pMargins)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThemeMetric calls UXTHEME!GetThemeMetric.
@@ -1243,7 +1243,7 @@ func GetThemeMargins(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId
 // Minimum OS: windows6.0.6000.
 func GetThemeMetric(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, iPropId int32, piVal *int32) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeMetric.Addr(), uintptr(hTheme), uintptr(hdc), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(piVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThemePartSize calls UXTHEME!GetThemePartSize.
@@ -1251,7 +1251,7 @@ func GetThemeMetric(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId 
 // Minimum OS: windows6.0.6000.
 func GetThemePartSize(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, prc *foundation.RECT, eSize THEMESIZE, psz *foundation.SIZE) error {
 	r1, _, _ := syscall.SyscallN(procGetThemePartSize.Addr(), uintptr(hTheme), uintptr(hdc), uintptr(iPartId), uintptr(iStateId), uintptr(unsafe.Pointer(prc)), uintptr(eSize), uintptr(unsafe.Pointer(psz)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThemePosition calls UXTHEME!GetThemePosition.
@@ -1259,7 +1259,7 @@ func GetThemePartSize(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateI
 // Minimum OS: windows6.0.6000.
 func GetThemePosition(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, pPoint *foundation.POINT) error {
 	r1, _, _ := syscall.SyscallN(procGetThemePosition.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(pPoint)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThemePropertyOrigin calls UxTheme!GetThemePropertyOrigin.
@@ -1267,7 +1267,7 @@ func GetThemePosition(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int3
 // Minimum OS: windows6.0.6000.
 func GetThemePropertyOrigin(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, pOrigin *PROPERTYORIGIN) error {
 	r1, _, _ := syscall.SyscallN(procGetThemePropertyOrigin.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(pOrigin)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThemeRect calls UXTHEME!GetThemeRect.
@@ -1275,7 +1275,7 @@ func GetThemePropertyOrigin(hTheme HTHEME, iPartId int32, iStateId int32, iPropI
 // Minimum OS: windows6.0.6000.
 func GetThemeRect(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, pRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeRect.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(pRect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThemeStream calls UXTHEME!GetThemeStream.
@@ -1283,7 +1283,7 @@ func GetThemeRect(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, p
 // Minimum OS: windows6.0.6000.
 func GetThemeStream(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, ppvStream *unsafe.Pointer, pcbStream *uint32, hInst foundation.HINSTANCE) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeStream.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(ppvStream)), uintptr(unsafe.Pointer(pcbStream)), uintptr(hInst))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThemeString calls UxTheme!GetThemeString.
@@ -1291,7 +1291,7 @@ func GetThemeStream(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32,
 // Minimum OS: windows6.0.6000.
 func GetThemeString(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, pszBuff foundation.PWSTR, cchMaxBuffChars int32) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeString.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(pszBuff)), uintptr(cchMaxBuffChars))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThemeSysBool calls UxTheme!GetThemeSysBool.
@@ -1323,7 +1323,7 @@ func GetThemeSysColorBrush(hTheme HTHEME, iColorId int32) graphicsgdi.HBRUSH {
 // Minimum OS: windows6.0.6000.
 func GetThemeSysFont(hTheme HTHEME, iFontId int32, plf *graphicsgdi.LOGFONTW) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeSysFont.Addr(), uintptr(hTheme), uintptr(iFontId), uintptr(unsafe.Pointer(plf)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThemeSysInt calls UxTheme!GetThemeSysInt.
@@ -1331,7 +1331,7 @@ func GetThemeSysFont(hTheme HTHEME, iFontId int32, plf *graphicsgdi.LOGFONTW) er
 // Minimum OS: windows6.0.6000.
 func GetThemeSysInt(hTheme HTHEME, iIntId int32, piValue *int32) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeSysInt.Addr(), uintptr(hTheme), uintptr(iIntId), uintptr(unsafe.Pointer(piValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThemeSysSize calls UxTheme!GetThemeSysSize.
@@ -1347,7 +1347,7 @@ func GetThemeSysSize(hTheme HTHEME, iSizeId int32) int32 {
 // Minimum OS: windows6.0.6000.
 func GetThemeSysString(hTheme HTHEME, iStringId int32, pszStringBuff foundation.PWSTR, cchMaxStringChars int32) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeSysString.Addr(), uintptr(hTheme), uintptr(iStringId), uintptr(unsafe.Pointer(pszStringBuff)), uintptr(cchMaxStringChars))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThemeTextExtent calls UxTheme!GetThemeTextExtent.
@@ -1356,7 +1356,7 @@ func GetThemeSysString(hTheme HTHEME, iStringId int32, pszStringBuff foundation.
 func GetThemeTextExtent(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, pszText string, cchCharCount int32, dwTextFlags graphicsgdi.DRAW_TEXT_FORMAT, pBoundingRect *foundation.RECT, pExtentRect *foundation.RECT) error {
 	_pszText := win32.UTF16Ptr(pszText)
 	r1, _, _ := syscall.SyscallN(procGetThemeTextExtent.Addr(), uintptr(hTheme), uintptr(hdc), uintptr(iPartId), uintptr(iStateId), uintptr(unsafe.Pointer(_pszText)), uintptr(cchCharCount), uintptr(dwTextFlags), uintptr(unsafe.Pointer(pBoundingRect)), uintptr(unsafe.Pointer(pExtentRect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThemeTextMetrics calls UxTheme!GetThemeTextMetrics.
@@ -1364,7 +1364,7 @@ func GetThemeTextExtent(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStat
 // Minimum OS: windows6.0.6000.
 func GetThemeTextMetrics(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, ptm *graphicsgdi.TEXTMETRICW) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeTextMetrics.Addr(), uintptr(hTheme), uintptr(hdc), uintptr(iPartId), uintptr(iStateId), uintptr(unsafe.Pointer(ptm)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThemeTimingFunction calls UXTHEME!GetThemeTimingFunction.
@@ -1372,7 +1372,7 @@ func GetThemeTextMetrics(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iSta
 // Minimum OS: windows8.0.
 func GetThemeTimingFunction(hTheme HTHEME, iTimingFunctionId int32, pTimingFunction *TA_TIMINGFUNCTION, cbSize uint32, pcbSizeOut *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeTimingFunction.Addr(), uintptr(hTheme), uintptr(iTimingFunctionId), uintptr(unsafe.Pointer(pTimingFunction)), uintptr(cbSize), uintptr(unsafe.Pointer(pcbSizeOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThemeTransitionDuration calls UxTheme!GetThemeTransitionDuration.
@@ -1380,7 +1380,7 @@ func GetThemeTimingFunction(hTheme HTHEME, iTimingFunctionId int32, pTimingFunct
 // Minimum OS: windows6.0.6000.
 func GetThemeTransitionDuration(hTheme HTHEME, iPartId int32, iStateIdFrom int32, iStateIdTo int32, iPropId int32, pdwDuration *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeTransitionDuration.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateIdFrom), uintptr(iStateIdTo), uintptr(iPropId), uintptr(unsafe.Pointer(pdwDuration)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetWindowFeedbackSetting calls USER32!GetWindowFeedbackSetting.
@@ -1404,7 +1404,7 @@ func GetWindowTheme(hwnd foundation.HWND) HTHEME {
 // Minimum OS: windows6.0.6000.
 func HIMAGELIST_QueryInterface(himl HIMAGELIST, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procHIMAGELIST_QueryInterface.Addr(), uintptr(himl), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ImageList_Add calls COMCTL32!ImageList_Add.
@@ -1436,7 +1436,7 @@ func ImageList_BeginDrag(himlTrack HIMAGELIST, iTrack int32, dxHotspot int32, dy
 // Minimum OS: windows6.0.6000.
 func ImageList_CoCreateInstance(rclsid *win32.GUID, punkOuter *systemcom.IUnknown, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procImageList_CoCreateInstance.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(punkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ImageList_Copy calls COMCTL32!ImageList_Copy.
@@ -1621,7 +1621,7 @@ func ImageList_Read(pstm *systemcom.IStream) HIMAGELIST {
 // Minimum OS: windows6.0.6000.
 func ImageList_ReadEx(dwFlags uint32, pstm *systemcom.IStream, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procImageList_ReadEx.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(pstm)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ImageList_Remove calls COMCTL32!ImageList_Remove.
@@ -1701,7 +1701,7 @@ func ImageList_Write(himl HIMAGELIST, pstm *systemcom.IStream) bool {
 // Minimum OS: windows6.0.6000.
 func ImageList_WriteEx(himl HIMAGELIST, dwFlags IMAGE_LIST_WRITE_STREAM_FLAGS, pstm *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(procImageList_WriteEx.Addr(), uintptr(himl), uintptr(dwFlags), uintptr(unsafe.Pointer(pstm)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitCommonControls calls COMCTL32!InitCommonControls.
@@ -1796,7 +1796,7 @@ func IsThemePartDefined(hTheme HTHEME, iPartId int32, iStateId int32) bool {
 func LoadIconMetric(hinst foundation.HINSTANCE, pszName string, lims LI_METRIC, phico *uiwindowsandmessaging.HICON) error {
 	_pszName := win32.UTF16Ptr(pszName)
 	r1, _, _ := syscall.SyscallN(procLoadIconMetric.Addr(), uintptr(hinst), uintptr(unsafe.Pointer(_pszName)), uintptr(lims), uintptr(unsafe.Pointer(phico)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LoadIconWithScaleDown calls COMCTL32!LoadIconWithScaleDown.
@@ -1805,7 +1805,7 @@ func LoadIconMetric(hinst foundation.HINSTANCE, pszName string, lims LI_METRIC, 
 func LoadIconWithScaleDown(hinst foundation.HINSTANCE, pszName string, cx int32, cy int32, phico *uiwindowsandmessaging.HICON) error {
 	_pszName := win32.UTF16Ptr(pszName)
 	r1, _, _ := syscall.SyscallN(procLoadIconWithScaleDown.Addr(), uintptr(hinst), uintptr(unsafe.Pointer(_pszName)), uintptr(cx), uintptr(cy), uintptr(unsafe.Pointer(phico)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MakeDragList calls COMCTL32!MakeDragList.
@@ -1956,7 +1956,7 @@ func SetWindowTheme(hwnd foundation.HWND, pszSubAppName string, pszSubIdList str
 	_pszSubAppName := win32.UTF16Ptr(pszSubAppName)
 	_pszSubIdList := win32.UTF16Ptr(pszSubIdList)
 	r1, _, _ := syscall.SyscallN(procSetWindowTheme.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(_pszSubAppName)), uintptr(unsafe.Pointer(_pszSubIdList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetWindowThemeAttribute calls UXTHEME!SetWindowThemeAttribute.
@@ -1968,7 +1968,7 @@ func SetWindowThemeAttribute(hwnd foundation.HWND, eAttribute WINDOWTHEMEATTRIBU
 		_pvAttribute = &pvAttribute[0]
 	}
 	r1, _, _ := syscall.SyscallN(procSetWindowThemeAttribute.Addr(), uintptr(hwnd), uintptr(eAttribute), uintptr(unsafe.Pointer(_pvAttribute)), uintptr(len(pvAttribute)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ShowHideMenuCtl calls COMCTL32!ShowHideMenuCtl.
@@ -2009,7 +2009,7 @@ func TaskDialog(hwndOwner foundation.HWND, hInstance foundation.HINSTANCE, pszWi
 	_pszContent := win32.UTF16Ptr(pszContent)
 	_pszIcon := win32.UTF16Ptr(pszIcon)
 	r1, _, _ := syscall.SyscallN(procTaskDialog.Addr(), uintptr(hwndOwner), uintptr(hInstance), uintptr(unsafe.Pointer(_pszWindowTitle)), uintptr(unsafe.Pointer(_pszMainInstruction)), uintptr(unsafe.Pointer(_pszContent)), uintptr(dwCommonButtons), uintptr(unsafe.Pointer(_pszIcon)), uintptr(unsafe.Pointer(pnButton)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TaskDialogIndirect calls COMCTL32!TaskDialogIndirect.
@@ -2017,7 +2017,7 @@ func TaskDialog(hwndOwner foundation.HWND, hInstance foundation.HINSTANCE, pszWi
 // Minimum OS: windows6.0.6000.
 func TaskDialogIndirect(pTaskConfig *TASKDIALOGCONFIG, pnButton *int32, pnRadioButton *int32, pfVerificationFlagChecked *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procTaskDialogIndirect.Addr(), uintptr(unsafe.Pointer(pTaskConfig)), uintptr(unsafe.Pointer(pnButton)), uintptr(unsafe.Pointer(pnRadioButton)), uintptr(unsafe.Pointer(pfVerificationFlagChecked)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UninitializeFlatSB calls COMCTL32!UninitializeFlatSB.
@@ -2025,7 +2025,7 @@ func TaskDialogIndirect(pTaskConfig *TASKDIALOGCONFIG, pnButton *int32, pnRadioB
 // Minimum OS: windows6.0.6000.
 func UninitializeFlatSB(param0 foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(procUninitializeFlatSB.Addr(), uintptr(param0))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UpdatePanningFeedback calls UxTheme!UpdatePanningFeedback.

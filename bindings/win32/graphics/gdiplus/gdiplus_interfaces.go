@@ -19,7 +19,7 @@ type GdiplusAbort struct {
 // Abort dispatches through GdiplusAbort's vtable slot 0.
 func (self *GdiplusAbort) Abort() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[0], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 025d1823-6c7d-447b-bbdb-a3cbc3dfa2fc
@@ -33,17 +33,17 @@ var IID_IImageBytes = win32.GUID{Data1: 0x025d1823, Data2: 0x6c7d, Data3: 0x447b
 // CountBytes dispatches through IImageBytes's vtable slot 3.
 func (self *IImageBytes) CountBytes(pcb *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcb)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LockBytes dispatches through IImageBytes's vtable slot 4.
 func (self *IImageBytes) LockBytes(cb uint32, ulOffset uint32, ppvBytes *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cb), uintptr(ulOffset), uintptr(unsafe.Pointer(ppvBytes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnlockBytes dispatches through IImageBytes's vtable slot 5.
 func (self *IImageBytes) UnlockBytes(pvBytes unsafe.Pointer, cb uint32, ulOffset uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvBytes)), uintptr(cb), uintptr(ulOffset))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

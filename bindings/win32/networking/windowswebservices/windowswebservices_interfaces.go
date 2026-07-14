@@ -25,12 +25,12 @@ var IID_IContentPrefetcherTaskTrigger = win32.GUID{Data1: 0x1b35a14a, Data2: 0x6
 func (self *IContentPrefetcherTaskTrigger) TriggerContentPrefetcherTask(packageFullName string) error {
 	_packageFullName := win32.UTF16Ptr(packageFullName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_packageFullName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsRegisteredForContentPrefetch dispatches through IContentPrefetcherTaskTrigger's vtable slot 7.
 func (self *IContentPrefetcherTaskTrigger) IsRegisteredForContentPrefetch(packageFullName string, isRegistered *byte) error {
 	_packageFullName := win32.UTF16Ptr(packageFullName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_packageFullName)), uintptr(unsafe.Pointer(isRegistered)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

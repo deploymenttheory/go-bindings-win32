@@ -18,7 +18,7 @@ type IUnknown struct {
 // QueryInterface dispatches through IUnknown's vtable slot 0.
 func (u *IUnknown) QueryInterface(riid *GUID, ppv **IUnknown) error {
 	r1, _, _ := syscall.SyscallN(u.LpVtbl[0], uintptr(unsafe.Pointer(u)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return HRESULTError(int32(r1))
+	return ErrIfFailed(int32(r1))
 }
 
 // AddRef dispatches through IUnknown's vtable slot 1.

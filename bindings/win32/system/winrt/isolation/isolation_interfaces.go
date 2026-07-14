@@ -25,5 +25,5 @@ var IID_IIsolatedEnvironmentInterop = win32.GUID{Data1: 0x85713c2e, Data2: 0x8e6
 func (self *IIsolatedEnvironmentInterop) GetHostHwndInterop(containerHwnd foundation.HWND) (foundation.HWND, error) {
 	var _hostHwnd foundation.HWND
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(containerHwnd), uintptr(unsafe.Pointer(&_hostHwnd)))
-	return _hostHwnd, win32.HRESULTError(int32(r1))
+	return _hostHwnd, win32.ErrIfFailed(int32(r1))
 }

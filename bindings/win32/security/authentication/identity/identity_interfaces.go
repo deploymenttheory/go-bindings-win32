@@ -26,5 +26,5 @@ var IID_ICcgDomainAuthCredentials = win32.GUID{Data1: 0x6ecda518, Data2: 0x2010,
 func (self *ICcgDomainAuthCredentials) GetPasswordCredentials(pluginInput string, domainName *foundation.PWSTR, username *foundation.PWSTR, password *foundation.PWSTR) error {
 	_pluginInput := win32.UTF16Ptr(pluginInput)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pluginInput)), uintptr(unsafe.Pointer(domainName)), uintptr(unsafe.Pointer(username)), uintptr(unsafe.Pointer(password)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

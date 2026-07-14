@@ -36,7 +36,7 @@ var (
 // Minimum OS: windows5.0.
 func WMCreateBackupRestorer(pCallback *systemcom.IUnknown, ppBackup **IWMLicenseBackup) error {
 	r1, _, _ := syscall.SyscallN(procWMCreateBackupRestorer.Addr(), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(ppBackup)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WMCreateEditor calls WMVCore!WMCreateEditor.
@@ -44,7 +44,7 @@ func WMCreateBackupRestorer(pCallback *systemcom.IUnknown, ppBackup **IWMLicense
 // Minimum OS: windows5.0.
 func WMCreateEditor(ppEditor **IWMMetadataEditor) error {
 	r1, _, _ := syscall.SyscallN(procWMCreateEditor.Addr(), uintptr(unsafe.Pointer(ppEditor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WMCreateIndexer calls WMVCore!WMCreateIndexer.
@@ -52,7 +52,7 @@ func WMCreateEditor(ppEditor **IWMMetadataEditor) error {
 // Minimum OS: windows5.0.
 func WMCreateIndexer(ppIndexer **IWMIndexer) error {
 	r1, _, _ := syscall.SyscallN(procWMCreateIndexer.Addr(), uintptr(unsafe.Pointer(ppIndexer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WMCreateProfileManager calls WMVCore!WMCreateProfileManager.
@@ -60,7 +60,7 @@ func WMCreateIndexer(ppIndexer **IWMIndexer) error {
 // Minimum OS: windows5.0.
 func WMCreateProfileManager(ppProfileManager **IWMProfileManager) error {
 	r1, _, _ := syscall.SyscallN(procWMCreateProfileManager.Addr(), uintptr(unsafe.Pointer(ppProfileManager)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WMCreateReader calls WMVCore!WMCreateReader.
@@ -68,7 +68,7 @@ func WMCreateProfileManager(ppProfileManager **IWMProfileManager) error {
 // Minimum OS: windows5.0.
 func WMCreateReader(pUnkCert *systemcom.IUnknown, dwRights uint32, ppReader **IWMReader) error {
 	r1, _, _ := syscall.SyscallN(procWMCreateReader.Addr(), uintptr(unsafe.Pointer(pUnkCert)), uintptr(dwRights), uintptr(unsafe.Pointer(ppReader)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WMCreateSyncReader calls WMVCore!WMCreateSyncReader.
@@ -76,7 +76,7 @@ func WMCreateReader(pUnkCert *systemcom.IUnknown, dwRights uint32, ppReader **IW
 // Minimum OS: windows5.0.
 func WMCreateSyncReader(pUnkCert *systemcom.IUnknown, dwRights uint32, ppSyncReader **IWMSyncReader) error {
 	r1, _, _ := syscall.SyscallN(procWMCreateSyncReader.Addr(), uintptr(unsafe.Pointer(pUnkCert)), uintptr(dwRights), uintptr(unsafe.Pointer(ppSyncReader)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WMCreateWriter calls WMVCore!WMCreateWriter.
@@ -84,7 +84,7 @@ func WMCreateSyncReader(pUnkCert *systemcom.IUnknown, dwRights uint32, ppSyncRea
 // Minimum OS: windows5.0.
 func WMCreateWriter(pUnkCert *systemcom.IUnknown, ppWriter **IWMWriter) error {
 	r1, _, _ := syscall.SyscallN(procWMCreateWriter.Addr(), uintptr(unsafe.Pointer(pUnkCert)), uintptr(unsafe.Pointer(ppWriter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WMCreateWriterFileSink calls WMVCore!WMCreateWriterFileSink.
@@ -92,7 +92,7 @@ func WMCreateWriter(pUnkCert *systemcom.IUnknown, ppWriter **IWMWriter) error {
 // Minimum OS: windows5.0.
 func WMCreateWriterFileSink(ppSink **IWMWriterFileSink) error {
 	r1, _, _ := syscall.SyscallN(procWMCreateWriterFileSink.Addr(), uintptr(unsafe.Pointer(ppSink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WMCreateWriterNetworkSink calls WMVCore!WMCreateWriterNetworkSink.
@@ -100,7 +100,7 @@ func WMCreateWriterFileSink(ppSink **IWMWriterFileSink) error {
 // Minimum OS: windows5.0.
 func WMCreateWriterNetworkSink(ppSink **IWMWriterNetworkSink) error {
 	r1, _, _ := syscall.SyscallN(procWMCreateWriterNetworkSink.Addr(), uintptr(unsafe.Pointer(ppSink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WMCreateWriterPushSink calls WMVCore!WMCreateWriterPushSink.
@@ -108,7 +108,7 @@ func WMCreateWriterNetworkSink(ppSink **IWMWriterNetworkSink) error {
 // Minimum OS: windows5.0.
 func WMCreateWriterPushSink(ppSink **IWMWriterPushSink) error {
 	r1, _, _ := syscall.SyscallN(procWMCreateWriterPushSink.Addr(), uintptr(unsafe.Pointer(ppSink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WMIsContentProtected calls WMVCore!WMIsContentProtected.
@@ -117,5 +117,5 @@ func WMCreateWriterPushSink(ppSink **IWMWriterPushSink) error {
 func WMIsContentProtected(pwszFileName string, pfIsProtected *foundation.BOOL) error {
 	_pwszFileName := win32.UTF16Ptr(pwszFileName)
 	r1, _, _ := syscall.SyscallN(procWMIsContentProtected.Addr(), uintptr(unsafe.Pointer(_pwszFileName)), uintptr(unsafe.Pointer(pfIsProtected)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

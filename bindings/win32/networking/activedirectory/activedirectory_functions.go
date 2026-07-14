@@ -193,7 +193,7 @@ var (
 // Minimum OS: windows6.0.6000.
 func ADsBuildEnumerator(pADsContainer *IADsContainer, ppEnumVariant **systemole.IEnumVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procADsBuildEnumerator.Addr(), uintptr(unsafe.Pointer(pADsContainer)), uintptr(unsafe.Pointer(ppEnumVariant)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ADsBuildVarArrayInt calls ACTIVEDS!ADsBuildVarArrayInt.
@@ -201,7 +201,7 @@ func ADsBuildEnumerator(pADsContainer *IADsContainer, ppEnumVariant **systemole.
 // Minimum OS: windows6.0.6000.
 func ADsBuildVarArrayInt(lpdwObjectTypes *uint32, dwObjectTypes uint32, pVar *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(procADsBuildVarArrayInt.Addr(), uintptr(unsafe.Pointer(lpdwObjectTypes)), uintptr(dwObjectTypes), uintptr(unsafe.Pointer(pVar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ADsBuildVarArrayStr calls ACTIVEDS!ADsBuildVarArrayStr.
@@ -213,14 +213,14 @@ func ADsBuildVarArrayStr(lppPathNames []foundation.PWSTR, pVar *systemvariant.VA
 		_lppPathNames = &lppPathNames[0]
 	}
 	r1, _, _ := syscall.SyscallN(procADsBuildVarArrayStr.Addr(), uintptr(unsafe.Pointer(_lppPathNames)), uintptr(len(lppPathNames)), uintptr(unsafe.Pointer(pVar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ADsDecodeBinaryData calls ACTIVEDS!ADsDecodeBinaryData.
 func ADsDecodeBinaryData(szSrcData string, ppbDestData **byte, pdwDestLen *uint32) error {
 	_szSrcData := win32.UTF16Ptr(szSrcData)
 	r1, _, _ := syscall.SyscallN(procADsDecodeBinaryData.Addr(), uintptr(unsafe.Pointer(_szSrcData)), uintptr(unsafe.Pointer(ppbDestData)), uintptr(unsafe.Pointer(pdwDestLen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ADsEncodeBinaryData calls ACTIVEDS!ADsEncodeBinaryData.
@@ -228,7 +228,7 @@ func ADsDecodeBinaryData(szSrcData string, ppbDestData **byte, pdwDestLen *uint3
 // Minimum OS: windows6.0.6000.
 func ADsEncodeBinaryData(pbSrcData *byte, dwSrcLen uint32, ppszDestData *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procADsEncodeBinaryData.Addr(), uintptr(unsafe.Pointer(pbSrcData)), uintptr(dwSrcLen), uintptr(unsafe.Pointer(ppszDestData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ADsEnumerateNext calls ACTIVEDS!ADsEnumerateNext.
@@ -236,7 +236,7 @@ func ADsEncodeBinaryData(pbSrcData *byte, dwSrcLen uint32, ppszDestData *foundat
 // Minimum OS: windows6.0.6000.
 func ADsEnumerateNext(pEnumVariant *systemole.IEnumVARIANT, cElements uint32, pvar *systemvariant.VARIANT, pcElementsFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(procADsEnumerateNext.Addr(), uintptr(unsafe.Pointer(pEnumVariant)), uintptr(cElements), uintptr(unsafe.Pointer(pvar)), uintptr(unsafe.Pointer(pcElementsFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ADsFreeEnumerator calls ACTIVEDS!ADsFreeEnumerator.
@@ -244,7 +244,7 @@ func ADsEnumerateNext(pEnumVariant *systemole.IEnumVARIANT, cElements uint32, pv
 // Minimum OS: windows6.0.6000.
 func ADsFreeEnumerator(pEnumVariant *systemole.IEnumVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procADsFreeEnumerator.Addr(), uintptr(unsafe.Pointer(pEnumVariant)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ADsGetLastError calls ACTIVEDS!ADsGetLastError.
@@ -252,7 +252,7 @@ func ADsFreeEnumerator(pEnumVariant *systemole.IEnumVARIANT) error {
 // Minimum OS: windows6.0.6000.
 func ADsGetLastError(lpError *uint32, lpErrorBuf foundation.PWSTR, dwErrorBufLen uint32, lpNameBuf foundation.PWSTR, dwNameBufLen uint32) error {
 	r1, _, _ := syscall.SyscallN(procADsGetLastError.Addr(), uintptr(unsafe.Pointer(lpError)), uintptr(unsafe.Pointer(lpErrorBuf)), uintptr(dwErrorBufLen), uintptr(unsafe.Pointer(lpNameBuf)), uintptr(dwNameBufLen))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ADsGetObject calls ACTIVEDS!ADsGetObject.
@@ -261,7 +261,7 @@ func ADsGetLastError(lpError *uint32, lpErrorBuf foundation.PWSTR, dwErrorBufLen
 func ADsGetObject(lpszPathName string, riid *win32.GUID, ppObject **win32.IUnknown) error {
 	_lpszPathName := win32.UTF16Ptr(lpszPathName)
 	r1, _, _ := syscall.SyscallN(procADsGetObject.Addr(), uintptr(unsafe.Pointer(_lpszPathName)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ADsOpenObject calls ACTIVEDS!ADsOpenObject.
@@ -272,7 +272,7 @@ func ADsOpenObject(lpszPathName string, lpszUserName string, lpszPassword string
 	_lpszUserName := win32.UTF16Ptr(lpszUserName)
 	_lpszPassword := win32.UTF16Ptr(lpszPassword)
 	r1, _, _ := syscall.SyscallN(procADsOpenObject.Addr(), uintptr(unsafe.Pointer(_lpszPathName)), uintptr(unsafe.Pointer(_lpszUserName)), uintptr(unsafe.Pointer(_lpszPassword)), uintptr(dwReserved), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ADsPropCheckIfWritable calls dsprop!ADsPropCheckIfWritable.
@@ -290,7 +290,7 @@ func ADsPropCheckIfWritable(pwzAttr string, pWritableAttrs *ADS_ATTR_INFO) bool 
 func ADsPropCreateNotifyObj(pAppThdDataObj *systemcom.IDataObject, pwzADsObjName string, phNotifyObj *foundation.HWND) error {
 	_pwzADsObjName := win32.UTF16Ptr(pwzADsObjName)
 	r1, _, _ := syscall.SyscallN(procADsPropCreateNotifyObj.Addr(), uintptr(unsafe.Pointer(pAppThdDataObj)), uintptr(unsafe.Pointer(_pwzADsObjName)), uintptr(unsafe.Pointer(phNotifyObj)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ADsPropGetInitInfo calls dsprop!ADsPropGetInitInfo.
@@ -350,7 +350,7 @@ func AdsFreeAdsValues(pAdsValues *ADSVALUE, dwNumValues uint32) {
 // AdsTypeToPropVariant calls ACTIVEDS!AdsTypeToPropVariant.
 func AdsTypeToPropVariant(pAdsValues *ADSVALUE, dwNumValues uint32, pVariant *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(procAdsTypeToPropVariant.Addr(), uintptr(unsafe.Pointer(pAdsValues)), uintptr(dwNumValues), uintptr(unsafe.Pointer(pVariant)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AllocADsMem calls ACTIVEDS!AllocADsMem.
@@ -378,7 +378,7 @@ func BinarySDToSecurityDescriptor(pSecurityDescriptor security.PSECURITY_DESCRIP
 	_userName := win32.UTF16Ptr(userName)
 	_passWord := win32.UTF16Ptr(passWord)
 	r1, _, _ := syscall.SyscallN(procBinarySDToSecurityDescriptor.Addr(), uintptr(pSecurityDescriptor), uintptr(unsafe.Pointer(pVarsec)), uintptr(unsafe.Pointer(_pszServerName)), uintptr(unsafe.Pointer(_userName)), uintptr(unsafe.Pointer(_passWord)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DsAddSidHistory calls NTDSAPI!DsAddSidHistoryW.
@@ -908,7 +908,7 @@ func DsGetForestTrustInformationW(ServerName string, TrustedDomainName string, F
 func DsGetFriendlyClassName(pszObjectClass string, pszBuffer foundation.PWSTR, cchBuffer uint32) error {
 	_pszObjectClass := win32.UTF16Ptr(pszObjectClass)
 	r1, _, _ := syscall.SyscallN(procDsGetFriendlyClassName.Addr(), uintptr(unsafe.Pointer(_pszObjectClass)), uintptr(unsafe.Pointer(pszBuffer)), uintptr(cchBuffer))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DsGetIcon calls dsuiext!DsGetIcon.
@@ -1563,7 +1563,7 @@ func FreeADsStr(pStr string) bool {
 // PropVariantToAdsType calls ACTIVEDS!PropVariantToAdsType.
 func PropVariantToAdsType(pVariant *systemvariant.VARIANT, dwNumVariant uint32, ppAdsValues **ADSVALUE, pdwNumValues *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToAdsType.Addr(), uintptr(unsafe.Pointer(pVariant)), uintptr(dwNumVariant), uintptr(unsafe.Pointer(ppAdsValues)), uintptr(unsafe.Pointer(pdwNumValues)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReallocADsMem calls ACTIVEDS!ReallocADsMem.

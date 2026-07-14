@@ -23,5 +23,5 @@ var (
 // https://learn.microsoft.com/windows/win32/dxcore/dxcore/nf-dxcore-dxcorecreateadapterfactory
 func DXCoreCreateAdapterFactory(riid *win32.GUID, ppvFactory **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procDXCoreCreateAdapterFactory.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvFactory)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

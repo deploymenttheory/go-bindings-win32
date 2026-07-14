@@ -24,11 +24,11 @@ var (
 // MLCreateOperatorRegistry calls windows.ai.machinelearning!MLCreateOperatorRegistry.
 func MLCreateOperatorRegistry(registry **IMLOperatorRegistry) error {
 	r1, _, _ := syscall.SyscallN(procMLCreateOperatorRegistry.Addr(), uintptr(unsafe.Pointer(registry)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WinMLCreateRuntime calls winml!WinMLCreateRuntime.
 func WinMLCreateRuntime(runtime **IWinMLRuntime) error {
 	r1, _, _ := syscall.SyscallN(procWinMLCreateRuntime.Addr(), uintptr(unsafe.Pointer(runtime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

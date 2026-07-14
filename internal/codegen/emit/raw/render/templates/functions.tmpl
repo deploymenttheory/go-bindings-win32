@@ -48,13 +48,13 @@ func {{.GoName}}({{.ParamStr}}){{with .ReturnSig}} {{.}}{{end}} {
 	return {{.RetExpr}}, nil
 {{- else if eq .ReturnKind 5}}
 	r1, _, _ := syscall.SyscallN({{.ProcVar}}.Addr(){{range .ArgExprs}}, {{.}}{{end}})
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 {{- else if eq .ReturnKind 6}}
 	r1, _, _ := syscall.SyscallN({{.ProcVar}}.Addr(){{range .ArgExprs}}, {{.}}{{end}})
 	return r1 != 0
 {{- else if eq .ReturnKind 7}}
 	r1, _, _ := syscall.SyscallN({{.ProcVar}}.Addr(){{range .ArgExprs}}, {{.}}{{end}})
-	return {{range .ReturnValues}}{{.}}, {{end}}win32.HRESULTError(int32(r1))
+	return {{range .ReturnValues}}{{.}}, {{end}}win32.ErrIfFailed(int32(r1))
 {{- else if eq .ReturnKind 8}}
 	r1, _, e1 := syscall.SyscallN({{.ProcVar}}.Addr(){{range .ArgExprs}}, {{.}}{{end}})
 	if r1 == 0 {

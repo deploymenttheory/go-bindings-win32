@@ -1585,7 +1585,7 @@ func MsiGetFileHashA(szFilePath foundation.PSTR, dwOptions uint32, pHash *MSIFIL
 func MsiGetFileSignatureInformation(szSignedObjectPath string, dwFlags uint32, ppcCertContext **securitycryptography.CERT_CONTEXT, pbHashData *byte, pcbHashData *uint32) error {
 	_szSignedObjectPath := win32.UTF16Ptr(szSignedObjectPath)
 	r1, _, _ := syscall.SyscallN(procMsiGetFileSignatureInformation.Addr(), uintptr(unsafe.Pointer(_szSignedObjectPath)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppcCertContext)), uintptr(unsafe.Pointer(pbHashData)), uintptr(unsafe.Pointer(pcbHashData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MsiGetFileSignatureInformationA calls msi!MsiGetFileSignatureInformationA.
@@ -1593,7 +1593,7 @@ func MsiGetFileSignatureInformation(szSignedObjectPath string, dwFlags uint32, p
 // Minimum OS: windows8.0.
 func MsiGetFileSignatureInformationA(szSignedObjectPath foundation.PSTR, dwFlags uint32, ppcCertContext **securitycryptography.CERT_CONTEXT, pbHashData *byte, pcbHashData *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMsiGetFileSignatureInformationA.Addr(), uintptr(unsafe.Pointer(szSignedObjectPath)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppcCertContext)), uintptr(unsafe.Pointer(pbHashData)), uintptr(unsafe.Pointer(pcbHashData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MsiGetFileVersion calls msi!MsiGetFileVersionW.

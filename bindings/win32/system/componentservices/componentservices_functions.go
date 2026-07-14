@@ -35,7 +35,7 @@ var (
 // Minimum OS: windows5.1.2600.
 func CoCreateActivity(pIUnknown *systemcom.IUnknown, riid *win32.GUID, ppObj **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCoCreateActivity.Addr(), uintptr(unsafe.Pointer(pIUnknown)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppObj)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoEnterServiceDomain calls comsvcs!CoEnterServiceDomain.
@@ -43,7 +43,7 @@ func CoCreateActivity(pIUnknown *systemcom.IUnknown, riid *win32.GUID, ppObj **w
 // Minimum OS: windows5.1.2600.
 func CoEnterServiceDomain(pConfigObject *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCoEnterServiceDomain.Addr(), uintptr(unsafe.Pointer(pConfigObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoGetDefaultContext calls OLE32!CoGetDefaultContext.
@@ -51,7 +51,7 @@ func CoEnterServiceDomain(pConfigObject *systemcom.IUnknown) error {
 // Minimum OS: windows5.1.2600.
 func CoGetDefaultContext(aptType systemcom.APTTYPE, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCoGetDefaultContext.Addr(), uintptr(aptType), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoLeaveServiceDomain calls comsvcs!CoLeaveServiceDomain.
@@ -66,7 +66,7 @@ func CoLeaveServiceDomain(pUnkStatus *systemcom.IUnknown) {
 // Minimum OS: windows5.0.
 func GetDispenserManager(param0 **IDispenserManager) error {
 	r1, _, _ := syscall.SyscallN(procGetDispenserManager.Addr(), uintptr(unsafe.Pointer(param0)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetManagedExtensions calls comsvcs!GetManagedExtensions.
@@ -74,7 +74,7 @@ func GetDispenserManager(param0 **IDispenserManager) error {
 // Minimum OS: windows5.1.2600.
 func GetManagedExtensions(dwExts *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetManagedExtensions.Addr(), uintptr(unsafe.Pointer(dwExts)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MTSCreateActivity calls comsvcs!MTSCreateActivity.
@@ -82,7 +82,7 @@ func GetManagedExtensions(dwExts *uint32) error {
 // Minimum OS: windows5.0.
 func MTSCreateActivity(riid *win32.GUID, ppobj **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procMTSCreateActivity.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppobj)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RecycleSurrogate calls comsvcs!RecycleSurrogate.
@@ -90,7 +90,7 @@ func MTSCreateActivity(riid *win32.GUID, ppobj **win32.IUnknown) error {
 // Minimum OS: windows5.0.
 func RecycleSurrogate(lReasonCode int32) error {
 	r1, _, _ := syscall.SyscallN(procRecycleSurrogate.Addr(), uintptr(lReasonCode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SafeRef calls comsvcs!SafeRef.

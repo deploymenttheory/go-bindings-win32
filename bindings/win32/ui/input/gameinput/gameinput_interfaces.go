@@ -30,43 +30,43 @@ func (self *IGameInput) GetCurrentTimestamp() uint64 {
 // GetCurrentReading dispatches through IGameInput's vtable slot 4.
 func (self *IGameInput) GetCurrentReading(inputKind GameInputKind, device *IGameInputDevice, reading **IGameInputReading) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(inputKind), uintptr(unsafe.Pointer(device)), uintptr(unsafe.Pointer(reading)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNextReading dispatches through IGameInput's vtable slot 5.
 func (self *IGameInput) GetNextReading(referenceReading *IGameInputReading, inputKind GameInputKind, device *IGameInputDevice, reading **IGameInputReading) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(referenceReading)), uintptr(inputKind), uintptr(unsafe.Pointer(device)), uintptr(unsafe.Pointer(reading)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPreviousReading dispatches through IGameInput's vtable slot 6.
 func (self *IGameInput) GetPreviousReading(referenceReading *IGameInputReading, inputKind GameInputKind, device *IGameInputDevice, reading **IGameInputReading) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(referenceReading)), uintptr(inputKind), uintptr(unsafe.Pointer(device)), uintptr(unsafe.Pointer(reading)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTemporalReading dispatches through IGameInput's vtable slot 7.
 func (self *IGameInput) GetTemporalReading(timestamp uint64, device *IGameInputDevice, reading **IGameInputReading) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(timestamp), uintptr(unsafe.Pointer(device)), uintptr(unsafe.Pointer(reading)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterDeviceCallback dispatches through IGameInput's vtable slot 9.
 func (self *IGameInput) RegisterDeviceCallback(device *IGameInputDevice, inputKind GameInputKind, statusFilter GameInputDeviceStatus, enumerationKind GameInputEnumerationKind, context unsafe.Pointer, callbackFunc GameInputDeviceCallback, callbackToken *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(device)), uintptr(inputKind), uintptr(statusFilter), uintptr(enumerationKind), uintptr(unsafe.Pointer(context)), uintptr(callbackFunc), uintptr(unsafe.Pointer(callbackToken)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterSystemButtonCallback dispatches through IGameInput's vtable slot 10.
 func (self *IGameInput) RegisterSystemButtonCallback(device *IGameInputDevice, buttonFilter GameInputSystemButtons, context unsafe.Pointer, callbackFunc GameInputSystemButtonCallback, callbackToken *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(device)), uintptr(buttonFilter), uintptr(unsafe.Pointer(context)), uintptr(callbackFunc), uintptr(unsafe.Pointer(callbackToken)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterKeyboardLayoutCallback dispatches through IGameInput's vtable slot 11.
 func (self *IGameInput) RegisterKeyboardLayoutCallback(device *IGameInputDevice, context unsafe.Pointer, callbackFunc GameInputKeyboardLayoutCallback, callbackToken *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(device)), uintptr(unsafe.Pointer(context)), uintptr(callbackFunc), uintptr(unsafe.Pointer(callbackToken)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StopCallback dispatches through IGameInput's vtable slot 12.
@@ -77,44 +77,44 @@ func (self *IGameInput) StopCallback(callbackToken uint64) {
 // CreateDispatcher dispatches through IGameInput's vtable slot 14.
 func (self *IGameInput) CreateDispatcher(dispatcher **IGameInputDispatcher) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dispatcher)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateAggregateDevice dispatches through IGameInput's vtable slot 15.
 func (self *IGameInput) CreateAggregateDevice(inputKind GameInputKind, device **IGameInputDevice) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(inputKind), uintptr(unsafe.Pointer(device)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FindDeviceFromId dispatches through IGameInput's vtable slot 16.
 func (self *IGameInput) FindDeviceFromId(value *foundation.APP_LOCAL_DEVICE_ID, device **IGameInputDevice) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(device)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FindDeviceFromObject dispatches through IGameInput's vtable slot 17.
 func (self *IGameInput) FindDeviceFromObject(value *systemcom.IUnknown, device **IGameInputDevice) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(device)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FindDeviceFromPlatformHandle dispatches through IGameInput's vtable slot 18.
 func (self *IGameInput) FindDeviceFromPlatformHandle(value foundation.HANDLE, device **IGameInputDevice) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(value), uintptr(unsafe.Pointer(device)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FindDeviceFromPlatformString dispatches through IGameInput's vtable slot 19.
 func (self *IGameInput) FindDeviceFromPlatformString(value string, device **IGameInputDevice) error {
 	_value := win32.UTF16Ptr(value)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_value)), uintptr(unsafe.Pointer(device)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnableOemDeviceSupport dispatches through IGameInput's vtable slot 20.
 func (self *IGameInput) EnableOemDeviceSupport(vendorId uint16, productId uint16, interfaceNumber byte, collectionNumber byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(vendorId), uintptr(productId), uintptr(interfaceNumber), uintptr(collectionNumber))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetFocusPolicy dispatches through IGameInput's vtable slot 21.
@@ -150,13 +150,13 @@ func (self *IGameInputDevice) GetBatteryState(state *GameInputBatteryState) {
 // CreateForceFeedbackEffect dispatches through IGameInputDevice's vtable slot 6.
 func (self *IGameInputDevice) CreateForceFeedbackEffect(motorIndex uint32, params *GameInputForceFeedbackParams, effect **IGameInputForceFeedbackEffect) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(motorIndex), uintptr(unsafe.Pointer(params)), uintptr(unsafe.Pointer(effect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetHapticMotorState dispatches through IGameInputDevice's vtable slot 9.
 func (self *IGameInputDevice) SetHapticMotorState(motorIndex uint32, params *GameInputHapticFeedbackParams) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(motorIndex), uintptr(unsafe.Pointer(params)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetRumbleState dispatches through IGameInputDevice's vtable slot 10.
@@ -182,31 +182,31 @@ func (self *IGameInputDevice) PowerOff() {
 // CreateRawDeviceReport dispatches through IGameInputDevice's vtable slot 14.
 func (self *IGameInputDevice) CreateRawDeviceReport(reportId uint32, reportKind GameInputRawDeviceReportKind, report **IGameInputRawDeviceReport) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(reportId), uintptr(reportKind), uintptr(unsafe.Pointer(report)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRawDeviceFeature dispatches through IGameInputDevice's vtable slot 15.
 func (self *IGameInputDevice) GetRawDeviceFeature(reportId uint32, report **IGameInputRawDeviceReport) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(reportId), uintptr(unsafe.Pointer(report)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetRawDeviceFeature dispatches through IGameInputDevice's vtable slot 16.
 func (self *IGameInputDevice) SetRawDeviceFeature(report *IGameInputRawDeviceReport) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(report)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendRawDeviceOutput dispatches through IGameInputDevice's vtable slot 17.
 func (self *IGameInputDevice) SendRawDeviceOutput(report *IGameInputRawDeviceReport) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(report)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendRawDeviceOutputWithResponse dispatches through IGameInputDevice's vtable slot 18.
 func (self *IGameInputDevice) SendRawDeviceOutputWithResponse(requestReport *IGameInputRawDeviceReport, responseReport **IGameInputRawDeviceReport) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(requestReport)), uintptr(unsafe.Pointer(responseReport)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExecuteRawDeviceIoControl dispatches through IGameInputDevice's vtable slot 19.
@@ -220,7 +220,7 @@ func (self *IGameInputDevice) ExecuteRawDeviceIoControl(controlCode uint32, inpu
 		_outputBuffer = &outputBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(controlCode), uintptr(len(inputBuffer)), uintptr(unsafe.Pointer(_inputBuffer)), uintptr(len(outputBuffer)), uintptr(unsafe.Pointer(_outputBuffer)), uintptr(unsafe.Pointer(outputSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReleaseExclusiveRawDeviceAccess dispatches through IGameInputDevice's vtable slot 21.
@@ -239,7 +239,7 @@ var IID_IGameInputDispatcher = win32.GUID{Data1: 0x415eed2e, Data2: 0x98cb, Data
 // OpenWaitHandle dispatches through IGameInputDispatcher's vtable slot 4.
 func (self *IGameInputDispatcher) OpenWaitHandle(waitHandle *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(waitHandle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 51bda05e-f742-45d9-b085-9444ae48381d

@@ -25,43 +25,43 @@ var IID_ISensLogon = win32.GUID{Data1: 0xd597bab3, Data2: 0x5b9f, Data3: 0x11d1,
 // Logon dispatches through ISensLogon's vtable slot 7.
 func (self *ISensLogon) Logon(bstrUserName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUserName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Logoff dispatches through ISensLogon's vtable slot 8.
 func (self *ISensLogon) Logoff(bstrUserName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUserName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StartShell dispatches through ISensLogon's vtable slot 9.
 func (self *ISensLogon) StartShell(bstrUserName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUserName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DisplayLock dispatches through ISensLogon's vtable slot 10.
 func (self *ISensLogon) DisplayLock(bstrUserName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUserName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DisplayUnlock dispatches through ISensLogon's vtable slot 11.
 func (self *ISensLogon) DisplayUnlock(bstrUserName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUserName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StartScreenSaver dispatches through ISensLogon's vtable slot 12.
 func (self *ISensLogon) StartScreenSaver(bstrUserName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUserName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StopScreenSaver dispatches through ISensLogon's vtable slot 13.
 func (self *ISensLogon) StopScreenSaver(bstrUserName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUserName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISensLogon2: https://learn.microsoft.com/windows/win32/api/sensevts/nn-sensevts-isenslogon2
@@ -76,31 +76,31 @@ var IID_ISensLogon2 = win32.GUID{Data1: 0xd597bab4, Data2: 0x5b9f, Data3: 0x11d1
 // Logon dispatches through ISensLogon2's vtable slot 7.
 func (self *ISensLogon2) Logon(bstrUserName foundation.BSTR, dwSessionId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUserName)), uintptr(dwSessionId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Logoff dispatches through ISensLogon2's vtable slot 8.
 func (self *ISensLogon2) Logoff(bstrUserName foundation.BSTR, dwSessionId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUserName)), uintptr(dwSessionId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SessionDisconnect dispatches through ISensLogon2's vtable slot 9.
 func (self *ISensLogon2) SessionDisconnect(bstrUserName foundation.BSTR, dwSessionId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUserName)), uintptr(dwSessionId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SessionReconnect dispatches through ISensLogon2's vtable slot 10.
 func (self *ISensLogon2) SessionReconnect(bstrUserName foundation.BSTR, dwSessionId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUserName)), uintptr(dwSessionId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PostShell dispatches through ISensLogon2's vtable slot 11.
 func (self *ISensLogon2) PostShell(bstrUserName foundation.BSTR, dwSessionId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUserName)), uintptr(dwSessionId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISensNetwork: https://learn.microsoft.com/windows/win32/api/sensevts/nn-sensevts-isensnetwork
@@ -115,31 +115,31 @@ var IID_ISensNetwork = win32.GUID{Data1: 0xd597bab1, Data2: 0x5b9f, Data3: 0x11d
 // ConnectionMade dispatches through ISensNetwork's vtable slot 7.
 func (self *ISensNetwork) ConnectionMade(bstrConnection foundation.BSTR, ulType uint32, lpQOCInfo *SENS_QOCINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrConnection)), uintptr(ulType), uintptr(unsafe.Pointer(lpQOCInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ConnectionMadeNoQOCInfo dispatches through ISensNetwork's vtable slot 8.
 func (self *ISensNetwork) ConnectionMadeNoQOCInfo(bstrConnection foundation.BSTR, ulType uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrConnection)), uintptr(ulType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ConnectionLost dispatches through ISensNetwork's vtable slot 9.
 func (self *ISensNetwork) ConnectionLost(bstrConnection foundation.BSTR, ulType SENS_CONNECTION_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrConnection)), uintptr(ulType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DestinationReachable dispatches through ISensNetwork's vtable slot 10.
 func (self *ISensNetwork) DestinationReachable(bstrDestination foundation.BSTR, bstrConnection foundation.BSTR, ulType uint32, lpQOCInfo *SENS_QOCINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDestination)), uintptr(unsafe.Pointer(bstrConnection)), uintptr(ulType), uintptr(unsafe.Pointer(lpQOCInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DestinationReachableNoQOCInfo dispatches through ISensNetwork's vtable slot 11.
 func (self *ISensNetwork) DestinationReachableNoQOCInfo(bstrDestination foundation.BSTR, bstrConnection foundation.BSTR, ulType uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDestination)), uintptr(unsafe.Pointer(bstrConnection)), uintptr(ulType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISensOnNow: https://learn.microsoft.com/windows/win32/api/sensevts/nn-sensevts-isensonnow
@@ -154,17 +154,17 @@ var IID_ISensOnNow = win32.GUID{Data1: 0xd597bab2, Data2: 0x5b9f, Data3: 0x11d1,
 // OnACPower dispatches through ISensOnNow's vtable slot 7.
 func (self *ISensOnNow) OnACPower() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnBatteryPower dispatches through ISensOnNow's vtable slot 8.
 func (self *ISensOnNow) OnBatteryPower(dwBatteryLifePercent uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwBatteryLifePercent))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BatteryLow dispatches through ISensOnNow's vtable slot 9.
 func (self *ISensOnNow) BatteryLow(dwBatteryLifePercent uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwBatteryLifePercent))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

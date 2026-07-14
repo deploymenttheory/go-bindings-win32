@@ -28,25 +28,25 @@ var IID_IADesktopP2 = win32.GUID{Data1: 0xb22754e2, Data2: 0x4574, Data3: 0x11d1
 // ReReadWallpaper dispatches through IADesktopP2's vtable slot 3.
 func (self *IADesktopP2) ReReadWallpaper() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetADObjectFlags dispatches through IADesktopP2's vtable slot 4.
 func (self *IADesktopP2) GetADObjectFlags(pdwFlags *uint32, dwMask uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)), uintptr(dwMask))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UpdateAllDesktopSubscriptions dispatches through IADesktopP2's vtable slot 5.
 func (self *IADesktopP2) UpdateAllDesktopSubscriptions() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MakeDynamicChanges dispatches through IADesktopP2's vtable slot 6.
 func (self *IADesktopP2) MakeDynamicChanges(pOleObj *systemole.IOleObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOleObj)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IActiveDesktopP: https://learn.microsoft.com/windows/win32/api/shlobj/nn-shlobj-iactivedesktopp
@@ -61,26 +61,26 @@ var IID_IActiveDesktopP = win32.GUID{Data1: 0x52502ee0, Data2: 0xec80, Data3: 0x
 // SetSafeMode dispatches through IActiveDesktopP's vtable slot 3.
 func (self *IActiveDesktopP) SetSafeMode(dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnsureUpdateHTML dispatches through IActiveDesktopP's vtable slot 4.
 func (self *IActiveDesktopP) EnsureUpdateHTML() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetScheme dispatches through IActiveDesktopP's vtable slot 5.
 func (self *IActiveDesktopP) SetScheme(pwszSchemeName string, dwFlags uint32) error {
 	_pwszSchemeName := win32.UTF16Ptr(pwszSchemeName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszSchemeName)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetScheme dispatches through IActiveDesktopP's vtable slot 6.
 func (self *IActiveDesktopP) GetScheme(pwszSchemeName foundation.PWSTR, pdwcchBuffer *uint32, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszSchemeName)), uintptr(unsafe.Pointer(pdwcchBuffer)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 99180164-da16-101a-935c-444553540000
@@ -94,7 +94,7 @@ var IID_IBriefcaseInitiator = win32.GUID{Data1: 0x99180164, Data2: 0xda16, Data3
 // IsMonikerInBriefcase dispatches through IBriefcaseInitiator's vtable slot 3.
 func (self *IBriefcaseInitiator) IsMonikerInBriefcase(pmk *systemcom.IMoniker) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pmk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEmptyVolumeCache: https://learn.microsoft.com/windows/win32/api/emptyvc/nn-emptyvc-iemptyvolumecache
@@ -110,31 +110,31 @@ var IID_IEmptyVolumeCache = win32.GUID{Data1: 0x8fce5227, Data2: 0x04da, Data3: 
 func (self *IEmptyVolumeCache) Initialize(hkRegKey systemregistry.HKEY, pcwszVolume string, ppwszDisplayName *foundation.PWSTR, ppwszDescription *foundation.PWSTR, pdwFlags *EMPTY_VOLUME_CACHE_FLAGS) error {
 	_pcwszVolume := win32.UTF16Ptr(pcwszVolume)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hkRegKey), uintptr(unsafe.Pointer(_pcwszVolume)), uintptr(unsafe.Pointer(ppwszDisplayName)), uintptr(unsafe.Pointer(ppwszDescription)), uintptr(unsafe.Pointer(pdwFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSpaceUsed dispatches through IEmptyVolumeCache's vtable slot 4.
 func (self *IEmptyVolumeCache) GetSpaceUsed(pdwlSpaceUsed *uint64, picb *IEmptyVolumeCacheCallBack) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwlSpaceUsed)), uintptr(unsafe.Pointer(picb)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Purge dispatches through IEmptyVolumeCache's vtable slot 5.
 func (self *IEmptyVolumeCache) Purge(dwlSpaceToFree uint64, picb *IEmptyVolumeCacheCallBack) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwlSpaceToFree), uintptr(unsafe.Pointer(picb)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ShowProperties dispatches through IEmptyVolumeCache's vtable slot 6.
 func (self *IEmptyVolumeCache) ShowProperties(hwnd foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hwnd))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Deactivate dispatches through IEmptyVolumeCache's vtable slot 7.
 func (self *IEmptyVolumeCache) Deactivate(pdwFlags *EMPTY_VOLUME_CACHE_FLAGS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEmptyVolumeCache2: https://learn.microsoft.com/windows/win32/api/emptyvc/nn-emptyvc-iemptyvolumecache2
@@ -151,7 +151,7 @@ func (self *IEmptyVolumeCache2) InitializeEx(hkRegKey systemregistry.HKEY, pcwsz
 	_pcwszVolume := win32.UTF16Ptr(pcwszVolume)
 	_pcwszKeyName := win32.UTF16Ptr(pcwszKeyName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(hkRegKey), uintptr(unsafe.Pointer(_pcwszVolume)), uintptr(unsafe.Pointer(_pcwszKeyName)), uintptr(unsafe.Pointer(ppwszDisplayName)), uintptr(unsafe.Pointer(ppwszDescription)), uintptr(unsafe.Pointer(ppwszBtnText)), uintptr(unsafe.Pointer(pdwFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEmptyVolumeCacheCallBack: https://learn.microsoft.com/windows/win32/api/emptyvc/nn-emptyvc-iemptyvolumecachecallback
@@ -167,14 +167,14 @@ var IID_IEmptyVolumeCacheCallBack = win32.GUID{Data1: 0x6e793361, Data2: 0x73c6,
 func (self *IEmptyVolumeCacheCallBack) ScanProgress(dwlSpaceUsed uint64, dwFlags uint32, pcwszStatus string) error {
 	_pcwszStatus := win32.UTF16Ptr(pcwszStatus)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwlSpaceUsed), uintptr(dwFlags), uintptr(unsafe.Pointer(_pcwszStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PurgeProgress dispatches through IEmptyVolumeCacheCallBack's vtable slot 4.
 func (self *IEmptyVolumeCacheCallBack) PurgeProgress(dwlSpaceFreed uint64, dwlSpaceToFree uint64, dwFlags uint32, pcwszStatus string) error {
 	_pcwszStatus := win32.UTF16Ptr(pcwszStatus)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwlSpaceFreed), uintptr(dwlSpaceToFree), uintptr(dwFlags), uintptr(unsafe.Pointer(_pcwszStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IReconcilableObject: https://learn.microsoft.com/windows/win32/api/reconcil/nn-reconcil-ireconcilableobject
@@ -193,13 +193,13 @@ func (self *IReconcilableObject) Reconcile(pInitiator *IReconcileInitiator, dwFl
 		_rgpmkOtherInput = &rgpmkOtherInput[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInitiator)), uintptr(dwFlags), uintptr(hwndOwner), uintptr(hwndProgressFeedback), uintptr(len(rgpmkOtherInput)), uintptr(unsafe.Pointer(_rgpmkOtherInput)), uintptr(unsafe.Pointer(plOutIndex)), uintptr(unsafe.Pointer(pstgNewResidues)), 0)
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProgressFeedbackMaxEstimate dispatches through IReconcilableObject's vtable slot 4.
 func (self *IReconcilableObject) GetProgressFeedbackMaxEstimate(pulProgressMax *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulProgressMax)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IReconcileInitiator: https://learn.microsoft.com/windows/win32/lwef/ireconcileinitiator
@@ -214,11 +214,11 @@ var IID_IReconcileInitiator = win32.GUID{Data1: 0x99180161, Data2: 0xda16, Data3
 // SetAbortCallback dispatches through IReconcileInitiator's vtable slot 3.
 func (self *IReconcileInitiator) SetAbortCallback(punkForAbort *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(punkForAbort)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetProgressFeedback dispatches through IReconcileInitiator's vtable slot 4.
 func (self *IReconcileInitiator) SetProgressFeedback(ulProgress uint32, ulProgressMax uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulProgress), uintptr(ulProgressMax))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

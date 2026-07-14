@@ -30,25 +30,25 @@ func (self *IBitmapData) CopyBytesTo(sourceOffsetInBytes uint32, pvBytes []byte,
 		_pvBytes = &pvBytes[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(sourceOffsetInBytes), uintptr(len(pvBytes)), uintptr(unsafe.Pointer(_pvBytes)), uintptr(unsafe.Pointer(numberOfBytesCopied)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStride dispatches through IBitmapData's vtable slot 4.
 func (self *IBitmapData) GetStride(pStride *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStride)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBitmapDescription dispatches through IBitmapData's vtable slot 5.
 func (self *IBitmapData) GetBitmapDescription(pBitmapDescription *BitmapDescription) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBitmapDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSourceBitmapDescription dispatches through IBitmapData's vtable slot 6.
 func (self *IBitmapData) GetSourceBitmapDescription(pBitmapDescription *BitmapDescription) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBitmapDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVisualTreeService: https://learn.microsoft.com/windows/win32/api/xamlom/nn-xamlom-ivisualtreeservice
@@ -63,74 +63,74 @@ var IID_IVisualTreeService = win32.GUID{Data1: 0xa593b11a, Data2: 0xd17f, Data3:
 // AdviseVisualTreeChange dispatches through IVisualTreeService's vtable slot 3.
 func (self *IVisualTreeService) AdviseVisualTreeChange(pCallback *IVisualTreeServiceCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallback)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnadviseVisualTreeChange dispatches through IVisualTreeService's vtable slot 4.
 func (self *IVisualTreeService) UnadviseVisualTreeChange(pCallback *IVisualTreeServiceCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallback)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEnums dispatches through IVisualTreeService's vtable slot 5.
 func (self *IVisualTreeService) GetEnums(pCount *uint32, ppEnums **EnumType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)), uintptr(unsafe.Pointer(ppEnums)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateInstance dispatches through IVisualTreeService's vtable slot 6.
 func (self *IVisualTreeService) CreateInstance(typeName foundation.BSTR, value foundation.BSTR) (uint64, error) {
 	var _pInstanceHandle uint64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(typeName)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(&_pInstanceHandle)))
-	return _pInstanceHandle, win32.HRESULTError(int32(r1))
+	return _pInstanceHandle, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPropertyValuesChain dispatches through IVisualTreeService's vtable slot 7.
 func (self *IVisualTreeService) GetPropertyValuesChain(instanceHandle uint64, pSourceCount *uint32, ppPropertySources **PropertyChainSource, pPropertyCount *uint32, ppPropertyValues **PropertyChainValue) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(instanceHandle), uintptr(unsafe.Pointer(pSourceCount)), uintptr(unsafe.Pointer(ppPropertySources)), uintptr(unsafe.Pointer(pPropertyCount)), uintptr(unsafe.Pointer(ppPropertyValues)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetProperty dispatches through IVisualTreeService's vtable slot 8.
 func (self *IVisualTreeService) SetProperty(instanceHandle uint64, value uint64, propertyIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(instanceHandle), uintptr(value), uintptr(propertyIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ClearProperty dispatches through IVisualTreeService's vtable slot 9.
 func (self *IVisualTreeService) ClearProperty(instanceHandle uint64, propertyIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(instanceHandle), uintptr(propertyIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCollectionCount dispatches through IVisualTreeService's vtable slot 10.
 func (self *IVisualTreeService) GetCollectionCount(instanceHandle uint64, pCollectionSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(instanceHandle), uintptr(unsafe.Pointer(pCollectionSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCollectionElements dispatches through IVisualTreeService's vtable slot 11.
 func (self *IVisualTreeService) GetCollectionElements(instanceHandle uint64, startIndex uint32, pElementCount *uint32, ppElementValues **CollectionElementValue) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(instanceHandle), uintptr(startIndex), uintptr(unsafe.Pointer(pElementCount)), uintptr(unsafe.Pointer(ppElementValues)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddChild dispatches through IVisualTreeService's vtable slot 12.
 func (self *IVisualTreeService) AddChild(parent uint64, child uint64, index uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(parent), uintptr(child), uintptr(index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveChild dispatches through IVisualTreeService's vtable slot 13.
 func (self *IVisualTreeService) RemoveChild(parent uint64, index uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(parent), uintptr(index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ClearChildren dispatches through IVisualTreeService's vtable slot 14.
 func (self *IVisualTreeService) ClearChildren(parent uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(parent))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVisualTreeService2: https://learn.microsoft.com/windows/win32/api/xamlom/nn-xamlom-ivisualtreeservice2
@@ -146,25 +146,25 @@ var IID_IVisualTreeService2 = win32.GUID{Data1: 0x130f5136, Data2: 0xec43, Data3
 func (self *IVisualTreeService2) GetPropertyIndex(object uint64, propertyName string, pPropertyIndex *uint32) error {
 	_propertyName := win32.UTF16Ptr(propertyName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(object), uintptr(unsafe.Pointer(_propertyName)), uintptr(unsafe.Pointer(pPropertyIndex)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProperty dispatches through IVisualTreeService2's vtable slot 16.
 func (self *IVisualTreeService2) GetProperty(object uint64, propertyIndex uint32, pValue *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(object), uintptr(propertyIndex), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReplaceResource dispatches through IVisualTreeService2's vtable slot 17.
 func (self *IVisualTreeService2) ReplaceResource(resourceDictionary uint64, key uint64, newValue uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(resourceDictionary), uintptr(key), uintptr(newValue))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RenderTargetBitmap dispatches through IVisualTreeService2's vtable slot 18.
 func (self *IVisualTreeService2) RenderTargetBitmap(handle uint64, options RenderTargetBitmapOptions, maxPixelWidth uint32, maxPixelHeight uint32, ppBitmapData **IBitmapData) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(handle), uintptr(options), uintptr(maxPixelWidth), uintptr(maxPixelHeight), uintptr(unsafe.Pointer(ppBitmapData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVisualTreeService3: https://learn.microsoft.com/windows/win32/api/xamlom/nn-xamlom-ivisualtreeservice3
@@ -180,7 +180,7 @@ var IID_IVisualTreeService3 = win32.GUID{Data1: 0x0e79c6e0, Data2: 0x85a0, Data3
 func (self *IVisualTreeService3) ResolveResource(resourceContext uint64, resourceName string, resourceType ResourceType, propertyIndex uint32) error {
 	_resourceName := win32.UTF16Ptr(resourceName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(resourceContext), uintptr(unsafe.Pointer(_resourceName)), uintptr(resourceType), uintptr(propertyIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDictionaryItem dispatches through IVisualTreeService3's vtable slot 20.
@@ -188,19 +188,19 @@ func (self *IVisualTreeService3) GetDictionaryItem(dictionaryHandle uint64, reso
 	_resourceName := win32.UTF16Ptr(resourceName)
 	_resourceIsImplicitStyle := win32.Bool32(resourceIsImplicitStyle)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(dictionaryHandle), uintptr(unsafe.Pointer(_resourceName)), uintptr(_resourceIsImplicitStyle), uintptr(unsafe.Pointer(resourceHandle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddDictionaryItem dispatches through IVisualTreeService3's vtable slot 21.
 func (self *IVisualTreeService3) AddDictionaryItem(dictionaryHandle uint64, resourceKey uint64, resourceHandle uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(dictionaryHandle), uintptr(resourceKey), uintptr(resourceHandle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveDictionaryItem dispatches through IVisualTreeService3's vtable slot 22.
 func (self *IVisualTreeService3) RemoveDictionaryItem(dictionaryHandle uint64, resourceKey uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(dictionaryHandle), uintptr(resourceKey))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IVisualTreeServiceCallback: https://learn.microsoft.com/windows/win32/api/xamlom/nn-xamlom-ivisualtreeservicecallback
@@ -225,7 +225,7 @@ var IID_IVisualTreeServiceCallback2 = win32.GUID{Data1: 0xbad9eb88, Data2: 0xae7
 func (self *IVisualTreeServiceCallback2) OnElementStateChanged(element uint64, elementState VisualElementState, context string) error {
 	_context := win32.UTF16Ptr(context)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(element), uintptr(elementState), uintptr(unsafe.Pointer(_context)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXamlDiagnostics: https://learn.microsoft.com/windows/win32/api/xamlom/nn-xamlom-ixamldiagnostics
@@ -241,47 +241,47 @@ var IID_IXamlDiagnostics = win32.GUID{Data1: 0x18c9e2b6, Data2: 0x3f43, Data3: 0
 func (self *IXamlDiagnostics) GetDispatcher() (*systemwinrt.IInspectable, error) {
 	var _ppDispatcher *systemwinrt.IInspectable
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppDispatcher)))
-	return _ppDispatcher, win32.HRESULTError(int32(r1))
+	return _ppDispatcher, win32.ErrIfFailed(int32(r1))
 }
 
 // GetUiLayer dispatches through IXamlDiagnostics's vtable slot 4.
 func (self *IXamlDiagnostics) GetUiLayer() (*systemwinrt.IInspectable, error) {
 	var _ppLayer *systemwinrt.IInspectable
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppLayer)))
-	return _ppLayer, win32.HRESULTError(int32(r1))
+	return _ppLayer, win32.ErrIfFailed(int32(r1))
 }
 
 // GetApplication dispatches through IXamlDiagnostics's vtable slot 5.
 func (self *IXamlDiagnostics) GetApplication() (*systemwinrt.IInspectable, error) {
 	var _ppApplication *systemwinrt.IInspectable
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppApplication)))
-	return _ppApplication, win32.HRESULTError(int32(r1))
+	return _ppApplication, win32.ErrIfFailed(int32(r1))
 }
 
 // GetIInspectableFromHandle dispatches through IXamlDiagnostics's vtable slot 6.
 func (self *IXamlDiagnostics) GetIInspectableFromHandle(instanceHandle uint64) (*systemwinrt.IInspectable, error) {
 	var _ppInstance *systemwinrt.IInspectable
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(instanceHandle), uintptr(unsafe.Pointer(&_ppInstance)))
-	return _ppInstance, win32.HRESULTError(int32(r1))
+	return _ppInstance, win32.ErrIfFailed(int32(r1))
 }
 
 // GetHandleFromIInspectable dispatches through IXamlDiagnostics's vtable slot 7.
 func (self *IXamlDiagnostics) GetHandleFromIInspectable(pInstance *systemwinrt.IInspectable) (uint64, error) {
 	var _pHandle uint64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInstance)), uintptr(unsafe.Pointer(&_pHandle)))
-	return _pHandle, win32.HRESULTError(int32(r1))
+	return _pHandle, win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterInstance dispatches through IXamlDiagnostics's vtable slot 9.
 func (self *IXamlDiagnostics) RegisterInstance(pInstance *systemwinrt.IInspectable) (uint64, error) {
 	var _pInstanceHandle uint64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInstance)), uintptr(unsafe.Pointer(&_pInstanceHandle)))
-	return _pInstanceHandle, win32.HRESULTError(int32(r1))
+	return _pInstanceHandle, win32.ErrIfFailed(int32(r1))
 }
 
 // GetInitializationData dispatches through IXamlDiagnostics's vtable slot 10.
 func (self *IXamlDiagnostics) GetInitializationData() (foundation.BSTR, error) {
 	var _pInitializationData foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pInitializationData)))
-	return _pInitializationData, win32.HRESULTError(int32(r1))
+	return _pInitializationData, win32.ErrIfFailed(int32(r1))
 }

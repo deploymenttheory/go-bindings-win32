@@ -53,7 +53,7 @@ func (self *IDMLBindingTable) BindPersistentResource(binding *DML_BINDING_DESC) 
 // Reset dispatches through IDMLBindingTable's vtable slot 12.
 func (self *IDMLBindingTable) Reset(desc *DML_BINDING_TABLE_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(desc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDMLCommandRecorder: https://learn.microsoft.com/windows/win32/api/directml/nn-directml-idmlcommandrecorder
@@ -114,19 +114,19 @@ func (self *IDMLDevice) CheckFeatureSupport(feature DML_FEATURE, featureQueryDat
 		_featureSupportData = &featureSupportData[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(feature), uintptr(len(featureQueryData)), uintptr(unsafe.Pointer(_featureQueryData)), uintptr(len(featureSupportData)), uintptr(unsafe.Pointer(_featureSupportData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateOperator dispatches through IDMLDevice's vtable slot 8.
 func (self *IDMLDevice) CreateOperator(desc *DML_OPERATOR_DESC, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(desc)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CompileOperator dispatches through IDMLDevice's vtable slot 9.
 func (self *IDMLDevice) CompileOperator(op *IDMLOperator, flags DML_EXECUTION_FLAGS, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(op)), uintptr(flags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateOperatorInitializer dispatches through IDMLDevice's vtable slot 10.
@@ -136,19 +136,19 @@ func (self *IDMLDevice) CreateOperatorInitializer(operators []*IDMLCompiledOpera
 		_operators = &operators[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(len(operators)), uintptr(unsafe.Pointer(_operators)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateCommandRecorder dispatches through IDMLDevice's vtable slot 11.
 func (self *IDMLDevice) CreateCommandRecorder(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateBindingTable dispatches through IDMLDevice's vtable slot 12.
 func (self *IDMLDevice) CreateBindingTable(desc *DML_BINDING_TABLE_DESC, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(desc)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Evict dispatches through IDMLDevice's vtable slot 13.
@@ -158,7 +158,7 @@ func (self *IDMLDevice) Evict(ppObjects []*IDMLPageable) error {
 		_ppObjects = &ppObjects[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(len(ppObjects)), uintptr(unsafe.Pointer(_ppObjects)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MakeResident dispatches through IDMLDevice's vtable slot 14.
@@ -168,19 +168,19 @@ func (self *IDMLDevice) MakeResident(ppObjects []*IDMLPageable) error {
 		_ppObjects = &ppObjects[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(len(ppObjects)), uintptr(unsafe.Pointer(_ppObjects)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceRemovedReason dispatches through IDMLDevice's vtable slot 15.
 func (self *IDMLDevice) GetDeviceRemovedReason() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetParentDevice dispatches through IDMLDevice's vtable slot 16.
 func (self *IDMLDevice) GetParentDevice(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDMLDevice1: https://learn.microsoft.com/windows/win32/api/directml/nn-directml-idmldevice1
@@ -195,7 +195,7 @@ var IID_IDMLDevice1 = win32.GUID{Data1: 0xa0884f9a, Data2: 0xd2be, Data3: 0x4355
 // CompileGraph dispatches through IDMLDevice1's vtable slot 17.
 func (self *IDMLDevice1) CompileGraph(desc *DML_GRAPH_DESC, flags DML_EXECUTION_FLAGS, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(desc)), uintptr(flags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDMLDeviceChild: https://learn.microsoft.com/windows/win32/api/directml/nn-directml-idmldevicechild
@@ -210,7 +210,7 @@ var IID_IDMLDeviceChild = win32.GUID{Data1: 0x27e83142, Data2: 0x8165, Data3: 0x
 // GetDevice dispatches through IDMLDeviceChild's vtable slot 7.
 func (self *IDMLDeviceChild) GetDevice(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDMLDispatchable: https://learn.microsoft.com/windows/win32/api/directml/nn-directml-idmldispatchable
@@ -234,7 +234,7 @@ var IID_IDMLObject = win32.GUID{Data1: 0xc8263aac, Data2: 0x9e0c, Data3: 0x4a2d,
 // GetPrivateData dispatches through IDMLObject's vtable slot 3.
 func (self *IDMLObject) GetPrivateData(guid *win32.GUID, dataSize *uint32, data unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guid)), uintptr(unsafe.Pointer(dataSize)), uintptr(unsafe.Pointer(data)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetPrivateData dispatches through IDMLObject's vtable slot 4.
@@ -244,20 +244,20 @@ func (self *IDMLObject) SetPrivateData(guid *win32.GUID, data []byte) error {
 		_data = &data[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guid)), uintptr(len(data)), uintptr(unsafe.Pointer(_data)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetPrivateDataInterface dispatches through IDMLObject's vtable slot 5.
 func (self *IDMLObject) SetPrivateDataInterface(guid *win32.GUID, data *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guid)), uintptr(unsafe.Pointer(data)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetName dispatches through IDMLObject's vtable slot 6.
 func (self *IDMLObject) SetName(name string) error {
 	_name := win32.UTF16Ptr(name)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDMLOperator: https://learn.microsoft.com/windows/win32/api/directml/nn-directml-idmloperator
@@ -285,7 +285,7 @@ func (self *IDMLOperatorInitializer) Reset(operators []*IDMLCompiledOperator) er
 		_operators = &operators[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(len(operators)), uintptr(unsafe.Pointer(_operators)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDMLPageable: https://learn.microsoft.com/windows/win32/api/directml/nn-directml-idmlpageable

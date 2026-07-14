@@ -28,7 +28,7 @@ var IID_IAcousticEchoCancellationControl = win32.GUID{Data1: 0xf4ae25b5, Data2: 
 func (self *IAcousticEchoCancellationControl) SetEchoCancellationRenderEndpoint(endpointId string) error {
 	_endpointId := win32.UTF16Ptr(endpointId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_endpointId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IActivateAudioInterfaceAsyncOperation: https://learn.microsoft.com/windows/win32/api/mmdeviceapi/nn-mmdeviceapi-iactivateaudiointerfaceasyncoperation
@@ -43,7 +43,7 @@ var IID_IActivateAudioInterfaceAsyncOperation = win32.GUID{Data1: 0x72a22d78, Da
 // GetActivateResult dispatches through IActivateAudioInterfaceAsyncOperation's vtable slot 3.
 func (self *IActivateAudioInterfaceAsyncOperation) GetActivateResult(activateResult *foundation.HRESULT, activatedInterface **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(activateResult)), uintptr(unsafe.Pointer(activatedInterface)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IActivateAudioInterfaceCompletionHandler: https://learn.microsoft.com/windows/win32/api/mmdeviceapi/nn-mmdeviceapi-iactivateaudiointerfacecompletionhandler
@@ -58,7 +58,7 @@ var IID_IActivateAudioInterfaceCompletionHandler = win32.GUID{Data1: 0x41d949ab,
 // ActivateCompleted dispatches through IActivateAudioInterfaceCompletionHandler's vtable slot 3.
 func (self *IActivateAudioInterfaceCompletionHandler) ActivateCompleted(activateOperation *IActivateAudioInterfaceAsyncOperation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(activateOperation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 28724c91-df35-4856-9f76-d6a26413f3df
@@ -76,20 +76,20 @@ func (self *IAudioAmbisonicsControl) SetData(pAmbisonicsParams []AMBISONICS_PARA
 		_pAmbisonicsParams = &pAmbisonicsParams[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pAmbisonicsParams)), uintptr(len(pAmbisonicsParams)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetHeadTracking dispatches through IAudioAmbisonicsControl's vtable slot 4.
 func (self *IAudioAmbisonicsControl) SetHeadTracking(bEnableHeadTracking bool) error {
 	_bEnableHeadTracking := win32.Bool32(bEnableHeadTracking)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(_bEnableHeadTracking))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetHeadTracking dispatches through IAudioAmbisonicsControl's vtable slot 5.
 func (self *IAudioAmbisonicsControl) GetHeadTracking(pbEnableHeadTracking *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbEnableHeadTracking)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioAutoGainControl: https://learn.microsoft.com/windows/win32/api/devicetopology/nn-devicetopology-iaudioautogaincontrol
@@ -104,14 +104,14 @@ var IID_IAudioAutoGainControl = win32.GUID{Data1: 0x85401fd4, Data2: 0x6de4, Dat
 // GetEnabled dispatches through IAudioAutoGainControl's vtable slot 3.
 func (self *IAudioAutoGainControl) GetEnabled(pbEnabled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbEnabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetEnabled dispatches through IAudioAutoGainControl's vtable slot 4.
 func (self *IAudioAutoGainControl) SetEnabled(bEnable bool, pguidEventContext *win32.GUID) error {
 	_bEnable := win32.Bool32(bEnable)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(_bEnable), uintptr(unsafe.Pointer(pguidEventContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioBass: https://learn.microsoft.com/windows/win32/api/devicetopology/nn-devicetopology-iaudiobass
@@ -135,19 +135,19 @@ var IID_IAudioCaptureClient = win32.GUID{Data1: 0xc8adbd64, Data2: 0xe71e, Data3
 // GetBuffer dispatches through IAudioCaptureClient's vtable slot 3.
 func (self *IAudioCaptureClient) GetBuffer(ppData **byte, pNumFramesToRead *uint32, pdwFlags *uint32, pu64DevicePosition *uint64, pu64QPCPosition *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppData)), uintptr(unsafe.Pointer(pNumFramesToRead)), uintptr(unsafe.Pointer(pdwFlags)), uintptr(unsafe.Pointer(pu64DevicePosition)), uintptr(unsafe.Pointer(pu64QPCPosition)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReleaseBuffer dispatches through IAudioCaptureClient's vtable slot 4.
 func (self *IAudioCaptureClient) ReleaseBuffer(NumFramesRead uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(NumFramesRead))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNextPacketSize dispatches through IAudioCaptureClient's vtable slot 5.
 func (self *IAudioCaptureClient) GetNextPacketSize(pNumFramesInNextPacket *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNumFramesInNextPacket)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioChannelConfig: https://learn.microsoft.com/windows/win32/api/devicetopology/nn-devicetopology-iaudiochannelconfig
@@ -162,14 +162,14 @@ var IID_IAudioChannelConfig = win32.GUID{Data1: 0xbb11c46f, Data2: 0xec28, Data3
 // SetChannelConfig dispatches through IAudioChannelConfig's vtable slot 3.
 func (self *IAudioChannelConfig) SetChannelConfig(dwConfig uint32, pguidEventContext *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwConfig), uintptr(unsafe.Pointer(pguidEventContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetChannelConfig dispatches through IAudioChannelConfig's vtable slot 4.
 func (self *IAudioChannelConfig) GetChannelConfig() (uint32, error) {
 	var _pdwConfig uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pdwConfig)))
-	return _pdwConfig, win32.HRESULTError(int32(r1))
+	return _pdwConfig, win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioClient: https://learn.microsoft.com/windows/win32/api/audioclient/nn-audioclient-iaudioclient
@@ -184,73 +184,73 @@ var IID_IAudioClient = win32.GUID{Data1: 0x1cb9ad4c, Data2: 0xdbfa, Data3: 0x4c3
 // Initialize dispatches through IAudioClient's vtable slot 3.
 func (self *IAudioClient) Initialize(ShareMode AUDCLNT_SHAREMODE, StreamFlags uint32, hnsBufferDuration int64, hnsPeriodicity int64, pFormat *WAVEFORMATEX, AudioSessionGuid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ShareMode), uintptr(StreamFlags), uintptr(hnsBufferDuration), uintptr(hnsPeriodicity), uintptr(unsafe.Pointer(pFormat)), uintptr(unsafe.Pointer(AudioSessionGuid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBufferSize dispatches through IAudioClient's vtable slot 4.
 func (self *IAudioClient) GetBufferSize(pNumBufferFrames *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNumBufferFrames)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStreamLatency dispatches through IAudioClient's vtable slot 5.
 func (self *IAudioClient) GetStreamLatency(phnsLatency *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phnsLatency)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentPadding dispatches through IAudioClient's vtable slot 6.
 func (self *IAudioClient) GetCurrentPadding(pNumPaddingFrames *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNumPaddingFrames)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsFormatSupported dispatches through IAudioClient's vtable slot 7.
 func (self *IAudioClient) IsFormatSupported(ShareMode AUDCLNT_SHAREMODE, pFormat *WAVEFORMATEX, ppClosestMatch **WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(ShareMode), uintptr(unsafe.Pointer(pFormat)), uintptr(unsafe.Pointer(ppClosestMatch)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMixFormat dispatches through IAudioClient's vtable slot 8.
 func (self *IAudioClient) GetMixFormat(ppDeviceFormat **WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDeviceFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDevicePeriod dispatches through IAudioClient's vtable slot 9.
 func (self *IAudioClient) GetDevicePeriod(phnsDefaultDevicePeriod *int64, phnsMinimumDevicePeriod *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phnsDefaultDevicePeriod)), uintptr(unsafe.Pointer(phnsMinimumDevicePeriod)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Start dispatches through IAudioClient's vtable slot 10.
 func (self *IAudioClient) Start() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Stop dispatches through IAudioClient's vtable slot 11.
 func (self *IAudioClient) Stop() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IAudioClient's vtable slot 12.
 func (self *IAudioClient) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetEventHandle dispatches through IAudioClient's vtable slot 13.
 func (self *IAudioClient) SetEventHandle(eventHandle foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(eventHandle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetService dispatches through IAudioClient's vtable slot 14.
 func (self *IAudioClient) GetService(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioClient2: https://learn.microsoft.com/windows/win32/api/audioclient/nn-audioclient-iaudioclient2
@@ -265,20 +265,20 @@ var IID_IAudioClient2 = win32.GUID{Data1: 0x726778cd, Data2: 0xf60a, Data3: 0x4e
 // IsOffloadCapable dispatches through IAudioClient2's vtable slot 15.
 func (self *IAudioClient2) IsOffloadCapable(Category AUDIO_STREAM_CATEGORY, pbOffloadCapable *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(Category), uintptr(unsafe.Pointer(pbOffloadCapable)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetClientProperties dispatches through IAudioClient2's vtable slot 16.
 func (self *IAudioClient2) SetClientProperties(pProperties *AudioClientProperties) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProperties)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBufferSizeLimits dispatches through IAudioClient2's vtable slot 17.
 func (self *IAudioClient2) GetBufferSizeLimits(pFormat *WAVEFORMATEX, bEventDriven bool, phnsMinBufferDuration *int64, phnsMaxBufferDuration *int64) error {
 	_bEventDriven := win32.Bool32(bEventDriven)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFormat)), uintptr(_bEventDriven), uintptr(unsafe.Pointer(phnsMinBufferDuration)), uintptr(unsafe.Pointer(phnsMaxBufferDuration)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioClient3: https://learn.microsoft.com/windows/win32/api/audioclient/nn-audioclient-iaudioclient3
@@ -293,19 +293,19 @@ var IID_IAudioClient3 = win32.GUID{Data1: 0x7ed4ee07, Data2: 0x8e67, Data3: 0x4c
 // GetSharedModeEnginePeriod dispatches through IAudioClient3's vtable slot 18.
 func (self *IAudioClient3) GetSharedModeEnginePeriod(pFormat *WAVEFORMATEX, pDefaultPeriodInFrames *uint32, pFundamentalPeriodInFrames *uint32, pMinPeriodInFrames *uint32, pMaxPeriodInFrames *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFormat)), uintptr(unsafe.Pointer(pDefaultPeriodInFrames)), uintptr(unsafe.Pointer(pFundamentalPeriodInFrames)), uintptr(unsafe.Pointer(pMinPeriodInFrames)), uintptr(unsafe.Pointer(pMaxPeriodInFrames)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentSharedModeEnginePeriod dispatches through IAudioClient3's vtable slot 19.
 func (self *IAudioClient3) GetCurrentSharedModeEnginePeriod(ppFormat **WAVEFORMATEX, pCurrentPeriodInFrames *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFormat)), uintptr(unsafe.Pointer(pCurrentPeriodInFrames)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeSharedAudioStream dispatches through IAudioClient3's vtable slot 20.
 func (self *IAudioClient3) InitializeSharedAudioStream(StreamFlags uint32, PeriodInFrames uint32, pFormat *WAVEFORMATEX, AudioSessionGuid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(StreamFlags), uintptr(PeriodInFrames), uintptr(unsafe.Pointer(pFormat)), uintptr(unsafe.Pointer(AudioSessionGuid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioClientDuckingControl: https://learn.microsoft.com/windows/win32/api/audioclient/nn-audioclient-iaudioclientduckingcontrol
@@ -320,7 +320,7 @@ var IID_IAudioClientDuckingControl = win32.GUID{Data1: 0xc789d381, Data2: 0xa28c
 // SetDuckingOptionsForCurrentStream dispatches through IAudioClientDuckingControl's vtable slot 3.
 func (self *IAudioClientDuckingControl) SetDuckingOptionsForCurrentStream(options AUDIO_DUCKING_OPTIONS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(options))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioClock: https://learn.microsoft.com/windows/win32/api/audioclient/nn-audioclient-iaudioclock
@@ -335,19 +335,19 @@ var IID_IAudioClock = win32.GUID{Data1: 0xcd63314f, Data2: 0x3fba, Data3: 0x4a1b
 // GetFrequency dispatches through IAudioClock's vtable slot 3.
 func (self *IAudioClock) GetFrequency(pu64Frequency *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pu64Frequency)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPosition dispatches through IAudioClock's vtable slot 4.
 func (self *IAudioClock) GetPosition(pu64Position *uint64, pu64QPCPosition *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pu64Position)), uintptr(unsafe.Pointer(pu64QPCPosition)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCharacteristics dispatches through IAudioClock's vtable slot 5.
 func (self *IAudioClock) GetCharacteristics(pdwCharacteristics *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCharacteristics)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioClock2: https://learn.microsoft.com/windows/win32/api/audioclient/nn-audioclient-iaudioclock2
@@ -362,7 +362,7 @@ var IID_IAudioClock2 = win32.GUID{Data1: 0x6f49ff73, Data2: 0x6727, Data3: 0x49a
 // GetDevicePosition dispatches through IAudioClock2's vtable slot 3.
 func (self *IAudioClock2) GetDevicePosition(DevicePosition *uint64, QPCPosition *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(DevicePosition)), uintptr(unsafe.Pointer(QPCPosition)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioClockAdjustment: https://learn.microsoft.com/windows/win32/api/audioclient/nn-audioclient-iaudioclockadjustment
@@ -386,7 +386,7 @@ var IID_IAudioEffectsChangedNotificationClient = win32.GUID{Data1: 0xa5ded44f, D
 // OnAudioEffectsChanged dispatches through IAudioEffectsChangedNotificationClient's vtable slot 3.
 func (self *IAudioEffectsChangedNotificationClient) OnAudioEffectsChanged() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioEffectsManager: https://learn.microsoft.com/windows/win32/api/audioclient/nn-audioclient-iaudioeffectsmanager
@@ -401,19 +401,19 @@ var IID_IAudioEffectsManager = win32.GUID{Data1: 0x4460b3ae, Data2: 0x4b44, Data
 // RegisterAudioEffectsChangedNotificationCallback dispatches through IAudioEffectsManager's vtable slot 3.
 func (self *IAudioEffectsManager) RegisterAudioEffectsChangedNotificationCallback(client *IAudioEffectsChangedNotificationClient) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(client)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnregisterAudioEffectsChangedNotificationCallback dispatches through IAudioEffectsManager's vtable slot 4.
 func (self *IAudioEffectsManager) UnregisterAudioEffectsChangedNotificationCallback(client *IAudioEffectsChangedNotificationClient) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(client)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAudioEffects dispatches through IAudioEffectsManager's vtable slot 5.
 func (self *IAudioEffectsManager) GetAudioEffects(effects **AUDIO_EFFECT, numEffects *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(effects)), uintptr(unsafe.Pointer(numEffects)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioFormatEnumerator: https://learn.microsoft.com/windows/win32/api/spatialaudioclient/nn-spatialaudioclient-iaudioformatenumerator
@@ -428,13 +428,13 @@ var IID_IAudioFormatEnumerator = win32.GUID{Data1: 0xdcdaa858, Data2: 0x895a, Da
 // GetCount dispatches through IAudioFormatEnumerator's vtable slot 3.
 func (self *IAudioFormatEnumerator) GetCount(count *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(count)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFormat dispatches through IAudioFormatEnumerator's vtable slot 4.
 func (self *IAudioFormatEnumerator) GetFormat(index uint32, format **WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(format)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioInputSelector: https://learn.microsoft.com/windows/win32/api/devicetopology/nn-devicetopology-iaudioinputselector
@@ -449,13 +449,13 @@ var IID_IAudioInputSelector = win32.GUID{Data1: 0x4f03dc02, Data2: 0x5e6e, Data3
 // GetSelection dispatches through IAudioInputSelector's vtable slot 3.
 func (self *IAudioInputSelector) GetSelection(pnIdSelected *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnIdSelected)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetSelection dispatches through IAudioInputSelector's vtable slot 4.
 func (self *IAudioInputSelector) SetSelection(nIdSelect uint32, pguidEventContext *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(nIdSelect), uintptr(unsafe.Pointer(pguidEventContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioLoudness: https://learn.microsoft.com/windows/win32/api/devicetopology/nn-devicetopology-iaudioloudness
@@ -470,14 +470,14 @@ var IID_IAudioLoudness = win32.GUID{Data1: 0x7d8b1437, Data2: 0xdd53, Data3: 0x4
 // GetEnabled dispatches through IAudioLoudness's vtable slot 3.
 func (self *IAudioLoudness) GetEnabled(pbEnabled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbEnabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetEnabled dispatches through IAudioLoudness's vtable slot 4.
 func (self *IAudioLoudness) SetEnabled(bEnable bool, pguidEventContext *win32.GUID) error {
 	_bEnable := win32.Bool32(bEnable)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(_bEnable), uintptr(unsafe.Pointer(pguidEventContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioMidrange: https://learn.microsoft.com/windows/win32/api/devicetopology/nn-devicetopology-iaudiomidrange
@@ -502,13 +502,13 @@ var IID_IAudioMute = win32.GUID{Data1: 0xdf45aeea, Data2: 0xb74a, Data3: 0x4b6b,
 func (self *IAudioMute) SetMute(bMuted bool, pguidEventContext *win32.GUID) error {
 	_bMuted := win32.Bool32(bMuted)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(_bMuted), uintptr(unsafe.Pointer(pguidEventContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMute dispatches through IAudioMute's vtable slot 4.
 func (self *IAudioMute) GetMute(pbMuted *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbMuted)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioOutputSelector: https://learn.microsoft.com/windows/win32/api/devicetopology/nn-devicetopology-iaudiooutputselector
@@ -523,13 +523,13 @@ var IID_IAudioOutputSelector = win32.GUID{Data1: 0xbb515f69, Data2: 0x94a7, Data
 // GetSelection dispatches through IAudioOutputSelector's vtable slot 3.
 func (self *IAudioOutputSelector) GetSelection(pnIdSelected *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnIdSelected)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetSelection dispatches through IAudioOutputSelector's vtable slot 4.
 func (self *IAudioOutputSelector) SetSelection(nIdSelect uint32, pguidEventContext *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(nIdSelect), uintptr(unsafe.Pointer(pguidEventContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioPeakMeter: https://learn.microsoft.com/windows/win32/api/devicetopology/nn-devicetopology-iaudiopeakmeter
@@ -544,13 +544,13 @@ var IID_IAudioPeakMeter = win32.GUID{Data1: 0xdd79923c, Data2: 0x0599, Data3: 0x
 // GetChannelCount dispatches through IAudioPeakMeter's vtable slot 3.
 func (self *IAudioPeakMeter) GetChannelCount(pcChannels *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcChannels)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLevel dispatches through IAudioPeakMeter's vtable slot 4.
 func (self *IAudioPeakMeter) GetLevel(nChannel uint32, pfLevel *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(nChannel), uintptr(unsafe.Pointer(pfLevel)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioRenderClient: https://learn.microsoft.com/windows/win32/api/audioclient/nn-audioclient-iaudiorenderclient
@@ -565,13 +565,13 @@ var IID_IAudioRenderClient = win32.GUID{Data1: 0xf294acfc, Data2: 0x3146, Data3:
 // GetBuffer dispatches through IAudioRenderClient's vtable slot 3.
 func (self *IAudioRenderClient) GetBuffer(NumFramesRequested uint32, ppData **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(NumFramesRequested), uintptr(unsafe.Pointer(ppData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReleaseBuffer dispatches through IAudioRenderClient's vtable slot 4.
 func (self *IAudioRenderClient) ReleaseBuffer(NumFramesWritten uint32, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(NumFramesWritten), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioSessionControl: https://learn.microsoft.com/windows/win32/api/audiopolicy/nn-audiopolicy-iaudiosessioncontrol
@@ -586,57 +586,57 @@ var IID_IAudioSessionControl = win32.GUID{Data1: 0xf4b1a599, Data2: 0x7266, Data
 // GetState dispatches through IAudioSessionControl's vtable slot 3.
 func (self *IAudioSessionControl) GetState(pRetVal *AudioSessionState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDisplayName dispatches through IAudioSessionControl's vtable slot 4.
 func (self *IAudioSessionControl) GetDisplayName(pRetVal *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDisplayName dispatches through IAudioSessionControl's vtable slot 5.
 func (self *IAudioSessionControl) SetDisplayName(Value string, EventContext *win32.GUID) error {
 	_Value := win32.UTF16Ptr(Value)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Value)), uintptr(unsafe.Pointer(EventContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetIconPath dispatches through IAudioSessionControl's vtable slot 6.
 func (self *IAudioSessionControl) GetIconPath(pRetVal *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetIconPath dispatches through IAudioSessionControl's vtable slot 7.
 func (self *IAudioSessionControl) SetIconPath(Value string, EventContext *win32.GUID) error {
 	_Value := win32.UTF16Ptr(Value)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Value)), uintptr(unsafe.Pointer(EventContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetGroupingParam dispatches through IAudioSessionControl's vtable slot 8.
 func (self *IAudioSessionControl) GetGroupingParam(pRetVal *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetGroupingParam dispatches through IAudioSessionControl's vtable slot 9.
 func (self *IAudioSessionControl) SetGroupingParam(Override *win32.GUID, EventContext *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Override)), uintptr(unsafe.Pointer(EventContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterAudioSessionNotification dispatches through IAudioSessionControl's vtable slot 10.
 func (self *IAudioSessionControl) RegisterAudioSessionNotification(NewNotifications *IAudioSessionEvents) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(NewNotifications)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnregisterAudioSessionNotification dispatches through IAudioSessionControl's vtable slot 11.
 func (self *IAudioSessionControl) UnregisterAudioSessionNotification(NewNotifications *IAudioSessionEvents) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(NewNotifications)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioSessionControl2: https://learn.microsoft.com/windows/win32/api/audiopolicy/nn-audiopolicy-iaudiosessioncontrol2
@@ -651,32 +651,32 @@ var IID_IAudioSessionControl2 = win32.GUID{Data1: 0xbfb7ff88, Data2: 0x7239, Dat
 // GetSessionIdentifier dispatches through IAudioSessionControl2's vtable slot 12.
 func (self *IAudioSessionControl2) GetSessionIdentifier(pRetVal *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSessionInstanceIdentifier dispatches through IAudioSessionControl2's vtable slot 13.
 func (self *IAudioSessionControl2) GetSessionInstanceIdentifier(pRetVal *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProcessId dispatches through IAudioSessionControl2's vtable slot 14.
 func (self *IAudioSessionControl2) GetProcessId(pRetVal *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsSystemSoundsSession dispatches through IAudioSessionControl2's vtable slot 15.
 func (self *IAudioSessionControl2) IsSystemSoundsSession() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDuckingPreference dispatches through IAudioSessionControl2's vtable slot 16.
 func (self *IAudioSessionControl2) SetDuckingPreference(optOut bool) error {
 	_optOut := win32.Bool32(optOut)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(_optOut))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioSessionEnumerator: https://learn.microsoft.com/windows/win32/api/audiopolicy/nn-audiopolicy-iaudiosessionenumerator
@@ -691,13 +691,13 @@ var IID_IAudioSessionEnumerator = win32.GUID{Data1: 0xe2f5bb11, Data2: 0x0570, D
 // GetCount dispatches through IAudioSessionEnumerator's vtable slot 3.
 func (self *IAudioSessionEnumerator) GetCount(SessionCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SessionCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSession dispatches through IAudioSessionEnumerator's vtable slot 4.
 func (self *IAudioSessionEnumerator) GetSession(SessionCount int32, Session **IAudioSessionControl) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(SessionCount), uintptr(unsafe.Pointer(Session)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioSessionEvents: https://learn.microsoft.com/windows/win32/api/audiopolicy/nn-audiopolicy-iaudiosessionevents
@@ -713,14 +713,14 @@ var IID_IAudioSessionEvents = win32.GUID{Data1: 0x24918acc, Data2: 0x64b3, Data3
 func (self *IAudioSessionEvents) OnDisplayNameChanged(NewDisplayName string, EventContext *win32.GUID) error {
 	_NewDisplayName := win32.UTF16Ptr(NewDisplayName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_NewDisplayName)), uintptr(unsafe.Pointer(EventContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnIconPathChanged dispatches through IAudioSessionEvents's vtable slot 4.
 func (self *IAudioSessionEvents) OnIconPathChanged(NewIconPath string, EventContext *win32.GUID) error {
 	_NewIconPath := win32.UTF16Ptr(NewIconPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_NewIconPath)), uintptr(unsafe.Pointer(EventContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnChannelVolumeChanged dispatches through IAudioSessionEvents's vtable slot 6.
@@ -730,25 +730,25 @@ func (self *IAudioSessionEvents) OnChannelVolumeChanged(NewChannelVolumeArray []
 		_NewChannelVolumeArray = &NewChannelVolumeArray[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(len(NewChannelVolumeArray)), uintptr(unsafe.Pointer(_NewChannelVolumeArray)), uintptr(ChangedChannel), uintptr(unsafe.Pointer(EventContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnGroupingParamChanged dispatches through IAudioSessionEvents's vtable slot 7.
 func (self *IAudioSessionEvents) OnGroupingParamChanged(NewGroupingParam *win32.GUID, EventContext *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(NewGroupingParam)), uintptr(unsafe.Pointer(EventContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnStateChanged dispatches through IAudioSessionEvents's vtable slot 8.
 func (self *IAudioSessionEvents) OnStateChanged(NewState AudioSessionState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(NewState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnSessionDisconnected dispatches through IAudioSessionEvents's vtable slot 9.
 func (self *IAudioSessionEvents) OnSessionDisconnected(DisconnectReason AudioSessionDisconnectReason) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(DisconnectReason))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioSessionManager: https://learn.microsoft.com/windows/win32/api/audiopolicy/nn-audiopolicy-iaudiosessionmanager
@@ -763,13 +763,13 @@ var IID_IAudioSessionManager = win32.GUID{Data1: 0xbfa971f1, Data2: 0x4d5e, Data
 // GetAudioSessionControl dispatches through IAudioSessionManager's vtable slot 3.
 func (self *IAudioSessionManager) GetAudioSessionControl(AudioSessionGuid *win32.GUID, StreamFlags uint32, SessionControl **IAudioSessionControl) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AudioSessionGuid)), uintptr(StreamFlags), uintptr(unsafe.Pointer(SessionControl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSimpleAudioVolume dispatches through IAudioSessionManager's vtable slot 4.
 func (self *IAudioSessionManager) GetSimpleAudioVolume(AudioSessionGuid *win32.GUID, StreamFlags uint32, AudioVolume **ISimpleAudioVolume) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AudioSessionGuid)), uintptr(StreamFlags), uintptr(unsafe.Pointer(AudioVolume)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioSessionManager2: https://learn.microsoft.com/windows/win32/api/audiopolicy/nn-audiopolicy-iaudiosessionmanager2
@@ -785,32 +785,32 @@ var IID_IAudioSessionManager2 = win32.GUID{Data1: 0x77aa99a0, Data2: 0x1bd6, Dat
 func (self *IAudioSessionManager2) GetSessionEnumerator() (*IAudioSessionEnumerator, error) {
 	var _SessionEnum *IAudioSessionEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_SessionEnum)))
-	return _SessionEnum, win32.HRESULTError(int32(r1))
+	return _SessionEnum, win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterSessionNotification dispatches through IAudioSessionManager2's vtable slot 6.
 func (self *IAudioSessionManager2) RegisterSessionNotification(SessionNotification *IAudioSessionNotification) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SessionNotification)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnregisterSessionNotification dispatches through IAudioSessionManager2's vtable slot 7.
 func (self *IAudioSessionManager2) UnregisterSessionNotification(SessionNotification *IAudioSessionNotification) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SessionNotification)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterDuckNotification dispatches through IAudioSessionManager2's vtable slot 8.
 func (self *IAudioSessionManager2) RegisterDuckNotification(sessionID string, duckNotification *IAudioVolumeDuckNotification) error {
 	_sessionID := win32.UTF16Ptr(sessionID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_sessionID)), uintptr(unsafe.Pointer(duckNotification)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnregisterDuckNotification dispatches through IAudioSessionManager2's vtable slot 9.
 func (self *IAudioSessionManager2) UnregisterDuckNotification(duckNotification *IAudioVolumeDuckNotification) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(duckNotification)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioSessionNotification: https://learn.microsoft.com/windows/win32/api/audiopolicy/nn-audiopolicy-iaudiosessionnotification
@@ -825,7 +825,7 @@ var IID_IAudioSessionNotification = win32.GUID{Data1: 0x641dd20b, Data2: 0x4d41,
 // OnSessionCreated dispatches through IAudioSessionNotification's vtable slot 3.
 func (self *IAudioSessionNotification) OnSessionCreated(NewSession *IAudioSessionControl) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(NewSession)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 63bd8738-e30d-4c77-bf5c-834e87c657e2
@@ -839,7 +839,7 @@ var IID_IAudioStateMonitor = win32.GUID{Data1: 0x63bd8738, Data2: 0xe30d, Data3:
 // RegisterCallback dispatches through IAudioStateMonitor's vtable slot 3.
 func (self *IAudioStateMonitor) RegisterCallback(callback PAudioStateMonitorCallback, context unsafe.Pointer, registration *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(callback), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(registration)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnregisterCallback dispatches through IAudioStateMonitor's vtable slot 4.
@@ -865,13 +865,13 @@ var IID_IAudioStreamVolume = win32.GUID{Data1: 0x93014887, Data2: 0x242d, Data3:
 // GetChannelCount dispatches through IAudioStreamVolume's vtable slot 3.
 func (self *IAudioStreamVolume) GetChannelCount(pdwCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetChannelVolume dispatches through IAudioStreamVolume's vtable slot 5.
 func (self *IAudioStreamVolume) GetChannelVolume(dwIndex uint32, pfLevel *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(pfLevel)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAllVolumes dispatches through IAudioStreamVolume's vtable slot 6.
@@ -881,7 +881,7 @@ func (self *IAudioStreamVolume) SetAllVolumes(pfVolumes []float32) error {
 		_pfVolumes = &pfVolumes[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(len(pfVolumes)), uintptr(unsafe.Pointer(_pfVolumes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAllVolumes dispatches through IAudioStreamVolume's vtable slot 7.
@@ -891,7 +891,7 @@ func (self *IAudioStreamVolume) GetAllVolumes(pfVolumes []float32) error {
 		_pfVolumes = &pfVolumes[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(len(pfVolumes)), uintptr(unsafe.Pointer(_pfVolumes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioSystemEffectsPropertyChangeNotificationClient: https://learn.microsoft.com/windows/win32/api/mmdeviceapi/nn-mmdeviceapi-iaudiosystemeffectspropertychangenotificationclient
@@ -915,43 +915,43 @@ var IID_IAudioSystemEffectsPropertyStore = win32.GUID{Data1: 0x302ae7f9, Data2: 
 // OpenDefaultPropertyStore dispatches through IAudioSystemEffectsPropertyStore's vtable slot 3.
 func (self *IAudioSystemEffectsPropertyStore) OpenDefaultPropertyStore(stgmAccess uint32, propStore **uishellpropertiessystem.IPropertyStore) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(stgmAccess), uintptr(unsafe.Pointer(propStore)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenUserPropertyStore dispatches through IAudioSystemEffectsPropertyStore's vtable slot 4.
 func (self *IAudioSystemEffectsPropertyStore) OpenUserPropertyStore(stgmAccess uint32, propStore **uishellpropertiessystem.IPropertyStore) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(stgmAccess), uintptr(unsafe.Pointer(propStore)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenVolatilePropertyStore dispatches through IAudioSystemEffectsPropertyStore's vtable slot 5.
 func (self *IAudioSystemEffectsPropertyStore) OpenVolatilePropertyStore(stgmAccess uint32, propStore **uishellpropertiessystem.IPropertyStore) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(stgmAccess), uintptr(unsafe.Pointer(propStore)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ResetUserPropertyStore dispatches through IAudioSystemEffectsPropertyStore's vtable slot 6.
 func (self *IAudioSystemEffectsPropertyStore) ResetUserPropertyStore() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ResetVolatilePropertyStore dispatches through IAudioSystemEffectsPropertyStore's vtable slot 7.
 func (self *IAudioSystemEffectsPropertyStore) ResetVolatilePropertyStore() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterPropertyChangeNotification dispatches through IAudioSystemEffectsPropertyStore's vtable slot 8.
 func (self *IAudioSystemEffectsPropertyStore) RegisterPropertyChangeNotification(callback *IAudioSystemEffectsPropertyChangeNotificationClient) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(callback)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnregisterPropertyChangeNotification dispatches through IAudioSystemEffectsPropertyStore's vtable slot 9.
 func (self *IAudioSystemEffectsPropertyStore) UnregisterPropertyChangeNotification(callback *IAudioSystemEffectsPropertyChangeNotificationClient) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(callback)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioTreble: https://learn.microsoft.com/windows/win32/api/devicetopology/nn-devicetopology-iaudiotreble
@@ -975,7 +975,7 @@ var IID_IAudioViewManagerService = win32.GUID{Data1: 0xa7a7ef10, Data2: 0x1f49, 
 // SetAudioStreamWindow dispatches through IAudioViewManagerService's vtable slot 3.
 func (self *IAudioViewManagerService) SetAudioStreamWindow(hwnd foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hwnd))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioVolumeDuckNotification: https://learn.microsoft.com/windows/win32/api/audiopolicy/nn-audiopolicy-iaudiovolumeducknotification
@@ -991,14 +991,14 @@ var IID_IAudioVolumeDuckNotification = win32.GUID{Data1: 0xc3b284d4, Data2: 0x6d
 func (self *IAudioVolumeDuckNotification) OnVolumeDuckNotification(sessionID string, countCommunicationSessions uint32) error {
 	_sessionID := win32.UTF16Ptr(sessionID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_sessionID)), uintptr(countCommunicationSessions))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnVolumeUnduckNotification dispatches through IAudioVolumeDuckNotification's vtable slot 4.
 func (self *IAudioVolumeDuckNotification) OnVolumeUnduckNotification(sessionID string) error {
 	_sessionID := win32.UTF16Ptr(sessionID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_sessionID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioVolumeLevel: https://learn.microsoft.com/windows/win32/api/devicetopology/nn-devicetopology-iaudiovolumelevel
@@ -1022,13 +1022,13 @@ var IID_IChannelAudioVolume = win32.GUID{Data1: 0x1c158861, Data2: 0xb533, Data3
 // GetChannelCount dispatches through IChannelAudioVolume's vtable slot 3.
 func (self *IChannelAudioVolume) GetChannelCount(pdwCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetChannelVolume dispatches through IChannelAudioVolume's vtable slot 5.
 func (self *IChannelAudioVolume) GetChannelVolume(dwIndex uint32, pfLevel *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(pfLevel)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAllVolumes dispatches through IChannelAudioVolume's vtable slot 6.
@@ -1038,7 +1038,7 @@ func (self *IChannelAudioVolume) SetAllVolumes(pfVolumes []float32, EventContext
 		_pfVolumes = &pfVolumes[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(len(pfVolumes)), uintptr(unsafe.Pointer(_pfVolumes)), uintptr(unsafe.Pointer(EventContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAllVolumes dispatches through IChannelAudioVolume's vtable slot 7.
@@ -1048,7 +1048,7 @@ func (self *IChannelAudioVolume) GetAllVolumes(pfVolumes []float32) error {
 		_pfVolumes = &pfVolumes[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(len(pfVolumes)), uintptr(unsafe.Pointer(_pfVolumes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IConnector: https://learn.microsoft.com/windows/win32/api/devicetopology/nn-devicetopology-iconnector
@@ -1063,49 +1063,49 @@ var IID_IConnector = win32.GUID{Data1: 0x9c2c4058, Data2: 0x23f5, Data3: 0x41de,
 // GetType dispatches through IConnector's vtable slot 3.
 func (self *IConnector) GetType(pType *ConnectorType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDataFlow dispatches through IConnector's vtable slot 4.
 func (self *IConnector) GetDataFlow(pFlow *DataFlow) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFlow)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ConnectTo dispatches through IConnector's vtable slot 5.
 func (self *IConnector) ConnectTo(pConnectTo *IConnector) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pConnectTo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Disconnect dispatches through IConnector's vtable slot 6.
 func (self *IConnector) Disconnect() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsConnected dispatches through IConnector's vtable slot 7.
 func (self *IConnector) IsConnected(pbConnected *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbConnected)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetConnectedTo dispatches through IConnector's vtable slot 8.
 func (self *IConnector) GetConnectedTo(ppConTo **IConnector) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppConTo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetConnectorIdConnectedTo dispatches through IConnector's vtable slot 9.
 func (self *IConnector) GetConnectorIdConnectedTo(ppwstrConnectorId *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwstrConnectorId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceIdConnectedTo dispatches through IConnector's vtable slot 10.
 func (self *IConnector) GetDeviceIdConnectedTo(ppwstrDeviceId *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwstrDeviceId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IControlChangeNotify: https://learn.microsoft.com/windows/win32/api/devicetopology/nn-devicetopology-icontrolchangenotify
@@ -1120,7 +1120,7 @@ var IID_IControlChangeNotify = win32.GUID{Data1: 0xa09513ed, Data2: 0xc709, Data
 // OnNotify dispatches through IControlChangeNotify's vtable slot 3.
 func (self *IControlChangeNotify) OnNotify(dwSenderProcessId uint32, pguidEventContext *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwSenderProcessId), uintptr(unsafe.Pointer(pguidEventContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IControlInterface: https://learn.microsoft.com/windows/win32/api/devicetopology/nn-devicetopology-icontrolinterface
@@ -1135,13 +1135,13 @@ var IID_IControlInterface = win32.GUID{Data1: 0x45d37c3f, Data2: 0x5140, Data3: 
 // GetName dispatches through IControlInterface's vtable slot 3.
 func (self *IControlInterface) GetName(ppwstrName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetIID dispatches through IControlInterface's vtable slot 4.
 func (self *IControlInterface) GetIID(pIID *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDeviceSpecificProperty: https://learn.microsoft.com/windows/win32/api/devicetopology/nn-devicetopology-idevicespecificproperty
@@ -1156,25 +1156,25 @@ var IID_IDeviceSpecificProperty = win32.GUID{Data1: 0x3b22bcbf, Data2: 0x2586, D
 // GetType dispatches through IDeviceSpecificProperty's vtable slot 3.
 func (self *IDeviceSpecificProperty) GetType(pVType *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetValue dispatches through IDeviceSpecificProperty's vtable slot 4.
 func (self *IDeviceSpecificProperty) GetValue(pvValue unsafe.Pointer, pcbValue *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvValue)), uintptr(unsafe.Pointer(pcbValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetValue dispatches through IDeviceSpecificProperty's vtable slot 5.
 func (self *IDeviceSpecificProperty) SetValue(pvValue unsafe.Pointer, cbValue uint32, pguidEventContext *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvValue)), uintptr(cbValue), uintptr(unsafe.Pointer(pguidEventContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get4BRange dispatches through IDeviceSpecificProperty's vtable slot 6.
 func (self *IDeviceSpecificProperty) Get4BRange(plMin *int32, plMax *int32, plStepping *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMin)), uintptr(unsafe.Pointer(plMax)), uintptr(unsafe.Pointer(plStepping)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDeviceTopology: https://learn.microsoft.com/windows/win32/api/devicetopology/nn-devicetopology-idevicetopology
@@ -1189,44 +1189,44 @@ var IID_IDeviceTopology = win32.GUID{Data1: 0x2a07407e, Data2: 0x6497, Data3: 0x
 // GetConnectorCount dispatches through IDeviceTopology's vtable slot 3.
 func (self *IDeviceTopology) GetConnectorCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetConnector dispatches through IDeviceTopology's vtable slot 4.
 func (self *IDeviceTopology) GetConnector(nIndex uint32, ppConnector **IConnector) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(nIndex), uintptr(unsafe.Pointer(ppConnector)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSubunitCount dispatches through IDeviceTopology's vtable slot 5.
 func (self *IDeviceTopology) GetSubunitCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSubunit dispatches through IDeviceTopology's vtable slot 6.
 func (self *IDeviceTopology) GetSubunit(nIndex uint32, ppSubunit **ISubunit) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(nIndex), uintptr(unsafe.Pointer(ppSubunit)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPartById dispatches through IDeviceTopology's vtable slot 7.
 func (self *IDeviceTopology) GetPartById(nId uint32, ppPart **IPart) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(nId), uintptr(unsafe.Pointer(ppPart)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceId dispatches through IDeviceTopology's vtable slot 8.
 func (self *IDeviceTopology) GetDeviceId(ppwstrDeviceId *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwstrDeviceId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSignalPath dispatches through IDeviceTopology's vtable slot 9.
 func (self *IDeviceTopology) GetSignalPath(pIPartFrom *IPart, pIPartTo *IPart, bRejectMixedPaths bool, ppParts **IPartsList) error {
 	_bRejectMixedPaths := win32.Bool32(bRejectMixedPaths)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIPartFrom)), uintptr(unsafe.Pointer(pIPartTo)), uintptr(_bRejectMixedPaths), uintptr(unsafe.Pointer(ppParts)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMMDevice: https://learn.microsoft.com/windows/win32/api/mmdeviceapi/nn-mmdeviceapi-immdevice
@@ -1241,25 +1241,25 @@ var IID_IMMDevice = win32.GUID{Data1: 0xd666063f, Data2: 0x1587, Data3: 0x4e43, 
 // Activate dispatches through IMMDevice's vtable slot 3.
 func (self *IMMDevice) Activate(iid *win32.GUID, dwClsCtx systemcom.CLSCTX, pActivationParams *systemcomstructuredstorage.PROPVARIANT, ppInterface **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(iid)), uintptr(dwClsCtx), uintptr(unsafe.Pointer(pActivationParams)), uintptr(unsafe.Pointer(ppInterface)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenPropertyStore dispatches through IMMDevice's vtable slot 4.
 func (self *IMMDevice) OpenPropertyStore(stgmAccess systemcom.STGM, ppProperties **uishellpropertiessystem.IPropertyStore) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(stgmAccess), uintptr(unsafe.Pointer(ppProperties)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetId dispatches through IMMDevice's vtable slot 5.
 func (self *IMMDevice) GetId(ppstrId *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppstrId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetState dispatches through IMMDevice's vtable slot 6.
 func (self *IMMDevice) GetState(pdwState *DEVICE_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 3b0d0ea4-d0a9-4b0e-935b-09516746fac0
@@ -1273,7 +1273,7 @@ var IID_IMMDeviceActivator = win32.GUID{Data1: 0x3b0d0ea4, Data2: 0xd0a9, Data3:
 // Activate dispatches through IMMDeviceActivator's vtable slot 3.
 func (self *IMMDeviceActivator) Activate(iid *win32.GUID, pDevice *IMMDevice, pActivationParams *systemcomstructuredstorage.PROPVARIANT, ppInterface **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(pActivationParams)), uintptr(unsafe.Pointer(ppInterface)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMMDeviceCollection: https://learn.microsoft.com/windows/win32/api/mmdeviceapi/nn-mmdeviceapi-immdevicecollection
@@ -1288,13 +1288,13 @@ var IID_IMMDeviceCollection = win32.GUID{Data1: 0x0bd7a1be, Data2: 0x7a1a, Data3
 // GetCount dispatches through IMMDeviceCollection's vtable slot 3.
 func (self *IMMDeviceCollection) GetCount(pcDevices *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcDevices)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Item dispatches through IMMDeviceCollection's vtable slot 4.
 func (self *IMMDeviceCollection) Item(nDevice uint32, ppDevice **IMMDevice) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(nDevice), uintptr(unsafe.Pointer(ppDevice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMMDeviceEnumerator: https://learn.microsoft.com/windows/win32/api/mmdeviceapi/nn-mmdeviceapi-immdeviceenumerator
@@ -1309,32 +1309,32 @@ var IID_IMMDeviceEnumerator = win32.GUID{Data1: 0xa95664d2, Data2: 0x9614, Data3
 // EnumAudioEndpoints dispatches through IMMDeviceEnumerator's vtable slot 3.
 func (self *IMMDeviceEnumerator) EnumAudioEndpoints(dataFlow EDataFlow, dwStateMask DEVICE_STATE, ppDevices **IMMDeviceCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dataFlow), uintptr(dwStateMask), uintptr(unsafe.Pointer(ppDevices)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDefaultAudioEndpoint dispatches through IMMDeviceEnumerator's vtable slot 4.
 func (self *IMMDeviceEnumerator) GetDefaultAudioEndpoint(dataFlow EDataFlow, role ERole, ppEndpoint **IMMDevice) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dataFlow), uintptr(role), uintptr(unsafe.Pointer(ppEndpoint)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDevice dispatches through IMMDeviceEnumerator's vtable slot 5.
 func (self *IMMDeviceEnumerator) GetDevice(pwstrId string, ppDevice **IMMDevice) error {
 	_pwstrId := win32.UTF16Ptr(pwstrId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwstrId)), uintptr(unsafe.Pointer(ppDevice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterEndpointNotificationCallback dispatches through IMMDeviceEnumerator's vtable slot 6.
 func (self *IMMDeviceEnumerator) RegisterEndpointNotificationCallback(pClient *IMMNotificationClient) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pClient)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnregisterEndpointNotificationCallback dispatches through IMMDeviceEnumerator's vtable slot 7.
 func (self *IMMDeviceEnumerator) UnregisterEndpointNotificationCallback(pClient *IMMNotificationClient) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pClient)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMMEndpoint: https://learn.microsoft.com/windows/win32/api/mmdeviceapi/nn-mmdeviceapi-immendpoint
@@ -1349,7 +1349,7 @@ var IID_IMMEndpoint = win32.GUID{Data1: 0x1be09788, Data2: 0x6894, Data3: 0x4089
 // GetDataFlow dispatches through IMMEndpoint's vtable slot 3.
 func (self *IMMEndpoint) GetDataFlow(pDataFlow *EDataFlow) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDataFlow)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMMNotificationClient: https://learn.microsoft.com/windows/win32/api/mmdeviceapi/nn-mmdeviceapi-immnotificationclient
@@ -1365,28 +1365,28 @@ var IID_IMMNotificationClient = win32.GUID{Data1: 0x7991eec9, Data2: 0x7e89, Dat
 func (self *IMMNotificationClient) OnDeviceStateChanged(pwstrDeviceId string, dwNewState DEVICE_STATE) error {
 	_pwstrDeviceId := win32.UTF16Ptr(pwstrDeviceId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwstrDeviceId)), uintptr(dwNewState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnDeviceAdded dispatches through IMMNotificationClient's vtable slot 4.
 func (self *IMMNotificationClient) OnDeviceAdded(pwstrDeviceId string) error {
 	_pwstrDeviceId := win32.UTF16Ptr(pwstrDeviceId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwstrDeviceId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnDeviceRemoved dispatches through IMMNotificationClient's vtable slot 5.
 func (self *IMMNotificationClient) OnDeviceRemoved(pwstrDeviceId string) error {
 	_pwstrDeviceId := win32.UTF16Ptr(pwstrDeviceId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwstrDeviceId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnDefaultDeviceChanged dispatches through IMMNotificationClient's vtable slot 6.
 func (self *IMMNotificationClient) OnDefaultDeviceChanged(flow EDataFlow, role ERole, pwstrDefaultDeviceId string) error {
 	_pwstrDefaultDeviceId := win32.UTF16Ptr(pwstrDefaultDeviceId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(flow), uintptr(role), uintptr(unsafe.Pointer(_pwstrDefaultDeviceId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMessageFilter: https://learn.microsoft.com/windows/win32/api/objidl/nn-objidl-imessagefilter
@@ -1428,79 +1428,79 @@ var IID_IPart = win32.GUID{Data1: 0xae2de0e4, Data2: 0x5bca, Data3: 0x4f2d, Data
 // GetName dispatches through IPart's vtable slot 3.
 func (self *IPart) GetName(ppwstrName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLocalId dispatches through IPart's vtable slot 4.
 func (self *IPart) GetLocalId(pnId *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetGlobalId dispatches through IPart's vtable slot 5.
 func (self *IPart) GetGlobalId(ppwstrGlobalId *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwstrGlobalId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPartType dispatches through IPart's vtable slot 6.
 func (self *IPart) GetPartType(pPartType *PartType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPartType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSubType dispatches through IPart's vtable slot 7.
 func (self *IPart) GetSubType(pSubType *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSubType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetControlInterfaceCount dispatches through IPart's vtable slot 8.
 func (self *IPart) GetControlInterfaceCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetControlInterface dispatches through IPart's vtable slot 9.
 func (self *IPart) GetControlInterface(nIndex uint32, ppInterfaceDesc **IControlInterface) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(nIndex), uintptr(unsafe.Pointer(ppInterfaceDesc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumPartsIncoming dispatches through IPart's vtable slot 10.
 func (self *IPart) EnumPartsIncoming(ppParts **IPartsList) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppParts)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumPartsOutgoing dispatches through IPart's vtable slot 11.
 func (self *IPart) EnumPartsOutgoing(ppParts **IPartsList) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppParts)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTopologyObject dispatches through IPart's vtable slot 12.
 func (self *IPart) GetTopologyObject(ppTopology **IDeviceTopology) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTopology)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Activate dispatches through IPart's vtable slot 13.
 func (self *IPart) Activate(dwClsContext uint32, refiid *win32.GUID, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwClsContext), uintptr(unsafe.Pointer(refiid)), uintptr(unsafe.Pointer(ppvObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterControlChangeCallback dispatches through IPart's vtable slot 14.
 func (self *IPart) RegisterControlChangeCallback(riid *win32.GUID, pNotify *IControlChangeNotify) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pNotify)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnregisterControlChangeCallback dispatches through IPart's vtable slot 15.
 func (self *IPart) UnregisterControlChangeCallback(pNotify *IControlChangeNotify) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNotify)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPartsList: https://learn.microsoft.com/windows/win32/api/devicetopology/nn-devicetopology-ipartslist
@@ -1515,13 +1515,13 @@ var IID_IPartsList = win32.GUID{Data1: 0x6daa848c, Data2: 0x5eb0, Data3: 0x45cc,
 // GetCount dispatches through IPartsList's vtable slot 3.
 func (self *IPartsList) GetCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPart dispatches through IPartsList's vtable slot 4.
 func (self *IPartsList) GetPart(nIndex uint32, ppPart **IPart) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(nIndex), uintptr(unsafe.Pointer(ppPart)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPerChannelDbLevel: https://learn.microsoft.com/windows/win32/api/devicetopology/nn-devicetopology-iperchanneldblevel
@@ -1536,19 +1536,19 @@ var IID_IPerChannelDbLevel = win32.GUID{Data1: 0xc2f8e001, Data2: 0xf205, Data3:
 // GetChannelCount dispatches through IPerChannelDbLevel's vtable slot 3.
 func (self *IPerChannelDbLevel) GetChannelCount(pcChannels *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcChannels)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLevelRange dispatches through IPerChannelDbLevel's vtable slot 4.
 func (self *IPerChannelDbLevel) GetLevelRange(nChannel uint32, pfMinLevelDB *float32, pfMaxLevelDB *float32, pfStepping *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(nChannel), uintptr(unsafe.Pointer(pfMinLevelDB)), uintptr(unsafe.Pointer(pfMaxLevelDB)), uintptr(unsafe.Pointer(pfStepping)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLevel dispatches through IPerChannelDbLevel's vtable slot 5.
 func (self *IPerChannelDbLevel) GetLevel(nChannel uint32, pfLevelDB *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(nChannel), uintptr(unsafe.Pointer(pfLevelDB)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetLevelAllChannels dispatches through IPerChannelDbLevel's vtable slot 8.
@@ -1558,7 +1558,7 @@ func (self *IPerChannelDbLevel) SetLevelAllChannels(aLevelsDB []float32, pguidEv
 		_aLevelsDB = &aLevelsDB[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_aLevelsDB)), uintptr(len(aLevelsDB)), uintptr(unsafe.Pointer(pguidEventContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISimpleAudioVolume: https://learn.microsoft.com/windows/win32/api/audioclient/nn-audioclient-isimpleaudiovolume
@@ -1573,20 +1573,20 @@ var IID_ISimpleAudioVolume = win32.GUID{Data1: 0x87ce5498, Data2: 0x68d6, Data3:
 // GetMasterVolume dispatches through ISimpleAudioVolume's vtable slot 4.
 func (self *ISimpleAudioVolume) GetMasterVolume(pfLevel *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfLevel)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMute dispatches through ISimpleAudioVolume's vtable slot 5.
 func (self *ISimpleAudioVolume) SetMute(bMute bool, EventContext *win32.GUID) error {
 	_bMute := win32.Bool32(bMute)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(_bMute), uintptr(unsafe.Pointer(EventContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMute dispatches through ISimpleAudioVolume's vtable slot 6.
 func (self *ISimpleAudioVolume) GetMute(pbMute *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbMute)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISpatialAudioClient: https://learn.microsoft.com/windows/win32/api/spatialaudioclient/nn-spatialaudioclient-ispatialaudioclient
@@ -1601,49 +1601,49 @@ var IID_ISpatialAudioClient = win32.GUID{Data1: 0xbbf8e066, Data2: 0xaaaa, Data3
 // GetStaticObjectPosition dispatches through ISpatialAudioClient's vtable slot 3.
 func (self *ISpatialAudioClient) GetStaticObjectPosition(type_ AudioObjectType, x *float32, y *float32, z *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(unsafe.Pointer(x)), uintptr(unsafe.Pointer(y)), uintptr(unsafe.Pointer(z)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNativeStaticObjectTypeMask dispatches through ISpatialAudioClient's vtable slot 4.
 func (self *ISpatialAudioClient) GetNativeStaticObjectTypeMask(mask *AudioObjectType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(mask)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMaxDynamicObjectCount dispatches through ISpatialAudioClient's vtable slot 5.
 func (self *ISpatialAudioClient) GetMaxDynamicObjectCount(value *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSupportedAudioObjectFormatEnumerator dispatches through ISpatialAudioClient's vtable slot 6.
 func (self *ISpatialAudioClient) GetSupportedAudioObjectFormatEnumerator(enumerator **IAudioFormatEnumerator) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(enumerator)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMaxFrameCount dispatches through ISpatialAudioClient's vtable slot 7.
 func (self *ISpatialAudioClient) GetMaxFrameCount(objectFormat *WAVEFORMATEX, frameCountPerBuffer *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(objectFormat)), uintptr(unsafe.Pointer(frameCountPerBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsAudioObjectFormatSupported dispatches through ISpatialAudioClient's vtable slot 8.
 func (self *ISpatialAudioClient) IsAudioObjectFormatSupported(objectFormat *WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(objectFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsSpatialAudioStreamAvailable dispatches through ISpatialAudioClient's vtable slot 9.
 func (self *ISpatialAudioClient) IsSpatialAudioStreamAvailable(streamUuid *win32.GUID, auxiliaryInfo *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(streamUuid)), uintptr(unsafe.Pointer(auxiliaryInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ActivateSpatialAudioStream dispatches through ISpatialAudioClient's vtable slot 10.
 func (self *ISpatialAudioClient) ActivateSpatialAudioStream(activationParams *systemcomstructuredstorage.PROPVARIANT, riid *win32.GUID, stream **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(activationParams)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(stream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISpatialAudioClient2: https://learn.microsoft.com/windows/win32/api/spatialaudioclient/nn-spatialaudioclient-ispatialaudioclient2
@@ -1658,14 +1658,14 @@ var IID_ISpatialAudioClient2 = win32.GUID{Data1: 0xcaabe452, Data2: 0xa66a, Data
 // IsOffloadCapable dispatches through ISpatialAudioClient2's vtable slot 11.
 func (self *ISpatialAudioClient2) IsOffloadCapable(category AUDIO_STREAM_CATEGORY, isOffloadCapable *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(category), uintptr(unsafe.Pointer(isOffloadCapable)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMaxFrameCountForCategory dispatches through ISpatialAudioClient2's vtable slot 12.
 func (self *ISpatialAudioClient2) GetMaxFrameCountForCategory(category AUDIO_STREAM_CATEGORY, offloadEnabled bool, objectFormat *WAVEFORMATEX, frameCountPerBuffer *uint32) error {
 	_offloadEnabled := win32.Bool32(offloadEnabled)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(category), uintptr(_offloadEnabled), uintptr(unsafe.Pointer(objectFormat)), uintptr(unsafe.Pointer(frameCountPerBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISpatialAudioMetadataClient: https://learn.microsoft.com/windows/win32/api/spatialaudiometadata/nn-spatialaudiometadata-ispatialaudiometadataclient
@@ -1680,31 +1680,31 @@ var IID_ISpatialAudioMetadataClient = win32.GUID{Data1: 0x777d4a3b, Data2: 0xf6f
 // ActivateSpatialAudioMetadataItems dispatches through ISpatialAudioMetadataClient's vtable slot 3.
 func (self *ISpatialAudioMetadataClient) ActivateSpatialAudioMetadataItems(maxItemCount uint16, frameCount uint16, metadataItemsBuffer **ISpatialAudioMetadataItemsBuffer, metadataItems **ISpatialAudioMetadataItems) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(maxItemCount), uintptr(frameCount), uintptr(unsafe.Pointer(metadataItemsBuffer)), uintptr(unsafe.Pointer(metadataItems)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSpatialAudioMetadataItemsBufferLength dispatches through ISpatialAudioMetadataClient's vtable slot 4.
 func (self *ISpatialAudioMetadataClient) GetSpatialAudioMetadataItemsBufferLength(maxItemCount uint16, bufferLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(maxItemCount), uintptr(unsafe.Pointer(bufferLength)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ActivateSpatialAudioMetadataWriter dispatches through ISpatialAudioMetadataClient's vtable slot 5.
 func (self *ISpatialAudioMetadataClient) ActivateSpatialAudioMetadataWriter(overflowMode SpatialAudioMetadataWriterOverflowMode, metadataWriter **ISpatialAudioMetadataWriter) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(overflowMode), uintptr(unsafe.Pointer(metadataWriter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ActivateSpatialAudioMetadataCopier dispatches through ISpatialAudioMetadataClient's vtable slot 6.
 func (self *ISpatialAudioMetadataClient) ActivateSpatialAudioMetadataCopier(metadataCopier **ISpatialAudioMetadataCopier) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(metadataCopier)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ActivateSpatialAudioMetadataReader dispatches through ISpatialAudioMetadataClient's vtable slot 7.
 func (self *ISpatialAudioMetadataClient) ActivateSpatialAudioMetadataReader(metadataReader **ISpatialAudioMetadataReader) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(metadataReader)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISpatialAudioMetadataCopier: https://learn.microsoft.com/windows/win32/api/spatialaudiometadata/nn-spatialaudiometadata-ispatialaudiometadatacopier
@@ -1719,19 +1719,19 @@ var IID_ISpatialAudioMetadataCopier = win32.GUID{Data1: 0xd224b233, Data2: 0xe25
 // Open dispatches through ISpatialAudioMetadataCopier's vtable slot 3.
 func (self *ISpatialAudioMetadataCopier) Open(metadataItems *ISpatialAudioMetadataItems) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(metadataItems)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CopyMetadataForFrames dispatches through ISpatialAudioMetadataCopier's vtable slot 4.
 func (self *ISpatialAudioMetadataCopier) CopyMetadataForFrames(copyFrameCount uint16, copyMode SpatialAudioMetadataCopyMode, dstMetadataItems *ISpatialAudioMetadataItems, itemsCopied *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(copyFrameCount), uintptr(copyMode), uintptr(unsafe.Pointer(dstMetadataItems)), uintptr(unsafe.Pointer(itemsCopied)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Close dispatches through ISpatialAudioMetadataCopier's vtable slot 5.
 func (self *ISpatialAudioMetadataCopier) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISpatialAudioMetadataItems: https://learn.microsoft.com/windows/win32/api/spatialaudiometadata/nn-spatialaudiometadata-ispatialaudiometadataitems
@@ -1746,31 +1746,31 @@ var IID_ISpatialAudioMetadataItems = win32.GUID{Data1: 0xbcd7c78f, Data2: 0x3098
 // GetFrameCount dispatches through ISpatialAudioMetadataItems's vtable slot 3.
 func (self *ISpatialAudioMetadataItems) GetFrameCount(frameCount *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(frameCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetItemCount dispatches through ISpatialAudioMetadataItems's vtable slot 4.
 func (self *ISpatialAudioMetadataItems) GetItemCount(itemCount *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(itemCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMaxItemCount dispatches through ISpatialAudioMetadataItems's vtable slot 5.
 func (self *ISpatialAudioMetadataItems) GetMaxItemCount(maxItemCount *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(maxItemCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMaxValueBufferLength dispatches through ISpatialAudioMetadataItems's vtable slot 6.
 func (self *ISpatialAudioMetadataItems) GetMaxValueBufferLength(maxValueBufferLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(maxValueBufferLength)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInfo dispatches through ISpatialAudioMetadataItems's vtable slot 7.
 func (self *ISpatialAudioMetadataItems) GetInfo(info *SpatialAudioMetadataItemsInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(info)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISpatialAudioMetadataItemsBuffer: https://learn.microsoft.com/windows/win32/api/spatialaudiometadata/nn-spatialaudiometadata-ispatialaudiometadataitemsbuffer
@@ -1789,7 +1789,7 @@ func (self *ISpatialAudioMetadataItemsBuffer) AttachToBuffer(buffer []byte) erro
 		_buffer = &buffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_buffer)), uintptr(len(buffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AttachToPopulatedBuffer dispatches through ISpatialAudioMetadataItemsBuffer's vtable slot 4.
@@ -1799,13 +1799,13 @@ func (self *ISpatialAudioMetadataItemsBuffer) AttachToPopulatedBuffer(buffer []b
 		_buffer = &buffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_buffer)), uintptr(len(buffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DetachBuffer dispatches through ISpatialAudioMetadataItemsBuffer's vtable slot 5.
 func (self *ISpatialAudioMetadataItemsBuffer) DetachBuffer() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISpatialAudioMetadataReader: https://learn.microsoft.com/windows/win32/api/spatialaudiometadata/nn-spatialaudiometadata-ispatialaudiometadatareader
@@ -1820,13 +1820,13 @@ var IID_ISpatialAudioMetadataReader = win32.GUID{Data1: 0xb78e86a2, Data2: 0x31d
 // Open dispatches through ISpatialAudioMetadataReader's vtable slot 3.
 func (self *ISpatialAudioMetadataReader) Open(metadataItems *ISpatialAudioMetadataItems) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(metadataItems)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReadNextItem dispatches through ISpatialAudioMetadataReader's vtable slot 4.
 func (self *ISpatialAudioMetadataReader) ReadNextItem(commandCount *byte, frameOffset *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(commandCount)), uintptr(unsafe.Pointer(frameOffset)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReadNextItemCommand dispatches through ISpatialAudioMetadataReader's vtable slot 5.
@@ -1836,13 +1836,13 @@ func (self *ISpatialAudioMetadataReader) ReadNextItemCommand(commandID *byte, va
 		_valueBuffer = &valueBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(commandID)), uintptr(unsafe.Pointer(_valueBuffer)), uintptr(len(valueBuffer)), uintptr(unsafe.Pointer(valueBufferLength)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Close dispatches through ISpatialAudioMetadataReader's vtable slot 6.
 func (self *ISpatialAudioMetadataReader) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISpatialAudioMetadataWriter: https://learn.microsoft.com/windows/win32/api/spatialaudiometadata/nn-spatialaudiometadata-ispatialaudiometadatawriter
@@ -1857,13 +1857,13 @@ var IID_ISpatialAudioMetadataWriter = win32.GUID{Data1: 0x1b17ca01, Data2: 0x295
 // Open dispatches through ISpatialAudioMetadataWriter's vtable slot 3.
 func (self *ISpatialAudioMetadataWriter) Open(metadataItems *ISpatialAudioMetadataItems) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(metadataItems)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteNextItem dispatches through ISpatialAudioMetadataWriter's vtable slot 4.
 func (self *ISpatialAudioMetadataWriter) WriteNextItem(frameOffset uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(frameOffset))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteNextItemCommand dispatches through ISpatialAudioMetadataWriter's vtable slot 5.
@@ -1873,13 +1873,13 @@ func (self *ISpatialAudioMetadataWriter) WriteNextItemCommand(commandID byte, va
 		_valueBuffer = &valueBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(commandID), uintptr(unsafe.Pointer(_valueBuffer)), uintptr(len(valueBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Close dispatches through ISpatialAudioMetadataWriter's vtable slot 6.
 func (self *ISpatialAudioMetadataWriter) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISpatialAudioObject: https://learn.microsoft.com/windows/win32/api/spatialaudioclient/nn-spatialaudioclient-ispatialaudioobject
@@ -1903,25 +1903,25 @@ var IID_ISpatialAudioObjectBase = win32.GUID{Data1: 0xcce0b8f2, Data2: 0x8d4d, D
 // GetBuffer dispatches through ISpatialAudioObjectBase's vtable slot 3.
 func (self *ISpatialAudioObjectBase) GetBuffer(buffer **byte, bufferLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(buffer)), uintptr(unsafe.Pointer(bufferLength)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetEndOfStream dispatches through ISpatialAudioObjectBase's vtable slot 4.
 func (self *ISpatialAudioObjectBase) SetEndOfStream(frameCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(frameCount))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsActive dispatches through ISpatialAudioObjectBase's vtable slot 5.
 func (self *ISpatialAudioObjectBase) IsActive(isActive *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(isActive)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAudioObjectType dispatches through ISpatialAudioObjectBase's vtable slot 6.
 func (self *ISpatialAudioObjectBase) GetAudioObjectType(audioObjectType *AudioObjectType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(audioObjectType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISpatialAudioObjectForHrtf: https://learn.microsoft.com/windows/win32/api/spatialaudiohrtf/nn-spatialaudiohrtf-ispatialaudioobjectforhrtf
@@ -1936,25 +1936,25 @@ var IID_ISpatialAudioObjectForHrtf = win32.GUID{Data1: 0xd7436ade, Data2: 0x1978
 // SetOrientation dispatches through ISpatialAudioObjectForHrtf's vtable slot 9.
 func (self *ISpatialAudioObjectForHrtf) SetOrientation(orientation **float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(orientation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetEnvironment dispatches through ISpatialAudioObjectForHrtf's vtable slot 10.
 func (self *ISpatialAudioObjectForHrtf) SetEnvironment(environment SpatialAudioHrtfEnvironmentType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(environment))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDistanceDecay dispatches through ISpatialAudioObjectForHrtf's vtable slot 11.
 func (self *ISpatialAudioObjectForHrtf) SetDistanceDecay(distanceDecay *SpatialAudioHrtfDistanceDecay) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(distanceDecay)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDirectivity dispatches through ISpatialAudioObjectForHrtf's vtable slot 12.
 func (self *ISpatialAudioObjectForHrtf) SetDirectivity(directivity *SpatialAudioHrtfDirectivityUnion) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(directivity)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISpatialAudioObjectForMetadataCommands: https://learn.microsoft.com/windows/win32/api/spatialaudiometadata/nn-spatialaudiometadata-ispatialaudioobjectformetadatacommands
@@ -1973,7 +1973,7 @@ func (self *ISpatialAudioObjectForMetadataCommands) WriteNextMetadataCommand(com
 		_valueBuffer = &valueBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(commandID), uintptr(unsafe.Pointer(_valueBuffer)), uintptr(len(valueBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISpatialAudioObjectForMetadataItems: https://learn.microsoft.com/windows/win32/api/spatialaudiometadata/nn-spatialaudiometadata-ispatialaudioobjectformetadataitems
@@ -1988,7 +1988,7 @@ var IID_ISpatialAudioObjectForMetadataItems = win32.GUID{Data1: 0xddea49ff, Data
 // GetSpatialAudioMetadataItems dispatches through ISpatialAudioObjectForMetadataItems's vtable slot 7.
 func (self *ISpatialAudioObjectForMetadataItems) GetSpatialAudioMetadataItems(metadataItems **ISpatialAudioMetadataItems) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(metadataItems)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISpatialAudioObjectRenderStream: https://learn.microsoft.com/windows/win32/api/spatialaudioclient/nn-spatialaudioclient-ispatialaudioobjectrenderstream
@@ -2003,7 +2003,7 @@ var IID_ISpatialAudioObjectRenderStream = win32.GUID{Data1: 0xbab5f473, Data2: 0
 // ActivateSpatialAudioObject dispatches through ISpatialAudioObjectRenderStream's vtable slot 10.
 func (self *ISpatialAudioObjectRenderStream) ActivateSpatialAudioObject(type_ AudioObjectType, audioObject **ISpatialAudioObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(unsafe.Pointer(audioObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISpatialAudioObjectRenderStreamBase: https://learn.microsoft.com/windows/win32/api/spatialaudioclient/nn-spatialaudioclient-ispatialaudioobjectrenderstreambase
@@ -2018,43 +2018,43 @@ var IID_ISpatialAudioObjectRenderStreamBase = win32.GUID{Data1: 0xfeaaf403, Data
 // GetAvailableDynamicObjectCount dispatches through ISpatialAudioObjectRenderStreamBase's vtable slot 3.
 func (self *ISpatialAudioObjectRenderStreamBase) GetAvailableDynamicObjectCount(value *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetService dispatches through ISpatialAudioObjectRenderStreamBase's vtable slot 4.
 func (self *ISpatialAudioObjectRenderStreamBase) GetService(riid *win32.GUID, service **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(service)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Start dispatches through ISpatialAudioObjectRenderStreamBase's vtable slot 5.
 func (self *ISpatialAudioObjectRenderStreamBase) Start() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Stop dispatches through ISpatialAudioObjectRenderStreamBase's vtable slot 6.
 func (self *ISpatialAudioObjectRenderStreamBase) Stop() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through ISpatialAudioObjectRenderStreamBase's vtable slot 7.
 func (self *ISpatialAudioObjectRenderStreamBase) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BeginUpdatingAudioObjects dispatches through ISpatialAudioObjectRenderStreamBase's vtable slot 8.
 func (self *ISpatialAudioObjectRenderStreamBase) BeginUpdatingAudioObjects(availableDynamicObjectCount *uint32, frameCountPerBuffer *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(availableDynamicObjectCount)), uintptr(unsafe.Pointer(frameCountPerBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndUpdatingAudioObjects dispatches through ISpatialAudioObjectRenderStreamBase's vtable slot 9.
 func (self *ISpatialAudioObjectRenderStreamBase) EndUpdatingAudioObjects() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISpatialAudioObjectRenderStreamForHrtf: https://learn.microsoft.com/windows/win32/api/spatialaudiohrtf/nn-spatialaudiohrtf-ispatialaudioobjectrenderstreamforhrtf
@@ -2069,7 +2069,7 @@ var IID_ISpatialAudioObjectRenderStreamForHrtf = win32.GUID{Data1: 0xe08deef9, D
 // ActivateSpatialAudioObjectForHrtf dispatches through ISpatialAudioObjectRenderStreamForHrtf's vtable slot 10.
 func (self *ISpatialAudioObjectRenderStreamForHrtf) ActivateSpatialAudioObjectForHrtf(type_ AudioObjectType, audioObject **ISpatialAudioObjectForHrtf) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(unsafe.Pointer(audioObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISpatialAudioObjectRenderStreamForMetadata: https://learn.microsoft.com/windows/win32/api/spatialaudiometadata/nn-spatialaudiometadata-ispatialaudioobjectrenderstreamformetadata
@@ -2084,13 +2084,13 @@ var IID_ISpatialAudioObjectRenderStreamForMetadata = win32.GUID{Data1: 0xbbc9c90
 // ActivateSpatialAudioObjectForMetadataCommands dispatches through ISpatialAudioObjectRenderStreamForMetadata's vtable slot 10.
 func (self *ISpatialAudioObjectRenderStreamForMetadata) ActivateSpatialAudioObjectForMetadataCommands(type_ AudioObjectType, audioObject **ISpatialAudioObjectForMetadataCommands) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(unsafe.Pointer(audioObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ActivateSpatialAudioObjectForMetadataItems dispatches through ISpatialAudioObjectRenderStreamForMetadata's vtable slot 11.
 func (self *ISpatialAudioObjectRenderStreamForMetadata) ActivateSpatialAudioObjectForMetadataItems(type_ AudioObjectType, audioObject **ISpatialAudioObjectForMetadataItems) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(unsafe.Pointer(audioObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISpatialAudioObjectRenderStreamNotify: https://learn.microsoft.com/windows/win32/api/spatialaudioclient/nn-spatialaudioclient-ispatialaudioobjectrenderstreamnotify
@@ -2105,7 +2105,7 @@ var IID_ISpatialAudioObjectRenderStreamNotify = win32.GUID{Data1: 0xdddf83e6, Da
 // OnAvailableDynamicObjectCountChange dispatches through ISpatialAudioObjectRenderStreamNotify's vtable slot 3.
 func (self *ISpatialAudioObjectRenderStreamNotify) OnAvailableDynamicObjectCountChange(sender *ISpatialAudioObjectRenderStreamBase, hnsComplianceDeadlineTime int64, availableDynamicObjectCountChange uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sender)), uintptr(hnsComplianceDeadlineTime), uintptr(availableDynamicObjectCountChange))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISubunit: https://learn.microsoft.com/windows/win32/api/devicetopology/nn-devicetopology-isubunit

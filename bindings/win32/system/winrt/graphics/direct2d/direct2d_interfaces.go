@@ -24,13 +24,13 @@ var IID_IGeometrySource2DInterop = win32.GUID{Data1: 0x0657af73, Data2: 0x53fd, 
 // GetGeometry dispatches through IGeometrySource2DInterop's vtable slot 3.
 func (self *IGeometrySource2DInterop) GetGeometry(value **graphicsdirect2d.ID2D1Geometry) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TryGetGeometryUsingFactory dispatches through IGeometrySource2DInterop's vtable slot 4.
 func (self *IGeometrySource2DInterop) TryGetGeometryUsingFactory(factory *graphicsdirect2d.ID2D1Factory, value **graphicsdirect2d.ID2D1Geometry) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(factory)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IGraphicsEffectD2D1Interop: https://learn.microsoft.com/windows/win32/api/windows.graphics.effects.interop/nn-windows-graphics-effects-interop-igraphicseffectd2d1interop
@@ -45,36 +45,36 @@ var IID_IGraphicsEffectD2D1Interop = win32.GUID{Data1: 0x2fc57384, Data2: 0xa068
 // GetEffectId dispatches through IGraphicsEffectD2D1Interop's vtable slot 3.
 func (self *IGraphicsEffectD2D1Interop) GetEffectId(id *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(id)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNamedPropertyMapping dispatches through IGraphicsEffectD2D1Interop's vtable slot 4.
 func (self *IGraphicsEffectD2D1Interop) GetNamedPropertyMapping(name string, index *uint32, mapping *GRAPHICS_EFFECT_PROPERTY_MAPPING) error {
 	_name := win32.UTF16Ptr(name)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(unsafe.Pointer(index)), uintptr(unsafe.Pointer(mapping)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPropertyCount dispatches through IGraphicsEffectD2D1Interop's vtable slot 5.
 func (self *IGraphicsEffectD2D1Interop) GetPropertyCount(count *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(count)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProperty dispatches through IGraphicsEffectD2D1Interop's vtable slot 6.
 func (self *IGraphicsEffectD2D1Interop) GetProperty(index uint32, value *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSource dispatches through IGraphicsEffectD2D1Interop's vtable slot 7.
 func (self *IGraphicsEffectD2D1Interop) GetSource(index uint32, source *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(source)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSourceCount dispatches through IGraphicsEffectD2D1Interop's vtable slot 8.
 func (self *IGraphicsEffectD2D1Interop) GetSourceCount(count *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(count)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

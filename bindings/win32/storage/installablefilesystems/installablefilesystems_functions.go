@@ -56,7 +56,7 @@ func FilterAttach(lpFilterName string, lpVolumeName string, lpInstanceName strin
 	_lpVolumeName := win32.UTF16Ptr(lpVolumeName)
 	_lpInstanceName := win32.UTF16Ptr(lpInstanceName)
 	r1, _, _ := syscall.SyscallN(procFilterAttach.Addr(), uintptr(unsafe.Pointer(_lpFilterName)), uintptr(unsafe.Pointer(_lpVolumeName)), uintptr(unsafe.Pointer(_lpInstanceName)), uintptr(dwCreatedInstanceNameLength), uintptr(unsafe.Pointer(lpCreatedInstanceName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FilterAttachAtAltitude calls FLTLIB!FilterAttachAtAltitude.
@@ -67,14 +67,14 @@ func FilterAttachAtAltitude(lpFilterName string, lpVolumeName string, lpAltitude
 	_lpAltitude := win32.UTF16Ptr(lpAltitude)
 	_lpInstanceName := win32.UTF16Ptr(lpInstanceName)
 	r1, _, _ := syscall.SyscallN(procFilterAttachAtAltitude.Addr(), uintptr(unsafe.Pointer(_lpFilterName)), uintptr(unsafe.Pointer(_lpVolumeName)), uintptr(unsafe.Pointer(_lpAltitude)), uintptr(unsafe.Pointer(_lpInstanceName)), uintptr(dwCreatedInstanceNameLength), uintptr(unsafe.Pointer(lpCreatedInstanceName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FilterClose calls FLTLIB!FilterClose.
 // https://learn.microsoft.com/windows/win32/api/fltuser/nf-fltuser-filterclose
 func FilterClose(hFilter HFILTER) error {
 	r1, _, _ := syscall.SyscallN(procFilterClose.Addr(), uintptr(hFilter))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FilterConnectCommunicationPort calls FLTLIB!FilterConnectCommunicationPort.
@@ -86,7 +86,7 @@ func FilterConnectCommunicationPort(lpPortName string, dwOptions uint32, lpConte
 		_lpContext = &lpContext[0]
 	}
 	r1, _, _ := syscall.SyscallN(procFilterConnectCommunicationPort.Addr(), uintptr(unsafe.Pointer(_lpPortName)), uintptr(dwOptions), uintptr(unsafe.Pointer(_lpContext)), uintptr(len(lpContext)), uintptr(unsafe.Pointer(lpSecurityAttributes)), uintptr(unsafe.Pointer(hPort)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FilterCreate calls FLTLIB!FilterCreate.
@@ -94,7 +94,7 @@ func FilterConnectCommunicationPort(lpPortName string, dwOptions uint32, lpConte
 func FilterCreate(lpFilterName string, hFilter *HFILTER) error {
 	_lpFilterName := win32.UTF16Ptr(lpFilterName)
 	r1, _, _ := syscall.SyscallN(procFilterCreate.Addr(), uintptr(unsafe.Pointer(_lpFilterName)), uintptr(unsafe.Pointer(hFilter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FilterDetach calls FLTLIB!FilterDetach.
@@ -104,14 +104,14 @@ func FilterDetach(lpFilterName string, lpVolumeName string, lpInstanceName strin
 	_lpVolumeName := win32.UTF16Ptr(lpVolumeName)
 	_lpInstanceName := win32.UTF16Ptr(lpInstanceName)
 	r1, _, _ := syscall.SyscallN(procFilterDetach.Addr(), uintptr(unsafe.Pointer(_lpFilterName)), uintptr(unsafe.Pointer(_lpVolumeName)), uintptr(unsafe.Pointer(_lpInstanceName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FilterFindClose calls FLTLIB!FilterFindClose.
 // https://learn.microsoft.com/windows/win32/api/fltuser/nf-fltuser-filterfindclose
 func FilterFindClose(hFilterFind foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procFilterFindClose.Addr(), uintptr(hFilterFind))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FilterFindFirst calls FLTLIB!FilterFindFirst.
@@ -122,7 +122,7 @@ func FilterFindFirst(dwInformationClass FILTER_INFORMATION_CLASS, lpBuffer []byt
 		_lpBuffer = &lpBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(procFilterFindFirst.Addr(), uintptr(dwInformationClass), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(lpFilterFind)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FilterFindNext calls FLTLIB!FilterFindNext.
@@ -133,7 +133,7 @@ func FilterFindNext(hFilterFind foundation.HANDLE, dwInformationClass FILTER_INF
 		_lpBuffer = &lpBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(procFilterFindNext.Addr(), uintptr(hFilterFind), uintptr(dwInformationClass), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FilterGetDosName calls FLTLIB!FilterGetDosName.
@@ -141,7 +141,7 @@ func FilterFindNext(hFilterFind foundation.HANDLE, dwInformationClass FILTER_INF
 func FilterGetDosName(lpVolumeName string, lpDosName foundation.PWSTR, dwDosNameBufferSize uint32) error {
 	_lpVolumeName := win32.UTF16Ptr(lpVolumeName)
 	r1, _, _ := syscall.SyscallN(procFilterGetDosName.Addr(), uintptr(unsafe.Pointer(_lpVolumeName)), uintptr(unsafe.Pointer(lpDosName)), uintptr(dwDosNameBufferSize))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FilterGetInformation calls FLTLIB!FilterGetInformation.
@@ -152,21 +152,21 @@ func FilterGetInformation(hFilter HFILTER, dwInformationClass FILTER_INFORMATION
 		_lpBuffer = &lpBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(procFilterGetInformation.Addr(), uintptr(hFilter), uintptr(dwInformationClass), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FilterGetMessage calls FLTLIB!FilterGetMessage.
 // https://learn.microsoft.com/windows/win32/api/fltuser/nf-fltuser-filtergetmessage
 func FilterGetMessage(hPort foundation.HANDLE, lpMessageBuffer *FILTER_MESSAGE_HEADER, dwMessageBufferSize uint32, lpOverlapped *systemio.OVERLAPPED) error {
 	r1, _, _ := syscall.SyscallN(procFilterGetMessage.Addr(), uintptr(hPort), uintptr(unsafe.Pointer(lpMessageBuffer)), uintptr(dwMessageBufferSize), uintptr(unsafe.Pointer(lpOverlapped)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FilterInstanceClose calls FLTLIB!FilterInstanceClose.
 // https://learn.microsoft.com/windows/win32/api/fltuser/nf-fltuser-filterinstanceclose
 func FilterInstanceClose(hInstance HFILTER_INSTANCE) error {
 	r1, _, _ := syscall.SyscallN(procFilterInstanceClose.Addr(), uintptr(hInstance))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FilterInstanceCreate calls FLTLIB!FilterInstanceCreate.
@@ -176,14 +176,14 @@ func FilterInstanceCreate(lpFilterName string, lpVolumeName string, lpInstanceNa
 	_lpVolumeName := win32.UTF16Ptr(lpVolumeName)
 	_lpInstanceName := win32.UTF16Ptr(lpInstanceName)
 	r1, _, _ := syscall.SyscallN(procFilterInstanceCreate.Addr(), uintptr(unsafe.Pointer(_lpFilterName)), uintptr(unsafe.Pointer(_lpVolumeName)), uintptr(unsafe.Pointer(_lpInstanceName)), uintptr(unsafe.Pointer(hInstance)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FilterInstanceFindClose calls FLTLIB!FilterInstanceFindClose.
 // https://learn.microsoft.com/windows/win32/api/fltuser/nf-fltuser-filterinstancefindclose
 func FilterInstanceFindClose(hFilterInstanceFind foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procFilterInstanceFindClose.Addr(), uintptr(hFilterInstanceFind))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FilterInstanceFindFirst calls FLTLIB!FilterInstanceFindFirst.
@@ -195,7 +195,7 @@ func FilterInstanceFindFirst(lpFilterName string, dwInformationClass INSTANCE_IN
 		_lpBuffer = &lpBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(procFilterInstanceFindFirst.Addr(), uintptr(unsafe.Pointer(_lpFilterName)), uintptr(dwInformationClass), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(lpFilterInstanceFind)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FilterInstanceFindNext calls FLTLIB!FilterInstanceFindNext.
@@ -206,7 +206,7 @@ func FilterInstanceFindNext(hFilterInstanceFind foundation.HANDLE, dwInformation
 		_lpBuffer = &lpBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(procFilterInstanceFindNext.Addr(), uintptr(hFilterInstanceFind), uintptr(dwInformationClass), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FilterInstanceGetInformation calls FLTLIB!FilterInstanceGetInformation.
@@ -217,7 +217,7 @@ func FilterInstanceGetInformation(hInstance HFILTER_INSTANCE, dwInformationClass
 		_lpBuffer = &lpBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(procFilterInstanceGetInformation.Addr(), uintptr(hInstance), uintptr(dwInformationClass), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FilterLoad calls FLTLIB!FilterLoad.
@@ -225,7 +225,7 @@ func FilterInstanceGetInformation(hInstance HFILTER_INSTANCE, dwInformationClass
 func FilterLoad(lpFilterName string) error {
 	_lpFilterName := win32.UTF16Ptr(lpFilterName)
 	r1, _, _ := syscall.SyscallN(procFilterLoad.Addr(), uintptr(unsafe.Pointer(_lpFilterName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FilterReplyMessage calls FLTLIB!FilterReplyMessage.
@@ -233,7 +233,7 @@ func FilterLoad(lpFilterName string) error {
 // Minimum OS: windows5.0.
 func FilterReplyMessage(hPort foundation.HANDLE, lpReplyBuffer *FILTER_REPLY_HEADER, dwReplyBufferSize uint32) error {
 	r1, _, _ := syscall.SyscallN(procFilterReplyMessage.Addr(), uintptr(hPort), uintptr(unsafe.Pointer(lpReplyBuffer)), uintptr(dwReplyBufferSize))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FilterSendMessage calls FLTLIB!FilterSendMessage.
@@ -248,7 +248,7 @@ func FilterSendMessage(hPort foundation.HANDLE, lpInBuffer []byte, lpOutBuffer [
 		_lpOutBuffer = &lpOutBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(procFilterSendMessage.Addr(), uintptr(hPort), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FilterUnload calls FLTLIB!FilterUnload.
@@ -256,14 +256,14 @@ func FilterSendMessage(hPort foundation.HANDLE, lpInBuffer []byte, lpOutBuffer [
 func FilterUnload(lpFilterName string) error {
 	_lpFilterName := win32.UTF16Ptr(lpFilterName)
 	r1, _, _ := syscall.SyscallN(procFilterUnload.Addr(), uintptr(unsafe.Pointer(_lpFilterName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FilterVolumeFindClose calls FLTLIB!FilterVolumeFindClose.
 // https://learn.microsoft.com/windows/win32/api/fltuser/nf-fltuser-filtervolumefindclose
 func FilterVolumeFindClose(hVolumeFind foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procFilterVolumeFindClose.Addr(), uintptr(hVolumeFind))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FilterVolumeFindFirst calls FLTLIB!FilterVolumeFindFirst.
@@ -274,7 +274,7 @@ func FilterVolumeFindFirst(dwInformationClass FILTER_VOLUME_INFORMATION_CLASS, l
 		_lpBuffer = &lpBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(procFilterVolumeFindFirst.Addr(), uintptr(dwInformationClass), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(lpVolumeFind)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FilterVolumeFindNext calls FLTLIB!FilterVolumeFindNext.
@@ -285,14 +285,14 @@ func FilterVolumeFindNext(hVolumeFind foundation.HANDLE, dwInformationClass FILT
 		_lpBuffer = &lpBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(procFilterVolumeFindNext.Addr(), uintptr(hVolumeFind), uintptr(dwInformationClass), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FilterVolumeInstanceFindClose calls FLTLIB!FilterVolumeInstanceFindClose.
 // https://learn.microsoft.com/windows/win32/api/fltuser/nf-fltuser-filtervolumeinstancefindclose
 func FilterVolumeInstanceFindClose(hVolumeInstanceFind foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procFilterVolumeInstanceFindClose.Addr(), uintptr(hVolumeInstanceFind))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FilterVolumeInstanceFindFirst calls FLTLIB!FilterVolumeInstanceFindFirst.
@@ -304,7 +304,7 @@ func FilterVolumeInstanceFindFirst(lpVolumeName string, dwInformationClass INSTA
 		_lpBuffer = &lpBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(procFilterVolumeInstanceFindFirst.Addr(), uintptr(unsafe.Pointer(_lpVolumeName)), uintptr(dwInformationClass), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(lpVolumeInstanceFind)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FilterVolumeInstanceFindNext calls FLTLIB!FilterVolumeInstanceFindNext.
@@ -315,5 +315,5 @@ func FilterVolumeInstanceFindNext(hVolumeInstanceFind foundation.HANDLE, dwInfor
 		_lpBuffer = &lpBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(procFilterVolumeInstanceFindNext.Addr(), uintptr(hVolumeInstanceFind), uintptr(dwInformationClass), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

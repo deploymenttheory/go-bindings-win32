@@ -27,7 +27,7 @@ var IID_IWebApplicationActivation = win32.GUID{Data1: 0xbcdcd0de, Data2: 0x330e,
 // CancelPendingActivation dispatches through IWebApplicationActivation's vtable slot 3.
 func (self *IWebApplicationActivation) CancelPendingActivation() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWebApplicationAuthoringMode: https://learn.microsoft.com/windows/win32/api/webapplication/nn-webapplication-iwebapplicationauthoringmode
@@ -42,7 +42,7 @@ var IID_IWebApplicationAuthoringMode = win32.GUID{Data1: 0x720aea93, Data2: 0x19
 // Get_AuthoringClientBinary dispatches through IWebApplicationAuthoringMode's vtable slot 4.
 func (self *IWebApplicationAuthoringMode) Get_AuthoringClientBinary(designModeDllPath *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(designModeDllPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWebApplicationHost: https://learn.microsoft.com/windows/win32/api/webapplication/nn-webapplication-iwebapplicationhost
@@ -57,31 +57,31 @@ var IID_IWebApplicationHost = win32.GUID{Data1: 0xcecbd2c3, Data2: 0xa3a5, Data3
 // Get_HWND dispatches through IWebApplicationHost's vtable slot 3.
 func (self *IWebApplicationHost) Get_HWND(hwnd *foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hwnd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Document dispatches through IWebApplicationHost's vtable slot 4.
 func (self *IWebApplicationHost) Get_Document(htmlDocument **webmshtml.IHTMLDocument2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(htmlDocument)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through IWebApplicationHost's vtable slot 5.
 func (self *IWebApplicationHost) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Advise dispatches through IWebApplicationHost's vtable slot 6.
 func (self *IWebApplicationHost) Advise(interfaceId *win32.GUID, callback *systemcom.IUnknown, cookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(interfaceId)), uintptr(unsafe.Pointer(callback)), uintptr(unsafe.Pointer(cookie)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Unadvise dispatches through IWebApplicationHost's vtable slot 7.
 func (self *IWebApplicationHost) Unadvise(cookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(cookie))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWebApplicationNavigationEvents: https://learn.microsoft.com/windows/win32/api/webapplication/nn-webapplication-iwebapplicationnavigationevents
@@ -98,14 +98,14 @@ func (self *IWebApplicationNavigationEvents) BeforeNavigate(htmlWindow *webmshtm
 	_url := win32.UTF16Ptr(url)
 	_targetFrameName := win32.UTF16Ptr(targetFrameName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(htmlWindow)), uintptr(unsafe.Pointer(_url)), uintptr(navigationFlags), uintptr(unsafe.Pointer(_targetFrameName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NavigateComplete dispatches through IWebApplicationNavigationEvents's vtable slot 4.
 func (self *IWebApplicationNavigationEvents) NavigateComplete(htmlWindow *webmshtml.IHTMLWindow2, url string) error {
 	_url := win32.UTF16Ptr(url)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(htmlWindow)), uintptr(unsafe.Pointer(_url)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NavigateError dispatches through IWebApplicationNavigationEvents's vtable slot 5.
@@ -113,26 +113,26 @@ func (self *IWebApplicationNavigationEvents) NavigateError(htmlWindow *webmshtml
 	_url := win32.UTF16Ptr(url)
 	_targetFrameName := win32.UTF16Ptr(targetFrameName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(htmlWindow)), uintptr(unsafe.Pointer(_url)), uintptr(unsafe.Pointer(_targetFrameName)), uintptr(statusCode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DocumentComplete dispatches through IWebApplicationNavigationEvents's vtable slot 6.
 func (self *IWebApplicationNavigationEvents) DocumentComplete(htmlWindow *webmshtml.IHTMLWindow2, url string) error {
 	_url := win32.UTF16Ptr(url)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(htmlWindow)), uintptr(unsafe.Pointer(_url)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DownloadBegin dispatches through IWebApplicationNavigationEvents's vtable slot 7.
 func (self *IWebApplicationNavigationEvents) DownloadBegin() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DownloadComplete dispatches through IWebApplicationNavigationEvents's vtable slot 8.
 func (self *IWebApplicationNavigationEvents) DownloadComplete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWebApplicationScriptEvents: https://learn.microsoft.com/windows/win32/api/webapplication/nn-webapplication-iwebapplicationscriptevents
@@ -147,7 +147,7 @@ var IID_IWebApplicationScriptEvents = win32.GUID{Data1: 0x7c3f6998, Data2: 0x156
 // BeforeScriptExecute dispatches through IWebApplicationScriptEvents's vtable slot 3.
 func (self *IWebApplicationScriptEvents) BeforeScriptExecute(htmlWindow *webmshtml.IHTMLWindow2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(htmlWindow)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScriptError dispatches through IWebApplicationScriptEvents's vtable slot 4.
@@ -155,7 +155,7 @@ func (self *IWebApplicationScriptEvents) ScriptError(htmlWindow *webmshtml.IHTML
 	_url := win32.UTF16Ptr(url)
 	_errorHandled := win32.Bool32(errorHandled)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(htmlWindow)), uintptr(unsafe.Pointer(scriptError)), uintptr(unsafe.Pointer(_url)), uintptr(_errorHandled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWebApplicationUIEvents: https://learn.microsoft.com/windows/win32/api/webapplication/nn-webapplication-iwebapplicationuievents
@@ -170,7 +170,7 @@ var IID_IWebApplicationUIEvents = win32.GUID{Data1: 0x5b2b3f99, Data2: 0x328c, D
 // SecurityProblem dispatches through IWebApplicationUIEvents's vtable slot 3.
 func (self *IWebApplicationUIEvents) SecurityProblem(securityProblem uint32, result *foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(securityProblem), uintptr(unsafe.Pointer(result)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWebApplicationUpdateEvents: https://learn.microsoft.com/windows/win32/api/webapplication/nn-webapplication-iwebapplicationupdateevents
@@ -185,11 +185,11 @@ var IID_IWebApplicationUpdateEvents = win32.GUID{Data1: 0x3e59e6b7, Data2: 0xc65
 // OnPaint dispatches through IWebApplicationUpdateEvents's vtable slot 3.
 func (self *IWebApplicationUpdateEvents) OnPaint() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnCssChanged dispatches through IWebApplicationUpdateEvents's vtable slot 4.
 func (self *IWebApplicationUpdateEvents) OnCssChanged() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

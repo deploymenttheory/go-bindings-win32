@@ -47,7 +47,7 @@ func SwDeviceCreate(pszEnumeratorName string, pszParentDeviceInstance string, pC
 		_pProperties = &pProperties[0]
 	}
 	r1, _, _ := syscall.SyscallN(procSwDeviceCreate.Addr(), uintptr(unsafe.Pointer(_pszEnumeratorName)), uintptr(unsafe.Pointer(_pszParentDeviceInstance)), uintptr(unsafe.Pointer(pCreateInfo)), uintptr(len(pProperties)), uintptr(unsafe.Pointer(_pProperties)), uintptr(pCallback), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(phSwDevice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SwDeviceGetLifetime calls CFGMGR32!SwDeviceGetLifetime.
@@ -55,7 +55,7 @@ func SwDeviceCreate(pszEnumeratorName string, pszParentDeviceInstance string, pC
 // Minimum OS: windows8.1.
 func SwDeviceGetLifetime(hSwDevice HSWDEVICE, pLifetime *SW_DEVICE_LIFETIME) error {
 	r1, _, _ := syscall.SyscallN(procSwDeviceGetLifetime.Addr(), uintptr(hSwDevice), uintptr(unsafe.Pointer(pLifetime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SwDeviceInterfacePropertySet calls CFGMGR32!SwDeviceInterfacePropertySet.
@@ -68,7 +68,7 @@ func SwDeviceInterfacePropertySet(hSwDevice HSWDEVICE, pszDeviceInterfaceId stri
 		_pProperties = &pProperties[0]
 	}
 	r1, _, _ := syscall.SyscallN(procSwDeviceInterfacePropertySet.Addr(), uintptr(hSwDevice), uintptr(unsafe.Pointer(_pszDeviceInterfaceId)), uintptr(len(pProperties)), uintptr(unsafe.Pointer(_pProperties)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SwDeviceInterfaceRegister calls CFGMGR32!SwDeviceInterfaceRegister.
@@ -82,7 +82,7 @@ func SwDeviceInterfaceRegister(hSwDevice HSWDEVICE, pInterfaceClassGuid *win32.G
 	}
 	_fEnabled := win32.Bool32(fEnabled)
 	r1, _, _ := syscall.SyscallN(procSwDeviceInterfaceRegister.Addr(), uintptr(hSwDevice), uintptr(unsafe.Pointer(pInterfaceClassGuid)), uintptr(unsafe.Pointer(_pszReferenceString)), uintptr(len(pProperties)), uintptr(unsafe.Pointer(_pProperties)), uintptr(_fEnabled), uintptr(unsafe.Pointer(ppszDeviceInterfaceId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SwDeviceInterfaceSetState calls CFGMGR32!SwDeviceInterfaceSetState.
@@ -92,7 +92,7 @@ func SwDeviceInterfaceSetState(hSwDevice HSWDEVICE, pszDeviceInterfaceId string,
 	_pszDeviceInterfaceId := win32.UTF16Ptr(pszDeviceInterfaceId)
 	_fEnabled := win32.Bool32(fEnabled)
 	r1, _, _ := syscall.SyscallN(procSwDeviceInterfaceSetState.Addr(), uintptr(hSwDevice), uintptr(unsafe.Pointer(_pszDeviceInterfaceId)), uintptr(_fEnabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SwDevicePropertySet calls CFGMGR32!SwDevicePropertySet.
@@ -104,7 +104,7 @@ func SwDevicePropertySet(hSwDevice HSWDEVICE, pProperties []devicesproperties.DE
 		_pProperties = &pProperties[0]
 	}
 	r1, _, _ := syscall.SyscallN(procSwDevicePropertySet.Addr(), uintptr(hSwDevice), uintptr(len(pProperties)), uintptr(unsafe.Pointer(_pProperties)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SwDeviceSetLifetime calls CFGMGR32!SwDeviceSetLifetime.
@@ -112,7 +112,7 @@ func SwDevicePropertySet(hSwDevice HSWDEVICE, pProperties []devicesproperties.DE
 // Minimum OS: windows8.1.
 func SwDeviceSetLifetime(hSwDevice HSWDEVICE, Lifetime SW_DEVICE_LIFETIME) error {
 	r1, _, _ := syscall.SyscallN(procSwDeviceSetLifetime.Addr(), uintptr(hSwDevice), uintptr(Lifetime))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SwMemFree calls CFGMGR32!SwMemFree.

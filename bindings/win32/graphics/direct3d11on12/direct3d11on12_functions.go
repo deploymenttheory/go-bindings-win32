@@ -34,5 +34,5 @@ func D3D11On12CreateDevice(pDevice *systemcom.IUnknown, Flags uint32, pFeatureLe
 		_ppCommandQueues = &ppCommandQueues[0]
 	}
 	r1, _, _ := syscall.SyscallN(procD3D11On12CreateDevice.Addr(), uintptr(unsafe.Pointer(pDevice)), uintptr(Flags), uintptr(unsafe.Pointer(_pFeatureLevels)), uintptr(len(pFeatureLevels)), uintptr(unsafe.Pointer(_ppCommandQueues)), uintptr(len(ppCommandQueues)), uintptr(NodeMask), uintptr(unsafe.Pointer(ppDevice)), uintptr(unsafe.Pointer(ppImmediateContext)), uintptr(unsafe.Pointer(pChosenFeatureLevel)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

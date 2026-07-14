@@ -22,5 +22,5 @@ var (
 // GameInputCreate calls GameInput!GameInputCreate.
 func GameInputCreate(gameInput **IGameInput) error {
 	r1, _, _ := syscall.SyscallN(procGameInputCreate.Addr(), uintptr(unsafe.Pointer(gameInput)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

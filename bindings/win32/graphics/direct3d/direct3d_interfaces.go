@@ -46,13 +46,13 @@ var IID_ID3DDestructionNotifier = win32.GUID{Data1: 0xa06eb39a, Data2: 0x50da, D
 // RegisterDestructionCallback dispatches through ID3DDestructionNotifier's vtable slot 3.
 func (self *ID3DDestructionNotifier) RegisterDestructionCallback(callbackFn PFN_DESTRUCTION_CALLBACK, pData unsafe.Pointer, pCallbackID *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(callbackFn), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(pCallbackID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnregisterDestructionCallback dispatches through ID3DDestructionNotifier's vtable slot 4.
 func (self *ID3DDestructionNotifier) UnregisterDestructionCallback(callbackID uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(callbackID))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ID3DInclude: https://learn.microsoft.com/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude
@@ -63,13 +63,13 @@ type ID3DInclude struct {
 // Open dispatches through ID3DInclude's vtable slot 0.
 func (self *ID3DInclude) Open(IncludeType D3D_INCLUDE_TYPE, pFileName foundation.PSTR, pParentData unsafe.Pointer, ppData *unsafe.Pointer, pBytes *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[0], uintptr(unsafe.Pointer(self)), uintptr(IncludeType), uintptr(unsafe.Pointer(pFileName)), uintptr(unsafe.Pointer(pParentData)), uintptr(unsafe.Pointer(ppData)), uintptr(unsafe.Pointer(pBytes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Close dispatches through ID3DInclude's vtable slot 1.
 func (self *ID3DInclude) Close(pData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[1], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: fc688ee2-1b35-4913-93be-1ca3fa7df39e
@@ -83,13 +83,13 @@ var IID_ID3DShaderCacheApplication = win32.GUID{Data1: 0xfc688ee2, Data2: 0x1b35
 // GetExePath dispatches through ID3DShaderCacheApplication's vtable slot 3.
 func (self *ID3DShaderCacheApplication) GetExePath(pExePath **uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pExePath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDesc dispatches through ID3DShaderCacheApplication's vtable slot 4.
 func (self *ID3DShaderCacheApplication) GetDesc(pApplicationDesc *D3D_SHADER_CACHE_APPLICATION_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pApplicationDesc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterComponent dispatches through ID3DShaderCacheApplication's vtable slot 5.
@@ -101,13 +101,13 @@ func (self *ID3DShaderCacheApplication) RegisterComponent(pName string, pStateOb
 		_pPSDBs = &pPSDBs[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pStateObjectDBPath)), uintptr(len(pPSDBs)), uintptr(unsafe.Pointer(_pPSDBs)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvComponent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveComponent dispatches through ID3DShaderCacheApplication's vtable slot 6.
 func (self *ID3DShaderCacheApplication) RemoveComponent(pComponent *ID3DShaderCacheComponent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pComponent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetComponentCount dispatches through ID3DShaderCacheApplication's vtable slot 7.
@@ -119,7 +119,7 @@ func (self *ID3DShaderCacheApplication) GetComponentCount() uint32 {
 // GetComponent dispatches through ID3DShaderCacheApplication's vtable slot 8.
 func (self *ID3DShaderCacheApplication) GetComponent(index uint32, riid *win32.GUID, ppvComponent **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvComponent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPrecompileTargetCount dispatches through ID3DShaderCacheApplication's vtable slot 9.
@@ -135,13 +135,13 @@ func (self *ID3DShaderCacheApplication) GetPrecompileTargets(pArray []D3D_SHADER
 		_pArray = &pArray[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(len(pArray)), uintptr(unsafe.Pointer(_pArray)), uintptr(flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInstallerName dispatches through ID3DShaderCacheApplication's vtable slot 11.
 func (self *ID3DShaderCacheApplication) GetInstallerName(pInstallerName **uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInstallerName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: eed1bf00-f5c7-4cf7-885c-d0f9c0cb4828
@@ -155,20 +155,20 @@ var IID_ID3DShaderCacheComponent = win32.GUID{Data1: 0xeed1bf00, Data2: 0xf5c7, 
 // GetComponentName dispatches through ID3DShaderCacheComponent's vtable slot 3.
 func (self *ID3DShaderCacheComponent) GetComponentName(pName **uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStateObjectDatabasePath dispatches through ID3DShaderCacheComponent's vtable slot 4.
 func (self *ID3DShaderCacheComponent) GetStateObjectDatabasePath(pPath **uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPrecompiledCachePath dispatches through ID3DShaderCacheComponent's vtable slot 5.
 func (self *ID3DShaderCacheComponent) GetPrecompiledCachePath(pAdapterFamily string, pPath **uint16) error {
 	_pAdapterFamily := win32.UTF16Ptr(pAdapterFamily)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pAdapterFamily)), uintptr(unsafe.Pointer(pPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPrecompiledShaderDatabaseCount dispatches through ID3DShaderCacheComponent's vtable slot 6.
@@ -184,7 +184,7 @@ func (self *ID3DShaderCacheComponent) GetPrecompiledShaderDatabases(pPSDBs []D3D
 		_pPSDBs = &pPSDBs[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(len(pPSDBs)), uintptr(unsafe.Pointer(_pPSDBs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 90432322-32f5-487f-9264-e9390fa58b2a
@@ -199,7 +199,7 @@ var IID_ID3DShaderCacheExplorer = win32.GUID{Data1: 0x90432322, Data2: 0x32f5, D
 func (self *ID3DShaderCacheExplorer) GetApplicationFromExePath(pFullExePath string, riid *win32.GUID, ppvApp **win32.IUnknown) error {
 	_pFullExePath := win32.UTF16Ptr(pFullExePath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pFullExePath)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvApp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: bbe30de1-6318-4526-ae17-776693191bb4
@@ -213,38 +213,38 @@ var IID_ID3DShaderCacheInstaller = win32.GUID{Data1: 0xbbe30de1, Data2: 0x6318, 
 // RegisterDriverUpdateListener dispatches through ID3DShaderCacheInstaller's vtable slot 3.
 func (self *ID3DShaderCacheInstaller) RegisterDriverUpdateListener() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnregisterDriverUpdateListener dispatches through ID3DShaderCacheInstaller's vtable slot 4.
 func (self *ID3DShaderCacheInstaller) UnregisterDriverUpdateListener() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterServiceDriverUpdateTrigger dispatches through ID3DShaderCacheInstaller's vtable slot 5.
 func (self *ID3DShaderCacheInstaller) RegisterServiceDriverUpdateTrigger(hServiceHandle systemservices.SC_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hServiceHandle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnregisterServiceDriverUpdateTrigger dispatches through ID3DShaderCacheInstaller's vtable slot 6.
 func (self *ID3DShaderCacheInstaller) UnregisterServiceDriverUpdateTrigger(hServiceHandle systemservices.SC_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hServiceHandle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterApplication dispatches through ID3DShaderCacheInstaller's vtable slot 7.
 func (self *ID3DShaderCacheInstaller) RegisterApplication(pExePath string, pApplicationDesc *D3D_SHADER_CACHE_APPLICATION_DESC, riid *win32.GUID, ppvApp **win32.IUnknown) error {
 	_pExePath := win32.UTF16Ptr(pExePath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pExePath)), uintptr(unsafe.Pointer(pApplicationDesc)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvApp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveApplication dispatches through ID3DShaderCacheInstaller's vtable slot 8.
 func (self *ID3DShaderCacheInstaller) RemoveApplication(pApplication *ID3DShaderCacheApplication) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pApplication)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetApplicationCount dispatches through ID3DShaderCacheInstaller's vtable slot 9.
@@ -256,13 +256,13 @@ func (self *ID3DShaderCacheInstaller) GetApplicationCount() uint32 {
 // GetApplication dispatches through ID3DShaderCacheInstaller's vtable slot 10.
 func (self *ID3DShaderCacheInstaller) GetApplication(index uint32, riid *win32.GUID, ppvApp **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvApp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ClearAllState dispatches through ID3DShaderCacheInstaller's vtable slot 11.
 func (self *ID3DShaderCacheInstaller) ClearAllState() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMaxPrecompileTargetCount dispatches through ID3DShaderCacheInstaller's vtable slot 12.
@@ -274,7 +274,7 @@ func (self *ID3DShaderCacheInstaller) GetMaxPrecompileTargetCount() uint32 {
 // GetPrecompileTargets dispatches through ID3DShaderCacheInstaller's vtable slot 13.
 func (self *ID3DShaderCacheInstaller) GetPrecompileTargets(pApplicationDesc *D3D_SHADER_CACHE_APPLICATION_DESC, pArraySize *uint32, pArray *D3D_SHADER_CACHE_COMPILER_PROPERTIES, flags D3D_SHADER_CACHE_TARGET_FLAGS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pApplicationDesc)), uintptr(unsafe.Pointer(pArraySize)), uintptr(unsafe.Pointer(pArray)), uintptr(flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: a16ee930-d9f6-4222-a514-244473e5d266
@@ -288,7 +288,7 @@ var IID_ID3DShaderCacheInstallerClient = win32.GUID{Data1: 0xa16ee930, Data2: 0x
 // GetInstallerName dispatches through ID3DShaderCacheInstallerClient's vtable slot 0.
 func (self *ID3DShaderCacheInstallerClient) GetInstallerName(pNameLength *uintptr, pName foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[0], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNameLength)), uintptr(unsafe.Pointer(pName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInstallerScope dispatches through ID3DShaderCacheInstallerClient's vtable slot 1.
@@ -300,7 +300,7 @@ func (self *ID3DShaderCacheInstallerClient) GetInstallerScope() D3D_SHADER_CACHE
 // HandleDriverUpdate dispatches through ID3DShaderCacheInstallerClient's vtable slot 2.
 func (self *ID3DShaderCacheInstallerClient) HandleDriverUpdate(pInstaller *ID3DShaderCacheInstaller) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[2], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInstaller)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 09b2dfe4-840f-401a-804c-0dd8aadc9e9f
@@ -314,11 +314,11 @@ var IID_ID3DShaderCacheInstallerFactory = win32.GUID{Data1: 0x09b2dfe4, Data2: 0
 // CreateInstaller dispatches through ID3DShaderCacheInstallerFactory's vtable slot 3.
 func (self *ID3DShaderCacheInstallerFactory) CreateInstaller(pClient *ID3DShaderCacheInstallerClient, riid *win32.GUID, ppvInstaller **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pClient)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvInstaller)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateExplorer dispatches through ID3DShaderCacheInstallerFactory's vtable slot 4.
 func (self *ID3DShaderCacheInstallerFactory) CreateExplorer(pUnknown *systemcom.IUnknown, riid *win32.GUID, ppvExplorer **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnknown)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvExplorer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

@@ -1846,7 +1846,7 @@ func GetDistanceOfClosestLanguageInList(pszLanguage string, pszLanguagesList str
 	_pszLanguage := win32.UTF16Ptr(pszLanguage)
 	_pszLanguagesList := win32.UTF16Ptr(pszLanguagesList)
 	r1, _, _ := syscall.SyscallN(procGetDistanceOfClosestLanguageInList.Addr(), uintptr(unsafe.Pointer(_pszLanguage)), uintptr(unsafe.Pointer(_pszLanguagesList)), uintptr(wchListDelimiter), uintptr(unsafe.Pointer(pClosestDistance)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDurationFormat calls KERNEL32!GetDurationFormat.
@@ -2620,7 +2620,7 @@ func LstrlenA(lpString foundation.PSTR) int32 {
 func MappingDoAction(pBag *MAPPING_PROPERTY_BAG, dwRangeIndex uint32, pszActionId string) error {
 	_pszActionId := win32.UTF16Ptr(pszActionId)
 	r1, _, _ := syscall.SyscallN(procMappingDoAction.Addr(), uintptr(unsafe.Pointer(pBag)), uintptr(dwRangeIndex), uintptr(unsafe.Pointer(_pszActionId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MappingFreePropertyBag calls elscore!MappingFreePropertyBag.
@@ -2628,7 +2628,7 @@ func MappingDoAction(pBag *MAPPING_PROPERTY_BAG, dwRangeIndex uint32, pszActionI
 // Minimum OS: windows6.1.
 func MappingFreePropertyBag(pBag *MAPPING_PROPERTY_BAG) error {
 	r1, _, _ := syscall.SyscallN(procMappingFreePropertyBag.Addr(), uintptr(unsafe.Pointer(pBag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MappingFreeServices calls elscore!MappingFreeServices.
@@ -2636,7 +2636,7 @@ func MappingFreePropertyBag(pBag *MAPPING_PROPERTY_BAG) error {
 // Minimum OS: windows6.1.
 func MappingFreeServices(pServiceInfo *MAPPING_SERVICE_INFO) error {
 	r1, _, _ := syscall.SyscallN(procMappingFreeServices.Addr(), uintptr(unsafe.Pointer(pServiceInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MappingGetServices calls elscore!MappingGetServices.
@@ -2644,7 +2644,7 @@ func MappingFreeServices(pServiceInfo *MAPPING_SERVICE_INFO) error {
 // Minimum OS: windows6.1.
 func MappingGetServices(pOptions *MAPPING_ENUM_OPTIONS, prgServices **MAPPING_SERVICE_INFO, pdwServicesCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMappingGetServices.Addr(), uintptr(unsafe.Pointer(pOptions)), uintptr(unsafe.Pointer(prgServices)), uintptr(unsafe.Pointer(pdwServicesCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MappingRecognizeText calls elscore!MappingRecognizeText.
@@ -2653,7 +2653,7 @@ func MappingGetServices(pOptions *MAPPING_ENUM_OPTIONS, prgServices **MAPPING_SE
 func MappingRecognizeText(pServiceInfo *MAPPING_SERVICE_INFO, pszText string, dwLength uint32, dwIndex uint32, pOptions *MAPPING_OPTIONS, pbag *MAPPING_PROPERTY_BAG) error {
 	_pszText := win32.UTF16Ptr(pszText)
 	r1, _, _ := syscall.SyscallN(procMappingRecognizeText.Addr(), uintptr(unsafe.Pointer(pServiceInfo)), uintptr(unsafe.Pointer(_pszText)), uintptr(dwLength), uintptr(dwIndex), uintptr(unsafe.Pointer(pOptions)), uintptr(unsafe.Pointer(pbag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MultiByteToWideChar calls KERNEL32!MultiByteToWideChar.
@@ -2711,7 +2711,7 @@ func RestoreThreadPreferredUILanguages(snapshot HSAVEDUILANGUAGES) {
 // Minimum OS: windows5.0.
 func ScriptApplyDigitSubstitution(psds *SCRIPT_DIGITSUBSTITUTE, psc *SCRIPT_CONTROL, pss *SCRIPT_STATE) error {
 	r1, _, _ := syscall.SyscallN(procScriptApplyDigitSubstitution.Addr(), uintptr(unsafe.Pointer(psds)), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(pss)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScriptApplyLogicalWidth calls USP10!ScriptApplyLogicalWidth.
@@ -2719,7 +2719,7 @@ func ScriptApplyDigitSubstitution(psds *SCRIPT_DIGITSUBSTITUTE, psc *SCRIPT_CONT
 // Minimum OS: windows5.0.
 func ScriptApplyLogicalWidth(piDx *int32, cChars int32, cGlyphs int32, pwLogClust *uint16, psva *SCRIPT_VISATTR, piAdvance *int32, psa *SCRIPT_ANALYSIS, pABC *graphicsgdi.ABC, piJustify *int32) error {
 	r1, _, _ := syscall.SyscallN(procScriptApplyLogicalWidth.Addr(), uintptr(unsafe.Pointer(piDx)), uintptr(cChars), uintptr(cGlyphs), uintptr(unsafe.Pointer(pwLogClust)), uintptr(unsafe.Pointer(psva)), uintptr(unsafe.Pointer(piAdvance)), uintptr(unsafe.Pointer(psa)), uintptr(unsafe.Pointer(pABC)), uintptr(unsafe.Pointer(piJustify)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScriptBreak calls USP10!ScriptBreak.
@@ -2728,7 +2728,7 @@ func ScriptApplyLogicalWidth(piDx *int32, cChars int32, cGlyphs int32, pwLogClus
 func ScriptBreak(pwcChars string, cChars int32, psa *SCRIPT_ANALYSIS, psla *SCRIPT_LOGATTR) error {
 	_pwcChars := win32.UTF16Ptr(pwcChars)
 	r1, _, _ := syscall.SyscallN(procScriptBreak.Addr(), uintptr(unsafe.Pointer(_pwcChars)), uintptr(cChars), uintptr(unsafe.Pointer(psa)), uintptr(unsafe.Pointer(psla)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScriptCPtoX calls USP10!ScriptCPtoX.
@@ -2741,7 +2741,7 @@ func ScriptCPtoX(iCP int32, fTrailing bool, cGlyphs int32, pwLogClust []uint16, 
 		_pwLogClust = &pwLogClust[0]
 	}
 	r1, _, _ := syscall.SyscallN(procScriptCPtoX.Addr(), uintptr(iCP), uintptr(_fTrailing), uintptr(len(pwLogClust)), uintptr(cGlyphs), uintptr(unsafe.Pointer(_pwLogClust)), uintptr(unsafe.Pointer(psva)), uintptr(unsafe.Pointer(piAdvance)), uintptr(unsafe.Pointer(psa)), uintptr(unsafe.Pointer(piX)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScriptCacheGetHeight calls USP10!ScriptCacheGetHeight.
@@ -2749,7 +2749,7 @@ func ScriptCPtoX(iCP int32, fTrailing bool, cGlyphs int32, pwLogClust []uint16, 
 // Minimum OS: windows5.0.
 func ScriptCacheGetHeight(hdc graphicsgdi.HDC, psc *unsafe.Pointer, tmHeight *int32) error {
 	r1, _, _ := syscall.SyscallN(procScriptCacheGetHeight.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(tmHeight)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScriptFreeCache calls USP10!ScriptFreeCache.
@@ -2757,7 +2757,7 @@ func ScriptCacheGetHeight(hdc graphicsgdi.HDC, psc *unsafe.Pointer, tmHeight *in
 // Minimum OS: windows5.0.
 func ScriptFreeCache(psc *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procScriptFreeCache.Addr(), uintptr(unsafe.Pointer(psc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScriptGetCMap calls USP10!ScriptGetCMap.
@@ -2766,7 +2766,7 @@ func ScriptFreeCache(psc *unsafe.Pointer) error {
 func ScriptGetCMap(hdc graphicsgdi.HDC, psc *unsafe.Pointer, pwcInChars string, cChars int32, dwFlags uint32, pwOutGlyphs *uint16) error {
 	_pwcInChars := win32.UTF16Ptr(pwcInChars)
 	r1, _, _ := syscall.SyscallN(procScriptGetCMap.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(_pwcInChars)), uintptr(cChars), uintptr(dwFlags), uintptr(unsafe.Pointer(pwOutGlyphs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScriptGetFontAlternateGlyphs calls USP10!ScriptGetFontAlternateGlyphs.
@@ -2778,7 +2778,7 @@ func ScriptGetFontAlternateGlyphs(hdc graphicsgdi.HDC, psc *unsafe.Pointer, psa 
 		_pAlternateGlyphs = &pAlternateGlyphs[0]
 	}
 	r1, _, _ := syscall.SyscallN(procScriptGetFontAlternateGlyphs.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(psa)), uintptr(tagScript), uintptr(tagLangSys), uintptr(tagFeature), uintptr(wGlyphId), uintptr(len(pAlternateGlyphs)), uintptr(unsafe.Pointer(_pAlternateGlyphs)), uintptr(unsafe.Pointer(pcAlternates)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScriptGetFontFeatureTags calls USP10!ScriptGetFontFeatureTags.
@@ -2790,7 +2790,7 @@ func ScriptGetFontFeatureTags(hdc graphicsgdi.HDC, psc *unsafe.Pointer, psa *SCR
 		_pFeatureTags = &pFeatureTags[0]
 	}
 	r1, _, _ := syscall.SyscallN(procScriptGetFontFeatureTags.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(psa)), uintptr(tagScript), uintptr(tagLangSys), uintptr(len(pFeatureTags)), uintptr(unsafe.Pointer(_pFeatureTags)), uintptr(unsafe.Pointer(pcTags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScriptGetFontLanguageTags calls USP10!ScriptGetFontLanguageTags.
@@ -2802,7 +2802,7 @@ func ScriptGetFontLanguageTags(hdc graphicsgdi.HDC, psc *unsafe.Pointer, psa *SC
 		_pLangsysTags = &pLangsysTags[0]
 	}
 	r1, _, _ := syscall.SyscallN(procScriptGetFontLanguageTags.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(psa)), uintptr(tagScript), uintptr(len(pLangsysTags)), uintptr(unsafe.Pointer(_pLangsysTags)), uintptr(unsafe.Pointer(pcTags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScriptGetFontProperties calls USP10!ScriptGetFontProperties.
@@ -2810,7 +2810,7 @@ func ScriptGetFontLanguageTags(hdc graphicsgdi.HDC, psc *unsafe.Pointer, psa *SC
 // Minimum OS: windows5.0.
 func ScriptGetFontProperties(hdc graphicsgdi.HDC, psc *unsafe.Pointer, sfp *SCRIPT_FONTPROPERTIES) error {
 	r1, _, _ := syscall.SyscallN(procScriptGetFontProperties.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(sfp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScriptGetFontScriptTags calls USP10!ScriptGetFontScriptTags.
@@ -2822,7 +2822,7 @@ func ScriptGetFontScriptTags(hdc graphicsgdi.HDC, psc *unsafe.Pointer, psa *SCRI
 		_pScriptTags = &pScriptTags[0]
 	}
 	r1, _, _ := syscall.SyscallN(procScriptGetFontScriptTags.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(psa)), uintptr(len(pScriptTags)), uintptr(unsafe.Pointer(_pScriptTags)), uintptr(unsafe.Pointer(pcTags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScriptGetGlyphABCWidth calls USP10!ScriptGetGlyphABCWidth.
@@ -2830,7 +2830,7 @@ func ScriptGetFontScriptTags(hdc graphicsgdi.HDC, psc *unsafe.Pointer, psa *SCRI
 // Minimum OS: windows5.0.
 func ScriptGetGlyphABCWidth(hdc graphicsgdi.HDC, psc *unsafe.Pointer, wGlyph uint16, pABC *graphicsgdi.ABC) error {
 	r1, _, _ := syscall.SyscallN(procScriptGetGlyphABCWidth.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(wGlyph), uintptr(unsafe.Pointer(pABC)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScriptGetLogicalWidths calls USP10!ScriptGetLogicalWidths.
@@ -2838,7 +2838,7 @@ func ScriptGetGlyphABCWidth(hdc graphicsgdi.HDC, psc *unsafe.Pointer, wGlyph uin
 // Minimum OS: windows5.0.
 func ScriptGetLogicalWidths(psa *SCRIPT_ANALYSIS, cChars int32, cGlyphs int32, piGlyphWidth *int32, pwLogClust *uint16, psva *SCRIPT_VISATTR, piDx *int32) error {
 	r1, _, _ := syscall.SyscallN(procScriptGetLogicalWidths.Addr(), uintptr(unsafe.Pointer(psa)), uintptr(cChars), uintptr(cGlyphs), uintptr(unsafe.Pointer(piGlyphWidth)), uintptr(unsafe.Pointer(pwLogClust)), uintptr(unsafe.Pointer(psva)), uintptr(unsafe.Pointer(piDx)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScriptGetProperties calls USP10!ScriptGetProperties.
@@ -2846,7 +2846,7 @@ func ScriptGetLogicalWidths(psa *SCRIPT_ANALYSIS, cChars int32, cGlyphs int32, p
 // Minimum OS: windows5.0.
 func ScriptGetProperties(ppSp ***SCRIPT_PROPERTIES, piNumScripts *int32) error {
 	r1, _, _ := syscall.SyscallN(procScriptGetProperties.Addr(), uintptr(unsafe.Pointer(ppSp)), uintptr(unsafe.Pointer(piNumScripts)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScriptIsComplex calls USP10!ScriptIsComplex.
@@ -2855,7 +2855,7 @@ func ScriptGetProperties(ppSp ***SCRIPT_PROPERTIES, piNumScripts *int32) error {
 func ScriptIsComplex(pwcInChars string, cInChars int32, dwFlags SCRIPT_IS_COMPLEX_FLAGS) error {
 	_pwcInChars := win32.UTF16Ptr(pwcInChars)
 	r1, _, _ := syscall.SyscallN(procScriptIsComplex.Addr(), uintptr(unsafe.Pointer(_pwcInChars)), uintptr(cInChars), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScriptItemize calls USP10!ScriptItemize.
@@ -2868,7 +2868,7 @@ func ScriptItemize(pwcInChars string, cInChars int32, psControl *SCRIPT_CONTROL,
 		_pItems = &pItems[0]
 	}
 	r1, _, _ := syscall.SyscallN(procScriptItemize.Addr(), uintptr(unsafe.Pointer(_pwcInChars)), uintptr(cInChars), uintptr(len(pItems)), uintptr(unsafe.Pointer(psControl)), uintptr(unsafe.Pointer(psState)), uintptr(unsafe.Pointer(_pItems)), uintptr(unsafe.Pointer(pcItems)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScriptItemizeOpenType calls USP10!ScriptItemizeOpenType.
@@ -2877,7 +2877,7 @@ func ScriptItemize(pwcInChars string, cInChars int32, psControl *SCRIPT_CONTROL,
 func ScriptItemizeOpenType(pwcInChars string, cInChars int32, cMaxItems int32, psControl *SCRIPT_CONTROL, psState *SCRIPT_STATE, pItems *SCRIPT_ITEM, pScriptTags *uint32, pcItems *int32) error {
 	_pwcInChars := win32.UTF16Ptr(pwcInChars)
 	r1, _, _ := syscall.SyscallN(procScriptItemizeOpenType.Addr(), uintptr(unsafe.Pointer(_pwcInChars)), uintptr(cInChars), uintptr(cMaxItems), uintptr(unsafe.Pointer(psControl)), uintptr(unsafe.Pointer(psState)), uintptr(unsafe.Pointer(pItems)), uintptr(unsafe.Pointer(pScriptTags)), uintptr(unsafe.Pointer(pcItems)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScriptJustify calls USP10!ScriptJustify.
@@ -2885,7 +2885,7 @@ func ScriptItemizeOpenType(pwcInChars string, cInChars int32, cMaxItems int32, p
 // Minimum OS: windows5.0.
 func ScriptJustify(psva *SCRIPT_VISATTR, piAdvance *int32, cGlyphs int32, iDx int32, iMinKashida int32, piJustify *int32) error {
 	r1, _, _ := syscall.SyscallN(procScriptJustify.Addr(), uintptr(unsafe.Pointer(psva)), uintptr(unsafe.Pointer(piAdvance)), uintptr(cGlyphs), uintptr(iDx), uintptr(iMinKashida), uintptr(unsafe.Pointer(piJustify)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScriptLayout calls USP10!ScriptLayout.
@@ -2893,7 +2893,7 @@ func ScriptJustify(psva *SCRIPT_VISATTR, piAdvance *int32, cGlyphs int32, iDx in
 // Minimum OS: windows5.0.
 func ScriptLayout(cRuns int32, pbLevel *byte, piVisualToLogical *int32, piLogicalToVisual *int32) error {
 	r1, _, _ := syscall.SyscallN(procScriptLayout.Addr(), uintptr(cRuns), uintptr(unsafe.Pointer(pbLevel)), uintptr(unsafe.Pointer(piVisualToLogical)), uintptr(unsafe.Pointer(piLogicalToVisual)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScriptPlace calls USP10!ScriptPlace.
@@ -2901,7 +2901,7 @@ func ScriptLayout(cRuns int32, pbLevel *byte, piVisualToLogical *int32, piLogica
 // Minimum OS: windows5.0.
 func ScriptPlace(hdc graphicsgdi.HDC, psc *unsafe.Pointer, pwGlyphs *uint16, cGlyphs int32, psva *SCRIPT_VISATTR, psa *SCRIPT_ANALYSIS, piAdvance *int32, pGoffset *GOFFSET, pABC *graphicsgdi.ABC) error {
 	r1, _, _ := syscall.SyscallN(procScriptPlace.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(pwGlyphs)), uintptr(cGlyphs), uintptr(unsafe.Pointer(psva)), uintptr(unsafe.Pointer(psa)), uintptr(unsafe.Pointer(piAdvance)), uintptr(unsafe.Pointer(pGoffset)), uintptr(unsafe.Pointer(pABC)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScriptPlaceOpenType calls USP10!ScriptPlaceOpenType.
@@ -2910,7 +2910,7 @@ func ScriptPlace(hdc graphicsgdi.HDC, psc *unsafe.Pointer, pwGlyphs *uint16, cGl
 func ScriptPlaceOpenType(hdc graphicsgdi.HDC, psc *unsafe.Pointer, psa *SCRIPT_ANALYSIS, tagScript uint32, tagLangSys uint32, rcRangeChars *int32, rpRangeProperties **TEXTRANGE_PROPERTIES, cRanges int32, pwcChars string, pwLogClust *uint16, pCharProps *SCRIPT_CHARPROP, cChars int32, pwGlyphs *uint16, pGlyphProps *SCRIPT_GLYPHPROP, cGlyphs int32, piAdvance *int32, pGoffset *GOFFSET, pABC *graphicsgdi.ABC) error {
 	_pwcChars := win32.UTF16Ptr(pwcChars)
 	r1, _, _ := syscall.SyscallN(procScriptPlaceOpenType.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(psa)), uintptr(tagScript), uintptr(tagLangSys), uintptr(unsafe.Pointer(rcRangeChars)), uintptr(unsafe.Pointer(rpRangeProperties)), uintptr(cRanges), uintptr(unsafe.Pointer(_pwcChars)), uintptr(unsafe.Pointer(pwLogClust)), uintptr(unsafe.Pointer(pCharProps)), uintptr(cChars), uintptr(unsafe.Pointer(pwGlyphs)), uintptr(unsafe.Pointer(pGlyphProps)), uintptr(cGlyphs), uintptr(unsafe.Pointer(piAdvance)), uintptr(unsafe.Pointer(pGoffset)), uintptr(unsafe.Pointer(pABC)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScriptRecordDigitSubstitution calls USP10!ScriptRecordDigitSubstitution.
@@ -2918,7 +2918,7 @@ func ScriptPlaceOpenType(hdc graphicsgdi.HDC, psc *unsafe.Pointer, psa *SCRIPT_A
 // Minimum OS: windows5.0.
 func ScriptRecordDigitSubstitution(Locale uint32, psds *SCRIPT_DIGITSUBSTITUTE) error {
 	r1, _, _ := syscall.SyscallN(procScriptRecordDigitSubstitution.Addr(), uintptr(Locale), uintptr(unsafe.Pointer(psds)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScriptShape calls USP10!ScriptShape.
@@ -2927,7 +2927,7 @@ func ScriptRecordDigitSubstitution(Locale uint32, psds *SCRIPT_DIGITSUBSTITUTE) 
 func ScriptShape(hdc graphicsgdi.HDC, psc *unsafe.Pointer, pwcChars string, cChars int32, cMaxGlyphs int32, psa *SCRIPT_ANALYSIS, pwOutGlyphs *uint16, pwLogClust *uint16, psva *SCRIPT_VISATTR, pcGlyphs *int32) error {
 	_pwcChars := win32.UTF16Ptr(pwcChars)
 	r1, _, _ := syscall.SyscallN(procScriptShape.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(_pwcChars)), uintptr(cChars), uintptr(cMaxGlyphs), uintptr(unsafe.Pointer(psa)), uintptr(unsafe.Pointer(pwOutGlyphs)), uintptr(unsafe.Pointer(pwLogClust)), uintptr(unsafe.Pointer(psva)), uintptr(unsafe.Pointer(pcGlyphs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScriptShapeOpenType calls USP10!ScriptShapeOpenType.
@@ -2936,7 +2936,7 @@ func ScriptShape(hdc graphicsgdi.HDC, psc *unsafe.Pointer, pwcChars string, cCha
 func ScriptShapeOpenType(hdc graphicsgdi.HDC, psc *unsafe.Pointer, psa *SCRIPT_ANALYSIS, tagScript uint32, tagLangSys uint32, rcRangeChars *int32, rpRangeProperties **TEXTRANGE_PROPERTIES, cRanges int32, pwcChars string, cChars int32, cMaxGlyphs int32, pwLogClust *uint16, pCharProps *SCRIPT_CHARPROP, pwOutGlyphs *uint16, pOutGlyphProps *SCRIPT_GLYPHPROP, pcGlyphs *int32) error {
 	_pwcChars := win32.UTF16Ptr(pwcChars)
 	r1, _, _ := syscall.SyscallN(procScriptShapeOpenType.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(psa)), uintptr(tagScript), uintptr(tagLangSys), uintptr(unsafe.Pointer(rcRangeChars)), uintptr(unsafe.Pointer(rpRangeProperties)), uintptr(cRanges), uintptr(unsafe.Pointer(_pwcChars)), uintptr(cChars), uintptr(cMaxGlyphs), uintptr(unsafe.Pointer(pwLogClust)), uintptr(unsafe.Pointer(pCharProps)), uintptr(unsafe.Pointer(pwOutGlyphs)), uintptr(unsafe.Pointer(pOutGlyphProps)), uintptr(unsafe.Pointer(pcGlyphs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScriptStringAnalyse calls USP10!ScriptStringAnalyse.
@@ -2944,7 +2944,7 @@ func ScriptShapeOpenType(hdc graphicsgdi.HDC, psc *unsafe.Pointer, psa *SCRIPT_A
 // Minimum OS: windows5.0.
 func ScriptStringAnalyse(hdc graphicsgdi.HDC, pString unsafe.Pointer, cString int32, cGlyphs int32, iCharset int32, dwFlags uint32, iReqWidth int32, psControl *SCRIPT_CONTROL, psState *SCRIPT_STATE, piDx *int32, pTabdef *SCRIPT_TABDEF, pbInClass *byte, pssa *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procScriptStringAnalyse.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(pString)), uintptr(cString), uintptr(cGlyphs), uintptr(iCharset), uintptr(dwFlags), uintptr(iReqWidth), uintptr(unsafe.Pointer(psControl)), uintptr(unsafe.Pointer(psState)), uintptr(unsafe.Pointer(piDx)), uintptr(unsafe.Pointer(pTabdef)), uintptr(unsafe.Pointer(pbInClass)), uintptr(unsafe.Pointer(pssa)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScriptStringCPtoX calls USP10!ScriptStringCPtoX.
@@ -2953,7 +2953,7 @@ func ScriptStringAnalyse(hdc graphicsgdi.HDC, pString unsafe.Pointer, cString in
 func ScriptStringCPtoX(ssa unsafe.Pointer, icp int32, fTrailing bool, pX *int32) error {
 	_fTrailing := win32.Bool32(fTrailing)
 	r1, _, _ := syscall.SyscallN(procScriptStringCPtoX.Addr(), uintptr(unsafe.Pointer(ssa)), uintptr(icp), uintptr(_fTrailing), uintptr(unsafe.Pointer(pX)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScriptStringFree calls USP10!ScriptStringFree.
@@ -2961,7 +2961,7 @@ func ScriptStringCPtoX(ssa unsafe.Pointer, icp int32, fTrailing bool, pX *int32)
 // Minimum OS: windows5.0.
 func ScriptStringFree(pssa *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procScriptStringFree.Addr(), uintptr(unsafe.Pointer(pssa)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScriptStringGetLogicalWidths calls USP10!ScriptStringGetLogicalWidths.
@@ -2969,7 +2969,7 @@ func ScriptStringFree(pssa *unsafe.Pointer) error {
 // Minimum OS: windows5.0.
 func ScriptStringGetLogicalWidths(ssa unsafe.Pointer, piDx *int32) error {
 	r1, _, _ := syscall.SyscallN(procScriptStringGetLogicalWidths.Addr(), uintptr(unsafe.Pointer(ssa)), uintptr(unsafe.Pointer(piDx)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScriptStringGetOrder calls USP10!ScriptStringGetOrder.
@@ -2977,7 +2977,7 @@ func ScriptStringGetLogicalWidths(ssa unsafe.Pointer, piDx *int32) error {
 // Minimum OS: windows5.0.
 func ScriptStringGetOrder(ssa unsafe.Pointer, puOrder *uint32) error {
 	r1, _, _ := syscall.SyscallN(procScriptStringGetOrder.Addr(), uintptr(unsafe.Pointer(ssa)), uintptr(unsafe.Pointer(puOrder)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScriptStringOut calls USP10!ScriptStringOut.
@@ -2986,7 +2986,7 @@ func ScriptStringGetOrder(ssa unsafe.Pointer, puOrder *uint32) error {
 func ScriptStringOut(ssa unsafe.Pointer, iX int32, iY int32, uOptions graphicsgdi.ETO_OPTIONS, prc *foundation.RECT, iMinSel int32, iMaxSel int32, fDisabled bool) error {
 	_fDisabled := win32.Bool32(fDisabled)
 	r1, _, _ := syscall.SyscallN(procScriptStringOut.Addr(), uintptr(unsafe.Pointer(ssa)), uintptr(iX), uintptr(iY), uintptr(uOptions), uintptr(unsafe.Pointer(prc)), uintptr(iMinSel), uintptr(iMaxSel), uintptr(_fDisabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScriptStringValidate calls USP10!ScriptStringValidate.
@@ -2994,7 +2994,7 @@ func ScriptStringOut(ssa unsafe.Pointer, iX int32, iY int32, uOptions graphicsgd
 // Minimum OS: windows5.0.
 func ScriptStringValidate(ssa unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procScriptStringValidate.Addr(), uintptr(unsafe.Pointer(ssa)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScriptStringXtoCP calls USP10!ScriptStringXtoCP.
@@ -3002,7 +3002,7 @@ func ScriptStringValidate(ssa unsafe.Pointer) error {
 // Minimum OS: windows5.0.
 func ScriptStringXtoCP(ssa unsafe.Pointer, iX int32, piCh *int32, piTrailing *int32) error {
 	r1, _, _ := syscall.SyscallN(procScriptStringXtoCP.Addr(), uintptr(unsafe.Pointer(ssa)), uintptr(iX), uintptr(unsafe.Pointer(piCh)), uintptr(unsafe.Pointer(piTrailing)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScriptString_pLogAttr calls USP10!ScriptString_pLogAttr.
@@ -3034,7 +3034,7 @@ func ScriptString_pcOutChars(ssa unsafe.Pointer) *int32 {
 // Minimum OS: windows6.0.6000.
 func ScriptSubstituteSingleGlyph(hdc graphicsgdi.HDC, psc *unsafe.Pointer, psa *SCRIPT_ANALYSIS, tagScript uint32, tagLangSys uint32, tagFeature uint32, lParameter int32, wGlyphId uint16, pwOutGlyphId *uint16) error {
 	r1, _, _ := syscall.SyscallN(procScriptSubstituteSingleGlyph.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(psa)), uintptr(tagScript), uintptr(tagLangSys), uintptr(tagFeature), uintptr(lParameter), uintptr(wGlyphId), uintptr(unsafe.Pointer(pwOutGlyphId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScriptTextOut calls USP10!ScriptTextOut.
@@ -3042,7 +3042,7 @@ func ScriptSubstituteSingleGlyph(hdc graphicsgdi.HDC, psc *unsafe.Pointer, psa *
 // Minimum OS: windows5.0.
 func ScriptTextOut(hdc graphicsgdi.HDC, psc *unsafe.Pointer, x int32, y int32, fuOptions uint32, lprc *foundation.RECT, psa *SCRIPT_ANALYSIS, pwGlyphs *uint16, cGlyphs int32, piAdvance *int32, piJustify *int32, pGoffset *GOFFSET) error {
 	r1, _, _ := syscall.SyscallN(procScriptTextOut.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(x), uintptr(y), uintptr(fuOptions), uintptr(unsafe.Pointer(lprc)), uintptr(unsafe.Pointer(psa)), 0, 0, uintptr(unsafe.Pointer(pwGlyphs)), uintptr(cGlyphs), uintptr(unsafe.Pointer(piAdvance)), uintptr(unsafe.Pointer(piJustify)), uintptr(unsafe.Pointer(pGoffset)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScriptXtoCP calls USP10!ScriptXtoCP.
@@ -3054,7 +3054,7 @@ func ScriptXtoCP(iX int32, cGlyphs int32, pwLogClust []uint16, psva *SCRIPT_VISA
 		_pwLogClust = &pwLogClust[0]
 	}
 	r1, _, _ := syscall.SyscallN(procScriptXtoCP.Addr(), uintptr(iX), uintptr(len(pwLogClust)), uintptr(cGlyphs), uintptr(unsafe.Pointer(_pwLogClust)), uintptr(unsafe.Pointer(psva)), uintptr(unsafe.Pointer(piAdvance)), uintptr(unsafe.Pointer(psa)), uintptr(unsafe.Pointer(piCP)), uintptr(unsafe.Pointer(piTrailing)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCalendarInfo calls KERNEL32!SetCalendarInfoW.

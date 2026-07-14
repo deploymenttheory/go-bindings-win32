@@ -27,14 +27,14 @@ var IID_IProtectionPolicyManagerInterop = win32.GUID{Data1: 0x4652651d, Data2: 0
 func (self *IProtectionPolicyManagerInterop) RequestAccessForWindowAsync(appWindow foundation.HWND, sourceIdentity systemwinrt.HSTRING, targetIdentity systemwinrt.HSTRING, riid *win32.GUID) (*win32.IUnknown, error) {
 	var _asyncOperation *win32.IUnknown
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(sourceIdentity), uintptr(targetIdentity), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_asyncOperation)))
-	return _asyncOperation, win32.HRESULTError(int32(r1))
+	return _asyncOperation, win32.ErrIfFailed(int32(r1))
 }
 
 // GetForWindow dispatches through IProtectionPolicyManagerInterop's vtable slot 7.
 func (self *IProtectionPolicyManagerInterop) GetForWindow(appWindow foundation.HWND, riid *win32.GUID) (*win32.IUnknown, error) {
 	var _result *win32.IUnknown
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_result)))
-	return _result, win32.HRESULTError(int32(r1))
+	return _result, win32.ErrIfFailed(int32(r1))
 }
 
 // IProtectionPolicyManagerInterop2: https://learn.microsoft.com/windows/win32/api/efswrtinterop/nn-efswrtinterop-iprotectionpolicymanagerinterop2
@@ -50,35 +50,35 @@ var IID_IProtectionPolicyManagerInterop2 = win32.GUID{Data1: 0x157cfbe4, Data2: 
 func (self *IProtectionPolicyManagerInterop2) RequestAccessForAppWithWindowAsync(appWindow foundation.HWND, sourceIdentity systemwinrt.HSTRING, appPackageFamilyName systemwinrt.HSTRING, riid *win32.GUID) (*win32.IUnknown, error) {
 	var _asyncOperation *win32.IUnknown
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(sourceIdentity), uintptr(appPackageFamilyName), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_asyncOperation)))
-	return _asyncOperation, win32.HRESULTError(int32(r1))
+	return _asyncOperation, win32.ErrIfFailed(int32(r1))
 }
 
 // RequestAccessWithAuditingInfoForWindowAsync dispatches through IProtectionPolicyManagerInterop2's vtable slot 7.
 func (self *IProtectionPolicyManagerInterop2) RequestAccessWithAuditingInfoForWindowAsync(appWindow foundation.HWND, sourceIdentity systemwinrt.HSTRING, targetIdentity systemwinrt.HSTRING, auditInfoUnk *systemcom.IUnknown, riid *win32.GUID) (*win32.IUnknown, error) {
 	var _asyncOperation *win32.IUnknown
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(sourceIdentity), uintptr(targetIdentity), uintptr(unsafe.Pointer(auditInfoUnk)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_asyncOperation)))
-	return _asyncOperation, win32.HRESULTError(int32(r1))
+	return _asyncOperation, win32.ErrIfFailed(int32(r1))
 }
 
 // RequestAccessWithMessageForWindowAsync dispatches through IProtectionPolicyManagerInterop2's vtable slot 8.
 func (self *IProtectionPolicyManagerInterop2) RequestAccessWithMessageForWindowAsync(appWindow foundation.HWND, sourceIdentity systemwinrt.HSTRING, targetIdentity systemwinrt.HSTRING, auditInfoUnk *systemcom.IUnknown, messageFromApp systemwinrt.HSTRING, riid *win32.GUID) (*win32.IUnknown, error) {
 	var _asyncOperation *win32.IUnknown
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(sourceIdentity), uintptr(targetIdentity), uintptr(unsafe.Pointer(auditInfoUnk)), uintptr(messageFromApp), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_asyncOperation)))
-	return _asyncOperation, win32.HRESULTError(int32(r1))
+	return _asyncOperation, win32.ErrIfFailed(int32(r1))
 }
 
 // RequestAccessForAppWithAuditingInfoForWindowAsync dispatches through IProtectionPolicyManagerInterop2's vtable slot 9.
 func (self *IProtectionPolicyManagerInterop2) RequestAccessForAppWithAuditingInfoForWindowAsync(appWindow foundation.HWND, sourceIdentity systemwinrt.HSTRING, appPackageFamilyName systemwinrt.HSTRING, auditInfoUnk *systemcom.IUnknown, riid *win32.GUID) (*win32.IUnknown, error) {
 	var _asyncOperation *win32.IUnknown
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(sourceIdentity), uintptr(appPackageFamilyName), uintptr(unsafe.Pointer(auditInfoUnk)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_asyncOperation)))
-	return _asyncOperation, win32.HRESULTError(int32(r1))
+	return _asyncOperation, win32.ErrIfFailed(int32(r1))
 }
 
 // RequestAccessForAppWithMessageForWindowAsync dispatches through IProtectionPolicyManagerInterop2's vtable slot 10.
 func (self *IProtectionPolicyManagerInterop2) RequestAccessForAppWithMessageForWindowAsync(appWindow foundation.HWND, sourceIdentity systemwinrt.HSTRING, appPackageFamilyName systemwinrt.HSTRING, auditInfoUnk *systemcom.IUnknown, messageFromApp systemwinrt.HSTRING, riid *win32.GUID) (*win32.IUnknown, error) {
 	var _asyncOperation *win32.IUnknown
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(sourceIdentity), uintptr(appPackageFamilyName), uintptr(unsafe.Pointer(auditInfoUnk)), uintptr(messageFromApp), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_asyncOperation)))
-	return _asyncOperation, win32.HRESULTError(int32(r1))
+	return _asyncOperation, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: c1c03933-b398-4d93-b0fd-2972adf802c2
@@ -93,40 +93,40 @@ var IID_IProtectionPolicyManagerInterop3 = win32.GUID{Data1: 0xc1c03933, Data2: 
 func (self *IProtectionPolicyManagerInterop3) RequestAccessWithBehaviorForWindowAsync(appWindow foundation.HWND, sourceIdentity systemwinrt.HSTRING, targetIdentity systemwinrt.HSTRING, auditInfoUnk *systemcom.IUnknown, messageFromApp systemwinrt.HSTRING, behavior uint32, riid *win32.GUID) (*win32.IUnknown, error) {
 	var _asyncOperation *win32.IUnknown
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(sourceIdentity), uintptr(targetIdentity), uintptr(unsafe.Pointer(auditInfoUnk)), uintptr(messageFromApp), uintptr(behavior), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_asyncOperation)))
-	return _asyncOperation, win32.HRESULTError(int32(r1))
+	return _asyncOperation, win32.ErrIfFailed(int32(r1))
 }
 
 // RequestAccessForAppWithBehaviorForWindowAsync dispatches through IProtectionPolicyManagerInterop3's vtable slot 7.
 func (self *IProtectionPolicyManagerInterop3) RequestAccessForAppWithBehaviorForWindowAsync(appWindow foundation.HWND, sourceIdentity systemwinrt.HSTRING, appPackageFamilyName systemwinrt.HSTRING, auditInfoUnk *systemcom.IUnknown, messageFromApp systemwinrt.HSTRING, behavior uint32, riid *win32.GUID) (*win32.IUnknown, error) {
 	var _asyncOperation *win32.IUnknown
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(sourceIdentity), uintptr(appPackageFamilyName), uintptr(unsafe.Pointer(auditInfoUnk)), uintptr(messageFromApp), uintptr(behavior), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_asyncOperation)))
-	return _asyncOperation, win32.HRESULTError(int32(r1))
+	return _asyncOperation, win32.ErrIfFailed(int32(r1))
 }
 
 // RequestAccessToFilesForAppForWindowAsync dispatches through IProtectionPolicyManagerInterop3's vtable slot 8.
 func (self *IProtectionPolicyManagerInterop3) RequestAccessToFilesForAppForWindowAsync(appWindow foundation.HWND, sourceItemListUnk *systemcom.IUnknown, appPackageFamilyName systemwinrt.HSTRING, auditInfoUnk *systemcom.IUnknown, riid *win32.GUID) (*win32.IUnknown, error) {
 	var _asyncOperation *win32.IUnknown
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(sourceItemListUnk)), uintptr(appPackageFamilyName), uintptr(unsafe.Pointer(auditInfoUnk)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_asyncOperation)))
-	return _asyncOperation, win32.HRESULTError(int32(r1))
+	return _asyncOperation, win32.ErrIfFailed(int32(r1))
 }
 
 // RequestAccessToFilesForAppWithMessageAndBehaviorForWindowAsync dispatches through IProtectionPolicyManagerInterop3's vtable slot 9.
 func (self *IProtectionPolicyManagerInterop3) RequestAccessToFilesForAppWithMessageAndBehaviorForWindowAsync(appWindow foundation.HWND, sourceItemListUnk *systemcom.IUnknown, appPackageFamilyName systemwinrt.HSTRING, auditInfoUnk *systemcom.IUnknown, messageFromApp systemwinrt.HSTRING, behavior uint32, riid *win32.GUID) (*win32.IUnknown, error) {
 	var _asyncOperation *win32.IUnknown
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(sourceItemListUnk)), uintptr(appPackageFamilyName), uintptr(unsafe.Pointer(auditInfoUnk)), uintptr(messageFromApp), uintptr(behavior), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_asyncOperation)))
-	return _asyncOperation, win32.HRESULTError(int32(r1))
+	return _asyncOperation, win32.ErrIfFailed(int32(r1))
 }
 
 // RequestAccessToFilesForProcessForWindowAsync dispatches through IProtectionPolicyManagerInterop3's vtable slot 10.
 func (self *IProtectionPolicyManagerInterop3) RequestAccessToFilesForProcessForWindowAsync(appWindow foundation.HWND, sourceItemListUnk *systemcom.IUnknown, processId uint32, auditInfoUnk *systemcom.IUnknown, riid *win32.GUID) (*win32.IUnknown, error) {
 	var _asyncOperation *win32.IUnknown
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(sourceItemListUnk)), uintptr(processId), uintptr(unsafe.Pointer(auditInfoUnk)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_asyncOperation)))
-	return _asyncOperation, win32.HRESULTError(int32(r1))
+	return _asyncOperation, win32.ErrIfFailed(int32(r1))
 }
 
 // RequestAccessToFilesForProcessWithMessageAndBehaviorForWindowAsync dispatches through IProtectionPolicyManagerInterop3's vtable slot 11.
 func (self *IProtectionPolicyManagerInterop3) RequestAccessToFilesForProcessWithMessageAndBehaviorForWindowAsync(appWindow foundation.HWND, sourceItemListUnk *systemcom.IUnknown, processId uint32, auditInfoUnk *systemcom.IUnknown, messageFromApp systemwinrt.HSTRING, behavior uint32, riid *win32.GUID) (*win32.IUnknown, error) {
 	var _asyncOperation *win32.IUnknown
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(sourceItemListUnk)), uintptr(processId), uintptr(unsafe.Pointer(auditInfoUnk)), uintptr(messageFromApp), uintptr(behavior), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_asyncOperation)))
-	return _asyncOperation, win32.HRESULTError(int32(r1))
+	return _asyncOperation, win32.ErrIfFailed(int32(r1))
 }

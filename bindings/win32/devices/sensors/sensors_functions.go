@@ -152,7 +152,7 @@ func InitPropVariantFromCLSIDArray(members []win32.GUID, ppropvar *systemcomstru
 		_members = &members[0]
 	}
 	r1, _, _ := syscall.SyscallN(procInitPropVariantFromCLSIDArray.Addr(), uintptr(unsafe.Pointer(_members)), uintptr(len(members)), uintptr(unsafe.Pointer(ppropvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsCollectionListSame calls SensorsUtilsV2!IsCollectionListSame.

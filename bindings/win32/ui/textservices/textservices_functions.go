@@ -32,7 +32,7 @@ func DoMsCtfMonitor(dwFlags uint32, hEventForServiceStop foundation.HANDLE) bool
 // Minimum OS: windows6.0.6000.
 func InitLocalMsCtfMonitor(dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procInitLocalMsCtfMonitor.Addr(), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UninitLocalMsCtfMonitor calls MsCtfMonitor!UninitLocalMsCtfMonitor.
@@ -40,5 +40,5 @@ func InitLocalMsCtfMonitor(dwFlags uint32) error {
 // Minimum OS: windows6.0.6000.
 func UninitLocalMsCtfMonitor() error {
 	r1, _, _ := syscall.SyscallN(procUninitLocalMsCtfMonitor.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

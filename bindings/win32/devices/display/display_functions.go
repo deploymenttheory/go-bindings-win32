@@ -802,7 +802,7 @@ func GetNumberOfPhysicalMonitorsFromHMONITOR(hMonitor graphicsgdi.HMONITOR, pdwN
 // Minimum OS: windows6.0.6000.
 func GetNumberOfPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9 *graphicsdirect3d9.IDirect3DDevice9, pdwNumberOfPhysicalMonitors *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetNumberOfPhysicalMonitorsFromIDirect3DDevice9.Addr(), uintptr(unsafe.Pointer(pDirect3DDevice9)), uintptr(unsafe.Pointer(pdwNumberOfPhysicalMonitors)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPhysicalMonitorsFromHMONITOR calls dxva2!GetPhysicalMonitorsFromHMONITOR.
@@ -829,7 +829,7 @@ func GetPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9 *graphicsdirect3d9
 		_pPhysicalMonitorArray = &pPhysicalMonitorArray[0]
 	}
 	r1, _, _ := syscall.SyscallN(procGetPhysicalMonitorsFromIDirect3DDevice9.Addr(), uintptr(unsafe.Pointer(pDirect3DDevice9)), uintptr(len(pPhysicalMonitorArray)), uintptr(unsafe.Pointer(_pPhysicalMonitorArray)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTimingReport calls dxva2!GetTimingReport.

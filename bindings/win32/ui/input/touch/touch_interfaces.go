@@ -25,169 +25,169 @@ var IID_IInertiaProcessor = win32.GUID{Data1: 0x18b00c6d, Data2: 0xc5ee, Data3: 
 // Get_InitialOriginX dispatches through IInertiaProcessor's vtable slot 3.
 func (self *IInertiaProcessor) Get_InitialOriginX(x *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(x)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InitialOriginY dispatches through IInertiaProcessor's vtable slot 5.
 func (self *IInertiaProcessor) Get_InitialOriginY(y *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(y)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InitialVelocityX dispatches through IInertiaProcessor's vtable slot 7.
 func (self *IInertiaProcessor) Get_InitialVelocityX(x *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(x)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InitialVelocityY dispatches through IInertiaProcessor's vtable slot 9.
 func (self *IInertiaProcessor) Get_InitialVelocityY(y *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(y)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InitialAngularVelocity dispatches through IInertiaProcessor's vtable slot 11.
 func (self *IInertiaProcessor) Get_InitialAngularVelocity(velocity *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(velocity)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InitialExpansionVelocity dispatches through IInertiaProcessor's vtable slot 13.
 func (self *IInertiaProcessor) Get_InitialExpansionVelocity(velocity *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(velocity)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InitialRadius dispatches through IInertiaProcessor's vtable slot 15.
 func (self *IInertiaProcessor) Get_InitialRadius(radius *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(radius)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BoundaryLeft dispatches through IInertiaProcessor's vtable slot 17.
 func (self *IInertiaProcessor) Get_BoundaryLeft(left *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(left)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BoundaryTop dispatches through IInertiaProcessor's vtable slot 19.
 func (self *IInertiaProcessor) Get_BoundaryTop(top *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(top)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BoundaryRight dispatches through IInertiaProcessor's vtable slot 21.
 func (self *IInertiaProcessor) Get_BoundaryRight(right *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(right)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BoundaryBottom dispatches through IInertiaProcessor's vtable slot 23.
 func (self *IInertiaProcessor) Get_BoundaryBottom(bottom *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bottom)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ElasticMarginLeft dispatches through IInertiaProcessor's vtable slot 25.
 func (self *IInertiaProcessor) Get_ElasticMarginLeft(left *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(left)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ElasticMarginTop dispatches through IInertiaProcessor's vtable slot 27.
 func (self *IInertiaProcessor) Get_ElasticMarginTop(top *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(top)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ElasticMarginRight dispatches through IInertiaProcessor's vtable slot 29.
 func (self *IInertiaProcessor) Get_ElasticMarginRight(right *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(right)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ElasticMarginBottom dispatches through IInertiaProcessor's vtable slot 31.
 func (self *IInertiaProcessor) Get_ElasticMarginBottom(bottom *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bottom)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DesiredDisplacement dispatches through IInertiaProcessor's vtable slot 33.
 func (self *IInertiaProcessor) Get_DesiredDisplacement(displacement *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(displacement)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DesiredRotation dispatches through IInertiaProcessor's vtable slot 35.
 func (self *IInertiaProcessor) Get_DesiredRotation(rotation *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rotation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DesiredExpansion dispatches through IInertiaProcessor's vtable slot 37.
 func (self *IInertiaProcessor) Get_DesiredExpansion(expansion *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(expansion)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DesiredDeceleration dispatches through IInertiaProcessor's vtable slot 39.
 func (self *IInertiaProcessor) Get_DesiredDeceleration(deceleration *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(deceleration)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DesiredAngularDeceleration dispatches through IInertiaProcessor's vtable slot 41.
 func (self *IInertiaProcessor) Get_DesiredAngularDeceleration(deceleration *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(deceleration)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DesiredExpansionDeceleration dispatches through IInertiaProcessor's vtable slot 43.
 func (self *IInertiaProcessor) Get_DesiredExpansionDeceleration(deceleration *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(deceleration)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InitialTimestamp dispatches through IInertiaProcessor's vtable slot 45.
 func (self *IInertiaProcessor) Get_InitialTimestamp(timestamp *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(timestamp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_InitialTimestamp dispatches through IInertiaProcessor's vtable slot 46.
 func (self *IInertiaProcessor) Put_InitialTimestamp(timestamp uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(timestamp))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IInertiaProcessor's vtable slot 47.
 func (self *IInertiaProcessor) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Process dispatches through IInertiaProcessor's vtable slot 48.
 func (self *IInertiaProcessor) Process(completed *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(completed)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ProcessTime dispatches through IInertiaProcessor's vtable slot 49.
 func (self *IInertiaProcessor) ProcessTime(timestamp uint32, completed *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(timestamp), uintptr(unsafe.Pointer(completed)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Complete dispatches through IInertiaProcessor's vtable slot 50.
 func (self *IInertiaProcessor) Complete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CompleteTime dispatches through IInertiaProcessor's vtable slot 51.
 func (self *IInertiaProcessor) CompleteTime(timestamp uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(timestamp))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IManipulationProcessor: https://learn.microsoft.com/windows/win32/api/manipulations/nn-manipulations-imanipulationprocessor
@@ -202,67 +202,67 @@ var IID_IManipulationProcessor = win32.GUID{Data1: 0xa22ac519, Data2: 0x8300, Da
 // Get_SupportedManipulations dispatches through IManipulationProcessor's vtable slot 3.
 func (self *IManipulationProcessor) Get_SupportedManipulations(manipulations *MANIPULATION_PROCESSOR_MANIPULATIONS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(manipulations)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SupportedManipulations dispatches through IManipulationProcessor's vtable slot 4.
 func (self *IManipulationProcessor) Put_SupportedManipulations(manipulations MANIPULATION_PROCESSOR_MANIPULATIONS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(manipulations))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PivotPointX dispatches through IManipulationProcessor's vtable slot 5.
 func (self *IManipulationProcessor) Get_PivotPointX(pivotPointX *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pivotPointX)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PivotPointY dispatches through IManipulationProcessor's vtable slot 7.
 func (self *IManipulationProcessor) Get_PivotPointY(pivotPointY *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pivotPointY)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PivotRadius dispatches through IManipulationProcessor's vtable slot 9.
 func (self *IManipulationProcessor) Get_PivotRadius(pivotRadius *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pivotRadius)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CompleteManipulation dispatches through IManipulationProcessor's vtable slot 11.
 func (self *IManipulationProcessor) CompleteManipulation() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetVelocityX dispatches through IManipulationProcessor's vtable slot 18.
 func (self *IManipulationProcessor) GetVelocityX(velocityX *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(velocityX)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetVelocityY dispatches through IManipulationProcessor's vtable slot 19.
 func (self *IManipulationProcessor) GetVelocityY(velocityY *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(velocityY)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetExpansionVelocity dispatches through IManipulationProcessor's vtable slot 20.
 func (self *IManipulationProcessor) GetExpansionVelocity(expansionVelocity *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(expansionVelocity)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAngularVelocity dispatches through IManipulationProcessor's vtable slot 21.
 func (self *IManipulationProcessor) GetAngularVelocity(angularVelocity *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(angularVelocity)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MinimumScaleRotateRadius dispatches through IManipulationProcessor's vtable slot 22.
 func (self *IManipulationProcessor) Get_MinimumScaleRotateRadius(minRadius *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(minRadius)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IManipulationEvents: https://learn.microsoft.com/windows/win32/api/manipulations/nn-manipulations-_imanipulationevents

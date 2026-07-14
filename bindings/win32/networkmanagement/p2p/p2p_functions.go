@@ -238,7 +238,7 @@ func DrtClose(hDrt unsafe.Pointer) {
 // Minimum OS: windows6.1.
 func DrtContinueSearch(hSearchContext unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDrtContinueSearch.Addr(), uintptr(unsafe.Pointer(hSearchContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrtCreateDerivedKey calls drtprov!DrtCreateDerivedKey.
@@ -246,7 +246,7 @@ func DrtContinueSearch(hSearchContext unsafe.Pointer) error {
 // Minimum OS: windows6.1.
 func DrtCreateDerivedKey(pLocalCert *securitycryptography.CERT_CONTEXT, pKey *DRT_DATA) error {
 	r1, _, _ := syscall.SyscallN(procDrtCreateDerivedKey.Addr(), uintptr(unsafe.Pointer(pLocalCert)), uintptr(unsafe.Pointer(pKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrtCreateDerivedKeySecurityProvider calls drtprov!DrtCreateDerivedKeySecurityProvider.
@@ -254,7 +254,7 @@ func DrtCreateDerivedKey(pLocalCert *securitycryptography.CERT_CONTEXT, pKey *DR
 // Minimum OS: windows6.1.
 func DrtCreateDerivedKeySecurityProvider(pRootCert *securitycryptography.CERT_CONTEXT, pLocalCert *securitycryptography.CERT_CONTEXT, ppSecurityProvider **DRT_SECURITY_PROVIDER) error {
 	r1, _, _ := syscall.SyscallN(procDrtCreateDerivedKeySecurityProvider.Addr(), uintptr(unsafe.Pointer(pRootCert)), uintptr(unsafe.Pointer(pLocalCert)), uintptr(unsafe.Pointer(ppSecurityProvider)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrtCreateDnsBootstrapResolver calls drtprov!DrtCreateDnsBootstrapResolver.
@@ -263,7 +263,7 @@ func DrtCreateDerivedKeySecurityProvider(pRootCert *securitycryptography.CERT_CO
 func DrtCreateDnsBootstrapResolver(port uint16, pwszAddress string, ppModule **DRT_BOOTSTRAP_PROVIDER) error {
 	_pwszAddress := win32.UTF16Ptr(pwszAddress)
 	r1, _, _ := syscall.SyscallN(procDrtCreateDnsBootstrapResolver.Addr(), uintptr(port), uintptr(unsafe.Pointer(_pwszAddress)), uintptr(unsafe.Pointer(ppModule)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrtCreateIpv6UdpTransport calls drttransport!DrtCreateIpv6UdpTransport.
@@ -271,7 +271,7 @@ func DrtCreateDnsBootstrapResolver(port uint16, pwszAddress string, ppModule **D
 // Minimum OS: windows6.1.
 func DrtCreateIpv6UdpTransport(scope DRT_SCOPE, dwScopeId uint32, dwLocalityThreshold uint32, pwPort *uint16, phTransport *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDrtCreateIpv6UdpTransport.Addr(), uintptr(scope), uintptr(dwScopeId), uintptr(dwLocalityThreshold), uintptr(unsafe.Pointer(pwPort)), uintptr(unsafe.Pointer(phTransport)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrtCreateNullSecurityProvider calls drtprov!DrtCreateNullSecurityProvider.
@@ -279,7 +279,7 @@ func DrtCreateIpv6UdpTransport(scope DRT_SCOPE, dwScopeId uint32, dwLocalityThre
 // Minimum OS: windows6.1.
 func DrtCreateNullSecurityProvider(ppSecurityProvider **DRT_SECURITY_PROVIDER) error {
 	r1, _, _ := syscall.SyscallN(procDrtCreateNullSecurityProvider.Addr(), uintptr(unsafe.Pointer(ppSecurityProvider)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrtCreatePnrpBootstrapResolver calls drtprov!DrtCreatePnrpBootstrapResolver.
@@ -291,7 +291,7 @@ func DrtCreatePnrpBootstrapResolver(fPublish bool, pwzPeerName string, pwzCloudN
 	_pwzCloudName := win32.UTF16Ptr(pwzCloudName)
 	_pwzPublishingIdentity := win32.UTF16Ptr(pwzPublishingIdentity)
 	r1, _, _ := syscall.SyscallN(procDrtCreatePnrpBootstrapResolver.Addr(), uintptr(_fPublish), uintptr(unsafe.Pointer(_pwzPeerName)), uintptr(unsafe.Pointer(_pwzCloudName)), uintptr(unsafe.Pointer(_pwzPublishingIdentity)), uintptr(unsafe.Pointer(ppResolver)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrtDeleteDerivedKeySecurityProvider calls drtprov!DrtDeleteDerivedKeySecurityProvider.
@@ -313,7 +313,7 @@ func DrtDeleteDnsBootstrapResolver(pResolver *DRT_BOOTSTRAP_PROVIDER) {
 // Minimum OS: windows6.1.
 func DrtDeleteIpv6UdpTransport(hTransport unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDrtDeleteIpv6UdpTransport.Addr(), uintptr(unsafe.Pointer(hTransport)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrtDeleteNullSecurityProvider calls drtprov!DrtDeleteNullSecurityProvider.
@@ -335,7 +335,7 @@ func DrtDeletePnrpBootstrapResolver(pResolver *DRT_BOOTSTRAP_PROVIDER) {
 // Minimum OS: windows6.1.
 func DrtEndSearch(hSearchContext unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDrtEndSearch.Addr(), uintptr(unsafe.Pointer(hSearchContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrtGetEventData calls drt!DrtGetEventData.
@@ -343,7 +343,7 @@ func DrtEndSearch(hSearchContext unsafe.Pointer) error {
 // Minimum OS: windows6.1.
 func DrtGetEventData(hDrt unsafe.Pointer, ulEventDataLen uint32, pEventData *DRT_EVENT_DATA) error {
 	r1, _, _ := syscall.SyscallN(procDrtGetEventData.Addr(), uintptr(unsafe.Pointer(hDrt)), uintptr(ulEventDataLen), uintptr(unsafe.Pointer(pEventData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrtGetEventDataSize calls drt!DrtGetEventDataSize.
@@ -351,7 +351,7 @@ func DrtGetEventData(hDrt unsafe.Pointer, ulEventDataLen uint32, pEventData *DRT
 // Minimum OS: windows6.1.
 func DrtGetEventDataSize(hDrt unsafe.Pointer, pulEventDataLen *uint32) error {
 	r1, _, _ := syscall.SyscallN(procDrtGetEventDataSize.Addr(), uintptr(unsafe.Pointer(hDrt)), uintptr(unsafe.Pointer(pulEventDataLen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrtGetInstanceName calls drt!DrtGetInstanceName.
@@ -359,7 +359,7 @@ func DrtGetEventDataSize(hDrt unsafe.Pointer, pulEventDataLen *uint32) error {
 // Minimum OS: windows6.1.
 func DrtGetInstanceName(hDrt unsafe.Pointer, ulcbInstanceNameSize uint32, pwzDrtInstanceName foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procDrtGetInstanceName.Addr(), uintptr(unsafe.Pointer(hDrt)), uintptr(ulcbInstanceNameSize), uintptr(unsafe.Pointer(pwzDrtInstanceName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrtGetInstanceNameSize calls drt!DrtGetInstanceNameSize.
@@ -367,7 +367,7 @@ func DrtGetInstanceName(hDrt unsafe.Pointer, ulcbInstanceNameSize uint32, pwzDrt
 // Minimum OS: windows6.1.
 func DrtGetInstanceNameSize(hDrt unsafe.Pointer, pulcbInstanceNameSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procDrtGetInstanceNameSize.Addr(), uintptr(unsafe.Pointer(hDrt)), uintptr(unsafe.Pointer(pulcbInstanceNameSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrtGetSearchPath calls drt!DrtGetSearchPath.
@@ -375,7 +375,7 @@ func DrtGetInstanceNameSize(hDrt unsafe.Pointer, pulcbInstanceNameSize *uint32) 
 // Minimum OS: windows6.1.
 func DrtGetSearchPath(hSearchContext unsafe.Pointer, ulSearchPathSize uint32, pSearchPath *DRT_ADDRESS_LIST) error {
 	r1, _, _ := syscall.SyscallN(procDrtGetSearchPath.Addr(), uintptr(unsafe.Pointer(hSearchContext)), uintptr(ulSearchPathSize), uintptr(unsafe.Pointer(pSearchPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrtGetSearchPathSize calls drt!DrtGetSearchPathSize.
@@ -383,7 +383,7 @@ func DrtGetSearchPath(hSearchContext unsafe.Pointer, ulSearchPathSize uint32, pS
 // Minimum OS: windows6.1.
 func DrtGetSearchPathSize(hSearchContext unsafe.Pointer, pulSearchPathSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procDrtGetSearchPathSize.Addr(), uintptr(unsafe.Pointer(hSearchContext)), uintptr(unsafe.Pointer(pulSearchPathSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrtGetSearchResult calls drt!DrtGetSearchResult.
@@ -391,7 +391,7 @@ func DrtGetSearchPathSize(hSearchContext unsafe.Pointer, pulSearchPathSize *uint
 // Minimum OS: windows6.1.
 func DrtGetSearchResult(hSearchContext unsafe.Pointer, ulSearchResultSize uint32, pSearchResult *DRT_SEARCH_RESULT) error {
 	r1, _, _ := syscall.SyscallN(procDrtGetSearchResult.Addr(), uintptr(unsafe.Pointer(hSearchContext)), uintptr(ulSearchResultSize), uintptr(unsafe.Pointer(pSearchResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrtGetSearchResultSize calls drt!DrtGetSearchResultSize.
@@ -399,7 +399,7 @@ func DrtGetSearchResult(hSearchContext unsafe.Pointer, ulSearchResultSize uint32
 // Minimum OS: windows6.1.
 func DrtGetSearchResultSize(hSearchContext unsafe.Pointer, pulSearchResultSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procDrtGetSearchResultSize.Addr(), uintptr(unsafe.Pointer(hSearchContext)), uintptr(unsafe.Pointer(pulSearchResultSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrtOpen calls drt!DrtOpen.
@@ -407,7 +407,7 @@ func DrtGetSearchResultSize(hSearchContext unsafe.Pointer, pulSearchResultSize *
 // Minimum OS: windows6.1.
 func DrtOpen(pSettings *DRT_SETTINGS, hEvent foundation.HANDLE, pvContext unsafe.Pointer, phDrt *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDrtOpen.Addr(), uintptr(unsafe.Pointer(pSettings)), uintptr(hEvent), uintptr(unsafe.Pointer(pvContext)), uintptr(unsafe.Pointer(phDrt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrtRegisterKey calls drt!DrtRegisterKey.
@@ -415,7 +415,7 @@ func DrtOpen(pSettings *DRT_SETTINGS, hEvent foundation.HANDLE, pvContext unsafe
 // Minimum OS: windows6.1.
 func DrtRegisterKey(hDrt unsafe.Pointer, pRegistration *DRT_REGISTRATION, pvKeyContext unsafe.Pointer, phKeyRegistration *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDrtRegisterKey.Addr(), uintptr(unsafe.Pointer(hDrt)), uintptr(unsafe.Pointer(pRegistration)), uintptr(unsafe.Pointer(pvKeyContext)), uintptr(unsafe.Pointer(phKeyRegistration)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrtStartSearch calls drt!DrtStartSearch.
@@ -423,7 +423,7 @@ func DrtRegisterKey(hDrt unsafe.Pointer, pRegistration *DRT_REGISTRATION, pvKeyC
 // Minimum OS: windows6.1.
 func DrtStartSearch(hDrt unsafe.Pointer, pKey *DRT_DATA, pInfo *DRT_SEARCH_INFO, timeout uint32, hEvent foundation.HANDLE, pvContext unsafe.Pointer, hSearchContext *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDrtStartSearch.Addr(), uintptr(unsafe.Pointer(hDrt)), uintptr(unsafe.Pointer(pKey)), uintptr(unsafe.Pointer(pInfo)), uintptr(timeout), uintptr(hEvent), uintptr(unsafe.Pointer(pvContext)), uintptr(unsafe.Pointer(hSearchContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrtUnregisterKey calls drt!DrtUnregisterKey.
@@ -438,7 +438,7 @@ func DrtUnregisterKey(hKeyRegistration unsafe.Pointer) {
 // Minimum OS: windows6.1.
 func DrtUpdateKey(hKeyRegistration unsafe.Pointer, pAppData *DRT_DATA) error {
 	r1, _, _ := syscall.SyscallN(procDrtUpdateKey.Addr(), uintptr(unsafe.Pointer(hKeyRegistration)), uintptr(unsafe.Pointer(pAppData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabAddContact calls P2P!PeerCollabAddContact.
@@ -447,7 +447,7 @@ func DrtUpdateKey(hKeyRegistration unsafe.Pointer, pAppData *DRT_DATA) error {
 func PeerCollabAddContact(pwzContactData string, ppContact **PEER_CONTACT) error {
 	_pwzContactData := win32.UTF16Ptr(pwzContactData)
 	r1, _, _ := syscall.SyscallN(procPeerCollabAddContact.Addr(), uintptr(unsafe.Pointer(_pwzContactData)), uintptr(unsafe.Pointer(ppContact)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabAsyncInviteContact calls P2P!PeerCollabAsyncInviteContact.
@@ -455,7 +455,7 @@ func PeerCollabAddContact(pwzContactData string, ppContact **PEER_CONTACT) error
 // Minimum OS: windows6.0.6000.
 func PeerCollabAsyncInviteContact(pcContact *PEER_CONTACT, pcEndpoint *PEER_ENDPOINT, pcInvitation *PEER_INVITATION, hEvent foundation.HANDLE, phInvitation *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabAsyncInviteContact.Addr(), uintptr(unsafe.Pointer(pcContact)), uintptr(unsafe.Pointer(pcEndpoint)), uintptr(unsafe.Pointer(pcInvitation)), uintptr(hEvent), uintptr(unsafe.Pointer(phInvitation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabAsyncInviteEndpoint calls P2P!PeerCollabAsyncInviteEndpoint.
@@ -463,7 +463,7 @@ func PeerCollabAsyncInviteContact(pcContact *PEER_CONTACT, pcEndpoint *PEER_ENDP
 // Minimum OS: windows6.0.6000.
 func PeerCollabAsyncInviteEndpoint(pcEndpoint *PEER_ENDPOINT, pcInvitation *PEER_INVITATION, hEvent foundation.HANDLE, phInvitation *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabAsyncInviteEndpoint.Addr(), uintptr(unsafe.Pointer(pcEndpoint)), uintptr(unsafe.Pointer(pcInvitation)), uintptr(hEvent), uintptr(unsafe.Pointer(phInvitation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabCancelInvitation calls P2P!PeerCollabCancelInvitation.
@@ -471,7 +471,7 @@ func PeerCollabAsyncInviteEndpoint(pcEndpoint *PEER_ENDPOINT, pcInvitation *PEER
 // Minimum OS: windows6.0.6000.
 func PeerCollabCancelInvitation(hInvitation foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabCancelInvitation.Addr(), uintptr(hInvitation))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabCloseHandle calls P2P!PeerCollabCloseHandle.
@@ -479,7 +479,7 @@ func PeerCollabCancelInvitation(hInvitation foundation.HANDLE) error {
 // Minimum OS: windows6.0.6000.
 func PeerCollabCloseHandle(hInvitation foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabCloseHandle.Addr(), uintptr(hInvitation))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabDeleteContact calls P2P!PeerCollabDeleteContact.
@@ -488,7 +488,7 @@ func PeerCollabCloseHandle(hInvitation foundation.HANDLE) error {
 func PeerCollabDeleteContact(pwzPeerName string) error {
 	_pwzPeerName := win32.UTF16Ptr(pwzPeerName)
 	r1, _, _ := syscall.SyscallN(procPeerCollabDeleteContact.Addr(), uintptr(unsafe.Pointer(_pwzPeerName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabDeleteEndpointData calls P2P!PeerCollabDeleteEndpointData.
@@ -496,7 +496,7 @@ func PeerCollabDeleteContact(pwzPeerName string) error {
 // Minimum OS: windows6.0.6000.
 func PeerCollabDeleteEndpointData(pcEndpoint *PEER_ENDPOINT) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabDeleteEndpointData.Addr(), uintptr(unsafe.Pointer(pcEndpoint)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabDeleteObject calls P2P!PeerCollabDeleteObject.
@@ -504,7 +504,7 @@ func PeerCollabDeleteEndpointData(pcEndpoint *PEER_ENDPOINT) error {
 // Minimum OS: windows6.0.6000.
 func PeerCollabDeleteObject(pObjectId *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabDeleteObject.Addr(), uintptr(unsafe.Pointer(pObjectId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabEnumApplicationRegistrationInfo calls P2P!PeerCollabEnumApplicationRegistrationInfo.
@@ -512,7 +512,7 @@ func PeerCollabDeleteObject(pObjectId *win32.GUID) error {
 // Minimum OS: windows6.0.6000.
 func PeerCollabEnumApplicationRegistrationInfo(registrationType PEER_APPLICATION_REGISTRATION_TYPE, phPeerEnum *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabEnumApplicationRegistrationInfo.Addr(), uintptr(registrationType), uintptr(unsafe.Pointer(phPeerEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabEnumApplications calls P2P!PeerCollabEnumApplications.
@@ -520,7 +520,7 @@ func PeerCollabEnumApplicationRegistrationInfo(registrationType PEER_APPLICATION
 // Minimum OS: windows6.0.6000.
 func PeerCollabEnumApplications(pcEndpoint *PEER_ENDPOINT, pApplicationId *win32.GUID, phPeerEnum *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabEnumApplications.Addr(), uintptr(unsafe.Pointer(pcEndpoint)), uintptr(unsafe.Pointer(pApplicationId)), uintptr(unsafe.Pointer(phPeerEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabEnumContacts calls P2P!PeerCollabEnumContacts.
@@ -528,7 +528,7 @@ func PeerCollabEnumApplications(pcEndpoint *PEER_ENDPOINT, pApplicationId *win32
 // Minimum OS: windows6.0.6000.
 func PeerCollabEnumContacts(phPeerEnum *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabEnumContacts.Addr(), uintptr(unsafe.Pointer(phPeerEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabEnumEndpoints calls P2P!PeerCollabEnumEndpoints.
@@ -536,7 +536,7 @@ func PeerCollabEnumContacts(phPeerEnum *unsafe.Pointer) error {
 // Minimum OS: windows6.0.6000.
 func PeerCollabEnumEndpoints(pcContact *PEER_CONTACT, phPeerEnum *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabEnumEndpoints.Addr(), uintptr(unsafe.Pointer(pcContact)), uintptr(unsafe.Pointer(phPeerEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabEnumObjects calls P2P!PeerCollabEnumObjects.
@@ -544,7 +544,7 @@ func PeerCollabEnumEndpoints(pcContact *PEER_CONTACT, phPeerEnum *unsafe.Pointer
 // Minimum OS: windows6.0.6000.
 func PeerCollabEnumObjects(pcEndpoint *PEER_ENDPOINT, pObjectId *win32.GUID, phPeerEnum *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabEnumObjects.Addr(), uintptr(unsafe.Pointer(pcEndpoint)), uintptr(unsafe.Pointer(pObjectId)), uintptr(unsafe.Pointer(phPeerEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabEnumPeopleNearMe calls P2P!PeerCollabEnumPeopleNearMe.
@@ -552,7 +552,7 @@ func PeerCollabEnumObjects(pcEndpoint *PEER_ENDPOINT, pObjectId *win32.GUID, phP
 // Minimum OS: windows6.0.6000.
 func PeerCollabEnumPeopleNearMe(phPeerEnum *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabEnumPeopleNearMe.Addr(), uintptr(unsafe.Pointer(phPeerEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabExportContact calls P2P!PeerCollabExportContact.
@@ -561,7 +561,7 @@ func PeerCollabEnumPeopleNearMe(phPeerEnum *unsafe.Pointer) error {
 func PeerCollabExportContact(pwzPeerName string, ppwzContactData *foundation.PWSTR) error {
 	_pwzPeerName := win32.UTF16Ptr(pwzPeerName)
 	r1, _, _ := syscall.SyscallN(procPeerCollabExportContact.Addr(), uintptr(unsafe.Pointer(_pwzPeerName)), uintptr(unsafe.Pointer(ppwzContactData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabGetAppLaunchInfo calls P2P!PeerCollabGetAppLaunchInfo.
@@ -569,7 +569,7 @@ func PeerCollabExportContact(pwzPeerName string, ppwzContactData *foundation.PWS
 // Minimum OS: windows6.0.6000.
 func PeerCollabGetAppLaunchInfo(ppLaunchInfo **PEER_APP_LAUNCH_INFO) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabGetAppLaunchInfo.Addr(), uintptr(unsafe.Pointer(ppLaunchInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabGetApplicationRegistrationInfo calls P2P!PeerCollabGetApplicationRegistrationInfo.
@@ -577,7 +577,7 @@ func PeerCollabGetAppLaunchInfo(ppLaunchInfo **PEER_APP_LAUNCH_INFO) error {
 // Minimum OS: windows6.0.6000.
 func PeerCollabGetApplicationRegistrationInfo(pApplicationId *win32.GUID, registrationType PEER_APPLICATION_REGISTRATION_TYPE, ppApplication **PEER_APPLICATION_REGISTRATION_INFO) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabGetApplicationRegistrationInfo.Addr(), uintptr(unsafe.Pointer(pApplicationId)), uintptr(registrationType), uintptr(unsafe.Pointer(ppApplication)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabGetContact calls P2P!PeerCollabGetContact.
@@ -586,7 +586,7 @@ func PeerCollabGetApplicationRegistrationInfo(pApplicationId *win32.GUID, regist
 func PeerCollabGetContact(pwzPeerName string, ppContact **PEER_CONTACT) error {
 	_pwzPeerName := win32.UTF16Ptr(pwzPeerName)
 	r1, _, _ := syscall.SyscallN(procPeerCollabGetContact.Addr(), uintptr(unsafe.Pointer(_pwzPeerName)), uintptr(unsafe.Pointer(ppContact)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabGetEndpointName calls P2P!PeerCollabGetEndpointName.
@@ -594,7 +594,7 @@ func PeerCollabGetContact(pwzPeerName string, ppContact **PEER_CONTACT) error {
 // Minimum OS: windows6.0.6000.
 func PeerCollabGetEndpointName(ppwzEndpointName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabGetEndpointName.Addr(), uintptr(unsafe.Pointer(ppwzEndpointName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabGetEventData calls P2P!PeerCollabGetEventData.
@@ -602,7 +602,7 @@ func PeerCollabGetEndpointName(ppwzEndpointName *foundation.PWSTR) error {
 // Minimum OS: windows6.0.6000.
 func PeerCollabGetEventData(hPeerEvent unsafe.Pointer, ppEventData **PEER_COLLAB_EVENT_DATA) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabGetEventData.Addr(), uintptr(unsafe.Pointer(hPeerEvent)), uintptr(unsafe.Pointer(ppEventData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabGetInvitationResponse calls P2P!PeerCollabGetInvitationResponse.
@@ -610,7 +610,7 @@ func PeerCollabGetEventData(hPeerEvent unsafe.Pointer, ppEventData **PEER_COLLAB
 // Minimum OS: windows6.0.6000.
 func PeerCollabGetInvitationResponse(hInvitation foundation.HANDLE, ppInvitationResponse **PEER_INVITATION_RESPONSE) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabGetInvitationResponse.Addr(), uintptr(hInvitation), uintptr(unsafe.Pointer(ppInvitationResponse)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabGetPresenceInfo calls P2P!PeerCollabGetPresenceInfo.
@@ -618,7 +618,7 @@ func PeerCollabGetInvitationResponse(hInvitation foundation.HANDLE, ppInvitation
 // Minimum OS: windows6.0.6000.
 func PeerCollabGetPresenceInfo(pcEndpoint *PEER_ENDPOINT, ppPresenceInfo **PEER_PRESENCE_INFO) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabGetPresenceInfo.Addr(), uintptr(unsafe.Pointer(pcEndpoint)), uintptr(unsafe.Pointer(ppPresenceInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabGetSigninOptions calls P2P!PeerCollabGetSigninOptions.
@@ -626,7 +626,7 @@ func PeerCollabGetPresenceInfo(pcEndpoint *PEER_ENDPOINT, ppPresenceInfo **PEER_
 // Minimum OS: windows6.0.6000.
 func PeerCollabGetSigninOptions(pdwSigninOptions *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabGetSigninOptions.Addr(), uintptr(unsafe.Pointer(pdwSigninOptions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabInviteContact calls P2P!PeerCollabInviteContact.
@@ -634,7 +634,7 @@ func PeerCollabGetSigninOptions(pdwSigninOptions *uint32) error {
 // Minimum OS: windows6.0.6000.
 func PeerCollabInviteContact(pcContact *PEER_CONTACT, pcEndpoint *PEER_ENDPOINT, pcInvitation *PEER_INVITATION, ppResponse **PEER_INVITATION_RESPONSE) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabInviteContact.Addr(), uintptr(unsafe.Pointer(pcContact)), uintptr(unsafe.Pointer(pcEndpoint)), uintptr(unsafe.Pointer(pcInvitation)), uintptr(unsafe.Pointer(ppResponse)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabInviteEndpoint calls P2P!PeerCollabInviteEndpoint.
@@ -642,7 +642,7 @@ func PeerCollabInviteContact(pcContact *PEER_CONTACT, pcEndpoint *PEER_ENDPOINT,
 // Minimum OS: windows6.0.6000.
 func PeerCollabInviteEndpoint(pcEndpoint *PEER_ENDPOINT, pcInvitation *PEER_INVITATION, ppResponse **PEER_INVITATION_RESPONSE) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabInviteEndpoint.Addr(), uintptr(unsafe.Pointer(pcEndpoint)), uintptr(unsafe.Pointer(pcInvitation)), uintptr(unsafe.Pointer(ppResponse)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabParseContact calls P2P!PeerCollabParseContact.
@@ -651,7 +651,7 @@ func PeerCollabInviteEndpoint(pcEndpoint *PEER_ENDPOINT, pcInvitation *PEER_INVI
 func PeerCollabParseContact(pwzContactData string, ppContact **PEER_CONTACT) error {
 	_pwzContactData := win32.UTF16Ptr(pwzContactData)
 	r1, _, _ := syscall.SyscallN(procPeerCollabParseContact.Addr(), uintptr(unsafe.Pointer(_pwzContactData)), uintptr(unsafe.Pointer(ppContact)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabQueryContactData calls P2P!PeerCollabQueryContactData.
@@ -659,7 +659,7 @@ func PeerCollabParseContact(pwzContactData string, ppContact **PEER_CONTACT) err
 // Minimum OS: windows6.0.6000.
 func PeerCollabQueryContactData(pcEndpoint *PEER_ENDPOINT, ppwzContactData *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabQueryContactData.Addr(), uintptr(unsafe.Pointer(pcEndpoint)), uintptr(unsafe.Pointer(ppwzContactData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabRefreshEndpointData calls P2P!PeerCollabRefreshEndpointData.
@@ -667,7 +667,7 @@ func PeerCollabQueryContactData(pcEndpoint *PEER_ENDPOINT, ppwzContactData *foun
 // Minimum OS: windows6.0.6000.
 func PeerCollabRefreshEndpointData(pcEndpoint *PEER_ENDPOINT) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabRefreshEndpointData.Addr(), uintptr(unsafe.Pointer(pcEndpoint)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabRegisterApplication calls P2P!PeerCollabRegisterApplication.
@@ -675,7 +675,7 @@ func PeerCollabRefreshEndpointData(pcEndpoint *PEER_ENDPOINT) error {
 // Minimum OS: windows6.0.6000.
 func PeerCollabRegisterApplication(pcApplication *PEER_APPLICATION_REGISTRATION_INFO, registrationType PEER_APPLICATION_REGISTRATION_TYPE) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabRegisterApplication.Addr(), uintptr(unsafe.Pointer(pcApplication)), uintptr(registrationType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabRegisterEvent calls P2P!PeerCollabRegisterEvent.
@@ -687,7 +687,7 @@ func PeerCollabRegisterEvent(hEvent foundation.HANDLE, pEventRegistrations []PEE
 		_pEventRegistrations = &pEventRegistrations[0]
 	}
 	r1, _, _ := syscall.SyscallN(procPeerCollabRegisterEvent.Addr(), uintptr(hEvent), uintptr(len(pEventRegistrations)), uintptr(unsafe.Pointer(_pEventRegistrations)), uintptr(unsafe.Pointer(phPeerEvent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabSetEndpointName calls P2P!PeerCollabSetEndpointName.
@@ -696,7 +696,7 @@ func PeerCollabRegisterEvent(hEvent foundation.HANDLE, pEventRegistrations []PEE
 func PeerCollabSetEndpointName(pwzEndpointName string) error {
 	_pwzEndpointName := win32.UTF16Ptr(pwzEndpointName)
 	r1, _, _ := syscall.SyscallN(procPeerCollabSetEndpointName.Addr(), uintptr(unsafe.Pointer(_pwzEndpointName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabSetObject calls P2P!PeerCollabSetObject.
@@ -704,7 +704,7 @@ func PeerCollabSetEndpointName(pwzEndpointName string) error {
 // Minimum OS: windows6.0.6000.
 func PeerCollabSetObject(pcObject *PEER_OBJECT) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabSetObject.Addr(), uintptr(unsafe.Pointer(pcObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabSetPresenceInfo calls P2P!PeerCollabSetPresenceInfo.
@@ -712,7 +712,7 @@ func PeerCollabSetObject(pcObject *PEER_OBJECT) error {
 // Minimum OS: windows6.0.6000.
 func PeerCollabSetPresenceInfo(pcPresenceInfo *PEER_PRESENCE_INFO) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabSetPresenceInfo.Addr(), uintptr(unsafe.Pointer(pcPresenceInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabShutdown calls P2P!PeerCollabShutdown.
@@ -720,7 +720,7 @@ func PeerCollabSetPresenceInfo(pcPresenceInfo *PEER_PRESENCE_INFO) error {
 // Minimum OS: windows6.0.6000.
 func PeerCollabShutdown() error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabShutdown.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabSignin calls P2P!PeerCollabSignin.
@@ -728,7 +728,7 @@ func PeerCollabShutdown() error {
 // Minimum OS: windows6.0.6000.
 func PeerCollabSignin(hwndParent foundation.HWND, dwSigninOptions uint32) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabSignin.Addr(), uintptr(hwndParent), uintptr(dwSigninOptions))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabSignout calls P2P!PeerCollabSignout.
@@ -736,7 +736,7 @@ func PeerCollabSignin(hwndParent foundation.HWND, dwSigninOptions uint32) error 
 // Minimum OS: windows6.0.6000.
 func PeerCollabSignout(dwSigninOptions uint32) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabSignout.Addr(), uintptr(dwSigninOptions))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabStartup calls P2P!PeerCollabStartup.
@@ -744,7 +744,7 @@ func PeerCollabSignout(dwSigninOptions uint32) error {
 // Minimum OS: windows6.0.6000.
 func PeerCollabStartup(wVersionRequested uint16) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabStartup.Addr(), uintptr(wVersionRequested))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabSubscribeEndpointData calls P2P!PeerCollabSubscribeEndpointData.
@@ -752,7 +752,7 @@ func PeerCollabStartup(wVersionRequested uint16) error {
 // Minimum OS: windows6.0.6000.
 func PeerCollabSubscribeEndpointData(pcEndpoint *PEER_ENDPOINT) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabSubscribeEndpointData.Addr(), uintptr(unsafe.Pointer(pcEndpoint)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabUnregisterApplication calls P2P!PeerCollabUnregisterApplication.
@@ -760,7 +760,7 @@ func PeerCollabSubscribeEndpointData(pcEndpoint *PEER_ENDPOINT) error {
 // Minimum OS: windows6.0.6000.
 func PeerCollabUnregisterApplication(pApplicationId *win32.GUID, registrationType PEER_APPLICATION_REGISTRATION_TYPE) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabUnregisterApplication.Addr(), uintptr(unsafe.Pointer(pApplicationId)), uintptr(registrationType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabUnregisterEvent calls P2P!PeerCollabUnregisterEvent.
@@ -768,7 +768,7 @@ func PeerCollabUnregisterApplication(pApplicationId *win32.GUID, registrationTyp
 // Minimum OS: windows6.0.6000.
 func PeerCollabUnregisterEvent(hPeerEvent unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabUnregisterEvent.Addr(), uintptr(unsafe.Pointer(hPeerEvent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabUnsubscribeEndpointData calls P2P!PeerCollabUnsubscribeEndpointData.
@@ -776,7 +776,7 @@ func PeerCollabUnregisterEvent(hPeerEvent unsafe.Pointer) error {
 // Minimum OS: windows6.0.6000.
 func PeerCollabUnsubscribeEndpointData(pcEndpoint *PEER_ENDPOINT) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabUnsubscribeEndpointData.Addr(), uintptr(unsafe.Pointer(pcEndpoint)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCollabUpdateContact calls P2P!PeerCollabUpdateContact.
@@ -784,7 +784,7 @@ func PeerCollabUnsubscribeEndpointData(pcEndpoint *PEER_ENDPOINT) error {
 // Minimum OS: windows6.0.6000.
 func PeerCollabUpdateContact(pContact *PEER_CONTACT) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabUpdateContact.Addr(), uintptr(unsafe.Pointer(pContact)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerCreatePeerName calls P2P!PeerCreatePeerName.
@@ -794,7 +794,7 @@ func PeerCreatePeerName(pwzIdentity string, pwzClassifier string, ppwzPeerName *
 	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
 	_pwzClassifier := win32.UTF16Ptr(pwzClassifier)
 	r1, _, _ := syscall.SyscallN(procPeerCreatePeerName.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(_pwzClassifier)), uintptr(unsafe.Pointer(ppwzPeerName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerDistClientAddContentInformation calls PeerDist!PeerDistClientAddContentInformation.
@@ -1084,7 +1084,7 @@ func PeerDistUnregisterForStatusChangeNotification(hPeerDist uintptr) (uint32, e
 // Minimum OS: windows5.1.2600.
 func PeerEndEnumeration(hPeerEnum unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerEndEnumeration.Addr(), uintptr(unsafe.Pointer(hPeerEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerEnumGroups calls P2P!PeerEnumGroups.
@@ -1093,7 +1093,7 @@ func PeerEndEnumeration(hPeerEnum unsafe.Pointer) error {
 func PeerEnumGroups(pwzIdentity string, phPeerEnum *unsafe.Pointer) error {
 	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
 	r1, _, _ := syscall.SyscallN(procPeerEnumGroups.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(phPeerEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerEnumIdentities calls P2P!PeerEnumIdentities.
@@ -1101,7 +1101,7 @@ func PeerEnumGroups(pwzIdentity string, phPeerEnum *unsafe.Pointer) error {
 // Minimum OS: windows5.1.2600.
 func PeerEnumIdentities(phPeerEnum *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerEnumIdentities.Addr(), uintptr(unsafe.Pointer(phPeerEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerFreeData calls P2P!PeerFreeData.
@@ -1116,7 +1116,7 @@ func PeerFreeData(pvData unsafe.Pointer) {
 // Minimum OS: windows5.1.2600.
 func PeerGetItemCount(hPeerEnum unsafe.Pointer, pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPeerGetItemCount.Addr(), uintptr(unsafe.Pointer(hPeerEnum)), uintptr(unsafe.Pointer(pCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGetNextItem calls P2P!PeerGetNextItem.
@@ -1124,7 +1124,7 @@ func PeerGetItemCount(hPeerEnum unsafe.Pointer, pCount *uint32) error {
 // Minimum OS: windows5.1.2600.
 func PeerGetNextItem(hPeerEnum unsafe.Pointer, pCount *uint32, pppvItems **unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerGetNextItem.Addr(), uintptr(unsafe.Pointer(hPeerEnum)), uintptr(unsafe.Pointer(pCount)), uintptr(unsafe.Pointer(pppvItems)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGraphAddRecord calls P2PGRAPH!PeerGraphAddRecord.
@@ -1132,7 +1132,7 @@ func PeerGetNextItem(hPeerEnum unsafe.Pointer, pCount *uint32, pppvItems **unsaf
 // Minimum OS: windows5.1.2600.
 func PeerGraphAddRecord(hGraph unsafe.Pointer, pRecord *PEER_RECORD, pRecordId *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphAddRecord.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(pRecord)), uintptr(unsafe.Pointer(pRecordId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGraphClose calls P2PGRAPH!PeerGraphClose.
@@ -1140,7 +1140,7 @@ func PeerGraphAddRecord(hGraph unsafe.Pointer, pRecord *PEER_RECORD, pRecordId *
 // Minimum OS: windows5.1.2600.
 func PeerGraphClose(hGraph unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphClose.Addr(), uintptr(unsafe.Pointer(hGraph)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGraphCloseDirectConnection calls P2PGRAPH!PeerGraphCloseDirectConnection.
@@ -1148,7 +1148,7 @@ func PeerGraphClose(hGraph unsafe.Pointer) error {
 // Minimum OS: windows5.1.2600.
 func PeerGraphCloseDirectConnection(hGraph unsafe.Pointer, ullConnectionId uint64) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphCloseDirectConnection.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(ullConnectionId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGraphConnect calls P2PGRAPH!PeerGraphConnect.
@@ -1157,7 +1157,7 @@ func PeerGraphCloseDirectConnection(hGraph unsafe.Pointer, ullConnectionId uint6
 func PeerGraphConnect(hGraph unsafe.Pointer, pwzPeerId string, pAddress *PEER_ADDRESS, pullConnectionId *uint64) error {
 	_pwzPeerId := win32.UTF16Ptr(pwzPeerId)
 	r1, _, _ := syscall.SyscallN(procPeerGraphConnect.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(_pwzPeerId)), uintptr(unsafe.Pointer(pAddress)), uintptr(unsafe.Pointer(pullConnectionId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGraphCreate calls P2PGRAPH!PeerGraphCreate.
@@ -1166,7 +1166,7 @@ func PeerGraphConnect(hGraph unsafe.Pointer, pwzPeerId string, pAddress *PEER_AD
 func PeerGraphCreate(pGraphProperties *PEER_GRAPH_PROPERTIES, pwzDatabaseName string, pSecurityInterface *PEER_SECURITY_INTERFACE, phGraph *unsafe.Pointer) error {
 	_pwzDatabaseName := win32.UTF16Ptr(pwzDatabaseName)
 	r1, _, _ := syscall.SyscallN(procPeerGraphCreate.Addr(), uintptr(unsafe.Pointer(pGraphProperties)), uintptr(unsafe.Pointer(_pwzDatabaseName)), uintptr(unsafe.Pointer(pSecurityInterface)), uintptr(unsafe.Pointer(phGraph)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGraphDelete calls P2PGRAPH!PeerGraphDelete.
@@ -1177,7 +1177,7 @@ func PeerGraphDelete(pwzGraphId string, pwzPeerId string, pwzDatabaseName string
 	_pwzPeerId := win32.UTF16Ptr(pwzPeerId)
 	_pwzDatabaseName := win32.UTF16Ptr(pwzDatabaseName)
 	r1, _, _ := syscall.SyscallN(procPeerGraphDelete.Addr(), uintptr(unsafe.Pointer(_pwzGraphId)), uintptr(unsafe.Pointer(_pwzPeerId)), uintptr(unsafe.Pointer(_pwzDatabaseName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGraphDeleteRecord calls P2PGRAPH!PeerGraphDeleteRecord.
@@ -1186,7 +1186,7 @@ func PeerGraphDelete(pwzGraphId string, pwzPeerId string, pwzDatabaseName string
 func PeerGraphDeleteRecord(hGraph unsafe.Pointer, pRecordId *win32.GUID, fLocal bool) error {
 	_fLocal := win32.Bool32(fLocal)
 	r1, _, _ := syscall.SyscallN(procPeerGraphDeleteRecord.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(pRecordId)), uintptr(_fLocal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGraphEndEnumeration calls P2PGRAPH!PeerGraphEndEnumeration.
@@ -1194,7 +1194,7 @@ func PeerGraphDeleteRecord(hGraph unsafe.Pointer, pRecordId *win32.GUID, fLocal 
 // Minimum OS: windows5.1.2600.
 func PeerGraphEndEnumeration(hPeerEnum unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphEndEnumeration.Addr(), uintptr(unsafe.Pointer(hPeerEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGraphEnumConnections calls P2PGRAPH!PeerGraphEnumConnections.
@@ -1202,7 +1202,7 @@ func PeerGraphEndEnumeration(hPeerEnum unsafe.Pointer) error {
 // Minimum OS: windows5.1.2600.
 func PeerGraphEnumConnections(hGraph unsafe.Pointer, dwFlags uint32, phPeerEnum *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphEnumConnections.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(dwFlags), uintptr(unsafe.Pointer(phPeerEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGraphEnumNodes calls P2PGRAPH!PeerGraphEnumNodes.
@@ -1211,7 +1211,7 @@ func PeerGraphEnumConnections(hGraph unsafe.Pointer, dwFlags uint32, phPeerEnum 
 func PeerGraphEnumNodes(hGraph unsafe.Pointer, pwzPeerId string, phPeerEnum *unsafe.Pointer) error {
 	_pwzPeerId := win32.UTF16Ptr(pwzPeerId)
 	r1, _, _ := syscall.SyscallN(procPeerGraphEnumNodes.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(_pwzPeerId)), uintptr(unsafe.Pointer(phPeerEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGraphEnumRecords calls P2PGRAPH!PeerGraphEnumRecords.
@@ -1220,7 +1220,7 @@ func PeerGraphEnumNodes(hGraph unsafe.Pointer, pwzPeerId string, phPeerEnum *uns
 func PeerGraphEnumRecords(hGraph unsafe.Pointer, pRecordType *win32.GUID, pwzPeerId string, phPeerEnum *unsafe.Pointer) error {
 	_pwzPeerId := win32.UTF16Ptr(pwzPeerId)
 	r1, _, _ := syscall.SyscallN(procPeerGraphEnumRecords.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(pRecordType)), uintptr(unsafe.Pointer(_pwzPeerId)), uintptr(unsafe.Pointer(phPeerEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGraphExportDatabase calls P2PGRAPH!PeerGraphExportDatabase.
@@ -1229,7 +1229,7 @@ func PeerGraphEnumRecords(hGraph unsafe.Pointer, pRecordType *win32.GUID, pwzPee
 func PeerGraphExportDatabase(hGraph unsafe.Pointer, pwzFilePath string) error {
 	_pwzFilePath := win32.UTF16Ptr(pwzFilePath)
 	r1, _, _ := syscall.SyscallN(procPeerGraphExportDatabase.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(_pwzFilePath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGraphFreeData calls P2PGRAPH!PeerGraphFreeData.
@@ -1244,7 +1244,7 @@ func PeerGraphFreeData(pvData unsafe.Pointer) {
 // Minimum OS: windows5.1.2600.
 func PeerGraphGetEventData(hPeerEvent unsafe.Pointer, ppEventData **PEER_GRAPH_EVENT_DATA) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphGetEventData.Addr(), uintptr(unsafe.Pointer(hPeerEvent)), uintptr(unsafe.Pointer(ppEventData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGraphGetItemCount calls P2PGRAPH!PeerGraphGetItemCount.
@@ -1252,7 +1252,7 @@ func PeerGraphGetEventData(hPeerEvent unsafe.Pointer, ppEventData **PEER_GRAPH_E
 // Minimum OS: windows5.1.2600.
 func PeerGraphGetItemCount(hPeerEnum unsafe.Pointer, pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphGetItemCount.Addr(), uintptr(unsafe.Pointer(hPeerEnum)), uintptr(unsafe.Pointer(pCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGraphGetNextItem calls P2PGRAPH!PeerGraphGetNextItem.
@@ -1260,7 +1260,7 @@ func PeerGraphGetItemCount(hPeerEnum unsafe.Pointer, pCount *uint32) error {
 // Minimum OS: windows5.1.2600.
 func PeerGraphGetNextItem(hPeerEnum unsafe.Pointer, pCount *uint32, pppvItems **unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphGetNextItem.Addr(), uintptr(unsafe.Pointer(hPeerEnum)), uintptr(unsafe.Pointer(pCount)), uintptr(unsafe.Pointer(pppvItems)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGraphGetNodeInfo calls P2PGRAPH!PeerGraphGetNodeInfo.
@@ -1268,7 +1268,7 @@ func PeerGraphGetNextItem(hPeerEnum unsafe.Pointer, pCount *uint32, pppvItems **
 // Minimum OS: windows5.1.2600.
 func PeerGraphGetNodeInfo(hGraph unsafe.Pointer, ullNodeId uint64, ppNodeInfo **PEER_NODE_INFO) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphGetNodeInfo.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(ullNodeId), uintptr(unsafe.Pointer(ppNodeInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGraphGetProperties calls P2PGRAPH!PeerGraphGetProperties.
@@ -1276,7 +1276,7 @@ func PeerGraphGetNodeInfo(hGraph unsafe.Pointer, ullNodeId uint64, ppNodeInfo **
 // Minimum OS: windows5.1.2600.
 func PeerGraphGetProperties(hGraph unsafe.Pointer, ppGraphProperties **PEER_GRAPH_PROPERTIES) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphGetProperties.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(ppGraphProperties)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGraphGetRecord calls P2PGRAPH!PeerGraphGetRecord.
@@ -1284,7 +1284,7 @@ func PeerGraphGetProperties(hGraph unsafe.Pointer, ppGraphProperties **PEER_GRAP
 // Minimum OS: windows5.1.2600.
 func PeerGraphGetRecord(hGraph unsafe.Pointer, pRecordId *win32.GUID, ppRecord **PEER_RECORD) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphGetRecord.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(pRecordId)), uintptr(unsafe.Pointer(ppRecord)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGraphGetStatus calls P2PGRAPH!PeerGraphGetStatus.
@@ -1292,7 +1292,7 @@ func PeerGraphGetRecord(hGraph unsafe.Pointer, pRecordId *win32.GUID, ppRecord *
 // Minimum OS: windows5.1.2600.
 func PeerGraphGetStatus(hGraph unsafe.Pointer, pdwStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphGetStatus.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(pdwStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGraphImportDatabase calls P2PGRAPH!PeerGraphImportDatabase.
@@ -1301,7 +1301,7 @@ func PeerGraphGetStatus(hGraph unsafe.Pointer, pdwStatus *uint32) error {
 func PeerGraphImportDatabase(hGraph unsafe.Pointer, pwzFilePath string) error {
 	_pwzFilePath := win32.UTF16Ptr(pwzFilePath)
 	r1, _, _ := syscall.SyscallN(procPeerGraphImportDatabase.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(_pwzFilePath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGraphListen calls P2PGRAPH!PeerGraphListen.
@@ -1309,7 +1309,7 @@ func PeerGraphImportDatabase(hGraph unsafe.Pointer, pwzFilePath string) error {
 // Minimum OS: windows5.1.2600.
 func PeerGraphListen(hGraph unsafe.Pointer, dwScope uint32, dwScopeId uint32, wPort uint16) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphListen.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(dwScope), uintptr(dwScopeId), uintptr(wPort))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGraphOpen calls P2PGRAPH!PeerGraphOpen.
@@ -1324,7 +1324,7 @@ func PeerGraphOpen(pwzGraphId string, pwzPeerId string, pwzDatabaseName string, 
 		_pRecordTypeSyncPrecedence = &pRecordTypeSyncPrecedence[0]
 	}
 	r1, _, _ := syscall.SyscallN(procPeerGraphOpen.Addr(), uintptr(unsafe.Pointer(_pwzGraphId)), uintptr(unsafe.Pointer(_pwzPeerId)), uintptr(unsafe.Pointer(_pwzDatabaseName)), uintptr(unsafe.Pointer(pSecurityInterface)), uintptr(len(pRecordTypeSyncPrecedence)), uintptr(unsafe.Pointer(_pRecordTypeSyncPrecedence)), uintptr(unsafe.Pointer(phGraph)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGraphOpenDirectConnection calls P2PGRAPH!PeerGraphOpenDirectConnection.
@@ -1333,7 +1333,7 @@ func PeerGraphOpen(pwzGraphId string, pwzPeerId string, pwzDatabaseName string, 
 func PeerGraphOpenDirectConnection(hGraph unsafe.Pointer, pwzPeerId string, pAddress *PEER_ADDRESS, pullConnectionId *uint64) error {
 	_pwzPeerId := win32.UTF16Ptr(pwzPeerId)
 	r1, _, _ := syscall.SyscallN(procPeerGraphOpenDirectConnection.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(_pwzPeerId)), uintptr(unsafe.Pointer(pAddress)), uintptr(unsafe.Pointer(pullConnectionId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGraphPeerTimeToUniversalTime calls P2PGRAPH!PeerGraphPeerTimeToUniversalTime.
@@ -1341,7 +1341,7 @@ func PeerGraphOpenDirectConnection(hGraph unsafe.Pointer, pwzPeerId string, pAdd
 // Minimum OS: windows5.1.2600.
 func PeerGraphPeerTimeToUniversalTime(hGraph unsafe.Pointer, pftPeerTime *foundation.FILETIME, pftUniversalTime *foundation.FILETIME) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphPeerTimeToUniversalTime.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(pftPeerTime)), uintptr(unsafe.Pointer(pftUniversalTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGraphRegisterEvent calls P2PGRAPH!PeerGraphRegisterEvent.
@@ -1353,7 +1353,7 @@ func PeerGraphRegisterEvent(hGraph unsafe.Pointer, hEvent foundation.HANDLE, pEv
 		_pEventRegistrations = &pEventRegistrations[0]
 	}
 	r1, _, _ := syscall.SyscallN(procPeerGraphRegisterEvent.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(hEvent), uintptr(len(pEventRegistrations)), uintptr(unsafe.Pointer(_pEventRegistrations)), uintptr(unsafe.Pointer(phPeerEvent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGraphSearchRecords calls P2PGRAPH!PeerGraphSearchRecords.
@@ -1362,7 +1362,7 @@ func PeerGraphRegisterEvent(hGraph unsafe.Pointer, hEvent foundation.HANDLE, pEv
 func PeerGraphSearchRecords(hGraph unsafe.Pointer, pwzCriteria string, phPeerEnum *unsafe.Pointer) error {
 	_pwzCriteria := win32.UTF16Ptr(pwzCriteria)
 	r1, _, _ := syscall.SyscallN(procPeerGraphSearchRecords.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(_pwzCriteria)), uintptr(unsafe.Pointer(phPeerEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGraphSendData calls P2PGRAPH!PeerGraphSendData.
@@ -1374,7 +1374,7 @@ func PeerGraphSendData(hGraph unsafe.Pointer, ullConnectionId uint64, pType *win
 		_pvData = &pvData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procPeerGraphSendData.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(ullConnectionId), uintptr(unsafe.Pointer(pType)), uintptr(len(pvData)), uintptr(unsafe.Pointer(_pvData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGraphSetNodeAttributes calls P2PGRAPH!PeerGraphSetNodeAttributes.
@@ -1383,7 +1383,7 @@ func PeerGraphSendData(hGraph unsafe.Pointer, ullConnectionId uint64, pType *win
 func PeerGraphSetNodeAttributes(hGraph unsafe.Pointer, pwzAttributes string) error {
 	_pwzAttributes := win32.UTF16Ptr(pwzAttributes)
 	r1, _, _ := syscall.SyscallN(procPeerGraphSetNodeAttributes.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(_pwzAttributes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGraphSetPresence calls P2PGRAPH!PeerGraphSetPresence.
@@ -1392,7 +1392,7 @@ func PeerGraphSetNodeAttributes(hGraph unsafe.Pointer, pwzAttributes string) err
 func PeerGraphSetPresence(hGraph unsafe.Pointer, fPresent bool) error {
 	_fPresent := win32.Bool32(fPresent)
 	r1, _, _ := syscall.SyscallN(procPeerGraphSetPresence.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(_fPresent))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGraphSetProperties calls P2PGRAPH!PeerGraphSetProperties.
@@ -1400,7 +1400,7 @@ func PeerGraphSetPresence(hGraph unsafe.Pointer, fPresent bool) error {
 // Minimum OS: windows5.1.2600.
 func PeerGraphSetProperties(hGraph unsafe.Pointer, pGraphProperties *PEER_GRAPH_PROPERTIES) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphSetProperties.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(pGraphProperties)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGraphShutdown calls P2PGRAPH!PeerGraphShutdown.
@@ -1408,7 +1408,7 @@ func PeerGraphSetProperties(hGraph unsafe.Pointer, pGraphProperties *PEER_GRAPH_
 // Minimum OS: windows5.1.2600.
 func PeerGraphShutdown() error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphShutdown.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGraphStartup calls P2PGRAPH!PeerGraphStartup.
@@ -1416,7 +1416,7 @@ func PeerGraphShutdown() error {
 // Minimum OS: windows5.1.2600.
 func PeerGraphStartup(wVersionRequested uint16, pVersionData *PEER_VERSION_DATA) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphStartup.Addr(), uintptr(wVersionRequested), uintptr(unsafe.Pointer(pVersionData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGraphUniversalTimeToPeerTime calls P2PGRAPH!PeerGraphUniversalTimeToPeerTime.
@@ -1424,7 +1424,7 @@ func PeerGraphStartup(wVersionRequested uint16, pVersionData *PEER_VERSION_DATA)
 // Minimum OS: windows5.1.2600.
 func PeerGraphUniversalTimeToPeerTime(hGraph unsafe.Pointer, pftUniversalTime *foundation.FILETIME, pftPeerTime *foundation.FILETIME) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphUniversalTimeToPeerTime.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(pftUniversalTime)), uintptr(unsafe.Pointer(pftPeerTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGraphUnregisterEvent calls P2PGRAPH!PeerGraphUnregisterEvent.
@@ -1432,7 +1432,7 @@ func PeerGraphUniversalTimeToPeerTime(hGraph unsafe.Pointer, pftUniversalTime *f
 // Minimum OS: windows5.1.2600.
 func PeerGraphUnregisterEvent(hPeerEvent unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphUnregisterEvent.Addr(), uintptr(unsafe.Pointer(hPeerEvent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGraphUpdateRecord calls P2PGRAPH!PeerGraphUpdateRecord.
@@ -1440,7 +1440,7 @@ func PeerGraphUnregisterEvent(hPeerEvent unsafe.Pointer) error {
 // Minimum OS: windows5.1.2600.
 func PeerGraphUpdateRecord(hGraph unsafe.Pointer, pRecord *PEER_RECORD) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphUpdateRecord.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(pRecord)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGraphValidateDeferredRecords calls P2PGRAPH!PeerGraphValidateDeferredRecords.
@@ -1452,7 +1452,7 @@ func PeerGraphValidateDeferredRecords(hGraph unsafe.Pointer, pRecordIds []win32.
 		_pRecordIds = &pRecordIds[0]
 	}
 	r1, _, _ := syscall.SyscallN(procPeerGraphValidateDeferredRecords.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(len(pRecordIds)), uintptr(unsafe.Pointer(_pRecordIds)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupAddRecord calls P2P!PeerGroupAddRecord.
@@ -1460,7 +1460,7 @@ func PeerGraphValidateDeferredRecords(hGraph unsafe.Pointer, pRecordIds []win32.
 // Minimum OS: windows5.1.2600.
 func PeerGroupAddRecord(hGroup unsafe.Pointer, pRecord *PEER_RECORD, pRecordId *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupAddRecord.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(pRecord)), uintptr(unsafe.Pointer(pRecordId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupClose calls P2P!PeerGroupClose.
@@ -1468,7 +1468,7 @@ func PeerGroupAddRecord(hGroup unsafe.Pointer, pRecord *PEER_RECORD, pRecordId *
 // Minimum OS: windows5.1.2600.
 func PeerGroupClose(hGroup unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupClose.Addr(), uintptr(unsafe.Pointer(hGroup)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupCloseDirectConnection calls P2P!PeerGroupCloseDirectConnection.
@@ -1476,7 +1476,7 @@ func PeerGroupClose(hGroup unsafe.Pointer) error {
 // Minimum OS: windows5.1.2600.
 func PeerGroupCloseDirectConnection(hGroup unsafe.Pointer, ullConnectionId uint64) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupCloseDirectConnection.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(ullConnectionId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupConnect calls P2P!PeerGroupConnect.
@@ -1484,7 +1484,7 @@ func PeerGroupCloseDirectConnection(hGroup unsafe.Pointer, ullConnectionId uint6
 // Minimum OS: windows5.1.2600.
 func PeerGroupConnect(hGroup unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupConnect.Addr(), uintptr(unsafe.Pointer(hGroup)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupConnectByAddress calls P2P!PeerGroupConnectByAddress.
@@ -1496,7 +1496,7 @@ func PeerGroupConnectByAddress(hGroup unsafe.Pointer, pAddresses []PEER_ADDRESS)
 		_pAddresses = &pAddresses[0]
 	}
 	r1, _, _ := syscall.SyscallN(procPeerGroupConnectByAddress.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(len(pAddresses)), uintptr(unsafe.Pointer(_pAddresses)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupCreate calls P2P!PeerGroupCreate.
@@ -1504,7 +1504,7 @@ func PeerGroupConnectByAddress(hGroup unsafe.Pointer, pAddresses []PEER_ADDRESS)
 // Minimum OS: windows5.1.2600.
 func PeerGroupCreate(pProperties *PEER_GROUP_PROPERTIES, phGroup *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupCreate.Addr(), uintptr(unsafe.Pointer(pProperties)), uintptr(unsafe.Pointer(phGroup)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupCreateInvitation calls P2P!PeerGroupCreateInvitation.
@@ -1517,7 +1517,7 @@ func PeerGroupCreateInvitation(hGroup unsafe.Pointer, pwzIdentityInfo string, pf
 		_pRoles = &pRoles[0]
 	}
 	r1, _, _ := syscall.SyscallN(procPeerGroupCreateInvitation.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(_pwzIdentityInfo)), uintptr(unsafe.Pointer(pftExpiration)), uintptr(len(pRoles)), uintptr(unsafe.Pointer(_pRoles)), uintptr(unsafe.Pointer(ppwzInvitation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupCreatePasswordInvitation calls P2P!PeerGroupCreatePasswordInvitation.
@@ -1525,7 +1525,7 @@ func PeerGroupCreateInvitation(hGroup unsafe.Pointer, pwzIdentityInfo string, pf
 // Minimum OS: windows5.1.2600.
 func PeerGroupCreatePasswordInvitation(hGroup unsafe.Pointer, ppwzInvitation *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupCreatePasswordInvitation.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(ppwzInvitation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupDelete calls P2P!PeerGroupDelete.
@@ -1535,7 +1535,7 @@ func PeerGroupDelete(pwzIdentity string, pwzGroupPeerName string) error {
 	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
 	_pwzGroupPeerName := win32.UTF16Ptr(pwzGroupPeerName)
 	r1, _, _ := syscall.SyscallN(procPeerGroupDelete.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(_pwzGroupPeerName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupDeleteRecord calls P2P!PeerGroupDeleteRecord.
@@ -1543,7 +1543,7 @@ func PeerGroupDelete(pwzIdentity string, pwzGroupPeerName string) error {
 // Minimum OS: windows5.1.2600.
 func PeerGroupDeleteRecord(hGroup unsafe.Pointer, pRecordId *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupDeleteRecord.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(pRecordId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupEnumConnections calls P2P!PeerGroupEnumConnections.
@@ -1551,7 +1551,7 @@ func PeerGroupDeleteRecord(hGroup unsafe.Pointer, pRecordId *win32.GUID) error {
 // Minimum OS: windows5.1.2600.
 func PeerGroupEnumConnections(hGroup unsafe.Pointer, dwFlags uint32, phPeerEnum *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupEnumConnections.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(dwFlags), uintptr(unsafe.Pointer(phPeerEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupEnumMembers calls P2P!PeerGroupEnumMembers.
@@ -1560,7 +1560,7 @@ func PeerGroupEnumConnections(hGroup unsafe.Pointer, dwFlags uint32, phPeerEnum 
 func PeerGroupEnumMembers(hGroup unsafe.Pointer, dwFlags uint32, pwzIdentity string, phPeerEnum *unsafe.Pointer) error {
 	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
 	r1, _, _ := syscall.SyscallN(procPeerGroupEnumMembers.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(dwFlags), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(phPeerEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupEnumRecords calls P2P!PeerGroupEnumRecords.
@@ -1568,7 +1568,7 @@ func PeerGroupEnumMembers(hGroup unsafe.Pointer, dwFlags uint32, pwzIdentity str
 // Minimum OS: windows5.1.2600.
 func PeerGroupEnumRecords(hGroup unsafe.Pointer, pRecordType *win32.GUID, phPeerEnum *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupEnumRecords.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(pRecordType)), uintptr(unsafe.Pointer(phPeerEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupExportConfig calls P2P!PeerGroupExportConfig.
@@ -1577,7 +1577,7 @@ func PeerGroupEnumRecords(hGroup unsafe.Pointer, pRecordType *win32.GUID, phPeer
 func PeerGroupExportConfig(hGroup unsafe.Pointer, pwzPassword string, ppwzXML *foundation.PWSTR) error {
 	_pwzPassword := win32.UTF16Ptr(pwzPassword)
 	r1, _, _ := syscall.SyscallN(procPeerGroupExportConfig.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(_pwzPassword)), uintptr(unsafe.Pointer(ppwzXML)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupExportDatabase calls P2P!PeerGroupExportDatabase.
@@ -1586,7 +1586,7 @@ func PeerGroupExportConfig(hGroup unsafe.Pointer, pwzPassword string, ppwzXML *f
 func PeerGroupExportDatabase(hGroup unsafe.Pointer, pwzFilePath string) error {
 	_pwzFilePath := win32.UTF16Ptr(pwzFilePath)
 	r1, _, _ := syscall.SyscallN(procPeerGroupExportDatabase.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(_pwzFilePath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupGetEventData calls P2P!PeerGroupGetEventData.
@@ -1594,7 +1594,7 @@ func PeerGroupExportDatabase(hGroup unsafe.Pointer, pwzFilePath string) error {
 // Minimum OS: windows5.1.2600.
 func PeerGroupGetEventData(hPeerEvent unsafe.Pointer, ppEventData **PEER_GROUP_EVENT_DATA) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupGetEventData.Addr(), uintptr(unsafe.Pointer(hPeerEvent)), uintptr(unsafe.Pointer(ppEventData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupGetProperties calls P2P!PeerGroupGetProperties.
@@ -1602,7 +1602,7 @@ func PeerGroupGetEventData(hPeerEvent unsafe.Pointer, ppEventData **PEER_GROUP_E
 // Minimum OS: windows5.1.2600.
 func PeerGroupGetProperties(hGroup unsafe.Pointer, ppProperties **PEER_GROUP_PROPERTIES) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupGetProperties.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(ppProperties)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupGetRecord calls P2P!PeerGroupGetRecord.
@@ -1610,7 +1610,7 @@ func PeerGroupGetProperties(hGroup unsafe.Pointer, ppProperties **PEER_GROUP_PRO
 // Minimum OS: windows5.1.2600.
 func PeerGroupGetRecord(hGroup unsafe.Pointer, pRecordId *win32.GUID, ppRecord **PEER_RECORD) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupGetRecord.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(pRecordId)), uintptr(unsafe.Pointer(ppRecord)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupGetStatus calls P2P!PeerGroupGetStatus.
@@ -1618,7 +1618,7 @@ func PeerGroupGetRecord(hGroup unsafe.Pointer, pRecordId *win32.GUID, ppRecord *
 // Minimum OS: windows5.1.2600.
 func PeerGroupGetStatus(hGroup unsafe.Pointer, pdwStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupGetStatus.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(pdwStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupImportConfig calls P2P!PeerGroupImportConfig.
@@ -1629,7 +1629,7 @@ func PeerGroupImportConfig(pwzXML string, pwzPassword string, fOverwrite bool, p
 	_pwzPassword := win32.UTF16Ptr(pwzPassword)
 	_fOverwrite := win32.Bool32(fOverwrite)
 	r1, _, _ := syscall.SyscallN(procPeerGroupImportConfig.Addr(), uintptr(unsafe.Pointer(_pwzXML)), uintptr(unsafe.Pointer(_pwzPassword)), uintptr(_fOverwrite), uintptr(unsafe.Pointer(ppwzIdentity)), uintptr(unsafe.Pointer(ppwzGroup)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupImportDatabase calls P2P!PeerGroupImportDatabase.
@@ -1638,7 +1638,7 @@ func PeerGroupImportConfig(pwzXML string, pwzPassword string, fOverwrite bool, p
 func PeerGroupImportDatabase(hGroup unsafe.Pointer, pwzFilePath string) error {
 	_pwzFilePath := win32.UTF16Ptr(pwzFilePath)
 	r1, _, _ := syscall.SyscallN(procPeerGroupImportDatabase.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(_pwzFilePath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupIssueCredentials calls P2P!PeerGroupIssueCredentials.
@@ -1647,7 +1647,7 @@ func PeerGroupImportDatabase(hGroup unsafe.Pointer, pwzFilePath string) error {
 func PeerGroupIssueCredentials(hGroup unsafe.Pointer, pwzSubjectIdentity string, pCredentialInfo *PEER_CREDENTIAL_INFO, dwFlags uint32, ppwzInvitation *foundation.PWSTR) error {
 	_pwzSubjectIdentity := win32.UTF16Ptr(pwzSubjectIdentity)
 	r1, _, _ := syscall.SyscallN(procPeerGroupIssueCredentials.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(_pwzSubjectIdentity)), uintptr(unsafe.Pointer(pCredentialInfo)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppwzInvitation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupJoin calls P2P!PeerGroupJoin.
@@ -1658,7 +1658,7 @@ func PeerGroupJoin(pwzIdentity string, pwzInvitation string, pwzCloud string, ph
 	_pwzInvitation := win32.UTF16Ptr(pwzInvitation)
 	_pwzCloud := win32.UTF16Ptr(pwzCloud)
 	r1, _, _ := syscall.SyscallN(procPeerGroupJoin.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(_pwzInvitation)), uintptr(unsafe.Pointer(_pwzCloud)), uintptr(unsafe.Pointer(phGroup)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupOpen calls P2P!PeerGroupOpen.
@@ -1669,7 +1669,7 @@ func PeerGroupOpen(pwzIdentity string, pwzGroupPeerName string, pwzCloud string,
 	_pwzGroupPeerName := win32.UTF16Ptr(pwzGroupPeerName)
 	_pwzCloud := win32.UTF16Ptr(pwzCloud)
 	r1, _, _ := syscall.SyscallN(procPeerGroupOpen.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(_pwzGroupPeerName)), uintptr(unsafe.Pointer(_pwzCloud)), uintptr(unsafe.Pointer(phGroup)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupOpenDirectConnection calls P2P!PeerGroupOpenDirectConnection.
@@ -1678,7 +1678,7 @@ func PeerGroupOpen(pwzIdentity string, pwzGroupPeerName string, pwzCloud string,
 func PeerGroupOpenDirectConnection(hGroup unsafe.Pointer, pwzIdentity string, pAddress *PEER_ADDRESS, pullConnectionId *uint64) error {
 	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
 	r1, _, _ := syscall.SyscallN(procPeerGroupOpenDirectConnection.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(pAddress)), uintptr(unsafe.Pointer(pullConnectionId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupParseInvitation calls P2P!PeerGroupParseInvitation.
@@ -1687,7 +1687,7 @@ func PeerGroupOpenDirectConnection(hGroup unsafe.Pointer, pwzIdentity string, pA
 func PeerGroupParseInvitation(pwzInvitation string, ppInvitationInfo **PEER_INVITATION_INFO) error {
 	_pwzInvitation := win32.UTF16Ptr(pwzInvitation)
 	r1, _, _ := syscall.SyscallN(procPeerGroupParseInvitation.Addr(), uintptr(unsafe.Pointer(_pwzInvitation)), uintptr(unsafe.Pointer(ppInvitationInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupPasswordJoin calls P2P!PeerGroupPasswordJoin.
@@ -1699,7 +1699,7 @@ func PeerGroupPasswordJoin(pwzIdentity string, pwzInvitation string, pwzPassword
 	_pwzPassword := win32.UTF16Ptr(pwzPassword)
 	_pwzCloud := win32.UTF16Ptr(pwzCloud)
 	r1, _, _ := syscall.SyscallN(procPeerGroupPasswordJoin.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(_pwzInvitation)), uintptr(unsafe.Pointer(_pwzPassword)), uintptr(unsafe.Pointer(_pwzCloud)), uintptr(unsafe.Pointer(phGroup)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupPeerTimeToUniversalTime calls P2P!PeerGroupPeerTimeToUniversalTime.
@@ -1707,7 +1707,7 @@ func PeerGroupPasswordJoin(pwzIdentity string, pwzInvitation string, pwzPassword
 // Minimum OS: windows5.1.2600.
 func PeerGroupPeerTimeToUniversalTime(hGroup unsafe.Pointer, pftPeerTime *foundation.FILETIME, pftUniversalTime *foundation.FILETIME) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupPeerTimeToUniversalTime.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(pftPeerTime)), uintptr(unsafe.Pointer(pftUniversalTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupRegisterEvent calls P2P!PeerGroupRegisterEvent.
@@ -1719,13 +1719,13 @@ func PeerGroupRegisterEvent(hGroup unsafe.Pointer, hEvent foundation.HANDLE, pEv
 		_pEventRegistrations = &pEventRegistrations[0]
 	}
 	r1, _, _ := syscall.SyscallN(procPeerGroupRegisterEvent.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(hEvent), uintptr(len(pEventRegistrations)), uintptr(unsafe.Pointer(_pEventRegistrations)), uintptr(unsafe.Pointer(phPeerEvent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupResumePasswordAuthentication calls P2P!PeerGroupResumePasswordAuthentication.
 func PeerGroupResumePasswordAuthentication(hGroup unsafe.Pointer, hPeerEventHandle unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupResumePasswordAuthentication.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(hPeerEventHandle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupSearchRecords calls P2P!PeerGroupSearchRecords.
@@ -1734,7 +1734,7 @@ func PeerGroupResumePasswordAuthentication(hGroup unsafe.Pointer, hPeerEventHand
 func PeerGroupSearchRecords(hGroup unsafe.Pointer, pwzCriteria string, phPeerEnum *unsafe.Pointer) error {
 	_pwzCriteria := win32.UTF16Ptr(pwzCriteria)
 	r1, _, _ := syscall.SyscallN(procPeerGroupSearchRecords.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(_pwzCriteria)), uintptr(unsafe.Pointer(phPeerEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupSendData calls P2P!PeerGroupSendData.
@@ -1746,7 +1746,7 @@ func PeerGroupSendData(hGroup unsafe.Pointer, ullConnectionId uint64, pType *win
 		_pvData = &pvData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procPeerGroupSendData.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(ullConnectionId), uintptr(unsafe.Pointer(pType)), uintptr(len(pvData)), uintptr(unsafe.Pointer(_pvData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupSetProperties calls P2P!PeerGroupSetProperties.
@@ -1754,7 +1754,7 @@ func PeerGroupSendData(hGroup unsafe.Pointer, ullConnectionId uint64, pType *win
 // Minimum OS: windows5.1.2600.
 func PeerGroupSetProperties(hGroup unsafe.Pointer, pProperties *PEER_GROUP_PROPERTIES) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupSetProperties.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(pProperties)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupShutdown calls P2P!PeerGroupShutdown.
@@ -1762,7 +1762,7 @@ func PeerGroupSetProperties(hGroup unsafe.Pointer, pProperties *PEER_GROUP_PROPE
 // Minimum OS: windows5.1.2600.
 func PeerGroupShutdown() error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupShutdown.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupStartup calls P2P!PeerGroupStartup.
@@ -1770,7 +1770,7 @@ func PeerGroupShutdown() error {
 // Minimum OS: windows5.1.2600.
 func PeerGroupStartup(wVersionRequested uint16, pVersionData *PEER_VERSION_DATA) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupStartup.Addr(), uintptr(wVersionRequested), uintptr(unsafe.Pointer(pVersionData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupUniversalTimeToPeerTime calls P2P!PeerGroupUniversalTimeToPeerTime.
@@ -1778,7 +1778,7 @@ func PeerGroupStartup(wVersionRequested uint16, pVersionData *PEER_VERSION_DATA)
 // Minimum OS: windows5.1.2600.
 func PeerGroupUniversalTimeToPeerTime(hGroup unsafe.Pointer, pftUniversalTime *foundation.FILETIME, pftPeerTime *foundation.FILETIME) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupUniversalTimeToPeerTime.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(pftUniversalTime)), uintptr(unsafe.Pointer(pftPeerTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupUnregisterEvent calls P2P!PeerGroupUnregisterEvent.
@@ -1786,7 +1786,7 @@ func PeerGroupUniversalTimeToPeerTime(hGroup unsafe.Pointer, pftUniversalTime *f
 // Minimum OS: windows5.1.2600.
 func PeerGroupUnregisterEvent(hPeerEvent unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupUnregisterEvent.Addr(), uintptr(unsafe.Pointer(hPeerEvent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerGroupUpdateRecord calls P2P!PeerGroupUpdateRecord.
@@ -1794,7 +1794,7 @@ func PeerGroupUnregisterEvent(hPeerEvent unsafe.Pointer) error {
 // Minimum OS: windows5.1.2600.
 func PeerGroupUpdateRecord(hGroup unsafe.Pointer, pRecord *PEER_RECORD) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupUpdateRecord.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(pRecord)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerHostNameToPeerName calls P2P!PeerHostNameToPeerName.
@@ -1803,7 +1803,7 @@ func PeerGroupUpdateRecord(hGroup unsafe.Pointer, pRecord *PEER_RECORD) error {
 func PeerHostNameToPeerName(pwzHostName string, ppwzPeerName *foundation.PWSTR) error {
 	_pwzHostName := win32.UTF16Ptr(pwzHostName)
 	r1, _, _ := syscall.SyscallN(procPeerHostNameToPeerName.Addr(), uintptr(unsafe.Pointer(_pwzHostName)), uintptr(unsafe.Pointer(ppwzPeerName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerIdentityCreate calls P2P!PeerIdentityCreate.
@@ -1813,7 +1813,7 @@ func PeerIdentityCreate(pwzClassifier string, pwzFriendlyName string, hCryptProv
 	_pwzClassifier := win32.UTF16Ptr(pwzClassifier)
 	_pwzFriendlyName := win32.UTF16Ptr(pwzFriendlyName)
 	r1, _, _ := syscall.SyscallN(procPeerIdentityCreate.Addr(), uintptr(unsafe.Pointer(_pwzClassifier)), uintptr(unsafe.Pointer(_pwzFriendlyName)), uintptr(hCryptProv), uintptr(unsafe.Pointer(ppwzIdentity)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerIdentityDelete calls P2P!PeerIdentityDelete.
@@ -1822,7 +1822,7 @@ func PeerIdentityCreate(pwzClassifier string, pwzFriendlyName string, hCryptProv
 func PeerIdentityDelete(pwzIdentity string) error {
 	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
 	r1, _, _ := syscall.SyscallN(procPeerIdentityDelete.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerIdentityExport calls P2P!PeerIdentityExport.
@@ -1832,7 +1832,7 @@ func PeerIdentityExport(pwzIdentity string, pwzPassword string, ppwzExportXML *f
 	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
 	_pwzPassword := win32.UTF16Ptr(pwzPassword)
 	r1, _, _ := syscall.SyscallN(procPeerIdentityExport.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(_pwzPassword)), uintptr(unsafe.Pointer(ppwzExportXML)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerIdentityGetCryptKey calls P2P!PeerIdentityGetCryptKey.
@@ -1841,7 +1841,7 @@ func PeerIdentityExport(pwzIdentity string, pwzPassword string, ppwzExportXML *f
 func PeerIdentityGetCryptKey(pwzIdentity string, phCryptProv *uintptr) error {
 	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
 	r1, _, _ := syscall.SyscallN(procPeerIdentityGetCryptKey.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(phCryptProv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerIdentityGetDefault calls P2P!PeerIdentityGetDefault.
@@ -1849,7 +1849,7 @@ func PeerIdentityGetCryptKey(pwzIdentity string, phCryptProv *uintptr) error {
 // Minimum OS: windows5.1.2600.
 func PeerIdentityGetDefault(ppwzPeerName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procPeerIdentityGetDefault.Addr(), uintptr(unsafe.Pointer(ppwzPeerName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerIdentityGetFriendlyName calls P2P!PeerIdentityGetFriendlyName.
@@ -1858,7 +1858,7 @@ func PeerIdentityGetDefault(ppwzPeerName *foundation.PWSTR) error {
 func PeerIdentityGetFriendlyName(pwzIdentity string, ppwzFriendlyName *foundation.PWSTR) error {
 	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
 	r1, _, _ := syscall.SyscallN(procPeerIdentityGetFriendlyName.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(ppwzFriendlyName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerIdentityGetXML calls P2P!PeerIdentityGetXML.
@@ -1867,7 +1867,7 @@ func PeerIdentityGetFriendlyName(pwzIdentity string, ppwzFriendlyName *foundatio
 func PeerIdentityGetXML(pwzIdentity string, ppwzIdentityXML *foundation.PWSTR) error {
 	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
 	r1, _, _ := syscall.SyscallN(procPeerIdentityGetXML.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(ppwzIdentityXML)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerIdentityImport calls P2P!PeerIdentityImport.
@@ -1877,7 +1877,7 @@ func PeerIdentityImport(pwzImportXML string, pwzPassword string, ppwzIdentity *f
 	_pwzImportXML := win32.UTF16Ptr(pwzImportXML)
 	_pwzPassword := win32.UTF16Ptr(pwzPassword)
 	r1, _, _ := syscall.SyscallN(procPeerIdentityImport.Addr(), uintptr(unsafe.Pointer(_pwzImportXML)), uintptr(unsafe.Pointer(_pwzPassword)), uintptr(unsafe.Pointer(ppwzIdentity)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerIdentitySetFriendlyName calls P2P!PeerIdentitySetFriendlyName.
@@ -1887,7 +1887,7 @@ func PeerIdentitySetFriendlyName(pwzIdentity string, pwzFriendlyName string) err
 	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
 	_pwzFriendlyName := win32.UTF16Ptr(pwzFriendlyName)
 	r1, _, _ := syscall.SyscallN(procPeerIdentitySetFriendlyName.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(_pwzFriendlyName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerNameToPeerHostName calls P2P!PeerNameToPeerHostName.
@@ -1896,7 +1896,7 @@ func PeerIdentitySetFriendlyName(pwzIdentity string, pwzFriendlyName string) err
 func PeerNameToPeerHostName(pwzPeerName string, ppwzHostName *foundation.PWSTR) error {
 	_pwzPeerName := win32.UTF16Ptr(pwzPeerName)
 	r1, _, _ := syscall.SyscallN(procPeerNameToPeerHostName.Addr(), uintptr(unsafe.Pointer(_pwzPeerName)), uintptr(unsafe.Pointer(ppwzHostName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerPnrpEndResolve calls P2P!PeerPnrpEndResolve.
@@ -1904,7 +1904,7 @@ func PeerNameToPeerHostName(pwzPeerName string, ppwzHostName *foundation.PWSTR) 
 // Minimum OS: windows5.1.2600.
 func PeerPnrpEndResolve(hResolve unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerPnrpEndResolve.Addr(), uintptr(unsafe.Pointer(hResolve)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerPnrpGetCloudInfo calls P2P!PeerPnrpGetCloudInfo.
@@ -1912,7 +1912,7 @@ func PeerPnrpEndResolve(hResolve unsafe.Pointer) error {
 // Minimum OS: windows5.1.2600.
 func PeerPnrpGetCloudInfo(pcNumClouds *uint32, ppCloudInfo **PEER_PNRP_CLOUD_INFO) error {
 	r1, _, _ := syscall.SyscallN(procPeerPnrpGetCloudInfo.Addr(), uintptr(unsafe.Pointer(pcNumClouds)), uintptr(unsafe.Pointer(ppCloudInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerPnrpGetEndpoint calls P2P!PeerPnrpGetEndpoint.
@@ -1920,7 +1920,7 @@ func PeerPnrpGetCloudInfo(pcNumClouds *uint32, ppCloudInfo **PEER_PNRP_CLOUD_INF
 // Minimum OS: windows5.1.2600.
 func PeerPnrpGetEndpoint(hResolve unsafe.Pointer, ppEndpoint **PEER_PNRP_ENDPOINT_INFO) error {
 	r1, _, _ := syscall.SyscallN(procPeerPnrpGetEndpoint.Addr(), uintptr(unsafe.Pointer(hResolve)), uintptr(unsafe.Pointer(ppEndpoint)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerPnrpRegister calls P2P!PeerPnrpRegister.
@@ -1929,7 +1929,7 @@ func PeerPnrpGetEndpoint(hResolve unsafe.Pointer, ppEndpoint **PEER_PNRP_ENDPOIN
 func PeerPnrpRegister(pcwzPeerName string, pRegistrationInfo *PEER_PNRP_REGISTRATION_INFO, phRegistration *unsafe.Pointer) error {
 	_pcwzPeerName := win32.UTF16Ptr(pcwzPeerName)
 	r1, _, _ := syscall.SyscallN(procPeerPnrpRegister.Addr(), uintptr(unsafe.Pointer(_pcwzPeerName)), uintptr(unsafe.Pointer(pRegistrationInfo)), uintptr(unsafe.Pointer(phRegistration)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerPnrpResolve calls P2P!PeerPnrpResolve.
@@ -1939,7 +1939,7 @@ func PeerPnrpResolve(pcwzPeerName string, pcwzCloudName string, pcEndpoints *uin
 	_pcwzPeerName := win32.UTF16Ptr(pcwzPeerName)
 	_pcwzCloudName := win32.UTF16Ptr(pcwzCloudName)
 	r1, _, _ := syscall.SyscallN(procPeerPnrpResolve.Addr(), uintptr(unsafe.Pointer(_pcwzPeerName)), uintptr(unsafe.Pointer(_pcwzCloudName)), uintptr(unsafe.Pointer(pcEndpoints)), uintptr(unsafe.Pointer(ppEndpoints)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerPnrpShutdown calls P2P!PeerPnrpShutdown.
@@ -1947,7 +1947,7 @@ func PeerPnrpResolve(pcwzPeerName string, pcwzCloudName string, pcEndpoints *uin
 // Minimum OS: windows5.1.2600.
 func PeerPnrpShutdown() error {
 	r1, _, _ := syscall.SyscallN(procPeerPnrpShutdown.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerPnrpStartResolve calls P2P!PeerPnrpStartResolve.
@@ -1957,7 +1957,7 @@ func PeerPnrpStartResolve(pcwzPeerName string, pcwzCloudName string, cMaxEndpoin
 	_pcwzPeerName := win32.UTF16Ptr(pcwzPeerName)
 	_pcwzCloudName := win32.UTF16Ptr(pcwzCloudName)
 	r1, _, _ := syscall.SyscallN(procPeerPnrpStartResolve.Addr(), uintptr(unsafe.Pointer(_pcwzPeerName)), uintptr(unsafe.Pointer(_pcwzCloudName)), uintptr(cMaxEndpoints), uintptr(hEvent), uintptr(unsafe.Pointer(phResolve)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerPnrpStartup calls P2P!PeerPnrpStartup.
@@ -1965,7 +1965,7 @@ func PeerPnrpStartResolve(pcwzPeerName string, pcwzCloudName string, cMaxEndpoin
 // Minimum OS: windows5.1.2600.
 func PeerPnrpStartup(wVersionRequested uint16) error {
 	r1, _, _ := syscall.SyscallN(procPeerPnrpStartup.Addr(), uintptr(wVersionRequested))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerPnrpUnregister calls P2P!PeerPnrpUnregister.
@@ -1973,7 +1973,7 @@ func PeerPnrpStartup(wVersionRequested uint16) error {
 // Minimum OS: windows5.1.2600.
 func PeerPnrpUnregister(hRegistration unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerPnrpUnregister.Addr(), uintptr(unsafe.Pointer(hRegistration)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeerPnrpUpdateRegistration calls P2P!PeerPnrpUpdateRegistration.
@@ -1981,5 +1981,5 @@ func PeerPnrpUnregister(hRegistration unsafe.Pointer) error {
 // Minimum OS: windows5.1.2600.
 func PeerPnrpUpdateRegistration(hRegistration unsafe.Pointer, pRegistrationInfo *PEER_PNRP_REGISTRATION_INFO) error {
 	r1, _, _ := syscall.SyscallN(procPeerPnrpUpdateRegistration.Addr(), uintptr(unsafe.Pointer(hRegistration)), uintptr(unsafe.Pointer(pRegistrationInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

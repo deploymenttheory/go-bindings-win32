@@ -48,7 +48,7 @@ func GetInterfaceContextTableForHostName(HostName string, ProxyName string, Flag
 		_ConnectionProfileFilterRawData = &ConnectionProfileFilterRawData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procGetInterfaceContextTableForHostName.Addr(), uintptr(unsafe.Pointer(_HostName)), uintptr(unsafe.Pointer(_ProxyName)), uintptr(Flags), uintptr(unsafe.Pointer(_ConnectionProfileFilterRawData)), uintptr(len(ConnectionProfileFilterRawData)), uintptr(unsafe.Pointer(InterfaceContextTable)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnDemandGetRoutingHint calls OnDemandConnRouteHelper!OnDemandGetRoutingHint.
@@ -57,7 +57,7 @@ func GetInterfaceContextTableForHostName(HostName string, ProxyName string, Flag
 func OnDemandGetRoutingHint(destinationHostName string, interfaceIndex *uint32) error {
 	_destinationHostName := win32.UTF16Ptr(destinationHostName)
 	r1, _, _ := syscall.SyscallN(procOnDemandGetRoutingHint.Addr(), uintptr(unsafe.Pointer(_destinationHostName)), uintptr(unsafe.Pointer(interfaceIndex)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnDemandRegisterNotification calls OnDemandConnRouteHelper!OnDemandRegisterNotification.
@@ -65,7 +65,7 @@ func OnDemandGetRoutingHint(destinationHostName string, interfaceIndex *uint32) 
 // Minimum OS: windows8.1.
 func OnDemandRegisterNotification(callback ONDEMAND_NOTIFICATION_CALLBACK, callbackContext unsafe.Pointer, registrationHandle *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procOnDemandRegisterNotification.Addr(), uintptr(callback), uintptr(unsafe.Pointer(callbackContext)), uintptr(unsafe.Pointer(registrationHandle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnDemandUnRegisterNotification calls OnDemandConnRouteHelper!OnDemandUnRegisterNotification.
@@ -73,7 +73,7 @@ func OnDemandRegisterNotification(callback ONDEMAND_NOTIFICATION_CALLBACK, callb
 // Minimum OS: windows8.1.
 func OnDemandUnRegisterNotification(registrationHandle foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procOnDemandUnRegisterNotification.Addr(), uintptr(registrationHandle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WcmFreeMemory calls wcmapi!WcmFreeMemory.

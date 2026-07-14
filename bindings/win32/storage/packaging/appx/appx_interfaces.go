@@ -27,7 +27,7 @@ var IID_IAppxAppInstallerReader = win32.GUID{Data1: 0xf35bc38c, Data2: 0x1d2f, D
 func (self *IAppxAppInstallerReader) GetXmlDom() (*dataxmlmsxml.IXMLDOMDocument, error) {
 	var _dom *dataxmlmsxml.IXMLDOMDocument
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_dom)))
-	return _dom, win32.HRESULTError(int32(r1))
+	return _dom, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxBlockMapBlock: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxblockmapblock
@@ -43,14 +43,14 @@ var IID_IAppxBlockMapBlock = win32.GUID{Data1: 0x75cf3930, Data2: 0x3244, Data3:
 func (self *IAppxBlockMapBlock) GetHash(bufferSize *uint32) (*byte, error) {
 	var _buffer *byte
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bufferSize)), uintptr(unsafe.Pointer(&_buffer)))
-	return _buffer, win32.HRESULTError(int32(r1))
+	return _buffer, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCompressedSize dispatches through IAppxBlockMapBlock's vtable slot 4.
 func (self *IAppxBlockMapBlock) GetCompressedSize() (uint32, error) {
 	var _size uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_size)))
-	return _size, win32.HRESULTError(int32(r1))
+	return _size, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxBlockMapBlocksEnumerator: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxblockmapblocksenumerator
@@ -66,21 +66,21 @@ var IID_IAppxBlockMapBlocksEnumerator = win32.GUID{Data1: 0x6b429b5b, Data2: 0x3
 func (self *IAppxBlockMapBlocksEnumerator) GetCurrent() (*IAppxBlockMapBlock, error) {
 	var _block *IAppxBlockMapBlock
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_block)))
-	return _block, win32.HRESULTError(int32(r1))
+	return _block, win32.ErrIfFailed(int32(r1))
 }
 
 // GetHasCurrent dispatches through IAppxBlockMapBlocksEnumerator's vtable slot 4.
 func (self *IAppxBlockMapBlocksEnumerator) GetHasCurrent() (foundation.BOOL, error) {
 	var _hasCurrent foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasCurrent)))
-	return _hasCurrent, win32.HRESULTError(int32(r1))
+	return _hasCurrent, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxBlockMapBlocksEnumerator's vtable slot 5.
 func (self *IAppxBlockMapBlocksEnumerator) MoveNext() (foundation.BOOL, error) {
 	var _hasNext foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasNext)))
-	return _hasNext, win32.HRESULTError(int32(r1))
+	return _hasNext, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxBlockMapFile: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxblockmapfile
@@ -96,35 +96,35 @@ var IID_IAppxBlockMapFile = win32.GUID{Data1: 0x277672ac, Data2: 0x4f63, Data3: 
 func (self *IAppxBlockMapFile) GetBlocks() (*IAppxBlockMapBlocksEnumerator, error) {
 	var _blocks *IAppxBlockMapBlocksEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_blocks)))
-	return _blocks, win32.HRESULTError(int32(r1))
+	return _blocks, win32.ErrIfFailed(int32(r1))
 }
 
 // GetLocalFileHeaderSize dispatches through IAppxBlockMapFile's vtable slot 4.
 func (self *IAppxBlockMapFile) GetLocalFileHeaderSize() (uint32, error) {
 	var _lfhSize uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lfhSize)))
-	return _lfhSize, win32.HRESULTError(int32(r1))
+	return _lfhSize, win32.ErrIfFailed(int32(r1))
 }
 
 // GetName dispatches through IAppxBlockMapFile's vtable slot 5.
 func (self *IAppxBlockMapFile) GetName() (foundation.PWSTR, error) {
 	var _name foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
-	return _name, win32.HRESULTError(int32(r1))
+	return _name, win32.ErrIfFailed(int32(r1))
 }
 
 // GetUncompressedSize dispatches through IAppxBlockMapFile's vtable slot 6.
 func (self *IAppxBlockMapFile) GetUncompressedSize() (uint64, error) {
 	var _size uint64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_size)))
-	return _size, win32.HRESULTError(int32(r1))
+	return _size, win32.ErrIfFailed(int32(r1))
 }
 
 // ValidateFileHash dispatches through IAppxBlockMapFile's vtable slot 7.
 func (self *IAppxBlockMapFile) ValidateFileHash(fileStream *systemcom.IStream) (foundation.BOOL, error) {
 	var _isValid foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fileStream)), uintptr(unsafe.Pointer(&_isValid)))
-	return _isValid, win32.HRESULTError(int32(r1))
+	return _isValid, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 54785f78-40e9-11ee-be56-0242ac120002
@@ -139,7 +139,7 @@ var IID_IAppxBlockMapFile2 = win32.GUID{Data1: 0x54785f78, Data2: 0x40e9, Data3:
 func (self *IAppxBlockMapFile2) GetBlockSize() (uint64, error) {
 	var _blockSize uint64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_blockSize)))
-	return _blockSize, win32.HRESULTError(int32(r1))
+	return _blockSize, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxBlockMapFilesEnumerator: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxblockmapfilesenumerator
@@ -155,21 +155,21 @@ var IID_IAppxBlockMapFilesEnumerator = win32.GUID{Data1: 0x02b856a2, Data2: 0x42
 func (self *IAppxBlockMapFilesEnumerator) GetCurrent() (*IAppxBlockMapFile, error) {
 	var _file *IAppxBlockMapFile
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_file)))
-	return _file, win32.HRESULTError(int32(r1))
+	return _file, win32.ErrIfFailed(int32(r1))
 }
 
 // GetHasCurrent dispatches through IAppxBlockMapFilesEnumerator's vtable slot 4.
 func (self *IAppxBlockMapFilesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
 	var _hasCurrent foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasCurrent)))
-	return _hasCurrent, win32.HRESULTError(int32(r1))
+	return _hasCurrent, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxBlockMapFilesEnumerator's vtable slot 5.
 func (self *IAppxBlockMapFilesEnumerator) MoveNext() (foundation.BOOL, error) {
 	var _hasCurrent foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasCurrent)))
-	return _hasCurrent, win32.HRESULTError(int32(r1))
+	return _hasCurrent, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxBlockMapReader: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxblockmapreader
@@ -186,28 +186,28 @@ func (self *IAppxBlockMapReader) GetFile(filename string) (*IAppxBlockMapFile, e
 	_filename := win32.UTF16Ptr(filename)
 	var _file *IAppxBlockMapFile
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_filename)), uintptr(unsafe.Pointer(&_file)))
-	return _file, win32.HRESULTError(int32(r1))
+	return _file, win32.ErrIfFailed(int32(r1))
 }
 
 // GetFiles dispatches through IAppxBlockMapReader's vtable slot 4.
 func (self *IAppxBlockMapReader) GetFiles() (*IAppxBlockMapFilesEnumerator, error) {
 	var _enumerator *IAppxBlockMapFilesEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_enumerator)))
-	return _enumerator, win32.HRESULTError(int32(r1))
+	return _enumerator, win32.ErrIfFailed(int32(r1))
 }
 
 // GetHashMethod dispatches through IAppxBlockMapReader's vtable slot 5.
 func (self *IAppxBlockMapReader) GetHashMethod() (*systemcom.IUri, error) {
 	var _hashMethod *systemcom.IUri
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hashMethod)))
-	return _hashMethod, win32.HRESULTError(int32(r1))
+	return _hashMethod, win32.ErrIfFailed(int32(r1))
 }
 
 // GetStream dispatches through IAppxBlockMapReader's vtable slot 6.
 func (self *IAppxBlockMapReader) GetStream() (*systemcom.IStream, error) {
 	var _blockMapStream *systemcom.IStream
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_blockMapStream)))
-	return _blockMapStream, win32.HRESULTError(int32(r1))
+	return _blockMapStream, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxBundleFactory: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxbundlefactory
@@ -223,21 +223,21 @@ var IID_IAppxBundleFactory = win32.GUID{Data1: 0xbba65864, Data2: 0x965f, Data3:
 func (self *IAppxBundleFactory) CreateBundleWriter(outputStream *systemcom.IStream, bundleVersion uint64) (*IAppxBundleWriter, error) {
 	var _bundleWriter *IAppxBundleWriter
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(outputStream)), uintptr(bundleVersion), uintptr(unsafe.Pointer(&_bundleWriter)))
-	return _bundleWriter, win32.HRESULTError(int32(r1))
+	return _bundleWriter, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateBundleReader dispatches through IAppxBundleFactory's vtable slot 4.
 func (self *IAppxBundleFactory) CreateBundleReader(inputStream *systemcom.IStream) (*IAppxBundleReader, error) {
 	var _bundleReader *IAppxBundleReader
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inputStream)), uintptr(unsafe.Pointer(&_bundleReader)))
-	return _bundleReader, win32.HRESULTError(int32(r1))
+	return _bundleReader, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateBundleManifestReader dispatches through IAppxBundleFactory's vtable slot 5.
 func (self *IAppxBundleFactory) CreateBundleManifestReader(inputStream *systemcom.IStream) (*IAppxBundleManifestReader, error) {
 	var _manifestReader *IAppxBundleManifestReader
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inputStream)), uintptr(unsafe.Pointer(&_manifestReader)))
-	return _manifestReader, win32.HRESULTError(int32(r1))
+	return _manifestReader, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxBundleFactory2: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxbundlefactory2
@@ -254,7 +254,7 @@ func (self *IAppxBundleFactory2) CreateBundleReader2(inputStream *systemcom.IStr
 	_expectedDigest := win32.UTF16Ptr(expectedDigest)
 	var _bundleReader *IAppxBundleReader
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inputStream)), uintptr(unsafe.Pointer(_expectedDigest)), uintptr(unsafe.Pointer(&_bundleReader)))
-	return _bundleReader, win32.HRESULTError(int32(r1))
+	return _bundleReader, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: d11ea6b6-3909-4376-b7c4-10d50f5cf3ae
@@ -271,7 +271,7 @@ func (self *IAppxBundleFactory3) CreateBundleReaderFromSourceUri(uri string, exp
 	_expectedDigest := win32.UTF16Ptr(expectedDigest)
 	var _bundleReader *IAppxBundleReader
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_uri)), uintptr(unsafe.Pointer(_expectedDigest)), uintptr(unsafe.Pointer(&_bundleReader)))
-	return _bundleReader, win32.HRESULTError(int32(r1))
+	return _bundleReader, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxBundleManifestOptionalBundleInfo: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxbundlemanifestoptionalbundleinfo
@@ -287,21 +287,21 @@ var IID_IAppxBundleManifestOptionalBundleInfo = win32.GUID{Data1: 0x515bf2e8, Da
 func (self *IAppxBundleManifestOptionalBundleInfo) GetPackageId() (*IAppxManifestPackageId, error) {
 	var _packageId *IAppxManifestPackageId
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_packageId)))
-	return _packageId, win32.HRESULTError(int32(r1))
+	return _packageId, win32.ErrIfFailed(int32(r1))
 }
 
 // GetFileName dispatches through IAppxBundleManifestOptionalBundleInfo's vtable slot 4.
 func (self *IAppxBundleManifestOptionalBundleInfo) GetFileName() (foundation.PWSTR, error) {
 	var _fileName foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_fileName)))
-	return _fileName, win32.HRESULTError(int32(r1))
+	return _fileName, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPackageInfoItems dispatches through IAppxBundleManifestOptionalBundleInfo's vtable slot 5.
 func (self *IAppxBundleManifestOptionalBundleInfo) GetPackageInfoItems() (*IAppxBundleManifestPackageInfoEnumerator, error) {
 	var _packageInfoItems *IAppxBundleManifestPackageInfoEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_packageInfoItems)))
-	return _packageInfoItems, win32.HRESULTError(int32(r1))
+	return _packageInfoItems, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxBundleManifestOptionalBundleInfoEnumerator: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxbundlemanifestoptionalbundleinfoenumerator
@@ -317,21 +317,21 @@ var IID_IAppxBundleManifestOptionalBundleInfoEnumerator = win32.GUID{Data1: 0x9a
 func (self *IAppxBundleManifestOptionalBundleInfoEnumerator) GetCurrent() (*IAppxBundleManifestOptionalBundleInfo, error) {
 	var _optionalBundle *IAppxBundleManifestOptionalBundleInfo
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_optionalBundle)))
-	return _optionalBundle, win32.HRESULTError(int32(r1))
+	return _optionalBundle, win32.ErrIfFailed(int32(r1))
 }
 
 // GetHasCurrent dispatches through IAppxBundleManifestOptionalBundleInfoEnumerator's vtable slot 4.
 func (self *IAppxBundleManifestOptionalBundleInfoEnumerator) GetHasCurrent() (foundation.BOOL, error) {
 	var _hasCurrent foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasCurrent)))
-	return _hasCurrent, win32.HRESULTError(int32(r1))
+	return _hasCurrent, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxBundleManifestOptionalBundleInfoEnumerator's vtable slot 5.
 func (self *IAppxBundleManifestOptionalBundleInfoEnumerator) MoveNext() (foundation.BOOL, error) {
 	var _hasNext foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasNext)))
-	return _hasNext, win32.HRESULTError(int32(r1))
+	return _hasNext, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxBundleManifestPackageInfo: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxbundlemanifestpackageinfo
@@ -347,42 +347,42 @@ var IID_IAppxBundleManifestPackageInfo = win32.GUID{Data1: 0x54cd06c1, Data2: 0x
 func (self *IAppxBundleManifestPackageInfo) GetPackageType() (APPX_BUNDLE_PAYLOAD_PACKAGE_TYPE, error) {
 	var _packageType APPX_BUNDLE_PAYLOAD_PACKAGE_TYPE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_packageType)))
-	return _packageType, win32.HRESULTError(int32(r1))
+	return _packageType, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPackageId dispatches through IAppxBundleManifestPackageInfo's vtable slot 4.
 func (self *IAppxBundleManifestPackageInfo) GetPackageId() (*IAppxManifestPackageId, error) {
 	var _packageId *IAppxManifestPackageId
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_packageId)))
-	return _packageId, win32.HRESULTError(int32(r1))
+	return _packageId, win32.ErrIfFailed(int32(r1))
 }
 
 // GetFileName dispatches through IAppxBundleManifestPackageInfo's vtable slot 5.
 func (self *IAppxBundleManifestPackageInfo) GetFileName() (foundation.PWSTR, error) {
 	var _fileName foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_fileName)))
-	return _fileName, win32.HRESULTError(int32(r1))
+	return _fileName, win32.ErrIfFailed(int32(r1))
 }
 
 // GetOffset dispatches through IAppxBundleManifestPackageInfo's vtable slot 6.
 func (self *IAppxBundleManifestPackageInfo) GetOffset() (uint64, error) {
 	var _offset uint64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_offset)))
-	return _offset, win32.HRESULTError(int32(r1))
+	return _offset, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSize dispatches through IAppxBundleManifestPackageInfo's vtable slot 7.
 func (self *IAppxBundleManifestPackageInfo) GetSize() (uint64, error) {
 	var _size uint64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_size)))
-	return _size, win32.HRESULTError(int32(r1))
+	return _size, win32.ErrIfFailed(int32(r1))
 }
 
 // GetResources dispatches through IAppxBundleManifestPackageInfo's vtable slot 8.
 func (self *IAppxBundleManifestPackageInfo) GetResources() (*IAppxManifestQualifiedResourcesEnumerator, error) {
 	var _resources *IAppxManifestQualifiedResourcesEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_resources)))
-	return _resources, win32.HRESULTError(int32(r1))
+	return _resources, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxBundleManifestPackageInfo2: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxbundlemanifestpackageinfo2
@@ -398,21 +398,21 @@ var IID_IAppxBundleManifestPackageInfo2 = win32.GUID{Data1: 0x44c2acbc, Data2: 0
 func (self *IAppxBundleManifestPackageInfo2) GetIsPackageReference() (foundation.BOOL, error) {
 	var _isPackageReference foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_isPackageReference)))
-	return _isPackageReference, win32.HRESULTError(int32(r1))
+	return _isPackageReference, win32.ErrIfFailed(int32(r1))
 }
 
 // GetIsNonQualifiedResourcePackage dispatches through IAppxBundleManifestPackageInfo2's vtable slot 4.
 func (self *IAppxBundleManifestPackageInfo2) GetIsNonQualifiedResourcePackage() (foundation.BOOL, error) {
 	var _isNonQualifiedResourcePackage foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_isNonQualifiedResourcePackage)))
-	return _isNonQualifiedResourcePackage, win32.HRESULTError(int32(r1))
+	return _isNonQualifiedResourcePackage, win32.ErrIfFailed(int32(r1))
 }
 
 // GetIsDefaultApplicablePackage dispatches through IAppxBundleManifestPackageInfo2's vtable slot 5.
 func (self *IAppxBundleManifestPackageInfo2) GetIsDefaultApplicablePackage() (foundation.BOOL, error) {
 	var _isDefaultApplicablePackage foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_isDefaultApplicablePackage)))
-	return _isDefaultApplicablePackage, win32.HRESULTError(int32(r1))
+	return _isDefaultApplicablePackage, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 6ba74b98-bb74-4296-80d0-5f4256a99675
@@ -427,7 +427,7 @@ var IID_IAppxBundleManifestPackageInfo3 = win32.GUID{Data1: 0x6ba74b98, Data2: 0
 func (self *IAppxBundleManifestPackageInfo3) GetTargetDeviceFamilies() (*IAppxManifestTargetDeviceFamiliesEnumerator, error) {
 	var _targetDeviceFamilies *IAppxManifestTargetDeviceFamiliesEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_targetDeviceFamilies)))
-	return _targetDeviceFamilies, win32.HRESULTError(int32(r1))
+	return _targetDeviceFamilies, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 5da6f13d-a8a7-4532-857c-1393d659371d
@@ -442,7 +442,7 @@ var IID_IAppxBundleManifestPackageInfo4 = win32.GUID{Data1: 0x5da6f13d, Data2: 0
 func (self *IAppxBundleManifestPackageInfo4) GetIsStub() (foundation.BOOL, error) {
 	var _isStub foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_isStub)))
-	return _isStub, win32.HRESULTError(int32(r1))
+	return _isStub, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxBundleManifestPackageInfoEnumerator: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxbundlemanifestpackageinfoenumerator
@@ -458,21 +458,21 @@ var IID_IAppxBundleManifestPackageInfoEnumerator = win32.GUID{Data1: 0xf9b856ee,
 func (self *IAppxBundleManifestPackageInfoEnumerator) GetCurrent() (*IAppxBundleManifestPackageInfo, error) {
 	var _packageInfo *IAppxBundleManifestPackageInfo
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_packageInfo)))
-	return _packageInfo, win32.HRESULTError(int32(r1))
+	return _packageInfo, win32.ErrIfFailed(int32(r1))
 }
 
 // GetHasCurrent dispatches through IAppxBundleManifestPackageInfoEnumerator's vtable slot 4.
 func (self *IAppxBundleManifestPackageInfoEnumerator) GetHasCurrent() (foundation.BOOL, error) {
 	var _hasCurrent foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasCurrent)))
-	return _hasCurrent, win32.HRESULTError(int32(r1))
+	return _hasCurrent, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxBundleManifestPackageInfoEnumerator's vtable slot 5.
 func (self *IAppxBundleManifestPackageInfoEnumerator) MoveNext() (foundation.BOOL, error) {
 	var _hasNext foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasNext)))
-	return _hasNext, win32.HRESULTError(int32(r1))
+	return _hasNext, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxBundleManifestReader: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxbundlemanifestreader
@@ -488,21 +488,21 @@ var IID_IAppxBundleManifestReader = win32.GUID{Data1: 0xcf0ebbc1, Data2: 0xcc99,
 func (self *IAppxBundleManifestReader) GetPackageId() (*IAppxManifestPackageId, error) {
 	var _packageId *IAppxManifestPackageId
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_packageId)))
-	return _packageId, win32.HRESULTError(int32(r1))
+	return _packageId, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPackageInfoItems dispatches through IAppxBundleManifestReader's vtable slot 4.
 func (self *IAppxBundleManifestReader) GetPackageInfoItems() (*IAppxBundleManifestPackageInfoEnumerator, error) {
 	var _packageInfoItems *IAppxBundleManifestPackageInfoEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_packageInfoItems)))
-	return _packageInfoItems, win32.HRESULTError(int32(r1))
+	return _packageInfoItems, win32.ErrIfFailed(int32(r1))
 }
 
 // GetStream dispatches through IAppxBundleManifestReader's vtable slot 5.
 func (self *IAppxBundleManifestReader) GetStream() (*systemcom.IStream, error) {
 	var _manifestStream *systemcom.IStream
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_manifestStream)))
-	return _manifestStream, win32.HRESULTError(int32(r1))
+	return _manifestStream, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxBundleManifestReader2: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxbundlemanifestreader2
@@ -518,7 +518,7 @@ var IID_IAppxBundleManifestReader2 = win32.GUID{Data1: 0x5517df70, Data2: 0x033f
 func (self *IAppxBundleManifestReader2) GetOptionalBundles() (*IAppxBundleManifestOptionalBundleInfoEnumerator, error) {
 	var _optionalBundles *IAppxBundleManifestOptionalBundleInfoEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_optionalBundles)))
-	return _optionalBundles, win32.HRESULTError(int32(r1))
+	return _optionalBundles, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxBundleReader: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxbundlereader
@@ -534,28 +534,28 @@ var IID_IAppxBundleReader = win32.GUID{Data1: 0xdd75b8c0, Data2: 0xba76, Data3: 
 func (self *IAppxBundleReader) GetFootprintFile(fileType APPX_BUNDLE_FOOTPRINT_FILE_TYPE) (*IAppxFile, error) {
 	var _footprintFile *IAppxFile
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(fileType), uintptr(unsafe.Pointer(&_footprintFile)))
-	return _footprintFile, win32.HRESULTError(int32(r1))
+	return _footprintFile, win32.ErrIfFailed(int32(r1))
 }
 
 // GetBlockMap dispatches through IAppxBundleReader's vtable slot 4.
 func (self *IAppxBundleReader) GetBlockMap() (*IAppxBlockMapReader, error) {
 	var _blockMapReader *IAppxBlockMapReader
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_blockMapReader)))
-	return _blockMapReader, win32.HRESULTError(int32(r1))
+	return _blockMapReader, win32.ErrIfFailed(int32(r1))
 }
 
 // GetManifest dispatches through IAppxBundleReader's vtable slot 5.
 func (self *IAppxBundleReader) GetManifest() (*IAppxBundleManifestReader, error) {
 	var _manifestReader *IAppxBundleManifestReader
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_manifestReader)))
-	return _manifestReader, win32.HRESULTError(int32(r1))
+	return _manifestReader, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPayloadPackages dispatches through IAppxBundleReader's vtable slot 6.
 func (self *IAppxBundleReader) GetPayloadPackages() (*IAppxFilesEnumerator, error) {
 	var _payloadPackages *IAppxFilesEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_payloadPackages)))
-	return _payloadPackages, win32.HRESULTError(int32(r1))
+	return _payloadPackages, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPayloadPackage dispatches through IAppxBundleReader's vtable slot 7.
@@ -563,7 +563,7 @@ func (self *IAppxBundleReader) GetPayloadPackage(fileName string) (*IAppxFile, e
 	_fileName := win32.UTF16Ptr(fileName)
 	var _payloadPackage *IAppxFile
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fileName)), uintptr(unsafe.Pointer(&_payloadPackage)))
-	return _payloadPackage, win32.HRESULTError(int32(r1))
+	return _payloadPackage, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 98262195-d63a-4c10-b4cf-dd72e061ba87
@@ -579,7 +579,7 @@ func (self *IAppxBundleReader2) GetPayloadPackageReader(fileName string) (*IAppx
 	_fileName := win32.UTF16Ptr(fileName)
 	var _payloadPackageReader *IAppxPackageReader
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fileName)), uintptr(unsafe.Pointer(&_payloadPackageReader)))
-	return _payloadPackageReader, win32.HRESULTError(int32(r1))
+	return _payloadPackageReader, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxBundleWriter: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxbundlewriter
@@ -595,13 +595,13 @@ var IID_IAppxBundleWriter = win32.GUID{Data1: 0xec446fe8, Data2: 0xbfec, Data3: 
 func (self *IAppxBundleWriter) AddPayloadPackage(fileName string, packageStream *systemcom.IStream) error {
 	_fileName := win32.UTF16Ptr(fileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fileName)), uintptr(unsafe.Pointer(packageStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Close dispatches through IAppxBundleWriter's vtable slot 4.
 func (self *IAppxBundleWriter) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxBundleWriter2: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxbundlewriter2
@@ -617,7 +617,7 @@ var IID_IAppxBundleWriter2 = win32.GUID{Data1: 0x6d8fe971, Data2: 0x01cc, Data3:
 func (self *IAppxBundleWriter2) AddExternalPackageReference(fileName string, inputStream *systemcom.IStream) error {
 	_fileName := win32.UTF16Ptr(fileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fileName)), uintptr(unsafe.Pointer(inputStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxBundleWriter3: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxbundlewriter3
@@ -633,14 +633,14 @@ var IID_IAppxBundleWriter3 = win32.GUID{Data1: 0xad711152, Data2: 0xf969, Data3:
 func (self *IAppxBundleWriter3) AddPackageReference(fileName string, inputStream *systemcom.IStream) error {
 	_fileName := win32.UTF16Ptr(fileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fileName)), uintptr(unsafe.Pointer(inputStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Close dispatches through IAppxBundleWriter3's vtable slot 4.
 func (self *IAppxBundleWriter3) Close(hashMethodString string) error {
 	_hashMethodString := win32.UTF16Ptr(hashMethodString)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_hashMethodString)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxBundleWriter4: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxbundlewriter4
@@ -657,7 +657,7 @@ func (self *IAppxBundleWriter4) AddPayloadPackage(fileName string, packageStream
 	_fileName := win32.UTF16Ptr(fileName)
 	_isDefaultApplicablePackage := win32.Bool32(isDefaultApplicablePackage)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fileName)), uintptr(unsafe.Pointer(packageStream)), uintptr(_isDefaultApplicablePackage))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddPackageReference dispatches through IAppxBundleWriter4's vtable slot 4.
@@ -665,7 +665,7 @@ func (self *IAppxBundleWriter4) AddPackageReference(fileName string, inputStream
 	_fileName := win32.UTF16Ptr(fileName)
 	_isDefaultApplicablePackage := win32.Bool32(isDefaultApplicablePackage)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fileName)), uintptr(unsafe.Pointer(inputStream)), uintptr(_isDefaultApplicablePackage))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddExternalPackageReference dispatches through IAppxBundleWriter4's vtable slot 5.
@@ -673,7 +673,7 @@ func (self *IAppxBundleWriter4) AddExternalPackageReference(fileName string, inp
 	_fileName := win32.UTF16Ptr(fileName)
 	_isDefaultApplicablePackage := win32.Bool32(isDefaultApplicablePackage)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fileName)), uintptr(unsafe.Pointer(inputStream)), uintptr(_isDefaultApplicablePackage))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxContentGroup: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxcontentgroup
@@ -689,14 +689,14 @@ var IID_IAppxContentGroup = win32.GUID{Data1: 0x328f6468, Data2: 0xc04f, Data3: 
 func (self *IAppxContentGroup) GetName() (foundation.PWSTR, error) {
 	var _groupName foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_groupName)))
-	return _groupName, win32.HRESULTError(int32(r1))
+	return _groupName, win32.ErrIfFailed(int32(r1))
 }
 
 // GetFiles dispatches through IAppxContentGroup's vtable slot 4.
 func (self *IAppxContentGroup) GetFiles() (*IAppxContentGroupFilesEnumerator, error) {
 	var _enumerator *IAppxContentGroupFilesEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_enumerator)))
-	return _enumerator, win32.HRESULTError(int32(r1))
+	return _enumerator, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxContentGroupFilesEnumerator: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxcontentgroupfilesenumerator
@@ -712,21 +712,21 @@ var IID_IAppxContentGroupFilesEnumerator = win32.GUID{Data1: 0x1a09a2fd, Data2: 
 func (self *IAppxContentGroupFilesEnumerator) GetCurrent() (foundation.PWSTR, error) {
 	var _file foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_file)))
-	return _file, win32.HRESULTError(int32(r1))
+	return _file, win32.ErrIfFailed(int32(r1))
 }
 
 // GetHasCurrent dispatches through IAppxContentGroupFilesEnumerator's vtable slot 4.
 func (self *IAppxContentGroupFilesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
 	var _hasCurrent foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasCurrent)))
-	return _hasCurrent, win32.HRESULTError(int32(r1))
+	return _hasCurrent, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxContentGroupFilesEnumerator's vtable slot 5.
 func (self *IAppxContentGroupFilesEnumerator) MoveNext() (foundation.BOOL, error) {
 	var _hasNext foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasNext)))
-	return _hasNext, win32.HRESULTError(int32(r1))
+	return _hasNext, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxContentGroupMapReader: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxcontentgroupmapreader
@@ -742,14 +742,14 @@ var IID_IAppxContentGroupMapReader = win32.GUID{Data1: 0x418726d8, Data2: 0xdd99
 func (self *IAppxContentGroupMapReader) GetRequiredGroup() (*IAppxContentGroup, error) {
 	var _requiredGroup *IAppxContentGroup
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_requiredGroup)))
-	return _requiredGroup, win32.HRESULTError(int32(r1))
+	return _requiredGroup, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAutomaticGroups dispatches through IAppxContentGroupMapReader's vtable slot 4.
 func (self *IAppxContentGroupMapReader) GetAutomaticGroups() (*IAppxContentGroupsEnumerator, error) {
 	var _automaticGroupsEnumerator *IAppxContentGroupsEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_automaticGroupsEnumerator)))
-	return _automaticGroupsEnumerator, win32.HRESULTError(int32(r1))
+	return _automaticGroupsEnumerator, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxContentGroupMapWriter: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxcontentgroupmapwriter
@@ -765,20 +765,20 @@ var IID_IAppxContentGroupMapWriter = win32.GUID{Data1: 0xd07ab776, Data2: 0xa9de
 func (self *IAppxContentGroupMapWriter) AddAutomaticGroup(groupName string) error {
 	_groupName := win32.UTF16Ptr(groupName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_groupName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddAutomaticFile dispatches through IAppxContentGroupMapWriter's vtable slot 4.
 func (self *IAppxContentGroupMapWriter) AddAutomaticFile(fileName string) error {
 	_fileName := win32.UTF16Ptr(fileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fileName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Close dispatches through IAppxContentGroupMapWriter's vtable slot 5.
 func (self *IAppxContentGroupMapWriter) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxContentGroupsEnumerator: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxcontentgroupsenumerator
@@ -794,21 +794,21 @@ var IID_IAppxContentGroupsEnumerator = win32.GUID{Data1: 0x3264e477, Data2: 0x16
 func (self *IAppxContentGroupsEnumerator) GetCurrent() (*IAppxContentGroup, error) {
 	var _stream *IAppxContentGroup
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_stream)))
-	return _stream, win32.HRESULTError(int32(r1))
+	return _stream, win32.ErrIfFailed(int32(r1))
 }
 
 // GetHasCurrent dispatches through IAppxContentGroupsEnumerator's vtable slot 4.
 func (self *IAppxContentGroupsEnumerator) GetHasCurrent() (foundation.BOOL, error) {
 	var _hasCurrent foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasCurrent)))
-	return _hasCurrent, win32.HRESULTError(int32(r1))
+	return _hasCurrent, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxContentGroupsEnumerator's vtable slot 5.
 func (self *IAppxContentGroupsEnumerator) MoveNext() (foundation.BOOL, error) {
 	var _hasNext foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasNext)))
-	return _hasNext, win32.HRESULTError(int32(r1))
+	return _hasNext, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxDigestProvider: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxdigestprovider
@@ -824,7 +824,7 @@ var IID_IAppxDigestProvider = win32.GUID{Data1: 0x9fe2702b, Data2: 0x7640, Data3
 func (self *IAppxDigestProvider) GetDigest() (foundation.PWSTR, error) {
 	var _digest foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_digest)))
-	return _digest, win32.HRESULTError(int32(r1))
+	return _digest, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxEncryptedBundleWriter: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxencryptedbundlewriter
@@ -840,13 +840,13 @@ var IID_IAppxEncryptedBundleWriter = win32.GUID{Data1: 0x80b0902f, Data2: 0x7bf0
 func (self *IAppxEncryptedBundleWriter) AddPayloadPackageEncrypted(fileName string, packageStream *systemcom.IStream) error {
 	_fileName := win32.UTF16Ptr(fileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fileName)), uintptr(unsafe.Pointer(packageStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Close dispatches through IAppxEncryptedBundleWriter's vtable slot 4.
 func (self *IAppxEncryptedBundleWriter) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxEncryptedBundleWriter2: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxencryptedbundlewriter2
@@ -862,7 +862,7 @@ var IID_IAppxEncryptedBundleWriter2 = win32.GUID{Data1: 0xe644be82, Data2: 0xf0f
 func (self *IAppxEncryptedBundleWriter2) AddExternalPackageReference(fileName string, inputStream *systemcom.IStream) error {
 	_fileName := win32.UTF16Ptr(fileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fileName)), uintptr(unsafe.Pointer(inputStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxEncryptedBundleWriter3: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxencryptedbundlewriter3
@@ -879,7 +879,7 @@ func (self *IAppxEncryptedBundleWriter3) AddPayloadPackageEncrypted(fileName str
 	_fileName := win32.UTF16Ptr(fileName)
 	_isDefaultApplicablePackage := win32.Bool32(isDefaultApplicablePackage)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fileName)), uintptr(unsafe.Pointer(packageStream)), uintptr(_isDefaultApplicablePackage))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddExternalPackageReference dispatches through IAppxEncryptedBundleWriter3's vtable slot 4.
@@ -887,7 +887,7 @@ func (self *IAppxEncryptedBundleWriter3) AddExternalPackageReference(fileName st
 	_fileName := win32.UTF16Ptr(fileName)
 	_isDefaultApplicablePackage := win32.Bool32(isDefaultApplicablePackage)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fileName)), uintptr(unsafe.Pointer(inputStream)), uintptr(_isDefaultApplicablePackage))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxEncryptedPackageWriter: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxencryptedpackagewriter
@@ -903,13 +903,13 @@ var IID_IAppxEncryptedPackageWriter = win32.GUID{Data1: 0xf43d0b0b, Data2: 0x137
 func (self *IAppxEncryptedPackageWriter) AddPayloadFileEncrypted(fileName string, compressionOption APPX_COMPRESSION_OPTION, inputStream *systemcom.IStream) error {
 	_fileName := win32.UTF16Ptr(fileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fileName)), uintptr(compressionOption), uintptr(unsafe.Pointer(inputStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Close dispatches through IAppxEncryptedPackageWriter's vtable slot 4.
 func (self *IAppxEncryptedPackageWriter) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxEncryptedPackageWriter2: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxencryptedpackagewriter2
@@ -928,7 +928,7 @@ func (self *IAppxEncryptedPackageWriter2) AddPayloadFilesEncrypted(payloadFiles 
 		_payloadFiles = &payloadFiles[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(payloadFiles)), uintptr(unsafe.Pointer(_payloadFiles)), uintptr(memoryLimit))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxEncryptionFactory: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxencryptionfactory
@@ -943,53 +943,53 @@ var IID_IAppxEncryptionFactory = win32.GUID{Data1: 0x80e8e04d, Data2: 0x8c88, Da
 // EncryptPackage dispatches through IAppxEncryptionFactory's vtable slot 3.
 func (self *IAppxEncryptionFactory) EncryptPackage(inputStream *systemcom.IStream, outputStream *systemcom.IStream, settings *APPX_ENCRYPTED_PACKAGE_SETTINGS, keyInfo *APPX_KEY_INFO, exemptedFiles *APPX_ENCRYPTED_EXEMPTIONS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inputStream)), uintptr(unsafe.Pointer(outputStream)), uintptr(unsafe.Pointer(settings)), uintptr(unsafe.Pointer(keyInfo)), uintptr(unsafe.Pointer(exemptedFiles)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DecryptPackage dispatches through IAppxEncryptionFactory's vtable slot 4.
 func (self *IAppxEncryptionFactory) DecryptPackage(inputStream *systemcom.IStream, outputStream *systemcom.IStream, keyInfo *APPX_KEY_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inputStream)), uintptr(unsafe.Pointer(outputStream)), uintptr(unsafe.Pointer(keyInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateEncryptedPackageWriter dispatches through IAppxEncryptionFactory's vtable slot 5.
 func (self *IAppxEncryptionFactory) CreateEncryptedPackageWriter(outputStream *systemcom.IStream, manifestStream *systemcom.IStream, settings *APPX_ENCRYPTED_PACKAGE_SETTINGS, keyInfo *APPX_KEY_INFO, exemptedFiles *APPX_ENCRYPTED_EXEMPTIONS) (*IAppxEncryptedPackageWriter, error) {
 	var _packageWriter *IAppxEncryptedPackageWriter
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(outputStream)), uintptr(unsafe.Pointer(manifestStream)), uintptr(unsafe.Pointer(settings)), uintptr(unsafe.Pointer(keyInfo)), uintptr(unsafe.Pointer(exemptedFiles)), uintptr(unsafe.Pointer(&_packageWriter)))
-	return _packageWriter, win32.HRESULTError(int32(r1))
+	return _packageWriter, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateEncryptedPackageReader dispatches through IAppxEncryptionFactory's vtable slot 6.
 func (self *IAppxEncryptionFactory) CreateEncryptedPackageReader(inputStream *systemcom.IStream, keyInfo *APPX_KEY_INFO) (*IAppxPackageReader, error) {
 	var _packageReader *IAppxPackageReader
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inputStream)), uintptr(unsafe.Pointer(keyInfo)), uintptr(unsafe.Pointer(&_packageReader)))
-	return _packageReader, win32.HRESULTError(int32(r1))
+	return _packageReader, win32.ErrIfFailed(int32(r1))
 }
 
 // EncryptBundle dispatches through IAppxEncryptionFactory's vtable slot 7.
 func (self *IAppxEncryptionFactory) EncryptBundle(inputStream *systemcom.IStream, outputStream *systemcom.IStream, settings *APPX_ENCRYPTED_PACKAGE_SETTINGS, keyInfo *APPX_KEY_INFO, exemptedFiles *APPX_ENCRYPTED_EXEMPTIONS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inputStream)), uintptr(unsafe.Pointer(outputStream)), uintptr(unsafe.Pointer(settings)), uintptr(unsafe.Pointer(keyInfo)), uintptr(unsafe.Pointer(exemptedFiles)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DecryptBundle dispatches through IAppxEncryptionFactory's vtable slot 8.
 func (self *IAppxEncryptionFactory) DecryptBundle(inputStream *systemcom.IStream, outputStream *systemcom.IStream, keyInfo *APPX_KEY_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inputStream)), uintptr(unsafe.Pointer(outputStream)), uintptr(unsafe.Pointer(keyInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateEncryptedBundleWriter dispatches through IAppxEncryptionFactory's vtable slot 9.
 func (self *IAppxEncryptionFactory) CreateEncryptedBundleWriter(outputStream *systemcom.IStream, bundleVersion uint64, settings *APPX_ENCRYPTED_PACKAGE_SETTINGS, keyInfo *APPX_KEY_INFO, exemptedFiles *APPX_ENCRYPTED_EXEMPTIONS) (*IAppxEncryptedBundleWriter, error) {
 	var _bundleWriter *IAppxEncryptedBundleWriter
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(outputStream)), uintptr(bundleVersion), uintptr(unsafe.Pointer(settings)), uintptr(unsafe.Pointer(keyInfo)), uintptr(unsafe.Pointer(exemptedFiles)), uintptr(unsafe.Pointer(&_bundleWriter)))
-	return _bundleWriter, win32.HRESULTError(int32(r1))
+	return _bundleWriter, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateEncryptedBundleReader dispatches through IAppxEncryptionFactory's vtable slot 10.
 func (self *IAppxEncryptionFactory) CreateEncryptedBundleReader(inputStream *systemcom.IStream, keyInfo *APPX_KEY_INFO) (*IAppxBundleReader, error) {
 	var _bundleReader *IAppxBundleReader
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inputStream)), uintptr(unsafe.Pointer(keyInfo)), uintptr(unsafe.Pointer(&_bundleReader)))
-	return _bundleReader, win32.HRESULTError(int32(r1))
+	return _bundleReader, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxEncryptionFactory2: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxencryptionfactory2
@@ -1005,7 +1005,7 @@ var IID_IAppxEncryptionFactory2 = win32.GUID{Data1: 0xc1b11eee, Data2: 0xc4ba, D
 func (self *IAppxEncryptionFactory2) CreateEncryptedPackageWriter(outputStream *systemcom.IStream, manifestStream *systemcom.IStream, contentGroupMapStream *systemcom.IStream, settings *APPX_ENCRYPTED_PACKAGE_SETTINGS, keyInfo *APPX_KEY_INFO, exemptedFiles *APPX_ENCRYPTED_EXEMPTIONS) (*IAppxEncryptedPackageWriter, error) {
 	var _packageWriter *IAppxEncryptedPackageWriter
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(outputStream)), uintptr(unsafe.Pointer(manifestStream)), uintptr(unsafe.Pointer(contentGroupMapStream)), uintptr(unsafe.Pointer(settings)), uintptr(unsafe.Pointer(keyInfo)), uintptr(unsafe.Pointer(exemptedFiles)), uintptr(unsafe.Pointer(&_packageWriter)))
-	return _packageWriter, win32.HRESULTError(int32(r1))
+	return _packageWriter, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxEncryptionFactory3: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxencryptionfactory3
@@ -1020,27 +1020,27 @@ var IID_IAppxEncryptionFactory3 = win32.GUID{Data1: 0x09edca37, Data2: 0xcd64, D
 // EncryptPackage dispatches through IAppxEncryptionFactory3's vtable slot 3.
 func (self *IAppxEncryptionFactory3) EncryptPackage(inputStream *systemcom.IStream, outputStream *systemcom.IStream, settings *APPX_ENCRYPTED_PACKAGE_SETTINGS2, keyInfo *APPX_KEY_INFO, exemptedFiles *APPX_ENCRYPTED_EXEMPTIONS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inputStream)), uintptr(unsafe.Pointer(outputStream)), uintptr(unsafe.Pointer(settings)), uintptr(unsafe.Pointer(keyInfo)), uintptr(unsafe.Pointer(exemptedFiles)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateEncryptedPackageWriter dispatches through IAppxEncryptionFactory3's vtable slot 4.
 func (self *IAppxEncryptionFactory3) CreateEncryptedPackageWriter(outputStream *systemcom.IStream, manifestStream *systemcom.IStream, contentGroupMapStream *systemcom.IStream, settings *APPX_ENCRYPTED_PACKAGE_SETTINGS2, keyInfo *APPX_KEY_INFO, exemptedFiles *APPX_ENCRYPTED_EXEMPTIONS) (*IAppxEncryptedPackageWriter, error) {
 	var _packageWriter *IAppxEncryptedPackageWriter
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(outputStream)), uintptr(unsafe.Pointer(manifestStream)), uintptr(unsafe.Pointer(contentGroupMapStream)), uintptr(unsafe.Pointer(settings)), uintptr(unsafe.Pointer(keyInfo)), uintptr(unsafe.Pointer(exemptedFiles)), uintptr(unsafe.Pointer(&_packageWriter)))
-	return _packageWriter, win32.HRESULTError(int32(r1))
+	return _packageWriter, win32.ErrIfFailed(int32(r1))
 }
 
 // EncryptBundle dispatches through IAppxEncryptionFactory3's vtable slot 5.
 func (self *IAppxEncryptionFactory3) EncryptBundle(inputStream *systemcom.IStream, outputStream *systemcom.IStream, settings *APPX_ENCRYPTED_PACKAGE_SETTINGS2, keyInfo *APPX_KEY_INFO, exemptedFiles *APPX_ENCRYPTED_EXEMPTIONS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inputStream)), uintptr(unsafe.Pointer(outputStream)), uintptr(unsafe.Pointer(settings)), uintptr(unsafe.Pointer(keyInfo)), uintptr(unsafe.Pointer(exemptedFiles)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateEncryptedBundleWriter dispatches through IAppxEncryptionFactory3's vtable slot 6.
 func (self *IAppxEncryptionFactory3) CreateEncryptedBundleWriter(outputStream *systemcom.IStream, bundleVersion uint64, settings *APPX_ENCRYPTED_PACKAGE_SETTINGS2, keyInfo *APPX_KEY_INFO, exemptedFiles *APPX_ENCRYPTED_EXEMPTIONS) (*IAppxEncryptedBundleWriter, error) {
 	var _bundleWriter *IAppxEncryptedBundleWriter
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(outputStream)), uintptr(bundleVersion), uintptr(unsafe.Pointer(settings)), uintptr(unsafe.Pointer(keyInfo)), uintptr(unsafe.Pointer(exemptedFiles)), uintptr(unsafe.Pointer(&_bundleWriter)))
-	return _bundleWriter, win32.HRESULTError(int32(r1))
+	return _bundleWriter, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxEncryptionFactory4: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxencryptionfactory4
@@ -1055,7 +1055,7 @@ var IID_IAppxEncryptionFactory4 = win32.GUID{Data1: 0xa879611f, Data2: 0x12fd, D
 // EncryptPackage dispatches through IAppxEncryptionFactory4's vtable slot 3.
 func (self *IAppxEncryptionFactory4) EncryptPackage(inputStream *systemcom.IStream, outputStream *systemcom.IStream, settings *APPX_ENCRYPTED_PACKAGE_SETTINGS2, keyInfo *APPX_KEY_INFO, exemptedFiles *APPX_ENCRYPTED_EXEMPTIONS, memoryLimit uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inputStream)), uintptr(unsafe.Pointer(outputStream)), uintptr(unsafe.Pointer(settings)), uintptr(unsafe.Pointer(keyInfo)), uintptr(unsafe.Pointer(exemptedFiles)), uintptr(memoryLimit))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxEncryptionFactory5: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxencryptionfactory5
@@ -1072,7 +1072,7 @@ func (self *IAppxEncryptionFactory5) CreateEncryptedPackageReader2(inputStream *
 	_expectedDigest := win32.UTF16Ptr(expectedDigest)
 	var _packageReader *IAppxPackageReader
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inputStream)), uintptr(unsafe.Pointer(keyInfo)), uintptr(unsafe.Pointer(_expectedDigest)), uintptr(unsafe.Pointer(&_packageReader)))
-	return _packageReader, win32.HRESULTError(int32(r1))
+	return _packageReader, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateEncryptedBundleReader2 dispatches through IAppxEncryptionFactory5's vtable slot 4.
@@ -1080,7 +1080,7 @@ func (self *IAppxEncryptionFactory5) CreateEncryptedBundleReader2(inputStream *s
 	_expectedDigest := win32.UTF16Ptr(expectedDigest)
 	var _bundleReader *IAppxBundleReader
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inputStream)), uintptr(unsafe.Pointer(keyInfo)), uintptr(unsafe.Pointer(_expectedDigest)), uintptr(unsafe.Pointer(&_bundleReader)))
-	return _bundleReader, win32.HRESULTError(int32(r1))
+	return _bundleReader, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxFactory: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxfactory
@@ -1096,28 +1096,28 @@ var IID_IAppxFactory = win32.GUID{Data1: 0xbeb94909, Data2: 0xe451, Data3: 0x438
 func (self *IAppxFactory) CreatePackageWriter(outputStream *systemcom.IStream, settings *APPX_PACKAGE_SETTINGS) (*IAppxPackageWriter, error) {
 	var _packageWriter *IAppxPackageWriter
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(outputStream)), uintptr(unsafe.Pointer(settings)), uintptr(unsafe.Pointer(&_packageWriter)))
-	return _packageWriter, win32.HRESULTError(int32(r1))
+	return _packageWriter, win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePackageReader dispatches through IAppxFactory's vtable slot 4.
 func (self *IAppxFactory) CreatePackageReader(inputStream *systemcom.IStream) (*IAppxPackageReader, error) {
 	var _packageReader *IAppxPackageReader
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inputStream)), uintptr(unsafe.Pointer(&_packageReader)))
-	return _packageReader, win32.HRESULTError(int32(r1))
+	return _packageReader, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateManifestReader dispatches through IAppxFactory's vtable slot 5.
 func (self *IAppxFactory) CreateManifestReader(inputStream *systemcom.IStream) (*IAppxManifestReader, error) {
 	var _manifestReader *IAppxManifestReader
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inputStream)), uintptr(unsafe.Pointer(&_manifestReader)))
-	return _manifestReader, win32.HRESULTError(int32(r1))
+	return _manifestReader, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateBlockMapReader dispatches through IAppxFactory's vtable slot 6.
 func (self *IAppxFactory) CreateBlockMapReader(inputStream *systemcom.IStream) (*IAppxBlockMapReader, error) {
 	var _blockMapReader *IAppxBlockMapReader
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inputStream)), uintptr(unsafe.Pointer(&_blockMapReader)))
-	return _blockMapReader, win32.HRESULTError(int32(r1))
+	return _blockMapReader, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateValidatedBlockMapReader dispatches through IAppxFactory's vtable slot 7.
@@ -1125,7 +1125,7 @@ func (self *IAppxFactory) CreateValidatedBlockMapReader(blockMapStream *systemco
 	_signatureFileName := win32.UTF16Ptr(signatureFileName)
 	var _blockMapReader *IAppxBlockMapReader
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(blockMapStream)), uintptr(unsafe.Pointer(_signatureFileName)), uintptr(unsafe.Pointer(&_blockMapReader)))
-	return _blockMapReader, win32.HRESULTError(int32(r1))
+	return _blockMapReader, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxFactory2: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxfactory2
@@ -1141,21 +1141,21 @@ var IID_IAppxFactory2 = win32.GUID{Data1: 0xf1346df2, Data2: 0xc282, Data3: 0x4e
 func (self *IAppxFactory2) CreateContentGroupMapReader(inputStream *systemcom.IStream) (*IAppxContentGroupMapReader, error) {
 	var _contentGroupMapReader *IAppxContentGroupMapReader
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inputStream)), uintptr(unsafe.Pointer(&_contentGroupMapReader)))
-	return _contentGroupMapReader, win32.HRESULTError(int32(r1))
+	return _contentGroupMapReader, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSourceContentGroupMapReader dispatches through IAppxFactory2's vtable slot 4.
 func (self *IAppxFactory2) CreateSourceContentGroupMapReader(inputStream *systemcom.IStream) (*IAppxSourceContentGroupMapReader, error) {
 	var _reader *IAppxSourceContentGroupMapReader
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inputStream)), uintptr(unsafe.Pointer(&_reader)))
-	return _reader, win32.HRESULTError(int32(r1))
+	return _reader, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateContentGroupMapWriter dispatches through IAppxFactory2's vtable slot 5.
 func (self *IAppxFactory2) CreateContentGroupMapWriter(stream *systemcom.IStream) (*IAppxContentGroupMapWriter, error) {
 	var _contentGroupMapWriter *IAppxContentGroupMapWriter
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(stream)), uintptr(unsafe.Pointer(&_contentGroupMapWriter)))
-	return _contentGroupMapWriter, win32.HRESULTError(int32(r1))
+	return _contentGroupMapWriter, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxFactory3: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxfactory3
@@ -1172,7 +1172,7 @@ func (self *IAppxFactory3) CreatePackageReader2(inputStream *systemcom.IStream, 
 	_expectedDigest := win32.UTF16Ptr(expectedDigest)
 	var _packageReader *IAppxPackageReader
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inputStream)), uintptr(unsafe.Pointer(_expectedDigest)), uintptr(unsafe.Pointer(&_packageReader)))
-	return _packageReader, win32.HRESULTError(int32(r1))
+	return _packageReader, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateManifestReader2 dispatches through IAppxFactory3's vtable slot 4.
@@ -1180,7 +1180,7 @@ func (self *IAppxFactory3) CreateManifestReader2(inputStream *systemcom.IStream,
 	_expectedDigest := win32.UTF16Ptr(expectedDigest)
 	var _manifestReader *IAppxManifestReader
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inputStream)), uintptr(unsafe.Pointer(_expectedDigest)), uintptr(unsafe.Pointer(&_manifestReader)))
-	return _manifestReader, win32.HRESULTError(int32(r1))
+	return _manifestReader, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateAppInstallerReader dispatches through IAppxFactory3's vtable slot 5.
@@ -1188,7 +1188,7 @@ func (self *IAppxFactory3) CreateAppInstallerReader(inputStream *systemcom.IStre
 	_expectedDigest := win32.UTF16Ptr(expectedDigest)
 	var _appInstallerReader *IAppxAppInstallerReader
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inputStream)), uintptr(unsafe.Pointer(_expectedDigest)), uintptr(unsafe.Pointer(&_appInstallerReader)))
-	return _appInstallerReader, win32.HRESULTError(int32(r1))
+	return _appInstallerReader, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 92e50000-6934-4c8d-b472-229d431daddf
@@ -1205,7 +1205,7 @@ func (self *IAppxFactory4) CreatePackageReaderFromSourceUri(uri string, expected
 	_expectedDigest := win32.UTF16Ptr(expectedDigest)
 	var _packageReader *IAppxPackageReader
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_uri)), uintptr(unsafe.Pointer(_expectedDigest)), uintptr(unsafe.Pointer(&_packageReader)))
-	return _packageReader, win32.HRESULTError(int32(r1))
+	return _packageReader, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxFile: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxfile
@@ -1221,35 +1221,35 @@ var IID_IAppxFile = win32.GUID{Data1: 0x91df827b, Data2: 0x94fd, Data3: 0x468f, 
 func (self *IAppxFile) GetCompressionOption() (APPX_COMPRESSION_OPTION, error) {
 	var _compressionOption APPX_COMPRESSION_OPTION
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_compressionOption)))
-	return _compressionOption, win32.HRESULTError(int32(r1))
+	return _compressionOption, win32.ErrIfFailed(int32(r1))
 }
 
 // GetContentType dispatches through IAppxFile's vtable slot 4.
 func (self *IAppxFile) GetContentType() (foundation.PWSTR, error) {
 	var _contentType foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_contentType)))
-	return _contentType, win32.HRESULTError(int32(r1))
+	return _contentType, win32.ErrIfFailed(int32(r1))
 }
 
 // GetName dispatches through IAppxFile's vtable slot 5.
 func (self *IAppxFile) GetName() (foundation.PWSTR, error) {
 	var _fileName foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_fileName)))
-	return _fileName, win32.HRESULTError(int32(r1))
+	return _fileName, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSize dispatches through IAppxFile's vtable slot 6.
 func (self *IAppxFile) GetSize() (uint64, error) {
 	var _size uint64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_size)))
-	return _size, win32.HRESULTError(int32(r1))
+	return _size, win32.ErrIfFailed(int32(r1))
 }
 
 // GetStream dispatches through IAppxFile's vtable slot 7.
 func (self *IAppxFile) GetStream() (*systemcom.IStream, error) {
 	var _stream *systemcom.IStream
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_stream)))
-	return _stream, win32.HRESULTError(int32(r1))
+	return _stream, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 0c830b3c-40e9-11ee-be56-0242ac120002
@@ -1264,7 +1264,7 @@ var IID_IAppxFile2 = win32.GUID{Data1: 0x0c830b3c, Data2: 0x40e9, Data3: 0x11ee,
 func (self *IAppxFile2) GetBlockSize() (uint64, error) {
 	var _blockSize uint64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_blockSize)))
-	return _blockSize, win32.HRESULTError(int32(r1))
+	return _blockSize, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxFilesEnumerator: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxfilesenumerator
@@ -1280,21 +1280,21 @@ var IID_IAppxFilesEnumerator = win32.GUID{Data1: 0xf007eeaf, Data2: 0x9831, Data
 func (self *IAppxFilesEnumerator) GetCurrent() (*IAppxFile, error) {
 	var _file *IAppxFile
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_file)))
-	return _file, win32.HRESULTError(int32(r1))
+	return _file, win32.ErrIfFailed(int32(r1))
 }
 
 // GetHasCurrent dispatches through IAppxFilesEnumerator's vtable slot 4.
 func (self *IAppxFilesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
 	var _hasCurrent foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasCurrent)))
-	return _hasCurrent, win32.HRESULTError(int32(r1))
+	return _hasCurrent, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxFilesEnumerator's vtable slot 5.
 func (self *IAppxFilesEnumerator) MoveNext() (foundation.BOOL, error) {
 	var _hasNext foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasNext)))
-	return _hasNext, win32.HRESULTError(int32(r1))
+	return _hasNext, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxManifestApplication: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxmanifestapplication
@@ -1311,14 +1311,14 @@ func (self *IAppxManifestApplication) GetStringValue(name string) (foundation.PW
 	_name := win32.UTF16Ptr(name)
 	var _value foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAppUserModelId dispatches through IAppxManifestApplication's vtable slot 4.
 func (self *IAppxManifestApplication) GetAppUserModelId() (foundation.PWSTR, error) {
 	var _appUserModelId foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_appUserModelId)))
-	return _appUserModelId, win32.HRESULTError(int32(r1))
+	return _appUserModelId, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxManifestApplicationsEnumerator: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxmanifestapplicationsenumerator
@@ -1334,21 +1334,21 @@ var IID_IAppxManifestApplicationsEnumerator = win32.GUID{Data1: 0x9eb8a55a, Data
 func (self *IAppxManifestApplicationsEnumerator) GetCurrent() (*IAppxManifestApplication, error) {
 	var _application *IAppxManifestApplication
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_application)))
-	return _application, win32.HRESULTError(int32(r1))
+	return _application, win32.ErrIfFailed(int32(r1))
 }
 
 // GetHasCurrent dispatches through IAppxManifestApplicationsEnumerator's vtable slot 4.
 func (self *IAppxManifestApplicationsEnumerator) GetHasCurrent() (foundation.BOOL, error) {
 	var _hasCurrent foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasCurrent)))
-	return _hasCurrent, win32.HRESULTError(int32(r1))
+	return _hasCurrent, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxManifestApplicationsEnumerator's vtable slot 5.
 func (self *IAppxManifestApplicationsEnumerator) MoveNext() (foundation.BOOL, error) {
 	var _hasNext foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasNext)))
-	return _hasNext, win32.HRESULTError(int32(r1))
+	return _hasNext, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 11d22258-f470-42c1-b291-8361c5437e41
@@ -1363,21 +1363,21 @@ var IID_IAppxManifestCapabilitiesEnumerator = win32.GUID{Data1: 0x11d22258, Data
 func (self *IAppxManifestCapabilitiesEnumerator) GetCurrent() (foundation.PWSTR, error) {
 	var _capability foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_capability)))
-	return _capability, win32.HRESULTError(int32(r1))
+	return _capability, win32.ErrIfFailed(int32(r1))
 }
 
 // GetHasCurrent dispatches through IAppxManifestCapabilitiesEnumerator's vtable slot 4.
 func (self *IAppxManifestCapabilitiesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
 	var _hasCurrent foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasCurrent)))
-	return _hasCurrent, win32.HRESULTError(int32(r1))
+	return _hasCurrent, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxManifestCapabilitiesEnumerator's vtable slot 5.
 func (self *IAppxManifestCapabilitiesEnumerator) MoveNext() (foundation.BOOL, error) {
 	var _hasNext foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasNext)))
-	return _hasNext, win32.HRESULTError(int32(r1))
+	return _hasNext, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxManifestDeviceCapabilitiesEnumerator: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxmanifestdevicecapabilitiesenumerator
@@ -1393,21 +1393,21 @@ var IID_IAppxManifestDeviceCapabilitiesEnumerator = win32.GUID{Data1: 0x30204541
 func (self *IAppxManifestDeviceCapabilitiesEnumerator) GetCurrent() (foundation.PWSTR, error) {
 	var _deviceCapability foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_deviceCapability)))
-	return _deviceCapability, win32.HRESULTError(int32(r1))
+	return _deviceCapability, win32.ErrIfFailed(int32(r1))
 }
 
 // GetHasCurrent dispatches through IAppxManifestDeviceCapabilitiesEnumerator's vtable slot 4.
 func (self *IAppxManifestDeviceCapabilitiesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
 	var _hasCurrent foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasCurrent)))
-	return _hasCurrent, win32.HRESULTError(int32(r1))
+	return _hasCurrent, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxManifestDeviceCapabilitiesEnumerator's vtable slot 5.
 func (self *IAppxManifestDeviceCapabilitiesEnumerator) MoveNext() (foundation.BOOL, error) {
 	var _hasNext foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasNext)))
-	return _hasNext, win32.HRESULTError(int32(r1))
+	return _hasNext, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: c031bee4-bbcc-48ea-a237-c34045c80a07
@@ -1422,21 +1422,21 @@ var IID_IAppxManifestDriverConstraint = win32.GUID{Data1: 0xc031bee4, Data2: 0xb
 func (self *IAppxManifestDriverConstraint) GetName() (foundation.PWSTR, error) {
 	var _name foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
-	return _name, win32.HRESULTError(int32(r1))
+	return _name, win32.ErrIfFailed(int32(r1))
 }
 
 // GetMinVersion dispatches through IAppxManifestDriverConstraint's vtable slot 4.
 func (self *IAppxManifestDriverConstraint) GetMinVersion() (uint64, error) {
 	var _minVersion uint64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_minVersion)))
-	return _minVersion, win32.HRESULTError(int32(r1))
+	return _minVersion, win32.ErrIfFailed(int32(r1))
 }
 
 // GetMinDate dispatches through IAppxManifestDriverConstraint's vtable slot 5.
 func (self *IAppxManifestDriverConstraint) GetMinDate() (foundation.PWSTR, error) {
 	var _minDate foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_minDate)))
-	return _minDate, win32.HRESULTError(int32(r1))
+	return _minDate, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: d402b2d1-f600-49e0-95e6-975d8da13d89
@@ -1451,21 +1451,21 @@ var IID_IAppxManifestDriverConstraintsEnumerator = win32.GUID{Data1: 0xd402b2d1,
 func (self *IAppxManifestDriverConstraintsEnumerator) GetCurrent() (*IAppxManifestDriverConstraint, error) {
 	var _driverConstraint *IAppxManifestDriverConstraint
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_driverConstraint)))
-	return _driverConstraint, win32.HRESULTError(int32(r1))
+	return _driverConstraint, win32.ErrIfFailed(int32(r1))
 }
 
 // GetHasCurrent dispatches through IAppxManifestDriverConstraintsEnumerator's vtable slot 4.
 func (self *IAppxManifestDriverConstraintsEnumerator) GetHasCurrent() (foundation.BOOL, error) {
 	var _hasCurrent foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasCurrent)))
-	return _hasCurrent, win32.HRESULTError(int32(r1))
+	return _hasCurrent, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxManifestDriverConstraintsEnumerator's vtable slot 5.
 func (self *IAppxManifestDriverConstraintsEnumerator) MoveNext() (foundation.BOOL, error) {
 	var _hasNext foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasNext)))
-	return _hasNext, win32.HRESULTError(int32(r1))
+	return _hasNext, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: fe039db2-467f-4755-8404-8f5eb6865b33
@@ -1480,21 +1480,21 @@ var IID_IAppxManifestDriverDependenciesEnumerator = win32.GUID{Data1: 0xfe039db2
 func (self *IAppxManifestDriverDependenciesEnumerator) GetCurrent() (*IAppxManifestDriverDependency, error) {
 	var _driverDependency *IAppxManifestDriverDependency
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_driverDependency)))
-	return _driverDependency, win32.HRESULTError(int32(r1))
+	return _driverDependency, win32.ErrIfFailed(int32(r1))
 }
 
 // GetHasCurrent dispatches through IAppxManifestDriverDependenciesEnumerator's vtable slot 4.
 func (self *IAppxManifestDriverDependenciesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
 	var _hasCurrent foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasCurrent)))
-	return _hasCurrent, win32.HRESULTError(int32(r1))
+	return _hasCurrent, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxManifestDriverDependenciesEnumerator's vtable slot 5.
 func (self *IAppxManifestDriverDependenciesEnumerator) MoveNext() (foundation.BOOL, error) {
 	var _hasNext foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasNext)))
-	return _hasNext, win32.HRESULTError(int32(r1))
+	return _hasNext, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 1210cb94-5a92-4602-be24-79f318af4af9
@@ -1509,7 +1509,7 @@ var IID_IAppxManifestDriverDependency = win32.GUID{Data1: 0x1210cb94, Data2: 0x5
 func (self *IAppxManifestDriverDependency) GetDriverConstraints() (*IAppxManifestDriverConstraintsEnumerator, error) {
 	var _driverConstraints *IAppxManifestDriverConstraintsEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_driverConstraints)))
-	return _driverConstraints, win32.HRESULTError(int32(r1))
+	return _driverConstraints, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 6427a646-7f49-433e-b1a6-0da309f6885a
@@ -1524,21 +1524,21 @@ var IID_IAppxManifestHostRuntimeDependenciesEnumerator = win32.GUID{Data1: 0x642
 func (self *IAppxManifestHostRuntimeDependenciesEnumerator) GetCurrent() (*IAppxManifestHostRuntimeDependency, error) {
 	var _hostRuntimeDependency *IAppxManifestHostRuntimeDependency
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hostRuntimeDependency)))
-	return _hostRuntimeDependency, win32.HRESULTError(int32(r1))
+	return _hostRuntimeDependency, win32.ErrIfFailed(int32(r1))
 }
 
 // GetHasCurrent dispatches through IAppxManifestHostRuntimeDependenciesEnumerator's vtable slot 4.
 func (self *IAppxManifestHostRuntimeDependenciesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
 	var _hasCurrent foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasCurrent)))
-	return _hasCurrent, win32.HRESULTError(int32(r1))
+	return _hasCurrent, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxManifestHostRuntimeDependenciesEnumerator's vtable slot 5.
 func (self *IAppxManifestHostRuntimeDependenciesEnumerator) MoveNext() (foundation.BOOL, error) {
 	var _hasNext foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasNext)))
-	return _hasNext, win32.HRESULTError(int32(r1))
+	return _hasNext, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 3455d234-8414-410d-95c7-7b35255b8391
@@ -1553,21 +1553,21 @@ var IID_IAppxManifestHostRuntimeDependency = win32.GUID{Data1: 0x3455d234, Data2
 func (self *IAppxManifestHostRuntimeDependency) GetName() (foundation.PWSTR, error) {
 	var _name foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
-	return _name, win32.HRESULTError(int32(r1))
+	return _name, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPublisher dispatches through IAppxManifestHostRuntimeDependency's vtable slot 4.
 func (self *IAppxManifestHostRuntimeDependency) GetPublisher() (foundation.PWSTR, error) {
 	var _publisher foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_publisher)))
-	return _publisher, win32.HRESULTError(int32(r1))
+	return _publisher, win32.ErrIfFailed(int32(r1))
 }
 
 // GetMinVersion dispatches through IAppxManifestHostRuntimeDependency's vtable slot 5.
 func (self *IAppxManifestHostRuntimeDependency) GetMinVersion() (uint64, error) {
 	var _minVersion uint64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_minVersion)))
-	return _minVersion, win32.HRESULTError(int32(r1))
+	return _minVersion, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: c26f23a8-ee10-4ad6-b898-2b4d7aebfe6a
@@ -1582,7 +1582,7 @@ var IID_IAppxManifestHostRuntimeDependency2 = win32.GUID{Data1: 0xc26f23a8, Data
 func (self *IAppxManifestHostRuntimeDependency2) GetPackageFamilyName() (foundation.PWSTR, error) {
 	var _packageFamilyName foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_packageFamilyName)))
-	return _packageFamilyName, win32.HRESULTError(int32(r1))
+	return _packageFamilyName, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxManifestMainPackageDependenciesEnumerator: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxmanifestmainpackagedependenciesenumerator
@@ -1598,21 +1598,21 @@ var IID_IAppxManifestMainPackageDependenciesEnumerator = win32.GUID{Data1: 0xa99
 func (self *IAppxManifestMainPackageDependenciesEnumerator) GetCurrent() (*IAppxManifestMainPackageDependency, error) {
 	var _mainPackageDependency *IAppxManifestMainPackageDependency
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_mainPackageDependency)))
-	return _mainPackageDependency, win32.HRESULTError(int32(r1))
+	return _mainPackageDependency, win32.ErrIfFailed(int32(r1))
 }
 
 // GetHasCurrent dispatches through IAppxManifestMainPackageDependenciesEnumerator's vtable slot 4.
 func (self *IAppxManifestMainPackageDependenciesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
 	var _hasCurrent foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasCurrent)))
-	return _hasCurrent, win32.HRESULTError(int32(r1))
+	return _hasCurrent, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxManifestMainPackageDependenciesEnumerator's vtable slot 5.
 func (self *IAppxManifestMainPackageDependenciesEnumerator) MoveNext() (foundation.BOOL, error) {
 	var _hasNext foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasNext)))
-	return _hasNext, win32.HRESULTError(int32(r1))
+	return _hasNext, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxManifestMainPackageDependency: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxmanifestmainpackagedependency
@@ -1628,21 +1628,21 @@ var IID_IAppxManifestMainPackageDependency = win32.GUID{Data1: 0x05d0611c, Data2
 func (self *IAppxManifestMainPackageDependency) GetName() (foundation.PWSTR, error) {
 	var _name foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
-	return _name, win32.HRESULTError(int32(r1))
+	return _name, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPublisher dispatches through IAppxManifestMainPackageDependency's vtable slot 4.
 func (self *IAppxManifestMainPackageDependency) GetPublisher() (foundation.PWSTR, error) {
 	var _publisher foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_publisher)))
-	return _publisher, win32.HRESULTError(int32(r1))
+	return _publisher, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPackageFamilyName dispatches through IAppxManifestMainPackageDependency's vtable slot 5.
 func (self *IAppxManifestMainPackageDependency) GetPackageFamilyName() (foundation.PWSTR, error) {
 	var _packageFamilyName foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_packageFamilyName)))
-	return _packageFamilyName, win32.HRESULTError(int32(r1))
+	return _packageFamilyName, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: b84e2fc3-f8ec-4bc1-8ae2-156346f5ffea
@@ -1657,21 +1657,21 @@ var IID_IAppxManifestOSPackageDependenciesEnumerator = win32.GUID{Data1: 0xb84e2
 func (self *IAppxManifestOSPackageDependenciesEnumerator) GetCurrent() (*IAppxManifestOSPackageDependency, error) {
 	var _osPackageDependency *IAppxManifestOSPackageDependency
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_osPackageDependency)))
-	return _osPackageDependency, win32.HRESULTError(int32(r1))
+	return _osPackageDependency, win32.ErrIfFailed(int32(r1))
 }
 
 // GetHasCurrent dispatches through IAppxManifestOSPackageDependenciesEnumerator's vtable slot 4.
 func (self *IAppxManifestOSPackageDependenciesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
 	var _hasCurrent foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasCurrent)))
-	return _hasCurrent, win32.HRESULTError(int32(r1))
+	return _hasCurrent, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxManifestOSPackageDependenciesEnumerator's vtable slot 5.
 func (self *IAppxManifestOSPackageDependenciesEnumerator) MoveNext() (foundation.BOOL, error) {
 	var _hasNext foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasNext)))
-	return _hasNext, win32.HRESULTError(int32(r1))
+	return _hasNext, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 154995ee-54a6-4f14-ac97-d8cf0519644b
@@ -1686,14 +1686,14 @@ var IID_IAppxManifestOSPackageDependency = win32.GUID{Data1: 0x154995ee, Data2: 
 func (self *IAppxManifestOSPackageDependency) GetName() (foundation.PWSTR, error) {
 	var _name foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
-	return _name, win32.HRESULTError(int32(r1))
+	return _name, win32.ErrIfFailed(int32(r1))
 }
 
 // GetVersion dispatches through IAppxManifestOSPackageDependency's vtable slot 4.
 func (self *IAppxManifestOSPackageDependency) GetVersion() (uint64, error) {
 	var _version uint64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_version)))
-	return _version, win32.HRESULTError(int32(r1))
+	return _version, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxManifestOptionalPackageInfo: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxmanifestoptionalpackageinfo
@@ -1709,14 +1709,14 @@ var IID_IAppxManifestOptionalPackageInfo = win32.GUID{Data1: 0x2634847d, Data2: 
 func (self *IAppxManifestOptionalPackageInfo) GetIsOptionalPackage() (foundation.BOOL, error) {
 	var _isOptionalPackage foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_isOptionalPackage)))
-	return _isOptionalPackage, win32.HRESULTError(int32(r1))
+	return _isOptionalPackage, win32.ErrIfFailed(int32(r1))
 }
 
 // GetMainPackageName dispatches through IAppxManifestOptionalPackageInfo's vtable slot 4.
 func (self *IAppxManifestOptionalPackageInfo) GetMainPackageName() (foundation.PWSTR, error) {
 	var _mainPackageName foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_mainPackageName)))
-	return _mainPackageName, win32.HRESULTError(int32(r1))
+	return _mainPackageName, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxManifestPackageDependenciesEnumerator: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxmanifestpackagedependenciesenumerator
@@ -1732,21 +1732,21 @@ var IID_IAppxManifestPackageDependenciesEnumerator = win32.GUID{Data1: 0xb43bbcf
 func (self *IAppxManifestPackageDependenciesEnumerator) GetCurrent() (*IAppxManifestPackageDependency, error) {
 	var _dependency *IAppxManifestPackageDependency
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_dependency)))
-	return _dependency, win32.HRESULTError(int32(r1))
+	return _dependency, win32.ErrIfFailed(int32(r1))
 }
 
 // GetHasCurrent dispatches through IAppxManifestPackageDependenciesEnumerator's vtable slot 4.
 func (self *IAppxManifestPackageDependenciesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
 	var _hasCurrent foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasCurrent)))
-	return _hasCurrent, win32.HRESULTError(int32(r1))
+	return _hasCurrent, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxManifestPackageDependenciesEnumerator's vtable slot 5.
 func (self *IAppxManifestPackageDependenciesEnumerator) MoveNext() (foundation.BOOL, error) {
 	var _hasNext foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasNext)))
-	return _hasNext, win32.HRESULTError(int32(r1))
+	return _hasNext, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxManifestPackageDependency: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxmanifestpackagedependency
@@ -1762,21 +1762,21 @@ var IID_IAppxManifestPackageDependency = win32.GUID{Data1: 0xe4946b59, Data2: 0x
 func (self *IAppxManifestPackageDependency) GetName() (foundation.PWSTR, error) {
 	var _name foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
-	return _name, win32.HRESULTError(int32(r1))
+	return _name, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPublisher dispatches through IAppxManifestPackageDependency's vtable slot 4.
 func (self *IAppxManifestPackageDependency) GetPublisher() (foundation.PWSTR, error) {
 	var _publisher foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_publisher)))
-	return _publisher, win32.HRESULTError(int32(r1))
+	return _publisher, win32.ErrIfFailed(int32(r1))
 }
 
 // GetMinVersion dispatches through IAppxManifestPackageDependency's vtable slot 5.
 func (self *IAppxManifestPackageDependency) GetMinVersion() (uint64, error) {
 	var _minVersion uint64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_minVersion)))
-	return _minVersion, win32.HRESULTError(int32(r1))
+	return _minVersion, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxManifestPackageDependency2: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxmanifestpackagedependency2
@@ -1792,7 +1792,7 @@ var IID_IAppxManifestPackageDependency2 = win32.GUID{Data1: 0xdda0b713, Data2: 0
 func (self *IAppxManifestPackageDependency2) GetMaxMajorVersionTested() (uint16, error) {
 	var _maxMajorVersionTested uint16
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_maxMajorVersionTested)))
-	return _maxMajorVersionTested, win32.HRESULTError(int32(r1))
+	return _maxMajorVersionTested, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 1ac56374-6198-4d6b-92e4-749d5ab8a895
@@ -1807,7 +1807,7 @@ var IID_IAppxManifestPackageDependency3 = win32.GUID{Data1: 0x1ac56374, Data2: 0
 func (self *IAppxManifestPackageDependency3) GetIsOptional() (foundation.BOOL, error) {
 	var _isOptional foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_isOptional)))
-	return _isOptional, win32.HRESULTError(int32(r1))
+	return _isOptional, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxManifestPackageId: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxmanifestpackageid
@@ -1823,35 +1823,35 @@ var IID_IAppxManifestPackageId = win32.GUID{Data1: 0x283ce2d7, Data2: 0x7153, Da
 func (self *IAppxManifestPackageId) GetName() (foundation.PWSTR, error) {
 	var _name foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
-	return _name, win32.HRESULTError(int32(r1))
+	return _name, win32.ErrIfFailed(int32(r1))
 }
 
 // GetArchitecture dispatches through IAppxManifestPackageId's vtable slot 4.
 func (self *IAppxManifestPackageId) GetArchitecture() (APPX_PACKAGE_ARCHITECTURE, error) {
 	var _architecture APPX_PACKAGE_ARCHITECTURE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_architecture)))
-	return _architecture, win32.HRESULTError(int32(r1))
+	return _architecture, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPublisher dispatches through IAppxManifestPackageId's vtable slot 5.
 func (self *IAppxManifestPackageId) GetPublisher() (foundation.PWSTR, error) {
 	var _publisher foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_publisher)))
-	return _publisher, win32.HRESULTError(int32(r1))
+	return _publisher, win32.ErrIfFailed(int32(r1))
 }
 
 // GetVersion dispatches through IAppxManifestPackageId's vtable slot 6.
 func (self *IAppxManifestPackageId) GetVersion() (uint64, error) {
 	var _packageVersion uint64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_packageVersion)))
-	return _packageVersion, win32.HRESULTError(int32(r1))
+	return _packageVersion, win32.ErrIfFailed(int32(r1))
 }
 
 // GetResourceId dispatches through IAppxManifestPackageId's vtable slot 7.
 func (self *IAppxManifestPackageId) GetResourceId() (foundation.PWSTR, error) {
 	var _resourceId foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_resourceId)))
-	return _resourceId, win32.HRESULTError(int32(r1))
+	return _resourceId, win32.ErrIfFailed(int32(r1))
 }
 
 // ComparePublisher dispatches through IAppxManifestPackageId's vtable slot 8.
@@ -1859,21 +1859,21 @@ func (self *IAppxManifestPackageId) ComparePublisher(other string) (foundation.B
 	_other := win32.UTF16Ptr(other)
 	var _isSame foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_other)), uintptr(unsafe.Pointer(&_isSame)))
-	return _isSame, win32.HRESULTError(int32(r1))
+	return _isSame, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPackageFullName dispatches through IAppxManifestPackageId's vtable slot 9.
 func (self *IAppxManifestPackageId) GetPackageFullName() (foundation.PWSTR, error) {
 	var _packageFullName foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_packageFullName)))
-	return _packageFullName, win32.HRESULTError(int32(r1))
+	return _packageFullName, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPackageFamilyName dispatches through IAppxManifestPackageId's vtable slot 10.
 func (self *IAppxManifestPackageId) GetPackageFamilyName() (foundation.PWSTR, error) {
 	var _packageFamilyName foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_packageFamilyName)))
-	return _packageFamilyName, win32.HRESULTError(int32(r1))
+	return _packageFamilyName, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxManifestPackageId2: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxmanifestpackageid2
@@ -1889,7 +1889,7 @@ var IID_IAppxManifestPackageId2 = win32.GUID{Data1: 0x2256999d, Data2: 0xd617, D
 func (self *IAppxManifestPackageId2) GetArchitecture2() (APPX_PACKAGE_ARCHITECTURE2, error) {
 	var _architecture APPX_PACKAGE_ARCHITECTURE2
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_architecture)))
-	return _architecture, win32.HRESULTError(int32(r1))
+	return _architecture, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxManifestProperties: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxmanifestproperties
@@ -1906,7 +1906,7 @@ func (self *IAppxManifestProperties) GetBoolValue(name string) (foundation.BOOL,
 	_name := win32.UTF16Ptr(name)
 	var _value foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // GetStringValue dispatches through IAppxManifestProperties's vtable slot 4.
@@ -1914,7 +1914,7 @@ func (self *IAppxManifestProperties) GetStringValue(name string) (foundation.PWS
 	_name := win32.UTF16Ptr(name)
 	var _value foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 3b53a497-3c5c-48d1-9ea3-bb7eac8cd7d4
@@ -1929,21 +1929,21 @@ var IID_IAppxManifestQualifiedResource = win32.GUID{Data1: 0x3b53a497, Data2: 0x
 func (self *IAppxManifestQualifiedResource) GetLanguage() (foundation.PWSTR, error) {
 	var _language foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_language)))
-	return _language, win32.HRESULTError(int32(r1))
+	return _language, win32.ErrIfFailed(int32(r1))
 }
 
 // GetScale dispatches through IAppxManifestQualifiedResource's vtable slot 4.
 func (self *IAppxManifestQualifiedResource) GetScale() (uint32, error) {
 	var _scale uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_scale)))
-	return _scale, win32.HRESULTError(int32(r1))
+	return _scale, win32.ErrIfFailed(int32(r1))
 }
 
 // GetDXFeatureLevel dispatches through IAppxManifestQualifiedResource's vtable slot 5.
 func (self *IAppxManifestQualifiedResource) GetDXFeatureLevel() (DX_FEATURE_LEVEL, error) {
 	var _dxFeatureLevel DX_FEATURE_LEVEL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_dxFeatureLevel)))
-	return _dxFeatureLevel, win32.HRESULTError(int32(r1))
+	return _dxFeatureLevel, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 8ef6adfe-3762-4a8f-9373-2fc5d444c8d2
@@ -1958,21 +1958,21 @@ var IID_IAppxManifestQualifiedResourcesEnumerator = win32.GUID{Data1: 0x8ef6adfe
 func (self *IAppxManifestQualifiedResourcesEnumerator) GetCurrent() (*IAppxManifestQualifiedResource, error) {
 	var _resource *IAppxManifestQualifiedResource
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_resource)))
-	return _resource, win32.HRESULTError(int32(r1))
+	return _resource, win32.ErrIfFailed(int32(r1))
 }
 
 // GetHasCurrent dispatches through IAppxManifestQualifiedResourcesEnumerator's vtable slot 4.
 func (self *IAppxManifestQualifiedResourcesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
 	var _hasCurrent foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasCurrent)))
-	return _hasCurrent, win32.HRESULTError(int32(r1))
+	return _hasCurrent, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxManifestQualifiedResourcesEnumerator's vtable slot 5.
 func (self *IAppxManifestQualifiedResourcesEnumerator) MoveNext() (foundation.BOOL, error) {
 	var _hasNext foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasNext)))
-	return _hasNext, win32.HRESULTError(int32(r1))
+	return _hasNext, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxManifestReader: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxmanifestreader
@@ -1988,42 +1988,42 @@ var IID_IAppxManifestReader = win32.GUID{Data1: 0x4e1bd148, Data2: 0x55a0, Data3
 func (self *IAppxManifestReader) GetPackageId() (*IAppxManifestPackageId, error) {
 	var _packageId *IAppxManifestPackageId
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_packageId)))
-	return _packageId, win32.HRESULTError(int32(r1))
+	return _packageId, win32.ErrIfFailed(int32(r1))
 }
 
 // GetProperties dispatches through IAppxManifestReader's vtable slot 4.
 func (self *IAppxManifestReader) GetProperties() (*IAppxManifestProperties, error) {
 	var _packageProperties *IAppxManifestProperties
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_packageProperties)))
-	return _packageProperties, win32.HRESULTError(int32(r1))
+	return _packageProperties, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPackageDependencies dispatches through IAppxManifestReader's vtable slot 5.
 func (self *IAppxManifestReader) GetPackageDependencies() (*IAppxManifestPackageDependenciesEnumerator, error) {
 	var _dependencies *IAppxManifestPackageDependenciesEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_dependencies)))
-	return _dependencies, win32.HRESULTError(int32(r1))
+	return _dependencies, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCapabilities dispatches through IAppxManifestReader's vtable slot 6.
 func (self *IAppxManifestReader) GetCapabilities() (APPX_CAPABILITIES, error) {
 	var _capabilities APPX_CAPABILITIES
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_capabilities)))
-	return _capabilities, win32.HRESULTError(int32(r1))
+	return _capabilities, win32.ErrIfFailed(int32(r1))
 }
 
 // GetResources dispatches through IAppxManifestReader's vtable slot 7.
 func (self *IAppxManifestReader) GetResources() (*IAppxManifestResourcesEnumerator, error) {
 	var _resources *IAppxManifestResourcesEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_resources)))
-	return _resources, win32.HRESULTError(int32(r1))
+	return _resources, win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceCapabilities dispatches through IAppxManifestReader's vtable slot 8.
 func (self *IAppxManifestReader) GetDeviceCapabilities() (*IAppxManifestDeviceCapabilitiesEnumerator, error) {
 	var _deviceCapabilities *IAppxManifestDeviceCapabilitiesEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_deviceCapabilities)))
-	return _deviceCapabilities, win32.HRESULTError(int32(r1))
+	return _deviceCapabilities, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPrerequisite dispatches through IAppxManifestReader's vtable slot 9.
@@ -2031,21 +2031,21 @@ func (self *IAppxManifestReader) GetPrerequisite(name string) (uint64, error) {
 	_name := win32.UTF16Ptr(name)
 	var _value uint64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // GetApplications dispatches through IAppxManifestReader's vtable slot 10.
 func (self *IAppxManifestReader) GetApplications() (*IAppxManifestApplicationsEnumerator, error) {
 	var _applications *IAppxManifestApplicationsEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_applications)))
-	return _applications, win32.HRESULTError(int32(r1))
+	return _applications, win32.ErrIfFailed(int32(r1))
 }
 
 // GetStream dispatches through IAppxManifestReader's vtable slot 11.
 func (self *IAppxManifestReader) GetStream() (*systemcom.IStream, error) {
 	var _manifestStream *systemcom.IStream
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_manifestStream)))
-	return _manifestStream, win32.HRESULTError(int32(r1))
+	return _manifestStream, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxManifestReader2: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxmanifestreader2
@@ -2061,7 +2061,7 @@ var IID_IAppxManifestReader2 = win32.GUID{Data1: 0xd06f67bc, Data2: 0xb31d, Data
 func (self *IAppxManifestReader2) GetQualifiedResources() (*IAppxManifestQualifiedResourcesEnumerator, error) {
 	var _resources *IAppxManifestQualifiedResourcesEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_resources)))
-	return _resources, win32.HRESULTError(int32(r1))
+	return _resources, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: c43825ab-69b7-400a-9709-cc37f5a72d24
@@ -2076,14 +2076,14 @@ var IID_IAppxManifestReader3 = win32.GUID{Data1: 0xc43825ab, Data2: 0x69b7, Data
 func (self *IAppxManifestReader3) GetCapabilitiesByCapabilityClass(capabilityClass APPX_CAPABILITY_CLASS_TYPE) (*IAppxManifestCapabilitiesEnumerator, error) {
 	var _capabilities *IAppxManifestCapabilitiesEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(capabilityClass), uintptr(unsafe.Pointer(&_capabilities)))
-	return _capabilities, win32.HRESULTError(int32(r1))
+	return _capabilities, win32.ErrIfFailed(int32(r1))
 }
 
 // GetTargetDeviceFamilies dispatches through IAppxManifestReader3's vtable slot 14.
 func (self *IAppxManifestReader3) GetTargetDeviceFamilies() (*IAppxManifestTargetDeviceFamiliesEnumerator, error) {
 	var _targetDeviceFamilies *IAppxManifestTargetDeviceFamiliesEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_targetDeviceFamilies)))
-	return _targetDeviceFamilies, win32.HRESULTError(int32(r1))
+	return _targetDeviceFamilies, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 4579bb7c-741d-4161-b5a1-47bd3b78ad9b
@@ -2098,7 +2098,7 @@ var IID_IAppxManifestReader4 = win32.GUID{Data1: 0x4579bb7c, Data2: 0x741d, Data
 func (self *IAppxManifestReader4) GetOptionalPackageInfo() (*IAppxManifestOptionalPackageInfo, error) {
 	var _optionalPackageInfo *IAppxManifestOptionalPackageInfo
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_optionalPackageInfo)))
-	return _optionalPackageInfo, win32.HRESULTError(int32(r1))
+	return _optionalPackageInfo, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxManifestReader5: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxmanifestreader5
@@ -2114,7 +2114,7 @@ var IID_IAppxManifestReader5 = win32.GUID{Data1: 0x8d7ae132, Data2: 0xa690, Data
 func (self *IAppxManifestReader5) GetMainPackageDependencies() (*IAppxManifestMainPackageDependenciesEnumerator, error) {
 	var _mainPackageDependencies *IAppxManifestMainPackageDependenciesEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_mainPackageDependencies)))
-	return _mainPackageDependencies, win32.HRESULTError(int32(r1))
+	return _mainPackageDependencies, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxManifestReader6: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxmanifestreader6
@@ -2130,7 +2130,7 @@ var IID_IAppxManifestReader6 = win32.GUID{Data1: 0x34deaca4, Data2: 0xd3c0, Data
 func (self *IAppxManifestReader6) GetIsNonQualifiedResourcePackage() (foundation.BOOL, error) {
 	var _isNonQualifiedResourcePackage foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_isNonQualifiedResourcePackage)))
-	return _isNonQualifiedResourcePackage, win32.HRESULTError(int32(r1))
+	return _isNonQualifiedResourcePackage, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 8efe6f27-0ce0-4988-b32d-738eb63db3b7
@@ -2145,21 +2145,21 @@ var IID_IAppxManifestReader7 = win32.GUID{Data1: 0x8efe6f27, Data2: 0x0ce0, Data
 func (self *IAppxManifestReader7) GetDriverDependencies() (*IAppxManifestDriverDependenciesEnumerator, error) {
 	var _driverDependencies *IAppxManifestDriverDependenciesEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_driverDependencies)))
-	return _driverDependencies, win32.HRESULTError(int32(r1))
+	return _driverDependencies, win32.ErrIfFailed(int32(r1))
 }
 
 // GetOSPackageDependencies dispatches through IAppxManifestReader7's vtable slot 4.
 func (self *IAppxManifestReader7) GetOSPackageDependencies() (*IAppxManifestOSPackageDependenciesEnumerator, error) {
 	var _osPackageDependencies *IAppxManifestOSPackageDependenciesEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_osPackageDependencies)))
-	return _osPackageDependencies, win32.HRESULTError(int32(r1))
+	return _osPackageDependencies, win32.ErrIfFailed(int32(r1))
 }
 
 // GetHostRuntimeDependencies dispatches through IAppxManifestReader7's vtable slot 5.
 func (self *IAppxManifestReader7) GetHostRuntimeDependencies() (*IAppxManifestHostRuntimeDependenciesEnumerator, error) {
 	var _hostRuntimeDependencies *IAppxManifestHostRuntimeDependenciesEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hostRuntimeDependencies)))
-	return _hostRuntimeDependencies, win32.HRESULTError(int32(r1))
+	return _hostRuntimeDependencies, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxManifestResourcesEnumerator: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxmanifestresourcesenumerator
@@ -2175,21 +2175,21 @@ var IID_IAppxManifestResourcesEnumerator = win32.GUID{Data1: 0xde4dfbbd, Data2: 
 func (self *IAppxManifestResourcesEnumerator) GetCurrent() (foundation.PWSTR, error) {
 	var _resource foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_resource)))
-	return _resource, win32.HRESULTError(int32(r1))
+	return _resource, win32.ErrIfFailed(int32(r1))
 }
 
 // GetHasCurrent dispatches through IAppxManifestResourcesEnumerator's vtable slot 4.
 func (self *IAppxManifestResourcesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
 	var _hasCurrent foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasCurrent)))
-	return _hasCurrent, win32.HRESULTError(int32(r1))
+	return _hasCurrent, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxManifestResourcesEnumerator's vtable slot 5.
 func (self *IAppxManifestResourcesEnumerator) MoveNext() (foundation.BOOL, error) {
 	var _hasNext foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasNext)))
-	return _hasNext, win32.HRESULTError(int32(r1))
+	return _hasNext, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 36537f36-27a4-4788-88c0-733819575017
@@ -2204,21 +2204,21 @@ var IID_IAppxManifestTargetDeviceFamiliesEnumerator = win32.GUID{Data1: 0x36537f
 func (self *IAppxManifestTargetDeviceFamiliesEnumerator) GetCurrent() (*IAppxManifestTargetDeviceFamily, error) {
 	var _targetDeviceFamily *IAppxManifestTargetDeviceFamily
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_targetDeviceFamily)))
-	return _targetDeviceFamily, win32.HRESULTError(int32(r1))
+	return _targetDeviceFamily, win32.ErrIfFailed(int32(r1))
 }
 
 // GetHasCurrent dispatches through IAppxManifestTargetDeviceFamiliesEnumerator's vtable slot 4.
 func (self *IAppxManifestTargetDeviceFamiliesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
 	var _hasCurrent foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasCurrent)))
-	return _hasCurrent, win32.HRESULTError(int32(r1))
+	return _hasCurrent, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxManifestTargetDeviceFamiliesEnumerator's vtable slot 5.
 func (self *IAppxManifestTargetDeviceFamiliesEnumerator) MoveNext() (foundation.BOOL, error) {
 	var _hasNext foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasNext)))
-	return _hasNext, win32.HRESULTError(int32(r1))
+	return _hasNext, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxManifestTargetDeviceFamily: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxmanifesttargetdevicefamily
@@ -2234,21 +2234,21 @@ var IID_IAppxManifestTargetDeviceFamily = win32.GUID{Data1: 0x9091b09b, Data2: 0
 func (self *IAppxManifestTargetDeviceFamily) GetName() (foundation.PWSTR, error) {
 	var _name foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
-	return _name, win32.HRESULTError(int32(r1))
+	return _name, win32.ErrIfFailed(int32(r1))
 }
 
 // GetMinVersion dispatches through IAppxManifestTargetDeviceFamily's vtable slot 4.
 func (self *IAppxManifestTargetDeviceFamily) GetMinVersion() (uint64, error) {
 	var _minVersion uint64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_minVersion)))
-	return _minVersion, win32.HRESULTError(int32(r1))
+	return _minVersion, win32.ErrIfFailed(int32(r1))
 }
 
 // GetMaxVersionTested dispatches through IAppxManifestTargetDeviceFamily's vtable slot 5.
 func (self *IAppxManifestTargetDeviceFamily) GetMaxVersionTested() (uint64, error) {
 	var _maxVersionTested uint64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_maxVersionTested)))
-	return _maxVersionTested, win32.HRESULTError(int32(r1))
+	return _maxVersionTested, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxPackageEditor: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxpackageeditor
@@ -2264,39 +2264,39 @@ var IID_IAppxPackageEditor = win32.GUID{Data1: 0xe2adb6dc, Data2: 0x5e71, Data3:
 func (self *IAppxPackageEditor) SetWorkingDirectory(workingDirectory string) error {
 	_workingDirectory := win32.UTF16Ptr(workingDirectory)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_workingDirectory)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateDeltaPackage dispatches through IAppxPackageEditor's vtable slot 4.
 func (self *IAppxPackageEditor) CreateDeltaPackage(updatedPackageStream *systemcom.IStream, baselinePackageStream *systemcom.IStream, deltaPackageStream *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(updatedPackageStream)), uintptr(unsafe.Pointer(baselinePackageStream)), uintptr(unsafe.Pointer(deltaPackageStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateDeltaPackageUsingBaselineBlockMap dispatches through IAppxPackageEditor's vtable slot 5.
 func (self *IAppxPackageEditor) CreateDeltaPackageUsingBaselineBlockMap(updatedPackageStream *systemcom.IStream, baselineBlockMapStream *systemcom.IStream, baselinePackageFullName string, deltaPackageStream *systemcom.IStream) error {
 	_baselinePackageFullName := win32.UTF16Ptr(baselinePackageFullName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(updatedPackageStream)), uintptr(unsafe.Pointer(baselineBlockMapStream)), uintptr(unsafe.Pointer(_baselinePackageFullName)), uintptr(unsafe.Pointer(deltaPackageStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UpdatePackage dispatches through IAppxPackageEditor's vtable slot 6.
 func (self *IAppxPackageEditor) UpdatePackage(baselinePackageStream *systemcom.IStream, deltaPackageStream *systemcom.IStream, updateOption APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_OPTION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(baselinePackageStream)), uintptr(unsafe.Pointer(deltaPackageStream)), uintptr(updateOption))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UpdateEncryptedPackage dispatches through IAppxPackageEditor's vtable slot 7.
 func (self *IAppxPackageEditor) UpdateEncryptedPackage(baselineEncryptedPackageStream *systemcom.IStream, deltaPackageStream *systemcom.IStream, updateOption APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_OPTION, settings *APPX_ENCRYPTED_PACKAGE_SETTINGS2, keyInfo *APPX_KEY_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(baselineEncryptedPackageStream)), uintptr(unsafe.Pointer(deltaPackageStream)), uintptr(updateOption), uintptr(unsafe.Pointer(settings)), uintptr(unsafe.Pointer(keyInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UpdatePackageManifest dispatches through IAppxPackageEditor's vtable slot 8.
 func (self *IAppxPackageEditor) UpdatePackageManifest(packageStream *systemcom.IStream, updatedManifestStream *systemcom.IStream, isPackageEncrypted bool, options APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_MANIFEST_OPTIONS) error {
 	_isPackageEncrypted := win32.Bool32(isPackageEncrypted)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(packageStream)), uintptr(unsafe.Pointer(updatedManifestStream)), uintptr(_isPackageEncrypted), uintptr(options))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxPackageReader: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxpackagereader
@@ -2312,14 +2312,14 @@ var IID_IAppxPackageReader = win32.GUID{Data1: 0xb5c49650, Data2: 0x99bc, Data3:
 func (self *IAppxPackageReader) GetBlockMap() (*IAppxBlockMapReader, error) {
 	var _blockMapReader *IAppxBlockMapReader
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_blockMapReader)))
-	return _blockMapReader, win32.HRESULTError(int32(r1))
+	return _blockMapReader, win32.ErrIfFailed(int32(r1))
 }
 
 // GetFootprintFile dispatches through IAppxPackageReader's vtable slot 4.
 func (self *IAppxPackageReader) GetFootprintFile(type_ APPX_FOOTPRINT_FILE_TYPE) (*IAppxFile, error) {
 	var _file *IAppxFile
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(unsafe.Pointer(&_file)))
-	return _file, win32.HRESULTError(int32(r1))
+	return _file, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPayloadFile dispatches through IAppxPackageReader's vtable slot 5.
@@ -2327,21 +2327,21 @@ func (self *IAppxPackageReader) GetPayloadFile(fileName string) (*IAppxFile, err
 	_fileName := win32.UTF16Ptr(fileName)
 	var _file *IAppxFile
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fileName)), uintptr(unsafe.Pointer(&_file)))
-	return _file, win32.HRESULTError(int32(r1))
+	return _file, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPayloadFiles dispatches through IAppxPackageReader's vtable slot 6.
 func (self *IAppxPackageReader) GetPayloadFiles() (*IAppxFilesEnumerator, error) {
 	var _filesEnumerator *IAppxFilesEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_filesEnumerator)))
-	return _filesEnumerator, win32.HRESULTError(int32(r1))
+	return _filesEnumerator, win32.ErrIfFailed(int32(r1))
 }
 
 // GetManifest dispatches through IAppxPackageReader's vtable slot 7.
 func (self *IAppxPackageReader) GetManifest() (*IAppxManifestReader, error) {
 	var _manifestReader *IAppxManifestReader
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_manifestReader)))
-	return _manifestReader, win32.HRESULTError(int32(r1))
+	return _manifestReader, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxPackageWriter: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxpackagewriter
@@ -2358,13 +2358,13 @@ func (self *IAppxPackageWriter) AddPayloadFile(fileName string, contentType stri
 	_fileName := win32.UTF16Ptr(fileName)
 	_contentType := win32.UTF16Ptr(contentType)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fileName)), uintptr(unsafe.Pointer(_contentType)), uintptr(compressionOption), uintptr(unsafe.Pointer(inputStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Close dispatches through IAppxPackageWriter's vtable slot 4.
 func (self *IAppxPackageWriter) Close(manifest *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(manifest)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxPackageWriter2: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxpackagewriter2
@@ -2379,7 +2379,7 @@ var IID_IAppxPackageWriter2 = win32.GUID{Data1: 0x2cf5c4fd, Data2: 0xe54c, Data3
 // Close dispatches through IAppxPackageWriter2's vtable slot 3.
 func (self *IAppxPackageWriter2) Close(manifest *systemcom.IStream, contentGroupMap *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(manifest)), uintptr(unsafe.Pointer(contentGroupMap)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxPackageWriter3: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxpackagewriter3
@@ -2398,7 +2398,7 @@ func (self *IAppxPackageWriter3) AddPayloadFiles(payloadFiles []APPX_PACKAGE_WRI
 		_payloadFiles = &payloadFiles[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(payloadFiles)), uintptr(unsafe.Pointer(_payloadFiles)), uintptr(memoryLimit))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 17239d47-6adb-45d2-80f6-f9cbc3bf059d
@@ -2414,14 +2414,14 @@ func (self *IAppxPackagingDiagnosticEventSink) ReportContextChange(changeType AP
 	_contextMessage := win32.UTF16Ptr(contextMessage)
 	_detailsMessage := win32.UTF16Ptr(detailsMessage)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(changeType), uintptr(contextId), uintptr(unsafe.Pointer(contextName)), uintptr(unsafe.Pointer(_contextMessage)), uintptr(unsafe.Pointer(_detailsMessage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReportError dispatches through IAppxPackagingDiagnosticEventSink's vtable slot 4.
 func (self *IAppxPackagingDiagnosticEventSink) ReportError(errorMessage string) error {
 	_errorMessage := win32.UTF16Ptr(errorMessage)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_errorMessage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 369648fa-a7eb-4909-a15d-6954a078f18a
@@ -2435,7 +2435,7 @@ var IID_IAppxPackagingDiagnosticEventSinkManager = win32.GUID{Data1: 0x369648fa,
 // SetSinkForProcess dispatches through IAppxPackagingDiagnosticEventSinkManager's vtable slot 3.
 func (self *IAppxPackagingDiagnosticEventSinkManager) SetSinkForProcess(sink *IAppxPackagingDiagnosticEventSink) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxSourceContentGroupMapReader: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxsourcecontentgroupmapreader
@@ -2451,12 +2451,12 @@ var IID_IAppxSourceContentGroupMapReader = win32.GUID{Data1: 0xf329791d, Data2: 
 func (self *IAppxSourceContentGroupMapReader) GetRequiredGroup() (*IAppxContentGroup, error) {
 	var _requiredGroup *IAppxContentGroup
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_requiredGroup)))
-	return _requiredGroup, win32.HRESULTError(int32(r1))
+	return _requiredGroup, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAutomaticGroups dispatches through IAppxSourceContentGroupMapReader's vtable slot 4.
 func (self *IAppxSourceContentGroupMapReader) GetAutomaticGroups() (*IAppxContentGroupsEnumerator, error) {
 	var _automaticGroupsEnumerator *IAppxContentGroupsEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_automaticGroupsEnumerator)))
-	return _automaticGroupsEnumerator, win32.HRESULTError(int32(r1))
+	return _automaticGroupsEnumerator, win32.ErrIfFailed(int32(r1))
 }

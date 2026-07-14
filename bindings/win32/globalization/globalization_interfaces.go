@@ -28,7 +28,7 @@ func (self *IComprehensiveSpellCheckProvider) ComprehensiveCheck(text string) (*
 	_text := win32.UTF16Ptr(text)
 	var _value *IEnumSpellingError
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_text)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 275c23e3-3747-11d0-9fea-00aa003f8646
@@ -42,25 +42,25 @@ var IID_IEnumCodePage = win32.GUID{Data1: 0x275c23e3, Data2: 0x3747, Data3: 0x11
 // Clone dispatches through IEnumCodePage's vtable slot 3.
 func (self *IEnumCodePage) Clone() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), 0)
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Next dispatches through IEnumCodePage's vtable slot 4.
 func (self *IEnumCodePage) Next(celt uint32, rgelt *MIMECPINFO, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumCodePage's vtable slot 5.
 func (self *IEnumCodePage) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumCodePage's vtable slot 6.
 func (self *IEnumCodePage) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 3dc39d1d-c030-11d0-b81b-00c04fc9b31f
@@ -74,25 +74,25 @@ var IID_IEnumRfc1766 = win32.GUID{Data1: 0x3dc39d1d, Data2: 0xc030, Data3: 0x11d
 // Clone dispatches through IEnumRfc1766's vtable slot 3.
 func (self *IEnumRfc1766) Clone() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), 0)
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Next dispatches through IEnumRfc1766's vtable slot 4.
 func (self *IEnumRfc1766) Next(celt uint32, rgelt *RFC1766INFO, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumRfc1766's vtable slot 5.
 func (self *IEnumRfc1766) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumRfc1766's vtable slot 6.
 func (self *IEnumRfc1766) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: ae5f1430-388b-11d2-8380-00c04f8f5da1
@@ -106,25 +106,25 @@ var IID_IEnumScript = win32.GUID{Data1: 0xae5f1430, Data2: 0x388b, Data3: 0x11d2
 // Clone dispatches through IEnumScript's vtable slot 3.
 func (self *IEnumScript) Clone() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), 0)
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Next dispatches through IEnumScript's vtable slot 4.
 func (self *IEnumScript) Next(celt uint32, rgelt *SCRIPTINFO, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumScript's vtable slot 5.
 func (self *IEnumScript) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumScript's vtable slot 6.
 func (self *IEnumScript) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumSpellingError: https://learn.microsoft.com/windows/win32/api/spellcheck/nn-spellcheck-ienumspellingerror
@@ -140,7 +140,7 @@ var IID_IEnumSpellingError = win32.GUID{Data1: 0x803e3bd4, Data2: 0x2828, Data3:
 func (self *IEnumSpellingError) Next() (*ISpellingError, error) {
 	var _value *ISpellingError
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 359f3443-bd4a-11d0-b188-00aa0038c969
@@ -154,26 +154,26 @@ var IID_IMLangCodePages = win32.GUID{Data1: 0x359f3443, Data2: 0xbd4a, Data3: 0x
 // GetCharCodePages dispatches through IMLangCodePages's vtable slot 3.
 func (self *IMLangCodePages) GetCharCodePages(chSrc uint16, pdwCodePages *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(chSrc), uintptr(unsafe.Pointer(pdwCodePages)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStrCodePages dispatches through IMLangCodePages's vtable slot 4.
 func (self *IMLangCodePages) GetStrCodePages(pszSrc string, cchSrc int32, dwPriorityCodePages uint32, pdwCodePages *uint32, pcchCodePages *int32) error {
 	_pszSrc := win32.UTF16Ptr(pszSrc)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSrc)), uintptr(cchSrc), uintptr(dwPriorityCodePages), uintptr(unsafe.Pointer(pdwCodePages)), uintptr(unsafe.Pointer(pcchCodePages)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CodePageToCodePages dispatches through IMLangCodePages's vtable slot 5.
 func (self *IMLangCodePages) CodePageToCodePages(uCodePage uint32, pdwCodePages *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(uCodePage), uintptr(unsafe.Pointer(pdwCodePages)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CodePagesToCodePage dispatches through IMLangCodePages's vtable slot 6.
 func (self *IMLangCodePages) CodePagesToCodePage(dwCodePages uint32, uDefaultCodePage uint32, puCodePage *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwCodePages), uintptr(uDefaultCodePage), uintptr(unsafe.Pointer(puCodePage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: d66d6f98-cdaa-11d0-b822-00c04fc9b31f
@@ -187,44 +187,44 @@ var IID_IMLangConvertCharset = win32.GUID{Data1: 0xd66d6f98, Data2: 0xcdaa, Data
 // Initialize dispatches through IMLangConvertCharset's vtable slot 3.
 func (self *IMLangConvertCharset) Initialize(uiSrcCodePage uint32, uiDstCodePage uint32, dwProperty uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(uiSrcCodePage), uintptr(uiDstCodePage), uintptr(dwProperty))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSourceCodePage dispatches through IMLangConvertCharset's vtable slot 4.
 func (self *IMLangConvertCharset) GetSourceCodePage(puiSrcCodePage *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(puiSrcCodePage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDestinationCodePage dispatches through IMLangConvertCharset's vtable slot 5.
 func (self *IMLangConvertCharset) GetDestinationCodePage(puiDstCodePage *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(puiDstCodePage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProperty dispatches through IMLangConvertCharset's vtable slot 6.
 func (self *IMLangConvertCharset) GetProperty(pdwProperty *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwProperty)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DoConversion dispatches through IMLangConvertCharset's vtable slot 7.
 func (self *IMLangConvertCharset) DoConversion(pSrcStr *byte, pcSrcSize *uint32, pDstStr *byte, pcDstSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSrcStr)), uintptr(unsafe.Pointer(pcSrcSize)), uintptr(unsafe.Pointer(pDstStr)), uintptr(unsafe.Pointer(pcDstSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DoConversionToUnicode dispatches through IMLangConvertCharset's vtable slot 8.
 func (self *IMLangConvertCharset) DoConversionToUnicode(pSrcStr foundation.PSTR, pcSrcSize *uint32, pDstStr foundation.PWSTR, pcDstSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSrcStr)), uintptr(unsafe.Pointer(pcSrcSize)), uintptr(unsafe.Pointer(pDstStr)), uintptr(unsafe.Pointer(pcDstSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DoConversionFromUnicode dispatches through IMLangConvertCharset's vtable slot 9.
 func (self *IMLangConvertCharset) DoConversionFromUnicode(pSrcStr string, pcSrcSize *uint32, pDstStr foundation.PSTR, pcDstSize *uint32) error {
 	_pSrcStr := win32.UTF16Ptr(pSrcStr)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pSrcStr)), uintptr(unsafe.Pointer(pcSrcSize)), uintptr(unsafe.Pointer(pDstStr)), uintptr(unsafe.Pointer(pcDstSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 359f3441-bd4a-11d0-b188-00aa0038c969
@@ -238,25 +238,25 @@ var IID_IMLangFontLink = win32.GUID{Data1: 0x359f3441, Data2: 0xbd4a, Data3: 0x1
 // GetFontCodePages dispatches through IMLangFontLink's vtable slot 7.
 func (self *IMLangFontLink) GetFontCodePages(hDC graphicsgdi.HDC, hFont graphicsgdi.HFONT, pdwCodePages *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hDC), uintptr(hFont), uintptr(unsafe.Pointer(pdwCodePages)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MapFont dispatches through IMLangFontLink's vtable slot 8.
 func (self *IMLangFontLink) MapFont(hDC graphicsgdi.HDC, dwCodePages uint32, hSrcFont graphicsgdi.HFONT, phDestFont *graphicsgdi.HFONT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(hDC), uintptr(dwCodePages), uintptr(hSrcFont), uintptr(unsafe.Pointer(phDestFont)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReleaseFont dispatches through IMLangFontLink's vtable slot 9.
 func (self *IMLangFontLink) ReleaseFont(hFont graphicsgdi.HFONT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(hFont))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ResetFontMapping dispatches through IMLangFontLink's vtable slot 10.
 func (self *IMLangFontLink) ResetFontMapping() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: dccfc162-2b38-11d2-b7ec-00c04f8f5d9a
@@ -270,43 +270,43 @@ var IID_IMLangFontLink2 = win32.GUID{Data1: 0xdccfc162, Data2: 0x2b38, Data3: 0x
 // GetFontCodePages dispatches through IMLangFontLink2's vtable slot 7.
 func (self *IMLangFontLink2) GetFontCodePages(hDC graphicsgdi.HDC, hFont graphicsgdi.HFONT, pdwCodePages *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hDC), uintptr(hFont), uintptr(unsafe.Pointer(pdwCodePages)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReleaseFont dispatches through IMLangFontLink2's vtable slot 8.
 func (self *IMLangFontLink2) ReleaseFont(hFont graphicsgdi.HFONT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(hFont))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ResetFontMapping dispatches through IMLangFontLink2's vtable slot 9.
 func (self *IMLangFontLink2) ResetFontMapping() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MapFont dispatches through IMLangFontLink2's vtable slot 10.
 func (self *IMLangFontLink2) MapFont(hDC graphicsgdi.HDC, dwCodePages uint32, chSrc uint16, pFont *graphicsgdi.HFONT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(hDC), uintptr(dwCodePages), uintptr(chSrc), uintptr(unsafe.Pointer(pFont)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFontUnicodeRanges dispatches through IMLangFontLink2's vtable slot 11.
 func (self *IMLangFontLink2) GetFontUnicodeRanges(hDC graphicsgdi.HDC, puiRanges *uint32, pUranges *UNICODERANGE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(hDC), uintptr(unsafe.Pointer(puiRanges)), uintptr(unsafe.Pointer(pUranges)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetScriptFontInfo dispatches through IMLangFontLink2's vtable slot 12.
 func (self *IMLangFontLink2) GetScriptFontInfo(sid byte, dwFlags uint32, puiFonts *uint32, pScriptFont *SCRIPTFONTINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(sid), uintptr(dwFlags), uintptr(unsafe.Pointer(puiFonts)), uintptr(unsafe.Pointer(pScriptFont)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CodePageToScriptID dispatches through IMLangFontLink2's vtable slot 13.
 func (self *IMLangFontLink2) CodePageToScriptID(uiCodePage uint32, pSid *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(uiCodePage), uintptr(unsafe.Pointer(pSid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f5be2ee1-bfd7-11d0-b188-00aa0038c969
@@ -320,20 +320,20 @@ var IID_IMLangLineBreakConsole = win32.GUID{Data1: 0xf5be2ee1, Data2: 0xbfd7, Da
 // BreakLineML dispatches through IMLangLineBreakConsole's vtable slot 3.
 func (self *IMLangLineBreakConsole) BreakLineML(pSrcMLStr *IMLangString, lSrcPos int32, lSrcLen int32, cMinColumns int32, cMaxColumns int32, plLineLen *int32, plSkipLen *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSrcMLStr)), uintptr(lSrcPos), uintptr(lSrcLen), uintptr(cMinColumns), uintptr(cMaxColumns), uintptr(unsafe.Pointer(plLineLen)), uintptr(unsafe.Pointer(plSkipLen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BreakLineW dispatches through IMLangLineBreakConsole's vtable slot 4.
 func (self *IMLangLineBreakConsole) BreakLineW(locale uint32, pszSrc string, cchSrc int32, cMaxColumns int32, pcchLine *int32, pcchSkip *int32) error {
 	_pszSrc := win32.UTF16Ptr(pszSrc)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(locale), uintptr(unsafe.Pointer(_pszSrc)), uintptr(cchSrc), uintptr(cMaxColumns), uintptr(unsafe.Pointer(pcchLine)), uintptr(unsafe.Pointer(pcchSkip)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BreakLineA dispatches through IMLangLineBreakConsole's vtable slot 5.
 func (self *IMLangLineBreakConsole) BreakLineA(locale uint32, uCodePage uint32, pszSrc foundation.PSTR, cchSrc int32, cMaxColumns int32, pcchLine *int32, pcchSkip *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(locale), uintptr(uCodePage), uintptr(unsafe.Pointer(pszSrc)), uintptr(cchSrc), uintptr(cMaxColumns), uintptr(unsafe.Pointer(pcchLine)), uintptr(unsafe.Pointer(pcchSkip)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: c04d65ce-b70d-11d0-b188-00aa0038c969
@@ -348,25 +348,25 @@ var IID_IMLangString = win32.GUID{Data1: 0xc04d65ce, Data2: 0xb70d, Data3: 0x11d
 func (self *IMLangString) Sync(fNoAccess bool) error {
 	_fNoAccess := win32.Bool32(fNoAccess)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(_fNoAccess))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLength dispatches through IMLangString's vtable slot 4.
 func (self *IMLangString) GetLength(plLen *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plLen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMLStr dispatches through IMLangString's vtable slot 5.
 func (self *IMLangString) SetMLStr(lDestPos int32, lDestLen int32, pSrcMLStr *systemcom.IUnknown, lSrcPos int32, lSrcLen int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(lDestPos), uintptr(lDestLen), uintptr(unsafe.Pointer(pSrcMLStr)), uintptr(lSrcPos), uintptr(lSrcLen))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMLStr dispatches through IMLangString's vtable slot 6.
 func (self *IMLangString) GetMLStr(lSrcPos int32, lSrcLen int32, pUnkOuter *systemcom.IUnknown, dwClsContext uint32, piid *win32.GUID, ppDestMLStr **systemcom.IUnknown, plDestPos *int32, plDestLen *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(lSrcPos), uintptr(lSrcLen), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(dwClsContext), uintptr(unsafe.Pointer(piid)), uintptr(unsafe.Pointer(ppDestMLStr)), uintptr(unsafe.Pointer(plDestPos)), uintptr(unsafe.Pointer(plDestLen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: c04d65d2-b70d-11d0-b188-00aa0038c969
@@ -380,49 +380,49 @@ var IID_IMLangStringAStr = win32.GUID{Data1: 0xc04d65d2, Data2: 0xb70d, Data3: 0
 // SetAStr dispatches through IMLangStringAStr's vtable slot 7.
 func (self *IMLangStringAStr) SetAStr(lDestPos int32, lDestLen int32, uCodePage uint32, pszSrc foundation.PSTR, cchSrc int32, pcchActual *int32, plActualLen *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(lDestPos), uintptr(lDestLen), uintptr(uCodePage), uintptr(unsafe.Pointer(pszSrc)), uintptr(cchSrc), uintptr(unsafe.Pointer(pcchActual)), uintptr(unsafe.Pointer(plActualLen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetStrBufA dispatches through IMLangStringAStr's vtable slot 8.
 func (self *IMLangStringAStr) SetStrBufA(lDestPos int32, lDestLen int32, uCodePage uint32, pSrcBuf *IMLangStringBufA, pcchActual *int32, plActualLen *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lDestPos), uintptr(lDestLen), uintptr(uCodePage), uintptr(unsafe.Pointer(pSrcBuf)), uintptr(unsafe.Pointer(pcchActual)), uintptr(unsafe.Pointer(plActualLen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAStr dispatches through IMLangStringAStr's vtable slot 9.
 func (self *IMLangStringAStr) GetAStr(lSrcPos int32, lSrcLen int32, uCodePageIn uint32, pszDest foundation.PSTR, cchDest int32, pcchActual *int32, plActualLen *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(lSrcPos), uintptr(lSrcLen), uintptr(uCodePageIn), 0, uintptr(unsafe.Pointer(pszDest)), uintptr(cchDest), uintptr(unsafe.Pointer(pcchActual)), uintptr(unsafe.Pointer(plActualLen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStrBufA dispatches through IMLangStringAStr's vtable slot 10.
 func (self *IMLangStringAStr) GetStrBufA(lSrcPos int32, lSrcMaxLen int32, puDestCodePage *uint32, ppDestBuf **IMLangStringBufA, plDestLen *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lSrcPos), uintptr(lSrcMaxLen), uintptr(unsafe.Pointer(puDestCodePage)), uintptr(unsafe.Pointer(ppDestBuf)), uintptr(unsafe.Pointer(plDestLen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LockAStr dispatches through IMLangStringAStr's vtable slot 11.
 func (self *IMLangStringAStr) LockAStr(lSrcPos int32, lSrcLen int32, lFlags int32, uCodePageIn uint32, cchRequest int32, puCodePageOut *uint32, ppszDest *foundation.PSTR, pcchDest *int32, plDestLen *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(lSrcPos), uintptr(lSrcLen), uintptr(lFlags), uintptr(uCodePageIn), uintptr(cchRequest), uintptr(unsafe.Pointer(puCodePageOut)), uintptr(unsafe.Pointer(ppszDest)), uintptr(unsafe.Pointer(pcchDest)), uintptr(unsafe.Pointer(plDestLen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnlockAStr dispatches through IMLangStringAStr's vtable slot 12.
 func (self *IMLangStringAStr) UnlockAStr(pszSrc foundation.PSTR, cchSrc int32, pcchActual *int32, plActualLen *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszSrc)), uintptr(cchSrc), uintptr(unsafe.Pointer(pcchActual)), uintptr(unsafe.Pointer(plActualLen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetLocale dispatches through IMLangStringAStr's vtable slot 13.
 func (self *IMLangStringAStr) SetLocale(lDestPos int32, lDestLen int32, locale uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(lDestPos), uintptr(lDestLen), uintptr(locale))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLocale dispatches through IMLangStringAStr's vtable slot 14.
 func (self *IMLangStringAStr) GetLocale(lSrcPos int32, lSrcMaxLen int32, plocale *uint32, plLocalePos *int32, plLocaleLen *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(lSrcPos), uintptr(lSrcMaxLen), uintptr(unsafe.Pointer(plocale)), uintptr(unsafe.Pointer(plLocalePos)), uintptr(unsafe.Pointer(plLocaleLen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: d24acd23-ba72-11d0-b188-00aa0038c969
@@ -436,31 +436,31 @@ var IID_IMLangStringBufA = win32.GUID{Data1: 0xd24acd23, Data2: 0xba72, Data3: 0
 // GetStatus dispatches through IMLangStringBufA's vtable slot 3.
 func (self *IMLangStringBufA) GetStatus(plFlags *int32, pcchBuf *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plFlags)), uintptr(unsafe.Pointer(pcchBuf)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LockBuf dispatches through IMLangStringBufA's vtable slot 4.
 func (self *IMLangStringBufA) LockBuf(cchOffset int32, cchMaxLock int32, ppszBuf **foundation.CHAR, pcchBuf *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cchOffset), uintptr(cchMaxLock), uintptr(unsafe.Pointer(ppszBuf)), uintptr(unsafe.Pointer(pcchBuf)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnlockBuf dispatches through IMLangStringBufA's vtable slot 5.
 func (self *IMLangStringBufA) UnlockBuf(pszBuf foundation.PSTR, cchOffset int32, cchWrite int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszBuf)), uintptr(cchOffset), uintptr(cchWrite))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Insert dispatches through IMLangStringBufA's vtable slot 6.
 func (self *IMLangStringBufA) Insert(cchOffset int32, cchMaxInsert int32, pcchActual *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(cchOffset), uintptr(cchMaxInsert), uintptr(unsafe.Pointer(pcchActual)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IMLangStringBufA's vtable slot 7.
 func (self *IMLangStringBufA) Delete(cchOffset int32, cchDelete int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(cchOffset), uintptr(cchDelete))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: d24acd21-ba72-11d0-b188-00aa0038c969
@@ -474,32 +474,32 @@ var IID_IMLangStringBufW = win32.GUID{Data1: 0xd24acd21, Data2: 0xba72, Data3: 0
 // GetStatus dispatches through IMLangStringBufW's vtable slot 3.
 func (self *IMLangStringBufW) GetStatus(plFlags *int32, pcchBuf *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plFlags)), uintptr(unsafe.Pointer(pcchBuf)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LockBuf dispatches through IMLangStringBufW's vtable slot 4.
 func (self *IMLangStringBufW) LockBuf(cchOffset int32, cchMaxLock int32, ppszBuf **uint16, pcchBuf *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cchOffset), uintptr(cchMaxLock), uintptr(unsafe.Pointer(ppszBuf)), uintptr(unsafe.Pointer(pcchBuf)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnlockBuf dispatches through IMLangStringBufW's vtable slot 5.
 func (self *IMLangStringBufW) UnlockBuf(pszBuf string, cchOffset int32, cchWrite int32) error {
 	_pszBuf := win32.UTF16Ptr(pszBuf)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszBuf)), uintptr(cchOffset), uintptr(cchWrite))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Insert dispatches through IMLangStringBufW's vtable slot 6.
 func (self *IMLangStringBufW) Insert(cchOffset int32, cchMaxInsert int32, pcchActual *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(cchOffset), uintptr(cchMaxInsert), uintptr(unsafe.Pointer(pcchActual)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IMLangStringBufW's vtable slot 7.
 func (self *IMLangStringBufW) Delete(cchOffset int32, cchDelete int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(cchOffset), uintptr(cchDelete))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: c04d65d0-b70d-11d0-b188-00aa0038c969
@@ -514,50 +514,50 @@ var IID_IMLangStringWStr = win32.GUID{Data1: 0xc04d65d0, Data2: 0xb70d, Data3: 0
 func (self *IMLangStringWStr) SetWStr(lDestPos int32, lDestLen int32, pszSrc string, cchSrc int32, pcchActual *int32, plActualLen *int32) error {
 	_pszSrc := win32.UTF16Ptr(pszSrc)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(lDestPos), uintptr(lDestLen), uintptr(unsafe.Pointer(_pszSrc)), uintptr(cchSrc), uintptr(unsafe.Pointer(pcchActual)), uintptr(unsafe.Pointer(plActualLen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetStrBufW dispatches through IMLangStringWStr's vtable slot 8.
 func (self *IMLangStringWStr) SetStrBufW(lDestPos int32, lDestLen int32, pSrcBuf *IMLangStringBufW, pcchActual *int32, plActualLen *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lDestPos), uintptr(lDestLen), uintptr(unsafe.Pointer(pSrcBuf)), uintptr(unsafe.Pointer(pcchActual)), uintptr(unsafe.Pointer(plActualLen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetWStr dispatches through IMLangStringWStr's vtable slot 9.
 func (self *IMLangStringWStr) GetWStr(lSrcPos int32, lSrcLen int32, pszDest foundation.PWSTR, cchDest int32, pcchActual *int32, plActualLen *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(lSrcPos), uintptr(lSrcLen), uintptr(unsafe.Pointer(pszDest)), uintptr(cchDest), uintptr(unsafe.Pointer(pcchActual)), uintptr(unsafe.Pointer(plActualLen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStrBufW dispatches through IMLangStringWStr's vtable slot 10.
 func (self *IMLangStringWStr) GetStrBufW(lSrcPos int32, lSrcMaxLen int32, ppDestBuf **IMLangStringBufW, plDestLen *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lSrcPos), uintptr(lSrcMaxLen), uintptr(unsafe.Pointer(ppDestBuf)), uintptr(unsafe.Pointer(plDestLen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LockWStr dispatches through IMLangStringWStr's vtable slot 11.
 func (self *IMLangStringWStr) LockWStr(lSrcPos int32, lSrcLen int32, lFlags int32, cchRequest int32, ppszDest *foundation.PWSTR, pcchDest *int32, plDestLen *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(lSrcPos), uintptr(lSrcLen), uintptr(lFlags), uintptr(cchRequest), uintptr(unsafe.Pointer(ppszDest)), uintptr(unsafe.Pointer(pcchDest)), uintptr(unsafe.Pointer(plDestLen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnlockWStr dispatches through IMLangStringWStr's vtable slot 12.
 func (self *IMLangStringWStr) UnlockWStr(pszSrc string, cchSrc int32, pcchActual *int32, plActualLen *int32) error {
 	_pszSrc := win32.UTF16Ptr(pszSrc)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSrc)), uintptr(cchSrc), uintptr(unsafe.Pointer(pcchActual)), uintptr(unsafe.Pointer(plActualLen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetLocale dispatches through IMLangStringWStr's vtable slot 13.
 func (self *IMLangStringWStr) SetLocale(lDestPos int32, lDestLen int32, locale uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(lDestPos), uintptr(lDestLen), uintptr(locale))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLocale dispatches through IMLangStringWStr's vtable slot 14.
 func (self *IMLangStringWStr) GetLocale(lSrcPos int32, lSrcMaxLen int32, plocale *uint32, plLocalePos *int32, plLocaleLen *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(lSrcPos), uintptr(lSrcMaxLen), uintptr(unsafe.Pointer(plocale)), uintptr(unsafe.Pointer(plLocalePos)), uintptr(unsafe.Pointer(plLocaleLen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 275c23e1-3747-11d0-9fea-00aa003f8646
@@ -571,92 +571,92 @@ var IID_IMultiLanguage = win32.GUID{Data1: 0x275c23e1, Data2: 0x3747, Data3: 0x1
 // GetNumberOfCodePageInfo dispatches through IMultiLanguage's vtable slot 3.
 func (self *IMultiLanguage) GetNumberOfCodePageInfo(pcCodePage *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcCodePage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCodePageInfo dispatches through IMultiLanguage's vtable slot 4.
 func (self *IMultiLanguage) GetCodePageInfo(uiCodePage uint32, pCodePageInfo *MIMECPINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(uiCodePage), uintptr(unsafe.Pointer(pCodePageInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFamilyCodePage dispatches through IMultiLanguage's vtable slot 5.
 func (self *IMultiLanguage) GetFamilyCodePage(uiCodePage uint32, puiFamilyCodePage *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(uiCodePage), uintptr(unsafe.Pointer(puiFamilyCodePage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumCodePages dispatches through IMultiLanguage's vtable slot 6.
 func (self *IMultiLanguage) EnumCodePages(grfFlags uint32, ppEnumCodePage **IEnumCodePage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(grfFlags), uintptr(unsafe.Pointer(ppEnumCodePage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCharsetInfo dispatches through IMultiLanguage's vtable slot 7.
 func (self *IMultiLanguage) GetCharsetInfo(Charset foundation.BSTR, pCharsetInfo *MIMECSETINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Charset)), uintptr(unsafe.Pointer(pCharsetInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsConvertible dispatches through IMultiLanguage's vtable slot 8.
 func (self *IMultiLanguage) IsConvertible(dwSrcEncoding uint32, dwDstEncoding uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwSrcEncoding), uintptr(dwDstEncoding))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ConvertString dispatches through IMultiLanguage's vtable slot 9.
 func (self *IMultiLanguage) ConvertString(pdwMode *uint32, dwSrcEncoding uint32, dwDstEncoding uint32, pSrcStr *byte, pcSrcSize *uint32, pDstStr *byte, pcDstSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwMode)), uintptr(dwSrcEncoding), uintptr(dwDstEncoding), uintptr(unsafe.Pointer(pSrcStr)), uintptr(unsafe.Pointer(pcSrcSize)), uintptr(unsafe.Pointer(pDstStr)), uintptr(unsafe.Pointer(pcDstSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ConvertStringToUnicode dispatches through IMultiLanguage's vtable slot 10.
 func (self *IMultiLanguage) ConvertStringToUnicode(pdwMode *uint32, dwEncoding uint32, pSrcStr foundation.PSTR, pcSrcSize *uint32, pDstStr foundation.PWSTR, pcDstSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwMode)), uintptr(dwEncoding), uintptr(unsafe.Pointer(pSrcStr)), uintptr(unsafe.Pointer(pcSrcSize)), uintptr(unsafe.Pointer(pDstStr)), uintptr(unsafe.Pointer(pcDstSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ConvertStringFromUnicode dispatches through IMultiLanguage's vtable slot 11.
 func (self *IMultiLanguage) ConvertStringFromUnicode(pdwMode *uint32, dwEncoding uint32, pSrcStr string, pcSrcSize *uint32, pDstStr foundation.PSTR, pcDstSize *uint32) error {
 	_pSrcStr := win32.UTF16Ptr(pSrcStr)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwMode)), uintptr(dwEncoding), uintptr(unsafe.Pointer(_pSrcStr)), uintptr(unsafe.Pointer(pcSrcSize)), uintptr(unsafe.Pointer(pDstStr)), uintptr(unsafe.Pointer(pcDstSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ConvertStringReset dispatches through IMultiLanguage's vtable slot 12.
 func (self *IMultiLanguage) ConvertStringReset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRfc1766FromLcid dispatches through IMultiLanguage's vtable slot 13.
 func (self *IMultiLanguage) GetRfc1766FromLcid(Locale uint32, pbstrRfc1766 *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Locale), uintptr(unsafe.Pointer(pbstrRfc1766)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLcidFromRfc1766 dispatches through IMultiLanguage's vtable slot 14.
 func (self *IMultiLanguage) GetLcidFromRfc1766(pLocale *uint32, bstrRfc1766 foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLocale)), uintptr(unsafe.Pointer(bstrRfc1766)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumRfc1766 dispatches through IMultiLanguage's vtable slot 15.
 func (self *IMultiLanguage) EnumRfc1766(ppEnumRfc1766 **IEnumRfc1766) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumRfc1766)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRfc1766Info dispatches through IMultiLanguage's vtable slot 16.
 func (self *IMultiLanguage) GetRfc1766Info(Locale uint32, pRfc1766Info *RFC1766INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(Locale), uintptr(unsafe.Pointer(pRfc1766Info)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateConvertCharset dispatches through IMultiLanguage's vtable slot 17.
 func (self *IMultiLanguage) CreateConvertCharset(uiSrcCodePage uint32, uiDstCodePage uint32, dwProperty uint32, ppMLangConvertCharset **IMLangConvertCharset) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(uiSrcCodePage), uintptr(uiDstCodePage), uintptr(dwProperty), uintptr(unsafe.Pointer(ppMLangConvertCharset)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: dccfc164-2b38-11d2-b7ec-00c04f8f5d9a
@@ -670,106 +670,106 @@ var IID_IMultiLanguage2 = win32.GUID{Data1: 0xdccfc164, Data2: 0x2b38, Data3: 0x
 // GetNumberOfCodePageInfo dispatches through IMultiLanguage2's vtable slot 3.
 func (self *IMultiLanguage2) GetNumberOfCodePageInfo(pcCodePage *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcCodePage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCodePageInfo dispatches through IMultiLanguage2's vtable slot 4.
 func (self *IMultiLanguage2) GetCodePageInfo(uiCodePage uint32, LangId uint16, pCodePageInfo *MIMECPINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(uiCodePage), uintptr(LangId), uintptr(unsafe.Pointer(pCodePageInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFamilyCodePage dispatches through IMultiLanguage2's vtable slot 5.
 func (self *IMultiLanguage2) GetFamilyCodePage(uiCodePage uint32, puiFamilyCodePage *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(uiCodePage), uintptr(unsafe.Pointer(puiFamilyCodePage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumCodePages dispatches through IMultiLanguage2's vtable slot 6.
 func (self *IMultiLanguage2) EnumCodePages(grfFlags uint32, LangId uint16, ppEnumCodePage **IEnumCodePage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(grfFlags), uintptr(LangId), uintptr(unsafe.Pointer(ppEnumCodePage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCharsetInfo dispatches through IMultiLanguage2's vtable slot 7.
 func (self *IMultiLanguage2) GetCharsetInfo(Charset foundation.BSTR, pCharsetInfo *MIMECSETINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Charset)), uintptr(unsafe.Pointer(pCharsetInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsConvertible dispatches through IMultiLanguage2's vtable slot 8.
 func (self *IMultiLanguage2) IsConvertible(dwSrcEncoding uint32, dwDstEncoding uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwSrcEncoding), uintptr(dwDstEncoding))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ConvertString dispatches through IMultiLanguage2's vtable slot 9.
 func (self *IMultiLanguage2) ConvertString(pdwMode *uint32, dwSrcEncoding uint32, dwDstEncoding uint32, pSrcStr *byte, pcSrcSize *uint32, pDstStr *byte, pcDstSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwMode)), uintptr(dwSrcEncoding), uintptr(dwDstEncoding), uintptr(unsafe.Pointer(pSrcStr)), uintptr(unsafe.Pointer(pcSrcSize)), uintptr(unsafe.Pointer(pDstStr)), uintptr(unsafe.Pointer(pcDstSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ConvertStringToUnicode dispatches through IMultiLanguage2's vtable slot 10.
 func (self *IMultiLanguage2) ConvertStringToUnicode(pdwMode *uint32, dwEncoding uint32, pSrcStr foundation.PSTR, pcSrcSize *uint32, pDstStr foundation.PWSTR, pcDstSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwMode)), uintptr(dwEncoding), uintptr(unsafe.Pointer(pSrcStr)), uintptr(unsafe.Pointer(pcSrcSize)), uintptr(unsafe.Pointer(pDstStr)), uintptr(unsafe.Pointer(pcDstSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ConvertStringFromUnicode dispatches through IMultiLanguage2's vtable slot 11.
 func (self *IMultiLanguage2) ConvertStringFromUnicode(pdwMode *uint32, dwEncoding uint32, pSrcStr string, pcSrcSize *uint32, pDstStr foundation.PSTR, pcDstSize *uint32) error {
 	_pSrcStr := win32.UTF16Ptr(pSrcStr)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwMode)), uintptr(dwEncoding), uintptr(unsafe.Pointer(_pSrcStr)), uintptr(unsafe.Pointer(pcSrcSize)), uintptr(unsafe.Pointer(pDstStr)), uintptr(unsafe.Pointer(pcDstSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ConvertStringReset dispatches through IMultiLanguage2's vtable slot 12.
 func (self *IMultiLanguage2) ConvertStringReset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRfc1766FromLcid dispatches through IMultiLanguage2's vtable slot 13.
 func (self *IMultiLanguage2) GetRfc1766FromLcid(Locale uint32, pbstrRfc1766 *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Locale), uintptr(unsafe.Pointer(pbstrRfc1766)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLcidFromRfc1766 dispatches through IMultiLanguage2's vtable slot 14.
 func (self *IMultiLanguage2) GetLcidFromRfc1766(pLocale *uint32, bstrRfc1766 foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLocale)), uintptr(unsafe.Pointer(bstrRfc1766)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumRfc1766 dispatches through IMultiLanguage2's vtable slot 15.
 func (self *IMultiLanguage2) EnumRfc1766(LangId uint16, ppEnumRfc1766 **IEnumRfc1766) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(LangId), uintptr(unsafe.Pointer(ppEnumRfc1766)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRfc1766Info dispatches through IMultiLanguage2's vtable slot 16.
 func (self *IMultiLanguage2) GetRfc1766Info(Locale uint32, LangId uint16, pRfc1766Info *RFC1766INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(Locale), uintptr(LangId), uintptr(unsafe.Pointer(pRfc1766Info)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateConvertCharset dispatches through IMultiLanguage2's vtable slot 17.
 func (self *IMultiLanguage2) CreateConvertCharset(uiSrcCodePage uint32, uiDstCodePage uint32, dwProperty uint32, ppMLangConvertCharset **IMLangConvertCharset) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(uiSrcCodePage), uintptr(uiDstCodePage), uintptr(dwProperty), uintptr(unsafe.Pointer(ppMLangConvertCharset)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ConvertStringInIStream dispatches through IMultiLanguage2's vtable slot 18.
 func (self *IMultiLanguage2) ConvertStringInIStream(pdwMode *uint32, dwFlag uint32, lpFallBack string, dwSrcEncoding uint32, dwDstEncoding uint32, pstmIn *systemcom.IStream, pstmOut *systemcom.IStream) error {
 	_lpFallBack := win32.UTF16Ptr(lpFallBack)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwMode)), uintptr(dwFlag), uintptr(unsafe.Pointer(_lpFallBack)), uintptr(dwSrcEncoding), uintptr(dwDstEncoding), uintptr(unsafe.Pointer(pstmIn)), uintptr(unsafe.Pointer(pstmOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ConvertStringToUnicodeEx dispatches through IMultiLanguage2's vtable slot 19.
 func (self *IMultiLanguage2) ConvertStringToUnicodeEx(pdwMode *uint32, dwEncoding uint32, pSrcStr foundation.PSTR, pcSrcSize *uint32, pDstStr foundation.PWSTR, pcDstSize *uint32, dwFlag uint32, lpFallBack string) error {
 	_lpFallBack := win32.UTF16Ptr(lpFallBack)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwMode)), uintptr(dwEncoding), uintptr(unsafe.Pointer(pSrcStr)), uintptr(unsafe.Pointer(pcSrcSize)), uintptr(unsafe.Pointer(pDstStr)), uintptr(unsafe.Pointer(pcDstSize)), uintptr(dwFlag), uintptr(unsafe.Pointer(_lpFallBack)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ConvertStringFromUnicodeEx dispatches through IMultiLanguage2's vtable slot 20.
@@ -777,61 +777,61 @@ func (self *IMultiLanguage2) ConvertStringFromUnicodeEx(pdwMode *uint32, dwEncod
 	_pSrcStr := win32.UTF16Ptr(pSrcStr)
 	_lpFallBack := win32.UTF16Ptr(lpFallBack)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwMode)), uintptr(dwEncoding), uintptr(unsafe.Pointer(_pSrcStr)), uintptr(unsafe.Pointer(pcSrcSize)), uintptr(unsafe.Pointer(pDstStr)), uintptr(unsafe.Pointer(pcDstSize)), uintptr(dwFlag), uintptr(unsafe.Pointer(_lpFallBack)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DetectCodepageInIStream dispatches through IMultiLanguage2's vtable slot 21.
 func (self *IMultiLanguage2) DetectCodepageInIStream(dwFlag uint32, dwPrefWinCodePage uint32, pstmIn *systemcom.IStream, lpEncoding *DetectEncodingInfo, pnScores *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(dwFlag), uintptr(dwPrefWinCodePage), uintptr(unsafe.Pointer(pstmIn)), uintptr(unsafe.Pointer(lpEncoding)), uintptr(unsafe.Pointer(pnScores)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DetectInputCodepage dispatches through IMultiLanguage2's vtable slot 22.
 func (self *IMultiLanguage2) DetectInputCodepage(dwFlag uint32, dwPrefWinCodePage uint32, pSrcStr foundation.PSTR, pcSrcSize *int32, lpEncoding *DetectEncodingInfo, pnScores *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(dwFlag), uintptr(dwPrefWinCodePage), uintptr(unsafe.Pointer(pSrcStr)), uintptr(unsafe.Pointer(pcSrcSize)), uintptr(unsafe.Pointer(lpEncoding)), uintptr(unsafe.Pointer(pnScores)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ValidateCodePage dispatches through IMultiLanguage2's vtable slot 23.
 func (self *IMultiLanguage2) ValidateCodePage(uiCodePage uint32, hwnd foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(uiCodePage), uintptr(hwnd))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCodePageDescription dispatches through IMultiLanguage2's vtable slot 24.
 func (self *IMultiLanguage2) GetCodePageDescription(uiCodePage uint32, lcid uint32, lpWideCharStr foundation.PWSTR, cchWideChar int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(uiCodePage), uintptr(lcid), uintptr(unsafe.Pointer(lpWideCharStr)), uintptr(cchWideChar))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsCodePageInstallable dispatches through IMultiLanguage2's vtable slot 25.
 func (self *IMultiLanguage2) IsCodePageInstallable(uiCodePage uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(uiCodePage))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMimeDBSource dispatches through IMultiLanguage2's vtable slot 26.
 func (self *IMultiLanguage2) SetMimeDBSource(dwSource MIMECONTF) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(dwSource))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNumberOfScripts dispatches through IMultiLanguage2's vtable slot 27.
 func (self *IMultiLanguage2) GetNumberOfScripts(pnScripts *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnScripts)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumScripts dispatches through IMultiLanguage2's vtable slot 28.
 func (self *IMultiLanguage2) EnumScripts(dwFlags uint32, LangId uint16, ppEnumScript **IEnumScript) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(LangId), uintptr(unsafe.Pointer(ppEnumScript)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ValidateCodePageEx dispatches through IMultiLanguage2's vtable slot 29.
 func (self *IMultiLanguage2) ValidateCodePageEx(uiCodePage uint32, hwnd foundation.HWND, dwfIODControl uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(uiCodePage), uintptr(hwnd), uintptr(dwfIODControl))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 4e5868ab-b157-4623-9acc-6a1d9caebe04
@@ -851,7 +851,7 @@ func (self *IMultiLanguage3) DetectOutboundCodePage(dwFlags uint32, lpWideCharSt
 	}
 	_lpSpecialChar := win32.UTF16Ptr(lpSpecialChar)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpWideCharStr)), uintptr(cchWideChar), uintptr(unsafe.Pointer(_puiPreferredCodePages)), uintptr(len(puiPreferredCodePages)), uintptr(unsafe.Pointer(puiDetectedCodePages)), uintptr(unsafe.Pointer(pnDetectedCodePages)), uintptr(unsafe.Pointer(_lpSpecialChar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DetectOutboundCodePageInIStream dispatches through IMultiLanguage3's vtable slot 31.
@@ -862,7 +862,7 @@ func (self *IMultiLanguage3) DetectOutboundCodePageInIStream(dwFlags uint32, pSt
 	}
 	_lpSpecialChar := win32.UTF16Ptr(lpSpecialChar)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(pStrIn)), uintptr(unsafe.Pointer(_puiPreferredCodePages)), uintptr(len(puiPreferredCodePages)), uintptr(unsafe.Pointer(puiDetectedCodePages)), uintptr(unsafe.Pointer(pnDetectedCodePages)), uintptr(unsafe.Pointer(_lpSpecialChar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IOptionDescription: https://learn.microsoft.com/windows/win32/api/spellcheck/nn-spellcheck-ioptiondescription
@@ -878,28 +878,28 @@ var IID_IOptionDescription = win32.GUID{Data1: 0x432e5f85, Data2: 0x35cf, Data3:
 func (self *IOptionDescription) Get_Id() (foundation.PWSTR, error) {
 	var _value foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Heading dispatches through IOptionDescription's vtable slot 4.
 func (self *IOptionDescription) Get_Heading() (foundation.PWSTR, error) {
 	var _value foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through IOptionDescription's vtable slot 5.
 func (self *IOptionDescription) Get_Description() (foundation.PWSTR, error) {
 	var _value foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Labels dispatches through IOptionDescription's vtable slot 6.
 func (self *IOptionDescription) Get_Labels() (*systemcom.IEnumString, error) {
 	var _value *systemcom.IEnumString
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // ISpellCheckProvider: https://learn.microsoft.com/windows/win32/api/spellcheckprovider/nn-spellcheckprovider-ispellcheckprovider
@@ -915,7 +915,7 @@ var IID_ISpellCheckProvider = win32.GUID{Data1: 0x73e976e0, Data2: 0x8ed4, Data3
 func (self *ISpellCheckProvider) Get_LanguageTag() (foundation.PWSTR, error) {
 	var _value foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // Check dispatches through ISpellCheckProvider's vtable slot 4.
@@ -923,7 +923,7 @@ func (self *ISpellCheckProvider) Check(text string) (*IEnumSpellingError, error)
 	_text := win32.UTF16Ptr(text)
 	var _value *IEnumSpellingError
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_text)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // Suggest dispatches through ISpellCheckProvider's vtable slot 5.
@@ -931,7 +931,7 @@ func (self *ISpellCheckProvider) Suggest(word string) (*systemcom.IEnumString, e
 	_word := win32.UTF16Ptr(word)
 	var _value *systemcom.IEnumString
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_word)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // GetOptionValue dispatches through ISpellCheckProvider's vtable slot 6.
@@ -939,35 +939,35 @@ func (self *ISpellCheckProvider) GetOptionValue(optionId string) (byte, error) {
 	_optionId := win32.UTF16Ptr(optionId)
 	var _value byte
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_optionId)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // SetOptionValue dispatches through ISpellCheckProvider's vtable slot 7.
 func (self *ISpellCheckProvider) SetOptionValue(optionId string, value byte) error {
 	_optionId := win32.UTF16Ptr(optionId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_optionId)), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OptionIds dispatches through ISpellCheckProvider's vtable slot 8.
 func (self *ISpellCheckProvider) Get_OptionIds() (*systemcom.IEnumString, error) {
 	var _value *systemcom.IEnumString
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Id dispatches through ISpellCheckProvider's vtable slot 9.
 func (self *ISpellCheckProvider) Get_Id() (foundation.PWSTR, error) {
 	var _value foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LocalizedName dispatches through ISpellCheckProvider's vtable slot 10.
 func (self *ISpellCheckProvider) Get_LocalizedName() (foundation.PWSTR, error) {
 	var _value foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // GetOptionDescription dispatches through ISpellCheckProvider's vtable slot 11.
@@ -975,13 +975,13 @@ func (self *ISpellCheckProvider) GetOptionDescription(optionId string) (*IOption
 	_optionId := win32.UTF16Ptr(optionId)
 	var _value *IOptionDescription
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_optionId)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeWordlist dispatches through ISpellCheckProvider's vtable slot 12.
 func (self *ISpellCheckProvider) InitializeWordlist(wordlistType WORDLIST_TYPE, words *systemcom.IEnumString) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(wordlistType), uintptr(unsafe.Pointer(words)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISpellCheckProviderFactory: https://learn.microsoft.com/windows/win32/api/spellcheckprovider/nn-spellcheckprovider-ispellcheckproviderfactory
@@ -997,7 +997,7 @@ var IID_ISpellCheckProviderFactory = win32.GUID{Data1: 0x9f671e11, Data2: 0x77d6
 func (self *ISpellCheckProviderFactory) Get_SupportedLanguages() (*systemcom.IEnumString, error) {
 	var _value *systemcom.IEnumString
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // IsSupported dispatches through ISpellCheckProviderFactory's vtable slot 4.
@@ -1005,7 +1005,7 @@ func (self *ISpellCheckProviderFactory) IsSupported(languageTag string) (foundat
 	_languageTag := win32.UTF16Ptr(languageTag)
 	var _value foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_languageTag)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSpellCheckProvider dispatches through ISpellCheckProviderFactory's vtable slot 5.
@@ -1013,7 +1013,7 @@ func (self *ISpellCheckProviderFactory) CreateSpellCheckProvider(languageTag str
 	_languageTag := win32.UTF16Ptr(languageTag)
 	var _value *ISpellCheckProvider
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_languageTag)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // ISpellChecker: https://learn.microsoft.com/windows/win32/api/spellcheck/nn-spellcheck-ispellchecker
@@ -1029,7 +1029,7 @@ var IID_ISpellChecker = win32.GUID{Data1: 0xb6fd0b71, Data2: 0xe2bc, Data3: 0x46
 func (self *ISpellChecker) Get_LanguageTag() (foundation.PWSTR, error) {
 	var _value foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // Check dispatches through ISpellChecker's vtable slot 4.
@@ -1037,7 +1037,7 @@ func (self *ISpellChecker) Check(text string) (*IEnumSpellingError, error) {
 	_text := win32.UTF16Ptr(text)
 	var _value *IEnumSpellingError
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_text)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // Suggest dispatches through ISpellChecker's vtable slot 5.
@@ -1045,21 +1045,21 @@ func (self *ISpellChecker) Suggest(word string) (*systemcom.IEnumString, error) 
 	_word := win32.UTF16Ptr(word)
 	var _value *systemcom.IEnumString
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_word)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through ISpellChecker's vtable slot 6.
 func (self *ISpellChecker) Add(word string) error {
 	_word := win32.UTF16Ptr(word)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_word)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Ignore dispatches through ISpellChecker's vtable slot 7.
 func (self *ISpellChecker) Ignore(word string) error {
 	_word := win32.UTF16Ptr(word)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_word)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AutoCorrect dispatches through ISpellChecker's vtable slot 8.
@@ -1067,7 +1067,7 @@ func (self *ISpellChecker) AutoCorrect(from string, to string) error {
 	_from := win32.UTF16Ptr(from)
 	_to := win32.UTF16Ptr(to)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_from)), uintptr(unsafe.Pointer(_to)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOptionValue dispatches through ISpellChecker's vtable slot 9.
@@ -1075,41 +1075,41 @@ func (self *ISpellChecker) GetOptionValue(optionId string) (byte, error) {
 	_optionId := win32.UTF16Ptr(optionId)
 	var _value byte
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_optionId)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OptionIds dispatches through ISpellChecker's vtable slot 10.
 func (self *ISpellChecker) Get_OptionIds() (*systemcom.IEnumString, error) {
 	var _value *systemcom.IEnumString
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Id dispatches through ISpellChecker's vtable slot 11.
 func (self *ISpellChecker) Get_Id() (foundation.PWSTR, error) {
 	var _value foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LocalizedName dispatches through ISpellChecker's vtable slot 12.
 func (self *ISpellChecker) Get_LocalizedName() (foundation.PWSTR, error) {
 	var _value foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // Add_SpellCheckerChanged dispatches through ISpellChecker's vtable slot 13.
 func (self *ISpellChecker) Add_SpellCheckerChanged(handler *ISpellCheckerChangedEventHandler) (uint32, error) {
 	var _eventCookie uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(handler)), uintptr(unsafe.Pointer(&_eventCookie)))
-	return _eventCookie, win32.HRESULTError(int32(r1))
+	return _eventCookie, win32.ErrIfFailed(int32(r1))
 }
 
 // Remove_SpellCheckerChanged dispatches through ISpellChecker's vtable slot 14.
 func (self *ISpellChecker) Remove_SpellCheckerChanged(eventCookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(eventCookie))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOptionDescription dispatches through ISpellChecker's vtable slot 15.
@@ -1117,7 +1117,7 @@ func (self *ISpellChecker) GetOptionDescription(optionId string) (*IOptionDescri
 	_optionId := win32.UTF16Ptr(optionId)
 	var _value *IOptionDescription
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_optionId)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // ComprehensiveCheck dispatches through ISpellChecker's vtable slot 16.
@@ -1125,7 +1125,7 @@ func (self *ISpellChecker) ComprehensiveCheck(text string) (*IEnumSpellingError,
 	_text := win32.UTF16Ptr(text)
 	var _value *IEnumSpellingError
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_text)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // ISpellChecker2: https://learn.microsoft.com/windows/win32/api/spellcheck/nn-spellcheck-ispellchecker2
@@ -1141,7 +1141,7 @@ var IID_ISpellChecker2 = win32.GUID{Data1: 0xe7ed1c71, Data2: 0x87f7, Data3: 0x4
 func (self *ISpellChecker2) Remove(word string) error {
 	_word := win32.UTF16Ptr(word)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_word)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISpellCheckerChangedEventHandler: https://learn.microsoft.com/windows/win32/api/spellcheck/nn-spellcheck-ispellcheckerchangedeventhandler
@@ -1156,7 +1156,7 @@ var IID_ISpellCheckerChangedEventHandler = win32.GUID{Data1: 0x0b83a5b0, Data2: 
 // Invoke dispatches through ISpellCheckerChangedEventHandler's vtable slot 3.
 func (self *ISpellCheckerChangedEventHandler) Invoke(sender *ISpellChecker) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sender)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISpellCheckerFactory: https://learn.microsoft.com/windows/win32/api/spellcheck/nn-spellcheck-ispellcheckerfactory
@@ -1172,7 +1172,7 @@ var IID_ISpellCheckerFactory = win32.GUID{Data1: 0x8e018a9d, Data2: 0x2415, Data
 func (self *ISpellCheckerFactory) Get_SupportedLanguages() (*systemcom.IEnumString, error) {
 	var _value *systemcom.IEnumString
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // IsSupported dispatches through ISpellCheckerFactory's vtable slot 4.
@@ -1180,7 +1180,7 @@ func (self *ISpellCheckerFactory) IsSupported(languageTag string) (foundation.BO
 	_languageTag := win32.UTF16Ptr(languageTag)
 	var _value foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_languageTag)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSpellChecker dispatches through ISpellCheckerFactory's vtable slot 5.
@@ -1188,7 +1188,7 @@ func (self *ISpellCheckerFactory) CreateSpellChecker(languageTag string) (*ISpel
 	_languageTag := win32.UTF16Ptr(languageTag)
 	var _value *ISpellChecker
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_languageTag)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // ISpellingError: https://learn.microsoft.com/windows/win32/api/spellcheck/nn-spellcheck-ispellingerror
@@ -1204,28 +1204,28 @@ var IID_ISpellingError = win32.GUID{Data1: 0xb7c82d61, Data2: 0xfbe8, Data3: 0x4
 func (self *ISpellingError) Get_StartIndex() (uint32, error) {
 	var _value uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Length dispatches through ISpellingError's vtable slot 4.
 func (self *ISpellingError) Get_Length() (uint32, error) {
 	var _value uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CorrectiveAction dispatches through ISpellingError's vtable slot 5.
 func (self *ISpellingError) Get_CorrectiveAction() (CORRECTIVE_ACTION, error) {
 	var _value CORRECTIVE_ACTION
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Replacement dispatches through ISpellingError's vtable slot 6.
 func (self *ISpellingError) Get_Replacement() (foundation.PWSTR, error) {
 	var _value foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // IUserDictionariesRegistrar: https://learn.microsoft.com/windows/win32/api/spellcheck/nn-spellcheck-iuserdictionariesregistrar
@@ -1242,7 +1242,7 @@ func (self *IUserDictionariesRegistrar) RegisterUserDictionary(dictionaryPath st
 	_dictionaryPath := win32.UTF16Ptr(dictionaryPath)
 	_languageTag := win32.UTF16Ptr(languageTag)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_dictionaryPath)), uintptr(unsafe.Pointer(_languageTag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnregisterUserDictionary dispatches through IUserDictionariesRegistrar's vtable slot 4.
@@ -1250,5 +1250,5 @@ func (self *IUserDictionariesRegistrar) UnregisterUserDictionary(dictionaryPath 
 	_dictionaryPath := win32.UTF16Ptr(dictionaryPath)
 	_languageTag := win32.UTF16Ptr(languageTag)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_dictionaryPath)), uintptr(unsafe.Pointer(_languageTag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

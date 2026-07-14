@@ -137,7 +137,7 @@ var (
 // Minimum OS: windows5.0.
 func BindMoniker(pmk *IMoniker, grfOpt uint32, iidResult *win32.GUID, ppvResult **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procBindMoniker.Addr(), uintptr(unsafe.Pointer(pmk)), uintptr(grfOpt), uintptr(unsafe.Pointer(iidResult)), uintptr(unsafe.Pointer(ppvResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CLSIDFromProgID calls OLE32!CLSIDFromProgID.
@@ -146,7 +146,7 @@ func BindMoniker(pmk *IMoniker, grfOpt uint32, iidResult *win32.GUID, ppvResult 
 func CLSIDFromProgID(lpszProgID string, lpclsid *win32.GUID) error {
 	_lpszProgID := win32.UTF16Ptr(lpszProgID)
 	r1, _, _ := syscall.SyscallN(procCLSIDFromProgID.Addr(), uintptr(unsafe.Pointer(_lpszProgID)), uintptr(unsafe.Pointer(lpclsid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CLSIDFromProgIDEx calls OLE32!CLSIDFromProgIDEx.
@@ -155,7 +155,7 @@ func CLSIDFromProgID(lpszProgID string, lpclsid *win32.GUID) error {
 func CLSIDFromProgIDEx(lpszProgID string, lpclsid *win32.GUID) error {
 	_lpszProgID := win32.UTF16Ptr(lpszProgID)
 	r1, _, _ := syscall.SyscallN(procCLSIDFromProgIDEx.Addr(), uintptr(unsafe.Pointer(_lpszProgID)), uintptr(unsafe.Pointer(lpclsid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CLSIDFromString calls OLE32!CLSIDFromString.
@@ -164,7 +164,7 @@ func CLSIDFromProgIDEx(lpszProgID string, lpclsid *win32.GUID) error {
 func CLSIDFromString(lpsz string, pclsid *win32.GUID) error {
 	_lpsz := win32.UTF16Ptr(lpsz)
 	r1, _, _ := syscall.SyscallN(procCLSIDFromString.Addr(), uintptr(unsafe.Pointer(_lpsz)), uintptr(unsafe.Pointer(pclsid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoAddRefServerProcess calls OLE32!CoAddRefServerProcess.
@@ -180,7 +180,7 @@ func CoAddRefServerProcess() uint32 {
 // Minimum OS: windows5.0.
 func CoAllowSetForegroundWindow(pUnk *IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCoAllowSetForegroundWindow.Addr(), uintptr(unsafe.Pointer(pUnk)), 0)
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoAllowUnmarshalerCLSID calls OLE32!CoAllowUnmarshalerCLSID.
@@ -188,7 +188,7 @@ func CoAllowSetForegroundWindow(pUnk *IUnknown) error {
 // Minimum OS: windows8.0.
 func CoAllowUnmarshalerCLSID(clsid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procCoAllowUnmarshalerCLSID.Addr(), uintptr(unsafe.Pointer(clsid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoBuildVersion calls ole32!CoBuildVersion.
@@ -202,7 +202,7 @@ func CoBuildVersion() uint32 {
 // Minimum OS: windows5.0.
 func CoCancelCall(dwThreadId uint32, ulTimeout uint32) error {
 	r1, _, _ := syscall.SyscallN(procCoCancelCall.Addr(), uintptr(dwThreadId), uintptr(ulTimeout))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoCopyProxy calls OLE32!CoCopyProxy.
@@ -210,7 +210,7 @@ func CoCancelCall(dwThreadId uint32, ulTimeout uint32) error {
 // Minimum OS: windows5.0.
 func CoCopyProxy(pProxy *IUnknown, ppCopy **IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCoCopyProxy.Addr(), uintptr(unsafe.Pointer(pProxy)), uintptr(unsafe.Pointer(ppCopy)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoCreateFreeThreadedMarshaler calls OLE32!CoCreateFreeThreadedMarshaler.
@@ -218,7 +218,7 @@ func CoCopyProxy(pProxy *IUnknown, ppCopy **IUnknown) error {
 // Minimum OS: windows5.0.
 func CoCreateFreeThreadedMarshaler(punkOuter *IUnknown, ppunkMarshal **IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCoCreateFreeThreadedMarshaler.Addr(), uintptr(unsafe.Pointer(punkOuter)), uintptr(unsafe.Pointer(ppunkMarshal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoCreateGuid calls OLE32!CoCreateGuid.
@@ -226,7 +226,7 @@ func CoCreateFreeThreadedMarshaler(punkOuter *IUnknown, ppunkMarshal **IUnknown)
 // Minimum OS: windows5.0.
 func CoCreateGuid(pguid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procCoCreateGuid.Addr(), uintptr(unsafe.Pointer(pguid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoCreateInstance calls OLE32!CoCreateInstance.
@@ -234,7 +234,7 @@ func CoCreateGuid(pguid *win32.GUID) error {
 // Minimum OS: windows5.0.
 func CoCreateInstance(rclsid *win32.GUID, pUnkOuter *IUnknown, dwClsContext CLSCTX, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCoCreateInstance.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(dwClsContext), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoCreateInstanceEx calls OLE32!CoCreateInstanceEx.
@@ -246,7 +246,7 @@ func CoCreateInstanceEx(Clsid *win32.GUID, punkOuter *IUnknown, dwClsCtx CLSCTX,
 		_pResults = &pResults[0]
 	}
 	r1, _, _ := syscall.SyscallN(procCoCreateInstanceEx.Addr(), uintptr(unsafe.Pointer(Clsid)), uintptr(unsafe.Pointer(punkOuter)), uintptr(dwClsCtx), uintptr(unsafe.Pointer(pServerInfo)), uintptr(len(pResults)), uintptr(unsafe.Pointer(_pResults)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoCreateInstanceFromApp calls OLE32!CoCreateInstanceFromApp.
@@ -258,14 +258,14 @@ func CoCreateInstanceFromApp(Clsid *win32.GUID, punkOuter *IUnknown, dwClsCtx CL
 		_pResults = &pResults[0]
 	}
 	r1, _, _ := syscall.SyscallN(procCoCreateInstanceFromApp.Addr(), uintptr(unsafe.Pointer(Clsid)), uintptr(unsafe.Pointer(punkOuter)), uintptr(dwClsCtx), uintptr(unsafe.Pointer(reserved)), uintptr(len(pResults)), uintptr(unsafe.Pointer(_pResults)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoDecrementMTAUsage calls OLE32!CoDecrementMTAUsage.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-codecrementmtausage
 func CoDecrementMTAUsage(Cookie CO_MTA_USAGE_COOKIE) error {
 	r1, _, _ := syscall.SyscallN(procCoDecrementMTAUsage.Addr(), uintptr(Cookie))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoDisableCallCancellation calls OLE32!CoDisableCallCancellation.
@@ -273,7 +273,7 @@ func CoDecrementMTAUsage(Cookie CO_MTA_USAGE_COOKIE) error {
 // Minimum OS: windows5.0.
 func CoDisableCallCancellation() error {
 	r1, _, _ := syscall.SyscallN(procCoDisableCallCancellation.Addr(), 0)
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoDisconnectContext calls OLE32!CoDisconnectContext.
@@ -281,7 +281,7 @@ func CoDisableCallCancellation() error {
 // Minimum OS: windows6.0.6000.
 func CoDisconnectContext(dwTimeout uint32) error {
 	r1, _, _ := syscall.SyscallN(procCoDisconnectContext.Addr(), uintptr(dwTimeout))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoDisconnectObject calls OLE32!CoDisconnectObject.
@@ -289,7 +289,7 @@ func CoDisconnectContext(dwTimeout uint32) error {
 // Minimum OS: windows5.0.
 func CoDisconnectObject(pUnk *IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCoDisconnectObject.Addr(), uintptr(unsafe.Pointer(pUnk)), 0)
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoDosDateTimeToFileTime calls OLE32!CoDosDateTimeToFileTime.
@@ -305,7 +305,7 @@ func CoDosDateTimeToFileTime(nDosDate uint16, nDosTime uint16, lpFileTime *found
 // Minimum OS: windows5.0.
 func CoEnableCallCancellation() error {
 	r1, _, _ := syscall.SyscallN(procCoEnableCallCancellation.Addr(), 0)
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoFileTimeNow calls OLE32!CoFileTimeNow.
@@ -313,7 +313,7 @@ func CoEnableCallCancellation() error {
 // Minimum OS: windows5.0.
 func CoFileTimeNow(lpFileTime *foundation.FILETIME) error {
 	r1, _, _ := syscall.SyscallN(procCoFileTimeNow.Addr(), uintptr(unsafe.Pointer(lpFileTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoFileTimeToDosDateTime calls OLE32!CoFileTimeToDosDateTime.
@@ -357,7 +357,7 @@ func CoFreeUnusedLibrariesEx(dwUnloadDelay uint32) {
 // Minimum OS: windows6.1.
 func CoGetApartmentType(pAptType *APTTYPE, pAptQualifier *APTTYPEQUALIFIER) error {
 	r1, _, _ := syscall.SyscallN(procCoGetApartmentType.Addr(), uintptr(unsafe.Pointer(pAptType)), uintptr(unsafe.Pointer(pAptQualifier)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoGetCallContext calls OLE32!CoGetCallContext.
@@ -365,7 +365,7 @@ func CoGetApartmentType(pAptType *APTTYPE, pAptQualifier *APTTYPEQUALIFIER) erro
 // Minimum OS: windows5.0.
 func CoGetCallContext(riid *win32.GUID, ppInterface **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCoGetCallContext.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppInterface)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoGetCallerTID calls OLE32!CoGetCallerTID.
@@ -373,7 +373,7 @@ func CoGetCallContext(riid *win32.GUID, ppInterface **win32.IUnknown) error {
 // Minimum OS: windows5.0.
 func CoGetCallerTID(lpdwTID *uint32) error {
 	r1, _, _ := syscall.SyscallN(procCoGetCallerTID.Addr(), uintptr(unsafe.Pointer(lpdwTID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoGetCancelObject calls OLE32!CoGetCancelObject.
@@ -381,7 +381,7 @@ func CoGetCallerTID(lpdwTID *uint32) error {
 // Minimum OS: windows5.0.
 func CoGetCancelObject(dwThreadId uint32, iid *win32.GUID, ppUnk **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCoGetCancelObject.Addr(), uintptr(dwThreadId), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(ppUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoGetClassObject calls OLE32!CoGetClassObject.
@@ -389,7 +389,7 @@ func CoGetCancelObject(dwThreadId uint32, iid *win32.GUID, ppUnk **win32.IUnknow
 // Minimum OS: windows5.0.
 func CoGetClassObject(rclsid *win32.GUID, dwClsContext uint32, pvReserved unsafe.Pointer, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCoGetClassObject.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(dwClsContext), uintptr(unsafe.Pointer(pvReserved)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoGetContextToken calls OLE32!CoGetContextToken.
@@ -397,7 +397,7 @@ func CoGetClassObject(rclsid *win32.GUID, dwClsContext uint32, pvReserved unsafe
 // Minimum OS: windows5.0.
 func CoGetContextToken(pToken *uintptr) error {
 	r1, _, _ := syscall.SyscallN(procCoGetContextToken.Addr(), uintptr(unsafe.Pointer(pToken)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoGetCurrentLogicalThreadId calls OLE32!CoGetCurrentLogicalThreadId.
@@ -405,7 +405,7 @@ func CoGetContextToken(pToken *uintptr) error {
 // Minimum OS: windows5.0.
 func CoGetCurrentLogicalThreadId(pguid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procCoGetCurrentLogicalThreadId.Addr(), uintptr(unsafe.Pointer(pguid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoGetCurrentProcess calls OLE32!CoGetCurrentProcess.
@@ -421,7 +421,7 @@ func CoGetCurrentProcess() uint32 {
 // Minimum OS: windows5.0.
 func CoGetMalloc(dwMemContext uint32, ppMalloc **IMalloc) error {
 	r1, _, _ := syscall.SyscallN(procCoGetMalloc.Addr(), uintptr(dwMemContext), uintptr(unsafe.Pointer(ppMalloc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoGetObject calls OLE32!CoGetObject.
@@ -430,7 +430,7 @@ func CoGetMalloc(dwMemContext uint32, ppMalloc **IMalloc) error {
 func CoGetObject(pszName string, pBindOptions *BIND_OPTS, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszName := win32.UTF16Ptr(pszName)
 	r1, _, _ := syscall.SyscallN(procCoGetObject.Addr(), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(pBindOptions)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoGetObjectContext calls OLE32!CoGetObjectContext.
@@ -438,7 +438,7 @@ func CoGetObject(pszName string, pBindOptions *BIND_OPTS, riid *win32.GUID, ppv 
 // Minimum OS: windows5.0.
 func CoGetObjectContext(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCoGetObjectContext.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoGetPSClsid calls OLE32!CoGetPSClsid.
@@ -446,7 +446,7 @@ func CoGetObjectContext(riid *win32.GUID, ppv **win32.IUnknown) error {
 // Minimum OS: windows5.0.
 func CoGetPSClsid(riid *win32.GUID, pClsid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procCoGetPSClsid.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pClsid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoGetSystemSecurityPermissions calls OLE32!CoGetSystemSecurityPermissions.
@@ -454,7 +454,7 @@ func CoGetPSClsid(riid *win32.GUID, pClsid *win32.GUID) error {
 // Minimum OS: windows5.0.
 func CoGetSystemSecurityPermissions(comSDType COMSD, ppSD *security.PSECURITY_DESCRIPTOR) error {
 	r1, _, _ := syscall.SyscallN(procCoGetSystemSecurityPermissions.Addr(), uintptr(comSDType), uintptr(unsafe.Pointer(ppSD)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoGetTreatAsClass calls OLE32!CoGetTreatAsClass.
@@ -462,7 +462,7 @@ func CoGetSystemSecurityPermissions(comSDType COMSD, ppSD *security.PSECURITY_DE
 // Minimum OS: windows5.0.
 func CoGetTreatAsClass(clsidOld *win32.GUID, pClsidNew *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procCoGetTreatAsClass.Addr(), uintptr(unsafe.Pointer(clsidOld)), uintptr(unsafe.Pointer(pClsidNew)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoImpersonateClient calls OLE32!CoImpersonateClient.
@@ -470,14 +470,14 @@ func CoGetTreatAsClass(clsidOld *win32.GUID, pClsidNew *win32.GUID) error {
 // Minimum OS: windows5.0.
 func CoImpersonateClient() error {
 	r1, _, _ := syscall.SyscallN(procCoImpersonateClient.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoIncrementMTAUsage calls OLE32!CoIncrementMTAUsage.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-coincrementmtausage
 func CoIncrementMTAUsage(pCookie *CO_MTA_USAGE_COOKIE) error {
 	r1, _, _ := syscall.SyscallN(procCoIncrementMTAUsage.Addr(), uintptr(unsafe.Pointer(pCookie)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoInitialize calls OLE32!CoInitialize.
@@ -485,7 +485,7 @@ func CoIncrementMTAUsage(pCookie *CO_MTA_USAGE_COOKIE) error {
 // Minimum OS: windows5.0.
 func CoInitialize() error {
 	r1, _, _ := syscall.SyscallN(procCoInitialize.Addr(), 0)
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoInitializeEx calls OLE32!CoInitializeEx.
@@ -493,7 +493,7 @@ func CoInitialize() error {
 // Minimum OS: windows5.0.
 func CoInitializeEx(dwCoInit uint32) error {
 	r1, _, _ := syscall.SyscallN(procCoInitializeEx.Addr(), 0, uintptr(dwCoInit))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoInitializeSecurity calls OLE32!CoInitializeSecurity.
@@ -501,7 +501,7 @@ func CoInitializeEx(dwCoInit uint32) error {
 // Minimum OS: windows5.0.
 func CoInitializeSecurity(pSecDesc security.PSECURITY_DESCRIPTOR, cAuthSvc int32, asAuthSvc *SOLE_AUTHENTICATION_SERVICE, dwAuthnLevel RPC_C_AUTHN_LEVEL, dwImpLevel RPC_C_IMP_LEVEL, pAuthList unsafe.Pointer, dwCapabilities uint32) error {
 	r1, _, _ := syscall.SyscallN(procCoInitializeSecurity.Addr(), uintptr(pSecDesc), uintptr(cAuthSvc), uintptr(unsafe.Pointer(asAuthSvc)), 0, uintptr(dwAuthnLevel), uintptr(dwImpLevel), uintptr(unsafe.Pointer(pAuthList)), uintptr(dwCapabilities), 0)
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoInstall calls ole32!CoInstall.
@@ -509,7 +509,7 @@ func CoInitializeSecurity(pSecDesc security.PSECURITY_DESCRIPTOR, cAuthSvc int32
 func CoInstall(pbc *IBindCtx, dwFlags uint32, pClassSpec *UCLSSPEC, pQuery *QUERYCONTEXT, pszCodeBase string) error {
 	_pszCodeBase := win32.UTF16Ptr(pszCodeBase)
 	r1, _, _ := syscall.SyscallN(procCoInstall.Addr(), uintptr(unsafe.Pointer(pbc)), uintptr(dwFlags), uintptr(unsafe.Pointer(pClassSpec)), uintptr(unsafe.Pointer(pQuery)), uintptr(unsafe.Pointer(_pszCodeBase)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoInvalidateRemoteMachineBindings calls OLE32!CoInvalidateRemoteMachineBindings.
@@ -518,7 +518,7 @@ func CoInstall(pbc *IBindCtx, dwFlags uint32, pClassSpec *UCLSSPEC, pQuery *QUER
 func CoInvalidateRemoteMachineBindings(pszMachineName string) error {
 	_pszMachineName := win32.UTF16Ptr(pszMachineName)
 	r1, _, _ := syscall.SyscallN(procCoInvalidateRemoteMachineBindings.Addr(), uintptr(unsafe.Pointer(_pszMachineName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoIsHandlerConnected calls OLE32!CoIsHandlerConnected.
@@ -554,7 +554,7 @@ func CoLockObjectExternal(pUnk *IUnknown, fLock bool, fLastUnlockReleases bool) 
 	_fLock := win32.Bool32(fLock)
 	_fLastUnlockReleases := win32.Bool32(fLastUnlockReleases)
 	r1, _, _ := syscall.SyscallN(procCoLockObjectExternal.Addr(), uintptr(unsafe.Pointer(pUnk)), uintptr(_fLock), uintptr(_fLastUnlockReleases))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoQueryAuthenticationServices calls OLE32!CoQueryAuthenticationServices.
@@ -562,7 +562,7 @@ func CoLockObjectExternal(pUnk *IUnknown, fLock bool, fLastUnlockReleases bool) 
 // Minimum OS: windows5.0.
 func CoQueryAuthenticationServices(pcAuthSvc *uint32, asAuthSvc **SOLE_AUTHENTICATION_SERVICE) error {
 	r1, _, _ := syscall.SyscallN(procCoQueryAuthenticationServices.Addr(), uintptr(unsafe.Pointer(pcAuthSvc)), uintptr(unsafe.Pointer(asAuthSvc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoQueryClientBlanket calls OLE32!CoQueryClientBlanket.
@@ -570,7 +570,7 @@ func CoQueryAuthenticationServices(pcAuthSvc *uint32, asAuthSvc **SOLE_AUTHENTIC
 // Minimum OS: windows5.0.
 func CoQueryClientBlanket(pAuthnSvc *uint32, pAuthzSvc *uint32, pServerPrincName *foundation.PWSTR, pAuthnLevel *uint32, pImpLevel *uint32, pPrivs *unsafe.Pointer, pCapabilities *uint32) error {
 	r1, _, _ := syscall.SyscallN(procCoQueryClientBlanket.Addr(), uintptr(unsafe.Pointer(pAuthnSvc)), uintptr(unsafe.Pointer(pAuthzSvc)), uintptr(unsafe.Pointer(pServerPrincName)), uintptr(unsafe.Pointer(pAuthnLevel)), uintptr(unsafe.Pointer(pImpLevel)), uintptr(unsafe.Pointer(pPrivs)), uintptr(unsafe.Pointer(pCapabilities)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoQueryProxyBlanket calls OLE32!CoQueryProxyBlanket.
@@ -578,7 +578,7 @@ func CoQueryClientBlanket(pAuthnSvc *uint32, pAuthzSvc *uint32, pServerPrincName
 // Minimum OS: windows5.0.
 func CoQueryProxyBlanket(pProxy *IUnknown, pwAuthnSvc *uint32, pAuthzSvc *uint32, pServerPrincName *foundation.PWSTR, pAuthnLevel *uint32, pImpLevel *uint32, pAuthInfo *unsafe.Pointer, pCapabilites *uint32) error {
 	r1, _, _ := syscall.SyscallN(procCoQueryProxyBlanket.Addr(), uintptr(unsafe.Pointer(pProxy)), uintptr(unsafe.Pointer(pwAuthnSvc)), uintptr(unsafe.Pointer(pAuthzSvc)), uintptr(unsafe.Pointer(pServerPrincName)), uintptr(unsafe.Pointer(pAuthnLevel)), uintptr(unsafe.Pointer(pImpLevel)), uintptr(unsafe.Pointer(pAuthInfo)), uintptr(unsafe.Pointer(pCapabilites)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoRegisterActivationFilter calls OLE32!CoRegisterActivationFilter.
@@ -586,14 +586,14 @@ func CoQueryProxyBlanket(pProxy *IUnknown, pwAuthnSvc *uint32, pAuthzSvc *uint32
 // Minimum OS: windows5.1.2600.
 func CoRegisterActivationFilter(pActivationFilter *IActivationFilter) error {
 	r1, _, _ := syscall.SyscallN(procCoRegisterActivationFilter.Addr(), uintptr(unsafe.Pointer(pActivationFilter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoRegisterChannelHook calls ole32!CoRegisterChannelHook.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-coregisterchannelhook
 func CoRegisterChannelHook(ExtensionUuid *win32.GUID, pChannelHook *IChannelHook) error {
 	r1, _, _ := syscall.SyscallN(procCoRegisterChannelHook.Addr(), uintptr(unsafe.Pointer(ExtensionUuid)), uintptr(unsafe.Pointer(pChannelHook)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoRegisterClassObject calls OLE32!CoRegisterClassObject.
@@ -601,7 +601,7 @@ func CoRegisterChannelHook(ExtensionUuid *win32.GUID, pChannelHook *IChannelHook
 // Minimum OS: windows5.0.
 func CoRegisterClassObject(rclsid *win32.GUID, pUnk *IUnknown, dwClsContext CLSCTX, flags uint32, lpdwRegister *uint32) error {
 	r1, _, _ := syscall.SyscallN(procCoRegisterClassObject.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(pUnk)), uintptr(dwClsContext), uintptr(flags), uintptr(unsafe.Pointer(lpdwRegister)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoRegisterDeviceCatalog calls OLE32!CoRegisterDeviceCatalog.
@@ -609,7 +609,7 @@ func CoRegisterClassObject(rclsid *win32.GUID, pUnk *IUnknown, dwClsContext CLSC
 func CoRegisterDeviceCatalog(deviceInstanceId string, cookie *CO_DEVICE_CATALOG_COOKIE) error {
 	_deviceInstanceId := win32.UTF16Ptr(deviceInstanceId)
 	r1, _, _ := syscall.SyscallN(procCoRegisterDeviceCatalog.Addr(), uintptr(unsafe.Pointer(_deviceInstanceId)), uintptr(unsafe.Pointer(cookie)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoRegisterInitializeSpy calls OLE32!CoRegisterInitializeSpy.
@@ -617,7 +617,7 @@ func CoRegisterDeviceCatalog(deviceInstanceId string, cookie *CO_DEVICE_CATALOG_
 // Minimum OS: windows5.1.2600.
 func CoRegisterInitializeSpy(pSpy *IInitializeSpy, puliCookie *uint64) error {
 	r1, _, _ := syscall.SyscallN(procCoRegisterInitializeSpy.Addr(), uintptr(unsafe.Pointer(pSpy)), uintptr(unsafe.Pointer(puliCookie)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoRegisterMallocSpy calls OLE32!CoRegisterMallocSpy.
@@ -625,7 +625,7 @@ func CoRegisterInitializeSpy(pSpy *IInitializeSpy, puliCookie *uint64) error {
 // Minimum OS: windows5.0.
 func CoRegisterMallocSpy(pMallocSpy *IMallocSpy) error {
 	r1, _, _ := syscall.SyscallN(procCoRegisterMallocSpy.Addr(), uintptr(unsafe.Pointer(pMallocSpy)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoRegisterPSClsid calls OLE32!CoRegisterPSClsid.
@@ -633,7 +633,7 @@ func CoRegisterMallocSpy(pMallocSpy *IMallocSpy) error {
 // Minimum OS: windows5.0.
 func CoRegisterPSClsid(riid *win32.GUID, rclsid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procCoRegisterPSClsid.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(rclsid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoRegisterSurrogate calls OLE32!CoRegisterSurrogate.
@@ -641,7 +641,7 @@ func CoRegisterPSClsid(riid *win32.GUID, rclsid *win32.GUID) error {
 // Minimum OS: windows5.0.
 func CoRegisterSurrogate(pSurrogate *ISurrogate) error {
 	r1, _, _ := syscall.SyscallN(procCoRegisterSurrogate.Addr(), uintptr(unsafe.Pointer(pSurrogate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoReleaseServerProcess calls OLE32!CoReleaseServerProcess.
@@ -657,7 +657,7 @@ func CoReleaseServerProcess() uint32 {
 // Minimum OS: windows5.0.
 func CoResumeClassObjects() error {
 	r1, _, _ := syscall.SyscallN(procCoResumeClassObjects.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoRevertToSelf calls OLE32!CoRevertToSelf.
@@ -665,7 +665,7 @@ func CoResumeClassObjects() error {
 // Minimum OS: windows5.0.
 func CoRevertToSelf() error {
 	r1, _, _ := syscall.SyscallN(procCoRevertToSelf.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoRevokeClassObject calls OLE32!CoRevokeClassObject.
@@ -673,14 +673,14 @@ func CoRevertToSelf() error {
 // Minimum OS: windows5.0.
 func CoRevokeClassObject(dwRegister uint32) error {
 	r1, _, _ := syscall.SyscallN(procCoRevokeClassObject.Addr(), uintptr(dwRegister))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoRevokeDeviceCatalog calls OLE32!CoRevokeDeviceCatalog.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-corevokedevicecatalog
 func CoRevokeDeviceCatalog(cookie CO_DEVICE_CATALOG_COOKIE) error {
 	r1, _, _ := syscall.SyscallN(procCoRevokeDeviceCatalog.Addr(), uintptr(cookie))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoRevokeInitializeSpy calls OLE32!CoRevokeInitializeSpy.
@@ -688,7 +688,7 @@ func CoRevokeDeviceCatalog(cookie CO_DEVICE_CATALOG_COOKIE) error {
 // Minimum OS: windows5.0.
 func CoRevokeInitializeSpy(uliCookie uint64) error {
 	r1, _, _ := syscall.SyscallN(procCoRevokeInitializeSpy.Addr(), uintptr(uliCookie))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoRevokeMallocSpy calls OLE32!CoRevokeMallocSpy.
@@ -696,7 +696,7 @@ func CoRevokeInitializeSpy(uliCookie uint64) error {
 // Minimum OS: windows5.0.
 func CoRevokeMallocSpy() error {
 	r1, _, _ := syscall.SyscallN(procCoRevokeMallocSpy.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoSetCancelObject calls OLE32!CoSetCancelObject.
@@ -704,7 +704,7 @@ func CoRevokeMallocSpy() error {
 // Minimum OS: windows5.0.
 func CoSetCancelObject(pUnk *IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCoSetCancelObject.Addr(), uintptr(unsafe.Pointer(pUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoSetProxyBlanket calls OLE32!CoSetProxyBlanket.
@@ -713,7 +713,7 @@ func CoSetCancelObject(pUnk *IUnknown) error {
 func CoSetProxyBlanket(pProxy *IUnknown, dwAuthnSvc uint32, dwAuthzSvc uint32, pServerPrincName string, dwAuthnLevel RPC_C_AUTHN_LEVEL, dwImpLevel RPC_C_IMP_LEVEL, pAuthInfo unsafe.Pointer, dwCapabilities uint32) error {
 	_pServerPrincName := win32.UTF16Ptr(pServerPrincName)
 	r1, _, _ := syscall.SyscallN(procCoSetProxyBlanket.Addr(), uintptr(unsafe.Pointer(pProxy)), uintptr(dwAuthnSvc), uintptr(dwAuthzSvc), uintptr(unsafe.Pointer(_pServerPrincName)), uintptr(dwAuthnLevel), uintptr(dwImpLevel), uintptr(unsafe.Pointer(pAuthInfo)), uintptr(dwCapabilities))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoSuspendClassObjects calls OLE32!CoSuspendClassObjects.
@@ -721,7 +721,7 @@ func CoSetProxyBlanket(pProxy *IUnknown, dwAuthnSvc uint32, dwAuthzSvc uint32, p
 // Minimum OS: windows5.0.
 func CoSuspendClassObjects() error {
 	r1, _, _ := syscall.SyscallN(procCoSuspendClassObjects.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoSwitchCallContext calls OLE32!CoSwitchCallContext.
@@ -729,7 +729,7 @@ func CoSuspendClassObjects() error {
 // Minimum OS: windows5.0.
 func CoSwitchCallContext(pNewObject *IUnknown, ppOldObject **IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCoSwitchCallContext.Addr(), uintptr(unsafe.Pointer(pNewObject)), uintptr(unsafe.Pointer(ppOldObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoTaskMemAlloc calls OLE32!CoTaskMemAlloc.
@@ -760,7 +760,7 @@ func CoTaskMemRealloc(pv unsafe.Pointer, cb uintptr) unsafe.Pointer {
 // Minimum OS: windows5.0.
 func CoTestCancel() error {
 	r1, _, _ := syscall.SyscallN(procCoTestCancel.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoTreatAsClass calls OLE32!CoTreatAsClass.
@@ -768,7 +768,7 @@ func CoTestCancel() error {
 // Minimum OS: windows5.0.
 func CoTreatAsClass(clsidOld *win32.GUID, clsidNew *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procCoTreatAsClass.Addr(), uintptr(unsafe.Pointer(clsidOld)), uintptr(unsafe.Pointer(clsidNew)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoUninitialize calls OLE32!CoUninitialize.
@@ -787,7 +787,7 @@ func CoWaitForMultipleHandles(dwFlags uint32, dwTimeout uint32, pHandles []found
 		_pHandles = &pHandles[0]
 	}
 	r1, _, _ := syscall.SyscallN(procCoWaitForMultipleHandles.Addr(), uintptr(dwFlags), uintptr(dwTimeout), uintptr(len(pHandles)), uintptr(unsafe.Pointer(_pHandles)), uintptr(unsafe.Pointer(lpdwindex)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoWaitForMultipleObjects calls OLE32!CoWaitForMultipleObjects.
@@ -798,7 +798,7 @@ func CoWaitForMultipleObjects(dwFlags uint32, dwTimeout uint32, pHandles []found
 		_pHandles = &pHandles[0]
 	}
 	r1, _, _ := syscall.SyscallN(procCoWaitForMultipleObjects.Addr(), uintptr(dwFlags), uintptr(dwTimeout), uintptr(len(pHandles)), uintptr(unsafe.Pointer(_pHandles)), uintptr(unsafe.Pointer(lpdwindex)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateAntiMoniker calls OLE32!CreateAntiMoniker.
@@ -806,7 +806,7 @@ func CoWaitForMultipleObjects(dwFlags uint32, dwTimeout uint32, pHandles []found
 // Minimum OS: windows5.0.
 func CreateAntiMoniker(ppmk **IMoniker) error {
 	r1, _, _ := syscall.SyscallN(procCreateAntiMoniker.Addr(), uintptr(unsafe.Pointer(ppmk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateBindCtx calls OLE32!CreateBindCtx.
@@ -814,7 +814,7 @@ func CreateAntiMoniker(ppmk **IMoniker) error {
 // Minimum OS: windows5.0.
 func CreateBindCtx(reserved uint32, ppbc **IBindCtx) error {
 	r1, _, _ := syscall.SyscallN(procCreateBindCtx.Addr(), uintptr(reserved), uintptr(unsafe.Pointer(ppbc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateClassMoniker calls OLE32!CreateClassMoniker.
@@ -822,7 +822,7 @@ func CreateBindCtx(reserved uint32, ppbc **IBindCtx) error {
 // Minimum OS: windows5.0.
 func CreateClassMoniker(rclsid *win32.GUID, ppmk **IMoniker) error {
 	r1, _, _ := syscall.SyscallN(procCreateClassMoniker.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(ppmk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateDataAdviseHolder calls OLE32!CreateDataAdviseHolder.
@@ -830,7 +830,7 @@ func CreateClassMoniker(rclsid *win32.GUID, ppmk **IMoniker) error {
 // Minimum OS: windows5.0.
 func CreateDataAdviseHolder(ppDAHolder **IDataAdviseHolder) error {
 	r1, _, _ := syscall.SyscallN(procCreateDataAdviseHolder.Addr(), uintptr(unsafe.Pointer(ppDAHolder)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateDataCache calls OLE32!CreateDataCache.
@@ -838,7 +838,7 @@ func CreateDataAdviseHolder(ppDAHolder **IDataAdviseHolder) error {
 // Minimum OS: windows5.0.
 func CreateDataCache(pUnkOuter *IUnknown, rclsid *win32.GUID, iid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCreateDataCache.Addr(), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateFileMoniker calls OLE32!CreateFileMoniker.
@@ -847,7 +847,7 @@ func CreateDataCache(pUnkOuter *IUnknown, rclsid *win32.GUID, iid *win32.GUID, p
 func CreateFileMoniker(lpszPathName string, ppmk **IMoniker) error {
 	_lpszPathName := win32.UTF16Ptr(lpszPathName)
 	r1, _, _ := syscall.SyscallN(procCreateFileMoniker.Addr(), uintptr(unsafe.Pointer(_lpszPathName)), uintptr(unsafe.Pointer(ppmk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateGenericComposite calls OLE32!CreateGenericComposite.
@@ -855,13 +855,13 @@ func CreateFileMoniker(lpszPathName string, ppmk **IMoniker) error {
 // Minimum OS: windows5.0.
 func CreateGenericComposite(pmkFirst *IMoniker, pmkRest *IMoniker, ppmkComposite **IMoniker) error {
 	r1, _, _ := syscall.SyscallN(procCreateGenericComposite.Addr(), uintptr(unsafe.Pointer(pmkFirst)), uintptr(unsafe.Pointer(pmkRest)), uintptr(unsafe.Pointer(ppmkComposite)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateIUriBuilder calls URLMON!CreateIUriBuilder.
 func CreateIUriBuilder(pIUri *IUri, dwFlags uint32, dwReserved uintptr, ppIUriBuilder **IUriBuilder) error {
 	r1, _, _ := syscall.SyscallN(procCreateIUriBuilder.Addr(), uintptr(unsafe.Pointer(pIUri)), uintptr(dwFlags), uintptr(dwReserved), uintptr(unsafe.Pointer(ppIUriBuilder)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateItemMoniker calls OLE32!CreateItemMoniker.
@@ -871,7 +871,7 @@ func CreateItemMoniker(lpszDelim string, lpszItem string, ppmk **IMoniker) error
 	_lpszDelim := win32.UTF16Ptr(lpszDelim)
 	_lpszItem := win32.UTF16Ptr(lpszItem)
 	r1, _, _ := syscall.SyscallN(procCreateItemMoniker.Addr(), uintptr(unsafe.Pointer(_lpszDelim)), uintptr(unsafe.Pointer(_lpszItem)), uintptr(unsafe.Pointer(ppmk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateObjrefMoniker calls OLE32!CreateObjrefMoniker.
@@ -879,7 +879,7 @@ func CreateItemMoniker(lpszDelim string, lpszItem string, ppmk **IMoniker) error
 // Minimum OS: windows5.0.
 func CreateObjrefMoniker(punk *IUnknown, ppmk **IMoniker) error {
 	r1, _, _ := syscall.SyscallN(procCreateObjrefMoniker.Addr(), uintptr(unsafe.Pointer(punk)), uintptr(unsafe.Pointer(ppmk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePointerMoniker calls OLE32!CreatePointerMoniker.
@@ -887,27 +887,27 @@ func CreateObjrefMoniker(punk *IUnknown, ppmk **IMoniker) error {
 // Minimum OS: windows5.0.
 func CreatePointerMoniker(punk *IUnknown, ppmk **IMoniker) error {
 	r1, _, _ := syscall.SyscallN(procCreatePointerMoniker.Addr(), uintptr(unsafe.Pointer(punk)), uintptr(unsafe.Pointer(ppmk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateStdProgressIndicator calls ole32!CreateStdProgressIndicator.
 func CreateStdProgressIndicator(hwndParent foundation.HWND, pszTitle string, pIbscCaller *IBindStatusCallback, ppIbsc **IBindStatusCallback) error {
 	_pszTitle := win32.UTF16Ptr(pszTitle)
 	r1, _, _ := syscall.SyscallN(procCreateStdProgressIndicator.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(_pszTitle)), uintptr(unsafe.Pointer(pIbscCaller)), uintptr(unsafe.Pointer(ppIbsc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateUri calls URLMON!CreateUri.
 func CreateUri(pwzURI string, dwFlags URI_CREATE_FLAGS, ppURI **IUri) error {
 	_pwzURI := win32.UTF16Ptr(pwzURI)
 	r1, _, _ := syscall.SyscallN(procCreateUri.Addr(), uintptr(unsafe.Pointer(_pwzURI)), uintptr(dwFlags), 0, uintptr(unsafe.Pointer(ppURI)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateUriFromMultiByteString calls urlmon!CreateUriFromMultiByteString.
 func CreateUriFromMultiByteString(pszANSIInputUri foundation.PSTR, dwEncodingFlags uint32, dwCodePage uint32, dwCreateFlags uint32, ppUri **IUri) error {
 	r1, _, _ := syscall.SyscallN(procCreateUriFromMultiByteString.Addr(), uintptr(unsafe.Pointer(pszANSIInputUri)), uintptr(dwEncodingFlags), uintptr(dwCodePage), uintptr(dwCreateFlags), 0, uintptr(unsafe.Pointer(ppUri)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateUriWithFragment calls URLMON!CreateUriWithFragment.
@@ -915,13 +915,13 @@ func CreateUriWithFragment(pwzURI string, pwzFragment string, dwFlags uint32, pp
 	_pwzURI := win32.UTF16Ptr(pwzURI)
 	_pwzFragment := win32.UTF16Ptr(pwzFragment)
 	r1, _, _ := syscall.SyscallN(procCreateUriWithFragment.Addr(), uintptr(unsafe.Pointer(_pwzURI)), uintptr(unsafe.Pointer(_pwzFragment)), uintptr(dwFlags), 0, uintptr(unsafe.Pointer(ppURI)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DcomChannelSetHResult calls ole32!DcomChannelSetHResult.
 func DcomChannelSetHResult(pvReserved unsafe.Pointer, pulReserved *uint32, appsHR foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(procDcomChannelSetHResult.Addr(), uintptr(unsafe.Pointer(pvReserved)), uintptr(unsafe.Pointer(pulReserved)), uintptr(appsHR))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetClassFile calls OLE32!GetClassFile.
@@ -930,14 +930,14 @@ func DcomChannelSetHResult(pvReserved unsafe.Pointer, pulReserved *uint32, appsH
 func GetClassFile(szFilename string, pclsid *win32.GUID) error {
 	_szFilename := win32.UTF16Ptr(szFilename)
 	r1, _, _ := syscall.SyscallN(procGetClassFile.Addr(), uintptr(unsafe.Pointer(_szFilename)), uintptr(unsafe.Pointer(pclsid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetErrorInfo calls OLEAUT32!GetErrorInfo.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-geterrorinfo
 func GetErrorInfo(dwReserved uint32, pperrinfo **IErrorInfo) error {
 	r1, _, _ := syscall.SyscallN(procGetErrorInfo.Addr(), uintptr(dwReserved), uintptr(unsafe.Pointer(pperrinfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRunningObjectTable calls OLE32!GetRunningObjectTable.
@@ -945,7 +945,7 @@ func GetErrorInfo(dwReserved uint32, pperrinfo **IErrorInfo) error {
 // Minimum OS: windows5.0.
 func GetRunningObjectTable(reserved uint32, pprot **IRunningObjectTable) error {
 	r1, _, _ := syscall.SyscallN(procGetRunningObjectTable.Addr(), uintptr(reserved), uintptr(unsafe.Pointer(pprot)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IIDFromString calls OLE32!IIDFromString.
@@ -954,7 +954,7 @@ func GetRunningObjectTable(reserved uint32, pprot **IRunningObjectTable) error {
 func IIDFromString(lpsz string, lpiid *win32.GUID) error {
 	_lpsz := win32.UTF16Ptr(lpsz)
 	r1, _, _ := syscall.SyscallN(procIIDFromString.Addr(), uintptr(unsafe.Pointer(_lpsz)), uintptr(unsafe.Pointer(lpiid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MkParseDisplayName calls OLE32!MkParseDisplayName.
@@ -963,7 +963,7 @@ func IIDFromString(lpsz string, lpiid *win32.GUID) error {
 func MkParseDisplayName(pbc *IBindCtx, szUserName string, pchEaten *uint32, ppmk **IMoniker) error {
 	_szUserName := win32.UTF16Ptr(szUserName)
 	r1, _, _ := syscall.SyscallN(procMkParseDisplayName.Addr(), uintptr(unsafe.Pointer(pbc)), uintptr(unsafe.Pointer(_szUserName)), uintptr(unsafe.Pointer(pchEaten)), uintptr(unsafe.Pointer(ppmk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MonikerCommonPrefixWith calls ole32!MonikerCommonPrefixWith.
@@ -971,7 +971,7 @@ func MkParseDisplayName(pbc *IBindCtx, szUserName string, pchEaten *uint32, ppmk
 // Minimum OS: windows5.0.
 func MonikerCommonPrefixWith(pmkThis *IMoniker, pmkOther *IMoniker, ppmkCommon **IMoniker) error {
 	r1, _, _ := syscall.SyscallN(procMonikerCommonPrefixWith.Addr(), uintptr(unsafe.Pointer(pmkThis)), uintptr(unsafe.Pointer(pmkOther)), uintptr(unsafe.Pointer(ppmkCommon)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MonikerRelativePathTo calls ole32!MonikerRelativePathTo.
@@ -980,7 +980,7 @@ func MonikerCommonPrefixWith(pmkThis *IMoniker, pmkOther *IMoniker, ppmkCommon *
 func MonikerRelativePathTo(pmkSrc *IMoniker, pmkDest *IMoniker, ppmkRelPath **IMoniker, dwReserved bool) error {
 	_dwReserved := win32.Bool32(dwReserved)
 	r1, _, _ := syscall.SyscallN(procMonikerRelativePathTo.Addr(), uintptr(unsafe.Pointer(pmkSrc)), uintptr(unsafe.Pointer(pmkDest)), uintptr(unsafe.Pointer(ppmkRelPath)), uintptr(_dwReserved))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ProgIDFromCLSID calls OLE32!ProgIDFromCLSID.
@@ -988,14 +988,14 @@ func MonikerRelativePathTo(pmkSrc *IMoniker, pmkDest *IMoniker, ppmkRelPath **IM
 // Minimum OS: windows5.0.
 func ProgIDFromCLSID(clsid *win32.GUID, lplpszProgID *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procProgIDFromCLSID.Addr(), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(lplpszProgID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetErrorInfo calls OLEAUT32!SetErrorInfo.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-seterrorinfo
 func SetErrorInfo(dwReserved uint32, perrinfo *IErrorInfo) error {
 	r1, _, _ := syscall.SyscallN(procSetErrorInfo.Addr(), uintptr(dwReserved), uintptr(unsafe.Pointer(perrinfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StringFromCLSID calls OLE32!StringFromCLSID.
@@ -1003,7 +1003,7 @@ func SetErrorInfo(dwReserved uint32, perrinfo *IErrorInfo) error {
 // Minimum OS: windows5.0.
 func StringFromCLSID(rclsid *win32.GUID, lplpsz *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procStringFromCLSID.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(lplpsz)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StringFromGUID2 calls OLE32!StringFromGUID2.
@@ -1019,5 +1019,5 @@ func StringFromGUID2(rguid *win32.GUID, lpsz foundation.PWSTR, cchMax int32) int
 // Minimum OS: windows5.0.
 func StringFromIID(rclsid *win32.GUID, lplpsz *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procStringFromIID.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(lplpsz)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

@@ -57,7 +57,7 @@ programs.
 | Package | Import path | What it gives you |
 |---|---|---|
 | **Namespace bindings** | `bindings/win32/<namespace>` | The generated API for a namespace: Go strings for `PWSTR`, `bool` for `BOOL`, `error` for `HRESULT`/`SetLastError`, `[]T` for array+count pairs, elevated `[out,retval]` returns, `Close<Handle>` helpers, COM interfaces as method-bearing vtable structs — plus every struct, constant, and function. One Go package per namespace. |
-| **Runtime** | `bindings/runtime/win32` | Shared helpers the bindings use: `UTF16Ptr`, `UTF16ToString`, `GUID`, `HRESULTError`, `Bool32`. |
+| **Runtime** | `bindings/runtime/win32` | Shared helpers the bindings use: `UTF16Ptr`, `UTF16ToString`, `GUID`, `ErrIfFailed`, `Bool32`. |
 
 Rule of thumb: **import `bindings/win32/<namespace>` and the runtime
 `bindings/runtime/win32`.** There is a single bindings tree — the Go-friendly

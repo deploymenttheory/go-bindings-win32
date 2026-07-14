@@ -25,17 +25,17 @@ var IID_IDirect3DDevice9On12 = win32.GUID{Data1: 0xe7fda234, Data2: 0xb589, Data
 // GetD3D12Device dispatches through IDirect3DDevice9On12's vtable slot 3.
 func (self *IDirect3DDevice9On12) GetD3D12Device(riid *win32.GUID, ppvDevice **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvDevice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnwrapUnderlyingResource dispatches through IDirect3DDevice9On12's vtable slot 4.
 func (self *IDirect3DDevice9On12) UnwrapUnderlyingResource(pResource *graphicsdirect3d9.IDirect3DResource9, pCommandQueue *graphicsdirect3d12.ID3D12CommandQueue, riid *win32.GUID, ppvResource12 **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResource)), uintptr(unsafe.Pointer(pCommandQueue)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvResource12)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReturnUnderlyingResource dispatches through IDirect3DDevice9On12's vtable slot 5.
 func (self *IDirect3DDevice9On12) ReturnUnderlyingResource(pResource *graphicsdirect3d9.IDirect3DResource9, NumSync uint32, pSignalValues *uint64, ppFences **graphicsdirect3d12.ID3D12Fence) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResource)), uintptr(NumSync), uintptr(unsafe.Pointer(pSignalValues)), uintptr(unsafe.Pointer(ppFences)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

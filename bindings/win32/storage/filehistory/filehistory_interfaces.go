@@ -25,89 +25,89 @@ var IID_IFhConfigMgr = win32.GUID{Data1: 0x6a5fea5b, Data2: 0xbf8f, Data3: 0x4ee
 // LoadConfiguration dispatches through IFhConfigMgr's vtable slot 3.
 func (self *IFhConfigMgr) LoadConfiguration() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateDefaultConfiguration dispatches through IFhConfigMgr's vtable slot 4.
 func (self *IFhConfigMgr) CreateDefaultConfiguration(OverwriteIfExists bool) error {
 	_OverwriteIfExists := win32.Bool32(OverwriteIfExists)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(_OverwriteIfExists))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SaveConfiguration dispatches through IFhConfigMgr's vtable slot 5.
 func (self *IFhConfigMgr) SaveConfiguration() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddRemoveExcludeRule dispatches through IFhConfigMgr's vtable slot 6.
 func (self *IFhConfigMgr) AddRemoveExcludeRule(Add bool, Category FH_PROTECTED_ITEM_CATEGORY, Item foundation.BSTR) error {
 	_Add := win32.Bool32(Add)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(_Add), uintptr(Category), uintptr(unsafe.Pointer(Item)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetIncludeExcludeRules dispatches through IFhConfigMgr's vtable slot 7.
 func (self *IFhConfigMgr) GetIncludeExcludeRules(Include bool, Category FH_PROTECTED_ITEM_CATEGORY, Iterator **IFhScopeIterator) error {
 	_Include := win32.Bool32(Include)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(_Include), uintptr(Category), uintptr(unsafe.Pointer(Iterator)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLocalPolicy dispatches through IFhConfigMgr's vtable slot 8.
 func (self *IFhConfigMgr) GetLocalPolicy(LocalPolicyType FH_LOCAL_POLICY_TYPE, PolicyValue *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(LocalPolicyType), uintptr(unsafe.Pointer(PolicyValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetLocalPolicy dispatches through IFhConfigMgr's vtable slot 9.
 func (self *IFhConfigMgr) SetLocalPolicy(LocalPolicyType FH_LOCAL_POLICY_TYPE, PolicyValue uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(LocalPolicyType), uintptr(PolicyValue))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBackupStatus dispatches through IFhConfigMgr's vtable slot 10.
 func (self *IFhConfigMgr) GetBackupStatus(BackupStatus *FH_BACKUP_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(BackupStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBackupStatus dispatches through IFhConfigMgr's vtable slot 11.
 func (self *IFhConfigMgr) SetBackupStatus(BackupStatus FH_BACKUP_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(BackupStatus))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDefaultTarget dispatches through IFhConfigMgr's vtable slot 12.
 func (self *IFhConfigMgr) GetDefaultTarget(DefaultTarget **IFhTarget) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(DefaultTarget)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ValidateTarget dispatches through IFhConfigMgr's vtable slot 13.
 func (self *IFhConfigMgr) ValidateTarget(TargetUrl foundation.BSTR, ValidationResult *FH_DEVICE_VALIDATION_RESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(TargetUrl)), uintptr(unsafe.Pointer(ValidationResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ProvisionAndSetNewTarget dispatches through IFhConfigMgr's vtable slot 14.
 func (self *IFhConfigMgr) ProvisionAndSetNewTarget(TargetUrl foundation.BSTR, TargetName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(TargetUrl)), uintptr(unsafe.Pointer(TargetName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ChangeDefaultTargetRecommendation dispatches through IFhConfigMgr's vtable slot 15.
 func (self *IFhConfigMgr) ChangeDefaultTargetRecommendation(Recommend bool) error {
 	_Recommend := win32.Bool32(Recommend)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(_Recommend))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryProtectionStatus dispatches through IFhConfigMgr's vtable slot 16.
 func (self *IFhConfigMgr) QueryProtectionStatus(ProtectionState *uint32, ProtectedUntilTime *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ProtectionState)), uintptr(unsafe.Pointer(ProtectedUntilTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFhReassociation: https://learn.microsoft.com/windows/win32/api/fhcfg/nn-fhcfg-ifhreassociation
@@ -122,32 +122,32 @@ var IID_IFhReassociation = win32.GUID{Data1: 0x6544a28a, Data2: 0xf68d, Data3: 0
 // ValidateTarget dispatches through IFhReassociation's vtable slot 3.
 func (self *IFhReassociation) ValidateTarget(TargetUrl foundation.BSTR, ValidationResult *FH_DEVICE_VALIDATION_RESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(TargetUrl)), uintptr(unsafe.Pointer(ValidationResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScanTargetForConfigurations dispatches through IFhReassociation's vtable slot 4.
 func (self *IFhReassociation) ScanTargetForConfigurations(TargetUrl foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(TargetUrl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetConfigurationDetails dispatches through IFhReassociation's vtable slot 5.
 func (self *IFhReassociation) GetConfigurationDetails(Index uint32, UserName *foundation.BSTR, PcName *foundation.BSTR, BackupTime *foundation.FILETIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(UserName)), uintptr(unsafe.Pointer(PcName)), uintptr(unsafe.Pointer(BackupTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SelectConfiguration dispatches through IFhReassociation's vtable slot 6.
 func (self *IFhReassociation) SelectConfiguration(Index uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(Index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PerformReassociation dispatches through IFhReassociation's vtable slot 7.
 func (self *IFhReassociation) PerformReassociation(OverwriteIfExists bool) error {
 	_OverwriteIfExists := win32.Bool32(OverwriteIfExists)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(_OverwriteIfExists))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFhScopeIterator: https://learn.microsoft.com/windows/win32/api/fhcfg/nn-fhcfg-ifhscopeiterator
@@ -162,13 +162,13 @@ var IID_IFhScopeIterator = win32.GUID{Data1: 0x3197abce, Data2: 0x532a, Data3: 0
 // MoveToNextItem dispatches through IFhScopeIterator's vtable slot 3.
 func (self *IFhScopeIterator) MoveToNextItem() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetItem dispatches through IFhScopeIterator's vtable slot 4.
 func (self *IFhScopeIterator) GetItem(Item *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Item)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFhTarget: https://learn.microsoft.com/windows/win32/api/fhcfg/nn-fhcfg-ifhtarget
@@ -183,11 +183,11 @@ var IID_IFhTarget = win32.GUID{Data1: 0xd87965fd, Data2: 0x2bad, Data3: 0x4657, 
 // GetStringProperty dispatches through IFhTarget's vtable slot 3.
 func (self *IFhTarget) GetStringProperty(PropertyType FH_TARGET_PROPERTY_TYPE, PropertyValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(PropertyType), uintptr(unsafe.Pointer(PropertyValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNumericalProperty dispatches through IFhTarget's vtable slot 4.
 func (self *IFhTarget) GetNumericalProperty(PropertyType FH_TARGET_PROPERTY_TYPE, PropertyValue *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(PropertyType), uintptr(unsafe.Pointer(PropertyValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

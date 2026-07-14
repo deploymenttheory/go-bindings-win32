@@ -67,97 +67,97 @@ var IID_IAlertDataCollector = win32.GUID{Data1: 0x03837516, Data2: 0x098b, Data3
 // Get_AlertThresholds dispatches through IAlertDataCollector's vtable slot 32.
 func (self *IAlertDataCollector) Get_AlertThresholds(alerts **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(alerts)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AlertThresholds dispatches through IAlertDataCollector's vtable slot 33.
 func (self *IAlertDataCollector) Put_AlertThresholds(alerts *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(alerts)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EventLog dispatches through IAlertDataCollector's vtable slot 34.
 func (self *IAlertDataCollector) Get_EventLog(log *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(log)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EventLog dispatches through IAlertDataCollector's vtable slot 35.
 func (self *IAlertDataCollector) Put_EventLog(log foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(log))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SampleInterval dispatches through IAlertDataCollector's vtable slot 36.
 func (self *IAlertDataCollector) Get_SampleInterval(interval *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(interval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SampleInterval dispatches through IAlertDataCollector's vtable slot 37.
 func (self *IAlertDataCollector) Put_SampleInterval(interval uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(interval))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Task dispatches through IAlertDataCollector's vtable slot 38.
 func (self *IAlertDataCollector) Get_Task(task *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(task)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Task dispatches through IAlertDataCollector's vtable slot 39.
 func (self *IAlertDataCollector) Put_Task(task foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(task)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TaskRunAsSelf dispatches through IAlertDataCollector's vtable slot 40.
 func (self *IAlertDataCollector) Get_TaskRunAsSelf(RunAsSelf *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(RunAsSelf)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_TaskRunAsSelf dispatches through IAlertDataCollector's vtable slot 41.
 func (self *IAlertDataCollector) Put_TaskRunAsSelf(RunAsSelf foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(RunAsSelf))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TaskArguments dispatches through IAlertDataCollector's vtable slot 42.
 func (self *IAlertDataCollector) Get_TaskArguments(task *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(task)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_TaskArguments dispatches through IAlertDataCollector's vtable slot 43.
 func (self *IAlertDataCollector) Put_TaskArguments(task foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(task)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TaskUserTextArguments dispatches through IAlertDataCollector's vtable slot 44.
 func (self *IAlertDataCollector) Get_TaskUserTextArguments(task *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(task)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_TaskUserTextArguments dispatches through IAlertDataCollector's vtable slot 45.
 func (self *IAlertDataCollector) Put_TaskUserTextArguments(task foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(task)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TriggerDataCollectorSet dispatches through IAlertDataCollector's vtable slot 46.
 func (self *IAlertDataCollector) Get_TriggerDataCollectorSet(name *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_TriggerDataCollectorSet dispatches through IAlertDataCollector's vtable slot 47.
 func (self *IAlertDataCollector) Put_TriggerDataCollectorSet(name foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IApiTracingDataCollector: https://learn.microsoft.com/windows/win32/api/pla/nn-pla-iapitracingdatacollector
@@ -172,85 +172,85 @@ var IID_IApiTracingDataCollector = win32.GUID{Data1: 0x0383751a, Data2: 0x098b, 
 // Get_LogApiNamesOnly dispatches through IApiTracingDataCollector's vtable slot 32.
 func (self *IApiTracingDataCollector) Get_LogApiNamesOnly(logapinames *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(logapinames)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LogApiNamesOnly dispatches through IApiTracingDataCollector's vtable slot 33.
 func (self *IApiTracingDataCollector) Put_LogApiNamesOnly(logapinames foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(logapinames))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LogApisRecursively dispatches through IApiTracingDataCollector's vtable slot 34.
 func (self *IApiTracingDataCollector) Get_LogApisRecursively(logrecursively *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(logrecursively)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LogApisRecursively dispatches through IApiTracingDataCollector's vtable slot 35.
 func (self *IApiTracingDataCollector) Put_LogApisRecursively(logrecursively foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(logrecursively))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ExePath dispatches through IApiTracingDataCollector's vtable slot 36.
 func (self *IApiTracingDataCollector) Get_ExePath(exepath *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(exepath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ExePath dispatches through IApiTracingDataCollector's vtable slot 37.
 func (self *IApiTracingDataCollector) Put_ExePath(exepath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(exepath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LogFilePath dispatches through IApiTracingDataCollector's vtable slot 38.
 func (self *IApiTracingDataCollector) Get_LogFilePath(logfilepath *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(logfilepath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LogFilePath dispatches through IApiTracingDataCollector's vtable slot 39.
 func (self *IApiTracingDataCollector) Put_LogFilePath(logfilepath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(logfilepath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IncludeModules dispatches through IApiTracingDataCollector's vtable slot 40.
 func (self *IApiTracingDataCollector) Get_IncludeModules(includemodules **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(includemodules)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_IncludeModules dispatches through IApiTracingDataCollector's vtable slot 41.
 func (self *IApiTracingDataCollector) Put_IncludeModules(includemodules *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(includemodules)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IncludeApis dispatches through IApiTracingDataCollector's vtable slot 42.
 func (self *IApiTracingDataCollector) Get_IncludeApis(includeapis **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(includeapis)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_IncludeApis dispatches through IApiTracingDataCollector's vtable slot 43.
 func (self *IApiTracingDataCollector) Put_IncludeApis(includeapis *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(includeapis)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ExcludeApis dispatches through IApiTracingDataCollector's vtable slot 44.
 func (self *IApiTracingDataCollector) Get_ExcludeApis(excludeapis **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(excludeapis)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ExcludeApis dispatches through IApiTracingDataCollector's vtable slot 45.
 func (self *IApiTracingDataCollector) Put_ExcludeApis(excludeapis *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(excludeapis)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IConfigurationDataCollector: https://learn.microsoft.com/windows/win32/api/pla/nn-pla-iconfigurationdatacollector
@@ -265,109 +265,109 @@ var IID_IConfigurationDataCollector = win32.GUID{Data1: 0x03837514, Data2: 0x098
 // Get_FileMaxCount dispatches through IConfigurationDataCollector's vtable slot 32.
 func (self *IConfigurationDataCollector) Get_FileMaxCount(count *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(count)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FileMaxCount dispatches through IConfigurationDataCollector's vtable slot 33.
 func (self *IConfigurationDataCollector) Put_FileMaxCount(count uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(count))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FileMaxRecursiveDepth dispatches through IConfigurationDataCollector's vtable slot 34.
 func (self *IConfigurationDataCollector) Get_FileMaxRecursiveDepth(depth *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(depth)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FileMaxRecursiveDepth dispatches through IConfigurationDataCollector's vtable slot 35.
 func (self *IConfigurationDataCollector) Put_FileMaxRecursiveDepth(depth uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(depth))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FileMaxTotalSize dispatches through IConfigurationDataCollector's vtable slot 36.
 func (self *IConfigurationDataCollector) Get_FileMaxTotalSize(size *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(size)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FileMaxTotalSize dispatches through IConfigurationDataCollector's vtable slot 37.
 func (self *IConfigurationDataCollector) Put_FileMaxTotalSize(size uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(size))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Files dispatches through IConfigurationDataCollector's vtable slot 38.
 func (self *IConfigurationDataCollector) Get_Files(Files **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Files)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Files dispatches through IConfigurationDataCollector's vtable slot 39.
 func (self *IConfigurationDataCollector) Put_Files(Files *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Files)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ManagementQueries dispatches through IConfigurationDataCollector's vtable slot 40.
 func (self *IConfigurationDataCollector) Get_ManagementQueries(Queries **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Queries)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ManagementQueries dispatches through IConfigurationDataCollector's vtable slot 41.
 func (self *IConfigurationDataCollector) Put_ManagementQueries(Queries *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Queries)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_QueryNetworkAdapters dispatches through IConfigurationDataCollector's vtable slot 42.
 func (self *IConfigurationDataCollector) Get_QueryNetworkAdapters(network *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(network)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_QueryNetworkAdapters dispatches through IConfigurationDataCollector's vtable slot 43.
 func (self *IConfigurationDataCollector) Put_QueryNetworkAdapters(network foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(network))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RegistryKeys dispatches through IConfigurationDataCollector's vtable slot 44.
 func (self *IConfigurationDataCollector) Get_RegistryKeys(query **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(query)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RegistryKeys dispatches through IConfigurationDataCollector's vtable slot 45.
 func (self *IConfigurationDataCollector) Put_RegistryKeys(query *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(query)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RegistryMaxRecursiveDepth dispatches through IConfigurationDataCollector's vtable slot 46.
 func (self *IConfigurationDataCollector) Get_RegistryMaxRecursiveDepth(depth *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(depth)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RegistryMaxRecursiveDepth dispatches through IConfigurationDataCollector's vtable slot 47.
 func (self *IConfigurationDataCollector) Put_RegistryMaxRecursiveDepth(depth uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(depth))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SystemStateFile dispatches through IConfigurationDataCollector's vtable slot 48.
 func (self *IConfigurationDataCollector) Get_SystemStateFile(FileName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(FileName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SystemStateFile dispatches through IConfigurationDataCollector's vtable slot 49.
 func (self *IConfigurationDataCollector) Put_SystemStateFile(FileName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(FileName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 771a9520-ee28-11ce-941e-008029004347
@@ -381,73 +381,73 @@ var IID_ICounterItem = win32.GUID{Data1: 0x771a9520, Data2: 0xee28, Data3: 0x11c
 // Get_Value dispatches through ICounterItem's vtable slot 3.
 func (self *ICounterItem) Get_Value(pdblValue *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdblValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Color dispatches through ICounterItem's vtable slot 4.
 func (self *ICounterItem) Put_Color(Color uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Color))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Color dispatches through ICounterItem's vtable slot 5.
 func (self *ICounterItem) Get_Color(pColor *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pColor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Width dispatches through ICounterItem's vtable slot 6.
 func (self *ICounterItem) Put_Width(iWidth int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(iWidth))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Width dispatches through ICounterItem's vtable slot 7.
 func (self *ICounterItem) Get_Width(piValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LineStyle dispatches through ICounterItem's vtable slot 8.
 func (self *ICounterItem) Put_LineStyle(iLineStyle int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(iLineStyle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LineStyle dispatches through ICounterItem's vtable slot 9.
 func (self *ICounterItem) Get_LineStyle(piValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ScaleFactor dispatches through ICounterItem's vtable slot 10.
 func (self *ICounterItem) Put_ScaleFactor(iScale int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(iScale))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ScaleFactor dispatches through ICounterItem's vtable slot 11.
 func (self *ICounterItem) Get_ScaleFactor(piValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Path dispatches through ICounterItem's vtable slot 12.
 func (self *ICounterItem) Get_Path(pstrValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetValue dispatches through ICounterItem's vtable slot 13.
 func (self *ICounterItem) GetValue(Value *float64, Status *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)), uintptr(unsafe.Pointer(Status)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStatistics dispatches through ICounterItem's vtable slot 14.
 func (self *ICounterItem) GetStatistics(Max *float64, Min *float64, Avg *float64, Status *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Max)), uintptr(unsafe.Pointer(Min)), uintptr(unsafe.Pointer(Avg)), uintptr(unsafe.Pointer(Status)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: eefcd4e1-ea1c-4435-b7f4-e341ba03b4f9
@@ -461,31 +461,31 @@ var IID_ICounterItem2 = win32.GUID{Data1: 0xeefcd4e1, Data2: 0xea1c, Data3: 0x44
 // Put_Selected dispatches through ICounterItem2's vtable slot 15.
 func (self *ICounterItem2) Put_Selected(bState foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(bState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Selected dispatches through ICounterItem2's vtable slot 16.
 func (self *ICounterItem2) Get_Selected(pbState *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Visible dispatches through ICounterItem2's vtable slot 17.
 func (self *ICounterItem2) Put_Visible(bState foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(bState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Visible dispatches through ICounterItem2's vtable slot 18.
 func (self *ICounterItem2) Get_Visible(pbState *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDataAt dispatches through ICounterItem2's vtable slot 19.
 func (self *ICounterItem2) GetDataAt(iIndex int32, iWhich SysmonDataType, pVariant *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(iIndex), uintptr(iWhich), uintptr(unsafe.Pointer(pVariant)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 79167962-28fc-11cf-942f-008029004347
@@ -499,19 +499,19 @@ var IID_ICounters = win32.GUID{Data1: 0x79167962, Data2: 0x28fc, Data3: 0x11cf, 
 // Get_Count dispatches through ICounters's vtable slot 7.
 func (self *ICounters) Get_Count(pLong *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLong)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ICounters's vtable slot 8.
 func (self *ICounters) Get__NewEnum(ppIunk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIunk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through ICounters's vtable slot 10.
 func (self *ICounters) Add(pathname foundation.BSTR, ppI **DICounterItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pathname)), uintptr(unsafe.Pointer(ppI)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDataCollector: https://learn.microsoft.com/windows/win32/api/pla/nn-pla-idatacollector
@@ -526,151 +526,151 @@ var IID_IDataCollector = win32.GUID{Data1: 0x038374ff, Data2: 0x098b, Data3: 0x1
 // Get_DataCollectorSet dispatches through IDataCollector's vtable slot 7.
 func (self *IDataCollector) Get_DataCollectorSet(group **IDataCollectorSet) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(group)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DataCollectorSet dispatches through IDataCollector's vtable slot 8.
 func (self *IDataCollector) Put_DataCollectorSet(group *IDataCollectorSet) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(group)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DataCollectorType dispatches through IDataCollector's vtable slot 9.
 func (self *IDataCollector) Get_DataCollectorType(type_ *DataCollectorType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(type_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FileName dispatches through IDataCollector's vtable slot 10.
 func (self *IDataCollector) Get_FileName(name *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FileName dispatches through IDataCollector's vtable slot 11.
 func (self *IDataCollector) Put_FileName(name foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FileNameFormat dispatches through IDataCollector's vtable slot 12.
 func (self *IDataCollector) Get_FileNameFormat(format *AutoPathFormat) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(format)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FileNameFormat dispatches through IDataCollector's vtable slot 13.
 func (self *IDataCollector) Put_FileNameFormat(format AutoPathFormat) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(format))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FileNameFormatPattern dispatches through IDataCollector's vtable slot 14.
 func (self *IDataCollector) Get_FileNameFormatPattern(pattern *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pattern)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FileNameFormatPattern dispatches through IDataCollector's vtable slot 15.
 func (self *IDataCollector) Put_FileNameFormatPattern(pattern foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pattern)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LatestOutputLocation dispatches through IDataCollector's vtable slot 16.
 func (self *IDataCollector) Get_LatestOutputLocation(path *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LatestOutputLocation dispatches through IDataCollector's vtable slot 17.
 func (self *IDataCollector) Put_LatestOutputLocation(path foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LogAppend dispatches through IDataCollector's vtable slot 18.
 func (self *IDataCollector) Get_LogAppend(append_ *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(append_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LogAppend dispatches through IDataCollector's vtable slot 19.
 func (self *IDataCollector) Put_LogAppend(append_ foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(append_))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LogCircular dispatches through IDataCollector's vtable slot 20.
 func (self *IDataCollector) Get_LogCircular(circular *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(circular)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LogCircular dispatches through IDataCollector's vtable slot 21.
 func (self *IDataCollector) Put_LogCircular(circular foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(circular))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LogOverwrite dispatches through IDataCollector's vtable slot 22.
 func (self *IDataCollector) Get_LogOverwrite(overwrite *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(overwrite)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LogOverwrite dispatches through IDataCollector's vtable slot 23.
 func (self *IDataCollector) Put_LogOverwrite(overwrite foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(overwrite))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through IDataCollector's vtable slot 24.
 func (self *IDataCollector) Get_Name(name *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Name dispatches through IDataCollector's vtable slot 25.
 func (self *IDataCollector) Put_Name(name foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OutputLocation dispatches through IDataCollector's vtable slot 26.
 func (self *IDataCollector) Get_OutputLocation(path *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Index dispatches through IDataCollector's vtable slot 27.
 func (self *IDataCollector) Get_Index(index *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(index)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Index dispatches through IDataCollector's vtable slot 28.
 func (self *IDataCollector) Put_Index(index int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Xml dispatches through IDataCollector's vtable slot 29.
 func (self *IDataCollector) Get_Xml(Xml *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Xml)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetXml dispatches through IDataCollector's vtable slot 30.
 func (self *IDataCollector) SetXml(Xml foundation.BSTR, Validation **IValueMap) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Xml)), uintptr(unsafe.Pointer(Validation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateOutputLocation dispatches through IDataCollector's vtable slot 31.
 func (self *IDataCollector) CreateOutputLocation(Latest foundation.VARIANT_BOOL, Location *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(Latest), uintptr(unsafe.Pointer(Location)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDataCollectorCollection: https://learn.microsoft.com/windows/win32/api/pla/nn-pla-idatacollectorcollection
@@ -685,43 +685,43 @@ var IID_IDataCollectorCollection = win32.GUID{Data1: 0x03837502, Data2: 0x098b, 
 // Get_Count dispatches through IDataCollectorCollection's vtable slot 7.
 func (self *IDataCollectorCollection) Get_Count(retVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IDataCollectorCollection's vtable slot 9.
 func (self *IDataCollectorCollection) Get__NewEnum(retVal **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through IDataCollectorCollection's vtable slot 10.
 func (self *IDataCollectorCollection) Add(collector *IDataCollector) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(collector)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through IDataCollectorCollection's vtable slot 12.
 func (self *IDataCollectorCollection) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddRange dispatches through IDataCollectorCollection's vtable slot 13.
 func (self *IDataCollectorCollection) AddRange(collectors *IDataCollectorCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(collectors)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateDataCollectorFromXml dispatches through IDataCollectorCollection's vtable slot 14.
 func (self *IDataCollectorCollection) CreateDataCollectorFromXml(bstrXml foundation.BSTR, pValidation **IValueMap, pCollector **IDataCollector) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrXml)), uintptr(unsafe.Pointer(pValidation)), uintptr(unsafe.Pointer(pCollector)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateDataCollector dispatches through IDataCollectorCollection's vtable slot 15.
 func (self *IDataCollectorCollection) CreateDataCollector(Type DataCollectorType, Collector **IDataCollector) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(unsafe.Pointer(Collector)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDataCollectorSet: https://learn.microsoft.com/windows/win32/api/pla/nn-pla-idatacollectorset
@@ -736,361 +736,361 @@ var IID_IDataCollectorSet = win32.GUID{Data1: 0x03837520, Data2: 0x098b, Data3: 
 // Get_DataCollectors dispatches through IDataCollectorSet's vtable slot 7.
 func (self *IDataCollectorSet) Get_DataCollectors(collectors **IDataCollectorCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(collectors)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Duration dispatches through IDataCollectorSet's vtable slot 8.
 func (self *IDataCollectorSet) Get_Duration(seconds *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(seconds)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Duration dispatches through IDataCollectorSet's vtable slot 9.
 func (self *IDataCollectorSet) Put_Duration(seconds uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(seconds))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through IDataCollectorSet's vtable slot 10.
 func (self *IDataCollectorSet) Get_Description(description *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(description)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Description dispatches through IDataCollectorSet's vtable slot 11.
 func (self *IDataCollectorSet) Put_Description(description foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(description)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DescriptionUnresolved dispatches through IDataCollectorSet's vtable slot 12.
 func (self *IDataCollectorSet) Get_DescriptionUnresolved(Descr *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Descr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DisplayName dispatches through IDataCollectorSet's vtable slot 13.
 func (self *IDataCollectorSet) Get_DisplayName(DisplayName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(DisplayName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DisplayName dispatches through IDataCollectorSet's vtable slot 14.
 func (self *IDataCollectorSet) Put_DisplayName(DisplayName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(DisplayName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DisplayNameUnresolved dispatches through IDataCollectorSet's vtable slot 15.
 func (self *IDataCollectorSet) Get_DisplayNameUnresolved(name *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Keywords dispatches through IDataCollectorSet's vtable slot 16.
 func (self *IDataCollectorSet) Get_Keywords(keywords **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(keywords)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Keywords dispatches through IDataCollectorSet's vtable slot 17.
 func (self *IDataCollectorSet) Put_Keywords(keywords *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(keywords)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LatestOutputLocation dispatches through IDataCollectorSet's vtable slot 18.
 func (self *IDataCollectorSet) Get_LatestOutputLocation(path *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LatestOutputLocation dispatches through IDataCollectorSet's vtable slot 19.
 func (self *IDataCollectorSet) Put_LatestOutputLocation(path foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through IDataCollectorSet's vtable slot 20.
 func (self *IDataCollectorSet) Get_Name(name *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OutputLocation dispatches through IDataCollectorSet's vtable slot 21.
 func (self *IDataCollectorSet) Get_OutputLocation(path *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RootPath dispatches through IDataCollectorSet's vtable slot 22.
 func (self *IDataCollectorSet) Get_RootPath(folder *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(folder)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RootPath dispatches through IDataCollectorSet's vtable slot 23.
 func (self *IDataCollectorSet) Put_RootPath(folder foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(folder)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Segment dispatches through IDataCollectorSet's vtable slot 24.
 func (self *IDataCollectorSet) Get_Segment(segment *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(segment)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Segment dispatches through IDataCollectorSet's vtable slot 25.
 func (self *IDataCollectorSet) Put_Segment(segment foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(segment))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SegmentMaxDuration dispatches through IDataCollectorSet's vtable slot 26.
 func (self *IDataCollectorSet) Get_SegmentMaxDuration(seconds *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(seconds)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SegmentMaxDuration dispatches through IDataCollectorSet's vtable slot 27.
 func (self *IDataCollectorSet) Put_SegmentMaxDuration(seconds uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(seconds))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SegmentMaxSize dispatches through IDataCollectorSet's vtable slot 28.
 func (self *IDataCollectorSet) Get_SegmentMaxSize(size *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(size)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SegmentMaxSize dispatches through IDataCollectorSet's vtable slot 29.
 func (self *IDataCollectorSet) Put_SegmentMaxSize(size uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(size))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SerialNumber dispatches through IDataCollectorSet's vtable slot 30.
 func (self *IDataCollectorSet) Get_SerialNumber(index *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(index)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SerialNumber dispatches through IDataCollectorSet's vtable slot 31.
 func (self *IDataCollectorSet) Put_SerialNumber(index uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Server dispatches through IDataCollectorSet's vtable slot 32.
 func (self *IDataCollectorSet) Get_Server(server *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(server)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Status dispatches through IDataCollectorSet's vtable slot 33.
 func (self *IDataCollectorSet) Get_Status(status *DataCollectorSetStatus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(status)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Subdirectory dispatches through IDataCollectorSet's vtable slot 34.
 func (self *IDataCollectorSet) Get_Subdirectory(folder *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(folder)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Subdirectory dispatches through IDataCollectorSet's vtable slot 35.
 func (self *IDataCollectorSet) Put_Subdirectory(folder foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(folder)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SubdirectoryFormat dispatches through IDataCollectorSet's vtable slot 36.
 func (self *IDataCollectorSet) Get_SubdirectoryFormat(format *AutoPathFormat) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(format)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SubdirectoryFormat dispatches through IDataCollectorSet's vtable slot 37.
 func (self *IDataCollectorSet) Put_SubdirectoryFormat(format AutoPathFormat) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(format))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SubdirectoryFormatPattern dispatches through IDataCollectorSet's vtable slot 38.
 func (self *IDataCollectorSet) Get_SubdirectoryFormatPattern(pattern *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pattern)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SubdirectoryFormatPattern dispatches through IDataCollectorSet's vtable slot 39.
 func (self *IDataCollectorSet) Put_SubdirectoryFormatPattern(pattern foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pattern)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Task dispatches through IDataCollectorSet's vtable slot 40.
 func (self *IDataCollectorSet) Get_Task(task *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(task)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Task dispatches through IDataCollectorSet's vtable slot 41.
 func (self *IDataCollectorSet) Put_Task(task foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(task)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TaskRunAsSelf dispatches through IDataCollectorSet's vtable slot 42.
 func (self *IDataCollectorSet) Get_TaskRunAsSelf(RunAsSelf *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(RunAsSelf)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_TaskRunAsSelf dispatches through IDataCollectorSet's vtable slot 43.
 func (self *IDataCollectorSet) Put_TaskRunAsSelf(RunAsSelf foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(RunAsSelf))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TaskArguments dispatches through IDataCollectorSet's vtable slot 44.
 func (self *IDataCollectorSet) Get_TaskArguments(task *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(task)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_TaskArguments dispatches through IDataCollectorSet's vtable slot 45.
 func (self *IDataCollectorSet) Put_TaskArguments(task foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(task)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TaskUserTextArguments dispatches through IDataCollectorSet's vtable slot 46.
 func (self *IDataCollectorSet) Get_TaskUserTextArguments(UserText *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(UserText)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_TaskUserTextArguments dispatches through IDataCollectorSet's vtable slot 47.
 func (self *IDataCollectorSet) Put_TaskUserTextArguments(UserText foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(UserText)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Schedules dispatches through IDataCollectorSet's vtable slot 48.
 func (self *IDataCollectorSet) Get_Schedules(ppSchedules **IScheduleCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSchedules)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SchedulesEnabled dispatches through IDataCollectorSet's vtable slot 49.
 func (self *IDataCollectorSet) Get_SchedulesEnabled(enabled *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(enabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SchedulesEnabled dispatches through IDataCollectorSet's vtable slot 50.
 func (self *IDataCollectorSet) Put_SchedulesEnabled(enabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(enabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UserAccount dispatches through IDataCollectorSet's vtable slot 51.
 func (self *IDataCollectorSet) Get_UserAccount(user *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(user)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Xml dispatches through IDataCollectorSet's vtable slot 52.
 func (self *IDataCollectorSet) Get_Xml(xml *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(xml)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Security dispatches through IDataCollectorSet's vtable slot 53.
 func (self *IDataCollectorSet) Get_Security(pbstrSecurity *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrSecurity)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Security dispatches through IDataCollectorSet's vtable slot 54.
 func (self *IDataCollectorSet) Put_Security(bstrSecurity foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrSecurity)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StopOnCompletion dispatches through IDataCollectorSet's vtable slot 55.
 func (self *IDataCollectorSet) Get_StopOnCompletion(Stop *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Stop)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_StopOnCompletion dispatches through IDataCollectorSet's vtable slot 56.
 func (self *IDataCollectorSet) Put_StopOnCompletion(Stop foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(Stop))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DataManager dispatches through IDataCollectorSet's vtable slot 57.
 func (self *IDataCollectorSet) Get_DataManager(DataManager **IDataManager) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(DataManager)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCredentials dispatches through IDataCollectorSet's vtable slot 58.
 func (self *IDataCollectorSet) SetCredentials(user foundation.BSTR, password foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(user)), uintptr(unsafe.Pointer(password)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Query dispatches through IDataCollectorSet's vtable slot 59.
 func (self *IDataCollectorSet) Query(name foundation.BSTR, server foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(server)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Commit dispatches through IDataCollectorSet's vtable slot 60.
 func (self *IDataCollectorSet) Commit(name foundation.BSTR, server foundation.BSTR, mode CommitMode, validation **IValueMap) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(server)), uintptr(mode), uintptr(unsafe.Pointer(validation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IDataCollectorSet's vtable slot 61.
 func (self *IDataCollectorSet) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Start dispatches through IDataCollectorSet's vtable slot 62.
 func (self *IDataCollectorSet) Start(Synchronous foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(Synchronous))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Stop dispatches through IDataCollectorSet's vtable slot 63.
 func (self *IDataCollectorSet) Stop(Synchronous foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(Synchronous))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetXml dispatches through IDataCollectorSet's vtable slot 64.
 func (self *IDataCollectorSet) SetXml(xml foundation.BSTR, validation **IValueMap) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(xml)), uintptr(unsafe.Pointer(validation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetValue dispatches through IDataCollectorSet's vtable slot 65.
 func (self *IDataCollectorSet) SetValue(key foundation.BSTR, value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetValue dispatches through IDataCollectorSet's vtable slot 66.
 func (self *IDataCollectorSet) GetValue(key foundation.BSTR, value *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDataCollectorSetCollection: https://learn.microsoft.com/windows/win32/api/pla/nn-pla-idatacollectorsetcollection
@@ -1105,37 +1105,37 @@ var IID_IDataCollectorSetCollection = win32.GUID{Data1: 0x03837524, Data2: 0x098
 // Get_Count dispatches through IDataCollectorSetCollection's vtable slot 7.
 func (self *IDataCollectorSetCollection) Get_Count(retVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IDataCollectorSetCollection's vtable slot 9.
 func (self *IDataCollectorSetCollection) Get__NewEnum(retVal **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through IDataCollectorSetCollection's vtable slot 10.
 func (self *IDataCollectorSetCollection) Add(set *IDataCollectorSet) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(set)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through IDataCollectorSetCollection's vtable slot 12.
 func (self *IDataCollectorSetCollection) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddRange dispatches through IDataCollectorSetCollection's vtable slot 13.
 func (self *IDataCollectorSetCollection) AddRange(sets *IDataCollectorSetCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sets)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDataCollectorSets dispatches through IDataCollectorSetCollection's vtable slot 14.
 func (self *IDataCollectorSetCollection) GetDataCollectorSets(server foundation.BSTR, filter foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(server)), uintptr(unsafe.Pointer(filter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDataManager: https://learn.microsoft.com/windows/win32/api/pla/nn-pla-idatamanager
@@ -1150,151 +1150,151 @@ var IID_IDataManager = win32.GUID{Data1: 0x03837541, Data2: 0x098b, Data3: 0x11d
 // Get_Enabled dispatches through IDataManager's vtable slot 7.
 func (self *IDataManager) Get_Enabled(pfEnabled *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEnabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Enabled dispatches through IDataManager's vtable slot 8.
 func (self *IDataManager) Put_Enabled(fEnabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(fEnabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CheckBeforeRunning dispatches through IDataManager's vtable slot 9.
 func (self *IDataManager) Get_CheckBeforeRunning(pfCheck *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfCheck)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CheckBeforeRunning dispatches through IDataManager's vtable slot 10.
 func (self *IDataManager) Put_CheckBeforeRunning(fCheck foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(fCheck))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MinFreeDisk dispatches through IDataManager's vtable slot 11.
 func (self *IDataManager) Get_MinFreeDisk(MinFreeDisk *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(MinFreeDisk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MinFreeDisk dispatches through IDataManager's vtable slot 12.
 func (self *IDataManager) Put_MinFreeDisk(MinFreeDisk uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(MinFreeDisk))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MaxSize dispatches through IDataManager's vtable slot 13.
 func (self *IDataManager) Get_MaxSize(pulMaxSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulMaxSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MaxSize dispatches through IDataManager's vtable slot 14.
 func (self *IDataManager) Put_MaxSize(ulMaxSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(ulMaxSize))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MaxFolderCount dispatches through IDataManager's vtable slot 15.
 func (self *IDataManager) Get_MaxFolderCount(pulMaxFolderCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulMaxFolderCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MaxFolderCount dispatches through IDataManager's vtable slot 16.
 func (self *IDataManager) Put_MaxFolderCount(ulMaxFolderCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(ulMaxFolderCount))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ResourcePolicy dispatches through IDataManager's vtable slot 17.
 func (self *IDataManager) Get_ResourcePolicy(pPolicy *ResourcePolicy) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPolicy)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ResourcePolicy dispatches through IDataManager's vtable slot 18.
 func (self *IDataManager) Put_ResourcePolicy(Policy ResourcePolicy) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(Policy))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FolderActions dispatches through IDataManager's vtable slot 19.
 func (self *IDataManager) Get_FolderActions(Actions **IFolderActionCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Actions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReportSchema dispatches through IDataManager's vtable slot 20.
 func (self *IDataManager) Get_ReportSchema(ReportSchema *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ReportSchema)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ReportSchema dispatches through IDataManager's vtable slot 21.
 func (self *IDataManager) Put_ReportSchema(ReportSchema foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ReportSchema)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReportFileName dispatches through IDataManager's vtable slot 22.
 func (self *IDataManager) Get_ReportFileName(pbstrFilename *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrFilename)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ReportFileName dispatches through IDataManager's vtable slot 23.
 func (self *IDataManager) Put_ReportFileName(pbstrFilename foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrFilename)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RuleTargetFileName dispatches through IDataManager's vtable slot 24.
 func (self *IDataManager) Get_RuleTargetFileName(Filename *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Filename)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RuleTargetFileName dispatches through IDataManager's vtable slot 25.
 func (self *IDataManager) Put_RuleTargetFileName(Filename foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Filename)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EventsFileName dispatches through IDataManager's vtable slot 26.
 func (self *IDataManager) Get_EventsFileName(pbstrFilename *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrFilename)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EventsFileName dispatches through IDataManager's vtable slot 27.
 func (self *IDataManager) Put_EventsFileName(pbstrFilename foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrFilename)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Rules dispatches through IDataManager's vtable slot 28.
 func (self *IDataManager) Get_Rules(pbstrXml *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrXml)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Rules dispatches through IDataManager's vtable slot 29.
 func (self *IDataManager) Put_Rules(bstrXml foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrXml)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Run dispatches through IDataManager's vtable slot 30.
 func (self *IDataManager) Run(Steps DataManagerSteps, bstrFolder foundation.BSTR, Errors **IValueMap) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(Steps), uintptr(unsafe.Pointer(bstrFolder)), uintptr(unsafe.Pointer(Errors)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Extract dispatches through IDataManager's vtable slot 31.
 func (self *IDataManager) Extract(CabFilename foundation.BSTR, DestinationPath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CabFilename)), uintptr(unsafe.Pointer(DestinationPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFolderAction: https://learn.microsoft.com/windows/win32/api/pla/nn-pla-ifolderaction
@@ -1309,49 +1309,49 @@ var IID_IFolderAction = win32.GUID{Data1: 0x03837543, Data2: 0x098b, Data3: 0x11
 // Get_Age dispatches through IFolderAction's vtable slot 7.
 func (self *IFolderAction) Get_Age(pulAge *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulAge)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Age dispatches through IFolderAction's vtable slot 8.
 func (self *IFolderAction) Put_Age(ulAge uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(ulAge))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Size dispatches through IFolderAction's vtable slot 9.
 func (self *IFolderAction) Get_Size(pulAge *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulAge)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Size dispatches through IFolderAction's vtable slot 10.
 func (self *IFolderAction) Put_Size(ulAge uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(ulAge))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Actions dispatches through IFolderAction's vtable slot 11.
 func (self *IFolderAction) Get_Actions(Steps *FolderActionSteps) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Steps)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Actions dispatches through IFolderAction's vtable slot 12.
 func (self *IFolderAction) Put_Actions(Steps FolderActionSteps) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Steps))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SendCabTo dispatches through IFolderAction's vtable slot 13.
 func (self *IFolderAction) Get_SendCabTo(pbstrDestination *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDestination)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SendCabTo dispatches through IFolderAction's vtable slot 14.
 func (self *IFolderAction) Put_SendCabTo(bstrDestination foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDestination)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFolderActionCollection: https://learn.microsoft.com/windows/win32/api/pla/nn-pla-ifolderactioncollection
@@ -1366,37 +1366,37 @@ var IID_IFolderActionCollection = win32.GUID{Data1: 0x03837544, Data2: 0x098b, D
 // Get_Count dispatches through IFolderActionCollection's vtable slot 7.
 func (self *IFolderActionCollection) Get_Count(Count *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Count)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IFolderActionCollection's vtable slot 9.
 func (self *IFolderActionCollection) Get__NewEnum(Enum **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Enum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through IFolderActionCollection's vtable slot 10.
 func (self *IFolderActionCollection) Add(Action *IFolderAction) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Action)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through IFolderActionCollection's vtable slot 12.
 func (self *IFolderActionCollection) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddRange dispatches through IFolderActionCollection's vtable slot 13.
 func (self *IFolderActionCollection) AddRange(Actions *IFolderActionCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Actions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateFolderAction dispatches through IFolderActionCollection's vtable slot 14.
 func (self *IFolderActionCollection) CreateFolderAction(FolderAction **IFolderAction) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(FolderAction)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: d6b518dd-05c7-418a-89e6-4f9ce8c6841e
@@ -1410,7 +1410,7 @@ var IID_ILogFileItem = win32.GUID{Data1: 0xd6b518dd, Data2: 0x05c7, Data3: 0x418
 // Get_Path dispatches through ILogFileItem's vtable slot 3.
 func (self *ILogFileItem) Get_Path(pstrValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 6a2a97e6-6851-41ea-87ad-2a8225335865
@@ -1424,19 +1424,19 @@ var IID_ILogFiles = win32.GUID{Data1: 0x6a2a97e6, Data2: 0x6851, Data3: 0x41ea, 
 // Get_Count dispatches through ILogFiles's vtable slot 7.
 func (self *ILogFiles) Get_Count(pLong *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLong)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ILogFiles's vtable slot 8.
 func (self *ILogFiles) Get__NewEnum(ppIunk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIunk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through ILogFiles's vtable slot 10.
 func (self *ILogFiles) Add(pathname foundation.BSTR, ppI **DILogFileItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pathname)), uintptr(unsafe.Pointer(ppI)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPerformanceCounterDataCollector: https://learn.microsoft.com/windows/win32/api/pla/nn-pla-iperformancecounterdatacollector
@@ -1451,61 +1451,61 @@ var IID_IPerformanceCounterDataCollector = win32.GUID{Data1: 0x03837506, Data2: 
 // Get_DataSourceName dispatches through IPerformanceCounterDataCollector's vtable slot 32.
 func (self *IPerformanceCounterDataCollector) Get_DataSourceName(dsn *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dsn)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DataSourceName dispatches through IPerformanceCounterDataCollector's vtable slot 33.
 func (self *IPerformanceCounterDataCollector) Put_DataSourceName(dsn foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dsn)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PerformanceCounters dispatches through IPerformanceCounterDataCollector's vtable slot 34.
 func (self *IPerformanceCounterDataCollector) Get_PerformanceCounters(counters **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(counters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PerformanceCounters dispatches through IPerformanceCounterDataCollector's vtable slot 35.
 func (self *IPerformanceCounterDataCollector) Put_PerformanceCounters(counters *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(counters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LogFileFormat dispatches through IPerformanceCounterDataCollector's vtable slot 36.
 func (self *IPerformanceCounterDataCollector) Get_LogFileFormat(format *FileFormat) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(format)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LogFileFormat dispatches through IPerformanceCounterDataCollector's vtable slot 37.
 func (self *IPerformanceCounterDataCollector) Put_LogFileFormat(format FileFormat) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(format))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SampleInterval dispatches through IPerformanceCounterDataCollector's vtable slot 38.
 func (self *IPerformanceCounterDataCollector) Get_SampleInterval(interval *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(interval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SampleInterval dispatches through IPerformanceCounterDataCollector's vtable slot 39.
 func (self *IPerformanceCounterDataCollector) Put_SampleInterval(interval uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(interval))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SegmentMaxRecords dispatches through IPerformanceCounterDataCollector's vtable slot 40.
 func (self *IPerformanceCounterDataCollector) Get_SegmentMaxRecords(records *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(records)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SegmentMaxRecords dispatches through IPerformanceCounterDataCollector's vtable slot 41.
 func (self *IPerformanceCounterDataCollector) Put_SegmentMaxRecords(records uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(records))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISchedule: https://learn.microsoft.com/windows/win32/api/pla/nn-pla-ischedule
@@ -1520,31 +1520,31 @@ var IID_ISchedule = win32.GUID{Data1: 0x0383753a, Data2: 0x098b, Data3: 0x11d8, 
 // Get_StartDate dispatches through ISchedule's vtable slot 7.
 func (self *ISchedule) Get_StartDate(start *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(start)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EndDate dispatches through ISchedule's vtable slot 9.
 func (self *ISchedule) Get_EndDate(end *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(end)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StartTime dispatches through ISchedule's vtable slot 11.
 func (self *ISchedule) Get_StartTime(start *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(start)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Days dispatches through ISchedule's vtable slot 13.
 func (self *ISchedule) Get_Days(days *WeekDays) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(days)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Days dispatches through ISchedule's vtable slot 14.
 func (self *ISchedule) Put_Days(days WeekDays) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(days))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IScheduleCollection: https://learn.microsoft.com/windows/win32/api/pla/nn-pla-ischedulecollection
@@ -1559,37 +1559,37 @@ var IID_IScheduleCollection = win32.GUID{Data1: 0x0383753d, Data2: 0x098b, Data3
 // Get_Count dispatches through IScheduleCollection's vtable slot 7.
 func (self *IScheduleCollection) Get_Count(retVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IScheduleCollection's vtable slot 9.
 func (self *IScheduleCollection) Get__NewEnum(ienum **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ienum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through IScheduleCollection's vtable slot 10.
 func (self *IScheduleCollection) Add(pSchedule *ISchedule) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSchedule)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through IScheduleCollection's vtable slot 12.
 func (self *IScheduleCollection) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddRange dispatches through IScheduleCollection's vtable slot 13.
 func (self *IScheduleCollection) AddRange(pSchedules *IScheduleCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSchedules)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSchedule dispatches through IScheduleCollection's vtable slot 14.
 func (self *IScheduleCollection) CreateSchedule(Schedule **ISchedule) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Schedule)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 194eb241-c32c-11cf-9398-00aa00a3ddea
@@ -1603,439 +1603,439 @@ var IID_ISystemMonitor = win32.GUID{Data1: 0x194eb241, Data2: 0xc32c, Data3: 0x1
 // Get_Appearance dispatches through ISystemMonitor's vtable slot 3.
 func (self *ISystemMonitor) Get_Appearance(iAppearance *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(iAppearance)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Appearance dispatches through ISystemMonitor's vtable slot 4.
 func (self *ISystemMonitor) Put_Appearance(iAppearance int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(iAppearance))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BackColor dispatches through ISystemMonitor's vtable slot 5.
 func (self *ISystemMonitor) Get_BackColor(pColor *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pColor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BackColor dispatches through ISystemMonitor's vtable slot 6.
 func (self *ISystemMonitor) Put_BackColor(Color uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(Color))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BorderStyle dispatches through ISystemMonitor's vtable slot 7.
 func (self *ISystemMonitor) Get_BorderStyle(iBorderStyle *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(iBorderStyle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BorderStyle dispatches through ISystemMonitor's vtable slot 8.
 func (self *ISystemMonitor) Put_BorderStyle(iBorderStyle int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(iBorderStyle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ForeColor dispatches through ISystemMonitor's vtable slot 9.
 func (self *ISystemMonitor) Get_ForeColor(pColor *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pColor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ForeColor dispatches through ISystemMonitor's vtable slot 10.
 func (self *ISystemMonitor) Put_ForeColor(Color uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Color))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Font dispatches through ISystemMonitor's vtable slot 11.
 func (self *ISystemMonitor) Get_Font(ppFont **systemole.IFontDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFont)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_Font dispatches through ISystemMonitor's vtable slot 12.
 func (self *ISystemMonitor) Putref_Font(pFont *systemole.IFontDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFont)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Counters dispatches through ISystemMonitor's vtable slot 13.
 func (self *ISystemMonitor) Get_Counters(ppICounters **ICounters) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppICounters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ShowVerticalGrid dispatches through ISystemMonitor's vtable slot 14.
 func (self *ISystemMonitor) Put_ShowVerticalGrid(bState foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(bState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ShowVerticalGrid dispatches through ISystemMonitor's vtable slot 15.
 func (self *ISystemMonitor) Get_ShowVerticalGrid(pbState *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ShowHorizontalGrid dispatches through ISystemMonitor's vtable slot 16.
 func (self *ISystemMonitor) Put_ShowHorizontalGrid(bState foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(bState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ShowHorizontalGrid dispatches through ISystemMonitor's vtable slot 17.
 func (self *ISystemMonitor) Get_ShowHorizontalGrid(pbState *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ShowLegend dispatches through ISystemMonitor's vtable slot 18.
 func (self *ISystemMonitor) Put_ShowLegend(bState foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(bState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ShowLegend dispatches through ISystemMonitor's vtable slot 19.
 func (self *ISystemMonitor) Get_ShowLegend(pbState *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ShowScaleLabels dispatches through ISystemMonitor's vtable slot 20.
 func (self *ISystemMonitor) Put_ShowScaleLabels(bState foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(bState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ShowScaleLabels dispatches through ISystemMonitor's vtable slot 21.
 func (self *ISystemMonitor) Get_ShowScaleLabels(pbState *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ShowValueBar dispatches through ISystemMonitor's vtable slot 22.
 func (self *ISystemMonitor) Put_ShowValueBar(bState foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(bState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ShowValueBar dispatches through ISystemMonitor's vtable slot 23.
 func (self *ISystemMonitor) Get_ShowValueBar(pbState *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MaximumScale dispatches through ISystemMonitor's vtable slot 24.
 func (self *ISystemMonitor) Put_MaximumScale(iValue int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(iValue))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MaximumScale dispatches through ISystemMonitor's vtable slot 25.
 func (self *ISystemMonitor) Get_MaximumScale(piValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MinimumScale dispatches through ISystemMonitor's vtable slot 26.
 func (self *ISystemMonitor) Put_MinimumScale(iValue int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(iValue))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MinimumScale dispatches through ISystemMonitor's vtable slot 27.
 func (self *ISystemMonitor) Get_MinimumScale(piValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UpdateInterval dispatches through ISystemMonitor's vtable slot 29.
 func (self *ISystemMonitor) Get_UpdateInterval(pfValue *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DisplayType dispatches through ISystemMonitor's vtable slot 30.
 func (self *ISystemMonitor) Put_DisplayType(eDisplayType DisplayTypeConstants) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(eDisplayType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DisplayType dispatches through ISystemMonitor's vtable slot 31.
 func (self *ISystemMonitor) Get_DisplayType(peDisplayType *DisplayTypeConstants) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(peDisplayType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ManualUpdate dispatches through ISystemMonitor's vtable slot 32.
 func (self *ISystemMonitor) Put_ManualUpdate(bState foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(bState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ManualUpdate dispatches through ISystemMonitor's vtable slot 33.
 func (self *ISystemMonitor) Get_ManualUpdate(pbState *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_GraphTitle dispatches through ISystemMonitor's vtable slot 34.
 func (self *ISystemMonitor) Put_GraphTitle(bsTitle foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bsTitle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_GraphTitle dispatches through ISystemMonitor's vtable slot 35.
 func (self *ISystemMonitor) Get_GraphTitle(pbsTitle *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbsTitle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_YAxisLabel dispatches through ISystemMonitor's vtable slot 36.
 func (self *ISystemMonitor) Put_YAxisLabel(bsTitle foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bsTitle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_YAxisLabel dispatches through ISystemMonitor's vtable slot 37.
 func (self *ISystemMonitor) Get_YAxisLabel(pbsTitle *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbsTitle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CollectSample dispatches through ISystemMonitor's vtable slot 38.
 func (self *ISystemMonitor) CollectSample() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UpdateGraph dispatches through ISystemMonitor's vtable slot 39.
 func (self *ISystemMonitor) UpdateGraph() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BrowseCounters dispatches through ISystemMonitor's vtable slot 40.
 func (self *ISystemMonitor) BrowseCounters() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DisplayProperties dispatches through ISystemMonitor's vtable slot 41.
 func (self *ISystemMonitor) DisplayProperties() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Counter dispatches through ISystemMonitor's vtable slot 42.
 func (self *ISystemMonitor) Counter(iIndex int32, ppICounter **ICounterItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(iIndex), uintptr(unsafe.Pointer(ppICounter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddCounter dispatches through ISystemMonitor's vtable slot 43.
 func (self *ISystemMonitor) AddCounter(bsPath foundation.BSTR, ppICounter **ICounterItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bsPath)), uintptr(unsafe.Pointer(ppICounter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteCounter dispatches through ISystemMonitor's vtable slot 44.
 func (self *ISystemMonitor) DeleteCounter(pCtr *ICounterItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCtr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BackColorCtl dispatches through ISystemMonitor's vtable slot 45.
 func (self *ISystemMonitor) Get_BackColorCtl(pColor *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pColor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BackColorCtl dispatches through ISystemMonitor's vtable slot 46.
 func (self *ISystemMonitor) Put_BackColorCtl(Color uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(Color))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LogFileName dispatches through ISystemMonitor's vtable slot 47.
 func (self *ISystemMonitor) Put_LogFileName(bsFileName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bsFileName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LogFileName dispatches through ISystemMonitor's vtable slot 48.
 func (self *ISystemMonitor) Get_LogFileName(bsFileName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bsFileName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LogViewStart dispatches through ISystemMonitor's vtable slot 50.
 func (self *ISystemMonitor) Get_LogViewStart(StartTime *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(StartTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LogViewStop dispatches through ISystemMonitor's vtable slot 52.
 func (self *ISystemMonitor) Get_LogViewStop(StopTime *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(StopTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_GridColor dispatches through ISystemMonitor's vtable slot 53.
 func (self *ISystemMonitor) Get_GridColor(pColor *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pColor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_GridColor dispatches through ISystemMonitor's vtable slot 54.
 func (self *ISystemMonitor) Put_GridColor(Color uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(Color))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TimeBarColor dispatches through ISystemMonitor's vtable slot 55.
 func (self *ISystemMonitor) Get_TimeBarColor(pColor *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pColor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_TimeBarColor dispatches through ISystemMonitor's vtable slot 56.
 func (self *ISystemMonitor) Put_TimeBarColor(Color uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(Color))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Highlight dispatches through ISystemMonitor's vtable slot 57.
 func (self *ISystemMonitor) Get_Highlight(pbState *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Highlight dispatches through ISystemMonitor's vtable slot 58.
 func (self *ISystemMonitor) Put_Highlight(bState foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(bState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ShowToolbar dispatches through ISystemMonitor's vtable slot 59.
 func (self *ISystemMonitor) Get_ShowToolbar(pbState *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ShowToolbar dispatches through ISystemMonitor's vtable slot 60.
 func (self *ISystemMonitor) Put_ShowToolbar(bState foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(bState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Paste dispatches through ISystemMonitor's vtable slot 61.
 func (self *ISystemMonitor) Paste() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Copy dispatches through ISystemMonitor's vtable slot 62.
 func (self *ISystemMonitor) Copy() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through ISystemMonitor's vtable slot 63.
 func (self *ISystemMonitor) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ReadOnly dispatches through ISystemMonitor's vtable slot 64.
 func (self *ISystemMonitor) Put_ReadOnly(bState foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(bState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReadOnly dispatches through ISystemMonitor's vtable slot 65.
 func (self *ISystemMonitor) Get_ReadOnly(pbState *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ReportValueType dispatches through ISystemMonitor's vtable slot 66.
 func (self *ISystemMonitor) Put_ReportValueType(eReportValueType ReportValueTypeConstants) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(eReportValueType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReportValueType dispatches through ISystemMonitor's vtable slot 67.
 func (self *ISystemMonitor) Get_ReportValueType(peReportValueType *ReportValueTypeConstants) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(peReportValueType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MonitorDuplicateInstances dispatches through ISystemMonitor's vtable slot 68.
 func (self *ISystemMonitor) Put_MonitorDuplicateInstances(bState foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(bState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MonitorDuplicateInstances dispatches through ISystemMonitor's vtable slot 69.
 func (self *ISystemMonitor) Get_MonitorDuplicateInstances(pbState *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DisplayFilter dispatches through ISystemMonitor's vtable slot 70.
 func (self *ISystemMonitor) Put_DisplayFilter(iValue int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)), uintptr(iValue))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DisplayFilter dispatches through ISystemMonitor's vtable slot 71.
 func (self *ISystemMonitor) Get_DisplayFilter(piValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LogFiles dispatches through ISystemMonitor's vtable slot 72.
 func (self *ISystemMonitor) Get_LogFiles(ppILogFiles **ILogFiles) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[72], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppILogFiles)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DataSourceType dispatches through ISystemMonitor's vtable slot 73.
 func (self *ISystemMonitor) Put_DataSourceType(eDataSourceType DataSourceTypeConstants) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(eDataSourceType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DataSourceType dispatches through ISystemMonitor's vtable slot 74.
 func (self *ISystemMonitor) Get_DataSourceType(peDataSourceType *DataSourceTypeConstants) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[74], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(peDataSourceType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SqlDsnName dispatches through ISystemMonitor's vtable slot 75.
 func (self *ISystemMonitor) Put_SqlDsnName(bsSqlDsnName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[75], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bsSqlDsnName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SqlDsnName dispatches through ISystemMonitor's vtable slot 76.
 func (self *ISystemMonitor) Get_SqlDsnName(bsSqlDsnName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[76], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bsSqlDsnName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SqlLogSetName dispatches through ISystemMonitor's vtable slot 77.
 func (self *ISystemMonitor) Put_SqlLogSetName(bsSqlLogSetName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[77], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bsSqlLogSetName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SqlLogSetName dispatches through ISystemMonitor's vtable slot 78.
 func (self *ISystemMonitor) Get_SqlLogSetName(bsSqlLogSetName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bsSqlLogSetName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 08e3206a-5fd2-4fde-a8a5-8cb3b63d2677
@@ -2049,115 +2049,115 @@ var IID_ISystemMonitor2 = win32.GUID{Data1: 0x08e3206a, Data2: 0x5fd2, Data3: 0x
 // Put_EnableDigitGrouping dispatches through ISystemMonitor2's vtable slot 79.
 func (self *ISystemMonitor2) Put_EnableDigitGrouping(bState foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[79], uintptr(unsafe.Pointer(self)), uintptr(bState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EnableDigitGrouping dispatches through ISystemMonitor2's vtable slot 80.
 func (self *ISystemMonitor2) Get_EnableDigitGrouping(pbState *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[80], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EnableToolTips dispatches through ISystemMonitor2's vtable slot 81.
 func (self *ISystemMonitor2) Put_EnableToolTips(bState foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(bState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EnableToolTips dispatches through ISystemMonitor2's vtable slot 82.
 func (self *ISystemMonitor2) Get_EnableToolTips(pbState *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ShowTimeAxisLabels dispatches through ISystemMonitor2's vtable slot 83.
 func (self *ISystemMonitor2) Put_ShowTimeAxisLabels(bState foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(bState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ShowTimeAxisLabels dispatches through ISystemMonitor2's vtable slot 84.
 func (self *ISystemMonitor2) Get_ShowTimeAxisLabels(pbState *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ChartScroll dispatches through ISystemMonitor2's vtable slot 85.
 func (self *ISystemMonitor2) Put_ChartScroll(bScroll foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(bScroll))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ChartScroll dispatches through ISystemMonitor2's vtable slot 86.
 func (self *ISystemMonitor2) Get_ChartScroll(pbScroll *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbScroll)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DataPointCount dispatches through ISystemMonitor2's vtable slot 87.
 func (self *ISystemMonitor2) Put_DataPointCount(iNewCount int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[87], uintptr(unsafe.Pointer(self)), uintptr(iNewCount))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DataPointCount dispatches through ISystemMonitor2's vtable slot 88.
 func (self *ISystemMonitor2) Get_DataPointCount(piDataPointCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[88], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piDataPointCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScaleToFit dispatches through ISystemMonitor2's vtable slot 89.
 func (self *ISystemMonitor2) ScaleToFit(bSelectedCountersOnly foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[89], uintptr(unsafe.Pointer(self)), uintptr(bSelectedCountersOnly))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SaveAs dispatches through ISystemMonitor2's vtable slot 90.
 func (self *ISystemMonitor2) SaveAs(bstrFileName foundation.BSTR, eSysmonFileType SysmonFileType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrFileName)), uintptr(eSysmonFileType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Relog dispatches through ISystemMonitor2's vtable slot 91.
 func (self *ISystemMonitor2) Relog(bstrFileName foundation.BSTR, eSysmonFileType SysmonFileType, iFilter int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[91], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrFileName)), uintptr(eSysmonFileType), uintptr(iFilter))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ClearData dispatches through ISystemMonitor2's vtable slot 92.
 func (self *ISystemMonitor2) ClearData() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[92], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LogSourceStartTime dispatches through ISystemMonitor2's vtable slot 93.
 func (self *ISystemMonitor2) Get_LogSourceStartTime(pDate *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[93], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LogSourceStopTime dispatches through ISystemMonitor2's vtable slot 94.
 func (self *ISystemMonitor2) Get_LogSourceStopTime(pDate *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[94], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLogViewRange dispatches through ISystemMonitor2's vtable slot 96.
 func (self *ISystemMonitor2) GetLogViewRange(StartTime *float64, StopTime *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[96], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(StartTime)), uintptr(unsafe.Pointer(StopTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BatchingLock dispatches through ISystemMonitor2's vtable slot 97.
 func (self *ISystemMonitor2) BatchingLock(fLock foundation.VARIANT_BOOL, eBatchReason SysmonBatchReason) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[97], uintptr(unsafe.Pointer(self)), uintptr(fLock), uintptr(eBatchReason))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LoadSettings dispatches through ISystemMonitor2's vtable slot 98.
 func (self *ISystemMonitor2) LoadSettings(bstrSettingFileName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[98], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrSettingFileName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: ee660ea0-4abd-11cf-943a-008029004347
@@ -2205,235 +2205,235 @@ var IID_ITraceDataCollector = win32.GUID{Data1: 0x0383750b, Data2: 0x098b, Data3
 // Get_BufferSize dispatches through ITraceDataCollector's vtable slot 32.
 func (self *ITraceDataCollector) Get_BufferSize(size *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(size)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BufferSize dispatches through ITraceDataCollector's vtable slot 33.
 func (self *ITraceDataCollector) Put_BufferSize(size uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(size))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BuffersLost dispatches through ITraceDataCollector's vtable slot 34.
 func (self *ITraceDataCollector) Get_BuffersLost(buffers *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(buffers)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BuffersLost dispatches through ITraceDataCollector's vtable slot 35.
 func (self *ITraceDataCollector) Put_BuffersLost(buffers uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(buffers))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BuffersWritten dispatches through ITraceDataCollector's vtable slot 36.
 func (self *ITraceDataCollector) Get_BuffersWritten(buffers *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(buffers)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BuffersWritten dispatches through ITraceDataCollector's vtable slot 37.
 func (self *ITraceDataCollector) Put_BuffersWritten(buffers uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(buffers))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ClockType dispatches through ITraceDataCollector's vtable slot 38.
 func (self *ITraceDataCollector) Get_ClockType(clock *ClockType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clock)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ClockType dispatches through ITraceDataCollector's vtable slot 39.
 func (self *ITraceDataCollector) Put_ClockType(clock ClockType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(clock))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EventsLost dispatches through ITraceDataCollector's vtable slot 40.
 func (self *ITraceDataCollector) Get_EventsLost(events *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(events)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EventsLost dispatches through ITraceDataCollector's vtable slot 41.
 func (self *ITraceDataCollector) Put_EventsLost(events uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(events))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ExtendedModes dispatches through ITraceDataCollector's vtable slot 42.
 func (self *ITraceDataCollector) Get_ExtendedModes(mode *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(mode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ExtendedModes dispatches through ITraceDataCollector's vtable slot 43.
 func (self *ITraceDataCollector) Put_ExtendedModes(mode uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(mode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FlushTimer dispatches through ITraceDataCollector's vtable slot 44.
 func (self *ITraceDataCollector) Get_FlushTimer(seconds *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(seconds)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FlushTimer dispatches through ITraceDataCollector's vtable slot 45.
 func (self *ITraceDataCollector) Put_FlushTimer(seconds uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(seconds))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FreeBuffers dispatches through ITraceDataCollector's vtable slot 46.
 func (self *ITraceDataCollector) Get_FreeBuffers(buffers *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(buffers)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FreeBuffers dispatches through ITraceDataCollector's vtable slot 47.
 func (self *ITraceDataCollector) Put_FreeBuffers(buffers uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(buffers))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Guid dispatches through ITraceDataCollector's vtable slot 48.
 func (self *ITraceDataCollector) Get_Guid(guid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsKernelTrace dispatches through ITraceDataCollector's vtable slot 50.
 func (self *ITraceDataCollector) Get_IsKernelTrace(kernel *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(kernel)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MaximumBuffers dispatches through ITraceDataCollector's vtable slot 51.
 func (self *ITraceDataCollector) Get_MaximumBuffers(buffers *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(buffers)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MaximumBuffers dispatches through ITraceDataCollector's vtable slot 52.
 func (self *ITraceDataCollector) Put_MaximumBuffers(buffers uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(buffers))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MinimumBuffers dispatches through ITraceDataCollector's vtable slot 53.
 func (self *ITraceDataCollector) Get_MinimumBuffers(buffers *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(buffers)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MinimumBuffers dispatches through ITraceDataCollector's vtable slot 54.
 func (self *ITraceDataCollector) Put_MinimumBuffers(buffers uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(buffers))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NumberOfBuffers dispatches through ITraceDataCollector's vtable slot 55.
 func (self *ITraceDataCollector) Get_NumberOfBuffers(buffers *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(buffers)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_NumberOfBuffers dispatches through ITraceDataCollector's vtable slot 56.
 func (self *ITraceDataCollector) Put_NumberOfBuffers(buffers uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(buffers))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PreallocateFile dispatches through ITraceDataCollector's vtable slot 57.
 func (self *ITraceDataCollector) Get_PreallocateFile(allocate *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(allocate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PreallocateFile dispatches through ITraceDataCollector's vtable slot 58.
 func (self *ITraceDataCollector) Put_PreallocateFile(allocate foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(allocate))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ProcessMode dispatches through ITraceDataCollector's vtable slot 59.
 func (self *ITraceDataCollector) Get_ProcessMode(process *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(process)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ProcessMode dispatches through ITraceDataCollector's vtable slot 60.
 func (self *ITraceDataCollector) Put_ProcessMode(process foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(process))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RealTimeBuffersLost dispatches through ITraceDataCollector's vtable slot 61.
 func (self *ITraceDataCollector) Get_RealTimeBuffersLost(buffers *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(buffers)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RealTimeBuffersLost dispatches through ITraceDataCollector's vtable slot 62.
 func (self *ITraceDataCollector) Put_RealTimeBuffersLost(buffers uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(buffers))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SessionId dispatches through ITraceDataCollector's vtable slot 63.
 func (self *ITraceDataCollector) Get_SessionId(id *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(id)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SessionId dispatches through ITraceDataCollector's vtable slot 64.
 func (self *ITraceDataCollector) Put_SessionId(id uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(id))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SessionName dispatches through ITraceDataCollector's vtable slot 65.
 func (self *ITraceDataCollector) Get_SessionName(name *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SessionName dispatches through ITraceDataCollector's vtable slot 66.
 func (self *ITraceDataCollector) Put_SessionName(name foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SessionThreadId dispatches through ITraceDataCollector's vtable slot 67.
 func (self *ITraceDataCollector) Get_SessionThreadId(tid *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(tid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SessionThreadId dispatches through ITraceDataCollector's vtable slot 68.
 func (self *ITraceDataCollector) Put_SessionThreadId(tid uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(tid))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StreamMode dispatches through ITraceDataCollector's vtable slot 69.
 func (self *ITraceDataCollector) Get_StreamMode(mode *StreamMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(mode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_StreamMode dispatches through ITraceDataCollector's vtable slot 70.
 func (self *ITraceDataCollector) Put_StreamMode(mode StreamMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)), uintptr(mode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TraceDataProviders dispatches through ITraceDataCollector's vtable slot 71.
 func (self *ITraceDataCollector) Get_TraceDataProviders(providers **ITraceDataProviderCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(providers)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ITraceDataProvider: https://learn.microsoft.com/windows/win32/api/pla/nn-pla-itracedataprovider
@@ -2448,109 +2448,109 @@ var IID_ITraceDataProvider = win32.GUID{Data1: 0x03837512, Data2: 0x098b, Data3:
 // Get_DisplayName dispatches through ITraceDataProvider's vtable slot 7.
 func (self *ITraceDataProvider) Get_DisplayName(name *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DisplayName dispatches through ITraceDataProvider's vtable slot 8.
 func (self *ITraceDataProvider) Put_DisplayName(name foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Guid dispatches through ITraceDataProvider's vtable slot 9.
 func (self *ITraceDataProvider) Get_Guid(guid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Level dispatches through ITraceDataProvider's vtable slot 11.
 func (self *ITraceDataProvider) Get_Level(ppLevel **IValueMap) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppLevel)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_KeywordsAny dispatches through ITraceDataProvider's vtable slot 12.
 func (self *ITraceDataProvider) Get_KeywordsAny(ppKeywords **IValueMap) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppKeywords)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_KeywordsAll dispatches through ITraceDataProvider's vtable slot 13.
 func (self *ITraceDataProvider) Get_KeywordsAll(ppKeywords **IValueMap) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppKeywords)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Properties dispatches through ITraceDataProvider's vtable slot 14.
 func (self *ITraceDataProvider) Get_Properties(ppProperties **IValueMap) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProperties)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FilterEnabled dispatches through ITraceDataProvider's vtable slot 15.
 func (self *ITraceDataProvider) Get_FilterEnabled(FilterEnabled *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(FilterEnabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FilterEnabled dispatches through ITraceDataProvider's vtable slot 16.
 func (self *ITraceDataProvider) Put_FilterEnabled(FilterEnabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(FilterEnabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FilterType dispatches through ITraceDataProvider's vtable slot 17.
 func (self *ITraceDataProvider) Get_FilterType(pulType *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FilterType dispatches through ITraceDataProvider's vtable slot 18.
 func (self *ITraceDataProvider) Put_FilterType(ulType uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(ulType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FilterData dispatches through ITraceDataProvider's vtable slot 19.
 func (self *ITraceDataProvider) Get_FilterData(ppData **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FilterData dispatches through ITraceDataProvider's vtable slot 20.
 func (self *ITraceDataProvider) Put_FilterData(pData *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Query dispatches through ITraceDataProvider's vtable slot 21.
 func (self *ITraceDataProvider) Query(bstrName foundation.BSTR, bstrServer foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(bstrServer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Resolve dispatches through ITraceDataProvider's vtable slot 22.
 func (self *ITraceDataProvider) Resolve(pFrom *systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFrom)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetSecurity dispatches through ITraceDataProvider's vtable slot 23.
 func (self *ITraceDataProvider) SetSecurity(Sddl foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Sddl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSecurity dispatches through ITraceDataProvider's vtable slot 24.
 func (self *ITraceDataProvider) GetSecurity(SecurityInfo uint32, Sddl *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(SecurityInfo), uintptr(unsafe.Pointer(Sddl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRegisteredProcesses dispatches through ITraceDataProvider's vtable slot 25.
 func (self *ITraceDataProvider) GetRegisteredProcesses(Processes **IValueMap) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Processes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ITraceDataProviderCollection: https://learn.microsoft.com/windows/win32/api/pla/nn-pla-itracedataprovidercollection
@@ -2565,49 +2565,49 @@ var IID_ITraceDataProviderCollection = win32.GUID{Data1: 0x03837510, Data2: 0x09
 // Get_Count dispatches through ITraceDataProviderCollection's vtable slot 7.
 func (self *ITraceDataProviderCollection) Get_Count(retVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ITraceDataProviderCollection's vtable slot 9.
 func (self *ITraceDataProviderCollection) Get__NewEnum(retVal **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through ITraceDataProviderCollection's vtable slot 10.
 func (self *ITraceDataProviderCollection) Add(pProvider *ITraceDataProvider) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProvider)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through ITraceDataProviderCollection's vtable slot 12.
 func (self *ITraceDataProviderCollection) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddRange dispatches through ITraceDataProviderCollection's vtable slot 13.
 func (self *ITraceDataProviderCollection) AddRange(providers *ITraceDataProviderCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(providers)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateTraceDataProvider dispatches through ITraceDataProviderCollection's vtable slot 14.
 func (self *ITraceDataProviderCollection) CreateTraceDataProvider(Provider **ITraceDataProvider) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Provider)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTraceDataProviders dispatches through ITraceDataProviderCollection's vtable slot 15.
 func (self *ITraceDataProviderCollection) GetTraceDataProviders(server foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(server)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTraceDataProvidersByProcess dispatches through ITraceDataProviderCollection's vtable slot 16.
 func (self *ITraceDataProviderCollection) GetTraceDataProvidersByProcess(Server foundation.BSTR, Pid uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Server)), uintptr(Pid))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IValueMap: https://learn.microsoft.com/windows/win32/api/pla/nn-pla-ivaluemap
@@ -2622,61 +2622,61 @@ var IID_IValueMap = win32.GUID{Data1: 0x03837534, Data2: 0x098b, Data3: 0x11d8, 
 // Get_Count dispatches through IValueMap's vtable slot 7.
 func (self *IValueMap) Get_Count(retVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IValueMap's vtable slot 9.
 func (self *IValueMap) Get__NewEnum(retVal **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through IValueMap's vtable slot 10.
 func (self *IValueMap) Get_Description(description *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(description)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Description dispatches through IValueMap's vtable slot 11.
 func (self *IValueMap) Put_Description(description foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(description)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Value dispatches through IValueMap's vtable slot 12.
 func (self *IValueMap) Get_Value(Value *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ValueMapType dispatches through IValueMap's vtable slot 14.
 func (self *IValueMap) Get_ValueMapType(type_ *ValueMapType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(type_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ValueMapType dispatches through IValueMap's vtable slot 15.
 func (self *IValueMap) Put_ValueMapType(type_ ValueMapType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(type_))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through IValueMap's vtable slot 18.
 func (self *IValueMap) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddRange dispatches through IValueMap's vtable slot 19.
 func (self *IValueMap) AddRange(map_ *IValueMap) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(map_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateValueMapItem dispatches through IValueMap's vtable slot 20.
 func (self *IValueMap) CreateValueMapItem(Item **IValueMapItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Item)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IValueMapItem: https://learn.microsoft.com/windows/win32/api/pla/nn-pla-ivaluemapitem
@@ -2691,55 +2691,55 @@ var IID_IValueMapItem = win32.GUID{Data1: 0x03837533, Data2: 0x098b, Data3: 0x11
 // Get_Description dispatches through IValueMapItem's vtable slot 7.
 func (self *IValueMapItem) Get_Description(description *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(description)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Description dispatches through IValueMapItem's vtable slot 8.
 func (self *IValueMapItem) Put_Description(description foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(description)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Enabled dispatches through IValueMapItem's vtable slot 9.
 func (self *IValueMapItem) Get_Enabled(enabled *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(enabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Enabled dispatches through IValueMapItem's vtable slot 10.
 func (self *IValueMapItem) Put_Enabled(enabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(enabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Key dispatches through IValueMapItem's vtable slot 11.
 func (self *IValueMapItem) Get_Key(key *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Key dispatches through IValueMapItem's vtable slot 12.
 func (self *IValueMapItem) Put_Key(key foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Value dispatches through IValueMapItem's vtable slot 13.
 func (self *IValueMapItem) Get_Value(Value *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ValueMapType dispatches through IValueMapItem's vtable slot 15.
 func (self *IValueMapItem) Get_ValueMapType(type_ *ValueMapType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(type_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ValueMapType dispatches through IValueMapItem's vtable slot 16.
 func (self *IValueMapItem) Put_ValueMapType(type_ ValueMapType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(type_))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: de1a6b74-9182-4c41-8e2c-24c2cd30ee83
@@ -2753,103 +2753,103 @@ var IID_ICounterItemUnion = win32.GUID{Data1: 0xde1a6b74, Data2: 0x9182, Data3: 
 // Get_Value dispatches through _ICounterItemUnion's vtable slot 3.
 func (self *ICounterItemUnion) Get_Value(pdblValue *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdblValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Color dispatches through _ICounterItemUnion's vtable slot 4.
 func (self *ICounterItemUnion) Put_Color(Color uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Color))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Color dispatches through _ICounterItemUnion's vtable slot 5.
 func (self *ICounterItemUnion) Get_Color(pColor *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pColor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Width dispatches through _ICounterItemUnion's vtable slot 6.
 func (self *ICounterItemUnion) Put_Width(iWidth int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(iWidth))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Width dispatches through _ICounterItemUnion's vtable slot 7.
 func (self *ICounterItemUnion) Get_Width(piValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LineStyle dispatches through _ICounterItemUnion's vtable slot 8.
 func (self *ICounterItemUnion) Put_LineStyle(iLineStyle int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(iLineStyle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LineStyle dispatches through _ICounterItemUnion's vtable slot 9.
 func (self *ICounterItemUnion) Get_LineStyle(piValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ScaleFactor dispatches through _ICounterItemUnion's vtable slot 10.
 func (self *ICounterItemUnion) Put_ScaleFactor(iScale int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(iScale))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ScaleFactor dispatches through _ICounterItemUnion's vtable slot 11.
 func (self *ICounterItemUnion) Get_ScaleFactor(piValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Path dispatches through _ICounterItemUnion's vtable slot 12.
 func (self *ICounterItemUnion) Get_Path(pstrValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetValue dispatches through _ICounterItemUnion's vtable slot 13.
 func (self *ICounterItemUnion) GetValue(Value *float64, Status *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)), uintptr(unsafe.Pointer(Status)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStatistics dispatches through _ICounterItemUnion's vtable slot 14.
 func (self *ICounterItemUnion) GetStatistics(Max *float64, Min *float64, Avg *float64, Status *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Max)), uintptr(unsafe.Pointer(Min)), uintptr(unsafe.Pointer(Avg)), uintptr(unsafe.Pointer(Status)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Selected dispatches through _ICounterItemUnion's vtable slot 15.
 func (self *ICounterItemUnion) Put_Selected(bState foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(bState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Selected dispatches through _ICounterItemUnion's vtable slot 16.
 func (self *ICounterItemUnion) Get_Selected(pbState *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Visible dispatches through _ICounterItemUnion's vtable slot 17.
 func (self *ICounterItemUnion) Put_Visible(bState foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(bState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Visible dispatches through _ICounterItemUnion's vtable slot 18.
 func (self *ICounterItemUnion) Get_Visible(pbState *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDataAt dispatches through _ICounterItemUnion's vtable slot 19.
 func (self *ICounterItemUnion) GetDataAt(iIndex int32, iWhich SysmonDataType, pVariant *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(iIndex), uintptr(iWhich), uintptr(unsafe.Pointer(pVariant)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: c8a77338-265f-4de5-aa25-c7da1ce5a8f4
@@ -2863,551 +2863,551 @@ var IID_ISystemMonitorUnion = win32.GUID{Data1: 0xc8a77338, Data2: 0x265f, Data3
 // Get_Appearance dispatches through _ISystemMonitorUnion's vtable slot 3.
 func (self *ISystemMonitorUnion) Get_Appearance(iAppearance *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(iAppearance)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Appearance dispatches through _ISystemMonitorUnion's vtable slot 4.
 func (self *ISystemMonitorUnion) Put_Appearance(iAppearance int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(iAppearance))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BackColor dispatches through _ISystemMonitorUnion's vtable slot 5.
 func (self *ISystemMonitorUnion) Get_BackColor(pColor *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pColor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BackColor dispatches through _ISystemMonitorUnion's vtable slot 6.
 func (self *ISystemMonitorUnion) Put_BackColor(Color uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(Color))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BorderStyle dispatches through _ISystemMonitorUnion's vtable slot 7.
 func (self *ISystemMonitorUnion) Get_BorderStyle(iBorderStyle *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(iBorderStyle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BorderStyle dispatches through _ISystemMonitorUnion's vtable slot 8.
 func (self *ISystemMonitorUnion) Put_BorderStyle(iBorderStyle int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(iBorderStyle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ForeColor dispatches through _ISystemMonitorUnion's vtable slot 9.
 func (self *ISystemMonitorUnion) Get_ForeColor(pColor *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pColor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ForeColor dispatches through _ISystemMonitorUnion's vtable slot 10.
 func (self *ISystemMonitorUnion) Put_ForeColor(Color uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Color))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Font dispatches through _ISystemMonitorUnion's vtable slot 11.
 func (self *ISystemMonitorUnion) Get_Font(ppFont **systemole.IFontDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFont)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_Font dispatches through _ISystemMonitorUnion's vtable slot 12.
 func (self *ISystemMonitorUnion) Putref_Font(pFont *systemole.IFontDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFont)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Counters dispatches through _ISystemMonitorUnion's vtable slot 13.
 func (self *ISystemMonitorUnion) Get_Counters(ppICounters **ICounters) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppICounters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ShowVerticalGrid dispatches through _ISystemMonitorUnion's vtable slot 14.
 func (self *ISystemMonitorUnion) Put_ShowVerticalGrid(bState foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(bState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ShowVerticalGrid dispatches through _ISystemMonitorUnion's vtable slot 15.
 func (self *ISystemMonitorUnion) Get_ShowVerticalGrid(pbState *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ShowHorizontalGrid dispatches through _ISystemMonitorUnion's vtable slot 16.
 func (self *ISystemMonitorUnion) Put_ShowHorizontalGrid(bState foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(bState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ShowHorizontalGrid dispatches through _ISystemMonitorUnion's vtable slot 17.
 func (self *ISystemMonitorUnion) Get_ShowHorizontalGrid(pbState *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ShowLegend dispatches through _ISystemMonitorUnion's vtable slot 18.
 func (self *ISystemMonitorUnion) Put_ShowLegend(bState foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(bState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ShowLegend dispatches through _ISystemMonitorUnion's vtable slot 19.
 func (self *ISystemMonitorUnion) Get_ShowLegend(pbState *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ShowScaleLabels dispatches through _ISystemMonitorUnion's vtable slot 20.
 func (self *ISystemMonitorUnion) Put_ShowScaleLabels(bState foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(bState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ShowScaleLabels dispatches through _ISystemMonitorUnion's vtable slot 21.
 func (self *ISystemMonitorUnion) Get_ShowScaleLabels(pbState *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ShowValueBar dispatches through _ISystemMonitorUnion's vtable slot 22.
 func (self *ISystemMonitorUnion) Put_ShowValueBar(bState foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(bState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ShowValueBar dispatches through _ISystemMonitorUnion's vtable slot 23.
 func (self *ISystemMonitorUnion) Get_ShowValueBar(pbState *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MaximumScale dispatches through _ISystemMonitorUnion's vtable slot 24.
 func (self *ISystemMonitorUnion) Put_MaximumScale(iValue int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(iValue))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MaximumScale dispatches through _ISystemMonitorUnion's vtable slot 25.
 func (self *ISystemMonitorUnion) Get_MaximumScale(piValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MinimumScale dispatches through _ISystemMonitorUnion's vtable slot 26.
 func (self *ISystemMonitorUnion) Put_MinimumScale(iValue int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(iValue))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MinimumScale dispatches through _ISystemMonitorUnion's vtable slot 27.
 func (self *ISystemMonitorUnion) Get_MinimumScale(piValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UpdateInterval dispatches through _ISystemMonitorUnion's vtable slot 29.
 func (self *ISystemMonitorUnion) Get_UpdateInterval(pfValue *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DisplayType dispatches through _ISystemMonitorUnion's vtable slot 30.
 func (self *ISystemMonitorUnion) Put_DisplayType(eDisplayType DisplayTypeConstants) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(eDisplayType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DisplayType dispatches through _ISystemMonitorUnion's vtable slot 31.
 func (self *ISystemMonitorUnion) Get_DisplayType(peDisplayType *DisplayTypeConstants) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(peDisplayType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ManualUpdate dispatches through _ISystemMonitorUnion's vtable slot 32.
 func (self *ISystemMonitorUnion) Put_ManualUpdate(bState foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(bState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ManualUpdate dispatches through _ISystemMonitorUnion's vtable slot 33.
 func (self *ISystemMonitorUnion) Get_ManualUpdate(pbState *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_GraphTitle dispatches through _ISystemMonitorUnion's vtable slot 34.
 func (self *ISystemMonitorUnion) Put_GraphTitle(bsTitle foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bsTitle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_GraphTitle dispatches through _ISystemMonitorUnion's vtable slot 35.
 func (self *ISystemMonitorUnion) Get_GraphTitle(pbsTitle *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbsTitle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_YAxisLabel dispatches through _ISystemMonitorUnion's vtable slot 36.
 func (self *ISystemMonitorUnion) Put_YAxisLabel(bsTitle foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bsTitle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_YAxisLabel dispatches through _ISystemMonitorUnion's vtable slot 37.
 func (self *ISystemMonitorUnion) Get_YAxisLabel(pbsTitle *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbsTitle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CollectSample dispatches through _ISystemMonitorUnion's vtable slot 38.
 func (self *ISystemMonitorUnion) CollectSample() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UpdateGraph dispatches through _ISystemMonitorUnion's vtable slot 39.
 func (self *ISystemMonitorUnion) UpdateGraph() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BrowseCounters dispatches through _ISystemMonitorUnion's vtable slot 40.
 func (self *ISystemMonitorUnion) BrowseCounters() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DisplayProperties dispatches through _ISystemMonitorUnion's vtable slot 41.
 func (self *ISystemMonitorUnion) DisplayProperties() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Counter dispatches through _ISystemMonitorUnion's vtable slot 42.
 func (self *ISystemMonitorUnion) Counter(iIndex int32, ppICounter **ICounterItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(iIndex), uintptr(unsafe.Pointer(ppICounter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddCounter dispatches through _ISystemMonitorUnion's vtable slot 43.
 func (self *ISystemMonitorUnion) AddCounter(bsPath foundation.BSTR, ppICounter **ICounterItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bsPath)), uintptr(unsafe.Pointer(ppICounter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteCounter dispatches through _ISystemMonitorUnion's vtable slot 44.
 func (self *ISystemMonitorUnion) DeleteCounter(pCtr *ICounterItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCtr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BackColorCtl dispatches through _ISystemMonitorUnion's vtable slot 45.
 func (self *ISystemMonitorUnion) Get_BackColorCtl(pColor *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pColor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BackColorCtl dispatches through _ISystemMonitorUnion's vtable slot 46.
 func (self *ISystemMonitorUnion) Put_BackColorCtl(Color uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(Color))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LogFileName dispatches through _ISystemMonitorUnion's vtable slot 47.
 func (self *ISystemMonitorUnion) Put_LogFileName(bsFileName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bsFileName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LogFileName dispatches through _ISystemMonitorUnion's vtable slot 48.
 func (self *ISystemMonitorUnion) Get_LogFileName(bsFileName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bsFileName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LogViewStart dispatches through _ISystemMonitorUnion's vtable slot 50.
 func (self *ISystemMonitorUnion) Get_LogViewStart(StartTime *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(StartTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LogViewStop dispatches through _ISystemMonitorUnion's vtable slot 52.
 func (self *ISystemMonitorUnion) Get_LogViewStop(StopTime *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(StopTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_GridColor dispatches through _ISystemMonitorUnion's vtable slot 53.
 func (self *ISystemMonitorUnion) Get_GridColor(pColor *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pColor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_GridColor dispatches through _ISystemMonitorUnion's vtable slot 54.
 func (self *ISystemMonitorUnion) Put_GridColor(Color uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(Color))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TimeBarColor dispatches through _ISystemMonitorUnion's vtable slot 55.
 func (self *ISystemMonitorUnion) Get_TimeBarColor(pColor *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pColor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_TimeBarColor dispatches through _ISystemMonitorUnion's vtable slot 56.
 func (self *ISystemMonitorUnion) Put_TimeBarColor(Color uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(Color))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Highlight dispatches through _ISystemMonitorUnion's vtable slot 57.
 func (self *ISystemMonitorUnion) Get_Highlight(pbState *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Highlight dispatches through _ISystemMonitorUnion's vtable slot 58.
 func (self *ISystemMonitorUnion) Put_Highlight(bState foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(bState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ShowToolbar dispatches through _ISystemMonitorUnion's vtable slot 59.
 func (self *ISystemMonitorUnion) Get_ShowToolbar(pbState *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ShowToolbar dispatches through _ISystemMonitorUnion's vtable slot 60.
 func (self *ISystemMonitorUnion) Put_ShowToolbar(bState foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(bState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Paste dispatches through _ISystemMonitorUnion's vtable slot 61.
 func (self *ISystemMonitorUnion) Paste() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Copy dispatches through _ISystemMonitorUnion's vtable slot 62.
 func (self *ISystemMonitorUnion) Copy() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through _ISystemMonitorUnion's vtable slot 63.
 func (self *ISystemMonitorUnion) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ReadOnly dispatches through _ISystemMonitorUnion's vtable slot 64.
 func (self *ISystemMonitorUnion) Put_ReadOnly(bState foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(bState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReadOnly dispatches through _ISystemMonitorUnion's vtable slot 65.
 func (self *ISystemMonitorUnion) Get_ReadOnly(pbState *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ReportValueType dispatches through _ISystemMonitorUnion's vtable slot 66.
 func (self *ISystemMonitorUnion) Put_ReportValueType(eReportValueType ReportValueTypeConstants) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(eReportValueType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReportValueType dispatches through _ISystemMonitorUnion's vtable slot 67.
 func (self *ISystemMonitorUnion) Get_ReportValueType(peReportValueType *ReportValueTypeConstants) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(peReportValueType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MonitorDuplicateInstances dispatches through _ISystemMonitorUnion's vtable slot 68.
 func (self *ISystemMonitorUnion) Put_MonitorDuplicateInstances(bState foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(bState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MonitorDuplicateInstances dispatches through _ISystemMonitorUnion's vtable slot 69.
 func (self *ISystemMonitorUnion) Get_MonitorDuplicateInstances(pbState *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DisplayFilter dispatches through _ISystemMonitorUnion's vtable slot 70.
 func (self *ISystemMonitorUnion) Put_DisplayFilter(iValue int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)), uintptr(iValue))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DisplayFilter dispatches through _ISystemMonitorUnion's vtable slot 71.
 func (self *ISystemMonitorUnion) Get_DisplayFilter(piValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LogFiles dispatches through _ISystemMonitorUnion's vtable slot 72.
 func (self *ISystemMonitorUnion) Get_LogFiles(ppILogFiles **ILogFiles) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[72], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppILogFiles)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DataSourceType dispatches through _ISystemMonitorUnion's vtable slot 73.
 func (self *ISystemMonitorUnion) Put_DataSourceType(eDataSourceType DataSourceTypeConstants) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(eDataSourceType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DataSourceType dispatches through _ISystemMonitorUnion's vtable slot 74.
 func (self *ISystemMonitorUnion) Get_DataSourceType(peDataSourceType *DataSourceTypeConstants) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[74], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(peDataSourceType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SqlDsnName dispatches through _ISystemMonitorUnion's vtable slot 75.
 func (self *ISystemMonitorUnion) Put_SqlDsnName(bsSqlDsnName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[75], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bsSqlDsnName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SqlDsnName dispatches through _ISystemMonitorUnion's vtable slot 76.
 func (self *ISystemMonitorUnion) Get_SqlDsnName(bsSqlDsnName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[76], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bsSqlDsnName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SqlLogSetName dispatches through _ISystemMonitorUnion's vtable slot 77.
 func (self *ISystemMonitorUnion) Put_SqlLogSetName(bsSqlLogSetName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[77], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bsSqlLogSetName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SqlLogSetName dispatches through _ISystemMonitorUnion's vtable slot 78.
 func (self *ISystemMonitorUnion) Get_SqlLogSetName(bsSqlLogSetName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bsSqlLogSetName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EnableDigitGrouping dispatches through _ISystemMonitorUnion's vtable slot 79.
 func (self *ISystemMonitorUnion) Put_EnableDigitGrouping(bState foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[79], uintptr(unsafe.Pointer(self)), uintptr(bState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EnableDigitGrouping dispatches through _ISystemMonitorUnion's vtable slot 80.
 func (self *ISystemMonitorUnion) Get_EnableDigitGrouping(pbState *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[80], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EnableToolTips dispatches through _ISystemMonitorUnion's vtable slot 81.
 func (self *ISystemMonitorUnion) Put_EnableToolTips(bState foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(bState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EnableToolTips dispatches through _ISystemMonitorUnion's vtable slot 82.
 func (self *ISystemMonitorUnion) Get_EnableToolTips(pbState *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ShowTimeAxisLabels dispatches through _ISystemMonitorUnion's vtable slot 83.
 func (self *ISystemMonitorUnion) Put_ShowTimeAxisLabels(bState foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(bState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ShowTimeAxisLabels dispatches through _ISystemMonitorUnion's vtable slot 84.
 func (self *ISystemMonitorUnion) Get_ShowTimeAxisLabels(pbState *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ChartScroll dispatches through _ISystemMonitorUnion's vtable slot 85.
 func (self *ISystemMonitorUnion) Put_ChartScroll(bScroll foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(bScroll))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ChartScroll dispatches through _ISystemMonitorUnion's vtable slot 86.
 func (self *ISystemMonitorUnion) Get_ChartScroll(pbScroll *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbScroll)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DataPointCount dispatches through _ISystemMonitorUnion's vtable slot 87.
 func (self *ISystemMonitorUnion) Put_DataPointCount(iNewCount int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[87], uintptr(unsafe.Pointer(self)), uintptr(iNewCount))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DataPointCount dispatches through _ISystemMonitorUnion's vtable slot 88.
 func (self *ISystemMonitorUnion) Get_DataPointCount(piDataPointCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[88], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piDataPointCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScaleToFit dispatches through _ISystemMonitorUnion's vtable slot 89.
 func (self *ISystemMonitorUnion) ScaleToFit(bSelectedCountersOnly foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[89], uintptr(unsafe.Pointer(self)), uintptr(bSelectedCountersOnly))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SaveAs dispatches through _ISystemMonitorUnion's vtable slot 90.
 func (self *ISystemMonitorUnion) SaveAs(bstrFileName foundation.BSTR, eSysmonFileType SysmonFileType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrFileName)), uintptr(eSysmonFileType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Relog dispatches through _ISystemMonitorUnion's vtable slot 91.
 func (self *ISystemMonitorUnion) Relog(bstrFileName foundation.BSTR, eSysmonFileType SysmonFileType, iFilter int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[91], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrFileName)), uintptr(eSysmonFileType), uintptr(iFilter))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ClearData dispatches through _ISystemMonitorUnion's vtable slot 92.
 func (self *ISystemMonitorUnion) ClearData() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[92], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LogSourceStartTime dispatches through _ISystemMonitorUnion's vtable slot 93.
 func (self *ISystemMonitorUnion) Get_LogSourceStartTime(pDate *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[93], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LogSourceStopTime dispatches through _ISystemMonitorUnion's vtable slot 94.
 func (self *ISystemMonitorUnion) Get_LogSourceStopTime(pDate *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[94], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLogViewRange dispatches through _ISystemMonitorUnion's vtable slot 96.
 func (self *ISystemMonitorUnion) GetLogViewRange(StartTime *float64, StopTime *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[96], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(StartTime)), uintptr(unsafe.Pointer(StopTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BatchingLock dispatches through _ISystemMonitorUnion's vtable slot 97.
 func (self *ISystemMonitorUnion) BatchingLock(fLock foundation.VARIANT_BOOL, eBatchReason SysmonBatchReason) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[97], uintptr(unsafe.Pointer(self)), uintptr(fLock), uintptr(eBatchReason))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LoadSettings dispatches through _ISystemMonitorUnion's vtable slot 98.
 func (self *ISystemMonitorUnion) LoadSettings(bstrSettingFileName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[98], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrSettingFileName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

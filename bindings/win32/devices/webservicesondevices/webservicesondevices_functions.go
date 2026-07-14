@@ -72,7 +72,7 @@ func WSDAttachLinkedMemory(pParent unsafe.Pointer, pChild unsafe.Pointer) {
 func WSDCreateDeviceHost(pszLocalId string, pContext *IWSDXMLContext, ppDeviceHost **IWSDDeviceHost) error {
 	_pszLocalId := win32.UTF16Ptr(pszLocalId)
 	r1, _, _ := syscall.SyscallN(procWSDCreateDeviceHost.Addr(), uintptr(unsafe.Pointer(_pszLocalId)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(ppDeviceHost)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WSDCreateDeviceHost2 calls wsdapi!WSDCreateDeviceHost2.
@@ -85,7 +85,7 @@ func WSDCreateDeviceHost2(pszLocalId string, pContext *IWSDXMLContext, pConfigPa
 		_pConfigParams = &pConfigParams[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWSDCreateDeviceHost2.Addr(), uintptr(unsafe.Pointer(_pszLocalId)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(_pConfigParams)), uintptr(len(pConfigParams)), uintptr(unsafe.Pointer(ppDeviceHost)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WSDCreateDeviceHostAdvanced calls wsdapi!WSDCreateDeviceHostAdvanced.
@@ -98,7 +98,7 @@ func WSDCreateDeviceHostAdvanced(pszLocalId string, pContext *IWSDXMLContext, pp
 		_ppHostAddresses = &ppHostAddresses[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWSDCreateDeviceHostAdvanced.Addr(), uintptr(unsafe.Pointer(_pszLocalId)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(_ppHostAddresses)), uintptr(len(ppHostAddresses)), uintptr(unsafe.Pointer(ppDeviceHost)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WSDCreateDeviceProxy calls wsdapi!WSDCreateDeviceProxy.
@@ -108,7 +108,7 @@ func WSDCreateDeviceProxy(pszDeviceId string, pszLocalId string, pContext *IWSDX
 	_pszDeviceId := win32.UTF16Ptr(pszDeviceId)
 	_pszLocalId := win32.UTF16Ptr(pszLocalId)
 	r1, _, _ := syscall.SyscallN(procWSDCreateDeviceProxy.Addr(), uintptr(unsafe.Pointer(_pszDeviceId)), uintptr(unsafe.Pointer(_pszLocalId)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(ppDeviceProxy)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WSDCreateDeviceProxy2 calls wsdapi!WSDCreateDeviceProxy2.
@@ -122,7 +122,7 @@ func WSDCreateDeviceProxy2(pszDeviceId string, pszLocalId string, pContext *IWSD
 		_pConfigParams = &pConfigParams[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWSDCreateDeviceProxy2.Addr(), uintptr(unsafe.Pointer(_pszDeviceId)), uintptr(unsafe.Pointer(_pszLocalId)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(_pConfigParams)), uintptr(len(pConfigParams)), uintptr(unsafe.Pointer(ppDeviceProxy)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WSDCreateDeviceProxyAdvanced calls wsdapi!WSDCreateDeviceProxyAdvanced.
@@ -132,7 +132,7 @@ func WSDCreateDeviceProxyAdvanced(pszDeviceId string, pDeviceAddress *IWSDAddres
 	_pszDeviceId := win32.UTF16Ptr(pszDeviceId)
 	_pszLocalId := win32.UTF16Ptr(pszLocalId)
 	r1, _, _ := syscall.SyscallN(procWSDCreateDeviceProxyAdvanced.Addr(), uintptr(unsafe.Pointer(_pszDeviceId)), uintptr(unsafe.Pointer(pDeviceAddress)), uintptr(unsafe.Pointer(_pszLocalId)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(ppDeviceProxy)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WSDCreateDiscoveryProvider calls wsdapi!WSDCreateDiscoveryProvider.
@@ -140,7 +140,7 @@ func WSDCreateDeviceProxyAdvanced(pszDeviceId string, pDeviceAddress *IWSDAddres
 // Minimum OS: windows6.0.6000.
 func WSDCreateDiscoveryProvider(pContext *IWSDXMLContext, ppProvider **IWSDiscoveryProvider) error {
 	r1, _, _ := syscall.SyscallN(procWSDCreateDiscoveryProvider.Addr(), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(ppProvider)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WSDCreateDiscoveryProvider2 calls wsdapi!WSDCreateDiscoveryProvider2.
@@ -152,7 +152,7 @@ func WSDCreateDiscoveryProvider2(pContext *IWSDXMLContext, pConfigParams []WSD_C
 		_pConfigParams = &pConfigParams[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWSDCreateDiscoveryProvider2.Addr(), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(_pConfigParams)), uintptr(len(pConfigParams)), uintptr(unsafe.Pointer(ppProvider)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WSDCreateDiscoveryPublisher calls wsdapi!WSDCreateDiscoveryPublisher.
@@ -160,7 +160,7 @@ func WSDCreateDiscoveryProvider2(pContext *IWSDXMLContext, pConfigParams []WSD_C
 // Minimum OS: windows6.0.6000.
 func WSDCreateDiscoveryPublisher(pContext *IWSDXMLContext, ppPublisher **IWSDiscoveryPublisher) error {
 	r1, _, _ := syscall.SyscallN(procWSDCreateDiscoveryPublisher.Addr(), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(ppPublisher)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WSDCreateDiscoveryPublisher2 calls wsdapi!WSDCreateDiscoveryPublisher2.
@@ -172,7 +172,7 @@ func WSDCreateDiscoveryPublisher2(pContext *IWSDXMLContext, pConfigParams []WSD_
 		_pConfigParams = &pConfigParams[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWSDCreateDiscoveryPublisher2.Addr(), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(_pConfigParams)), uintptr(len(pConfigParams)), uintptr(unsafe.Pointer(ppPublisher)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WSDCreateHttpAddress calls wsdapi!WSDCreateHttpAddress.
@@ -180,7 +180,7 @@ func WSDCreateDiscoveryPublisher2(pContext *IWSDXMLContext, pConfigParams []WSD_
 // Minimum OS: windows6.0.6000.
 func WSDCreateHttpAddress(ppAddress **IWSDHttpAddress) error {
 	r1, _, _ := syscall.SyscallN(procWSDCreateHttpAddress.Addr(), uintptr(unsafe.Pointer(ppAddress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WSDCreateHttpMessageParameters calls wsdapi!WSDCreateHttpMessageParameters.
@@ -188,7 +188,7 @@ func WSDCreateHttpAddress(ppAddress **IWSDHttpAddress) error {
 // Minimum OS: windows6.0.6000.
 func WSDCreateHttpMessageParameters(ppTxParams **IWSDHttpMessageParameters) error {
 	r1, _, _ := syscall.SyscallN(procWSDCreateHttpMessageParameters.Addr(), uintptr(unsafe.Pointer(ppTxParams)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WSDCreateOutboundAttachment calls wsdapi!WSDCreateOutboundAttachment.
@@ -196,7 +196,7 @@ func WSDCreateHttpMessageParameters(ppTxParams **IWSDHttpMessageParameters) erro
 // Minimum OS: windows6.0.6000.
 func WSDCreateOutboundAttachment(ppAttachment **IWSDOutboundAttachment) error {
 	r1, _, _ := syscall.SyscallN(procWSDCreateOutboundAttachment.Addr(), uintptr(unsafe.Pointer(ppAttachment)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WSDCreateUdpAddress calls wsdapi!WSDCreateUdpAddress.
@@ -204,7 +204,7 @@ func WSDCreateOutboundAttachment(ppAttachment **IWSDOutboundAttachment) error {
 // Minimum OS: windows6.0.6000.
 func WSDCreateUdpAddress(ppAddress **IWSDUdpAddress) error {
 	r1, _, _ := syscall.SyscallN(procWSDCreateUdpAddress.Addr(), uintptr(unsafe.Pointer(ppAddress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WSDCreateUdpMessageParameters calls wsdapi!WSDCreateUdpMessageParameters.
@@ -212,7 +212,7 @@ func WSDCreateUdpAddress(ppAddress **IWSDUdpAddress) error {
 // Minimum OS: windows6.0.6000.
 func WSDCreateUdpMessageParameters(ppTxParams **IWSDUdpMessageParameters) error {
 	r1, _, _ := syscall.SyscallN(procWSDCreateUdpMessageParameters.Addr(), uintptr(unsafe.Pointer(ppTxParams)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WSDDetachLinkedMemory calls wsdapi!WSDDetachLinkedMemory.
@@ -238,7 +238,7 @@ func WSDGenerateFault(pszCode string, pszSubCode string, pszReason string, pszDe
 	_pszReason := win32.UTF16Ptr(pszReason)
 	_pszDetail := win32.UTF16Ptr(pszDetail)
 	r1, _, _ := syscall.SyscallN(procWSDGenerateFault.Addr(), uintptr(unsafe.Pointer(_pszCode)), uintptr(unsafe.Pointer(_pszSubCode)), uintptr(unsafe.Pointer(_pszReason)), uintptr(unsafe.Pointer(_pszDetail)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(ppFault)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WSDGenerateFaultEx calls wsdapi!WSDGenerateFaultEx.
@@ -247,7 +247,7 @@ func WSDGenerateFault(pszCode string, pszSubCode string, pszReason string, pszDe
 func WSDGenerateFaultEx(pCode *WSDXML_NAME, pSubCode *WSDXML_NAME, pReasons *WSD_LOCALIZED_STRING_LIST, pszDetail string, ppFault **WSD_SOAP_FAULT) error {
 	_pszDetail := win32.UTF16Ptr(pszDetail)
 	r1, _, _ := syscall.SyscallN(procWSDGenerateFaultEx.Addr(), uintptr(unsafe.Pointer(pCode)), uintptr(unsafe.Pointer(pSubCode)), uintptr(unsafe.Pointer(pReasons)), uintptr(unsafe.Pointer(_pszDetail)), uintptr(unsafe.Pointer(ppFault)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WSDGetConfigurationOption calls wsdapi!WSDGetConfigurationOption.
@@ -259,7 +259,7 @@ func WSDGetConfigurationOption(dwOption uint32, pVoid []byte) error {
 		_pVoid = &pVoid[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWSDGetConfigurationOption.Addr(), uintptr(dwOption), uintptr(unsafe.Pointer(_pVoid)), uintptr(len(pVoid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WSDSetConfigurationOption calls wsdapi!WSDSetConfigurationOption.
@@ -271,7 +271,7 @@ func WSDSetConfigurationOption(dwOption uint32, pVoid []byte) error {
 		_pVoid = &pVoid[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWSDSetConfigurationOption.Addr(), uintptr(dwOption), uintptr(unsafe.Pointer(_pVoid)), uintptr(len(pVoid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WSDUriDecode calls wsdapi!WSDUriDecode.
@@ -280,7 +280,7 @@ func WSDSetConfigurationOption(dwOption uint32, pVoid []byte) error {
 func WSDUriDecode(source string, cchSource uint32, destOut *foundation.PWSTR, cchDestOut *uint32) error {
 	_source := win32.UTF16Ptr(source)
 	r1, _, _ := syscall.SyscallN(procWSDUriDecode.Addr(), uintptr(unsafe.Pointer(_source)), uintptr(cchSource), uintptr(unsafe.Pointer(destOut)), uintptr(unsafe.Pointer(cchDestOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WSDUriEncode calls wsdapi!WSDUriEncode.
@@ -289,7 +289,7 @@ func WSDUriDecode(source string, cchSource uint32, destOut *foundation.PWSTR, cc
 func WSDUriEncode(source string, cchSource uint32, destOut *foundation.PWSTR, cchDestOut *uint32) error {
 	_source := win32.UTF16Ptr(source)
 	r1, _, _ := syscall.SyscallN(procWSDUriEncode.Addr(), uintptr(unsafe.Pointer(_source)), uintptr(cchSource), uintptr(unsafe.Pointer(destOut)), uintptr(unsafe.Pointer(cchDestOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WSDXMLAddChild calls wsdapi!WSDXMLAddChild.
@@ -297,7 +297,7 @@ func WSDUriEncode(source string, cchSource uint32, destOut *foundation.PWSTR, cc
 // Minimum OS: windows6.0.6000.
 func WSDXMLAddChild(pParent *WSDXML_ELEMENT, pChild *WSDXML_ELEMENT) error {
 	r1, _, _ := syscall.SyscallN(procWSDXMLAddChild.Addr(), uintptr(unsafe.Pointer(pParent)), uintptr(unsafe.Pointer(pChild)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WSDXMLAddSibling calls wsdapi!WSDXMLAddSibling.
@@ -305,7 +305,7 @@ func WSDXMLAddChild(pParent *WSDXML_ELEMENT, pChild *WSDXML_ELEMENT) error {
 // Minimum OS: windows6.0.6000.
 func WSDXMLAddSibling(pFirst *WSDXML_ELEMENT, pSecond *WSDXML_ELEMENT) error {
 	r1, _, _ := syscall.SyscallN(procWSDXMLAddSibling.Addr(), uintptr(unsafe.Pointer(pFirst)), uintptr(unsafe.Pointer(pSecond)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WSDXMLBuildAnyForSingleElement calls wsdapi!WSDXMLBuildAnyForSingleElement.
@@ -314,7 +314,7 @@ func WSDXMLAddSibling(pFirst *WSDXML_ELEMENT, pSecond *WSDXML_ELEMENT) error {
 func WSDXMLBuildAnyForSingleElement(pElementName *WSDXML_NAME, pszText string, ppAny **WSDXML_ELEMENT) error {
 	_pszText := win32.UTF16Ptr(pszText)
 	r1, _, _ := syscall.SyscallN(procWSDXMLBuildAnyForSingleElement.Addr(), uintptr(unsafe.Pointer(pElementName)), uintptr(unsafe.Pointer(_pszText)), uintptr(unsafe.Pointer(ppAny)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WSDXMLCleanupElement calls wsdapi!WSDXMLCleanupElement.
@@ -322,7 +322,7 @@ func WSDXMLBuildAnyForSingleElement(pElementName *WSDXML_NAME, pszText string, p
 // Minimum OS: windows6.0.6000.
 func WSDXMLCleanupElement(pAny *WSDXML_ELEMENT) error {
 	r1, _, _ := syscall.SyscallN(procWSDXMLCleanupElement.Addr(), uintptr(unsafe.Pointer(pAny)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WSDXMLCreateContext calls wsdapi!WSDXMLCreateContext.
@@ -330,7 +330,7 @@ func WSDXMLCleanupElement(pAny *WSDXML_ELEMENT) error {
 // Minimum OS: windows6.0.6000.
 func WSDXMLCreateContext(ppContext **IWSDXMLContext) error {
 	r1, _, _ := syscall.SyscallN(procWSDXMLCreateContext.Addr(), uintptr(unsafe.Pointer(ppContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WSDXMLGetNameFromBuiltinNamespace calls wsdapi!WSDXMLGetNameFromBuiltinNamespace.
@@ -340,7 +340,7 @@ func WSDXMLGetNameFromBuiltinNamespace(pszNamespace string, pszName string, ppNa
 	_pszNamespace := win32.UTF16Ptr(pszNamespace)
 	_pszName := win32.UTF16Ptr(pszName)
 	r1, _, _ := syscall.SyscallN(procWSDXMLGetNameFromBuiltinNamespace.Addr(), uintptr(unsafe.Pointer(_pszNamespace)), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(ppName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WSDXMLGetValueFromAny calls wsdapi!WSDXMLGetValueFromAny.
@@ -350,5 +350,5 @@ func WSDXMLGetValueFromAny(pszNamespace string, pszName string, pAny *WSDXML_ELE
 	_pszNamespace := win32.UTF16Ptr(pszNamespace)
 	_pszName := win32.UTF16Ptr(pszName)
 	r1, _, _ := syscall.SyscallN(procWSDXMLGetValueFromAny.Addr(), uintptr(unsafe.Pointer(_pszNamespace)), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(ppszValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

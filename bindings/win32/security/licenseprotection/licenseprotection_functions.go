@@ -25,12 +25,12 @@ var (
 func RegisterLicenseKeyWithExpiration(licenseKey string, validityInDays uint32, status *LicenseProtectionStatus) error {
 	_licenseKey := win32.UTF16Ptr(licenseKey)
 	r1, _, _ := syscall.SyscallN(procRegisterLicenseKeyWithExpiration.Addr(), uintptr(unsafe.Pointer(_licenseKey)), uintptr(validityInDays), uintptr(unsafe.Pointer(status)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ValidateLicenseKeyProtection calls licenseprotection!ValidateLicenseKeyProtection.
 func ValidateLicenseKeyProtection(licenseKey string, notValidBefore *foundation.FILETIME, notValidAfter *foundation.FILETIME, status *LicenseProtectionStatus) error {
 	_licenseKey := win32.UTF16Ptr(licenseKey)
 	r1, _, _ := syscall.SyscallN(procValidateLicenseKeyProtection.Addr(), uintptr(unsafe.Pointer(_licenseKey)), uintptr(unsafe.Pointer(notValidBefore)), uintptr(unsafe.Pointer(notValidAfter)), uintptr(unsafe.Pointer(status)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

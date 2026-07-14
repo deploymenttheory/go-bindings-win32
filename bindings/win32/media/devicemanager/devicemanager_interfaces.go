@@ -33,13 +33,13 @@ func (self *IComponentAuthenticate) SACAuth(dwProtocolID uint32, dwPass uint32, 
 		_pbDataIn = &pbDataIn[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwProtocolID), uintptr(dwPass), uintptr(unsafe.Pointer(_pbDataIn)), uintptr(len(pbDataIn)), uintptr(unsafe.Pointer(ppbDataOut)), uintptr(unsafe.Pointer(pdwDataOutLen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SACGetProtocols dispatches through IComponentAuthenticate's vtable slot 4.
 func (self *IComponentAuthenticate) SACGetProtocols(ppdwProtocols **uint32, pdwProtocolCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppdwProtocols)), uintptr(unsafe.Pointer(pdwProtocolCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMDSPDevice: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-imdspdevice
@@ -54,67 +54,67 @@ var IID_IMDSPDevice = win32.GUID{Data1: 0x1dcb3a12, Data2: 0x33ed, Data3: 0x11d3
 // GetName dispatches through IMDSPDevice's vtable slot 3.
 func (self *IMDSPDevice) GetName(pwszName foundation.PWSTR, nMaxChars uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszName)), uintptr(nMaxChars))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetManufacturer dispatches through IMDSPDevice's vtable slot 4.
 func (self *IMDSPDevice) GetManufacturer(pwszName foundation.PWSTR, nMaxChars uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszName)), uintptr(nMaxChars))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetVersion dispatches through IMDSPDevice's vtable slot 5.
 func (self *IMDSPDevice) GetVersion(pdwVersion *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwVersion)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetType dispatches through IMDSPDevice's vtable slot 6.
 func (self *IMDSPDevice) GetType(pdwType *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSerialNumber dispatches through IMDSPDevice's vtable slot 7.
 func (self *IMDSPDevice) GetSerialNumber(pSerialNumber *WMDMID, abMac *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSerialNumber)), uintptr(unsafe.Pointer(abMac)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPowerSource dispatches through IMDSPDevice's vtable slot 8.
 func (self *IMDSPDevice) GetPowerSource(pdwPowerSource *uint32, pdwPercentRemaining *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwPowerSource)), uintptr(unsafe.Pointer(pdwPercentRemaining)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStatus dispatches through IMDSPDevice's vtable slot 9.
 func (self *IMDSPDevice) GetStatus(pdwStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceIcon dispatches through IMDSPDevice's vtable slot 10.
 func (self *IMDSPDevice) GetDeviceIcon(hIcon *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hIcon)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumStorage dispatches through IMDSPDevice's vtable slot 11.
 func (self *IMDSPDevice) EnumStorage(ppEnumStorage **IMDSPEnumStorage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumStorage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFormatSupport dispatches through IMDSPDevice's vtable slot 12.
 func (self *IMDSPDevice) GetFormatSupport(pFormatEx **mediaaudio.WAVEFORMATEX, pnFormatCount *uint32, pppwszMimeType **foundation.PWSTR, pnMimeTypeCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFormatEx)), uintptr(unsafe.Pointer(pnFormatCount)), uintptr(unsafe.Pointer(pppwszMimeType)), uintptr(unsafe.Pointer(pnMimeTypeCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendOpaqueCommand dispatches through IMDSPDevice's vtable slot 13.
 func (self *IMDSPDevice) SendOpaqueCommand(pCommand *OPAQUECOMMAND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCommand)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMDSPDevice2: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-imdspdevice2
@@ -130,25 +130,25 @@ var IID_IMDSPDevice2 = win32.GUID{Data1: 0x420d16ad, Data2: 0xc97d, Data3: 0x4e0
 func (self *IMDSPDevice2) GetStorage(pszStorageName string, ppStorage **IMDSPStorage) error {
 	_pszStorageName := win32.UTF16Ptr(pszStorageName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszStorageName)), uintptr(unsafe.Pointer(ppStorage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFormatSupport2 dispatches through IMDSPDevice2's vtable slot 15.
 func (self *IMDSPDevice2) GetFormatSupport2(dwFlags uint32, ppAudioFormatEx **mediaaudio.WAVEFORMATEX, pnAudioFormatCount *uint32, ppVideoFormatEx **mediamediafoundation.VIDEOINFOHEADER, pnVideoFormatCount *uint32, ppFileType **WMFILECAPABILITIES, pnFileTypeCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppAudioFormatEx)), uintptr(unsafe.Pointer(pnAudioFormatCount)), uintptr(unsafe.Pointer(ppVideoFormatEx)), uintptr(unsafe.Pointer(pnVideoFormatCount)), uintptr(unsafe.Pointer(ppFileType)), uintptr(unsafe.Pointer(pnFileTypeCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSpecifyPropertyPages dispatches through IMDSPDevice2's vtable slot 16.
 func (self *IMDSPDevice2) GetSpecifyPropertyPages(ppSpecifyPropPages **systemole.ISpecifyPropertyPages, pppUnknowns ***systemcom.IUnknown, pcUnks *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSpecifyPropPages)), uintptr(unsafe.Pointer(pppUnknowns)), uintptr(unsafe.Pointer(pcUnks)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCanonicalName dispatches through IMDSPDevice2's vtable slot 17.
 func (self *IMDSPDevice2) GetCanonicalName(pwszPnPName foundation.PWSTR, nMaxChars uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszPnPName)), uintptr(nMaxChars))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMDSPDevice3: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-imdspdevice3
@@ -164,20 +164,20 @@ var IID_IMDSPDevice3 = win32.GUID{Data1: 0x1a839845, Data2: 0xfc55, Data3: 0x487
 func (self *IMDSPDevice3) GetProperty(pwszPropName string, pValue *systemcomstructuredstorage.PROPVARIANT) error {
 	_pwszPropName := win32.UTF16Ptr(pwszPropName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszPropName)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetProperty dispatches through IMDSPDevice3's vtable slot 19.
 func (self *IMDSPDevice3) SetProperty(pwszPropName string, pValue *systemcomstructuredstorage.PROPVARIANT) error {
 	_pwszPropName := win32.UTF16Ptr(pwszPropName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszPropName)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFormatCapability dispatches through IMDSPDevice3's vtable slot 20.
 func (self *IMDSPDevice3) GetFormatCapability(format WMDM_FORMATCODE, pFormatSupport *WMDM_FORMAT_CAPABILITY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(format), uintptr(unsafe.Pointer(pFormatSupport)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeviceIoControl dispatches through IMDSPDevice3's vtable slot 21.
@@ -187,14 +187,14 @@ func (self *IMDSPDevice3) DeviceIoControl(dwIoControlCode uint32, lpInBuffer []b
 		_lpInBuffer = &lpInBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(dwIoControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(lpOutBuffer)), uintptr(unsafe.Pointer(pnOutBufferSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FindStorage dispatches through IMDSPDevice3's vtable slot 22.
 func (self *IMDSPDevice3) FindStorage(findScope WMDM_FIND_SCOPE, pwszUniqueID string, ppStorage **IMDSPStorage) error {
 	_pwszUniqueID := win32.UTF16Ptr(pwszUniqueID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(findScope), uintptr(unsafe.Pointer(_pwszUniqueID)), uintptr(unsafe.Pointer(ppStorage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMDSPDeviceControl: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-imdspdevicecontrol
@@ -209,49 +209,49 @@ var IID_IMDSPDeviceControl = win32.GUID{Data1: 0x1dcb3a14, Data2: 0x33ed, Data3:
 // GetDCStatus dispatches through IMDSPDeviceControl's vtable slot 3.
 func (self *IMDSPDeviceControl) GetDCStatus(pdwStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCapabilities dispatches through IMDSPDeviceControl's vtable slot 4.
 func (self *IMDSPDeviceControl) GetCapabilities(pdwCapabilitiesMask *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCapabilitiesMask)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Play dispatches through IMDSPDeviceControl's vtable slot 5.
 func (self *IMDSPDeviceControl) Play() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Record dispatches through IMDSPDeviceControl's vtable slot 6.
 func (self *IMDSPDeviceControl) Record(pFormat *mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Pause dispatches through IMDSPDeviceControl's vtable slot 7.
 func (self *IMDSPDeviceControl) Pause() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Resume dispatches through IMDSPDeviceControl's vtable slot 8.
 func (self *IMDSPDeviceControl) Resume() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Stop dispatches through IMDSPDeviceControl's vtable slot 9.
 func (self *IMDSPDeviceControl) Stop() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Seek dispatches through IMDSPDeviceControl's vtable slot 10.
 func (self *IMDSPDeviceControl) Seek(fuMode uint32, nOffset int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(fuMode), uintptr(nOffset))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMDSPDirectTransfer: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-imdspdirecttransfer
@@ -268,7 +268,7 @@ func (self *IMDSPDirectTransfer) TransferToDevice(pwszSourceFilePath string, pSo
 	_pwszSourceFilePath := win32.UTF16Ptr(pwszSourceFilePath)
 	_pwszDestinationName := win32.UTF16Ptr(pwszDestinationName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszSourceFilePath)), uintptr(unsafe.Pointer(pSourceOperation)), uintptr(fuFlags), uintptr(unsafe.Pointer(_pwszDestinationName)), uintptr(unsafe.Pointer(pSourceMetaData)), uintptr(unsafe.Pointer(pTransferProgress)), uintptr(unsafe.Pointer(ppNewObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMDSPEnumDevice: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-imdspenumdevice
@@ -287,25 +287,25 @@ func (self *IMDSPEnumDevice) Next(ppDevice []*IMDSPDevice, pceltFetched *uint32)
 		_ppDevice = &ppDevice[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppDevice)), uintptr(unsafe.Pointer(_ppDevice)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IMDSPEnumDevice's vtable slot 4.
 func (self *IMDSPEnumDevice) Skip(celt uint32, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IMDSPEnumDevice's vtable slot 5.
 func (self *IMDSPEnumDevice) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IMDSPEnumDevice's vtable slot 6.
 func (self *IMDSPEnumDevice) Clone(ppEnumDevice **IMDSPEnumDevice) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumDevice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMDSPEnumStorage: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-imdspenumstorage
@@ -324,25 +324,25 @@ func (self *IMDSPEnumStorage) Next(ppStorage []*IMDSPStorage, pceltFetched *uint
 		_ppStorage = &ppStorage[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppStorage)), uintptr(unsafe.Pointer(_ppStorage)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IMDSPEnumStorage's vtable slot 4.
 func (self *IMDSPEnumStorage) Skip(celt uint32, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IMDSPEnumStorage's vtable slot 5.
 func (self *IMDSPEnumStorage) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IMDSPEnumStorage's vtable slot 6.
 func (self *IMDSPEnumStorage) Clone(ppEnumStorage **IMDSPEnumStorage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumStorage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMDSPObject: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-imdspobject
@@ -357,50 +357,50 @@ var IID_IMDSPObject = win32.GUID{Data1: 0x1dcb3a18, Data2: 0x33ed, Data3: 0x11d3
 // Open dispatches through IMDSPObject's vtable slot 3.
 func (self *IMDSPObject) Open(fuMode uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(fuMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Read dispatches through IMDSPObject's vtable slot 4.
 func (self *IMDSPObject) Read(pData *byte, pdwSize *uint32, abMac *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(pdwSize)), uintptr(unsafe.Pointer(abMac)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Write dispatches through IMDSPObject's vtable slot 5.
 func (self *IMDSPObject) Write(pData *byte, pdwSize *uint32, abMac *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(pdwSize)), uintptr(unsafe.Pointer(abMac)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IMDSPObject's vtable slot 6.
 func (self *IMDSPObject) Delete(fuMode uint32, pProgress *IWMDMProgress) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(fuMode), uintptr(unsafe.Pointer(pProgress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Seek dispatches through IMDSPObject's vtable slot 7.
 func (self *IMDSPObject) Seek(fuFlags uint32, dwOffset uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(fuFlags), uintptr(dwOffset))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Rename dispatches through IMDSPObject's vtable slot 8.
 func (self *IMDSPObject) Rename(pwszNewName string, pProgress *IWMDMProgress) error {
 	_pwszNewName := win32.UTF16Ptr(pwszNewName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszNewName)), uintptr(unsafe.Pointer(pProgress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Move dispatches through IMDSPObject's vtable slot 9.
 func (self *IMDSPObject) Move(fuMode uint32, pProgress *IWMDMProgress, pTarget *IMDSPStorage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(fuMode), uintptr(unsafe.Pointer(pProgress)), uintptr(unsafe.Pointer(pTarget)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Close dispatches through IMDSPObject's vtable slot 10.
 func (self *IMDSPObject) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMDSPObject2: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-imdspobject2
@@ -415,13 +415,13 @@ var IID_IMDSPObject2 = win32.GUID{Data1: 0x3f34cd3e, Data2: 0x5907, Data3: 0x434
 // ReadOnClearChannel dispatches through IMDSPObject2's vtable slot 11.
 func (self *IMDSPObject2) ReadOnClearChannel(pData *byte, pdwSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(pdwSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteOnClearChannel dispatches through IMDSPObject2's vtable slot 12.
 func (self *IMDSPObject2) WriteOnClearChannel(pData *byte, pdwSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(pdwSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMDSPObjectInfo: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-imdspobjectinfo
@@ -436,43 +436,43 @@ var IID_IMDSPObjectInfo = win32.GUID{Data1: 0x1dcb3a19, Data2: 0x33ed, Data3: 0x
 // GetPlayLength dispatches through IMDSPObjectInfo's vtable slot 3.
 func (self *IMDSPObjectInfo) GetPlayLength(pdwLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwLength)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetPlayLength dispatches through IMDSPObjectInfo's vtable slot 4.
 func (self *IMDSPObjectInfo) SetPlayLength(dwLength uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwLength))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPlayOffset dispatches through IMDSPObjectInfo's vtable slot 5.
 func (self *IMDSPObjectInfo) GetPlayOffset(pdwOffset *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwOffset)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetPlayOffset dispatches through IMDSPObjectInfo's vtable slot 6.
 func (self *IMDSPObjectInfo) SetPlayOffset(dwOffset uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwOffset))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTotalLength dispatches through IMDSPObjectInfo's vtable slot 7.
 func (self *IMDSPObjectInfo) GetTotalLength(pdwLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwLength)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLastPlayPosition dispatches through IMDSPObjectInfo's vtable slot 8.
 func (self *IMDSPObjectInfo) GetLastPlayPosition(pdwLastPos *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwLastPos)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLongestPlayPosition dispatches through IMDSPObjectInfo's vtable slot 9.
 func (self *IMDSPObjectInfo) GetLongestPlayPosition(pdwLongestPos *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwLongestPos)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMDSPRevoked: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-imdsprevoked
@@ -487,7 +487,7 @@ var IID_IMDSPRevoked = win32.GUID{Data1: 0xa4e8f2d4, Data2: 0x3f31, Data3: 0x464
 // GetRevocationURL dispatches through IMDSPRevoked's vtable slot 3.
 func (self *IMDSPRevoked) GetRevocationURL(ppwszRevocationURL *foundation.PWSTR, pdwBufferLen *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwszRevocationURL)), uintptr(unsafe.Pointer(pdwBufferLen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMDSPStorage: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-imdspstorage
@@ -502,62 +502,62 @@ var IID_IMDSPStorage = win32.GUID{Data1: 0x1dcb3a16, Data2: 0x33ed, Data3: 0x11d
 // SetAttributes dispatches through IMDSPStorage's vtable slot 3.
 func (self *IMDSPStorage) SetAttributes(dwAttributes uint32, pFormat *mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwAttributes), uintptr(unsafe.Pointer(pFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStorageGlobals dispatches through IMDSPStorage's vtable slot 4.
 func (self *IMDSPStorage) GetStorageGlobals(ppStorageGlobals **IMDSPStorageGlobals) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppStorageGlobals)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAttributes dispatches through IMDSPStorage's vtable slot 5.
 func (self *IMDSPStorage) GetAttributes(pdwAttributes *uint32, pFormat *mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwAttributes)), uintptr(unsafe.Pointer(pFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetName dispatches through IMDSPStorage's vtable slot 6.
 func (self *IMDSPStorage) GetName(pwszName foundation.PWSTR, nMaxChars uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszName)), uintptr(nMaxChars))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDate dispatches through IMDSPStorage's vtable slot 7.
 func (self *IMDSPStorage) GetDate(pDateTimeUTC *WMDMDATETIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDateTimeUTC)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSize dispatches through IMDSPStorage's vtable slot 8.
 func (self *IMDSPStorage) GetSize(pdwSizeLow *uint32, pdwSizeHigh *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwSizeLow)), uintptr(unsafe.Pointer(pdwSizeHigh)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRights dispatches through IMDSPStorage's vtable slot 9.
 func (self *IMDSPStorage) GetRights(ppRights **WMDMRIGHTS, pnRightsCount *uint32, abMac *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppRights)), uintptr(unsafe.Pointer(pnRightsCount)), uintptr(unsafe.Pointer(abMac)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateStorage dispatches through IMDSPStorage's vtable slot 10.
 func (self *IMDSPStorage) CreateStorage(dwAttributes uint32, pFormat *mediaaudio.WAVEFORMATEX, pwszName string, ppNewStorage **IMDSPStorage) error {
 	_pwszName := win32.UTF16Ptr(pwszName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(dwAttributes), uintptr(unsafe.Pointer(pFormat)), uintptr(unsafe.Pointer(_pwszName)), uintptr(unsafe.Pointer(ppNewStorage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumStorage dispatches through IMDSPStorage's vtable slot 11.
 func (self *IMDSPStorage) EnumStorage(ppEnumStorage **IMDSPEnumStorage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumStorage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendOpaqueCommand dispatches through IMDSPStorage's vtable slot 12.
 func (self *IMDSPStorage) SendOpaqueCommand(pCommand *OPAQUECOMMAND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCommand)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMDSPStorage2: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-imdspstorage2
@@ -573,26 +573,26 @@ var IID_IMDSPStorage2 = win32.GUID{Data1: 0x0a5e07a5, Data2: 0x6454, Data3: 0x44
 func (self *IMDSPStorage2) GetStorage(pszStorageName string, ppStorage **IMDSPStorage) error {
 	_pszStorageName := win32.UTF16Ptr(pszStorageName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszStorageName)), uintptr(unsafe.Pointer(ppStorage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateStorage2 dispatches through IMDSPStorage2's vtable slot 14.
 func (self *IMDSPStorage2) CreateStorage2(dwAttributes uint32, dwAttributesEx uint32, pAudioFormat *mediaaudio.WAVEFORMATEX, pVideoFormat *mediamediafoundation.VIDEOINFOHEADER, pwszName string, qwFileSize uint64, ppNewStorage **IMDSPStorage) error {
 	_pwszName := win32.UTF16Ptr(pwszName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(dwAttributes), uintptr(dwAttributesEx), uintptr(unsafe.Pointer(pAudioFormat)), uintptr(unsafe.Pointer(pVideoFormat)), uintptr(unsafe.Pointer(_pwszName)), uintptr(qwFileSize), uintptr(unsafe.Pointer(ppNewStorage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAttributes2 dispatches through IMDSPStorage2's vtable slot 15.
 func (self *IMDSPStorage2) SetAttributes2(dwAttributes uint32, dwAttributesEx uint32, pAudioFormat *mediaaudio.WAVEFORMATEX, pVideoFormat *mediamediafoundation.VIDEOINFOHEADER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwAttributes), uintptr(dwAttributesEx), uintptr(unsafe.Pointer(pAudioFormat)), uintptr(unsafe.Pointer(pVideoFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAttributes2 dispatches through IMDSPStorage2's vtable slot 16.
 func (self *IMDSPStorage2) GetAttributes2(pdwAttributes *uint32, pdwAttributesEx *uint32, pAudioFormat *mediaaudio.WAVEFORMATEX, pVideoFormat *mediamediafoundation.VIDEOINFOHEADER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwAttributes)), uintptr(unsafe.Pointer(pdwAttributesEx)), uintptr(unsafe.Pointer(pAudioFormat)), uintptr(unsafe.Pointer(pVideoFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMDSPStorage3: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-imdspstorage3
@@ -607,13 +607,13 @@ var IID_IMDSPStorage3 = win32.GUID{Data1: 0x6c669867, Data2: 0x97ed, Data3: 0x4a
 // GetMetadata dispatches through IMDSPStorage3's vtable slot 17.
 func (self *IMDSPStorage3) GetMetadata(pMetadata *IWMDMMetaData) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMetadata)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMetadata dispatches through IMDSPStorage3's vtable slot 18.
 func (self *IMDSPStorage3) SetMetadata(pMetadata *IWMDMMetaData) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMetadata)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMDSPStorage4: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-imdspstorage4
@@ -632,20 +632,20 @@ func (self *IMDSPStorage4) SetReferences(ppISPStorage []*IMDSPStorage) error {
 		_ppISPStorage = &ppISPStorage[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(len(ppISPStorage)), uintptr(unsafe.Pointer(_ppISPStorage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetReferences dispatches through IMDSPStorage4's vtable slot 20.
 func (self *IMDSPStorage4) GetReferences(pdwRefs *uint32, pppISPStorage ***IMDSPStorage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwRefs)), uintptr(unsafe.Pointer(pppISPStorage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateStorageWithMetadata dispatches through IMDSPStorage4's vtable slot 21.
 func (self *IMDSPStorage4) CreateStorageWithMetadata(dwAttributes uint32, pwszName string, pMetadata *IWMDMMetaData, qwFileSize uint64, ppNewStorage **IMDSPStorage) error {
 	_pwszName := win32.UTF16Ptr(pwszName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(dwAttributes), uintptr(unsafe.Pointer(_pwszName)), uintptr(unsafe.Pointer(pMetadata)), uintptr(qwFileSize), uintptr(unsafe.Pointer(ppNewStorage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSpecifiedMetadata dispatches through IMDSPStorage4's vtable slot 22.
@@ -655,20 +655,20 @@ func (self *IMDSPStorage4) GetSpecifiedMetadata(ppwszPropNames []foundation.PWST
 		_ppwszPropNames = &ppwszPropNames[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(len(ppwszPropNames)), uintptr(unsafe.Pointer(_ppwszPropNames)), uintptr(unsafe.Pointer(pMetadata)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FindStorage dispatches through IMDSPStorage4's vtable slot 23.
 func (self *IMDSPStorage4) FindStorage(findScope WMDM_FIND_SCOPE, pwszUniqueID string, ppStorage **IMDSPStorage) error {
 	_pwszUniqueID := win32.UTF16Ptr(pwszUniqueID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(findScope), uintptr(unsafe.Pointer(_pwszUniqueID)), uintptr(unsafe.Pointer(ppStorage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetParent dispatches through IMDSPStorage4's vtable slot 24.
 func (self *IMDSPStorage4) GetParent(ppStorage **IMDSPStorage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppStorage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMDSPStorageGlobals: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-imdspstorageglobals
@@ -683,55 +683,55 @@ var IID_IMDSPStorageGlobals = win32.GUID{Data1: 0x1dcb3a17, Data2: 0x33ed, Data3
 // GetCapabilities dispatches through IMDSPStorageGlobals's vtable slot 3.
 func (self *IMDSPStorageGlobals) GetCapabilities(pdwCapabilities *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCapabilities)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSerialNumber dispatches through IMDSPStorageGlobals's vtable slot 4.
 func (self *IMDSPStorageGlobals) GetSerialNumber(pSerialNum *WMDMID, abMac *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSerialNum)), uintptr(unsafe.Pointer(abMac)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTotalSize dispatches through IMDSPStorageGlobals's vtable slot 5.
 func (self *IMDSPStorageGlobals) GetTotalSize(pdwTotalSizeLow *uint32, pdwTotalSizeHigh *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwTotalSizeLow)), uintptr(unsafe.Pointer(pdwTotalSizeHigh)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTotalFree dispatches through IMDSPStorageGlobals's vtable slot 6.
 func (self *IMDSPStorageGlobals) GetTotalFree(pdwFreeLow *uint32, pdwFreeHigh *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFreeLow)), uintptr(unsafe.Pointer(pdwFreeHigh)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTotalBad dispatches through IMDSPStorageGlobals's vtable slot 7.
 func (self *IMDSPStorageGlobals) GetTotalBad(pdwBadLow *uint32, pdwBadHigh *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwBadLow)), uintptr(unsafe.Pointer(pdwBadHigh)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStatus dispatches through IMDSPStorageGlobals's vtable slot 8.
 func (self *IMDSPStorageGlobals) GetStatus(pdwStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Initialize dispatches through IMDSPStorageGlobals's vtable slot 9.
 func (self *IMDSPStorageGlobals) Initialize(fuMode uint32, pProgress *IWMDMProgress) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(fuMode), uintptr(unsafe.Pointer(pProgress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDevice dispatches through IMDSPStorageGlobals's vtable slot 10.
 func (self *IMDSPStorageGlobals) GetDevice(ppDevice **IMDSPDevice) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDevice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRootStorage dispatches through IMDSPStorageGlobals's vtable slot 11.
 func (self *IMDSPStorageGlobals) GetRootStorage(ppRoot **IMDSPStorage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppRoot)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMDServiceProvider: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-imdserviceprovider
@@ -746,13 +746,13 @@ var IID_IMDServiceProvider = win32.GUID{Data1: 0x1dcb3a10, Data2: 0x33ed, Data3:
 // GetDeviceCount dispatches through IMDServiceProvider's vtable slot 3.
 func (self *IMDServiceProvider) GetDeviceCount(pdwCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumDevices dispatches through IMDServiceProvider's vtable slot 4.
 func (self *IMDServiceProvider) EnumDevices(ppEnumDevice **IMDSPEnumDevice) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumDevice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMDServiceProvider2: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-imdserviceprovider2
@@ -768,7 +768,7 @@ var IID_IMDServiceProvider2 = win32.GUID{Data1: 0xb2fa24b7, Data2: 0xcda3, Data3
 func (self *IMDServiceProvider2) CreateDevice(pwszDevicePath string, pdwCount *uint32, pppDeviceArray ***IMDSPDevice) error {
 	_pwszDevicePath := win32.UTF16Ptr(pwszDevicePath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszDevicePath)), uintptr(unsafe.Pointer(pdwCount)), uintptr(unsafe.Pointer(pppDeviceArray)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMDServiceProvider3: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-imdserviceprovider3
@@ -783,7 +783,7 @@ var IID_IMDServiceProvider3 = win32.GUID{Data1: 0x4ed13ef3, Data2: 0xa971, Data3
 // SetDeviceEnumPreference dispatches through IMDServiceProvider3's vtable slot 6.
 func (self *IMDServiceProvider3) SetDeviceEnumPreference(dwEnumPref uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwEnumPref))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISCPSecureAuthenticate: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iscpsecureauthenticate
@@ -798,7 +798,7 @@ var IID_ISCPSecureAuthenticate = win32.GUID{Data1: 0x1dcb3a0f, Data2: 0x33ed, Da
 // GetSecureQuery dispatches through ISCPSecureAuthenticate's vtable slot 3.
 func (self *ISCPSecureAuthenticate) GetSecureQuery(ppSecureQuery **ISCPSecureQuery) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSecureQuery)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISCPSecureAuthenticate2: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iscpsecureauthenticate2
@@ -813,7 +813,7 @@ var IID_ISCPSecureAuthenticate2 = win32.GUID{Data1: 0xb580cfae, Data2: 0x1672, D
 // GetSCPSession dispatches through ISCPSecureAuthenticate2's vtable slot 4.
 func (self *ISCPSecureAuthenticate2) GetSCPSession(ppSCPSession **ISCPSession) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSCPSession)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISCPSecureExchange: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iscpsecureexchange
@@ -832,19 +832,19 @@ func (self *ISCPSecureExchange) TransferContainerData(pData []byte, pfuReadyFlag
 		_pData = &pData[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(unsafe.Pointer(pfuReadyFlags)), uintptr(unsafe.Pointer(abMac)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ObjectData dispatches through ISCPSecureExchange's vtable slot 4.
 func (self *ISCPSecureExchange) ObjectData(pData *byte, pdwSize *uint32, abMac *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(pdwSize)), uintptr(unsafe.Pointer(abMac)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TransferComplete dispatches through ISCPSecureExchange's vtable slot 5.
 func (self *ISCPSecureExchange) TransferComplete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISCPSecureExchange2: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iscpsecureexchange2
@@ -863,7 +863,7 @@ func (self *ISCPSecureExchange2) TransferContainerData2(pData []byte, pProgressC
 		_pData = &pData[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(unsafe.Pointer(pProgressCallback)), uintptr(unsafe.Pointer(pfuReadyFlags)), uintptr(unsafe.Pointer(abMac)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISCPSecureExchange3: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iscpsecureexchange3
@@ -882,19 +882,19 @@ func (self *ISCPSecureExchange3) TransferContainerDataOnClearChannel(pDevice *IM
 		_pData = &pData[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(unsafe.Pointer(pProgressCallback)), uintptr(unsafe.Pointer(pfuReadyFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetObjectDataOnClearChannel dispatches through ISCPSecureExchange3's vtable slot 8.
 func (self *ISCPSecureExchange3) GetObjectDataOnClearChannel(pDevice *IMDSPDevice, pData *byte, pdwSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(pdwSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TransferCompleteForDevice dispatches through ISCPSecureExchange3's vtable slot 9.
 func (self *ISCPSecureExchange3) TransferCompleteForDevice(pDevice *IMDSPDevice) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISCPSecureQuery: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iscpsecurequery
@@ -909,7 +909,7 @@ var IID_ISCPSecureQuery = win32.GUID{Data1: 0x1dcb3a0d, Data2: 0x33ed, Data3: 0x
 // GetDataDemands dispatches through ISCPSecureQuery's vtable slot 3.
 func (self *ISCPSecureQuery) GetDataDemands(pfuFlags *uint32, pdwMinRightsData *uint32, pdwMinExamineData *uint32, pdwMinDecideData *uint32, abMac *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfuFlags)), uintptr(unsafe.Pointer(pdwMinRightsData)), uintptr(unsafe.Pointer(pdwMinExamineData)), uintptr(unsafe.Pointer(pdwMinDecideData)), uintptr(unsafe.Pointer(abMac)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExamineData dispatches through ISCPSecureQuery's vtable slot 4.
@@ -920,7 +920,7 @@ func (self *ISCPSecureQuery) ExamineData(fuFlags uint32, pwszExtension string, p
 		_pData = &pData[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(fuFlags), uintptr(unsafe.Pointer(_pwszExtension)), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(unsafe.Pointer(abMac)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MakeDecision dispatches through ISCPSecureQuery's vtable slot 5.
@@ -934,7 +934,7 @@ func (self *ISCPSecureQuery) MakeDecision(fuFlags uint32, pData []byte, dwAppSec
 		_pbSPSessionKey = &pbSPSessionKey[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(fuFlags), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(dwAppSec), uintptr(unsafe.Pointer(_pbSPSessionKey)), uintptr(len(pbSPSessionKey)), uintptr(unsafe.Pointer(pStorageGlobals)), uintptr(unsafe.Pointer(ppExchange)), uintptr(unsafe.Pointer(abMac)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRights dispatches through ISCPSecureQuery's vtable slot 6.
@@ -948,7 +948,7 @@ func (self *ISCPSecureQuery) GetRights(pData []byte, pbSPSessionKey []byte, pStg
 		_pbSPSessionKey = &pbSPSessionKey[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(unsafe.Pointer(_pbSPSessionKey)), uintptr(len(pbSPSessionKey)), uintptr(unsafe.Pointer(pStgGlobals)), uintptr(unsafe.Pointer(ppRights)), uintptr(unsafe.Pointer(pnRightsCount)), uintptr(unsafe.Pointer(abMac)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISCPSecureQuery2: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iscpsecurequery2
@@ -979,7 +979,7 @@ func (self *ISCPSecureQuery2) MakeDecision2(fuFlags uint32, pData []byte, dwAppS
 		_pAppCertSP = &pAppCertSP[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(fuFlags), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(dwAppSec), uintptr(unsafe.Pointer(_pbSPSessionKey)), uintptr(len(pbSPSessionKey)), uintptr(unsafe.Pointer(pStorageGlobals)), uintptr(unsafe.Pointer(_pAppCertApp)), uintptr(len(pAppCertApp)), uintptr(unsafe.Pointer(_pAppCertSP)), uintptr(len(pAppCertSP)), uintptr(unsafe.Pointer(pszRevocationURL)), uintptr(unsafe.Pointer(pdwRevocationURLLen)), uintptr(unsafe.Pointer(pdwRevocationBitFlag)), uintptr(unsafe.Pointer(pqwFileSize)), uintptr(unsafe.Pointer(pUnknown)), uintptr(unsafe.Pointer(ppExchange)), uintptr(unsafe.Pointer(abMac)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISCPSecureQuery3: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iscpsecurequery3
@@ -1002,7 +1002,7 @@ func (self *ISCPSecureQuery3) GetRightsOnClearChannel(pData []byte, pbSPSessionK
 		_pbSPSessionKey = &pbSPSessionKey[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(unsafe.Pointer(_pbSPSessionKey)), uintptr(len(pbSPSessionKey)), uintptr(unsafe.Pointer(pStgGlobals)), uintptr(unsafe.Pointer(pProgressCallback)), uintptr(unsafe.Pointer(ppRights)), uintptr(unsafe.Pointer(pnRightsCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MakeDecisionOnClearChannel dispatches through ISCPSecureQuery3's vtable slot 9.
@@ -1024,7 +1024,7 @@ func (self *ISCPSecureQuery3) MakeDecisionOnClearChannel(fuFlags uint32, pData [
 		_pAppCertSP = &pAppCertSP[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(fuFlags), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(dwAppSec), uintptr(unsafe.Pointer(_pbSPSessionKey)), uintptr(len(pbSPSessionKey)), uintptr(unsafe.Pointer(pStorageGlobals)), uintptr(unsafe.Pointer(pProgressCallback)), uintptr(unsafe.Pointer(_pAppCertApp)), uintptr(len(pAppCertApp)), uintptr(unsafe.Pointer(_pAppCertSP)), uintptr(len(pAppCertSP)), uintptr(unsafe.Pointer(pszRevocationURL)), uintptr(unsafe.Pointer(pdwRevocationURLLen)), uintptr(unsafe.Pointer(pdwRevocationBitFlag)), uintptr(unsafe.Pointer(pqwFileSize)), uintptr(unsafe.Pointer(pUnknown)), uintptr(unsafe.Pointer(ppExchange)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISCPSession: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iscpsession
@@ -1043,7 +1043,7 @@ func (self *ISCPSession) BeginSession(pIDevice *IMDSPDevice, pCtx []byte) error 
 		_pCtx = &pCtx[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIDevice)), uintptr(unsafe.Pointer(_pCtx)), uintptr(len(pCtx)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndSession dispatches through ISCPSession's vtable slot 4.
@@ -1053,13 +1053,13 @@ func (self *ISCPSession) EndSession(pCtx []byte) error {
 		_pCtx = &pCtx[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pCtx)), uintptr(len(pCtx)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSecureQuery dispatches through ISCPSession's vtable slot 5.
 func (self *ISCPSession) GetSecureQuery(ppSecureQuery **ISCPSecureQuery) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSecureQuery)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMDMDevice: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iwmdmdevice
@@ -1074,67 +1074,67 @@ var IID_IWMDMDevice = win32.GUID{Data1: 0x1dcb3a02, Data2: 0x33ed, Data3: 0x11d3
 // GetName dispatches through IWMDMDevice's vtable slot 3.
 func (self *IWMDMDevice) GetName(pwszName foundation.PWSTR, nMaxChars uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszName)), uintptr(nMaxChars))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetManufacturer dispatches through IWMDMDevice's vtable slot 4.
 func (self *IWMDMDevice) GetManufacturer(pwszName foundation.PWSTR, nMaxChars uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszName)), uintptr(nMaxChars))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetVersion dispatches through IWMDMDevice's vtable slot 5.
 func (self *IWMDMDevice) GetVersion(pdwVersion *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwVersion)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetType dispatches through IWMDMDevice's vtable slot 6.
 func (self *IWMDMDevice) GetType(pdwType *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSerialNumber dispatches through IWMDMDevice's vtable slot 7.
 func (self *IWMDMDevice) GetSerialNumber(pSerialNumber *WMDMID, abMac *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSerialNumber)), uintptr(unsafe.Pointer(abMac)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPowerSource dispatches through IWMDMDevice's vtable slot 8.
 func (self *IWMDMDevice) GetPowerSource(pdwPowerSource *uint32, pdwPercentRemaining *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwPowerSource)), uintptr(unsafe.Pointer(pdwPercentRemaining)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStatus dispatches through IWMDMDevice's vtable slot 9.
 func (self *IWMDMDevice) GetStatus(pdwStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceIcon dispatches through IWMDMDevice's vtable slot 10.
 func (self *IWMDMDevice) GetDeviceIcon(hIcon *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hIcon)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumStorage dispatches through IWMDMDevice's vtable slot 11.
 func (self *IWMDMDevice) EnumStorage(ppEnumStorage **IWMDMEnumStorage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumStorage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFormatSupport dispatches through IWMDMDevice's vtable slot 12.
 func (self *IWMDMDevice) GetFormatSupport(ppFormatEx **mediaaudio.WAVEFORMATEX, pnFormatCount *uint32, pppwszMimeType **foundation.PWSTR, pnMimeTypeCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFormatEx)), uintptr(unsafe.Pointer(pnFormatCount)), uintptr(unsafe.Pointer(pppwszMimeType)), uintptr(unsafe.Pointer(pnMimeTypeCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendOpaqueCommand dispatches through IWMDMDevice's vtable slot 13.
 func (self *IWMDMDevice) SendOpaqueCommand(pCommand *OPAQUECOMMAND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCommand)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMDMDevice2: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iwmdmdevice2
@@ -1150,25 +1150,25 @@ var IID_IWMDMDevice2 = win32.GUID{Data1: 0xe34f3d37, Data2: 0x9d67, Data3: 0x4fc
 func (self *IWMDMDevice2) GetStorage(pszStorageName string, ppStorage **IWMDMStorage) error {
 	_pszStorageName := win32.UTF16Ptr(pszStorageName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszStorageName)), uintptr(unsafe.Pointer(ppStorage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFormatSupport2 dispatches through IWMDMDevice2's vtable slot 15.
 func (self *IWMDMDevice2) GetFormatSupport2(dwFlags uint32, ppAudioFormatEx **mediaaudio.WAVEFORMATEX, pnAudioFormatCount *uint32, ppVideoFormatEx **mediamediafoundation.VIDEOINFOHEADER, pnVideoFormatCount *uint32, ppFileType **WMFILECAPABILITIES, pnFileTypeCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppAudioFormatEx)), uintptr(unsafe.Pointer(pnAudioFormatCount)), uintptr(unsafe.Pointer(ppVideoFormatEx)), uintptr(unsafe.Pointer(pnVideoFormatCount)), uintptr(unsafe.Pointer(ppFileType)), uintptr(unsafe.Pointer(pnFileTypeCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSpecifyPropertyPages dispatches through IWMDMDevice2's vtable slot 16.
 func (self *IWMDMDevice2) GetSpecifyPropertyPages(ppSpecifyPropPages **systemole.ISpecifyPropertyPages, pppUnknowns ***systemcom.IUnknown, pcUnks *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSpecifyPropPages)), uintptr(unsafe.Pointer(pppUnknowns)), uintptr(unsafe.Pointer(pcUnks)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCanonicalName dispatches through IWMDMDevice2's vtable slot 17.
 func (self *IWMDMDevice2) GetCanonicalName(pwszPnPName foundation.PWSTR, nMaxChars uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszPnPName)), uintptr(nMaxChars))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMDMDevice3: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iwmdmdevice3
@@ -1184,20 +1184,20 @@ var IID_IWMDMDevice3 = win32.GUID{Data1: 0x6c03e4fe, Data2: 0x05db, Data3: 0x4dd
 func (self *IWMDMDevice3) GetProperty(pwszPropName string, pValue *systemcomstructuredstorage.PROPVARIANT) error {
 	_pwszPropName := win32.UTF16Ptr(pwszPropName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszPropName)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetProperty dispatches through IWMDMDevice3's vtable slot 19.
 func (self *IWMDMDevice3) SetProperty(pwszPropName string, pValue *systemcomstructuredstorage.PROPVARIANT) error {
 	_pwszPropName := win32.UTF16Ptr(pwszPropName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszPropName)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFormatCapability dispatches through IWMDMDevice3's vtable slot 20.
 func (self *IWMDMDevice3) GetFormatCapability(format WMDM_FORMATCODE, pFormatSupport *WMDM_FORMAT_CAPABILITY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(format), uintptr(unsafe.Pointer(pFormatSupport)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeviceIoControl dispatches through IWMDMDevice3's vtable slot 21.
@@ -1207,14 +1207,14 @@ func (self *IWMDMDevice3) DeviceIoControl(dwIoControlCode uint32, lpInBuffer []b
 		_lpInBuffer = &lpInBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(dwIoControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(lpOutBuffer)), uintptr(unsafe.Pointer(pnOutBufferSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FindStorage dispatches through IWMDMDevice3's vtable slot 22.
 func (self *IWMDMDevice3) FindStorage(findScope WMDM_FIND_SCOPE, pwszUniqueID string, ppStorage **IWMDMStorage) error {
 	_pwszUniqueID := win32.UTF16Ptr(pwszUniqueID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(findScope), uintptr(unsafe.Pointer(_pwszUniqueID)), uintptr(unsafe.Pointer(ppStorage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMDMDeviceControl: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iwmdmdevicecontrol
@@ -1229,49 +1229,49 @@ var IID_IWMDMDeviceControl = win32.GUID{Data1: 0x1dcb3a04, Data2: 0x33ed, Data3:
 // GetStatus dispatches through IWMDMDeviceControl's vtable slot 3.
 func (self *IWMDMDeviceControl) GetStatus(pdwStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCapabilities dispatches through IWMDMDeviceControl's vtable slot 4.
 func (self *IWMDMDeviceControl) GetCapabilities(pdwCapabilitiesMask *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCapabilitiesMask)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Play dispatches through IWMDMDeviceControl's vtable slot 5.
 func (self *IWMDMDeviceControl) Play() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Record dispatches through IWMDMDeviceControl's vtable slot 6.
 func (self *IWMDMDeviceControl) Record(pFormat *mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Pause dispatches through IWMDMDeviceControl's vtable slot 7.
 func (self *IWMDMDeviceControl) Pause() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Resume dispatches through IWMDMDeviceControl's vtable slot 8.
 func (self *IWMDMDeviceControl) Resume() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Stop dispatches through IWMDMDeviceControl's vtable slot 9.
 func (self *IWMDMDeviceControl) Stop() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Seek dispatches through IWMDMDeviceControl's vtable slot 10.
 func (self *IWMDMDeviceControl) Seek(fuMode uint32, nOffset int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(fuMode), uintptr(nOffset))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMDMDeviceSession: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iwmdmdevicesession
@@ -1290,7 +1290,7 @@ func (self *IWMDMDeviceSession) BeginSession(type_ WMDM_SESSION_TYPE, pCtx []byt
 		_pCtx = &pCtx[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(unsafe.Pointer(_pCtx)), uintptr(len(pCtx)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndSession dispatches through IWMDMDeviceSession's vtable slot 4.
@@ -1300,7 +1300,7 @@ func (self *IWMDMDeviceSession) EndSession(type_ WMDM_SESSION_TYPE, pCtx []byte)
 		_pCtx = &pCtx[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(unsafe.Pointer(_pCtx)), uintptr(len(pCtx)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMDMEnumDevice: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iwmdmenumdevice
@@ -1319,25 +1319,25 @@ func (self *IWMDMEnumDevice) Next(ppDevice []*IWMDMDevice, pceltFetched *uint32)
 		_ppDevice = &ppDevice[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppDevice)), uintptr(unsafe.Pointer(_ppDevice)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IWMDMEnumDevice's vtable slot 4.
 func (self *IWMDMEnumDevice) Skip(celt uint32, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IWMDMEnumDevice's vtable slot 5.
 func (self *IWMDMEnumDevice) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IWMDMEnumDevice's vtable slot 6.
 func (self *IWMDMEnumDevice) Clone(ppEnumDevice **IWMDMEnumDevice) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumDevice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMDMEnumStorage: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iwmdmenumstorage
@@ -1356,25 +1356,25 @@ func (self *IWMDMEnumStorage) Next(ppStorage []*IWMDMStorage, pceltFetched *uint
 		_ppStorage = &ppStorage[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppStorage)), uintptr(unsafe.Pointer(_ppStorage)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IWMDMEnumStorage's vtable slot 4.
 func (self *IWMDMEnumStorage) Skip(celt uint32, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IWMDMEnumStorage's vtable slot 5.
 func (self *IWMDMEnumStorage) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IWMDMEnumStorage's vtable slot 6.
 func (self *IWMDMEnumStorage) Clone(ppEnumStorage **IWMDMEnumStorage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumStorage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMDMLogger: https://learn.microsoft.com/windows/win32/api/wmdmlog/nn-wmdmlog-iwmdmlogger
@@ -1389,56 +1389,56 @@ var IID_IWMDMLogger = win32.GUID{Data1: 0x110a3200, Data2: 0x5a79, Data3: 0x11d3
 // IsEnabled dispatches through IWMDMLogger's vtable slot 3.
 func (self *IWMDMLogger) IsEnabled(pfEnabled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEnabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Enable dispatches through IWMDMLogger's vtable slot 4.
 func (self *IWMDMLogger) Enable(fEnable bool) error {
 	_fEnable := win32.Bool32(fEnable)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(_fEnable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLogFileName dispatches through IWMDMLogger's vtable slot 5.
 func (self *IWMDMLogger) GetLogFileName(pszFilename foundation.PSTR, nMaxChars uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszFilename)), uintptr(nMaxChars))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetLogFileName dispatches through IWMDMLogger's vtable slot 6.
 func (self *IWMDMLogger) SetLogFileName(pszFilename foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszFilename)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LogString dispatches through IWMDMLogger's vtable slot 7.
 func (self *IWMDMLogger) LogString(dwFlags uint32, pszSrcName foundation.PSTR, pszLog foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(pszSrcName)), uintptr(unsafe.Pointer(pszLog)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LogDword dispatches through IWMDMLogger's vtable slot 8.
 func (self *IWMDMLogger) LogDword(dwFlags uint32, pszSrcName foundation.PSTR, pszLogFormat foundation.PSTR, dwLog uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(pszSrcName)), uintptr(unsafe.Pointer(pszLogFormat)), uintptr(dwLog))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IWMDMLogger's vtable slot 9.
 func (self *IWMDMLogger) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSizeParams dispatches through IWMDMLogger's vtable slot 10.
 func (self *IWMDMLogger) GetSizeParams(pdwMaxSize *uint32, pdwShrinkToSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwMaxSize)), uintptr(unsafe.Pointer(pdwShrinkToSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetSizeParams dispatches through IWMDMLogger's vtable slot 11.
 func (self *IWMDMLogger) SetSizeParams(dwMaxSize uint32, dwShrinkToSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(dwMaxSize), uintptr(dwShrinkToSize))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMDMMetaData: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iwmdmmetadata
@@ -1458,26 +1458,26 @@ func (self *IWMDMMetaData) AddItem(Type WMDM_TAG_DATATYPE, pwszTagName string, p
 		_pValue = &pValue[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(unsafe.Pointer(_pwszTagName)), uintptr(unsafe.Pointer(_pValue)), uintptr(len(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryByName dispatches through IWMDMMetaData's vtable slot 4.
 func (self *IWMDMMetaData) QueryByName(pwszTagName string, pType *WMDM_TAG_DATATYPE, pValue **byte, pcbLength *uint32) error {
 	_pwszTagName := win32.UTF16Ptr(pwszTagName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszTagName)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pcbLength)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryByIndex dispatches through IWMDMMetaData's vtable slot 5.
 func (self *IWMDMMetaData) QueryByIndex(iIndex uint32, ppwszName **uint16, pType *WMDM_TAG_DATATYPE, ppValue **byte, pcbLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(iIndex), uintptr(unsafe.Pointer(ppwszName)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(ppValue)), uintptr(unsafe.Pointer(pcbLength)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetItemCount dispatches through IWMDMMetaData's vtable slot 6.
 func (self *IWMDMMetaData) GetItemCount(iCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(iCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMDMNotification: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iwmdmnotification
@@ -1493,7 +1493,7 @@ var IID_IWMDMNotification = win32.GUID{Data1: 0x3f5e95c0, Data2: 0x0f43, Data3: 
 func (self *IWMDMNotification) WMDMMessage(dwMessageType uint32, pwszCanonicalName string) error {
 	_pwszCanonicalName := win32.UTF16Ptr(pwszCanonicalName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwMessageType), uintptr(unsafe.Pointer(_pwszCanonicalName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMDMObjectInfo: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iwmdmobjectinfo
@@ -1508,43 +1508,43 @@ var IID_IWMDMObjectInfo = win32.GUID{Data1: 0x1dcb3a09, Data2: 0x33ed, Data3: 0x
 // GetPlayLength dispatches through IWMDMObjectInfo's vtable slot 3.
 func (self *IWMDMObjectInfo) GetPlayLength(pdwLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwLength)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetPlayLength dispatches through IWMDMObjectInfo's vtable slot 4.
 func (self *IWMDMObjectInfo) SetPlayLength(dwLength uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwLength))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPlayOffset dispatches through IWMDMObjectInfo's vtable slot 5.
 func (self *IWMDMObjectInfo) GetPlayOffset(pdwOffset *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwOffset)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetPlayOffset dispatches through IWMDMObjectInfo's vtable slot 6.
 func (self *IWMDMObjectInfo) SetPlayOffset(dwOffset uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwOffset))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTotalLength dispatches through IWMDMObjectInfo's vtable slot 7.
 func (self *IWMDMObjectInfo) GetTotalLength(pdwLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwLength)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLastPlayPosition dispatches through IWMDMObjectInfo's vtable slot 8.
 func (self *IWMDMObjectInfo) GetLastPlayPosition(pdwLastPos *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwLastPos)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLongestPlayPosition dispatches through IWMDMObjectInfo's vtable slot 9.
 func (self *IWMDMObjectInfo) GetLongestPlayPosition(pdwLongestPos *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwLongestPos)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMDMOperation: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iwmdmoperation
@@ -1559,62 +1559,62 @@ var IID_IWMDMOperation = win32.GUID{Data1: 0x1dcb3a0b, Data2: 0x33ed, Data3: 0x1
 // BeginRead dispatches through IWMDMOperation's vtable slot 3.
 func (self *IWMDMOperation) BeginRead() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BeginWrite dispatches through IWMDMOperation's vtable slot 4.
 func (self *IWMDMOperation) BeginWrite() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetObjectName dispatches through IWMDMOperation's vtable slot 5.
 func (self *IWMDMOperation) GetObjectName(pwszName foundation.PWSTR, nMaxChars uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszName)), uintptr(nMaxChars))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetObjectName dispatches through IWMDMOperation's vtable slot 6.
 func (self *IWMDMOperation) SetObjectName(pwszName string, nMaxChars uint32) error {
 	_pwszName := win32.UTF16Ptr(pwszName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszName)), uintptr(nMaxChars))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetObjectAttributes dispatches through IWMDMOperation's vtable slot 7.
 func (self *IWMDMOperation) GetObjectAttributes(pdwAttributes *uint32, pFormat *mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwAttributes)), uintptr(unsafe.Pointer(pFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetObjectAttributes dispatches through IWMDMOperation's vtable slot 8.
 func (self *IWMDMOperation) SetObjectAttributes(dwAttributes uint32, pFormat *mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwAttributes), uintptr(unsafe.Pointer(pFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetObjectTotalSize dispatches through IWMDMOperation's vtable slot 9.
 func (self *IWMDMOperation) GetObjectTotalSize(pdwSize *uint32, pdwSizeHigh *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwSize)), uintptr(unsafe.Pointer(pdwSizeHigh)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetObjectTotalSize dispatches through IWMDMOperation's vtable slot 10.
 func (self *IWMDMOperation) SetObjectTotalSize(dwSize uint32, dwSizeHigh uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(dwSize), uintptr(dwSizeHigh))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TransferObjectData dispatches through IWMDMOperation's vtable slot 11.
 func (self *IWMDMOperation) TransferObjectData(pData *byte, pdwSize *uint32, abMac *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(pdwSize)), uintptr(unsafe.Pointer(abMac)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // End dispatches through IWMDMOperation's vtable slot 12.
 func (self *IWMDMOperation) End(phCompletionCode *foundation.HRESULT, pNewObject *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phCompletionCode)), uintptr(unsafe.Pointer(pNewObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMDMOperation2: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iwmdmoperation2
@@ -1629,13 +1629,13 @@ var IID_IWMDMOperation2 = win32.GUID{Data1: 0x33445b48, Data2: 0x7df7, Data3: 0x
 // SetObjectAttributes2 dispatches through IWMDMOperation2's vtable slot 13.
 func (self *IWMDMOperation2) SetObjectAttributes2(dwAttributes uint32, dwAttributesEx uint32, pFormat *mediaaudio.WAVEFORMATEX, pVideoFormat *mediamediafoundation.VIDEOINFOHEADER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwAttributes), uintptr(dwAttributesEx), uintptr(unsafe.Pointer(pFormat)), uintptr(unsafe.Pointer(pVideoFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetObjectAttributes2 dispatches through IWMDMOperation2's vtable slot 14.
 func (self *IWMDMOperation2) GetObjectAttributes2(pdwAttributes *uint32, pdwAttributesEx *uint32, pAudioFormat *mediaaudio.WAVEFORMATEX, pVideoFormat *mediamediafoundation.VIDEOINFOHEADER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwAttributes)), uintptr(unsafe.Pointer(pdwAttributesEx)), uintptr(unsafe.Pointer(pAudioFormat)), uintptr(unsafe.Pointer(pVideoFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMDMOperation3: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iwmdmoperation3
@@ -1650,7 +1650,7 @@ var IID_IWMDMOperation3 = win32.GUID{Data1: 0xd1f9b46a, Data2: 0x9ca8, Data3: 0x
 // TransferObjectDataOnClearChannel dispatches through IWMDMOperation3's vtable slot 13.
 func (self *IWMDMOperation3) TransferObjectDataOnClearChannel(pData *byte, pdwSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(pdwSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMDMProgress: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iwmdmprogress
@@ -1665,19 +1665,19 @@ var IID_IWMDMProgress = win32.GUID{Data1: 0x1dcb3a0c, Data2: 0x33ed, Data3: 0x11
 // Begin dispatches through IWMDMProgress's vtable slot 3.
 func (self *IWMDMProgress) Begin(dwEstimatedTicks uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwEstimatedTicks))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Progress dispatches through IWMDMProgress's vtable slot 4.
 func (self *IWMDMProgress) Progress(dwTranspiredTicks uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwTranspiredTicks))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // End dispatches through IWMDMProgress's vtable slot 5.
 func (self *IWMDMProgress) End() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMDMProgress2: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iwmdmprogress2
@@ -1692,7 +1692,7 @@ var IID_IWMDMProgress2 = win32.GUID{Data1: 0x3a43f550, Data2: 0xb383, Data3: 0x4
 // End2 dispatches through IWMDMProgress2's vtable slot 6.
 func (self *IWMDMProgress2) End2(hrCompletionCode foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hrCompletionCode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMDMProgress3: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iwmdmprogress3
@@ -1716,7 +1716,7 @@ var IID_IWMDMRevoked = win32.GUID{Data1: 0xebeccedb, Data2: 0x88ee, Data3: 0x4e5
 // GetRevocationURL dispatches through IWMDMRevoked's vtable slot 3.
 func (self *IWMDMRevoked) GetRevocationURL(ppwszRevocationURL *foundation.PWSTR, pdwBufferLen *uint32, pdwRevokedBitFlag *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwszRevocationURL)), uintptr(unsafe.Pointer(pdwBufferLen)), uintptr(unsafe.Pointer(pdwRevokedBitFlag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMDMStorage: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iwmdmstorage
@@ -1731,55 +1731,55 @@ var IID_IWMDMStorage = win32.GUID{Data1: 0x1dcb3a06, Data2: 0x33ed, Data3: 0x11d
 // SetAttributes dispatches through IWMDMStorage's vtable slot 3.
 func (self *IWMDMStorage) SetAttributes(dwAttributes uint32, pFormat *mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwAttributes), uintptr(unsafe.Pointer(pFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStorageGlobals dispatches through IWMDMStorage's vtable slot 4.
 func (self *IWMDMStorage) GetStorageGlobals(ppStorageGlobals **IWMDMStorageGlobals) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppStorageGlobals)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAttributes dispatches through IWMDMStorage's vtable slot 5.
 func (self *IWMDMStorage) GetAttributes(pdwAttributes *uint32, pFormat *mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwAttributes)), uintptr(unsafe.Pointer(pFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetName dispatches through IWMDMStorage's vtable slot 6.
 func (self *IWMDMStorage) GetName(pwszName foundation.PWSTR, nMaxChars uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszName)), uintptr(nMaxChars))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDate dispatches through IWMDMStorage's vtable slot 7.
 func (self *IWMDMStorage) GetDate(pDateTimeUTC *WMDMDATETIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDateTimeUTC)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSize dispatches through IWMDMStorage's vtable slot 8.
 func (self *IWMDMStorage) GetSize(pdwSizeLow *uint32, pdwSizeHigh *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwSizeLow)), uintptr(unsafe.Pointer(pdwSizeHigh)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRights dispatches through IWMDMStorage's vtable slot 9.
 func (self *IWMDMStorage) GetRights(ppRights **WMDMRIGHTS, pnRightsCount *uint32, abMac *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppRights)), uintptr(unsafe.Pointer(pnRightsCount)), uintptr(unsafe.Pointer(abMac)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumStorage dispatches through IWMDMStorage's vtable slot 10.
 func (self *IWMDMStorage) EnumStorage(pEnumStorage **IWMDMEnumStorage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEnumStorage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendOpaqueCommand dispatches through IWMDMStorage's vtable slot 11.
 func (self *IWMDMStorage) SendOpaqueCommand(pCommand *OPAQUECOMMAND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCommand)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMDMStorage2: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iwmdmstorage2
@@ -1795,19 +1795,19 @@ var IID_IWMDMStorage2 = win32.GUID{Data1: 0x1ed5a144, Data2: 0x5cd5, Data3: 0x46
 func (self *IWMDMStorage2) GetStorage(pszStorageName string, ppStorage **IWMDMStorage) error {
 	_pszStorageName := win32.UTF16Ptr(pszStorageName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszStorageName)), uintptr(unsafe.Pointer(ppStorage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAttributes2 dispatches through IWMDMStorage2's vtable slot 13.
 func (self *IWMDMStorage2) SetAttributes2(dwAttributes uint32, dwAttributesEx uint32, pFormat *mediaaudio.WAVEFORMATEX, pVideoFormat *mediamediafoundation.VIDEOINFOHEADER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwAttributes), uintptr(dwAttributesEx), uintptr(unsafe.Pointer(pFormat)), uintptr(unsafe.Pointer(pVideoFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAttributes2 dispatches through IWMDMStorage2's vtable slot 14.
 func (self *IWMDMStorage2) GetAttributes2(pdwAttributes *uint32, pdwAttributesEx *uint32, pAudioFormat *mediaaudio.WAVEFORMATEX, pVideoFormat *mediamediafoundation.VIDEOINFOHEADER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwAttributes)), uintptr(unsafe.Pointer(pdwAttributesEx)), uintptr(unsafe.Pointer(pAudioFormat)), uintptr(unsafe.Pointer(pVideoFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMDMStorage3: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iwmdmstorage3
@@ -1822,19 +1822,19 @@ var IID_IWMDMStorage3 = win32.GUID{Data1: 0x97717eea, Data2: 0x926a, Data3: 0x46
 // GetMetadata dispatches through IWMDMStorage3's vtable slot 15.
 func (self *IWMDMStorage3) GetMetadata(ppMetadata **IWMDMMetaData) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppMetadata)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMetadata dispatches through IWMDMStorage3's vtable slot 16.
 func (self *IWMDMStorage3) SetMetadata(pMetadata *IWMDMMetaData) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMetadata)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateEmptyMetadataObject dispatches through IWMDMStorage3's vtable slot 17.
 func (self *IWMDMStorage3) CreateEmptyMetadataObject(ppMetadata **IWMDMMetaData) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppMetadata)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetEnumPreference dispatches through IWMDMStorage3's vtable slot 18.
@@ -1844,7 +1844,7 @@ func (self *IWMDMStorage3) SetEnumPreference(pMode *WMDM_STORAGE_ENUM_MODE, pVie
 		_pViews = &pViews[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMode)), uintptr(len(pViews)), uintptr(unsafe.Pointer(_pViews)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMDMStorage4: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iwmdmstorage4
@@ -1863,19 +1863,19 @@ func (self *IWMDMStorage4) SetReferences(ppIWMDMStorage []*IWMDMStorage) error {
 		_ppIWMDMStorage = &ppIWMDMStorage[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(len(ppIWMDMStorage)), uintptr(unsafe.Pointer(_ppIWMDMStorage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetReferences dispatches through IWMDMStorage4's vtable slot 20.
 func (self *IWMDMStorage4) GetReferences(pdwRefs *uint32, pppIWMDMStorage ***IWMDMStorage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwRefs)), uintptr(unsafe.Pointer(pppIWMDMStorage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRightsWithProgress dispatches through IWMDMStorage4's vtable slot 21.
 func (self *IWMDMStorage4) GetRightsWithProgress(pIProgressCallback *IWMDMProgress3, ppRights **WMDMRIGHTS, pnRightsCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIProgressCallback)), uintptr(unsafe.Pointer(ppRights)), uintptr(unsafe.Pointer(pnRightsCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSpecifiedMetadata dispatches through IWMDMStorage4's vtable slot 22.
@@ -1885,20 +1885,20 @@ func (self *IWMDMStorage4) GetSpecifiedMetadata(ppwszPropNames []foundation.PWST
 		_ppwszPropNames = &ppwszPropNames[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(len(ppwszPropNames)), uintptr(unsafe.Pointer(_ppwszPropNames)), uintptr(unsafe.Pointer(ppMetadata)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FindStorage dispatches through IWMDMStorage4's vtable slot 23.
 func (self *IWMDMStorage4) FindStorage(findScope WMDM_FIND_SCOPE, pwszUniqueID string, ppStorage **IWMDMStorage) error {
 	_pwszUniqueID := win32.UTF16Ptr(pwszUniqueID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(findScope), uintptr(unsafe.Pointer(_pwszUniqueID)), uintptr(unsafe.Pointer(ppStorage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetParent dispatches through IWMDMStorage4's vtable slot 24.
 func (self *IWMDMStorage4) GetParent(ppStorage **IWMDMStorage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppStorage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMDMStorageControl: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iwmdmstoragecontrol
@@ -1914,33 +1914,33 @@ var IID_IWMDMStorageControl = win32.GUID{Data1: 0x1dcb3a08, Data2: 0x33ed, Data3
 func (self *IWMDMStorageControl) Insert(fuMode uint32, pwszFile string, pOperation *IWMDMOperation, pProgress *IWMDMProgress, ppNewObject **IWMDMStorage) error {
 	_pwszFile := win32.UTF16Ptr(pwszFile)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(fuMode), uintptr(unsafe.Pointer(_pwszFile)), uintptr(unsafe.Pointer(pOperation)), uintptr(unsafe.Pointer(pProgress)), uintptr(unsafe.Pointer(ppNewObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IWMDMStorageControl's vtable slot 4.
 func (self *IWMDMStorageControl) Delete(fuMode uint32, pProgress *IWMDMProgress) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(fuMode), uintptr(unsafe.Pointer(pProgress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Rename dispatches through IWMDMStorageControl's vtable slot 5.
 func (self *IWMDMStorageControl) Rename(fuMode uint32, pwszNewName string, pProgress *IWMDMProgress) error {
 	_pwszNewName := win32.UTF16Ptr(pwszNewName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(fuMode), uintptr(unsafe.Pointer(_pwszNewName)), uintptr(unsafe.Pointer(pProgress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Read dispatches through IWMDMStorageControl's vtable slot 6.
 func (self *IWMDMStorageControl) Read(fuMode uint32, pwszFile string, pProgress *IWMDMProgress, pOperation *IWMDMOperation) error {
 	_pwszFile := win32.UTF16Ptr(pwszFile)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(fuMode), uintptr(unsafe.Pointer(_pwszFile)), uintptr(unsafe.Pointer(pProgress)), uintptr(unsafe.Pointer(pOperation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Move dispatches through IWMDMStorageControl's vtable slot 7.
 func (self *IWMDMStorageControl) Move(fuMode uint32, pTargetObject *IWMDMStorage, pProgress *IWMDMProgress) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(fuMode), uintptr(unsafe.Pointer(pTargetObject)), uintptr(unsafe.Pointer(pProgress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMDMStorageControl2: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iwmdmstoragecontrol2
@@ -1957,7 +1957,7 @@ func (self *IWMDMStorageControl2) Insert2(fuMode uint32, pwszFileSource string, 
 	_pwszFileSource := win32.UTF16Ptr(pwszFileSource)
 	_pwszFileDest := win32.UTF16Ptr(pwszFileDest)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(fuMode), uintptr(unsafe.Pointer(_pwszFileSource)), uintptr(unsafe.Pointer(_pwszFileDest)), uintptr(unsafe.Pointer(pOperation)), uintptr(unsafe.Pointer(pProgress)), uintptr(unsafe.Pointer(pUnknown)), uintptr(unsafe.Pointer(ppNewObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMDMStorageControl3: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iwmdmstoragecontrol3
@@ -1974,7 +1974,7 @@ func (self *IWMDMStorageControl3) Insert3(fuMode uint32, fuType uint32, pwszFile
 	_pwszFileSource := win32.UTF16Ptr(pwszFileSource)
 	_pwszFileDest := win32.UTF16Ptr(pwszFileDest)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(fuMode), uintptr(fuType), uintptr(unsafe.Pointer(_pwszFileSource)), uintptr(unsafe.Pointer(_pwszFileDest)), uintptr(unsafe.Pointer(pOperation)), uintptr(unsafe.Pointer(pProgress)), uintptr(unsafe.Pointer(pMetaData)), uintptr(unsafe.Pointer(pUnknown)), uintptr(unsafe.Pointer(ppNewObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMDMStorageGlobals: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iwmdmstorageglobals
@@ -1989,43 +1989,43 @@ var IID_IWMDMStorageGlobals = win32.GUID{Data1: 0x1dcb3a07, Data2: 0x33ed, Data3
 // GetCapabilities dispatches through IWMDMStorageGlobals's vtable slot 3.
 func (self *IWMDMStorageGlobals) GetCapabilities(pdwCapabilities *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCapabilities)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSerialNumber dispatches through IWMDMStorageGlobals's vtable slot 4.
 func (self *IWMDMStorageGlobals) GetSerialNumber(pSerialNum *WMDMID, abMac *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSerialNum)), uintptr(unsafe.Pointer(abMac)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTotalSize dispatches through IWMDMStorageGlobals's vtable slot 5.
 func (self *IWMDMStorageGlobals) GetTotalSize(pdwTotalSizeLow *uint32, pdwTotalSizeHigh *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwTotalSizeLow)), uintptr(unsafe.Pointer(pdwTotalSizeHigh)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTotalFree dispatches through IWMDMStorageGlobals's vtable slot 6.
 func (self *IWMDMStorageGlobals) GetTotalFree(pdwFreeLow *uint32, pdwFreeHigh *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFreeLow)), uintptr(unsafe.Pointer(pdwFreeHigh)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTotalBad dispatches through IWMDMStorageGlobals's vtable slot 7.
 func (self *IWMDMStorageGlobals) GetTotalBad(pdwBadLow *uint32, pdwBadHigh *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwBadLow)), uintptr(unsafe.Pointer(pdwBadHigh)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStatus dispatches through IWMDMStorageGlobals's vtable slot 8.
 func (self *IWMDMStorageGlobals) GetStatus(pdwStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Initialize dispatches through IWMDMStorageGlobals's vtable slot 9.
 func (self *IWMDMStorageGlobals) Initialize(fuMode uint32, pProgress *IWMDMProgress) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(fuMode), uintptr(unsafe.Pointer(pProgress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMDeviceManager: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iwmdevicemanager
@@ -2040,19 +2040,19 @@ var IID_IWMDeviceManager = win32.GUID{Data1: 0x1dcb3a00, Data2: 0x33ed, Data3: 0
 // GetRevision dispatches through IWMDeviceManager's vtable slot 3.
 func (self *IWMDeviceManager) GetRevision(pdwRevision *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwRevision)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceCount dispatches through IWMDeviceManager's vtable slot 4.
 func (self *IWMDeviceManager) GetDeviceCount(pdwCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumDevices dispatches through IWMDeviceManager's vtable slot 5.
 func (self *IWMDeviceManager) EnumDevices(ppEnumDevice **IWMDMEnumDevice) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumDevice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMDeviceManager2: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iwmdevicemanager2
@@ -2068,19 +2068,19 @@ var IID_IWMDeviceManager2 = win32.GUID{Data1: 0x923e5249, Data2: 0x8731, Data3: 
 func (self *IWMDeviceManager2) GetDeviceFromCanonicalName(pwszCanonicalName string, ppDevice **IWMDMDevice) error {
 	_pwszCanonicalName := win32.UTF16Ptr(pwszCanonicalName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszCanonicalName)), uintptr(unsafe.Pointer(ppDevice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumDevices2 dispatches through IWMDeviceManager2's vtable slot 7.
 func (self *IWMDeviceManager2) EnumDevices2(ppEnumDevice **IWMDMEnumDevice) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumDevice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reinitialize dispatches through IWMDeviceManager2's vtable slot 8.
 func (self *IWMDeviceManager2) Reinitialize() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMDeviceManager3: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iwmdevicemanager3
@@ -2095,5 +2095,5 @@ var IID_IWMDeviceManager3 = win32.GUID{Data1: 0xaf185c41, Data2: 0x100d, Data3: 
 // SetDeviceEnumPreference dispatches through IWMDeviceManager3's vtable slot 9.
 func (self *IWMDeviceManager3) SetDeviceEnumPreference(dwEnumPref uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwEnumPref))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

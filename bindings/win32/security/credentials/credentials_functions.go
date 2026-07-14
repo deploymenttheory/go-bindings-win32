@@ -707,21 +707,21 @@ func KeyCredentialManagerFreeInformation(keyCredentialManagerInfo *KeyCredential
 // https://learn.microsoft.com/windows/win32/api/keycredmgr/nf-keycredmgr-keycredentialmanagergetinformation
 func KeyCredentialManagerGetInformation(keyCredentialManagerInfo **KeyCredentialManagerInfo) error {
 	r1, _, _ := syscall.SyscallN(procKeyCredentialManagerGetInformation.Addr(), uintptr(unsafe.Pointer(keyCredentialManagerInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KeyCredentialManagerGetOperationErrorStates calls KeyCredMgr!KeyCredentialManagerGetOperationErrorStates.
 // https://learn.microsoft.com/windows/win32/api/keycredmgr/nf-keycredmgr-keycredentialmanagergetoperationerrorstates
 func KeyCredentialManagerGetOperationErrorStates(keyCredentialManagerOperationType KeyCredentialManagerOperationType, isReady *foundation.BOOL, keyCredentialManagerOperationErrorStates *KeyCredentialManagerOperationErrorStates) error {
 	r1, _, _ := syscall.SyscallN(procKeyCredentialManagerGetOperationErrorStates.Addr(), uintptr(keyCredentialManagerOperationType), uintptr(unsafe.Pointer(isReady)), uintptr(unsafe.Pointer(keyCredentialManagerOperationErrorStates)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // KeyCredentialManagerShowUIOperation calls KeyCredMgr!KeyCredentialManagerShowUIOperation.
 // https://learn.microsoft.com/windows/win32/api/keycredmgr/nf-keycredmgr-keycredentialmanagershowuioperation
 func KeyCredentialManagerShowUIOperation(hWndOwner foundation.HWND, keyCredentialManagerOperationType KeyCredentialManagerOperationType) error {
 	r1, _, _ := syscall.SyscallN(procKeyCredentialManagerShowUIOperation.Addr(), uintptr(hWndOwner), uintptr(keyCredentialManagerOperationType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SCardAccessStartedEvent calls WinSCard!SCardAccessStartedEvent.

@@ -26,11 +26,11 @@ var (
 // Minimum OS: windows5.0.
 func CoGetInterceptor(iidIntercepted *win32.GUID, punkOuter *systemcom.IUnknown, iid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCoGetInterceptor.Addr(), uintptr(unsafe.Pointer(iidIntercepted)), uintptr(unsafe.Pointer(punkOuter)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoGetInterceptorFromTypeInfo calls ole32!CoGetInterceptorFromTypeInfo.
 func CoGetInterceptorFromTypeInfo(iidIntercepted *win32.GUID, punkOuter *systemcom.IUnknown, typeInfo *systemcom.ITypeInfo, iid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCoGetInterceptorFromTypeInfo.Addr(), uintptr(unsafe.Pointer(iidIntercepted)), uintptr(unsafe.Pointer(punkOuter)), uintptr(unsafe.Pointer(typeInfo)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

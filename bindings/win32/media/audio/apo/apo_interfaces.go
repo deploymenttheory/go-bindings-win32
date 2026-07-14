@@ -34,7 +34,7 @@ var IID_IApoAcousticEchoCancellation2 = win32.GUID{Data1: 0xf235855f, Data2: 0xf
 // GetDesiredReferenceStreamProperties dispatches through IApoAcousticEchoCancellation2's vtable slot 3.
 func (self *IApoAcousticEchoCancellation2) GetDesiredReferenceStreamProperties(pProperties *APO_REFERENCE_STREAM_PROPERTIES) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProperties)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IApoAuxiliaryInputConfiguration: https://learn.microsoft.com/windows/win32/api/audioenginebaseapo/nn-audioenginebaseapo-iapoauxiliaryinputconfiguration
@@ -53,19 +53,19 @@ func (self *IApoAuxiliaryInputConfiguration) AddAuxiliaryInput(dwInputId uint32,
 		_pbyData = &pbyData[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwInputId), uintptr(len(pbyData)), uintptr(unsafe.Pointer(_pbyData)), uintptr(unsafe.Pointer(pInputConnection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAuxiliaryInput dispatches through IApoAuxiliaryInputConfiguration's vtable slot 4.
 func (self *IApoAuxiliaryInputConfiguration) RemoveAuxiliaryInput(dwInputId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwInputId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsInputFormatSupported dispatches through IApoAuxiliaryInputConfiguration's vtable slot 5.
 func (self *IApoAuxiliaryInputConfiguration) IsInputFormatSupported(pRequestedInputFormat *IAudioMediaType, ppSupportedInputFormat **IAudioMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRequestedInputFormat)), uintptr(unsafe.Pointer(ppSupportedInputFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IApoAuxiliaryInputRT: https://learn.microsoft.com/windows/win32/api/audioenginebaseapo/nn-audioenginebaseapo-iapoauxiliaryinputrt
@@ -94,7 +94,7 @@ var IID_IAudioDeviceModulesClient = win32.GUID{Data1: 0x98f37dac, Data2: 0xd0b6,
 // SetAudioDeviceModulesManager dispatches through IAudioDeviceModulesClient's vtable slot 3.
 func (self *IAudioDeviceModulesClient) SetAudioDeviceModulesManager(pAudioDeviceModulesManager *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAudioDeviceModulesManager)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioMediaType: https://learn.microsoft.com/windows/win32/api/audiomediatype/nn-audiomediatype-iaudiomediatype
@@ -109,13 +109,13 @@ var IID_IAudioMediaType = win32.GUID{Data1: 0x4e997f73, Data2: 0xb71f, Data3: 0x
 // IsCompressedFormat dispatches through IAudioMediaType's vtable slot 3.
 func (self *IAudioMediaType) IsCompressedFormat(pfCompressed *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfCompressed)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsEqual dispatches through IAudioMediaType's vtable slot 4.
 func (self *IAudioMediaType) IsEqual(pIAudioType *IAudioMediaType, pdwFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIAudioType)), uintptr(unsafe.Pointer(pdwFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAudioFormat dispatches through IAudioMediaType's vtable slot 5.
@@ -127,7 +127,7 @@ func (self *IAudioMediaType) GetAudioFormat() *mediaaudio.WAVEFORMATEX {
 // GetUncompressedAudioFormat dispatches through IAudioMediaType's vtable slot 6.
 func (self *IAudioMediaType) GetUncompressedAudioFormat(pUncompressedAudioFormat *UNCOMPRESSEDAUDIOFORMAT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUncompressedAudioFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioProcessingObject: https://learn.microsoft.com/windows/win32/api/audioenginebaseapo/nn-audioenginebaseapo-iaudioprocessingobject
@@ -142,19 +142,19 @@ var IID_IAudioProcessingObject = win32.GUID{Data1: 0xfd7f2b29, Data2: 0x24d0, Da
 // Reset dispatches through IAudioProcessingObject's vtable slot 3.
 func (self *IAudioProcessingObject) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLatency dispatches through IAudioProcessingObject's vtable slot 4.
 func (self *IAudioProcessingObject) GetLatency(pTime *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRegistrationProperties dispatches through IAudioProcessingObject's vtable slot 5.
 func (self *IAudioProcessingObject) GetRegistrationProperties(ppRegProps **APO_REG_PROPERTIES) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppRegProps)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Initialize dispatches through IAudioProcessingObject's vtable slot 6.
@@ -164,25 +164,25 @@ func (self *IAudioProcessingObject) Initialize(pbyData []byte) error {
 		_pbyData = &pbyData[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(len(pbyData)), uintptr(unsafe.Pointer(_pbyData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsInputFormatSupported dispatches through IAudioProcessingObject's vtable slot 7.
 func (self *IAudioProcessingObject) IsInputFormatSupported(pOppositeFormat *IAudioMediaType, pRequestedInputFormat *IAudioMediaType, ppSupportedInputFormat **IAudioMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOppositeFormat)), uintptr(unsafe.Pointer(pRequestedInputFormat)), uintptr(unsafe.Pointer(ppSupportedInputFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsOutputFormatSupported dispatches through IAudioProcessingObject's vtable slot 8.
 func (self *IAudioProcessingObject) IsOutputFormatSupported(pOppositeFormat *IAudioMediaType, pRequestedOutputFormat *IAudioMediaType, ppSupportedOutputFormat **IAudioMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOppositeFormat)), uintptr(unsafe.Pointer(pRequestedOutputFormat)), uintptr(unsafe.Pointer(ppSupportedOutputFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInputChannelCount dispatches through IAudioProcessingObject's vtable slot 9.
 func (self *IAudioProcessingObject) GetInputChannelCount(pu32ChannelCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pu32ChannelCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioProcessingObjectConfiguration: https://learn.microsoft.com/windows/win32/api/audioenginebaseapo/nn-audioenginebaseapo-iaudioprocessingobjectconfiguration
@@ -205,13 +205,13 @@ func (self *IAudioProcessingObjectConfiguration) LockForProcess(ppInputConnectio
 		_ppOutputConnections = &ppOutputConnections[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppInputConnections)), uintptr(unsafe.Pointer(_ppInputConnections)), uintptr(len(ppOutputConnections)), uintptr(unsafe.Pointer(_ppOutputConnections)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnlockForProcess dispatches through IAudioProcessingObjectConfiguration's vtable slot 4.
 func (self *IAudioProcessingObjectConfiguration) UnlockForProcess() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioProcessingObjectLoggingService: https://learn.microsoft.com/windows/win32/api/audioengineextensionapo/nn-audioengineextensionapo-iaudioprocessingobjectloggingservice
@@ -241,7 +241,7 @@ var IID_IAudioProcessingObjectNotifications = win32.GUID{Data1: 0x56b0c76f, Data
 // GetApoNotificationRegistrationInfo dispatches through IAudioProcessingObjectNotifications's vtable slot 3.
 func (self *IAudioProcessingObjectNotifications) GetApoNotificationRegistrationInfo(apoNotifications **APO_NOTIFICATION_DESCRIPTOR, count *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(apoNotifications)), uintptr(unsafe.Pointer(count)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HandleNotification dispatches through IAudioProcessingObjectNotifications's vtable slot 4.
@@ -261,7 +261,7 @@ var IID_IAudioProcessingObjectNotifications2 = win32.GUID{Data1: 0xca2cfbde, Dat
 // GetApoNotificationRegistrationInfo2 dispatches through IAudioProcessingObjectNotifications2's vtable slot 5.
 func (self *IAudioProcessingObjectNotifications2) GetApoNotificationRegistrationInfo2(maxApoNotificationTypeSupported APO_NOTIFICATION_TYPE, apoNotifications **APO_NOTIFICATION_DESCRIPTOR, count *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(maxApoNotificationTypeSupported), uintptr(unsafe.Pointer(apoNotifications)), uintptr(unsafe.Pointer(count)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 51cbd3c4-f1f3-4d2f-a0e1-7e9c4dd0feb3
@@ -275,13 +275,13 @@ var IID_IAudioProcessingObjectPreferredFormatSupport = win32.GUID{Data1: 0x51cbd
 // GetPreferredInputFormat dispatches through IAudioProcessingObjectPreferredFormatSupport's vtable slot 3.
 func (self *IAudioProcessingObjectPreferredFormatSupport) GetPreferredInputFormat(outputFormat *IAudioMediaType, preferredFormat **IAudioMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(outputFormat)), uintptr(unsafe.Pointer(preferredFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPreferredOutputFormat dispatches through IAudioProcessingObjectPreferredFormatSupport's vtable slot 4.
 func (self *IAudioProcessingObjectPreferredFormatSupport) GetPreferredOutputFormat(inputFormat *IAudioMediaType, preferredFormat **IAudioMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inputFormat)), uintptr(unsafe.Pointer(preferredFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioProcessingObjectRT: https://learn.microsoft.com/windows/win32/api/audioenginebaseapo/nn-audioenginebaseapo-iaudioprocessingobjectrt
@@ -322,7 +322,7 @@ var IID_IAudioProcessingObjectRTQueueService = win32.GUID{Data1: 0xacd65e2f, Dat
 // GetRealTimeWorkQueue dispatches through IAudioProcessingObjectRTQueueService's vtable slot 3.
 func (self *IAudioProcessingObjectRTQueueService) GetRealTimeWorkQueue(workQueueId *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(workQueueId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 7ba1db8f-78ad-49cd-9591-f79d80a17c81
@@ -336,13 +336,13 @@ var IID_IAudioProcessingObjectVBR = win32.GUID{Data1: 0x7ba1db8f, Data2: 0x78ad,
 // CalcMaxInputFrames dispatches through IAudioProcessingObjectVBR's vtable slot 3.
 func (self *IAudioProcessingObjectVBR) CalcMaxInputFrames(u32MaxOutputFrameCount uint32, pu32InputFrameCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(u32MaxOutputFrameCount), uintptr(unsafe.Pointer(pu32InputFrameCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CalcMaxOutputFrames dispatches through IAudioProcessingObjectVBR's vtable slot 4.
 func (self *IAudioProcessingObjectVBR) CalcMaxOutputFrames(u32MaxInputFrameCount uint32, pu32OutputFrameCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(u32MaxInputFrameCount), uintptr(unsafe.Pointer(pu32OutputFrameCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioSystemEffects: https://learn.microsoft.com/windows/win32/api/audioenginebaseapo/nn-audioenginebaseapo-iaudiosystemeffects
@@ -366,7 +366,7 @@ var IID_IAudioSystemEffects2 = win32.GUID{Data1: 0xbafe99d2, Data2: 0x7436, Data
 // GetEffectsList dispatches through IAudioSystemEffects2's vtable slot 3.
 func (self *IAudioSystemEffects2) GetEffectsList(ppEffectsIds **win32.GUID, pcEffects *uint32, Event foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEffectsIds)), uintptr(unsafe.Pointer(pcEffects)), uintptr(Event))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioSystemEffects3: https://learn.microsoft.com/windows/win32/api/audioengineextensionapo/nn-audioengineextensionapo-iaudiosystemeffects3
@@ -381,7 +381,7 @@ var IID_IAudioSystemEffects3 = win32.GUID{Data1: 0xc58b31cd, Data2: 0xfc6a, Data
 // GetControllableSystemEffectsList dispatches through IAudioSystemEffects3's vtable slot 4.
 func (self *IAudioSystemEffects3) GetControllableSystemEffectsList(effects **AUDIO_SYSTEMEFFECT, numEffects *uint32, event foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(effects)), uintptr(unsafe.Pointer(numEffects)), uintptr(event))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioSystemEffectsCustomFormats: https://learn.microsoft.com/windows/win32/api/audioenginebaseapo/nn-audioenginebaseapo-iaudiosystemeffectscustomformats
@@ -396,17 +396,17 @@ var IID_IAudioSystemEffectsCustomFormats = win32.GUID{Data1: 0xb1176e34, Data2: 
 // GetFormatCount dispatches through IAudioSystemEffectsCustomFormats's vtable slot 3.
 func (self *IAudioSystemEffectsCustomFormats) GetFormatCount(pcFormats *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcFormats)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFormat dispatches through IAudioSystemEffectsCustomFormats's vtable slot 4.
 func (self *IAudioSystemEffectsCustomFormats) GetFormat(nFormat uint32, ppFormat **IAudioMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(nFormat), uintptr(unsafe.Pointer(ppFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFormatRepresentation dispatches through IAudioSystemEffectsCustomFormats's vtable slot 5.
 func (self *IAudioSystemEffectsCustomFormats) GetFormatRepresentation(nFormat uint32, ppwstrFormatRep *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(nFormat), uintptr(unsafe.Pointer(ppwstrFormatRep)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

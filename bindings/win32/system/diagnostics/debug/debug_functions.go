@@ -496,7 +496,7 @@ func DecodePointer(Ptr unsafe.Pointer) unsafe.Pointer {
 // DecodeRemotePointer calls api-ms-win-core-util-l1-1-1!DecodeRemotePointer.
 func DecodeRemotePointer(ProcessHandle foundation.HANDLE, Ptr unsafe.Pointer, DecodedPtr *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDecodeRemotePointer.Addr(), uintptr(ProcessHandle), uintptr(unsafe.Pointer(Ptr)), uintptr(unsafe.Pointer(DecodedPtr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DecodeSystemPointer calls KERNEL32!DecodeSystemPointer.
@@ -514,7 +514,7 @@ func EncodePointer(Ptr unsafe.Pointer) unsafe.Pointer {
 // EncodeRemotePointer calls api-ms-win-core-util-l1-1-1!EncodeRemotePointer.
 func EncodeRemotePointer(ProcessHandle foundation.HANDLE, Ptr unsafe.Pointer, EncodedPtr *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procEncodeRemotePointer.Addr(), uintptr(ProcessHandle), uintptr(unsafe.Pointer(Ptr)), uintptr(unsafe.Pointer(EncodedPtr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EncodeSystemPointer calls KERNEL32!EncodeSystemPointer.

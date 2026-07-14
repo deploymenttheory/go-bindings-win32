@@ -39,21 +39,21 @@ var (
 func WebAuthNAuthenticatorGetAssertion(hWnd foundation.HWND, pwszRpId string, pWebAuthNClientData *WEBAUTHN_CLIENT_DATA, pWebAuthNGetAssertionOptions *WEBAUTHN_AUTHENTICATOR_GET_ASSERTION_OPTIONS, ppWebAuthNAssertion **WEBAUTHN_ASSERTION) error {
 	_pwszRpId := win32.UTF16Ptr(pwszRpId)
 	r1, _, _ := syscall.SyscallN(procWebAuthNAuthenticatorGetAssertion.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(_pwszRpId)), uintptr(unsafe.Pointer(pWebAuthNClientData)), uintptr(unsafe.Pointer(pWebAuthNGetAssertionOptions)), uintptr(unsafe.Pointer(ppWebAuthNAssertion)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WebAuthNAuthenticatorMakeCredential calls webauthn!WebAuthNAuthenticatorMakeCredential.
 // https://learn.microsoft.com/windows/win32/api/webauthn/nf-webauthn-webauthnauthenticatormakecredential
 func WebAuthNAuthenticatorMakeCredential(hWnd foundation.HWND, pRpInformation *WEBAUTHN_RP_ENTITY_INFORMATION, pUserInformation *WEBAUTHN_USER_ENTITY_INFORMATION, pPubKeyCredParams *WEBAUTHN_COSE_CREDENTIAL_PARAMETERS, pWebAuthNClientData *WEBAUTHN_CLIENT_DATA, pWebAuthNMakeCredentialOptions *WEBAUTHN_AUTHENTICATOR_MAKE_CREDENTIAL_OPTIONS, ppWebAuthNCredentialAttestation **WEBAUTHN_CREDENTIAL_ATTESTATION) error {
 	r1, _, _ := syscall.SyscallN(procWebAuthNAuthenticatorMakeCredential.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(pRpInformation)), uintptr(unsafe.Pointer(pUserInformation)), uintptr(unsafe.Pointer(pPubKeyCredParams)), uintptr(unsafe.Pointer(pWebAuthNClientData)), uintptr(unsafe.Pointer(pWebAuthNMakeCredentialOptions)), uintptr(unsafe.Pointer(ppWebAuthNCredentialAttestation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WebAuthNCancelCurrentOperation calls webauthn!WebAuthNCancelCurrentOperation.
 // https://learn.microsoft.com/windows/win32/api/webauthn/nf-webauthn-webauthncancelcurrentoperation
 func WebAuthNCancelCurrentOperation(pCancellationId *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procWebAuthNCancelCurrentOperation.Addr(), uintptr(unsafe.Pointer(pCancellationId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WebAuthNDeletePlatformCredential calls webauthn!WebAuthNDeletePlatformCredential.
@@ -64,7 +64,7 @@ func WebAuthNDeletePlatformCredential(pbCredentialId []byte) error {
 		_pbCredentialId = &pbCredentialId[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWebAuthNDeletePlatformCredential.Addr(), uintptr(len(pbCredentialId)), uintptr(unsafe.Pointer(_pbCredentialId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WebAuthNFreeAssertion calls webauthn!WebAuthNFreeAssertion.
@@ -100,14 +100,14 @@ func WebAuthNGetApiVersionNumber() uint32 {
 // WebAuthNGetAuthenticatorList calls webauthn!WebAuthNGetAuthenticatorList.
 func WebAuthNGetAuthenticatorList(pWebAuthNGetAuthenticatorListOptions *WEBAUTHN_AUTHENTICATOR_DETAILS_OPTIONS, ppAuthenticatorDetailsList **WEBAUTHN_AUTHENTICATOR_DETAILS_LIST) error {
 	r1, _, _ := syscall.SyscallN(procWebAuthNGetAuthenticatorList.Addr(), uintptr(unsafe.Pointer(pWebAuthNGetAuthenticatorListOptions)), uintptr(unsafe.Pointer(ppAuthenticatorDetailsList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WebAuthNGetCancellationId calls webauthn!WebAuthNGetCancellationId.
 // https://learn.microsoft.com/windows/win32/api/webauthn/nf-webauthn-webauthngetcancellationid
 func WebAuthNGetCancellationId(pCancellationId *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procWebAuthNGetCancellationId.Addr(), uintptr(unsafe.Pointer(pCancellationId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WebAuthNGetErrorName calls webauthn!WebAuthNGetErrorName.
@@ -121,19 +121,19 @@ func WebAuthNGetErrorName(hr foundation.HRESULT) foundation.PWSTR {
 // https://learn.microsoft.com/windows/win32/api/webauthn/nf-webauthn-webauthngetplatformcredentiallist
 func WebAuthNGetPlatformCredentialList(pGetCredentialsOptions *WEBAUTHN_GET_CREDENTIALS_OPTIONS, ppCredentialDetailsList **WEBAUTHN_CREDENTIAL_DETAILS_LIST) error {
 	r1, _, _ := syscall.SyscallN(procWebAuthNGetPlatformCredentialList.Addr(), uintptr(unsafe.Pointer(pGetCredentialsOptions)), uintptr(unsafe.Pointer(ppCredentialDetailsList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WebAuthNGetW3CExceptionDOMError calls webauthn!WebAuthNGetW3CExceptionDOMError.
 // https://learn.microsoft.com/windows/win32/api/webauthn/nf-webauthn-webauthngetw3cexceptiondomerror
 func WebAuthNGetW3CExceptionDOMError(hr foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(procWebAuthNGetW3CExceptionDOMError.Addr(), uintptr(hr))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WebAuthNIsUserVerifyingPlatformAuthenticatorAvailable calls webauthn!WebAuthNIsUserVerifyingPlatformAuthenticatorAvailable.
 // https://learn.microsoft.com/windows/win32/api/webauthn/nf-webauthn-webauthnisuserverifyingplatformauthenticatoravailable
 func WebAuthNIsUserVerifyingPlatformAuthenticatorAvailable(pbIsUserVerifyingPlatformAuthenticatorAvailable *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procWebAuthNIsUserVerifyingPlatformAuthenticatorAvailable.Addr(), uintptr(unsafe.Pointer(pbIsUserVerifyingPlatformAuthenticatorAvailable)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

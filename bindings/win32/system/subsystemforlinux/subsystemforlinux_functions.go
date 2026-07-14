@@ -31,7 +31,7 @@ var (
 func WslConfigureDistribution(distributionName string, defaultUID uint32, wslDistributionFlags WSL_DISTRIBUTION_FLAGS) error {
 	_distributionName := win32.UTF16Ptr(distributionName)
 	r1, _, _ := syscall.SyscallN(procWslConfigureDistribution.Addr(), uintptr(unsafe.Pointer(_distributionName)), uintptr(defaultUID), uintptr(wslDistributionFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WslGetDistributionConfiguration calls Api-ms-win-wsl-api-l1-1-0!WslGetDistributionConfiguration.
@@ -39,7 +39,7 @@ func WslConfigureDistribution(distributionName string, defaultUID uint32, wslDis
 func WslGetDistributionConfiguration(distributionName string, distributionVersion *uint32, defaultUID *uint32, wslDistributionFlags *WSL_DISTRIBUTION_FLAGS, defaultEnvironmentVariables **foundation.PSTR, defaultEnvironmentVariableCount *uint32) error {
 	_distributionName := win32.UTF16Ptr(distributionName)
 	r1, _, _ := syscall.SyscallN(procWslGetDistributionConfiguration.Addr(), uintptr(unsafe.Pointer(_distributionName)), uintptr(unsafe.Pointer(distributionVersion)), uintptr(unsafe.Pointer(defaultUID)), uintptr(unsafe.Pointer(wslDistributionFlags)), uintptr(unsafe.Pointer(defaultEnvironmentVariables)), uintptr(unsafe.Pointer(defaultEnvironmentVariableCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WslIsDistributionRegistered calls Api-ms-win-wsl-api-l1-1-0!WslIsDistributionRegistered.
@@ -57,7 +57,7 @@ func WslLaunch(distributionName string, command string, useCurrentWorkingDirecto
 	_command := win32.UTF16Ptr(command)
 	_useCurrentWorkingDirectory := win32.Bool32(useCurrentWorkingDirectory)
 	r1, _, _ := syscall.SyscallN(procWslLaunch.Addr(), uintptr(unsafe.Pointer(_distributionName)), uintptr(unsafe.Pointer(_command)), uintptr(_useCurrentWorkingDirectory), uintptr(stdIn), uintptr(stdOut), uintptr(stdErr), uintptr(unsafe.Pointer(process)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WslLaunchInteractive calls Api-ms-win-wsl-api-l1-1-0!WslLaunchInteractive.
@@ -67,7 +67,7 @@ func WslLaunchInteractive(distributionName string, command string, useCurrentWor
 	_command := win32.UTF16Ptr(command)
 	_useCurrentWorkingDirectory := win32.Bool32(useCurrentWorkingDirectory)
 	r1, _, _ := syscall.SyscallN(procWslLaunchInteractive.Addr(), uintptr(unsafe.Pointer(_distributionName)), uintptr(unsafe.Pointer(_command)), uintptr(_useCurrentWorkingDirectory), uintptr(unsafe.Pointer(exitCode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WslRegisterDistribution calls Api-ms-win-wsl-api-l1-1-0!WslRegisterDistribution.
@@ -76,7 +76,7 @@ func WslRegisterDistribution(distributionName string, tarGzFilename string) erro
 	_distributionName := win32.UTF16Ptr(distributionName)
 	_tarGzFilename := win32.UTF16Ptr(tarGzFilename)
 	r1, _, _ := syscall.SyscallN(procWslRegisterDistribution.Addr(), uintptr(unsafe.Pointer(_distributionName)), uintptr(unsafe.Pointer(_tarGzFilename)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WslUnregisterDistribution calls Api-ms-win-wsl-api-l1-1-0!WslUnregisterDistribution.
@@ -84,5 +84,5 @@ func WslRegisterDistribution(distributionName string, tarGzFilename string) erro
 func WslUnregisterDistribution(distributionName string) error {
 	_distributionName := win32.UTF16Ptr(distributionName)
 	r1, _, _ := syscall.SyscallN(procWslUnregisterDistribution.Addr(), uintptr(unsafe.Pointer(_distributionName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

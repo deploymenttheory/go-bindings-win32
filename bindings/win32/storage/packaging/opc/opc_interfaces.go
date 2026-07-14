@@ -28,28 +28,28 @@ var IID_IOpcCertificateEnumerator = win32.GUID{Data1: 0x85131937, Data2: 0x8f24,
 func (self *IOpcCertificateEnumerator) MoveNext() (foundation.BOOL, error) {
 	var _hasNext foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasNext)))
-	return _hasNext, win32.HRESULTError(int32(r1))
+	return _hasNext, win32.ErrIfFailed(int32(r1))
 }
 
 // MovePrevious dispatches through IOpcCertificateEnumerator's vtable slot 4.
 func (self *IOpcCertificateEnumerator) MovePrevious() (foundation.BOOL, error) {
 	var _hasPrevious foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasPrevious)))
-	return _hasPrevious, win32.HRESULTError(int32(r1))
+	return _hasPrevious, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrent dispatches through IOpcCertificateEnumerator's vtable slot 5.
 func (self *IOpcCertificateEnumerator) GetCurrent() (*securitycryptography.CERT_CONTEXT, error) {
 	var _certificate *securitycryptography.CERT_CONTEXT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_certificate)))
-	return _certificate, win32.HRESULTError(int32(r1))
+	return _certificate, win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IOpcCertificateEnumerator's vtable slot 6.
 func (self *IOpcCertificateEnumerator) Clone() (*IOpcCertificateEnumerator, error) {
 	var _copy_ *IOpcCertificateEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_copy_)))
-	return _copy_, win32.HRESULTError(int32(r1))
+	return _copy_, win32.ErrIfFailed(int32(r1))
 }
 
 // IOpcCertificateSet: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopccertificateset
@@ -64,20 +64,20 @@ var IID_IOpcCertificateSet = win32.GUID{Data1: 0x56ea4325, Data2: 0x8e2d, Data3:
 // Add dispatches through IOpcCertificateSet's vtable slot 3.
 func (self *IOpcCertificateSet) Add(certificate *securitycryptography.CERT_CONTEXT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(certificate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through IOpcCertificateSet's vtable slot 4.
 func (self *IOpcCertificateSet) Remove(certificate *securitycryptography.CERT_CONTEXT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(certificate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEnumerator dispatches through IOpcCertificateSet's vtable slot 5.
 func (self *IOpcCertificateSet) GetEnumerator() (*IOpcCertificateEnumerator, error) {
 	var _certificateEnumerator *IOpcCertificateEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_certificateEnumerator)))
-	return _certificateEnumerator, win32.HRESULTError(int32(r1))
+	return _certificateEnumerator, win32.ErrIfFailed(int32(r1))
 }
 
 // IOpcDigitalSignature: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcdigitalsignature
@@ -92,100 +92,100 @@ var IID_IOpcDigitalSignature = win32.GUID{Data1: 0x52ab21dd, Data2: 0x1cd0, Data
 // GetNamespaces dispatches through IOpcDigitalSignature's vtable slot 3.
 func (self *IOpcDigitalSignature) GetNamespaces(prefixes **foundation.PWSTR, namespaces **foundation.PWSTR, count *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prefixes)), uintptr(unsafe.Pointer(namespaces)), uintptr(unsafe.Pointer(count)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSignatureId dispatches through IOpcDigitalSignature's vtable slot 4.
 func (self *IOpcDigitalSignature) GetSignatureId(signatureId *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signatureId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSignaturePartName dispatches through IOpcDigitalSignature's vtable slot 5.
 func (self *IOpcDigitalSignature) GetSignaturePartName() (*IOpcPartUri, error) {
 	var _signaturePartName *IOpcPartUri
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_signaturePartName)))
-	return _signaturePartName, win32.HRESULTError(int32(r1))
+	return _signaturePartName, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSignatureMethod dispatches through IOpcDigitalSignature's vtable slot 6.
 func (self *IOpcDigitalSignature) GetSignatureMethod(signatureMethod *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signatureMethod)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCanonicalizationMethod dispatches through IOpcDigitalSignature's vtable slot 7.
 func (self *IOpcDigitalSignature) GetCanonicalizationMethod() (OPC_CANONICALIZATION_METHOD, error) {
 	var _canonicalizationMethod OPC_CANONICALIZATION_METHOD
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_canonicalizationMethod)))
-	return _canonicalizationMethod, win32.HRESULTError(int32(r1))
+	return _canonicalizationMethod, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSignatureValue dispatches through IOpcDigitalSignature's vtable slot 8.
 func (self *IOpcDigitalSignature) GetSignatureValue(signatureValue **byte, count *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signatureValue)), uintptr(unsafe.Pointer(count)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSignaturePartReferenceEnumerator dispatches through IOpcDigitalSignature's vtable slot 9.
 func (self *IOpcDigitalSignature) GetSignaturePartReferenceEnumerator() (*IOpcSignaturePartReferenceEnumerator, error) {
 	var _partReferenceEnumerator *IOpcSignaturePartReferenceEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_partReferenceEnumerator)))
-	return _partReferenceEnumerator, win32.HRESULTError(int32(r1))
+	return _partReferenceEnumerator, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSignatureRelationshipReferenceEnumerator dispatches through IOpcDigitalSignature's vtable slot 10.
 func (self *IOpcDigitalSignature) GetSignatureRelationshipReferenceEnumerator() (*IOpcSignatureRelationshipReferenceEnumerator, error) {
 	var _relationshipReferenceEnumerator *IOpcSignatureRelationshipReferenceEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_relationshipReferenceEnumerator)))
-	return _relationshipReferenceEnumerator, win32.HRESULTError(int32(r1))
+	return _relationshipReferenceEnumerator, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSigningTime dispatches through IOpcDigitalSignature's vtable slot 11.
 func (self *IOpcDigitalSignature) GetSigningTime(signingTime *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signingTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTimeFormat dispatches through IOpcDigitalSignature's vtable slot 12.
 func (self *IOpcDigitalSignature) GetTimeFormat() (OPC_SIGNATURE_TIME_FORMAT, error) {
 	var _timeFormat OPC_SIGNATURE_TIME_FORMAT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_timeFormat)))
-	return _timeFormat, win32.HRESULTError(int32(r1))
+	return _timeFormat, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPackageObjectReference dispatches through IOpcDigitalSignature's vtable slot 13.
 func (self *IOpcDigitalSignature) GetPackageObjectReference() (*IOpcSignatureReference, error) {
 	var _packageObjectReference *IOpcSignatureReference
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_packageObjectReference)))
-	return _packageObjectReference, win32.HRESULTError(int32(r1))
+	return _packageObjectReference, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCertificateEnumerator dispatches through IOpcDigitalSignature's vtable slot 14.
 func (self *IOpcDigitalSignature) GetCertificateEnumerator() (*IOpcCertificateEnumerator, error) {
 	var _certificateEnumerator *IOpcCertificateEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_certificateEnumerator)))
-	return _certificateEnumerator, win32.HRESULTError(int32(r1))
+	return _certificateEnumerator, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCustomReferenceEnumerator dispatches through IOpcDigitalSignature's vtable slot 15.
 func (self *IOpcDigitalSignature) GetCustomReferenceEnumerator() (*IOpcSignatureReferenceEnumerator, error) {
 	var _customReferenceEnumerator *IOpcSignatureReferenceEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_customReferenceEnumerator)))
-	return _customReferenceEnumerator, win32.HRESULTError(int32(r1))
+	return _customReferenceEnumerator, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCustomObjectEnumerator dispatches through IOpcDigitalSignature's vtable slot 16.
 func (self *IOpcDigitalSignature) GetCustomObjectEnumerator() (*IOpcSignatureCustomObjectEnumerator, error) {
 	var _customObjectEnumerator *IOpcSignatureCustomObjectEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_customObjectEnumerator)))
-	return _customObjectEnumerator, win32.HRESULTError(int32(r1))
+	return _customObjectEnumerator, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSignatureXml dispatches through IOpcDigitalSignature's vtable slot 17.
 func (self *IOpcDigitalSignature) GetSignatureXml(signatureXml **byte, count *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signatureXml)), uintptr(unsafe.Pointer(count)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IOpcDigitalSignatureEnumerator: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcdigitalsignatureenumerator
@@ -201,28 +201,28 @@ var IID_IOpcDigitalSignatureEnumerator = win32.GUID{Data1: 0x967b6882, Data2: 0x
 func (self *IOpcDigitalSignatureEnumerator) MoveNext() (foundation.BOOL, error) {
 	var _hasNext foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasNext)))
-	return _hasNext, win32.HRESULTError(int32(r1))
+	return _hasNext, win32.ErrIfFailed(int32(r1))
 }
 
 // MovePrevious dispatches through IOpcDigitalSignatureEnumerator's vtable slot 4.
 func (self *IOpcDigitalSignatureEnumerator) MovePrevious() (foundation.BOOL, error) {
 	var _hasPrevious foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasPrevious)))
-	return _hasPrevious, win32.HRESULTError(int32(r1))
+	return _hasPrevious, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrent dispatches through IOpcDigitalSignatureEnumerator's vtable slot 5.
 func (self *IOpcDigitalSignatureEnumerator) GetCurrent() (*IOpcDigitalSignature, error) {
 	var _digitalSignature *IOpcDigitalSignature
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_digitalSignature)))
-	return _digitalSignature, win32.HRESULTError(int32(r1))
+	return _digitalSignature, win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IOpcDigitalSignatureEnumerator's vtable slot 6.
 func (self *IOpcDigitalSignatureEnumerator) Clone() (*IOpcDigitalSignatureEnumerator, error) {
 	var _copy_ *IOpcDigitalSignatureEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_copy_)))
-	return _copy_, win32.HRESULTError(int32(r1))
+	return _copy_, win32.ErrIfFailed(int32(r1))
 }
 
 // IOpcDigitalSignatureManager: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcdigitalsignaturemanager
@@ -238,47 +238,47 @@ var IID_IOpcDigitalSignatureManager = win32.GUID{Data1: 0xd5e62a0b, Data2: 0x696
 func (self *IOpcDigitalSignatureManager) GetSignatureOriginPartName() (*IOpcPartUri, error) {
 	var _signatureOriginPartName *IOpcPartUri
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_signatureOriginPartName)))
-	return _signatureOriginPartName, win32.HRESULTError(int32(r1))
+	return _signatureOriginPartName, win32.ErrIfFailed(int32(r1))
 }
 
 // SetSignatureOriginPartName dispatches through IOpcDigitalSignatureManager's vtable slot 4.
 func (self *IOpcDigitalSignatureManager) SetSignatureOriginPartName(signatureOriginPartName *IOpcPartUri) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signatureOriginPartName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSignatureEnumerator dispatches through IOpcDigitalSignatureManager's vtable slot 5.
 func (self *IOpcDigitalSignatureManager) GetSignatureEnumerator() (*IOpcDigitalSignatureEnumerator, error) {
 	var _signatureEnumerator *IOpcDigitalSignatureEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_signatureEnumerator)))
-	return _signatureEnumerator, win32.HRESULTError(int32(r1))
+	return _signatureEnumerator, win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveSignature dispatches through IOpcDigitalSignatureManager's vtable slot 6.
 func (self *IOpcDigitalSignatureManager) RemoveSignature(signaturePartName *IOpcPartUri) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signaturePartName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSigningOptions dispatches through IOpcDigitalSignatureManager's vtable slot 7.
 func (self *IOpcDigitalSignatureManager) CreateSigningOptions() (*IOpcSigningOptions, error) {
 	var _signingOptions *IOpcSigningOptions
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_signingOptions)))
-	return _signingOptions, win32.HRESULTError(int32(r1))
+	return _signingOptions, win32.ErrIfFailed(int32(r1))
 }
 
 // Validate dispatches through IOpcDigitalSignatureManager's vtable slot 8.
 func (self *IOpcDigitalSignatureManager) Validate(signature *IOpcDigitalSignature, certificate *securitycryptography.CERT_CONTEXT) (OPC_SIGNATURE_VALIDATION_RESULT, error) {
 	var _validationResult OPC_SIGNATURE_VALIDATION_RESULT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signature)), uintptr(unsafe.Pointer(certificate)), uintptr(unsafe.Pointer(&_validationResult)))
-	return _validationResult, win32.HRESULTError(int32(r1))
+	return _validationResult, win32.ErrIfFailed(int32(r1))
 }
 
 // Sign dispatches through IOpcDigitalSignatureManager's vtable slot 9.
 func (self *IOpcDigitalSignatureManager) Sign(certificate *securitycryptography.CERT_CONTEXT, signingOptions *IOpcSigningOptions) (*IOpcDigitalSignature, error) {
 	var _digitalSignature *IOpcDigitalSignature
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(certificate)), uintptr(unsafe.Pointer(signingOptions)), uintptr(unsafe.Pointer(&_digitalSignature)))
-	return _digitalSignature, win32.HRESULTError(int32(r1))
+	return _digitalSignature, win32.ErrIfFailed(int32(r1))
 }
 
 // ReplaceSignatureXml dispatches through IOpcDigitalSignatureManager's vtable slot 10.
@@ -289,7 +289,7 @@ func (self *IOpcDigitalSignatureManager) ReplaceSignatureXml(signaturePartName *
 	}
 	var _digitalSignature *IOpcDigitalSignature
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signaturePartName)), uintptr(unsafe.Pointer(_newSignatureXml)), uintptr(len(newSignatureXml)), uintptr(unsafe.Pointer(&_digitalSignature)))
-	return _digitalSignature, win32.HRESULTError(int32(r1))
+	return _digitalSignature, win32.ErrIfFailed(int32(r1))
 }
 
 // IOpcFactory: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcfactory
@@ -305,7 +305,7 @@ var IID_IOpcFactory = win32.GUID{Data1: 0x6d0b4446, Data2: 0xcd73, Data3: 0x4ab3
 func (self *IOpcFactory) CreatePackageRootUri() (*IOpcUri, error) {
 	var _rootUri *IOpcUri
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_rootUri)))
-	return _rootUri, win32.HRESULTError(int32(r1))
+	return _rootUri, win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePartUri dispatches through IOpcFactory's vtable slot 4.
@@ -313,7 +313,7 @@ func (self *IOpcFactory) CreatePartUri(pwzUri string) (*IOpcPartUri, error) {
 	_pwzUri := win32.UTF16Ptr(pwzUri)
 	var _partUri *IOpcPartUri
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzUri)), uintptr(unsafe.Pointer(&_partUri)))
-	return _partUri, win32.HRESULTError(int32(r1))
+	return _partUri, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateStreamOnFile dispatches through IOpcFactory's vtable slot 5.
@@ -321,34 +321,34 @@ func (self *IOpcFactory) CreateStreamOnFile(filename string, ioMode OPC_STREAM_I
 	_filename := win32.UTF16Ptr(filename)
 	var _stream *systemcom.IStream
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_filename)), uintptr(ioMode), uintptr(unsafe.Pointer(securityAttributes)), uintptr(dwFlagsAndAttributes), uintptr(unsafe.Pointer(&_stream)))
-	return _stream, win32.HRESULTError(int32(r1))
+	return _stream, win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePackage dispatches through IOpcFactory's vtable slot 6.
 func (self *IOpcFactory) CreatePackage() (*IOpcPackage, error) {
 	var _package_ *IOpcPackage
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_package_)))
-	return _package_, win32.HRESULTError(int32(r1))
+	return _package_, win32.ErrIfFailed(int32(r1))
 }
 
 // ReadPackageFromStream dispatches through IOpcFactory's vtable slot 7.
 func (self *IOpcFactory) ReadPackageFromStream(stream *systemcom.IStream, flags OPC_READ_FLAGS) (*IOpcPackage, error) {
 	var _package_ *IOpcPackage
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(stream)), uintptr(flags), uintptr(unsafe.Pointer(&_package_)))
-	return _package_, win32.HRESULTError(int32(r1))
+	return _package_, win32.ErrIfFailed(int32(r1))
 }
 
 // WritePackageToStream dispatches through IOpcFactory's vtable slot 8.
 func (self *IOpcFactory) WritePackageToStream(package_ *IOpcPackage, flags OPC_WRITE_FLAGS, stream *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(package_)), uintptr(flags), uintptr(unsafe.Pointer(stream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateDigitalSignatureManager dispatches through IOpcFactory's vtable slot 9.
 func (self *IOpcFactory) CreateDigitalSignatureManager(package_ *IOpcPackage) (*IOpcDigitalSignatureManager, error) {
 	var _signatureManager *IOpcDigitalSignatureManager
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(package_)), uintptr(unsafe.Pointer(&_signatureManager)))
-	return _signatureManager, win32.HRESULTError(int32(r1))
+	return _signatureManager, win32.ErrIfFailed(int32(r1))
 }
 
 // IOpcPackage: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcpackage
@@ -364,14 +364,14 @@ var IID_IOpcPackage = win32.GUID{Data1: 0x42195949, Data2: 0x3b79, Data3: 0x4fc8
 func (self *IOpcPackage) GetPartSet() (*IOpcPartSet, error) {
 	var _partSet *IOpcPartSet
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_partSet)))
-	return _partSet, win32.HRESULTError(int32(r1))
+	return _partSet, win32.ErrIfFailed(int32(r1))
 }
 
 // GetRelationshipSet dispatches through IOpcPackage's vtable slot 4.
 func (self *IOpcPackage) GetRelationshipSet() (*IOpcRelationshipSet, error) {
 	var _relationshipSet *IOpcRelationshipSet
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_relationshipSet)))
-	return _relationshipSet, win32.HRESULTError(int32(r1))
+	return _relationshipSet, win32.ErrIfFailed(int32(r1))
 }
 
 // IOpcPart: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcpart
@@ -387,35 +387,35 @@ var IID_IOpcPart = win32.GUID{Data1: 0x42195949, Data2: 0x3b79, Data3: 0x4fc8, D
 func (self *IOpcPart) GetRelationshipSet() (*IOpcRelationshipSet, error) {
 	var _relationshipSet *IOpcRelationshipSet
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_relationshipSet)))
-	return _relationshipSet, win32.HRESULTError(int32(r1))
+	return _relationshipSet, win32.ErrIfFailed(int32(r1))
 }
 
 // GetContentStream dispatches through IOpcPart's vtable slot 4.
 func (self *IOpcPart) GetContentStream() (*systemcom.IStream, error) {
 	var _stream *systemcom.IStream
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_stream)))
-	return _stream, win32.HRESULTError(int32(r1))
+	return _stream, win32.ErrIfFailed(int32(r1))
 }
 
 // GetName dispatches through IOpcPart's vtable slot 5.
 func (self *IOpcPart) GetName() (*IOpcPartUri, error) {
 	var _name *IOpcPartUri
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
-	return _name, win32.HRESULTError(int32(r1))
+	return _name, win32.ErrIfFailed(int32(r1))
 }
 
 // GetContentType dispatches through IOpcPart's vtable slot 6.
 func (self *IOpcPart) GetContentType() (foundation.PWSTR, error) {
 	var _contentType foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_contentType)))
-	return _contentType, win32.HRESULTError(int32(r1))
+	return _contentType, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCompressionOptions dispatches through IOpcPart's vtable slot 7.
 func (self *IOpcPart) GetCompressionOptions() (OPC_COMPRESSION_OPTIONS, error) {
 	var _compressionOptions OPC_COMPRESSION_OPTIONS
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_compressionOptions)))
-	return _compressionOptions, win32.HRESULTError(int32(r1))
+	return _compressionOptions, win32.ErrIfFailed(int32(r1))
 }
 
 // IOpcPartEnumerator: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcpartenumerator
@@ -431,28 +431,28 @@ var IID_IOpcPartEnumerator = win32.GUID{Data1: 0x42195949, Data2: 0x3b79, Data3:
 func (self *IOpcPartEnumerator) MoveNext() (foundation.BOOL, error) {
 	var _hasNext foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasNext)))
-	return _hasNext, win32.HRESULTError(int32(r1))
+	return _hasNext, win32.ErrIfFailed(int32(r1))
 }
 
 // MovePrevious dispatches through IOpcPartEnumerator's vtable slot 4.
 func (self *IOpcPartEnumerator) MovePrevious() (foundation.BOOL, error) {
 	var _hasPrevious foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasPrevious)))
-	return _hasPrevious, win32.HRESULTError(int32(r1))
+	return _hasPrevious, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrent dispatches through IOpcPartEnumerator's vtable slot 5.
 func (self *IOpcPartEnumerator) GetCurrent() (*IOpcPart, error) {
 	var _part *IOpcPart
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_part)))
-	return _part, win32.HRESULTError(int32(r1))
+	return _part, win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IOpcPartEnumerator's vtable slot 6.
 func (self *IOpcPartEnumerator) Clone() (*IOpcPartEnumerator, error) {
 	var _copy_ *IOpcPartEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_copy_)))
-	return _copy_, win32.HRESULTError(int32(r1))
+	return _copy_, win32.ErrIfFailed(int32(r1))
 }
 
 // IOpcPartSet: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcpartset
@@ -468,7 +468,7 @@ var IID_IOpcPartSet = win32.GUID{Data1: 0x42195949, Data2: 0x3b79, Data3: 0x4fc8
 func (self *IOpcPartSet) GetPart(name *IOpcPartUri) (*IOpcPart, error) {
 	var _part *IOpcPart
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(&_part)))
-	return _part, win32.HRESULTError(int32(r1))
+	return _part, win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePart dispatches through IOpcPartSet's vtable slot 4.
@@ -476,27 +476,27 @@ func (self *IOpcPartSet) CreatePart(name *IOpcPartUri, contentType string, compr
 	_contentType := win32.UTF16Ptr(contentType)
 	var _part *IOpcPart
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(_contentType)), uintptr(compressionOptions), uintptr(unsafe.Pointer(&_part)))
-	return _part, win32.HRESULTError(int32(r1))
+	return _part, win32.ErrIfFailed(int32(r1))
 }
 
 // DeletePart dispatches through IOpcPartSet's vtable slot 5.
 func (self *IOpcPartSet) DeletePart(name *IOpcPartUri) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PartExists dispatches through IOpcPartSet's vtable slot 6.
 func (self *IOpcPartSet) PartExists(name *IOpcPartUri) (foundation.BOOL, error) {
 	var _partExists foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(&_partExists)))
-	return _partExists, win32.HRESULTError(int32(r1))
+	return _partExists, win32.ErrIfFailed(int32(r1))
 }
 
 // GetEnumerator dispatches through IOpcPartSet's vtable slot 7.
 func (self *IOpcPartSet) GetEnumerator() (*IOpcPartEnumerator, error) {
 	var _partEnumerator *IOpcPartEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_partEnumerator)))
-	return _partEnumerator, win32.HRESULTError(int32(r1))
+	return _partEnumerator, win32.ErrIfFailed(int32(r1))
 }
 
 // IOpcPartUri: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcparturi
@@ -512,21 +512,21 @@ var IID_IOpcPartUri = win32.GUID{Data1: 0x7d3babe7, Data2: 0x88b2, Data3: 0x46ba
 func (self *IOpcPartUri) ComparePartUri(partUri *IOpcPartUri) (int32, error) {
 	var _comparisonResult int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(partUri)), uintptr(unsafe.Pointer(&_comparisonResult)))
-	return _comparisonResult, win32.HRESULTError(int32(r1))
+	return _comparisonResult, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSourceUri dispatches through IOpcPartUri's vtable slot 32.
 func (self *IOpcPartUri) GetSourceUri() (*IOpcUri, error) {
 	var _sourceUri *IOpcUri
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_sourceUri)))
-	return _sourceUri, win32.HRESULTError(int32(r1))
+	return _sourceUri, win32.ErrIfFailed(int32(r1))
 }
 
 // IsRelationshipsPartUri dispatches through IOpcPartUri's vtable slot 33.
 func (self *IOpcPartUri) IsRelationshipsPartUri() (foundation.BOOL, error) {
 	var _isRelationshipUri foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_isRelationshipUri)))
-	return _isRelationshipUri, win32.HRESULTError(int32(r1))
+	return _isRelationshipUri, win32.ErrIfFailed(int32(r1))
 }
 
 // IOpcRelationship: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcrelationship
@@ -542,35 +542,35 @@ var IID_IOpcRelationship = win32.GUID{Data1: 0x42195949, Data2: 0x3b79, Data3: 0
 func (self *IOpcRelationship) GetId() (foundation.PWSTR, error) {
 	var _relationshipIdentifier foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_relationshipIdentifier)))
-	return _relationshipIdentifier, win32.HRESULTError(int32(r1))
+	return _relationshipIdentifier, win32.ErrIfFailed(int32(r1))
 }
 
 // GetRelationshipType dispatches through IOpcRelationship's vtable slot 4.
 func (self *IOpcRelationship) GetRelationshipType() (foundation.PWSTR, error) {
 	var _relationshipType foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_relationshipType)))
-	return _relationshipType, win32.HRESULTError(int32(r1))
+	return _relationshipType, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSourceUri dispatches through IOpcRelationship's vtable slot 5.
 func (self *IOpcRelationship) GetSourceUri() (*IOpcUri, error) {
 	var _sourceUri *IOpcUri
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_sourceUri)))
-	return _sourceUri, win32.HRESULTError(int32(r1))
+	return _sourceUri, win32.ErrIfFailed(int32(r1))
 }
 
 // GetTargetUri dispatches through IOpcRelationship's vtable slot 6.
 func (self *IOpcRelationship) GetTargetUri() (*systemcom.IUri, error) {
 	var _targetUri *systemcom.IUri
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_targetUri)))
-	return _targetUri, win32.HRESULTError(int32(r1))
+	return _targetUri, win32.ErrIfFailed(int32(r1))
 }
 
 // GetTargetMode dispatches through IOpcRelationship's vtable slot 7.
 func (self *IOpcRelationship) GetTargetMode() (OPC_URI_TARGET_MODE, error) {
 	var _targetMode OPC_URI_TARGET_MODE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_targetMode)))
-	return _targetMode, win32.HRESULTError(int32(r1))
+	return _targetMode, win32.ErrIfFailed(int32(r1))
 }
 
 // IOpcRelationshipEnumerator: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcrelationshipenumerator
@@ -586,28 +586,28 @@ var IID_IOpcRelationshipEnumerator = win32.GUID{Data1: 0x42195949, Data2: 0x3b79
 func (self *IOpcRelationshipEnumerator) MoveNext() (foundation.BOOL, error) {
 	var _hasNext foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasNext)))
-	return _hasNext, win32.HRESULTError(int32(r1))
+	return _hasNext, win32.ErrIfFailed(int32(r1))
 }
 
 // MovePrevious dispatches through IOpcRelationshipEnumerator's vtable slot 4.
 func (self *IOpcRelationshipEnumerator) MovePrevious() (foundation.BOOL, error) {
 	var _hasPrevious foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasPrevious)))
-	return _hasPrevious, win32.HRESULTError(int32(r1))
+	return _hasPrevious, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrent dispatches through IOpcRelationshipEnumerator's vtable slot 5.
 func (self *IOpcRelationshipEnumerator) GetCurrent() (*IOpcRelationship, error) {
 	var _relationship *IOpcRelationship
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_relationship)))
-	return _relationship, win32.HRESULTError(int32(r1))
+	return _relationship, win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IOpcRelationshipEnumerator's vtable slot 6.
 func (self *IOpcRelationshipEnumerator) Clone() (*IOpcRelationshipEnumerator, error) {
 	var _copy_ *IOpcRelationshipEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_copy_)))
-	return _copy_, win32.HRESULTError(int32(r1))
+	return _copy_, win32.ErrIfFailed(int32(r1))
 }
 
 // IOpcRelationshipSelector: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcrelationshipselector
@@ -623,14 +623,14 @@ var IID_IOpcRelationshipSelector = win32.GUID{Data1: 0xf8f26c7f, Data2: 0xb28f, 
 func (self *IOpcRelationshipSelector) GetSelectorType() (OPC_RELATIONSHIP_SELECTOR, error) {
 	var _selector OPC_RELATIONSHIP_SELECTOR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_selector)))
-	return _selector, win32.HRESULTError(int32(r1))
+	return _selector, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSelectionCriterion dispatches through IOpcRelationshipSelector's vtable slot 4.
 func (self *IOpcRelationshipSelector) GetSelectionCriterion() (foundation.PWSTR, error) {
 	var _selectionCriterion foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_selectionCriterion)))
-	return _selectionCriterion, win32.HRESULTError(int32(r1))
+	return _selectionCriterion, win32.ErrIfFailed(int32(r1))
 }
 
 // IOpcRelationshipSelectorEnumerator: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcrelationshipselectorenumerator
@@ -646,28 +646,28 @@ var IID_IOpcRelationshipSelectorEnumerator = win32.GUID{Data1: 0x5e50a181, Data2
 func (self *IOpcRelationshipSelectorEnumerator) MoveNext() (foundation.BOOL, error) {
 	var _hasNext foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasNext)))
-	return _hasNext, win32.HRESULTError(int32(r1))
+	return _hasNext, win32.ErrIfFailed(int32(r1))
 }
 
 // MovePrevious dispatches through IOpcRelationshipSelectorEnumerator's vtable slot 4.
 func (self *IOpcRelationshipSelectorEnumerator) MovePrevious() (foundation.BOOL, error) {
 	var _hasPrevious foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasPrevious)))
-	return _hasPrevious, win32.HRESULTError(int32(r1))
+	return _hasPrevious, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrent dispatches through IOpcRelationshipSelectorEnumerator's vtable slot 5.
 func (self *IOpcRelationshipSelectorEnumerator) GetCurrent() (*IOpcRelationshipSelector, error) {
 	var _relationshipSelector *IOpcRelationshipSelector
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_relationshipSelector)))
-	return _relationshipSelector, win32.HRESULTError(int32(r1))
+	return _relationshipSelector, win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IOpcRelationshipSelectorEnumerator's vtable slot 6.
 func (self *IOpcRelationshipSelectorEnumerator) Clone() (*IOpcRelationshipSelectorEnumerator, error) {
 	var _copy_ *IOpcRelationshipSelectorEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_copy_)))
-	return _copy_, win32.HRESULTError(int32(r1))
+	return _copy_, win32.ErrIfFailed(int32(r1))
 }
 
 // IOpcRelationshipSelectorSet: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcrelationshipselectorset
@@ -684,20 +684,20 @@ func (self *IOpcRelationshipSelectorSet) Create(selector OPC_RELATIONSHIP_SELECT
 	_selectionCriterion := win32.UTF16Ptr(selectionCriterion)
 	var _relationshipSelector *IOpcRelationshipSelector
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(selector), uintptr(unsafe.Pointer(_selectionCriterion)), uintptr(unsafe.Pointer(&_relationshipSelector)))
-	return _relationshipSelector, win32.HRESULTError(int32(r1))
+	return _relationshipSelector, win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IOpcRelationshipSelectorSet's vtable slot 4.
 func (self *IOpcRelationshipSelectorSet) Delete(relationshipSelector *IOpcRelationshipSelector) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(relationshipSelector)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEnumerator dispatches through IOpcRelationshipSelectorSet's vtable slot 5.
 func (self *IOpcRelationshipSelectorSet) GetEnumerator() (*IOpcRelationshipSelectorEnumerator, error) {
 	var _relationshipSelectorEnumerator *IOpcRelationshipSelectorEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_relationshipSelectorEnumerator)))
-	return _relationshipSelectorEnumerator, win32.HRESULTError(int32(r1))
+	return _relationshipSelectorEnumerator, win32.ErrIfFailed(int32(r1))
 }
 
 // IOpcRelationshipSet: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcrelationshipset
@@ -714,7 +714,7 @@ func (self *IOpcRelationshipSet) GetRelationship(relationshipIdentifier string) 
 	_relationshipIdentifier := win32.UTF16Ptr(relationshipIdentifier)
 	var _relationship *IOpcRelationship
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_relationshipIdentifier)), uintptr(unsafe.Pointer(&_relationship)))
-	return _relationship, win32.HRESULTError(int32(r1))
+	return _relationship, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateRelationship dispatches through IOpcRelationshipSet's vtable slot 4.
@@ -723,14 +723,14 @@ func (self *IOpcRelationshipSet) CreateRelationship(relationshipIdentifier strin
 	_relationshipType := win32.UTF16Ptr(relationshipType)
 	var _relationship *IOpcRelationship
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_relationshipIdentifier)), uintptr(unsafe.Pointer(_relationshipType)), uintptr(unsafe.Pointer(targetUri)), uintptr(targetMode), uintptr(unsafe.Pointer(&_relationship)))
-	return _relationship, win32.HRESULTError(int32(r1))
+	return _relationship, win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteRelationship dispatches through IOpcRelationshipSet's vtable slot 5.
 func (self *IOpcRelationshipSet) DeleteRelationship(relationshipIdentifier string) error {
 	_relationshipIdentifier := win32.UTF16Ptr(relationshipIdentifier)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_relationshipIdentifier)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RelationshipExists dispatches through IOpcRelationshipSet's vtable slot 6.
@@ -738,14 +738,14 @@ func (self *IOpcRelationshipSet) RelationshipExists(relationshipIdentifier strin
 	_relationshipIdentifier := win32.UTF16Ptr(relationshipIdentifier)
 	var _relationshipExists foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_relationshipIdentifier)), uintptr(unsafe.Pointer(&_relationshipExists)))
-	return _relationshipExists, win32.HRESULTError(int32(r1))
+	return _relationshipExists, win32.ErrIfFailed(int32(r1))
 }
 
 // GetEnumerator dispatches through IOpcRelationshipSet's vtable slot 7.
 func (self *IOpcRelationshipSet) GetEnumerator() (*IOpcRelationshipEnumerator, error) {
 	var _relationshipEnumerator *IOpcRelationshipEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_relationshipEnumerator)))
-	return _relationshipEnumerator, win32.HRESULTError(int32(r1))
+	return _relationshipEnumerator, win32.ErrIfFailed(int32(r1))
 }
 
 // GetEnumeratorForType dispatches through IOpcRelationshipSet's vtable slot 8.
@@ -753,14 +753,14 @@ func (self *IOpcRelationshipSet) GetEnumeratorForType(relationshipType string) (
 	_relationshipType := win32.UTF16Ptr(relationshipType)
 	var _relationshipEnumerator *IOpcRelationshipEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_relationshipType)), uintptr(unsafe.Pointer(&_relationshipEnumerator)))
-	return _relationshipEnumerator, win32.HRESULTError(int32(r1))
+	return _relationshipEnumerator, win32.ErrIfFailed(int32(r1))
 }
 
 // GetRelationshipsContentStream dispatches through IOpcRelationshipSet's vtable slot 9.
 func (self *IOpcRelationshipSet) GetRelationshipsContentStream() (*systemcom.IStream, error) {
 	var _contents *systemcom.IStream
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_contents)))
-	return _contents, win32.HRESULTError(int32(r1))
+	return _contents, win32.ErrIfFailed(int32(r1))
 }
 
 // IOpcSignatureCustomObject: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcsignaturecustomobject
@@ -775,7 +775,7 @@ var IID_IOpcSignatureCustomObject = win32.GUID{Data1: 0x5d77a19e, Data2: 0x62c1,
 // GetXml dispatches through IOpcSignatureCustomObject's vtable slot 3.
 func (self *IOpcSignatureCustomObject) GetXml(xmlMarkup **byte, count *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(xmlMarkup)), uintptr(unsafe.Pointer(count)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IOpcSignatureCustomObjectEnumerator: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcsignaturecustomobjectenumerator
@@ -791,28 +791,28 @@ var IID_IOpcSignatureCustomObjectEnumerator = win32.GUID{Data1: 0x5ee4fe1d, Data
 func (self *IOpcSignatureCustomObjectEnumerator) MoveNext() (foundation.BOOL, error) {
 	var _hasNext foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasNext)))
-	return _hasNext, win32.HRESULTError(int32(r1))
+	return _hasNext, win32.ErrIfFailed(int32(r1))
 }
 
 // MovePrevious dispatches through IOpcSignatureCustomObjectEnumerator's vtable slot 4.
 func (self *IOpcSignatureCustomObjectEnumerator) MovePrevious() (foundation.BOOL, error) {
 	var _hasPrevious foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasPrevious)))
-	return _hasPrevious, win32.HRESULTError(int32(r1))
+	return _hasPrevious, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrent dispatches through IOpcSignatureCustomObjectEnumerator's vtable slot 5.
 func (self *IOpcSignatureCustomObjectEnumerator) GetCurrent() (*IOpcSignatureCustomObject, error) {
 	var _customObject *IOpcSignatureCustomObject
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_customObject)))
-	return _customObject, win32.HRESULTError(int32(r1))
+	return _customObject, win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IOpcSignatureCustomObjectEnumerator's vtable slot 6.
 func (self *IOpcSignatureCustomObjectEnumerator) Clone() (*IOpcSignatureCustomObjectEnumerator, error) {
 	var _copy_ *IOpcSignatureCustomObjectEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_copy_)))
-	return _copy_, win32.HRESULTError(int32(r1))
+	return _copy_, win32.ErrIfFailed(int32(r1))
 }
 
 // IOpcSignatureCustomObjectSet: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcsignaturecustomobjectset
@@ -832,20 +832,20 @@ func (self *IOpcSignatureCustomObjectSet) Create(xmlMarkup []byte) (*IOpcSignatu
 	}
 	var _customObject *IOpcSignatureCustomObject
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_xmlMarkup)), uintptr(len(xmlMarkup)), uintptr(unsafe.Pointer(&_customObject)))
-	return _customObject, win32.HRESULTError(int32(r1))
+	return _customObject, win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IOpcSignatureCustomObjectSet's vtable slot 4.
 func (self *IOpcSignatureCustomObjectSet) Delete(customObject *IOpcSignatureCustomObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(customObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEnumerator dispatches through IOpcSignatureCustomObjectSet's vtable slot 5.
 func (self *IOpcSignatureCustomObjectSet) GetEnumerator() (*IOpcSignatureCustomObjectEnumerator, error) {
 	var _customObjectEnumerator *IOpcSignatureCustomObjectEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_customObjectEnumerator)))
-	return _customObjectEnumerator, win32.HRESULTError(int32(r1))
+	return _customObjectEnumerator, win32.ErrIfFailed(int32(r1))
 }
 
 // IOpcSignaturePartReference: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcsignaturepartreference
@@ -861,34 +861,34 @@ var IID_IOpcSignaturePartReference = win32.GUID{Data1: 0xe24231ca, Data2: 0x59f4
 func (self *IOpcSignaturePartReference) GetPartName() (*IOpcPartUri, error) {
 	var _partName *IOpcPartUri
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_partName)))
-	return _partName, win32.HRESULTError(int32(r1))
+	return _partName, win32.ErrIfFailed(int32(r1))
 }
 
 // GetContentType dispatches through IOpcSignaturePartReference's vtable slot 4.
 func (self *IOpcSignaturePartReference) GetContentType() (foundation.PWSTR, error) {
 	var _contentType foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_contentType)))
-	return _contentType, win32.HRESULTError(int32(r1))
+	return _contentType, win32.ErrIfFailed(int32(r1))
 }
 
 // GetDigestMethod dispatches through IOpcSignaturePartReference's vtable slot 5.
 func (self *IOpcSignaturePartReference) GetDigestMethod() (foundation.PWSTR, error) {
 	var _digestMethod foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_digestMethod)))
-	return _digestMethod, win32.HRESULTError(int32(r1))
+	return _digestMethod, win32.ErrIfFailed(int32(r1))
 }
 
 // GetDigestValue dispatches through IOpcSignaturePartReference's vtable slot 6.
 func (self *IOpcSignaturePartReference) GetDigestValue(digestValue **byte, count *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(digestValue)), uintptr(unsafe.Pointer(count)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTransformMethod dispatches through IOpcSignaturePartReference's vtable slot 7.
 func (self *IOpcSignaturePartReference) GetTransformMethod() (OPC_CANONICALIZATION_METHOD, error) {
 	var _transformMethod OPC_CANONICALIZATION_METHOD
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_transformMethod)))
-	return _transformMethod, win32.HRESULTError(int32(r1))
+	return _transformMethod, win32.ErrIfFailed(int32(r1))
 }
 
 // IOpcSignaturePartReferenceEnumerator: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcsignaturepartreferenceenumerator
@@ -904,28 +904,28 @@ var IID_IOpcSignaturePartReferenceEnumerator = win32.GUID{Data1: 0x80eb1561, Dat
 func (self *IOpcSignaturePartReferenceEnumerator) MoveNext() (foundation.BOOL, error) {
 	var _hasNext foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasNext)))
-	return _hasNext, win32.HRESULTError(int32(r1))
+	return _hasNext, win32.ErrIfFailed(int32(r1))
 }
 
 // MovePrevious dispatches through IOpcSignaturePartReferenceEnumerator's vtable slot 4.
 func (self *IOpcSignaturePartReferenceEnumerator) MovePrevious() (foundation.BOOL, error) {
 	var _hasPrevious foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasPrevious)))
-	return _hasPrevious, win32.HRESULTError(int32(r1))
+	return _hasPrevious, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrent dispatches through IOpcSignaturePartReferenceEnumerator's vtable slot 5.
 func (self *IOpcSignaturePartReferenceEnumerator) GetCurrent() (*IOpcSignaturePartReference, error) {
 	var _partReference *IOpcSignaturePartReference
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_partReference)))
-	return _partReference, win32.HRESULTError(int32(r1))
+	return _partReference, win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IOpcSignaturePartReferenceEnumerator's vtable slot 6.
 func (self *IOpcSignaturePartReferenceEnumerator) Clone() (*IOpcSignaturePartReferenceEnumerator, error) {
 	var _copy_ *IOpcSignaturePartReferenceEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_copy_)))
-	return _copy_, win32.HRESULTError(int32(r1))
+	return _copy_, win32.ErrIfFailed(int32(r1))
 }
 
 // IOpcSignaturePartReferenceSet: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcsignaturepartreferenceset
@@ -942,20 +942,20 @@ func (self *IOpcSignaturePartReferenceSet) Create(partUri *IOpcPartUri, digestMe
 	_digestMethod := win32.UTF16Ptr(digestMethod)
 	var _partReference *IOpcSignaturePartReference
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(partUri)), uintptr(unsafe.Pointer(_digestMethod)), uintptr(transformMethod), uintptr(unsafe.Pointer(&_partReference)))
-	return _partReference, win32.HRESULTError(int32(r1))
+	return _partReference, win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IOpcSignaturePartReferenceSet's vtable slot 4.
 func (self *IOpcSignaturePartReferenceSet) Delete(partReference *IOpcSignaturePartReference) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(partReference)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEnumerator dispatches through IOpcSignaturePartReferenceSet's vtable slot 5.
 func (self *IOpcSignaturePartReferenceSet) GetEnumerator() (*IOpcSignaturePartReferenceEnumerator, error) {
 	var _partReferenceEnumerator *IOpcSignaturePartReferenceEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_partReferenceEnumerator)))
-	return _partReferenceEnumerator, win32.HRESULTError(int32(r1))
+	return _partReferenceEnumerator, win32.ErrIfFailed(int32(r1))
 }
 
 // IOpcSignatureReference: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcsignaturereference
@@ -971,41 +971,41 @@ var IID_IOpcSignatureReference = win32.GUID{Data1: 0x1b47005e, Data2: 0x3011, Da
 func (self *IOpcSignatureReference) GetId() (foundation.PWSTR, error) {
 	var _referenceId foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_referenceId)))
-	return _referenceId, win32.HRESULTError(int32(r1))
+	return _referenceId, win32.ErrIfFailed(int32(r1))
 }
 
 // GetUri dispatches through IOpcSignatureReference's vtable slot 4.
 func (self *IOpcSignatureReference) GetUri() (*systemcom.IUri, error) {
 	var _referenceUri *systemcom.IUri
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_referenceUri)))
-	return _referenceUri, win32.HRESULTError(int32(r1))
+	return _referenceUri, win32.ErrIfFailed(int32(r1))
 }
 
 // GetType dispatches through IOpcSignatureReference's vtable slot 5.
 func (self *IOpcSignatureReference) GetType() (foundation.PWSTR, error) {
 	var _type_ foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_type_)))
-	return _type_, win32.HRESULTError(int32(r1))
+	return _type_, win32.ErrIfFailed(int32(r1))
 }
 
 // GetTransformMethod dispatches through IOpcSignatureReference's vtable slot 6.
 func (self *IOpcSignatureReference) GetTransformMethod() (OPC_CANONICALIZATION_METHOD, error) {
 	var _transformMethod OPC_CANONICALIZATION_METHOD
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_transformMethod)))
-	return _transformMethod, win32.HRESULTError(int32(r1))
+	return _transformMethod, win32.ErrIfFailed(int32(r1))
 }
 
 // GetDigestMethod dispatches through IOpcSignatureReference's vtable slot 7.
 func (self *IOpcSignatureReference) GetDigestMethod() (foundation.PWSTR, error) {
 	var _digestMethod foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_digestMethod)))
-	return _digestMethod, win32.HRESULTError(int32(r1))
+	return _digestMethod, win32.ErrIfFailed(int32(r1))
 }
 
 // GetDigestValue dispatches through IOpcSignatureReference's vtable slot 8.
 func (self *IOpcSignatureReference) GetDigestValue(digestValue **byte, count *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(digestValue)), uintptr(unsafe.Pointer(count)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IOpcSignatureReferenceEnumerator: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcsignaturereferenceenumerator
@@ -1021,28 +1021,28 @@ var IID_IOpcSignatureReferenceEnumerator = win32.GUID{Data1: 0xcfa59a45, Data2: 
 func (self *IOpcSignatureReferenceEnumerator) MoveNext() (foundation.BOOL, error) {
 	var _hasNext foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasNext)))
-	return _hasNext, win32.HRESULTError(int32(r1))
+	return _hasNext, win32.ErrIfFailed(int32(r1))
 }
 
 // MovePrevious dispatches through IOpcSignatureReferenceEnumerator's vtable slot 4.
 func (self *IOpcSignatureReferenceEnumerator) MovePrevious() (foundation.BOOL, error) {
 	var _hasPrevious foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasPrevious)))
-	return _hasPrevious, win32.HRESULTError(int32(r1))
+	return _hasPrevious, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrent dispatches through IOpcSignatureReferenceEnumerator's vtable slot 5.
 func (self *IOpcSignatureReferenceEnumerator) GetCurrent() (*IOpcSignatureReference, error) {
 	var _reference *IOpcSignatureReference
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_reference)))
-	return _reference, win32.HRESULTError(int32(r1))
+	return _reference, win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IOpcSignatureReferenceEnumerator's vtable slot 6.
 func (self *IOpcSignatureReferenceEnumerator) Clone() (*IOpcSignatureReferenceEnumerator, error) {
 	var _copy_ *IOpcSignatureReferenceEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_copy_)))
-	return _copy_, win32.HRESULTError(int32(r1))
+	return _copy_, win32.ErrIfFailed(int32(r1))
 }
 
 // IOpcSignatureReferenceSet: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcsignaturereferenceset
@@ -1061,20 +1061,20 @@ func (self *IOpcSignatureReferenceSet) Create(referenceUri *systemcom.IUri, refe
 	_digestMethod := win32.UTF16Ptr(digestMethod)
 	var _reference *IOpcSignatureReference
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(referenceUri)), uintptr(unsafe.Pointer(_referenceId)), uintptr(unsafe.Pointer(_type_)), uintptr(unsafe.Pointer(_digestMethod)), uintptr(transformMethod), uintptr(unsafe.Pointer(&_reference)))
-	return _reference, win32.HRESULTError(int32(r1))
+	return _reference, win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IOpcSignatureReferenceSet's vtable slot 4.
 func (self *IOpcSignatureReferenceSet) Delete(reference *IOpcSignatureReference) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(reference)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEnumerator dispatches through IOpcSignatureReferenceSet's vtable slot 5.
 func (self *IOpcSignatureReferenceSet) GetEnumerator() (*IOpcSignatureReferenceEnumerator, error) {
 	var _referenceEnumerator *IOpcSignatureReferenceEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_referenceEnumerator)))
-	return _referenceEnumerator, win32.HRESULTError(int32(r1))
+	return _referenceEnumerator, win32.ErrIfFailed(int32(r1))
 }
 
 // IOpcSignatureRelationshipReference: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcsignaturerelationshipreference
@@ -1090,41 +1090,41 @@ var IID_IOpcSignatureRelationshipReference = win32.GUID{Data1: 0x57babac6, Data2
 func (self *IOpcSignatureRelationshipReference) GetSourceUri() (*IOpcUri, error) {
 	var _sourceUri *IOpcUri
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_sourceUri)))
-	return _sourceUri, win32.HRESULTError(int32(r1))
+	return _sourceUri, win32.ErrIfFailed(int32(r1))
 }
 
 // GetDigestMethod dispatches through IOpcSignatureRelationshipReference's vtable slot 4.
 func (self *IOpcSignatureRelationshipReference) GetDigestMethod() (foundation.PWSTR, error) {
 	var _digestMethod foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_digestMethod)))
-	return _digestMethod, win32.HRESULTError(int32(r1))
+	return _digestMethod, win32.ErrIfFailed(int32(r1))
 }
 
 // GetDigestValue dispatches through IOpcSignatureRelationshipReference's vtable slot 5.
 func (self *IOpcSignatureRelationshipReference) GetDigestValue(digestValue **byte, count *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(digestValue)), uintptr(unsafe.Pointer(count)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTransformMethod dispatches through IOpcSignatureRelationshipReference's vtable slot 6.
 func (self *IOpcSignatureRelationshipReference) GetTransformMethod() (OPC_CANONICALIZATION_METHOD, error) {
 	var _transformMethod OPC_CANONICALIZATION_METHOD
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_transformMethod)))
-	return _transformMethod, win32.HRESULTError(int32(r1))
+	return _transformMethod, win32.ErrIfFailed(int32(r1))
 }
 
 // GetRelationshipSigningOption dispatches through IOpcSignatureRelationshipReference's vtable slot 7.
 func (self *IOpcSignatureRelationshipReference) GetRelationshipSigningOption() (OPC_RELATIONSHIPS_SIGNING_OPTION, error) {
 	var _relationshipSigningOption OPC_RELATIONSHIPS_SIGNING_OPTION
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_relationshipSigningOption)))
-	return _relationshipSigningOption, win32.HRESULTError(int32(r1))
+	return _relationshipSigningOption, win32.ErrIfFailed(int32(r1))
 }
 
 // GetRelationshipSelectorEnumerator dispatches through IOpcSignatureRelationshipReference's vtable slot 8.
 func (self *IOpcSignatureRelationshipReference) GetRelationshipSelectorEnumerator() (*IOpcRelationshipSelectorEnumerator, error) {
 	var _selectorEnumerator *IOpcRelationshipSelectorEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_selectorEnumerator)))
-	return _selectorEnumerator, win32.HRESULTError(int32(r1))
+	return _selectorEnumerator, win32.ErrIfFailed(int32(r1))
 }
 
 // IOpcSignatureRelationshipReferenceEnumerator: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcsignaturerelationshipreferenceenumerator
@@ -1140,28 +1140,28 @@ var IID_IOpcSignatureRelationshipReferenceEnumerator = win32.GUID{Data1: 0x773ba
 func (self *IOpcSignatureRelationshipReferenceEnumerator) MoveNext() (foundation.BOOL, error) {
 	var _hasNext foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasNext)))
-	return _hasNext, win32.HRESULTError(int32(r1))
+	return _hasNext, win32.ErrIfFailed(int32(r1))
 }
 
 // MovePrevious dispatches through IOpcSignatureRelationshipReferenceEnumerator's vtable slot 4.
 func (self *IOpcSignatureRelationshipReferenceEnumerator) MovePrevious() (foundation.BOOL, error) {
 	var _hasPrevious foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasPrevious)))
-	return _hasPrevious, win32.HRESULTError(int32(r1))
+	return _hasPrevious, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrent dispatches through IOpcSignatureRelationshipReferenceEnumerator's vtable slot 5.
 func (self *IOpcSignatureRelationshipReferenceEnumerator) GetCurrent() (*IOpcSignatureRelationshipReference, error) {
 	var _relationshipReference *IOpcSignatureRelationshipReference
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_relationshipReference)))
-	return _relationshipReference, win32.HRESULTError(int32(r1))
+	return _relationshipReference, win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IOpcSignatureRelationshipReferenceEnumerator's vtable slot 6.
 func (self *IOpcSignatureRelationshipReferenceEnumerator) Clone() (*IOpcSignatureRelationshipReferenceEnumerator, error) {
 	var _copy_ *IOpcSignatureRelationshipReferenceEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_copy_)))
-	return _copy_, win32.HRESULTError(int32(r1))
+	return _copy_, win32.ErrIfFailed(int32(r1))
 }
 
 // IOpcSignatureRelationshipReferenceSet: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcsignaturerelationshipreferenceset
@@ -1178,26 +1178,26 @@ func (self *IOpcSignatureRelationshipReferenceSet) Create(sourceUri *IOpcUri, di
 	_digestMethod := win32.UTF16Ptr(digestMethod)
 	var _relationshipReference *IOpcSignatureRelationshipReference
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sourceUri)), uintptr(unsafe.Pointer(_digestMethod)), uintptr(relationshipSigningOption), uintptr(unsafe.Pointer(selectorSet)), uintptr(transformMethod), uintptr(unsafe.Pointer(&_relationshipReference)))
-	return _relationshipReference, win32.HRESULTError(int32(r1))
+	return _relationshipReference, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateRelationshipSelectorSet dispatches through IOpcSignatureRelationshipReferenceSet's vtable slot 4.
 func (self *IOpcSignatureRelationshipReferenceSet) CreateRelationshipSelectorSet(selectorSet **IOpcRelationshipSelectorSet) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(selectorSet)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IOpcSignatureRelationshipReferenceSet's vtable slot 5.
 func (self *IOpcSignatureRelationshipReferenceSet) Delete(relationshipReference *IOpcSignatureRelationshipReference) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(relationshipReference)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEnumerator dispatches through IOpcSignatureRelationshipReferenceSet's vtable slot 6.
 func (self *IOpcSignatureRelationshipReferenceSet) GetEnumerator() (*IOpcSignatureRelationshipReferenceEnumerator, error) {
 	var _relationshipReferenceEnumerator *IOpcSignatureRelationshipReferenceEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_relationshipReferenceEnumerator)))
-	return _relationshipReferenceEnumerator, win32.HRESULTError(int32(r1))
+	return _relationshipReferenceEnumerator, win32.ErrIfFailed(int32(r1))
 }
 
 // IOpcSigningOptions: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcsigningoptions
@@ -1213,116 +1213,116 @@ var IID_IOpcSigningOptions = win32.GUID{Data1: 0x50d2d6a5, Data2: 0x7aeb, Data3:
 func (self *IOpcSigningOptions) GetSignatureId() (foundation.PWSTR, error) {
 	var _signatureId foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_signatureId)))
-	return _signatureId, win32.HRESULTError(int32(r1))
+	return _signatureId, win32.ErrIfFailed(int32(r1))
 }
 
 // SetSignatureId dispatches through IOpcSigningOptions's vtable slot 4.
 func (self *IOpcSigningOptions) SetSignatureId(signatureId string) error {
 	_signatureId := win32.UTF16Ptr(signatureId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_signatureId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSignatureMethod dispatches through IOpcSigningOptions's vtable slot 5.
 func (self *IOpcSigningOptions) GetSignatureMethod() (foundation.PWSTR, error) {
 	var _signatureMethod foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_signatureMethod)))
-	return _signatureMethod, win32.HRESULTError(int32(r1))
+	return _signatureMethod, win32.ErrIfFailed(int32(r1))
 }
 
 // SetSignatureMethod dispatches through IOpcSigningOptions's vtable slot 6.
 func (self *IOpcSigningOptions) SetSignatureMethod(signatureMethod string) error {
 	_signatureMethod := win32.UTF16Ptr(signatureMethod)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_signatureMethod)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDefaultDigestMethod dispatches through IOpcSigningOptions's vtable slot 7.
 func (self *IOpcSigningOptions) GetDefaultDigestMethod() (foundation.PWSTR, error) {
 	var _digestMethod foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_digestMethod)))
-	return _digestMethod, win32.HRESULTError(int32(r1))
+	return _digestMethod, win32.ErrIfFailed(int32(r1))
 }
 
 // SetDefaultDigestMethod dispatches through IOpcSigningOptions's vtable slot 8.
 func (self *IOpcSigningOptions) SetDefaultDigestMethod(digestMethod string) error {
 	_digestMethod := win32.UTF16Ptr(digestMethod)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_digestMethod)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCertificateEmbeddingOption dispatches through IOpcSigningOptions's vtable slot 9.
 func (self *IOpcSigningOptions) GetCertificateEmbeddingOption() (OPC_CERTIFICATE_EMBEDDING_OPTION, error) {
 	var _embeddingOption OPC_CERTIFICATE_EMBEDDING_OPTION
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_embeddingOption)))
-	return _embeddingOption, win32.HRESULTError(int32(r1))
+	return _embeddingOption, win32.ErrIfFailed(int32(r1))
 }
 
 // SetCertificateEmbeddingOption dispatches through IOpcSigningOptions's vtable slot 10.
 func (self *IOpcSigningOptions) SetCertificateEmbeddingOption(embeddingOption OPC_CERTIFICATE_EMBEDDING_OPTION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(embeddingOption))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTimeFormat dispatches through IOpcSigningOptions's vtable slot 11.
 func (self *IOpcSigningOptions) GetTimeFormat() (OPC_SIGNATURE_TIME_FORMAT, error) {
 	var _timeFormat OPC_SIGNATURE_TIME_FORMAT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_timeFormat)))
-	return _timeFormat, win32.HRESULTError(int32(r1))
+	return _timeFormat, win32.ErrIfFailed(int32(r1))
 }
 
 // SetTimeFormat dispatches through IOpcSigningOptions's vtable slot 12.
 func (self *IOpcSigningOptions) SetTimeFormat(timeFormat OPC_SIGNATURE_TIME_FORMAT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(timeFormat))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSignaturePartReferenceSet dispatches through IOpcSigningOptions's vtable slot 13.
 func (self *IOpcSigningOptions) GetSignaturePartReferenceSet() (*IOpcSignaturePartReferenceSet, error) {
 	var _partReferenceSet *IOpcSignaturePartReferenceSet
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_partReferenceSet)))
-	return _partReferenceSet, win32.HRESULTError(int32(r1))
+	return _partReferenceSet, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSignatureRelationshipReferenceSet dispatches through IOpcSigningOptions's vtable slot 14.
 func (self *IOpcSigningOptions) GetSignatureRelationshipReferenceSet() (*IOpcSignatureRelationshipReferenceSet, error) {
 	var _relationshipReferenceSet *IOpcSignatureRelationshipReferenceSet
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_relationshipReferenceSet)))
-	return _relationshipReferenceSet, win32.HRESULTError(int32(r1))
+	return _relationshipReferenceSet, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCustomObjectSet dispatches through IOpcSigningOptions's vtable slot 15.
 func (self *IOpcSigningOptions) GetCustomObjectSet() (*IOpcSignatureCustomObjectSet, error) {
 	var _customObjectSet *IOpcSignatureCustomObjectSet
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_customObjectSet)))
-	return _customObjectSet, win32.HRESULTError(int32(r1))
+	return _customObjectSet, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCustomReferenceSet dispatches through IOpcSigningOptions's vtable slot 16.
 func (self *IOpcSigningOptions) GetCustomReferenceSet() (*IOpcSignatureReferenceSet, error) {
 	var _customReferenceSet *IOpcSignatureReferenceSet
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_customReferenceSet)))
-	return _customReferenceSet, win32.HRESULTError(int32(r1))
+	return _customReferenceSet, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCertificateSet dispatches through IOpcSigningOptions's vtable slot 17.
 func (self *IOpcSigningOptions) GetCertificateSet() (*IOpcCertificateSet, error) {
 	var _certificateSet *IOpcCertificateSet
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_certificateSet)))
-	return _certificateSet, win32.HRESULTError(int32(r1))
+	return _certificateSet, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSignaturePartName dispatches through IOpcSigningOptions's vtable slot 18.
 func (self *IOpcSigningOptions) GetSignaturePartName() (*IOpcPartUri, error) {
 	var _signaturePartName *IOpcPartUri
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_signaturePartName)))
-	return _signaturePartName, win32.HRESULTError(int32(r1))
+	return _signaturePartName, win32.ErrIfFailed(int32(r1))
 }
 
 // SetSignaturePartName dispatches through IOpcSigningOptions's vtable slot 19.
 func (self *IOpcSigningOptions) SetSignaturePartName(signaturePartName *IOpcPartUri) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signaturePartName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IOpcUri: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcuri
@@ -1338,19 +1338,19 @@ var IID_IOpcUri = win32.GUID{Data1: 0xbc9c1b9b, Data2: 0xd62c, Data3: 0x49eb, Da
 func (self *IOpcUri) GetRelationshipsPartUri() (*IOpcPartUri, error) {
 	var _relationshipPartUri *IOpcPartUri
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_relationshipPartUri)))
-	return _relationshipPartUri, win32.HRESULTError(int32(r1))
+	return _relationshipPartUri, win32.ErrIfFailed(int32(r1))
 }
 
 // GetRelativeUri dispatches through IOpcUri's vtable slot 29.
 func (self *IOpcUri) GetRelativeUri(targetPartUri *IOpcPartUri) (*systemcom.IUri, error) {
 	var _relativeUri *systemcom.IUri
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(targetPartUri)), uintptr(unsafe.Pointer(&_relativeUri)))
-	return _relativeUri, win32.HRESULTError(int32(r1))
+	return _relativeUri, win32.ErrIfFailed(int32(r1))
 }
 
 // CombinePartUri dispatches through IOpcUri's vtable slot 30.
 func (self *IOpcUri) CombinePartUri(relativeUri *systemcom.IUri) (*IOpcPartUri, error) {
 	var _combinedUri *IOpcPartUri
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(relativeUri)), uintptr(unsafe.Pointer(&_combinedUri)))
-	return _combinedUri, win32.HRESULTError(int32(r1))
+	return _combinedUri, win32.ErrIfFailed(int32(r1))
 }

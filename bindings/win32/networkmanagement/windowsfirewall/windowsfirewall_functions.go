@@ -74,7 +74,7 @@ func NetworkIsolationEnumAppContainers(Flags uint32, pdwNumPublicAppCs *uint32, 
 // Minimum OS: windows8.0.
 func NetworkIsolationEnumerateAppContainerRules(newEnum **systemole.IEnumVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procNetworkIsolationEnumerateAppContainerRules.Addr(), uintptr(unsafe.Pointer(newEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NetworkIsolationFreeAppContainers calls api-ms-win-net-isolation-l1-1-0!NetworkIsolationFreeAppContainers.
@@ -144,7 +144,7 @@ func NetworkIsolationSetupAppContainerBinaries(applicationContainerSid security.
 		_binaries = &binaries[0]
 	}
 	r1, _, _ := syscall.SyscallN(procNetworkIsolationSetupAppContainerBinaries.Addr(), uintptr(applicationContainerSid), uintptr(unsafe.Pointer(_packageFullName)), uintptr(unsafe.Pointer(_packageFolder)), uintptr(unsafe.Pointer(_displayName)), uintptr(_bBinariesFullyComputed), uintptr(unsafe.Pointer(_binaries)), uintptr(len(binaries)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NetworkIsolationUnregisterForAppContainerChanges calls api-ms-win-net-isolation-l1-1-0!NetworkIsolationUnregisterForAppContainerChanges.

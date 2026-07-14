@@ -28,31 +28,31 @@ var IID_IEnumWIA_DEV_CAPS = win32.GUID{Data1: 0x1fcc4287, Data2: 0xaca6, Data3: 
 // Next dispatches through IEnumWIA_DEV_CAPS's vtable slot 3.
 func (self *IEnumWIA_DEV_CAPS) Next(celt uint32, rgelt *WIA_DEV_CAP, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumWIA_DEV_CAPS's vtable slot 4.
 func (self *IEnumWIA_DEV_CAPS) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumWIA_DEV_CAPS's vtable slot 5.
 func (self *IEnumWIA_DEV_CAPS) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IEnumWIA_DEV_CAPS's vtable slot 6.
 func (self *IEnumWIA_DEV_CAPS) Clone(ppIEnum **IEnumWIA_DEV_CAPS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCount dispatches through IEnumWIA_DEV_CAPS's vtable slot 7.
 func (self *IEnumWIA_DEV_CAPS) GetCount(pcelt *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcelt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumWIA_DEV_INFO: https://learn.microsoft.com/windows/win32/api/wia_xp/nn-wia_xp-ienumwia_dev_info
@@ -67,31 +67,31 @@ var IID_IEnumWIA_DEV_INFO = win32.GUID{Data1: 0x5e38b83c, Data2: 0x8cf1, Data3: 
 // Next dispatches through IEnumWIA_DEV_INFO's vtable slot 3.
 func (self *IEnumWIA_DEV_INFO) Next(celt uint32, rgelt **IWiaPropertyStorage, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumWIA_DEV_INFO's vtable slot 4.
 func (self *IEnumWIA_DEV_INFO) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumWIA_DEV_INFO's vtable slot 5.
 func (self *IEnumWIA_DEV_INFO) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IEnumWIA_DEV_INFO's vtable slot 6.
 func (self *IEnumWIA_DEV_INFO) Clone(ppIEnum **IEnumWIA_DEV_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCount dispatches through IEnumWIA_DEV_INFO's vtable slot 7.
 func (self *IEnumWIA_DEV_INFO) GetCount(celt *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(celt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumWIA_FORMAT_INFO: https://learn.microsoft.com/windows/win32/api/wia_xp/nn-wia_xp-ienumwia_format_info
@@ -106,31 +106,31 @@ var IID_IEnumWIA_FORMAT_INFO = win32.GUID{Data1: 0x81befc5b, Data2: 0x656d, Data
 // Next dispatches through IEnumWIA_FORMAT_INFO's vtable slot 3.
 func (self *IEnumWIA_FORMAT_INFO) Next(celt uint32, rgelt *WIA_FORMAT_INFO, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumWIA_FORMAT_INFO's vtable slot 4.
 func (self *IEnumWIA_FORMAT_INFO) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumWIA_FORMAT_INFO's vtable slot 5.
 func (self *IEnumWIA_FORMAT_INFO) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IEnumWIA_FORMAT_INFO's vtable slot 6.
 func (self *IEnumWIA_FORMAT_INFO) Clone(ppIEnum **IEnumWIA_FORMAT_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCount dispatches through IEnumWIA_FORMAT_INFO's vtable slot 7.
 func (self *IEnumWIA_FORMAT_INFO) GetCount(pcelt *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcelt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumWiaItem: https://learn.microsoft.com/windows/win32/api/wia_xp/nn-wia_xp-ienumwiaitem
@@ -145,31 +145,31 @@ var IID_IEnumWiaItem = win32.GUID{Data1: 0x5e8383fc, Data2: 0x3391, Data3: 0x11d
 // Next dispatches through IEnumWiaItem's vtable slot 3.
 func (self *IEnumWiaItem) Next(celt uint32, ppIWiaItem **IWiaItem, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppIWiaItem)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumWiaItem's vtable slot 4.
 func (self *IEnumWiaItem) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumWiaItem's vtable slot 5.
 func (self *IEnumWiaItem) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IEnumWiaItem's vtable slot 6.
 func (self *IEnumWiaItem) Clone(ppIEnum **IEnumWiaItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCount dispatches through IEnumWiaItem's vtable slot 7.
 func (self *IEnumWiaItem) GetCount(celt *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(celt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumWiaItem2: https://learn.microsoft.com/windows/win32/wia/-wia-ienumwiaitem2
@@ -184,31 +184,31 @@ var IID_IEnumWiaItem2 = win32.GUID{Data1: 0x59970af4, Data2: 0xcd0d, Data3: 0x44
 // Next dispatches through IEnumWiaItem2's vtable slot 3.
 func (self *IEnumWiaItem2) Next(cElt uint32, ppIWiaItem2 **IWiaItem2, pcEltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cElt), uintptr(unsafe.Pointer(ppIWiaItem2)), uintptr(unsafe.Pointer(pcEltFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumWiaItem2's vtable slot 4.
 func (self *IEnumWiaItem2) Skip(cElt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cElt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumWiaItem2's vtable slot 5.
 func (self *IEnumWiaItem2) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IEnumWiaItem2's vtable slot 6.
 func (self *IEnumWiaItem2) Clone(ppIEnum **IEnumWiaItem2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCount dispatches through IEnumWiaItem2's vtable slot 7.
 func (self *IEnumWiaItem2) GetCount(cElt *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cElt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWiaAppErrorHandler: https://learn.microsoft.com/windows/win32/wia/-wia-iwiaapperrorhandler
@@ -223,13 +223,13 @@ var IID_IWiaAppErrorHandler = win32.GUID{Data1: 0x6c16186c, Data2: 0xd0a6, Data3
 // GetWindow dispatches through IWiaAppErrorHandler's vtable slot 3.
 func (self *IWiaAppErrorHandler) GetWindow(phwnd *foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phwnd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReportStatus dispatches through IWiaAppErrorHandler's vtable slot 4.
 func (self *IWiaAppErrorHandler) ReportStatus(lFlags int32, pWiaItem2 *IWiaItem2, hrStatus foundation.HRESULT, lPercentComplete int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(pWiaItem2)), uintptr(hrStatus), uintptr(lPercentComplete))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWiaDataCallback: https://learn.microsoft.com/windows/win32/api/wia_xp/nn-wia_xp-iwiadatacallback
@@ -244,7 +244,7 @@ var IID_IWiaDataCallback = win32.GUID{Data1: 0xa558a866, Data2: 0xa5b0, Data3: 0
 // BandedDataCallback dispatches through IWiaDataCallback's vtable slot 3.
 func (self *IWiaDataCallback) BandedDataCallback(lMessage int32, lStatus int32, lPercentComplete int32, lOffset int32, lLength int32, lReserved int32, lResLength int32, pbBuffer *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lMessage), uintptr(lStatus), uintptr(lPercentComplete), uintptr(lOffset), uintptr(lLength), uintptr(lReserved), uintptr(lResLength), uintptr(unsafe.Pointer(pbBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWiaDataTransfer: https://learn.microsoft.com/windows/win32/api/wia_xp/nn-wia_xp-iwiadatatransfer
@@ -259,31 +259,31 @@ var IID_IWiaDataTransfer = win32.GUID{Data1: 0xa6cef998, Data2: 0xa5b0, Data3: 0
 // IdtGetData dispatches through IWiaDataTransfer's vtable slot 3.
 func (self *IWiaDataTransfer) IdtGetData(pMedium *systemcom.STGMEDIUM, pIWiaDataCallback *IWiaDataCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMedium)), uintptr(unsafe.Pointer(pIWiaDataCallback)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IdtGetBandedData dispatches through IWiaDataTransfer's vtable slot 4.
 func (self *IWiaDataTransfer) IdtGetBandedData(pWiaDataTransInfo *WIA_DATA_TRANSFER_INFO, pIWiaDataCallback *IWiaDataCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWiaDataTransInfo)), uintptr(unsafe.Pointer(pIWiaDataCallback)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IdtQueryGetData dispatches through IWiaDataTransfer's vtable slot 5.
 func (self *IWiaDataTransfer) IdtQueryGetData(pfe *WIA_FORMAT_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfe)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IdtEnumWIA_FORMAT_INFO dispatches through IWiaDataTransfer's vtable slot 6.
 func (self *IWiaDataTransfer) IdtEnumWIA_FORMAT_INFO(ppEnum **IEnumWIA_FORMAT_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IdtGetExtendedTransferInfo dispatches through IWiaDataTransfer's vtable slot 7.
 func (self *IWiaDataTransfer) IdtGetExtendedTransferInfo(pExtendedTransferInfo *WIA_EXTENDED_TRANSFER_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pExtendedTransferInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWiaDevMgr: https://learn.microsoft.com/windows/win32/api/wia_xp/nn-wia_xp-iwiadevmgr
@@ -298,55 +298,55 @@ var IID_IWiaDevMgr = win32.GUID{Data1: 0x5eb2502a, Data2: 0x8cf1, Data3: 0x11d1,
 // EnumDeviceInfo dispatches through IWiaDevMgr's vtable slot 3.
 func (self *IWiaDevMgr) EnumDeviceInfo(lFlag int32, ppIEnum **IEnumWIA_DEV_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lFlag), uintptr(unsafe.Pointer(ppIEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateDevice dispatches through IWiaDevMgr's vtable slot 4.
 func (self *IWiaDevMgr) CreateDevice(bstrDeviceID foundation.BSTR, ppWiaItemRoot **IWiaItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDeviceID)), uintptr(unsafe.Pointer(ppWiaItemRoot)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SelectDeviceDlg dispatches through IWiaDevMgr's vtable slot 5.
 func (self *IWiaDevMgr) SelectDeviceDlg(hwndParent foundation.HWND, lDeviceType int32, lFlags int32, pbstrDeviceID *foundation.BSTR, ppItemRoot **IWiaItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(lDeviceType), uintptr(lFlags), uintptr(unsafe.Pointer(pbstrDeviceID)), uintptr(unsafe.Pointer(ppItemRoot)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SelectDeviceDlgID dispatches through IWiaDevMgr's vtable slot 6.
 func (self *IWiaDevMgr) SelectDeviceDlgID(hwndParent foundation.HWND, lDeviceType int32, lFlags int32, pbstrDeviceID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(lDeviceType), uintptr(lFlags), uintptr(unsafe.Pointer(pbstrDeviceID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetImageDlg dispatches through IWiaDevMgr's vtable slot 7.
 func (self *IWiaDevMgr) GetImageDlg(hwndParent foundation.HWND, lDeviceType int32, lFlags int32, lIntent int32, pItemRoot *IWiaItem, bstrFilename foundation.BSTR, pguidFormat *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(lDeviceType), uintptr(lFlags), uintptr(lIntent), uintptr(unsafe.Pointer(pItemRoot)), uintptr(unsafe.Pointer(bstrFilename)), uintptr(unsafe.Pointer(pguidFormat)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterEventCallbackProgram dispatches through IWiaDevMgr's vtable slot 8.
 func (self *IWiaDevMgr) RegisterEventCallbackProgram(lFlags int32, bstrDeviceID foundation.BSTR, pEventGUID *win32.GUID, bstrCommandline foundation.BSTR, bstrName foundation.BSTR, bstrDescription foundation.BSTR, bstrIcon foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(bstrDeviceID)), uintptr(unsafe.Pointer(pEventGUID)), uintptr(unsafe.Pointer(bstrCommandline)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(bstrDescription)), uintptr(unsafe.Pointer(bstrIcon)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterEventCallbackInterface dispatches through IWiaDevMgr's vtable slot 9.
 func (self *IWiaDevMgr) RegisterEventCallbackInterface(lFlags int32, bstrDeviceID foundation.BSTR, pEventGUID *win32.GUID, pIWiaEventCallback *IWiaEventCallback, pEventObject **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(bstrDeviceID)), uintptr(unsafe.Pointer(pEventGUID)), uintptr(unsafe.Pointer(pIWiaEventCallback)), uintptr(unsafe.Pointer(pEventObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterEventCallbackCLSID dispatches through IWiaDevMgr's vtable slot 10.
 func (self *IWiaDevMgr) RegisterEventCallbackCLSID(lFlags int32, bstrDeviceID foundation.BSTR, pEventGUID *win32.GUID, pClsID *win32.GUID, bstrName foundation.BSTR, bstrDescription foundation.BSTR, bstrIcon foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(bstrDeviceID)), uintptr(unsafe.Pointer(pEventGUID)), uintptr(unsafe.Pointer(pClsID)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(bstrDescription)), uintptr(unsafe.Pointer(bstrIcon)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddDeviceDlg dispatches through IWiaDevMgr's vtable slot 11.
 func (self *IWiaDevMgr) AddDeviceDlg(hwndParent foundation.HWND, lFlags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(lFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWiaDevMgr2: https://learn.microsoft.com/windows/win32/wia/-wia-iwiadevmgr2
@@ -361,49 +361,49 @@ var IID_IWiaDevMgr2 = win32.GUID{Data1: 0x79c07cf1, Data2: 0xcbdd, Data3: 0x41ee
 // EnumDeviceInfo dispatches through IWiaDevMgr2's vtable slot 3.
 func (self *IWiaDevMgr2) EnumDeviceInfo(lFlags int32, ppIEnum **IEnumWIA_DEV_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(ppIEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateDevice dispatches through IWiaDevMgr2's vtable slot 4.
 func (self *IWiaDevMgr2) CreateDevice(lFlags int32, bstrDeviceID foundation.BSTR, ppWiaItem2Root **IWiaItem2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(bstrDeviceID)), uintptr(unsafe.Pointer(ppWiaItem2Root)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SelectDeviceDlg dispatches through IWiaDevMgr2's vtable slot 5.
 func (self *IWiaDevMgr2) SelectDeviceDlg(hwndParent foundation.HWND, lDeviceType int32, lFlags int32, pbstrDeviceID *foundation.BSTR, ppItemRoot **IWiaItem2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(lDeviceType), uintptr(lFlags), uintptr(unsafe.Pointer(pbstrDeviceID)), uintptr(unsafe.Pointer(ppItemRoot)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SelectDeviceDlgID dispatches through IWiaDevMgr2's vtable slot 6.
 func (self *IWiaDevMgr2) SelectDeviceDlgID(hwndParent foundation.HWND, lDeviceType int32, lFlags int32, pbstrDeviceID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(lDeviceType), uintptr(lFlags), uintptr(unsafe.Pointer(pbstrDeviceID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterEventCallbackInterface dispatches through IWiaDevMgr2's vtable slot 7.
 func (self *IWiaDevMgr2) RegisterEventCallbackInterface(lFlags int32, bstrDeviceID foundation.BSTR, pEventGUID *win32.GUID, pIWiaEventCallback *IWiaEventCallback, pEventObject **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(bstrDeviceID)), uintptr(unsafe.Pointer(pEventGUID)), uintptr(unsafe.Pointer(pIWiaEventCallback)), uintptr(unsafe.Pointer(pEventObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterEventCallbackProgram dispatches through IWiaDevMgr2's vtable slot 8.
 func (self *IWiaDevMgr2) RegisterEventCallbackProgram(lFlags int32, bstrDeviceID foundation.BSTR, pEventGUID *win32.GUID, bstrFullAppName foundation.BSTR, bstrCommandLineArg foundation.BSTR, bstrName foundation.BSTR, bstrDescription foundation.BSTR, bstrIcon foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(bstrDeviceID)), uintptr(unsafe.Pointer(pEventGUID)), uintptr(unsafe.Pointer(bstrFullAppName)), uintptr(unsafe.Pointer(bstrCommandLineArg)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(bstrDescription)), uintptr(unsafe.Pointer(bstrIcon)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterEventCallbackCLSID dispatches through IWiaDevMgr2's vtable slot 9.
 func (self *IWiaDevMgr2) RegisterEventCallbackCLSID(lFlags int32, bstrDeviceID foundation.BSTR, pEventGUID *win32.GUID, pClsID *win32.GUID, bstrName foundation.BSTR, bstrDescription foundation.BSTR, bstrIcon foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(bstrDeviceID)), uintptr(unsafe.Pointer(pEventGUID)), uintptr(unsafe.Pointer(pClsID)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(bstrDescription)), uintptr(unsafe.Pointer(bstrIcon)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetImageDlg dispatches through IWiaDevMgr2's vtable slot 10.
 func (self *IWiaDevMgr2) GetImageDlg(lFlags int32, bstrDeviceID foundation.BSTR, hwndParent foundation.HWND, bstrFolderName foundation.BSTR, bstrFilename foundation.BSTR, plNumFiles *int32, ppbstrFilePaths **foundation.BSTR, ppItem **IWiaItem2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(bstrDeviceID)), uintptr(hwndParent), uintptr(unsafe.Pointer(bstrFolderName)), uintptr(unsafe.Pointer(bstrFilename)), uintptr(unsafe.Pointer(plNumFiles)), uintptr(unsafe.Pointer(ppbstrFilePaths)), uintptr(unsafe.Pointer(ppItem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 1f02b5c5-b00c-11d2-a094-00c04f72dc3c
@@ -417,79 +417,79 @@ var IID_IWiaDrvItem = win32.GUID{Data1: 0x1f02b5c5, Data2: 0xb00c, Data3: 0x11d2
 // GetItemFlags dispatches through IWiaDrvItem's vtable slot 3.
 func (self *IWiaDrvItem) GetItemFlags(__MIDL__IWiaDrvItem0000 *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__IWiaDrvItem0000)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceSpecContext dispatches through IWiaDrvItem's vtable slot 4.
 func (self *IWiaDrvItem) GetDeviceSpecContext(__MIDL__IWiaDrvItem0001 **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__IWiaDrvItem0001)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFullItemName dispatches through IWiaDrvItem's vtable slot 5.
 func (self *IWiaDrvItem) GetFullItemName(__MIDL__IWiaDrvItem0002 *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__IWiaDrvItem0002)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetItemName dispatches through IWiaDrvItem's vtable slot 6.
 func (self *IWiaDrvItem) GetItemName(__MIDL__IWiaDrvItem0003 *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__IWiaDrvItem0003)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddItemToFolder dispatches through IWiaDrvItem's vtable slot 7.
 func (self *IWiaDrvItem) AddItemToFolder(__MIDL__IWiaDrvItem0004 *IWiaDrvItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__IWiaDrvItem0004)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnlinkItemTree dispatches through IWiaDrvItem's vtable slot 8.
 func (self *IWiaDrvItem) UnlinkItemTree(__MIDL__IWiaDrvItem0005 int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(__MIDL__IWiaDrvItem0005))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveItemFromFolder dispatches through IWiaDrvItem's vtable slot 9.
 func (self *IWiaDrvItem) RemoveItemFromFolder(__MIDL__IWiaDrvItem0006 int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(__MIDL__IWiaDrvItem0006))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FindItemByName dispatches through IWiaDrvItem's vtable slot 10.
 func (self *IWiaDrvItem) FindItemByName(__MIDL__IWiaDrvItem0007 int32, __MIDL__IWiaDrvItem0008 foundation.BSTR, __MIDL__IWiaDrvItem0009 **IWiaDrvItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(__MIDL__IWiaDrvItem0007), uintptr(unsafe.Pointer(__MIDL__IWiaDrvItem0008)), uintptr(unsafe.Pointer(__MIDL__IWiaDrvItem0009)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FindChildItemByName dispatches through IWiaDrvItem's vtable slot 11.
 func (self *IWiaDrvItem) FindChildItemByName(__MIDL__IWiaDrvItem0010 foundation.BSTR, __MIDL__IWiaDrvItem0011 **IWiaDrvItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__IWiaDrvItem0010)), uintptr(unsafe.Pointer(__MIDL__IWiaDrvItem0011)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetParentItem dispatches through IWiaDrvItem's vtable slot 12.
 func (self *IWiaDrvItem) GetParentItem(__MIDL__IWiaDrvItem0012 **IWiaDrvItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__IWiaDrvItem0012)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFirstChildItem dispatches through IWiaDrvItem's vtable slot 13.
 func (self *IWiaDrvItem) GetFirstChildItem(__MIDL__IWiaDrvItem0013 **IWiaDrvItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__IWiaDrvItem0013)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNextSiblingItem dispatches through IWiaDrvItem's vtable slot 14.
 func (self *IWiaDrvItem) GetNextSiblingItem(__MIDL__IWiaDrvItem0014 **IWiaDrvItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__IWiaDrvItem0014)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DumpItemData dispatches through IWiaDrvItem's vtable slot 15.
 func (self *IWiaDrvItem) DumpItemData(__MIDL__IWiaDrvItem0015 *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__IWiaDrvItem0015)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWiaErrorHandler: https://learn.microsoft.com/windows/win32/wia/-wia-iwiaerrorhandler
@@ -504,13 +504,13 @@ var IID_IWiaErrorHandler = win32.GUID{Data1: 0x0e4a51b1, Data2: 0xbc1f, Data3: 0
 // ReportStatus dispatches through IWiaErrorHandler's vtable slot 3.
 func (self *IWiaErrorHandler) ReportStatus(lFlags int32, hwndParent foundation.HWND, pWiaItem2 *IWiaItem2, hrStatus foundation.HRESULT, lPercentComplete int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(hwndParent), uintptr(unsafe.Pointer(pWiaItem2)), uintptr(hrStatus), uintptr(lPercentComplete))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStatusDescription dispatches through IWiaErrorHandler's vtable slot 4.
 func (self *IWiaErrorHandler) GetStatusDescription(lFlags int32, pWiaItem2 *IWiaItem2, hrStatus foundation.HRESULT, pbstrDescription *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(pWiaItem2)), uintptr(hrStatus), uintptr(unsafe.Pointer(pbstrDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWiaEventCallback: https://learn.microsoft.com/windows/win32/api/wia_xp/nn-wia_xp-iwiaeventcallback
@@ -525,7 +525,7 @@ var IID_IWiaEventCallback = win32.GUID{Data1: 0xae6287b0, Data2: 0x0084, Data3: 
 // ImageEventCallback dispatches through IWiaEventCallback's vtable slot 3.
 func (self *IWiaEventCallback) ImageEventCallback(pEventGUID *win32.GUID, bstrEventDescription foundation.BSTR, bstrDeviceID foundation.BSTR, bstrDeviceDescription foundation.BSTR, dwDeviceType uint32, bstrFullItemName foundation.BSTR, pulEventType *uint32, ulReserved uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEventGUID)), uintptr(unsafe.Pointer(bstrEventDescription)), uintptr(unsafe.Pointer(bstrDeviceID)), uintptr(unsafe.Pointer(bstrDeviceDescription)), uintptr(dwDeviceType), uintptr(unsafe.Pointer(bstrFullItemName)), uintptr(unsafe.Pointer(pulEventType)), uintptr(ulReserved))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWiaImageFilter: https://learn.microsoft.com/windows/win32/wia/-wia-iwiaimagefilter
@@ -540,19 +540,19 @@ var IID_IWiaImageFilter = win32.GUID{Data1: 0xa8a79ffa, Data2: 0x450b, Data3: 0x
 // InitializeFilter dispatches through IWiaImageFilter's vtable slot 3.
 func (self *IWiaImageFilter) InitializeFilter(pWiaItem2 *IWiaItem2, pWiaTransferCallback *IWiaTransferCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWiaItem2)), uintptr(unsafe.Pointer(pWiaTransferCallback)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetNewCallback dispatches through IWiaImageFilter's vtable slot 4.
 func (self *IWiaImageFilter) SetNewCallback(pWiaTransferCallback *IWiaTransferCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWiaTransferCallback)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ApplyProperties dispatches through IWiaImageFilter's vtable slot 6.
 func (self *IWiaImageFilter) ApplyProperties(pWiaPropertyStorage *IWiaPropertyStorage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWiaPropertyStorage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWiaItem: https://learn.microsoft.com/windows/win32/api/wia_xp/nn-wia_xp-iwiaitem
@@ -567,85 +567,85 @@ var IID_IWiaItem = win32.GUID{Data1: 0x4db1ad10, Data2: 0x3391, Data3: 0x11d2, D
 // GetItemType dispatches through IWiaItem's vtable slot 3.
 func (self *IWiaItem) GetItemType(pItemType *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pItemType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AnalyzeItem dispatches through IWiaItem's vtable slot 4.
 func (self *IWiaItem) AnalyzeItem(lFlags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(lFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumChildItems dispatches through IWiaItem's vtable slot 5.
 func (self *IWiaItem) EnumChildItems(ppIEnumWiaItem **IEnumWiaItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIEnumWiaItem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteItem dispatches through IWiaItem's vtable slot 6.
 func (self *IWiaItem) DeleteItem(lFlags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(lFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateChildItem dispatches through IWiaItem's vtable slot 7.
 func (self *IWiaItem) CreateChildItem(lFlags int32, bstrItemName foundation.BSTR, bstrFullItemName foundation.BSTR, ppIWiaItem **IWiaItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(bstrItemName)), uintptr(unsafe.Pointer(bstrFullItemName)), uintptr(unsafe.Pointer(ppIWiaItem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumRegisterEventInfo dispatches through IWiaItem's vtable slot 8.
 func (self *IWiaItem) EnumRegisterEventInfo(lFlags int32, pEventGUID *win32.GUID, ppIEnum **IEnumWIA_DEV_CAPS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(pEventGUID)), uintptr(unsafe.Pointer(ppIEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FindItemByName dispatches through IWiaItem's vtable slot 9.
 func (self *IWiaItem) FindItemByName(lFlags int32, bstrFullItemName foundation.BSTR, ppIWiaItem **IWiaItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(bstrFullItemName)), uintptr(unsafe.Pointer(ppIWiaItem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeviceDlg dispatches through IWiaItem's vtable slot 10.
 func (self *IWiaItem) DeviceDlg(hwndParent foundation.HWND, lFlags int32, lIntent int32, plItemCount *int32, ppIWiaItem ***IWiaItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(lFlags), uintptr(lIntent), uintptr(unsafe.Pointer(plItemCount)), uintptr(unsafe.Pointer(ppIWiaItem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeviceCommand dispatches through IWiaItem's vtable slot 11.
 func (self *IWiaItem) DeviceCommand(lFlags int32, pCmdGUID *win32.GUID, pIWiaItem **IWiaItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(pCmdGUID)), uintptr(unsafe.Pointer(pIWiaItem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRootItem dispatches through IWiaItem's vtable slot 12.
 func (self *IWiaItem) GetRootItem(ppIWiaItem **IWiaItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIWiaItem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumDeviceCapabilities dispatches through IWiaItem's vtable slot 13.
 func (self *IWiaItem) EnumDeviceCapabilities(lFlags int32, ppIEnumWIA_DEV_CAPS **IEnumWIA_DEV_CAPS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(ppIEnumWIA_DEV_CAPS)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DumpItemData dispatches through IWiaItem's vtable slot 14.
 func (self *IWiaItem) DumpItemData(bstrData *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DumpDrvItemData dispatches through IWiaItem's vtable slot 15.
 func (self *IWiaItem) DumpDrvItemData(bstrData *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DumpTreeItemData dispatches through IWiaItem's vtable slot 16.
 func (self *IWiaItem) DumpTreeItemData(bstrData *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Diagnostic dispatches through IWiaItem's vtable slot 17.
@@ -655,7 +655,7 @@ func (self *IWiaItem) Diagnostic(pBuffer []byte) error {
 		_pBuffer = &pBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(_pBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWiaItem2: https://learn.microsoft.com/windows/win32/wia/-wia-iwiaitem2
@@ -670,91 +670,91 @@ var IID_IWiaItem2 = win32.GUID{Data1: 0x6cba0075, Data2: 0x1287, Data3: 0x407d, 
 // CreateChildItem dispatches through IWiaItem2's vtable slot 3.
 func (self *IWiaItem2) CreateChildItem(lItemFlags int32, lCreationFlags int32, bstrItemName foundation.BSTR, ppIWiaItem2 **IWiaItem2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lItemFlags), uintptr(lCreationFlags), uintptr(unsafe.Pointer(bstrItemName)), uintptr(unsafe.Pointer(ppIWiaItem2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteItem dispatches through IWiaItem2's vtable slot 4.
 func (self *IWiaItem2) DeleteItem(lFlags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(lFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumChildItems dispatches through IWiaItem2's vtable slot 5.
 func (self *IWiaItem2) EnumChildItems(pCategoryGUID *win32.GUID, ppIEnumWiaItem2 **IEnumWiaItem2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCategoryGUID)), uintptr(unsafe.Pointer(ppIEnumWiaItem2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FindItemByName dispatches through IWiaItem2's vtable slot 6.
 func (self *IWiaItem2) FindItemByName(lFlags int32, bstrFullItemName foundation.BSTR, ppIWiaItem2 **IWiaItem2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(bstrFullItemName)), uintptr(unsafe.Pointer(ppIWiaItem2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetItemCategory dispatches through IWiaItem2's vtable slot 7.
 func (self *IWiaItem2) GetItemCategory(pItemCategoryGUID *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pItemCategoryGUID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetItemType dispatches through IWiaItem2's vtable slot 8.
 func (self *IWiaItem2) GetItemType(pItemType *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pItemType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeviceDlg dispatches through IWiaItem2's vtable slot 9.
 func (self *IWiaItem2) DeviceDlg(lFlags int32, hwndParent foundation.HWND, bstrFolderName foundation.BSTR, bstrFilename foundation.BSTR, plNumFiles *int32, ppbstrFilePaths **foundation.BSTR, ppItem **IWiaItem2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(hwndParent), uintptr(unsafe.Pointer(bstrFolderName)), uintptr(unsafe.Pointer(bstrFilename)), uintptr(unsafe.Pointer(plNumFiles)), uintptr(unsafe.Pointer(ppbstrFilePaths)), uintptr(unsafe.Pointer(ppItem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeviceCommand dispatches through IWiaItem2's vtable slot 10.
 func (self *IWiaItem2) DeviceCommand(lFlags int32, pCmdGUID *win32.GUID, ppIWiaItem2 **IWiaItem2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(pCmdGUID)), uintptr(unsafe.Pointer(ppIWiaItem2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumDeviceCapabilities dispatches through IWiaItem2's vtable slot 11.
 func (self *IWiaItem2) EnumDeviceCapabilities(lFlags int32, ppIEnumWIA_DEV_CAPS **IEnumWIA_DEV_CAPS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(ppIEnumWIA_DEV_CAPS)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CheckExtension dispatches through IWiaItem2's vtable slot 12.
 func (self *IWiaItem2) CheckExtension(lFlags int32, bstrName foundation.BSTR, riidExtensionInterface *win32.GUID, pbExtensionExists *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(riidExtensionInterface)), uintptr(unsafe.Pointer(pbExtensionExists)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetExtension dispatches through IWiaItem2's vtable slot 13.
 func (self *IWiaItem2) GetExtension(lFlags int32, bstrName foundation.BSTR, riidExtensionInterface *win32.GUID, ppOut **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(riidExtensionInterface)), uintptr(unsafe.Pointer(ppOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetParentItem dispatches through IWiaItem2's vtable slot 14.
 func (self *IWiaItem2) GetParentItem(ppIWiaItem2 **IWiaItem2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIWiaItem2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRootItem dispatches through IWiaItem2's vtable slot 15.
 func (self *IWiaItem2) GetRootItem(ppIWiaItem2 **IWiaItem2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIWiaItem2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPreviewComponent dispatches through IWiaItem2's vtable slot 16.
 func (self *IWiaItem2) GetPreviewComponent(lFlags int32, ppWiaPreview **IWiaPreview) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(ppWiaPreview)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumRegisterEventInfo dispatches through IWiaItem2's vtable slot 17.
 func (self *IWiaItem2) EnumRegisterEventInfo(lFlags int32, pEventGUID *win32.GUID, ppIEnum **IEnumWIA_DEV_CAPS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(pEventGUID)), uintptr(unsafe.Pointer(ppIEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Diagnostic dispatches through IWiaItem2's vtable slot 18.
@@ -764,7 +764,7 @@ func (self *IWiaItem2) Diagnostic(pBuffer []byte) error {
 		_pBuffer = &pBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(_pBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWiaItemExtras: https://learn.microsoft.com/windows/win32/api/wia_xp/nn-wia_xp-iwiaitemextras
@@ -779,7 +779,7 @@ var IID_IWiaItemExtras = win32.GUID{Data1: 0x6291ef2c, Data2: 0x36ef, Data3: 0x4
 // GetExtendedErrorInfo dispatches through IWiaItemExtras's vtable slot 3.
 func (self *IWiaItemExtras) GetExtendedErrorInfo(bstrErrorText *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrErrorText)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Escape dispatches through IWiaItemExtras's vtable slot 4.
@@ -793,13 +793,13 @@ func (self *IWiaItemExtras) Escape(dwEscapeCode uint32, lpInData []byte, pOutDat
 		_pOutData = &pOutData[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwEscapeCode), uintptr(unsafe.Pointer(_lpInData)), uintptr(len(lpInData)), uintptr(unsafe.Pointer(_pOutData)), uintptr(len(pOutData)), uintptr(unsafe.Pointer(pdwActualDataSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CancelPendingIO dispatches through IWiaItemExtras's vtable slot 5.
 func (self *IWiaItemExtras) CancelPendingIO() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWiaLog: https://learn.microsoft.com/windows/win32/api/wia_xp/nn-wia_xp-iwialog
@@ -814,19 +814,19 @@ var IID_IWiaLog = win32.GUID{Data1: 0xa00c10b6, Data2: 0x82a1, Data3: 0x452f, Da
 // InitializeLog dispatches through IWiaLog's vtable slot 3.
 func (self *IWiaLog) InitializeLog(hInstance int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hInstance))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HResult dispatches through IWiaLog's vtable slot 4.
 func (self *IWiaLog) HResult(hResult foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hResult))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Log dispatches through IWiaLog's vtable slot 5.
 func (self *IWiaLog) Log(lFlags int32, lResID int32, lDetail int32, bstrText foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(lResID), uintptr(lDetail), uintptr(unsafe.Pointer(bstrText)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWiaLogEx: https://learn.microsoft.com/windows/win32/api/wia_xp/nn-wia_xp-iwialogex
@@ -841,31 +841,31 @@ var IID_IWiaLogEx = win32.GUID{Data1: 0xaf1f22ac, Data2: 0x7a40, Data3: 0x4787, 
 // InitializeLogEx dispatches through IWiaLogEx's vtable slot 3.
 func (self *IWiaLogEx) InitializeLogEx(hInstance *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hInstance)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HResult dispatches through IWiaLogEx's vtable slot 4.
 func (self *IWiaLogEx) HResult(hResult foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hResult))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Log dispatches through IWiaLogEx's vtable slot 5.
 func (self *IWiaLogEx) Log(lFlags int32, lResID int32, lDetail int32, bstrText foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(lResID), uintptr(lDetail), uintptr(unsafe.Pointer(bstrText)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HResultEx dispatches through IWiaLogEx's vtable slot 6.
 func (self *IWiaLogEx) HResultEx(lMethodId int32, hResult foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(lMethodId), uintptr(hResult))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LogEx dispatches through IWiaLogEx's vtable slot 7.
 func (self *IWiaLogEx) LogEx(lMethodId int32, lFlags int32, lResID int32, lDetail int32, bstrText foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(lMethodId), uintptr(lFlags), uintptr(lResID), uintptr(lDetail), uintptr(unsafe.Pointer(bstrText)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: d8cdee14-3c6c-11d2-9a35-00c04fa36145
@@ -879,103 +879,103 @@ var IID_IWiaMiniDrv = win32.GUID{Data1: 0xd8cdee14, Data2: 0x3c6c, Data3: 0x11d2
 // DrvInitializeWia dispatches through IWiaMiniDrv's vtable slot 3.
 func (self *IWiaMiniDrv) DrvInitializeWia(__MIDL__IWiaMiniDrv0000 *byte, __MIDL__IWiaMiniDrv0001 int32, __MIDL__IWiaMiniDrv0002 foundation.BSTR, __MIDL__IWiaMiniDrv0003 foundation.BSTR, __MIDL__IWiaMiniDrv0004 *systemcom.IUnknown, __MIDL__IWiaMiniDrv0005 *systemcom.IUnknown, __MIDL__IWiaMiniDrv0006 **IWiaDrvItem, __MIDL__IWiaMiniDrv0007 **systemcom.IUnknown, __MIDL__IWiaMiniDrv0008 *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0000)), uintptr(__MIDL__IWiaMiniDrv0001), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0002)), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0003)), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0004)), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0005)), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0006)), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0007)), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0008)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrvAcquireItemData dispatches through IWiaMiniDrv's vtable slot 4.
 func (self *IWiaMiniDrv) DrvAcquireItemData(__MIDL__IWiaMiniDrv0009 *byte, __MIDL__IWiaMiniDrv0010 int32, __MIDL__IWiaMiniDrv0011 *MINIDRV_TRANSFER_CONTEXT, __MIDL__IWiaMiniDrv0012 *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0009)), uintptr(__MIDL__IWiaMiniDrv0010), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0011)), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0012)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrvInitItemProperties dispatches through IWiaMiniDrv's vtable slot 5.
 func (self *IWiaMiniDrv) DrvInitItemProperties(__MIDL__IWiaMiniDrv0013 *byte, __MIDL__IWiaMiniDrv0014 int32, __MIDL__IWiaMiniDrv0015 *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0013)), uintptr(__MIDL__IWiaMiniDrv0014), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0015)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrvValidateItemProperties dispatches through IWiaMiniDrv's vtable slot 6.
 func (self *IWiaMiniDrv) DrvValidateItemProperties(__MIDL__IWiaMiniDrv0016 *byte, __MIDL__IWiaMiniDrv0017 int32, __MIDL__IWiaMiniDrv0018 uint32, __MIDL__IWiaMiniDrv0019 *systemcomstructuredstorage.PROPSPEC, __MIDL__IWiaMiniDrv0020 *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0016)), uintptr(__MIDL__IWiaMiniDrv0017), uintptr(__MIDL__IWiaMiniDrv0018), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0019)), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0020)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrvWriteItemProperties dispatches through IWiaMiniDrv's vtable slot 7.
 func (self *IWiaMiniDrv) DrvWriteItemProperties(__MIDL__IWiaMiniDrv0021 *byte, __MIDL__IWiaMiniDrv0022 int32, __MIDL__IWiaMiniDrv0023 *MINIDRV_TRANSFER_CONTEXT, __MIDL__IWiaMiniDrv0024 *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0021)), uintptr(__MIDL__IWiaMiniDrv0022), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0023)), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0024)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrvReadItemProperties dispatches through IWiaMiniDrv's vtable slot 8.
 func (self *IWiaMiniDrv) DrvReadItemProperties(__MIDL__IWiaMiniDrv0025 *byte, __MIDL__IWiaMiniDrv0026 int32, __MIDL__IWiaMiniDrv0027 uint32, __MIDL__IWiaMiniDrv0028 *systemcomstructuredstorage.PROPSPEC, __MIDL__IWiaMiniDrv0029 *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0025)), uintptr(__MIDL__IWiaMiniDrv0026), uintptr(__MIDL__IWiaMiniDrv0027), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0028)), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0029)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrvLockWiaDevice dispatches through IWiaMiniDrv's vtable slot 9.
 func (self *IWiaMiniDrv) DrvLockWiaDevice(__MIDL__IWiaMiniDrv0030 *byte, __MIDL__IWiaMiniDrv0031 int32, __MIDL__IWiaMiniDrv0032 *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0030)), uintptr(__MIDL__IWiaMiniDrv0031), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0032)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrvUnLockWiaDevice dispatches through IWiaMiniDrv's vtable slot 10.
 func (self *IWiaMiniDrv) DrvUnLockWiaDevice(__MIDL__IWiaMiniDrv0033 *byte, __MIDL__IWiaMiniDrv0034 int32, __MIDL__IWiaMiniDrv0035 *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0033)), uintptr(__MIDL__IWiaMiniDrv0034), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0035)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrvAnalyzeItem dispatches through IWiaMiniDrv's vtable slot 11.
 func (self *IWiaMiniDrv) DrvAnalyzeItem(__MIDL__IWiaMiniDrv0036 *byte, __MIDL__IWiaMiniDrv0037 int32, __MIDL__IWiaMiniDrv0038 *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0036)), uintptr(__MIDL__IWiaMiniDrv0037), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0038)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrvGetDeviceErrorStr dispatches through IWiaMiniDrv's vtable slot 12.
 func (self *IWiaMiniDrv) DrvGetDeviceErrorStr(__MIDL__IWiaMiniDrv0039 int32, __MIDL__IWiaMiniDrv0040 int32, __MIDL__IWiaMiniDrv0041 *foundation.PWSTR, __MIDL__IWiaMiniDrv0042 *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(__MIDL__IWiaMiniDrv0039), uintptr(__MIDL__IWiaMiniDrv0040), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0041)), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0042)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrvDeviceCommand dispatches through IWiaMiniDrv's vtable slot 13.
 func (self *IWiaMiniDrv) DrvDeviceCommand(__MIDL__IWiaMiniDrv0043 *byte, __MIDL__IWiaMiniDrv0044 int32, __MIDL__IWiaMiniDrv0045 *win32.GUID, __MIDL__IWiaMiniDrv0046 **IWiaDrvItem, __MIDL__IWiaMiniDrv0047 *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0043)), uintptr(__MIDL__IWiaMiniDrv0044), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0045)), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0046)), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0047)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrvGetCapabilities dispatches through IWiaMiniDrv's vtable slot 14.
 func (self *IWiaMiniDrv) DrvGetCapabilities(__MIDL__IWiaMiniDrv0048 *byte, __MIDL__IWiaMiniDrv0049 int32, __MIDL__IWiaMiniDrv0050 *int32, __MIDL__IWiaMiniDrv0051 **WIA_DEV_CAP_DRV, __MIDL__IWiaMiniDrv0052 *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0048)), uintptr(__MIDL__IWiaMiniDrv0049), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0050)), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0051)), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0052)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrvDeleteItem dispatches through IWiaMiniDrv's vtable slot 15.
 func (self *IWiaMiniDrv) DrvDeleteItem(__MIDL__IWiaMiniDrv0053 *byte, __MIDL__IWiaMiniDrv0054 int32, __MIDL__IWiaMiniDrv0055 *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0053)), uintptr(__MIDL__IWiaMiniDrv0054), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0055)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrvFreeDrvItemContext dispatches through IWiaMiniDrv's vtable slot 16.
 func (self *IWiaMiniDrv) DrvFreeDrvItemContext(__MIDL__IWiaMiniDrv0056 int32, __MIDL__IWiaMiniDrv0057 *byte, __MIDL__IWiaMiniDrv0058 *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(__MIDL__IWiaMiniDrv0056), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0057)), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0058)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrvGetWiaFormatInfo dispatches through IWiaMiniDrv's vtable slot 17.
 func (self *IWiaMiniDrv) DrvGetWiaFormatInfo(__MIDL__IWiaMiniDrv0059 *byte, __MIDL__IWiaMiniDrv0060 int32, __MIDL__IWiaMiniDrv0061 *int32, __MIDL__IWiaMiniDrv0062 **WIA_FORMAT_INFO, __MIDL__IWiaMiniDrv0063 *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0059)), uintptr(__MIDL__IWiaMiniDrv0060), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0061)), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0062)), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0063)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrvNotifyPnpEvent dispatches through IWiaMiniDrv's vtable slot 18.
 func (self *IWiaMiniDrv) DrvNotifyPnpEvent(pEventGUID *win32.GUID, bstrDeviceID foundation.BSTR, ulReserved uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEventGUID)), uintptr(unsafe.Pointer(bstrDeviceID)), uintptr(ulReserved))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrvUnInitializeWia dispatches through IWiaMiniDrv's vtable slot 19.
 func (self *IWiaMiniDrv) DrvUnInitializeWia(__MIDL__IWiaMiniDrv0064 *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__IWiaMiniDrv0064)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 33a57d5a-3de8-11d2-9a36-00c04fa36145
@@ -989,7 +989,7 @@ var IID_IWiaMiniDrvCallBack = win32.GUID{Data1: 0x33a57d5a, Data2: 0x3de8, Data3
 // MiniDrvCallback dispatches through IWiaMiniDrvCallBack's vtable slot 3.
 func (self *IWiaMiniDrvCallBack) MiniDrvCallback(lReason int32, lStatus int32, lPercentComplete int32, lOffset int32, lLength int32, pTranCtx *MINIDRV_TRANSFER_CONTEXT, lReserved int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lReason), uintptr(lStatus), uintptr(lPercentComplete), uintptr(lOffset), uintptr(lLength), uintptr(unsafe.Pointer(pTranCtx)), uintptr(lReserved))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: a9d2ee89-2ce5-4ff0-8adb-c961d1d774ca
@@ -1003,13 +1003,13 @@ var IID_IWiaMiniDrvTransferCallback = win32.GUID{Data1: 0xa9d2ee89, Data2: 0x2ce
 // GetNextStream dispatches through IWiaMiniDrvTransferCallback's vtable slot 3.
 func (self *IWiaMiniDrvTransferCallback) GetNextStream(lFlags int32, bstrItemName foundation.BSTR, bstrFullItemName foundation.BSTR, ppIStream **systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(bstrItemName)), uintptr(unsafe.Pointer(bstrFullItemName)), uintptr(unsafe.Pointer(ppIStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendMessage dispatches through IWiaMiniDrvTransferCallback's vtable slot 4.
 func (self *IWiaMiniDrvTransferCallback) SendMessage(lFlags int32, pWiaTransferParams *WiaTransferParams) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(pWiaTransferParams)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWiaNotifyDevMgr: https://learn.microsoft.com/windows/win32/api/wia_xp/nn-wia_xp-iwianotifydevmgr
@@ -1024,7 +1024,7 @@ var IID_IWiaNotifyDevMgr = win32.GUID{Data1: 0x70681ea0, Data2: 0xe7bf, Data3: 0
 // NewDeviceArrival dispatches through IWiaNotifyDevMgr's vtable slot 3.
 func (self *IWiaNotifyDevMgr) NewDeviceArrival() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWiaPreview: https://learn.microsoft.com/windows/win32/wia/-wia-iwiapreview
@@ -1039,25 +1039,25 @@ var IID_IWiaPreview = win32.GUID{Data1: 0x95c2b4fd, Data2: 0x33f2, Data3: 0x4d86
 // GetNewPreview dispatches through IWiaPreview's vtable slot 3.
 func (self *IWiaPreview) GetNewPreview(lFlags int32, pWiaItem2 *IWiaItem2, pWiaTransferCallback *IWiaTransferCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(pWiaItem2)), uintptr(unsafe.Pointer(pWiaTransferCallback)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UpdatePreview dispatches through IWiaPreview's vtable slot 4.
 func (self *IWiaPreview) UpdatePreview(lFlags int32, pChildWiaItem2 *IWiaItem2, pWiaTransferCallback *IWiaTransferCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(pChildWiaItem2)), uintptr(unsafe.Pointer(pWiaTransferCallback)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DetectRegions dispatches through IWiaPreview's vtable slot 5.
 func (self *IWiaPreview) DetectRegions(lFlags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(lFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through IWiaPreview's vtable slot 6.
 func (self *IWiaPreview) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWiaPropertyStorage: https://learn.microsoft.com/windows/win32/api/wia_xp/nn-wia_xp-iwiapropertystorage
@@ -1072,13 +1072,13 @@ var IID_IWiaPropertyStorage = win32.GUID{Data1: 0x98b5e8a0, Data2: 0x29cc, Data3
 // ReadMultiple dispatches through IWiaPropertyStorage's vtable slot 3.
 func (self *IWiaPropertyStorage) ReadMultiple(cpspec uint32, rgpspec *systemcomstructuredstorage.PROPSPEC, rgpropvar *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cpspec), uintptr(unsafe.Pointer(rgpspec)), uintptr(unsafe.Pointer(rgpropvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteMultiple dispatches through IWiaPropertyStorage's vtable slot 4.
 func (self *IWiaPropertyStorage) WriteMultiple(cpspec uint32, rgpspec *systemcomstructuredstorage.PROPSPEC, rgpropvar *systemcomstructuredstorage.PROPVARIANT, propidNameFirst uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cpspec), uintptr(unsafe.Pointer(rgpspec)), uintptr(unsafe.Pointer(rgpropvar)), uintptr(propidNameFirst))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteMultiple dispatches through IWiaPropertyStorage's vtable slot 5.
@@ -1088,19 +1088,19 @@ func (self *IWiaPropertyStorage) DeleteMultiple(rgpspec []systemcomstructuredsto
 		_rgpspec = &rgpspec[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(len(rgpspec)), uintptr(unsafe.Pointer(_rgpspec)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReadPropertyNames dispatches through IWiaPropertyStorage's vtable slot 6.
 func (self *IWiaPropertyStorage) ReadPropertyNames(cpropid uint32, rgpropid *uint32, rglpwstrName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(cpropid), uintptr(unsafe.Pointer(rgpropid)), uintptr(unsafe.Pointer(rglpwstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WritePropertyNames dispatches through IWiaPropertyStorage's vtable slot 7.
 func (self *IWiaPropertyStorage) WritePropertyNames(cpropid uint32, rgpropid *uint32, rglpwstrName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(cpropid), uintptr(unsafe.Pointer(rgpropid)), uintptr(unsafe.Pointer(rglpwstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeletePropertyNames dispatches through IWiaPropertyStorage's vtable slot 8.
@@ -1110,67 +1110,67 @@ func (self *IWiaPropertyStorage) DeletePropertyNames(rgpropid []uint32) error {
 		_rgpropid = &rgpropid[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(len(rgpropid)), uintptr(unsafe.Pointer(_rgpropid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Commit dispatches through IWiaPropertyStorage's vtable slot 9.
 func (self *IWiaPropertyStorage) Commit(grfCommitFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(grfCommitFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Revert dispatches through IWiaPropertyStorage's vtable slot 10.
 func (self *IWiaPropertyStorage) Revert() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Enum dispatches through IWiaPropertyStorage's vtable slot 11.
 func (self *IWiaPropertyStorage) Enum(ppenum **systemcomstructuredstorage.IEnumSTATPROPSTG) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTimes dispatches through IWiaPropertyStorage's vtable slot 12.
 func (self *IWiaPropertyStorage) SetTimes(pctime *foundation.FILETIME, patime *foundation.FILETIME, pmtime *foundation.FILETIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pctime)), uintptr(unsafe.Pointer(patime)), uintptr(unsafe.Pointer(pmtime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetClass dispatches through IWiaPropertyStorage's vtable slot 13.
 func (self *IWiaPropertyStorage) SetClass(clsid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Stat dispatches through IWiaPropertyStorage's vtable slot 14.
 func (self *IWiaPropertyStorage) Stat(pstatpsstg *systemcomstructuredstorage.STATPROPSETSTG) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstatpsstg)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPropertyAttributes dispatches through IWiaPropertyStorage's vtable slot 15.
 func (self *IWiaPropertyStorage) GetPropertyAttributes(cpspec uint32, rgpspec *systemcomstructuredstorage.PROPSPEC, rgflags *uint32, rgpropvar *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(cpspec), uintptr(unsafe.Pointer(rgpspec)), uintptr(unsafe.Pointer(rgflags)), uintptr(unsafe.Pointer(rgpropvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCount dispatches through IWiaPropertyStorage's vtable slot 16.
 func (self *IWiaPropertyStorage) GetCount(pulNumProps *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulNumProps)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPropertyStream dispatches through IWiaPropertyStorage's vtable slot 17.
 func (self *IWiaPropertyStorage) GetPropertyStream(pCompatibilityId *win32.GUID, ppIStream **systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCompatibilityId)), uintptr(unsafe.Pointer(ppIStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetPropertyStream dispatches through IWiaPropertyStorage's vtable slot 18.
 func (self *IWiaPropertyStorage) SetPropertyStream(pCompatibilityId *win32.GUID, pIStream *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCompatibilityId)), uintptr(unsafe.Pointer(pIStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWiaSegmentationFilter: https://learn.microsoft.com/windows/win32/wia/-wia-iwiasegmentationfilter
@@ -1185,7 +1185,7 @@ var IID_IWiaSegmentationFilter = win32.GUID{Data1: 0xec46a697, Data2: 0xac04, Da
 // DetectRegions dispatches through IWiaSegmentationFilter's vtable slot 3.
 func (self *IWiaSegmentationFilter) DetectRegions(lFlags int32, pInputStream *systemcom.IStream, pWiaItem2 *IWiaItem2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(pInputStream)), uintptr(unsafe.Pointer(pWiaItem2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWiaTransfer: https://learn.microsoft.com/windows/win32/wia/-wia-iwiatransfer
@@ -1200,25 +1200,25 @@ var IID_IWiaTransfer = win32.GUID{Data1: 0xc39d6942, Data2: 0x2f4e, Data3: 0x4d0
 // Download dispatches through IWiaTransfer's vtable slot 3.
 func (self *IWiaTransfer) Download(lFlags int32, pIWiaTransferCallback *IWiaTransferCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(pIWiaTransferCallback)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Upload dispatches through IWiaTransfer's vtable slot 4.
 func (self *IWiaTransfer) Upload(lFlags int32, pSource *systemcom.IStream, pIWiaTransferCallback *IWiaTransferCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(pSource)), uintptr(unsafe.Pointer(pIWiaTransferCallback)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Cancel dispatches through IWiaTransfer's vtable slot 5.
 func (self *IWiaTransfer) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumWIA_FORMAT_INFO dispatches through IWiaTransfer's vtable slot 6.
 func (self *IWiaTransfer) EnumWIA_FORMAT_INFO(ppEnum **IEnumWIA_FORMAT_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWiaTransferCallback: https://learn.microsoft.com/windows/win32/wia/-wia-iwiatransfercallback
@@ -1233,13 +1233,13 @@ var IID_IWiaTransferCallback = win32.GUID{Data1: 0x27d4eaaf, Data2: 0x28a6, Data
 // TransferCallback dispatches through IWiaTransferCallback's vtable slot 3.
 func (self *IWiaTransferCallback) TransferCallback(lFlags int32, pWiaTransferParams *WiaTransferParams) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(pWiaTransferParams)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNextStream dispatches through IWiaTransferCallback's vtable slot 4.
 func (self *IWiaTransferCallback) GetNextStream(lFlags int32, bstrItemName foundation.BSTR, bstrFullItemName foundation.BSTR, ppDestination **systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(bstrItemName)), uintptr(unsafe.Pointer(bstrFullItemName)), uintptr(unsafe.Pointer(ppDestination)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWiaUIExtension: https://learn.microsoft.com/windows/win32/wia/-wia-iwiauiextension
@@ -1254,19 +1254,19 @@ var IID_IWiaUIExtension = win32.GUID{Data1: 0xda319113, Data2: 0x50ee, Data3: 0x
 // DeviceDialog dispatches through IWiaUIExtension's vtable slot 3.
 func (self *IWiaUIExtension) DeviceDialog(pDeviceDialogData *DEVICEDIALOGDATA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDeviceDialogData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceIcon dispatches through IWiaUIExtension's vtable slot 4.
 func (self *IWiaUIExtension) GetDeviceIcon(bstrDeviceId foundation.BSTR, phIcon *uiwindowsandmessaging.HICON, nSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDeviceId)), uintptr(unsafe.Pointer(phIcon)), uintptr(nSize))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceBitmapLogo dispatches through IWiaUIExtension's vtable slot 5.
 func (self *IWiaUIExtension) GetDeviceBitmapLogo(bstrDeviceId foundation.BSTR, phBitmap *graphicsgdi.HBITMAP, nMaxWidth uint32, nMaxHeight uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDeviceId)), uintptr(unsafe.Pointer(phBitmap)), uintptr(nMaxWidth), uintptr(nMaxHeight))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWiaUIExtension2: https://learn.microsoft.com/windows/win32/wia/-wia-iwiauiextension2
@@ -1281,13 +1281,13 @@ var IID_IWiaUIExtension2 = win32.GUID{Data1: 0x305600d7, Data2: 0x5088, Data3: 0
 // DeviceDialog dispatches through IWiaUIExtension2's vtable slot 3.
 func (self *IWiaUIExtension2) DeviceDialog(pDeviceDialogData *DEVICEDIALOGDATA2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDeviceDialogData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceIcon dispatches through IWiaUIExtension2's vtable slot 4.
 func (self *IWiaUIExtension2) GetDeviceIcon(bstrDeviceId foundation.BSTR, phIcon *uiwindowsandmessaging.HICON, nSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDeviceId)), uintptr(unsafe.Pointer(phIcon)), uintptr(nSize))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWiaVideo: https://learn.microsoft.com/windows/win32/api/wiavideo/nn-wiavideo-iwiavideo
@@ -1302,26 +1302,26 @@ var IID_IWiaVideo = win32.GUID{Data1: 0xd52920aa, Data2: 0xdb88, Data3: 0x41f0, 
 // Get_PreviewVisible dispatches through IWiaVideo's vtable slot 3.
 func (self *IWiaVideo) Get_PreviewVisible(pbPreviewVisible *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbPreviewVisible)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PreviewVisible dispatches through IWiaVideo's vtable slot 4.
 func (self *IWiaVideo) Put_PreviewVisible(bPreviewVisible bool) error {
 	_bPreviewVisible := win32.Bool32(bPreviewVisible)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(_bPreviewVisible))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ImagesDirectory dispatches through IWiaVideo's vtable slot 5.
 func (self *IWiaVideo) Get_ImagesDirectory(pbstrImageDirectory *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrImageDirectory)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ImagesDirectory dispatches through IWiaVideo's vtable slot 6.
 func (self *IWiaVideo) Put_ImagesDirectory(bstrImageDirectory foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrImageDirectory)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateVideoByWiaDevID dispatches through IWiaVideo's vtable slot 7.
@@ -1329,7 +1329,7 @@ func (self *IWiaVideo) CreateVideoByWiaDevID(bstrWiaDeviceID foundation.BSTR, hw
 	_bStretchToFitParent := win32.Bool32(bStretchToFitParent)
 	_bAutoBeginPlayback := win32.Bool32(bAutoBeginPlayback)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrWiaDeviceID)), uintptr(hwndParent), uintptr(_bStretchToFitParent), uintptr(_bAutoBeginPlayback))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateVideoByDevNum dispatches through IWiaVideo's vtable slot 8.
@@ -1337,7 +1337,7 @@ func (self *IWiaVideo) CreateVideoByDevNum(uiDeviceNumber uint32, hwndParent fou
 	_bStretchToFitParent := win32.Bool32(bStretchToFitParent)
 	_bAutoBeginPlayback := win32.Bool32(bAutoBeginPlayback)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(uiDeviceNumber), uintptr(hwndParent), uintptr(_bStretchToFitParent), uintptr(_bAutoBeginPlayback))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateVideoByName dispatches through IWiaVideo's vtable slot 9.
@@ -1345,42 +1345,42 @@ func (self *IWiaVideo) CreateVideoByName(bstrFriendlyName foundation.BSTR, hwndP
 	_bStretchToFitParent := win32.Bool32(bStretchToFitParent)
 	_bAutoBeginPlayback := win32.Bool32(bAutoBeginPlayback)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrFriendlyName)), uintptr(hwndParent), uintptr(_bStretchToFitParent), uintptr(_bAutoBeginPlayback))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DestroyVideo dispatches through IWiaVideo's vtable slot 10.
 func (self *IWiaVideo) DestroyVideo() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Play dispatches through IWiaVideo's vtable slot 11.
 func (self *IWiaVideo) Play() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Pause dispatches through IWiaVideo's vtable slot 12.
 func (self *IWiaVideo) Pause() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TakePicture dispatches through IWiaVideo's vtable slot 13.
 func (self *IWiaVideo) TakePicture(pbstrNewImageFilename *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrNewImageFilename)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ResizeVideo dispatches through IWiaVideo's vtable slot 14.
 func (self *IWiaVideo) ResizeVideo(bStretchToFitParent bool) error {
 	_bStretchToFitParent := win32.Bool32(bStretchToFitParent)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(_bStretchToFitParent))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentState dispatches through IWiaVideo's vtable slot 15.
 func (self *IWiaVideo) GetCurrentState(pState *WIAVIDEO_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

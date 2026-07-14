@@ -28,7 +28,7 @@ func (self *INetDiagExtensibleHelper) ResolveAttributes(rgKeyAttributes []HELPER
 		_rgKeyAttributes = &rgKeyAttributes[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgKeyAttributes)), uintptr(unsafe.Pointer(_rgKeyAttributes)), uintptr(unsafe.Pointer(pcelt)), uintptr(unsafe.Pointer(prgMatchValues)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // INetDiagHelper: https://learn.microsoft.com/windows/win32/api/ndhelper/nn-ndhelper-inetdiaghelper
@@ -47,106 +47,106 @@ func (self *INetDiagHelper) Initialize(rgAttributes []HELPER_ATTRIBUTE) error {
 		_rgAttributes = &rgAttributes[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgAttributes)), uintptr(unsafe.Pointer(_rgAttributes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDiagnosticsInfo dispatches through INetDiagHelper's vtable slot 4.
 func (self *INetDiagHelper) GetDiagnosticsInfo() (*DiagnosticsInfo, error) {
 	var _ppInfo *DiagnosticsInfo
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppInfo)))
-	return _ppInfo, win32.HRESULTError(int32(r1))
+	return _ppInfo, win32.ErrIfFailed(int32(r1))
 }
 
 // GetKeyAttributes dispatches through INetDiagHelper's vtable slot 5.
 func (self *INetDiagHelper) GetKeyAttributes(pcelt *uint32, pprgAttributes **HELPER_ATTRIBUTE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcelt)), uintptr(unsafe.Pointer(pprgAttributes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LowHealth dispatches through INetDiagHelper's vtable slot 6.
 func (self *INetDiagHelper) LowHealth(pwszInstanceDescription string, ppwszDescription *foundation.PWSTR, pDeferredTime *int32, pStatus *DIAGNOSIS_STATUS) error {
 	_pwszInstanceDescription := win32.UTF16Ptr(pwszInstanceDescription)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszInstanceDescription)), uintptr(unsafe.Pointer(ppwszDescription)), uintptr(unsafe.Pointer(pDeferredTime)), uintptr(unsafe.Pointer(pStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HighUtilization dispatches through INetDiagHelper's vtable slot 7.
 func (self *INetDiagHelper) HighUtilization(pwszInstanceDescription string, ppwszDescription *foundation.PWSTR, pDeferredTime *int32, pStatus *DIAGNOSIS_STATUS) error {
 	_pwszInstanceDescription := win32.UTF16Ptr(pwszInstanceDescription)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszInstanceDescription)), uintptr(unsafe.Pointer(ppwszDescription)), uintptr(unsafe.Pointer(pDeferredTime)), uintptr(unsafe.Pointer(pStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLowerHypotheses dispatches through INetDiagHelper's vtable slot 8.
 func (self *INetDiagHelper) GetLowerHypotheses(pcelt *uint32, pprgHypotheses **HYPOTHESIS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcelt)), uintptr(unsafe.Pointer(pprgHypotheses)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDownStreamHypotheses dispatches through INetDiagHelper's vtable slot 9.
 func (self *INetDiagHelper) GetDownStreamHypotheses(pcelt *uint32, pprgHypotheses **HYPOTHESIS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcelt)), uintptr(unsafe.Pointer(pprgHypotheses)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetHigherHypotheses dispatches through INetDiagHelper's vtable slot 10.
 func (self *INetDiagHelper) GetHigherHypotheses(pcelt *uint32, pprgHypotheses **HYPOTHESIS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcelt)), uintptr(unsafe.Pointer(pprgHypotheses)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetUpStreamHypotheses dispatches through INetDiagHelper's vtable slot 11.
 func (self *INetDiagHelper) GetUpStreamHypotheses(pcelt *uint32, pprgHypotheses **HYPOTHESIS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcelt)), uintptr(unsafe.Pointer(pprgHypotheses)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Repair dispatches through INetDiagHelper's vtable slot 12.
 func (self *INetDiagHelper) Repair(pInfo *RepairInfo, pDeferredTime *int32, pStatus *REPAIR_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(pDeferredTime)), uintptr(unsafe.Pointer(pStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Validate dispatches through INetDiagHelper's vtable slot 13.
 func (self *INetDiagHelper) Validate(problem PROBLEM_TYPE, pDeferredTime *int32, pStatus *REPAIR_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(problem), uintptr(unsafe.Pointer(pDeferredTime)), uintptr(unsafe.Pointer(pStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRepairInfo dispatches through INetDiagHelper's vtable slot 14.
 func (self *INetDiagHelper) GetRepairInfo(problem PROBLEM_TYPE, pcelt *uint32, ppInfo **RepairInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(problem), uintptr(unsafe.Pointer(pcelt)), uintptr(unsafe.Pointer(ppInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLifeTime dispatches through INetDiagHelper's vtable slot 15.
 func (self *INetDiagHelper) GetLifeTime(pLifeTime *LIFE_TIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLifeTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCacheTime dispatches through INetDiagHelper's vtable slot 17.
 func (self *INetDiagHelper) GetCacheTime(pCacheTime *foundation.FILETIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCacheTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAttributes dispatches through INetDiagHelper's vtable slot 18.
 func (self *INetDiagHelper) GetAttributes(pcelt *uint32, pprgAttributes **HELPER_ATTRIBUTE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcelt)), uintptr(unsafe.Pointer(pprgAttributes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Cancel dispatches through INetDiagHelper's vtable slot 19.
 func (self *INetDiagHelper) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Cleanup dispatches through INetDiagHelper's vtable slot 20.
 func (self *INetDiagHelper) Cleanup() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // INetDiagHelperEx: https://learn.microsoft.com/windows/win32/api/ndhelper/nn-ndhelper-inetdiaghelperex
@@ -165,19 +165,19 @@ func (self *INetDiagHelperEx) ReconfirmLowHealth(pResults []HypothesisResult, pp
 		_pResults = &pResults[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pResults)), uintptr(unsafe.Pointer(_pResults)), uintptr(unsafe.Pointer(ppwszUpdatedDescription)), uintptr(unsafe.Pointer(pUpdatedStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetUtilities dispatches through INetDiagHelperEx's vtable slot 4.
 func (self *INetDiagHelperEx) SetUtilities(pUtilities *INetDiagHelperUtilFactory) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUtilities)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReproduceFailure dispatches through INetDiagHelperEx's vtable slot 5.
 func (self *INetDiagHelperEx) ReproduceFailure() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // INetDiagHelperInfo: https://learn.microsoft.com/windows/win32/api/ndhelper/nn-ndhelper-inetdiaghelperinfo
@@ -192,7 +192,7 @@ var IID_INetDiagHelperInfo = win32.GUID{Data1: 0xc0b35747, Data2: 0xebf5, Data3:
 // GetAttributeInfo dispatches through INetDiagHelperInfo's vtable slot 3.
 func (self *INetDiagHelperInfo) GetAttributeInfo(pcelt *uint32, pprgAttributeInfos **HelperAttributeInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcelt)), uintptr(unsafe.Pointer(pprgAttributeInfos)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // INetDiagHelperUtilFactory: https://learn.microsoft.com/windows/win32/api/ndhelper/nn-ndhelper-inetdiaghelperutilfactory
@@ -207,5 +207,5 @@ var IID_INetDiagHelperUtilFactory = win32.GUID{Data1: 0x104613fb, Data2: 0xbc57,
 // CreateUtilityInstance dispatches through INetDiagHelperUtilFactory's vtable slot 3.
 func (self *INetDiagHelperUtilFactory) CreateUtilityInstance(riid *win32.GUID, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

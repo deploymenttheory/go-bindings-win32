@@ -25,13 +25,13 @@ var IID_IFindSimilarResults = win32.GUID{Data1: 0x96236a81, Data2: 0x9dbc, Data3
 // GetSize dispatches through IFindSimilarResults's vtable slot 3.
 func (self *IFindSimilarResults) GetSize(size *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(size)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNextFileId dispatches through IFindSimilarResults's vtable slot 4.
 func (self *IFindSimilarResults) GetNextFileId(numTraitsMatched *uint32, similarityFileId *SimilarityFileId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(numTraitsMatched)), uintptr(unsafe.Pointer(similarityFileId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IRdcComparator: https://learn.microsoft.com/windows/win32/api/msrdc/nn-msrdc-irdccomparator
@@ -47,7 +47,7 @@ var IID_IRdcComparator = win32.GUID{Data1: 0x96236a77, Data2: 0x9dbc, Data3: 0x1
 func (self *IRdcComparator) Process(endOfInput bool, endOfOutput *foundation.BOOL, inputBuffer *RdcBufferPointer, outputBuffer *RdcNeedPointer, rdc_ErrorCode *RDC_ErrorCode) error {
 	_endOfInput := win32.Bool32(endOfInput)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(_endOfInput), uintptr(unsafe.Pointer(endOfOutput)), uintptr(unsafe.Pointer(inputBuffer)), uintptr(unsafe.Pointer(outputBuffer)), uintptr(unsafe.Pointer(rdc_ErrorCode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IRdcFileReader: https://learn.microsoft.com/windows/win32/api/msrdc/nn-msrdc-irdcfilereader
@@ -62,19 +62,19 @@ var IID_IRdcFileReader = win32.GUID{Data1: 0x96236a74, Data2: 0x9dbc, Data3: 0x1
 // GetFileSize dispatches through IRdcFileReader's vtable slot 3.
 func (self *IRdcFileReader) GetFileSize(fileSize *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fileSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Read dispatches through IRdcFileReader's vtable slot 4.
 func (self *IRdcFileReader) Read(offsetFileStart uint64, bytesToRead uint32, bytesActuallyRead *uint32, buffer *byte, eof *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(offsetFileStart), uintptr(bytesToRead), uintptr(unsafe.Pointer(bytesActuallyRead)), uintptr(unsafe.Pointer(buffer)), uintptr(unsafe.Pointer(eof)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFilePosition dispatches through IRdcFileReader's vtable slot 5.
 func (self *IRdcFileReader) GetFilePosition(offsetFromStart *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(offsetFromStart)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IRdcFileWriter: https://learn.microsoft.com/windows/win32/api/msrdc/nn-msrdc-irdcfilewriter
@@ -89,19 +89,19 @@ var IID_IRdcFileWriter = win32.GUID{Data1: 0x96236a75, Data2: 0x9dbc, Data3: 0x1
 // Write dispatches through IRdcFileWriter's vtable slot 6.
 func (self *IRdcFileWriter) Write(offsetFileStart uint64, bytesToWrite uint32, buffer *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(offsetFileStart), uintptr(bytesToWrite), uintptr(unsafe.Pointer(buffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Truncate dispatches through IRdcFileWriter's vtable slot 7.
 func (self *IRdcFileWriter) Truncate() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteOnClose dispatches through IRdcFileWriter's vtable slot 8.
 func (self *IRdcFileWriter) DeleteOnClose() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IRdcGenerator: https://learn.microsoft.com/windows/win32/api/msrdc/nn-msrdc-irdcgenerator
@@ -116,7 +116,7 @@ var IID_IRdcGenerator = win32.GUID{Data1: 0x96236a73, Data2: 0x9dbc, Data3: 0x11
 // GetGeneratorParameters dispatches through IRdcGenerator's vtable slot 3.
 func (self *IRdcGenerator) GetGeneratorParameters(level uint32, iGeneratorParameters **IRdcGeneratorParameters) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(level), uintptr(unsafe.Pointer(iGeneratorParameters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Process dispatches through IRdcGenerator's vtable slot 4.
@@ -127,7 +127,7 @@ func (self *IRdcGenerator) Process(endOfInput bool, endOfOutput *foundation.BOOL
 		_outputBuffers = &outputBuffers[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(_endOfInput), uintptr(unsafe.Pointer(endOfOutput)), uintptr(unsafe.Pointer(inputBuffer)), uintptr(len(outputBuffers)), uintptr(unsafe.Pointer(_outputBuffers)), uintptr(unsafe.Pointer(rdc_ErrorCode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IRdcGeneratorFilterMaxParameters: https://learn.microsoft.com/windows/win32/api/msrdc/nn-msrdc-irdcgeneratorfiltermaxparameters
@@ -142,25 +142,25 @@ var IID_IRdcGeneratorFilterMaxParameters = win32.GUID{Data1: 0x96236a72, Data2: 
 // GetHorizonSize dispatches through IRdcGeneratorFilterMaxParameters's vtable slot 3.
 func (self *IRdcGeneratorFilterMaxParameters) GetHorizonSize(horizonSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(horizonSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetHorizonSize dispatches through IRdcGeneratorFilterMaxParameters's vtable slot 4.
 func (self *IRdcGeneratorFilterMaxParameters) SetHorizonSize(horizonSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(horizonSize))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetHashWindowSize dispatches through IRdcGeneratorFilterMaxParameters's vtable slot 5.
 func (self *IRdcGeneratorFilterMaxParameters) GetHashWindowSize(hashWindowSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hashWindowSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetHashWindowSize dispatches through IRdcGeneratorFilterMaxParameters's vtable slot 6.
 func (self *IRdcGeneratorFilterMaxParameters) SetHashWindowSize(hashWindowSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hashWindowSize))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IRdcGeneratorParameters: https://learn.microsoft.com/windows/win32/api/msrdc/nn-msrdc-irdcgeneratorparameters
@@ -175,25 +175,25 @@ var IID_IRdcGeneratorParameters = win32.GUID{Data1: 0x96236a71, Data2: 0x9dbc, D
 // GetGeneratorParametersType dispatches through IRdcGeneratorParameters's vtable slot 3.
 func (self *IRdcGeneratorParameters) GetGeneratorParametersType(parametersType *GeneratorParametersType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(parametersType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetParametersVersion dispatches through IRdcGeneratorParameters's vtable slot 4.
 func (self *IRdcGeneratorParameters) GetParametersVersion(currentVersion *uint32, minimumCompatibleAppVersion *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(currentVersion)), uintptr(unsafe.Pointer(minimumCompatibleAppVersion)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSerializeSize dispatches through IRdcGeneratorParameters's vtable slot 5.
 func (self *IRdcGeneratorParameters) GetSerializeSize(size *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(size)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Serialize dispatches through IRdcGeneratorParameters's vtable slot 6.
 func (self *IRdcGeneratorParameters) Serialize(size uint32, parametersBlob *byte, bytesWritten *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(size), uintptr(unsafe.Pointer(parametersBlob)), uintptr(unsafe.Pointer(bytesWritten)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IRdcLibrary: https://learn.microsoft.com/windows/win32/api/msrdc/nn-msrdc-irdclibrary
@@ -208,19 +208,19 @@ var IID_IRdcLibrary = win32.GUID{Data1: 0x96236a78, Data2: 0x9dbc, Data3: 0x11da
 // ComputeDefaultRecursionDepth dispatches through IRdcLibrary's vtable slot 3.
 func (self *IRdcLibrary) ComputeDefaultRecursionDepth(fileSize uint64, depth *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(fileSize), uintptr(unsafe.Pointer(depth)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateGeneratorParameters dispatches through IRdcLibrary's vtable slot 4.
 func (self *IRdcLibrary) CreateGeneratorParameters(parametersType GeneratorParametersType, level uint32, iGeneratorParameters **IRdcGeneratorParameters) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(parametersType), uintptr(level), uintptr(unsafe.Pointer(iGeneratorParameters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenGeneratorParameters dispatches through IRdcLibrary's vtable slot 5.
 func (self *IRdcLibrary) OpenGeneratorParameters(size uint32, parametersBlob *byte, iGeneratorParameters **IRdcGeneratorParameters) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(size), uintptr(unsafe.Pointer(parametersBlob)), uintptr(unsafe.Pointer(iGeneratorParameters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateGenerator dispatches through IRdcLibrary's vtable slot 6.
@@ -230,25 +230,25 @@ func (self *IRdcLibrary) CreateGenerator(iGeneratorParametersArray []*IRdcGenera
 		_iGeneratorParametersArray = &iGeneratorParametersArray[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(len(iGeneratorParametersArray)), uintptr(unsafe.Pointer(_iGeneratorParametersArray)), uintptr(unsafe.Pointer(iGenerator)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateComparator dispatches through IRdcLibrary's vtable slot 7.
 func (self *IRdcLibrary) CreateComparator(iSeedSignaturesFile *IRdcFileReader, comparatorBufferSize uint32, iComparator **IRdcComparator) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(iSeedSignaturesFile)), uintptr(comparatorBufferSize), uintptr(unsafe.Pointer(iComparator)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSignatureReader dispatches through IRdcLibrary's vtable slot 8.
 func (self *IRdcLibrary) CreateSignatureReader(iFileReader *IRdcFileReader, iSignatureReader **IRdcSignatureReader) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(iFileReader)), uintptr(unsafe.Pointer(iSignatureReader)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRDCVersion dispatches through IRdcLibrary's vtable slot 9.
 func (self *IRdcLibrary) GetRDCVersion(currentVersion *uint32, minimumCompatibleAppVersion *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(currentVersion)), uintptr(unsafe.Pointer(minimumCompatibleAppVersion)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IRdcSignatureReader: https://learn.microsoft.com/windows/win32/api/msrdc/nn-msrdc-irdcsignaturereader
@@ -263,13 +263,13 @@ var IID_IRdcSignatureReader = win32.GUID{Data1: 0x96236a76, Data2: 0x9dbc, Data3
 // ReadHeader dispatches through IRdcSignatureReader's vtable slot 3.
 func (self *IRdcSignatureReader) ReadHeader(rdc_ErrorCode *RDC_ErrorCode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rdc_ErrorCode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReadSignatures dispatches through IRdcSignatureReader's vtable slot 4.
 func (self *IRdcSignatureReader) ReadSignatures(rdcSignaturePointer *RdcSignaturePointer, endOfOutput *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rdcSignaturePointer)), uintptr(unsafe.Pointer(endOfOutput)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IRdcSimilarityGenerator: https://learn.microsoft.com/windows/win32/api/msrdc/nn-msrdc-irdcsimilaritygenerator
@@ -284,13 +284,13 @@ var IID_IRdcSimilarityGenerator = win32.GUID{Data1: 0x96236a80, Data2: 0x9dbc, D
 // EnableSimilarity dispatches through IRdcSimilarityGenerator's vtable slot 3.
 func (self *IRdcSimilarityGenerator) EnableSimilarity() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Results dispatches through IRdcSimilarityGenerator's vtable slot 4.
 func (self *IRdcSimilarityGenerator) Results(similarityData *SimilarityData) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(similarityData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISimilarity: https://learn.microsoft.com/windows/win32/api/msrdc/nn-msrdc-isimilarity
@@ -307,45 +307,45 @@ func (self *ISimilarity) CreateTable(path string, truncate bool, securityDescrip
 	_path := win32.UTF16Ptr(path)
 	_truncate := win32.Bool32(truncate)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_path)), uintptr(_truncate), uintptr(unsafe.Pointer(securityDescriptor)), uintptr(recordSize), uintptr(unsafe.Pointer(isNew)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateTableIndirect dispatches through ISimilarity's vtable slot 4.
 func (self *ISimilarity) CreateTableIndirect(mapping *ISimilarityTraitsMapping, fileIdFile *IRdcFileWriter, truncate bool, recordSize uint32, isNew *RdcCreatedTables) error {
 	_truncate := win32.Bool32(truncate)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(mapping)), uintptr(unsafe.Pointer(fileIdFile)), uintptr(_truncate), uintptr(recordSize), uintptr(unsafe.Pointer(isNew)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CloseTable dispatches through ISimilarity's vtable slot 5.
 func (self *ISimilarity) CloseTable(isValid bool) error {
 	_isValid := win32.Bool32(isValid)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(_isValid))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Append dispatches through ISimilarity's vtable slot 6.
 func (self *ISimilarity) Append(similarityFileId *SimilarityFileId, similarityData *SimilarityData) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(similarityFileId)), uintptr(unsafe.Pointer(similarityData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FindSimilarFileId dispatches through ISimilarity's vtable slot 7.
 func (self *ISimilarity) FindSimilarFileId(similarityData *SimilarityData, numberOfMatchesRequired uint16, resultsSize uint32, findSimilarResults **IFindSimilarResults) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(similarityData)), uintptr(numberOfMatchesRequired), uintptr(resultsSize), uintptr(unsafe.Pointer(findSimilarResults)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CopyAndSwap dispatches through ISimilarity's vtable slot 8.
 func (self *ISimilarity) CopyAndSwap(newSimilarityTables *ISimilarity, reportProgress *ISimilarityReportProgress) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newSimilarityTables)), uintptr(unsafe.Pointer(reportProgress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRecordCount dispatches through ISimilarity's vtable slot 9.
 func (self *ISimilarity) GetRecordCount(recordCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(recordCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISimilarityFileIdTable: https://learn.microsoft.com/windows/win32/api/msrdc/nn-msrdc-isimilarityfileidtable
@@ -362,45 +362,45 @@ func (self *ISimilarityFileIdTable) CreateTable(path string, truncate bool, secu
 	_path := win32.UTF16Ptr(path)
 	_truncate := win32.Bool32(truncate)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_path)), uintptr(_truncate), uintptr(unsafe.Pointer(securityDescriptor)), uintptr(recordSize), uintptr(unsafe.Pointer(isNew)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateTableIndirect dispatches through ISimilarityFileIdTable's vtable slot 4.
 func (self *ISimilarityFileIdTable) CreateTableIndirect(fileIdFile *IRdcFileWriter, truncate bool, recordSize uint32, isNew *RdcCreatedTables) error {
 	_truncate := win32.Bool32(truncate)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fileIdFile)), uintptr(_truncate), uintptr(recordSize), uintptr(unsafe.Pointer(isNew)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CloseTable dispatches through ISimilarityFileIdTable's vtable slot 5.
 func (self *ISimilarityFileIdTable) CloseTable(isValid bool) error {
 	_isValid := win32.Bool32(isValid)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(_isValid))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Append dispatches through ISimilarityFileIdTable's vtable slot 6.
 func (self *ISimilarityFileIdTable) Append(similarityFileId *SimilarityFileId, similarityFileIndex *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(similarityFileId)), uintptr(unsafe.Pointer(similarityFileIndex)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Lookup dispatches through ISimilarityFileIdTable's vtable slot 7.
 func (self *ISimilarityFileIdTable) Lookup(similarityFileIndex uint32, similarityFileId *SimilarityFileId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(similarityFileIndex), uintptr(unsafe.Pointer(similarityFileId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Invalidate dispatches through ISimilarityFileIdTable's vtable slot 8.
 func (self *ISimilarityFileIdTable) Invalidate(similarityFileIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(similarityFileIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRecordCount dispatches through ISimilarityFileIdTable's vtable slot 9.
 func (self *ISimilarityFileIdTable) GetRecordCount(recordCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(recordCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISimilarityReportProgress: https://learn.microsoft.com/windows/win32/api/msrdc/nn-msrdc-isimilarityreportprogress
@@ -415,7 +415,7 @@ var IID_ISimilarityReportProgress = win32.GUID{Data1: 0x96236a7a, Data2: 0x9dbc,
 // ReportProgress dispatches through ISimilarityReportProgress's vtable slot 3.
 func (self *ISimilarityReportProgress) ReportProgress(percentCompleted uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(percentCompleted))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISimilarityTableDumpState: https://learn.microsoft.com/windows/win32/api/msrdc/nn-msrdc-isimilaritytabledumpstate
@@ -430,7 +430,7 @@ var IID_ISimilarityTableDumpState = win32.GUID{Data1: 0x96236a7b, Data2: 0x9dbc,
 // GetNextData dispatches through ISimilarityTableDumpState's vtable slot 3.
 func (self *ISimilarityTableDumpState) GetNextData(resultsSize uint32, resultsUsed *uint32, eof *foundation.BOOL, results *SimilarityDumpData) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(resultsSize), uintptr(unsafe.Pointer(resultsUsed)), uintptr(unsafe.Pointer(eof)), uintptr(unsafe.Pointer(results)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISimilarityTraitsMappedView: https://learn.microsoft.com/windows/win32/api/msrdc/nn-msrdc-isimilaritytraitsmappedview
@@ -445,20 +445,20 @@ var IID_ISimilarityTraitsMappedView = win32.GUID{Data1: 0x96236a7c, Data2: 0x9db
 // Flush dispatches through ISimilarityTraitsMappedView's vtable slot 3.
 func (self *ISimilarityTraitsMappedView) Flush() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Unmap dispatches through ISimilarityTraitsMappedView's vtable slot 4.
 func (self *ISimilarityTraitsMappedView) Unmap() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get dispatches through ISimilarityTraitsMappedView's vtable slot 5.
 func (self *ISimilarityTraitsMappedView) Get(index uint64, dirty bool, numElements uint32, viewInfo *SimilarityMappedViewInfo) error {
 	_dirty := win32.Bool32(dirty)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(_dirty), uintptr(numElements), uintptr(unsafe.Pointer(viewInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetView dispatches through ISimilarityTraitsMappedView's vtable slot 6.
@@ -483,25 +483,25 @@ func (self *ISimilarityTraitsMapping) CloseMapping() {
 // SetFileSize dispatches through ISimilarityTraitsMapping's vtable slot 4.
 func (self *ISimilarityTraitsMapping) SetFileSize(fileSize uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(fileSize))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFileSize dispatches through ISimilarityTraitsMapping's vtable slot 5.
 func (self *ISimilarityTraitsMapping) GetFileSize(fileSize *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fileSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenMapping dispatches through ISimilarityTraitsMapping's vtable slot 6.
 func (self *ISimilarityTraitsMapping) OpenMapping(accessMode RdcMappingAccessMode, begin uint64, end uint64, actualEnd *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(accessMode), uintptr(begin), uintptr(end), uintptr(unsafe.Pointer(actualEnd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ResizeMapping dispatches through ISimilarityTraitsMapping's vtable slot 7.
 func (self *ISimilarityTraitsMapping) ResizeMapping(accessMode RdcMappingAccessMode, begin uint64, end uint64, actualEnd *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(accessMode), uintptr(begin), uintptr(end), uintptr(unsafe.Pointer(actualEnd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPageSize dispatches through ISimilarityTraitsMapping's vtable slot 8.
@@ -512,7 +512,7 @@ func (self *ISimilarityTraitsMapping) GetPageSize(pageSize *uint32) {
 // CreateView dispatches through ISimilarityTraitsMapping's vtable slot 9.
 func (self *ISimilarityTraitsMapping) CreateView(minimumMappedPages uint32, accessMode RdcMappingAccessMode, mappedView **ISimilarityTraitsMappedView) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(minimumMappedPages), uintptr(accessMode), uintptr(unsafe.Pointer(mappedView)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ISimilarityTraitsTable: https://learn.microsoft.com/windows/win32/api/msrdc/nn-msrdc-isimilaritytraitstable
@@ -529,43 +529,43 @@ func (self *ISimilarityTraitsTable) CreateTable(path string, truncate bool, secu
 	_path := win32.UTF16Ptr(path)
 	_truncate := win32.Bool32(truncate)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_path)), uintptr(_truncate), uintptr(unsafe.Pointer(securityDescriptor)), uintptr(unsafe.Pointer(isNew)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateTableIndirect dispatches through ISimilarityTraitsTable's vtable slot 4.
 func (self *ISimilarityTraitsTable) CreateTableIndirect(mapping *ISimilarityTraitsMapping, truncate bool, isNew *RdcCreatedTables) error {
 	_truncate := win32.Bool32(truncate)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(mapping)), uintptr(_truncate), uintptr(unsafe.Pointer(isNew)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CloseTable dispatches through ISimilarityTraitsTable's vtable slot 5.
 func (self *ISimilarityTraitsTable) CloseTable(isValid bool) error {
 	_isValid := win32.Bool32(isValid)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(_isValid))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Append dispatches through ISimilarityTraitsTable's vtable slot 6.
 func (self *ISimilarityTraitsTable) Append(data *SimilarityData, fileIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(data)), uintptr(fileIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FindSimilarFileIndex dispatches through ISimilarityTraitsTable's vtable slot 7.
 func (self *ISimilarityTraitsTable) FindSimilarFileIndex(similarityData *SimilarityData, numberOfMatchesRequired uint16, findSimilarFileIndexResults *FindSimilarFileIndexResults, resultsSize uint32, resultsUsed *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(similarityData)), uintptr(numberOfMatchesRequired), uintptr(unsafe.Pointer(findSimilarFileIndexResults)), uintptr(resultsSize), uintptr(unsafe.Pointer(resultsUsed)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BeginDump dispatches through ISimilarityTraitsTable's vtable slot 8.
 func (self *ISimilarityTraitsTable) BeginDump(similarityTableDumpState **ISimilarityTableDumpState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(similarityTableDumpState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLastIndex dispatches through ISimilarityTraitsTable's vtable slot 9.
 func (self *ISimilarityTraitsTable) GetLastIndex(fileIndex *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fileIndex)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

@@ -24,28 +24,28 @@ var IID_ICloneViewHelper = win32.GUID{Data1: 0xf6a3d4c4, Data2: 0x5632, Data3: 0
 func (self *ICloneViewHelper) GetConnectedIDs(wszAdaptorName string, pulCount *uint32, pulID *uint32, ulFlags uint32) error {
 	_wszAdaptorName := win32.UTF16Ptr(wszAdaptorName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszAdaptorName)), uintptr(unsafe.Pointer(pulCount)), uintptr(unsafe.Pointer(pulID)), uintptr(ulFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetActiveTopology dispatches through ICloneViewHelper's vtable slot 4.
 func (self *ICloneViewHelper) GetActiveTopology(wszAdaptorName string, ulSourceID uint32, pulCount *uint32, pulTargetID *uint32) error {
 	_wszAdaptorName := win32.UTF16Ptr(wszAdaptorName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszAdaptorName)), uintptr(ulSourceID), uintptr(unsafe.Pointer(pulCount)), uintptr(unsafe.Pointer(pulTargetID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetActiveTopology dispatches through ICloneViewHelper's vtable slot 5.
 func (self *ICloneViewHelper) SetActiveTopology(wszAdaptorName string, ulSourceID uint32, ulCount uint32, pulTargetID *uint32) error {
 	_wszAdaptorName := win32.UTF16Ptr(wszAdaptorName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszAdaptorName)), uintptr(ulSourceID), uintptr(ulCount), uintptr(unsafe.Pointer(pulTargetID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Commit dispatches through ICloneViewHelper's vtable slot 6.
 func (self *ICloneViewHelper) Commit(fFinalCall bool) error {
 	_fFinalCall := win32.Bool32(fFinalCall)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(_fFinalCall))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: e85ccef5-aaaa-47f0-b5e3-61f7aecdc4c1
@@ -60,37 +60,37 @@ var IID_IViewHelper = win32.GUID{Data1: 0xe85ccef5, Data2: 0xaaaa, Data3: 0x47f0
 func (self *IViewHelper) GetConnectedIDs(wszAdaptorName string, pulCount *uint32, pulID *uint32, ulFlags uint32) error {
 	_wszAdaptorName := win32.UTF16Ptr(wszAdaptorName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszAdaptorName)), uintptr(unsafe.Pointer(pulCount)), uintptr(unsafe.Pointer(pulID)), uintptr(ulFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetActiveTopology dispatches through IViewHelper's vtable slot 4.
 func (self *IViewHelper) GetActiveTopology(wszAdaptorName string, ulSourceID uint32, pulCount *uint32, pulTargetID *uint32) error {
 	_wszAdaptorName := win32.UTF16Ptr(wszAdaptorName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszAdaptorName)), uintptr(ulSourceID), uintptr(unsafe.Pointer(pulCount)), uintptr(unsafe.Pointer(pulTargetID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetActiveTopology dispatches through IViewHelper's vtable slot 5.
 func (self *IViewHelper) SetActiveTopology(wszAdaptorName string, ulSourceID uint32, ulCount uint32, pulTargetID *uint32) error {
 	_wszAdaptorName := win32.UTF16Ptr(wszAdaptorName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszAdaptorName)), uintptr(ulSourceID), uintptr(ulCount), uintptr(unsafe.Pointer(pulTargetID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Commit dispatches through IViewHelper's vtable slot 6.
 func (self *IViewHelper) Commit() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetConfiguration dispatches through IViewHelper's vtable slot 7.
 func (self *IViewHelper) SetConfiguration(pIStream *systemcom.IStream, pulStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIStream)), uintptr(unsafe.Pointer(pulStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProceedOnNewConfiguration dispatches through IViewHelper's vtable slot 8.
 func (self *IViewHelper) GetProceedOnNewConfiguration() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

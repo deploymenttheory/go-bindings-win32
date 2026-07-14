@@ -25,25 +25,25 @@ var IID_ICreateDeviceAccessAsync = win32.GUID{Data1: 0x3474628f, Data2: 0x683d, 
 // Cancel dispatches through ICreateDeviceAccessAsync's vtable slot 3.
 func (self *ICreateDeviceAccessAsync) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Wait dispatches through ICreateDeviceAccessAsync's vtable slot 4.
 func (self *ICreateDeviceAccessAsync) Wait(timeout uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(timeout))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Close dispatches through ICreateDeviceAccessAsync's vtable slot 5.
 func (self *ICreateDeviceAccessAsync) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetResult dispatches through ICreateDeviceAccessAsync's vtable slot 6.
 func (self *ICreateDeviceAccessAsync) GetResult(riid *win32.GUID, deviceAccess **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(deviceAccess)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDeviceIoControl: https://learn.microsoft.com/windows/win32/api/deviceaccess/nn-deviceaccess-ideviceiocontrol
@@ -66,7 +66,7 @@ func (self *IDeviceIoControl) DeviceIoControlSync(ioControlCode uint32, inputBuf
 		_outputBuffer = &outputBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ioControlCode), uintptr(unsafe.Pointer(_inputBuffer)), uintptr(len(inputBuffer)), uintptr(unsafe.Pointer(_outputBuffer)), uintptr(len(outputBuffer)), uintptr(unsafe.Pointer(bytesReturned)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeviceIoControlAsync dispatches through IDeviceIoControl's vtable slot 4.
@@ -80,13 +80,13 @@ func (self *IDeviceIoControl) DeviceIoControlAsync(ioControlCode uint32, inputBu
 		_outputBuffer = &outputBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ioControlCode), uintptr(unsafe.Pointer(_inputBuffer)), uintptr(len(inputBuffer)), uintptr(unsafe.Pointer(_outputBuffer)), uintptr(len(outputBuffer)), uintptr(unsafe.Pointer(requestCompletionCallback)), uintptr(unsafe.Pointer(cancelContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CancelOperation dispatches through IDeviceIoControl's vtable slot 5.
 func (self *IDeviceIoControl) CancelOperation(cancelContext uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(cancelContext))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDeviceRequestCompletionCallback: https://learn.microsoft.com/windows/win32/api/deviceaccess/nn-deviceaccess-idevicerequestcompletioncallback
@@ -101,5 +101,5 @@ var IID_IDeviceRequestCompletionCallback = win32.GUID{Data1: 0x999bad24, Data2: 
 // Invoke dispatches through IDeviceRequestCompletionCallback's vtable slot 3.
 func (self *IDeviceRequestCompletionCallback) Invoke(requestResult foundation.HRESULT, bytesReturned uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(requestResult), uintptr(bytesReturned))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

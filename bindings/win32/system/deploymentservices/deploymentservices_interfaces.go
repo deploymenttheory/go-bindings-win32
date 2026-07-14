@@ -26,25 +26,25 @@ var IID_IWdsTransportCacheable = win32.GUID{Data1: 0x46ad894b, Data2: 0x0bab, Da
 func (self *IWdsTransportCacheable) Get_Dirty() (foundation.VARIANT_BOOL, error) {
 	var _pbDirty foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbDirty)))
-	return _pbDirty, win32.HRESULTError(int32(r1))
+	return _pbDirty, win32.ErrIfFailed(int32(r1))
 }
 
 // Discard dispatches through IWdsTransportCacheable's vtable slot 8.
 func (self *IWdsTransportCacheable) Discard() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through IWdsTransportCacheable's vtable slot 9.
 func (self *IWdsTransportCacheable) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Commit dispatches through IWdsTransportCacheable's vtable slot 10.
 func (self *IWdsTransportCacheable) Commit() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWdsTransportClient: https://learn.microsoft.com/windows/win32/api/wdstptmgmt/nn-wdstptmgmt-iwdstransportclient
@@ -60,83 +60,83 @@ var IID_IWdsTransportClient = win32.GUID{Data1: 0xb5dbc93a, Data2: 0xcabe, Data3
 func (self *IWdsTransportClient) Get_Session() (*IWdsTransportSession, error) {
 	var _ppWdsTransportSession *IWdsTransportSession
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppWdsTransportSession)))
-	return _ppWdsTransportSession, win32.HRESULTError(int32(r1))
+	return _ppWdsTransportSession, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Id dispatches through IWdsTransportClient's vtable slot 8.
 func (self *IWdsTransportClient) Get_Id() (uint32, error) {
 	var _pulId uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulId)))
-	return _pulId, win32.HRESULTError(int32(r1))
+	return _pulId, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through IWdsTransportClient's vtable slot 9.
 func (self *IWdsTransportClient) Get_Name() (foundation.BSTR, error) {
 	var _pbszName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbszName)))
-	return _pbszName, win32.HRESULTError(int32(r1))
+	return _pbszName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MacAddress dispatches through IWdsTransportClient's vtable slot 10.
 func (self *IWdsTransportClient) Get_MacAddress() (foundation.BSTR, error) {
 	var _pbszMacAddress foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbszMacAddress)))
-	return _pbszMacAddress, win32.HRESULTError(int32(r1))
+	return _pbszMacAddress, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IpAddress dispatches through IWdsTransportClient's vtable slot 11.
 func (self *IWdsTransportClient) Get_IpAddress() (foundation.BSTR, error) {
 	var _pbszIpAddress foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbszIpAddress)))
-	return _pbszIpAddress, win32.HRESULTError(int32(r1))
+	return _pbszIpAddress, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PercentCompletion dispatches through IWdsTransportClient's vtable slot 12.
 func (self *IWdsTransportClient) Get_PercentCompletion() (uint32, error) {
 	var _pulPercentCompletion uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulPercentCompletion)))
-	return _pulPercentCompletion, win32.HRESULTError(int32(r1))
+	return _pulPercentCompletion, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_JoinDuration dispatches through IWdsTransportClient's vtable slot 13.
 func (self *IWdsTransportClient) Get_JoinDuration() (uint32, error) {
 	var _pulJoinDuration uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulJoinDuration)))
-	return _pulJoinDuration, win32.HRESULTError(int32(r1))
+	return _pulJoinDuration, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CpuUtilization dispatches through IWdsTransportClient's vtable slot 14.
 func (self *IWdsTransportClient) Get_CpuUtilization() (uint32, error) {
 	var _pulCpuUtilization uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulCpuUtilization)))
-	return _pulCpuUtilization, win32.HRESULTError(int32(r1))
+	return _pulCpuUtilization, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MemoryUtilization dispatches through IWdsTransportClient's vtable slot 15.
 func (self *IWdsTransportClient) Get_MemoryUtilization() (uint32, error) {
 	var _pulMemoryUtilization uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulMemoryUtilization)))
-	return _pulMemoryUtilization, win32.HRESULTError(int32(r1))
+	return _pulMemoryUtilization, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NetworkUtilization dispatches through IWdsTransportClient's vtable slot 16.
 func (self *IWdsTransportClient) Get_NetworkUtilization() (uint32, error) {
 	var _pulNetworkUtilization uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulNetworkUtilization)))
-	return _pulNetworkUtilization, win32.HRESULTError(int32(r1))
+	return _pulNetworkUtilization, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UserIdentity dispatches through IWdsTransportClient's vtable slot 17.
 func (self *IWdsTransportClient) Get_UserIdentity() (foundation.BSTR, error) {
 	var _pbszUserIdentity foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbszUserIdentity)))
-	return _pbszUserIdentity, win32.HRESULTError(int32(r1))
+	return _pbszUserIdentity, win32.ErrIfFailed(int32(r1))
 }
 
 // Disconnect dispatches through IWdsTransportClient's vtable slot 18.
 func (self *IWdsTransportClient) Disconnect(DisconnectionType WDSTRANSPORT_DISCONNECT_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(DisconnectionType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWdsTransportCollection: https://learn.microsoft.com/windows/win32/api/wdstptmgmt/nn-wdstptmgmt-iwdstransportcollection
@@ -152,21 +152,21 @@ var IID_IWdsTransportCollection = win32.GUID{Data1: 0xb8ba4b1a, Data2: 0x2ff4, D
 func (self *IWdsTransportCollection) Get_Count() (uint32, error) {
 	var _pulCount uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulCount)))
-	return _pulCount, win32.HRESULTError(int32(r1))
+	return _pulCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Item dispatches through IWdsTransportCollection's vtable slot 8.
 func (self *IWdsTransportCollection) Get_Item(ulIndex uint32) (*systemcom.IDispatch, error) {
 	var _ppVal *systemcom.IDispatch
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(ulIndex), uintptr(unsafe.Pointer(&_ppVal)))
-	return _ppVal, win32.HRESULTError(int32(r1))
+	return _ppVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IWdsTransportCollection's vtable slot 9.
 func (self *IWdsTransportCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
 	var _ppVal *systemcom.IUnknown
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppVal)))
-	return _ppVal, win32.HRESULTError(int32(r1))
+	return _ppVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IWdsTransportConfigurationManager: https://learn.microsoft.com/windows/win32/api/wdstptmgmt/nn-wdstptmgmt-iwdstransportconfigurationmanager
@@ -182,57 +182,57 @@ var IID_IWdsTransportConfigurationManager = win32.GUID{Data1: 0x84cc4779, Data2:
 func (self *IWdsTransportConfigurationManager) Get_ServicePolicy() (*IWdsTransportServicePolicy, error) {
 	var _ppWdsTransportServicePolicy *IWdsTransportServicePolicy
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppWdsTransportServicePolicy)))
-	return _ppWdsTransportServicePolicy, win32.HRESULTError(int32(r1))
+	return _ppWdsTransportServicePolicy, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DiagnosticsPolicy dispatches through IWdsTransportConfigurationManager's vtable slot 8.
 func (self *IWdsTransportConfigurationManager) Get_DiagnosticsPolicy() (*IWdsTransportDiagnosticsPolicy, error) {
 	var _ppWdsTransportDiagnosticsPolicy *IWdsTransportDiagnosticsPolicy
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppWdsTransportDiagnosticsPolicy)))
-	return _ppWdsTransportDiagnosticsPolicy, win32.HRESULTError(int32(r1))
+	return _ppWdsTransportDiagnosticsPolicy, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_WdsTransportServicesRunning dispatches through IWdsTransportConfigurationManager's vtable slot 9.
 func (self *IWdsTransportConfigurationManager) Get_WdsTransportServicesRunning(bRealtimeStatus foundation.VARIANT_BOOL) (foundation.VARIANT_BOOL, error) {
 	var _pbServicesRunning foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(bRealtimeStatus), uintptr(unsafe.Pointer(&_pbServicesRunning)))
-	return _pbServicesRunning, win32.HRESULTError(int32(r1))
+	return _pbServicesRunning, win32.ErrIfFailed(int32(r1))
 }
 
 // EnableWdsTransportServices dispatches through IWdsTransportConfigurationManager's vtable slot 10.
 func (self *IWdsTransportConfigurationManager) EnableWdsTransportServices() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DisableWdsTransportServices dispatches through IWdsTransportConfigurationManager's vtable slot 11.
 func (self *IWdsTransportConfigurationManager) DisableWdsTransportServices() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StartWdsTransportServices dispatches through IWdsTransportConfigurationManager's vtable slot 12.
 func (self *IWdsTransportConfigurationManager) StartWdsTransportServices() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StopWdsTransportServices dispatches through IWdsTransportConfigurationManager's vtable slot 13.
 func (self *IWdsTransportConfigurationManager) StopWdsTransportServices() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RestartWdsTransportServices dispatches through IWdsTransportConfigurationManager's vtable slot 14.
 func (self *IWdsTransportConfigurationManager) RestartWdsTransportServices() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NotifyWdsTransportServices dispatches through IWdsTransportConfigurationManager's vtable slot 15.
 func (self *IWdsTransportConfigurationManager) NotifyWdsTransportServices(ServiceNotification WDSTRANSPORT_SERVICE_NOTIFICATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(ServiceNotification))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWdsTransportConfigurationManager2: https://learn.microsoft.com/windows/win32/api/wdstptmgmt/nn-wdstptmgmt-iwdstransportconfigurationmanager2
@@ -248,7 +248,7 @@ var IID_IWdsTransportConfigurationManager2 = win32.GUID{Data1: 0xd0d85caf, Data2
 func (self *IWdsTransportConfigurationManager2) Get_MulticastSessionPolicy() (*IWdsTransportMulticastSessionPolicy, error) {
 	var _ppWdsTransportMulticastSessionPolicy *IWdsTransportMulticastSessionPolicy
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppWdsTransportMulticastSessionPolicy)))
-	return _ppWdsTransportMulticastSessionPolicy, win32.HRESULTError(int32(r1))
+	return _ppWdsTransportMulticastSessionPolicy, win32.ErrIfFailed(int32(r1))
 }
 
 // IWdsTransportContent: https://learn.microsoft.com/windows/win32/api/wdstptmgmt/nn-wdstptmgmt-iwdstransportcontent
@@ -264,34 +264,34 @@ var IID_IWdsTransportContent = win32.GUID{Data1: 0xd405d711, Data2: 0x0296, Data
 func (self *IWdsTransportContent) Get_Namespace() (*IWdsTransportNamespace, error) {
 	var _ppWdsTransportNamespace *IWdsTransportNamespace
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppWdsTransportNamespace)))
-	return _ppWdsTransportNamespace, win32.HRESULTError(int32(r1))
+	return _ppWdsTransportNamespace, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Id dispatches through IWdsTransportContent's vtable slot 8.
 func (self *IWdsTransportContent) Get_Id() (uint32, error) {
 	var _pulId uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulId)))
-	return _pulId, win32.HRESULTError(int32(r1))
+	return _pulId, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through IWdsTransportContent's vtable slot 9.
 func (self *IWdsTransportContent) Get_Name() (foundation.BSTR, error) {
 	var _pbszName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbszName)))
-	return _pbszName, win32.HRESULTError(int32(r1))
+	return _pbszName, win32.ErrIfFailed(int32(r1))
 }
 
 // RetrieveSessions dispatches through IWdsTransportContent's vtable slot 10.
 func (self *IWdsTransportContent) RetrieveSessions() (*IWdsTransportCollection, error) {
 	var _ppWdsTransportSessions *IWdsTransportCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppWdsTransportSessions)))
-	return _ppWdsTransportSessions, win32.HRESULTError(int32(r1))
+	return _ppWdsTransportSessions, win32.ErrIfFailed(int32(r1))
 }
 
 // Terminate dispatches through IWdsTransportContent's vtable slot 11.
 func (self *IWdsTransportContent) Terminate() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWdsTransportContentProvider: https://learn.microsoft.com/windows/win32/api/wdstptmgmt/nn-wdstptmgmt-iwdstransportcontentprovider
@@ -307,28 +307,28 @@ var IID_IWdsTransportContentProvider = win32.GUID{Data1: 0xb9489f24, Data2: 0xf2
 func (self *IWdsTransportContentProvider) Get_Name() (foundation.BSTR, error) {
 	var _pbszName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbszName)))
-	return _pbszName, win32.HRESULTError(int32(r1))
+	return _pbszName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through IWdsTransportContentProvider's vtable slot 8.
 func (self *IWdsTransportContentProvider) Get_Description() (foundation.BSTR, error) {
 	var _pbszDescription foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbszDescription)))
-	return _pbszDescription, win32.HRESULTError(int32(r1))
+	return _pbszDescription, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FilePath dispatches through IWdsTransportContentProvider's vtable slot 9.
 func (self *IWdsTransportContentProvider) Get_FilePath() (foundation.BSTR, error) {
 	var _pbszFilePath foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbszFilePath)))
-	return _pbszFilePath, win32.HRESULTError(int32(r1))
+	return _pbszFilePath, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InitializationRoutine dispatches through IWdsTransportContentProvider's vtable slot 10.
 func (self *IWdsTransportContentProvider) Get_InitializationRoutine() (foundation.BSTR, error) {
 	var _pbszInitializationRoutine foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbszInitializationRoutine)))
-	return _pbszInitializationRoutine, win32.HRESULTError(int32(r1))
+	return _pbszInitializationRoutine, win32.ErrIfFailed(int32(r1))
 }
 
 // IWdsTransportDiagnosticsPolicy: https://learn.microsoft.com/windows/win32/api/wdstptmgmt/nn-wdstptmgmt-iwdstransportdiagnosticspolicy
@@ -344,26 +344,26 @@ var IID_IWdsTransportDiagnosticsPolicy = win32.GUID{Data1: 0x13b33efc, Data2: 0x
 func (self *IWdsTransportDiagnosticsPolicy) Get_Enabled() (foundation.VARIANT_BOOL, error) {
 	var _pbEnabled foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbEnabled)))
-	return _pbEnabled, win32.HRESULTError(int32(r1))
+	return _pbEnabled, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Enabled dispatches through IWdsTransportDiagnosticsPolicy's vtable slot 12.
 func (self *IWdsTransportDiagnosticsPolicy) Put_Enabled(bEnabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(bEnabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Components dispatches through IWdsTransportDiagnosticsPolicy's vtable slot 13.
 func (self *IWdsTransportDiagnosticsPolicy) Get_Components() (uint32, error) {
 	var _pulComponents uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulComponents)))
-	return _pulComponents, win32.HRESULTError(int32(r1))
+	return _pulComponents, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Components dispatches through IWdsTransportDiagnosticsPolicy's vtable slot 14.
 func (self *IWdsTransportDiagnosticsPolicy) Put_Components(ulComponents uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(ulComponents))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWdsTransportManager: https://learn.microsoft.com/windows/win32/api/wdstptmgmt/nn-wdstptmgmt-iwdstransportmanager
@@ -379,7 +379,7 @@ var IID_IWdsTransportManager = win32.GUID{Data1: 0x5b0d35f5, Data2: 0x1b13, Data
 func (self *IWdsTransportManager) GetWdsTransportServer(bszServerName foundation.BSTR) (*IWdsTransportServer, error) {
 	var _ppWdsTransportServer *IWdsTransportServer
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bszServerName)), uintptr(unsafe.Pointer(&_ppWdsTransportServer)))
-	return _ppWdsTransportServer, win32.HRESULTError(int32(r1))
+	return _ppWdsTransportServer, win32.ErrIfFailed(int32(r1))
 }
 
 // IWdsTransportMulticastSessionPolicy: https://learn.microsoft.com/windows/win32/api/wdstptmgmt/nn-wdstptmgmt-iwdstransportmulticastsessionpolicy
@@ -395,52 +395,52 @@ var IID_IWdsTransportMulticastSessionPolicy = win32.GUID{Data1: 0x4e5753cf, Data
 func (self *IWdsTransportMulticastSessionPolicy) Get_SlowClientHandling() (WDSTRANSPORT_SLOW_CLIENT_HANDLING_TYPE, error) {
 	var _pSlowClientHandling WDSTRANSPORT_SLOW_CLIENT_HANDLING_TYPE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pSlowClientHandling)))
-	return _pSlowClientHandling, win32.HRESULTError(int32(r1))
+	return _pSlowClientHandling, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SlowClientHandling dispatches through IWdsTransportMulticastSessionPolicy's vtable slot 12.
 func (self *IWdsTransportMulticastSessionPolicy) Put_SlowClientHandling(SlowClientHandling WDSTRANSPORT_SLOW_CLIENT_HANDLING_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(SlowClientHandling))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AutoDisconnectThreshold dispatches through IWdsTransportMulticastSessionPolicy's vtable slot 13.
 func (self *IWdsTransportMulticastSessionPolicy) Get_AutoDisconnectThreshold() (uint32, error) {
 	var _pulThreshold uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulThreshold)))
-	return _pulThreshold, win32.HRESULTError(int32(r1))
+	return _pulThreshold, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AutoDisconnectThreshold dispatches through IWdsTransportMulticastSessionPolicy's vtable slot 14.
 func (self *IWdsTransportMulticastSessionPolicy) Put_AutoDisconnectThreshold(ulThreshold uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(ulThreshold))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MultistreamStreamCount dispatches through IWdsTransportMulticastSessionPolicy's vtable slot 15.
 func (self *IWdsTransportMulticastSessionPolicy) Get_MultistreamStreamCount() (uint32, error) {
 	var _pulStreamCount uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulStreamCount)))
-	return _pulStreamCount, win32.HRESULTError(int32(r1))
+	return _pulStreamCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MultistreamStreamCount dispatches through IWdsTransportMulticastSessionPolicy's vtable slot 16.
 func (self *IWdsTransportMulticastSessionPolicy) Put_MultistreamStreamCount(ulStreamCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(ulStreamCount))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SlowClientFallback dispatches through IWdsTransportMulticastSessionPolicy's vtable slot 17.
 func (self *IWdsTransportMulticastSessionPolicy) Get_SlowClientFallback() (foundation.VARIANT_BOOL, error) {
 	var _pbClientFallback foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbClientFallback)))
-	return _pbClientFallback, win32.HRESULTError(int32(r1))
+	return _pbClientFallback, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SlowClientFallback dispatches through IWdsTransportMulticastSessionPolicy's vtable slot 18.
 func (self *IWdsTransportMulticastSessionPolicy) Put_SlowClientFallback(bClientFallback foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(bClientFallback))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWdsTransportNamespace: https://learn.microsoft.com/windows/win32/api/wdstptmgmt/nn-wdstptmgmt-iwdstransportnamespace
@@ -456,139 +456,139 @@ var IID_IWdsTransportNamespace = win32.GUID{Data1: 0xfa561f57, Data2: 0xfbef, Da
 func (self *IWdsTransportNamespace) Get_Type() (WDSTRANSPORT_NAMESPACE_TYPE, error) {
 	var _pType WDSTRANSPORT_NAMESPACE_TYPE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pType)))
-	return _pType, win32.HRESULTError(int32(r1))
+	return _pType, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Id dispatches through IWdsTransportNamespace's vtable slot 8.
 func (self *IWdsTransportNamespace) Get_Id() (uint32, error) {
 	var _pulId uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulId)))
-	return _pulId, win32.HRESULTError(int32(r1))
+	return _pulId, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through IWdsTransportNamespace's vtable slot 9.
 func (self *IWdsTransportNamespace) Get_Name() (foundation.BSTR, error) {
 	var _pbszName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbszName)))
-	return _pbszName, win32.HRESULTError(int32(r1))
+	return _pbszName, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Name dispatches through IWdsTransportNamespace's vtable slot 10.
 func (self *IWdsTransportNamespace) Put_Name(bszName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bszName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FriendlyName dispatches through IWdsTransportNamespace's vtable slot 11.
 func (self *IWdsTransportNamespace) Get_FriendlyName() (foundation.BSTR, error) {
 	var _pbszFriendlyName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbszFriendlyName)))
-	return _pbszFriendlyName, win32.HRESULTError(int32(r1))
+	return _pbszFriendlyName, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FriendlyName dispatches through IWdsTransportNamespace's vtable slot 12.
 func (self *IWdsTransportNamespace) Put_FriendlyName(bszFriendlyName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bszFriendlyName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through IWdsTransportNamespace's vtable slot 13.
 func (self *IWdsTransportNamespace) Get_Description() (foundation.BSTR, error) {
 	var _pbszDescription foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbszDescription)))
-	return _pbszDescription, win32.HRESULTError(int32(r1))
+	return _pbszDescription, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Description dispatches through IWdsTransportNamespace's vtable slot 14.
 func (self *IWdsTransportNamespace) Put_Description(bszDescription foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bszDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ContentProvider dispatches through IWdsTransportNamespace's vtable slot 15.
 func (self *IWdsTransportNamespace) Get_ContentProvider() (foundation.BSTR, error) {
 	var _pbszContentProvider foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbszContentProvider)))
-	return _pbszContentProvider, win32.HRESULTError(int32(r1))
+	return _pbszContentProvider, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ContentProvider dispatches through IWdsTransportNamespace's vtable slot 16.
 func (self *IWdsTransportNamespace) Put_ContentProvider(bszContentProvider foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bszContentProvider)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Configuration dispatches through IWdsTransportNamespace's vtable slot 17.
 func (self *IWdsTransportNamespace) Get_Configuration() (foundation.BSTR, error) {
 	var _pbszConfiguration foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbszConfiguration)))
-	return _pbszConfiguration, win32.HRESULTError(int32(r1))
+	return _pbszConfiguration, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Configuration dispatches through IWdsTransportNamespace's vtable slot 18.
 func (self *IWdsTransportNamespace) Put_Configuration(bszConfiguration foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bszConfiguration)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Registered dispatches through IWdsTransportNamespace's vtable slot 19.
 func (self *IWdsTransportNamespace) Get_Registered() (foundation.VARIANT_BOOL, error) {
 	var _pbRegistered foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbRegistered)))
-	return _pbRegistered, win32.HRESULTError(int32(r1))
+	return _pbRegistered, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Tombstoned dispatches through IWdsTransportNamespace's vtable slot 20.
 func (self *IWdsTransportNamespace) Get_Tombstoned() (foundation.VARIANT_BOOL, error) {
 	var _pbTombstoned foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbTombstoned)))
-	return _pbTombstoned, win32.HRESULTError(int32(r1))
+	return _pbTombstoned, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TombstoneTime dispatches through IWdsTransportNamespace's vtable slot 21.
 func (self *IWdsTransportNamespace) Get_TombstoneTime() (float64, error) {
 	var _pTombstoneTime float64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pTombstoneTime)))
-	return _pTombstoneTime, win32.HRESULTError(int32(r1))
+	return _pTombstoneTime, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TransmissionStarted dispatches through IWdsTransportNamespace's vtable slot 22.
 func (self *IWdsTransportNamespace) Get_TransmissionStarted() (foundation.VARIANT_BOOL, error) {
 	var _pbTransmissionStarted foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbTransmissionStarted)))
-	return _pbTransmissionStarted, win32.HRESULTError(int32(r1))
+	return _pbTransmissionStarted, win32.ErrIfFailed(int32(r1))
 }
 
 // Register dispatches through IWdsTransportNamespace's vtable slot 23.
 func (self *IWdsTransportNamespace) Register() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Deregister dispatches through IWdsTransportNamespace's vtable slot 24.
 func (self *IWdsTransportNamespace) Deregister(bTerminateSessions foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(bTerminateSessions))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IWdsTransportNamespace's vtable slot 25.
 func (self *IWdsTransportNamespace) Clone() (*IWdsTransportNamespace, error) {
 	var _ppWdsTransportNamespaceClone *IWdsTransportNamespace
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppWdsTransportNamespaceClone)))
-	return _ppWdsTransportNamespaceClone, win32.HRESULTError(int32(r1))
+	return _ppWdsTransportNamespaceClone, win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through IWdsTransportNamespace's vtable slot 26.
 func (self *IWdsTransportNamespace) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RetrieveContents dispatches through IWdsTransportNamespace's vtable slot 27.
 func (self *IWdsTransportNamespace) RetrieveContents() (*IWdsTransportCollection, error) {
 	var _ppWdsTransportContents *IWdsTransportCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppWdsTransportContents)))
-	return _ppWdsTransportContents, win32.HRESULTError(int32(r1))
+	return _ppWdsTransportContents, win32.ErrIfFailed(int32(r1))
 }
 
 // IWdsTransportNamespaceAutoCast: https://learn.microsoft.com/windows/win32/api/wdstptmgmt/nn-wdstptmgmt-iwdstransportnamespaceautocast
@@ -613,21 +613,21 @@ var IID_IWdsTransportNamespaceManager = win32.GUID{Data1: 0x3e22d9f6, Data2: 0x3
 func (self *IWdsTransportNamespaceManager) CreateNamespace(NamespaceType WDSTRANSPORT_NAMESPACE_TYPE, bszNamespaceName foundation.BSTR, bszContentProvider foundation.BSTR, bszConfiguration foundation.BSTR) (*IWdsTransportNamespace, error) {
 	var _ppWdsTransportNamespace *IWdsTransportNamespace
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(NamespaceType), uintptr(unsafe.Pointer(bszNamespaceName)), uintptr(unsafe.Pointer(bszContentProvider)), uintptr(unsafe.Pointer(bszConfiguration)), uintptr(unsafe.Pointer(&_ppWdsTransportNamespace)))
-	return _ppWdsTransportNamespace, win32.HRESULTError(int32(r1))
+	return _ppWdsTransportNamespace, win32.ErrIfFailed(int32(r1))
 }
 
 // RetrieveNamespace dispatches through IWdsTransportNamespaceManager's vtable slot 8.
 func (self *IWdsTransportNamespaceManager) RetrieveNamespace(bszNamespaceName foundation.BSTR) (*IWdsTransportNamespace, error) {
 	var _ppWdsTransportNamespace *IWdsTransportNamespace
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bszNamespaceName)), uintptr(unsafe.Pointer(&_ppWdsTransportNamespace)))
-	return _ppWdsTransportNamespace, win32.HRESULTError(int32(r1))
+	return _ppWdsTransportNamespace, win32.ErrIfFailed(int32(r1))
 }
 
 // RetrieveNamespaces dispatches through IWdsTransportNamespaceManager's vtable slot 9.
 func (self *IWdsTransportNamespaceManager) RetrieveNamespaces(bszContentProvider foundation.BSTR, bszNamespaceName foundation.BSTR, bIncludeTombstones foundation.VARIANT_BOOL) (*IWdsTransportCollection, error) {
 	var _ppWdsTransportNamespaces *IWdsTransportCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bszContentProvider)), uintptr(unsafe.Pointer(bszNamespaceName)), uintptr(bIncludeTombstones), uintptr(unsafe.Pointer(&_ppWdsTransportNamespaces)))
-	return _ppWdsTransportNamespaces, win32.HRESULTError(int32(r1))
+	return _ppWdsTransportNamespaces, win32.ErrIfFailed(int32(r1))
 }
 
 // IWdsTransportNamespaceScheduledCast: https://learn.microsoft.com/windows/win32/api/wdstptmgmt/nn-wdstptmgmt-iwdstransportnamespacescheduledcast
@@ -642,7 +642,7 @@ var IID_IWdsTransportNamespaceScheduledCast = win32.GUID{Data1: 0x3840cecf, Data
 // StartTransmission dispatches through IWdsTransportNamespaceScheduledCast's vtable slot 28.
 func (self *IWdsTransportNamespaceScheduledCast) StartTransmission() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWdsTransportNamespaceScheduledCastAutoStart: https://learn.microsoft.com/windows/win32/api/wdstptmgmt/nn-wdstptmgmt-iwdstransportnamespacescheduledcastautostart
@@ -658,20 +658,20 @@ var IID_IWdsTransportNamespaceScheduledCastAutoStart = win32.GUID{Data1: 0xd606a
 func (self *IWdsTransportNamespaceScheduledCastAutoStart) Get_MinimumClients() (uint32, error) {
 	var _pulMinimumClients uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulMinimumClients)))
-	return _pulMinimumClients, win32.HRESULTError(int32(r1))
+	return _pulMinimumClients, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MinimumClients dispatches through IWdsTransportNamespaceScheduledCastAutoStart's vtable slot 30.
 func (self *IWdsTransportNamespaceScheduledCastAutoStart) Put_MinimumClients(ulMinimumClients uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(ulMinimumClients))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StartTime dispatches through IWdsTransportNamespaceScheduledCastAutoStart's vtable slot 31.
 func (self *IWdsTransportNamespaceScheduledCastAutoStart) Get_StartTime() (float64, error) {
 	var _pStartTime float64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pStartTime)))
-	return _pStartTime, win32.HRESULTError(int32(r1))
+	return _pStartTime, win32.ErrIfFailed(int32(r1))
 }
 
 // IWdsTransportNamespaceScheduledCastManualStart: https://learn.microsoft.com/windows/win32/api/wdstptmgmt/nn-wdstptmgmt-iwdstransportnamespacescheduledcastmanualstart
@@ -696,34 +696,34 @@ var IID_IWdsTransportServer = win32.GUID{Data1: 0x09ccd093, Data2: 0x830d, Data3
 func (self *IWdsTransportServer) Get_Name() (foundation.BSTR, error) {
 	var _pbszName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbszName)))
-	return _pbszName, win32.HRESULTError(int32(r1))
+	return _pbszName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SetupManager dispatches through IWdsTransportServer's vtable slot 8.
 func (self *IWdsTransportServer) Get_SetupManager() (*IWdsTransportSetupManager, error) {
 	var _ppWdsTransportSetupManager *IWdsTransportSetupManager
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppWdsTransportSetupManager)))
-	return _ppWdsTransportSetupManager, win32.HRESULTError(int32(r1))
+	return _ppWdsTransportSetupManager, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ConfigurationManager dispatches through IWdsTransportServer's vtable slot 9.
 func (self *IWdsTransportServer) Get_ConfigurationManager() (*IWdsTransportConfigurationManager, error) {
 	var _ppWdsTransportConfigurationManager *IWdsTransportConfigurationManager
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppWdsTransportConfigurationManager)))
-	return _ppWdsTransportConfigurationManager, win32.HRESULTError(int32(r1))
+	return _ppWdsTransportConfigurationManager, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NamespaceManager dispatches through IWdsTransportServer's vtable slot 10.
 func (self *IWdsTransportServer) Get_NamespaceManager() (*IWdsTransportNamespaceManager, error) {
 	var _ppWdsTransportNamespaceManager *IWdsTransportNamespaceManager
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppWdsTransportNamespaceManager)))
-	return _ppWdsTransportNamespaceManager, win32.HRESULTError(int32(r1))
+	return _ppWdsTransportNamespaceManager, win32.ErrIfFailed(int32(r1))
 }
 
 // DisconnectClient dispatches through IWdsTransportServer's vtable slot 11.
 func (self *IWdsTransportServer) DisconnectClient(ulClientId uint32, DisconnectionType WDSTRANSPORT_DISCONNECT_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(ulClientId), uintptr(DisconnectionType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWdsTransportServer2: https://learn.microsoft.com/windows/win32/api/wdstptmgmt/nn-wdstptmgmt-iwdstransportserver2
@@ -739,7 +739,7 @@ var IID_IWdsTransportServer2 = win32.GUID{Data1: 0x256e999f, Data2: 0x6df4, Data
 func (self *IWdsTransportServer2) Get_TftpManager() (*IWdsTransportTftpManager, error) {
 	var _ppWdsTransportTftpManager *IWdsTransportTftpManager
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppWdsTransportTftpManager)))
-	return _ppWdsTransportTftpManager, win32.HRESULTError(int32(r1))
+	return _ppWdsTransportTftpManager, win32.ErrIfFailed(int32(r1))
 }
 
 // IWdsTransportServicePolicy: https://learn.microsoft.com/windows/win32/api/wdstptmgmt/nn-wdstptmgmt-iwdstransportservicepolicy
@@ -755,78 +755,78 @@ var IID_IWdsTransportServicePolicy = win32.GUID{Data1: 0xb9468578, Data2: 0x9f2b
 func (self *IWdsTransportServicePolicy) Get_IpAddressSource(AddressType WDSTRANSPORT_IP_ADDRESS_TYPE) (WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE, error) {
 	var _pSourceType WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(AddressType), uintptr(unsafe.Pointer(&_pSourceType)))
-	return _pSourceType, win32.HRESULTError(int32(r1))
+	return _pSourceType, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_IpAddressSource dispatches through IWdsTransportServicePolicy's vtable slot 12.
 func (self *IWdsTransportServicePolicy) Put_IpAddressSource(AddressType WDSTRANSPORT_IP_ADDRESS_TYPE, SourceType WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(AddressType), uintptr(SourceType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StartIpAddress dispatches through IWdsTransportServicePolicy's vtable slot 13.
 func (self *IWdsTransportServicePolicy) Get_StartIpAddress(AddressType WDSTRANSPORT_IP_ADDRESS_TYPE) (foundation.BSTR, error) {
 	var _pbszStartIpAddress foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(AddressType), uintptr(unsafe.Pointer(&_pbszStartIpAddress)))
-	return _pbszStartIpAddress, win32.HRESULTError(int32(r1))
+	return _pbszStartIpAddress, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_StartIpAddress dispatches through IWdsTransportServicePolicy's vtable slot 14.
 func (self *IWdsTransportServicePolicy) Put_StartIpAddress(AddressType WDSTRANSPORT_IP_ADDRESS_TYPE, bszStartIpAddress foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(AddressType), uintptr(unsafe.Pointer(bszStartIpAddress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EndIpAddress dispatches through IWdsTransportServicePolicy's vtable slot 15.
 func (self *IWdsTransportServicePolicy) Get_EndIpAddress(AddressType WDSTRANSPORT_IP_ADDRESS_TYPE) (foundation.BSTR, error) {
 	var _pbszEndIpAddress foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(AddressType), uintptr(unsafe.Pointer(&_pbszEndIpAddress)))
-	return _pbszEndIpAddress, win32.HRESULTError(int32(r1))
+	return _pbszEndIpAddress, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EndIpAddress dispatches through IWdsTransportServicePolicy's vtable slot 16.
 func (self *IWdsTransportServicePolicy) Put_EndIpAddress(AddressType WDSTRANSPORT_IP_ADDRESS_TYPE, bszEndIpAddress foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(AddressType), uintptr(unsafe.Pointer(bszEndIpAddress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StartPort dispatches through IWdsTransportServicePolicy's vtable slot 17.
 func (self *IWdsTransportServicePolicy) Get_StartPort() (uint32, error) {
 	var _pulStartPort uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulStartPort)))
-	return _pulStartPort, win32.HRESULTError(int32(r1))
+	return _pulStartPort, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_StartPort dispatches through IWdsTransportServicePolicy's vtable slot 18.
 func (self *IWdsTransportServicePolicy) Put_StartPort(ulStartPort uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(ulStartPort))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EndPort dispatches through IWdsTransportServicePolicy's vtable slot 19.
 func (self *IWdsTransportServicePolicy) Get_EndPort() (uint32, error) {
 	var _pulEndPort uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulEndPort)))
-	return _pulEndPort, win32.HRESULTError(int32(r1))
+	return _pulEndPort, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EndPort dispatches through IWdsTransportServicePolicy's vtable slot 20.
 func (self *IWdsTransportServicePolicy) Put_EndPort(ulEndPort uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(ulEndPort))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NetworkProfile dispatches through IWdsTransportServicePolicy's vtable slot 21.
 func (self *IWdsTransportServicePolicy) Get_NetworkProfile() (WDSTRANSPORT_NETWORK_PROFILE_TYPE, error) {
 	var _pProfileType WDSTRANSPORT_NETWORK_PROFILE_TYPE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pProfileType)))
-	return _pProfileType, win32.HRESULTError(int32(r1))
+	return _pProfileType, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_NetworkProfile dispatches through IWdsTransportServicePolicy's vtable slot 22.
 func (self *IWdsTransportServicePolicy) Put_NetworkProfile(ProfileType WDSTRANSPORT_NETWORK_PROFILE_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(ProfileType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWdsTransportServicePolicy2: https://learn.microsoft.com/windows/win32/api/wdstptmgmt/nn-wdstptmgmt-iwdstransportservicepolicy2
@@ -842,39 +842,39 @@ var IID_IWdsTransportServicePolicy2 = win32.GUID{Data1: 0x65c19e5c, Data2: 0xaa7
 func (self *IWdsTransportServicePolicy2) Get_UdpPortPolicy() (WDSTRANSPORT_UDP_PORT_POLICY, error) {
 	var _pUdpPortPolicy WDSTRANSPORT_UDP_PORT_POLICY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pUdpPortPolicy)))
-	return _pUdpPortPolicy, win32.HRESULTError(int32(r1))
+	return _pUdpPortPolicy, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_UdpPortPolicy dispatches through IWdsTransportServicePolicy2's vtable slot 24.
 func (self *IWdsTransportServicePolicy2) Put_UdpPortPolicy(UdpPortPolicy WDSTRANSPORT_UDP_PORT_POLICY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(UdpPortPolicy))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TftpMaximumBlockSize dispatches through IWdsTransportServicePolicy2's vtable slot 25.
 func (self *IWdsTransportServicePolicy2) Get_TftpMaximumBlockSize() (uint32, error) {
 	var _pulTftpMaximumBlockSize uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulTftpMaximumBlockSize)))
-	return _pulTftpMaximumBlockSize, win32.HRESULTError(int32(r1))
+	return _pulTftpMaximumBlockSize, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_TftpMaximumBlockSize dispatches through IWdsTransportServicePolicy2's vtable slot 26.
 func (self *IWdsTransportServicePolicy2) Put_TftpMaximumBlockSize(ulTftpMaximumBlockSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(ulTftpMaximumBlockSize))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EnableTftpVariableWindowExtension dispatches through IWdsTransportServicePolicy2's vtable slot 27.
 func (self *IWdsTransportServicePolicy2) Get_EnableTftpVariableWindowExtension() (foundation.VARIANT_BOOL, error) {
 	var _pbEnableTftpVariableWindowExtension foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbEnableTftpVariableWindowExtension)))
-	return _pbEnableTftpVariableWindowExtension, win32.HRESULTError(int32(r1))
+	return _pbEnableTftpVariableWindowExtension, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EnableTftpVariableWindowExtension dispatches through IWdsTransportServicePolicy2's vtable slot 28.
 func (self *IWdsTransportServicePolicy2) Put_EnableTftpVariableWindowExtension(bEnableTftpVariableWindowExtension foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(bEnableTftpVariableWindowExtension))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWdsTransportSession: https://learn.microsoft.com/windows/win32/api/wdstptmgmt/nn-wdstptmgmt-iwdstransportsession
@@ -890,55 +890,55 @@ var IID_IWdsTransportSession = win32.GUID{Data1: 0xf4efea88, Data2: 0x65b1, Data
 func (self *IWdsTransportSession) Get_Content() (*IWdsTransportContent, error) {
 	var _ppWdsTransportContent *IWdsTransportContent
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppWdsTransportContent)))
-	return _ppWdsTransportContent, win32.HRESULTError(int32(r1))
+	return _ppWdsTransportContent, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Id dispatches through IWdsTransportSession's vtable slot 8.
 func (self *IWdsTransportSession) Get_Id() (uint32, error) {
 	var _pulId uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulId)))
-	return _pulId, win32.HRESULTError(int32(r1))
+	return _pulId, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NetworkInterfaceName dispatches through IWdsTransportSession's vtable slot 9.
 func (self *IWdsTransportSession) Get_NetworkInterfaceName() (foundation.BSTR, error) {
 	var _pbszNetworkInterfaceName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbszNetworkInterfaceName)))
-	return _pbszNetworkInterfaceName, win32.HRESULTError(int32(r1))
+	return _pbszNetworkInterfaceName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NetworkInterfaceAddress dispatches through IWdsTransportSession's vtable slot 10.
 func (self *IWdsTransportSession) Get_NetworkInterfaceAddress() (foundation.BSTR, error) {
 	var _pbszNetworkInterfaceAddress foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbszNetworkInterfaceAddress)))
-	return _pbszNetworkInterfaceAddress, win32.HRESULTError(int32(r1))
+	return _pbszNetworkInterfaceAddress, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TransferRate dispatches through IWdsTransportSession's vtable slot 11.
 func (self *IWdsTransportSession) Get_TransferRate() (uint32, error) {
 	var _pulTransferRate uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulTransferRate)))
-	return _pulTransferRate, win32.HRESULTError(int32(r1))
+	return _pulTransferRate, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MasterClientId dispatches through IWdsTransportSession's vtable slot 12.
 func (self *IWdsTransportSession) Get_MasterClientId() (uint32, error) {
 	var _pulMasterClientId uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulMasterClientId)))
-	return _pulMasterClientId, win32.HRESULTError(int32(r1))
+	return _pulMasterClientId, win32.ErrIfFailed(int32(r1))
 }
 
 // RetrieveClients dispatches through IWdsTransportSession's vtable slot 13.
 func (self *IWdsTransportSession) RetrieveClients() (*IWdsTransportCollection, error) {
 	var _ppWdsTransportClients *IWdsTransportCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppWdsTransportClients)))
-	return _ppWdsTransportClients, win32.HRESULTError(int32(r1))
+	return _ppWdsTransportClients, win32.ErrIfFailed(int32(r1))
 }
 
 // Terminate dispatches through IWdsTransportSession's vtable slot 14.
 func (self *IWdsTransportSession) Terminate() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWdsTransportSetupManager: https://learn.microsoft.com/windows/win32/api/wdstptmgmt/nn-wdstptmgmt-iwdstransportsetupmanager
@@ -954,33 +954,33 @@ var IID_IWdsTransportSetupManager = win32.GUID{Data1: 0xf7238425, Data2: 0xefa8,
 func (self *IWdsTransportSetupManager) Get_Version() (uint64, error) {
 	var _pullVersion uint64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pullVersion)))
-	return _pullVersion, win32.HRESULTError(int32(r1))
+	return _pullVersion, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InstalledFeatures dispatches through IWdsTransportSetupManager's vtable slot 8.
 func (self *IWdsTransportSetupManager) Get_InstalledFeatures() (uint32, error) {
 	var _pulInstalledFeatures uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulInstalledFeatures)))
-	return _pulInstalledFeatures, win32.HRESULTError(int32(r1))
+	return _pulInstalledFeatures, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Protocols dispatches through IWdsTransportSetupManager's vtable slot 9.
 func (self *IWdsTransportSetupManager) Get_Protocols() (uint32, error) {
 	var _pulProtocols uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulProtocols)))
-	return _pulProtocols, win32.HRESULTError(int32(r1))
+	return _pulProtocols, win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterContentProvider dispatches through IWdsTransportSetupManager's vtable slot 10.
 func (self *IWdsTransportSetupManager) RegisterContentProvider(bszName foundation.BSTR, bszDescription foundation.BSTR, bszFilePath foundation.BSTR, bszInitializationRoutine foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bszName)), uintptr(unsafe.Pointer(bszDescription)), uintptr(unsafe.Pointer(bszFilePath)), uintptr(unsafe.Pointer(bszInitializationRoutine)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeregisterContentProvider dispatches through IWdsTransportSetupManager's vtable slot 11.
 func (self *IWdsTransportSetupManager) DeregisterContentProvider(bszName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bszName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWdsTransportSetupManager2: https://learn.microsoft.com/windows/win32/api/wdstptmgmt/nn-wdstptmgmt-iwdstransportsetupmanager2
@@ -996,14 +996,14 @@ var IID_IWdsTransportSetupManager2 = win32.GUID{Data1: 0x02be79da, Data2: 0x7e9e
 func (self *IWdsTransportSetupManager2) Get_TftpCapabilities() (uint32, error) {
 	var _pulTftpCapabilities uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulTftpCapabilities)))
-	return _pulTftpCapabilities, win32.HRESULTError(int32(r1))
+	return _pulTftpCapabilities, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ContentProviders dispatches through IWdsTransportSetupManager2's vtable slot 13.
 func (self *IWdsTransportSetupManager2) Get_ContentProviders() (*IWdsTransportCollection, error) {
 	var _ppProviderCollection *IWdsTransportCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProviderCollection)))
-	return _ppProviderCollection, win32.HRESULTError(int32(r1))
+	return _ppProviderCollection, win32.ErrIfFailed(int32(r1))
 }
 
 // IWdsTransportTftpClient: https://learn.microsoft.com/windows/win32/api/wdstptmgmt/nn-wdstptmgmt-iwdstransporttftpclient
@@ -1019,49 +1019,49 @@ var IID_IWdsTransportTftpClient = win32.GUID{Data1: 0xb022d3ae, Data2: 0x884d, D
 func (self *IWdsTransportTftpClient) Get_FileName() (foundation.BSTR, error) {
 	var _pbszFileName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbszFileName)))
-	return _pbszFileName, win32.HRESULTError(int32(r1))
+	return _pbszFileName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IpAddress dispatches through IWdsTransportTftpClient's vtable slot 8.
 func (self *IWdsTransportTftpClient) Get_IpAddress() (foundation.BSTR, error) {
 	var _pbszIpAddress foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbszIpAddress)))
-	return _pbszIpAddress, win32.HRESULTError(int32(r1))
+	return _pbszIpAddress, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Timeout dispatches through IWdsTransportTftpClient's vtable slot 9.
 func (self *IWdsTransportTftpClient) Get_Timeout() (uint32, error) {
 	var _pulTimeout uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulTimeout)))
-	return _pulTimeout, win32.HRESULTError(int32(r1))
+	return _pulTimeout, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentFileOffset dispatches through IWdsTransportTftpClient's vtable slot 10.
 func (self *IWdsTransportTftpClient) Get_CurrentFileOffset() (uint64, error) {
 	var _pul64CurrentOffset uint64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pul64CurrentOffset)))
-	return _pul64CurrentOffset, win32.HRESULTError(int32(r1))
+	return _pul64CurrentOffset, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FileSize dispatches through IWdsTransportTftpClient's vtable slot 11.
 func (self *IWdsTransportTftpClient) Get_FileSize() (uint64, error) {
 	var _pul64FileSize uint64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pul64FileSize)))
-	return _pul64FileSize, win32.HRESULTError(int32(r1))
+	return _pul64FileSize, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BlockSize dispatches through IWdsTransportTftpClient's vtable slot 12.
 func (self *IWdsTransportTftpClient) Get_BlockSize() (uint32, error) {
 	var _pulBlockSize uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulBlockSize)))
-	return _pulBlockSize, win32.HRESULTError(int32(r1))
+	return _pulBlockSize, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_WindowSize dispatches through IWdsTransportTftpClient's vtable slot 13.
 func (self *IWdsTransportTftpClient) Get_WindowSize() (uint32, error) {
 	var _pulWindowSize uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulWindowSize)))
-	return _pulWindowSize, win32.HRESULTError(int32(r1))
+	return _pulWindowSize, win32.ErrIfFailed(int32(r1))
 }
 
 // IWdsTransportTftpManager: https://learn.microsoft.com/windows/win32/api/wdstptmgmt/nn-wdstptmgmt-iwdstransporttftpmanager
@@ -1077,5 +1077,5 @@ var IID_IWdsTransportTftpManager = win32.GUID{Data1: 0x1327a7c8, Data2: 0xae8a, 
 func (self *IWdsTransportTftpManager) RetrieveTftpClients() (*IWdsTransportCollection, error) {
 	var _ppWdsTransportTftpClients *IWdsTransportCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppWdsTransportTftpClients)))
-	return _ppWdsTransportTftpClients, win32.HRESULTError(int32(r1))
+	return _ppWdsTransportTftpClients, win32.ErrIfFailed(int32(r1))
 }

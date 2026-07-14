@@ -25,13 +25,13 @@ var IID_IGraphicsCaptureItemInterop = win32.GUID{Data1: 0x3628e81b, Data2: 0x3ca
 // CreateForWindow dispatches through IGraphicsCaptureItemInterop's vtable slot 3.
 func (self *IGraphicsCaptureItemInterop) CreateForWindow(window foundation.HWND, riid *win32.GUID, result **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(window), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(result)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateForMonitor dispatches through IGraphicsCaptureItemInterop's vtable slot 4.
 func (self *IGraphicsCaptureItemInterop) CreateForMonitor(monitor graphicsgdi.HMONITOR, riid *win32.GUID, result **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(monitor), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(result)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 33274d14-a076-4048-8416-747e9b04db7b
@@ -45,7 +45,7 @@ var IID_IMonitorGraphicsCaptureItemInterop = win32.GUID{Data1: 0x33274d14, Data2
 // GetMonitor dispatches through IMonitorGraphicsCaptureItemInterop's vtable slot 3.
 func (self *IMonitorGraphicsCaptureItemInterop) GetMonitor(monitor *graphicsgdi.HMONITOR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(monitor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 38e4c48b-94e6-4c44-9cfa-968193316c0c
@@ -59,5 +59,5 @@ var IID_IWindowGraphicsCaptureItemInterop = win32.GUID{Data1: 0x38e4c48b, Data2:
 // GetWindow dispatches through IWindowGraphicsCaptureItemInterop's vtable slot 3.
 func (self *IWindowGraphicsCaptureItemInterop) GetWindow(window *foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(window)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

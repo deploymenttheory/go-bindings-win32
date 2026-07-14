@@ -28,14 +28,14 @@ var IID_IWSDAddress = win32.GUID{Data1: 0xb9574c6c, Data2: 0x12a6, Data3: 0x4f74
 func (self *IWSDAddress) Serialize(pszBuffer foundation.PWSTR, cchLength uint32, fSafe bool) error {
 	_fSafe := win32.Bool32(fSafe)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszBuffer)), uintptr(cchLength), uintptr(_fSafe))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Deserialize dispatches through IWSDAddress's vtable slot 4.
 func (self *IWSDAddress) Deserialize(pszBuffer string) error {
 	_pszBuffer := win32.UTF16Ptr(pszBuffer)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWSDAsyncCallback: https://learn.microsoft.com/windows/win32/api/wsdclient/nn-wsdclient-iwsdasynccallback
@@ -50,7 +50,7 @@ var IID_IWSDAsyncCallback = win32.GUID{Data1: 0xa63e109d, Data2: 0xce72, Data3: 
 // AsyncOperationComplete dispatches through IWSDAsyncCallback's vtable slot 3.
 func (self *IWSDAsyncCallback) AsyncOperationComplete(pAsyncResult *IWSDAsyncResult, pAsyncState *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAsyncResult)), uintptr(unsafe.Pointer(pAsyncState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWSDAsyncResult: https://learn.microsoft.com/windows/win32/api/wsdclient/nn-wsdclient-iwsdasyncresult
@@ -65,43 +65,43 @@ var IID_IWSDAsyncResult = win32.GUID{Data1: 0x11a9852a, Data2: 0x8dd8, Data3: 0x
 // SetCallback dispatches through IWSDAsyncResult's vtable slot 3.
 func (self *IWSDAsyncResult) SetCallback(pCallback *IWSDAsyncCallback, pAsyncState *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pAsyncState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetWaitHandle dispatches through IWSDAsyncResult's vtable slot 4.
 func (self *IWSDAsyncResult) SetWaitHandle(hWaitHandle foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hWaitHandle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HasCompleted dispatches through IWSDAsyncResult's vtable slot 5.
 func (self *IWSDAsyncResult) HasCompleted() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAsyncState dispatches through IWSDAsyncResult's vtable slot 6.
 func (self *IWSDAsyncResult) GetAsyncState(ppAsyncState **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAsyncState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Abort dispatches through IWSDAsyncResult's vtable slot 7.
 func (self *IWSDAsyncResult) Abort() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEvent dispatches through IWSDAsyncResult's vtable slot 8.
 func (self *IWSDAsyncResult) GetEvent(pEvent *WSD_EVENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEvent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEndpointProxy dispatches through IWSDAsyncResult's vtable slot 9.
 func (self *IWSDAsyncResult) GetEndpointProxy(ppEndpoint **IWSDEndpointProxy) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEndpoint)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWSDAttachment: https://learn.microsoft.com/windows/win32/api/wsdattachment/nn-wsdattachment-iwsdattachment
@@ -130,51 +130,51 @@ func (self *IWSDDeviceHost) Init(pszLocalId string, pContext *IWSDXMLContext, pp
 		_ppHostAddresses = &ppHostAddresses[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszLocalId)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(_ppHostAddresses)), uintptr(len(ppHostAddresses)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Start dispatches through IWSDDeviceHost's vtable slot 4.
 func (self *IWSDDeviceHost) Start(ullInstanceId uint64, pScopeList *WSD_URI_LIST, pNotificationSink *IWSDDeviceHostNotify) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ullInstanceId), uintptr(unsafe.Pointer(pScopeList)), uintptr(unsafe.Pointer(pNotificationSink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Stop dispatches through IWSDDeviceHost's vtable slot 5.
 func (self *IWSDDeviceHost) Stop() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Terminate dispatches through IWSDDeviceHost's vtable slot 6.
 func (self *IWSDDeviceHost) Terminate() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterPortType dispatches through IWSDDeviceHost's vtable slot 7.
 func (self *IWSDDeviceHost) RegisterPortType(pPortType *WSD_PORT_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPortType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMetadata dispatches through IWSDDeviceHost's vtable slot 8.
 func (self *IWSDDeviceHost) SetMetadata(pThisModelMetadata *WSD_THIS_MODEL_METADATA, pThisDeviceMetadata *WSD_THIS_DEVICE_METADATA, pHostMetadata *WSD_HOST_METADATA, pCustomMetadata *WSD_METADATA_SECTION_LIST) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pThisModelMetadata)), uintptr(unsafe.Pointer(pThisDeviceMetadata)), uintptr(unsafe.Pointer(pHostMetadata)), uintptr(unsafe.Pointer(pCustomMetadata)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterService dispatches through IWSDDeviceHost's vtable slot 9.
 func (self *IWSDDeviceHost) RegisterService(pszServiceId string, pService *systemcom.IUnknown) error {
 	_pszServiceId := win32.UTF16Ptr(pszServiceId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszServiceId)), uintptr(unsafe.Pointer(pService)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RetireService dispatches through IWSDDeviceHost's vtable slot 10.
 func (self *IWSDDeviceHost) RetireService(pszServiceId string) error {
 	_pszServiceId := win32.UTF16Ptr(pszServiceId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszServiceId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddDynamicService dispatches through IWSDDeviceHost's vtable slot 11.
@@ -182,14 +182,14 @@ func (self *IWSDDeviceHost) AddDynamicService(pszServiceId string, pszEndpointAd
 	_pszServiceId := win32.UTF16Ptr(pszServiceId)
 	_pszEndpointAddress := win32.UTF16Ptr(pszEndpointAddress)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszServiceId)), uintptr(unsafe.Pointer(_pszEndpointAddress)), uintptr(unsafe.Pointer(pPortType)), uintptr(unsafe.Pointer(pPortName)), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(pService)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveDynamicService dispatches through IWSDDeviceHost's vtable slot 12.
 func (self *IWSDDeviceHost) RemoveDynamicService(pszServiceId string) error {
 	_pszServiceId := win32.UTF16Ptr(pszServiceId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszServiceId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetServiceDiscoverable dispatches through IWSDDeviceHost's vtable slot 13.
@@ -197,14 +197,14 @@ func (self *IWSDDeviceHost) SetServiceDiscoverable(pszServiceId string, fDiscove
 	_pszServiceId := win32.UTF16Ptr(pszServiceId)
 	_fDiscoverable := win32.Bool32(fDiscoverable)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszServiceId)), uintptr(_fDiscoverable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SignalEvent dispatches through IWSDDeviceHost's vtable slot 14.
 func (self *IWSDDeviceHost) SignalEvent(pszServiceId string, pBody unsafe.Pointer, pOperation *WSD_OPERATION) error {
 	_pszServiceId := win32.UTF16Ptr(pszServiceId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszServiceId)), uintptr(unsafe.Pointer(pBody)), uintptr(unsafe.Pointer(pOperation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWSDDeviceHostNotify: https://learn.microsoft.com/windows/win32/api/wsdhost/nn-wsdhost-iwsddevicehostnotify
@@ -220,7 +220,7 @@ var IID_IWSDDeviceHostNotify = win32.GUID{Data1: 0xb5bee9f9, Data2: 0xeeda, Data
 func (self *IWSDDeviceHostNotify) GetService(pszServiceId string, ppService **systemcom.IUnknown) error {
 	_pszServiceId := win32.UTF16Ptr(pszServiceId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszServiceId)), uintptr(unsafe.Pointer(ppService)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWSDDeviceProxy: https://learn.microsoft.com/windows/win32/api/wsdclient/nn-wsdclient-iwsddeviceproxy
@@ -237,62 +237,62 @@ func (self *IWSDDeviceProxy) Init(pszDeviceId string, pDeviceAddress *IWSDAddres
 	_pszDeviceId := win32.UTF16Ptr(pszDeviceId)
 	_pszLocalId := win32.UTF16Ptr(pszLocalId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszDeviceId)), uintptr(unsafe.Pointer(pDeviceAddress)), uintptr(unsafe.Pointer(_pszLocalId)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(pSponsor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BeginGetMetadata dispatches through IWSDDeviceProxy's vtable slot 4.
 func (self *IWSDDeviceProxy) BeginGetMetadata(ppResult **IWSDAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndGetMetadata dispatches through IWSDDeviceProxy's vtable slot 5.
 func (self *IWSDDeviceProxy) EndGetMetadata(pResult *IWSDAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetHostMetadata dispatches through IWSDDeviceProxy's vtable slot 6.
 func (self *IWSDDeviceProxy) GetHostMetadata(ppHostMetadata **WSD_HOST_METADATA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppHostMetadata)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThisModelMetadata dispatches through IWSDDeviceProxy's vtable slot 7.
 func (self *IWSDDeviceProxy) GetThisModelMetadata(ppManufacturerMetadata **WSD_THIS_MODEL_METADATA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppManufacturerMetadata)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThisDeviceMetadata dispatches through IWSDDeviceProxy's vtable slot 8.
 func (self *IWSDDeviceProxy) GetThisDeviceMetadata(ppThisDeviceMetadata **WSD_THIS_DEVICE_METADATA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppThisDeviceMetadata)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAllMetadata dispatches through IWSDDeviceProxy's vtable slot 9.
 func (self *IWSDDeviceProxy) GetAllMetadata(ppMetadata **WSD_METADATA_SECTION_LIST) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppMetadata)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetServiceProxyById dispatches through IWSDDeviceProxy's vtable slot 10.
 func (self *IWSDDeviceProxy) GetServiceProxyById(pszServiceId string, ppServiceProxy **IWSDServiceProxy) error {
 	_pszServiceId := win32.UTF16Ptr(pszServiceId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszServiceId)), uintptr(unsafe.Pointer(ppServiceProxy)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetServiceProxyByType dispatches through IWSDDeviceProxy's vtable slot 11.
 func (self *IWSDDeviceProxy) GetServiceProxyByType(pType *WSDXML_NAME, ppServiceProxy **IWSDServiceProxy) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(ppServiceProxy)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEndpointProxy dispatches through IWSDDeviceProxy's vtable slot 12.
 func (self *IWSDDeviceProxy) GetEndpointProxy(ppProxy **IWSDEndpointProxy) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProxy)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWSDEndpointProxy: https://learn.microsoft.com/windows/win32/api/wsdclient/nn-wsdclient-iwsdendpointproxy
@@ -307,43 +307,43 @@ var IID_IWSDEndpointProxy = win32.GUID{Data1: 0x1860d430, Data2: 0xb24c, Data3: 
 // SendOneWayRequest dispatches through IWSDEndpointProxy's vtable slot 3.
 func (self *IWSDEndpointProxy) SendOneWayRequest(pBody unsafe.Pointer, pOperation *WSD_OPERATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBody)), uintptr(unsafe.Pointer(pOperation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendTwoWayRequest dispatches through IWSDEndpointProxy's vtable slot 4.
 func (self *IWSDEndpointProxy) SendTwoWayRequest(pBody unsafe.Pointer, pOperation *WSD_OPERATION, pResponseContext *WSD_SYNCHRONOUS_RESPONSE_CONTEXT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBody)), uintptr(unsafe.Pointer(pOperation)), uintptr(unsafe.Pointer(pResponseContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendTwoWayRequestAsync dispatches through IWSDEndpointProxy's vtable slot 5.
 func (self *IWSDEndpointProxy) SendTwoWayRequestAsync(pBody unsafe.Pointer, pOperation *WSD_OPERATION, pAsyncState *systemcom.IUnknown, pCallback *IWSDAsyncCallback, pResult **IWSDAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBody)), uintptr(unsafe.Pointer(pOperation)), uintptr(unsafe.Pointer(pAsyncState)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AbortAsyncOperation dispatches through IWSDEndpointProxy's vtable slot 6.
 func (self *IWSDEndpointProxy) AbortAsyncOperation(pAsyncResult *IWSDAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAsyncResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ProcessFault dispatches through IWSDEndpointProxy's vtable slot 7.
 func (self *IWSDEndpointProxy) ProcessFault(pFault *WSD_SOAP_FAULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFault)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetErrorInfo dispatches through IWSDEndpointProxy's vtable slot 8.
 func (self *IWSDEndpointProxy) GetErrorInfo(ppszErrorInfo *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszErrorInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFaultInfo dispatches through IWSDEndpointProxy's vtable slot 9.
 func (self *IWSDEndpointProxy) GetFaultInfo(ppFault **WSD_SOAP_FAULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFault)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWSDEventingStatus: https://learn.microsoft.com/windows/win32/api/wsdclient/nn-wsdclient-iwsdeventingstatus
@@ -385,27 +385,27 @@ var IID_IWSDHttpAddress = win32.GUID{Data1: 0xd09ac7bd, Data2: 0x2a3e, Data3: 0x
 // GetSecure dispatches through IWSDHttpAddress's vtable slot 10.
 func (self *IWSDHttpAddress) GetSecure() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetSecure dispatches through IWSDHttpAddress's vtable slot 11.
 func (self *IWSDHttpAddress) SetSecure(fSecure bool) error {
 	_fSecure := win32.Bool32(fSecure)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(_fSecure))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPath dispatches through IWSDHttpAddress's vtable slot 12.
 func (self *IWSDHttpAddress) GetPath(ppszPath *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetPath dispatches through IWSDHttpAddress's vtable slot 13.
 func (self *IWSDHttpAddress) SetPath(pszPath string) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWSDHttpAuthParameters: https://learn.microsoft.com/windows/win32/api/wsdbase/nn-wsdbase-iwsdhttpauthparameters
@@ -420,13 +420,13 @@ var IID_IWSDHttpAuthParameters = win32.GUID{Data1: 0x0b476df0, Data2: 0x8dac, Da
 // GetClientAccessToken dispatches through IWSDHttpAuthParameters's vtable slot 3.
 func (self *IWSDHttpAuthParameters) GetClientAccessToken(phToken *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phToken)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAuthType dispatches through IWSDHttpAuthParameters's vtable slot 4.
 func (self *IWSDHttpAuthParameters) GetAuthType(pAuthType *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAuthType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWSDHttpMessageParameters: https://learn.microsoft.com/windows/win32/api/wsdbase/nn-wsdbase-iwsdhttpmessageparameters
@@ -442,57 +442,57 @@ var IID_IWSDHttpMessageParameters = win32.GUID{Data1: 0x540bd122, Data2: 0x5c83,
 func (self *IWSDHttpMessageParameters) SetInboundHttpHeaders(pszHeaders string) error {
 	_pszHeaders := win32.UTF16Ptr(pszHeaders)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszHeaders)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInboundHttpHeaders dispatches through IWSDHttpMessageParameters's vtable slot 9.
 func (self *IWSDHttpMessageParameters) GetInboundHttpHeaders(ppszHeaders *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszHeaders)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetOutboundHttpHeaders dispatches through IWSDHttpMessageParameters's vtable slot 10.
 func (self *IWSDHttpMessageParameters) SetOutboundHttpHeaders(pszHeaders string) error {
 	_pszHeaders := win32.UTF16Ptr(pszHeaders)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszHeaders)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOutboundHttpHeaders dispatches through IWSDHttpMessageParameters's vtable slot 11.
 func (self *IWSDHttpMessageParameters) GetOutboundHttpHeaders(ppszHeaders *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszHeaders)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetID dispatches through IWSDHttpMessageParameters's vtable slot 12.
 func (self *IWSDHttpMessageParameters) SetID(pszId string) error {
 	_pszId := win32.UTF16Ptr(pszId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetID dispatches through IWSDHttpMessageParameters's vtable slot 13.
 func (self *IWSDHttpMessageParameters) GetID(ppszId *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetContext dispatches through IWSDHttpMessageParameters's vtable slot 14.
 func (self *IWSDHttpMessageParameters) SetContext(pContext *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetContext dispatches through IWSDHttpMessageParameters's vtable slot 15.
 func (self *IWSDHttpMessageParameters) GetContext(ppContext **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through IWSDHttpMessageParameters's vtable slot 16.
 func (self *IWSDHttpMessageParameters) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWSDInboundAttachment: https://learn.microsoft.com/windows/win32/api/wsdattachment/nn-wsdattachment-iwsdinboundattachment
@@ -511,13 +511,13 @@ func (self *IWSDInboundAttachment) Read(pBuffer []byte, pdwNumberOfBytesRead *ui
 		_pBuffer = &pBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(pdwNumberOfBytesRead)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Close dispatches through IWSDInboundAttachment's vtable slot 4.
 func (self *IWSDInboundAttachment) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWSDMessageParameters: https://learn.microsoft.com/windows/win32/api/wsdbase/nn-wsdbase-iwsdmessageparameters
@@ -532,31 +532,31 @@ var IID_IWSDMessageParameters = win32.GUID{Data1: 0x1fafe8a2, Data2: 0xe6fc, Dat
 // GetLocalAddress dispatches through IWSDMessageParameters's vtable slot 3.
 func (self *IWSDMessageParameters) GetLocalAddress(ppAddress **IWSDAddress) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAddress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetLocalAddress dispatches through IWSDMessageParameters's vtable slot 4.
 func (self *IWSDMessageParameters) SetLocalAddress(pAddress *IWSDAddress) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAddress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRemoteAddress dispatches through IWSDMessageParameters's vtable slot 5.
 func (self *IWSDMessageParameters) GetRemoteAddress(ppAddress **IWSDAddress) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAddress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetRemoteAddress dispatches through IWSDMessageParameters's vtable slot 6.
 func (self *IWSDMessageParameters) SetRemoteAddress(pAddress *IWSDAddress) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAddress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLowerParameters dispatches through IWSDMessageParameters's vtable slot 7.
 func (self *IWSDMessageParameters) GetLowerParameters(ppTxParams **IWSDMessageParameters) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTxParams)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWSDMetadataExchange: https://learn.microsoft.com/windows/win32/api/wsdclient/nn-wsdclient-iwsdmetadataexchange
@@ -571,7 +571,7 @@ var IID_IWSDMetadataExchange = win32.GUID{Data1: 0x06996d57, Data2: 0x1d67, Data
 // GetMetadata dispatches through IWSDMetadataExchange's vtable slot 3.
 func (self *IWSDMetadataExchange) GetMetadata(MetadataOut **WSD_METADATA_SECTION_LIST) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(MetadataOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWSDOutboundAttachment: https://learn.microsoft.com/windows/win32/api/wsdattachment/nn-wsdattachment-iwsdoutboundattachment
@@ -590,19 +590,19 @@ func (self *IWSDOutboundAttachment) Write(pBuffer []byte, pdwNumberOfBytesWritte
 		_pBuffer = &pBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(pdwNumberOfBytesWritten)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Close dispatches through IWSDOutboundAttachment's vtable slot 4.
 func (self *IWSDOutboundAttachment) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Abort dispatches through IWSDOutboundAttachment's vtable slot 5.
 func (self *IWSDOutboundAttachment) Abort() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWSDSSLClientCertificate: https://learn.microsoft.com/windows/win32/api/wsdbase/nn-wsdbase-iwsdsslclientcertificate
@@ -617,13 +617,13 @@ var IID_IWSDSSLClientCertificate = win32.GUID{Data1: 0xde105e87, Data2: 0xa0da, 
 // GetClientCertificate dispatches through IWSDSSLClientCertificate's vtable slot 3.
 func (self *IWSDSSLClientCertificate) GetClientCertificate(ppCertContext **securitycryptography.CERT_CONTEXT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCertContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMappedAccessToken dispatches through IWSDSSLClientCertificate's vtable slot 4.
 func (self *IWSDSSLClientCertificate) GetMappedAccessToken(phToken *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phToken)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWSDScopeMatchingRule: https://learn.microsoft.com/windows/win32/api/wsddisco/nn-wsddisco-iwsdscopematchingrule
@@ -638,7 +638,7 @@ var IID_IWSDScopeMatchingRule = win32.GUID{Data1: 0xfcafe424, Data2: 0xfef5, Dat
 // GetScopeRule dispatches through IWSDScopeMatchingRule's vtable slot 3.
 func (self *IWSDScopeMatchingRule) GetScopeRule(ppszScopeMatchingRule *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszScopeMatchingRule)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MatchScopes dispatches through IWSDScopeMatchingRule's vtable slot 4.
@@ -646,7 +646,7 @@ func (self *IWSDScopeMatchingRule) MatchScopes(pszScope1 string, pszScope2 strin
 	_pszScope1 := win32.UTF16Ptr(pszScope1)
 	_pszScope2 := win32.UTF16Ptr(pszScope2)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszScope1)), uintptr(unsafe.Pointer(_pszScope2)), uintptr(unsafe.Pointer(pfMatch)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWSDServiceMessaging: https://learn.microsoft.com/windows/win32/api/wsdhost/nn-wsdhost-iwsdservicemessaging
@@ -661,13 +661,13 @@ var IID_IWSDServiceMessaging = win32.GUID{Data1: 0x94974cf4, Data2: 0x0cab, Data
 // SendResponse dispatches through IWSDServiceMessaging's vtable slot 3.
 func (self *IWSDServiceMessaging) SendResponse(pBody unsafe.Pointer, pOperation *WSD_OPERATION, pMessageParameters *IWSDMessageParameters) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBody)), uintptr(unsafe.Pointer(pOperation)), uintptr(unsafe.Pointer(pMessageParameters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FaultRequest dispatches through IWSDServiceMessaging's vtable slot 4.
 func (self *IWSDServiceMessaging) FaultRequest(pRequestHeader *WSD_SOAP_HEADER, pMessageParameters *IWSDMessageParameters, pFault *WSD_SOAP_FAULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRequestHeader)), uintptr(unsafe.Pointer(pMessageParameters)), uintptr(unsafe.Pointer(pFault)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWSDServiceProxy: https://learn.microsoft.com/windows/win32/api/wsdclient/nn-wsdclient-iwsdserviceproxy
@@ -682,43 +682,43 @@ var IID_IWSDServiceProxy = win32.GUID{Data1: 0xd4c7fb9c, Data2: 0x03ab, Data3: 0
 // BeginGetMetadata dispatches through IWSDServiceProxy's vtable slot 4.
 func (self *IWSDServiceProxy) BeginGetMetadata(ppResult **IWSDAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndGetMetadata dispatches through IWSDServiceProxy's vtable slot 5.
 func (self *IWSDServiceProxy) EndGetMetadata(pResult *IWSDAsyncResult, ppMetadata **WSD_METADATA_SECTION_LIST) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(ppMetadata)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetServiceMetadata dispatches through IWSDServiceProxy's vtable slot 6.
 func (self *IWSDServiceProxy) GetServiceMetadata(ppServiceMetadata **WSD_SERVICE_METADATA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppServiceMetadata)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SubscribeToOperation dispatches through IWSDServiceProxy's vtable slot 7.
 func (self *IWSDServiceProxy) SubscribeToOperation(pOperation *WSD_OPERATION, pUnknown *systemcom.IUnknown, pAny *WSDXML_ELEMENT, ppAny **WSDXML_ELEMENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOperation)), uintptr(unsafe.Pointer(pUnknown)), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(ppAny)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnsubscribeToOperation dispatches through IWSDServiceProxy's vtable slot 8.
 func (self *IWSDServiceProxy) UnsubscribeToOperation(pOperation *WSD_OPERATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOperation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetEventingStatusCallback dispatches through IWSDServiceProxy's vtable slot 9.
 func (self *IWSDServiceProxy) SetEventingStatusCallback(pStatus *IWSDEventingStatus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEndpointProxy dispatches through IWSDServiceProxy's vtable slot 10.
 func (self *IWSDServiceProxy) GetEndpointProxy(ppProxy **IWSDEndpointProxy) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProxy)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWSDServiceProxyEventing: https://learn.microsoft.com/windows/win32/api/wsdclient/nn-wsdclient-iwsdserviceproxyeventing
@@ -737,7 +737,7 @@ func (self *IWSDServiceProxyEventing) SubscribeToMultipleOperations(pOperations 
 		_pOperations = &pOperations[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pOperations)), uintptr(len(pOperations)), uintptr(unsafe.Pointer(pUnknown)), uintptr(unsafe.Pointer(pExpires)), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(ppExpires)), uintptr(unsafe.Pointer(ppAny)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BeginSubscribeToMultipleOperations dispatches through IWSDServiceProxyEventing's vtable slot 12.
@@ -747,7 +747,7 @@ func (self *IWSDServiceProxyEventing) BeginSubscribeToMultipleOperations(pOperat
 		_pOperations = &pOperations[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pOperations)), uintptr(len(pOperations)), uintptr(unsafe.Pointer(pUnknown)), uintptr(unsafe.Pointer(pExpires)), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(pAsyncState)), uintptr(unsafe.Pointer(pAsyncCallback)), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndSubscribeToMultipleOperations dispatches through IWSDServiceProxyEventing's vtable slot 13.
@@ -757,7 +757,7 @@ func (self *IWSDServiceProxyEventing) EndSubscribeToMultipleOperations(pOperatio
 		_pOperations = &pOperations[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pOperations)), uintptr(len(pOperations)), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(ppExpires)), uintptr(unsafe.Pointer(ppAny)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnsubscribeToMultipleOperations dispatches through IWSDServiceProxyEventing's vtable slot 14.
@@ -767,7 +767,7 @@ func (self *IWSDServiceProxyEventing) UnsubscribeToMultipleOperations(pOperation
 		_pOperations = &pOperations[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pOperations)), uintptr(len(pOperations)), uintptr(unsafe.Pointer(pAny)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BeginUnsubscribeToMultipleOperations dispatches through IWSDServiceProxyEventing's vtable slot 15.
@@ -777,7 +777,7 @@ func (self *IWSDServiceProxyEventing) BeginUnsubscribeToMultipleOperations(pOper
 		_pOperations = &pOperations[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pOperations)), uintptr(len(pOperations)), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(pAsyncState)), uintptr(unsafe.Pointer(pAsyncCallback)), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndUnsubscribeToMultipleOperations dispatches through IWSDServiceProxyEventing's vtable slot 16.
@@ -787,7 +787,7 @@ func (self *IWSDServiceProxyEventing) EndUnsubscribeToMultipleOperations(pOperat
 		_pOperations = &pOperations[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pOperations)), uintptr(len(pOperations)), uintptr(unsafe.Pointer(pResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RenewMultipleOperations dispatches through IWSDServiceProxyEventing's vtable slot 17.
@@ -797,7 +797,7 @@ func (self *IWSDServiceProxyEventing) RenewMultipleOperations(pOperations []WSD_
 		_pOperations = &pOperations[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pOperations)), uintptr(len(pOperations)), uintptr(unsafe.Pointer(pExpires)), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(ppExpires)), uintptr(unsafe.Pointer(ppAny)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BeginRenewMultipleOperations dispatches through IWSDServiceProxyEventing's vtable slot 18.
@@ -807,7 +807,7 @@ func (self *IWSDServiceProxyEventing) BeginRenewMultipleOperations(pOperations [
 		_pOperations = &pOperations[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pOperations)), uintptr(len(pOperations)), uintptr(unsafe.Pointer(pExpires)), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(pAsyncState)), uintptr(unsafe.Pointer(pAsyncCallback)), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndRenewMultipleOperations dispatches through IWSDServiceProxyEventing's vtable slot 19.
@@ -817,7 +817,7 @@ func (self *IWSDServiceProxyEventing) EndRenewMultipleOperations(pOperations []W
 		_pOperations = &pOperations[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pOperations)), uintptr(len(pOperations)), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(ppExpires)), uintptr(unsafe.Pointer(ppAny)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStatusForMultipleOperations dispatches through IWSDServiceProxyEventing's vtable slot 20.
@@ -827,7 +827,7 @@ func (self *IWSDServiceProxyEventing) GetStatusForMultipleOperations(pOperations
 		_pOperations = &pOperations[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pOperations)), uintptr(len(pOperations)), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(ppExpires)), uintptr(unsafe.Pointer(ppAny)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BeginGetStatusForMultipleOperations dispatches through IWSDServiceProxyEventing's vtable slot 21.
@@ -837,7 +837,7 @@ func (self *IWSDServiceProxyEventing) BeginGetStatusForMultipleOperations(pOpera
 		_pOperations = &pOperations[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pOperations)), uintptr(len(pOperations)), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(pAsyncState)), uintptr(unsafe.Pointer(pAsyncCallback)), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndGetStatusForMultipleOperations dispatches through IWSDServiceProxyEventing's vtable slot 22.
@@ -847,7 +847,7 @@ func (self *IWSDServiceProxyEventing) EndGetStatusForMultipleOperations(pOperati
 		_pOperations = &pOperations[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pOperations)), uintptr(len(pOperations)), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(ppExpires)), uintptr(unsafe.Pointer(ppAny)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWSDSignatureProperty: https://learn.microsoft.com/windows/win32/api/wsdbase/nn-wsdbase-iwsdsignatureproperty
@@ -862,31 +862,31 @@ var IID_IWSDSignatureProperty = win32.GUID{Data1: 0x03ce20aa, Data2: 0x71c4, Dat
 // IsMessageSigned dispatches through IWSDSignatureProperty's vtable slot 3.
 func (self *IWSDSignatureProperty) IsMessageSigned(pbSigned *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbSigned)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsMessageSignatureTrusted dispatches through IWSDSignatureProperty's vtable slot 4.
 func (self *IWSDSignatureProperty) IsMessageSignatureTrusted(pbSignatureTrusted *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbSignatureTrusted)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetKeyInfo dispatches through IWSDSignatureProperty's vtable slot 5.
 func (self *IWSDSignatureProperty) GetKeyInfo(pbKeyInfo *byte, pdwKeyInfoSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbKeyInfo)), uintptr(unsafe.Pointer(pdwKeyInfoSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSignature dispatches through IWSDSignatureProperty's vtable slot 6.
 func (self *IWSDSignatureProperty) GetSignature(pbSignature *byte, pdwSignatureSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbSignature)), uintptr(unsafe.Pointer(pdwSignatureSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSignedInfoHash dispatches through IWSDSignatureProperty's vtable slot 7.
 func (self *IWSDSignatureProperty) GetSignedInfoHash(pbSignedInfoHash *byte, pdwHashSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbSignedInfoHash)), uintptr(unsafe.Pointer(pdwHashSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWSDTransportAddress: https://learn.microsoft.com/windows/win32/api/wsdbase/nn-wsdbase-iwsdtransportaddress
@@ -901,33 +901,33 @@ var IID_IWSDTransportAddress = win32.GUID{Data1: 0x70d23498, Data2: 0x4ee6, Data
 // GetPort dispatches through IWSDTransportAddress's vtable slot 5.
 func (self *IWSDTransportAddress) GetPort(pwPort *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwPort)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetPort dispatches through IWSDTransportAddress's vtable slot 6.
 func (self *IWSDTransportAddress) SetPort(wPort uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(wPort))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTransportAddress dispatches through IWSDTransportAddress's vtable slot 7.
 func (self *IWSDTransportAddress) GetTransportAddress(ppszAddress *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszAddress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTransportAddressEx dispatches through IWSDTransportAddress's vtable slot 8.
 func (self *IWSDTransportAddress) GetTransportAddressEx(fSafe bool, ppszAddress *foundation.PWSTR) error {
 	_fSafe := win32.Bool32(fSafe)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(_fSafe), uintptr(unsafe.Pointer(ppszAddress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTransportAddress dispatches through IWSDTransportAddress's vtable slot 9.
 func (self *IWSDTransportAddress) SetTransportAddress(pszAddress string) error {
 	_pszAddress := win32.UTF16Ptr(pszAddress)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszAddress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWSDUdpAddress: https://learn.microsoft.com/windows/win32/api/wsdbase/nn-wsdbase-iwsdudpaddress
@@ -942,62 +942,62 @@ var IID_IWSDUdpAddress = win32.GUID{Data1: 0x74d6124a, Data2: 0xa441, Data3: 0x4
 // SetSockaddr dispatches through IWSDUdpAddress's vtable slot 10.
 func (self *IWSDUdpAddress) SetSockaddr(pSockAddr *networkingwinsock.SOCKADDR_STORAGE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSockAddr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSockaddr dispatches through IWSDUdpAddress's vtable slot 11.
 func (self *IWSDUdpAddress) GetSockaddr(pSockAddr *networkingwinsock.SOCKADDR_STORAGE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSockAddr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetExclusive dispatches through IWSDUdpAddress's vtable slot 12.
 func (self *IWSDUdpAddress) SetExclusive(fExclusive bool) error {
 	_fExclusive := win32.Bool32(fExclusive)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(_fExclusive))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetExclusive dispatches through IWSDUdpAddress's vtable slot 13.
 func (self *IWSDUdpAddress) GetExclusive() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMessageType dispatches through IWSDUdpAddress's vtable slot 14.
 func (self *IWSDUdpAddress) SetMessageType(messageType WSDUdpMessageType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(messageType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMessageType dispatches through IWSDUdpAddress's vtable slot 15.
 func (self *IWSDUdpAddress) GetMessageType(pMessageType *WSDUdpMessageType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMessageType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTTL dispatches through IWSDUdpAddress's vtable slot 16.
 func (self *IWSDUdpAddress) SetTTL(dwTTL uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(dwTTL))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTTL dispatches through IWSDUdpAddress's vtable slot 17.
 func (self *IWSDUdpAddress) GetTTL(pdwTTL *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwTTL)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAlias dispatches through IWSDUdpAddress's vtable slot 18.
 func (self *IWSDUdpAddress) SetAlias(pAlias *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAlias)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAlias dispatches through IWSDUdpAddress's vtable slot 19.
 func (self *IWSDUdpAddress) GetAlias(pAlias *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAlias)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWSDUdpMessageParameters: https://learn.microsoft.com/windows/win32/api/wsdbase/nn-wsdbase-iwsdudpmessageparameters
@@ -1012,13 +1012,13 @@ var IID_IWSDUdpMessageParameters = win32.GUID{Data1: 0x9934149f, Data2: 0x8f0c, 
 // SetRetransmitParams dispatches through IWSDUdpMessageParameters's vtable slot 8.
 func (self *IWSDUdpMessageParameters) SetRetransmitParams(pParams *WSDUdpRetransmitParams) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pParams)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRetransmitParams dispatches through IWSDUdpMessageParameters's vtable slot 9.
 func (self *IWSDUdpMessageParameters) GetRetransmitParams(pParams *WSDUdpRetransmitParams) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pParams)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWSDXMLContext: https://learn.microsoft.com/windows/win32/api/wsdxml/nn-wsdxml-iwsdxmlcontext
@@ -1035,7 +1035,7 @@ func (self *IWSDXMLContext) AddNamespace(pszUri string, pszSuggestedPrefix strin
 	_pszUri := win32.UTF16Ptr(pszUri)
 	_pszSuggestedPrefix := win32.UTF16Ptr(pszSuggestedPrefix)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszUri)), uintptr(unsafe.Pointer(_pszSuggestedPrefix)), uintptr(unsafe.Pointer(ppNamespace)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddNameToNamespace dispatches through IWSDXMLContext's vtable slot 4.
@@ -1043,7 +1043,7 @@ func (self *IWSDXMLContext) AddNameToNamespace(pszUri string, pszName string, pp
 	_pszUri := win32.UTF16Ptr(pszUri)
 	_pszName := win32.UTF16Ptr(pszName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszUri)), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(ppName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetNamespaces dispatches through IWSDXMLContext's vtable slot 5.
@@ -1053,7 +1053,7 @@ func (self *IWSDXMLContext) SetNamespaces(pNamespaces []*WSDXML_NAMESPACE, bLaye
 		_pNamespaces = &pNamespaces[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pNamespaces)), uintptr(len(pNamespaces)), uintptr(bLayerNumber))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTypes dispatches through IWSDXMLContext's vtable slot 6.
@@ -1063,7 +1063,7 @@ func (self *IWSDXMLContext) SetTypes(pTypes []*WSDXML_TYPE, bLayerNumber byte) e
 		_pTypes = &pTypes[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pTypes)), uintptr(len(pTypes)), uintptr(bLayerNumber))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWSDiscoveredService: https://learn.microsoft.com/windows/win32/api/wsddisco/nn-wsddisco-iwsdiscoveredservice
@@ -1078,67 +1078,67 @@ var IID_IWSDiscoveredService = win32.GUID{Data1: 0x4bad8a3b, Data2: 0xb374, Data
 // GetEndpointReference dispatches through IWSDiscoveredService's vtable slot 3.
 func (self *IWSDiscoveredService) GetEndpointReference(ppEndpointReference **WSD_ENDPOINT_REFERENCE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEndpointReference)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTypes dispatches through IWSDiscoveredService's vtable slot 4.
 func (self *IWSDiscoveredService) GetTypes(ppTypesList **WSD_NAME_LIST) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTypesList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetScopes dispatches through IWSDiscoveredService's vtable slot 5.
 func (self *IWSDiscoveredService) GetScopes(ppScopesList **WSD_URI_LIST) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppScopesList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetXAddrs dispatches through IWSDiscoveredService's vtable slot 6.
 func (self *IWSDiscoveredService) GetXAddrs(ppXAddrsList **WSD_URI_LIST) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppXAddrsList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMetadataVersion dispatches through IWSDiscoveredService's vtable slot 7.
 func (self *IWSDiscoveredService) GetMetadataVersion(pullMetadataVersion *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pullMetadataVersion)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetExtendedDiscoXML dispatches through IWSDiscoveredService's vtable slot 8.
 func (self *IWSDiscoveredService) GetExtendedDiscoXML(ppHeaderAny **WSDXML_ELEMENT, ppBodyAny **WSDXML_ELEMENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppHeaderAny)), uintptr(unsafe.Pointer(ppBodyAny)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProbeResolveTag dispatches through IWSDiscoveredService's vtable slot 9.
 func (self *IWSDiscoveredService) GetProbeResolveTag(ppszTag *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszTag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRemoteTransportAddress dispatches through IWSDiscoveredService's vtable slot 10.
 func (self *IWSDiscoveredService) GetRemoteTransportAddress(ppszRemoteTransportAddress *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszRemoteTransportAddress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLocalTransportAddress dispatches through IWSDiscoveredService's vtable slot 11.
 func (self *IWSDiscoveredService) GetLocalTransportAddress(ppszLocalTransportAddress *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszLocalTransportAddress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLocalInterfaceGUID dispatches through IWSDiscoveredService's vtable slot 12.
 func (self *IWSDiscoveredService) GetLocalInterfaceGUID(pGuid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGuid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInstanceId dispatches through IWSDiscoveredService's vtable slot 13.
 func (self *IWSDiscoveredService) GetInstanceId(pullInstanceId *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pullInstanceId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWSDiscoveryProvider: https://learn.microsoft.com/windows/win32/api/wsddisco/nn-wsddisco-iwsdiscoveryprovider
@@ -1153,19 +1153,19 @@ var IID_IWSDiscoveryProvider = win32.GUID{Data1: 0x8ffc8e55, Data2: 0xf0eb, Data
 // SetAddressFamily dispatches through IWSDiscoveryProvider's vtable slot 3.
 func (self *IWSDiscoveryProvider) SetAddressFamily(dwAddressFamily uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwAddressFamily))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Attach dispatches through IWSDiscoveryProvider's vtable slot 4.
 func (self *IWSDiscoveryProvider) Attach(pSink *IWSDiscoveryProviderNotify) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Detach dispatches through IWSDiscoveryProvider's vtable slot 5.
 func (self *IWSDiscoveryProvider) Detach() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SearchById dispatches through IWSDiscoveryProvider's vtable slot 6.
@@ -1173,7 +1173,7 @@ func (self *IWSDiscoveryProvider) SearchById(pszId string, pszTag string) error 
 	_pszId := win32.UTF16Ptr(pszId)
 	_pszTag := win32.UTF16Ptr(pszTag)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszId)), uintptr(unsafe.Pointer(_pszTag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SearchByAddress dispatches through IWSDiscoveryProvider's vtable slot 7.
@@ -1181,7 +1181,7 @@ func (self *IWSDiscoveryProvider) SearchByAddress(pszAddress string, pszTag stri
 	_pszAddress := win32.UTF16Ptr(pszAddress)
 	_pszTag := win32.UTF16Ptr(pszTag)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszAddress)), uintptr(unsafe.Pointer(_pszTag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SearchByType dispatches through IWSDiscoveryProvider's vtable slot 8.
@@ -1189,13 +1189,13 @@ func (self *IWSDiscoveryProvider) SearchByType(pTypesList *WSD_NAME_LIST, pScope
 	_pszMatchBy := win32.UTF16Ptr(pszMatchBy)
 	_pszTag := win32.UTF16Ptr(pszTag)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTypesList)), uintptr(unsafe.Pointer(pScopesList)), uintptr(unsafe.Pointer(_pszMatchBy)), uintptr(unsafe.Pointer(_pszTag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetXMLContext dispatches through IWSDiscoveryProvider's vtable slot 9.
 func (self *IWSDiscoveryProvider) GetXMLContext(ppContext **IWSDXMLContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWSDiscoveryProviderNotify: https://learn.microsoft.com/windows/win32/api/wsddisco/nn-wsddisco-iwsdiscoveryprovidernotify
@@ -1210,27 +1210,27 @@ var IID_IWSDiscoveryProviderNotify = win32.GUID{Data1: 0x73ee3ced, Data2: 0xb6e6
 // Add dispatches through IWSDiscoveryProviderNotify's vtable slot 3.
 func (self *IWSDiscoveryProviderNotify) Add(pService *IWSDiscoveredService) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pService)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through IWSDiscoveryProviderNotify's vtable slot 4.
 func (self *IWSDiscoveryProviderNotify) Remove(pService *IWSDiscoveredService) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pService)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SearchFailed dispatches through IWSDiscoveryProviderNotify's vtable slot 5.
 func (self *IWSDiscoveryProviderNotify) SearchFailed(hr foundation.HRESULT, pszTag string) error {
 	_pszTag := win32.UTF16Ptr(pszTag)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hr), uintptr(unsafe.Pointer(_pszTag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SearchComplete dispatches through IWSDiscoveryProviderNotify's vtable slot 6.
 func (self *IWSDiscoveryProviderNotify) SearchComplete(pszTag string) error {
 	_pszTag := win32.UTF16Ptr(pszTag)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszTag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWSDiscoveryPublisher: https://learn.microsoft.com/windows/win32/api/wsddisco/nn-wsddisco-iwsdiscoverypublisher
@@ -1245,19 +1245,19 @@ var IID_IWSDiscoveryPublisher = win32.GUID{Data1: 0xae01e1a8, Data2: 0x3ff9, Dat
 // SetAddressFamily dispatches through IWSDiscoveryPublisher's vtable slot 3.
 func (self *IWSDiscoveryPublisher) SetAddressFamily(dwAddressFamily uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwAddressFamily))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterNotificationSink dispatches through IWSDiscoveryPublisher's vtable slot 4.
 func (self *IWSDiscoveryPublisher) RegisterNotificationSink(pSink *IWSDiscoveryPublisherNotify) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnRegisterNotificationSink dispatches through IWSDiscoveryPublisher's vtable slot 5.
 func (self *IWSDiscoveryPublisher) UnRegisterNotificationSink(pSink *IWSDiscoveryPublisherNotify) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Publish dispatches through IWSDiscoveryPublisher's vtable slot 6.
@@ -1265,7 +1265,7 @@ func (self *IWSDiscoveryPublisher) Publish(pszId string, ullMetadataVersion uint
 	_pszId := win32.UTF16Ptr(pszId)
 	_pszSessionId := win32.UTF16Ptr(pszSessionId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszId)), uintptr(ullMetadataVersion), uintptr(ullInstanceId), uintptr(ullMessageNumber), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(pTypesList)), uintptr(unsafe.Pointer(pScopesList)), uintptr(unsafe.Pointer(pXAddrsList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnPublish dispatches through IWSDiscoveryPublisher's vtable slot 7.
@@ -1273,7 +1273,7 @@ func (self *IWSDiscoveryPublisher) UnPublish(pszId string, ullInstanceId uint64,
 	_pszId := win32.UTF16Ptr(pszId)
 	_pszSessionId := win32.UTF16Ptr(pszSessionId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszId)), uintptr(ullInstanceId), uintptr(ullMessageNumber), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(pAny)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MatchProbe dispatches through IWSDiscoveryPublisher's vtable slot 8.
@@ -1281,7 +1281,7 @@ func (self *IWSDiscoveryPublisher) MatchProbe(pProbeMessage *WSD_SOAP_MESSAGE, p
 	_pszId := win32.UTF16Ptr(pszId)
 	_pszSessionId := win32.UTF16Ptr(pszSessionId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProbeMessage)), uintptr(unsafe.Pointer(pMessageParameters)), uintptr(unsafe.Pointer(_pszId)), uintptr(ullMetadataVersion), uintptr(ullInstanceId), uintptr(ullMessageNumber), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(pTypesList)), uintptr(unsafe.Pointer(pScopesList)), uintptr(unsafe.Pointer(pXAddrsList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MatchResolve dispatches through IWSDiscoveryPublisher's vtable slot 9.
@@ -1289,7 +1289,7 @@ func (self *IWSDiscoveryPublisher) MatchResolve(pResolveMessage *WSD_SOAP_MESSAG
 	_pszId := win32.UTF16Ptr(pszId)
 	_pszSessionId := win32.UTF16Ptr(pszSessionId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResolveMessage)), uintptr(unsafe.Pointer(pMessageParameters)), uintptr(unsafe.Pointer(_pszId)), uintptr(ullMetadataVersion), uintptr(ullInstanceId), uintptr(ullMessageNumber), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(pTypesList)), uintptr(unsafe.Pointer(pScopesList)), uintptr(unsafe.Pointer(pXAddrsList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PublishEx dispatches through IWSDiscoveryPublisher's vtable slot 10.
@@ -1297,7 +1297,7 @@ func (self *IWSDiscoveryPublisher) PublishEx(pszId string, ullMetadataVersion ui
 	_pszId := win32.UTF16Ptr(pszId)
 	_pszSessionId := win32.UTF16Ptr(pszSessionId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszId)), uintptr(ullMetadataVersion), uintptr(ullInstanceId), uintptr(ullMessageNumber), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(pTypesList)), uintptr(unsafe.Pointer(pScopesList)), uintptr(unsafe.Pointer(pXAddrsList)), uintptr(unsafe.Pointer(pHeaderAny)), uintptr(unsafe.Pointer(pReferenceParameterAny)), uintptr(unsafe.Pointer(pPolicyAny)), uintptr(unsafe.Pointer(pEndpointReferenceAny)), uintptr(unsafe.Pointer(pAny)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MatchProbeEx dispatches through IWSDiscoveryPublisher's vtable slot 11.
@@ -1305,7 +1305,7 @@ func (self *IWSDiscoveryPublisher) MatchProbeEx(pProbeMessage *WSD_SOAP_MESSAGE,
 	_pszId := win32.UTF16Ptr(pszId)
 	_pszSessionId := win32.UTF16Ptr(pszSessionId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProbeMessage)), uintptr(unsafe.Pointer(pMessageParameters)), uintptr(unsafe.Pointer(_pszId)), uintptr(ullMetadataVersion), uintptr(ullInstanceId), uintptr(ullMessageNumber), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(pTypesList)), uintptr(unsafe.Pointer(pScopesList)), uintptr(unsafe.Pointer(pXAddrsList)), uintptr(unsafe.Pointer(pHeaderAny)), uintptr(unsafe.Pointer(pReferenceParameterAny)), uintptr(unsafe.Pointer(pPolicyAny)), uintptr(unsafe.Pointer(pEndpointReferenceAny)), uintptr(unsafe.Pointer(pAny)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MatchResolveEx dispatches through IWSDiscoveryPublisher's vtable slot 12.
@@ -1313,25 +1313,25 @@ func (self *IWSDiscoveryPublisher) MatchResolveEx(pResolveMessage *WSD_SOAP_MESS
 	_pszId := win32.UTF16Ptr(pszId)
 	_pszSessionId := win32.UTF16Ptr(pszSessionId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResolveMessage)), uintptr(unsafe.Pointer(pMessageParameters)), uintptr(unsafe.Pointer(_pszId)), uintptr(ullMetadataVersion), uintptr(ullInstanceId), uintptr(ullMessageNumber), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(pTypesList)), uintptr(unsafe.Pointer(pScopesList)), uintptr(unsafe.Pointer(pXAddrsList)), uintptr(unsafe.Pointer(pHeaderAny)), uintptr(unsafe.Pointer(pReferenceParameterAny)), uintptr(unsafe.Pointer(pPolicyAny)), uintptr(unsafe.Pointer(pEndpointReferenceAny)), uintptr(unsafe.Pointer(pAny)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterScopeMatchingRule dispatches through IWSDiscoveryPublisher's vtable slot 13.
 func (self *IWSDiscoveryPublisher) RegisterScopeMatchingRule(pScopeMatchingRule *IWSDScopeMatchingRule) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pScopeMatchingRule)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnRegisterScopeMatchingRule dispatches through IWSDiscoveryPublisher's vtable slot 14.
 func (self *IWSDiscoveryPublisher) UnRegisterScopeMatchingRule(pScopeMatchingRule *IWSDScopeMatchingRule) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pScopeMatchingRule)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetXMLContext dispatches through IWSDiscoveryPublisher's vtable slot 15.
 func (self *IWSDiscoveryPublisher) GetXMLContext(ppContext **IWSDXMLContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWSDiscoveryPublisherNotify: https://learn.microsoft.com/windows/win32/api/wsddisco/nn-wsddisco-iwsdiscoverypublishernotify
@@ -1346,11 +1346,11 @@ var IID_IWSDiscoveryPublisherNotify = win32.GUID{Data1: 0xe67651b0, Data2: 0x337
 // ProbeHandler dispatches through IWSDiscoveryPublisherNotify's vtable slot 3.
 func (self *IWSDiscoveryPublisherNotify) ProbeHandler(pSoap *WSD_SOAP_MESSAGE, pMessageParameters *IWSDMessageParameters) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSoap)), uintptr(unsafe.Pointer(pMessageParameters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ResolveHandler dispatches through IWSDiscoveryPublisherNotify's vtable slot 4.
 func (self *IWSDiscoveryPublisherNotify) ResolveHandler(pSoap *WSD_SOAP_MESSAGE, pMessageParameters *IWSDMessageParameters) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSoap)), uintptr(unsafe.Pointer(pMessageParameters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

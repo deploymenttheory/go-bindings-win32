@@ -24,7 +24,7 @@ var IID_IDxcAssembler = win32.GUID{Data1: 0x091f7a26, Data2: 0x1c1f, Data3: 0x49
 // AssembleToContainer dispatches through IDxcAssembler's vtable slot 3.
 func (self *IDxcAssembler) AssembleToContainer(pShader *IDxcBlob, ppResult **IDxcOperationResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pShader)), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 8ba5fb08-5195-40e2-ac58-0d989c3a0102
@@ -58,7 +58,7 @@ var IID_IDxcBlobEncoding = win32.GUID{Data1: 0x7241d424, Data2: 0x2646, Data3: 0
 // GetEncoding dispatches through IDxcBlobEncoding's vtable slot 5.
 func (self *IDxcBlobEncoding) GetEncoding(pKnown *foundation.BOOL, pCodePage *DXC_CP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pKnown)), uintptr(unsafe.Pointer(pCodePage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: a3f84eab-0faa-497e-a39c-ee6ed60b2d84
@@ -123,7 +123,7 @@ func (self *IDxcCompiler) Compile(pSource *IDxcBlob, pSourceName string, pEntryP
 		_pDefines = &pDefines[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSource)), uintptr(unsafe.Pointer(_pSourceName)), uintptr(unsafe.Pointer(_pEntryPoint)), uintptr(unsafe.Pointer(_pTargetProfile)), uintptr(unsafe.Pointer(_pArguments)), uintptr(len(pArguments)), uintptr(unsafe.Pointer(_pDefines)), uintptr(len(pDefines)), uintptr(unsafe.Pointer(pIncludeHandler)), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Preprocess dispatches through IDxcCompiler's vtable slot 4.
@@ -138,13 +138,13 @@ func (self *IDxcCompiler) Preprocess(pSource *IDxcBlob, pSourceName string, pArg
 		_pDefines = &pDefines[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSource)), uintptr(unsafe.Pointer(_pSourceName)), uintptr(unsafe.Pointer(_pArguments)), uintptr(len(pArguments)), uintptr(unsafe.Pointer(_pDefines)), uintptr(len(pDefines)), uintptr(unsafe.Pointer(pIncludeHandler)), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Disassemble dispatches through IDxcCompiler's vtable slot 5.
 func (self *IDxcCompiler) Disassemble(pSource *IDxcBlob, ppDisassembly **IDxcBlobEncoding) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSource)), uintptr(unsafe.Pointer(ppDisassembly)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: a005a9d9-b8bb-4594-b5c9-0e633bec4d37
@@ -169,7 +169,7 @@ func (self *IDxcCompiler2) CompileWithDebug(pSource *IDxcBlob, pSourceName strin
 		_pDefines = &pDefines[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSource)), uintptr(unsafe.Pointer(_pSourceName)), uintptr(unsafe.Pointer(_pEntryPoint)), uintptr(unsafe.Pointer(_pTargetProfile)), uintptr(unsafe.Pointer(_pArguments)), uintptr(len(pArguments)), uintptr(unsafe.Pointer(_pDefines)), uintptr(len(pDefines)), uintptr(unsafe.Pointer(pIncludeHandler)), uintptr(unsafe.Pointer(ppResult)), uintptr(unsafe.Pointer(ppDebugBlobName)), uintptr(unsafe.Pointer(ppDebugBlob)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 228b4687-5a6a-4730-900c-9702b2203f54
@@ -187,13 +187,13 @@ func (self *IDxcCompiler3) Compile(pSource *DxcBuffer, pArguments []foundation.P
 		_pArguments = &pArguments[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSource)), uintptr(unsafe.Pointer(_pArguments)), uintptr(len(pArguments)), uintptr(unsafe.Pointer(pIncludeHandler)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Disassemble dispatches through IDxcCompiler3's vtable slot 4.
 func (self *IDxcCompiler3) Disassemble(pObject *DxcBuffer, riid *win32.GUID, ppResult **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObject)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 73effe2a-70dc-45f8-9690-eff64c02429d
@@ -223,7 +223,7 @@ func (self *IDxcCompilerArgs) AddArguments(pArguments []foundation.PWSTR) error 
 		_pArguments = &pArguments[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pArguments)), uintptr(len(pArguments)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddArgumentsUTF8 dispatches through IDxcCompilerArgs's vtable slot 6.
@@ -233,7 +233,7 @@ func (self *IDxcCompilerArgs) AddArgumentsUTF8(pArguments []foundation.PSTR) err
 		_pArguments = &pArguments[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pArguments)), uintptr(len(pArguments)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddDefines dispatches through IDxcCompilerArgs's vtable slot 7.
@@ -243,7 +243,7 @@ func (self *IDxcCompilerArgs) AddDefines(pDefines []DxcDefine) error {
 		_pDefines = &pDefines[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pDefines)), uintptr(len(pDefines)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 334b1f50-2292-4b35-99a1-25588d8c17fe
@@ -257,25 +257,25 @@ var IID_IDxcContainerBuilder = win32.GUID{Data1: 0x334b1f50, Data2: 0x2292, Data
 // Load dispatches through IDxcContainerBuilder's vtable slot 3.
 func (self *IDxcContainerBuilder) Load(pDxilContainerHeader *IDxcBlob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDxilContainerHeader)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddPart dispatches through IDxcContainerBuilder's vtable slot 4.
 func (self *IDxcContainerBuilder) AddPart(fourCC uint32, pSource *IDxcBlob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(fourCC), uintptr(unsafe.Pointer(pSource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemovePart dispatches through IDxcContainerBuilder's vtable slot 5.
 func (self *IDxcContainerBuilder) RemovePart(fourCC uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(fourCC))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SerializeContainer dispatches through IDxcContainerBuilder's vtable slot 6.
 func (self *IDxcContainerBuilder) SerializeContainer(ppResult **IDxcOperationResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: d2c21b26-8350-4bdc-976a-331ce6f4c54c
@@ -289,37 +289,37 @@ var IID_IDxcContainerReflection = win32.GUID{Data1: 0xd2c21b26, Data2: 0x8350, D
 // Load dispatches through IDxcContainerReflection's vtable slot 3.
 func (self *IDxcContainerReflection) Load(pContainer *IDxcBlob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pContainer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPartCount dispatches through IDxcContainerReflection's vtable slot 4.
 func (self *IDxcContainerReflection) GetPartCount(pResult *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPartKind dispatches through IDxcContainerReflection's vtable slot 5.
 func (self *IDxcContainerReflection) GetPartKind(idx uint32, pResult *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(idx), uintptr(unsafe.Pointer(pResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPartContent dispatches through IDxcContainerReflection's vtable slot 6.
 func (self *IDxcContainerReflection) GetPartContent(idx uint32, ppResult **IDxcBlob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(idx), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FindFirstPartKind dispatches through IDxcContainerReflection's vtable slot 7.
 func (self *IDxcContainerReflection) FindFirstPartKind(kind uint32, pResult *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(kind), uintptr(unsafe.Pointer(pResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPartReflection dispatches through IDxcContainerReflection's vtable slot 8.
 func (self *IDxcContainerReflection) GetPartReflection(idx uint32, iid *win32.GUID, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(idx), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(ppvObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 319b37a2-a5c2-494a-a5de-4801b2faf989
@@ -339,7 +339,7 @@ func (self *IDxcExtraOutputs) GetOutputCount() uint32 {
 // GetOutput dispatches through IDxcExtraOutputs's vtable slot 4.
 func (self *IDxcExtraOutputs) GetOutput(uIndex uint32, iid *win32.GUID, ppvObject **win32.IUnknown, ppOutputType **IDxcBlobUtf16, ppOutputName **IDxcBlobUtf16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(uIndex), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(ppvObject)), uintptr(unsafe.Pointer(ppOutputType)), uintptr(unsafe.Pointer(ppOutputName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 7f61fc7d-950d-467f-b3e3-3c02fb49187c
@@ -354,7 +354,7 @@ var IID_IDxcIncludeHandler = win32.GUID{Data1: 0x7f61fc7d, Data2: 0x950d, Data3:
 func (self *IDxcIncludeHandler) LoadSource(pFilename string, ppIncludeSource **IDxcBlob) error {
 	_pFilename := win32.UTF16Ptr(pFilename)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pFilename)), uintptr(unsafe.Pointer(ppIncludeSource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: e5204dc7-d18c-4c3c-bdfb-851673980fe7
@@ -368,20 +368,20 @@ var IID_IDxcLibrary = win32.GUID{Data1: 0xe5204dc7, Data2: 0xd18c, Data3: 0x4c3c
 // SetMalloc dispatches through IDxcLibrary's vtable slot 3.
 func (self *IDxcLibrary) SetMalloc(pMalloc *systemcom.IMalloc) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMalloc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateBlobFromBlob dispatches through IDxcLibrary's vtable slot 4.
 func (self *IDxcLibrary) CreateBlobFromBlob(pBlob *IDxcBlob, offset uint32, length uint32, ppResult **IDxcBlob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBlob)), uintptr(offset), uintptr(length), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateBlobFromFile dispatches through IDxcLibrary's vtable slot 5.
 func (self *IDxcLibrary) CreateBlobFromFile(pFileName string, codePage *DXC_CP, pBlobEncoding **IDxcBlobEncoding) error {
 	_pFileName := win32.UTF16Ptr(pFileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pFileName)), uintptr(unsafe.Pointer(codePage)), uintptr(unsafe.Pointer(pBlobEncoding)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateBlobWithEncodingFromPinned dispatches through IDxcLibrary's vtable slot 6.
@@ -391,7 +391,7 @@ func (self *IDxcLibrary) CreateBlobWithEncodingFromPinned(pText []byte, codePage
 		_pText = &pText[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pText)), uintptr(len(pText)), uintptr(codePage), uintptr(unsafe.Pointer(pBlobEncoding)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateBlobWithEncodingOnHeapCopy dispatches through IDxcLibrary's vtable slot 7.
@@ -401,7 +401,7 @@ func (self *IDxcLibrary) CreateBlobWithEncodingOnHeapCopy(pText []byte, codePage
 		_pText = &pText[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pText)), uintptr(len(pText)), uintptr(codePage), uintptr(unsafe.Pointer(pBlobEncoding)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateBlobWithEncodingOnMalloc dispatches through IDxcLibrary's vtable slot 8.
@@ -411,31 +411,31 @@ func (self *IDxcLibrary) CreateBlobWithEncodingOnMalloc(pText []byte, pIMalloc *
 		_pText = &pText[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pText)), uintptr(unsafe.Pointer(pIMalloc)), uintptr(len(pText)), uintptr(codePage), uintptr(unsafe.Pointer(pBlobEncoding)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateIncludeHandler dispatches through IDxcLibrary's vtable slot 9.
 func (self *IDxcLibrary) CreateIncludeHandler(ppResult **IDxcIncludeHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateStreamFromBlobReadOnly dispatches through IDxcLibrary's vtable slot 10.
 func (self *IDxcLibrary) CreateStreamFromBlobReadOnly(pBlob *IDxcBlob, ppStream **systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBlob)), uintptr(unsafe.Pointer(ppStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBlobAsUtf8 dispatches through IDxcLibrary's vtable slot 11.
 func (self *IDxcLibrary) GetBlobAsUtf8(pBlob *IDxcBlob, pBlobEncoding **IDxcBlobEncoding) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBlob)), uintptr(unsafe.Pointer(pBlobEncoding)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBlobAsWide dispatches through IDxcLibrary's vtable slot 12.
 func (self *IDxcLibrary) GetBlobAsWide(pBlob *IDxcBlob, pBlobEncoding **IDxcBlobEncoding) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBlob)), uintptr(unsafe.Pointer(pBlobEncoding)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f1b5be2a-62dd-4327-a1c2-42ac1e1e78e6
@@ -450,7 +450,7 @@ var IID_IDxcLinker = win32.GUID{Data1: 0xf1b5be2a, Data2: 0x62dd, Data3: 0x4327,
 func (self *IDxcLinker) RegisterLibrary(pLibName string, pLib *IDxcBlob) error {
 	_pLibName := win32.UTF16Ptr(pLibName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pLibName)), uintptr(unsafe.Pointer(pLib)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Link dispatches through IDxcLinker's vtable slot 4.
@@ -466,7 +466,7 @@ func (self *IDxcLinker) Link(pEntryName string, pTargetProfile string, pLibNames
 		_pArguments = &pArguments[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pEntryName)), uintptr(unsafe.Pointer(_pTargetProfile)), uintptr(unsafe.Pointer(_pLibNames)), uintptr(len(pLibNames)), uintptr(unsafe.Pointer(_pArguments)), uintptr(len(pArguments)), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: cedb484a-d4e9-445a-b991-ca21ca157dc2
@@ -480,19 +480,19 @@ var IID_IDxcOperationResult = win32.GUID{Data1: 0xcedb484a, Data2: 0xd4e9, Data3
 // GetStatus dispatches through IDxcOperationResult's vtable slot 3.
 func (self *IDxcOperationResult) GetStatus(pStatus *foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetResult dispatches through IDxcOperationResult's vtable slot 4.
 func (self *IDxcOperationResult) GetResult(ppResult **IDxcBlob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetErrorBuffer dispatches through IDxcOperationResult's vtable slot 5.
 func (self *IDxcOperationResult) GetErrorBuffer(ppErrors **IDxcBlobEncoding) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppErrors)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 25740e2e-9cba-401b-9119-4fb42f39f270
@@ -506,13 +506,13 @@ var IID_IDxcOptimizer = win32.GUID{Data1: 0x25740e2e, Data2: 0x9cba, Data3: 0x40
 // GetAvailablePassCount dispatches through IDxcOptimizer's vtable slot 3.
 func (self *IDxcOptimizer) GetAvailablePassCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAvailablePass dispatches through IDxcOptimizer's vtable slot 4.
 func (self *IDxcOptimizer) GetAvailablePass(index uint32, ppResult **IDxcOptimizerPass) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RunOptimizer dispatches through IDxcOptimizer's vtable slot 5.
@@ -522,7 +522,7 @@ func (self *IDxcOptimizer) RunOptimizer(pBlob *IDxcBlob, ppOptions []foundation.
 		_ppOptions = &ppOptions[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBlob)), uintptr(unsafe.Pointer(_ppOptions)), uintptr(len(ppOptions)), uintptr(unsafe.Pointer(pOutputModule)), uintptr(unsafe.Pointer(ppOutputText)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: ae2cd79f-cc22-453f-9b6b-b124e7a5204c
@@ -536,31 +536,31 @@ var IID_IDxcOptimizerPass = win32.GUID{Data1: 0xae2cd79f, Data2: 0xcc22, Data3: 
 // GetOptionName dispatches through IDxcOptimizerPass's vtable slot 3.
 func (self *IDxcOptimizerPass) GetOptionName(ppResult *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDescription dispatches through IDxcOptimizerPass's vtable slot 4.
 func (self *IDxcOptimizerPass) GetDescription(ppResult *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOptionArgCount dispatches through IDxcOptimizerPass's vtable slot 5.
 func (self *IDxcOptimizerPass) GetOptionArgCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOptionArgName dispatches through IDxcOptimizerPass's vtable slot 6.
 func (self *IDxcOptimizerPass) GetOptionArgName(argIndex uint32, ppResult *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(argIndex), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOptionArgDescription dispatches through IDxcOptimizerPass's vtable slot 7.
 func (self *IDxcOptimizerPass) GetOptionArgDescription(argIndex uint32, ppResult *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(argIndex), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: e6c9647e-9d6a-4c3b-b94c-524b5a6c343d
@@ -574,103 +574,103 @@ var IID_IDxcPdbUtils = win32.GUID{Data1: 0xe6c9647e, Data2: 0x9d6a, Data3: 0x4c3
 // Load dispatches through IDxcPdbUtils's vtable slot 3.
 func (self *IDxcPdbUtils) Load(pPdbOrDxil *IDxcBlob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPdbOrDxil)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSourceCount dispatches through IDxcPdbUtils's vtable slot 4.
 func (self *IDxcPdbUtils) GetSourceCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSource dispatches through IDxcPdbUtils's vtable slot 5.
 func (self *IDxcPdbUtils) GetSource(uIndex uint32, ppResult **IDxcBlobEncoding) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(uIndex), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSourceName dispatches through IDxcPdbUtils's vtable slot 6.
 func (self *IDxcPdbUtils) GetSourceName(uIndex uint32, pResult *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(uIndex), uintptr(unsafe.Pointer(pResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFlagCount dispatches through IDxcPdbUtils's vtable slot 7.
 func (self *IDxcPdbUtils) GetFlagCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFlag dispatches through IDxcPdbUtils's vtable slot 8.
 func (self *IDxcPdbUtils) GetFlag(uIndex uint32, pResult *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(uIndex), uintptr(unsafe.Pointer(pResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetArgCount dispatches through IDxcPdbUtils's vtable slot 9.
 func (self *IDxcPdbUtils) GetArgCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetArg dispatches through IDxcPdbUtils's vtable slot 10.
 func (self *IDxcPdbUtils) GetArg(uIndex uint32, pResult *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(uIndex), uintptr(unsafe.Pointer(pResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetArgPairCount dispatches through IDxcPdbUtils's vtable slot 11.
 func (self *IDxcPdbUtils) GetArgPairCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetArgPair dispatches through IDxcPdbUtils's vtable slot 12.
 func (self *IDxcPdbUtils) GetArgPair(uIndex uint32, pName *foundation.BSTR, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(uIndex), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDefineCount dispatches through IDxcPdbUtils's vtable slot 13.
 func (self *IDxcPdbUtils) GetDefineCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDefine dispatches through IDxcPdbUtils's vtable slot 14.
 func (self *IDxcPdbUtils) GetDefine(uIndex uint32, pResult *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(uIndex), uintptr(unsafe.Pointer(pResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTargetProfile dispatches through IDxcPdbUtils's vtable slot 15.
 func (self *IDxcPdbUtils) GetTargetProfile(pResult *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEntryPoint dispatches through IDxcPdbUtils's vtable slot 16.
 func (self *IDxcPdbUtils) GetEntryPoint(pResult *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMainFileName dispatches through IDxcPdbUtils's vtable slot 17.
 func (self *IDxcPdbUtils) GetMainFileName(pResult *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetHash dispatches through IDxcPdbUtils's vtable slot 18.
 func (self *IDxcPdbUtils) GetHash(ppResult **IDxcBlob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetName dispatches through IDxcPdbUtils's vtable slot 19.
 func (self *IDxcPdbUtils) GetName(pResult *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsFullPDB dispatches through IDxcPdbUtils's vtable slot 20.
@@ -682,38 +682,38 @@ func (self *IDxcPdbUtils) IsFullPDB() foundation.BOOL {
 // GetFullPDB dispatches through IDxcPdbUtils's vtable slot 21.
 func (self *IDxcPdbUtils) GetFullPDB(ppFullPDB **IDxcBlob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFullPDB)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetVersionInfo dispatches through IDxcPdbUtils's vtable slot 22.
 func (self *IDxcPdbUtils) GetVersionInfo(ppVersionInfo **IDxcVersionInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppVersionInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCompiler dispatches through IDxcPdbUtils's vtable slot 23.
 func (self *IDxcPdbUtils) SetCompiler(pCompiler *IDxcCompiler3) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCompiler)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CompileForFullPDB dispatches through IDxcPdbUtils's vtable slot 24.
 func (self *IDxcPdbUtils) CompileForFullPDB(ppResult **IDxcResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OverrideArgs dispatches through IDxcPdbUtils's vtable slot 25.
 func (self *IDxcPdbUtils) OverrideArgs(pArgPairs *DxcArgPair, uNumArgPairs uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pArgPairs)), uintptr(uNumArgPairs))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OverrideRootSignature dispatches through IDxcPdbUtils's vtable slot 26.
 func (self *IDxcPdbUtils) OverrideRootSignature(pRootSignature string) error {
 	_pRootSignature := win32.UTF16Ptr(pRootSignature)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pRootSignature)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 4315d938-f369-4f93-95a2-252017cc3807
@@ -727,139 +727,139 @@ var IID_IDxcPdbUtils2 = win32.GUID{Data1: 0x4315d938, Data2: 0xf369, Data3: 0x4f
 // Load dispatches through IDxcPdbUtils2's vtable slot 3.
 func (self *IDxcPdbUtils2) Load(pPdbOrDxil *IDxcBlob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPdbOrDxil)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSourceCount dispatches through IDxcPdbUtils2's vtable slot 4.
 func (self *IDxcPdbUtils2) GetSourceCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSource dispatches through IDxcPdbUtils2's vtable slot 5.
 func (self *IDxcPdbUtils2) GetSource(uIndex uint32, ppResult **IDxcBlobEncoding) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(uIndex), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSourceName dispatches through IDxcPdbUtils2's vtable slot 6.
 func (self *IDxcPdbUtils2) GetSourceName(uIndex uint32, ppResult **IDxcBlobUtf16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(uIndex), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLibraryPDBCount dispatches through IDxcPdbUtils2's vtable slot 7.
 func (self *IDxcPdbUtils2) GetLibraryPDBCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLibraryPDB dispatches through IDxcPdbUtils2's vtable slot 8.
 func (self *IDxcPdbUtils2) GetLibraryPDB(uIndex uint32, ppOutPdbUtils **IDxcPdbUtils2, ppLibraryName **IDxcBlobUtf16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(uIndex), uintptr(unsafe.Pointer(ppOutPdbUtils)), uintptr(unsafe.Pointer(ppLibraryName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFlagCount dispatches through IDxcPdbUtils2's vtable slot 9.
 func (self *IDxcPdbUtils2) GetFlagCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFlag dispatches through IDxcPdbUtils2's vtable slot 10.
 func (self *IDxcPdbUtils2) GetFlag(uIndex uint32, ppResult **IDxcBlobUtf16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(uIndex), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetArgCount dispatches through IDxcPdbUtils2's vtable slot 11.
 func (self *IDxcPdbUtils2) GetArgCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetArg dispatches through IDxcPdbUtils2's vtable slot 12.
 func (self *IDxcPdbUtils2) GetArg(uIndex uint32, ppResult **IDxcBlobUtf16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(uIndex), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetArgPairCount dispatches through IDxcPdbUtils2's vtable slot 13.
 func (self *IDxcPdbUtils2) GetArgPairCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetArgPair dispatches through IDxcPdbUtils2's vtable slot 14.
 func (self *IDxcPdbUtils2) GetArgPair(uIndex uint32, ppName **IDxcBlobUtf16, ppValue **IDxcBlobUtf16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(uIndex), uintptr(unsafe.Pointer(ppName)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDefineCount dispatches through IDxcPdbUtils2's vtable slot 15.
 func (self *IDxcPdbUtils2) GetDefineCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDefine dispatches through IDxcPdbUtils2's vtable slot 16.
 func (self *IDxcPdbUtils2) GetDefine(uIndex uint32, ppResult **IDxcBlobUtf16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(uIndex), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTargetProfile dispatches through IDxcPdbUtils2's vtable slot 17.
 func (self *IDxcPdbUtils2) GetTargetProfile(ppResult **IDxcBlobUtf16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEntryPoint dispatches through IDxcPdbUtils2's vtable slot 18.
 func (self *IDxcPdbUtils2) GetEntryPoint(ppResult **IDxcBlobUtf16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMainFileName dispatches through IDxcPdbUtils2's vtable slot 19.
 func (self *IDxcPdbUtils2) GetMainFileName(ppResult **IDxcBlobUtf16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetHash dispatches through IDxcPdbUtils2's vtable slot 20.
 func (self *IDxcPdbUtils2) GetHash(ppResult **IDxcBlob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetName dispatches through IDxcPdbUtils2's vtable slot 21.
 func (self *IDxcPdbUtils2) GetName(ppResult **IDxcBlobUtf16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetVersionInfo dispatches through IDxcPdbUtils2's vtable slot 22.
 func (self *IDxcPdbUtils2) GetVersionInfo(ppVersionInfo **IDxcVersionInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppVersionInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCustomToolchainID dispatches through IDxcPdbUtils2's vtable slot 23.
 func (self *IDxcPdbUtils2) GetCustomToolchainID(pID *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCustomToolchainData dispatches through IDxcPdbUtils2's vtable slot 24.
 func (self *IDxcPdbUtils2) GetCustomToolchainData(ppBlob **IDxcBlob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppBlob)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetWholeDxil dispatches through IDxcPdbUtils2's vtable slot 25.
 func (self *IDxcPdbUtils2) GetWholeDxil(ppResult **IDxcBlob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsFullPDB dispatches through IDxcPdbUtils2's vtable slot 26.
@@ -891,7 +891,7 @@ func (self *IDxcResult) HasOutput(dxcOutKind DXC_OUT_KIND) foundation.BOOL {
 // GetOutput dispatches through IDxcResult's vtable slot 7.
 func (self *IDxcResult) GetOutput(dxcOutKind DXC_OUT_KIND, iid *win32.GUID, ppvObject **win32.IUnknown, ppOutputName **IDxcBlobUtf16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dxcOutKind), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(ppvObject)), uintptr(unsafe.Pointer(ppOutputName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNumOutputs dispatches through IDxcResult's vtable slot 8.
@@ -923,7 +923,7 @@ var IID_IDxcUtils = win32.GUID{Data1: 0x4605c4cb, Data2: 0x2019, Data3: 0x492a, 
 // CreateBlobFromBlob dispatches through IDxcUtils's vtable slot 3.
 func (self *IDxcUtils) CreateBlobFromBlob(pBlob *IDxcBlob, offset uint32, length uint32, ppResult **IDxcBlob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBlob)), uintptr(offset), uintptr(length), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateBlobFromPinned dispatches through IDxcUtils's vtable slot 4.
@@ -933,7 +933,7 @@ func (self *IDxcUtils) CreateBlobFromPinned(pData []byte, codePage DXC_CP, ppBlo
 		_pData = &pData[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(codePage), uintptr(unsafe.Pointer(ppBlobEncoding)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MoveToBlob dispatches through IDxcUtils's vtable slot 5.
@@ -943,7 +943,7 @@ func (self *IDxcUtils) MoveToBlob(pData []byte, pIMalloc *systemcom.IMalloc, cod
 		_pData = &pData[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pData)), uintptr(unsafe.Pointer(pIMalloc)), uintptr(len(pData)), uintptr(codePage), uintptr(unsafe.Pointer(ppBlobEncoding)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateBlob dispatches through IDxcUtils's vtable slot 6.
@@ -953,50 +953,50 @@ func (self *IDxcUtils) CreateBlob(pData []byte, codePage DXC_CP, ppBlobEncoding 
 		_pData = &pData[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(codePage), uintptr(unsafe.Pointer(ppBlobEncoding)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LoadFile dispatches through IDxcUtils's vtable slot 7.
 func (self *IDxcUtils) LoadFile(pFileName string, pCodePage *DXC_CP, ppBlobEncoding **IDxcBlobEncoding) error {
 	_pFileName := win32.UTF16Ptr(pFileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pFileName)), uintptr(unsafe.Pointer(pCodePage)), uintptr(unsafe.Pointer(ppBlobEncoding)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateReadOnlyStreamFromBlob dispatches through IDxcUtils's vtable slot 8.
 func (self *IDxcUtils) CreateReadOnlyStreamFromBlob(pBlob *IDxcBlob, ppStream **systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBlob)), uintptr(unsafe.Pointer(ppStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateDefaultIncludeHandler dispatches through IDxcUtils's vtable slot 9.
 func (self *IDxcUtils) CreateDefaultIncludeHandler(ppResult **IDxcIncludeHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBlobAsUtf8 dispatches through IDxcUtils's vtable slot 10.
 func (self *IDxcUtils) GetBlobAsUtf8(pBlob *IDxcBlob, ppBlobEncoding **IDxcBlobUtf8) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBlob)), uintptr(unsafe.Pointer(ppBlobEncoding)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBlobAsWide dispatches through IDxcUtils's vtable slot 11.
 func (self *IDxcUtils) GetBlobAsWide(pBlob *IDxcBlob, ppBlobEncoding **IDxcBlobUtf16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBlob)), uintptr(unsafe.Pointer(ppBlobEncoding)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDxilContainerPart dispatches through IDxcUtils's vtable slot 12.
 func (self *IDxcUtils) GetDxilContainerPart(pShader *DxcBuffer, DxcPart uint32, ppPartData *unsafe.Pointer, pPartSizeInBytes *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pShader)), uintptr(DxcPart), uintptr(unsafe.Pointer(ppPartData)), uintptr(unsafe.Pointer(pPartSizeInBytes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateReflection dispatches through IDxcUtils's vtable slot 13.
 func (self *IDxcUtils) CreateReflection(pData *DxcBuffer, iid *win32.GUID, ppvReflection **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(ppvReflection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BuildArguments dispatches through IDxcUtils's vtable slot 14.
@@ -1013,13 +1013,13 @@ func (self *IDxcUtils) BuildArguments(pSourceName string, pEntryPoint string, pT
 		_pDefines = &pDefines[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pSourceName)), uintptr(unsafe.Pointer(_pEntryPoint)), uintptr(unsafe.Pointer(_pTargetProfile)), uintptr(unsafe.Pointer(_pArguments)), uintptr(len(pArguments)), uintptr(unsafe.Pointer(_pDefines)), uintptr(len(pDefines)), uintptr(unsafe.Pointer(ppArgs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPDBContents dispatches through IDxcUtils's vtable slot 15.
 func (self *IDxcUtils) GetPDBContents(pPDBBlob *IDxcBlob, ppHash **IDxcBlob, ppContainer **IDxcBlob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPDBBlob)), uintptr(unsafe.Pointer(ppHash)), uintptr(unsafe.Pointer(ppContainer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: a6e82bd2-1fd7-4826-9811-2857e797f49a
@@ -1033,7 +1033,7 @@ var IID_IDxcValidator = win32.GUID{Data1: 0xa6e82bd2, Data2: 0x1fd7, Data3: 0x48
 // Validate dispatches through IDxcValidator's vtable slot 3.
 func (self *IDxcValidator) Validate(pShader *IDxcBlob, Flags uint32, ppResult **IDxcOperationResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pShader)), uintptr(Flags), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 458e1fd1-b1b2-4750-a6e1-9c10f03bed92
@@ -1047,7 +1047,7 @@ var IID_IDxcValidator2 = win32.GUID{Data1: 0x458e1fd1, Data2: 0xb1b2, Data3: 0x4
 // ValidateWithDebug dispatches through IDxcValidator2's vtable slot 4.
 func (self *IDxcValidator2) ValidateWithDebug(pShader *IDxcBlob, Flags uint32, pOptDebugBitcode *DxcBuffer, ppResult **IDxcOperationResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pShader)), uintptr(Flags), uintptr(unsafe.Pointer(pOptDebugBitcode)), uintptr(unsafe.Pointer(ppResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: b04f5b50-2059-4f12-a8ff-a1e0cde1cc7e
@@ -1061,13 +1061,13 @@ var IID_IDxcVersionInfo = win32.GUID{Data1: 0xb04f5b50, Data2: 0x2059, Data3: 0x
 // GetVersion dispatches through IDxcVersionInfo's vtable slot 3.
 func (self *IDxcVersionInfo) GetVersion(pMajor *uint32, pMinor *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMajor)), uintptr(unsafe.Pointer(pMinor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFlags dispatches through IDxcVersionInfo's vtable slot 4.
 func (self *IDxcVersionInfo) GetFlags(pFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: fb6904c4-42f0-4b62-9c46-983af7da7c83
@@ -1081,7 +1081,7 @@ var IID_IDxcVersionInfo2 = win32.GUID{Data1: 0xfb6904c4, Data2: 0x42f0, Data3: 0
 // GetCommitInfo dispatches through IDxcVersionInfo2's vtable slot 5.
 func (self *IDxcVersionInfo2) GetCommitInfo(pCommitCount *uint32, pCommitHash **int8) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCommitCount)), uintptr(unsafe.Pointer(pCommitHash)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 5e13e843-9d25-473c-9ad2-03b2d0b44b1e
@@ -1095,5 +1095,5 @@ var IID_IDxcVersionInfo3 = win32.GUID{Data1: 0x5e13e843, Data2: 0x9d25, Data3: 0
 // GetCustomVersionString dispatches through IDxcVersionInfo3's vtable slot 3.
 func (self *IDxcVersionInfo3) GetCustomVersionString(pVersionString **int8) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVersionString)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

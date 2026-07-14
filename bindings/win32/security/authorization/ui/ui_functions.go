@@ -51,5 +51,5 @@ func EditSecurity(hwndOwner foundation.HWND, psi *ISecurityInformation) error {
 // Minimum OS: windows6.0.6000.
 func EditSecurityAdvanced(hwndOwner foundation.HWND, psi *ISecurityInformation, uSIPage SI_PAGE_TYPE) error {
 	r1, _, _ := syscall.SyscallN(procEditSecurityAdvanced.Addr(), uintptr(hwndOwner), uintptr(unsafe.Pointer(psi)), uintptr(uSIPage))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

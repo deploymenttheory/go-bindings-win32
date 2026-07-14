@@ -139,7 +139,7 @@ var (
 // Minimum OS: windows8.0.
 func AccSetRunningUtilityState(hwndApp foundation.HWND, dwUtilityStateMask uint32, dwUtilityState ACC_UTILITY_STATE_FLAGS) error {
 	r1, _, _ := syscall.SyscallN(procAccSetRunningUtilityState.Addr(), uintptr(hwndApp), uintptr(dwUtilityStateMask), uintptr(dwUtilityState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AccessibleChildren calls OLEACC!AccessibleChildren.
@@ -151,7 +151,7 @@ func AccessibleChildren(paccContainer *IAccessible, iChildStart int32, rgvarChil
 		_rgvarChildren = &rgvarChildren[0]
 	}
 	r1, _, _ := syscall.SyscallN(procAccessibleChildren.Addr(), uintptr(unsafe.Pointer(paccContainer)), uintptr(iChildStart), uintptr(len(rgvarChildren)), uintptr(unsafe.Pointer(_rgvarChildren)), uintptr(unsafe.Pointer(pcObtained)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AccessibleObjectFromEvent calls OLEACC!AccessibleObjectFromEvent.
@@ -159,7 +159,7 @@ func AccessibleChildren(paccContainer *IAccessible, iChildStart int32, rgvarChil
 // Minimum OS: windows5.0.
 func AccessibleObjectFromEvent(hwnd foundation.HWND, dwId uint32, dwChildId uint32, ppacc **IAccessible, pvarChild *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(procAccessibleObjectFromEvent.Addr(), uintptr(hwnd), uintptr(dwId), uintptr(dwChildId), uintptr(unsafe.Pointer(ppacc)), uintptr(unsafe.Pointer(pvarChild)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AccessibleObjectFromWindow calls OLEACC!AccessibleObjectFromWindow.
@@ -167,7 +167,7 @@ func AccessibleObjectFromEvent(hwnd foundation.HWND, dwId uint32, dwChildId uint
 // Minimum OS: windows5.0.
 func AccessibleObjectFromWindow(hwnd foundation.HWND, dwId uint32, riid *win32.GUID, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procAccessibleObjectFromWindow.Addr(), uintptr(hwnd), uintptr(dwId), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateStdAccessibleObject calls OLEACC!CreateStdAccessibleObject.
@@ -175,7 +175,7 @@ func AccessibleObjectFromWindow(hwnd foundation.HWND, dwId uint32, riid *win32.G
 // Minimum OS: windows5.0.
 func CreateStdAccessibleObject(hwnd foundation.HWND, idObject int32, riid *win32.GUID, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCreateStdAccessibleObject.Addr(), uintptr(hwnd), uintptr(idObject), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateStdAccessibleProxy calls OLEACC!CreateStdAccessibleProxyW.
@@ -184,7 +184,7 @@ func CreateStdAccessibleObject(hwnd foundation.HWND, idObject int32, riid *win32
 func CreateStdAccessibleProxy(hwnd foundation.HWND, pClassName string, idObject int32, riid *win32.GUID, ppvObject **win32.IUnknown) error {
 	_pClassName := win32.UTF16Ptr(pClassName)
 	r1, _, _ := syscall.SyscallN(procCreateStdAccessibleProxy.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(_pClassName)), uintptr(idObject), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateStdAccessibleProxyA calls OLEACC!CreateStdAccessibleProxyA.
@@ -192,7 +192,7 @@ func CreateStdAccessibleProxy(hwnd foundation.HWND, pClassName string, idObject 
 // Minimum OS: windows5.0.
 func CreateStdAccessibleProxyA(hwnd foundation.HWND, pClassName foundation.PSTR, idObject int32, riid *win32.GUID, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCreateStdAccessibleProxyA.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pClassName)), uintptr(idObject), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DockPattern_SetDockPosition calls UIAutomationCore!DockPattern_SetDockPosition.
@@ -200,7 +200,7 @@ func CreateStdAccessibleProxyA(hwnd foundation.HWND, pClassName foundation.PSTR,
 // Minimum OS: windows5.1.2600.
 func DockPattern_SetDockPosition(hobj HUIAPATTERNOBJECT, dockPosition DockPosition) error {
 	r1, _, _ := syscall.SyscallN(procDockPattern_SetDockPosition.Addr(), uintptr(hobj), uintptr(dockPosition))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExpandCollapsePattern_Collapse calls UIAutomationCore!ExpandCollapsePattern_Collapse.
@@ -208,7 +208,7 @@ func DockPattern_SetDockPosition(hobj HUIAPATTERNOBJECT, dockPosition DockPositi
 // Minimum OS: windows5.1.2600.
 func ExpandCollapsePattern_Collapse(hobj HUIAPATTERNOBJECT) error {
 	r1, _, _ := syscall.SyscallN(procExpandCollapsePattern_Collapse.Addr(), uintptr(hobj))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExpandCollapsePattern_Expand calls UIAutomationCore!ExpandCollapsePattern_Expand.
@@ -216,7 +216,7 @@ func ExpandCollapsePattern_Collapse(hobj HUIAPATTERNOBJECT) error {
 // Minimum OS: windows5.1.2600.
 func ExpandCollapsePattern_Expand(hobj HUIAPATTERNOBJECT) error {
 	r1, _, _ := syscall.SyscallN(procExpandCollapsePattern_Expand.Addr(), uintptr(hobj))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOleaccVersionInfo calls OLEACC!GetOleaccVersionInfo.
@@ -275,7 +275,7 @@ func GetStateTextA(lStateBit uint32, lpszState foundation.PSTR, cchState uint32)
 // Minimum OS: windows5.1.2600.
 func GridPattern_GetItem(hobj HUIAPATTERNOBJECT, row int32, column int32, pResult *HUIANODE) error {
 	r1, _, _ := syscall.SyscallN(procGridPattern_GetItem.Addr(), uintptr(hobj), uintptr(row), uintptr(column), uintptr(unsafe.Pointer(pResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InvokePattern_Invoke calls UIAutomationCore!InvokePattern_Invoke.
@@ -283,7 +283,7 @@ func GridPattern_GetItem(hobj HUIAPATTERNOBJECT, row int32, column int32, pResul
 // Minimum OS: windows5.1.2600.
 func InvokePattern_Invoke(hobj HUIAPATTERNOBJECT) error {
 	r1, _, _ := syscall.SyscallN(procInvokePattern_Invoke.Addr(), uintptr(hobj))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsWinEventHookInstalled calls USER32!IsWinEventHookInstalled.
@@ -299,7 +299,7 @@ func IsWinEventHookInstalled(event uint32) bool {
 // Minimum OS: windows6.1.
 func LegacyIAccessiblePattern_DoDefaultAction(hobj HUIAPATTERNOBJECT) error {
 	r1, _, _ := syscall.SyscallN(procLegacyIAccessiblePattern_DoDefaultAction.Addr(), uintptr(hobj))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LegacyIAccessiblePattern_GetIAccessible calls UIAutomationCore!LegacyIAccessiblePattern_GetIAccessible.
@@ -307,7 +307,7 @@ func LegacyIAccessiblePattern_DoDefaultAction(hobj HUIAPATTERNOBJECT) error {
 // Minimum OS: windows6.1.
 func LegacyIAccessiblePattern_GetIAccessible(hobj HUIAPATTERNOBJECT, pAccessible **IAccessible) error {
 	r1, _, _ := syscall.SyscallN(procLegacyIAccessiblePattern_GetIAccessible.Addr(), uintptr(hobj), uintptr(unsafe.Pointer(pAccessible)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LegacyIAccessiblePattern_Select calls UIAutomationCore!LegacyIAccessiblePattern_Select.
@@ -315,7 +315,7 @@ func LegacyIAccessiblePattern_GetIAccessible(hobj HUIAPATTERNOBJECT, pAccessible
 // Minimum OS: windows6.1.
 func LegacyIAccessiblePattern_Select(hobj HUIAPATTERNOBJECT, flagsSelect int32) error {
 	r1, _, _ := syscall.SyscallN(procLegacyIAccessiblePattern_Select.Addr(), uintptr(hobj), uintptr(flagsSelect))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LegacyIAccessiblePattern_SetValue calls UIAutomationCore!LegacyIAccessiblePattern_SetValue.
@@ -324,7 +324,7 @@ func LegacyIAccessiblePattern_Select(hobj HUIAPATTERNOBJECT, flagsSelect int32) 
 func LegacyIAccessiblePattern_SetValue(hobj HUIAPATTERNOBJECT, szValue string) error {
 	_szValue := win32.UTF16Ptr(szValue)
 	r1, _, _ := syscall.SyscallN(procLegacyIAccessiblePattern_SetValue.Addr(), uintptr(hobj), uintptr(unsafe.Pointer(_szValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LresultFromObject calls OLEACC!LresultFromObject.
@@ -340,7 +340,7 @@ func LresultFromObject(riid *win32.GUID, wParam foundation.WPARAM, punk *systemc
 // Minimum OS: windows5.1.2600.
 func MultipleViewPattern_GetViewName(hobj HUIAPATTERNOBJECT, viewId int32, ppStr *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procMultipleViewPattern_GetViewName.Addr(), uintptr(hobj), uintptr(viewId), uintptr(unsafe.Pointer(ppStr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MultipleViewPattern_SetCurrentView calls UIAutomationCore!MultipleViewPattern_SetCurrentView.
@@ -348,7 +348,7 @@ func MultipleViewPattern_GetViewName(hobj HUIAPATTERNOBJECT, viewId int32, ppStr
 // Minimum OS: windows5.1.2600.
 func MultipleViewPattern_SetCurrentView(hobj HUIAPATTERNOBJECT, viewId int32) error {
 	r1, _, _ := syscall.SyscallN(procMultipleViewPattern_SetCurrentView.Addr(), uintptr(hobj), uintptr(viewId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NotifyWinEvent calls USER32!NotifyWinEvent.
@@ -363,7 +363,7 @@ func NotifyWinEvent(event uint32, hwnd foundation.HWND, idObject int32, idChild 
 // Minimum OS: windows5.1.2600.
 func ObjectFromLresult(lResult foundation.LRESULT, riid *win32.GUID, wParam foundation.WPARAM, ppvObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procObjectFromLresult.Addr(), uintptr(lResult), uintptr(unsafe.Pointer(riid)), uintptr(wParam), uintptr(unsafe.Pointer(ppvObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterPointerInputTarget calls USER32!RegisterPointerInputTarget.
@@ -391,7 +391,7 @@ func RegisterPointerInputTargetEx(hwnd foundation.HWND, pointerType uiwindowsand
 // Minimum OS: windows5.1.2600.
 func ScrollItemPattern_ScrollIntoView(hobj HUIAPATTERNOBJECT) error {
 	r1, _, _ := syscall.SyscallN(procScrollItemPattern_ScrollIntoView.Addr(), uintptr(hobj))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScrollPattern_Scroll calls UIAutomationCore!ScrollPattern_Scroll.
@@ -399,7 +399,7 @@ func ScrollItemPattern_ScrollIntoView(hobj HUIAPATTERNOBJECT) error {
 // Minimum OS: windows5.1.2600.
 func ScrollPattern_Scroll(hobj HUIAPATTERNOBJECT, horizontalAmount ScrollAmount, verticalAmount ScrollAmount) error {
 	r1, _, _ := syscall.SyscallN(procScrollPattern_Scroll.Addr(), uintptr(hobj), uintptr(horizontalAmount), uintptr(verticalAmount))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SelectionItemPattern_AddToSelection calls UIAutomationCore!SelectionItemPattern_AddToSelection.
@@ -407,7 +407,7 @@ func ScrollPattern_Scroll(hobj HUIAPATTERNOBJECT, horizontalAmount ScrollAmount,
 // Minimum OS: windows5.1.2600.
 func SelectionItemPattern_AddToSelection(hobj HUIAPATTERNOBJECT) error {
 	r1, _, _ := syscall.SyscallN(procSelectionItemPattern_AddToSelection.Addr(), uintptr(hobj))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SelectionItemPattern_RemoveFromSelection calls UIAutomationCore!SelectionItemPattern_RemoveFromSelection.
@@ -415,7 +415,7 @@ func SelectionItemPattern_AddToSelection(hobj HUIAPATTERNOBJECT) error {
 // Minimum OS: windows5.1.2600.
 func SelectionItemPattern_RemoveFromSelection(hobj HUIAPATTERNOBJECT) error {
 	r1, _, _ := syscall.SyscallN(procSelectionItemPattern_RemoveFromSelection.Addr(), uintptr(hobj))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SelectionItemPattern_Select calls UIAutomationCore!SelectionItemPattern_Select.
@@ -423,7 +423,7 @@ func SelectionItemPattern_RemoveFromSelection(hobj HUIAPATTERNOBJECT) error {
 // Minimum OS: windows5.1.2600.
 func SelectionItemPattern_Select(hobj HUIAPATTERNOBJECT) error {
 	r1, _, _ := syscall.SyscallN(procSelectionItemPattern_Select.Addr(), uintptr(hobj))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetWinEventHook calls USER32!SetWinEventHook.
@@ -439,7 +439,7 @@ func SetWinEventHook(eventMin uint32, eventMax uint32, hmodWinEventProc foundati
 // Minimum OS: windows6.1.
 func SynchronizedInputPattern_Cancel(hobj HUIAPATTERNOBJECT) error {
 	r1, _, _ := syscall.SyscallN(procSynchronizedInputPattern_Cancel.Addr(), uintptr(hobj))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SynchronizedInputPattern_StartListening calls UIAutomationCore!SynchronizedInputPattern_StartListening.
@@ -447,7 +447,7 @@ func SynchronizedInputPattern_Cancel(hobj HUIAPATTERNOBJECT) error {
 // Minimum OS: windows6.1.
 func SynchronizedInputPattern_StartListening(hobj HUIAPATTERNOBJECT, inputType SynchronizedInputType) error {
 	r1, _, _ := syscall.SyscallN(procSynchronizedInputPattern_StartListening.Addr(), uintptr(hobj), uintptr(inputType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TextPattern_GetSelection calls UIAutomationCore!TextPattern_GetSelection.
@@ -455,7 +455,7 @@ func SynchronizedInputPattern_StartListening(hobj HUIAPATTERNOBJECT, inputType S
 // Minimum OS: windows5.1.2600.
 func TextPattern_GetSelection(hobj HUIAPATTERNOBJECT, pRetVal **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(procTextPattern_GetSelection.Addr(), uintptr(hobj), uintptr(unsafe.Pointer(pRetVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TextPattern_GetVisibleRanges calls UIAutomationCore!TextPattern_GetVisibleRanges.
@@ -463,7 +463,7 @@ func TextPattern_GetSelection(hobj HUIAPATTERNOBJECT, pRetVal **systemcom.SAFEAR
 // Minimum OS: windows5.1.2600.
 func TextPattern_GetVisibleRanges(hobj HUIAPATTERNOBJECT, pRetVal **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(procTextPattern_GetVisibleRanges.Addr(), uintptr(hobj), uintptr(unsafe.Pointer(pRetVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TextPattern_RangeFromChild calls UIAutomationCore!TextPattern_RangeFromChild.
@@ -471,7 +471,7 @@ func TextPattern_GetVisibleRanges(hobj HUIAPATTERNOBJECT, pRetVal **systemcom.SA
 // Minimum OS: windows5.1.2600.
 func TextPattern_RangeFromChild(hobj HUIAPATTERNOBJECT, hnodeChild HUIANODE, pRetVal *HUIATEXTRANGE) error {
 	r1, _, _ := syscall.SyscallN(procTextPattern_RangeFromChild.Addr(), uintptr(hobj), uintptr(hnodeChild), uintptr(unsafe.Pointer(pRetVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TextPattern_get_DocumentRange calls UIAutomationCore!TextPattern_get_DocumentRange.
@@ -479,7 +479,7 @@ func TextPattern_RangeFromChild(hobj HUIAPATTERNOBJECT, hnodeChild HUIANODE, pRe
 // Minimum OS: windows5.1.2600.
 func TextPattern_get_DocumentRange(hobj HUIAPATTERNOBJECT, pRetVal *HUIATEXTRANGE) error {
 	r1, _, _ := syscall.SyscallN(procTextPattern_get_DocumentRange.Addr(), uintptr(hobj), uintptr(unsafe.Pointer(pRetVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TextPattern_get_SupportedTextSelection calls UIAutomationCore!TextPattern_get_SupportedTextSelection.
@@ -487,7 +487,7 @@ func TextPattern_get_DocumentRange(hobj HUIAPATTERNOBJECT, pRetVal *HUIATEXTRANG
 // Minimum OS: windows5.1.2600.
 func TextPattern_get_SupportedTextSelection(hobj HUIAPATTERNOBJECT, pRetVal *SupportedTextSelection) error {
 	r1, _, _ := syscall.SyscallN(procTextPattern_get_SupportedTextSelection.Addr(), uintptr(hobj), uintptr(unsafe.Pointer(pRetVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TextRange_AddToSelection calls UIAutomationCore!TextRange_AddToSelection.
@@ -495,7 +495,7 @@ func TextPattern_get_SupportedTextSelection(hobj HUIAPATTERNOBJECT, pRetVal *Sup
 // Minimum OS: windows5.1.2600.
 func TextRange_AddToSelection(hobj HUIATEXTRANGE) error {
 	r1, _, _ := syscall.SyscallN(procTextRange_AddToSelection.Addr(), uintptr(hobj))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TextRange_Clone calls UIAutomationCore!TextRange_Clone.
@@ -503,7 +503,7 @@ func TextRange_AddToSelection(hobj HUIATEXTRANGE) error {
 // Minimum OS: windows5.1.2600.
 func TextRange_Clone(hobj HUIATEXTRANGE, pRetVal *HUIATEXTRANGE) error {
 	r1, _, _ := syscall.SyscallN(procTextRange_Clone.Addr(), uintptr(hobj), uintptr(unsafe.Pointer(pRetVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TextRange_Compare calls UIAutomationCore!TextRange_Compare.
@@ -511,7 +511,7 @@ func TextRange_Clone(hobj HUIATEXTRANGE, pRetVal *HUIATEXTRANGE) error {
 // Minimum OS: windows5.1.2600.
 func TextRange_Compare(hobj HUIATEXTRANGE, range_ HUIATEXTRANGE, pRetVal *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procTextRange_Compare.Addr(), uintptr(hobj), uintptr(range_), uintptr(unsafe.Pointer(pRetVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TextRange_CompareEndpoints calls UIAutomationCore!TextRange_CompareEndpoints.
@@ -519,7 +519,7 @@ func TextRange_Compare(hobj HUIATEXTRANGE, range_ HUIATEXTRANGE, pRetVal *founda
 // Minimum OS: windows5.1.2600.
 func TextRange_CompareEndpoints(hobj HUIATEXTRANGE, endpoint TextPatternRangeEndpoint, targetRange HUIATEXTRANGE, targetEndpoint TextPatternRangeEndpoint, pRetVal *int32) error {
 	r1, _, _ := syscall.SyscallN(procTextRange_CompareEndpoints.Addr(), uintptr(hobj), uintptr(endpoint), uintptr(targetRange), uintptr(targetEndpoint), uintptr(unsafe.Pointer(pRetVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TextRange_ExpandToEnclosingUnit calls UIAutomationCore!TextRange_ExpandToEnclosingUnit.
@@ -527,7 +527,7 @@ func TextRange_CompareEndpoints(hobj HUIATEXTRANGE, endpoint TextPatternRangeEnd
 // Minimum OS: windows5.1.2600.
 func TextRange_ExpandToEnclosingUnit(hobj HUIATEXTRANGE, unit TextUnit) error {
 	r1, _, _ := syscall.SyscallN(procTextRange_ExpandToEnclosingUnit.Addr(), uintptr(hobj), uintptr(unit))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TextRange_FindText calls UIAutomationCore!TextRange_FindText.
@@ -537,7 +537,7 @@ func TextRange_FindText(hobj HUIATEXTRANGE, text foundation.BSTR, backward bool,
 	_backward := win32.Bool32(backward)
 	_ignoreCase := win32.Bool32(ignoreCase)
 	r1, _, _ := syscall.SyscallN(procTextRange_FindText.Addr(), uintptr(hobj), uintptr(unsafe.Pointer(text)), uintptr(_backward), uintptr(_ignoreCase), uintptr(unsafe.Pointer(pRetVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TextRange_GetAttributeValue calls UIAutomationCore!TextRange_GetAttributeValue.
@@ -545,7 +545,7 @@ func TextRange_FindText(hobj HUIATEXTRANGE, text foundation.BSTR, backward bool,
 // Minimum OS: windows5.1.2600.
 func TextRange_GetAttributeValue(hobj HUIATEXTRANGE, attributeId int32, pRetVal *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(procTextRange_GetAttributeValue.Addr(), uintptr(hobj), uintptr(attributeId), uintptr(unsafe.Pointer(pRetVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TextRange_GetBoundingRectangles calls UIAutomationCore!TextRange_GetBoundingRectangles.
@@ -553,7 +553,7 @@ func TextRange_GetAttributeValue(hobj HUIATEXTRANGE, attributeId int32, pRetVal 
 // Minimum OS: windows5.1.2600.
 func TextRange_GetBoundingRectangles(hobj HUIATEXTRANGE, pRetVal **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(procTextRange_GetBoundingRectangles.Addr(), uintptr(hobj), uintptr(unsafe.Pointer(pRetVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TextRange_GetChildren calls UIAutomationCore!TextRange_GetChildren.
@@ -561,7 +561,7 @@ func TextRange_GetBoundingRectangles(hobj HUIATEXTRANGE, pRetVal **systemcom.SAF
 // Minimum OS: windows5.1.2600.
 func TextRange_GetChildren(hobj HUIATEXTRANGE, pRetVal **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(procTextRange_GetChildren.Addr(), uintptr(hobj), uintptr(unsafe.Pointer(pRetVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TextRange_GetEnclosingElement calls UIAutomationCore!TextRange_GetEnclosingElement.
@@ -569,7 +569,7 @@ func TextRange_GetChildren(hobj HUIATEXTRANGE, pRetVal **systemcom.SAFEARRAY) er
 // Minimum OS: windows5.1.2600.
 func TextRange_GetEnclosingElement(hobj HUIATEXTRANGE, pRetVal *HUIANODE) error {
 	r1, _, _ := syscall.SyscallN(procTextRange_GetEnclosingElement.Addr(), uintptr(hobj), uintptr(unsafe.Pointer(pRetVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TextRange_GetText calls UIAutomationCore!TextRange_GetText.
@@ -577,7 +577,7 @@ func TextRange_GetEnclosingElement(hobj HUIATEXTRANGE, pRetVal *HUIANODE) error 
 // Minimum OS: windows5.1.2600.
 func TextRange_GetText(hobj HUIATEXTRANGE, maxLength int32, pRetVal *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procTextRange_GetText.Addr(), uintptr(hobj), uintptr(maxLength), uintptr(unsafe.Pointer(pRetVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TextRange_Move calls UIAutomationCore!TextRange_Move.
@@ -585,7 +585,7 @@ func TextRange_GetText(hobj HUIATEXTRANGE, maxLength int32, pRetVal *foundation.
 // Minimum OS: windows5.1.2600.
 func TextRange_Move(hobj HUIATEXTRANGE, unit TextUnit, count int32, pRetVal *int32) error {
 	r1, _, _ := syscall.SyscallN(procTextRange_Move.Addr(), uintptr(hobj), uintptr(unit), uintptr(count), uintptr(unsafe.Pointer(pRetVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TextRange_MoveEndpointByRange calls UIAutomationCore!TextRange_MoveEndpointByRange.
@@ -593,7 +593,7 @@ func TextRange_Move(hobj HUIATEXTRANGE, unit TextUnit, count int32, pRetVal *int
 // Minimum OS: windows5.1.2600.
 func TextRange_MoveEndpointByRange(hobj HUIATEXTRANGE, endpoint TextPatternRangeEndpoint, targetRange HUIATEXTRANGE, targetEndpoint TextPatternRangeEndpoint) error {
 	r1, _, _ := syscall.SyscallN(procTextRange_MoveEndpointByRange.Addr(), uintptr(hobj), uintptr(endpoint), uintptr(targetRange), uintptr(targetEndpoint))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TextRange_MoveEndpointByUnit calls UIAutomationCore!TextRange_MoveEndpointByUnit.
@@ -601,7 +601,7 @@ func TextRange_MoveEndpointByRange(hobj HUIATEXTRANGE, endpoint TextPatternRange
 // Minimum OS: windows5.1.2600.
 func TextRange_MoveEndpointByUnit(hobj HUIATEXTRANGE, endpoint TextPatternRangeEndpoint, unit TextUnit, count int32, pRetVal *int32) error {
 	r1, _, _ := syscall.SyscallN(procTextRange_MoveEndpointByUnit.Addr(), uintptr(hobj), uintptr(endpoint), uintptr(unit), uintptr(count), uintptr(unsafe.Pointer(pRetVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TextRange_RemoveFromSelection calls UIAutomationCore!TextRange_RemoveFromSelection.
@@ -609,7 +609,7 @@ func TextRange_MoveEndpointByUnit(hobj HUIATEXTRANGE, endpoint TextPatternRangeE
 // Minimum OS: windows5.1.2600.
 func TextRange_RemoveFromSelection(hobj HUIATEXTRANGE) error {
 	r1, _, _ := syscall.SyscallN(procTextRange_RemoveFromSelection.Addr(), uintptr(hobj))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TextRange_ScrollIntoView calls UIAutomationCore!TextRange_ScrollIntoView.
@@ -618,7 +618,7 @@ func TextRange_RemoveFromSelection(hobj HUIATEXTRANGE) error {
 func TextRange_ScrollIntoView(hobj HUIATEXTRANGE, alignToTop bool) error {
 	_alignToTop := win32.Bool32(alignToTop)
 	r1, _, _ := syscall.SyscallN(procTextRange_ScrollIntoView.Addr(), uintptr(hobj), uintptr(_alignToTop))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TextRange_Select calls UIAutomationCore!TextRange_Select.
@@ -626,7 +626,7 @@ func TextRange_ScrollIntoView(hobj HUIATEXTRANGE, alignToTop bool) error {
 // Minimum OS: windows5.1.2600.
 func TextRange_Select(hobj HUIATEXTRANGE) error {
 	r1, _, _ := syscall.SyscallN(procTextRange_Select.Addr(), uintptr(hobj))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TogglePattern_Toggle calls UIAutomationCore!TogglePattern_Toggle.
@@ -634,7 +634,7 @@ func TextRange_Select(hobj HUIATEXTRANGE) error {
 // Minimum OS: windows5.1.2600.
 func TogglePattern_Toggle(hobj HUIAPATTERNOBJECT) error {
 	r1, _, _ := syscall.SyscallN(procTogglePattern_Toggle.Addr(), uintptr(hobj))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UiaAddEvent calls UIAutomationCore!UiaAddEvent.
@@ -642,7 +642,7 @@ func TogglePattern_Toggle(hobj HUIAPATTERNOBJECT) error {
 // Minimum OS: windows5.1.2600.
 func UiaAddEvent(hnode HUIANODE, eventId int32, pCallback *UiaEventCallback, scope TreeScope, pProperties *int32, cProperties int32, pRequest *UiaCacheRequest, phEvent *HUIAEVENT) error {
 	r1, _, _ := syscall.SyscallN(procUiaAddEvent.Addr(), uintptr(hnode), uintptr(eventId), uintptr(unsafe.Pointer(pCallback)), uintptr(scope), uintptr(unsafe.Pointer(pProperties)), uintptr(cProperties), uintptr(unsafe.Pointer(pRequest)), uintptr(unsafe.Pointer(phEvent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UiaClientsAreListening calls UIAutomationCore!UiaClientsAreListening.
@@ -658,7 +658,7 @@ func UiaClientsAreListening() bool {
 // Minimum OS: windows8.0.
 func UiaDisconnectAllProviders() error {
 	r1, _, _ := syscall.SyscallN(procUiaDisconnectAllProviders.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UiaDisconnectProvider calls UIAutomationCore!UiaDisconnectProvider.
@@ -666,7 +666,7 @@ func UiaDisconnectAllProviders() error {
 // Minimum OS: windows8.0.
 func UiaDisconnectProvider(pProvider *IRawElementProviderSimple) error {
 	r1, _, _ := syscall.SyscallN(procUiaDisconnectProvider.Addr(), uintptr(unsafe.Pointer(pProvider)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UiaEventAddWindow calls UIAutomationCore!UiaEventAddWindow.
@@ -674,7 +674,7 @@ func UiaDisconnectProvider(pProvider *IRawElementProviderSimple) error {
 // Minimum OS: windows5.1.2600.
 func UiaEventAddWindow(hEvent HUIAEVENT, hwnd foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(procUiaEventAddWindow.Addr(), uintptr(hEvent), uintptr(hwnd))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UiaEventRemoveWindow calls UIAutomationCore!UiaEventRemoveWindow.
@@ -682,7 +682,7 @@ func UiaEventAddWindow(hEvent HUIAEVENT, hwnd foundation.HWND) error {
 // Minimum OS: windows5.1.2600.
 func UiaEventRemoveWindow(hEvent HUIAEVENT, hwnd foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(procUiaEventRemoveWindow.Addr(), uintptr(hEvent), uintptr(hwnd))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UiaFind calls UIAutomationCore!UiaFind.
@@ -690,7 +690,7 @@ func UiaEventRemoveWindow(hEvent HUIAEVENT, hwnd foundation.HWND) error {
 // Minimum OS: windows5.1.2600.
 func UiaFind(hnode HUIANODE, pParams *UiaFindParams, pRequest *UiaCacheRequest, ppRequestedData **systemcom.SAFEARRAY, ppOffsets **systemcom.SAFEARRAY, ppTreeStructures **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(procUiaFind.Addr(), uintptr(hnode), uintptr(unsafe.Pointer(pParams)), uintptr(unsafe.Pointer(pRequest)), uintptr(unsafe.Pointer(ppRequestedData)), uintptr(unsafe.Pointer(ppOffsets)), uintptr(unsafe.Pointer(ppTreeStructures)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UiaGetErrorDescription calls UIAutomationCore!UiaGetErrorDescription.
@@ -706,7 +706,7 @@ func UiaGetErrorDescription(pDescription *foundation.BSTR) bool {
 // Minimum OS: windows5.1.2600.
 func UiaGetPatternProvider(hnode HUIANODE, patternId int32, phobj *HUIAPATTERNOBJECT) error {
 	r1, _, _ := syscall.SyscallN(procUiaGetPatternProvider.Addr(), uintptr(hnode), uintptr(patternId), uintptr(unsafe.Pointer(phobj)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UiaGetPropertyValue calls UIAutomationCore!UiaGetPropertyValue.
@@ -714,7 +714,7 @@ func UiaGetPatternProvider(hnode HUIANODE, patternId int32, phobj *HUIAPATTERNOB
 // Minimum OS: windows5.1.2600.
 func UiaGetPropertyValue(hnode HUIANODE, propertyId int32, pValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(procUiaGetPropertyValue.Addr(), uintptr(hnode), uintptr(propertyId), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UiaGetReservedMixedAttributeValue calls UIAutomationCore!UiaGetReservedMixedAttributeValue.
@@ -722,7 +722,7 @@ func UiaGetPropertyValue(hnode HUIANODE, propertyId int32, pValue *systemvariant
 // Minimum OS: windows5.1.2600.
 func UiaGetReservedMixedAttributeValue(punkMixedAttributeValue **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procUiaGetReservedMixedAttributeValue.Addr(), uintptr(unsafe.Pointer(punkMixedAttributeValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UiaGetReservedNotSupportedValue calls UIAutomationCore!UiaGetReservedNotSupportedValue.
@@ -730,7 +730,7 @@ func UiaGetReservedMixedAttributeValue(punkMixedAttributeValue **systemcom.IUnkn
 // Minimum OS: windows5.1.2600.
 func UiaGetReservedNotSupportedValue(punkNotSupportedValue **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procUiaGetReservedNotSupportedValue.Addr(), uintptr(unsafe.Pointer(punkNotSupportedValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UiaGetRootNode calls UIAutomationCore!UiaGetRootNode.
@@ -738,7 +738,7 @@ func UiaGetReservedNotSupportedValue(punkNotSupportedValue **systemcom.IUnknown)
 // Minimum OS: windows5.1.2600.
 func UiaGetRootNode(phnode *HUIANODE) error {
 	r1, _, _ := syscall.SyscallN(procUiaGetRootNode.Addr(), uintptr(unsafe.Pointer(phnode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UiaGetRuntimeId calls UIAutomationCore!UiaGetRuntimeId.
@@ -746,7 +746,7 @@ func UiaGetRootNode(phnode *HUIANODE) error {
 // Minimum OS: windows5.1.2600.
 func UiaGetRuntimeId(hnode HUIANODE, pruntimeId **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(procUiaGetRuntimeId.Addr(), uintptr(hnode), uintptr(unsafe.Pointer(pruntimeId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UiaGetUpdatedCache calls UIAutomationCore!UiaGetUpdatedCache.
@@ -754,7 +754,7 @@ func UiaGetRuntimeId(hnode HUIANODE, pruntimeId **systemcom.SAFEARRAY) error {
 // Minimum OS: windows5.1.2600.
 func UiaGetUpdatedCache(hnode HUIANODE, pRequest *UiaCacheRequest, normalizeState NormalizeState, pNormalizeCondition *UiaCondition, ppRequestedData **systemcom.SAFEARRAY, ppTreeStructure *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procUiaGetUpdatedCache.Addr(), uintptr(hnode), uintptr(unsafe.Pointer(pRequest)), uintptr(normalizeState), uintptr(unsafe.Pointer(pNormalizeCondition)), uintptr(unsafe.Pointer(ppRequestedData)), uintptr(unsafe.Pointer(ppTreeStructure)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UiaHPatternObjectFromVariant calls UIAutomationCore!UiaHPatternObjectFromVariant.
@@ -762,7 +762,7 @@ func UiaGetUpdatedCache(hnode HUIANODE, pRequest *UiaCacheRequest, normalizeStat
 // Minimum OS: windows5.1.2600.
 func UiaHPatternObjectFromVariant(pvar *systemvariant.VARIANT, phobj *HUIAPATTERNOBJECT) error {
 	r1, _, _ := syscall.SyscallN(procUiaHPatternObjectFromVariant.Addr(), uintptr(unsafe.Pointer(pvar)), uintptr(unsafe.Pointer(phobj)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UiaHTextRangeFromVariant calls UIAutomationCore!UiaHTextRangeFromVariant.
@@ -770,7 +770,7 @@ func UiaHPatternObjectFromVariant(pvar *systemvariant.VARIANT, phobj *HUIAPATTER
 // Minimum OS: windows5.1.2600.
 func UiaHTextRangeFromVariant(pvar *systemvariant.VARIANT, phtextrange *HUIATEXTRANGE) error {
 	r1, _, _ := syscall.SyscallN(procUiaHTextRangeFromVariant.Addr(), uintptr(unsafe.Pointer(pvar)), uintptr(unsafe.Pointer(phtextrange)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UiaHUiaNodeFromVariant calls UIAutomationCore!UiaHUiaNodeFromVariant.
@@ -778,7 +778,7 @@ func UiaHTextRangeFromVariant(pvar *systemvariant.VARIANT, phtextrange *HUIATEXT
 // Minimum OS: windows5.1.2600.
 func UiaHUiaNodeFromVariant(pvar *systemvariant.VARIANT, phnode *HUIANODE) error {
 	r1, _, _ := syscall.SyscallN(procUiaHUiaNodeFromVariant.Addr(), uintptr(unsafe.Pointer(pvar)), uintptr(unsafe.Pointer(phnode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UiaHasServerSideProvider calls UIAutomationCore!UiaHasServerSideProvider.
@@ -794,7 +794,7 @@ func UiaHasServerSideProvider(hwnd foundation.HWND) bool {
 // Minimum OS: windows5.1.2600.
 func UiaHostProviderFromHwnd(hwnd foundation.HWND, ppProvider **IRawElementProviderSimple) error {
 	r1, _, _ := syscall.SyscallN(procUiaHostProviderFromHwnd.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(ppProvider)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UiaIAccessibleFromProvider calls UIAutomationCore!UiaIAccessibleFromProvider.
@@ -802,7 +802,7 @@ func UiaHostProviderFromHwnd(hwnd foundation.HWND, ppProvider **IRawElementProvi
 // Minimum OS: windows8.0.
 func UiaIAccessibleFromProvider(pProvider *IRawElementProviderSimple, dwFlags uint32, ppAccessible **IAccessible, pvarChild *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(procUiaIAccessibleFromProvider.Addr(), uintptr(unsafe.Pointer(pProvider)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppAccessible)), uintptr(unsafe.Pointer(pvarChild)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UiaLookupId calls UIAutomationCore!UiaLookupId.
@@ -818,7 +818,7 @@ func UiaLookupId(type_ AutomationIdentifierType, pGuid *win32.GUID) int32 {
 // Minimum OS: windows5.1.2600.
 func UiaNavigate(hnode HUIANODE, direction NavigateDirection, pCondition *UiaCondition, pRequest *UiaCacheRequest, ppRequestedData **systemcom.SAFEARRAY, ppTreeStructure *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procUiaNavigate.Addr(), uintptr(hnode), uintptr(direction), uintptr(unsafe.Pointer(pCondition)), uintptr(unsafe.Pointer(pRequest)), uintptr(unsafe.Pointer(ppRequestedData)), uintptr(unsafe.Pointer(ppTreeStructure)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UiaNodeFromFocus calls UIAutomationCore!UiaNodeFromFocus.
@@ -826,7 +826,7 @@ func UiaNavigate(hnode HUIANODE, direction NavigateDirection, pCondition *UiaCon
 // Minimum OS: windows5.1.2600.
 func UiaNodeFromFocus(pRequest *UiaCacheRequest, ppRequestedData **systemcom.SAFEARRAY, ppTreeStructure *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procUiaNodeFromFocus.Addr(), uintptr(unsafe.Pointer(pRequest)), uintptr(unsafe.Pointer(ppRequestedData)), uintptr(unsafe.Pointer(ppTreeStructure)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UiaNodeFromHandle calls UIAutomationCore!UiaNodeFromHandle.
@@ -834,7 +834,7 @@ func UiaNodeFromFocus(pRequest *UiaCacheRequest, ppRequestedData **systemcom.SAF
 // Minimum OS: windows5.1.2600.
 func UiaNodeFromHandle(hwnd foundation.HWND, phnode *HUIANODE) error {
 	r1, _, _ := syscall.SyscallN(procUiaNodeFromHandle.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(phnode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UiaNodeFromProvider calls UIAutomationCore!UiaNodeFromProvider.
@@ -842,7 +842,7 @@ func UiaNodeFromHandle(hwnd foundation.HWND, phnode *HUIANODE) error {
 // Minimum OS: windows5.1.2600.
 func UiaNodeFromProvider(pProvider *IRawElementProviderSimple, phnode *HUIANODE) error {
 	r1, _, _ := syscall.SyscallN(procUiaNodeFromProvider.Addr(), uintptr(unsafe.Pointer(pProvider)), uintptr(unsafe.Pointer(phnode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UiaNodeRelease calls UIAutomationCore!UiaNodeRelease.
@@ -866,7 +866,7 @@ func UiaPatternRelease(hobj HUIAPATTERNOBJECT) bool {
 // Minimum OS: windows8.0.
 func UiaProviderForNonClient(hwnd foundation.HWND, idObject int32, idChild int32, ppProvider **IRawElementProviderSimple) error {
 	r1, _, _ := syscall.SyscallN(procUiaProviderForNonClient.Addr(), uintptr(hwnd), uintptr(idObject), uintptr(idChild), uintptr(unsafe.Pointer(ppProvider)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UiaProviderFromIAccessible calls UIAutomationCore!UiaProviderFromIAccessible.
@@ -874,7 +874,7 @@ func UiaProviderForNonClient(hwnd foundation.HWND, idObject int32, idChild int32
 // Minimum OS: windows8.0.
 func UiaProviderFromIAccessible(pAccessible *IAccessible, idChild int32, dwFlags uint32, ppProvider **IRawElementProviderSimple) error {
 	r1, _, _ := syscall.SyscallN(procUiaProviderFromIAccessible.Addr(), uintptr(unsafe.Pointer(pAccessible)), uintptr(idChild), uintptr(dwFlags), uintptr(unsafe.Pointer(ppProvider)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UiaRaiseActiveTextPositionChangedEvent calls UIAutomationCore!UiaRaiseActiveTextPositionChangedEvent.
@@ -882,7 +882,7 @@ func UiaProviderFromIAccessible(pAccessible *IAccessible, idChild int32, dwFlags
 // Minimum OS: windows8.1.
 func UiaRaiseActiveTextPositionChangedEvent(provider *IRawElementProviderSimple, textRange *ITextRangeProvider) error {
 	r1, _, _ := syscall.SyscallN(procUiaRaiseActiveTextPositionChangedEvent.Addr(), uintptr(unsafe.Pointer(provider)), uintptr(unsafe.Pointer(textRange)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UiaRaiseAutomationEvent calls UIAutomationCore!UiaRaiseAutomationEvent.
@@ -890,7 +890,7 @@ func UiaRaiseActiveTextPositionChangedEvent(provider *IRawElementProviderSimple,
 // Minimum OS: windows5.1.2600.
 func UiaRaiseAutomationEvent(pProvider *IRawElementProviderSimple, id UIA_EVENT_ID) error {
 	r1, _, _ := syscall.SyscallN(procUiaRaiseAutomationEvent.Addr(), uintptr(unsafe.Pointer(pProvider)), uintptr(id))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UiaRaiseChangesEvent calls UIAutomationCore!UiaRaiseChangesEvent.
@@ -898,7 +898,7 @@ func UiaRaiseAutomationEvent(pProvider *IRawElementProviderSimple, id UIA_EVENT_
 // Minimum OS: windows10.0.10240.
 func UiaRaiseChangesEvent(pProvider *IRawElementProviderSimple, eventIdCount int32, pUiaChanges *UiaChangeInfo) error {
 	r1, _, _ := syscall.SyscallN(procUiaRaiseChangesEvent.Addr(), uintptr(unsafe.Pointer(pProvider)), uintptr(eventIdCount), uintptr(unsafe.Pointer(pUiaChanges)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UiaRaiseNotificationEvent calls UIAutomationCore!UiaRaiseNotificationEvent.
@@ -906,7 +906,7 @@ func UiaRaiseChangesEvent(pProvider *IRawElementProviderSimple, eventIdCount int
 // Minimum OS: windows10.0.16299.
 func UiaRaiseNotificationEvent(provider *IRawElementProviderSimple, notificationKind NotificationKind, notificationProcessing NotificationProcessing, displayString foundation.BSTR, activityId foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procUiaRaiseNotificationEvent.Addr(), uintptr(unsafe.Pointer(provider)), uintptr(notificationKind), uintptr(notificationProcessing), uintptr(unsafe.Pointer(displayString)), uintptr(unsafe.Pointer(activityId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UiaRaiseStructureChangedEvent calls UIAutomationCore!UiaRaiseStructureChangedEvent.
@@ -914,7 +914,7 @@ func UiaRaiseNotificationEvent(provider *IRawElementProviderSimple, notification
 // Minimum OS: windows5.1.2600.
 func UiaRaiseStructureChangedEvent(pProvider *IRawElementProviderSimple, structureChangeType StructureChangeType, pRuntimeId *int32, cRuntimeIdLen int32) error {
 	r1, _, _ := syscall.SyscallN(procUiaRaiseStructureChangedEvent.Addr(), uintptr(unsafe.Pointer(pProvider)), uintptr(structureChangeType), uintptr(unsafe.Pointer(pRuntimeId)), uintptr(cRuntimeIdLen))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UiaRaiseTextEditTextChangedEvent calls UIAutomationCore!UiaRaiseTextEditTextChangedEvent.
@@ -922,7 +922,7 @@ func UiaRaiseStructureChangedEvent(pProvider *IRawElementProviderSimple, structu
 // Minimum OS: windows8.1.
 func UiaRaiseTextEditTextChangedEvent(pProvider *IRawElementProviderSimple, textEditChangeType TextEditChangeType, pChangedData *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(procUiaRaiseTextEditTextChangedEvent.Addr(), uintptr(unsafe.Pointer(pProvider)), uintptr(textEditChangeType), uintptr(unsafe.Pointer(pChangedData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UiaRegisterProviderCallback calls UIAutomationCore!UiaRegisterProviderCallback.
@@ -937,7 +937,7 @@ func UiaRegisterProviderCallback(pCallback *UiaProviderCallback) {
 // Minimum OS: windows5.1.2600.
 func UiaRemoveEvent(hEvent HUIAEVENT) error {
 	r1, _, _ := syscall.SyscallN(procUiaRemoveEvent.Addr(), uintptr(hEvent))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UiaReturnRawElementProvider calls UIAutomationCore!UiaReturnRawElementProvider.
@@ -953,7 +953,7 @@ func UiaReturnRawElementProvider(hwnd foundation.HWND, wParam foundation.WPARAM,
 // Minimum OS: windows5.1.2600.
 func UiaSetFocus(hnode HUIANODE) error {
 	r1, _, _ := syscall.SyscallN(procUiaSetFocus.Addr(), uintptr(hnode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UiaTextRangeRelease calls UIAutomationCore!UiaTextRangeRelease.
@@ -997,7 +997,7 @@ func UnregisterPointerInputTargetEx(hwnd foundation.HWND, pointerType uiwindowsa
 func ValuePattern_SetValue(hobj HUIAPATTERNOBJECT, pVal string) error {
 	_pVal := win32.UTF16Ptr(pVal)
 	r1, _, _ := syscall.SyscallN(procValuePattern_SetValue.Addr(), uintptr(hobj), uintptr(unsafe.Pointer(_pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // VirtualizedItemPattern_Realize calls UIAutomationCore!VirtualizedItemPattern_Realize.
@@ -1005,7 +1005,7 @@ func ValuePattern_SetValue(hobj HUIAPATTERNOBJECT, pVal string) error {
 // Minimum OS: windows6.1.
 func VirtualizedItemPattern_Realize(hobj HUIAPATTERNOBJECT) error {
 	r1, _, _ := syscall.SyscallN(procVirtualizedItemPattern_Realize.Addr(), uintptr(hobj))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WindowFromAccessibleObject calls OLEACC!WindowFromAccessibleObject.
@@ -1013,7 +1013,7 @@ func VirtualizedItemPattern_Realize(hobj HUIAPATTERNOBJECT) error {
 // Minimum OS: windows5.0.
 func WindowFromAccessibleObject(param0 *IAccessible, phwnd *foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(procWindowFromAccessibleObject.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(phwnd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WindowPattern_Close calls UIAutomationCore!WindowPattern_Close.
@@ -1021,7 +1021,7 @@ func WindowFromAccessibleObject(param0 *IAccessible, phwnd *foundation.HWND) err
 // Minimum OS: windows5.1.2600.
 func WindowPattern_Close(hobj HUIAPATTERNOBJECT) error {
 	r1, _, _ := syscall.SyscallN(procWindowPattern_Close.Addr(), uintptr(hobj))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WindowPattern_SetWindowVisualState calls UIAutomationCore!WindowPattern_SetWindowVisualState.
@@ -1029,7 +1029,7 @@ func WindowPattern_Close(hobj HUIAPATTERNOBJECT) error {
 // Minimum OS: windows5.1.2600.
 func WindowPattern_SetWindowVisualState(hobj HUIAPATTERNOBJECT, state WindowVisualState) error {
 	r1, _, _ := syscall.SyscallN(procWindowPattern_SetWindowVisualState.Addr(), uintptr(hobj), uintptr(state))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WindowPattern_WaitForInputIdle calls UIAutomationCore!WindowPattern_WaitForInputIdle.
@@ -1037,5 +1037,5 @@ func WindowPattern_SetWindowVisualState(hobj HUIAPATTERNOBJECT, state WindowVisu
 // Minimum OS: windows5.1.2600.
 func WindowPattern_WaitForInputIdle(hobj HUIAPATTERNOBJECT, milliseconds int32, pResult *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procWindowPattern_WaitForInputIdle.Addr(), uintptr(hobj), uintptr(milliseconds), uintptr(unsafe.Pointer(pResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

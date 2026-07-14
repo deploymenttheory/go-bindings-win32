@@ -25,7 +25,7 @@ var IID_ICorProfilerAssemblyReferenceProvider = win32.GUID{Data1: 0x66a78c24, Da
 // AddAssemblyReference dispatches through ICorProfilerAssemblyReferenceProvider's vtable slot 3.
 func (self *ICorProfilerAssemblyReferenceProvider) AddAssemblyReference(pAssemblyRefInfo *COR_PRF_ASSEMBLY_REFERENCE_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAssemblyRefInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 176fbed1-a55c-4796-98ca-a9da0ef883e7
@@ -39,301 +39,301 @@ var IID_ICorProfilerCallback = win32.GUID{Data1: 0x176fbed1, Data2: 0xa55c, Data
 // Initialize dispatches through ICorProfilerCallback's vtable slot 3.
 func (self *ICorProfilerCallback) Initialize(pICorProfilerInfoUnk *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pICorProfilerInfoUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Shutdown dispatches through ICorProfilerCallback's vtable slot 4.
 func (self *ICorProfilerCallback) Shutdown() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AppDomainCreationStarted dispatches through ICorProfilerCallback's vtable slot 5.
 func (self *ICorProfilerCallback) AppDomainCreationStarted(appDomainId uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(appDomainId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AppDomainCreationFinished dispatches through ICorProfilerCallback's vtable slot 6.
 func (self *ICorProfilerCallback) AppDomainCreationFinished(appDomainId uintptr, hrStatus foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(appDomainId), uintptr(hrStatus))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AppDomainShutdownStarted dispatches through ICorProfilerCallback's vtable slot 7.
 func (self *ICorProfilerCallback) AppDomainShutdownStarted(appDomainId uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(appDomainId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AppDomainShutdownFinished dispatches through ICorProfilerCallback's vtable slot 8.
 func (self *ICorProfilerCallback) AppDomainShutdownFinished(appDomainId uintptr, hrStatus foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(appDomainId), uintptr(hrStatus))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AssemblyLoadStarted dispatches through ICorProfilerCallback's vtable slot 9.
 func (self *ICorProfilerCallback) AssemblyLoadStarted(assemblyId uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(assemblyId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AssemblyLoadFinished dispatches through ICorProfilerCallback's vtable slot 10.
 func (self *ICorProfilerCallback) AssemblyLoadFinished(assemblyId uintptr, hrStatus foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(assemblyId), uintptr(hrStatus))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AssemblyUnloadStarted dispatches through ICorProfilerCallback's vtable slot 11.
 func (self *ICorProfilerCallback) AssemblyUnloadStarted(assemblyId uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(assemblyId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AssemblyUnloadFinished dispatches through ICorProfilerCallback's vtable slot 12.
 func (self *ICorProfilerCallback) AssemblyUnloadFinished(assemblyId uintptr, hrStatus foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(assemblyId), uintptr(hrStatus))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ModuleLoadStarted dispatches through ICorProfilerCallback's vtable slot 13.
 func (self *ICorProfilerCallback) ModuleLoadStarted(moduleId uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(moduleId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ModuleLoadFinished dispatches through ICorProfilerCallback's vtable slot 14.
 func (self *ICorProfilerCallback) ModuleLoadFinished(moduleId uintptr, hrStatus foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(moduleId), uintptr(hrStatus))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ModuleUnloadStarted dispatches through ICorProfilerCallback's vtable slot 15.
 func (self *ICorProfilerCallback) ModuleUnloadStarted(moduleId uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(moduleId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ModuleUnloadFinished dispatches through ICorProfilerCallback's vtable slot 16.
 func (self *ICorProfilerCallback) ModuleUnloadFinished(moduleId uintptr, hrStatus foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(moduleId), uintptr(hrStatus))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ModuleAttachedToAssembly dispatches through ICorProfilerCallback's vtable slot 17.
 func (self *ICorProfilerCallback) ModuleAttachedToAssembly(moduleId uintptr, AssemblyId uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(moduleId), uintptr(AssemblyId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ClassLoadStarted dispatches through ICorProfilerCallback's vtable slot 18.
 func (self *ICorProfilerCallback) ClassLoadStarted(classId uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(classId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ClassLoadFinished dispatches through ICorProfilerCallback's vtable slot 19.
 func (self *ICorProfilerCallback) ClassLoadFinished(classId uintptr, hrStatus foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(classId), uintptr(hrStatus))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ClassUnloadStarted dispatches through ICorProfilerCallback's vtable slot 20.
 func (self *ICorProfilerCallback) ClassUnloadStarted(classId uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(classId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ClassUnloadFinished dispatches through ICorProfilerCallback's vtable slot 21.
 func (self *ICorProfilerCallback) ClassUnloadFinished(classId uintptr, hrStatus foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(classId), uintptr(hrStatus))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FunctionUnloadStarted dispatches through ICorProfilerCallback's vtable slot 22.
 func (self *ICorProfilerCallback) FunctionUnloadStarted(functionId uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(functionId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // JITCompilationStarted dispatches through ICorProfilerCallback's vtable slot 23.
 func (self *ICorProfilerCallback) JITCompilationStarted(functionId uintptr, fIsSafeToBlock bool) error {
 	_fIsSafeToBlock := win32.Bool32(fIsSafeToBlock)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(_fIsSafeToBlock))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // JITCompilationFinished dispatches through ICorProfilerCallback's vtable slot 24.
 func (self *ICorProfilerCallback) JITCompilationFinished(functionId uintptr, hrStatus foundation.HRESULT, fIsSafeToBlock bool) error {
 	_fIsSafeToBlock := win32.Bool32(fIsSafeToBlock)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(hrStatus), uintptr(_fIsSafeToBlock))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // JITCachedFunctionSearchStarted dispatches through ICorProfilerCallback's vtable slot 25.
 func (self *ICorProfilerCallback) JITCachedFunctionSearchStarted(functionId uintptr, pbUseCachedFunction *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(unsafe.Pointer(pbUseCachedFunction)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // JITCachedFunctionSearchFinished dispatches through ICorProfilerCallback's vtable slot 26.
 func (self *ICorProfilerCallback) JITCachedFunctionSearchFinished(functionId uintptr, result COR_PRF_JIT_CACHE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(result))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // JITFunctionPitched dispatches through ICorProfilerCallback's vtable slot 27.
 func (self *ICorProfilerCallback) JITFunctionPitched(functionId uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(functionId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // JITInlining dispatches through ICorProfilerCallback's vtable slot 28.
 func (self *ICorProfilerCallback) JITInlining(callerId uintptr, calleeId uintptr, pfShouldInline *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(callerId), uintptr(calleeId), uintptr(unsafe.Pointer(pfShouldInline)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ThreadCreated dispatches through ICorProfilerCallback's vtable slot 29.
 func (self *ICorProfilerCallback) ThreadCreated(threadId uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(threadId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ThreadDestroyed dispatches through ICorProfilerCallback's vtable slot 30.
 func (self *ICorProfilerCallback) ThreadDestroyed(threadId uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(threadId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ThreadAssignedToOSThread dispatches through ICorProfilerCallback's vtable slot 31.
 func (self *ICorProfilerCallback) ThreadAssignedToOSThread(managedThreadId uintptr, osThreadId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(managedThreadId), uintptr(osThreadId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemotingClientInvocationStarted dispatches through ICorProfilerCallback's vtable slot 32.
 func (self *ICorProfilerCallback) RemotingClientInvocationStarted() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemotingClientSendingMessage dispatches through ICorProfilerCallback's vtable slot 33.
 func (self *ICorProfilerCallback) RemotingClientSendingMessage(pCookie *win32.GUID, fIsAsync bool) error {
 	_fIsAsync := win32.Bool32(fIsAsync)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCookie)), uintptr(_fIsAsync))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemotingClientReceivingReply dispatches through ICorProfilerCallback's vtable slot 34.
 func (self *ICorProfilerCallback) RemotingClientReceivingReply(pCookie *win32.GUID, fIsAsync bool) error {
 	_fIsAsync := win32.Bool32(fIsAsync)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCookie)), uintptr(_fIsAsync))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemotingClientInvocationFinished dispatches through ICorProfilerCallback's vtable slot 35.
 func (self *ICorProfilerCallback) RemotingClientInvocationFinished() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemotingServerReceivingMessage dispatches through ICorProfilerCallback's vtable slot 36.
 func (self *ICorProfilerCallback) RemotingServerReceivingMessage(pCookie *win32.GUID, fIsAsync bool) error {
 	_fIsAsync := win32.Bool32(fIsAsync)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCookie)), uintptr(_fIsAsync))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemotingServerInvocationStarted dispatches through ICorProfilerCallback's vtable slot 37.
 func (self *ICorProfilerCallback) RemotingServerInvocationStarted() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemotingServerInvocationReturned dispatches through ICorProfilerCallback's vtable slot 38.
 func (self *ICorProfilerCallback) RemotingServerInvocationReturned() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemotingServerSendingReply dispatches through ICorProfilerCallback's vtable slot 39.
 func (self *ICorProfilerCallback) RemotingServerSendingReply(pCookie *win32.GUID, fIsAsync bool) error {
 	_fIsAsync := win32.Bool32(fIsAsync)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCookie)), uintptr(_fIsAsync))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnmanagedToManagedTransition dispatches through ICorProfilerCallback's vtable slot 40.
 func (self *ICorProfilerCallback) UnmanagedToManagedTransition(functionId uintptr, reason COR_PRF_TRANSITION_REASON) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(reason))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ManagedToUnmanagedTransition dispatches through ICorProfilerCallback's vtable slot 41.
 func (self *ICorProfilerCallback) ManagedToUnmanagedTransition(functionId uintptr, reason COR_PRF_TRANSITION_REASON) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(reason))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RuntimeSuspendStarted dispatches through ICorProfilerCallback's vtable slot 42.
 func (self *ICorProfilerCallback) RuntimeSuspendStarted(suspendReason COR_PRF_SUSPEND_REASON) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(suspendReason))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RuntimeSuspendFinished dispatches through ICorProfilerCallback's vtable slot 43.
 func (self *ICorProfilerCallback) RuntimeSuspendFinished() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RuntimeSuspendAborted dispatches through ICorProfilerCallback's vtable slot 44.
 func (self *ICorProfilerCallback) RuntimeSuspendAborted() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RuntimeResumeStarted dispatches through ICorProfilerCallback's vtable slot 45.
 func (self *ICorProfilerCallback) RuntimeResumeStarted() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RuntimeResumeFinished dispatches through ICorProfilerCallback's vtable slot 46.
 func (self *ICorProfilerCallback) RuntimeResumeFinished() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RuntimeThreadSuspended dispatches through ICorProfilerCallback's vtable slot 47.
 func (self *ICorProfilerCallback) RuntimeThreadSuspended(threadId uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(threadId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RuntimeThreadResumed dispatches through ICorProfilerCallback's vtable slot 48.
 func (self *ICorProfilerCallback) RuntimeThreadResumed(threadId uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(threadId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MovedReferences dispatches through ICorProfilerCallback's vtable slot 49.
 func (self *ICorProfilerCallback) MovedReferences(cMovedObjectIDRanges uint32, oldObjectIDRangeStart *uintptr, newObjectIDRangeStart *uintptr, cObjectIDRangeLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(cMovedObjectIDRanges), uintptr(unsafe.Pointer(oldObjectIDRangeStart)), uintptr(unsafe.Pointer(newObjectIDRangeStart)), uintptr(unsafe.Pointer(cObjectIDRangeLength)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ObjectAllocated dispatches through ICorProfilerCallback's vtable slot 50.
 func (self *ICorProfilerCallback) ObjectAllocated(objectId uintptr, classId uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(objectId), uintptr(classId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ObjectsAllocatedByClass dispatches through ICorProfilerCallback's vtable slot 51.
 func (self *ICorProfilerCallback) ObjectsAllocatedByClass(cClassCount uint32, classIds *uintptr, cObjects *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(cClassCount), uintptr(unsafe.Pointer(classIds)), uintptr(unsafe.Pointer(cObjects)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ObjectReferences dispatches through ICorProfilerCallback's vtable slot 52.
@@ -343,7 +343,7 @@ func (self *ICorProfilerCallback) ObjectReferences(objectId uintptr, classId uin
 		_objectRefIds = &objectRefIds[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(objectId), uintptr(classId), uintptr(len(objectRefIds)), uintptr(unsafe.Pointer(_objectRefIds)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RootReferences dispatches through ICorProfilerCallback's vtable slot 53.
@@ -353,115 +353,115 @@ func (self *ICorProfilerCallback) RootReferences(rootRefIds []uintptr) error {
 		_rootRefIds = &rootRefIds[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(len(rootRefIds)), uintptr(unsafe.Pointer(_rootRefIds)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExceptionThrown dispatches through ICorProfilerCallback's vtable slot 54.
 func (self *ICorProfilerCallback) ExceptionThrown(thrownObjectId uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(thrownObjectId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExceptionSearchFunctionEnter dispatches through ICorProfilerCallback's vtable slot 55.
 func (self *ICorProfilerCallback) ExceptionSearchFunctionEnter(functionId uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(functionId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExceptionSearchFunctionLeave dispatches through ICorProfilerCallback's vtable slot 56.
 func (self *ICorProfilerCallback) ExceptionSearchFunctionLeave() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExceptionSearchFilterEnter dispatches through ICorProfilerCallback's vtable slot 57.
 func (self *ICorProfilerCallback) ExceptionSearchFilterEnter(functionId uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(functionId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExceptionSearchFilterLeave dispatches through ICorProfilerCallback's vtable slot 58.
 func (self *ICorProfilerCallback) ExceptionSearchFilterLeave() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExceptionSearchCatcherFound dispatches through ICorProfilerCallback's vtable slot 59.
 func (self *ICorProfilerCallback) ExceptionSearchCatcherFound(functionId uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(functionId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExceptionOSHandlerEnter dispatches through ICorProfilerCallback's vtable slot 60.
 func (self *ICorProfilerCallback) ExceptionOSHandlerEnter(__unused uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(__unused))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExceptionOSHandlerLeave dispatches through ICorProfilerCallback's vtable slot 61.
 func (self *ICorProfilerCallback) ExceptionOSHandlerLeave(__unused uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(__unused))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExceptionUnwindFunctionEnter dispatches through ICorProfilerCallback's vtable slot 62.
 func (self *ICorProfilerCallback) ExceptionUnwindFunctionEnter(functionId uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(functionId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExceptionUnwindFunctionLeave dispatches through ICorProfilerCallback's vtable slot 63.
 func (self *ICorProfilerCallback) ExceptionUnwindFunctionLeave() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExceptionUnwindFinallyEnter dispatches through ICorProfilerCallback's vtable slot 64.
 func (self *ICorProfilerCallback) ExceptionUnwindFinallyEnter(functionId uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(functionId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExceptionUnwindFinallyLeave dispatches through ICorProfilerCallback's vtable slot 65.
 func (self *ICorProfilerCallback) ExceptionUnwindFinallyLeave() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExceptionCatcherEnter dispatches through ICorProfilerCallback's vtable slot 66.
 func (self *ICorProfilerCallback) ExceptionCatcherEnter(functionId uintptr, objectId uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(objectId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExceptionCatcherLeave dispatches through ICorProfilerCallback's vtable slot 67.
 func (self *ICorProfilerCallback) ExceptionCatcherLeave() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // COMClassicVTableCreated dispatches through ICorProfilerCallback's vtable slot 68.
 func (self *ICorProfilerCallback) COMClassicVTableCreated(wrappedClassId uintptr, implementedIID *win32.GUID, pVTable unsafe.Pointer, cSlots uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(wrappedClassId), uintptr(unsafe.Pointer(implementedIID)), uintptr(unsafe.Pointer(pVTable)), uintptr(cSlots))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // COMClassicVTableDestroyed dispatches through ICorProfilerCallback's vtable slot 69.
 func (self *ICorProfilerCallback) COMClassicVTableDestroyed(wrappedClassId uintptr, implementedIID *win32.GUID, pVTable unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(wrappedClassId), uintptr(unsafe.Pointer(implementedIID)), uintptr(unsafe.Pointer(pVTable)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExceptionCLRCatcherFound dispatches through ICorProfilerCallback's vtable slot 70.
 func (self *ICorProfilerCallback) ExceptionCLRCatcherFound() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExceptionCLRCatcherExecute dispatches through ICorProfilerCallback's vtable slot 71.
 func (self *ICorProfilerCallback) ExceptionCLRCatcherExecute() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: cec5b60e-c69c-495f-87f6-84d28ee16ffb
@@ -483,13 +483,13 @@ func (self *ICorProfilerCallback10) EventPipeEventDelivered(provider uintptr, ev
 		_eventData = &eventData[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[95], uintptr(unsafe.Pointer(self)), uintptr(provider), uintptr(eventId), uintptr(eventVersion), uintptr(len(metadataBlob)), uintptr(unsafe.Pointer(_metadataBlob)), uintptr(len(eventData)), uintptr(unsafe.Pointer(_eventData)), uintptr(unsafe.Pointer(pActivityId)), uintptr(unsafe.Pointer(pRelatedActivityId)), uintptr(eventThread), uintptr(numStackFrames), uintptr(unsafe.Pointer(stackFrames)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EventPipeProviderCreated dispatches through ICorProfilerCallback10's vtable slot 96.
 func (self *ICorProfilerCallback10) EventPipeProviderCreated(provider uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[96], uintptr(unsafe.Pointer(self)), uintptr(provider))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 42350846-aaed-47f7-b128-fd0c98881cde
@@ -503,7 +503,7 @@ var IID_ICorProfilerCallback11 = win32.GUID{Data1: 0x42350846, Data2: 0xaaed, Da
 // LoadAsNotificationOnly dispatches through ICorProfilerCallback11's vtable slot 97.
 func (self *ICorProfilerCallback11) LoadAsNotificationOnly(pbNotificationOnly *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[97], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbNotificationOnly)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 8a8cc829-ccf2-49fe-bbae-0f022228071a
@@ -518,7 +518,7 @@ var IID_ICorProfilerCallback2 = win32.GUID{Data1: 0x8a8cc829, Data2: 0xccf2, Dat
 func (self *ICorProfilerCallback2) ThreadNameChanged(threadId uintptr, cchName uint32, name string) error {
 	_name := win32.UTF16Ptr(name)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[72], uintptr(unsafe.Pointer(self)), uintptr(threadId), uintptr(cchName), uintptr(unsafe.Pointer(_name)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GarbageCollectionStarted dispatches through ICorProfilerCallback2's vtable slot 73.
@@ -528,43 +528,43 @@ func (self *ICorProfilerCallback2) GarbageCollectionStarted(generationCollected 
 		_generationCollected = &generationCollected[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(len(generationCollected)), uintptr(unsafe.Pointer(_generationCollected)), uintptr(reason))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SurvivingReferences dispatches through ICorProfilerCallback2's vtable slot 74.
 func (self *ICorProfilerCallback2) SurvivingReferences(cSurvivingObjectIDRanges uint32, objectIDRangeStart *uintptr, cObjectIDRangeLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[74], uintptr(unsafe.Pointer(self)), uintptr(cSurvivingObjectIDRanges), uintptr(unsafe.Pointer(objectIDRangeStart)), uintptr(unsafe.Pointer(cObjectIDRangeLength)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GarbageCollectionFinished dispatches through ICorProfilerCallback2's vtable slot 75.
 func (self *ICorProfilerCallback2) GarbageCollectionFinished() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[75], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FinalizeableObjectQueued dispatches through ICorProfilerCallback2's vtable slot 76.
 func (self *ICorProfilerCallback2) FinalizeableObjectQueued(finalizerFlags uint32, objectID uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[76], uintptr(unsafe.Pointer(self)), uintptr(finalizerFlags), uintptr(objectID))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RootReferences2 dispatches through ICorProfilerCallback2's vtable slot 77.
 func (self *ICorProfilerCallback2) RootReferences2(cRootRefs uint32, rootRefIds *uintptr, rootKinds *COR_PRF_GC_ROOT_KIND, rootFlags *COR_PRF_GC_ROOT_FLAGS, rootIds *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[77], uintptr(unsafe.Pointer(self)), uintptr(cRootRefs), uintptr(unsafe.Pointer(rootRefIds)), uintptr(unsafe.Pointer(rootKinds)), uintptr(unsafe.Pointer(rootFlags)), uintptr(unsafe.Pointer(rootIds)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HandleCreated dispatches through ICorProfilerCallback2's vtable slot 78.
 func (self *ICorProfilerCallback2) HandleCreated(handleId uintptr, initialObjectId uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(handleId), uintptr(initialObjectId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HandleDestroyed dispatches through ICorProfilerCallback2's vtable slot 79.
 func (self *ICorProfilerCallback2) HandleDestroyed(handleId uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[79], uintptr(unsafe.Pointer(self)), uintptr(handleId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 4fd2ed52-7731-4b8d-9469-03d2cc3086c5
@@ -578,19 +578,19 @@ var IID_ICorProfilerCallback3 = win32.GUID{Data1: 0x4fd2ed52, Data2: 0x7731, Dat
 // InitializeForAttach dispatches through ICorProfilerCallback3's vtable slot 80.
 func (self *ICorProfilerCallback3) InitializeForAttach(pCorProfilerInfoUnk *systemcom.IUnknown, pvClientData unsafe.Pointer, cbClientData uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[80], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCorProfilerInfoUnk)), uintptr(unsafe.Pointer(pvClientData)), uintptr(cbClientData))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ProfilerAttachComplete dispatches through ICorProfilerCallback3's vtable slot 81.
 func (self *ICorProfilerCallback3) ProfilerAttachComplete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ProfilerDetachSucceeded dispatches through ICorProfilerCallback3's vtable slot 82.
 func (self *ICorProfilerCallback3) ProfilerDetachSucceeded() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 7b63b2e3-107d-4d48-b2f6-f61e229470d2
@@ -605,38 +605,38 @@ var IID_ICorProfilerCallback4 = win32.GUID{Data1: 0x7b63b2e3, Data2: 0x107d, Dat
 func (self *ICorProfilerCallback4) ReJITCompilationStarted(functionId uintptr, rejitId uintptr, fIsSafeToBlock bool) error {
 	_fIsSafeToBlock := win32.Bool32(fIsSafeToBlock)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(rejitId), uintptr(_fIsSafeToBlock))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetReJITParameters dispatches through ICorProfilerCallback4's vtable slot 84.
 func (self *ICorProfilerCallback4) GetReJITParameters(moduleId uintptr, methodId uint32, pFunctionControl *ICorProfilerFunctionControl) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(moduleId), uintptr(methodId), uintptr(unsafe.Pointer(pFunctionControl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReJITCompilationFinished dispatches through ICorProfilerCallback4's vtable slot 85.
 func (self *ICorProfilerCallback4) ReJITCompilationFinished(functionId uintptr, rejitId uintptr, hrStatus foundation.HRESULT, fIsSafeToBlock bool) error {
 	_fIsSafeToBlock := win32.Bool32(fIsSafeToBlock)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(rejitId), uintptr(hrStatus), uintptr(_fIsSafeToBlock))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReJITError dispatches through ICorProfilerCallback4's vtable slot 86.
 func (self *ICorProfilerCallback4) ReJITError(moduleId uintptr, methodId uint32, functionId uintptr, hrStatus foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(moduleId), uintptr(methodId), uintptr(functionId), uintptr(hrStatus))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MovedReferences2 dispatches through ICorProfilerCallback4's vtable slot 87.
 func (self *ICorProfilerCallback4) MovedReferences2(cMovedObjectIDRanges uint32, oldObjectIDRangeStart *uintptr, newObjectIDRangeStart *uintptr, cObjectIDRangeLength *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[87], uintptr(unsafe.Pointer(self)), uintptr(cMovedObjectIDRanges), uintptr(unsafe.Pointer(oldObjectIDRangeStart)), uintptr(unsafe.Pointer(newObjectIDRangeStart)), uintptr(unsafe.Pointer(cObjectIDRangeLength)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SurvivingReferences2 dispatches through ICorProfilerCallback4's vtable slot 88.
 func (self *ICorProfilerCallback4) SurvivingReferences2(cSurvivingObjectIDRanges uint32, objectIDRangeStart *uintptr, cObjectIDRangeLength *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[88], uintptr(unsafe.Pointer(self)), uintptr(cSurvivingObjectIDRanges), uintptr(unsafe.Pointer(objectIDRangeStart)), uintptr(unsafe.Pointer(cObjectIDRangeLength)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 8dfba405-8c9f-45f8-bffa-83b14cef78b5
@@ -650,7 +650,7 @@ var IID_ICorProfilerCallback5 = win32.GUID{Data1: 0x8dfba405, Data2: 0x8c9f, Dat
 // ConditionalWeakTableElementReferences dispatches through ICorProfilerCallback5's vtable slot 89.
 func (self *ICorProfilerCallback5) ConditionalWeakTableElementReferences(cRootRefs uint32, keyRefIds *uintptr, valueRefIds *uintptr, rootIds *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[89], uintptr(unsafe.Pointer(self)), uintptr(cRootRefs), uintptr(unsafe.Pointer(keyRefIds)), uintptr(unsafe.Pointer(valueRefIds)), uintptr(unsafe.Pointer(rootIds)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: fc13df4b-4448-4f4f-950c-ba8d19d00c36
@@ -665,7 +665,7 @@ var IID_ICorProfilerCallback6 = win32.GUID{Data1: 0xfc13df4b, Data2: 0x4448, Dat
 func (self *ICorProfilerCallback6) GetAssemblyReferences(wszAssemblyPath string, pAsmRefProvider *ICorProfilerAssemblyReferenceProvider) error {
 	_wszAssemblyPath := win32.UTF16Ptr(wszAssemblyPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszAssemblyPath)), uintptr(unsafe.Pointer(pAsmRefProvider)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f76a2dba-1d52-4539-866c-2aa518f9efc3
@@ -679,7 +679,7 @@ var IID_ICorProfilerCallback7 = win32.GUID{Data1: 0xf76a2dba, Data2: 0x1d52, Dat
 // ModuleInMemorySymbolsUpdated dispatches through ICorProfilerCallback7's vtable slot 91.
 func (self *ICorProfilerCallback7) ModuleInMemorySymbolsUpdated(moduleId uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[91], uintptr(unsafe.Pointer(self)), uintptr(moduleId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 5bed9b15-c079-4d47-bfe2-215a140c07e0
@@ -694,14 +694,14 @@ var IID_ICorProfilerCallback8 = win32.GUID{Data1: 0x5bed9b15, Data2: 0xc079, Dat
 func (self *ICorProfilerCallback8) DynamicMethodJITCompilationStarted(functionId uintptr, fIsSafeToBlock bool, pILHeader *byte, cbILHeader uint32) error {
 	_fIsSafeToBlock := win32.Bool32(fIsSafeToBlock)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[92], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(_fIsSafeToBlock), uintptr(unsafe.Pointer(pILHeader)), uintptr(cbILHeader))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DynamicMethodJITCompilationFinished dispatches through ICorProfilerCallback8's vtable slot 93.
 func (self *ICorProfilerCallback8) DynamicMethodJITCompilationFinished(functionId uintptr, hrStatus foundation.HRESULT, fIsSafeToBlock bool) error {
 	_fIsSafeToBlock := win32.Bool32(fIsSafeToBlock)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[93], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(hrStatus), uintptr(_fIsSafeToBlock))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 27583ec3-c8f5-482f-8052-194b8ce4705a
@@ -715,7 +715,7 @@ var IID_ICorProfilerCallback9 = win32.GUID{Data1: 0x27583ec3, Data2: 0xc8f5, Dat
 // DynamicMethodUnloaded dispatches through ICorProfilerCallback9's vtable slot 94.
 func (self *ICorProfilerCallback9) DynamicMethodUnloaded(functionId uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[94], uintptr(unsafe.Pointer(self)), uintptr(functionId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f0963021-e1ea-4732-8581-e01b0bd3c0c6
@@ -729,7 +729,7 @@ var IID_ICorProfilerFunctionControl = win32.GUID{Data1: 0xf0963021, Data2: 0xe1e
 // SetCodegenFlags dispatches through ICorProfilerFunctionControl's vtable slot 3.
 func (self *ICorProfilerFunctionControl) SetCodegenFlags(flags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetILFunctionBody dispatches through ICorProfilerFunctionControl's vtable slot 4.
@@ -739,7 +739,7 @@ func (self *ICorProfilerFunctionControl) SetILFunctionBody(pbNewILMethodHeader [
 		_pbNewILMethodHeader = &pbNewILMethodHeader[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(pbNewILMethodHeader)), uintptr(unsafe.Pointer(_pbNewILMethodHeader)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetILInstrumentedCodeMap dispatches through ICorProfilerFunctionControl's vtable slot 5.
@@ -749,7 +749,7 @@ func (self *ICorProfilerFunctionControl) SetILInstrumentedCodeMap(rgILMapEntries
 		_rgILMapEntries = &rgILMapEntries[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(len(rgILMapEntries)), uintptr(unsafe.Pointer(_rgILMapEntries)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: ff71301a-b994-429d-a10b-b345a65280ef
@@ -763,25 +763,25 @@ var IID_ICorProfilerFunctionEnum = win32.GUID{Data1: 0xff71301a, Data2: 0xb994, 
 // Skip dispatches through ICorProfilerFunctionEnum's vtable slot 3.
 func (self *ICorProfilerFunctionEnum) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through ICorProfilerFunctionEnum's vtable slot 4.
 func (self *ICorProfilerFunctionEnum) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through ICorProfilerFunctionEnum's vtable slot 5.
 func (self *ICorProfilerFunctionEnum) Clone(ppEnum **ICorProfilerFunctionEnum) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCount dispatches through ICorProfilerFunctionEnum's vtable slot 6.
 func (self *ICorProfilerFunctionEnum) GetCount(pcelt *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcelt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Next dispatches through ICorProfilerFunctionEnum's vtable slot 7.
@@ -791,7 +791,7 @@ func (self *ICorProfilerFunctionEnum) Next(ids []COR_PRF_FUNCTION, pceltFetched 
 		_ids = &ids[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(len(ids)), uintptr(unsafe.Pointer(_ids)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 28b5557d-3f3f-48b4-90b2-5f9eea2f6c48
@@ -805,157 +805,157 @@ var IID_ICorProfilerInfo = win32.GUID{Data1: 0x28b5557d, Data2: 0x3f3f, Data3: 0
 // GetClassFromObject dispatches through ICorProfilerInfo's vtable slot 3.
 func (self *ICorProfilerInfo) GetClassFromObject(objectId uintptr, pClassId *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(objectId), uintptr(unsafe.Pointer(pClassId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetClassFromToken dispatches through ICorProfilerInfo's vtable slot 4.
 func (self *ICorProfilerInfo) GetClassFromToken(moduleId uintptr, typeDef uint32, pClassId *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(moduleId), uintptr(typeDef), uintptr(unsafe.Pointer(pClassId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCodeInfo dispatches through ICorProfilerInfo's vtable slot 5.
 func (self *ICorProfilerInfo) GetCodeInfo(functionId uintptr, pStart **byte, pcSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(unsafe.Pointer(pStart)), uintptr(unsafe.Pointer(pcSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEventMask dispatches through ICorProfilerInfo's vtable slot 6.
 func (self *ICorProfilerInfo) GetEventMask(pdwEvents *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwEvents)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFunctionFromIP dispatches through ICorProfilerInfo's vtable slot 7.
 func (self *ICorProfilerInfo) GetFunctionFromIP(ip *byte, pFunctionId *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ip)), uintptr(unsafe.Pointer(pFunctionId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFunctionFromToken dispatches through ICorProfilerInfo's vtable slot 8.
 func (self *ICorProfilerInfo) GetFunctionFromToken(moduleId uintptr, token uint32, pFunctionId *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(moduleId), uintptr(token), uintptr(unsafe.Pointer(pFunctionId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetHandleFromThread dispatches through ICorProfilerInfo's vtable slot 9.
 func (self *ICorProfilerInfo) GetHandleFromThread(threadId uintptr, phThread *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(threadId), uintptr(unsafe.Pointer(phThread)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetObjectSize dispatches through ICorProfilerInfo's vtable slot 10.
 func (self *ICorProfilerInfo) GetObjectSize(objectId uintptr, pcSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(objectId), uintptr(unsafe.Pointer(pcSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsArrayClass dispatches through ICorProfilerInfo's vtable slot 11.
 func (self *ICorProfilerInfo) IsArrayClass(classId uintptr, pBaseElemType *systemwinrtmetadata.CorElementType, pBaseClassId *uintptr, pcRank *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(classId), uintptr(unsafe.Pointer(pBaseElemType)), uintptr(unsafe.Pointer(pBaseClassId)), uintptr(unsafe.Pointer(pcRank)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThreadInfo dispatches through ICorProfilerInfo's vtable slot 12.
 func (self *ICorProfilerInfo) GetThreadInfo(threadId uintptr, pdwWin32ThreadId *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(threadId), uintptr(unsafe.Pointer(pdwWin32ThreadId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentThreadID dispatches through ICorProfilerInfo's vtable slot 13.
 func (self *ICorProfilerInfo) GetCurrentThreadID(pThreadId *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pThreadId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetClassIDInfo dispatches through ICorProfilerInfo's vtable slot 14.
 func (self *ICorProfilerInfo) GetClassIDInfo(classId uintptr, pModuleId *uintptr, pTypeDefToken *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(classId), uintptr(unsafe.Pointer(pModuleId)), uintptr(unsafe.Pointer(pTypeDefToken)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFunctionInfo dispatches through ICorProfilerInfo's vtable slot 15.
 func (self *ICorProfilerInfo) GetFunctionInfo(functionId uintptr, pClassId *uintptr, pModuleId *uintptr, pToken *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(unsafe.Pointer(pClassId)), uintptr(unsafe.Pointer(pModuleId)), uintptr(unsafe.Pointer(pToken)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetEventMask dispatches through ICorProfilerInfo's vtable slot 16.
 func (self *ICorProfilerInfo) SetEventMask(dwEvents uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(dwEvents))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetEnterLeaveFunctionHooks dispatches through ICorProfilerInfo's vtable slot 17.
 func (self *ICorProfilerInfo) SetEnterLeaveFunctionHooks(pFuncEnter *FunctionEnter, pFuncLeave *FunctionLeave, pFuncTailcall *FunctionTailcall) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFuncEnter)), uintptr(unsafe.Pointer(pFuncLeave)), uintptr(unsafe.Pointer(pFuncTailcall)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetFunctionIDMapper dispatches through ICorProfilerInfo's vtable slot 18.
 func (self *ICorProfilerInfo) SetFunctionIDMapper(pFunc *FunctionIDMapper) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFunc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTokenAndMetaDataFromFunction dispatches through ICorProfilerInfo's vtable slot 19.
 func (self *ICorProfilerInfo) GetTokenAndMetaDataFromFunction(functionId uintptr, riid *win32.GUID, ppImport **systemcom.IUnknown, pToken *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppImport)), uintptr(unsafe.Pointer(pToken)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetModuleInfo dispatches through ICorProfilerInfo's vtable slot 20.
 func (self *ICorProfilerInfo) GetModuleInfo(moduleId uintptr, ppBaseLoadAddress **byte, cchName uint32, pcchName *uint32, szName foundation.PWSTR, pAssemblyId *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(moduleId), uintptr(unsafe.Pointer(ppBaseLoadAddress)), uintptr(cchName), uintptr(unsafe.Pointer(pcchName)), uintptr(unsafe.Pointer(szName)), uintptr(unsafe.Pointer(pAssemblyId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetModuleMetaData dispatches through ICorProfilerInfo's vtable slot 21.
 func (self *ICorProfilerInfo) GetModuleMetaData(moduleId uintptr, dwOpenFlags uint32, riid *win32.GUID, ppOut **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(moduleId), uintptr(dwOpenFlags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetILFunctionBody dispatches through ICorProfilerInfo's vtable slot 22.
 func (self *ICorProfilerInfo) GetILFunctionBody(moduleId uintptr, methodId uint32, ppMethodHeader **byte, pcbMethodSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(moduleId), uintptr(methodId), uintptr(unsafe.Pointer(ppMethodHeader)), uintptr(unsafe.Pointer(pcbMethodSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetILFunctionBodyAllocator dispatches through ICorProfilerInfo's vtable slot 23.
 func (self *ICorProfilerInfo) GetILFunctionBodyAllocator(moduleId uintptr, ppMalloc **IMethodMalloc) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(moduleId), uintptr(unsafe.Pointer(ppMalloc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetILFunctionBody dispatches through ICorProfilerInfo's vtable slot 24.
 func (self *ICorProfilerInfo) SetILFunctionBody(moduleId uintptr, methodid uint32, pbNewILMethodHeader *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(moduleId), uintptr(methodid), uintptr(unsafe.Pointer(pbNewILMethodHeader)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAppDomainInfo dispatches through ICorProfilerInfo's vtable slot 25.
 func (self *ICorProfilerInfo) GetAppDomainInfo(appDomainId uintptr, cchName uint32, pcchName *uint32, szName foundation.PWSTR, pProcessId *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(appDomainId), uintptr(cchName), uintptr(unsafe.Pointer(pcchName)), uintptr(unsafe.Pointer(szName)), uintptr(unsafe.Pointer(pProcessId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAssemblyInfo dispatches through ICorProfilerInfo's vtable slot 26.
 func (self *ICorProfilerInfo) GetAssemblyInfo(assemblyId uintptr, cchName uint32, pcchName *uint32, szName foundation.PWSTR, pAppDomainId *uintptr, pModuleId *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(assemblyId), uintptr(cchName), uintptr(unsafe.Pointer(pcchName)), uintptr(unsafe.Pointer(szName)), uintptr(unsafe.Pointer(pAppDomainId)), uintptr(unsafe.Pointer(pModuleId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetFunctionReJIT dispatches through ICorProfilerInfo's vtable slot 27.
 func (self *ICorProfilerInfo) SetFunctionReJIT(functionId uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(functionId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ForceGC dispatches through ICorProfilerInfo's vtable slot 28.
 func (self *ICorProfilerInfo) ForceGC() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetILInstrumentedCodeMap dispatches through ICorProfilerInfo's vtable slot 29.
@@ -966,38 +966,38 @@ func (self *ICorProfilerInfo) SetILInstrumentedCodeMap(functionId uintptr, fStar
 		_rgILMapEntries = &rgILMapEntries[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(_fStartJit), uintptr(len(rgILMapEntries)), uintptr(unsafe.Pointer(_rgILMapEntries)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInprocInspectionInterface dispatches through ICorProfilerInfo's vtable slot 30.
 func (self *ICorProfilerInfo) GetInprocInspectionInterface(ppicd **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppicd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInprocInspectionIThisThread dispatches through ICorProfilerInfo's vtable slot 31.
 func (self *ICorProfilerInfo) GetInprocInspectionIThisThread(ppicd **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppicd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThreadContext dispatches through ICorProfilerInfo's vtable slot 32.
 func (self *ICorProfilerInfo) GetThreadContext(threadId uintptr, pContextId *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(threadId), uintptr(unsafe.Pointer(pContextId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BeginInprocDebugging dispatches through ICorProfilerInfo's vtable slot 33.
 func (self *ICorProfilerInfo) BeginInprocDebugging(fThisThreadOnly bool, pdwProfilerContext *uint32) error {
 	_fThisThreadOnly := win32.Bool32(fThisThreadOnly)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(_fThisThreadOnly), uintptr(unsafe.Pointer(pdwProfilerContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndInprocDebugging dispatches through ICorProfilerInfo's vtable slot 34.
 func (self *ICorProfilerInfo) EndInprocDebugging(dwProfilerContext uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(dwProfilerContext))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetILToNativeMapping dispatches through ICorProfilerInfo's vtable slot 35.
@@ -1007,7 +1007,7 @@ func (self *ICorProfilerInfo) GetILToNativeMapping(functionId uintptr, pcMap *ui
 		_map_ = &map_[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(len(map_)), uintptr(unsafe.Pointer(pcMap)), uintptr(unsafe.Pointer(_map_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 2f1b5152-c869-40c9-aa5f-3abe026bd720
@@ -1021,37 +1021,37 @@ var IID_ICorProfilerInfo10 = win32.GUID{Data1: 0x2f1b5152, Data2: 0xc869, Data3:
 // EnumerateObjectReferences dispatches through ICorProfilerInfo10's vtable slot 93.
 func (self *ICorProfilerInfo10) EnumerateObjectReferences(objectId uintptr, callback ObjectReferenceCallback, clientData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[93], uintptr(unsafe.Pointer(self)), uintptr(objectId), uintptr(callback), uintptr(unsafe.Pointer(clientData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsFrozenObject dispatches through ICorProfilerInfo10's vtable slot 94.
 func (self *ICorProfilerInfo10) IsFrozenObject(objectId uintptr, pbFrozen *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[94], uintptr(unsafe.Pointer(self)), uintptr(objectId), uintptr(unsafe.Pointer(pbFrozen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLOHObjectSizeThreshold dispatches through ICorProfilerInfo10's vtable slot 95.
 func (self *ICorProfilerInfo10) GetLOHObjectSizeThreshold(pThreshold *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[95], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pThreshold)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RequestReJITWithInliners dispatches through ICorProfilerInfo10's vtable slot 96.
 func (self *ICorProfilerInfo10) RequestReJITWithInliners(dwRejitFlags uint32, cFunctions uint32, moduleIds *uintptr, methodIds *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[96], uintptr(unsafe.Pointer(self)), uintptr(dwRejitFlags), uintptr(cFunctions), uintptr(unsafe.Pointer(moduleIds)), uintptr(unsafe.Pointer(methodIds)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SuspendRuntime dispatches through ICorProfilerInfo10's vtable slot 97.
 func (self *ICorProfilerInfo10) SuspendRuntime() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[97], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ResumeRuntime dispatches through ICorProfilerInfo10's vtable slot 98.
 func (self *ICorProfilerInfo10) ResumeRuntime() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[98], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 06398876-8987-4154-b621-40a00d6e4d04
@@ -1066,7 +1066,7 @@ var IID_ICorProfilerInfo11 = win32.GUID{Data1: 0x06398876, Data2: 0x8987, Data3:
 func (self *ICorProfilerInfo11) GetEnvironmentVariableA(szName string, cchValue uint32, pcchValue *uint32, szValue foundation.PWSTR) error {
 	_szName := win32.UTF16Ptr(szName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[99], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szName)), uintptr(cchValue), uintptr(unsafe.Pointer(pcchValue)), uintptr(unsafe.Pointer(szValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetEnvironmentVariable dispatches through ICorProfilerInfo11's vtable slot 100.
@@ -1074,7 +1074,7 @@ func (self *ICorProfilerInfo11) SetEnvironmentVariable(szName string, szValue st
 	_szName := win32.UTF16Ptr(szName)
 	_szValue := win32.UTF16Ptr(szValue)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[100], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szName)), uintptr(unsafe.Pointer(_szValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 27b24ccd-1cb1-47c5-96ee-98190dc30959
@@ -1093,26 +1093,26 @@ func (self *ICorProfilerInfo12) EventPipeStartSession(pProviderConfigs []COR_PRF
 	}
 	_requestRundown := win32.Bool32(requestRundown)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[101], uintptr(unsafe.Pointer(self)), uintptr(len(pProviderConfigs)), uintptr(unsafe.Pointer(_pProviderConfigs)), uintptr(_requestRundown), uintptr(unsafe.Pointer(pSession)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EventPipeStopSession dispatches through ICorProfilerInfo12's vtable slot 103.
 func (self *ICorProfilerInfo12) EventPipeStopSession(session uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[103], uintptr(unsafe.Pointer(self)), uintptr(session))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EventPipeCreateProvider dispatches through ICorProfilerInfo12's vtable slot 104.
 func (self *ICorProfilerInfo12) EventPipeCreateProvider(providerName string, pProvider *uintptr) error {
 	_providerName := win32.UTF16Ptr(providerName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[104], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_providerName)), uintptr(unsafe.Pointer(pProvider)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EventPipeGetProviderInfo dispatches through ICorProfilerInfo12's vtable slot 105.
 func (self *ICorProfilerInfo12) EventPipeGetProviderInfo(provider uintptr, cchName uint32, pcchName *uint32, providerName foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[105], uintptr(unsafe.Pointer(self)), uintptr(provider), uintptr(cchName), uintptr(unsafe.Pointer(pcchName)), uintptr(unsafe.Pointer(providerName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EventPipeDefineEvent dispatches through ICorProfilerInfo12's vtable slot 106.
@@ -1124,7 +1124,7 @@ func (self *ICorProfilerInfo12) EventPipeDefineEvent(provider uintptr, eventName
 		_pParamDescs = &pParamDescs[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[106], uintptr(unsafe.Pointer(self)), uintptr(provider), uintptr(unsafe.Pointer(_eventName)), uintptr(eventID), uintptr(keywords), uintptr(eventVersion), uintptr(level), uintptr(opcode), uintptr(_needStack), uintptr(len(pParamDescs)), uintptr(unsafe.Pointer(_pParamDescs)), uintptr(unsafe.Pointer(pEvent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EventPipeWriteEvent dispatches through ICorProfilerInfo12's vtable slot 107.
@@ -1134,7 +1134,7 @@ func (self *ICorProfilerInfo12) EventPipeWriteEvent(event uintptr, data []COR_PR
 		_data = &data[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[107], uintptr(unsafe.Pointer(self)), uintptr(event), uintptr(len(data)), uintptr(unsafe.Pointer(_data)), uintptr(unsafe.Pointer(pActivityId)), uintptr(unsafe.Pointer(pRelatedActivityId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 6e6c7ee2-0701-4ec2-9d29-2e8733b66934
@@ -1148,19 +1148,19 @@ var IID_ICorProfilerInfo13 = win32.GUID{Data1: 0x6e6c7ee2, Data2: 0x0701, Data3:
 // CreateHandle dispatches through ICorProfilerInfo13's vtable slot 108.
 func (self *ICorProfilerInfo13) CreateHandle(object uintptr, type_ COR_PRF_HANDLE_TYPE, pHandle **unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[108], uintptr(unsafe.Pointer(self)), uintptr(object), uintptr(type_), uintptr(unsafe.Pointer(pHandle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DestroyHandle dispatches through ICorProfilerInfo13's vtable slot 109.
 func (self *ICorProfilerInfo13) DestroyHandle(handle *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[109], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(handle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetObjectIDFromHandle dispatches through ICorProfilerInfo13's vtable slot 110.
 func (self *ICorProfilerInfo13) GetObjectIDFromHandle(handle *unsafe.Pointer, pObject *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[110], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(handle)), uintptr(unsafe.Pointer(pObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f460e352-d76d-4fe9-835f-f6af9d6e862d
@@ -1174,7 +1174,7 @@ var IID_ICorProfilerInfo14 = win32.GUID{Data1: 0xf460e352, Data2: 0xd76d, Data3:
 // EnumerateNonGCObjects dispatches through ICorProfilerInfo14's vtable slot 111.
 func (self *ICorProfilerInfo14) EnumerateNonGCObjects(ppEnum **ICorProfilerObjectEnum) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[111], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNonGCHeapBounds dispatches through ICorProfilerInfo14's vtable slot 112.
@@ -1184,14 +1184,14 @@ func (self *ICorProfilerInfo14) GetNonGCHeapBounds(pcObjectRanges *uint32, range
 		_ranges = &ranges[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[112], uintptr(unsafe.Pointer(self)), uintptr(len(ranges)), uintptr(unsafe.Pointer(pcObjectRanges)), uintptr(unsafe.Pointer(_ranges)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EventPipeCreateProvider2 dispatches through ICorProfilerInfo14's vtable slot 113.
 func (self *ICorProfilerInfo14) EventPipeCreateProvider2(providerName string, pCallback *EventPipeProviderCallback, pProvider *uintptr) error {
 	_providerName := win32.UTF16Ptr(providerName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[113], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_providerName)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pProvider)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: cc0935cd-a518-487d-b0bb-a93214e65478
@@ -1209,37 +1209,37 @@ func (self *ICorProfilerInfo2) DoStackSnapshot(thread uintptr, callback *StackSn
 		_context = &context[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(thread), uintptr(unsafe.Pointer(callback)), uintptr(infoFlags), uintptr(unsafe.Pointer(clientData)), uintptr(unsafe.Pointer(_context)), uintptr(len(context)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetEnterLeaveFunctionHooks2 dispatches through ICorProfilerInfo2's vtable slot 37.
 func (self *ICorProfilerInfo2) SetEnterLeaveFunctionHooks2(pFuncEnter *FunctionEnter2, pFuncLeave *FunctionLeave2, pFuncTailcall *FunctionTailcall2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFuncEnter)), uintptr(unsafe.Pointer(pFuncLeave)), uintptr(unsafe.Pointer(pFuncTailcall)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFunctionInfo2 dispatches through ICorProfilerInfo2's vtable slot 38.
 func (self *ICorProfilerInfo2) GetFunctionInfo2(funcId uintptr, frameInfo uintptr, pClassId *uintptr, pModuleId *uintptr, pToken *uint32, cTypeArgs uint32, pcTypeArgs *uint32, typeArgs *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(funcId), uintptr(frameInfo), uintptr(unsafe.Pointer(pClassId)), uintptr(unsafe.Pointer(pModuleId)), uintptr(unsafe.Pointer(pToken)), uintptr(cTypeArgs), uintptr(unsafe.Pointer(pcTypeArgs)), uintptr(unsafe.Pointer(typeArgs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStringLayout dispatches through ICorProfilerInfo2's vtable slot 39.
 func (self *ICorProfilerInfo2) GetStringLayout(pBufferLengthOffset *uint32, pStringLengthOffset *uint32, pBufferOffset *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBufferLengthOffset)), uintptr(unsafe.Pointer(pStringLengthOffset)), uintptr(unsafe.Pointer(pBufferOffset)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetClassLayout dispatches through ICorProfilerInfo2's vtable slot 40.
 func (self *ICorProfilerInfo2) GetClassLayout(classID uintptr, rFieldOffset *systemwinrtmetadata.COR_FIELD_OFFSET, cFieldOffset uint32, pcFieldOffset *uint32, pulClassSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(classID), uintptr(unsafe.Pointer(rFieldOffset)), uintptr(cFieldOffset), uintptr(unsafe.Pointer(pcFieldOffset)), uintptr(unsafe.Pointer(pulClassSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetClassIDInfo2 dispatches through ICorProfilerInfo2's vtable slot 41.
 func (self *ICorProfilerInfo2) GetClassIDInfo2(classId uintptr, pModuleId *uintptr, pTypeDefToken *uint32, pParentClassId *uintptr, cNumTypeArgs uint32, pcNumTypeArgs *uint32, typeArgs *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(classId), uintptr(unsafe.Pointer(pModuleId)), uintptr(unsafe.Pointer(pTypeDefToken)), uintptr(unsafe.Pointer(pParentClassId)), uintptr(cNumTypeArgs), uintptr(unsafe.Pointer(pcNumTypeArgs)), uintptr(unsafe.Pointer(typeArgs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCodeInfo2 dispatches through ICorProfilerInfo2's vtable slot 42.
@@ -1249,7 +1249,7 @@ func (self *ICorProfilerInfo2) GetCodeInfo2(functionID uintptr, pcCodeInfos *uin
 		_codeInfos = &codeInfos[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(functionID), uintptr(len(codeInfos)), uintptr(unsafe.Pointer(pcCodeInfos)), uintptr(unsafe.Pointer(_codeInfos)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetClassFromTokenAndTypeArgs dispatches through ICorProfilerInfo2's vtable slot 43.
@@ -1259,7 +1259,7 @@ func (self *ICorProfilerInfo2) GetClassFromTokenAndTypeArgs(moduleID uintptr, ty
 		_typeArgs = &typeArgs[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(moduleID), uintptr(typeDef), uintptr(len(typeArgs)), uintptr(unsafe.Pointer(_typeArgs)), uintptr(unsafe.Pointer(pClassID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFunctionFromTokenAndTypeArgs dispatches through ICorProfilerInfo2's vtable slot 44.
@@ -1269,61 +1269,61 @@ func (self *ICorProfilerInfo2) GetFunctionFromTokenAndTypeArgs(moduleID uintptr,
 		_typeArgs = &typeArgs[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(moduleID), uintptr(funcDef), uintptr(classId), uintptr(len(typeArgs)), uintptr(unsafe.Pointer(_typeArgs)), uintptr(unsafe.Pointer(pFunctionID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumModuleFrozenObjects dispatches through ICorProfilerInfo2's vtable slot 45.
 func (self *ICorProfilerInfo2) EnumModuleFrozenObjects(moduleID uintptr, ppEnum **ICorProfilerObjectEnum) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(moduleID), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetArrayObjectInfo dispatches through ICorProfilerInfo2's vtable slot 46.
 func (self *ICorProfilerInfo2) GetArrayObjectInfo(objectId uintptr, cDimensions uint32, pDimensionSizes *uint32, pDimensionLowerBounds *int32, ppData **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(objectId), uintptr(cDimensions), uintptr(unsafe.Pointer(pDimensionSizes)), uintptr(unsafe.Pointer(pDimensionLowerBounds)), uintptr(unsafe.Pointer(ppData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBoxClassLayout dispatches through ICorProfilerInfo2's vtable slot 47.
 func (self *ICorProfilerInfo2) GetBoxClassLayout(classId uintptr, pBufferOffset *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(classId), uintptr(unsafe.Pointer(pBufferOffset)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThreadAppDomain dispatches through ICorProfilerInfo2's vtable slot 48.
 func (self *ICorProfilerInfo2) GetThreadAppDomain(threadId uintptr, pAppDomainId *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(threadId), uintptr(unsafe.Pointer(pAppDomainId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRVAStaticAddress dispatches through ICorProfilerInfo2's vtable slot 49.
 func (self *ICorProfilerInfo2) GetRVAStaticAddress(classId uintptr, fieldToken uint32, ppAddress *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(classId), uintptr(fieldToken), uintptr(unsafe.Pointer(ppAddress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAppDomainStaticAddress dispatches through ICorProfilerInfo2's vtable slot 50.
 func (self *ICorProfilerInfo2) GetAppDomainStaticAddress(classId uintptr, fieldToken uint32, appDomainId uintptr, ppAddress *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(classId), uintptr(fieldToken), uintptr(appDomainId), uintptr(unsafe.Pointer(ppAddress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThreadStaticAddress dispatches through ICorProfilerInfo2's vtable slot 51.
 func (self *ICorProfilerInfo2) GetThreadStaticAddress(classId uintptr, fieldToken uint32, threadId uintptr, ppAddress *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(classId), uintptr(fieldToken), uintptr(threadId), uintptr(unsafe.Pointer(ppAddress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetContextStaticAddress dispatches through ICorProfilerInfo2's vtable slot 52.
 func (self *ICorProfilerInfo2) GetContextStaticAddress(classId uintptr, fieldToken uint32, contextId uintptr, ppAddress *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(classId), uintptr(fieldToken), uintptr(contextId), uintptr(unsafe.Pointer(ppAddress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStaticFieldInfo dispatches through ICorProfilerInfo2's vtable slot 53.
 func (self *ICorProfilerInfo2) GetStaticFieldInfo(classId uintptr, fieldToken uint32, pFieldInfo *COR_PRF_STATIC_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(classId), uintptr(fieldToken), uintptr(unsafe.Pointer(pFieldInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetGenerationBounds dispatches through ICorProfilerInfo2's vtable slot 54.
@@ -1333,19 +1333,19 @@ func (self *ICorProfilerInfo2) GetGenerationBounds(pcObjectRanges *uint32, range
 		_ranges = &ranges[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(len(ranges)), uintptr(unsafe.Pointer(pcObjectRanges)), uintptr(unsafe.Pointer(_ranges)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetObjectGeneration dispatches through ICorProfilerInfo2's vtable slot 55.
 func (self *ICorProfilerInfo2) GetObjectGeneration(objectId uintptr, range_ *COR_PRF_GC_GENERATION_RANGE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(objectId), uintptr(unsafe.Pointer(range_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNotifiedExceptionClauseInfo dispatches through ICorProfilerInfo2's vtable slot 56.
 func (self *ICorProfilerInfo2) GetNotifiedExceptionClauseInfo(pinfo *COR_PRF_EX_CLAUSE_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pinfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: b555ed4f-452a-4e54-8b39-b5360bad32a0
@@ -1359,73 +1359,73 @@ var IID_ICorProfilerInfo3 = win32.GUID{Data1: 0xb555ed4f, Data2: 0x452a, Data3: 
 // EnumJITedFunctions dispatches through ICorProfilerInfo3's vtable slot 57.
 func (self *ICorProfilerInfo3) EnumJITedFunctions(ppEnum **ICorProfilerFunctionEnum) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RequestProfilerDetach dispatches through ICorProfilerInfo3's vtable slot 58.
 func (self *ICorProfilerInfo3) RequestProfilerDetach(dwExpectedCompletionMilliseconds uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(dwExpectedCompletionMilliseconds))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetFunctionIDMapper2 dispatches through ICorProfilerInfo3's vtable slot 59.
 func (self *ICorProfilerInfo3) SetFunctionIDMapper2(pFunc *FunctionIDMapper2, clientData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFunc)), uintptr(unsafe.Pointer(clientData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStringLayout2 dispatches through ICorProfilerInfo3's vtable slot 60.
 func (self *ICorProfilerInfo3) GetStringLayout2(pStringLengthOffset *uint32, pBufferOffset *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStringLengthOffset)), uintptr(unsafe.Pointer(pBufferOffset)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetEnterLeaveFunctionHooks3 dispatches through ICorProfilerInfo3's vtable slot 61.
 func (self *ICorProfilerInfo3) SetEnterLeaveFunctionHooks3(pFuncEnter3 *FunctionEnter3, pFuncLeave3 *FunctionLeave3, pFuncTailcall3 *FunctionTailcall3) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFuncEnter3)), uintptr(unsafe.Pointer(pFuncLeave3)), uintptr(unsafe.Pointer(pFuncTailcall3)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetEnterLeaveFunctionHooks3WithInfo dispatches through ICorProfilerInfo3's vtable slot 62.
 func (self *ICorProfilerInfo3) SetEnterLeaveFunctionHooks3WithInfo(pFuncEnter3WithInfo *FunctionEnter3WithInfo, pFuncLeave3WithInfo *FunctionLeave3WithInfo, pFuncTailcall3WithInfo *FunctionTailcall3WithInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFuncEnter3WithInfo)), uintptr(unsafe.Pointer(pFuncLeave3WithInfo)), uintptr(unsafe.Pointer(pFuncTailcall3WithInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFunctionEnter3Info dispatches through ICorProfilerInfo3's vtable slot 63.
 func (self *ICorProfilerInfo3) GetFunctionEnter3Info(functionId uintptr, eltInfo uintptr, pFrameInfo *uintptr, pcbArgumentInfo *uint32, pArgumentInfo *COR_PRF_FUNCTION_ARGUMENT_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(eltInfo), uintptr(unsafe.Pointer(pFrameInfo)), uintptr(unsafe.Pointer(pcbArgumentInfo)), uintptr(unsafe.Pointer(pArgumentInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFunctionLeave3Info dispatches through ICorProfilerInfo3's vtable slot 64.
 func (self *ICorProfilerInfo3) GetFunctionLeave3Info(functionId uintptr, eltInfo uintptr, pFrameInfo *uintptr, pRetvalRange *COR_PRF_FUNCTION_ARGUMENT_RANGE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(eltInfo), uintptr(unsafe.Pointer(pFrameInfo)), uintptr(unsafe.Pointer(pRetvalRange)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFunctionTailcall3Info dispatches through ICorProfilerInfo3's vtable slot 65.
 func (self *ICorProfilerInfo3) GetFunctionTailcall3Info(functionId uintptr, eltInfo uintptr, pFrameInfo *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(eltInfo), uintptr(unsafe.Pointer(pFrameInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumModules dispatches through ICorProfilerInfo3's vtable slot 66.
 func (self *ICorProfilerInfo3) EnumModules(ppEnum **ICorProfilerModuleEnum) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRuntimeInformation dispatches through ICorProfilerInfo3's vtable slot 67.
 func (self *ICorProfilerInfo3) GetRuntimeInformation(pClrInstanceId *uint16, pRuntimeType *COR_PRF_RUNTIME_TYPE, pMajorVersion *uint16, pMinorVersion *uint16, pBuildNumber *uint16, pQFEVersion *uint16, cchVersionString uint32, pcchVersionString *uint32, szVersionString foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pClrInstanceId)), uintptr(unsafe.Pointer(pRuntimeType)), uintptr(unsafe.Pointer(pMajorVersion)), uintptr(unsafe.Pointer(pMinorVersion)), uintptr(unsafe.Pointer(pBuildNumber)), uintptr(unsafe.Pointer(pQFEVersion)), uintptr(cchVersionString), uintptr(unsafe.Pointer(pcchVersionString)), uintptr(unsafe.Pointer(szVersionString)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThreadStaticAddress2 dispatches through ICorProfilerInfo3's vtable slot 68.
 func (self *ICorProfilerInfo3) GetThreadStaticAddress2(classId uintptr, fieldToken uint32, appDomainId uintptr, threadId uintptr, ppAddress *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(classId), uintptr(fieldToken), uintptr(appDomainId), uintptr(threadId), uintptr(unsafe.Pointer(ppAddress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAppDomainsContainingModule dispatches through ICorProfilerInfo3's vtable slot 69.
@@ -1435,13 +1435,13 @@ func (self *ICorProfilerInfo3) GetAppDomainsContainingModule(moduleId uintptr, p
 		_appDomainIds = &appDomainIds[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(moduleId), uintptr(len(appDomainIds)), uintptr(unsafe.Pointer(pcAppDomainIds)), uintptr(unsafe.Pointer(_appDomainIds)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetModuleInfo2 dispatches through ICorProfilerInfo3's vtable slot 70.
 func (self *ICorProfilerInfo3) GetModuleInfo2(moduleId uintptr, ppBaseLoadAddress **byte, cchName uint32, pcchName *uint32, szName foundation.PWSTR, pAssemblyId *uintptr, pdwModuleFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)), uintptr(moduleId), uintptr(unsafe.Pointer(ppBaseLoadAddress)), uintptr(cchName), uintptr(unsafe.Pointer(pcchName)), uintptr(unsafe.Pointer(szName)), uintptr(unsafe.Pointer(pAssemblyId)), uintptr(unsafe.Pointer(pdwModuleFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 0d8fdcaa-6257-47bf-b1bf-94dac88466ee
@@ -1455,25 +1455,25 @@ var IID_ICorProfilerInfo4 = win32.GUID{Data1: 0x0d8fdcaa, Data2: 0x6257, Data3: 
 // EnumThreads dispatches through ICorProfilerInfo4's vtable slot 71.
 func (self *ICorProfilerInfo4) EnumThreads(ppEnum **ICorProfilerThreadEnum) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeCurrentThread dispatches through ICorProfilerInfo4's vtable slot 72.
 func (self *ICorProfilerInfo4) InitializeCurrentThread() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[72], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RequestReJIT dispatches through ICorProfilerInfo4's vtable slot 73.
 func (self *ICorProfilerInfo4) RequestReJIT(cFunctions uint32, moduleIds *uintptr, methodIds *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(cFunctions), uintptr(unsafe.Pointer(moduleIds)), uintptr(unsafe.Pointer(methodIds)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RequestRevert dispatches through ICorProfilerInfo4's vtable slot 74.
 func (self *ICorProfilerInfo4) RequestRevert(cFunctions uint32, moduleIds *uintptr, methodIds *uint32, status *foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[74], uintptr(unsafe.Pointer(self)), uintptr(cFunctions), uintptr(unsafe.Pointer(moduleIds)), uintptr(unsafe.Pointer(methodIds)), uintptr(unsafe.Pointer(status)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCodeInfo3 dispatches through ICorProfilerInfo4's vtable slot 75.
@@ -1483,13 +1483,13 @@ func (self *ICorProfilerInfo4) GetCodeInfo3(functionID uintptr, reJitId uintptr,
 		_codeInfos = &codeInfos[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[75], uintptr(unsafe.Pointer(self)), uintptr(functionID), uintptr(reJitId), uintptr(len(codeInfos)), uintptr(unsafe.Pointer(pcCodeInfos)), uintptr(unsafe.Pointer(_codeInfos)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFunctionFromIP2 dispatches through ICorProfilerInfo4's vtable slot 76.
 func (self *ICorProfilerInfo4) GetFunctionFromIP2(ip *byte, pFunctionId *uintptr, pReJitId *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[76], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ip)), uintptr(unsafe.Pointer(pFunctionId)), uintptr(unsafe.Pointer(pReJitId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetReJITIDs dispatches through ICorProfilerInfo4's vtable slot 77.
@@ -1499,7 +1499,7 @@ func (self *ICorProfilerInfo4) GetReJITIDs(functionId uintptr, pcReJitIds *uint3
 		_reJitIds = &reJitIds[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[77], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(len(reJitIds)), uintptr(unsafe.Pointer(pcReJitIds)), uintptr(unsafe.Pointer(_reJitIds)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetILToNativeMapping2 dispatches through ICorProfilerInfo4's vtable slot 78.
@@ -1509,19 +1509,19 @@ func (self *ICorProfilerInfo4) GetILToNativeMapping2(functionId uintptr, reJitId
 		_map_ = &map_[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(reJitId), uintptr(len(map_)), uintptr(unsafe.Pointer(pcMap)), uintptr(unsafe.Pointer(_map_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumJITedFunctions2 dispatches through ICorProfilerInfo4's vtable slot 79.
 func (self *ICorProfilerInfo4) EnumJITedFunctions2(ppEnum **ICorProfilerFunctionEnum) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[79], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetObjectSize2 dispatches through ICorProfilerInfo4's vtable slot 80.
 func (self *ICorProfilerInfo4) GetObjectSize2(objectId uintptr, pcSize *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[80], uintptr(unsafe.Pointer(self)), uintptr(objectId), uintptr(unsafe.Pointer(pcSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 07602928-ce38-4b83-81e7-74adaf781214
@@ -1535,13 +1535,13 @@ var IID_ICorProfilerInfo5 = win32.GUID{Data1: 0x07602928, Data2: 0xce38, Data3: 
 // GetEventMask2 dispatches through ICorProfilerInfo5's vtable slot 81.
 func (self *ICorProfilerInfo5) GetEventMask2(pdwEventsLow *uint32, pdwEventsHigh *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwEventsLow)), uintptr(unsafe.Pointer(pdwEventsHigh)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetEventMask2 dispatches through ICorProfilerInfo5's vtable slot 82.
 func (self *ICorProfilerInfo5) SetEventMask2(dwEventsLow uint32, dwEventsHigh uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(dwEventsLow), uintptr(dwEventsHigh))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f30a070d-bffb-46a7-b1d8-8781ef7b698a
@@ -1555,7 +1555,7 @@ var IID_ICorProfilerInfo6 = win32.GUID{Data1: 0xf30a070d, Data2: 0xbffb, Data3: 
 // EnumNgenModuleMethodsInliningThisMethod dispatches through ICorProfilerInfo6's vtable slot 83.
 func (self *ICorProfilerInfo6) EnumNgenModuleMethodsInliningThisMethod(inlinersModuleId uintptr, inlineeModuleId uintptr, inlineeMethodId uint32, incompleteData *foundation.BOOL, ppEnum **ICorProfilerMethodEnum) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(inlinersModuleId), uintptr(inlineeModuleId), uintptr(inlineeMethodId), uintptr(unsafe.Pointer(incompleteData)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 9aeecc0d-63e0-4187-8c00-e312f503f663
@@ -1569,19 +1569,19 @@ var IID_ICorProfilerInfo7 = win32.GUID{Data1: 0x9aeecc0d, Data2: 0x63e0, Data3: 
 // ApplyMetaData dispatches through ICorProfilerInfo7's vtable slot 84.
 func (self *ICorProfilerInfo7) ApplyMetaData(moduleId uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(moduleId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInMemorySymbolsLength dispatches through ICorProfilerInfo7's vtable slot 85.
 func (self *ICorProfilerInfo7) GetInMemorySymbolsLength(moduleId uintptr, pCountSymbolBytes *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(moduleId), uintptr(unsafe.Pointer(pCountSymbolBytes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReadInMemorySymbols dispatches through ICorProfilerInfo7's vtable slot 86.
 func (self *ICorProfilerInfo7) ReadInMemorySymbols(moduleId uintptr, symbolsReadOffset uint32, pSymbolBytes *byte, countSymbolBytes uint32, pCountSymbolBytesRead *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(moduleId), uintptr(symbolsReadOffset), uintptr(unsafe.Pointer(pSymbolBytes)), uintptr(countSymbolBytes), uintptr(unsafe.Pointer(pCountSymbolBytesRead)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: c5ac80a6-782e-4716-8044-39598c60cfbf
@@ -1595,19 +1595,19 @@ var IID_ICorProfilerInfo8 = win32.GUID{Data1: 0xc5ac80a6, Data2: 0x782e, Data3: 
 // IsFunctionDynamic dispatches through ICorProfilerInfo8's vtable slot 87.
 func (self *ICorProfilerInfo8) IsFunctionDynamic(functionId uintptr, isDynamic *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[87], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(unsafe.Pointer(isDynamic)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFunctionFromIP3 dispatches through ICorProfilerInfo8's vtable slot 88.
 func (self *ICorProfilerInfo8) GetFunctionFromIP3(ip *byte, functionId *uintptr, pReJitId *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[88], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ip)), uintptr(unsafe.Pointer(functionId)), uintptr(unsafe.Pointer(pReJitId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDynamicFunctionInfo dispatches through ICorProfilerInfo8's vtable slot 89.
 func (self *ICorProfilerInfo8) GetDynamicFunctionInfo(functionId uintptr, moduleId *uintptr, ppvSig **byte, pbSig *uint32, cchName uint32, pcchName *uint32, wszName foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[89], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(unsafe.Pointer(moduleId)), uintptr(unsafe.Pointer(ppvSig)), uintptr(unsafe.Pointer(pbSig)), uintptr(cchName), uintptr(unsafe.Pointer(pcchName)), uintptr(unsafe.Pointer(wszName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 008170db-f8cc-4796-9a51-dc8aa0b47012
@@ -1621,19 +1621,19 @@ var IID_ICorProfilerInfo9 = win32.GUID{Data1: 0x008170db, Data2: 0xf8cc, Data3: 
 // GetNativeCodeStartAddresses dispatches through ICorProfilerInfo9's vtable slot 90.
 func (self *ICorProfilerInfo9) GetNativeCodeStartAddresses(functionID uintptr, reJitId uintptr, cCodeStartAddresses uint32, pcCodeStartAddresses *uint32, codeStartAddresses *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)), uintptr(functionID), uintptr(reJitId), uintptr(cCodeStartAddresses), uintptr(unsafe.Pointer(pcCodeStartAddresses)), uintptr(unsafe.Pointer(codeStartAddresses)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetILToNativeMapping3 dispatches through ICorProfilerInfo9's vtable slot 91.
 func (self *ICorProfilerInfo9) GetILToNativeMapping3(pNativeCodeStartAddress uintptr, cMap uint32, pcMap *uint32, map_ *COR_DEBUG_IL_TO_NATIVE_MAP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[91], uintptr(unsafe.Pointer(self)), uintptr(pNativeCodeStartAddress), uintptr(cMap), uintptr(unsafe.Pointer(pcMap)), uintptr(unsafe.Pointer(map_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCodeInfo4 dispatches through ICorProfilerInfo9's vtable slot 92.
 func (self *ICorProfilerInfo9) GetCodeInfo4(pNativeCodeStartAddress uintptr, cCodeInfos uint32, pcCodeInfos *uint32, codeInfos *COR_PRF_CODE_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[92], uintptr(unsafe.Pointer(self)), uintptr(pNativeCodeStartAddress), uintptr(cCodeInfos), uintptr(unsafe.Pointer(pcCodeInfos)), uintptr(unsafe.Pointer(codeInfos)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: fccee788-0088-454b-a811-c99f298d1942
@@ -1647,25 +1647,25 @@ var IID_ICorProfilerMethodEnum = win32.GUID{Data1: 0xfccee788, Data2: 0x0088, Da
 // Skip dispatches through ICorProfilerMethodEnum's vtable slot 3.
 func (self *ICorProfilerMethodEnum) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through ICorProfilerMethodEnum's vtable slot 4.
 func (self *ICorProfilerMethodEnum) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through ICorProfilerMethodEnum's vtable slot 5.
 func (self *ICorProfilerMethodEnum) Clone(ppEnum **ICorProfilerMethodEnum) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCount dispatches through ICorProfilerMethodEnum's vtable slot 6.
 func (self *ICorProfilerMethodEnum) GetCount(pcelt *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcelt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Next dispatches through ICorProfilerMethodEnum's vtable slot 7.
@@ -1675,7 +1675,7 @@ func (self *ICorProfilerMethodEnum) Next(elements []COR_PRF_METHOD, pceltFetched
 		_elements = &elements[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(len(elements)), uintptr(unsafe.Pointer(_elements)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: b0266d75-2081-4493-af7f-028ba34db891
@@ -1689,25 +1689,25 @@ var IID_ICorProfilerModuleEnum = win32.GUID{Data1: 0xb0266d75, Data2: 0x2081, Da
 // Skip dispatches through ICorProfilerModuleEnum's vtable slot 3.
 func (self *ICorProfilerModuleEnum) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through ICorProfilerModuleEnum's vtable slot 4.
 func (self *ICorProfilerModuleEnum) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through ICorProfilerModuleEnum's vtable slot 5.
 func (self *ICorProfilerModuleEnum) Clone(ppEnum **ICorProfilerModuleEnum) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCount dispatches through ICorProfilerModuleEnum's vtable slot 6.
 func (self *ICorProfilerModuleEnum) GetCount(pcelt *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcelt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Next dispatches through ICorProfilerModuleEnum's vtable slot 7.
@@ -1717,7 +1717,7 @@ func (self *ICorProfilerModuleEnum) Next(ids []uintptr, pceltFetched *uint32) er
 		_ids = &ids[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(len(ids)), uintptr(unsafe.Pointer(_ids)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 2c6269bd-2d13-4321-ae12-6686365fd6af
@@ -1731,25 +1731,25 @@ var IID_ICorProfilerObjectEnum = win32.GUID{Data1: 0x2c6269bd, Data2: 0x2d13, Da
 // Skip dispatches through ICorProfilerObjectEnum's vtable slot 3.
 func (self *ICorProfilerObjectEnum) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through ICorProfilerObjectEnum's vtable slot 4.
 func (self *ICorProfilerObjectEnum) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through ICorProfilerObjectEnum's vtable slot 5.
 func (self *ICorProfilerObjectEnum) Clone(ppEnum **ICorProfilerObjectEnum) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCount dispatches through ICorProfilerObjectEnum's vtable slot 6.
 func (self *ICorProfilerObjectEnum) GetCount(pcelt *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcelt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Next dispatches through ICorProfilerObjectEnum's vtable slot 7.
@@ -1759,7 +1759,7 @@ func (self *ICorProfilerObjectEnum) Next(objects []uintptr, pceltFetched *uint32
 		_objects = &objects[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(len(objects)), uintptr(unsafe.Pointer(_objects)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 571194f7-25ed-419f-aa8b-7016b3159701
@@ -1773,25 +1773,25 @@ var IID_ICorProfilerThreadEnum = win32.GUID{Data1: 0x571194f7, Data2: 0x25ed, Da
 // Skip dispatches through ICorProfilerThreadEnum's vtable slot 3.
 func (self *ICorProfilerThreadEnum) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through ICorProfilerThreadEnum's vtable slot 4.
 func (self *ICorProfilerThreadEnum) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through ICorProfilerThreadEnum's vtable slot 5.
 func (self *ICorProfilerThreadEnum) Clone(ppEnum **ICorProfilerThreadEnum) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCount dispatches through ICorProfilerThreadEnum's vtable slot 6.
 func (self *ICorProfilerThreadEnum) GetCount(pcelt *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcelt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Next dispatches through ICorProfilerThreadEnum's vtable slot 7.
@@ -1801,7 +1801,7 @@ func (self *ICorProfilerThreadEnum) Next(ids []uintptr, pceltFetched *uint32) er
 		_ids = &ids[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(len(ids)), uintptr(unsafe.Pointer(_ids)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: a0efb28b-6ee2-4d7b-b983-a75ef7beedb8

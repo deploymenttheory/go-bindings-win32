@@ -260,7 +260,7 @@ DO-NOT-EDIT header are never touched.
   interface (roots carry `LpVtbl *[1024]uintptr`; derived interfaces embed
   their base, promoting its methods), methods dispatch through absolute
   vtable slots computed from the metadata base chain, `IID_*` GUID vars are
-  generated, and `HRESULT` returns convert to `error` via `win32.HRESULTError`.
+  generated, and `HRESULT` returns convert to `error` via `win32.ErrIfFailed`.
   The struct IS the COM object (no `Wrap`/`.Raw`). Severed base embeddings
   (import cycles) demote to a rootless vtable with a doc note; slots stay
   correct.

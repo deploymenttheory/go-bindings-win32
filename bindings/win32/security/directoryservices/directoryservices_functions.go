@@ -32,7 +32,7 @@ func DSCreateISecurityInfoObject(pwszObjectPath string, pwszObjectClass string, 
 	_pwszObjectPath := win32.UTF16Ptr(pwszObjectPath)
 	_pwszObjectClass := win32.UTF16Ptr(pwszObjectClass)
 	r1, _, _ := syscall.SyscallN(procDSCreateISecurityInfoObject.Addr(), uintptr(unsafe.Pointer(_pwszObjectPath)), uintptr(unsafe.Pointer(_pwszObjectClass)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppSI)), uintptr(pfnReadSD), uintptr(pfnWriteSD), uintptr(lpContext))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DSCreateISecurityInfoObjectEx calls DSSEC!DSCreateISecurityInfoObjectEx.
@@ -45,7 +45,7 @@ func DSCreateISecurityInfoObjectEx(pwszObjectPath string, pwszObjectClass string
 	_pwszUserName := win32.UTF16Ptr(pwszUserName)
 	_pwszPassword := win32.UTF16Ptr(pwszPassword)
 	r1, _, _ := syscall.SyscallN(procDSCreateISecurityInfoObjectEx.Addr(), uintptr(unsafe.Pointer(_pwszObjectPath)), uintptr(unsafe.Pointer(_pwszObjectClass)), uintptr(unsafe.Pointer(_pwszServer)), uintptr(unsafe.Pointer(_pwszUserName)), uintptr(unsafe.Pointer(_pwszPassword)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppSI)), uintptr(pfnReadSD), uintptr(pfnWriteSD), uintptr(lpContext))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DSCreateSecurityPage calls DSSEC!DSCreateSecurityPage.
@@ -55,7 +55,7 @@ func DSCreateSecurityPage(pwszObjectPath string, pwszObjectClass string, dwFlags
 	_pwszObjectPath := win32.UTF16Ptr(pwszObjectPath)
 	_pwszObjectClass := win32.UTF16Ptr(pwszObjectClass)
 	r1, _, _ := syscall.SyscallN(procDSCreateSecurityPage.Addr(), uintptr(unsafe.Pointer(_pwszObjectPath)), uintptr(unsafe.Pointer(_pwszObjectClass)), uintptr(dwFlags), uintptr(unsafe.Pointer(phPage)), uintptr(pfnReadSD), uintptr(pfnWriteSD), uintptr(lpContext))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DSEditSecurity calls DSSEC!DSEditSecurity.
@@ -66,5 +66,5 @@ func DSEditSecurity(hwndOwner foundation.HWND, pwszObjectPath string, pwszObject
 	_pwszObjectClass := win32.UTF16Ptr(pwszObjectClass)
 	_pwszCaption := win32.UTF16Ptr(pwszCaption)
 	r1, _, _ := syscall.SyscallN(procDSEditSecurity.Addr(), uintptr(hwndOwner), uintptr(unsafe.Pointer(_pwszObjectPath)), uintptr(unsafe.Pointer(_pwszObjectClass)), uintptr(dwFlags), uintptr(unsafe.Pointer(_pwszCaption)), uintptr(pfnReadSD), uintptr(pfnWriteSD), uintptr(lpContext))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

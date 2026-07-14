@@ -273,13 +273,13 @@ func AddDelBackupEntry(lpcszFileList string, lpcszBackupDir string, lpcszBaseNam
 	_lpcszBackupDir := win32.UTF16Ptr(lpcszBackupDir)
 	_lpcszBaseName := win32.UTF16Ptr(lpcszBaseName)
 	r1, _, _ := syscall.SyscallN(procAddDelBackupEntry.Addr(), uintptr(unsafe.Pointer(_lpcszFileList)), uintptr(unsafe.Pointer(_lpcszBackupDir)), uintptr(unsafe.Pointer(_lpcszBaseName)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddDelBackupEntryA calls ADVPACK!AddDelBackupEntryA.
 func AddDelBackupEntryA(lpcszFileList foundation.PSTR, lpcszBackupDir foundation.PSTR, lpcszBaseName foundation.PSTR, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procAddDelBackupEntryA.Addr(), uintptr(unsafe.Pointer(lpcszFileList)), uintptr(unsafe.Pointer(lpcszBackupDir)), uintptr(unsafe.Pointer(lpcszBaseName)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AdvInstallFile calls ADVPACK!AdvInstallFileW.
@@ -289,13 +289,13 @@ func AdvInstallFile(hwnd foundation.HWND, lpszSourceDir string, lpszSourceFile s
 	_lpszDestDir := win32.UTF16Ptr(lpszDestDir)
 	_lpszDestFile := win32.UTF16Ptr(lpszDestFile)
 	r1, _, _ := syscall.SyscallN(procAdvInstallFile.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(_lpszSourceDir)), uintptr(unsafe.Pointer(_lpszSourceFile)), uintptr(unsafe.Pointer(_lpszDestDir)), uintptr(unsafe.Pointer(_lpszDestFile)), uintptr(dwFlags), uintptr(dwReserved))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AdvInstallFileA calls ADVPACK!AdvInstallFileA.
 func AdvInstallFileA(hwnd foundation.HWND, lpszSourceDir foundation.PSTR, lpszSourceFile foundation.PSTR, lpszDestDir foundation.PSTR, lpszDestFile foundation.PSTR, dwFlags uint32, dwReserved uint32) error {
 	r1, _, _ := syscall.SyscallN(procAdvInstallFileA.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(lpszSourceDir)), uintptr(unsafe.Pointer(lpszSourceFile)), uintptr(unsafe.Pointer(lpszDestDir)), uintptr(unsafe.Pointer(lpszDestFile)), uintptr(dwFlags), uintptr(dwReserved))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ApphelpCheckShellObject calls APPHELP!ApphelpCheckShellObject.
@@ -315,7 +315,7 @@ func CancelDeviceWakeupRequest(hDevice foundation.HANDLE) bool {
 // CloseINFEngine calls ADVPACK!CloseINFEngine.
 func CloseINFEngine(hInf unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procCloseINFEngine.Addr(), uintptr(unsafe.Pointer(hInf)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ConvertAuxiliaryCounterToPerformanceCounter calls api-ms-win-core-realtime-l1-1-2!ConvertAuxiliaryCounterToPerformanceCounter.
@@ -323,7 +323,7 @@ func CloseINFEngine(hInf unsafe.Pointer) error {
 // Minimum OS: windows10.0.15063.
 func ConvertAuxiliaryCounterToPerformanceCounter(ullAuxiliaryCounterValue uint64, lpPerformanceCounterValue *uint64, lpConversionError *uint64) error {
 	r1, _, _ := syscall.SyscallN(procConvertAuxiliaryCounterToPerformanceCounter.Addr(), uintptr(ullAuxiliaryCounterValue), uintptr(unsafe.Pointer(lpPerformanceCounterValue)), uintptr(unsafe.Pointer(lpConversionError)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ConvertPerformanceCounterToAuxiliaryCounter calls api-ms-win-core-realtime-l1-1-2!ConvertPerformanceCounterToAuxiliaryCounter.
@@ -331,7 +331,7 @@ func ConvertAuxiliaryCounterToPerformanceCounter(ullAuxiliaryCounterValue uint64
 // Minimum OS: windows10.0.15063.
 func ConvertPerformanceCounterToAuxiliaryCounter(ullPerformanceCounterValue uint64, lpAuxiliaryCounterValue *uint64, lpConversionError *uint64) error {
 	r1, _, _ := syscall.SyscallN(procConvertPerformanceCounterToAuxiliaryCounter.Addr(), uintptr(ullPerformanceCounterValue), uintptr(unsafe.Pointer(lpAuxiliaryCounterValue)), uintptr(unsafe.Pointer(lpConversionError)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DCIBeginAccess calls DCIMAN32!DCIBeginAccess.
@@ -425,19 +425,19 @@ func DCISetSrcDestClip(pdci *DCIOFFSCREEN, srcrc *foundation.RECT, destrc *found
 func DelNode(pszFileOrDirName string, dwFlags uint32) error {
 	_pszFileOrDirName := win32.UTF16Ptr(pszFileOrDirName)
 	r1, _, _ := syscall.SyscallN(procDelNode.Addr(), uintptr(unsafe.Pointer(_pszFileOrDirName)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DelNodeA calls ADVPACK!DelNodeA.
 func DelNodeA(pszFileOrDirName foundation.PSTR, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procDelNodeA.Addr(), uintptr(unsafe.Pointer(pszFileOrDirName)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DelNodeRunDLL32 calls ADVPACK!DelNodeRunDLL32W.
 func DelNodeRunDLL32(hwnd foundation.HWND, hInstance foundation.HINSTANCE, pszParms foundation.PWSTR, nShow int32) error {
 	r1, _, _ := syscall.SyscallN(procDelNodeRunDLL32.Addr(), uintptr(hwnd), uintptr(hInstance), uintptr(unsafe.Pointer(pszParms)), uintptr(nShow))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DnsHostnameToComputerName calls KERNEL32!DnsHostnameToComputerNameW.
@@ -484,13 +484,13 @@ func EnableProcessOptionalXStateFeatures(Features uint64) bool {
 // ExecuteCab calls ADVPACK!ExecuteCabW.
 func ExecuteCab(hwnd foundation.HWND, pCab *CABINFOW, pReserved unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procExecuteCab.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pCab)), uintptr(unsafe.Pointer(pReserved)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExecuteCabA calls ADVPACK!ExecuteCabA.
 func ExecuteCabA(hwnd foundation.HWND, pCab *CABINFOA, pReserved unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procExecuteCabA.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pCab)), uintptr(unsafe.Pointer(pReserved)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExtractFiles calls ADVPACK!ExtractFilesW.
@@ -499,13 +499,13 @@ func ExtractFiles(pszCabName string, pszExpandDir string, dwFlags uint32, pszFil
 	_pszExpandDir := win32.UTF16Ptr(pszExpandDir)
 	_pszFileList := win32.UTF16Ptr(pszFileList)
 	r1, _, _ := syscall.SyscallN(procExtractFiles.Addr(), uintptr(unsafe.Pointer(_pszCabName)), uintptr(unsafe.Pointer(_pszExpandDir)), uintptr(dwFlags), uintptr(unsafe.Pointer(_pszFileList)), uintptr(unsafe.Pointer(lpReserved)), uintptr(dwReserved))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExtractFilesA calls ADVPACK!ExtractFilesA.
 func ExtractFilesA(pszCabName foundation.PSTR, pszExpandDir foundation.PSTR, dwFlags uint32, pszFileList foundation.PSTR, lpReserved unsafe.Pointer, dwReserved uint32) error {
 	r1, _, _ := syscall.SyscallN(procExtractFilesA.Addr(), uintptr(unsafe.Pointer(pszCabName)), uintptr(unsafe.Pointer(pszExpandDir)), uintptr(dwFlags), uintptr(unsafe.Pointer(pszFileList)), uintptr(unsafe.Pointer(lpReserved)), uintptr(dwReserved))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FileSaveMarkNotExist calls ADVPACK!FileSaveMarkNotExistW.
@@ -514,13 +514,13 @@ func FileSaveMarkNotExist(lpFileList string, lpDir string, lpBaseName string) er
 	_lpDir := win32.UTF16Ptr(lpDir)
 	_lpBaseName := win32.UTF16Ptr(lpBaseName)
 	r1, _, _ := syscall.SyscallN(procFileSaveMarkNotExist.Addr(), uintptr(unsafe.Pointer(_lpFileList)), uintptr(unsafe.Pointer(_lpDir)), uintptr(unsafe.Pointer(_lpBaseName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FileSaveMarkNotExistA calls ADVPACK!FileSaveMarkNotExistA.
 func FileSaveMarkNotExistA(lpFileList foundation.PSTR, lpDir foundation.PSTR, lpBaseName foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(procFileSaveMarkNotExistA.Addr(), uintptr(unsafe.Pointer(lpFileList)), uintptr(unsafe.Pointer(lpDir)), uintptr(unsafe.Pointer(lpBaseName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FileSaveRestore calls ADVPACK!FileSaveRestoreW.
@@ -529,7 +529,7 @@ func FileSaveRestore(hDlg foundation.HWND, lpFileList string, lpDir string, lpBa
 	_lpDir := win32.UTF16Ptr(lpDir)
 	_lpBaseName := win32.UTF16Ptr(lpBaseName)
 	r1, _, _ := syscall.SyscallN(procFileSaveRestore.Addr(), uintptr(hDlg), uintptr(unsafe.Pointer(_lpFileList)), uintptr(unsafe.Pointer(_lpDir)), uintptr(unsafe.Pointer(_lpBaseName)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FileSaveRestoreOnINF calls ADVPACK!FileSaveRestoreOnINFW.
@@ -540,13 +540,13 @@ func FileSaveRestoreOnINF(hWnd foundation.HWND, pszTitle string, pszINF string, 
 	_pszBackupDir := win32.UTF16Ptr(pszBackupDir)
 	_pszBaseBackupFile := win32.UTF16Ptr(pszBaseBackupFile)
 	r1, _, _ := syscall.SyscallN(procFileSaveRestoreOnINF.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(_pszTitle)), uintptr(unsafe.Pointer(_pszINF)), uintptr(unsafe.Pointer(_pszSection)), uintptr(unsafe.Pointer(_pszBackupDir)), uintptr(unsafe.Pointer(_pszBaseBackupFile)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FileSaveRestoreOnINFA calls ADVPACK!FileSaveRestoreOnINFA.
 func FileSaveRestoreOnINFA(hWnd foundation.HWND, pszTitle foundation.PSTR, pszINF foundation.PSTR, pszSection foundation.PSTR, pszBackupDir foundation.PSTR, pszBaseBackupFile foundation.PSTR, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procFileSaveRestoreOnINFA.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(pszTitle)), uintptr(unsafe.Pointer(pszINF)), uintptr(unsafe.Pointer(pszSection)), uintptr(unsafe.Pointer(pszBackupDir)), uintptr(unsafe.Pointer(pszBaseBackupFile)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FileTimeToDosDateTime calls KERNEL32!FileTimeToDosDateTime.
@@ -570,7 +570,7 @@ func GdiEntry13() uint32 {
 // GetApiSetModuleBaseName calls api-ms-win-core-apiquery-l2-1-1!GetApiSetModuleBaseName.
 func GetApiSetModuleBaseName(contractName foundation.PSTR, bufferLength uint32, moduleBaseName foundation.PWSTR, actualNameLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetApiSetModuleBaseName.Addr(), uintptr(unsafe.Pointer(contractName)), uintptr(bufferLength), uintptr(unsafe.Pointer(moduleBaseName)), uintptr(unsafe.Pointer(actualNameLength)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetComputerName calls KERNEL32!GetComputerNameW.
@@ -907,14 +907,14 @@ func GetVersionFromFile(lpszFilename string, pdwMSVer *uint32, pdwLSVer *uint32,
 	_lpszFilename := win32.UTF16Ptr(lpszFilename)
 	_bVersion := win32.Bool32(bVersion)
 	r1, _, _ := syscall.SyscallN(procGetVersionFromFile.Addr(), uintptr(unsafe.Pointer(_lpszFilename)), uintptr(unsafe.Pointer(pdwMSVer)), uintptr(unsafe.Pointer(pdwLSVer)), uintptr(_bVersion))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetVersionFromFileA calls ADVPACK!GetVersionFromFileA.
 func GetVersionFromFileA(lpszFilename foundation.PSTR, pdwMSVer *uint32, pdwLSVer *uint32, bVersion bool) error {
 	_bVersion := win32.Bool32(bVersion)
 	r1, _, _ := syscall.SyscallN(procGetVersionFromFileA.Addr(), uintptr(unsafe.Pointer(lpszFilename)), uintptr(unsafe.Pointer(pdwMSVer)), uintptr(unsafe.Pointer(pdwLSVer)), uintptr(_bVersion))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetVersionFromFileEx calls ADVPACK!GetVersionFromFileExW.
@@ -922,14 +922,14 @@ func GetVersionFromFileEx(lpszFilename string, pdwMSVer *uint32, pdwLSVer *uint3
 	_lpszFilename := win32.UTF16Ptr(lpszFilename)
 	_bVersion := win32.Bool32(bVersion)
 	r1, _, _ := syscall.SyscallN(procGetVersionFromFileEx.Addr(), uintptr(unsafe.Pointer(_lpszFilename)), uintptr(unsafe.Pointer(pdwMSVer)), uintptr(unsafe.Pointer(pdwLSVer)), uintptr(_bVersion))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetVersionFromFileExA calls ADVPACK!GetVersionFromFileExA.
 func GetVersionFromFileExA(lpszFilename foundation.PSTR, pdwMSVer *uint32, pdwLSVer *uint32, bVersion bool) error {
 	_bVersion := win32.Bool32(bVersion)
 	r1, _, _ := syscall.SyscallN(procGetVersionFromFileExA.Addr(), uintptr(unsafe.Pointer(lpszFilename)), uintptr(unsafe.Pointer(pdwMSVer)), uintptr(unsafe.Pointer(pdwLSVer)), uintptr(_bVersion))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetWindowRegionData calls DCIMAN32!GetWindowRegionData.
@@ -1070,7 +1070,7 @@ func LaunchINFSection(hwndOwner foundation.HWND, hInstance foundation.HINSTANCE,
 func LaunchINFSectionEx(hwnd foundation.HWND, hInstance foundation.HINSTANCE, pszParms string, nShow int32) error {
 	_pszParms := win32.UTF16Ptr(pszParms)
 	r1, _, _ := syscall.SyscallN(procLaunchINFSectionEx.Addr(), uintptr(hwnd), uintptr(hInstance), uintptr(unsafe.Pointer(_pszParms)), uintptr(nShow))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Lclose calls KERNEL32!_lclose.
@@ -1165,13 +1165,13 @@ func OpenINFEngine(pszInfFilename string, pszInstallSection string, dwFlags uint
 	_pszInfFilename := win32.UTF16Ptr(pszInfFilename)
 	_pszInstallSection := win32.UTF16Ptr(pszInstallSection)
 	r1, _, _ := syscall.SyscallN(procOpenINFEngine.Addr(), uintptr(unsafe.Pointer(_pszInfFilename)), uintptr(unsafe.Pointer(_pszInstallSection)), uintptr(dwFlags), uintptr(unsafe.Pointer(phInf)), uintptr(unsafe.Pointer(pvReserved)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenINFEngineA calls ADVPACK!OpenINFEngineA.
 func OpenINFEngineA(pszInfFilename foundation.PSTR, pszInstallSection foundation.PSTR, dwFlags uint32, phInf *unsafe.Pointer, pvReserved unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procOpenINFEngineA.Addr(), uintptr(unsafe.Pointer(pszInfFilename)), uintptr(unsafe.Pointer(pszInstallSection)), uintptr(dwFlags), uintptr(unsafe.Pointer(phInf)), uintptr(unsafe.Pointer(pvReserved)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenMutexA calls KERNEL32!OpenMutexA.
@@ -1195,7 +1195,7 @@ func OpenSemaphoreA(dwDesiredAccess uint32, bInheritHandle bool, lpName foundati
 // Minimum OS: windows10.0.15063.
 func QueryAuxiliaryCounterFrequency(lpAuxiliaryCounterFrequency *uint64) error {
 	r1, _, _ := syscall.SyscallN(procQueryAuxiliaryCounterFrequency.Addr(), uintptr(unsafe.Pointer(lpAuxiliaryCounterFrequency)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryIdleProcessorCycleTime calls KERNEL32!QueryIdleProcessorCycleTime.
@@ -1279,13 +1279,13 @@ func RebootCheckOnInstall(hwnd foundation.HWND, pszINF string, pszSec string, dw
 	_pszINF := win32.UTF16Ptr(pszINF)
 	_pszSec := win32.UTF16Ptr(pszSec)
 	r1, _, _ := syscall.SyscallN(procRebootCheckOnInstall.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(_pszINF)), uintptr(unsafe.Pointer(_pszSec)), uintptr(dwReserved))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RebootCheckOnInstallA calls ADVPACK!RebootCheckOnInstallA.
 func RebootCheckOnInstallA(hwnd foundation.HWND, pszINF foundation.PSTR, pszSec foundation.PSTR, dwReserved uint32) error {
 	r1, _, _ := syscall.SyscallN(procRebootCheckOnInstallA.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pszINF)), uintptr(unsafe.Pointer(pszSec)), uintptr(dwReserved))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RecordFeatureError calls api-ms-win-core-featurestaging-l1-1-0!RecordFeatureError.
@@ -1306,7 +1306,7 @@ func RecordFeatureUsage(featureId uint32, kind uint32, addend uint32, originName
 func RegInstall(hmod foundation.HMODULE, pszSection string, pstTable *STRTABLEW) error {
 	_pszSection := win32.UTF16Ptr(pszSection)
 	r1, _, _ := syscall.SyscallN(procRegInstall.Addr(), uintptr(hmod), uintptr(unsafe.Pointer(_pszSection)), uintptr(unsafe.Pointer(pstTable)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegInstallA calls ADVPACK!RegInstallA.
@@ -1314,20 +1314,20 @@ func RegInstall(hmod foundation.HMODULE, pszSection string, pstTable *STRTABLEW)
 // Minimum OS: windows10.0.10240.
 func RegInstallA(hmod foundation.HMODULE, pszSection foundation.PSTR, pstTable *STRTABLEA) error {
 	r1, _, _ := syscall.SyscallN(procRegInstallA.Addr(), uintptr(hmod), uintptr(unsafe.Pointer(pszSection)), uintptr(unsafe.Pointer(pstTable)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegRestoreAll calls ADVPACK!RegRestoreAllW.
 func RegRestoreAll(hWnd foundation.HWND, pszTitleString string, hkBckupKey systemregistry.HKEY) error {
 	_pszTitleString := win32.UTF16Ptr(pszTitleString)
 	r1, _, _ := syscall.SyscallN(procRegRestoreAll.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(_pszTitleString)), uintptr(hkBckupKey))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegRestoreAllA calls ADVPACK!RegRestoreAllA.
 func RegRestoreAllA(hWnd foundation.HWND, pszTitleString foundation.PSTR, hkBckupKey systemregistry.HKEY) error {
 	r1, _, _ := syscall.SyscallN(procRegRestoreAllA.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(pszTitleString)), uintptr(hkBckupKey))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegSaveRestore calls ADVPACK!RegSaveRestoreW.
@@ -1337,13 +1337,13 @@ func RegSaveRestore(hWnd foundation.HWND, pszTitleString string, hkBckupKey syst
 	_pcszSubKey := win32.UTF16Ptr(pcszSubKey)
 	_pcszValueName := win32.UTF16Ptr(pcszValueName)
 	r1, _, _ := syscall.SyscallN(procRegSaveRestore.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(_pszTitleString)), uintptr(hkBckupKey), uintptr(unsafe.Pointer(_pcszRootKey)), uintptr(unsafe.Pointer(_pcszSubKey)), uintptr(unsafe.Pointer(_pcszValueName)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegSaveRestoreA calls ADVPACK!RegSaveRestoreA.
 func RegSaveRestoreA(hWnd foundation.HWND, pszTitleString foundation.PSTR, hkBckupKey systemregistry.HKEY, pcszRootKey foundation.PSTR, pcszSubKey foundation.PSTR, pcszValueName foundation.PSTR, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procRegSaveRestoreA.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(pszTitleString)), uintptr(hkBckupKey), uintptr(unsafe.Pointer(pcszRootKey)), uintptr(unsafe.Pointer(pcszSubKey)), uintptr(unsafe.Pointer(pcszValueName)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegSaveRestoreOnINF calls ADVPACK!RegSaveRestoreOnINFW.
@@ -1352,13 +1352,13 @@ func RegSaveRestoreOnINF(hWnd foundation.HWND, pszTitle string, pszINF string, p
 	_pszINF := win32.UTF16Ptr(pszINF)
 	_pszSection := win32.UTF16Ptr(pszSection)
 	r1, _, _ := syscall.SyscallN(procRegSaveRestoreOnINF.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(_pszTitle)), uintptr(unsafe.Pointer(_pszINF)), uintptr(unsafe.Pointer(_pszSection)), uintptr(hHKLMBackKey), uintptr(hHKCUBackKey), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegSaveRestoreOnINFA calls ADVPACK!RegSaveRestoreOnINFA.
 func RegSaveRestoreOnINFA(hWnd foundation.HWND, pszTitle foundation.PSTR, pszINF foundation.PSTR, pszSection foundation.PSTR, hHKLMBackKey systemregistry.HKEY, hHKCUBackKey systemregistry.HKEY, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procRegSaveRestoreOnINFA.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(pszTitle)), uintptr(unsafe.Pointer(pszINF)), uintptr(unsafe.Pointer(pszSection)), uintptr(hHKLMBackKey), uintptr(hHKCUBackKey), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReplacePartitionUnit calls KERNEL32!ReplacePartitionUnit.
@@ -1515,13 +1515,13 @@ func RunSetupCommand(hWnd foundation.HWND, szCmdName string, szInfSection string
 	_szDir := win32.UTF16Ptr(szDir)
 	_lpszTitle := win32.UTF16Ptr(lpszTitle)
 	r1, _, _ := syscall.SyscallN(procRunSetupCommand.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(_szCmdName)), uintptr(unsafe.Pointer(_szInfSection)), uintptr(unsafe.Pointer(_szDir)), uintptr(unsafe.Pointer(_lpszTitle)), uintptr(unsafe.Pointer(phEXE)), uintptr(dwFlags), uintptr(unsafe.Pointer(pvReserved)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RunSetupCommandA calls ADVPACK!RunSetupCommandA.
 func RunSetupCommandA(hWnd foundation.HWND, szCmdName foundation.PSTR, szInfSection foundation.PSTR, szDir foundation.PSTR, lpszTitle foundation.PSTR, phEXE *foundation.HANDLE, dwFlags uint32, pvReserved unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procRunSetupCommandA.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(szCmdName)), uintptr(unsafe.Pointer(szInfSection)), uintptr(unsafe.Pointer(szDir)), uintptr(unsafe.Pointer(lpszTitle)), uintptr(unsafe.Pointer(phEXE)), uintptr(dwFlags), uintptr(unsafe.Pointer(pvReserved)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendIMEMessageEx calls USER32!SendIMEMessageExW.
@@ -1626,13 +1626,13 @@ func SetMessageWaitingIndicator(hMsgIndicator foundation.HANDLE, ulMsgCount uint
 // SetPerUserSecValues calls ADVPACK!SetPerUserSecValuesW.
 func SetPerUserSecValues(pPerUser *PERUSERSECTIONW) error {
 	r1, _, _ := syscall.SyscallN(procSetPerUserSecValues.Addr(), uintptr(unsafe.Pointer(pPerUser)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetPerUserSecValuesA calls ADVPACK!SetPerUserSecValuesA.
 func SetPerUserSecValuesA(pPerUser *PERUSERSECTIONA) error {
 	r1, _, _ := syscall.SyscallN(procSetPerUserSecValuesA.Addr(), uintptr(unsafe.Pointer(pPerUser)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SubscribeFeatureStateChangeNotification calls api-ms-win-core-featurestaging-l1-1-0!SubscribeFeatureStateChangeNotification.
@@ -1648,13 +1648,13 @@ func TranslateInfString(pszInfFilename string, pszInstallSection string, pszTran
 	_pszTranslateSection := win32.UTF16Ptr(pszTranslateSection)
 	_pszTranslateKey := win32.UTF16Ptr(pszTranslateKey)
 	r1, _, _ := syscall.SyscallN(procTranslateInfString.Addr(), uintptr(unsafe.Pointer(_pszInfFilename)), uintptr(unsafe.Pointer(_pszInstallSection)), uintptr(unsafe.Pointer(_pszTranslateSection)), uintptr(unsafe.Pointer(_pszTranslateKey)), uintptr(unsafe.Pointer(pszBuffer)), uintptr(cchBuffer), uintptr(unsafe.Pointer(pdwRequiredSize)), 0)
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TranslateInfStringA calls ADVPACK!TranslateInfStringA.
 func TranslateInfStringA(pszInfFilename foundation.PSTR, pszInstallSection foundation.PSTR, pszTranslateSection foundation.PSTR, pszTranslateKey foundation.PSTR, pszBuffer foundation.PSTR, cchBuffer uint32, pdwRequiredSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procTranslateInfStringA.Addr(), uintptr(unsafe.Pointer(pszInfFilename)), uintptr(unsafe.Pointer(pszInstallSection)), uintptr(unsafe.Pointer(pszTranslateSection)), uintptr(unsafe.Pointer(pszTranslateKey)), uintptr(unsafe.Pointer(pszBuffer)), uintptr(cchBuffer), uintptr(unsafe.Pointer(pdwRequiredSize)), 0)
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TranslateInfStringEx calls ADVPACK!TranslateInfStringExW.
@@ -1663,13 +1663,13 @@ func TranslateInfStringEx(hInf unsafe.Pointer, pszInfFilename string, pszTransla
 	_pszTranslateSection := win32.UTF16Ptr(pszTranslateSection)
 	_pszTranslateKey := win32.UTF16Ptr(pszTranslateKey)
 	r1, _, _ := syscall.SyscallN(procTranslateInfStringEx.Addr(), uintptr(unsafe.Pointer(hInf)), uintptr(unsafe.Pointer(_pszInfFilename)), uintptr(unsafe.Pointer(_pszTranslateSection)), uintptr(unsafe.Pointer(_pszTranslateKey)), uintptr(unsafe.Pointer(pszBuffer)), uintptr(dwBufferSize), uintptr(unsafe.Pointer(pdwRequiredSize)), 0)
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TranslateInfStringExA calls ADVPACK!TranslateInfStringExA.
 func TranslateInfStringExA(hInf unsafe.Pointer, pszInfFilename foundation.PSTR, pszTranslateSection foundation.PSTR, pszTranslateKey foundation.PSTR, pszBuffer foundation.PSTR, dwBufferSize uint32, pdwRequiredSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procTranslateInfStringExA.Addr(), uintptr(unsafe.Pointer(hInf)), uintptr(unsafe.Pointer(pszInfFilename)), uintptr(unsafe.Pointer(pszTranslateSection)), uintptr(unsafe.Pointer(pszTranslateKey)), uintptr(unsafe.Pointer(pszBuffer)), uintptr(dwBufferSize), uintptr(unsafe.Pointer(pdwRequiredSize)), 0)
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Uaw_lstrcmpW calls KERNEL32!uaw_lstrcmpW.
@@ -1731,26 +1731,26 @@ func UnsubscribeFeatureStateChangeNotification(subscription FEATURE_STATE_CHANGE
 func UserInstStubWrapper(hwnd foundation.HWND, hInstance foundation.HINSTANCE, pszParms string, nShow int32) error {
 	_pszParms := win32.UTF16Ptr(pszParms)
 	r1, _, _ := syscall.SyscallN(procUserInstStubWrapper.Addr(), uintptr(hwnd), uintptr(hInstance), uintptr(unsafe.Pointer(_pszParms)), uintptr(nShow))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UserInstStubWrapperA calls ADVPACK!UserInstStubWrapperA.
 func UserInstStubWrapperA(hwnd foundation.HWND, hInstance foundation.HINSTANCE, pszParms foundation.PSTR, nShow int32) error {
 	r1, _, _ := syscall.SyscallN(procUserInstStubWrapperA.Addr(), uintptr(hwnd), uintptr(hInstance), uintptr(unsafe.Pointer(pszParms)), uintptr(nShow))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UserUnInstStubWrapper calls ADVPACK!UserUnInstStubWrapperW.
 func UserUnInstStubWrapper(hwnd foundation.HWND, hInstance foundation.HINSTANCE, pszParms string, nShow int32) error {
 	_pszParms := win32.UTF16Ptr(pszParms)
 	r1, _, _ := syscall.SyscallN(procUserUnInstStubWrapper.Addr(), uintptr(hwnd), uintptr(hInstance), uintptr(unsafe.Pointer(_pszParms)), uintptr(nShow))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UserUnInstStubWrapperA calls ADVPACK!UserUnInstStubWrapperA.
 func UserUnInstStubWrapperA(hwnd foundation.HWND, hInstance foundation.HINSTANCE, pszParms foundation.PSTR, nShow int32) error {
 	r1, _, _ := syscall.SyscallN(procUserUnInstStubWrapperA.Addr(), uintptr(hwnd), uintptr(hInstance), uintptr(unsafe.Pointer(pszParms)), uintptr(nShow))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WINNLSEnableIME calls USER32!WINNLSEnableIME.
@@ -1812,7 +1812,7 @@ func WldpCanExecuteBuffer(host *win32.GUID, options WLDP_EXECUTION_EVALUATION_OP
 	}
 	_auditInfo := win32.UTF16Ptr(auditInfo)
 	r1, _, _ := syscall.SyscallN(procWldpCanExecuteBuffer.Addr(), uintptr(unsafe.Pointer(host)), uintptr(options), uintptr(unsafe.Pointer(_buffer)), uintptr(len(buffer)), uintptr(unsafe.Pointer(_auditInfo)), uintptr(unsafe.Pointer(result)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WldpCanExecuteFile calls Wldp!WldpCanExecuteFile.
@@ -1820,14 +1820,14 @@ func WldpCanExecuteBuffer(host *win32.GUID, options WLDP_EXECUTION_EVALUATION_OP
 func WldpCanExecuteFile(host *win32.GUID, options WLDP_EXECUTION_EVALUATION_OPTIONS, fileHandle foundation.HANDLE, auditInfo string, result *WLDP_EXECUTION_POLICY) error {
 	_auditInfo := win32.UTF16Ptr(auditInfo)
 	r1, _, _ := syscall.SyscallN(procWldpCanExecuteFile.Addr(), uintptr(unsafe.Pointer(host)), uintptr(options), uintptr(fileHandle), uintptr(unsafe.Pointer(_auditInfo)), uintptr(unsafe.Pointer(result)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WldpCanExecuteFileFromDetachedSignature calls Wldp!WldpCanExecuteFileFromDetachedSignature.
 func WldpCanExecuteFileFromDetachedSignature(host *win32.GUID, options WLDP_EXECUTION_EVALUATION_OPTIONS, contentFileHandle foundation.HANDLE, signatureFileHandle foundation.HANDLE, auditInfo string, result *WLDP_EXECUTION_POLICY) error {
 	_auditInfo := win32.UTF16Ptr(auditInfo)
 	r1, _, _ := syscall.SyscallN(procWldpCanExecuteFileFromDetachedSignature.Addr(), uintptr(unsafe.Pointer(host)), uintptr(options), uintptr(contentFileHandle), uintptr(signatureFileHandle), uintptr(unsafe.Pointer(_auditInfo)), uintptr(unsafe.Pointer(result)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WldpCanExecuteStream calls Wldp!WldpCanExecuteStream.
@@ -1835,7 +1835,7 @@ func WldpCanExecuteFileFromDetachedSignature(host *win32.GUID, options WLDP_EXEC
 func WldpCanExecuteStream(host *win32.GUID, options WLDP_EXECUTION_EVALUATION_OPTIONS, stream *systemcom.IStream, auditInfo string, result *WLDP_EXECUTION_POLICY) error {
 	_auditInfo := win32.UTF16Ptr(auditInfo)
 	r1, _, _ := syscall.SyscallN(procWldpCanExecuteStream.Addr(), uintptr(unsafe.Pointer(host)), uintptr(options), uintptr(unsafe.Pointer(stream)), uintptr(unsafe.Pointer(_auditInfo)), uintptr(unsafe.Pointer(result)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WldpGetApplicationSettingBoolean calls Wldp!WldpGetApplicationSettingBoolean.
@@ -1843,7 +1843,7 @@ func WldpGetApplicationSettingBoolean(id string, setting string, result *foundat
 	_id := win32.UTF16Ptr(id)
 	_setting := win32.UTF16Ptr(setting)
 	r1, _, _ := syscall.SyscallN(procWldpGetApplicationSettingBoolean.Addr(), uintptr(unsafe.Pointer(_id)), uintptr(unsafe.Pointer(_setting)), uintptr(unsafe.Pointer(result)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WldpGetApplicationSettingStringList calls Wldp!WldpGetApplicationSettingStringList.
@@ -1851,7 +1851,7 @@ func WldpGetApplicationSettingStringList(id string, setting string, dataCount ui
 	_id := win32.UTF16Ptr(id)
 	_setting := win32.UTF16Ptr(setting)
 	r1, _, _ := syscall.SyscallN(procWldpGetApplicationSettingStringList.Addr(), uintptr(unsafe.Pointer(_id)), uintptr(unsafe.Pointer(_setting)), uintptr(dataCount), uintptr(unsafe.Pointer(requiredCount)), uintptr(unsafe.Pointer(result)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WldpGetApplicationSettingStringSet calls Wldp!WldpGetApplicationSettingStringSet.
@@ -1859,47 +1859,47 @@ func WldpGetApplicationSettingStringSet(id string, setting string, dataCount uin
 	_id := win32.UTF16Ptr(id)
 	_setting := win32.UTF16Ptr(setting)
 	r1, _, _ := syscall.SyscallN(procWldpGetApplicationSettingStringSet.Addr(), uintptr(unsafe.Pointer(_id)), uintptr(unsafe.Pointer(_setting)), uintptr(dataCount), uintptr(unsafe.Pointer(requiredCount)), uintptr(unsafe.Pointer(result)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WldpGetLockdownPolicy calls Wldp!WldpGetLockdownPolicy.
 // https://learn.microsoft.com/windows/win32/api/wldp/nf-wldp-wldpgetlockdownpolicy
 func WldpGetLockdownPolicy(hostInformation *WLDP_HOST_INFORMATION, lockdownState *uint32, lockdownFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procWldpGetLockdownPolicy.Addr(), uintptr(unsafe.Pointer(hostInformation)), uintptr(unsafe.Pointer(lockdownState)), uintptr(lockdownFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WldpIsAppApprovedByPolicy calls Wldp!WldpIsAppApprovedByPolicy.
 func WldpIsAppApprovedByPolicy(PackageFamilyName string, PackageVersion uint64) error {
 	_PackageFamilyName := win32.UTF16Ptr(PackageFamilyName)
 	r1, _, _ := syscall.SyscallN(procWldpIsAppApprovedByPolicy.Addr(), uintptr(unsafe.Pointer(_PackageFamilyName)), uintptr(PackageVersion))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WldpIsClassInApprovedList calls Wldp!WldpIsClassInApprovedList.
 // https://learn.microsoft.com/windows/win32/api/wldp/nf-wldp-wldpisclassinapprovedlist
 func WldpIsClassInApprovedList(classID *win32.GUID, hostInformation *WLDP_HOST_INFORMATION, isApproved *foundation.BOOL, optionalFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procWldpIsClassInApprovedList.Addr(), uintptr(unsafe.Pointer(classID)), uintptr(unsafe.Pointer(hostInformation)), uintptr(unsafe.Pointer(isApproved)), uintptr(optionalFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WldpIsDynamicCodePolicyEnabled calls Wldp!WldpIsDynamicCodePolicyEnabled.
 // https://learn.microsoft.com/windows/win32/api/wldp/nf-wldp-wldpisdynamiccodepolicyenabled
 func WldpIsDynamicCodePolicyEnabled(isEnabled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procWldpIsDynamicCodePolicyEnabled.Addr(), uintptr(unsafe.Pointer(isEnabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WldpIsProductionConfiguration calls Wldp!WldpIsProductionConfiguration.
 func WldpIsProductionConfiguration(IsProductionConfiguration *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procWldpIsProductionConfiguration.Addr(), uintptr(unsafe.Pointer(IsProductionConfiguration)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WldpIsWcosProductionConfiguration calls Wldp!WldpIsWcosProductionConfiguration.
 func WldpIsWcosProductionConfiguration(IsProductionConfiguration *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procWldpIsWcosProductionConfiguration.Addr(), uintptr(unsafe.Pointer(IsProductionConfiguration)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WldpQueryDeviceSecurityInformation calls Wldp!WldpQueryDeviceSecurityInformation.
@@ -1909,7 +1909,7 @@ func WldpQueryDeviceSecurityInformation(information []WLDP_DEVICE_SECURITY_INFOR
 		_information = &information[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWldpQueryDeviceSecurityInformation.Addr(), uintptr(unsafe.Pointer(_information)), uintptr(len(information)), uintptr(unsafe.Pointer(returnLength)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WldpQueryDynamicCodeTrust calls Wldp!WldpQueryDynamicCodeTrust.
@@ -1920,64 +1920,64 @@ func WldpQueryDynamicCodeTrust(fileHandle foundation.HANDLE, baseImage []byte) e
 		_baseImage = &baseImage[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWldpQueryDynamicCodeTrust.Addr(), uintptr(fileHandle), uintptr(unsafe.Pointer(_baseImage)), uintptr(len(baseImage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WldpQueryPolicySettingEnabled calls Wldp!WldpQueryPolicySettingEnabled.
 func WldpQueryPolicySettingEnabled(Setting WLDP_POLICY_SETTING, Enabled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procWldpQueryPolicySettingEnabled.Addr(), uintptr(Setting), uintptr(unsafe.Pointer(Enabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WldpQueryPolicySettingEnabled2 calls Wldp!WldpQueryPolicySettingEnabled2.
 func WldpQueryPolicySettingEnabled2(SettingString string, Enabled *foundation.BOOL) error {
 	_SettingString := win32.UTF16Ptr(SettingString)
 	r1, _, _ := syscall.SyscallN(procWldpQueryPolicySettingEnabled2.Addr(), uintptr(unsafe.Pointer(_SettingString)), uintptr(unsafe.Pointer(Enabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WldpQuerySecurityPolicy calls Wldp!WldpQuerySecurityPolicy.
 func WldpQuerySecurityPolicy(providerName *foundation.UNICODE_STRING, keyName *foundation.UNICODE_STRING, valueName *foundation.UNICODE_STRING, valueType *WLDP_SECURE_SETTING_VALUE_TYPE, valueAddress unsafe.Pointer, valueSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWldpQuerySecurityPolicy.Addr(), uintptr(unsafe.Pointer(providerName)), uintptr(unsafe.Pointer(keyName)), uintptr(unsafe.Pointer(valueName)), uintptr(unsafe.Pointer(valueType)), uintptr(unsafe.Pointer(valueAddress)), uintptr(unsafe.Pointer(valueSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WldpQueryWindowsLockdownMode calls Wldp!WldpQueryWindowsLockdownMode.
 // https://learn.microsoft.com/windows/win32/api/wldp/nf-wldp-wldpquerywindowslockdownmode
 func WldpQueryWindowsLockdownMode(lockdownMode *WLDP_WINDOWS_LOCKDOWN_MODE) error {
 	r1, _, _ := syscall.SyscallN(procWldpQueryWindowsLockdownMode.Addr(), uintptr(unsafe.Pointer(lockdownMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WldpQueryWindowsLockdownRestriction calls Wldp!WldpQueryWindowsLockdownRestriction.
 func WldpQueryWindowsLockdownRestriction(LockdownRestriction *WLDP_WINDOWS_LOCKDOWN_RESTRICTION) error {
 	r1, _, _ := syscall.SyscallN(procWldpQueryWindowsLockdownRestriction.Addr(), uintptr(unsafe.Pointer(LockdownRestriction)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WldpResetProductionConfiguration calls Wldp!WldpResetProductionConfiguration.
 func WldpResetProductionConfiguration() error {
 	r1, _, _ := syscall.SyscallN(procWldpResetProductionConfiguration.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WldpResetWcosProductionConfiguration calls Wldp!WldpResetWcosProductionConfiguration.
 func WldpResetWcosProductionConfiguration() error {
 	r1, _, _ := syscall.SyscallN(procWldpResetWcosProductionConfiguration.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WldpSetDynamicCodeTrust calls Wldp!WldpSetDynamicCodeTrust.
 // https://learn.microsoft.com/windows/win32/api/wldp/nf-wldp-wldpsetdynamiccodetrust
 func WldpSetDynamicCodeTrust(fileHandle foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procWldpSetDynamicCodeTrust.Addr(), uintptr(fileHandle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WldpSetWindowsLockdownRestriction calls Wldp!WldpSetWindowsLockdownRestriction.
 func WldpSetWindowsLockdownRestriction(LockdownRestriction WLDP_WINDOWS_LOCKDOWN_RESTRICTION) error {
 	r1, _, _ := syscall.SyscallN(procWldpSetWindowsLockdownRestriction.Addr(), uintptr(LockdownRestriction))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WritePrivateProfileSection calls KERNEL32!WritePrivateProfileSectionW.

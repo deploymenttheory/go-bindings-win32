@@ -29,7 +29,7 @@ var (
 // WscGetAntiMalwareUri calls WSCAPI!WscGetAntiMalwareUri.
 func WscGetAntiMalwareUri(ppszUri *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procWscGetAntiMalwareUri.Addr(), uintptr(unsafe.Pointer(ppszUri)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WscGetSecurityProviderHealth calls WSCAPI!WscGetSecurityProviderHealth.
@@ -37,13 +37,13 @@ func WscGetAntiMalwareUri(ppszUri *foundation.PWSTR) error {
 // Minimum OS: windows6.0.6000.
 func WscGetSecurityProviderHealth(Providers uint32, pHealth *WSC_SECURITY_PROVIDER_HEALTH) error {
 	r1, _, _ := syscall.SyscallN(procWscGetSecurityProviderHealth.Addr(), uintptr(Providers), uintptr(unsafe.Pointer(pHealth)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WscQueryAntiMalwareUri calls WSCAPI!WscQueryAntiMalwareUri.
 func WscQueryAntiMalwareUri() error {
 	r1, _, _ := syscall.SyscallN(procWscQueryAntiMalwareUri.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WscRegisterForChanges calls WSCAPI!WscRegisterForChanges.
@@ -51,13 +51,13 @@ func WscQueryAntiMalwareUri() error {
 // Minimum OS: windows6.0.6000.
 func WscRegisterForChanges(Reserved unsafe.Pointer, phCallbackRegistration *foundation.HANDLE, lpCallbackAddress systemthreading.LPTHREAD_START_ROUTINE, pContext unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWscRegisterForChanges.Addr(), uintptr(unsafe.Pointer(Reserved)), uintptr(unsafe.Pointer(phCallbackRegistration)), uintptr(lpCallbackAddress), uintptr(unsafe.Pointer(pContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WscRegisterForUserNotifications calls WSCAPI!WscRegisterForUserNotifications.
 func WscRegisterForUserNotifications() error {
 	r1, _, _ := syscall.SyscallN(procWscRegisterForUserNotifications.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WscUnRegisterChanges calls WSCAPI!WscUnRegisterChanges.
@@ -65,5 +65,5 @@ func WscRegisterForUserNotifications() error {
 // Minimum OS: windows6.0.6000.
 func WscUnRegisterChanges(hRegistrationHandle foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procWscUnRegisterChanges.Addr(), uintptr(hRegistrationHandle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

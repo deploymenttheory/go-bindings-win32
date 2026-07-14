@@ -30,295 +30,295 @@ var IID_IFeed = win32.GUID{Data1: 0xf7f915d8, Data2: 0x2ede, Data3: 0x42bc, Data
 func (self *IFeed) Xml(count int32, sortProperty FEEDS_XML_SORT_PROPERTY, sortOrder FEEDS_XML_SORT_ORDER, filterFlags FEEDS_XML_FILTER_FLAGS, includeFlags FEEDS_XML_INCLUDE_FLAGS) (foundation.BSTR, error) {
 	var _xml foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(count), uintptr(sortProperty), uintptr(sortOrder), uintptr(filterFlags), uintptr(includeFlags), uintptr(unsafe.Pointer(&_xml)))
-	return _xml, win32.HRESULTError(int32(r1))
+	return _xml, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through IFeed's vtable slot 8.
 func (self *IFeed) Get_Name() (foundation.BSTR, error) {
 	var _name foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
-	return _name, win32.HRESULTError(int32(r1))
+	return _name, win32.ErrIfFailed(int32(r1))
 }
 
 // Rename dispatches through IFeed's vtable slot 9.
 func (self *IFeed) Rename(name foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Url dispatches through IFeed's vtable slot 10.
 func (self *IFeed) Get_Url() (foundation.BSTR, error) {
 	var _feedUrl foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_feedUrl)))
-	return _feedUrl, win32.HRESULTError(int32(r1))
+	return _feedUrl, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Url dispatches through IFeed's vtable slot 11.
 func (self *IFeed) Put_Url(feedUrl foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(feedUrl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LocalId dispatches through IFeed's vtable slot 12.
 func (self *IFeed) Get_LocalId() (foundation.BSTR, error) {
 	var _feedGuid foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_feedGuid)))
-	return _feedGuid, win32.HRESULTError(int32(r1))
+	return _feedGuid, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Path dispatches through IFeed's vtable slot 13.
 func (self *IFeed) Get_Path() (foundation.BSTR, error) {
 	var _path foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_path)))
-	return _path, win32.HRESULTError(int32(r1))
+	return _path, win32.ErrIfFailed(int32(r1))
 }
 
 // Move dispatches through IFeed's vtable slot 14.
 func (self *IFeed) Move(newParentPath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newParentPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Parent dispatches through IFeed's vtable slot 15.
 func (self *IFeed) Get_Parent() (*systemcom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.HRESULTError(int32(r1))
+	return _disp, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastWriteTime dispatches through IFeed's vtable slot 16.
 func (self *IFeed) Get_LastWriteTime() (float64, error) {
 	var _lastWrite float64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lastWrite)))
-	return _lastWrite, win32.HRESULTError(int32(r1))
+	return _lastWrite, win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IFeed's vtable slot 17.
 func (self *IFeed) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Download dispatches through IFeed's vtable slot 18.
 func (self *IFeed) Download() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AsyncDownload dispatches through IFeed's vtable slot 19.
 func (self *IFeed) AsyncDownload() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CancelAsyncDownload dispatches through IFeed's vtable slot 20.
 func (self *IFeed) CancelAsyncDownload() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SyncSetting dispatches through IFeed's vtable slot 21.
 func (self *IFeed) Get_SyncSetting() (FEEDS_SYNC_SETTING, error) {
 	var _syncSetting FEEDS_SYNC_SETTING
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_syncSetting)))
-	return _syncSetting, win32.HRESULTError(int32(r1))
+	return _syncSetting, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SyncSetting dispatches through IFeed's vtable slot 22.
 func (self *IFeed) Put_SyncSetting(syncSetting FEEDS_SYNC_SETTING) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(syncSetting))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Interval dispatches through IFeed's vtable slot 23.
 func (self *IFeed) Get_Interval() (int32, error) {
 	var _minutes int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_minutes)))
-	return _minutes, win32.HRESULTError(int32(r1))
+	return _minutes, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Interval dispatches through IFeed's vtable slot 24.
 func (self *IFeed) Put_Interval(minutes int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(minutes))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastDownloadTime dispatches through IFeed's vtable slot 25.
 func (self *IFeed) Get_LastDownloadTime() (float64, error) {
 	var _lastDownload float64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lastDownload)))
-	return _lastDownload, win32.HRESULTError(int32(r1))
+	return _lastDownload, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LocalEnclosurePath dispatches through IFeed's vtable slot 26.
 func (self *IFeed) Get_LocalEnclosurePath() (foundation.BSTR, error) {
 	var _path foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_path)))
-	return _path, win32.HRESULTError(int32(r1))
+	return _path, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Items dispatches through IFeed's vtable slot 27.
 func (self *IFeed) Get_Items() (*systemcom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.HRESULTError(int32(r1))
+	return _disp, win32.ErrIfFailed(int32(r1))
 }
 
 // GetItem dispatches through IFeed's vtable slot 28.
 func (self *IFeed) GetItem(itemId int32) (*systemcom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(itemId), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.HRESULTError(int32(r1))
+	return _disp, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Title dispatches through IFeed's vtable slot 29.
 func (self *IFeed) Get_Title() (foundation.BSTR, error) {
 	var _title foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_title)))
-	return _title, win32.HRESULTError(int32(r1))
+	return _title, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through IFeed's vtable slot 30.
 func (self *IFeed) Get_Description() (foundation.BSTR, error) {
 	var _description foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_description)))
-	return _description, win32.HRESULTError(int32(r1))
+	return _description, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Link dispatches through IFeed's vtable slot 31.
 func (self *IFeed) Get_Link() (foundation.BSTR, error) {
 	var _homePage foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_homePage)))
-	return _homePage, win32.HRESULTError(int32(r1))
+	return _homePage, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Image dispatches through IFeed's vtable slot 32.
 func (self *IFeed) Get_Image() (foundation.BSTR, error) {
 	var _imageUrl foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_imageUrl)))
-	return _imageUrl, win32.HRESULTError(int32(r1))
+	return _imageUrl, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastBuildDate dispatches through IFeed's vtable slot 33.
 func (self *IFeed) Get_LastBuildDate() (float64, error) {
 	var _lastBuildDate float64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lastBuildDate)))
-	return _lastBuildDate, win32.HRESULTError(int32(r1))
+	return _lastBuildDate, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PubDate dispatches through IFeed's vtable slot 34.
 func (self *IFeed) Get_PubDate() (float64, error) {
 	var _lastPopulateDate float64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lastPopulateDate)))
-	return _lastPopulateDate, win32.HRESULTError(int32(r1))
+	return _lastPopulateDate, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Ttl dispatches through IFeed's vtable slot 35.
 func (self *IFeed) Get_Ttl() (int32, error) {
 	var _ttl int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ttl)))
-	return _ttl, win32.HRESULTError(int32(r1))
+	return _ttl, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Language dispatches through IFeed's vtable slot 36.
 func (self *IFeed) Get_Language() (foundation.BSTR, error) {
 	var _language foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_language)))
-	return _language, win32.HRESULTError(int32(r1))
+	return _language, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Copyright dispatches through IFeed's vtable slot 37.
 func (self *IFeed) Get_Copyright() (foundation.BSTR, error) {
 	var _copyright foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_copyright)))
-	return _copyright, win32.HRESULTError(int32(r1))
+	return _copyright, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MaxItemCount dispatches through IFeed's vtable slot 38.
 func (self *IFeed) Get_MaxItemCount() (int32, error) {
 	var _count int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
-	return _count, win32.HRESULTError(int32(r1))
+	return _count, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MaxItemCount dispatches through IFeed's vtable slot 39.
 func (self *IFeed) Put_MaxItemCount(count int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(count))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DownloadEnclosuresAutomatically dispatches through IFeed's vtable slot 40.
 func (self *IFeed) Get_DownloadEnclosuresAutomatically() (foundation.VARIANT_BOOL, error) {
 	var _downloadEnclosuresAutomatically foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_downloadEnclosuresAutomatically)))
-	return _downloadEnclosuresAutomatically, win32.HRESULTError(int32(r1))
+	return _downloadEnclosuresAutomatically, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DownloadEnclosuresAutomatically dispatches through IFeed's vtable slot 41.
 func (self *IFeed) Put_DownloadEnclosuresAutomatically(downloadEnclosuresAutomatically foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(downloadEnclosuresAutomatically))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DownloadStatus dispatches through IFeed's vtable slot 42.
 func (self *IFeed) Get_DownloadStatus() (FEEDS_DOWNLOAD_STATUS, error) {
 	var _status FEEDS_DOWNLOAD_STATUS
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_status)))
-	return _status, win32.HRESULTError(int32(r1))
+	return _status, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastDownloadError dispatches through IFeed's vtable slot 43.
 func (self *IFeed) Get_LastDownloadError() (FEEDS_DOWNLOAD_ERROR, error) {
 	var _error_ FEEDS_DOWNLOAD_ERROR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_error_)))
-	return _error_, win32.HRESULTError(int32(r1))
+	return _error_, win32.ErrIfFailed(int32(r1))
 }
 
 // Merge dispatches through IFeed's vtable slot 44.
 func (self *IFeed) Merge(feedXml foundation.BSTR, feedUrl foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(feedXml)), uintptr(unsafe.Pointer(feedUrl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DownloadUrl dispatches through IFeed's vtable slot 45.
 func (self *IFeed) Get_DownloadUrl() (foundation.BSTR, error) {
 	var _feedUrl foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_feedUrl)))
-	return _feedUrl, win32.HRESULTError(int32(r1))
+	return _feedUrl, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsList dispatches through IFeed's vtable slot 46.
 func (self *IFeed) Get_IsList() (foundation.VARIANT_BOOL, error) {
 	var _isList foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_isList)))
-	return _isList, win32.HRESULTError(int32(r1))
+	return _isList, win32.ErrIfFailed(int32(r1))
 }
 
 // MarkAllItemsRead dispatches through IFeed's vtable slot 47.
 func (self *IFeed) MarkAllItemsRead() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetWatcher dispatches through IFeed's vtable slot 48.
 func (self *IFeed) GetWatcher(scope FEEDS_EVENTS_SCOPE, mask FEEDS_EVENTS_MASK) (*systemcom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(mask), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.HRESULTError(int32(r1))
+	return _disp, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UnreadItemCount dispatches through IFeed's vtable slot 49.
 func (self *IFeed) Get_UnreadItemCount() (int32, error) {
 	var _count int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
-	return _count, win32.HRESULTError(int32(r1))
+	return _count, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ItemCount dispatches through IFeed's vtable slot 50.
 func (self *IFeed) Get_ItemCount() (int32, error) {
 	var _count int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
-	return _count, win32.HRESULTError(int32(r1))
+	return _count, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 33f2ea09-1398-4ab9-b6a4-f94b49d0a42e
@@ -333,40 +333,40 @@ var IID_IFeed2 = win32.GUID{Data1: 0x33f2ea09, Data2: 0x1398, Data3: 0x4ab9, Dat
 func (self *IFeed2) GetItemByEffectiveId(itemEffectiveId int32) (*systemcom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(itemEffectiveId), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.HRESULTError(int32(r1))
+	return _disp, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastItemDownloadTime dispatches through IFeed2's vtable slot 52.
 func (self *IFeed2) Get_LastItemDownloadTime() (float64, error) {
 	var _lastItemDownloadTime float64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lastItemDownloadTime)))
-	return _lastItemDownloadTime, win32.HRESULTError(int32(r1))
+	return _lastItemDownloadTime, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Username dispatches through IFeed2's vtable slot 53.
 func (self *IFeed2) Get_Username() (foundation.BSTR, error) {
 	var _username foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_username)))
-	return _username, win32.HRESULTError(int32(r1))
+	return _username, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Password dispatches through IFeed2's vtable slot 54.
 func (self *IFeed2) Get_Password() (foundation.BSTR, error) {
 	var _password foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_password)))
-	return _password, win32.HRESULTError(int32(r1))
+	return _password, win32.ErrIfFailed(int32(r1))
 }
 
 // SetCredentials dispatches through IFeed2's vtable slot 55.
 func (self *IFeed2) SetCredentials(username foundation.BSTR, password foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(username)), uintptr(unsafe.Pointer(password)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ClearCredentials dispatches through IFeed2's vtable slot 56.
 func (self *IFeed2) ClearCredentials() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 361c26f7-90a4-4e67-ae09-3a36a546436a
@@ -381,87 +381,87 @@ var IID_IFeedEnclosure = win32.GUID{Data1: 0x361c26f7, Data2: 0x90a4, Data3: 0x4
 func (self *IFeedEnclosure) Get_Url() (foundation.BSTR, error) {
 	var _enclosureUrl foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_enclosureUrl)))
-	return _enclosureUrl, win32.HRESULTError(int32(r1))
+	return _enclosureUrl, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Type dispatches through IFeedEnclosure's vtable slot 8.
 func (self *IFeedEnclosure) Get_Type() (foundation.BSTR, error) {
 	var _mimeType foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_mimeType)))
-	return _mimeType, win32.HRESULTError(int32(r1))
+	return _mimeType, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Length dispatches through IFeedEnclosure's vtable slot 9.
 func (self *IFeedEnclosure) Get_Length() (int32, error) {
 	var _length int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_length)))
-	return _length, win32.HRESULTError(int32(r1))
+	return _length, win32.ErrIfFailed(int32(r1))
 }
 
 // AsyncDownload dispatches through IFeedEnclosure's vtable slot 10.
 func (self *IFeedEnclosure) AsyncDownload() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CancelAsyncDownload dispatches through IFeedEnclosure's vtable slot 11.
 func (self *IFeedEnclosure) CancelAsyncDownload() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DownloadStatus dispatches through IFeedEnclosure's vtable slot 12.
 func (self *IFeedEnclosure) Get_DownloadStatus() (FEEDS_DOWNLOAD_STATUS, error) {
 	var _status FEEDS_DOWNLOAD_STATUS
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_status)))
-	return _status, win32.HRESULTError(int32(r1))
+	return _status, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastDownloadError dispatches through IFeedEnclosure's vtable slot 13.
 func (self *IFeedEnclosure) Get_LastDownloadError() (FEEDS_DOWNLOAD_ERROR, error) {
 	var _error_ FEEDS_DOWNLOAD_ERROR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_error_)))
-	return _error_, win32.HRESULTError(int32(r1))
+	return _error_, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LocalPath dispatches through IFeedEnclosure's vtable slot 14.
 func (self *IFeedEnclosure) Get_LocalPath() (foundation.BSTR, error) {
 	var _localPath foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_localPath)))
-	return _localPath, win32.HRESULTError(int32(r1))
+	return _localPath, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Parent dispatches through IFeedEnclosure's vtable slot 15.
 func (self *IFeedEnclosure) Get_Parent() (*systemcom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.HRESULTError(int32(r1))
+	return _disp, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DownloadUrl dispatches through IFeedEnclosure's vtable slot 16.
 func (self *IFeedEnclosure) Get_DownloadUrl() (foundation.BSTR, error) {
 	var _enclosureUrl foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_enclosureUrl)))
-	return _enclosureUrl, win32.HRESULTError(int32(r1))
+	return _enclosureUrl, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DownloadMimeType dispatches through IFeedEnclosure's vtable slot 17.
 func (self *IFeedEnclosure) Get_DownloadMimeType() (foundation.BSTR, error) {
 	var _mimeType foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_mimeType)))
-	return _mimeType, win32.HRESULTError(int32(r1))
+	return _mimeType, win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveFile dispatches through IFeedEnclosure's vtable slot 18.
 func (self *IFeedEnclosure) RemoveFile() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetFile dispatches through IFeedEnclosure's vtable slot 19.
 func (self *IFeedEnclosure) SetFile(downloadUrl foundation.BSTR, downloadFilePath foundation.BSTR, downloadMimeType foundation.BSTR, enclosureFilename foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(downloadUrl)), uintptr(unsafe.Pointer(downloadFilePath)), uintptr(unsafe.Pointer(downloadMimeType)), uintptr(unsafe.Pointer(enclosureFilename)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: abf35c99-0681-47ea-9a8c-1436a375a99e
@@ -475,49 +475,49 @@ var IID_IFeedEvents = win32.GUID{Data1: 0xabf35c99, Data2: 0x0681, Data3: 0x47ea
 // Error dispatches through IFeedEvents's vtable slot 7.
 func (self *IFeedEvents) Error() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FeedDeleted dispatches through IFeedEvents's vtable slot 8.
 func (self *IFeedEvents) FeedDeleted(path foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FeedRenamed dispatches through IFeedEvents's vtable slot 9.
 func (self *IFeedEvents) FeedRenamed(path foundation.BSTR, oldPath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(oldPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FeedUrlChanged dispatches through IFeedEvents's vtable slot 10.
 func (self *IFeedEvents) FeedUrlChanged(path foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FeedMoved dispatches through IFeedEvents's vtable slot 11.
 func (self *IFeedEvents) FeedMoved(path foundation.BSTR, oldPath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(oldPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FeedDownloading dispatches through IFeedEvents's vtable slot 12.
 func (self *IFeedEvents) FeedDownloading(path foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FeedDownloadCompleted dispatches through IFeedEvents's vtable slot 13.
 func (self *IFeedEvents) FeedDownloadCompleted(path foundation.BSTR, error_ FEEDS_DOWNLOAD_ERROR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)), uintptr(error_))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FeedItemCountChanged dispatches through IFeedEvents's vtable slot 14.
 func (self *IFeedEvents) FeedItemCountChanged(path foundation.BSTR, itemCountType int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)), uintptr(itemCountType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 81f04ad1-4194-4d7d-86d6-11813cec163c
@@ -532,123 +532,123 @@ var IID_IFeedFolder = win32.GUID{Data1: 0x81f04ad1, Data2: 0x4194, Data3: 0x4d7d
 func (self *IFeedFolder) Get_Feeds() (*systemcom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.HRESULTError(int32(r1))
+	return _disp, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Subfolders dispatches through IFeedFolder's vtable slot 8.
 func (self *IFeedFolder) Get_Subfolders() (*systemcom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.HRESULTError(int32(r1))
+	return _disp, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateFeed dispatches through IFeedFolder's vtable slot 9.
 func (self *IFeedFolder) CreateFeed(feedName foundation.BSTR, feedUrl foundation.BSTR) (*systemcom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(feedName)), uintptr(unsafe.Pointer(feedUrl)), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.HRESULTError(int32(r1))
+	return _disp, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSubfolder dispatches through IFeedFolder's vtable slot 10.
 func (self *IFeedFolder) CreateSubfolder(folderName foundation.BSTR) (*systemcom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(folderName)), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.HRESULTError(int32(r1))
+	return _disp, win32.ErrIfFailed(int32(r1))
 }
 
 // ExistsFeed dispatches through IFeedFolder's vtable slot 11.
 func (self *IFeedFolder) ExistsFeed(feedName foundation.BSTR) (foundation.VARIANT_BOOL, error) {
 	var _exists foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(feedName)), uintptr(unsafe.Pointer(&_exists)))
-	return _exists, win32.HRESULTError(int32(r1))
+	return _exists, win32.ErrIfFailed(int32(r1))
 }
 
 // GetFeed dispatches through IFeedFolder's vtable slot 12.
 func (self *IFeedFolder) GetFeed(feedName foundation.BSTR) (*systemcom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(feedName)), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.HRESULTError(int32(r1))
+	return _disp, win32.ErrIfFailed(int32(r1))
 }
 
 // ExistsSubfolder dispatches through IFeedFolder's vtable slot 13.
 func (self *IFeedFolder) ExistsSubfolder(folderName foundation.BSTR) (foundation.VARIANT_BOOL, error) {
 	var _exists foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(folderName)), uintptr(unsafe.Pointer(&_exists)))
-	return _exists, win32.HRESULTError(int32(r1))
+	return _exists, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSubfolder dispatches through IFeedFolder's vtable slot 14.
 func (self *IFeedFolder) GetSubfolder(folderName foundation.BSTR) (*systemcom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(folderName)), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.HRESULTError(int32(r1))
+	return _disp, win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IFeedFolder's vtable slot 15.
 func (self *IFeedFolder) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through IFeedFolder's vtable slot 16.
 func (self *IFeedFolder) Get_Name() (foundation.BSTR, error) {
 	var _folderName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_folderName)))
-	return _folderName, win32.HRESULTError(int32(r1))
+	return _folderName, win32.ErrIfFailed(int32(r1))
 }
 
 // Rename dispatches through IFeedFolder's vtable slot 17.
 func (self *IFeedFolder) Rename(folderName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(folderName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Path dispatches through IFeedFolder's vtable slot 18.
 func (self *IFeedFolder) Get_Path() (foundation.BSTR, error) {
 	var _folderPath foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_folderPath)))
-	return _folderPath, win32.HRESULTError(int32(r1))
+	return _folderPath, win32.ErrIfFailed(int32(r1))
 }
 
 // Move dispatches through IFeedFolder's vtable slot 19.
 func (self *IFeedFolder) Move(newParentPath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newParentPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Parent dispatches through IFeedFolder's vtable slot 20.
 func (self *IFeedFolder) Get_Parent() (*systemcom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.HRESULTError(int32(r1))
+	return _disp, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsRoot dispatches through IFeedFolder's vtable slot 21.
 func (self *IFeedFolder) Get_IsRoot() (foundation.VARIANT_BOOL, error) {
 	var _isRoot foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_isRoot)))
-	return _isRoot, win32.HRESULTError(int32(r1))
+	return _isRoot, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TotalUnreadItemCount dispatches through IFeedFolder's vtable slot 22.
 func (self *IFeedFolder) Get_TotalUnreadItemCount() (int32, error) {
 	var _count int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
-	return _count, win32.HRESULTError(int32(r1))
+	return _count, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TotalItemCount dispatches through IFeedFolder's vtable slot 23.
 func (self *IFeedFolder) Get_TotalItemCount() (int32, error) {
 	var _count int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
-	return _count, win32.HRESULTError(int32(r1))
+	return _count, win32.ErrIfFailed(int32(r1))
 }
 
 // GetWatcher dispatches through IFeedFolder's vtable slot 24.
 func (self *IFeedFolder) GetWatcher(scope FEEDS_EVENTS_SCOPE, mask FEEDS_EVENTS_MASK) (*systemcom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(mask), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.HRESULTError(int32(r1))
+	return _disp, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 20a59fa6-a844-4630-9e98-175f70b4d55b
@@ -662,97 +662,97 @@ var IID_IFeedFolderEvents = win32.GUID{Data1: 0x20a59fa6, Data2: 0xa844, Data3: 
 // Error dispatches through IFeedFolderEvents's vtable slot 7.
 func (self *IFeedFolderEvents) Error() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FolderAdded dispatches through IFeedFolderEvents's vtable slot 8.
 func (self *IFeedFolderEvents) FolderAdded(path foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FolderDeleted dispatches through IFeedFolderEvents's vtable slot 9.
 func (self *IFeedFolderEvents) FolderDeleted(path foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FolderRenamed dispatches through IFeedFolderEvents's vtable slot 10.
 func (self *IFeedFolderEvents) FolderRenamed(path foundation.BSTR, oldPath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(oldPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FolderMovedFrom dispatches through IFeedFolderEvents's vtable slot 11.
 func (self *IFeedFolderEvents) FolderMovedFrom(path foundation.BSTR, oldPath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(oldPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FolderMovedTo dispatches through IFeedFolderEvents's vtable slot 12.
 func (self *IFeedFolderEvents) FolderMovedTo(path foundation.BSTR, oldPath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(oldPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FolderItemCountChanged dispatches through IFeedFolderEvents's vtable slot 13.
 func (self *IFeedFolderEvents) FolderItemCountChanged(path foundation.BSTR, itemCountType int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)), uintptr(itemCountType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FeedAdded dispatches through IFeedFolderEvents's vtable slot 14.
 func (self *IFeedFolderEvents) FeedAdded(path foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FeedDeleted dispatches through IFeedFolderEvents's vtable slot 15.
 func (self *IFeedFolderEvents) FeedDeleted(path foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FeedRenamed dispatches through IFeedFolderEvents's vtable slot 16.
 func (self *IFeedFolderEvents) FeedRenamed(path foundation.BSTR, oldPath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(oldPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FeedUrlChanged dispatches through IFeedFolderEvents's vtable slot 17.
 func (self *IFeedFolderEvents) FeedUrlChanged(path foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FeedMovedFrom dispatches through IFeedFolderEvents's vtable slot 18.
 func (self *IFeedFolderEvents) FeedMovedFrom(path foundation.BSTR, oldPath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(oldPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FeedMovedTo dispatches through IFeedFolderEvents's vtable slot 19.
 func (self *IFeedFolderEvents) FeedMovedTo(path foundation.BSTR, oldPath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(oldPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FeedDownloading dispatches through IFeedFolderEvents's vtable slot 20.
 func (self *IFeedFolderEvents) FeedDownloading(path foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FeedDownloadCompleted dispatches through IFeedFolderEvents's vtable slot 21.
 func (self *IFeedFolderEvents) FeedDownloadCompleted(path foundation.BSTR, error_ FEEDS_DOWNLOAD_ERROR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)), uintptr(error_))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FeedItemCountChanged dispatches through IFeedFolderEvents's vtable slot 22.
 func (self *IFeedFolderEvents) FeedItemCountChanged(path foundation.BSTR, itemCountType int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)), uintptr(itemCountType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 0a1e6cad-0a47-4da2-a13d-5baaa5c8bd4f
@@ -767,117 +767,117 @@ var IID_IFeedItem = win32.GUID{Data1: 0x0a1e6cad, Data2: 0x0a47, Data3: 0x4da2, 
 func (self *IFeedItem) Xml(includeFlags FEEDS_XML_INCLUDE_FLAGS) (foundation.BSTR, error) {
 	var _xml foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(includeFlags), uintptr(unsafe.Pointer(&_xml)))
-	return _xml, win32.HRESULTError(int32(r1))
+	return _xml, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Title dispatches through IFeedItem's vtable slot 8.
 func (self *IFeedItem) Get_Title() (foundation.BSTR, error) {
 	var _title foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_title)))
-	return _title, win32.HRESULTError(int32(r1))
+	return _title, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Link dispatches through IFeedItem's vtable slot 9.
 func (self *IFeedItem) Get_Link() (foundation.BSTR, error) {
 	var _linkUrl foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_linkUrl)))
-	return _linkUrl, win32.HRESULTError(int32(r1))
+	return _linkUrl, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Guid dispatches through IFeedItem's vtable slot 10.
 func (self *IFeedItem) Get_Guid() (foundation.BSTR, error) {
 	var _itemGuid foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_itemGuid)))
-	return _itemGuid, win32.HRESULTError(int32(r1))
+	return _itemGuid, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through IFeedItem's vtable slot 11.
 func (self *IFeedItem) Get_Description() (foundation.BSTR, error) {
 	var _description foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_description)))
-	return _description, win32.HRESULTError(int32(r1))
+	return _description, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PubDate dispatches through IFeedItem's vtable slot 12.
 func (self *IFeedItem) Get_PubDate() (float64, error) {
 	var _pubDate float64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pubDate)))
-	return _pubDate, win32.HRESULTError(int32(r1))
+	return _pubDate, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Comments dispatches through IFeedItem's vtable slot 13.
 func (self *IFeedItem) Get_Comments() (foundation.BSTR, error) {
 	var _comments foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_comments)))
-	return _comments, win32.HRESULTError(int32(r1))
+	return _comments, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Author dispatches through IFeedItem's vtable slot 14.
 func (self *IFeedItem) Get_Author() (foundation.BSTR, error) {
 	var _author foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_author)))
-	return _author, win32.HRESULTError(int32(r1))
+	return _author, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Enclosure dispatches through IFeedItem's vtable slot 15.
 func (self *IFeedItem) Get_Enclosure() (*systemcom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.HRESULTError(int32(r1))
+	return _disp, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsRead dispatches through IFeedItem's vtable slot 16.
 func (self *IFeedItem) Get_IsRead() (foundation.VARIANT_BOOL, error) {
 	var _isRead foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_isRead)))
-	return _isRead, win32.HRESULTError(int32(r1))
+	return _isRead, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_IsRead dispatches through IFeedItem's vtable slot 17.
 func (self *IFeedItem) Put_IsRead(isRead foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(isRead))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LocalId dispatches through IFeedItem's vtable slot 18.
 func (self *IFeedItem) Get_LocalId() (int32, error) {
 	var _itemId int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_itemId)))
-	return _itemId, win32.HRESULTError(int32(r1))
+	return _itemId, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Parent dispatches through IFeedItem's vtable slot 19.
 func (self *IFeedItem) Get_Parent() (*systemcom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.HRESULTError(int32(r1))
+	return _disp, win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IFeedItem's vtable slot 20.
 func (self *IFeedItem) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DownloadUrl dispatches through IFeedItem's vtable slot 21.
 func (self *IFeedItem) Get_DownloadUrl() (foundation.BSTR, error) {
 	var _itemUrl foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_itemUrl)))
-	return _itemUrl, win32.HRESULTError(int32(r1))
+	return _itemUrl, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastDownloadTime dispatches through IFeedItem's vtable slot 22.
 func (self *IFeedItem) Get_LastDownloadTime() (float64, error) {
 	var _lastDownload float64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lastDownload)))
-	return _lastDownload, win32.HRESULTError(int32(r1))
+	return _lastDownload, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Modified dispatches through IFeedItem's vtable slot 23.
 func (self *IFeedItem) Get_Modified() (float64, error) {
 	var _modified float64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_modified)))
-	return _modified, win32.HRESULTError(int32(r1))
+	return _modified, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 79ac9ef4-f9c1-4d2b-a50b-a7ffba4dcf37
@@ -892,7 +892,7 @@ var IID_IFeedItem2 = win32.GUID{Data1: 0x79ac9ef4, Data2: 0xf9c1, Data3: 0x4d2b,
 func (self *IFeedItem2) Get_EffectiveId() (int32, error) {
 	var _effectiveId int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_effectiveId)))
-	return _effectiveId, win32.HRESULTError(int32(r1))
+	return _effectiveId, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: e3cd0028-2eed-4c60-8fae-a3225309a836
@@ -907,21 +907,21 @@ var IID_IFeedsEnum = win32.GUID{Data1: 0xe3cd0028, Data2: 0x2eed, Data3: 0x4c60,
 func (self *IFeedsEnum) Get_Count() (int32, error) {
 	var _count int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
-	return _count, win32.HRESULTError(int32(r1))
+	return _count, win32.ErrIfFailed(int32(r1))
 }
 
 // Item dispatches through IFeedsEnum's vtable slot 8.
 func (self *IFeedsEnum) Item(index int32) (*systemcom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.HRESULTError(int32(r1))
+	return _disp, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IFeedsEnum's vtable slot 9.
 func (self *IFeedsEnum) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
 	var _enumVar *systemole.IEnumVARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_enumVar)))
-	return _enumVar, win32.HRESULTError(int32(r1))
+	return _enumVar, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: a74029cc-1f1a-4906-88f0-810638d86591
@@ -936,107 +936,107 @@ var IID_IFeedsManager = win32.GUID{Data1: 0xa74029cc, Data2: 0x1f1a, Data3: 0x49
 func (self *IFeedsManager) Get_RootFolder() (*systemcom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.HRESULTError(int32(r1))
+	return _disp, win32.ErrIfFailed(int32(r1))
 }
 
 // IsSubscribed dispatches through IFeedsManager's vtable slot 8.
 func (self *IFeedsManager) IsSubscribed(feedUrl foundation.BSTR) (foundation.VARIANT_BOOL, error) {
 	var _subscribed foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(feedUrl)), uintptr(unsafe.Pointer(&_subscribed)))
-	return _subscribed, win32.HRESULTError(int32(r1))
+	return _subscribed, win32.ErrIfFailed(int32(r1))
 }
 
 // ExistsFeed dispatches through IFeedsManager's vtable slot 9.
 func (self *IFeedsManager) ExistsFeed(feedPath foundation.BSTR) (foundation.VARIANT_BOOL, error) {
 	var _exists foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(feedPath)), uintptr(unsafe.Pointer(&_exists)))
-	return _exists, win32.HRESULTError(int32(r1))
+	return _exists, win32.ErrIfFailed(int32(r1))
 }
 
 // GetFeed dispatches through IFeedsManager's vtable slot 10.
 func (self *IFeedsManager) GetFeed(feedPath foundation.BSTR) (*systemcom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(feedPath)), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.HRESULTError(int32(r1))
+	return _disp, win32.ErrIfFailed(int32(r1))
 }
 
 // GetFeedByUrl dispatches through IFeedsManager's vtable slot 11.
 func (self *IFeedsManager) GetFeedByUrl(feedUrl foundation.BSTR) (*systemcom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(feedUrl)), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.HRESULTError(int32(r1))
+	return _disp, win32.ErrIfFailed(int32(r1))
 }
 
 // ExistsFolder dispatches through IFeedsManager's vtable slot 12.
 func (self *IFeedsManager) ExistsFolder(folderPath foundation.BSTR) (foundation.VARIANT_BOOL, error) {
 	var _exists foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(folderPath)), uintptr(unsafe.Pointer(&_exists)))
-	return _exists, win32.HRESULTError(int32(r1))
+	return _exists, win32.ErrIfFailed(int32(r1))
 }
 
 // GetFolder dispatches through IFeedsManager's vtable slot 13.
 func (self *IFeedsManager) GetFolder(folderPath foundation.BSTR) (*systemcom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(folderPath)), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.HRESULTError(int32(r1))
+	return _disp, win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteFeed dispatches through IFeedsManager's vtable slot 14.
 func (self *IFeedsManager) DeleteFeed(feedPath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(feedPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteFolder dispatches through IFeedsManager's vtable slot 15.
 func (self *IFeedsManager) DeleteFolder(folderPath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(folderPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BackgroundSync dispatches through IFeedsManager's vtable slot 16.
 func (self *IFeedsManager) BackgroundSync(action FEEDS_BACKGROUNDSYNC_ACTION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(action))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BackgroundSyncStatus dispatches through IFeedsManager's vtable slot 17.
 func (self *IFeedsManager) Get_BackgroundSyncStatus() (FEEDS_BACKGROUNDSYNC_STATUS, error) {
 	var _status FEEDS_BACKGROUNDSYNC_STATUS
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_status)))
-	return _status, win32.HRESULTError(int32(r1))
+	return _status, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DefaultInterval dispatches through IFeedsManager's vtable slot 18.
 func (self *IFeedsManager) Get_DefaultInterval() (int32, error) {
 	var _minutes int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_minutes)))
-	return _minutes, win32.HRESULTError(int32(r1))
+	return _minutes, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DefaultInterval dispatches through IFeedsManager's vtable slot 19.
 func (self *IFeedsManager) Put_DefaultInterval(minutes int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(minutes))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AsyncSyncAll dispatches through IFeedsManager's vtable slot 20.
 func (self *IFeedsManager) AsyncSyncAll() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Normalize dispatches through IFeedsManager's vtable slot 21.
 func (self *IFeedsManager) Normalize(feedXmlIn foundation.BSTR) (foundation.BSTR, error) {
 	var _feedXmlOut foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(feedXmlIn)), uintptr(unsafe.Pointer(&_feedXmlOut)))
-	return _feedXmlOut, win32.HRESULTError(int32(r1))
+	return _feedXmlOut, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ItemCountLimit dispatches through IFeedsManager's vtable slot 22.
 func (self *IFeedsManager) Get_ItemCountLimit() (int32, error) {
 	var _itemCountLimit int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_itemCountLimit)))
-	return _itemCountLimit, win32.HRESULTError(int32(r1))
+	return _itemCountLimit, win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPAudioRenderConfig: https://learn.microsoft.com/windows/win32/api/wmprealestate/nn-wmprealestate-iwmpaudiorenderconfig
@@ -1051,13 +1051,13 @@ var IID_IWMPAudioRenderConfig = win32.GUID{Data1: 0xe79c6349, Data2: 0x5997, Dat
 // Get_audioOutputDevice dispatches through IWMPAudioRenderConfig's vtable slot 3.
 func (self *IWMPAudioRenderConfig) Get_audioOutputDevice(pbstrOutputDevice *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrOutputDevice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_audioOutputDevice dispatches through IWMPAudioRenderConfig's vtable slot 4.
 func (self *IWMPAudioRenderConfig) Put_audioOutputDevice(bstrOutputDevice foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrOutputDevice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPCdrom: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpcdrom
@@ -1072,19 +1072,19 @@ var IID_IWMPCdrom = win32.GUID{Data1: 0xcfab6e98, Data2: 0x8730, Data3: 0x11d3, 
 // Get_driveSpecifier dispatches through IWMPCdrom's vtable slot 7.
 func (self *IWMPCdrom) Get_driveSpecifier(pbstrDrive *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDrive)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_playlist dispatches through IWMPCdrom's vtable slot 8.
 func (self *IWMPCdrom) Get_playlist(ppPlaylist **IWMPPlaylist) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPlaylist)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Eject dispatches through IWMPCdrom's vtable slot 9.
 func (self *IWMPCdrom) Eject() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPCdromBurn: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpcdromburn
@@ -1099,85 +1099,85 @@ var IID_IWMPCdromBurn = win32.GUID{Data1: 0xbd94dbeb, Data2: 0x417f, Data3: 0x49
 // IsAvailable dispatches through IWMPCdromBurn's vtable slot 3.
 func (self *IWMPCdromBurn) IsAvailable(bstrItem foundation.BSTR, pIsAvailable *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrItem)), uintptr(unsafe.Pointer(pIsAvailable)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetItemInfo dispatches through IWMPCdromBurn's vtable slot 4.
 func (self *IWMPCdromBurn) GetItemInfo(bstrItem foundation.BSTR, pbstrVal *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrItem)), uintptr(unsafe.Pointer(pbstrVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_label dispatches through IWMPCdromBurn's vtable slot 5.
 func (self *IWMPCdromBurn) Get_label(pbstrLabel *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrLabel)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_label dispatches through IWMPCdromBurn's vtable slot 6.
 func (self *IWMPCdromBurn) Put_label(bstrLabel foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrLabel)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_burnFormat dispatches through IWMPCdromBurn's vtable slot 7.
 func (self *IWMPCdromBurn) Get_burnFormat(pwmpbf *WMPBurnFormat) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwmpbf)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_burnFormat dispatches through IWMPCdromBurn's vtable slot 8.
 func (self *IWMPCdromBurn) Put_burnFormat(wmpbf WMPBurnFormat) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(wmpbf))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_burnPlaylist dispatches through IWMPCdromBurn's vtable slot 9.
 func (self *IWMPCdromBurn) Get_burnPlaylist(ppPlaylist **IWMPPlaylist) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPlaylist)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_burnPlaylist dispatches through IWMPCdromBurn's vtable slot 10.
 func (self *IWMPCdromBurn) Put_burnPlaylist(pPlaylist *IWMPPlaylist) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPlaylist)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RefreshStatus dispatches through IWMPCdromBurn's vtable slot 11.
 func (self *IWMPCdromBurn) RefreshStatus() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_burnState dispatches through IWMPCdromBurn's vtable slot 12.
 func (self *IWMPCdromBurn) Get_burnState(pwmpbs *WMPBurnState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwmpbs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_burnProgress dispatches through IWMPCdromBurn's vtable slot 13.
 func (self *IWMPCdromBurn) Get_burnProgress(plProgress *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plProgress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StartBurn dispatches through IWMPCdromBurn's vtable slot 14.
 func (self *IWMPCdromBurn) StartBurn() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StopBurn dispatches through IWMPCdromBurn's vtable slot 15.
 func (self *IWMPCdromBurn) StopBurn() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Erase dispatches through IWMPCdromBurn's vtable slot 16.
 func (self *IWMPCdromBurn) Erase() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPCdromCollection: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpcdromcollection
@@ -1192,19 +1192,19 @@ var IID_IWMPCdromCollection = win32.GUID{Data1: 0xee4c8fe2, Data2: 0x34b2, Data3
 // Get_count dispatches through IWMPCdromCollection's vtable slot 7.
 func (self *IWMPCdromCollection) Get_count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Item dispatches through IWMPCdromCollection's vtable slot 8.
 func (self *IWMPCdromCollection) Item(lIndex int32, ppItem **IWMPCdrom) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(ppItem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetByDriveSpecifier dispatches through IWMPCdromCollection's vtable slot 9.
 func (self *IWMPCdromCollection) GetByDriveSpecifier(bstrDriveSpecifier foundation.BSTR, ppCdrom **IWMPCdrom) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDriveSpecifier)), uintptr(unsafe.Pointer(ppCdrom)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPCdromRip: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpcdromrip
@@ -1219,25 +1219,25 @@ var IID_IWMPCdromRip = win32.GUID{Data1: 0x56e2294f, Data2: 0x69ed, Data3: 0x462
 // Get_ripState dispatches through IWMPCdromRip's vtable slot 3.
 func (self *IWMPCdromRip) Get_ripState(pwmprs *WMPRipState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwmprs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ripProgress dispatches through IWMPCdromRip's vtable slot 4.
 func (self *IWMPCdromRip) Get_ripProgress(plProgress *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plProgress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StartRip dispatches through IWMPCdromRip's vtable slot 5.
 func (self *IWMPCdromRip) StartRip() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StopRip dispatches through IWMPCdromRip's vtable slot 6.
 func (self *IWMPCdromRip) StopRip() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPClosedCaption: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpclosedcaption
@@ -1252,49 +1252,49 @@ var IID_IWMPClosedCaption = win32.GUID{Data1: 0x4f2df574, Data2: 0xc588, Data3: 
 // Get_SAMIStyle dispatches through IWMPClosedCaption's vtable slot 7.
 func (self *IWMPClosedCaption) Get_SAMIStyle(pbstrSAMIStyle *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrSAMIStyle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SAMIStyle dispatches through IWMPClosedCaption's vtable slot 8.
 func (self *IWMPClosedCaption) Put_SAMIStyle(bstrSAMIStyle foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrSAMIStyle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SAMILang dispatches through IWMPClosedCaption's vtable slot 9.
 func (self *IWMPClosedCaption) Get_SAMILang(pbstrSAMILang *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrSAMILang)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SAMILang dispatches through IWMPClosedCaption's vtable slot 10.
 func (self *IWMPClosedCaption) Put_SAMILang(bstrSAMILang foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrSAMILang)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SAMIFileName dispatches through IWMPClosedCaption's vtable slot 11.
 func (self *IWMPClosedCaption) Get_SAMIFileName(pbstrSAMIFileName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrSAMIFileName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SAMIFileName dispatches through IWMPClosedCaption's vtable slot 12.
 func (self *IWMPClosedCaption) Put_SAMIFileName(bstrSAMIFileName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrSAMIFileName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_captioningId dispatches through IWMPClosedCaption's vtable slot 13.
 func (self *IWMPClosedCaption) Get_captioningId(pbstrCaptioningID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrCaptioningID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_captioningId dispatches through IWMPClosedCaption's vtable slot 14.
 func (self *IWMPClosedCaption) Put_captioningId(bstrCaptioningID foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrCaptioningID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPClosedCaption2: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpclosedcaption2
@@ -1309,31 +1309,31 @@ var IID_IWMPClosedCaption2 = win32.GUID{Data1: 0x350ba78b, Data2: 0x6bc8, Data3:
 // Get_SAMILangCount dispatches through IWMPClosedCaption2's vtable slot 15.
 func (self *IWMPClosedCaption2) Get_SAMILangCount(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSAMILangName dispatches through IWMPClosedCaption2's vtable slot 16.
 func (self *IWMPClosedCaption2) GetSAMILangName(nIndex int32, pbstrName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(nIndex), uintptr(unsafe.Pointer(pbstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSAMILangID dispatches through IWMPClosedCaption2's vtable slot 17.
 func (self *IWMPClosedCaption2) GetSAMILangID(nIndex int32, plLangID *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(nIndex), uintptr(unsafe.Pointer(plLangID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SAMIStyleCount dispatches through IWMPClosedCaption2's vtable slot 18.
 func (self *IWMPClosedCaption2) Get_SAMIStyleCount(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSAMIStyleName dispatches through IWMPClosedCaption2's vtable slot 19.
 func (self *IWMPClosedCaption2) GetSAMIStyleName(nIndex int32, pbstrName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(nIndex), uintptr(unsafe.Pointer(pbstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPContentContainer: https://learn.microsoft.com/windows/win32/api/contentpartner/nn-contentpartner-iwmpcontentcontainer
@@ -1348,37 +1348,37 @@ var IID_IWMPContentContainer = win32.GUID{Data1: 0xad7f4d9c, Data2: 0x1a9f, Data
 // GetID dispatches through IWMPContentContainer's vtable slot 3.
 func (self *IWMPContentContainer) GetID(pContentID *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pContentID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPrice dispatches through IWMPContentContainer's vtable slot 4.
 func (self *IWMPContentContainer) GetPrice(pbstrPrice *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrPrice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetType dispatches through IWMPContentContainer's vtable slot 5.
 func (self *IWMPContentContainer) GetType(pbstrType *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetContentCount dispatches through IWMPContentContainer's vtable slot 6.
 func (self *IWMPContentContainer) GetContentCount(pcContent *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcContent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetContentPrice dispatches through IWMPContentContainer's vtable slot 7.
 func (self *IWMPContentContainer) GetContentPrice(idxContent uint32, pbstrPrice *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(idxContent), uintptr(unsafe.Pointer(pbstrPrice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetContentID dispatches through IWMPContentContainer's vtable slot 8.
 func (self *IWMPContentContainer) GetContentID(idxContent uint32, pContentID *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(idxContent), uintptr(unsafe.Pointer(pContentID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPContentContainerList: https://learn.microsoft.com/windows/win32/api/contentpartner/nn-contentpartner-iwmpcontentcontainerlist
@@ -1393,19 +1393,19 @@ var IID_IWMPContentContainerList = win32.GUID{Data1: 0xa9937f78, Data2: 0x0802, 
 // GetTransactionType dispatches through IWMPContentContainerList's vtable slot 3.
 func (self *IWMPContentContainerList) GetTransactionType(pwmptt *WMPTransactionType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwmptt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetContainerCount dispatches through IWMPContentContainerList's vtable slot 4.
 func (self *IWMPContentContainerList) GetContainerCount(pcContainer *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcContainer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetContainer dispatches through IWMPContentContainerList's vtable slot 5.
 func (self *IWMPContentContainerList) GetContainer(idxContainer uint32, ppContent **IWMPContentContainer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(idxContainer), uintptr(unsafe.Pointer(ppContent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPContentPartner: https://learn.microsoft.com/windows/win32/api/contentpartner/nn-contentpartner-iwmpcontentpartner
@@ -1420,25 +1420,25 @@ var IID_IWMPContentPartner = win32.GUID{Data1: 0x55455073, Data2: 0x41b5, Data3:
 // SetCallback dispatches through IWMPContentPartner's vtable slot 3.
 func (self *IWMPContentPartner) SetCallback(pCallback *IWMPContentPartnerCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallback)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Notify dispatches through IWMPContentPartner's vtable slot 4.
 func (self *IWMPContentPartner) Notify(type_ WMPPartnerNotification, pContext *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(unsafe.Pointer(pContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetItemInfo dispatches through IWMPContentPartner's vtable slot 5.
 func (self *IWMPContentPartner) GetItemInfo(bstrInfoName foundation.BSTR, pContext *systemvariant.VARIANT, pData *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrInfoName)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(pData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetContentPartnerInfo dispatches through IWMPContentPartner's vtable slot 6.
 func (self *IWMPContentPartner) GetContentPartnerInfo(bstrInfoName foundation.BSTR, pData *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrInfoName)), uintptr(unsafe.Pointer(pData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCommands dispatches through IWMPContentPartner's vtable slot 7.
@@ -1448,7 +1448,7 @@ func (self *IWMPContentPartner) GetCommands(location foundation.BSTR, pLocationC
 		_prgItemIDs = &prgItemIDs[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(location)), uintptr(unsafe.Pointer(pLocationContext)), uintptr(unsafe.Pointer(itemLocation)), uintptr(len(prgItemIDs)), uintptr(unsafe.Pointer(_prgItemIDs)), uintptr(unsafe.Pointer(pcItemIDs)), uintptr(unsafe.Pointer(pprgItems)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InvokeCommand dispatches through IWMPContentPartner's vtable slot 8.
@@ -1458,97 +1458,97 @@ func (self *IWMPContentPartner) InvokeCommand(dwCommandID uint32, location found
 		_rgItemIDs = &rgItemIDs[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwCommandID), uintptr(unsafe.Pointer(location)), uintptr(unsafe.Pointer(pLocationContext)), uintptr(unsafe.Pointer(itemLocation)), uintptr(len(rgItemIDs)), uintptr(unsafe.Pointer(_rgItemIDs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CanBuySilent dispatches through IWMPContentPartner's vtable slot 9.
 func (self *IWMPContentPartner) CanBuySilent(pInfo *IWMPContentContainerList, pbstrTotalPrice *foundation.BSTR, pSilentOK *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(pbstrTotalPrice)), uintptr(unsafe.Pointer(pSilentOK)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Buy dispatches through IWMPContentPartner's vtable slot 10.
 func (self *IWMPContentPartner) Buy(pInfo *IWMPContentContainerList, cookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(cookie))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStreamingURL dispatches through IWMPContentPartner's vtable slot 11.
 func (self *IWMPContentPartner) GetStreamingURL(st WMPStreamingType, pStreamContext *systemvariant.VARIANT, pbstrURL *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(st), uintptr(unsafe.Pointer(pStreamContext)), uintptr(unsafe.Pointer(pbstrURL)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Download dispatches through IWMPContentPartner's vtable slot 12.
 func (self *IWMPContentPartner) Download(pInfo *IWMPContentContainerList, cookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(cookie))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DownloadTrackComplete dispatches through IWMPContentPartner's vtable slot 13.
 func (self *IWMPContentPartner) DownloadTrackComplete(hrResult foundation.HRESULT, contentID uint32, downloadTrackParam foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(hrResult), uintptr(contentID), uintptr(unsafe.Pointer(downloadTrackParam)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RefreshLicense dispatches through IWMPContentPartner's vtable slot 14.
 func (self *IWMPContentPartner) RefreshLicense(dwCookie uint32, fLocal foundation.VARIANT_BOOL, bstrURL foundation.BSTR, type_ WMPStreamingType, contentID uint32, bstrRefreshReason foundation.BSTR, pReasonContext *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(dwCookie), uintptr(fLocal), uintptr(unsafe.Pointer(bstrURL)), uintptr(type_), uintptr(contentID), uintptr(unsafe.Pointer(bstrRefreshReason)), uintptr(unsafe.Pointer(pReasonContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCatalogURL dispatches through IWMPContentPartner's vtable slot 15.
 func (self *IWMPContentPartner) GetCatalogURL(dwCatalogVersion uint32, dwCatalogSchemaVersion uint32, catalogLCID uint32, pdwNewCatalogVersion *uint32, pbstrCatalogURL *foundation.BSTR, pExpirationDate *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwCatalogVersion), uintptr(dwCatalogSchemaVersion), uintptr(catalogLCID), uintptr(unsafe.Pointer(pdwNewCatalogVersion)), uintptr(unsafe.Pointer(pbstrCatalogURL)), uintptr(unsafe.Pointer(pExpirationDate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTemplate dispatches through IWMPContentPartner's vtable slot 16.
 func (self *IWMPContentPartner) GetTemplate(task WMPTaskType, location foundation.BSTR, pContext *systemvariant.VARIANT, clickLocation foundation.BSTR, pClickContext *systemvariant.VARIANT, bstrFilter foundation.BSTR, bstrViewParams foundation.BSTR, pbstrTemplateURL *foundation.BSTR, pTemplateSize *WMPTemplateSize) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(task), uintptr(unsafe.Pointer(location)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(clickLocation)), uintptr(unsafe.Pointer(pClickContext)), uintptr(unsafe.Pointer(bstrFilter)), uintptr(unsafe.Pointer(bstrViewParams)), uintptr(unsafe.Pointer(pbstrTemplateURL)), uintptr(unsafe.Pointer(pTemplateSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UpdateDevice dispatches through IWMPContentPartner's vtable slot 17.
 func (self *IWMPContentPartner) UpdateDevice(bstrDeviceName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDeviceName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetListContents dispatches through IWMPContentPartner's vtable slot 18.
 func (self *IWMPContentPartner) GetListContents(location foundation.BSTR, pContext *systemvariant.VARIANT, bstrListType foundation.BSTR, bstrParams foundation.BSTR, dwListCookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(location)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(bstrListType)), uintptr(unsafe.Pointer(bstrParams)), uintptr(dwListCookie))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Logout dispatches through IWMPContentPartner's vtable slot 21.
 func (self *IWMPContentPartner) Logout() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendMessage dispatches through IWMPContentPartner's vtable slot 22.
 func (self *IWMPContentPartner) SendMessage(bstrMsg foundation.BSTR, bstrParam foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrMsg)), uintptr(unsafe.Pointer(bstrParam)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StationEvent dispatches through IWMPContentPartner's vtable slot 23.
 func (self *IWMPContentPartner) StationEvent(bstrStationEventType foundation.BSTR, StationId uint32, PlaylistIndex uint32, TrackID uint32, TrackData foundation.BSTR, dwSecondsPlayed uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrStationEventType)), uintptr(StationId), uintptr(PlaylistIndex), uintptr(TrackID), uintptr(unsafe.Pointer(TrackData)), uintptr(dwSecondsPlayed))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CompareContainerListPrices dispatches through IWMPContentPartner's vtable slot 24.
 func (self *IWMPContentPartner) CompareContainerListPrices(pListBase *IWMPContentContainerList, pListCompare *IWMPContentContainerList, pResult *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pListBase)), uintptr(unsafe.Pointer(pListCompare)), uintptr(unsafe.Pointer(pResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // VerifyPermission dispatches through IWMPContentPartner's vtable slot 25.
 func (self *IWMPContentPartner) VerifyPermission(bstrPermission foundation.BSTR, pContext *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPermission)), uintptr(unsafe.Pointer(pContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPContentPartnerCallback: https://learn.microsoft.com/windows/win32/api/contentpartner/nn-contentpartner-iwmpcontentpartnercallback
@@ -1563,37 +1563,37 @@ var IID_IWMPContentPartnerCallback = win32.GUID{Data1: 0x9e8f7da2, Data2: 0x0695
 // Notify dispatches through IWMPContentPartnerCallback's vtable slot 3.
 func (self *IWMPContentPartnerCallback) Notify(type_ WMPCallbackNotification, pContext *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(unsafe.Pointer(pContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BuyComplete dispatches through IWMPContentPartnerCallback's vtable slot 4.
 func (self *IWMPContentPartnerCallback) BuyComplete(hrResult foundation.HRESULT, dwBuyCookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hrResult), uintptr(dwBuyCookie))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DownloadTrack dispatches through IWMPContentPartnerCallback's vtable slot 5.
 func (self *IWMPContentPartnerCallback) DownloadTrack(cookie uint32, bstrTrackURL foundation.BSTR, dwServiceTrackID uint32, bstrDownloadParams foundation.BSTR, hrDownload foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(cookie), uintptr(unsafe.Pointer(bstrTrackURL)), uintptr(dwServiceTrackID), uintptr(unsafe.Pointer(bstrDownloadParams)), uintptr(hrDownload))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCatalogVersion dispatches through IWMPContentPartnerCallback's vtable slot 6.
 func (self *IWMPContentPartnerCallback) GetCatalogVersion(pdwVersion *uint32, pdwSchemaVersion *uint32, plcid *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwVersion)), uintptr(unsafe.Pointer(pdwSchemaVersion)), uintptr(unsafe.Pointer(plcid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UpdateDeviceComplete dispatches through IWMPContentPartnerCallback's vtable slot 7.
 func (self *IWMPContentPartnerCallback) UpdateDeviceComplete(bstrDeviceName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDeviceName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ChangeView dispatches through IWMPContentPartnerCallback's vtable slot 8.
 func (self *IWMPContentPartnerCallback) ChangeView(bstrType foundation.BSTR, bstrID foundation.BSTR, bstrFilter foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrType)), uintptr(unsafe.Pointer(bstrID)), uintptr(unsafe.Pointer(bstrFilter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddListContents dispatches through IWMPContentPartnerCallback's vtable slot 9.
@@ -1603,43 +1603,43 @@ func (self *IWMPContentPartnerCallback) AddListContents(dwListCookie uint32, prg
 		_prgItems = &prgItems[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwListCookie), uintptr(len(prgItems)), uintptr(unsafe.Pointer(_prgItems)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ListContentsComplete dispatches through IWMPContentPartnerCallback's vtable slot 10.
 func (self *IWMPContentPartnerCallback) ListContentsComplete(dwListCookie uint32, hrSuccess foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(dwListCookie), uintptr(hrSuccess))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendMessageComplete dispatches through IWMPContentPartnerCallback's vtable slot 11.
 func (self *IWMPContentPartnerCallback) SendMessageComplete(bstrMsg foundation.BSTR, bstrParam foundation.BSTR, bstrResult foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrMsg)), uintptr(unsafe.Pointer(bstrParam)), uintptr(unsafe.Pointer(bstrResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetContentIDsInLibrary dispatches through IWMPContentPartnerCallback's vtable slot 12.
 func (self *IWMPContentPartnerCallback) GetContentIDsInLibrary(pcContentIDs *uint32, pprgIDs **uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcContentIDs)), uintptr(unsafe.Pointer(pprgIDs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RefreshLicenseComplete dispatches through IWMPContentPartnerCallback's vtable slot 13.
 func (self *IWMPContentPartnerCallback) RefreshLicenseComplete(dwCookie uint32, contentID uint32, hrRefresh foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwCookie), uintptr(contentID), uintptr(hrRefresh))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ShowPopup dispatches through IWMPContentPartnerCallback's vtable slot 14.
 func (self *IWMPContentPartnerCallback) ShowPopup(lIndex int32, bstrParameters foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(bstrParameters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // VerifyPermissionComplete dispatches through IWMPContentPartnerCallback's vtable slot 15.
 func (self *IWMPContentPartnerCallback) VerifyPermissionComplete(bstrPermission foundation.BSTR, pContext *systemvariant.VARIANT, hrPermission foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPermission)), uintptr(unsafe.Pointer(pContext)), uintptr(hrPermission))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPControls: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpcontrols
@@ -1654,91 +1654,91 @@ var IID_IWMPControls = win32.GUID{Data1: 0x74c09e02, Data2: 0xf828, Data3: 0x11d
 // Get_isAvailable dispatches through IWMPControls's vtable slot 7.
 func (self *IWMPControls) Get_isAvailable(bstrItem foundation.BSTR, pIsAvailable *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrItem)), uintptr(unsafe.Pointer(pIsAvailable)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Play dispatches through IWMPControls's vtable slot 8.
 func (self *IWMPControls) Play() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Stop dispatches through IWMPControls's vtable slot 9.
 func (self *IWMPControls) Stop() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Pause dispatches through IWMPControls's vtable slot 10.
 func (self *IWMPControls) Pause() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FastForward dispatches through IWMPControls's vtable slot 11.
 func (self *IWMPControls) FastForward() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FastReverse dispatches through IWMPControls's vtable slot 12.
 func (self *IWMPControls) FastReverse() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_currentPosition dispatches through IWMPControls's vtable slot 13.
 func (self *IWMPControls) Get_currentPosition(pdCurrentPosition *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdCurrentPosition)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_currentPositionString dispatches through IWMPControls's vtable slot 15.
 func (self *IWMPControls) Get_currentPositionString(pbstrCurrentPosition *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrCurrentPosition)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Next dispatches through IWMPControls's vtable slot 16.
 func (self *IWMPControls) Next() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Previous dispatches through IWMPControls's vtable slot 17.
 func (self *IWMPControls) Previous() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_currentItem dispatches through IWMPControls's vtable slot 18.
 func (self *IWMPControls) Get_currentItem(ppIWMPMedia **IWMPMedia) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIWMPMedia)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_currentItem dispatches through IWMPControls's vtable slot 19.
 func (self *IWMPControls) Put_currentItem(pIWMPMedia *IWMPMedia) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIWMPMedia)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_currentMarker dispatches through IWMPControls's vtable slot 20.
 func (self *IWMPControls) Get_currentMarker(plMarker *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMarker)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_currentMarker dispatches through IWMPControls's vtable slot 21.
 func (self *IWMPControls) Put_currentMarker(lMarker int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(lMarker))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PlayItem dispatches through IWMPControls's vtable slot 22.
 func (self *IWMPControls) PlayItem(pIWMPMedia *IWMPMedia) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIWMPMedia)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPControls2: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpcontrols2
@@ -1753,7 +1753,7 @@ var IID_IWMPControls2 = win32.GUID{Data1: 0x6f030d25, Data2: 0x0890, Data3: 0x48
 // Step dispatches through IWMPControls2's vtable slot 23.
 func (self *IWMPControls2) Step(lStep int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(lStep))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPControls3: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpcontrols3
@@ -1768,61 +1768,61 @@ var IID_IWMPControls3 = win32.GUID{Data1: 0xa1d1110e, Data2: 0xd545, Data3: 0x47
 // Get_audioLanguageCount dispatches through IWMPControls3's vtable slot 24.
 func (self *IWMPControls3) Get_audioLanguageCount(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAudioLanguageID dispatches through IWMPControls3's vtable slot 25.
 func (self *IWMPControls3) GetAudioLanguageID(lIndex int32, plLangID *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(plLangID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAudioLanguageDescription dispatches through IWMPControls3's vtable slot 26.
 func (self *IWMPControls3) GetAudioLanguageDescription(lIndex int32, pbstrLangDesc *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(pbstrLangDesc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_currentAudioLanguage dispatches through IWMPControls3's vtable slot 27.
 func (self *IWMPControls3) Get_currentAudioLanguage(plLangID *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plLangID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_currentAudioLanguage dispatches through IWMPControls3's vtable slot 28.
 func (self *IWMPControls3) Put_currentAudioLanguage(lLangID int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(lLangID))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_currentAudioLanguageIndex dispatches through IWMPControls3's vtable slot 29.
 func (self *IWMPControls3) Get_currentAudioLanguageIndex(plIndex *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plIndex)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_currentAudioLanguageIndex dispatches through IWMPControls3's vtable slot 30.
 func (self *IWMPControls3) Put_currentAudioLanguageIndex(lIndex int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(lIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLanguageName dispatches through IWMPControls3's vtable slot 31.
 func (self *IWMPControls3) GetLanguageName(lLangID int32, pbstrLangName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(lLangID), uintptr(unsafe.Pointer(pbstrLangName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_currentPositionTimecode dispatches through IWMPControls3's vtable slot 32.
 func (self *IWMPControls3) Get_currentPositionTimecode(bstrTimecode *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTimecode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_currentPositionTimecode dispatches through IWMPControls3's vtable slot 33.
 func (self *IWMPControls3) Put_currentPositionTimecode(bstrTimecode foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTimecode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPConvert: https://learn.microsoft.com/windows/win32/api/wmpservices/nn-wmpservices-iwmpconvert
@@ -1837,13 +1837,13 @@ var IID_IWMPConvert = win32.GUID{Data1: 0xd683162f, Data2: 0x57d4, Data3: 0x4108
 // ConvertFile dispatches through IWMPConvert's vtable slot 3.
 func (self *IWMPConvert) ConvertFile(bstrInputFile foundation.BSTR, bstrDestinationFolder foundation.BSTR, pbstrOutputFile *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrInputFile)), uintptr(unsafe.Pointer(bstrDestinationFolder)), uintptr(unsafe.Pointer(pbstrOutputFile)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetErrorURL dispatches through IWMPConvert's vtable slot 4.
 func (self *IWMPConvert) GetErrorURL(pbstrURL *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrURL)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPCore: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpcore
@@ -1858,127 +1858,127 @@ var IID_IWMPCore = win32.GUID{Data1: 0xd84cca99, Data2: 0xcce2, Data3: 0x11d2, D
 // Close dispatches through IWMPCore's vtable slot 7.
 func (self *IWMPCore) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_URL dispatches through IWMPCore's vtable slot 8.
 func (self *IWMPCore) Get_URL(pbstrURL *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrURL)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_URL dispatches through IWMPCore's vtable slot 9.
 func (self *IWMPCore) Put_URL(bstrURL foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrURL)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_openState dispatches through IWMPCore's vtable slot 10.
 func (self *IWMPCore) Get_openState(pwmpos *WMPOpenState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwmpos)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_playState dispatches through IWMPCore's vtable slot 11.
 func (self *IWMPCore) Get_playState(pwmpps *WMPPlayState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwmpps)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_controls dispatches through IWMPCore's vtable slot 12.
 func (self *IWMPCore) Get_controls(ppControl **IWMPControls) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppControl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_settings dispatches through IWMPCore's vtable slot 13.
 func (self *IWMPCore) Get_settings(ppSettings **IWMPSettings) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSettings)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_currentMedia dispatches through IWMPCore's vtable slot 14.
 func (self *IWMPCore) Get_currentMedia(ppMedia **IWMPMedia) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppMedia)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_currentMedia dispatches through IWMPCore's vtable slot 15.
 func (self *IWMPCore) Put_currentMedia(pMedia *IWMPMedia) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMedia)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_mediaCollection dispatches through IWMPCore's vtable slot 16.
 func (self *IWMPCore) Get_mediaCollection(ppMediaCollection **IWMPMediaCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppMediaCollection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_playlistCollection dispatches through IWMPCore's vtable slot 17.
 func (self *IWMPCore) Get_playlistCollection(ppPlaylistCollection **IWMPPlaylistCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPlaylistCollection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_versionInfo dispatches through IWMPCore's vtable slot 18.
 func (self *IWMPCore) Get_versionInfo(pbstrVersionInfo *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrVersionInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LaunchURL dispatches through IWMPCore's vtable slot 19.
 func (self *IWMPCore) LaunchURL(bstrURL foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrURL)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_network dispatches through IWMPCore's vtable slot 20.
 func (self *IWMPCore) Get_network(ppQNI **IWMPNetwork) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppQNI)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_currentPlaylist dispatches through IWMPCore's vtable slot 21.
 func (self *IWMPCore) Get_currentPlaylist(ppPL **IWMPPlaylist) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPL)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_currentPlaylist dispatches through IWMPCore's vtable slot 22.
 func (self *IWMPCore) Put_currentPlaylist(pPL *IWMPPlaylist) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPL)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_cdromCollection dispatches through IWMPCore's vtable slot 23.
 func (self *IWMPCore) Get_cdromCollection(ppCdromCollection **IWMPCdromCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCdromCollection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_closedCaption dispatches through IWMPCore's vtable slot 24.
 func (self *IWMPCore) Get_closedCaption(ppClosedCaption **IWMPClosedCaption) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppClosedCaption)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_isOnline dispatches through IWMPCore's vtable slot 25.
 func (self *IWMPCore) Get_isOnline(pfOnline *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfOnline)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_error dispatches through IWMPCore's vtable slot 26.
 func (self *IWMPCore) Get_error(ppError **IWMPError) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppError)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_status dispatches through IWMPCore's vtable slot 27.
 func (self *IWMPCore) Get_status(pbstrStatus *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPCore2: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpcore2
@@ -1993,7 +1993,7 @@ var IID_IWMPCore2 = win32.GUID{Data1: 0xbc17e5b7, Data2: 0x7561, Data3: 0x4c18, 
 // Get_dvd dispatches through IWMPCore2's vtable slot 28.
 func (self *IWMPCore2) Get_dvd(ppDVD **IWMPDVD) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDVD)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPCore3: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpcore3
@@ -2008,13 +2008,13 @@ var IID_IWMPCore3 = win32.GUID{Data1: 0x7587c667, Data2: 0x628f, Data3: 0x499f, 
 // NewPlaylist dispatches through IWMPCore3's vtable slot 29.
 func (self *IWMPCore3) NewPlaylist(bstrName foundation.BSTR, bstrURL foundation.BSTR, ppPlaylist **IWMPPlaylist) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(bstrURL)), uintptr(unsafe.Pointer(ppPlaylist)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NewMedia dispatches through IWMPCore3's vtable slot 30.
 func (self *IWMPCore3) NewMedia(bstrURL foundation.BSTR, ppMedia **IWMPMedia) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrURL)), uintptr(unsafe.Pointer(ppMedia)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPDVD: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpdvd
@@ -2029,37 +2029,37 @@ var IID_IWMPDVD = win32.GUID{Data1: 0x8da61686, Data2: 0x4668, Data3: 0x4a5c, Da
 // Get_isAvailable dispatches through IWMPDVD's vtable slot 7.
 func (self *IWMPDVD) Get_isAvailable(bstrItem foundation.BSTR, pIsAvailable *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrItem)), uintptr(unsafe.Pointer(pIsAvailable)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_domain dispatches through IWMPDVD's vtable slot 8.
 func (self *IWMPDVD) Get_domain(strDomain *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strDomain)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TopMenu dispatches through IWMPDVD's vtable slot 9.
 func (self *IWMPDVD) TopMenu() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TitleMenu dispatches through IWMPDVD's vtable slot 10.
 func (self *IWMPDVD) TitleMenu() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Back dispatches through IWMPDVD's vtable slot 11.
 func (self *IWMPDVD) Back() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Resume dispatches through IWMPDVD's vtable slot 12.
 func (self *IWMPDVD) Resume() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 0a319c7f-85f9-436c-b88e-82fd88000e1c
@@ -2073,37 +2073,37 @@ var IID_IWMPDownloadCollection = win32.GUID{Data1: 0x0a319c7f, Data2: 0x85f9, Da
 // Get_id dispatches through IWMPDownloadCollection's vtable slot 7.
 func (self *IWMPDownloadCollection) Get_id(plId *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_count dispatches through IWMPDownloadCollection's vtable slot 8.
 func (self *IWMPDownloadCollection) Get_count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Item dispatches through IWMPDownloadCollection's vtable slot 9.
 func (self *IWMPDownloadCollection) Item(lItem int32, ppDownload **IWMPDownloadItem2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(lItem), uintptr(unsafe.Pointer(ppDownload)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StartDownload dispatches through IWMPDownloadCollection's vtable slot 10.
 func (self *IWMPDownloadCollection) StartDownload(bstrSourceURL foundation.BSTR, bstrType foundation.BSTR, ppDownload **IWMPDownloadItem2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrSourceURL)), uintptr(unsafe.Pointer(bstrType)), uintptr(unsafe.Pointer(ppDownload)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveItem dispatches through IWMPDownloadCollection's vtable slot 11.
 func (self *IWMPDownloadCollection) RemoveItem(lItem int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(lItem))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through IWMPDownloadCollection's vtable slot 12.
 func (self *IWMPDownloadCollection) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: c9470e8e-3f6b-46a9-a0a9-452815c34297
@@ -2117,49 +2117,49 @@ var IID_IWMPDownloadItem = win32.GUID{Data1: 0xc9470e8e, Data2: 0x3f6b, Data3: 0
 // Get_sourceURL dispatches through IWMPDownloadItem's vtable slot 7.
 func (self *IWMPDownloadItem) Get_sourceURL(pbstrURL *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrURL)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_size dispatches through IWMPDownloadItem's vtable slot 8.
 func (self *IWMPDownloadItem) Get_size(plSize *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_type dispatches through IWMPDownloadItem's vtable slot 9.
 func (self *IWMPDownloadItem) Get_type(pbstrType *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_progress dispatches through IWMPDownloadItem's vtable slot 10.
 func (self *IWMPDownloadItem) Get_progress(plProgress *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plProgress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_downloadState dispatches through IWMPDownloadItem's vtable slot 11.
 func (self *IWMPDownloadItem) Get_downloadState(pwmpsdls *WMPSubscriptionDownloadState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwmpsdls)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Pause dispatches through IWMPDownloadItem's vtable slot 12.
 func (self *IWMPDownloadItem) Pause() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Resume dispatches through IWMPDownloadItem's vtable slot 13.
 func (self *IWMPDownloadItem) Resume() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Cancel dispatches through IWMPDownloadItem's vtable slot 14.
 func (self *IWMPDownloadItem) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 9fbb3336-6da3-479d-b8ff-67d46e20a987
@@ -2173,7 +2173,7 @@ var IID_IWMPDownloadItem2 = win32.GUID{Data1: 0x9fbb3336, Data2: 0x6da3, Data3: 
 // GetItemInfo dispatches through IWMPDownloadItem2's vtable slot 15.
 func (self *IWMPDownloadItem2) GetItemInfo(bstrItemName foundation.BSTR, pbstrVal *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrItemName)), uintptr(unsafe.Pointer(pbstrVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: e15e9ad1-8f20-4cc4-9ec7-1a328ca86a0d
@@ -2187,13 +2187,13 @@ var IID_IWMPDownloadManager = win32.GUID{Data1: 0xe15e9ad1, Data2: 0x8f20, Data3
 // GetDownloadCollection dispatches through IWMPDownloadManager's vtable slot 7.
 func (self *IWMPDownloadManager) GetDownloadCollection(lCollectionId int32, ppCollection **IWMPDownloadCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(lCollectionId), uintptr(unsafe.Pointer(ppCollection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateDownloadCollection dispatches through IWMPDownloadManager's vtable slot 8.
 func (self *IWMPDownloadManager) CreateDownloadCollection(ppCollection **IWMPDownloadCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCollection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPEffects: https://learn.microsoft.com/windows/win32/api/effects/nn-effects-iwmpeffects
@@ -2208,68 +2208,68 @@ var IID_IWMPEffects = win32.GUID{Data1: 0xd3984c13, Data2: 0xc3cb, Data3: 0x48e2
 // Render dispatches through IWMPEffects's vtable slot 3.
 func (self *IWMPEffects) Render(pLevels *TimedLevel, hdc graphicsgdi.HDC, prc *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLevels)), uintptr(hdc), uintptr(unsafe.Pointer(prc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MediaInfo dispatches through IWMPEffects's vtable slot 4.
 func (self *IWMPEffects) MediaInfo(lChannelCount int32, lSampleRate int32, bstrTitle foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(lChannelCount), uintptr(lSampleRate), uintptr(unsafe.Pointer(bstrTitle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCapabilities dispatches through IWMPEffects's vtable slot 5.
 func (self *IWMPEffects) GetCapabilities(pdwCapabilities *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCapabilities)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTitle dispatches through IWMPEffects's vtable slot 6.
 func (self *IWMPEffects) GetTitle(bstrTitle *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTitle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPresetTitle dispatches through IWMPEffects's vtable slot 7.
 func (self *IWMPEffects) GetPresetTitle(nPreset int32, bstrPresetTitle *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(nPreset), uintptr(unsafe.Pointer(bstrPresetTitle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPresetCount dispatches through IWMPEffects's vtable slot 8.
 func (self *IWMPEffects) GetPresetCount(pnPresetCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnPresetCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCurrentPreset dispatches through IWMPEffects's vtable slot 9.
 func (self *IWMPEffects) SetCurrentPreset(nPreset int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(nPreset))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentPreset dispatches through IWMPEffects's vtable slot 10.
 func (self *IWMPEffects) GetCurrentPreset(pnPreset *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnPreset)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DisplayPropertyPage dispatches through IWMPEffects's vtable slot 11.
 func (self *IWMPEffects) DisplayPropertyPage(hwndOwner foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(hwndOwner))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GoFullscreen dispatches through IWMPEffects's vtable slot 12.
 func (self *IWMPEffects) GoFullscreen(fFullScreen bool) error {
 	_fFullScreen := win32.Bool32(fFullScreen)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(_fFullScreen))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RenderFullScreen dispatches through IWMPEffects's vtable slot 13.
 func (self *IWMPEffects) RenderFullScreen(pLevels *TimedLevel) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLevels)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPEffects2: https://learn.microsoft.com/windows/win32/api/effects/nn-effects-iwmpeffects2
@@ -2284,38 +2284,38 @@ var IID_IWMPEffects2 = win32.GUID{Data1: 0x695386ec, Data2: 0xaa3c, Data3: 0x461
 // SetCore dispatches through IWMPEffects2's vtable slot 14.
 func (self *IWMPEffects2) SetCore(pPlayer *IWMPCore) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPlayer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Create dispatches through IWMPEffects2's vtable slot 15.
 func (self *IWMPEffects2) Create(hwndParent foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(hwndParent))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Destroy dispatches through IWMPEffects2's vtable slot 16.
 func (self *IWMPEffects2) Destroy() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NotifyNewMedia dispatches through IWMPEffects2's vtable slot 17.
 func (self *IWMPEffects2) NotifyNewMedia(pMedia *IWMPMedia) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMedia)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnWindowMessage dispatches through IWMPEffects2's vtable slot 18.
 func (self *IWMPEffects2) OnWindowMessage(msg uint32, WParam foundation.WPARAM, LParam foundation.LPARAM, plResultParam *foundation.LRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(msg), uintptr(WParam), uintptr(LParam), uintptr(unsafe.Pointer(plResultParam)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RenderWindowed dispatches through IWMPEffects2's vtable slot 19.
 func (self *IWMPEffects2) RenderWindowed(pData *TimedLevel, fRequiredRender bool) error {
 	_fRequiredRender := win32.Bool32(fRequiredRender)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(_fRequiredRender))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPError: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmperror
@@ -2330,25 +2330,25 @@ var IID_IWMPError = win32.GUID{Data1: 0xa12dcf7d, Data2: 0x14ab, Data3: 0x4c1b, 
 // ClearErrorQueue dispatches through IWMPError's vtable slot 7.
 func (self *IWMPError) ClearErrorQueue() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_errorCount dispatches through IWMPError's vtable slot 8.
 func (self *IWMPError) Get_errorCount(plNumErrors *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plNumErrors)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_item dispatches through IWMPError's vtable slot 9.
 func (self *IWMPError) Get_item(dwIndex int32, ppErrorItem **IWMPErrorItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(ppErrorItem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WebHelp dispatches through IWMPError's vtable slot 10.
 func (self *IWMPError) WebHelp() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPErrorItem: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmperroritem
@@ -2363,31 +2363,31 @@ var IID_IWMPErrorItem = win32.GUID{Data1: 0x3614c646, Data2: 0x3b3b, Data3: 0x4d
 // Get_errorCode dispatches through IWMPErrorItem's vtable slot 7.
 func (self *IWMPErrorItem) Get_errorCode(phr *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_errorDescription dispatches through IWMPErrorItem's vtable slot 8.
 func (self *IWMPErrorItem) Get_errorDescription(pbstrDescription *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_errorContext dispatches through IWMPErrorItem's vtable slot 9.
 func (self *IWMPErrorItem) Get_errorContext(pvarContext *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_remedy dispatches through IWMPErrorItem's vtable slot 10.
 func (self *IWMPErrorItem) Get_remedy(plRemedy *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plRemedy)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_customUrl dispatches through IWMPErrorItem's vtable slot 11.
 func (self *IWMPErrorItem) Get_customUrl(pbstrCustomUrl *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrCustomUrl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPErrorItem2: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmperroritem2
@@ -2402,7 +2402,7 @@ var IID_IWMPErrorItem2 = win32.GUID{Data1: 0xf75ccec0, Data2: 0xc67c, Data3: 0x4
 // Get_condition dispatches through IWMPErrorItem2's vtable slot 12.
 func (self *IWMPErrorItem2) Get_condition(plCondition *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCondition)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPEvents: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpevents
@@ -2763,67 +2763,67 @@ var IID_IWMPFolderMonitorServices = win32.GUID{Data1: 0x788c8743, Data2: 0xe57f,
 // Get_count dispatches through IWMPFolderMonitorServices's vtable slot 3.
 func (self *IWMPFolderMonitorServices) Get_count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Item dispatches through IWMPFolderMonitorServices's vtable slot 4.
 func (self *IWMPFolderMonitorServices) Item(lIndex int32, pbstrFolder *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(pbstrFolder)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through IWMPFolderMonitorServices's vtable slot 5.
 func (self *IWMPFolderMonitorServices) Add(bstrFolder foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrFolder)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through IWMPFolderMonitorServices's vtable slot 6.
 func (self *IWMPFolderMonitorServices) Remove(lIndex int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(lIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_scanState dispatches through IWMPFolderMonitorServices's vtable slot 7.
 func (self *IWMPFolderMonitorServices) Get_scanState(pwmpfss *WMPFolderScanState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwmpfss)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_currentFolder dispatches through IWMPFolderMonitorServices's vtable slot 8.
 func (self *IWMPFolderMonitorServices) Get_currentFolder(pbstrFolder *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrFolder)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_scannedFilesCount dispatches through IWMPFolderMonitorServices's vtable slot 9.
 func (self *IWMPFolderMonitorServices) Get_scannedFilesCount(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_addedFilesCount dispatches through IWMPFolderMonitorServices's vtable slot 10.
 func (self *IWMPFolderMonitorServices) Get_addedFilesCount(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_updateProgress dispatches through IWMPFolderMonitorServices's vtable slot 11.
 func (self *IWMPFolderMonitorServices) Get_updateProgress(plProgress *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plProgress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StartScan dispatches through IWMPFolderMonitorServices's vtable slot 12.
 func (self *IWMPFolderMonitorServices) StartScan() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StopScan dispatches through IWMPFolderMonitorServices's vtable slot 13.
 func (self *IWMPFolderMonitorServices) StopScan() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPGraphCreation: https://learn.microsoft.com/windows/win32/api/wmpservices/nn-wmpservices-iwmpgraphcreation
@@ -2838,19 +2838,19 @@ var IID_IWMPGraphCreation = win32.GUID{Data1: 0xbfb377e5, Data2: 0xc594, Data3: 
 // GraphCreationPreRender dispatches through IWMPGraphCreation's vtable slot 3.
 func (self *IWMPGraphCreation) GraphCreationPreRender(pFilterGraph *systemcom.IUnknown, pReserved *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFilterGraph)), uintptr(unsafe.Pointer(pReserved)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GraphCreationPostRender dispatches through IWMPGraphCreation's vtable slot 4.
 func (self *IWMPGraphCreation) GraphCreationPostRender(pFilterGraph *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFilterGraph)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetGraphCreationFlags dispatches through IWMPGraphCreation's vtable slot 5.
 func (self *IWMPGraphCreation) GetGraphCreationFlags(pdwFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPLibrary: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmplibrary
@@ -2865,25 +2865,25 @@ var IID_IWMPLibrary = win32.GUID{Data1: 0x3df47861, Data2: 0x7df1, Data3: 0x4c1f
 // Get_name dispatches through IWMPLibrary's vtable slot 3.
 func (self *IWMPLibrary) Get_name(pbstrName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_type dispatches through IWMPLibrary's vtable slot 4.
 func (self *IWMPLibrary) Get_type(pwmplt *WMPLibraryType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwmplt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_mediaCollection dispatches through IWMPLibrary's vtable slot 5.
 func (self *IWMPLibrary) Get_mediaCollection(ppIWMPMediaCollection **IWMPMediaCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIWMPMediaCollection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsIdentical dispatches through IWMPLibrary's vtable slot 6.
 func (self *IWMPLibrary) IsIdentical(pIWMPLibrary *IWMPLibrary, pvbool *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIWMPLibrary)), uintptr(unsafe.Pointer(pvbool)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPLibrary2: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmplibrary2
@@ -2898,7 +2898,7 @@ var IID_IWMPLibrary2 = win32.GUID{Data1: 0xdd578a4e, Data2: 0x79b1, Data3: 0x426
 // GetItemInfo dispatches through IWMPLibrary2's vtable slot 7.
 func (self *IWMPLibrary2) GetItemInfo(bstrItemName foundation.BSTR, pbstrVal *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrItemName)), uintptr(unsafe.Pointer(pbstrVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPLibraryServices: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmplibraryservices
@@ -2913,13 +2913,13 @@ var IID_IWMPLibraryServices = win32.GUID{Data1: 0x39c2f8d5, Data2: 0x1cf2, Data3
 // GetCountByType dispatches through IWMPLibraryServices's vtable slot 3.
 func (self *IWMPLibraryServices) GetCountByType(wmplt WMPLibraryType, plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(wmplt), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLibraryByType dispatches through IWMPLibraryServices's vtable slot 4.
 func (self *IWMPLibraryServices) GetLibraryByType(wmplt WMPLibraryType, lIndex int32, ppIWMPLibrary **IWMPLibrary) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(wmplt), uintptr(lIndex), uintptr(unsafe.Pointer(ppIWMPLibrary)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPLibrarySharingServices: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmplibrarysharingservices
@@ -2934,19 +2934,19 @@ var IID_IWMPLibrarySharingServices = win32.GUID{Data1: 0x82cba86b, Data2: 0x9f04
 // IsLibraryShared dispatches through IWMPLibrarySharingServices's vtable slot 3.
 func (self *IWMPLibrarySharingServices) IsLibraryShared(pvbShared *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvbShared)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsLibrarySharingEnabled dispatches through IWMPLibrarySharingServices's vtable slot 4.
 func (self *IWMPLibrarySharingServices) IsLibrarySharingEnabled(pvbEnabled *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvbEnabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ShowLibrarySharing dispatches through IWMPLibrarySharingServices's vtable slot 5.
 func (self *IWMPLibrarySharingServices) ShowLibrarySharing() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPMedia: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpmedia
@@ -2961,109 +2961,109 @@ var IID_IWMPMedia = win32.GUID{Data1: 0x94d55e95, Data2: 0x3fac, Data3: 0x11d3, 
 // Get_isIdentical dispatches through IWMPMedia's vtable slot 7.
 func (self *IWMPMedia) Get_isIdentical(pIWMPMedia *IWMPMedia, pvbool *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIWMPMedia)), uintptr(unsafe.Pointer(pvbool)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_sourceURL dispatches through IWMPMedia's vtable slot 8.
 func (self *IWMPMedia) Get_sourceURL(pbstrSourceURL *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrSourceURL)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_name dispatches through IWMPMedia's vtable slot 9.
 func (self *IWMPMedia) Get_name(pbstrName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_name dispatches through IWMPMedia's vtable slot 10.
 func (self *IWMPMedia) Put_name(bstrName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_imageSourceWidth dispatches through IWMPMedia's vtable slot 11.
 func (self *IWMPMedia) Get_imageSourceWidth(pWidth *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWidth)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_imageSourceHeight dispatches through IWMPMedia's vtable slot 12.
 func (self *IWMPMedia) Get_imageSourceHeight(pHeight *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHeight)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_markerCount dispatches through IWMPMedia's vtable slot 13.
 func (self *IWMPMedia) Get_markerCount(pMarkerCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMarkerCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMarkerTime dispatches through IWMPMedia's vtable slot 14.
 func (self *IWMPMedia) GetMarkerTime(MarkerNum int32, pMarkerTime *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(MarkerNum), uintptr(unsafe.Pointer(pMarkerTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMarkerName dispatches through IWMPMedia's vtable slot 15.
 func (self *IWMPMedia) GetMarkerName(MarkerNum int32, pbstrMarkerName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(MarkerNum), uintptr(unsafe.Pointer(pbstrMarkerName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_duration dispatches through IWMPMedia's vtable slot 16.
 func (self *IWMPMedia) Get_duration(pDuration *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDuration)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_durationString dispatches through IWMPMedia's vtable slot 17.
 func (self *IWMPMedia) Get_durationString(pbstrDuration *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDuration)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_attributeCount dispatches through IWMPMedia's vtable slot 18.
 func (self *IWMPMedia) Get_attributeCount(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAttributeName dispatches through IWMPMedia's vtable slot 19.
 func (self *IWMPMedia) GetAttributeName(lIndex int32, pbstrItemName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(pbstrItemName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetItemInfo dispatches through IWMPMedia's vtable slot 20.
 func (self *IWMPMedia) GetItemInfo(bstrItemName foundation.BSTR, pbstrVal *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrItemName)), uintptr(unsafe.Pointer(pbstrVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetItemInfo dispatches through IWMPMedia's vtable slot 21.
 func (self *IWMPMedia) SetItemInfo(bstrItemName foundation.BSTR, bstrVal foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrItemName)), uintptr(unsafe.Pointer(bstrVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetItemInfoByAtom dispatches through IWMPMedia's vtable slot 22.
 func (self *IWMPMedia) GetItemInfoByAtom(lAtom int32, pbstrVal *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(lAtom), uintptr(unsafe.Pointer(pbstrVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsMemberOf dispatches through IWMPMedia's vtable slot 23.
 func (self *IWMPMedia) IsMemberOf(pPlaylist *IWMPPlaylist, pvarfIsMemberOf *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPlaylist)), uintptr(unsafe.Pointer(pvarfIsMemberOf)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsReadOnlyItem dispatches through IWMPMedia's vtable slot 24.
 func (self *IWMPMedia) IsReadOnlyItem(bstrItemName foundation.BSTR, pvarfIsReadOnly *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrItemName)), uintptr(unsafe.Pointer(pvarfIsReadOnly)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPMedia2: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpmedia2
@@ -3078,7 +3078,7 @@ var IID_IWMPMedia2 = win32.GUID{Data1: 0xab7c88bb, Data2: 0x143e, Data3: 0x4ea4,
 // Get_error dispatches through IWMPMedia2's vtable slot 25.
 func (self *IWMPMedia2) Get_error(ppIWMPErrorItem **IWMPErrorItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIWMPErrorItem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPMedia3: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpmedia3
@@ -3093,13 +3093,13 @@ var IID_IWMPMedia3 = win32.GUID{Data1: 0xf118efc7, Data2: 0xf03a, Data3: 0x4fb4,
 // GetAttributeCountByType dispatches through IWMPMedia3's vtable slot 26.
 func (self *IWMPMedia3) GetAttributeCountByType(bstrType foundation.BSTR, bstrLanguage foundation.BSTR, plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrType)), uintptr(unsafe.Pointer(bstrLanguage)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetItemInfoByType dispatches through IWMPMedia3's vtable slot 27.
 func (self *IWMPMedia3) GetItemInfoByType(bstrType foundation.BSTR, bstrLanguage foundation.BSTR, lIndex int32, pvarValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrType)), uintptr(unsafe.Pointer(bstrLanguage)), uintptr(lIndex), uintptr(unsafe.Pointer(pvarValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPMediaCollection: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpmediacollection
@@ -3114,73 +3114,73 @@ var IID_IWMPMediaCollection = win32.GUID{Data1: 0x8363bc22, Data2: 0xb4b4, Data3
 // Add dispatches through IWMPMediaCollection's vtable slot 7.
 func (self *IWMPMediaCollection) Add(bstrURL foundation.BSTR, ppItem **IWMPMedia) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrURL)), uintptr(unsafe.Pointer(ppItem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAll dispatches through IWMPMediaCollection's vtable slot 8.
 func (self *IWMPMediaCollection) GetAll(ppMediaItems **IWMPPlaylist) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppMediaItems)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetByName dispatches through IWMPMediaCollection's vtable slot 9.
 func (self *IWMPMediaCollection) GetByName(bstrName foundation.BSTR, ppMediaItems **IWMPPlaylist) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(ppMediaItems)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetByGenre dispatches through IWMPMediaCollection's vtable slot 10.
 func (self *IWMPMediaCollection) GetByGenre(bstrGenre foundation.BSTR, ppMediaItems **IWMPPlaylist) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGenre)), uintptr(unsafe.Pointer(ppMediaItems)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetByAuthor dispatches through IWMPMediaCollection's vtable slot 11.
 func (self *IWMPMediaCollection) GetByAuthor(bstrAuthor foundation.BSTR, ppMediaItems **IWMPPlaylist) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAuthor)), uintptr(unsafe.Pointer(ppMediaItems)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetByAlbum dispatches through IWMPMediaCollection's vtable slot 12.
 func (self *IWMPMediaCollection) GetByAlbum(bstrAlbum foundation.BSTR, ppMediaItems **IWMPPlaylist) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAlbum)), uintptr(unsafe.Pointer(ppMediaItems)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetByAttribute dispatches through IWMPMediaCollection's vtable slot 13.
 func (self *IWMPMediaCollection) GetByAttribute(bstrAttribute foundation.BSTR, bstrValue foundation.BSTR, ppMediaItems **IWMPPlaylist) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAttribute)), uintptr(unsafe.Pointer(bstrValue)), uintptr(unsafe.Pointer(ppMediaItems)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through IWMPMediaCollection's vtable slot 14.
 func (self *IWMPMediaCollection) Remove(pItem *IWMPMedia, varfDeleteFile foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pItem)), uintptr(varfDeleteFile))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAttributeStringCollection dispatches through IWMPMediaCollection's vtable slot 15.
 func (self *IWMPMediaCollection) GetAttributeStringCollection(bstrAttribute foundation.BSTR, bstrMediaType foundation.BSTR, ppStringCollection **IWMPStringCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAttribute)), uintptr(unsafe.Pointer(bstrMediaType)), uintptr(unsafe.Pointer(ppStringCollection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMediaAtom dispatches through IWMPMediaCollection's vtable slot 16.
 func (self *IWMPMediaCollection) GetMediaAtom(bstrItemName foundation.BSTR, plAtom *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrItemName)), uintptr(unsafe.Pointer(plAtom)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDeleted dispatches through IWMPMediaCollection's vtable slot 17.
 func (self *IWMPMediaCollection) SetDeleted(pItem *IWMPMedia, varfIsDeleted foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pItem)), uintptr(varfIsDeleted))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsDeleted dispatches through IWMPMediaCollection's vtable slot 18.
 func (self *IWMPMediaCollection) IsDeleted(pItem *IWMPMedia, pvarfIsDeleted *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pItem)), uintptr(unsafe.Pointer(pvarfIsDeleted)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPMediaCollection2: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpmediacollection2
@@ -3195,25 +3195,25 @@ var IID_IWMPMediaCollection2 = win32.GUID{Data1: 0x8ba957f5, Data2: 0xfd8c, Data
 // CreateQuery dispatches through IWMPMediaCollection2's vtable slot 19.
 func (self *IWMPMediaCollection2) CreateQuery(ppQuery **IWMPQuery) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppQuery)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPlaylistByQuery dispatches through IWMPMediaCollection2's vtable slot 20.
 func (self *IWMPMediaCollection2) GetPlaylistByQuery(pQuery *IWMPQuery, bstrMediaType foundation.BSTR, bstrSortAttribute foundation.BSTR, fSortAscending foundation.VARIANT_BOOL, ppPlaylist **IWMPPlaylist) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pQuery)), uintptr(unsafe.Pointer(bstrMediaType)), uintptr(unsafe.Pointer(bstrSortAttribute)), uintptr(fSortAscending), uintptr(unsafe.Pointer(ppPlaylist)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStringCollectionByQuery dispatches through IWMPMediaCollection2's vtable slot 21.
 func (self *IWMPMediaCollection2) GetStringCollectionByQuery(bstrAttribute foundation.BSTR, pQuery *IWMPQuery, bstrMediaType foundation.BSTR, bstrSortAttribute foundation.BSTR, fSortAscending foundation.VARIANT_BOOL, ppStringCollection **IWMPStringCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAttribute)), uintptr(unsafe.Pointer(pQuery)), uintptr(unsafe.Pointer(bstrMediaType)), uintptr(unsafe.Pointer(bstrSortAttribute)), uintptr(fSortAscending), uintptr(unsafe.Pointer(ppStringCollection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetByAttributeAndMediaType dispatches through IWMPMediaCollection2's vtable slot 22.
 func (self *IWMPMediaCollection2) GetByAttributeAndMediaType(bstrAttribute foundation.BSTR, bstrValue foundation.BSTR, bstrMediaType foundation.BSTR, ppMediaItems **IWMPPlaylist) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAttribute)), uintptr(unsafe.Pointer(bstrValue)), uintptr(unsafe.Pointer(bstrMediaType)), uintptr(unsafe.Pointer(ppMediaItems)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPMediaPluginRegistrar: https://learn.microsoft.com/windows/win32/api/wmpservices/nn-wmpservices-iwmpmediapluginregistrar
@@ -3237,25 +3237,25 @@ var IID_IWMPMetadataPicture = win32.GUID{Data1: 0x5c29bbe0, Data2: 0xf87d, Data3
 // Get_mimeType dispatches through IWMPMetadataPicture's vtable slot 7.
 func (self *IWMPMetadataPicture) Get_mimeType(pbstrMimeType *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrMimeType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_pictureType dispatches through IWMPMetadataPicture's vtable slot 8.
 func (self *IWMPMetadataPicture) Get_pictureType(pbstrPictureType *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrPictureType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_description dispatches through IWMPMetadataPicture's vtable slot 9.
 func (self *IWMPMetadataPicture) Get_description(pbstrDescription *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_URL dispatches through IWMPMetadataPicture's vtable slot 10.
 func (self *IWMPMetadataPicture) Get_URL(pbstrURL *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrURL)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPMetadataText: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpmetadatatext
@@ -3270,13 +3270,13 @@ var IID_IWMPMetadataText = win32.GUID{Data1: 0x769a72db, Data2: 0x13d2, Data3: 0
 // Get_description dispatches through IWMPMetadataText's vtable slot 7.
 func (self *IWMPMetadataText) Get_description(pbstrDescription *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_text dispatches through IWMPMetadataText's vtable slot 8.
 func (self *IWMPMetadataText) Get_text(pbstrText *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrText)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPNetwork: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpnetwork
@@ -3291,169 +3291,169 @@ var IID_IWMPNetwork = win32.GUID{Data1: 0xec21b779, Data2: 0xedef, Data3: 0x462d
 // Get_bandWidth dispatches through IWMPNetwork's vtable slot 7.
 func (self *IWMPNetwork) Get_bandWidth(plBandwidth *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plBandwidth)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_recoveredPackets dispatches through IWMPNetwork's vtable slot 8.
 func (self *IWMPNetwork) Get_recoveredPackets(plRecoveredPackets *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plRecoveredPackets)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_sourceProtocol dispatches through IWMPNetwork's vtable slot 9.
 func (self *IWMPNetwork) Get_sourceProtocol(pbstrSourceProtocol *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrSourceProtocol)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_receivedPackets dispatches through IWMPNetwork's vtable slot 10.
 func (self *IWMPNetwork) Get_receivedPackets(plReceivedPackets *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plReceivedPackets)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_lostPackets dispatches through IWMPNetwork's vtable slot 11.
 func (self *IWMPNetwork) Get_lostPackets(plLostPackets *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plLostPackets)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_receptionQuality dispatches through IWMPNetwork's vtable slot 12.
 func (self *IWMPNetwork) Get_receptionQuality(plReceptionQuality *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plReceptionQuality)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_bufferingCount dispatches through IWMPNetwork's vtable slot 13.
 func (self *IWMPNetwork) Get_bufferingCount(plBufferingCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plBufferingCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_bufferingProgress dispatches through IWMPNetwork's vtable slot 14.
 func (self *IWMPNetwork) Get_bufferingProgress(plBufferingProgress *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plBufferingProgress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_bufferingTime dispatches through IWMPNetwork's vtable slot 15.
 func (self *IWMPNetwork) Get_bufferingTime(plBufferingTime *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plBufferingTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_bufferingTime dispatches through IWMPNetwork's vtable slot 16.
 func (self *IWMPNetwork) Put_bufferingTime(lBufferingTime int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(lBufferingTime))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_frameRate dispatches through IWMPNetwork's vtable slot 17.
 func (self *IWMPNetwork) Get_frameRate(plFrameRate *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plFrameRate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_maxBitRate dispatches through IWMPNetwork's vtable slot 18.
 func (self *IWMPNetwork) Get_maxBitRate(plBitRate *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plBitRate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_bitRate dispatches through IWMPNetwork's vtable slot 19.
 func (self *IWMPNetwork) Get_bitRate(plBitRate *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plBitRate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProxySettings dispatches through IWMPNetwork's vtable slot 20.
 func (self *IWMPNetwork) GetProxySettings(bstrProtocol foundation.BSTR, plProxySetting *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProtocol)), uintptr(unsafe.Pointer(plProxySetting)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetProxySettings dispatches through IWMPNetwork's vtable slot 21.
 func (self *IWMPNetwork) SetProxySettings(bstrProtocol foundation.BSTR, lProxySetting int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProtocol)), uintptr(lProxySetting))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProxyName dispatches through IWMPNetwork's vtable slot 22.
 func (self *IWMPNetwork) GetProxyName(bstrProtocol foundation.BSTR, pbstrProxyName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProtocol)), uintptr(unsafe.Pointer(pbstrProxyName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetProxyName dispatches through IWMPNetwork's vtable slot 23.
 func (self *IWMPNetwork) SetProxyName(bstrProtocol foundation.BSTR, bstrProxyName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProtocol)), uintptr(unsafe.Pointer(bstrProxyName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProxyPort dispatches through IWMPNetwork's vtable slot 24.
 func (self *IWMPNetwork) GetProxyPort(bstrProtocol foundation.BSTR, lProxyPort *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProtocol)), uintptr(unsafe.Pointer(lProxyPort)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetProxyPort dispatches through IWMPNetwork's vtable slot 25.
 func (self *IWMPNetwork) SetProxyPort(bstrProtocol foundation.BSTR, lProxyPort int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProtocol)), uintptr(lProxyPort))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProxyExceptionList dispatches through IWMPNetwork's vtable slot 26.
 func (self *IWMPNetwork) GetProxyExceptionList(bstrProtocol foundation.BSTR, pbstrExceptionList *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProtocol)), uintptr(unsafe.Pointer(pbstrExceptionList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetProxyExceptionList dispatches through IWMPNetwork's vtable slot 27.
 func (self *IWMPNetwork) SetProxyExceptionList(bstrProtocol foundation.BSTR, pbstrExceptionList foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProtocol)), uintptr(unsafe.Pointer(pbstrExceptionList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProxyBypassForLocal dispatches through IWMPNetwork's vtable slot 28.
 func (self *IWMPNetwork) GetProxyBypassForLocal(bstrProtocol foundation.BSTR, pfBypassForLocal *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProtocol)), uintptr(unsafe.Pointer(pfBypassForLocal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetProxyBypassForLocal dispatches through IWMPNetwork's vtable slot 29.
 func (self *IWMPNetwork) SetProxyBypassForLocal(bstrProtocol foundation.BSTR, fBypassForLocal foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProtocol)), uintptr(fBypassForLocal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_maxBandwidth dispatches through IWMPNetwork's vtable slot 30.
 func (self *IWMPNetwork) Get_maxBandwidth(lMaxBandwidth *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lMaxBandwidth)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_maxBandwidth dispatches through IWMPNetwork's vtable slot 31.
 func (self *IWMPNetwork) Put_maxBandwidth(lMaxBandwidth int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(lMaxBandwidth))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_downloadProgress dispatches through IWMPNetwork's vtable slot 32.
 func (self *IWMPNetwork) Get_downloadProgress(plDownloadProgress *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plDownloadProgress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_encodedFrameRate dispatches through IWMPNetwork's vtable slot 33.
 func (self *IWMPNetwork) Get_encodedFrameRate(plFrameRate *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plFrameRate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_framesSkipped dispatches through IWMPNetwork's vtable slot 34.
 func (self *IWMPNetwork) Get_framesSkipped(plFrames *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plFrames)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 42751198-5a50-4460-bcb4-709f8bdc8e59
@@ -3467,45 +3467,45 @@ var IID_IWMPNodeRealEstate = win32.GUID{Data1: 0x42751198, Data2: 0x5a50, Data3:
 // GetDesiredSize dispatches through IWMPNodeRealEstate's vtable slot 3.
 func (self *IWMPNodeRealEstate) GetDesiredSize(pSize *foundation.SIZE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetRects dispatches through IWMPNodeRealEstate's vtable slot 4.
 func (self *IWMPNodeRealEstate) SetRects(pSrc *foundation.RECT, pDest *foundation.RECT, pClip *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSrc)), uintptr(unsafe.Pointer(pDest)), uintptr(unsafe.Pointer(pClip)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRects dispatches through IWMPNodeRealEstate's vtable slot 5.
 func (self *IWMPNodeRealEstate) GetRects(pSrc *foundation.RECT, pDest *foundation.RECT, pClip *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSrc)), uintptr(unsafe.Pointer(pDest)), uintptr(unsafe.Pointer(pClip)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetWindowless dispatches through IWMPNodeRealEstate's vtable slot 6.
 func (self *IWMPNodeRealEstate) SetWindowless(fWindowless bool) error {
 	_fWindowless := win32.Bool32(fWindowless)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(_fWindowless))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetWindowless dispatches through IWMPNodeRealEstate's vtable slot 7.
 func (self *IWMPNodeRealEstate) GetWindowless(pfWindowless *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfWindowless)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetFullScreen dispatches through IWMPNodeRealEstate's vtable slot 8.
 func (self *IWMPNodeRealEstate) SetFullScreen(fFullScreen bool) error {
 	_fFullScreen := win32.Bool32(fFullScreen)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(_fFullScreen))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFullScreen dispatches through IWMPNodeRealEstate's vtable slot 9.
 func (self *IWMPNodeRealEstate) GetFullScreen(pfFullScreen *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfFullScreen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 1491087d-2c6b-44c8-b019-b3c929d2ada9
@@ -3519,14 +3519,14 @@ var IID_IWMPNodeRealEstateHost = win32.GUID{Data1: 0x1491087d, Data2: 0x2c6b, Da
 // OnDesiredSizeChange dispatches through IWMPNodeRealEstateHost's vtable slot 3.
 func (self *IWMPNodeRealEstateHost) OnDesiredSizeChange(pSize *foundation.SIZE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnFullScreenTransition dispatches through IWMPNodeRealEstateHost's vtable slot 4.
 func (self *IWMPNodeRealEstateHost) OnFullScreenTransition(fFullScreen bool) error {
 	_fFullScreen := win32.Bool32(fFullScreen)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(_fFullScreen))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 96740bfa-c56a-45d1-a3a4-762914d4ade9
@@ -3540,13 +3540,13 @@ var IID_IWMPNodeWindowed = win32.GUID{Data1: 0x96740bfa, Data2: 0xc56a, Data3: 0
 // SetOwnerWindow dispatches through IWMPNodeWindowed's vtable slot 3.
 func (self *IWMPNodeWindowed) SetOwnerWindow(hwnd uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hwnd))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOwnerWindow dispatches through IWMPNodeWindowed's vtable slot 4.
 func (self *IWMPNodeWindowed) GetOwnerWindow(phwnd *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phwnd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: a300415a-54aa-4081-adbf-3b13610d8958
@@ -3560,7 +3560,7 @@ var IID_IWMPNodeWindowedHost = win32.GUID{Data1: 0xa300415a, Data2: 0x54aa, Data
 // OnWindowMessageFromRenderer dispatches through IWMPNodeWindowedHost's vtable slot 3.
 func (self *IWMPNodeWindowedHost) OnWindowMessageFromRenderer(uMsg uint32, wparam foundation.WPARAM, lparam foundation.LPARAM, plRet *foundation.LRESULT, pfHandled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(uMsg), uintptr(wparam), uintptr(lparam), uintptr(unsafe.Pointer(plRet)), uintptr(unsafe.Pointer(pfHandled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 9b9199ad-780c-4eda-b816-261eba5d1575
@@ -3574,7 +3574,7 @@ var IID_IWMPNodeWindowless = win32.GUID{Data1: 0x9b9199ad, Data2: 0x780c, Data3:
 // OnDraw dispatches through IWMPNodeWindowless's vtable slot 4.
 func (self *IWMPNodeWindowless) OnDraw(hdc uintptr, prcDraw *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hdc), uintptr(unsafe.Pointer(prcDraw)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: be7017c6-ce34-4901-8106-770381aa6e3e
@@ -3589,7 +3589,7 @@ var IID_IWMPNodeWindowlessHost = win32.GUID{Data1: 0xbe7017c6, Data2: 0xce34, Da
 func (self *IWMPNodeWindowlessHost) InvalidateRect(prc *foundation.RECT, fErase bool) error {
 	_fErase := win32.Bool32(fErase)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prc)), uintptr(_fErase))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPPlayer: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpplayer
@@ -3604,49 +3604,49 @@ var IID_IWMPPlayer = win32.GUID{Data1: 0x6bf52a4f, Data2: 0x394a, Data3: 0x11d3,
 // Get_enabled dispatches through IWMPPlayer's vtable slot 28.
 func (self *IWMPPlayer) Get_enabled(pbEnabled *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbEnabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_enabled dispatches through IWMPPlayer's vtable slot 29.
 func (self *IWMPPlayer) Put_enabled(bEnabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(bEnabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_fullScreen dispatches through IWMPPlayer's vtable slot 30.
 func (self *IWMPPlayer) Get_fullScreen(pbFullScreen *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbFullScreen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_fullScreen dispatches through IWMPPlayer's vtable slot 31.
 func (self *IWMPPlayer) Put_fullScreen(bFullScreen foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(bFullScreen))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_enableContextMenu dispatches through IWMPPlayer's vtable slot 32.
 func (self *IWMPPlayer) Get_enableContextMenu(pbEnableContextMenu *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbEnableContextMenu)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_enableContextMenu dispatches through IWMPPlayer's vtable slot 33.
 func (self *IWMPPlayer) Put_enableContextMenu(bEnableContextMenu foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(bEnableContextMenu))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_uiMode dispatches through IWMPPlayer's vtable slot 34.
 func (self *IWMPPlayer) Put_uiMode(bstrMode foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_uiMode dispatches through IWMPPlayer's vtable slot 35.
 func (self *IWMPPlayer) Get_uiMode(pbstrMode *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPPlayer2: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpplayer2
@@ -3661,73 +3661,73 @@ var IID_IWMPPlayer2 = win32.GUID{Data1: 0x0e6b01d1, Data2: 0xd407, Data3: 0x4c85
 // Get_enabled dispatches through IWMPPlayer2's vtable slot 28.
 func (self *IWMPPlayer2) Get_enabled(pbEnabled *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbEnabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_enabled dispatches through IWMPPlayer2's vtable slot 29.
 func (self *IWMPPlayer2) Put_enabled(bEnabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(bEnabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_fullScreen dispatches through IWMPPlayer2's vtable slot 30.
 func (self *IWMPPlayer2) Get_fullScreen(pbFullScreen *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbFullScreen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_fullScreen dispatches through IWMPPlayer2's vtable slot 31.
 func (self *IWMPPlayer2) Put_fullScreen(bFullScreen foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(bFullScreen))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_enableContextMenu dispatches through IWMPPlayer2's vtable slot 32.
 func (self *IWMPPlayer2) Get_enableContextMenu(pbEnableContextMenu *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbEnableContextMenu)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_enableContextMenu dispatches through IWMPPlayer2's vtable slot 33.
 func (self *IWMPPlayer2) Put_enableContextMenu(bEnableContextMenu foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(bEnableContextMenu))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_uiMode dispatches through IWMPPlayer2's vtable slot 34.
 func (self *IWMPPlayer2) Put_uiMode(bstrMode foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_uiMode dispatches through IWMPPlayer2's vtable slot 35.
 func (self *IWMPPlayer2) Get_uiMode(pbstrMode *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_stretchToFit dispatches through IWMPPlayer2's vtable slot 36.
 func (self *IWMPPlayer2) Get_stretchToFit(pbEnabled *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbEnabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_stretchToFit dispatches through IWMPPlayer2's vtable slot 37.
 func (self *IWMPPlayer2) Put_stretchToFit(bEnabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(bEnabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_windowlessVideo dispatches through IWMPPlayer2's vtable slot 38.
 func (self *IWMPPlayer2) Get_windowlessVideo(pbEnabled *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbEnabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_windowlessVideo dispatches through IWMPPlayer2's vtable slot 39.
 func (self *IWMPPlayer2) Put_windowlessVideo(bEnabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(bEnabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPPlayer3: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpplayer3
@@ -3742,73 +3742,73 @@ var IID_IWMPPlayer3 = win32.GUID{Data1: 0x54062b68, Data2: 0x052a, Data3: 0x4c25
 // Get_enabled dispatches through IWMPPlayer3's vtable slot 29.
 func (self *IWMPPlayer3) Get_enabled(pbEnabled *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbEnabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_enabled dispatches through IWMPPlayer3's vtable slot 30.
 func (self *IWMPPlayer3) Put_enabled(bEnabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(bEnabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_fullScreen dispatches through IWMPPlayer3's vtable slot 31.
 func (self *IWMPPlayer3) Get_fullScreen(pbFullScreen *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbFullScreen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_fullScreen dispatches through IWMPPlayer3's vtable slot 32.
 func (self *IWMPPlayer3) Put_fullScreen(bFullScreen foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(bFullScreen))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_enableContextMenu dispatches through IWMPPlayer3's vtable slot 33.
 func (self *IWMPPlayer3) Get_enableContextMenu(pbEnableContextMenu *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbEnableContextMenu)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_enableContextMenu dispatches through IWMPPlayer3's vtable slot 34.
 func (self *IWMPPlayer3) Put_enableContextMenu(bEnableContextMenu foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(bEnableContextMenu))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_uiMode dispatches through IWMPPlayer3's vtable slot 35.
 func (self *IWMPPlayer3) Put_uiMode(bstrMode foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_uiMode dispatches through IWMPPlayer3's vtable slot 36.
 func (self *IWMPPlayer3) Get_uiMode(pbstrMode *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_stretchToFit dispatches through IWMPPlayer3's vtable slot 37.
 func (self *IWMPPlayer3) Get_stretchToFit(pbEnabled *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbEnabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_stretchToFit dispatches through IWMPPlayer3's vtable slot 38.
 func (self *IWMPPlayer3) Put_stretchToFit(bEnabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(bEnabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_windowlessVideo dispatches through IWMPPlayer3's vtable slot 39.
 func (self *IWMPPlayer3) Get_windowlessVideo(pbEnabled *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbEnabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_windowlessVideo dispatches through IWMPPlayer3's vtable slot 40.
 func (self *IWMPPlayer3) Put_windowlessVideo(bEnabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(bEnabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPPlayer4: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpplayer4
@@ -3823,91 +3823,91 @@ var IID_IWMPPlayer4 = win32.GUID{Data1: 0x6c497d62, Data2: 0x8919, Data3: 0x413c
 // Get_enabled dispatches through IWMPPlayer4's vtable slot 31.
 func (self *IWMPPlayer4) Get_enabled(pbEnabled *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbEnabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_enabled dispatches through IWMPPlayer4's vtable slot 32.
 func (self *IWMPPlayer4) Put_enabled(bEnabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(bEnabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_fullScreen dispatches through IWMPPlayer4's vtable slot 33.
 func (self *IWMPPlayer4) Get_fullScreen(pbFullScreen *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbFullScreen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_fullScreen dispatches through IWMPPlayer4's vtable slot 34.
 func (self *IWMPPlayer4) Put_fullScreen(bFullScreen foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(bFullScreen))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_enableContextMenu dispatches through IWMPPlayer4's vtable slot 35.
 func (self *IWMPPlayer4) Get_enableContextMenu(pbEnableContextMenu *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbEnableContextMenu)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_enableContextMenu dispatches through IWMPPlayer4's vtable slot 36.
 func (self *IWMPPlayer4) Put_enableContextMenu(bEnableContextMenu foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(bEnableContextMenu))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_uiMode dispatches through IWMPPlayer4's vtable slot 37.
 func (self *IWMPPlayer4) Put_uiMode(bstrMode foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_uiMode dispatches through IWMPPlayer4's vtable slot 38.
 func (self *IWMPPlayer4) Get_uiMode(pbstrMode *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_stretchToFit dispatches through IWMPPlayer4's vtable slot 39.
 func (self *IWMPPlayer4) Get_stretchToFit(pbEnabled *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbEnabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_stretchToFit dispatches through IWMPPlayer4's vtable slot 40.
 func (self *IWMPPlayer4) Put_stretchToFit(bEnabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(bEnabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_windowlessVideo dispatches through IWMPPlayer4's vtable slot 41.
 func (self *IWMPPlayer4) Get_windowlessVideo(pbEnabled *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbEnabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_windowlessVideo dispatches through IWMPPlayer4's vtable slot 42.
 func (self *IWMPPlayer4) Put_windowlessVideo(bEnabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(bEnabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_isRemote dispatches through IWMPPlayer4's vtable slot 43.
 func (self *IWMPPlayer4) Get_isRemote(pvarfIsRemote *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarfIsRemote)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_playerApplication dispatches through IWMPPlayer4's vtable slot 44.
 func (self *IWMPPlayer4) Get_playerApplication(ppIWMPPlayerApplication **IWMPPlayerApplication) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIWMPPlayerApplication)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenPlayer dispatches through IWMPPlayer4's vtable slot 45.
 func (self *IWMPPlayer4) OpenPlayer(bstrURL foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrURL)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPPlayerApplication: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpplayerapplication
@@ -3922,25 +3922,25 @@ var IID_IWMPPlayerApplication = win32.GUID{Data1: 0x40897764, Data2: 0xceab, Dat
 // SwitchToPlayerApplication dispatches through IWMPPlayerApplication's vtable slot 7.
 func (self *IWMPPlayerApplication) SwitchToPlayerApplication() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SwitchToControl dispatches through IWMPPlayerApplication's vtable slot 8.
 func (self *IWMPPlayerApplication) SwitchToControl() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_playerDocked dispatches through IWMPPlayerApplication's vtable slot 9.
 func (self *IWMPPlayerApplication) Get_playerDocked(pbPlayerDocked *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbPlayerDocked)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_hasDisplay dispatches through IWMPPlayerApplication's vtable slot 10.
 func (self *IWMPPlayerApplication) Get_hasDisplay(pbHasDisplay *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbHasDisplay)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPPlayerServices: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpplayerservices
@@ -3955,19 +3955,19 @@ var IID_IWMPPlayerServices = win32.GUID{Data1: 0x1d01fbdb, Data2: 0xade2, Data3:
 // ActivateUIPlugin dispatches through IWMPPlayerServices's vtable slot 3.
 func (self *IWMPPlayerServices) ActivateUIPlugin(bstrPlugin foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPlugin)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTaskPane dispatches through IWMPPlayerServices's vtable slot 4.
 func (self *IWMPPlayerServices) SetTaskPane(bstrTaskPane foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTaskPane)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTaskPaneURL dispatches through IWMPPlayerServices's vtable slot 5.
 func (self *IWMPPlayerServices) SetTaskPaneURL(bstrTaskPane foundation.BSTR, bstrURL foundation.BSTR, bstrFriendlyName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTaskPane)), uintptr(unsafe.Pointer(bstrURL)), uintptr(unsafe.Pointer(bstrFriendlyName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPPlayerServices2: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpplayerservices2
@@ -3982,7 +3982,7 @@ var IID_IWMPPlayerServices2 = win32.GUID{Data1: 0x1bb1592f, Data2: 0xf040, Data3
 // SetBackgroundProcessingPriority dispatches through IWMPPlayerServices2's vtable slot 6.
 func (self *IWMPPlayerServices2) SetBackgroundProcessingPriority(bstrPriority foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPriority)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPPlaylist: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpplaylist
@@ -3997,85 +3997,85 @@ var IID_IWMPPlaylist = win32.GUID{Data1: 0xd5f0f4f1, Data2: 0x130c, Data3: 0x11d
 // Get_count dispatches through IWMPPlaylist's vtable slot 7.
 func (self *IWMPPlaylist) Get_count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_name dispatches through IWMPPlaylist's vtable slot 8.
 func (self *IWMPPlaylist) Get_name(pbstrName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_name dispatches through IWMPPlaylist's vtable slot 9.
 func (self *IWMPPlaylist) Put_name(bstrName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_attributeCount dispatches through IWMPPlaylist's vtable slot 10.
 func (self *IWMPPlaylist) Get_attributeCount(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_attributeName dispatches through IWMPPlaylist's vtable slot 11.
 func (self *IWMPPlaylist) Get_attributeName(lIndex int32, pbstrAttributeName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(pbstrAttributeName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_item dispatches through IWMPPlaylist's vtable slot 12.
 func (self *IWMPPlaylist) Get_item(lIndex int32, ppIWMPMedia **IWMPMedia) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(ppIWMPMedia)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetItemInfo dispatches through IWMPPlaylist's vtable slot 13.
 func (self *IWMPPlaylist) GetItemInfo(bstrName foundation.BSTR, pbstrVal *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(pbstrVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetItemInfo dispatches through IWMPPlaylist's vtable slot 14.
 func (self *IWMPPlaylist) SetItemInfo(bstrName foundation.BSTR, bstrValue foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(bstrValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_isIdentical dispatches through IWMPPlaylist's vtable slot 15.
 func (self *IWMPPlaylist) Get_isIdentical(pIWMPPlaylist *IWMPPlaylist, pvbool *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIWMPPlaylist)), uintptr(unsafe.Pointer(pvbool)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through IWMPPlaylist's vtable slot 16.
 func (self *IWMPPlaylist) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InsertItem dispatches through IWMPPlaylist's vtable slot 17.
 func (self *IWMPPlaylist) InsertItem(lIndex int32, pIWMPMedia *IWMPMedia) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(pIWMPMedia)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AppendItem dispatches through IWMPPlaylist's vtable slot 18.
 func (self *IWMPPlaylist) AppendItem(pIWMPMedia *IWMPMedia) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIWMPMedia)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveItem dispatches through IWMPPlaylist's vtable slot 19.
 func (self *IWMPPlaylist) RemoveItem(pIWMPMedia *IWMPMedia) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIWMPMedia)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MoveItem dispatches through IWMPPlaylist's vtable slot 20.
 func (self *IWMPPlaylist) MoveItem(lIndexOld int32, lIndexNew int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(lIndexOld), uintptr(lIndexNew))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPPlaylistArray: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpplaylistarray
@@ -4090,13 +4090,13 @@ var IID_IWMPPlaylistArray = win32.GUID{Data1: 0x679409c0, Data2: 0x99f7, Data3: 
 // Get_count dispatches through IWMPPlaylistArray's vtable slot 7.
 func (self *IWMPPlaylistArray) Get_count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Item dispatches through IWMPPlaylistArray's vtable slot 8.
 func (self *IWMPPlaylistArray) Item(lIndex int32, ppItem **IWMPPlaylist) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(ppItem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPPlaylistCollection: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpplaylistcollection
@@ -4111,43 +4111,43 @@ var IID_IWMPPlaylistCollection = win32.GUID{Data1: 0x10a13217, Data2: 0x23a7, Da
 // NewPlaylist dispatches through IWMPPlaylistCollection's vtable slot 7.
 func (self *IWMPPlaylistCollection) NewPlaylist(bstrName foundation.BSTR, ppItem **IWMPPlaylist) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(ppItem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAll dispatches through IWMPPlaylistCollection's vtable slot 8.
 func (self *IWMPPlaylistCollection) GetAll(ppPlaylistArray **IWMPPlaylistArray) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPlaylistArray)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetByName dispatches through IWMPPlaylistCollection's vtable slot 9.
 func (self *IWMPPlaylistCollection) GetByName(bstrName foundation.BSTR, ppPlaylistArray **IWMPPlaylistArray) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(ppPlaylistArray)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through IWMPPlaylistCollection's vtable slot 10.
 func (self *IWMPPlaylistCollection) Remove(pItem *IWMPPlaylist) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pItem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDeleted dispatches through IWMPPlaylistCollection's vtable slot 11.
 func (self *IWMPPlaylistCollection) SetDeleted(pItem *IWMPPlaylist, varfIsDeleted foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pItem)), uintptr(varfIsDeleted))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsDeleted dispatches through IWMPPlaylistCollection's vtable slot 12.
 func (self *IWMPPlaylistCollection) IsDeleted(pItem *IWMPPlaylist, pvarfIsDeleted *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pItem)), uintptr(unsafe.Pointer(pvarfIsDeleted)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ImportPlaylist dispatches through IWMPPlaylistCollection's vtable slot 13.
 func (self *IWMPPlaylistCollection) ImportPlaylist(pItem *IWMPPlaylist, ppImportedItem **IWMPPlaylist) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pItem)), uintptr(unsafe.Pointer(ppImportedItem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPPlugin: https://learn.microsoft.com/windows/win32/api/wmpservices/nn-wmpservices-iwmpplugin
@@ -4162,37 +4162,37 @@ var IID_IWMPPlugin = win32.GUID{Data1: 0xf1392a70, Data2: 0x024c, Data3: 0x42bb,
 // Init dispatches through IWMPPlugin's vtable slot 3.
 func (self *IWMPPlugin) Init(dwPlaybackContext uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwPlaybackContext))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Shutdown dispatches through IWMPPlugin's vtable slot 4.
 func (self *IWMPPlugin) Shutdown() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetID dispatches through IWMPPlugin's vtable slot 5.
 func (self *IWMPPlugin) GetID(pGUID *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGUID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCaps dispatches through IWMPPlugin's vtable slot 6.
 func (self *IWMPPlugin) GetCaps(pdwFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AdviseWMPServices dispatches through IWMPPlugin's vtable slot 7.
 func (self *IWMPPlugin) AdviseWMPServices(pWMPServices *IWMPServices) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWMPServices)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnAdviseWMPServices dispatches through IWMPPlugin's vtable slot 8.
 func (self *IWMPPlugin) UnAdviseWMPServices() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPPluginEnable: https://learn.microsoft.com/windows/win32/api/wmpservices/nn-wmpservices-iwmppluginenable
@@ -4208,13 +4208,13 @@ var IID_IWMPPluginEnable = win32.GUID{Data1: 0x5fca444c, Data2: 0x7ad1, Data3: 0
 func (self *IWMPPluginEnable) SetEnable(fEnable bool) error {
 	_fEnable := win32.Bool32(fEnable)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(_fEnable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEnable dispatches through IWMPPluginEnable's vtable slot 4.
 func (self *IWMPPluginEnable) GetEnable(pfEnable *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEnable)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPPluginUI: https://learn.microsoft.com/windows/win32/api/wmpplug/nn-wmpplug-iwmppluginui
@@ -4229,45 +4229,45 @@ var IID_IWMPPluginUI = win32.GUID{Data1: 0x4c5e8f9f, Data2: 0xad3e, Data3: 0x4bf
 // SetCore dispatches through IWMPPluginUI's vtable slot 3.
 func (self *IWMPPluginUI) SetCore(pCore *IWMPCore) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCore)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Create dispatches through IWMPPluginUI's vtable slot 4.
 func (self *IWMPPluginUI) Create(hwndParent foundation.HWND, phwndWindow *foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(unsafe.Pointer(phwndWindow)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Destroy dispatches through IWMPPluginUI's vtable slot 5.
 func (self *IWMPPluginUI) Destroy() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DisplayPropertyPage dispatches through IWMPPluginUI's vtable slot 6.
 func (self *IWMPPluginUI) DisplayPropertyPage(hwndParent foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hwndParent))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProperty dispatches through IWMPPluginUI's vtable slot 7.
 func (self *IWMPPluginUI) GetProperty(pwszName string, pvarProperty *systemvariant.VARIANT) error {
 	_pwszName := win32.UTF16Ptr(pwszName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszName)), uintptr(unsafe.Pointer(pvarProperty)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetProperty dispatches through IWMPPluginUI's vtable slot 8.
 func (self *IWMPPluginUI) SetProperty(pwszName string, pvarProperty *systemvariant.VARIANT) error {
 	_pwszName := win32.UTF16Ptr(pwszName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszName)), uintptr(unsafe.Pointer(pvarProperty)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TranslateAccelerator dispatches through IWMPPluginUI's vtable slot 9.
 func (self *IWMPPluginUI) TranslateAccelerator(lpmsg *uiwindowsandmessaging.MSG) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpmsg)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPQuery: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpquery
@@ -4282,13 +4282,13 @@ var IID_IWMPQuery = win32.GUID{Data1: 0xa00918f3, Data2: 0xa6b0, Data3: 0x4bfb, 
 // AddCondition dispatches through IWMPQuery's vtable slot 7.
 func (self *IWMPQuery) AddCondition(bstrAttribute foundation.BSTR, bstrOperator foundation.BSTR, bstrValue foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAttribute)), uintptr(unsafe.Pointer(bstrOperator)), uintptr(unsafe.Pointer(bstrValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BeginNextGroup dispatches through IWMPQuery's vtable slot 8.
 func (self *IWMPQuery) BeginNextGroup() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPRemoteMediaServices: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpremotemediaservices
@@ -4303,25 +4303,25 @@ var IID_IWMPRemoteMediaServices = win32.GUID{Data1: 0xcbb92747, Data2: 0x741f, D
 // GetServiceType dispatches through IWMPRemoteMediaServices's vtable slot 3.
 func (self *IWMPRemoteMediaServices) GetServiceType(pbstrType *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetApplicationName dispatches through IWMPRemoteMediaServices's vtable slot 4.
 func (self *IWMPRemoteMediaServices) GetApplicationName(pbstrName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetScriptableObject dispatches through IWMPRemoteMediaServices's vtable slot 5.
 func (self *IWMPRemoteMediaServices) GetScriptableObject(pbstrName *foundation.BSTR, ppDispatch **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)), uintptr(unsafe.Pointer(ppDispatch)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCustomUIMode dispatches through IWMPRemoteMediaServices's vtable slot 6.
 func (self *IWMPRemoteMediaServices) GetCustomUIMode(pbstrFile *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrFile)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPRenderConfig: https://learn.microsoft.com/windows/win32/api/wmprealestate/nn-wmprealestate-iwmprenderconfig
@@ -4337,13 +4337,13 @@ var IID_IWMPRenderConfig = win32.GUID{Data1: 0x959506c1, Data2: 0x0314, Data3: 0
 func (self *IWMPRenderConfig) Put_inProcOnly(fInProc bool) error {
 	_fInProc := win32.Bool32(fInProc)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(_fInProc))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_inProcOnly dispatches through IWMPRenderConfig's vtable slot 4.
 func (self *IWMPRenderConfig) Get_inProcOnly(pfInProc *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfInProc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPServices: https://learn.microsoft.com/windows/win32/api/wmpservices/nn-wmpservices-iwmpservices
@@ -4358,13 +4358,13 @@ var IID_IWMPServices = win32.GUID{Data1: 0xafb6b76b, Data2: 0x1e20, Data3: 0x419
 // GetStreamTime dispatches through IWMPServices's vtable slot 3.
 func (self *IWMPServices) GetStreamTime(prt *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStreamState dispatches through IWMPServices's vtable slot 4.
 func (self *IWMPServices) GetStreamState(pState *WMPServices_StreamState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPSettings: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpsettings
@@ -4379,133 +4379,133 @@ var IID_IWMPSettings = win32.GUID{Data1: 0x9104d1ab, Data2: 0x80c9, Data3: 0x4fe
 // Get_isAvailable dispatches through IWMPSettings's vtable slot 7.
 func (self *IWMPSettings) Get_isAvailable(bstrItem foundation.BSTR, pIsAvailable *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrItem)), uintptr(unsafe.Pointer(pIsAvailable)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_autoStart dispatches through IWMPSettings's vtable slot 8.
 func (self *IWMPSettings) Get_autoStart(pfAutoStart *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfAutoStart)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_autoStart dispatches through IWMPSettings's vtable slot 9.
 func (self *IWMPSettings) Put_autoStart(fAutoStart foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(fAutoStart))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_baseURL dispatches through IWMPSettings's vtable slot 10.
 func (self *IWMPSettings) Get_baseURL(pbstrBaseURL *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrBaseURL)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_baseURL dispatches through IWMPSettings's vtable slot 11.
 func (self *IWMPSettings) Put_baseURL(bstrBaseURL foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrBaseURL)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_defaultFrame dispatches through IWMPSettings's vtable slot 12.
 func (self *IWMPSettings) Get_defaultFrame(pbstrDefaultFrame *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDefaultFrame)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_defaultFrame dispatches through IWMPSettings's vtable slot 13.
 func (self *IWMPSettings) Put_defaultFrame(bstrDefaultFrame foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDefaultFrame)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_invokeURLs dispatches through IWMPSettings's vtable slot 14.
 func (self *IWMPSettings) Get_invokeURLs(pfInvokeURLs *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfInvokeURLs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_invokeURLs dispatches through IWMPSettings's vtable slot 15.
 func (self *IWMPSettings) Put_invokeURLs(fInvokeURLs foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(fInvokeURLs))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_mute dispatches through IWMPSettings's vtable slot 16.
 func (self *IWMPSettings) Get_mute(pfMute *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfMute)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_mute dispatches through IWMPSettings's vtable slot 17.
 func (self *IWMPSettings) Put_mute(fMute foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(fMute))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_playCount dispatches through IWMPSettings's vtable slot 18.
 func (self *IWMPSettings) Get_playCount(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_playCount dispatches through IWMPSettings's vtable slot 19.
 func (self *IWMPSettings) Put_playCount(lCount int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(lCount))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_rate dispatches through IWMPSettings's vtable slot 20.
 func (self *IWMPSettings) Get_rate(pdRate *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdRate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_balance dispatches through IWMPSettings's vtable slot 22.
 func (self *IWMPSettings) Get_balance(plBalance *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plBalance)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_balance dispatches through IWMPSettings's vtable slot 23.
 func (self *IWMPSettings) Put_balance(lBalance int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(lBalance))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_volume dispatches through IWMPSettings's vtable slot 24.
 func (self *IWMPSettings) Get_volume(plVolume *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plVolume)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_volume dispatches through IWMPSettings's vtable slot 25.
 func (self *IWMPSettings) Put_volume(lVolume int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(lVolume))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMode dispatches through IWMPSettings's vtable slot 26.
 func (self *IWMPSettings) GetMode(bstrMode foundation.BSTR, pvarfMode *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrMode)), uintptr(unsafe.Pointer(pvarfMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMode dispatches through IWMPSettings's vtable slot 27.
 func (self *IWMPSettings) SetMode(bstrMode foundation.BSTR, varfMode foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrMode)), uintptr(varfMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_enableErrorDialogs dispatches through IWMPSettings's vtable slot 28.
 func (self *IWMPSettings) Get_enableErrorDialogs(pfEnableErrorDialogs *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEnableErrorDialogs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_enableErrorDialogs dispatches through IWMPSettings's vtable slot 29.
 func (self *IWMPSettings) Put_enableErrorDialogs(fEnableErrorDialogs foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(fEnableErrorDialogs))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPSettings2: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpsettings2
@@ -4520,19 +4520,19 @@ var IID_IWMPSettings2 = win32.GUID{Data1: 0xfda937a4, Data2: 0xeece, Data3: 0x4d
 // Get_defaultAudioLanguage dispatches through IWMPSettings2's vtable slot 30.
 func (self *IWMPSettings2) Get_defaultAudioLanguage(plLangID *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plLangID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_mediaAccessRights dispatches through IWMPSettings2's vtable slot 31.
 func (self *IWMPSettings2) Get_mediaAccessRights(pbstrRights *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrRights)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RequestMediaAccessRights dispatches through IWMPSettings2's vtable slot 32.
 func (self *IWMPSettings2) RequestMediaAccessRights(bstrDesiredAccess foundation.BSTR, pvbAccepted *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDesiredAccess)), uintptr(unsafe.Pointer(pvbAccepted)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPSkinManager: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpskinmanager
@@ -4547,7 +4547,7 @@ var IID_IWMPSkinManager = win32.GUID{Data1: 0x076f2fa6, Data2: 0xed30, Data3: 0x
 // SetVisualStyle dispatches through IWMPSkinManager's vtable slot 3.
 func (self *IWMPSkinManager) SetVisualStyle(bstrPath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPStringCollection: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpstringcollection
@@ -4562,13 +4562,13 @@ var IID_IWMPStringCollection = win32.GUID{Data1: 0x4a976298, Data2: 0x8c0d, Data
 // Get_count dispatches through IWMPStringCollection's vtable slot 7.
 func (self *IWMPStringCollection) Get_count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Item dispatches through IWMPStringCollection's vtable slot 8.
 func (self *IWMPStringCollection) Item(lIndex int32, pbstrString *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(pbstrString)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPStringCollection2: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpstringcollection2
@@ -4583,25 +4583,25 @@ var IID_IWMPStringCollection2 = win32.GUID{Data1: 0x46ad648d, Data2: 0x53f1, Dat
 // IsIdentical dispatches through IWMPStringCollection2's vtable slot 9.
 func (self *IWMPStringCollection2) IsIdentical(pIWMPStringCollection2 *IWMPStringCollection2, pvbool *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIWMPStringCollection2)), uintptr(unsafe.Pointer(pvbool)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetItemInfo dispatches through IWMPStringCollection2's vtable slot 10.
 func (self *IWMPStringCollection2) GetItemInfo(lCollectionIndex int32, bstrItemName foundation.BSTR, pbstrValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lCollectionIndex), uintptr(unsafe.Pointer(bstrItemName)), uintptr(unsafe.Pointer(pbstrValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAttributeCountByType dispatches through IWMPStringCollection2's vtable slot 11.
 func (self *IWMPStringCollection2) GetAttributeCountByType(lCollectionIndex int32, bstrType foundation.BSTR, bstrLanguage foundation.BSTR, plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(lCollectionIndex), uintptr(unsafe.Pointer(bstrType)), uintptr(unsafe.Pointer(bstrLanguage)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetItemInfoByType dispatches through IWMPStringCollection2's vtable slot 12.
 func (self *IWMPStringCollection2) GetItemInfoByType(lCollectionIndex int32, bstrType foundation.BSTR, bstrLanguage foundation.BSTR, lAttributeIndex int32, pvarValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(lCollectionIndex), uintptr(unsafe.Pointer(bstrType)), uintptr(unsafe.Pointer(bstrLanguage)), uintptr(lAttributeIndex), uintptr(unsafe.Pointer(pvarValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPSubscriptionService: https://learn.microsoft.com/windows/win32/api/subscriptionservices/nn-subscriptionservices-iwmpsubscriptionservice
@@ -4616,25 +4616,25 @@ var IID_IWMPSubscriptionService = win32.GUID{Data1: 0x376055f8, Data2: 0x2a59, D
 // AllowPlay dispatches through IWMPSubscriptionService's vtable slot 3.
 func (self *IWMPSubscriptionService) AllowPlay(hwnd foundation.HWND, pMedia *IWMPMedia, pfAllowPlay *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(unsafe.Pointer(pMedia)), uintptr(unsafe.Pointer(pfAllowPlay)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AllowCDBurn dispatches through IWMPSubscriptionService's vtable slot 4.
 func (self *IWMPSubscriptionService) AllowCDBurn(hwnd foundation.HWND, pPlaylist *IWMPPlaylist, pfAllowBurn *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(unsafe.Pointer(pPlaylist)), uintptr(unsafe.Pointer(pfAllowBurn)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AllowPDATransfer dispatches through IWMPSubscriptionService's vtable slot 5.
 func (self *IWMPSubscriptionService) AllowPDATransfer(hwnd foundation.HWND, pPlaylist *IWMPPlaylist, pfAllowTransfer *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(unsafe.Pointer(pPlaylist)), uintptr(unsafe.Pointer(pfAllowTransfer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StartBackgroundProcessing dispatches through IWMPSubscriptionService's vtable slot 6.
 func (self *IWMPSubscriptionService) StartBackgroundProcessing(hwnd foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hwnd))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPSubscriptionService2: https://learn.microsoft.com/windows/win32/api/subscriptionservices/nn-subscriptionservices-iwmpsubscriptionservice2
@@ -4649,25 +4649,25 @@ var IID_IWMPSubscriptionService2 = win32.GUID{Data1: 0xa94c120e, Data2: 0xd600, 
 // StopBackgroundProcessing dispatches through IWMPSubscriptionService2's vtable slot 7.
 func (self *IWMPSubscriptionService2) StopBackgroundProcessing() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ServiceEvent dispatches through IWMPSubscriptionService2's vtable slot 8.
 func (self *IWMPSubscriptionService2) ServiceEvent(event WMPSubscriptionServiceEvent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(event))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeviceAvailable dispatches through IWMPSubscriptionService2's vtable slot 9.
 func (self *IWMPSubscriptionService2) DeviceAvailable(bstrDeviceName foundation.BSTR, pCB *IWMPSubscriptionServiceCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDeviceName)), uintptr(unsafe.Pointer(pCB)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PrepareForSync dispatches through IWMPSubscriptionService2's vtable slot 10.
 func (self *IWMPSubscriptionService2) PrepareForSync(bstrFilename foundation.BSTR, bstrDeviceName foundation.BSTR, pCB *IWMPSubscriptionServiceCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrFilename)), uintptr(unsafe.Pointer(bstrDeviceName)), uintptr(unsafe.Pointer(pCB)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPSubscriptionServiceCallback: https://learn.microsoft.com/windows/win32/api/subscriptionservices/nn-subscriptionservices-iwmpsubscriptionservicecallback
@@ -4682,7 +4682,7 @@ var IID_IWMPSubscriptionServiceCallback = win32.GUID{Data1: 0xdd01d127, Data2: 0
 // OnComplete dispatches through IWMPSubscriptionServiceCallback's vtable slot 3.
 func (self *IWMPSubscriptionServiceCallback) OnComplete(hrResult foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hrResult))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPSyncDevice: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpsyncdevice
@@ -4697,97 +4697,97 @@ var IID_IWMPSyncDevice = win32.GUID{Data1: 0x82a2986c, Data2: 0x0293, Data3: 0x4
 // Get_friendlyName dispatches through IWMPSyncDevice's vtable slot 3.
 func (self *IWMPSyncDevice) Get_friendlyName(pbstrName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_friendlyName dispatches through IWMPSyncDevice's vtable slot 4.
 func (self *IWMPSyncDevice) Put_friendlyName(bstrName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_deviceName dispatches through IWMPSyncDevice's vtable slot 5.
 func (self *IWMPSyncDevice) Get_deviceName(pbstrName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_deviceId dispatches through IWMPSyncDevice's vtable slot 6.
 func (self *IWMPSyncDevice) Get_deviceId(pbstrDeviceId *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDeviceId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_partnershipIndex dispatches through IWMPSyncDevice's vtable slot 7.
 func (self *IWMPSyncDevice) Get_partnershipIndex(plIndex *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plIndex)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_connected dispatches through IWMPSyncDevice's vtable slot 8.
 func (self *IWMPSyncDevice) Get_connected(pvbConnected *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvbConnected)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_status dispatches through IWMPSyncDevice's vtable slot 9.
 func (self *IWMPSyncDevice) Get_status(pwmpds *WMPDeviceStatus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwmpds)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_syncState dispatches through IWMPSyncDevice's vtable slot 10.
 func (self *IWMPSyncDevice) Get_syncState(pwmpss *WMPSyncState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwmpss)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_progress dispatches through IWMPSyncDevice's vtable slot 11.
 func (self *IWMPSyncDevice) Get_progress(plProgress *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plProgress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetItemInfo dispatches through IWMPSyncDevice's vtable slot 12.
 func (self *IWMPSyncDevice) GetItemInfo(bstrItemName foundation.BSTR, pbstrVal *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrItemName)), uintptr(unsafe.Pointer(pbstrVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePartnership dispatches through IWMPSyncDevice's vtable slot 13.
 func (self *IWMPSyncDevice) CreatePartnership(vbShowUI foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(vbShowUI))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeletePartnership dispatches through IWMPSyncDevice's vtable slot 14.
 func (self *IWMPSyncDevice) DeletePartnership() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Start dispatches through IWMPSyncDevice's vtable slot 15.
 func (self *IWMPSyncDevice) Start() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Stop dispatches through IWMPSyncDevice's vtable slot 16.
 func (self *IWMPSyncDevice) Stop() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ShowSettings dispatches through IWMPSyncDevice's vtable slot 17.
 func (self *IWMPSyncDevice) ShowSettings() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsIdentical dispatches through IWMPSyncDevice's vtable slot 18.
 func (self *IWMPSyncDevice) IsIdentical(pDevice *IWMPSyncDevice, pvbool *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(pvbool)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPSyncDevice2: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpsyncdevice2
@@ -4802,7 +4802,7 @@ var IID_IWMPSyncDevice2 = win32.GUID{Data1: 0x88afb4b2, Data2: 0x140a, Data3: 0x
 // SetItemInfo dispatches through IWMPSyncDevice2's vtable slot 19.
 func (self *IWMPSyncDevice2) SetItemInfo(bstrItemName foundation.BSTR, bstrVal foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrItemName)), uintptr(unsafe.Pointer(bstrVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPSyncDevice3: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpsyncdevice3
@@ -4817,13 +4817,13 @@ var IID_IWMPSyncDevice3 = win32.GUID{Data1: 0xb22c85f9, Data2: 0x263c, Data3: 0x
 // EstimateSyncSize dispatches through IWMPSyncDevice3's vtable slot 20.
 func (self *IWMPSyncDevice3) EstimateSyncSize(pNonRulePlaylist *IWMPPlaylist, pRulesPlaylist *IWMPPlaylist) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNonRulePlaylist)), uintptr(unsafe.Pointer(pRulesPlaylist)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CancelEstimation dispatches through IWMPSyncDevice3's vtable slot 21.
 func (self *IWMPSyncDevice3) CancelEstimation() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPSyncServices: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpsyncservices
@@ -4838,13 +4838,13 @@ var IID_IWMPSyncServices = win32.GUID{Data1: 0x8b5050ff, Data2: 0xe0a4, Data3: 0
 // Get_deviceCount dispatches through IWMPSyncServices's vtable slot 3.
 func (self *IWMPSyncServices) Get_deviceCount(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDevice dispatches through IWMPSyncServices's vtable slot 4.
 func (self *IWMPSyncServices) GetDevice(lIndex int32, ppDevice **IWMPSyncDevice) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(ppDevice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPTranscodePolicy: https://learn.microsoft.com/windows/win32/api/wmpservices/nn-wmpservices-iwmptranscodepolicy
@@ -4859,7 +4859,7 @@ var IID_IWMPTranscodePolicy = win32.GUID{Data1: 0xb64cbac3, Data2: 0x401c, Data3
 // AllowTranscode dispatches through IWMPTranscodePolicy's vtable slot 3.
 func (self *IWMPTranscodePolicy) AllowTranscode(pvbAllow *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvbAllow)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPUserEventSink: https://learn.microsoft.com/windows/win32/api/wmpservices/nn-wmpservices-iwmpusereventsink
@@ -4874,7 +4874,7 @@ var IID_IWMPUserEventSink = win32.GUID{Data1: 0xcfccfa72, Data2: 0xc343, Data3: 
 // NotifyUserEvent dispatches through IWMPUserEventSink's vtable slot 3.
 func (self *IWMPUserEventSink) NotifyUserEvent(EventCode int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(EventCode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPVideoRenderConfig: https://learn.microsoft.com/windows/win32/api/wmprealestate/nn-wmprealestate-iwmpvideorenderconfig
@@ -4889,7 +4889,7 @@ var IID_IWMPVideoRenderConfig = win32.GUID{Data1: 0x6d6cf803, Data2: 0x1ec0, Dat
 // Put_presenterActivate dispatches through IWMPVideoRenderConfig's vtable slot 3.
 func (self *IWMPVideoRenderConfig) Put_presenterActivate(pActivate *mediamediafoundation.IMFActivate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pActivate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 3a0daa30-908d-4789-ba87-aed879b5c49b
@@ -4903,7 +4903,7 @@ var IID_IWMPWindowMessageSink = win32.GUID{Data1: 0x3a0daa30, Data2: 0x908d, Dat
 // OnWindowMessage dispatches through IWMPWindowMessageSink's vtable slot 3.
 func (self *IWMPWindowMessageSink) OnWindowMessage(uMsg uint32, wparam foundation.WPARAM, lparam foundation.LPARAM, plRet *foundation.LRESULT, pfHandled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(uMsg), uintptr(wparam), uintptr(lparam), uintptr(unsafe.Pointer(plRet)), uintptr(unsafe.Pointer(pfHandled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: a44179a4-e0f6-403b-af8d-d080f425a451
@@ -4917,270 +4917,270 @@ var IID_IXFeed = win32.GUID{Data1: 0xa44179a4, Data2: 0xe0f6, Data3: 0x403b, Dat
 // Xml dispatches through IXFeed's vtable slot 3.
 func (self *IXFeed) Xml(uiItemCount uint32, sortProperty FEEDS_XML_SORT_PROPERTY, sortOrder FEEDS_XML_SORT_ORDER, filterFlags FEEDS_XML_FILTER_FLAGS, includeFlags FEEDS_XML_INCLUDE_FLAGS, pps **systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(uiItemCount), uintptr(sortProperty), uintptr(sortOrder), uintptr(filterFlags), uintptr(includeFlags), uintptr(unsafe.Pointer(pps)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Name dispatches through IXFeed's vtable slot 4.
 func (self *IXFeed) Name(ppszName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Rename dispatches through IXFeed's vtable slot 5.
 func (self *IXFeed) Rename(pszName string) error {
 	_pszName := win32.UTF16Ptr(pszName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Url dispatches through IXFeed's vtable slot 6.
 func (self *IXFeed) Url(ppszUrl *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszUrl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetUrl dispatches through IXFeed's vtable slot 7.
 func (self *IXFeed) SetUrl(pszUrl string) error {
 	_pszUrl := win32.UTF16Ptr(pszUrl)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszUrl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LocalId dispatches through IXFeed's vtable slot 8.
 func (self *IXFeed) LocalId(pguid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Path dispatches through IXFeed's vtable slot 9.
 func (self *IXFeed) Path(ppszPath *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Move dispatches through IXFeed's vtable slot 10.
 func (self *IXFeed) Move(pszPath string) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Parent dispatches through IXFeed's vtable slot 11.
 func (self *IXFeed) Parent(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LastWriteTime dispatches through IXFeed's vtable slot 12.
 func (self *IXFeed) LastWriteTime(pstLastWriteTime *foundation.SYSTEMTIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstLastWriteTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IXFeed's vtable slot 13.
 func (self *IXFeed) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Download dispatches through IXFeed's vtable slot 14.
 func (self *IXFeed) Download() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AsyncDownload dispatches through IXFeed's vtable slot 15.
 func (self *IXFeed) AsyncDownload() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CancelAsyncDownload dispatches through IXFeed's vtable slot 16.
 func (self *IXFeed) CancelAsyncDownload() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SyncSetting dispatches through IXFeed's vtable slot 17.
 func (self *IXFeed) SyncSetting(pfss *FEEDS_SYNC_SETTING) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfss)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetSyncSetting dispatches through IXFeed's vtable slot 18.
 func (self *IXFeed) SetSyncSetting(fss FEEDS_SYNC_SETTING) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(fss))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Interval dispatches through IXFeed's vtable slot 19.
 func (self *IXFeed) Interval(puiInterval *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(puiInterval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetInterval dispatches through IXFeed's vtable slot 20.
 func (self *IXFeed) SetInterval(uiInterval uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(uiInterval))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LastDownloadTime dispatches through IXFeed's vtable slot 21.
 func (self *IXFeed) LastDownloadTime(pstLastDownloadTime *foundation.SYSTEMTIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstLastDownloadTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LocalEnclosurePath dispatches through IXFeed's vtable slot 22.
 func (self *IXFeed) LocalEnclosurePath(ppszPath *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Items dispatches through IXFeed's vtable slot 23.
 func (self *IXFeed) Items(ppfe **IXFeedsEnum) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppfe)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetItem dispatches through IXFeed's vtable slot 24.
 func (self *IXFeed) GetItem(uiId uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(uiId), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MarkAllItemsRead dispatches through IXFeed's vtable slot 25.
 func (self *IXFeed) MarkAllItemsRead() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MaxItemCount dispatches through IXFeed's vtable slot 26.
 func (self *IXFeed) MaxItemCount(puiMaxItemCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(puiMaxItemCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMaxItemCount dispatches through IXFeed's vtable slot 27.
 func (self *IXFeed) SetMaxItemCount(uiMaxItemCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(uiMaxItemCount))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DownloadEnclosuresAutomatically dispatches through IXFeed's vtable slot 28.
 func (self *IXFeed) DownloadEnclosuresAutomatically(pbDownloadEnclosuresAutomatically *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbDownloadEnclosuresAutomatically)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDownloadEnclosuresAutomatically dispatches through IXFeed's vtable slot 29.
 func (self *IXFeed) SetDownloadEnclosuresAutomatically(bDownloadEnclosuresAutomatically bool) error {
 	_bDownloadEnclosuresAutomatically := win32.Bool32(bDownloadEnclosuresAutomatically)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(_bDownloadEnclosuresAutomatically))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DownloadStatus dispatches through IXFeed's vtable slot 30.
 func (self *IXFeed) DownloadStatus(pfds *FEEDS_DOWNLOAD_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfds)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LastDownloadError dispatches through IXFeed's vtable slot 31.
 func (self *IXFeed) LastDownloadError(pfde *FEEDS_DOWNLOAD_ERROR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfde)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Merge dispatches through IXFeed's vtable slot 32.
 func (self *IXFeed) Merge(pStream *systemcom.IStream, pszUrl string) error {
 	_pszUrl := win32.UTF16Ptr(pszUrl)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStream)), uintptr(unsafe.Pointer(_pszUrl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DownloadUrl dispatches through IXFeed's vtable slot 33.
 func (self *IXFeed) DownloadUrl(ppszUrl *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszUrl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Title dispatches through IXFeed's vtable slot 34.
 func (self *IXFeed) Title(ppszTitle *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszTitle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Description dispatches through IXFeed's vtable slot 35.
 func (self *IXFeed) Description(ppszDescription *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Link dispatches through IXFeed's vtable slot 36.
 func (self *IXFeed) Link(ppszHomePage *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszHomePage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Image dispatches through IXFeed's vtable slot 37.
 func (self *IXFeed) Image(ppszImageUrl *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszImageUrl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LastBuildDate dispatches through IXFeed's vtable slot 38.
 func (self *IXFeed) LastBuildDate(pstLastBuildDate *foundation.SYSTEMTIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstLastBuildDate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PubDate dispatches through IXFeed's vtable slot 39.
 func (self *IXFeed) PubDate(pstPubDate *foundation.SYSTEMTIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstPubDate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Ttl dispatches through IXFeed's vtable slot 40.
 func (self *IXFeed) Ttl(puiTtl *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(puiTtl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Language dispatches through IXFeed's vtable slot 41.
 func (self *IXFeed) Language(ppszLanguage *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszLanguage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Copyright dispatches through IXFeed's vtable slot 42.
 func (self *IXFeed) Copyright(ppszCopyright *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszCopyright)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsList dispatches through IXFeed's vtable slot 43.
 func (self *IXFeed) IsList(pbIsList *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbIsList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetWatcher dispatches through IXFeed's vtable slot 44.
 func (self *IXFeed) GetWatcher(scope FEEDS_EVENTS_SCOPE, mask FEEDS_EVENTS_MASK, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(mask), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnreadItemCount dispatches through IXFeed's vtable slot 45.
 func (self *IXFeed) UnreadItemCount(puiUnreadItemCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(puiUnreadItemCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ItemCount dispatches through IXFeed's vtable slot 46.
 func (self *IXFeed) ItemCount(puiItemCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(puiItemCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: ce528e77-3716-4eb7-956d-f5e37502e12a
@@ -5194,25 +5194,25 @@ var IID_IXFeed2 = win32.GUID{Data1: 0xce528e77, Data2: 0x3716, Data3: 0x4eb7, Da
 // GetItemByEffectiveId dispatches through IXFeed2's vtable slot 47.
 func (self *IXFeed2) GetItemByEffectiveId(uiEffectiveId uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(uiEffectiveId), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LastItemDownloadTime dispatches through IXFeed2's vtable slot 48.
 func (self *IXFeed2) LastItemDownloadTime(pstLastItemDownloadTime *foundation.SYSTEMTIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstLastItemDownloadTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Username dispatches through IXFeed2's vtable slot 49.
 func (self *IXFeed2) Username(ppszUsername *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszUsername)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Password dispatches through IXFeed2's vtable slot 50.
 func (self *IXFeed2) Password(ppszPassword *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszPassword)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCredentials dispatches through IXFeed2's vtable slot 51.
@@ -5220,13 +5220,13 @@ func (self *IXFeed2) SetCredentials(pszUsername string, pszPassword string) erro
 	_pszUsername := win32.UTF16Ptr(pszUsername)
 	_pszPassword := win32.UTF16Ptr(pszPassword)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszUsername)), uintptr(unsafe.Pointer(_pszPassword)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ClearCredentials dispatches through IXFeed2's vtable slot 52.
 func (self *IXFeed2) ClearCredentials() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: bfbfb953-644f-4792-b69c-dfaca4cbf89a
@@ -5240,73 +5240,73 @@ var IID_IXFeedEnclosure = win32.GUID{Data1: 0xbfbfb953, Data2: 0x644f, Data3: 0x
 // Url dispatches through IXFeedEnclosure's vtable slot 3.
 func (self *IXFeedEnclosure) Url(ppszUrl *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszUrl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Type dispatches through IXFeedEnclosure's vtable slot 4.
 func (self *IXFeedEnclosure) Type(ppszMimeType *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszMimeType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Length dispatches through IXFeedEnclosure's vtable slot 5.
 func (self *IXFeedEnclosure) Length(puiLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(puiLength)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AsyncDownload dispatches through IXFeedEnclosure's vtable slot 6.
 func (self *IXFeedEnclosure) AsyncDownload() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CancelAsyncDownload dispatches through IXFeedEnclosure's vtable slot 7.
 func (self *IXFeedEnclosure) CancelAsyncDownload() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DownloadStatus dispatches through IXFeedEnclosure's vtable slot 8.
 func (self *IXFeedEnclosure) DownloadStatus(pfds *FEEDS_DOWNLOAD_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfds)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LastDownloadError dispatches through IXFeedEnclosure's vtable slot 9.
 func (self *IXFeedEnclosure) LastDownloadError(pfde *FEEDS_DOWNLOAD_ERROR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfde)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LocalPath dispatches through IXFeedEnclosure's vtable slot 10.
 func (self *IXFeedEnclosure) LocalPath(ppszPath *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Parent dispatches through IXFeedEnclosure's vtable slot 11.
 func (self *IXFeedEnclosure) Parent(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DownloadUrl dispatches through IXFeedEnclosure's vtable slot 12.
 func (self *IXFeedEnclosure) DownloadUrl(ppszUrl *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszUrl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DownloadMimeType dispatches through IXFeedEnclosure's vtable slot 13.
 func (self *IXFeedEnclosure) DownloadMimeType(ppszMimeType *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszMimeType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveFile dispatches through IXFeedEnclosure's vtable slot 14.
 func (self *IXFeedEnclosure) RemoveFile() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetFile dispatches through IXFeedEnclosure's vtable slot 15.
@@ -5316,7 +5316,7 @@ func (self *IXFeedEnclosure) SetFile(pszDownloadUrl string, pszDownloadFilePath 
 	_pszDownloadMimeType := win32.UTF16Ptr(pszDownloadMimeType)
 	_pszEnclosureFilename := win32.UTF16Ptr(pszEnclosureFilename)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszDownloadUrl)), uintptr(unsafe.Pointer(_pszDownloadFilePath)), uintptr(unsafe.Pointer(_pszDownloadMimeType)), uintptr(unsafe.Pointer(_pszEnclosureFilename)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 1630852e-1263-465b-98e5-fe60ffec4ac2
@@ -5330,14 +5330,14 @@ var IID_IXFeedEvents = win32.GUID{Data1: 0x1630852e, Data2: 0x1263, Data3: 0x465
 // Error dispatches through IXFeedEvents's vtable slot 3.
 func (self *IXFeedEvents) Error() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FeedDeleted dispatches through IXFeedEvents's vtable slot 4.
 func (self *IXFeedEvents) FeedDeleted(pszPath string) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FeedRenamed dispatches through IXFeedEvents's vtable slot 5.
@@ -5345,14 +5345,14 @@ func (self *IXFeedEvents) FeedRenamed(pszPath string, pszOldPath string) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	_pszOldPath := win32.UTF16Ptr(pszOldPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)), uintptr(unsafe.Pointer(_pszOldPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FeedUrlChanged dispatches through IXFeedEvents's vtable slot 6.
 func (self *IXFeedEvents) FeedUrlChanged(pszPath string) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FeedMoved dispatches through IXFeedEvents's vtable slot 7.
@@ -5360,28 +5360,28 @@ func (self *IXFeedEvents) FeedMoved(pszPath string, pszOldPath string) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	_pszOldPath := win32.UTF16Ptr(pszOldPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)), uintptr(unsafe.Pointer(_pszOldPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FeedDownloading dispatches through IXFeedEvents's vtable slot 8.
 func (self *IXFeedEvents) FeedDownloading(pszPath string) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FeedDownloadCompleted dispatches through IXFeedEvents's vtable slot 9.
 func (self *IXFeedEvents) FeedDownloadCompleted(pszPath string, fde FEEDS_DOWNLOAD_ERROR) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)), uintptr(fde))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FeedItemCountChanged dispatches through IXFeedEvents's vtable slot 10.
 func (self *IXFeedEvents) FeedItemCountChanged(pszPath string, feicfFlags int32) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)), uintptr(feicfFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 4c963678-3a51-4b88-8531-98b90b6508f2
@@ -5395,13 +5395,13 @@ var IID_IXFeedFolder = win32.GUID{Data1: 0x4c963678, Data2: 0x3a51, Data3: 0x4b8
 // Feeds dispatches through IXFeedFolder's vtable slot 3.
 func (self *IXFeedFolder) Feeds(ppfe **IXFeedsEnum) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppfe)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Subfolders dispatches through IXFeedFolder's vtable slot 4.
 func (self *IXFeedFolder) Subfolders(ppfe **IXFeedsEnum) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppfe)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateFeed dispatches through IXFeedFolder's vtable slot 5.
@@ -5409,104 +5409,104 @@ func (self *IXFeedFolder) CreateFeed(pszName string, pszUrl string, riid *win32.
 	_pszName := win32.UTF16Ptr(pszName)
 	_pszUrl := win32.UTF16Ptr(pszUrl)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(_pszUrl)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSubfolder dispatches through IXFeedFolder's vtable slot 6.
 func (self *IXFeedFolder) CreateSubfolder(pszName string, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszName := win32.UTF16Ptr(pszName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExistsFeed dispatches through IXFeedFolder's vtable slot 7.
 func (self *IXFeedFolder) ExistsFeed(pszName string, pbFeedExists *foundation.BOOL) error {
 	_pszName := win32.UTF16Ptr(pszName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(pbFeedExists)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExistsSubfolder dispatches through IXFeedFolder's vtable slot 8.
 func (self *IXFeedFolder) ExistsSubfolder(pszName string, pbSubfolderExists *foundation.BOOL) error {
 	_pszName := win32.UTF16Ptr(pszName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(pbSubfolderExists)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFeed dispatches through IXFeedFolder's vtable slot 9.
 func (self *IXFeedFolder) GetFeed(pszName string, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszName := win32.UTF16Ptr(pszName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSubfolder dispatches through IXFeedFolder's vtable slot 10.
 func (self *IXFeedFolder) GetSubfolder(pszName string, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszName := win32.UTF16Ptr(pszName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IXFeedFolder's vtable slot 11.
 func (self *IXFeedFolder) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Name dispatches through IXFeedFolder's vtable slot 12.
 func (self *IXFeedFolder) Name(ppszName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Rename dispatches through IXFeedFolder's vtable slot 13.
 func (self *IXFeedFolder) Rename(pszName string) error {
 	_pszName := win32.UTF16Ptr(pszName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Path dispatches through IXFeedFolder's vtable slot 14.
 func (self *IXFeedFolder) Path(ppszPath *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Move dispatches through IXFeedFolder's vtable slot 15.
 func (self *IXFeedFolder) Move(pszPath string) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Parent dispatches through IXFeedFolder's vtable slot 16.
 func (self *IXFeedFolder) Parent(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsRoot dispatches through IXFeedFolder's vtable slot 17.
 func (self *IXFeedFolder) IsRoot(pbIsRootFeedFolder *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbIsRootFeedFolder)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetWatcher dispatches through IXFeedFolder's vtable slot 18.
 func (self *IXFeedFolder) GetWatcher(scope FEEDS_EVENTS_SCOPE, mask FEEDS_EVENTS_MASK, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(mask), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TotalUnreadItemCount dispatches through IXFeedFolder's vtable slot 19.
 func (self *IXFeedFolder) TotalUnreadItemCount(puiTotalUnreadItemCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(puiTotalUnreadItemCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TotalItemCount dispatches through IXFeedFolder's vtable slot 20.
 func (self *IXFeedFolder) TotalItemCount(puiTotalItemCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(puiTotalItemCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 7964b769-234a-4bb1-a5f4-90454c8ad07e
@@ -5520,21 +5520,21 @@ var IID_IXFeedFolderEvents = win32.GUID{Data1: 0x7964b769, Data2: 0x234a, Data3:
 // Error dispatches through IXFeedFolderEvents's vtable slot 3.
 func (self *IXFeedFolderEvents) Error() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FolderAdded dispatches through IXFeedFolderEvents's vtable slot 4.
 func (self *IXFeedFolderEvents) FolderAdded(pszPath string) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FolderDeleted dispatches through IXFeedFolderEvents's vtable slot 5.
 func (self *IXFeedFolderEvents) FolderDeleted(pszPath string) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FolderRenamed dispatches through IXFeedFolderEvents's vtable slot 6.
@@ -5542,7 +5542,7 @@ func (self *IXFeedFolderEvents) FolderRenamed(pszPath string, pszOldPath string)
 	_pszPath := win32.UTF16Ptr(pszPath)
 	_pszOldPath := win32.UTF16Ptr(pszOldPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)), uintptr(unsafe.Pointer(_pszOldPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FolderMovedFrom dispatches through IXFeedFolderEvents's vtable slot 7.
@@ -5550,7 +5550,7 @@ func (self *IXFeedFolderEvents) FolderMovedFrom(pszPath string, pszOldPath strin
 	_pszPath := win32.UTF16Ptr(pszPath)
 	_pszOldPath := win32.UTF16Ptr(pszOldPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)), uintptr(unsafe.Pointer(_pszOldPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FolderMovedTo dispatches through IXFeedFolderEvents's vtable slot 8.
@@ -5558,28 +5558,28 @@ func (self *IXFeedFolderEvents) FolderMovedTo(pszPath string, pszOldPath string)
 	_pszPath := win32.UTF16Ptr(pszPath)
 	_pszOldPath := win32.UTF16Ptr(pszOldPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)), uintptr(unsafe.Pointer(_pszOldPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FolderItemCountChanged dispatches through IXFeedFolderEvents's vtable slot 9.
 func (self *IXFeedFolderEvents) FolderItemCountChanged(pszPath string, feicfFlags int32) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)), uintptr(feicfFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FeedAdded dispatches through IXFeedFolderEvents's vtable slot 10.
 func (self *IXFeedFolderEvents) FeedAdded(pszPath string) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FeedDeleted dispatches through IXFeedFolderEvents's vtable slot 11.
 func (self *IXFeedFolderEvents) FeedDeleted(pszPath string) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FeedRenamed dispatches through IXFeedFolderEvents's vtable slot 12.
@@ -5587,14 +5587,14 @@ func (self *IXFeedFolderEvents) FeedRenamed(pszPath string, pszOldPath string) e
 	_pszPath := win32.UTF16Ptr(pszPath)
 	_pszOldPath := win32.UTF16Ptr(pszOldPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)), uintptr(unsafe.Pointer(_pszOldPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FeedUrlChanged dispatches through IXFeedFolderEvents's vtable slot 13.
 func (self *IXFeedFolderEvents) FeedUrlChanged(pszPath string) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FeedMovedFrom dispatches through IXFeedFolderEvents's vtable slot 14.
@@ -5602,7 +5602,7 @@ func (self *IXFeedFolderEvents) FeedMovedFrom(pszPath string, pszOldPath string)
 	_pszPath := win32.UTF16Ptr(pszPath)
 	_pszOldPath := win32.UTF16Ptr(pszOldPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)), uintptr(unsafe.Pointer(_pszOldPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FeedMovedTo dispatches through IXFeedFolderEvents's vtable slot 15.
@@ -5610,28 +5610,28 @@ func (self *IXFeedFolderEvents) FeedMovedTo(pszPath string, pszOldPath string) e
 	_pszPath := win32.UTF16Ptr(pszPath)
 	_pszOldPath := win32.UTF16Ptr(pszOldPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)), uintptr(unsafe.Pointer(_pszOldPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FeedDownloading dispatches through IXFeedFolderEvents's vtable slot 16.
 func (self *IXFeedFolderEvents) FeedDownloading(pszPath string) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FeedDownloadCompleted dispatches through IXFeedFolderEvents's vtable slot 17.
 func (self *IXFeedFolderEvents) FeedDownloadCompleted(pszPath string, fde FEEDS_DOWNLOAD_ERROR) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)), uintptr(fde))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FeedItemCountChanged dispatches through IXFeedFolderEvents's vtable slot 18.
 func (self *IXFeedFolderEvents) FeedItemCountChanged(pszPath string, feicfFlags int32) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)), uintptr(feicfFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: e757b2f5-e73e-434e-a1bf-2bd7c3e60fcb
@@ -5645,104 +5645,104 @@ var IID_IXFeedItem = win32.GUID{Data1: 0xe757b2f5, Data2: 0xe73e, Data3: 0x434e,
 // Xml dispatches through IXFeedItem's vtable slot 3.
 func (self *IXFeedItem) Xml(fxif FEEDS_XML_INCLUDE_FLAGS, pps **systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(fxif), uintptr(unsafe.Pointer(pps)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Title dispatches through IXFeedItem's vtable slot 4.
 func (self *IXFeedItem) Title(ppszTitle *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszTitle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Link dispatches through IXFeedItem's vtable slot 5.
 func (self *IXFeedItem) Link(ppszUrl *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszUrl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Guid dispatches through IXFeedItem's vtable slot 6.
 func (self *IXFeedItem) Guid(ppszGuid *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszGuid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Description dispatches through IXFeedItem's vtable slot 7.
 func (self *IXFeedItem) Description(ppszDescription *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PubDate dispatches through IXFeedItem's vtable slot 8.
 func (self *IXFeedItem) PubDate(pstPubDate *foundation.SYSTEMTIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstPubDate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Comments dispatches through IXFeedItem's vtable slot 9.
 func (self *IXFeedItem) Comments(ppszUrl *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszUrl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Author dispatches through IXFeedItem's vtable slot 10.
 func (self *IXFeedItem) Author(ppszAuthor *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszAuthor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Enclosure dispatches through IXFeedItem's vtable slot 11.
 func (self *IXFeedItem) Enclosure(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsRead dispatches through IXFeedItem's vtable slot 12.
 func (self *IXFeedItem) IsRead(pbIsRead *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbIsRead)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetIsRead dispatches through IXFeedItem's vtable slot 13.
 func (self *IXFeedItem) SetIsRead(bIsRead bool) error {
 	_bIsRead := win32.Bool32(bIsRead)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(_bIsRead))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LocalId dispatches through IXFeedItem's vtable slot 14.
 func (self *IXFeedItem) LocalId(puiId *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(puiId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Parent dispatches through IXFeedItem's vtable slot 15.
 func (self *IXFeedItem) Parent(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IXFeedItem's vtable slot 16.
 func (self *IXFeedItem) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DownloadUrl dispatches through IXFeedItem's vtable slot 17.
 func (self *IXFeedItem) DownloadUrl(ppszUrl *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszUrl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LastDownloadTime dispatches through IXFeedItem's vtable slot 18.
 func (self *IXFeedItem) LastDownloadTime(pstLastDownloadTime *foundation.SYSTEMTIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstLastDownloadTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Modified dispatches through IXFeedItem's vtable slot 19.
 func (self *IXFeedItem) Modified(pstModifiedTime *foundation.SYSTEMTIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstModifiedTime)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 6cda2dc7-9013-4522-9970-2a9dd9ead5a3
@@ -5756,7 +5756,7 @@ var IID_IXFeedItem2 = win32.GUID{Data1: 0x6cda2dc7, Data2: 0x9013, Data3: 0x4522
 // EffectiveId dispatches through IXFeedItem2's vtable slot 20.
 func (self *IXFeedItem2) EffectiveId(puiEffectiveId *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(puiEffectiveId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: dc43a9d5-5015-4301-8c96-a47434b4d658
@@ -5770,13 +5770,13 @@ var IID_IXFeedsEnum = win32.GUID{Data1: 0xdc43a9d5, Data2: 0x5015, Data3: 0x4301
 // Count dispatches through IXFeedsEnum's vtable slot 3.
 func (self *IXFeedsEnum) Count(puiCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(puiCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Item dispatches through IXFeedsEnum's vtable slot 4.
 func (self *IXFeedsEnum) Item(uiIndex uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(uiIndex), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 5357e238-fb12-4aca-a930-cab7832b84bf
@@ -5790,105 +5790,105 @@ var IID_IXFeedsManager = win32.GUID{Data1: 0x5357e238, Data2: 0xfb12, Data3: 0x4
 // RootFolder dispatches through IXFeedsManager's vtable slot 3.
 func (self *IXFeedsManager) RootFolder(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsSubscribed dispatches through IXFeedsManager's vtable slot 4.
 func (self *IXFeedsManager) IsSubscribed(pszUrl string, pbSubscribed *foundation.BOOL) error {
 	_pszUrl := win32.UTF16Ptr(pszUrl)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszUrl)), uintptr(unsafe.Pointer(pbSubscribed)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExistsFeed dispatches through IXFeedsManager's vtable slot 5.
 func (self *IXFeedsManager) ExistsFeed(pszPath string, pbFeedExists *foundation.BOOL) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)), uintptr(unsafe.Pointer(pbFeedExists)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFeed dispatches through IXFeedsManager's vtable slot 6.
 func (self *IXFeedsManager) GetFeed(pszPath string, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFeedByUrl dispatches through IXFeedsManager's vtable slot 7.
 func (self *IXFeedsManager) GetFeedByUrl(pszUrl string, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszUrl := win32.UTF16Ptr(pszUrl)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszUrl)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExistsFolder dispatches through IXFeedsManager's vtable slot 8.
 func (self *IXFeedsManager) ExistsFolder(pszPath string, pbFolderExists *foundation.BOOL) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)), uintptr(unsafe.Pointer(pbFolderExists)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFolder dispatches through IXFeedsManager's vtable slot 9.
 func (self *IXFeedsManager) GetFolder(pszPath string, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteFeed dispatches through IXFeedsManager's vtable slot 10.
 func (self *IXFeedsManager) DeleteFeed(pszPath string) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteFolder dispatches through IXFeedsManager's vtable slot 11.
 func (self *IXFeedsManager) DeleteFolder(pszPath string) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BackgroundSync dispatches through IXFeedsManager's vtable slot 12.
 func (self *IXFeedsManager) BackgroundSync(fbsa FEEDS_BACKGROUNDSYNC_ACTION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(fbsa))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BackgroundSyncStatus dispatches through IXFeedsManager's vtable slot 13.
 func (self *IXFeedsManager) BackgroundSyncStatus(pfbss *FEEDS_BACKGROUNDSYNC_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfbss)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DefaultInterval dispatches through IXFeedsManager's vtable slot 14.
 func (self *IXFeedsManager) DefaultInterval(puiInterval *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(puiInterval)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDefaultInterval dispatches through IXFeedsManager's vtable slot 15.
 func (self *IXFeedsManager) SetDefaultInterval(uiInterval uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(uiInterval))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AsyncSyncAll dispatches through IXFeedsManager's vtable slot 16.
 func (self *IXFeedsManager) AsyncSyncAll() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Normalize dispatches through IXFeedsManager's vtable slot 17.
 func (self *IXFeedsManager) Normalize(pStreamIn *systemcom.IStream, ppStreamOut **systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStreamIn)), uintptr(unsafe.Pointer(ppStreamOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ItemCountLimit dispatches through IXFeedsManager's vtable slot 18.
 func (self *IXFeedsManager) ItemCountLimit(puiItemCountLimit *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(puiItemCountLimit)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WMPOCXEvents: https://learn.microsoft.com/windows/win32/WMP/-wmpocxevents-interface

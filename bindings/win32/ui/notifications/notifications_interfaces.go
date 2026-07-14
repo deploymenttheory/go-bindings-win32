@@ -30,5 +30,5 @@ func (self *INotificationActivationCallback) Activate(appUserModelId string, inv
 		_data = &data[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_appUserModelId)), uintptr(unsafe.Pointer(_invokedArgs)), uintptr(unsafe.Pointer(_data)), uintptr(len(data)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

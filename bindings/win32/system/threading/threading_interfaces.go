@@ -25,13 +25,13 @@ var IID_IRtwqAsyncCallback = win32.GUID{Data1: 0xa27003cf, Data2: 0x2354, Data3:
 // GetParameters dispatches through IRtwqAsyncCallback's vtable slot 3.
 func (self *IRtwqAsyncCallback) GetParameters(pdwFlags *uint32, pdwQueue *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)), uintptr(unsafe.Pointer(pdwQueue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Invoke dispatches through IRtwqAsyncCallback's vtable slot 4.
 func (self *IRtwqAsyncCallback) Invoke(pAsyncResult *IRtwqAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAsyncResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IRtwqAsyncResult: https://learn.microsoft.com/windows/win32/api/rtworkq/nn-rtworkq-irtwqasyncresult
@@ -46,25 +46,25 @@ var IID_IRtwqAsyncResult = win32.GUID{Data1: 0xac6b7889, Data2: 0x0740, Data3: 0
 // GetState dispatches through IRtwqAsyncResult's vtable slot 3.
 func (self *IRtwqAsyncResult) GetState(ppunkState **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppunkState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStatus dispatches through IRtwqAsyncResult's vtable slot 4.
 func (self *IRtwqAsyncResult) GetStatus() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetStatus dispatches through IRtwqAsyncResult's vtable slot 5.
 func (self *IRtwqAsyncResult) SetStatus(hrStatus foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hrStatus))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetObject dispatches through IRtwqAsyncResult's vtable slot 6.
 func (self *IRtwqAsyncResult) GetObject(ppObject **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStateNoAddRef dispatches through IRtwqAsyncResult's vtable slot 7.
@@ -85,19 +85,19 @@ var IID_IRtwqPlatformEvents = win32.GUID{Data1: 0x63d9255a, Data2: 0x7ff1, Data3
 // InitializationComplete dispatches through IRtwqPlatformEvents's vtable slot 3.
 func (self *IRtwqPlatformEvents) InitializationComplete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ShutdownStart dispatches through IRtwqPlatformEvents's vtable slot 4.
 func (self *IRtwqPlatformEvents) ShutdownStart() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ShutdownComplete dispatches through IRtwqPlatformEvents's vtable slot 5.
 func (self *IRtwqPlatformEvents) ShutdownComplete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 type RTWQASYNCRESULT struct {

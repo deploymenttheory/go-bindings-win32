@@ -26,28 +26,28 @@ var IID_IWSMan = win32.GUID{Data1: 0x190d8637, Data2: 0x5cd3, Data3: 0x496d, Dat
 func (self *IWSMan) CreateSession(connection foundation.BSTR, flags int32, connectionOptions *systemcom.IDispatch) (*systemcom.IDispatch, error) {
 	var _session *systemcom.IDispatch
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(connection)), uintptr(flags), uintptr(unsafe.Pointer(connectionOptions)), uintptr(unsafe.Pointer(&_session)))
-	return _session, win32.HRESULTError(int32(r1))
+	return _session, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateConnectionOptions dispatches through IWSMan's vtable slot 8.
 func (self *IWSMan) CreateConnectionOptions() (*systemcom.IDispatch, error) {
 	var _connectionOptions *systemcom.IDispatch
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_connectionOptions)))
-	return _connectionOptions, win32.HRESULTError(int32(r1))
+	return _connectionOptions, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CommandLine dispatches through IWSMan's vtable slot 9.
 func (self *IWSMan) Get_CommandLine() (foundation.BSTR, error) {
 	var _value foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Error dispatches through IWSMan's vtable slot 10.
 func (self *IWSMan) Get_Error() (foundation.BSTR, error) {
 	var _value foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // IWSManConnectionOptions: https://learn.microsoft.com/windows/win32/api/wsmandisp/nn-wsmandisp-iwsmanconnectionoptions
@@ -63,19 +63,19 @@ var IID_IWSManConnectionOptions = win32.GUID{Data1: 0xf704e861, Data2: 0x9e52, D
 func (self *IWSManConnectionOptions) Get_UserName() (foundation.BSTR, error) {
 	var _name foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
-	return _name, win32.HRESULTError(int32(r1))
+	return _name, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_UserName dispatches through IWSManConnectionOptions's vtable slot 8.
 func (self *IWSManConnectionOptions) Put_UserName(name foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Password dispatches through IWSManConnectionOptions's vtable slot 9.
 func (self *IWSManConnectionOptions) Put_Password(password foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(password)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWSManConnectionOptionsEx: https://learn.microsoft.com/windows/win32/api/wsmandisp/nn-wsmandisp-iwsmanconnectionoptionsex
@@ -91,13 +91,13 @@ var IID_IWSManConnectionOptionsEx = win32.GUID{Data1: 0xef43edf7, Data2: 0x2a48,
 func (self *IWSManConnectionOptionsEx) Get_CertificateThumbprint() (foundation.BSTR, error) {
 	var _thumbprint foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_thumbprint)))
-	return _thumbprint, win32.HRESULTError(int32(r1))
+	return _thumbprint, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CertificateThumbprint dispatches through IWSManConnectionOptionsEx's vtable slot 11.
 func (self *IWSManConnectionOptionsEx) Put_CertificateThumbprint(thumbprint foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(thumbprint)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWSManConnectionOptionsEx2: https://learn.microsoft.com/windows/win32/api/wsmandisp/nn-wsmandisp-iwsmanconnectionoptionsex2
@@ -112,56 +112,56 @@ var IID_IWSManConnectionOptionsEx2 = win32.GUID{Data1: 0xf500c9ec, Data2: 0x24ee
 // SetProxy dispatches through IWSManConnectionOptionsEx2's vtable slot 12.
 func (self *IWSManConnectionOptionsEx2) SetProxy(accessType int32, authenticationMechanism int32, userName foundation.BSTR, password foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(accessType), uintptr(authenticationMechanism), uintptr(unsafe.Pointer(userName)), uintptr(unsafe.Pointer(password)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ProxyIEConfig dispatches through IWSManConnectionOptionsEx2's vtable slot 13.
 func (self *IWSManConnectionOptionsEx2) ProxyIEConfig() (int32, error) {
 	var _value int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // ProxyWinHttpConfig dispatches through IWSManConnectionOptionsEx2's vtable slot 14.
 func (self *IWSManConnectionOptionsEx2) ProxyWinHttpConfig() (int32, error) {
 	var _value int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // ProxyAutoDetect dispatches through IWSManConnectionOptionsEx2's vtable slot 15.
 func (self *IWSManConnectionOptionsEx2) ProxyAutoDetect() (int32, error) {
 	var _value int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // ProxyNoProxyServer dispatches through IWSManConnectionOptionsEx2's vtable slot 16.
 func (self *IWSManConnectionOptionsEx2) ProxyNoProxyServer() (int32, error) {
 	var _value int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // ProxyAuthenticationUseNegotiate dispatches through IWSManConnectionOptionsEx2's vtable slot 17.
 func (self *IWSManConnectionOptionsEx2) ProxyAuthenticationUseNegotiate() (int32, error) {
 	var _value int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // ProxyAuthenticationUseBasic dispatches through IWSManConnectionOptionsEx2's vtable slot 18.
 func (self *IWSManConnectionOptionsEx2) ProxyAuthenticationUseBasic() (int32, error) {
 	var _value int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // ProxyAuthenticationUseDigest dispatches through IWSManConnectionOptionsEx2's vtable slot 19.
 func (self *IWSManConnectionOptionsEx2) ProxyAuthenticationUseDigest() (int32, error) {
 	var _value int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // IWSManEnumerator: https://learn.microsoft.com/windows/win32/api/wsmandisp/nn-wsmandisp-iwsmanenumerator
@@ -177,21 +177,21 @@ var IID_IWSManEnumerator = win32.GUID{Data1: 0xf3457ca9, Data2: 0xabb9, Data3: 0
 func (self *IWSManEnumerator) ReadItem() (foundation.BSTR, error) {
 	var _resource foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_resource)))
-	return _resource, win32.HRESULTError(int32(r1))
+	return _resource, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AtEndOfStream dispatches through IWSManEnumerator's vtable slot 8.
 func (self *IWSManEnumerator) Get_AtEndOfStream() (foundation.VARIANT_BOOL, error) {
 	var _eos foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_eos)))
-	return _eos, win32.HRESULTError(int32(r1))
+	return _eos, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Error dispatches through IWSManEnumerator's vtable slot 9.
 func (self *IWSManEnumerator) Get_Error() (foundation.BSTR, error) {
 	var _value foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // IWSManEx: https://learn.microsoft.com/windows/win32/api/wsmandisp/nn-wsmandisp-iwsmanex
@@ -207,140 +207,140 @@ var IID_IWSManEx = win32.GUID{Data1: 0x2d53bdaa, Data2: 0x798e, Data3: 0x49e6, D
 func (self *IWSManEx) CreateResourceLocator(strResourceLocator foundation.BSTR) (*systemcom.IDispatch, error) {
 	var _newResourceLocator *systemcom.IDispatch
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strResourceLocator)), uintptr(unsafe.Pointer(&_newResourceLocator)))
-	return _newResourceLocator, win32.HRESULTError(int32(r1))
+	return _newResourceLocator, win32.ErrIfFailed(int32(r1))
 }
 
 // SessionFlagUTF8 dispatches through IWSManEx's vtable slot 12.
 func (self *IWSManEx) SessionFlagUTF8() (int32, error) {
 	var _flags int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_flags)))
-	return _flags, win32.HRESULTError(int32(r1))
+	return _flags, win32.ErrIfFailed(int32(r1))
 }
 
 // SessionFlagCredUsernamePassword dispatches through IWSManEx's vtable slot 13.
 func (self *IWSManEx) SessionFlagCredUsernamePassword() (int32, error) {
 	var _flags int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_flags)))
-	return _flags, win32.HRESULTError(int32(r1))
+	return _flags, win32.ErrIfFailed(int32(r1))
 }
 
 // SessionFlagSkipCACheck dispatches through IWSManEx's vtable slot 14.
 func (self *IWSManEx) SessionFlagSkipCACheck() (int32, error) {
 	var _flags int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_flags)))
-	return _flags, win32.HRESULTError(int32(r1))
+	return _flags, win32.ErrIfFailed(int32(r1))
 }
 
 // SessionFlagSkipCNCheck dispatches through IWSManEx's vtable slot 15.
 func (self *IWSManEx) SessionFlagSkipCNCheck() (int32, error) {
 	var _flags int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_flags)))
-	return _flags, win32.HRESULTError(int32(r1))
+	return _flags, win32.ErrIfFailed(int32(r1))
 }
 
 // SessionFlagUseDigest dispatches through IWSManEx's vtable slot 16.
 func (self *IWSManEx) SessionFlagUseDigest() (int32, error) {
 	var _flags int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_flags)))
-	return _flags, win32.HRESULTError(int32(r1))
+	return _flags, win32.ErrIfFailed(int32(r1))
 }
 
 // SessionFlagUseNegotiate dispatches through IWSManEx's vtable slot 17.
 func (self *IWSManEx) SessionFlagUseNegotiate() (int32, error) {
 	var _flags int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_flags)))
-	return _flags, win32.HRESULTError(int32(r1))
+	return _flags, win32.ErrIfFailed(int32(r1))
 }
 
 // SessionFlagUseBasic dispatches through IWSManEx's vtable slot 18.
 func (self *IWSManEx) SessionFlagUseBasic() (int32, error) {
 	var _flags int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_flags)))
-	return _flags, win32.HRESULTError(int32(r1))
+	return _flags, win32.ErrIfFailed(int32(r1))
 }
 
 // SessionFlagUseKerberos dispatches through IWSManEx's vtable slot 19.
 func (self *IWSManEx) SessionFlagUseKerberos() (int32, error) {
 	var _flags int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_flags)))
-	return _flags, win32.HRESULTError(int32(r1))
+	return _flags, win32.ErrIfFailed(int32(r1))
 }
 
 // SessionFlagNoEncryption dispatches through IWSManEx's vtable slot 20.
 func (self *IWSManEx) SessionFlagNoEncryption() (int32, error) {
 	var _flags int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_flags)))
-	return _flags, win32.HRESULTError(int32(r1))
+	return _flags, win32.ErrIfFailed(int32(r1))
 }
 
 // SessionFlagEnableSPNServerPort dispatches through IWSManEx's vtable slot 21.
 func (self *IWSManEx) SessionFlagEnableSPNServerPort() (int32, error) {
 	var _flags int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_flags)))
-	return _flags, win32.HRESULTError(int32(r1))
+	return _flags, win32.ErrIfFailed(int32(r1))
 }
 
 // SessionFlagUseNoAuthentication dispatches through IWSManEx's vtable slot 22.
 func (self *IWSManEx) SessionFlagUseNoAuthentication() (int32, error) {
 	var _flags int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_flags)))
-	return _flags, win32.HRESULTError(int32(r1))
+	return _flags, win32.ErrIfFailed(int32(r1))
 }
 
 // EnumerationFlagNonXmlText dispatches through IWSManEx's vtable slot 23.
 func (self *IWSManEx) EnumerationFlagNonXmlText() (int32, error) {
 	var _flags int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_flags)))
-	return _flags, win32.HRESULTError(int32(r1))
+	return _flags, win32.ErrIfFailed(int32(r1))
 }
 
 // EnumerationFlagReturnEPR dispatches through IWSManEx's vtable slot 24.
 func (self *IWSManEx) EnumerationFlagReturnEPR() (int32, error) {
 	var _flags int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_flags)))
-	return _flags, win32.HRESULTError(int32(r1))
+	return _flags, win32.ErrIfFailed(int32(r1))
 }
 
 // EnumerationFlagReturnObjectAndEPR dispatches through IWSManEx's vtable slot 25.
 func (self *IWSManEx) EnumerationFlagReturnObjectAndEPR() (int32, error) {
 	var _flags int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_flags)))
-	return _flags, win32.HRESULTError(int32(r1))
+	return _flags, win32.ErrIfFailed(int32(r1))
 }
 
 // GetErrorMessage dispatches through IWSManEx's vtable slot 26.
 func (self *IWSManEx) GetErrorMessage(errorNumber uint32) (foundation.BSTR, error) {
 	var _errorMessage foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(errorNumber), uintptr(unsafe.Pointer(&_errorMessage)))
-	return _errorMessage, win32.HRESULTError(int32(r1))
+	return _errorMessage, win32.ErrIfFailed(int32(r1))
 }
 
 // EnumerationFlagHierarchyDeep dispatches through IWSManEx's vtable slot 27.
 func (self *IWSManEx) EnumerationFlagHierarchyDeep() (int32, error) {
 	var _flags int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_flags)))
-	return _flags, win32.HRESULTError(int32(r1))
+	return _flags, win32.ErrIfFailed(int32(r1))
 }
 
 // EnumerationFlagHierarchyShallow dispatches through IWSManEx's vtable slot 28.
 func (self *IWSManEx) EnumerationFlagHierarchyShallow() (int32, error) {
 	var _flags int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_flags)))
-	return _flags, win32.HRESULTError(int32(r1))
+	return _flags, win32.ErrIfFailed(int32(r1))
 }
 
 // EnumerationFlagHierarchyDeepBasePropsOnly dispatches through IWSManEx's vtable slot 29.
 func (self *IWSManEx) EnumerationFlagHierarchyDeepBasePropsOnly() (int32, error) {
 	var _flags int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_flags)))
-	return _flags, win32.HRESULTError(int32(r1))
+	return _flags, win32.ErrIfFailed(int32(r1))
 }
 
 // EnumerationFlagReturnObject dispatches through IWSManEx's vtable slot 30.
 func (self *IWSManEx) EnumerationFlagReturnObject() (int32, error) {
 	var _flags int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_flags)))
-	return _flags, win32.HRESULTError(int32(r1))
+	return _flags, win32.ErrIfFailed(int32(r1))
 }
 
 // IWSManEx2: https://learn.microsoft.com/windows/win32/api/wsmandisp/nn-wsmandisp-iwsmanex2
@@ -356,7 +356,7 @@ var IID_IWSManEx2 = win32.GUID{Data1: 0x1d1b5ae0, Data2: 0x42d9, Data3: 0x4021, 
 func (self *IWSManEx2) SessionFlagUseClientCertificate() (int32, error) {
 	var _flags int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_flags)))
-	return _flags, win32.HRESULTError(int32(r1))
+	return _flags, win32.ErrIfFailed(int32(r1))
 }
 
 // IWSManEx3: https://learn.microsoft.com/windows/win32/api/wsmandisp/nn-wsmandisp-iwsmanex3
@@ -372,49 +372,49 @@ var IID_IWSManEx3 = win32.GUID{Data1: 0x6400e966, Data2: 0x011d, Data3: 0x4eac, 
 func (self *IWSManEx3) SessionFlagUTF16() (int32, error) {
 	var _flags int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_flags)))
-	return _flags, win32.HRESULTError(int32(r1))
+	return _flags, win32.ErrIfFailed(int32(r1))
 }
 
 // SessionFlagUseCredSsp dispatches through IWSManEx3's vtable slot 33.
 func (self *IWSManEx3) SessionFlagUseCredSsp() (int32, error) {
 	var _flags int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_flags)))
-	return _flags, win32.HRESULTError(int32(r1))
+	return _flags, win32.ErrIfFailed(int32(r1))
 }
 
 // EnumerationFlagAssociationInstance dispatches through IWSManEx3's vtable slot 34.
 func (self *IWSManEx3) EnumerationFlagAssociationInstance() (int32, error) {
 	var _flags int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_flags)))
-	return _flags, win32.HRESULTError(int32(r1))
+	return _flags, win32.ErrIfFailed(int32(r1))
 }
 
 // EnumerationFlagAssociatedInstance dispatches through IWSManEx3's vtable slot 35.
 func (self *IWSManEx3) EnumerationFlagAssociatedInstance() (int32, error) {
 	var _flags int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_flags)))
-	return _flags, win32.HRESULTError(int32(r1))
+	return _flags, win32.ErrIfFailed(int32(r1))
 }
 
 // SessionFlagSkipRevocationCheck dispatches through IWSManEx3's vtable slot 36.
 func (self *IWSManEx3) SessionFlagSkipRevocationCheck() (int32, error) {
 	var _flags int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_flags)))
-	return _flags, win32.HRESULTError(int32(r1))
+	return _flags, win32.ErrIfFailed(int32(r1))
 }
 
 // SessionFlagAllowNegotiateImplicitCredentials dispatches through IWSManEx3's vtable slot 37.
 func (self *IWSManEx3) SessionFlagAllowNegotiateImplicitCredentials() (int32, error) {
 	var _flags int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_flags)))
-	return _flags, win32.HRESULTError(int32(r1))
+	return _flags, win32.ErrIfFailed(int32(r1))
 }
 
 // SessionFlagUseSsl dispatches through IWSManEx3's vtable slot 38.
 func (self *IWSManEx3) SessionFlagUseSsl() (int32, error) {
 	var _flags int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_flags)))
-	return _flags, win32.HRESULTError(int32(r1))
+	return _flags, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 04ae2b1d-9954-4d99-94a9-a961e72c3a13
@@ -437,73 +437,73 @@ var IID_IWSManResourceLocator = win32.GUID{Data1: 0xa7a1ba28, Data2: 0xde41, Dat
 // Put_ResourceURI dispatches through IWSManResourceLocator's vtable slot 7.
 func (self *IWSManResourceLocator) Put_ResourceURI(uri foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(uri)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ResourceURI dispatches through IWSManResourceLocator's vtable slot 8.
 func (self *IWSManResourceLocator) Get_ResourceURI() (foundation.BSTR, error) {
 	var _uri foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_uri)))
-	return _uri, win32.HRESULTError(int32(r1))
+	return _uri, win32.ErrIfFailed(int32(r1))
 }
 
 // ClearSelectors dispatches through IWSManResourceLocator's vtable slot 10.
 func (self *IWSManResourceLocator) ClearSelectors() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FragmentPath dispatches through IWSManResourceLocator's vtable slot 11.
 func (self *IWSManResourceLocator) Get_FragmentPath() (foundation.BSTR, error) {
 	var _text foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_text)))
-	return _text, win32.HRESULTError(int32(r1))
+	return _text, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FragmentPath dispatches through IWSManResourceLocator's vtable slot 12.
 func (self *IWSManResourceLocator) Put_FragmentPath(text foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(text)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FragmentDialect dispatches through IWSManResourceLocator's vtable slot 13.
 func (self *IWSManResourceLocator) Get_FragmentDialect() (foundation.BSTR, error) {
 	var _text foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_text)))
-	return _text, win32.HRESULTError(int32(r1))
+	return _text, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FragmentDialect dispatches through IWSManResourceLocator's vtable slot 14.
 func (self *IWSManResourceLocator) Put_FragmentDialect(text foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(text)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MustUnderstandOptions dispatches through IWSManResourceLocator's vtable slot 16.
 func (self *IWSManResourceLocator) Put_MustUnderstandOptions(mustUnderstand bool) error {
 	_mustUnderstand := win32.Bool32(mustUnderstand)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(_mustUnderstand))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MustUnderstandOptions dispatches through IWSManResourceLocator's vtable slot 17.
 func (self *IWSManResourceLocator) Get_MustUnderstandOptions() (foundation.BOOL, error) {
 	var _mustUnderstand foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_mustUnderstand)))
-	return _mustUnderstand, win32.HRESULTError(int32(r1))
+	return _mustUnderstand, win32.ErrIfFailed(int32(r1))
 }
 
 // ClearOptions dispatches through IWSManResourceLocator's vtable slot 18.
 func (self *IWSManResourceLocator) ClearOptions() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Error dispatches through IWSManResourceLocator's vtable slot 19.
 func (self *IWSManResourceLocator) Get_Error() (foundation.BSTR, error) {
 	var _value foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: effaead7-7ec8-4716-b9be-f2e7e9fb4adb
@@ -527,38 +527,38 @@ var IID_IWSManSession = win32.GUID{Data1: 0xfc84fc58, Data2: 0x1286, Data3: 0x40
 func (self *IWSManSession) Identify(flags int32) (foundation.BSTR, error) {
 	var _result foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(flags), uintptr(unsafe.Pointer(&_result)))
-	return _result, win32.HRESULTError(int32(r1))
+	return _result, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Error dispatches through IWSManSession's vtable slot 14.
 func (self *IWSManSession) Get_Error() (foundation.BSTR, error) {
 	var _value foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BatchItems dispatches through IWSManSession's vtable slot 15.
 func (self *IWSManSession) Get_BatchItems() (int32, error) {
 	var _value int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BatchItems dispatches through IWSManSession's vtable slot 16.
 func (self *IWSManSession) Put_BatchItems(value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Timeout dispatches through IWSManSession's vtable slot 17.
 func (self *IWSManSession) Get_Timeout() (int32, error) {
 	var _value int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Timeout dispatches through IWSManSession's vtable slot 18.
 func (self *IWSManSession) Put_Timeout(value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

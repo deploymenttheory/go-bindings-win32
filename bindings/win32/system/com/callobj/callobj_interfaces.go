@@ -26,19 +26,19 @@ var IID_ICallFrame = win32.GUID{Data1: 0xd573b4b0, Data2: 0x894e, Data3: 0x11d2,
 // GetInfo dispatches through ICallFrame's vtable slot 3.
 func (self *ICallFrame) GetInfo(pInfo *CALLFRAMEINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetIIDAndMethod dispatches through ICallFrame's vtable slot 4.
 func (self *ICallFrame) GetIIDAndMethod(pIID *win32.GUID, piMethod *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIID)), uintptr(unsafe.Pointer(piMethod)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNames dispatches through ICallFrame's vtable slot 5.
 func (self *ICallFrame) GetNames(pwszInterface *foundation.PWSTR, pwszMethod *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszInterface)), uintptr(unsafe.Pointer(pwszMethod)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStackLocation dispatches through ICallFrame's vtable slot 6.
@@ -60,79 +60,79 @@ func (self *ICallFrame) SetReturnValue(hr foundation.HRESULT) {
 // GetReturnValue dispatches through ICallFrame's vtable slot 9.
 func (self *ICallFrame) GetReturnValue() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetParamInfo dispatches through ICallFrame's vtable slot 10.
 func (self *ICallFrame) GetParamInfo(iparam uint32, pInfo *CALLFRAMEPARAMINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(iparam), uintptr(unsafe.Pointer(pInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetParam dispatches through ICallFrame's vtable slot 11.
 func (self *ICallFrame) SetParam(iparam uint32, pvar *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(iparam), uintptr(unsafe.Pointer(pvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetParam dispatches through ICallFrame's vtable slot 12.
 func (self *ICallFrame) GetParam(iparam uint32, pvar *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(iparam), uintptr(unsafe.Pointer(pvar)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Copy dispatches through ICallFrame's vtable slot 13.
 func (self *ICallFrame) Copy(copyControl CALLFRAME_COPY, pWalker *ICallFrameWalker, ppFrame **ICallFrame) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(copyControl), uintptr(unsafe.Pointer(pWalker)), uintptr(unsafe.Pointer(ppFrame)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Free dispatches through ICallFrame's vtable slot 14.
 func (self *ICallFrame) Free(pframeArgsDest *ICallFrame, pWalkerDestFree *ICallFrameWalker, pWalkerCopy *ICallFrameWalker, freeFlags uint32, pWalkerFree *ICallFrameWalker, nullFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pframeArgsDest)), uintptr(unsafe.Pointer(pWalkerDestFree)), uintptr(unsafe.Pointer(pWalkerCopy)), uintptr(freeFlags), uintptr(unsafe.Pointer(pWalkerFree)), uintptr(nullFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FreeParam dispatches through ICallFrame's vtable slot 15.
 func (self *ICallFrame) FreeParam(iparam uint32, freeFlags uint32, pWalkerFree *ICallFrameWalker, nullFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(iparam), uintptr(freeFlags), uintptr(unsafe.Pointer(pWalkerFree)), uintptr(nullFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WalkFrame dispatches through ICallFrame's vtable slot 16.
 func (self *ICallFrame) WalkFrame(walkWhat uint32, pWalker *ICallFrameWalker) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(walkWhat), uintptr(unsafe.Pointer(pWalker)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMarshalSizeMax dispatches through ICallFrame's vtable slot 17.
 func (self *ICallFrame) GetMarshalSizeMax(pmshlContext *CALLFRAME_MARSHALCONTEXT, mshlflags systemcom.MSHLFLAGS, pcbBufferNeeded *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pmshlContext)), uintptr(mshlflags), uintptr(unsafe.Pointer(pcbBufferNeeded)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Marshal dispatches through ICallFrame's vtable slot 18.
 func (self *ICallFrame) Marshal(pmshlContext *CALLFRAME_MARSHALCONTEXT, mshlflags systemcom.MSHLFLAGS, pBuffer unsafe.Pointer, cbBuffer uint32, pcbBufferUsed *uint32, pdataRep *uint32, prpcFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pmshlContext)), uintptr(mshlflags), uintptr(unsafe.Pointer(pBuffer)), uintptr(cbBuffer), uintptr(unsafe.Pointer(pcbBufferUsed)), uintptr(unsafe.Pointer(pdataRep)), uintptr(unsafe.Pointer(prpcFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Unmarshal dispatches through ICallFrame's vtable slot 19.
 func (self *ICallFrame) Unmarshal(pBuffer unsafe.Pointer, cbBuffer uint32, dataRep uint32, pcontext *CALLFRAME_MARSHALCONTEXT, pcbUnmarshalled *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBuffer)), uintptr(cbBuffer), uintptr(dataRep), uintptr(unsafe.Pointer(pcontext)), uintptr(unsafe.Pointer(pcbUnmarshalled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReleaseMarshalData dispatches through ICallFrame's vtable slot 20.
 func (self *ICallFrame) ReleaseMarshalData(pBuffer unsafe.Pointer, cbBuffer uint32, ibFirstRelease uint32, dataRep uint32, pcontext *CALLFRAME_MARSHALCONTEXT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBuffer)), uintptr(cbBuffer), uintptr(ibFirstRelease), uintptr(dataRep), uintptr(unsafe.Pointer(pcontext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Invoke dispatches through ICallFrame's vtable slot 21.
 func (self *ICallFrame) Invoke(pvReceiver unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvReceiver)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICallFrameEvents: https://learn.microsoft.com/windows/win32/api/callobj/nn-callobj-icallframeevents
@@ -147,7 +147,7 @@ var IID_ICallFrameEvents = win32.GUID{Data1: 0xfd5e0843, Data2: 0xfc91, Data3: 0
 // OnCall dispatches through ICallFrameEvents's vtable slot 3.
 func (self *ICallFrameEvents) OnCall(pFrame *ICallFrame) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFrame)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICallFrameWalker: https://learn.microsoft.com/windows/win32/api/callobj/nn-callobj-icallframewalker
@@ -164,7 +164,7 @@ func (self *ICallFrameWalker) OnWalkInterface(iid *win32.GUID, ppvInterface *uns
 	_fIn := win32.Bool32(fIn)
 	_fOut := win32.Bool32(fOut)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(ppvInterface)), uintptr(_fIn), uintptr(_fOut))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICallIndirect: https://learn.microsoft.com/windows/win32/api/callobj/nn-callobj-icallindirect
@@ -179,25 +179,25 @@ var IID_ICallIndirect = win32.GUID{Data1: 0xd573b4b1, Data2: 0x894e, Data3: 0x11
 // CallIndirect dispatches through ICallIndirect's vtable slot 3.
 func (self *ICallIndirect) CallIndirect(phrReturn *foundation.HRESULT, iMethod uint32, pvArgs unsafe.Pointer, cbArgs *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phrReturn)), uintptr(iMethod), uintptr(unsafe.Pointer(pvArgs)), uintptr(unsafe.Pointer(cbArgs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMethodInfo dispatches through ICallIndirect's vtable slot 4.
 func (self *ICallIndirect) GetMethodInfo(iMethod uint32, pInfo *CALLFRAMEINFO, pwszMethod *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(iMethod), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(pwszMethod)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStackSize dispatches through ICallIndirect's vtable slot 5.
 func (self *ICallIndirect) GetStackSize(iMethod uint32, cbArgs *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(iMethod), uintptr(unsafe.Pointer(cbArgs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetIID dispatches through ICallIndirect's vtable slot 6.
 func (self *ICallIndirect) GetIID(piid *win32.GUID, pfDerivesFromIDispatch *foundation.BOOL, pcMethod *uint32, pwszInterface *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piid)), uintptr(unsafe.Pointer(pfDerivesFromIDispatch)), uintptr(unsafe.Pointer(pcMethod)), uintptr(unsafe.Pointer(pwszInterface)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICallInterceptor: https://learn.microsoft.com/windows/win32/api/callobj/nn-callobj-icallinterceptor
@@ -212,13 +212,13 @@ var IID_ICallInterceptor = win32.GUID{Data1: 0x60c7ca75, Data2: 0x896d, Data3: 0
 // RegisterSink dispatches through ICallInterceptor's vtable slot 7.
 func (self *ICallInterceptor) RegisterSink(psink *ICallFrameEvents) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(psink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRegisteredSink dispatches through ICallInterceptor's vtable slot 8.
 func (self *ICallInterceptor) GetRegisteredSink(ppsink **ICallFrameEvents) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppsink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ICallUnmarshal: https://learn.microsoft.com/windows/win32/api/callobj/nn-callobj-icallunmarshal
@@ -234,13 +234,13 @@ var IID_ICallUnmarshal = win32.GUID{Data1: 0x5333b003, Data2: 0x2e42, Data3: 0x1
 func (self *ICallUnmarshal) Unmarshal(iMethod uint32, pBuffer unsafe.Pointer, cbBuffer uint32, fForceBufferCopy bool, dataRep uint32, pcontext *CALLFRAME_MARSHALCONTEXT, pcbUnmarshalled *uint32, ppFrame **ICallFrame) error {
 	_fForceBufferCopy := win32.Bool32(fForceBufferCopy)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(iMethod), uintptr(unsafe.Pointer(pBuffer)), uintptr(cbBuffer), uintptr(_fForceBufferCopy), uintptr(dataRep), uintptr(unsafe.Pointer(pcontext)), uintptr(unsafe.Pointer(pcbUnmarshalled)), uintptr(unsafe.Pointer(ppFrame)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReleaseMarshalData dispatches through ICallUnmarshal's vtable slot 4.
 func (self *ICallUnmarshal) ReleaseMarshalData(iMethod uint32, pBuffer unsafe.Pointer, cbBuffer uint32, ibFirstRelease uint32, dataRep uint32, pcontext *CALLFRAME_MARSHALCONTEXT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(iMethod), uintptr(unsafe.Pointer(pBuffer)), uintptr(cbBuffer), uintptr(ibFirstRelease), uintptr(dataRep), uintptr(unsafe.Pointer(pcontext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: d1fb5a79-7706-11d1-adba-00c04fc2adc0
@@ -254,11 +254,11 @@ var IID_IInterfaceRelated = win32.GUID{Data1: 0xd1fb5a79, Data2: 0x7706, Data3: 
 // SetIID dispatches through IInterfaceRelated's vtable slot 3.
 func (self *IInterfaceRelated) SetIID(iid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(iid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetIID dispatches through IInterfaceRelated's vtable slot 4.
 func (self *IInterfaceRelated) GetIID(piid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

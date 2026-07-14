@@ -125,7 +125,7 @@ func GetDpiAwarenessContextForProcess(hProcess foundation.HANDLE) DPI_AWARENESS_
 // Minimum OS: windows8.1.
 func GetDpiForMonitor(hmonitor graphicsgdi.HMONITOR, dpiType MONITOR_DPI_TYPE, dpiX *uint32, dpiY *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetDpiForMonitor.Addr(), uintptr(hmonitor), uintptr(dpiType), uintptr(unsafe.Pointer(dpiX)), uintptr(unsafe.Pointer(dpiY)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDpiForSystem calls USER32!GetDpiForSystem.
@@ -157,7 +157,7 @@ func GetDpiFromDpiAwarenessContext(value DPI_AWARENESS_CONTEXT) uint32 {
 // Minimum OS: windows8.1.
 func GetProcessDpiAwareness(hprocess foundation.HANDLE, value *PROCESS_DPI_AWARENESS) error {
 	r1, _, _ := syscall.SyscallN(procGetProcessDpiAwareness.Addr(), uintptr(hprocess), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSystemDpiForProcess calls USER32!GetSystemDpiForProcess.
@@ -271,7 +271,7 @@ func SetDialogDpiChangeBehavior(hDlg foundation.HWND, mask DIALOG_DPI_CHANGE_BEH
 // Minimum OS: windows8.1.
 func SetProcessDpiAwareness(value PROCESS_DPI_AWARENESS) error {
 	r1, _, _ := syscall.SyscallN(procSetProcessDpiAwareness.Addr(), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetProcessDpiAwarenessContext calls USER32!SetProcessDpiAwarenessContext.

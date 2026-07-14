@@ -31,7 +31,7 @@ var (
 // Minimum OS: windows8.0.
 func D2D1CreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, creationProperties *D2D1_CREATION_PROPERTIES, d2dDevice **ID2D1Device) error {
 	r1, _, _ := syscall.SyscallN(procD2D1CreateDevice.Addr(), uintptr(unsafe.Pointer(dxgiDevice)), uintptr(unsafe.Pointer(creationProperties)), uintptr(unsafe.Pointer(d2dDevice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // D2D1CreateDeviceContext calls d2d1!D2D1CreateDeviceContext.
@@ -39,7 +39,7 @@ func D2D1CreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, creationProperties *
 // Minimum OS: windows8.0.
 func D2D1CreateDeviceContext(dxgiSurface *graphicsdxgi.IDXGISurface, creationProperties *D2D1_CREATION_PROPERTIES, d2dDeviceContext **ID2D1DeviceContext) error {
 	r1, _, _ := syscall.SyscallN(procD2D1CreateDeviceContext.Addr(), uintptr(unsafe.Pointer(dxgiSurface)), uintptr(unsafe.Pointer(creationProperties)), uintptr(unsafe.Pointer(d2dDeviceContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // D2D1CreateFactory calls d2d1!D2D1CreateFactory.
@@ -47,7 +47,7 @@ func D2D1CreateDeviceContext(dxgiSurface *graphicsdxgi.IDXGISurface, creationPro
 // Minimum OS: windows6.1.
 func D2D1CreateFactory(factoryType D2D1_FACTORY_TYPE, riid *win32.GUID, pFactoryOptions *D2D1_FACTORY_OPTIONS, ppIFactory **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procD2D1CreateFactory.Addr(), uintptr(factoryType), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pFactoryOptions)), uintptr(unsafe.Pointer(ppIFactory)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // D2D1GetGradientMeshInteriorPointsFromCoonsPatch calls d2d1!D2D1GetGradientMeshInteriorPointsFromCoonsPatch.

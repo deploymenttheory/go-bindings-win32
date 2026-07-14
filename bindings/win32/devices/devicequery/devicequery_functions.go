@@ -51,7 +51,7 @@ func DevCreateObjectQuery(ObjectType DEV_OBJECT_TYPE, QueryFlags uint32, pReques
 		_pFilter = &pFilter[0]
 	}
 	r1, _, _ := syscall.SyscallN(procDevCreateObjectQuery.Addr(), uintptr(ObjectType), uintptr(QueryFlags), uintptr(len(pRequestedProperties)), uintptr(unsafe.Pointer(_pRequestedProperties)), uintptr(len(pFilter)), uintptr(unsafe.Pointer(_pFilter)), uintptr(pCallback), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(phDevQuery)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DevCreateObjectQueryEx calls api-ms-win-devices-query-l1-1-1!DevCreateObjectQueryEx.
@@ -69,7 +69,7 @@ func DevCreateObjectQueryEx(ObjectType DEV_OBJECT_TYPE, QueryFlags uint32, pRequ
 		_pExtendedParameters = &pExtendedParameters[0]
 	}
 	r1, _, _ := syscall.SyscallN(procDevCreateObjectQueryEx.Addr(), uintptr(ObjectType), uintptr(QueryFlags), uintptr(len(pRequestedProperties)), uintptr(unsafe.Pointer(_pRequestedProperties)), uintptr(len(pFilter)), uintptr(unsafe.Pointer(_pFilter)), uintptr(len(pExtendedParameters)), uintptr(unsafe.Pointer(_pExtendedParameters)), uintptr(pCallback), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(phDevQuery)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DevCreateObjectQueryFromId calls api-ms-win-devices-query-l1-1-0!DevCreateObjectQueryFromId.
@@ -84,7 +84,7 @@ func DevCreateObjectQueryFromId(ObjectType DEV_OBJECT_TYPE, pszObjectId string, 
 		_pFilter = &pFilter[0]
 	}
 	r1, _, _ := syscall.SyscallN(procDevCreateObjectQueryFromId.Addr(), uintptr(ObjectType), uintptr(unsafe.Pointer(_pszObjectId)), uintptr(QueryFlags), uintptr(len(pRequestedProperties)), uintptr(unsafe.Pointer(_pRequestedProperties)), uintptr(len(pFilter)), uintptr(unsafe.Pointer(_pFilter)), uintptr(pCallback), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(phDevQuery)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DevCreateObjectQueryFromIdEx calls api-ms-win-devices-query-l1-1-1!DevCreateObjectQueryFromIdEx.
@@ -103,7 +103,7 @@ func DevCreateObjectQueryFromIdEx(ObjectType DEV_OBJECT_TYPE, pszObjectId string
 		_pExtendedParameters = &pExtendedParameters[0]
 	}
 	r1, _, _ := syscall.SyscallN(procDevCreateObjectQueryFromIdEx.Addr(), uintptr(ObjectType), uintptr(unsafe.Pointer(_pszObjectId)), uintptr(QueryFlags), uintptr(len(pRequestedProperties)), uintptr(unsafe.Pointer(_pRequestedProperties)), uintptr(len(pFilter)), uintptr(unsafe.Pointer(_pFilter)), uintptr(len(pExtendedParameters)), uintptr(unsafe.Pointer(_pExtendedParameters)), uintptr(pCallback), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(phDevQuery)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DevCreateObjectQueryFromIds calls api-ms-win-devices-query-l1-1-0!DevCreateObjectQueryFromIds.
@@ -118,7 +118,7 @@ func DevCreateObjectQueryFromIds(ObjectType DEV_OBJECT_TYPE, pszzObjectIds strin
 		_pFilter = &pFilter[0]
 	}
 	r1, _, _ := syscall.SyscallN(procDevCreateObjectQueryFromIds.Addr(), uintptr(ObjectType), uintptr(unsafe.Pointer(_pszzObjectIds)), uintptr(QueryFlags), uintptr(len(pRequestedProperties)), uintptr(unsafe.Pointer(_pRequestedProperties)), uintptr(len(pFilter)), uintptr(unsafe.Pointer(_pFilter)), uintptr(pCallback), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(phDevQuery)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DevCreateObjectQueryFromIdsEx calls api-ms-win-devices-query-l1-1-1!DevCreateObjectQueryFromIdsEx.
@@ -137,7 +137,7 @@ func DevCreateObjectQueryFromIdsEx(ObjectType DEV_OBJECT_TYPE, pszzObjectIds str
 		_pExtendedParameters = &pExtendedParameters[0]
 	}
 	r1, _, _ := syscall.SyscallN(procDevCreateObjectQueryFromIdsEx.Addr(), uintptr(ObjectType), uintptr(unsafe.Pointer(_pszzObjectIds)), uintptr(QueryFlags), uintptr(len(pRequestedProperties)), uintptr(unsafe.Pointer(_pRequestedProperties)), uintptr(len(pFilter)), uintptr(unsafe.Pointer(_pFilter)), uintptr(len(pExtendedParameters)), uintptr(unsafe.Pointer(_pExtendedParameters)), uintptr(pCallback), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(phDevQuery)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DevFindProperty calls api-ms-win-devices-query-l1-1-0!DevFindProperty.
@@ -177,7 +177,7 @@ func DevGetObjectProperties(ObjectType DEV_OBJECT_TYPE, pszObjectId string, Quer
 		_pRequestedProperties = &pRequestedProperties[0]
 	}
 	r1, _, _ := syscall.SyscallN(procDevGetObjectProperties.Addr(), uintptr(ObjectType), uintptr(unsafe.Pointer(_pszObjectId)), uintptr(QueryFlags), uintptr(len(pRequestedProperties)), uintptr(unsafe.Pointer(_pRequestedProperties)), uintptr(unsafe.Pointer(pcPropertyCount)), uintptr(unsafe.Pointer(ppProperties)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DevGetObjectPropertiesEx calls api-ms-win-devices-query-l1-1-1!DevGetObjectPropertiesEx.
@@ -192,7 +192,7 @@ func DevGetObjectPropertiesEx(ObjectType DEV_OBJECT_TYPE, pszObjectId string, Qu
 		_pExtendedParameters = &pExtendedParameters[0]
 	}
 	r1, _, _ := syscall.SyscallN(procDevGetObjectPropertiesEx.Addr(), uintptr(ObjectType), uintptr(unsafe.Pointer(_pszObjectId)), uintptr(QueryFlags), uintptr(len(pRequestedProperties)), uintptr(unsafe.Pointer(_pRequestedProperties)), uintptr(len(pExtendedParameters)), uintptr(unsafe.Pointer(_pExtendedParameters)), uintptr(unsafe.Pointer(pcPropertyCount)), uintptr(unsafe.Pointer(ppProperties)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DevGetObjects calls api-ms-win-devices-query-l1-1-0!DevGetObjects.
@@ -206,7 +206,7 @@ func DevGetObjects(ObjectType DEV_OBJECT_TYPE, QueryFlags uint32, pRequestedProp
 		_pFilter = &pFilter[0]
 	}
 	r1, _, _ := syscall.SyscallN(procDevGetObjects.Addr(), uintptr(ObjectType), uintptr(QueryFlags), uintptr(len(pRequestedProperties)), uintptr(unsafe.Pointer(_pRequestedProperties)), uintptr(len(pFilter)), uintptr(unsafe.Pointer(_pFilter)), uintptr(unsafe.Pointer(pcObjectCount)), uintptr(unsafe.Pointer(ppObjects)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DevGetObjectsEx calls api-ms-win-devices-query-l1-1-1!DevGetObjectsEx.
@@ -224,5 +224,5 @@ func DevGetObjectsEx(ObjectType DEV_OBJECT_TYPE, QueryFlags uint32, pRequestedPr
 		_pExtendedParameters = &pExtendedParameters[0]
 	}
 	r1, _, _ := syscall.SyscallN(procDevGetObjectsEx.Addr(), uintptr(ObjectType), uintptr(QueryFlags), uintptr(len(pRequestedProperties)), uintptr(unsafe.Pointer(_pRequestedProperties)), uintptr(len(pFilter)), uintptr(unsafe.Pointer(_pFilter)), uintptr(len(pExtendedParameters)), uintptr(unsafe.Pointer(_pExtendedParameters)), uintptr(unsafe.Pointer(pcObjectCount)), uintptr(unsafe.Pointer(ppObjects)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

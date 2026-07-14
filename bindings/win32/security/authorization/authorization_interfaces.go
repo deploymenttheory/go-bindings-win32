@@ -26,159 +26,159 @@ var IID_IAzApplication = win32.GUID{Data1: 0x987bc7c7, Data2: 0xb813, Data3: 0x4
 // Get_Name dispatches through IAzApplication's vtable slot 7.
 func (self *IAzApplication) Get_Name(pbstrName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Name dispatches through IAzApplication's vtable slot 8.
 func (self *IAzApplication) Put_Name(bstrName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through IAzApplication's vtable slot 9.
 func (self *IAzApplication) Get_Description(pbstrDescription *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Description dispatches through IAzApplication's vtable slot 10.
 func (self *IAzApplication) Put_Description(bstrDescription foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ApplicationData dispatches through IAzApplication's vtable slot 11.
 func (self *IAzApplication) Get_ApplicationData(pbstrApplicationData *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrApplicationData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ApplicationData dispatches through IAzApplication's vtable slot 12.
 func (self *IAzApplication) Put_ApplicationData(bstrApplicationData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplicationData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AuthzInterfaceClsid dispatches through IAzApplication's vtable slot 13.
 func (self *IAzApplication) Get_AuthzInterfaceClsid(pbstrProp *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AuthzInterfaceClsid dispatches through IAzApplication's vtable slot 14.
 func (self *IAzApplication) Put_AuthzInterfaceClsid(bstrProp foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Version dispatches through IAzApplication's vtable slot 15.
 func (self *IAzApplication) Get_Version(pbstrProp *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Version dispatches through IAzApplication's vtable slot 16.
 func (self *IAzApplication) Put_Version(bstrProp foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_GenerateAudits dispatches through IAzApplication's vtable slot 17.
 func (self *IAzApplication) Get_GenerateAudits(pbProp *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_GenerateAudits dispatches through IAzApplication's vtable slot 18.
 func (self *IAzApplication) Put_GenerateAudits(bProp bool) error {
 	_bProp := win32.Bool32(bProp)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(_bProp))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ApplyStoreSacl dispatches through IAzApplication's vtable slot 19.
 func (self *IAzApplication) Get_ApplyStoreSacl(pbProp *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ApplyStoreSacl dispatches through IAzApplication's vtable slot 20.
 func (self *IAzApplication) Put_ApplyStoreSacl(bProp bool) error {
 	_bProp := win32.Bool32(bProp)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(_bProp))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Writable dispatches through IAzApplication's vtable slot 21.
 func (self *IAzApplication) Get_Writable(pfProp *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PolicyAdministrators dispatches through IAzApplication's vtable slot 24.
 func (self *IAzApplication) Get_PolicyAdministrators(pvarAdmins *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarAdmins)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PolicyReaders dispatches through IAzApplication's vtable slot 25.
 func (self *IAzApplication) Get_PolicyReaders(pvarReaders *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarReaders)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Scopes dispatches through IAzApplication's vtable slot 30.
 func (self *IAzApplication) Get_Scopes(ppScopeCollection **IAzScopes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppScopeCollection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Operations dispatches through IAzApplication's vtable slot 34.
 func (self *IAzApplication) Get_Operations(ppOperationCollection **IAzOperations) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppOperationCollection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Tasks dispatches through IAzApplication's vtable slot 38.
 func (self *IAzApplication) Get_Tasks(ppTaskCollection **IAzTasks) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTaskCollection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ApplicationGroups dispatches through IAzApplication's vtable slot 42.
 func (self *IAzApplication) Get_ApplicationGroups(ppGroupCollection **IAzApplicationGroups) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppGroupCollection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Roles dispatches through IAzApplication's vtable slot 46.
 func (self *IAzApplication) Get_Roles(ppRoleCollection **IAzRoles) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppRoleCollection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DelegatedPolicyUsers dispatches through IAzApplication's vtable slot 55.
 func (self *IAzApplication) Get_DelegatedPolicyUsers(pvarDelegatedPolicyUsers *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarDelegatedPolicyUsers)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PolicyAdministratorsName dispatches through IAzApplication's vtable slot 59.
 func (self *IAzApplication) Get_PolicyAdministratorsName(pvarAdmins *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarAdmins)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PolicyReadersName dispatches through IAzApplication's vtable slot 60.
 func (self *IAzApplication) Get_PolicyReadersName(pvarReaders *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarReaders)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DelegatedPolicyUsersName dispatches through IAzApplication's vtable slot 65.
 func (self *IAzApplication) Get_DelegatedPolicyUsersName(pvarDelegatedPolicyUsers *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarDelegatedPolicyUsers)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAzApplication2: https://learn.microsoft.com/windows/win32/api/azroles/nn-azroles-iazapplication2
@@ -202,85 +202,85 @@ var IID_IAzApplication3 = win32.GUID{Data1: 0x181c845e, Data2: 0x7196, Data3: 0x
 // ScopeExists dispatches through IAzApplication3's vtable slot 70.
 func (self *IAzApplication3) ScopeExists(bstrScopeName foundation.BSTR, pbExist *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrScopeName)), uintptr(unsafe.Pointer(pbExist)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenScope2 dispatches through IAzApplication3's vtable slot 71.
 func (self *IAzApplication3) OpenScope2(bstrScopeName foundation.BSTR, ppScope2 **IAzScope2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrScopeName)), uintptr(unsafe.Pointer(ppScope2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateScope2 dispatches through IAzApplication3's vtable slot 72.
 func (self *IAzApplication3) CreateScope2(bstrScopeName foundation.BSTR, ppScope2 **IAzScope2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[72], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrScopeName)), uintptr(unsafe.Pointer(ppScope2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteScope2 dispatches through IAzApplication3's vtable slot 73.
 func (self *IAzApplication3) DeleteScope2(bstrScopeName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrScopeName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RoleDefinitions dispatches through IAzApplication3's vtable slot 74.
 func (self *IAzApplication3) Get_RoleDefinitions(ppRoleDefinitions **IAzRoleDefinitions) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[74], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppRoleDefinitions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateRoleDefinition dispatches through IAzApplication3's vtable slot 75.
 func (self *IAzApplication3) CreateRoleDefinition(bstrRoleDefinitionName foundation.BSTR, ppRoleDefinitions **IAzRoleDefinition) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[75], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRoleDefinitionName)), uintptr(unsafe.Pointer(ppRoleDefinitions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenRoleDefinition dispatches through IAzApplication3's vtable slot 76.
 func (self *IAzApplication3) OpenRoleDefinition(bstrRoleDefinitionName foundation.BSTR, ppRoleDefinitions **IAzRoleDefinition) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[76], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRoleDefinitionName)), uintptr(unsafe.Pointer(ppRoleDefinitions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteRoleDefinition dispatches through IAzApplication3's vtable slot 77.
 func (self *IAzApplication3) DeleteRoleDefinition(bstrRoleDefinitionName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[77], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRoleDefinitionName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RoleAssignments dispatches through IAzApplication3's vtable slot 78.
 func (self *IAzApplication3) Get_RoleAssignments(ppRoleAssignments **IAzRoleAssignments) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppRoleAssignments)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateRoleAssignment dispatches through IAzApplication3's vtable slot 79.
 func (self *IAzApplication3) CreateRoleAssignment(bstrRoleAssignmentName foundation.BSTR, ppRoleAssignment **IAzRoleAssignment) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[79], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRoleAssignmentName)), uintptr(unsafe.Pointer(ppRoleAssignment)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenRoleAssignment dispatches through IAzApplication3's vtable slot 80.
 func (self *IAzApplication3) OpenRoleAssignment(bstrRoleAssignmentName foundation.BSTR, ppRoleAssignment **IAzRoleAssignment) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[80], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRoleAssignmentName)), uintptr(unsafe.Pointer(ppRoleAssignment)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteRoleAssignment dispatches through IAzApplication3's vtable slot 81.
 func (self *IAzApplication3) DeleteRoleAssignment(bstrRoleAssignmentName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRoleAssignmentName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BizRulesEnabled dispatches through IAzApplication3's vtable slot 82.
 func (self *IAzApplication3) Get_BizRulesEnabled(pbEnabled *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbEnabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BizRulesEnabled dispatches through IAzApplication3's vtable slot 83.
 func (self *IAzApplication3) Put_BizRulesEnabled(bEnabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(bEnabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAzApplicationGroup: https://learn.microsoft.com/windows/win32/api/azroles/nn-azroles-iazapplicationgroup
@@ -295,91 +295,91 @@ var IID_IAzApplicationGroup = win32.GUID{Data1: 0xf1b744cd, Data2: 0x58a6, Data3
 // Get_Name dispatches through IAzApplicationGroup's vtable slot 7.
 func (self *IAzApplicationGroup) Get_Name(pbstrName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Name dispatches through IAzApplicationGroup's vtable slot 8.
 func (self *IAzApplicationGroup) Put_Name(bstrName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Type dispatches through IAzApplicationGroup's vtable slot 9.
 func (self *IAzApplicationGroup) Get_Type(plProp *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Type dispatches through IAzApplicationGroup's vtable slot 10.
 func (self *IAzApplicationGroup) Put_Type(lProp int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lProp))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LdapQuery dispatches through IAzApplicationGroup's vtable slot 11.
 func (self *IAzApplicationGroup) Get_LdapQuery(pbstrProp *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LdapQuery dispatches through IAzApplicationGroup's vtable slot 12.
 func (self *IAzApplicationGroup) Put_LdapQuery(bstrProp foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AppMembers dispatches through IAzApplicationGroup's vtable slot 13.
 func (self *IAzApplicationGroup) Get_AppMembers(pvarProp *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AppNonMembers dispatches through IAzApplicationGroup's vtable slot 14.
 func (self *IAzApplicationGroup) Get_AppNonMembers(pvarProp *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Members dispatches through IAzApplicationGroup's vtable slot 15.
 func (self *IAzApplicationGroup) Get_Members(pvarProp *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NonMembers dispatches through IAzApplicationGroup's vtable slot 16.
 func (self *IAzApplicationGroup) Get_NonMembers(pvarProp *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through IAzApplicationGroup's vtable slot 17.
 func (self *IAzApplicationGroup) Get_Description(pbstrDescription *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Description dispatches through IAzApplicationGroup's vtable slot 18.
 func (self *IAzApplicationGroup) Put_Description(bstrDescription foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Writable dispatches through IAzApplicationGroup's vtable slot 27.
 func (self *IAzApplicationGroup) Get_Writable(pfProp *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MembersName dispatches through IAzApplicationGroup's vtable slot 37.
 func (self *IAzApplicationGroup) Get_MembersName(pvarProp *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NonMembersName dispatches through IAzApplicationGroup's vtable slot 38.
 func (self *IAzApplicationGroup) Get_NonMembersName(pvarProp *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAzApplicationGroup2: https://learn.microsoft.com/windows/win32/api/azroles/nn-azroles-iazapplicationgroup2
@@ -394,43 +394,43 @@ var IID_IAzApplicationGroup2 = win32.GUID{Data1: 0x3f0613fc, Data2: 0xb71a, Data
 // Get_BizRule dispatches through IAzApplicationGroup2's vtable slot 39.
 func (self *IAzApplicationGroup2) Get_BizRule(pbstrProp *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BizRule dispatches through IAzApplicationGroup2's vtable slot 40.
 func (self *IAzApplicationGroup2) Put_BizRule(bstrProp foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BizRuleLanguage dispatches through IAzApplicationGroup2's vtable slot 41.
 func (self *IAzApplicationGroup2) Get_BizRuleLanguage(pbstrProp *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BizRuleLanguage dispatches through IAzApplicationGroup2's vtable slot 42.
 func (self *IAzApplicationGroup2) Put_BizRuleLanguage(bstrProp foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BizRuleImportedPath dispatches through IAzApplicationGroup2's vtable slot 43.
 func (self *IAzApplicationGroup2) Get_BizRuleImportedPath(pbstrProp *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BizRuleImportedPath dispatches through IAzApplicationGroup2's vtable slot 44.
 func (self *IAzApplicationGroup2) Put_BizRuleImportedPath(bstrProp foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RoleAssignments dispatches through IAzApplicationGroup2's vtable slot 45.
 func (self *IAzApplicationGroup2) RoleAssignments(bstrScopeName foundation.BSTR, bRecursive foundation.VARIANT_BOOL, ppRoleAssignments **IAzRoleAssignments) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrScopeName)), uintptr(bRecursive), uintptr(unsafe.Pointer(ppRoleAssignments)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAzApplicationGroups: https://learn.microsoft.com/windows/win32/api/azroles/nn-azroles-iazapplicationgroups
@@ -445,19 +445,19 @@ var IID_IAzApplicationGroups = win32.GUID{Data1: 0x4ce66ad5, Data2: 0x9f3c, Data
 // Get_Item dispatches through IAzApplicationGroups's vtable slot 7.
 func (self *IAzApplicationGroups) Get_Item(Index int32, pvarObtPtr *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pvarObtPtr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IAzApplicationGroups's vtable slot 8.
 func (self *IAzApplicationGroups) Get_Count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IAzApplicationGroups's vtable slot 9.
 func (self *IAzApplicationGroups) Get__NewEnum(ppEnumPtr **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumPtr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAzApplications: https://learn.microsoft.com/windows/win32/api/azroles/nn-azroles-iazapplications
@@ -472,19 +472,19 @@ var IID_IAzApplications = win32.GUID{Data1: 0x929b11a9, Data2: 0x95c5, Data3: 0x
 // Get_Item dispatches through IAzApplications's vtable slot 7.
 func (self *IAzApplications) Get_Item(Index int32, pvarObtPtr *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pvarObtPtr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IAzApplications's vtable slot 8.
 func (self *IAzApplications) Get_Count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IAzApplications's vtable slot 9.
 func (self *IAzApplications) Get__NewEnum(ppEnumPtr **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumPtr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAzAuthorizationStore: https://learn.microsoft.com/windows/win32/api/azroles/nn-azroles-iazauthorizationstore
@@ -499,153 +499,153 @@ var IID_IAzAuthorizationStore = win32.GUID{Data1: 0xedbd9ca9, Data2: 0x9b82, Dat
 // Get_Description dispatches through IAzAuthorizationStore's vtable slot 7.
 func (self *IAzAuthorizationStore) Get_Description(pbstrDescription *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Description dispatches through IAzAuthorizationStore's vtable slot 8.
 func (self *IAzAuthorizationStore) Put_Description(bstrDescription foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ApplicationData dispatches through IAzAuthorizationStore's vtable slot 9.
 func (self *IAzAuthorizationStore) Get_ApplicationData(pbstrApplicationData *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrApplicationData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ApplicationData dispatches through IAzAuthorizationStore's vtable slot 10.
 func (self *IAzAuthorizationStore) Put_ApplicationData(bstrApplicationData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplicationData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DomainTimeout dispatches through IAzAuthorizationStore's vtable slot 11.
 func (self *IAzAuthorizationStore) Get_DomainTimeout(plProp *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DomainTimeout dispatches through IAzAuthorizationStore's vtable slot 12.
 func (self *IAzAuthorizationStore) Put_DomainTimeout(lProp int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(lProp))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ScriptEngineTimeout dispatches through IAzAuthorizationStore's vtable slot 13.
 func (self *IAzAuthorizationStore) Get_ScriptEngineTimeout(plProp *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ScriptEngineTimeout dispatches through IAzAuthorizationStore's vtable slot 14.
 func (self *IAzAuthorizationStore) Put_ScriptEngineTimeout(lProp int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(lProp))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MaxScriptEngines dispatches through IAzAuthorizationStore's vtable slot 15.
 func (self *IAzAuthorizationStore) Get_MaxScriptEngines(plProp *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MaxScriptEngines dispatches through IAzAuthorizationStore's vtable slot 16.
 func (self *IAzAuthorizationStore) Put_MaxScriptEngines(lProp int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(lProp))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_GenerateAudits dispatches through IAzAuthorizationStore's vtable slot 17.
 func (self *IAzAuthorizationStore) Get_GenerateAudits(pbProp *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_GenerateAudits dispatches through IAzAuthorizationStore's vtable slot 18.
 func (self *IAzAuthorizationStore) Put_GenerateAudits(bProp bool) error {
 	_bProp := win32.Bool32(bProp)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(_bProp))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Writable dispatches through IAzAuthorizationStore's vtable slot 19.
 func (self *IAzAuthorizationStore) Get_Writable(pfProp *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PolicyAdministrators dispatches through IAzAuthorizationStore's vtable slot 24.
 func (self *IAzAuthorizationStore) Get_PolicyAdministrators(pvarAdmins *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarAdmins)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PolicyReaders dispatches through IAzAuthorizationStore's vtable slot 25.
 func (self *IAzAuthorizationStore) Get_PolicyReaders(pvarReaders *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarReaders)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Applications dispatches through IAzAuthorizationStore's vtable slot 33.
 func (self *IAzAuthorizationStore) Get_Applications(ppAppCollection **IAzApplications) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAppCollection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ApplicationGroups dispatches through IAzAuthorizationStore's vtable slot 37.
 func (self *IAzAuthorizationStore) Get_ApplicationGroups(ppGroupCollection **IAzApplicationGroups) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppGroupCollection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DelegatedPolicyUsers dispatches through IAzAuthorizationStore's vtable slot 42.
 func (self *IAzAuthorizationStore) Get_DelegatedPolicyUsers(pvarDelegatedPolicyUsers *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarDelegatedPolicyUsers)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TargetMachine dispatches through IAzAuthorizationStore's vtable slot 45.
 func (self *IAzAuthorizationStore) Get_TargetMachine(pbstrTargetMachine *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrTargetMachine)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ApplyStoreSacl dispatches through IAzAuthorizationStore's vtable slot 46.
 func (self *IAzAuthorizationStore) Get_ApplyStoreSacl(pbApplyStoreSacl *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbApplyStoreSacl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ApplyStoreSacl dispatches through IAzAuthorizationStore's vtable slot 47.
 func (self *IAzAuthorizationStore) Put_ApplyStoreSacl(bApplyStoreSacl bool) error {
 	_bApplyStoreSacl := win32.Bool32(bApplyStoreSacl)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(_bApplyStoreSacl))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PolicyAdministratorsName dispatches through IAzAuthorizationStore's vtable slot 48.
 func (self *IAzAuthorizationStore) Get_PolicyAdministratorsName(pvarAdmins *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarAdmins)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PolicyReadersName dispatches through IAzAuthorizationStore's vtable slot 49.
 func (self *IAzAuthorizationStore) Get_PolicyReadersName(pvarReaders *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarReaders)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DelegatedPolicyUsersName dispatches through IAzAuthorizationStore's vtable slot 54.
 func (self *IAzAuthorizationStore) Get_DelegatedPolicyUsersName(pvarDelegatedPolicyUsers *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarDelegatedPolicyUsers)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CloseApplication dispatches through IAzAuthorizationStore's vtable slot 57.
 func (self *IAzAuthorizationStore) CloseApplication(bstrApplicationName foundation.BSTR, lFlag int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplicationName)), uintptr(lFlag))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAzAuthorizationStore2: https://learn.microsoft.com/windows/win32/api/azroles/nn-azroles-iazauthorizationstore2
@@ -669,31 +669,31 @@ var IID_IAzAuthorizationStore3 = win32.GUID{Data1: 0xabc08425, Data2: 0x0c86, Da
 // IsUpdateNeeded dispatches through IAzAuthorizationStore3's vtable slot 60.
 func (self *IAzAuthorizationStore3) IsUpdateNeeded(pbIsUpdateNeeded *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbIsUpdateNeeded)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // BizruleGroupSupported dispatches through IAzAuthorizationStore3's vtable slot 61.
 func (self *IAzAuthorizationStore3) BizruleGroupSupported(pbSupported *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbSupported)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UpgradeStoresFunctionalLevel dispatches through IAzAuthorizationStore3's vtable slot 62.
 func (self *IAzAuthorizationStore3) UpgradeStoresFunctionalLevel(lFunctionalLevel int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(lFunctionalLevel))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsFunctionalLevelUpgradeSupported dispatches through IAzAuthorizationStore3's vtable slot 63.
 func (self *IAzAuthorizationStore3) IsFunctionalLevelUpgradeSupported(lFunctionalLevel int32, pbSupported *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(lFunctionalLevel), uintptr(unsafe.Pointer(pbSupported)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSchemaVersion dispatches through IAzAuthorizationStore3's vtable slot 64.
 func (self *IAzAuthorizationStore3) GetSchemaVersion(plMajorVersion *int32, plMinorVersion *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMajorVersion)), uintptr(unsafe.Pointer(plMinorVersion)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAzBizRuleContext: https://learn.microsoft.com/windows/win32/api/azroles/nn-azroles-iazbizrulecontext
@@ -709,25 +709,25 @@ var IID_IAzBizRuleContext = win32.GUID{Data1: 0xe192f17d, Data2: 0xd59f, Data3: 
 func (self *IAzBizRuleContext) Put_BusinessRuleResult(bResult bool) error {
 	_bResult := win32.Bool32(bResult)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(_bResult))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BusinessRuleString dispatches through IAzBizRuleContext's vtable slot 8.
 func (self *IAzBizRuleContext) Put_BusinessRuleString(bstrBusinessRuleString foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrBusinessRuleString)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BusinessRuleString dispatches through IAzBizRuleContext's vtable slot 9.
 func (self *IAzBizRuleContext) Get_BusinessRuleString(pbstrBusinessRuleString *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrBusinessRuleString)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetParameter dispatches through IAzBizRuleContext's vtable slot 10.
 func (self *IAzBizRuleContext) GetParameter(bstrParameterName foundation.BSTR, pvarParameterValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrParameterName)), uintptr(unsafe.Pointer(pvarParameterValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAzBizRuleInterfaces: https://learn.microsoft.com/windows/win32/api/azroles/nn-azroles-iazbizruleinterfaces
@@ -742,25 +742,25 @@ var IID_IAzBizRuleInterfaces = win32.GUID{Data1: 0xe94128c7, Data2: 0xe9da, Data
 // GetInterfaceValue dispatches through IAzBizRuleInterfaces's vtable slot 9.
 func (self *IAzBizRuleInterfaces) GetInterfaceValue(bstrInterfaceName foundation.BSTR, lInterfaceFlag *int32, varInterface *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrInterfaceName)), uintptr(unsafe.Pointer(lInterfaceFlag)), uintptr(unsafe.Pointer(varInterface)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through IAzBizRuleInterfaces's vtable slot 10.
 func (self *IAzBizRuleInterfaces) Remove(bstrInterfaceName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrInterfaceName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAll dispatches through IAzBizRuleInterfaces's vtable slot 11.
 func (self *IAzBizRuleInterfaces) RemoveAll() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IAzBizRuleInterfaces's vtable slot 12.
 func (self *IAzBizRuleInterfaces) Get_Count(plCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAzBizRuleParameters: https://learn.microsoft.com/windows/win32/api/azroles/nn-azroles-iazbizruleparameters
@@ -775,25 +775,25 @@ var IID_IAzBizRuleParameters = win32.GUID{Data1: 0xfc17685f, Data2: 0xe25d, Data
 // GetParameterValue dispatches through IAzBizRuleParameters's vtable slot 9.
 func (self *IAzBizRuleParameters) GetParameterValue(bstrParameterName foundation.BSTR, pvarParameterValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrParameterName)), uintptr(unsafe.Pointer(pvarParameterValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through IAzBizRuleParameters's vtable slot 10.
 func (self *IAzBizRuleParameters) Remove(varParameterName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(varParameterName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAll dispatches through IAzBizRuleParameters's vtable slot 11.
 func (self *IAzBizRuleParameters) RemoveAll() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IAzBizRuleParameters's vtable slot 12.
 func (self *IAzBizRuleParameters) Get_Count(plCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAzClientContext: https://learn.microsoft.com/windows/win32/api/azroles/nn-azroles-iazclientcontext
@@ -808,67 +808,67 @@ var IID_IAzClientContext = win32.GUID{Data1: 0xeff1f00b, Data2: 0x488a, Data3: 0
 // GetBusinessRuleString dispatches through IAzClientContext's vtable slot 8.
 func (self *IAzClientContext) GetBusinessRuleString(pbstrBusinessRuleString *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrBusinessRuleString)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UserDn dispatches through IAzClientContext's vtable slot 9.
 func (self *IAzClientContext) Get_UserDn(pbstrProp *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UserSamCompat dispatches through IAzClientContext's vtable slot 10.
 func (self *IAzClientContext) Get_UserSamCompat(pbstrProp *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UserDisplay dispatches through IAzClientContext's vtable slot 11.
 func (self *IAzClientContext) Get_UserDisplay(pbstrProp *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UserGuid dispatches through IAzClientContext's vtable slot 12.
 func (self *IAzClientContext) Get_UserGuid(pbstrProp *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UserCanonical dispatches through IAzClientContext's vtable slot 13.
 func (self *IAzClientContext) Get_UserCanonical(pbstrProp *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UserUpn dispatches through IAzClientContext's vtable slot 14.
 func (self *IAzClientContext) Get_UserUpn(pbstrProp *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UserDnsSamCompat dispatches through IAzClientContext's vtable slot 15.
 func (self *IAzClientContext) Get_UserDnsSamCompat(pbstrProp *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRoles dispatches through IAzClientContext's vtable slot 17.
 func (self *IAzClientContext) GetRoles(bstrScopeName foundation.BSTR, pvarRoleNames *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrScopeName)), uintptr(unsafe.Pointer(pvarRoleNames)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RoleForAccessCheck dispatches through IAzClientContext's vtable slot 18.
 func (self *IAzClientContext) Get_RoleForAccessCheck(pbstrProp *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RoleForAccessCheck dispatches through IAzClientContext's vtable slot 19.
 func (self *IAzClientContext) Put_RoleForAccessCheck(bstrProp foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAzClientContext2: https://learn.microsoft.com/windows/win32/api/azroles/nn-azroles-iazclientcontext2
@@ -883,19 +883,19 @@ var IID_IAzClientContext2 = win32.GUID{Data1: 0x2b0c92b8, Data2: 0x208a, Data3: 
 // GetAssignedScopesPage dispatches through IAzClientContext2's vtable slot 20.
 func (self *IAzClientContext2) GetAssignedScopesPage(lOptions int32, PageSize int32, pvarCursor *systemvariant.VARIANT, pvarScopeNames *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(lOptions), uintptr(PageSize), uintptr(unsafe.Pointer(pvarCursor)), uintptr(unsafe.Pointer(pvarScopeNames)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LDAPQueryDN dispatches through IAzClientContext2's vtable slot 24.
 func (self *IAzClientContext2) Put_LDAPQueryDN(bstrLDAPQueryDN foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrLDAPQueryDN)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LDAPQueryDN dispatches through IAzClientContext2's vtable slot 25.
 func (self *IAzClientContext2) Get_LDAPQueryDN(pbstrLDAPQueryDN *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrLDAPQueryDN)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAzClientContext3: https://learn.microsoft.com/windows/win32/api/azroles/nn-azroles-iazclientcontext3
@@ -910,49 +910,49 @@ var IID_IAzClientContext3 = win32.GUID{Data1: 0x11894fde, Data2: 0x1deb, Data3: 
 // AccessCheck2 dispatches through IAzClientContext3's vtable slot 26.
 func (self *IAzClientContext3) AccessCheck2(bstrObjectName foundation.BSTR, bstrScopeName foundation.BSTR, lOperation int32, plResult *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrObjectName)), uintptr(unsafe.Pointer(bstrScopeName)), uintptr(lOperation), uintptr(unsafe.Pointer(plResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsInRoleAssignment dispatches through IAzClientContext3's vtable slot 27.
 func (self *IAzClientContext3) IsInRoleAssignment(bstrScopeName foundation.BSTR, bstrRoleName foundation.BSTR, pbIsInRole *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrScopeName)), uintptr(unsafe.Pointer(bstrRoleName)), uintptr(unsafe.Pointer(pbIsInRole)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOperations dispatches through IAzClientContext3's vtable slot 28.
 func (self *IAzClientContext3) GetOperations(bstrScopeName foundation.BSTR, ppOperationCollection **IAzOperations) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrScopeName)), uintptr(unsafe.Pointer(ppOperationCollection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTasks dispatches through IAzClientContext3's vtable slot 29.
 func (self *IAzClientContext3) GetTasks(bstrScopeName foundation.BSTR, ppTaskCollection **IAzTasks) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrScopeName)), uintptr(unsafe.Pointer(ppTaskCollection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BizRuleParameters dispatches through IAzClientContext3's vtable slot 30.
 func (self *IAzClientContext3) Get_BizRuleParameters(ppBizRuleParam **IAzBizRuleParameters) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppBizRuleParam)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BizRuleInterfaces dispatches through IAzClientContext3's vtable slot 31.
 func (self *IAzClientContext3) Get_BizRuleInterfaces(ppBizRuleInterfaces **IAzBizRuleInterfaces) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppBizRuleInterfaces)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetGroups dispatches through IAzClientContext3's vtable slot 32.
 func (self *IAzClientContext3) GetGroups(bstrScopeName foundation.BSTR, ulOptions uint32, pGroupArray *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrScopeName)), uintptr(ulOptions), uintptr(unsafe.Pointer(pGroupArray)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Sids dispatches through IAzClientContext3's vtable slot 33.
 func (self *IAzClientContext3) Get_Sids(pStringSidArray *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStringSidArray)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAzNameResolver: https://learn.microsoft.com/windows/win32/api/azroles/nn-azroles-iaznameresolver
@@ -967,7 +967,7 @@ var IID_IAzNameResolver = win32.GUID{Data1: 0x504d0f15, Data2: 0x73e2, Data3: 0x
 // NameFromSid dispatches through IAzNameResolver's vtable slot 7.
 func (self *IAzNameResolver) NameFromSid(bstrSid foundation.BSTR, pSidType *int32, pbstrName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrSid)), uintptr(unsafe.Pointer(pSidType)), uintptr(unsafe.Pointer(pbstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAzObjectPicker: https://learn.microsoft.com/windows/win32/api/azroles/nn-azroles-iazobjectpicker
@@ -982,13 +982,13 @@ var IID_IAzObjectPicker = win32.GUID{Data1: 0x63130a48, Data2: 0x699a, Data3: 0x
 // GetPrincipals dispatches through IAzObjectPicker's vtable slot 7.
 func (self *IAzObjectPicker) GetPrincipals(hParentWnd foundation.HWND, bstrTitle foundation.BSTR, pvSidTypes *systemvariant.VARIANT, pvNames *systemvariant.VARIANT, pvSids *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hParentWnd), uintptr(unsafe.Pointer(bstrTitle)), uintptr(unsafe.Pointer(pvSidTypes)), uintptr(unsafe.Pointer(pvNames)), uintptr(unsafe.Pointer(pvSids)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through IAzObjectPicker's vtable slot 8.
 func (self *IAzObjectPicker) Get_Name(pbstrName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAzOperation: https://learn.microsoft.com/windows/win32/api/azroles/nn-azroles-iazoperation
@@ -1003,55 +1003,55 @@ var IID_IAzOperation = win32.GUID{Data1: 0x5e56b24f, Data2: 0xea01, Data3: 0x4d6
 // Get_Name dispatches through IAzOperation's vtable slot 7.
 func (self *IAzOperation) Get_Name(pbstrName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Name dispatches through IAzOperation's vtable slot 8.
 func (self *IAzOperation) Put_Name(bstrName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through IAzOperation's vtable slot 9.
 func (self *IAzOperation) Get_Description(pbstrDescription *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Description dispatches through IAzOperation's vtable slot 10.
 func (self *IAzOperation) Put_Description(bstrDescription foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ApplicationData dispatches through IAzOperation's vtable slot 11.
 func (self *IAzOperation) Get_ApplicationData(pbstrApplicationData *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrApplicationData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ApplicationData dispatches through IAzOperation's vtable slot 12.
 func (self *IAzOperation) Put_ApplicationData(bstrApplicationData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplicationData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OperationID dispatches through IAzOperation's vtable slot 13.
 func (self *IAzOperation) Get_OperationID(plProp *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_OperationID dispatches through IAzOperation's vtable slot 14.
 func (self *IAzOperation) Put_OperationID(lProp int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(lProp))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Writable dispatches through IAzOperation's vtable slot 15.
 func (self *IAzOperation) Get_Writable(pfProp *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAzOperation2: https://learn.microsoft.com/windows/win32/api/azroles/nn-azroles-iazoperation2
@@ -1066,7 +1066,7 @@ var IID_IAzOperation2 = win32.GUID{Data1: 0x1f5ea01f, Data2: 0x44a2, Data3: 0x41
 // RoleAssignments dispatches through IAzOperation2's vtable slot 19.
 func (self *IAzOperation2) RoleAssignments(bstrScopeName foundation.BSTR, bRecursive foundation.VARIANT_BOOL, ppRoleAssignments **IAzRoleAssignments) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrScopeName)), uintptr(bRecursive), uintptr(unsafe.Pointer(ppRoleAssignments)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAzOperations: https://learn.microsoft.com/windows/win32/api/azroles/nn-azroles-iazoperations
@@ -1081,19 +1081,19 @@ var IID_IAzOperations = win32.GUID{Data1: 0x90ef9c07, Data2: 0x9706, Data3: 0x49
 // Get_Item dispatches through IAzOperations's vtable slot 7.
 func (self *IAzOperations) Get_Item(Index int32, pvarObtPtr *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pvarObtPtr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IAzOperations's vtable slot 8.
 func (self *IAzOperations) Get_Count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IAzOperations's vtable slot 9.
 func (self *IAzOperations) Get__NewEnum(ppEnumPtr **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumPtr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAzPrincipalLocator: https://learn.microsoft.com/windows/win32/api/azroles/nn-azroles-iazprincipallocator
@@ -1108,13 +1108,13 @@ var IID_IAzPrincipalLocator = win32.GUID{Data1: 0xe5c3507d, Data2: 0xad6a, Data3
 // Get_NameResolver dispatches through IAzPrincipalLocator's vtable slot 7.
 func (self *IAzPrincipalLocator) Get_NameResolver(ppNameResolver **IAzNameResolver) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppNameResolver)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ObjectPicker dispatches through IAzPrincipalLocator's vtable slot 8.
 func (self *IAzPrincipalLocator) Get_ObjectPicker(ppObjectPicker **IAzObjectPicker) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppObjectPicker)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAzRole: https://learn.microsoft.com/windows/win32/api/azroles/nn-azroles-iazrole
@@ -1129,73 +1129,73 @@ var IID_IAzRole = win32.GUID{Data1: 0x859e0d8d, Data2: 0x62d7, Data3: 0x41d8, Da
 // Get_Name dispatches through IAzRole's vtable slot 7.
 func (self *IAzRole) Get_Name(pbstrName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Name dispatches through IAzRole's vtable slot 8.
 func (self *IAzRole) Put_Name(bstrName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through IAzRole's vtable slot 9.
 func (self *IAzRole) Get_Description(pbstrDescription *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Description dispatches through IAzRole's vtable slot 10.
 func (self *IAzRole) Put_Description(bstrDescription foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ApplicationData dispatches through IAzRole's vtable slot 11.
 func (self *IAzRole) Get_ApplicationData(pbstrApplicationData *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrApplicationData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ApplicationData dispatches through IAzRole's vtable slot 12.
 func (self *IAzRole) Put_ApplicationData(bstrApplicationData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplicationData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Writable dispatches through IAzRole's vtable slot 21.
 func (self *IAzRole) Get_Writable(pfProp *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AppMembers dispatches through IAzRole's vtable slot 24.
 func (self *IAzRole) Get_AppMembers(pvarProp *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Members dispatches through IAzRole's vtable slot 25.
 func (self *IAzRole) Get_Members(pvarProp *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Operations dispatches through IAzRole's vtable slot 26.
 func (self *IAzRole) Get_Operations(pvarProp *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Tasks dispatches through IAzRole's vtable slot 27.
 func (self *IAzRole) Get_Tasks(pvarProp *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MembersName dispatches through IAzRole's vtable slot 33.
 func (self *IAzRole) Get_MembersName(pvarProp *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAzRoleAssignment: https://learn.microsoft.com/windows/win32/api/azroles/nn-azroles-iazroleassignment
@@ -1210,25 +1210,25 @@ var IID_IAzRoleAssignment = win32.GUID{Data1: 0x55647d31, Data2: 0x0d5a, Data3: 
 // AddRoleDefinition dispatches through IAzRoleAssignment's vtable slot 34.
 func (self *IAzRoleAssignment) AddRoleDefinition(bstrRoleDefinition foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRoleDefinition)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteRoleDefinition dispatches through IAzRoleAssignment's vtable slot 35.
 func (self *IAzRoleAssignment) DeleteRoleDefinition(bstrRoleDefinition foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRoleDefinition)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RoleDefinitions dispatches through IAzRoleAssignment's vtable slot 36.
 func (self *IAzRoleAssignment) Get_RoleDefinitions(ppRoleDefinitions **IAzRoleDefinitions) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppRoleDefinitions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Scope dispatches through IAzRoleAssignment's vtable slot 37.
 func (self *IAzRoleAssignment) Get_Scope(ppScope **IAzScope) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppScope)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAzRoleAssignments: https://learn.microsoft.com/windows/win32/api/azroles/nn-azroles-iazroleassignments
@@ -1243,19 +1243,19 @@ var IID_IAzRoleAssignments = win32.GUID{Data1: 0x9c80b900, Data2: 0xfceb, Data3:
 // Get_Item dispatches through IAzRoleAssignments's vtable slot 7.
 func (self *IAzRoleAssignments) Get_Item(Index int32, pvarObtPtr *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pvarObtPtr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IAzRoleAssignments's vtable slot 8.
 func (self *IAzRoleAssignments) Get_Count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IAzRoleAssignments's vtable slot 9.
 func (self *IAzRoleAssignments) Get__NewEnum(ppEnumPtr **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumPtr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAzRoleDefinition: https://learn.microsoft.com/windows/win32/api/azroles/nn-azroles-iazroledefinition
@@ -1270,25 +1270,25 @@ var IID_IAzRoleDefinition = win32.GUID{Data1: 0xd97fcea1, Data2: 0x2599, Data3: 
 // RoleAssignments dispatches through IAzRoleDefinition's vtable slot 33.
 func (self *IAzRoleDefinition) RoleAssignments(bstrScopeName foundation.BSTR, bRecursive foundation.VARIANT_BOOL, ppRoleAssignments **IAzRoleAssignments) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrScopeName)), uintptr(bRecursive), uintptr(unsafe.Pointer(ppRoleAssignments)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddRoleDefinition dispatches through IAzRoleDefinition's vtable slot 34.
 func (self *IAzRoleDefinition) AddRoleDefinition(bstrRoleDefinition foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRoleDefinition)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteRoleDefinition dispatches through IAzRoleDefinition's vtable slot 35.
 func (self *IAzRoleDefinition) DeleteRoleDefinition(bstrRoleDefinition foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRoleDefinition)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RoleDefinitions dispatches through IAzRoleDefinition's vtable slot 36.
 func (self *IAzRoleDefinition) Get_RoleDefinitions(ppRoleDefinitions **IAzRoleDefinitions) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppRoleDefinitions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAzRoleDefinitions: https://learn.microsoft.com/windows/win32/api/azroles/nn-azroles-iazroledefinitions
@@ -1303,19 +1303,19 @@ var IID_IAzRoleDefinitions = win32.GUID{Data1: 0x881f25a5, Data2: 0xd755, Data3:
 // Get_Item dispatches through IAzRoleDefinitions's vtable slot 7.
 func (self *IAzRoleDefinitions) Get_Item(Index int32, pvarObtPtr *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pvarObtPtr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IAzRoleDefinitions's vtable slot 8.
 func (self *IAzRoleDefinitions) Get_Count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IAzRoleDefinitions's vtable slot 9.
 func (self *IAzRoleDefinitions) Get__NewEnum(ppEnumPtr **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumPtr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAzRoles: https://learn.microsoft.com/windows/win32/api/azroles/nn-azroles-iazroles
@@ -1330,19 +1330,19 @@ var IID_IAzRoles = win32.GUID{Data1: 0x95e0f119, Data2: 0x13b4, Data3: 0x4dae, D
 // Get_Item dispatches through IAzRoles's vtable slot 7.
 func (self *IAzRoles) Get_Item(Index int32, pvarObtPtr *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pvarObtPtr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IAzRoles's vtable slot 8.
 func (self *IAzRoles) Get_Count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IAzRoles's vtable slot 9.
 func (self *IAzRoles) Get__NewEnum(ppEnumPtr **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumPtr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAzScope: https://learn.microsoft.com/windows/win32/api/azroles/nn-azroles-iazscope
@@ -1357,97 +1357,97 @@ var IID_IAzScope = win32.GUID{Data1: 0x00e52487, Data2: 0xe08d, Data3: 0x4514, D
 // Get_Name dispatches through IAzScope's vtable slot 7.
 func (self *IAzScope) Get_Name(pbstrName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Name dispatches through IAzScope's vtable slot 8.
 func (self *IAzScope) Put_Name(bstrName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through IAzScope's vtable slot 9.
 func (self *IAzScope) Get_Description(pbstrDescription *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Description dispatches through IAzScope's vtable slot 10.
 func (self *IAzScope) Put_Description(bstrDescription foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ApplicationData dispatches through IAzScope's vtable slot 11.
 func (self *IAzScope) Get_ApplicationData(pbstrApplicationData *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrApplicationData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ApplicationData dispatches through IAzScope's vtable slot 12.
 func (self *IAzScope) Put_ApplicationData(bstrApplicationData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplicationData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Writable dispatches through IAzScope's vtable slot 13.
 func (self *IAzScope) Get_Writable(pfProp *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PolicyAdministrators dispatches through IAzScope's vtable slot 18.
 func (self *IAzScope) Get_PolicyAdministrators(pvarAdmins *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarAdmins)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PolicyReaders dispatches through IAzScope's vtable slot 19.
 func (self *IAzScope) Get_PolicyReaders(pvarReaders *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarReaders)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ApplicationGroups dispatches through IAzScope's vtable slot 24.
 func (self *IAzScope) Get_ApplicationGroups(ppGroupCollection **IAzApplicationGroups) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppGroupCollection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Roles dispatches through IAzScope's vtable slot 28.
 func (self *IAzScope) Get_Roles(ppRoleCollection **IAzRoles) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppRoleCollection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Tasks dispatches through IAzScope's vtable slot 32.
 func (self *IAzScope) Get_Tasks(ppTaskCollection **IAzTasks) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTaskCollection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CanBeDelegated dispatches through IAzScope's vtable slot 37.
 func (self *IAzScope) Get_CanBeDelegated(pfProp *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BizrulesWritable dispatches through IAzScope's vtable slot 38.
 func (self *IAzScope) Get_BizrulesWritable(pfProp *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PolicyAdministratorsName dispatches through IAzScope's vtable slot 39.
 func (self *IAzScope) Get_PolicyAdministratorsName(pvarAdmins *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarAdmins)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PolicyReadersName dispatches through IAzScope's vtable slot 40.
 func (self *IAzScope) Get_PolicyReadersName(pvarReaders *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarReaders)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAzScope2: https://learn.microsoft.com/windows/win32/api/azroles/nn-azroles-iazscope2
@@ -1462,49 +1462,49 @@ var IID_IAzScope2 = win32.GUID{Data1: 0xee9fe8c9, Data2: 0xc9f3, Data3: 0x40e2, 
 // Get_RoleDefinitions dispatches through IAzScope2's vtable slot 45.
 func (self *IAzScope2) Get_RoleDefinitions(ppRoleDefinitions **IAzRoleDefinitions) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppRoleDefinitions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateRoleDefinition dispatches through IAzScope2's vtable slot 46.
 func (self *IAzScope2) CreateRoleDefinition(bstrRoleDefinitionName foundation.BSTR, ppRoleDefinitions **IAzRoleDefinition) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRoleDefinitionName)), uintptr(unsafe.Pointer(ppRoleDefinitions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenRoleDefinition dispatches through IAzScope2's vtable slot 47.
 func (self *IAzScope2) OpenRoleDefinition(bstrRoleDefinitionName foundation.BSTR, ppRoleDefinitions **IAzRoleDefinition) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRoleDefinitionName)), uintptr(unsafe.Pointer(ppRoleDefinitions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteRoleDefinition dispatches through IAzScope2's vtable slot 48.
 func (self *IAzScope2) DeleteRoleDefinition(bstrRoleDefinitionName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRoleDefinitionName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RoleAssignments dispatches through IAzScope2's vtable slot 49.
 func (self *IAzScope2) Get_RoleAssignments(ppRoleAssignments **IAzRoleAssignments) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppRoleAssignments)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateRoleAssignment dispatches through IAzScope2's vtable slot 50.
 func (self *IAzScope2) CreateRoleAssignment(bstrRoleAssignmentName foundation.BSTR, ppRoleAssignment **IAzRoleAssignment) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRoleAssignmentName)), uintptr(unsafe.Pointer(ppRoleAssignment)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenRoleAssignment dispatches through IAzScope2's vtable slot 51.
 func (self *IAzScope2) OpenRoleAssignment(bstrRoleAssignmentName foundation.BSTR, ppRoleAssignment **IAzRoleAssignment) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRoleAssignmentName)), uintptr(unsafe.Pointer(ppRoleAssignment)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteRoleAssignment dispatches through IAzScope2's vtable slot 52.
 func (self *IAzScope2) DeleteRoleAssignment(bstrRoleAssignmentName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRoleAssignmentName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAzScopes: https://learn.microsoft.com/windows/win32/api/azroles/nn-azroles-iazscopes
@@ -1519,19 +1519,19 @@ var IID_IAzScopes = win32.GUID{Data1: 0x78e14853, Data2: 0x9f5e, Data3: 0x406d, 
 // Get_Item dispatches through IAzScopes's vtable slot 7.
 func (self *IAzScopes) Get_Item(Index int32, pvarObtPtr *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pvarObtPtr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IAzScopes's vtable slot 8.
 func (self *IAzScopes) Get_Count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IAzScopes's vtable slot 9.
 func (self *IAzScopes) Get__NewEnum(ppEnumPtr **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumPtr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAzTask: https://learn.microsoft.com/windows/win32/api/azroles/nn-azroles-iaztask
@@ -1546,104 +1546,104 @@ var IID_IAzTask = win32.GUID{Data1: 0xcb94e592, Data2: 0x2e0e, Data3: 0x4a6c, Da
 // Get_Name dispatches through IAzTask's vtable slot 7.
 func (self *IAzTask) Get_Name(pbstrName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Name dispatches through IAzTask's vtable slot 8.
 func (self *IAzTask) Put_Name(bstrName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through IAzTask's vtable slot 9.
 func (self *IAzTask) Get_Description(pbstrDescription *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Description dispatches through IAzTask's vtable slot 10.
 func (self *IAzTask) Put_Description(bstrDescription foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ApplicationData dispatches through IAzTask's vtable slot 11.
 func (self *IAzTask) Get_ApplicationData(pbstrApplicationData *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrApplicationData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ApplicationData dispatches through IAzTask's vtable slot 12.
 func (self *IAzTask) Put_ApplicationData(bstrApplicationData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplicationData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BizRule dispatches through IAzTask's vtable slot 13.
 func (self *IAzTask) Get_BizRule(pbstrProp *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BizRule dispatches through IAzTask's vtable slot 14.
 func (self *IAzTask) Put_BizRule(bstrProp foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BizRuleLanguage dispatches through IAzTask's vtable slot 15.
 func (self *IAzTask) Get_BizRuleLanguage(pbstrProp *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BizRuleLanguage dispatches through IAzTask's vtable slot 16.
 func (self *IAzTask) Put_BizRuleLanguage(bstrProp foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BizRuleImportedPath dispatches through IAzTask's vtable slot 17.
 func (self *IAzTask) Get_BizRuleImportedPath(pbstrProp *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BizRuleImportedPath dispatches through IAzTask's vtable slot 18.
 func (self *IAzTask) Put_BizRuleImportedPath(bstrProp foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsRoleDefinition dispatches through IAzTask's vtable slot 19.
 func (self *IAzTask) Get_IsRoleDefinition(pfProp *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_IsRoleDefinition dispatches through IAzTask's vtable slot 20.
 func (self *IAzTask) Put_IsRoleDefinition(fProp bool) error {
 	_fProp := win32.Bool32(fProp)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(_fProp))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Operations dispatches through IAzTask's vtable slot 21.
 func (self *IAzTask) Get_Operations(pvarProp *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Tasks dispatches through IAzTask's vtable slot 22.
 func (self *IAzTask) Get_Tasks(pvarProp *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Writable dispatches through IAzTask's vtable slot 27.
 func (self *IAzTask) Get_Writable(pfProp *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfProp)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAzTask2: https://learn.microsoft.com/windows/win32/api/azroles/nn-azroles-iaztask2
@@ -1658,7 +1658,7 @@ var IID_IAzTask2 = win32.GUID{Data1: 0x03a9a5ee, Data2: 0x48c8, Data3: 0x4832, D
 // RoleAssignments dispatches through IAzTask2's vtable slot 33.
 func (self *IAzTask2) RoleAssignments(bstrScopeName foundation.BSTR, bRecursive foundation.VARIANT_BOOL, ppRoleAssignments **IAzRoleAssignments) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrScopeName)), uintptr(bRecursive), uintptr(unsafe.Pointer(ppRoleAssignments)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAzTasks: https://learn.microsoft.com/windows/win32/api/azroles/nn-azroles-iaztasks
@@ -1673,17 +1673,17 @@ var IID_IAzTasks = win32.GUID{Data1: 0xb338ccab, Data2: 0x4c85, Data3: 0x4388, D
 // Get_Item dispatches through IAzTasks's vtable slot 7.
 func (self *IAzTasks) Get_Item(Index int32, pvarObtPtr *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pvarObtPtr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IAzTasks's vtable slot 8.
 func (self *IAzTasks) Get_Count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IAzTasks's vtable slot 9.
 func (self *IAzTasks) Get__NewEnum(ppEnumPtr **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumPtr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

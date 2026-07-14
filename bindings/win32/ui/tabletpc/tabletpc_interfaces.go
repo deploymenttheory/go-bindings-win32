@@ -28,93 +28,93 @@ var IID_IDynamicRenderer = win32.GUID{Data1: 0xa079468e, Data2: 0x7165, Data3: 0
 // Get_Enabled dispatches through IDynamicRenderer's vtable slot 3.
 func (self *IDynamicRenderer) Get_Enabled(bEnabled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bEnabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Enabled dispatches through IDynamicRenderer's vtable slot 4.
 func (self *IDynamicRenderer) Put_Enabled(bEnabled bool) error {
 	_bEnabled := win32.Bool32(bEnabled)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(_bEnabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HWND dispatches through IDynamicRenderer's vtable slot 5.
 func (self *IDynamicRenderer) Get_HWND(hwnd *foundation.HANDLE_PTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hwnd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_HWND dispatches through IDynamicRenderer's vtable slot 6.
 func (self *IDynamicRenderer) Put_HWND(hwnd foundation.HANDLE_PTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hwnd))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ClipRectangle dispatches through IDynamicRenderer's vtable slot 7.
 func (self *IDynamicRenderer) Get_ClipRectangle(prcClipRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prcClipRect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ClipRectangle dispatches through IDynamicRenderer's vtable slot 8.
 func (self *IDynamicRenderer) Put_ClipRectangle(prcClipRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prcClipRect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ClipRegion dispatches through IDynamicRenderer's vtable slot 9.
 func (self *IDynamicRenderer) Get_ClipRegion(phClipRgn *foundation.HANDLE_PTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phClipRgn)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ClipRegion dispatches through IDynamicRenderer's vtable slot 10.
 func (self *IDynamicRenderer) Put_ClipRegion(hClipRgn foundation.HANDLE_PTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(hClipRgn))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DrawingAttributes dispatches through IDynamicRenderer's vtable slot 11.
 func (self *IDynamicRenderer) Get_DrawingAttributes(ppiDA **IInkDrawingAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppiDA)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_DrawingAttributes dispatches through IDynamicRenderer's vtable slot 12.
 func (self *IDynamicRenderer) Putref_DrawingAttributes(piDA *IInkDrawingAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piDA)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DataCacheEnabled dispatches through IDynamicRenderer's vtable slot 13.
 func (self *IDynamicRenderer) Get_DataCacheEnabled(pfCacheData *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfCacheData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DataCacheEnabled dispatches through IDynamicRenderer's vtable slot 14.
 func (self *IDynamicRenderer) Put_DataCacheEnabled(fCacheData bool) error {
 	_fCacheData := win32.Bool32(fCacheData)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(_fCacheData))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReleaseCachedData dispatches through IDynamicRenderer's vtable slot 15.
 func (self *IDynamicRenderer) ReleaseCachedData(strokeId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(strokeId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through IDynamicRenderer's vtable slot 16.
 func (self *IDynamicRenderer) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Draw dispatches through IDynamicRenderer's vtable slot 17.
 func (self *IDynamicRenderer) Draw(hDC foundation.HANDLE_PTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(hDC))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IGestureRecognizer: https://learn.microsoft.com/windows/win32/api/rtscom/nn-rtscom-igesturerecognizer
@@ -129,26 +129,26 @@ var IID_IGestureRecognizer = win32.GUID{Data1: 0xae9ef86b, Data2: 0x7054, Data3:
 // Get_Enabled dispatches through IGestureRecognizer's vtable slot 3.
 func (self *IGestureRecognizer) Get_Enabled(pfEnabled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEnabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Enabled dispatches through IGestureRecognizer's vtable slot 4.
 func (self *IGestureRecognizer) Put_Enabled(fEnabled bool) error {
 	_fEnabled := win32.Bool32(fEnabled)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(_fEnabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MaxStrokeCount dispatches through IGestureRecognizer's vtable slot 5.
 func (self *IGestureRecognizer) Get_MaxStrokeCount(pcStrokes *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcStrokes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MaxStrokeCount dispatches through IGestureRecognizer's vtable slot 6.
 func (self *IGestureRecognizer) Put_MaxStrokeCount(cStrokes int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(cStrokes))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnableGestures dispatches through IGestureRecognizer's vtable slot 7.
@@ -158,13 +158,13 @@ func (self *IGestureRecognizer) EnableGestures(pGestures []int32) error {
 		_pGestures = &pGestures[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(len(pGestures)), uintptr(unsafe.Pointer(_pGestures)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IGestureRecognizer's vtable slot 8.
 func (self *IGestureRecognizer) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IHandwrittenTextInsertion: https://learn.microsoft.com/windows/win32/api/peninputpanel/nn-peninputpanel-ihandwrittentextinsertion
@@ -180,14 +180,14 @@ var IID_IHandwrittenTextInsertion = win32.GUID{Data1: 0x56fdea97, Data2: 0xecd6,
 func (self *IHandwrittenTextInsertion) InsertRecognitionResultsArray(psaAlternates *systemcom.SAFEARRAY, locale uint32, fAlternateContainsAutoSpacingInformation bool) error {
 	_fAlternateContainsAutoSpacingInformation := win32.Bool32(fAlternateContainsAutoSpacingInformation)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(psaAlternates)), uintptr(locale), uintptr(_fAlternateContainsAutoSpacingInformation))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InsertInkRecognitionResult dispatches through IHandwrittenTextInsertion's vtable slot 4.
 func (self *IHandwrittenTextInsertion) InsertInkRecognitionResult(pIInkRecoResult *IInkRecognitionResult, locale uint32, fAlternateContainsAutoSpacingInformation bool) error {
 	_fAlternateContainsAutoSpacingInformation := win32.Bool32(fAlternateContainsAutoSpacingInformation)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIInkRecoResult)), uintptr(locale), uintptr(_fAlternateContainsAutoSpacingInformation))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 03f8e511-43a1-11d3-8bb6-0080c7d6bad5
@@ -210,235 +210,235 @@ var IID_IInkCollector = win32.GUID{Data1: 0xf0f060b5, Data2: 0x8b1f, Data3: 0x4a
 // Get_hWnd dispatches through IInkCollector's vtable slot 7.
 func (self *IInkCollector) Get_hWnd(CurrentWindow *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CurrentWindow)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_hWnd dispatches through IInkCollector's vtable slot 8.
 func (self *IInkCollector) Put_hWnd(NewWindow uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(NewWindow))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Enabled dispatches through IInkCollector's vtable slot 9.
 func (self *IInkCollector) Get_Enabled(Collecting *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Collecting)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Enabled dispatches through IInkCollector's vtable slot 10.
 func (self *IInkCollector) Put_Enabled(Collecting foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Collecting))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DefaultDrawingAttributes dispatches through IInkCollector's vtable slot 11.
 func (self *IInkCollector) Get_DefaultDrawingAttributes(CurrentAttributes **IInkDrawingAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CurrentAttributes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_DefaultDrawingAttributes dispatches through IInkCollector's vtable slot 12.
 func (self *IInkCollector) Putref_DefaultDrawingAttributes(NewAttributes *IInkDrawingAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(NewAttributes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Renderer dispatches through IInkCollector's vtable slot 13.
 func (self *IInkCollector) Get_Renderer(CurrentInkRenderer **IInkRenderer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CurrentInkRenderer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_Renderer dispatches through IInkCollector's vtable slot 14.
 func (self *IInkCollector) Putref_Renderer(NewInkRenderer *IInkRenderer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(NewInkRenderer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Ink dispatches through IInkCollector's vtable slot 15.
 func (self *IInkCollector) Get_Ink(Ink **IInkDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Ink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_Ink dispatches through IInkCollector's vtable slot 16.
 func (self *IInkCollector) Putref_Ink(NewInk *IInkDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(NewInk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AutoRedraw dispatches through IInkCollector's vtable slot 17.
 func (self *IInkCollector) Get_AutoRedraw(AutoRedraw *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AutoRedraw)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AutoRedraw dispatches through IInkCollector's vtable slot 18.
 func (self *IInkCollector) Put_AutoRedraw(AutoRedraw foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(AutoRedraw))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CollectingInk dispatches through IInkCollector's vtable slot 19.
 func (self *IInkCollector) Get_CollectingInk(Collecting *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Collecting)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CollectionMode dispatches through IInkCollector's vtable slot 20.
 func (self *IInkCollector) Get_CollectionMode(Mode *InkCollectionMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Mode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CollectionMode dispatches through IInkCollector's vtable slot 21.
 func (self *IInkCollector) Put_CollectionMode(Mode InkCollectionMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(Mode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DynamicRendering dispatches through IInkCollector's vtable slot 22.
 func (self *IInkCollector) Get_DynamicRendering(Enabled *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Enabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DynamicRendering dispatches through IInkCollector's vtable slot 23.
 func (self *IInkCollector) Put_DynamicRendering(Enabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(Enabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DesiredPacketDescription dispatches through IInkCollector's vtable slot 24.
 func (self *IInkCollector) Get_DesiredPacketDescription(PacketGuids *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PacketGuids)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MouseIcon dispatches through IInkCollector's vtable slot 26.
 func (self *IInkCollector) Get_MouseIcon(MouseIcon **systemole.IPictureDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(MouseIcon)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MouseIcon dispatches through IInkCollector's vtable slot 27.
 func (self *IInkCollector) Put_MouseIcon(MouseIcon *systemole.IPictureDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(MouseIcon)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_MouseIcon dispatches through IInkCollector's vtable slot 28.
 func (self *IInkCollector) Putref_MouseIcon(MouseIcon *systemole.IPictureDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(MouseIcon)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MousePointer dispatches through IInkCollector's vtable slot 29.
 func (self *IInkCollector) Get_MousePointer(MousePointer *InkMousePointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(MousePointer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MousePointer dispatches through IInkCollector's vtable slot 30.
 func (self *IInkCollector) Put_MousePointer(MousePointer InkMousePointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(MousePointer))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Cursors dispatches through IInkCollector's vtable slot 31.
 func (self *IInkCollector) Get_Cursors(Cursors **IInkCursors) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Cursors)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MarginX dispatches through IInkCollector's vtable slot 32.
 func (self *IInkCollector) Get_MarginX(MarginX *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(MarginX)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MarginX dispatches through IInkCollector's vtable slot 33.
 func (self *IInkCollector) Put_MarginX(MarginX int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(MarginX))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MarginY dispatches through IInkCollector's vtable slot 34.
 func (self *IInkCollector) Get_MarginY(MarginY *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(MarginY)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MarginY dispatches through IInkCollector's vtable slot 35.
 func (self *IInkCollector) Put_MarginY(MarginY int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(MarginY))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Tablet dispatches through IInkCollector's vtable slot 36.
 func (self *IInkCollector) Get_Tablet(SingleTablet **IInkTablet) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SingleTablet)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SupportHighContrastInk dispatches through IInkCollector's vtable slot 37.
 func (self *IInkCollector) Get_SupportHighContrastInk(Support *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Support)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SupportHighContrastInk dispatches through IInkCollector's vtable slot 38.
 func (self *IInkCollector) Put_SupportHighContrastInk(Support foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(Support))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetGestureStatus dispatches through IInkCollector's vtable slot 39.
 func (self *IInkCollector) SetGestureStatus(Gesture InkApplicationGesture, Listen foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(Gesture), uintptr(Listen))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetGestureStatus dispatches through IInkCollector's vtable slot 40.
 func (self *IInkCollector) GetGestureStatus(Gesture InkApplicationGesture, Listening *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(Gesture), uintptr(unsafe.Pointer(Listening)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetWindowInputRectangle dispatches through IInkCollector's vtable slot 41.
 func (self *IInkCollector) GetWindowInputRectangle(WindowInputRectangle **IInkRectangle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WindowInputRectangle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetWindowInputRectangle dispatches through IInkCollector's vtable slot 42.
 func (self *IInkCollector) SetWindowInputRectangle(WindowInputRectangle *IInkRectangle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WindowInputRectangle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAllTabletsMode dispatches through IInkCollector's vtable slot 43.
 func (self *IInkCollector) SetAllTabletsMode(UseMouseForInput foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(UseMouseForInput))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetSingleTabletIntegratedMode dispatches through IInkCollector's vtable slot 44.
 func (self *IInkCollector) SetSingleTabletIntegratedMode(Tablet *IInkTablet) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Tablet)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEventInterest dispatches through IInkCollector's vtable slot 45.
 func (self *IInkCollector) GetEventInterest(EventId InkCollectorEventInterest, Listen *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(EventId), uintptr(unsafe.Pointer(Listen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetEventInterest dispatches through IInkCollector's vtable slot 46.
 func (self *IInkCollector) SetEventInterest(EventId InkCollectorEventInterest, Listen foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(EventId), uintptr(Listen))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkCursor: https://learn.microsoft.com/windows/win32/api/msinkaut/nn-msinkaut-iinkcursor
@@ -453,43 +453,43 @@ var IID_IInkCursor = win32.GUID{Data1: 0xad30c630, Data2: 0x40c5, Data3: 0x4350,
 // Get_Name dispatches through IInkCursor's vtable slot 7.
 func (self *IInkCursor) Get_Name(Name *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Name)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Id dispatches through IInkCursor's vtable slot 8.
 func (self *IInkCursor) Get_Id(Id *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Id)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Inverted dispatches through IInkCursor's vtable slot 9.
 func (self *IInkCursor) Get_Inverted(Status *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Status)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DrawingAttributes dispatches through IInkCursor's vtable slot 10.
 func (self *IInkCursor) Get_DrawingAttributes(Attributes **IInkDrawingAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Attributes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_DrawingAttributes dispatches through IInkCursor's vtable slot 11.
 func (self *IInkCursor) Putref_DrawingAttributes(Attributes *IInkDrawingAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Attributes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Tablet dispatches through IInkCursor's vtable slot 12.
 func (self *IInkCursor) Get_Tablet(Tablet **IInkTablet) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Tablet)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Buttons dispatches through IInkCursor's vtable slot 13.
 func (self *IInkCursor) Get_Buttons(Buttons **IInkCursorButtons) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Buttons)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkCursorButton: https://learn.microsoft.com/windows/win32/api/msinkaut/nn-msinkaut-iinkcursorbutton
@@ -504,19 +504,19 @@ var IID_IInkCursorButton = win32.GUID{Data1: 0x85ef9417, Data2: 0x1d59, Data3: 0
 // Get_Name dispatches through IInkCursorButton's vtable slot 7.
 func (self *IInkCursorButton) Get_Name(Name *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Name)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Id dispatches through IInkCursorButton's vtable slot 8.
 func (self *IInkCursorButton) Get_Id(Id *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Id)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_State dispatches through IInkCursorButton's vtable slot 9.
 func (self *IInkCursorButton) Get_State(CurrentState *InkCursorButtonState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CurrentState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkCursorButtons: https://learn.microsoft.com/windows/win32/api/msinkaut/nn-msinkaut-iinkcursorbuttons
@@ -531,13 +531,13 @@ var IID_IInkCursorButtons = win32.GUID{Data1: 0x3671cc40, Data2: 0xb624, Data3: 
 // Get_Count dispatches through IInkCursorButtons's vtable slot 7.
 func (self *IInkCursorButtons) Get_Count(Count *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Count)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IInkCursorButtons's vtable slot 8.
 func (self *IInkCursorButtons) Get__NewEnum(_NewEnum **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_NewEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkCursors: https://learn.microsoft.com/windows/win32/api/msinkaut/nn-msinkaut-iinkcursors
@@ -552,19 +552,19 @@ var IID_IInkCursors = win32.GUID{Data1: 0xa248c1ac, Data2: 0xc698, Data3: 0x4e06
 // Get_Count dispatches through IInkCursors's vtable slot 7.
 func (self *IInkCursors) Get_Count(Count *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Count)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IInkCursors's vtable slot 8.
 func (self *IInkCursors) Get__NewEnum(_NewEnum **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_NewEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Item dispatches through IInkCursors's vtable slot 9.
 func (self *IInkCursors) Item(Index int32, Cursor **IInkCursor) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(Cursor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkCustomStrokes: https://learn.microsoft.com/windows/win32/api/msinkaut/nn-msinkaut-iinkcustomstrokes
@@ -579,25 +579,25 @@ var IID_IInkCustomStrokes = win32.GUID{Data1: 0x7e23a88f, Data2: 0xc30e, Data3: 
 // Get_Count dispatches through IInkCustomStrokes's vtable slot 7.
 func (self *IInkCustomStrokes) Get_Count(Count *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Count)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IInkCustomStrokes's vtable slot 8.
 func (self *IInkCustomStrokes) Get__NewEnum(_NewEnum **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_NewEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through IInkCustomStrokes's vtable slot 10.
 func (self *IInkCustomStrokes) Add(Name foundation.BSTR, Strokes *IInkStrokes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Name)), uintptr(unsafe.Pointer(Strokes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through IInkCustomStrokes's vtable slot 12.
 func (self *IInkCustomStrokes) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkDisp: https://learn.microsoft.com/windows/win32/api/msinkaut/nn-msinkaut-iinkdisp
@@ -612,115 +612,115 @@ var IID_IInkDisp = win32.GUID{Data1: 0x9d398fa0, Data2: 0xc4e2, Data3: 0x4fcd, D
 // Get_Strokes dispatches through IInkDisp's vtable slot 7.
 func (self *IInkDisp) Get_Strokes(Strokes **IInkStrokes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Strokes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ExtendedProperties dispatches through IInkDisp's vtable slot 8.
 func (self *IInkDisp) Get_ExtendedProperties(Properties **IInkExtendedProperties) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Properties)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Dirty dispatches through IInkDisp's vtable slot 9.
 func (self *IInkDisp) Get_Dirty(Dirty *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Dirty)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Dirty dispatches through IInkDisp's vtable slot 10.
 func (self *IInkDisp) Put_Dirty(Dirty foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Dirty))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CustomStrokes dispatches through IInkDisp's vtable slot 11.
 func (self *IInkDisp) Get_CustomStrokes(ppunkInkCustomStrokes **IInkCustomStrokes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppunkInkCustomStrokes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBoundingBox dispatches through IInkDisp's vtable slot 12.
 func (self *IInkDisp) GetBoundingBox(BoundingBoxMode InkBoundingBoxMode, Rectangle **IInkRectangle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(BoundingBoxMode), uintptr(unsafe.Pointer(Rectangle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteStrokes dispatches through IInkDisp's vtable slot 13.
 func (self *IInkDisp) DeleteStrokes(Strokes *IInkStrokes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Strokes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteStroke dispatches through IInkDisp's vtable slot 14.
 func (self *IInkDisp) DeleteStroke(Stroke *IInkStrokeDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Stroke)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExtractStrokes dispatches through IInkDisp's vtable slot 15.
 func (self *IInkDisp) ExtractStrokes(Strokes *IInkStrokes, ExtractFlags InkExtractFlags, ExtractedInk **IInkDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Strokes)), uintptr(ExtractFlags), uintptr(unsafe.Pointer(ExtractedInk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExtractWithRectangle dispatches through IInkDisp's vtable slot 16.
 func (self *IInkDisp) ExtractWithRectangle(Rectangle *IInkRectangle, extractFlags InkExtractFlags, ExtractedInk **IInkDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Rectangle)), uintptr(extractFlags), uintptr(unsafe.Pointer(ExtractedInk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clip dispatches through IInkDisp's vtable slot 17.
 func (self *IInkDisp) Clip(Rectangle *IInkRectangle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Rectangle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IInkDisp's vtable slot 18.
 func (self *IInkDisp) Clone(NewInk **IInkDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(NewInk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NearestPoint dispatches through IInkDisp's vtable slot 22.
 func (self *IInkDisp) NearestPoint(X int32, Y int32, PointOnStroke *float32, DistanceFromPacket *float32, Stroke **IInkStrokeDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(X), uintptr(Y), uintptr(unsafe.Pointer(PointOnStroke)), uintptr(unsafe.Pointer(DistanceFromPacket)), uintptr(unsafe.Pointer(Stroke)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddStrokesAtRectangle dispatches through IInkDisp's vtable slot 24.
 func (self *IInkDisp) AddStrokesAtRectangle(SourceStrokes *IInkStrokes, TargetRectangle *IInkRectangle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SourceStrokes)), uintptr(unsafe.Pointer(TargetRectangle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Save dispatches through IInkDisp's vtable slot 25.
 func (self *IInkDisp) Save(PersistenceFormat InkPersistenceFormat, CompressionMode InkPersistenceCompressionMode, Data *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(PersistenceFormat), uintptr(CompressionMode), uintptr(unsafe.Pointer(Data)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ClipboardCopyWithRectangle dispatches through IInkDisp's vtable slot 28.
 func (self *IInkDisp) ClipboardCopyWithRectangle(Rectangle *IInkRectangle, ClipboardFormats InkClipboardFormats, ClipboardModes InkClipboardModes, DataObject **systemcom.IDataObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Rectangle)), uintptr(ClipboardFormats), uintptr(ClipboardModes), uintptr(unsafe.Pointer(DataObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ClipboardCopy dispatches through IInkDisp's vtable slot 29.
 func (self *IInkDisp) ClipboardCopy(strokes *IInkStrokes, ClipboardFormats InkClipboardFormats, ClipboardModes InkClipboardModes, DataObject **systemcom.IDataObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strokes)), uintptr(ClipboardFormats), uintptr(ClipboardModes), uintptr(unsafe.Pointer(DataObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CanPaste dispatches through IInkDisp's vtable slot 30.
 func (self *IInkDisp) CanPaste(DataObject *systemcom.IDataObject, CanPaste *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(DataObject)), uintptr(unsafe.Pointer(CanPaste)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ClipboardPaste dispatches through IInkDisp's vtable slot 31.
 func (self *IInkDisp) ClipboardPaste(x int32, y int32, DataObject *systemcom.IDataObject, Strokes **IInkStrokes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(x), uintptr(y), uintptr(unsafe.Pointer(DataObject)), uintptr(unsafe.Pointer(Strokes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkDivider: https://learn.microsoft.com/windows/win32/api/msinkaut15/nn-msinkaut15-iinkdivider
@@ -735,43 +735,43 @@ var IID_IInkDivider = win32.GUID{Data1: 0x5de00405, Data2: 0xf9a4, Data3: 0x4651
 // Get_Strokes dispatches through IInkDivider's vtable slot 7.
 func (self *IInkDivider) Get_Strokes(Strokes **IInkStrokes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Strokes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_Strokes dispatches through IInkDivider's vtable slot 8.
 func (self *IInkDivider) Putref_Strokes(Strokes *IInkStrokes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Strokes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RecognizerContext dispatches through IInkDivider's vtable slot 9.
 func (self *IInkDivider) Get_RecognizerContext(RecognizerContext **IInkRecognizerContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(RecognizerContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_RecognizerContext dispatches through IInkDivider's vtable slot 10.
 func (self *IInkDivider) Putref_RecognizerContext(RecognizerContext *IInkRecognizerContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(RecognizerContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LineHeight dispatches through IInkDivider's vtable slot 11.
 func (self *IInkDivider) Get_LineHeight(LineHeight *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(LineHeight)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_LineHeight dispatches through IInkDivider's vtable slot 12.
 func (self *IInkDivider) Put_LineHeight(LineHeight int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(LineHeight))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Divide dispatches through IInkDivider's vtable slot 13.
 func (self *IInkDivider) Divide(InkDivisionResult **IInkDivisionResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(InkDivisionResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkDivisionResult: https://learn.microsoft.com/windows/win32/api/msinkaut15/nn-msinkaut15-iinkdivisionresult
@@ -786,13 +786,13 @@ var IID_IInkDivisionResult = win32.GUID{Data1: 0x2dbec0a7, Data2: 0x74c7, Data3:
 // Get_Strokes dispatches through IInkDivisionResult's vtable slot 7.
 func (self *IInkDivisionResult) Get_Strokes(Strokes **IInkStrokes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Strokes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ResultByType dispatches through IInkDivisionResult's vtable slot 8.
 func (self *IInkDivisionResult) ResultByType(divisionType InkDivisionType, InkDivisionUnits **IInkDivisionUnits) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(divisionType), uintptr(unsafe.Pointer(InkDivisionUnits)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkDivisionUnit: https://learn.microsoft.com/windows/win32/api/msinkaut15/nn-msinkaut15-iinkdivisionunit
@@ -807,25 +807,25 @@ var IID_IInkDivisionUnit = win32.GUID{Data1: 0x85aee342, Data2: 0x48b0, Data3: 0
 // Get_Strokes dispatches through IInkDivisionUnit's vtable slot 7.
 func (self *IInkDivisionUnit) Get_Strokes(Strokes **IInkStrokes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Strokes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DivisionType dispatches through IInkDivisionUnit's vtable slot 8.
 func (self *IInkDivisionUnit) Get_DivisionType(divisionType *InkDivisionType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(divisionType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RecognizedString dispatches through IInkDivisionUnit's vtable slot 9.
 func (self *IInkDivisionUnit) Get_RecognizedString(RecoString *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(RecoString)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RotationTransform dispatches through IInkDivisionUnit's vtable slot 10.
 func (self *IInkDivisionUnit) Get_RotationTransform(RotationTransform **IInkTransform) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(RotationTransform)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkDivisionUnits: https://learn.microsoft.com/windows/win32/api/msinkaut15/nn-msinkaut15-iinkdivisionunits
@@ -840,19 +840,19 @@ var IID_IInkDivisionUnits = win32.GUID{Data1: 0x1bb5ddc2, Data2: 0x31cc, Data3: 
 // Get_Count dispatches through IInkDivisionUnits's vtable slot 7.
 func (self *IInkDivisionUnits) Get_Count(Count *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Count)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IInkDivisionUnits's vtable slot 8.
 func (self *IInkDivisionUnits) Get__NewEnum(_NewEnum **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_NewEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Item dispatches through IInkDivisionUnits's vtable slot 9.
 func (self *IInkDivisionUnits) Item(Index int32, InkDivisionUnit **IInkDivisionUnit) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(InkDivisionUnit)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkDrawingAttributes: https://learn.microsoft.com/windows/win32/api/msinkaut/nn-msinkaut-iinkdrawingattributes
@@ -867,109 +867,109 @@ var IID_IInkDrawingAttributes = win32.GUID{Data1: 0xbf519b75, Data2: 0x0a15, Dat
 // Get_Color dispatches through IInkDrawingAttributes's vtable slot 7.
 func (self *IInkDrawingAttributes) Get_Color(CurrentColor *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CurrentColor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Color dispatches through IInkDrawingAttributes's vtable slot 8.
 func (self *IInkDrawingAttributes) Put_Color(NewColor int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(NewColor))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Width dispatches through IInkDrawingAttributes's vtable slot 9.
 func (self *IInkDrawingAttributes) Get_Width(CurrentWidth *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CurrentWidth)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Height dispatches through IInkDrawingAttributes's vtable slot 11.
 func (self *IInkDrawingAttributes) Get_Height(CurrentHeight *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CurrentHeight)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FitToCurve dispatches through IInkDrawingAttributes's vtable slot 13.
 func (self *IInkDrawingAttributes) Get_FitToCurve(Flag *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Flag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FitToCurve dispatches through IInkDrawingAttributes's vtable slot 14.
 func (self *IInkDrawingAttributes) Put_FitToCurve(Flag foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(Flag))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IgnorePressure dispatches through IInkDrawingAttributes's vtable slot 15.
 func (self *IInkDrawingAttributes) Get_IgnorePressure(Flag *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Flag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_IgnorePressure dispatches through IInkDrawingAttributes's vtable slot 16.
 func (self *IInkDrawingAttributes) Put_IgnorePressure(Flag foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(Flag))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AntiAliased dispatches through IInkDrawingAttributes's vtable slot 17.
 func (self *IInkDrawingAttributes) Get_AntiAliased(Flag *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Flag)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AntiAliased dispatches through IInkDrawingAttributes's vtable slot 18.
 func (self *IInkDrawingAttributes) Put_AntiAliased(Flag foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(Flag))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Transparency dispatches through IInkDrawingAttributes's vtable slot 19.
 func (self *IInkDrawingAttributes) Get_Transparency(CurrentTransparency *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CurrentTransparency)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Transparency dispatches through IInkDrawingAttributes's vtable slot 20.
 func (self *IInkDrawingAttributes) Put_Transparency(NewTransparency int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(NewTransparency))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RasterOperation dispatches through IInkDrawingAttributes's vtable slot 21.
 func (self *IInkDrawingAttributes) Get_RasterOperation(CurrentRasterOperation *InkRasterOperation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CurrentRasterOperation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RasterOperation dispatches through IInkDrawingAttributes's vtable slot 22.
 func (self *IInkDrawingAttributes) Put_RasterOperation(NewRasterOperation InkRasterOperation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(NewRasterOperation))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PenTip dispatches through IInkDrawingAttributes's vtable slot 23.
 func (self *IInkDrawingAttributes) Get_PenTip(CurrentPenTip *InkPenTip) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CurrentPenTip)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PenTip dispatches through IInkDrawingAttributes's vtable slot 24.
 func (self *IInkDrawingAttributes) Put_PenTip(NewPenTip InkPenTip) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(NewPenTip))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ExtendedProperties dispatches through IInkDrawingAttributes's vtable slot 25.
 func (self *IInkDrawingAttributes) Get_ExtendedProperties(Properties **IInkExtendedProperties) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Properties)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IInkDrawingAttributes's vtable slot 26.
 func (self *IInkDrawingAttributes) Clone(DrawingAttributes **IInkDrawingAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(DrawingAttributes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkEdit: https://learn.microsoft.com/windows/win32/api/inked/nn-inked-iinkedit
@@ -984,409 +984,409 @@ var IID_IInkEdit = win32.GUID{Data1: 0xf2127a19, Data2: 0xfbfb, Data3: 0x4aed, D
 // Get_Status dispatches through IInkEdit's vtable slot 7.
 func (self *IInkEdit) Get_Status(pStatus *InkEditStatus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UseMouseForInput dispatches through IInkEdit's vtable slot 8.
 func (self *IInkEdit) Get_UseMouseForInput(pVal *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_UseMouseForInput dispatches through IInkEdit's vtable slot 9.
 func (self *IInkEdit) Put_UseMouseForInput(newVal foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(newVal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InkMode dispatches through IInkEdit's vtable slot 10.
 func (self *IInkEdit) Get_InkMode(pVal *InkMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_InkMode dispatches through IInkEdit's vtable slot 11.
 func (self *IInkEdit) Put_InkMode(newVal InkMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(newVal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InkInsertMode dispatches through IInkEdit's vtable slot 12.
 func (self *IInkEdit) Get_InkInsertMode(pVal *InkInsertMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_InkInsertMode dispatches through IInkEdit's vtable slot 13.
 func (self *IInkEdit) Put_InkInsertMode(newVal InkInsertMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(newVal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DrawingAttributes dispatches through IInkEdit's vtable slot 14.
 func (self *IInkEdit) Get_DrawingAttributes(pVal **IInkDrawingAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_DrawingAttributes dispatches through IInkEdit's vtable slot 15.
 func (self *IInkEdit) Putref_DrawingAttributes(newVal *IInkDrawingAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RecognitionTimeout dispatches through IInkEdit's vtable slot 16.
 func (self *IInkEdit) Get_RecognitionTimeout(pVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RecognitionTimeout dispatches through IInkEdit's vtable slot 17.
 func (self *IInkEdit) Put_RecognitionTimeout(newVal int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(newVal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Recognizer dispatches through IInkEdit's vtable slot 18.
 func (self *IInkEdit) Get_Recognizer(pVal **IInkRecognizer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_Recognizer dispatches through IInkEdit's vtable slot 19.
 func (self *IInkEdit) Putref_Recognizer(newVal *IInkRecognizer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Factoid dispatches through IInkEdit's vtable slot 20.
 func (self *IInkEdit) Get_Factoid(pVal *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Factoid dispatches through IInkEdit's vtable slot 21.
 func (self *IInkEdit) Put_Factoid(newVal foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SelInks dispatches through IInkEdit's vtable slot 22.
 func (self *IInkEdit) Get_SelInks(pSelInk *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSelInk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SelInksDisplayMode dispatches through IInkEdit's vtable slot 24.
 func (self *IInkEdit) Get_SelInksDisplayMode(pInkDisplayMode *InkDisplayMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInkDisplayMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SelInksDisplayMode dispatches through IInkEdit's vtable slot 25.
 func (self *IInkEdit) Put_SelInksDisplayMode(InkDisplayMode_ InkDisplayMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(InkDisplayMode_))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Recognize dispatches through IInkEdit's vtable slot 26.
 func (self *IInkEdit) Recognize() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetGestureStatus dispatches through IInkEdit's vtable slot 27.
 func (self *IInkEdit) GetGestureStatus(Gesture InkApplicationGesture, pListen *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(Gesture), uintptr(unsafe.Pointer(pListen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetGestureStatus dispatches through IInkEdit's vtable slot 28.
 func (self *IInkEdit) SetGestureStatus(Gesture InkApplicationGesture, Listen foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(Gesture), uintptr(Listen))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BackColor dispatches through IInkEdit's vtable slot 29.
 func (self *IInkEdit) Put_BackColor(clr uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(clr))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BackColor dispatches through IInkEdit's vtable slot 30.
 func (self *IInkEdit) Get_BackColor(pclr *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pclr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Appearance dispatches through IInkEdit's vtable slot 31.
 func (self *IInkEdit) Get_Appearance(pAppearance *AppearanceConstants) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAppearance)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Appearance dispatches through IInkEdit's vtable slot 32.
 func (self *IInkEdit) Put_Appearance(pAppearance AppearanceConstants) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(pAppearance))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BorderStyle dispatches through IInkEdit's vtable slot 33.
 func (self *IInkEdit) Get_BorderStyle(pBorderStyle *BorderStyleConstants) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBorderStyle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BorderStyle dispatches through IInkEdit's vtable slot 34.
 func (self *IInkEdit) Put_BorderStyle(pBorderStyle BorderStyleConstants) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(pBorderStyle))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Hwnd dispatches through IInkEdit's vtable slot 35.
 func (self *IInkEdit) Get_Hwnd(pohHwnd *systemole.OLE_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pohHwnd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Font dispatches through IInkEdit's vtable slot 36.
 func (self *IInkEdit) Get_Font(ppFont **systemole.IFontDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFont)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_Font dispatches through IInkEdit's vtable slot 37.
 func (self *IInkEdit) Putref_Font(ppFont *systemole.IFontDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFont)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Text dispatches through IInkEdit's vtable slot 38.
 func (self *IInkEdit) Get_Text(pbstrText *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrText)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Text dispatches through IInkEdit's vtable slot 39.
 func (self *IInkEdit) Put_Text(pbstrText foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrText)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MouseIcon dispatches through IInkEdit's vtable slot 40.
 func (self *IInkEdit) Get_MouseIcon(MouseIcon **systemole.IPictureDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(MouseIcon)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MouseIcon dispatches through IInkEdit's vtable slot 41.
 func (self *IInkEdit) Put_MouseIcon(MouseIcon *systemole.IPictureDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(MouseIcon)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_MouseIcon dispatches through IInkEdit's vtable slot 42.
 func (self *IInkEdit) Putref_MouseIcon(MouseIcon *systemole.IPictureDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(MouseIcon)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MousePointer dispatches through IInkEdit's vtable slot 43.
 func (self *IInkEdit) Get_MousePointer(MousePointer *InkMousePointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(MousePointer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MousePointer dispatches through IInkEdit's vtable slot 44.
 func (self *IInkEdit) Put_MousePointer(MousePointer InkMousePointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(MousePointer))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Locked dispatches through IInkEdit's vtable slot 45.
 func (self *IInkEdit) Get_Locked(pVal *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Locked dispatches through IInkEdit's vtable slot 46.
 func (self *IInkEdit) Put_Locked(newVal foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(newVal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Enabled dispatches through IInkEdit's vtable slot 47.
 func (self *IInkEdit) Get_Enabled(pVal *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Enabled dispatches through IInkEdit's vtable slot 48.
 func (self *IInkEdit) Put_Enabled(newVal foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(newVal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MaxLength dispatches through IInkEdit's vtable slot 49.
 func (self *IInkEdit) Get_MaxLength(plMaxLength *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMaxLength)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MaxLength dispatches through IInkEdit's vtable slot 50.
 func (self *IInkEdit) Put_MaxLength(lMaxLength int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(lMaxLength))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MultiLine dispatches through IInkEdit's vtable slot 51.
 func (self *IInkEdit) Get_MultiLine(pVal *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MultiLine dispatches through IInkEdit's vtable slot 52.
 func (self *IInkEdit) Put_MultiLine(newVal foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(newVal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ScrollBars dispatches through IInkEdit's vtable slot 53.
 func (self *IInkEdit) Get_ScrollBars(pVal *ScrollBarsConstants) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ScrollBars dispatches through IInkEdit's vtable slot 54.
 func (self *IInkEdit) Put_ScrollBars(newVal ScrollBarsConstants) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(newVal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DisableNoScroll dispatches through IInkEdit's vtable slot 55.
 func (self *IInkEdit) Get_DisableNoScroll(pVal *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DisableNoScroll dispatches through IInkEdit's vtable slot 56.
 func (self *IInkEdit) Put_DisableNoScroll(newVal foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(newVal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SelAlignment dispatches through IInkEdit's vtable slot 57.
 func (self *IInkEdit) Get_SelAlignment(pvarSelAlignment *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSelAlignment)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SelBold dispatches through IInkEdit's vtable slot 59.
 func (self *IInkEdit) Get_SelBold(pvarSelBold *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSelBold)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SelItalic dispatches through IInkEdit's vtable slot 61.
 func (self *IInkEdit) Get_SelItalic(pvarSelItalic *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSelItalic)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SelUnderline dispatches through IInkEdit's vtable slot 63.
 func (self *IInkEdit) Get_SelUnderline(pvarSelUnderline *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSelUnderline)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SelColor dispatches through IInkEdit's vtable slot 65.
 func (self *IInkEdit) Get_SelColor(pvarSelColor *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSelColor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SelFontName dispatches through IInkEdit's vtable slot 67.
 func (self *IInkEdit) Get_SelFontName(pvarSelFontName *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSelFontName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SelFontSize dispatches through IInkEdit's vtable slot 69.
 func (self *IInkEdit) Get_SelFontSize(pvarSelFontSize *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSelFontSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SelCharOffset dispatches through IInkEdit's vtable slot 71.
 func (self *IInkEdit) Get_SelCharOffset(pvarSelCharOffset *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSelCharOffset)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TextRTF dispatches through IInkEdit's vtable slot 73.
 func (self *IInkEdit) Get_TextRTF(pbstrTextRTF *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrTextRTF)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_TextRTF dispatches through IInkEdit's vtable slot 74.
 func (self *IInkEdit) Put_TextRTF(pbstrTextRTF foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[74], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrTextRTF)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SelStart dispatches through IInkEdit's vtable slot 75.
 func (self *IInkEdit) Get_SelStart(plSelStart *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[75], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plSelStart)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SelStart dispatches through IInkEdit's vtable slot 76.
 func (self *IInkEdit) Put_SelStart(plSelStart int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[76], uintptr(unsafe.Pointer(self)), uintptr(plSelStart))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SelLength dispatches through IInkEdit's vtable slot 77.
 func (self *IInkEdit) Get_SelLength(plSelLength *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[77], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plSelLength)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SelLength dispatches through IInkEdit's vtable slot 78.
 func (self *IInkEdit) Put_SelLength(plSelLength int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(plSelLength))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SelText dispatches through IInkEdit's vtable slot 79.
 func (self *IInkEdit) Get_SelText(pbstrSelText *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[79], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrSelText)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SelText dispatches through IInkEdit's vtable slot 80.
 func (self *IInkEdit) Put_SelText(pbstrSelText foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[80], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrSelText)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SelRTF dispatches through IInkEdit's vtable slot 81.
 func (self *IInkEdit) Get_SelRTF(pbstrSelRTF *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrSelRTF)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SelRTF dispatches through IInkEdit's vtable slot 82.
 func (self *IInkEdit) Put_SelRTF(pbstrSelRTF foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrSelRTF)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through IInkEdit's vtable slot 83.
 func (self *IInkEdit) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkExtendedProperties: https://learn.microsoft.com/windows/win32/api/msinkaut/nn-msinkaut-iinkextendedproperties
@@ -1401,25 +1401,25 @@ var IID_IInkExtendedProperties = win32.GUID{Data1: 0x89f2a8be, Data2: 0x95a9, Da
 // Get_Count dispatches through IInkExtendedProperties's vtable slot 7.
 func (self *IInkExtendedProperties) Get_Count(Count *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Count)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IInkExtendedProperties's vtable slot 8.
 func (self *IInkExtendedProperties) Get__NewEnum(_NewEnum **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_NewEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through IInkExtendedProperties's vtable slot 12.
 func (self *IInkExtendedProperties) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DoesPropertyExist dispatches through IInkExtendedProperties's vtable slot 13.
 func (self *IInkExtendedProperties) DoesPropertyExist(Guid foundation.BSTR, DoesPropertyExist *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Guid)), uintptr(unsafe.Pointer(DoesPropertyExist)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkExtendedProperty: https://learn.microsoft.com/windows/win32/api/msinkaut/nn-msinkaut-iinkextendedproperty
@@ -1434,13 +1434,13 @@ var IID_IInkExtendedProperty = win32.GUID{Data1: 0xdb489209, Data2: 0xb7c3, Data
 // Get_Guid dispatches through IInkExtendedProperty's vtable slot 7.
 func (self *IInkExtendedProperty) Get_Guid(Guid *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Guid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Data dispatches through IInkExtendedProperty's vtable slot 8.
 func (self *IInkExtendedProperty) Get_Data(Data *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Data)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkGesture: https://learn.microsoft.com/windows/win32/api/msinkaut/nn-msinkaut-iinkgesture
@@ -1455,19 +1455,19 @@ var IID_IInkGesture = win32.GUID{Data1: 0x3bdc0a97, Data2: 0x04e5, Data3: 0x4e26
 // Get_Confidence dispatches through IInkGesture's vtable slot 7.
 func (self *IInkGesture) Get_Confidence(Confidence *InkRecognitionConfidence) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Confidence)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Id dispatches through IInkGesture's vtable slot 8.
 func (self *IInkGesture) Get_Id(Id *InkApplicationGesture) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Id)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetHotPoint dispatches through IInkGesture's vtable slot 9.
 func (self *IInkGesture) GetHotPoint(X *int32, Y *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(X)), uintptr(unsafe.Pointer(Y)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkLineInfo: https://learn.microsoft.com/windows/win32/api/msinkaut/nn-msinkaut-iinklineinfo
@@ -1482,39 +1482,39 @@ var IID_IInkLineInfo = win32.GUID{Data1: 0x9c1c5ad6, Data2: 0xf22f, Data3: 0x4de
 // SetFormat dispatches through IInkLineInfo's vtable slot 3.
 func (self *IInkLineInfo) SetFormat(pim *INKMETRIC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pim)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFormat dispatches through IInkLineInfo's vtable slot 4.
 func (self *IInkLineInfo) GetFormat(pim *INKMETRIC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pim)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInkExtent dispatches through IInkLineInfo's vtable slot 5.
 func (self *IInkLineInfo) GetInkExtent(pim *INKMETRIC, pnWidth *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pim)), uintptr(unsafe.Pointer(pnWidth)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCandidate dispatches through IInkLineInfo's vtable slot 6.
 func (self *IInkLineInfo) GetCandidate(nCandidateNum uint32, pwcRecogWord string, pcwcRecogWord *uint32, dwFlags uint32) error {
 	_pwcRecogWord := win32.UTF16Ptr(pwcRecogWord)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(nCandidateNum), uintptr(unsafe.Pointer(_pwcRecogWord)), uintptr(unsafe.Pointer(pcwcRecogWord)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCandidate dispatches through IInkLineInfo's vtable slot 7.
 func (self *IInkLineInfo) SetCandidate(nCandidateNum uint32, strRecogWord string) error {
 	_strRecogWord := win32.UTF16Ptr(strRecogWord)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(nCandidateNum), uintptr(unsafe.Pointer(_strRecogWord)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Recognize dispatches through IInkLineInfo's vtable slot 8.
 func (self *IInkLineInfo) Recognize() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkOverlay: https://learn.microsoft.com/windows/win32/api/msinkaut/nn-msinkaut-iinkoverlay
@@ -1529,319 +1529,319 @@ var IID_IInkOverlay = win32.GUID{Data1: 0xb82a463b, Data2: 0xc1c5, Data3: 0x45a3
 // Get_hWnd dispatches through IInkOverlay's vtable slot 7.
 func (self *IInkOverlay) Get_hWnd(CurrentWindow *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CurrentWindow)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_hWnd dispatches through IInkOverlay's vtable slot 8.
 func (self *IInkOverlay) Put_hWnd(NewWindow uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(NewWindow))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Enabled dispatches through IInkOverlay's vtable slot 9.
 func (self *IInkOverlay) Get_Enabled(Collecting *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Collecting)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Enabled dispatches through IInkOverlay's vtable slot 10.
 func (self *IInkOverlay) Put_Enabled(Collecting foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Collecting))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DefaultDrawingAttributes dispatches through IInkOverlay's vtable slot 11.
 func (self *IInkOverlay) Get_DefaultDrawingAttributes(CurrentAttributes **IInkDrawingAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CurrentAttributes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_DefaultDrawingAttributes dispatches through IInkOverlay's vtable slot 12.
 func (self *IInkOverlay) Putref_DefaultDrawingAttributes(NewAttributes *IInkDrawingAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(NewAttributes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Renderer dispatches through IInkOverlay's vtable slot 13.
 func (self *IInkOverlay) Get_Renderer(CurrentInkRenderer **IInkRenderer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CurrentInkRenderer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_Renderer dispatches through IInkOverlay's vtable slot 14.
 func (self *IInkOverlay) Putref_Renderer(NewInkRenderer *IInkRenderer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(NewInkRenderer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Ink dispatches through IInkOverlay's vtable slot 15.
 func (self *IInkOverlay) Get_Ink(Ink **IInkDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Ink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_Ink dispatches through IInkOverlay's vtable slot 16.
 func (self *IInkOverlay) Putref_Ink(NewInk *IInkDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(NewInk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AutoRedraw dispatches through IInkOverlay's vtable slot 17.
 func (self *IInkOverlay) Get_AutoRedraw(AutoRedraw *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AutoRedraw)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AutoRedraw dispatches through IInkOverlay's vtable slot 18.
 func (self *IInkOverlay) Put_AutoRedraw(AutoRedraw foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(AutoRedraw))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CollectingInk dispatches through IInkOverlay's vtable slot 19.
 func (self *IInkOverlay) Get_CollectingInk(Collecting *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Collecting)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CollectionMode dispatches through IInkOverlay's vtable slot 20.
 func (self *IInkOverlay) Get_CollectionMode(Mode *InkCollectionMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Mode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CollectionMode dispatches through IInkOverlay's vtable slot 21.
 func (self *IInkOverlay) Put_CollectionMode(Mode InkCollectionMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(Mode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DynamicRendering dispatches through IInkOverlay's vtable slot 22.
 func (self *IInkOverlay) Get_DynamicRendering(Enabled *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Enabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DynamicRendering dispatches through IInkOverlay's vtable slot 23.
 func (self *IInkOverlay) Put_DynamicRendering(Enabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(Enabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DesiredPacketDescription dispatches through IInkOverlay's vtable slot 24.
 func (self *IInkOverlay) Get_DesiredPacketDescription(PacketGuids *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PacketGuids)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MouseIcon dispatches through IInkOverlay's vtable slot 26.
 func (self *IInkOverlay) Get_MouseIcon(MouseIcon **systemole.IPictureDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(MouseIcon)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MouseIcon dispatches through IInkOverlay's vtable slot 27.
 func (self *IInkOverlay) Put_MouseIcon(MouseIcon *systemole.IPictureDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(MouseIcon)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_MouseIcon dispatches through IInkOverlay's vtable slot 28.
 func (self *IInkOverlay) Putref_MouseIcon(MouseIcon *systemole.IPictureDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(MouseIcon)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MousePointer dispatches through IInkOverlay's vtable slot 29.
 func (self *IInkOverlay) Get_MousePointer(MousePointer *InkMousePointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(MousePointer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MousePointer dispatches through IInkOverlay's vtable slot 30.
 func (self *IInkOverlay) Put_MousePointer(MousePointer InkMousePointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(MousePointer))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EditingMode dispatches through IInkOverlay's vtable slot 31.
 func (self *IInkOverlay) Get_EditingMode(EditingMode *InkOverlayEditingMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(EditingMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EditingMode dispatches through IInkOverlay's vtable slot 32.
 func (self *IInkOverlay) Put_EditingMode(EditingMode InkOverlayEditingMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(EditingMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Selection dispatches through IInkOverlay's vtable slot 33.
 func (self *IInkOverlay) Get_Selection(Selection **IInkStrokes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Selection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Selection dispatches through IInkOverlay's vtable slot 34.
 func (self *IInkOverlay) Put_Selection(Selection *IInkStrokes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Selection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EraserMode dispatches through IInkOverlay's vtable slot 35.
 func (self *IInkOverlay) Get_EraserMode(EraserMode *InkOverlayEraserMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(EraserMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EraserMode dispatches through IInkOverlay's vtable slot 36.
 func (self *IInkOverlay) Put_EraserMode(EraserMode InkOverlayEraserMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(EraserMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EraserWidth dispatches through IInkOverlay's vtable slot 37.
 func (self *IInkOverlay) Get_EraserWidth(EraserWidth *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(EraserWidth)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EraserWidth dispatches through IInkOverlay's vtable slot 38.
 func (self *IInkOverlay) Put_EraserWidth(newEraserWidth int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(newEraserWidth))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AttachMode dispatches through IInkOverlay's vtable slot 39.
 func (self *IInkOverlay) Get_AttachMode(AttachMode *InkOverlayAttachMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AttachMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AttachMode dispatches through IInkOverlay's vtable slot 40.
 func (self *IInkOverlay) Put_AttachMode(AttachMode InkOverlayAttachMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(AttachMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Cursors dispatches through IInkOverlay's vtable slot 41.
 func (self *IInkOverlay) Get_Cursors(Cursors **IInkCursors) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Cursors)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MarginX dispatches through IInkOverlay's vtable slot 42.
 func (self *IInkOverlay) Get_MarginX(MarginX *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(MarginX)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MarginX dispatches through IInkOverlay's vtable slot 43.
 func (self *IInkOverlay) Put_MarginX(MarginX int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(MarginX))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MarginY dispatches through IInkOverlay's vtable slot 44.
 func (self *IInkOverlay) Get_MarginY(MarginY *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(MarginY)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MarginY dispatches through IInkOverlay's vtable slot 45.
 func (self *IInkOverlay) Put_MarginY(MarginY int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(MarginY))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Tablet dispatches through IInkOverlay's vtable slot 46.
 func (self *IInkOverlay) Get_Tablet(SingleTablet **IInkTablet) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SingleTablet)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SupportHighContrastInk dispatches through IInkOverlay's vtable slot 47.
 func (self *IInkOverlay) Get_SupportHighContrastInk(Support *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Support)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SupportHighContrastInk dispatches through IInkOverlay's vtable slot 48.
 func (self *IInkOverlay) Put_SupportHighContrastInk(Support foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(Support))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SupportHighContrastSelectionUI dispatches through IInkOverlay's vtable slot 49.
 func (self *IInkOverlay) Get_SupportHighContrastSelectionUI(Support *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Support)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SupportHighContrastSelectionUI dispatches through IInkOverlay's vtable slot 50.
 func (self *IInkOverlay) Put_SupportHighContrastSelectionUI(Support foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(Support))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HitTestSelection dispatches through IInkOverlay's vtable slot 51.
 func (self *IInkOverlay) HitTestSelection(x int32, y int32, SelArea *SelectionHitResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(x), uintptr(y), uintptr(unsafe.Pointer(SelArea)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Draw dispatches through IInkOverlay's vtable slot 52.
 func (self *IInkOverlay) Draw(Rect *IInkRectangle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Rect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetGestureStatus dispatches through IInkOverlay's vtable slot 53.
 func (self *IInkOverlay) SetGestureStatus(Gesture InkApplicationGesture, Listen foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(Gesture), uintptr(Listen))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetGestureStatus dispatches through IInkOverlay's vtable slot 54.
 func (self *IInkOverlay) GetGestureStatus(Gesture InkApplicationGesture, Listening *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(Gesture), uintptr(unsafe.Pointer(Listening)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetWindowInputRectangle dispatches through IInkOverlay's vtable slot 55.
 func (self *IInkOverlay) GetWindowInputRectangle(WindowInputRectangle **IInkRectangle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WindowInputRectangle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetWindowInputRectangle dispatches through IInkOverlay's vtable slot 56.
 func (self *IInkOverlay) SetWindowInputRectangle(WindowInputRectangle *IInkRectangle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WindowInputRectangle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAllTabletsMode dispatches through IInkOverlay's vtable slot 57.
 func (self *IInkOverlay) SetAllTabletsMode(UseMouseForInput foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(UseMouseForInput))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetSingleTabletIntegratedMode dispatches through IInkOverlay's vtable slot 58.
 func (self *IInkOverlay) SetSingleTabletIntegratedMode(Tablet *IInkTablet) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Tablet)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEventInterest dispatches through IInkOverlay's vtable slot 59.
 func (self *IInkOverlay) GetEventInterest(EventId InkCollectorEventInterest, Listen *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(EventId), uintptr(unsafe.Pointer(Listen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetEventInterest dispatches through IInkOverlay's vtable slot 60.
 func (self *IInkOverlay) SetEventInterest(EventId InkCollectorEventInterest, Listen foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(EventId), uintptr(Listen))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkPicture: https://learn.microsoft.com/windows/win32/api/msinkaut/nn-msinkaut-iinkpicture
@@ -1856,349 +1856,349 @@ var IID_IInkPicture = win32.GUID{Data1: 0xe85662e0, Data2: 0x379a, Data3: 0x40d7
 // Get_hWnd dispatches through IInkPicture's vtable slot 7.
 func (self *IInkPicture) Get_hWnd(CurrentWindow *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CurrentWindow)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DefaultDrawingAttributes dispatches through IInkPicture's vtable slot 8.
 func (self *IInkPicture) Get_DefaultDrawingAttributes(CurrentAttributes **IInkDrawingAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CurrentAttributes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_DefaultDrawingAttributes dispatches through IInkPicture's vtable slot 9.
 func (self *IInkPicture) Putref_DefaultDrawingAttributes(NewAttributes *IInkDrawingAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(NewAttributes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Renderer dispatches through IInkPicture's vtable slot 10.
 func (self *IInkPicture) Get_Renderer(CurrentInkRenderer **IInkRenderer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CurrentInkRenderer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_Renderer dispatches through IInkPicture's vtable slot 11.
 func (self *IInkPicture) Putref_Renderer(NewInkRenderer *IInkRenderer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(NewInkRenderer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Ink dispatches through IInkPicture's vtable slot 12.
 func (self *IInkPicture) Get_Ink(Ink **IInkDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Ink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_Ink dispatches through IInkPicture's vtable slot 13.
 func (self *IInkPicture) Putref_Ink(NewInk *IInkDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(NewInk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AutoRedraw dispatches through IInkPicture's vtable slot 14.
 func (self *IInkPicture) Get_AutoRedraw(AutoRedraw *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AutoRedraw)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AutoRedraw dispatches through IInkPicture's vtable slot 15.
 func (self *IInkPicture) Put_AutoRedraw(AutoRedraw foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(AutoRedraw))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CollectingInk dispatches through IInkPicture's vtable slot 16.
 func (self *IInkPicture) Get_CollectingInk(Collecting *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Collecting)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CollectionMode dispatches through IInkPicture's vtable slot 17.
 func (self *IInkPicture) Get_CollectionMode(Mode *InkCollectionMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Mode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CollectionMode dispatches through IInkPicture's vtable slot 18.
 func (self *IInkPicture) Put_CollectionMode(Mode InkCollectionMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(Mode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DynamicRendering dispatches through IInkPicture's vtable slot 19.
 func (self *IInkPicture) Get_DynamicRendering(Enabled *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Enabled)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DynamicRendering dispatches through IInkPicture's vtable slot 20.
 func (self *IInkPicture) Put_DynamicRendering(Enabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(Enabled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DesiredPacketDescription dispatches through IInkPicture's vtable slot 21.
 func (self *IInkPicture) Get_DesiredPacketDescription(PacketGuids *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PacketGuids)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MouseIcon dispatches through IInkPicture's vtable slot 23.
 func (self *IInkPicture) Get_MouseIcon(MouseIcon **systemole.IPictureDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(MouseIcon)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MouseIcon dispatches through IInkPicture's vtable slot 24.
 func (self *IInkPicture) Put_MouseIcon(MouseIcon *systemole.IPictureDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(MouseIcon)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_MouseIcon dispatches through IInkPicture's vtable slot 25.
 func (self *IInkPicture) Putref_MouseIcon(MouseIcon *systemole.IPictureDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(MouseIcon)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MousePointer dispatches through IInkPicture's vtable slot 26.
 func (self *IInkPicture) Get_MousePointer(MousePointer *InkMousePointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(MousePointer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MousePointer dispatches through IInkPicture's vtable slot 27.
 func (self *IInkPicture) Put_MousePointer(MousePointer InkMousePointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(MousePointer))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EditingMode dispatches through IInkPicture's vtable slot 28.
 func (self *IInkPicture) Get_EditingMode(EditingMode *InkOverlayEditingMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(EditingMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EditingMode dispatches through IInkPicture's vtable slot 29.
 func (self *IInkPicture) Put_EditingMode(EditingMode InkOverlayEditingMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(EditingMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Selection dispatches through IInkPicture's vtable slot 30.
 func (self *IInkPicture) Get_Selection(Selection **IInkStrokes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Selection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Selection dispatches through IInkPicture's vtable slot 31.
 func (self *IInkPicture) Put_Selection(Selection *IInkStrokes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Selection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EraserMode dispatches through IInkPicture's vtable slot 32.
 func (self *IInkPicture) Get_EraserMode(EraserMode *InkOverlayEraserMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(EraserMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EraserMode dispatches through IInkPicture's vtable slot 33.
 func (self *IInkPicture) Put_EraserMode(EraserMode InkOverlayEraserMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(EraserMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EraserWidth dispatches through IInkPicture's vtable slot 34.
 func (self *IInkPicture) Get_EraserWidth(EraserWidth *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(EraserWidth)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EraserWidth dispatches through IInkPicture's vtable slot 35.
 func (self *IInkPicture) Put_EraserWidth(newEraserWidth int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(newEraserWidth))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_Picture dispatches through IInkPicture's vtable slot 36.
 func (self *IInkPicture) Putref_Picture(pPicture *systemole.IPictureDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPicture)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Picture dispatches through IInkPicture's vtable slot 37.
 func (self *IInkPicture) Put_Picture(pPicture *systemole.IPictureDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPicture)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Picture dispatches through IInkPicture's vtable slot 38.
 func (self *IInkPicture) Get_Picture(ppPicture **systemole.IPictureDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPicture)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SizeMode dispatches through IInkPicture's vtable slot 39.
 func (self *IInkPicture) Put_SizeMode(smNewSizeMode InkPictureSizeMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(smNewSizeMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SizeMode dispatches through IInkPicture's vtable slot 40.
 func (self *IInkPicture) Get_SizeMode(smSizeMode *InkPictureSizeMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(smSizeMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BackColor dispatches through IInkPicture's vtable slot 41.
 func (self *IInkPicture) Put_BackColor(newColor uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(newColor))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BackColor dispatches through IInkPicture's vtable slot 42.
 func (self *IInkPicture) Get_BackColor(pColor *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pColor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Cursors dispatches through IInkPicture's vtable slot 43.
 func (self *IInkPicture) Get_Cursors(Cursors **IInkCursors) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Cursors)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MarginX dispatches through IInkPicture's vtable slot 44.
 func (self *IInkPicture) Get_MarginX(MarginX *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(MarginX)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MarginX dispatches through IInkPicture's vtable slot 45.
 func (self *IInkPicture) Put_MarginX(MarginX int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(MarginX))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MarginY dispatches through IInkPicture's vtable slot 46.
 func (self *IInkPicture) Get_MarginY(MarginY *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(MarginY)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MarginY dispatches through IInkPicture's vtable slot 47.
 func (self *IInkPicture) Put_MarginY(MarginY int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(MarginY))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Tablet dispatches through IInkPicture's vtable slot 48.
 func (self *IInkPicture) Get_Tablet(SingleTablet **IInkTablet) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SingleTablet)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SupportHighContrastInk dispatches through IInkPicture's vtable slot 49.
 func (self *IInkPicture) Get_SupportHighContrastInk(Support *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Support)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SupportHighContrastInk dispatches through IInkPicture's vtable slot 50.
 func (self *IInkPicture) Put_SupportHighContrastInk(Support foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(Support))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SupportHighContrastSelectionUI dispatches through IInkPicture's vtable slot 51.
 func (self *IInkPicture) Get_SupportHighContrastSelectionUI(Support *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Support)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SupportHighContrastSelectionUI dispatches through IInkPicture's vtable slot 52.
 func (self *IInkPicture) Put_SupportHighContrastSelectionUI(Support foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(Support))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HitTestSelection dispatches through IInkPicture's vtable slot 53.
 func (self *IInkPicture) HitTestSelection(x int32, y int32, SelArea *SelectionHitResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(x), uintptr(y), uintptr(unsafe.Pointer(SelArea)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetGestureStatus dispatches through IInkPicture's vtable slot 54.
 func (self *IInkPicture) SetGestureStatus(Gesture InkApplicationGesture, Listen foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(Gesture), uintptr(Listen))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetGestureStatus dispatches through IInkPicture's vtable slot 55.
 func (self *IInkPicture) GetGestureStatus(Gesture InkApplicationGesture, Listening *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(Gesture), uintptr(unsafe.Pointer(Listening)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetWindowInputRectangle dispatches through IInkPicture's vtable slot 56.
 func (self *IInkPicture) GetWindowInputRectangle(WindowInputRectangle **IInkRectangle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WindowInputRectangle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetWindowInputRectangle dispatches through IInkPicture's vtable slot 57.
 func (self *IInkPicture) SetWindowInputRectangle(WindowInputRectangle *IInkRectangle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WindowInputRectangle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAllTabletsMode dispatches through IInkPicture's vtable slot 58.
 func (self *IInkPicture) SetAllTabletsMode(UseMouseForInput foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(UseMouseForInput))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetSingleTabletIntegratedMode dispatches through IInkPicture's vtable slot 59.
 func (self *IInkPicture) SetSingleTabletIntegratedMode(Tablet *IInkTablet) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Tablet)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEventInterest dispatches through IInkPicture's vtable slot 60.
 func (self *IInkPicture) GetEventInterest(EventId InkCollectorEventInterest, Listen *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(EventId), uintptr(unsafe.Pointer(Listen)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetEventInterest dispatches through IInkPicture's vtable slot 61.
 func (self *IInkPicture) SetEventInterest(EventId InkCollectorEventInterest, Listen foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(EventId), uintptr(Listen))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InkEnabled dispatches through IInkPicture's vtable slot 62.
 func (self *IInkPicture) Get_InkEnabled(Collecting *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Collecting)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_InkEnabled dispatches through IInkPicture's vtable slot 63.
 func (self *IInkPicture) Put_InkEnabled(Collecting foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(Collecting))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Enabled dispatches through IInkPicture's vtable slot 64.
 func (self *IInkPicture) Get_Enabled(pbool *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbool)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Enabled dispatches through IInkPicture's vtable slot 65.
 func (self *IInkPicture) Put_Enabled(vbool foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(vbool))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkRecognitionAlternate: https://learn.microsoft.com/windows/win32/api/msinkaut/nn-msinkaut-iinkrecognitionalternate
@@ -2213,91 +2213,91 @@ var IID_IInkRecognitionAlternate = win32.GUID{Data1: 0xb7e660ad, Data2: 0x77e4, 
 // Get_String dispatches through IInkRecognitionAlternate's vtable slot 7.
 func (self *IInkRecognitionAlternate) Get_String(RecoString *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(RecoString)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Confidence dispatches through IInkRecognitionAlternate's vtable slot 8.
 func (self *IInkRecognitionAlternate) Get_Confidence(Confidence *InkRecognitionConfidence) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Confidence)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Baseline dispatches through IInkRecognitionAlternate's vtable slot 9.
 func (self *IInkRecognitionAlternate) Get_Baseline(Baseline *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Baseline)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Midline dispatches through IInkRecognitionAlternate's vtable slot 10.
 func (self *IInkRecognitionAlternate) Get_Midline(Midline *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Midline)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Ascender dispatches through IInkRecognitionAlternate's vtable slot 11.
 func (self *IInkRecognitionAlternate) Get_Ascender(Ascender *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Ascender)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Descender dispatches through IInkRecognitionAlternate's vtable slot 12.
 func (self *IInkRecognitionAlternate) Get_Descender(Descender *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Descender)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LineNumber dispatches through IInkRecognitionAlternate's vtable slot 13.
 func (self *IInkRecognitionAlternate) Get_LineNumber(LineNumber *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(LineNumber)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Strokes dispatches through IInkRecognitionAlternate's vtable slot 14.
 func (self *IInkRecognitionAlternate) Get_Strokes(Strokes **IInkStrokes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Strokes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LineAlternates dispatches through IInkRecognitionAlternate's vtable slot 15.
 func (self *IInkRecognitionAlternate) Get_LineAlternates(LineAlternates **IInkRecognitionAlternates) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(LineAlternates)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ConfidenceAlternates dispatches through IInkRecognitionAlternate's vtable slot 16.
 func (self *IInkRecognitionAlternate) Get_ConfidenceAlternates(ConfidenceAlternates **IInkRecognitionAlternates) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ConfidenceAlternates)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStrokesFromStrokeRanges dispatches through IInkRecognitionAlternate's vtable slot 17.
 func (self *IInkRecognitionAlternate) GetStrokesFromStrokeRanges(Strokes *IInkStrokes, GetStrokesFromStrokeRanges **IInkStrokes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Strokes)), uintptr(unsafe.Pointer(GetStrokesFromStrokeRanges)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStrokesFromTextRange dispatches through IInkRecognitionAlternate's vtable slot 18.
 func (self *IInkRecognitionAlternate) GetStrokesFromTextRange(selectionStart *int32, selectionLength *int32, GetStrokesFromTextRange **IInkStrokes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(selectionStart)), uintptr(unsafe.Pointer(selectionLength)), uintptr(unsafe.Pointer(GetStrokesFromTextRange)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTextRangeFromStrokes dispatches through IInkRecognitionAlternate's vtable slot 19.
 func (self *IInkRecognitionAlternate) GetTextRangeFromStrokes(Strokes *IInkStrokes, selectionStart *int32, selectionLength *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Strokes)), uintptr(unsafe.Pointer(selectionStart)), uintptr(unsafe.Pointer(selectionLength)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AlternatesWithConstantPropertyValues dispatches through IInkRecognitionAlternate's vtable slot 20.
 func (self *IInkRecognitionAlternate) AlternatesWithConstantPropertyValues(PropertyType foundation.BSTR, AlternatesWithConstantPropertyValues **IInkRecognitionAlternates) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PropertyType)), uintptr(unsafe.Pointer(AlternatesWithConstantPropertyValues)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPropertyValue dispatches through IInkRecognitionAlternate's vtable slot 21.
 func (self *IInkRecognitionAlternate) GetPropertyValue(PropertyType foundation.BSTR, PropertyValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PropertyType)), uintptr(unsafe.Pointer(PropertyValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkRecognitionAlternates: https://learn.microsoft.com/windows/win32/api/msinkaut/nn-msinkaut-iinkrecognitionalternates
@@ -2312,25 +2312,25 @@ var IID_IInkRecognitionAlternates = win32.GUID{Data1: 0x286a167f, Data2: 0x9f19,
 // Get_Count dispatches through IInkRecognitionAlternates's vtable slot 7.
 func (self *IInkRecognitionAlternates) Get_Count(Count *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Count)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IInkRecognitionAlternates's vtable slot 8.
 func (self *IInkRecognitionAlternates) Get__NewEnum(_NewEnum **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_NewEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Strokes dispatches through IInkRecognitionAlternates's vtable slot 9.
 func (self *IInkRecognitionAlternates) Get_Strokes(Strokes **IInkStrokes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Strokes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Item dispatches through IInkRecognitionAlternates's vtable slot 10.
 func (self *IInkRecognitionAlternates) Item(Index int32, InkRecoAlternate **IInkRecognitionAlternate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(InkRecoAlternate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkRecognitionResult: https://learn.microsoft.com/windows/win32/api/msinkaut/nn-msinkaut-iinkrecognitionresult
@@ -2345,43 +2345,43 @@ var IID_IInkRecognitionResult = win32.GUID{Data1: 0x3bc129a8, Data2: 0x86cd, Dat
 // Get_TopString dispatches through IInkRecognitionResult's vtable slot 7.
 func (self *IInkRecognitionResult) Get_TopString(TopString *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(TopString)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TopAlternate dispatches through IInkRecognitionResult's vtable slot 8.
 func (self *IInkRecognitionResult) Get_TopAlternate(TopAlternate **IInkRecognitionAlternate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(TopAlternate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TopConfidence dispatches through IInkRecognitionResult's vtable slot 9.
 func (self *IInkRecognitionResult) Get_TopConfidence(TopConfidence *InkRecognitionConfidence) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(TopConfidence)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Strokes dispatches through IInkRecognitionResult's vtable slot 10.
 func (self *IInkRecognitionResult) Get_Strokes(Strokes **IInkStrokes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Strokes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AlternatesFromSelection dispatches through IInkRecognitionResult's vtable slot 11.
 func (self *IInkRecognitionResult) AlternatesFromSelection(selectionStart int32, selectionLength int32, maximumAlternates int32, AlternatesFromSelection **IInkRecognitionAlternates) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(selectionStart), uintptr(selectionLength), uintptr(maximumAlternates), uintptr(unsafe.Pointer(AlternatesFromSelection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ModifyTopAlternate dispatches through IInkRecognitionResult's vtable slot 12.
 func (self *IInkRecognitionResult) ModifyTopAlternate(Alternate *IInkRecognitionAlternate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Alternate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetResultOnStrokes dispatches through IInkRecognitionResult's vtable slot 13.
 func (self *IInkRecognitionResult) SetResultOnStrokes() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkRecognizer: https://learn.microsoft.com/windows/win32/api/msinkaut/nn-msinkaut-iinkrecognizer
@@ -2396,43 +2396,43 @@ var IID_IInkRecognizer = win32.GUID{Data1: 0x782bf7cf, Data2: 0x034b, Data3: 0x4
 // Get_Name dispatches through IInkRecognizer's vtable slot 7.
 func (self *IInkRecognizer) Get_Name(Name *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Name)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Vendor dispatches through IInkRecognizer's vtable slot 8.
 func (self *IInkRecognizer) Get_Vendor(Vendor *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Vendor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Capabilities dispatches through IInkRecognizer's vtable slot 9.
 func (self *IInkRecognizer) Get_Capabilities(CapabilitiesFlags *InkRecognizerCapabilities) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CapabilitiesFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Languages dispatches through IInkRecognizer's vtable slot 10.
 func (self *IInkRecognizer) Get_Languages(Languages *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Languages)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SupportedProperties dispatches through IInkRecognizer's vtable slot 11.
 func (self *IInkRecognizer) Get_SupportedProperties(SupportedProperties *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SupportedProperties)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PreferredPacketDescription dispatches through IInkRecognizer's vtable slot 12.
 func (self *IInkRecognizer) Get_PreferredPacketDescription(PreferredPacketDescription *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PreferredPacketDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateRecognizerContext dispatches through IInkRecognizer's vtable slot 13.
 func (self *IInkRecognizer) CreateRecognizerContext(Context **IInkRecognizerContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Context)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkRecognizer2: https://learn.microsoft.com/windows/win32/api/msinkaut/nn-msinkaut-iinkrecognizer2
@@ -2447,13 +2447,13 @@ var IID_IInkRecognizer2 = win32.GUID{Data1: 0x6110118a, Data2: 0x3a75, Data3: 0x
 // Get_Id dispatches through IInkRecognizer2's vtable slot 7.
 func (self *IInkRecognizer2) Get_Id(pbstrId *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UnicodeRanges dispatches through IInkRecognizer2's vtable slot 8.
 func (self *IInkRecognizer2) Get_UnicodeRanges(UnicodeRanges *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(UnicodeRanges)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkRecognizerContext: https://learn.microsoft.com/windows/win32/api/msinkaut/nn-msinkaut-iinkrecognizercontext
@@ -2468,133 +2468,133 @@ var IID_IInkRecognizerContext = win32.GUID{Data1: 0xc68f52f9, Data2: 0x32a3, Dat
 // Get_Strokes dispatches through IInkRecognizerContext's vtable slot 7.
 func (self *IInkRecognizerContext) Get_Strokes(Strokes **IInkStrokes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Strokes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_Strokes dispatches through IInkRecognizerContext's vtable slot 8.
 func (self *IInkRecognizerContext) Putref_Strokes(Strokes *IInkStrokes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Strokes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CharacterAutoCompletionMode dispatches through IInkRecognizerContext's vtable slot 9.
 func (self *IInkRecognizerContext) Get_CharacterAutoCompletionMode(Mode *InkRecognizerCharacterAutoCompletionMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Mode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CharacterAutoCompletionMode dispatches through IInkRecognizerContext's vtable slot 10.
 func (self *IInkRecognizerContext) Put_CharacterAutoCompletionMode(Mode InkRecognizerCharacterAutoCompletionMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Mode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Factoid dispatches through IInkRecognizerContext's vtable slot 11.
 func (self *IInkRecognizerContext) Get_Factoid(Factoid *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Factoid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Factoid dispatches through IInkRecognizerContext's vtable slot 12.
 func (self *IInkRecognizerContext) Put_Factoid(factoid foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(factoid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Guide dispatches through IInkRecognizerContext's vtable slot 13.
 func (self *IInkRecognizerContext) Get_Guide(RecognizerGuide **IInkRecognizerGuide) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(RecognizerGuide)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_Guide dispatches through IInkRecognizerContext's vtable slot 14.
 func (self *IInkRecognizerContext) Putref_Guide(RecognizerGuide *IInkRecognizerGuide) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(RecognizerGuide)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PrefixText dispatches through IInkRecognizerContext's vtable slot 15.
 func (self *IInkRecognizerContext) Get_PrefixText(Prefix *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Prefix)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PrefixText dispatches through IInkRecognizerContext's vtable slot 16.
 func (self *IInkRecognizerContext) Put_PrefixText(Prefix foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Prefix)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SuffixText dispatches through IInkRecognizerContext's vtable slot 17.
 func (self *IInkRecognizerContext) Get_SuffixText(Suffix *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Suffix)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SuffixText dispatches through IInkRecognizerContext's vtable slot 18.
 func (self *IInkRecognizerContext) Put_SuffixText(Suffix foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Suffix)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RecognitionFlags dispatches through IInkRecognizerContext's vtable slot 19.
 func (self *IInkRecognizerContext) Get_RecognitionFlags(Modes *InkRecognitionModes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Modes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RecognitionFlags dispatches through IInkRecognizerContext's vtable slot 20.
 func (self *IInkRecognizerContext) Put_RecognitionFlags(Modes InkRecognitionModes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(Modes))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_WordList dispatches through IInkRecognizerContext's vtable slot 21.
 func (self *IInkRecognizerContext) Get_WordList(WordList **IInkWordList) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WordList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_WordList dispatches through IInkRecognizerContext's vtable slot 22.
 func (self *IInkRecognizerContext) Putref_WordList(WordList *IInkWordList) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WordList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Recognizer dispatches through IInkRecognizerContext's vtable slot 23.
 func (self *IInkRecognizerContext) Get_Recognizer(Recognizer **IInkRecognizer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Recognizer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Recognize dispatches through IInkRecognizerContext's vtable slot 24.
 func (self *IInkRecognizerContext) Recognize(RecognitionStatus *InkRecognitionStatus, RecognitionResult **IInkRecognitionResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(RecognitionStatus)), uintptr(unsafe.Pointer(RecognitionResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StopBackgroundRecognition dispatches through IInkRecognizerContext's vtable slot 25.
 func (self *IInkRecognizerContext) StopBackgroundRecognition() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndInkInput dispatches through IInkRecognizerContext's vtable slot 26.
 func (self *IInkRecognizerContext) EndInkInput() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IInkRecognizerContext's vtable slot 29.
 func (self *IInkRecognizerContext) Clone(RecoContext **IInkRecognizerContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(RecoContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsStringSupported dispatches through IInkRecognizerContext's vtable slot 30.
 func (self *IInkRecognizerContext) IsStringSupported(String foundation.BSTR, Supported *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(String)), uintptr(unsafe.Pointer(Supported)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkRecognizerContext2: https://learn.microsoft.com/windows/win32/api/msinkaut/nn-msinkaut-iinkrecognizercontext2
@@ -2609,7 +2609,7 @@ var IID_IInkRecognizerContext2 = win32.GUID{Data1: 0xd6f0e32f, Data2: 0x73d8, Da
 // Get_EnabledUnicodeRanges dispatches through IInkRecognizerContext2's vtable slot 7.
 func (self *IInkRecognizerContext2) Get_EnabledUnicodeRanges(UnicodeRanges *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(UnicodeRanges)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkRecognizerGuide: https://learn.microsoft.com/windows/win32/api/msinkaut/nn-msinkaut-iinkrecognizerguide
@@ -2624,67 +2624,67 @@ var IID_IInkRecognizerGuide = win32.GUID{Data1: 0xd934be07, Data2: 0x7b84, Data3
 // Get_WritingBox dispatches through IInkRecognizerGuide's vtable slot 7.
 func (self *IInkRecognizerGuide) Get_WritingBox(Rectangle **IInkRectangle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Rectangle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_WritingBox dispatches through IInkRecognizerGuide's vtable slot 8.
 func (self *IInkRecognizerGuide) Put_WritingBox(Rectangle *IInkRectangle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Rectangle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DrawnBox dispatches through IInkRecognizerGuide's vtable slot 9.
 func (self *IInkRecognizerGuide) Get_DrawnBox(Rectangle **IInkRectangle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Rectangle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DrawnBox dispatches through IInkRecognizerGuide's vtable slot 10.
 func (self *IInkRecognizerGuide) Put_DrawnBox(Rectangle *IInkRectangle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Rectangle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Rows dispatches through IInkRecognizerGuide's vtable slot 11.
 func (self *IInkRecognizerGuide) Get_Rows(Units *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Units)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Rows dispatches through IInkRecognizerGuide's vtable slot 12.
 func (self *IInkRecognizerGuide) Put_Rows(Units int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Units))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Columns dispatches through IInkRecognizerGuide's vtable slot 13.
 func (self *IInkRecognizerGuide) Get_Columns(Units *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Units)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Columns dispatches through IInkRecognizerGuide's vtable slot 14.
 func (self *IInkRecognizerGuide) Put_Columns(Units int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(Units))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Midline dispatches through IInkRecognizerGuide's vtable slot 15.
 func (self *IInkRecognizerGuide) Get_Midline(Units *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Units)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Midline dispatches through IInkRecognizerGuide's vtable slot 16.
 func (self *IInkRecognizerGuide) Put_Midline(Units int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(Units))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_GuideData dispatches through IInkRecognizerGuide's vtable slot 17.
 func (self *IInkRecognizerGuide) Get_GuideData(pRecoGuide *InkRecoGuide) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRecoGuide)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkRecognizers: https://learn.microsoft.com/windows/win32/api/msinkaut/nn-msinkaut-iinkrecognizers
@@ -2699,25 +2699,25 @@ var IID_IInkRecognizers = win32.GUID{Data1: 0x9ccc4f12, Data2: 0xb0b7, Data3: 0x
 // Get_Count dispatches through IInkRecognizers's vtable slot 7.
 func (self *IInkRecognizers) Get_Count(Count *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Count)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IInkRecognizers's vtable slot 8.
 func (self *IInkRecognizers) Get__NewEnum(_NewEnum **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_NewEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDefaultRecognizer dispatches through IInkRecognizers's vtable slot 9.
 func (self *IInkRecognizers) GetDefaultRecognizer(lcid int32, DefaultRecognizer **IInkRecognizer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(lcid), uintptr(unsafe.Pointer(DefaultRecognizer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Item dispatches through IInkRecognizers's vtable slot 10.
 func (self *IInkRecognizers) Item(Index int32, InkRecognizer **IInkRecognizer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(InkRecognizer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkRectangle: https://learn.microsoft.com/windows/win32/api/msinkaut/nn-msinkaut-iinkrectangle
@@ -2732,67 +2732,67 @@ var IID_IInkRectangle = win32.GUID{Data1: 0x9794ff82, Data2: 0x6071, Data3: 0x47
 // Get_Top dispatches through IInkRectangle's vtable slot 7.
 func (self *IInkRectangle) Get_Top(Units *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Units)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Top dispatches through IInkRectangle's vtable slot 8.
 func (self *IInkRectangle) Put_Top(Units int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Units))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Left dispatches through IInkRectangle's vtable slot 9.
 func (self *IInkRectangle) Get_Left(Units *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Units)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Left dispatches through IInkRectangle's vtable slot 10.
 func (self *IInkRectangle) Put_Left(Units int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Units))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Bottom dispatches through IInkRectangle's vtable slot 11.
 func (self *IInkRectangle) Get_Bottom(Units *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Units)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Bottom dispatches through IInkRectangle's vtable slot 12.
 func (self *IInkRectangle) Put_Bottom(Units int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Units))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Right dispatches through IInkRectangle's vtable slot 13.
 func (self *IInkRectangle) Get_Right(Units *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Units)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Right dispatches through IInkRectangle's vtable slot 14.
 func (self *IInkRectangle) Put_Right(Units int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(Units))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Data dispatches through IInkRectangle's vtable slot 15.
 func (self *IInkRectangle) Get_Data(Rect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Rect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRectangle dispatches through IInkRectangle's vtable slot 17.
 func (self *IInkRectangle) GetRectangle(Top *int32, Left *int32, Bottom *int32, Right *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Top)), uintptr(unsafe.Pointer(Left)), uintptr(unsafe.Pointer(Bottom)), uintptr(unsafe.Pointer(Right)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetRectangle dispatches through IInkRectangle's vtable slot 18.
 func (self *IInkRectangle) SetRectangle(Top int32, Left int32, Bottom int32, Right int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(Top), uintptr(Left), uintptr(Bottom), uintptr(Right))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkRenderer: https://learn.microsoft.com/windows/win32/api/msinkaut/nn-msinkaut-iinkrenderer
@@ -2807,73 +2807,73 @@ var IID_IInkRenderer = win32.GUID{Data1: 0xe6257a9c, Data2: 0xb511, Data3: 0x4f4
 // GetViewTransform dispatches through IInkRenderer's vtable slot 7.
 func (self *IInkRenderer) GetViewTransform(ViewTransform *IInkTransform) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ViewTransform)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetViewTransform dispatches through IInkRenderer's vtable slot 8.
 func (self *IInkRenderer) SetViewTransform(ViewTransform *IInkTransform) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ViewTransform)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetObjectTransform dispatches through IInkRenderer's vtable slot 9.
 func (self *IInkRenderer) GetObjectTransform(ObjectTransform *IInkTransform) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ObjectTransform)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetObjectTransform dispatches through IInkRenderer's vtable slot 10.
 func (self *IInkRenderer) SetObjectTransform(ObjectTransform *IInkTransform) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ObjectTransform)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Draw dispatches through IInkRenderer's vtable slot 11.
 func (self *IInkRenderer) Draw(hDC uintptr, Strokes *IInkStrokes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(hDC), uintptr(unsafe.Pointer(Strokes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DrawStroke dispatches through IInkRenderer's vtable slot 12.
 func (self *IInkRenderer) DrawStroke(hDC uintptr, Stroke *IInkStrokeDisp, DrawingAttributes *IInkDrawingAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(hDC), uintptr(unsafe.Pointer(Stroke)), uintptr(unsafe.Pointer(DrawingAttributes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PixelToInkSpace dispatches through IInkRenderer's vtable slot 13.
 func (self *IInkRenderer) PixelToInkSpace(hDC uintptr, x *int32, y *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(hDC), uintptr(unsafe.Pointer(x)), uintptr(unsafe.Pointer(y)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InkSpaceToPixel dispatches through IInkRenderer's vtable slot 14.
 func (self *IInkRenderer) InkSpaceToPixel(hdcDisplay uintptr, x *int32, y *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(hdcDisplay), uintptr(unsafe.Pointer(x)), uintptr(unsafe.Pointer(y)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PixelToInkSpaceFromPoints dispatches through IInkRenderer's vtable slot 15.
 func (self *IInkRenderer) PixelToInkSpaceFromPoints(hDC uintptr, Points *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(hDC), uintptr(unsafe.Pointer(Points)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InkSpaceToPixelFromPoints dispatches through IInkRenderer's vtable slot 16.
 func (self *IInkRenderer) InkSpaceToPixelFromPoints(hDC uintptr, Points *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(hDC), uintptr(unsafe.Pointer(Points)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Measure dispatches through IInkRenderer's vtable slot 17.
 func (self *IInkRenderer) Measure(Strokes *IInkStrokes, Rectangle **IInkRectangle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Strokes)), uintptr(unsafe.Pointer(Rectangle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MeasureStroke dispatches through IInkRenderer's vtable slot 18.
 func (self *IInkRenderer) MeasureStroke(Stroke *IInkStrokeDisp, DrawingAttributes *IInkDrawingAttributes, Rectangle **IInkRectangle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Stroke)), uintptr(unsafe.Pointer(DrawingAttributes)), uintptr(unsafe.Pointer(Rectangle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkStrokeDisp: https://learn.microsoft.com/windows/win32/api/msinkaut/nn-msinkaut-iinkstrokedisp
@@ -2888,151 +2888,151 @@ var IID_IInkStrokeDisp = win32.GUID{Data1: 0x43242fea, Data2: 0x91d1, Data3: 0x4
 // Get_ID dispatches through IInkStrokeDisp's vtable slot 7.
 func (self *IInkStrokeDisp) Get_ID(ID *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BezierPoints dispatches through IInkStrokeDisp's vtable slot 8.
 func (self *IInkStrokeDisp) Get_BezierPoints(Points *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Points)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DrawingAttributes dispatches through IInkStrokeDisp's vtable slot 9.
 func (self *IInkStrokeDisp) Get_DrawingAttributes(DrawAttrs **IInkDrawingAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(DrawAttrs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_DrawingAttributes dispatches through IInkStrokeDisp's vtable slot 10.
 func (self *IInkStrokeDisp) Putref_DrawingAttributes(DrawAttrs *IInkDrawingAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(DrawAttrs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Ink dispatches through IInkStrokeDisp's vtable slot 11.
 func (self *IInkStrokeDisp) Get_Ink(Ink **IInkDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Ink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ExtendedProperties dispatches through IInkStrokeDisp's vtable slot 12.
 func (self *IInkStrokeDisp) Get_ExtendedProperties(Properties **IInkExtendedProperties) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Properties)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PolylineCusps dispatches through IInkStrokeDisp's vtable slot 13.
 func (self *IInkStrokeDisp) Get_PolylineCusps(Cusps *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Cusps)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BezierCusps dispatches through IInkStrokeDisp's vtable slot 14.
 func (self *IInkStrokeDisp) Get_BezierCusps(Cusps *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Cusps)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SelfIntersections dispatches through IInkStrokeDisp's vtable slot 15.
 func (self *IInkStrokeDisp) Get_SelfIntersections(Intersections *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Intersections)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PacketCount dispatches through IInkStrokeDisp's vtable slot 16.
 func (self *IInkStrokeDisp) Get_PacketCount(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PacketSize dispatches through IInkStrokeDisp's vtable slot 17.
 func (self *IInkStrokeDisp) Get_PacketSize(plSize *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PacketDescription dispatches through IInkStrokeDisp's vtable slot 18.
 func (self *IInkStrokeDisp) Get_PacketDescription(PacketDescription *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PacketDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Deleted dispatches through IInkStrokeDisp's vtable slot 19.
 func (self *IInkStrokeDisp) Get_Deleted(Deleted *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Deleted)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBoundingBox dispatches through IInkStrokeDisp's vtable slot 20.
 func (self *IInkStrokeDisp) GetBoundingBox(BoundingBoxMode InkBoundingBoxMode, Rectangle **IInkRectangle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(BoundingBoxMode), uintptr(unsafe.Pointer(Rectangle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FindIntersections dispatches through IInkStrokeDisp's vtable slot 21.
 func (self *IInkStrokeDisp) FindIntersections(Strokes *IInkStrokes, Intersections *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Strokes)), uintptr(unsafe.Pointer(Intersections)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRectangleIntersections dispatches through IInkStrokeDisp's vtable slot 22.
 func (self *IInkStrokeDisp) GetRectangleIntersections(Rectangle *IInkRectangle, Intersections *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Rectangle)), uintptr(unsafe.Pointer(Intersections)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clip dispatches through IInkStrokeDisp's vtable slot 23.
 func (self *IInkStrokeDisp) Clip(Rectangle *IInkRectangle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Rectangle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NearestPoint dispatches through IInkStrokeDisp's vtable slot 25.
 func (self *IInkStrokeDisp) NearestPoint(X int32, Y int32, Distance *float32, Point *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(X), uintptr(Y), uintptr(unsafe.Pointer(Distance)), uintptr(unsafe.Pointer(Point)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPacketDescriptionPropertyMetrics dispatches through IInkStrokeDisp's vtable slot 27.
 func (self *IInkStrokeDisp) GetPacketDescriptionPropertyMetrics(PropertyName foundation.BSTR, Minimum *int32, Maximum *int32, Units *TabletPropertyMetricUnit, Resolution *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PropertyName)), uintptr(unsafe.Pointer(Minimum)), uintptr(unsafe.Pointer(Maximum)), uintptr(unsafe.Pointer(Units)), uintptr(unsafe.Pointer(Resolution)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPoints dispatches through IInkStrokeDisp's vtable slot 28.
 func (self *IInkStrokeDisp) GetPoints(Index int32, Count int32, Points *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(Count), uintptr(unsafe.Pointer(Points)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPacketData dispatches through IInkStrokeDisp's vtable slot 30.
 func (self *IInkStrokeDisp) GetPacketData(Index int32, Count int32, PacketData *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(Count), uintptr(unsafe.Pointer(PacketData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPacketValuesByProperty dispatches through IInkStrokeDisp's vtable slot 31.
 func (self *IInkStrokeDisp) GetPacketValuesByProperty(PropertyName foundation.BSTR, Index int32, Count int32, PacketValues *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PropertyName)), uintptr(Index), uintptr(Count), uintptr(unsafe.Pointer(PacketValues)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFlattenedBezierPoints dispatches through IInkStrokeDisp's vtable slot 33.
 func (self *IInkStrokeDisp) GetFlattenedBezierPoints(FittingError int32, FlattenedBezierPoints *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(FittingError), uintptr(unsafe.Pointer(FlattenedBezierPoints)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Transform dispatches through IInkStrokeDisp's vtable slot 34.
 func (self *IInkStrokeDisp) Transform(Transform *IInkTransform, ApplyOnPenWidth foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Transform)), uintptr(ApplyOnPenWidth))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScaleToRectangle dispatches through IInkStrokeDisp's vtable slot 35.
 func (self *IInkStrokeDisp) ScaleToRectangle(Rectangle *IInkRectangle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Rectangle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkStrokes: https://learn.microsoft.com/windows/win32/api/msinkaut/nn-msinkaut-iinkstrokes
@@ -3047,97 +3047,97 @@ var IID_IInkStrokes = win32.GUID{Data1: 0xf1f4c9d8, Data2: 0x590a, Data3: 0x4963
 // Get_Count dispatches through IInkStrokes's vtable slot 7.
 func (self *IInkStrokes) Get_Count(Count *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Count)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IInkStrokes's vtable slot 8.
 func (self *IInkStrokes) Get__NewEnum(_NewEnum **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_NewEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Ink dispatches through IInkStrokes's vtable slot 9.
 func (self *IInkStrokes) Get_Ink(Ink **IInkDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Ink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RecognitionResult dispatches through IInkStrokes's vtable slot 10.
 func (self *IInkStrokes) Get_RecognitionResult(RecognitionResult **IInkRecognitionResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(RecognitionResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ToString dispatches through IInkStrokes's vtable slot 11.
 func (self *IInkStrokes) ToString(ToString *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ToString)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Item dispatches through IInkStrokes's vtable slot 12.
 func (self *IInkStrokes) Item(Index int32, Stroke **IInkStrokeDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(Stroke)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through IInkStrokes's vtable slot 13.
 func (self *IInkStrokes) Add(InkStroke *IInkStrokeDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(InkStroke)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddStrokes dispatches through IInkStrokes's vtable slot 14.
 func (self *IInkStrokes) AddStrokes(InkStrokes *IInkStrokes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(InkStrokes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through IInkStrokes's vtable slot 15.
 func (self *IInkStrokes) Remove(InkStroke *IInkStrokeDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(InkStroke)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveStrokes dispatches through IInkStrokes's vtable slot 16.
 func (self *IInkStrokes) RemoveStrokes(InkStrokes *IInkStrokes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(InkStrokes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ModifyDrawingAttributes dispatches through IInkStrokes's vtable slot 17.
 func (self *IInkStrokes) ModifyDrawingAttributes(DrawAttrs *IInkDrawingAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(DrawAttrs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBoundingBox dispatches through IInkStrokes's vtable slot 18.
 func (self *IInkStrokes) GetBoundingBox(BoundingBoxMode InkBoundingBoxMode, BoundingBox **IInkRectangle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(BoundingBoxMode), uintptr(unsafe.Pointer(BoundingBox)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Transform dispatches through IInkStrokes's vtable slot 19.
 func (self *IInkStrokes) Transform(Transform *IInkTransform, ApplyOnPenWidth foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Transform)), uintptr(ApplyOnPenWidth))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScaleToRectangle dispatches through IInkStrokes's vtable slot 20.
 func (self *IInkStrokes) ScaleToRectangle(Rectangle *IInkRectangle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Rectangle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clip dispatches through IInkStrokes's vtable slot 25.
 func (self *IInkStrokes) Clip(Rectangle *IInkRectangle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Rectangle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveRecognitionResult dispatches through IInkStrokes's vtable slot 26.
 func (self *IInkStrokes) RemoveRecognitionResult() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkTablet: https://learn.microsoft.com/windows/win32/api/msinkaut/nn-msinkaut-iinktablet
@@ -3152,37 +3152,37 @@ var IID_IInkTablet = win32.GUID{Data1: 0x2de25eaa, Data2: 0x6ef8, Data3: 0x42d5,
 // Get_Name dispatches through IInkTablet's vtable slot 7.
 func (self *IInkTablet) Get_Name(Name *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Name)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PlugAndPlayId dispatches through IInkTablet's vtable slot 8.
 func (self *IInkTablet) Get_PlugAndPlayId(Id *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Id)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MaximumInputRectangle dispatches through IInkTablet's vtable slot 9.
 func (self *IInkTablet) Get_MaximumInputRectangle(Rectangle **IInkRectangle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Rectangle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HardwareCapabilities dispatches through IInkTablet's vtable slot 10.
 func (self *IInkTablet) Get_HardwareCapabilities(Capabilities *TabletHardwareCapabilities) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Capabilities)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsPacketPropertySupported dispatches through IInkTablet's vtable slot 11.
 func (self *IInkTablet) IsPacketPropertySupported(packetPropertyName foundation.BSTR, Supported *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(packetPropertyName)), uintptr(unsafe.Pointer(Supported)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPropertyMetrics dispatches through IInkTablet's vtable slot 12.
 func (self *IInkTablet) GetPropertyMetrics(propertyName foundation.BSTR, Minimum *int32, Maximum *int32, Units *TabletPropertyMetricUnit, Resolution *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propertyName)), uintptr(unsafe.Pointer(Minimum)), uintptr(unsafe.Pointer(Maximum)), uintptr(unsafe.Pointer(Units)), uintptr(unsafe.Pointer(Resolution)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkTablet2: https://learn.microsoft.com/windows/win32/api/msinkaut/nn-msinkaut-iinktablet2
@@ -3197,7 +3197,7 @@ var IID_IInkTablet2 = win32.GUID{Data1: 0x90c91ad2, Data2: 0xfa36, Data3: 0x49d6
 // Get_DeviceKind dispatches through IInkTablet2's vtable slot 7.
 func (self *IInkTablet2) Get_DeviceKind(Kind *TabletDeviceKind) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Kind)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkTablet3: https://learn.microsoft.com/windows/win32/api/msinkaut/nn-msinkaut-iinktablet3
@@ -3212,13 +3212,13 @@ var IID_IInkTablet3 = win32.GUID{Data1: 0x7e313997, Data2: 0x1327, Data3: 0x41dd
 // Get_IsMultiTouch dispatches through IInkTablet3's vtable slot 7.
 func (self *IInkTablet3) Get_IsMultiTouch(pIsMultiTouch *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsMultiTouch)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MaximumCursors dispatches through IInkTablet3's vtable slot 8.
 func (self *IInkTablet3) Get_MaximumCursors(pMaximumCursors *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMaximumCursors)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkTablets: https://learn.microsoft.com/windows/win32/api/msinkaut/nn-msinkaut-iinktablets
@@ -3233,31 +3233,31 @@ var IID_IInkTablets = win32.GUID{Data1: 0x112086d9, Data2: 0x7779, Data3: 0x4535
 // Get_Count dispatches through IInkTablets's vtable slot 7.
 func (self *IInkTablets) Get_Count(Count *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Count)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IInkTablets's vtable slot 8.
 func (self *IInkTablets) Get__NewEnum(_NewEnum **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_NewEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DefaultTablet dispatches through IInkTablets's vtable slot 9.
 func (self *IInkTablets) Get_DefaultTablet(DefaultTablet **IInkTablet) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(DefaultTablet)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Item dispatches through IInkTablets's vtable slot 10.
 func (self *IInkTablets) Item(Index int32, Tablet **IInkTablet) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(Tablet)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsPacketPropertySupported dispatches through IInkTablets's vtable slot 11.
 func (self *IInkTablets) IsPacketPropertySupported(packetPropertyName foundation.BSTR, Supported *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(packetPropertyName)), uintptr(unsafe.Pointer(Supported)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkTransform: https://learn.microsoft.com/windows/win32/api/msinkaut/nn-msinkaut-iinktransform
@@ -3272,61 +3272,61 @@ var IID_IInkTransform = win32.GUID{Data1: 0x615f1d43, Data2: 0x8703, Data3: 0x45
 // Reset dispatches through IInkTransform's vtable slot 7.
 func (self *IInkTransform) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reflect dispatches through IInkTransform's vtable slot 10.
 func (self *IInkTransform) Reflect(Horizontally foundation.VARIANT_BOOL, Vertically foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Horizontally), uintptr(Vertically))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTransform dispatches through IInkTransform's vtable slot 13.
 func (self *IInkTransform) GetTransform(eM11 *float32, eM12 *float32, eM21 *float32, eM22 *float32, eDx *float32, eDy *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(eM11)), uintptr(unsafe.Pointer(eM12)), uintptr(unsafe.Pointer(eM21)), uintptr(unsafe.Pointer(eM22)), uintptr(unsafe.Pointer(eDx)), uintptr(unsafe.Pointer(eDy)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_eM11 dispatches through IInkTransform's vtable slot 15.
 func (self *IInkTransform) Get_eM11(Value *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_eM12 dispatches through IInkTransform's vtable slot 17.
 func (self *IInkTransform) Get_eM12(Value *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_eM21 dispatches through IInkTransform's vtable slot 19.
 func (self *IInkTransform) Get_eM21(Value *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_eM22 dispatches through IInkTransform's vtable slot 21.
 func (self *IInkTransform) Get_eM22(Value *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_eDx dispatches through IInkTransform's vtable slot 23.
 func (self *IInkTransform) Get_eDx(Value *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_eDy dispatches through IInkTransform's vtable slot 25.
 func (self *IInkTransform) Get_eDy(Value *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Data dispatches through IInkTransform's vtable slot 27.
 func (self *IInkTransform) Get_Data(XForm *graphicsgdi.XFORM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(XForm)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkWordList: https://learn.microsoft.com/windows/win32/api/msinkaut/nn-msinkaut-iinkwordlist
@@ -3341,19 +3341,19 @@ var IID_IInkWordList = win32.GUID{Data1: 0x76ba3491, Data2: 0xcb2f, Data3: 0x406
 // AddWord dispatches through IInkWordList's vtable slot 7.
 func (self *IInkWordList) AddWord(NewWord foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(NewWord)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveWord dispatches through IInkWordList's vtable slot 8.
 func (self *IInkWordList) RemoveWord(RemoveWord foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(RemoveWord)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Merge dispatches through IInkWordList's vtable slot 9.
 func (self *IInkWordList) Merge(MergeWordList *IInkWordList) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(MergeWordList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IInkWordList2: https://learn.microsoft.com/windows/win32/api/msinkaut/nn-msinkaut-iinkwordlist2
@@ -3368,7 +3368,7 @@ var IID_IInkWordList2 = win32.GUID{Data1: 0x14542586, Data2: 0x11bf, Data3: 0x4f
 // AddWords dispatches through IInkWordList2's vtable slot 7.
 func (self *IInkWordList2) AddWords(NewWords foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(NewWords)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 4af81847-fdc4-4fc3-ad0b-422479c1b935
@@ -3382,25 +3382,25 @@ var IID_IInputPanelWindowHandle = win32.GUID{Data1: 0x4af81847, Data2: 0xfdc4, D
 // Get_AttachedEditWindow32 dispatches through IInputPanelWindowHandle's vtable slot 3.
 func (self *IInputPanelWindowHandle) Get_AttachedEditWindow32(AttachedEditWindow *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AttachedEditWindow)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AttachedEditWindow32 dispatches through IInputPanelWindowHandle's vtable slot 4.
 func (self *IInputPanelWindowHandle) Put_AttachedEditWindow32(AttachedEditWindow int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(AttachedEditWindow))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AttachedEditWindow64 dispatches through IInputPanelWindowHandle's vtable slot 5.
 func (self *IInputPanelWindowHandle) Get_AttachedEditWindow64(AttachedEditWindow *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AttachedEditWindow)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AttachedEditWindow64 dispatches through IInputPanelWindowHandle's vtable slot 6.
 func (self *IInputPanelWindowHandle) Put_AttachedEditWindow64(AttachedEditWindow int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(AttachedEditWindow))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMathInputControl: https://learn.microsoft.com/windows/win32/api/micaut/nn-micaut-imathinputcontrol
@@ -3415,103 +3415,103 @@ var IID_IMathInputControl = win32.GUID{Data1: 0xeba615aa, Data2: 0xfac6, Data3: 
 // Show dispatches through IMathInputControl's vtable slot 7.
 func (self *IMathInputControl) Show() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Hide dispatches through IMathInputControl's vtable slot 8.
 func (self *IMathInputControl) Hide() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsVisible dispatches through IMathInputControl's vtable slot 9.
 func (self *IMathInputControl) IsVisible(pvbShown *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvbShown)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPosition dispatches through IMathInputControl's vtable slot 10.
 func (self *IMathInputControl) GetPosition(Left *int32, Top *int32, Right *int32, Bottom *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Left)), uintptr(unsafe.Pointer(Top)), uintptr(unsafe.Pointer(Right)), uintptr(unsafe.Pointer(Bottom)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetPosition dispatches through IMathInputControl's vtable slot 11.
 func (self *IMathInputControl) SetPosition(Left int32, Top int32, Right int32, Bottom int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Left), uintptr(Top), uintptr(Right), uintptr(Bottom))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through IMathInputControl's vtable slot 12.
 func (self *IMathInputControl) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCustomPaint dispatches through IMathInputControl's vtable slot 13.
 func (self *IMathInputControl) SetCustomPaint(Element int32, Paint foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Element), uintptr(Paint))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCaptionText dispatches through IMathInputControl's vtable slot 14.
 func (self *IMathInputControl) SetCaptionText(CaptionText foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CaptionText)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LoadInk dispatches through IMathInputControl's vtable slot 15.
 func (self *IMathInputControl) LoadInk(Ink *IInkDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Ink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetOwnerWindow dispatches through IMathInputControl's vtable slot 16.
 func (self *IMathInputControl) SetOwnerWindow(OwnerWindow uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(OwnerWindow))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnableExtendedButtons dispatches through IMathInputControl's vtable slot 17.
 func (self *IMathInputControl) EnableExtendedButtons(Extended foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(Extended))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPreviewHeight dispatches through IMathInputControl's vtable slot 18.
 func (self *IMathInputControl) GetPreviewHeight(Height *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Height)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetPreviewHeight dispatches through IMathInputControl's vtable slot 19.
 func (self *IMathInputControl) SetPreviewHeight(Height int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(Height))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnableAutoGrow dispatches through IMathInputControl's vtable slot 20.
 func (self *IMathInputControl) EnableAutoGrow(AutoGrow foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(AutoGrow))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddFunctionName dispatches through IMathInputControl's vtable slot 21.
 func (self *IMathInputControl) AddFunctionName(FunctionName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(FunctionName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveFunctionName dispatches through IMathInputControl's vtable slot 22.
 func (self *IMathInputControl) RemoveFunctionName(FunctionName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(FunctionName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetHoverIcon dispatches through IMathInputControl's vtable slot 23.
 func (self *IMathInputControl) GetHoverIcon(HoverImage **systemole.IPictureDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(HoverImage)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPenInputPanel: https://learn.microsoft.com/windows/win32/api/peninputpanel/nn-peninputpanel-ipeninputpanel
@@ -3526,151 +3526,151 @@ var IID_IPenInputPanel = win32.GUID{Data1: 0xfa7a4083, Data2: 0x5747, Data3: 0x4
 // Get_Busy dispatches through IPenInputPanel's vtable slot 7.
 func (self *IPenInputPanel) Get_Busy(Busy *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Busy)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Factoid dispatches through IPenInputPanel's vtable slot 8.
 func (self *IPenInputPanel) Get_Factoid(Factoid *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Factoid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Factoid dispatches through IPenInputPanel's vtable slot 9.
 func (self *IPenInputPanel) Put_Factoid(Factoid foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Factoid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AttachedEditWindow dispatches through IPenInputPanel's vtable slot 10.
 func (self *IPenInputPanel) Get_AttachedEditWindow(AttachedEditWindow *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AttachedEditWindow)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AttachedEditWindow dispatches through IPenInputPanel's vtable slot 11.
 func (self *IPenInputPanel) Put_AttachedEditWindow(AttachedEditWindow int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(AttachedEditWindow))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentPanel dispatches through IPenInputPanel's vtable slot 12.
 func (self *IPenInputPanel) Get_CurrentPanel(CurrentPanel *PanelType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CurrentPanel)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CurrentPanel dispatches through IPenInputPanel's vtable slot 13.
 func (self *IPenInputPanel) Put_CurrentPanel(CurrentPanel PanelType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(CurrentPanel))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DefaultPanel dispatches through IPenInputPanel's vtable slot 14.
 func (self *IPenInputPanel) Get_DefaultPanel(pDefaultPanel *PanelType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDefaultPanel)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DefaultPanel dispatches through IPenInputPanel's vtable slot 15.
 func (self *IPenInputPanel) Put_DefaultPanel(DefaultPanel PanelType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(DefaultPanel))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Visible dispatches through IPenInputPanel's vtable slot 16.
 func (self *IPenInputPanel) Get_Visible(Visible *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Visible)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Visible dispatches through IPenInputPanel's vtable slot 17.
 func (self *IPenInputPanel) Put_Visible(Visible foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(Visible))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Top dispatches through IPenInputPanel's vtable slot 18.
 func (self *IPenInputPanel) Get_Top(Top *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Top)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Left dispatches through IPenInputPanel's vtable slot 19.
 func (self *IPenInputPanel) Get_Left(Left *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Left)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Width dispatches through IPenInputPanel's vtable slot 20.
 func (self *IPenInputPanel) Get_Width(Width *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Width)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Height dispatches through IPenInputPanel's vtable slot 21.
 func (self *IPenInputPanel) Get_Height(Height *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Height)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_VerticalOffset dispatches through IPenInputPanel's vtable slot 22.
 func (self *IPenInputPanel) Get_VerticalOffset(VerticalOffset *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(VerticalOffset)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_VerticalOffset dispatches through IPenInputPanel's vtable slot 23.
 func (self *IPenInputPanel) Put_VerticalOffset(VerticalOffset int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(VerticalOffset))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HorizontalOffset dispatches through IPenInputPanel's vtable slot 24.
 func (self *IPenInputPanel) Get_HorizontalOffset(HorizontalOffset *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(HorizontalOffset)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_HorizontalOffset dispatches through IPenInputPanel's vtable slot 25.
 func (self *IPenInputPanel) Put_HorizontalOffset(HorizontalOffset int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(HorizontalOffset))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AutoShow dispatches through IPenInputPanel's vtable slot 26.
 func (self *IPenInputPanel) Get_AutoShow(pAutoShow *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAutoShow)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AutoShow dispatches through IPenInputPanel's vtable slot 27.
 func (self *IPenInputPanel) Put_AutoShow(AutoShow foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(AutoShow))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MoveTo dispatches through IPenInputPanel's vtable slot 28.
 func (self *IPenInputPanel) MoveTo(Left int32, Top int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(Left), uintptr(Top))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CommitPendingInput dispatches through IPenInputPanel's vtable slot 29.
 func (self *IPenInputPanel) CommitPendingInput() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through IPenInputPanel's vtable slot 30.
 func (self *IPenInputPanel) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnableTsf dispatches through IPenInputPanel's vtable slot 31.
 func (self *IPenInputPanel) EnableTsf(Enable foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(Enable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IRealTimeStylus: https://learn.microsoft.com/windows/win32/api/rtscom/nn-rtscom-irealtimestylus
@@ -3685,110 +3685,110 @@ var IID_IRealTimeStylus = win32.GUID{Data1: 0xa8bb5d22, Data2: 0x3144, Data3: 0x
 // Get_Enabled dispatches through IRealTimeStylus's vtable slot 3.
 func (self *IRealTimeStylus) Get_Enabled(pfEnable *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEnable)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Enabled dispatches through IRealTimeStylus's vtable slot 4.
 func (self *IRealTimeStylus) Put_Enabled(fEnable bool) error {
 	_fEnable := win32.Bool32(fEnable)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(_fEnable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HWND dispatches through IRealTimeStylus's vtable slot 5.
 func (self *IRealTimeStylus) Get_HWND(phwnd *foundation.HANDLE_PTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phwnd)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_HWND dispatches through IRealTimeStylus's vtable slot 6.
 func (self *IRealTimeStylus) Put_HWND(hwnd foundation.HANDLE_PTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hwnd))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_WindowInputRectangle dispatches through IRealTimeStylus's vtable slot 7.
 func (self *IRealTimeStylus) Get_WindowInputRectangle(prcWndInputRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prcWndInputRect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_WindowInputRectangle dispatches through IRealTimeStylus's vtable slot 8.
 func (self *IRealTimeStylus) Put_WindowInputRectangle(prcWndInputRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prcWndInputRect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddStylusSyncPlugin dispatches through IRealTimeStylus's vtable slot 9.
 func (self *IRealTimeStylus) AddStylusSyncPlugin(iIndex uint32, piPlugin *IStylusSyncPlugin) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(iIndex), uintptr(unsafe.Pointer(piPlugin)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveStylusSyncPlugin dispatches through IRealTimeStylus's vtable slot 10.
 func (self *IRealTimeStylus) RemoveStylusSyncPlugin(iIndex uint32, ppiPlugin **IStylusSyncPlugin) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(iIndex), uintptr(unsafe.Pointer(ppiPlugin)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAllStylusSyncPlugins dispatches through IRealTimeStylus's vtable slot 11.
 func (self *IRealTimeStylus) RemoveAllStylusSyncPlugins() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStylusSyncPlugin dispatches through IRealTimeStylus's vtable slot 12.
 func (self *IRealTimeStylus) GetStylusSyncPlugin(iIndex uint32, ppiPlugin **IStylusSyncPlugin) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(iIndex), uintptr(unsafe.Pointer(ppiPlugin)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStylusSyncPluginCount dispatches through IRealTimeStylus's vtable slot 13.
 func (self *IRealTimeStylus) GetStylusSyncPluginCount(pcPlugins *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcPlugins)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddStylusAsyncPlugin dispatches through IRealTimeStylus's vtable slot 14.
 func (self *IRealTimeStylus) AddStylusAsyncPlugin(iIndex uint32, piPlugin *IStylusAsyncPlugin) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(iIndex), uintptr(unsafe.Pointer(piPlugin)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveStylusAsyncPlugin dispatches through IRealTimeStylus's vtable slot 15.
 func (self *IRealTimeStylus) RemoveStylusAsyncPlugin(iIndex uint32, ppiPlugin **IStylusAsyncPlugin) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(iIndex), uintptr(unsafe.Pointer(ppiPlugin)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAllStylusAsyncPlugins dispatches through IRealTimeStylus's vtable slot 16.
 func (self *IRealTimeStylus) RemoveAllStylusAsyncPlugins() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStylusAsyncPlugin dispatches through IRealTimeStylus's vtable slot 17.
 func (self *IRealTimeStylus) GetStylusAsyncPlugin(iIndex uint32, ppiPlugin **IStylusAsyncPlugin) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(iIndex), uintptr(unsafe.Pointer(ppiPlugin)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStylusAsyncPluginCount dispatches through IRealTimeStylus's vtable slot 18.
 func (self *IRealTimeStylus) GetStylusAsyncPluginCount(pcPlugins *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcPlugins)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ChildRealTimeStylusPlugin dispatches through IRealTimeStylus's vtable slot 19.
 func (self *IRealTimeStylus) Get_ChildRealTimeStylusPlugin(ppiRTS **IRealTimeStylus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppiRTS)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_ChildRealTimeStylusPlugin dispatches through IRealTimeStylus's vtable slot 20.
 func (self *IRealTimeStylus) Putref_ChildRealTimeStylusPlugin(piRTS *IRealTimeStylus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piRTS)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddCustomStylusDataToQueue dispatches through IRealTimeStylus's vtable slot 21.
@@ -3798,62 +3798,62 @@ func (self *IRealTimeStylus) AddCustomStylusDataToQueue(sq StylusQueue, pGuidId 
 		_pbData = &pbData[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(sq), uintptr(unsafe.Pointer(pGuidId)), uintptr(len(pbData)), uintptr(unsafe.Pointer(_pbData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ClearStylusQueues dispatches through IRealTimeStylus's vtable slot 22.
 func (self *IRealTimeStylus) ClearStylusQueues() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAllTabletsMode dispatches through IRealTimeStylus's vtable slot 23.
 func (self *IRealTimeStylus) SetAllTabletsMode(fUseMouseForInput bool) error {
 	_fUseMouseForInput := win32.Bool32(fUseMouseForInput)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(_fUseMouseForInput))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetSingleTabletMode dispatches through IRealTimeStylus's vtable slot 24.
 func (self *IRealTimeStylus) SetSingleTabletMode(piTablet *IInkTablet) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piTablet)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTablet dispatches through IRealTimeStylus's vtable slot 25.
 func (self *IRealTimeStylus) GetTablet(ppiSingleTablet **IInkTablet) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppiSingleTablet)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTabletContextIdFromTablet dispatches through IRealTimeStylus's vtable slot 26.
 func (self *IRealTimeStylus) GetTabletContextIdFromTablet(piTablet *IInkTablet, ptcid *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piTablet)), uintptr(unsafe.Pointer(ptcid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTabletFromTabletContextId dispatches through IRealTimeStylus's vtable slot 27.
 func (self *IRealTimeStylus) GetTabletFromTabletContextId(tcid uint32, ppiTablet **IInkTablet) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(tcid), uintptr(unsafe.Pointer(ppiTablet)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAllTabletContextIds dispatches through IRealTimeStylus's vtable slot 28.
 func (self *IRealTimeStylus) GetAllTabletContextIds(pcTcidCount *uint32, ppTcids **uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcTcidCount)), uintptr(unsafe.Pointer(ppTcids)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStyluses dispatches through IRealTimeStylus's vtable slot 29.
 func (self *IRealTimeStylus) GetStyluses(ppiInkCursors **IInkCursors) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppiInkCursors)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStylusForId dispatches through IRealTimeStylus's vtable slot 30.
 func (self *IRealTimeStylus) GetStylusForId(sid uint32, ppiInkCursor **IInkCursor) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(sid), uintptr(unsafe.Pointer(ppiInkCursor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDesiredPacketDescription dispatches through IRealTimeStylus's vtable slot 31.
@@ -3863,19 +3863,19 @@ func (self *IRealTimeStylus) SetDesiredPacketDescription(pPropertyGuids []win32.
 		_pPropertyGuids = &pPropertyGuids[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(len(pPropertyGuids)), uintptr(unsafe.Pointer(_pPropertyGuids)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDesiredPacketDescription dispatches through IRealTimeStylus's vtable slot 32.
 func (self *IRealTimeStylus) GetDesiredPacketDescription(pcProperties *uint32, ppPropertyGuids **win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcProperties)), uintptr(unsafe.Pointer(ppPropertyGuids)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPacketDescriptionData dispatches through IRealTimeStylus's vtable slot 33.
 func (self *IRealTimeStylus) GetPacketDescriptionData(tcid uint32, pfInkToDeviceScaleX *float32, pfInkToDeviceScaleY *float32, pcPacketProperties *uint32, ppPacketProperties **PACKET_PROPERTY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(tcid), uintptr(unsafe.Pointer(pfInkToDeviceScaleX)), uintptr(unsafe.Pointer(pfInkToDeviceScaleY)), uintptr(unsafe.Pointer(pcPacketProperties)), uintptr(unsafe.Pointer(ppPacketProperties)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IRealTimeStylus2: https://learn.microsoft.com/windows/win32/api/rtscom/nn-rtscom-irealtimestylus2
@@ -3890,14 +3890,14 @@ var IID_IRealTimeStylus2 = win32.GUID{Data1: 0xb5f2a6cd, Data2: 0x3179, Data3: 0
 // Get_FlicksEnabled dispatches through IRealTimeStylus2's vtable slot 3.
 func (self *IRealTimeStylus2) Get_FlicksEnabled(pfEnable *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEnable)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FlicksEnabled dispatches through IRealTimeStylus2's vtable slot 4.
 func (self *IRealTimeStylus2) Put_FlicksEnabled(fEnable bool) error {
 	_fEnable := win32.Bool32(fEnable)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(_fEnable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IRealTimeStylus3: https://learn.microsoft.com/windows/win32/api/rtscom/nn-rtscom-irealtimestylus3
@@ -3912,14 +3912,14 @@ var IID_IRealTimeStylus3 = win32.GUID{Data1: 0xd70230a3, Data2: 0x6986, Data3: 0
 // Get_MultiTouchEnabled dispatches through IRealTimeStylus3's vtable slot 3.
 func (self *IRealTimeStylus3) Get_MultiTouchEnabled(pfEnable *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEnable)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MultiTouchEnabled dispatches through IRealTimeStylus3's vtable slot 4.
 func (self *IRealTimeStylus3) Put_MultiTouchEnabled(fEnable bool) error {
 	_fEnable := win32.Bool32(fEnable)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(_fEnable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IRealTimeStylusSynchronization: https://learn.microsoft.com/windows/win32/api/rtscom/nn-rtscom-irealtimestylussynchronization
@@ -3934,13 +3934,13 @@ var IID_IRealTimeStylusSynchronization = win32.GUID{Data1: 0xaa87eab8, Data2: 0x
 // AcquireLock dispatches through IRealTimeStylusSynchronization's vtable slot 3.
 func (self *IRealTimeStylusSynchronization) AcquireLock(lock RealTimeStylusLockType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lock))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReleaseLock dispatches through IRealTimeStylusSynchronization's vtable slot 4.
 func (self *IRealTimeStylusSynchronization) ReleaseLock(lock RealTimeStylusLockType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(lock))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: b4563688-98eb-4646-b279-44da14d45748
@@ -3967,25 +3967,25 @@ func (self *IStrokeBuilder) AppendPackets(tcid uint32, sid uint32, pPackets []in
 		_pPackets = &pPackets[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(tcid), uintptr(sid), uintptr(len(pPackets)), uintptr(unsafe.Pointer(_pPackets)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndStroke dispatches through IStrokeBuilder's vtable slot 6.
 func (self *IStrokeBuilder) EndStroke(tcid uint32, sid uint32, ppIInkStroke **IInkStrokeDisp, pDirtyRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(tcid), uintptr(sid), uintptr(unsafe.Pointer(ppIInkStroke)), uintptr(unsafe.Pointer(pDirtyRect)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Ink dispatches through IStrokeBuilder's vtable slot 7.
 func (self *IStrokeBuilder) Get_Ink(ppiInkObj **IInkDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppiInkObj)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_Ink dispatches through IStrokeBuilder's vtable slot 8.
 func (self *IStrokeBuilder) Putref_Ink(piInkObj *IInkDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piInkObj)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IStylusAsyncPlugin: https://learn.microsoft.com/windows/win32/api/rtscom/nn-rtscom-istylusasyncplugin
@@ -4013,7 +4013,7 @@ func (self *IStylusPlugin) RealTimeStylusEnabled(piRtsSrc *IRealTimeStylus, pTci
 		_pTcids = &pTcids[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piRtsSrc)), uintptr(len(pTcids)), uintptr(unsafe.Pointer(_pTcids)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RealTimeStylusDisabled dispatches through IStylusPlugin's vtable slot 4.
@@ -4023,19 +4023,19 @@ func (self *IStylusPlugin) RealTimeStylusDisabled(piRtsSrc *IRealTimeStylus, pTc
 		_pTcids = &pTcids[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piRtsSrc)), uintptr(len(pTcids)), uintptr(unsafe.Pointer(_pTcids)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StylusInRange dispatches through IStylusPlugin's vtable slot 5.
 func (self *IStylusPlugin) StylusInRange(piRtsSrc *IRealTimeStylus, tcid uint32, sid uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piRtsSrc)), uintptr(tcid), uintptr(sid))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StylusOutOfRange dispatches through IStylusPlugin's vtable slot 6.
 func (self *IStylusPlugin) StylusOutOfRange(piRtsSrc *IRealTimeStylus, tcid uint32, sid uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piRtsSrc)), uintptr(tcid), uintptr(sid))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StylusDown dispatches through IStylusPlugin's vtable slot 7.
@@ -4045,7 +4045,7 @@ func (self *IStylusPlugin) StylusDown(piRtsSrc *IRealTimeStylus, pStylusInfo *St
 		_pPacket = &pPacket[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piRtsSrc)), uintptr(unsafe.Pointer(pStylusInfo)), uintptr(len(pPacket)), uintptr(unsafe.Pointer(_pPacket)), uintptr(unsafe.Pointer(ppInOutPkt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StylusUp dispatches through IStylusPlugin's vtable slot 8.
@@ -4055,19 +4055,19 @@ func (self *IStylusPlugin) StylusUp(piRtsSrc *IRealTimeStylus, pStylusInfo *Styl
 		_pPacket = &pPacket[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piRtsSrc)), uintptr(unsafe.Pointer(pStylusInfo)), uintptr(len(pPacket)), uintptr(unsafe.Pointer(_pPacket)), uintptr(unsafe.Pointer(ppInOutPkt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StylusButtonDown dispatches through IStylusPlugin's vtable slot 9.
 func (self *IStylusPlugin) StylusButtonDown(piRtsSrc *IRealTimeStylus, sid uint32, pGuidStylusButton *win32.GUID, pStylusPos *foundation.POINT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piRtsSrc)), uintptr(sid), uintptr(unsafe.Pointer(pGuidStylusButton)), uintptr(unsafe.Pointer(pStylusPos)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StylusButtonUp dispatches through IStylusPlugin's vtable slot 10.
 func (self *IStylusPlugin) StylusButtonUp(piRtsSrc *IRealTimeStylus, sid uint32, pGuidStylusButton *win32.GUID, pStylusPos *foundation.POINT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piRtsSrc)), uintptr(sid), uintptr(unsafe.Pointer(pGuidStylusButton)), uintptr(unsafe.Pointer(pStylusPos)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InAirPackets dispatches through IStylusPlugin's vtable slot 11.
@@ -4077,7 +4077,7 @@ func (self *IStylusPlugin) InAirPackets(piRtsSrc *IRealTimeStylus, pStylusInfo *
 		_pPackets = &pPackets[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piRtsSrc)), uintptr(unsafe.Pointer(pStylusInfo)), uintptr(cPktCount), uintptr(len(pPackets)), uintptr(unsafe.Pointer(_pPackets)), uintptr(unsafe.Pointer(pcInOutPkts)), uintptr(unsafe.Pointer(ppInOutPkts)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Packets dispatches through IStylusPlugin's vtable slot 12.
@@ -4087,7 +4087,7 @@ func (self *IStylusPlugin) Packets(piRtsSrc *IRealTimeStylus, pStylusInfo *Stylu
 		_pPackets = &pPackets[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piRtsSrc)), uintptr(unsafe.Pointer(pStylusInfo)), uintptr(cPktCount), uintptr(len(pPackets)), uintptr(unsafe.Pointer(_pPackets)), uintptr(unsafe.Pointer(pcInOutPkts)), uintptr(unsafe.Pointer(ppInOutPkts)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CustomStylusDataAdded dispatches through IStylusPlugin's vtable slot 13.
@@ -4097,37 +4097,37 @@ func (self *IStylusPlugin) CustomStylusDataAdded(piRtsSrc *IRealTimeStylus, pGui
 		_pbData = &pbData[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piRtsSrc)), uintptr(unsafe.Pointer(pGuidId)), uintptr(len(pbData)), uintptr(unsafe.Pointer(_pbData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TabletAdded dispatches through IStylusPlugin's vtable slot 15.
 func (self *IStylusPlugin) TabletAdded(piRtsSrc *IRealTimeStylus, piTablet *IInkTablet) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piRtsSrc)), uintptr(unsafe.Pointer(piTablet)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TabletRemoved dispatches through IStylusPlugin's vtable slot 16.
 func (self *IStylusPlugin) TabletRemoved(piRtsSrc *IRealTimeStylus, iTabletIndex int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piRtsSrc)), uintptr(iTabletIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Error dispatches through IStylusPlugin's vtable slot 17.
 func (self *IStylusPlugin) Error(piRtsSrc *IRealTimeStylus, piPlugin *IStylusPlugin, dataInterest RealTimeStylusDataInterest, hrErrorCode foundation.HRESULT, lptrKey *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piRtsSrc)), uintptr(unsafe.Pointer(piPlugin)), uintptr(dataInterest), uintptr(hrErrorCode), uintptr(unsafe.Pointer(lptrKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UpdateMapping dispatches through IStylusPlugin's vtable slot 18.
 func (self *IStylusPlugin) UpdateMapping(piRtsSrc *IRealTimeStylus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piRtsSrc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DataInterest dispatches through IStylusPlugin's vtable slot 19.
 func (self *IStylusPlugin) DataInterest(pDataInterest *RealTimeStylusDataInterest) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDataInterest)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IStylusSyncPlugin: https://learn.microsoft.com/windows/win32/api/rtscom/nn-rtscom-istylussyncplugin
@@ -4151,154 +4151,154 @@ var IID_ITextInputPanel = win32.GUID{Data1: 0x6b6a65a5, Data2: 0x6af3, Data3: 0x
 // Get_AttachedEditWindow dispatches through ITextInputPanel's vtable slot 3.
 func (self *ITextInputPanel) Get_AttachedEditWindow(AttachedEditWindow *foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AttachedEditWindow)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AttachedEditWindow dispatches through ITextInputPanel's vtable slot 4.
 func (self *ITextInputPanel) Put_AttachedEditWindow(AttachedEditWindow foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(AttachedEditWindow))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentInteractionMode dispatches through ITextInputPanel's vtable slot 5.
 func (self *ITextInputPanel) Get_CurrentInteractionMode(CurrentInteractionMode *InteractionMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CurrentInteractionMode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DefaultInPlaceState dispatches through ITextInputPanel's vtable slot 6.
 func (self *ITextInputPanel) Get_DefaultInPlaceState(State *InPlaceState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(State)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DefaultInPlaceState dispatches through ITextInputPanel's vtable slot 7.
 func (self *ITextInputPanel) Put_DefaultInPlaceState(State InPlaceState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(State))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentInPlaceState dispatches through ITextInputPanel's vtable slot 8.
 func (self *ITextInputPanel) Get_CurrentInPlaceState(State *InPlaceState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(State)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DefaultInputArea dispatches through ITextInputPanel's vtable slot 9.
 func (self *ITextInputPanel) Get_DefaultInputArea(Area *PanelInputArea) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Area)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DefaultInputArea dispatches through ITextInputPanel's vtable slot 10.
 func (self *ITextInputPanel) Put_DefaultInputArea(Area PanelInputArea) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Area))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentInputArea dispatches through ITextInputPanel's vtable slot 11.
 func (self *ITextInputPanel) Get_CurrentInputArea(Area *PanelInputArea) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Area)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentCorrectionMode dispatches through ITextInputPanel's vtable slot 12.
 func (self *ITextInputPanel) Get_CurrentCorrectionMode(Mode *CorrectionMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Mode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PreferredInPlaceDirection dispatches through ITextInputPanel's vtable slot 13.
 func (self *ITextInputPanel) Get_PreferredInPlaceDirection(Direction *InPlaceDirection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Direction)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PreferredInPlaceDirection dispatches through ITextInputPanel's vtable slot 14.
 func (self *ITextInputPanel) Put_PreferredInPlaceDirection(Direction InPlaceDirection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(Direction))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ExpandPostInsertionCorrection dispatches through ITextInputPanel's vtable slot 15.
 func (self *ITextInputPanel) Get_ExpandPostInsertionCorrection(Expand *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Expand)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ExpandPostInsertionCorrection dispatches through ITextInputPanel's vtable slot 16.
 func (self *ITextInputPanel) Put_ExpandPostInsertionCorrection(Expand bool) error {
 	_Expand := win32.Bool32(Expand)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(_Expand))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InPlaceVisibleOnFocus dispatches through ITextInputPanel's vtable slot 17.
 func (self *ITextInputPanel) Get_InPlaceVisibleOnFocus(Visible *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Visible)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_InPlaceVisibleOnFocus dispatches through ITextInputPanel's vtable slot 18.
 func (self *ITextInputPanel) Put_InPlaceVisibleOnFocus(Visible bool) error {
 	_Visible := win32.Bool32(Visible)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(_Visible))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InPlaceBoundingRectangle dispatches through ITextInputPanel's vtable slot 19.
 func (self *ITextInputPanel) Get_InPlaceBoundingRectangle(BoundingRectangle *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(BoundingRectangle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PopUpCorrectionHeight dispatches through ITextInputPanel's vtable slot 20.
 func (self *ITextInputPanel) Get_PopUpCorrectionHeight(Height *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Height)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PopDownCorrectionHeight dispatches through ITextInputPanel's vtable slot 21.
 func (self *ITextInputPanel) Get_PopDownCorrectionHeight(Height *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Height)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CommitPendingInput dispatches through ITextInputPanel's vtable slot 22.
 func (self *ITextInputPanel) CommitPendingInput() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetInPlaceVisibility dispatches through ITextInputPanel's vtable slot 23.
 func (self *ITextInputPanel) SetInPlaceVisibility(Visible bool) error {
 	_Visible := win32.Bool32(Visible)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(_Visible))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetInPlacePosition dispatches through ITextInputPanel's vtable slot 24.
 func (self *ITextInputPanel) SetInPlacePosition(xPosition int32, yPosition int32, position CorrectionPosition) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(xPosition), uintptr(yPosition), uintptr(position))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetInPlaceHoverTargetPosition dispatches through ITextInputPanel's vtable slot 25.
 func (self *ITextInputPanel) SetInPlaceHoverTargetPosition(xPosition int32, yPosition int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(xPosition), uintptr(yPosition))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Advise dispatches through ITextInputPanel's vtable slot 26.
 func (self *ITextInputPanel) Advise(EventSink *ITextInputPanelEventSink, EventMask uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(EventSink)), uintptr(EventMask))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Unadvise dispatches through ITextInputPanel's vtable slot 27.
 func (self *ITextInputPanel) Unadvise(EventSink *ITextInputPanelEventSink) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(EventSink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ITextInputPanelEventSink: https://learn.microsoft.com/windows/win32/api/peninputpanel/nn-peninputpanel-itextinputpaneleventsink
@@ -4313,37 +4313,37 @@ var IID_ITextInputPanelEventSink = win32.GUID{Data1: 0x27560408, Data2: 0x8e64, 
 // InPlaceStateChanging dispatches through ITextInputPanelEventSink's vtable slot 3.
 func (self *ITextInputPanelEventSink) InPlaceStateChanging(oldInPlaceState InPlaceState, newInPlaceState InPlaceState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(oldInPlaceState), uintptr(newInPlaceState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InPlaceStateChanged dispatches through ITextInputPanelEventSink's vtable slot 4.
 func (self *ITextInputPanelEventSink) InPlaceStateChanged(oldInPlaceState InPlaceState, newInPlaceState InPlaceState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(oldInPlaceState), uintptr(newInPlaceState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InputAreaChanging dispatches through ITextInputPanelEventSink's vtable slot 7.
 func (self *ITextInputPanelEventSink) InputAreaChanging(oldInputArea PanelInputArea, newInputArea PanelInputArea) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(oldInputArea), uintptr(newInputArea))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InputAreaChanged dispatches through ITextInputPanelEventSink's vtable slot 8.
 func (self *ITextInputPanelEventSink) InputAreaChanged(oldInputArea PanelInputArea, newInputArea PanelInputArea) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(oldInputArea), uintptr(newInputArea))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CorrectionModeChanging dispatches through ITextInputPanelEventSink's vtable slot 9.
 func (self *ITextInputPanelEventSink) CorrectionModeChanging(oldCorrectionMode CorrectionMode, newCorrectionMode CorrectionMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(oldCorrectionMode), uintptr(newCorrectionMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CorrectionModeChanged dispatches through ITextInputPanelEventSink's vtable slot 10.
 func (self *ITextInputPanelEventSink) CorrectionModeChanged(oldCorrectionMode CorrectionMode, newCorrectionMode CorrectionMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(oldCorrectionMode), uintptr(newCorrectionMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InPlaceVisibilityChanging dispatches through ITextInputPanelEventSink's vtable slot 11.
@@ -4351,7 +4351,7 @@ func (self *ITextInputPanelEventSink) InPlaceVisibilityChanging(oldVisible bool,
 	_oldVisible := win32.Bool32(oldVisible)
 	_newVisible := win32.Bool32(newVisible)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(_oldVisible), uintptr(_newVisible))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InPlaceVisibilityChanged dispatches through ITextInputPanelEventSink's vtable slot 12.
@@ -4359,19 +4359,19 @@ func (self *ITextInputPanelEventSink) InPlaceVisibilityChanged(oldVisible bool, 
 	_oldVisible := win32.Bool32(oldVisible)
 	_newVisible := win32.Bool32(newVisible)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(_oldVisible), uintptr(_newVisible))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TextInserting dispatches through ITextInputPanelEventSink's vtable slot 13.
 func (self *ITextInputPanelEventSink) TextInserting(Ink *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Ink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TextInserted dispatches through ITextInputPanelEventSink's vtable slot 14.
 func (self *ITextInputPanelEventSink) TextInserted(Ink *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Ink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ITextInputPanelRunInfo: https://learn.microsoft.com/windows/win32/api/peninputpanel/nn-peninputpanel-itextinputpanelruninfo
@@ -4386,7 +4386,7 @@ var IID_ITextInputPanelRunInfo = win32.GUID{Data1: 0x9f424568, Data2: 0x1920, Da
 // IsTipRunning dispatches through ITextInputPanelRunInfo's vtable slot 3.
 func (self *ITextInputPanelRunInfo) IsTipRunning(pfRunning *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfRunning)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 5e078e03-8265-4bbe-9487-d242edbef910
@@ -4400,31 +4400,31 @@ var IID_ITipAutoCompleteClient = win32.GUID{Data1: 0x5e078e03, Data2: 0x8265, Da
 // AdviseProvider dispatches through ITipAutoCompleteClient's vtable slot 3.
 func (self *ITipAutoCompleteClient) AdviseProvider(hWndField foundation.HWND, pIProvider *ITipAutoCompleteProvider) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hWndField), uintptr(unsafe.Pointer(pIProvider)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnadviseProvider dispatches through ITipAutoCompleteClient's vtable slot 4.
 func (self *ITipAutoCompleteClient) UnadviseProvider(hWndField foundation.HWND, pIProvider *ITipAutoCompleteProvider) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hWndField), uintptr(unsafe.Pointer(pIProvider)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UserSelection dispatches through ITipAutoCompleteClient's vtable slot 5.
 func (self *ITipAutoCompleteClient) UserSelection() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PreferredRects dispatches through ITipAutoCompleteClient's vtable slot 6.
 func (self *ITipAutoCompleteClient) PreferredRects(prcACList *foundation.RECT, prcField *foundation.RECT, prcModifiedACList *foundation.RECT, pfShownAboveTip *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prcACList)), uintptr(unsafe.Pointer(prcField)), uintptr(unsafe.Pointer(prcModifiedACList)), uintptr(unsafe.Pointer(pfShownAboveTip)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RequestShowUI dispatches through ITipAutoCompleteClient's vtable slot 7.
 func (self *ITipAutoCompleteClient) RequestShowUI(hWndList foundation.HWND, pfAllowShowing *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hWndList), uintptr(unsafe.Pointer(pfAllowShowing)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 7c6cf46d-8404-46b9-ad33-f5b6036d4007
@@ -4438,14 +4438,14 @@ var IID_ITipAutoCompleteProvider = win32.GUID{Data1: 0x7c6cf46d, Data2: 0x8404, 
 // UpdatePendingText dispatches through ITipAutoCompleteProvider's vtable slot 3.
 func (self *ITipAutoCompleteProvider) UpdatePendingText(bstrPendingText foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPendingText)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Show dispatches through ITipAutoCompleteProvider's vtable slot 4.
 func (self *ITipAutoCompleteProvider) Show(fShow bool) error {
 	_fShow := win32.Bool32(fShow)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(_fShow))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 11a583f2-712d-4fea-abcf-ab4af38ea06b

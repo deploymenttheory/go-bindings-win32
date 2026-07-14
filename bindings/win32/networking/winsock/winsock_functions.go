@@ -1022,7 +1022,7 @@ func SetServiceA(dwNameSpace uint32, dwOperation SET_SERVICE_OPERATION, dwFlags 
 func SetSocketMediaStreamingMode(value bool) error {
 	_value := win32.Bool32(value)
 	r1, _, _ := syscall.SyscallN(procSetSocketMediaStreamingMode.Addr(), uintptr(_value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Setsockopt calls WS2_32!setsockopt.

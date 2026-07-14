@@ -27,7 +27,7 @@ var IID_DDiscFormat2DataEvents = win32.GUID{Data1: 0x2735413c, Data2: 0x7f64, Da
 // Update dispatches through DDiscFormat2DataEvents's vtable slot 7.
 func (self *DDiscFormat2DataEvents) Update(object *systemcom.IDispatch, progress *systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(object)), uintptr(unsafe.Pointer(progress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DDiscFormat2EraseEvents: https://learn.microsoft.com/windows/win32/api/imapi2/nn-imapi2-ddiscformat2eraseevents
@@ -42,7 +42,7 @@ var IID_DDiscFormat2EraseEvents = win32.GUID{Data1: 0x2735413a, Data2: 0x7f64, D
 // Update dispatches through DDiscFormat2EraseEvents's vtable slot 7.
 func (self *DDiscFormat2EraseEvents) Update(object *systemcom.IDispatch, elapsedSeconds int32, estimatedTotalSeconds int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(object)), uintptr(elapsedSeconds), uintptr(estimatedTotalSeconds))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DDiscFormat2RawCDEvents: https://learn.microsoft.com/windows/win32/api/imapi2/nn-imapi2-ddiscformat2rawcdevents
@@ -57,7 +57,7 @@ var IID_DDiscFormat2RawCDEvents = win32.GUID{Data1: 0x27354142, Data2: 0x7f64, D
 // Update dispatches through DDiscFormat2RawCDEvents's vtable slot 7.
 func (self *DDiscFormat2RawCDEvents) Update(object *systemcom.IDispatch, progress *systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(object)), uintptr(unsafe.Pointer(progress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DDiscFormat2TrackAtOnceEvents: https://learn.microsoft.com/windows/win32/api/imapi2/nn-imapi2-ddiscformat2trackatonceevents
@@ -72,7 +72,7 @@ var IID_DDiscFormat2TrackAtOnceEvents = win32.GUID{Data1: 0x2735413f, Data2: 0x7
 // Update dispatches through DDiscFormat2TrackAtOnceEvents's vtable slot 7.
 func (self *DDiscFormat2TrackAtOnceEvents) Update(object *systemcom.IDispatch, progress *systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(object)), uintptr(unsafe.Pointer(progress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DDiscMaster2Events: https://learn.microsoft.com/windows/win32/api/imapi2/nn-imapi2-ddiscmaster2events
@@ -87,13 +87,13 @@ var IID_DDiscMaster2Events = win32.GUID{Data1: 0x27354131, Data2: 0x7f64, Data3:
 // NotifyDeviceAdded dispatches through DDiscMaster2Events's vtable slot 7.
 func (self *DDiscMaster2Events) NotifyDeviceAdded(object *systemcom.IDispatch, uniqueId foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(object)), uintptr(unsafe.Pointer(uniqueId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NotifyDeviceRemoved dispatches through DDiscMaster2Events's vtable slot 8.
 func (self *DDiscMaster2Events) NotifyDeviceRemoved(object *systemcom.IDispatch, uniqueId foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(object)), uintptr(unsafe.Pointer(uniqueId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DFileSystemImageEvents: https://learn.microsoft.com/windows/win32/api/imapi2fs/nn-imapi2fs-dfilesystemimageevents
@@ -108,7 +108,7 @@ var IID_DFileSystemImageEvents = win32.GUID{Data1: 0x2c941fdf, Data2: 0x975b, Da
 // Update dispatches through DFileSystemImageEvents's vtable slot 7.
 func (self *DFileSystemImageEvents) Update(object *systemcom.IDispatch, currentFile foundation.BSTR, copiedSectors int32, totalSectors int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(object)), uintptr(unsafe.Pointer(currentFile)), uintptr(copiedSectors), uintptr(totalSectors))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DFileSystemImageImportEvents: https://learn.microsoft.com/windows/win32/api/imapi2fs/nn-imapi2fs-dfilesystemimageimportevents
@@ -123,7 +123,7 @@ var IID_DFileSystemImageImportEvents = win32.GUID{Data1: 0xd25c30f9, Data2: 0x40
 // UpdateImport dispatches through DFileSystemImageImportEvents's vtable slot 7.
 func (self *DFileSystemImageImportEvents) UpdateImport(object *systemcom.IDispatch, fileSystem FsiFileSystems, currentItem foundation.BSTR, importedDirectoryItems int32, totalDirectoryItems int32, importedFileItems int32, totalFileItems int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(object)), uintptr(fileSystem), uintptr(unsafe.Pointer(currentItem)), uintptr(importedDirectoryItems), uintptr(totalDirectoryItems), uintptr(importedFileItems), uintptr(totalFileItems))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DWriteEngine2Events: https://learn.microsoft.com/windows/win32/api/imapi2/nn-imapi2-dwriteengine2events
@@ -138,7 +138,7 @@ var IID_DWriteEngine2Events = win32.GUID{Data1: 0x27354137, Data2: 0x7f64, Data3
 // Update dispatches through DWriteEngine2Events's vtable slot 7.
 func (self *DWriteEngine2Events) Update(object *systemcom.IDispatch, progress *systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(object)), uintptr(unsafe.Pointer(progress)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBlockRange: https://learn.microsoft.com/windows/win32/api/imapi2/nn-imapi2-iblockrange
@@ -153,13 +153,13 @@ var IID_IBlockRange = win32.GUID{Data1: 0xb507ca25, Data2: 0x2204, Data3: 0x11dd
 // Get_StartLba dispatches through IBlockRange's vtable slot 7.
 func (self *IBlockRange) Get_StartLba(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EndLba dispatches through IBlockRange's vtable slot 8.
 func (self *IBlockRange) Get_EndLba(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBlockRangeList: https://learn.microsoft.com/windows/win32/api/imapi2/nn-imapi2-iblockrangelist
@@ -174,7 +174,7 @@ var IID_IBlockRangeList = win32.GUID{Data1: 0xb507ca26, Data2: 0x2204, Data3: 0x
 // Get_BlockRanges dispatches through IBlockRangeList's vtable slot 7.
 func (self *IBlockRangeList) Get_BlockRanges(value **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBootOptions: https://learn.microsoft.com/windows/win32/api/imapi2fs/nn-imapi2fs-ibootoptions
@@ -190,59 +190,59 @@ var IID_IBootOptions = win32.GUID{Data1: 0x2c941fd4, Data2: 0x975b, Data3: 0x59b
 func (self *IBootOptions) Get_BootImage() (*systemcom.IStream, error) {
 	var _pVal *systemcom.IStream
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Manufacturer dispatches through IBootOptions's vtable slot 8.
 func (self *IBootOptions) Get_Manufacturer() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Manufacturer dispatches through IBootOptions's vtable slot 9.
 func (self *IBootOptions) Put_Manufacturer(newVal foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PlatformId dispatches through IBootOptions's vtable slot 10.
 func (self *IBootOptions) Get_PlatformId() (PlatformId, error) {
 	var _pVal PlatformId
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PlatformId dispatches through IBootOptions's vtable slot 11.
 func (self *IBootOptions) Put_PlatformId(newVal PlatformId) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(newVal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Emulation dispatches through IBootOptions's vtable slot 12.
 func (self *IBootOptions) Get_Emulation() (EmulationType, error) {
 	var _pVal EmulationType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Emulation dispatches through IBootOptions's vtable slot 13.
 func (self *IBootOptions) Put_Emulation(newVal EmulationType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(newVal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ImageSize dispatches through IBootOptions's vtable slot 14.
 func (self *IBootOptions) Get_ImageSize() (uint32, error) {
 	var _pVal uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // AssignBootImage dispatches through IBootOptions's vtable slot 15.
 func (self *IBootOptions) AssignBootImage(newVal *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IBurnVerification: https://learn.microsoft.com/windows/win32/api/imapi2/nn-imapi2-iburnverification
@@ -257,13 +257,13 @@ var IID_IBurnVerification = win32.GUID{Data1: 0xd2ffd834, Data2: 0x958b, Data3: 
 // Put_BurnVerificationLevel dispatches through IBurnVerification's vtable slot 3.
 func (self *IBurnVerification) Put_BurnVerificationLevel(value IMAPI_BURN_VERIFICATION_LEVEL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BurnVerificationLevel dispatches through IBurnVerification's vtable slot 4.
 func (self *IBurnVerification) Get_BurnVerificationLevel(value *IMAPI_BURN_VERIFICATION_LEVEL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDiscFormat2: https://learn.microsoft.com/windows/win32/api/imapi2/nn-imapi2-idiscformat2
@@ -278,31 +278,31 @@ var IID_IDiscFormat2 = win32.GUID{Data1: 0x27354152, Data2: 0x8f64, Data3: 0x5b0
 // IsRecorderSupported dispatches through IDiscFormat2's vtable slot 7.
 func (self *IDiscFormat2) IsRecorderSupported(recorder *IDiscRecorder2, value *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(recorder)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsCurrentMediaSupported dispatches through IDiscFormat2's vtable slot 8.
 func (self *IDiscFormat2) IsCurrentMediaSupported(recorder *IDiscRecorder2, value *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(recorder)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MediaPhysicallyBlank dispatches through IDiscFormat2's vtable slot 9.
 func (self *IDiscFormat2) Get_MediaPhysicallyBlank(value *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MediaHeuristicallyBlank dispatches through IDiscFormat2's vtable slot 10.
 func (self *IDiscFormat2) Get_MediaHeuristicallyBlank(value *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SupportedMediaTypes dispatches through IDiscFormat2's vtable slot 11.
 func (self *IDiscFormat2) Get_SupportedMediaTypes(value **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDiscFormat2Data: https://learn.microsoft.com/windows/win32/api/imapi2/nn-imapi2-idiscformat2data
@@ -317,193 +317,193 @@ var IID_IDiscFormat2Data = win32.GUID{Data1: 0x27354153, Data2: 0x9f64, Data3: 0
 // Put_Recorder dispatches through IDiscFormat2Data's vtable slot 12.
 func (self *IDiscFormat2Data) Put_Recorder(value *IDiscRecorder2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Recorder dispatches through IDiscFormat2Data's vtable slot 13.
 func (self *IDiscFormat2Data) Get_Recorder(value **IDiscRecorder2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BufferUnderrunFreeDisabled dispatches through IDiscFormat2Data's vtable slot 14.
 func (self *IDiscFormat2Data) Put_BufferUnderrunFreeDisabled(value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BufferUnderrunFreeDisabled dispatches through IDiscFormat2Data's vtable slot 15.
 func (self *IDiscFormat2Data) Get_BufferUnderrunFreeDisabled(value *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PostgapAlreadyInImage dispatches through IDiscFormat2Data's vtable slot 16.
 func (self *IDiscFormat2Data) Put_PostgapAlreadyInImage(value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PostgapAlreadyInImage dispatches through IDiscFormat2Data's vtable slot 17.
 func (self *IDiscFormat2Data) Get_PostgapAlreadyInImage(value *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentMediaStatus dispatches through IDiscFormat2Data's vtable slot 18.
 func (self *IDiscFormat2Data) Get_CurrentMediaStatus(value *IMAPI_FORMAT2_DATA_MEDIA_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_WriteProtectStatus dispatches through IDiscFormat2Data's vtable slot 19.
 func (self *IDiscFormat2Data) Get_WriteProtectStatus(value *IMAPI_MEDIA_WRITE_PROTECT_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TotalSectorsOnMedia dispatches through IDiscFormat2Data's vtable slot 20.
 func (self *IDiscFormat2Data) Get_TotalSectorsOnMedia(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FreeSectorsOnMedia dispatches through IDiscFormat2Data's vtable slot 21.
 func (self *IDiscFormat2Data) Get_FreeSectorsOnMedia(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NextWritableAddress dispatches through IDiscFormat2Data's vtable slot 22.
 func (self *IDiscFormat2Data) Get_NextWritableAddress(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StartAddressOfPreviousSession dispatches through IDiscFormat2Data's vtable slot 23.
 func (self *IDiscFormat2Data) Get_StartAddressOfPreviousSession(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastWrittenAddressOfPreviousSession dispatches through IDiscFormat2Data's vtable slot 24.
 func (self *IDiscFormat2Data) Get_LastWrittenAddressOfPreviousSession(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ForceMediaToBeClosed dispatches through IDiscFormat2Data's vtable slot 25.
 func (self *IDiscFormat2Data) Put_ForceMediaToBeClosed(value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ForceMediaToBeClosed dispatches through IDiscFormat2Data's vtable slot 26.
 func (self *IDiscFormat2Data) Get_ForceMediaToBeClosed(value *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DisableConsumerDvdCompatibilityMode dispatches through IDiscFormat2Data's vtable slot 27.
 func (self *IDiscFormat2Data) Put_DisableConsumerDvdCompatibilityMode(value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DisableConsumerDvdCompatibilityMode dispatches through IDiscFormat2Data's vtable slot 28.
 func (self *IDiscFormat2Data) Get_DisableConsumerDvdCompatibilityMode(value *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentPhysicalMediaType dispatches through IDiscFormat2Data's vtable slot 29.
 func (self *IDiscFormat2Data) Get_CurrentPhysicalMediaType(value *IMAPI_MEDIA_PHYSICAL_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ClientName dispatches through IDiscFormat2Data's vtable slot 30.
 func (self *IDiscFormat2Data) Put_ClientName(value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ClientName dispatches through IDiscFormat2Data's vtable slot 31.
 func (self *IDiscFormat2Data) Get_ClientName(value *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RequestedWriteSpeed dispatches through IDiscFormat2Data's vtable slot 32.
 func (self *IDiscFormat2Data) Get_RequestedWriteSpeed(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RequestedRotationTypeIsPureCAV dispatches through IDiscFormat2Data's vtable slot 33.
 func (self *IDiscFormat2Data) Get_RequestedRotationTypeIsPureCAV(value *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentWriteSpeed dispatches through IDiscFormat2Data's vtable slot 34.
 func (self *IDiscFormat2Data) Get_CurrentWriteSpeed(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentRotationTypeIsPureCAV dispatches through IDiscFormat2Data's vtable slot 35.
 func (self *IDiscFormat2Data) Get_CurrentRotationTypeIsPureCAV(value *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SupportedWriteSpeeds dispatches through IDiscFormat2Data's vtable slot 36.
 func (self *IDiscFormat2Data) Get_SupportedWriteSpeeds(supportedSpeeds **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(supportedSpeeds)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SupportedWriteSpeedDescriptors dispatches through IDiscFormat2Data's vtable slot 37.
 func (self *IDiscFormat2Data) Get_SupportedWriteSpeedDescriptors(supportedSpeedDescriptors **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(supportedSpeedDescriptors)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ForceOverwrite dispatches through IDiscFormat2Data's vtable slot 38.
 func (self *IDiscFormat2Data) Put_ForceOverwrite(value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ForceOverwrite dispatches through IDiscFormat2Data's vtable slot 39.
 func (self *IDiscFormat2Data) Get_ForceOverwrite(value *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MultisessionInterfaces dispatches through IDiscFormat2Data's vtable slot 40.
 func (self *IDiscFormat2Data) Get_MultisessionInterfaces(value **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Write dispatches through IDiscFormat2Data's vtable slot 41.
 func (self *IDiscFormat2Data) Write(data *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(data)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CancelWrite dispatches through IDiscFormat2Data's vtable slot 42.
 func (self *IDiscFormat2Data) CancelWrite() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetWriteSpeed dispatches through IDiscFormat2Data's vtable slot 43.
 func (self *IDiscFormat2Data) SetWriteSpeed(RequestedSectorsPerSecond int32, RotationTypeIsPureCAV foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(RequestedSectorsPerSecond), uintptr(RotationTypeIsPureCAV))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDiscFormat2DataEventArgs: https://learn.microsoft.com/windows/win32/api/imapi2/nn-imapi2-idiscformat2dataeventargs
@@ -518,25 +518,25 @@ var IID_IDiscFormat2DataEventArgs = win32.GUID{Data1: 0x2735413d, Data2: 0x7f64,
 // Get_ElapsedTime dispatches through IDiscFormat2DataEventArgs's vtable slot 14.
 func (self *IDiscFormat2DataEventArgs) Get_ElapsedTime(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RemainingTime dispatches through IDiscFormat2DataEventArgs's vtable slot 15.
 func (self *IDiscFormat2DataEventArgs) Get_RemainingTime(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TotalTime dispatches through IDiscFormat2DataEventArgs's vtable slot 16.
 func (self *IDiscFormat2DataEventArgs) Get_TotalTime(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentAction dispatches through IDiscFormat2DataEventArgs's vtable slot 17.
 func (self *IDiscFormat2DataEventArgs) Get_CurrentAction(value *IMAPI_FORMAT2_DATA_WRITE_ACTION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDiscFormat2Erase: https://learn.microsoft.com/windows/win32/api/imapi2/nn-imapi2-idiscformat2erase
@@ -551,49 +551,49 @@ var IID_IDiscFormat2Erase = win32.GUID{Data1: 0x27354156, Data2: 0x8f64, Data3: 
 // Put_Recorder dispatches through IDiscFormat2Erase's vtable slot 12.
 func (self *IDiscFormat2Erase) Put_Recorder(value *IDiscRecorder2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Recorder dispatches through IDiscFormat2Erase's vtable slot 13.
 func (self *IDiscFormat2Erase) Get_Recorder(value **IDiscRecorder2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FullErase dispatches through IDiscFormat2Erase's vtable slot 14.
 func (self *IDiscFormat2Erase) Put_FullErase(value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FullErase dispatches through IDiscFormat2Erase's vtable slot 15.
 func (self *IDiscFormat2Erase) Get_FullErase(value *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentPhysicalMediaType dispatches through IDiscFormat2Erase's vtable slot 16.
 func (self *IDiscFormat2Erase) Get_CurrentPhysicalMediaType(value *IMAPI_MEDIA_PHYSICAL_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ClientName dispatches through IDiscFormat2Erase's vtable slot 17.
 func (self *IDiscFormat2Erase) Put_ClientName(value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ClientName dispatches through IDiscFormat2Erase's vtable slot 18.
 func (self *IDiscFormat2Erase) Get_ClientName(value *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EraseMedia dispatches through IDiscFormat2Erase's vtable slot 19.
 func (self *IDiscFormat2Erase) EraseMedia() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDiscFormat2RawCD: https://learn.microsoft.com/windows/win32/api/imapi2/nn-imapi2-idiscformat2rawcd
@@ -608,145 +608,145 @@ var IID_IDiscFormat2RawCD = win32.GUID{Data1: 0x27354155, Data2: 0x8f64, Data3: 
 // PrepareMedia dispatches through IDiscFormat2RawCD's vtable slot 12.
 func (self *IDiscFormat2RawCD) PrepareMedia() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteMedia dispatches through IDiscFormat2RawCD's vtable slot 13.
 func (self *IDiscFormat2RawCD) WriteMedia(data *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(data)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteMedia2 dispatches through IDiscFormat2RawCD's vtable slot 14.
 func (self *IDiscFormat2RawCD) WriteMedia2(data *systemcom.IStream, streamLeadInSectors int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(data)), uintptr(streamLeadInSectors))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CancelWrite dispatches through IDiscFormat2RawCD's vtable slot 15.
 func (self *IDiscFormat2RawCD) CancelWrite() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReleaseMedia dispatches through IDiscFormat2RawCD's vtable slot 16.
 func (self *IDiscFormat2RawCD) ReleaseMedia() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetWriteSpeed dispatches through IDiscFormat2RawCD's vtable slot 17.
 func (self *IDiscFormat2RawCD) SetWriteSpeed(RequestedSectorsPerSecond int32, RotationTypeIsPureCAV foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(RequestedSectorsPerSecond), uintptr(RotationTypeIsPureCAV))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Recorder dispatches through IDiscFormat2RawCD's vtable slot 18.
 func (self *IDiscFormat2RawCD) Put_Recorder(value *IDiscRecorder2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Recorder dispatches through IDiscFormat2RawCD's vtable slot 19.
 func (self *IDiscFormat2RawCD) Get_Recorder(value **IDiscRecorder2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BufferUnderrunFreeDisabled dispatches through IDiscFormat2RawCD's vtable slot 20.
 func (self *IDiscFormat2RawCD) Put_BufferUnderrunFreeDisabled(value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BufferUnderrunFreeDisabled dispatches through IDiscFormat2RawCD's vtable slot 21.
 func (self *IDiscFormat2RawCD) Get_BufferUnderrunFreeDisabled(value *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StartOfNextSession dispatches through IDiscFormat2RawCD's vtable slot 22.
 func (self *IDiscFormat2RawCD) Get_StartOfNextSession(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastPossibleStartOfLeadout dispatches through IDiscFormat2RawCD's vtable slot 23.
 func (self *IDiscFormat2RawCD) Get_LastPossibleStartOfLeadout(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentPhysicalMediaType dispatches through IDiscFormat2RawCD's vtable slot 24.
 func (self *IDiscFormat2RawCD) Get_CurrentPhysicalMediaType(value *IMAPI_MEDIA_PHYSICAL_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SupportedSectorTypes dispatches through IDiscFormat2RawCD's vtable slot 25.
 func (self *IDiscFormat2RawCD) Get_SupportedSectorTypes(value **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RequestedSectorType dispatches through IDiscFormat2RawCD's vtable slot 26.
 func (self *IDiscFormat2RawCD) Put_RequestedSectorType(value IMAPI_FORMAT2_RAW_CD_DATA_SECTOR_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RequestedSectorType dispatches through IDiscFormat2RawCD's vtable slot 27.
 func (self *IDiscFormat2RawCD) Get_RequestedSectorType(value *IMAPI_FORMAT2_RAW_CD_DATA_SECTOR_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ClientName dispatches through IDiscFormat2RawCD's vtable slot 28.
 func (self *IDiscFormat2RawCD) Put_ClientName(value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ClientName dispatches through IDiscFormat2RawCD's vtable slot 29.
 func (self *IDiscFormat2RawCD) Get_ClientName(value *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RequestedWriteSpeed dispatches through IDiscFormat2RawCD's vtable slot 30.
 func (self *IDiscFormat2RawCD) Get_RequestedWriteSpeed(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RequestedRotationTypeIsPureCAV dispatches through IDiscFormat2RawCD's vtable slot 31.
 func (self *IDiscFormat2RawCD) Get_RequestedRotationTypeIsPureCAV(value *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentWriteSpeed dispatches through IDiscFormat2RawCD's vtable slot 32.
 func (self *IDiscFormat2RawCD) Get_CurrentWriteSpeed(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentRotationTypeIsPureCAV dispatches through IDiscFormat2RawCD's vtable slot 33.
 func (self *IDiscFormat2RawCD) Get_CurrentRotationTypeIsPureCAV(value *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SupportedWriteSpeeds dispatches through IDiscFormat2RawCD's vtable slot 34.
 func (self *IDiscFormat2RawCD) Get_SupportedWriteSpeeds(supportedSpeeds **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(supportedSpeeds)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SupportedWriteSpeedDescriptors dispatches through IDiscFormat2RawCD's vtable slot 35.
 func (self *IDiscFormat2RawCD) Get_SupportedWriteSpeedDescriptors(supportedSpeedDescriptors **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(supportedSpeedDescriptors)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDiscFormat2RawCDEventArgs: https://learn.microsoft.com/windows/win32/api/imapi2/nn-imapi2-idiscformat2rawcdeventargs
@@ -761,19 +761,19 @@ var IID_IDiscFormat2RawCDEventArgs = win32.GUID{Data1: 0x27354143, Data2: 0x7f64
 // Get_CurrentAction dispatches through IDiscFormat2RawCDEventArgs's vtable slot 14.
 func (self *IDiscFormat2RawCDEventArgs) Get_CurrentAction(value *IMAPI_FORMAT2_RAW_CD_WRITE_ACTION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ElapsedTime dispatches through IDiscFormat2RawCDEventArgs's vtable slot 15.
 func (self *IDiscFormat2RawCDEventArgs) Get_ElapsedTime(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RemainingTime dispatches through IDiscFormat2RawCDEventArgs's vtable slot 16.
 func (self *IDiscFormat2RawCDEventArgs) Get_RemainingTime(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDiscFormat2TrackAtOnce: https://learn.microsoft.com/windows/win32/api/imapi2/nn-imapi2-idiscformat2trackatonce
@@ -788,151 +788,151 @@ var IID_IDiscFormat2TrackAtOnce = win32.GUID{Data1: 0x27354154, Data2: 0x8f64, D
 // PrepareMedia dispatches through IDiscFormat2TrackAtOnce's vtable slot 12.
 func (self *IDiscFormat2TrackAtOnce) PrepareMedia() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddAudioTrack dispatches through IDiscFormat2TrackAtOnce's vtable slot 13.
 func (self *IDiscFormat2TrackAtOnce) AddAudioTrack(data *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(data)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CancelAddTrack dispatches through IDiscFormat2TrackAtOnce's vtable slot 14.
 func (self *IDiscFormat2TrackAtOnce) CancelAddTrack() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReleaseMedia dispatches through IDiscFormat2TrackAtOnce's vtable slot 15.
 func (self *IDiscFormat2TrackAtOnce) ReleaseMedia() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetWriteSpeed dispatches through IDiscFormat2TrackAtOnce's vtable slot 16.
 func (self *IDiscFormat2TrackAtOnce) SetWriteSpeed(RequestedSectorsPerSecond int32, RotationTypeIsPureCAV foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(RequestedSectorsPerSecond), uintptr(RotationTypeIsPureCAV))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Recorder dispatches through IDiscFormat2TrackAtOnce's vtable slot 17.
 func (self *IDiscFormat2TrackAtOnce) Put_Recorder(value *IDiscRecorder2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Recorder dispatches through IDiscFormat2TrackAtOnce's vtable slot 18.
 func (self *IDiscFormat2TrackAtOnce) Get_Recorder(value **IDiscRecorder2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BufferUnderrunFreeDisabled dispatches through IDiscFormat2TrackAtOnce's vtable slot 19.
 func (self *IDiscFormat2TrackAtOnce) Put_BufferUnderrunFreeDisabled(value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BufferUnderrunFreeDisabled dispatches through IDiscFormat2TrackAtOnce's vtable slot 20.
 func (self *IDiscFormat2TrackAtOnce) Get_BufferUnderrunFreeDisabled(value *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NumberOfExistingTracks dispatches through IDiscFormat2TrackAtOnce's vtable slot 21.
 func (self *IDiscFormat2TrackAtOnce) Get_NumberOfExistingTracks(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TotalSectorsOnMedia dispatches through IDiscFormat2TrackAtOnce's vtable slot 22.
 func (self *IDiscFormat2TrackAtOnce) Get_TotalSectorsOnMedia(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FreeSectorsOnMedia dispatches through IDiscFormat2TrackAtOnce's vtable slot 23.
 func (self *IDiscFormat2TrackAtOnce) Get_FreeSectorsOnMedia(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UsedSectorsOnMedia dispatches through IDiscFormat2TrackAtOnce's vtable slot 24.
 func (self *IDiscFormat2TrackAtOnce) Get_UsedSectorsOnMedia(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DoNotFinalizeMedia dispatches through IDiscFormat2TrackAtOnce's vtable slot 25.
 func (self *IDiscFormat2TrackAtOnce) Put_DoNotFinalizeMedia(value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DoNotFinalizeMedia dispatches through IDiscFormat2TrackAtOnce's vtable slot 26.
 func (self *IDiscFormat2TrackAtOnce) Get_DoNotFinalizeMedia(value *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ExpectedTableOfContents dispatches through IDiscFormat2TrackAtOnce's vtable slot 27.
 func (self *IDiscFormat2TrackAtOnce) Get_ExpectedTableOfContents(value **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentPhysicalMediaType dispatches through IDiscFormat2TrackAtOnce's vtable slot 28.
 func (self *IDiscFormat2TrackAtOnce) Get_CurrentPhysicalMediaType(value *IMAPI_MEDIA_PHYSICAL_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ClientName dispatches through IDiscFormat2TrackAtOnce's vtable slot 29.
 func (self *IDiscFormat2TrackAtOnce) Put_ClientName(value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ClientName dispatches through IDiscFormat2TrackAtOnce's vtable slot 30.
 func (self *IDiscFormat2TrackAtOnce) Get_ClientName(value *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RequestedWriteSpeed dispatches through IDiscFormat2TrackAtOnce's vtable slot 31.
 func (self *IDiscFormat2TrackAtOnce) Get_RequestedWriteSpeed(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RequestedRotationTypeIsPureCAV dispatches through IDiscFormat2TrackAtOnce's vtable slot 32.
 func (self *IDiscFormat2TrackAtOnce) Get_RequestedRotationTypeIsPureCAV(value *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentWriteSpeed dispatches through IDiscFormat2TrackAtOnce's vtable slot 33.
 func (self *IDiscFormat2TrackAtOnce) Get_CurrentWriteSpeed(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentRotationTypeIsPureCAV dispatches through IDiscFormat2TrackAtOnce's vtable slot 34.
 func (self *IDiscFormat2TrackAtOnce) Get_CurrentRotationTypeIsPureCAV(value *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SupportedWriteSpeeds dispatches through IDiscFormat2TrackAtOnce's vtable slot 35.
 func (self *IDiscFormat2TrackAtOnce) Get_SupportedWriteSpeeds(supportedSpeeds **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(supportedSpeeds)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SupportedWriteSpeedDescriptors dispatches through IDiscFormat2TrackAtOnce's vtable slot 36.
 func (self *IDiscFormat2TrackAtOnce) Get_SupportedWriteSpeedDescriptors(supportedSpeedDescriptors **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(supportedSpeedDescriptors)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDiscFormat2TrackAtOnceEventArgs: https://learn.microsoft.com/windows/win32/api/imapi2/nn-imapi2-idiscformat2trackatonceeventargs
@@ -947,25 +947,25 @@ var IID_IDiscFormat2TrackAtOnceEventArgs = win32.GUID{Data1: 0x27354140, Data2: 
 // Get_CurrentTrackNumber dispatches through IDiscFormat2TrackAtOnceEventArgs's vtable slot 14.
 func (self *IDiscFormat2TrackAtOnceEventArgs) Get_CurrentTrackNumber(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentAction dispatches through IDiscFormat2TrackAtOnceEventArgs's vtable slot 15.
 func (self *IDiscFormat2TrackAtOnceEventArgs) Get_CurrentAction(value *IMAPI_FORMAT2_TAO_WRITE_ACTION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ElapsedTime dispatches through IDiscFormat2TrackAtOnceEventArgs's vtable slot 16.
 func (self *IDiscFormat2TrackAtOnceEventArgs) Get_ElapsedTime(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RemainingTime dispatches through IDiscFormat2TrackAtOnceEventArgs's vtable slot 17.
 func (self *IDiscFormat2TrackAtOnceEventArgs) Get_RemainingTime(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDiscMaster: https://learn.microsoft.com/windows/win32/api/imapi/nn-imapi-idiscmaster
@@ -980,73 +980,73 @@ var IID_IDiscMaster = win32.GUID{Data1: 0x520cca62, Data2: 0x51a5, Data3: 0x11d3
 // Open dispatches through IDiscMaster's vtable slot 3.
 func (self *IDiscMaster) Open() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumDiscMasterFormats dispatches through IDiscMaster's vtable slot 4.
 func (self *IDiscMaster) EnumDiscMasterFormats(ppEnum **IEnumDiscMasterFormats) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetActiveDiscMasterFormat dispatches through IDiscMaster's vtable slot 5.
 func (self *IDiscMaster) GetActiveDiscMasterFormat(lpiid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpiid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetActiveDiscMasterFormat dispatches through IDiscMaster's vtable slot 6.
 func (self *IDiscMaster) SetActiveDiscMasterFormat(riid *win32.GUID, ppUnk **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppUnk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumDiscRecorders dispatches through IDiscMaster's vtable slot 7.
 func (self *IDiscMaster) EnumDiscRecorders(ppEnum **IEnumDiscRecorders) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetActiveDiscRecorder dispatches through IDiscMaster's vtable slot 8.
 func (self *IDiscMaster) GetActiveDiscRecorder(ppRecorder **IDiscRecorder) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppRecorder)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetActiveDiscRecorder dispatches through IDiscMaster's vtable slot 9.
 func (self *IDiscMaster) SetActiveDiscRecorder(pRecorder *IDiscRecorder) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRecorder)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ClearFormatContent dispatches through IDiscMaster's vtable slot 10.
 func (self *IDiscMaster) ClearFormatContent() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ProgressAdvise dispatches through IDiscMaster's vtable slot 11.
 func (self *IDiscMaster) ProgressAdvise(pEvents *IDiscMasterProgressEvents, pvCookie *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEvents)), uintptr(unsafe.Pointer(pvCookie)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ProgressUnadvise dispatches through IDiscMaster's vtable slot 12.
 func (self *IDiscMaster) ProgressUnadvise(vCookie uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(vCookie))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RecordDisc dispatches through IDiscMaster's vtable slot 13.
 func (self *IDiscMaster) RecordDisc(bSimulate byte, bEjectAfterBurn byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(bSimulate), uintptr(bEjectAfterBurn))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Close dispatches through IDiscMaster's vtable slot 14.
 func (self *IDiscMaster) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDiscMaster2: https://learn.microsoft.com/windows/win32/api/imapi2/nn-imapi2-idiscmaster2
@@ -1061,25 +1061,25 @@ var IID_IDiscMaster2 = win32.GUID{Data1: 0x27354130, Data2: 0x7f64, Data3: 0x5b0
 // Get__NewEnum dispatches through IDiscMaster2's vtable slot 7.
 func (self *IDiscMaster2) Get__NewEnum(ppunk **systemole.IEnumVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppunk)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Item dispatches through IDiscMaster2's vtable slot 8.
 func (self *IDiscMaster2) Get_Item(index int32, value *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IDiscMaster2's vtable slot 9.
 func (self *IDiscMaster2) Get_Count(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsSupportedEnvironment dispatches through IDiscMaster2's vtable slot 10.
 func (self *IDiscMaster2) Get_IsSupportedEnvironment(value *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDiscMasterProgressEvents: https://learn.microsoft.com/windows/win32/api/imapi/nn-imapi-idiscmasterprogressevents
@@ -1094,55 +1094,55 @@ var IID_IDiscMasterProgressEvents = win32.GUID{Data1: 0xec9e51c1, Data2: 0x4e5d,
 // QueryCancel dispatches through IDiscMasterProgressEvents's vtable slot 3.
 func (self *IDiscMasterProgressEvents) QueryCancel(pbCancel *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbCancel)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NotifyPnPActivity dispatches through IDiscMasterProgressEvents's vtable slot 4.
 func (self *IDiscMasterProgressEvents) NotifyPnPActivity() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NotifyAddProgress dispatches through IDiscMasterProgressEvents's vtable slot 5.
 func (self *IDiscMasterProgressEvents) NotifyAddProgress(nCompletedSteps int32, nTotalSteps int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(nCompletedSteps), uintptr(nTotalSteps))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NotifyBlockProgress dispatches through IDiscMasterProgressEvents's vtable slot 6.
 func (self *IDiscMasterProgressEvents) NotifyBlockProgress(nCompleted int32, nTotal int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(nCompleted), uintptr(nTotal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NotifyTrackProgress dispatches through IDiscMasterProgressEvents's vtable slot 7.
 func (self *IDiscMasterProgressEvents) NotifyTrackProgress(nCurrentTrack int32, nTotalTracks int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(nCurrentTrack), uintptr(nTotalTracks))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NotifyPreparingBurn dispatches through IDiscMasterProgressEvents's vtable slot 8.
 func (self *IDiscMasterProgressEvents) NotifyPreparingBurn(nEstimatedSeconds int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(nEstimatedSeconds))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NotifyClosingDisc dispatches through IDiscMasterProgressEvents's vtable slot 9.
 func (self *IDiscMasterProgressEvents) NotifyClosingDisc(nEstimatedSeconds int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(nEstimatedSeconds))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NotifyBurnComplete dispatches through IDiscMasterProgressEvents's vtable slot 10.
 func (self *IDiscMasterProgressEvents) NotifyBurnComplete(status foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(status))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NotifyEraseComplete dispatches through IDiscMasterProgressEvents's vtable slot 11.
 func (self *IDiscMasterProgressEvents) NotifyEraseComplete(status foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(status))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDiscRecorder: https://learn.microsoft.com/windows/win32/api/imapi/nn-imapi-idiscrecorder
@@ -1161,7 +1161,7 @@ func (self *IDiscRecorder) Init(pbyUniqueID []byte, nulDriveNumber uint32) error
 		_pbyUniqueID = &pbyUniqueID[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pbyUniqueID)), uintptr(len(pbyUniqueID)), uintptr(nulDriveNumber))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRecorderGUID dispatches through IDiscRecorder's vtable slot 4.
@@ -1171,85 +1171,85 @@ func (self *IDiscRecorder) GetRecorderGUID(pbyUniqueID []byte, pulReturnSizeRequ
 		_pbyUniqueID = &pbyUniqueID[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pbyUniqueID)), uintptr(len(pbyUniqueID)), uintptr(unsafe.Pointer(pulReturnSizeRequired)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRecorderType dispatches through IDiscRecorder's vtable slot 5.
 func (self *IDiscRecorder) GetRecorderType(fTypeCode *RECORDER_TYPES) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fTypeCode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDisplayNames dispatches through IDiscRecorder's vtable slot 6.
 func (self *IDiscRecorder) GetDisplayNames(pbstrVendorID *foundation.BSTR, pbstrProductID *foundation.BSTR, pbstrRevision *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrVendorID)), uintptr(unsafe.Pointer(pbstrProductID)), uintptr(unsafe.Pointer(pbstrRevision)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBasePnPID dispatches through IDiscRecorder's vtable slot 7.
 func (self *IDiscRecorder) GetBasePnPID(pbstrBasePnPID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrBasePnPID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPath dispatches through IDiscRecorder's vtable slot 8.
 func (self *IDiscRecorder) GetPath(pbstrPath *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRecorderProperties dispatches through IDiscRecorder's vtable slot 9.
 func (self *IDiscRecorder) GetRecorderProperties(ppPropStg **systemcomstructuredstorage.IPropertyStorage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPropStg)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetRecorderProperties dispatches through IDiscRecorder's vtable slot 10.
 func (self *IDiscRecorder) SetRecorderProperties(pPropStg *systemcomstructuredstorage.IPropertyStorage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPropStg)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRecorderState dispatches through IDiscRecorder's vtable slot 11.
 func (self *IDiscRecorder) GetRecorderState(pulDevStateFlags *DISC_RECORDER_STATE_FLAGS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulDevStateFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenExclusive dispatches through IDiscRecorder's vtable slot 12.
 func (self *IDiscRecorder) OpenExclusive() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryMediaType dispatches through IDiscRecorder's vtable slot 13.
 func (self *IDiscRecorder) QueryMediaType(fMediaType *MEDIA_TYPES, fMediaFlags *MEDIA_FLAGS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fMediaType)), uintptr(unsafe.Pointer(fMediaFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryMediaInfo dispatches through IDiscRecorder's vtable slot 14.
 func (self *IDiscRecorder) QueryMediaInfo(pbSessions *byte, pbLastTrack *byte, ulStartAddress *uint32, ulNextWritable *uint32, ulFreeBlocks *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbSessions)), uintptr(unsafe.Pointer(pbLastTrack)), uintptr(unsafe.Pointer(ulStartAddress)), uintptr(unsafe.Pointer(ulNextWritable)), uintptr(unsafe.Pointer(ulFreeBlocks)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Eject dispatches through IDiscRecorder's vtable slot 15.
 func (self *IDiscRecorder) Eject() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Erase dispatches through IDiscRecorder's vtable slot 16.
 func (self *IDiscRecorder) Erase(bFullErase byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(bFullErase))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Close dispatches through IDiscRecorder's vtable slot 17.
 func (self *IDiscRecorder) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDiscRecorder2: https://learn.microsoft.com/windows/win32/api/imapi2/nn-imapi2-idiscrecorder2
@@ -1264,127 +1264,127 @@ var IID_IDiscRecorder2 = win32.GUID{Data1: 0x27354133, Data2: 0x7f64, Data3: 0x5
 // EjectMedia dispatches through IDiscRecorder2's vtable slot 7.
 func (self *IDiscRecorder2) EjectMedia() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CloseTray dispatches through IDiscRecorder2's vtable slot 8.
 func (self *IDiscRecorder2) CloseTray() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AcquireExclusiveAccess dispatches through IDiscRecorder2's vtable slot 9.
 func (self *IDiscRecorder2) AcquireExclusiveAccess(force foundation.VARIANT_BOOL, __MIDL__IDiscRecorder20000 foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(force), uintptr(unsafe.Pointer(__MIDL__IDiscRecorder20000)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReleaseExclusiveAccess dispatches through IDiscRecorder2's vtable slot 10.
 func (self *IDiscRecorder2) ReleaseExclusiveAccess() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DisableMcn dispatches through IDiscRecorder2's vtable slot 11.
 func (self *IDiscRecorder2) DisableMcn() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnableMcn dispatches through IDiscRecorder2's vtable slot 12.
 func (self *IDiscRecorder2) EnableMcn() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeDiscRecorder dispatches through IDiscRecorder2's vtable slot 13.
 func (self *IDiscRecorder2) InitializeDiscRecorder(recorderUniqueId foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(recorderUniqueId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ActiveDiscRecorder dispatches through IDiscRecorder2's vtable slot 14.
 func (self *IDiscRecorder2) Get_ActiveDiscRecorder(value *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_VendorId dispatches through IDiscRecorder2's vtable slot 15.
 func (self *IDiscRecorder2) Get_VendorId(value *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ProductId dispatches through IDiscRecorder2's vtable slot 16.
 func (self *IDiscRecorder2) Get_ProductId(value *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ProductRevision dispatches through IDiscRecorder2's vtable slot 17.
 func (self *IDiscRecorder2) Get_ProductRevision(value *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_VolumeName dispatches through IDiscRecorder2's vtable slot 18.
 func (self *IDiscRecorder2) Get_VolumeName(value *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_VolumePathNames dispatches through IDiscRecorder2's vtable slot 19.
 func (self *IDiscRecorder2) Get_VolumePathNames(value **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DeviceCanLoadMedia dispatches through IDiscRecorder2's vtable slot 20.
 func (self *IDiscRecorder2) Get_DeviceCanLoadMedia(value *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LegacyDeviceNumber dispatches through IDiscRecorder2's vtable slot 21.
 func (self *IDiscRecorder2) Get_LegacyDeviceNumber(legacyDeviceNumber *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(legacyDeviceNumber)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SupportedFeaturePages dispatches through IDiscRecorder2's vtable slot 22.
 func (self *IDiscRecorder2) Get_SupportedFeaturePages(value **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentFeaturePages dispatches through IDiscRecorder2's vtable slot 23.
 func (self *IDiscRecorder2) Get_CurrentFeaturePages(value **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SupportedProfiles dispatches through IDiscRecorder2's vtable slot 24.
 func (self *IDiscRecorder2) Get_SupportedProfiles(value **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentProfiles dispatches through IDiscRecorder2's vtable slot 25.
 func (self *IDiscRecorder2) Get_CurrentProfiles(value **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SupportedModePages dispatches through IDiscRecorder2's vtable slot 26.
 func (self *IDiscRecorder2) Get_SupportedModePages(value **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ExclusiveAccessOwner dispatches through IDiscRecorder2's vtable slot 27.
 func (self *IDiscRecorder2) Get_ExclusiveAccessOwner(value *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDiscRecorder2Ex: https://learn.microsoft.com/windows/win32/api/imapi2/nn-imapi2-idiscrecorder2ex
@@ -1403,7 +1403,7 @@ func (self *IDiscRecorder2Ex) SendCommandNoData(Cdb []byte, SenseBuffer *byte, T
 		_Cdb = &Cdb[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Cdb)), uintptr(len(Cdb)), uintptr(unsafe.Pointer(SenseBuffer)), uintptr(Timeout))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendCommandSendDataToDevice dispatches through IDiscRecorder2Ex's vtable slot 4.
@@ -1417,7 +1417,7 @@ func (self *IDiscRecorder2Ex) SendCommandSendDataToDevice(Cdb []byte, SenseBuffe
 		_Buffer = &Buffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Cdb)), uintptr(len(Cdb)), uintptr(unsafe.Pointer(SenseBuffer)), uintptr(Timeout), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendCommandGetDataFromDevice dispatches through IDiscRecorder2Ex's vtable slot 5.
@@ -1431,13 +1431,13 @@ func (self *IDiscRecorder2Ex) SendCommandGetDataFromDevice(Cdb []byte, SenseBuff
 		_Buffer = &Buffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Cdb)), uintptr(len(Cdb)), uintptr(unsafe.Pointer(SenseBuffer)), uintptr(Timeout), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BufferFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReadDvdStructure dispatches through IDiscRecorder2Ex's vtable slot 6.
 func (self *IDiscRecorder2Ex) ReadDvdStructure(format uint32, address uint32, layer uint32, agid uint32, data **byte, count *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(format), uintptr(address), uintptr(layer), uintptr(agid), uintptr(unsafe.Pointer(data)), uintptr(unsafe.Pointer(count)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendDvdStructure dispatches through IDiscRecorder2Ex's vtable slot 7.
@@ -1447,43 +1447,43 @@ func (self *IDiscRecorder2Ex) SendDvdStructure(format uint32, data []byte) error
 		_data = &data[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(format), uintptr(unsafe.Pointer(_data)), uintptr(len(data)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAdapterDescriptor dispatches through IDiscRecorder2Ex's vtable slot 8.
 func (self *IDiscRecorder2Ex) GetAdapterDescriptor(data **byte, byteSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(data)), uintptr(unsafe.Pointer(byteSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceDescriptor dispatches through IDiscRecorder2Ex's vtable slot 9.
 func (self *IDiscRecorder2Ex) GetDeviceDescriptor(data **byte, byteSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(data)), uintptr(unsafe.Pointer(byteSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDiscInformation dispatches through IDiscRecorder2Ex's vtable slot 10.
 func (self *IDiscRecorder2Ex) GetDiscInformation(discInformation **byte, byteSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(discInformation)), uintptr(unsafe.Pointer(byteSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTrackInformation dispatches through IDiscRecorder2Ex's vtable slot 11.
 func (self *IDiscRecorder2Ex) GetTrackInformation(address uint32, addressType IMAPI_READ_TRACK_ADDRESS_TYPE, trackInformation **byte, byteSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(address), uintptr(addressType), uintptr(unsafe.Pointer(trackInformation)), uintptr(unsafe.Pointer(byteSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFeaturePage dispatches through IDiscRecorder2Ex's vtable slot 12.
 func (self *IDiscRecorder2Ex) GetFeaturePage(requestedFeature IMAPI_FEATURE_PAGE_TYPE, currentFeatureOnly foundation.BOOLEAN, featureData **byte, byteSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(requestedFeature), uintptr(currentFeatureOnly), uintptr(unsafe.Pointer(featureData)), uintptr(unsafe.Pointer(byteSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetModePage dispatches through IDiscRecorder2Ex's vtable slot 13.
 func (self *IDiscRecorder2Ex) GetModePage(requestedModePage IMAPI_MODE_PAGE_TYPE, requestType IMAPI_MODE_PAGE_REQUEST_TYPE, modePageData **byte, byteSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(requestedModePage), uintptr(requestType), uintptr(unsafe.Pointer(modePageData)), uintptr(unsafe.Pointer(byteSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetModePage dispatches through IDiscRecorder2Ex's vtable slot 14.
@@ -1493,43 +1493,43 @@ func (self *IDiscRecorder2Ex) SetModePage(requestType IMAPI_MODE_PAGE_REQUEST_TY
 		_data = &data[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(requestType), uintptr(unsafe.Pointer(_data)), uintptr(len(data)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSupportedFeaturePages dispatches through IDiscRecorder2Ex's vtable slot 15.
 func (self *IDiscRecorder2Ex) GetSupportedFeaturePages(currentFeatureOnly foundation.BOOLEAN, featureData **IMAPI_FEATURE_PAGE_TYPE, byteSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(currentFeatureOnly), uintptr(unsafe.Pointer(featureData)), uintptr(unsafe.Pointer(byteSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSupportedProfiles dispatches through IDiscRecorder2Ex's vtable slot 16.
 func (self *IDiscRecorder2Ex) GetSupportedProfiles(currentOnly foundation.BOOLEAN, profileTypes **IMAPI_PROFILE_TYPE, validProfiles *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(currentOnly), uintptr(unsafe.Pointer(profileTypes)), uintptr(unsafe.Pointer(validProfiles)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSupportedModePages dispatches through IDiscRecorder2Ex's vtable slot 17.
 func (self *IDiscRecorder2Ex) GetSupportedModePages(requestType IMAPI_MODE_PAGE_REQUEST_TYPE, modePageTypes **IMAPI_MODE_PAGE_TYPE, validPages *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(requestType), uintptr(unsafe.Pointer(modePageTypes)), uintptr(unsafe.Pointer(validPages)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetByteAlignmentMask dispatches through IDiscRecorder2Ex's vtable slot 18.
 func (self *IDiscRecorder2Ex) GetByteAlignmentMask(value *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMaximumNonPageAlignedTransferSize dispatches through IDiscRecorder2Ex's vtable slot 19.
 func (self *IDiscRecorder2Ex) GetMaximumNonPageAlignedTransferSize(value *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMaximumPageAlignedTransferSize dispatches through IDiscRecorder2Ex's vtable slot 20.
 func (self *IDiscRecorder2Ex) GetMaximumPageAlignedTransferSize(value *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: ddf445e1-54ba-11d3-9144-00104ba11c5e
@@ -1547,25 +1547,25 @@ func (self *IEnumDiscMasterFormats) Next(lpiidFormatID []win32.GUID, pcFetched *
 		_lpiidFormatID = &lpiidFormatID[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(lpiidFormatID)), uintptr(unsafe.Pointer(_lpiidFormatID)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumDiscMasterFormats's vtable slot 4.
 func (self *IEnumDiscMasterFormats) Skip(cFormats uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cFormats))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumDiscMasterFormats's vtable slot 5.
 func (self *IEnumDiscMasterFormats) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IEnumDiscMasterFormats's vtable slot 6.
 func (self *IEnumDiscMasterFormats) Clone(ppEnum **IEnumDiscMasterFormats) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 9b1921e1-54ac-11d3-9144-00104ba11c5e
@@ -1583,25 +1583,25 @@ func (self *IEnumDiscRecorders) Next(ppRecorder []*IDiscRecorder, pcFetched *uin
 		_ppRecorder = &ppRecorder[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppRecorder)), uintptr(unsafe.Pointer(_ppRecorder)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumDiscRecorders's vtable slot 4.
 func (self *IEnumDiscRecorders) Skip(cRecorders uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cRecorders))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumDiscRecorders's vtable slot 5.
 func (self *IEnumDiscRecorders) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IEnumDiscRecorders's vtable slot 6.
 func (self *IEnumDiscRecorders) Clone(ppEnum **IEnumDiscRecorders) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumFsiItems: https://learn.microsoft.com/windows/win32/api/imapi2fs/nn-imapi2fs-ienumfsiitems
@@ -1620,25 +1620,25 @@ func (self *IEnumFsiItems) Next(rgelt []*IFsiItem, pceltFetched *uint32) error {
 		_rgelt = &rgelt[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumFsiItems's vtable slot 4.
 func (self *IEnumFsiItems) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumFsiItems's vtable slot 5.
 func (self *IEnumFsiItems) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IEnumFsiItems's vtable slot 6.
 func (self *IEnumFsiItems) Clone(ppEnum **IEnumFsiItems) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumProgressItems: https://learn.microsoft.com/windows/win32/api/imapi2fs/nn-imapi2fs-ienumprogressitems
@@ -1657,25 +1657,25 @@ func (self *IEnumProgressItems) Next(rgelt []*IProgressItem, pceltFetched *uint3
 		_rgelt = &rgelt[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumProgressItems's vtable slot 4.
 func (self *IEnumProgressItems) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumProgressItems's vtable slot 5.
 func (self *IEnumProgressItems) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IEnumProgressItems's vtable slot 6.
 func (self *IEnumProgressItems) Clone(ppEnum **IEnumProgressItems) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFileSystemImage: https://learn.microsoft.com/windows/win32/api/imapi2fs/nn-imapi2fs-ifilesystemimage
@@ -1690,301 +1690,301 @@ var IID_IFileSystemImage = win32.GUID{Data1: 0x2c941fe1, Data2: 0x975b, Data3: 0
 // Get_Root dispatches through IFileSystemImage's vtable slot 7.
 func (self *IFileSystemImage) Get_Root(pVal **IFsiDirectoryItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SessionStartBlock dispatches through IFileSystemImage's vtable slot 8.
 func (self *IFileSystemImage) Get_SessionStartBlock(pVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SessionStartBlock dispatches through IFileSystemImage's vtable slot 9.
 func (self *IFileSystemImage) Put_SessionStartBlock(newVal int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(newVal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FreeMediaBlocks dispatches through IFileSystemImage's vtable slot 10.
 func (self *IFileSystemImage) Get_FreeMediaBlocks(pVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FreeMediaBlocks dispatches through IFileSystemImage's vtable slot 11.
 func (self *IFileSystemImage) Put_FreeMediaBlocks(newVal int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(newVal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMaxMediaBlocksFromDevice dispatches through IFileSystemImage's vtable slot 12.
 func (self *IFileSystemImage) SetMaxMediaBlocksFromDevice(discRecorder *IDiscRecorder2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(discRecorder)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UsedBlocks dispatches through IFileSystemImage's vtable slot 13.
 func (self *IFileSystemImage) Get_UsedBlocks(pVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_VolumeName dispatches through IFileSystemImage's vtable slot 14.
 func (self *IFileSystemImage) Get_VolumeName(pVal *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_VolumeName dispatches through IFileSystemImage's vtable slot 15.
 func (self *IFileSystemImage) Put_VolumeName(newVal foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ImportedVolumeName dispatches through IFileSystemImage's vtable slot 16.
 func (self *IFileSystemImage) Get_ImportedVolumeName(pVal *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BootImageOptions dispatches through IFileSystemImage's vtable slot 17.
 func (self *IFileSystemImage) Get_BootImageOptions(pVal **IBootOptions) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BootImageOptions dispatches through IFileSystemImage's vtable slot 18.
 func (self *IFileSystemImage) Put_BootImageOptions(newVal *IBootOptions) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FileCount dispatches through IFileSystemImage's vtable slot 19.
 func (self *IFileSystemImage) Get_FileCount(pVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DirectoryCount dispatches through IFileSystemImage's vtable slot 20.
 func (self *IFileSystemImage) Get_DirectoryCount(pVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_WorkingDirectory dispatches through IFileSystemImage's vtable slot 21.
 func (self *IFileSystemImage) Get_WorkingDirectory(pVal *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_WorkingDirectory dispatches through IFileSystemImage's vtable slot 22.
 func (self *IFileSystemImage) Put_WorkingDirectory(newVal foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ChangePoint dispatches through IFileSystemImage's vtable slot 23.
 func (self *IFileSystemImage) Get_ChangePoint(pVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StrictFileSystemCompliance dispatches through IFileSystemImage's vtable slot 24.
 func (self *IFileSystemImage) Get_StrictFileSystemCompliance(pVal *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_StrictFileSystemCompliance dispatches through IFileSystemImage's vtable slot 25.
 func (self *IFileSystemImage) Put_StrictFileSystemCompliance(newVal foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(newVal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UseRestrictedCharacterSet dispatches through IFileSystemImage's vtable slot 26.
 func (self *IFileSystemImage) Get_UseRestrictedCharacterSet(pVal *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_UseRestrictedCharacterSet dispatches through IFileSystemImage's vtable slot 27.
 func (self *IFileSystemImage) Put_UseRestrictedCharacterSet(newVal foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(newVal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FileSystemsToCreate dispatches through IFileSystemImage's vtable slot 28.
 func (self *IFileSystemImage) Get_FileSystemsToCreate(pVal *FsiFileSystems) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FileSystemsToCreate dispatches through IFileSystemImage's vtable slot 29.
 func (self *IFileSystemImage) Put_FileSystemsToCreate(newVal FsiFileSystems) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(newVal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FileSystemsSupported dispatches through IFileSystemImage's vtable slot 30.
 func (self *IFileSystemImage) Get_FileSystemsSupported(pVal *FsiFileSystems) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_UDFRevision dispatches through IFileSystemImage's vtable slot 31.
 func (self *IFileSystemImage) Put_UDFRevision(newVal int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(newVal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UDFRevision dispatches through IFileSystemImage's vtable slot 32.
 func (self *IFileSystemImage) Get_UDFRevision(pVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UDFRevisionsSupported dispatches through IFileSystemImage's vtable slot 33.
 func (self *IFileSystemImage) Get_UDFRevisionsSupported(pVal **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ChooseImageDefaults dispatches through IFileSystemImage's vtable slot 34.
 func (self *IFileSystemImage) ChooseImageDefaults(discRecorder *IDiscRecorder2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(discRecorder)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ChooseImageDefaultsForMediaType dispatches through IFileSystemImage's vtable slot 35.
 func (self *IFileSystemImage) ChooseImageDefaultsForMediaType(value IMAPI_MEDIA_PHYSICAL_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ISO9660InterchangeLevel dispatches through IFileSystemImage's vtable slot 36.
 func (self *IFileSystemImage) Put_ISO9660InterchangeLevel(newVal int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(newVal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ISO9660InterchangeLevel dispatches through IFileSystemImage's vtable slot 37.
 func (self *IFileSystemImage) Get_ISO9660InterchangeLevel(pVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ISO9660InterchangeLevelsSupported dispatches through IFileSystemImage's vtable slot 38.
 func (self *IFileSystemImage) Get_ISO9660InterchangeLevelsSupported(pVal **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateResultImage dispatches through IFileSystemImage's vtable slot 39.
 func (self *IFileSystemImage) CreateResultImage(resultStream **IFileSystemImageResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(resultStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Exists dispatches through IFileSystemImage's vtable slot 40.
 func (self *IFileSystemImage) Exists(fullPath foundation.BSTR, itemType *FsiItemType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fullPath)), uintptr(unsafe.Pointer(itemType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CalculateDiscIdentifier dispatches through IFileSystemImage's vtable slot 41.
 func (self *IFileSystemImage) CalculateDiscIdentifier(discIdentifier *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(discIdentifier)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IdentifyFileSystemsOnDisc dispatches through IFileSystemImage's vtable slot 42.
 func (self *IFileSystemImage) IdentifyFileSystemsOnDisc(discRecorder *IDiscRecorder2, fileSystems *FsiFileSystems) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(discRecorder)), uintptr(unsafe.Pointer(fileSystems)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDefaultFileSystemForImport dispatches through IFileSystemImage's vtable slot 43.
 func (self *IFileSystemImage) GetDefaultFileSystemForImport(fileSystems FsiFileSystems, importDefault *FsiFileSystems) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(fileSystems), uintptr(unsafe.Pointer(importDefault)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ImportFileSystem dispatches through IFileSystemImage's vtable slot 44.
 func (self *IFileSystemImage) ImportFileSystem(importedFileSystem *FsiFileSystems) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(importedFileSystem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ImportSpecificFileSystem dispatches through IFileSystemImage's vtable slot 45.
 func (self *IFileSystemImage) ImportSpecificFileSystem(fileSystemToUse FsiFileSystems) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(fileSystemToUse))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RollbackToChangePoint dispatches through IFileSystemImage's vtable slot 46.
 func (self *IFileSystemImage) RollbackToChangePoint(changePoint int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(changePoint))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LockInChangePoint dispatches through IFileSystemImage's vtable slot 47.
 func (self *IFileSystemImage) LockInChangePoint() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateDirectoryItem dispatches through IFileSystemImage's vtable slot 48.
 func (self *IFileSystemImage) CreateDirectoryItem(name foundation.BSTR, newItem **IFsiDirectoryItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(newItem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateFileItem dispatches through IFileSystemImage's vtable slot 49.
 func (self *IFileSystemImage) CreateFileItem(name foundation.BSTR, newItem **IFsiFileItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(newItem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_VolumeNameUDF dispatches through IFileSystemImage's vtable slot 50.
 func (self *IFileSystemImage) Get_VolumeNameUDF(pVal *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_VolumeNameJoliet dispatches through IFileSystemImage's vtable slot 51.
 func (self *IFileSystemImage) Get_VolumeNameJoliet(pVal *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_VolumeNameISO9660 dispatches through IFileSystemImage's vtable slot 52.
 func (self *IFileSystemImage) Get_VolumeNameISO9660(pVal *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StageFiles dispatches through IFileSystemImage's vtable slot 53.
 func (self *IFileSystemImage) Get_StageFiles(pVal *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_StageFiles dispatches through IFileSystemImage's vtable slot 54.
 func (self *IFileSystemImage) Put_StageFiles(newVal foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(newVal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MultisessionInterfaces dispatches through IFileSystemImage's vtable slot 55.
 func (self *IFileSystemImage) Get_MultisessionInterfaces(pVal **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MultisessionInterfaces dispatches through IFileSystemImage's vtable slot 56.
 func (self *IFileSystemImage) Put_MultisessionInterfaces(newVal *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFileSystemImage2: https://learn.microsoft.com/windows/win32/api/imapi2fs/nn-imapi2fs-ifilesystemimage2
@@ -1999,13 +1999,13 @@ var IID_IFileSystemImage2 = win32.GUID{Data1: 0xd7644b2c, Data2: 0x1537, Data3: 
 // Get_BootImageOptionsArray dispatches through IFileSystemImage2's vtable slot 57.
 func (self *IFileSystemImage2) Get_BootImageOptionsArray(pVal **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BootImageOptionsArray dispatches through IFileSystemImage2's vtable slot 58.
 func (self *IFileSystemImage2) Put_BootImageOptionsArray(newVal *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFileSystemImage3: https://learn.microsoft.com/windows/win32/api/imapi2fs/nn-imapi2fs-ifilesystemimage3
@@ -2020,19 +2020,19 @@ var IID_IFileSystemImage3 = win32.GUID{Data1: 0x7cff842c, Data2: 0x7e97, Data3: 
 // Get_CreateRedundantUdfMetadataFiles dispatches through IFileSystemImage3's vtable slot 59.
 func (self *IFileSystemImage3) Get_CreateRedundantUdfMetadataFiles(pVal *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CreateRedundantUdfMetadataFiles dispatches through IFileSystemImage3's vtable slot 60.
 func (self *IFileSystemImage3) Put_CreateRedundantUdfMetadataFiles(newVal foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(newVal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ProbeSpecificFileSystem dispatches through IFileSystemImage3's vtable slot 61.
 func (self *IFileSystemImage3) ProbeSpecificFileSystem(fileSystemToProbe FsiFileSystems, isAppendable *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(fileSystemToProbe), uintptr(unsafe.Pointer(isAppendable)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFileSystemImageResult: https://learn.microsoft.com/windows/win32/api/imapi2fs/nn-imapi2fs-ifilesystemimageresult
@@ -2048,35 +2048,35 @@ var IID_IFileSystemImageResult = win32.GUID{Data1: 0x2c941fd8, Data2: 0x975b, Da
 func (self *IFileSystemImageResult) Get_ImageStream() (*systemcom.IStream, error) {
 	var _pVal *systemcom.IStream
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ProgressItems dispatches through IFileSystemImageResult's vtable slot 8.
 func (self *IFileSystemImageResult) Get_ProgressItems() (*IProgressItems, error) {
 	var _pVal *IProgressItems
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TotalBlocks dispatches through IFileSystemImageResult's vtable slot 9.
 func (self *IFileSystemImageResult) Get_TotalBlocks() (int32, error) {
 	var _pVal int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BlockSize dispatches through IFileSystemImageResult's vtable slot 10.
 func (self *IFileSystemImageResult) Get_BlockSize() (int32, error) {
 	var _pVal int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DiscId dispatches through IFileSystemImageResult's vtable slot 11.
 func (self *IFileSystemImageResult) Get_DiscId() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IFileSystemImageResult2: https://learn.microsoft.com/windows/win32/api/imapi2fs/nn-imapi2fs-ifilesystemimageresult2
@@ -2091,7 +2091,7 @@ var IID_IFileSystemImageResult2 = win32.GUID{Data1: 0xb507ca29, Data2: 0x2204, D
 // Get_ModifiedBlocks dispatches through IFileSystemImageResult2's vtable slot 12.
 func (self *IFileSystemImageResult2) Get_ModifiedBlocks(pVal **IBlockRangeList) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsiDirectoryItem: https://learn.microsoft.com/windows/win32/api/imapi2fs/nn-imapi2fs-ifsidirectoryitem
@@ -2107,64 +2107,64 @@ var IID_IFsiDirectoryItem = win32.GUID{Data1: 0x2c941fdc, Data2: 0x975b, Data3: 
 func (self *IFsiDirectoryItem) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
 	var _NewEnum *systemole.IEnumVARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_NewEnum)))
-	return _NewEnum, win32.HRESULTError(int32(r1))
+	return _NewEnum, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Item dispatches through IFsiDirectoryItem's vtable slot 20.
 func (self *IFsiDirectoryItem) Get_Item(path foundation.BSTR) (*IFsiItem, error) {
 	var _item *IFsiItem
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(&_item)))
-	return _item, win32.HRESULTError(int32(r1))
+	return _item, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IFsiDirectoryItem's vtable slot 21.
 func (self *IFsiDirectoryItem) Get_Count() (int32, error) {
 	var _Count int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Count)))
-	return _Count, win32.HRESULTError(int32(r1))
+	return _Count, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EnumFsiItems dispatches through IFsiDirectoryItem's vtable slot 22.
 func (self *IFsiDirectoryItem) Get_EnumFsiItems() (*IEnumFsiItems, error) {
 	var _NewEnum *IEnumFsiItems
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_NewEnum)))
-	return _NewEnum, win32.HRESULTError(int32(r1))
+	return _NewEnum, win32.ErrIfFailed(int32(r1))
 }
 
 // AddDirectory dispatches through IFsiDirectoryItem's vtable slot 23.
 func (self *IFsiDirectoryItem) AddDirectory(path foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddFile dispatches through IFsiDirectoryItem's vtable slot 24.
 func (self *IFsiDirectoryItem) AddFile(path foundation.BSTR, fileData *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(fileData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddTree dispatches through IFsiDirectoryItem's vtable slot 25.
 func (self *IFsiDirectoryItem) AddTree(sourceDirectory foundation.BSTR, includeBaseDirectory foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sourceDirectory)), uintptr(includeBaseDirectory))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through IFsiDirectoryItem's vtable slot 26.
 func (self *IFsiDirectoryItem) Add(item *IFsiItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(item)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through IFsiDirectoryItem's vtable slot 27.
 func (self *IFsiDirectoryItem) Remove(path foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveTree dispatches through IFsiDirectoryItem's vtable slot 28.
 func (self *IFsiDirectoryItem) RemoveTree(path foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsiDirectoryItem2: https://learn.microsoft.com/windows/win32/api/imapi2fs/nn-imapi2fs-ifsidirectoryitem2
@@ -2179,7 +2179,7 @@ var IID_IFsiDirectoryItem2 = win32.GUID{Data1: 0xf7fb4b9b, Data2: 0x6d96, Data3:
 // AddTreeWithNamedStreams dispatches through IFsiDirectoryItem2's vtable slot 29.
 func (self *IFsiDirectoryItem2) AddTreeWithNamedStreams(sourceDirectory foundation.BSTR, includeBaseDirectory foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sourceDirectory)), uintptr(includeBaseDirectory))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsiFileItem: https://learn.microsoft.com/windows/win32/api/imapi2fs/nn-imapi2fs-ifsifileitem
@@ -2195,34 +2195,34 @@ var IID_IFsiFileItem = win32.GUID{Data1: 0x2c941fdb, Data2: 0x975b, Data3: 0x59b
 func (self *IFsiFileItem) Get_DataSize() (int64, error) {
 	var _pVal int64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DataSize32BitLow dispatches through IFsiFileItem's vtable slot 20.
 func (self *IFsiFileItem) Get_DataSize32BitLow() (int32, error) {
 	var _pVal int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DataSize32BitHigh dispatches through IFsiFileItem's vtable slot 21.
 func (self *IFsiFileItem) Get_DataSize32BitHigh() (int32, error) {
 	var _pVal int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Data dispatches through IFsiFileItem's vtable slot 22.
 func (self *IFsiFileItem) Get_Data() (*systemcom.IStream, error) {
 	var _pVal *systemcom.IStream
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Data dispatches through IFsiFileItem's vtable slot 23.
 func (self *IFsiFileItem) Put_Data(newVal *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsiFileItem2: https://learn.microsoft.com/windows/win32/api/imapi2fs/nn-imapi2fs-ifsifileitem2
@@ -2237,37 +2237,37 @@ var IID_IFsiFileItem2 = win32.GUID{Data1: 0x199d0c19, Data2: 0x11e1, Data3: 0x40
 // Get_FsiNamedStreams dispatches through IFsiFileItem2's vtable slot 24.
 func (self *IFsiFileItem2) Get_FsiNamedStreams(streams **IFsiNamedStreams) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(streams)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsNamedStream dispatches through IFsiFileItem2's vtable slot 25.
 func (self *IFsiFileItem2) Get_IsNamedStream(pVal *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddStream dispatches through IFsiFileItem2's vtable slot 26.
 func (self *IFsiFileItem2) AddStream(name foundation.BSTR, streamData *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(streamData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveStream dispatches through IFsiFileItem2's vtable slot 27.
 func (self *IFsiFileItem2) RemoveStream(name foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsRealTime dispatches through IFsiFileItem2's vtable slot 28.
 func (self *IFsiFileItem2) Get_IsRealTime(pVal *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_IsRealTime dispatches through IFsiFileItem2's vtable slot 29.
 func (self *IFsiFileItem2) Put_IsRealTime(newVal foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(newVal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsiItem: https://learn.microsoft.com/windows/win32/api/imapi2fs/nn-imapi2fs-ifsiitem
@@ -2283,62 +2283,62 @@ var IID_IFsiItem = win32.GUID{Data1: 0x2c941fd9, Data2: 0x975b, Data3: 0x59be, D
 func (self *IFsiItem) Get_Name() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FullPath dispatches through IFsiItem's vtable slot 8.
 func (self *IFsiItem) Get_FullPath() (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CreationTime dispatches through IFsiItem's vtable slot 9.
 func (self *IFsiItem) Get_CreationTime() (float64, error) {
 	var _pVal float64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastAccessedTime dispatches through IFsiItem's vtable slot 11.
 func (self *IFsiItem) Get_LastAccessedTime() (float64, error) {
 	var _pVal float64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastModifiedTime dispatches through IFsiItem's vtable slot 13.
 func (self *IFsiItem) Get_LastModifiedTime() (float64, error) {
 	var _pVal float64
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsHidden dispatches through IFsiItem's vtable slot 15.
 func (self *IFsiItem) Get_IsHidden() (foundation.VARIANT_BOOL, error) {
 	var _pVal foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_IsHidden dispatches through IFsiItem's vtable slot 16.
 func (self *IFsiItem) Put_IsHidden(newVal foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(newVal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FileSystemName dispatches through IFsiItem's vtable slot 17.
 func (self *IFsiItem) FileSystemName(fileSystem FsiFileSystems) (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(fileSystem), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // FileSystemPath dispatches through IFsiItem's vtable slot 18.
 func (self *IFsiItem) FileSystemPath(fileSystem FsiFileSystems) (foundation.BSTR, error) {
 	var _pVal foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(fileSystem), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.HRESULTError(int32(r1))
+	return _pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IFsiNamedStreams: https://learn.microsoft.com/windows/win32/api/imapi2fs/nn-imapi2fs-ifsinamedstreams
@@ -2353,25 +2353,25 @@ var IID_IFsiNamedStreams = win32.GUID{Data1: 0xed79ba56, Data2: 0x5294, Data3: 0
 // Get__NewEnum dispatches through IFsiNamedStreams's vtable slot 7.
 func (self *IFsiNamedStreams) Get__NewEnum(NewEnum **systemole.IEnumVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(NewEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Item dispatches through IFsiNamedStreams's vtable slot 8.
 func (self *IFsiNamedStreams) Get_Item(index int32, item **IFsiFileItem2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(item)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IFsiNamedStreams's vtable slot 9.
 func (self *IFsiNamedStreams) Get_Count(count *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(count)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EnumNamedStreams dispatches through IFsiNamedStreams's vtable slot 10.
 func (self *IFsiNamedStreams) Get_EnumNamedStreams(NewEnum **IEnumFsiItems) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(NewEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IIsoImageManager: https://learn.microsoft.com/windows/win32/api/imapi2fs/nn-imapi2fs-iisoimagemanager
@@ -2386,32 +2386,32 @@ var IID_IIsoImageManager = win32.GUID{Data1: 0x6ca38be5, Data2: 0xfbbb, Data3: 0
 // Get_Path dispatches through IIsoImageManager's vtable slot 7.
 func (self *IIsoImageManager) Get_Path(pVal *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Stream dispatches through IIsoImageManager's vtable slot 8.
 func (self *IIsoImageManager) Get_Stream() (*systemcom.IStream, error) {
 	var _data *systemcom.IStream
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_data)))
-	return _data, win32.HRESULTError(int32(r1))
+	return _data, win32.ErrIfFailed(int32(r1))
 }
 
 // SetPath dispatches through IIsoImageManager's vtable slot 9.
 func (self *IIsoImageManager) SetPath(Val foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Val)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetStream dispatches through IIsoImageManager's vtable slot 10.
 func (self *IIsoImageManager) SetStream(data *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(data)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Validate dispatches through IIsoImageManager's vtable slot 11.
 func (self *IIsoImageManager) Validate() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IJolietDiscMaster: https://learn.microsoft.com/windows/win32/api/imapi/nn-imapi-ijolietdiscmaster
@@ -2426,37 +2426,37 @@ var IID_IJolietDiscMaster = win32.GUID{Data1: 0xe3bc42ce, Data2: 0x4e5c, Data3: 
 // GetTotalDataBlocks dispatches through IJolietDiscMaster's vtable slot 3.
 func (self *IJolietDiscMaster) GetTotalDataBlocks(pnBlocks *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnBlocks)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetUsedDataBlocks dispatches through IJolietDiscMaster's vtable slot 4.
 func (self *IJolietDiscMaster) GetUsedDataBlocks(pnBlocks *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnBlocks)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDataBlockSize dispatches through IJolietDiscMaster's vtable slot 5.
 func (self *IJolietDiscMaster) GetDataBlockSize(pnBlockBytes *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnBlockBytes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddData dispatches through IJolietDiscMaster's vtable slot 6.
 func (self *IJolietDiscMaster) AddData(pStorage *systemcomstructuredstorage.IStorage, lFileOverwrite int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStorage)), uintptr(lFileOverwrite))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetJolietProperties dispatches through IJolietDiscMaster's vtable slot 7.
 func (self *IJolietDiscMaster) GetJolietProperties(ppPropStg **systemcomstructuredstorage.IPropertyStorage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPropStg)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetJolietProperties dispatches through IJolietDiscMaster's vtable slot 8.
 func (self *IJolietDiscMaster) SetJolietProperties(pPropStg *systemcomstructuredstorage.IPropertyStorage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPropStg)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMultisession: https://learn.microsoft.com/windows/win32/api/imapi2/nn-imapi2-imultisession
@@ -2471,25 +2471,25 @@ var IID_IMultisession = win32.GUID{Data1: 0x27354150, Data2: 0x7f64, Data3: 0x5b
 // Get_IsSupportedOnCurrentMediaState dispatches through IMultisession's vtable slot 7.
 func (self *IMultisession) Get_IsSupportedOnCurrentMediaState(value *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_InUse dispatches through IMultisession's vtable slot 8.
 func (self *IMultisession) Put_InUse(value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InUse dispatches through IMultisession's vtable slot 9.
 func (self *IMultisession) Get_InUse(value *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ImportRecorder dispatches through IMultisession's vtable slot 10.
 func (self *IMultisession) Get_ImportRecorder(value **IDiscRecorder2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMultisessionRandomWrite: https://learn.microsoft.com/windows/win32/api/imapi2/nn-imapi2-imultisessionrandomwrite
@@ -2504,19 +2504,19 @@ var IID_IMultisessionRandomWrite = win32.GUID{Data1: 0xb507ca23, Data2: 0x2204, 
 // Get_WriteUnitSize dispatches through IMultisessionRandomWrite's vtable slot 11.
 func (self *IMultisessionRandomWrite) Get_WriteUnitSize(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastWrittenAddress dispatches through IMultisessionRandomWrite's vtable slot 12.
 func (self *IMultisessionRandomWrite) Get_LastWrittenAddress(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TotalSectorsOnMedia dispatches through IMultisessionRandomWrite's vtable slot 13.
 func (self *IMultisessionRandomWrite) Get_TotalSectorsOnMedia(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMultisessionSequential: https://learn.microsoft.com/windows/win32/api/imapi2/nn-imapi2-imultisessionsequential
@@ -2531,31 +2531,31 @@ var IID_IMultisessionSequential = win32.GUID{Data1: 0x27354151, Data2: 0x7f64, D
 // Get_IsFirstDataSession dispatches through IMultisessionSequential's vtable slot 11.
 func (self *IMultisessionSequential) Get_IsFirstDataSession(value *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StartAddressOfPreviousSession dispatches through IMultisessionSequential's vtable slot 12.
 func (self *IMultisessionSequential) Get_StartAddressOfPreviousSession(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastWrittenAddressOfPreviousSession dispatches through IMultisessionSequential's vtable slot 13.
 func (self *IMultisessionSequential) Get_LastWrittenAddressOfPreviousSession(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NextWritableAddress dispatches through IMultisessionSequential's vtable slot 14.
 func (self *IMultisessionSequential) Get_NextWritableAddress(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FreeSectorsOnMedia dispatches through IMultisessionSequential's vtable slot 15.
 func (self *IMultisessionSequential) Get_FreeSectorsOnMedia(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IMultisessionSequential2: https://learn.microsoft.com/windows/win32/api/imapi2/nn-imapi2-imultisessionsequential2
@@ -2570,7 +2570,7 @@ var IID_IMultisessionSequential2 = win32.GUID{Data1: 0xb507ca22, Data2: 0x2204, 
 // Get_WriteUnitSize dispatches through IMultisessionSequential2's vtable slot 16.
 func (self *IMultisessionSequential2) Get_WriteUnitSize(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IProgressItem: https://learn.microsoft.com/windows/win32/api/imapi2fs/nn-imapi2fs-iprogressitem
@@ -2586,28 +2586,28 @@ var IID_IProgressItem = win32.GUID{Data1: 0x2c941fd5, Data2: 0x975b, Data3: 0x59
 func (self *IProgressItem) Get_Description() (foundation.BSTR, error) {
 	var _desc foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_desc)))
-	return _desc, win32.HRESULTError(int32(r1))
+	return _desc, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FirstBlock dispatches through IProgressItem's vtable slot 8.
 func (self *IProgressItem) Get_FirstBlock() (uint32, error) {
 	var _block uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_block)))
-	return _block, win32.HRESULTError(int32(r1))
+	return _block, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastBlock dispatches through IProgressItem's vtable slot 9.
 func (self *IProgressItem) Get_LastBlock() (uint32, error) {
 	var _block uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_block)))
-	return _block, win32.HRESULTError(int32(r1))
+	return _block, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BlockCount dispatches through IProgressItem's vtable slot 10.
 func (self *IProgressItem) Get_BlockCount() (uint32, error) {
 	var _blocks uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_blocks)))
-	return _blocks, win32.HRESULTError(int32(r1))
+	return _blocks, win32.ErrIfFailed(int32(r1))
 }
 
 // IProgressItems: https://learn.microsoft.com/windows/win32/api/imapi2fs/nn-imapi2fs-iprogressitems
@@ -2623,42 +2623,42 @@ var IID_IProgressItems = win32.GUID{Data1: 0x2c941fd7, Data2: 0x975b, Data3: 0x5
 func (self *IProgressItems) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
 	var _NewEnum *systemole.IEnumVARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_NewEnum)))
-	return _NewEnum, win32.HRESULTError(int32(r1))
+	return _NewEnum, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Item dispatches through IProgressItems's vtable slot 8.
 func (self *IProgressItems) Get_Item(Index int32) (*IProgressItem, error) {
 	var _item *IProgressItem
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(&_item)))
-	return _item, win32.HRESULTError(int32(r1))
+	return _item, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IProgressItems's vtable slot 9.
 func (self *IProgressItems) Get_Count() (int32, error) {
 	var _Count int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Count)))
-	return _Count, win32.HRESULTError(int32(r1))
+	return _Count, win32.ErrIfFailed(int32(r1))
 }
 
 // ProgressItemFromBlock dispatches through IProgressItems's vtable slot 10.
 func (self *IProgressItems) ProgressItemFromBlock(block uint32) (*IProgressItem, error) {
 	var _item *IProgressItem
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(block), uintptr(unsafe.Pointer(&_item)))
-	return _item, win32.HRESULTError(int32(r1))
+	return _item, win32.ErrIfFailed(int32(r1))
 }
 
 // ProgressItemFromDescription dispatches through IProgressItems's vtable slot 11.
 func (self *IProgressItems) ProgressItemFromDescription(description foundation.BSTR) (*IProgressItem, error) {
 	var _item *IProgressItem
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(description)), uintptr(unsafe.Pointer(&_item)))
-	return _item, win32.HRESULTError(int32(r1))
+	return _item, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EnumProgressItems dispatches through IProgressItems's vtable slot 12.
 func (self *IProgressItems) Get_EnumProgressItems() (*IEnumProgressItems, error) {
 	var _NewEnum *IEnumProgressItems
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_NewEnum)))
-	return _NewEnum, win32.HRESULTError(int32(r1))
+	return _NewEnum, win32.ErrIfFailed(int32(r1))
 }
 
 // IRawCDImageCreator: https://learn.microsoft.com/windows/win32/api/imapi2/nn-imapi2-irawcdimagecreator
@@ -2674,116 +2674,116 @@ var IID_IRawCDImageCreator = win32.GUID{Data1: 0x25983550, Data2: 0x9d65, Data3:
 func (self *IRawCDImageCreator) CreateResultImage() (*systemcom.IStream, error) {
 	var _resultStream *systemcom.IStream
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_resultStream)))
-	return _resultStream, win32.HRESULTError(int32(r1))
+	return _resultStream, win32.ErrIfFailed(int32(r1))
 }
 
 // AddTrack dispatches through IRawCDImageCreator's vtable slot 8.
 func (self *IRawCDImageCreator) AddTrack(dataType IMAPI_CD_SECTOR_TYPE, data *systemcom.IStream) (int32, error) {
 	var _trackIndex int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dataType), uintptr(unsafe.Pointer(data)), uintptr(unsafe.Pointer(&_trackIndex)))
-	return _trackIndex, win32.HRESULTError(int32(r1))
+	return _trackIndex, win32.ErrIfFailed(int32(r1))
 }
 
 // AddSpecialPregap dispatches through IRawCDImageCreator's vtable slot 9.
 func (self *IRawCDImageCreator) AddSpecialPregap(data *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(data)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddSubcodeRWGenerator dispatches through IRawCDImageCreator's vtable slot 10.
 func (self *IRawCDImageCreator) AddSubcodeRWGenerator(subcode *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(subcode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ResultingImageType dispatches through IRawCDImageCreator's vtable slot 11.
 func (self *IRawCDImageCreator) Put_ResultingImageType(value IMAPI_FORMAT2_RAW_CD_DATA_SECTOR_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ResultingImageType dispatches through IRawCDImageCreator's vtable slot 12.
 func (self *IRawCDImageCreator) Get_ResultingImageType(value *IMAPI_FORMAT2_RAW_CD_DATA_SECTOR_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StartOfLeadout dispatches through IRawCDImageCreator's vtable slot 13.
 func (self *IRawCDImageCreator) Get_StartOfLeadout(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_StartOfLeadoutLimit dispatches through IRawCDImageCreator's vtable slot 14.
 func (self *IRawCDImageCreator) Put_StartOfLeadoutLimit(value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StartOfLeadoutLimit dispatches through IRawCDImageCreator's vtable slot 15.
 func (self *IRawCDImageCreator) Get_StartOfLeadoutLimit(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DisableGaplessAudio dispatches through IRawCDImageCreator's vtable slot 16.
 func (self *IRawCDImageCreator) Put_DisableGaplessAudio(value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DisableGaplessAudio dispatches through IRawCDImageCreator's vtable slot 17.
 func (self *IRawCDImageCreator) Get_DisableGaplessAudio(value *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MediaCatalogNumber dispatches through IRawCDImageCreator's vtable slot 18.
 func (self *IRawCDImageCreator) Put_MediaCatalogNumber(value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MediaCatalogNumber dispatches through IRawCDImageCreator's vtable slot 19.
 func (self *IRawCDImageCreator) Get_MediaCatalogNumber(value *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_StartingTrackNumber dispatches through IRawCDImageCreator's vtable slot 20.
 func (self *IRawCDImageCreator) Put_StartingTrackNumber(value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StartingTrackNumber dispatches through IRawCDImageCreator's vtable slot 21.
 func (self *IRawCDImageCreator) Get_StartingTrackNumber(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TrackInfo dispatches through IRawCDImageCreator's vtable slot 22.
 func (self *IRawCDImageCreator) Get_TrackInfo(trackIndex int32, value **IRawCDImageTrackInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(trackIndex), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NumberOfExistingTracks dispatches through IRawCDImageCreator's vtable slot 23.
 func (self *IRawCDImageCreator) Get_NumberOfExistingTracks(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastUsedUserSectorInImage dispatches through IRawCDImageCreator's vtable slot 24.
 func (self *IRawCDImageCreator) Get_LastUsedUserSectorInImage(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ExpectedTableOfContents dispatches through IRawCDImageCreator's vtable slot 25.
 func (self *IRawCDImageCreator) Get_ExpectedTableOfContents(value **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IRawCDImageTrackInfo: https://learn.microsoft.com/windows/win32/api/imapi2/nn-imapi2-irawcdimagetrackinfo
@@ -2798,79 +2798,79 @@ var IID_IRawCDImageTrackInfo = win32.GUID{Data1: 0x25983551, Data2: 0x9d65, Data
 // Get_StartingLba dispatches through IRawCDImageTrackInfo's vtable slot 7.
 func (self *IRawCDImageTrackInfo) Get_StartingLba(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SectorCount dispatches through IRawCDImageTrackInfo's vtable slot 8.
 func (self *IRawCDImageTrackInfo) Get_SectorCount(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TrackNumber dispatches through IRawCDImageTrackInfo's vtable slot 9.
 func (self *IRawCDImageTrackInfo) Get_TrackNumber(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SectorType dispatches through IRawCDImageTrackInfo's vtable slot 10.
 func (self *IRawCDImageTrackInfo) Get_SectorType(value *IMAPI_CD_SECTOR_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ISRC dispatches through IRawCDImageTrackInfo's vtable slot 11.
 func (self *IRawCDImageTrackInfo) Get_ISRC(value *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ISRC dispatches through IRawCDImageTrackInfo's vtable slot 12.
 func (self *IRawCDImageTrackInfo) Put_ISRC(value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DigitalAudioCopySetting dispatches through IRawCDImageTrackInfo's vtable slot 13.
 func (self *IRawCDImageTrackInfo) Get_DigitalAudioCopySetting(value *IMAPI_CD_TRACK_DIGITAL_COPY_SETTING) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DigitalAudioCopySetting dispatches through IRawCDImageTrackInfo's vtable slot 14.
 func (self *IRawCDImageTrackInfo) Put_DigitalAudioCopySetting(value IMAPI_CD_TRACK_DIGITAL_COPY_SETTING) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AudioHasPreemphasis dispatches through IRawCDImageTrackInfo's vtable slot 15.
 func (self *IRawCDImageTrackInfo) Get_AudioHasPreemphasis(value *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AudioHasPreemphasis dispatches through IRawCDImageTrackInfo's vtable slot 16.
 func (self *IRawCDImageTrackInfo) Put_AudioHasPreemphasis(value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TrackIndexes dispatches through IRawCDImageTrackInfo's vtable slot 17.
 func (self *IRawCDImageTrackInfo) Get_TrackIndexes(value **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddTrackIndex dispatches through IRawCDImageTrackInfo's vtable slot 18.
 func (self *IRawCDImageTrackInfo) AddTrackIndex(lbaOffset int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(lbaOffset))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ClearTrackIndex dispatches through IRawCDImageTrackInfo's vtable slot 19.
 func (self *IRawCDImageTrackInfo) ClearTrackIndex(lbaOffset int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(lbaOffset))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IRedbookDiscMaster: https://learn.microsoft.com/windows/win32/api/imapi/nn-imapi-iredbookdiscmaster
@@ -2885,37 +2885,37 @@ var IID_IRedbookDiscMaster = win32.GUID{Data1: 0xe3bc42cd, Data2: 0x4e5c, Data3:
 // GetTotalAudioTracks dispatches through IRedbookDiscMaster's vtable slot 3.
 func (self *IRedbookDiscMaster) GetTotalAudioTracks(pnTracks *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnTracks)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTotalAudioBlocks dispatches through IRedbookDiscMaster's vtable slot 4.
 func (self *IRedbookDiscMaster) GetTotalAudioBlocks(pnBlocks *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnBlocks)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetUsedAudioBlocks dispatches through IRedbookDiscMaster's vtable slot 5.
 func (self *IRedbookDiscMaster) GetUsedAudioBlocks(pnBlocks *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnBlocks)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAvailableAudioTrackBlocks dispatches through IRedbookDiscMaster's vtable slot 6.
 func (self *IRedbookDiscMaster) GetAvailableAudioTrackBlocks(pnBlocks *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnBlocks)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAudioBlockSize dispatches through IRedbookDiscMaster's vtable slot 7.
 func (self *IRedbookDiscMaster) GetAudioBlockSize(pnBlockBytes *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnBlockBytes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateAudioTrack dispatches through IRedbookDiscMaster's vtable slot 8.
 func (self *IRedbookDiscMaster) CreateAudioTrack(nBlocks int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(nBlocks))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddAudioTrackBlocks dispatches through IRedbookDiscMaster's vtable slot 9.
@@ -2925,13 +2925,13 @@ func (self *IRedbookDiscMaster) AddAudioTrackBlocks(pby []byte) error {
 		_pby = &pby[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pby)), uintptr(len(pby)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CloseAudioTrack dispatches through IRedbookDiscMaster's vtable slot 10.
 func (self *IRedbookDiscMaster) CloseAudioTrack() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IStreamConcatenate: https://learn.microsoft.com/windows/win32/api/imapi2/nn-imapi2-istreamconcatenate
@@ -2946,7 +2946,7 @@ var IID_IStreamConcatenate = win32.GUID{Data1: 0x27354146, Data2: 0x7f64, Data3:
 // Initialize dispatches through IStreamConcatenate's vtable slot 14.
 func (self *IStreamConcatenate) Initialize(stream1 *systemcom.IStream, stream2 *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(stream1)), uintptr(unsafe.Pointer(stream2)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Initialize2 dispatches through IStreamConcatenate's vtable slot 15.
@@ -2956,13 +2956,13 @@ func (self *IStreamConcatenate) Initialize2(streams []*systemcom.IStream) error 
 		_streams = &streams[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_streams)), uintptr(len(streams)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Append dispatches through IStreamConcatenate's vtable slot 16.
 func (self *IStreamConcatenate) Append(stream *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(stream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Append2 dispatches through IStreamConcatenate's vtable slot 17.
@@ -2972,7 +2972,7 @@ func (self *IStreamConcatenate) Append2(streams []*systemcom.IStream) error {
 		_streams = &streams[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_streams)), uintptr(len(streams)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IStreamInterleave: https://learn.microsoft.com/windows/win32/api/imapi2/nn-imapi2-istreaminterleave
@@ -2987,7 +2987,7 @@ var IID_IStreamInterleave = win32.GUID{Data1: 0x27354147, Data2: 0x7f64, Data3: 
 // Initialize dispatches through IStreamInterleave's vtable slot 14.
 func (self *IStreamInterleave) Initialize(streams **systemcom.IStream, interleaveSizes *uint32, streamCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(streams)), uintptr(unsafe.Pointer(interleaveSizes)), uintptr(streamCount))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IStreamPseudoRandomBased: https://learn.microsoft.com/windows/win32/api/imapi2/nn-imapi2-istreampseudorandombased
@@ -3002,13 +3002,13 @@ var IID_IStreamPseudoRandomBased = win32.GUID{Data1: 0x27354145, Data2: 0x7f64, 
 // Put_Seed dispatches through IStreamPseudoRandomBased's vtable slot 14.
 func (self *IStreamPseudoRandomBased) Put_Seed(value uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Seed dispatches through IStreamPseudoRandomBased's vtable slot 15.
 func (self *IStreamPseudoRandomBased) Get_Seed(value *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ExtendedSeed dispatches through IStreamPseudoRandomBased's vtable slot 16.
@@ -3018,13 +3018,13 @@ func (self *IStreamPseudoRandomBased) Put_ExtendedSeed(values []uint32) error {
 		_values = &values[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_values)), uintptr(len(values)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ExtendedSeed dispatches through IStreamPseudoRandomBased's vtable slot 17.
 func (self *IStreamPseudoRandomBased) Get_ExtendedSeed(values **uint32, eCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(values)), uintptr(unsafe.Pointer(eCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWriteEngine2: https://learn.microsoft.com/windows/win32/api/imapi2/nn-imapi2-iwriteengine2
@@ -3039,79 +3039,79 @@ var IID_IWriteEngine2 = win32.GUID{Data1: 0x27354135, Data2: 0x7f64, Data3: 0x5b
 // WriteSection dispatches through IWriteEngine2's vtable slot 7.
 func (self *IWriteEngine2) WriteSection(data *systemcom.IStream, startingBlockAddress int32, numberOfBlocks int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(data)), uintptr(startingBlockAddress), uintptr(numberOfBlocks))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CancelWrite dispatches through IWriteEngine2's vtable slot 8.
 func (self *IWriteEngine2) CancelWrite() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Recorder dispatches through IWriteEngine2's vtable slot 9.
 func (self *IWriteEngine2) Put_Recorder(value *IDiscRecorder2Ex) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Recorder dispatches through IWriteEngine2's vtable slot 10.
 func (self *IWriteEngine2) Get_Recorder(value **IDiscRecorder2Ex) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_UseStreamingWrite12 dispatches through IWriteEngine2's vtable slot 11.
 func (self *IWriteEngine2) Put_UseStreamingWrite12(value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UseStreamingWrite12 dispatches through IWriteEngine2's vtable slot 12.
 func (self *IWriteEngine2) Get_UseStreamingWrite12(value *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_StartingSectorsPerSecond dispatches through IWriteEngine2's vtable slot 13.
 func (self *IWriteEngine2) Put_StartingSectorsPerSecond(value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StartingSectorsPerSecond dispatches through IWriteEngine2's vtable slot 14.
 func (self *IWriteEngine2) Get_StartingSectorsPerSecond(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EndingSectorsPerSecond dispatches through IWriteEngine2's vtable slot 15.
 func (self *IWriteEngine2) Put_EndingSectorsPerSecond(value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EndingSectorsPerSecond dispatches through IWriteEngine2's vtable slot 16.
 func (self *IWriteEngine2) Get_EndingSectorsPerSecond(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BytesPerSector dispatches through IWriteEngine2's vtable slot 17.
 func (self *IWriteEngine2) Put_BytesPerSector(value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BytesPerSector dispatches through IWriteEngine2's vtable slot 18.
 func (self *IWriteEngine2) Get_BytesPerSector(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_WriteInProgress dispatches through IWriteEngine2's vtable slot 19.
 func (self *IWriteEngine2) Get_WriteInProgress(value *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWriteEngine2EventArgs: https://learn.microsoft.com/windows/win32/api/imapi2/nn-imapi2-iwriteengine2eventargs
@@ -3126,43 +3126,43 @@ var IID_IWriteEngine2EventArgs = win32.GUID{Data1: 0x27354136, Data2: 0x7f64, Da
 // Get_StartLba dispatches through IWriteEngine2EventArgs's vtable slot 7.
 func (self *IWriteEngine2EventArgs) Get_StartLba(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SectorCount dispatches through IWriteEngine2EventArgs's vtable slot 8.
 func (self *IWriteEngine2EventArgs) Get_SectorCount(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastReadLba dispatches through IWriteEngine2EventArgs's vtable slot 9.
 func (self *IWriteEngine2EventArgs) Get_LastReadLba(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastWrittenLba dispatches through IWriteEngine2EventArgs's vtable slot 10.
 func (self *IWriteEngine2EventArgs) Get_LastWrittenLba(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TotalSystemBuffer dispatches through IWriteEngine2EventArgs's vtable slot 11.
 func (self *IWriteEngine2EventArgs) Get_TotalSystemBuffer(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UsedSystemBuffer dispatches through IWriteEngine2EventArgs's vtable slot 12.
 func (self *IWriteEngine2EventArgs) Get_UsedSystemBuffer(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FreeSystemBuffer dispatches through IWriteEngine2EventArgs's vtable slot 13.
 func (self *IWriteEngine2EventArgs) Get_FreeSystemBuffer(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWriteSpeedDescriptor: https://learn.microsoft.com/windows/win32/api/imapi2/nn-imapi2-iwritespeeddescriptor
@@ -3177,17 +3177,17 @@ var IID_IWriteSpeedDescriptor = win32.GUID{Data1: 0x27354144, Data2: 0x7f64, Dat
 // Get_MediaType dispatches through IWriteSpeedDescriptor's vtable slot 7.
 func (self *IWriteSpeedDescriptor) Get_MediaType(value *IMAPI_MEDIA_PHYSICAL_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RotationTypeIsPureCAV dispatches through IWriteSpeedDescriptor's vtable slot 8.
 func (self *IWriteSpeedDescriptor) Get_RotationTypeIsPureCAV(value *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_WriteSpeed dispatches through IWriteSpeedDescriptor's vtable slot 9.
 func (self *IWriteSpeedDescriptor) Get_WriteSpeed(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

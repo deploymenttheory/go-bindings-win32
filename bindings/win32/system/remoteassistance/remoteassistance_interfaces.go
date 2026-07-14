@@ -34,7 +34,7 @@ var IID_IRendezvousApplication = win32.GUID{Data1: 0x4f4d070b, Data2: 0xa275, Da
 // SetRendezvousSession dispatches through IRendezvousApplication's vtable slot 3.
 func (self *IRendezvousApplication) SetRendezvousSession(pRendezvousSession *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRendezvousSession)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IRendezvousSession: https://learn.microsoft.com/windows/win32/api/rendezvoussession/nn-rendezvoussession-irendezvoussession
@@ -49,29 +49,29 @@ var IID_IRendezvousSession = win32.GUID{Data1: 0x9ba4b1dd, Data2: 0x8b0c, Data3:
 // Get_State dispatches through IRendezvousSession's vtable slot 3.
 func (self *IRendezvousSession) Get_State(pSessionState *RENDEZVOUS_SESSION_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSessionState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RemoteUser dispatches through IRendezvousSession's vtable slot 4.
 func (self *IRendezvousSession) Get_RemoteUser(bstrUserName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUserName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Flags dispatches through IRendezvousSession's vtable slot 5.
 func (self *IRendezvousSession) Get_Flags(pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendContextData dispatches through IRendezvousSession's vtable slot 6.
 func (self *IRendezvousSession) SendContextData(bstrData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Terminate dispatches through IRendezvousSession's vtable slot 7.
 func (self *IRendezvousSession) Terminate(hr foundation.HRESULT, bstrAppData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hr), uintptr(unsafe.Pointer(bstrAppData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

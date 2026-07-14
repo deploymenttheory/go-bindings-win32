@@ -30,5 +30,5 @@ func (self *IDDEInitializer) Initialize(fileExtensionOrProtocol string, method C
 	_arguments := win32.UTF16Ptr(arguments)
 	_verb := win32.UTF16Ptr(verb)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fileExtensionOrProtocol)), uintptr(method), uintptr(unsafe.Pointer(_currentDirectory)), uintptr(unsafe.Pointer(execTarget)), uintptr(unsafe.Pointer(site)), uintptr(unsafe.Pointer(_application)), uintptr(unsafe.Pointer(_targetFile)), uintptr(unsafe.Pointer(_arguments)), uintptr(unsafe.Pointer(_verb)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

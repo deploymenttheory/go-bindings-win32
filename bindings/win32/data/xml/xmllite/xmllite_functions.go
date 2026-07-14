@@ -28,7 +28,7 @@ var (
 // CreateXmlReader calls XmlLite!CreateXmlReader.
 func CreateXmlReader(riid *win32.GUID, ppvObject **win32.IUnknown, pMalloc *systemcom.IMalloc) error {
 	r1, _, _ := syscall.SyscallN(procCreateXmlReader.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)), uintptr(unsafe.Pointer(pMalloc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateXmlReaderInputWithEncodingCodePage calls XmlLite!CreateXmlReaderInputWithEncodingCodePage.
@@ -36,7 +36,7 @@ func CreateXmlReaderInputWithEncodingCodePage(pInputStream *systemcom.IUnknown, 
 	_fEncodingHint := win32.Bool32(fEncodingHint)
 	_pwszBaseUri := win32.UTF16Ptr(pwszBaseUri)
 	r1, _, _ := syscall.SyscallN(procCreateXmlReaderInputWithEncodingCodePage.Addr(), uintptr(unsafe.Pointer(pInputStream)), uintptr(unsafe.Pointer(pMalloc)), uintptr(nEncodingCodePage), uintptr(_fEncodingHint), uintptr(unsafe.Pointer(_pwszBaseUri)), uintptr(unsafe.Pointer(ppInput)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateXmlReaderInputWithEncodingName calls XmlLite!CreateXmlReaderInputWithEncodingName.
@@ -45,24 +45,24 @@ func CreateXmlReaderInputWithEncodingName(pInputStream *systemcom.IUnknown, pMal
 	_fEncodingHint := win32.Bool32(fEncodingHint)
 	_pwszBaseUri := win32.UTF16Ptr(pwszBaseUri)
 	r1, _, _ := syscall.SyscallN(procCreateXmlReaderInputWithEncodingName.Addr(), uintptr(unsafe.Pointer(pInputStream)), uintptr(unsafe.Pointer(pMalloc)), uintptr(unsafe.Pointer(_pwszEncodingName)), uintptr(_fEncodingHint), uintptr(unsafe.Pointer(_pwszBaseUri)), uintptr(unsafe.Pointer(ppInput)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateXmlWriter calls XmlLite!CreateXmlWriter.
 func CreateXmlWriter(riid *win32.GUID, ppvObject **win32.IUnknown, pMalloc *systemcom.IMalloc) error {
 	r1, _, _ := syscall.SyscallN(procCreateXmlWriter.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)), uintptr(unsafe.Pointer(pMalloc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateXmlWriterOutputWithEncodingCodePage calls XmlLite!CreateXmlWriterOutputWithEncodingCodePage.
 func CreateXmlWriterOutputWithEncodingCodePage(pOutputStream *systemcom.IUnknown, pMalloc *systemcom.IMalloc, nEncodingCodePage uint32, ppOutput **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCreateXmlWriterOutputWithEncodingCodePage.Addr(), uintptr(unsafe.Pointer(pOutputStream)), uintptr(unsafe.Pointer(pMalloc)), uintptr(nEncodingCodePage), uintptr(unsafe.Pointer(ppOutput)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateXmlWriterOutputWithEncodingName calls XmlLite!CreateXmlWriterOutputWithEncodingName.
 func CreateXmlWriterOutputWithEncodingName(pOutputStream *systemcom.IUnknown, pMalloc *systemcom.IMalloc, pwszEncodingName string, ppOutput **systemcom.IUnknown) error {
 	_pwszEncodingName := win32.UTF16Ptr(pwszEncodingName)
 	r1, _, _ := syscall.SyscallN(procCreateXmlWriterOutputWithEncodingName.Addr(), uintptr(unsafe.Pointer(pOutputStream)), uintptr(unsafe.Pointer(pMalloc)), uintptr(unsafe.Pointer(_pwszEncodingName)), uintptr(unsafe.Pointer(ppOutput)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

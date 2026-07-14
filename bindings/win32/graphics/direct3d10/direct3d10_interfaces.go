@@ -42,7 +42,7 @@ func (self *ID3D10Asynchronous) GetData(pData []byte, GetDataFlags uint32) error
 		_pData = &pData[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(GetDataFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDataSize dispatches through ID3D10Asynchronous's vtable slot 10.
@@ -91,7 +91,7 @@ var IID_ID3D10Buffer = win32.GUID{Data1: 0x9b7e4c02, Data2: 0x342c, Data3: 0x410
 // Map dispatches through ID3D10Buffer's vtable slot 10.
 func (self *ID3D10Buffer) Map(MapType D3D10_MAP, MapFlags uint32, ppData *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(MapType), uintptr(MapFlags), uintptr(unsafe.Pointer(ppData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Unmap dispatches through ID3D10Buffer's vtable slot 11.
@@ -130,7 +130,7 @@ var IID_ID3D10Debug = win32.GUID{Data1: 0x9b7e4e01, Data2: 0x342c, Data3: 0x4106
 // SetFeatureMask dispatches through ID3D10Debug's vtable slot 3.
 func (self *ID3D10Debug) SetFeatureMask(Mask uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Mask))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFeatureMask dispatches through ID3D10Debug's vtable slot 4.
@@ -142,7 +142,7 @@ func (self *ID3D10Debug) GetFeatureMask() uint32 {
 // SetPresentPerRenderOpDelay dispatches through ID3D10Debug's vtable slot 5.
 func (self *ID3D10Debug) SetPresentPerRenderOpDelay(Milliseconds uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Milliseconds))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPresentPerRenderOpDelay dispatches through ID3D10Debug's vtable slot 6.
@@ -154,19 +154,19 @@ func (self *ID3D10Debug) GetPresentPerRenderOpDelay() uint32 {
 // SetSwapChain dispatches through ID3D10Debug's vtable slot 7.
 func (self *ID3D10Debug) SetSwapChain(pSwapChain *graphicsdxgi.IDXGISwapChain) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSwapChain)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSwapChain dispatches through ID3D10Debug's vtable slot 8.
 func (self *ID3D10Debug) GetSwapChain(ppSwapChain **graphicsdxgi.IDXGISwapChain) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSwapChain)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Validate dispatches through ID3D10Debug's vtable slot 9.
 func (self *ID3D10Debug) Validate() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ID3D10DepthStencilState: https://learn.microsoft.com/windows/win32/api/d3d10/nn-d3d10-id3d10depthstencilstate
@@ -593,13 +593,13 @@ func (self *ID3D10Device) RSGetScissorRects(NumRects *uint32, pRects *foundation
 // GetDeviceRemovedReason dispatches through ID3D10Device's vtable slot 63.
 func (self *ID3D10Device) GetDeviceRemovedReason() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetExceptionMode dispatches through ID3D10Device's vtable slot 64.
 func (self *ID3D10Device) SetExceptionMode(RaiseFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(RaiseFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetExceptionMode dispatches through ID3D10Device's vtable slot 65.
@@ -611,7 +611,7 @@ func (self *ID3D10Device) GetExceptionMode() uint32 {
 // GetPrivateData dispatches through ID3D10Device's vtable slot 66.
 func (self *ID3D10Device) GetPrivateData(guid *win32.GUID, pDataSize *uint32, pData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guid)), uintptr(unsafe.Pointer(pDataSize)), uintptr(unsafe.Pointer(pData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetPrivateData dispatches through ID3D10Device's vtable slot 67.
@@ -621,13 +621,13 @@ func (self *ID3D10Device) SetPrivateData(guid *win32.GUID, pData []byte) error {
 		_pData = &pData[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guid)), uintptr(len(pData)), uintptr(unsafe.Pointer(_pData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetPrivateDataInterface dispatches through ID3D10Device's vtable slot 68.
 func (self *ID3D10Device) SetPrivateDataInterface(guid *win32.GUID, pData *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guid)), uintptr(unsafe.Pointer(pData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ClearState dispatches through ID3D10Device's vtable slot 69.
@@ -643,43 +643,43 @@ func (self *ID3D10Device) Flush() {
 // CreateBuffer dispatches through ID3D10Device's vtable slot 71.
 func (self *ID3D10Device) CreateBuffer(pDesc *D3D10_BUFFER_DESC, pInitialData *D3D10_SUBRESOURCE_DATA, ppBuffer **ID3D10Buffer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(pInitialData)), uintptr(unsafe.Pointer(ppBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateTexture1D dispatches through ID3D10Device's vtable slot 72.
 func (self *ID3D10Device) CreateTexture1D(pDesc *D3D10_TEXTURE1D_DESC, pInitialData *D3D10_SUBRESOURCE_DATA, ppTexture1D **ID3D10Texture1D) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[72], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(pInitialData)), uintptr(unsafe.Pointer(ppTexture1D)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateTexture2D dispatches through ID3D10Device's vtable slot 73.
 func (self *ID3D10Device) CreateTexture2D(pDesc *D3D10_TEXTURE2D_DESC, pInitialData *D3D10_SUBRESOURCE_DATA, ppTexture2D **ID3D10Texture2D) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(pInitialData)), uintptr(unsafe.Pointer(ppTexture2D)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateTexture3D dispatches through ID3D10Device's vtable slot 74.
 func (self *ID3D10Device) CreateTexture3D(pDesc *D3D10_TEXTURE3D_DESC, pInitialData *D3D10_SUBRESOURCE_DATA, ppTexture3D **ID3D10Texture3D) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[74], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(pInitialData)), uintptr(unsafe.Pointer(ppTexture3D)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateShaderResourceView dispatches through ID3D10Device's vtable slot 75.
 func (self *ID3D10Device) CreateShaderResourceView(pResource *ID3D10Resource, pDesc *D3D10_SHADER_RESOURCE_VIEW_DESC, ppSRView **ID3D10ShaderResourceView) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[75], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResource)), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(ppSRView)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateRenderTargetView dispatches through ID3D10Device's vtable slot 76.
 func (self *ID3D10Device) CreateRenderTargetView(pResource *ID3D10Resource, pDesc *D3D10_RENDER_TARGET_VIEW_DESC, ppRTView **ID3D10RenderTargetView) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[76], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResource)), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(ppRTView)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateDepthStencilView dispatches through ID3D10Device's vtable slot 77.
 func (self *ID3D10Device) CreateDepthStencilView(pResource *ID3D10Resource, pDesc *D3D10_DEPTH_STENCIL_VIEW_DESC, ppDepthStencilView **ID3D10DepthStencilView) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[77], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResource)), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(ppDepthStencilView)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateInputLayout dispatches through ID3D10Device's vtable slot 78.
@@ -689,19 +689,19 @@ func (self *ID3D10Device) CreateInputLayout(pInputElementDescs []D3D10_INPUT_ELE
 		_pInputElementDescs = &pInputElementDescs[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pInputElementDescs)), uintptr(len(pInputElementDescs)), uintptr(unsafe.Pointer(pShaderBytecodeWithInputSignature)), uintptr(BytecodeLength), uintptr(unsafe.Pointer(ppInputLayout)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateVertexShader dispatches through ID3D10Device's vtable slot 79.
 func (self *ID3D10Device) CreateVertexShader(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, ppVertexShader **ID3D10VertexShader) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[79], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pShaderBytecode)), uintptr(BytecodeLength), uintptr(unsafe.Pointer(ppVertexShader)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateGeometryShader dispatches through ID3D10Device's vtable slot 80.
 func (self *ID3D10Device) CreateGeometryShader(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, ppGeometryShader **ID3D10GeometryShader) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[80], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pShaderBytecode)), uintptr(BytecodeLength), uintptr(unsafe.Pointer(ppGeometryShader)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateGeometryShaderWithStreamOutput dispatches through ID3D10Device's vtable slot 81.
@@ -711,67 +711,67 @@ func (self *ID3D10Device) CreateGeometryShaderWithStreamOutput(pShaderBytecode u
 		_pSODeclaration = &pSODeclaration[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pShaderBytecode)), uintptr(BytecodeLength), uintptr(unsafe.Pointer(_pSODeclaration)), uintptr(len(pSODeclaration)), uintptr(OutputStreamStride), uintptr(unsafe.Pointer(ppGeometryShader)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePixelShader dispatches through ID3D10Device's vtable slot 82.
 func (self *ID3D10Device) CreatePixelShader(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, ppPixelShader **ID3D10PixelShader) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pShaderBytecode)), uintptr(BytecodeLength), uintptr(unsafe.Pointer(ppPixelShader)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateBlendState dispatches through ID3D10Device's vtable slot 83.
 func (self *ID3D10Device) CreateBlendState(pBlendStateDesc *D3D10_BLEND_DESC, ppBlendState **ID3D10BlendState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBlendStateDesc)), uintptr(unsafe.Pointer(ppBlendState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateDepthStencilState dispatches through ID3D10Device's vtable slot 84.
 func (self *ID3D10Device) CreateDepthStencilState(pDepthStencilDesc *D3D10_DEPTH_STENCIL_DESC, ppDepthStencilState **ID3D10DepthStencilState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDepthStencilDesc)), uintptr(unsafe.Pointer(ppDepthStencilState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateRasterizerState dispatches through ID3D10Device's vtable slot 85.
 func (self *ID3D10Device) CreateRasterizerState(pRasterizerDesc *D3D10_RASTERIZER_DESC, ppRasterizerState **ID3D10RasterizerState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRasterizerDesc)), uintptr(unsafe.Pointer(ppRasterizerState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSamplerState dispatches through ID3D10Device's vtable slot 86.
 func (self *ID3D10Device) CreateSamplerState(pSamplerDesc *D3D10_SAMPLER_DESC, ppSamplerState **ID3D10SamplerState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSamplerDesc)), uintptr(unsafe.Pointer(ppSamplerState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateQuery dispatches through ID3D10Device's vtable slot 87.
 func (self *ID3D10Device) CreateQuery(pQueryDesc *D3D10_QUERY_DESC, ppQuery **ID3D10Query) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[87], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pQueryDesc)), uintptr(unsafe.Pointer(ppQuery)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePredicate dispatches through ID3D10Device's vtable slot 88.
 func (self *ID3D10Device) CreatePredicate(pPredicateDesc *D3D10_QUERY_DESC, ppPredicate **ID3D10Predicate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[88], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPredicateDesc)), uintptr(unsafe.Pointer(ppPredicate)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateCounter dispatches through ID3D10Device's vtable slot 89.
 func (self *ID3D10Device) CreateCounter(pCounterDesc *D3D10_COUNTER_DESC, ppCounter **ID3D10Counter) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[89], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCounterDesc)), uintptr(unsafe.Pointer(ppCounter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CheckFormatSupport dispatches through ID3D10Device's vtable slot 90.
 func (self *ID3D10Device) CheckFormatSupport(Format graphicsdxgicommon.DXGI_FORMAT, pFormatSupport *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)), uintptr(Format), uintptr(unsafe.Pointer(pFormatSupport)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CheckMultisampleQualityLevels dispatches through ID3D10Device's vtable slot 91.
 func (self *ID3D10Device) CheckMultisampleQualityLevels(Format graphicsdxgicommon.DXGI_FORMAT, SampleCount uint32, pNumQualityLevels *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[91], uintptr(unsafe.Pointer(self)), uintptr(Format), uintptr(SampleCount), uintptr(unsafe.Pointer(pNumQualityLevels)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CheckCounterInfo dispatches through ID3D10Device's vtable slot 92.
@@ -782,7 +782,7 @@ func (self *ID3D10Device) CheckCounterInfo(pCounterInfo *D3D10_COUNTER_INFO) {
 // CheckCounter dispatches through ID3D10Device's vtable slot 93.
 func (self *ID3D10Device) CheckCounter(pDesc *D3D10_COUNTER_DESC, pType *D3D10_COUNTER_TYPE, pActiveCounters *uint32, szName foundation.PSTR, pNameLength *uint32, szUnits foundation.PSTR, pUnitsLength *uint32, szDescription foundation.PSTR, pDescriptionLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[93], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(pActiveCounters)), uintptr(unsafe.Pointer(szName)), uintptr(unsafe.Pointer(pNameLength)), uintptr(unsafe.Pointer(szUnits)), uintptr(unsafe.Pointer(pUnitsLength)), uintptr(unsafe.Pointer(szDescription)), uintptr(unsafe.Pointer(pDescriptionLength)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCreationFlags dispatches through ID3D10Device's vtable slot 94.
@@ -794,7 +794,7 @@ func (self *ID3D10Device) GetCreationFlags() uint32 {
 // OpenSharedResource dispatches through ID3D10Device's vtable slot 95.
 func (self *ID3D10Device) OpenSharedResource(hResource foundation.HANDLE, ReturnedInterface *win32.GUID, ppResource *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[95], uintptr(unsafe.Pointer(self)), uintptr(hResource), uintptr(unsafe.Pointer(ReturnedInterface)), uintptr(unsafe.Pointer(ppResource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTextFilterSize dispatches through ID3D10Device's vtable slot 96.
@@ -819,13 +819,13 @@ var IID_ID3D10Device1 = win32.GUID{Data1: 0x9b7e4c8f, Data2: 0x342c, Data3: 0x41
 // CreateShaderResourceView1 dispatches through ID3D10Device1's vtable slot 98.
 func (self *ID3D10Device1) CreateShaderResourceView1(pResource *ID3D10Resource, pDesc *D3D10_SHADER_RESOURCE_VIEW_DESC1, ppSRView **ID3D10ShaderResourceView1) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[98], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResource)), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(ppSRView)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateBlendState1 dispatches through ID3D10Device1's vtable slot 99.
 func (self *ID3D10Device1) CreateBlendState1(pBlendStateDesc *D3D10_BLEND_DESC1, ppBlendState **ID3D10BlendState1) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[99], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBlendStateDesc)), uintptr(unsafe.Pointer(ppBlendState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFeatureLevel dispatches through ID3D10Device1's vtable slot 100.
@@ -851,7 +851,7 @@ func (self *ID3D10DeviceChild) GetDevice(ppDevice **ID3D10Device) {
 // GetPrivateData dispatches through ID3D10DeviceChild's vtable slot 4.
 func (self *ID3D10DeviceChild) GetPrivateData(guid *win32.GUID, pDataSize *uint32, pData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guid)), uintptr(unsafe.Pointer(pDataSize)), uintptr(unsafe.Pointer(pData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetPrivateData dispatches through ID3D10DeviceChild's vtable slot 5.
@@ -861,13 +861,13 @@ func (self *ID3D10DeviceChild) SetPrivateData(guid *win32.GUID, pData []byte) er
 		_pData = &pData[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guid)), uintptr(len(pData)), uintptr(unsafe.Pointer(_pData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetPrivateDataInterface dispatches through ID3D10DeviceChild's vtable slot 6.
 func (self *ID3D10DeviceChild) SetPrivateDataInterface(guid *win32.GUID, pData *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guid)), uintptr(unsafe.Pointer(pData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ID3D10Effect: https://learn.microsoft.com/windows/win32/api/d3d10effect/nn-d3d10effect-id3d10effect
@@ -894,13 +894,13 @@ func (self *ID3D10Effect) IsPool() foundation.BOOL {
 // GetDevice dispatches through ID3D10Effect's vtable slot 5.
 func (self *ID3D10Effect) GetDevice(ppDevice **ID3D10Device) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDevice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDesc dispatches through ID3D10Effect's vtable slot 6.
 func (self *ID3D10Effect) GetDesc(pDesc *D3D10_EFFECT_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetConstantBufferByIndex dispatches through ID3D10Effect's vtable slot 7.
@@ -948,7 +948,7 @@ func (self *ID3D10Effect) GetTechniqueByName(Name foundation.PSTR) *ID3D10Effect
 // Optimize dispatches through ID3D10Effect's vtable slot 14.
 func (self *ID3D10Effect) Optimize() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsOptimized dispatches through ID3D10Effect's vtable slot 15.
@@ -969,13 +969,13 @@ var IID_ID3D10EffectBlendVariable = win32.GUID{Data1: 0x1fcd2294, Data2: 0xdf6d,
 // GetBlendState dispatches through ID3D10EffectBlendVariable's vtable slot 25.
 func (self *ID3D10EffectBlendVariable) GetBlendState(Index uint32, ppBlendState **ID3D10BlendState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(ppBlendState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBackingStore dispatches through ID3D10EffectBlendVariable's vtable slot 26.
 func (self *ID3D10EffectBlendVariable) GetBackingStore(Index uint32, pBlendDesc *D3D10_BLEND_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pBlendDesc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ID3D10EffectConstantBuffer: https://learn.microsoft.com/windows/win32/api/d3d10effect/nn-d3d10effect-id3d10effectconstantbuffer
@@ -990,25 +990,25 @@ var IID_ID3D10EffectConstantBuffer = win32.GUID{Data1: 0x56648f4d, Data2: 0xcc8b
 // SetConstantBuffer dispatches through ID3D10EffectConstantBuffer's vtable slot 25.
 func (self *ID3D10EffectConstantBuffer) SetConstantBuffer(pConstantBuffer *ID3D10Buffer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pConstantBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetConstantBuffer dispatches through ID3D10EffectConstantBuffer's vtable slot 26.
 func (self *ID3D10EffectConstantBuffer) GetConstantBuffer(ppConstantBuffer **ID3D10Buffer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppConstantBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTextureBuffer dispatches through ID3D10EffectConstantBuffer's vtable slot 27.
 func (self *ID3D10EffectConstantBuffer) SetTextureBuffer(pTextureBuffer *ID3D10ShaderResourceView) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTextureBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTextureBuffer dispatches through ID3D10EffectConstantBuffer's vtable slot 28.
 func (self *ID3D10EffectConstantBuffer) GetTextureBuffer(ppTextureBuffer **ID3D10ShaderResourceView) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTextureBuffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ID3D10EffectDepthStencilVariable: https://learn.microsoft.com/windows/win32/api/d3d10effect/nn-d3d10effect-id3d10effectdepthstencilvariable
@@ -1023,13 +1023,13 @@ var IID_ID3D10EffectDepthStencilVariable = win32.GUID{Data1: 0xaf482368, Data2: 
 // GetDepthStencilState dispatches through ID3D10EffectDepthStencilVariable's vtable slot 25.
 func (self *ID3D10EffectDepthStencilVariable) GetDepthStencilState(Index uint32, ppDepthStencilState **ID3D10DepthStencilState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(ppDepthStencilState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBackingStore dispatches through ID3D10EffectDepthStencilVariable's vtable slot 26.
 func (self *ID3D10EffectDepthStencilVariable) GetBackingStore(Index uint32, pDepthStencilDesc *D3D10_DEPTH_STENCIL_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pDepthStencilDesc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ID3D10EffectDepthStencilViewVariable: https://learn.microsoft.com/windows/win32/api/d3d10effect/nn-d3d10effect-id3d10effectdepthstencilviewvariable
@@ -1044,13 +1044,13 @@ var IID_ID3D10EffectDepthStencilViewVariable = win32.GUID{Data1: 0x3e02c918, Dat
 // SetDepthStencil dispatches through ID3D10EffectDepthStencilViewVariable's vtable slot 25.
 func (self *ID3D10EffectDepthStencilViewVariable) SetDepthStencil(pResource *ID3D10DepthStencilView) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDepthStencil dispatches through ID3D10EffectDepthStencilViewVariable's vtable slot 26.
 func (self *ID3D10EffectDepthStencilViewVariable) GetDepthStencil(ppResource **ID3D10DepthStencilView) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDepthStencilArray dispatches through ID3D10EffectDepthStencilViewVariable's vtable slot 27.
@@ -1060,7 +1060,7 @@ func (self *ID3D10EffectDepthStencilViewVariable) SetDepthStencilArray(ppResourc
 		_ppResources = &ppResources[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_ppResources)), uintptr(Offset), uintptr(len(ppResources)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDepthStencilArray dispatches through ID3D10EffectDepthStencilViewVariable's vtable slot 28.
@@ -1070,7 +1070,7 @@ func (self *ID3D10EffectDepthStencilViewVariable) GetDepthStencilArray(ppResourc
 		_ppResources = &ppResources[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_ppResources)), uintptr(Offset), uintptr(len(ppResources)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ID3D10EffectMatrixVariable: https://learn.microsoft.com/windows/win32/api/d3d10effect/nn-d3d10effect-id3d10effectmatrixvariable
@@ -1085,49 +1085,49 @@ var IID_ID3D10EffectMatrixVariable = win32.GUID{Data1: 0x50666c24, Data2: 0xb82f
 // SetMatrix dispatches through ID3D10EffectMatrixVariable's vtable slot 25.
 func (self *ID3D10EffectMatrixVariable) SetMatrix(pData *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMatrix dispatches through ID3D10EffectMatrixVariable's vtable slot 26.
 func (self *ID3D10EffectMatrixVariable) GetMatrix(pData *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMatrixArray dispatches through ID3D10EffectMatrixVariable's vtable slot 27.
 func (self *ID3D10EffectMatrixVariable) SetMatrixArray(pData *float32, Offset uint32, Count uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(Offset), uintptr(Count))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMatrixArray dispatches through ID3D10EffectMatrixVariable's vtable slot 28.
 func (self *ID3D10EffectMatrixVariable) GetMatrixArray(pData *float32, Offset uint32, Count uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(Offset), uintptr(Count))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMatrixTranspose dispatches through ID3D10EffectMatrixVariable's vtable slot 29.
 func (self *ID3D10EffectMatrixVariable) SetMatrixTranspose(pData *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMatrixTranspose dispatches through ID3D10EffectMatrixVariable's vtable slot 30.
 func (self *ID3D10EffectMatrixVariable) GetMatrixTranspose(pData *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMatrixTransposeArray dispatches through ID3D10EffectMatrixVariable's vtable slot 31.
 func (self *ID3D10EffectMatrixVariable) SetMatrixTransposeArray(pData *float32, Offset uint32, Count uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(Offset), uintptr(Count))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMatrixTransposeArray dispatches through ID3D10EffectMatrixVariable's vtable slot 32.
 func (self *ID3D10EffectMatrixVariable) GetMatrixTransposeArray(pData *float32, Offset uint32, Count uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(Offset), uintptr(Count))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ID3D10EffectPass: https://learn.microsoft.com/windows/win32/api/d3d10effect/nn-d3d10effect-id3d10effectpass
@@ -1148,25 +1148,25 @@ func (self *ID3D10EffectPass) IsValid() foundation.BOOL {
 // GetDesc dispatches through ID3D10EffectPass's vtable slot 1.
 func (self *ID3D10EffectPass) GetDesc(pDesc *D3D10_PASS_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[1], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetVertexShaderDesc dispatches through ID3D10EffectPass's vtable slot 2.
 func (self *ID3D10EffectPass) GetVertexShaderDesc(pDesc *D3D10_PASS_SHADER_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[2], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetGeometryShaderDesc dispatches through ID3D10EffectPass's vtable slot 3.
 func (self *ID3D10EffectPass) GetGeometryShaderDesc(pDesc *D3D10_PASS_SHADER_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPixelShaderDesc dispatches through ID3D10EffectPass's vtable slot 4.
 func (self *ID3D10EffectPass) GetPixelShaderDesc(pDesc *D3D10_PASS_SHADER_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAnnotationByIndex dispatches through ID3D10EffectPass's vtable slot 5.
@@ -1184,13 +1184,13 @@ func (self *ID3D10EffectPass) GetAnnotationByName(Name foundation.PSTR) *ID3D10E
 // Apply dispatches through ID3D10EffectPass's vtable slot 7.
 func (self *ID3D10EffectPass) Apply(Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ComputeStateBlockMask dispatches through ID3D10EffectPass's vtable slot 8.
 func (self *ID3D10EffectPass) ComputeStateBlockMask(pStateBlockMask *D3D10_STATE_BLOCK_MASK) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStateBlockMask)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ID3D10EffectPool: https://learn.microsoft.com/windows/win32/api/d3d10effect/nn-d3d10effect-id3d10effectpool
@@ -1220,13 +1220,13 @@ var IID_ID3D10EffectRasterizerVariable = win32.GUID{Data1: 0x21af9f0e, Data2: 0x
 // GetRasterizerState dispatches through ID3D10EffectRasterizerVariable's vtable slot 25.
 func (self *ID3D10EffectRasterizerVariable) GetRasterizerState(Index uint32, ppRasterizerState **ID3D10RasterizerState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(ppRasterizerState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBackingStore dispatches through ID3D10EffectRasterizerVariable's vtable slot 26.
 func (self *ID3D10EffectRasterizerVariable) GetBackingStore(Index uint32, pRasterizerDesc *D3D10_RASTERIZER_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pRasterizerDesc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ID3D10EffectRenderTargetViewVariable: https://learn.microsoft.com/windows/win32/api/d3d10effect/nn-d3d10effect-id3d10effectrendertargetviewvariable
@@ -1241,13 +1241,13 @@ var IID_ID3D10EffectRenderTargetViewVariable = win32.GUID{Data1: 0x28ca0cc3, Dat
 // SetRenderTarget dispatches through ID3D10EffectRenderTargetViewVariable's vtable slot 25.
 func (self *ID3D10EffectRenderTargetViewVariable) SetRenderTarget(pResource *ID3D10RenderTargetView) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRenderTarget dispatches through ID3D10EffectRenderTargetViewVariable's vtable slot 26.
 func (self *ID3D10EffectRenderTargetViewVariable) GetRenderTarget(ppResource **ID3D10RenderTargetView) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetRenderTargetArray dispatches through ID3D10EffectRenderTargetViewVariable's vtable slot 27.
@@ -1257,7 +1257,7 @@ func (self *ID3D10EffectRenderTargetViewVariable) SetRenderTargetArray(ppResourc
 		_ppResources = &ppResources[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_ppResources)), uintptr(Offset), uintptr(len(ppResources)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRenderTargetArray dispatches through ID3D10EffectRenderTargetViewVariable's vtable slot 28.
@@ -1267,7 +1267,7 @@ func (self *ID3D10EffectRenderTargetViewVariable) GetRenderTargetArray(ppResourc
 		_ppResources = &ppResources[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_ppResources)), uintptr(Offset), uintptr(len(ppResources)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ID3D10EffectSamplerVariable: https://learn.microsoft.com/windows/win32/api/d3d10effect/nn-d3d10effect-id3d10effectsamplervariable
@@ -1282,13 +1282,13 @@ var IID_ID3D10EffectSamplerVariable = win32.GUID{Data1: 0x6530d5c7, Data2: 0x07e
 // GetSampler dispatches through ID3D10EffectSamplerVariable's vtable slot 25.
 func (self *ID3D10EffectSamplerVariable) GetSampler(Index uint32, ppSampler **ID3D10SamplerState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(ppSampler)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBackingStore dispatches through ID3D10EffectSamplerVariable's vtable slot 26.
 func (self *ID3D10EffectSamplerVariable) GetBackingStore(Index uint32, pSamplerDesc *D3D10_SAMPLER_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pSamplerDesc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ID3D10EffectScalarVariable: https://learn.microsoft.com/windows/win32/api/d3d10effect/nn-d3d10effect-id3d10effectscalarvariable
@@ -1303,7 +1303,7 @@ var IID_ID3D10EffectScalarVariable = win32.GUID{Data1: 0x00e48f7b, Data2: 0xd2c8
 // GetFloat dispatches through ID3D10EffectScalarVariable's vtable slot 26.
 func (self *ID3D10EffectScalarVariable) GetFloat(pValue *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetFloatArray dispatches through ID3D10EffectScalarVariable's vtable slot 27.
@@ -1313,7 +1313,7 @@ func (self *ID3D10EffectScalarVariable) SetFloatArray(pData []float32, Offset ui
 		_pData = &pData[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pData)), uintptr(Offset), uintptr(len(pData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFloatArray dispatches through ID3D10EffectScalarVariable's vtable slot 28.
@@ -1323,19 +1323,19 @@ func (self *ID3D10EffectScalarVariable) GetFloatArray(pData []float32, Offset ui
 		_pData = &pData[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pData)), uintptr(Offset), uintptr(len(pData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetInt dispatches through ID3D10EffectScalarVariable's vtable slot 29.
 func (self *ID3D10EffectScalarVariable) SetInt(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInt dispatches through ID3D10EffectScalarVariable's vtable slot 30.
 func (self *ID3D10EffectScalarVariable) GetInt(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetIntArray dispatches through ID3D10EffectScalarVariable's vtable slot 31.
@@ -1345,7 +1345,7 @@ func (self *ID3D10EffectScalarVariable) SetIntArray(pData []int32, Offset uint32
 		_pData = &pData[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pData)), uintptr(Offset), uintptr(len(pData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetIntArray dispatches through ID3D10EffectScalarVariable's vtable slot 32.
@@ -1355,20 +1355,20 @@ func (self *ID3D10EffectScalarVariable) GetIntArray(pData []int32, Offset uint32
 		_pData = &pData[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pData)), uintptr(Offset), uintptr(len(pData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBool dispatches through ID3D10EffectScalarVariable's vtable slot 33.
 func (self *ID3D10EffectScalarVariable) SetBool(Value bool) error {
 	_Value := win32.Bool32(Value)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(_Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBool dispatches through ID3D10EffectScalarVariable's vtable slot 34.
 func (self *ID3D10EffectScalarVariable) GetBool(pValue *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBoolArray dispatches through ID3D10EffectScalarVariable's vtable slot 35.
@@ -1378,7 +1378,7 @@ func (self *ID3D10EffectScalarVariable) SetBoolArray(pData []foundation.BOOL, Of
 		_pData = &pData[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pData)), uintptr(Offset), uintptr(len(pData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBoolArray dispatches through ID3D10EffectScalarVariable's vtable slot 36.
@@ -1388,7 +1388,7 @@ func (self *ID3D10EffectScalarVariable) GetBoolArray(pData []foundation.BOOL, Of
 		_pData = &pData[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pData)), uintptr(Offset), uintptr(len(pData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ID3D10EffectShaderResourceVariable: https://learn.microsoft.com/windows/win32/api/d3d10effect/nn-d3d10effect-id3d10effectshaderresourcevariable
@@ -1403,13 +1403,13 @@ var IID_ID3D10EffectShaderResourceVariable = win32.GUID{Data1: 0xc0a7157b, Data2
 // SetResource dispatches through ID3D10EffectShaderResourceVariable's vtable slot 25.
 func (self *ID3D10EffectShaderResourceVariable) SetResource(pResource *ID3D10ShaderResourceView) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetResource dispatches through ID3D10EffectShaderResourceVariable's vtable slot 26.
 func (self *ID3D10EffectShaderResourceVariable) GetResource(ppResource **ID3D10ShaderResourceView) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetResourceArray dispatches through ID3D10EffectShaderResourceVariable's vtable slot 27.
@@ -1419,7 +1419,7 @@ func (self *ID3D10EffectShaderResourceVariable) SetResourceArray(ppResources []*
 		_ppResources = &ppResources[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_ppResources)), uintptr(Offset), uintptr(len(ppResources)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetResourceArray dispatches through ID3D10EffectShaderResourceVariable's vtable slot 28.
@@ -1429,7 +1429,7 @@ func (self *ID3D10EffectShaderResourceVariable) GetResourceArray(ppResources []*
 		_ppResources = &ppResources[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_ppResources)), uintptr(Offset), uintptr(len(ppResources)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ID3D10EffectShaderVariable: https://learn.microsoft.com/windows/win32/api/d3d10effect/nn-d3d10effect-id3d10effectshadervariable
@@ -1444,37 +1444,37 @@ var IID_ID3D10EffectShaderVariable = win32.GUID{Data1: 0x80849279, Data2: 0xc799
 // GetShaderDesc dispatches through ID3D10EffectShaderVariable's vtable slot 25.
 func (self *ID3D10EffectShaderVariable) GetShaderDesc(ShaderIndex uint32, pDesc *D3D10_EFFECT_SHADER_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(ShaderIndex), uintptr(unsafe.Pointer(pDesc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetVertexShader dispatches through ID3D10EffectShaderVariable's vtable slot 26.
 func (self *ID3D10EffectShaderVariable) GetVertexShader(ShaderIndex uint32, ppVS **ID3D10VertexShader) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(ShaderIndex), uintptr(unsafe.Pointer(ppVS)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetGeometryShader dispatches through ID3D10EffectShaderVariable's vtable slot 27.
 func (self *ID3D10EffectShaderVariable) GetGeometryShader(ShaderIndex uint32, ppGS **ID3D10GeometryShader) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(ShaderIndex), uintptr(unsafe.Pointer(ppGS)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPixelShader dispatches through ID3D10EffectShaderVariable's vtable slot 28.
 func (self *ID3D10EffectShaderVariable) GetPixelShader(ShaderIndex uint32, ppPS **ID3D10PixelShader) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(ShaderIndex), uintptr(unsafe.Pointer(ppPS)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInputSignatureElementDesc dispatches through ID3D10EffectShaderVariable's vtable slot 29.
 func (self *ID3D10EffectShaderVariable) GetInputSignatureElementDesc(ShaderIndex uint32, Element uint32, pDesc *D3D10_SIGNATURE_PARAMETER_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(ShaderIndex), uintptr(Element), uintptr(unsafe.Pointer(pDesc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOutputSignatureElementDesc dispatches through ID3D10EffectShaderVariable's vtable slot 30.
 func (self *ID3D10EffectShaderVariable) GetOutputSignatureElementDesc(ShaderIndex uint32, Element uint32, pDesc *D3D10_SIGNATURE_PARAMETER_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(ShaderIndex), uintptr(Element), uintptr(unsafe.Pointer(pDesc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ID3D10EffectStringVariable: https://learn.microsoft.com/windows/win32/api/d3d10effect/nn-d3d10effect-id3d10effectstringvariable
@@ -1489,7 +1489,7 @@ var IID_ID3D10EffectStringVariable = win32.GUID{Data1: 0x71417501, Data2: 0x8df9
 // GetString dispatches through ID3D10EffectStringVariable's vtable slot 25.
 func (self *ID3D10EffectStringVariable) GetString(ppString *foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppString)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStringArray dispatches through ID3D10EffectStringVariable's vtable slot 26.
@@ -1499,7 +1499,7 @@ func (self *ID3D10EffectStringVariable) GetStringArray(ppStrings []foundation.PS
 		_ppStrings = &ppStrings[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_ppStrings)), uintptr(Offset), uintptr(len(ppStrings)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ID3D10EffectTechnique: https://learn.microsoft.com/windows/win32/api/d3d10effect/nn-d3d10effect-id3d10effecttechnique
@@ -1520,7 +1520,7 @@ func (self *ID3D10EffectTechnique) IsValid() foundation.BOOL {
 // GetDesc dispatches through ID3D10EffectTechnique's vtable slot 1.
 func (self *ID3D10EffectTechnique) GetDesc(pDesc *D3D10_TECHNIQUE_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[1], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAnnotationByIndex dispatches through ID3D10EffectTechnique's vtable slot 2.
@@ -1550,7 +1550,7 @@ func (self *ID3D10EffectTechnique) GetPassByName(Name foundation.PSTR) *ID3D10Ef
 // ComputeStateBlockMask dispatches through ID3D10EffectTechnique's vtable slot 6.
 func (self *ID3D10EffectTechnique) ComputeStateBlockMask(pStateBlockMask *D3D10_STATE_BLOCK_MASK) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStateBlockMask)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ID3D10EffectType: https://learn.microsoft.com/windows/win32/api/d3d10effect/nn-d3d10effect-id3d10effecttype
@@ -1571,7 +1571,7 @@ func (self *ID3D10EffectType) IsValid() foundation.BOOL {
 // GetDesc dispatches through ID3D10EffectType's vtable slot 1.
 func (self *ID3D10EffectType) GetDesc(pDesc *D3D10_EFFECT_TYPE_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[1], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMemberTypeByIndex dispatches through ID3D10EffectType's vtable slot 2.
@@ -1628,7 +1628,7 @@ func (self *ID3D10EffectVariable) GetType() *ID3D10EffectType {
 // GetDesc dispatches through ID3D10EffectVariable's vtable slot 2.
 func (self *ID3D10EffectVariable) GetDesc(pDesc *D3D10_EFFECT_VARIABLE_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[2], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAnnotationByIndex dispatches through ID3D10EffectVariable's vtable slot 3.
@@ -1758,7 +1758,7 @@ func (self *ID3D10EffectVariable) SetRawValue(pData []byte, Offset uint32) error
 		_pData = &pData[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pData)), uintptr(Offset), uintptr(len(pData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRawValue dispatches through ID3D10EffectVariable's vtable slot 24.
@@ -1768,7 +1768,7 @@ func (self *ID3D10EffectVariable) GetRawValue(pData []byte, Offset uint32) error
 		_pData = &pData[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pData)), uintptr(Offset), uintptr(len(pData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ID3D10EffectVectorVariable: https://learn.microsoft.com/windows/win32/api/d3d10effect/nn-d3d10effect-id3d10effectvectorvariable
@@ -1783,73 +1783,73 @@ var IID_ID3D10EffectVectorVariable = win32.GUID{Data1: 0x62b98c44, Data2: 0x1f82
 // SetBoolVector dispatches through ID3D10EffectVectorVariable's vtable slot 25.
 func (self *ID3D10EffectVectorVariable) SetBoolVector(pData *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetIntVector dispatches through ID3D10EffectVectorVariable's vtable slot 26.
 func (self *ID3D10EffectVectorVariable) SetIntVector(pData *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetFloatVector dispatches through ID3D10EffectVectorVariable's vtable slot 27.
 func (self *ID3D10EffectVectorVariable) SetFloatVector(pData *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBoolVector dispatches through ID3D10EffectVectorVariable's vtable slot 28.
 func (self *ID3D10EffectVectorVariable) GetBoolVector(pData *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetIntVector dispatches through ID3D10EffectVectorVariable's vtable slot 29.
 func (self *ID3D10EffectVectorVariable) GetIntVector(pData *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFloatVector dispatches through ID3D10EffectVectorVariable's vtable slot 30.
 func (self *ID3D10EffectVectorVariable) GetFloatVector(pData *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBoolVectorArray dispatches through ID3D10EffectVectorVariable's vtable slot 31.
 func (self *ID3D10EffectVectorVariable) SetBoolVectorArray(pData *foundation.BOOL, Offset uint32, Count uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(Offset), uintptr(Count))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetIntVectorArray dispatches through ID3D10EffectVectorVariable's vtable slot 32.
 func (self *ID3D10EffectVectorVariable) SetIntVectorArray(pData *int32, Offset uint32, Count uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(Offset), uintptr(Count))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetFloatVectorArray dispatches through ID3D10EffectVectorVariable's vtable slot 33.
 func (self *ID3D10EffectVectorVariable) SetFloatVectorArray(pData *float32, Offset uint32, Count uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(Offset), uintptr(Count))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBoolVectorArray dispatches through ID3D10EffectVectorVariable's vtable slot 34.
 func (self *ID3D10EffectVectorVariable) GetBoolVectorArray(pData *foundation.BOOL, Offset uint32, Count uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(Offset), uintptr(Count))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetIntVectorArray dispatches through ID3D10EffectVectorVariable's vtable slot 35.
 func (self *ID3D10EffectVectorVariable) GetIntVectorArray(pData *int32, Offset uint32, Count uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(Offset), uintptr(Count))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFloatVectorArray dispatches through ID3D10EffectVectorVariable's vtable slot 36.
 func (self *ID3D10EffectVectorVariable) GetFloatVectorArray(pData *float32, Offset uint32, Count uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(Offset), uintptr(Count))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ID3D10GeometryShader: https://learn.microsoft.com/windows/win32/api/d3d10/nn-d3d10-id3d10geometryshader
@@ -1873,7 +1873,7 @@ var IID_ID3D10InfoQueue = win32.GUID{Data1: 0x1b940b17, Data2: 0x2642, Data3: 0x
 // SetMessageCountLimit dispatches through ID3D10InfoQueue's vtable slot 3.
 func (self *ID3D10InfoQueue) SetMessageCountLimit(MessageCountLimit uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(MessageCountLimit))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ClearStoredMessages dispatches through ID3D10InfoQueue's vtable slot 4.
@@ -1884,7 +1884,7 @@ func (self *ID3D10InfoQueue) ClearStoredMessages() {
 // GetMessage dispatches through ID3D10InfoQueue's vtable slot 5.
 func (self *ID3D10InfoQueue) GetMessage(MessageIndex uint64, pMessage *D3D10_MESSAGE, pMessageByteLength *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(MessageIndex), uintptr(unsafe.Pointer(pMessage)), uintptr(unsafe.Pointer(pMessageByteLength)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNumMessagesAllowedByStorageFilter dispatches through ID3D10InfoQueue's vtable slot 6.
@@ -1926,13 +1926,13 @@ func (self *ID3D10InfoQueue) GetMessageCountLimit() uint64 {
 // AddStorageFilterEntries dispatches through ID3D10InfoQueue's vtable slot 12.
 func (self *ID3D10InfoQueue) AddStorageFilterEntries(pFilter *D3D10_INFO_QUEUE_FILTER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFilter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStorageFilter dispatches through ID3D10InfoQueue's vtable slot 13.
 func (self *ID3D10InfoQueue) GetStorageFilter(pFilter *D3D10_INFO_QUEUE_FILTER, pFilterByteLength *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFilter)), uintptr(unsafe.Pointer(pFilterByteLength)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ClearStorageFilter dispatches through ID3D10InfoQueue's vtable slot 14.
@@ -1943,19 +1943,19 @@ func (self *ID3D10InfoQueue) ClearStorageFilter() {
 // PushEmptyStorageFilter dispatches through ID3D10InfoQueue's vtable slot 15.
 func (self *ID3D10InfoQueue) PushEmptyStorageFilter() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PushCopyOfStorageFilter dispatches through ID3D10InfoQueue's vtable slot 16.
 func (self *ID3D10InfoQueue) PushCopyOfStorageFilter() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PushStorageFilter dispatches through ID3D10InfoQueue's vtable slot 17.
 func (self *ID3D10InfoQueue) PushStorageFilter(pFilter *D3D10_INFO_QUEUE_FILTER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFilter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PopStorageFilter dispatches through ID3D10InfoQueue's vtable slot 18.
@@ -1972,13 +1972,13 @@ func (self *ID3D10InfoQueue) GetStorageFilterStackSize() uint32 {
 // AddRetrievalFilterEntries dispatches through ID3D10InfoQueue's vtable slot 20.
 func (self *ID3D10InfoQueue) AddRetrievalFilterEntries(pFilter *D3D10_INFO_QUEUE_FILTER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFilter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRetrievalFilter dispatches through ID3D10InfoQueue's vtable slot 21.
 func (self *ID3D10InfoQueue) GetRetrievalFilter(pFilter *D3D10_INFO_QUEUE_FILTER, pFilterByteLength *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFilter)), uintptr(unsafe.Pointer(pFilterByteLength)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ClearRetrievalFilter dispatches through ID3D10InfoQueue's vtable slot 22.
@@ -1989,19 +1989,19 @@ func (self *ID3D10InfoQueue) ClearRetrievalFilter() {
 // PushEmptyRetrievalFilter dispatches through ID3D10InfoQueue's vtable slot 23.
 func (self *ID3D10InfoQueue) PushEmptyRetrievalFilter() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PushCopyOfRetrievalFilter dispatches through ID3D10InfoQueue's vtable slot 24.
 func (self *ID3D10InfoQueue) PushCopyOfRetrievalFilter() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PushRetrievalFilter dispatches through ID3D10InfoQueue's vtable slot 25.
 func (self *ID3D10InfoQueue) PushRetrievalFilter(pFilter *D3D10_INFO_QUEUE_FILTER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFilter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PopRetrievalFilter dispatches through ID3D10InfoQueue's vtable slot 26.
@@ -2018,34 +2018,34 @@ func (self *ID3D10InfoQueue) GetRetrievalFilterStackSize() uint32 {
 // AddMessage dispatches through ID3D10InfoQueue's vtable slot 28.
 func (self *ID3D10InfoQueue) AddMessage(Category D3D10_MESSAGE_CATEGORY, Severity D3D10_MESSAGE_SEVERITY, ID D3D10_MESSAGE_ID, pDescription foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(Category), uintptr(Severity), uintptr(ID), uintptr(unsafe.Pointer(pDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddApplicationMessage dispatches through ID3D10InfoQueue's vtable slot 29.
 func (self *ID3D10InfoQueue) AddApplicationMessage(Severity D3D10_MESSAGE_SEVERITY, pDescription foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(Severity), uintptr(unsafe.Pointer(pDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBreakOnCategory dispatches through ID3D10InfoQueue's vtable slot 30.
 func (self *ID3D10InfoQueue) SetBreakOnCategory(Category D3D10_MESSAGE_CATEGORY, bEnable bool) error {
 	_bEnable := win32.Bool32(bEnable)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(Category), uintptr(_bEnable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBreakOnSeverity dispatches through ID3D10InfoQueue's vtable slot 31.
 func (self *ID3D10InfoQueue) SetBreakOnSeverity(Severity D3D10_MESSAGE_SEVERITY, bEnable bool) error {
 	_bEnable := win32.Bool32(bEnable)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(Severity), uintptr(_bEnable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBreakOnID dispatches through ID3D10InfoQueue's vtable slot 32.
 func (self *ID3D10InfoQueue) SetBreakOnID(ID D3D10_MESSAGE_ID, bEnable bool) error {
 	_bEnable := win32.Bool32(bEnable)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(ID), uintptr(_bEnable))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBreakOnCategory dispatches through ID3D10InfoQueue's vtable slot 33.
@@ -2230,7 +2230,7 @@ var IID_ID3D10ShaderReflection = win32.GUID{Data1: 0xd40e20b6, Data2: 0xf8f7, Da
 // GetDesc dispatches through ID3D10ShaderReflection's vtable slot 3.
 func (self *ID3D10ShaderReflection) GetDesc(pDesc *D3D10_SHADER_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetConstantBufferByIndex dispatches through ID3D10ShaderReflection's vtable slot 4.
@@ -2248,19 +2248,19 @@ func (self *ID3D10ShaderReflection) GetConstantBufferByName(Name foundation.PSTR
 // GetResourceBindingDesc dispatches through ID3D10ShaderReflection's vtable slot 6.
 func (self *ID3D10ShaderReflection) GetResourceBindingDesc(ResourceIndex uint32, pDesc *D3D10_SHADER_INPUT_BIND_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ResourceIndex), uintptr(unsafe.Pointer(pDesc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInputParameterDesc dispatches through ID3D10ShaderReflection's vtable slot 7.
 func (self *ID3D10ShaderReflection) GetInputParameterDesc(ParameterIndex uint32, pDesc *D3D10_SIGNATURE_PARAMETER_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(ParameterIndex), uintptr(unsafe.Pointer(pDesc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOutputParameterDesc dispatches through ID3D10ShaderReflection's vtable slot 8.
 func (self *ID3D10ShaderReflection) GetOutputParameterDesc(ParameterIndex uint32, pDesc *D3D10_SIGNATURE_PARAMETER_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(ParameterIndex), uintptr(unsafe.Pointer(pDesc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ID3D10ShaderReflection1: https://learn.microsoft.com/windows/win32/api/d3d10_1shader/nn-d3d10_1shader-id3d10shaderreflection1
@@ -2275,7 +2275,7 @@ var IID_ID3D10ShaderReflection1 = win32.GUID{Data1: 0xc3457783, Data2: 0xa846, D
 // GetDesc dispatches through ID3D10ShaderReflection1's vtable slot 3.
 func (self *ID3D10ShaderReflection1) GetDesc(pDesc *D3D10_SHADER_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetConstantBufferByIndex dispatches through ID3D10ShaderReflection1's vtable slot 4.
@@ -2293,19 +2293,19 @@ func (self *ID3D10ShaderReflection1) GetConstantBufferByName(Name foundation.PST
 // GetResourceBindingDesc dispatches through ID3D10ShaderReflection1's vtable slot 6.
 func (self *ID3D10ShaderReflection1) GetResourceBindingDesc(ResourceIndex uint32, pDesc *D3D10_SHADER_INPUT_BIND_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ResourceIndex), uintptr(unsafe.Pointer(pDesc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInputParameterDesc dispatches through ID3D10ShaderReflection1's vtable slot 7.
 func (self *ID3D10ShaderReflection1) GetInputParameterDesc(ParameterIndex uint32, pDesc *D3D10_SIGNATURE_PARAMETER_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(ParameterIndex), uintptr(unsafe.Pointer(pDesc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOutputParameterDesc dispatches through ID3D10ShaderReflection1's vtable slot 8.
 func (self *ID3D10ShaderReflection1) GetOutputParameterDesc(ParameterIndex uint32, pDesc *D3D10_SIGNATURE_PARAMETER_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(ParameterIndex), uintptr(unsafe.Pointer(pDesc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetVariableByName dispatches through ID3D10ShaderReflection1's vtable slot 9.
@@ -2317,49 +2317,49 @@ func (self *ID3D10ShaderReflection1) GetVariableByName(Name foundation.PSTR) *ID
 // GetResourceBindingDescByName dispatches through ID3D10ShaderReflection1's vtable slot 10.
 func (self *ID3D10ShaderReflection1) GetResourceBindingDescByName(Name foundation.PSTR, pDesc *D3D10_SHADER_INPUT_BIND_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Name)), uintptr(unsafe.Pointer(pDesc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMovInstructionCount dispatches through ID3D10ShaderReflection1's vtable slot 11.
 func (self *ID3D10ShaderReflection1) GetMovInstructionCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMovcInstructionCount dispatches through ID3D10ShaderReflection1's vtable slot 12.
 func (self *ID3D10ShaderReflection1) GetMovcInstructionCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetConversionInstructionCount dispatches through ID3D10ShaderReflection1's vtable slot 13.
 func (self *ID3D10ShaderReflection1) GetConversionInstructionCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBitwiseInstructionCount dispatches through ID3D10ShaderReflection1's vtable slot 14.
 func (self *ID3D10ShaderReflection1) GetBitwiseInstructionCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetGSInputPrimitive dispatches through ID3D10ShaderReflection1's vtable slot 15.
 func (self *ID3D10ShaderReflection1) GetGSInputPrimitive(pPrim *graphicsdirect3d.D3D_PRIMITIVE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPrim)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsLevel9Shader dispatches through ID3D10ShaderReflection1's vtable slot 16.
 func (self *ID3D10ShaderReflection1) IsLevel9Shader(pbLevel9Shader *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbLevel9Shader)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsSampleFrequencyShader dispatches through ID3D10ShaderReflection1's vtable slot 17.
 func (self *ID3D10ShaderReflection1) IsSampleFrequencyShader(pbSampleFrequency *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbSampleFrequency)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ID3D10ShaderReflectionConstantBuffer: https://learn.microsoft.com/windows/win32/api/d3d10shader/nn-d3d10shader-id3d10shaderreflectionconstantbuffer
@@ -2374,7 +2374,7 @@ var IID_ID3D10ShaderReflectionConstantBuffer = win32.GUID{Data1: 0x66c66a94, Dat
 // GetDesc dispatches through ID3D10ShaderReflectionConstantBuffer's vtable slot 0.
 func (self *ID3D10ShaderReflectionConstantBuffer) GetDesc(pDesc *D3D10_SHADER_BUFFER_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[0], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetVariableByIndex dispatches through ID3D10ShaderReflectionConstantBuffer's vtable slot 1.
@@ -2401,7 +2401,7 @@ var IID_ID3D10ShaderReflectionType = win32.GUID{Data1: 0xc530ad7d, Data2: 0x9b16
 // GetDesc dispatches through ID3D10ShaderReflectionType's vtable slot 0.
 func (self *ID3D10ShaderReflectionType) GetDesc(pDesc *D3D10_SHADER_TYPE_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[0], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMemberTypeByIndex dispatches through ID3D10ShaderReflectionType's vtable slot 1.
@@ -2434,7 +2434,7 @@ var IID_ID3D10ShaderReflectionVariable = win32.GUID{Data1: 0x1bf63c95, Data2: 0x
 // GetDesc dispatches through ID3D10ShaderReflectionVariable's vtable slot 0.
 func (self *ID3D10ShaderReflectionVariable) GetDesc(pDesc *D3D10_SHADER_VARIABLE_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[0], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetType dispatches through ID3D10ShaderReflectionVariable's vtable slot 1.
@@ -2483,25 +2483,25 @@ var IID_ID3D10StateBlock = win32.GUID{Data1: 0x0803425a, Data2: 0x57f5, Data3: 0
 // Capture dispatches through ID3D10StateBlock's vtable slot 3.
 func (self *ID3D10StateBlock) Capture() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Apply dispatches through ID3D10StateBlock's vtable slot 4.
 func (self *ID3D10StateBlock) Apply() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReleaseAllDeviceObjects dispatches through ID3D10StateBlock's vtable slot 5.
 func (self *ID3D10StateBlock) ReleaseAllDeviceObjects() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDevice dispatches through ID3D10StateBlock's vtable slot 6.
 func (self *ID3D10StateBlock) GetDevice(ppDevice **ID3D10Device) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDevice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ID3D10SwitchToRef: https://learn.microsoft.com/windows/win32/api/d3d10sdklayers/nn-d3d10sdklayers-id3d10switchtoref
@@ -2538,7 +2538,7 @@ var IID_ID3D10Texture1D = win32.GUID{Data1: 0x9b7e4c03, Data2: 0x342c, Data3: 0x
 // Map dispatches through ID3D10Texture1D's vtable slot 10.
 func (self *ID3D10Texture1D) Map(Subresource uint32, MapType D3D10_MAP, MapFlags uint32, ppData *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Subresource), uintptr(MapType), uintptr(MapFlags), uintptr(unsafe.Pointer(ppData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Unmap dispatches through ID3D10Texture1D's vtable slot 11.
@@ -2563,7 +2563,7 @@ var IID_ID3D10Texture2D = win32.GUID{Data1: 0x9b7e4c04, Data2: 0x342c, Data3: 0x
 // Map dispatches through ID3D10Texture2D's vtable slot 10.
 func (self *ID3D10Texture2D) Map(Subresource uint32, MapType D3D10_MAP, MapFlags uint32, pMappedTex2D *D3D10_MAPPED_TEXTURE2D) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Subresource), uintptr(MapType), uintptr(MapFlags), uintptr(unsafe.Pointer(pMappedTex2D)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Unmap dispatches through ID3D10Texture2D's vtable slot 11.
@@ -2588,7 +2588,7 @@ var IID_ID3D10Texture3D = win32.GUID{Data1: 0x9b7e4c05, Data2: 0x342c, Data3: 0x
 // Map dispatches through ID3D10Texture3D's vtable slot 10.
 func (self *ID3D10Texture3D) Map(Subresource uint32, MapType D3D10_MAP, MapFlags uint32, pMappedTex3D *D3D10_MAPPED_TEXTURE3D) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Subresource), uintptr(MapType), uintptr(MapFlags), uintptr(unsafe.Pointer(pMappedTex3D)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Unmap dispatches through ID3D10Texture3D's vtable slot 11.

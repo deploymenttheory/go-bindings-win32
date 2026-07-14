@@ -55,7 +55,7 @@ func D3DCompile(pSrcData []byte, pSourceName foundation.PSTR, pDefines *graphics
 		_pSrcData = &pSrcData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procD3DCompile.Addr(), uintptr(unsafe.Pointer(_pSrcData)), uintptr(len(pSrcData)), uintptr(unsafe.Pointer(pSourceName)), uintptr(unsafe.Pointer(pDefines)), uintptr(unsafe.Pointer(pInclude)), uintptr(unsafe.Pointer(pEntrypoint)), uintptr(unsafe.Pointer(pTarget)), uintptr(Flags1), uintptr(Flags2), uintptr(unsafe.Pointer(ppCode)), uintptr(unsafe.Pointer(ppErrorMsgs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // D3DCompile2 calls D3DCOMPILER_47!D3DCompile2.
@@ -70,7 +70,7 @@ func D3DCompile2(pSrcData []byte, pSourceName foundation.PSTR, pDefines *graphic
 		_pSecondaryData = &pSecondaryData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procD3DCompile2.Addr(), uintptr(unsafe.Pointer(_pSrcData)), uintptr(len(pSrcData)), uintptr(unsafe.Pointer(pSourceName)), uintptr(unsafe.Pointer(pDefines)), uintptr(unsafe.Pointer(pInclude)), uintptr(unsafe.Pointer(pEntrypoint)), uintptr(unsafe.Pointer(pTarget)), uintptr(Flags1), uintptr(Flags2), uintptr(SecondaryDataFlags), uintptr(unsafe.Pointer(_pSecondaryData)), uintptr(len(pSecondaryData)), uintptr(unsafe.Pointer(ppCode)), uintptr(unsafe.Pointer(ppErrorMsgs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // D3DCompileFromFile calls D3DCOMPILER_47!D3DCompileFromFile.
@@ -78,7 +78,7 @@ func D3DCompile2(pSrcData []byte, pSourceName foundation.PSTR, pDefines *graphic
 func D3DCompileFromFile(pFileName string, pDefines *graphicsdirect3d.D3D_SHADER_MACRO, pInclude *graphicsdirect3d.ID3DInclude, pEntrypoint foundation.PSTR, pTarget foundation.PSTR, Flags1 uint32, Flags2 uint32, ppCode **graphicsdirect3d.ID3DBlob, ppErrorMsgs **graphicsdirect3d.ID3DBlob) error {
 	_pFileName := win32.UTF16Ptr(pFileName)
 	r1, _, _ := syscall.SyscallN(procD3DCompileFromFile.Addr(), uintptr(unsafe.Pointer(_pFileName)), uintptr(unsafe.Pointer(pDefines)), uintptr(unsafe.Pointer(pInclude)), uintptr(unsafe.Pointer(pEntrypoint)), uintptr(unsafe.Pointer(pTarget)), uintptr(Flags1), uintptr(Flags2), uintptr(unsafe.Pointer(ppCode)), uintptr(unsafe.Pointer(ppErrorMsgs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // D3DCompressShaders calls D3DCOMPILER_47!D3DCompressShaders.
@@ -89,28 +89,28 @@ func D3DCompressShaders(pShaderData []D3D_SHADER_DATA, uFlags uint32, ppCompress
 		_pShaderData = &pShaderData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procD3DCompressShaders.Addr(), uintptr(len(pShaderData)), uintptr(unsafe.Pointer(_pShaderData)), uintptr(uFlags), uintptr(unsafe.Pointer(ppCompressedData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // D3DCreateBlob calls D3DCOMPILER_47!D3DCreateBlob.
 // https://learn.microsoft.com/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcreateblob
 func D3DCreateBlob(Size uintptr, ppBlob **graphicsdirect3d.ID3DBlob) error {
 	r1, _, _ := syscall.SyscallN(procD3DCreateBlob.Addr(), uintptr(Size), uintptr(unsafe.Pointer(ppBlob)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // D3DCreateFunctionLinkingGraph calls D3DCOMPILER_47!D3DCreateFunctionLinkingGraph.
 // https://learn.microsoft.com/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcreatefunctionlinkinggraph
 func D3DCreateFunctionLinkingGraph(uFlags uint32, ppFunctionLinkingGraph **graphicsdirect3d11.ID3D11FunctionLinkingGraph) error {
 	r1, _, _ := syscall.SyscallN(procD3DCreateFunctionLinkingGraph.Addr(), uintptr(uFlags), uintptr(unsafe.Pointer(ppFunctionLinkingGraph)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // D3DCreateLinker calls D3DCOMPILER_47!D3DCreateLinker.
 // https://learn.microsoft.com/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcreatelinker
 func D3DCreateLinker(ppLinker **graphicsdirect3d11.ID3D11Linker) error {
 	r1, _, _ := syscall.SyscallN(procD3DCreateLinker.Addr(), uintptr(unsafe.Pointer(ppLinker)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // D3DDecompressShaders calls D3DCOMPILER_47!D3DDecompressShaders.
@@ -121,7 +121,7 @@ func D3DDecompressShaders(pSrcData []byte, uNumShaders uint32, uStartIndex uint3
 		_pSrcData = &pSrcData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procD3DDecompressShaders.Addr(), uintptr(unsafe.Pointer(_pSrcData)), uintptr(len(pSrcData)), uintptr(uNumShaders), uintptr(uStartIndex), uintptr(unsafe.Pointer(pIndices)), uintptr(uFlags), uintptr(unsafe.Pointer(ppShaders)), uintptr(unsafe.Pointer(pTotalShaders)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // D3DDisassemble calls D3DCOMPILER_47!D3DDisassemble.
@@ -132,14 +132,14 @@ func D3DDisassemble(pSrcData []byte, Flags uint32, szComments foundation.PSTR, p
 		_pSrcData = &pSrcData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procD3DDisassemble.Addr(), uintptr(unsafe.Pointer(_pSrcData)), uintptr(len(pSrcData)), uintptr(Flags), uintptr(unsafe.Pointer(szComments)), uintptr(unsafe.Pointer(ppDisassembly)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // D3DDisassemble10Effect calls D3DCOMPILER_47!D3DDisassemble10Effect.
 // https://learn.microsoft.com/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddisassemble10effect
 func D3DDisassemble10Effect(pEffect *graphicsdirect3d10.ID3D10Effect, Flags uint32, ppDisassembly **graphicsdirect3d.ID3DBlob) error {
 	r1, _, _ := syscall.SyscallN(procD3DDisassemble10Effect.Addr(), uintptr(unsafe.Pointer(pEffect)), uintptr(Flags), uintptr(unsafe.Pointer(ppDisassembly)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // D3DDisassembleRegion calls D3DCOMPILER_47!D3DDisassembleRegion.
@@ -150,7 +150,7 @@ func D3DDisassembleRegion(pSrcData []byte, Flags uint32, szComments foundation.P
 		_pSrcData = &pSrcData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procD3DDisassembleRegion.Addr(), uintptr(unsafe.Pointer(_pSrcData)), uintptr(len(pSrcData)), uintptr(Flags), uintptr(unsafe.Pointer(szComments)), uintptr(StartByteOffset), uintptr(NumInsts), uintptr(unsafe.Pointer(pFinishByteOffset)), uintptr(unsafe.Pointer(ppDisassembly)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // D3DGetBlobPart calls D3DCOMPILER_47!D3DGetBlobPart.
@@ -161,7 +161,7 @@ func D3DGetBlobPart(pSrcData []byte, Part D3D_BLOB_PART, Flags uint32, ppPart **
 		_pSrcData = &pSrcData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procD3DGetBlobPart.Addr(), uintptr(unsafe.Pointer(_pSrcData)), uintptr(len(pSrcData)), uintptr(Part), uintptr(Flags), uintptr(unsafe.Pointer(ppPart)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // D3DGetDebugInfo calls D3DCOMPILER_47!D3DGetDebugInfo.
@@ -172,7 +172,7 @@ func D3DGetDebugInfo(pSrcData []byte, ppDebugInfo **graphicsdirect3d.ID3DBlob) e
 		_pSrcData = &pSrcData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procD3DGetDebugInfo.Addr(), uintptr(unsafe.Pointer(_pSrcData)), uintptr(len(pSrcData)), uintptr(unsafe.Pointer(ppDebugInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // D3DGetInputAndOutputSignatureBlob calls D3DCOMPILER_47!D3DGetInputAndOutputSignatureBlob.
@@ -183,7 +183,7 @@ func D3DGetInputAndOutputSignatureBlob(pSrcData []byte, ppSignatureBlob **graphi
 		_pSrcData = &pSrcData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procD3DGetInputAndOutputSignatureBlob.Addr(), uintptr(unsafe.Pointer(_pSrcData)), uintptr(len(pSrcData)), uintptr(unsafe.Pointer(ppSignatureBlob)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // D3DGetInputSignatureBlob calls D3DCOMPILER_47!D3DGetInputSignatureBlob.
@@ -194,7 +194,7 @@ func D3DGetInputSignatureBlob(pSrcData []byte, ppSignatureBlob **graphicsdirect3
 		_pSrcData = &pSrcData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procD3DGetInputSignatureBlob.Addr(), uintptr(unsafe.Pointer(_pSrcData)), uintptr(len(pSrcData)), uintptr(unsafe.Pointer(ppSignatureBlob)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // D3DGetOutputSignatureBlob calls D3DCOMPILER_47!D3DGetOutputSignatureBlob.
@@ -205,7 +205,7 @@ func D3DGetOutputSignatureBlob(pSrcData []byte, ppSignatureBlob **graphicsdirect
 		_pSrcData = &pSrcData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procD3DGetOutputSignatureBlob.Addr(), uintptr(unsafe.Pointer(_pSrcData)), uintptr(len(pSrcData)), uintptr(unsafe.Pointer(ppSignatureBlob)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // D3DGetTraceInstructionOffsets calls D3DCOMPILER_47!D3DGetTraceInstructionOffsets.
@@ -220,14 +220,14 @@ func D3DGetTraceInstructionOffsets(pSrcData []byte, Flags uint32, StartInstIndex
 		_pOffsets = &pOffsets[0]
 	}
 	r1, _, _ := syscall.SyscallN(procD3DGetTraceInstructionOffsets.Addr(), uintptr(unsafe.Pointer(_pSrcData)), uintptr(len(pSrcData)), uintptr(Flags), uintptr(StartInstIndex), uintptr(len(pOffsets)), uintptr(unsafe.Pointer(_pOffsets)), uintptr(unsafe.Pointer(pTotalInsts)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // D3DLoadModule calls D3DCOMPILER_47!D3DLoadModule.
 // https://learn.microsoft.com/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dloadmodule
 func D3DLoadModule(pSrcData unsafe.Pointer, cbSrcDataSize uintptr, ppModule **graphicsdirect3d11.ID3D11Module) error {
 	r1, _, _ := syscall.SyscallN(procD3DLoadModule.Addr(), uintptr(unsafe.Pointer(pSrcData)), uintptr(cbSrcDataSize), uintptr(unsafe.Pointer(ppModule)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // D3DPreprocess calls D3DCOMPILER_47!D3DPreprocess.
@@ -238,7 +238,7 @@ func D3DPreprocess(pSrcData []byte, pSourceName foundation.PSTR, pDefines *graph
 		_pSrcData = &pSrcData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procD3DPreprocess.Addr(), uintptr(unsafe.Pointer(_pSrcData)), uintptr(len(pSrcData)), uintptr(unsafe.Pointer(pSourceName)), uintptr(unsafe.Pointer(pDefines)), uintptr(unsafe.Pointer(pInclude)), uintptr(unsafe.Pointer(ppCodeText)), uintptr(unsafe.Pointer(ppErrorMsgs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // D3DReadFileToBlob calls D3DCOMPILER_47!D3DReadFileToBlob.
@@ -246,7 +246,7 @@ func D3DPreprocess(pSrcData []byte, pSourceName foundation.PSTR, pDefines *graph
 func D3DReadFileToBlob(pFileName string, ppContents **graphicsdirect3d.ID3DBlob) error {
 	_pFileName := win32.UTF16Ptr(pFileName)
 	r1, _, _ := syscall.SyscallN(procD3DReadFileToBlob.Addr(), uintptr(unsafe.Pointer(_pFileName)), uintptr(unsafe.Pointer(ppContents)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // D3DReflect calls D3DCOMPILER_47!D3DReflect.
@@ -257,7 +257,7 @@ func D3DReflect(pSrcData []byte, pInterface *win32.GUID, ppReflector *unsafe.Poi
 		_pSrcData = &pSrcData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procD3DReflect.Addr(), uintptr(unsafe.Pointer(_pSrcData)), uintptr(len(pSrcData)), uintptr(unsafe.Pointer(pInterface)), uintptr(unsafe.Pointer(ppReflector)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // D3DReflectLibrary calls D3DCOMPILER_47!D3DReflectLibrary.
@@ -268,7 +268,7 @@ func D3DReflectLibrary(pSrcData []byte, riid *win32.GUID, ppReflector **win32.IU
 		_pSrcData = &pSrcData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procD3DReflectLibrary.Addr(), uintptr(unsafe.Pointer(_pSrcData)), uintptr(len(pSrcData)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppReflector)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // D3DSetBlobPart calls D3DCOMPILER_47!D3DSetBlobPart.
@@ -283,7 +283,7 @@ func D3DSetBlobPart(pSrcData []byte, Part D3D_BLOB_PART, Flags uint32, pPart []b
 		_pPart = &pPart[0]
 	}
 	r1, _, _ := syscall.SyscallN(procD3DSetBlobPart.Addr(), uintptr(unsafe.Pointer(_pSrcData)), uintptr(len(pSrcData)), uintptr(Part), uintptr(Flags), uintptr(unsafe.Pointer(_pPart)), uintptr(len(pPart)), uintptr(unsafe.Pointer(ppNewShader)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // D3DStripShader calls D3DCOMPILER_47!D3DStripShader.
@@ -294,7 +294,7 @@ func D3DStripShader(pShaderBytecode []byte, uStripFlags uint32, ppStrippedBlob *
 		_pShaderBytecode = &pShaderBytecode[0]
 	}
 	r1, _, _ := syscall.SyscallN(procD3DStripShader.Addr(), uintptr(unsafe.Pointer(_pShaderBytecode)), uintptr(len(pShaderBytecode)), uintptr(uStripFlags), uintptr(unsafe.Pointer(ppStrippedBlob)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // D3DWriteBlobToFile calls D3DCOMPILER_47!D3DWriteBlobToFile.
@@ -303,5 +303,5 @@ func D3DWriteBlobToFile(pBlob *graphicsdirect3d.ID3DBlob, pFileName string, bOve
 	_pFileName := win32.UTF16Ptr(pFileName)
 	_bOverwrite := win32.Bool32(bOverwrite)
 	r1, _, _ := syscall.SyscallN(procD3DWriteBlobToFile.Addr(), uintptr(unsafe.Pointer(pBlob)), uintptr(unsafe.Pointer(_pFileName)), uintptr(_bOverwrite))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

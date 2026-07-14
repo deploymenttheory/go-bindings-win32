@@ -204,7 +204,7 @@ var (
 func GetNetScheduleAccountInformation(pwszServerName string, ccAccount uint32, wszAccount foundation.PWSTR) error {
 	_pwszServerName := win32.UTF16Ptr(pwszServerName)
 	r1, _, _ := syscall.SyscallN(procGetNetScheduleAccountInformation.Addr(), uintptr(unsafe.Pointer(_pwszServerName)), uintptr(ccAccount), uintptr(unsafe.Pointer(wszAccount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // I_NetLogonControl2 calls NETAPI32!I_NetLogonControl2.
@@ -518,7 +518,7 @@ func NetFreeAadJoinInformation(pJoinInfo *DSREG_JOIN_INFO) {
 func NetGetAadJoinInformation(pcszTenantId string, ppJoinInfo **DSREG_JOIN_INFO) error {
 	_pcszTenantId := win32.UTF16Ptr(pcszTenantId)
 	r1, _, _ := syscall.SyscallN(procNetGetAadJoinInformation.Addr(), uintptr(unsafe.Pointer(_pcszTenantId)), uintptr(unsafe.Pointer(ppJoinInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NetGetAnyDCName calls NETAPI32!NetGetAnyDCName.
@@ -1634,7 +1634,7 @@ func SetNetScheduleAccountInformation(pwszServerName string, pwszAccount string,
 	_pwszAccount := win32.UTF16Ptr(pwszAccount)
 	_pwszPassword := win32.UTF16Ptr(pwszPassword)
 	r1, _, _ := syscall.SyscallN(procSetNetScheduleAccountInformation.Addr(), uintptr(unsafe.Pointer(_pwszServerName)), uintptr(unsafe.Pointer(_pwszAccount)), uintptr(unsafe.Pointer(_pwszPassword)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TraceDeregister calls rtutils!TraceDeregisterW.

@@ -26,19 +26,19 @@ var IID_IWICImageEncoder = win32.GUID{Data1: 0x04c75bf8, Data2: 0x3ce1, Data3: 0
 // WriteFrame dispatches through IWICImageEncoder's vtable slot 3.
 func (self *IWICImageEncoder) WriteFrame(pImage *graphicsdirect2d.ID2D1Image, pFrameEncode *graphicsimaging.IWICBitmapFrameEncode, pImageParameters *graphicsimaging.WICImageParameters) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pImage)), uintptr(unsafe.Pointer(pFrameEncode)), uintptr(unsafe.Pointer(pImageParameters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteFrameThumbnail dispatches through IWICImageEncoder's vtable slot 4.
 func (self *IWICImageEncoder) WriteFrameThumbnail(pImage *graphicsdirect2d.ID2D1Image, pFrameEncode *graphicsimaging.IWICBitmapFrameEncode, pImageParameters *graphicsimaging.WICImageParameters) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pImage)), uintptr(unsafe.Pointer(pFrameEncode)), uintptr(unsafe.Pointer(pImageParameters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteThumbnail dispatches through IWICImageEncoder's vtable slot 5.
 func (self *IWICImageEncoder) WriteThumbnail(pImage *graphicsdirect2d.ID2D1Image, pEncoder *graphicsimaging.IWICBitmapEncoder, pImageParameters *graphicsimaging.WICImageParameters) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pImage)), uintptr(unsafe.Pointer(pEncoder)), uintptr(unsafe.Pointer(pImageParameters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWICImagingFactory2: https://learn.microsoft.com/windows/win32/api/wincodec/nn-wincodec-iwicimagingfactory2
@@ -53,7 +53,7 @@ var IID_IWICImagingFactory2 = win32.GUID{Data1: 0x7b816b45, Data2: 0x1996, Data3
 // CreateImageEncoder dispatches through IWICImagingFactory2's vtable slot 28.
 func (self *IWICImagingFactory2) CreateImageEncoder(pD2DDevice *graphicsdirect2d.ID2D1Device, ppWICImageEncoder **IWICImageEncoder) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pD2DDevice)), uintptr(unsafe.Pointer(ppWICImageEncoder)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 489b3d8b-624a-4258-b678-7eece70f299d
@@ -67,5 +67,5 @@ var IID_IWICImagingFactory3 = win32.GUID{Data1: 0x489b3d8b, Data2: 0x624a, Data3
 // CreateBitmapToneMapper dispatches through IWICImagingFactory3's vtable slot 29.
 func (self *IWICImagingFactory3) CreateBitmapToneMapper(ppToneMapper **graphicsimaging.IWICBitmapToneMapper) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppToneMapper)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

@@ -41,7 +41,7 @@ var (
 // Minimum OS: windows6.1.
 func NdfCancelIncident(Handle unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procNdfCancelIncident.Addr(), uintptr(unsafe.Pointer(Handle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NdfCloseIncident calls NDFAPI!NdfCloseIncident.
@@ -49,7 +49,7 @@ func NdfCancelIncident(Handle unsafe.Pointer) error {
 // Minimum OS: windows6.0.6000.
 func NdfCloseIncident(handle unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procNdfCloseIncident.Addr(), uintptr(unsafe.Pointer(handle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NdfCreateConnectivityIncident calls NDFAPI!NdfCreateConnectivityIncident.
@@ -57,7 +57,7 @@ func NdfCloseIncident(handle unsafe.Pointer) error {
 // Minimum OS: windows6.0.6000.
 func NdfCreateConnectivityIncident(handle *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procNdfCreateConnectivityIncident.Addr(), uintptr(unsafe.Pointer(handle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NdfCreateDNSIncident calls NDFAPI!NdfCreateDNSIncident.
@@ -66,7 +66,7 @@ func NdfCreateConnectivityIncident(handle *unsafe.Pointer) error {
 func NdfCreateDNSIncident(hostname string, queryType uint16, handle *unsafe.Pointer) error {
 	_hostname := win32.UTF16Ptr(hostname)
 	r1, _, _ := syscall.SyscallN(procNdfCreateDNSIncident.Addr(), uintptr(unsafe.Pointer(_hostname)), uintptr(queryType), uintptr(unsafe.Pointer(handle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NdfCreateGroupingIncident calls NDFAPI!NdfCreateGroupingIncident.
@@ -79,7 +79,7 @@ func NdfCreateGroupingIncident(CloudName string, GroupName string, Identity stri
 	_Invitation := win32.UTF16Ptr(Invitation)
 	_appId := win32.UTF16Ptr(appId)
 	r1, _, _ := syscall.SyscallN(procNdfCreateGroupingIncident.Addr(), uintptr(unsafe.Pointer(_CloudName)), uintptr(unsafe.Pointer(_GroupName)), uintptr(unsafe.Pointer(_Identity)), uintptr(unsafe.Pointer(_Invitation)), uintptr(unsafe.Pointer(Addresses)), uintptr(unsafe.Pointer(_appId)), uintptr(unsafe.Pointer(handle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NdfCreateIncident calls NDFAPI!NdfCreateIncident.
@@ -92,7 +92,7 @@ func NdfCreateIncident(helperClassName string, attributes []HELPER_ATTRIBUTE, ha
 		_attributes = &attributes[0]
 	}
 	r1, _, _ := syscall.SyscallN(procNdfCreateIncident.Addr(), uintptr(unsafe.Pointer(_helperClassName)), uintptr(len(attributes)), uintptr(unsafe.Pointer(_attributes)), uintptr(unsafe.Pointer(handle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NdfCreatePnrpIncident calls NDFAPI!NdfCreatePnrpIncident.
@@ -104,7 +104,7 @@ func NdfCreatePnrpIncident(cloudname string, peername string, diagnosePublish bo
 	_diagnosePublish := win32.Bool32(diagnosePublish)
 	_appId := win32.UTF16Ptr(appId)
 	r1, _, _ := syscall.SyscallN(procNdfCreatePnrpIncident.Addr(), uintptr(unsafe.Pointer(_cloudname)), uintptr(unsafe.Pointer(_peername)), uintptr(_diagnosePublish), uintptr(unsafe.Pointer(_appId)), uintptr(unsafe.Pointer(handle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NdfCreateSharingIncident calls NDFAPI!NdfCreateSharingIncident.
@@ -113,7 +113,7 @@ func NdfCreatePnrpIncident(cloudname string, peername string, diagnosePublish bo
 func NdfCreateSharingIncident(UNCPath string, handle *unsafe.Pointer) error {
 	_UNCPath := win32.UTF16Ptr(UNCPath)
 	r1, _, _ := syscall.SyscallN(procNdfCreateSharingIncident.Addr(), uintptr(unsafe.Pointer(_UNCPath)), uintptr(unsafe.Pointer(handle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NdfCreateWebIncident calls NDFAPI!NdfCreateWebIncident.
@@ -122,7 +122,7 @@ func NdfCreateSharingIncident(UNCPath string, handle *unsafe.Pointer) error {
 func NdfCreateWebIncident(url string, handle *unsafe.Pointer) error {
 	_url := win32.UTF16Ptr(url)
 	r1, _, _ := syscall.SyscallN(procNdfCreateWebIncident.Addr(), uintptr(unsafe.Pointer(_url)), uintptr(unsafe.Pointer(handle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NdfCreateWebIncidentEx calls NDFAPI!NdfCreateWebIncidentEx.
@@ -133,7 +133,7 @@ func NdfCreateWebIncidentEx(url string, useWinHTTP bool, moduleName string, hand
 	_useWinHTTP := win32.Bool32(useWinHTTP)
 	_moduleName := win32.UTF16Ptr(moduleName)
 	r1, _, _ := syscall.SyscallN(procNdfCreateWebIncidentEx.Addr(), uintptr(unsafe.Pointer(_url)), uintptr(_useWinHTTP), uintptr(unsafe.Pointer(_moduleName)), uintptr(unsafe.Pointer(handle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NdfCreateWinSockIncident calls NDFAPI!NdfCreateWinSockIncident.
@@ -143,7 +143,7 @@ func NdfCreateWinSockIncident(sock networkingwinsock.SOCKET, host string, port u
 	_host := win32.UTF16Ptr(host)
 	_appId := win32.UTF16Ptr(appId)
 	r1, _, _ := syscall.SyscallN(procNdfCreateWinSockIncident.Addr(), uintptr(sock), uintptr(unsafe.Pointer(_host)), uintptr(port), uintptr(unsafe.Pointer(_appId)), uintptr(unsafe.Pointer(userId)), uintptr(unsafe.Pointer(handle)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NdfDiagnoseIncident calls NDFAPI!NdfDiagnoseIncident.
@@ -151,7 +151,7 @@ func NdfCreateWinSockIncident(sock networkingwinsock.SOCKET, host string, port u
 // Minimum OS: windows6.1.
 func NdfDiagnoseIncident(Handle unsafe.Pointer, RootCauseCount *uint32, RootCauses **RootCauseInfo, dwWait uint32, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procNdfDiagnoseIncident.Addr(), uintptr(unsafe.Pointer(Handle)), uintptr(unsafe.Pointer(RootCauseCount)), uintptr(unsafe.Pointer(RootCauses)), uintptr(dwWait), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NdfExecuteDiagnosis calls NDFAPI!NdfExecuteDiagnosis.
@@ -159,7 +159,7 @@ func NdfDiagnoseIncident(Handle unsafe.Pointer, RootCauseCount *uint32, RootCaus
 // Minimum OS: windows6.0.6000.
 func NdfExecuteDiagnosis(handle unsafe.Pointer, hwnd foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(procNdfExecuteDiagnosis.Addr(), uintptr(unsafe.Pointer(handle)), uintptr(hwnd))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NdfGetTraceFile calls NDFAPI!NdfGetTraceFile.
@@ -167,7 +167,7 @@ func NdfExecuteDiagnosis(handle unsafe.Pointer, hwnd foundation.HWND) error {
 // Minimum OS: windows6.1.
 func NdfGetTraceFile(Handle unsafe.Pointer, TraceFileLocation *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procNdfGetTraceFile.Addr(), uintptr(unsafe.Pointer(Handle)), uintptr(unsafe.Pointer(TraceFileLocation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NdfRepairIncident calls NDFAPI!NdfRepairIncident.
@@ -175,5 +175,5 @@ func NdfGetTraceFile(Handle unsafe.Pointer, TraceFileLocation *foundation.PWSTR)
 // Minimum OS: windows6.1.
 func NdfRepairIncident(Handle unsafe.Pointer, RepairEx *RepairInfoEx, dwWait uint32) error {
 	r1, _, _ := syscall.SyscallN(procNdfRepairIncident.Addr(), uintptr(unsafe.Pointer(Handle)), uintptr(unsafe.Pointer(RepairEx)), uintptr(dwWait))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

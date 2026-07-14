@@ -29,21 +29,21 @@ var IID_IXpsDocumentPackageTarget = win32.GUID{Data1: 0x3b0b6d38, Data2: 0x53ad,
 func (self *IXpsDocumentPackageTarget) GetXpsOMPackageWriter(documentSequencePartName *storagepackagingopc.IOpcPartUri, discardControlPartName *storagepackagingopc.IOpcPartUri) (*IXpsOMPackageWriter, error) {
 	var _packageWriter *IXpsOMPackageWriter
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(documentSequencePartName)), uintptr(unsafe.Pointer(discardControlPartName)), uintptr(unsafe.Pointer(&_packageWriter)))
-	return _packageWriter, win32.HRESULTError(int32(r1))
+	return _packageWriter, win32.ErrIfFailed(int32(r1))
 }
 
 // GetXpsOMFactory dispatches through IXpsDocumentPackageTarget's vtable slot 4.
 func (self *IXpsDocumentPackageTarget) GetXpsOMFactory() (*IXpsOMObjectFactory, error) {
 	var _xpsFactory *IXpsOMObjectFactory
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_xpsFactory)))
-	return _xpsFactory, win32.HRESULTError(int32(r1))
+	return _xpsFactory, win32.ErrIfFailed(int32(r1))
 }
 
 // GetXpsType dispatches through IXpsDocumentPackageTarget's vtable slot 5.
 func (self *IXpsDocumentPackageTarget) GetXpsType() (XPS_DOCUMENT_TYPE, error) {
 	var _documentType XPS_DOCUMENT_TYPE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_documentType)))
-	return _documentType, win32.HRESULTError(int32(r1))
+	return _documentType, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsDocumentPackageTarget3D: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel_2/nn-xpsobjectmodel_2-ixpsdocumentpackagetarget3d
@@ -59,14 +59,14 @@ var IID_IXpsDocumentPackageTarget3D = win32.GUID{Data1: 0x60ba71b8, Data2: 0x310
 func (self *IXpsDocumentPackageTarget3D) GetXpsOMPackageWriter3D(documentSequencePartName *storagepackagingopc.IOpcPartUri, discardControlPartName *storagepackagingopc.IOpcPartUri, modelPartName *storagepackagingopc.IOpcPartUri, modelData *systemcom.IStream) (*IXpsOMPackageWriter3D, error) {
 	var _packageWriter *IXpsOMPackageWriter3D
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(documentSequencePartName)), uintptr(unsafe.Pointer(discardControlPartName)), uintptr(unsafe.Pointer(modelPartName)), uintptr(unsafe.Pointer(modelData)), uintptr(unsafe.Pointer(&_packageWriter)))
-	return _packageWriter, win32.HRESULTError(int32(r1))
+	return _packageWriter, win32.ErrIfFailed(int32(r1))
 }
 
 // GetXpsOMFactory dispatches through IXpsDocumentPackageTarget3D's vtable slot 4.
 func (self *IXpsDocumentPackageTarget3D) GetXpsOMFactory() (*IXpsOMObjectFactory, error) {
 	var _xpsFactory *IXpsOMObjectFactory
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_xpsFactory)))
-	return _xpsFactory, win32.HRESULTError(int32(r1))
+	return _xpsFactory, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMBrush: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsombrush
@@ -82,7 +82,7 @@ var IID_IXpsOMBrush = win32.GUID{Data1: 0x56a3f80c, Data2: 0xea4c, Data3: 0x4187
 func (self *IXpsOMBrush) GetOpacity() (float32, error) {
 	var _opacity float32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_opacity)))
-	return _opacity, win32.HRESULTError(int32(r1))
+	return _opacity, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMCanvas: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomcanvas
@@ -98,89 +98,89 @@ var IID_IXpsOMCanvas = win32.GUID{Data1: 0x221d1452, Data2: 0x331e, Data3: 0x47c
 func (self *IXpsOMCanvas) GetVisuals() (*IXpsOMVisualCollection, error) {
 	var _visuals *IXpsOMVisualCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_visuals)))
-	return _visuals, win32.HRESULTError(int32(r1))
+	return _visuals, win32.ErrIfFailed(int32(r1))
 }
 
 // GetUseAliasedEdgeMode dispatches through IXpsOMCanvas's vtable slot 31.
 func (self *IXpsOMCanvas) GetUseAliasedEdgeMode() (foundation.BOOL, error) {
 	var _useAliasedEdgeMode foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_useAliasedEdgeMode)))
-	return _useAliasedEdgeMode, win32.HRESULTError(int32(r1))
+	return _useAliasedEdgeMode, win32.ErrIfFailed(int32(r1))
 }
 
 // SetUseAliasedEdgeMode dispatches through IXpsOMCanvas's vtable slot 32.
 func (self *IXpsOMCanvas) SetUseAliasedEdgeMode(useAliasedEdgeMode bool) error {
 	_useAliasedEdgeMode := win32.Bool32(useAliasedEdgeMode)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(_useAliasedEdgeMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAccessibilityShortDescription dispatches through IXpsOMCanvas's vtable slot 33.
 func (self *IXpsOMCanvas) GetAccessibilityShortDescription() (foundation.PWSTR, error) {
 	var _shortDescription foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_shortDescription)))
-	return _shortDescription, win32.HRESULTError(int32(r1))
+	return _shortDescription, win32.ErrIfFailed(int32(r1))
 }
 
 // SetAccessibilityShortDescription dispatches through IXpsOMCanvas's vtable slot 34.
 func (self *IXpsOMCanvas) SetAccessibilityShortDescription(shortDescription string) error {
 	_shortDescription := win32.UTF16Ptr(shortDescription)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_shortDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAccessibilityLongDescription dispatches through IXpsOMCanvas's vtable slot 35.
 func (self *IXpsOMCanvas) GetAccessibilityLongDescription() (foundation.PWSTR, error) {
 	var _longDescription foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_longDescription)))
-	return _longDescription, win32.HRESULTError(int32(r1))
+	return _longDescription, win32.ErrIfFailed(int32(r1))
 }
 
 // SetAccessibilityLongDescription dispatches through IXpsOMCanvas's vtable slot 36.
 func (self *IXpsOMCanvas) SetAccessibilityLongDescription(longDescription string) error {
 	_longDescription := win32.UTF16Ptr(longDescription)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_longDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDictionary dispatches through IXpsOMCanvas's vtable slot 37.
 func (self *IXpsOMCanvas) GetDictionary() (*IXpsOMDictionary, error) {
 	var _resourceDictionary *IXpsOMDictionary
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_resourceDictionary)))
-	return _resourceDictionary, win32.HRESULTError(int32(r1))
+	return _resourceDictionary, win32.ErrIfFailed(int32(r1))
 }
 
 // GetDictionaryLocal dispatches through IXpsOMCanvas's vtable slot 38.
 func (self *IXpsOMCanvas) GetDictionaryLocal() (*IXpsOMDictionary, error) {
 	var _resourceDictionary *IXpsOMDictionary
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_resourceDictionary)))
-	return _resourceDictionary, win32.HRESULTError(int32(r1))
+	return _resourceDictionary, win32.ErrIfFailed(int32(r1))
 }
 
 // SetDictionaryLocal dispatches through IXpsOMCanvas's vtable slot 39.
 func (self *IXpsOMCanvas) SetDictionaryLocal(resourceDictionary *IXpsOMDictionary) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(resourceDictionary)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDictionaryResource dispatches through IXpsOMCanvas's vtable slot 40.
 func (self *IXpsOMCanvas) GetDictionaryResource() (*IXpsOMRemoteDictionaryResource, error) {
 	var _remoteDictionaryResource *IXpsOMRemoteDictionaryResource
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_remoteDictionaryResource)))
-	return _remoteDictionaryResource, win32.HRESULTError(int32(r1))
+	return _remoteDictionaryResource, win32.ErrIfFailed(int32(r1))
 }
 
 // SetDictionaryResource dispatches through IXpsOMCanvas's vtable slot 41.
 func (self *IXpsOMCanvas) SetDictionaryResource(remoteDictionaryResource *IXpsOMRemoteDictionaryResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(remoteDictionaryResource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IXpsOMCanvas's vtable slot 42.
 func (self *IXpsOMCanvas) Clone() (*IXpsOMCanvas, error) {
 	var _canvas *IXpsOMCanvas
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_canvas)))
-	return _canvas, win32.HRESULTError(int32(r1))
+	return _canvas, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMColorProfileResource: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomcolorprofileresource
@@ -196,13 +196,13 @@ var IID_IXpsOMColorProfileResource = win32.GUID{Data1: 0x67bd7d69, Data2: 0x1eef
 func (self *IXpsOMColorProfileResource) GetStream() (*systemcom.IStream, error) {
 	var _stream *systemcom.IStream
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_stream)))
-	return _stream, win32.HRESULTError(int32(r1))
+	return _stream, win32.ErrIfFailed(int32(r1))
 }
 
 // SetContent dispatches through IXpsOMColorProfileResource's vtable slot 6.
 func (self *IXpsOMColorProfileResource) SetContent(sourceStream *systemcom.IStream, partName *storagepackagingopc.IOpcPartUri) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sourceStream)), uintptr(unsafe.Pointer(partName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMColorProfileResourceCollection: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomcolorprofileresourcecollection
@@ -218,45 +218,45 @@ var IID_IXpsOMColorProfileResourceCollection = win32.GUID{Data1: 0x12759630, Dat
 func (self *IXpsOMColorProfileResourceCollection) GetCount() (uint32, error) {
 	var _count uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
-	return _count, win32.HRESULTError(int32(r1))
+	return _count, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAt dispatches through IXpsOMColorProfileResourceCollection's vtable slot 4.
 func (self *IXpsOMColorProfileResourceCollection) GetAt(index uint32) (*IXpsOMColorProfileResource, error) {
 	var _object *IXpsOMColorProfileResource
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_object)))
-	return _object, win32.HRESULTError(int32(r1))
+	return _object, win32.ErrIfFailed(int32(r1))
 }
 
 // InsertAt dispatches through IXpsOMColorProfileResourceCollection's vtable slot 5.
 func (self *IXpsOMColorProfileResourceCollection) InsertAt(index uint32, object *IXpsOMColorProfileResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(object)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAt dispatches through IXpsOMColorProfileResourceCollection's vtable slot 6.
 func (self *IXpsOMColorProfileResourceCollection) RemoveAt(index uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAt dispatches through IXpsOMColorProfileResourceCollection's vtable slot 7.
 func (self *IXpsOMColorProfileResourceCollection) SetAt(index uint32, object *IXpsOMColorProfileResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(object)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Append dispatches through IXpsOMColorProfileResourceCollection's vtable slot 8.
 func (self *IXpsOMColorProfileResourceCollection) Append(object *IXpsOMColorProfileResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(object)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetByPartName dispatches through IXpsOMColorProfileResourceCollection's vtable slot 9.
 func (self *IXpsOMColorProfileResourceCollection) GetByPartName(partName *storagepackagingopc.IOpcPartUri) (*IXpsOMColorProfileResource, error) {
 	var _part *IXpsOMColorProfileResource
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(partName)), uintptr(unsafe.Pointer(&_part)))
-	return _part, win32.HRESULTError(int32(r1))
+	return _part, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMCoreProperties: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomcoreproperties
@@ -272,235 +272,235 @@ var IID_IXpsOMCoreProperties = win32.GUID{Data1: 0x3340fe8f, Data2: 0x4027, Data
 func (self *IXpsOMCoreProperties) GetOwner() (*IXpsOMPackage, error) {
 	var _package_ *IXpsOMPackage
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_package_)))
-	return _package_, win32.HRESULTError(int32(r1))
+	return _package_, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCategory dispatches through IXpsOMCoreProperties's vtable slot 6.
 func (self *IXpsOMCoreProperties) GetCategory() (foundation.PWSTR, error) {
 	var _category foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_category)))
-	return _category, win32.HRESULTError(int32(r1))
+	return _category, win32.ErrIfFailed(int32(r1))
 }
 
 // SetCategory dispatches through IXpsOMCoreProperties's vtable slot 7.
 func (self *IXpsOMCoreProperties) SetCategory(category string) error {
 	_category := win32.UTF16Ptr(category)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_category)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetContentStatus dispatches through IXpsOMCoreProperties's vtable slot 8.
 func (self *IXpsOMCoreProperties) GetContentStatus() (foundation.PWSTR, error) {
 	var _contentStatus foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_contentStatus)))
-	return _contentStatus, win32.HRESULTError(int32(r1))
+	return _contentStatus, win32.ErrIfFailed(int32(r1))
 }
 
 // SetContentStatus dispatches through IXpsOMCoreProperties's vtable slot 9.
 func (self *IXpsOMCoreProperties) SetContentStatus(contentStatus string) error {
 	_contentStatus := win32.UTF16Ptr(contentStatus)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_contentStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetContentType dispatches through IXpsOMCoreProperties's vtable slot 10.
 func (self *IXpsOMCoreProperties) GetContentType() (foundation.PWSTR, error) {
 	var _contentType foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_contentType)))
-	return _contentType, win32.HRESULTError(int32(r1))
+	return _contentType, win32.ErrIfFailed(int32(r1))
 }
 
 // SetContentType dispatches through IXpsOMCoreProperties's vtable slot 11.
 func (self *IXpsOMCoreProperties) SetContentType(contentType string) error {
 	_contentType := win32.UTF16Ptr(contentType)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_contentType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCreated dispatches through IXpsOMCoreProperties's vtable slot 12.
 func (self *IXpsOMCoreProperties) GetCreated() (foundation.SYSTEMTIME, error) {
 	var _created foundation.SYSTEMTIME
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_created)))
-	return _created, win32.HRESULTError(int32(r1))
+	return _created, win32.ErrIfFailed(int32(r1))
 }
 
 // SetCreated dispatches through IXpsOMCoreProperties's vtable slot 13.
 func (self *IXpsOMCoreProperties) SetCreated(created *foundation.SYSTEMTIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(created)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCreator dispatches through IXpsOMCoreProperties's vtable slot 14.
 func (self *IXpsOMCoreProperties) GetCreator() (foundation.PWSTR, error) {
 	var _creator foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_creator)))
-	return _creator, win32.HRESULTError(int32(r1))
+	return _creator, win32.ErrIfFailed(int32(r1))
 }
 
 // SetCreator dispatches through IXpsOMCoreProperties's vtable slot 15.
 func (self *IXpsOMCoreProperties) SetCreator(creator string) error {
 	_creator := win32.UTF16Ptr(creator)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_creator)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDescription dispatches through IXpsOMCoreProperties's vtable slot 16.
 func (self *IXpsOMCoreProperties) GetDescription() (foundation.PWSTR, error) {
 	var _description foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_description)))
-	return _description, win32.HRESULTError(int32(r1))
+	return _description, win32.ErrIfFailed(int32(r1))
 }
 
 // SetDescription dispatches through IXpsOMCoreProperties's vtable slot 17.
 func (self *IXpsOMCoreProperties) SetDescription(description string) error {
 	_description := win32.UTF16Ptr(description)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_description)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetIdentifier dispatches through IXpsOMCoreProperties's vtable slot 18.
 func (self *IXpsOMCoreProperties) GetIdentifier() (foundation.PWSTR, error) {
 	var _identifier foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_identifier)))
-	return _identifier, win32.HRESULTError(int32(r1))
+	return _identifier, win32.ErrIfFailed(int32(r1))
 }
 
 // SetIdentifier dispatches through IXpsOMCoreProperties's vtable slot 19.
 func (self *IXpsOMCoreProperties) SetIdentifier(identifier string) error {
 	_identifier := win32.UTF16Ptr(identifier)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_identifier)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetKeywords dispatches through IXpsOMCoreProperties's vtable slot 20.
 func (self *IXpsOMCoreProperties) GetKeywords() (foundation.PWSTR, error) {
 	var _keywords foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_keywords)))
-	return _keywords, win32.HRESULTError(int32(r1))
+	return _keywords, win32.ErrIfFailed(int32(r1))
 }
 
 // SetKeywords dispatches through IXpsOMCoreProperties's vtable slot 21.
 func (self *IXpsOMCoreProperties) SetKeywords(keywords string) error {
 	_keywords := win32.UTF16Ptr(keywords)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_keywords)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLanguage dispatches through IXpsOMCoreProperties's vtable slot 22.
 func (self *IXpsOMCoreProperties) GetLanguage() (foundation.PWSTR, error) {
 	var _language foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_language)))
-	return _language, win32.HRESULTError(int32(r1))
+	return _language, win32.ErrIfFailed(int32(r1))
 }
 
 // SetLanguage dispatches through IXpsOMCoreProperties's vtable slot 23.
 func (self *IXpsOMCoreProperties) SetLanguage(language string) error {
 	_language := win32.UTF16Ptr(language)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_language)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLastModifiedBy dispatches through IXpsOMCoreProperties's vtable slot 24.
 func (self *IXpsOMCoreProperties) GetLastModifiedBy() (foundation.PWSTR, error) {
 	var _lastModifiedBy foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lastModifiedBy)))
-	return _lastModifiedBy, win32.HRESULTError(int32(r1))
+	return _lastModifiedBy, win32.ErrIfFailed(int32(r1))
 }
 
 // SetLastModifiedBy dispatches through IXpsOMCoreProperties's vtable slot 25.
 func (self *IXpsOMCoreProperties) SetLastModifiedBy(lastModifiedBy string) error {
 	_lastModifiedBy := win32.UTF16Ptr(lastModifiedBy)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lastModifiedBy)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLastPrinted dispatches through IXpsOMCoreProperties's vtable slot 26.
 func (self *IXpsOMCoreProperties) GetLastPrinted() (foundation.SYSTEMTIME, error) {
 	var _lastPrinted foundation.SYSTEMTIME
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lastPrinted)))
-	return _lastPrinted, win32.HRESULTError(int32(r1))
+	return _lastPrinted, win32.ErrIfFailed(int32(r1))
 }
 
 // SetLastPrinted dispatches through IXpsOMCoreProperties's vtable slot 27.
 func (self *IXpsOMCoreProperties) SetLastPrinted(lastPrinted *foundation.SYSTEMTIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lastPrinted)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetModified dispatches through IXpsOMCoreProperties's vtable slot 28.
 func (self *IXpsOMCoreProperties) GetModified() (foundation.SYSTEMTIME, error) {
 	var _modified foundation.SYSTEMTIME
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_modified)))
-	return _modified, win32.HRESULTError(int32(r1))
+	return _modified, win32.ErrIfFailed(int32(r1))
 }
 
 // SetModified dispatches through IXpsOMCoreProperties's vtable slot 29.
 func (self *IXpsOMCoreProperties) SetModified(modified *foundation.SYSTEMTIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(modified)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRevision dispatches through IXpsOMCoreProperties's vtable slot 30.
 func (self *IXpsOMCoreProperties) GetRevision() (foundation.PWSTR, error) {
 	var _revision foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_revision)))
-	return _revision, win32.HRESULTError(int32(r1))
+	return _revision, win32.ErrIfFailed(int32(r1))
 }
 
 // SetRevision dispatches through IXpsOMCoreProperties's vtable slot 31.
 func (self *IXpsOMCoreProperties) SetRevision(revision string) error {
 	_revision := win32.UTF16Ptr(revision)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_revision)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSubject dispatches through IXpsOMCoreProperties's vtable slot 32.
 func (self *IXpsOMCoreProperties) GetSubject() (foundation.PWSTR, error) {
 	var _subject foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_subject)))
-	return _subject, win32.HRESULTError(int32(r1))
+	return _subject, win32.ErrIfFailed(int32(r1))
 }
 
 // SetSubject dispatches through IXpsOMCoreProperties's vtable slot 33.
 func (self *IXpsOMCoreProperties) SetSubject(subject string) error {
 	_subject := win32.UTF16Ptr(subject)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_subject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTitle dispatches through IXpsOMCoreProperties's vtable slot 34.
 func (self *IXpsOMCoreProperties) GetTitle() (foundation.PWSTR, error) {
 	var _title foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_title)))
-	return _title, win32.HRESULTError(int32(r1))
+	return _title, win32.ErrIfFailed(int32(r1))
 }
 
 // SetTitle dispatches through IXpsOMCoreProperties's vtable slot 35.
 func (self *IXpsOMCoreProperties) SetTitle(title string) error {
 	_title := win32.UTF16Ptr(title)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_title)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetVersion dispatches through IXpsOMCoreProperties's vtable slot 36.
 func (self *IXpsOMCoreProperties) GetVersion() (foundation.PWSTR, error) {
 	var _version foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_version)))
-	return _version, win32.HRESULTError(int32(r1))
+	return _version, win32.ErrIfFailed(int32(r1))
 }
 
 // SetVersion dispatches through IXpsOMCoreProperties's vtable slot 37.
 func (self *IXpsOMCoreProperties) SetVersion(version string) error {
 	_version := win32.UTF16Ptr(version)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_version)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IXpsOMCoreProperties's vtable slot 38.
 func (self *IXpsOMCoreProperties) Clone() (*IXpsOMCoreProperties, error) {
 	var _coreProperties *IXpsOMCoreProperties
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_coreProperties)))
-	return _coreProperties, win32.HRESULTError(int32(r1))
+	return _coreProperties, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMDashCollection: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomdashcollection
@@ -516,38 +516,38 @@ var IID_IXpsOMDashCollection = win32.GUID{Data1: 0x081613f4, Data2: 0x74eb, Data
 func (self *IXpsOMDashCollection) GetCount() (uint32, error) {
 	var _count uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
-	return _count, win32.HRESULTError(int32(r1))
+	return _count, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAt dispatches through IXpsOMDashCollection's vtable slot 4.
 func (self *IXpsOMDashCollection) GetAt(index uint32) (XPS_DASH, error) {
 	var _dash XPS_DASH
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_dash)))
-	return _dash, win32.HRESULTError(int32(r1))
+	return _dash, win32.ErrIfFailed(int32(r1))
 }
 
 // InsertAt dispatches through IXpsOMDashCollection's vtable slot 5.
 func (self *IXpsOMDashCollection) InsertAt(index uint32, dash *XPS_DASH) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(dash)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAt dispatches through IXpsOMDashCollection's vtable slot 6.
 func (self *IXpsOMDashCollection) RemoveAt(index uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAt dispatches through IXpsOMDashCollection's vtable slot 7.
 func (self *IXpsOMDashCollection) SetAt(index uint32, dash *XPS_DASH) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(dash)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Append dispatches through IXpsOMDashCollection's vtable slot 8.
 func (self *IXpsOMDashCollection) Append(dash *XPS_DASH) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dash)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMDictionary: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomdictionary
@@ -563,21 +563,21 @@ var IID_IXpsOMDictionary = win32.GUID{Data1: 0x897c86b8, Data2: 0x8eaf, Data3: 0
 func (self *IXpsOMDictionary) GetOwner() (*systemcom.IUnknown, error) {
 	var _owner *systemcom.IUnknown
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_owner)))
-	return _owner, win32.HRESULTError(int32(r1))
+	return _owner, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCount dispatches through IXpsOMDictionary's vtable slot 4.
 func (self *IXpsOMDictionary) GetCount() (uint32, error) {
 	var _count uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
-	return _count, win32.HRESULTError(int32(r1))
+	return _count, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAt dispatches through IXpsOMDictionary's vtable slot 5.
 func (self *IXpsOMDictionary) GetAt(index uint32, key *foundation.PWSTR) (*IXpsOMShareable, error) {
 	var _entry *IXpsOMShareable
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(&_entry)))
-	return _entry, win32.HRESULTError(int32(r1))
+	return _entry, win32.ErrIfFailed(int32(r1))
 }
 
 // GetByKey dispatches through IXpsOMDictionary's vtable slot 6.
@@ -585,48 +585,48 @@ func (self *IXpsOMDictionary) GetByKey(key string, beforeEntry *IXpsOMShareable)
 	_key := win32.UTF16Ptr(key)
 	var _entry *IXpsOMShareable
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_key)), uintptr(unsafe.Pointer(beforeEntry)), uintptr(unsafe.Pointer(&_entry)))
-	return _entry, win32.HRESULTError(int32(r1))
+	return _entry, win32.ErrIfFailed(int32(r1))
 }
 
 // GetIndex dispatches through IXpsOMDictionary's vtable slot 7.
 func (self *IXpsOMDictionary) GetIndex(entry *IXpsOMShareable) (uint32, error) {
 	var _index uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(entry)), uintptr(unsafe.Pointer(&_index)))
-	return _index, win32.HRESULTError(int32(r1))
+	return _index, win32.ErrIfFailed(int32(r1))
 }
 
 // Append dispatches through IXpsOMDictionary's vtable slot 8.
 func (self *IXpsOMDictionary) Append(key string, entry *IXpsOMShareable) error {
 	_key := win32.UTF16Ptr(key)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_key)), uintptr(unsafe.Pointer(entry)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InsertAt dispatches through IXpsOMDictionary's vtable slot 9.
 func (self *IXpsOMDictionary) InsertAt(index uint32, key string, entry *IXpsOMShareable) error {
 	_key := win32.UTF16Ptr(key)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(_key)), uintptr(unsafe.Pointer(entry)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAt dispatches through IXpsOMDictionary's vtable slot 10.
 func (self *IXpsOMDictionary) RemoveAt(index uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAt dispatches through IXpsOMDictionary's vtable slot 11.
 func (self *IXpsOMDictionary) SetAt(index uint32, key string, entry *IXpsOMShareable) error {
 	_key := win32.UTF16Ptr(key)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(_key)), uintptr(unsafe.Pointer(entry)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IXpsOMDictionary's vtable slot 12.
 func (self *IXpsOMDictionary) Clone() (*IXpsOMDictionary, error) {
 	var _dictionary *IXpsOMDictionary
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_dictionary)))
-	return _dictionary, win32.HRESULTError(int32(r1))
+	return _dictionary, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMDocument: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomdocument
@@ -642,54 +642,54 @@ var IID_IXpsOMDocument = win32.GUID{Data1: 0x2c2c94cb, Data2: 0xac5f, Data3: 0x4
 func (self *IXpsOMDocument) GetOwner() (*IXpsOMDocumentSequence, error) {
 	var _documentSequence *IXpsOMDocumentSequence
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_documentSequence)))
-	return _documentSequence, win32.HRESULTError(int32(r1))
+	return _documentSequence, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPageReferences dispatches through IXpsOMDocument's vtable slot 6.
 func (self *IXpsOMDocument) GetPageReferences() (*IXpsOMPageReferenceCollection, error) {
 	var _pageReferences *IXpsOMPageReferenceCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pageReferences)))
-	return _pageReferences, win32.HRESULTError(int32(r1))
+	return _pageReferences, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPrintTicketResource dispatches through IXpsOMDocument's vtable slot 7.
 func (self *IXpsOMDocument) GetPrintTicketResource() (*IXpsOMPrintTicketResource, error) {
 	var _printTicketResource *IXpsOMPrintTicketResource
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_printTicketResource)))
-	return _printTicketResource, win32.HRESULTError(int32(r1))
+	return _printTicketResource, win32.ErrIfFailed(int32(r1))
 }
 
 // SetPrintTicketResource dispatches through IXpsOMDocument's vtable slot 8.
 func (self *IXpsOMDocument) SetPrintTicketResource(printTicketResource *IXpsOMPrintTicketResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(printTicketResource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDocumentStructureResource dispatches through IXpsOMDocument's vtable slot 9.
 func (self *IXpsOMDocument) GetDocumentStructureResource() (*IXpsOMDocumentStructureResource, error) {
 	var _documentStructureResource *IXpsOMDocumentStructureResource
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_documentStructureResource)))
-	return _documentStructureResource, win32.HRESULTError(int32(r1))
+	return _documentStructureResource, win32.ErrIfFailed(int32(r1))
 }
 
 // SetDocumentStructureResource dispatches through IXpsOMDocument's vtable slot 10.
 func (self *IXpsOMDocument) SetDocumentStructureResource(documentStructureResource *IXpsOMDocumentStructureResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(documentStructureResource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSignatureBlockResources dispatches through IXpsOMDocument's vtable slot 11.
 func (self *IXpsOMDocument) GetSignatureBlockResources() (*IXpsOMSignatureBlockResourceCollection, error) {
 	var _signatureBlockResources *IXpsOMSignatureBlockResourceCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_signatureBlockResources)))
-	return _signatureBlockResources, win32.HRESULTError(int32(r1))
+	return _signatureBlockResources, win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IXpsOMDocument's vtable slot 12.
 func (self *IXpsOMDocument) Clone() (*IXpsOMDocument, error) {
 	var _document *IXpsOMDocument
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_document)))
-	return _document, win32.HRESULTError(int32(r1))
+	return _document, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMDocumentCollection: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomdocumentcollection
@@ -705,38 +705,38 @@ var IID_IXpsOMDocumentCollection = win32.GUID{Data1: 0xd1c87f0d, Data2: 0xe947, 
 func (self *IXpsOMDocumentCollection) GetCount() (uint32, error) {
 	var _count uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
-	return _count, win32.HRESULTError(int32(r1))
+	return _count, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAt dispatches through IXpsOMDocumentCollection's vtable slot 4.
 func (self *IXpsOMDocumentCollection) GetAt(index uint32) (*IXpsOMDocument, error) {
 	var _document *IXpsOMDocument
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_document)))
-	return _document, win32.HRESULTError(int32(r1))
+	return _document, win32.ErrIfFailed(int32(r1))
 }
 
 // InsertAt dispatches through IXpsOMDocumentCollection's vtable slot 5.
 func (self *IXpsOMDocumentCollection) InsertAt(index uint32, document *IXpsOMDocument) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(document)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAt dispatches through IXpsOMDocumentCollection's vtable slot 6.
 func (self *IXpsOMDocumentCollection) RemoveAt(index uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAt dispatches through IXpsOMDocumentCollection's vtable slot 7.
 func (self *IXpsOMDocumentCollection) SetAt(index uint32, document *IXpsOMDocument) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(document)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Append dispatches through IXpsOMDocumentCollection's vtable slot 8.
 func (self *IXpsOMDocumentCollection) Append(document *IXpsOMDocument) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(document)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMDocumentSequence: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomdocumentsequence
@@ -752,27 +752,27 @@ var IID_IXpsOMDocumentSequence = win32.GUID{Data1: 0x56492eb4, Data2: 0xd8d5, Da
 func (self *IXpsOMDocumentSequence) GetOwner() (*IXpsOMPackage, error) {
 	var _package_ *IXpsOMPackage
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_package_)))
-	return _package_, win32.HRESULTError(int32(r1))
+	return _package_, win32.ErrIfFailed(int32(r1))
 }
 
 // GetDocuments dispatches through IXpsOMDocumentSequence's vtable slot 6.
 func (self *IXpsOMDocumentSequence) GetDocuments() (*IXpsOMDocumentCollection, error) {
 	var _documents *IXpsOMDocumentCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_documents)))
-	return _documents, win32.HRESULTError(int32(r1))
+	return _documents, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPrintTicketResource dispatches through IXpsOMDocumentSequence's vtable slot 7.
 func (self *IXpsOMDocumentSequence) GetPrintTicketResource() (*IXpsOMPrintTicketResource, error) {
 	var _printTicketResource *IXpsOMPrintTicketResource
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_printTicketResource)))
-	return _printTicketResource, win32.HRESULTError(int32(r1))
+	return _printTicketResource, win32.ErrIfFailed(int32(r1))
 }
 
 // SetPrintTicketResource dispatches through IXpsOMDocumentSequence's vtable slot 8.
 func (self *IXpsOMDocumentSequence) SetPrintTicketResource(printTicketResource *IXpsOMPrintTicketResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(printTicketResource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMDocumentStructureResource: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomdocumentstructureresource
@@ -788,20 +788,20 @@ var IID_IXpsOMDocumentStructureResource = win32.GUID{Data1: 0x85febc8a, Data2: 0
 func (self *IXpsOMDocumentStructureResource) GetOwner() (*IXpsOMDocument, error) {
 	var _owner *IXpsOMDocument
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_owner)))
-	return _owner, win32.HRESULTError(int32(r1))
+	return _owner, win32.ErrIfFailed(int32(r1))
 }
 
 // GetStream dispatches through IXpsOMDocumentStructureResource's vtable slot 6.
 func (self *IXpsOMDocumentStructureResource) GetStream() (*systemcom.IStream, error) {
 	var _stream *systemcom.IStream
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_stream)))
-	return _stream, win32.HRESULTError(int32(r1))
+	return _stream, win32.ErrIfFailed(int32(r1))
 }
 
 // SetContent dispatches through IXpsOMDocumentStructureResource's vtable slot 7.
 func (self *IXpsOMDocumentStructureResource) SetContent(sourceStream *systemcom.IStream, partName *storagepackagingopc.IOpcPartUri) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sourceStream)), uintptr(unsafe.Pointer(partName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMFontResource: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomfontresource
@@ -817,20 +817,20 @@ var IID_IXpsOMFontResource = win32.GUID{Data1: 0xa8c45708, Data2: 0x47d9, Data3:
 func (self *IXpsOMFontResource) GetStream() (*systemcom.IStream, error) {
 	var _readerStream *systemcom.IStream
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_readerStream)))
-	return _readerStream, win32.HRESULTError(int32(r1))
+	return _readerStream, win32.ErrIfFailed(int32(r1))
 }
 
 // SetContent dispatches through IXpsOMFontResource's vtable slot 6.
 func (self *IXpsOMFontResource) SetContent(sourceStream *systemcom.IStream, embeddingOption XPS_FONT_EMBEDDING, partName *storagepackagingopc.IOpcPartUri) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sourceStream)), uintptr(embeddingOption), uintptr(unsafe.Pointer(partName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEmbeddingOption dispatches through IXpsOMFontResource's vtable slot 7.
 func (self *IXpsOMFontResource) GetEmbeddingOption() (XPS_FONT_EMBEDDING, error) {
 	var _embeddingOption XPS_FONT_EMBEDDING
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_embeddingOption)))
-	return _embeddingOption, win32.HRESULTError(int32(r1))
+	return _embeddingOption, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMFontResourceCollection: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomfontresourcecollection
@@ -846,45 +846,45 @@ var IID_IXpsOMFontResourceCollection = win32.GUID{Data1: 0x70b4a6bb, Data2: 0x88
 func (self *IXpsOMFontResourceCollection) GetCount() (uint32, error) {
 	var _count uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
-	return _count, win32.HRESULTError(int32(r1))
+	return _count, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAt dispatches through IXpsOMFontResourceCollection's vtable slot 4.
 func (self *IXpsOMFontResourceCollection) GetAt(index uint32) (*IXpsOMFontResource, error) {
 	var _value *IXpsOMFontResource
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // SetAt dispatches through IXpsOMFontResourceCollection's vtable slot 5.
 func (self *IXpsOMFontResourceCollection) SetAt(index uint32, value *IXpsOMFontResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InsertAt dispatches through IXpsOMFontResourceCollection's vtable slot 6.
 func (self *IXpsOMFontResourceCollection) InsertAt(index uint32, value *IXpsOMFontResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Append dispatches through IXpsOMFontResourceCollection's vtable slot 7.
 func (self *IXpsOMFontResourceCollection) Append(value *IXpsOMFontResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAt dispatches through IXpsOMFontResourceCollection's vtable slot 8.
 func (self *IXpsOMFontResourceCollection) RemoveAt(index uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetByPartName dispatches through IXpsOMFontResourceCollection's vtable slot 9.
 func (self *IXpsOMFontResourceCollection) GetByPartName(partName *storagepackagingopc.IOpcPartUri) (*IXpsOMFontResource, error) {
 	var _part *IXpsOMFontResource
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(partName)), uintptr(unsafe.Pointer(&_part)))
-	return _part, win32.HRESULTError(int32(r1))
+	return _part, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMGeometry: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomgeometry
@@ -900,61 +900,61 @@ var IID_IXpsOMGeometry = win32.GUID{Data1: 0x64fcf3d7, Data2: 0x4d58, Data3: 0x4
 func (self *IXpsOMGeometry) GetFigures() (*IXpsOMGeometryFigureCollection, error) {
 	var _figures *IXpsOMGeometryFigureCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_figures)))
-	return _figures, win32.HRESULTError(int32(r1))
+	return _figures, win32.ErrIfFailed(int32(r1))
 }
 
 // GetFillRule dispatches through IXpsOMGeometry's vtable slot 6.
 func (self *IXpsOMGeometry) GetFillRule() (XPS_FILL_RULE, error) {
 	var _fillRule XPS_FILL_RULE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_fillRule)))
-	return _fillRule, win32.HRESULTError(int32(r1))
+	return _fillRule, win32.ErrIfFailed(int32(r1))
 }
 
 // SetFillRule dispatches through IXpsOMGeometry's vtable slot 7.
 func (self *IXpsOMGeometry) SetFillRule(fillRule XPS_FILL_RULE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(fillRule))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTransform dispatches through IXpsOMGeometry's vtable slot 8.
 func (self *IXpsOMGeometry) GetTransform() (*IXpsOMMatrixTransform, error) {
 	var _transform *IXpsOMMatrixTransform
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_transform)))
-	return _transform, win32.HRESULTError(int32(r1))
+	return _transform, win32.ErrIfFailed(int32(r1))
 }
 
 // GetTransformLocal dispatches through IXpsOMGeometry's vtable slot 9.
 func (self *IXpsOMGeometry) GetTransformLocal() (*IXpsOMMatrixTransform, error) {
 	var _transform *IXpsOMMatrixTransform
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_transform)))
-	return _transform, win32.HRESULTError(int32(r1))
+	return _transform, win32.ErrIfFailed(int32(r1))
 }
 
 // SetTransformLocal dispatches through IXpsOMGeometry's vtable slot 10.
 func (self *IXpsOMGeometry) SetTransformLocal(transform *IXpsOMMatrixTransform) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(transform)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTransformLookup dispatches through IXpsOMGeometry's vtable slot 11.
 func (self *IXpsOMGeometry) GetTransformLookup() (foundation.PWSTR, error) {
 	var _lookup foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lookup)))
-	return _lookup, win32.HRESULTError(int32(r1))
+	return _lookup, win32.ErrIfFailed(int32(r1))
 }
 
 // SetTransformLookup dispatches through IXpsOMGeometry's vtable slot 12.
 func (self *IXpsOMGeometry) SetTransformLookup(lookup string) error {
 	_lookup := win32.UTF16Ptr(lookup)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lookup)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IXpsOMGeometry's vtable slot 13.
 func (self *IXpsOMGeometry) Clone() (*IXpsOMGeometry, error) {
 	var _geometry *IXpsOMGeometry
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_geometry)))
-	return _geometry, win32.HRESULTError(int32(r1))
+	return _geometry, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMGeometryFigure: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomgeometryfigure
@@ -970,100 +970,100 @@ var IID_IXpsOMGeometryFigure = win32.GUID{Data1: 0xd410dc83, Data2: 0x908c, Data
 func (self *IXpsOMGeometryFigure) GetOwner() (*IXpsOMGeometry, error) {
 	var _owner *IXpsOMGeometry
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_owner)))
-	return _owner, win32.HRESULTError(int32(r1))
+	return _owner, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSegmentData dispatches through IXpsOMGeometryFigure's vtable slot 4.
 func (self *IXpsOMGeometryFigure) GetSegmentData(dataCount *uint32, segmentData *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dataCount)), uintptr(unsafe.Pointer(segmentData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSegmentTypes dispatches through IXpsOMGeometryFigure's vtable slot 5.
 func (self *IXpsOMGeometryFigure) GetSegmentTypes(segmentCount *uint32, segmentTypes *XPS_SEGMENT_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(segmentCount)), uintptr(unsafe.Pointer(segmentTypes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSegmentStrokes dispatches through IXpsOMGeometryFigure's vtable slot 6.
 func (self *IXpsOMGeometryFigure) GetSegmentStrokes(segmentCount *uint32, segmentStrokes *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(segmentCount)), uintptr(unsafe.Pointer(segmentStrokes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetSegments dispatches through IXpsOMGeometryFigure's vtable slot 7.
 func (self *IXpsOMGeometryFigure) SetSegments(segmentCount uint32, segmentDataCount uint32, segmentTypes *XPS_SEGMENT_TYPE, segmentData *float32, segmentStrokes *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(segmentCount), uintptr(segmentDataCount), uintptr(unsafe.Pointer(segmentTypes)), uintptr(unsafe.Pointer(segmentData)), uintptr(unsafe.Pointer(segmentStrokes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStartPoint dispatches through IXpsOMGeometryFigure's vtable slot 8.
 func (self *IXpsOMGeometryFigure) GetStartPoint() (XPS_POINT, error) {
 	var _startPoint XPS_POINT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_startPoint)))
-	return _startPoint, win32.HRESULTError(int32(r1))
+	return _startPoint, win32.ErrIfFailed(int32(r1))
 }
 
 // SetStartPoint dispatches through IXpsOMGeometryFigure's vtable slot 9.
 func (self *IXpsOMGeometryFigure) SetStartPoint(startPoint *XPS_POINT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(startPoint)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetIsClosed dispatches through IXpsOMGeometryFigure's vtable slot 10.
 func (self *IXpsOMGeometryFigure) GetIsClosed() (foundation.BOOL, error) {
 	var _isClosed foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_isClosed)))
-	return _isClosed, win32.HRESULTError(int32(r1))
+	return _isClosed, win32.ErrIfFailed(int32(r1))
 }
 
 // SetIsClosed dispatches through IXpsOMGeometryFigure's vtable slot 11.
 func (self *IXpsOMGeometryFigure) SetIsClosed(isClosed bool) error {
 	_isClosed := win32.Bool32(isClosed)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(_isClosed))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetIsFilled dispatches through IXpsOMGeometryFigure's vtable slot 12.
 func (self *IXpsOMGeometryFigure) GetIsFilled() (foundation.BOOL, error) {
 	var _isFilled foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_isFilled)))
-	return _isFilled, win32.HRESULTError(int32(r1))
+	return _isFilled, win32.ErrIfFailed(int32(r1))
 }
 
 // SetIsFilled dispatches through IXpsOMGeometryFigure's vtable slot 13.
 func (self *IXpsOMGeometryFigure) SetIsFilled(isFilled bool) error {
 	_isFilled := win32.Bool32(isFilled)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(_isFilled))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSegmentCount dispatches through IXpsOMGeometryFigure's vtable slot 14.
 func (self *IXpsOMGeometryFigure) GetSegmentCount() (uint32, error) {
 	var _segmentCount uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_segmentCount)))
-	return _segmentCount, win32.HRESULTError(int32(r1))
+	return _segmentCount, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSegmentDataCount dispatches through IXpsOMGeometryFigure's vtable slot 15.
 func (self *IXpsOMGeometryFigure) GetSegmentDataCount() (uint32, error) {
 	var _segmentDataCount uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_segmentDataCount)))
-	return _segmentDataCount, win32.HRESULTError(int32(r1))
+	return _segmentDataCount, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSegmentStrokePattern dispatches through IXpsOMGeometryFigure's vtable slot 16.
 func (self *IXpsOMGeometryFigure) GetSegmentStrokePattern() (XPS_SEGMENT_STROKE_PATTERN, error) {
 	var _segmentStrokePattern XPS_SEGMENT_STROKE_PATTERN
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_segmentStrokePattern)))
-	return _segmentStrokePattern, win32.HRESULTError(int32(r1))
+	return _segmentStrokePattern, win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IXpsOMGeometryFigure's vtable slot 17.
 func (self *IXpsOMGeometryFigure) Clone() (*IXpsOMGeometryFigure, error) {
 	var _geometryFigure *IXpsOMGeometryFigure
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_geometryFigure)))
-	return _geometryFigure, win32.HRESULTError(int32(r1))
+	return _geometryFigure, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMGeometryFigureCollection: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomgeometryfigurecollection
@@ -1079,38 +1079,38 @@ var IID_IXpsOMGeometryFigureCollection = win32.GUID{Data1: 0xfd48c3f3, Data2: 0x
 func (self *IXpsOMGeometryFigureCollection) GetCount() (uint32, error) {
 	var _count uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
-	return _count, win32.HRESULTError(int32(r1))
+	return _count, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAt dispatches through IXpsOMGeometryFigureCollection's vtable slot 4.
 func (self *IXpsOMGeometryFigureCollection) GetAt(index uint32) (*IXpsOMGeometryFigure, error) {
 	var _geometryFigure *IXpsOMGeometryFigure
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_geometryFigure)))
-	return _geometryFigure, win32.HRESULTError(int32(r1))
+	return _geometryFigure, win32.ErrIfFailed(int32(r1))
 }
 
 // InsertAt dispatches through IXpsOMGeometryFigureCollection's vtable slot 5.
 func (self *IXpsOMGeometryFigureCollection) InsertAt(index uint32, geometryFigure *IXpsOMGeometryFigure) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(geometryFigure)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAt dispatches through IXpsOMGeometryFigureCollection's vtable slot 6.
 func (self *IXpsOMGeometryFigureCollection) RemoveAt(index uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAt dispatches through IXpsOMGeometryFigureCollection's vtable slot 7.
 func (self *IXpsOMGeometryFigureCollection) SetAt(index uint32, geometryFigure *IXpsOMGeometryFigure) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(geometryFigure)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Append dispatches through IXpsOMGeometryFigureCollection's vtable slot 8.
 func (self *IXpsOMGeometryFigureCollection) Append(geometryFigure *IXpsOMGeometryFigure) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(geometryFigure)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMGlyphs: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomglyphs
@@ -1126,174 +1126,174 @@ var IID_IXpsOMGlyphs = win32.GUID{Data1: 0x819b3199, Data2: 0x0a5a, Data3: 0x4b6
 func (self *IXpsOMGlyphs) GetUnicodeString() (foundation.PWSTR, error) {
 	var _unicodeString foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_unicodeString)))
-	return _unicodeString, win32.HRESULTError(int32(r1))
+	return _unicodeString, win32.ErrIfFailed(int32(r1))
 }
 
 // GetGlyphIndexCount dispatches through IXpsOMGlyphs's vtable slot 31.
 func (self *IXpsOMGlyphs) GetGlyphIndexCount() (uint32, error) {
 	var _indexCount uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_indexCount)))
-	return _indexCount, win32.HRESULTError(int32(r1))
+	return _indexCount, win32.ErrIfFailed(int32(r1))
 }
 
 // GetGlyphIndices dispatches through IXpsOMGlyphs's vtable slot 32.
 func (self *IXpsOMGlyphs) GetGlyphIndices(indexCount *uint32, glyphIndices *XPS_GLYPH_INDEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(indexCount)), uintptr(unsafe.Pointer(glyphIndices)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetGlyphMappingCount dispatches through IXpsOMGlyphs's vtable slot 33.
 func (self *IXpsOMGlyphs) GetGlyphMappingCount() (uint32, error) {
 	var _glyphMappingCount uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_glyphMappingCount)))
-	return _glyphMappingCount, win32.HRESULTError(int32(r1))
+	return _glyphMappingCount, win32.ErrIfFailed(int32(r1))
 }
 
 // GetGlyphMappings dispatches through IXpsOMGlyphs's vtable slot 34.
 func (self *IXpsOMGlyphs) GetGlyphMappings(glyphMappingCount *uint32, glyphMappings *XPS_GLYPH_MAPPING) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(glyphMappingCount)), uintptr(unsafe.Pointer(glyphMappings)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProhibitedCaretStopCount dispatches through IXpsOMGlyphs's vtable slot 35.
 func (self *IXpsOMGlyphs) GetProhibitedCaretStopCount() (uint32, error) {
 	var _prohibitedCaretStopCount uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_prohibitedCaretStopCount)))
-	return _prohibitedCaretStopCount, win32.HRESULTError(int32(r1))
+	return _prohibitedCaretStopCount, win32.ErrIfFailed(int32(r1))
 }
 
 // GetProhibitedCaretStops dispatches through IXpsOMGlyphs's vtable slot 36.
 func (self *IXpsOMGlyphs) GetProhibitedCaretStops(prohibitedCaretStopCount *uint32, prohibitedCaretStops *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prohibitedCaretStopCount)), uintptr(unsafe.Pointer(prohibitedCaretStops)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBidiLevel dispatches through IXpsOMGlyphs's vtable slot 37.
 func (self *IXpsOMGlyphs) GetBidiLevel() (uint32, error) {
 	var _bidiLevel uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bidiLevel)))
-	return _bidiLevel, win32.HRESULTError(int32(r1))
+	return _bidiLevel, win32.ErrIfFailed(int32(r1))
 }
 
 // GetIsSideways dispatches through IXpsOMGlyphs's vtable slot 38.
 func (self *IXpsOMGlyphs) GetIsSideways() (foundation.BOOL, error) {
 	var _isSideways foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_isSideways)))
-	return _isSideways, win32.HRESULTError(int32(r1))
+	return _isSideways, win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceFontName dispatches through IXpsOMGlyphs's vtable slot 39.
 func (self *IXpsOMGlyphs) GetDeviceFontName() (foundation.PWSTR, error) {
 	var _deviceFontName foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_deviceFontName)))
-	return _deviceFontName, win32.HRESULTError(int32(r1))
+	return _deviceFontName, win32.ErrIfFailed(int32(r1))
 }
 
 // GetStyleSimulations dispatches through IXpsOMGlyphs's vtable slot 40.
 func (self *IXpsOMGlyphs) GetStyleSimulations() (XPS_STYLE_SIMULATION, error) {
 	var _styleSimulations XPS_STYLE_SIMULATION
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_styleSimulations)))
-	return _styleSimulations, win32.HRESULTError(int32(r1))
+	return _styleSimulations, win32.ErrIfFailed(int32(r1))
 }
 
 // SetStyleSimulations dispatches through IXpsOMGlyphs's vtable slot 41.
 func (self *IXpsOMGlyphs) SetStyleSimulations(styleSimulations XPS_STYLE_SIMULATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(styleSimulations))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOrigin dispatches through IXpsOMGlyphs's vtable slot 42.
 func (self *IXpsOMGlyphs) GetOrigin() (XPS_POINT, error) {
 	var _origin XPS_POINT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_origin)))
-	return _origin, win32.HRESULTError(int32(r1))
+	return _origin, win32.ErrIfFailed(int32(r1))
 }
 
 // SetOrigin dispatches through IXpsOMGlyphs's vtable slot 43.
 func (self *IXpsOMGlyphs) SetOrigin(origin *XPS_POINT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(origin)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFontRenderingEmSize dispatches through IXpsOMGlyphs's vtable slot 44.
 func (self *IXpsOMGlyphs) GetFontRenderingEmSize() (float32, error) {
 	var _fontRenderingEmSize float32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_fontRenderingEmSize)))
-	return _fontRenderingEmSize, win32.HRESULTError(int32(r1))
+	return _fontRenderingEmSize, win32.ErrIfFailed(int32(r1))
 }
 
 // GetFontResource dispatches through IXpsOMGlyphs's vtable slot 46.
 func (self *IXpsOMGlyphs) GetFontResource() (*IXpsOMFontResource, error) {
 	var _fontResource *IXpsOMFontResource
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_fontResource)))
-	return _fontResource, win32.HRESULTError(int32(r1))
+	return _fontResource, win32.ErrIfFailed(int32(r1))
 }
 
 // SetFontResource dispatches through IXpsOMGlyphs's vtable slot 47.
 func (self *IXpsOMGlyphs) SetFontResource(fontResource *IXpsOMFontResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontResource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFontFaceIndex dispatches through IXpsOMGlyphs's vtable slot 48.
 func (self *IXpsOMGlyphs) GetFontFaceIndex() (int16, error) {
 	var _fontFaceIndex int16
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_fontFaceIndex)))
-	return _fontFaceIndex, win32.HRESULTError(int32(r1))
+	return _fontFaceIndex, win32.ErrIfFailed(int32(r1))
 }
 
 // SetFontFaceIndex dispatches through IXpsOMGlyphs's vtable slot 49.
 func (self *IXpsOMGlyphs) SetFontFaceIndex(fontFaceIndex int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(fontFaceIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFillBrush dispatches through IXpsOMGlyphs's vtable slot 50.
 func (self *IXpsOMGlyphs) GetFillBrush() (*IXpsOMBrush, error) {
 	var _fillBrush *IXpsOMBrush
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_fillBrush)))
-	return _fillBrush, win32.HRESULTError(int32(r1))
+	return _fillBrush, win32.ErrIfFailed(int32(r1))
 }
 
 // GetFillBrushLocal dispatches through IXpsOMGlyphs's vtable slot 51.
 func (self *IXpsOMGlyphs) GetFillBrushLocal() (*IXpsOMBrush, error) {
 	var _fillBrush *IXpsOMBrush
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_fillBrush)))
-	return _fillBrush, win32.HRESULTError(int32(r1))
+	return _fillBrush, win32.ErrIfFailed(int32(r1))
 }
 
 // SetFillBrushLocal dispatches through IXpsOMGlyphs's vtable slot 52.
 func (self *IXpsOMGlyphs) SetFillBrushLocal(fillBrush *IXpsOMBrush) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fillBrush)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFillBrushLookup dispatches through IXpsOMGlyphs's vtable slot 53.
 func (self *IXpsOMGlyphs) GetFillBrushLookup() (foundation.PWSTR, error) {
 	var _key foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_key)))
-	return _key, win32.HRESULTError(int32(r1))
+	return _key, win32.ErrIfFailed(int32(r1))
 }
 
 // SetFillBrushLookup dispatches through IXpsOMGlyphs's vtable slot 54.
 func (self *IXpsOMGlyphs) SetFillBrushLookup(key string) error {
 	_key := win32.UTF16Ptr(key)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_key)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetGlyphsEditor dispatches through IXpsOMGlyphs's vtable slot 55.
 func (self *IXpsOMGlyphs) GetGlyphsEditor() (*IXpsOMGlyphsEditor, error) {
 	var _editor *IXpsOMGlyphsEditor
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_editor)))
-	return _editor, win32.HRESULTError(int32(r1))
+	return _editor, win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IXpsOMGlyphs's vtable slot 56.
 func (self *IXpsOMGlyphs) Clone() (*IXpsOMGlyphs, error) {
 	var _glyphs *IXpsOMGlyphs
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_glyphs)))
-	return _glyphs, win32.HRESULTError(int32(r1))
+	return _glyphs, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMGlyphsEditor: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomglyphseditor
@@ -1308,119 +1308,119 @@ var IID_IXpsOMGlyphsEditor = win32.GUID{Data1: 0xa5ab8616, Data2: 0x5b16, Data3:
 // ApplyEdits dispatches through IXpsOMGlyphsEditor's vtable slot 3.
 func (self *IXpsOMGlyphsEditor) ApplyEdits() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetUnicodeString dispatches through IXpsOMGlyphsEditor's vtable slot 4.
 func (self *IXpsOMGlyphsEditor) GetUnicodeString() (foundation.PWSTR, error) {
 	var _unicodeString foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_unicodeString)))
-	return _unicodeString, win32.HRESULTError(int32(r1))
+	return _unicodeString, win32.ErrIfFailed(int32(r1))
 }
 
 // SetUnicodeString dispatches through IXpsOMGlyphsEditor's vtable slot 5.
 func (self *IXpsOMGlyphsEditor) SetUnicodeString(unicodeString string) error {
 	_unicodeString := win32.UTF16Ptr(unicodeString)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_unicodeString)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetGlyphIndexCount dispatches through IXpsOMGlyphsEditor's vtable slot 6.
 func (self *IXpsOMGlyphsEditor) GetGlyphIndexCount() (uint32, error) {
 	var _indexCount uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_indexCount)))
-	return _indexCount, win32.HRESULTError(int32(r1))
+	return _indexCount, win32.ErrIfFailed(int32(r1))
 }
 
 // GetGlyphIndices dispatches through IXpsOMGlyphsEditor's vtable slot 7.
 func (self *IXpsOMGlyphsEditor) GetGlyphIndices(indexCount *uint32, glyphIndices *XPS_GLYPH_INDEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(indexCount)), uintptr(unsafe.Pointer(glyphIndices)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetGlyphIndices dispatches through IXpsOMGlyphsEditor's vtable slot 8.
 func (self *IXpsOMGlyphsEditor) SetGlyphIndices(indexCount uint32, glyphIndices *XPS_GLYPH_INDEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(indexCount), uintptr(unsafe.Pointer(glyphIndices)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetGlyphMappingCount dispatches through IXpsOMGlyphsEditor's vtable slot 9.
 func (self *IXpsOMGlyphsEditor) GetGlyphMappingCount() (uint32, error) {
 	var _glyphMappingCount uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_glyphMappingCount)))
-	return _glyphMappingCount, win32.HRESULTError(int32(r1))
+	return _glyphMappingCount, win32.ErrIfFailed(int32(r1))
 }
 
 // GetGlyphMappings dispatches through IXpsOMGlyphsEditor's vtable slot 10.
 func (self *IXpsOMGlyphsEditor) GetGlyphMappings(glyphMappingCount *uint32, glyphMappings *XPS_GLYPH_MAPPING) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(glyphMappingCount)), uintptr(unsafe.Pointer(glyphMappings)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetGlyphMappings dispatches through IXpsOMGlyphsEditor's vtable slot 11.
 func (self *IXpsOMGlyphsEditor) SetGlyphMappings(glyphMappingCount uint32, glyphMappings *XPS_GLYPH_MAPPING) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(glyphMappingCount), uintptr(unsafe.Pointer(glyphMappings)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProhibitedCaretStopCount dispatches through IXpsOMGlyphsEditor's vtable slot 12.
 func (self *IXpsOMGlyphsEditor) GetProhibitedCaretStopCount() (uint32, error) {
 	var _prohibitedCaretStopCount uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_prohibitedCaretStopCount)))
-	return _prohibitedCaretStopCount, win32.HRESULTError(int32(r1))
+	return _prohibitedCaretStopCount, win32.ErrIfFailed(int32(r1))
 }
 
 // GetProhibitedCaretStops dispatches through IXpsOMGlyphsEditor's vtable slot 13.
 func (self *IXpsOMGlyphsEditor) GetProhibitedCaretStops(count *uint32, prohibitedCaretStops *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(count)), uintptr(unsafe.Pointer(prohibitedCaretStops)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetProhibitedCaretStops dispatches through IXpsOMGlyphsEditor's vtable slot 14.
 func (self *IXpsOMGlyphsEditor) SetProhibitedCaretStops(count uint32, prohibitedCaretStops *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(count), uintptr(unsafe.Pointer(prohibitedCaretStops)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBidiLevel dispatches through IXpsOMGlyphsEditor's vtable slot 15.
 func (self *IXpsOMGlyphsEditor) GetBidiLevel() (uint32, error) {
 	var _bidiLevel uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bidiLevel)))
-	return _bidiLevel, win32.HRESULTError(int32(r1))
+	return _bidiLevel, win32.ErrIfFailed(int32(r1))
 }
 
 // SetBidiLevel dispatches through IXpsOMGlyphsEditor's vtable slot 16.
 func (self *IXpsOMGlyphsEditor) SetBidiLevel(bidiLevel uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(bidiLevel))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetIsSideways dispatches through IXpsOMGlyphsEditor's vtable slot 17.
 func (self *IXpsOMGlyphsEditor) GetIsSideways() (foundation.BOOL, error) {
 	var _isSideways foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_isSideways)))
-	return _isSideways, win32.HRESULTError(int32(r1))
+	return _isSideways, win32.ErrIfFailed(int32(r1))
 }
 
 // SetIsSideways dispatches through IXpsOMGlyphsEditor's vtable slot 18.
 func (self *IXpsOMGlyphsEditor) SetIsSideways(isSideways bool) error {
 	_isSideways := win32.Bool32(isSideways)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(_isSideways))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceFontName dispatches through IXpsOMGlyphsEditor's vtable slot 19.
 func (self *IXpsOMGlyphsEditor) GetDeviceFontName() (foundation.PWSTR, error) {
 	var _deviceFontName foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_deviceFontName)))
-	return _deviceFontName, win32.HRESULTError(int32(r1))
+	return _deviceFontName, win32.ErrIfFailed(int32(r1))
 }
 
 // SetDeviceFontName dispatches through IXpsOMGlyphsEditor's vtable slot 20.
 func (self *IXpsOMGlyphsEditor) SetDeviceFontName(deviceFontName string) error {
 	_deviceFontName := win32.UTF16Ptr(deviceFontName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_deviceFontName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMGradientBrush: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomgradientbrush
@@ -1436,67 +1436,67 @@ var IID_IXpsOMGradientBrush = win32.GUID{Data1: 0xedb59622, Data2: 0x61a2, Data3
 func (self *IXpsOMGradientBrush) GetGradientStops() (*IXpsOMGradientStopCollection, error) {
 	var _gradientStops *IXpsOMGradientStopCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_gradientStops)))
-	return _gradientStops, win32.HRESULTError(int32(r1))
+	return _gradientStops, win32.ErrIfFailed(int32(r1))
 }
 
 // GetTransform dispatches through IXpsOMGradientBrush's vtable slot 8.
 func (self *IXpsOMGradientBrush) GetTransform() (*IXpsOMMatrixTransform, error) {
 	var _transform *IXpsOMMatrixTransform
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_transform)))
-	return _transform, win32.HRESULTError(int32(r1))
+	return _transform, win32.ErrIfFailed(int32(r1))
 }
 
 // GetTransformLocal dispatches through IXpsOMGradientBrush's vtable slot 9.
 func (self *IXpsOMGradientBrush) GetTransformLocal() (*IXpsOMMatrixTransform, error) {
 	var _transform *IXpsOMMatrixTransform
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_transform)))
-	return _transform, win32.HRESULTError(int32(r1))
+	return _transform, win32.ErrIfFailed(int32(r1))
 }
 
 // SetTransformLocal dispatches through IXpsOMGradientBrush's vtable slot 10.
 func (self *IXpsOMGradientBrush) SetTransformLocal(transform *IXpsOMMatrixTransform) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(transform)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTransformLookup dispatches through IXpsOMGradientBrush's vtable slot 11.
 func (self *IXpsOMGradientBrush) GetTransformLookup() (foundation.PWSTR, error) {
 	var _key foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_key)))
-	return _key, win32.HRESULTError(int32(r1))
+	return _key, win32.ErrIfFailed(int32(r1))
 }
 
 // SetTransformLookup dispatches through IXpsOMGradientBrush's vtable slot 12.
 func (self *IXpsOMGradientBrush) SetTransformLookup(key string) error {
 	_key := win32.UTF16Ptr(key)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_key)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSpreadMethod dispatches through IXpsOMGradientBrush's vtable slot 13.
 func (self *IXpsOMGradientBrush) GetSpreadMethod() (XPS_SPREAD_METHOD, error) {
 	var _spreadMethod XPS_SPREAD_METHOD
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_spreadMethod)))
-	return _spreadMethod, win32.HRESULTError(int32(r1))
+	return _spreadMethod, win32.ErrIfFailed(int32(r1))
 }
 
 // SetSpreadMethod dispatches through IXpsOMGradientBrush's vtable slot 14.
 func (self *IXpsOMGradientBrush) SetSpreadMethod(spreadMethod XPS_SPREAD_METHOD) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(spreadMethod))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetColorInterpolationMode dispatches through IXpsOMGradientBrush's vtable slot 15.
 func (self *IXpsOMGradientBrush) GetColorInterpolationMode() (XPS_COLOR_INTERPOLATION, error) {
 	var _colorInterpolationMode XPS_COLOR_INTERPOLATION
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_colorInterpolationMode)))
-	return _colorInterpolationMode, win32.HRESULTError(int32(r1))
+	return _colorInterpolationMode, win32.ErrIfFailed(int32(r1))
 }
 
 // SetColorInterpolationMode dispatches through IXpsOMGradientBrush's vtable slot 16.
 func (self *IXpsOMGradientBrush) SetColorInterpolationMode(colorInterpolationMode XPS_COLOR_INTERPOLATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(colorInterpolationMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMGradientStop: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomgradientstop
@@ -1512,34 +1512,34 @@ var IID_IXpsOMGradientStop = win32.GUID{Data1: 0x5cf4f5cc, Data2: 0x3969, Data3:
 func (self *IXpsOMGradientStop) GetOwner() (*IXpsOMGradientBrush, error) {
 	var _owner *IXpsOMGradientBrush
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_owner)))
-	return _owner, win32.HRESULTError(int32(r1))
+	return _owner, win32.ErrIfFailed(int32(r1))
 }
 
 // GetOffset dispatches through IXpsOMGradientStop's vtable slot 4.
 func (self *IXpsOMGradientStop) GetOffset() (float32, error) {
 	var _offset float32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_offset)))
-	return _offset, win32.HRESULTError(int32(r1))
+	return _offset, win32.ErrIfFailed(int32(r1))
 }
 
 // GetColor dispatches through IXpsOMGradientStop's vtable slot 6.
 func (self *IXpsOMGradientStop) GetColor(color *XPS_COLOR) (*IXpsOMColorProfileResource, error) {
 	var _colorProfile *IXpsOMColorProfileResource
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(color)), uintptr(unsafe.Pointer(&_colorProfile)))
-	return _colorProfile, win32.HRESULTError(int32(r1))
+	return _colorProfile, win32.ErrIfFailed(int32(r1))
 }
 
 // SetColor dispatches through IXpsOMGradientStop's vtable slot 7.
 func (self *IXpsOMGradientStop) SetColor(color *XPS_COLOR, colorProfile *IXpsOMColorProfileResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(color)), uintptr(unsafe.Pointer(colorProfile)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IXpsOMGradientStop's vtable slot 8.
 func (self *IXpsOMGradientStop) Clone() (*IXpsOMGradientStop, error) {
 	var _gradientStop *IXpsOMGradientStop
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_gradientStop)))
-	return _gradientStop, win32.HRESULTError(int32(r1))
+	return _gradientStop, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMGradientStopCollection: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomgradientstopcollection
@@ -1555,38 +1555,38 @@ var IID_IXpsOMGradientStopCollection = win32.GUID{Data1: 0xc9174c3a, Data2: 0x3c
 func (self *IXpsOMGradientStopCollection) GetCount() (uint32, error) {
 	var _count uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
-	return _count, win32.HRESULTError(int32(r1))
+	return _count, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAt dispatches through IXpsOMGradientStopCollection's vtable slot 4.
 func (self *IXpsOMGradientStopCollection) GetAt(index uint32) (*IXpsOMGradientStop, error) {
 	var _stop *IXpsOMGradientStop
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_stop)))
-	return _stop, win32.HRESULTError(int32(r1))
+	return _stop, win32.ErrIfFailed(int32(r1))
 }
 
 // InsertAt dispatches through IXpsOMGradientStopCollection's vtable slot 5.
 func (self *IXpsOMGradientStopCollection) InsertAt(index uint32, stop *IXpsOMGradientStop) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(stop)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAt dispatches through IXpsOMGradientStopCollection's vtable slot 6.
 func (self *IXpsOMGradientStopCollection) RemoveAt(index uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAt dispatches through IXpsOMGradientStopCollection's vtable slot 7.
 func (self *IXpsOMGradientStopCollection) SetAt(index uint32, stop *IXpsOMGradientStop) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(stop)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Append dispatches through IXpsOMGradientStopCollection's vtable slot 8.
 func (self *IXpsOMGradientStopCollection) Append(stop *IXpsOMGradientStop) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(stop)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMImageBrush: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomimagebrush
@@ -1602,33 +1602,33 @@ var IID_IXpsOMImageBrush = win32.GUID{Data1: 0x3df0b466, Data2: 0xd382, Data3: 0
 func (self *IXpsOMImageBrush) GetImageResource() (*IXpsOMImageResource, error) {
 	var _imageResource *IXpsOMImageResource
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_imageResource)))
-	return _imageResource, win32.HRESULTError(int32(r1))
+	return _imageResource, win32.ErrIfFailed(int32(r1))
 }
 
 // SetImageResource dispatches through IXpsOMImageBrush's vtable slot 19.
 func (self *IXpsOMImageBrush) SetImageResource(imageResource *IXpsOMImageResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(imageResource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetColorProfileResource dispatches through IXpsOMImageBrush's vtable slot 20.
 func (self *IXpsOMImageBrush) GetColorProfileResource() (*IXpsOMColorProfileResource, error) {
 	var _colorProfileResource *IXpsOMColorProfileResource
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_colorProfileResource)))
-	return _colorProfileResource, win32.HRESULTError(int32(r1))
+	return _colorProfileResource, win32.ErrIfFailed(int32(r1))
 }
 
 // SetColorProfileResource dispatches through IXpsOMImageBrush's vtable slot 21.
 func (self *IXpsOMImageBrush) SetColorProfileResource(colorProfileResource *IXpsOMColorProfileResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(colorProfileResource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IXpsOMImageBrush's vtable slot 22.
 func (self *IXpsOMImageBrush) Clone() (*IXpsOMImageBrush, error) {
 	var _imageBrush *IXpsOMImageBrush
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_imageBrush)))
-	return _imageBrush, win32.HRESULTError(int32(r1))
+	return _imageBrush, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMImageResource: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomimageresource
@@ -1644,20 +1644,20 @@ var IID_IXpsOMImageResource = win32.GUID{Data1: 0x3db8417d, Data2: 0xae50, Data3
 func (self *IXpsOMImageResource) GetStream() (*systemcom.IStream, error) {
 	var _readerStream *systemcom.IStream
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_readerStream)))
-	return _readerStream, win32.HRESULTError(int32(r1))
+	return _readerStream, win32.ErrIfFailed(int32(r1))
 }
 
 // SetContent dispatches through IXpsOMImageResource's vtable slot 6.
 func (self *IXpsOMImageResource) SetContent(sourceStream *systemcom.IStream, imageType XPS_IMAGE_TYPE, partName *storagepackagingopc.IOpcPartUri) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sourceStream)), uintptr(imageType), uintptr(unsafe.Pointer(partName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetImageType dispatches through IXpsOMImageResource's vtable slot 7.
 func (self *IXpsOMImageResource) GetImageType() (XPS_IMAGE_TYPE, error) {
 	var _imageType XPS_IMAGE_TYPE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_imageType)))
-	return _imageType, win32.HRESULTError(int32(r1))
+	return _imageType, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMImageResourceCollection: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomimageresourcecollection
@@ -1673,45 +1673,45 @@ var IID_IXpsOMImageResourceCollection = win32.GUID{Data1: 0x7a4a1a71, Data2: 0x9
 func (self *IXpsOMImageResourceCollection) GetCount() (uint32, error) {
 	var _count uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
-	return _count, win32.HRESULTError(int32(r1))
+	return _count, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAt dispatches through IXpsOMImageResourceCollection's vtable slot 4.
 func (self *IXpsOMImageResourceCollection) GetAt(index uint32) (*IXpsOMImageResource, error) {
 	var _object *IXpsOMImageResource
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_object)))
-	return _object, win32.HRESULTError(int32(r1))
+	return _object, win32.ErrIfFailed(int32(r1))
 }
 
 // InsertAt dispatches through IXpsOMImageResourceCollection's vtable slot 5.
 func (self *IXpsOMImageResourceCollection) InsertAt(index uint32, object *IXpsOMImageResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(object)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAt dispatches through IXpsOMImageResourceCollection's vtable slot 6.
 func (self *IXpsOMImageResourceCollection) RemoveAt(index uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAt dispatches through IXpsOMImageResourceCollection's vtable slot 7.
 func (self *IXpsOMImageResourceCollection) SetAt(index uint32, object *IXpsOMImageResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(object)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Append dispatches through IXpsOMImageResourceCollection's vtable slot 8.
 func (self *IXpsOMImageResourceCollection) Append(object *IXpsOMImageResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(object)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetByPartName dispatches through IXpsOMImageResourceCollection's vtable slot 9.
 func (self *IXpsOMImageResourceCollection) GetByPartName(partName *storagepackagingopc.IOpcPartUri) (*IXpsOMImageResource, error) {
 	var _part *IXpsOMImageResource
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(partName)), uintptr(unsafe.Pointer(&_part)))
-	return _part, win32.HRESULTError(int32(r1))
+	return _part, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMLinearGradientBrush: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomlineargradientbrush
@@ -1727,33 +1727,33 @@ var IID_IXpsOMLinearGradientBrush = win32.GUID{Data1: 0x005e279f, Data2: 0xc30d,
 func (self *IXpsOMLinearGradientBrush) GetStartPoint() (XPS_POINT, error) {
 	var _startPoint XPS_POINT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_startPoint)))
-	return _startPoint, win32.HRESULTError(int32(r1))
+	return _startPoint, win32.ErrIfFailed(int32(r1))
 }
 
 // SetStartPoint dispatches through IXpsOMLinearGradientBrush's vtable slot 18.
 func (self *IXpsOMLinearGradientBrush) SetStartPoint(startPoint *XPS_POINT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(startPoint)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEndPoint dispatches through IXpsOMLinearGradientBrush's vtable slot 19.
 func (self *IXpsOMLinearGradientBrush) GetEndPoint() (XPS_POINT, error) {
 	var _endPoint XPS_POINT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_endPoint)))
-	return _endPoint, win32.HRESULTError(int32(r1))
+	return _endPoint, win32.ErrIfFailed(int32(r1))
 }
 
 // SetEndPoint dispatches through IXpsOMLinearGradientBrush's vtable slot 20.
 func (self *IXpsOMLinearGradientBrush) SetEndPoint(endPoint *XPS_POINT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(endPoint)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IXpsOMLinearGradientBrush's vtable slot 21.
 func (self *IXpsOMLinearGradientBrush) Clone() (*IXpsOMLinearGradientBrush, error) {
 	var _linearGradientBrush *IXpsOMLinearGradientBrush
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_linearGradientBrush)))
-	return _linearGradientBrush, win32.HRESULTError(int32(r1))
+	return _linearGradientBrush, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMMatrixTransform: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsommatrixtransform
@@ -1769,20 +1769,20 @@ var IID_IXpsOMMatrixTransform = win32.GUID{Data1: 0xb77330ff, Data2: 0xbb37, Dat
 func (self *IXpsOMMatrixTransform) GetMatrix() (XPS_MATRIX, error) {
 	var _matrix XPS_MATRIX
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_matrix)))
-	return _matrix, win32.HRESULTError(int32(r1))
+	return _matrix, win32.ErrIfFailed(int32(r1))
 }
 
 // SetMatrix dispatches through IXpsOMMatrixTransform's vtable slot 6.
 func (self *IXpsOMMatrixTransform) SetMatrix(matrix *XPS_MATRIX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(matrix)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IXpsOMMatrixTransform's vtable slot 7.
 func (self *IXpsOMMatrixTransform) Clone() (*IXpsOMMatrixTransform, error) {
 	var _matrixTransform *IXpsOMMatrixTransform
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_matrixTransform)))
-	return _matrixTransform, win32.HRESULTError(int32(r1))
+	return _matrixTransform, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMNameCollection: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomnamecollection
@@ -1798,14 +1798,14 @@ var IID_IXpsOMNameCollection = win32.GUID{Data1: 0x4bddf8ec, Data2: 0xc915, Data
 func (self *IXpsOMNameCollection) GetCount() (uint32, error) {
 	var _count uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
-	return _count, win32.HRESULTError(int32(r1))
+	return _count, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAt dispatches through IXpsOMNameCollection's vtable slot 4.
 func (self *IXpsOMNameCollection) GetAt(index uint32) (foundation.PWSTR, error) {
 	var _name foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_name)))
-	return _name, win32.HRESULTError(int32(r1))
+	return _name, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMObjectFactory: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomobjectfactory
@@ -1821,7 +1821,7 @@ var IID_IXpsOMObjectFactory = win32.GUID{Data1: 0xf9b2a685, Data2: 0xa50d, Data3
 func (self *IXpsOMObjectFactory) CreatePackage() (*IXpsOMPackage, error) {
 	var _package_ *IXpsOMPackage
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_package_)))
-	return _package_, win32.HRESULTError(int32(r1))
+	return _package_, win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePackageFromFile dispatches through IXpsOMObjectFactory's vtable slot 4.
@@ -1830,7 +1830,7 @@ func (self *IXpsOMObjectFactory) CreatePackageFromFile(filename string, reuseObj
 	_reuseObjects := win32.Bool32(reuseObjects)
 	var _package_ *IXpsOMPackage
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_filename)), uintptr(_reuseObjects), uintptr(unsafe.Pointer(&_package_)))
-	return _package_, win32.HRESULTError(int32(r1))
+	return _package_, win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePackageFromStream dispatches through IXpsOMObjectFactory's vtable slot 5.
@@ -1838,70 +1838,70 @@ func (self *IXpsOMObjectFactory) CreatePackageFromStream(stream *systemcom.IStre
 	_reuseObjects := win32.Bool32(reuseObjects)
 	var _package_ *IXpsOMPackage
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(stream)), uintptr(_reuseObjects), uintptr(unsafe.Pointer(&_package_)))
-	return _package_, win32.HRESULTError(int32(r1))
+	return _package_, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateStoryFragmentsResource dispatches through IXpsOMObjectFactory's vtable slot 6.
 func (self *IXpsOMObjectFactory) CreateStoryFragmentsResource(acquiredStream *systemcom.IStream, partUri *storagepackagingopc.IOpcPartUri) (*IXpsOMStoryFragmentsResource, error) {
 	var _storyFragmentsResource *IXpsOMStoryFragmentsResource
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(acquiredStream)), uintptr(unsafe.Pointer(partUri)), uintptr(unsafe.Pointer(&_storyFragmentsResource)))
-	return _storyFragmentsResource, win32.HRESULTError(int32(r1))
+	return _storyFragmentsResource, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateDocumentStructureResource dispatches through IXpsOMObjectFactory's vtable slot 7.
 func (self *IXpsOMObjectFactory) CreateDocumentStructureResource(acquiredStream *systemcom.IStream, partUri *storagepackagingopc.IOpcPartUri) (*IXpsOMDocumentStructureResource, error) {
 	var _documentStructureResource *IXpsOMDocumentStructureResource
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(acquiredStream)), uintptr(unsafe.Pointer(partUri)), uintptr(unsafe.Pointer(&_documentStructureResource)))
-	return _documentStructureResource, win32.HRESULTError(int32(r1))
+	return _documentStructureResource, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSignatureBlockResource dispatches through IXpsOMObjectFactory's vtable slot 8.
 func (self *IXpsOMObjectFactory) CreateSignatureBlockResource(acquiredStream *systemcom.IStream, partUri *storagepackagingopc.IOpcPartUri) (*IXpsOMSignatureBlockResource, error) {
 	var _signatureBlockResource *IXpsOMSignatureBlockResource
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(acquiredStream)), uintptr(unsafe.Pointer(partUri)), uintptr(unsafe.Pointer(&_signatureBlockResource)))
-	return _signatureBlockResource, win32.HRESULTError(int32(r1))
+	return _signatureBlockResource, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateRemoteDictionaryResource dispatches through IXpsOMObjectFactory's vtable slot 9.
 func (self *IXpsOMObjectFactory) CreateRemoteDictionaryResource(dictionary *IXpsOMDictionary, partUri *storagepackagingopc.IOpcPartUri) (*IXpsOMRemoteDictionaryResource, error) {
 	var _remoteDictionaryResource *IXpsOMRemoteDictionaryResource
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dictionary)), uintptr(unsafe.Pointer(partUri)), uintptr(unsafe.Pointer(&_remoteDictionaryResource)))
-	return _remoteDictionaryResource, win32.HRESULTError(int32(r1))
+	return _remoteDictionaryResource, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateRemoteDictionaryResourceFromStream dispatches through IXpsOMObjectFactory's vtable slot 10.
 func (self *IXpsOMObjectFactory) CreateRemoteDictionaryResourceFromStream(dictionaryMarkupStream *systemcom.IStream, dictionaryPartUri *storagepackagingopc.IOpcPartUri, resources *IXpsOMPartResources) (*IXpsOMRemoteDictionaryResource, error) {
 	var _dictionaryResource *IXpsOMRemoteDictionaryResource
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dictionaryMarkupStream)), uintptr(unsafe.Pointer(dictionaryPartUri)), uintptr(unsafe.Pointer(resources)), uintptr(unsafe.Pointer(&_dictionaryResource)))
-	return _dictionaryResource, win32.HRESULTError(int32(r1))
+	return _dictionaryResource, win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePartResources dispatches through IXpsOMObjectFactory's vtable slot 11.
 func (self *IXpsOMObjectFactory) CreatePartResources() (*IXpsOMPartResources, error) {
 	var _partResources *IXpsOMPartResources
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_partResources)))
-	return _partResources, win32.HRESULTError(int32(r1))
+	return _partResources, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateDocumentSequence dispatches through IXpsOMObjectFactory's vtable slot 12.
 func (self *IXpsOMObjectFactory) CreateDocumentSequence(partUri *storagepackagingopc.IOpcPartUri) (*IXpsOMDocumentSequence, error) {
 	var _documentSequence *IXpsOMDocumentSequence
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(partUri)), uintptr(unsafe.Pointer(&_documentSequence)))
-	return _documentSequence, win32.HRESULTError(int32(r1))
+	return _documentSequence, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateDocument dispatches through IXpsOMObjectFactory's vtable slot 13.
 func (self *IXpsOMObjectFactory) CreateDocument(partUri *storagepackagingopc.IOpcPartUri) (*IXpsOMDocument, error) {
 	var _document *IXpsOMDocument
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(partUri)), uintptr(unsafe.Pointer(&_document)))
-	return _document, win32.HRESULTError(int32(r1))
+	return _document, win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePageReference dispatches through IXpsOMObjectFactory's vtable slot 14.
 func (self *IXpsOMObjectFactory) CreatePageReference(advisoryPageDimensions *XPS_SIZE) (*IXpsOMPageReference, error) {
 	var _pageReference *IXpsOMPageReference
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(advisoryPageDimensions)), uintptr(unsafe.Pointer(&_pageReference)))
-	return _pageReference, win32.HRESULTError(int32(r1))
+	return _pageReference, win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePage dispatches through IXpsOMObjectFactory's vtable slot 15.
@@ -1909,7 +1909,7 @@ func (self *IXpsOMObjectFactory) CreatePage(pageDimensions *XPS_SIZE, language s
 	_language := win32.UTF16Ptr(language)
 	var _page *IXpsOMPage
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pageDimensions)), uintptr(unsafe.Pointer(_language)), uintptr(unsafe.Pointer(partUri)), uintptr(unsafe.Pointer(&_page)))
-	return _page, win32.HRESULTError(int32(r1))
+	return _page, win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePageFromStream dispatches through IXpsOMObjectFactory's vtable slot 16.
@@ -1917,91 +1917,91 @@ func (self *IXpsOMObjectFactory) CreatePageFromStream(pageMarkupStream *systemco
 	_reuseObjects := win32.Bool32(reuseObjects)
 	var _page *IXpsOMPage
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pageMarkupStream)), uintptr(unsafe.Pointer(partUri)), uintptr(unsafe.Pointer(resources)), uintptr(_reuseObjects), uintptr(unsafe.Pointer(&_page)))
-	return _page, win32.HRESULTError(int32(r1))
+	return _page, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateCanvas dispatches through IXpsOMObjectFactory's vtable slot 17.
 func (self *IXpsOMObjectFactory) CreateCanvas() (*IXpsOMCanvas, error) {
 	var _canvas *IXpsOMCanvas
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_canvas)))
-	return _canvas, win32.HRESULTError(int32(r1))
+	return _canvas, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateGlyphs dispatches through IXpsOMObjectFactory's vtable slot 18.
 func (self *IXpsOMObjectFactory) CreateGlyphs(fontResource *IXpsOMFontResource) (*IXpsOMGlyphs, error) {
 	var _glyphs *IXpsOMGlyphs
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontResource)), uintptr(unsafe.Pointer(&_glyphs)))
-	return _glyphs, win32.HRESULTError(int32(r1))
+	return _glyphs, win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePath dispatches through IXpsOMObjectFactory's vtable slot 19.
 func (self *IXpsOMObjectFactory) CreatePath() (*IXpsOMPath, error) {
 	var _path *IXpsOMPath
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_path)))
-	return _path, win32.HRESULTError(int32(r1))
+	return _path, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateGeometry dispatches through IXpsOMObjectFactory's vtable slot 20.
 func (self *IXpsOMObjectFactory) CreateGeometry() (*IXpsOMGeometry, error) {
 	var _geometry *IXpsOMGeometry
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_geometry)))
-	return _geometry, win32.HRESULTError(int32(r1))
+	return _geometry, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateGeometryFigure dispatches through IXpsOMObjectFactory's vtable slot 21.
 func (self *IXpsOMObjectFactory) CreateGeometryFigure(startPoint *XPS_POINT) (*IXpsOMGeometryFigure, error) {
 	var _figure *IXpsOMGeometryFigure
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(startPoint)), uintptr(unsafe.Pointer(&_figure)))
-	return _figure, win32.HRESULTError(int32(r1))
+	return _figure, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateMatrixTransform dispatches through IXpsOMObjectFactory's vtable slot 22.
 func (self *IXpsOMObjectFactory) CreateMatrixTransform(matrix *XPS_MATRIX) (*IXpsOMMatrixTransform, error) {
 	var _transform *IXpsOMMatrixTransform
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(matrix)), uintptr(unsafe.Pointer(&_transform)))
-	return _transform, win32.HRESULTError(int32(r1))
+	return _transform, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSolidColorBrush dispatches through IXpsOMObjectFactory's vtable slot 23.
 func (self *IXpsOMObjectFactory) CreateSolidColorBrush(color *XPS_COLOR, colorProfile *IXpsOMColorProfileResource) (*IXpsOMSolidColorBrush, error) {
 	var _solidColorBrush *IXpsOMSolidColorBrush
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(color)), uintptr(unsafe.Pointer(colorProfile)), uintptr(unsafe.Pointer(&_solidColorBrush)))
-	return _solidColorBrush, win32.HRESULTError(int32(r1))
+	return _solidColorBrush, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateColorProfileResource dispatches through IXpsOMObjectFactory's vtable slot 24.
 func (self *IXpsOMObjectFactory) CreateColorProfileResource(acquiredStream *systemcom.IStream, partUri *storagepackagingopc.IOpcPartUri) (*IXpsOMColorProfileResource, error) {
 	var _colorProfileResource *IXpsOMColorProfileResource
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(acquiredStream)), uintptr(unsafe.Pointer(partUri)), uintptr(unsafe.Pointer(&_colorProfileResource)))
-	return _colorProfileResource, win32.HRESULTError(int32(r1))
+	return _colorProfileResource, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateImageBrush dispatches through IXpsOMObjectFactory's vtable slot 25.
 func (self *IXpsOMObjectFactory) CreateImageBrush(image *IXpsOMImageResource, viewBox *XPS_RECT, viewPort *XPS_RECT) (*IXpsOMImageBrush, error) {
 	var _imageBrush *IXpsOMImageBrush
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(image)), uintptr(unsafe.Pointer(viewBox)), uintptr(unsafe.Pointer(viewPort)), uintptr(unsafe.Pointer(&_imageBrush)))
-	return _imageBrush, win32.HRESULTError(int32(r1))
+	return _imageBrush, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateVisualBrush dispatches through IXpsOMObjectFactory's vtable slot 26.
 func (self *IXpsOMObjectFactory) CreateVisualBrush(viewBox *XPS_RECT, viewPort *XPS_RECT) (*IXpsOMVisualBrush, error) {
 	var _visualBrush *IXpsOMVisualBrush
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(viewBox)), uintptr(unsafe.Pointer(viewPort)), uintptr(unsafe.Pointer(&_visualBrush)))
-	return _visualBrush, win32.HRESULTError(int32(r1))
+	return _visualBrush, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateImageResource dispatches through IXpsOMObjectFactory's vtable slot 27.
 func (self *IXpsOMObjectFactory) CreateImageResource(acquiredStream *systemcom.IStream, contentType XPS_IMAGE_TYPE, partUri *storagepackagingopc.IOpcPartUri) (*IXpsOMImageResource, error) {
 	var _imageResource *IXpsOMImageResource
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(acquiredStream)), uintptr(contentType), uintptr(unsafe.Pointer(partUri)), uintptr(unsafe.Pointer(&_imageResource)))
-	return _imageResource, win32.HRESULTError(int32(r1))
+	return _imageResource, win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePrintTicketResource dispatches through IXpsOMObjectFactory's vtable slot 28.
 func (self *IXpsOMObjectFactory) CreatePrintTicketResource(acquiredStream *systemcom.IStream, partUri *storagepackagingopc.IOpcPartUri) (*IXpsOMPrintTicketResource, error) {
 	var _printTicketResource *IXpsOMPrintTicketResource
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(acquiredStream)), uintptr(unsafe.Pointer(partUri)), uintptr(unsafe.Pointer(&_printTicketResource)))
-	return _printTicketResource, win32.HRESULTError(int32(r1))
+	return _printTicketResource, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateFontResource dispatches through IXpsOMObjectFactory's vtable slot 29.
@@ -2009,42 +2009,42 @@ func (self *IXpsOMObjectFactory) CreateFontResource(acquiredStream *systemcom.IS
 	_isObfSourceStream := win32.Bool32(isObfSourceStream)
 	var _fontResource *IXpsOMFontResource
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(acquiredStream)), uintptr(fontEmbedding), uintptr(unsafe.Pointer(partUri)), uintptr(_isObfSourceStream), uintptr(unsafe.Pointer(&_fontResource)))
-	return _fontResource, win32.HRESULTError(int32(r1))
+	return _fontResource, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateLinearGradientBrush dispatches through IXpsOMObjectFactory's vtable slot 31.
 func (self *IXpsOMObjectFactory) CreateLinearGradientBrush(gradStop1 *IXpsOMGradientStop, gradStop2 *IXpsOMGradientStop, startPoint *XPS_POINT, endPoint *XPS_POINT) (*IXpsOMLinearGradientBrush, error) {
 	var _linearGradientBrush *IXpsOMLinearGradientBrush
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(gradStop1)), uintptr(unsafe.Pointer(gradStop2)), uintptr(unsafe.Pointer(startPoint)), uintptr(unsafe.Pointer(endPoint)), uintptr(unsafe.Pointer(&_linearGradientBrush)))
-	return _linearGradientBrush, win32.HRESULTError(int32(r1))
+	return _linearGradientBrush, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateRadialGradientBrush dispatches through IXpsOMObjectFactory's vtable slot 32.
 func (self *IXpsOMObjectFactory) CreateRadialGradientBrush(gradStop1 *IXpsOMGradientStop, gradStop2 *IXpsOMGradientStop, centerPoint *XPS_POINT, gradientOrigin *XPS_POINT, radiiSizes *XPS_SIZE) (*IXpsOMRadialGradientBrush, error) {
 	var _radialGradientBrush *IXpsOMRadialGradientBrush
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(gradStop1)), uintptr(unsafe.Pointer(gradStop2)), uintptr(unsafe.Pointer(centerPoint)), uintptr(unsafe.Pointer(gradientOrigin)), uintptr(unsafe.Pointer(radiiSizes)), uintptr(unsafe.Pointer(&_radialGradientBrush)))
-	return _radialGradientBrush, win32.HRESULTError(int32(r1))
+	return _radialGradientBrush, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateCoreProperties dispatches through IXpsOMObjectFactory's vtable slot 33.
 func (self *IXpsOMObjectFactory) CreateCoreProperties(partUri *storagepackagingopc.IOpcPartUri) (*IXpsOMCoreProperties, error) {
 	var _coreProperties *IXpsOMCoreProperties
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(partUri)), uintptr(unsafe.Pointer(&_coreProperties)))
-	return _coreProperties, win32.HRESULTError(int32(r1))
+	return _coreProperties, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateDictionary dispatches through IXpsOMObjectFactory's vtable slot 34.
 func (self *IXpsOMObjectFactory) CreateDictionary() (*IXpsOMDictionary, error) {
 	var _dictionary *IXpsOMDictionary
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_dictionary)))
-	return _dictionary, win32.HRESULTError(int32(r1))
+	return _dictionary, win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePartUriCollection dispatches through IXpsOMObjectFactory's vtable slot 35.
 func (self *IXpsOMObjectFactory) CreatePartUriCollection() (*IXpsOMPartUriCollection, error) {
 	var _partUriCollection *IXpsOMPartUriCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_partUriCollection)))
-	return _partUriCollection, win32.HRESULTError(int32(r1))
+	return _partUriCollection, win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePackageWriterOnFile dispatches through IXpsOMObjectFactory's vtable slot 36.
@@ -2053,7 +2053,7 @@ func (self *IXpsOMObjectFactory) CreatePackageWriterOnFile(fileName string, secu
 	_optimizeMarkupSize := win32.Bool32(optimizeMarkupSize)
 	var _packageWriter *IXpsOMPackageWriter
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fileName)), uintptr(unsafe.Pointer(securityAttributes)), uintptr(flagsAndAttributes), uintptr(_optimizeMarkupSize), uintptr(interleaving), uintptr(unsafe.Pointer(documentSequencePartName)), uintptr(unsafe.Pointer(coreProperties)), uintptr(unsafe.Pointer(packageThumbnail)), uintptr(unsafe.Pointer(documentSequencePrintTicket)), uintptr(unsafe.Pointer(discardControlPartName)), uintptr(unsafe.Pointer(&_packageWriter)))
-	return _packageWriter, win32.HRESULTError(int32(r1))
+	return _packageWriter, win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePackageWriterOnStream dispatches through IXpsOMObjectFactory's vtable slot 37.
@@ -2061,7 +2061,7 @@ func (self *IXpsOMObjectFactory) CreatePackageWriterOnStream(outputStream *syste
 	_optimizeMarkupSize := win32.Bool32(optimizeMarkupSize)
 	var _packageWriter *IXpsOMPackageWriter
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(outputStream)), uintptr(_optimizeMarkupSize), uintptr(interleaving), uintptr(unsafe.Pointer(documentSequencePartName)), uintptr(unsafe.Pointer(coreProperties)), uintptr(unsafe.Pointer(packageThumbnail)), uintptr(unsafe.Pointer(documentSequencePrintTicket)), uintptr(unsafe.Pointer(discardControlPartName)), uintptr(unsafe.Pointer(&_packageWriter)))
-	return _packageWriter, win32.HRESULTError(int32(r1))
+	return _packageWriter, win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePartUri dispatches through IXpsOMObjectFactory's vtable slot 38.
@@ -2069,7 +2069,7 @@ func (self *IXpsOMObjectFactory) CreatePartUri(uri string) (*storagepackagingopc
 	_uri := win32.UTF16Ptr(uri)
 	var _partUri *storagepackagingopc.IOpcPartUri
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_uri)), uintptr(unsafe.Pointer(&_partUri)))
-	return _partUri, win32.HRESULTError(int32(r1))
+	return _partUri, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateReadOnlyStreamOnFile dispatches through IXpsOMObjectFactory's vtable slot 39.
@@ -2077,7 +2077,7 @@ func (self *IXpsOMObjectFactory) CreateReadOnlyStreamOnFile(filename string) (*s
 	_filename := win32.UTF16Ptr(filename)
 	var _stream *systemcom.IStream
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_filename)), uintptr(unsafe.Pointer(&_stream)))
-	return _stream, win32.HRESULTError(int32(r1))
+	return _stream, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMObjectFactory1: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel_1/nn-xpsobjectmodel_1-ixpsomobjectfactory1
@@ -2094,26 +2094,26 @@ func (self *IXpsOMObjectFactory1) GetDocumentTypeFromFile(filename string) (XPS_
 	_filename := win32.UTF16Ptr(filename)
 	var _documentType XPS_DOCUMENT_TYPE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_filename)), uintptr(unsafe.Pointer(&_documentType)))
-	return _documentType, win32.HRESULTError(int32(r1))
+	return _documentType, win32.ErrIfFailed(int32(r1))
 }
 
 // GetDocumentTypeFromStream dispatches through IXpsOMObjectFactory1's vtable slot 41.
 func (self *IXpsOMObjectFactory1) GetDocumentTypeFromStream(xpsDocumentStream *systemcom.IStream) (XPS_DOCUMENT_TYPE, error) {
 	var _documentType XPS_DOCUMENT_TYPE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(xpsDocumentStream)), uintptr(unsafe.Pointer(&_documentType)))
-	return _documentType, win32.HRESULTError(int32(r1))
+	return _documentType, win32.ErrIfFailed(int32(r1))
 }
 
 // ConvertHDPhotoToJpegXR dispatches through IXpsOMObjectFactory1's vtable slot 42.
 func (self *IXpsOMObjectFactory1) ConvertHDPhotoToJpegXR(imageResource *IXpsOMImageResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(imageResource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ConvertJpegXRToHDPhoto dispatches through IXpsOMObjectFactory1's vtable slot 43.
 func (self *IXpsOMObjectFactory1) ConvertJpegXRToHDPhoto(imageResource *IXpsOMImageResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(imageResource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePackageWriterOnFile1 dispatches through IXpsOMObjectFactory1's vtable slot 44.
@@ -2122,7 +2122,7 @@ func (self *IXpsOMObjectFactory1) CreatePackageWriterOnFile1(fileName string, se
 	_optimizeMarkupSize := win32.Bool32(optimizeMarkupSize)
 	var _packageWriter *IXpsOMPackageWriter
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fileName)), uintptr(unsafe.Pointer(securityAttributes)), uintptr(flagsAndAttributes), uintptr(_optimizeMarkupSize), uintptr(interleaving), uintptr(unsafe.Pointer(documentSequencePartName)), uintptr(unsafe.Pointer(coreProperties)), uintptr(unsafe.Pointer(packageThumbnail)), uintptr(unsafe.Pointer(documentSequencePrintTicket)), uintptr(unsafe.Pointer(discardControlPartName)), uintptr(documentType), uintptr(unsafe.Pointer(&_packageWriter)))
-	return _packageWriter, win32.HRESULTError(int32(r1))
+	return _packageWriter, win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePackageWriterOnStream1 dispatches through IXpsOMObjectFactory1's vtable slot 45.
@@ -2130,14 +2130,14 @@ func (self *IXpsOMObjectFactory1) CreatePackageWriterOnStream1(outputStream *sys
 	_optimizeMarkupSize := win32.Bool32(optimizeMarkupSize)
 	var _packageWriter *IXpsOMPackageWriter
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(outputStream)), uintptr(_optimizeMarkupSize), uintptr(interleaving), uintptr(unsafe.Pointer(documentSequencePartName)), uintptr(unsafe.Pointer(coreProperties)), uintptr(unsafe.Pointer(packageThumbnail)), uintptr(unsafe.Pointer(documentSequencePrintTicket)), uintptr(unsafe.Pointer(discardControlPartName)), uintptr(documentType), uintptr(unsafe.Pointer(&_packageWriter)))
-	return _packageWriter, win32.HRESULTError(int32(r1))
+	return _packageWriter, win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePackage1 dispatches through IXpsOMObjectFactory1's vtable slot 46.
 func (self *IXpsOMObjectFactory1) CreatePackage1() (*IXpsOMPackage1, error) {
 	var _package_ *IXpsOMPackage1
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_package_)))
-	return _package_, win32.HRESULTError(int32(r1))
+	return _package_, win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePackageFromStream1 dispatches through IXpsOMObjectFactory1's vtable slot 47.
@@ -2145,7 +2145,7 @@ func (self *IXpsOMObjectFactory1) CreatePackageFromStream1(stream *systemcom.ISt
 	_reuseObjects := win32.Bool32(reuseObjects)
 	var _package_ *IXpsOMPackage1
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(stream)), uintptr(_reuseObjects), uintptr(unsafe.Pointer(&_package_)))
-	return _package_, win32.HRESULTError(int32(r1))
+	return _package_, win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePackageFromFile1 dispatches through IXpsOMObjectFactory1's vtable slot 48.
@@ -2154,7 +2154,7 @@ func (self *IXpsOMObjectFactory1) CreatePackageFromFile1(filename string, reuseO
 	_reuseObjects := win32.Bool32(reuseObjects)
 	var _package_ *IXpsOMPackage1
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_filename)), uintptr(_reuseObjects), uintptr(unsafe.Pointer(&_package_)))
-	return _package_, win32.HRESULTError(int32(r1))
+	return _package_, win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePage1 dispatches through IXpsOMObjectFactory1's vtable slot 49.
@@ -2162,7 +2162,7 @@ func (self *IXpsOMObjectFactory1) CreatePage1(pageDimensions *XPS_SIZE, language
 	_language := win32.UTF16Ptr(language)
 	var _page *IXpsOMPage1
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pageDimensions)), uintptr(unsafe.Pointer(_language)), uintptr(unsafe.Pointer(partUri)), uintptr(unsafe.Pointer(&_page)))
-	return _page, win32.HRESULTError(int32(r1))
+	return _page, win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePageFromStream1 dispatches through IXpsOMObjectFactory1's vtable slot 50.
@@ -2170,14 +2170,14 @@ func (self *IXpsOMObjectFactory1) CreatePageFromStream1(pageMarkupStream *system
 	_reuseObjects := win32.Bool32(reuseObjects)
 	var _page *IXpsOMPage1
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pageMarkupStream)), uintptr(unsafe.Pointer(partUri)), uintptr(unsafe.Pointer(resources)), uintptr(_reuseObjects), uintptr(unsafe.Pointer(&_page)))
-	return _page, win32.HRESULTError(int32(r1))
+	return _page, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateRemoteDictionaryResourceFromStream1 dispatches through IXpsOMObjectFactory1's vtable slot 51.
 func (self *IXpsOMObjectFactory1) CreateRemoteDictionaryResourceFromStream1(dictionaryMarkupStream *systemcom.IStream, partUri *storagepackagingopc.IOpcPartUri, resources *IXpsOMPartResources) (*IXpsOMRemoteDictionaryResource, error) {
 	var _dictionaryResource *IXpsOMRemoteDictionaryResource
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dictionaryMarkupStream)), uintptr(unsafe.Pointer(partUri)), uintptr(unsafe.Pointer(resources)), uintptr(unsafe.Pointer(&_dictionaryResource)))
-	return _dictionaryResource, win32.HRESULTError(int32(r1))
+	return _dictionaryResource, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMPackage: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsompackage
@@ -2193,52 +2193,52 @@ var IID_IXpsOMPackage = win32.GUID{Data1: 0x18c3df65, Data2: 0x81e1, Data3: 0x46
 func (self *IXpsOMPackage) GetDocumentSequence() (*IXpsOMDocumentSequence, error) {
 	var _documentSequence *IXpsOMDocumentSequence
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_documentSequence)))
-	return _documentSequence, win32.HRESULTError(int32(r1))
+	return _documentSequence, win32.ErrIfFailed(int32(r1))
 }
 
 // SetDocumentSequence dispatches through IXpsOMPackage's vtable slot 4.
 func (self *IXpsOMPackage) SetDocumentSequence(documentSequence *IXpsOMDocumentSequence) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(documentSequence)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCoreProperties dispatches through IXpsOMPackage's vtable slot 5.
 func (self *IXpsOMPackage) GetCoreProperties() (*IXpsOMCoreProperties, error) {
 	var _coreProperties *IXpsOMCoreProperties
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_coreProperties)))
-	return _coreProperties, win32.HRESULTError(int32(r1))
+	return _coreProperties, win32.ErrIfFailed(int32(r1))
 }
 
 // SetCoreProperties dispatches through IXpsOMPackage's vtable slot 6.
 func (self *IXpsOMPackage) SetCoreProperties(coreProperties *IXpsOMCoreProperties) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(coreProperties)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDiscardControlPartName dispatches through IXpsOMPackage's vtable slot 7.
 func (self *IXpsOMPackage) GetDiscardControlPartName() (*storagepackagingopc.IOpcPartUri, error) {
 	var _discardControlPartUri *storagepackagingopc.IOpcPartUri
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_discardControlPartUri)))
-	return _discardControlPartUri, win32.HRESULTError(int32(r1))
+	return _discardControlPartUri, win32.ErrIfFailed(int32(r1))
 }
 
 // SetDiscardControlPartName dispatches through IXpsOMPackage's vtable slot 8.
 func (self *IXpsOMPackage) SetDiscardControlPartName(discardControlPartUri *storagepackagingopc.IOpcPartUri) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(discardControlPartUri)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThumbnailResource dispatches through IXpsOMPackage's vtable slot 9.
 func (self *IXpsOMPackage) GetThumbnailResource() (*IXpsOMImageResource, error) {
 	var _imageResource *IXpsOMImageResource
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_imageResource)))
-	return _imageResource, win32.HRESULTError(int32(r1))
+	return _imageResource, win32.ErrIfFailed(int32(r1))
 }
 
 // SetThumbnailResource dispatches through IXpsOMPackage's vtable slot 10.
 func (self *IXpsOMPackage) SetThumbnailResource(imageResource *IXpsOMImageResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(imageResource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteToFile dispatches through IXpsOMPackage's vtable slot 11.
@@ -2246,14 +2246,14 @@ func (self *IXpsOMPackage) WriteToFile(fileName string, securityAttributes *secu
 	_fileName := win32.UTF16Ptr(fileName)
 	_optimizeMarkupSize := win32.Bool32(optimizeMarkupSize)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fileName)), uintptr(unsafe.Pointer(securityAttributes)), uintptr(flagsAndAttributes), uintptr(_optimizeMarkupSize))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteToStream dispatches through IXpsOMPackage's vtable slot 12.
 func (self *IXpsOMPackage) WriteToStream(stream *systemcom.ISequentialStream, optimizeMarkupSize bool) error {
 	_optimizeMarkupSize := win32.Bool32(optimizeMarkupSize)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(stream)), uintptr(_optimizeMarkupSize))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMPackage1: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel_1/nn-xpsobjectmodel_1-ixpsompackage1
@@ -2269,7 +2269,7 @@ var IID_IXpsOMPackage1 = win32.GUID{Data1: 0x95a9435e, Data2: 0x12bb, Data3: 0x4
 func (self *IXpsOMPackage1) GetDocumentType() (XPS_DOCUMENT_TYPE, error) {
 	var _documentType XPS_DOCUMENT_TYPE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_documentType)))
-	return _documentType, win32.HRESULTError(int32(r1))
+	return _documentType, win32.ErrIfFailed(int32(r1))
 }
 
 // WriteToFile1 dispatches through IXpsOMPackage1's vtable slot 14.
@@ -2277,14 +2277,14 @@ func (self *IXpsOMPackage1) WriteToFile1(fileName string, securityAttributes *se
 	_fileName := win32.UTF16Ptr(fileName)
 	_optimizeMarkupSize := win32.Bool32(optimizeMarkupSize)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fileName)), uintptr(unsafe.Pointer(securityAttributes)), uintptr(flagsAndAttributes), uintptr(_optimizeMarkupSize), uintptr(documentType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteToStream1 dispatches through IXpsOMPackage1's vtable slot 15.
 func (self *IXpsOMPackage1) WriteToStream1(outputStream *systemcom.ISequentialStream, optimizeMarkupSize bool, documentType XPS_DOCUMENT_TYPE) error {
 	_optimizeMarkupSize := win32.Bool32(optimizeMarkupSize)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(outputStream)), uintptr(_optimizeMarkupSize), uintptr(documentType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMPackageTarget: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsompackagetarget
@@ -2299,7 +2299,7 @@ var IID_IXpsOMPackageTarget = win32.GUID{Data1: 0x219a9db0, Data2: 0x4959, Data3
 // CreateXpsOMPackageWriter dispatches through IXpsOMPackageTarget's vtable slot 3.
 func (self *IXpsOMPackageTarget) CreateXpsOMPackageWriter(documentSequencePartName *storagepackagingopc.IOpcPartUri, documentSequencePrintTicket *IXpsOMPrintTicketResource, discardControlPartName *storagepackagingopc.IOpcPartUri, packageWriter **IXpsOMPackageWriter) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(documentSequencePartName)), uintptr(unsafe.Pointer(documentSequencePrintTicket)), uintptr(unsafe.Pointer(discardControlPartName)), uintptr(unsafe.Pointer(packageWriter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMPackageWriter: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsompackagewriter
@@ -2314,32 +2314,32 @@ var IID_IXpsOMPackageWriter = win32.GUID{Data1: 0x4e2aa182, Data2: 0xa443, Data3
 // StartNewDocument dispatches through IXpsOMPackageWriter's vtable slot 3.
 func (self *IXpsOMPackageWriter) StartNewDocument(documentPartName *storagepackagingopc.IOpcPartUri, documentPrintTicket *IXpsOMPrintTicketResource, documentStructure *IXpsOMDocumentStructureResource, signatureBlockResources *IXpsOMSignatureBlockResourceCollection, restrictedFonts *IXpsOMPartUriCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(documentPartName)), uintptr(unsafe.Pointer(documentPrintTicket)), uintptr(unsafe.Pointer(documentStructure)), uintptr(unsafe.Pointer(signatureBlockResources)), uintptr(unsafe.Pointer(restrictedFonts)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddPage dispatches through IXpsOMPackageWriter's vtable slot 4.
 func (self *IXpsOMPackageWriter) AddPage(page *IXpsOMPage, advisoryPageDimensions *XPS_SIZE, discardableResourceParts *IXpsOMPartUriCollection, storyFragments *IXpsOMStoryFragmentsResource, pagePrintTicket *IXpsOMPrintTicketResource, pageThumbnail *IXpsOMImageResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(page)), uintptr(unsafe.Pointer(advisoryPageDimensions)), uintptr(unsafe.Pointer(discardableResourceParts)), uintptr(unsafe.Pointer(storyFragments)), uintptr(unsafe.Pointer(pagePrintTicket)), uintptr(unsafe.Pointer(pageThumbnail)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddResource dispatches through IXpsOMPackageWriter's vtable slot 5.
 func (self *IXpsOMPackageWriter) AddResource(resource *IXpsOMResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(resource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Close dispatches through IXpsOMPackageWriter's vtable slot 6.
 func (self *IXpsOMPackageWriter) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsClosed dispatches through IXpsOMPackageWriter's vtable slot 7.
 func (self *IXpsOMPackageWriter) IsClosed() (foundation.BOOL, error) {
 	var _isClosed foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_isClosed)))
-	return _isClosed, win32.HRESULTError(int32(r1))
+	return _isClosed, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMPackageWriter3D: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel_2/nn-xpsobjectmodel_2-ixpsompackagewriter3d
@@ -2354,13 +2354,13 @@ var IID_IXpsOMPackageWriter3D = win32.GUID{Data1: 0xe8a45033, Data2: 0x640e, Dat
 // AddModelTexture dispatches through IXpsOMPackageWriter3D's vtable slot 8.
 func (self *IXpsOMPackageWriter3D) AddModelTexture(texturePartName *storagepackagingopc.IOpcPartUri, textureData *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(texturePartName)), uintptr(unsafe.Pointer(textureData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetModelPrintTicket dispatches through IXpsOMPackageWriter3D's vtable slot 9.
 func (self *IXpsOMPackageWriter3D) SetModelPrintTicket(printTicketPartName *storagepackagingopc.IOpcPartUri, printTicketData *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(printTicketPartName)), uintptr(unsafe.Pointer(printTicketData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMPage: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsompage
@@ -2376,149 +2376,149 @@ var IID_IXpsOMPage = win32.GUID{Data1: 0xd3e18888, Data2: 0xf120, Data3: 0x4fee,
 func (self *IXpsOMPage) GetOwner() (*IXpsOMPageReference, error) {
 	var _pageReference *IXpsOMPageReference
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pageReference)))
-	return _pageReference, win32.HRESULTError(int32(r1))
+	return _pageReference, win32.ErrIfFailed(int32(r1))
 }
 
 // GetVisuals dispatches through IXpsOMPage's vtable slot 6.
 func (self *IXpsOMPage) GetVisuals() (*IXpsOMVisualCollection, error) {
 	var _visuals *IXpsOMVisualCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_visuals)))
-	return _visuals, win32.HRESULTError(int32(r1))
+	return _visuals, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPageDimensions dispatches through IXpsOMPage's vtable slot 7.
 func (self *IXpsOMPage) GetPageDimensions() (XPS_SIZE, error) {
 	var _pageDimensions XPS_SIZE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pageDimensions)))
-	return _pageDimensions, win32.HRESULTError(int32(r1))
+	return _pageDimensions, win32.ErrIfFailed(int32(r1))
 }
 
 // SetPageDimensions dispatches through IXpsOMPage's vtable slot 8.
 func (self *IXpsOMPage) SetPageDimensions(pageDimensions *XPS_SIZE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pageDimensions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetContentBox dispatches through IXpsOMPage's vtable slot 9.
 func (self *IXpsOMPage) GetContentBox() (XPS_RECT, error) {
 	var _contentBox XPS_RECT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_contentBox)))
-	return _contentBox, win32.HRESULTError(int32(r1))
+	return _contentBox, win32.ErrIfFailed(int32(r1))
 }
 
 // SetContentBox dispatches through IXpsOMPage's vtable slot 10.
 func (self *IXpsOMPage) SetContentBox(contentBox *XPS_RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(contentBox)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBleedBox dispatches through IXpsOMPage's vtable slot 11.
 func (self *IXpsOMPage) GetBleedBox() (XPS_RECT, error) {
 	var _bleedBox XPS_RECT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bleedBox)))
-	return _bleedBox, win32.HRESULTError(int32(r1))
+	return _bleedBox, win32.ErrIfFailed(int32(r1))
 }
 
 // SetBleedBox dispatches through IXpsOMPage's vtable slot 12.
 func (self *IXpsOMPage) SetBleedBox(bleedBox *XPS_RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bleedBox)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLanguage dispatches through IXpsOMPage's vtable slot 13.
 func (self *IXpsOMPage) GetLanguage() (foundation.PWSTR, error) {
 	var _language foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_language)))
-	return _language, win32.HRESULTError(int32(r1))
+	return _language, win32.ErrIfFailed(int32(r1))
 }
 
 // SetLanguage dispatches through IXpsOMPage's vtable slot 14.
 func (self *IXpsOMPage) SetLanguage(language string) error {
 	_language := win32.UTF16Ptr(language)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_language)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetName dispatches through IXpsOMPage's vtable slot 15.
 func (self *IXpsOMPage) GetName() (foundation.PWSTR, error) {
 	var _name foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
-	return _name, win32.HRESULTError(int32(r1))
+	return _name, win32.ErrIfFailed(int32(r1))
 }
 
 // SetName dispatches through IXpsOMPage's vtable slot 16.
 func (self *IXpsOMPage) SetName(name string) error {
 	_name := win32.UTF16Ptr(name)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetIsHyperlinkTarget dispatches through IXpsOMPage's vtable slot 17.
 func (self *IXpsOMPage) GetIsHyperlinkTarget() (foundation.BOOL, error) {
 	var _isHyperlinkTarget foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_isHyperlinkTarget)))
-	return _isHyperlinkTarget, win32.HRESULTError(int32(r1))
+	return _isHyperlinkTarget, win32.ErrIfFailed(int32(r1))
 }
 
 // SetIsHyperlinkTarget dispatches through IXpsOMPage's vtable slot 18.
 func (self *IXpsOMPage) SetIsHyperlinkTarget(isHyperlinkTarget bool) error {
 	_isHyperlinkTarget := win32.Bool32(isHyperlinkTarget)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(_isHyperlinkTarget))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDictionary dispatches through IXpsOMPage's vtable slot 19.
 func (self *IXpsOMPage) GetDictionary() (*IXpsOMDictionary, error) {
 	var _resourceDictionary *IXpsOMDictionary
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_resourceDictionary)))
-	return _resourceDictionary, win32.HRESULTError(int32(r1))
+	return _resourceDictionary, win32.ErrIfFailed(int32(r1))
 }
 
 // GetDictionaryLocal dispatches through IXpsOMPage's vtable slot 20.
 func (self *IXpsOMPage) GetDictionaryLocal() (*IXpsOMDictionary, error) {
 	var _resourceDictionary *IXpsOMDictionary
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_resourceDictionary)))
-	return _resourceDictionary, win32.HRESULTError(int32(r1))
+	return _resourceDictionary, win32.ErrIfFailed(int32(r1))
 }
 
 // SetDictionaryLocal dispatches through IXpsOMPage's vtable slot 21.
 func (self *IXpsOMPage) SetDictionaryLocal(resourceDictionary *IXpsOMDictionary) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(resourceDictionary)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDictionaryResource dispatches through IXpsOMPage's vtable slot 22.
 func (self *IXpsOMPage) GetDictionaryResource() (*IXpsOMRemoteDictionaryResource, error) {
 	var _remoteDictionaryResource *IXpsOMRemoteDictionaryResource
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_remoteDictionaryResource)))
-	return _remoteDictionaryResource, win32.HRESULTError(int32(r1))
+	return _remoteDictionaryResource, win32.ErrIfFailed(int32(r1))
 }
 
 // SetDictionaryResource dispatches through IXpsOMPage's vtable slot 23.
 func (self *IXpsOMPage) SetDictionaryResource(remoteDictionaryResource *IXpsOMRemoteDictionaryResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(remoteDictionaryResource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Write dispatches through IXpsOMPage's vtable slot 24.
 func (self *IXpsOMPage) Write(stream *systemcom.ISequentialStream, optimizeMarkupSize bool) error {
 	_optimizeMarkupSize := win32.Bool32(optimizeMarkupSize)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(stream)), uintptr(_optimizeMarkupSize))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GenerateUnusedLookupKey dispatches through IXpsOMPage's vtable slot 25.
 func (self *IXpsOMPage) GenerateUnusedLookupKey(type_ XPS_OBJECT_TYPE) (foundation.PWSTR, error) {
 	var _key foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(unsafe.Pointer(&_key)))
-	return _key, win32.HRESULTError(int32(r1))
+	return _key, win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IXpsOMPage's vtable slot 26.
 func (self *IXpsOMPage) Clone() (*IXpsOMPage, error) {
 	var _page *IXpsOMPage
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_page)))
-	return _page, win32.HRESULTError(int32(r1))
+	return _page, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMPage1: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel_1/nn-xpsobjectmodel_1-ixpsompage1
@@ -2534,14 +2534,14 @@ var IID_IXpsOMPage1 = win32.GUID{Data1: 0x305b60ef, Data2: 0x6892, Data3: 0x4dda
 func (self *IXpsOMPage1) GetDocumentType() (XPS_DOCUMENT_TYPE, error) {
 	var _documentType XPS_DOCUMENT_TYPE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_documentType)))
-	return _documentType, win32.HRESULTError(int32(r1))
+	return _documentType, win32.ErrIfFailed(int32(r1))
 }
 
 // Write1 dispatches through IXpsOMPage1's vtable slot 28.
 func (self *IXpsOMPage1) Write1(stream *systemcom.ISequentialStream, optimizeMarkupSize bool, documentType XPS_DOCUMENT_TYPE) error {
 	_optimizeMarkupSize := win32.Bool32(optimizeMarkupSize)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(stream)), uintptr(_optimizeMarkupSize), uintptr(documentType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMPageReference: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsompagereference
@@ -2557,113 +2557,113 @@ var IID_IXpsOMPageReference = win32.GUID{Data1: 0xed360180, Data2: 0x6f92, Data3
 func (self *IXpsOMPageReference) GetOwner() (*IXpsOMDocument, error) {
 	var _document *IXpsOMDocument
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_document)))
-	return _document, win32.HRESULTError(int32(r1))
+	return _document, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPage dispatches through IXpsOMPageReference's vtable slot 4.
 func (self *IXpsOMPageReference) GetPage() (*IXpsOMPage, error) {
 	var _page *IXpsOMPage
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_page)))
-	return _page, win32.HRESULTError(int32(r1))
+	return _page, win32.ErrIfFailed(int32(r1))
 }
 
 // SetPage dispatches through IXpsOMPageReference's vtable slot 5.
 func (self *IXpsOMPageReference) SetPage(page *IXpsOMPage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(page)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DiscardPage dispatches through IXpsOMPageReference's vtable slot 6.
 func (self *IXpsOMPageReference) DiscardPage() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsPageLoaded dispatches through IXpsOMPageReference's vtable slot 7.
 func (self *IXpsOMPageReference) IsPageLoaded() (foundation.BOOL, error) {
 	var _isPageLoaded foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_isPageLoaded)))
-	return _isPageLoaded, win32.HRESULTError(int32(r1))
+	return _isPageLoaded, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAdvisoryPageDimensions dispatches through IXpsOMPageReference's vtable slot 8.
 func (self *IXpsOMPageReference) GetAdvisoryPageDimensions() (XPS_SIZE, error) {
 	var _pageDimensions XPS_SIZE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pageDimensions)))
-	return _pageDimensions, win32.HRESULTError(int32(r1))
+	return _pageDimensions, win32.ErrIfFailed(int32(r1))
 }
 
 // SetAdvisoryPageDimensions dispatches through IXpsOMPageReference's vtable slot 9.
 func (self *IXpsOMPageReference) SetAdvisoryPageDimensions(pageDimensions *XPS_SIZE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pageDimensions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStoryFragmentsResource dispatches through IXpsOMPageReference's vtable slot 10.
 func (self *IXpsOMPageReference) GetStoryFragmentsResource() (*IXpsOMStoryFragmentsResource, error) {
 	var _storyFragmentsResource *IXpsOMStoryFragmentsResource
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_storyFragmentsResource)))
-	return _storyFragmentsResource, win32.HRESULTError(int32(r1))
+	return _storyFragmentsResource, win32.ErrIfFailed(int32(r1))
 }
 
 // SetStoryFragmentsResource dispatches through IXpsOMPageReference's vtable slot 11.
 func (self *IXpsOMPageReference) SetStoryFragmentsResource(storyFragmentsResource *IXpsOMStoryFragmentsResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(storyFragmentsResource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPrintTicketResource dispatches through IXpsOMPageReference's vtable slot 12.
 func (self *IXpsOMPageReference) GetPrintTicketResource() (*IXpsOMPrintTicketResource, error) {
 	var _printTicketResource *IXpsOMPrintTicketResource
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_printTicketResource)))
-	return _printTicketResource, win32.HRESULTError(int32(r1))
+	return _printTicketResource, win32.ErrIfFailed(int32(r1))
 }
 
 // SetPrintTicketResource dispatches through IXpsOMPageReference's vtable slot 13.
 func (self *IXpsOMPageReference) SetPrintTicketResource(printTicketResource *IXpsOMPrintTicketResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(printTicketResource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetThumbnailResource dispatches through IXpsOMPageReference's vtable slot 14.
 func (self *IXpsOMPageReference) GetThumbnailResource() (*IXpsOMImageResource, error) {
 	var _imageResource *IXpsOMImageResource
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_imageResource)))
-	return _imageResource, win32.HRESULTError(int32(r1))
+	return _imageResource, win32.ErrIfFailed(int32(r1))
 }
 
 // SetThumbnailResource dispatches through IXpsOMPageReference's vtable slot 15.
 func (self *IXpsOMPageReference) SetThumbnailResource(imageResource *IXpsOMImageResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(imageResource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CollectLinkTargets dispatches through IXpsOMPageReference's vtable slot 16.
 func (self *IXpsOMPageReference) CollectLinkTargets() (*IXpsOMNameCollection, error) {
 	var _linkTargets *IXpsOMNameCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_linkTargets)))
-	return _linkTargets, win32.HRESULTError(int32(r1))
+	return _linkTargets, win32.ErrIfFailed(int32(r1))
 }
 
 // CollectPartResources dispatches through IXpsOMPageReference's vtable slot 17.
 func (self *IXpsOMPageReference) CollectPartResources() (*IXpsOMPartResources, error) {
 	var _partResources *IXpsOMPartResources
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_partResources)))
-	return _partResources, win32.HRESULTError(int32(r1))
+	return _partResources, win32.ErrIfFailed(int32(r1))
 }
 
 // HasRestrictedFonts dispatches through IXpsOMPageReference's vtable slot 18.
 func (self *IXpsOMPageReference) HasRestrictedFonts() (foundation.BOOL, error) {
 	var _restrictedFonts foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_restrictedFonts)))
-	return _restrictedFonts, win32.HRESULTError(int32(r1))
+	return _restrictedFonts, win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IXpsOMPageReference's vtable slot 19.
 func (self *IXpsOMPageReference) Clone() (*IXpsOMPageReference, error) {
 	var _pageReference *IXpsOMPageReference
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pageReference)))
-	return _pageReference, win32.HRESULTError(int32(r1))
+	return _pageReference, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMPageReferenceCollection: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsompagereferencecollection
@@ -2679,38 +2679,38 @@ var IID_IXpsOMPageReferenceCollection = win32.GUID{Data1: 0xca16ba4d, Data2: 0xe
 func (self *IXpsOMPageReferenceCollection) GetCount() (uint32, error) {
 	var _count uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
-	return _count, win32.HRESULTError(int32(r1))
+	return _count, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAt dispatches through IXpsOMPageReferenceCollection's vtable slot 4.
 func (self *IXpsOMPageReferenceCollection) GetAt(index uint32) (*IXpsOMPageReference, error) {
 	var _pageReference *IXpsOMPageReference
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_pageReference)))
-	return _pageReference, win32.HRESULTError(int32(r1))
+	return _pageReference, win32.ErrIfFailed(int32(r1))
 }
 
 // InsertAt dispatches through IXpsOMPageReferenceCollection's vtable slot 5.
 func (self *IXpsOMPageReferenceCollection) InsertAt(index uint32, pageReference *IXpsOMPageReference) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(pageReference)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAt dispatches through IXpsOMPageReferenceCollection's vtable slot 6.
 func (self *IXpsOMPageReferenceCollection) RemoveAt(index uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAt dispatches through IXpsOMPageReferenceCollection's vtable slot 7.
 func (self *IXpsOMPageReferenceCollection) SetAt(index uint32, pageReference *IXpsOMPageReference) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(pageReference)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Append dispatches through IXpsOMPageReferenceCollection's vtable slot 8.
 func (self *IXpsOMPageReferenceCollection) Append(pageReference *IXpsOMPageReference) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pageReference)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMPart: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsompart
@@ -2726,13 +2726,13 @@ var IID_IXpsOMPart = win32.GUID{Data1: 0x74eb2f0b, Data2: 0xa91e, Data3: 0x4486,
 func (self *IXpsOMPart) GetPartName() (*storagepackagingopc.IOpcPartUri, error) {
 	var _partUri *storagepackagingopc.IOpcPartUri
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_partUri)))
-	return _partUri, win32.HRESULTError(int32(r1))
+	return _partUri, win32.ErrIfFailed(int32(r1))
 }
 
 // SetPartName dispatches through IXpsOMPart's vtable slot 4.
 func (self *IXpsOMPart) SetPartName(partUri *storagepackagingopc.IOpcPartUri) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(partUri)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMPartResources: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsompartresources
@@ -2748,28 +2748,28 @@ var IID_IXpsOMPartResources = win32.GUID{Data1: 0xf4cf7729, Data2: 0x4864, Data3
 func (self *IXpsOMPartResources) GetFontResources() (*IXpsOMFontResourceCollection, error) {
 	var _fontResources *IXpsOMFontResourceCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_fontResources)))
-	return _fontResources, win32.HRESULTError(int32(r1))
+	return _fontResources, win32.ErrIfFailed(int32(r1))
 }
 
 // GetImageResources dispatches through IXpsOMPartResources's vtable slot 4.
 func (self *IXpsOMPartResources) GetImageResources() (*IXpsOMImageResourceCollection, error) {
 	var _imageResources *IXpsOMImageResourceCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_imageResources)))
-	return _imageResources, win32.HRESULTError(int32(r1))
+	return _imageResources, win32.ErrIfFailed(int32(r1))
 }
 
 // GetColorProfileResources dispatches through IXpsOMPartResources's vtable slot 5.
 func (self *IXpsOMPartResources) GetColorProfileResources() (*IXpsOMColorProfileResourceCollection, error) {
 	var _colorProfileResources *IXpsOMColorProfileResourceCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_colorProfileResources)))
-	return _colorProfileResources, win32.HRESULTError(int32(r1))
+	return _colorProfileResources, win32.ErrIfFailed(int32(r1))
 }
 
 // GetRemoteDictionaryResources dispatches through IXpsOMPartResources's vtable slot 6.
 func (self *IXpsOMPartResources) GetRemoteDictionaryResources() (*IXpsOMRemoteDictionaryResourceCollection, error) {
 	var _dictionaryResources *IXpsOMRemoteDictionaryResourceCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_dictionaryResources)))
-	return _dictionaryResources, win32.HRESULTError(int32(r1))
+	return _dictionaryResources, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMPartUriCollection: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomparturicollection
@@ -2785,38 +2785,38 @@ var IID_IXpsOMPartUriCollection = win32.GUID{Data1: 0x57c650d4, Data2: 0x067c, D
 func (self *IXpsOMPartUriCollection) GetCount() (uint32, error) {
 	var _count uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
-	return _count, win32.HRESULTError(int32(r1))
+	return _count, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAt dispatches through IXpsOMPartUriCollection's vtable slot 4.
 func (self *IXpsOMPartUriCollection) GetAt(index uint32) (*storagepackagingopc.IOpcPartUri, error) {
 	var _partUri *storagepackagingopc.IOpcPartUri
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_partUri)))
-	return _partUri, win32.HRESULTError(int32(r1))
+	return _partUri, win32.ErrIfFailed(int32(r1))
 }
 
 // InsertAt dispatches through IXpsOMPartUriCollection's vtable slot 5.
 func (self *IXpsOMPartUriCollection) InsertAt(index uint32, partUri *storagepackagingopc.IOpcPartUri) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(partUri)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAt dispatches through IXpsOMPartUriCollection's vtable slot 6.
 func (self *IXpsOMPartUriCollection) RemoveAt(index uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAt dispatches through IXpsOMPartUriCollection's vtable slot 7.
 func (self *IXpsOMPartUriCollection) SetAt(index uint32, partUri *storagepackagingopc.IOpcPartUri) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(partUri)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Append dispatches through IXpsOMPartUriCollection's vtable slot 8.
 func (self *IXpsOMPartUriCollection) Append(partUri *storagepackagingopc.IOpcPartUri) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(partUri)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMPath: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsompath
@@ -2832,231 +2832,231 @@ var IID_IXpsOMPath = win32.GUID{Data1: 0x37d38bb6, Data2: 0x3ee9, Data3: 0x4110,
 func (self *IXpsOMPath) GetGeometry() (*IXpsOMGeometry, error) {
 	var _geometry *IXpsOMGeometry
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_geometry)))
-	return _geometry, win32.HRESULTError(int32(r1))
+	return _geometry, win32.ErrIfFailed(int32(r1))
 }
 
 // GetGeometryLocal dispatches through IXpsOMPath's vtable slot 31.
 func (self *IXpsOMPath) GetGeometryLocal() (*IXpsOMGeometry, error) {
 	var _geometry *IXpsOMGeometry
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_geometry)))
-	return _geometry, win32.HRESULTError(int32(r1))
+	return _geometry, win32.ErrIfFailed(int32(r1))
 }
 
 // SetGeometryLocal dispatches through IXpsOMPath's vtable slot 32.
 func (self *IXpsOMPath) SetGeometryLocal(geometry *IXpsOMGeometry) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(geometry)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetGeometryLookup dispatches through IXpsOMPath's vtable slot 33.
 func (self *IXpsOMPath) GetGeometryLookup() (foundation.PWSTR, error) {
 	var _lookup foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lookup)))
-	return _lookup, win32.HRESULTError(int32(r1))
+	return _lookup, win32.ErrIfFailed(int32(r1))
 }
 
 // SetGeometryLookup dispatches through IXpsOMPath's vtable slot 34.
 func (self *IXpsOMPath) SetGeometryLookup(lookup string) error {
 	_lookup := win32.UTF16Ptr(lookup)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lookup)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAccessibilityShortDescription dispatches through IXpsOMPath's vtable slot 35.
 func (self *IXpsOMPath) GetAccessibilityShortDescription() (foundation.PWSTR, error) {
 	var _shortDescription foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_shortDescription)))
-	return _shortDescription, win32.HRESULTError(int32(r1))
+	return _shortDescription, win32.ErrIfFailed(int32(r1))
 }
 
 // SetAccessibilityShortDescription dispatches through IXpsOMPath's vtable slot 36.
 func (self *IXpsOMPath) SetAccessibilityShortDescription(shortDescription string) error {
 	_shortDescription := win32.UTF16Ptr(shortDescription)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_shortDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAccessibilityLongDescription dispatches through IXpsOMPath's vtable slot 37.
 func (self *IXpsOMPath) GetAccessibilityLongDescription() (foundation.PWSTR, error) {
 	var _longDescription foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_longDescription)))
-	return _longDescription, win32.HRESULTError(int32(r1))
+	return _longDescription, win32.ErrIfFailed(int32(r1))
 }
 
 // SetAccessibilityLongDescription dispatches through IXpsOMPath's vtable slot 38.
 func (self *IXpsOMPath) SetAccessibilityLongDescription(longDescription string) error {
 	_longDescription := win32.UTF16Ptr(longDescription)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_longDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSnapsToPixels dispatches through IXpsOMPath's vtable slot 39.
 func (self *IXpsOMPath) GetSnapsToPixels() (foundation.BOOL, error) {
 	var _snapsToPixels foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_snapsToPixels)))
-	return _snapsToPixels, win32.HRESULTError(int32(r1))
+	return _snapsToPixels, win32.ErrIfFailed(int32(r1))
 }
 
 // SetSnapsToPixels dispatches through IXpsOMPath's vtable slot 40.
 func (self *IXpsOMPath) SetSnapsToPixels(snapsToPixels bool) error {
 	_snapsToPixels := win32.Bool32(snapsToPixels)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(_snapsToPixels))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStrokeBrush dispatches through IXpsOMPath's vtable slot 41.
 func (self *IXpsOMPath) GetStrokeBrush() (*IXpsOMBrush, error) {
 	var _brush *IXpsOMBrush
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_brush)))
-	return _brush, win32.HRESULTError(int32(r1))
+	return _brush, win32.ErrIfFailed(int32(r1))
 }
 
 // GetStrokeBrushLocal dispatches through IXpsOMPath's vtable slot 42.
 func (self *IXpsOMPath) GetStrokeBrushLocal() (*IXpsOMBrush, error) {
 	var _brush *IXpsOMBrush
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_brush)))
-	return _brush, win32.HRESULTError(int32(r1))
+	return _brush, win32.ErrIfFailed(int32(r1))
 }
 
 // SetStrokeBrushLocal dispatches through IXpsOMPath's vtable slot 43.
 func (self *IXpsOMPath) SetStrokeBrushLocal(brush *IXpsOMBrush) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(brush)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStrokeBrushLookup dispatches through IXpsOMPath's vtable slot 44.
 func (self *IXpsOMPath) GetStrokeBrushLookup() (foundation.PWSTR, error) {
 	var _lookup foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lookup)))
-	return _lookup, win32.HRESULTError(int32(r1))
+	return _lookup, win32.ErrIfFailed(int32(r1))
 }
 
 // SetStrokeBrushLookup dispatches through IXpsOMPath's vtable slot 45.
 func (self *IXpsOMPath) SetStrokeBrushLookup(lookup string) error {
 	_lookup := win32.UTF16Ptr(lookup)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lookup)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStrokeDashes dispatches through IXpsOMPath's vtable slot 46.
 func (self *IXpsOMPath) GetStrokeDashes() (*IXpsOMDashCollection, error) {
 	var _strokeDashes *IXpsOMDashCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_strokeDashes)))
-	return _strokeDashes, win32.HRESULTError(int32(r1))
+	return _strokeDashes, win32.ErrIfFailed(int32(r1))
 }
 
 // GetStrokeDashCap dispatches through IXpsOMPath's vtable slot 47.
 func (self *IXpsOMPath) GetStrokeDashCap() (XPS_DASH_CAP, error) {
 	var _strokeDashCap XPS_DASH_CAP
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_strokeDashCap)))
-	return _strokeDashCap, win32.HRESULTError(int32(r1))
+	return _strokeDashCap, win32.ErrIfFailed(int32(r1))
 }
 
 // SetStrokeDashCap dispatches through IXpsOMPath's vtable slot 48.
 func (self *IXpsOMPath) SetStrokeDashCap(strokeDashCap XPS_DASH_CAP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(strokeDashCap))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStrokeDashOffset dispatches through IXpsOMPath's vtable slot 49.
 func (self *IXpsOMPath) GetStrokeDashOffset() (float32, error) {
 	var _strokeDashOffset float32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_strokeDashOffset)))
-	return _strokeDashOffset, win32.HRESULTError(int32(r1))
+	return _strokeDashOffset, win32.ErrIfFailed(int32(r1))
 }
 
 // GetStrokeStartLineCap dispatches through IXpsOMPath's vtable slot 51.
 func (self *IXpsOMPath) GetStrokeStartLineCap() (XPS_LINE_CAP, error) {
 	var _strokeStartLineCap XPS_LINE_CAP
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_strokeStartLineCap)))
-	return _strokeStartLineCap, win32.HRESULTError(int32(r1))
+	return _strokeStartLineCap, win32.ErrIfFailed(int32(r1))
 }
 
 // SetStrokeStartLineCap dispatches through IXpsOMPath's vtable slot 52.
 func (self *IXpsOMPath) SetStrokeStartLineCap(strokeStartLineCap XPS_LINE_CAP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(strokeStartLineCap))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStrokeEndLineCap dispatches through IXpsOMPath's vtable slot 53.
 func (self *IXpsOMPath) GetStrokeEndLineCap() (XPS_LINE_CAP, error) {
 	var _strokeEndLineCap XPS_LINE_CAP
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_strokeEndLineCap)))
-	return _strokeEndLineCap, win32.HRESULTError(int32(r1))
+	return _strokeEndLineCap, win32.ErrIfFailed(int32(r1))
 }
 
 // SetStrokeEndLineCap dispatches through IXpsOMPath's vtable slot 54.
 func (self *IXpsOMPath) SetStrokeEndLineCap(strokeEndLineCap XPS_LINE_CAP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(strokeEndLineCap))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStrokeLineJoin dispatches through IXpsOMPath's vtable slot 55.
 func (self *IXpsOMPath) GetStrokeLineJoin() (XPS_LINE_JOIN, error) {
 	var _strokeLineJoin XPS_LINE_JOIN
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_strokeLineJoin)))
-	return _strokeLineJoin, win32.HRESULTError(int32(r1))
+	return _strokeLineJoin, win32.ErrIfFailed(int32(r1))
 }
 
 // SetStrokeLineJoin dispatches through IXpsOMPath's vtable slot 56.
 func (self *IXpsOMPath) SetStrokeLineJoin(strokeLineJoin XPS_LINE_JOIN) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(strokeLineJoin))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStrokeMiterLimit dispatches through IXpsOMPath's vtable slot 57.
 func (self *IXpsOMPath) GetStrokeMiterLimit() (float32, error) {
 	var _strokeMiterLimit float32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_strokeMiterLimit)))
-	return _strokeMiterLimit, win32.HRESULTError(int32(r1))
+	return _strokeMiterLimit, win32.ErrIfFailed(int32(r1))
 }
 
 // GetStrokeThickness dispatches through IXpsOMPath's vtable slot 59.
 func (self *IXpsOMPath) GetStrokeThickness() (float32, error) {
 	var _strokeThickness float32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_strokeThickness)))
-	return _strokeThickness, win32.HRESULTError(int32(r1))
+	return _strokeThickness, win32.ErrIfFailed(int32(r1))
 }
 
 // GetFillBrush dispatches through IXpsOMPath's vtable slot 61.
 func (self *IXpsOMPath) GetFillBrush() (*IXpsOMBrush, error) {
 	var _brush *IXpsOMBrush
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_brush)))
-	return _brush, win32.HRESULTError(int32(r1))
+	return _brush, win32.ErrIfFailed(int32(r1))
 }
 
 // GetFillBrushLocal dispatches through IXpsOMPath's vtable slot 62.
 func (self *IXpsOMPath) GetFillBrushLocal() (*IXpsOMBrush, error) {
 	var _brush *IXpsOMBrush
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_brush)))
-	return _brush, win32.HRESULTError(int32(r1))
+	return _brush, win32.ErrIfFailed(int32(r1))
 }
 
 // SetFillBrushLocal dispatches through IXpsOMPath's vtable slot 63.
 func (self *IXpsOMPath) SetFillBrushLocal(brush *IXpsOMBrush) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(brush)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFillBrushLookup dispatches through IXpsOMPath's vtable slot 64.
 func (self *IXpsOMPath) GetFillBrushLookup() (foundation.PWSTR, error) {
 	var _lookup foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lookup)))
-	return _lookup, win32.HRESULTError(int32(r1))
+	return _lookup, win32.ErrIfFailed(int32(r1))
 }
 
 // SetFillBrushLookup dispatches through IXpsOMPath's vtable slot 65.
 func (self *IXpsOMPath) SetFillBrushLookup(lookup string) error {
 	_lookup := win32.UTF16Ptr(lookup)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lookup)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IXpsOMPath's vtable slot 66.
 func (self *IXpsOMPath) Clone() (*IXpsOMPath, error) {
 	var _path *IXpsOMPath
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_path)))
-	return _path, win32.HRESULTError(int32(r1))
+	return _path, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMPrintTicketResource: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomprintticketresource
@@ -3072,13 +3072,13 @@ var IID_IXpsOMPrintTicketResource = win32.GUID{Data1: 0xe7ff32d2, Data2: 0x34aa,
 func (self *IXpsOMPrintTicketResource) GetStream() (*systemcom.IStream, error) {
 	var _stream *systemcom.IStream
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_stream)))
-	return _stream, win32.HRESULTError(int32(r1))
+	return _stream, win32.ErrIfFailed(int32(r1))
 }
 
 // SetContent dispatches through IXpsOMPrintTicketResource's vtable slot 6.
 func (self *IXpsOMPrintTicketResource) SetContent(sourceStream *systemcom.IStream, partName *storagepackagingopc.IOpcPartUri) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sourceStream)), uintptr(unsafe.Pointer(partName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMRadialGradientBrush: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomradialgradientbrush
@@ -3094,46 +3094,46 @@ var IID_IXpsOMRadialGradientBrush = win32.GUID{Data1: 0x75f207e5, Data2: 0x08bf,
 func (self *IXpsOMRadialGradientBrush) GetCenter() (XPS_POINT, error) {
 	var _center XPS_POINT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_center)))
-	return _center, win32.HRESULTError(int32(r1))
+	return _center, win32.ErrIfFailed(int32(r1))
 }
 
 // SetCenter dispatches through IXpsOMRadialGradientBrush's vtable slot 18.
 func (self *IXpsOMRadialGradientBrush) SetCenter(center *XPS_POINT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(center)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRadiiSizes dispatches through IXpsOMRadialGradientBrush's vtable slot 19.
 func (self *IXpsOMRadialGradientBrush) GetRadiiSizes() (XPS_SIZE, error) {
 	var _radiiSizes XPS_SIZE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_radiiSizes)))
-	return _radiiSizes, win32.HRESULTError(int32(r1))
+	return _radiiSizes, win32.ErrIfFailed(int32(r1))
 }
 
 // SetRadiiSizes dispatches through IXpsOMRadialGradientBrush's vtable slot 20.
 func (self *IXpsOMRadialGradientBrush) SetRadiiSizes(radiiSizes *XPS_SIZE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(radiiSizes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetGradientOrigin dispatches through IXpsOMRadialGradientBrush's vtable slot 21.
 func (self *IXpsOMRadialGradientBrush) GetGradientOrigin() (XPS_POINT, error) {
 	var _origin XPS_POINT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_origin)))
-	return _origin, win32.HRESULTError(int32(r1))
+	return _origin, win32.ErrIfFailed(int32(r1))
 }
 
 // SetGradientOrigin dispatches through IXpsOMRadialGradientBrush's vtable slot 22.
 func (self *IXpsOMRadialGradientBrush) SetGradientOrigin(origin *XPS_POINT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(origin)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IXpsOMRadialGradientBrush's vtable slot 23.
 func (self *IXpsOMRadialGradientBrush) Clone() (*IXpsOMRadialGradientBrush, error) {
 	var _radialGradientBrush *IXpsOMRadialGradientBrush
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_radialGradientBrush)))
-	return _radialGradientBrush, win32.HRESULTError(int32(r1))
+	return _radialGradientBrush, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMRemoteDictionaryResource: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomremotedictionaryresource
@@ -3149,13 +3149,13 @@ var IID_IXpsOMRemoteDictionaryResource = win32.GUID{Data1: 0xc9bd7cd4, Data2: 0x
 func (self *IXpsOMRemoteDictionaryResource) GetDictionary() (*IXpsOMDictionary, error) {
 	var _dictionary *IXpsOMDictionary
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_dictionary)))
-	return _dictionary, win32.HRESULTError(int32(r1))
+	return _dictionary, win32.ErrIfFailed(int32(r1))
 }
 
 // SetDictionary dispatches through IXpsOMRemoteDictionaryResource's vtable slot 6.
 func (self *IXpsOMRemoteDictionaryResource) SetDictionary(dictionary *IXpsOMDictionary) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dictionary)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMRemoteDictionaryResource1: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel_1/nn-xpsobjectmodel_1-ixpsomremotedictionaryresource1
@@ -3171,13 +3171,13 @@ var IID_IXpsOMRemoteDictionaryResource1 = win32.GUID{Data1: 0xbf8fc1d4, Data2: 0
 func (self *IXpsOMRemoteDictionaryResource1) GetDocumentType() (XPS_DOCUMENT_TYPE, error) {
 	var _documentType XPS_DOCUMENT_TYPE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_documentType)))
-	return _documentType, win32.HRESULTError(int32(r1))
+	return _documentType, win32.ErrIfFailed(int32(r1))
 }
 
 // Write1 dispatches through IXpsOMRemoteDictionaryResource1's vtable slot 8.
 func (self *IXpsOMRemoteDictionaryResource1) Write1(stream *systemcom.ISequentialStream, documentType XPS_DOCUMENT_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(stream)), uintptr(documentType))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMRemoteDictionaryResourceCollection: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomremotedictionaryresourcecollection
@@ -3193,45 +3193,45 @@ var IID_IXpsOMRemoteDictionaryResourceCollection = win32.GUID{Data1: 0x5c38db61,
 func (self *IXpsOMRemoteDictionaryResourceCollection) GetCount() (uint32, error) {
 	var _count uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
-	return _count, win32.HRESULTError(int32(r1))
+	return _count, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAt dispatches through IXpsOMRemoteDictionaryResourceCollection's vtable slot 4.
 func (self *IXpsOMRemoteDictionaryResourceCollection) GetAt(index uint32) (*IXpsOMRemoteDictionaryResource, error) {
 	var _object *IXpsOMRemoteDictionaryResource
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_object)))
-	return _object, win32.HRESULTError(int32(r1))
+	return _object, win32.ErrIfFailed(int32(r1))
 }
 
 // InsertAt dispatches through IXpsOMRemoteDictionaryResourceCollection's vtable slot 5.
 func (self *IXpsOMRemoteDictionaryResourceCollection) InsertAt(index uint32, object *IXpsOMRemoteDictionaryResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(object)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAt dispatches through IXpsOMRemoteDictionaryResourceCollection's vtable slot 6.
 func (self *IXpsOMRemoteDictionaryResourceCollection) RemoveAt(index uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAt dispatches through IXpsOMRemoteDictionaryResourceCollection's vtable slot 7.
 func (self *IXpsOMRemoteDictionaryResourceCollection) SetAt(index uint32, object *IXpsOMRemoteDictionaryResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(object)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Append dispatches through IXpsOMRemoteDictionaryResourceCollection's vtable slot 8.
 func (self *IXpsOMRemoteDictionaryResourceCollection) Append(object *IXpsOMRemoteDictionaryResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(object)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetByPartName dispatches through IXpsOMRemoteDictionaryResourceCollection's vtable slot 9.
 func (self *IXpsOMRemoteDictionaryResourceCollection) GetByPartName(partName *storagepackagingopc.IOpcPartUri) (*IXpsOMRemoteDictionaryResource, error) {
 	var _remoteDictionaryResource *IXpsOMRemoteDictionaryResource
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(partName)), uintptr(unsafe.Pointer(&_remoteDictionaryResource)))
-	return _remoteDictionaryResource, win32.HRESULTError(int32(r1))
+	return _remoteDictionaryResource, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMResource: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomresource
@@ -3256,14 +3256,14 @@ var IID_IXpsOMShareable = win32.GUID{Data1: 0x7137398f, Data2: 0x2fc1, Data3: 0x
 func (self *IXpsOMShareable) GetOwner() (*systemcom.IUnknown, error) {
 	var _owner *systemcom.IUnknown
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_owner)))
-	return _owner, win32.HRESULTError(int32(r1))
+	return _owner, win32.ErrIfFailed(int32(r1))
 }
 
 // GetType dispatches through IXpsOMShareable's vtable slot 4.
 func (self *IXpsOMShareable) GetType() (XPS_OBJECT_TYPE, error) {
 	var _type_ XPS_OBJECT_TYPE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_type_)))
-	return _type_, win32.HRESULTError(int32(r1))
+	return _type_, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMSignatureBlockResource: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomsignatureblockresource
@@ -3279,20 +3279,20 @@ var IID_IXpsOMSignatureBlockResource = win32.GUID{Data1: 0x4776ad35, Data2: 0x2e
 func (self *IXpsOMSignatureBlockResource) GetOwner() (*IXpsOMDocument, error) {
 	var _owner *IXpsOMDocument
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_owner)))
-	return _owner, win32.HRESULTError(int32(r1))
+	return _owner, win32.ErrIfFailed(int32(r1))
 }
 
 // GetStream dispatches through IXpsOMSignatureBlockResource's vtable slot 6.
 func (self *IXpsOMSignatureBlockResource) GetStream() (*systemcom.IStream, error) {
 	var _stream *systemcom.IStream
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_stream)))
-	return _stream, win32.HRESULTError(int32(r1))
+	return _stream, win32.ErrIfFailed(int32(r1))
 }
 
 // SetContent dispatches through IXpsOMSignatureBlockResource's vtable slot 7.
 func (self *IXpsOMSignatureBlockResource) SetContent(sourceStream *systemcom.IStream, partName *storagepackagingopc.IOpcPartUri) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sourceStream)), uintptr(unsafe.Pointer(partName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMSignatureBlockResourceCollection: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomsignatureblockresourcecollection
@@ -3308,45 +3308,45 @@ var IID_IXpsOMSignatureBlockResourceCollection = win32.GUID{Data1: 0xab8f5d8e, D
 func (self *IXpsOMSignatureBlockResourceCollection) GetCount() (uint32, error) {
 	var _count uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
-	return _count, win32.HRESULTError(int32(r1))
+	return _count, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAt dispatches through IXpsOMSignatureBlockResourceCollection's vtable slot 4.
 func (self *IXpsOMSignatureBlockResourceCollection) GetAt(index uint32) (*IXpsOMSignatureBlockResource, error) {
 	var _signatureBlockResource *IXpsOMSignatureBlockResource
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_signatureBlockResource)))
-	return _signatureBlockResource, win32.HRESULTError(int32(r1))
+	return _signatureBlockResource, win32.ErrIfFailed(int32(r1))
 }
 
 // InsertAt dispatches through IXpsOMSignatureBlockResourceCollection's vtable slot 5.
 func (self *IXpsOMSignatureBlockResourceCollection) InsertAt(index uint32, signatureBlockResource *IXpsOMSignatureBlockResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(signatureBlockResource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAt dispatches through IXpsOMSignatureBlockResourceCollection's vtable slot 6.
 func (self *IXpsOMSignatureBlockResourceCollection) RemoveAt(index uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAt dispatches through IXpsOMSignatureBlockResourceCollection's vtable slot 7.
 func (self *IXpsOMSignatureBlockResourceCollection) SetAt(index uint32, signatureBlockResource *IXpsOMSignatureBlockResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(signatureBlockResource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Append dispatches through IXpsOMSignatureBlockResourceCollection's vtable slot 8.
 func (self *IXpsOMSignatureBlockResourceCollection) Append(signatureBlockResource *IXpsOMSignatureBlockResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signatureBlockResource)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetByPartName dispatches through IXpsOMSignatureBlockResourceCollection's vtable slot 9.
 func (self *IXpsOMSignatureBlockResourceCollection) GetByPartName(partName *storagepackagingopc.IOpcPartUri) (*IXpsOMSignatureBlockResource, error) {
 	var _signatureBlockResource *IXpsOMSignatureBlockResource
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(partName)), uintptr(unsafe.Pointer(&_signatureBlockResource)))
-	return _signatureBlockResource, win32.HRESULTError(int32(r1))
+	return _signatureBlockResource, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMSolidColorBrush: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomsolidcolorbrush
@@ -3362,20 +3362,20 @@ var IID_IXpsOMSolidColorBrush = win32.GUID{Data1: 0xa06f9f05, Data2: 0x3be9, Dat
 func (self *IXpsOMSolidColorBrush) GetColor(color *XPS_COLOR) (*IXpsOMColorProfileResource, error) {
 	var _colorProfile *IXpsOMColorProfileResource
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(color)), uintptr(unsafe.Pointer(&_colorProfile)))
-	return _colorProfile, win32.HRESULTError(int32(r1))
+	return _colorProfile, win32.ErrIfFailed(int32(r1))
 }
 
 // SetColor dispatches through IXpsOMSolidColorBrush's vtable slot 8.
 func (self *IXpsOMSolidColorBrush) SetColor(color *XPS_COLOR, colorProfile *IXpsOMColorProfileResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(color)), uintptr(unsafe.Pointer(colorProfile)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IXpsOMSolidColorBrush's vtable slot 9.
 func (self *IXpsOMSolidColorBrush) Clone() (*IXpsOMSolidColorBrush, error) {
 	var _solidColorBrush *IXpsOMSolidColorBrush
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_solidColorBrush)))
-	return _solidColorBrush, win32.HRESULTError(int32(r1))
+	return _solidColorBrush, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMStoryFragmentsResource: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomstoryfragmentsresource
@@ -3391,20 +3391,20 @@ var IID_IXpsOMStoryFragmentsResource = win32.GUID{Data1: 0xc2b3ca09, Data2: 0x04
 func (self *IXpsOMStoryFragmentsResource) GetOwner() (*IXpsOMPageReference, error) {
 	var _owner *IXpsOMPageReference
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_owner)))
-	return _owner, win32.HRESULTError(int32(r1))
+	return _owner, win32.ErrIfFailed(int32(r1))
 }
 
 // GetStream dispatches through IXpsOMStoryFragmentsResource's vtable slot 6.
 func (self *IXpsOMStoryFragmentsResource) GetStream() (*systemcom.IStream, error) {
 	var _stream *systemcom.IStream
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_stream)))
-	return _stream, win32.HRESULTError(int32(r1))
+	return _stream, win32.ErrIfFailed(int32(r1))
 }
 
 // SetContent dispatches through IXpsOMStoryFragmentsResource's vtable slot 7.
 func (self *IXpsOMStoryFragmentsResource) SetContent(sourceStream *systemcom.IStream, partName *storagepackagingopc.IOpcPartUri) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sourceStream)), uintptr(unsafe.Pointer(partName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMThumbnailGenerator: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomthumbnailgenerator
@@ -3420,7 +3420,7 @@ var IID_IXpsOMThumbnailGenerator = win32.GUID{Data1: 0x15b873d5, Data2: 0x1971, 
 func (self *IXpsOMThumbnailGenerator) GenerateThumbnail(page *IXpsOMPage, thumbnailType XPS_IMAGE_TYPE, thumbnailSize XPS_THUMBNAIL_SIZE, imageResourcePartName *storagepackagingopc.IOpcPartUri) (*IXpsOMImageResource, error) {
 	var _imageResource *IXpsOMImageResource
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(page)), uintptr(thumbnailType), uintptr(thumbnailSize), uintptr(unsafe.Pointer(imageResourcePartName)), uintptr(unsafe.Pointer(&_imageResource)))
-	return _imageResource, win32.HRESULTError(int32(r1))
+	return _imageResource, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMTileBrush: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomtilebrush
@@ -3436,73 +3436,73 @@ var IID_IXpsOMTileBrush = win32.GUID{Data1: 0x0fc2328d, Data2: 0xd722, Data3: 0x
 func (self *IXpsOMTileBrush) GetTransform() (*IXpsOMMatrixTransform, error) {
 	var _transform *IXpsOMMatrixTransform
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_transform)))
-	return _transform, win32.HRESULTError(int32(r1))
+	return _transform, win32.ErrIfFailed(int32(r1))
 }
 
 // GetTransformLocal dispatches through IXpsOMTileBrush's vtable slot 8.
 func (self *IXpsOMTileBrush) GetTransformLocal() (*IXpsOMMatrixTransform, error) {
 	var _transform *IXpsOMMatrixTransform
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_transform)))
-	return _transform, win32.HRESULTError(int32(r1))
+	return _transform, win32.ErrIfFailed(int32(r1))
 }
 
 // SetTransformLocal dispatches through IXpsOMTileBrush's vtable slot 9.
 func (self *IXpsOMTileBrush) SetTransformLocal(transform *IXpsOMMatrixTransform) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(transform)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTransformLookup dispatches through IXpsOMTileBrush's vtable slot 10.
 func (self *IXpsOMTileBrush) GetTransformLookup() (foundation.PWSTR, error) {
 	var _key foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_key)))
-	return _key, win32.HRESULTError(int32(r1))
+	return _key, win32.ErrIfFailed(int32(r1))
 }
 
 // SetTransformLookup dispatches through IXpsOMTileBrush's vtable slot 11.
 func (self *IXpsOMTileBrush) SetTransformLookup(key string) error {
 	_key := win32.UTF16Ptr(key)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_key)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetViewbox dispatches through IXpsOMTileBrush's vtable slot 12.
 func (self *IXpsOMTileBrush) GetViewbox() (XPS_RECT, error) {
 	var _viewbox XPS_RECT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_viewbox)))
-	return _viewbox, win32.HRESULTError(int32(r1))
+	return _viewbox, win32.ErrIfFailed(int32(r1))
 }
 
 // SetViewbox dispatches through IXpsOMTileBrush's vtable slot 13.
 func (self *IXpsOMTileBrush) SetViewbox(viewbox *XPS_RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(viewbox)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetViewport dispatches through IXpsOMTileBrush's vtable slot 14.
 func (self *IXpsOMTileBrush) GetViewport() (XPS_RECT, error) {
 	var _viewport XPS_RECT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_viewport)))
-	return _viewport, win32.HRESULTError(int32(r1))
+	return _viewport, win32.ErrIfFailed(int32(r1))
 }
 
 // SetViewport dispatches through IXpsOMTileBrush's vtable slot 15.
 func (self *IXpsOMTileBrush) SetViewport(viewport *XPS_RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(viewport)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTileMode dispatches through IXpsOMTileBrush's vtable slot 16.
 func (self *IXpsOMTileBrush) GetTileMode() (XPS_TILE_MODE, error) {
 	var _tileMode XPS_TILE_MODE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_tileMode)))
-	return _tileMode, win32.HRESULTError(int32(r1))
+	return _tileMode, win32.ErrIfFailed(int32(r1))
 }
 
 // SetTileMode dispatches through IXpsOMTileBrush's vtable slot 17.
 func (self *IXpsOMTileBrush) SetTileMode(tileMode XPS_TILE_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(tileMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMVisual: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomvisual
@@ -3518,164 +3518,164 @@ var IID_IXpsOMVisual = win32.GUID{Data1: 0xbc3e7333, Data2: 0xfb0b, Data3: 0x4af
 func (self *IXpsOMVisual) GetTransform() (*IXpsOMMatrixTransform, error) {
 	var _matrixTransform *IXpsOMMatrixTransform
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_matrixTransform)))
-	return _matrixTransform, win32.HRESULTError(int32(r1))
+	return _matrixTransform, win32.ErrIfFailed(int32(r1))
 }
 
 // GetTransformLocal dispatches through IXpsOMVisual's vtable slot 6.
 func (self *IXpsOMVisual) GetTransformLocal() (*IXpsOMMatrixTransform, error) {
 	var _matrixTransform *IXpsOMMatrixTransform
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_matrixTransform)))
-	return _matrixTransform, win32.HRESULTError(int32(r1))
+	return _matrixTransform, win32.ErrIfFailed(int32(r1))
 }
 
 // SetTransformLocal dispatches through IXpsOMVisual's vtable slot 7.
 func (self *IXpsOMVisual) SetTransformLocal(matrixTransform *IXpsOMMatrixTransform) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(matrixTransform)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTransformLookup dispatches through IXpsOMVisual's vtable slot 8.
 func (self *IXpsOMVisual) GetTransformLookup() (foundation.PWSTR, error) {
 	var _key foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_key)))
-	return _key, win32.HRESULTError(int32(r1))
+	return _key, win32.ErrIfFailed(int32(r1))
 }
 
 // SetTransformLookup dispatches through IXpsOMVisual's vtable slot 9.
 func (self *IXpsOMVisual) SetTransformLookup(key string) error {
 	_key := win32.UTF16Ptr(key)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_key)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetClipGeometry dispatches through IXpsOMVisual's vtable slot 10.
 func (self *IXpsOMVisual) GetClipGeometry() (*IXpsOMGeometry, error) {
 	var _clipGeometry *IXpsOMGeometry
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_clipGeometry)))
-	return _clipGeometry, win32.HRESULTError(int32(r1))
+	return _clipGeometry, win32.ErrIfFailed(int32(r1))
 }
 
 // GetClipGeometryLocal dispatches through IXpsOMVisual's vtable slot 11.
 func (self *IXpsOMVisual) GetClipGeometryLocal() (*IXpsOMGeometry, error) {
 	var _clipGeometry *IXpsOMGeometry
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_clipGeometry)))
-	return _clipGeometry, win32.HRESULTError(int32(r1))
+	return _clipGeometry, win32.ErrIfFailed(int32(r1))
 }
 
 // SetClipGeometryLocal dispatches through IXpsOMVisual's vtable slot 12.
 func (self *IXpsOMVisual) SetClipGeometryLocal(clipGeometry *IXpsOMGeometry) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clipGeometry)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetClipGeometryLookup dispatches through IXpsOMVisual's vtable slot 13.
 func (self *IXpsOMVisual) GetClipGeometryLookup() (foundation.PWSTR, error) {
 	var _key foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_key)))
-	return _key, win32.HRESULTError(int32(r1))
+	return _key, win32.ErrIfFailed(int32(r1))
 }
 
 // SetClipGeometryLookup dispatches through IXpsOMVisual's vtable slot 14.
 func (self *IXpsOMVisual) SetClipGeometryLookup(key string) error {
 	_key := win32.UTF16Ptr(key)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_key)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOpacity dispatches through IXpsOMVisual's vtable slot 15.
 func (self *IXpsOMVisual) GetOpacity() (float32, error) {
 	var _opacity float32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_opacity)))
-	return _opacity, win32.HRESULTError(int32(r1))
+	return _opacity, win32.ErrIfFailed(int32(r1))
 }
 
 // GetOpacityMaskBrush dispatches through IXpsOMVisual's vtable slot 17.
 func (self *IXpsOMVisual) GetOpacityMaskBrush() (*IXpsOMBrush, error) {
 	var _opacityMaskBrush *IXpsOMBrush
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_opacityMaskBrush)))
-	return _opacityMaskBrush, win32.HRESULTError(int32(r1))
+	return _opacityMaskBrush, win32.ErrIfFailed(int32(r1))
 }
 
 // GetOpacityMaskBrushLocal dispatches through IXpsOMVisual's vtable slot 18.
 func (self *IXpsOMVisual) GetOpacityMaskBrushLocal() (*IXpsOMBrush, error) {
 	var _opacityMaskBrush *IXpsOMBrush
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_opacityMaskBrush)))
-	return _opacityMaskBrush, win32.HRESULTError(int32(r1))
+	return _opacityMaskBrush, win32.ErrIfFailed(int32(r1))
 }
 
 // SetOpacityMaskBrushLocal dispatches through IXpsOMVisual's vtable slot 19.
 func (self *IXpsOMVisual) SetOpacityMaskBrushLocal(opacityMaskBrush *IXpsOMBrush) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(opacityMaskBrush)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOpacityMaskBrushLookup dispatches through IXpsOMVisual's vtable slot 20.
 func (self *IXpsOMVisual) GetOpacityMaskBrushLookup() (foundation.PWSTR, error) {
 	var _key foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_key)))
-	return _key, win32.HRESULTError(int32(r1))
+	return _key, win32.ErrIfFailed(int32(r1))
 }
 
 // SetOpacityMaskBrushLookup dispatches through IXpsOMVisual's vtable slot 21.
 func (self *IXpsOMVisual) SetOpacityMaskBrushLookup(key string) error {
 	_key := win32.UTF16Ptr(key)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_key)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetName dispatches through IXpsOMVisual's vtable slot 22.
 func (self *IXpsOMVisual) GetName() (foundation.PWSTR, error) {
 	var _name foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
-	return _name, win32.HRESULTError(int32(r1))
+	return _name, win32.ErrIfFailed(int32(r1))
 }
 
 // SetName dispatches through IXpsOMVisual's vtable slot 23.
 func (self *IXpsOMVisual) SetName(name string) error {
 	_name := win32.UTF16Ptr(name)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetIsHyperlinkTarget dispatches through IXpsOMVisual's vtable slot 24.
 func (self *IXpsOMVisual) GetIsHyperlinkTarget() (foundation.BOOL, error) {
 	var _isHyperlink foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_isHyperlink)))
-	return _isHyperlink, win32.HRESULTError(int32(r1))
+	return _isHyperlink, win32.ErrIfFailed(int32(r1))
 }
 
 // SetIsHyperlinkTarget dispatches through IXpsOMVisual's vtable slot 25.
 func (self *IXpsOMVisual) SetIsHyperlinkTarget(isHyperlink bool) error {
 	_isHyperlink := win32.Bool32(isHyperlink)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(_isHyperlink))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetHyperlinkNavigateUri dispatches through IXpsOMVisual's vtable slot 26.
 func (self *IXpsOMVisual) GetHyperlinkNavigateUri() (*systemcom.IUri, error) {
 	var _hyperlinkUri *systemcom.IUri
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hyperlinkUri)))
-	return _hyperlinkUri, win32.HRESULTError(int32(r1))
+	return _hyperlinkUri, win32.ErrIfFailed(int32(r1))
 }
 
 // SetHyperlinkNavigateUri dispatches through IXpsOMVisual's vtable slot 27.
 func (self *IXpsOMVisual) SetHyperlinkNavigateUri(hyperlinkUri *systemcom.IUri) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hyperlinkUri)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLanguage dispatches through IXpsOMVisual's vtable slot 28.
 func (self *IXpsOMVisual) GetLanguage() (foundation.PWSTR, error) {
 	var _language foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_language)))
-	return _language, win32.HRESULTError(int32(r1))
+	return _language, win32.ErrIfFailed(int32(r1))
 }
 
 // SetLanguage dispatches through IXpsOMVisual's vtable slot 29.
 func (self *IXpsOMVisual) SetLanguage(language string) error {
 	_language := win32.UTF16Ptr(language)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_language)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMVisualBrush: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomvisualbrush
@@ -3691,41 +3691,41 @@ var IID_IXpsOMVisualBrush = win32.GUID{Data1: 0x97e294af, Data2: 0x5b37, Data3: 
 func (self *IXpsOMVisualBrush) GetVisual() (*IXpsOMVisual, error) {
 	var _visual *IXpsOMVisual
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_visual)))
-	return _visual, win32.HRESULTError(int32(r1))
+	return _visual, win32.ErrIfFailed(int32(r1))
 }
 
 // GetVisualLocal dispatches through IXpsOMVisualBrush's vtable slot 19.
 func (self *IXpsOMVisualBrush) GetVisualLocal() (*IXpsOMVisual, error) {
 	var _visual *IXpsOMVisual
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_visual)))
-	return _visual, win32.HRESULTError(int32(r1))
+	return _visual, win32.ErrIfFailed(int32(r1))
 }
 
 // SetVisualLocal dispatches through IXpsOMVisualBrush's vtable slot 20.
 func (self *IXpsOMVisualBrush) SetVisualLocal(visual *IXpsOMVisual) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(visual)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetVisualLookup dispatches through IXpsOMVisualBrush's vtable slot 21.
 func (self *IXpsOMVisualBrush) GetVisualLookup() (foundation.PWSTR, error) {
 	var _lookup foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lookup)))
-	return _lookup, win32.HRESULTError(int32(r1))
+	return _lookup, win32.ErrIfFailed(int32(r1))
 }
 
 // SetVisualLookup dispatches through IXpsOMVisualBrush's vtable slot 22.
 func (self *IXpsOMVisualBrush) SetVisualLookup(lookup string) error {
 	_lookup := win32.UTF16Ptr(lookup)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lookup)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IXpsOMVisualBrush's vtable slot 23.
 func (self *IXpsOMVisualBrush) Clone() (*IXpsOMVisualBrush, error) {
 	var _visualBrush *IXpsOMVisualBrush
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_visualBrush)))
-	return _visualBrush, win32.HRESULTError(int32(r1))
+	return _visualBrush, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMVisualCollection: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomvisualcollection
@@ -3741,38 +3741,38 @@ var IID_IXpsOMVisualCollection = win32.GUID{Data1: 0x94d8abde, Data2: 0xab91, Da
 func (self *IXpsOMVisualCollection) GetCount() (uint32, error) {
 	var _count uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
-	return _count, win32.HRESULTError(int32(r1))
+	return _count, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAt dispatches through IXpsOMVisualCollection's vtable slot 4.
 func (self *IXpsOMVisualCollection) GetAt(index uint32) (*IXpsOMVisual, error) {
 	var _object *IXpsOMVisual
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_object)))
-	return _object, win32.HRESULTError(int32(r1))
+	return _object, win32.ErrIfFailed(int32(r1))
 }
 
 // InsertAt dispatches through IXpsOMVisualCollection's vtable slot 5.
 func (self *IXpsOMVisualCollection) InsertAt(index uint32, object *IXpsOMVisual) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(object)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAt dispatches through IXpsOMVisualCollection's vtable slot 6.
 func (self *IXpsOMVisualCollection) RemoveAt(index uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAt dispatches through IXpsOMVisualCollection's vtable slot 7.
 func (self *IXpsOMVisualCollection) SetAt(index uint32, object *IXpsOMVisual) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(object)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Append dispatches through IXpsOMVisualCollection's vtable slot 8.
 func (self *IXpsOMVisualCollection) Append(object *IXpsOMVisual) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(object)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsSignature: https://learn.microsoft.com/windows/win32/api/xpsdigitalsignature/nn-xpsdigitalsignature-ixpssignature
@@ -3788,75 +3788,75 @@ var IID_IXpsSignature = win32.GUID{Data1: 0x6ae4c93e, Data2: 0x1ade, Data3: 0x42
 func (self *IXpsSignature) GetSignatureId() (foundation.PWSTR, error) {
 	var _sigId foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_sigId)))
-	return _sigId, win32.HRESULTError(int32(r1))
+	return _sigId, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSignatureValue dispatches through IXpsSignature's vtable slot 4.
 func (self *IXpsSignature) GetSignatureValue(signatureHashValue **byte, count *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signatureHashValue)), uintptr(unsafe.Pointer(count)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCertificateEnumerator dispatches through IXpsSignature's vtable slot 5.
 func (self *IXpsSignature) GetCertificateEnumerator() (*storagepackagingopc.IOpcCertificateEnumerator, error) {
 	var _certificateEnumerator *storagepackagingopc.IOpcCertificateEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_certificateEnumerator)))
-	return _certificateEnumerator, win32.HRESULTError(int32(r1))
+	return _certificateEnumerator, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSigningTime dispatches through IXpsSignature's vtable slot 6.
 func (self *IXpsSignature) GetSigningTime() (foundation.PWSTR, error) {
 	var _sigDateTimeString foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_sigDateTimeString)))
-	return _sigDateTimeString, win32.HRESULTError(int32(r1))
+	return _sigDateTimeString, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSigningTimeFormat dispatches through IXpsSignature's vtable slot 7.
 func (self *IXpsSignature) GetSigningTimeFormat() (storagepackagingopc.OPC_SIGNATURE_TIME_FORMAT, error) {
 	var _timeFormat storagepackagingopc.OPC_SIGNATURE_TIME_FORMAT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_timeFormat)))
-	return _timeFormat, win32.HRESULTError(int32(r1))
+	return _timeFormat, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSignaturePartName dispatches through IXpsSignature's vtable slot 8.
 func (self *IXpsSignature) GetSignaturePartName() (*storagepackagingopc.IOpcPartUri, error) {
 	var _signaturePartName *storagepackagingopc.IOpcPartUri
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_signaturePartName)))
-	return _signaturePartName, win32.HRESULTError(int32(r1))
+	return _signaturePartName, win32.ErrIfFailed(int32(r1))
 }
 
 // Verify dispatches through IXpsSignature's vtable slot 9.
 func (self *IXpsSignature) Verify(x509Certificate *securitycryptography.CERT_CONTEXT) (XPS_SIGNATURE_STATUS, error) {
 	var _sigStatus XPS_SIGNATURE_STATUS
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(x509Certificate)), uintptr(unsafe.Pointer(&_sigStatus)))
-	return _sigStatus, win32.HRESULTError(int32(r1))
+	return _sigStatus, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPolicy dispatches through IXpsSignature's vtable slot 10.
 func (self *IXpsSignature) GetPolicy() (XPS_SIGN_POLICY, error) {
 	var _policy XPS_SIGN_POLICY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_policy)))
-	return _policy, win32.HRESULTError(int32(r1))
+	return _policy, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCustomObjectEnumerator dispatches through IXpsSignature's vtable slot 11.
 func (self *IXpsSignature) GetCustomObjectEnumerator() (*storagepackagingopc.IOpcSignatureCustomObjectEnumerator, error) {
 	var _customObjectEnumerator *storagepackagingopc.IOpcSignatureCustomObjectEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_customObjectEnumerator)))
-	return _customObjectEnumerator, win32.HRESULTError(int32(r1))
+	return _customObjectEnumerator, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCustomReferenceEnumerator dispatches through IXpsSignature's vtable slot 12.
 func (self *IXpsSignature) GetCustomReferenceEnumerator() (*storagepackagingopc.IOpcSignatureReferenceEnumerator, error) {
 	var _customReferenceEnumerator *storagepackagingopc.IOpcSignatureReferenceEnumerator
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_customReferenceEnumerator)))
-	return _customReferenceEnumerator, win32.HRESULTError(int32(r1))
+	return _customReferenceEnumerator, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSignatureXml dispatches through IXpsSignature's vtable slot 13.
 func (self *IXpsSignature) GetSignatureXml(signatureXml **byte, count *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signatureXml)), uintptr(unsafe.Pointer(count)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetSignatureXml dispatches through IXpsSignature's vtable slot 14.
@@ -3866,7 +3866,7 @@ func (self *IXpsSignature) SetSignatureXml(signatureXml []byte) error {
 		_signatureXml = &signatureXml[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_signatureXml)), uintptr(len(signatureXml)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsSignatureBlock: https://learn.microsoft.com/windows/win32/api/xpsdigitalsignature/nn-xpsdigitalsignature-ixpssignatureblock
@@ -3882,28 +3882,28 @@ var IID_IXpsSignatureBlock = win32.GUID{Data1: 0x151fac09, Data2: 0x0b97, Data3:
 func (self *IXpsSignatureBlock) GetRequests() (*IXpsSignatureRequestCollection, error) {
 	var _requests *IXpsSignatureRequestCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_requests)))
-	return _requests, win32.HRESULTError(int32(r1))
+	return _requests, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPartName dispatches through IXpsSignatureBlock's vtable slot 4.
 func (self *IXpsSignatureBlock) GetPartName() (*storagepackagingopc.IOpcPartUri, error) {
 	var _partName *storagepackagingopc.IOpcPartUri
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_partName)))
-	return _partName, win32.HRESULTError(int32(r1))
+	return _partName, win32.ErrIfFailed(int32(r1))
 }
 
 // GetDocumentIndex dispatches through IXpsSignatureBlock's vtable slot 5.
 func (self *IXpsSignatureBlock) GetDocumentIndex() (uint32, error) {
 	var _fixedDocumentIndex uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_fixedDocumentIndex)))
-	return _fixedDocumentIndex, win32.HRESULTError(int32(r1))
+	return _fixedDocumentIndex, win32.ErrIfFailed(int32(r1))
 }
 
 // GetDocumentName dispatches through IXpsSignatureBlock's vtable slot 6.
 func (self *IXpsSignatureBlock) GetDocumentName() (*storagepackagingopc.IOpcPartUri, error) {
 	var _fixedDocumentName *storagepackagingopc.IOpcPartUri
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_fixedDocumentName)))
-	return _fixedDocumentName, win32.HRESULTError(int32(r1))
+	return _fixedDocumentName, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateRequest dispatches through IXpsSignatureBlock's vtable slot 7.
@@ -3911,7 +3911,7 @@ func (self *IXpsSignatureBlock) CreateRequest(requestId string) (*IXpsSignatureR
 	_requestId := win32.UTF16Ptr(requestId)
 	var _signatureRequest *IXpsSignatureRequest
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_requestId)), uintptr(unsafe.Pointer(&_signatureRequest)))
-	return _signatureRequest, win32.HRESULTError(int32(r1))
+	return _signatureRequest, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsSignatureBlockCollection: https://learn.microsoft.com/windows/win32/api/xpsdigitalsignature/nn-xpsdigitalsignature-ixpssignatureblockcollection
@@ -3927,20 +3927,20 @@ var IID_IXpsSignatureBlockCollection = win32.GUID{Data1: 0x23397050, Data2: 0xfe
 func (self *IXpsSignatureBlockCollection) GetCount() (uint32, error) {
 	var _count uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
-	return _count, win32.HRESULTError(int32(r1))
+	return _count, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAt dispatches through IXpsSignatureBlockCollection's vtable slot 4.
 func (self *IXpsSignatureBlockCollection) GetAt(index uint32) (*IXpsSignatureBlock, error) {
 	var _signatureBlock *IXpsSignatureBlock
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_signatureBlock)))
-	return _signatureBlock, win32.HRESULTError(int32(r1))
+	return _signatureBlock, win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAt dispatches through IXpsSignatureBlockCollection's vtable slot 5.
 func (self *IXpsSignatureBlockCollection) RemoveAt(index uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsSignatureCollection: https://learn.microsoft.com/windows/win32/api/xpsdigitalsignature/nn-xpsdigitalsignature-ixpssignaturecollection
@@ -3956,20 +3956,20 @@ var IID_IXpsSignatureCollection = win32.GUID{Data1: 0xa2d1d95d, Data2: 0xadd2, D
 func (self *IXpsSignatureCollection) GetCount() (uint32, error) {
 	var _count uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
-	return _count, win32.HRESULTError(int32(r1))
+	return _count, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAt dispatches through IXpsSignatureCollection's vtable slot 4.
 func (self *IXpsSignatureCollection) GetAt(index uint32) (*IXpsSignature, error) {
 	var _signature *IXpsSignature
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_signature)))
-	return _signature, win32.HRESULTError(int32(r1))
+	return _signature, win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAt dispatches through IXpsSignatureCollection's vtable slot 5.
 func (self *IXpsSignatureCollection) RemoveAt(index uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsSignatureManager: https://learn.microsoft.com/windows/win32/api/xpsdigitalsignature/nn-xpsdigitalsignature-ixpssignaturemanager
@@ -3985,74 +3985,74 @@ var IID_IXpsSignatureManager = win32.GUID{Data1: 0xd3e8d338, Data2: 0xfdc4, Data
 func (self *IXpsSignatureManager) LoadPackageFile(fileName string) error {
 	_fileName := win32.UTF16Ptr(fileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fileName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LoadPackageStream dispatches through IXpsSignatureManager's vtable slot 4.
 func (self *IXpsSignatureManager) LoadPackageStream(stream *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(stream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Sign dispatches through IXpsSignatureManager's vtable slot 5.
 func (self *IXpsSignatureManager) Sign(signOptions *IXpsSigningOptions, x509Certificate *securitycryptography.CERT_CONTEXT) (*IXpsSignature, error) {
 	var _signature *IXpsSignature
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signOptions)), uintptr(unsafe.Pointer(x509Certificate)), uintptr(unsafe.Pointer(&_signature)))
-	return _signature, win32.HRESULTError(int32(r1))
+	return _signature, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSignatureOriginPartName dispatches through IXpsSignatureManager's vtable slot 6.
 func (self *IXpsSignatureManager) GetSignatureOriginPartName() (*storagepackagingopc.IOpcPartUri, error) {
 	var _signatureOriginPartName *storagepackagingopc.IOpcPartUri
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_signatureOriginPartName)))
-	return _signatureOriginPartName, win32.HRESULTError(int32(r1))
+	return _signatureOriginPartName, win32.ErrIfFailed(int32(r1))
 }
 
 // SetSignatureOriginPartName dispatches through IXpsSignatureManager's vtable slot 7.
 func (self *IXpsSignatureManager) SetSignatureOriginPartName(signatureOriginPartName *storagepackagingopc.IOpcPartUri) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signatureOriginPartName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSignatures dispatches through IXpsSignatureManager's vtable slot 8.
 func (self *IXpsSignatureManager) GetSignatures() (*IXpsSignatureCollection, error) {
 	var _signatures *IXpsSignatureCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_signatures)))
-	return _signatures, win32.HRESULTError(int32(r1))
+	return _signatures, win32.ErrIfFailed(int32(r1))
 }
 
 // AddSignatureBlock dispatches through IXpsSignatureManager's vtable slot 9.
 func (self *IXpsSignatureManager) AddSignatureBlock(partName *storagepackagingopc.IOpcPartUri, fixedDocumentIndex uint32) (*IXpsSignatureBlock, error) {
 	var _signatureBlock *IXpsSignatureBlock
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(partName)), uintptr(fixedDocumentIndex), uintptr(unsafe.Pointer(&_signatureBlock)))
-	return _signatureBlock, win32.HRESULTError(int32(r1))
+	return _signatureBlock, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSignatureBlocks dispatches through IXpsSignatureManager's vtable slot 10.
 func (self *IXpsSignatureManager) GetSignatureBlocks() (*IXpsSignatureBlockCollection, error) {
 	var _signatureBlocks *IXpsSignatureBlockCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_signatureBlocks)))
-	return _signatureBlocks, win32.HRESULTError(int32(r1))
+	return _signatureBlocks, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSigningOptions dispatches through IXpsSignatureManager's vtable slot 11.
 func (self *IXpsSignatureManager) CreateSigningOptions() (*IXpsSigningOptions, error) {
 	var _signingOptions *IXpsSigningOptions
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_signingOptions)))
-	return _signingOptions, win32.HRESULTError(int32(r1))
+	return _signingOptions, win32.ErrIfFailed(int32(r1))
 }
 
 // SavePackageToFile dispatches through IXpsSignatureManager's vtable slot 12.
 func (self *IXpsSignatureManager) SavePackageToFile(fileName string, securityAttributes *security.SECURITY_ATTRIBUTES, flagsAndAttributes uint32) error {
 	_fileName := win32.UTF16Ptr(fileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fileName)), uintptr(unsafe.Pointer(securityAttributes)), uintptr(flagsAndAttributes))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SavePackageToStream dispatches through IXpsSignatureManager's vtable slot 13.
 func (self *IXpsSignatureManager) SavePackageToStream(stream *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(stream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsSignatureRequest: https://learn.microsoft.com/windows/win32/api/xpsdigitalsignature/nn-xpsdigitalsignature-ixpssignaturerequest
@@ -4068,76 +4068,76 @@ var IID_IXpsSignatureRequest = win32.GUID{Data1: 0xac58950b, Data2: 0x7208, Data
 func (self *IXpsSignatureRequest) GetIntent() (foundation.PWSTR, error) {
 	var _intent foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_intent)))
-	return _intent, win32.HRESULTError(int32(r1))
+	return _intent, win32.ErrIfFailed(int32(r1))
 }
 
 // SetIntent dispatches through IXpsSignatureRequest's vtable slot 4.
 func (self *IXpsSignatureRequest) SetIntent(intent string) error {
 	_intent := win32.UTF16Ptr(intent)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_intent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRequestedSigner dispatches through IXpsSignatureRequest's vtable slot 5.
 func (self *IXpsSignatureRequest) GetRequestedSigner() (foundation.PWSTR, error) {
 	var _signerName foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_signerName)))
-	return _signerName, win32.HRESULTError(int32(r1))
+	return _signerName, win32.ErrIfFailed(int32(r1))
 }
 
 // SetRequestedSigner dispatches through IXpsSignatureRequest's vtable slot 6.
 func (self *IXpsSignatureRequest) SetRequestedSigner(signerName string) error {
 	_signerName := win32.UTF16Ptr(signerName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_signerName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRequestSignByDate dispatches through IXpsSignatureRequest's vtable slot 7.
 func (self *IXpsSignatureRequest) GetRequestSignByDate() (foundation.PWSTR, error) {
 	var _dateString foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_dateString)))
-	return _dateString, win32.HRESULTError(int32(r1))
+	return _dateString, win32.ErrIfFailed(int32(r1))
 }
 
 // SetRequestSignByDate dispatches through IXpsSignatureRequest's vtable slot 8.
 func (self *IXpsSignatureRequest) SetRequestSignByDate(dateString string) error {
 	_dateString := win32.UTF16Ptr(dateString)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_dateString)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSigningLocale dispatches through IXpsSignatureRequest's vtable slot 9.
 func (self *IXpsSignatureRequest) GetSigningLocale() (foundation.PWSTR, error) {
 	var _place foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_place)))
-	return _place, win32.HRESULTError(int32(r1))
+	return _place, win32.ErrIfFailed(int32(r1))
 }
 
 // SetSigningLocale dispatches through IXpsSignatureRequest's vtable slot 10.
 func (self *IXpsSignatureRequest) SetSigningLocale(place string) error {
 	_place := win32.UTF16Ptr(place)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_place)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSpotLocation dispatches through IXpsSignatureRequest's vtable slot 11.
 func (self *IXpsSignatureRequest) GetSpotLocation(pageIndex *int32, pagePartName **storagepackagingopc.IOpcPartUri, x *float32, y *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pageIndex)), uintptr(unsafe.Pointer(pagePartName)), uintptr(unsafe.Pointer(x)), uintptr(unsafe.Pointer(y)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRequestId dispatches through IXpsSignatureRequest's vtable slot 13.
 func (self *IXpsSignatureRequest) GetRequestId() (foundation.PWSTR, error) {
 	var _requestId foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_requestId)))
-	return _requestId, win32.HRESULTError(int32(r1))
+	return _requestId, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSignature dispatches through IXpsSignatureRequest's vtable slot 14.
 func (self *IXpsSignatureRequest) GetSignature() (*IXpsSignature, error) {
 	var _signature *IXpsSignature
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_signature)))
-	return _signature, win32.HRESULTError(int32(r1))
+	return _signature, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsSignatureRequestCollection: https://learn.microsoft.com/windows/win32/api/xpsdigitalsignature/nn-xpsdigitalsignature-ixpssignaturerequestcollection
@@ -4153,20 +4153,20 @@ var IID_IXpsSignatureRequestCollection = win32.GUID{Data1: 0xf0253e68, Data2: 0x
 func (self *IXpsSignatureRequestCollection) GetCount() (uint32, error) {
 	var _count uint32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
-	return _count, win32.HRESULTError(int32(r1))
+	return _count, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAt dispatches through IXpsSignatureRequestCollection's vtable slot 4.
 func (self *IXpsSignatureRequestCollection) GetAt(index uint32) (*IXpsSignatureRequest, error) {
 	var _signatureRequest *IXpsSignatureRequest
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_signatureRequest)))
-	return _signatureRequest, win32.HRESULTError(int32(r1))
+	return _signatureRequest, win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAt dispatches through IXpsSignatureRequestCollection's vtable slot 5.
 func (self *IXpsSignatureRequestCollection) RemoveAt(index uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(index))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsSigningOptions: https://learn.microsoft.com/windows/win32/api/xpsdigitalsignature/nn-xpsdigitalsignature-ixpssigningoptions
@@ -4182,113 +4182,113 @@ var IID_IXpsSigningOptions = win32.GUID{Data1: 0x7718eae4, Data2: 0x3215, Data3:
 func (self *IXpsSigningOptions) GetSignatureId() (foundation.PWSTR, error) {
 	var _signatureId foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_signatureId)))
-	return _signatureId, win32.HRESULTError(int32(r1))
+	return _signatureId, win32.ErrIfFailed(int32(r1))
 }
 
 // SetSignatureId dispatches through IXpsSigningOptions's vtable slot 4.
 func (self *IXpsSigningOptions) SetSignatureId(signatureId string) error {
 	_signatureId := win32.UTF16Ptr(signatureId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_signatureId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSignatureMethod dispatches through IXpsSigningOptions's vtable slot 5.
 func (self *IXpsSigningOptions) GetSignatureMethod() (foundation.PWSTR, error) {
 	var _signatureMethod foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_signatureMethod)))
-	return _signatureMethod, win32.HRESULTError(int32(r1))
+	return _signatureMethod, win32.ErrIfFailed(int32(r1))
 }
 
 // SetSignatureMethod dispatches through IXpsSigningOptions's vtable slot 6.
 func (self *IXpsSigningOptions) SetSignatureMethod(signatureMethod string) error {
 	_signatureMethod := win32.UTF16Ptr(signatureMethod)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_signatureMethod)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDigestMethod dispatches through IXpsSigningOptions's vtable slot 7.
 func (self *IXpsSigningOptions) GetDigestMethod() (foundation.PWSTR, error) {
 	var _digestMethod foundation.PWSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_digestMethod)))
-	return _digestMethod, win32.HRESULTError(int32(r1))
+	return _digestMethod, win32.ErrIfFailed(int32(r1))
 }
 
 // SetDigestMethod dispatches through IXpsSigningOptions's vtable slot 8.
 func (self *IXpsSigningOptions) SetDigestMethod(digestMethod string) error {
 	_digestMethod := win32.UTF16Ptr(digestMethod)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_digestMethod)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSignaturePartName dispatches through IXpsSigningOptions's vtable slot 9.
 func (self *IXpsSigningOptions) GetSignaturePartName() (*storagepackagingopc.IOpcPartUri, error) {
 	var _signaturePartName *storagepackagingopc.IOpcPartUri
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_signaturePartName)))
-	return _signaturePartName, win32.HRESULTError(int32(r1))
+	return _signaturePartName, win32.ErrIfFailed(int32(r1))
 }
 
 // SetSignaturePartName dispatches through IXpsSigningOptions's vtable slot 10.
 func (self *IXpsSigningOptions) SetSignaturePartName(signaturePartName *storagepackagingopc.IOpcPartUri) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signaturePartName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPolicy dispatches through IXpsSigningOptions's vtable slot 11.
 func (self *IXpsSigningOptions) GetPolicy() (XPS_SIGN_POLICY, error) {
 	var _policy XPS_SIGN_POLICY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_policy)))
-	return _policy, win32.HRESULTError(int32(r1))
+	return _policy, win32.ErrIfFailed(int32(r1))
 }
 
 // SetPolicy dispatches through IXpsSigningOptions's vtable slot 12.
 func (self *IXpsSigningOptions) SetPolicy(policy XPS_SIGN_POLICY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(policy))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSigningTimeFormat dispatches through IXpsSigningOptions's vtable slot 13.
 func (self *IXpsSigningOptions) GetSigningTimeFormat() (storagepackagingopc.OPC_SIGNATURE_TIME_FORMAT, error) {
 	var _timeFormat storagepackagingopc.OPC_SIGNATURE_TIME_FORMAT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_timeFormat)))
-	return _timeFormat, win32.HRESULTError(int32(r1))
+	return _timeFormat, win32.ErrIfFailed(int32(r1))
 }
 
 // SetSigningTimeFormat dispatches through IXpsSigningOptions's vtable slot 14.
 func (self *IXpsSigningOptions) SetSigningTimeFormat(timeFormat storagepackagingopc.OPC_SIGNATURE_TIME_FORMAT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(timeFormat))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCustomObjects dispatches through IXpsSigningOptions's vtable slot 15.
 func (self *IXpsSigningOptions) GetCustomObjects() (*storagepackagingopc.IOpcSignatureCustomObjectSet, error) {
 	var _customObjectSet *storagepackagingopc.IOpcSignatureCustomObjectSet
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_customObjectSet)))
-	return _customObjectSet, win32.HRESULTError(int32(r1))
+	return _customObjectSet, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCustomReferences dispatches through IXpsSigningOptions's vtable slot 16.
 func (self *IXpsSigningOptions) GetCustomReferences() (*storagepackagingopc.IOpcSignatureReferenceSet, error) {
 	var _customReferenceSet *storagepackagingopc.IOpcSignatureReferenceSet
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_customReferenceSet)))
-	return _customReferenceSet, win32.HRESULTError(int32(r1))
+	return _customReferenceSet, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCertificateSet dispatches through IXpsSigningOptions's vtable slot 17.
 func (self *IXpsSigningOptions) GetCertificateSet() (*storagepackagingopc.IOpcCertificateSet, error) {
 	var _certificateSet *storagepackagingopc.IOpcCertificateSet
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_certificateSet)))
-	return _certificateSet, win32.HRESULTError(int32(r1))
+	return _certificateSet, win32.ErrIfFailed(int32(r1))
 }
 
 // GetFlags dispatches through IXpsSigningOptions's vtable slot 18.
 func (self *IXpsSigningOptions) GetFlags() (XPS_SIGN_FLAGS, error) {
 	var _flags XPS_SIGN_FLAGS
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_flags)))
-	return _flags, win32.HRESULTError(int32(r1))
+	return _flags, win32.ErrIfFailed(int32(r1))
 }
 
 // SetFlags dispatches through IXpsSigningOptions's vtable slot 19.
 func (self *IXpsSigningOptions) SetFlags(flags XPS_SIGN_FLAGS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(flags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

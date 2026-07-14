@@ -42,7 +42,7 @@ var (
 func ApplyLocalManagementSyncML(syncMLRequest string, syncMLResult *foundation.PWSTR) error {
 	_syncMLRequest := win32.UTF16Ptr(syncMLRequest)
 	r1, _, _ := syscall.SyscallN(procApplyLocalManagementSyncML.Addr(), uintptr(unsafe.Pointer(_syncMLRequest)), uintptr(unsafe.Pointer(syncMLResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DiscoverManagementService calls MDMRegistration!DiscoverManagementService.
@@ -51,7 +51,7 @@ func ApplyLocalManagementSyncML(syncMLRequest string, syncMLResult *foundation.P
 func DiscoverManagementService(pszUPN string, ppMgmtInfo **MANAGEMENT_SERVICE_INFO) error {
 	_pszUPN := win32.UTF16Ptr(pszUPN)
 	r1, _, _ := syscall.SyscallN(procDiscoverManagementService.Addr(), uintptr(unsafe.Pointer(_pszUPN)), uintptr(unsafe.Pointer(ppMgmtInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DiscoverManagementServiceEx calls MDMRegistration!DiscoverManagementServiceEx.
@@ -61,7 +61,7 @@ func DiscoverManagementServiceEx(pszUPN string, pszDiscoveryServiceCandidate str
 	_pszUPN := win32.UTF16Ptr(pszUPN)
 	_pszDiscoveryServiceCandidate := win32.UTF16Ptr(pszDiscoveryServiceCandidate)
 	r1, _, _ := syscall.SyscallN(procDiscoverManagementServiceEx.Addr(), uintptr(unsafe.Pointer(_pszUPN)), uintptr(unsafe.Pointer(_pszDiscoveryServiceCandidate)), uintptr(unsafe.Pointer(ppMgmtInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceManagementConfigInfo calls MDMRegistration!GetDeviceManagementConfigInfo.
@@ -69,7 +69,7 @@ func DiscoverManagementServiceEx(pszUPN string, pszDiscoveryServiceCandidate str
 func GetDeviceManagementConfigInfo(providerID string, configStringBufferLength *uint32, configString foundation.PWSTR) error {
 	_providerID := win32.UTF16Ptr(providerID)
 	r1, _, _ := syscall.SyscallN(procGetDeviceManagementConfigInfo.Addr(), uintptr(unsafe.Pointer(_providerID)), uintptr(unsafe.Pointer(configStringBufferLength)), uintptr(unsafe.Pointer(configString)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceRegistrationInfo calls MDMRegistration!GetDeviceRegistrationInfo.
@@ -77,7 +77,7 @@ func GetDeviceManagementConfigInfo(providerID string, configStringBufferLength *
 // Minimum OS: windows8.1.
 func GetDeviceRegistrationInfo(DeviceInformationClass REGISTRATION_INFORMATION_CLASS, ppDeviceRegistrationInfo *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procGetDeviceRegistrationInfo.Addr(), uintptr(DeviceInformationClass), uintptr(unsafe.Pointer(ppDeviceRegistrationInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetManagementAppHyperlink calls MDMRegistration!GetManagementAppHyperlink.
@@ -85,7 +85,7 @@ func GetDeviceRegistrationInfo(DeviceInformationClass REGISTRATION_INFORMATION_C
 // Minimum OS: windows8.1.
 func GetManagementAppHyperlink(cchHyperlink uint32, pszHyperlink foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procGetManagementAppHyperlink.Addr(), uintptr(cchHyperlink), uintptr(unsafe.Pointer(pszHyperlink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsDeviceRegisteredWithManagement calls MDMRegistration!IsDeviceRegisteredWithManagement.
@@ -93,7 +93,7 @@ func GetManagementAppHyperlink(cchHyperlink uint32, pszHyperlink foundation.PWST
 // Minimum OS: windows8.1.
 func IsDeviceRegisteredWithManagement(pfIsDeviceRegisteredWithManagement *foundation.BOOL, cchUPN uint32, pszUPN foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procIsDeviceRegisteredWithManagement.Addr(), uintptr(unsafe.Pointer(pfIsDeviceRegisteredWithManagement)), uintptr(cchUPN), uintptr(unsafe.Pointer(pszUPN)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsManagementRegistrationAllowed calls MDMRegistration!IsManagementRegistrationAllowed.
@@ -101,19 +101,19 @@ func IsDeviceRegisteredWithManagement(pfIsDeviceRegisteredWithManagement *founda
 // Minimum OS: windows8.1.
 func IsManagementRegistrationAllowed(pfIsManagementRegistrationAllowed *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procIsManagementRegistrationAllowed.Addr(), uintptr(unsafe.Pointer(pfIsManagementRegistrationAllowed)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsMdmUxWithoutAadAllowed calls MDMRegistration!IsMdmUxWithoutAadAllowed.
 func IsMdmUxWithoutAadAllowed(isEnrollmentAllowed *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procIsMdmUxWithoutAadAllowed.Addr(), uintptr(unsafe.Pointer(isEnrollmentAllowed)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterDeviceWithLocalManagement calls MDMLocalManagement!RegisterDeviceWithLocalManagement.
 func RegisterDeviceWithLocalManagement(alreadyRegistered *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procRegisterDeviceWithLocalManagement.Addr(), uintptr(unsafe.Pointer(alreadyRegistered)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterDeviceWithManagement calls MDMRegistration!RegisterDeviceWithManagement.
@@ -124,7 +124,7 @@ func RegisterDeviceWithManagement(pszUPN string, ppszMDMServiceUri string, ppzsA
 	_ppszMDMServiceUri := win32.UTF16Ptr(ppszMDMServiceUri)
 	_ppzsAccessToken := win32.UTF16Ptr(ppzsAccessToken)
 	r1, _, _ := syscall.SyscallN(procRegisterDeviceWithManagement.Addr(), uintptr(unsafe.Pointer(_pszUPN)), uintptr(unsafe.Pointer(_ppszMDMServiceUri)), uintptr(unsafe.Pointer(_ppzsAccessToken)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterDeviceWithManagementUsingAADCredentials calls MDMRegistration!RegisterDeviceWithManagementUsingAADCredentials.
@@ -132,7 +132,7 @@ func RegisterDeviceWithManagement(pszUPN string, ppszMDMServiceUri string, ppzsA
 // Minimum OS: windows8.1.
 func RegisterDeviceWithManagementUsingAADCredentials(UserToken foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procRegisterDeviceWithManagementUsingAADCredentials.Addr(), uintptr(UserToken))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterDeviceWithManagementUsingAADDeviceCredentials calls MDMRegistration!RegisterDeviceWithManagementUsingAADDeviceCredentials.
@@ -140,14 +140,14 @@ func RegisterDeviceWithManagementUsingAADCredentials(UserToken foundation.HANDLE
 // Minimum OS: windows8.1.
 func RegisterDeviceWithManagementUsingAADDeviceCredentials() error {
 	r1, _, _ := syscall.SyscallN(procRegisterDeviceWithManagementUsingAADDeviceCredentials.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterDeviceWithManagementUsingAADDeviceCredentials2 calls MDMRegistration!RegisterDeviceWithManagementUsingAADDeviceCredentials2.
 func RegisterDeviceWithManagementUsingAADDeviceCredentials2(MDMApplicationID string) error {
 	_MDMApplicationID := win32.UTF16Ptr(MDMApplicationID)
 	r1, _, _ := syscall.SyscallN(procRegisterDeviceWithManagementUsingAADDeviceCredentials2.Addr(), uintptr(unsafe.Pointer(_MDMApplicationID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDeviceManagementConfigInfo calls MDMRegistration!SetDeviceManagementConfigInfo.
@@ -156,7 +156,7 @@ func SetDeviceManagementConfigInfo(providerID string, configString string) error
 	_providerID := win32.UTF16Ptr(providerID)
 	_configString := win32.UTF16Ptr(configString)
 	r1, _, _ := syscall.SyscallN(procSetDeviceManagementConfigInfo.Addr(), uintptr(unsafe.Pointer(_providerID)), uintptr(unsafe.Pointer(_configString)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetManagedExternally calls MDMRegistration!SetManagedExternally.
@@ -165,13 +165,13 @@ func SetDeviceManagementConfigInfo(providerID string, configString string) error
 func SetManagedExternally(IsManagedExternally bool) error {
 	_IsManagedExternally := win32.Bool32(IsManagedExternally)
 	r1, _, _ := syscall.SyscallN(procSetManagedExternally.Addr(), uintptr(_IsManagedExternally))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnregisterDeviceWithLocalManagement calls MDMLocalManagement!UnregisterDeviceWithLocalManagement.
 func UnregisterDeviceWithLocalManagement() error {
 	r1, _, _ := syscall.SyscallN(procUnregisterDeviceWithLocalManagement.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnregisterDeviceWithManagement calls MDMRegistration!UnregisterDeviceWithManagement.
@@ -180,5 +180,5 @@ func UnregisterDeviceWithLocalManagement() error {
 func UnregisterDeviceWithManagement(enrollmentID string) error {
 	_enrollmentID := win32.UTF16Ptr(enrollmentID)
 	r1, _, _ := syscall.SyscallN(procUnregisterDeviceWithManagement.Addr(), uintptr(unsafe.Pointer(_enrollmentID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

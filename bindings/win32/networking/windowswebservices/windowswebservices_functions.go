@@ -217,7 +217,7 @@ var (
 // Minimum OS: windows6.1.
 func WsAbandonCall(serviceProxy *WS_SERVICE_PROXY, callId uint32, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsAbandonCall.Addr(), uintptr(unsafe.Pointer(serviceProxy)), uintptr(callId), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsAbandonMessage calls webservices!WsAbandonMessage.
@@ -225,7 +225,7 @@ func WsAbandonCall(serviceProxy *WS_SERVICE_PROXY, callId uint32, error_ *WS_ERR
 // Minimum OS: windows6.1.
 func WsAbandonMessage(channel *WS_CHANNEL, message *WS_MESSAGE, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsAbandonMessage.Addr(), uintptr(unsafe.Pointer(channel)), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsAbortChannel calls webservices!WsAbortChannel.
@@ -233,7 +233,7 @@ func WsAbandonMessage(channel *WS_CHANNEL, message *WS_MESSAGE, error_ *WS_ERROR
 // Minimum OS: windows6.1.
 func WsAbortChannel(channel *WS_CHANNEL, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsAbortChannel.Addr(), uintptr(unsafe.Pointer(channel)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsAbortListener calls webservices!WsAbortListener.
@@ -241,7 +241,7 @@ func WsAbortChannel(channel *WS_CHANNEL, error_ *WS_ERROR) error {
 // Minimum OS: windows6.1.
 func WsAbortListener(listener *WS_LISTENER, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsAbortListener.Addr(), uintptr(unsafe.Pointer(listener)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsAbortServiceHost calls webservices!WsAbortServiceHost.
@@ -249,7 +249,7 @@ func WsAbortListener(listener *WS_LISTENER, error_ *WS_ERROR) error {
 // Minimum OS: windows6.1.
 func WsAbortServiceHost(serviceHost *WS_SERVICE_HOST, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsAbortServiceHost.Addr(), uintptr(unsafe.Pointer(serviceHost)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsAbortServiceProxy calls webservices!WsAbortServiceProxy.
@@ -257,7 +257,7 @@ func WsAbortServiceHost(serviceHost *WS_SERVICE_HOST, error_ *WS_ERROR) error {
 // Minimum OS: windows6.1.
 func WsAbortServiceProxy(serviceProxy *WS_SERVICE_PROXY, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsAbortServiceProxy.Addr(), uintptr(unsafe.Pointer(serviceProxy)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsAcceptChannel calls webservices!WsAcceptChannel.
@@ -265,7 +265,7 @@ func WsAbortServiceProxy(serviceProxy *WS_SERVICE_PROXY, error_ *WS_ERROR) error
 // Minimum OS: windows6.1.
 func WsAcceptChannel(listener *WS_LISTENER, channel *WS_CHANNEL, asyncContext *WS_ASYNC_CONTEXT, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsAcceptChannel.Addr(), uintptr(unsafe.Pointer(listener)), uintptr(unsafe.Pointer(channel)), uintptr(unsafe.Pointer(asyncContext)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsAddCustomHeader calls webservices!WsAddCustomHeader.
@@ -277,7 +277,7 @@ func WsAddCustomHeader(message *WS_MESSAGE, headerDescription *WS_ELEMENT_DESCRI
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsAddCustomHeader.Addr(), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(headerDescription)), uintptr(writeOption), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(headerAttributes), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsAddErrorString calls webservices!WsAddErrorString.
@@ -285,7 +285,7 @@ func WsAddCustomHeader(message *WS_MESSAGE, headerDescription *WS_ELEMENT_DESCRI
 // Minimum OS: windows6.1.
 func WsAddErrorString(error_ *WS_ERROR, string_ *WS_STRING) error {
 	r1, _, _ := syscall.SyscallN(procWsAddErrorString.Addr(), uintptr(unsafe.Pointer(error_)), uintptr(unsafe.Pointer(string_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsAddMappedHeader calls webservices!WsAddMappedHeader.
@@ -297,7 +297,7 @@ func WsAddMappedHeader(message *WS_MESSAGE, headerName *WS_XML_STRING, valueType
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsAddMappedHeader.Addr(), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(headerName)), uintptr(valueType), uintptr(writeOption), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsAddressMessage calls webservices!WsAddressMessage.
@@ -305,7 +305,7 @@ func WsAddMappedHeader(message *WS_MESSAGE, headerName *WS_XML_STRING, valueType
 // Minimum OS: windows6.1.
 func WsAddressMessage(message *WS_MESSAGE, address *WS_ENDPOINT_ADDRESS, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsAddressMessage.Addr(), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(address)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsAlloc calls webservices!WsAlloc.
@@ -313,7 +313,7 @@ func WsAddressMessage(message *WS_MESSAGE, address *WS_ENDPOINT_ADDRESS, error_ 
 // Minimum OS: windows6.1.
 func WsAlloc(heap *WS_HEAP, size uintptr, ptr *unsafe.Pointer, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsAlloc.Addr(), uintptr(unsafe.Pointer(heap)), uintptr(size), uintptr(unsafe.Pointer(ptr)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsAsyncExecute calls webservices!WsAsyncExecute.
@@ -321,7 +321,7 @@ func WsAlloc(heap *WS_HEAP, size uintptr, ptr *unsafe.Pointer, error_ *WS_ERROR)
 // Minimum OS: windows6.1.
 func WsAsyncExecute(asyncState *WS_ASYNC_STATE, operation WS_ASYNC_FUNCTION, callbackModel WS_CALLBACK_MODEL, callbackState unsafe.Pointer, asyncContext *WS_ASYNC_CONTEXT, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsAsyncExecute.Addr(), uintptr(unsafe.Pointer(asyncState)), uintptr(operation), uintptr(callbackModel), uintptr(unsafe.Pointer(callbackState)), uintptr(unsafe.Pointer(asyncContext)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsCall calls webservices!WsCall.
@@ -333,7 +333,7 @@ func WsCall(serviceProxy *WS_SERVICE_PROXY, operation *WS_OPERATION_DESCRIPTION,
 		_callProperties = &callProperties[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsCall.Addr(), uintptr(unsafe.Pointer(serviceProxy)), uintptr(unsafe.Pointer(operation)), uintptr(unsafe.Pointer(arguments)), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(_callProperties)), uintptr(len(callProperties)), uintptr(unsafe.Pointer(asyncContext)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsCheckMustUnderstandHeaders calls webservices!WsCheckMustUnderstandHeaders.
@@ -341,7 +341,7 @@ func WsCall(serviceProxy *WS_SERVICE_PROXY, operation *WS_OPERATION_DESCRIPTION,
 // Minimum OS: windows6.1.
 func WsCheckMustUnderstandHeaders(message *WS_MESSAGE, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsCheckMustUnderstandHeaders.Addr(), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsCloseChannel calls webservices!WsCloseChannel.
@@ -349,7 +349,7 @@ func WsCheckMustUnderstandHeaders(message *WS_MESSAGE, error_ *WS_ERROR) error {
 // Minimum OS: windows6.1.
 func WsCloseChannel(channel *WS_CHANNEL, asyncContext *WS_ASYNC_CONTEXT, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsCloseChannel.Addr(), uintptr(unsafe.Pointer(channel)), uintptr(unsafe.Pointer(asyncContext)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsCloseListener calls webservices!WsCloseListener.
@@ -357,7 +357,7 @@ func WsCloseChannel(channel *WS_CHANNEL, asyncContext *WS_ASYNC_CONTEXT, error_ 
 // Minimum OS: windows6.1.
 func WsCloseListener(listener *WS_LISTENER, asyncContext *WS_ASYNC_CONTEXT, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsCloseListener.Addr(), uintptr(unsafe.Pointer(listener)), uintptr(unsafe.Pointer(asyncContext)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsCloseServiceHost calls webservices!WsCloseServiceHost.
@@ -365,7 +365,7 @@ func WsCloseListener(listener *WS_LISTENER, asyncContext *WS_ASYNC_CONTEXT, erro
 // Minimum OS: windows6.1.
 func WsCloseServiceHost(serviceHost *WS_SERVICE_HOST, asyncContext *WS_ASYNC_CONTEXT, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsCloseServiceHost.Addr(), uintptr(unsafe.Pointer(serviceHost)), uintptr(unsafe.Pointer(asyncContext)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsCloseServiceProxy calls webservices!WsCloseServiceProxy.
@@ -373,7 +373,7 @@ func WsCloseServiceHost(serviceHost *WS_SERVICE_HOST, asyncContext *WS_ASYNC_CON
 // Minimum OS: windows6.1.
 func WsCloseServiceProxy(serviceProxy *WS_SERVICE_PROXY, asyncContext *WS_ASYNC_CONTEXT, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsCloseServiceProxy.Addr(), uintptr(unsafe.Pointer(serviceProxy)), uintptr(unsafe.Pointer(asyncContext)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsCombineUrl calls webservices!WsCombineUrl.
@@ -381,7 +381,7 @@ func WsCloseServiceProxy(serviceProxy *WS_SERVICE_PROXY, asyncContext *WS_ASYNC_
 // Minimum OS: windows6.1.
 func WsCombineUrl(baseUrl *WS_STRING, referenceUrl *WS_STRING, flags uint32, heap *WS_HEAP, resultUrl *WS_STRING, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsCombineUrl.Addr(), uintptr(unsafe.Pointer(baseUrl)), uintptr(unsafe.Pointer(referenceUrl)), uintptr(flags), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(resultUrl)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsCopyError calls webservices!WsCopyError.
@@ -389,7 +389,7 @@ func WsCombineUrl(baseUrl *WS_STRING, referenceUrl *WS_STRING, flags uint32, hea
 // Minimum OS: windows6.1.
 func WsCopyError(source *WS_ERROR, destination *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsCopyError.Addr(), uintptr(unsafe.Pointer(source)), uintptr(unsafe.Pointer(destination)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsCopyNode calls webservices!WsCopyNode.
@@ -397,7 +397,7 @@ func WsCopyError(source *WS_ERROR, destination *WS_ERROR) error {
 // Minimum OS: windows6.1.
 func WsCopyNode(writer *WS_XML_WRITER, reader *WS_XML_READER, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsCopyNode.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsCreateChannel calls webservices!WsCreateChannel.
@@ -409,7 +409,7 @@ func WsCreateChannel(channelType WS_CHANNEL_TYPE, channelBinding WS_CHANNEL_BIND
 		_properties = &properties[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsCreateChannel.Addr(), uintptr(channelType), uintptr(channelBinding), uintptr(unsafe.Pointer(_properties)), uintptr(len(properties)), uintptr(unsafe.Pointer(securityDescription)), uintptr(unsafe.Pointer(channel)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsCreateChannelForListener calls webservices!WsCreateChannelForListener.
@@ -421,7 +421,7 @@ func WsCreateChannelForListener(listener *WS_LISTENER, properties []WS_CHANNEL_P
 		_properties = &properties[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsCreateChannelForListener.Addr(), uintptr(unsafe.Pointer(listener)), uintptr(unsafe.Pointer(_properties)), uintptr(len(properties)), uintptr(unsafe.Pointer(channel)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsCreateError calls webservices!WsCreateError.
@@ -433,7 +433,7 @@ func WsCreateError(properties []WS_ERROR_PROPERTY, error_ **WS_ERROR) error {
 		_properties = &properties[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsCreateError.Addr(), uintptr(unsafe.Pointer(_properties)), uintptr(len(properties)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsCreateFaultFromError calls webservices!WsCreateFaultFromError.
@@ -441,7 +441,7 @@ func WsCreateError(properties []WS_ERROR_PROPERTY, error_ **WS_ERROR) error {
 // Minimum OS: windows6.1.
 func WsCreateFaultFromError(error_ *WS_ERROR, faultErrorCode foundation.HRESULT, faultDisclosure WS_FAULT_DISCLOSURE, heap *WS_HEAP, fault *WS_FAULT) error {
 	r1, _, _ := syscall.SyscallN(procWsCreateFaultFromError.Addr(), uintptr(unsafe.Pointer(error_)), uintptr(faultErrorCode), uintptr(faultDisclosure), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(fault)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsCreateHeap calls webservices!WsCreateHeap.
@@ -449,7 +449,7 @@ func WsCreateFaultFromError(error_ *WS_ERROR, faultErrorCode foundation.HRESULT,
 // Minimum OS: windows6.1.
 func WsCreateHeap(maxSize uintptr, trimSize uintptr, properties *WS_HEAP_PROPERTY, propertyCount uint32, heap **WS_HEAP, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsCreateHeap.Addr(), uintptr(maxSize), uintptr(trimSize), uintptr(unsafe.Pointer(properties)), uintptr(propertyCount), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsCreateListener calls webservices!WsCreateListener.
@@ -461,7 +461,7 @@ func WsCreateListener(channelType WS_CHANNEL_TYPE, channelBinding WS_CHANNEL_BIN
 		_properties = &properties[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsCreateListener.Addr(), uintptr(channelType), uintptr(channelBinding), uintptr(unsafe.Pointer(_properties)), uintptr(len(properties)), uintptr(unsafe.Pointer(securityDescription)), uintptr(unsafe.Pointer(listener)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsCreateMessage calls webservices!WsCreateMessage.
@@ -473,7 +473,7 @@ func WsCreateMessage(envelopeVersion WS_ENVELOPE_VERSION, addressingVersion WS_A
 		_properties = &properties[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsCreateMessage.Addr(), uintptr(envelopeVersion), uintptr(addressingVersion), uintptr(unsafe.Pointer(_properties)), uintptr(len(properties)), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsCreateMessageForChannel calls webservices!WsCreateMessageForChannel.
@@ -485,7 +485,7 @@ func WsCreateMessageForChannel(channel *WS_CHANNEL, properties []WS_MESSAGE_PROP
 		_properties = &properties[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsCreateMessageForChannel.Addr(), uintptr(unsafe.Pointer(channel)), uintptr(unsafe.Pointer(_properties)), uintptr(len(properties)), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsCreateMetadata calls webservices!WsCreateMetadata.
@@ -497,7 +497,7 @@ func WsCreateMetadata(properties []WS_METADATA_PROPERTY, metadata **WS_METADATA,
 		_properties = &properties[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsCreateMetadata.Addr(), uintptr(unsafe.Pointer(_properties)), uintptr(len(properties)), uintptr(unsafe.Pointer(metadata)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsCreateReader calls webservices!WsCreateReader.
@@ -509,7 +509,7 @@ func WsCreateReader(properties []WS_XML_READER_PROPERTY, reader **WS_XML_READER,
 		_properties = &properties[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsCreateReader.Addr(), uintptr(unsafe.Pointer(_properties)), uintptr(len(properties)), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsCreateServiceEndpointFromTemplate calls webservices!WsCreateServiceEndpointFromTemplate.
@@ -525,7 +525,7 @@ func WsCreateServiceEndpointFromTemplate(channelType WS_CHANNEL_TYPE, properties
 		_templateValue = &templateValue[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsCreateServiceEndpointFromTemplate.Addr(), uintptr(channelType), uintptr(unsafe.Pointer(_properties)), uintptr(len(properties)), uintptr(unsafe.Pointer(addressUrl)), uintptr(unsafe.Pointer(contract)), uintptr(authorizationCallback), uintptr(unsafe.Pointer(heap)), uintptr(templateType), uintptr(unsafe.Pointer(_templateValue)), uintptr(len(templateValue)), uintptr(unsafe.Pointer(templateDescription)), uintptr(templateDescriptionSize), uintptr(unsafe.Pointer(serviceEndpoint)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsCreateServiceHost calls webservices!WsCreateServiceHost.
@@ -541,7 +541,7 @@ func WsCreateServiceHost(endpoints []*WS_SERVICE_ENDPOINT, serviceProperties []W
 		_serviceProperties = &serviceProperties[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsCreateServiceHost.Addr(), uintptr(unsafe.Pointer(_endpoints)), uintptr(len(endpoints)), uintptr(unsafe.Pointer(_serviceProperties)), uintptr(len(serviceProperties)), uintptr(unsafe.Pointer(serviceHost)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsCreateServiceProxy calls webservices!WsCreateServiceProxy.
@@ -557,7 +557,7 @@ func WsCreateServiceProxy(channelType WS_CHANNEL_TYPE, channelBinding WS_CHANNEL
 		_channelProperties = &channelProperties[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsCreateServiceProxy.Addr(), uintptr(channelType), uintptr(channelBinding), uintptr(unsafe.Pointer(securityDescription)), uintptr(unsafe.Pointer(_properties)), uintptr(len(properties)), uintptr(unsafe.Pointer(_channelProperties)), uintptr(len(channelProperties)), uintptr(unsafe.Pointer(serviceProxy)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsCreateServiceProxyFromTemplate calls webservices!WsCreateServiceProxyFromTemplate.
@@ -573,7 +573,7 @@ func WsCreateServiceProxyFromTemplate(channelType WS_CHANNEL_TYPE, properties []
 		_templateValue = &templateValue[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsCreateServiceProxyFromTemplate.Addr(), uintptr(channelType), uintptr(unsafe.Pointer(_properties)), uintptr(len(properties)), uintptr(templateType), uintptr(unsafe.Pointer(_templateValue)), uintptr(len(templateValue)), uintptr(unsafe.Pointer(templateDescription)), uintptr(templateDescriptionSize), uintptr(unsafe.Pointer(serviceProxy)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsCreateWriter calls webservices!WsCreateWriter.
@@ -585,7 +585,7 @@ func WsCreateWriter(properties []WS_XML_WRITER_PROPERTY, writer **WS_XML_WRITER,
 		_properties = &properties[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsCreateWriter.Addr(), uintptr(unsafe.Pointer(_properties)), uintptr(len(properties)), uintptr(unsafe.Pointer(writer)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsCreateXmlBuffer calls webservices!WsCreateXmlBuffer.
@@ -597,7 +597,7 @@ func WsCreateXmlBuffer(heap *WS_HEAP, properties []WS_XML_BUFFER_PROPERTY, buffe
 		_properties = &properties[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsCreateXmlBuffer.Addr(), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(_properties)), uintptr(len(properties)), uintptr(unsafe.Pointer(buffer)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsCreateXmlSecurityToken calls webservices!WsCreateXmlSecurityToken.
@@ -609,7 +609,7 @@ func WsCreateXmlSecurityToken(tokenXml *WS_XML_BUFFER, tokenKey *WS_SECURITY_KEY
 		_properties = &properties[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsCreateXmlSecurityToken.Addr(), uintptr(unsafe.Pointer(tokenXml)), uintptr(unsafe.Pointer(tokenKey)), uintptr(unsafe.Pointer(_properties)), uintptr(len(properties)), uintptr(unsafe.Pointer(token)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsDateTimeToFileTime calls webservices!WsDateTimeToFileTime.
@@ -617,7 +617,7 @@ func WsCreateXmlSecurityToken(tokenXml *WS_XML_BUFFER, tokenKey *WS_SECURITY_KEY
 // Minimum OS: windows6.1.
 func WsDateTimeToFileTime(dateTime *WS_DATETIME, fileTime *foundation.FILETIME, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsDateTimeToFileTime.Addr(), uintptr(unsafe.Pointer(dateTime)), uintptr(unsafe.Pointer(fileTime)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsDecodeUrl calls webservices!WsDecodeUrl.
@@ -625,7 +625,7 @@ func WsDateTimeToFileTime(dateTime *WS_DATETIME, fileTime *foundation.FILETIME, 
 // Minimum OS: windows6.1.
 func WsDecodeUrl(url *WS_STRING, flags uint32, heap *WS_HEAP, outUrl **WS_URL, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsDecodeUrl.Addr(), uintptr(unsafe.Pointer(url)), uintptr(flags), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(outUrl)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsEncodeUrl calls webservices!WsEncodeUrl.
@@ -633,7 +633,7 @@ func WsDecodeUrl(url *WS_STRING, flags uint32, heap *WS_HEAP, outUrl **WS_URL, e
 // Minimum OS: windows6.1.
 func WsEncodeUrl(url *WS_URL, flags uint32, heap *WS_HEAP, outUrl *WS_STRING, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsEncodeUrl.Addr(), uintptr(unsafe.Pointer(url)), uintptr(flags), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(outUrl)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsEndReaderCanonicalization calls webservices!WsEndReaderCanonicalization.
@@ -641,7 +641,7 @@ func WsEncodeUrl(url *WS_URL, flags uint32, heap *WS_HEAP, outUrl *WS_STRING, er
 // Minimum OS: windows6.1.
 func WsEndReaderCanonicalization(reader *WS_XML_READER, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsEndReaderCanonicalization.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsEndWriterCanonicalization calls webservices!WsEndWriterCanonicalization.
@@ -649,7 +649,7 @@ func WsEndReaderCanonicalization(reader *WS_XML_READER, error_ *WS_ERROR) error 
 // Minimum OS: windows6.1.
 func WsEndWriterCanonicalization(writer *WS_XML_WRITER, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsEndWriterCanonicalization.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsFileTimeToDateTime calls webservices!WsFileTimeToDateTime.
@@ -657,7 +657,7 @@ func WsEndWriterCanonicalization(writer *WS_XML_WRITER, error_ *WS_ERROR) error 
 // Minimum OS: windows6.1.
 func WsFileTimeToDateTime(fileTime *foundation.FILETIME, dateTime *WS_DATETIME, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsFileTimeToDateTime.Addr(), uintptr(unsafe.Pointer(fileTime)), uintptr(unsafe.Pointer(dateTime)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsFillBody calls webservices!WsFillBody.
@@ -665,7 +665,7 @@ func WsFileTimeToDateTime(fileTime *foundation.FILETIME, dateTime *WS_DATETIME, 
 // Minimum OS: windows6.1.
 func WsFillBody(message *WS_MESSAGE, minSize uint32, asyncContext *WS_ASYNC_CONTEXT, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsFillBody.Addr(), uintptr(unsafe.Pointer(message)), uintptr(minSize), uintptr(unsafe.Pointer(asyncContext)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsFillReader calls webservices!WsFillReader.
@@ -673,7 +673,7 @@ func WsFillBody(message *WS_MESSAGE, minSize uint32, asyncContext *WS_ASYNC_CONT
 // Minimum OS: windows6.1.
 func WsFillReader(reader *WS_XML_READER, minSize uint32, asyncContext *WS_ASYNC_CONTEXT, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsFillReader.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(minSize), uintptr(unsafe.Pointer(asyncContext)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsFindAttribute calls webservices!WsFindAttribute.
@@ -682,7 +682,7 @@ func WsFillReader(reader *WS_XML_READER, minSize uint32, asyncContext *WS_ASYNC_
 func WsFindAttribute(reader *WS_XML_READER, localName *WS_XML_STRING, ns *WS_XML_STRING, required bool, attributeIndex *uint32, error_ *WS_ERROR) error {
 	_required := win32.Bool32(required)
 	r1, _, _ := syscall.SyscallN(procWsFindAttribute.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(localName)), uintptr(unsafe.Pointer(ns)), uintptr(_required), uintptr(unsafe.Pointer(attributeIndex)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsFlushBody calls webservices!WsFlushBody.
@@ -690,7 +690,7 @@ func WsFindAttribute(reader *WS_XML_READER, localName *WS_XML_STRING, ns *WS_XML
 // Minimum OS: windows6.1.
 func WsFlushBody(message *WS_MESSAGE, minSize uint32, asyncContext *WS_ASYNC_CONTEXT, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsFlushBody.Addr(), uintptr(unsafe.Pointer(message)), uintptr(minSize), uintptr(unsafe.Pointer(asyncContext)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsFlushWriter calls webservices!WsFlushWriter.
@@ -698,7 +698,7 @@ func WsFlushBody(message *WS_MESSAGE, minSize uint32, asyncContext *WS_ASYNC_CON
 // Minimum OS: windows6.1.
 func WsFlushWriter(writer *WS_XML_WRITER, minSize uint32, asyncContext *WS_ASYNC_CONTEXT, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsFlushWriter.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(minSize), uintptr(unsafe.Pointer(asyncContext)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsFreeChannel calls webservices!WsFreeChannel.
@@ -787,7 +787,7 @@ func WsGetChannelProperty(channel *WS_CHANNEL, id WS_CHANNEL_PROPERTY_ID, value 
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsGetChannelProperty.Addr(), uintptr(unsafe.Pointer(channel)), uintptr(id), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsGetCustomHeader calls webservices!WsGetCustomHeader.
@@ -799,7 +799,7 @@ func WsGetCustomHeader(message *WS_MESSAGE, customHeaderDescription *WS_ELEMENT_
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsGetCustomHeader.Addr(), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(customHeaderDescription)), uintptr(repeatingOption), uintptr(headerIndex), uintptr(readOption), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(headerAttributes)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsGetDictionary calls webservices!WsGetDictionary.
@@ -807,7 +807,7 @@ func WsGetCustomHeader(message *WS_MESSAGE, customHeaderDescription *WS_ELEMENT_
 // Minimum OS: windows6.1.
 func WsGetDictionary(encoding WS_ENCODING, dictionary **WS_XML_DICTIONARY, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsGetDictionary.Addr(), uintptr(encoding), uintptr(unsafe.Pointer(dictionary)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsGetErrorProperty calls webservices!WsGetErrorProperty.
@@ -819,7 +819,7 @@ func WsGetErrorProperty(error_ *WS_ERROR, id WS_ERROR_PROPERTY_ID, buffer []byte
 		_buffer = &buffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsGetErrorProperty.Addr(), uintptr(unsafe.Pointer(error_)), uintptr(id), uintptr(unsafe.Pointer(_buffer)), uintptr(len(buffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsGetErrorString calls webservices!WsGetErrorString.
@@ -827,7 +827,7 @@ func WsGetErrorProperty(error_ *WS_ERROR, id WS_ERROR_PROPERTY_ID, buffer []byte
 // Minimum OS: windows6.1.
 func WsGetErrorString(error_ *WS_ERROR, index uint32, string_ *WS_STRING) error {
 	r1, _, _ := syscall.SyscallN(procWsGetErrorString.Addr(), uintptr(unsafe.Pointer(error_)), uintptr(index), uintptr(unsafe.Pointer(string_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsGetFaultErrorDetail calls webservices!WsGetFaultErrorDetail.
@@ -839,7 +839,7 @@ func WsGetFaultErrorDetail(error_ *WS_ERROR, faultDetailDescription *WS_FAULT_DE
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsGetFaultErrorDetail.Addr(), uintptr(unsafe.Pointer(error_)), uintptr(unsafe.Pointer(faultDetailDescription)), uintptr(readOption), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(_value)), uintptr(len(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsGetFaultErrorProperty calls webservices!WsGetFaultErrorProperty.
@@ -851,7 +851,7 @@ func WsGetFaultErrorProperty(error_ *WS_ERROR, id WS_FAULT_ERROR_PROPERTY_ID, bu
 		_buffer = &buffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsGetFaultErrorProperty.Addr(), uintptr(unsafe.Pointer(error_)), uintptr(id), uintptr(unsafe.Pointer(_buffer)), uintptr(len(buffer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsGetHeader calls webservices!WsGetHeader.
@@ -863,7 +863,7 @@ func WsGetHeader(message *WS_MESSAGE, headerType WS_HEADER_TYPE, valueType WS_TY
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsGetHeader.Addr(), uintptr(unsafe.Pointer(message)), uintptr(headerType), uintptr(valueType), uintptr(readOption), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsGetHeaderAttributes calls webservices!WsGetHeaderAttributes.
@@ -871,7 +871,7 @@ func WsGetHeader(message *WS_MESSAGE, headerType WS_HEADER_TYPE, valueType WS_TY
 // Minimum OS: windows6.1.
 func WsGetHeaderAttributes(message *WS_MESSAGE, reader *WS_XML_READER, headerAttributes *uint32, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsGetHeaderAttributes.Addr(), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(headerAttributes)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsGetHeapProperty calls webservices!WsGetHeapProperty.
@@ -883,7 +883,7 @@ func WsGetHeapProperty(heap *WS_HEAP, id WS_HEAP_PROPERTY_ID, value []byte, erro
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsGetHeapProperty.Addr(), uintptr(unsafe.Pointer(heap)), uintptr(id), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsGetListenerProperty calls webservices!WsGetListenerProperty.
@@ -895,7 +895,7 @@ func WsGetListenerProperty(listener *WS_LISTENER, id WS_LISTENER_PROPERTY_ID, va
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsGetListenerProperty.Addr(), uintptr(unsafe.Pointer(listener)), uintptr(id), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsGetMappedHeader calls webservices!WsGetMappedHeader.
@@ -907,7 +907,7 @@ func WsGetMappedHeader(message *WS_MESSAGE, headerName *WS_XML_STRING, repeating
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsGetMappedHeader.Addr(), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(headerName)), uintptr(repeatingOption), uintptr(headerIndex), uintptr(valueType), uintptr(readOption), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsGetMessageProperty calls webservices!WsGetMessageProperty.
@@ -919,7 +919,7 @@ func WsGetMessageProperty(message *WS_MESSAGE, id WS_MESSAGE_PROPERTY_ID, value 
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsGetMessageProperty.Addr(), uintptr(unsafe.Pointer(message)), uintptr(id), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsGetMetadataEndpoints calls webservices!WsGetMetadataEndpoints.
@@ -927,7 +927,7 @@ func WsGetMessageProperty(message *WS_MESSAGE, id WS_MESSAGE_PROPERTY_ID, value 
 // Minimum OS: windows6.1.
 func WsGetMetadataEndpoints(metadata *WS_METADATA, endpoints *WS_METADATA_ENDPOINTS, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsGetMetadataEndpoints.Addr(), uintptr(unsafe.Pointer(metadata)), uintptr(unsafe.Pointer(endpoints)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsGetMetadataProperty calls webservices!WsGetMetadataProperty.
@@ -939,7 +939,7 @@ func WsGetMetadataProperty(metadata *WS_METADATA, id WS_METADATA_PROPERTY_ID, va
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsGetMetadataProperty.Addr(), uintptr(unsafe.Pointer(metadata)), uintptr(id), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsGetMissingMetadataDocumentAddress calls webservices!WsGetMissingMetadataDocumentAddress.
@@ -947,7 +947,7 @@ func WsGetMetadataProperty(metadata *WS_METADATA, id WS_METADATA_PROPERTY_ID, va
 // Minimum OS: windows6.1.
 func WsGetMissingMetadataDocumentAddress(metadata *WS_METADATA, address **WS_ENDPOINT_ADDRESS, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsGetMissingMetadataDocumentAddress.Addr(), uintptr(unsafe.Pointer(metadata)), uintptr(unsafe.Pointer(address)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsGetNamespaceFromPrefix calls webservices!WsGetNamespaceFromPrefix.
@@ -956,7 +956,7 @@ func WsGetMissingMetadataDocumentAddress(metadata *WS_METADATA, address **WS_END
 func WsGetNamespaceFromPrefix(reader *WS_XML_READER, prefix *WS_XML_STRING, required bool, ns **WS_XML_STRING, error_ *WS_ERROR) error {
 	_required := win32.Bool32(required)
 	r1, _, _ := syscall.SyscallN(procWsGetNamespaceFromPrefix.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(prefix)), uintptr(_required), uintptr(unsafe.Pointer(ns)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsGetOperationContextProperty calls webservices!WsGetOperationContextProperty.
@@ -968,7 +968,7 @@ func WsGetOperationContextProperty(context *WS_OPERATION_CONTEXT, id WS_OPERATIO
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsGetOperationContextProperty.Addr(), uintptr(unsafe.Pointer(context)), uintptr(id), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsGetPolicyAlternativeCount calls webservices!WsGetPolicyAlternativeCount.
@@ -976,7 +976,7 @@ func WsGetOperationContextProperty(context *WS_OPERATION_CONTEXT, id WS_OPERATIO
 // Minimum OS: windows6.1.
 func WsGetPolicyAlternativeCount(policy *WS_POLICY, count *uint32, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsGetPolicyAlternativeCount.Addr(), uintptr(unsafe.Pointer(policy)), uintptr(unsafe.Pointer(count)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsGetPolicyProperty calls webservices!WsGetPolicyProperty.
@@ -988,7 +988,7 @@ func WsGetPolicyProperty(policy *WS_POLICY, id WS_POLICY_PROPERTY_ID, value []by
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsGetPolicyProperty.Addr(), uintptr(unsafe.Pointer(policy)), uintptr(id), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsGetPrefixFromNamespace calls webservices!WsGetPrefixFromNamespace.
@@ -997,7 +997,7 @@ func WsGetPolicyProperty(policy *WS_POLICY, id WS_POLICY_PROPERTY_ID, value []by
 func WsGetPrefixFromNamespace(writer *WS_XML_WRITER, ns *WS_XML_STRING, required bool, prefix **WS_XML_STRING, error_ *WS_ERROR) error {
 	_required := win32.Bool32(required)
 	r1, _, _ := syscall.SyscallN(procWsGetPrefixFromNamespace.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(unsafe.Pointer(ns)), uintptr(_required), uintptr(unsafe.Pointer(prefix)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsGetReaderNode calls webservices!WsGetReaderNode.
@@ -1005,7 +1005,7 @@ func WsGetPrefixFromNamespace(writer *WS_XML_WRITER, ns *WS_XML_STRING, required
 // Minimum OS: windows6.1.
 func WsGetReaderNode(xmlReader *WS_XML_READER, node **WS_XML_NODE, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsGetReaderNode.Addr(), uintptr(unsafe.Pointer(xmlReader)), uintptr(unsafe.Pointer(node)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsGetReaderPosition calls webservices!WsGetReaderPosition.
@@ -1013,7 +1013,7 @@ func WsGetReaderNode(xmlReader *WS_XML_READER, node **WS_XML_NODE, error_ *WS_ER
 // Minimum OS: windows6.1.
 func WsGetReaderPosition(reader *WS_XML_READER, nodePosition *WS_XML_NODE_POSITION, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsGetReaderPosition.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(nodePosition)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsGetReaderProperty calls webservices!WsGetReaderProperty.
@@ -1025,7 +1025,7 @@ func WsGetReaderProperty(reader *WS_XML_READER, id WS_XML_READER_PROPERTY_ID, va
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsGetReaderProperty.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(id), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsGetSecurityContextProperty calls webservices!WsGetSecurityContextProperty.
@@ -1037,7 +1037,7 @@ func WsGetSecurityContextProperty(securityContext *WS_SECURITY_CONTEXT, id WS_SE
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsGetSecurityContextProperty.Addr(), uintptr(unsafe.Pointer(securityContext)), uintptr(id), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsGetSecurityTokenProperty calls webservices!WsGetSecurityTokenProperty.
@@ -1049,7 +1049,7 @@ func WsGetSecurityTokenProperty(securityToken *WS_SECURITY_TOKEN, id WS_SECURITY
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsGetSecurityTokenProperty.Addr(), uintptr(unsafe.Pointer(securityToken)), uintptr(id), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsGetServiceHostProperty calls webservices!WsGetServiceHostProperty.
@@ -1061,7 +1061,7 @@ func WsGetServiceHostProperty(serviceHost *WS_SERVICE_HOST, id WS_SERVICE_PROPER
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsGetServiceHostProperty.Addr(), uintptr(unsafe.Pointer(serviceHost)), uintptr(id), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsGetServiceProxyProperty calls webservices!WsGetServiceProxyProperty.
@@ -1073,7 +1073,7 @@ func WsGetServiceProxyProperty(serviceProxy *WS_SERVICE_PROXY, id WS_PROXY_PROPE
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsGetServiceProxyProperty.Addr(), uintptr(unsafe.Pointer(serviceProxy)), uintptr(id), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsGetWriterPosition calls webservices!WsGetWriterPosition.
@@ -1081,7 +1081,7 @@ func WsGetServiceProxyProperty(serviceProxy *WS_SERVICE_PROXY, id WS_PROXY_PROPE
 // Minimum OS: windows6.1.
 func WsGetWriterPosition(writer *WS_XML_WRITER, nodePosition *WS_XML_NODE_POSITION, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsGetWriterPosition.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(unsafe.Pointer(nodePosition)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsGetWriterProperty calls webservices!WsGetWriterProperty.
@@ -1093,7 +1093,7 @@ func WsGetWriterProperty(writer *WS_XML_WRITER, id WS_XML_WRITER_PROPERTY_ID, va
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsGetWriterProperty.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(id), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsGetXmlAttribute calls webservices!WsGetXmlAttribute.
@@ -1101,7 +1101,7 @@ func WsGetWriterProperty(writer *WS_XML_WRITER, id WS_XML_WRITER_PROPERTY_ID, va
 // Minimum OS: windows6.1.
 func WsGetXmlAttribute(reader *WS_XML_READER, localName *WS_XML_STRING, heap *WS_HEAP, valueChars **uint16, valueCharCount *uint32, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsGetXmlAttribute.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(localName)), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(valueChars)), uintptr(unsafe.Pointer(valueCharCount)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsInitializeMessage calls webservices!WsInitializeMessage.
@@ -1109,7 +1109,7 @@ func WsGetXmlAttribute(reader *WS_XML_READER, localName *WS_XML_STRING, heap *WS
 // Minimum OS: windows6.1.
 func WsInitializeMessage(message *WS_MESSAGE, initialization WS_MESSAGE_INITIALIZATION, sourceMessage *WS_MESSAGE, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsInitializeMessage.Addr(), uintptr(unsafe.Pointer(message)), uintptr(initialization), uintptr(unsafe.Pointer(sourceMessage)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsMarkHeaderAsUnderstood calls webservices!WsMarkHeaderAsUnderstood.
@@ -1117,7 +1117,7 @@ func WsInitializeMessage(message *WS_MESSAGE, initialization WS_MESSAGE_INITIALI
 // Minimum OS: windows6.1.
 func WsMarkHeaderAsUnderstood(message *WS_MESSAGE, headerPosition *WS_XML_NODE_POSITION, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsMarkHeaderAsUnderstood.Addr(), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(headerPosition)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsMatchPolicyAlternative calls webservices!WsMatchPolicyAlternative.
@@ -1126,7 +1126,7 @@ func WsMarkHeaderAsUnderstood(message *WS_MESSAGE, headerPosition *WS_XML_NODE_P
 func WsMatchPolicyAlternative(policy *WS_POLICY, alternativeIndex uint32, policyConstraints *WS_POLICY_CONSTRAINTS, matchRequired bool, heap *WS_HEAP, error_ *WS_ERROR) error {
 	_matchRequired := win32.Bool32(matchRequired)
 	r1, _, _ := syscall.SyscallN(procWsMatchPolicyAlternative.Addr(), uintptr(unsafe.Pointer(policy)), uintptr(alternativeIndex), uintptr(unsafe.Pointer(policyConstraints)), uintptr(_matchRequired), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsMoveReader calls webservices!WsMoveReader.
@@ -1134,7 +1134,7 @@ func WsMatchPolicyAlternative(policy *WS_POLICY, alternativeIndex uint32, policy
 // Minimum OS: windows6.1.
 func WsMoveReader(reader *WS_XML_READER, moveTo WS_MOVE_TO, found *foundation.BOOL, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsMoveReader.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(moveTo), uintptr(unsafe.Pointer(found)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsMoveWriter calls webservices!WsMoveWriter.
@@ -1142,7 +1142,7 @@ func WsMoveReader(reader *WS_XML_READER, moveTo WS_MOVE_TO, found *foundation.BO
 // Minimum OS: windows6.1.
 func WsMoveWriter(writer *WS_XML_WRITER, moveTo WS_MOVE_TO, found *foundation.BOOL, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsMoveWriter.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(moveTo), uintptr(unsafe.Pointer(found)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsOpenChannel calls webservices!WsOpenChannel.
@@ -1150,7 +1150,7 @@ func WsMoveWriter(writer *WS_XML_WRITER, moveTo WS_MOVE_TO, found *foundation.BO
 // Minimum OS: windows6.1.
 func WsOpenChannel(channel *WS_CHANNEL, endpointAddress *WS_ENDPOINT_ADDRESS, asyncContext *WS_ASYNC_CONTEXT, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsOpenChannel.Addr(), uintptr(unsafe.Pointer(channel)), uintptr(unsafe.Pointer(endpointAddress)), uintptr(unsafe.Pointer(asyncContext)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsOpenListener calls webservices!WsOpenListener.
@@ -1158,7 +1158,7 @@ func WsOpenChannel(channel *WS_CHANNEL, endpointAddress *WS_ENDPOINT_ADDRESS, as
 // Minimum OS: windows6.1.
 func WsOpenListener(listener *WS_LISTENER, url *WS_STRING, asyncContext *WS_ASYNC_CONTEXT, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsOpenListener.Addr(), uintptr(unsafe.Pointer(listener)), uintptr(unsafe.Pointer(url)), uintptr(unsafe.Pointer(asyncContext)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsOpenServiceHost calls webservices!WsOpenServiceHost.
@@ -1166,7 +1166,7 @@ func WsOpenListener(listener *WS_LISTENER, url *WS_STRING, asyncContext *WS_ASYN
 // Minimum OS: windows6.1.
 func WsOpenServiceHost(serviceHost *WS_SERVICE_HOST, asyncContext *WS_ASYNC_CONTEXT, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsOpenServiceHost.Addr(), uintptr(unsafe.Pointer(serviceHost)), uintptr(unsafe.Pointer(asyncContext)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsOpenServiceProxy calls webservices!WsOpenServiceProxy.
@@ -1174,7 +1174,7 @@ func WsOpenServiceHost(serviceHost *WS_SERVICE_HOST, asyncContext *WS_ASYNC_CONT
 // Minimum OS: windows6.1.
 func WsOpenServiceProxy(serviceProxy *WS_SERVICE_PROXY, address *WS_ENDPOINT_ADDRESS, asyncContext *WS_ASYNC_CONTEXT, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsOpenServiceProxy.Addr(), uintptr(unsafe.Pointer(serviceProxy)), uintptr(unsafe.Pointer(address)), uintptr(unsafe.Pointer(asyncContext)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsPullBytes calls webservices!WsPullBytes.
@@ -1182,7 +1182,7 @@ func WsOpenServiceProxy(serviceProxy *WS_SERVICE_PROXY, address *WS_ENDPOINT_ADD
 // Minimum OS: windows6.1.
 func WsPullBytes(writer *WS_XML_WRITER, callback WS_PULL_BYTES_CALLBACK, callbackState unsafe.Pointer, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsPullBytes.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(callback), uintptr(unsafe.Pointer(callbackState)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsPushBytes calls webservices!WsPushBytes.
@@ -1190,7 +1190,7 @@ func WsPullBytes(writer *WS_XML_WRITER, callback WS_PULL_BYTES_CALLBACK, callbac
 // Minimum OS: windows6.1.
 func WsPushBytes(writer *WS_XML_WRITER, callback WS_PUSH_BYTES_CALLBACK, callbackState unsafe.Pointer, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsPushBytes.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(callback), uintptr(unsafe.Pointer(callbackState)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsReadArray calls webservices!WsReadArray.
@@ -1202,7 +1202,7 @@ func WsReadArray(reader *WS_XML_READER, localName *WS_XML_STRING, ns *WS_XML_STR
 		_array = &array[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsReadArray.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(localName)), uintptr(unsafe.Pointer(ns)), uintptr(valueType), uintptr(unsafe.Pointer(_array)), uintptr(len(array)), uintptr(itemOffset), uintptr(itemCount), uintptr(unsafe.Pointer(actualItemCount)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsReadAttribute calls webservices!WsReadAttribute.
@@ -1214,7 +1214,7 @@ func WsReadAttribute(reader *WS_XML_READER, attributeDescription *WS_ATTRIBUTE_D
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsReadAttribute.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(attributeDescription)), uintptr(readOption), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsReadBody calls webservices!WsReadBody.
@@ -1226,7 +1226,7 @@ func WsReadBody(message *WS_MESSAGE, bodyDescription *WS_ELEMENT_DESCRIPTION, re
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsReadBody.Addr(), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(bodyDescription)), uintptr(readOption), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsReadBytes calls webservices!WsReadBytes.
@@ -1238,7 +1238,7 @@ func WsReadBytes(reader *WS_XML_READER, bytes []byte, actualByteCount *uint32, e
 		_bytes = &bytes[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsReadBytes.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(_bytes)), uintptr(len(bytes)), uintptr(unsafe.Pointer(actualByteCount)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsReadChars calls webservices!WsReadChars.
@@ -1246,7 +1246,7 @@ func WsReadBytes(reader *WS_XML_READER, bytes []byte, actualByteCount *uint32, e
 // Minimum OS: windows6.1.
 func WsReadChars(reader *WS_XML_READER, chars foundation.PWSTR, maxCharCount uint32, actualCharCount *uint32, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsReadChars.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(chars)), uintptr(maxCharCount), uintptr(unsafe.Pointer(actualCharCount)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsReadCharsUtf8 calls webservices!WsReadCharsUtf8.
@@ -1258,7 +1258,7 @@ func WsReadCharsUtf8(reader *WS_XML_READER, bytes []byte, actualByteCount *uint3
 		_bytes = &bytes[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsReadCharsUtf8.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(_bytes)), uintptr(len(bytes)), uintptr(unsafe.Pointer(actualByteCount)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsReadElement calls webservices!WsReadElement.
@@ -1270,7 +1270,7 @@ func WsReadElement(reader *WS_XML_READER, elementDescription *WS_ELEMENT_DESCRIP
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsReadElement.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(elementDescription)), uintptr(readOption), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsReadEndAttribute calls webservices!WsReadEndAttribute.
@@ -1278,7 +1278,7 @@ func WsReadElement(reader *WS_XML_READER, elementDescription *WS_ELEMENT_DESCRIP
 // Minimum OS: windows6.1.
 func WsReadEndAttribute(reader *WS_XML_READER, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsReadEndAttribute.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsReadEndElement calls webservices!WsReadEndElement.
@@ -1286,7 +1286,7 @@ func WsReadEndAttribute(reader *WS_XML_READER, error_ *WS_ERROR) error {
 // Minimum OS: windows6.1.
 func WsReadEndElement(reader *WS_XML_READER, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsReadEndElement.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsReadEndpointAddressExtension calls webservices!WsReadEndpointAddressExtension.
@@ -1298,7 +1298,7 @@ func WsReadEndpointAddressExtension(reader *WS_XML_READER, endpointAddress *WS_E
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsReadEndpointAddressExtension.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(endpointAddress)), uintptr(extensionType), uintptr(readOption), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsReadEnvelopeEnd calls webservices!WsReadEnvelopeEnd.
@@ -1306,7 +1306,7 @@ func WsReadEndpointAddressExtension(reader *WS_XML_READER, endpointAddress *WS_E
 // Minimum OS: windows6.1.
 func WsReadEnvelopeEnd(message *WS_MESSAGE, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsReadEnvelopeEnd.Addr(), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsReadEnvelopeStart calls webservices!WsReadEnvelopeStart.
@@ -1314,7 +1314,7 @@ func WsReadEnvelopeEnd(message *WS_MESSAGE, error_ *WS_ERROR) error {
 // Minimum OS: windows6.1.
 func WsReadEnvelopeStart(message *WS_MESSAGE, reader *WS_XML_READER, doneCallback WS_MESSAGE_DONE_CALLBACK, doneCallbackState unsafe.Pointer, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsReadEnvelopeStart.Addr(), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(reader)), uintptr(doneCallback), uintptr(unsafe.Pointer(doneCallbackState)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsReadMessageEnd calls webservices!WsReadMessageEnd.
@@ -1322,7 +1322,7 @@ func WsReadEnvelopeStart(message *WS_MESSAGE, reader *WS_XML_READER, doneCallbac
 // Minimum OS: windows6.1.
 func WsReadMessageEnd(channel *WS_CHANNEL, message *WS_MESSAGE, asyncContext *WS_ASYNC_CONTEXT, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsReadMessageEnd.Addr(), uintptr(unsafe.Pointer(channel)), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(asyncContext)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsReadMessageStart calls webservices!WsReadMessageStart.
@@ -1330,7 +1330,7 @@ func WsReadMessageEnd(channel *WS_CHANNEL, message *WS_MESSAGE, asyncContext *WS
 // Minimum OS: windows6.1.
 func WsReadMessageStart(channel *WS_CHANNEL, message *WS_MESSAGE, asyncContext *WS_ASYNC_CONTEXT, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsReadMessageStart.Addr(), uintptr(unsafe.Pointer(channel)), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(asyncContext)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsReadMetadata calls webservices!WsReadMetadata.
@@ -1338,7 +1338,7 @@ func WsReadMessageStart(channel *WS_CHANNEL, message *WS_MESSAGE, asyncContext *
 // Minimum OS: windows6.1.
 func WsReadMetadata(metadata *WS_METADATA, reader *WS_XML_READER, url *WS_STRING, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsReadMetadata.Addr(), uintptr(unsafe.Pointer(metadata)), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(url)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsReadNode calls webservices!WsReadNode.
@@ -1346,7 +1346,7 @@ func WsReadMetadata(metadata *WS_METADATA, reader *WS_XML_READER, url *WS_STRING
 // Minimum OS: windows6.1.
 func WsReadNode(reader *WS_XML_READER, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsReadNode.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsReadQualifiedName calls webservices!WsReadQualifiedName.
@@ -1354,7 +1354,7 @@ func WsReadNode(reader *WS_XML_READER, error_ *WS_ERROR) error {
 // Minimum OS: windows6.1.
 func WsReadQualifiedName(reader *WS_XML_READER, heap *WS_HEAP, prefix *WS_XML_STRING, localName *WS_XML_STRING, ns *WS_XML_STRING, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsReadQualifiedName.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(prefix)), uintptr(unsafe.Pointer(localName)), uintptr(unsafe.Pointer(ns)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsReadStartAttribute calls webservices!WsReadStartAttribute.
@@ -1362,7 +1362,7 @@ func WsReadQualifiedName(reader *WS_XML_READER, heap *WS_HEAP, prefix *WS_XML_ST
 // Minimum OS: windows6.1.
 func WsReadStartAttribute(reader *WS_XML_READER, attributeIndex uint32, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsReadStartAttribute.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(attributeIndex), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsReadStartElement calls webservices!WsReadStartElement.
@@ -1370,7 +1370,7 @@ func WsReadStartAttribute(reader *WS_XML_READER, attributeIndex uint32, error_ *
 // Minimum OS: windows6.1.
 func WsReadStartElement(reader *WS_XML_READER, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsReadStartElement.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsReadToStartElement calls webservices!WsReadToStartElement.
@@ -1378,7 +1378,7 @@ func WsReadStartElement(reader *WS_XML_READER, error_ *WS_ERROR) error {
 // Minimum OS: windows6.1.
 func WsReadToStartElement(reader *WS_XML_READER, localName *WS_XML_STRING, ns *WS_XML_STRING, found *foundation.BOOL, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsReadToStartElement.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(localName)), uintptr(unsafe.Pointer(ns)), uintptr(unsafe.Pointer(found)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsReadType calls webservices!WsReadType.
@@ -1390,7 +1390,7 @@ func WsReadType(reader *WS_XML_READER, typeMapping WS_TYPE_MAPPING, type_ WS_TYP
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsReadType.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(typeMapping), uintptr(type_), uintptr(unsafe.Pointer(typeDescription)), uintptr(readOption), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsReadValue calls webservices!WsReadValue.
@@ -1402,7 +1402,7 @@ func WsReadValue(reader *WS_XML_READER, valueType WS_VALUE_TYPE, value []byte, e
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsReadValue.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(valueType), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsReadXmlBuffer calls webservices!WsReadXmlBuffer.
@@ -1410,7 +1410,7 @@ func WsReadValue(reader *WS_XML_READER, valueType WS_VALUE_TYPE, value []byte, e
 // Minimum OS: windows6.1.
 func WsReadXmlBuffer(reader *WS_XML_READER, heap *WS_HEAP, xmlBuffer **WS_XML_BUFFER, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsReadXmlBuffer.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(xmlBuffer)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsReadXmlBufferFromBytes calls webservices!WsReadXmlBufferFromBytes.
@@ -1426,7 +1426,7 @@ func WsReadXmlBufferFromBytes(reader *WS_XML_READER, encoding *WS_XML_READER_ENC
 		_bytes = &bytes[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsReadXmlBufferFromBytes.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(encoding)), uintptr(unsafe.Pointer(_properties)), uintptr(len(properties)), uintptr(unsafe.Pointer(_bytes)), uintptr(len(bytes)), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(xmlBuffer)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsReceiveMessage calls webservices!WsReceiveMessage.
@@ -1442,7 +1442,7 @@ func WsReceiveMessage(channel *WS_CHANNEL, message *WS_MESSAGE, messageDescripti
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsReceiveMessage.Addr(), uintptr(unsafe.Pointer(channel)), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(_messageDescriptions)), uintptr(len(messageDescriptions)), uintptr(receiveOption), uintptr(readBodyOption), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(index)), uintptr(unsafe.Pointer(asyncContext)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsRegisterOperationForCancel calls webservices!WsRegisterOperationForCancel.
@@ -1450,7 +1450,7 @@ func WsReceiveMessage(channel *WS_CHANNEL, message *WS_MESSAGE, messageDescripti
 // Minimum OS: windows6.1.
 func WsRegisterOperationForCancel(context *WS_OPERATION_CONTEXT, cancelCallback WS_OPERATION_CANCEL_CALLBACK, freestateCallback WS_OPERATION_FREE_STATE_CALLBACK, userState unsafe.Pointer, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsRegisterOperationForCancel.Addr(), uintptr(unsafe.Pointer(context)), uintptr(cancelCallback), uintptr(freestateCallback), uintptr(unsafe.Pointer(userState)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsRemoveCustomHeader calls webservices!WsRemoveCustomHeader.
@@ -1458,7 +1458,7 @@ func WsRegisterOperationForCancel(context *WS_OPERATION_CONTEXT, cancelCallback 
 // Minimum OS: windows6.1.
 func WsRemoveCustomHeader(message *WS_MESSAGE, headerName *WS_XML_STRING, headerNs *WS_XML_STRING, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsRemoveCustomHeader.Addr(), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(headerName)), uintptr(unsafe.Pointer(headerNs)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsRemoveHeader calls webservices!WsRemoveHeader.
@@ -1466,7 +1466,7 @@ func WsRemoveCustomHeader(message *WS_MESSAGE, headerName *WS_XML_STRING, header
 // Minimum OS: windows6.1.
 func WsRemoveHeader(message *WS_MESSAGE, headerType WS_HEADER_TYPE, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsRemoveHeader.Addr(), uintptr(unsafe.Pointer(message)), uintptr(headerType), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsRemoveMappedHeader calls webservices!WsRemoveMappedHeader.
@@ -1474,7 +1474,7 @@ func WsRemoveHeader(message *WS_MESSAGE, headerType WS_HEADER_TYPE, error_ *WS_E
 // Minimum OS: windows6.1.
 func WsRemoveMappedHeader(message *WS_MESSAGE, headerName *WS_XML_STRING, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsRemoveMappedHeader.Addr(), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(headerName)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsRemoveNode calls webservices!WsRemoveNode.
@@ -1482,7 +1482,7 @@ func WsRemoveMappedHeader(message *WS_MESSAGE, headerName *WS_XML_STRING, error_
 // Minimum OS: windows6.1.
 func WsRemoveNode(nodePosition *WS_XML_NODE_POSITION, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsRemoveNode.Addr(), uintptr(unsafe.Pointer(nodePosition)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsRequestReply calls webservices!WsRequestReply.
@@ -1498,7 +1498,7 @@ func WsRequestReply(channel *WS_CHANNEL, requestMessage *WS_MESSAGE, requestMess
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsRequestReply.Addr(), uintptr(unsafe.Pointer(channel)), uintptr(unsafe.Pointer(requestMessage)), uintptr(unsafe.Pointer(requestMessageDescription)), uintptr(writeOption), uintptr(unsafe.Pointer(_requestBodyValue)), uintptr(len(requestBodyValue)), uintptr(unsafe.Pointer(replyMessage)), uintptr(unsafe.Pointer(replyMessageDescription)), uintptr(readOption), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(asyncContext)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsRequestSecurityToken calls webservices!WsRequestSecurityToken.
@@ -1510,7 +1510,7 @@ func WsRequestSecurityToken(channel *WS_CHANNEL, properties []WS_REQUEST_SECURIT
 		_properties = &properties[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsRequestSecurityToken.Addr(), uintptr(unsafe.Pointer(channel)), uintptr(unsafe.Pointer(_properties)), uintptr(len(properties)), uintptr(unsafe.Pointer(token)), uintptr(unsafe.Pointer(asyncContext)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsResetChannel calls webservices!WsResetChannel.
@@ -1518,7 +1518,7 @@ func WsRequestSecurityToken(channel *WS_CHANNEL, properties []WS_REQUEST_SECURIT
 // Minimum OS: windows6.1.
 func WsResetChannel(channel *WS_CHANNEL, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsResetChannel.Addr(), uintptr(unsafe.Pointer(channel)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsResetError calls webservices!WsResetError.
@@ -1526,7 +1526,7 @@ func WsResetChannel(channel *WS_CHANNEL, error_ *WS_ERROR) error {
 // Minimum OS: windows6.1.
 func WsResetError(error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsResetError.Addr(), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsResetHeap calls webservices!WsResetHeap.
@@ -1534,7 +1534,7 @@ func WsResetError(error_ *WS_ERROR) error {
 // Minimum OS: windows6.1.
 func WsResetHeap(heap *WS_HEAP, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsResetHeap.Addr(), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsResetListener calls webservices!WsResetListener.
@@ -1542,7 +1542,7 @@ func WsResetHeap(heap *WS_HEAP, error_ *WS_ERROR) error {
 // Minimum OS: windows6.1.
 func WsResetListener(listener *WS_LISTENER, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsResetListener.Addr(), uintptr(unsafe.Pointer(listener)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsResetMessage calls webservices!WsResetMessage.
@@ -1550,7 +1550,7 @@ func WsResetListener(listener *WS_LISTENER, error_ *WS_ERROR) error {
 // Minimum OS: windows6.1.
 func WsResetMessage(message *WS_MESSAGE, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsResetMessage.Addr(), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsResetMetadata calls webservices!WsResetMetadata.
@@ -1558,7 +1558,7 @@ func WsResetMessage(message *WS_MESSAGE, error_ *WS_ERROR) error {
 // Minimum OS: windows6.1.
 func WsResetMetadata(metadata *WS_METADATA, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsResetMetadata.Addr(), uintptr(unsafe.Pointer(metadata)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsResetServiceHost calls webservices!WsResetServiceHost.
@@ -1566,7 +1566,7 @@ func WsResetMetadata(metadata *WS_METADATA, error_ *WS_ERROR) error {
 // Minimum OS: windows6.1.
 func WsResetServiceHost(serviceHost *WS_SERVICE_HOST, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsResetServiceHost.Addr(), uintptr(unsafe.Pointer(serviceHost)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsResetServiceProxy calls webservices!WsResetServiceProxy.
@@ -1574,7 +1574,7 @@ func WsResetServiceHost(serviceHost *WS_SERVICE_HOST, error_ *WS_ERROR) error {
 // Minimum OS: windows6.1.
 func WsResetServiceProxy(serviceProxy *WS_SERVICE_PROXY, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsResetServiceProxy.Addr(), uintptr(unsafe.Pointer(serviceProxy)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsRevokeSecurityContext calls webservices!WsRevokeSecurityContext.
@@ -1582,7 +1582,7 @@ func WsResetServiceProxy(serviceProxy *WS_SERVICE_PROXY, error_ *WS_ERROR) error
 // Minimum OS: windows6.1.
 func WsRevokeSecurityContext(securityContext *WS_SECURITY_CONTEXT, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsRevokeSecurityContext.Addr(), uintptr(unsafe.Pointer(securityContext)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsSendFaultMessageForError calls webservices!WsSendFaultMessageForError.
@@ -1590,7 +1590,7 @@ func WsRevokeSecurityContext(securityContext *WS_SECURITY_CONTEXT, error_ *WS_ER
 // Minimum OS: windows6.1.
 func WsSendFaultMessageForError(channel *WS_CHANNEL, replyMessage *WS_MESSAGE, faultError *WS_ERROR, faultErrorCode foundation.HRESULT, faultDisclosure WS_FAULT_DISCLOSURE, requestMessage *WS_MESSAGE, asyncContext *WS_ASYNC_CONTEXT, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsSendFaultMessageForError.Addr(), uintptr(unsafe.Pointer(channel)), uintptr(unsafe.Pointer(replyMessage)), uintptr(unsafe.Pointer(faultError)), uintptr(faultErrorCode), uintptr(faultDisclosure), uintptr(unsafe.Pointer(requestMessage)), uintptr(unsafe.Pointer(asyncContext)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsSendMessage calls webservices!WsSendMessage.
@@ -1602,7 +1602,7 @@ func WsSendMessage(channel *WS_CHANNEL, message *WS_MESSAGE, messageDescription 
 		_bodyValue = &bodyValue[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsSendMessage.Addr(), uintptr(unsafe.Pointer(channel)), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(messageDescription)), uintptr(writeOption), uintptr(unsafe.Pointer(_bodyValue)), uintptr(len(bodyValue)), uintptr(unsafe.Pointer(asyncContext)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsSendReplyMessage calls webservices!WsSendReplyMessage.
@@ -1614,7 +1614,7 @@ func WsSendReplyMessage(channel *WS_CHANNEL, replyMessage *WS_MESSAGE, replyMess
 		_replyBodyValue = &replyBodyValue[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsSendReplyMessage.Addr(), uintptr(unsafe.Pointer(channel)), uintptr(unsafe.Pointer(replyMessage)), uintptr(unsafe.Pointer(replyMessageDescription)), uintptr(writeOption), uintptr(unsafe.Pointer(_replyBodyValue)), uintptr(len(replyBodyValue)), uintptr(unsafe.Pointer(requestMessage)), uintptr(unsafe.Pointer(asyncContext)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsSetChannelProperty calls webservices!WsSetChannelProperty.
@@ -1626,7 +1626,7 @@ func WsSetChannelProperty(channel *WS_CHANNEL, id WS_CHANNEL_PROPERTY_ID, value 
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsSetChannelProperty.Addr(), uintptr(unsafe.Pointer(channel)), uintptr(id), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsSetErrorProperty calls webservices!WsSetErrorProperty.
@@ -1638,7 +1638,7 @@ func WsSetErrorProperty(error_ *WS_ERROR, id WS_ERROR_PROPERTY_ID, value []byte)
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsSetErrorProperty.Addr(), uintptr(unsafe.Pointer(error_)), uintptr(id), uintptr(unsafe.Pointer(_value)), uintptr(len(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsSetFaultErrorDetail calls webservices!WsSetFaultErrorDetail.
@@ -1650,7 +1650,7 @@ func WsSetFaultErrorDetail(error_ *WS_ERROR, faultDetailDescription *WS_FAULT_DE
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsSetFaultErrorDetail.Addr(), uintptr(unsafe.Pointer(error_)), uintptr(unsafe.Pointer(faultDetailDescription)), uintptr(writeOption), uintptr(unsafe.Pointer(_value)), uintptr(len(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsSetFaultErrorProperty calls webservices!WsSetFaultErrorProperty.
@@ -1662,7 +1662,7 @@ func WsSetFaultErrorProperty(error_ *WS_ERROR, id WS_FAULT_ERROR_PROPERTY_ID, va
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsSetFaultErrorProperty.Addr(), uintptr(unsafe.Pointer(error_)), uintptr(id), uintptr(unsafe.Pointer(_value)), uintptr(len(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsSetHeader calls webservices!WsSetHeader.
@@ -1674,7 +1674,7 @@ func WsSetHeader(message *WS_MESSAGE, headerType WS_HEADER_TYPE, valueType WS_TY
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsSetHeader.Addr(), uintptr(unsafe.Pointer(message)), uintptr(headerType), uintptr(valueType), uintptr(writeOption), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsSetInput calls webservices!WsSetInput.
@@ -1686,7 +1686,7 @@ func WsSetInput(reader *WS_XML_READER, encoding *WS_XML_READER_ENCODING, input *
 		_properties = &properties[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsSetInput.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(encoding)), uintptr(unsafe.Pointer(input)), uintptr(unsafe.Pointer(_properties)), uintptr(len(properties)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsSetInputToBuffer calls webservices!WsSetInputToBuffer.
@@ -1698,7 +1698,7 @@ func WsSetInputToBuffer(reader *WS_XML_READER, buffer *WS_XML_BUFFER, properties
 		_properties = &properties[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsSetInputToBuffer.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(buffer)), uintptr(unsafe.Pointer(_properties)), uintptr(len(properties)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsSetListenerProperty calls webservices!WsSetListenerProperty.
@@ -1710,7 +1710,7 @@ func WsSetListenerProperty(listener *WS_LISTENER, id WS_LISTENER_PROPERTY_ID, va
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsSetListenerProperty.Addr(), uintptr(unsafe.Pointer(listener)), uintptr(id), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsSetMessageProperty calls webservices!WsSetMessageProperty.
@@ -1722,7 +1722,7 @@ func WsSetMessageProperty(message *WS_MESSAGE, id WS_MESSAGE_PROPERTY_ID, value 
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsSetMessageProperty.Addr(), uintptr(unsafe.Pointer(message)), uintptr(id), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsSetOutput calls webservices!WsSetOutput.
@@ -1734,7 +1734,7 @@ func WsSetOutput(writer *WS_XML_WRITER, encoding *WS_XML_WRITER_ENCODING, output
 		_properties = &properties[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsSetOutput.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(unsafe.Pointer(encoding)), uintptr(unsafe.Pointer(output)), uintptr(unsafe.Pointer(_properties)), uintptr(len(properties)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsSetOutputToBuffer calls webservices!WsSetOutputToBuffer.
@@ -1746,7 +1746,7 @@ func WsSetOutputToBuffer(writer *WS_XML_WRITER, buffer *WS_XML_BUFFER, propertie
 		_properties = &properties[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsSetOutputToBuffer.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(unsafe.Pointer(buffer)), uintptr(unsafe.Pointer(_properties)), uintptr(len(properties)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsSetReaderPosition calls webservices!WsSetReaderPosition.
@@ -1754,7 +1754,7 @@ func WsSetOutputToBuffer(writer *WS_XML_WRITER, buffer *WS_XML_BUFFER, propertie
 // Minimum OS: windows6.1.
 func WsSetReaderPosition(reader *WS_XML_READER, nodePosition *WS_XML_NODE_POSITION, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsSetReaderPosition.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(nodePosition)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsSetWriterPosition calls webservices!WsSetWriterPosition.
@@ -1762,7 +1762,7 @@ func WsSetReaderPosition(reader *WS_XML_READER, nodePosition *WS_XML_NODE_POSITI
 // Minimum OS: windows6.1.
 func WsSetWriterPosition(writer *WS_XML_WRITER, nodePosition *WS_XML_NODE_POSITION, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsSetWriterPosition.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(unsafe.Pointer(nodePosition)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsShutdownSessionChannel calls webservices!WsShutdownSessionChannel.
@@ -1770,7 +1770,7 @@ func WsSetWriterPosition(writer *WS_XML_WRITER, nodePosition *WS_XML_NODE_POSITI
 // Minimum OS: windows6.1.
 func WsShutdownSessionChannel(channel *WS_CHANNEL, asyncContext *WS_ASYNC_CONTEXT, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsShutdownSessionChannel.Addr(), uintptr(unsafe.Pointer(channel)), uintptr(unsafe.Pointer(asyncContext)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsSkipNode calls webservices!WsSkipNode.
@@ -1778,7 +1778,7 @@ func WsShutdownSessionChannel(channel *WS_CHANNEL, asyncContext *WS_ASYNC_CONTEX
 // Minimum OS: windows6.1.
 func WsSkipNode(reader *WS_XML_READER, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsSkipNode.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsStartReaderCanonicalization calls webservices!WsStartReaderCanonicalization.
@@ -1790,7 +1790,7 @@ func WsStartReaderCanonicalization(reader *WS_XML_READER, writeCallback WS_WRITE
 		_properties = &properties[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsStartReaderCanonicalization.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(writeCallback), uintptr(unsafe.Pointer(writeCallbackState)), uintptr(unsafe.Pointer(_properties)), uintptr(len(properties)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsStartWriterCanonicalization calls webservices!WsStartWriterCanonicalization.
@@ -1802,7 +1802,7 @@ func WsStartWriterCanonicalization(writer *WS_XML_WRITER, writeCallback WS_WRITE
 		_properties = &properties[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsStartWriterCanonicalization.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(writeCallback), uintptr(unsafe.Pointer(writeCallbackState)), uintptr(unsafe.Pointer(_properties)), uintptr(len(properties)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsTrimXmlWhitespace calls webservices!WsTrimXmlWhitespace.
@@ -1811,7 +1811,7 @@ func WsStartWriterCanonicalization(writer *WS_XML_WRITER, writeCallback WS_WRITE
 func WsTrimXmlWhitespace(chars string, charCount uint32, trimmedChars **uint16, trimmedCount *uint32, error_ *WS_ERROR) error {
 	_chars := win32.UTF16Ptr(chars)
 	r1, _, _ := syscall.SyscallN(procWsTrimXmlWhitespace.Addr(), uintptr(unsafe.Pointer(_chars)), uintptr(charCount), uintptr(unsafe.Pointer(trimmedChars)), uintptr(unsafe.Pointer(trimmedCount)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsVerifyXmlNCName calls webservices!WsVerifyXmlNCName.
@@ -1820,7 +1820,7 @@ func WsTrimXmlWhitespace(chars string, charCount uint32, trimmedChars **uint16, 
 func WsVerifyXmlNCName(ncNameChars string, ncNameCharCount uint32, error_ *WS_ERROR) error {
 	_ncNameChars := win32.UTF16Ptr(ncNameChars)
 	r1, _, _ := syscall.SyscallN(procWsVerifyXmlNCName.Addr(), uintptr(unsafe.Pointer(_ncNameChars)), uintptr(ncNameCharCount), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsWriteArray calls webservices!WsWriteArray.
@@ -1832,7 +1832,7 @@ func WsWriteArray(writer *WS_XML_WRITER, localName *WS_XML_STRING, ns *WS_XML_ST
 		_array = &array[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsWriteArray.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(unsafe.Pointer(localName)), uintptr(unsafe.Pointer(ns)), uintptr(valueType), uintptr(unsafe.Pointer(_array)), uintptr(len(array)), uintptr(itemOffset), uintptr(itemCount), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsWriteAttribute calls webservices!WsWriteAttribute.
@@ -1844,7 +1844,7 @@ func WsWriteAttribute(writer *WS_XML_WRITER, attributeDescription *WS_ATTRIBUTE_
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsWriteAttribute.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(unsafe.Pointer(attributeDescription)), uintptr(writeOption), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsWriteBody calls webservices!WsWriteBody.
@@ -1856,7 +1856,7 @@ func WsWriteBody(message *WS_MESSAGE, bodyDescription *WS_ELEMENT_DESCRIPTION, w
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsWriteBody.Addr(), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(bodyDescription)), uintptr(writeOption), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsWriteBytes calls webservices!WsWriteBytes.
@@ -1868,7 +1868,7 @@ func WsWriteBytes(writer *WS_XML_WRITER, bytes []byte, error_ *WS_ERROR) error {
 		_bytes = &bytes[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsWriteBytes.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(unsafe.Pointer(_bytes)), uintptr(len(bytes)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsWriteChars calls webservices!WsWriteChars.
@@ -1877,7 +1877,7 @@ func WsWriteBytes(writer *WS_XML_WRITER, bytes []byte, error_ *WS_ERROR) error {
 func WsWriteChars(writer *WS_XML_WRITER, chars string, charCount uint32, error_ *WS_ERROR) error {
 	_chars := win32.UTF16Ptr(chars)
 	r1, _, _ := syscall.SyscallN(procWsWriteChars.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(unsafe.Pointer(_chars)), uintptr(charCount), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsWriteCharsUtf8 calls webservices!WsWriteCharsUtf8.
@@ -1889,7 +1889,7 @@ func WsWriteCharsUtf8(writer *WS_XML_WRITER, bytes []byte, error_ *WS_ERROR) err
 		_bytes = &bytes[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsWriteCharsUtf8.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(unsafe.Pointer(_bytes)), uintptr(len(bytes)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsWriteElement calls webservices!WsWriteElement.
@@ -1901,7 +1901,7 @@ func WsWriteElement(writer *WS_XML_WRITER, elementDescription *WS_ELEMENT_DESCRI
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsWriteElement.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(unsafe.Pointer(elementDescription)), uintptr(writeOption), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsWriteEndAttribute calls webservices!WsWriteEndAttribute.
@@ -1909,7 +1909,7 @@ func WsWriteElement(writer *WS_XML_WRITER, elementDescription *WS_ELEMENT_DESCRI
 // Minimum OS: windows6.1.
 func WsWriteEndAttribute(writer *WS_XML_WRITER, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsWriteEndAttribute.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsWriteEndCData calls webservices!WsWriteEndCData.
@@ -1917,7 +1917,7 @@ func WsWriteEndAttribute(writer *WS_XML_WRITER, error_ *WS_ERROR) error {
 // Minimum OS: windows6.1.
 func WsWriteEndCData(writer *WS_XML_WRITER, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsWriteEndCData.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsWriteEndElement calls webservices!WsWriteEndElement.
@@ -1925,7 +1925,7 @@ func WsWriteEndCData(writer *WS_XML_WRITER, error_ *WS_ERROR) error {
 // Minimum OS: windows6.1.
 func WsWriteEndElement(writer *WS_XML_WRITER, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsWriteEndElement.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsWriteEndStartElement calls webservices!WsWriteEndStartElement.
@@ -1933,7 +1933,7 @@ func WsWriteEndElement(writer *WS_XML_WRITER, error_ *WS_ERROR) error {
 // Minimum OS: windows6.1.
 func WsWriteEndStartElement(writer *WS_XML_WRITER, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsWriteEndStartElement.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsWriteEnvelopeEnd calls webservices!WsWriteEnvelopeEnd.
@@ -1941,7 +1941,7 @@ func WsWriteEndStartElement(writer *WS_XML_WRITER, error_ *WS_ERROR) error {
 // Minimum OS: windows6.1.
 func WsWriteEnvelopeEnd(message *WS_MESSAGE, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsWriteEnvelopeEnd.Addr(), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsWriteEnvelopeStart calls webservices!WsWriteEnvelopeStart.
@@ -1949,7 +1949,7 @@ func WsWriteEnvelopeEnd(message *WS_MESSAGE, error_ *WS_ERROR) error {
 // Minimum OS: windows6.1.
 func WsWriteEnvelopeStart(message *WS_MESSAGE, writer *WS_XML_WRITER, doneCallback WS_MESSAGE_DONE_CALLBACK, doneCallbackState unsafe.Pointer, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsWriteEnvelopeStart.Addr(), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(writer)), uintptr(doneCallback), uintptr(unsafe.Pointer(doneCallbackState)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsWriteMessageEnd calls webservices!WsWriteMessageEnd.
@@ -1957,7 +1957,7 @@ func WsWriteEnvelopeStart(message *WS_MESSAGE, writer *WS_XML_WRITER, doneCallba
 // Minimum OS: windows6.1.
 func WsWriteMessageEnd(channel *WS_CHANNEL, message *WS_MESSAGE, asyncContext *WS_ASYNC_CONTEXT, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsWriteMessageEnd.Addr(), uintptr(unsafe.Pointer(channel)), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(asyncContext)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsWriteMessageStart calls webservices!WsWriteMessageStart.
@@ -1965,7 +1965,7 @@ func WsWriteMessageEnd(channel *WS_CHANNEL, message *WS_MESSAGE, asyncContext *W
 // Minimum OS: windows6.1.
 func WsWriteMessageStart(channel *WS_CHANNEL, message *WS_MESSAGE, asyncContext *WS_ASYNC_CONTEXT, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsWriteMessageStart.Addr(), uintptr(unsafe.Pointer(channel)), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(asyncContext)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsWriteNode calls webservices!WsWriteNode.
@@ -1973,7 +1973,7 @@ func WsWriteMessageStart(channel *WS_CHANNEL, message *WS_MESSAGE, asyncContext 
 // Minimum OS: windows6.1.
 func WsWriteNode(writer *WS_XML_WRITER, node *WS_XML_NODE, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsWriteNode.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(unsafe.Pointer(node)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsWriteQualifiedName calls webservices!WsWriteQualifiedName.
@@ -1981,7 +1981,7 @@ func WsWriteNode(writer *WS_XML_WRITER, node *WS_XML_NODE, error_ *WS_ERROR) err
 // Minimum OS: windows6.1.
 func WsWriteQualifiedName(writer *WS_XML_WRITER, prefix *WS_XML_STRING, localName *WS_XML_STRING, ns *WS_XML_STRING, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsWriteQualifiedName.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(unsafe.Pointer(prefix)), uintptr(unsafe.Pointer(localName)), uintptr(unsafe.Pointer(ns)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsWriteStartAttribute calls webservices!WsWriteStartAttribute.
@@ -1990,7 +1990,7 @@ func WsWriteQualifiedName(writer *WS_XML_WRITER, prefix *WS_XML_STRING, localNam
 func WsWriteStartAttribute(writer *WS_XML_WRITER, prefix *WS_XML_STRING, localName *WS_XML_STRING, ns *WS_XML_STRING, singleQuote bool, error_ *WS_ERROR) error {
 	_singleQuote := win32.Bool32(singleQuote)
 	r1, _, _ := syscall.SyscallN(procWsWriteStartAttribute.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(unsafe.Pointer(prefix)), uintptr(unsafe.Pointer(localName)), uintptr(unsafe.Pointer(ns)), uintptr(_singleQuote), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsWriteStartCData calls webservices!WsWriteStartCData.
@@ -1998,7 +1998,7 @@ func WsWriteStartAttribute(writer *WS_XML_WRITER, prefix *WS_XML_STRING, localNa
 // Minimum OS: windows6.1.
 func WsWriteStartCData(writer *WS_XML_WRITER, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsWriteStartCData.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsWriteStartElement calls webservices!WsWriteStartElement.
@@ -2006,7 +2006,7 @@ func WsWriteStartCData(writer *WS_XML_WRITER, error_ *WS_ERROR) error {
 // Minimum OS: windows6.1.
 func WsWriteStartElement(writer *WS_XML_WRITER, prefix *WS_XML_STRING, localName *WS_XML_STRING, ns *WS_XML_STRING, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsWriteStartElement.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(unsafe.Pointer(prefix)), uintptr(unsafe.Pointer(localName)), uintptr(unsafe.Pointer(ns)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsWriteText calls webservices!WsWriteText.
@@ -2014,7 +2014,7 @@ func WsWriteStartElement(writer *WS_XML_WRITER, prefix *WS_XML_STRING, localName
 // Minimum OS: windows6.1.
 func WsWriteText(writer *WS_XML_WRITER, text *WS_XML_TEXT, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsWriteText.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(unsafe.Pointer(text)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsWriteType calls webservices!WsWriteType.
@@ -2026,7 +2026,7 @@ func WsWriteType(writer *WS_XML_WRITER, typeMapping WS_TYPE_MAPPING, type_ WS_TY
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsWriteType.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(typeMapping), uintptr(type_), uintptr(unsafe.Pointer(typeDescription)), uintptr(writeOption), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsWriteValue calls webservices!WsWriteValue.
@@ -2038,7 +2038,7 @@ func WsWriteValue(writer *WS_XML_WRITER, valueType WS_VALUE_TYPE, value []byte, 
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsWriteValue.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(valueType), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsWriteXmlBuffer calls webservices!WsWriteXmlBuffer.
@@ -2046,7 +2046,7 @@ func WsWriteValue(writer *WS_XML_WRITER, valueType WS_VALUE_TYPE, value []byte, 
 // Minimum OS: windows6.1.
 func WsWriteXmlBuffer(writer *WS_XML_WRITER, xmlBuffer *WS_XML_BUFFER, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsWriteXmlBuffer.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(unsafe.Pointer(xmlBuffer)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsWriteXmlBufferToBytes calls webservices!WsWriteXmlBufferToBytes.
@@ -2058,7 +2058,7 @@ func WsWriteXmlBufferToBytes(writer *WS_XML_WRITER, xmlBuffer *WS_XML_BUFFER, en
 		_properties = &properties[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWsWriteXmlBufferToBytes.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(unsafe.Pointer(xmlBuffer)), uintptr(unsafe.Pointer(encoding)), uintptr(unsafe.Pointer(_properties)), uintptr(len(properties)), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(bytes)), uintptr(unsafe.Pointer(byteCount)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsWriteXmlnsAttribute calls webservices!WsWriteXmlnsAttribute.
@@ -2067,7 +2067,7 @@ func WsWriteXmlBufferToBytes(writer *WS_XML_WRITER, xmlBuffer *WS_XML_BUFFER, en
 func WsWriteXmlnsAttribute(writer *WS_XML_WRITER, prefix *WS_XML_STRING, ns *WS_XML_STRING, singleQuote bool, error_ *WS_ERROR) error {
 	_singleQuote := win32.Bool32(singleQuote)
 	r1, _, _ := syscall.SyscallN(procWsWriteXmlnsAttribute.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(unsafe.Pointer(prefix)), uintptr(unsafe.Pointer(ns)), uintptr(_singleQuote), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsXmlStringEquals calls webservices!WsXmlStringEquals.
@@ -2075,5 +2075,5 @@ func WsWriteXmlnsAttribute(writer *WS_XML_WRITER, prefix *WS_XML_STRING, ns *WS_
 // Minimum OS: windows6.1.
 func WsXmlStringEquals(string1 *WS_XML_STRING, string2 *WS_XML_STRING, error_ *WS_ERROR) error {
 	r1, _, _ := syscall.SyscallN(procWsXmlStringEquals.Addr(), uintptr(unsafe.Pointer(string1)), uintptr(unsafe.Pointer(string2)), uintptr(unsafe.Pointer(error_)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

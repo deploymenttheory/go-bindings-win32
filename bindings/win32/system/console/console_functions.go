@@ -172,7 +172,7 @@ func AllocConsole() error {
 // AllocConsoleWithOptions calls KERNEL32!AllocConsoleWithOptions.
 func AllocConsoleWithOptions(options *ALLOC_CONSOLE_OPTIONS, result *ALLOC_CONSOLE_RESULT) error {
 	r1, _, _ := syscall.SyscallN(procAllocConsoleWithOptions.Addr(), uintptr(unsafe.Pointer(options)), uintptr(unsafe.Pointer(result)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AttachConsole calls KERNEL32!AttachConsole.
@@ -783,7 +783,7 @@ func RegisterConsoleOS2(fOs2Register bool) bool {
 // ReleasePseudoConsole calls KERNEL32!ReleasePseudoConsole.
 func ReleasePseudoConsole(hPC HPCON) error {
 	r1, _, _ := syscall.SyscallN(procReleasePseudoConsole.Addr(), uintptr(hPC))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetConsoleActiveScreenBuffer calls KERNEL32!SetConsoleActiveScreenBuffer.

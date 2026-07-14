@@ -39,19 +39,19 @@ var (
 // Minimum OS: windows8.0.
 func MetaDataGetDispenser(rclsid *win32.GUID, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procMetaDataGetDispenser.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RoCreateNonAgilePropertySet calls api-ms-win-ro-typeresolution-l1-1-1!RoCreateNonAgilePropertySet.
 func RoCreateNonAgilePropertySet(ppPropertySet *uintptr) error {
 	r1, _, _ := syscall.SyscallN(procRoCreateNonAgilePropertySet.Addr(), uintptr(unsafe.Pointer(ppPropertySet)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RoCreatePropertySetSerializer calls api-ms-win-ro-typeresolution-l1-1-1!RoCreatePropertySetSerializer.
 func RoCreatePropertySetSerializer(ppPropertySetSerializer *uintptr) error {
 	r1, _, _ := syscall.SyscallN(procRoCreatePropertySetSerializer.Addr(), uintptr(unsafe.Pointer(ppPropertySetSerializer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RoFreeParameterizedTypeExtra calls api-ms-win-core-winrt-roparameterizediid-l1-1-0!RoFreeParameterizedTypeExtra.
@@ -66,7 +66,7 @@ func RoFreeParameterizedTypeExtra(extra ROPARAMIIDHANDLE) {
 // Minimum OS: windows8.0.
 func RoGetMetaDataFile(name systemwinrt.HSTRING, metaDataDispenser *IMetaDataDispenserEx, metaDataFilePath *systemwinrt.HSTRING, metaDataImport **IMetaDataImport2, typeDefToken *uint32) error {
 	r1, _, _ := syscall.SyscallN(procRoGetMetaDataFile.Addr(), uintptr(name), uintptr(unsafe.Pointer(metaDataDispenser)), uintptr(unsafe.Pointer(metaDataFilePath)), uintptr(unsafe.Pointer(metaDataImport)), uintptr(unsafe.Pointer(typeDefToken)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RoGetParameterizedTypeInstanceIID calls api-ms-win-core-winrt-roparameterizediid-l1-1-0!RoGetParameterizedTypeInstanceIID.
@@ -78,7 +78,7 @@ func RoGetParameterizedTypeInstanceIID(nameElements []foundation.PWSTR, metaData
 		_nameElements = &nameElements[0]
 	}
 	r1, _, _ := syscall.SyscallN(procRoGetParameterizedTypeInstanceIID.Addr(), uintptr(len(nameElements)), uintptr(unsafe.Pointer(_nameElements)), uintptr(unsafe.Pointer(metaDataLocator)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(pExtra)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RoIsApiContractMajorVersionPresent calls api-ms-win-ro-typeresolution-l1-1-1!RoIsApiContractMajorVersionPresent.
@@ -87,7 +87,7 @@ func RoGetParameterizedTypeInstanceIID(nameElements []foundation.PWSTR, metaData
 func RoIsApiContractMajorVersionPresent(name string, majorVersion uint16, present *foundation.BOOL) error {
 	_name := win32.UTF16Ptr(name)
 	r1, _, _ := syscall.SyscallN(procRoIsApiContractMajorVersionPresent.Addr(), uintptr(unsafe.Pointer(_name)), uintptr(majorVersion), uintptr(unsafe.Pointer(present)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RoIsApiContractPresent calls api-ms-win-ro-typeresolution-l1-1-1!RoIsApiContractPresent.
@@ -96,7 +96,7 @@ func RoIsApiContractMajorVersionPresent(name string, majorVersion uint16, presen
 func RoIsApiContractPresent(name string, majorVersion uint16, minorVersion uint16, present *foundation.BOOL) error {
 	_name := win32.UTF16Ptr(name)
 	r1, _, _ := syscall.SyscallN(procRoIsApiContractPresent.Addr(), uintptr(unsafe.Pointer(_name)), uintptr(majorVersion), uintptr(minorVersion), uintptr(unsafe.Pointer(present)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RoParameterizedTypeExtraGetTypeSignature calls api-ms-win-core-winrt-roparameterizediid-l1-1-0!RoParameterizedTypeExtraGetTypeSignature.
@@ -112,7 +112,7 @@ func RoParameterizedTypeExtraGetTypeSignature(extra ROPARAMIIDHANDLE) foundation
 // Minimum OS: windows8.0.
 func RoParseTypeName(typeName systemwinrt.HSTRING, partsCount *uint32, typeNameParts **systemwinrt.HSTRING) error {
 	r1, _, _ := syscall.SyscallN(procRoParseTypeName.Addr(), uintptr(typeName), uintptr(unsafe.Pointer(partsCount)), uintptr(unsafe.Pointer(typeNameParts)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RoResolveNamespace calls api-ms-win-ro-typeresolution-l1-1-0!RoResolveNamespace.
@@ -124,5 +124,5 @@ func RoResolveNamespace(name systemwinrt.HSTRING, windowsMetaDataDir systemwinrt
 		_packageGraphDirs = &packageGraphDirs[0]
 	}
 	r1, _, _ := syscall.SyscallN(procRoResolveNamespace.Addr(), uintptr(name), uintptr(windowsMetaDataDir), uintptr(len(packageGraphDirs)), uintptr(unsafe.Pointer(_packageGraphDirs)), uintptr(unsafe.Pointer(metaDataFilePathsCount)), uintptr(unsafe.Pointer(metaDataFilePaths)), uintptr(unsafe.Pointer(subNamespacesCount)), uintptr(unsafe.Pointer(subNamespaces)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

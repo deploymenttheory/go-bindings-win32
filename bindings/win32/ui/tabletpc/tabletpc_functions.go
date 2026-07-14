@@ -62,7 +62,7 @@ var (
 // Minimum OS: windows5.1.2600.
 func AddStroke(hrc HRECOCONTEXT, pPacketDesc *PACKET_DESCRIPTION, cbPacket uint32, pPacket *byte, pXForm *graphicsgdi.XFORM) error {
 	r1, _, _ := syscall.SyscallN(procAddStroke.Addr(), uintptr(hrc), uintptr(unsafe.Pointer(pPacketDesc)), uintptr(cbPacket), uintptr(unsafe.Pointer(pPacket)), uintptr(unsafe.Pointer(pXForm)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddWordsToWordList calls inkobjcore!AddWordsToWordList.
@@ -71,7 +71,7 @@ func AddStroke(hrc HRECOCONTEXT, pPacketDesc *PACKET_DESCRIPTION, cbPacket uint3
 func AddWordsToWordList(hwl HRECOWORDLIST, pwcWords string) error {
 	_pwcWords := win32.UTF16Ptr(pwcWords)
 	r1, _, _ := syscall.SyscallN(procAddWordsToWordList.Addr(), uintptr(hwl), uintptr(unsafe.Pointer(_pwcWords)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AdviseInkChange calls inkobjcore!AdviseInkChange.
@@ -80,7 +80,7 @@ func AddWordsToWordList(hwl HRECOWORDLIST, pwcWords string) error {
 func AdviseInkChange(hrc HRECOCONTEXT, bNewStroke bool) error {
 	_bNewStroke := win32.Bool32(bNewStroke)
 	r1, _, _ := syscall.SyscallN(procAdviseInkChange.Addr(), uintptr(hrc), uintptr(_bNewStroke))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CloneContext calls inkobjcore!CloneContext.
@@ -88,7 +88,7 @@ func AdviseInkChange(hrc HRECOCONTEXT, bNewStroke bool) error {
 // Minimum OS: windows5.1.2600.
 func CloneContext(hrc HRECOCONTEXT, pCloneHrc *HRECOCONTEXT) error {
 	r1, _, _ := syscall.SyscallN(procCloneContext.Addr(), uintptr(hrc), uintptr(unsafe.Pointer(pCloneHrc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateContext calls inkobjcore!CreateContext.
@@ -96,7 +96,7 @@ func CloneContext(hrc HRECOCONTEXT, pCloneHrc *HRECOCONTEXT) error {
 // Minimum OS: windows5.1.2600.
 func CreateContext(hrec HRECOGNIZER, phrc *HRECOCONTEXT) error {
 	r1, _, _ := syscall.SyscallN(procCreateContext.Addr(), uintptr(hrec), uintptr(unsafe.Pointer(phrc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateRecognizer calls inkobjcore!CreateRecognizer.
@@ -104,7 +104,7 @@ func CreateContext(hrec HRECOGNIZER, phrc *HRECOCONTEXT) error {
 // Minimum OS: windows5.1.2600.
 func CreateRecognizer(pCLSID *win32.GUID, phrec *HRECOGNIZER) error {
 	r1, _, _ := syscall.SyscallN(procCreateRecognizer.Addr(), uintptr(unsafe.Pointer(pCLSID)), uintptr(unsafe.Pointer(phrec)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DestroyAlternate calls inkobjcore!DestroyAlternate.
@@ -112,7 +112,7 @@ func CreateRecognizer(pCLSID *win32.GUID, phrec *HRECOGNIZER) error {
 // Minimum OS: windows5.1.2600.
 func DestroyAlternate(hrcalt HRECOALT) error {
 	r1, _, _ := syscall.SyscallN(procDestroyAlternate.Addr(), uintptr(hrcalt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DestroyContext calls inkobjcore!DestroyContext.
@@ -120,7 +120,7 @@ func DestroyAlternate(hrcalt HRECOALT) error {
 // Minimum OS: windows5.1.2600.
 func DestroyContext(hrc HRECOCONTEXT) error {
 	r1, _, _ := syscall.SyscallN(procDestroyContext.Addr(), uintptr(hrc))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DestroyRecognizer calls inkobjcore!DestroyRecognizer.
@@ -128,7 +128,7 @@ func DestroyContext(hrc HRECOCONTEXT) error {
 // Minimum OS: windows5.1.2600.
 func DestroyRecognizer(hrec HRECOGNIZER) error {
 	r1, _, _ := syscall.SyscallN(procDestroyRecognizer.Addr(), uintptr(hrec))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DestroyWordList calls inkobjcore!DestroyWordList.
@@ -136,7 +136,7 @@ func DestroyRecognizer(hrec HRECOGNIZER) error {
 // Minimum OS: windows5.1.2600.
 func DestroyWordList(hwl HRECOWORDLIST) error {
 	r1, _, _ := syscall.SyscallN(procDestroyWordList.Addr(), uintptr(hwl))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndInkInput calls inkobjcore!EndInkInput.
@@ -144,7 +144,7 @@ func DestroyWordList(hwl HRECOWORDLIST) error {
 // Minimum OS: windows5.1.2600.
 func EndInkInput(hrc HRECOCONTEXT) error {
 	r1, _, _ := syscall.SyscallN(procEndInkInput.Addr(), uintptr(hrc))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAllRecognizers calls inkobjcore!GetAllRecognizers.
@@ -152,7 +152,7 @@ func EndInkInput(hrc HRECOCONTEXT) error {
 // Minimum OS: windows5.1.2600.
 func GetAllRecognizers(recognizerClsids **win32.GUID, count *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetAllRecognizers.Addr(), uintptr(unsafe.Pointer(recognizerClsids)), uintptr(unsafe.Pointer(count)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBestResultString calls inkobjcore!GetBestResultString.
@@ -160,7 +160,7 @@ func GetAllRecognizers(recognizerClsids **win32.GUID, count *uint32) error {
 // Minimum OS: windows5.1.2600.
 func GetBestResultString(hrc HRECOCONTEXT, pcSize *uint32, pwcBestResult foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procGetBestResultString.Addr(), uintptr(hrc), uintptr(unsafe.Pointer(pcSize)), uintptr(unsafe.Pointer(pwcBestResult)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetContextPreferenceFlags calls inkobjcore!GetContextPreferenceFlags.
@@ -168,7 +168,7 @@ func GetBestResultString(hrc HRECOCONTEXT, pcSize *uint32, pwcBestResult foundat
 // Minimum OS: windows5.1.2600.
 func GetContextPreferenceFlags(hrc HRECOCONTEXT, pdwContextPreferenceFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetContextPreferenceFlags.Addr(), uintptr(hrc), uintptr(unsafe.Pointer(pdwContextPreferenceFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetContextPropertyList calls inkobjcore!GetContextPropertyList.
@@ -176,7 +176,7 @@ func GetContextPreferenceFlags(hrc HRECOCONTEXT, pdwContextPreferenceFlags *uint
 // Minimum OS: windows5.1.2600.
 func GetContextPropertyList(hrc HRECOCONTEXT, pcProperties *uint32, pPropertyGUIDS *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procGetContextPropertyList.Addr(), uintptr(hrc), uintptr(unsafe.Pointer(pcProperties)), uintptr(unsafe.Pointer(pPropertyGUIDS)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetContextPropertyValue calls inkobjcore!GetContextPropertyValue.
@@ -184,7 +184,7 @@ func GetContextPropertyList(hrc HRECOCONTEXT, pcProperties *uint32, pPropertyGUI
 // Minimum OS: windows5.1.2600.
 func GetContextPropertyValue(hrc HRECOCONTEXT, pGuid *win32.GUID, pcbSize *uint32, pProperty *byte) error {
 	r1, _, _ := syscall.SyscallN(procGetContextPropertyValue.Addr(), uintptr(hrc), uintptr(unsafe.Pointer(pGuid)), uintptr(unsafe.Pointer(pcbSize)), uintptr(unsafe.Pointer(pProperty)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEnabledUnicodeRanges calls inkobjcore!GetEnabledUnicodeRanges.
@@ -192,7 +192,7 @@ func GetContextPropertyValue(hrc HRECOCONTEXT, pGuid *win32.GUID, pcbSize *uint3
 // Minimum OS: windows5.1.2600.
 func GetEnabledUnicodeRanges(hrc HRECOCONTEXT, pcRanges *uint32, pcr *CHARACTER_RANGE) error {
 	r1, _, _ := syscall.SyscallN(procGetEnabledUnicodeRanges.Addr(), uintptr(hrc), uintptr(unsafe.Pointer(pcRanges)), uintptr(unsafe.Pointer(pcr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetGuide calls inkobjcore!GetGuide.
@@ -200,7 +200,7 @@ func GetEnabledUnicodeRanges(hrc HRECOCONTEXT, pcRanges *uint32, pcr *CHARACTER_
 // Minimum OS: windows5.1.2600.
 func GetGuide(hrc HRECOCONTEXT, pGuide *RECO_GUIDE, piIndex *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetGuide.Addr(), uintptr(hrc), uintptr(unsafe.Pointer(pGuide)), uintptr(unsafe.Pointer(piIndex)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLatticePtr calls inkobjcore!GetLatticePtr.
@@ -208,7 +208,7 @@ func GetGuide(hrc HRECOCONTEXT, pGuide *RECO_GUIDE, piIndex *uint32) error {
 // Minimum OS: windows5.1.2600.
 func GetLatticePtr(hrc HRECOCONTEXT, ppLattice **RECO_LATTICE) error {
 	r1, _, _ := syscall.SyscallN(procGetLatticePtr.Addr(), uintptr(hrc), uintptr(unsafe.Pointer(ppLattice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLeftSeparator calls inkobjcore!GetLeftSeparator.
@@ -216,7 +216,7 @@ func GetLatticePtr(hrc HRECOCONTEXT, ppLattice **RECO_LATTICE) error {
 // Minimum OS: windows5.1.2600.
 func GetLeftSeparator(hrc HRECOCONTEXT, pcSize *uint32, pwcLeftSeparator foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procGetLeftSeparator.Addr(), uintptr(hrc), uintptr(unsafe.Pointer(pcSize)), uintptr(unsafe.Pointer(pwcLeftSeparator)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPreferredPacketDescription calls inkobjcore!GetPreferredPacketDescription.
@@ -224,7 +224,7 @@ func GetLeftSeparator(hrc HRECOCONTEXT, pcSize *uint32, pwcLeftSeparator foundat
 // Minimum OS: windows5.1.2600.
 func GetPreferredPacketDescription(hrec HRECOGNIZER, pPacketDescription *PACKET_DESCRIPTION) error {
 	r1, _, _ := syscall.SyscallN(procGetPreferredPacketDescription.Addr(), uintptr(hrec), uintptr(unsafe.Pointer(pPacketDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRecoAttributes calls inkobjcore!GetRecoAttributes.
@@ -232,7 +232,7 @@ func GetPreferredPacketDescription(hrec HRECOGNIZER, pPacketDescription *PACKET_
 // Minimum OS: windows5.1.2600.
 func GetRecoAttributes(hrec HRECOGNIZER, pRecoAttrs *RECO_ATTRS) error {
 	r1, _, _ := syscall.SyscallN(procGetRecoAttributes.Addr(), uintptr(hrec), uintptr(unsafe.Pointer(pRecoAttrs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetResultPropertyList calls inkobjcore!GetResultPropertyList.
@@ -240,7 +240,7 @@ func GetRecoAttributes(hrec HRECOGNIZER, pRecoAttrs *RECO_ATTRS) error {
 // Minimum OS: windows5.1.2600.
 func GetResultPropertyList(hrec HRECOGNIZER, pPropertyCount *uint32, pPropertyGuid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procGetResultPropertyList.Addr(), uintptr(hrec), uintptr(unsafe.Pointer(pPropertyCount)), uintptr(unsafe.Pointer(pPropertyGuid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRightSeparator calls inkobjcore!GetRightSeparator.
@@ -248,7 +248,7 @@ func GetResultPropertyList(hrec HRECOGNIZER, pPropertyCount *uint32, pPropertyGu
 // Minimum OS: windows5.1.2600.
 func GetRightSeparator(hrc HRECOCONTEXT, pcSize *uint32, pwcRightSeparator foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procGetRightSeparator.Addr(), uintptr(hrc), uintptr(unsafe.Pointer(pcSize)), uintptr(unsafe.Pointer(pwcRightSeparator)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetUnicodeRanges calls inkobjcore!GetUnicodeRanges.
@@ -256,7 +256,7 @@ func GetRightSeparator(hrc HRECOCONTEXT, pcSize *uint32, pwcRightSeparator found
 // Minimum OS: windows5.1.2600.
 func GetUnicodeRanges(hrec HRECOGNIZER, pcRanges *uint32, pcr *CHARACTER_RANGE) error {
 	r1, _, _ := syscall.SyscallN(procGetUnicodeRanges.Addr(), uintptr(hrec), uintptr(unsafe.Pointer(pcRanges)), uintptr(unsafe.Pointer(pcr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsStringSupported calls inkobjcore!IsStringSupported.
@@ -265,7 +265,7 @@ func GetUnicodeRanges(hrec HRECOGNIZER, pcRanges *uint32, pcr *CHARACTER_RANGE) 
 func IsStringSupported(hrc HRECOCONTEXT, wcString uint32, pwcString string) error {
 	_pwcString := win32.UTF16Ptr(pwcString)
 	r1, _, _ := syscall.SyscallN(procIsStringSupported.Addr(), uintptr(hrc), uintptr(wcString), uintptr(unsafe.Pointer(_pwcString)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MakeWordList calls inkobjcore!MakeWordList.
@@ -274,14 +274,14 @@ func IsStringSupported(hrc HRECOCONTEXT, wcString uint32, pwcString string) erro
 func MakeWordList(hrec HRECOGNIZER, pBuffer string, phwl *HRECOWORDLIST) error {
 	_pBuffer := win32.UTF16Ptr(pBuffer)
 	r1, _, _ := syscall.SyscallN(procMakeWordList.Addr(), uintptr(hrec), uintptr(unsafe.Pointer(_pBuffer)), uintptr(unsafe.Pointer(phwl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Process calls inkobjcore!Process.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-process
 func Process(hrc HRECOCONTEXT, pbPartialProcessing *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procProcess.Addr(), uintptr(hrc), uintptr(unsafe.Pointer(pbPartialProcessing)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ResetContext calls inkobjcore!ResetContext.
@@ -289,7 +289,7 @@ func Process(hrc HRECOCONTEXT, pbPartialProcessing *foundation.BOOL) error {
 // Minimum OS: windows5.1.2600.
 func ResetContext(hrc HRECOCONTEXT) error {
 	r1, _, _ := syscall.SyscallN(procResetContext.Addr(), uintptr(hrc))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCACMode calls inkobjcore!SetCACMode.
@@ -297,7 +297,7 @@ func ResetContext(hrc HRECOCONTEXT) error {
 // Minimum OS: windows5.1.2600.
 func SetCACMode(hrc HRECOCONTEXT, iMode int32) error {
 	r1, _, _ := syscall.SyscallN(procSetCACMode.Addr(), uintptr(hrc), uintptr(iMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetContextPropertyValue calls inkobjcore!SetContextPropertyValue.
@@ -305,7 +305,7 @@ func SetCACMode(hrc HRECOCONTEXT, iMode int32) error {
 // Minimum OS: windows5.1.2600.
 func SetContextPropertyValue(hrc HRECOCONTEXT, pGuid *win32.GUID, cbSize uint32, pProperty *byte) error {
 	r1, _, _ := syscall.SyscallN(procSetContextPropertyValue.Addr(), uintptr(hrc), uintptr(unsafe.Pointer(pGuid)), uintptr(cbSize), uintptr(unsafe.Pointer(pProperty)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetEnabledUnicodeRanges calls inkobjcore!SetEnabledUnicodeRanges.
@@ -313,7 +313,7 @@ func SetContextPropertyValue(hrc HRECOCONTEXT, pGuid *win32.GUID, cbSize uint32,
 // Minimum OS: windows5.1.2600.
 func SetEnabledUnicodeRanges(hrc HRECOCONTEXT, cRanges uint32, pcr *CHARACTER_RANGE) error {
 	r1, _, _ := syscall.SyscallN(procSetEnabledUnicodeRanges.Addr(), uintptr(hrc), uintptr(cRanges), uintptr(unsafe.Pointer(pcr)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetFactoid calls inkobjcore!SetFactoid.
@@ -322,7 +322,7 @@ func SetEnabledUnicodeRanges(hrc HRECOCONTEXT, cRanges uint32, pcr *CHARACTER_RA
 func SetFactoid(hrc HRECOCONTEXT, cwcFactoid uint32, pwcFactoid string) error {
 	_pwcFactoid := win32.UTF16Ptr(pwcFactoid)
 	r1, _, _ := syscall.SyscallN(procSetFactoid.Addr(), uintptr(hrc), uintptr(cwcFactoid), uintptr(unsafe.Pointer(_pwcFactoid)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetFlags calls inkobjcore!SetFlags.
@@ -330,7 +330,7 @@ func SetFactoid(hrc HRECOCONTEXT, cwcFactoid uint32, pwcFactoid string) error {
 // Minimum OS: windows5.1.2600.
 func SetFlags(hrc HRECOCONTEXT, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procSetFlags.Addr(), uintptr(hrc), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetGuide calls inkobjcore!SetGuide.
@@ -338,7 +338,7 @@ func SetFlags(hrc HRECOCONTEXT, dwFlags uint32) error {
 // Minimum OS: windows5.1.2600.
 func SetGuide(hrc HRECOCONTEXT, pGuide *RECO_GUIDE, iIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(procSetGuide.Addr(), uintptr(hrc), uintptr(unsafe.Pointer(pGuide)), uintptr(iIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTextContext calls inkobjcore!SetTextContext.
@@ -348,7 +348,7 @@ func SetTextContext(hrc HRECOCONTEXT, cwcBefore uint32, pwcBefore string, cwcAft
 	_pwcBefore := win32.UTF16Ptr(pwcBefore)
 	_pwcAfter := win32.UTF16Ptr(pwcAfter)
 	r1, _, _ := syscall.SyscallN(procSetTextContext.Addr(), uintptr(hrc), uintptr(cwcBefore), uintptr(unsafe.Pointer(_pwcBefore)), uintptr(cwcAfter), uintptr(unsafe.Pointer(_pwcAfter)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetWordList calls inkobjcore!SetWordList.
@@ -356,5 +356,5 @@ func SetTextContext(hrc HRECOCONTEXT, cwcBefore uint32, pwcBefore string, cwcAft
 // Minimum OS: windows5.1.2600.
 func SetWordList(hrc HRECOCONTEXT, hwl HRECOWORDLIST) error {
 	r1, _, _ := syscall.SyscallN(procSetWordList.Addr(), uintptr(hrc), uintptr(hwl))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

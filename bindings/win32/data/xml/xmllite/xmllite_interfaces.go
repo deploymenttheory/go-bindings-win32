@@ -24,43 +24,43 @@ var IID_IXmlReader = win32.GUID{Data1: 0x7279fc81, Data2: 0x709d, Data3: 0x4095,
 // SetInput dispatches through IXmlReader's vtable slot 3.
 func (self *IXmlReader) SetInput(pInput *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInput)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProperty dispatches through IXmlReader's vtable slot 4.
 func (self *IXmlReader) GetProperty(nProperty uint32, ppValue *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(nProperty), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetProperty dispatches through IXmlReader's vtable slot 5.
 func (self *IXmlReader) SetProperty(nProperty uint32, pValue uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(nProperty), uintptr(pValue))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Read dispatches through IXmlReader's vtable slot 6.
 func (self *IXmlReader) Read(pNodeType *XmlNodeType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNodeType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNodeType dispatches through IXmlReader's vtable slot 7.
 func (self *IXmlReader) GetNodeType(pNodeType *XmlNodeType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNodeType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MoveToFirstAttribute dispatches through IXmlReader's vtable slot 8.
 func (self *IXmlReader) MoveToFirstAttribute() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MoveToNextAttribute dispatches through IXmlReader's vtable slot 9.
 func (self *IXmlReader) MoveToNextAttribute() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MoveToAttributeByName dispatches through IXmlReader's vtable slot 10.
@@ -68,55 +68,55 @@ func (self *IXmlReader) MoveToAttributeByName(pwszLocalName string, pwszNamespac
 	_pwszLocalName := win32.UTF16Ptr(pwszLocalName)
 	_pwszNamespaceUri := win32.UTF16Ptr(pwszNamespaceUri)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszLocalName)), uintptr(unsafe.Pointer(_pwszNamespaceUri)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // MoveToElement dispatches through IXmlReader's vtable slot 11.
 func (self *IXmlReader) MoveToElement() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetQualifiedName dispatches through IXmlReader's vtable slot 12.
 func (self *IXmlReader) GetQualifiedName(ppwszQualifiedName *foundation.PWSTR, pcwchQualifiedName *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwszQualifiedName)), uintptr(unsafe.Pointer(pcwchQualifiedName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNamespaceUri dispatches through IXmlReader's vtable slot 13.
 func (self *IXmlReader) GetNamespaceUri(ppwszNamespaceUri *foundation.PWSTR, pcwchNamespaceUri *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwszNamespaceUri)), uintptr(unsafe.Pointer(pcwchNamespaceUri)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLocalName dispatches through IXmlReader's vtable slot 14.
 func (self *IXmlReader) GetLocalName(ppwszLocalName *foundation.PWSTR, pcwchLocalName *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwszLocalName)), uintptr(unsafe.Pointer(pcwchLocalName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPrefix dispatches through IXmlReader's vtable slot 15.
 func (self *IXmlReader) GetPrefix(ppwszPrefix *foundation.PWSTR, pcwchPrefix *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwszPrefix)), uintptr(unsafe.Pointer(pcwchPrefix)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetValue dispatches through IXmlReader's vtable slot 16.
 func (self *IXmlReader) GetValue(ppwszValue *foundation.PWSTR, pcwchValue *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwszValue)), uintptr(unsafe.Pointer(pcwchValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReadValueChunk dispatches through IXmlReader's vtable slot 17.
 func (self *IXmlReader) ReadValueChunk(pwchBuffer foundation.PWSTR, cwchChunkSize uint32, pcwchRead *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwchBuffer)), uintptr(cwchChunkSize), uintptr(unsafe.Pointer(pcwchRead)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBaseUri dispatches through IXmlReader's vtable slot 18.
 func (self *IXmlReader) GetBaseUri(ppwszBaseUri *foundation.PWSTR, pcwchBaseUri *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwszBaseUri)), uintptr(unsafe.Pointer(pcwchBaseUri)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsDefault dispatches through IXmlReader's vtable slot 19.
@@ -134,25 +134,25 @@ func (self *IXmlReader) IsEmptyElement() foundation.BOOL {
 // GetLineNumber dispatches through IXmlReader's vtable slot 21.
 func (self *IXmlReader) GetLineNumber(pnLineNumber *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnLineNumber)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLinePosition dispatches through IXmlReader's vtable slot 22.
 func (self *IXmlReader) GetLinePosition(pnLinePosition *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnLinePosition)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAttributeCount dispatches through IXmlReader's vtable slot 23.
 func (self *IXmlReader) GetAttributeCount(pnAttributeCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnAttributeCount)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDepth dispatches through IXmlReader's vtable slot 24.
 func (self *IXmlReader) GetDepth(pnDepth *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnDepth)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsEOF dispatches through IXmlReader's vtable slot 25.
@@ -175,7 +175,7 @@ func (self *IXmlResolver) ResolveUri(pwszBaseUri string, pwszPublicIdentifier st
 	_pwszPublicIdentifier := win32.UTF16Ptr(pwszPublicIdentifier)
 	_pwszSystemIdentifier := win32.UTF16Ptr(pwszSystemIdentifier)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszBaseUri)), uintptr(unsafe.Pointer(_pwszPublicIdentifier)), uintptr(unsafe.Pointer(_pwszSystemIdentifier)), uintptr(unsafe.Pointer(ppResolvedInput)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 7279fc88-709d-4095-b63d-69fe4b0d9030
@@ -189,26 +189,26 @@ var IID_IXmlWriter = win32.GUID{Data1: 0x7279fc88, Data2: 0x709d, Data3: 0x4095,
 // SetOutput dispatches through IXmlWriter's vtable slot 3.
 func (self *IXmlWriter) SetOutput(pOutput *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOutput)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProperty dispatches through IXmlWriter's vtable slot 4.
 func (self *IXmlWriter) GetProperty(nProperty uint32, ppValue *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(nProperty), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetProperty dispatches through IXmlWriter's vtable slot 5.
 func (self *IXmlWriter) SetProperty(nProperty uint32, pValue uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(nProperty), uintptr(pValue))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteAttributes dispatches through IXmlWriter's vtable slot 6.
 func (self *IXmlWriter) WriteAttributes(pReader *IXmlReader, fWriteDefaultAttributes bool) error {
 	_fWriteDefaultAttributes := win32.Bool32(fWriteDefaultAttributes)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pReader)), uintptr(_fWriteDefaultAttributes))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteAttributeString dispatches through IXmlWriter's vtable slot 7.
@@ -218,34 +218,34 @@ func (self *IXmlWriter) WriteAttributeString(pwszPrefix string, pwszLocalName st
 	_pwszNamespaceUri := win32.UTF16Ptr(pwszNamespaceUri)
 	_pwszValue := win32.UTF16Ptr(pwszValue)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszPrefix)), uintptr(unsafe.Pointer(_pwszLocalName)), uintptr(unsafe.Pointer(_pwszNamespaceUri)), uintptr(unsafe.Pointer(_pwszValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteCData dispatches through IXmlWriter's vtable slot 8.
 func (self *IXmlWriter) WriteCData(pwszText string) error {
 	_pwszText := win32.UTF16Ptr(pwszText)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszText)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteCharEntity dispatches through IXmlWriter's vtable slot 9.
 func (self *IXmlWriter) WriteCharEntity(wch uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(wch))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteChars dispatches through IXmlWriter's vtable slot 10.
 func (self *IXmlWriter) WriteChars(pwch string, cwch uint32) error {
 	_pwch := win32.UTF16Ptr(pwch)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwch)), uintptr(cwch))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteComment dispatches through IXmlWriter's vtable slot 11.
 func (self *IXmlWriter) WriteComment(pwszComment string) error {
 	_pwszComment := win32.UTF16Ptr(pwszComment)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszComment)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteDocType dispatches through IXmlWriter's vtable slot 12.
@@ -255,7 +255,7 @@ func (self *IXmlWriter) WriteDocType(pwszName string, pwszPublicId string, pwszS
 	_pwszSystemId := win32.UTF16Ptr(pwszSystemId)
 	_pwszSubset := win32.UTF16Ptr(pwszSubset)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszName)), uintptr(unsafe.Pointer(_pwszPublicId)), uintptr(unsafe.Pointer(_pwszSystemId)), uintptr(unsafe.Pointer(_pwszSubset)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteElementString dispatches through IXmlWriter's vtable slot 13.
@@ -265,60 +265,60 @@ func (self *IXmlWriter) WriteElementString(pwszPrefix string, pwszLocalName stri
 	_pwszNamespaceUri := win32.UTF16Ptr(pwszNamespaceUri)
 	_pwszValue := win32.UTF16Ptr(pwszValue)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszPrefix)), uintptr(unsafe.Pointer(_pwszLocalName)), uintptr(unsafe.Pointer(_pwszNamespaceUri)), uintptr(unsafe.Pointer(_pwszValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteEndDocument dispatches through IXmlWriter's vtable slot 14.
 func (self *IXmlWriter) WriteEndDocument() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteEndElement dispatches through IXmlWriter's vtable slot 15.
 func (self *IXmlWriter) WriteEndElement() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteEntityRef dispatches through IXmlWriter's vtable slot 16.
 func (self *IXmlWriter) WriteEntityRef(pwszName string) error {
 	_pwszName := win32.UTF16Ptr(pwszName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteFullEndElement dispatches through IXmlWriter's vtable slot 17.
 func (self *IXmlWriter) WriteFullEndElement() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteName dispatches through IXmlWriter's vtable slot 18.
 func (self *IXmlWriter) WriteName(pwszName string) error {
 	_pwszName := win32.UTF16Ptr(pwszName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteNmToken dispatches through IXmlWriter's vtable slot 19.
 func (self *IXmlWriter) WriteNmToken(pwszNmToken string) error {
 	_pwszNmToken := win32.UTF16Ptr(pwszNmToken)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszNmToken)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteNode dispatches through IXmlWriter's vtable slot 20.
 func (self *IXmlWriter) WriteNode(pReader *IXmlReader, fWriteDefaultAttributes bool) error {
 	_fWriteDefaultAttributes := win32.Bool32(fWriteDefaultAttributes)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pReader)), uintptr(_fWriteDefaultAttributes))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteNodeShallow dispatches through IXmlWriter's vtable slot 21.
 func (self *IXmlWriter) WriteNodeShallow(pReader *IXmlReader, fWriteDefaultAttributes bool) error {
 	_fWriteDefaultAttributes := win32.Bool32(fWriteDefaultAttributes)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pReader)), uintptr(_fWriteDefaultAttributes))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteProcessingInstruction dispatches through IXmlWriter's vtable slot 22.
@@ -326,7 +326,7 @@ func (self *IXmlWriter) WriteProcessingInstruction(pwszName string, pwszText str
 	_pwszName := win32.UTF16Ptr(pwszName)
 	_pwszText := win32.UTF16Ptr(pwszText)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszName)), uintptr(unsafe.Pointer(_pwszText)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteQualifiedName dispatches through IXmlWriter's vtable slot 23.
@@ -334,27 +334,27 @@ func (self *IXmlWriter) WriteQualifiedName(pwszLocalName string, pwszNamespaceUr
 	_pwszLocalName := win32.UTF16Ptr(pwszLocalName)
 	_pwszNamespaceUri := win32.UTF16Ptr(pwszNamespaceUri)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszLocalName)), uintptr(unsafe.Pointer(_pwszNamespaceUri)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteRaw dispatches through IXmlWriter's vtable slot 24.
 func (self *IXmlWriter) WriteRaw(pwszData string) error {
 	_pwszData := win32.UTF16Ptr(pwszData)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteRawChars dispatches through IXmlWriter's vtable slot 25.
 func (self *IXmlWriter) WriteRawChars(pwch string, cwch uint32) error {
 	_pwch := win32.UTF16Ptr(pwch)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwch)), uintptr(cwch))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteStartDocument dispatches through IXmlWriter's vtable slot 26.
 func (self *IXmlWriter) WriteStartDocument(standalone XmlStandalone) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(standalone))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteStartElement dispatches through IXmlWriter's vtable slot 27.
@@ -363,33 +363,33 @@ func (self *IXmlWriter) WriteStartElement(pwszPrefix string, pwszLocalName strin
 	_pwszLocalName := win32.UTF16Ptr(pwszLocalName)
 	_pwszNamespaceUri := win32.UTF16Ptr(pwszNamespaceUri)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszPrefix)), uintptr(unsafe.Pointer(_pwszLocalName)), uintptr(unsafe.Pointer(_pwszNamespaceUri)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteString dispatches through IXmlWriter's vtable slot 28.
 func (self *IXmlWriter) WriteString(pwszText string) error {
 	_pwszText := win32.UTF16Ptr(pwszText)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszText)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteSurrogateCharEntity dispatches through IXmlWriter's vtable slot 29.
 func (self *IXmlWriter) WriteSurrogateCharEntity(wchLow uint16, wchHigh uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(wchLow), uintptr(wchHigh))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteWhitespace dispatches through IXmlWriter's vtable slot 30.
 func (self *IXmlWriter) WriteWhitespace(pwszWhitespace string) error {
 	_pwszWhitespace := win32.UTF16Ptr(pwszWhitespace)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszWhitespace)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Flush dispatches through IXmlWriter's vtable slot 31.
 func (self *IXmlWriter) Flush() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 862494c6-1310-4aad-b3cd-2dbeebf670d3
@@ -403,26 +403,26 @@ var IID_IXmlWriterLite = win32.GUID{Data1: 0x862494c6, Data2: 0x1310, Data3: 0x4
 // SetOutput dispatches through IXmlWriterLite's vtable slot 3.
 func (self *IXmlWriterLite) SetOutput(pOutput *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOutput)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProperty dispatches through IXmlWriterLite's vtable slot 4.
 func (self *IXmlWriterLite) GetProperty(nProperty uint32, ppValue *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(nProperty), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetProperty dispatches through IXmlWriterLite's vtable slot 5.
 func (self *IXmlWriterLite) SetProperty(nProperty uint32, pValue uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(nProperty), uintptr(pValue))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteAttributes dispatches through IXmlWriterLite's vtable slot 6.
 func (self *IXmlWriterLite) WriteAttributes(pReader *IXmlReader, fWriteDefaultAttributes bool) error {
 	_fWriteDefaultAttributes := win32.Bool32(fWriteDefaultAttributes)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pReader)), uintptr(_fWriteDefaultAttributes))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteAttributeString dispatches through IXmlWriterLite's vtable slot 7.
@@ -430,34 +430,34 @@ func (self *IXmlWriterLite) WriteAttributeString(pwszQName string, cwszQName uin
 	_pwszQName := win32.UTF16Ptr(pwszQName)
 	_pwszValue := win32.UTF16Ptr(pwszValue)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszQName)), uintptr(cwszQName), uintptr(unsafe.Pointer(_pwszValue)), uintptr(cwszValue))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteCData dispatches through IXmlWriterLite's vtable slot 8.
 func (self *IXmlWriterLite) WriteCData(pwszText string) error {
 	_pwszText := win32.UTF16Ptr(pwszText)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszText)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteCharEntity dispatches through IXmlWriterLite's vtable slot 9.
 func (self *IXmlWriterLite) WriteCharEntity(wch uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(wch))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteChars dispatches through IXmlWriterLite's vtable slot 10.
 func (self *IXmlWriterLite) WriteChars(pwch string, cwch uint32) error {
 	_pwch := win32.UTF16Ptr(pwch)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwch)), uintptr(cwch))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteComment dispatches through IXmlWriterLite's vtable slot 11.
 func (self *IXmlWriterLite) WriteComment(pwszComment string) error {
 	_pwszComment := win32.UTF16Ptr(pwszComment)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszComment)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteDocType dispatches through IXmlWriterLite's vtable slot 12.
@@ -467,7 +467,7 @@ func (self *IXmlWriterLite) WriteDocType(pwszName string, pwszPublicId string, p
 	_pwszSystemId := win32.UTF16Ptr(pwszSystemId)
 	_pwszSubset := win32.UTF16Ptr(pwszSubset)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszName)), uintptr(unsafe.Pointer(_pwszPublicId)), uintptr(unsafe.Pointer(_pwszSystemId)), uintptr(unsafe.Pointer(_pwszSubset)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteElementString dispatches through IXmlWriterLite's vtable slot 13.
@@ -475,62 +475,62 @@ func (self *IXmlWriterLite) WriteElementString(pwszQName string, cwszQName uint3
 	_pwszQName := win32.UTF16Ptr(pwszQName)
 	_pwszValue := win32.UTF16Ptr(pwszValue)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszQName)), uintptr(cwszQName), uintptr(unsafe.Pointer(_pwszValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteEndDocument dispatches through IXmlWriterLite's vtable slot 14.
 func (self *IXmlWriterLite) WriteEndDocument() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteEndElement dispatches through IXmlWriterLite's vtable slot 15.
 func (self *IXmlWriterLite) WriteEndElement(pwszQName string, cwszQName uint32) error {
 	_pwszQName := win32.UTF16Ptr(pwszQName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszQName)), uintptr(cwszQName))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteEntityRef dispatches through IXmlWriterLite's vtable slot 16.
 func (self *IXmlWriterLite) WriteEntityRef(pwszName string) error {
 	_pwszName := win32.UTF16Ptr(pwszName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteFullEndElement dispatches through IXmlWriterLite's vtable slot 17.
 func (self *IXmlWriterLite) WriteFullEndElement(pwszQName string, cwszQName uint32) error {
 	_pwszQName := win32.UTF16Ptr(pwszQName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszQName)), uintptr(cwszQName))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteName dispatches through IXmlWriterLite's vtable slot 18.
 func (self *IXmlWriterLite) WriteName(pwszName string) error {
 	_pwszName := win32.UTF16Ptr(pwszName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteNmToken dispatches through IXmlWriterLite's vtable slot 19.
 func (self *IXmlWriterLite) WriteNmToken(pwszNmToken string) error {
 	_pwszNmToken := win32.UTF16Ptr(pwszNmToken)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszNmToken)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteNode dispatches through IXmlWriterLite's vtable slot 20.
 func (self *IXmlWriterLite) WriteNode(pReader *IXmlReader, fWriteDefaultAttributes bool) error {
 	_fWriteDefaultAttributes := win32.Bool32(fWriteDefaultAttributes)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pReader)), uintptr(_fWriteDefaultAttributes))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteNodeShallow dispatches through IXmlWriterLite's vtable slot 21.
 func (self *IXmlWriterLite) WriteNodeShallow(pReader *IXmlReader, fWriteDefaultAttributes bool) error {
 	_fWriteDefaultAttributes := win32.Bool32(fWriteDefaultAttributes)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pReader)), uintptr(_fWriteDefaultAttributes))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteProcessingInstruction dispatches through IXmlWriterLite's vtable slot 22.
@@ -538,58 +538,58 @@ func (self *IXmlWriterLite) WriteProcessingInstruction(pwszName string, pwszText
 	_pwszName := win32.UTF16Ptr(pwszName)
 	_pwszText := win32.UTF16Ptr(pwszText)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszName)), uintptr(unsafe.Pointer(_pwszText)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteRaw dispatches through IXmlWriterLite's vtable slot 23.
 func (self *IXmlWriterLite) WriteRaw(pwszData string) error {
 	_pwszData := win32.UTF16Ptr(pwszData)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteRawChars dispatches through IXmlWriterLite's vtable slot 24.
 func (self *IXmlWriterLite) WriteRawChars(pwch string, cwch uint32) error {
 	_pwch := win32.UTF16Ptr(pwch)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwch)), uintptr(cwch))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteStartDocument dispatches through IXmlWriterLite's vtable slot 25.
 func (self *IXmlWriterLite) WriteStartDocument(standalone XmlStandalone) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(standalone))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteStartElement dispatches through IXmlWriterLite's vtable slot 26.
 func (self *IXmlWriterLite) WriteStartElement(pwszQName string, cwszQName uint32) error {
 	_pwszQName := win32.UTF16Ptr(pwszQName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszQName)), uintptr(cwszQName))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteString dispatches through IXmlWriterLite's vtable slot 27.
 func (self *IXmlWriterLite) WriteString(pwszText string) error {
 	_pwszText := win32.UTF16Ptr(pwszText)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszText)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteSurrogateCharEntity dispatches through IXmlWriterLite's vtable slot 28.
 func (self *IXmlWriterLite) WriteSurrogateCharEntity(wchLow uint16, wchHigh uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(wchLow), uintptr(wchHigh))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteWhitespace dispatches through IXmlWriterLite's vtable slot 29.
 func (self *IXmlWriterLite) WriteWhitespace(pwszWhitespace string) error {
 	_pwszWhitespace := win32.UTF16Ptr(pwszWhitespace)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszWhitespace)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Flush dispatches through IXmlWriterLite's vtable slot 30.
 func (self *IXmlWriterLite) Flush() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

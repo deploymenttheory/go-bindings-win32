@@ -638,7 +638,7 @@ func WTSSetRenderHint(pRenderHintID *uint64, hwndOwner foundation.HWND, renderHi
 		_pHintData = &pHintData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWTSSetRenderHint.Addr(), uintptr(unsafe.Pointer(pRenderHintID)), uintptr(hwndOwner), uintptr(renderHintType), uintptr(len(pHintData)), uintptr(unsafe.Pointer(_pHintData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WTSSetUserConfig calls WTSAPI32!WTSSetUserConfigW.

@@ -28,5 +28,5 @@ func DMProcessConfigXMLFiltered(pszXmlIn string, rgszAllowedCspNodes []foundatio
 		_rgszAllowedCspNodes = &rgszAllowedCspNodes[0]
 	}
 	r1, _, _ := syscall.SyscallN(procDMProcessConfigXMLFiltered.Addr(), uintptr(unsafe.Pointer(_pszXmlIn)), uintptr(unsafe.Pointer(_rgszAllowedCspNodes)), uintptr(len(rgszAllowedCspNodes)), uintptr(unsafe.Pointer(pbstrXmlOut)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

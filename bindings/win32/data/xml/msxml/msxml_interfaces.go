@@ -25,55 +25,55 @@ var IID_IMXAttributes = win32.GUID{Data1: 0xf10d27cc, Data2: 0x3ec0, Data3: 0x41
 // AddAttribute dispatches through IMXAttributes's vtable slot 7.
 func (self *IMXAttributes) AddAttribute(strURI foundation.BSTR, strLocalName foundation.BSTR, strQName foundation.BSTR, strType foundation.BSTR, strValue foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strURI)), uintptr(unsafe.Pointer(strLocalName)), uintptr(unsafe.Pointer(strQName)), uintptr(unsafe.Pointer(strType)), uintptr(unsafe.Pointer(strValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through IMXAttributes's vtable slot 9.
 func (self *IMXAttributes) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAttribute dispatches through IMXAttributes's vtable slot 10.
 func (self *IMXAttributes) RemoveAttribute(nIndex int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(nIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetAttribute dispatches through IMXAttributes's vtable slot 11.
 func (self *IMXAttributes) SetAttribute(nIndex int32, strURI foundation.BSTR, strLocalName foundation.BSTR, strQName foundation.BSTR, strType foundation.BSTR, strValue foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(nIndex), uintptr(unsafe.Pointer(strURI)), uintptr(unsafe.Pointer(strLocalName)), uintptr(unsafe.Pointer(strQName)), uintptr(unsafe.Pointer(strType)), uintptr(unsafe.Pointer(strValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetLocalName dispatches through IMXAttributes's vtable slot 13.
 func (self *IMXAttributes) SetLocalName(nIndex int32, strLocalName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(nIndex), uintptr(unsafe.Pointer(strLocalName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetQName dispatches through IMXAttributes's vtable slot 14.
 func (self *IMXAttributes) SetQName(nIndex int32, strQName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(nIndex), uintptr(unsafe.Pointer(strQName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetType dispatches through IMXAttributes's vtable slot 15.
 func (self *IMXAttributes) SetType(nIndex int32, strType foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(nIndex), uintptr(unsafe.Pointer(strType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetURI dispatches through IMXAttributes's vtable slot 16.
 func (self *IMXAttributes) SetURI(nIndex int32, strURI foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(nIndex), uintptr(unsafe.Pointer(strURI)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetValue dispatches through IMXAttributes's vtable slot 17.
 func (self *IMXAttributes) SetValue(nIndex int32, strValue foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(nIndex), uintptr(unsafe.Pointer(strValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: c90352f6-643c-4fbc-bb23-e996eb2d51fd
@@ -87,38 +87,38 @@ var IID_IMXNamespaceManager = win32.GUID{Data1: 0xc90352f6, Data2: 0x643c, Data3
 // PutAllowOverride dispatches through IMXNamespaceManager's vtable slot 3.
 func (self *IMXNamespaceManager) PutAllowOverride(fOverride foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(fOverride))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAllowOverride dispatches through IMXNamespaceManager's vtable slot 4.
 func (self *IMXNamespaceManager) GetAllowOverride() (foundation.VARIANT_BOOL, error) {
 	var _fOverride foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_fOverride)))
-	return _fOverride, win32.HRESULTError(int32(r1))
+	return _fOverride, win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IMXNamespaceManager's vtable slot 5.
 func (self *IMXNamespaceManager) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PushContext dispatches through IMXNamespaceManager's vtable slot 6.
 func (self *IMXNamespaceManager) PushContext() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PushNodeContext dispatches through IMXNamespaceManager's vtable slot 7.
 func (self *IMXNamespaceManager) PushNodeContext(contextNode *IXMLDOMNode, fDeep foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(contextNode)), uintptr(fDeep))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PopContext dispatches through IMXNamespaceManager's vtable slot 8.
 func (self *IMXNamespaceManager) PopContext() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeclarePrefix dispatches through IMXNamespaceManager's vtable slot 9.
@@ -126,27 +126,27 @@ func (self *IMXNamespaceManager) DeclarePrefix(prefix string, namespaceURI strin
 	_prefix := win32.UTF16Ptr(prefix)
 	_namespaceURI := win32.UTF16Ptr(namespaceURI)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_prefix)), uintptr(unsafe.Pointer(_namespaceURI)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeclaredPrefix dispatches through IMXNamespaceManager's vtable slot 10.
 func (self *IMXNamespaceManager) GetDeclaredPrefix(nIndex int32, pwchPrefix foundation.PWSTR, pcchPrefix *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(nIndex), uintptr(unsafe.Pointer(pwchPrefix)), uintptr(unsafe.Pointer(pcchPrefix)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPrefix dispatches through IMXNamespaceManager's vtable slot 11.
 func (self *IMXNamespaceManager) GetPrefix(pwszNamespaceURI string, nIndex int32, pwchPrefix foundation.PWSTR, pcchPrefix *int32) error {
 	_pwszNamespaceURI := win32.UTF16Ptr(pwszNamespaceURI)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszNamespaceURI)), uintptr(nIndex), uintptr(unsafe.Pointer(pwchPrefix)), uintptr(unsafe.Pointer(pcchPrefix)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetURI dispatches through IMXNamespaceManager's vtable slot 12.
 func (self *IMXNamespaceManager) GetURI(pwchPrefix string, pContextNode *IXMLDOMNode, pwchUri foundation.PWSTR, pcchUri *int32) error {
 	_pwchPrefix := win32.UTF16Ptr(pwchPrefix)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwchPrefix)), uintptr(unsafe.Pointer(pContextNode)), uintptr(unsafe.Pointer(pwchUri)), uintptr(unsafe.Pointer(pcchUri)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: c90352f4-643c-4fbc-bb23-e996eb2d51fd
@@ -161,21 +161,21 @@ var IID_IMXNamespacePrefixes = win32.GUID{Data1: 0xc90352f4, Data2: 0x643c, Data
 func (self *IMXNamespacePrefixes) Get_item(index int32) (foundation.BSTR, error) {
 	var _prefix foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_prefix)))
-	return _prefix, win32.HRESULTError(int32(r1))
+	return _prefix, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_length dispatches through IMXNamespacePrefixes's vtable slot 8.
 func (self *IMXNamespacePrefixes) Get_length() (int32, error) {
 	var _length int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_length)))
-	return _length, win32.HRESULTError(int32(r1))
+	return _length, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__newEnum dispatches through IMXNamespacePrefixes's vtable slot 9.
 func (self *IMXNamespacePrefixes) Get__newEnum() (*systemcom.IUnknown, error) {
 	var _ppUnk *systemcom.IUnknown
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppUnk)))
-	return _ppUnk, win32.HRESULTError(int32(r1))
+	return _ppUnk, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 808f4e35-8d5a-4fbe-8466-33a41279ed30
@@ -189,19 +189,19 @@ var IID_IMXReaderControl = win32.GUID{Data1: 0x808f4e35, Data2: 0x8d5a, Data3: 0
 // Abort dispatches through IMXReaderControl's vtable slot 7.
 func (self *IMXReaderControl) Abort() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Resume dispatches through IMXReaderControl's vtable slot 8.
 func (self *IMXReaderControl) Resume() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Suspend dispatches through IMXReaderControl's vtable slot 9.
 func (self *IMXReaderControl) Suspend() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: fa4bb38c-faf9-4cca-9302-d1dd0fe520db
@@ -215,7 +215,7 @@ var IID_IMXSchemaDeclHandler = win32.GUID{Data1: 0xfa4bb38c, Data2: 0xfaf9, Data
 // SchemaElementDecl dispatches through IMXSchemaDeclHandler's vtable slot 7.
 func (self *IMXSchemaDeclHandler) SchemaElementDecl(oSchemaElement *ISchemaElement) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(oSchemaElement)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 4d7ff4ba-1565-4ea8-94e1-6e724a46f98d
@@ -230,104 +230,104 @@ var IID_IMXWriter = win32.GUID{Data1: 0x4d7ff4ba, Data2: 0x1565, Data3: 0x4ea8, 
 func (self *IMXWriter) Get_output() (systemvariant.VARIANT, error) {
 	var _varDestination systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_varDestination)))
-	return _varDestination, win32.HRESULTError(int32(r1))
+	return _varDestination, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_encoding dispatches through IMXWriter's vtable slot 9.
 func (self *IMXWriter) Put_encoding(strEncoding foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strEncoding)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_encoding dispatches through IMXWriter's vtable slot 10.
 func (self *IMXWriter) Get_encoding() (foundation.BSTR, error) {
 	var _strEncoding foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_strEncoding)))
-	return _strEncoding, win32.HRESULTError(int32(r1))
+	return _strEncoding, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_byteOrderMark dispatches through IMXWriter's vtable slot 11.
 func (self *IMXWriter) Put_byteOrderMark(fWriteByteOrderMark foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(fWriteByteOrderMark))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_byteOrderMark dispatches through IMXWriter's vtable slot 12.
 func (self *IMXWriter) Get_byteOrderMark() (foundation.VARIANT_BOOL, error) {
 	var _fWriteByteOrderMark foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_fWriteByteOrderMark)))
-	return _fWriteByteOrderMark, win32.HRESULTError(int32(r1))
+	return _fWriteByteOrderMark, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_indent dispatches through IMXWriter's vtable slot 13.
 func (self *IMXWriter) Put_indent(fIndentMode foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(fIndentMode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_indent dispatches through IMXWriter's vtable slot 14.
 func (self *IMXWriter) Get_indent() (foundation.VARIANT_BOOL, error) {
 	var _fIndentMode foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_fIndentMode)))
-	return _fIndentMode, win32.HRESULTError(int32(r1))
+	return _fIndentMode, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_standalone dispatches through IMXWriter's vtable slot 15.
 func (self *IMXWriter) Put_standalone(fValue foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(fValue))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_standalone dispatches through IMXWriter's vtable slot 16.
 func (self *IMXWriter) Get_standalone() (foundation.VARIANT_BOOL, error) {
 	var _fValue foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_fValue)))
-	return _fValue, win32.HRESULTError(int32(r1))
+	return _fValue, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_omitXMLDeclaration dispatches through IMXWriter's vtable slot 17.
 func (self *IMXWriter) Put_omitXMLDeclaration(fValue foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(fValue))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_omitXMLDeclaration dispatches through IMXWriter's vtable slot 18.
 func (self *IMXWriter) Get_omitXMLDeclaration() (foundation.VARIANT_BOOL, error) {
 	var _fValue foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_fValue)))
-	return _fValue, win32.HRESULTError(int32(r1))
+	return _fValue, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_version dispatches through IMXWriter's vtable slot 19.
 func (self *IMXWriter) Put_version(strVersion foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strVersion)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_version dispatches through IMXWriter's vtable slot 20.
 func (self *IMXWriter) Get_version() (foundation.BSTR, error) {
 	var _strVersion foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_strVersion)))
-	return _strVersion, win32.HRESULTError(int32(r1))
+	return _strVersion, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_disableOutputEscaping dispatches through IMXWriter's vtable slot 21.
 func (self *IMXWriter) Put_disableOutputEscaping(fValue foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(fValue))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_disableOutputEscaping dispatches through IMXWriter's vtable slot 22.
 func (self *IMXWriter) Get_disableOutputEscaping() (foundation.VARIANT_BOOL, error) {
 	var _fValue foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_fValue)))
-	return _fValue, win32.HRESULTError(int32(r1))
+	return _fValue, win32.ErrIfFailed(int32(r1))
 }
 
 // Flush dispatches through IMXWriter's vtable slot 23.
 func (self *IMXWriter) Flush() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: c90352f7-643c-4fbc-bb23-e996eb2d51fd
@@ -342,72 +342,72 @@ var IID_IMXXMLFilter = win32.GUID{Data1: 0xc90352f7, Data2: 0x643c, Data3: 0x4fb
 func (self *IMXXMLFilter) GetFeature(strName foundation.BSTR) (foundation.VARIANT_BOOL, error) {
 	var _fValue foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strName)), uintptr(unsafe.Pointer(&_fValue)))
-	return _fValue, win32.HRESULTError(int32(r1))
+	return _fValue, win32.ErrIfFailed(int32(r1))
 }
 
 // PutFeature dispatches through IMXXMLFilter's vtable slot 8.
 func (self *IMXXMLFilter) PutFeature(strName foundation.BSTR, fValue foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strName)), uintptr(fValue))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProperty dispatches through IMXXMLFilter's vtable slot 9.
 func (self *IMXXMLFilter) GetProperty(strName foundation.BSTR) (systemvariant.VARIANT, error) {
 	var _varValue systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strName)), uintptr(unsafe.Pointer(&_varValue)))
-	return _varValue, win32.HRESULTError(int32(r1))
+	return _varValue, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_entityResolver dispatches through IMXXMLFilter's vtable slot 11.
 func (self *IMXXMLFilter) Get_entityResolver() (*systemcom.IUnknown, error) {
 	var _oResolver *systemcom.IUnknown
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_oResolver)))
-	return _oResolver, win32.HRESULTError(int32(r1))
+	return _oResolver, win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_entityResolver dispatches through IMXXMLFilter's vtable slot 12.
 func (self *IMXXMLFilter) Putref_entityResolver(oResolver *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(oResolver)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_contentHandler dispatches through IMXXMLFilter's vtable slot 13.
 func (self *IMXXMLFilter) Get_contentHandler() (*systemcom.IUnknown, error) {
 	var _oHandler *systemcom.IUnknown
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_oHandler)))
-	return _oHandler, win32.HRESULTError(int32(r1))
+	return _oHandler, win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_contentHandler dispatches through IMXXMLFilter's vtable slot 14.
 func (self *IMXXMLFilter) Putref_contentHandler(oHandler *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(oHandler)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_dtdHandler dispatches through IMXXMLFilter's vtable slot 15.
 func (self *IMXXMLFilter) Get_dtdHandler() (*systemcom.IUnknown, error) {
 	var _oHandler *systemcom.IUnknown
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_oHandler)))
-	return _oHandler, win32.HRESULTError(int32(r1))
+	return _oHandler, win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_dtdHandler dispatches through IMXXMLFilter's vtable slot 16.
 func (self *IMXXMLFilter) Putref_dtdHandler(oHandler *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(oHandler)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_errorHandler dispatches through IMXXMLFilter's vtable slot 17.
 func (self *IMXXMLFilter) Get_errorHandler() (*systemcom.IUnknown, error) {
 	var _oHandler *systemcom.IUnknown
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_oHandler)))
-	return _oHandler, win32.HRESULTError(int32(r1))
+	return _oHandler, win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_errorHandler dispatches through IMXXMLFilter's vtable slot 18.
 func (self *IMXXMLFilter) Putref_errorHandler(oHandler *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(oHandler)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f078abe1-45d2-4832-91ea-4466ce2f25c9
@@ -422,31 +422,31 @@ var IID_ISAXAttributes = win32.GUID{Data1: 0xf078abe1, Data2: 0x45d2, Data3: 0x4
 func (self *ISAXAttributes) GetLength() (int32, error) {
 	var _pnLength int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pnLength)))
-	return _pnLength, win32.HRESULTError(int32(r1))
+	return _pnLength, win32.ErrIfFailed(int32(r1))
 }
 
 // GetURI dispatches through ISAXAttributes's vtable slot 4.
 func (self *ISAXAttributes) GetURI(nIndex int32, ppwchUri **uint16, pcchUri *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(nIndex), uintptr(unsafe.Pointer(ppwchUri)), uintptr(unsafe.Pointer(pcchUri)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLocalName dispatches through ISAXAttributes's vtable slot 5.
 func (self *ISAXAttributes) GetLocalName(nIndex int32, ppwchLocalName **uint16, pcchLocalName *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(nIndex), uintptr(unsafe.Pointer(ppwchLocalName)), uintptr(unsafe.Pointer(pcchLocalName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetQName dispatches through ISAXAttributes's vtable slot 6.
 func (self *ISAXAttributes) GetQName(nIndex int32, ppwchQName **uint16, pcchQName *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(nIndex), uintptr(unsafe.Pointer(ppwchQName)), uintptr(unsafe.Pointer(pcchQName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetName dispatches through ISAXAttributes's vtable slot 7.
 func (self *ISAXAttributes) GetName(nIndex int32, ppwchUri **uint16, pcchUri *int32, ppwchLocalName **uint16, pcchLocalName *int32, ppwchQName **uint16, pcchQName *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(nIndex), uintptr(unsafe.Pointer(ppwchUri)), uintptr(unsafe.Pointer(pcchUri)), uintptr(unsafe.Pointer(ppwchLocalName)), uintptr(unsafe.Pointer(pcchLocalName)), uintptr(unsafe.Pointer(ppwchQName)), uintptr(unsafe.Pointer(pcchQName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetIndexFromName dispatches through ISAXAttributes's vtable slot 8.
@@ -455,7 +455,7 @@ func (self *ISAXAttributes) GetIndexFromName(pwchUri string, cchUri int32, pwchL
 	_pwchLocalName := win32.UTF16Ptr(pwchLocalName)
 	var _pnIndex int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwchUri)), uintptr(cchUri), uintptr(unsafe.Pointer(_pwchLocalName)), uintptr(cchLocalName), uintptr(unsafe.Pointer(&_pnIndex)))
-	return _pnIndex, win32.HRESULTError(int32(r1))
+	return _pnIndex, win32.ErrIfFailed(int32(r1))
 }
 
 // GetIndexFromQName dispatches through ISAXAttributes's vtable slot 9.
@@ -463,13 +463,13 @@ func (self *ISAXAttributes) GetIndexFromQName(pwchQName string, cchQName int32) 
 	_pwchQName := win32.UTF16Ptr(pwchQName)
 	var _pnIndex int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwchQName)), uintptr(cchQName), uintptr(unsafe.Pointer(&_pnIndex)))
-	return _pnIndex, win32.HRESULTError(int32(r1))
+	return _pnIndex, win32.ErrIfFailed(int32(r1))
 }
 
 // GetType dispatches through ISAXAttributes's vtable slot 10.
 func (self *ISAXAttributes) GetType(nIndex int32, ppwchType **uint16, pcchType *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(nIndex), uintptr(unsafe.Pointer(ppwchType)), uintptr(unsafe.Pointer(pcchType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTypeFromName dispatches through ISAXAttributes's vtable slot 11.
@@ -477,20 +477,20 @@ func (self *ISAXAttributes) GetTypeFromName(pwchUri string, cchUri int32, pwchLo
 	_pwchUri := win32.UTF16Ptr(pwchUri)
 	_pwchLocalName := win32.UTF16Ptr(pwchLocalName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwchUri)), uintptr(cchUri), uintptr(unsafe.Pointer(_pwchLocalName)), uintptr(cchLocalName), uintptr(unsafe.Pointer(ppwchType)), uintptr(unsafe.Pointer(pcchType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetTypeFromQName dispatches through ISAXAttributes's vtable slot 12.
 func (self *ISAXAttributes) GetTypeFromQName(pwchQName string, cchQName int32, ppwchType **uint16, pcchType *int32) error {
 	_pwchQName := win32.UTF16Ptr(pwchQName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwchQName)), uintptr(cchQName), uintptr(unsafe.Pointer(ppwchType)), uintptr(unsafe.Pointer(pcchType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetValue dispatches through ISAXAttributes's vtable slot 13.
 func (self *ISAXAttributes) GetValue(nIndex int32, ppwchValue **uint16, pcchValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(nIndex), uintptr(unsafe.Pointer(ppwchValue)), uintptr(unsafe.Pointer(pcchValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetValueFromName dispatches through ISAXAttributes's vtable slot 14.
@@ -498,14 +498,14 @@ func (self *ISAXAttributes) GetValueFromName(pwchUri string, cchUri int32, pwchL
 	_pwchUri := win32.UTF16Ptr(pwchUri)
 	_pwchLocalName := win32.UTF16Ptr(pwchLocalName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwchUri)), uintptr(cchUri), uintptr(unsafe.Pointer(_pwchLocalName)), uintptr(cchLocalName), uintptr(unsafe.Pointer(ppwchValue)), uintptr(unsafe.Pointer(pcchValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetValueFromQName dispatches through ISAXAttributes's vtable slot 15.
 func (self *ISAXAttributes) GetValueFromQName(pwchQName string, cchQName int32, ppwchValue **uint16, pcchValue *int32) error {
 	_pwchQName := win32.UTF16Ptr(pwchQName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwchQName)), uintptr(cchQName), uintptr(unsafe.Pointer(ppwchValue)), uintptr(unsafe.Pointer(pcchValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 1545cdfa-9e4e-4497-a8a4-2bf7d0112c44
@@ -519,19 +519,19 @@ var IID_ISAXContentHandler = win32.GUID{Data1: 0x1545cdfa, Data2: 0x9e4e, Data3:
 // PutDocumentLocator dispatches through ISAXContentHandler's vtable slot 3.
 func (self *ISAXContentHandler) PutDocumentLocator(pLocator *ISAXLocator) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLocator)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StartDocument dispatches through ISAXContentHandler's vtable slot 4.
 func (self *ISAXContentHandler) StartDocument() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndDocument dispatches through ISAXContentHandler's vtable slot 5.
 func (self *ISAXContentHandler) EndDocument() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StartPrefixMapping dispatches through ISAXContentHandler's vtable slot 6.
@@ -539,14 +539,14 @@ func (self *ISAXContentHandler) StartPrefixMapping(pwchPrefix string, cchPrefix 
 	_pwchPrefix := win32.UTF16Ptr(pwchPrefix)
 	_pwchUri := win32.UTF16Ptr(pwchUri)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwchPrefix)), uintptr(cchPrefix), uintptr(unsafe.Pointer(_pwchUri)), uintptr(cchUri))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndPrefixMapping dispatches through ISAXContentHandler's vtable slot 7.
 func (self *ISAXContentHandler) EndPrefixMapping(pwchPrefix string, cchPrefix int32) error {
 	_pwchPrefix := win32.UTF16Ptr(pwchPrefix)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwchPrefix)), uintptr(cchPrefix))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StartElement dispatches through ISAXContentHandler's vtable slot 8.
@@ -555,7 +555,7 @@ func (self *ISAXContentHandler) StartElement(pwchNamespaceUri string, cchNamespa
 	_pwchLocalName := win32.UTF16Ptr(pwchLocalName)
 	_pwchQName := win32.UTF16Ptr(pwchQName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwchNamespaceUri)), uintptr(cchNamespaceUri), uintptr(unsafe.Pointer(_pwchLocalName)), uintptr(cchLocalName), uintptr(unsafe.Pointer(_pwchQName)), uintptr(cchQName), uintptr(unsafe.Pointer(pAttributes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndElement dispatches through ISAXContentHandler's vtable slot 9.
@@ -564,21 +564,21 @@ func (self *ISAXContentHandler) EndElement(pwchNamespaceUri string, cchNamespace
 	_pwchLocalName := win32.UTF16Ptr(pwchLocalName)
 	_pwchQName := win32.UTF16Ptr(pwchQName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwchNamespaceUri)), uintptr(cchNamespaceUri), uintptr(unsafe.Pointer(_pwchLocalName)), uintptr(cchLocalName), uintptr(unsafe.Pointer(_pwchQName)), uintptr(cchQName))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Characters dispatches through ISAXContentHandler's vtable slot 10.
 func (self *ISAXContentHandler) Characters(pwchChars string, cchChars int32) error {
 	_pwchChars := win32.UTF16Ptr(pwchChars)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwchChars)), uintptr(cchChars))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IgnorableWhitespace dispatches through ISAXContentHandler's vtable slot 11.
 func (self *ISAXContentHandler) IgnorableWhitespace(pwchChars string, cchChars int32) error {
 	_pwchChars := win32.UTF16Ptr(pwchChars)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwchChars)), uintptr(cchChars))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ProcessingInstruction dispatches through ISAXContentHandler's vtable slot 12.
@@ -586,14 +586,14 @@ func (self *ISAXContentHandler) ProcessingInstruction(pwchTarget string, cchTarg
 	_pwchTarget := win32.UTF16Ptr(pwchTarget)
 	_pwchData := win32.UTF16Ptr(pwchData)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwchTarget)), uintptr(cchTarget), uintptr(unsafe.Pointer(_pwchData)), uintptr(cchData))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SkippedEntity dispatches through ISAXContentHandler's vtable slot 13.
 func (self *ISAXContentHandler) SkippedEntity(pwchName string, cchName int32) error {
 	_pwchName := win32.UTF16Ptr(pwchName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwchName)), uintptr(cchName))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: e15c1baf-afb3-4d60-8c36-19a8c45defed
@@ -610,7 +610,7 @@ func (self *ISAXDTDHandler) NotationDecl(pwchName string, cchName int32, pwchPub
 	_pwchPublicId := win32.UTF16Ptr(pwchPublicId)
 	_pwchSystemId := win32.UTF16Ptr(pwchSystemId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwchName)), uintptr(cchName), uintptr(unsafe.Pointer(_pwchPublicId)), uintptr(cchPublicId), uintptr(unsafe.Pointer(_pwchSystemId)), uintptr(cchSystemId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnparsedEntityDecl dispatches through ISAXDTDHandler's vtable slot 4.
@@ -620,7 +620,7 @@ func (self *ISAXDTDHandler) UnparsedEntityDecl(pwchName string, cchName int32, p
 	_pwchSystemId := win32.UTF16Ptr(pwchSystemId)
 	_pwchNotationName := win32.UTF16Ptr(pwchNotationName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwchName)), uintptr(cchName), uintptr(unsafe.Pointer(_pwchPublicId)), uintptr(cchPublicId), uintptr(unsafe.Pointer(_pwchSystemId)), uintptr(cchSystemId), uintptr(unsafe.Pointer(_pwchNotationName)), uintptr(cchNotationName))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 862629ac-771a-47b2-8337-4e6843c1be90
@@ -636,7 +636,7 @@ func (self *ISAXDeclHandler) ElementDecl(pwchName string, cchName int32, pwchMod
 	_pwchName := win32.UTF16Ptr(pwchName)
 	_pwchModel := win32.UTF16Ptr(pwchModel)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwchName)), uintptr(cchName), uintptr(unsafe.Pointer(_pwchModel)), uintptr(cchModel))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AttributeDecl dispatches through ISAXDeclHandler's vtable slot 4.
@@ -647,7 +647,7 @@ func (self *ISAXDeclHandler) AttributeDecl(pwchElementName string, cchElementNam
 	_pwchValueDefault := win32.UTF16Ptr(pwchValueDefault)
 	_pwchValue := win32.UTF16Ptr(pwchValue)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwchElementName)), uintptr(cchElementName), uintptr(unsafe.Pointer(_pwchAttributeName)), uintptr(cchAttributeName), uintptr(unsafe.Pointer(_pwchType)), uintptr(cchType), uintptr(unsafe.Pointer(_pwchValueDefault)), uintptr(cchValueDefault), uintptr(unsafe.Pointer(_pwchValue)), uintptr(cchValue))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InternalEntityDecl dispatches through ISAXDeclHandler's vtable slot 5.
@@ -655,7 +655,7 @@ func (self *ISAXDeclHandler) InternalEntityDecl(pwchName string, cchName int32, 
 	_pwchName := win32.UTF16Ptr(pwchName)
 	_pwchValue := win32.UTF16Ptr(pwchValue)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwchName)), uintptr(cchName), uintptr(unsafe.Pointer(_pwchValue)), uintptr(cchValue))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExternalEntityDecl dispatches through ISAXDeclHandler's vtable slot 6.
@@ -664,7 +664,7 @@ func (self *ISAXDeclHandler) ExternalEntityDecl(pwchName string, cchName int32, 
 	_pwchPublicId := win32.UTF16Ptr(pwchPublicId)
 	_pwchSystemId := win32.UTF16Ptr(pwchSystemId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwchName)), uintptr(cchName), uintptr(unsafe.Pointer(_pwchPublicId)), uintptr(cchPublicId), uintptr(unsafe.Pointer(_pwchSystemId)), uintptr(cchSystemId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 99bca7bd-e8c4-4d5f-a0cf-6d907901ff07
@@ -681,7 +681,7 @@ func (self *ISAXEntityResolver) ResolveEntity(pwchPublicId string, pwchSystemId 
 	_pwchSystemId := win32.UTF16Ptr(pwchSystemId)
 	var _pvarInput systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwchPublicId)), uintptr(unsafe.Pointer(_pwchSystemId)), uintptr(unsafe.Pointer(&_pvarInput)))
-	return _pvarInput, win32.HRESULTError(int32(r1))
+	return _pvarInput, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: a60511c4-ccf5-479e-98a3-dc8dc545b7d0
@@ -696,21 +696,21 @@ var IID_ISAXErrorHandler = win32.GUID{Data1: 0xa60511c4, Data2: 0xccf5, Data3: 0
 func (self *ISAXErrorHandler) Error(pLocator *ISAXLocator, pwchErrorMessage string, hrErrorCode foundation.HRESULT) error {
 	_pwchErrorMessage := win32.UTF16Ptr(pwchErrorMessage)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLocator)), uintptr(unsafe.Pointer(_pwchErrorMessage)), uintptr(hrErrorCode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FatalError dispatches through ISAXErrorHandler's vtable slot 4.
 func (self *ISAXErrorHandler) FatalError(pLocator *ISAXLocator, pwchErrorMessage string, hrErrorCode foundation.HRESULT) error {
 	_pwchErrorMessage := win32.UTF16Ptr(pwchErrorMessage)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLocator)), uintptr(unsafe.Pointer(_pwchErrorMessage)), uintptr(hrErrorCode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IgnorableWarning dispatches through ISAXErrorHandler's vtable slot 5.
 func (self *ISAXErrorHandler) IgnorableWarning(pLocator *ISAXLocator, pwchErrorMessage string, hrErrorCode foundation.HRESULT) error {
 	_pwchErrorMessage := win32.UTF16Ptr(pwchErrorMessage)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLocator)), uintptr(unsafe.Pointer(_pwchErrorMessage)), uintptr(hrErrorCode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 7f85d5f5-47a8-4497-bda5-84ba04819ea6
@@ -727,46 +727,46 @@ func (self *ISAXLexicalHandler) StartDTD(pwchName string, cchName int32, pwchPub
 	_pwchPublicId := win32.UTF16Ptr(pwchPublicId)
 	_pwchSystemId := win32.UTF16Ptr(pwchSystemId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwchName)), uintptr(cchName), uintptr(unsafe.Pointer(_pwchPublicId)), uintptr(cchPublicId), uintptr(unsafe.Pointer(_pwchSystemId)), uintptr(cchSystemId))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndDTD dispatches through ISAXLexicalHandler's vtable slot 4.
 func (self *ISAXLexicalHandler) EndDTD() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StartEntity dispatches through ISAXLexicalHandler's vtable slot 5.
 func (self *ISAXLexicalHandler) StartEntity(pwchName string, cchName int32) error {
 	_pwchName := win32.UTF16Ptr(pwchName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwchName)), uintptr(cchName))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndEntity dispatches through ISAXLexicalHandler's vtable slot 6.
 func (self *ISAXLexicalHandler) EndEntity(pwchName string, cchName int32) error {
 	_pwchName := win32.UTF16Ptr(pwchName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwchName)), uintptr(cchName))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StartCDATA dispatches through ISAXLexicalHandler's vtable slot 7.
 func (self *ISAXLexicalHandler) StartCDATA() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndCDATA dispatches through ISAXLexicalHandler's vtable slot 8.
 func (self *ISAXLexicalHandler) EndCDATA() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Comment dispatches through ISAXLexicalHandler's vtable slot 9.
 func (self *ISAXLexicalHandler) Comment(pwchChars string, cchChars int32) error {
 	_pwchChars := win32.UTF16Ptr(pwchChars)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwchChars)), uintptr(cchChars))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 9b7e472a-0de4-4640-bff3-84d38a051c31
@@ -781,28 +781,28 @@ var IID_ISAXLocator = win32.GUID{Data1: 0x9b7e472a, Data2: 0x0de4, Data3: 0x4640
 func (self *ISAXLocator) GetColumnNumber() (int32, error) {
 	var _pnColumn int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pnColumn)))
-	return _pnColumn, win32.HRESULTError(int32(r1))
+	return _pnColumn, win32.ErrIfFailed(int32(r1))
 }
 
 // GetLineNumber dispatches through ISAXLocator's vtable slot 4.
 func (self *ISAXLocator) GetLineNumber() (int32, error) {
 	var _pnLine int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pnLine)))
-	return _pnLine, win32.HRESULTError(int32(r1))
+	return _pnLine, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPublicId dispatches through ISAXLocator's vtable slot 5.
 func (self *ISAXLocator) GetPublicId() (*uint16, error) {
 	var _ppwchPublicId *uint16
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppwchPublicId)))
-	return _ppwchPublicId, win32.HRESULTError(int32(r1))
+	return _ppwchPublicId, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSystemId dispatches through ISAXLocator's vtable slot 6.
 func (self *ISAXLocator) GetSystemId() (*uint16, error) {
 	var _ppwchSystemId *uint16
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppwchSystemId)))
-	return _ppwchSystemId, win32.HRESULTError(int32(r1))
+	return _ppwchSystemId, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 70409222-ca09-4475-acb8-40312fe8d145
@@ -817,13 +817,13 @@ var IID_ISAXXMLFilter = win32.GUID{Data1: 0x70409222, Data2: 0xca09, Data3: 0x44
 func (self *ISAXXMLFilter) GetParent() (*ISAXXMLReader, error) {
 	var _ppReader *ISAXXMLReader
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppReader)))
-	return _ppReader, win32.HRESULTError(int32(r1))
+	return _ppReader, win32.ErrIfFailed(int32(r1))
 }
 
 // PutParent dispatches through ISAXXMLFilter's vtable slot 22.
 func (self *ISAXXMLFilter) PutParent(pReader *ISAXXMLReader) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pReader)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: a4f96ed0-f829-476e-81c0-cdc7bd2a0802
@@ -839,14 +839,14 @@ func (self *ISAXXMLReader) GetFeature(pwchName string) (foundation.VARIANT_BOOL,
 	_pwchName := win32.UTF16Ptr(pwchName)
 	var _pvfValue foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwchName)), uintptr(unsafe.Pointer(&_pvfValue)))
-	return _pvfValue, win32.HRESULTError(int32(r1))
+	return _pvfValue, win32.ErrIfFailed(int32(r1))
 }
 
 // PutFeature dispatches through ISAXXMLReader's vtable slot 4.
 func (self *ISAXXMLReader) PutFeature(pwchName string, vfValue foundation.VARIANT_BOOL) error {
 	_pwchName := win32.UTF16Ptr(pwchName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwchName)), uintptr(vfValue))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProperty dispatches through ISAXXMLReader's vtable slot 5.
@@ -854,94 +854,94 @@ func (self *ISAXXMLReader) GetProperty(pwchName string) (systemvariant.VARIANT, 
 	_pwchName := win32.UTF16Ptr(pwchName)
 	var _pvarValue systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwchName)), uintptr(unsafe.Pointer(&_pvarValue)))
-	return _pvarValue, win32.HRESULTError(int32(r1))
+	return _pvarValue, win32.ErrIfFailed(int32(r1))
 }
 
 // GetEntityResolver dispatches through ISAXXMLReader's vtable slot 7.
 func (self *ISAXXMLReader) GetEntityResolver() (*ISAXEntityResolver, error) {
 	var _ppResolver *ISAXEntityResolver
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppResolver)))
-	return _ppResolver, win32.HRESULTError(int32(r1))
+	return _ppResolver, win32.ErrIfFailed(int32(r1))
 }
 
 // PutEntityResolver dispatches through ISAXXMLReader's vtable slot 8.
 func (self *ISAXXMLReader) PutEntityResolver(pResolver *ISAXEntityResolver) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResolver)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetContentHandler dispatches through ISAXXMLReader's vtable slot 9.
 func (self *ISAXXMLReader) GetContentHandler() (*ISAXContentHandler, error) {
 	var _ppHandler *ISAXContentHandler
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppHandler)))
-	return _ppHandler, win32.HRESULTError(int32(r1))
+	return _ppHandler, win32.ErrIfFailed(int32(r1))
 }
 
 // PutContentHandler dispatches through ISAXXMLReader's vtable slot 10.
 func (self *ISAXXMLReader) PutContentHandler(pHandler *ISAXContentHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHandler)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDTDHandler dispatches through ISAXXMLReader's vtable slot 11.
 func (self *ISAXXMLReader) GetDTDHandler() (*ISAXDTDHandler, error) {
 	var _ppHandler *ISAXDTDHandler
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppHandler)))
-	return _ppHandler, win32.HRESULTError(int32(r1))
+	return _ppHandler, win32.ErrIfFailed(int32(r1))
 }
 
 // PutDTDHandler dispatches through ISAXXMLReader's vtable slot 12.
 func (self *ISAXXMLReader) PutDTDHandler(pHandler *ISAXDTDHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHandler)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetErrorHandler dispatches through ISAXXMLReader's vtable slot 13.
 func (self *ISAXXMLReader) GetErrorHandler() (*ISAXErrorHandler, error) {
 	var _ppHandler *ISAXErrorHandler
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppHandler)))
-	return _ppHandler, win32.HRESULTError(int32(r1))
+	return _ppHandler, win32.ErrIfFailed(int32(r1))
 }
 
 // PutErrorHandler dispatches through ISAXXMLReader's vtable slot 14.
 func (self *ISAXXMLReader) PutErrorHandler(pHandler *ISAXErrorHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHandler)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBaseURL dispatches through ISAXXMLReader's vtable slot 15.
 func (self *ISAXXMLReader) GetBaseURL() (*uint16, error) {
 	var _ppwchBaseUrl *uint16
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppwchBaseUrl)))
-	return _ppwchBaseUrl, win32.HRESULTError(int32(r1))
+	return _ppwchBaseUrl, win32.ErrIfFailed(int32(r1))
 }
 
 // PutBaseURL dispatches through ISAXXMLReader's vtable slot 16.
 func (self *ISAXXMLReader) PutBaseURL(pwchBaseUrl string) error {
 	_pwchBaseUrl := win32.UTF16Ptr(pwchBaseUrl)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwchBaseUrl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSecureBaseURL dispatches through ISAXXMLReader's vtable slot 17.
 func (self *ISAXXMLReader) GetSecureBaseURL() (*uint16, error) {
 	var _ppwchSecureBaseUrl *uint16
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppwchSecureBaseUrl)))
-	return _ppwchSecureBaseUrl, win32.HRESULTError(int32(r1))
+	return _ppwchSecureBaseUrl, win32.ErrIfFailed(int32(r1))
 }
 
 // PutSecureBaseURL dispatches through ISAXXMLReader's vtable slot 18.
 func (self *ISAXXMLReader) PutSecureBaseURL(pwchSecureBaseUrl string) error {
 	_pwchSecureBaseUrl := win32.UTF16Ptr(pwchSecureBaseUrl)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwchSecureBaseUrl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ParseURL dispatches through ISAXXMLReader's vtable slot 20.
 func (self *ISAXXMLReader) ParseURL(pwchUrl string) error {
 	_pwchUrl := win32.UTF16Ptr(pwchUrl)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwchUrl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 50ea08b4-dd1b-4664-9a50-c2f40f4bd79a
@@ -956,63 +956,63 @@ var IID_ISchema = win32.GUID{Data1: 0x50ea08b4, Data2: 0xdd1b, Data3: 0x4664, Da
 func (self *ISchema) Get_targetNamespace() (foundation.BSTR, error) {
 	var _targetNamespace foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_targetNamespace)))
-	return _targetNamespace, win32.HRESULTError(int32(r1))
+	return _targetNamespace, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_version dispatches through ISchema's vtable slot 15.
 func (self *ISchema) Get_version() (foundation.BSTR, error) {
 	var _version foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_version)))
-	return _version, win32.HRESULTError(int32(r1))
+	return _version, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_types dispatches through ISchema's vtable slot 16.
 func (self *ISchema) Get_types() (*ISchemaItemCollection, error) {
 	var _types *ISchemaItemCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_types)))
-	return _types, win32.HRESULTError(int32(r1))
+	return _types, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_elements dispatches through ISchema's vtable slot 17.
 func (self *ISchema) Get_elements() (*ISchemaItemCollection, error) {
 	var _elements *ISchemaItemCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_elements)))
-	return _elements, win32.HRESULTError(int32(r1))
+	return _elements, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_attributes dispatches through ISchema's vtable slot 18.
 func (self *ISchema) Get_attributes() (*ISchemaItemCollection, error) {
 	var _attributes *ISchemaItemCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_attributes)))
-	return _attributes, win32.HRESULTError(int32(r1))
+	return _attributes, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_attributeGroups dispatches through ISchema's vtable slot 19.
 func (self *ISchema) Get_attributeGroups() (*ISchemaItemCollection, error) {
 	var _attributeGroups *ISchemaItemCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_attributeGroups)))
-	return _attributeGroups, win32.HRESULTError(int32(r1))
+	return _attributeGroups, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_modelGroups dispatches through ISchema's vtable slot 20.
 func (self *ISchema) Get_modelGroups() (*ISchemaItemCollection, error) {
 	var _modelGroups *ISchemaItemCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_modelGroups)))
-	return _modelGroups, win32.HRESULTError(int32(r1))
+	return _modelGroups, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_notations dispatches through ISchema's vtable slot 21.
 func (self *ISchema) Get_notations() (*ISchemaItemCollection, error) {
 	var _notations *ISchemaItemCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_notations)))
-	return _notations, win32.HRESULTError(int32(r1))
+	return _notations, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_schemaLocations dispatches through ISchema's vtable slot 22.
 func (self *ISchema) Get_schemaLocations() (*ISchemaStringCollection, error) {
 	var _schemaLocations *ISchemaStringCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_schemaLocations)))
-	return _schemaLocations, win32.HRESULTError(int32(r1))
+	return _schemaLocations, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 50ea08bc-dd1b-4664-9a50-c2f40f4bd79a
@@ -1027,14 +1027,14 @@ var IID_ISchemaAny = win32.GUID{Data1: 0x50ea08bc, Data2: 0xdd1b, Data3: 0x4664,
 func (self *ISchemaAny) Get_namespaces() (*ISchemaStringCollection, error) {
 	var _namespaces *ISchemaStringCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_namespaces)))
-	return _namespaces, win32.HRESULTError(int32(r1))
+	return _namespaces, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_processContents dispatches through ISchemaAny's vtable slot 17.
 func (self *ISchemaAny) Get_processContents() (SCHEMAPROCESSCONTENTS, error) {
 	var _processContents SCHEMAPROCESSCONTENTS
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_processContents)))
-	return _processContents, win32.HRESULTError(int32(r1))
+	return _processContents, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 50ea08b6-dd1b-4664-9a50-c2f40f4bd79a
@@ -1049,42 +1049,42 @@ var IID_ISchemaAttribute = win32.GUID{Data1: 0x50ea08b6, Data2: 0xdd1b, Data3: 0
 func (self *ISchemaAttribute) Get_type() (*ISchemaType, error) {
 	var _type_ *ISchemaType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_type_)))
-	return _type_, win32.HRESULTError(int32(r1))
+	return _type_, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_scope dispatches through ISchemaAttribute's vtable slot 15.
 func (self *ISchemaAttribute) Get_scope() (*ISchemaComplexType, error) {
 	var _scope *ISchemaComplexType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_scope)))
-	return _scope, win32.HRESULTError(int32(r1))
+	return _scope, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_defaultValue dispatches through ISchemaAttribute's vtable slot 16.
 func (self *ISchemaAttribute) Get_defaultValue() (foundation.BSTR, error) {
 	var _defaultValue foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_defaultValue)))
-	return _defaultValue, win32.HRESULTError(int32(r1))
+	return _defaultValue, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_fixedValue dispatches through ISchemaAttribute's vtable slot 17.
 func (self *ISchemaAttribute) Get_fixedValue() (foundation.BSTR, error) {
 	var _fixedValue foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_fixedValue)))
-	return _fixedValue, win32.HRESULTError(int32(r1))
+	return _fixedValue, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_use dispatches through ISchemaAttribute's vtable slot 18.
 func (self *ISchemaAttribute) Get_use() (SCHEMAUSE, error) {
 	var _use SCHEMAUSE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_use)))
-	return _use, win32.HRESULTError(int32(r1))
+	return _use, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_isReference dispatches through ISchemaAttribute's vtable slot 19.
 func (self *ISchemaAttribute) Get_isReference() (foundation.VARIANT_BOOL, error) {
 	var _reference foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_reference)))
-	return _reference, win32.HRESULTError(int32(r1))
+	return _reference, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 50ea08ba-dd1b-4664-9a50-c2f40f4bd79a
@@ -1099,14 +1099,14 @@ var IID_ISchemaAttributeGroup = win32.GUID{Data1: 0x50ea08ba, Data2: 0xdd1b, Dat
 func (self *ISchemaAttributeGroup) Get_anyAttribute() (*ISchemaAny, error) {
 	var _anyAttribute *ISchemaAny
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_anyAttribute)))
-	return _anyAttribute, win32.HRESULTError(int32(r1))
+	return _anyAttribute, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_attributes dispatches through ISchemaAttributeGroup's vtable slot 15.
 func (self *ISchemaAttributeGroup) Get_attributes() (*ISchemaItemCollection, error) {
 	var _attributes *ISchemaItemCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_attributes)))
-	return _attributes, win32.HRESULTError(int32(r1))
+	return _attributes, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 50ea08b9-dd1b-4664-9a50-c2f40f4bd79a
@@ -1121,42 +1121,42 @@ var IID_ISchemaComplexType = win32.GUID{Data1: 0x50ea08b9, Data2: 0xdd1b, Data3:
 func (self *ISchemaComplexType) Get_isAbstract() (foundation.VARIANT_BOOL, error) {
 	var _abstract foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_abstract)))
-	return _abstract, win32.HRESULTError(int32(r1))
+	return _abstract, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_anyAttribute dispatches through ISchemaComplexType's vtable slot 32.
 func (self *ISchemaComplexType) Get_anyAttribute() (*ISchemaAny, error) {
 	var _anyAttribute *ISchemaAny
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_anyAttribute)))
-	return _anyAttribute, win32.HRESULTError(int32(r1))
+	return _anyAttribute, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_attributes dispatches through ISchemaComplexType's vtable slot 33.
 func (self *ISchemaComplexType) Get_attributes() (*ISchemaItemCollection, error) {
 	var _attributes *ISchemaItemCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_attributes)))
-	return _attributes, win32.HRESULTError(int32(r1))
+	return _attributes, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_contentType dispatches through ISchemaComplexType's vtable slot 34.
 func (self *ISchemaComplexType) Get_contentType() (SCHEMACONTENTTYPE, error) {
 	var _contentType SCHEMACONTENTTYPE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_contentType)))
-	return _contentType, win32.HRESULTError(int32(r1))
+	return _contentType, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_contentModel dispatches through ISchemaComplexType's vtable slot 35.
 func (self *ISchemaComplexType) Get_contentModel() (*ISchemaModelGroup, error) {
 	var _contentModel *ISchemaModelGroup
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_contentModel)))
-	return _contentModel, win32.HRESULTError(int32(r1))
+	return _contentModel, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_prohibitedSubstitutions dispatches through ISchemaComplexType's vtable slot 36.
 func (self *ISchemaComplexType) Get_prohibitedSubstitutions() (SCHEMADERIVATIONMETHOD, error) {
 	var _prohibited SCHEMADERIVATIONMETHOD
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_prohibited)))
-	return _prohibited, win32.HRESULTError(int32(r1))
+	return _prohibited, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 50ea08b7-dd1b-4664-9a50-c2f40f4bd79a
@@ -1171,77 +1171,77 @@ var IID_ISchemaElement = win32.GUID{Data1: 0x50ea08b7, Data2: 0xdd1b, Data3: 0x4
 func (self *ISchemaElement) Get_type() (*ISchemaType, error) {
 	var _type_ *ISchemaType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_type_)))
-	return _type_, win32.HRESULTError(int32(r1))
+	return _type_, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_scope dispatches through ISchemaElement's vtable slot 17.
 func (self *ISchemaElement) Get_scope() (*ISchemaComplexType, error) {
 	var _scope *ISchemaComplexType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_scope)))
-	return _scope, win32.HRESULTError(int32(r1))
+	return _scope, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_defaultValue dispatches through ISchemaElement's vtable slot 18.
 func (self *ISchemaElement) Get_defaultValue() (foundation.BSTR, error) {
 	var _defaultValue foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_defaultValue)))
-	return _defaultValue, win32.HRESULTError(int32(r1))
+	return _defaultValue, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_fixedValue dispatches through ISchemaElement's vtable slot 19.
 func (self *ISchemaElement) Get_fixedValue() (foundation.BSTR, error) {
 	var _fixedValue foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_fixedValue)))
-	return _fixedValue, win32.HRESULTError(int32(r1))
+	return _fixedValue, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_isNillable dispatches through ISchemaElement's vtable slot 20.
 func (self *ISchemaElement) Get_isNillable() (foundation.VARIANT_BOOL, error) {
 	var _nillable foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_nillable)))
-	return _nillable, win32.HRESULTError(int32(r1))
+	return _nillable, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_identityConstraints dispatches through ISchemaElement's vtable slot 21.
 func (self *ISchemaElement) Get_identityConstraints() (*ISchemaItemCollection, error) {
 	var _constraints *ISchemaItemCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_constraints)))
-	return _constraints, win32.HRESULTError(int32(r1))
+	return _constraints, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_substitutionGroup dispatches through ISchemaElement's vtable slot 22.
 func (self *ISchemaElement) Get_substitutionGroup() (*ISchemaElement, error) {
 	var _element *ISchemaElement
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_element)))
-	return _element, win32.HRESULTError(int32(r1))
+	return _element, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_substitutionGroupExclusions dispatches through ISchemaElement's vtable slot 23.
 func (self *ISchemaElement) Get_substitutionGroupExclusions() (SCHEMADERIVATIONMETHOD, error) {
 	var _exclusions SCHEMADERIVATIONMETHOD
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_exclusions)))
-	return _exclusions, win32.HRESULTError(int32(r1))
+	return _exclusions, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_disallowedSubstitutions dispatches through ISchemaElement's vtable slot 24.
 func (self *ISchemaElement) Get_disallowedSubstitutions() (SCHEMADERIVATIONMETHOD, error) {
 	var _disallowed SCHEMADERIVATIONMETHOD
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_disallowed)))
-	return _disallowed, win32.HRESULTError(int32(r1))
+	return _disallowed, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_isAbstract dispatches through ISchemaElement's vtable slot 25.
 func (self *ISchemaElement) Get_isAbstract() (foundation.VARIANT_BOOL, error) {
 	var _abstract foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_abstract)))
-	return _abstract, win32.HRESULTError(int32(r1))
+	return _abstract, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_isReference dispatches through ISchemaElement's vtable slot 26.
 func (self *ISchemaElement) Get_isReference() (foundation.VARIANT_BOOL, error) {
 	var _reference foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_reference)))
-	return _reference, win32.HRESULTError(int32(r1))
+	return _reference, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 50ea08bd-dd1b-4664-9a50-c2f40f4bd79a
@@ -1256,21 +1256,21 @@ var IID_ISchemaIdentityConstraint = win32.GUID{Data1: 0x50ea08bd, Data2: 0xdd1b,
 func (self *ISchemaIdentityConstraint) Get_selector() (foundation.BSTR, error) {
 	var _selector foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_selector)))
-	return _selector, win32.HRESULTError(int32(r1))
+	return _selector, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_fields dispatches through ISchemaIdentityConstraint's vtable slot 15.
 func (self *ISchemaIdentityConstraint) Get_fields() (*ISchemaStringCollection, error) {
 	var _fields *ISchemaStringCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_fields)))
-	return _fields, win32.HRESULTError(int32(r1))
+	return _fields, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_referencedKey dispatches through ISchemaIdentityConstraint's vtable slot 16.
 func (self *ISchemaIdentityConstraint) Get_referencedKey() (*ISchemaIdentityConstraint, error) {
 	var _key *ISchemaIdentityConstraint
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_key)))
-	return _key, win32.HRESULTError(int32(r1))
+	return _key, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 50ea08b3-dd1b-4664-9a50-c2f40f4bd79a
@@ -1285,49 +1285,49 @@ var IID_ISchemaItem = win32.GUID{Data1: 0x50ea08b3, Data2: 0xdd1b, Data3: 0x4664
 func (self *ISchemaItem) Get_name() (foundation.BSTR, error) {
 	var _name foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
-	return _name, win32.HRESULTError(int32(r1))
+	return _name, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_namespaceURI dispatches through ISchemaItem's vtable slot 8.
 func (self *ISchemaItem) Get_namespaceURI() (foundation.BSTR, error) {
 	var _namespaceURI foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_namespaceURI)))
-	return _namespaceURI, win32.HRESULTError(int32(r1))
+	return _namespaceURI, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_schema dispatches through ISchemaItem's vtable slot 9.
 func (self *ISchemaItem) Get_schema() (*ISchema, error) {
 	var _schema *ISchema
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_schema)))
-	return _schema, win32.HRESULTError(int32(r1))
+	return _schema, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_id dispatches through ISchemaItem's vtable slot 10.
 func (self *ISchemaItem) Get_id() (foundation.BSTR, error) {
 	var _id foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_id)))
-	return _id, win32.HRESULTError(int32(r1))
+	return _id, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_itemType dispatches through ISchemaItem's vtable slot 11.
 func (self *ISchemaItem) Get_itemType() (SOMITEMTYPE, error) {
 	var _itemType SOMITEMTYPE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_itemType)))
-	return _itemType, win32.HRESULTError(int32(r1))
+	return _itemType, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_unhandledAttributes dispatches through ISchemaItem's vtable slot 12.
 func (self *ISchemaItem) Get_unhandledAttributes() (*IVBSAXAttributes, error) {
 	var _attributes *IVBSAXAttributes
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_attributes)))
-	return _attributes, win32.HRESULTError(int32(r1))
+	return _attributes, win32.ErrIfFailed(int32(r1))
 }
 
 // WriteAnnotation dispatches through ISchemaItem's vtable slot 13.
 func (self *ISchemaItem) WriteAnnotation(annotationSink *systemcom.IUnknown) (foundation.VARIANT_BOOL, error) {
 	var _isWritten foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(annotationSink)), uintptr(unsafe.Pointer(&_isWritten)))
-	return _isWritten, win32.HRESULTError(int32(r1))
+	return _isWritten, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 50ea08b2-dd1b-4664-9a50-c2f40f4bd79a
@@ -1342,35 +1342,35 @@ var IID_ISchemaItemCollection = win32.GUID{Data1: 0x50ea08b2, Data2: 0xdd1b, Dat
 func (self *ISchemaItemCollection) Get_item(index int32) (*ISchemaItem, error) {
 	var _item *ISchemaItem
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_item)))
-	return _item, win32.HRESULTError(int32(r1))
+	return _item, win32.ErrIfFailed(int32(r1))
 }
 
 // ItemByName dispatches through ISchemaItemCollection's vtable slot 8.
 func (self *ISchemaItemCollection) ItemByName(name foundation.BSTR) (*ISchemaItem, error) {
 	var _item *ISchemaItem
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(&_item)))
-	return _item, win32.HRESULTError(int32(r1))
+	return _item, win32.ErrIfFailed(int32(r1))
 }
 
 // ItemByQName dispatches through ISchemaItemCollection's vtable slot 9.
 func (self *ISchemaItemCollection) ItemByQName(name foundation.BSTR, namespaceURI foundation.BSTR) (*ISchemaItem, error) {
 	var _item *ISchemaItem
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(namespaceURI)), uintptr(unsafe.Pointer(&_item)))
-	return _item, win32.HRESULTError(int32(r1))
+	return _item, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_length dispatches through ISchemaItemCollection's vtable slot 10.
 func (self *ISchemaItemCollection) Get_length() (int32, error) {
 	var _length int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_length)))
-	return _length, win32.HRESULTError(int32(r1))
+	return _length, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__newEnum dispatches through ISchemaItemCollection's vtable slot 11.
 func (self *ISchemaItemCollection) Get__newEnum() (*systemcom.IUnknown, error) {
 	var _ppunk *systemcom.IUnknown
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppunk)))
-	return _ppunk, win32.HRESULTError(int32(r1))
+	return _ppunk, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 50ea08bb-dd1b-4664-9a50-c2f40f4bd79a
@@ -1385,7 +1385,7 @@ var IID_ISchemaModelGroup = win32.GUID{Data1: 0x50ea08bb, Data2: 0xdd1b, Data3: 
 func (self *ISchemaModelGroup) Get_particles() (*ISchemaItemCollection, error) {
 	var _particles *ISchemaItemCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_particles)))
-	return _particles, win32.HRESULTError(int32(r1))
+	return _particles, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 50ea08be-dd1b-4664-9a50-c2f40f4bd79a
@@ -1400,14 +1400,14 @@ var IID_ISchemaNotation = win32.GUID{Data1: 0x50ea08be, Data2: 0xdd1b, Data3: 0x
 func (self *ISchemaNotation) Get_systemIdentifier() (foundation.BSTR, error) {
 	var _uri foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_uri)))
-	return _uri, win32.HRESULTError(int32(r1))
+	return _uri, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_publicIdentifier dispatches through ISchemaNotation's vtable slot 15.
 func (self *ISchemaNotation) Get_publicIdentifier() (foundation.BSTR, error) {
 	var _uri foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_uri)))
-	return _uri, win32.HRESULTError(int32(r1))
+	return _uri, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 50ea08b5-dd1b-4664-9a50-c2f40f4bd79a
@@ -1422,14 +1422,14 @@ var IID_ISchemaParticle = win32.GUID{Data1: 0x50ea08b5, Data2: 0xdd1b, Data3: 0x
 func (self *ISchemaParticle) Get_minOccurs() (systemvariant.VARIANT, error) {
 	var _minOccurs systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_minOccurs)))
-	return _minOccurs, win32.HRESULTError(int32(r1))
+	return _minOccurs, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_maxOccurs dispatches through ISchemaParticle's vtable slot 15.
 func (self *ISchemaParticle) Get_maxOccurs() (systemvariant.VARIANT, error) {
 	var _maxOccurs systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_maxOccurs)))
-	return _maxOccurs, win32.HRESULTError(int32(r1))
+	return _maxOccurs, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 50ea08b1-dd1b-4664-9a50-c2f40f4bd79a
@@ -1444,21 +1444,21 @@ var IID_ISchemaStringCollection = win32.GUID{Data1: 0x50ea08b1, Data2: 0xdd1b, D
 func (self *ISchemaStringCollection) Get_item(index int32) (foundation.BSTR, error) {
 	var _bstr foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_bstr)))
-	return _bstr, win32.HRESULTError(int32(r1))
+	return _bstr, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_length dispatches through ISchemaStringCollection's vtable slot 8.
 func (self *ISchemaStringCollection) Get_length() (int32, error) {
 	var _length int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_length)))
-	return _length, win32.HRESULTError(int32(r1))
+	return _length, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__newEnum dispatches through ISchemaStringCollection's vtable slot 9.
 func (self *ISchemaStringCollection) Get__newEnum() (*systemcom.IUnknown, error) {
 	var _ppunk *systemcom.IUnknown
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppunk)))
-	return _ppunk, win32.HRESULTError(int32(r1))
+	return _ppunk, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 50ea08b8-dd1b-4664-9a50-c2f40f4bd79a
@@ -1473,119 +1473,119 @@ var IID_ISchemaType = win32.GUID{Data1: 0x50ea08b8, Data2: 0xdd1b, Data3: 0x4664
 func (self *ISchemaType) Get_baseTypes() (*ISchemaItemCollection, error) {
 	var _baseTypes *ISchemaItemCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_baseTypes)))
-	return _baseTypes, win32.HRESULTError(int32(r1))
+	return _baseTypes, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_final dispatches through ISchemaType's vtable slot 15.
 func (self *ISchemaType) Get_final() (SCHEMADERIVATIONMETHOD, error) {
 	var _final SCHEMADERIVATIONMETHOD
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_final)))
-	return _final, win32.HRESULTError(int32(r1))
+	return _final, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_variety dispatches through ISchemaType's vtable slot 16.
 func (self *ISchemaType) Get_variety() (SCHEMATYPEVARIETY, error) {
 	var _variety SCHEMATYPEVARIETY
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_variety)))
-	return _variety, win32.HRESULTError(int32(r1))
+	return _variety, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_derivedBy dispatches through ISchemaType's vtable slot 17.
 func (self *ISchemaType) Get_derivedBy() (SCHEMADERIVATIONMETHOD, error) {
 	var _derivedBy SCHEMADERIVATIONMETHOD
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_derivedBy)))
-	return _derivedBy, win32.HRESULTError(int32(r1))
+	return _derivedBy, win32.ErrIfFailed(int32(r1))
 }
 
 // IsValid dispatches through ISchemaType's vtable slot 18.
 func (self *ISchemaType) IsValid(data foundation.BSTR) (foundation.VARIANT_BOOL, error) {
 	var _valid foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(data)), uintptr(unsafe.Pointer(&_valid)))
-	return _valid, win32.HRESULTError(int32(r1))
+	return _valid, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_minExclusive dispatches through ISchemaType's vtable slot 19.
 func (self *ISchemaType) Get_minExclusive() (foundation.BSTR, error) {
 	var _minExclusive foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_minExclusive)))
-	return _minExclusive, win32.HRESULTError(int32(r1))
+	return _minExclusive, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_minInclusive dispatches through ISchemaType's vtable slot 20.
 func (self *ISchemaType) Get_minInclusive() (foundation.BSTR, error) {
 	var _minInclusive foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_minInclusive)))
-	return _minInclusive, win32.HRESULTError(int32(r1))
+	return _minInclusive, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_maxExclusive dispatches through ISchemaType's vtable slot 21.
 func (self *ISchemaType) Get_maxExclusive() (foundation.BSTR, error) {
 	var _maxExclusive foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_maxExclusive)))
-	return _maxExclusive, win32.HRESULTError(int32(r1))
+	return _maxExclusive, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_maxInclusive dispatches through ISchemaType's vtable slot 22.
 func (self *ISchemaType) Get_maxInclusive() (foundation.BSTR, error) {
 	var _maxInclusive foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_maxInclusive)))
-	return _maxInclusive, win32.HRESULTError(int32(r1))
+	return _maxInclusive, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_totalDigits dispatches through ISchemaType's vtable slot 23.
 func (self *ISchemaType) Get_totalDigits() (systemvariant.VARIANT, error) {
 	var _totalDigits systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_totalDigits)))
-	return _totalDigits, win32.HRESULTError(int32(r1))
+	return _totalDigits, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_fractionDigits dispatches through ISchemaType's vtable slot 24.
 func (self *ISchemaType) Get_fractionDigits() (systemvariant.VARIANT, error) {
 	var _fractionDigits systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_fractionDigits)))
-	return _fractionDigits, win32.HRESULTError(int32(r1))
+	return _fractionDigits, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_length dispatches through ISchemaType's vtable slot 25.
 func (self *ISchemaType) Get_length() (systemvariant.VARIANT, error) {
 	var _length systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_length)))
-	return _length, win32.HRESULTError(int32(r1))
+	return _length, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_minLength dispatches through ISchemaType's vtable slot 26.
 func (self *ISchemaType) Get_minLength() (systemvariant.VARIANT, error) {
 	var _minLength systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_minLength)))
-	return _minLength, win32.HRESULTError(int32(r1))
+	return _minLength, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_maxLength dispatches through ISchemaType's vtable slot 27.
 func (self *ISchemaType) Get_maxLength() (systemvariant.VARIANT, error) {
 	var _maxLength systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_maxLength)))
-	return _maxLength, win32.HRESULTError(int32(r1))
+	return _maxLength, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_enumeration dispatches through ISchemaType's vtable slot 28.
 func (self *ISchemaType) Get_enumeration() (*ISchemaStringCollection, error) {
 	var _enumeration *ISchemaStringCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_enumeration)))
-	return _enumeration, win32.HRESULTError(int32(r1))
+	return _enumeration, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_whitespace dispatches through ISchemaType's vtable slot 29.
 func (self *ISchemaType) Get_whitespace() (SCHEMAWHITESPACE, error) {
 	var _whitespace SCHEMAWHITESPACE
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_whitespace)))
-	return _whitespace, win32.HRESULTError(int32(r1))
+	return _whitespace, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_patterns dispatches through ISchemaType's vtable slot 30.
 func (self *ISchemaType) Get_patterns() (*ISchemaStringCollection, error) {
 	var _patterns *ISchemaStringCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_patterns)))
-	return _patterns, win32.HRESULTError(int32(r1))
+	return _patterns, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 2e9196bf-13ba-4dd4-91ca-6c571f281495
@@ -1599,14 +1599,14 @@ var IID_IServerXMLHTTPRequest = win32.GUID{Data1: 0x2e9196bf, Data2: 0x13ba, Dat
 // SetTimeouts dispatches through IServerXMLHTTPRequest's vtable slot 21.
 func (self *IServerXMLHTTPRequest) SetTimeouts(resolveTimeout int32, connectTimeout int32, sendTimeout int32, receiveTimeout int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(resolveTimeout), uintptr(connectTimeout), uintptr(sendTimeout), uintptr(receiveTimeout))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetOption dispatches through IServerXMLHTTPRequest's vtable slot 23.
 func (self *IServerXMLHTTPRequest) GetOption(option SERVERXMLHTTP_OPTION) (systemvariant.VARIANT, error) {
 	var _value systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(option), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 2e01311b-c322-4b0a-bd77-b90cfdc8dce7
@@ -1620,7 +1620,7 @@ var IID_IServerXMLHTTPRequest2 = win32.GUID{Data1: 0x2e01311b, Data2: 0xc322, Da
 // SetProxyCredentials dispatches through IServerXMLHTTPRequest2's vtable slot 26.
 func (self *IServerXMLHTTPRequest2) SetProxyCredentials(bstrUserName foundation.BSTR, bstrPassword foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUserName)), uintptr(unsafe.Pointer(bstrPassword)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: c90352f5-643c-4fbc-bb23-e996eb2d51fd
@@ -1634,72 +1634,72 @@ var IID_IVBMXNamespaceManager = win32.GUID{Data1: 0xc90352f5, Data2: 0x643c, Dat
 // Put_allowOverride dispatches through IVBMXNamespaceManager's vtable slot 7.
 func (self *IVBMXNamespaceManager) Put_allowOverride(fOverride foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(fOverride))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_allowOverride dispatches through IVBMXNamespaceManager's vtable slot 8.
 func (self *IVBMXNamespaceManager) Get_allowOverride() (foundation.VARIANT_BOOL, error) {
 	var _fOverride foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_fOverride)))
-	return _fOverride, win32.HRESULTError(int32(r1))
+	return _fOverride, win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IVBMXNamespaceManager's vtable slot 9.
 func (self *IVBMXNamespaceManager) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PushContext dispatches through IVBMXNamespaceManager's vtable slot 10.
 func (self *IVBMXNamespaceManager) PushContext() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PushNodeContext dispatches through IVBMXNamespaceManager's vtable slot 11.
 func (self *IVBMXNamespaceManager) PushNodeContext(contextNode *IXMLDOMNode, fDeep foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(contextNode)), uintptr(fDeep))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PopContext dispatches through IVBMXNamespaceManager's vtable slot 12.
 func (self *IVBMXNamespaceManager) PopContext() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeclarePrefix dispatches through IVBMXNamespaceManager's vtable slot 13.
 func (self *IVBMXNamespaceManager) DeclarePrefix(prefix foundation.BSTR, namespaceURI foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prefix)), uintptr(unsafe.Pointer(namespaceURI)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeclaredPrefixes dispatches through IVBMXNamespaceManager's vtable slot 14.
 func (self *IVBMXNamespaceManager) GetDeclaredPrefixes() (*IMXNamespacePrefixes, error) {
 	var _prefixes *IMXNamespacePrefixes
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_prefixes)))
-	return _prefixes, win32.HRESULTError(int32(r1))
+	return _prefixes, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPrefixes dispatches through IVBMXNamespaceManager's vtable slot 15.
 func (self *IVBMXNamespaceManager) GetPrefixes(namespaceURI foundation.BSTR) (*IMXNamespacePrefixes, error) {
 	var _prefixes *IMXNamespacePrefixes
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(namespaceURI)), uintptr(unsafe.Pointer(&_prefixes)))
-	return _prefixes, win32.HRESULTError(int32(r1))
+	return _prefixes, win32.ErrIfFailed(int32(r1))
 }
 
 // GetURI dispatches through IVBMXNamespaceManager's vtable slot 16.
 func (self *IVBMXNamespaceManager) GetURI(prefix foundation.BSTR) (systemvariant.VARIANT, error) {
 	var _uri systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prefix)), uintptr(unsafe.Pointer(&_uri)))
-	return _uri, win32.HRESULTError(int32(r1))
+	return _uri, win32.ErrIfFailed(int32(r1))
 }
 
 // GetURIFromNode dispatches through IVBMXNamespaceManager's vtable slot 17.
 func (self *IVBMXNamespaceManager) GetURIFromNode(strPrefix foundation.BSTR, contextNode *IXMLDOMNode) (systemvariant.VARIANT, error) {
 	var _uri systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strPrefix)), uintptr(unsafe.Pointer(contextNode)), uintptr(unsafe.Pointer(&_uri)))
-	return _uri, win32.HRESULTError(int32(r1))
+	return _uri, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 10dc0586-132b-4cac-8bb3-db00ac8b7ee0
@@ -1714,84 +1714,84 @@ var IID_IVBSAXAttributes = win32.GUID{Data1: 0x10dc0586, Data2: 0x132b, Data3: 0
 func (self *IVBSAXAttributes) Get_length() (int32, error) {
 	var _nLength int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_nLength)))
-	return _nLength, win32.HRESULTError(int32(r1))
+	return _nLength, win32.ErrIfFailed(int32(r1))
 }
 
 // GetURI dispatches through IVBSAXAttributes's vtable slot 8.
 func (self *IVBSAXAttributes) GetURI(nIndex int32) (foundation.BSTR, error) {
 	var _strURI foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(nIndex), uintptr(unsafe.Pointer(&_strURI)))
-	return _strURI, win32.HRESULTError(int32(r1))
+	return _strURI, win32.ErrIfFailed(int32(r1))
 }
 
 // GetLocalName dispatches through IVBSAXAttributes's vtable slot 9.
 func (self *IVBSAXAttributes) GetLocalName(nIndex int32) (foundation.BSTR, error) {
 	var _strLocalName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(nIndex), uintptr(unsafe.Pointer(&_strLocalName)))
-	return _strLocalName, win32.HRESULTError(int32(r1))
+	return _strLocalName, win32.ErrIfFailed(int32(r1))
 }
 
 // GetQName dispatches through IVBSAXAttributes's vtable slot 10.
 func (self *IVBSAXAttributes) GetQName(nIndex int32) (foundation.BSTR, error) {
 	var _strQName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(nIndex), uintptr(unsafe.Pointer(&_strQName)))
-	return _strQName, win32.HRESULTError(int32(r1))
+	return _strQName, win32.ErrIfFailed(int32(r1))
 }
 
 // GetIndexFromName dispatches through IVBSAXAttributes's vtable slot 11.
 func (self *IVBSAXAttributes) GetIndexFromName(strURI foundation.BSTR, strLocalName foundation.BSTR) (int32, error) {
 	var _nIndex int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strURI)), uintptr(unsafe.Pointer(strLocalName)), uintptr(unsafe.Pointer(&_nIndex)))
-	return _nIndex, win32.HRESULTError(int32(r1))
+	return _nIndex, win32.ErrIfFailed(int32(r1))
 }
 
 // GetIndexFromQName dispatches through IVBSAXAttributes's vtable slot 12.
 func (self *IVBSAXAttributes) GetIndexFromQName(strQName foundation.BSTR) (int32, error) {
 	var _nIndex int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strQName)), uintptr(unsafe.Pointer(&_nIndex)))
-	return _nIndex, win32.HRESULTError(int32(r1))
+	return _nIndex, win32.ErrIfFailed(int32(r1))
 }
 
 // GetType dispatches through IVBSAXAttributes's vtable slot 13.
 func (self *IVBSAXAttributes) GetType(nIndex int32) (foundation.BSTR, error) {
 	var _strType foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(nIndex), uintptr(unsafe.Pointer(&_strType)))
-	return _strType, win32.HRESULTError(int32(r1))
+	return _strType, win32.ErrIfFailed(int32(r1))
 }
 
 // GetTypeFromName dispatches through IVBSAXAttributes's vtable slot 14.
 func (self *IVBSAXAttributes) GetTypeFromName(strURI foundation.BSTR, strLocalName foundation.BSTR) (foundation.BSTR, error) {
 	var _strType foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strURI)), uintptr(unsafe.Pointer(strLocalName)), uintptr(unsafe.Pointer(&_strType)))
-	return _strType, win32.HRESULTError(int32(r1))
+	return _strType, win32.ErrIfFailed(int32(r1))
 }
 
 // GetTypeFromQName dispatches through IVBSAXAttributes's vtable slot 15.
 func (self *IVBSAXAttributes) GetTypeFromQName(strQName foundation.BSTR) (foundation.BSTR, error) {
 	var _strType foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strQName)), uintptr(unsafe.Pointer(&_strType)))
-	return _strType, win32.HRESULTError(int32(r1))
+	return _strType, win32.ErrIfFailed(int32(r1))
 }
 
 // GetValue dispatches through IVBSAXAttributes's vtable slot 16.
 func (self *IVBSAXAttributes) GetValue(nIndex int32) (foundation.BSTR, error) {
 	var _strValue foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(nIndex), uintptr(unsafe.Pointer(&_strValue)))
-	return _strValue, win32.HRESULTError(int32(r1))
+	return _strValue, win32.ErrIfFailed(int32(r1))
 }
 
 // GetValueFromName dispatches through IVBSAXAttributes's vtable slot 17.
 func (self *IVBSAXAttributes) GetValueFromName(strURI foundation.BSTR, strLocalName foundation.BSTR) (foundation.BSTR, error) {
 	var _strValue foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strURI)), uintptr(unsafe.Pointer(strLocalName)), uintptr(unsafe.Pointer(&_strValue)))
-	return _strValue, win32.HRESULTError(int32(r1))
+	return _strValue, win32.ErrIfFailed(int32(r1))
 }
 
 // GetValueFromQName dispatches through IVBSAXAttributes's vtable slot 18.
 func (self *IVBSAXAttributes) GetValueFromQName(strQName foundation.BSTR) (foundation.BSTR, error) {
 	var _strValue foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strQName)), uintptr(unsafe.Pointer(&_strValue)))
-	return _strValue, win32.HRESULTError(int32(r1))
+	return _strValue, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 2ed7290a-4dd5-4b46-bb26-4e4155e77faa
@@ -1805,67 +1805,67 @@ var IID_IVBSAXContentHandler = win32.GUID{Data1: 0x2ed7290a, Data2: 0x4dd5, Data
 // Putref_documentLocator dispatches through IVBSAXContentHandler's vtable slot 7.
 func (self *IVBSAXContentHandler) Putref_documentLocator(oLocator *IVBSAXLocator) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(oLocator)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StartDocument dispatches through IVBSAXContentHandler's vtable slot 8.
 func (self *IVBSAXContentHandler) StartDocument() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndDocument dispatches through IVBSAXContentHandler's vtable slot 9.
 func (self *IVBSAXContentHandler) EndDocument() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StartPrefixMapping dispatches through IVBSAXContentHandler's vtable slot 10.
 func (self *IVBSAXContentHandler) StartPrefixMapping(strPrefix *foundation.BSTR, strURI *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strPrefix)), uintptr(unsafe.Pointer(strURI)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndPrefixMapping dispatches through IVBSAXContentHandler's vtable slot 11.
 func (self *IVBSAXContentHandler) EndPrefixMapping(strPrefix *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strPrefix)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StartElement dispatches through IVBSAXContentHandler's vtable slot 12.
 func (self *IVBSAXContentHandler) StartElement(strNamespaceURI *foundation.BSTR, strLocalName *foundation.BSTR, strQName *foundation.BSTR, oAttributes *IVBSAXAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strNamespaceURI)), uintptr(unsafe.Pointer(strLocalName)), uintptr(unsafe.Pointer(strQName)), uintptr(unsafe.Pointer(oAttributes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndElement dispatches through IVBSAXContentHandler's vtable slot 13.
 func (self *IVBSAXContentHandler) EndElement(strNamespaceURI *foundation.BSTR, strLocalName *foundation.BSTR, strQName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strNamespaceURI)), uintptr(unsafe.Pointer(strLocalName)), uintptr(unsafe.Pointer(strQName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Characters dispatches through IVBSAXContentHandler's vtable slot 14.
 func (self *IVBSAXContentHandler) Characters(strChars *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strChars)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IgnorableWhitespace dispatches through IVBSAXContentHandler's vtable slot 15.
 func (self *IVBSAXContentHandler) IgnorableWhitespace(strChars *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strChars)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ProcessingInstruction dispatches through IVBSAXContentHandler's vtable slot 16.
 func (self *IVBSAXContentHandler) ProcessingInstruction(strTarget *foundation.BSTR, strData *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strTarget)), uintptr(unsafe.Pointer(strData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SkippedEntity dispatches through IVBSAXContentHandler's vtable slot 17.
 func (self *IVBSAXContentHandler) SkippedEntity(strName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 24fb3297-302d-4620-ba39-3a732d850558
@@ -1879,13 +1879,13 @@ var IID_IVBSAXDTDHandler = win32.GUID{Data1: 0x24fb3297, Data2: 0x302d, Data3: 0
 // NotationDecl dispatches through IVBSAXDTDHandler's vtable slot 7.
 func (self *IVBSAXDTDHandler) NotationDecl(strName *foundation.BSTR, strPublicId *foundation.BSTR, strSystemId *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strName)), uintptr(unsafe.Pointer(strPublicId)), uintptr(unsafe.Pointer(strSystemId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnparsedEntityDecl dispatches through IVBSAXDTDHandler's vtable slot 8.
 func (self *IVBSAXDTDHandler) UnparsedEntityDecl(strName *foundation.BSTR, strPublicId *foundation.BSTR, strSystemId *foundation.BSTR, strNotationName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strName)), uintptr(unsafe.Pointer(strPublicId)), uintptr(unsafe.Pointer(strSystemId)), uintptr(unsafe.Pointer(strNotationName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: e8917260-7579-4be1-b5dd-7afbfa6f077b
@@ -1899,25 +1899,25 @@ var IID_IVBSAXDeclHandler = win32.GUID{Data1: 0xe8917260, Data2: 0x7579, Data3: 
 // ElementDecl dispatches through IVBSAXDeclHandler's vtable slot 7.
 func (self *IVBSAXDeclHandler) ElementDecl(strName *foundation.BSTR, strModel *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strName)), uintptr(unsafe.Pointer(strModel)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AttributeDecl dispatches through IVBSAXDeclHandler's vtable slot 8.
 func (self *IVBSAXDeclHandler) AttributeDecl(strElementName *foundation.BSTR, strAttributeName *foundation.BSTR, strType *foundation.BSTR, strValueDefault *foundation.BSTR, strValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strElementName)), uintptr(unsafe.Pointer(strAttributeName)), uintptr(unsafe.Pointer(strType)), uintptr(unsafe.Pointer(strValueDefault)), uintptr(unsafe.Pointer(strValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InternalEntityDecl dispatches through IVBSAXDeclHandler's vtable slot 9.
 func (self *IVBSAXDeclHandler) InternalEntityDecl(strName *foundation.BSTR, strValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strName)), uintptr(unsafe.Pointer(strValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExternalEntityDecl dispatches through IVBSAXDeclHandler's vtable slot 10.
 func (self *IVBSAXDeclHandler) ExternalEntityDecl(strName *foundation.BSTR, strPublicId *foundation.BSTR, strSystemId *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strName)), uintptr(unsafe.Pointer(strPublicId)), uintptr(unsafe.Pointer(strSystemId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 0c05d096-f45b-4aca-ad1a-aa0bc25518dc
@@ -1932,7 +1932,7 @@ var IID_IVBSAXEntityResolver = win32.GUID{Data1: 0x0c05d096, Data2: 0xf45b, Data
 func (self *IVBSAXEntityResolver) ResolveEntity(strPublicId *foundation.BSTR, strSystemId *foundation.BSTR) (systemvariant.VARIANT, error) {
 	var _varInput systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strPublicId)), uintptr(unsafe.Pointer(strSystemId)), uintptr(unsafe.Pointer(&_varInput)))
-	return _varInput, win32.HRESULTError(int32(r1))
+	return _varInput, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: d963d3fe-173c-4862-9095-b92f66995f52
@@ -1946,19 +1946,19 @@ var IID_IVBSAXErrorHandler = win32.GUID{Data1: 0xd963d3fe, Data2: 0x173c, Data3:
 // Error dispatches through IVBSAXErrorHandler's vtable slot 7.
 func (self *IVBSAXErrorHandler) Error(oLocator *IVBSAXLocator, strErrorMessage *foundation.BSTR, nErrorCode int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(oLocator)), uintptr(unsafe.Pointer(strErrorMessage)), uintptr(nErrorCode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FatalError dispatches through IVBSAXErrorHandler's vtable slot 8.
 func (self *IVBSAXErrorHandler) FatalError(oLocator *IVBSAXLocator, strErrorMessage *foundation.BSTR, nErrorCode int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(oLocator)), uintptr(unsafe.Pointer(strErrorMessage)), uintptr(nErrorCode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IgnorableWarning dispatches through IVBSAXErrorHandler's vtable slot 9.
 func (self *IVBSAXErrorHandler) IgnorableWarning(oLocator *IVBSAXLocator, strErrorMessage *foundation.BSTR, nErrorCode int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(oLocator)), uintptr(unsafe.Pointer(strErrorMessage)), uintptr(nErrorCode))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 032aac35-8c0e-4d9d-979f-e3b702935576
@@ -1972,43 +1972,43 @@ var IID_IVBSAXLexicalHandler = win32.GUID{Data1: 0x032aac35, Data2: 0x8c0e, Data
 // StartDTD dispatches through IVBSAXLexicalHandler's vtable slot 7.
 func (self *IVBSAXLexicalHandler) StartDTD(strName *foundation.BSTR, strPublicId *foundation.BSTR, strSystemId *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strName)), uintptr(unsafe.Pointer(strPublicId)), uintptr(unsafe.Pointer(strSystemId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndDTD dispatches through IVBSAXLexicalHandler's vtable slot 8.
 func (self *IVBSAXLexicalHandler) EndDTD() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StartEntity dispatches through IVBSAXLexicalHandler's vtable slot 9.
 func (self *IVBSAXLexicalHandler) StartEntity(strName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndEntity dispatches through IVBSAXLexicalHandler's vtable slot 10.
 func (self *IVBSAXLexicalHandler) EndEntity(strName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // StartCDATA dispatches through IVBSAXLexicalHandler's vtable slot 11.
 func (self *IVBSAXLexicalHandler) StartCDATA() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndCDATA dispatches through IVBSAXLexicalHandler's vtable slot 12.
 func (self *IVBSAXLexicalHandler) EndCDATA() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Comment dispatches through IVBSAXLexicalHandler's vtable slot 13.
 func (self *IVBSAXLexicalHandler) Comment(strChars *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strChars)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 796e7ac5-5aa2-4eff-acad-3faaf01a3288
@@ -2023,28 +2023,28 @@ var IID_IVBSAXLocator = win32.GUID{Data1: 0x796e7ac5, Data2: 0x5aa2, Data3: 0x4e
 func (self *IVBSAXLocator) Get_columnNumber() (int32, error) {
 	var _nColumn int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_nColumn)))
-	return _nColumn, win32.HRESULTError(int32(r1))
+	return _nColumn, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_lineNumber dispatches through IVBSAXLocator's vtable slot 8.
 func (self *IVBSAXLocator) Get_lineNumber() (int32, error) {
 	var _nLine int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_nLine)))
-	return _nLine, win32.HRESULTError(int32(r1))
+	return _nLine, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_publicId dispatches through IVBSAXLocator's vtable slot 9.
 func (self *IVBSAXLocator) Get_publicId() (foundation.BSTR, error) {
 	var _strPublicId foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_strPublicId)))
-	return _strPublicId, win32.HRESULTError(int32(r1))
+	return _strPublicId, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_systemId dispatches through IVBSAXLocator's vtable slot 10.
 func (self *IVBSAXLocator) Get_systemId() (foundation.BSTR, error) {
 	var _strSystemId foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_strSystemId)))
-	return _strSystemId, win32.HRESULTError(int32(r1))
+	return _strSystemId, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 1299eb1b-5b88-433e-82de-82ca75ad4e04
@@ -2059,13 +2059,13 @@ var IID_IVBSAXXMLFilter = win32.GUID{Data1: 0x1299eb1b, Data2: 0x5b88, Data3: 0x
 func (self *IVBSAXXMLFilter) Get_parent() (*IVBSAXXMLReader, error) {
 	var _oReader *IVBSAXXMLReader
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_oReader)))
-	return _oReader, win32.HRESULTError(int32(r1))
+	return _oReader, win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_parent dispatches through IVBSAXXMLFilter's vtable slot 8.
 func (self *IVBSAXXMLFilter) Putref_parent(oReader *IVBSAXXMLReader) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(oReader)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 8c033caa-6cd6-4f73-b728-4531af74945f
@@ -2080,104 +2080,104 @@ var IID_IVBSAXXMLReader = win32.GUID{Data1: 0x8c033caa, Data2: 0x6cd6, Data3: 0x
 func (self *IVBSAXXMLReader) GetFeature(strName foundation.BSTR) (foundation.VARIANT_BOOL, error) {
 	var _fValue foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strName)), uintptr(unsafe.Pointer(&_fValue)))
-	return _fValue, win32.HRESULTError(int32(r1))
+	return _fValue, win32.ErrIfFailed(int32(r1))
 }
 
 // PutFeature dispatches through IVBSAXXMLReader's vtable slot 8.
 func (self *IVBSAXXMLReader) PutFeature(strName foundation.BSTR, fValue foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strName)), uintptr(fValue))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProperty dispatches through IVBSAXXMLReader's vtable slot 9.
 func (self *IVBSAXXMLReader) GetProperty(strName foundation.BSTR) (systemvariant.VARIANT, error) {
 	var _varValue systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strName)), uintptr(unsafe.Pointer(&_varValue)))
-	return _varValue, win32.HRESULTError(int32(r1))
+	return _varValue, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_entityResolver dispatches through IVBSAXXMLReader's vtable slot 11.
 func (self *IVBSAXXMLReader) Get_entityResolver() (*IVBSAXEntityResolver, error) {
 	var _oResolver *IVBSAXEntityResolver
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_oResolver)))
-	return _oResolver, win32.HRESULTError(int32(r1))
+	return _oResolver, win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_entityResolver dispatches through IVBSAXXMLReader's vtable slot 12.
 func (self *IVBSAXXMLReader) Putref_entityResolver(oResolver *IVBSAXEntityResolver) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(oResolver)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_contentHandler dispatches through IVBSAXXMLReader's vtable slot 13.
 func (self *IVBSAXXMLReader) Get_contentHandler() (*IVBSAXContentHandler, error) {
 	var _oHandler *IVBSAXContentHandler
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_oHandler)))
-	return _oHandler, win32.HRESULTError(int32(r1))
+	return _oHandler, win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_contentHandler dispatches through IVBSAXXMLReader's vtable slot 14.
 func (self *IVBSAXXMLReader) Putref_contentHandler(oHandler *IVBSAXContentHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(oHandler)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_dtdHandler dispatches through IVBSAXXMLReader's vtable slot 15.
 func (self *IVBSAXXMLReader) Get_dtdHandler() (*IVBSAXDTDHandler, error) {
 	var _oHandler *IVBSAXDTDHandler
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_oHandler)))
-	return _oHandler, win32.HRESULTError(int32(r1))
+	return _oHandler, win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_dtdHandler dispatches through IVBSAXXMLReader's vtable slot 16.
 func (self *IVBSAXXMLReader) Putref_dtdHandler(oHandler *IVBSAXDTDHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(oHandler)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_errorHandler dispatches through IVBSAXXMLReader's vtable slot 17.
 func (self *IVBSAXXMLReader) Get_errorHandler() (*IVBSAXErrorHandler, error) {
 	var _oHandler *IVBSAXErrorHandler
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_oHandler)))
-	return _oHandler, win32.HRESULTError(int32(r1))
+	return _oHandler, win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_errorHandler dispatches through IVBSAXXMLReader's vtable slot 18.
 func (self *IVBSAXXMLReader) Putref_errorHandler(oHandler *IVBSAXErrorHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(oHandler)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_baseURL dispatches through IVBSAXXMLReader's vtable slot 19.
 func (self *IVBSAXXMLReader) Get_baseURL() (foundation.BSTR, error) {
 	var _strBaseURL foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_strBaseURL)))
-	return _strBaseURL, win32.HRESULTError(int32(r1))
+	return _strBaseURL, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_baseURL dispatches through IVBSAXXMLReader's vtable slot 20.
 func (self *IVBSAXXMLReader) Put_baseURL(strBaseURL foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strBaseURL)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_secureBaseURL dispatches through IVBSAXXMLReader's vtable slot 21.
 func (self *IVBSAXXMLReader) Get_secureBaseURL() (foundation.BSTR, error) {
 	var _strSecureBaseURL foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_strSecureBaseURL)))
-	return _strSecureBaseURL, win32.HRESULTError(int32(r1))
+	return _strSecureBaseURL, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_secureBaseURL dispatches through IVBSAXXMLReader's vtable slot 22.
 func (self *IVBSAXXMLReader) Put_secureBaseURL(strSecureBaseURL foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strSecureBaseURL)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ParseURL dispatches through IVBSAXXMLReader's vtable slot 24.
 func (self *IVBSAXXMLReader) ParseURL(strURL foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strURL)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: d4d4a0fc-3b73-11d1-b2b4-00c04fb92596
@@ -2192,14 +2192,14 @@ var IID_IXMLAttribute = win32.GUID{Data1: 0xd4d4a0fc, Data2: 0x3b73, Data3: 0x11
 func (self *IXMLAttribute) Get_name() (foundation.BSTR, error) {
 	var _n foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_n)))
-	return _n, win32.HRESULTError(int32(r1))
+	return _n, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_value dispatches through IXMLAttribute's vtable slot 8.
 func (self *IXMLAttribute) Get_value() (foundation.BSTR, error) {
 	var _v foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_v)))
-	return _v, win32.HRESULTError(int32(r1))
+	return _v, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 2933bf85-7b36-11d2-b20e-00c04f983e60
@@ -2214,14 +2214,14 @@ var IID_IXMLDOMAttribute = win32.GUID{Data1: 0x2933bf85, Data2: 0x7b36, Data3: 0
 func (self *IXMLDOMAttribute) Get_name() (foundation.BSTR, error) {
 	var _attributeName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_attributeName)))
-	return _attributeName, win32.HRESULTError(int32(r1))
+	return _attributeName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_value dispatches through IXMLDOMAttribute's vtable slot 44.
 func (self *IXMLDOMAttribute) Get_value() (systemvariant.VARIANT, error) {
 	var _attributeValue systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_attributeValue)))
-	return _attributeValue, win32.HRESULTError(int32(r1))
+	return _attributeValue, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 2933bf8a-7b36-11d2-b20e-00c04f983e60
@@ -2244,51 +2244,51 @@ var IID_IXMLDOMCharacterData = win32.GUID{Data1: 0x2933bf84, Data2: 0x7b36, Data
 func (self *IXMLDOMCharacterData) Get_data() (foundation.BSTR, error) {
 	var _data foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_data)))
-	return _data, win32.HRESULTError(int32(r1))
+	return _data, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_data dispatches through IXMLDOMCharacterData's vtable slot 44.
 func (self *IXMLDOMCharacterData) Put_data(data foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(data)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_length dispatches through IXMLDOMCharacterData's vtable slot 45.
 func (self *IXMLDOMCharacterData) Get_length() (int32, error) {
 	var _dataLength int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_dataLength)))
-	return _dataLength, win32.HRESULTError(int32(r1))
+	return _dataLength, win32.ErrIfFailed(int32(r1))
 }
 
 // SubstringData dispatches through IXMLDOMCharacterData's vtable slot 46.
 func (self *IXMLDOMCharacterData) SubstringData(offset int32, count int32) (foundation.BSTR, error) {
 	var _data foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(offset), uintptr(count), uintptr(unsafe.Pointer(&_data)))
-	return _data, win32.HRESULTError(int32(r1))
+	return _data, win32.ErrIfFailed(int32(r1))
 }
 
 // AppendData dispatches through IXMLDOMCharacterData's vtable slot 47.
 func (self *IXMLDOMCharacterData) AppendData(data foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(data)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InsertData dispatches through IXMLDOMCharacterData's vtable slot 48.
 func (self *IXMLDOMCharacterData) InsertData(offset int32, data foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(offset), uintptr(unsafe.Pointer(data)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteData dispatches through IXMLDOMCharacterData's vtable slot 49.
 func (self *IXMLDOMCharacterData) DeleteData(offset int32, count int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(offset), uintptr(count))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReplaceData dispatches through IXMLDOMCharacterData's vtable slot 50.
 func (self *IXMLDOMCharacterData) ReplaceData(offset int32, count int32, data foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(offset), uintptr(count), uintptr(unsafe.Pointer(data)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 2933bf88-7b36-11d2-b20e-00c04f983e60
@@ -2311,183 +2311,183 @@ var IID_IXMLDOMDocument = win32.GUID{Data1: 0x2933bf81, Data2: 0x7b36, Data3: 0x
 func (self *IXMLDOMDocument) Get_doctype() (*IXMLDOMDocumentType, error) {
 	var _documentType *IXMLDOMDocumentType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_documentType)))
-	return _documentType, win32.HRESULTError(int32(r1))
+	return _documentType, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_implementation dispatches through IXMLDOMDocument's vtable slot 44.
 func (self *IXMLDOMDocument) Get_implementation() (*IXMLDOMImplementation, error) {
 	var _impl *IXMLDOMImplementation
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_impl)))
-	return _impl, win32.HRESULTError(int32(r1))
+	return _impl, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_documentElement dispatches through IXMLDOMDocument's vtable slot 45.
 func (self *IXMLDOMDocument) Get_documentElement() (*IXMLDOMElement, error) {
 	var _DOMElement *IXMLDOMElement
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_DOMElement)))
-	return _DOMElement, win32.HRESULTError(int32(r1))
+	return _DOMElement, win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_documentElement dispatches through IXMLDOMDocument's vtable slot 46.
 func (self *IXMLDOMDocument) Putref_documentElement(DOMElement *IXMLDOMElement) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(DOMElement)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateElement dispatches through IXMLDOMDocument's vtable slot 47.
 func (self *IXMLDOMDocument) CreateElement(tagName foundation.BSTR) (*IXMLDOMElement, error) {
 	var _element *IXMLDOMElement
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(tagName)), uintptr(unsafe.Pointer(&_element)))
-	return _element, win32.HRESULTError(int32(r1))
+	return _element, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateDocumentFragment dispatches through IXMLDOMDocument's vtable slot 48.
 func (self *IXMLDOMDocument) CreateDocumentFragment() (*IXMLDOMDocumentFragment, error) {
 	var _docFrag *IXMLDOMDocumentFragment
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_docFrag)))
-	return _docFrag, win32.HRESULTError(int32(r1))
+	return _docFrag, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateTextNode dispatches through IXMLDOMDocument's vtable slot 49.
 func (self *IXMLDOMDocument) CreateTextNode(data foundation.BSTR) (*IXMLDOMText, error) {
 	var _text *IXMLDOMText
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(data)), uintptr(unsafe.Pointer(&_text)))
-	return _text, win32.HRESULTError(int32(r1))
+	return _text, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateComment dispatches through IXMLDOMDocument's vtable slot 50.
 func (self *IXMLDOMDocument) CreateComment(data foundation.BSTR) (*IXMLDOMComment, error) {
 	var _comment *IXMLDOMComment
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(data)), uintptr(unsafe.Pointer(&_comment)))
-	return _comment, win32.HRESULTError(int32(r1))
+	return _comment, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateCDATASection dispatches through IXMLDOMDocument's vtable slot 51.
 func (self *IXMLDOMDocument) CreateCDATASection(data foundation.BSTR) (*IXMLDOMCDATASection, error) {
 	var _cdata *IXMLDOMCDATASection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(data)), uintptr(unsafe.Pointer(&_cdata)))
-	return _cdata, win32.HRESULTError(int32(r1))
+	return _cdata, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateProcessingInstruction dispatches through IXMLDOMDocument's vtable slot 52.
 func (self *IXMLDOMDocument) CreateProcessingInstruction(target foundation.BSTR, data foundation.BSTR) (*IXMLDOMProcessingInstruction, error) {
 	var _pi *IXMLDOMProcessingInstruction
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(target)), uintptr(unsafe.Pointer(data)), uintptr(unsafe.Pointer(&_pi)))
-	return _pi, win32.HRESULTError(int32(r1))
+	return _pi, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateAttribute dispatches through IXMLDOMDocument's vtable slot 53.
 func (self *IXMLDOMDocument) CreateAttribute(name foundation.BSTR) (*IXMLDOMAttribute, error) {
 	var _attribute *IXMLDOMAttribute
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(&_attribute)))
-	return _attribute, win32.HRESULTError(int32(r1))
+	return _attribute, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateEntityReference dispatches through IXMLDOMDocument's vtable slot 54.
 func (self *IXMLDOMDocument) CreateEntityReference(name foundation.BSTR) (*IXMLDOMEntityReference, error) {
 	var _entityRef *IXMLDOMEntityReference
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(&_entityRef)))
-	return _entityRef, win32.HRESULTError(int32(r1))
+	return _entityRef, win32.ErrIfFailed(int32(r1))
 }
 
 // GetElementsByTagName dispatches through IXMLDOMDocument's vtable slot 55.
 func (self *IXMLDOMDocument) GetElementsByTagName(tagName foundation.BSTR) (*IXMLDOMNodeList, error) {
 	var _resultList *IXMLDOMNodeList
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(tagName)), uintptr(unsafe.Pointer(&_resultList)))
-	return _resultList, win32.HRESULTError(int32(r1))
+	return _resultList, win32.ErrIfFailed(int32(r1))
 }
 
 // NodeFromID dispatches through IXMLDOMDocument's vtable slot 57.
 func (self *IXMLDOMDocument) NodeFromID(idString foundation.BSTR) (*IXMLDOMNode, error) {
 	var _node *IXMLDOMNode
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(idString)), uintptr(unsafe.Pointer(&_node)))
-	return _node, win32.HRESULTError(int32(r1))
+	return _node, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_readyState dispatches through IXMLDOMDocument's vtable slot 59.
 func (self *IXMLDOMDocument) Get_readyState() (int32, error) {
 	var _value int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_parseError dispatches through IXMLDOMDocument's vtable slot 60.
 func (self *IXMLDOMDocument) Get_parseError() (*IXMLDOMParseError, error) {
 	var _errorObj *IXMLDOMParseError
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_errorObj)))
-	return _errorObj, win32.HRESULTError(int32(r1))
+	return _errorObj, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_url dispatches through IXMLDOMDocument's vtable slot 61.
 func (self *IXMLDOMDocument) Get_url() (foundation.BSTR, error) {
 	var _urlString foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_urlString)))
-	return _urlString, win32.HRESULTError(int32(r1))
+	return _urlString, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_async dispatches through IXMLDOMDocument's vtable slot 62.
 func (self *IXMLDOMDocument) Get_async() (foundation.VARIANT_BOOL, error) {
 	var _isAsync foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_isAsync)))
-	return _isAsync, win32.HRESULTError(int32(r1))
+	return _isAsync, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_async dispatches through IXMLDOMDocument's vtable slot 63.
 func (self *IXMLDOMDocument) Put_async(isAsync foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(isAsync))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Abort dispatches through IXMLDOMDocument's vtable slot 64.
 func (self *IXMLDOMDocument) Abort() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // LoadXML dispatches through IXMLDOMDocument's vtable slot 65.
 func (self *IXMLDOMDocument) LoadXML(bstrXML foundation.BSTR) (foundation.VARIANT_BOOL, error) {
 	var _isSuccessful foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrXML)), uintptr(unsafe.Pointer(&_isSuccessful)))
-	return _isSuccessful, win32.HRESULTError(int32(r1))
+	return _isSuccessful, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_validateOnParse dispatches through IXMLDOMDocument's vtable slot 67.
 func (self *IXMLDOMDocument) Get_validateOnParse() (foundation.VARIANT_BOOL, error) {
 	var _isValidating foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_isValidating)))
-	return _isValidating, win32.HRESULTError(int32(r1))
+	return _isValidating, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_validateOnParse dispatches through IXMLDOMDocument's vtable slot 68.
 func (self *IXMLDOMDocument) Put_validateOnParse(isValidating foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(isValidating))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_resolveExternals dispatches through IXMLDOMDocument's vtable slot 69.
 func (self *IXMLDOMDocument) Get_resolveExternals() (foundation.VARIANT_BOOL, error) {
 	var _isResolving foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_isResolving)))
-	return _isResolving, win32.HRESULTError(int32(r1))
+	return _isResolving, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_resolveExternals dispatches through IXMLDOMDocument's vtable slot 70.
 func (self *IXMLDOMDocument) Put_resolveExternals(isResolving foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)), uintptr(isResolving))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_preserveWhiteSpace dispatches through IXMLDOMDocument's vtable slot 71.
 func (self *IXMLDOMDocument) Get_preserveWhiteSpace() (foundation.VARIANT_BOOL, error) {
 	var _isPreserving foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_isPreserving)))
-	return _isPreserving, win32.HRESULTError(int32(r1))
+	return _isPreserving, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_preserveWhiteSpace dispatches through IXMLDOMDocument's vtable slot 72.
 func (self *IXMLDOMDocument) Put_preserveWhiteSpace(isPreserving foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[72], uintptr(unsafe.Pointer(self)), uintptr(isPreserving))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 2933bf95-7b36-11d2-b20e-00c04f983e60
@@ -2502,28 +2502,28 @@ var IID_IXMLDOMDocument2 = win32.GUID{Data1: 0x2933bf95, Data2: 0x7b36, Data3: 0
 func (self *IXMLDOMDocument2) Get_namespaces() (*IXMLDOMSchemaCollection, error) {
 	var _namespaceCollection *IXMLDOMSchemaCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[76], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_namespaceCollection)))
-	return _namespaceCollection, win32.HRESULTError(int32(r1))
+	return _namespaceCollection, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_schemas dispatches through IXMLDOMDocument2's vtable slot 77.
 func (self *IXMLDOMDocument2) Get_schemas() (systemvariant.VARIANT, error) {
 	var _otherCollection systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[77], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_otherCollection)))
-	return _otherCollection, win32.HRESULTError(int32(r1))
+	return _otherCollection, win32.ErrIfFailed(int32(r1))
 }
 
 // Validate dispatches through IXMLDOMDocument2's vtable slot 79.
 func (self *IXMLDOMDocument2) Validate() (*IXMLDOMParseError, error) {
 	var _errorObj *IXMLDOMParseError
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[79], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_errorObj)))
-	return _errorObj, win32.HRESULTError(int32(r1))
+	return _errorObj, win32.ErrIfFailed(int32(r1))
 }
 
 // GetProperty dispatches through IXMLDOMDocument2's vtable slot 81.
 func (self *IXMLDOMDocument2) GetProperty(name foundation.BSTR) (systemvariant.VARIANT, error) {
 	var _value systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 2933bf96-7b36-11d2-b20e-00c04f983e60
@@ -2538,14 +2538,14 @@ var IID_IXMLDOMDocument3 = win32.GUID{Data1: 0x2933bf96, Data2: 0x7b36, Data3: 0
 func (self *IXMLDOMDocument3) ValidateNode(node *IXMLDOMNode) (*IXMLDOMParseError, error) {
 	var _errorObj *IXMLDOMParseError
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(node)), uintptr(unsafe.Pointer(&_errorObj)))
-	return _errorObj, win32.HRESULTError(int32(r1))
+	return _errorObj, win32.ErrIfFailed(int32(r1))
 }
 
 // ImportNode dispatches through IXMLDOMDocument3's vtable slot 83.
 func (self *IXMLDOMDocument3) ImportNode(node *IXMLDOMNode, deep foundation.VARIANT_BOOL) (*IXMLDOMNode, error) {
 	var _clone *IXMLDOMNode
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(node)), uintptr(deep), uintptr(unsafe.Pointer(&_clone)))
-	return _clone, win32.HRESULTError(int32(r1))
+	return _clone, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 3efaa413-272f-11d2-836f-0000f87a7782
@@ -2568,21 +2568,21 @@ var IID_IXMLDOMDocumentType = win32.GUID{Data1: 0x2933bf8b, Data2: 0x7b36, Data3
 func (self *IXMLDOMDocumentType) Get_name() (foundation.BSTR, error) {
 	var _rootName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_rootName)))
-	return _rootName, win32.HRESULTError(int32(r1))
+	return _rootName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_entities dispatches through IXMLDOMDocumentType's vtable slot 44.
 func (self *IXMLDOMDocumentType) Get_entities() (*IXMLDOMNamedNodeMap, error) {
 	var _entityMap *IXMLDOMNamedNodeMap
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_entityMap)))
-	return _entityMap, win32.HRESULTError(int32(r1))
+	return _entityMap, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_notations dispatches through IXMLDOMDocumentType's vtable slot 45.
 func (self *IXMLDOMDocumentType) Get_notations() (*IXMLDOMNamedNodeMap, error) {
 	var _notationMap *IXMLDOMNamedNodeMap
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_notationMap)))
-	return _notationMap, win32.HRESULTError(int32(r1))
+	return _notationMap, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 2933bf86-7b36-11d2-b20e-00c04f983e60
@@ -2597,54 +2597,54 @@ var IID_IXMLDOMElement = win32.GUID{Data1: 0x2933bf86, Data2: 0x7b36, Data3: 0x1
 func (self *IXMLDOMElement) Get_tagName() (foundation.BSTR, error) {
 	var _tagName foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_tagName)))
-	return _tagName, win32.HRESULTError(int32(r1))
+	return _tagName, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAttribute dispatches through IXMLDOMElement's vtable slot 44.
 func (self *IXMLDOMElement) GetAttribute(name foundation.BSTR) (systemvariant.VARIANT, error) {
 	var _value systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAttribute dispatches through IXMLDOMElement's vtable slot 46.
 func (self *IXMLDOMElement) RemoveAttribute(name foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAttributeNode dispatches through IXMLDOMElement's vtable slot 47.
 func (self *IXMLDOMElement) GetAttributeNode(name foundation.BSTR) (*IXMLDOMAttribute, error) {
 	var _attributeNode *IXMLDOMAttribute
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(&_attributeNode)))
-	return _attributeNode, win32.HRESULTError(int32(r1))
+	return _attributeNode, win32.ErrIfFailed(int32(r1))
 }
 
 // SetAttributeNode dispatches through IXMLDOMElement's vtable slot 48.
 func (self *IXMLDOMElement) SetAttributeNode(DOMAttribute *IXMLDOMAttribute) (*IXMLDOMAttribute, error) {
 	var _attributeNode *IXMLDOMAttribute
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(DOMAttribute)), uintptr(unsafe.Pointer(&_attributeNode)))
-	return _attributeNode, win32.HRESULTError(int32(r1))
+	return _attributeNode, win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAttributeNode dispatches through IXMLDOMElement's vtable slot 49.
 func (self *IXMLDOMElement) RemoveAttributeNode(DOMAttribute *IXMLDOMAttribute) (*IXMLDOMAttribute, error) {
 	var _attributeNode *IXMLDOMAttribute
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(DOMAttribute)), uintptr(unsafe.Pointer(&_attributeNode)))
-	return _attributeNode, win32.HRESULTError(int32(r1))
+	return _attributeNode, win32.ErrIfFailed(int32(r1))
 }
 
 // GetElementsByTagName dispatches through IXMLDOMElement's vtable slot 50.
 func (self *IXMLDOMElement) GetElementsByTagName(tagName foundation.BSTR) (*IXMLDOMNodeList, error) {
 	var _resultList *IXMLDOMNodeList
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(tagName)), uintptr(unsafe.Pointer(&_resultList)))
-	return _resultList, win32.HRESULTError(int32(r1))
+	return _resultList, win32.ErrIfFailed(int32(r1))
 }
 
 // Normalize dispatches through IXMLDOMElement's vtable slot 51.
 func (self *IXMLDOMElement) Normalize() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 2933bf8d-7b36-11d2-b20e-00c04f983e60
@@ -2659,21 +2659,21 @@ var IID_IXMLDOMEntity = win32.GUID{Data1: 0x2933bf8d, Data2: 0x7b36, Data3: 0x11
 func (self *IXMLDOMEntity) Get_publicId() (systemvariant.VARIANT, error) {
 	var _publicID systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_publicID)))
-	return _publicID, win32.HRESULTError(int32(r1))
+	return _publicID, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_systemId dispatches through IXMLDOMEntity's vtable slot 44.
 func (self *IXMLDOMEntity) Get_systemId() (systemvariant.VARIANT, error) {
 	var _systemID systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_systemID)))
-	return _systemID, win32.HRESULTError(int32(r1))
+	return _systemID, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_notationName dispatches through IXMLDOMEntity's vtable slot 45.
 func (self *IXMLDOMEntity) Get_notationName() (foundation.BSTR, error) {
 	var _name foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
-	return _name, win32.HRESULTError(int32(r1))
+	return _name, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 2933bf8e-7b36-11d2-b20e-00c04f983e60
@@ -2696,7 +2696,7 @@ var IID_IXMLDOMImplementation = win32.GUID{Data1: 0x2933bf8f, Data2: 0x7b36, Dat
 func (self *IXMLDOMImplementation) HasFeature(feature foundation.BSTR, version foundation.BSTR) (foundation.VARIANT_BOOL, error) {
 	var _hasFeature foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(feature)), uintptr(unsafe.Pointer(version)), uintptr(unsafe.Pointer(&_hasFeature)))
-	return _hasFeature, win32.HRESULTError(int32(r1))
+	return _hasFeature, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 2933bf83-7b36-11d2-b20e-00c04f983e60
@@ -2711,69 +2711,69 @@ var IID_IXMLDOMNamedNodeMap = win32.GUID{Data1: 0x2933bf83, Data2: 0x7b36, Data3
 func (self *IXMLDOMNamedNodeMap) GetNamedItem(name foundation.BSTR) (*IXMLDOMNode, error) {
 	var _namedItem *IXMLDOMNode
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(&_namedItem)))
-	return _namedItem, win32.HRESULTError(int32(r1))
+	return _namedItem, win32.ErrIfFailed(int32(r1))
 }
 
 // SetNamedItem dispatches through IXMLDOMNamedNodeMap's vtable slot 8.
 func (self *IXMLDOMNamedNodeMap) SetNamedItem(newItem *IXMLDOMNode) (*IXMLDOMNode, error) {
 	var _nameItem *IXMLDOMNode
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newItem)), uintptr(unsafe.Pointer(&_nameItem)))
-	return _nameItem, win32.HRESULTError(int32(r1))
+	return _nameItem, win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveNamedItem dispatches through IXMLDOMNamedNodeMap's vtable slot 9.
 func (self *IXMLDOMNamedNodeMap) RemoveNamedItem(name foundation.BSTR) (*IXMLDOMNode, error) {
 	var _namedItem *IXMLDOMNode
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(&_namedItem)))
-	return _namedItem, win32.HRESULTError(int32(r1))
+	return _namedItem, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_item dispatches through IXMLDOMNamedNodeMap's vtable slot 10.
 func (self *IXMLDOMNamedNodeMap) Get_item(index int32) (*IXMLDOMNode, error) {
 	var _listItem *IXMLDOMNode
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_listItem)))
-	return _listItem, win32.HRESULTError(int32(r1))
+	return _listItem, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_length dispatches through IXMLDOMNamedNodeMap's vtable slot 11.
 func (self *IXMLDOMNamedNodeMap) Get_length() (int32, error) {
 	var _listLength int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_listLength)))
-	return _listLength, win32.HRESULTError(int32(r1))
+	return _listLength, win32.ErrIfFailed(int32(r1))
 }
 
 // GetQualifiedItem dispatches through IXMLDOMNamedNodeMap's vtable slot 12.
 func (self *IXMLDOMNamedNodeMap) GetQualifiedItem(baseName foundation.BSTR, namespaceURI foundation.BSTR) (*IXMLDOMNode, error) {
 	var _qualifiedItem *IXMLDOMNode
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(baseName)), uintptr(unsafe.Pointer(namespaceURI)), uintptr(unsafe.Pointer(&_qualifiedItem)))
-	return _qualifiedItem, win32.HRESULTError(int32(r1))
+	return _qualifiedItem, win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveQualifiedItem dispatches through IXMLDOMNamedNodeMap's vtable slot 13.
 func (self *IXMLDOMNamedNodeMap) RemoveQualifiedItem(baseName foundation.BSTR, namespaceURI foundation.BSTR) (*IXMLDOMNode, error) {
 	var _qualifiedItem *IXMLDOMNode
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(baseName)), uintptr(unsafe.Pointer(namespaceURI)), uintptr(unsafe.Pointer(&_qualifiedItem)))
-	return _qualifiedItem, win32.HRESULTError(int32(r1))
+	return _qualifiedItem, win32.ErrIfFailed(int32(r1))
 }
 
 // NextNode dispatches through IXMLDOMNamedNodeMap's vtable slot 14.
 func (self *IXMLDOMNamedNodeMap) NextNode() (*IXMLDOMNode, error) {
 	var _nextItem *IXMLDOMNode
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_nextItem)))
-	return _nextItem, win32.HRESULTError(int32(r1))
+	return _nextItem, win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IXMLDOMNamedNodeMap's vtable slot 15.
 func (self *IXMLDOMNamedNodeMap) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__newEnum dispatches through IXMLDOMNamedNodeMap's vtable slot 16.
 func (self *IXMLDOMNamedNodeMap) Get__newEnum() (*systemcom.IUnknown, error) {
 	var _ppUnk *systemcom.IUnknown
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppUnk)))
-	return _ppUnk, win32.HRESULTError(int32(r1))
+	return _ppUnk, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 2933bf80-7b36-11d2-b20e-00c04f983e60
@@ -2788,222 +2788,222 @@ var IID_IXMLDOMNode = win32.GUID{Data1: 0x2933bf80, Data2: 0x7b36, Data3: 0x11d2
 func (self *IXMLDOMNode) Get_nodeName() (foundation.BSTR, error) {
 	var _name foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
-	return _name, win32.HRESULTError(int32(r1))
+	return _name, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_nodeValue dispatches through IXMLDOMNode's vtable slot 8.
 func (self *IXMLDOMNode) Get_nodeValue() (systemvariant.VARIANT, error) {
 	var _value systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_nodeType dispatches through IXMLDOMNode's vtable slot 10.
 func (self *IXMLDOMNode) Get_nodeType() (DOMNodeType, error) {
 	var _type_ DOMNodeType
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_type_)))
-	return _type_, win32.HRESULTError(int32(r1))
+	return _type_, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_parentNode dispatches through IXMLDOMNode's vtable slot 11.
 func (self *IXMLDOMNode) Get_parentNode() (*IXMLDOMNode, error) {
 	var _parent *IXMLDOMNode
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_parent)))
-	return _parent, win32.HRESULTError(int32(r1))
+	return _parent, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_childNodes dispatches through IXMLDOMNode's vtable slot 12.
 func (self *IXMLDOMNode) Get_childNodes() (*IXMLDOMNodeList, error) {
 	var _childList *IXMLDOMNodeList
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_childList)))
-	return _childList, win32.HRESULTError(int32(r1))
+	return _childList, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_firstChild dispatches through IXMLDOMNode's vtable slot 13.
 func (self *IXMLDOMNode) Get_firstChild() (*IXMLDOMNode, error) {
 	var _firstChild *IXMLDOMNode
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_firstChild)))
-	return _firstChild, win32.HRESULTError(int32(r1))
+	return _firstChild, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_lastChild dispatches through IXMLDOMNode's vtable slot 14.
 func (self *IXMLDOMNode) Get_lastChild() (*IXMLDOMNode, error) {
 	var _lastChild *IXMLDOMNode
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lastChild)))
-	return _lastChild, win32.HRESULTError(int32(r1))
+	return _lastChild, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_previousSibling dispatches through IXMLDOMNode's vtable slot 15.
 func (self *IXMLDOMNode) Get_previousSibling() (*IXMLDOMNode, error) {
 	var _previousSibling *IXMLDOMNode
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_previousSibling)))
-	return _previousSibling, win32.HRESULTError(int32(r1))
+	return _previousSibling, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_nextSibling dispatches through IXMLDOMNode's vtable slot 16.
 func (self *IXMLDOMNode) Get_nextSibling() (*IXMLDOMNode, error) {
 	var _nextSibling *IXMLDOMNode
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_nextSibling)))
-	return _nextSibling, win32.HRESULTError(int32(r1))
+	return _nextSibling, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_attributes dispatches through IXMLDOMNode's vtable slot 17.
 func (self *IXMLDOMNode) Get_attributes() (*IXMLDOMNamedNodeMap, error) {
 	var _attributeMap *IXMLDOMNamedNodeMap
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_attributeMap)))
-	return _attributeMap, win32.HRESULTError(int32(r1))
+	return _attributeMap, win32.ErrIfFailed(int32(r1))
 }
 
 // ReplaceChild dispatches through IXMLDOMNode's vtable slot 19.
 func (self *IXMLDOMNode) ReplaceChild(newChild *IXMLDOMNode, oldChild *IXMLDOMNode) (*IXMLDOMNode, error) {
 	var _outOldChild *IXMLDOMNode
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newChild)), uintptr(unsafe.Pointer(oldChild)), uintptr(unsafe.Pointer(&_outOldChild)))
-	return _outOldChild, win32.HRESULTError(int32(r1))
+	return _outOldChild, win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveChild dispatches through IXMLDOMNode's vtable slot 20.
 func (self *IXMLDOMNode) RemoveChild(childNode *IXMLDOMNode) (*IXMLDOMNode, error) {
 	var _oldChild *IXMLDOMNode
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(childNode)), uintptr(unsafe.Pointer(&_oldChild)))
-	return _oldChild, win32.HRESULTError(int32(r1))
+	return _oldChild, win32.ErrIfFailed(int32(r1))
 }
 
 // AppendChild dispatches through IXMLDOMNode's vtable slot 21.
 func (self *IXMLDOMNode) AppendChild(newChild *IXMLDOMNode) (*IXMLDOMNode, error) {
 	var _outNewChild *IXMLDOMNode
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newChild)), uintptr(unsafe.Pointer(&_outNewChild)))
-	return _outNewChild, win32.HRESULTError(int32(r1))
+	return _outNewChild, win32.ErrIfFailed(int32(r1))
 }
 
 // HasChildNodes dispatches through IXMLDOMNode's vtable slot 22.
 func (self *IXMLDOMNode) HasChildNodes() (foundation.VARIANT_BOOL, error) {
 	var _hasChild foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasChild)))
-	return _hasChild, win32.HRESULTError(int32(r1))
+	return _hasChild, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ownerDocument dispatches through IXMLDOMNode's vtable slot 23.
 func (self *IXMLDOMNode) Get_ownerDocument() (*IXMLDOMDocument, error) {
 	var _XMLDOMDocument *IXMLDOMDocument
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_XMLDOMDocument)))
-	return _XMLDOMDocument, win32.HRESULTError(int32(r1))
+	return _XMLDOMDocument, win32.ErrIfFailed(int32(r1))
 }
 
 // CloneNode dispatches through IXMLDOMNode's vtable slot 24.
 func (self *IXMLDOMNode) CloneNode(deep foundation.VARIANT_BOOL) (*IXMLDOMNode, error) {
 	var _cloneRoot *IXMLDOMNode
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(deep), uintptr(unsafe.Pointer(&_cloneRoot)))
-	return _cloneRoot, win32.HRESULTError(int32(r1))
+	return _cloneRoot, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_nodeTypeString dispatches through IXMLDOMNode's vtable slot 25.
 func (self *IXMLDOMNode) Get_nodeTypeString() (foundation.BSTR, error) {
 	var _nodeType foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_nodeType)))
-	return _nodeType, win32.HRESULTError(int32(r1))
+	return _nodeType, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_text dispatches through IXMLDOMNode's vtable slot 26.
 func (self *IXMLDOMNode) Get_text() (foundation.BSTR, error) {
 	var _text foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_text)))
-	return _text, win32.HRESULTError(int32(r1))
+	return _text, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_text dispatches through IXMLDOMNode's vtable slot 27.
 func (self *IXMLDOMNode) Put_text(text foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(text)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_specified dispatches through IXMLDOMNode's vtable slot 28.
 func (self *IXMLDOMNode) Get_specified() (foundation.VARIANT_BOOL, error) {
 	var _isSpecified foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_isSpecified)))
-	return _isSpecified, win32.HRESULTError(int32(r1))
+	return _isSpecified, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_definition dispatches through IXMLDOMNode's vtable slot 29.
 func (self *IXMLDOMNode) Get_definition() (*IXMLDOMNode, error) {
 	var _definitionNode *IXMLDOMNode
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_definitionNode)))
-	return _definitionNode, win32.HRESULTError(int32(r1))
+	return _definitionNode, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_nodeTypedValue dispatches through IXMLDOMNode's vtable slot 30.
 func (self *IXMLDOMNode) Get_nodeTypedValue() (systemvariant.VARIANT, error) {
 	var _typedValue systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_typedValue)))
-	return _typedValue, win32.HRESULTError(int32(r1))
+	return _typedValue, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_dataType dispatches through IXMLDOMNode's vtable slot 32.
 func (self *IXMLDOMNode) Get_dataType() (systemvariant.VARIANT, error) {
 	var _dataTypeName systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_dataTypeName)))
-	return _dataTypeName, win32.HRESULTError(int32(r1))
+	return _dataTypeName, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_dataType dispatches through IXMLDOMNode's vtable slot 33.
 func (self *IXMLDOMNode) Put_dataType(dataTypeName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dataTypeName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_xml dispatches through IXMLDOMNode's vtable slot 34.
 func (self *IXMLDOMNode) Get_xml() (foundation.BSTR, error) {
 	var _xmlString foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_xmlString)))
-	return _xmlString, win32.HRESULTError(int32(r1))
+	return _xmlString, win32.ErrIfFailed(int32(r1))
 }
 
 // TransformNode dispatches through IXMLDOMNode's vtable slot 35.
 func (self *IXMLDOMNode) TransformNode(stylesheet *IXMLDOMNode) (foundation.BSTR, error) {
 	var _xmlString foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(stylesheet)), uintptr(unsafe.Pointer(&_xmlString)))
-	return _xmlString, win32.HRESULTError(int32(r1))
+	return _xmlString, win32.ErrIfFailed(int32(r1))
 }
 
 // SelectNodes dispatches through IXMLDOMNode's vtable slot 36.
 func (self *IXMLDOMNode) SelectNodes(queryString foundation.BSTR) (*IXMLDOMNodeList, error) {
 	var _resultList *IXMLDOMNodeList
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(queryString)), uintptr(unsafe.Pointer(&_resultList)))
-	return _resultList, win32.HRESULTError(int32(r1))
+	return _resultList, win32.ErrIfFailed(int32(r1))
 }
 
 // SelectSingleNode dispatches through IXMLDOMNode's vtable slot 37.
 func (self *IXMLDOMNode) SelectSingleNode(queryString foundation.BSTR) (*IXMLDOMNode, error) {
 	var _resultNode *IXMLDOMNode
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(queryString)), uintptr(unsafe.Pointer(&_resultNode)))
-	return _resultNode, win32.HRESULTError(int32(r1))
+	return _resultNode, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_parsed dispatches through IXMLDOMNode's vtable slot 38.
 func (self *IXMLDOMNode) Get_parsed() (foundation.VARIANT_BOOL, error) {
 	var _isParsed foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_isParsed)))
-	return _isParsed, win32.HRESULTError(int32(r1))
+	return _isParsed, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_namespaceURI dispatches through IXMLDOMNode's vtable slot 39.
 func (self *IXMLDOMNode) Get_namespaceURI() (foundation.BSTR, error) {
 	var _namespaceURI foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_namespaceURI)))
-	return _namespaceURI, win32.HRESULTError(int32(r1))
+	return _namespaceURI, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_prefix dispatches through IXMLDOMNode's vtable slot 40.
 func (self *IXMLDOMNode) Get_prefix() (foundation.BSTR, error) {
 	var _prefixString foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_prefixString)))
-	return _prefixString, win32.HRESULTError(int32(r1))
+	return _prefixString, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_baseName dispatches through IXMLDOMNode's vtable slot 41.
 func (self *IXMLDOMNode) Get_baseName() (foundation.BSTR, error) {
 	var _nameString foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_nameString)))
-	return _nameString, win32.HRESULTError(int32(r1))
+	return _nameString, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 2933bf82-7b36-11d2-b20e-00c04f983e60
@@ -3018,34 +3018,34 @@ var IID_IXMLDOMNodeList = win32.GUID{Data1: 0x2933bf82, Data2: 0x7b36, Data3: 0x
 func (self *IXMLDOMNodeList) Get_item(index int32) (*IXMLDOMNode, error) {
 	var _listItem *IXMLDOMNode
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_listItem)))
-	return _listItem, win32.HRESULTError(int32(r1))
+	return _listItem, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_length dispatches through IXMLDOMNodeList's vtable slot 8.
 func (self *IXMLDOMNodeList) Get_length() (int32, error) {
 	var _listLength int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_listLength)))
-	return _listLength, win32.HRESULTError(int32(r1))
+	return _listLength, win32.ErrIfFailed(int32(r1))
 }
 
 // NextNode dispatches through IXMLDOMNodeList's vtable slot 9.
 func (self *IXMLDOMNodeList) NextNode() (*IXMLDOMNode, error) {
 	var _nextItem *IXMLDOMNode
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_nextItem)))
-	return _nextItem, win32.HRESULTError(int32(r1))
+	return _nextItem, win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IXMLDOMNodeList's vtable slot 10.
 func (self *IXMLDOMNodeList) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__newEnum dispatches through IXMLDOMNodeList's vtable slot 11.
 func (self *IXMLDOMNodeList) Get__newEnum() (*systemcom.IUnknown, error) {
 	var _ppUnk *systemcom.IUnknown
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppUnk)))
-	return _ppUnk, win32.HRESULTError(int32(r1))
+	return _ppUnk, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 2933bf8c-7b36-11d2-b20e-00c04f983e60
@@ -3060,14 +3060,14 @@ var IID_IXMLDOMNotation = win32.GUID{Data1: 0x2933bf8c, Data2: 0x7b36, Data3: 0x
 func (self *IXMLDOMNotation) Get_publicId() (systemvariant.VARIANT, error) {
 	var _publicID systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_publicID)))
-	return _publicID, win32.HRESULTError(int32(r1))
+	return _publicID, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_systemId dispatches through IXMLDOMNotation's vtable slot 44.
 func (self *IXMLDOMNotation) Get_systemId() (systemvariant.VARIANT, error) {
 	var _systemID systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_systemID)))
-	return _systemID, win32.HRESULTError(int32(r1))
+	return _systemID, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 3efaa426-272f-11d2-836f-0000f87a7782
@@ -3082,49 +3082,49 @@ var IID_IXMLDOMParseError = win32.GUID{Data1: 0x3efaa426, Data2: 0x272f, Data3: 
 func (self *IXMLDOMParseError) Get_errorCode() (int32, error) {
 	var _errorCode int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_errorCode)))
-	return _errorCode, win32.HRESULTError(int32(r1))
+	return _errorCode, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_url dispatches through IXMLDOMParseError's vtable slot 8.
 func (self *IXMLDOMParseError) Get_url() (foundation.BSTR, error) {
 	var _urlString foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_urlString)))
-	return _urlString, win32.HRESULTError(int32(r1))
+	return _urlString, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_reason dispatches through IXMLDOMParseError's vtable slot 9.
 func (self *IXMLDOMParseError) Get_reason() (foundation.BSTR, error) {
 	var _reasonString foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_reasonString)))
-	return _reasonString, win32.HRESULTError(int32(r1))
+	return _reasonString, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_srcText dispatches through IXMLDOMParseError's vtable slot 10.
 func (self *IXMLDOMParseError) Get_srcText() (foundation.BSTR, error) {
 	var _sourceString foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_sourceString)))
-	return _sourceString, win32.HRESULTError(int32(r1))
+	return _sourceString, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_line dispatches through IXMLDOMParseError's vtable slot 11.
 func (self *IXMLDOMParseError) Get_line() (int32, error) {
 	var _lineNumber int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lineNumber)))
-	return _lineNumber, win32.HRESULTError(int32(r1))
+	return _lineNumber, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_linepos dispatches through IXMLDOMParseError's vtable slot 12.
 func (self *IXMLDOMParseError) Get_linepos() (int32, error) {
 	var _linePosition int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_linePosition)))
-	return _linePosition, win32.HRESULTError(int32(r1))
+	return _linePosition, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_filepos dispatches through IXMLDOMParseError's vtable slot 13.
 func (self *IXMLDOMParseError) Get_filepos() (int32, error) {
 	var _filePosition int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_filePosition)))
-	return _filePosition, win32.HRESULTError(int32(r1))
+	return _filePosition, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 3efaa428-272f-11d2-836f-0000f87a7782
@@ -3139,28 +3139,28 @@ var IID_IXMLDOMParseError2 = win32.GUID{Data1: 0x3efaa428, Data2: 0x272f, Data3:
 func (self *IXMLDOMParseError2) Get_errorXPath() (foundation.BSTR, error) {
 	var _xpathexpr foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_xpathexpr)))
-	return _xpathexpr, win32.HRESULTError(int32(r1))
+	return _xpathexpr, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_allErrors dispatches through IXMLDOMParseError2's vtable slot 15.
 func (self *IXMLDOMParseError2) Get_allErrors() (*IXMLDOMParseErrorCollection, error) {
 	var _allErrors *IXMLDOMParseErrorCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_allErrors)))
-	return _allErrors, win32.HRESULTError(int32(r1))
+	return _allErrors, win32.ErrIfFailed(int32(r1))
 }
 
 // ErrorParameters dispatches through IXMLDOMParseError2's vtable slot 16.
 func (self *IXMLDOMParseError2) ErrorParameters(index int32) (foundation.BSTR, error) {
 	var _param1 foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_param1)))
-	return _param1, win32.HRESULTError(int32(r1))
+	return _param1, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_errorParametersCount dispatches through IXMLDOMParseError2's vtable slot 17.
 func (self *IXMLDOMParseError2) Get_errorParametersCount() (int32, error) {
 	var _count int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
-	return _count, win32.HRESULTError(int32(r1))
+	return _count, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 3efaa429-272f-11d2-836f-0000f87a7782
@@ -3175,34 +3175,34 @@ var IID_IXMLDOMParseErrorCollection = win32.GUID{Data1: 0x3efaa429, Data2: 0x272
 func (self *IXMLDOMParseErrorCollection) Get_item(index int32) (*IXMLDOMParseError2, error) {
 	var _error_ *IXMLDOMParseError2
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_error_)))
-	return _error_, win32.HRESULTError(int32(r1))
+	return _error_, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_length dispatches through IXMLDOMParseErrorCollection's vtable slot 8.
 func (self *IXMLDOMParseErrorCollection) Get_length() (int32, error) {
 	var _length int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_length)))
-	return _length, win32.HRESULTError(int32(r1))
+	return _length, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_next dispatches through IXMLDOMParseErrorCollection's vtable slot 9.
 func (self *IXMLDOMParseErrorCollection) Get_next() (*IXMLDOMParseError2, error) {
 	var _error_ *IXMLDOMParseError2
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_error_)))
-	return _error_, win32.HRESULTError(int32(r1))
+	return _error_, win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IXMLDOMParseErrorCollection's vtable slot 10.
 func (self *IXMLDOMParseErrorCollection) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__newEnum dispatches through IXMLDOMParseErrorCollection's vtable slot 11.
 func (self *IXMLDOMParseErrorCollection) Get__newEnum() (*systemcom.IUnknown, error) {
 	var _ppunk *systemcom.IUnknown
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppunk)))
-	return _ppunk, win32.HRESULTError(int32(r1))
+	return _ppunk, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 2933bf89-7b36-11d2-b20e-00c04f983e60
@@ -3217,20 +3217,20 @@ var IID_IXMLDOMProcessingInstruction = win32.GUID{Data1: 0x2933bf89, Data2: 0x7b
 func (self *IXMLDOMProcessingInstruction) Get_target() (foundation.BSTR, error) {
 	var _name foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
-	return _name, win32.HRESULTError(int32(r1))
+	return _name, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_data dispatches through IXMLDOMProcessingInstruction's vtable slot 44.
 func (self *IXMLDOMProcessingInstruction) Get_data() (foundation.BSTR, error) {
 	var _value foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_data dispatches through IXMLDOMProcessingInstruction's vtable slot 45.
 func (self *IXMLDOMProcessingInstruction) Put_data(value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 373984c8-b845-449b-91e7-45ac83036ade
@@ -3245,40 +3245,40 @@ var IID_IXMLDOMSchemaCollection = win32.GUID{Data1: 0x373984c8, Data2: 0xb845, D
 func (self *IXMLDOMSchemaCollection) Get(namespaceURI foundation.BSTR) (*IXMLDOMNode, error) {
 	var _schemaNode *IXMLDOMNode
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(namespaceURI)), uintptr(unsafe.Pointer(&_schemaNode)))
-	return _schemaNode, win32.HRESULTError(int32(r1))
+	return _schemaNode, win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through IXMLDOMSchemaCollection's vtable slot 9.
 func (self *IXMLDOMSchemaCollection) Remove(namespaceURI foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(namespaceURI)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_length dispatches through IXMLDOMSchemaCollection's vtable slot 10.
 func (self *IXMLDOMSchemaCollection) Get_length() (int32, error) {
 	var _length int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_length)))
-	return _length, win32.HRESULTError(int32(r1))
+	return _length, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_namespaceURI dispatches through IXMLDOMSchemaCollection's vtable slot 11.
 func (self *IXMLDOMSchemaCollection) Get_namespaceURI(index int32) (foundation.BSTR, error) {
 	var _length foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_length)))
-	return _length, win32.HRESULTError(int32(r1))
+	return _length, win32.ErrIfFailed(int32(r1))
 }
 
 // AddCollection dispatches through IXMLDOMSchemaCollection's vtable slot 12.
 func (self *IXMLDOMSchemaCollection) AddCollection(otherCollection *IXMLDOMSchemaCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(otherCollection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__newEnum dispatches through IXMLDOMSchemaCollection's vtable slot 13.
 func (self *IXMLDOMSchemaCollection) Get__newEnum() (*systemcom.IUnknown, error) {
 	var _ppUnk *systemcom.IUnknown
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppUnk)))
-	return _ppUnk, win32.HRESULTError(int32(r1))
+	return _ppUnk, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 50ea08b0-dd1b-4664-9a50-c2f40f4bd79a
@@ -3292,34 +3292,34 @@ var IID_IXMLDOMSchemaCollection2 = win32.GUID{Data1: 0x50ea08b0, Data2: 0xdd1b, 
 // Validate dispatches through IXMLDOMSchemaCollection2's vtable slot 14.
 func (self *IXMLDOMSchemaCollection2) Validate() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Put_validateOnLoad dispatches through IXMLDOMSchemaCollection2's vtable slot 15.
 func (self *IXMLDOMSchemaCollection2) Put_validateOnLoad(validateOnLoad foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(validateOnLoad))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_validateOnLoad dispatches through IXMLDOMSchemaCollection2's vtable slot 16.
 func (self *IXMLDOMSchemaCollection2) Get_validateOnLoad() (foundation.VARIANT_BOOL, error) {
 	var _validateOnLoad foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_validateOnLoad)))
-	return _validateOnLoad, win32.HRESULTError(int32(r1))
+	return _validateOnLoad, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSchema dispatches through IXMLDOMSchemaCollection2's vtable slot 17.
 func (self *IXMLDOMSchemaCollection2) GetSchema(namespaceURI foundation.BSTR) (*ISchema, error) {
 	var _schema *ISchema
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(namespaceURI)), uintptr(unsafe.Pointer(&_schema)))
-	return _schema, win32.HRESULTError(int32(r1))
+	return _schema, win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeclaration dispatches through IXMLDOMSchemaCollection2's vtable slot 18.
 func (self *IXMLDOMSchemaCollection2) GetDeclaration(node *IXMLDOMNode) (*ISchemaItem, error) {
 	var _item *ISchemaItem
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(node)), uintptr(unsafe.Pointer(&_item)))
-	return _item, win32.HRESULTError(int32(r1))
+	return _item, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: aa634fc7-5888-44a7-a257-3a47150d3a0e
@@ -3334,67 +3334,67 @@ var IID_IXMLDOMSelection = win32.GUID{Data1: 0xaa634fc7, Data2: 0x5888, Data3: 0
 func (self *IXMLDOMSelection) Get_expr() (foundation.BSTR, error) {
 	var _expression foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_expression)))
-	return _expression, win32.HRESULTError(int32(r1))
+	return _expression, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_expr dispatches through IXMLDOMSelection's vtable slot 13.
 func (self *IXMLDOMSelection) Put_expr(expression foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(expression)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_context dispatches through IXMLDOMSelection's vtable slot 14.
 func (self *IXMLDOMSelection) Get_context() (*IXMLDOMNode, error) {
 	var _ppNode *IXMLDOMNode
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppNode)))
-	return _ppNode, win32.HRESULTError(int32(r1))
+	return _ppNode, win32.ErrIfFailed(int32(r1))
 }
 
 // Putref_context dispatches through IXMLDOMSelection's vtable slot 15.
 func (self *IXMLDOMSelection) Putref_context(pNode *IXMLDOMNode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNode)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PeekNode dispatches through IXMLDOMSelection's vtable slot 16.
 func (self *IXMLDOMSelection) PeekNode() (*IXMLDOMNode, error) {
 	var _ppNode *IXMLDOMNode
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppNode)))
-	return _ppNode, win32.HRESULTError(int32(r1))
+	return _ppNode, win32.ErrIfFailed(int32(r1))
 }
 
 // Matches dispatches through IXMLDOMSelection's vtable slot 17.
 func (self *IXMLDOMSelection) Matches(pNode *IXMLDOMNode) (*IXMLDOMNode, error) {
 	var _ppNode *IXMLDOMNode
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNode)), uintptr(unsafe.Pointer(&_ppNode)))
-	return _ppNode, win32.HRESULTError(int32(r1))
+	return _ppNode, win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveNext dispatches through IXMLDOMSelection's vtable slot 18.
 func (self *IXMLDOMSelection) RemoveNext() (*IXMLDOMNode, error) {
 	var _ppNode *IXMLDOMNode
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppNode)))
-	return _ppNode, win32.HRESULTError(int32(r1))
+	return _ppNode, win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAll dispatches through IXMLDOMSelection's vtable slot 19.
 func (self *IXMLDOMSelection) RemoveAll() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IXMLDOMSelection's vtable slot 20.
 func (self *IXMLDOMSelection) Clone() (*IXMLDOMSelection, error) {
 	var _ppNode *IXMLDOMSelection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppNode)))
-	return _ppNode, win32.HRESULTError(int32(r1))
+	return _ppNode, win32.ErrIfFailed(int32(r1))
 }
 
 // GetProperty dispatches through IXMLDOMSelection's vtable slot 21.
 func (self *IXMLDOMSelection) GetProperty(name foundation.BSTR) (systemvariant.VARIANT, error) {
 	var _value systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.HRESULTError(int32(r1))
+	return _value, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 2933bf87-7b36-11d2-b20e-00c04f983e60
@@ -3409,7 +3409,7 @@ var IID_IXMLDOMText = win32.GUID{Data1: 0x2933bf87, Data2: 0x7b36, Data3: 0x11d2
 func (self *IXMLDOMText) SplitText(offset int32) (*IXMLDOMText, error) {
 	var _rightHandTextNode *IXMLDOMText
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(offset), uintptr(unsafe.Pointer(&_rightHandTextNode)))
-	return _rightHandTextNode, win32.HRESULTError(int32(r1))
+	return _rightHandTextNode, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 310afa62-0575-11d2-9ca9-0060b0ec3d39
@@ -3424,34 +3424,34 @@ var IID_IXMLDSOControl = win32.GUID{Data1: 0x310afa62, Data2: 0x0575, Data3: 0x1
 func (self *IXMLDSOControl) Get_XMLDocument() (*IXMLDOMDocument, error) {
 	var _ppDoc *IXMLDOMDocument
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppDoc)))
-	return _ppDoc, win32.HRESULTError(int32(r1))
+	return _ppDoc, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_XMLDocument dispatches through IXMLDSOControl's vtable slot 8.
 func (self *IXMLDSOControl) Put_XMLDocument(ppDoc *IXMLDOMDocument) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDoc)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_JavaDSOCompatible dispatches through IXMLDSOControl's vtable slot 9.
 func (self *IXMLDSOControl) Get_JavaDSOCompatible() (foundation.BOOL, error) {
 	var _fJavaDSOCompatible foundation.BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_fJavaDSOCompatible)))
-	return _fJavaDSOCompatible, win32.HRESULTError(int32(r1))
+	return _fJavaDSOCompatible, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_JavaDSOCompatible dispatches through IXMLDSOControl's vtable slot 10.
 func (self *IXMLDSOControl) Put_JavaDSOCompatible(fJavaDSOCompatible bool) error {
 	_fJavaDSOCompatible := win32.Bool32(fJavaDSOCompatible)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(_fJavaDSOCompatible))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_readyState dispatches through IXMLDSOControl's vtable slot 11.
 func (self *IXMLDSOControl) Get_readyState() (int32, error) {
 	var _state int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_state)))
-	return _state, win32.HRESULTError(int32(r1))
+	return _state, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f52e2b61-18a1-11d1-b105-00805f49916b
@@ -3466,89 +3466,89 @@ var IID_IXMLDocument = win32.GUID{Data1: 0xf52e2b61, Data2: 0x18a1, Data3: 0x11d
 func (self *IXMLDocument) Get_root() (*IXMLElement, error) {
 	var _p *IXMLElement
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.HRESULTError(int32(r1))
+	return _p, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_fileSize dispatches through IXMLDocument's vtable slot 8.
 func (self *IXMLDocument) Get_fileSize() (foundation.BSTR, error) {
 	var _p foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.HRESULTError(int32(r1))
+	return _p, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_fileModifiedDate dispatches through IXMLDocument's vtable slot 9.
 func (self *IXMLDocument) Get_fileModifiedDate() (foundation.BSTR, error) {
 	var _p foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.HRESULTError(int32(r1))
+	return _p, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_fileUpdatedDate dispatches through IXMLDocument's vtable slot 10.
 func (self *IXMLDocument) Get_fileUpdatedDate() (foundation.BSTR, error) {
 	var _p foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.HRESULTError(int32(r1))
+	return _p, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_URL dispatches through IXMLDocument's vtable slot 11.
 func (self *IXMLDocument) Get_URL() (foundation.BSTR, error) {
 	var _p foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.HRESULTError(int32(r1))
+	return _p, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_URL dispatches through IXMLDocument's vtable slot 12.
 func (self *IXMLDocument) Put_URL(p foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(p)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_mimeType dispatches through IXMLDocument's vtable slot 13.
 func (self *IXMLDocument) Get_mimeType() (foundation.BSTR, error) {
 	var _p foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.HRESULTError(int32(r1))
+	return _p, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_readyState dispatches through IXMLDocument's vtable slot 14.
 func (self *IXMLDocument) Get_readyState() (int32, error) {
 	var _pl int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pl)))
-	return _pl, win32.HRESULTError(int32(r1))
+	return _pl, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_charset dispatches through IXMLDocument's vtable slot 15.
 func (self *IXMLDocument) Get_charset() (foundation.BSTR, error) {
 	var _p foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.HRESULTError(int32(r1))
+	return _p, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_charset dispatches through IXMLDocument's vtable slot 16.
 func (self *IXMLDocument) Put_charset(p foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(p)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_version dispatches through IXMLDocument's vtable slot 17.
 func (self *IXMLDocument) Get_version() (foundation.BSTR, error) {
 	var _p foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.HRESULTError(int32(r1))
+	return _p, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_doctype dispatches through IXMLDocument's vtable slot 18.
 func (self *IXMLDocument) Get_doctype() (foundation.BSTR, error) {
 	var _p foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.HRESULTError(int32(r1))
+	return _p, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_dtdURL dispatches through IXMLDocument's vtable slot 19.
 func (self *IXMLDocument) Get_dtdURL() (foundation.BSTR, error) {
 	var _p foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.HRESULTError(int32(r1))
+	return _p, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 2b8de2fe-8d2d-11d1-b2fc-00c04fd915a9
@@ -3563,102 +3563,102 @@ var IID_IXMLDocument2 = win32.GUID{Data1: 0x2b8de2fe, Data2: 0x8d2d, Data3: 0x11
 func (self *IXMLDocument2) Get_root() (*IXMLElement2, error) {
 	var _p *IXMLElement2
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.HRESULTError(int32(r1))
+	return _p, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_fileSize dispatches through IXMLDocument2's vtable slot 8.
 func (self *IXMLDocument2) Get_fileSize() (foundation.BSTR, error) {
 	var _p foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.HRESULTError(int32(r1))
+	return _p, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_fileModifiedDate dispatches through IXMLDocument2's vtable slot 9.
 func (self *IXMLDocument2) Get_fileModifiedDate() (foundation.BSTR, error) {
 	var _p foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.HRESULTError(int32(r1))
+	return _p, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_fileUpdatedDate dispatches through IXMLDocument2's vtable slot 10.
 func (self *IXMLDocument2) Get_fileUpdatedDate() (foundation.BSTR, error) {
 	var _p foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.HRESULTError(int32(r1))
+	return _p, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_URL dispatches through IXMLDocument2's vtable slot 11.
 func (self *IXMLDocument2) Get_URL() (foundation.BSTR, error) {
 	var _p foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.HRESULTError(int32(r1))
+	return _p, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_URL dispatches through IXMLDocument2's vtable slot 12.
 func (self *IXMLDocument2) Put_URL(p foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(p)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_mimeType dispatches through IXMLDocument2's vtable slot 13.
 func (self *IXMLDocument2) Get_mimeType() (foundation.BSTR, error) {
 	var _p foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.HRESULTError(int32(r1))
+	return _p, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_readyState dispatches through IXMLDocument2's vtable slot 14.
 func (self *IXMLDocument2) Get_readyState() (int32, error) {
 	var _pl int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pl)))
-	return _pl, win32.HRESULTError(int32(r1))
+	return _pl, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_charset dispatches through IXMLDocument2's vtable slot 15.
 func (self *IXMLDocument2) Get_charset() (foundation.BSTR, error) {
 	var _p foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.HRESULTError(int32(r1))
+	return _p, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_charset dispatches through IXMLDocument2's vtable slot 16.
 func (self *IXMLDocument2) Put_charset(p foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(p)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_version dispatches through IXMLDocument2's vtable slot 17.
 func (self *IXMLDocument2) Get_version() (foundation.BSTR, error) {
 	var _p foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.HRESULTError(int32(r1))
+	return _p, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_doctype dispatches through IXMLDocument2's vtable slot 18.
 func (self *IXMLDocument2) Get_doctype() (foundation.BSTR, error) {
 	var _p foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.HRESULTError(int32(r1))
+	return _p, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_dtdURL dispatches through IXMLDocument2's vtable slot 19.
 func (self *IXMLDocument2) Get_dtdURL() (foundation.BSTR, error) {
 	var _p foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.HRESULTError(int32(r1))
+	return _p, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_async dispatches through IXMLDocument2's vtable slot 21.
 func (self *IXMLDocument2) Get_async() (foundation.VARIANT_BOOL, error) {
 	var _pf foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pf)))
-	return _pf, win32.HRESULTError(int32(r1))
+	return _pf, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_async dispatches through IXMLDocument2's vtable slot 22.
 func (self *IXMLDocument2) Put_async(f foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(f))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 3f7f31ac-e15f-11d0-9c25-00c04fc99c8e
@@ -3673,72 +3673,72 @@ var IID_IXMLElement = win32.GUID{Data1: 0x3f7f31ac, Data2: 0xe15f, Data3: 0x11d0
 func (self *IXMLElement) Get_tagName() (foundation.BSTR, error) {
 	var _p foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.HRESULTError(int32(r1))
+	return _p, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_tagName dispatches through IXMLElement's vtable slot 8.
 func (self *IXMLElement) Put_tagName(p foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(p)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_parent dispatches through IXMLElement's vtable slot 9.
 func (self *IXMLElement) Get_parent() (*IXMLElement, error) {
 	var _ppParent *IXMLElement
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppParent)))
-	return _ppParent, win32.HRESULTError(int32(r1))
+	return _ppParent, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAttribute dispatches through IXMLElement's vtable slot 11.
 func (self *IXMLElement) GetAttribute(strPropertyName foundation.BSTR) (systemvariant.VARIANT, error) {
 	var _PropertyValue systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strPropertyName)), uintptr(unsafe.Pointer(&_PropertyValue)))
-	return _PropertyValue, win32.HRESULTError(int32(r1))
+	return _PropertyValue, win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAttribute dispatches through IXMLElement's vtable slot 12.
 func (self *IXMLElement) RemoveAttribute(strPropertyName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strPropertyName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_children dispatches through IXMLElement's vtable slot 13.
 func (self *IXMLElement) Get_children() (*IXMLElementCollection, error) {
 	var _pp *IXMLElementCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pp)))
-	return _pp, win32.HRESULTError(int32(r1))
+	return _pp, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_type dispatches through IXMLElement's vtable slot 14.
 func (self *IXMLElement) Get_type() (int32, error) {
 	var _plType int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plType)))
-	return _plType, win32.HRESULTError(int32(r1))
+	return _plType, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_text dispatches through IXMLElement's vtable slot 15.
 func (self *IXMLElement) Get_text() (foundation.BSTR, error) {
 	var _p foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.HRESULTError(int32(r1))
+	return _p, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_text dispatches through IXMLElement's vtable slot 16.
 func (self *IXMLElement) Put_text(p foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(p)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddChild dispatches through IXMLElement's vtable slot 17.
 func (self *IXMLElement) AddChild(pChildElem *IXMLElement, lIndex int32, lReserved int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pChildElem)), uintptr(lIndex), uintptr(lReserved))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveChild dispatches through IXMLElement's vtable slot 18.
 func (self *IXMLElement) RemoveChild(pChildElem *IXMLElement) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pChildElem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 2b8de2ff-8d2d-11d1-b2fc-00c04fd915a9
@@ -3753,79 +3753,79 @@ var IID_IXMLElement2 = win32.GUID{Data1: 0x2b8de2ff, Data2: 0x8d2d, Data3: 0x11d
 func (self *IXMLElement2) Get_tagName() (foundation.BSTR, error) {
 	var _p foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.HRESULTError(int32(r1))
+	return _p, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_tagName dispatches through IXMLElement2's vtable slot 8.
 func (self *IXMLElement2) Put_tagName(p foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(p)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_parent dispatches through IXMLElement2's vtable slot 9.
 func (self *IXMLElement2) Get_parent() (*IXMLElement2, error) {
 	var _ppParent *IXMLElement2
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppParent)))
-	return _ppParent, win32.HRESULTError(int32(r1))
+	return _ppParent, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAttribute dispatches through IXMLElement2's vtable slot 11.
 func (self *IXMLElement2) GetAttribute(strPropertyName foundation.BSTR) (systemvariant.VARIANT, error) {
 	var _PropertyValue systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strPropertyName)), uintptr(unsafe.Pointer(&_PropertyValue)))
-	return _PropertyValue, win32.HRESULTError(int32(r1))
+	return _PropertyValue, win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAttribute dispatches through IXMLElement2's vtable slot 12.
 func (self *IXMLElement2) RemoveAttribute(strPropertyName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strPropertyName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_children dispatches through IXMLElement2's vtable slot 13.
 func (self *IXMLElement2) Get_children() (*IXMLElementCollection, error) {
 	var _pp *IXMLElementCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pp)))
-	return _pp, win32.HRESULTError(int32(r1))
+	return _pp, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_type dispatches through IXMLElement2's vtable slot 14.
 func (self *IXMLElement2) Get_type() (int32, error) {
 	var _plType int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plType)))
-	return _plType, win32.HRESULTError(int32(r1))
+	return _plType, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_text dispatches through IXMLElement2's vtable slot 15.
 func (self *IXMLElement2) Get_text() (foundation.BSTR, error) {
 	var _p foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.HRESULTError(int32(r1))
+	return _p, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_text dispatches through IXMLElement2's vtable slot 16.
 func (self *IXMLElement2) Put_text(p foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(p)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddChild dispatches through IXMLElement2's vtable slot 17.
 func (self *IXMLElement2) AddChild(pChildElem *IXMLElement2, lIndex int32, lReserved int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pChildElem)), uintptr(lIndex), uintptr(lReserved))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveChild dispatches through IXMLElement2's vtable slot 18.
 func (self *IXMLElement2) RemoveChild(pChildElem *IXMLElement2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pChildElem)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_attributes dispatches through IXMLElement2's vtable slot 19.
 func (self *IXMLElement2) Get_attributes() (*IXMLElementCollection, error) {
 	var _pp *IXMLElementCollection
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pp)))
-	return _pp, win32.HRESULTError(int32(r1))
+	return _pp, win32.ErrIfFailed(int32(r1))
 }
 
 // IXMLElementCollection: https://learn.microsoft.com/windows/win32/api/msxml/nn-msxml-ixmlelementcollection
@@ -3840,21 +3840,21 @@ var IID_IXMLElementCollection = win32.GUID{Data1: 0x65725580, Data2: 0x9b5d, Dat
 // Put_length dispatches through IXMLElementCollection's vtable slot 7.
 func (self *IXMLElementCollection) Put_length(v int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(v))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_length dispatches through IXMLElementCollection's vtable slot 8.
 func (self *IXMLElementCollection) Get_length() (int32, error) {
 	var _p int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.HRESULTError(int32(r1))
+	return _p, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__newEnum dispatches through IXMLElementCollection's vtable slot 9.
 func (self *IXMLElementCollection) Get__newEnum() (*systemcom.IUnknown, error) {
 	var _ppUnk *systemcom.IUnknown
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppUnk)))
-	return _ppUnk, win32.HRESULTError(int32(r1))
+	return _ppUnk, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 948c5ad3-c58d-11d0-9c0b-00c04fc99c8e
@@ -3868,7 +3868,7 @@ var IID_IXMLError = win32.GUID{Data1: 0x948c5ad3, Data2: 0xc58d, Data3: 0x11d0, 
 // GetErrorInfo dispatches through IXMLError's vtable slot 3.
 func (self *IXMLError) GetErrorInfo(pErrorReturn *XML_ERROR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pErrorReturn)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: ed8c108d-4349-11d2-91a4-00c04f7969e8
@@ -3882,82 +3882,82 @@ var IID_IXMLHTTPRequest = win32.GUID{Data1: 0xed8c108d, Data2: 0x4349, Data3: 0x
 // SetRequestHeader dispatches through IXMLHTTPRequest's vtable slot 8.
 func (self *IXMLHTTPRequest) SetRequestHeader(bstrHeader foundation.BSTR, bstrValue foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrHeader)), uintptr(unsafe.Pointer(bstrValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetResponseHeader dispatches through IXMLHTTPRequest's vtable slot 9.
 func (self *IXMLHTTPRequest) GetResponseHeader(bstrHeader foundation.BSTR) (foundation.BSTR, error) {
 	var _pbstrValue foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrHeader)), uintptr(unsafe.Pointer(&_pbstrValue)))
-	return _pbstrValue, win32.HRESULTError(int32(r1))
+	return _pbstrValue, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAllResponseHeaders dispatches through IXMLHTTPRequest's vtable slot 10.
 func (self *IXMLHTTPRequest) GetAllResponseHeaders() (foundation.BSTR, error) {
 	var _pbstrHeaders foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrHeaders)))
-	return _pbstrHeaders, win32.HRESULTError(int32(r1))
+	return _pbstrHeaders, win32.ErrIfFailed(int32(r1))
 }
 
 // Abort dispatches through IXMLHTTPRequest's vtable slot 12.
 func (self *IXMLHTTPRequest) Abort() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_status dispatches through IXMLHTTPRequest's vtable slot 13.
 func (self *IXMLHTTPRequest) Get_status() (int32, error) {
 	var _plStatus int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plStatus)))
-	return _plStatus, win32.HRESULTError(int32(r1))
+	return _plStatus, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_statusText dispatches through IXMLHTTPRequest's vtable slot 14.
 func (self *IXMLHTTPRequest) Get_statusText() (foundation.BSTR, error) {
 	var _pbstrStatus foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrStatus)))
-	return _pbstrStatus, win32.HRESULTError(int32(r1))
+	return _pbstrStatus, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_responseXML dispatches through IXMLHTTPRequest's vtable slot 15.
 func (self *IXMLHTTPRequest) Get_responseXML() (*systemcom.IDispatch, error) {
 	var _ppBody *systemcom.IDispatch
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppBody)))
-	return _ppBody, win32.HRESULTError(int32(r1))
+	return _ppBody, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_responseText dispatches through IXMLHTTPRequest's vtable slot 16.
 func (self *IXMLHTTPRequest) Get_responseText() (foundation.BSTR, error) {
 	var _pbstrBody foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrBody)))
-	return _pbstrBody, win32.HRESULTError(int32(r1))
+	return _pbstrBody, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_responseBody dispatches through IXMLHTTPRequest's vtable slot 17.
 func (self *IXMLHTTPRequest) Get_responseBody() (systemvariant.VARIANT, error) {
 	var _pvarBody systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarBody)))
-	return _pvarBody, win32.HRESULTError(int32(r1))
+	return _pvarBody, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_responseStream dispatches through IXMLHTTPRequest's vtable slot 18.
 func (self *IXMLHTTPRequest) Get_responseStream() (systemvariant.VARIANT, error) {
 	var _pvarBody systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarBody)))
-	return _pvarBody, win32.HRESULTError(int32(r1))
+	return _pvarBody, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_readyState dispatches through IXMLHTTPRequest's vtable slot 19.
 func (self *IXMLHTTPRequest) Get_readyState() (int32, error) {
 	var _plState int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plState)))
-	return _plState, win32.HRESULTError(int32(r1))
+	return _plState, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_onreadystatechange dispatches through IXMLHTTPRequest's vtable slot 20.
 func (self *IXMLHTTPRequest) Put_onreadystatechange(pReadyStateSink *systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pReadyStateSink)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXMLHTTPRequest2: https://learn.microsoft.com/windows/win32/api/msxml6/nn-msxml6-ixmlhttprequest2
@@ -3978,37 +3978,37 @@ func (self *IXMLHTTPRequest2) Open(pwszMethod string, pwszUrl string, pStatusCal
 	_pwszProxyUserName := win32.UTF16Ptr(pwszProxyUserName)
 	_pwszProxyPassword := win32.UTF16Ptr(pwszProxyPassword)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszMethod)), uintptr(unsafe.Pointer(_pwszUrl)), uintptr(unsafe.Pointer(pStatusCallback)), uintptr(unsafe.Pointer(_pwszUserName)), uintptr(unsafe.Pointer(_pwszPassword)), uintptr(unsafe.Pointer(_pwszProxyUserName)), uintptr(unsafe.Pointer(_pwszProxyPassword)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Send dispatches through IXMLHTTPRequest2's vtable slot 4.
 func (self *IXMLHTTPRequest2) Send(pBody *systemcom.ISequentialStream, cbBody uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBody)), uintptr(cbBody))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Abort dispatches through IXMLHTTPRequest2's vtable slot 5.
 func (self *IXMLHTTPRequest2) Abort() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCookie dispatches through IXMLHTTPRequest2's vtable slot 6.
 func (self *IXMLHTTPRequest2) SetCookie(pCookie *XHR_COOKIE, pdwCookieState *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCookie)), uintptr(unsafe.Pointer(pdwCookieState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetCustomResponseStream dispatches through IXMLHTTPRequest2's vtable slot 7.
 func (self *IXMLHTTPRequest2) SetCustomResponseStream(pSequentialStream *systemcom.ISequentialStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSequentialStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetProperty dispatches through IXMLHTTPRequest2's vtable slot 8.
 func (self *IXMLHTTPRequest2) SetProperty(eProperty XHR_PROPERTY, ullValue uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(eProperty), uintptr(ullValue))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetRequestHeader dispatches through IXMLHTTPRequest2's vtable slot 9.
@@ -4016,13 +4016,13 @@ func (self *IXMLHTTPRequest2) SetRequestHeader(pwszHeader string, pwszValue stri
 	_pwszHeader := win32.UTF16Ptr(pwszHeader)
 	_pwszValue := win32.UTF16Ptr(pwszValue)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszHeader)), uintptr(unsafe.Pointer(_pwszValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAllResponseHeaders dispatches through IXMLHTTPRequest2's vtable slot 10.
 func (self *IXMLHTTPRequest2) GetAllResponseHeaders(ppwszHeaders **uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwszHeaders)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCookie dispatches through IXMLHTTPRequest2's vtable slot 11.
@@ -4030,14 +4030,14 @@ func (self *IXMLHTTPRequest2) GetCookie(pwszUrl string, pwszName string, dwFlags
 	_pwszUrl := win32.UTF16Ptr(pwszUrl)
 	_pwszName := win32.UTF16Ptr(pwszName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszUrl)), uintptr(unsafe.Pointer(_pwszName)), uintptr(dwFlags), uintptr(unsafe.Pointer(pcCookies)), uintptr(unsafe.Pointer(ppCookies)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetResponseHeader dispatches through IXMLHTTPRequest2's vtable slot 12.
 func (self *IXMLHTTPRequest2) GetResponseHeader(pwszHeader string, ppwszValue **uint16) error {
 	_pwszHeader := win32.UTF16Ptr(pwszHeader)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszHeader)), uintptr(unsafe.Pointer(ppwszValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXMLHTTPRequest2Callback: https://learn.microsoft.com/windows/win32/api/msxml6/nn-msxml6-ixmlhttprequest2callback
@@ -4053,32 +4053,32 @@ var IID_IXMLHTTPRequest2Callback = win32.GUID{Data1: 0xa44a9299, Data2: 0xe321, 
 func (self *IXMLHTTPRequest2Callback) OnRedirect(pXHR *IXMLHTTPRequest2, pwszRedirectUrl string) error {
 	_pwszRedirectUrl := win32.UTF16Ptr(pwszRedirectUrl)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pXHR)), uintptr(unsafe.Pointer(_pwszRedirectUrl)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnHeadersAvailable dispatches through IXMLHTTPRequest2Callback's vtable slot 4.
 func (self *IXMLHTTPRequest2Callback) OnHeadersAvailable(pXHR *IXMLHTTPRequest2, dwStatus uint32, pwszStatus string) error {
 	_pwszStatus := win32.UTF16Ptr(pwszStatus)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pXHR)), uintptr(dwStatus), uintptr(unsafe.Pointer(_pwszStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnDataAvailable dispatches through IXMLHTTPRequest2Callback's vtable slot 5.
 func (self *IXMLHTTPRequest2Callback) OnDataAvailable(pXHR *IXMLHTTPRequest2, pResponseStream *systemcom.ISequentialStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pXHR)), uintptr(unsafe.Pointer(pResponseStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnResponseReceived dispatches through IXMLHTTPRequest2Callback's vtable slot 6.
 func (self *IXMLHTTPRequest2Callback) OnResponseReceived(pXHR *IXMLHTTPRequest2, pResponseStream *systemcom.ISequentialStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pXHR)), uintptr(unsafe.Pointer(pResponseStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnError dispatches through IXMLHTTPRequest2Callback's vtable slot 7.
 func (self *IXMLHTTPRequest2Callback) OnError(pXHR *IXMLHTTPRequest2, hrError foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pXHR)), uintptr(hrError))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXMLHTTPRequest3: https://learn.microsoft.com/windows/win32/api/msxml6/nn-msxml6-ixmlhttprequest3
@@ -4098,7 +4098,7 @@ func (self *IXMLHTTPRequest3) SetClientCertificate(pbClientCertificateHash []byt
 	}
 	_pwszPin := win32.UTF16Ptr(pwszPin)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(len(pbClientCertificateHash)), uintptr(unsafe.Pointer(_pbClientCertificateHash)), uintptr(unsafe.Pointer(_pwszPin)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXMLHTTPRequest3Callback: https://learn.microsoft.com/windows/win32/api/msxml6/nn-msxml6-ixmlhttprequest3callback
@@ -4117,7 +4117,7 @@ func (self *IXMLHTTPRequest3Callback) OnServerCertificateReceived(pXHR *IXMLHTTP
 		_rgServerCertificateChain = &rgServerCertificateChain[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pXHR)), uintptr(dwCertificateErrors), uintptr(len(rgServerCertificateChain)), uintptr(unsafe.Pointer(_rgServerCertificateChain)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnClientCertificateRequested dispatches through IXMLHTTPRequest3Callback's vtable slot 9.
@@ -4127,7 +4127,7 @@ func (self *IXMLHTTPRequest3Callback) OnClientCertificateRequested(pXHR *IXMLHTT
 		_rgpwszIssuerList = &rgpwszIssuerList[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pXHR)), uintptr(len(rgpwszIssuerList)), uintptr(unsafe.Pointer(_rgpwszIssuerList)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 2933bf92-7b36-11d2-b20e-00c04f983e60
@@ -4142,74 +4142,74 @@ var IID_IXSLProcessor = win32.GUID{Data1: 0x2933bf92, Data2: 0x7b36, Data3: 0x11
 func (self *IXSLProcessor) Get_input() (systemvariant.VARIANT, error) {
 	var _pVar systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVar)))
-	return _pVar, win32.HRESULTError(int32(r1))
+	return _pVar, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ownerTemplate dispatches through IXSLProcessor's vtable slot 9.
 func (self *IXSLProcessor) Get_ownerTemplate() (*IXSLTemplate, error) {
 	var _ppTemplate *IXSLTemplate
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppTemplate)))
-	return _ppTemplate, win32.HRESULTError(int32(r1))
+	return _ppTemplate, win32.ErrIfFailed(int32(r1))
 }
 
 // SetStartMode dispatches through IXSLProcessor's vtable slot 10.
 func (self *IXSLProcessor) SetStartMode(mode foundation.BSTR, namespaceURI foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(mode)), uintptr(unsafe.Pointer(namespaceURI)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_startMode dispatches through IXSLProcessor's vtable slot 11.
 func (self *IXSLProcessor) Get_startMode() (foundation.BSTR, error) {
 	var _mode foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_mode)))
-	return _mode, win32.HRESULTError(int32(r1))
+	return _mode, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_startModeURI dispatches through IXSLProcessor's vtable slot 12.
 func (self *IXSLProcessor) Get_startModeURI() (foundation.BSTR, error) {
 	var _namespaceURI foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_namespaceURI)))
-	return _namespaceURI, win32.HRESULTError(int32(r1))
+	return _namespaceURI, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_output dispatches through IXSLProcessor's vtable slot 14.
 func (self *IXSLProcessor) Get_output() (systemvariant.VARIANT, error) {
 	var _pOutput systemvariant.VARIANT
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pOutput)))
-	return _pOutput, win32.HRESULTError(int32(r1))
+	return _pOutput, win32.ErrIfFailed(int32(r1))
 }
 
 // Transform dispatches through IXSLProcessor's vtable slot 15.
 func (self *IXSLProcessor) Transform() (foundation.VARIANT_BOOL, error) {
 	var _pDone foundation.VARIANT_BOOL
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDone)))
-	return _pDone, win32.HRESULTError(int32(r1))
+	return _pDone, win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IXSLProcessor's vtable slot 16.
 func (self *IXSLProcessor) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_readyState dispatches through IXSLProcessor's vtable slot 17.
 func (self *IXSLProcessor) Get_readyState() (int32, error) {
 	var _pReadyState int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pReadyState)))
-	return _pReadyState, win32.HRESULTError(int32(r1))
+	return _pReadyState, win32.ErrIfFailed(int32(r1))
 }
 
 // AddObject dispatches through IXSLProcessor's vtable slot 19.
 func (self *IXSLProcessor) AddObject(obj *systemcom.IDispatch, namespaceURI foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(obj)), uintptr(unsafe.Pointer(namespaceURI)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_stylesheet dispatches through IXSLProcessor's vtable slot 20.
 func (self *IXSLProcessor) Get_stylesheet() (*IXMLDOMNode, error) {
 	var _stylesheet *IXMLDOMNode
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_stylesheet)))
-	return _stylesheet, win32.HRESULTError(int32(r1))
+	return _stylesheet, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 2933bf93-7b36-11d2-b20e-00c04f983e60
@@ -4223,21 +4223,21 @@ var IID_IXSLTemplate = win32.GUID{Data1: 0x2933bf93, Data2: 0x7b36, Data3: 0x11d
 // Putref_stylesheet dispatches through IXSLTemplate's vtable slot 7.
 func (self *IXSLTemplate) Putref_stylesheet(stylesheet *IXMLDOMNode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(stylesheet)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_stylesheet dispatches through IXSLTemplate's vtable slot 8.
 func (self *IXSLTemplate) Get_stylesheet() (*IXMLDOMNode, error) {
 	var _stylesheet *IXMLDOMNode
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_stylesheet)))
-	return _stylesheet, win32.HRESULTError(int32(r1))
+	return _stylesheet, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateProcessor dispatches through IXSLTemplate's vtable slot 9.
 func (self *IXSLTemplate) CreateProcessor() (*IXSLProcessor, error) {
 	var _ppProcessor *IXSLProcessor
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProcessor)))
-	return _ppProcessor, win32.HRESULTError(int32(r1))
+	return _ppProcessor, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 3efaa425-272f-11d2-836f-0000f87a7782
@@ -4252,42 +4252,42 @@ var IID_IXTLRuntime = win32.GUID{Data1: 0x3efaa425, Data2: 0x272f, Data3: 0x11d2
 func (self *IXTLRuntime) UniqueID(pNode *IXMLDOMNode) (int32, error) {
 	var _pID int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNode)), uintptr(unsafe.Pointer(&_pID)))
-	return _pID, win32.HRESULTError(int32(r1))
+	return _pID, win32.ErrIfFailed(int32(r1))
 }
 
 // Depth dispatches through IXTLRuntime's vtable slot 44.
 func (self *IXTLRuntime) Depth(pNode *IXMLDOMNode) (int32, error) {
 	var _pDepth int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNode)), uintptr(unsafe.Pointer(&_pDepth)))
-	return _pDepth, win32.HRESULTError(int32(r1))
+	return _pDepth, win32.ErrIfFailed(int32(r1))
 }
 
 // ChildNumber dispatches through IXTLRuntime's vtable slot 45.
 func (self *IXTLRuntime) ChildNumber(pNode *IXMLDOMNode) (int32, error) {
 	var _pNumber int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNode)), uintptr(unsafe.Pointer(&_pNumber)))
-	return _pNumber, win32.HRESULTError(int32(r1))
+	return _pNumber, win32.ErrIfFailed(int32(r1))
 }
 
 // AncestorChildNumber dispatches through IXTLRuntime's vtable slot 46.
 func (self *IXTLRuntime) AncestorChildNumber(bstrNodeName foundation.BSTR, pNode *IXMLDOMNode) (int32, error) {
 	var _pNumber int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrNodeName)), uintptr(unsafe.Pointer(pNode)), uintptr(unsafe.Pointer(&_pNumber)))
-	return _pNumber, win32.HRESULTError(int32(r1))
+	return _pNumber, win32.ErrIfFailed(int32(r1))
 }
 
 // AbsoluteChildNumber dispatches through IXTLRuntime's vtable slot 47.
 func (self *IXTLRuntime) AbsoluteChildNumber(pNode *IXMLDOMNode) (int32, error) {
 	var _pNumber int32
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNode)), uintptr(unsafe.Pointer(&_pNumber)))
-	return _pNumber, win32.HRESULTError(int32(r1))
+	return _pNumber, win32.ErrIfFailed(int32(r1))
 }
 
 // FormatIndex dispatches through IXTLRuntime's vtable slot 48.
 func (self *IXTLRuntime) FormatIndex(lIndex int32, bstrFormat foundation.BSTR) (foundation.BSTR, error) {
 	var _pbstrFormattedString foundation.BSTR
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(bstrFormat)), uintptr(unsafe.Pointer(&_pbstrFormattedString)))
-	return _pbstrFormattedString, win32.HRESULTError(int32(r1))
+	return _pbstrFormattedString, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 3efaa427-272f-11d2-836f-0000f87a7782

@@ -28,7 +28,7 @@ var IID_IConnectionRequestCallback = win32.GUID{Data1: 0x272c9ae0, Data2: 0x7161
 // OnComplete dispatches through IConnectionRequestCallback's vtable slot 3.
 func (self *IConnectionRequestCallback) OnComplete(hrStatus foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hrStatus))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumPortableDeviceConnectors: https://learn.microsoft.com/windows/win32/wpd_sdk/ienumportabledeviceconnectors
@@ -47,25 +47,25 @@ func (self *IEnumPortableDeviceConnectors) Next(pConnectors []*IPortableDeviceCo
 		_pConnectors = &pConnectors[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pConnectors)), uintptr(unsafe.Pointer(_pConnectors)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumPortableDeviceConnectors's vtable slot 4.
 func (self *IEnumPortableDeviceConnectors) Skip(cConnectors uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cConnectors))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumPortableDeviceConnectors's vtable slot 5.
 func (self *IEnumPortableDeviceConnectors) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IEnumPortableDeviceConnectors's vtable slot 6.
 func (self *IEnumPortableDeviceConnectors) Clone(ppEnum **IEnumPortableDeviceConnectors) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumPortableDeviceObjectIDs: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-ienumportabledeviceobjectids
@@ -84,31 +84,31 @@ func (self *IEnumPortableDeviceObjectIDs) Next(pObjIDs []foundation.PWSTR, pcFet
 		_pObjIDs = &pObjIDs[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pObjIDs)), uintptr(unsafe.Pointer(_pObjIDs)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumPortableDeviceObjectIDs's vtable slot 4.
 func (self *IEnumPortableDeviceObjectIDs) Skip(cObjects uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cObjects))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumPortableDeviceObjectIDs's vtable slot 5.
 func (self *IEnumPortableDeviceObjectIDs) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IEnumPortableDeviceObjectIDs's vtable slot 6.
 func (self *IEnumPortableDeviceObjectIDs) Clone(ppEnum **IEnumPortableDeviceObjectIDs) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Cancel dispatches through IEnumPortableDeviceObjectIDs's vtable slot 7.
 func (self *IEnumPortableDeviceObjectIDs) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 6cfdcab5-fc47-42a5-9241-074b58830e73
@@ -122,13 +122,13 @@ var IID_IMediaRadioManager = win32.GUID{Data1: 0x6cfdcab5, Data2: 0xfc47, Data3:
 // GetRadioInstances dispatches through IMediaRadioManager's vtable slot 3.
 func (self *IMediaRadioManager) GetRadioInstances(ppCollection **IRadioInstanceCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCollection)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnSystemRadioStateChange dispatches through IMediaRadioManager's vtable slot 4.
 func (self *IMediaRadioManager) OnSystemRadioStateChange(sysRadioState SYSTEM_RADIO_STATE, uTimeoutSec uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(sysRadioState), uintptr(uTimeoutSec))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 89d81f5f-c147-49ed-a11c-77b20c31e7c9
@@ -142,19 +142,19 @@ var IID_IMediaRadioManagerNotifySink = win32.GUID{Data1: 0x89d81f5f, Data2: 0xc1
 // OnInstanceAdd dispatches through IMediaRadioManagerNotifySink's vtable slot 3.
 func (self *IMediaRadioManagerNotifySink) OnInstanceAdd(pRadioInstance *IRadioInstance) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRadioInstance)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnInstanceRemove dispatches through IMediaRadioManagerNotifySink's vtable slot 4.
 func (self *IMediaRadioManagerNotifySink) OnInstanceRemove(bstrRadioInstanceId foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRadioInstanceId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnInstanceRadioChange dispatches through IMediaRadioManagerNotifySink's vtable slot 5.
 func (self *IMediaRadioManagerNotifySink) OnInstanceRadioChange(bstrRadioInstanceId foundation.BSTR, radioState DEVICE_RADIO_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRadioInstanceId)), uintptr(radioState))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPortableDevice: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledevice
@@ -170,56 +170,56 @@ var IID_IPortableDevice = win32.GUID{Data1: 0x625e2df8, Data2: 0x6392, Data3: 0x
 func (self *IPortableDevice) Open(pszPnPDeviceID string, pClientInfo *IPortableDeviceValues) error {
 	_pszPnPDeviceID := win32.UTF16Ptr(pszPnPDeviceID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPnPDeviceID)), uintptr(unsafe.Pointer(pClientInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendCommand dispatches through IPortableDevice's vtable slot 4.
 func (self *IPortableDevice) SendCommand(dwFlags uint32, pParameters *IPortableDeviceValues, ppResults **IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(pParameters)), uintptr(unsafe.Pointer(ppResults)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Content dispatches through IPortableDevice's vtable slot 5.
 func (self *IPortableDevice) Content(ppContent **IPortableDeviceContent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppContent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Capabilities dispatches through IPortableDevice's vtable slot 6.
 func (self *IPortableDevice) Capabilities(ppCapabilities **IPortableDeviceCapabilities) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCapabilities)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Cancel dispatches through IPortableDevice's vtable slot 7.
 func (self *IPortableDevice) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Close dispatches through IPortableDevice's vtable slot 8.
 func (self *IPortableDevice) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Advise dispatches through IPortableDevice's vtable slot 9.
 func (self *IPortableDevice) Advise(dwFlags uint32, pCallback *IPortableDeviceEventCallback, pParameters *IPortableDeviceValues, ppszCookie *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pParameters)), uintptr(unsafe.Pointer(ppszCookie)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Unadvise dispatches through IPortableDevice's vtable slot 10.
 func (self *IPortableDevice) Unadvise(pszCookie string) error {
 	_pszCookie := win32.UTF16Ptr(pszCookie)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszCookie)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPnPDeviceID dispatches through IPortableDevice's vtable slot 11.
 func (self *IPortableDevice) GetPnPDeviceID(ppszPnPDeviceID *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszPnPDeviceID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPortableDeviceCapabilities: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledevicecapabilities
@@ -234,67 +234,67 @@ var IID_IPortableDeviceCapabilities = win32.GUID{Data1: 0x2c8c6dbf, Data2: 0xe3d
 // GetSupportedCommands dispatches through IPortableDeviceCapabilities's vtable slot 3.
 func (self *IPortableDeviceCapabilities) GetSupportedCommands(ppCommands **IPortableDeviceKeyCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCommands)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCommandOptions dispatches through IPortableDeviceCapabilities's vtable slot 4.
 func (self *IPortableDeviceCapabilities) GetCommandOptions(Command *foundation.PROPERTYKEY, ppOptions **IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Command)), uintptr(unsafe.Pointer(ppOptions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFunctionalCategories dispatches through IPortableDeviceCapabilities's vtable slot 5.
 func (self *IPortableDeviceCapabilities) GetFunctionalCategories(ppCategories **IPortableDevicePropVariantCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCategories)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFunctionalObjects dispatches through IPortableDeviceCapabilities's vtable slot 6.
 func (self *IPortableDeviceCapabilities) GetFunctionalObjects(Category *win32.GUID, ppObjectIDs **IPortableDevicePropVariantCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Category)), uintptr(unsafe.Pointer(ppObjectIDs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSupportedContentTypes dispatches through IPortableDeviceCapabilities's vtable slot 7.
 func (self *IPortableDeviceCapabilities) GetSupportedContentTypes(Category *win32.GUID, ppContentTypes **IPortableDevicePropVariantCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Category)), uintptr(unsafe.Pointer(ppContentTypes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSupportedFormats dispatches through IPortableDeviceCapabilities's vtable slot 8.
 func (self *IPortableDeviceCapabilities) GetSupportedFormats(ContentType *win32.GUID, ppFormats **IPortableDevicePropVariantCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ContentType)), uintptr(unsafe.Pointer(ppFormats)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSupportedFormatProperties dispatches through IPortableDeviceCapabilities's vtable slot 9.
 func (self *IPortableDeviceCapabilities) GetSupportedFormatProperties(Format *win32.GUID, ppKeys **IPortableDeviceKeyCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Format)), uintptr(unsafe.Pointer(ppKeys)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFixedPropertyAttributes dispatches through IPortableDeviceCapabilities's vtable slot 10.
 func (self *IPortableDeviceCapabilities) GetFixedPropertyAttributes(Format *win32.GUID, Key *foundation.PROPERTYKEY, ppAttributes **IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Format)), uintptr(unsafe.Pointer(Key)), uintptr(unsafe.Pointer(ppAttributes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Cancel dispatches through IPortableDeviceCapabilities's vtable slot 11.
 func (self *IPortableDeviceCapabilities) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSupportedEvents dispatches through IPortableDeviceCapabilities's vtable slot 12.
 func (self *IPortableDeviceCapabilities) GetSupportedEvents(ppEvents **IPortableDevicePropVariantCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEvents)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEventOptions dispatches through IPortableDeviceCapabilities's vtable slot 13.
 func (self *IPortableDeviceCapabilities) GetEventOptions(Event *win32.GUID, ppOptions **IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Event)), uintptr(unsafe.Pointer(ppOptions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPortableDeviceConnector: https://learn.microsoft.com/windows/win32/api/portabledeviceconnectapi/nn-portabledeviceconnectapi-iportabledeviceconnector
@@ -309,25 +309,25 @@ var IID_IPortableDeviceConnector = win32.GUID{Data1: 0x625e2df8, Data2: 0x6392, 
 // Connect dispatches through IPortableDeviceConnector's vtable slot 3.
 func (self *IPortableDeviceConnector) Connect(pCallback *IConnectionRequestCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallback)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Disconnect dispatches through IPortableDeviceConnector's vtable slot 4.
 func (self *IPortableDeviceConnector) Disconnect(pCallback *IConnectionRequestCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallback)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Cancel dispatches through IPortableDeviceConnector's vtable slot 5.
 func (self *IPortableDeviceConnector) Cancel(pCallback *IConnectionRequestCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallback)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetProperty dispatches through IPortableDeviceConnector's vtable slot 6.
 func (self *IPortableDeviceConnector) GetProperty(pPropertyKey *foundation.DEVPROPKEY, pPropertyType *devicesproperties.DEVPROPTYPE, ppData **byte, pcbData *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPropertyKey)), uintptr(unsafe.Pointer(pPropertyType)), uintptr(unsafe.Pointer(ppData)), uintptr(unsafe.Pointer(pcbData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetProperty dispatches through IPortableDeviceConnector's vtable slot 7.
@@ -337,13 +337,13 @@ func (self *IPortableDeviceConnector) SetProperty(pPropertyKey *foundation.DEVPR
 		_pData = &pData[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPropertyKey)), uintptr(PropertyType), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPnPID dispatches through IPortableDeviceConnector's vtable slot 8.
 func (self *IPortableDeviceConnector) GetPnPID(ppwszPnPID *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwszPnPID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPortableDeviceContent: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledevicecontent
@@ -359,63 +359,63 @@ var IID_IPortableDeviceContent = win32.GUID{Data1: 0x6a96ed84, Data2: 0x7c73, Da
 func (self *IPortableDeviceContent) EnumObjects(dwFlags uint32, pszParentObjectID string, pFilter *IPortableDeviceValues, ppEnum **IEnumPortableDeviceObjectIDs) error {
 	_pszParentObjectID := win32.UTF16Ptr(pszParentObjectID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(_pszParentObjectID)), uintptr(unsafe.Pointer(pFilter)), uintptr(unsafe.Pointer(ppEnum)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Properties dispatches through IPortableDeviceContent's vtable slot 4.
 func (self *IPortableDeviceContent) Properties(ppProperties **IPortableDeviceProperties) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProperties)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Transfer dispatches through IPortableDeviceContent's vtable slot 5.
 func (self *IPortableDeviceContent) Transfer(ppResources **IPortableDeviceResources) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResources)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateObjectWithPropertiesOnly dispatches through IPortableDeviceContent's vtable slot 6.
 func (self *IPortableDeviceContent) CreateObjectWithPropertiesOnly(pValues *IPortableDeviceValues, ppszObjectID *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValues)), uintptr(unsafe.Pointer(ppszObjectID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateObjectWithPropertiesAndData dispatches through IPortableDeviceContent's vtable slot 7.
 func (self *IPortableDeviceContent) CreateObjectWithPropertiesAndData(pValues *IPortableDeviceValues, ppData **systemcom.IStream, pdwOptimalWriteBufferSize *uint32, ppszCookie *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValues)), uintptr(unsafe.Pointer(ppData)), uintptr(unsafe.Pointer(pdwOptimalWriteBufferSize)), uintptr(unsafe.Pointer(ppszCookie)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IPortableDeviceContent's vtable slot 8.
 func (self *IPortableDeviceContent) Delete(dwOptions uint32, pObjectIDs *IPortableDevicePropVariantCollection, ppResults **IPortableDevicePropVariantCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwOptions), uintptr(unsafe.Pointer(pObjectIDs)), uintptr(unsafe.Pointer(ppResults)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetObjectIDsFromPersistentUniqueIDs dispatches through IPortableDeviceContent's vtable slot 9.
 func (self *IPortableDeviceContent) GetObjectIDsFromPersistentUniqueIDs(pPersistentUniqueIDs *IPortableDevicePropVariantCollection, ppObjectIDs **IPortableDevicePropVariantCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPersistentUniqueIDs)), uintptr(unsafe.Pointer(ppObjectIDs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Cancel dispatches through IPortableDeviceContent's vtable slot 10.
 func (self *IPortableDeviceContent) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Move dispatches through IPortableDeviceContent's vtable slot 11.
 func (self *IPortableDeviceContent) Move(pObjectIDs *IPortableDevicePropVariantCollection, pszDestinationFolderObjectID string, ppResults **IPortableDevicePropVariantCollection) error {
 	_pszDestinationFolderObjectID := win32.UTF16Ptr(pszDestinationFolderObjectID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObjectIDs)), uintptr(unsafe.Pointer(_pszDestinationFolderObjectID)), uintptr(unsafe.Pointer(ppResults)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Copy dispatches through IPortableDeviceContent's vtable slot 12.
 func (self *IPortableDeviceContent) Copy(pObjectIDs *IPortableDevicePropVariantCollection, pszDestinationFolderObjectID string, ppResults **IPortableDevicePropVariantCollection) error {
 	_pszDestinationFolderObjectID := win32.UTF16Ptr(pszDestinationFolderObjectID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObjectIDs)), uintptr(unsafe.Pointer(_pszDestinationFolderObjectID)), uintptr(unsafe.Pointer(ppResults)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPortableDeviceContent2: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledevicecontent2
@@ -431,7 +431,7 @@ var IID_IPortableDeviceContent2 = win32.GUID{Data1: 0x9b4add96, Data2: 0xf6bf, D
 func (self *IPortableDeviceContent2) UpdateObjectWithPropertiesAndData(pszObjectID string, pProperties *IPortableDeviceValues, ppData **systemcom.IStream, pdwOptimalWriteBufferSize *uint32) error {
 	_pszObjectID := win32.UTF16Ptr(pszObjectID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszObjectID)), uintptr(unsafe.Pointer(pProperties)), uintptr(unsafe.Pointer(ppData)), uintptr(unsafe.Pointer(pdwOptimalWriteBufferSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPortableDeviceDataStream: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledevicedatastream
@@ -446,13 +446,13 @@ var IID_IPortableDeviceDataStream = win32.GUID{Data1: 0x88e04db3, Data2: 0x1012,
 // GetObjectID dispatches through IPortableDeviceDataStream's vtable slot 14.
 func (self *IPortableDeviceDataStream) GetObjectID(ppszObjectID *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszObjectID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Cancel dispatches through IPortableDeviceDataStream's vtable slot 15.
 func (self *IPortableDeviceDataStream) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPortableDeviceDispatchFactory: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledevicedispatchfactory
@@ -468,7 +468,7 @@ var IID_IPortableDeviceDispatchFactory = win32.GUID{Data1: 0x5e1eafc3, Data2: 0x
 func (self *IPortableDeviceDispatchFactory) GetDeviceDispatch(pszPnPDeviceID string, ppDeviceDispatch **systemcom.IDispatch) error {
 	_pszPnPDeviceID := win32.UTF16Ptr(pszPnPDeviceID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPnPDeviceID)), uintptr(unsafe.Pointer(ppDeviceDispatch)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPortableDeviceEventCallback: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledeviceeventcallback
@@ -483,7 +483,7 @@ var IID_IPortableDeviceEventCallback = win32.GUID{Data1: 0xa8792a31, Data2: 0xf3
 // OnEvent dispatches through IPortableDeviceEventCallback's vtable slot 3.
 func (self *IPortableDeviceEventCallback) OnEvent(pEventParameters *IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEventParameters)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPortableDeviceKeyCollection: https://learn.microsoft.com/windows/win32/wpd_sdk/iportabledevicekeycollection
@@ -498,31 +498,31 @@ var IID_IPortableDeviceKeyCollection = win32.GUID{Data1: 0xdada2357, Data2: 0xe0
 // GetCount dispatches through IPortableDeviceKeyCollection's vtable slot 3.
 func (self *IPortableDeviceKeyCollection) GetCount(pcElems *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcElems)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAt dispatches through IPortableDeviceKeyCollection's vtable slot 4.
 func (self *IPortableDeviceKeyCollection) GetAt(dwIndex uint32, pKey *foundation.PROPERTYKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(pKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through IPortableDeviceKeyCollection's vtable slot 5.
 func (self *IPortableDeviceKeyCollection) Add(Key *foundation.PROPERTYKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Key)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through IPortableDeviceKeyCollection's vtable slot 6.
 func (self *IPortableDeviceKeyCollection) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAt dispatches through IPortableDeviceKeyCollection's vtable slot 7.
 func (self *IPortableDeviceKeyCollection) RemoveAt(dwIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPortableDeviceManager: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledevicemanager
@@ -537,34 +537,34 @@ var IID_IPortableDeviceManager = win32.GUID{Data1: 0xa1567595, Data2: 0x4c2f, Da
 // GetDevices dispatches through IPortableDeviceManager's vtable slot 3.
 func (self *IPortableDeviceManager) GetDevices(pPnPDeviceIDs *foundation.PWSTR, pcPnPDeviceIDs *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPnPDeviceIDs)), uintptr(unsafe.Pointer(pcPnPDeviceIDs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RefreshDeviceList dispatches through IPortableDeviceManager's vtable slot 4.
 func (self *IPortableDeviceManager) RefreshDeviceList() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceFriendlyName dispatches through IPortableDeviceManager's vtable slot 5.
 func (self *IPortableDeviceManager) GetDeviceFriendlyName(pszPnPDeviceID string, pDeviceFriendlyName foundation.PWSTR, pcchDeviceFriendlyName *uint32) error {
 	_pszPnPDeviceID := win32.UTF16Ptr(pszPnPDeviceID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPnPDeviceID)), uintptr(unsafe.Pointer(pDeviceFriendlyName)), uintptr(unsafe.Pointer(pcchDeviceFriendlyName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceDescription dispatches through IPortableDeviceManager's vtable slot 6.
 func (self *IPortableDeviceManager) GetDeviceDescription(pszPnPDeviceID string, pDeviceDescription foundation.PWSTR, pcchDeviceDescription *uint32) error {
 	_pszPnPDeviceID := win32.UTF16Ptr(pszPnPDeviceID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPnPDeviceID)), uintptr(unsafe.Pointer(pDeviceDescription)), uintptr(unsafe.Pointer(pcchDeviceDescription)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceManufacturer dispatches through IPortableDeviceManager's vtable slot 7.
 func (self *IPortableDeviceManager) GetDeviceManufacturer(pszPnPDeviceID string, pDeviceManufacturer foundation.PWSTR, pcchDeviceManufacturer *uint32) error {
 	_pszPnPDeviceID := win32.UTF16Ptr(pszPnPDeviceID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPnPDeviceID)), uintptr(unsafe.Pointer(pDeviceManufacturer)), uintptr(unsafe.Pointer(pcchDeviceManufacturer)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceProperty dispatches through IPortableDeviceManager's vtable slot 8.
@@ -572,13 +572,13 @@ func (self *IPortableDeviceManager) GetDeviceProperty(pszPnPDeviceID string, psz
 	_pszPnPDeviceID := win32.UTF16Ptr(pszPnPDeviceID)
 	_pszDevicePropertyName := win32.UTF16Ptr(pszDevicePropertyName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPnPDeviceID)), uintptr(unsafe.Pointer(_pszDevicePropertyName)), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(pcbData)), uintptr(unsafe.Pointer(pdwType)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPrivateDevices dispatches through IPortableDeviceManager's vtable slot 9.
 func (self *IPortableDeviceManager) GetPrivateDevices(pPnPDeviceIDs *foundation.PWSTR, pcPnPDeviceIDs *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPnPDeviceIDs)), uintptr(unsafe.Pointer(pcPnPDeviceIDs)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPortableDevicePropVariantCollection: https://learn.microsoft.com/windows/win32/wpd_sdk/iportabledevicepropvariantcollection
@@ -593,43 +593,43 @@ var IID_IPortableDevicePropVariantCollection = win32.GUID{Data1: 0x89b2e422, Dat
 // GetCount dispatches through IPortableDevicePropVariantCollection's vtable slot 3.
 func (self *IPortableDevicePropVariantCollection) GetCount(pcElems *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcElems)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAt dispatches through IPortableDevicePropVariantCollection's vtable slot 4.
 func (self *IPortableDevicePropVariantCollection) GetAt(dwIndex uint32, pValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through IPortableDevicePropVariantCollection's vtable slot 5.
 func (self *IPortableDevicePropVariantCollection) Add(pValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetType dispatches through IPortableDevicePropVariantCollection's vtable slot 6.
 func (self *IPortableDevicePropVariantCollection) GetType(pvt *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ChangeType dispatches through IPortableDevicePropVariantCollection's vtable slot 7.
 func (self *IPortableDevicePropVariantCollection) ChangeType(vt uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(vt))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through IPortableDevicePropVariantCollection's vtable slot 8.
 func (self *IPortableDevicePropVariantCollection) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAt dispatches through IPortableDevicePropVariantCollection's vtable slot 9.
 func (self *IPortableDevicePropVariantCollection) RemoveAt(dwIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPortableDeviceProperties: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledeviceproperties
@@ -645,41 +645,41 @@ var IID_IPortableDeviceProperties = win32.GUID{Data1: 0x7f6d695c, Data2: 0x03df,
 func (self *IPortableDeviceProperties) GetSupportedProperties(pszObjectID string, ppKeys **IPortableDeviceKeyCollection) error {
 	_pszObjectID := win32.UTF16Ptr(pszObjectID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszObjectID)), uintptr(unsafe.Pointer(ppKeys)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPropertyAttributes dispatches through IPortableDeviceProperties's vtable slot 4.
 func (self *IPortableDeviceProperties) GetPropertyAttributes(pszObjectID string, Key *foundation.PROPERTYKEY, ppAttributes **IPortableDeviceValues) error {
 	_pszObjectID := win32.UTF16Ptr(pszObjectID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszObjectID)), uintptr(unsafe.Pointer(Key)), uintptr(unsafe.Pointer(ppAttributes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetValues dispatches through IPortableDeviceProperties's vtable slot 5.
 func (self *IPortableDeviceProperties) GetValues(pszObjectID string, pKeys *IPortableDeviceKeyCollection, ppValues **IPortableDeviceValues) error {
 	_pszObjectID := win32.UTF16Ptr(pszObjectID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszObjectID)), uintptr(unsafe.Pointer(pKeys)), uintptr(unsafe.Pointer(ppValues)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetValues dispatches through IPortableDeviceProperties's vtable slot 6.
 func (self *IPortableDeviceProperties) SetValues(pszObjectID string, pValues *IPortableDeviceValues, ppResults **IPortableDeviceValues) error {
 	_pszObjectID := win32.UTF16Ptr(pszObjectID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszObjectID)), uintptr(unsafe.Pointer(pValues)), uintptr(unsafe.Pointer(ppResults)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IPortableDeviceProperties's vtable slot 7.
 func (self *IPortableDeviceProperties) Delete(pszObjectID string, pKeys *IPortableDeviceKeyCollection) error {
 	_pszObjectID := win32.UTF16Ptr(pszObjectID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszObjectID)), uintptr(unsafe.Pointer(pKeys)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Cancel dispatches through IPortableDeviceProperties's vtable slot 8.
 func (self *IPortableDeviceProperties) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPortableDevicePropertiesBulk: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledevicepropertiesbulk
@@ -694,32 +694,32 @@ var IID_IPortableDevicePropertiesBulk = win32.GUID{Data1: 0x482b05c0, Data2: 0x4
 // QueueGetValuesByObjectList dispatches through IPortableDevicePropertiesBulk's vtable slot 3.
 func (self *IPortableDevicePropertiesBulk) QueueGetValuesByObjectList(pObjectIDs *IPortableDevicePropVariantCollection, pKeys *IPortableDeviceKeyCollection, pCallback *IPortableDevicePropertiesBulkCallback, pContext *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObjectIDs)), uintptr(unsafe.Pointer(pKeys)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueueGetValuesByObjectFormat dispatches through IPortableDevicePropertiesBulk's vtable slot 4.
 func (self *IPortableDevicePropertiesBulk) QueueGetValuesByObjectFormat(pguidObjectFormat *win32.GUID, pszParentObjectID string, dwDepth uint32, pKeys *IPortableDeviceKeyCollection, pCallback *IPortableDevicePropertiesBulkCallback, pContext *win32.GUID) error {
 	_pszParentObjectID := win32.UTF16Ptr(pszParentObjectID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidObjectFormat)), uintptr(unsafe.Pointer(_pszParentObjectID)), uintptr(dwDepth), uintptr(unsafe.Pointer(pKeys)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueueSetValuesByObjectList dispatches through IPortableDevicePropertiesBulk's vtable slot 5.
 func (self *IPortableDevicePropertiesBulk) QueueSetValuesByObjectList(pObjectValues *IPortableDeviceValuesCollection, pCallback *IPortableDevicePropertiesBulkCallback, pContext *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObjectValues)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Start dispatches through IPortableDevicePropertiesBulk's vtable slot 6.
 func (self *IPortableDevicePropertiesBulk) Start(pContext *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Cancel dispatches through IPortableDevicePropertiesBulk's vtable slot 7.
 func (self *IPortableDevicePropertiesBulk) Cancel(pContext *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPortableDevicePropertiesBulkCallback: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledevicepropertiesbulkcallback
@@ -734,19 +734,19 @@ var IID_IPortableDevicePropertiesBulkCallback = win32.GUID{Data1: 0x9deacb80, Da
 // OnStart dispatches through IPortableDevicePropertiesBulkCallback's vtable slot 3.
 func (self *IPortableDevicePropertiesBulkCallback) OnStart(pContext *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnProgress dispatches through IPortableDevicePropertiesBulkCallback's vtable slot 4.
 func (self *IPortableDevicePropertiesBulkCallback) OnProgress(pContext *win32.GUID, pResults *IPortableDeviceValuesCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(pResults)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnEnd dispatches through IPortableDevicePropertiesBulkCallback's vtable slot 5.
 func (self *IPortableDevicePropertiesBulkCallback) OnEnd(pContext *win32.GUID, hrStatus foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pContext)), uintptr(hrStatus))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPortableDeviceResources: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledeviceresources
@@ -762,40 +762,40 @@ var IID_IPortableDeviceResources = win32.GUID{Data1: 0xfd8878ac, Data2: 0xd841, 
 func (self *IPortableDeviceResources) GetSupportedResources(pszObjectID string, ppKeys **IPortableDeviceKeyCollection) error {
 	_pszObjectID := win32.UTF16Ptr(pszObjectID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszObjectID)), uintptr(unsafe.Pointer(ppKeys)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetResourceAttributes dispatches through IPortableDeviceResources's vtable slot 4.
 func (self *IPortableDeviceResources) GetResourceAttributes(pszObjectID string, Key *foundation.PROPERTYKEY, ppResourceAttributes **IPortableDeviceValues) error {
 	_pszObjectID := win32.UTF16Ptr(pszObjectID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszObjectID)), uintptr(unsafe.Pointer(Key)), uintptr(unsafe.Pointer(ppResourceAttributes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStream dispatches through IPortableDeviceResources's vtable slot 5.
 func (self *IPortableDeviceResources) GetStream(pszObjectID string, Key *foundation.PROPERTYKEY, dwMode uint32, pdwOptimalBufferSize *uint32, ppStream **systemcom.IStream) error {
 	_pszObjectID := win32.UTF16Ptr(pszObjectID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszObjectID)), uintptr(unsafe.Pointer(Key)), uintptr(dwMode), uintptr(unsafe.Pointer(pdwOptimalBufferSize)), uintptr(unsafe.Pointer(ppStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IPortableDeviceResources's vtable slot 6.
 func (self *IPortableDeviceResources) Delete(pszObjectID string, pKeys *IPortableDeviceKeyCollection) error {
 	_pszObjectID := win32.UTF16Ptr(pszObjectID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszObjectID)), uintptr(unsafe.Pointer(pKeys)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Cancel dispatches through IPortableDeviceResources's vtable slot 7.
 func (self *IPortableDeviceResources) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateResource dispatches through IPortableDeviceResources's vtable slot 8.
 func (self *IPortableDeviceResources) CreateResource(pResourceAttributes *IPortableDeviceValues, ppData **systemcom.IStream, pdwOptimalWriteBufferSize *uint32, ppszCookie *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResourceAttributes)), uintptr(unsafe.Pointer(ppData)), uintptr(unsafe.Pointer(pdwOptimalWriteBufferSize)), uintptr(unsafe.Pointer(ppszCookie)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPortableDeviceService: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledeviceservice
@@ -811,68 +811,68 @@ var IID_IPortableDeviceService = win32.GUID{Data1: 0xd3bd3a44, Data2: 0xd7b5, Da
 func (self *IPortableDeviceService) Open(pszPnPServiceID string, pClientInfo *IPortableDeviceValues) error {
 	_pszPnPServiceID := win32.UTF16Ptr(pszPnPServiceID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPnPServiceID)), uintptr(unsafe.Pointer(pClientInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Capabilities dispatches through IPortableDeviceService's vtable slot 4.
 func (self *IPortableDeviceService) Capabilities(ppCapabilities **IPortableDeviceServiceCapabilities) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCapabilities)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Content dispatches through IPortableDeviceService's vtable slot 5.
 func (self *IPortableDeviceService) Content(ppContent **IPortableDeviceContent2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppContent)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Methods dispatches through IPortableDeviceService's vtable slot 6.
 func (self *IPortableDeviceService) Methods(ppMethods **IPortableDeviceServiceMethods) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppMethods)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Cancel dispatches through IPortableDeviceService's vtable slot 7.
 func (self *IPortableDeviceService) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Close dispatches through IPortableDeviceService's vtable slot 8.
 func (self *IPortableDeviceService) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetServiceObjectID dispatches through IPortableDeviceService's vtable slot 9.
 func (self *IPortableDeviceService) GetServiceObjectID(ppszServiceObjectID *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszServiceObjectID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPnPServiceID dispatches through IPortableDeviceService's vtable slot 10.
 func (self *IPortableDeviceService) GetPnPServiceID(ppszPnPServiceID *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszPnPServiceID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Advise dispatches through IPortableDeviceService's vtable slot 11.
 func (self *IPortableDeviceService) Advise(dwFlags uint32, pCallback *IPortableDeviceEventCallback, pParameters *IPortableDeviceValues, ppszCookie *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pParameters)), uintptr(unsafe.Pointer(ppszCookie)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Unadvise dispatches through IPortableDeviceService's vtable slot 12.
 func (self *IPortableDeviceService) Unadvise(pszCookie string) error {
 	_pszCookie := win32.UTF16Ptr(pszCookie)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszCookie)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SendCommand dispatches through IPortableDeviceService's vtable slot 13.
 func (self *IPortableDeviceService) SendCommand(dwFlags uint32, pParameters *IPortableDeviceValues, ppResults **IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(pParameters)), uintptr(unsafe.Pointer(ppResults)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: e56b0534-d9b9-425c-9b99-75f97cb3d7c8
@@ -887,13 +887,13 @@ var IID_IPortableDeviceServiceActivation = win32.GUID{Data1: 0xe56b0534, Data2: 
 func (self *IPortableDeviceServiceActivation) OpenAsync(pszPnPServiceID string, pClientInfo *IPortableDeviceValues, pCallback *IPortableDeviceServiceOpenCallback) error {
 	_pszPnPServiceID := win32.UTF16Ptr(pszPnPServiceID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPnPServiceID)), uintptr(unsafe.Pointer(pClientInfo)), uintptr(unsafe.Pointer(pCallback)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CancelOpenAsync dispatches through IPortableDeviceServiceActivation's vtable slot 4.
 func (self *IPortableDeviceServiceActivation) CancelOpenAsync() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPortableDeviceServiceCapabilities: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledeviceservicecapabilities
@@ -908,97 +908,97 @@ var IID_IPortableDeviceServiceCapabilities = win32.GUID{Data1: 0x24dbd89d, Data2
 // GetSupportedMethods dispatches through IPortableDeviceServiceCapabilities's vtable slot 3.
 func (self *IPortableDeviceServiceCapabilities) GetSupportedMethods(ppMethods **IPortableDevicePropVariantCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppMethods)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSupportedMethodsByFormat dispatches through IPortableDeviceServiceCapabilities's vtable slot 4.
 func (self *IPortableDeviceServiceCapabilities) GetSupportedMethodsByFormat(Format *win32.GUID, ppMethods **IPortableDevicePropVariantCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Format)), uintptr(unsafe.Pointer(ppMethods)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMethodAttributes dispatches through IPortableDeviceServiceCapabilities's vtable slot 5.
 func (self *IPortableDeviceServiceCapabilities) GetMethodAttributes(Method *win32.GUID, ppAttributes **IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Method)), uintptr(unsafe.Pointer(ppAttributes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMethodParameterAttributes dispatches through IPortableDeviceServiceCapabilities's vtable slot 6.
 func (self *IPortableDeviceServiceCapabilities) GetMethodParameterAttributes(Method *win32.GUID, Parameter *foundation.PROPERTYKEY, ppAttributes **IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Method)), uintptr(unsafe.Pointer(Parameter)), uintptr(unsafe.Pointer(ppAttributes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSupportedFormats dispatches through IPortableDeviceServiceCapabilities's vtable slot 7.
 func (self *IPortableDeviceServiceCapabilities) GetSupportedFormats(ppFormats **IPortableDevicePropVariantCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFormats)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFormatAttributes dispatches through IPortableDeviceServiceCapabilities's vtable slot 8.
 func (self *IPortableDeviceServiceCapabilities) GetFormatAttributes(Format *win32.GUID, ppAttributes **IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Format)), uintptr(unsafe.Pointer(ppAttributes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSupportedFormatProperties dispatches through IPortableDeviceServiceCapabilities's vtable slot 9.
 func (self *IPortableDeviceServiceCapabilities) GetSupportedFormatProperties(Format *win32.GUID, ppKeys **IPortableDeviceKeyCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Format)), uintptr(unsafe.Pointer(ppKeys)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFormatPropertyAttributes dispatches through IPortableDeviceServiceCapabilities's vtable slot 10.
 func (self *IPortableDeviceServiceCapabilities) GetFormatPropertyAttributes(Format *win32.GUID, Property *foundation.PROPERTYKEY, ppAttributes **IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Format)), uintptr(unsafe.Pointer(Property)), uintptr(unsafe.Pointer(ppAttributes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSupportedEvents dispatches through IPortableDeviceServiceCapabilities's vtable slot 11.
 func (self *IPortableDeviceServiceCapabilities) GetSupportedEvents(ppEvents **IPortableDevicePropVariantCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEvents)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEventAttributes dispatches through IPortableDeviceServiceCapabilities's vtable slot 12.
 func (self *IPortableDeviceServiceCapabilities) GetEventAttributes(Event *win32.GUID, ppAttributes **IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Event)), uintptr(unsafe.Pointer(ppAttributes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEventParameterAttributes dispatches through IPortableDeviceServiceCapabilities's vtable slot 13.
 func (self *IPortableDeviceServiceCapabilities) GetEventParameterAttributes(Event *win32.GUID, Parameter *foundation.PROPERTYKEY, ppAttributes **IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Event)), uintptr(unsafe.Pointer(Parameter)), uintptr(unsafe.Pointer(ppAttributes)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInheritedServices dispatches through IPortableDeviceServiceCapabilities's vtable slot 14.
 func (self *IPortableDeviceServiceCapabilities) GetInheritedServices(dwInheritanceType uint32, ppServices **IPortableDevicePropVariantCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(dwInheritanceType), uintptr(unsafe.Pointer(ppServices)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFormatRenderingProfiles dispatches through IPortableDeviceServiceCapabilities's vtable slot 15.
 func (self *IPortableDeviceServiceCapabilities) GetFormatRenderingProfiles(Format *win32.GUID, ppRenderingProfiles **IPortableDeviceValuesCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Format)), uintptr(unsafe.Pointer(ppRenderingProfiles)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSupportedCommands dispatches through IPortableDeviceServiceCapabilities's vtable slot 16.
 func (self *IPortableDeviceServiceCapabilities) GetSupportedCommands(ppCommands **IPortableDeviceKeyCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCommands)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCommandOptions dispatches through IPortableDeviceServiceCapabilities's vtable slot 17.
 func (self *IPortableDeviceServiceCapabilities) GetCommandOptions(Command *foundation.PROPERTYKEY, ppOptions **IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Command)), uintptr(unsafe.Pointer(ppOptions)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Cancel dispatches through IPortableDeviceServiceCapabilities's vtable slot 18.
 func (self *IPortableDeviceServiceCapabilities) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPortableDeviceServiceManager: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledeviceservicemanager
@@ -1014,14 +1014,14 @@ var IID_IPortableDeviceServiceManager = win32.GUID{Data1: 0xa8abc4e9, Data2: 0xa
 func (self *IPortableDeviceServiceManager) GetDeviceServices(pszPnPDeviceID string, guidServiceCategory *win32.GUID, pServices *foundation.PWSTR, pcServices *uint32) error {
 	_pszPnPDeviceID := win32.UTF16Ptr(pszPnPDeviceID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPnPDeviceID)), uintptr(unsafe.Pointer(guidServiceCategory)), uintptr(unsafe.Pointer(pServices)), uintptr(unsafe.Pointer(pcServices)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceForService dispatches through IPortableDeviceServiceManager's vtable slot 4.
 func (self *IPortableDeviceServiceManager) GetDeviceForService(pszPnPServiceID string, ppszPnPDeviceID *foundation.PWSTR) error {
 	_pszPnPServiceID := win32.UTF16Ptr(pszPnPServiceID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPnPServiceID)), uintptr(unsafe.Pointer(ppszPnPDeviceID)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPortableDeviceServiceMethodCallback: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledeviceservicemethodcallback
@@ -1036,7 +1036,7 @@ var IID_IPortableDeviceServiceMethodCallback = win32.GUID{Data1: 0xc424233c, Dat
 // OnComplete dispatches through IPortableDeviceServiceMethodCallback's vtable slot 3.
 func (self *IPortableDeviceServiceMethodCallback) OnComplete(hrStatus foundation.HRESULT, pResults *IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hrStatus), uintptr(unsafe.Pointer(pResults)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPortableDeviceServiceMethods: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledeviceservicemethods
@@ -1051,19 +1051,19 @@ var IID_IPortableDeviceServiceMethods = win32.GUID{Data1: 0xe20333c9, Data2: 0xf
 // Invoke dispatches through IPortableDeviceServiceMethods's vtable slot 3.
 func (self *IPortableDeviceServiceMethods) Invoke(Method *win32.GUID, pParameters *IPortableDeviceValues, ppResults **IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Method)), uintptr(unsafe.Pointer(pParameters)), uintptr(unsafe.Pointer(ppResults)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InvokeAsync dispatches through IPortableDeviceServiceMethods's vtable slot 4.
 func (self *IPortableDeviceServiceMethods) InvokeAsync(Method *win32.GUID, pParameters *IPortableDeviceValues, pCallback *IPortableDeviceServiceMethodCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Method)), uintptr(unsafe.Pointer(pParameters)), uintptr(unsafe.Pointer(pCallback)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Cancel dispatches through IPortableDeviceServiceMethods's vtable slot 5.
 func (self *IPortableDeviceServiceMethods) Cancel(pCallback *IPortableDeviceServiceMethodCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallback)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: bced49c8-8efe-41ed-960b-61313abd47a9
@@ -1077,7 +1077,7 @@ var IID_IPortableDeviceServiceOpenCallback = win32.GUID{Data1: 0xbced49c8, Data2
 // OnComplete dispatches through IPortableDeviceServiceOpenCallback's vtable slot 3.
 func (self *IPortableDeviceServiceOpenCallback) OnComplete(hrStatus foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hrStatus))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPortableDeviceUnitsStream: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledeviceunitsstream
@@ -1092,13 +1092,13 @@ var IID_IPortableDeviceUnitsStream = win32.GUID{Data1: 0x5e98025f, Data2: 0xbfc4
 // SeekInUnits dispatches through IPortableDeviceUnitsStream's vtable slot 3.
 func (self *IPortableDeviceUnitsStream) SeekInUnits(dlibMove int64, units WPD_STREAM_UNITS, dwOrigin uint32, plibNewPosition *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dlibMove), uintptr(units), uintptr(dwOrigin), uintptr(unsafe.Pointer(plibNewPosition)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Cancel dispatches through IPortableDeviceUnitsStream's vtable slot 4.
 func (self *IPortableDeviceUnitsStream) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPortableDeviceValues: https://learn.microsoft.com/windows/win32/wpd_sdk/iportabledevicevalues
@@ -1113,153 +1113,153 @@ var IID_IPortableDeviceValues = win32.GUID{Data1: 0x6848f6f2, Data2: 0x3155, Dat
 // GetCount dispatches through IPortableDeviceValues's vtable slot 3.
 func (self *IPortableDeviceValues) GetCount(pcelt *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcelt)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAt dispatches through IPortableDeviceValues's vtable slot 4.
 func (self *IPortableDeviceValues) GetAt(index uint32, pKey *foundation.PROPERTYKEY, pValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(pKey)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetValue dispatches through IPortableDeviceValues's vtable slot 5.
 func (self *IPortableDeviceValues) SetValue(key *foundation.PROPERTYKEY, pValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetValue dispatches through IPortableDeviceValues's vtable slot 6.
 func (self *IPortableDeviceValues) GetValue(key *foundation.PROPERTYKEY, pValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetStringValue dispatches through IPortableDeviceValues's vtable slot 7.
 func (self *IPortableDeviceValues) SetStringValue(key *foundation.PROPERTYKEY, Value string) error {
 	_Value := win32.UTF16Ptr(Value)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(_Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStringValue dispatches through IPortableDeviceValues's vtable slot 8.
 func (self *IPortableDeviceValues) GetStringValue(key *foundation.PROPERTYKEY, pValue *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetUnsignedIntegerValue dispatches through IPortableDeviceValues's vtable slot 9.
 func (self *IPortableDeviceValues) SetUnsignedIntegerValue(key *foundation.PROPERTYKEY, Value uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetUnsignedIntegerValue dispatches through IPortableDeviceValues's vtable slot 10.
 func (self *IPortableDeviceValues) GetUnsignedIntegerValue(key *foundation.PROPERTYKEY, pValue *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetSignedIntegerValue dispatches through IPortableDeviceValues's vtable slot 11.
 func (self *IPortableDeviceValues) SetSignedIntegerValue(key *foundation.PROPERTYKEY, Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSignedIntegerValue dispatches through IPortableDeviceValues's vtable slot 12.
 func (self *IPortableDeviceValues) GetSignedIntegerValue(key *foundation.PROPERTYKEY, pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetUnsignedLargeIntegerValue dispatches through IPortableDeviceValues's vtable slot 13.
 func (self *IPortableDeviceValues) SetUnsignedLargeIntegerValue(key *foundation.PROPERTYKEY, Value uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetUnsignedLargeIntegerValue dispatches through IPortableDeviceValues's vtable slot 14.
 func (self *IPortableDeviceValues) GetUnsignedLargeIntegerValue(key *foundation.PROPERTYKEY, pValue *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetSignedLargeIntegerValue dispatches through IPortableDeviceValues's vtable slot 15.
 func (self *IPortableDeviceValues) SetSignedLargeIntegerValue(key *foundation.PROPERTYKEY, Value int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSignedLargeIntegerValue dispatches through IPortableDeviceValues's vtable slot 16.
 func (self *IPortableDeviceValues) GetSignedLargeIntegerValue(key *foundation.PROPERTYKEY, pValue *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFloatValue dispatches through IPortableDeviceValues's vtable slot 18.
 func (self *IPortableDeviceValues) GetFloatValue(key *foundation.PROPERTYKEY, pValue *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetErrorValue dispatches through IPortableDeviceValues's vtable slot 19.
 func (self *IPortableDeviceValues) SetErrorValue(key *foundation.PROPERTYKEY, Value foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetErrorValue dispatches through IPortableDeviceValues's vtable slot 20.
 func (self *IPortableDeviceValues) GetErrorValue(key *foundation.PROPERTYKEY, pValue *foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetKeyValue dispatches through IPortableDeviceValues's vtable slot 21.
 func (self *IPortableDeviceValues) SetKeyValue(key *foundation.PROPERTYKEY, Value *foundation.PROPERTYKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetKeyValue dispatches through IPortableDeviceValues's vtable slot 22.
 func (self *IPortableDeviceValues) GetKeyValue(key *foundation.PROPERTYKEY, pValue *foundation.PROPERTYKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBoolValue dispatches through IPortableDeviceValues's vtable slot 23.
 func (self *IPortableDeviceValues) SetBoolValue(key *foundation.PROPERTYKEY, Value bool) error {
 	_Value := win32.Bool32(Value)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(_Value))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBoolValue dispatches through IPortableDeviceValues's vtable slot 24.
 func (self *IPortableDeviceValues) GetBoolValue(key *foundation.PROPERTYKEY, pValue *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetIUnknownValue dispatches through IPortableDeviceValues's vtable slot 25.
 func (self *IPortableDeviceValues) SetIUnknownValue(key *foundation.PROPERTYKEY, pValue *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetIUnknownValue dispatches through IPortableDeviceValues's vtable slot 26.
 func (self *IPortableDeviceValues) GetIUnknownValue(key *foundation.PROPERTYKEY, ppValue **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetGuidValue dispatches through IPortableDeviceValues's vtable slot 27.
 func (self *IPortableDeviceValues) SetGuidValue(key *foundation.PROPERTYKEY, Value *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(Value)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetGuidValue dispatches through IPortableDeviceValues's vtable slot 28.
 func (self *IPortableDeviceValues) GetGuidValue(key *foundation.PROPERTYKEY, pValue *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetBufferValue dispatches through IPortableDeviceValues's vtable slot 29.
@@ -1269,85 +1269,85 @@ func (self *IPortableDeviceValues) SetBufferValue(key *foundation.PROPERTYKEY, p
 		_pValue = &pValue[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(_pValue)), uintptr(len(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBufferValue dispatches through IPortableDeviceValues's vtable slot 30.
 func (self *IPortableDeviceValues) GetBufferValue(key *foundation.PROPERTYKEY, ppValue **byte, pcbValue *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(ppValue)), uintptr(unsafe.Pointer(pcbValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetIPortableDeviceValuesValue dispatches through IPortableDeviceValues's vtable slot 31.
 func (self *IPortableDeviceValues) SetIPortableDeviceValuesValue(key *foundation.PROPERTYKEY, pValue *IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetIPortableDeviceValuesValue dispatches through IPortableDeviceValues's vtable slot 32.
 func (self *IPortableDeviceValues) GetIPortableDeviceValuesValue(key *foundation.PROPERTYKEY, ppValue **IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetIPortableDevicePropVariantCollectionValue dispatches through IPortableDeviceValues's vtable slot 33.
 func (self *IPortableDeviceValues) SetIPortableDevicePropVariantCollectionValue(key *foundation.PROPERTYKEY, pValue *IPortableDevicePropVariantCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetIPortableDevicePropVariantCollectionValue dispatches through IPortableDeviceValues's vtable slot 34.
 func (self *IPortableDeviceValues) GetIPortableDevicePropVariantCollectionValue(key *foundation.PROPERTYKEY, ppValue **IPortableDevicePropVariantCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetIPortableDeviceKeyCollectionValue dispatches through IPortableDeviceValues's vtable slot 35.
 func (self *IPortableDeviceValues) SetIPortableDeviceKeyCollectionValue(key *foundation.PROPERTYKEY, pValue *IPortableDeviceKeyCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetIPortableDeviceKeyCollectionValue dispatches through IPortableDeviceValues's vtable slot 36.
 func (self *IPortableDeviceValues) GetIPortableDeviceKeyCollectionValue(key *foundation.PROPERTYKEY, ppValue **IPortableDeviceKeyCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetIPortableDeviceValuesCollectionValue dispatches through IPortableDeviceValues's vtable slot 37.
 func (self *IPortableDeviceValues) SetIPortableDeviceValuesCollectionValue(key *foundation.PROPERTYKEY, pValue *IPortableDeviceValuesCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetIPortableDeviceValuesCollectionValue dispatches through IPortableDeviceValues's vtable slot 38.
 func (self *IPortableDeviceValues) GetIPortableDeviceValuesCollectionValue(key *foundation.PROPERTYKEY, ppValue **IPortableDeviceValuesCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(ppValue)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveValue dispatches through IPortableDeviceValues's vtable slot 39.
 func (self *IPortableDeviceValues) RemoveValue(key *foundation.PROPERTYKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CopyValuesFromPropertyStore dispatches through IPortableDeviceValues's vtable slot 40.
 func (self *IPortableDeviceValues) CopyValuesFromPropertyStore(pStore *uishellpropertiessystem.IPropertyStore) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStore)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CopyValuesToPropertyStore dispatches through IPortableDeviceValues's vtable slot 41.
 func (self *IPortableDeviceValues) CopyValuesToPropertyStore(pStore *uishellpropertiessystem.IPropertyStore) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStore)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through IPortableDeviceValues's vtable slot 42.
 func (self *IPortableDeviceValues) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPortableDeviceValuesCollection: https://learn.microsoft.com/windows/win32/wpd_sdk/iportabledevicevaluescollection
@@ -1362,31 +1362,31 @@ var IID_IPortableDeviceValuesCollection = win32.GUID{Data1: 0x6e3f2d79, Data2: 0
 // GetCount dispatches through IPortableDeviceValuesCollection's vtable slot 3.
 func (self *IPortableDeviceValuesCollection) GetCount(pcElems *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcElems)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAt dispatches through IPortableDeviceValuesCollection's vtable slot 4.
 func (self *IPortableDeviceValuesCollection) GetAt(dwIndex uint32, ppValues **IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(ppValues)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through IPortableDeviceValuesCollection's vtable slot 5.
 func (self *IPortableDeviceValuesCollection) Add(pValues *IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValues)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through IPortableDeviceValuesCollection's vtable slot 6.
 func (self *IPortableDeviceValuesCollection) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAt dispatches through IPortableDeviceValuesCollection's vtable slot 7.
 func (self *IPortableDeviceValuesCollection) RemoveAt(dwIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwIndex))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IPortableDeviceWebControl: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledevicewebcontrol
@@ -1401,13 +1401,13 @@ var IID_IPortableDeviceWebControl = win32.GUID{Data1: 0x94fc7953, Data2: 0x5ca1,
 // GetDeviceFromId dispatches through IPortableDeviceWebControl's vtable slot 7.
 func (self *IPortableDeviceWebControl) GetDeviceFromId(deviceId foundation.BSTR, ppDevice **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(deviceId)), uintptr(unsafe.Pointer(ppDevice)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceFromIdAsync dispatches through IPortableDeviceWebControl's vtable slot 8.
 func (self *IPortableDeviceWebControl) GetDeviceFromIdAsync(deviceId foundation.BSTR, pCompletionHandler *systemcom.IDispatch, pErrorHandler *systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(deviceId)), uintptr(unsafe.Pointer(pCompletionHandler)), uintptr(unsafe.Pointer(pErrorHandler)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 70aa1c9e-f2b4-4c61-86d3-6b9fb75fd1a2
@@ -1421,31 +1421,31 @@ var IID_IRadioInstance = win32.GUID{Data1: 0x70aa1c9e, Data2: 0xf2b4, Data3: 0x4
 // GetRadioManagerSignature dispatches through IRadioInstance's vtable slot 3.
 func (self *IRadioInstance) GetRadioManagerSignature(pguidSignature *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidSignature)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetInstanceSignature dispatches through IRadioInstance's vtable slot 4.
 func (self *IRadioInstance) GetInstanceSignature(pbstrId *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrId)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFriendlyName dispatches through IRadioInstance's vtable slot 5.
 func (self *IRadioInstance) GetFriendlyName(lcid uint32, pbstrName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(lcid), uintptr(unsafe.Pointer(pbstrName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRadioState dispatches through IRadioInstance's vtable slot 6.
 func (self *IRadioInstance) GetRadioState(pRadioState *DEVICE_RADIO_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRadioState)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetRadioState dispatches through IRadioInstance's vtable slot 7.
 func (self *IRadioInstance) SetRadioState(radioState DEVICE_RADIO_STATE, uTimeoutSec uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(radioState), uintptr(uTimeoutSec))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsMultiComm dispatches through IRadioInstance's vtable slot 8.
@@ -1471,13 +1471,13 @@ var IID_IRadioInstanceCollection = win32.GUID{Data1: 0xe5791fae, Data2: 0x5665, 
 // GetCount dispatches through IRadioInstanceCollection's vtable slot 3.
 func (self *IRadioInstanceCollection) GetCount(pcInstance *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcInstance)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAt dispatches through IRadioInstanceCollection's vtable slot 4.
 func (self *IRadioInstanceCollection) GetAt(uIndex uint32, ppRadioInstance **IRadioInstance) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(uIndex), uintptr(unsafe.Pointer(ppRadioInstance)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWpdSerializer: https://learn.microsoft.com/windows/win32/wpd_sdk/iwpdserializer
@@ -1496,7 +1496,7 @@ func (self *IWpdSerializer) GetIPortableDeviceValuesFromBuffer(pBuffer []byte, p
 		_pBuffer = &pBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(ppParams)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteIPortableDeviceValuesToBuffer dispatches through IWpdSerializer's vtable slot 4.
@@ -1506,17 +1506,17 @@ func (self *IWpdSerializer) WriteIPortableDeviceValuesToBuffer(pResults *IPortab
 		_pBuffer = &pBuffer[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(pResults)), uintptr(unsafe.Pointer(_pBuffer)), uintptr(unsafe.Pointer(pdwBytesWritten)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetBufferFromIPortableDeviceValues dispatches through IWpdSerializer's vtable slot 5.
 func (self *IWpdSerializer) GetBufferFromIPortableDeviceValues(pSource *IPortableDeviceValues, ppBuffer **byte, pdwBufferSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSource)), uintptr(unsafe.Pointer(ppBuffer)), uintptr(unsafe.Pointer(pdwBufferSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSerializedSize dispatches through IWpdSerializer's vtable slot 6.
 func (self *IWpdSerializer) GetSerializedSize(pSource *IPortableDeviceValues, pdwSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSource)), uintptr(unsafe.Pointer(pdwSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

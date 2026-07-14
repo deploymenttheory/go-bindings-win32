@@ -327,7 +327,7 @@ func AddPortA(pName foundation.PSTR, hWnd foundation.HWND, pMonitorName foundati
 // AddPrintDeviceObject calls SPOOLSS!AddPrintDeviceObject.
 func AddPrintDeviceObject(hPrinter PRINTER_HANDLE, phDeviceObject *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procAddPrintDeviceObject.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(phDeviceObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddPrintProcessor calls winspool.drv!AddPrintProcessorW.
@@ -543,7 +543,7 @@ func ConnectToPrinterDlg(hwnd foundation.HWND, Flags uint32) foundation.HANDLE {
 func CreatePrintAsyncNotifyChannel(pszName string, pNotificationType *win32.GUID, eUserFilter PrintAsyncNotifyUserFilter, eConversationStyle PrintAsyncNotifyConversationStyle, pCallback *IPrintAsyncNotifyCallback, ppIAsynchNotification **IPrintAsyncNotifyChannel) error {
 	_pszName := win32.UTF16Ptr(pszName)
 	r1, _, _ := syscall.SyscallN(procCreatePrintAsyncNotifyChannel.Addr(), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(pNotificationType)), uintptr(eUserFilter), uintptr(eConversationStyle), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(ppIAsynchNotification)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePrinterIC calls winspool.drv!CreatePrinterIC.
@@ -750,14 +750,14 @@ func DeletePrinterDriverPackage(pszServer string, pszInfPath string, pszEnvironm
 	_pszInfPath := win32.UTF16Ptr(pszInfPath)
 	_pszEnvironment := win32.UTF16Ptr(pszEnvironment)
 	r1, _, _ := syscall.SyscallN(procDeletePrinterDriverPackage.Addr(), uintptr(unsafe.Pointer(_pszServer)), uintptr(unsafe.Pointer(_pszInfPath)), uintptr(unsafe.Pointer(_pszEnvironment)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeletePrinterDriverPackageA calls winspool.drv!DeletePrinterDriverPackageA.
 // https://learn.microsoft.com/windows/win32/printdocs/deleteprinterdriverpackage
 func DeletePrinterDriverPackageA(pszServer foundation.PSTR, pszInfPath foundation.PSTR, pszEnvironment foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(procDeletePrinterDriverPackageA.Addr(), uintptr(unsafe.Pointer(pszServer)), uintptr(unsafe.Pointer(pszInfPath)), uintptr(unsafe.Pointer(pszEnvironment)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeletePrinterIC calls winspool.drv!DeletePrinterIC.
@@ -1249,7 +1249,7 @@ func GetCorePrinterDrivers(pszServer string, pszEnvironment string, pszzCoreDriv
 		_pCorePrinterDrivers = &pCorePrinterDrivers[0]
 	}
 	r1, _, _ := syscall.SyscallN(procGetCorePrinterDrivers.Addr(), uintptr(unsafe.Pointer(_pszServer)), uintptr(unsafe.Pointer(_pszEnvironment)), uintptr(unsafe.Pointer(_pszzCoreDriverDependencies)), uintptr(len(pCorePrinterDrivers)), uintptr(unsafe.Pointer(_pCorePrinterDrivers)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCorePrinterDriversA calls winspool.drv!GetCorePrinterDriversA.
@@ -1260,7 +1260,7 @@ func GetCorePrinterDriversA(pszServer foundation.PSTR, pszEnvironment foundation
 		_pCorePrinterDrivers = &pCorePrinterDrivers[0]
 	}
 	r1, _, _ := syscall.SyscallN(procGetCorePrinterDriversA.Addr(), uintptr(unsafe.Pointer(pszServer)), uintptr(unsafe.Pointer(pszEnvironment)), uintptr(unsafe.Pointer(pszzCoreDriverDependencies)), uintptr(len(pCorePrinterDrivers)), uintptr(unsafe.Pointer(_pCorePrinterDrivers)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDefaultPrinter calls winspool.drv!GetDefaultPrinterW.
@@ -1358,7 +1358,7 @@ func GetPrintExecutionData(pData *PRINT_EXECUTION_DATA) bool {
 func GetPrintOutputInfo(hWnd foundation.HWND, pszPrinter string, phFile *foundation.HANDLE, ppszOutputFile *foundation.PWSTR) error {
 	_pszPrinter := win32.UTF16Ptr(pszPrinter)
 	r1, _, _ := syscall.SyscallN(procGetPrintOutputInfo.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(_pszPrinter)), uintptr(unsafe.Pointer(phFile)), uintptr(unsafe.Pointer(ppszOutputFile)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPrintProcessorDirectory calls winspool.drv!GetPrintProcessorDirectoryW.
@@ -1537,14 +1537,14 @@ func GetPrinterDriverPackagePath(pszServer string, pszEnvironment string, pszLan
 	_pszLanguage := win32.UTF16Ptr(pszLanguage)
 	_pszPackageID := win32.UTF16Ptr(pszPackageID)
 	r1, _, _ := syscall.SyscallN(procGetPrinterDriverPackagePath.Addr(), uintptr(unsafe.Pointer(_pszServer)), uintptr(unsafe.Pointer(_pszEnvironment)), uintptr(unsafe.Pointer(_pszLanguage)), uintptr(unsafe.Pointer(_pszPackageID)), uintptr(unsafe.Pointer(pszDriverPackageCab)), uintptr(cchDriverPackageCab), uintptr(unsafe.Pointer(pcchRequiredSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPrinterDriverPackagePathA calls winspool.drv!GetPrinterDriverPackagePathA.
 // https://learn.microsoft.com/windows/win32/printdocs/getprinterdriverpackagepath
 func GetPrinterDriverPackagePathA(pszServer foundation.PSTR, pszEnvironment foundation.PSTR, pszLanguage foundation.PSTR, pszPackageID foundation.PSTR, pszDriverPackageCab foundation.PSTR, cchDriverPackageCab uint32, pcchRequiredSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetPrinterDriverPackagePathA.Addr(), uintptr(unsafe.Pointer(pszServer)), uintptr(unsafe.Pointer(pszEnvironment)), uintptr(unsafe.Pointer(pszLanguage)), uintptr(unsafe.Pointer(pszPackageID)), uintptr(unsafe.Pointer(pszDriverPackageCab)), uintptr(cchDriverPackageCab), uintptr(unsafe.Pointer(pcchRequiredSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSpoolFileHandle calls winspool.drv!GetSpoolFileHandle.
@@ -1572,14 +1572,14 @@ func InstallPrinterDriverFromPackage(pszServer string, pszInfPath string, pszDri
 	_pszDriverName := win32.UTF16Ptr(pszDriverName)
 	_pszEnvironment := win32.UTF16Ptr(pszEnvironment)
 	r1, _, _ := syscall.SyscallN(procInstallPrinterDriverFromPackage.Addr(), uintptr(unsafe.Pointer(_pszServer)), uintptr(unsafe.Pointer(_pszInfPath)), uintptr(unsafe.Pointer(_pszDriverName)), uintptr(unsafe.Pointer(_pszEnvironment)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // InstallPrinterDriverFromPackageA calls winspool.drv!InstallPrinterDriverFromPackageA.
 // https://learn.microsoft.com/windows/win32/printdocs/installprinterdriverfrompackage
 func InstallPrinterDriverFromPackageA(pszServer foundation.PSTR, pszInfPath foundation.PSTR, pszDriverName foundation.PSTR, pszEnvironment foundation.PSTR, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procInstallPrinterDriverFromPackageA.Addr(), uintptr(unsafe.Pointer(pszServer)), uintptr(unsafe.Pointer(pszInfPath)), uintptr(unsafe.Pointer(pszDriverName)), uintptr(unsafe.Pointer(pszEnvironment)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsValidDevmode calls winspool.drv!IsValidDevmodeW.
@@ -1708,13 +1708,13 @@ func ReadPrinter(hPrinter PRINTER_HANDLE, pBuf []byte, pNoBytesRead *uint32) boo
 func RegisterForPrintAsyncNotifications(pszName string, pNotificationType *win32.GUID, eUserFilter PrintAsyncNotifyUserFilter, eConversationStyle PrintAsyncNotifyConversationStyle, pCallback *IPrintAsyncNotifyCallback, phNotify *foundation.HANDLE) error {
 	_pszName := win32.UTF16Ptr(pszName)
 	r1, _, _ := syscall.SyscallN(procRegisterForPrintAsyncNotifications.Addr(), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(pNotificationType)), uintptr(eUserFilter), uintptr(eConversationStyle), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(phNotify)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemovePrintDeviceObject calls SPOOLSS!RemovePrintDeviceObject.
 func RemovePrintDeviceObject(hDeviceObject foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procRemovePrintDeviceObject.Addr(), uintptr(hDeviceObject))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ReplyPrinterChangeNotification calls SPOOLSS!ReplyPrinterChangeNotification.
@@ -1733,7 +1733,7 @@ func ReplyPrinterChangeNotificationEx(hNotify foundation.HANDLE, dwColor uint32,
 // https://learn.microsoft.com/windows/win32/printdocs/reportjobprocessingprogress
 func ReportJobProcessingProgress(printerHandle foundation.HANDLE, jobId uint32, jobOperation EPrintXPSJobOperation, jobProgress EPrintXPSJobProgress) error {
 	r1, _, _ := syscall.SyscallN(procReportJobProcessingProgress.Addr(), uintptr(printerHandle), uintptr(jobId), uintptr(jobOperation), uintptr(jobProgress))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ResetPrinter calls winspool.drv!ResetPrinterW.
@@ -1778,7 +1778,7 @@ func RouterAllocPrinterNotifyInfo(cPrinterNotifyInfoData uint32) *PRINTER_NOTIFY
 func RouterCreatePrintAsyncNotificationChannel(pName string, pNotificationType *win32.GUID, eNotifyFilter PrintAsyncNotifyUserFilter, eConversationStyle PrintAsyncNotifyConversationStyle, pCallback *IPrintAsyncNotifyCallback, ppIAsynchNotification **IPrintAsyncNotifyChannel) error {
 	_pName := win32.UTF16Ptr(pName)
 	r1, _, _ := syscall.SyscallN(procRouterCreatePrintAsyncNotificationChannel.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(pNotificationType)), uintptr(eNotifyFilter), uintptr(eConversationStyle), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(ppIAsynchNotification)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RouterFreeBidiMem calls SPOOLSS!RouterFreeBidiMem.
@@ -1802,13 +1802,13 @@ func RouterFreePrinterNotifyInfo(pInfo *PRINTER_NOTIFY_INFO) bool {
 func RouterGetPrintClassObject(pPrinter string, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pPrinter := win32.UTF16Ptr(pPrinter)
 	r1, _, _ := syscall.SyscallN(procRouterGetPrintClassObject.Addr(), uintptr(unsafe.Pointer(_pPrinter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RouterUnregisterForPrintAsyncNotifications calls SPOOLSS!RouterUnregisterForPrintAsyncNotifications.
 func RouterUnregisterForPrintAsyncNotifications(hNotify foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procRouterUnregisterForPrintAsyncNotifications.Addr(), uintptr(hNotify))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ScheduleJob calls winspool.drv!ScheduleJob.
@@ -2038,13 +2038,13 @@ func StartPagePrinter(hPrinter PRINTER_HANDLE) bool {
 // Minimum OS: windows6.0.6000.
 func UnRegisterForPrintAsyncNotifications(param0 foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procUnRegisterForPrintAsyncNotifications.Addr(), uintptr(param0))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UpdatePrintDeviceObject calls SPOOLSS!UpdatePrintDeviceObject.
 func UpdatePrintDeviceObject(hPrinter PRINTER_HANDLE, hDeviceObject foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procUpdatePrintDeviceObject.Addr(), uintptr(hPrinter), uintptr(hDeviceObject))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UploadPrinterDriverPackage calls winspool.drv!UploadPrinterDriverPackageW.
@@ -2054,14 +2054,14 @@ func UploadPrinterDriverPackage(pszServer string, pszInfPath string, pszEnvironm
 	_pszInfPath := win32.UTF16Ptr(pszInfPath)
 	_pszEnvironment := win32.UTF16Ptr(pszEnvironment)
 	r1, _, _ := syscall.SyscallN(procUploadPrinterDriverPackage.Addr(), uintptr(unsafe.Pointer(_pszServer)), uintptr(unsafe.Pointer(_pszInfPath)), uintptr(unsafe.Pointer(_pszEnvironment)), uintptr(dwFlags), uintptr(hwnd), uintptr(unsafe.Pointer(pszDestInfPath)), uintptr(unsafe.Pointer(pcchDestInfPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // UploadPrinterDriverPackageA calls winspool.drv!UploadPrinterDriverPackageA.
 // https://learn.microsoft.com/windows/win32/printdocs/uploadprinterdriverpackage
 func UploadPrinterDriverPackageA(pszServer foundation.PSTR, pszInfPath foundation.PSTR, pszEnvironment foundation.PSTR, dwFlags uint32, hwnd foundation.HWND, pszDestInfPath foundation.PSTR, pcchDestInfPath *uint32) error {
 	r1, _, _ := syscall.SyscallN(procUploadPrinterDriverPackageA.Addr(), uintptr(unsafe.Pointer(pszServer)), uintptr(unsafe.Pointer(pszInfPath)), uintptr(unsafe.Pointer(pszEnvironment)), uintptr(dwFlags), uintptr(hwnd), uintptr(unsafe.Pointer(pszDestInfPath)), uintptr(unsafe.Pointer(pcchDestInfPath)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // WaitForPrinterChange calls winspool.drv!WaitForPrinterChange.

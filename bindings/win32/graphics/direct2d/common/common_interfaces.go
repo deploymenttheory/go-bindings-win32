@@ -57,5 +57,5 @@ func (self *ID2D1SimplifiedGeometrySink) EndFigure(figureEnd D2D1_FIGURE_END) {
 // Close dispatches through ID2D1SimplifiedGeometrySink's vtable slot 9.
 func (self *ID2D1SimplifiedGeometrySink) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

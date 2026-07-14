@@ -2451,7 +2451,7 @@ func CertVerifyValidityNesting(pSubjectInfo *CERT_INFO, pIssuerInfo *CERT_INFO) 
 // CloseCryptoHandle calls infocardapi!CloseCryptoHandle.
 func CloseCryptoHandle(hCrypto *INFORMATIONCARD_CRYPTO_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procCloseCryptoHandle.Addr(), uintptr(unsafe.Pointer(hCrypto)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CryptAcquireCertificatePrivateKey calls CRYPT32!CryptAcquireCertificatePrivateKey.
@@ -4110,7 +4110,7 @@ func CryptXmlAddObject(hSignatureOrObject unsafe.Pointer, dwFlags uint32, rgProp
 		_rgProperty = &rgProperty[0]
 	}
 	r1, _, _ := syscall.SyscallN(procCryptXmlAddObject.Addr(), uintptr(unsafe.Pointer(hSignatureOrObject)), uintptr(dwFlags), uintptr(unsafe.Pointer(_rgProperty)), uintptr(len(rgProperty)), uintptr(unsafe.Pointer(pEncoded)), uintptr(unsafe.Pointer(ppObject)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CryptXmlClose calls CRYPTXML!CryptXmlClose.
@@ -4118,7 +4118,7 @@ func CryptXmlAddObject(hSignatureOrObject unsafe.Pointer, dwFlags uint32, rgProp
 // Minimum OS: windows6.1.
 func CryptXmlClose(hCryptXml unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procCryptXmlClose.Addr(), uintptr(unsafe.Pointer(hCryptXml)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CryptXmlCreateReference calls CRYPTXML!CryptXmlCreateReference.
@@ -4133,7 +4133,7 @@ func CryptXmlCreateReference(hCryptXml unsafe.Pointer, dwFlags uint32, wszId str
 		_rgTransform = &rgTransform[0]
 	}
 	r1, _, _ := syscall.SyscallN(procCryptXmlCreateReference.Addr(), uintptr(unsafe.Pointer(hCryptXml)), uintptr(dwFlags), uintptr(unsafe.Pointer(_wszId)), uintptr(unsafe.Pointer(_wszURI)), uintptr(unsafe.Pointer(_wszType)), uintptr(unsafe.Pointer(pDigestMethod)), uintptr(len(rgTransform)), uintptr(unsafe.Pointer(_rgTransform)), uintptr(unsafe.Pointer(phReference)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CryptXmlDigestReference calls CRYPTXML!CryptXmlDigestReference.
@@ -4141,7 +4141,7 @@ func CryptXmlCreateReference(hCryptXml unsafe.Pointer, dwFlags uint32, wszId str
 // Minimum OS: windows6.1.
 func CryptXmlDigestReference(hReference unsafe.Pointer, dwFlags uint32, pDataProviderIn *CRYPT_XML_DATA_PROVIDER) error {
 	r1, _, _ := syscall.SyscallN(procCryptXmlDigestReference.Addr(), uintptr(unsafe.Pointer(hReference)), uintptr(dwFlags), uintptr(unsafe.Pointer(pDataProviderIn)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CryptXmlEncode calls CRYPTXML!CryptXmlEncode.
@@ -4153,13 +4153,13 @@ func CryptXmlEncode(hCryptXml unsafe.Pointer, dwCharset CRYPT_XML_CHARSET, rgPro
 		_rgProperty = &rgProperty[0]
 	}
 	r1, _, _ := syscall.SyscallN(procCryptXmlEncode.Addr(), uintptr(unsafe.Pointer(hCryptXml)), uintptr(dwCharset), uintptr(unsafe.Pointer(_rgProperty)), uintptr(len(rgProperty)), uintptr(unsafe.Pointer(pvCallbackState)), uintptr(pfnWrite))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CryptXmlEnumAlgorithmInfo calls CRYPTXML!CryptXmlEnumAlgorithmInfo.
 func CryptXmlEnumAlgorithmInfo(dwGroupId uint32, dwFlags uint32, pvArg unsafe.Pointer, pfnEnumAlgInfo PFN_CRYPT_XML_ENUM_ALG_INFO) error {
 	r1, _, _ := syscall.SyscallN(procCryptXmlEnumAlgorithmInfo.Addr(), uintptr(dwGroupId), uintptr(dwFlags), uintptr(unsafe.Pointer(pvArg)), uintptr(pfnEnumAlgInfo))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CryptXmlFindAlgorithmInfo calls CRYPTXML!CryptXmlFindAlgorithmInfo.
@@ -4173,7 +4173,7 @@ func CryptXmlFindAlgorithmInfo(dwFindByType uint32, pvFindBy unsafe.Pointer, dwG
 // Minimum OS: windows6.1.
 func CryptXmlGetAlgorithmInfo(pXmlAlgorithm *CRYPT_XML_ALGORITHM, dwFlags CRYPT_XML_FLAGS, ppAlgInfo **CRYPT_XML_ALGORITHM_INFO) error {
 	r1, _, _ := syscall.SyscallN(procCryptXmlGetAlgorithmInfo.Addr(), uintptr(unsafe.Pointer(pXmlAlgorithm)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppAlgInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CryptXmlGetDocContext calls CRYPTXML!CryptXmlGetDocContext.
@@ -4181,7 +4181,7 @@ func CryptXmlGetAlgorithmInfo(pXmlAlgorithm *CRYPT_XML_ALGORITHM, dwFlags CRYPT_
 // Minimum OS: windows6.1.
 func CryptXmlGetDocContext(hCryptXml unsafe.Pointer, ppStruct **CRYPT_XML_DOC_CTXT) error {
 	r1, _, _ := syscall.SyscallN(procCryptXmlGetDocContext.Addr(), uintptr(unsafe.Pointer(hCryptXml)), uintptr(unsafe.Pointer(ppStruct)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CryptXmlGetReference calls CRYPTXML!CryptXmlGetReference.
@@ -4189,7 +4189,7 @@ func CryptXmlGetDocContext(hCryptXml unsafe.Pointer, ppStruct **CRYPT_XML_DOC_CT
 // Minimum OS: windows6.1.
 func CryptXmlGetReference(hCryptXml unsafe.Pointer, ppStruct **CRYPT_XML_REFERENCE) error {
 	r1, _, _ := syscall.SyscallN(procCryptXmlGetReference.Addr(), uintptr(unsafe.Pointer(hCryptXml)), uintptr(unsafe.Pointer(ppStruct)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CryptXmlGetSignature calls CRYPTXML!CryptXmlGetSignature.
@@ -4197,7 +4197,7 @@ func CryptXmlGetReference(hCryptXml unsafe.Pointer, ppStruct **CRYPT_XML_REFEREN
 // Minimum OS: windows6.1.
 func CryptXmlGetSignature(hCryptXml unsafe.Pointer, ppStruct **CRYPT_XML_SIGNATURE) error {
 	r1, _, _ := syscall.SyscallN(procCryptXmlGetSignature.Addr(), uintptr(unsafe.Pointer(hCryptXml)), uintptr(unsafe.Pointer(ppStruct)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CryptXmlGetStatus calls CRYPTXML!CryptXmlGetStatus.
@@ -4205,7 +4205,7 @@ func CryptXmlGetSignature(hCryptXml unsafe.Pointer, ppStruct **CRYPT_XML_SIGNATU
 // Minimum OS: windows6.1.
 func CryptXmlGetStatus(hCryptXml unsafe.Pointer, pStatus *CRYPT_XML_STATUS) error {
 	r1, _, _ := syscall.SyscallN(procCryptXmlGetStatus.Addr(), uintptr(unsafe.Pointer(hCryptXml)), uintptr(unsafe.Pointer(pStatus)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CryptXmlGetTransforms calls CRYPTXML!CryptXmlGetTransforms.
@@ -4213,7 +4213,7 @@ func CryptXmlGetStatus(hCryptXml unsafe.Pointer, pStatus *CRYPT_XML_STATUS) erro
 // Minimum OS: windows6.1.
 func CryptXmlGetTransforms(ppConfig **CRYPT_XML_TRANSFORM_CHAIN_CONFIG) error {
 	r1, _, _ := syscall.SyscallN(procCryptXmlGetTransforms.Addr(), uintptr(unsafe.Pointer(ppConfig)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CryptXmlImportPublicKey calls CRYPTXML!CryptXmlImportPublicKey.
@@ -4221,7 +4221,7 @@ func CryptXmlGetTransforms(ppConfig **CRYPT_XML_TRANSFORM_CHAIN_CONFIG) error {
 // Minimum OS: windows6.1.
 func CryptXmlImportPublicKey(dwFlags CRYPT_XML_FLAGS, pKeyValue *CRYPT_XML_KEY_VALUE, phKey *BCRYPT_KEY_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procCryptXmlImportPublicKey.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(pKeyValue)), uintptr(unsafe.Pointer(phKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CryptXmlOpenToDecode calls CRYPTXML!CryptXmlOpenToDecode.
@@ -4233,7 +4233,7 @@ func CryptXmlOpenToDecode(pConfig *CRYPT_XML_TRANSFORM_CHAIN_CONFIG, dwFlags CRY
 		_rgProperty = &rgProperty[0]
 	}
 	r1, _, _ := syscall.SyscallN(procCryptXmlOpenToDecode.Addr(), uintptr(unsafe.Pointer(pConfig)), uintptr(dwFlags), uintptr(unsafe.Pointer(_rgProperty)), uintptr(len(rgProperty)), uintptr(unsafe.Pointer(pEncoded)), uintptr(unsafe.Pointer(phCryptXml)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CryptXmlOpenToEncode calls CRYPTXML!CryptXmlOpenToEncode.
@@ -4246,7 +4246,7 @@ func CryptXmlOpenToEncode(pConfig *CRYPT_XML_TRANSFORM_CHAIN_CONFIG, dwFlags CRY
 		_rgProperty = &rgProperty[0]
 	}
 	r1, _, _ := syscall.SyscallN(procCryptXmlOpenToEncode.Addr(), uintptr(unsafe.Pointer(pConfig)), uintptr(dwFlags), uintptr(unsafe.Pointer(_wszId)), uintptr(unsafe.Pointer(_rgProperty)), uintptr(len(rgProperty)), uintptr(unsafe.Pointer(pEncoded)), uintptr(unsafe.Pointer(phSignature)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CryptXmlSetHMACSecret calls CRYPTXML!CryptXmlSetHMACSecret.
@@ -4258,7 +4258,7 @@ func CryptXmlSetHMACSecret(hSignature unsafe.Pointer, pbSecret []byte) error {
 		_pbSecret = &pbSecret[0]
 	}
 	r1, _, _ := syscall.SyscallN(procCryptXmlSetHMACSecret.Addr(), uintptr(unsafe.Pointer(hSignature)), uintptr(unsafe.Pointer(_pbSecret)), uintptr(len(pbSecret)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CryptXmlSign calls CRYPTXML!CryptXmlSign.
@@ -4266,7 +4266,7 @@ func CryptXmlSetHMACSecret(hSignature unsafe.Pointer, pbSecret []byte) error {
 // Minimum OS: windows6.1.
 func CryptXmlSign(hSignature unsafe.Pointer, hKey HCRYPTPROV_OR_NCRYPT_KEY_HANDLE, dwKeySpec CERT_KEY_SPEC, dwFlags CRYPT_XML_FLAGS, dwKeyInfoSpec CRYPT_XML_KEYINFO_SPEC, pvKeyInfoSpec unsafe.Pointer, pSignatureMethod *CRYPT_XML_ALGORITHM, pCanonicalization *CRYPT_XML_ALGORITHM) error {
 	r1, _, _ := syscall.SyscallN(procCryptXmlSign.Addr(), uintptr(unsafe.Pointer(hSignature)), uintptr(hKey), uintptr(dwKeySpec), uintptr(dwFlags), uintptr(dwKeyInfoSpec), uintptr(unsafe.Pointer(pvKeyInfoSpec)), uintptr(unsafe.Pointer(pSignatureMethod)), uintptr(unsafe.Pointer(pCanonicalization)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CryptXmlVerifySignature calls CRYPTXML!CryptXmlVerifySignature.
@@ -4274,7 +4274,7 @@ func CryptXmlSign(hSignature unsafe.Pointer, hKey HCRYPTPROV_OR_NCRYPT_KEY_HANDL
 // Minimum OS: windows6.1.
 func CryptXmlVerifySignature(hSignature unsafe.Pointer, hKey BCRYPT_KEY_HANDLE, dwFlags CRYPT_XML_FLAGS) error {
 	r1, _, _ := syscall.SyscallN(procCryptXmlVerifySignature.Addr(), uintptr(unsafe.Pointer(hSignature)), uintptr(hKey), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Decrypt calls infocardapi!Decrypt.
@@ -4286,7 +4286,7 @@ func Decrypt(hCrypto *INFORMATIONCARD_CRYPTO_HANDLE, fOAEP bool, pInData []byte,
 		_pInData = &pInData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procDecrypt.Addr(), uintptr(unsafe.Pointer(hCrypto)), uintptr(_fOAEP), uintptr(len(pInData)), uintptr(unsafe.Pointer(_pInData)), uintptr(unsafe.Pointer(pcbOutData)), uintptr(unsafe.Pointer(ppOutData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Encrypt calls infocardapi!Encrypt.
@@ -4298,7 +4298,7 @@ func Encrypt(hCrypto *INFORMATIONCARD_CRYPTO_HANDLE, fOAEP bool, pInData []byte,
 		_pInData = &pInData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procEncrypt.Addr(), uintptr(unsafe.Pointer(hCrypto)), uintptr(_fOAEP), uintptr(len(pInData)), uintptr(unsafe.Pointer(_pInData)), uintptr(unsafe.Pointer(pcbOutData)), uintptr(unsafe.Pointer(ppOutData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FindCertsByIssuer calls WINTRUST!FindCertsByIssuer.
@@ -4309,7 +4309,7 @@ func FindCertsByIssuer(pCertChains *CERT_CHAIN, pcbCertChains *uint32, pcCertCha
 	}
 	_pwszPurpose := win32.UTF16Ptr(pwszPurpose)
 	r1, _, _ := syscall.SyscallN(procFindCertsByIssuer.Addr(), uintptr(unsafe.Pointer(pCertChains)), uintptr(unsafe.Pointer(pcbCertChains)), uintptr(unsafe.Pointer(pcCertChains)), uintptr(unsafe.Pointer(_pbEncodedIssuerName)), uintptr(len(pbEncodedIssuerName)), uintptr(unsafe.Pointer(_pwszPurpose)), uintptr(dwKeySpec))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // FreeToken calls infocardapi!FreeToken.
@@ -4330,7 +4330,7 @@ func GenerateDerivedKey(hCrypto *INFORMATIONCARD_CRYPTO_HANDLE, pLabel []byte, p
 	}
 	_algId := win32.UTF16Ptr(algId)
 	r1, _, _ := syscall.SyscallN(procGenerateDerivedKey.Addr(), uintptr(unsafe.Pointer(hCrypto)), uintptr(len(pLabel)), uintptr(unsafe.Pointer(_pLabel)), uintptr(len(pNonce)), uintptr(unsafe.Pointer(_pNonce)), uintptr(derivedKeyLength), uintptr(offset), uintptr(unsafe.Pointer(_algId)), uintptr(unsafe.Pointer(pcbKey)), uintptr(unsafe.Pointer(ppKey)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAsymmetricEncryptionInterface calls bcryptprimitives!GetAsymmetricEncryptionInterface.
@@ -4344,7 +4344,7 @@ func GetAsymmetricEncryptionInterface(pszProviderName string, pszAlgId string, p
 // GetBrowserToken calls infocardapi!GetBrowserToken.
 func GetBrowserToken(dwParamType uint32, pParam unsafe.Pointer, pcbToken *uint32, ppToken **byte) error {
 	r1, _, _ := syscall.SyscallN(procGetBrowserToken.Addr(), uintptr(dwParamType), uintptr(unsafe.Pointer(pParam)), uintptr(unsafe.Pointer(pcbToken)), uintptr(unsafe.Pointer(ppToken)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCipherInterface calls bcryptprimitives!GetCipherInterface.
@@ -4362,7 +4362,7 @@ func GetCryptoTransform(hSymmetricCrypto *INFORMATIONCARD_CRYPTO_HANDLE, mode ui
 		_pIV = &pIV[0]
 	}
 	r1, _, _ := syscall.SyscallN(procGetCryptoTransform.Addr(), uintptr(unsafe.Pointer(hSymmetricCrypto)), uintptr(mode), uintptr(padding), uintptr(feedbackSize), uintptr(direction), uintptr(len(pIV)), uintptr(unsafe.Pointer(_pIV)), uintptr(unsafe.Pointer(pphTransform)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetHashInterface calls bcryptprimitives!GetHashInterface.
@@ -4392,7 +4392,7 @@ func GetKeyStorageInterface(pszProviderName string, ppFunctionTable **NCRYPT_KEY
 // GetKeyedHash calls infocardapi!GetKeyedHash.
 func GetKeyedHash(hSymmetricCrypto *INFORMATIONCARD_CRYPTO_HANDLE, pphHash **INFORMATIONCARD_CRYPTO_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procGetKeyedHash.Addr(), uintptr(unsafe.Pointer(hSymmetricCrypto)), uintptr(unsafe.Pointer(pphHash)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRngInterface calls bcryptprimitives!GetRngInterface.
@@ -4432,7 +4432,7 @@ func GetToken(pPolicyChain []POLICY_ELEMENT, securityToken **GENERIC_XML_TOKEN, 
 		_pPolicyChain = &pPolicyChain[0]
 	}
 	r1, _, _ := syscall.SyscallN(procGetToken.Addr(), uintptr(len(pPolicyChain)), uintptr(unsafe.Pointer(_pPolicyChain)), uintptr(unsafe.Pointer(securityToken)), uintptr(unsafe.Pointer(phProofTokenCrypto)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HashCore calls infocardapi!HashCore.
@@ -4442,7 +4442,7 @@ func HashCore(hCrypto *INFORMATIONCARD_CRYPTO_HANDLE, pInData []byte) error {
 		_pInData = &pInData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procHashCore.Addr(), uintptr(unsafe.Pointer(hCrypto)), uintptr(len(pInData)), uintptr(unsafe.Pointer(_pInData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // HashFinal calls infocardapi!HashFinal.
@@ -4452,20 +4452,20 @@ func HashFinal(hCrypto *INFORMATIONCARD_CRYPTO_HANDLE, pInData []byte, pcbOutDat
 		_pInData = &pInData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procHashFinal.Addr(), uintptr(unsafe.Pointer(hCrypto)), uintptr(len(pInData)), uintptr(unsafe.Pointer(_pInData)), uintptr(unsafe.Pointer(pcbOutData)), uintptr(unsafe.Pointer(ppOutData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ImportInformationCard calls infocardapi!ImportInformationCard.
 func ImportInformationCard(fileName string) error {
 	_fileName := win32.UTF16Ptr(fileName)
 	r1, _, _ := syscall.SyscallN(procImportInformationCard.Addr(), uintptr(unsafe.Pointer(_fileName)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ManageCardSpace calls infocardapi!ManageCardSpace.
 func ManageCardSpace() error {
 	r1, _, _ := syscall.SyscallN(procManageCardSpace.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptCloseProtectionDescriptor calls ncrypt!NCryptCloseProtectionDescriptor.
@@ -4473,7 +4473,7 @@ func ManageCardSpace() error {
 // Minimum OS: windows8.0.
 func NCryptCloseProtectionDescriptor(hDescriptor security.NCRYPT_DESCRIPTOR_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procNCryptCloseProtectionDescriptor.Addr(), uintptr(hDescriptor))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptCreateClaim calls ncrypt!NCryptCreateClaim.
@@ -4485,7 +4485,7 @@ func NCryptCreateClaim(hSubjectKey NCRYPT_KEY_HANDLE, hAuthorityKey NCRYPT_KEY_H
 		_pbClaimBlob = &pbClaimBlob[0]
 	}
 	r1, _, _ := syscall.SyscallN(procNCryptCreateClaim.Addr(), uintptr(hSubjectKey), uintptr(hAuthorityKey), uintptr(dwClaimType), uintptr(unsafe.Pointer(pParameterList)), uintptr(unsafe.Pointer(_pbClaimBlob)), uintptr(len(pbClaimBlob)), uintptr(unsafe.Pointer(pcbResult)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptCreatePersistedKey calls ncrypt!NCryptCreatePersistedKey.
@@ -4495,7 +4495,7 @@ func NCryptCreatePersistedKey(hProvider NCRYPT_PROV_HANDLE, phKey *NCRYPT_KEY_HA
 	_pszAlgId := win32.UTF16Ptr(pszAlgId)
 	_pszKeyName := win32.UTF16Ptr(pszKeyName)
 	r1, _, _ := syscall.SyscallN(procNCryptCreatePersistedKey.Addr(), uintptr(hProvider), uintptr(unsafe.Pointer(phKey)), uintptr(unsafe.Pointer(_pszAlgId)), uintptr(unsafe.Pointer(_pszKeyName)), uintptr(dwLegacyKeySpec), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptCreateProtectionDescriptor calls ncrypt!NCryptCreateProtectionDescriptor.
@@ -4504,7 +4504,7 @@ func NCryptCreatePersistedKey(hProvider NCRYPT_PROV_HANDLE, phKey *NCRYPT_KEY_HA
 func NCryptCreateProtectionDescriptor(pwszDescriptorString string, dwFlags uint32, phDescriptor *security.NCRYPT_DESCRIPTOR_HANDLE) error {
 	_pwszDescriptorString := win32.UTF16Ptr(pwszDescriptorString)
 	r1, _, _ := syscall.SyscallN(procNCryptCreateProtectionDescriptor.Addr(), uintptr(unsafe.Pointer(_pwszDescriptorString)), uintptr(dwFlags), uintptr(unsafe.Pointer(phDescriptor)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptDecapsulate calls ncrypt!NCryptDecapsulate.
@@ -4518,7 +4518,7 @@ func NCryptDecapsulate(hKey NCRYPT_KEY_HANDLE, pbCipherText []byte, pbSecretKey 
 		_pbSecretKey = &pbSecretKey[0]
 	}
 	r1, _, _ := syscall.SyscallN(procNCryptDecapsulate.Addr(), uintptr(hKey), uintptr(unsafe.Pointer(_pbCipherText)), uintptr(len(pbCipherText)), uintptr(unsafe.Pointer(_pbSecretKey)), uintptr(len(pbSecretKey)), uintptr(unsafe.Pointer(pcbSecretKey)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptDecrypt calls ncrypt!NCryptDecrypt.
@@ -4534,7 +4534,7 @@ func NCryptDecrypt(hKey NCRYPT_KEY_HANDLE, pbInput []byte, pPaddingInfo unsafe.P
 		_pbOutput = &pbOutput[0]
 	}
 	r1, _, _ := syscall.SyscallN(procNCryptDecrypt.Addr(), uintptr(hKey), uintptr(unsafe.Pointer(_pbInput)), uintptr(len(pbInput)), uintptr(unsafe.Pointer(pPaddingInfo)), uintptr(unsafe.Pointer(_pbOutput)), uintptr(len(pbOutput)), uintptr(unsafe.Pointer(pcbResult)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptDeleteKey calls ncrypt!NCryptDeleteKey.
@@ -4542,7 +4542,7 @@ func NCryptDecrypt(hKey NCRYPT_KEY_HANDLE, pbInput []byte, pPaddingInfo unsafe.P
 // Minimum OS: windows6.0.6000.
 func NCryptDeleteKey(hKey NCRYPT_KEY_HANDLE, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procNCryptDeleteKey.Addr(), uintptr(hKey), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptDeriveKey calls ncrypt!NCryptDeriveKey.
@@ -4555,7 +4555,7 @@ func NCryptDeriveKey(hSharedSecret NCRYPT_SECRET_HANDLE, pwszKDF string, pParame
 		_pbDerivedKey = &pbDerivedKey[0]
 	}
 	r1, _, _ := syscall.SyscallN(procNCryptDeriveKey.Addr(), uintptr(hSharedSecret), uintptr(unsafe.Pointer(_pwszKDF)), uintptr(unsafe.Pointer(pParameterList)), uintptr(unsafe.Pointer(_pbDerivedKey)), uintptr(len(pbDerivedKey)), uintptr(unsafe.Pointer(pcbResult)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptEncapsulate calls ncrypt!NCryptEncapsulate.
@@ -4569,7 +4569,7 @@ func NCryptEncapsulate(hKey NCRYPT_KEY_HANDLE, pbSecretKey []byte, pcbSecretKey 
 		_pbCipherText = &pbCipherText[0]
 	}
 	r1, _, _ := syscall.SyscallN(procNCryptEncapsulate.Addr(), uintptr(hKey), uintptr(unsafe.Pointer(_pbSecretKey)), uintptr(len(pbSecretKey)), uintptr(unsafe.Pointer(pcbSecretKey)), uintptr(unsafe.Pointer(_pbCipherText)), uintptr(len(pbCipherText)), uintptr(unsafe.Pointer(pcbCipherText)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptEncrypt calls ncrypt!NCryptEncrypt.
@@ -4585,7 +4585,7 @@ func NCryptEncrypt(hKey NCRYPT_KEY_HANDLE, pbInput []byte, pPaddingInfo unsafe.P
 		_pbOutput = &pbOutput[0]
 	}
 	r1, _, _ := syscall.SyscallN(procNCryptEncrypt.Addr(), uintptr(hKey), uintptr(unsafe.Pointer(_pbInput)), uintptr(len(pbInput)), uintptr(unsafe.Pointer(pPaddingInfo)), uintptr(unsafe.Pointer(_pbOutput)), uintptr(len(pbOutput)), uintptr(unsafe.Pointer(pcbResult)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptEnumAlgorithms calls ncrypt!NCryptEnumAlgorithms.
@@ -4593,7 +4593,7 @@ func NCryptEncrypt(hKey NCRYPT_KEY_HANDLE, pbInput []byte, pPaddingInfo unsafe.P
 // Minimum OS: windows6.0.6000.
 func NCryptEnumAlgorithms(hProvider NCRYPT_PROV_HANDLE, dwAlgOperations NCRYPT_OPERATION, pdwAlgCount *uint32, ppAlgList **NCryptAlgorithmName, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procNCryptEnumAlgorithms.Addr(), uintptr(hProvider), uintptr(dwAlgOperations), uintptr(unsafe.Pointer(pdwAlgCount)), uintptr(unsafe.Pointer(ppAlgList)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptEnumKeys calls ncrypt!NCryptEnumKeys.
@@ -4602,7 +4602,7 @@ func NCryptEnumAlgorithms(hProvider NCRYPT_PROV_HANDLE, dwAlgOperations NCRYPT_O
 func NCryptEnumKeys(hProvider NCRYPT_PROV_HANDLE, pszScope string, ppKeyName **NCryptKeyName, ppEnumState *unsafe.Pointer, dwFlags NCRYPT_FLAGS) error {
 	_pszScope := win32.UTF16Ptr(pszScope)
 	r1, _, _ := syscall.SyscallN(procNCryptEnumKeys.Addr(), uintptr(hProvider), uintptr(unsafe.Pointer(_pszScope)), uintptr(unsafe.Pointer(ppKeyName)), uintptr(unsafe.Pointer(ppEnumState)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptEnumStorageProviders calls ncrypt!NCryptEnumStorageProviders.
@@ -4610,7 +4610,7 @@ func NCryptEnumKeys(hProvider NCRYPT_PROV_HANDLE, pszScope string, ppKeyName **N
 // Minimum OS: windows6.0.6000.
 func NCryptEnumStorageProviders(pdwProviderCount *uint32, ppProviderList **NCryptProviderName, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procNCryptEnumStorageProviders.Addr(), uintptr(unsafe.Pointer(pdwProviderCount)), uintptr(unsafe.Pointer(ppProviderList)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptExportKey calls ncrypt!NCryptExportKey.
@@ -4623,7 +4623,7 @@ func NCryptExportKey(hKey NCRYPT_KEY_HANDLE, hExportKey NCRYPT_KEY_HANDLE, pszBl
 		_pbOutput = &pbOutput[0]
 	}
 	r1, _, _ := syscall.SyscallN(procNCryptExportKey.Addr(), uintptr(hKey), uintptr(hExportKey), uintptr(unsafe.Pointer(_pszBlobType)), uintptr(unsafe.Pointer(pParameterList)), uintptr(unsafe.Pointer(_pbOutput)), uintptr(len(pbOutput)), uintptr(unsafe.Pointer(pcbResult)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptFinalizeKey calls ncrypt!NCryptFinalizeKey.
@@ -4631,7 +4631,7 @@ func NCryptExportKey(hKey NCRYPT_KEY_HANDLE, hExportKey NCRYPT_KEY_HANDLE, pszBl
 // Minimum OS: windows6.0.6000.
 func NCryptFinalizeKey(hKey NCRYPT_KEY_HANDLE, dwFlags NCRYPT_FLAGS) error {
 	r1, _, _ := syscall.SyscallN(procNCryptFinalizeKey.Addr(), uintptr(hKey), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptFreeBuffer calls ncrypt!NCryptFreeBuffer.
@@ -4639,7 +4639,7 @@ func NCryptFinalizeKey(hKey NCRYPT_KEY_HANDLE, dwFlags NCRYPT_FLAGS) error {
 // Minimum OS: windows6.0.6000.
 func NCryptFreeBuffer(pvInput unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procNCryptFreeBuffer.Addr(), uintptr(unsafe.Pointer(pvInput)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptFreeObject calls ncrypt!NCryptFreeObject.
@@ -4647,7 +4647,7 @@ func NCryptFreeBuffer(pvInput unsafe.Pointer) error {
 // Minimum OS: windows6.0.6000.
 func NCryptFreeObject(hObject NCRYPT_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procNCryptFreeObject.Addr(), uintptr(hObject))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptGetProperty calls ncrypt!NCryptGetProperty.
@@ -4660,7 +4660,7 @@ func NCryptGetProperty(hObject NCRYPT_HANDLE, pszProperty string, pbOutput []byt
 		_pbOutput = &pbOutput[0]
 	}
 	r1, _, _ := syscall.SyscallN(procNCryptGetProperty.Addr(), uintptr(hObject), uintptr(unsafe.Pointer(_pszProperty)), uintptr(unsafe.Pointer(_pbOutput)), uintptr(len(pbOutput)), uintptr(unsafe.Pointer(pcbResult)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptGetProtectionDescriptorInfo calls ncrypt!NCryptGetProtectionDescriptorInfo.
@@ -4668,7 +4668,7 @@ func NCryptGetProperty(hObject NCRYPT_HANDLE, pszProperty string, pbOutput []byt
 // Minimum OS: windows8.0.
 func NCryptGetProtectionDescriptorInfo(hDescriptor security.NCRYPT_DESCRIPTOR_HANDLE, pMemPara *NCRYPT_ALLOC_PARA, dwInfoType uint32, ppvInfo *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procNCryptGetProtectionDescriptorInfo.Addr(), uintptr(hDescriptor), uintptr(unsafe.Pointer(pMemPara)), uintptr(dwInfoType), uintptr(unsafe.Pointer(ppvInfo)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptImportKey calls ncrypt!NCryptImportKey.
@@ -4681,7 +4681,7 @@ func NCryptImportKey(hProvider NCRYPT_PROV_HANDLE, hImportKey NCRYPT_KEY_HANDLE,
 		_pbData = &pbData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procNCryptImportKey.Addr(), uintptr(hProvider), uintptr(hImportKey), uintptr(unsafe.Pointer(_pszBlobType)), uintptr(unsafe.Pointer(pParameterList)), uintptr(unsafe.Pointer(phKey)), uintptr(unsafe.Pointer(_pbData)), uintptr(len(pbData)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptIsAlgSupported calls ncrypt!NCryptIsAlgSupported.
@@ -4690,7 +4690,7 @@ func NCryptImportKey(hProvider NCRYPT_PROV_HANDLE, hImportKey NCRYPT_KEY_HANDLE,
 func NCryptIsAlgSupported(hProvider NCRYPT_PROV_HANDLE, pszAlgId string, dwFlags uint32) error {
 	_pszAlgId := win32.UTF16Ptr(pszAlgId)
 	r1, _, _ := syscall.SyscallN(procNCryptIsAlgSupported.Addr(), uintptr(hProvider), uintptr(unsafe.Pointer(_pszAlgId)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptIsKeyHandle calls ncrypt!NCryptIsKeyHandle.
@@ -4710,7 +4710,7 @@ func NCryptKeyDerivation(hKey NCRYPT_KEY_HANDLE, pParameterList *BCryptBufferDes
 		_pbDerivedKey = &pbDerivedKey[0]
 	}
 	r1, _, _ := syscall.SyscallN(procNCryptKeyDerivation.Addr(), uintptr(hKey), uintptr(unsafe.Pointer(pParameterList)), uintptr(unsafe.Pointer(_pbDerivedKey)), uintptr(len(pbDerivedKey)), uintptr(unsafe.Pointer(pcbResult)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptNotifyChangeKey calls ncrypt!NCryptNotifyChangeKey.
@@ -4718,7 +4718,7 @@ func NCryptKeyDerivation(hKey NCRYPT_KEY_HANDLE, pParameterList *BCryptBufferDes
 // Minimum OS: windows6.0.6000.
 func NCryptNotifyChangeKey(hProvider NCRYPT_PROV_HANDLE, phEvent *foundation.HANDLE, dwFlags NCRYPT_FLAGS) error {
 	r1, _, _ := syscall.SyscallN(procNCryptNotifyChangeKey.Addr(), uintptr(hProvider), uintptr(unsafe.Pointer(phEvent)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptOpenKey calls ncrypt!NCryptOpenKey.
@@ -4727,7 +4727,7 @@ func NCryptNotifyChangeKey(hProvider NCRYPT_PROV_HANDLE, phEvent *foundation.HAN
 func NCryptOpenKey(hProvider NCRYPT_PROV_HANDLE, phKey *NCRYPT_KEY_HANDLE, pszKeyName string, dwLegacyKeySpec CERT_KEY_SPEC, dwFlags NCRYPT_FLAGS) error {
 	_pszKeyName := win32.UTF16Ptr(pszKeyName)
 	r1, _, _ := syscall.SyscallN(procNCryptOpenKey.Addr(), uintptr(hProvider), uintptr(unsafe.Pointer(phKey)), uintptr(unsafe.Pointer(_pszKeyName)), uintptr(dwLegacyKeySpec), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptOpenStorageProvider calls ncrypt!NCryptOpenStorageProvider.
@@ -4736,7 +4736,7 @@ func NCryptOpenKey(hProvider NCRYPT_PROV_HANDLE, phKey *NCRYPT_KEY_HANDLE, pszKe
 func NCryptOpenStorageProvider(phProvider *NCRYPT_PROV_HANDLE, pszProviderName string, dwFlags uint32) error {
 	_pszProviderName := win32.UTF16Ptr(pszProviderName)
 	r1, _, _ := syscall.SyscallN(procNCryptOpenStorageProvider.Addr(), uintptr(unsafe.Pointer(phProvider)), uintptr(unsafe.Pointer(_pszProviderName)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptProtectSecret calls ncrypt!NCryptProtectSecret.
@@ -4748,7 +4748,7 @@ func NCryptProtectSecret(hDescriptor security.NCRYPT_DESCRIPTOR_HANDLE, dwFlags 
 		_pbData = &pbData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procNCryptProtectSecret.Addr(), uintptr(hDescriptor), uintptr(dwFlags), uintptr(unsafe.Pointer(_pbData)), uintptr(len(pbData)), uintptr(unsafe.Pointer(pMemPara)), uintptr(hWnd), uintptr(unsafe.Pointer(ppbProtectedBlob)), uintptr(unsafe.Pointer(pcbProtectedBlob)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptQueryProtectionDescriptorName calls ncrypt!NCryptQueryProtectionDescriptorName.
@@ -4757,7 +4757,7 @@ func NCryptProtectSecret(hDescriptor security.NCRYPT_DESCRIPTOR_HANDLE, dwFlags 
 func NCryptQueryProtectionDescriptorName(pwszName string, pwszDescriptorString foundation.PWSTR, pcDescriptorString *uintptr, dwFlags uint32) error {
 	_pwszName := win32.UTF16Ptr(pwszName)
 	r1, _, _ := syscall.SyscallN(procNCryptQueryProtectionDescriptorName.Addr(), uintptr(unsafe.Pointer(_pwszName)), uintptr(unsafe.Pointer(pwszDescriptorString)), uintptr(unsafe.Pointer(pcDescriptorString)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptRegisterProtectionDescriptorName calls ncrypt!NCryptRegisterProtectionDescriptorName.
@@ -4767,7 +4767,7 @@ func NCryptRegisterProtectionDescriptorName(pwszName string, pwszDescriptorStrin
 	_pwszName := win32.UTF16Ptr(pwszName)
 	_pwszDescriptorString := win32.UTF16Ptr(pwszDescriptorString)
 	r1, _, _ := syscall.SyscallN(procNCryptRegisterProtectionDescriptorName.Addr(), uintptr(unsafe.Pointer(_pwszName)), uintptr(unsafe.Pointer(_pwszDescriptorString)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptSecretAgreement calls ncrypt!NCryptSecretAgreement.
@@ -4775,7 +4775,7 @@ func NCryptRegisterProtectionDescriptorName(pwszName string, pwszDescriptorStrin
 // Minimum OS: windows6.0.6000.
 func NCryptSecretAgreement(hPrivKey NCRYPT_KEY_HANDLE, hPubKey NCRYPT_KEY_HANDLE, phAgreedSecret *NCRYPT_SECRET_HANDLE, dwFlags NCRYPT_FLAGS) error {
 	r1, _, _ := syscall.SyscallN(procNCryptSecretAgreement.Addr(), uintptr(hPrivKey), uintptr(hPubKey), uintptr(unsafe.Pointer(phAgreedSecret)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptSetProperty calls ncrypt!NCryptSetProperty.
@@ -4788,7 +4788,7 @@ func NCryptSetProperty(hObject NCRYPT_HANDLE, pszProperty string, pbInput []byte
 		_pbInput = &pbInput[0]
 	}
 	r1, _, _ := syscall.SyscallN(procNCryptSetProperty.Addr(), uintptr(hObject), uintptr(unsafe.Pointer(_pszProperty)), uintptr(unsafe.Pointer(_pbInput)), uintptr(len(pbInput)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptSignHash calls ncrypt!NCryptSignHash.
@@ -4804,7 +4804,7 @@ func NCryptSignHash(hKey NCRYPT_KEY_HANDLE, pPaddingInfo unsafe.Pointer, pbHashV
 		_pbSignature = &pbSignature[0]
 	}
 	r1, _, _ := syscall.SyscallN(procNCryptSignHash.Addr(), uintptr(hKey), uintptr(unsafe.Pointer(pPaddingInfo)), uintptr(unsafe.Pointer(_pbHashValue)), uintptr(len(pbHashValue)), uintptr(unsafe.Pointer(_pbSignature)), uintptr(len(pbSignature)), uintptr(unsafe.Pointer(pcbResult)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptStreamClose calls ncrypt!NCryptStreamClose.
@@ -4812,7 +4812,7 @@ func NCryptSignHash(hKey NCRYPT_KEY_HANDLE, pPaddingInfo unsafe.Pointer, pbHashV
 // Minimum OS: windows8.0.
 func NCryptStreamClose(hStream security.NCRYPT_STREAM_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procNCryptStreamClose.Addr(), uintptr(hStream))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptStreamOpenToProtect calls ncrypt!NCryptStreamOpenToProtect.
@@ -4820,7 +4820,7 @@ func NCryptStreamClose(hStream security.NCRYPT_STREAM_HANDLE) error {
 // Minimum OS: windows8.0.
 func NCryptStreamOpenToProtect(hDescriptor security.NCRYPT_DESCRIPTOR_HANDLE, dwFlags uint32, hWnd foundation.HWND, pStreamInfo *NCRYPT_PROTECT_STREAM_INFO, phStream *security.NCRYPT_STREAM_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procNCryptStreamOpenToProtect.Addr(), uintptr(hDescriptor), uintptr(dwFlags), uintptr(hWnd), uintptr(unsafe.Pointer(pStreamInfo)), uintptr(unsafe.Pointer(phStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptStreamOpenToUnprotect calls ncrypt!NCryptStreamOpenToUnprotect.
@@ -4828,14 +4828,14 @@ func NCryptStreamOpenToProtect(hDescriptor security.NCRYPT_DESCRIPTOR_HANDLE, dw
 // Minimum OS: windows8.0.
 func NCryptStreamOpenToUnprotect(pStreamInfo *NCRYPT_PROTECT_STREAM_INFO, dwFlags uint32, hWnd foundation.HWND, phStream *security.NCRYPT_STREAM_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procNCryptStreamOpenToUnprotect.Addr(), uintptr(unsafe.Pointer(pStreamInfo)), uintptr(dwFlags), uintptr(hWnd), uintptr(unsafe.Pointer(phStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptStreamOpenToUnprotectEx calls ncrypt!NCryptStreamOpenToUnprotectEx.
 // https://learn.microsoft.com/windows/win32/api/ncryptprotect/nf-ncryptprotect-ncryptstreamopentounprotectex
 func NCryptStreamOpenToUnprotectEx(pStreamInfo *NCRYPT_PROTECT_STREAM_INFO_EX, dwFlags uint32, hWnd foundation.HWND, phStream *security.NCRYPT_STREAM_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procNCryptStreamOpenToUnprotectEx.Addr(), uintptr(unsafe.Pointer(pStreamInfo)), uintptr(dwFlags), uintptr(hWnd), uintptr(unsafe.Pointer(phStream)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptStreamUpdate calls ncrypt!NCryptStreamUpdate.
@@ -4848,7 +4848,7 @@ func NCryptStreamUpdate(hStream security.NCRYPT_STREAM_HANDLE, pbData []byte, fF
 	}
 	_fFinal := win32.Bool32(fFinal)
 	r1, _, _ := syscall.SyscallN(procNCryptStreamUpdate.Addr(), uintptr(hStream), uintptr(unsafe.Pointer(_pbData)), uintptr(len(pbData)), uintptr(_fFinal))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptTranslateHandle calls ncrypt!NCryptTranslateHandle.
@@ -4856,7 +4856,7 @@ func NCryptStreamUpdate(hStream security.NCRYPT_STREAM_HANDLE, pbData []byte, fF
 // Minimum OS: windows6.0.6000.
 func NCryptTranslateHandle(phProvider *NCRYPT_PROV_HANDLE, phKey *NCRYPT_KEY_HANDLE, hLegacyProv uintptr, hLegacyKey uintptr, dwLegacyKeySpec CERT_KEY_SPEC, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procNCryptTranslateHandle.Addr(), uintptr(unsafe.Pointer(phProvider)), uintptr(unsafe.Pointer(phKey)), uintptr(hLegacyProv), uintptr(hLegacyKey), uintptr(dwLegacyKeySpec), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptUnprotectSecret calls ncrypt!NCryptUnprotectSecret.
@@ -4868,7 +4868,7 @@ func NCryptUnprotectSecret(phDescriptor *security.NCRYPT_DESCRIPTOR_HANDLE, dwFl
 		_pbProtectedBlob = &pbProtectedBlob[0]
 	}
 	r1, _, _ := syscall.SyscallN(procNCryptUnprotectSecret.Addr(), uintptr(unsafe.Pointer(phDescriptor)), uintptr(dwFlags), uintptr(unsafe.Pointer(_pbProtectedBlob)), uintptr(len(pbProtectedBlob)), uintptr(unsafe.Pointer(pMemPara)), uintptr(hWnd), uintptr(unsafe.Pointer(ppbData)), uintptr(unsafe.Pointer(pcbData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptVerifyClaim calls ncrypt!NCryptVerifyClaim.
@@ -4880,7 +4880,7 @@ func NCryptVerifyClaim(hSubjectKey NCRYPT_KEY_HANDLE, hAuthorityKey NCRYPT_KEY_H
 		_pbClaimBlob = &pbClaimBlob[0]
 	}
 	r1, _, _ := syscall.SyscallN(procNCryptVerifyClaim.Addr(), uintptr(hSubjectKey), uintptr(hAuthorityKey), uintptr(dwClaimType), uintptr(unsafe.Pointer(pParameterList)), uintptr(unsafe.Pointer(_pbClaimBlob)), uintptr(len(pbClaimBlob)), uintptr(unsafe.Pointer(pOutput)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // NCryptVerifySignature calls ncrypt!NCryptVerifySignature.
@@ -4896,7 +4896,7 @@ func NCryptVerifySignature(hKey NCRYPT_KEY_HANDLE, pPaddingInfo unsafe.Pointer, 
 		_pbSignature = &pbSignature[0]
 	}
 	r1, _, _ := syscall.SyscallN(procNCryptVerifySignature.Addr(), uintptr(hKey), uintptr(unsafe.Pointer(pPaddingInfo)), uintptr(unsafe.Pointer(_pbHashValue)), uintptr(len(pbHashValue)), uintptr(unsafe.Pointer(_pbSignature)), uintptr(len(pbSignature)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // PFXExportCertStore calls CRYPT32!PFXExportCertStore.
@@ -4968,7 +4968,7 @@ func ProcessPrng(pbData []byte) bool {
 // https://learn.microsoft.com/windows/win32/SecCrypto/signerror
 func SignError() error {
 	r1, _, _ := syscall.SyscallN(procSignError.Addr())
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SignHash calls infocardapi!SignHash.
@@ -4979,14 +4979,14 @@ func SignHash(hCrypto *INFORMATIONCARD_CRYPTO_HANDLE, pHash []byte, hashAlgOid s
 	}
 	_hashAlgOid := win32.UTF16Ptr(hashAlgOid)
 	r1, _, _ := syscall.SyscallN(procSignHash.Addr(), uintptr(unsafe.Pointer(hCrypto)), uintptr(len(pHash)), uintptr(unsafe.Pointer(_pHash)), uintptr(unsafe.Pointer(_hashAlgOid)), uintptr(unsafe.Pointer(pcbSig)), uintptr(unsafe.Pointer(ppSig)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SignerFreeSignerContext calls Mssign32!SignerFreeSignerContext.
 // https://learn.microsoft.com/windows/win32/SecCrypto/signerfreesignercontext
 func SignerFreeSignerContext(pSignerContext *SIGNER_CONTEXT) error {
 	r1, _, _ := syscall.SyscallN(procSignerFreeSignerContext.Addr(), uintptr(unsafe.Pointer(pSignerContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SignerSign calls Mssign32!SignerSign.
@@ -4994,7 +4994,7 @@ func SignerFreeSignerContext(pSignerContext *SIGNER_CONTEXT) error {
 func SignerSign(pSubjectInfo *SIGNER_SUBJECT_INFO, pSignerCert *SIGNER_CERT, pSignatureInfo *SIGNER_SIGNATURE_INFO, pProviderInfo *SIGNER_PROVIDER_INFO, pwszHttpTimeStamp string, psRequest *CRYPT_ATTRIBUTES, pSipData unsafe.Pointer) error {
 	_pwszHttpTimeStamp := win32.UTF16Ptr(pwszHttpTimeStamp)
 	r1, _, _ := syscall.SyscallN(procSignerSign.Addr(), uintptr(unsafe.Pointer(pSubjectInfo)), uintptr(unsafe.Pointer(pSignerCert)), uintptr(unsafe.Pointer(pSignatureInfo)), uintptr(unsafe.Pointer(pProviderInfo)), uintptr(unsafe.Pointer(_pwszHttpTimeStamp)), uintptr(unsafe.Pointer(psRequest)), uintptr(unsafe.Pointer(pSipData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SignerSignEx calls Mssign32!SignerSignEx.
@@ -5002,7 +5002,7 @@ func SignerSign(pSubjectInfo *SIGNER_SUBJECT_INFO, pSignerCert *SIGNER_CERT, pSi
 func SignerSignEx(dwFlags SIGNER_SIGN_FLAGS, pSubjectInfo *SIGNER_SUBJECT_INFO, pSignerCert *SIGNER_CERT, pSignatureInfo *SIGNER_SIGNATURE_INFO, pProviderInfo *SIGNER_PROVIDER_INFO, pwszHttpTimeStamp string, psRequest *CRYPT_ATTRIBUTES, pSipData unsafe.Pointer, ppSignerContext **SIGNER_CONTEXT) error {
 	_pwszHttpTimeStamp := win32.UTF16Ptr(pwszHttpTimeStamp)
 	r1, _, _ := syscall.SyscallN(procSignerSignEx.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(pSubjectInfo)), uintptr(unsafe.Pointer(pSignerCert)), uintptr(unsafe.Pointer(pSignatureInfo)), uintptr(unsafe.Pointer(pProviderInfo)), uintptr(unsafe.Pointer(_pwszHttpTimeStamp)), uintptr(unsafe.Pointer(psRequest)), uintptr(unsafe.Pointer(pSipData)), uintptr(unsafe.Pointer(ppSignerContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SignerSignEx2 calls Mssign32!SignerSignEx2.
@@ -5010,7 +5010,7 @@ func SignerSignEx(dwFlags SIGNER_SIGN_FLAGS, pSubjectInfo *SIGNER_SUBJECT_INFO, 
 func SignerSignEx2(dwFlags SIGNER_SIGN_FLAGS, pSubjectInfo *SIGNER_SUBJECT_INFO, pSignerCert *SIGNER_CERT, pSignatureInfo *SIGNER_SIGNATURE_INFO, pProviderInfo *SIGNER_PROVIDER_INFO, dwTimestampFlags SIGNER_TIMESTAMP_FLAGS, pszTimestampAlgorithmOid foundation.PSTR, pwszHttpTimeStamp string, psRequest *CRYPT_ATTRIBUTES, pSipData unsafe.Pointer, ppSignerContext **SIGNER_CONTEXT, pCryptoPolicy *CERT_STRONG_SIGN_PARA) error {
 	_pwszHttpTimeStamp := win32.UTF16Ptr(pwszHttpTimeStamp)
 	r1, _, _ := syscall.SyscallN(procSignerSignEx2.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(pSubjectInfo)), uintptr(unsafe.Pointer(pSignerCert)), uintptr(unsafe.Pointer(pSignatureInfo)), uintptr(unsafe.Pointer(pProviderInfo)), uintptr(dwTimestampFlags), uintptr(unsafe.Pointer(pszTimestampAlgorithmOid)), uintptr(unsafe.Pointer(_pwszHttpTimeStamp)), uintptr(unsafe.Pointer(psRequest)), uintptr(unsafe.Pointer(pSipData)), uintptr(unsafe.Pointer(ppSignerContext)), uintptr(unsafe.Pointer(pCryptoPolicy)), 0)
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SignerSignEx3 calls Mssign32!SignerSignEx3.
@@ -5018,7 +5018,7 @@ func SignerSignEx2(dwFlags SIGNER_SIGN_FLAGS, pSubjectInfo *SIGNER_SUBJECT_INFO,
 func SignerSignEx3(dwFlags SIGNER_SIGN_FLAGS, pSubjectInfo *SIGNER_SUBJECT_INFO, pSignerCert *SIGNER_CERT, pSignatureInfo *SIGNER_SIGNATURE_INFO, pProviderInfo *SIGNER_PROVIDER_INFO, dwTimestampFlags SIGNER_TIMESTAMP_FLAGS, pszTimestampAlgorithmOid foundation.PSTR, pwszHttpTimeStamp string, psRequest *CRYPT_ATTRIBUTES, pSipData unsafe.Pointer, ppSignerContext **SIGNER_CONTEXT, pCryptoPolicy *CERT_STRONG_SIGN_PARA, pDigestSignInfo *SIGNER_DIGEST_SIGN_INFO) error {
 	_pwszHttpTimeStamp := win32.UTF16Ptr(pwszHttpTimeStamp)
 	r1, _, _ := syscall.SyscallN(procSignerSignEx3.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(pSubjectInfo)), uintptr(unsafe.Pointer(pSignerCert)), uintptr(unsafe.Pointer(pSignatureInfo)), uintptr(unsafe.Pointer(pProviderInfo)), uintptr(dwTimestampFlags), uintptr(unsafe.Pointer(pszTimestampAlgorithmOid)), uintptr(unsafe.Pointer(_pwszHttpTimeStamp)), uintptr(unsafe.Pointer(psRequest)), uintptr(unsafe.Pointer(pSipData)), uintptr(unsafe.Pointer(ppSignerContext)), uintptr(unsafe.Pointer(pCryptoPolicy)), uintptr(unsafe.Pointer(pDigestSignInfo)), 0)
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SignerTimeStamp calls Mssign32!SignerTimeStamp.
@@ -5026,7 +5026,7 @@ func SignerSignEx3(dwFlags SIGNER_SIGN_FLAGS, pSubjectInfo *SIGNER_SUBJECT_INFO,
 func SignerTimeStamp(pSubjectInfo *SIGNER_SUBJECT_INFO, pwszHttpTimeStamp string, psRequest *CRYPT_ATTRIBUTES, pSipData unsafe.Pointer) error {
 	_pwszHttpTimeStamp := win32.UTF16Ptr(pwszHttpTimeStamp)
 	r1, _, _ := syscall.SyscallN(procSignerTimeStamp.Addr(), uintptr(unsafe.Pointer(pSubjectInfo)), uintptr(unsafe.Pointer(_pwszHttpTimeStamp)), uintptr(unsafe.Pointer(psRequest)), uintptr(unsafe.Pointer(pSipData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SignerTimeStampEx calls Mssign32!SignerTimeStampEx.
@@ -5034,7 +5034,7 @@ func SignerTimeStamp(pSubjectInfo *SIGNER_SUBJECT_INFO, pwszHttpTimeStamp string
 func SignerTimeStampEx(pSubjectInfo *SIGNER_SUBJECT_INFO, pwszHttpTimeStamp string, psRequest *CRYPT_ATTRIBUTES, pSipData unsafe.Pointer, ppSignerContext **SIGNER_CONTEXT) error {
 	_pwszHttpTimeStamp := win32.UTF16Ptr(pwszHttpTimeStamp)
 	r1, _, _ := syscall.SyscallN(procSignerTimeStampEx.Addr(), 0, uintptr(unsafe.Pointer(pSubjectInfo)), uintptr(unsafe.Pointer(_pwszHttpTimeStamp)), uintptr(unsafe.Pointer(psRequest)), uintptr(unsafe.Pointer(pSipData)), uintptr(unsafe.Pointer(ppSignerContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SignerTimeStampEx2 calls Mssign32!SignerTimeStampEx2.
@@ -5042,7 +5042,7 @@ func SignerTimeStampEx(pSubjectInfo *SIGNER_SUBJECT_INFO, pwszHttpTimeStamp stri
 func SignerTimeStampEx2(pSubjectInfo *SIGNER_SUBJECT_INFO, pwszHttpTimeStamp string, dwAlgId ALG_ID, psRequest *CRYPT_ATTRIBUTES, pSipData unsafe.Pointer, ppSignerContext **SIGNER_CONTEXT) error {
 	_pwszHttpTimeStamp := win32.UTF16Ptr(pwszHttpTimeStamp)
 	r1, _, _ := syscall.SyscallN(procSignerTimeStampEx2.Addr(), 0, uintptr(unsafe.Pointer(pSubjectInfo)), uintptr(unsafe.Pointer(_pwszHttpTimeStamp)), uintptr(dwAlgId), uintptr(unsafe.Pointer(psRequest)), uintptr(unsafe.Pointer(pSipData)), uintptr(unsafe.Pointer(ppSignerContext)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SignerTimeStampEx3 calls Mssign32!SignerTimeStampEx3.
@@ -5051,14 +5051,14 @@ func SignerTimeStampEx3(dwFlags SIGNER_TIMESTAMP_FLAGS, dwIndex uint32, pSubject
 	_pwszHttpTimeStamp := win32.UTF16Ptr(pwszHttpTimeStamp)
 	_pszAlgorithmOid := win32.UTF16Ptr(pszAlgorithmOid)
 	r1, _, _ := syscall.SyscallN(procSignerTimeStampEx3.Addr(), uintptr(dwFlags), uintptr(dwIndex), uintptr(unsafe.Pointer(pSubjectInfo)), uintptr(unsafe.Pointer(_pwszHttpTimeStamp)), uintptr(unsafe.Pointer(_pszAlgorithmOid)), uintptr(unsafe.Pointer(psRequest)), uintptr(unsafe.Pointer(pSipData)), uintptr(unsafe.Pointer(ppSignerContext)), uintptr(unsafe.Pointer(pCryptoPolicy)), 0)
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslChangeNotify calls ncrypt!SslChangeNotify.
 // https://learn.microsoft.com/windows/win32/SecCNG/sslchangenotify
 func SslChangeNotify(hEvent foundation.HANDLE, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procSslChangeNotify.Addr(), uintptr(hEvent), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslComputeClientAuthHash calls ncrypt!SslComputeClientAuthHash.
@@ -5070,7 +5070,7 @@ func SslComputeClientAuthHash(hSslProvider NCRYPT_PROV_HANDLE, hMasterKey NCRYPT
 		_pbOutput = &pbOutput[0]
 	}
 	r1, _, _ := syscall.SyscallN(procSslComputeClientAuthHash.Addr(), uintptr(hSslProvider), uintptr(hMasterKey), uintptr(hHandshakeHash), uintptr(unsafe.Pointer(_pszAlgId)), uintptr(unsafe.Pointer(_pbOutput)), uintptr(len(pbOutput)), uintptr(unsafe.Pointer(pcbResult)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslComputeEapKeyBlock calls ncrypt!SslComputeEapKeyBlock.
@@ -5085,7 +5085,7 @@ func SslComputeEapKeyBlock(hSslProvider NCRYPT_PROV_HANDLE, hMasterKey NCRYPT_KE
 		_pbOutput = &pbOutput[0]
 	}
 	r1, _, _ := syscall.SyscallN(procSslComputeEapKeyBlock.Addr(), uintptr(hSslProvider), uintptr(hMasterKey), uintptr(unsafe.Pointer(_pbRandoms)), uintptr(len(pbRandoms)), uintptr(unsafe.Pointer(_pbOutput)), uintptr(len(pbOutput)), uintptr(unsafe.Pointer(pcbResult)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslComputeFinishedHash calls ncrypt!SslComputeFinishedHash.
@@ -5096,7 +5096,7 @@ func SslComputeFinishedHash(hSslProvider NCRYPT_PROV_HANDLE, hMasterKey NCRYPT_K
 		_pbOutput = &pbOutput[0]
 	}
 	r1, _, _ := syscall.SyscallN(procSslComputeFinishedHash.Addr(), uintptr(hSslProvider), uintptr(hMasterKey), uintptr(hHandshakeHash), uintptr(unsafe.Pointer(_pbOutput)), uintptr(len(pbOutput)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslComputeSessionHash calls ncrypt!SslComputeSessionHash.
@@ -5106,7 +5106,7 @@ func SslComputeSessionHash(hSslProvider NCRYPT_PROV_HANDLE, hHandshakeHash NCRYP
 		_pbOutput = &pbOutput[0]
 	}
 	r1, _, _ := syscall.SyscallN(procSslComputeSessionHash.Addr(), uintptr(hSslProvider), uintptr(hHandshakeHash), uintptr(dwProtocol), uintptr(unsafe.Pointer(_pbOutput)), uintptr(len(pbOutput)), uintptr(unsafe.Pointer(pcbResult)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslCreateClientAuthHash calls ncrypt!SslCreateClientAuthHash.
@@ -5114,7 +5114,7 @@ func SslComputeSessionHash(hSslProvider NCRYPT_PROV_HANDLE, hHandshakeHash NCRYP
 func SslCreateClientAuthHash(hSslProvider NCRYPT_PROV_HANDLE, phHandshakeHash *NCRYPT_HASH_HANDLE, dwProtocol uint32, dwCipherSuite uint32, pszHashAlgId string, dwFlags uint32) error {
 	_pszHashAlgId := win32.UTF16Ptr(pszHashAlgId)
 	r1, _, _ := syscall.SyscallN(procSslCreateClientAuthHash.Addr(), uintptr(hSslProvider), uintptr(unsafe.Pointer(phHandshakeHash)), uintptr(dwProtocol), uintptr(dwCipherSuite), uintptr(unsafe.Pointer(_pszHashAlgId)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslCreateEphemeralKey calls ncrypt!SslCreateEphemeralKey.
@@ -5125,21 +5125,21 @@ func SslCreateEphemeralKey(hSslProvider NCRYPT_PROV_HANDLE, phEphemeralKey *NCRY
 		_pbParams = &pbParams[0]
 	}
 	r1, _, _ := syscall.SyscallN(procSslCreateEphemeralKey.Addr(), uintptr(hSslProvider), uintptr(unsafe.Pointer(phEphemeralKey)), uintptr(dwProtocol), uintptr(dwCipherSuite), uintptr(dwKeyType), uintptr(dwKeyBitLen), uintptr(unsafe.Pointer(_pbParams)), uintptr(len(pbParams)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslCreateHandshakeHash calls ncrypt!SslCreateHandshakeHash.
 // https://learn.microsoft.com/windows/win32/SecCNG/sslcreatehandshakehash
 func SslCreateHandshakeHash(hSslProvider NCRYPT_PROV_HANDLE, phHandshakeHash *NCRYPT_HASH_HANDLE, dwProtocol uint32, dwCipherSuite uint32, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procSslCreateHandshakeHash.Addr(), uintptr(hSslProvider), uintptr(unsafe.Pointer(phHandshakeHash)), uintptr(dwProtocol), uintptr(dwCipherSuite), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslDecrementProviderReferenceCount calls ncrypt!SslDecrementProviderReferenceCount.
 // https://learn.microsoft.com/windows/win32/SecCNG/ssldecrementproviderreferencecount
 func SslDecrementProviderReferenceCount(hSslProvider NCRYPT_PROV_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procSslDecrementProviderReferenceCount.Addr(), uintptr(hSslProvider))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslDecryptPacket calls ncrypt!SslDecryptPacket.
@@ -5154,13 +5154,13 @@ func SslDecryptPacket(hSslProvider NCRYPT_PROV_HANDLE, hKey NCRYPT_KEY_HANDLE, p
 		_pbOutput = &pbOutput[0]
 	}
 	r1, _, _ := syscall.SyscallN(procSslDecryptPacket.Addr(), uintptr(hSslProvider), uintptr(hKey), uintptr(unsafe.Pointer(_pbInput)), uintptr(len(pbInput)), uintptr(unsafe.Pointer(_pbOutput)), uintptr(len(pbOutput)), uintptr(unsafe.Pointer(pcbResult)), uintptr(SequenceNumber), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslDuplicateTranscriptHash calls ncrypt!SslDuplicateTranscriptHash.
 func SslDuplicateTranscriptHash(hSslProvider NCRYPT_PROV_HANDLE, hTranscriptHash NCRYPT_HASH_HANDLE, phTranscriptHash *NCRYPT_HASH_HANDLE, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procSslDuplicateTranscriptHash.Addr(), uintptr(hSslProvider), uintptr(hTranscriptHash), uintptr(unsafe.Pointer(phTranscriptHash)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslEncryptPacket calls ncrypt!SslEncryptPacket.
@@ -5175,45 +5175,45 @@ func SslEncryptPacket(hSslProvider NCRYPT_PROV_HANDLE, hKey NCRYPT_KEY_HANDLE, p
 		_pbOutput = &pbOutput[0]
 	}
 	r1, _, _ := syscall.SyscallN(procSslEncryptPacket.Addr(), uintptr(hSslProvider), uintptr(hKey), uintptr(unsafe.Pointer(_pbInput)), uintptr(len(pbInput)), uintptr(unsafe.Pointer(_pbOutput)), uintptr(len(pbOutput)), uintptr(unsafe.Pointer(pcbResult)), uintptr(SequenceNumber), uintptr(dwContentType), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslEnumCipherSuites calls ncrypt!SslEnumCipherSuites.
 // https://learn.microsoft.com/windows/win32/SecCNG/sslenumciphersuites
 func SslEnumCipherSuites(hSslProvider NCRYPT_PROV_HANDLE, hPrivateKey NCRYPT_KEY_HANDLE, ppCipherSuite **NCRYPT_SSL_CIPHER_SUITE, ppEnumState *unsafe.Pointer, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procSslEnumCipherSuites.Addr(), uintptr(hSslProvider), uintptr(hPrivateKey), uintptr(unsafe.Pointer(ppCipherSuite)), uintptr(unsafe.Pointer(ppEnumState)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslEnumCipherSuitesEx calls ncrypt!SslEnumCipherSuitesEx.
 func SslEnumCipherSuitesEx(hSslProvider NCRYPT_PROV_HANDLE, hPrivateKey NCRYPT_KEY_HANDLE, ppCipherSuite **NCRYPT_SSL_CIPHER_SUITE_EX, ppEnumState *unsafe.Pointer, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procSslEnumCipherSuitesEx.Addr(), uintptr(hSslProvider), uintptr(hPrivateKey), uintptr(unsafe.Pointer(ppCipherSuite)), uintptr(unsafe.Pointer(ppEnumState)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslEnumEccCurves calls ncrypt!SslEnumEccCurves.
 func SslEnumEccCurves(hSslProvider NCRYPT_PROV_HANDLE, pEccCurveCount *uint32, ppEccCurve **NCRYPT_SSL_ECC_CURVE, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procSslEnumEccCurves.Addr(), uintptr(hSslProvider), uintptr(unsafe.Pointer(pEccCurveCount)), uintptr(unsafe.Pointer(ppEccCurve)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslEnumProtocolProviders calls ncrypt!SslEnumProtocolProviders.
 // https://learn.microsoft.com/windows/win32/SecCNG/sslenumprotocolproviders
 func SslEnumProtocolProviders(pdwProviderCount *uint32, ppProviderList **NCryptProviderName, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procSslEnumProtocolProviders.Addr(), uintptr(unsafe.Pointer(pdwProviderCount)), uintptr(unsafe.Pointer(ppProviderList)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslExpandBinderKey calls ncrypt!SslExpandBinderKey.
 func SslExpandBinderKey(hSslProvider NCRYPT_PROV_HANDLE, hEarlyKey NCRYPT_KEY_HANDLE, phBinderKey *NCRYPT_KEY_HANDLE, pParameterList *BCryptBufferDesc, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procSslExpandBinderKey.Addr(), uintptr(hSslProvider), uintptr(hEarlyKey), uintptr(unsafe.Pointer(phBinderKey)), uintptr(unsafe.Pointer(pParameterList)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslExpandExporterMasterKey calls ncrypt!SslExpandExporterMasterKey.
 func SslExpandExporterMasterKey(hSslProvider NCRYPT_PROV_HANDLE, hBaseKey NCRYPT_KEY_HANDLE, hHashValue NCRYPT_HASH_HANDLE, phExporterMasterKey *NCRYPT_KEY_HANDLE, pParameterList *BCryptBufferDesc, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procSslExpandExporterMasterKey.Addr(), uintptr(hSslProvider), uintptr(hBaseKey), uintptr(hHashValue), uintptr(unsafe.Pointer(phExporterMasterKey)), uintptr(unsafe.Pointer(pParameterList)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslExpandPreSharedKey calls ncrypt!SslExpandPreSharedKey.
@@ -5223,25 +5223,25 @@ func SslExpandPreSharedKey(hSslProvider NCRYPT_PROV_HANDLE, hResumptionMasterKey
 		_pbTicketNonce = &pbTicketNonce[0]
 	}
 	r1, _, _ := syscall.SyscallN(procSslExpandPreSharedKey.Addr(), uintptr(hSslProvider), uintptr(hResumptionMasterKey), uintptr(unsafe.Pointer(_pbTicketNonce)), uintptr(len(pbTicketNonce)), uintptr(unsafe.Pointer(phPreSharedKey)), uintptr(unsafe.Pointer(pParameterList)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslExpandResumptionMasterKey calls ncrypt!SslExpandResumptionMasterKey.
 func SslExpandResumptionMasterKey(hSslProvider NCRYPT_PROV_HANDLE, hMasterKey NCRYPT_KEY_HANDLE, hHashValue NCRYPT_HASH_HANDLE, phResumptionMasterKey *NCRYPT_KEY_HANDLE, pParameterList *BCryptBufferDesc, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procSslExpandResumptionMasterKey.Addr(), uintptr(hSslProvider), uintptr(hMasterKey), uintptr(hHashValue), uintptr(unsafe.Pointer(phResumptionMasterKey)), uintptr(unsafe.Pointer(pParameterList)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslExpandTrafficKeys calls ncrypt!SslExpandTrafficKeys.
 func SslExpandTrafficKeys(hSslProvider NCRYPT_PROV_HANDLE, hBaseKey NCRYPT_KEY_HANDLE, hHashValue NCRYPT_HASH_HANDLE, phClientTrafficKey *NCRYPT_KEY_HANDLE, phServerTrafficKey *NCRYPT_KEY_HANDLE, pParameterList *BCryptBufferDesc, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procSslExpandTrafficKeys.Addr(), uintptr(hSslProvider), uintptr(hBaseKey), uintptr(hHashValue), uintptr(unsafe.Pointer(phClientTrafficKey)), uintptr(unsafe.Pointer(phServerTrafficKey)), uintptr(unsafe.Pointer(pParameterList)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslExpandWriteKey calls ncrypt!SslExpandWriteKey.
 func SslExpandWriteKey(hSslProvider NCRYPT_PROV_HANDLE, hBaseTrafficKey NCRYPT_KEY_HANDLE, phWriteKey *NCRYPT_KEY_HANDLE, pParameterList *BCryptBufferDesc, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procSslExpandWriteKey.Addr(), uintptr(hSslProvider), uintptr(hBaseTrafficKey), uintptr(unsafe.Pointer(phWriteKey)), uintptr(unsafe.Pointer(pParameterList)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslExportKey calls ncrypt!SslExportKey.
@@ -5253,7 +5253,7 @@ func SslExportKey(hSslProvider NCRYPT_PROV_HANDLE, hKey NCRYPT_KEY_HANDLE, pszBl
 		_pbOutput = &pbOutput[0]
 	}
 	r1, _, _ := syscall.SyscallN(procSslExportKey.Addr(), uintptr(hSslProvider), uintptr(hKey), uintptr(unsafe.Pointer(_pszBlobType)), uintptr(unsafe.Pointer(_pbOutput)), uintptr(len(pbOutput)), uintptr(unsafe.Pointer(pcbResult)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslExportKeyingMaterial calls ncrypt!SslExportKeyingMaterial.
@@ -5272,39 +5272,39 @@ func SslExportKeyingMaterial(hSslProvider NCRYPT_PROV_HANDLE, hMasterKey NCRYPT_
 		_pbOutput = &pbOutput[0]
 	}
 	r1, _, _ := syscall.SyscallN(procSslExportKeyingMaterial.Addr(), uintptr(hSslProvider), uintptr(hMasterKey), uintptr(unsafe.Pointer(sLabel)), uintptr(unsafe.Pointer(_pbRandoms)), uintptr(len(pbRandoms)), uintptr(unsafe.Pointer(_pbContextValue)), uintptr(len(pbContextValue)), uintptr(unsafe.Pointer(_pbOutput)), uintptr(len(pbOutput)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslExtractEarlyKey calls ncrypt!SslExtractEarlyKey.
 func SslExtractEarlyKey(hSslProvider NCRYPT_PROV_HANDLE, hPreSharedKey NCRYPT_KEY_HANDLE, phEarlyKey *NCRYPT_KEY_HANDLE, dwProtocol uint32, dwCipherSuite uint32, pParameterList *BCryptBufferDesc, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procSslExtractEarlyKey.Addr(), uintptr(hSslProvider), uintptr(hPreSharedKey), uintptr(unsafe.Pointer(phEarlyKey)), uintptr(dwProtocol), uintptr(dwCipherSuite), uintptr(unsafe.Pointer(pParameterList)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslExtractHandshakeKey calls ncrypt!SslExtractHandshakeKey.
 func SslExtractHandshakeKey(hSslProvider NCRYPT_PROV_HANDLE, hPrivateKey NCRYPT_KEY_HANDLE, hPublicKey NCRYPT_KEY_HANDLE, hEarlyKey NCRYPT_KEY_HANDLE, phHandshakeKey *NCRYPT_KEY_HANDLE, pParameterList *BCryptBufferDesc, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procSslExtractHandshakeKey.Addr(), uintptr(hSslProvider), uintptr(hPrivateKey), uintptr(hPublicKey), uintptr(hEarlyKey), uintptr(unsafe.Pointer(phHandshakeKey)), uintptr(unsafe.Pointer(pParameterList)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslExtractMasterKey calls ncrypt!SslExtractMasterKey.
 func SslExtractMasterKey(hSslProvider NCRYPT_PROV_HANDLE, hHandshakeKey NCRYPT_KEY_HANDLE, phMasterKey *NCRYPT_KEY_HANDLE, pParameterList *BCryptBufferDesc, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procSslExtractMasterKey.Addr(), uintptr(hSslProvider), uintptr(hHandshakeKey), uintptr(unsafe.Pointer(phMasterKey)), uintptr(unsafe.Pointer(pParameterList)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslFreeBuffer calls ncrypt!SslFreeBuffer.
 // https://learn.microsoft.com/windows/win32/SecCNG/sslfreebuffer
 func SslFreeBuffer(pvInput unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procSslFreeBuffer.Addr(), uintptr(unsafe.Pointer(pvInput)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslFreeObject calls ncrypt!SslFreeObject.
 // https://learn.microsoft.com/windows/win32/SecCNG/sslfreeobject
 func SslFreeObject(hObject NCRYPT_HANDLE, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procSslFreeObject.Addr(), uintptr(hObject), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslGenerateMasterKey calls ncrypt!SslGenerateMasterKey.
@@ -5315,7 +5315,7 @@ func SslGenerateMasterKey(hSslProvider NCRYPT_PROV_HANDLE, hPrivateKey NCRYPT_KE
 		_pbOutput = &pbOutput[0]
 	}
 	r1, _, _ := syscall.SyscallN(procSslGenerateMasterKey.Addr(), uintptr(hSslProvider), uintptr(hPrivateKey), uintptr(hPublicKey), uintptr(unsafe.Pointer(phMasterKey)), uintptr(dwProtocol), uintptr(dwCipherSuite), uintptr(unsafe.Pointer(pParameterList)), uintptr(unsafe.Pointer(_pbOutput)), uintptr(len(pbOutput)), uintptr(unsafe.Pointer(pcbResult)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslGeneratePreMasterKey calls ncrypt!SslGeneratePreMasterKey.
@@ -5325,21 +5325,21 @@ func SslGeneratePreMasterKey(hSslProvider NCRYPT_PROV_HANDLE, hPublicKey NCRYPT_
 		_pbOutput = &pbOutput[0]
 	}
 	r1, _, _ := syscall.SyscallN(procSslGeneratePreMasterKey.Addr(), uintptr(hSslProvider), uintptr(hPublicKey), uintptr(unsafe.Pointer(phPreMasterKey)), uintptr(dwProtocol), uintptr(dwCipherSuite), uintptr(unsafe.Pointer(pParameterList)), uintptr(unsafe.Pointer(_pbOutput)), uintptr(len(pbOutput)), uintptr(unsafe.Pointer(pcbResult)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslGenerateSessionKeys calls ncrypt!SslGenerateSessionKeys.
 // https://learn.microsoft.com/windows/win32/SecCNG/sslgeneratesessionkeys
 func SslGenerateSessionKeys(hSslProvider NCRYPT_PROV_HANDLE, hMasterKey NCRYPT_KEY_HANDLE, phReadKey *NCRYPT_KEY_HANDLE, phWriteKey *NCRYPT_KEY_HANDLE, pParameterList *BCryptBufferDesc, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procSslGenerateSessionKeys.Addr(), uintptr(hSslProvider), uintptr(hMasterKey), uintptr(unsafe.Pointer(phReadKey)), uintptr(unsafe.Pointer(phWriteKey)), uintptr(unsafe.Pointer(pParameterList)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslGetCipherSuitePRFHashAlgorithm calls ncrypt!SslGetCipherSuitePRFHashAlgorithm.
 // https://learn.microsoft.com/windows/win32/SecCNG/sslgetciphersuiteprfhashalgorithm
 func SslGetCipherSuitePRFHashAlgorithm(hSslProvider NCRYPT_PROV_HANDLE, dwProtocol uint32, dwCipherSuite uint32, dwKeyType uint32, szPRFHash foundation.PWSTR, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procSslGetCipherSuitePRFHashAlgorithm.Addr(), uintptr(hSslProvider), uintptr(dwProtocol), uintptr(dwCipherSuite), uintptr(dwKeyType), uintptr(unsafe.Pointer(szPRFHash)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslGetKeyProperty calls ncrypt!SslGetKeyProperty.
@@ -5347,7 +5347,7 @@ func SslGetCipherSuitePRFHashAlgorithm(hSslProvider NCRYPT_PROV_HANDLE, dwProtoc
 func SslGetKeyProperty(hKey NCRYPT_KEY_HANDLE, pszProperty string, ppbOutput **byte, pcbOutput *uint32, dwFlags uint32) error {
 	_pszProperty := win32.UTF16Ptr(pszProperty)
 	r1, _, _ := syscall.SyscallN(procSslGetKeyProperty.Addr(), uintptr(hKey), uintptr(unsafe.Pointer(_pszProperty)), uintptr(unsafe.Pointer(ppbOutput)), uintptr(unsafe.Pointer(pcbOutput)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslGetProviderProperty calls ncrypt!SslGetProviderProperty.
@@ -5355,7 +5355,7 @@ func SslGetKeyProperty(hKey NCRYPT_KEY_HANDLE, pszProperty string, ppbOutput **b
 func SslGetProviderProperty(hSslProvider NCRYPT_PROV_HANDLE, pszProperty string, ppbOutput **byte, pcbOutput *uint32, ppEnumState *unsafe.Pointer, dwFlags uint32) error {
 	_pszProperty := win32.UTF16Ptr(pszProperty)
 	r1, _, _ := syscall.SyscallN(procSslGetProviderProperty.Addr(), uintptr(hSslProvider), uintptr(unsafe.Pointer(_pszProperty)), uintptr(unsafe.Pointer(ppbOutput)), uintptr(unsafe.Pointer(pcbOutput)), uintptr(unsafe.Pointer(ppEnumState)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslHashHandshake calls ncrypt!SslHashHandshake.
@@ -5366,7 +5366,7 @@ func SslHashHandshake(hSslProvider NCRYPT_PROV_HANDLE, hHandshakeHash NCRYPT_HAS
 		_pbInput = &pbInput[0]
 	}
 	r1, _, _ := syscall.SyscallN(procSslHashHandshake.Addr(), uintptr(hSslProvider), uintptr(hHandshakeHash), uintptr(unsafe.Pointer(_pbInput)), uintptr(len(pbInput)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslImportKey calls ncrypt!SslImportKey.
@@ -5378,7 +5378,7 @@ func SslImportKey(hSslProvider NCRYPT_PROV_HANDLE, phKey *NCRYPT_KEY_HANDLE, psz
 		_pbKeyBlob = &pbKeyBlob[0]
 	}
 	r1, _, _ := syscall.SyscallN(procSslImportKey.Addr(), uintptr(hSslProvider), uintptr(unsafe.Pointer(phKey)), uintptr(unsafe.Pointer(_pszBlobType)), uintptr(unsafe.Pointer(_pbKeyBlob)), uintptr(len(pbKeyBlob)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslImportMasterKey calls ncrypt!SslImportMasterKey.
@@ -5389,35 +5389,35 @@ func SslImportMasterKey(hSslProvider NCRYPT_PROV_HANDLE, hPrivateKey NCRYPT_KEY_
 		_pbEncryptedKey = &pbEncryptedKey[0]
 	}
 	r1, _, _ := syscall.SyscallN(procSslImportMasterKey.Addr(), uintptr(hSslProvider), uintptr(hPrivateKey), uintptr(unsafe.Pointer(phMasterKey)), uintptr(dwProtocol), uintptr(dwCipherSuite), uintptr(unsafe.Pointer(pParameterList)), uintptr(unsafe.Pointer(_pbEncryptedKey)), uintptr(len(pbEncryptedKey)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslIncrementProviderReferenceCount calls ncrypt!SslIncrementProviderReferenceCount.
 // https://learn.microsoft.com/windows/win32/SecCNG/sslincrementproviderreferencecount
 func SslIncrementProviderReferenceCount(hSslProvider NCRYPT_PROV_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procSslIncrementProviderReferenceCount.Addr(), uintptr(hSslProvider))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslLookupCipherLengths calls ncrypt!SslLookupCipherLengths.
 // https://learn.microsoft.com/windows/win32/SecCNG/ssllookupcipherlengths
 func SslLookupCipherLengths(hSslProvider NCRYPT_PROV_HANDLE, dwProtocol uint32, dwCipherSuite uint32, dwKeyType uint32, pCipherLengths *NCRYPT_SSL_CIPHER_LENGTHS, cbCipherLengths uint32, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procSslLookupCipherLengths.Addr(), uintptr(hSslProvider), uintptr(dwProtocol), uintptr(dwCipherSuite), uintptr(dwKeyType), uintptr(unsafe.Pointer(pCipherLengths)), uintptr(cbCipherLengths), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslLookupCipherSuiteInfo calls ncrypt!SslLookupCipherSuiteInfo.
 // https://learn.microsoft.com/windows/win32/SecCNG/ssllookupciphersuiteinfo
 func SslLookupCipherSuiteInfo(hSslProvider NCRYPT_PROV_HANDLE, dwProtocol uint32, dwCipherSuite uint32, dwKeyType uint32, pCipherSuite *NCRYPT_SSL_CIPHER_SUITE, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procSslLookupCipherSuiteInfo.Addr(), uintptr(hSslProvider), uintptr(dwProtocol), uintptr(dwCipherSuite), uintptr(dwKeyType), uintptr(unsafe.Pointer(pCipherSuite)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslOpenPrivateKey calls ncrypt!SslOpenPrivateKey.
 // https://learn.microsoft.com/windows/win32/SecCNG/sslopenprivatekey
 func SslOpenPrivateKey(hSslProvider NCRYPT_PROV_HANDLE, phPrivateKey *NCRYPT_KEY_HANDLE, pCertContext *CERT_CONTEXT, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procSslOpenPrivateKey.Addr(), uintptr(hSslProvider), uintptr(unsafe.Pointer(phPrivateKey)), uintptr(unsafe.Pointer(pCertContext)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslOpenProvider calls ncrypt!SslOpenProvider.
@@ -5425,7 +5425,7 @@ func SslOpenPrivateKey(hSslProvider NCRYPT_PROV_HANDLE, phPrivateKey *NCRYPT_KEY
 func SslOpenProvider(phSslProvider *NCRYPT_PROV_HANDLE, pszProviderName string, dwFlags uint32) error {
 	_pszProviderName := win32.UTF16Ptr(pszProviderName)
 	r1, _, _ := syscall.SyscallN(procSslOpenProvider.Addr(), uintptr(unsafe.Pointer(phSslProvider)), uintptr(unsafe.Pointer(_pszProviderName)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslSignHash calls ncrypt!SslSignHash.
@@ -5440,7 +5440,7 @@ func SslSignHash(hSslProvider NCRYPT_PROV_HANDLE, hPrivateKey NCRYPT_KEY_HANDLE,
 		_pbSignature = &pbSignature[0]
 	}
 	r1, _, _ := syscall.SyscallN(procSslSignHash.Addr(), uintptr(hSslProvider), uintptr(hPrivateKey), uintptr(unsafe.Pointer(_pbHashValue)), uintptr(len(pbHashValue)), uintptr(unsafe.Pointer(_pbSignature)), uintptr(len(pbSignature)), uintptr(unsafe.Pointer(pcbResult)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslVerifySignature calls ncrypt!SslVerifySignature.
@@ -5455,7 +5455,7 @@ func SslVerifySignature(hSslProvider NCRYPT_PROV_HANDLE, hPublicKey NCRYPT_KEY_H
 		_pbSignature = &pbSignature[0]
 	}
 	r1, _, _ := syscall.SyscallN(procSslVerifySignature.Addr(), uintptr(hSslProvider), uintptr(hPublicKey), uintptr(unsafe.Pointer(_pbHashValue)), uintptr(len(pbHashValue)), uintptr(unsafe.Pointer(_pbSignature)), uintptr(len(pbSignature)), uintptr(dwFlags))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SystemPrng calls BCryptPrimitives!SystemPrng.
@@ -5476,7 +5476,7 @@ func TransformBlock(hCrypto *INFORMATIONCARD_CRYPTO_HANDLE, pInData []byte, pcbO
 		_pInData = &pInData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procTransformBlock.Addr(), uintptr(unsafe.Pointer(hCrypto)), uintptr(len(pInData)), uintptr(unsafe.Pointer(_pInData)), uintptr(unsafe.Pointer(pcbOutData)), uintptr(unsafe.Pointer(ppOutData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // TransformFinalBlock calls infocardapi!TransformFinalBlock.
@@ -5486,7 +5486,7 @@ func TransformFinalBlock(hCrypto *INFORMATIONCARD_CRYPTO_HANDLE, pInData []byte,
 		_pInData = &pInData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procTransformFinalBlock.Addr(), uintptr(unsafe.Pointer(hCrypto)), uintptr(len(pInData)), uintptr(unsafe.Pointer(_pInData)), uintptr(unsafe.Pointer(pcbOutData)), uintptr(unsafe.Pointer(ppOutData)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // VerifyHash calls infocardapi!VerifyHash.
@@ -5501,5 +5501,5 @@ func VerifyHash(hCrypto *INFORMATIONCARD_CRYPTO_HANDLE, pHash []byte, hashAlgOid
 		_pSig = &pSig[0]
 	}
 	r1, _, _ := syscall.SyscallN(procVerifyHash.Addr(), uintptr(unsafe.Pointer(hCrypto)), uintptr(len(pHash)), uintptr(unsafe.Pointer(_pHash)), uintptr(unsafe.Pointer(_hashAlgOid)), uintptr(len(pSig)), uintptr(unsafe.Pointer(_pSig)), uintptr(unsafe.Pointer(pfVerified)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }

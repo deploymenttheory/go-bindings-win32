@@ -129,13 +129,13 @@ func DestroyEnvironmentBlock(lpEnvironment unsafe.Pointer) error {
 // EnclaveCopyIntoEnclave calls vertdll!EnclaveCopyIntoEnclave.
 func EnclaveCopyIntoEnclave(EnclaveAddress unsafe.Pointer, UnsecureAddress unsafe.Pointer, NumberOfBytes uintptr) error {
 	r1, _, _ := syscall.SyscallN(procEnclaveCopyIntoEnclave.Addr(), uintptr(unsafe.Pointer(EnclaveAddress)), uintptr(unsafe.Pointer(UnsecureAddress)), uintptr(NumberOfBytes))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnclaveCopyOutOfEnclave calls vertdll!EnclaveCopyOutOfEnclave.
 func EnclaveCopyOutOfEnclave(UnsecureAddress unsafe.Pointer, EnclaveAddress unsafe.Pointer, NumberOfBytes uintptr) error {
 	r1, _, _ := syscall.SyscallN(procEnclaveCopyOutOfEnclave.Addr(), uintptr(unsafe.Pointer(UnsecureAddress)), uintptr(unsafe.Pointer(EnclaveAddress)), uintptr(NumberOfBytes))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnclaveEncryptDataForTrustlet calls vertdll!EnclaveEncryptDataForTrustlet.
@@ -149,7 +149,7 @@ func EnclaveEncryptDataForTrustlet(DataToEncrypt []byte, TrustletBindingData *TR
 		_EncryptedData = &EncryptedData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procEnclaveEncryptDataForTrustlet.Addr(), uintptr(unsafe.Pointer(_DataToEncrypt)), uintptr(len(DataToEncrypt)), uintptr(unsafe.Pointer(TrustletBindingData)), uintptr(unsafe.Pointer(_EncryptedData)), uintptr(len(EncryptedData)), uintptr(unsafe.Pointer(EncryptedDataSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnclaveGetAttestationReport calls vertdll!EnclaveGetAttestationReport.
@@ -161,7 +161,7 @@ func EnclaveGetAttestationReport(EnclaveData *byte, Report []byte, OutputSize *u
 		_Report = &Report[0]
 	}
 	r1, _, _ := syscall.SyscallN(procEnclaveGetAttestationReport.Addr(), uintptr(unsafe.Pointer(EnclaveData)), uintptr(unsafe.Pointer(_Report)), uintptr(len(Report)), uintptr(unsafe.Pointer(OutputSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnclaveGetEnclaveInformation calls vertdll!EnclaveGetEnclaveInformation.
@@ -169,14 +169,14 @@ func EnclaveGetAttestationReport(EnclaveData *byte, Report []byte, OutputSize *u
 // Minimum OS: windows10.0.16299.
 func EnclaveGetEnclaveInformation(InformationSize uint32, EnclaveInformation *ENCLAVE_INFORMATION) error {
 	r1, _, _ := syscall.SyscallN(procEnclaveGetEnclaveInformation.Addr(), uintptr(InformationSize), uintptr(unsafe.Pointer(EnclaveInformation)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnclaveRestrictContainingProcessAccess calls vertdll!EnclaveRestrictContainingProcessAccess.
 func EnclaveRestrictContainingProcessAccess(RestrictAccess bool, PreviouslyRestricted *foundation.BOOL) error {
 	_RestrictAccess := win32.Bool32(RestrictAccess)
 	r1, _, _ := syscall.SyscallN(procEnclaveRestrictContainingProcessAccess.Addr(), uintptr(_RestrictAccess), uintptr(unsafe.Pointer(PreviouslyRestricted)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnclaveSealData calls vertdll!EnclaveSealData.
@@ -192,7 +192,7 @@ func EnclaveSealData(DataToEncrypt []byte, IdentityPolicy ENCLAVE_SEALING_IDENTI
 		_ProtectedBlob = &ProtectedBlob[0]
 	}
 	r1, _, _ := syscall.SyscallN(procEnclaveSealData.Addr(), uintptr(unsafe.Pointer(_DataToEncrypt)), uintptr(len(DataToEncrypt)), uintptr(IdentityPolicy), uintptr(RuntimePolicy), uintptr(unsafe.Pointer(_ProtectedBlob)), uintptr(len(ProtectedBlob)), uintptr(unsafe.Pointer(ProtectedBlobSize)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnclaveUnsealData calls vertdll!EnclaveUnsealData.
@@ -208,7 +208,7 @@ func EnclaveUnsealData(ProtectedBlob []byte, DecryptedData []byte, DecryptedData
 		_DecryptedData = &DecryptedData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procEnclaveUnsealData.Addr(), uintptr(unsafe.Pointer(_ProtectedBlob)), uintptr(len(ProtectedBlob)), uintptr(unsafe.Pointer(_DecryptedData)), uintptr(len(DecryptedData)), uintptr(unsafe.Pointer(DecryptedDataSize)), uintptr(unsafe.Pointer(SealingIdentity)), uintptr(unsafe.Pointer(UnsealingFlags)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnclaveUsesAttestedKeys calls vertdll!EnclaveUsesAttestedKeys.
@@ -226,7 +226,7 @@ func EnclaveVerifyAttestationReport(EnclaveType uint32, Report []byte) error {
 		_Report = &Report[0]
 	}
 	r1, _, _ := syscall.SyscallN(procEnclaveVerifyAttestationReport.Addr(), uintptr(EnclaveType), uintptr(unsafe.Pointer(_Report)), uintptr(len(Report)))
-	return win32.HRESULTError(int32(r1))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExpandEnvironmentStrings calls KERNEL32!ExpandEnvironmentStringsW.

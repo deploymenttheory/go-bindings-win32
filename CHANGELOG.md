@@ -32,30 +32,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Bug Fixes
 
 * **ingest:** nested anonymous unions/structs corrupted struct layout ([d95b02d](https://github.com/deploymenttheory/go-bindings-win32/commit/d95b02de26c697d48b1375c82080feaba753acac))
-
-## [Unreleased]
-
-### Added
-
-- Added xyz [@your_username](https://github.com/your_username)
-
-### Fixed
-
-- Fixed zyx [@your_username](https://github.com/your_username)
-
-## [1.1.0] - 2021-06-23
-
-### Added
-
-- Added x [@your_username](https://github.com/your_username)
-
-### Changed
-
-- Changed y [@your_username](https://github.com/your_username)
-
-## [1.0.0] - 2021-06-20
-
-### Added
-
-- Inititated y [@your_username](https://github.com/your_username)
-- Inititated z [@your_username](https://github.com/your_username)

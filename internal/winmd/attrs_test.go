@@ -49,7 +49,7 @@ func TestGuidAttribute(t *testing.T) {
 		if typeDef.Name != "IUnknown" || typeDef.Namespace != "Windows.Win32.System.Com" {
 			continue
 		}
-		attrs := file.AttributesFor(CodedIndex{Table: tableTypeDef, Row: uint32(typeDefRow + 1)})
+		attrs := file.AttributesFor(CodedIndex{Table: TableTypeDef, Row: uint32(typeDefRow + 1)})
 		for _, attr := range attrs {
 			if attr.Name != "GuidAttribute" {
 				continue
@@ -96,7 +96,7 @@ func TestDllImportViaImplMap(t *testing.T) {
 		t.Fatal("SetEvent not found")
 	}
 	for _, implMap := range file.Tables.ImplMaps {
-		if implMap.MemberForwarded.Table != tableMethodDef || implMap.MemberForwarded.Row != setEventRow {
+		if implMap.MemberForwarded.Table != TableMethodDef || implMap.MemberForwarded.Row != setEventRow {
 			continue
 		}
 		dll := file.Tables.ModuleRefs[implMap.ImportScope-1]

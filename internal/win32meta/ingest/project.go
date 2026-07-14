@@ -194,9 +194,9 @@ func (in *Ingester) paramsOf(method *winmd.MethodDefRow, sig *winmd.MethodSig) [
 		}
 		param := &params[paramRow.Sequence-1]
 		param.Name = paramRow.Name
-		param.IsIn = paramRow.Flags&paramFlagIn != 0
-		param.IsOut = paramRow.Flags&paramFlagOut != 0
-		param.IsOptional = paramRow.Flags&paramFlagOptional != 0
+		param.IsIn = paramRow.Flags&winmd.ParamAttrIn != 0
+		param.IsOut = paramRow.Flags&winmd.ParamAttrOut != 0
+		param.IsOptional = paramRow.Flags&winmd.ParamAttrOptional != 0
 		in.applyParamAttributes(param, winmd.CodedIndex{Table: winmd.TableParam, Row: row})
 	}
 	return params
@@ -273,7 +273,7 @@ func (in *Ingester) projectApis(meta *win32meta.NamespaceMeta, typeDef *winmd.Ty
 		function := win32meta.Function{
 			Name:         method.Name,
 			DLL:          tables.ModuleRefs[implMap.ImportScope-1],
-			SetLastError: implMap.MappingFlags&implMapFlagSupportsLastError != 0,
+			SetLastError: implMap.MappingFlags&winmd.PInvokeAttrSupportsLastError != 0,
 			Return:       in.typeRefOf(&sig.Return),
 			Params:       in.paramsOf(method, &sig),
 			Availability: in.availabilityOf(target),
@@ -310,7 +310,7 @@ func (in *Ingester) projectConstant(fieldRow uint32) (win32meta.Constant, bool) 
 		Availability: in.availabilityOf(target),
 	}
 
-	if field.Flags&fieldFlagLiteral != 0 {
+	if field.Flags&winmd.FieldAttrLiteral != 0 {
 		constantRow := in.constantIndex[fieldRow]
 		if constantRow == nil {
 			return win32meta.Constant{}, false
@@ -337,7 +337,7 @@ func (in *Ingester) projectConstant(fieldRow uint32) (win32meta.Constant, bool) 
 // decodeConstantValue renders a Constant table value as (string, kind).
 func (in *Ingester) decodeConstantValue(row *winmd.ConstantRow) (string, string) {
 	blob := in.file.Blobs.Get(row.Value)
-	value := winmd.DecodeConstant(winmd.ElementType(row.Type), blob)
+	value := winmd.DecodeConstant(row.Type, blob)
 	switch typed := value.(type) {
 	case string:
 		return typed, "String"
@@ -419,7 +419,7 @@ func (in *Ingester) projectStructInto(meta *win32meta.NamespaceMeta, typeDef *wi
 func (in *Ingester) projectStruct(typeDef *winmd.TypeDefRow, row uint32) win32meta.Struct {
 	tables := &in.file.Tables
 	projected := win32meta.Struct{
-		IsUnion:      typeDef.Flags&typeFlagExplicitLayout != 0,
+		IsUnion:      typeDef.Flags&winmd.TypeAttrExplicitLayout != 0,
 		Availability: in.availabilityOf(typeDefTarget(row)),
 	}
 	if layout := in.classLayoutIndex[row]; layout != nil {
@@ -434,7 +434,7 @@ func (in *Ingester) projectStruct(typeDef *winmd.TypeDefRow, row uint32) win32me
 
 	for fieldRow := typeDef.FieldFirst; fieldRow < typeDef.FieldEnd && int(fieldRow) <= len(tables.Fields); fieldRow++ {
 		field := &tables.Fields[fieldRow-1]
-		if field.Flags&fieldFlagStatic != 0 {
+		if field.Flags&winmd.FieldAttrStatic != 0 {
 			continue
 		}
 		fieldSig, err := in.file.FieldSignature(field.Signature)
@@ -497,7 +497,7 @@ func (in *Ingester) projectTypedef(typeDef *winmd.TypeDefRow, row uint32) win32m
 	}
 	for fieldRow := typeDef.FieldFirst; fieldRow < typeDef.FieldEnd && int(fieldRow) <= len(tables.Fields); fieldRow++ {
 		field := &tables.Fields[fieldRow-1]
-		if field.Flags&fieldFlagStatic != 0 {
+		if field.Flags&winmd.FieldAttrStatic != 0 {
 			continue
 		}
 		if sig, err := in.file.FieldSignature(field.Signature); err == nil {

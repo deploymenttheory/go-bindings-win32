@@ -7,7 +7,7 @@ import (
 )
 
 // DecodeConstant decodes a Constant-table value blob by its declared element
-// type (ECMA-335 II.22.9). Integers widen to int64/uint64; strings decode
+// type (ECMA-335 §II.22.9). Integers widen to int64/uint64; strings decode
 // from UTF-16LE. Returns nil for unsupported types or truncated blobs.
 func DecodeConstant(elem ElementType, blob []byte) any {
 	need := func(n int) bool { return len(blob) >= n }

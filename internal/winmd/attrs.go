@@ -6,7 +6,7 @@ import (
 )
 
 // CustomAttr is a decoded custom attribute: the attribute type's name plus
-// its constructor (fixed) and named arguments (ECMA-335 II.23.3).
+// its constructor (fixed) and named arguments (ECMA-335 §II.23.3).
 //
 // Argument values are one of: string, bool, byte, int8, uint16, int16,
 // uint32, int32, uint64, int64, float32, float64, or []any (SZARRAY).
@@ -79,7 +79,9 @@ func (f *File) decodeAttribute(row *CustomAttributeRow) (CustomAttr, error) {
 	}
 	namedCount := int(reader.uint16())
 	if namedCount > 0 {
-		attr.Named = make(map[string]any, namedCount)
+		// Size hint clamped to the bytes left: each named arg is ≥3 bytes
+		// (kind, type, name), so a corrupt count cannot force an outsized map.
+		attr.Named = make(map[string]any, min(namedCount, reader.remaining()))
 		for i := 0; i < namedCount && !reader.failed(); i++ {
 			argName, value := f.readNamedArg(&reader)
 			attr.Named[argName] = value
@@ -95,16 +97,22 @@ func (f *File) decodeAttribute(row *CustomAttributeRow) (CustomAttr, error) {
 // or MemberRef) to the attribute type's namespace/name and ctor signature.
 func (f *File) resolveAttributeCtor(ctor CodedIndex) (namespace, name string, sig MethodSig, err error) {
 	switch ctor.Table {
-	case tableMemberRef:
-		if int(ctor.Row) > len(f.Tables.MemberRefs) {
+	case TableMemberRef:
+		if ctor.Row == 0 || int(ctor.Row) > len(f.Tables.MemberRefs) {
 			return "", "", MethodSig{}, fmt.Errorf("MemberRef row %d out of range", ctor.Row)
 		}
 		memberRef := &f.Tables.MemberRefs[ctor.Row-1]
 		switch memberRef.Class.Table {
-		case tableTypeRef:
+		case TableTypeRef:
+			if memberRef.Class.Row == 0 || int(memberRef.Class.Row) > len(f.Tables.TypeRefs) {
+				return "", "", MethodSig{}, fmt.Errorf("MemberRef parent TypeRef row %d out of range", memberRef.Class.Row)
+			}
 			typeRef := &f.Tables.TypeRefs[memberRef.Class.Row-1]
 			namespace, name = typeRef.Namespace, typeRef.Name
-		case tableTypeDef:
+		case TableTypeDef:
+			if memberRef.Class.Row == 0 || int(memberRef.Class.Row) > len(f.Tables.TypeDefs) {
+				return "", "", MethodSig{}, fmt.Errorf("MemberRef parent TypeDef row %d out of range", memberRef.Class.Row)
+			}
 			typeDef := &f.Tables.TypeDefs[memberRef.Class.Row-1]
 			namespace, name = typeDef.Namespace, typeDef.Name
 		default:
@@ -113,8 +121,8 @@ func (f *File) resolveAttributeCtor(ctor CodedIndex) (namespace, name string, si
 		sig, err = f.MethodSignature(memberRef.Signature)
 		return namespace, name, sig, err
 
-	case tableMethodDef:
-		if int(ctor.Row) > len(f.Tables.Methods) {
+	case TableMethodDef:
+		if ctor.Row == 0 || int(ctor.Row) > len(f.Tables.Methods) {
 			return "", "", MethodSig{}, fmt.Errorf("MethodDef row %d out of range", ctor.Row)
 		}
 		method := &f.Tables.Methods[ctor.Row-1]
@@ -140,6 +148,8 @@ func (f *File) declaringType(methodRow uint32) (namespace, name string) {
 	if int(methodRow) >= len(f.methodOwnerIndex) || f.methodOwnerIndex[methodRow] == 0 {
 		return "", ""
 	}
+	// Row bounds: index entries are typeDefRow+1 for rows of TypeDefs, so the
+	// nonzero value is always in [1, len(TypeDefs)].
 	typeDef := &f.Tables.TypeDefs[f.methodOwnerIndex[methodRow]-1]
 	return typeDef.Namespace, typeDef.Name
 }
@@ -167,7 +177,9 @@ func (f *File) readFixedArg(reader *blobReader, sig *TypeSig) any {
 		if count == 0xFFFFFFFF { // null array
 			return []any(nil)
 		}
-		values := make([]any, 0, count)
+		// Capacity clamped to the bytes left: each element is ≥1 byte, so a
+		// corrupt count cannot force an outsized allocation.
+		values := make([]any, 0, min(int(count), reader.remaining()))
 		for i := uint32(0); i < count && !reader.failed(); i++ {
 			values = append(values, f.readFixedArg(reader, sig.Child))
 		}

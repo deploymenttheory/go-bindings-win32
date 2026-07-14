@@ -19,28 +19,6 @@ const (
 	interopNamespace   = "Windows.Win32.Interop"
 )
 
-// TypeDef flag bits (ECMA-335 II.23.1.15).
-const (
-	typeFlagInterface      = 0x00000020
-	typeFlagExplicitLayout = 0x00000010
-)
-
-// Field flag bits (II.23.1.5).
-const (
-	fieldFlagStatic  = 0x0010
-	fieldFlagLiteral = 0x0040
-)
-
-// Param flag bits (II.23.1.13).
-const (
-	paramFlagIn       = 0x0001
-	paramFlagOut      = 0x0002
-	paramFlagOptional = 0x0010
-)
-
-// ImplMap mapping flag bits (II.23.1.8).
-const implMapFlagSupportsLastError = 0x0040
-
 // Ingester projects a winmd file into NamespaceMeta values.
 type Ingester struct {
 	file         *winmd.File
@@ -174,7 +152,7 @@ func (in *Ingester) buildIndices() {
 
 // classifyTypeDef determines a TypeDef's TargetKind.
 func (in *Ingester) classifyTypeDef(typeDef *winmd.TypeDefRow, row uint32) string {
-	if typeDef.Flags&typeFlagInterface != 0 {
+	if typeDef.Flags&winmd.TypeAttrInterface != 0 {
 		return "Com"
 	}
 	extendsNamespace, extendsName := in.extendsOf(typeDef)
@@ -188,7 +166,7 @@ func (in *Ingester) classifyTypeDef(typeDef *winmd.TypeDefRow, row uint32) strin
 			in.hasAttribute(typeDefTarget(row), "MetadataTypedefAttribute") {
 			return "Typedef"
 		}
-		if typeDef.Flags&typeFlagExplicitLayout != 0 {
+		if typeDef.Flags&winmd.TypeAttrExplicitLayout != 0 {
 			return "Union"
 		}
 		return "Struct"

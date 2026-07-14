@@ -2,42 +2,43 @@ package winmd
 
 import "fmt"
 
-// ELEMENT_TYPE_* constants (ECMA-335 II.23.1.16).
+// ElementType is an ELEMENT_TYPE_* constant (§II.23.1.16). The Go names are
+// idiomatic; each constant's comment carries the specification name.
 type ElementType byte
 
 const (
-	ElemEnd         ElementType = 0x00
-	ElemVoid        ElementType = 0x01
-	ElemBoolean     ElementType = 0x02
-	ElemChar        ElementType = 0x03
-	ElemInt8        ElementType = 0x04
-	ElemUInt8       ElementType = 0x05
-	ElemInt16       ElementType = 0x06
-	ElemUInt16      ElementType = 0x07
-	ElemInt32       ElementType = 0x08
-	ElemUInt32      ElementType = 0x09
-	ElemInt64       ElementType = 0x0A
-	ElemUInt64      ElementType = 0x0B
-	ElemFloat32     ElementType = 0x0C
-	ElemFloat64     ElementType = 0x0D
-	ElemString      ElementType = 0x0E
-	ElemPtr         ElementType = 0x0F
-	ElemByRef       ElementType = 0x10
-	ElemValueType   ElementType = 0x11
-	ElemClass       ElementType = 0x12
-	ElemVar         ElementType = 0x13
-	ElemArray       ElementType = 0x14
-	ElemGenericInst ElementType = 0x15
-	ElemTypedByRef  ElementType = 0x16
-	ElemIntPtr      ElementType = 0x18
-	ElemUIntPtr     ElementType = 0x19
-	ElemFnPtr       ElementType = 0x1B
-	ElemObject      ElementType = 0x1C
-	ElemSZArray     ElementType = 0x1D
-	ElemMVar        ElementType = 0x1E
-	ElemCModReqd    ElementType = 0x1F
-	ElemCModOpt     ElementType = 0x20
-	ElemSentinel    ElementType = 0x41
+	ElemEnd         ElementType = 0x00 // ELEMENT_TYPE_END
+	ElemVoid        ElementType = 0x01 // ELEMENT_TYPE_VOID
+	ElemBoolean     ElementType = 0x02 // ELEMENT_TYPE_BOOLEAN
+	ElemChar        ElementType = 0x03 // ELEMENT_TYPE_CHAR
+	ElemInt8        ElementType = 0x04 // ELEMENT_TYPE_I1
+	ElemUInt8       ElementType = 0x05 // ELEMENT_TYPE_U1
+	ElemInt16       ElementType = 0x06 // ELEMENT_TYPE_I2
+	ElemUInt16      ElementType = 0x07 // ELEMENT_TYPE_U2
+	ElemInt32       ElementType = 0x08 // ELEMENT_TYPE_I4
+	ElemUInt32      ElementType = 0x09 // ELEMENT_TYPE_U4
+	ElemInt64       ElementType = 0x0A // ELEMENT_TYPE_I8
+	ElemUInt64      ElementType = 0x0B // ELEMENT_TYPE_U8
+	ElemFloat32     ElementType = 0x0C // ELEMENT_TYPE_R4
+	ElemFloat64     ElementType = 0x0D // ELEMENT_TYPE_R8
+	ElemString      ElementType = 0x0E // ELEMENT_TYPE_STRING
+	ElemPtr         ElementType = 0x0F // ELEMENT_TYPE_PTR
+	ElemByRef       ElementType = 0x10 // ELEMENT_TYPE_BYREF
+	ElemValueType   ElementType = 0x11 // ELEMENT_TYPE_VALUETYPE
+	ElemClass       ElementType = 0x12 // ELEMENT_TYPE_CLASS
+	ElemVar         ElementType = 0x13 // ELEMENT_TYPE_VAR
+	ElemArray       ElementType = 0x14 // ELEMENT_TYPE_ARRAY
+	ElemGenericInst ElementType = 0x15 // ELEMENT_TYPE_GENERICINST
+	ElemTypedByRef  ElementType = 0x16 // ELEMENT_TYPE_TYPEDBYREF
+	ElemIntPtr      ElementType = 0x18 // ELEMENT_TYPE_I
+	ElemUIntPtr     ElementType = 0x19 // ELEMENT_TYPE_U
+	ElemFnPtr       ElementType = 0x1B // ELEMENT_TYPE_FNPTR
+	ElemObject      ElementType = 0x1C // ELEMENT_TYPE_OBJECT
+	ElemSZArray     ElementType = 0x1D // ELEMENT_TYPE_SZARRAY
+	ElemMVar        ElementType = 0x1E // ELEMENT_TYPE_MVAR
+	ElemCModReqd    ElementType = 0x1F // ELEMENT_TYPE_CMOD_REQD
+	ElemCModOpt     ElementType = 0x20 // ELEMENT_TYPE_CMOD_OPT
+	ElemSentinel    ElementType = 0x41 // ELEMENT_TYPE_SENTINEL
 )
 
 // TypeSigKind discriminates TypeSig.
@@ -52,8 +53,9 @@ const (
 	SigFuncPtr                      // FuncSig holds the target signature
 )
 
-// TypeSig is the decoded, recursive form of an ECMA-335 type signature —
-// the native structured analogue of the win32json Kind/Child type grammar.
+// TypeSig is the decoded, recursive form of an ECMA-335 Type production
+// (§II.23.2.12) — the native structured analogue of the win32json
+// Kind/Child type grammar.
 type TypeSig struct {
 	Kind      TypeSigKind
 	Primitive ElementType // SigPrimitive
@@ -74,14 +76,15 @@ type TypeSig struct {
 	IsConst bool
 }
 
-// MethodSig is a decoded MethodDefSig (II.23.2.1).
+// MethodSig is a decoded MethodDefSig (§II.23.2.1).
 type MethodSig struct {
 	HasThis bool
 	Return  TypeSig
 	Params  []TypeSig
 }
 
-// FieldSignature decodes the FieldSig blob at the given #Blob offset.
+// FieldSignature decodes the FieldSig blob (§II.23.2.4) at the given #Blob
+// offset.
 func (f *File) FieldSignature(blobOffset uint32) (TypeSig, error) {
 	blob := f.Blobs.Get(blobOffset)
 	if blob == nil {
@@ -99,7 +102,8 @@ func (f *File) FieldSignature(blobOffset uint32) (TypeSig, error) {
 	return sig, nil
 }
 
-// MethodSignature decodes the MethodDefSig blob at the given #Blob offset.
+// MethodSignature decodes the MethodDefSig blob (§II.23.2.1) at the given
+// #Blob offset.
 func (f *File) MethodSignature(blobOffset uint32) (MethodSig, error) {
 	blob := f.Blobs.Get(blobOffset)
 	if blob == nil {
@@ -111,7 +115,9 @@ func (f *File) MethodSignature(blobOffset uint32) (MethodSig, error) {
 	paramCount := reader.compressedUint()
 	sig := MethodSig{HasThis: callConv&sigHasThis != 0}
 	sig.Return = f.decodeTypeSig(&reader)
-	sig.Params = make([]TypeSig, 0, paramCount)
+	// Capacity clamped to the bytes left: each param is ≥1 byte, so a corrupt
+	// count (up to 2²⁹−1) cannot force an outsized allocation.
+	sig.Params = make([]TypeSig, 0, min(int(paramCount), reader.remaining()))
 	for i := uint32(0); i < paramCount && !reader.failed(); i++ {
 		sig.Params = append(sig.Params, f.decodeTypeSig(&reader))
 	}
@@ -121,7 +127,7 @@ func (f *File) MethodSignature(blobOffset uint32) (MethodSig, error) {
 	return sig, nil
 }
 
-// decodeTypeSig decodes one Type production (II.23.2.12).
+// decodeTypeSig decodes one Type production (§II.23.2.12).
 func (f *File) decodeTypeSig(reader *blobReader) TypeSig {
 	var isConst bool
 	// Skip leading custom modifiers, remembering IsConst.
@@ -166,7 +172,7 @@ func (f *File) decodeTypeSig(reader *blobReader) TypeSig {
 		sig.Child = &child
 
 	case ElemArray:
-		// Type Rank NumSizes Size* NumLoBounds LoBound* (II.23.2.13).
+		// Type Rank NumSizes Size* NumLoBounds LoBound* (§II.23.2.13).
 		child := f.decodeTypeSig(reader)
 		rank := reader.compressedUint()
 		numSizes := reader.compressedUint()
@@ -208,7 +214,7 @@ func (f *File) decodeTypeSig(reader *blobReader) TypeSig {
 }
 
 // resolveTypeToken resolves a TypeDefOrRefEncoded compressed token
-// (II.23.2.8) to a (namespace, name) pair.
+// (§II.23.2.8) to a (namespace, name) pair.
 func (f *File) resolveTypeToken(encoded uint32) (namespace, name string) {
 	row := encoded >> 2
 	if row == 0 {

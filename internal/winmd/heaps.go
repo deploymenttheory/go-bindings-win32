@@ -6,7 +6,7 @@ import (
 )
 
 // StringHeap is the #Strings heap: UTF-8, NUL-terminated strings addressed by
-// byte offset (II.24.2.3).
+// byte offset (§II.24.2.3).
 type StringHeap []byte
 
 // Get returns the string at the given heap offset.
@@ -18,7 +18,7 @@ func (h StringHeap) Get(offset uint32) string {
 }
 
 // GUIDHeap is the #GUID heap: a sequence of 16-byte GUIDs addressed by
-// 1-based index (II.24.2.5).
+// 1-based index (§II.24.2.5).
 type GUIDHeap []byte
 
 // Get returns the GUID at the given 1-based index in canonical
@@ -47,7 +47,7 @@ func formatGUID(data1 uint32, data2, data3 uint16, data4 []byte) string {
 }
 
 // BlobHeap is the #Blob heap: length-prefixed binary blobs addressed by byte
-// offset (II.24.2.4).
+// offset (§II.24.2.4).
 type BlobHeap []byte
 
 // Get returns the blob at the given heap offset (without its length prefix).
@@ -64,7 +64,7 @@ func (h BlobHeap) Get(offset uint32) []byte {
 }
 
 // blobReader is a cursor over blob/signature bytes with ECMA-335 compressed
-// integer decoding (II.23.2).
+// integer decoding (§II.23.2).
 type blobReader struct {
 	data []byte
 	pos  int
@@ -126,7 +126,7 @@ func (b *blobReader) uint64() uint64 {
 	return binary.LittleEndian.Uint64(v)
 }
 
-// compressedUint decodes an ECMA-335 compressed unsigned integer (II.23.2):
+// compressedUint decodes an ECMA-335 compressed unsigned integer (§II.23.2):
 // 1 byte (0xxxxxxx), 2 bytes (10xxxxxx x), or 4 bytes (110xxxxx x x x).
 func (b *blobReader) compressedUint() uint32 {
 	first := b.byte()
@@ -145,7 +145,7 @@ func (b *blobReader) compressedUint() uint32 {
 	}
 }
 
-// serString decodes a custom-attribute SerString (II.23.3): compressed length
+// serString decodes a custom-attribute SerString (§II.23.3): compressed length
 // + UTF-8 bytes; 0xFF means null.
 func (b *blobReader) serString() string {
 	if b.peek() == 0xFF {

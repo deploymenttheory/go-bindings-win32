@@ -1,11 +1,35 @@
 // Package winmd is a native Go reader for ECMA-335 metadata files (.winmd).
 //
-// It parses the PE container, the CLI metadata root, the five metadata heaps
-// (#~, #Strings, #US, #GUID, #Blob), and decodes the metadata tables needed to
+// It parses the PE container, the CLI metadata root, the metadata heaps
+// (#Strings, #Blob, #GUID), and decodes the metadata tables needed to
 // project the Windows.Win32 API surface. No .NET runtime, no cgo.
 //
-// Layout references: ECMA-335 6th edition, partition II §24 (metadata physical
-// layout), §22 (metadata tables), §23.2 (signature blobs).
+// Section references marked § cite ECMA-335 6th edition, partition II:
+// §II.22 (metadata tables), §II.23 (blobs, flags, and signatures), §II.24
+// (metadata physical layout), §II.25 (PE file format).
+//
+// # Non-goals
+//
+// The reader is deliberately scoped to what the Windows.Win32 projection
+// needs. The following are intentional omissions (evaluated against
+// github.com/microsoft/go-winmd), not oversights:
+//
+//   - No dependency on microsoft/go-winmd: it has no tagged releases,
+//     depends on x/tools, and lacks the custom-attribute value decoding,
+//     Constant decoding, and #- stream handling this projection requires.
+//   - No lazy per-row table access: the consumer scans every row of every
+//     materialized table, so eager typed slices are simpler and faster.
+//   - No per-group coded-index tag types (go-winmd's CodedIndex[T]): coded
+//     indices resolve eagerly to a concrete (Table, Row) pair, which is
+//     strictly more informative than an encoded tag+index.
+//   - No table-layout code generation: tableSchemas is the hand-transcribed
+//     §II.22 column layout for all 45 tables.
+//   - No #US heap: user strings are IL plumbing, never referenced by winmd
+//     projections.
+//   - No generics/BYREF/multi-rank-array signature decoding: absent from
+//     the Win32 winmd (the brute-force test suites prove it); such
+//     constructs fail with a structured error rather than silently
+//     mis-decoding.
 package winmd
 
 import (
@@ -57,7 +81,7 @@ func Parse(data []byte) (*File, error) {
 	return parseMetadataRoot(metadataRoot)
 }
 
-// locateMetadata walks the PE headers to the CLI (COR20) header and returns
+// locateMetadata walks the PE headers to the CLI (COR20) header (§II.25.3.3) and returns
 // the metadata root as a sub-slice of data.
 func locateMetadata(data []byte) ([]byte, error) {
 	peFile, err := pe.NewFile(newSliceReaderAt(data))
@@ -89,7 +113,7 @@ func locateMetadata(data []byte) ([]byte, error) {
 	if err != nil {
 		return nil, fmt.Errorf("reading CLI header: %w", err)
 	}
-	// IMAGE_COR20_HEADER: cb(4) MajorRuntimeVersion(2) MinorRuntimeVersion(2)
+	// IMAGE_COR20_HEADER (§II.25.3.3): cb(4) MajorRuntimeVersion(2) MinorRuntimeVersion(2)
 	// MetaData RVA(4) + Size(4) at offset 8.
 	if len(cliHeader) < 16 {
 		return nil, fmt.Errorf("CLI header too short: %d bytes", len(cliHeader))
@@ -119,7 +143,7 @@ func sliceAtRVA(data []byte, peFile *pe.File, rva, size uint32) ([]byte, error) 
 	return nil, fmt.Errorf("RVA 0x%x not covered by any PE section", rva)
 }
 
-// parseMetadataRoot parses the metadata root (II.24.2.1) and its streams.
+// parseMetadataRoot parses the metadata root (§II.24.2.1) and its streams.
 func parseMetadataRoot(root []byte) (*File, error) {
 	const metadataSignature = 0x424A5342 // "BSJB"
 	if len(root) < 20 {

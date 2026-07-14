@@ -40,9 +40,10 @@ func (self *IXmlReader) SetProperty(nProperty uint32, pValue uintptr) error {
 }
 
 // Read dispatches through IXmlReader's vtable slot 6.
-func (self *IXmlReader) Read(pNodeType *XmlNodeType) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IXmlReader) Read(pNodeType *XmlNodeType) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNodeType)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // GetNodeType dispatches through IXmlReader's vtable slot 7.

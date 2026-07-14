@@ -236,6 +236,9 @@ func (g *Generator) buildFunction(meta *win32meta.NamespaceMeta, function *win32
 		model.ReturnValues = returnValues
 		switch retValMode {
 		case retValHRESULT:
+			if g.isInformationalFunction(meta.Namespace, function.Name) {
+				g.diag("function %s: informational-success annotation not applied ([out,retval] elevation)", function.Name)
+			}
 			model.ReturnKind = view.RetRetValHResult
 			model.ReturnSig = "(" + strings.Join(append(returnTypes, "error"), ", ") + ")"
 		case retValRawError:
@@ -249,7 +252,7 @@ func (g *Generator) buildFunction(meta *win32meta.NamespaceMeta, function *win32
 				model.ReturnSig = "(" + strings.Join(returnTypes, ", ") + ")"
 			}
 		}
-	} else if !g.buildReturnShape(&model, function, returnResolved) {
+	} else if !g.buildReturnShape(&model, meta, function, returnResolved) {
 		return view.FunctionModel{}, false
 	}
 
@@ -282,6 +285,10 @@ func (g *Generator) buildFunction(meta *win32meta.NamespaceMeta, function *win32
 		imports["unsafe"] = "unsafe"
 	}
 	model.CommentLines = functionComments(function, goName)
+	if model.ReturnKind == view.RetHResultValueErr {
+		model.CommentLines = append(model.CommentLines,
+			"The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.")
+	}
 	return model, true
 }
 
@@ -322,7 +329,7 @@ func shapeParam(name string, param *win32meta.Param, resolved typemap.Resolved) 
 }
 
 // buildReturnShape selects the body/return template shape (idiomatic).
-func (g *Generator) buildReturnShape(model *view.FunctionModel, function *win32meta.Function, resolved typemap.Resolved) bool {
+func (g *Generator) buildReturnShape(model *view.FunctionModel, meta *win32meta.NamespaceMeta, function *win32meta.Function, resolved typemap.Resolved) bool {
 	switch resolved.Kind {
 	case typemap.KindVoid:
 		model.ReturnKind = view.RetVoid
@@ -346,8 +353,14 @@ func (g *Generator) buildReturnShape(model *view.FunctionModel, function *win32m
 		model.ReturnSig = "error"
 		return true
 	}
-	// HRESULT → error.
+	// HRESULT → error; curated informational-success APIs additionally
+	// return the raw HRESULT so S_FALSE-style codes survive.
 	if isHRESULT(resolved) {
+		if g.isInformationalFunction(meta.Namespace, function.Name) {
+			model.ReturnKind = view.RetHResultValueErr
+			model.ReturnSig = "(win32.HRESULT, error)"
+			return true
+		}
 		model.ReturnKind = view.RetHResultErr
 		model.ReturnSig = "error"
 		return true

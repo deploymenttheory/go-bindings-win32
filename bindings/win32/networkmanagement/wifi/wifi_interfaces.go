@@ -299,19 +299,21 @@ type IEnumDot11AdHocInterfaces struct {
 var IID_IEnumDot11AdHocInterfaces = win32.GUID{Data1: 0x8f10cc2c, Data2: 0xcf0d, Data3: 0x42a0, Data4: [8]byte{0xac, 0xbe, 0xe2, 0xde, 0x70, 0x07, 0x38, 0x4d}}
 
 // Next dispatches through IEnumDot11AdHocInterfaces's vtable slot 3.
-func (self *IEnumDot11AdHocInterfaces) Next(rgElt []*IDot11AdHocInterface, pcEltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumDot11AdHocInterfaces) Next(rgElt []*IDot11AdHocInterface, pcEltFetched *uint32) (win32.HRESULT, error) {
 	var _rgElt **IDot11AdHocInterface
 	if len(rgElt) > 0 {
 		_rgElt = &rgElt[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgElt)), uintptr(unsafe.Pointer(_rgElt)), uintptr(unsafe.Pointer(pcEltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumDot11AdHocInterfaces's vtable slot 4.
-func (self *IEnumDot11AdHocInterfaces) Skip(cElt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumDot11AdHocInterfaces) Skip(cElt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cElt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumDot11AdHocInterfaces's vtable slot 5.
@@ -336,19 +338,21 @@ type IEnumDot11AdHocNetworks struct {
 var IID_IEnumDot11AdHocNetworks = win32.GUID{Data1: 0x8f10cc28, Data2: 0xcf0d, Data3: 0x42a0, Data4: [8]byte{0xac, 0xbe, 0xe2, 0xde, 0x70, 0x07, 0x38, 0x4d}}
 
 // Next dispatches through IEnumDot11AdHocNetworks's vtable slot 3.
-func (self *IEnumDot11AdHocNetworks) Next(rgElt []*IDot11AdHocNetwork, pcEltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumDot11AdHocNetworks) Next(rgElt []*IDot11AdHocNetwork, pcEltFetched *uint32) (win32.HRESULT, error) {
 	var _rgElt **IDot11AdHocNetwork
 	if len(rgElt) > 0 {
 		_rgElt = &rgElt[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgElt)), uintptr(unsafe.Pointer(_rgElt)), uintptr(unsafe.Pointer(pcEltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumDot11AdHocNetworks's vtable slot 4.
-func (self *IEnumDot11AdHocNetworks) Skip(cElt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumDot11AdHocNetworks) Skip(cElt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cElt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumDot11AdHocNetworks's vtable slot 5.
@@ -373,19 +377,21 @@ type IEnumDot11AdHocSecuritySettings struct {
 var IID_IEnumDot11AdHocSecuritySettings = win32.GUID{Data1: 0x8f10cc2d, Data2: 0xcf0d, Data3: 0x42a0, Data4: [8]byte{0xac, 0xbe, 0xe2, 0xde, 0x70, 0x07, 0x38, 0x4d}}
 
 // Next dispatches through IEnumDot11AdHocSecuritySettings's vtable slot 3.
-func (self *IEnumDot11AdHocSecuritySettings) Next(rgElt []*IDot11AdHocSecuritySettings, pcEltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumDot11AdHocSecuritySettings) Next(rgElt []*IDot11AdHocSecuritySettings, pcEltFetched *uint32) (win32.HRESULT, error) {
 	var _rgElt **IDot11AdHocSecuritySettings
 	if len(rgElt) > 0 {
 		_rgElt = &rgElt[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgElt)), uintptr(unsafe.Pointer(_rgElt)), uintptr(unsafe.Pointer(pcEltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumDot11AdHocSecuritySettings's vtable slot 4.
-func (self *IEnumDot11AdHocSecuritySettings) Skip(cElt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumDot11AdHocSecuritySettings) Skip(cElt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cElt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumDot11AdHocSecuritySettings's vtable slot 5.

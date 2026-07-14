@@ -1541,19 +1541,21 @@ type IEnumDiscMasterFormats struct {
 var IID_IEnumDiscMasterFormats = win32.GUID{Data1: 0xddf445e1, Data2: 0x54ba, Data3: 0x11d3, Data4: [8]byte{0x91, 0x44, 0x00, 0x10, 0x4b, 0xa1, 0x1c, 0x5e}}
 
 // Next dispatches through IEnumDiscMasterFormats's vtable slot 3.
-func (self *IEnumDiscMasterFormats) Next(lpiidFormatID []win32.GUID, pcFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumDiscMasterFormats) Next(lpiidFormatID []win32.GUID, pcFetched *uint32) (win32.HRESULT, error) {
 	var _lpiidFormatID *win32.GUID
 	if len(lpiidFormatID) > 0 {
 		_lpiidFormatID = &lpiidFormatID[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(lpiidFormatID)), uintptr(unsafe.Pointer(_lpiidFormatID)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumDiscMasterFormats's vtable slot 4.
-func (self *IEnumDiscMasterFormats) Skip(cFormats uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumDiscMasterFormats) Skip(cFormats uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cFormats))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumDiscMasterFormats's vtable slot 5.
@@ -1577,19 +1579,21 @@ type IEnumDiscRecorders struct {
 var IID_IEnumDiscRecorders = win32.GUID{Data1: 0x9b1921e1, Data2: 0x54ac, Data3: 0x11d3, Data4: [8]byte{0x91, 0x44, 0x00, 0x10, 0x4b, 0xa1, 0x1c, 0x5e}}
 
 // Next dispatches through IEnumDiscRecorders's vtable slot 3.
-func (self *IEnumDiscRecorders) Next(ppRecorder []*IDiscRecorder, pcFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumDiscRecorders) Next(ppRecorder []*IDiscRecorder, pcFetched *uint32) (win32.HRESULT, error) {
 	var _ppRecorder **IDiscRecorder
 	if len(ppRecorder) > 0 {
 		_ppRecorder = &ppRecorder[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppRecorder)), uintptr(unsafe.Pointer(_ppRecorder)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumDiscRecorders's vtable slot 4.
-func (self *IEnumDiscRecorders) Skip(cRecorders uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumDiscRecorders) Skip(cRecorders uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cRecorders))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumDiscRecorders's vtable slot 5.
@@ -1614,19 +1618,21 @@ type IEnumFsiItems struct {
 var IID_IEnumFsiItems = win32.GUID{Data1: 0x2c941fda, Data2: 0x975b, Data3: 0x59be, Data4: [8]byte{0xa9, 0x60, 0x9a, 0x2a, 0x26, 0x28, 0x53, 0xa5}}
 
 // Next dispatches through IEnumFsiItems's vtable slot 3.
-func (self *IEnumFsiItems) Next(rgelt []*IFsiItem, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumFsiItems) Next(rgelt []*IFsiItem, pceltFetched *uint32) (win32.HRESULT, error) {
 	var _rgelt **IFsiItem
 	if len(rgelt) > 0 {
 		_rgelt = &rgelt[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumFsiItems's vtable slot 4.
-func (self *IEnumFsiItems) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumFsiItems) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumFsiItems's vtable slot 5.
@@ -1651,19 +1657,21 @@ type IEnumProgressItems struct {
 var IID_IEnumProgressItems = win32.GUID{Data1: 0x2c941fd6, Data2: 0x975b, Data3: 0x59be, Data4: [8]byte{0xa9, 0x60, 0x9a, 0x2a, 0x26, 0x28, 0x53, 0xa5}}
 
 // Next dispatches through IEnumProgressItems's vtable slot 3.
-func (self *IEnumProgressItems) Next(rgelt []*IProgressItem, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumProgressItems) Next(rgelt []*IProgressItem, pceltFetched *uint32) (win32.HRESULT, error) {
 	var _rgelt **IProgressItem
 	if len(rgelt) > 0 {
 		_rgelt = &rgelt[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumProgressItems's vtable slot 4.
-func (self *IEnumProgressItems) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumProgressItems) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumProgressItems's vtable slot 5.

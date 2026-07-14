@@ -167,19 +167,21 @@ type IEnumNetConnection struct {
 var IID_IEnumNetConnection = win32.GUID{Data1: 0xc08956a0, Data2: 0x1cd3, Data3: 0x11d1, Data4: [8]byte{0xb1, 0xc5, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // Next dispatches through IEnumNetConnection's vtable slot 3.
-func (self *IEnumNetConnection) Next(rgelt []*INetConnection, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumNetConnection) Next(rgelt []*INetConnection, pceltFetched *uint32) (win32.HRESULT, error) {
 	var _rgelt **INetConnection
 	if len(rgelt) > 0 {
 		_rgelt = &rgelt[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumNetConnection's vtable slot 4.
-func (self *IEnumNetConnection) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumNetConnection) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumNetConnection's vtable slot 5.
@@ -204,19 +206,21 @@ type IEnumNetSharingEveryConnection struct {
 var IID_IEnumNetSharingEveryConnection = win32.GUID{Data1: 0xc08956b8, Data2: 0x1cd3, Data3: 0x11d1, Data4: [8]byte{0xb1, 0xc5, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // Next dispatches through IEnumNetSharingEveryConnection's vtable slot 3.
-func (self *IEnumNetSharingEveryConnection) Next(rgVar []systemvariant.VARIANT, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumNetSharingEveryConnection) Next(rgVar []systemvariant.VARIANT, pceltFetched *uint32) (win32.HRESULT, error) {
 	var _rgVar *systemvariant.VARIANT
 	if len(rgVar) > 0 {
 		_rgVar = &rgVar[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgVar)), uintptr(unsafe.Pointer(_rgVar)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumNetSharingEveryConnection's vtable slot 4.
-func (self *IEnumNetSharingEveryConnection) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumNetSharingEveryConnection) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumNetSharingEveryConnection's vtable slot 5.
@@ -241,19 +245,21 @@ type IEnumNetSharingPortMapping struct {
 var IID_IEnumNetSharingPortMapping = win32.GUID{Data1: 0xc08956b0, Data2: 0x1cd3, Data3: 0x11d1, Data4: [8]byte{0xb1, 0xc5, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // Next dispatches through IEnumNetSharingPortMapping's vtable slot 3.
-func (self *IEnumNetSharingPortMapping) Next(rgVar []systemvariant.VARIANT, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumNetSharingPortMapping) Next(rgVar []systemvariant.VARIANT, pceltFetched *uint32) (win32.HRESULT, error) {
 	var _rgVar *systemvariant.VARIANT
 	if len(rgVar) > 0 {
 		_rgVar = &rgVar[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgVar)), uintptr(unsafe.Pointer(_rgVar)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumNetSharingPortMapping's vtable slot 4.
-func (self *IEnumNetSharingPortMapping) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumNetSharingPortMapping) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumNetSharingPortMapping's vtable slot 5.
@@ -278,19 +284,21 @@ type IEnumNetSharingPrivateConnection struct {
 var IID_IEnumNetSharingPrivateConnection = win32.GUID{Data1: 0xc08956b5, Data2: 0x1cd3, Data3: 0x11d1, Data4: [8]byte{0xb1, 0xc5, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // Next dispatches through IEnumNetSharingPrivateConnection's vtable slot 3.
-func (self *IEnumNetSharingPrivateConnection) Next(rgVar []systemvariant.VARIANT, pCeltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumNetSharingPrivateConnection) Next(rgVar []systemvariant.VARIANT, pCeltFetched *uint32) (win32.HRESULT, error) {
 	var _rgVar *systemvariant.VARIANT
 	if len(rgVar) > 0 {
 		_rgVar = &rgVar[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgVar)), uintptr(unsafe.Pointer(_rgVar)), uintptr(unsafe.Pointer(pCeltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumNetSharingPrivateConnection's vtable slot 4.
-func (self *IEnumNetSharingPrivateConnection) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumNetSharingPrivateConnection) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumNetSharingPrivateConnection's vtable slot 5.
@@ -315,19 +323,21 @@ type IEnumNetSharingPublicConnection struct {
 var IID_IEnumNetSharingPublicConnection = win32.GUID{Data1: 0xc08956b4, Data2: 0x1cd3, Data3: 0x11d1, Data4: [8]byte{0xb1, 0xc5, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // Next dispatches through IEnumNetSharingPublicConnection's vtable slot 3.
-func (self *IEnumNetSharingPublicConnection) Next(rgVar []systemvariant.VARIANT, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumNetSharingPublicConnection) Next(rgVar []systemvariant.VARIANT, pceltFetched *uint32) (win32.HRESULT, error) {
 	var _rgVar *systemvariant.VARIANT
 	if len(rgVar) > 0 {
 		_rgVar = &rgVar[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgVar)), uintptr(unsafe.Pointer(_rgVar)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumNetSharingPublicConnection's vtable slot 4.
-func (self *IEnumNetSharingPublicConnection) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumNetSharingPublicConnection) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumNetSharingPublicConnection's vtable slot 5.

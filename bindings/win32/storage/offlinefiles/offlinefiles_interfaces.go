@@ -24,19 +24,21 @@ type IEnumOfflineFilesItems struct {
 var IID_IEnumOfflineFilesItems = win32.GUID{Data1: 0xda70e815, Data2: 0xc361, Data3: 0x4407, Data4: [8]byte{0xbc, 0x0b, 0x0d, 0x70, 0x46, 0xe5, 0xf2, 0xcd}}
 
 // Next dispatches through IEnumOfflineFilesItems's vtable slot 3.
-func (self *IEnumOfflineFilesItems) Next(rgelt []*IOfflineFilesItem, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumOfflineFilesItems) Next(rgelt []*IOfflineFilesItem, pceltFetched *uint32) (win32.HRESULT, error) {
 	var _rgelt **IOfflineFilesItem
 	if len(rgelt) > 0 {
 		_rgelt = &rgelt[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumOfflineFilesItems's vtable slot 4.
-func (self *IEnumOfflineFilesItems) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumOfflineFilesItems) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumOfflineFilesItems's vtable slot 5.
@@ -61,19 +63,21 @@ type IEnumOfflineFilesSettings struct {
 var IID_IEnumOfflineFilesSettings = win32.GUID{Data1: 0x729680c4, Data2: 0x1a38, Data3: 0x47bc, Data4: [8]byte{0x9e, 0x5c, 0x02, 0xc5, 0x15, 0x62, 0xac, 0x30}}
 
 // Next dispatches through IEnumOfflineFilesSettings's vtable slot 3.
-func (self *IEnumOfflineFilesSettings) Next(rgelt []*IOfflineFilesSetting, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumOfflineFilesSettings) Next(rgelt []*IOfflineFilesSetting, pceltFetched *uint32) (win32.HRESULT, error) {
 	var _rgelt **IOfflineFilesSetting
 	if len(rgelt) > 0 {
 		_rgelt = &rgelt[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumOfflineFilesSettings's vtable slot 4.
-func (self *IEnumOfflineFilesSettings) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumOfflineFilesSettings) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumOfflineFilesSettings's vtable slot 5.

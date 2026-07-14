@@ -38,6 +38,10 @@ type Generator struct {
 	// files from earlier runs can be pruned afterwards.
 	writtenFiles map[string]bool
 
+	// informationalMatched tracks which curated informational-success
+	// entries (informational.go) matched an emitted API this run.
+	informationalMatched map[string]bool
+
 	// Diagnostics collects all degradations and skips (ratchet input).
 	Diagnostics []string
 }
@@ -52,7 +56,8 @@ func New(registry *pipeline.Registry, modulePath, outDir string) *Generator {
 			ModulePath: modulePath,
 			Blocked:    pipeline.ComputeBlockedImports(registry),
 		},
-		outDir: outDir,
+		outDir:               outDir,
+		informationalMatched: map[string]bool{},
 	}
 }
 
@@ -108,6 +113,10 @@ func (g *Generator) EmitAll(filter map[string]bool) (int, error) {
 	// whole output tree.
 	if err := g.pruneStale(len(filter) == 0); err != nil {
 		return len(emitted), err
+	}
+	// Stale curated entries are only detectable when everything was emitted.
+	if len(filter) == 0 {
+		g.checkInformationalEntries()
 	}
 	g.Diagnostics = append(g.Diagnostics, g.mapper.Diagnostics...)
 	return len(emitted), nil

@@ -142,6 +142,11 @@ each call, then the template dispatches via `syscall.SyscallN`:
   `_name := win32.UTF16Ptr(name)`)
 - input `BOOL` → Go `bool` (`win32.Bool32`); plain `BOOL` return → `bool`
 - `HRESULT` return → `error`; `BOOL` + SetLastError → `error`
+- a curated set of informational-success APIs (`IEnum*::Next`/`::Skip`,
+  `IXmlReader::Read`, `CoInitializeEx` — see `emit/raw/informational.go`)
+  returns `(win32.HRESULT, error)` instead: err reflects failure only, the
+  HRESULT preserves `S_FALSE`-style success codes. The winmd has no attribute
+  for this, so the set is curated; stale entries surface as diagnostics.
 - handle/pointer + SetLastError → `(T, error)`, failure sentinels from
   `[InvalidHandleValue]` metadata; other + SetLastError → `(T, error)` where
   err is the advisory GetLastError; no SetLastError → bare `T`

@@ -7440,19 +7440,21 @@ type IEnumFilters struct {
 var IID_IEnumFilters = win32.GUID{Data1: 0x56a86893, Data2: 0x0ad4, Data3: 0x11ce, Data4: [8]byte{0xb0, 0x3a, 0x00, 0x20, 0xaf, 0x0b, 0xa7, 0x70}}
 
 // Next dispatches through IEnumFilters's vtable slot 3.
-func (self *IEnumFilters) Next(ppFilter []*IBaseFilter, pcFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumFilters) Next(ppFilter []*IBaseFilter, pcFetched *uint32) (win32.HRESULT, error) {
 	var _ppFilter **IBaseFilter
 	if len(ppFilter) > 0 {
 		_ppFilter = &ppFilter[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppFilter)), uintptr(unsafe.Pointer(_ppFilter)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumFilters's vtable slot 4.
-func (self *IEnumFilters) Skip(cFilters uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumFilters) Skip(cFilters uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cFilters))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumFilters's vtable slot 5.
@@ -7477,19 +7479,21 @@ type IEnumMediaTypes struct {
 var IID_IEnumMediaTypes = win32.GUID{Data1: 0x89c31040, Data2: 0x846b, Data3: 0x11ce, Data4: [8]byte{0x97, 0xd3, 0x00, 0xaa, 0x00, 0x55, 0x59, 0x5a}}
 
 // Next dispatches through IEnumMediaTypes's vtable slot 3.
-func (self *IEnumMediaTypes) Next(ppMediaTypes []*mediamediafoundation.AM_MEDIA_TYPE, pcFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumMediaTypes) Next(ppMediaTypes []*mediamediafoundation.AM_MEDIA_TYPE, pcFetched *uint32) (win32.HRESULT, error) {
 	var _ppMediaTypes **mediamediafoundation.AM_MEDIA_TYPE
 	if len(ppMediaTypes) > 0 {
 		_ppMediaTypes = &ppMediaTypes[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppMediaTypes)), uintptr(unsafe.Pointer(_ppMediaTypes)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumMediaTypes's vtable slot 4.
-func (self *IEnumMediaTypes) Skip(cMediaTypes uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumMediaTypes) Skip(cMediaTypes uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cMediaTypes))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumMediaTypes's vtable slot 5.
@@ -7514,19 +7518,21 @@ type IEnumPIDMap struct {
 var IID_IEnumPIDMap = win32.GUID{Data1: 0xafb6c2a2, Data2: 0x2c41, Data3: 0x11d3, Data4: [8]byte{0x8a, 0x60, 0x00, 0x00, 0xf8, 0x1e, 0x0e, 0x4a}}
 
 // Next dispatches through IEnumPIDMap's vtable slot 3.
-func (self *IEnumPIDMap) Next(pPIDMap []PID_MAP, pcReceived *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumPIDMap) Next(pPIDMap []PID_MAP, pcReceived *uint32) (win32.HRESULT, error) {
 	var _pPIDMap *PID_MAP
 	if len(pPIDMap) > 0 {
 		_pPIDMap = &pPIDMap[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pPIDMap)), uintptr(unsafe.Pointer(_pPIDMap)), uintptr(unsafe.Pointer(pcReceived)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumPIDMap's vtable slot 4.
-func (self *IEnumPIDMap) Skip(cRecords uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumPIDMap) Skip(cRecords uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cRecords))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumPIDMap's vtable slot 5.
@@ -7551,19 +7557,21 @@ type IEnumPins struct {
 var IID_IEnumPins = win32.GUID{Data1: 0x56a86892, Data2: 0x0ad4, Data3: 0x11ce, Data4: [8]byte{0xb0, 0x3a, 0x00, 0x20, 0xaf, 0x0b, 0xa7, 0x70}}
 
 // Next dispatches through IEnumPins's vtable slot 3.
-func (self *IEnumPins) Next(ppPins []*IPin, pcFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumPins) Next(ppPins []*IPin, pcFetched *uint32) (win32.HRESULT, error) {
 	var _ppPins **IPin
 	if len(ppPins) > 0 {
 		_ppPins = &ppPins[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppPins)), uintptr(unsafe.Pointer(_ppPins)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumPins's vtable slot 4.
-func (self *IEnumPins) Skip(cPins uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumPins) Skip(cPins uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cPins))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumPins's vtable slot 5.
@@ -7588,19 +7596,21 @@ type IEnumRegFilters struct {
 var IID_IEnumRegFilters = win32.GUID{Data1: 0x56a868a4, Data2: 0x0ad4, Data3: 0x11ce, Data4: [8]byte{0xb0, 0x3a, 0x00, 0x20, 0xaf, 0x0b, 0xa7, 0x70}}
 
 // Next dispatches through IEnumRegFilters's vtable slot 3.
-func (self *IEnumRegFilters) Next(apRegFilter []*REGFILTER, pcFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumRegFilters) Next(apRegFilter []*REGFILTER, pcFetched *uint32) (win32.HRESULT, error) {
 	var _apRegFilter **REGFILTER
 	if len(apRegFilter) > 0 {
 		_apRegFilter = &apRegFilter[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(apRegFilter)), uintptr(unsafe.Pointer(_apRegFilter)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumRegFilters's vtable slot 4.
-func (self *IEnumRegFilters) Skip(cFilters uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumRegFilters) Skip(cFilters uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cFilters))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumRegFilters's vtable slot 5.
@@ -7625,19 +7635,21 @@ type IEnumStreamIdMap struct {
 var IID_IEnumStreamIdMap = win32.GUID{Data1: 0x945c1566, Data2: 0x6202, Data3: 0x46fc, Data4: [8]byte{0x96, 0xc7, 0xd8, 0x7f, 0x28, 0x9c, 0x65, 0x34}}
 
 // Next dispatches through IEnumStreamIdMap's vtable slot 3.
-func (self *IEnumStreamIdMap) Next(pStreamIdMap []STREAM_ID_MAP, pcReceived *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumStreamIdMap) Next(pStreamIdMap []STREAM_ID_MAP, pcReceived *uint32) (win32.HRESULT, error) {
 	var _pStreamIdMap *STREAM_ID_MAP
 	if len(pStreamIdMap) > 0 {
 		_pStreamIdMap = &pStreamIdMap[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pStreamIdMap)), uintptr(unsafe.Pointer(_pStreamIdMap)), uintptr(unsafe.Pointer(pcReceived)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumStreamIdMap's vtable slot 4.
-func (self *IEnumStreamIdMap) Skip(cRecords uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumStreamIdMap) Skip(cRecords uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cRecords))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumStreamIdMap's vtable slot 5.

@@ -193,9 +193,20 @@ func (g *Generator) buildComMethod(meta *win32meta.NamespaceMeta, interfaceName 
 	}
 	switch {
 	case isHRESULT(returnResolved) && len(returnValues) > 0:
+		if informationalComMethods[meta.Namespace+"."+interfaceName+"."+method.Name] {
+			g.informationalMatched[meta.Namespace+"."+interfaceName+"."+method.Name] = true
+			g.diag("interface %s: method %s informational-success annotation not applied ([out,retval] elevation)",
+				interfaceName, method.Name)
+		}
 		model.ReturnKind = view.RetRetValHResult
 		model.ReturnValues = returnValues
 		model.ReturnSig = "(" + strings.Join(append(returnTypes, "error"), ", ") + ")"
+	case isHRESULT(returnResolved) && g.isInformationalComMethod(meta.Namespace, interfaceName, method.Name):
+		// Curated informational-success methods additionally return the raw
+		// HRESULT so S_FALSE-style codes survive.
+		model.ReturnKind = view.RetHResultValueErr
+		model.ReturnSig = "(win32.HRESULT, error)"
+		scratch["win32"] = g.mapper.ModulePath + "/bindings/runtime/win32"
 	case isHRESULT(returnResolved):
 		model.ReturnKind = view.RetHResultErr
 		model.ReturnSig = "error"
@@ -221,5 +232,9 @@ func (g *Generator) buildComMethod(meta *win32meta.NamespaceMeta, interfaceName 
 		imports[alias] = path
 	}
 	model.CommentLines = []string{fmt.Sprintf("%s dispatches through %s's vtable slot %d.", model.GoName, interfaceName, slot)}
+	if model.ReturnKind == view.RetHResultValueErr {
+		model.CommentLines = append(model.CommentLines,
+			"The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.")
+	}
 	return model, true
 }

@@ -5272,9 +5272,10 @@ func (self *IEnumPrivacyRecords) GetPrivacyImpacted(pState *foundation.BOOL) err
 }
 
 // Next dispatches through IEnumPrivacyRecords's vtable slot 6.
-func (self *IEnumPrivacyRecords) Next(pbstrUrl *foundation.BSTR, pbstrPolicyRef *foundation.BSTR, pdwReserved *int32, pdwPrivacyFlags *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumPrivacyRecords) Next(pbstrUrl *foundation.BSTR, pbstrPolicyRef *foundation.BSTR, pdwReserved *int32, pdwPrivacyFlags *uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrUrl)), uintptr(unsafe.Pointer(pbstrPolicyRef)), uintptr(unsafe.Pointer(pdwReserved)), uintptr(unsafe.Pointer(pdwPrivacyFlags)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 3051073a-98b5-11cf-bb82-00aa00bdce0b

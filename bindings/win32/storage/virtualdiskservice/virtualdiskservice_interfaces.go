@@ -24,19 +24,21 @@ type IEnumVdsObject struct {
 var IID_IEnumVdsObject = win32.GUID{Data1: 0x118610b7, Data2: 0x8d94, Data3: 0x4030, Data4: [8]byte{0xb5, 0xb8, 0x50, 0x08, 0x89, 0x78, 0x8e, 0x4e}}
 
 // Next dispatches through IEnumVdsObject's vtable slot 3.
-func (self *IEnumVdsObject) Next(ppObjectArray []*systemcom.IUnknown, pcFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumVdsObject) Next(ppObjectArray []*systemcom.IUnknown, pcFetched *uint32) (win32.HRESULT, error) {
 	var _ppObjectArray **systemcom.IUnknown
 	if len(ppObjectArray) > 0 {
 		_ppObjectArray = &ppObjectArray[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppObjectArray)), uintptr(unsafe.Pointer(_ppObjectArray)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumVdsObject's vtable slot 4.
-func (self *IEnumVdsObject) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumVdsObject) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumVdsObject's vtable slot 5.

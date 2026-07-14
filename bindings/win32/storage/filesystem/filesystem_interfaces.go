@@ -319,15 +319,17 @@ type IEnumDiskQuotaUsers struct {
 var IID_IEnumDiskQuotaUsers = win32.GUID{Data1: 0x7988b577, Data2: 0xec89, Data3: 0x11cf, Data4: [8]byte{0x9c, 0x00, 0x00, 0xaa, 0x00, 0xa1, 0x4f, 0x56}}
 
 // Next dispatches through IEnumDiskQuotaUsers's vtable slot 3.
-func (self *IEnumDiskQuotaUsers) Next(cUsers uint32, rgUsers **IDiskQuotaUser, pcUsersFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumDiskQuotaUsers) Next(cUsers uint32, rgUsers **IDiskQuotaUser, pcUsersFetched *uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cUsers), uintptr(unsafe.Pointer(rgUsers)), uintptr(unsafe.Pointer(pcUsersFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumDiskQuotaUsers's vtable slot 4.
-func (self *IEnumDiskQuotaUsers) Skip(cUsers uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumDiskQuotaUsers) Skip(cUsers uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cUsers))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumDiskQuotaUsers's vtable slot 5.

@@ -30,13 +30,14 @@ func (self *IEnumWbemClassObject) Reset() error {
 }
 
 // Next dispatches through IEnumWbemClassObject's vtable slot 4.
-func (self *IEnumWbemClassObject) Next(lTimeout int32, apObjects []*IWbemClassObject, puReturned *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumWbemClassObject) Next(lTimeout int32, apObjects []*IWbemClassObject, puReturned *uint32) (win32.HRESULT, error) {
 	var _apObjects **IWbemClassObject
 	if len(apObjects) > 0 {
 		_apObjects = &apObjects[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(lTimeout), uintptr(len(apObjects)), uintptr(unsafe.Pointer(_apObjects)), uintptr(unsafe.Pointer(puReturned)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // NextAsync dispatches through IEnumWbemClassObject's vtable slot 5.
@@ -52,9 +53,10 @@ func (self *IEnumWbemClassObject) Clone(ppEnum **IEnumWbemClassObject) error {
 }
 
 // Skip dispatches through IEnumWbemClassObject's vtable slot 7.
-func (self *IEnumWbemClassObject) Skip(lTimeout int32, nCount uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumWbemClassObject) Skip(lTimeout int32, nCount uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(lTimeout), uintptr(nCount))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // IMofCompiler: https://learn.microsoft.com/windows/win32/api/wbemcli/nn-wbemcli-imofcompiler

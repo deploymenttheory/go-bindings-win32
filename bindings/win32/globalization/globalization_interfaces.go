@@ -46,9 +46,10 @@ func (self *IEnumCodePage) Clone() error {
 }
 
 // Next dispatches through IEnumCodePage's vtable slot 4.
-func (self *IEnumCodePage) Next(celt uint32, rgelt *MIMECPINFO, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumCodePage) Next(celt uint32, rgelt *MIMECPINFO, pceltFetched *uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumCodePage's vtable slot 5.
@@ -58,9 +59,10 @@ func (self *IEnumCodePage) Reset() error {
 }
 
 // Skip dispatches through IEnumCodePage's vtable slot 6.
-func (self *IEnumCodePage) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumCodePage) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 3dc39d1d-c030-11d0-b81b-00c04fc9b31f
@@ -78,9 +80,10 @@ func (self *IEnumRfc1766) Clone() error {
 }
 
 // Next dispatches through IEnumRfc1766's vtable slot 4.
-func (self *IEnumRfc1766) Next(celt uint32, rgelt *RFC1766INFO, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumRfc1766) Next(celt uint32, rgelt *RFC1766INFO, pceltFetched *uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumRfc1766's vtable slot 5.
@@ -90,9 +93,10 @@ func (self *IEnumRfc1766) Reset() error {
 }
 
 // Skip dispatches through IEnumRfc1766's vtable slot 6.
-func (self *IEnumRfc1766) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumRfc1766) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // IID: ae5f1430-388b-11d2-8380-00c04f8f5da1
@@ -110,9 +114,10 @@ func (self *IEnumScript) Clone() error {
 }
 
 // Next dispatches through IEnumScript's vtable slot 4.
-func (self *IEnumScript) Next(celt uint32, rgelt *SCRIPTINFO, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumScript) Next(celt uint32, rgelt *SCRIPTINFO, pceltFetched *uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumScript's vtable slot 5.
@@ -122,9 +127,10 @@ func (self *IEnumScript) Reset() error {
 }
 
 // Skip dispatches through IEnumScript's vtable slot 6.
-func (self *IEnumScript) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumScript) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumSpellingError: https://learn.microsoft.com/windows/win32/api/spellcheck/nn-spellcheck-ienumspellingerror

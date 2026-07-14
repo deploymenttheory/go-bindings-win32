@@ -491,9 +491,10 @@ func CoInitialize() error {
 // CoInitializeEx calls OLE32!CoInitializeEx.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-coinitializeex
 // Minimum OS: windows5.0.
-func CoInitializeEx(dwCoInit uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func CoInitializeEx(dwCoInit uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(procCoInitializeEx.Addr(), 0, uintptr(dwCoInit))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // CoInitializeSecurity calls OLE32!CoInitializeSecurity.

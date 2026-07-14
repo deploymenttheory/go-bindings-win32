@@ -26,15 +26,17 @@ type IEnumWIA_DEV_CAPS struct {
 var IID_IEnumWIA_DEV_CAPS = win32.GUID{Data1: 0x1fcc4287, Data2: 0xaca6, Data3: 0x11d2, Data4: [8]byte{0xa0, 0x93, 0x00, 0xc0, 0x4f, 0x72, 0xdc, 0x3c}}
 
 // Next dispatches through IEnumWIA_DEV_CAPS's vtable slot 3.
-func (self *IEnumWIA_DEV_CAPS) Next(celt uint32, rgelt *WIA_DEV_CAP, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumWIA_DEV_CAPS) Next(celt uint32, rgelt *WIA_DEV_CAP, pceltFetched *uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumWIA_DEV_CAPS's vtable slot 4.
-func (self *IEnumWIA_DEV_CAPS) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumWIA_DEV_CAPS) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumWIA_DEV_CAPS's vtable slot 5.
@@ -65,15 +67,17 @@ type IEnumWIA_DEV_INFO struct {
 var IID_IEnumWIA_DEV_INFO = win32.GUID{Data1: 0x5e38b83c, Data2: 0x8cf1, Data3: 0x11d1, Data4: [8]byte{0xbf, 0x92, 0x00, 0x60, 0x08, 0x1e, 0xd8, 0x11}}
 
 // Next dispatches through IEnumWIA_DEV_INFO's vtable slot 3.
-func (self *IEnumWIA_DEV_INFO) Next(celt uint32, rgelt **IWiaPropertyStorage, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumWIA_DEV_INFO) Next(celt uint32, rgelt **IWiaPropertyStorage, pceltFetched *uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumWIA_DEV_INFO's vtable slot 4.
-func (self *IEnumWIA_DEV_INFO) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumWIA_DEV_INFO) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumWIA_DEV_INFO's vtable slot 5.
@@ -104,15 +108,17 @@ type IEnumWIA_FORMAT_INFO struct {
 var IID_IEnumWIA_FORMAT_INFO = win32.GUID{Data1: 0x81befc5b, Data2: 0x656d, Data3: 0x44f1, Data4: [8]byte{0xb2, 0x4c, 0xd4, 0x1d, 0x51, 0xb4, 0xdc, 0x81}}
 
 // Next dispatches through IEnumWIA_FORMAT_INFO's vtable slot 3.
-func (self *IEnumWIA_FORMAT_INFO) Next(celt uint32, rgelt *WIA_FORMAT_INFO, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumWIA_FORMAT_INFO) Next(celt uint32, rgelt *WIA_FORMAT_INFO, pceltFetched *uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumWIA_FORMAT_INFO's vtable slot 4.
-func (self *IEnumWIA_FORMAT_INFO) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumWIA_FORMAT_INFO) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumWIA_FORMAT_INFO's vtable slot 5.
@@ -143,15 +149,17 @@ type IEnumWiaItem struct {
 var IID_IEnumWiaItem = win32.GUID{Data1: 0x5e8383fc, Data2: 0x3391, Data3: 0x11d2, Data4: [8]byte{0x9a, 0x33, 0x00, 0xc0, 0x4f, 0xa3, 0x61, 0x45}}
 
 // Next dispatches through IEnumWiaItem's vtable slot 3.
-func (self *IEnumWiaItem) Next(celt uint32, ppIWiaItem **IWiaItem, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumWiaItem) Next(celt uint32, ppIWiaItem **IWiaItem, pceltFetched *uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppIWiaItem)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumWiaItem's vtable slot 4.
-func (self *IEnumWiaItem) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumWiaItem) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumWiaItem's vtable slot 5.
@@ -182,15 +190,17 @@ type IEnumWiaItem2 struct {
 var IID_IEnumWiaItem2 = win32.GUID{Data1: 0x59970af4, Data2: 0xcd0d, Data3: 0x44d9, Data4: [8]byte{0xab, 0x24, 0x52, 0x29, 0x56, 0x30, 0xe5, 0x82}}
 
 // Next dispatches through IEnumWiaItem2's vtable slot 3.
-func (self *IEnumWiaItem2) Next(cElt uint32, ppIWiaItem2 **IWiaItem2, pcEltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumWiaItem2) Next(cElt uint32, ppIWiaItem2 **IWiaItem2, pcEltFetched *uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cElt), uintptr(unsafe.Pointer(ppIWiaItem2)), uintptr(unsafe.Pointer(pcEltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumWiaItem2's vtable slot 4.
-func (self *IEnumWiaItem2) Skip(cElt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumWiaItem2) Skip(cElt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cElt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumWiaItem2's vtable slot 5.

@@ -291,13 +291,14 @@ func (self *IEnumITfCompositionView) Clone(ppEnum **IEnumITfCompositionView) err
 }
 
 // Next dispatches through IEnumITfCompositionView's vtable slot 4.
-func (self *IEnumITfCompositionView) Next(rgCompositionView []*ITfCompositionView, pcFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumITfCompositionView) Next(rgCompositionView []*ITfCompositionView, pcFetched *uint32) (win32.HRESULT, error) {
 	var _rgCompositionView **ITfCompositionView
 	if len(rgCompositionView) > 0 {
 		_rgCompositionView = &rgCompositionView[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(rgCompositionView)), uintptr(unsafe.Pointer(_rgCompositionView)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumITfCompositionView's vtable slot 5.
@@ -307,9 +308,10 @@ func (self *IEnumITfCompositionView) Reset() error {
 }
 
 // Skip dispatches through IEnumITfCompositionView's vtable slot 6.
-func (self *IEnumITfCompositionView) Skip(ulCount uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumITfCompositionView) Skip(ulCount uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ulCount))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 8c5dac4f-083c-4b85-a4c9-71746048adca
@@ -327,13 +329,14 @@ func (self *IEnumSpeechCommands) Clone(ppEnum **IEnumSpeechCommands) error {
 }
 
 // Next dispatches through IEnumSpeechCommands's vtable slot 4.
-func (self *IEnumSpeechCommands) Next(pSpCmds []*uint16, pcFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumSpeechCommands) Next(pSpCmds []*uint16, pcFetched *uint32) (win32.HRESULT, error) {
 	var _pSpCmds **uint16
 	if len(pSpCmds) > 0 {
 		_pSpCmds = &pSpCmds[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(pSpCmds)), uintptr(unsafe.Pointer(_pSpCmds)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumSpeechCommands's vtable slot 5.
@@ -343,9 +346,10 @@ func (self *IEnumSpeechCommands) Reset() error {
 }
 
 // Skip dispatches through IEnumSpeechCommands's vtable slot 6.
-func (self *IEnumSpeechCommands) Skip(ulCount uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumSpeechCommands) Skip(ulCount uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ulCount))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumTfCandidates: https://learn.microsoft.com/windows/win32/api/ctffunc/nn-ctffunc-ienumtfcandidates
@@ -364,13 +368,14 @@ func (self *IEnumTfCandidates) Clone(ppEnum **IEnumTfCandidates) error {
 }
 
 // Next dispatches through IEnumTfCandidates's vtable slot 4.
-func (self *IEnumTfCandidates) Next(ppCand []*ITfCandidateString, pcFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumTfCandidates) Next(ppCand []*ITfCandidateString, pcFetched *uint32) (win32.HRESULT, error) {
 	var _ppCand **ITfCandidateString
 	if len(ppCand) > 0 {
 		_ppCand = &ppCand[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(ppCand)), uintptr(unsafe.Pointer(_ppCand)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumTfCandidates's vtable slot 5.
@@ -380,9 +385,10 @@ func (self *IEnumTfCandidates) Reset() error {
 }
 
 // Skip dispatches through IEnumTfCandidates's vtable slot 6.
-func (self *IEnumTfCandidates) Skip(ulCount uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumTfCandidates) Skip(ulCount uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ulCount))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumTfContextViews: https://learn.microsoft.com/windows/win32/api/msctf/nn-msctf-ienumtfcontextviews
@@ -401,13 +407,14 @@ func (self *IEnumTfContextViews) Clone(ppEnum **IEnumTfContextViews) error {
 }
 
 // Next dispatches through IEnumTfContextViews's vtable slot 4.
-func (self *IEnumTfContextViews) Next(rgViews []*ITfContextView, pcFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumTfContextViews) Next(rgViews []*ITfContextView, pcFetched *uint32) (win32.HRESULT, error) {
 	var _rgViews **ITfContextView
 	if len(rgViews) > 0 {
 		_rgViews = &rgViews[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(rgViews)), uintptr(unsafe.Pointer(_rgViews)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumTfContextViews's vtable slot 5.
@@ -417,9 +424,10 @@ func (self *IEnumTfContextViews) Reset() error {
 }
 
 // Skip dispatches through IEnumTfContextViews's vtable slot 6.
-func (self *IEnumTfContextViews) Skip(ulCount uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumTfContextViews) Skip(ulCount uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ulCount))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumTfContexts: https://learn.microsoft.com/windows/win32/api/msctf/nn-msctf-ienumtfcontexts
@@ -438,13 +446,14 @@ func (self *IEnumTfContexts) Clone(ppEnum **IEnumTfContexts) error {
 }
 
 // Next dispatches through IEnumTfContexts's vtable slot 4.
-func (self *IEnumTfContexts) Next(rgContext []*ITfContext, pcFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumTfContexts) Next(rgContext []*ITfContext, pcFetched *uint32) (win32.HRESULT, error) {
 	var _rgContext **ITfContext
 	if len(rgContext) > 0 {
 		_rgContext = &rgContext[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(rgContext)), uintptr(unsafe.Pointer(_rgContext)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumTfContexts's vtable slot 5.
@@ -454,9 +463,10 @@ func (self *IEnumTfContexts) Reset() error {
 }
 
 // Skip dispatches through IEnumTfContexts's vtable slot 6.
-func (self *IEnumTfContexts) Skip(ulCount uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumTfContexts) Skip(ulCount uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ulCount))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumTfDisplayAttributeInfo: https://learn.microsoft.com/windows/win32/api/msctf/nn-msctf-ienumtfdisplayattributeinfo
@@ -475,13 +485,14 @@ func (self *IEnumTfDisplayAttributeInfo) Clone(ppEnum **IEnumTfDisplayAttributeI
 }
 
 // Next dispatches through IEnumTfDisplayAttributeInfo's vtable slot 4.
-func (self *IEnumTfDisplayAttributeInfo) Next(rgInfo []*ITfDisplayAttributeInfo, pcFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumTfDisplayAttributeInfo) Next(rgInfo []*ITfDisplayAttributeInfo, pcFetched *uint32) (win32.HRESULT, error) {
 	var _rgInfo **ITfDisplayAttributeInfo
 	if len(rgInfo) > 0 {
 		_rgInfo = &rgInfo[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(rgInfo)), uintptr(unsafe.Pointer(_rgInfo)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumTfDisplayAttributeInfo's vtable slot 5.
@@ -491,9 +502,10 @@ func (self *IEnumTfDisplayAttributeInfo) Reset() error {
 }
 
 // Skip dispatches through IEnumTfDisplayAttributeInfo's vtable slot 6.
-func (self *IEnumTfDisplayAttributeInfo) Skip(ulCount uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumTfDisplayAttributeInfo) Skip(ulCount uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ulCount))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumTfDocumentMgrs: https://learn.microsoft.com/windows/win32/api/msctf/nn-msctf-ienumtfdocumentmgrs
@@ -512,13 +524,14 @@ func (self *IEnumTfDocumentMgrs) Clone(ppEnum **IEnumTfDocumentMgrs) error {
 }
 
 // Next dispatches through IEnumTfDocumentMgrs's vtable slot 4.
-func (self *IEnumTfDocumentMgrs) Next(rgDocumentMgr []*ITfDocumentMgr, pcFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumTfDocumentMgrs) Next(rgDocumentMgr []*ITfDocumentMgr, pcFetched *uint32) (win32.HRESULT, error) {
 	var _rgDocumentMgr **ITfDocumentMgr
 	if len(rgDocumentMgr) > 0 {
 		_rgDocumentMgr = &rgDocumentMgr[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(rgDocumentMgr)), uintptr(unsafe.Pointer(_rgDocumentMgr)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumTfDocumentMgrs's vtable slot 5.
@@ -528,9 +541,10 @@ func (self *IEnumTfDocumentMgrs) Reset() error {
 }
 
 // Skip dispatches through IEnumTfDocumentMgrs's vtable slot 6.
-func (self *IEnumTfDocumentMgrs) Skip(ulCount uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumTfDocumentMgrs) Skip(ulCount uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ulCount))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumTfFunctionProviders: https://learn.microsoft.com/windows/win32/api/msctf/nn-msctf-ienumtffunctionproviders
@@ -549,13 +563,14 @@ func (self *IEnumTfFunctionProviders) Clone(ppEnum **IEnumTfFunctionProviders) e
 }
 
 // Next dispatches through IEnumTfFunctionProviders's vtable slot 4.
-func (self *IEnumTfFunctionProviders) Next(ppCmdobj []*ITfFunctionProvider, pcFetch *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumTfFunctionProviders) Next(ppCmdobj []*ITfFunctionProvider, pcFetch *uint32) (win32.HRESULT, error) {
 	var _ppCmdobj **ITfFunctionProvider
 	if len(ppCmdobj) > 0 {
 		_ppCmdobj = &ppCmdobj[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(ppCmdobj)), uintptr(unsafe.Pointer(_ppCmdobj)), uintptr(unsafe.Pointer(pcFetch)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumTfFunctionProviders's vtable slot 5.
@@ -565,9 +580,10 @@ func (self *IEnumTfFunctionProviders) Reset() error {
 }
 
 // Skip dispatches through IEnumTfFunctionProviders's vtable slot 6.
-func (self *IEnumTfFunctionProviders) Skip(ulCount uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumTfFunctionProviders) Skip(ulCount uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ulCount))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumTfInputProcessorProfiles: https://learn.microsoft.com/windows/win32/api/msctf/nn-msctf-ienumtfinputprocessorprofiles
@@ -586,13 +602,14 @@ func (self *IEnumTfInputProcessorProfiles) Clone(ppEnum **IEnumTfInputProcessorP
 }
 
 // Next dispatches through IEnumTfInputProcessorProfiles's vtable slot 4.
-func (self *IEnumTfInputProcessorProfiles) Next(pProfile []TF_INPUTPROCESSORPROFILE, pcFetch *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumTfInputProcessorProfiles) Next(pProfile []TF_INPUTPROCESSORPROFILE, pcFetch *uint32) (win32.HRESULT, error) {
 	var _pProfile *TF_INPUTPROCESSORPROFILE
 	if len(pProfile) > 0 {
 		_pProfile = &pProfile[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(pProfile)), uintptr(unsafe.Pointer(_pProfile)), uintptr(unsafe.Pointer(pcFetch)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumTfInputProcessorProfiles's vtable slot 5.
@@ -602,9 +619,10 @@ func (self *IEnumTfInputProcessorProfiles) Reset() error {
 }
 
 // Skip dispatches through IEnumTfInputProcessorProfiles's vtable slot 6.
-func (self *IEnumTfInputProcessorProfiles) Skip(ulCount uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumTfInputProcessorProfiles) Skip(ulCount uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ulCount))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumTfLangBarItems: https://learn.microsoft.com/windows/win32/api/ctfutb/nn-ctfutb-ienumtflangbaritems
@@ -623,13 +641,14 @@ func (self *IEnumTfLangBarItems) Clone(ppEnum **IEnumTfLangBarItems) error {
 }
 
 // Next dispatches through IEnumTfLangBarItems's vtable slot 4.
-func (self *IEnumTfLangBarItems) Next(ppItem []*ITfLangBarItem, pcFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumTfLangBarItems) Next(ppItem []*ITfLangBarItem, pcFetched *uint32) (win32.HRESULT, error) {
 	var _ppItem **ITfLangBarItem
 	if len(ppItem) > 0 {
 		_ppItem = &ppItem[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(ppItem)), uintptr(unsafe.Pointer(_ppItem)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumTfLangBarItems's vtable slot 5.
@@ -639,9 +658,10 @@ func (self *IEnumTfLangBarItems) Reset() error {
 }
 
 // Skip dispatches through IEnumTfLangBarItems's vtable slot 6.
-func (self *IEnumTfLangBarItems) Skip(ulCount uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumTfLangBarItems) Skip(ulCount uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ulCount))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumTfLanguageProfiles: https://learn.microsoft.com/windows/win32/api/msctf/nn-msctf-ienumtflanguageprofiles
@@ -660,13 +680,14 @@ func (self *IEnumTfLanguageProfiles) Clone(ppEnum **IEnumTfLanguageProfiles) err
 }
 
 // Next dispatches through IEnumTfLanguageProfiles's vtable slot 4.
-func (self *IEnumTfLanguageProfiles) Next(pProfile []TF_LANGUAGEPROFILE, pcFetch *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumTfLanguageProfiles) Next(pProfile []TF_LANGUAGEPROFILE, pcFetch *uint32) (win32.HRESULT, error) {
 	var _pProfile *TF_LANGUAGEPROFILE
 	if len(pProfile) > 0 {
 		_pProfile = &pProfile[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(pProfile)), uintptr(unsafe.Pointer(_pProfile)), uintptr(unsafe.Pointer(pcFetch)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumTfLanguageProfiles's vtable slot 5.
@@ -676,9 +697,10 @@ func (self *IEnumTfLanguageProfiles) Reset() error {
 }
 
 // Skip dispatches through IEnumTfLanguageProfiles's vtable slot 6.
-func (self *IEnumTfLanguageProfiles) Skip(ulCount uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumTfLanguageProfiles) Skip(ulCount uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ulCount))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumTfLatticeElements: https://learn.microsoft.com/windows/win32/api/ctffunc/nn-ctffunc-ienumtflatticeelements
@@ -697,13 +719,14 @@ func (self *IEnumTfLatticeElements) Clone(ppEnum **IEnumTfLatticeElements) error
 }
 
 // Next dispatches through IEnumTfLatticeElements's vtable slot 4.
-func (self *IEnumTfLatticeElements) Next(rgsElements []TF_LMLATTELEMENT, pcFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumTfLatticeElements) Next(rgsElements []TF_LMLATTELEMENT, pcFetched *uint32) (win32.HRESULT, error) {
 	var _rgsElements *TF_LMLATTELEMENT
 	if len(rgsElements) > 0 {
 		_rgsElements = &rgsElements[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(rgsElements)), uintptr(unsafe.Pointer(_rgsElements)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumTfLatticeElements's vtable slot 5.
@@ -713,9 +736,10 @@ func (self *IEnumTfLatticeElements) Reset() error {
 }
 
 // Skip dispatches through IEnumTfLatticeElements's vtable slot 6.
-func (self *IEnumTfLatticeElements) Skip(ulCount uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumTfLatticeElements) Skip(ulCount uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ulCount))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumTfProperties: https://learn.microsoft.com/windows/win32/api/msctf/nn-msctf-ienumtfproperties
@@ -734,13 +758,14 @@ func (self *IEnumTfProperties) Clone(ppEnum **IEnumTfProperties) error {
 }
 
 // Next dispatches through IEnumTfProperties's vtable slot 4.
-func (self *IEnumTfProperties) Next(ppProp []*ITfProperty, pcFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumTfProperties) Next(ppProp []*ITfProperty, pcFetched *uint32) (win32.HRESULT, error) {
 	var _ppProp **ITfProperty
 	if len(ppProp) > 0 {
 		_ppProp = &ppProp[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(ppProp)), uintptr(unsafe.Pointer(_ppProp)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumTfProperties's vtable slot 5.
@@ -750,9 +775,10 @@ func (self *IEnumTfProperties) Reset() error {
 }
 
 // Skip dispatches through IEnumTfProperties's vtable slot 6.
-func (self *IEnumTfProperties) Skip(ulCount uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumTfProperties) Skip(ulCount uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ulCount))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumTfPropertyValue: https://learn.microsoft.com/windows/win32/api/msctf/nn-msctf-ienumtfpropertyvalue
@@ -771,13 +797,14 @@ func (self *IEnumTfPropertyValue) Clone(ppEnum **IEnumTfPropertyValue) error {
 }
 
 // Next dispatches through IEnumTfPropertyValue's vtable slot 4.
-func (self *IEnumTfPropertyValue) Next(rgValues []TF_PROPERTYVAL, pcFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumTfPropertyValue) Next(rgValues []TF_PROPERTYVAL, pcFetched *uint32) (win32.HRESULT, error) {
 	var _rgValues *TF_PROPERTYVAL
 	if len(rgValues) > 0 {
 		_rgValues = &rgValues[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(rgValues)), uintptr(unsafe.Pointer(_rgValues)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumTfPropertyValue's vtable slot 5.
@@ -787,9 +814,10 @@ func (self *IEnumTfPropertyValue) Reset() error {
 }
 
 // Skip dispatches through IEnumTfPropertyValue's vtable slot 6.
-func (self *IEnumTfPropertyValue) Skip(ulCount uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumTfPropertyValue) Skip(ulCount uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ulCount))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumTfRanges: https://learn.microsoft.com/windows/win32/api/msctf/nn-msctf-ienumtfranges
@@ -808,13 +836,14 @@ func (self *IEnumTfRanges) Clone(ppEnum **IEnumTfRanges) error {
 }
 
 // Next dispatches through IEnumTfRanges's vtable slot 4.
-func (self *IEnumTfRanges) Next(ppRange []*ITfRange, pcFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumTfRanges) Next(ppRange []*ITfRange, pcFetched *uint32) (win32.HRESULT, error) {
 	var _ppRange **ITfRange
 	if len(ppRange) > 0 {
 		_ppRange = &ppRange[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(ppRange)), uintptr(unsafe.Pointer(_ppRange)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumTfRanges's vtable slot 5.
@@ -824,9 +853,10 @@ func (self *IEnumTfRanges) Reset() error {
 }
 
 // Skip dispatches through IEnumTfRanges's vtable slot 6.
-func (self *IEnumTfRanges) Skip(ulCount uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumTfRanges) Skip(ulCount uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ulCount))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumTfUIElements: https://learn.microsoft.com/windows/win32/api/msctf/nn-msctf-ienumtfuielements
@@ -845,13 +875,14 @@ func (self *IEnumTfUIElements) Clone(ppEnum **IEnumTfUIElements) error {
 }
 
 // Next dispatches through IEnumTfUIElements's vtable slot 4.
-func (self *IEnumTfUIElements) Next(ppElement []*ITfUIElement, pcFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumTfUIElements) Next(ppElement []*ITfUIElement, pcFetched *uint32) (win32.HRESULT, error) {
 	var _ppElement **ITfUIElement
 	if len(ppElement) > 0 {
 		_ppElement = &ppElement[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(ppElement)), uintptr(unsafe.Pointer(_ppElement)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumTfUIElements's vtable slot 5.
@@ -861,9 +892,10 @@ func (self *IEnumTfUIElements) Reset() error {
 }
 
 // Skip dispatches through IEnumTfUIElements's vtable slot 6.
-func (self *IEnumTfUIElements) Skip(ulCount uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumTfUIElements) Skip(ulCount uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ulCount))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // IID: e1aa6466-9db4-40ba-be03-77c38e8e60b2

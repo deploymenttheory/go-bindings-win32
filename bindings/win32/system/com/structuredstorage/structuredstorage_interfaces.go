@@ -51,19 +51,21 @@ type IEnumSTATPROPSETSTG struct {
 var IID_IEnumSTATPROPSETSTG = win32.GUID{Data1: 0x0000013b, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // Next dispatches through IEnumSTATPROPSETSTG's vtable slot 3.
-func (self *IEnumSTATPROPSETSTG) Next(rgelt []STATPROPSETSTG, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumSTATPROPSETSTG) Next(rgelt []STATPROPSETSTG, pceltFetched *uint32) (win32.HRESULT, error) {
 	var _rgelt *STATPROPSETSTG
 	if len(rgelt) > 0 {
 		_rgelt = &rgelt[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumSTATPROPSETSTG's vtable slot 4.
-func (self *IEnumSTATPROPSETSTG) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumSTATPROPSETSTG) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumSTATPROPSETSTG's vtable slot 5.
@@ -88,19 +90,21 @@ type IEnumSTATPROPSTG struct {
 var IID_IEnumSTATPROPSTG = win32.GUID{Data1: 0x00000139, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // Next dispatches through IEnumSTATPROPSTG's vtable slot 3.
-func (self *IEnumSTATPROPSTG) Next(rgelt []STATPROPSTG, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumSTATPROPSTG) Next(rgelt []STATPROPSTG, pceltFetched *uint32) (win32.HRESULT, error) {
 	var _rgelt *STATPROPSTG
 	if len(rgelt) > 0 {
 		_rgelt = &rgelt[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumSTATPROPSTG's vtable slot 4.
-func (self *IEnumSTATPROPSTG) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumSTATPROPSTG) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumSTATPROPSTG's vtable slot 5.
@@ -125,19 +129,21 @@ type IEnumSTATSTG struct {
 var IID_IEnumSTATSTG = win32.GUID{Data1: 0x0000000d, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // Next dispatches through IEnumSTATSTG's vtable slot 3.
-func (self *IEnumSTATSTG) Next(rgelt []systemcom.STATSTG, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumSTATSTG) Next(rgelt []systemcom.STATSTG, pceltFetched *uint32) (win32.HRESULT, error) {
 	var _rgelt *systemcom.STATSTG
 	if len(rgelt) > 0 {
 		_rgelt = &rgelt[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumSTATSTG's vtable slot 4.
-func (self *IEnumSTATSTG) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumSTATSTG) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumSTATSTG's vtable slot 5.

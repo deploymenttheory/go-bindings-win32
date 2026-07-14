@@ -41,19 +41,21 @@ type IEnumPortableDeviceConnectors struct {
 var IID_IEnumPortableDeviceConnectors = win32.GUID{Data1: 0xbfdef549, Data2: 0x9247, Data3: 0x454f, Data4: [8]byte{0xbd, 0x82, 0x06, 0xfe, 0x80, 0x85, 0x3f, 0xaa}}
 
 // Next dispatches through IEnumPortableDeviceConnectors's vtable slot 3.
-func (self *IEnumPortableDeviceConnectors) Next(pConnectors []*IPortableDeviceConnector, pcFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumPortableDeviceConnectors) Next(pConnectors []*IPortableDeviceConnector, pcFetched *uint32) (win32.HRESULT, error) {
 	var _pConnectors **IPortableDeviceConnector
 	if len(pConnectors) > 0 {
 		_pConnectors = &pConnectors[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pConnectors)), uintptr(unsafe.Pointer(_pConnectors)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumPortableDeviceConnectors's vtable slot 4.
-func (self *IEnumPortableDeviceConnectors) Skip(cConnectors uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumPortableDeviceConnectors) Skip(cConnectors uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cConnectors))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumPortableDeviceConnectors's vtable slot 5.
@@ -78,19 +80,21 @@ type IEnumPortableDeviceObjectIDs struct {
 var IID_IEnumPortableDeviceObjectIDs = win32.GUID{Data1: 0x10ece955, Data2: 0xcf41, Data3: 0x4728, Data4: [8]byte{0xbf, 0xa0, 0x41, 0xee, 0xdf, 0x1b, 0xbf, 0x19}}
 
 // Next dispatches through IEnumPortableDeviceObjectIDs's vtable slot 3.
-func (self *IEnumPortableDeviceObjectIDs) Next(pObjIDs []foundation.PWSTR, pcFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumPortableDeviceObjectIDs) Next(pObjIDs []foundation.PWSTR, pcFetched *uint32) (win32.HRESULT, error) {
 	var _pObjIDs *foundation.PWSTR
 	if len(pObjIDs) > 0 {
 		_pObjIDs = &pObjIDs[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pObjIDs)), uintptr(unsafe.Pointer(_pObjIDs)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumPortableDeviceObjectIDs's vtable slot 4.
-func (self *IEnumPortableDeviceObjectIDs) Skip(cObjects uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumPortableDeviceObjectIDs) Skip(cObjects uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cObjects))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumPortableDeviceObjectIDs's vtable slot 5.

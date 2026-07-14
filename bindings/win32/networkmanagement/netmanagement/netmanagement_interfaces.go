@@ -24,19 +24,21 @@ type IEnumNetCfgBindingInterface struct {
 var IID_IEnumNetCfgBindingInterface = win32.GUID{Data1: 0xc0e8ae90, Data2: 0x306e, Data3: 0x11d1, Data4: [8]byte{0xaa, 0xcf, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // Next dispatches through IEnumNetCfgBindingInterface's vtable slot 3.
-func (self *IEnumNetCfgBindingInterface) Next(rgelt []*INetCfgBindingInterface, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumNetCfgBindingInterface) Next(rgelt []*INetCfgBindingInterface, pceltFetched *uint32) (win32.HRESULT, error) {
 	var _rgelt **INetCfgBindingInterface
 	if len(rgelt) > 0 {
 		_rgelt = &rgelt[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumNetCfgBindingInterface's vtable slot 4.
-func (self *IEnumNetCfgBindingInterface) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumNetCfgBindingInterface) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumNetCfgBindingInterface's vtable slot 5.
@@ -60,19 +62,21 @@ type IEnumNetCfgBindingPath struct {
 var IID_IEnumNetCfgBindingPath = win32.GUID{Data1: 0xc0e8ae91, Data2: 0x306e, Data3: 0x11d1, Data4: [8]byte{0xaa, 0xcf, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // Next dispatches through IEnumNetCfgBindingPath's vtable slot 3.
-func (self *IEnumNetCfgBindingPath) Next(rgelt []*INetCfgBindingPath, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumNetCfgBindingPath) Next(rgelt []*INetCfgBindingPath, pceltFetched *uint32) (win32.HRESULT, error) {
 	var _rgelt **INetCfgBindingPath
 	if len(rgelt) > 0 {
 		_rgelt = &rgelt[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumNetCfgBindingPath's vtable slot 4.
-func (self *IEnumNetCfgBindingPath) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumNetCfgBindingPath) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumNetCfgBindingPath's vtable slot 5.
@@ -96,19 +100,21 @@ type IEnumNetCfgComponent struct {
 var IID_IEnumNetCfgComponent = win32.GUID{Data1: 0xc0e8ae92, Data2: 0x306e, Data3: 0x11d1, Data4: [8]byte{0xaa, 0xcf, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // Next dispatches through IEnumNetCfgComponent's vtable slot 3.
-func (self *IEnumNetCfgComponent) Next(rgelt []*INetCfgComponent, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumNetCfgComponent) Next(rgelt []*INetCfgComponent, pceltFetched *uint32) (win32.HRESULT, error) {
 	var _rgelt **INetCfgComponent
 	if len(rgelt) > 0 {
 		_rgelt = &rgelt[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumNetCfgComponent's vtable slot 4.
-func (self *IEnumNetCfgComponent) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumNetCfgComponent) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumNetCfgComponent's vtable slot 5.

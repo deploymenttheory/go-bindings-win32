@@ -1204,9 +1204,10 @@ func (self *IEnumInputContext) Clone(ppEnum **IEnumInputContext) error {
 }
 
 // Next dispatches through IEnumInputContext's vtable slot 4.
-func (self *IEnumInputContext) Next(ulCount uint32, rgInputContext *HIMC, pcFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumInputContext) Next(ulCount uint32, rgInputContext *HIMC, pcFetched *uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulCount), uintptr(unsafe.Pointer(rgInputContext)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumInputContext's vtable slot 5.
@@ -1216,9 +1217,10 @@ func (self *IEnumInputContext) Reset() error {
 }
 
 // Skip dispatches through IEnumInputContext's vtable slot 6.
-func (self *IEnumInputContext) Skip(ulCount uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumInputContext) Skip(ulCount uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ulCount))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 08c03412-f96b-11d0-a475-00aa006bcc59
@@ -1236,9 +1238,10 @@ func (self *IEnumRegisterWordA) Clone(ppEnum **IEnumRegisterWordA) error {
 }
 
 // Next dispatches through IEnumRegisterWordA's vtable slot 4.
-func (self *IEnumRegisterWordA) Next(ulCount uint32, rgRegisterWord *REGISTERWORDA, pcFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumRegisterWordA) Next(ulCount uint32, rgRegisterWord *REGISTERWORDA, pcFetched *uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulCount), uintptr(unsafe.Pointer(rgRegisterWord)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumRegisterWordA's vtable slot 5.
@@ -1248,9 +1251,10 @@ func (self *IEnumRegisterWordA) Reset() error {
 }
 
 // Skip dispatches through IEnumRegisterWordA's vtable slot 6.
-func (self *IEnumRegisterWordA) Skip(ulCount uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumRegisterWordA) Skip(ulCount uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ulCount))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 4955dd31-b159-11d0-8fcf-00aa006bcc59
@@ -1268,9 +1272,10 @@ func (self *IEnumRegisterWordW) Clone(ppEnum **IEnumRegisterWordW) error {
 }
 
 // Next dispatches through IEnumRegisterWordW's vtable slot 4.
-func (self *IEnumRegisterWordW) Next(ulCount uint32, rgRegisterWord *REGISTERWORDW, pcFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumRegisterWordW) Next(ulCount uint32, rgRegisterWord *REGISTERWORDW, pcFetched *uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulCount), uintptr(unsafe.Pointer(rgRegisterWord)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumRegisterWordW's vtable slot 5.
@@ -1280,9 +1285,10 @@ func (self *IEnumRegisterWordW) Reset() error {
 }
 
 // Skip dispatches through IEnumRegisterWordW's vtable slot 6.
-func (self *IEnumRegisterWordW) Skip(ulCount uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumRegisterWordW) Skip(ulCount uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ulCount))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 type IFEClassFactory struct {

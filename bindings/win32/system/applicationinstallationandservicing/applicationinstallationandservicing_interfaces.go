@@ -157,15 +157,17 @@ type IEnumMsmDependency struct {
 var IID_IEnumMsmDependency = win32.GUID{Data1: 0x0adda82c, Data2: 0x2c26, Data3: 0x11d2, Data4: [8]byte{0xad, 0x65, 0x00, 0xa0, 0xc9, 0xaf, 0x11, 0xa6}}
 
 // Next dispatches through IEnumMsmDependency's vtable slot 3.
-func (self *IEnumMsmDependency) Next(cFetch uint32, rgmsmDependencies **IMsmDependency, pcFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumMsmDependency) Next(cFetch uint32, rgmsmDependencies **IMsmDependency, pcFetched *uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cFetch), uintptr(unsafe.Pointer(rgmsmDependencies)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumMsmDependency's vtable slot 4.
-func (self *IEnumMsmDependency) Skip(cSkip uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumMsmDependency) Skip(cSkip uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cSkip))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumMsmDependency's vtable slot 5.
@@ -189,15 +191,17 @@ type IEnumMsmError struct {
 var IID_IEnumMsmError = win32.GUID{Data1: 0x0adda829, Data2: 0x2c26, Data3: 0x11d2, Data4: [8]byte{0xad, 0x65, 0x00, 0xa0, 0xc9, 0xaf, 0x11, 0xa6}}
 
 // Next dispatches through IEnumMsmError's vtable slot 3.
-func (self *IEnumMsmError) Next(cFetch uint32, rgmsmErrors **IMsmError, pcFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumMsmError) Next(cFetch uint32, rgmsmErrors **IMsmError, pcFetched *uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cFetch), uintptr(unsafe.Pointer(rgmsmErrors)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumMsmError's vtable slot 4.
-func (self *IEnumMsmError) Skip(cSkip uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumMsmError) Skip(cSkip uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cSkip))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumMsmError's vtable slot 5.
@@ -221,15 +225,17 @@ type IEnumMsmString struct {
 var IID_IEnumMsmString = win32.GUID{Data1: 0x0adda826, Data2: 0x2c26, Data3: 0x11d2, Data4: [8]byte{0xad, 0x65, 0x00, 0xa0, 0xc9, 0xaf, 0x11, 0xa6}}
 
 // Next dispatches through IEnumMsmString's vtable slot 3.
-func (self *IEnumMsmString) Next(cFetch uint32, rgbstrStrings *foundation.BSTR, pcFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumMsmString) Next(cFetch uint32, rgbstrStrings *foundation.BSTR, pcFetched *uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cFetch), uintptr(unsafe.Pointer(rgbstrStrings)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumMsmString's vtable slot 4.
-func (self *IEnumMsmString) Skip(cSkip uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumMsmString) Skip(cSkip uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cSkip))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumMsmString's vtable slot 5.

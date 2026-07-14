@@ -38,13 +38,14 @@ func (self *IEnumEventObject) Clone(ppInterface **IEnumEventObject) error {
 }
 
 // Next dispatches through IEnumEventObject's vtable slot 4.
-func (self *IEnumEventObject) Next(ppInterface []*systemcom.IUnknown, cRetElem *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumEventObject) Next(ppInterface []*systemcom.IUnknown, cRetElem *uint32) (win32.HRESULT, error) {
 	var _ppInterface **systemcom.IUnknown
 	if len(ppInterface) > 0 {
 		_ppInterface = &ppInterface[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(ppInterface)), uintptr(unsafe.Pointer(_ppInterface)), uintptr(unsafe.Pointer(cRetElem)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumEventObject's vtable slot 5.
@@ -54,9 +55,10 @@ func (self *IEnumEventObject) Reset() error {
 }
 
 // Skip dispatches through IEnumEventObject's vtable slot 6.
-func (self *IEnumEventObject) Skip(cSkipElem uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumEventObject) Skip(cSkipElem uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(cSkipElem))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // IEventClass: https://learn.microsoft.com/windows/win32/api/eventsys/nn-eventsys-ieventclass

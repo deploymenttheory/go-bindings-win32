@@ -2714,15 +2714,17 @@ type IEnumDebugApplicationNodes struct {
 var IID_IEnumDebugApplicationNodes = win32.GUID{Data1: 0x51973c3a, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // Next dispatches through IEnumDebugApplicationNodes's vtable slot 3.
-func (self *IEnumDebugApplicationNodes) Next(celt uint32, pprddp **IDebugApplicationNode, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumDebugApplicationNodes) Next(celt uint32, pprddp **IDebugApplicationNode, pceltFetched *uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(pprddp)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumDebugApplicationNodes's vtable slot 4.
-func (self *IEnumDebugApplicationNodes) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumDebugApplicationNodes) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumDebugApplicationNodes's vtable slot 5.
@@ -2746,15 +2748,17 @@ type IEnumDebugCodeContexts struct {
 var IID_IEnumDebugCodeContexts = win32.GUID{Data1: 0x51973c1d, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // Next dispatches through IEnumDebugCodeContexts's vtable slot 3.
-func (self *IEnumDebugCodeContexts) Next(celt uint32, pscc **IDebugCodeContext, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumDebugCodeContexts) Next(celt uint32, pscc **IDebugCodeContext, pceltFetched *uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(pscc)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumDebugCodeContexts's vtable slot 4.
-func (self *IEnumDebugCodeContexts) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumDebugCodeContexts) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumDebugCodeContexts's vtable slot 5.
@@ -2778,15 +2782,17 @@ type IEnumDebugExpressionContexts struct {
 var IID_IEnumDebugExpressionContexts = win32.GUID{Data1: 0x51973c40, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // Next dispatches through IEnumDebugExpressionContexts's vtable slot 3.
-func (self *IEnumDebugExpressionContexts) Next(celt uint32, ppdec **IDebugExpressionContext, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumDebugExpressionContexts) Next(celt uint32, ppdec **IDebugExpressionContext, pceltFetched *uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppdec)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumDebugExpressionContexts's vtable slot 4.
-func (self *IEnumDebugExpressionContexts) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumDebugExpressionContexts) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumDebugExpressionContexts's vtable slot 5.
@@ -2810,15 +2816,17 @@ type IEnumDebugStackFrames struct {
 var IID_IEnumDebugStackFrames = win32.GUID{Data1: 0x51973c1e, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // Next dispatches through IEnumDebugStackFrames's vtable slot 3.
-func (self *IEnumDebugStackFrames) Next(celt uint32, prgdsfd *DebugStackFrameDescriptor, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumDebugStackFrames) Next(celt uint32, prgdsfd *DebugStackFrameDescriptor, pceltFetched *uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(prgdsfd)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumDebugStackFrames's vtable slot 4.
-func (self *IEnumDebugStackFrames) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumDebugStackFrames) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumDebugStackFrames's vtable slot 5.
@@ -2856,13 +2864,14 @@ type IEnumJsStackFrames struct {
 var IID_IEnumJsStackFrames = win32.GUID{Data1: 0x5e7da34b, Data2: 0xfb51, Data3: 0x4791, Data4: [8]byte{0xab, 0xe7, 0xcb, 0x5b, 0xdf, 0x41, 0x97, 0x55}}
 
 // Next dispatches through IEnumJsStackFrames's vtable slot 3.
-func (self *IEnumJsStackFrames) Next(pFrames []JS_NATIVE_FRAME, pcFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumJsStackFrames) Next(pFrames []JS_NATIVE_FRAME, pcFetched *uint32) (win32.HRESULT, error) {
 	var _pFrames *JS_NATIVE_FRAME
 	if len(pFrames) > 0 {
 		_pFrames = &pFrames[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pFrames)), uintptr(unsafe.Pointer(_pFrames)), uintptr(unsafe.Pointer(pcFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumJsStackFrames's vtable slot 4.
@@ -2880,15 +2889,17 @@ type IEnumRemoteDebugApplicationThreads struct {
 var IID_IEnumRemoteDebugApplicationThreads = win32.GUID{Data1: 0x51973c3c, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // Next dispatches through IEnumRemoteDebugApplicationThreads's vtable slot 3.
-func (self *IEnumRemoteDebugApplicationThreads) Next(celt uint32, pprdat **IRemoteDebugApplicationThread, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumRemoteDebugApplicationThreads) Next(celt uint32, pprdat **IRemoteDebugApplicationThread, pceltFetched *uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(pprdat)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumRemoteDebugApplicationThreads's vtable slot 4.
-func (self *IEnumRemoteDebugApplicationThreads) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumRemoteDebugApplicationThreads) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumRemoteDebugApplicationThreads's vtable slot 5.
@@ -2912,15 +2923,17 @@ type IEnumRemoteDebugApplications struct {
 var IID_IEnumRemoteDebugApplications = win32.GUID{Data1: 0x51973c3b, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // Next dispatches through IEnumRemoteDebugApplications's vtable slot 3.
-func (self *IEnumRemoteDebugApplications) Next(celt uint32, ppda **IRemoteDebugApplication, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumRemoteDebugApplications) Next(celt uint32, ppda **IRemoteDebugApplication, pceltFetched *uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppda)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumRemoteDebugApplications's vtable slot 4.
-func (self *IEnumRemoteDebugApplications) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumRemoteDebugApplications) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumRemoteDebugApplications's vtable slot 5.

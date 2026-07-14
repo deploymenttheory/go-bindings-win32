@@ -1301,19 +1301,21 @@ type IEnumBackgroundCopyFiles struct {
 var IID_IEnumBackgroundCopyFiles = win32.GUID{Data1: 0xca51e165, Data2: 0xc365, Data3: 0x424c, Data4: [8]byte{0x8d, 0x41, 0x24, 0xaa, 0xa4, 0xff, 0x3c, 0x40}}
 
 // Next dispatches through IEnumBackgroundCopyFiles's vtable slot 3.
-func (self *IEnumBackgroundCopyFiles) Next(rgelt []*IBackgroundCopyFile, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumBackgroundCopyFiles) Next(rgelt []*IBackgroundCopyFile, pceltFetched *uint32) (win32.HRESULT, error) {
 	var _rgelt **IBackgroundCopyFile
 	if len(rgelt) > 0 {
 		_rgelt = &rgelt[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumBackgroundCopyFiles's vtable slot 4.
-func (self *IEnumBackgroundCopyFiles) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumBackgroundCopyFiles) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumBackgroundCopyFiles's vtable slot 5.
@@ -1344,19 +1346,21 @@ type IEnumBackgroundCopyGroups struct {
 var IID_IEnumBackgroundCopyGroups = win32.GUID{Data1: 0xd993e603, Data2: 0x4aa4, Data3: 0x47c5, Data4: [8]byte{0x86, 0x65, 0xc2, 0x0d, 0x39, 0xc2, 0xba, 0x4f}}
 
 // Next dispatches through IEnumBackgroundCopyGroups's vtable slot 3.
-func (self *IEnumBackgroundCopyGroups) Next(rgelt []win32.GUID, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumBackgroundCopyGroups) Next(rgelt []win32.GUID, pceltFetched *uint32) (win32.HRESULT, error) {
 	var _rgelt *win32.GUID
 	if len(rgelt) > 0 {
 		_rgelt = &rgelt[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumBackgroundCopyGroups's vtable slot 4.
-func (self *IEnumBackgroundCopyGroups) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumBackgroundCopyGroups) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumBackgroundCopyGroups's vtable slot 5.
@@ -1387,19 +1391,21 @@ type IEnumBackgroundCopyJobs struct {
 var IID_IEnumBackgroundCopyJobs = win32.GUID{Data1: 0x1af4f612, Data2: 0x3b71, Data3: 0x466f, Data4: [8]byte{0x8f, 0x58, 0x7b, 0x6f, 0x73, 0xac, 0x57, 0xad}}
 
 // Next dispatches through IEnumBackgroundCopyJobs's vtable slot 3.
-func (self *IEnumBackgroundCopyJobs) Next(rgelt []*IBackgroundCopyJob, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumBackgroundCopyJobs) Next(rgelt []*IBackgroundCopyJob, pceltFetched *uint32) (win32.HRESULT, error) {
 	var _rgelt **IBackgroundCopyJob
 	if len(rgelt) > 0 {
 		_rgelt = &rgelt[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumBackgroundCopyJobs's vtable slot 4.
-func (self *IEnumBackgroundCopyJobs) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumBackgroundCopyJobs) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumBackgroundCopyJobs's vtable slot 5.
@@ -1430,19 +1436,21 @@ type IEnumBackgroundCopyJobs1 struct {
 var IID_IEnumBackgroundCopyJobs1 = win32.GUID{Data1: 0x8baeba9d, Data2: 0x8f1c, Data3: 0x42c4, Data4: [8]byte{0xb8, 0x2c, 0x09, 0xae, 0x79, 0x98, 0x0d, 0x25}}
 
 // Next dispatches through IEnumBackgroundCopyJobs1's vtable slot 3.
-func (self *IEnumBackgroundCopyJobs1) Next(rgelt []win32.GUID, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumBackgroundCopyJobs1) Next(rgelt []win32.GUID, pceltFetched *uint32) (win32.HRESULT, error) {
 	var _rgelt *win32.GUID
 	if len(rgelt) > 0 {
 		_rgelt = &rgelt[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumBackgroundCopyJobs1's vtable slot 4.
-func (self *IEnumBackgroundCopyJobs1) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumBackgroundCopyJobs1) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumBackgroundCopyJobs1's vtable slot 5.
@@ -1473,19 +1481,21 @@ type IEnumBitsPeerCacheRecords struct {
 var IID_IEnumBitsPeerCacheRecords = win32.GUID{Data1: 0x659cdea4, Data2: 0x489e, Data3: 0x11d9, Data4: [8]byte{0xa9, 0xcd, 0x00, 0x0d, 0x56, 0x96, 0x52, 0x51}}
 
 // Next dispatches through IEnumBitsPeerCacheRecords's vtable slot 3.
-func (self *IEnumBitsPeerCacheRecords) Next(rgelt []*IBitsPeerCacheRecord, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumBitsPeerCacheRecords) Next(rgelt []*IBitsPeerCacheRecord, pceltFetched *uint32) (win32.HRESULT, error) {
 	var _rgelt **IBitsPeerCacheRecord
 	if len(rgelt) > 0 {
 		_rgelt = &rgelt[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumBitsPeerCacheRecords's vtable slot 4.
-func (self *IEnumBitsPeerCacheRecords) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumBitsPeerCacheRecords) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumBitsPeerCacheRecords's vtable slot 5.
@@ -1516,19 +1526,21 @@ type IEnumBitsPeers struct {
 var IID_IEnumBitsPeers = win32.GUID{Data1: 0x659cdea5, Data2: 0x489e, Data3: 0x11d9, Data4: [8]byte{0xa9, 0xcd, 0x00, 0x0d, 0x56, 0x96, 0x52, 0x51}}
 
 // Next dispatches through IEnumBitsPeers's vtable slot 3.
-func (self *IEnumBitsPeers) Next(rgelt []*IBitsPeer, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumBitsPeers) Next(rgelt []*IBitsPeer, pceltFetched *uint32) (win32.HRESULT, error) {
 	var _rgelt **IBitsPeer
 	if len(rgelt) > 0 {
 		_rgelt = &rgelt[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumBitsPeers's vtable slot 4.
-func (self *IEnumBitsPeers) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumBitsPeers) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumBitsPeers's vtable slot 5.

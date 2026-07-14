@@ -3974,9 +3974,10 @@ type IEnumCERTVIEWATTRIBUTE struct {
 var IID_IEnumCERTVIEWATTRIBUTE = win32.GUID{Data1: 0xe77db656, Data2: 0x7653, Data3: 0x11d1, Data4: [8]byte{0x9b, 0xde, 0x00, 0xc0, 0x4f, 0xb6, 0x83, 0xfa}}
 
 // Next dispatches through IEnumCERTVIEWATTRIBUTE's vtable slot 7.
-func (self *IEnumCERTVIEWATTRIBUTE) Next(pIndex *int32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumCERTVIEWATTRIBUTE) Next(pIndex *int32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIndex)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // GetName dispatches through IEnumCERTVIEWATTRIBUTE's vtable slot 8.
@@ -3992,9 +3993,10 @@ func (self *IEnumCERTVIEWATTRIBUTE) GetValue(pstrOut *foundation.BSTR) error {
 }
 
 // Skip dispatches through IEnumCERTVIEWATTRIBUTE's vtable slot 10.
-func (self *IEnumCERTVIEWATTRIBUTE) Skip(celt int32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumCERTVIEWATTRIBUTE) Skip(celt int32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumCERTVIEWATTRIBUTE's vtable slot 11.
@@ -4019,9 +4021,10 @@ type IEnumCERTVIEWCOLUMN struct {
 var IID_IEnumCERTVIEWCOLUMN = win32.GUID{Data1: 0x9c735be2, Data2: 0x57a5, Data3: 0x11d1, Data4: [8]byte{0x9b, 0xdb, 0x00, 0xc0, 0x4f, 0xb6, 0x83, 0xfa}}
 
 // Next dispatches through IEnumCERTVIEWCOLUMN's vtable slot 7.
-func (self *IEnumCERTVIEWCOLUMN) Next(pIndex *int32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumCERTVIEWCOLUMN) Next(pIndex *int32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIndex)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // GetName dispatches through IEnumCERTVIEWCOLUMN's vtable slot 8.
@@ -4061,9 +4064,10 @@ func (self *IEnumCERTVIEWCOLUMN) GetValue(Flags ENUM_CERT_COLUMN_VALUE_FLAGS, pv
 }
 
 // Skip dispatches through IEnumCERTVIEWCOLUMN's vtable slot 14.
-func (self *IEnumCERTVIEWCOLUMN) Skip(celt int32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumCERTVIEWCOLUMN) Skip(celt int32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumCERTVIEWCOLUMN's vtable slot 15.
@@ -4088,9 +4092,10 @@ type IEnumCERTVIEWEXTENSION struct {
 var IID_IEnumCERTVIEWEXTENSION = win32.GUID{Data1: 0xe7dd1466, Data2: 0x7653, Data3: 0x11d1, Data4: [8]byte{0x9b, 0xde, 0x00, 0xc0, 0x4f, 0xb6, 0x83, 0xfa}}
 
 // Next dispatches through IEnumCERTVIEWEXTENSION's vtable slot 7.
-func (self *IEnumCERTVIEWEXTENSION) Next(pIndex *int32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumCERTVIEWEXTENSION) Next(pIndex *int32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIndex)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // GetName dispatches through IEnumCERTVIEWEXTENSION's vtable slot 8.
@@ -4112,9 +4117,10 @@ func (self *IEnumCERTVIEWEXTENSION) GetValue(Type CERT_PROPERTY_TYPE, Flags ENUM
 }
 
 // Skip dispatches through IEnumCERTVIEWEXTENSION's vtable slot 11.
-func (self *IEnumCERTVIEWEXTENSION) Skip(celt int32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumCERTVIEWEXTENSION) Skip(celt int32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumCERTVIEWEXTENSION's vtable slot 12.
@@ -4139,9 +4145,10 @@ type IEnumCERTVIEWROW struct {
 var IID_IEnumCERTVIEWROW = win32.GUID{Data1: 0xd1157f4c, Data2: 0x5af2, Data3: 0x11d1, Data4: [8]byte{0x9b, 0xdc, 0x00, 0xc0, 0x4f, 0xb6, 0x83, 0xfa}}
 
 // Next dispatches through IEnumCERTVIEWROW's vtable slot 7.
-func (self *IEnumCERTVIEWROW) Next(pIndex *int32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumCERTVIEWROW) Next(pIndex *int32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIndex)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // EnumCertViewColumn dispatches through IEnumCERTVIEWROW's vtable slot 8.
@@ -4163,9 +4170,10 @@ func (self *IEnumCERTVIEWROW) EnumCertViewExtension(Flags int32, ppenum **IEnumC
 }
 
 // Skip dispatches through IEnumCERTVIEWROW's vtable slot 11.
-func (self *IEnumCERTVIEWROW) Skip(celt int32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumCERTVIEWROW) Skip(celt int32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumCERTVIEWROW's vtable slot 12.

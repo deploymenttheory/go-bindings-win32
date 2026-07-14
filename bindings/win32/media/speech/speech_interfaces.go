@@ -26,15 +26,17 @@ type IEnumSpObjectTokens struct {
 var IID_IEnumSpObjectTokens = win32.GUID{Data1: 0x06b64f9e, Data2: 0x7fda, Data3: 0x11d2, Data4: [8]byte{0xb4, 0xf2, 0x00, 0xc0, 0x4f, 0x79, 0x73, 0x96}}
 
 // Next dispatches through IEnumSpObjectTokens's vtable slot 3.
-func (self *IEnumSpObjectTokens) Next(celt uint32, pelt **ISpObjectToken, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumSpObjectTokens) Next(celt uint32, pelt **ISpObjectToken, pceltFetched *uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(pelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumSpObjectTokens's vtable slot 4.
-func (self *IEnumSpObjectTokens) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumSpObjectTokens) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumSpObjectTokens's vtable slot 5.

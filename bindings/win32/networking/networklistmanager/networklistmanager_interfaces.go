@@ -31,19 +31,21 @@ func (self *IEnumNetworkConnections) Get__NewEnum() (*systemole.IEnumVARIANT, er
 }
 
 // Next dispatches through IEnumNetworkConnections's vtable slot 8.
-func (self *IEnumNetworkConnections) Next(rgelt []*INetworkConnection, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumNetworkConnections) Next(rgelt []*INetworkConnection, pceltFetched *uint32) (win32.HRESULT, error) {
 	var _rgelt **INetworkConnection
 	if len(rgelt) > 0 {
 		_rgelt = &rgelt[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumNetworkConnections's vtable slot 9.
-func (self *IEnumNetworkConnections) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumNetworkConnections) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumNetworkConnections's vtable slot 10.
@@ -76,19 +78,21 @@ func (self *IEnumNetworks) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
 }
 
 // Next dispatches through IEnumNetworks's vtable slot 8.
-func (self *IEnumNetworks) Next(rgelt []*INetwork, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumNetworks) Next(rgelt []*INetwork, pceltFetched *uint32) (win32.HRESULT, error) {
 	var _rgelt **INetwork
 	if len(rgelt) > 0 {
 		_rgelt = &rgelt[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumNetworks's vtable slot 9.
-func (self *IEnumNetworks) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumNetworks) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumNetworks's vtable slot 10.

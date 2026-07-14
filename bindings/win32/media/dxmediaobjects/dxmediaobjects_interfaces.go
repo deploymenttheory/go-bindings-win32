@@ -83,15 +83,17 @@ type IEnumDMO struct {
 var IID_IEnumDMO = win32.GUID{Data1: 0x2c3cd98a, Data2: 0x2bfa, Data3: 0x4a53, Data4: [8]byte{0x9c, 0x27, 0x52, 0x49, 0xba, 0x64, 0xba, 0x0f}}
 
 // Next dispatches through IEnumDMO's vtable slot 3.
-func (self *IEnumDMO) Next(cItemsToFetch uint32, pCLSID *win32.GUID, Names *foundation.PWSTR, pcItemsFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumDMO) Next(cItemsToFetch uint32, pCLSID *win32.GUID, Names *foundation.PWSTR, pcItemsFetched *uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cItemsToFetch), uintptr(unsafe.Pointer(pCLSID)), uintptr(unsafe.Pointer(Names)), uintptr(unsafe.Pointer(pcItemsFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumDMO's vtable slot 4.
-func (self *IEnumDMO) Skip(cItemsToSkip uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumDMO) Skip(cItemsToSkip uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cItemsToSkip))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumDMO's vtable slot 5.

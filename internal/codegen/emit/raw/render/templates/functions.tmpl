@@ -64,6 +64,9 @@ func {{.GoName}}({{.ParamStr}}){{with .ReturnSig}} {{.}}{{end}} {
 {{- else if eq .ReturnKind 9}}
 	syscall.SyscallN({{.ProcVar}}.Addr(){{range .ArgExprs}}, {{.}}{{end}})
 	return {{join .ReturnValues ", "}}
+{{- else if eq .ReturnKind 10}}
+	r1, _, _ := syscall.SyscallN({{.ProcVar}}.Addr(){{range .ArgExprs}}, {{.}}{{end}})
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 {{- end}}
 }
 

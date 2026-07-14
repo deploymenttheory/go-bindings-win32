@@ -273,13 +273,14 @@ type IEnumManagerFrames struct {
 var IID_IEnumManagerFrames = win32.GUID{Data1: 0x3caa826a, Data2: 0x9b1f, Data3: 0x4a79, Data4: [8]byte{0xbc, 0x81, 0xf0, 0x43, 0x0d, 0xed, 0x16, 0x48}}
 
 // Next dispatches through IEnumManagerFrames's vtable slot 3.
-func (self *IEnumManagerFrames) Next(ppWindows []*foundation.HWND, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumManagerFrames) Next(ppWindows []*foundation.HWND, pceltFetched *uint32) (win32.HRESULT, error) {
 	var _ppWindows **foundation.HWND
 	if len(ppWindows) > 0 {
 		_ppWindows = &ppWindows[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppWindows)), uintptr(unsafe.Pointer(_ppWindows)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Count dispatches through IEnumManagerFrames's vtable slot 4.
@@ -289,9 +290,10 @@ func (self *IEnumManagerFrames) Count(pcelt *uint32) error {
 }
 
 // Skip dispatches through IEnumManagerFrames's vtable slot 5.
-func (self *IEnumManagerFrames) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumManagerFrames) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumManagerFrames's vtable slot 6.
@@ -315,19 +317,21 @@ type IEnumOpenServiceActivity struct {
 var IID_IEnumOpenServiceActivity = win32.GUID{Data1: 0xa436d7d2, Data2: 0x17c3, Data3: 0x4ef4, Data4: [8]byte{0xa1, 0xe8, 0x5c, 0x86, 0xfa, 0xff, 0x26, 0xc0}}
 
 // Next dispatches through IEnumOpenServiceActivity's vtable slot 3.
-func (self *IEnumOpenServiceActivity) Next(rgelt []*IOpenServiceActivity, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumOpenServiceActivity) Next(rgelt []*IOpenServiceActivity, pceltFetched *uint32) (win32.HRESULT, error) {
 	var _rgelt **IOpenServiceActivity
 	if len(rgelt) > 0 {
 		_rgelt = &rgelt[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumOpenServiceActivity's vtable slot 4.
-func (self *IEnumOpenServiceActivity) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumOpenServiceActivity) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumOpenServiceActivity's vtable slot 5.
@@ -351,19 +355,21 @@ type IEnumOpenServiceActivityCategory struct {
 var IID_IEnumOpenServiceActivityCategory = win32.GUID{Data1: 0x33627a56, Data2: 0x8c9a, Data3: 0x4430, Data4: [8]byte{0x8f, 0xd1, 0xb5, 0xf5, 0xc7, 0x71, 0xaf, 0xb6}}
 
 // Next dispatches through IEnumOpenServiceActivityCategory's vtable slot 3.
-func (self *IEnumOpenServiceActivityCategory) Next(rgelt []*IOpenServiceActivityCategory, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumOpenServiceActivityCategory) Next(rgelt []*IOpenServiceActivityCategory, pceltFetched *uint32) (win32.HRESULT, error) {
 	var _rgelt **IOpenServiceActivityCategory
 	if len(rgelt) > 0 {
 		_rgelt = &rgelt[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumOpenServiceActivityCategory's vtable slot 4.
-func (self *IEnumOpenServiceActivityCategory) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumOpenServiceActivityCategory) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumOpenServiceActivityCategory's vtable slot 5.
@@ -387,15 +393,17 @@ type IEnumSTATURL struct {
 var IID_IEnumSTATURL = win32.GUID{Data1: 0x3c374a42, Data2: 0xbae4, Data3: 0x11cf, Data4: [8]byte{0xbf, 0x7d, 0x00, 0xaa, 0x00, 0x69, 0x46, 0xee}}
 
 // Next dispatches through IEnumSTATURL's vtable slot 3.
-func (self *IEnumSTATURL) Next(celt uint32, rgelt *STATURL, pceltFetched *uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumSTATURL) Next(celt uint32, rgelt *STATURL, pceltFetched *uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Skip dispatches through IEnumSTATURL's vtable slot 4.
-func (self *IEnumSTATURL) Skip(celt uint32) error {
+// The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
+func (self *IEnumSTATURL) Skip(celt uint32) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return win32.ErrIfFailed(int32(r1))
+	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IEnumSTATURL's vtable slot 5.

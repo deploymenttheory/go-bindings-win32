@@ -26,9 +26,9 @@ var IID_IComprehensiveSpellCheckProvider = win32.GUID{Data1: 0x0c58f8de, Data2: 
 // ComprehensiveCheck dispatches through IComprehensiveSpellCheckProvider's vtable slot 3.
 func (self *IComprehensiveSpellCheckProvider) ComprehensiveCheck(text string) (*IEnumSpellingError, error) {
 	_text := win32.UTF16Ptr(text)
-	var _value *IEnumSpellingError
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_text)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.ErrIfFailed(int32(r1))
+	_value := new(*IEnumSpellingError)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_text)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 275c23e3-3747-11d0-9fea-00aa003f8646
@@ -144,9 +144,9 @@ var IID_IEnumSpellingError = win32.GUID{Data1: 0x803e3bd4, Data2: 0x2828, Data3:
 
 // Next dispatches through IEnumSpellingError's vtable slot 3.
 func (self *IEnumSpellingError) Next() (*ISpellingError, error) {
-	var _value *ISpellingError
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.ErrIfFailed(int32(r1))
+	_value := new(*ISpellingError)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 359f3443-bd4a-11d0-b188-00aa0038c969
@@ -882,30 +882,30 @@ var IID_IOptionDescription = win32.GUID{Data1: 0x432e5f85, Data2: 0x35cf, Data3:
 
 // Get_Id dispatches through IOptionDescription's vtable slot 3.
 func (self *IOptionDescription) Get_Id() (foundation.PWSTR, error) {
-	var _value foundation.PWSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.ErrIfFailed(int32(r1))
+	_value := new(foundation.PWSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Heading dispatches through IOptionDescription's vtable slot 4.
 func (self *IOptionDescription) Get_Heading() (foundation.PWSTR, error) {
-	var _value foundation.PWSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.ErrIfFailed(int32(r1))
+	_value := new(foundation.PWSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through IOptionDescription's vtable slot 5.
 func (self *IOptionDescription) Get_Description() (foundation.PWSTR, error) {
-	var _value foundation.PWSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.ErrIfFailed(int32(r1))
+	_value := new(foundation.PWSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Labels dispatches through IOptionDescription's vtable slot 6.
 func (self *IOptionDescription) Get_Labels() (*systemcom.IEnumString, error) {
-	var _value *systemcom.IEnumString
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.ErrIfFailed(int32(r1))
+	_value := new(*systemcom.IEnumString)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
 // ISpellCheckProvider: https://learn.microsoft.com/windows/win32/api/spellcheckprovider/nn-spellcheckprovider-ispellcheckprovider
@@ -919,33 +919,33 @@ var IID_ISpellCheckProvider = win32.GUID{Data1: 0x73e976e0, Data2: 0x8ed4, Data3
 
 // Get_LanguageTag dispatches through ISpellCheckProvider's vtable slot 3.
 func (self *ISpellCheckProvider) Get_LanguageTag() (foundation.PWSTR, error) {
-	var _value foundation.PWSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.ErrIfFailed(int32(r1))
+	_value := new(foundation.PWSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
 // Check dispatches through ISpellCheckProvider's vtable slot 4.
 func (self *ISpellCheckProvider) Check(text string) (*IEnumSpellingError, error) {
 	_text := win32.UTF16Ptr(text)
-	var _value *IEnumSpellingError
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_text)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.ErrIfFailed(int32(r1))
+	_value := new(*IEnumSpellingError)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_text)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
 // Suggest dispatches through ISpellCheckProvider's vtable slot 5.
 func (self *ISpellCheckProvider) Suggest(word string) (*systemcom.IEnumString, error) {
 	_word := win32.UTF16Ptr(word)
-	var _value *systemcom.IEnumString
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_word)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.ErrIfFailed(int32(r1))
+	_value := new(*systemcom.IEnumString)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_word)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
 // GetOptionValue dispatches through ISpellCheckProvider's vtable slot 6.
 func (self *ISpellCheckProvider) GetOptionValue(optionId string) (byte, error) {
 	_optionId := win32.UTF16Ptr(optionId)
-	var _value byte
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_optionId)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.ErrIfFailed(int32(r1))
+	_value := new(byte)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_optionId)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
 // SetOptionValue dispatches through ISpellCheckProvider's vtable slot 7.
@@ -957,31 +957,31 @@ func (self *ISpellCheckProvider) SetOptionValue(optionId string, value byte) err
 
 // Get_OptionIds dispatches through ISpellCheckProvider's vtable slot 8.
 func (self *ISpellCheckProvider) Get_OptionIds() (*systemcom.IEnumString, error) {
-	var _value *systemcom.IEnumString
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.ErrIfFailed(int32(r1))
+	_value := new(*systemcom.IEnumString)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Id dispatches through ISpellCheckProvider's vtable slot 9.
 func (self *ISpellCheckProvider) Get_Id() (foundation.PWSTR, error) {
-	var _value foundation.PWSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.ErrIfFailed(int32(r1))
+	_value := new(foundation.PWSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LocalizedName dispatches through ISpellCheckProvider's vtable slot 10.
 func (self *ISpellCheckProvider) Get_LocalizedName() (foundation.PWSTR, error) {
-	var _value foundation.PWSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.ErrIfFailed(int32(r1))
+	_value := new(foundation.PWSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
 // GetOptionDescription dispatches through ISpellCheckProvider's vtable slot 11.
 func (self *ISpellCheckProvider) GetOptionDescription(optionId string) (*IOptionDescription, error) {
 	_optionId := win32.UTF16Ptr(optionId)
-	var _value *IOptionDescription
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_optionId)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.ErrIfFailed(int32(r1))
+	_value := new(*IOptionDescription)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_optionId)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeWordlist dispatches through ISpellCheckProvider's vtable slot 12.
@@ -1001,25 +1001,25 @@ var IID_ISpellCheckProviderFactory = win32.GUID{Data1: 0x9f671e11, Data2: 0x77d6
 
 // Get_SupportedLanguages dispatches through ISpellCheckProviderFactory's vtable slot 3.
 func (self *ISpellCheckProviderFactory) Get_SupportedLanguages() (*systemcom.IEnumString, error) {
-	var _value *systemcom.IEnumString
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.ErrIfFailed(int32(r1))
+	_value := new(*systemcom.IEnumString)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
 // IsSupported dispatches through ISpellCheckProviderFactory's vtable slot 4.
 func (self *ISpellCheckProviderFactory) IsSupported(languageTag string) (foundation.BOOL, error) {
 	_languageTag := win32.UTF16Ptr(languageTag)
-	var _value foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_languageTag)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.ErrIfFailed(int32(r1))
+	_value := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_languageTag)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSpellCheckProvider dispatches through ISpellCheckProviderFactory's vtable slot 5.
 func (self *ISpellCheckProviderFactory) CreateSpellCheckProvider(languageTag string) (*ISpellCheckProvider, error) {
 	_languageTag := win32.UTF16Ptr(languageTag)
-	var _value *ISpellCheckProvider
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_languageTag)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.ErrIfFailed(int32(r1))
+	_value := new(*ISpellCheckProvider)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_languageTag)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
 // ISpellChecker: https://learn.microsoft.com/windows/win32/api/spellcheck/nn-spellcheck-ispellchecker
@@ -1033,25 +1033,25 @@ var IID_ISpellChecker = win32.GUID{Data1: 0xb6fd0b71, Data2: 0xe2bc, Data3: 0x46
 
 // Get_LanguageTag dispatches through ISpellChecker's vtable slot 3.
 func (self *ISpellChecker) Get_LanguageTag() (foundation.PWSTR, error) {
-	var _value foundation.PWSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.ErrIfFailed(int32(r1))
+	_value := new(foundation.PWSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
 // Check dispatches through ISpellChecker's vtable slot 4.
 func (self *ISpellChecker) Check(text string) (*IEnumSpellingError, error) {
 	_text := win32.UTF16Ptr(text)
-	var _value *IEnumSpellingError
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_text)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.ErrIfFailed(int32(r1))
+	_value := new(*IEnumSpellingError)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_text)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
 // Suggest dispatches through ISpellChecker's vtable slot 5.
 func (self *ISpellChecker) Suggest(word string) (*systemcom.IEnumString, error) {
 	_word := win32.UTF16Ptr(word)
-	var _value *systemcom.IEnumString
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_word)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.ErrIfFailed(int32(r1))
+	_value := new(*systemcom.IEnumString)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_word)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through ISpellChecker's vtable slot 6.
@@ -1079,37 +1079,37 @@ func (self *ISpellChecker) AutoCorrect(from string, to string) error {
 // GetOptionValue dispatches through ISpellChecker's vtable slot 9.
 func (self *ISpellChecker) GetOptionValue(optionId string) (byte, error) {
 	_optionId := win32.UTF16Ptr(optionId)
-	var _value byte
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_optionId)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.ErrIfFailed(int32(r1))
+	_value := new(byte)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_optionId)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OptionIds dispatches through ISpellChecker's vtable slot 10.
 func (self *ISpellChecker) Get_OptionIds() (*systemcom.IEnumString, error) {
-	var _value *systemcom.IEnumString
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.ErrIfFailed(int32(r1))
+	_value := new(*systemcom.IEnumString)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Id dispatches through ISpellChecker's vtable slot 11.
 func (self *ISpellChecker) Get_Id() (foundation.PWSTR, error) {
-	var _value foundation.PWSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.ErrIfFailed(int32(r1))
+	_value := new(foundation.PWSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LocalizedName dispatches through ISpellChecker's vtable slot 12.
 func (self *ISpellChecker) Get_LocalizedName() (foundation.PWSTR, error) {
-	var _value foundation.PWSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.ErrIfFailed(int32(r1))
+	_value := new(foundation.PWSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
 // Add_SpellCheckerChanged dispatches through ISpellChecker's vtable slot 13.
 func (self *ISpellChecker) Add_SpellCheckerChanged(handler *ISpellCheckerChangedEventHandler) (uint32, error) {
-	var _eventCookie uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(handler)), uintptr(unsafe.Pointer(&_eventCookie)))
-	return _eventCookie, win32.ErrIfFailed(int32(r1))
+	_eventCookie := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(handler)), uintptr(win32.OutParam(unsafe.Pointer(_eventCookie))))
+	return *_eventCookie, win32.ErrIfFailed(int32(r1))
 }
 
 // Remove_SpellCheckerChanged dispatches through ISpellChecker's vtable slot 14.
@@ -1121,17 +1121,17 @@ func (self *ISpellChecker) Remove_SpellCheckerChanged(eventCookie uint32) error 
 // GetOptionDescription dispatches through ISpellChecker's vtable slot 15.
 func (self *ISpellChecker) GetOptionDescription(optionId string) (*IOptionDescription, error) {
 	_optionId := win32.UTF16Ptr(optionId)
-	var _value *IOptionDescription
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_optionId)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.ErrIfFailed(int32(r1))
+	_value := new(*IOptionDescription)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_optionId)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
 // ComprehensiveCheck dispatches through ISpellChecker's vtable slot 16.
 func (self *ISpellChecker) ComprehensiveCheck(text string) (*IEnumSpellingError, error) {
 	_text := win32.UTF16Ptr(text)
-	var _value *IEnumSpellingError
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_text)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.ErrIfFailed(int32(r1))
+	_value := new(*IEnumSpellingError)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_text)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
 // ISpellChecker2: https://learn.microsoft.com/windows/win32/api/spellcheck/nn-spellcheck-ispellchecker2
@@ -1176,25 +1176,25 @@ var IID_ISpellCheckerFactory = win32.GUID{Data1: 0x8e018a9d, Data2: 0x2415, Data
 
 // Get_SupportedLanguages dispatches through ISpellCheckerFactory's vtable slot 3.
 func (self *ISpellCheckerFactory) Get_SupportedLanguages() (*systemcom.IEnumString, error) {
-	var _value *systemcom.IEnumString
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.ErrIfFailed(int32(r1))
+	_value := new(*systemcom.IEnumString)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
 // IsSupported dispatches through ISpellCheckerFactory's vtable slot 4.
 func (self *ISpellCheckerFactory) IsSupported(languageTag string) (foundation.BOOL, error) {
 	_languageTag := win32.UTF16Ptr(languageTag)
-	var _value foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_languageTag)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.ErrIfFailed(int32(r1))
+	_value := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_languageTag)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSpellChecker dispatches through ISpellCheckerFactory's vtable slot 5.
 func (self *ISpellCheckerFactory) CreateSpellChecker(languageTag string) (*ISpellChecker, error) {
 	_languageTag := win32.UTF16Ptr(languageTag)
-	var _value *ISpellChecker
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_languageTag)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.ErrIfFailed(int32(r1))
+	_value := new(*ISpellChecker)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_languageTag)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
 // ISpellingError: https://learn.microsoft.com/windows/win32/api/spellcheck/nn-spellcheck-ispellingerror
@@ -1208,30 +1208,30 @@ var IID_ISpellingError = win32.GUID{Data1: 0xb7c82d61, Data2: 0xfbe8, Data3: 0x4
 
 // Get_StartIndex dispatches through ISpellingError's vtable slot 3.
 func (self *ISpellingError) Get_StartIndex() (uint32, error) {
-	var _value uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.ErrIfFailed(int32(r1))
+	_value := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Length dispatches through ISpellingError's vtable slot 4.
 func (self *ISpellingError) Get_Length() (uint32, error) {
-	var _value uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.ErrIfFailed(int32(r1))
+	_value := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CorrectiveAction dispatches through ISpellingError's vtable slot 5.
 func (self *ISpellingError) Get_CorrectiveAction() (CORRECTIVE_ACTION, error) {
-	var _value CORRECTIVE_ACTION
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.ErrIfFailed(int32(r1))
+	_value := new(CORRECTIVE_ACTION)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Replacement dispatches through ISpellingError's vtable slot 6.
 func (self *ISpellingError) Get_Replacement() (foundation.PWSTR, error) {
-	var _value foundation.PWSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.ErrIfFailed(int32(r1))
+	_value := new(foundation.PWSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
 // IUserDictionariesRegistrar: https://learn.microsoft.com/windows/win32/api/spellcheck/nn-spellcheck-iuserdictionariesregistrar

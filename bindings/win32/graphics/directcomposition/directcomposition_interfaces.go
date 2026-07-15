@@ -335,9 +335,9 @@ func (self *IDCompositionDevice) WaitForCommitCompletion() error {
 
 // GetFrameStatistics dispatches through IDCompositionDevice's vtable slot 5.
 func (self *IDCompositionDevice) GetFrameStatistics() (DCOMPOSITION_FRAME_STATISTICS, error) {
-	var _statistics DCOMPOSITION_FRAME_STATISTICS
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_statistics)))
-	return _statistics, win32.ErrIfFailed(int32(r1))
+	_statistics := new(DCOMPOSITION_FRAME_STATISTICS)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_statistics))))
+	return *_statistics, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateTargetForHwnd dispatches through IDCompositionDevice's vtable slot 6.
@@ -498,9 +498,9 @@ func (self *IDCompositionDevice2) WaitForCommitCompletion() error {
 
 // GetFrameStatistics dispatches through IDCompositionDevice2's vtable slot 5.
 func (self *IDCompositionDevice2) GetFrameStatistics() (DCOMPOSITION_FRAME_STATISTICS, error) {
-	var _statistics DCOMPOSITION_FRAME_STATISTICS
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_statistics)))
-	return _statistics, win32.ErrIfFailed(int32(r1))
+	_statistics := new(DCOMPOSITION_FRAME_STATISTICS)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_statistics))))
+	return *_statistics, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateVisual dispatches through IDCompositionDevice2's vtable slot 6.

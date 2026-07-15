@@ -49,16 +49,16 @@ func (self *IAutomaticUpdates) ShowSettingsDialog() error {
 
 // Get_Settings dispatches through IAutomaticUpdates's vtable slot 11.
 func (self *IAutomaticUpdates) Get_Settings() (*IAutomaticUpdatesSettings, error) {
-	var _retval *IAutomaticUpdatesSettings
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IAutomaticUpdatesSettings)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ServiceEnabled dispatches through IAutomaticUpdates's vtable slot 12.
 func (self *IAutomaticUpdates) Get_ServiceEnabled() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // EnableService dispatches through IAutomaticUpdates's vtable slot 13.
@@ -78,9 +78,9 @@ var IID_IAutomaticUpdates2 = win32.GUID{Data1: 0x4a2f5c31, Data2: 0xcfd9, Data3:
 
 // Get_Results dispatches through IAutomaticUpdates2's vtable slot 14.
 func (self *IAutomaticUpdates2) Get_Results() (*IAutomaticUpdatesResults, error) {
-	var _retval *IAutomaticUpdatesResults
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IAutomaticUpdatesResults)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IAutomaticUpdatesResults: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iautomaticupdatesresults
@@ -94,16 +94,16 @@ var IID_IAutomaticUpdatesResults = win32.GUID{Data1: 0xe7a4d634, Data2: 0x7942, 
 
 // Get_LastSearchSuccessDate dispatches through IAutomaticUpdatesResults's vtable slot 7.
 func (self *IAutomaticUpdatesResults) Get_LastSearchSuccessDate() (systemvariant.VARIANT, error) {
-	var _retval systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastInstallationSuccessDate dispatches through IAutomaticUpdatesResults's vtable slot 8.
 func (self *IAutomaticUpdatesResults) Get_LastInstallationSuccessDate() (systemvariant.VARIANT, error) {
-	var _retval systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IAutomaticUpdatesSettings: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iautomaticupdatessettings
@@ -117,9 +117,9 @@ var IID_IAutomaticUpdatesSettings = win32.GUID{Data1: 0x2ee48f22, Data2: 0xaf3c,
 
 // Get_NotificationLevel dispatches through IAutomaticUpdatesSettings's vtable slot 7.
 func (self *IAutomaticUpdatesSettings) Get_NotificationLevel() (AutomaticUpdatesNotificationLevel, error) {
-	var _retval AutomaticUpdatesNotificationLevel
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(AutomaticUpdatesNotificationLevel)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_NotificationLevel dispatches through IAutomaticUpdatesSettings's vtable slot 8.
@@ -130,23 +130,23 @@ func (self *IAutomaticUpdatesSettings) Put_NotificationLevel(value AutomaticUpda
 
 // Get_ReadOnly dispatches through IAutomaticUpdatesSettings's vtable slot 9.
 func (self *IAutomaticUpdatesSettings) Get_ReadOnly() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Required dispatches through IAutomaticUpdatesSettings's vtable slot 10.
 func (self *IAutomaticUpdatesSettings) Get_Required() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ScheduledInstallationDay dispatches through IAutomaticUpdatesSettings's vtable slot 11.
 func (self *IAutomaticUpdatesSettings) Get_ScheduledInstallationDay() (AutomaticUpdatesScheduledInstallationDay, error) {
-	var _retval AutomaticUpdatesScheduledInstallationDay
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(AutomaticUpdatesScheduledInstallationDay)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ScheduledInstallationDay dispatches through IAutomaticUpdatesSettings's vtable slot 12.
@@ -157,9 +157,9 @@ func (self *IAutomaticUpdatesSettings) Put_ScheduledInstallationDay(value Automa
 
 // Get_ScheduledInstallationTime dispatches through IAutomaticUpdatesSettings's vtable slot 13.
 func (self *IAutomaticUpdatesSettings) Get_ScheduledInstallationTime() (int32, error) {
-	var _retval int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ScheduledInstallationTime dispatches through IAutomaticUpdatesSettings's vtable slot 14.
@@ -191,9 +191,9 @@ var IID_IAutomaticUpdatesSettings2 = win32.GUID{Data1: 0x6abc136a, Data2: 0xc3ca
 
 // Get_IncludeRecommendedUpdates dispatches through IAutomaticUpdatesSettings2's vtable slot 17.
 func (self *IAutomaticUpdatesSettings2) Get_IncludeRecommendedUpdates() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_IncludeRecommendedUpdates dispatches through IAutomaticUpdatesSettings2's vtable slot 18.
@@ -204,9 +204,9 @@ func (self *IAutomaticUpdatesSettings2) Put_IncludeRecommendedUpdates(value foun
 
 // CheckPermission dispatches through IAutomaticUpdatesSettings2's vtable slot 19.
 func (self *IAutomaticUpdatesSettings2) CheckPermission(userType AutomaticUpdatesUserType, permissionType AutomaticUpdatesPermissionType) (foundation.VARIANT_BOOL, error) {
-	var _userHasPermission foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(userType), uintptr(permissionType), uintptr(unsafe.Pointer(&_userHasPermission)))
-	return _userHasPermission, win32.ErrIfFailed(int32(r1))
+	_userHasPermission := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(userType), uintptr(permissionType), uintptr(win32.OutParam(unsafe.Pointer(_userHasPermission))))
+	return *_userHasPermission, win32.ErrIfFailed(int32(r1))
 }
 
 // IAutomaticUpdatesSettings3: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iautomaticupdatessettings3
@@ -220,9 +220,9 @@ var IID_IAutomaticUpdatesSettings3 = win32.GUID{Data1: 0xb587f5c3, Data2: 0xf57e
 
 // Get_NonAdministratorsElevated dispatches through IAutomaticUpdatesSettings3's vtable slot 20.
 func (self *IAutomaticUpdatesSettings3) Get_NonAdministratorsElevated() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_NonAdministratorsElevated dispatches through IAutomaticUpdatesSettings3's vtable slot 21.
@@ -233,9 +233,9 @@ func (self *IAutomaticUpdatesSettings3) Put_NonAdministratorsElevated(value foun
 
 // Get_FeaturedUpdatesEnabled dispatches through IAutomaticUpdatesSettings3's vtable slot 22.
 func (self *IAutomaticUpdatesSettings3) Get_FeaturedUpdatesEnabled() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FeaturedUpdatesEnabled dispatches through IAutomaticUpdatesSettings3's vtable slot 23.
@@ -255,65 +255,65 @@ var IID_ICategory = win32.GUID{Data1: 0x81ddc1b8, Data2: 0x9d35, Data3: 0x47a6, 
 
 // Get_Name dispatches through ICategory's vtable slot 7.
 func (self *ICategory) Get_Name() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CategoryID dispatches through ICategory's vtable slot 8.
 func (self *ICategory) Get_CategoryID() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Children dispatches through ICategory's vtable slot 9.
 func (self *ICategory) Get_Children() (*ICategoryCollection, error) {
-	var _retval *ICategoryCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*ICategoryCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through ICategory's vtable slot 10.
 func (self *ICategory) Get_Description() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Image dispatches through ICategory's vtable slot 11.
 func (self *ICategory) Get_Image() (*IImageInformation, error) {
-	var _retval *IImageInformation
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IImageInformation)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Order dispatches through ICategory's vtable slot 12.
 func (self *ICategory) Get_Order() (int32, error) {
-	var _retval int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Parent dispatches through ICategory's vtable slot 13.
 func (self *ICategory) Get_Parent() (*ICategory, error) {
-	var _retval *ICategory
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*ICategory)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Type dispatches through ICategory's vtable slot 14.
 func (self *ICategory) Get_Type() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Updates dispatches through ICategory's vtable slot 15.
 func (self *ICategory) Get_Updates() (*IUpdateCollection, error) {
-	var _retval *IUpdateCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IUpdateCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // ICategoryCollection: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-icategorycollection
@@ -327,23 +327,23 @@ var IID_ICategoryCollection = win32.GUID{Data1: 0x3a56bfb8, Data2: 0x576c, Data3
 
 // Get_Item dispatches through ICategoryCollection's vtable slot 7.
 func (self *ICategoryCollection) Get_Item(index int32) (*ICategory, error) {
-	var _retval *ICategory
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*ICategory)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ICategoryCollection's vtable slot 8.
 func (self *ICategoryCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through ICategoryCollection's vtable slot 9.
 func (self *ICategoryCollection) Get_Count() (int32, error) {
-	var _retval int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IDownloadCompletedCallback: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-idownloadcompletedcallback
@@ -381,23 +381,23 @@ var IID_IDownloadJob = win32.GUID{Data1: 0xc574de85, Data2: 0x7358, Data3: 0x43f
 
 // Get_AsyncState dispatches through IDownloadJob's vtable slot 7.
 func (self *IDownloadJob) Get_AsyncState() (systemvariant.VARIANT, error) {
-	var _retval systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsCompleted dispatches through IDownloadJob's vtable slot 8.
 func (self *IDownloadJob) Get_IsCompleted() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Updates dispatches through IDownloadJob's vtable slot 9.
 func (self *IDownloadJob) Get_Updates() (*IUpdateCollection, error) {
-	var _retval *IUpdateCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IUpdateCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // CleanUp dispatches through IDownloadJob's vtable slot 10.
@@ -408,9 +408,9 @@ func (self *IDownloadJob) CleanUp() error {
 
 // GetProgress dispatches through IDownloadJob's vtable slot 11.
 func (self *IDownloadJob) GetProgress() (*IDownloadProgress, error) {
-	var _retval *IDownloadProgress
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IDownloadProgress)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // RequestAbort dispatches through IDownloadJob's vtable slot 12.
@@ -430,65 +430,65 @@ var IID_IDownloadProgress = win32.GUID{Data1: 0xd31a5bac, Data2: 0xf719, Data3: 
 
 // Get_CurrentUpdateBytesDownloaded dispatches through IDownloadProgress's vtable slot 7.
 func (self *IDownloadProgress) Get_CurrentUpdateBytesDownloaded() (foundation.DECIMAL, error) {
-	var _retval foundation.DECIMAL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.DECIMAL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentUpdateBytesToDownload dispatches through IDownloadProgress's vtable slot 8.
 func (self *IDownloadProgress) Get_CurrentUpdateBytesToDownload() (foundation.DECIMAL, error) {
-	var _retval foundation.DECIMAL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.DECIMAL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentUpdateIndex dispatches through IDownloadProgress's vtable slot 9.
 func (self *IDownloadProgress) Get_CurrentUpdateIndex() (int32, error) {
-	var _retval int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PercentComplete dispatches through IDownloadProgress's vtable slot 10.
 func (self *IDownloadProgress) Get_PercentComplete() (int32, error) {
-	var _retval int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TotalBytesDownloaded dispatches through IDownloadProgress's vtable slot 11.
 func (self *IDownloadProgress) Get_TotalBytesDownloaded() (foundation.DECIMAL, error) {
-	var _retval foundation.DECIMAL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.DECIMAL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TotalBytesToDownload dispatches through IDownloadProgress's vtable slot 12.
 func (self *IDownloadProgress) Get_TotalBytesToDownload() (foundation.DECIMAL, error) {
-	var _retval foundation.DECIMAL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.DECIMAL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // GetUpdateResult dispatches through IDownloadProgress's vtable slot 13.
 func (self *IDownloadProgress) GetUpdateResult(updateIndex int32) (*IUpdateDownloadResult, error) {
-	var _retval *IUpdateDownloadResult
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(updateIndex), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IUpdateDownloadResult)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(updateIndex), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentUpdateDownloadPhase dispatches through IDownloadProgress's vtable slot 14.
 func (self *IDownloadProgress) Get_CurrentUpdateDownloadPhase() (DownloadPhase, error) {
-	var _retval DownloadPhase
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(DownloadPhase)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentUpdatePercentComplete dispatches through IDownloadProgress's vtable slot 15.
 func (self *IDownloadProgress) Get_CurrentUpdatePercentComplete() (int32, error) {
-	var _retval int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IDownloadProgressChangedCallback: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-idownloadprogresschangedcallback
@@ -517,9 +517,9 @@ var IID_IDownloadProgressChangedCallbackArgs = win32.GUID{Data1: 0x324ff2c6, Dat
 
 // Get_Progress dispatches through IDownloadProgressChangedCallbackArgs's vtable slot 7.
 func (self *IDownloadProgressChangedCallbackArgs) Get_Progress() (*IDownloadProgress, error) {
-	var _retval *IDownloadProgress
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IDownloadProgress)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IDownloadResult: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-idownloadresult
@@ -533,23 +533,23 @@ var IID_IDownloadResult = win32.GUID{Data1: 0xdaa4fdd0, Data2: 0x4727, Data3: 0x
 
 // Get_HResult dispatches through IDownloadResult's vtable slot 7.
 func (self *IDownloadResult) Get_HResult() (int32, error) {
-	var _retval int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ResultCode dispatches through IDownloadResult's vtable slot 8.
 func (self *IDownloadResult) Get_ResultCode() (OperationResultCode, error) {
-	var _retval OperationResultCode
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(OperationResultCode)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // GetUpdateResult dispatches through IDownloadResult's vtable slot 9.
 func (self *IDownloadResult) GetUpdateResult(updateIndex int32) (*IUpdateDownloadResult, error) {
-	var _retval *IUpdateDownloadResult
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(updateIndex), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IUpdateDownloadResult)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(updateIndex), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IImageInformation: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iimageinformation
@@ -563,30 +563,30 @@ var IID_IImageInformation = win32.GUID{Data1: 0x7c907864, Data2: 0x346c, Data3: 
 
 // Get_AltText dispatches through IImageInformation's vtable slot 7.
 func (self *IImageInformation) Get_AltText() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Height dispatches through IImageInformation's vtable slot 8.
 func (self *IImageInformation) Get_Height() (int32, error) {
-	var _retval int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Source dispatches through IImageInformation's vtable slot 9.
 func (self *IImageInformation) Get_Source() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Width dispatches through IImageInformation's vtable slot 10.
 func (self *IImageInformation) Get_Width() (int32, error) {
-	var _retval int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IInstallationAgent: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iinstallationagent
@@ -615,30 +615,30 @@ var IID_IInstallationBehavior = win32.GUID{Data1: 0xd9a59339, Data2: 0xe245, Dat
 
 // Get_CanRequestUserInput dispatches through IInstallationBehavior's vtable slot 7.
 func (self *IInstallationBehavior) Get_CanRequestUserInput() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Impact dispatches through IInstallationBehavior's vtable slot 8.
 func (self *IInstallationBehavior) Get_Impact() (InstallationImpact, error) {
-	var _retval InstallationImpact
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(InstallationImpact)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RebootBehavior dispatches through IInstallationBehavior's vtable slot 9.
 func (self *IInstallationBehavior) Get_RebootBehavior() (InstallationRebootBehavior, error) {
-	var _retval InstallationRebootBehavior
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(InstallationRebootBehavior)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RequiresNetworkConnectivity dispatches through IInstallationBehavior's vtable slot 10.
 func (self *IInstallationBehavior) Get_RequiresNetworkConnectivity() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IInstallationCompletedCallback: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iinstallationcompletedcallback
@@ -676,23 +676,23 @@ var IID_IInstallationJob = win32.GUID{Data1: 0x5c209f0b, Data2: 0xbad5, Data3: 0
 
 // Get_AsyncState dispatches through IInstallationJob's vtable slot 7.
 func (self *IInstallationJob) Get_AsyncState() (systemvariant.VARIANT, error) {
-	var _retval systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsCompleted dispatches through IInstallationJob's vtable slot 8.
 func (self *IInstallationJob) Get_IsCompleted() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Updates dispatches through IInstallationJob's vtable slot 9.
 func (self *IInstallationJob) Get_Updates() (*IUpdateCollection, error) {
-	var _retval *IUpdateCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IUpdateCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // CleanUp dispatches through IInstallationJob's vtable slot 10.
@@ -703,9 +703,9 @@ func (self *IInstallationJob) CleanUp() error {
 
 // GetProgress dispatches through IInstallationJob's vtable slot 11.
 func (self *IInstallationJob) GetProgress() (*IInstallationProgress, error) {
-	var _retval *IInstallationProgress
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IInstallationProgress)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // RequestAbort dispatches through IInstallationJob's vtable slot 12.
@@ -725,30 +725,30 @@ var IID_IInstallationProgress = win32.GUID{Data1: 0x345c8244, Data2: 0x43a3, Dat
 
 // Get_CurrentUpdateIndex dispatches through IInstallationProgress's vtable slot 7.
 func (self *IInstallationProgress) Get_CurrentUpdateIndex() (int32, error) {
-	var _retval int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentUpdatePercentComplete dispatches through IInstallationProgress's vtable slot 8.
 func (self *IInstallationProgress) Get_CurrentUpdatePercentComplete() (int32, error) {
-	var _retval int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PercentComplete dispatches through IInstallationProgress's vtable slot 9.
 func (self *IInstallationProgress) Get_PercentComplete() (int32, error) {
-	var _retval int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // GetUpdateResult dispatches through IInstallationProgress's vtable slot 10.
 func (self *IInstallationProgress) GetUpdateResult(updateIndex int32) (*IUpdateInstallationResult, error) {
-	var _retval *IUpdateInstallationResult
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(updateIndex), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IUpdateInstallationResult)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(updateIndex), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IInstallationProgressChangedCallback: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iinstallationprogresschangedcallback
@@ -777,9 +777,9 @@ var IID_IInstallationProgressChangedCallbackArgs = win32.GUID{Data1: 0xe4f14e1e,
 
 // Get_Progress dispatches through IInstallationProgressChangedCallbackArgs's vtable slot 7.
 func (self *IInstallationProgressChangedCallbackArgs) Get_Progress() (*IInstallationProgress, error) {
-	var _retval *IInstallationProgress
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IInstallationProgress)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IInstallationResult: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iinstallationresult
@@ -793,30 +793,30 @@ var IID_IInstallationResult = win32.GUID{Data1: 0xa43c56d6, Data2: 0x7451, Data3
 
 // Get_HResult dispatches through IInstallationResult's vtable slot 7.
 func (self *IInstallationResult) Get_HResult() (int32, error) {
-	var _retval int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RebootRequired dispatches through IInstallationResult's vtable slot 8.
 func (self *IInstallationResult) Get_RebootRequired() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ResultCode dispatches through IInstallationResult's vtable slot 9.
 func (self *IInstallationResult) Get_ResultCode() (OperationResultCode, error) {
-	var _retval OperationResultCode
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(OperationResultCode)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // GetUpdateResult dispatches through IInstallationResult's vtable slot 10.
 func (self *IInstallationResult) GetUpdateResult(updateIndex int32) (*IUpdateInstallationResult, error) {
-	var _retval *IUpdateInstallationResult
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(updateIndex), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IUpdateInstallationResult)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(updateIndex), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IInvalidProductLicenseException: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iinvalidproductlicenseexception
@@ -830,9 +830,9 @@ var IID_IInvalidProductLicenseException = win32.GUID{Data1: 0xa37d00f5, Data2: 0
 
 // Get_Product dispatches through IInvalidProductLicenseException's vtable slot 10.
 func (self *IInvalidProductLicenseException) Get_Product() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // ISearchCompletedCallback: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-isearchcompletedcallback
@@ -870,16 +870,16 @@ var IID_ISearchJob = win32.GUID{Data1: 0x7366ea16, Data2: 0x7a1a, Data3: 0x4ea2,
 
 // Get_AsyncState dispatches through ISearchJob's vtable slot 7.
 func (self *ISearchJob) Get_AsyncState() (systemvariant.VARIANT, error) {
-	var _retval systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsCompleted dispatches through ISearchJob's vtable slot 8.
 func (self *ISearchJob) Get_IsCompleted() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // CleanUp dispatches through ISearchJob's vtable slot 9.
@@ -905,30 +905,30 @@ var IID_ISearchResult = win32.GUID{Data1: 0xd40cff62, Data2: 0xe08c, Data3: 0x44
 
 // Get_ResultCode dispatches through ISearchResult's vtable slot 7.
 func (self *ISearchResult) Get_ResultCode() (OperationResultCode, error) {
-	var _retval OperationResultCode
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(OperationResultCode)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RootCategories dispatches through ISearchResult's vtable slot 8.
 func (self *ISearchResult) Get_RootCategories() (*ICategoryCollection, error) {
-	var _retval *ICategoryCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*ICategoryCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Updates dispatches through ISearchResult's vtable slot 9.
 func (self *ISearchResult) Get_Updates() (*IUpdateCollection, error) {
-	var _retval *IUpdateCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IUpdateCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Warnings dispatches through ISearchResult's vtable slot 10.
 func (self *ISearchResult) Get_Warnings() (*IUpdateExceptionCollection, error) {
-	var _retval *IUpdateExceptionCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IUpdateExceptionCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IStringCollection: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-istringcollection
@@ -942,9 +942,9 @@ var IID_IStringCollection = win32.GUID{Data1: 0xeff90582, Data2: 0x2ddc, Data3: 
 
 // Get_Item dispatches through IStringCollection's vtable slot 7.
 func (self *IStringCollection) Get_Item(index int32) (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Item dispatches through IStringCollection's vtable slot 8.
@@ -955,30 +955,30 @@ func (self *IStringCollection) Put_Item(index int32, value foundation.BSTR) erro
 
 // Get__NewEnum dispatches through IStringCollection's vtable slot 9.
 func (self *IStringCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IStringCollection's vtable slot 10.
 func (self *IStringCollection) Get_Count() (int32, error) {
-	var _retval int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReadOnly dispatches through IStringCollection's vtable slot 11.
 func (self *IStringCollection) Get_ReadOnly() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through IStringCollection's vtable slot 12.
 func (self *IStringCollection) Add(value foundation.BSTR) (int32, error) {
-	var _retval int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through IStringCollection's vtable slot 13.
@@ -989,9 +989,9 @@ func (self *IStringCollection) Clear() error {
 
 // Copy dispatches through IStringCollection's vtable slot 14.
 func (self *IStringCollection) Copy() (*IStringCollection, error) {
-	var _retval *IStringCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IStringCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Insert dispatches through IStringCollection's vtable slot 15.
@@ -1017,16 +1017,16 @@ var IID_ISystemInformation = win32.GUID{Data1: 0xade87bf7, Data2: 0x7b56, Data3:
 
 // Get_OemHardwareSupportLink dispatches through ISystemInformation's vtable slot 7.
 func (self *ISystemInformation) Get_OemHardwareSupportLink() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RebootRequired dispatches through ISystemInformation's vtable slot 8.
 func (self *ISystemInformation) Get_RebootRequired() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IUpdate: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdate
@@ -1040,128 +1040,128 @@ var IID_IUpdate = win32.GUID{Data1: 0x6a92b07a, Data2: 0xd821, Data3: 0x4682, Da
 
 // Get_Title dispatches through IUpdate's vtable slot 7.
 func (self *IUpdate) Get_Title() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AutoSelectOnWebSites dispatches through IUpdate's vtable slot 8.
 func (self *IUpdate) Get_AutoSelectOnWebSites() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BundledUpdates dispatches through IUpdate's vtable slot 9.
 func (self *IUpdate) Get_BundledUpdates() (*IUpdateCollection, error) {
-	var _retval *IUpdateCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IUpdateCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CanRequireSource dispatches through IUpdate's vtable slot 10.
 func (self *IUpdate) Get_CanRequireSource() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Categories dispatches through IUpdate's vtable slot 11.
 func (self *IUpdate) Get_Categories() (*ICategoryCollection, error) {
-	var _retval *ICategoryCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*ICategoryCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Deadline dispatches through IUpdate's vtable slot 12.
 func (self *IUpdate) Get_Deadline() (systemvariant.VARIANT, error) {
-	var _retval systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DeltaCompressedContentAvailable dispatches through IUpdate's vtable slot 13.
 func (self *IUpdate) Get_DeltaCompressedContentAvailable() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DeltaCompressedContentPreferred dispatches through IUpdate's vtable slot 14.
 func (self *IUpdate) Get_DeltaCompressedContentPreferred() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through IUpdate's vtable slot 15.
 func (self *IUpdate) Get_Description() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EulaAccepted dispatches through IUpdate's vtable slot 16.
 func (self *IUpdate) Get_EulaAccepted() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EulaText dispatches through IUpdate's vtable slot 17.
 func (self *IUpdate) Get_EulaText() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HandlerID dispatches through IUpdate's vtable slot 18.
 func (self *IUpdate) Get_HandlerID() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Identity dispatches through IUpdate's vtable slot 19.
 func (self *IUpdate) Get_Identity() (*IUpdateIdentity, error) {
-	var _retval *IUpdateIdentity
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IUpdateIdentity)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Image dispatches through IUpdate's vtable slot 20.
 func (self *IUpdate) Get_Image() (*IImageInformation, error) {
-	var _retval *IImageInformation
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IImageInformation)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InstallationBehavior dispatches through IUpdate's vtable slot 21.
 func (self *IUpdate) Get_InstallationBehavior() (*IInstallationBehavior, error) {
-	var _retval *IInstallationBehavior
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IInstallationBehavior)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsBeta dispatches through IUpdate's vtable slot 22.
 func (self *IUpdate) Get_IsBeta() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsDownloaded dispatches through IUpdate's vtable slot 23.
 func (self *IUpdate) Get_IsDownloaded() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsHidden dispatches through IUpdate's vtable slot 24.
 func (self *IUpdate) Get_IsHidden() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_IsHidden dispatches through IUpdate's vtable slot 25.
@@ -1172,149 +1172,149 @@ func (self *IUpdate) Put_IsHidden(value foundation.VARIANT_BOOL) error {
 
 // Get_IsInstalled dispatches through IUpdate's vtable slot 26.
 func (self *IUpdate) Get_IsInstalled() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsMandatory dispatches through IUpdate's vtable slot 27.
 func (self *IUpdate) Get_IsMandatory() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsUninstallable dispatches through IUpdate's vtable slot 28.
 func (self *IUpdate) Get_IsUninstallable() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Languages dispatches through IUpdate's vtable slot 29.
 func (self *IUpdate) Get_Languages() (*IStringCollection, error) {
-	var _retval *IStringCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IStringCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastDeploymentChangeTime dispatches through IUpdate's vtable slot 30.
 func (self *IUpdate) Get_LastDeploymentChangeTime() (float64, error) {
-	var _retval float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MaxDownloadSize dispatches through IUpdate's vtable slot 31.
 func (self *IUpdate) Get_MaxDownloadSize() (foundation.DECIMAL, error) {
-	var _retval foundation.DECIMAL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.DECIMAL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MinDownloadSize dispatches through IUpdate's vtable slot 32.
 func (self *IUpdate) Get_MinDownloadSize() (foundation.DECIMAL, error) {
-	var _retval foundation.DECIMAL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.DECIMAL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MoreInfoUrls dispatches through IUpdate's vtable slot 33.
 func (self *IUpdate) Get_MoreInfoUrls() (*IStringCollection, error) {
-	var _retval *IStringCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IStringCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MsrcSeverity dispatches through IUpdate's vtable slot 34.
 func (self *IUpdate) Get_MsrcSeverity() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RecommendedCpuSpeed dispatches through IUpdate's vtable slot 35.
 func (self *IUpdate) Get_RecommendedCpuSpeed() (int32, error) {
-	var _retval int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RecommendedHardDiskSpace dispatches through IUpdate's vtable slot 36.
 func (self *IUpdate) Get_RecommendedHardDiskSpace() (int32, error) {
-	var _retval int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RecommendedMemory dispatches through IUpdate's vtable slot 37.
 func (self *IUpdate) Get_RecommendedMemory() (int32, error) {
-	var _retval int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReleaseNotes dispatches through IUpdate's vtable slot 38.
 func (self *IUpdate) Get_ReleaseNotes() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SecurityBulletinIDs dispatches through IUpdate's vtable slot 39.
 func (self *IUpdate) Get_SecurityBulletinIDs() (*IStringCollection, error) {
-	var _retval *IStringCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IStringCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SupersededUpdateIDs dispatches through IUpdate's vtable slot 40.
 func (self *IUpdate) Get_SupersededUpdateIDs() (*IStringCollection, error) {
-	var _retval *IStringCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IStringCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SupportUrl dispatches through IUpdate's vtable slot 41.
 func (self *IUpdate) Get_SupportUrl() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Type dispatches through IUpdate's vtable slot 42.
 func (self *IUpdate) Get_Type() (UpdateType, error) {
-	var _retval UpdateType
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(UpdateType)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UninstallationNotes dispatches through IUpdate's vtable slot 43.
 func (self *IUpdate) Get_UninstallationNotes() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UninstallationBehavior dispatches through IUpdate's vtable slot 44.
 func (self *IUpdate) Get_UninstallationBehavior() (*IInstallationBehavior, error) {
-	var _retval *IInstallationBehavior
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IInstallationBehavior)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UninstallationSteps dispatches through IUpdate's vtable slot 45.
 func (self *IUpdate) Get_UninstallationSteps() (*IStringCollection, error) {
-	var _retval *IStringCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IStringCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_KBArticleIDs dispatches through IUpdate's vtable slot 46.
 func (self *IUpdate) Get_KBArticleIDs() (*IStringCollection, error) {
-	var _retval *IStringCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IStringCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // AcceptEula dispatches through IUpdate's vtable slot 47.
@@ -1325,9 +1325,9 @@ func (self *IUpdate) AcceptEula() error {
 
 // Get_DeploymentAction dispatches through IUpdate's vtable slot 48.
 func (self *IUpdate) Get_DeploymentAction() (DeploymentAction, error) {
-	var _retval DeploymentAction
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(DeploymentAction)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // CopyFromCache dispatches through IUpdate's vtable slot 49.
@@ -1338,16 +1338,16 @@ func (self *IUpdate) CopyFromCache(path foundation.BSTR, toExtractCabFiles found
 
 // Get_DownloadPriority dispatches through IUpdate's vtable slot 50.
 func (self *IUpdate) Get_DownloadPriority() (DownloadPriority, error) {
-	var _retval DownloadPriority
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(DownloadPriority)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DownloadContents dispatches through IUpdate's vtable slot 51.
 func (self *IUpdate) Get_DownloadContents() (*IUpdateDownloadContentCollection, error) {
-	var _retval *IUpdateDownloadContentCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IUpdateDownloadContentCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IUpdate2: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdate2
@@ -1361,23 +1361,23 @@ var IID_IUpdate2 = win32.GUID{Data1: 0x144fe9b0, Data2: 0xd23d, Data3: 0x4a8b, D
 
 // Get_RebootRequired dispatches through IUpdate2's vtable slot 52.
 func (self *IUpdate2) Get_RebootRequired() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsPresent dispatches through IUpdate2's vtable slot 53.
 func (self *IUpdate2) Get_IsPresent() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CveIDs dispatches through IUpdate2's vtable slot 54.
 func (self *IUpdate2) Get_CveIDs() (*IStringCollection, error) {
-	var _retval *IStringCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IStringCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // CopyToCache dispatches through IUpdate2's vtable slot 55.
@@ -1397,9 +1397,9 @@ var IID_IUpdate3 = win32.GUID{Data1: 0x112eda6b, Data2: 0x95b3, Data3: 0x476f, D
 
 // Get_BrowseOnly dispatches through IUpdate3's vtable slot 56.
 func (self *IUpdate3) Get_BrowseOnly() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IUpdate4: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdate4
@@ -1413,9 +1413,9 @@ var IID_IUpdate4 = win32.GUID{Data1: 0x27e94b0d, Data2: 0x5139, Data3: 0x49a2, D
 
 // Get_PerUser dispatches through IUpdate4's vtable slot 57.
 func (self *IUpdate4) Get_PerUser() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IUpdate5: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdate5
@@ -1429,16 +1429,16 @@ var IID_IUpdate5 = win32.GUID{Data1: 0xc1c2f21a, Data2: 0xd2f4, Data3: 0x4902, D
 
 // Get_AutoSelection dispatches through IUpdate5's vtable slot 58.
 func (self *IUpdate5) Get_AutoSelection() (AutoSelectionMode, error) {
-	var _retval AutoSelectionMode
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(AutoSelectionMode)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AutoDownload dispatches through IUpdate5's vtable slot 59.
 func (self *IUpdate5) Get_AutoDownload() (AutoDownloadMode, error) {
-	var _retval AutoDownloadMode
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(AutoDownloadMode)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IUpdateCollection: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdatecollection
@@ -1452,9 +1452,9 @@ var IID_IUpdateCollection = win32.GUID{Data1: 0x07f7438c, Data2: 0x7709, Data3: 
 
 // Get_Item dispatches through IUpdateCollection's vtable slot 7.
 func (self *IUpdateCollection) Get_Item(index int32) (*IUpdate, error) {
-	var _retval *IUpdate
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IUpdate)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Item dispatches through IUpdateCollection's vtable slot 8.
@@ -1465,30 +1465,30 @@ func (self *IUpdateCollection) Put_Item(index int32, value *IUpdate) error {
 
 // Get__NewEnum dispatches through IUpdateCollection's vtable slot 9.
 func (self *IUpdateCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IUpdateCollection's vtable slot 10.
 func (self *IUpdateCollection) Get_Count() (int32, error) {
-	var _retval int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReadOnly dispatches through IUpdateCollection's vtable slot 11.
 func (self *IUpdateCollection) Get_ReadOnly() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through IUpdateCollection's vtable slot 12.
 func (self *IUpdateCollection) Add(value *IUpdate) (int32, error) {
-	var _retval int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through IUpdateCollection's vtable slot 13.
@@ -1499,9 +1499,9 @@ func (self *IUpdateCollection) Clear() error {
 
 // Copy dispatches through IUpdateCollection's vtable slot 14.
 func (self *IUpdateCollection) Copy() (*IUpdateCollection, error) {
-	var _retval *IUpdateCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IUpdateCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Insert dispatches through IUpdateCollection's vtable slot 15.
@@ -1527,9 +1527,9 @@ var IID_IUpdateDownloadContent = win32.GUID{Data1: 0x54a2cb2d, Data2: 0x9a0c, Da
 
 // Get_DownloadUrl dispatches through IUpdateDownloadContent's vtable slot 7.
 func (self *IUpdateDownloadContent) Get_DownloadUrl() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IUpdateDownloadContent2: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdatedownloadcontent2
@@ -1543,9 +1543,9 @@ var IID_IUpdateDownloadContent2 = win32.GUID{Data1: 0xc97ad11b, Data2: 0xf257, D
 
 // Get_IsDeltaCompressedContent dispatches through IUpdateDownloadContent2's vtable slot 8.
 func (self *IUpdateDownloadContent2) Get_IsDeltaCompressedContent() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IUpdateDownloadContentCollection: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdatedownloadcontentcollection
@@ -1559,23 +1559,23 @@ var IID_IUpdateDownloadContentCollection = win32.GUID{Data1: 0xbc5513c8, Data2: 
 
 // Get_Item dispatches through IUpdateDownloadContentCollection's vtable slot 7.
 func (self *IUpdateDownloadContentCollection) Get_Item(index int32) (*IUpdateDownloadContent, error) {
-	var _retval *IUpdateDownloadContent
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IUpdateDownloadContent)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IUpdateDownloadContentCollection's vtable slot 8.
 func (self *IUpdateDownloadContentCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IUpdateDownloadContentCollection's vtable slot 9.
 func (self *IUpdateDownloadContentCollection) Get_Count() (int32, error) {
-	var _retval int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IUpdateDownloadResult: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdatedownloadresult
@@ -1589,16 +1589,16 @@ var IID_IUpdateDownloadResult = win32.GUID{Data1: 0xbf99af76, Data2: 0xb575, Dat
 
 // Get_HResult dispatches through IUpdateDownloadResult's vtable slot 7.
 func (self *IUpdateDownloadResult) Get_HResult() (int32, error) {
-	var _retval int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ResultCode dispatches through IUpdateDownloadResult's vtable slot 8.
 func (self *IUpdateDownloadResult) Get_ResultCode() (OperationResultCode, error) {
-	var _retval OperationResultCode
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(OperationResultCode)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IUpdateDownloader: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdatedownloader
@@ -1612,9 +1612,9 @@ var IID_IUpdateDownloader = win32.GUID{Data1: 0x68f1c6f9, Data2: 0x7ecc, Data3: 
 
 // Get_ClientApplicationID dispatches through IUpdateDownloader's vtable slot 7.
 func (self *IUpdateDownloader) Get_ClientApplicationID() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ClientApplicationID dispatches through IUpdateDownloader's vtable slot 8.
@@ -1625,9 +1625,9 @@ func (self *IUpdateDownloader) Put_ClientApplicationID(value foundation.BSTR) er
 
 // Get_IsForced dispatches through IUpdateDownloader's vtable slot 9.
 func (self *IUpdateDownloader) Get_IsForced() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_IsForced dispatches through IUpdateDownloader's vtable slot 10.
@@ -1638,9 +1638,9 @@ func (self *IUpdateDownloader) Put_IsForced(value foundation.VARIANT_BOOL) error
 
 // Get_Priority dispatches through IUpdateDownloader's vtable slot 11.
 func (self *IUpdateDownloader) Get_Priority() (DownloadPriority, error) {
-	var _retval DownloadPriority
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(DownloadPriority)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Priority dispatches through IUpdateDownloader's vtable slot 12.
@@ -1651,9 +1651,9 @@ func (self *IUpdateDownloader) Put_Priority(value DownloadPriority) error {
 
 // Get_Updates dispatches through IUpdateDownloader's vtable slot 13.
 func (self *IUpdateDownloader) Get_Updates() (*IUpdateCollection, error) {
-	var _retval *IUpdateCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IUpdateCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Updates dispatches through IUpdateDownloader's vtable slot 14.
@@ -1664,16 +1664,16 @@ func (self *IUpdateDownloader) Put_Updates(value *IUpdateCollection) error {
 
 // Download dispatches through IUpdateDownloader's vtable slot 16.
 func (self *IUpdateDownloader) Download() (*IDownloadResult, error) {
-	var _retval *IDownloadResult
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IDownloadResult)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // EndDownload dispatches through IUpdateDownloader's vtable slot 17.
 func (self *IUpdateDownloader) EndDownload(value *IDownloadJob) (*IDownloadResult, error) {
-	var _retval *IDownloadResult
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IDownloadResult)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 94726306-f12a-482a-a774-fb4f870d98c0
@@ -1686,9 +1686,9 @@ var IID_IUpdateDownloaderEx = win32.GUID{Data1: 0x94726306, Data2: 0xf12a, Data3
 
 // Download2 dispatches through IUpdateDownloaderEx's vtable slot 19.
 func (self *IUpdateDownloaderEx) Download2(downloadType DownloadType) (*IDownloadResult, error) {
-	var _retval *IDownloadResult
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(downloadType), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IDownloadResult)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(downloadType), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 769355a3-c5a0-497c-a606-560a36d2121c
@@ -1701,16 +1701,16 @@ var IID_IUpdateEx = win32.GUID{Data1: 0x769355a3, Data2: 0xc5a0, Data3: 0x497c, 
 
 // Get_ExtendedStaticProperty dispatches through IUpdateEx's vtable slot 60.
 func (self *IUpdateEx) Get_ExtendedStaticProperty(propertyName foundation.BSTR) (systemvariant.VARIANT, error) {
-	var _retval systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propertyName)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propertyName)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // EvaluateExtendedDynamicProperty dispatches through IUpdateEx's vtable slot 61.
 func (self *IUpdateEx) EvaluateExtendedDynamicProperty(propertyName foundation.BSTR) (systemvariant.VARIANT, error) {
-	var _retval systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propertyName)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propertyName)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IUpdateException: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdateexception
@@ -1724,23 +1724,23 @@ var IID_IUpdateException = win32.GUID{Data1: 0xa376dd5e, Data2: 0x09d4, Data3: 0
 
 // Get_Message dispatches through IUpdateException's vtable slot 7.
 func (self *IUpdateException) Get_Message() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HResult dispatches through IUpdateException's vtable slot 8.
 func (self *IUpdateException) Get_HResult() (int32, error) {
-	var _retval int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Context dispatches through IUpdateException's vtable slot 9.
 func (self *IUpdateException) Get_Context() (UpdateExceptionContext, error) {
-	var _retval UpdateExceptionContext
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(UpdateExceptionContext)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IUpdateExceptionCollection: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdateexceptioncollection
@@ -1754,23 +1754,23 @@ var IID_IUpdateExceptionCollection = win32.GUID{Data1: 0x503626a3, Data2: 0x8e14
 
 // Get_Item dispatches through IUpdateExceptionCollection's vtable slot 7.
 func (self *IUpdateExceptionCollection) Get_Item(index int32) (*IUpdateException, error) {
-	var _retval *IUpdateException
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IUpdateException)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IUpdateExceptionCollection's vtable slot 8.
 func (self *IUpdateExceptionCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IUpdateExceptionCollection's vtable slot 9.
 func (self *IUpdateExceptionCollection) Get_Count() (int32, error) {
-	var _retval int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IUpdateHistoryEntry: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdatehistoryentry
@@ -1784,100 +1784,100 @@ var IID_IUpdateHistoryEntry = win32.GUID{Data1: 0xbe56a644, Data2: 0xaf0e, Data3
 
 // Get_Operation dispatches through IUpdateHistoryEntry's vtable slot 7.
 func (self *IUpdateHistoryEntry) Get_Operation() (UpdateOperation, error) {
-	var _retval UpdateOperation
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(UpdateOperation)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ResultCode dispatches through IUpdateHistoryEntry's vtable slot 8.
 func (self *IUpdateHistoryEntry) Get_ResultCode() (OperationResultCode, error) {
-	var _retval OperationResultCode
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(OperationResultCode)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HResult dispatches through IUpdateHistoryEntry's vtable slot 9.
 func (self *IUpdateHistoryEntry) Get_HResult() (int32, error) {
-	var _retval int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Date dispatches through IUpdateHistoryEntry's vtable slot 10.
 func (self *IUpdateHistoryEntry) Get_Date() (float64, error) {
-	var _retval float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UpdateIdentity dispatches through IUpdateHistoryEntry's vtable slot 11.
 func (self *IUpdateHistoryEntry) Get_UpdateIdentity() (*IUpdateIdentity, error) {
-	var _retval *IUpdateIdentity
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IUpdateIdentity)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Title dispatches through IUpdateHistoryEntry's vtable slot 12.
 func (self *IUpdateHistoryEntry) Get_Title() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through IUpdateHistoryEntry's vtable slot 13.
 func (self *IUpdateHistoryEntry) Get_Description() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UnmappedResultCode dispatches through IUpdateHistoryEntry's vtable slot 14.
 func (self *IUpdateHistoryEntry) Get_UnmappedResultCode() (int32, error) {
-	var _retval int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ClientApplicationID dispatches through IUpdateHistoryEntry's vtable slot 15.
 func (self *IUpdateHistoryEntry) Get_ClientApplicationID() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ServerSelection dispatches through IUpdateHistoryEntry's vtable slot 16.
 func (self *IUpdateHistoryEntry) Get_ServerSelection() (ServerSelection, error) {
-	var _retval ServerSelection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(ServerSelection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ServiceID dispatches through IUpdateHistoryEntry's vtable slot 17.
 func (self *IUpdateHistoryEntry) Get_ServiceID() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UninstallationSteps dispatches through IUpdateHistoryEntry's vtable slot 18.
 func (self *IUpdateHistoryEntry) Get_UninstallationSteps() (*IStringCollection, error) {
-	var _retval *IStringCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IStringCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UninstallationNotes dispatches through IUpdateHistoryEntry's vtable slot 19.
 func (self *IUpdateHistoryEntry) Get_UninstallationNotes() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SupportUrl dispatches through IUpdateHistoryEntry's vtable slot 20.
 func (self *IUpdateHistoryEntry) Get_SupportUrl() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IUpdateHistoryEntry2: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdatehistoryentry2
@@ -1891,9 +1891,9 @@ var IID_IUpdateHistoryEntry2 = win32.GUID{Data1: 0xc2bfb780, Data2: 0x4539, Data
 
 // Get_Categories dispatches through IUpdateHistoryEntry2's vtable slot 21.
 func (self *IUpdateHistoryEntry2) Get_Categories() (*ICategoryCollection, error) {
-	var _retval *ICategoryCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*ICategoryCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IUpdateHistoryEntryCollection: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdatehistoryentrycollection
@@ -1907,23 +1907,23 @@ var IID_IUpdateHistoryEntryCollection = win32.GUID{Data1: 0xa7f04f3c, Data2: 0xa
 
 // Get_Item dispatches through IUpdateHistoryEntryCollection's vtable slot 7.
 func (self *IUpdateHistoryEntryCollection) Get_Item(index int32) (*IUpdateHistoryEntry, error) {
-	var _retval *IUpdateHistoryEntry
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IUpdateHistoryEntry)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IUpdateHistoryEntryCollection's vtable slot 8.
 func (self *IUpdateHistoryEntryCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IUpdateHistoryEntryCollection's vtable slot 9.
 func (self *IUpdateHistoryEntryCollection) Get_Count() (int32, error) {
-	var _retval int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IUpdateIdentity: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdateidentity
@@ -1937,16 +1937,16 @@ var IID_IUpdateIdentity = win32.GUID{Data1: 0x46297823, Data2: 0x9940, Data3: 0x
 
 // Get_RevisionNumber dispatches through IUpdateIdentity's vtable slot 7.
 func (self *IUpdateIdentity) Get_RevisionNumber() (int32, error) {
-	var _retval int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UpdateID dispatches through IUpdateIdentity's vtable slot 8.
 func (self *IUpdateIdentity) Get_UpdateID() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IUpdateInstallationResult: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdateinstallationresult
@@ -1960,23 +1960,23 @@ var IID_IUpdateInstallationResult = win32.GUID{Data1: 0xd940f0f8, Data2: 0x3cbb,
 
 // Get_HResult dispatches through IUpdateInstallationResult's vtable slot 7.
 func (self *IUpdateInstallationResult) Get_HResult() (int32, error) {
-	var _retval int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RebootRequired dispatches through IUpdateInstallationResult's vtable slot 8.
 func (self *IUpdateInstallationResult) Get_RebootRequired() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ResultCode dispatches through IUpdateInstallationResult's vtable slot 9.
 func (self *IUpdateInstallationResult) Get_ResultCode() (OperationResultCode, error) {
-	var _retval OperationResultCode
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(OperationResultCode)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IUpdateInstaller: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdateinstaller
@@ -1990,9 +1990,9 @@ var IID_IUpdateInstaller = win32.GUID{Data1: 0x7b929c68, Data2: 0xccdc, Data3: 0
 
 // Get_ClientApplicationID dispatches through IUpdateInstaller's vtable slot 7.
 func (self *IUpdateInstaller) Get_ClientApplicationID() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ClientApplicationID dispatches through IUpdateInstaller's vtable slot 8.
@@ -2003,9 +2003,9 @@ func (self *IUpdateInstaller) Put_ClientApplicationID(value foundation.BSTR) err
 
 // Get_IsForced dispatches through IUpdateInstaller's vtable slot 9.
 func (self *IUpdateInstaller) Get_IsForced() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_IsForced dispatches through IUpdateInstaller's vtable slot 10.
@@ -2016,9 +2016,9 @@ func (self *IUpdateInstaller) Put_IsForced(value foundation.VARIANT_BOOL) error 
 
 // Get_ParentHwnd dispatches through IUpdateInstaller's vtable slot 11.
 func (self *IUpdateInstaller) Get_ParentHwnd() (foundation.HWND, error) {
-	var _retval foundation.HWND
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.HWND)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ParentHwnd dispatches through IUpdateInstaller's vtable slot 12.
@@ -2035,16 +2035,16 @@ func (self *IUpdateInstaller) Put_ParentWindow(value *systemcom.IUnknown) error 
 
 // Get_ParentWindow dispatches through IUpdateInstaller's vtable slot 14.
 func (self *IUpdateInstaller) Get_ParentWindow() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Updates dispatches through IUpdateInstaller's vtable slot 15.
 func (self *IUpdateInstaller) Get_Updates() (*IUpdateCollection, error) {
-	var _retval *IUpdateCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IUpdateCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Updates dispatches through IUpdateInstaller's vtable slot 16.
@@ -2055,51 +2055,51 @@ func (self *IUpdateInstaller) Put_Updates(value *IUpdateCollection) error {
 
 // EndInstall dispatches through IUpdateInstaller's vtable slot 19.
 func (self *IUpdateInstaller) EndInstall(value *IInstallationJob) (*IInstallationResult, error) {
-	var _retval *IInstallationResult
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IInstallationResult)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // EndUninstall dispatches through IUpdateInstaller's vtable slot 20.
 func (self *IUpdateInstaller) EndUninstall(value *IInstallationJob) (*IInstallationResult, error) {
-	var _retval *IInstallationResult
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IInstallationResult)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Install dispatches through IUpdateInstaller's vtable slot 21.
 func (self *IUpdateInstaller) Install() (*IInstallationResult, error) {
-	var _retval *IInstallationResult
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IInstallationResult)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // RunWizard dispatches through IUpdateInstaller's vtable slot 22.
 func (self *IUpdateInstaller) RunWizard(dialogTitle foundation.BSTR) (*IInstallationResult, error) {
-	var _retval *IInstallationResult
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dialogTitle)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IInstallationResult)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dialogTitle)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsBusy dispatches through IUpdateInstaller's vtable slot 23.
 func (self *IUpdateInstaller) Get_IsBusy() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Uninstall dispatches through IUpdateInstaller's vtable slot 24.
 func (self *IUpdateInstaller) Uninstall() (*IInstallationResult, error) {
-	var _retval *IInstallationResult
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IInstallationResult)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AllowSourcePrompts dispatches through IUpdateInstaller's vtable slot 25.
 func (self *IUpdateInstaller) Get_AllowSourcePrompts() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AllowSourcePrompts dispatches through IUpdateInstaller's vtable slot 26.
@@ -2110,9 +2110,9 @@ func (self *IUpdateInstaller) Put_AllowSourcePrompts(value foundation.VARIANT_BO
 
 // Get_RebootRequiredBeforeInstallation dispatches through IUpdateInstaller's vtable slot 27.
 func (self *IUpdateInstaller) Get_RebootRequiredBeforeInstallation() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IUpdateInstaller2: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdateinstaller2
@@ -2126,9 +2126,9 @@ var IID_IUpdateInstaller2 = win32.GUID{Data1: 0x3442d4fe, Data2: 0x224d, Data3: 
 
 // Get_ForceQuiet dispatches through IUpdateInstaller2's vtable slot 28.
 func (self *IUpdateInstaller2) Get_ForceQuiet() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ForceQuiet dispatches through IUpdateInstaller2's vtable slot 29.
@@ -2148,9 +2148,9 @@ var IID_IUpdateInstaller3 = win32.GUID{Data1: 0x16d11c35, Data2: 0x099a, Data3: 
 
 // Get_AttemptCloseAppsIfNecessary dispatches through IUpdateInstaller3's vtable slot 30.
 func (self *IUpdateInstaller3) Get_AttemptCloseAppsIfNecessary() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AttemptCloseAppsIfNecessary dispatches through IUpdateInstaller3's vtable slot 31.
@@ -2200,9 +2200,9 @@ var IID_IUpdateSearcher = win32.GUID{Data1: 0x8f45abf1, Data2: 0xf9ae, Data3: 0x
 
 // Get_CanAutomaticallyUpgradeService dispatches through IUpdateSearcher's vtable slot 7.
 func (self *IUpdateSearcher) Get_CanAutomaticallyUpgradeService() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CanAutomaticallyUpgradeService dispatches through IUpdateSearcher's vtable slot 8.
@@ -2213,9 +2213,9 @@ func (self *IUpdateSearcher) Put_CanAutomaticallyUpgradeService(value foundation
 
 // Get_ClientApplicationID dispatches through IUpdateSearcher's vtable slot 9.
 func (self *IUpdateSearcher) Get_ClientApplicationID() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ClientApplicationID dispatches through IUpdateSearcher's vtable slot 10.
@@ -2226,9 +2226,9 @@ func (self *IUpdateSearcher) Put_ClientApplicationID(value foundation.BSTR) erro
 
 // Get_IncludePotentiallySupersededUpdates dispatches through IUpdateSearcher's vtable slot 11.
 func (self *IUpdateSearcher) Get_IncludePotentiallySupersededUpdates() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_IncludePotentiallySupersededUpdates dispatches through IUpdateSearcher's vtable slot 12.
@@ -2239,9 +2239,9 @@ func (self *IUpdateSearcher) Put_IncludePotentiallySupersededUpdates(value found
 
 // Get_ServerSelection dispatches through IUpdateSearcher's vtable slot 13.
 func (self *IUpdateSearcher) Get_ServerSelection() (ServerSelection, error) {
-	var _retval ServerSelection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(ServerSelection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ServerSelection dispatches through IUpdateSearcher's vtable slot 14.
@@ -2252,37 +2252,37 @@ func (self *IUpdateSearcher) Put_ServerSelection(value ServerSelection) error {
 
 // EndSearch dispatches through IUpdateSearcher's vtable slot 16.
 func (self *IUpdateSearcher) EndSearch(searchJob *ISearchJob) (*ISearchResult, error) {
-	var _retval *ISearchResult
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(searchJob)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*ISearchResult)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(searchJob)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // EscapeString dispatches through IUpdateSearcher's vtable slot 17.
 func (self *IUpdateSearcher) EscapeString(unescaped foundation.BSTR) (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(unescaped)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(unescaped)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // QueryHistory dispatches through IUpdateSearcher's vtable slot 18.
 func (self *IUpdateSearcher) QueryHistory(startIndex int32, count int32) (*IUpdateHistoryEntryCollection, error) {
-	var _retval *IUpdateHistoryEntryCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(startIndex), uintptr(count), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IUpdateHistoryEntryCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(startIndex), uintptr(count), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Search dispatches through IUpdateSearcher's vtable slot 19.
 func (self *IUpdateSearcher) Search(criteria foundation.BSTR) (*ISearchResult, error) {
-	var _retval *ISearchResult
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(criteria)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*ISearchResult)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(criteria)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Online dispatches through IUpdateSearcher's vtable slot 20.
 func (self *IUpdateSearcher) Get_Online() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Online dispatches through IUpdateSearcher's vtable slot 21.
@@ -2293,16 +2293,16 @@ func (self *IUpdateSearcher) Put_Online(value foundation.VARIANT_BOOL) error {
 
 // GetTotalHistoryCount dispatches through IUpdateSearcher's vtable slot 22.
 func (self *IUpdateSearcher) GetTotalHistoryCount() (int32, error) {
-	var _retval int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ServiceID dispatches through IUpdateSearcher's vtable slot 23.
 func (self *IUpdateSearcher) Get_ServiceID() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ServiceID dispatches through IUpdateSearcher's vtable slot 24.
@@ -2322,9 +2322,9 @@ var IID_IUpdateSearcher2 = win32.GUID{Data1: 0x4cbdcb2d, Data2: 0x1589, Data3: 0
 
 // Get_IgnoreDownloadPriority dispatches through IUpdateSearcher2's vtable slot 25.
 func (self *IUpdateSearcher2) Get_IgnoreDownloadPriority() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_IgnoreDownloadPriority dispatches through IUpdateSearcher2's vtable slot 26.
@@ -2344,9 +2344,9 @@ var IID_IUpdateSearcher3 = win32.GUID{Data1: 0x04c6895d, Data2: 0xeaf2, Data3: 0
 
 // Get_SearchScope dispatches through IUpdateSearcher3's vtable slot 27.
 func (self *IUpdateSearcher3) Get_SearchScope() (SearchScope, error) {
-	var _retval SearchScope
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(SearchScope)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SearchScope dispatches through IUpdateSearcher3's vtable slot 28.
@@ -2366,93 +2366,93 @@ var IID_IUpdateService = win32.GUID{Data1: 0x76b3b17e, Data2: 0xaed6, Data3: 0x4
 
 // Get_Name dispatches through IUpdateService's vtable slot 7.
 func (self *IUpdateService) Get_Name() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ContentValidationCert dispatches through IUpdateService's vtable slot 8.
 func (self *IUpdateService) Get_ContentValidationCert() (systemvariant.VARIANT, error) {
-	var _retval systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ExpirationDate dispatches through IUpdateService's vtable slot 9.
 func (self *IUpdateService) Get_ExpirationDate() (float64, error) {
-	var _retval float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsManaged dispatches through IUpdateService's vtable slot 10.
 func (self *IUpdateService) Get_IsManaged() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsRegisteredWithAU dispatches through IUpdateService's vtable slot 11.
 func (self *IUpdateService) Get_IsRegisteredWithAU() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IssueDate dispatches through IUpdateService's vtable slot 12.
 func (self *IUpdateService) Get_IssueDate() (float64, error) {
-	var _retval float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OffersWindowsUpdates dispatches through IUpdateService's vtable slot 13.
 func (self *IUpdateService) Get_OffersWindowsUpdates() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RedirectUrls dispatches through IUpdateService's vtable slot 14.
 func (self *IUpdateService) Get_RedirectUrls() (*IStringCollection, error) {
-	var _retval *IStringCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IStringCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ServiceID dispatches through IUpdateService's vtable slot 15.
 func (self *IUpdateService) Get_ServiceID() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsScanPackageService dispatches through IUpdateService's vtable slot 16.
 func (self *IUpdateService) Get_IsScanPackageService() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CanRegisterWithAU dispatches through IUpdateService's vtable slot 17.
 func (self *IUpdateService) Get_CanRegisterWithAU() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ServiceUrl dispatches through IUpdateService's vtable slot 18.
 func (self *IUpdateService) Get_ServiceUrl() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SetupPrefix dispatches through IUpdateService's vtable slot 19.
 func (self *IUpdateService) Get_SetupPrefix() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IUpdateService2: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdateservice2
@@ -2466,9 +2466,9 @@ var IID_IUpdateService2 = win32.GUID{Data1: 0x1518b460, Data2: 0x6518, Data3: 0x
 
 // Get_IsDefaultAUService dispatches through IUpdateService2's vtable slot 20.
 func (self *IUpdateService2) Get_IsDefaultAUService() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IUpdateServiceCollection: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdateservicecollection
@@ -2482,23 +2482,23 @@ var IID_IUpdateServiceCollection = win32.GUID{Data1: 0x9b0353aa, Data2: 0x0e52, 
 
 // Get_Item dispatches through IUpdateServiceCollection's vtable slot 7.
 func (self *IUpdateServiceCollection) Get_Item(index int32) (*IUpdateService, error) {
-	var _retval *IUpdateService
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IUpdateService)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IUpdateServiceCollection's vtable slot 8.
 func (self *IUpdateServiceCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IUpdateServiceCollection's vtable slot 9.
 func (self *IUpdateServiceCollection) Get_Count() (int32, error) {
-	var _retval int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IUpdateServiceManager: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdateservicemanager
@@ -2512,16 +2512,16 @@ var IID_IUpdateServiceManager = win32.GUID{Data1: 0x23857e3c, Data2: 0x02ba, Dat
 
 // Get_Services dispatches through IUpdateServiceManager's vtable slot 7.
 func (self *IUpdateServiceManager) Get_Services() (*IUpdateServiceCollection, error) {
-	var _retval *IUpdateServiceCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IUpdateServiceCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // AddService dispatches through IUpdateServiceManager's vtable slot 8.
 func (self *IUpdateServiceManager) AddService(serviceID foundation.BSTR, authorizationCabPath foundation.BSTR) (*IUpdateService, error) {
-	var _retval *IUpdateService
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(serviceID)), uintptr(unsafe.Pointer(authorizationCabPath)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IUpdateService)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(serviceID)), uintptr(unsafe.Pointer(authorizationCabPath)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterServiceWithAU dispatches through IUpdateServiceManager's vtable slot 9.
@@ -2544,9 +2544,9 @@ func (self *IUpdateServiceManager) UnregisterServiceWithAU(serviceID foundation.
 
 // AddScanPackageService dispatches through IUpdateServiceManager's vtable slot 12.
 func (self *IUpdateServiceManager) AddScanPackageService(serviceName foundation.BSTR, scanFileLocation foundation.BSTR, flags int32) (*IUpdateService, error) {
-	var _ppService *IUpdateService
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(serviceName)), uintptr(unsafe.Pointer(scanFileLocation)), uintptr(flags), uintptr(unsafe.Pointer(&_ppService)))
-	return _ppService, win32.ErrIfFailed(int32(r1))
+	_ppService := new(*IUpdateService)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(serviceName)), uintptr(unsafe.Pointer(scanFileLocation)), uintptr(flags), uintptr(win32.OutParam(unsafe.Pointer(_ppService))))
+	return *_ppService, win32.ErrIfFailed(int32(r1))
 }
 
 // IUpdateServiceManager2: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdateservicemanager2
@@ -2560,9 +2560,9 @@ var IID_IUpdateServiceManager2 = win32.GUID{Data1: 0x0bb8531d, Data2: 0x7e8d, Da
 
 // Get_ClientApplicationID dispatches through IUpdateServiceManager2's vtable slot 14.
 func (self *IUpdateServiceManager2) Get_ClientApplicationID() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ClientApplicationID dispatches through IUpdateServiceManager2's vtable slot 15.
@@ -2573,16 +2573,16 @@ func (self *IUpdateServiceManager2) Put_ClientApplicationID(value foundation.BST
 
 // QueryServiceRegistration dispatches through IUpdateServiceManager2's vtable slot 16.
 func (self *IUpdateServiceManager2) QueryServiceRegistration(serviceID foundation.BSTR) (*IUpdateServiceRegistration, error) {
-	var _retval *IUpdateServiceRegistration
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(serviceID)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IUpdateServiceRegistration)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(serviceID)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // AddService2 dispatches through IUpdateServiceManager2's vtable slot 17.
 func (self *IUpdateServiceManager2) AddService2(serviceID foundation.BSTR, flags int32, authorizationCabPath foundation.BSTR) (*IUpdateServiceRegistration, error) {
-	var _retval *IUpdateServiceRegistration
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(serviceID)), uintptr(flags), uintptr(unsafe.Pointer(authorizationCabPath)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IUpdateServiceRegistration)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(serviceID)), uintptr(flags), uintptr(unsafe.Pointer(authorizationCabPath)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IUpdateServiceRegistration: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdateserviceregistration
@@ -2596,30 +2596,30 @@ var IID_IUpdateServiceRegistration = win32.GUID{Data1: 0xdde02280, Data2: 0x12b3
 
 // Get_RegistrationState dispatches through IUpdateServiceRegistration's vtable slot 7.
 func (self *IUpdateServiceRegistration) Get_RegistrationState() (UpdateServiceRegistrationState, error) {
-	var _retval UpdateServiceRegistrationState
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(UpdateServiceRegistrationState)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ServiceID dispatches through IUpdateServiceRegistration's vtable slot 8.
 func (self *IUpdateServiceRegistration) Get_ServiceID() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsPendingRegistrationWithAU dispatches through IUpdateServiceRegistration's vtable slot 9.
 func (self *IUpdateServiceRegistration) Get_IsPendingRegistrationWithAU() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Service dispatches through IUpdateServiceRegistration's vtable slot 10.
 func (self *IUpdateServiceRegistration) Get_Service() (*IUpdateService2, error) {
-	var _retval *IUpdateService2
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IUpdateService2)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IUpdateSession: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdatesession
@@ -2633,9 +2633,9 @@ var IID_IUpdateSession = win32.GUID{Data1: 0x816858a4, Data2: 0x260d, Data3: 0x4
 
 // Get_ClientApplicationID dispatches through IUpdateSession's vtable slot 7.
 func (self *IUpdateSession) Get_ClientApplicationID() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ClientApplicationID dispatches through IUpdateSession's vtable slot 8.
@@ -2646,16 +2646,16 @@ func (self *IUpdateSession) Put_ClientApplicationID(value foundation.BSTR) error
 
 // Get_ReadOnly dispatches through IUpdateSession's vtable slot 9.
 func (self *IUpdateSession) Get_ReadOnly() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_WebProxy dispatches through IUpdateSession's vtable slot 10.
 func (self *IUpdateSession) Get_WebProxy() (*IWebProxy, error) {
-	var _retval *IWebProxy
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IWebProxy)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_WebProxy dispatches through IUpdateSession's vtable slot 11.
@@ -2666,23 +2666,23 @@ func (self *IUpdateSession) Put_WebProxy(value *IWebProxy) error {
 
 // CreateUpdateSearcher dispatches through IUpdateSession's vtable slot 12.
 func (self *IUpdateSession) CreateUpdateSearcher() (*IUpdateSearcher, error) {
-	var _retval *IUpdateSearcher
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IUpdateSearcher)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateUpdateDownloader dispatches through IUpdateSession's vtable slot 13.
 func (self *IUpdateSession) CreateUpdateDownloader() (*IUpdateDownloader, error) {
-	var _retval *IUpdateDownloader
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IUpdateDownloader)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateUpdateInstaller dispatches through IUpdateSession's vtable slot 14.
 func (self *IUpdateSession) CreateUpdateInstaller() (*IUpdateInstaller, error) {
-	var _retval *IUpdateInstaller
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IUpdateInstaller)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IUpdateSession2: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdatesession2
@@ -2696,9 +2696,9 @@ var IID_IUpdateSession2 = win32.GUID{Data1: 0x91caf7b0, Data2: 0xeb23, Data3: 0x
 
 // Get_UserLocale dispatches through IUpdateSession2's vtable slot 15.
 func (self *IUpdateSession2) Get_UserLocale() (uint32, error) {
-	var _retval uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_UserLocale dispatches through IUpdateSession2's vtable slot 16.
@@ -2718,16 +2718,16 @@ var IID_IUpdateSession3 = win32.GUID{Data1: 0x918efd1e, Data2: 0xb5d8, Data3: 0x
 
 // CreateUpdateServiceManager dispatches through IUpdateSession3's vtable slot 17.
 func (self *IUpdateSession3) CreateUpdateServiceManager() (*IUpdateServiceManager2, error) {
-	var _retval *IUpdateServiceManager2
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IUpdateServiceManager2)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // QueryHistory dispatches through IUpdateSession3's vtable slot 18.
 func (self *IUpdateSession3) QueryHistory(criteria foundation.BSTR, startIndex int32, count int32) (*IUpdateHistoryEntryCollection, error) {
-	var _retval *IUpdateHistoryEntryCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(criteria)), uintptr(startIndex), uintptr(count), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IUpdateHistoryEntryCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(criteria)), uintptr(startIndex), uintptr(count), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IWebProxy: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iwebproxy
@@ -2741,9 +2741,9 @@ var IID_IWebProxy = win32.GUID{Data1: 0x174c81fe, Data2: 0xaecd, Data3: 0x4dae, 
 
 // Get_Address dispatches through IWebProxy's vtable slot 7.
 func (self *IWebProxy) Get_Address() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Address dispatches through IWebProxy's vtable slot 8.
@@ -2754,9 +2754,9 @@ func (self *IWebProxy) Put_Address(value foundation.BSTR) error {
 
 // Get_BypassList dispatches through IWebProxy's vtable slot 9.
 func (self *IWebProxy) Get_BypassList() (*IStringCollection, error) {
-	var _retval *IStringCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IStringCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BypassList dispatches through IWebProxy's vtable slot 10.
@@ -2767,9 +2767,9 @@ func (self *IWebProxy) Put_BypassList(value *IStringCollection) error {
 
 // Get_BypassProxyOnLocal dispatches through IWebProxy's vtable slot 11.
 func (self *IWebProxy) Get_BypassProxyOnLocal() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BypassProxyOnLocal dispatches through IWebProxy's vtable slot 12.
@@ -2780,16 +2780,16 @@ func (self *IWebProxy) Put_BypassProxyOnLocal(value foundation.VARIANT_BOOL) err
 
 // Get_ReadOnly dispatches through IWebProxy's vtable slot 13.
 func (self *IWebProxy) Get_ReadOnly() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UserName dispatches through IWebProxy's vtable slot 14.
 func (self *IWebProxy) Get_UserName() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_UserName dispatches through IWebProxy's vtable slot 15.
@@ -2818,9 +2818,9 @@ func (self *IWebProxy) PromptForCredentialsFromHwnd(parentWindow foundation.HWND
 
 // Get_AutoDetect dispatches through IWebProxy's vtable slot 19.
 func (self *IWebProxy) Get_AutoDetect() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AutoDetect dispatches through IWebProxy's vtable slot 20.
@@ -2840,58 +2840,58 @@ var IID_IWindowsDriverUpdate = win32.GUID{Data1: 0xb383cd1a, Data2: 0x5ce9, Data
 
 // Get_DriverClass dispatches through IWindowsDriverUpdate's vtable slot 52.
 func (self *IWindowsDriverUpdate) Get_DriverClass() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DriverHardwareID dispatches through IWindowsDriverUpdate's vtable slot 53.
 func (self *IWindowsDriverUpdate) Get_DriverHardwareID() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DriverManufacturer dispatches through IWindowsDriverUpdate's vtable slot 54.
 func (self *IWindowsDriverUpdate) Get_DriverManufacturer() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DriverModel dispatches through IWindowsDriverUpdate's vtable slot 55.
 func (self *IWindowsDriverUpdate) Get_DriverModel() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DriverProvider dispatches through IWindowsDriverUpdate's vtable slot 56.
 func (self *IWindowsDriverUpdate) Get_DriverProvider() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DriverVerDate dispatches through IWindowsDriverUpdate's vtable slot 57.
 func (self *IWindowsDriverUpdate) Get_DriverVerDate() (float64, error) {
-	var _retval float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DeviceProblemNumber dispatches through IWindowsDriverUpdate's vtable slot 58.
 func (self *IWindowsDriverUpdate) Get_DeviceProblemNumber() (int32, error) {
-	var _retval int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DeviceStatus dispatches through IWindowsDriverUpdate's vtable slot 59.
 func (self *IWindowsDriverUpdate) Get_DeviceStatus() (int32, error) {
-	var _retval int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IWindowsDriverUpdate2: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iwindowsdriverupdate2
@@ -2905,23 +2905,23 @@ var IID_IWindowsDriverUpdate2 = win32.GUID{Data1: 0x615c4269, Data2: 0x7a48, Dat
 
 // Get_RebootRequired dispatches through IWindowsDriverUpdate2's vtable slot 60.
 func (self *IWindowsDriverUpdate2) Get_RebootRequired() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsPresent dispatches through IWindowsDriverUpdate2's vtable slot 61.
 func (self *IWindowsDriverUpdate2) Get_IsPresent() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CveIDs dispatches through IWindowsDriverUpdate2's vtable slot 62.
 func (self *IWindowsDriverUpdate2) Get_CveIDs() (*IStringCollection, error) {
-	var _retval *IStringCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IStringCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // CopyToCache dispatches through IWindowsDriverUpdate2's vtable slot 63.
@@ -2941,9 +2941,9 @@ var IID_IWindowsDriverUpdate3 = win32.GUID{Data1: 0x49ebd502, Data2: 0x4a96, Dat
 
 // Get_BrowseOnly dispatches through IWindowsDriverUpdate3's vtable slot 64.
 func (self *IWindowsDriverUpdate3) Get_BrowseOnly() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IWindowsDriverUpdate4: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iwindowsdriverupdate4
@@ -2957,16 +2957,16 @@ var IID_IWindowsDriverUpdate4 = win32.GUID{Data1: 0x004c6a2b, Data2: 0x0c19, Dat
 
 // Get_WindowsDriverUpdateEntries dispatches through IWindowsDriverUpdate4's vtable slot 65.
 func (self *IWindowsDriverUpdate4) Get_WindowsDriverUpdateEntries() (*IWindowsDriverUpdateEntryCollection, error) {
-	var _retval *IWindowsDriverUpdateEntryCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IWindowsDriverUpdateEntryCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PerUser dispatches through IWindowsDriverUpdate4's vtable slot 66.
 func (self *IWindowsDriverUpdate4) Get_PerUser() (foundation.VARIANT_BOOL, error) {
-	var _retval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IWindowsDriverUpdate5: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iwindowsdriverupdate5
@@ -2980,16 +2980,16 @@ var IID_IWindowsDriverUpdate5 = win32.GUID{Data1: 0x70cf5c82, Data2: 0x8642, Dat
 
 // Get_AutoSelection dispatches through IWindowsDriverUpdate5's vtable slot 67.
 func (self *IWindowsDriverUpdate5) Get_AutoSelection() (AutoSelectionMode, error) {
-	var _retval AutoSelectionMode
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(AutoSelectionMode)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AutoDownload dispatches through IWindowsDriverUpdate5's vtable slot 68.
 func (self *IWindowsDriverUpdate5) Get_AutoDownload() (AutoDownloadMode, error) {
-	var _retval AutoDownloadMode
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(AutoDownloadMode)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IWindowsDriverUpdateEntry: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iwindowsdriverupdateentry
@@ -3003,58 +3003,58 @@ var IID_IWindowsDriverUpdateEntry = win32.GUID{Data1: 0xed8bfe40, Data2: 0xa60b,
 
 // Get_DriverClass dispatches through IWindowsDriverUpdateEntry's vtable slot 7.
 func (self *IWindowsDriverUpdateEntry) Get_DriverClass() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DriverHardwareID dispatches through IWindowsDriverUpdateEntry's vtable slot 8.
 func (self *IWindowsDriverUpdateEntry) Get_DriverHardwareID() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DriverManufacturer dispatches through IWindowsDriverUpdateEntry's vtable slot 9.
 func (self *IWindowsDriverUpdateEntry) Get_DriverManufacturer() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DriverModel dispatches through IWindowsDriverUpdateEntry's vtable slot 10.
 func (self *IWindowsDriverUpdateEntry) Get_DriverModel() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DriverProvider dispatches through IWindowsDriverUpdateEntry's vtable slot 11.
 func (self *IWindowsDriverUpdateEntry) Get_DriverProvider() (foundation.BSTR, error) {
-	var _retval foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DriverVerDate dispatches through IWindowsDriverUpdateEntry's vtable slot 12.
 func (self *IWindowsDriverUpdateEntry) Get_DriverVerDate() (float64, error) {
-	var _retval float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DeviceProblemNumber dispatches through IWindowsDriverUpdateEntry's vtable slot 13.
 func (self *IWindowsDriverUpdateEntry) Get_DeviceProblemNumber() (int32, error) {
-	var _retval int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DeviceStatus dispatches through IWindowsDriverUpdateEntry's vtable slot 14.
 func (self *IWindowsDriverUpdateEntry) Get_DeviceStatus() (int32, error) {
-	var _retval int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IWindowsDriverUpdateEntryCollection: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iwindowsdriverupdateentrycollection
@@ -3068,23 +3068,23 @@ var IID_IWindowsDriverUpdateEntryCollection = win32.GUID{Data1: 0x0d521700, Data
 
 // Get_Item dispatches through IWindowsDriverUpdateEntryCollection's vtable slot 7.
 func (self *IWindowsDriverUpdateEntryCollection) Get_Item(index int32) (*IWindowsDriverUpdateEntry, error) {
-	var _retval *IWindowsDriverUpdateEntry
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*IWindowsDriverUpdateEntry)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IWindowsDriverUpdateEntryCollection's vtable slot 8.
 func (self *IWindowsDriverUpdateEntryCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IWindowsDriverUpdateEntryCollection's vtable slot 9.
 func (self *IWindowsDriverUpdateEntryCollection) Get_Count() (int32, error) {
-	var _retval int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IWindowsUpdateAgentInfo: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iwindowsupdateagentinfo

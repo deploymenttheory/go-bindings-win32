@@ -37,58 +37,58 @@ func (self *IWinHttpRequest) SetRequestHeader(Header foundation.BSTR, Value foun
 
 // GetResponseHeader dispatches through IWinHttpRequest's vtable slot 11.
 func (self *IWinHttpRequest) GetResponseHeader(Header foundation.BSTR) (foundation.BSTR, error) {
-	var _Value foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Header)), uintptr(unsafe.Pointer(&_Value)))
-	return _Value, win32.ErrIfFailed(int32(r1))
+	_Value := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Header)), uintptr(win32.OutParam(unsafe.Pointer(_Value))))
+	return *_Value, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAllResponseHeaders dispatches through IWinHttpRequest's vtable slot 12.
 func (self *IWinHttpRequest) GetAllResponseHeaders() (foundation.BSTR, error) {
-	var _Headers foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Headers)))
-	return _Headers, win32.ErrIfFailed(int32(r1))
+	_Headers := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Headers))))
+	return *_Headers, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Status dispatches through IWinHttpRequest's vtable slot 14.
 func (self *IWinHttpRequest) Get_Status() (int32, error) {
-	var _Status int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Status)))
-	return _Status, win32.ErrIfFailed(int32(r1))
+	_Status := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Status))))
+	return *_Status, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StatusText dispatches through IWinHttpRequest's vtable slot 15.
 func (self *IWinHttpRequest) Get_StatusText() (foundation.BSTR, error) {
-	var _Status foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Status)))
-	return _Status, win32.ErrIfFailed(int32(r1))
+	_Status := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Status))))
+	return *_Status, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ResponseText dispatches through IWinHttpRequest's vtable slot 16.
 func (self *IWinHttpRequest) Get_ResponseText() (foundation.BSTR, error) {
-	var _Body foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Body)))
-	return _Body, win32.ErrIfFailed(int32(r1))
+	_Body := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Body))))
+	return *_Body, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ResponseBody dispatches through IWinHttpRequest's vtable slot 17.
 func (self *IWinHttpRequest) Get_ResponseBody() (systemvariant.VARIANT, error) {
-	var _Body systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Body)))
-	return _Body, win32.ErrIfFailed(int32(r1))
+	_Body := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Body))))
+	return *_Body, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ResponseStream dispatches through IWinHttpRequest's vtable slot 18.
 func (self *IWinHttpRequest) Get_ResponseStream() (systemvariant.VARIANT, error) {
-	var _Body systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Body)))
-	return _Body, win32.ErrIfFailed(int32(r1))
+	_Body := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Body))))
+	return *_Body, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Option dispatches through IWinHttpRequest's vtable slot 19.
 func (self *IWinHttpRequest) Get_Option(Option WinHttpRequestOption) (systemvariant.VARIANT, error) {
-	var _Value systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(Option), uintptr(unsafe.Pointer(&_Value)))
-	return _Value, win32.ErrIfFailed(int32(r1))
+	_Value := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(Option), uintptr(win32.OutParam(unsafe.Pointer(_Value))))
+	return *_Value, win32.ErrIfFailed(int32(r1))
 }
 
 // Abort dispatches through IWinHttpRequest's vtable slot 22.

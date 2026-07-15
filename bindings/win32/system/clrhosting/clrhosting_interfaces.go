@@ -446,9 +446,9 @@ var IID_ICLRMetaHost = win32.GUID{Data1: 0xd332db9e, Data2: 0xb9b3, Data3: 0x412
 // GetRuntime dispatches through ICLRMetaHost's vtable slot 3.
 func (self *ICLRMetaHost) GetRuntime(pwzVersion string, riid *win32.GUID) (*win32.IUnknown, error) {
 	_pwzVersion := win32.UTF16Ptr(pwzVersion)
-	var _ppRuntime *win32.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzVersion)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_ppRuntime)))
-	return _ppRuntime, win32.ErrIfFailed(int32(r1))
+	_ppRuntime := new(*win32.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzVersion)), uintptr(unsafe.Pointer(riid)), uintptr(win32.OutParam(unsafe.Pointer(_ppRuntime))))
+	return *_ppRuntime, win32.ErrIfFailed(int32(r1))
 }
 
 // GetVersionFromFile dispatches through ICLRMetaHost's vtable slot 4.
@@ -460,16 +460,16 @@ func (self *ICLRMetaHost) GetVersionFromFile(pwzFilePath string, pwzBuffer found
 
 // EnumerateInstalledRuntimes dispatches through ICLRMetaHost's vtable slot 5.
 func (self *ICLRMetaHost) EnumerateInstalledRuntimes() (*systemcom.IEnumUnknown, error) {
-	var _ppEnumerator *systemcom.IEnumUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnumerator)))
-	return _ppEnumerator, win32.ErrIfFailed(int32(r1))
+	_ppEnumerator := new(*systemcom.IEnumUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppEnumerator))))
+	return *_ppEnumerator, win32.ErrIfFailed(int32(r1))
 }
 
 // EnumerateLoadedRuntimes dispatches through ICLRMetaHost's vtable slot 6.
 func (self *ICLRMetaHost) EnumerateLoadedRuntimes(hndProcess foundation.HANDLE) (*systemcom.IEnumUnknown, error) {
-	var _ppEnumerator *systemcom.IEnumUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hndProcess), uintptr(unsafe.Pointer(&_ppEnumerator)))
-	return _ppEnumerator, win32.ErrIfFailed(int32(r1))
+	_ppEnumerator := new(*systemcom.IEnumUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hndProcess), uintptr(win32.OutParam(unsafe.Pointer(_ppEnumerator))))
+	return *_ppEnumerator, win32.ErrIfFailed(int32(r1))
 }
 
 // RequestRuntimeLoadedNotification dispatches through ICLRMetaHost's vtable slot 7.
@@ -480,9 +480,9 @@ func (self *ICLRMetaHost) RequestRuntimeLoadedNotification(pCallbackFunction Run
 
 // QueryLegacyV2RuntimeBinding dispatches through ICLRMetaHost's vtable slot 8.
 func (self *ICLRMetaHost) QueryLegacyV2RuntimeBinding(riid *win32.GUID) (*win32.IUnknown, error) {
-	var _ppUnk *win32.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_ppUnk)))
-	return _ppUnk, win32.ErrIfFailed(int32(r1))
+	_ppUnk := new(*win32.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(win32.OutParam(unsafe.Pointer(_ppUnk))))
+	return *_ppUnk, win32.ErrIfFailed(int32(r1))
 }
 
 // ExitProcess dispatches through ICLRMetaHost's vtable slot 9.
@@ -502,9 +502,9 @@ var IID_ICLRMetaHostPolicy = win32.GUID{Data1: 0xe2190695, Data2: 0x77b2, Data3:
 // GetRequestedRuntime dispatches through ICLRMetaHostPolicy's vtable slot 3.
 func (self *ICLRMetaHostPolicy) GetRequestedRuntime(dwPolicyFlags METAHOST_POLICY_FLAGS, pwzBinary string, pCfgStream *systemcom.IStream, pwzVersion foundation.PWSTR, pcchVersion *uint32, pwzImageVersion foundation.PWSTR, pcchImageVersion *uint32, pdwConfigFlags *uint32, riid *win32.GUID) (*win32.IUnknown, error) {
 	_pwzBinary := win32.UTF16Ptr(pwzBinary)
-	var _ppRuntime *win32.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwPolicyFlags), uintptr(unsafe.Pointer(_pwzBinary)), uintptr(unsafe.Pointer(pCfgStream)), uintptr(unsafe.Pointer(pwzVersion)), uintptr(unsafe.Pointer(pcchVersion)), uintptr(unsafe.Pointer(pwzImageVersion)), uintptr(unsafe.Pointer(pcchImageVersion)), uintptr(unsafe.Pointer(pdwConfigFlags)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_ppRuntime)))
-	return _ppRuntime, win32.ErrIfFailed(int32(r1))
+	_ppRuntime := new(*win32.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwPolicyFlags), uintptr(unsafe.Pointer(_pwzBinary)), uintptr(unsafe.Pointer(pCfgStream)), uintptr(unsafe.Pointer(pwzVersion)), uintptr(unsafe.Pointer(pcchVersion)), uintptr(unsafe.Pointer(pwzImageVersion)), uintptr(unsafe.Pointer(pcchImageVersion)), uintptr(unsafe.Pointer(pdwConfigFlags)), uintptr(unsafe.Pointer(riid)), uintptr(win32.OutParam(unsafe.Pointer(_ppRuntime))))
+	return *_ppRuntime, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 1d0e0132-e64f-493d-9260-025c0e32c175
@@ -704,9 +704,9 @@ func (self *ICLRRuntimeInfo) GetRuntimeDirectory(pwzBuffer foundation.PWSTR, pcc
 
 // IsLoaded dispatches through ICLRRuntimeInfo's vtable slot 5.
 func (self *ICLRRuntimeInfo) IsLoaded(hndProcess foundation.HANDLE) (foundation.BOOL, error) {
-	var _pbLoaded foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hndProcess), uintptr(unsafe.Pointer(&_pbLoaded)))
-	return _pbLoaded, win32.ErrIfFailed(int32(r1))
+	_pbLoaded := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hndProcess), uintptr(win32.OutParam(unsafe.Pointer(_pbLoaded))))
+	return *_pbLoaded, win32.ErrIfFailed(int32(r1))
 }
 
 // LoadErrorString dispatches through ICLRRuntimeInfo's vtable slot 6.
@@ -718,9 +718,9 @@ func (self *ICLRRuntimeInfo) LoadErrorString(iResourceID uint32, pwzBuffer found
 // LoadLibraryA dispatches through ICLRRuntimeInfo's vtable slot 7.
 func (self *ICLRRuntimeInfo) LoadLibraryA(pwzDllName string) (foundation.HMODULE, error) {
 	_pwzDllName := win32.UTF16Ptr(pwzDllName)
-	var _phndModule foundation.HMODULE
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzDllName)), uintptr(unsafe.Pointer(&_phndModule)))
-	return _phndModule, win32.ErrIfFailed(int32(r1))
+	_phndModule := new(foundation.HMODULE)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzDllName)), uintptr(win32.OutParam(unsafe.Pointer(_phndModule))))
+	return *_phndModule, win32.ErrIfFailed(int32(r1))
 }
 
 // GetProcAddress dispatches through ICLRRuntimeInfo's vtable slot 8.
@@ -731,16 +731,16 @@ func (self *ICLRRuntimeInfo) GetProcAddress(pszProcName foundation.PSTR, ppProc 
 
 // GetInterface dispatches through ICLRRuntimeInfo's vtable slot 9.
 func (self *ICLRRuntimeInfo) GetInterface(rclsid *win32.GUID, riid *win32.GUID) (*win32.IUnknown, error) {
-	var _ppUnk *win32.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_ppUnk)))
-	return _ppUnk, win32.ErrIfFailed(int32(r1))
+	_ppUnk := new(*win32.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(win32.OutParam(unsafe.Pointer(_ppUnk))))
+	return *_ppUnk, win32.ErrIfFailed(int32(r1))
 }
 
 // IsLoadable dispatches through ICLRRuntimeInfo's vtable slot 10.
 func (self *ICLRRuntimeInfo) IsLoadable() (foundation.BOOL, error) {
-	var _pbLoadable foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbLoadable)))
-	return _pbLoadable, win32.ErrIfFailed(int32(r1))
+	_pbLoadable := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbLoadable))))
+	return *_pbLoadable, win32.ErrIfFailed(int32(r1))
 }
 
 // SetDefaultStartupFlags dispatches through ICLRRuntimeInfo's vtable slot 11.
@@ -842,9 +842,9 @@ func (self *ICLRStrongName) GetHashFromHandle(hFile foundation.HANDLE, piHashAlg
 func (self *ICLRStrongName) StrongNameCompareAssemblies(pwzAssembly1 string, pwzAssembly2 string) (uint32, error) {
 	_pwzAssembly1 := win32.UTF16Ptr(pwzAssembly1)
 	_pwzAssembly2 := win32.UTF16Ptr(pwzAssembly2)
-	var _pdwResult uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzAssembly1)), uintptr(unsafe.Pointer(_pwzAssembly2)), uintptr(unsafe.Pointer(&_pdwResult)))
-	return _pdwResult, win32.ErrIfFailed(int32(r1))
+	_pdwResult := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzAssembly1)), uintptr(unsafe.Pointer(_pwzAssembly2)), uintptr(win32.OutParam(unsafe.Pointer(_pdwResult))))
+	return *_pdwResult, win32.ErrIfFailed(int32(r1))
 }
 
 // StrongNameFreeBuffer dispatches through ICLRStrongName's vtable slot 10.
@@ -879,9 +879,9 @@ func (self *ICLRStrongName) StrongNameGetPublicKey(pwzKeyContainer string, pbKey
 
 // StrongNameHashSize dispatches through ICLRStrongName's vtable slot 14.
 func (self *ICLRStrongName) StrongNameHashSize(ulHashAlg uint32) (uint32, error) {
-	var _pcbSize uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(ulHashAlg), uintptr(unsafe.Pointer(&_pcbSize)))
-	return _pcbSize, win32.ErrIfFailed(int32(r1))
+	_pcbSize := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(ulHashAlg), uintptr(win32.OutParam(unsafe.Pointer(_pcbSize))))
+	return *_pcbSize, win32.ErrIfFailed(int32(r1))
 }
 
 // StrongNameKeyDelete dispatches through ICLRStrongName's vtable slot 15.
@@ -937,24 +937,24 @@ func (self *ICLRStrongName) StrongNameSignatureSize(pbPublicKeyBlob *byte, cbPub
 // StrongNameSignatureVerification dispatches through ICLRStrongName's vtable slot 22.
 func (self *ICLRStrongName) StrongNameSignatureVerification(pwzFilePath string, dwInFlags uint32) (uint32, error) {
 	_pwzFilePath := win32.UTF16Ptr(pwzFilePath)
-	var _pdwOutFlags uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzFilePath)), uintptr(dwInFlags), uintptr(unsafe.Pointer(&_pdwOutFlags)))
-	return _pdwOutFlags, win32.ErrIfFailed(int32(r1))
+	_pdwOutFlags := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzFilePath)), uintptr(dwInFlags), uintptr(win32.OutParam(unsafe.Pointer(_pdwOutFlags))))
+	return *_pdwOutFlags, win32.ErrIfFailed(int32(r1))
 }
 
 // StrongNameSignatureVerificationEx dispatches through ICLRStrongName's vtable slot 23.
 func (self *ICLRStrongName) StrongNameSignatureVerificationEx(pwzFilePath string, fForceVerification foundation.BOOLEAN) (byte, error) {
 	_pwzFilePath := win32.UTF16Ptr(pwzFilePath)
-	var _pfWasVerified byte
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzFilePath)), uintptr(fForceVerification), uintptr(unsafe.Pointer(&_pfWasVerified)))
-	return _pfWasVerified, win32.ErrIfFailed(int32(r1))
+	_pfWasVerified := new(byte)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzFilePath)), uintptr(fForceVerification), uintptr(win32.OutParam(unsafe.Pointer(_pfWasVerified))))
+	return *_pfWasVerified, win32.ErrIfFailed(int32(r1))
 }
 
 // StrongNameSignatureVerificationFromImage dispatches through ICLRStrongName's vtable slot 24.
 func (self *ICLRStrongName) StrongNameSignatureVerificationFromImage(pbBase *byte, dwLength uint32, dwInFlags uint32) (uint32, error) {
-	var _pdwOutFlags uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbBase)), uintptr(dwLength), uintptr(dwInFlags), uintptr(unsafe.Pointer(&_pdwOutFlags)))
-	return _pdwOutFlags, win32.ErrIfFailed(int32(r1))
+	_pdwOutFlags := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbBase)), uintptr(dwLength), uintptr(dwInFlags), uintptr(win32.OutParam(unsafe.Pointer(_pdwOutFlags))))
+	return *_pdwOutFlags, win32.ErrIfFailed(int32(r1))
 }
 
 // StrongNameTokenFromAssembly dispatches through ICLRStrongName's vtable slot 25.
@@ -2324,9 +2324,9 @@ var IID_IObjectHandle = win32.GUID{Data1: 0xc460e2b4, Data2: 0xe199, Data3: 0x41
 
 // Unwrap dispatches through IObjectHandle's vtable slot 3.
 func (self *IObjectHandle) Unwrap() (systemvariant.VARIANT, error) {
-	var _ppv systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppv)))
-	return _ppv, win32.ErrIfFailed(int32(r1))
+	_ppv := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppv))))
+	return *_ppv, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: b81ff171-20f3-11d2-8dcc-00a0c9b00522
@@ -2339,51 +2339,51 @@ var IID_ITypeName = win32.GUID{Data1: 0xb81ff171, Data2: 0x20f3, Data3: 0x11d2, 
 
 // GetNameCount dispatches through ITypeName's vtable slot 3.
 func (self *ITypeName) GetNameCount() (uint32, error) {
-	var _pCount uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pCount)))
-	return _pCount, win32.ErrIfFailed(int32(r1))
+	_pCount := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pCount))))
+	return *_pCount, win32.ErrIfFailed(int32(r1))
 }
 
 // GetNames dispatches through ITypeName's vtable slot 4.
 func (self *ITypeName) GetNames(count uint32, rgbszNames *foundation.BSTR) (uint32, error) {
-	var _pCount uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(count), uintptr(unsafe.Pointer(rgbszNames)), uintptr(unsafe.Pointer(&_pCount)))
-	return _pCount, win32.ErrIfFailed(int32(r1))
+	_pCount := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(count), uintptr(unsafe.Pointer(rgbszNames)), uintptr(win32.OutParam(unsafe.Pointer(_pCount))))
+	return *_pCount, win32.ErrIfFailed(int32(r1))
 }
 
 // GetTypeArgumentCount dispatches through ITypeName's vtable slot 5.
 func (self *ITypeName) GetTypeArgumentCount() (uint32, error) {
-	var _pCount uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pCount)))
-	return _pCount, win32.ErrIfFailed(int32(r1))
+	_pCount := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pCount))))
+	return *_pCount, win32.ErrIfFailed(int32(r1))
 }
 
 // GetTypeArguments dispatches through ITypeName's vtable slot 6.
 func (self *ITypeName) GetTypeArguments(count uint32, rgpArguments **ITypeName) (uint32, error) {
-	var _pCount uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(count), uintptr(unsafe.Pointer(rgpArguments)), uintptr(unsafe.Pointer(&_pCount)))
-	return _pCount, win32.ErrIfFailed(int32(r1))
+	_pCount := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(count), uintptr(unsafe.Pointer(rgpArguments)), uintptr(win32.OutParam(unsafe.Pointer(_pCount))))
+	return *_pCount, win32.ErrIfFailed(int32(r1))
 }
 
 // GetModifierLength dispatches through ITypeName's vtable slot 7.
 func (self *ITypeName) GetModifierLength() (uint32, error) {
-	var _pCount uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pCount)))
-	return _pCount, win32.ErrIfFailed(int32(r1))
+	_pCount := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pCount))))
+	return *_pCount, win32.ErrIfFailed(int32(r1))
 }
 
 // GetModifiers dispatches through ITypeName's vtable slot 8.
 func (self *ITypeName) GetModifiers(count uint32, rgModifiers *uint32) (uint32, error) {
-	var _pCount uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(count), uintptr(unsafe.Pointer(rgModifiers)), uintptr(unsafe.Pointer(&_pCount)))
-	return _pCount, win32.ErrIfFailed(int32(r1))
+	_pCount := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(count), uintptr(unsafe.Pointer(rgModifiers)), uintptr(win32.OutParam(unsafe.Pointer(_pCount))))
+	return *_pCount, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAssemblyName dispatches through ITypeName's vtable slot 9.
 func (self *ITypeName) GetAssemblyName() (foundation.BSTR, error) {
-	var _rgbszAssemblyNames foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_rgbszAssemblyNames)))
-	return _rgbszAssemblyNames, win32.ErrIfFailed(int32(r1))
+	_rgbszAssemblyNames := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_rgbszAssemblyNames))))
+	return *_rgbszAssemblyNames, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: b81ff171-20f3-11d2-8dcc-00a0c9b00523
@@ -2458,9 +2458,9 @@ func (self *ITypeNameBuilder) AddAssemblySpec(szAssemblySpec string) error {
 
 // ToString dispatches through ITypeNameBuilder's vtable slot 13.
 func (self *ITypeNameBuilder) ToString() (foundation.BSTR, error) {
-	var _pszStringRepresentation foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszStringRepresentation)))
-	return _pszStringRepresentation, win32.ErrIfFailed(int32(r1))
+	_pszStringRepresentation := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pszStringRepresentation))))
+	return *_pszStringRepresentation, win32.ErrIfFailed(int32(r1))
 }
 
 // Clear dispatches through ITypeNameBuilder's vtable slot 14.
@@ -2480,14 +2480,14 @@ var IID_ITypeNameFactory = win32.GUID{Data1: 0xb81ff171, Data2: 0x20f3, Data3: 0
 // ParseTypeName dispatches through ITypeNameFactory's vtable slot 3.
 func (self *ITypeNameFactory) ParseTypeName(szName string, pError *uint32) (*ITypeName, error) {
 	_szName := win32.UTF16Ptr(szName)
-	var _ppTypeName *ITypeName
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szName)), uintptr(unsafe.Pointer(pError)), uintptr(unsafe.Pointer(&_ppTypeName)))
-	return _ppTypeName, win32.ErrIfFailed(int32(r1))
+	_ppTypeName := new(*ITypeName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szName)), uintptr(unsafe.Pointer(pError)), uintptr(win32.OutParam(unsafe.Pointer(_ppTypeName))))
+	return *_ppTypeName, win32.ErrIfFailed(int32(r1))
 }
 
 // GetTypeNameBuilder dispatches through ITypeNameFactory's vtable slot 4.
 func (self *ITypeNameFactory) GetTypeNameBuilder() (*ITypeNameBuilder, error) {
-	var _ppTypeBuilder *ITypeNameBuilder
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppTypeBuilder)))
-	return _ppTypeBuilder, win32.ErrIfFailed(int32(r1))
+	_ppTypeBuilder := new(*ITypeNameBuilder)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppTypeBuilder))))
+	return *_ppTypeBuilder, win32.ErrIfFailed(int32(r1))
 }

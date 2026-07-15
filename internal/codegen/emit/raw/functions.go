@@ -183,13 +183,16 @@ func (g *Generator) buildFunction(meta *win32meta.NamespaceMeta, function *win32
 		resolved := resolvedParams[i]
 
 		// [out,retval] → elevated Go return value (a COM out is just a typed
-		// pointer here, so no special-casing is needed).
+		// pointer here, so no special-casing is needed). The local is
+		// heap-escaped via win32.OutParam: a native callee that reenters Go
+		// (consumer NewCallback delegates) can move this goroutine's stack,
+		// stranding any stack out-pointer — see runtime outparam.go.
 		if retValMode != retValNone {
 			if element, ok := retValElement(param, resolved); ok {
 				local := "_" + paramNames[i]
-				preamble = append(preamble, "var "+local+" "+element)
-				argWords = append(argWords, "uintptr(unsafe.Pointer(&"+local+"))")
-				returnValues = append(returnValues, local)
+				preamble = append(preamble, local+" := new("+element+")")
+				argWords = append(argWords, "uintptr(win32.OutParam(unsafe.Pointer("+local+")))")
+				returnValues = append(returnValues, "*"+local)
 				returnTypes = append(returnTypes, element)
 				usesUnsafe = true
 				continue

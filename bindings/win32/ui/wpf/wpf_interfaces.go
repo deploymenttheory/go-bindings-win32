@@ -26,16 +26,16 @@ var IID_IMILBitmapEffect = win32.GUID{Data1: 0x8a6ff321, Data2: 0xc944, Data3: 0
 
 // GetOutput dispatches through IMILBitmapEffect's vtable slot 3.
 func (self *IMILBitmapEffect) GetOutput(uiIndex uint32, pContext *IMILBitmapEffectRenderContext) (*graphicsimaging.IWICBitmapSource, error) {
-	var _ppBitmapSource *graphicsimaging.IWICBitmapSource
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(uiIndex), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(&_ppBitmapSource)))
-	return _ppBitmapSource, win32.ErrIfFailed(int32(r1))
+	_ppBitmapSource := new(*graphicsimaging.IWICBitmapSource)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(uiIndex), uintptr(unsafe.Pointer(pContext)), uintptr(win32.OutParam(unsafe.Pointer(_ppBitmapSource))))
+	return *_ppBitmapSource, win32.ErrIfFailed(int32(r1))
 }
 
 // GetParentEffect dispatches through IMILBitmapEffect's vtable slot 4.
 func (self *IMILBitmapEffect) GetParentEffect() (*IMILBitmapEffectGroup, error) {
-	var _ppParentEffect *IMILBitmapEffectGroup
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppParentEffect)))
-	return _ppParentEffect, win32.ErrIfFailed(int32(r1))
+	_ppParentEffect := new(*IMILBitmapEffectGroup)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppParentEffect))))
+	return *_ppParentEffect, win32.ErrIfFailed(int32(r1))
 }
 
 // SetInputSource dispatches through IMILBitmapEffect's vtable slot 5.
@@ -55,16 +55,16 @@ var IID_IMILBitmapEffectConnections = win32.GUID{Data1: 0xc2b5d861, Data2: 0x9b1
 
 // GetInputConnector dispatches through IMILBitmapEffectConnections's vtable slot 3.
 func (self *IMILBitmapEffectConnections) GetInputConnector(uiIndex uint32) (*IMILBitmapEffectInputConnector, error) {
-	var _ppConnector *IMILBitmapEffectInputConnector
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(uiIndex), uintptr(unsafe.Pointer(&_ppConnector)))
-	return _ppConnector, win32.ErrIfFailed(int32(r1))
+	_ppConnector := new(*IMILBitmapEffectInputConnector)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(uiIndex), uintptr(win32.OutParam(unsafe.Pointer(_ppConnector))))
+	return *_ppConnector, win32.ErrIfFailed(int32(r1))
 }
 
 // GetOutputConnector dispatches through IMILBitmapEffectConnections's vtable slot 4.
 func (self *IMILBitmapEffectConnections) GetOutputConnector(uiIndex uint32) (*IMILBitmapEffectOutputConnector, error) {
-	var _ppConnector *IMILBitmapEffectOutputConnector
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(uiIndex), uintptr(unsafe.Pointer(&_ppConnector)))
-	return _ppConnector, win32.ErrIfFailed(int32(r1))
+	_ppConnector := new(*IMILBitmapEffectOutputConnector)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(uiIndex), uintptr(win32.OutParam(unsafe.Pointer(_ppConnector))))
+	return *_ppConnector, win32.ErrIfFailed(int32(r1))
 }
 
 // IMILBitmapEffectConnectionsInfo: https://learn.microsoft.com/windows/win32/api/mileffects/nn-mileffects-imilbitmapeffectconnectionsinfo
@@ -78,16 +78,16 @@ var IID_IMILBitmapEffectConnectionsInfo = win32.GUID{Data1: 0x476b538a, Data2: 0
 
 // GetNumberInputs dispatches through IMILBitmapEffectConnectionsInfo's vtable slot 3.
 func (self *IMILBitmapEffectConnectionsInfo) GetNumberInputs() (uint32, error) {
-	var _puiNumInputs uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_puiNumInputs)))
-	return _puiNumInputs, win32.ErrIfFailed(int32(r1))
+	_puiNumInputs := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_puiNumInputs))))
+	return *_puiNumInputs, win32.ErrIfFailed(int32(r1))
 }
 
 // GetNumberOutputs dispatches through IMILBitmapEffectConnectionsInfo's vtable slot 4.
 func (self *IMILBitmapEffectConnectionsInfo) GetNumberOutputs() (uint32, error) {
-	var _puiNumOutputs uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_puiNumOutputs)))
-	return _puiNumOutputs, win32.ErrIfFailed(int32(r1))
+	_puiNumOutputs := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_puiNumOutputs))))
+	return *_puiNumOutputs, win32.ErrIfFailed(int32(r1))
 }
 
 // GetInputConnectorInfo dispatches through IMILBitmapEffectConnectionsInfo's vtable slot 5.
@@ -113,16 +113,16 @@ var IID_IMILBitmapEffectConnector = win32.GUID{Data1: 0xf59567b3, Data2: 0x76c1,
 
 // IsConnected dispatches through IMILBitmapEffectConnector's vtable slot 7.
 func (self *IMILBitmapEffectConnector) IsConnected() (foundation.VARIANT_BOOL, error) {
-	var _pfConnected foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfConnected)))
-	return _pfConnected, win32.ErrIfFailed(int32(r1))
+	_pfConnected := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfConnected))))
+	return *_pfConnected, win32.ErrIfFailed(int32(r1))
 }
 
 // GetBitmapEffect dispatches through IMILBitmapEffectConnector's vtable slot 8.
 func (self *IMILBitmapEffectConnector) GetBitmapEffect() (*IMILBitmapEffect, error) {
-	var _ppEffect *IMILBitmapEffect
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEffect)))
-	return _ppEffect, win32.ErrIfFailed(int32(r1))
+	_ppEffect := new(*IMILBitmapEffect)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppEffect))))
+	return *_ppEffect, win32.ErrIfFailed(int32(r1))
 }
 
 // IMILBitmapEffectConnectorInfo: https://learn.microsoft.com/windows/win32/api/mileffects/nn-mileffects-imilbitmapeffectconnectorinfo
@@ -136,30 +136,30 @@ var IID_IMILBitmapEffectConnectorInfo = win32.GUID{Data1: 0xf66d2e4b, Data2: 0xb
 
 // GetIndex dispatches through IMILBitmapEffectConnectorInfo's vtable slot 3.
 func (self *IMILBitmapEffectConnectorInfo) GetIndex() (uint32, error) {
-	var _puiIndex uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_puiIndex)))
-	return _puiIndex, win32.ErrIfFailed(int32(r1))
+	_puiIndex := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_puiIndex))))
+	return *_puiIndex, win32.ErrIfFailed(int32(r1))
 }
 
 // GetOptimalFormat dispatches through IMILBitmapEffectConnectorInfo's vtable slot 4.
 func (self *IMILBitmapEffectConnectorInfo) GetOptimalFormat() (win32.GUID, error) {
-	var _pFormat win32.GUID
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pFormat)))
-	return _pFormat, win32.ErrIfFailed(int32(r1))
+	_pFormat := new(win32.GUID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pFormat))))
+	return *_pFormat, win32.ErrIfFailed(int32(r1))
 }
 
 // GetNumberFormats dispatches through IMILBitmapEffectConnectorInfo's vtable slot 5.
 func (self *IMILBitmapEffectConnectorInfo) GetNumberFormats() (uint32, error) {
-	var _pulNumberFormats uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulNumberFormats)))
-	return _pulNumberFormats, win32.ErrIfFailed(int32(r1))
+	_pulNumberFormats := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pulNumberFormats))))
+	return *_pulNumberFormats, win32.ErrIfFailed(int32(r1))
 }
 
 // GetFormat dispatches through IMILBitmapEffectConnectorInfo's vtable slot 6.
 func (self *IMILBitmapEffectConnectorInfo) GetFormat(ulIndex uint32) (win32.GUID, error) {
-	var _pFormat win32.GUID
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ulIndex), uintptr(unsafe.Pointer(&_pFormat)))
-	return _pFormat, win32.ErrIfFailed(int32(r1))
+	_pFormat := new(win32.GUID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ulIndex), uintptr(win32.OutParam(unsafe.Pointer(_pFormat))))
+	return *_pFormat, win32.ErrIfFailed(int32(r1))
 }
 
 // IMILBitmapEffectEvents: https://learn.microsoft.com/windows/win32/api/mileffects/nn-mileffects-imilbitmapeffectevents
@@ -221,16 +221,16 @@ var IID_IMILBitmapEffectGroup = win32.GUID{Data1: 0x2f952360, Data2: 0x698a, Dat
 
 // GetInteriorInputConnector dispatches through IMILBitmapEffectGroup's vtable slot 3.
 func (self *IMILBitmapEffectGroup) GetInteriorInputConnector(uiIndex uint32) (*IMILBitmapEffectOutputConnector, error) {
-	var _ppConnector *IMILBitmapEffectOutputConnector
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(uiIndex), uintptr(unsafe.Pointer(&_ppConnector)))
-	return _ppConnector, win32.ErrIfFailed(int32(r1))
+	_ppConnector := new(*IMILBitmapEffectOutputConnector)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(uiIndex), uintptr(win32.OutParam(unsafe.Pointer(_ppConnector))))
+	return *_ppConnector, win32.ErrIfFailed(int32(r1))
 }
 
 // GetInteriorOutputConnector dispatches through IMILBitmapEffectGroup's vtable slot 4.
 func (self *IMILBitmapEffectGroup) GetInteriorOutputConnector(uiIndex uint32) (*IMILBitmapEffectInputConnector, error) {
-	var _ppConnector *IMILBitmapEffectInputConnector
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(uiIndex), uintptr(unsafe.Pointer(&_ppConnector)))
-	return _ppConnector, win32.ErrIfFailed(int32(r1))
+	_ppConnector := new(*IMILBitmapEffectInputConnector)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(uiIndex), uintptr(win32.OutParam(unsafe.Pointer(_ppConnector))))
+	return *_ppConnector, win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through IMILBitmapEffectGroup's vtable slot 5.
@@ -256,16 +256,16 @@ func (self *IMILBitmapEffectGroupImpl) Preprocess(pContext *IMILBitmapEffectRend
 
 // GetNumberChildren dispatches through IMILBitmapEffectGroupImpl's vtable slot 4.
 func (self *IMILBitmapEffectGroupImpl) GetNumberChildren() (uint32, error) {
-	var _puiNumberChildren uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_puiNumberChildren)))
-	return _puiNumberChildren, win32.ErrIfFailed(int32(r1))
+	_puiNumberChildren := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_puiNumberChildren))))
+	return *_puiNumberChildren, win32.ErrIfFailed(int32(r1))
 }
 
 // GetChildren dispatches through IMILBitmapEffectGroupImpl's vtable slot 5.
 func (self *IMILBitmapEffectGroupImpl) GetChildren() (*IMILBitmapEffects, error) {
-	var _pChildren *IMILBitmapEffects
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pChildren)))
-	return _pChildren, win32.ErrIfFailed(int32(r1))
+	_pChildren := new(*IMILBitmapEffects)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pChildren))))
+	return *_pChildren, win32.ErrIfFailed(int32(r1))
 }
 
 // IMILBitmapEffectImpl: https://learn.microsoft.com/windows/win32/api/mileffects/nn-mileffects-imilbitmapeffectimpl
@@ -291,9 +291,9 @@ func (self *IMILBitmapEffectImpl) SetParentEffect(pParentEffect *IMILBitmapEffec
 
 // GetInputSource dispatches through IMILBitmapEffectImpl's vtable slot 5.
 func (self *IMILBitmapEffectImpl) GetInputSource(uiIndex uint32) (*graphicsimaging.IWICBitmapSource, error) {
-	var _ppBitmapSource *graphicsimaging.IWICBitmapSource
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(uiIndex), uintptr(unsafe.Pointer(&_ppBitmapSource)))
-	return _ppBitmapSource, win32.ErrIfFailed(int32(r1))
+	_ppBitmapSource := new(*graphicsimaging.IWICBitmapSource)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(uiIndex), uintptr(win32.OutParam(unsafe.Pointer(_ppBitmapSource))))
+	return *_ppBitmapSource, win32.ErrIfFailed(int32(r1))
 }
 
 // GetInputSourceBounds dispatches through IMILBitmapEffectImpl's vtable slot 6.
@@ -304,16 +304,16 @@ func (self *IMILBitmapEffectImpl) GetInputSourceBounds(uiIndex uint32, pRect *Mi
 
 // GetInputBitmapSource dispatches through IMILBitmapEffectImpl's vtable slot 7.
 func (self *IMILBitmapEffectImpl) GetInputBitmapSource(uiIndex uint32, pRenderContext *IMILBitmapEffectRenderContext, pfModifyInPlace *foundation.VARIANT_BOOL) (*graphicsimaging.IWICBitmapSource, error) {
-	var _ppBitmapSource *graphicsimaging.IWICBitmapSource
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(uiIndex), uintptr(unsafe.Pointer(pRenderContext)), uintptr(unsafe.Pointer(pfModifyInPlace)), uintptr(unsafe.Pointer(&_ppBitmapSource)))
-	return _ppBitmapSource, win32.ErrIfFailed(int32(r1))
+	_ppBitmapSource := new(*graphicsimaging.IWICBitmapSource)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(uiIndex), uintptr(unsafe.Pointer(pRenderContext)), uintptr(unsafe.Pointer(pfModifyInPlace)), uintptr(win32.OutParam(unsafe.Pointer(_ppBitmapSource))))
+	return *_ppBitmapSource, win32.ErrIfFailed(int32(r1))
 }
 
 // GetOutputBitmapSource dispatches through IMILBitmapEffectImpl's vtable slot 8.
 func (self *IMILBitmapEffectImpl) GetOutputBitmapSource(uiIndex uint32, pRenderContext *IMILBitmapEffectRenderContext, pfModifyInPlace *foundation.VARIANT_BOOL) (*graphicsimaging.IWICBitmapSource, error) {
-	var _ppBitmapSource *graphicsimaging.IWICBitmapSource
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(uiIndex), uintptr(unsafe.Pointer(pRenderContext)), uintptr(unsafe.Pointer(pfModifyInPlace)), uintptr(unsafe.Pointer(&_ppBitmapSource)))
-	return _ppBitmapSource, win32.ErrIfFailed(int32(r1))
+	_ppBitmapSource := new(*graphicsimaging.IWICBitmapSource)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(uiIndex), uintptr(unsafe.Pointer(pRenderContext)), uintptr(unsafe.Pointer(pfModifyInPlace)), uintptr(win32.OutParam(unsafe.Pointer(_ppBitmapSource))))
+	return *_ppBitmapSource, win32.ErrIfFailed(int32(r1))
 }
 
 // Initialize dispatches through IMILBitmapEffectImpl's vtable slot 9.
@@ -339,9 +339,9 @@ func (self *IMILBitmapEffectInputConnector) ConnectTo(pConnector *IMILBitmapEffe
 
 // GetConnection dispatches through IMILBitmapEffectInputConnector's vtable slot 10.
 func (self *IMILBitmapEffectInputConnector) GetConnection() (*IMILBitmapEffectOutputConnector, error) {
-	var _ppConnector *IMILBitmapEffectOutputConnector
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppConnector)))
-	return _ppConnector, win32.ErrIfFailed(int32(r1))
+	_ppConnector := new(*IMILBitmapEffectOutputConnector)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppConnector))))
+	return *_ppConnector, win32.ErrIfFailed(int32(r1))
 }
 
 // IMILBitmapEffectInteriorInputConnector: https://learn.microsoft.com/windows/win32/api/mileffects/nn-mileffects-imilbitmapeffectinteriorinputconnector
@@ -355,9 +355,9 @@ var IID_IMILBitmapEffectInteriorInputConnector = win32.GUID{Data1: 0x20287e9e, D
 
 // GetInputConnector dispatches through IMILBitmapEffectInteriorInputConnector's vtable slot 3.
 func (self *IMILBitmapEffectInteriorInputConnector) GetInputConnector() (*IMILBitmapEffectInputConnector, error) {
-	var _pInputConnector *IMILBitmapEffectInputConnector
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pInputConnector)))
-	return _pInputConnector, win32.ErrIfFailed(int32(r1))
+	_pInputConnector := new(*IMILBitmapEffectInputConnector)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pInputConnector))))
+	return *_pInputConnector, win32.ErrIfFailed(int32(r1))
 }
 
 // IMILBitmapEffectInteriorOutputConnector: https://learn.microsoft.com/windows/win32/api/mileffects/nn-mileffects-imilbitmapeffectinterioroutputconnector
@@ -371,9 +371,9 @@ var IID_IMILBitmapEffectInteriorOutputConnector = win32.GUID{Data1: 0x00bbb6dc, 
 
 // GetOutputConnector dispatches through IMILBitmapEffectInteriorOutputConnector's vtable slot 3.
 func (self *IMILBitmapEffectInteriorOutputConnector) GetOutputConnector() (*IMILBitmapEffectOutputConnector, error) {
-	var _pOutputConnector *IMILBitmapEffectOutputConnector
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pOutputConnector)))
-	return _pOutputConnector, win32.ErrIfFailed(int32(r1))
+	_pOutputConnector := new(*IMILBitmapEffectOutputConnector)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pOutputConnector))))
+	return *_pOutputConnector, win32.ErrIfFailed(int32(r1))
 }
 
 // IMILBitmapEffectOutputConnector: https://learn.microsoft.com/windows/win32/api/mileffects/nn-mileffects-imilbitmapeffectoutputconnector
@@ -387,16 +387,16 @@ var IID_IMILBitmapEffectOutputConnector = win32.GUID{Data1: 0x92957aad, Data2: 0
 
 // GetNumberConnections dispatches through IMILBitmapEffectOutputConnector's vtable slot 9.
 func (self *IMILBitmapEffectOutputConnector) GetNumberConnections() (uint32, error) {
-	var _puiNumberConnections uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_puiNumberConnections)))
-	return _puiNumberConnections, win32.ErrIfFailed(int32(r1))
+	_puiNumberConnections := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_puiNumberConnections))))
+	return *_puiNumberConnections, win32.ErrIfFailed(int32(r1))
 }
 
 // GetConnection dispatches through IMILBitmapEffectOutputConnector's vtable slot 10.
 func (self *IMILBitmapEffectOutputConnector) GetConnection(uiIndex uint32) (*IMILBitmapEffectInputConnector, error) {
-	var _ppConnection *IMILBitmapEffectInputConnector
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(uiIndex), uintptr(unsafe.Pointer(&_ppConnection)))
-	return _ppConnection, win32.ErrIfFailed(int32(r1))
+	_ppConnection := new(*IMILBitmapEffectInputConnector)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(uiIndex), uintptr(win32.OutParam(unsafe.Pointer(_ppConnection))))
+	return *_ppConnection, win32.ErrIfFailed(int32(r1))
 }
 
 // IMILBitmapEffectOutputConnectorImpl: https://learn.microsoft.com/windows/win32/api/mileffects/nn-mileffects-imilbitmapeffectoutputconnectorimpl
@@ -431,9 +431,9 @@ var IID_IMILBitmapEffectPrimitive = win32.GUID{Data1: 0x67e31025, Data2: 0x3091,
 
 // GetOutput dispatches through IMILBitmapEffectPrimitive's vtable slot 3.
 func (self *IMILBitmapEffectPrimitive) GetOutput(uiIndex uint32, pContext *IMILBitmapEffectRenderContext, pfModifyInPlace *foundation.VARIANT_BOOL) (*graphicsimaging.IWICBitmapSource, error) {
-	var _ppBitmapSource *graphicsimaging.IWICBitmapSource
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(uiIndex), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(pfModifyInPlace)), uintptr(unsafe.Pointer(&_ppBitmapSource)))
-	return _ppBitmapSource, win32.ErrIfFailed(int32(r1))
+	_ppBitmapSource := new(*graphicsimaging.IWICBitmapSource)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(uiIndex), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(pfModifyInPlace)), uintptr(win32.OutParam(unsafe.Pointer(_ppBitmapSource))))
+	return *_ppBitmapSource, win32.ErrIfFailed(int32(r1))
 }
 
 // TransformPoint dispatches through IMILBitmapEffectPrimitive's vtable slot 4.
@@ -477,16 +477,16 @@ var IID_IMILBitmapEffectPrimitiveImpl = win32.GUID{Data1: 0xce41e00b, Data2: 0xe
 
 // IsDirty dispatches through IMILBitmapEffectPrimitiveImpl's vtable slot 3.
 func (self *IMILBitmapEffectPrimitiveImpl) IsDirty(uiOutputIndex uint32) (foundation.VARIANT_BOOL, error) {
-	var _pfDirty foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(uiOutputIndex), uintptr(unsafe.Pointer(&_pfDirty)))
-	return _pfDirty, win32.ErrIfFailed(int32(r1))
+	_pfDirty := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(uiOutputIndex), uintptr(win32.OutParam(unsafe.Pointer(_pfDirty))))
+	return *_pfDirty, win32.ErrIfFailed(int32(r1))
 }
 
 // IsVolatile dispatches through IMILBitmapEffectPrimitiveImpl's vtable slot 4.
 func (self *IMILBitmapEffectPrimitiveImpl) IsVolatile(uiOutputIndex uint32) (foundation.VARIANT_BOOL, error) {
-	var _pfVolatile foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(uiOutputIndex), uintptr(unsafe.Pointer(&_pfVolatile)))
-	return _pfVolatile, win32.ErrIfFailed(int32(r1))
+	_pfVolatile := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(uiOutputIndex), uintptr(win32.OutParam(unsafe.Pointer(_pfVolatile))))
+	return *_pfVolatile, win32.ErrIfFailed(int32(r1))
 }
 
 // IMILBitmapEffectRenderContext: https://learn.microsoft.com/windows/win32/api/mileffects/nn-mileffects-imilbitmapeffectrendercontext
@@ -506,9 +506,9 @@ func (self *IMILBitmapEffectRenderContext) SetOutputPixelFormat(format *win32.GU
 
 // GetOutputPixelFormat dispatches through IMILBitmapEffectRenderContext's vtable slot 4.
 func (self *IMILBitmapEffectRenderContext) GetOutputPixelFormat() (win32.GUID, error) {
-	var _pFormat win32.GUID
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pFormat)))
-	return _pFormat, win32.ErrIfFailed(int32(r1))
+	_pFormat := new(win32.GUID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pFormat))))
+	return *_pFormat, win32.ErrIfFailed(int32(r1))
 }
 
 // SetUseSoftwareRenderer dispatches through IMILBitmapEffectRenderContext's vtable slot 5.
@@ -552,9 +552,9 @@ var IID_IMILBitmapEffectRenderContextImpl = win32.GUID{Data1: 0x4d25accb, Data2:
 
 // GetUseSoftwareRenderer dispatches through IMILBitmapEffectRenderContextImpl's vtable slot 3.
 func (self *IMILBitmapEffectRenderContextImpl) GetUseSoftwareRenderer() (foundation.VARIANT_BOOL, error) {
-	var _pfSoftware foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfSoftware)))
-	return _pfSoftware, win32.ErrIfFailed(int32(r1))
+	_pfSoftware := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfSoftware))))
+	return *_pfSoftware, win32.ErrIfFailed(int32(r1))
 }
 
 // GetTransform dispatches through IMILBitmapEffectRenderContextImpl's vtable slot 4.
@@ -592,28 +592,28 @@ var IID_IMILBitmapEffects = win32.GUID{Data1: 0x51ac3dce, Data2: 0x67c5, Data3: 
 
 // NewEnum dispatches through IMILBitmapEffects's vtable slot 3.
 func (self *IMILBitmapEffects) NewEnum() (*systemcom.IUnknown, error) {
-	var _ppiuReturn *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppiuReturn)))
-	return _ppiuReturn, win32.ErrIfFailed(int32(r1))
+	_ppiuReturn := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppiuReturn))))
+	return *_ppiuReturn, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Parent dispatches through IMILBitmapEffects's vtable slot 4.
 func (self *IMILBitmapEffects) Get_Parent() (*IMILBitmapEffectGroup, error) {
-	var _ppEffect *IMILBitmapEffectGroup
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEffect)))
-	return _ppEffect, win32.ErrIfFailed(int32(r1))
+	_ppEffect := new(*IMILBitmapEffectGroup)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppEffect))))
+	return *_ppEffect, win32.ErrIfFailed(int32(r1))
 }
 
 // Item dispatches through IMILBitmapEffects's vtable slot 5.
 func (self *IMILBitmapEffects) Item(uindex uint32) (*IMILBitmapEffect, error) {
-	var _ppEffect *IMILBitmapEffect
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(uindex), uintptr(unsafe.Pointer(&_ppEffect)))
-	return _ppEffect, win32.ErrIfFailed(int32(r1))
+	_ppEffect := new(*IMILBitmapEffect)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(uindex), uintptr(win32.OutParam(unsafe.Pointer(_ppEffect))))
+	return *_ppEffect, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IMILBitmapEffects's vtable slot 6.
 func (self *IMILBitmapEffects) Get_Count() (uint32, error) {
-	var _puiCount uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_puiCount)))
-	return _puiCount, win32.ErrIfFailed(int32(r1))
+	_puiCount := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_puiCount))))
+	return *_puiCount, win32.ErrIfFailed(int32(r1))
 }

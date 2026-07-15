@@ -1115,9 +1115,9 @@ var IID_IActiveScriptStringCompare = win32.GUID{Data1: 0x58562769, Data2: 0xed52
 
 // StrComp dispatches through IActiveScriptStringCompare's vtable slot 3.
 func (self *IActiveScriptStringCompare) StrComp(bszStr1 foundation.BSTR, bszStr2 foundation.BSTR) (int32, error) {
-	var _iRet int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bszStr1)), uintptr(unsafe.Pointer(bszStr2)), uintptr(unsafe.Pointer(&_iRet)))
-	return _iRet, win32.ErrIfFailed(int32(r1))
+	_iRet := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bszStr1)), uintptr(unsafe.Pointer(bszStr2)), uintptr(win32.OutParam(unsafe.Pointer(_iRet))))
+	return *_iRet, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: c35456e7-bebf-4a1b-86a9-24d56be8b369
@@ -3932,9 +3932,9 @@ var IID_IWebAppDiagnosticsSetup = win32.GUID{Data1: 0x379bfbe1, Data2: 0xc6c9, D
 
 // DiagnosticsSupported dispatches through IWebAppDiagnosticsSetup's vtable slot 3.
 func (self *IWebAppDiagnosticsSetup) DiagnosticsSupported() (foundation.VARIANT_BOOL, error) {
-	var _pRetVal foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateObjectWithSiteAtWebApp dispatches through IWebAppDiagnosticsSetup's vtable slot 4.

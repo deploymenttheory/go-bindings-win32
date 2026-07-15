@@ -28,16 +28,16 @@ var IID_IFeed = win32.GUID{Data1: 0xf7f915d8, Data2: 0x2ede, Data3: 0x42bc, Data
 
 // Xml dispatches through IFeed's vtable slot 7.
 func (self *IFeed) Xml(count int32, sortProperty FEEDS_XML_SORT_PROPERTY, sortOrder FEEDS_XML_SORT_ORDER, filterFlags FEEDS_XML_FILTER_FLAGS, includeFlags FEEDS_XML_INCLUDE_FLAGS) (foundation.BSTR, error) {
-	var _xml foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(count), uintptr(sortProperty), uintptr(sortOrder), uintptr(filterFlags), uintptr(includeFlags), uintptr(unsafe.Pointer(&_xml)))
-	return _xml, win32.ErrIfFailed(int32(r1))
+	_xml := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(count), uintptr(sortProperty), uintptr(sortOrder), uintptr(filterFlags), uintptr(includeFlags), uintptr(win32.OutParam(unsafe.Pointer(_xml))))
+	return *_xml, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through IFeed's vtable slot 8.
 func (self *IFeed) Get_Name() (foundation.BSTR, error) {
-	var _name foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
-	return _name, win32.ErrIfFailed(int32(r1))
+	_name := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_name))))
+	return *_name, win32.ErrIfFailed(int32(r1))
 }
 
 // Rename dispatches through IFeed's vtable slot 9.
@@ -48,9 +48,9 @@ func (self *IFeed) Rename(name foundation.BSTR) error {
 
 // Get_Url dispatches through IFeed's vtable slot 10.
 func (self *IFeed) Get_Url() (foundation.BSTR, error) {
-	var _feedUrl foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_feedUrl)))
-	return _feedUrl, win32.ErrIfFailed(int32(r1))
+	_feedUrl := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_feedUrl))))
+	return *_feedUrl, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Url dispatches through IFeed's vtable slot 11.
@@ -61,16 +61,16 @@ func (self *IFeed) Put_Url(feedUrl foundation.BSTR) error {
 
 // Get_LocalId dispatches through IFeed's vtable slot 12.
 func (self *IFeed) Get_LocalId() (foundation.BSTR, error) {
-	var _feedGuid foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_feedGuid)))
-	return _feedGuid, win32.ErrIfFailed(int32(r1))
+	_feedGuid := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_feedGuid))))
+	return *_feedGuid, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Path dispatches through IFeed's vtable slot 13.
 func (self *IFeed) Get_Path() (foundation.BSTR, error) {
-	var _path foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_path)))
-	return _path, win32.ErrIfFailed(int32(r1))
+	_path := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_path))))
+	return *_path, win32.ErrIfFailed(int32(r1))
 }
 
 // Move dispatches through IFeed's vtable slot 14.
@@ -81,16 +81,16 @@ func (self *IFeed) Move(newParentPath foundation.BSTR) error {
 
 // Get_Parent dispatches through IFeed's vtable slot 15.
 func (self *IFeed) Get_Parent() (*systemcom.IDispatch, error) {
-	var _disp *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.ErrIfFailed(int32(r1))
+	_disp := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_disp))))
+	return *_disp, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastWriteTime dispatches through IFeed's vtable slot 16.
 func (self *IFeed) Get_LastWriteTime() (float64, error) {
-	var _lastWrite float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lastWrite)))
-	return _lastWrite, win32.ErrIfFailed(int32(r1))
+	_lastWrite := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_lastWrite))))
+	return *_lastWrite, win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IFeed's vtable slot 17.
@@ -119,9 +119,9 @@ func (self *IFeed) CancelAsyncDownload() error {
 
 // Get_SyncSetting dispatches through IFeed's vtable slot 21.
 func (self *IFeed) Get_SyncSetting() (FEEDS_SYNC_SETTING, error) {
-	var _syncSetting FEEDS_SYNC_SETTING
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_syncSetting)))
-	return _syncSetting, win32.ErrIfFailed(int32(r1))
+	_syncSetting := new(FEEDS_SYNC_SETTING)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_syncSetting))))
+	return *_syncSetting, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SyncSetting dispatches through IFeed's vtable slot 22.
@@ -132,9 +132,9 @@ func (self *IFeed) Put_SyncSetting(syncSetting FEEDS_SYNC_SETTING) error {
 
 // Get_Interval dispatches through IFeed's vtable slot 23.
 func (self *IFeed) Get_Interval() (int32, error) {
-	var _minutes int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_minutes)))
-	return _minutes, win32.ErrIfFailed(int32(r1))
+	_minutes := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_minutes))))
+	return *_minutes, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Interval dispatches through IFeed's vtable slot 24.
@@ -145,100 +145,100 @@ func (self *IFeed) Put_Interval(minutes int32) error {
 
 // Get_LastDownloadTime dispatches through IFeed's vtable slot 25.
 func (self *IFeed) Get_LastDownloadTime() (float64, error) {
-	var _lastDownload float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lastDownload)))
-	return _lastDownload, win32.ErrIfFailed(int32(r1))
+	_lastDownload := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_lastDownload))))
+	return *_lastDownload, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LocalEnclosurePath dispatches through IFeed's vtable slot 26.
 func (self *IFeed) Get_LocalEnclosurePath() (foundation.BSTR, error) {
-	var _path foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_path)))
-	return _path, win32.ErrIfFailed(int32(r1))
+	_path := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_path))))
+	return *_path, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Items dispatches through IFeed's vtable slot 27.
 func (self *IFeed) Get_Items() (*systemcom.IDispatch, error) {
-	var _disp *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.ErrIfFailed(int32(r1))
+	_disp := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_disp))))
+	return *_disp, win32.ErrIfFailed(int32(r1))
 }
 
 // GetItem dispatches through IFeed's vtable slot 28.
 func (self *IFeed) GetItem(itemId int32) (*systemcom.IDispatch, error) {
-	var _disp *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(itemId), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.ErrIfFailed(int32(r1))
+	_disp := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(itemId), uintptr(win32.OutParam(unsafe.Pointer(_disp))))
+	return *_disp, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Title dispatches through IFeed's vtable slot 29.
 func (self *IFeed) Get_Title() (foundation.BSTR, error) {
-	var _title foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_title)))
-	return _title, win32.ErrIfFailed(int32(r1))
+	_title := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_title))))
+	return *_title, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through IFeed's vtable slot 30.
 func (self *IFeed) Get_Description() (foundation.BSTR, error) {
-	var _description foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_description)))
-	return _description, win32.ErrIfFailed(int32(r1))
+	_description := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_description))))
+	return *_description, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Link dispatches through IFeed's vtable slot 31.
 func (self *IFeed) Get_Link() (foundation.BSTR, error) {
-	var _homePage foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_homePage)))
-	return _homePage, win32.ErrIfFailed(int32(r1))
+	_homePage := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_homePage))))
+	return *_homePage, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Image dispatches through IFeed's vtable slot 32.
 func (self *IFeed) Get_Image() (foundation.BSTR, error) {
-	var _imageUrl foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_imageUrl)))
-	return _imageUrl, win32.ErrIfFailed(int32(r1))
+	_imageUrl := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_imageUrl))))
+	return *_imageUrl, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastBuildDate dispatches through IFeed's vtable slot 33.
 func (self *IFeed) Get_LastBuildDate() (float64, error) {
-	var _lastBuildDate float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lastBuildDate)))
-	return _lastBuildDate, win32.ErrIfFailed(int32(r1))
+	_lastBuildDate := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_lastBuildDate))))
+	return *_lastBuildDate, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PubDate dispatches through IFeed's vtable slot 34.
 func (self *IFeed) Get_PubDate() (float64, error) {
-	var _lastPopulateDate float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lastPopulateDate)))
-	return _lastPopulateDate, win32.ErrIfFailed(int32(r1))
+	_lastPopulateDate := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_lastPopulateDate))))
+	return *_lastPopulateDate, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Ttl dispatches through IFeed's vtable slot 35.
 func (self *IFeed) Get_Ttl() (int32, error) {
-	var _ttl int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ttl)))
-	return _ttl, win32.ErrIfFailed(int32(r1))
+	_ttl := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ttl))))
+	return *_ttl, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Language dispatches through IFeed's vtable slot 36.
 func (self *IFeed) Get_Language() (foundation.BSTR, error) {
-	var _language foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_language)))
-	return _language, win32.ErrIfFailed(int32(r1))
+	_language := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_language))))
+	return *_language, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Copyright dispatches through IFeed's vtable slot 37.
 func (self *IFeed) Get_Copyright() (foundation.BSTR, error) {
-	var _copyright foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_copyright)))
-	return _copyright, win32.ErrIfFailed(int32(r1))
+	_copyright := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_copyright))))
+	return *_copyright, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MaxItemCount dispatches through IFeed's vtable slot 38.
 func (self *IFeed) Get_MaxItemCount() (int32, error) {
-	var _count int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
-	return _count, win32.ErrIfFailed(int32(r1))
+	_count := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_count))))
+	return *_count, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MaxItemCount dispatches through IFeed's vtable slot 39.
@@ -249,9 +249,9 @@ func (self *IFeed) Put_MaxItemCount(count int32) error {
 
 // Get_DownloadEnclosuresAutomatically dispatches through IFeed's vtable slot 40.
 func (self *IFeed) Get_DownloadEnclosuresAutomatically() (foundation.VARIANT_BOOL, error) {
-	var _downloadEnclosuresAutomatically foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_downloadEnclosuresAutomatically)))
-	return _downloadEnclosuresAutomatically, win32.ErrIfFailed(int32(r1))
+	_downloadEnclosuresAutomatically := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_downloadEnclosuresAutomatically))))
+	return *_downloadEnclosuresAutomatically, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DownloadEnclosuresAutomatically dispatches through IFeed's vtable slot 41.
@@ -262,16 +262,16 @@ func (self *IFeed) Put_DownloadEnclosuresAutomatically(downloadEnclosuresAutomat
 
 // Get_DownloadStatus dispatches through IFeed's vtable slot 42.
 func (self *IFeed) Get_DownloadStatus() (FEEDS_DOWNLOAD_STATUS, error) {
-	var _status FEEDS_DOWNLOAD_STATUS
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_status)))
-	return _status, win32.ErrIfFailed(int32(r1))
+	_status := new(FEEDS_DOWNLOAD_STATUS)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_status))))
+	return *_status, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastDownloadError dispatches through IFeed's vtable slot 43.
 func (self *IFeed) Get_LastDownloadError() (FEEDS_DOWNLOAD_ERROR, error) {
-	var _error_ FEEDS_DOWNLOAD_ERROR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_error_)))
-	return _error_, win32.ErrIfFailed(int32(r1))
+	_error_ := new(FEEDS_DOWNLOAD_ERROR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_error_))))
+	return *_error_, win32.ErrIfFailed(int32(r1))
 }
 
 // Merge dispatches through IFeed's vtable slot 44.
@@ -282,16 +282,16 @@ func (self *IFeed) Merge(feedXml foundation.BSTR, feedUrl foundation.BSTR) error
 
 // Get_DownloadUrl dispatches through IFeed's vtable slot 45.
 func (self *IFeed) Get_DownloadUrl() (foundation.BSTR, error) {
-	var _feedUrl foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_feedUrl)))
-	return _feedUrl, win32.ErrIfFailed(int32(r1))
+	_feedUrl := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_feedUrl))))
+	return *_feedUrl, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsList dispatches through IFeed's vtable slot 46.
 func (self *IFeed) Get_IsList() (foundation.VARIANT_BOOL, error) {
-	var _isList foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_isList)))
-	return _isList, win32.ErrIfFailed(int32(r1))
+	_isList := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_isList))))
+	return *_isList, win32.ErrIfFailed(int32(r1))
 }
 
 // MarkAllItemsRead dispatches through IFeed's vtable slot 47.
@@ -302,23 +302,23 @@ func (self *IFeed) MarkAllItemsRead() error {
 
 // GetWatcher dispatches through IFeed's vtable slot 48.
 func (self *IFeed) GetWatcher(scope FEEDS_EVENTS_SCOPE, mask FEEDS_EVENTS_MASK) (*systemcom.IDispatch, error) {
-	var _disp *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(mask), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.ErrIfFailed(int32(r1))
+	_disp := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(mask), uintptr(win32.OutParam(unsafe.Pointer(_disp))))
+	return *_disp, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UnreadItemCount dispatches through IFeed's vtable slot 49.
 func (self *IFeed) Get_UnreadItemCount() (int32, error) {
-	var _count int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
-	return _count, win32.ErrIfFailed(int32(r1))
+	_count := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_count))))
+	return *_count, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ItemCount dispatches through IFeed's vtable slot 50.
 func (self *IFeed) Get_ItemCount() (int32, error) {
-	var _count int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
-	return _count, win32.ErrIfFailed(int32(r1))
+	_count := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_count))))
+	return *_count, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 33f2ea09-1398-4ab9-b6a4-f94b49d0a42e
@@ -331,30 +331,30 @@ var IID_IFeed2 = win32.GUID{Data1: 0x33f2ea09, Data2: 0x1398, Data3: 0x4ab9, Dat
 
 // GetItemByEffectiveId dispatches through IFeed2's vtable slot 51.
 func (self *IFeed2) GetItemByEffectiveId(itemEffectiveId int32) (*systemcom.IDispatch, error) {
-	var _disp *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(itemEffectiveId), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.ErrIfFailed(int32(r1))
+	_disp := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(itemEffectiveId), uintptr(win32.OutParam(unsafe.Pointer(_disp))))
+	return *_disp, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastItemDownloadTime dispatches through IFeed2's vtable slot 52.
 func (self *IFeed2) Get_LastItemDownloadTime() (float64, error) {
-	var _lastItemDownloadTime float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lastItemDownloadTime)))
-	return _lastItemDownloadTime, win32.ErrIfFailed(int32(r1))
+	_lastItemDownloadTime := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_lastItemDownloadTime))))
+	return *_lastItemDownloadTime, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Username dispatches through IFeed2's vtable slot 53.
 func (self *IFeed2) Get_Username() (foundation.BSTR, error) {
-	var _username foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_username)))
-	return _username, win32.ErrIfFailed(int32(r1))
+	_username := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_username))))
+	return *_username, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Password dispatches through IFeed2's vtable slot 54.
 func (self *IFeed2) Get_Password() (foundation.BSTR, error) {
-	var _password foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_password)))
-	return _password, win32.ErrIfFailed(int32(r1))
+	_password := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_password))))
+	return *_password, win32.ErrIfFailed(int32(r1))
 }
 
 // SetCredentials dispatches through IFeed2's vtable slot 55.
@@ -379,23 +379,23 @@ var IID_IFeedEnclosure = win32.GUID{Data1: 0x361c26f7, Data2: 0x90a4, Data3: 0x4
 
 // Get_Url dispatches through IFeedEnclosure's vtable slot 7.
 func (self *IFeedEnclosure) Get_Url() (foundation.BSTR, error) {
-	var _enclosureUrl foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_enclosureUrl)))
-	return _enclosureUrl, win32.ErrIfFailed(int32(r1))
+	_enclosureUrl := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_enclosureUrl))))
+	return *_enclosureUrl, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Type dispatches through IFeedEnclosure's vtable slot 8.
 func (self *IFeedEnclosure) Get_Type() (foundation.BSTR, error) {
-	var _mimeType foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_mimeType)))
-	return _mimeType, win32.ErrIfFailed(int32(r1))
+	_mimeType := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_mimeType))))
+	return *_mimeType, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Length dispatches through IFeedEnclosure's vtable slot 9.
 func (self *IFeedEnclosure) Get_Length() (int32, error) {
-	var _length int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_length)))
-	return _length, win32.ErrIfFailed(int32(r1))
+	_length := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_length))))
+	return *_length, win32.ErrIfFailed(int32(r1))
 }
 
 // AsyncDownload dispatches through IFeedEnclosure's vtable slot 10.
@@ -412,44 +412,44 @@ func (self *IFeedEnclosure) CancelAsyncDownload() error {
 
 // Get_DownloadStatus dispatches through IFeedEnclosure's vtable slot 12.
 func (self *IFeedEnclosure) Get_DownloadStatus() (FEEDS_DOWNLOAD_STATUS, error) {
-	var _status FEEDS_DOWNLOAD_STATUS
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_status)))
-	return _status, win32.ErrIfFailed(int32(r1))
+	_status := new(FEEDS_DOWNLOAD_STATUS)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_status))))
+	return *_status, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastDownloadError dispatches through IFeedEnclosure's vtable slot 13.
 func (self *IFeedEnclosure) Get_LastDownloadError() (FEEDS_DOWNLOAD_ERROR, error) {
-	var _error_ FEEDS_DOWNLOAD_ERROR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_error_)))
-	return _error_, win32.ErrIfFailed(int32(r1))
+	_error_ := new(FEEDS_DOWNLOAD_ERROR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_error_))))
+	return *_error_, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LocalPath dispatches through IFeedEnclosure's vtable slot 14.
 func (self *IFeedEnclosure) Get_LocalPath() (foundation.BSTR, error) {
-	var _localPath foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_localPath)))
-	return _localPath, win32.ErrIfFailed(int32(r1))
+	_localPath := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_localPath))))
+	return *_localPath, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Parent dispatches through IFeedEnclosure's vtable slot 15.
 func (self *IFeedEnclosure) Get_Parent() (*systemcom.IDispatch, error) {
-	var _disp *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.ErrIfFailed(int32(r1))
+	_disp := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_disp))))
+	return *_disp, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DownloadUrl dispatches through IFeedEnclosure's vtable slot 16.
 func (self *IFeedEnclosure) Get_DownloadUrl() (foundation.BSTR, error) {
-	var _enclosureUrl foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_enclosureUrl)))
-	return _enclosureUrl, win32.ErrIfFailed(int32(r1))
+	_enclosureUrl := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_enclosureUrl))))
+	return *_enclosureUrl, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DownloadMimeType dispatches through IFeedEnclosure's vtable slot 17.
 func (self *IFeedEnclosure) Get_DownloadMimeType() (foundation.BSTR, error) {
-	var _mimeType foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_mimeType)))
-	return _mimeType, win32.ErrIfFailed(int32(r1))
+	_mimeType := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_mimeType))))
+	return *_mimeType, win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveFile dispatches through IFeedEnclosure's vtable slot 18.
@@ -530,58 +530,58 @@ var IID_IFeedFolder = win32.GUID{Data1: 0x81f04ad1, Data2: 0x4194, Data3: 0x4d7d
 
 // Get_Feeds dispatches through IFeedFolder's vtable slot 7.
 func (self *IFeedFolder) Get_Feeds() (*systemcom.IDispatch, error) {
-	var _disp *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.ErrIfFailed(int32(r1))
+	_disp := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_disp))))
+	return *_disp, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Subfolders dispatches through IFeedFolder's vtable slot 8.
 func (self *IFeedFolder) Get_Subfolders() (*systemcom.IDispatch, error) {
-	var _disp *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.ErrIfFailed(int32(r1))
+	_disp := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_disp))))
+	return *_disp, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateFeed dispatches through IFeedFolder's vtable slot 9.
 func (self *IFeedFolder) CreateFeed(feedName foundation.BSTR, feedUrl foundation.BSTR) (*systemcom.IDispatch, error) {
-	var _disp *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(feedName)), uintptr(unsafe.Pointer(feedUrl)), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.ErrIfFailed(int32(r1))
+	_disp := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(feedName)), uintptr(unsafe.Pointer(feedUrl)), uintptr(win32.OutParam(unsafe.Pointer(_disp))))
+	return *_disp, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSubfolder dispatches through IFeedFolder's vtable slot 10.
 func (self *IFeedFolder) CreateSubfolder(folderName foundation.BSTR) (*systemcom.IDispatch, error) {
-	var _disp *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(folderName)), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.ErrIfFailed(int32(r1))
+	_disp := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(folderName)), uintptr(win32.OutParam(unsafe.Pointer(_disp))))
+	return *_disp, win32.ErrIfFailed(int32(r1))
 }
 
 // ExistsFeed dispatches through IFeedFolder's vtable slot 11.
 func (self *IFeedFolder) ExistsFeed(feedName foundation.BSTR) (foundation.VARIANT_BOOL, error) {
-	var _exists foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(feedName)), uintptr(unsafe.Pointer(&_exists)))
-	return _exists, win32.ErrIfFailed(int32(r1))
+	_exists := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(feedName)), uintptr(win32.OutParam(unsafe.Pointer(_exists))))
+	return *_exists, win32.ErrIfFailed(int32(r1))
 }
 
 // GetFeed dispatches through IFeedFolder's vtable slot 12.
 func (self *IFeedFolder) GetFeed(feedName foundation.BSTR) (*systemcom.IDispatch, error) {
-	var _disp *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(feedName)), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.ErrIfFailed(int32(r1))
+	_disp := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(feedName)), uintptr(win32.OutParam(unsafe.Pointer(_disp))))
+	return *_disp, win32.ErrIfFailed(int32(r1))
 }
 
 // ExistsSubfolder dispatches through IFeedFolder's vtable slot 13.
 func (self *IFeedFolder) ExistsSubfolder(folderName foundation.BSTR) (foundation.VARIANT_BOOL, error) {
-	var _exists foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(folderName)), uintptr(unsafe.Pointer(&_exists)))
-	return _exists, win32.ErrIfFailed(int32(r1))
+	_exists := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(folderName)), uintptr(win32.OutParam(unsafe.Pointer(_exists))))
+	return *_exists, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSubfolder dispatches through IFeedFolder's vtable slot 14.
 func (self *IFeedFolder) GetSubfolder(folderName foundation.BSTR) (*systemcom.IDispatch, error) {
-	var _disp *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(folderName)), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.ErrIfFailed(int32(r1))
+	_disp := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(folderName)), uintptr(win32.OutParam(unsafe.Pointer(_disp))))
+	return *_disp, win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IFeedFolder's vtable slot 15.
@@ -592,9 +592,9 @@ func (self *IFeedFolder) Delete() error {
 
 // Get_Name dispatches through IFeedFolder's vtable slot 16.
 func (self *IFeedFolder) Get_Name() (foundation.BSTR, error) {
-	var _folderName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_folderName)))
-	return _folderName, win32.ErrIfFailed(int32(r1))
+	_folderName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_folderName))))
+	return *_folderName, win32.ErrIfFailed(int32(r1))
 }
 
 // Rename dispatches through IFeedFolder's vtable slot 17.
@@ -605,9 +605,9 @@ func (self *IFeedFolder) Rename(folderName foundation.BSTR) error {
 
 // Get_Path dispatches through IFeedFolder's vtable slot 18.
 func (self *IFeedFolder) Get_Path() (foundation.BSTR, error) {
-	var _folderPath foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_folderPath)))
-	return _folderPath, win32.ErrIfFailed(int32(r1))
+	_folderPath := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_folderPath))))
+	return *_folderPath, win32.ErrIfFailed(int32(r1))
 }
 
 // Move dispatches through IFeedFolder's vtable slot 19.
@@ -618,37 +618,37 @@ func (self *IFeedFolder) Move(newParentPath foundation.BSTR) error {
 
 // Get_Parent dispatches through IFeedFolder's vtable slot 20.
 func (self *IFeedFolder) Get_Parent() (*systemcom.IDispatch, error) {
-	var _disp *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.ErrIfFailed(int32(r1))
+	_disp := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_disp))))
+	return *_disp, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsRoot dispatches through IFeedFolder's vtable slot 21.
 func (self *IFeedFolder) Get_IsRoot() (foundation.VARIANT_BOOL, error) {
-	var _isRoot foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_isRoot)))
-	return _isRoot, win32.ErrIfFailed(int32(r1))
+	_isRoot := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_isRoot))))
+	return *_isRoot, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TotalUnreadItemCount dispatches through IFeedFolder's vtable slot 22.
 func (self *IFeedFolder) Get_TotalUnreadItemCount() (int32, error) {
-	var _count int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
-	return _count, win32.ErrIfFailed(int32(r1))
+	_count := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_count))))
+	return *_count, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TotalItemCount dispatches through IFeedFolder's vtable slot 23.
 func (self *IFeedFolder) Get_TotalItemCount() (int32, error) {
-	var _count int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
-	return _count, win32.ErrIfFailed(int32(r1))
+	_count := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_count))))
+	return *_count, win32.ErrIfFailed(int32(r1))
 }
 
 // GetWatcher dispatches through IFeedFolder's vtable slot 24.
 func (self *IFeedFolder) GetWatcher(scope FEEDS_EVENTS_SCOPE, mask FEEDS_EVENTS_MASK) (*systemcom.IDispatch, error) {
-	var _disp *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(mask), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.ErrIfFailed(int32(r1))
+	_disp := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(mask), uintptr(win32.OutParam(unsafe.Pointer(_disp))))
+	return *_disp, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 20a59fa6-a844-4630-9e98-175f70b4d55b
@@ -765,72 +765,72 @@ var IID_IFeedItem = win32.GUID{Data1: 0x0a1e6cad, Data2: 0x0a47, Data3: 0x4da2, 
 
 // Xml dispatches through IFeedItem's vtable slot 7.
 func (self *IFeedItem) Xml(includeFlags FEEDS_XML_INCLUDE_FLAGS) (foundation.BSTR, error) {
-	var _xml foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(includeFlags), uintptr(unsafe.Pointer(&_xml)))
-	return _xml, win32.ErrIfFailed(int32(r1))
+	_xml := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(includeFlags), uintptr(win32.OutParam(unsafe.Pointer(_xml))))
+	return *_xml, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Title dispatches through IFeedItem's vtable slot 8.
 func (self *IFeedItem) Get_Title() (foundation.BSTR, error) {
-	var _title foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_title)))
-	return _title, win32.ErrIfFailed(int32(r1))
+	_title := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_title))))
+	return *_title, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Link dispatches through IFeedItem's vtable slot 9.
 func (self *IFeedItem) Get_Link() (foundation.BSTR, error) {
-	var _linkUrl foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_linkUrl)))
-	return _linkUrl, win32.ErrIfFailed(int32(r1))
+	_linkUrl := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_linkUrl))))
+	return *_linkUrl, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Guid dispatches through IFeedItem's vtable slot 10.
 func (self *IFeedItem) Get_Guid() (foundation.BSTR, error) {
-	var _itemGuid foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_itemGuid)))
-	return _itemGuid, win32.ErrIfFailed(int32(r1))
+	_itemGuid := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_itemGuid))))
+	return *_itemGuid, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through IFeedItem's vtable slot 11.
 func (self *IFeedItem) Get_Description() (foundation.BSTR, error) {
-	var _description foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_description)))
-	return _description, win32.ErrIfFailed(int32(r1))
+	_description := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_description))))
+	return *_description, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PubDate dispatches through IFeedItem's vtable slot 12.
 func (self *IFeedItem) Get_PubDate() (float64, error) {
-	var _pubDate float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pubDate)))
-	return _pubDate, win32.ErrIfFailed(int32(r1))
+	_pubDate := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pubDate))))
+	return *_pubDate, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Comments dispatches through IFeedItem's vtable slot 13.
 func (self *IFeedItem) Get_Comments() (foundation.BSTR, error) {
-	var _comments foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_comments)))
-	return _comments, win32.ErrIfFailed(int32(r1))
+	_comments := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_comments))))
+	return *_comments, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Author dispatches through IFeedItem's vtable slot 14.
 func (self *IFeedItem) Get_Author() (foundation.BSTR, error) {
-	var _author foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_author)))
-	return _author, win32.ErrIfFailed(int32(r1))
+	_author := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_author))))
+	return *_author, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Enclosure dispatches through IFeedItem's vtable slot 15.
 func (self *IFeedItem) Get_Enclosure() (*systemcom.IDispatch, error) {
-	var _disp *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.ErrIfFailed(int32(r1))
+	_disp := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_disp))))
+	return *_disp, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsRead dispatches through IFeedItem's vtable slot 16.
 func (self *IFeedItem) Get_IsRead() (foundation.VARIANT_BOOL, error) {
-	var _isRead foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_isRead)))
-	return _isRead, win32.ErrIfFailed(int32(r1))
+	_isRead := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_isRead))))
+	return *_isRead, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_IsRead dispatches through IFeedItem's vtable slot 17.
@@ -841,16 +841,16 @@ func (self *IFeedItem) Put_IsRead(isRead foundation.VARIANT_BOOL) error {
 
 // Get_LocalId dispatches through IFeedItem's vtable slot 18.
 func (self *IFeedItem) Get_LocalId() (int32, error) {
-	var _itemId int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_itemId)))
-	return _itemId, win32.ErrIfFailed(int32(r1))
+	_itemId := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_itemId))))
+	return *_itemId, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Parent dispatches through IFeedItem's vtable slot 19.
 func (self *IFeedItem) Get_Parent() (*systemcom.IDispatch, error) {
-	var _disp *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.ErrIfFailed(int32(r1))
+	_disp := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_disp))))
+	return *_disp, win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IFeedItem's vtable slot 20.
@@ -861,23 +861,23 @@ func (self *IFeedItem) Delete() error {
 
 // Get_DownloadUrl dispatches through IFeedItem's vtable slot 21.
 func (self *IFeedItem) Get_DownloadUrl() (foundation.BSTR, error) {
-	var _itemUrl foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_itemUrl)))
-	return _itemUrl, win32.ErrIfFailed(int32(r1))
+	_itemUrl := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_itemUrl))))
+	return *_itemUrl, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastDownloadTime dispatches through IFeedItem's vtable slot 22.
 func (self *IFeedItem) Get_LastDownloadTime() (float64, error) {
-	var _lastDownload float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lastDownload)))
-	return _lastDownload, win32.ErrIfFailed(int32(r1))
+	_lastDownload := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_lastDownload))))
+	return *_lastDownload, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Modified dispatches through IFeedItem's vtable slot 23.
 func (self *IFeedItem) Get_Modified() (float64, error) {
-	var _modified float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_modified)))
-	return _modified, win32.ErrIfFailed(int32(r1))
+	_modified := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_modified))))
+	return *_modified, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 79ac9ef4-f9c1-4d2b-a50b-a7ffba4dcf37
@@ -890,9 +890,9 @@ var IID_IFeedItem2 = win32.GUID{Data1: 0x79ac9ef4, Data2: 0xf9c1, Data3: 0x4d2b,
 
 // Get_EffectiveId dispatches through IFeedItem2's vtable slot 24.
 func (self *IFeedItem2) Get_EffectiveId() (int32, error) {
-	var _effectiveId int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_effectiveId)))
-	return _effectiveId, win32.ErrIfFailed(int32(r1))
+	_effectiveId := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_effectiveId))))
+	return *_effectiveId, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: e3cd0028-2eed-4c60-8fae-a3225309a836
@@ -905,23 +905,23 @@ var IID_IFeedsEnum = win32.GUID{Data1: 0xe3cd0028, Data2: 0x2eed, Data3: 0x4c60,
 
 // Get_Count dispatches through IFeedsEnum's vtable slot 7.
 func (self *IFeedsEnum) Get_Count() (int32, error) {
-	var _count int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
-	return _count, win32.ErrIfFailed(int32(r1))
+	_count := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_count))))
+	return *_count, win32.ErrIfFailed(int32(r1))
 }
 
 // Item dispatches through IFeedsEnum's vtable slot 8.
 func (self *IFeedsEnum) Item(index int32) (*systemcom.IDispatch, error) {
-	var _disp *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.ErrIfFailed(int32(r1))
+	_disp := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(win32.OutParam(unsafe.Pointer(_disp))))
+	return *_disp, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IFeedsEnum's vtable slot 9.
 func (self *IFeedsEnum) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
-	var _enumVar *systemole.IEnumVARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_enumVar)))
-	return _enumVar, win32.ErrIfFailed(int32(r1))
+	_enumVar := new(*systemole.IEnumVARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_enumVar))))
+	return *_enumVar, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: a74029cc-1f1a-4906-88f0-810638d86591
@@ -934,51 +934,51 @@ var IID_IFeedsManager = win32.GUID{Data1: 0xa74029cc, Data2: 0x1f1a, Data3: 0x49
 
 // Get_RootFolder dispatches through IFeedsManager's vtable slot 7.
 func (self *IFeedsManager) Get_RootFolder() (*systemcom.IDispatch, error) {
-	var _disp *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.ErrIfFailed(int32(r1))
+	_disp := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_disp))))
+	return *_disp, win32.ErrIfFailed(int32(r1))
 }
 
 // IsSubscribed dispatches through IFeedsManager's vtable slot 8.
 func (self *IFeedsManager) IsSubscribed(feedUrl foundation.BSTR) (foundation.VARIANT_BOOL, error) {
-	var _subscribed foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(feedUrl)), uintptr(unsafe.Pointer(&_subscribed)))
-	return _subscribed, win32.ErrIfFailed(int32(r1))
+	_subscribed := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(feedUrl)), uintptr(win32.OutParam(unsafe.Pointer(_subscribed))))
+	return *_subscribed, win32.ErrIfFailed(int32(r1))
 }
 
 // ExistsFeed dispatches through IFeedsManager's vtable slot 9.
 func (self *IFeedsManager) ExistsFeed(feedPath foundation.BSTR) (foundation.VARIANT_BOOL, error) {
-	var _exists foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(feedPath)), uintptr(unsafe.Pointer(&_exists)))
-	return _exists, win32.ErrIfFailed(int32(r1))
+	_exists := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(feedPath)), uintptr(win32.OutParam(unsafe.Pointer(_exists))))
+	return *_exists, win32.ErrIfFailed(int32(r1))
 }
 
 // GetFeed dispatches through IFeedsManager's vtable slot 10.
 func (self *IFeedsManager) GetFeed(feedPath foundation.BSTR) (*systemcom.IDispatch, error) {
-	var _disp *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(feedPath)), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.ErrIfFailed(int32(r1))
+	_disp := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(feedPath)), uintptr(win32.OutParam(unsafe.Pointer(_disp))))
+	return *_disp, win32.ErrIfFailed(int32(r1))
 }
 
 // GetFeedByUrl dispatches through IFeedsManager's vtable slot 11.
 func (self *IFeedsManager) GetFeedByUrl(feedUrl foundation.BSTR) (*systemcom.IDispatch, error) {
-	var _disp *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(feedUrl)), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.ErrIfFailed(int32(r1))
+	_disp := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(feedUrl)), uintptr(win32.OutParam(unsafe.Pointer(_disp))))
+	return *_disp, win32.ErrIfFailed(int32(r1))
 }
 
 // ExistsFolder dispatches through IFeedsManager's vtable slot 12.
 func (self *IFeedsManager) ExistsFolder(folderPath foundation.BSTR) (foundation.VARIANT_BOOL, error) {
-	var _exists foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(folderPath)), uintptr(unsafe.Pointer(&_exists)))
-	return _exists, win32.ErrIfFailed(int32(r1))
+	_exists := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(folderPath)), uintptr(win32.OutParam(unsafe.Pointer(_exists))))
+	return *_exists, win32.ErrIfFailed(int32(r1))
 }
 
 // GetFolder dispatches through IFeedsManager's vtable slot 13.
 func (self *IFeedsManager) GetFolder(folderPath foundation.BSTR) (*systemcom.IDispatch, error) {
-	var _disp *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(folderPath)), uintptr(unsafe.Pointer(&_disp)))
-	return _disp, win32.ErrIfFailed(int32(r1))
+	_disp := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(folderPath)), uintptr(win32.OutParam(unsafe.Pointer(_disp))))
+	return *_disp, win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteFeed dispatches through IFeedsManager's vtable slot 14.
@@ -1001,16 +1001,16 @@ func (self *IFeedsManager) BackgroundSync(action FEEDS_BACKGROUNDSYNC_ACTION) er
 
 // Get_BackgroundSyncStatus dispatches through IFeedsManager's vtable slot 17.
 func (self *IFeedsManager) Get_BackgroundSyncStatus() (FEEDS_BACKGROUNDSYNC_STATUS, error) {
-	var _status FEEDS_BACKGROUNDSYNC_STATUS
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_status)))
-	return _status, win32.ErrIfFailed(int32(r1))
+	_status := new(FEEDS_BACKGROUNDSYNC_STATUS)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_status))))
+	return *_status, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DefaultInterval dispatches through IFeedsManager's vtable slot 18.
 func (self *IFeedsManager) Get_DefaultInterval() (int32, error) {
-	var _minutes int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_minutes)))
-	return _minutes, win32.ErrIfFailed(int32(r1))
+	_minutes := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_minutes))))
+	return *_minutes, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DefaultInterval dispatches through IFeedsManager's vtable slot 19.
@@ -1027,16 +1027,16 @@ func (self *IFeedsManager) AsyncSyncAll() error {
 
 // Normalize dispatches through IFeedsManager's vtable slot 21.
 func (self *IFeedsManager) Normalize(feedXmlIn foundation.BSTR) (foundation.BSTR, error) {
-	var _feedXmlOut foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(feedXmlIn)), uintptr(unsafe.Pointer(&_feedXmlOut)))
-	return _feedXmlOut, win32.ErrIfFailed(int32(r1))
+	_feedXmlOut := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(feedXmlIn)), uintptr(win32.OutParam(unsafe.Pointer(_feedXmlOut))))
+	return *_feedXmlOut, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ItemCountLimit dispatches through IFeedsManager's vtable slot 22.
 func (self *IFeedsManager) Get_ItemCountLimit() (int32, error) {
-	var _itemCountLimit int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_itemCountLimit)))
-	return _itemCountLimit, win32.ErrIfFailed(int32(r1))
+	_itemCountLimit := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_itemCountLimit))))
+	return *_itemCountLimit, win32.ErrIfFailed(int32(r1))
 }
 
 // IWMPAudioRenderConfig: https://learn.microsoft.com/windows/win32/api/wmprealestate/nn-wmprealestate-iwmpaudiorenderconfig

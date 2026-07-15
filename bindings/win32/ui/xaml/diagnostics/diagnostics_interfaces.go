@@ -80,9 +80,9 @@ func (self *IVisualTreeService) GetEnums(pCount *uint32, ppEnums **EnumType) err
 
 // CreateInstance dispatches through IVisualTreeService's vtable slot 6.
 func (self *IVisualTreeService) CreateInstance(typeName foundation.BSTR, value foundation.BSTR) (uint64, error) {
-	var _pInstanceHandle uint64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(typeName)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(&_pInstanceHandle)))
-	return _pInstanceHandle, win32.ErrIfFailed(int32(r1))
+	_pInstanceHandle := new(uint64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(typeName)), uintptr(unsafe.Pointer(value)), uintptr(win32.OutParam(unsafe.Pointer(_pInstanceHandle))))
+	return *_pInstanceHandle, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPropertyValuesChain dispatches through IVisualTreeService's vtable slot 7.
@@ -239,49 +239,49 @@ var IID_IXamlDiagnostics = win32.GUID{Data1: 0x18c9e2b6, Data2: 0x3f43, Data3: 0
 
 // GetDispatcher dispatches through IXamlDiagnostics's vtable slot 3.
 func (self *IXamlDiagnostics) GetDispatcher() (*systemwinrt.IInspectable, error) {
-	var _ppDispatcher *systemwinrt.IInspectable
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppDispatcher)))
-	return _ppDispatcher, win32.ErrIfFailed(int32(r1))
+	_ppDispatcher := new(*systemwinrt.IInspectable)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppDispatcher))))
+	return *_ppDispatcher, win32.ErrIfFailed(int32(r1))
 }
 
 // GetUiLayer dispatches through IXamlDiagnostics's vtable slot 4.
 func (self *IXamlDiagnostics) GetUiLayer() (*systemwinrt.IInspectable, error) {
-	var _ppLayer *systemwinrt.IInspectable
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppLayer)))
-	return _ppLayer, win32.ErrIfFailed(int32(r1))
+	_ppLayer := new(*systemwinrt.IInspectable)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppLayer))))
+	return *_ppLayer, win32.ErrIfFailed(int32(r1))
 }
 
 // GetApplication dispatches through IXamlDiagnostics's vtable slot 5.
 func (self *IXamlDiagnostics) GetApplication() (*systemwinrt.IInspectable, error) {
-	var _ppApplication *systemwinrt.IInspectable
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppApplication)))
-	return _ppApplication, win32.ErrIfFailed(int32(r1))
+	_ppApplication := new(*systemwinrt.IInspectable)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppApplication))))
+	return *_ppApplication, win32.ErrIfFailed(int32(r1))
 }
 
 // GetIInspectableFromHandle dispatches through IXamlDiagnostics's vtable slot 6.
 func (self *IXamlDiagnostics) GetIInspectableFromHandle(instanceHandle uint64) (*systemwinrt.IInspectable, error) {
-	var _ppInstance *systemwinrt.IInspectable
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(instanceHandle), uintptr(unsafe.Pointer(&_ppInstance)))
-	return _ppInstance, win32.ErrIfFailed(int32(r1))
+	_ppInstance := new(*systemwinrt.IInspectable)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(instanceHandle), uintptr(win32.OutParam(unsafe.Pointer(_ppInstance))))
+	return *_ppInstance, win32.ErrIfFailed(int32(r1))
 }
 
 // GetHandleFromIInspectable dispatches through IXamlDiagnostics's vtable slot 7.
 func (self *IXamlDiagnostics) GetHandleFromIInspectable(pInstance *systemwinrt.IInspectable) (uint64, error) {
-	var _pHandle uint64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInstance)), uintptr(unsafe.Pointer(&_pHandle)))
-	return _pHandle, win32.ErrIfFailed(int32(r1))
+	_pHandle := new(uint64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInstance)), uintptr(win32.OutParam(unsafe.Pointer(_pHandle))))
+	return *_pHandle, win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterInstance dispatches through IXamlDiagnostics's vtable slot 9.
 func (self *IXamlDiagnostics) RegisterInstance(pInstance *systemwinrt.IInspectable) (uint64, error) {
-	var _pInstanceHandle uint64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInstance)), uintptr(unsafe.Pointer(&_pInstanceHandle)))
-	return _pInstanceHandle, win32.ErrIfFailed(int32(r1))
+	_pInstanceHandle := new(uint64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInstance)), uintptr(win32.OutParam(unsafe.Pointer(_pInstanceHandle))))
+	return *_pInstanceHandle, win32.ErrIfFailed(int32(r1))
 }
 
 // GetInitializationData dispatches through IXamlDiagnostics's vtable slot 10.
 func (self *IXamlDiagnostics) GetInitializationData() (foundation.BSTR, error) {
-	var _pInitializationData foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pInitializationData)))
-	return _pInitializationData, win32.ErrIfFailed(int32(r1))
+	_pInitializationData := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pInitializationData))))
+	return *_pInitializationData, win32.ErrIfFailed(int32(r1))
 }

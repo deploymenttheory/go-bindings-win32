@@ -1459,9 +1459,9 @@ var IID_ICertExit = win32.GUID{Data1: 0xe19ae1a0, Data2: 0x7364, Data3: 0x11d0, 
 
 // Initialize dispatches through ICertExit's vtable slot 7.
 func (self *ICertExit) Initialize(strConfig foundation.BSTR) (CERT_EXIT_EVENT_MASK, error) {
-	var _pEventMask CERT_EXIT_EVENT_MASK
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strConfig)), uintptr(unsafe.Pointer(&_pEventMask)))
-	return _pEventMask, win32.ErrIfFailed(int32(r1))
+	_pEventMask := new(CERT_EXIT_EVENT_MASK)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strConfig)), uintptr(win32.OutParam(unsafe.Pointer(_pEventMask))))
+	return *_pEventMask, win32.ErrIfFailed(int32(r1))
 }
 
 // Notify dispatches through ICertExit's vtable slot 8.
@@ -1472,9 +1472,9 @@ func (self *ICertExit) Notify(ExitEvent int32, Context int32) error {
 
 // GetDescription dispatches through ICertExit's vtable slot 9.
 func (self *ICertExit) GetDescription() (foundation.BSTR, error) {
-	var _pstrDescription foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pstrDescription)))
-	return _pstrDescription, win32.ErrIfFailed(int32(r1))
+	_pstrDescription := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pstrDescription))))
+	return *_pstrDescription, win32.ErrIfFailed(int32(r1))
 }
 
 // ICertExit2: https://learn.microsoft.com/windows/win32/api/certexit/nn-certexit-icertexit2
@@ -1488,9 +1488,9 @@ var IID_ICertExit2 = win32.GUID{Data1: 0x0abf484b, Data2: 0xd049, Data3: 0x464d,
 
 // GetManageModule dispatches through ICertExit2's vtable slot 10.
 func (self *ICertExit2) GetManageModule() (*ICertManageModule, error) {
-	var _ppManageModule *ICertManageModule
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppManageModule)))
-	return _ppManageModule, win32.ErrIfFailed(int32(r1))
+	_ppManageModule := new(*ICertManageModule)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppManageModule))))
+	return *_ppManageModule, win32.ErrIfFailed(int32(r1))
 }
 
 // ICertGetConfig: https://learn.microsoft.com/windows/win32/api/certcli/nn-certcli-icertgetconfig
@@ -1519,9 +1519,9 @@ var IID_ICertManageModule = win32.GUID{Data1: 0xe7d7ad42, Data2: 0xbd3d, Data3: 
 
 // GetProperty dispatches through ICertManageModule's vtable slot 7.
 func (self *ICertManageModule) GetProperty(strConfig foundation.BSTR, strStorageLocation foundation.BSTR, strPropertyName foundation.BSTR, Flags int32) (systemvariant.VARIANT, error) {
-	var _pvarProperty systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strConfig)), uintptr(unsafe.Pointer(strStorageLocation)), uintptr(unsafe.Pointer(strPropertyName)), uintptr(Flags), uintptr(unsafe.Pointer(&_pvarProperty)))
-	return _pvarProperty, win32.ErrIfFailed(int32(r1))
+	_pvarProperty := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strConfig)), uintptr(unsafe.Pointer(strStorageLocation)), uintptr(unsafe.Pointer(strPropertyName)), uintptr(Flags), uintptr(win32.OutParam(unsafe.Pointer(_pvarProperty))))
+	return *_pvarProperty, win32.ErrIfFailed(int32(r1))
 }
 
 // SetProperty dispatches through ICertManageModule's vtable slot 8.
@@ -1553,16 +1553,16 @@ func (self *ICertPolicy) Initialize(strConfig foundation.BSTR) error {
 
 // VerifyRequest dispatches through ICertPolicy's vtable slot 8.
 func (self *ICertPolicy) VerifyRequest(strConfig foundation.BSTR, Context int32, bNewRequest int32, Flags int32) (int32, error) {
-	var _pDisposition int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strConfig)), uintptr(Context), uintptr(bNewRequest), uintptr(Flags), uintptr(unsafe.Pointer(&_pDisposition)))
-	return _pDisposition, win32.ErrIfFailed(int32(r1))
+	_pDisposition := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strConfig)), uintptr(Context), uintptr(bNewRequest), uintptr(Flags), uintptr(win32.OutParam(unsafe.Pointer(_pDisposition))))
+	return *_pDisposition, win32.ErrIfFailed(int32(r1))
 }
 
 // GetDescription dispatches through ICertPolicy's vtable slot 9.
 func (self *ICertPolicy) GetDescription() (foundation.BSTR, error) {
-	var _pstrDescription foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pstrDescription)))
-	return _pstrDescription, win32.ErrIfFailed(int32(r1))
+	_pstrDescription := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pstrDescription))))
+	return *_pstrDescription, win32.ErrIfFailed(int32(r1))
 }
 
 // ShutDown dispatches through ICertPolicy's vtable slot 10.
@@ -1582,9 +1582,9 @@ var IID_ICertPolicy2 = win32.GUID{Data1: 0x3db4910e, Data2: 0x8001, Data3: 0x4bf
 
 // GetManageModule dispatches through ICertPolicy2's vtable slot 11.
 func (self *ICertPolicy2) GetManageModule() (*ICertManageModule, error) {
-	var _ppManageModule *ICertManageModule
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppManageModule)))
-	return _ppManageModule, win32.ErrIfFailed(int32(r1))
+	_ppManageModule := new(*ICertManageModule)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppManageModule))))
+	return *_ppManageModule, win32.ErrIfFailed(int32(r1))
 }
 
 // ICertProperties: https://learn.microsoft.com/windows/win32/api/certenroll/nn-certenroll-icertproperties
@@ -4219,18 +4219,18 @@ func (self *INDESPolicy) Uninitialize() error {
 func (self *INDESPolicy) GenerateChallenge(pwszTemplate string, pwszParams string) (foundation.PWSTR, error) {
 	_pwszTemplate := win32.UTF16Ptr(pwszTemplate)
 	_pwszParams := win32.UTF16Ptr(pwszParams)
-	var _ppwszResponse foundation.PWSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszTemplate)), uintptr(unsafe.Pointer(_pwszParams)), uintptr(unsafe.Pointer(&_ppwszResponse)))
-	return _ppwszResponse, win32.ErrIfFailed(int32(r1))
+	_ppwszResponse := new(foundation.PWSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszTemplate)), uintptr(unsafe.Pointer(_pwszParams)), uintptr(win32.OutParam(unsafe.Pointer(_ppwszResponse))))
+	return *_ppwszResponse, win32.ErrIfFailed(int32(r1))
 }
 
 // VerifyRequest dispatches through INDESPolicy's vtable slot 6.
 func (self *INDESPolicy) VerifyRequest(pctbRequest *CERTTRANSBLOB, pctbSigningCertEncoded *CERTTRANSBLOB, pwszTemplate string, pwszTransactionId string) (foundation.BOOL, error) {
 	_pwszTemplate := win32.UTF16Ptr(pwszTemplate)
 	_pwszTransactionId := win32.UTF16Ptr(pwszTransactionId)
-	var _pfVerified foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pctbRequest)), uintptr(unsafe.Pointer(pctbSigningCertEncoded)), uintptr(unsafe.Pointer(_pwszTemplate)), uintptr(unsafe.Pointer(_pwszTransactionId)), uintptr(unsafe.Pointer(&_pfVerified)))
-	return _pfVerified, win32.ErrIfFailed(int32(r1))
+	_pfVerified := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pctbRequest)), uintptr(unsafe.Pointer(pctbSigningCertEncoded)), uintptr(unsafe.Pointer(_pwszTemplate)), uintptr(unsafe.Pointer(_pwszTransactionId)), uintptr(win32.OutParam(unsafe.Pointer(_pfVerified))))
+	return *_pfVerified, win32.ErrIfFailed(int32(r1))
 }
 
 // Notify dispatches through INDESPolicy's vtable slot 7.

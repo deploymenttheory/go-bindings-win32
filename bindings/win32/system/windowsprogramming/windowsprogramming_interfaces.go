@@ -133,9 +133,9 @@ var IID_IContainerActivationHelper = win32.GUID{Data1: 0xb524f93f, Data2: 0x80d5
 
 // CanActivateClientVM dispatches through IContainerActivationHelper's vtable slot 3.
 func (self *IContainerActivationHelper) CanActivateClientVM() (foundation.VARIANT_BOOL, error) {
-	var _isAllowed foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_isAllowed)))
-	return _isAllowed, win32.ErrIfFailed(int32(r1))
+	_isAllowed := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_isAllowed))))
+	return *_isAllowed, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 7a27faad-5ae6-4255-9030-c530936292e3

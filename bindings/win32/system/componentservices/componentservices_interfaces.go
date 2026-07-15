@@ -144,37 +144,37 @@ var IID_ICOMAdminCatalog = win32.GUID{Data1: 0xdd662187, Data2: 0xdfc2, Data3: 0
 
 // GetCollection dispatches through ICOMAdminCatalog's vtable slot 7.
 func (self *ICOMAdminCatalog) GetCollection(bstrCollName foundation.BSTR) (*systemcom.IDispatch, error) {
-	var _ppCatalogCollection *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrCollName)), uintptr(unsafe.Pointer(&_ppCatalogCollection)))
-	return _ppCatalogCollection, win32.ErrIfFailed(int32(r1))
+	_ppCatalogCollection := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrCollName)), uintptr(win32.OutParam(unsafe.Pointer(_ppCatalogCollection))))
+	return *_ppCatalogCollection, win32.ErrIfFailed(int32(r1))
 }
 
 // Connect dispatches through ICOMAdminCatalog's vtable slot 8.
 func (self *ICOMAdminCatalog) Connect(bstrCatalogServerName foundation.BSTR) (*systemcom.IDispatch, error) {
-	var _ppCatalogCollection *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrCatalogServerName)), uintptr(unsafe.Pointer(&_ppCatalogCollection)))
-	return _ppCatalogCollection, win32.ErrIfFailed(int32(r1))
+	_ppCatalogCollection := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrCatalogServerName)), uintptr(win32.OutParam(unsafe.Pointer(_ppCatalogCollection))))
+	return *_ppCatalogCollection, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MajorVersion dispatches through ICOMAdminCatalog's vtable slot 9.
 func (self *ICOMAdminCatalog) Get_MajorVersion() (int32, error) {
-	var _plMajorVersion int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plMajorVersion)))
-	return _plMajorVersion, win32.ErrIfFailed(int32(r1))
+	_plMajorVersion := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plMajorVersion))))
+	return *_plMajorVersion, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MinorVersion dispatches through ICOMAdminCatalog's vtable slot 10.
 func (self *ICOMAdminCatalog) Get_MinorVersion() (int32, error) {
-	var _plMinorVersion int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plMinorVersion)))
-	return _plMinorVersion, win32.ErrIfFailed(int32(r1))
+	_plMinorVersion := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plMinorVersion))))
+	return *_plMinorVersion, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCollectionByQuery dispatches through ICOMAdminCatalog's vtable slot 11.
 func (self *ICOMAdminCatalog) GetCollectionByQuery(bstrCollName foundation.BSTR, ppsaVarQuery **systemcom.SAFEARRAY) (*systemcom.IDispatch, error) {
-	var _ppCatalogCollection *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrCollName)), uintptr(unsafe.Pointer(ppsaVarQuery)), uintptr(unsafe.Pointer(&_ppCatalogCollection)))
-	return _ppCatalogCollection, win32.ErrIfFailed(int32(r1))
+	_ppCatalogCollection := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrCollName)), uintptr(unsafe.Pointer(ppsaVarQuery)), uintptr(win32.OutParam(unsafe.Pointer(_ppCatalogCollection))))
+	return *_ppCatalogCollection, win32.ErrIfFailed(int32(r1))
 }
 
 // ImportComponent dispatches through ICOMAdminCatalog's vtable slot 12.
@@ -281,9 +281,9 @@ func (self *ICOMAdminCatalog) StartApplication(bstrApplIdOrName foundation.BSTR)
 
 // ServiceCheck dispatches through ICOMAdminCatalog's vtable slot 29.
 func (self *ICOMAdminCatalog) ServiceCheck(lService int32) (int32, error) {
-	var _plStatus int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(lService), uintptr(unsafe.Pointer(&_plStatus)))
-	return _plStatus, win32.ErrIfFailed(int32(r1))
+	_plStatus := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(lService), uintptr(win32.OutParam(unsafe.Pointer(_plStatus))))
+	return *_plStatus, win32.ErrIfFailed(int32(r1))
 }
 
 // InstallMultipleEventClasses dispatches through ICOMAdminCatalog's vtable slot 30.
@@ -315,16 +315,16 @@ var IID_ICOMAdminCatalog2 = win32.GUID{Data1: 0x790c6e0b, Data2: 0x9194, Data3: 
 
 // GetCollectionByQuery2 dispatches through ICOMAdminCatalog2's vtable slot 33.
 func (self *ICOMAdminCatalog2) GetCollectionByQuery2(bstrCollectionName foundation.BSTR, pVarQueryStrings *systemvariant.VARIANT) (*systemcom.IDispatch, error) {
-	var _ppCatalogCollection *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrCollectionName)), uintptr(unsafe.Pointer(pVarQueryStrings)), uintptr(unsafe.Pointer(&_ppCatalogCollection)))
-	return _ppCatalogCollection, win32.ErrIfFailed(int32(r1))
+	_ppCatalogCollection := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrCollectionName)), uintptr(unsafe.Pointer(pVarQueryStrings)), uintptr(win32.OutParam(unsafe.Pointer(_ppCatalogCollection))))
+	return *_ppCatalogCollection, win32.ErrIfFailed(int32(r1))
 }
 
 // GetApplicationInstanceIDFromProcessID dispatches through ICOMAdminCatalog2's vtable slot 34.
 func (self *ICOMAdminCatalog2) GetApplicationInstanceIDFromProcessID(lProcessID int32) (foundation.BSTR, error) {
-	var _pbstrApplicationInstanceID foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(lProcessID), uintptr(unsafe.Pointer(&_pbstrApplicationInstanceID)))
-	return _pbstrApplicationInstanceID, win32.ErrIfFailed(int32(r1))
+	_pbstrApplicationInstanceID := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(lProcessID), uintptr(win32.OutParam(unsafe.Pointer(_pbstrApplicationInstanceID))))
+	return *_pbstrApplicationInstanceID, win32.ErrIfFailed(int32(r1))
 }
 
 // ShutdownApplicationInstances dispatches through ICOMAdminCatalog2's vtable slot 35.
@@ -353,23 +353,23 @@ func (self *ICOMAdminCatalog2) RecycleApplicationInstances(pVarApplicationInstan
 
 // AreApplicationInstancesPaused dispatches through ICOMAdminCatalog2's vtable slot 39.
 func (self *ICOMAdminCatalog2) AreApplicationInstancesPaused(pVarApplicationInstanceID *systemvariant.VARIANT) (foundation.VARIANT_BOOL, error) {
-	var _pVarBoolPaused foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVarApplicationInstanceID)), uintptr(unsafe.Pointer(&_pVarBoolPaused)))
-	return _pVarBoolPaused, win32.ErrIfFailed(int32(r1))
+	_pVarBoolPaused := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVarApplicationInstanceID)), uintptr(win32.OutParam(unsafe.Pointer(_pVarBoolPaused))))
+	return *_pVarBoolPaused, win32.ErrIfFailed(int32(r1))
 }
 
 // DumpApplicationInstance dispatches through ICOMAdminCatalog2's vtable slot 40.
 func (self *ICOMAdminCatalog2) DumpApplicationInstance(bstrApplicationInstanceID foundation.BSTR, bstrDirectory foundation.BSTR, lMaxImages int32) (foundation.BSTR, error) {
-	var _pbstrDumpFile foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplicationInstanceID)), uintptr(unsafe.Pointer(bstrDirectory)), uintptr(lMaxImages), uintptr(unsafe.Pointer(&_pbstrDumpFile)))
-	return _pbstrDumpFile, win32.ErrIfFailed(int32(r1))
+	_pbstrDumpFile := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplicationInstanceID)), uintptr(unsafe.Pointer(bstrDirectory)), uintptr(lMaxImages), uintptr(win32.OutParam(unsafe.Pointer(_pbstrDumpFile))))
+	return *_pbstrDumpFile, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsApplicationInstanceDumpSupported dispatches through ICOMAdminCatalog2's vtable slot 41.
 func (self *ICOMAdminCatalog2) Get_IsApplicationInstanceDumpSupported() (foundation.VARIANT_BOOL, error) {
-	var _pVarBoolDumpSupported foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVarBoolDumpSupported)))
-	return _pVarBoolDumpSupported, win32.ErrIfFailed(int32(r1))
+	_pVarBoolDumpSupported := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVarBoolDumpSupported))))
+	return *_pVarBoolDumpSupported, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateServiceForApplication dispatches through ICOMAdminCatalog2's vtable slot 42.
@@ -386,16 +386,16 @@ func (self *ICOMAdminCatalog2) DeleteServiceForApplication(bstrApplicationIDOrNa
 
 // GetPartitionID dispatches through ICOMAdminCatalog2's vtable slot 44.
 func (self *ICOMAdminCatalog2) GetPartitionID(bstrApplicationIDOrName foundation.BSTR) (foundation.BSTR, error) {
-	var _pbstrPartitionID foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplicationIDOrName)), uintptr(unsafe.Pointer(&_pbstrPartitionID)))
-	return _pbstrPartitionID, win32.ErrIfFailed(int32(r1))
+	_pbstrPartitionID := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplicationIDOrName)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrPartitionID))))
+	return *_pbstrPartitionID, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPartitionName dispatches through ICOMAdminCatalog2's vtable slot 45.
 func (self *ICOMAdminCatalog2) GetPartitionName(bstrApplicationIDOrName foundation.BSTR) (foundation.BSTR, error) {
-	var _pbstrPartitionName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplicationIDOrName)), uintptr(unsafe.Pointer(&_pbstrPartitionName)))
-	return _pbstrPartitionName, win32.ErrIfFailed(int32(r1))
+	_pbstrPartitionName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplicationIDOrName)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrPartitionName))))
+	return *_pbstrPartitionName, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CurrentPartition dispatches through ICOMAdminCatalog2's vtable slot 46.
@@ -406,23 +406,23 @@ func (self *ICOMAdminCatalog2) Put_CurrentPartition(bstrPartitionIDOrName founda
 
 // Get_CurrentPartitionID dispatches through ICOMAdminCatalog2's vtable slot 47.
 func (self *ICOMAdminCatalog2) Get_CurrentPartitionID() (foundation.BSTR, error) {
-	var _pbstrPartitionID foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrPartitionID)))
-	return _pbstrPartitionID, win32.ErrIfFailed(int32(r1))
+	_pbstrPartitionID := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrPartitionID))))
+	return *_pbstrPartitionID, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentPartitionName dispatches through ICOMAdminCatalog2's vtable slot 48.
 func (self *ICOMAdminCatalog2) Get_CurrentPartitionName() (foundation.BSTR, error) {
-	var _pbstrPartitionName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrPartitionName)))
-	return _pbstrPartitionName, win32.ErrIfFailed(int32(r1))
+	_pbstrPartitionName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrPartitionName))))
+	return *_pbstrPartitionName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_GlobalPartitionID dispatches through ICOMAdminCatalog2's vtable slot 49.
 func (self *ICOMAdminCatalog2) Get_GlobalPartitionID() (foundation.BSTR, error) {
-	var _pbstrGlobalPartitionID foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrGlobalPartitionID)))
-	return _pbstrGlobalPartitionID, win32.ErrIfFailed(int32(r1))
+	_pbstrGlobalPartitionID := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrGlobalPartitionID))))
+	return *_pbstrGlobalPartitionID, win32.ErrIfFailed(int32(r1))
 }
 
 // FlushPartitionCache dispatches through ICOMAdminCatalog2's vtable slot 50.
@@ -457,9 +457,9 @@ func (self *ICOMAdminCatalog2) AliasComponent(bstrSrcApplicationIDOrName foundat
 
 // IsSafeToDelete dispatches through ICOMAdminCatalog2's vtable slot 55.
 func (self *ICOMAdminCatalog2) IsSafeToDelete(bstrDllName foundation.BSTR) (COMAdminInUse, error) {
-	var _pCOMAdminInUse COMAdminInUse
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDllName)), uintptr(unsafe.Pointer(&_pCOMAdminInUse)))
-	return _pCOMAdminInUse, win32.ErrIfFailed(int32(r1))
+	_pCOMAdminInUse := new(COMAdminInUse)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDllName)), uintptr(win32.OutParam(unsafe.Pointer(_pCOMAdminInUse))))
+	return *_pCOMAdminInUse, win32.ErrIfFailed(int32(r1))
 }
 
 // ImportUnconfiguredComponents dispatches through ICOMAdminCatalog2's vtable slot 56.
@@ -482,9 +482,9 @@ func (self *ICOMAdminCatalog2) ImportComponents(bstrApplicationIDOrName foundati
 
 // Get_Is64BitCatalogServer dispatches through ICOMAdminCatalog2's vtable slot 59.
 func (self *ICOMAdminCatalog2) Get_Is64BitCatalogServer() (foundation.VARIANT_BOOL, error) {
-	var _pbIs64Bit foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbIs64Bit)))
-	return _pbIs64Bit, win32.ErrIfFailed(int32(r1))
+	_pbIs64Bit := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbIs64Bit))))
+	return *_pbIs64Bit, win32.ErrIfFailed(int32(r1))
 }
 
 // ExportPartition dispatches through ICOMAdminCatalog2's vtable slot 60.
@@ -501,16 +501,16 @@ func (self *ICOMAdminCatalog2) InstallPartition(bstrFileName foundation.BSTR, bs
 
 // QueryApplicationFile2 dispatches through ICOMAdminCatalog2's vtable slot 62.
 func (self *ICOMAdminCatalog2) QueryApplicationFile2(bstrApplicationFile foundation.BSTR) (*systemcom.IDispatch, error) {
-	var _ppFilesForImport *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplicationFile)), uintptr(unsafe.Pointer(&_ppFilesForImport)))
-	return _ppFilesForImport, win32.ErrIfFailed(int32(r1))
+	_ppFilesForImport := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplicationFile)), uintptr(win32.OutParam(unsafe.Pointer(_ppFilesForImport))))
+	return *_ppFilesForImport, win32.ErrIfFailed(int32(r1))
 }
 
 // GetComponentVersionCount dispatches through ICOMAdminCatalog2's vtable slot 63.
 func (self *ICOMAdminCatalog2) GetComponentVersionCount(bstrCLSIDOrProgID foundation.BSTR) (int32, error) {
-	var _plVersionCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrCLSIDOrProgID)), uintptr(unsafe.Pointer(&_plVersionCount)))
-	return _plVersionCount, win32.ErrIfFailed(int32(r1))
+	_plVersionCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrCLSIDOrProgID)), uintptr(win32.OutParam(unsafe.Pointer(_plVersionCount))))
+	return *_plVersionCount, win32.ErrIfFailed(int32(r1))
 }
 
 // ICOMLBArguments: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icomlbarguments
@@ -558,23 +558,23 @@ var IID_ICatalogCollection = win32.GUID{Data1: 0x6eb22872, Data2: 0x8a19, Data3:
 
 // Get__NewEnum dispatches through ICatalogCollection's vtable slot 7.
 func (self *ICatalogCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _ppEnumVariant *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnumVariant)))
-	return _ppEnumVariant, win32.ErrIfFailed(int32(r1))
+	_ppEnumVariant := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppEnumVariant))))
+	return *_ppEnumVariant, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Item dispatches through ICatalogCollection's vtable slot 8.
 func (self *ICatalogCollection) Get_Item(lIndex int32) (*systemcom.IDispatch, error) {
-	var _ppCatalogObject *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(&_ppCatalogObject)))
-	return _ppCatalogObject, win32.ErrIfFailed(int32(r1))
+	_ppCatalogObject := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(win32.OutParam(unsafe.Pointer(_ppCatalogObject))))
+	return *_ppCatalogObject, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through ICatalogCollection's vtable slot 9.
 func (self *ICatalogCollection) Get_Count() (int32, error) {
-	var _plObjectCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plObjectCount)))
-	return _plObjectCount, win32.ErrIfFailed(int32(r1))
+	_plObjectCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plObjectCount))))
+	return *_plObjectCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through ICatalogCollection's vtable slot 10.
@@ -585,9 +585,9 @@ func (self *ICatalogCollection) Remove(lIndex int32) error {
 
 // Add dispatches through ICatalogCollection's vtable slot 11.
 func (self *ICatalogCollection) Add() (*systemcom.IDispatch, error) {
-	var _ppCatalogObject *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCatalogObject)))
-	return _ppCatalogObject, win32.ErrIfFailed(int32(r1))
+	_ppCatalogObject := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppCatalogObject))))
+	return *_ppCatalogObject, win32.ErrIfFailed(int32(r1))
 }
 
 // Populate dispatches through ICatalogCollection's vtable slot 12.
@@ -598,51 +598,51 @@ func (self *ICatalogCollection) Populate() error {
 
 // SaveChanges dispatches through ICatalogCollection's vtable slot 13.
 func (self *ICatalogCollection) SaveChanges() (int32, error) {
-	var _pcChanges int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pcChanges)))
-	return _pcChanges, win32.ErrIfFailed(int32(r1))
+	_pcChanges := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pcChanges))))
+	return *_pcChanges, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through ICatalogCollection's vtable slot 15.
 func (self *ICatalogCollection) Get_Name() (systemvariant.VARIANT, error) {
-	var _pVarNamel systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVarNamel)))
-	return _pVarNamel, win32.ErrIfFailed(int32(r1))
+	_pVarNamel := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVarNamel))))
+	return *_pVarNamel, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AddEnabled dispatches through ICatalogCollection's vtable slot 16.
 func (self *ICatalogCollection) Get_AddEnabled() (foundation.VARIANT_BOOL, error) {
-	var _pVarBool foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVarBool)))
-	return _pVarBool, win32.ErrIfFailed(int32(r1))
+	_pVarBool := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVarBool))))
+	return *_pVarBool, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RemoveEnabled dispatches through ICatalogCollection's vtable slot 17.
 func (self *ICatalogCollection) Get_RemoveEnabled() (foundation.VARIANT_BOOL, error) {
-	var _pVarBool foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVarBool)))
-	return _pVarBool, win32.ErrIfFailed(int32(r1))
+	_pVarBool := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVarBool))))
+	return *_pVarBool, win32.ErrIfFailed(int32(r1))
 }
 
 // GetUtilInterface dispatches through ICatalogCollection's vtable slot 18.
 func (self *ICatalogCollection) GetUtilInterface() (*systemcom.IDispatch, error) {
-	var _ppIDispatch *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppIDispatch)))
-	return _ppIDispatch, win32.ErrIfFailed(int32(r1))
+	_ppIDispatch := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppIDispatch))))
+	return *_ppIDispatch, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DataStoreMajorVersion dispatches through ICatalogCollection's vtable slot 19.
 func (self *ICatalogCollection) Get_DataStoreMajorVersion() (int32, error) {
-	var _plMajorVersion int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plMajorVersion)))
-	return _plMajorVersion, win32.ErrIfFailed(int32(r1))
+	_plMajorVersion := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plMajorVersion))))
+	return *_plMajorVersion, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DataStoreMinorVersion dispatches through ICatalogCollection's vtable slot 20.
 func (self *ICatalogCollection) Get_DataStoreMinorVersion() (int32, error) {
-	var _plMinorVersionl int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plMinorVersionl)))
-	return _plMinorVersionl, win32.ErrIfFailed(int32(r1))
+	_plMinorVersionl := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plMinorVersionl))))
+	return *_plMinorVersionl, win32.ErrIfFailed(int32(r1))
 }
 
 // PopulateByKey dispatches through ICatalogCollection's vtable slot 21.
@@ -668,44 +668,44 @@ var IID_ICatalogObject = win32.GUID{Data1: 0x6eb22871, Data2: 0x8a19, Data3: 0x1
 
 // Get_Value dispatches through ICatalogObject's vtable slot 7.
 func (self *ICatalogObject) Get_Value(bstrPropName foundation.BSTR) (systemvariant.VARIANT, error) {
-	var _pvarRetVal systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPropName)), uintptr(unsafe.Pointer(&_pvarRetVal)))
-	return _pvarRetVal, win32.ErrIfFailed(int32(r1))
+	_pvarRetVal := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPropName)), uintptr(win32.OutParam(unsafe.Pointer(_pvarRetVal))))
+	return *_pvarRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Key dispatches through ICatalogObject's vtable slot 9.
 func (self *ICatalogObject) Get_Key() (systemvariant.VARIANT, error) {
-	var _pvarRetVal systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarRetVal)))
-	return _pvarRetVal, win32.ErrIfFailed(int32(r1))
+	_pvarRetVal := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pvarRetVal))))
+	return *_pvarRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through ICatalogObject's vtable slot 10.
 func (self *ICatalogObject) Get_Name() (systemvariant.VARIANT, error) {
-	var _pvarRetVal systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarRetVal)))
-	return _pvarRetVal, win32.ErrIfFailed(int32(r1))
+	_pvarRetVal := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pvarRetVal))))
+	return *_pvarRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IsPropertyReadOnly dispatches through ICatalogObject's vtable slot 11.
 func (self *ICatalogObject) IsPropertyReadOnly(bstrPropName foundation.BSTR) (foundation.VARIANT_BOOL, error) {
-	var _pbRetVal foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPropName)), uintptr(unsafe.Pointer(&_pbRetVal)))
-	return _pbRetVal, win32.ErrIfFailed(int32(r1))
+	_pbRetVal := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPropName)), uintptr(win32.OutParam(unsafe.Pointer(_pbRetVal))))
+	return *_pbRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Valid dispatches through ICatalogObject's vtable slot 12.
 func (self *ICatalogObject) Get_Valid() (foundation.VARIANT_BOOL, error) {
-	var _pbRetVal foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbRetVal)))
-	return _pbRetVal, win32.ErrIfFailed(int32(r1))
+	_pbRetVal := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbRetVal))))
+	return *_pbRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IsPropertyWriteOnly dispatches through ICatalogObject's vtable slot 13.
 func (self *ICatalogObject) IsPropertyWriteOnly(bstrPropName foundation.BSTR) (foundation.VARIANT_BOOL, error) {
-	var _pbRetVal foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPropName)), uintptr(unsafe.Pointer(&_pbRetVal)))
-	return _pbRetVal, win32.ErrIfFailed(int32(r1))
+	_pbRetVal := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPropName)), uintptr(win32.OutParam(unsafe.Pointer(_pbRetVal))))
+	return *_pbRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // ICheckSxsConfig: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-ichecksxsconfig

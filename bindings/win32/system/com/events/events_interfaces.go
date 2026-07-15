@@ -72,9 +72,9 @@ var IID_IEventClass = win32.GUID{Data1: 0xfb2b72a0, Data2: 0x7a68, Data3: 0x11d1
 
 // Get_EventClassID dispatches through IEventClass's vtable slot 7.
 func (self *IEventClass) Get_EventClassID() (foundation.BSTR, error) {
-	var _pbstrEventClassID foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrEventClassID)))
-	return _pbstrEventClassID, win32.ErrIfFailed(int32(r1))
+	_pbstrEventClassID := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrEventClassID))))
+	return *_pbstrEventClassID, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EventClassID dispatches through IEventClass's vtable slot 8.
@@ -85,9 +85,9 @@ func (self *IEventClass) Put_EventClassID(bstrEventClassID foundation.BSTR) erro
 
 // Get_EventClassName dispatches through IEventClass's vtable slot 9.
 func (self *IEventClass) Get_EventClassName() (foundation.BSTR, error) {
-	var _pbstrEventClassName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrEventClassName)))
-	return _pbstrEventClassName, win32.ErrIfFailed(int32(r1))
+	_pbstrEventClassName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrEventClassName))))
+	return *_pbstrEventClassName, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EventClassName dispatches through IEventClass's vtable slot 10.
@@ -98,9 +98,9 @@ func (self *IEventClass) Put_EventClassName(bstrEventClassName foundation.BSTR) 
 
 // Get_OwnerSID dispatches through IEventClass's vtable slot 11.
 func (self *IEventClass) Get_OwnerSID() (foundation.BSTR, error) {
-	var _pbstrOwnerSID foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrOwnerSID)))
-	return _pbstrOwnerSID, win32.ErrIfFailed(int32(r1))
+	_pbstrOwnerSID := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrOwnerSID))))
+	return *_pbstrOwnerSID, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_OwnerSID dispatches through IEventClass's vtable slot 12.
@@ -111,9 +111,9 @@ func (self *IEventClass) Put_OwnerSID(bstrOwnerSID foundation.BSTR) error {
 
 // Get_FiringInterfaceID dispatches through IEventClass's vtable slot 13.
 func (self *IEventClass) Get_FiringInterfaceID() (foundation.BSTR, error) {
-	var _pbstrFiringInterfaceID foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrFiringInterfaceID)))
-	return _pbstrFiringInterfaceID, win32.ErrIfFailed(int32(r1))
+	_pbstrFiringInterfaceID := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrFiringInterfaceID))))
+	return *_pbstrFiringInterfaceID, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FiringInterfaceID dispatches through IEventClass's vtable slot 14.
@@ -124,9 +124,9 @@ func (self *IEventClass) Put_FiringInterfaceID(bstrFiringInterfaceID foundation.
 
 // Get_Description dispatches through IEventClass's vtable slot 15.
 func (self *IEventClass) Get_Description() (foundation.BSTR, error) {
-	var _pbstrDescription foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrDescription)))
-	return _pbstrDescription, win32.ErrIfFailed(int32(r1))
+	_pbstrDescription := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrDescription))))
+	return *_pbstrDescription, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Description dispatches through IEventClass's vtable slot 16.
@@ -137,9 +137,9 @@ func (self *IEventClass) Put_Description(bstrDescription foundation.BSTR) error 
 
 // Get_CustomConfigCLSID dispatches through IEventClass's vtable slot 17.
 func (self *IEventClass) Get_CustomConfigCLSID() (foundation.BSTR, error) {
-	var _pbstrCustomConfigCLSID foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrCustomConfigCLSID)))
-	return _pbstrCustomConfigCLSID, win32.ErrIfFailed(int32(r1))
+	_pbstrCustomConfigCLSID := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrCustomConfigCLSID))))
+	return *_pbstrCustomConfigCLSID, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CustomConfigCLSID dispatches through IEventClass's vtable slot 18.
@@ -150,9 +150,9 @@ func (self *IEventClass) Put_CustomConfigCLSID(bstrCustomConfigCLSID foundation.
 
 // Get_TypeLib dispatches through IEventClass's vtable slot 19.
 func (self *IEventClass) Get_TypeLib() (foundation.BSTR, error) {
-	var _pbstrTypeLib foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrTypeLib)))
-	return _pbstrTypeLib, win32.ErrIfFailed(int32(r1))
+	_pbstrTypeLib := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrTypeLib))))
+	return *_pbstrTypeLib, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_TypeLib dispatches through IEventClass's vtable slot 20.
@@ -172,9 +172,9 @@ var IID_IEventClass2 = win32.GUID{Data1: 0xfb2b72a1, Data2: 0x7a68, Data3: 0x11d
 
 // Get_PublisherID dispatches through IEventClass2's vtable slot 21.
 func (self *IEventClass2) Get_PublisherID() (foundation.BSTR, error) {
-	var _pbstrPublisherID foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrPublisherID)))
-	return _pbstrPublisherID, win32.ErrIfFailed(int32(r1))
+	_pbstrPublisherID := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrPublisherID))))
+	return *_pbstrPublisherID, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PublisherID dispatches through IEventClass2's vtable slot 22.
@@ -185,9 +185,9 @@ func (self *IEventClass2) Put_PublisherID(bstrPublisherID foundation.BSTR) error
 
 // Get_MultiInterfacePublisherFilterCLSID dispatches through IEventClass2's vtable slot 23.
 func (self *IEventClass2) Get_MultiInterfacePublisherFilterCLSID() (foundation.BSTR, error) {
-	var _pbstrPubFilCLSID foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrPubFilCLSID)))
-	return _pbstrPubFilCLSID, win32.ErrIfFailed(int32(r1))
+	_pbstrPubFilCLSID := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrPubFilCLSID))))
+	return *_pbstrPubFilCLSID, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MultiInterfacePublisherFilterCLSID dispatches through IEventClass2's vtable slot 24.
@@ -198,9 +198,9 @@ func (self *IEventClass2) Put_MultiInterfacePublisherFilterCLSID(bstrPubFilCLSID
 
 // Get_AllowInprocActivation dispatches through IEventClass2's vtable slot 25.
 func (self *IEventClass2) Get_AllowInprocActivation() (foundation.BOOL, error) {
-	var _pfAllowInprocActivation foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfAllowInprocActivation)))
-	return _pfAllowInprocActivation, win32.ErrIfFailed(int32(r1))
+	_pfAllowInprocActivation := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfAllowInprocActivation))))
+	return *_pfAllowInprocActivation, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AllowInprocActivation dispatches through IEventClass2's vtable slot 26.
@@ -212,9 +212,9 @@ func (self *IEventClass2) Put_AllowInprocActivation(fAllowInprocActivation bool)
 
 // Get_FireInParallel dispatches through IEventClass2's vtable slot 27.
 func (self *IEventClass2) Get_FireInParallel() (foundation.BOOL, error) {
-	var _pfFireInParallel foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfFireInParallel)))
-	return _pfFireInParallel, win32.ErrIfFailed(int32(r1))
+	_pfFireInParallel := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfFireInParallel))))
+	return *_pfFireInParallel, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FireInParallel dispatches through IEventClass2's vtable slot 28.
@@ -241,9 +241,9 @@ func (self *IEventControl) SetPublisherFilter(methodName foundation.BSTR, pPubli
 
 // Get_AllowInprocActivation dispatches through IEventControl's vtable slot 8.
 func (self *IEventControl) Get_AllowInprocActivation() (foundation.BOOL, error) {
-	var _pfAllowInprocActivation foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfAllowInprocActivation)))
-	return _pfAllowInprocActivation, win32.ErrIfFailed(int32(r1))
+	_pfAllowInprocActivation := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfAllowInprocActivation))))
+	return *_pfAllowInprocActivation, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AllowInprocActivation dispatches through IEventControl's vtable slot 9.
@@ -255,16 +255,16 @@ func (self *IEventControl) Put_AllowInprocActivation(fAllowInprocActivation bool
 
 // GetSubscriptions dispatches through IEventControl's vtable slot 10.
 func (self *IEventControl) GetSubscriptions(methodName foundation.BSTR, optionalCriteria foundation.BSTR, optionalErrorIndex *int32) (*IEventObjectCollection, error) {
-	var _ppCollection *IEventObjectCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(methodName)), uintptr(unsafe.Pointer(optionalCriteria)), uintptr(unsafe.Pointer(optionalErrorIndex)), uintptr(unsafe.Pointer(&_ppCollection)))
-	return _ppCollection, win32.ErrIfFailed(int32(r1))
+	_ppCollection := new(*IEventObjectCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(methodName)), uintptr(unsafe.Pointer(optionalCriteria)), uintptr(unsafe.Pointer(optionalErrorIndex)), uintptr(win32.OutParam(unsafe.Pointer(_ppCollection))))
+	return *_ppCollection, win32.ErrIfFailed(int32(r1))
 }
 
 // SetDefaultQuery dispatches through IEventControl's vtable slot 11.
 func (self *IEventControl) SetDefaultQuery(methodName foundation.BSTR, criteria foundation.BSTR) (int32, error) {
-	var _errorIndex int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(methodName)), uintptr(unsafe.Pointer(criteria)), uintptr(unsafe.Pointer(&_errorIndex)))
-	return _errorIndex, win32.ErrIfFailed(int32(r1))
+	_errorIndex := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(methodName)), uintptr(unsafe.Pointer(criteria)), uintptr(win32.OutParam(unsafe.Pointer(_errorIndex))))
+	return *_errorIndex, win32.ErrIfFailed(int32(r1))
 }
 
 // IEventObjectChange: https://learn.microsoft.com/windows/win32/api/eventsys/nn-eventsys-ieventobjectchange
@@ -326,30 +326,30 @@ var IID_IEventObjectCollection = win32.GUID{Data1: 0xf89ac270, Data2: 0xd4eb, Da
 
 // Get__NewEnum dispatches through IEventObjectCollection's vtable slot 7.
 func (self *IEventObjectCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _ppUnkEnum *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppUnkEnum)))
-	return _ppUnkEnum, win32.ErrIfFailed(int32(r1))
+	_ppUnkEnum := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppUnkEnum))))
+	return *_ppUnkEnum, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Item dispatches through IEventObjectCollection's vtable slot 8.
 func (self *IEventObjectCollection) Get_Item(objectID foundation.BSTR) (systemvariant.VARIANT, error) {
-	var _pItem systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(objectID)), uintptr(unsafe.Pointer(&_pItem)))
-	return _pItem, win32.ErrIfFailed(int32(r1))
+	_pItem := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(objectID)), uintptr(win32.OutParam(unsafe.Pointer(_pItem))))
+	return *_pItem, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NewEnum dispatches through IEventObjectCollection's vtable slot 9.
 func (self *IEventObjectCollection) Get_NewEnum() (*IEnumEventObject, error) {
-	var _ppEnum *IEnumEventObject
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
-	return _ppEnum, win32.ErrIfFailed(int32(r1))
+	_ppEnum := new(*IEnumEventObject)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppEnum))))
+	return *_ppEnum, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IEventObjectCollection's vtable slot 10.
 func (self *IEventObjectCollection) Get_Count() (int32, error) {
-	var _pCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pCount)))
-	return _pCount, win32.ErrIfFailed(int32(r1))
+	_pCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pCount))))
+	return *_pCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through IEventObjectCollection's vtable slot 11.
@@ -375,9 +375,9 @@ var IID_IEventProperty = win32.GUID{Data1: 0xda538ee2, Data2: 0xf4de, Data3: 0x1
 
 // Get_Name dispatches through IEventProperty's vtable slot 7.
 func (self *IEventProperty) Get_Name() (foundation.BSTR, error) {
-	var _propertyName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_propertyName)))
-	return _propertyName, win32.ErrIfFailed(int32(r1))
+	_propertyName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_propertyName))))
+	return *_propertyName, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Name dispatches through IEventProperty's vtable slot 8.
@@ -388,9 +388,9 @@ func (self *IEventProperty) Put_Name(propertyName foundation.BSTR) error {
 
 // Get_Value dispatches through IEventProperty's vtable slot 9.
 func (self *IEventProperty) Get_Value() (systemvariant.VARIANT, error) {
-	var _propertyValue systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_propertyValue)))
-	return _propertyValue, win32.ErrIfFailed(int32(r1))
+	_propertyValue := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_propertyValue))))
+	return *_propertyValue, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Value dispatches through IEventProperty's vtable slot 10.
@@ -410,9 +410,9 @@ var IID_IEventPublisher = win32.GUID{Data1: 0xe341516b, Data2: 0x2e32, Data3: 0x
 
 // Get_PublisherID dispatches through IEventPublisher's vtable slot 7.
 func (self *IEventPublisher) Get_PublisherID() (foundation.BSTR, error) {
-	var _pbstrPublisherID foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrPublisherID)))
-	return _pbstrPublisherID, win32.ErrIfFailed(int32(r1))
+	_pbstrPublisherID := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrPublisherID))))
+	return *_pbstrPublisherID, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PublisherID dispatches through IEventPublisher's vtable slot 8.
@@ -423,9 +423,9 @@ func (self *IEventPublisher) Put_PublisherID(bstrPublisherID foundation.BSTR) er
 
 // Get_PublisherName dispatches through IEventPublisher's vtable slot 9.
 func (self *IEventPublisher) Get_PublisherName() (foundation.BSTR, error) {
-	var _pbstrPublisherName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrPublisherName)))
-	return _pbstrPublisherName, win32.ErrIfFailed(int32(r1))
+	_pbstrPublisherName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrPublisherName))))
+	return *_pbstrPublisherName, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PublisherName dispatches through IEventPublisher's vtable slot 10.
@@ -436,9 +436,9 @@ func (self *IEventPublisher) Put_PublisherName(bstrPublisherName foundation.BSTR
 
 // Get_PublisherType dispatches through IEventPublisher's vtable slot 11.
 func (self *IEventPublisher) Get_PublisherType() (foundation.BSTR, error) {
-	var _pbstrPublisherType foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrPublisherType)))
-	return _pbstrPublisherType, win32.ErrIfFailed(int32(r1))
+	_pbstrPublisherType := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrPublisherType))))
+	return *_pbstrPublisherType, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PublisherType dispatches through IEventPublisher's vtable slot 12.
@@ -449,9 +449,9 @@ func (self *IEventPublisher) Put_PublisherType(bstrPublisherType foundation.BSTR
 
 // Get_OwnerSID dispatches through IEventPublisher's vtable slot 13.
 func (self *IEventPublisher) Get_OwnerSID() (foundation.BSTR, error) {
-	var _pbstrOwnerSID foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrOwnerSID)))
-	return _pbstrOwnerSID, win32.ErrIfFailed(int32(r1))
+	_pbstrOwnerSID := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrOwnerSID))))
+	return *_pbstrOwnerSID, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_OwnerSID dispatches through IEventPublisher's vtable slot 14.
@@ -462,9 +462,9 @@ func (self *IEventPublisher) Put_OwnerSID(bstrOwnerSID foundation.BSTR) error {
 
 // Get_Description dispatches through IEventPublisher's vtable slot 15.
 func (self *IEventPublisher) Get_Description() (foundation.BSTR, error) {
-	var _pbstrDescription foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrDescription)))
-	return _pbstrDescription, win32.ErrIfFailed(int32(r1))
+	_pbstrDescription := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrDescription))))
+	return *_pbstrDescription, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Description dispatches through IEventPublisher's vtable slot 16.
@@ -475,9 +475,9 @@ func (self *IEventPublisher) Put_Description(bstrDescription foundation.BSTR) er
 
 // GetDefaultProperty dispatches through IEventPublisher's vtable slot 17.
 func (self *IEventPublisher) GetDefaultProperty(bstrPropertyName foundation.BSTR) (systemvariant.VARIANT, error) {
-	var _propertyValue systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPropertyName)), uintptr(unsafe.Pointer(&_propertyValue)))
-	return _propertyValue, win32.ErrIfFailed(int32(r1))
+	_propertyValue := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPropertyName)), uintptr(win32.OutParam(unsafe.Pointer(_propertyValue))))
+	return *_propertyValue, win32.ErrIfFailed(int32(r1))
 }
 
 // PutDefaultProperty dispatches through IEventPublisher's vtable slot 18.
@@ -494,9 +494,9 @@ func (self *IEventPublisher) RemoveDefaultProperty(bstrPropertyName foundation.B
 
 // GetDefaultPropertyCollection dispatches through IEventPublisher's vtable slot 20.
 func (self *IEventPublisher) GetDefaultPropertyCollection() (*IEventObjectCollection, error) {
-	var _collection *IEventObjectCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_collection)))
-	return _collection, win32.ErrIfFailed(int32(r1))
+	_collection := new(*IEventObjectCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_collection))))
+	return *_collection, win32.ErrIfFailed(int32(r1))
 }
 
 // IEventSubscription: https://learn.microsoft.com/windows/win32/api/eventsys/nn-eventsys-ieventsubscription
@@ -510,9 +510,9 @@ var IID_IEventSubscription = win32.GUID{Data1: 0x4a6b0e15, Data2: 0x2e38, Data3:
 
 // Get_SubscriptionID dispatches through IEventSubscription's vtable slot 7.
 func (self *IEventSubscription) Get_SubscriptionID() (foundation.BSTR, error) {
-	var _pbstrSubscriptionID foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrSubscriptionID)))
-	return _pbstrSubscriptionID, win32.ErrIfFailed(int32(r1))
+	_pbstrSubscriptionID := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrSubscriptionID))))
+	return *_pbstrSubscriptionID, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SubscriptionID dispatches through IEventSubscription's vtable slot 8.
@@ -523,9 +523,9 @@ func (self *IEventSubscription) Put_SubscriptionID(bstrSubscriptionID foundation
 
 // Get_SubscriptionName dispatches through IEventSubscription's vtable slot 9.
 func (self *IEventSubscription) Get_SubscriptionName() (foundation.BSTR, error) {
-	var _pbstrSubscriptionName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrSubscriptionName)))
-	return _pbstrSubscriptionName, win32.ErrIfFailed(int32(r1))
+	_pbstrSubscriptionName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrSubscriptionName))))
+	return *_pbstrSubscriptionName, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SubscriptionName dispatches through IEventSubscription's vtable slot 10.
@@ -536,9 +536,9 @@ func (self *IEventSubscription) Put_SubscriptionName(bstrSubscriptionName founda
 
 // Get_PublisherID dispatches through IEventSubscription's vtable slot 11.
 func (self *IEventSubscription) Get_PublisherID() (foundation.BSTR, error) {
-	var _pbstrPublisherID foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrPublisherID)))
-	return _pbstrPublisherID, win32.ErrIfFailed(int32(r1))
+	_pbstrPublisherID := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrPublisherID))))
+	return *_pbstrPublisherID, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PublisherID dispatches through IEventSubscription's vtable slot 12.
@@ -549,9 +549,9 @@ func (self *IEventSubscription) Put_PublisherID(bstrPublisherID foundation.BSTR)
 
 // Get_EventClassID dispatches through IEventSubscription's vtable slot 13.
 func (self *IEventSubscription) Get_EventClassID() (foundation.BSTR, error) {
-	var _pbstrEventClassID foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrEventClassID)))
-	return _pbstrEventClassID, win32.ErrIfFailed(int32(r1))
+	_pbstrEventClassID := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrEventClassID))))
+	return *_pbstrEventClassID, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EventClassID dispatches through IEventSubscription's vtable slot 14.
@@ -562,9 +562,9 @@ func (self *IEventSubscription) Put_EventClassID(bstrEventClassID foundation.BST
 
 // Get_MethodName dispatches through IEventSubscription's vtable slot 15.
 func (self *IEventSubscription) Get_MethodName() (foundation.BSTR, error) {
-	var _pbstrMethodName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrMethodName)))
-	return _pbstrMethodName, win32.ErrIfFailed(int32(r1))
+	_pbstrMethodName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrMethodName))))
+	return *_pbstrMethodName, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MethodName dispatches through IEventSubscription's vtable slot 16.
@@ -575,9 +575,9 @@ func (self *IEventSubscription) Put_MethodName(bstrMethodName foundation.BSTR) e
 
 // Get_SubscriberCLSID dispatches through IEventSubscription's vtable slot 17.
 func (self *IEventSubscription) Get_SubscriberCLSID() (foundation.BSTR, error) {
-	var _pbstrSubscriberCLSID foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrSubscriberCLSID)))
-	return _pbstrSubscriberCLSID, win32.ErrIfFailed(int32(r1))
+	_pbstrSubscriberCLSID := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrSubscriberCLSID))))
+	return *_pbstrSubscriberCLSID, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SubscriberCLSID dispatches through IEventSubscription's vtable slot 18.
@@ -588,9 +588,9 @@ func (self *IEventSubscription) Put_SubscriberCLSID(bstrSubscriberCLSID foundati
 
 // Get_SubscriberInterface dispatches through IEventSubscription's vtable slot 19.
 func (self *IEventSubscription) Get_SubscriberInterface() (*systemcom.IUnknown, error) {
-	var _ppSubscriberInterface *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppSubscriberInterface)))
-	return _ppSubscriberInterface, win32.ErrIfFailed(int32(r1))
+	_ppSubscriberInterface := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppSubscriberInterface))))
+	return *_ppSubscriberInterface, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SubscriberInterface dispatches through IEventSubscription's vtable slot 20.
@@ -601,9 +601,9 @@ func (self *IEventSubscription) Put_SubscriberInterface(pSubscriberInterface *sy
 
 // Get_PerUser dispatches through IEventSubscription's vtable slot 21.
 func (self *IEventSubscription) Get_PerUser() (foundation.BOOL, error) {
-	var _pfPerUser foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfPerUser)))
-	return _pfPerUser, win32.ErrIfFailed(int32(r1))
+	_pfPerUser := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfPerUser))))
+	return *_pfPerUser, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PerUser dispatches through IEventSubscription's vtable slot 22.
@@ -615,9 +615,9 @@ func (self *IEventSubscription) Put_PerUser(fPerUser bool) error {
 
 // Get_OwnerSID dispatches through IEventSubscription's vtable slot 23.
 func (self *IEventSubscription) Get_OwnerSID() (foundation.BSTR, error) {
-	var _pbstrOwnerSID foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrOwnerSID)))
-	return _pbstrOwnerSID, win32.ErrIfFailed(int32(r1))
+	_pbstrOwnerSID := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrOwnerSID))))
+	return *_pbstrOwnerSID, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_OwnerSID dispatches through IEventSubscription's vtable slot 24.
@@ -628,9 +628,9 @@ func (self *IEventSubscription) Put_OwnerSID(bstrOwnerSID foundation.BSTR) error
 
 // Get_Enabled dispatches through IEventSubscription's vtable slot 25.
 func (self *IEventSubscription) Get_Enabled() (foundation.BOOL, error) {
-	var _pfEnabled foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfEnabled)))
-	return _pfEnabled, win32.ErrIfFailed(int32(r1))
+	_pfEnabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfEnabled))))
+	return *_pfEnabled, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Enabled dispatches through IEventSubscription's vtable slot 26.
@@ -642,9 +642,9 @@ func (self *IEventSubscription) Put_Enabled(fEnabled bool) error {
 
 // Get_Description dispatches through IEventSubscription's vtable slot 27.
 func (self *IEventSubscription) Get_Description() (foundation.BSTR, error) {
-	var _pbstrDescription foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrDescription)))
-	return _pbstrDescription, win32.ErrIfFailed(int32(r1))
+	_pbstrDescription := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrDescription))))
+	return *_pbstrDescription, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Description dispatches through IEventSubscription's vtable slot 28.
@@ -655,9 +655,9 @@ func (self *IEventSubscription) Put_Description(bstrDescription foundation.BSTR)
 
 // Get_MachineName dispatches through IEventSubscription's vtable slot 29.
 func (self *IEventSubscription) Get_MachineName() (foundation.BSTR, error) {
-	var _pbstrMachineName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrMachineName)))
-	return _pbstrMachineName, win32.ErrIfFailed(int32(r1))
+	_pbstrMachineName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrMachineName))))
+	return *_pbstrMachineName, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MachineName dispatches through IEventSubscription's vtable slot 30.
@@ -668,9 +668,9 @@ func (self *IEventSubscription) Put_MachineName(bstrMachineName foundation.BSTR)
 
 // GetPublisherProperty dispatches through IEventSubscription's vtable slot 31.
 func (self *IEventSubscription) GetPublisherProperty(bstrPropertyName foundation.BSTR) (systemvariant.VARIANT, error) {
-	var _propertyValue systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPropertyName)), uintptr(unsafe.Pointer(&_propertyValue)))
-	return _propertyValue, win32.ErrIfFailed(int32(r1))
+	_propertyValue := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPropertyName)), uintptr(win32.OutParam(unsafe.Pointer(_propertyValue))))
+	return *_propertyValue, win32.ErrIfFailed(int32(r1))
 }
 
 // PutPublisherProperty dispatches through IEventSubscription's vtable slot 32.
@@ -687,16 +687,16 @@ func (self *IEventSubscription) RemovePublisherProperty(bstrPropertyName foundat
 
 // GetPublisherPropertyCollection dispatches through IEventSubscription's vtable slot 34.
 func (self *IEventSubscription) GetPublisherPropertyCollection() (*IEventObjectCollection, error) {
-	var _collection *IEventObjectCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_collection)))
-	return _collection, win32.ErrIfFailed(int32(r1))
+	_collection := new(*IEventObjectCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_collection))))
+	return *_collection, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSubscriberProperty dispatches through IEventSubscription's vtable slot 35.
 func (self *IEventSubscription) GetSubscriberProperty(bstrPropertyName foundation.BSTR) (systemvariant.VARIANT, error) {
-	var _propertyValue systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPropertyName)), uintptr(unsafe.Pointer(&_propertyValue)))
-	return _propertyValue, win32.ErrIfFailed(int32(r1))
+	_propertyValue := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPropertyName)), uintptr(win32.OutParam(unsafe.Pointer(_propertyValue))))
+	return *_propertyValue, win32.ErrIfFailed(int32(r1))
 }
 
 // PutSubscriberProperty dispatches through IEventSubscription's vtable slot 36.
@@ -713,16 +713,16 @@ func (self *IEventSubscription) RemoveSubscriberProperty(bstrPropertyName founda
 
 // GetSubscriberPropertyCollection dispatches through IEventSubscription's vtable slot 38.
 func (self *IEventSubscription) GetSubscriberPropertyCollection() (*IEventObjectCollection, error) {
-	var _collection *IEventObjectCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_collection)))
-	return _collection, win32.ErrIfFailed(int32(r1))
+	_collection := new(*IEventObjectCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_collection))))
+	return *_collection, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InterfaceID dispatches through IEventSubscription's vtable slot 39.
 func (self *IEventSubscription) Get_InterfaceID() (foundation.BSTR, error) {
-	var _pbstrInterfaceID foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrInterfaceID)))
-	return _pbstrInterfaceID, win32.ErrIfFailed(int32(r1))
+	_pbstrInterfaceID := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrInterfaceID))))
+	return *_pbstrInterfaceID, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_InterfaceID dispatches through IEventSubscription's vtable slot 40.
@@ -742,9 +742,9 @@ var IID_IEventSystem = win32.GUID{Data1: 0x4e14fb9f, Data2: 0x2e22, Data3: 0x11d
 
 // Query dispatches through IEventSystem's vtable slot 7.
 func (self *IEventSystem) Query(progID foundation.BSTR, queryCriteria foundation.BSTR, errorIndex *int32) (*systemcom.IUnknown, error) {
-	var _ppInterface *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(progID)), uintptr(unsafe.Pointer(queryCriteria)), uintptr(unsafe.Pointer(errorIndex)), uintptr(unsafe.Pointer(&_ppInterface)))
-	return _ppInterface, win32.ErrIfFailed(int32(r1))
+	_ppInterface := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(progID)), uintptr(unsafe.Pointer(queryCriteria)), uintptr(unsafe.Pointer(errorIndex)), uintptr(win32.OutParam(unsafe.Pointer(_ppInterface))))
+	return *_ppInterface, win32.ErrIfFailed(int32(r1))
 }
 
 // Store dispatches through IEventSystem's vtable slot 8.
@@ -761,16 +761,16 @@ func (self *IEventSystem) Remove(progID foundation.BSTR, queryCriteria foundatio
 
 // Get_EventObjectChangeEventClassID dispatches through IEventSystem's vtable slot 10.
 func (self *IEventSystem) Get_EventObjectChangeEventClassID() (foundation.BSTR, error) {
-	var _pbstrEventClassID foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrEventClassID)))
-	return _pbstrEventClassID, win32.ErrIfFailed(int32(r1))
+	_pbstrEventClassID := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrEventClassID))))
+	return *_pbstrEventClassID, win32.ErrIfFailed(int32(r1))
 }
 
 // QueryS dispatches through IEventSystem's vtable slot 11.
 func (self *IEventSystem) QueryS(progID foundation.BSTR, queryCriteria foundation.BSTR) (*systemcom.IUnknown, error) {
-	var _ppInterface *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(progID)), uintptr(unsafe.Pointer(queryCriteria)), uintptr(unsafe.Pointer(&_ppInterface)))
-	return _ppInterface, win32.ErrIfFailed(int32(r1))
+	_ppInterface := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(progID)), uintptr(unsafe.Pointer(queryCriteria)), uintptr(win32.OutParam(unsafe.Pointer(_ppInterface))))
+	return *_ppInterface, win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveS dispatches through IEventSystem's vtable slot 12.
@@ -811,23 +811,23 @@ func (self *IMultiInterfaceEventControl) SetMultiInterfacePublisherFilter(classF
 
 // GetSubscriptions dispatches through IMultiInterfaceEventControl's vtable slot 4.
 func (self *IMultiInterfaceEventControl) GetSubscriptions(eventIID *win32.GUID, bstrMethodName foundation.BSTR, optionalCriteria foundation.BSTR, optionalErrorIndex *int32) (*IEventObjectCollection, error) {
-	var _ppCollection *IEventObjectCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(eventIID)), uintptr(unsafe.Pointer(bstrMethodName)), uintptr(unsafe.Pointer(optionalCriteria)), uintptr(unsafe.Pointer(optionalErrorIndex)), uintptr(unsafe.Pointer(&_ppCollection)))
-	return _ppCollection, win32.ErrIfFailed(int32(r1))
+	_ppCollection := new(*IEventObjectCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(eventIID)), uintptr(unsafe.Pointer(bstrMethodName)), uintptr(unsafe.Pointer(optionalCriteria)), uintptr(unsafe.Pointer(optionalErrorIndex)), uintptr(win32.OutParam(unsafe.Pointer(_ppCollection))))
+	return *_ppCollection, win32.ErrIfFailed(int32(r1))
 }
 
 // SetDefaultQuery dispatches through IMultiInterfaceEventControl's vtable slot 5.
 func (self *IMultiInterfaceEventControl) SetDefaultQuery(eventIID *win32.GUID, bstrMethodName foundation.BSTR, bstrCriteria foundation.BSTR) (int32, error) {
-	var _errorIndex int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(eventIID)), uintptr(unsafe.Pointer(bstrMethodName)), uintptr(unsafe.Pointer(bstrCriteria)), uintptr(unsafe.Pointer(&_errorIndex)))
-	return _errorIndex, win32.ErrIfFailed(int32(r1))
+	_errorIndex := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(eventIID)), uintptr(unsafe.Pointer(bstrMethodName)), uintptr(unsafe.Pointer(bstrCriteria)), uintptr(win32.OutParam(unsafe.Pointer(_errorIndex))))
+	return *_errorIndex, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AllowInprocActivation dispatches through IMultiInterfaceEventControl's vtable slot 6.
 func (self *IMultiInterfaceEventControl) Get_AllowInprocActivation() (foundation.BOOL, error) {
-	var _pfAllowInprocActivation foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfAllowInprocActivation)))
-	return _pfAllowInprocActivation, win32.ErrIfFailed(int32(r1))
+	_pfAllowInprocActivation := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfAllowInprocActivation))))
+	return *_pfAllowInprocActivation, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AllowInprocActivation dispatches through IMultiInterfaceEventControl's vtable slot 7.
@@ -839,9 +839,9 @@ func (self *IMultiInterfaceEventControl) Put_AllowInprocActivation(fAllowInprocA
 
 // Get_FireInParallel dispatches through IMultiInterfaceEventControl's vtable slot 8.
 func (self *IMultiInterfaceEventControl) Get_FireInParallel() (foundation.BOOL, error) {
-	var _pfFireInParallel foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfFireInParallel)))
-	return _pfFireInParallel, win32.ErrIfFailed(int32(r1))
+	_pfFireInParallel := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfFireInParallel))))
+	return *_pfFireInParallel, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FireInParallel dispatches through IMultiInterfaceEventControl's vtable slot 9.

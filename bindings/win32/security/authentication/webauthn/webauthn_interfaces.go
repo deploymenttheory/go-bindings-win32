@@ -48,16 +48,16 @@ var IID_IPluginAuthenticator = win32.GUID{Data1: 0xd26bcf6f, Data2: 0xb54c, Data
 
 // MakeCredential dispatches through IPluginAuthenticator's vtable slot 3.
 func (self *IPluginAuthenticator) MakeCredential(request *WEBAUTHN_PLUGIN_OPERATION_REQUEST) (WEBAUTHN_PLUGIN_OPERATION_RESPONSE, error) {
-	var _response WEBAUTHN_PLUGIN_OPERATION_RESPONSE
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(request)), uintptr(unsafe.Pointer(&_response)))
-	return _response, win32.ErrIfFailed(int32(r1))
+	_response := new(WEBAUTHN_PLUGIN_OPERATION_RESPONSE)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(request)), uintptr(win32.OutParam(unsafe.Pointer(_response))))
+	return *_response, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAssertion dispatches through IPluginAuthenticator's vtable slot 4.
 func (self *IPluginAuthenticator) GetAssertion(request *WEBAUTHN_PLUGIN_OPERATION_REQUEST) (WEBAUTHN_PLUGIN_OPERATION_RESPONSE, error) {
-	var _response WEBAUTHN_PLUGIN_OPERATION_RESPONSE
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(request)), uintptr(unsafe.Pointer(&_response)))
-	return _response, win32.ErrIfFailed(int32(r1))
+	_response := new(WEBAUTHN_PLUGIN_OPERATION_RESPONSE)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(request)), uintptr(win32.OutParam(unsafe.Pointer(_response))))
+	return *_response, win32.ErrIfFailed(int32(r1))
 }
 
 // CancelOperation dispatches through IPluginAuthenticator's vtable slot 5.
@@ -68,7 +68,7 @@ func (self *IPluginAuthenticator) CancelOperation(request *WEBAUTHN_PLUGIN_CANCE
 
 // GetLockStatus dispatches through IPluginAuthenticator's vtable slot 6.
 func (self *IPluginAuthenticator) GetLockStatus() (PLUGIN_LOCK_STATUS, error) {
-	var _lockStatus PLUGIN_LOCK_STATUS
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lockStatus)))
-	return _lockStatus, win32.ErrIfFailed(int32(r1))
+	_lockStatus := new(PLUGIN_LOCK_STATUS)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_lockStatus))))
+	return *_lockStatus, win32.ErrIfFailed(int32(r1))
 }

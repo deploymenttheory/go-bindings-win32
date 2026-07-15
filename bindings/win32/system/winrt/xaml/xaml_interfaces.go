@@ -32,9 +32,9 @@ func (self *IDesktopWindowXamlSourceNative) AttachToWindow(parentWnd foundation.
 
 // Get_WindowHandle dispatches through IDesktopWindowXamlSourceNative's vtable slot 4.
 func (self *IDesktopWindowXamlSourceNative) Get_WindowHandle() (foundation.HWND, error) {
-	var _hWnd foundation.HWND
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hWnd)))
-	return _hWnd, win32.ErrIfFailed(int32(r1))
+	_hWnd := new(foundation.HWND)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hWnd))))
+	return *_hWnd, win32.ErrIfFailed(int32(r1))
 }
 
 // IDesktopWindowXamlSourceNative2: https://learn.microsoft.com/windows/win32/api/windows.ui.xaml.hosting.desktopwindowxamlsource/nn-windows-ui-xaml-hosting-desktopwindowxamlsource-idesktopwindowxamlsourcenative2
@@ -367,9 +367,9 @@ var IID_ITrackerOwner = win32.GUID{Data1: 0xeb24c20b, Data2: 0x9816, Data3: 0x4a
 
 // CreateTrackerHandle dispatches through ITrackerOwner's vtable slot 3.
 func (self *ITrackerOwner) CreateTrackerHandle() (TrackerHandle, error) {
-	var _returnValue TrackerHandle
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_returnValue)))
-	return _returnValue, win32.ErrIfFailed(int32(r1))
+	_returnValue := new(TrackerHandle)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_returnValue))))
+	return *_returnValue, win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteTrackerHandle dispatches through ITrackerOwner's vtable slot 4.

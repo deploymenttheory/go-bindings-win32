@@ -33,9 +33,9 @@ func (self *IDXGIAdapter) EnumOutputs(Output uint32, ppOutput **IDXGIOutput) err
 
 // GetDesc dispatches through IDXGIAdapter's vtable slot 8.
 func (self *IDXGIAdapter) GetDesc() (DXGI_ADAPTER_DESC, error) {
-	var _pDesc DXGI_ADAPTER_DESC
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDesc)))
-	return _pDesc, win32.ErrIfFailed(int32(r1))
+	_pDesc := new(DXGI_ADAPTER_DESC)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pDesc))))
+	return *_pDesc, win32.ErrIfFailed(int32(r1))
 }
 
 // CheckInterfaceSupport dispatches through IDXGIAdapter's vtable slot 9.
@@ -55,9 +55,9 @@ var IID_IDXGIAdapter1 = win32.GUID{Data1: 0x29038f61, Data2: 0x3839, Data3: 0x46
 
 // GetDesc1 dispatches through IDXGIAdapter1's vtable slot 10.
 func (self *IDXGIAdapter1) GetDesc1() (DXGI_ADAPTER_DESC1, error) {
-	var _pDesc DXGI_ADAPTER_DESC1
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDesc)))
-	return _pDesc, win32.ErrIfFailed(int32(r1))
+	_pDesc := new(DXGI_ADAPTER_DESC1)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pDesc))))
+	return *_pDesc, win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGIAdapter2: https://learn.microsoft.com/windows/win32/api/dxgi1_2/nn-dxgi1_2-idxgiadapter2
@@ -71,9 +71,9 @@ var IID_IDXGIAdapter2 = win32.GUID{Data1: 0x0aa1ae0a, Data2: 0xfa0e, Data3: 0x4b
 
 // GetDesc2 dispatches through IDXGIAdapter2's vtable slot 11.
 func (self *IDXGIAdapter2) GetDesc2() (DXGI_ADAPTER_DESC2, error) {
-	var _pDesc DXGI_ADAPTER_DESC2
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDesc)))
-	return _pDesc, win32.ErrIfFailed(int32(r1))
+	_pDesc := new(DXGI_ADAPTER_DESC2)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pDesc))))
+	return *_pDesc, win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGIAdapter3: https://learn.microsoft.com/windows/win32/api/dxgi1_4/nn-dxgi1_4-idxgiadapter3
@@ -130,9 +130,9 @@ var IID_IDXGIAdapter4 = win32.GUID{Data1: 0x3c8d99d1, Data2: 0x4fbf, Data3: 0x41
 
 // GetDesc3 dispatches through IDXGIAdapter4's vtable slot 18.
 func (self *IDXGIAdapter4) GetDesc3() (DXGI_ADAPTER_DESC3, error) {
-	var _pDesc DXGI_ADAPTER_DESC3
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDesc)))
-	return _pDesc, win32.ErrIfFailed(int32(r1))
+	_pDesc := new(DXGI_ADAPTER_DESC3)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pDesc))))
+	return *_pDesc, win32.ErrIfFailed(int32(r1))
 }
 
 // IDXGIDebug: https://learn.microsoft.com/windows/win32/api/dxgidebug/nn-dxgidebug-idxgidebug
@@ -725,9 +725,9 @@ var IID_IDXGIOutput = win32.GUID{Data1: 0xae02eedb, Data2: 0xc735, Data3: 0x4690
 
 // GetDesc dispatches through IDXGIOutput's vtable slot 7.
 func (self *IDXGIOutput) GetDesc() (DXGI_OUTPUT_DESC, error) {
-	var _pDesc DXGI_OUTPUT_DESC
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDesc)))
-	return _pDesc, win32.ErrIfFailed(int32(r1))
+	_pDesc := new(DXGI_OUTPUT_DESC)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pDesc))))
+	return *_pDesc, win32.ErrIfFailed(int32(r1))
 }
 
 // GetDisplayModeList dispatches through IDXGIOutput's vtable slot 8.
@@ -904,9 +904,9 @@ var IID_IDXGIOutput6 = win32.GUID{Data1: 0x068346e8, Data2: 0xaaec, Data3: 0x4b8
 
 // GetDesc1 dispatches through IDXGIOutput6's vtable slot 27.
 func (self *IDXGIOutput6) GetDesc1() (DXGI_OUTPUT_DESC1, error) {
-	var _pDesc DXGI_OUTPUT_DESC1
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDesc)))
-	return _pDesc, win32.ErrIfFailed(int32(r1))
+	_pDesc := new(DXGI_OUTPUT_DESC1)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pDesc))))
+	return *_pDesc, win32.ErrIfFailed(int32(r1))
 }
 
 // CheckHardwareCompositionSupport dispatches through IDXGIOutput6's vtable slot 28.
@@ -1041,9 +1041,9 @@ var IID_IDXGISurface = win32.GUID{Data1: 0xcafcb56c, Data2: 0x6ac3, Data3: 0x488
 
 // GetDesc dispatches through IDXGISurface's vtable slot 8.
 func (self *IDXGISurface) GetDesc() (DXGI_SURFACE_DESC, error) {
-	var _pDesc DXGI_SURFACE_DESC
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDesc)))
-	return _pDesc, win32.ErrIfFailed(int32(r1))
+	_pDesc := new(DXGI_SURFACE_DESC)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pDesc))))
+	return *_pDesc, win32.ErrIfFailed(int32(r1))
 }
 
 // Map dispatches through IDXGISurface's vtable slot 9.
@@ -1131,9 +1131,9 @@ func (self *IDXGISwapChain) GetFullscreenState(pFullscreen *foundation.BOOL, ppT
 
 // GetDesc dispatches through IDXGISwapChain's vtable slot 12.
 func (self *IDXGISwapChain) GetDesc() (DXGI_SWAP_CHAIN_DESC, error) {
-	var _pDesc DXGI_SWAP_CHAIN_DESC
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDesc)))
-	return _pDesc, win32.ErrIfFailed(int32(r1))
+	_pDesc := new(DXGI_SWAP_CHAIN_DESC)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pDesc))))
+	return *_pDesc, win32.ErrIfFailed(int32(r1))
 }
 
 // ResizeBuffers dispatches through IDXGISwapChain's vtable slot 13.
@@ -1177,16 +1177,16 @@ var IID_IDXGISwapChain1 = win32.GUID{Data1: 0x790a45f7, Data2: 0x0d42, Data3: 0x
 
 // GetDesc1 dispatches through IDXGISwapChain1's vtable slot 18.
 func (self *IDXGISwapChain1) GetDesc1() (DXGI_SWAP_CHAIN_DESC1, error) {
-	var _pDesc DXGI_SWAP_CHAIN_DESC1
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDesc)))
-	return _pDesc, win32.ErrIfFailed(int32(r1))
+	_pDesc := new(DXGI_SWAP_CHAIN_DESC1)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pDesc))))
+	return *_pDesc, win32.ErrIfFailed(int32(r1))
 }
 
 // GetFullscreenDesc dispatches through IDXGISwapChain1's vtable slot 19.
 func (self *IDXGISwapChain1) GetFullscreenDesc() (DXGI_SWAP_CHAIN_FULLSCREEN_DESC, error) {
-	var _pDesc DXGI_SWAP_CHAIN_FULLSCREEN_DESC
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDesc)))
-	return _pDesc, win32.ErrIfFailed(int32(r1))
+	_pDesc := new(DXGI_SWAP_CHAIN_FULLSCREEN_DESC)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pDesc))))
+	return *_pDesc, win32.ErrIfFailed(int32(r1))
 }
 
 // GetHwnd dispatches through IDXGISwapChain1's vtable slot 20.

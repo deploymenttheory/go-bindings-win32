@@ -25,16 +25,16 @@ var IID_ICertSrvSetup = win32.GUID{Data1: 0xb760a1bb, Data2: 0x4784, Data3: 0x44
 
 // Get_CAErrorId dispatches through ICertSrvSetup's vtable slot 7.
 func (self *ICertSrvSetup) Get_CAErrorId() (int32, error) {
-	var _pVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CAErrorString dispatches through ICertSrvSetup's vtable slot 8.
 func (self *ICertSrvSetup) Get_CAErrorString() (foundation.BSTR, error) {
-	var _pVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeDefaults dispatches through ICertSrvSetup's vtable slot 9.
@@ -45,9 +45,9 @@ func (self *ICertSrvSetup) InitializeDefaults(bServer foundation.VARIANT_BOOL, b
 
 // GetCASetupProperty dispatches through ICertSrvSetup's vtable slot 10.
 func (self *ICertSrvSetup) GetCASetupProperty(propertyId CASetupProperty) (systemvariant.VARIANT, error) {
-	var _pPropertyValue systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(propertyId), uintptr(unsafe.Pointer(&_pPropertyValue)))
-	return _pPropertyValue, win32.ErrIfFailed(int32(r1))
+	_pPropertyValue := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(propertyId), uintptr(win32.OutParam(unsafe.Pointer(_pPropertyValue))))
+	return *_pPropertyValue, win32.ErrIfFailed(int32(r1))
 }
 
 // SetCASetupProperty dispatches through ICertSrvSetup's vtable slot 11.
@@ -58,58 +58,58 @@ func (self *ICertSrvSetup) SetCASetupProperty(propertyId CASetupProperty, pPrope
 
 // IsPropertyEditable dispatches through ICertSrvSetup's vtable slot 12.
 func (self *ICertSrvSetup) IsPropertyEditable(propertyId CASetupProperty) (foundation.VARIANT_BOOL, error) {
-	var _pbEditable foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(propertyId), uintptr(unsafe.Pointer(&_pbEditable)))
-	return _pbEditable, win32.ErrIfFailed(int32(r1))
+	_pbEditable := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(propertyId), uintptr(win32.OutParam(unsafe.Pointer(_pbEditable))))
+	return *_pbEditable, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSupportedCATypes dispatches through ICertSrvSetup's vtable slot 13.
 func (self *ICertSrvSetup) GetSupportedCATypes() (systemvariant.VARIANT, error) {
-	var _pCATypes systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pCATypes)))
-	return _pCATypes, win32.ErrIfFailed(int32(r1))
+	_pCATypes := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pCATypes))))
+	return *_pCATypes, win32.ErrIfFailed(int32(r1))
 }
 
 // GetProviderNameList dispatches through ICertSrvSetup's vtable slot 14.
 func (self *ICertSrvSetup) GetProviderNameList() (systemvariant.VARIANT, error) {
-	var _pVal systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetKeyLengthList dispatches through ICertSrvSetup's vtable slot 15.
 func (self *ICertSrvSetup) GetKeyLengthList(bstrProviderName foundation.BSTR) (systemvariant.VARIANT, error) {
-	var _pVal systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProviderName)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProviderName)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetHashAlgorithmList dispatches through ICertSrvSetup's vtable slot 16.
 func (self *ICertSrvSetup) GetHashAlgorithmList(bstrProviderName foundation.BSTR) (systemvariant.VARIANT, error) {
-	var _pVal systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProviderName)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProviderName)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPrivateKeyContainerList dispatches through ICertSrvSetup's vtable slot 17.
 func (self *ICertSrvSetup) GetPrivateKeyContainerList(bstrProviderName foundation.BSTR) (systemvariant.VARIANT, error) {
-	var _pVal systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProviderName)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProviderName)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetExistingCACertificates dispatches through ICertSrvSetup's vtable slot 18.
 func (self *ICertSrvSetup) GetExistingCACertificates() (*ICertSrvSetupKeyInformationCollection, error) {
-	var _ppVal *ICertSrvSetupKeyInformationCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppVal)))
-	return _ppVal, win32.ErrIfFailed(int32(r1))
+	_ppVal := new(*ICertSrvSetupKeyInformationCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppVal))))
+	return *_ppVal, win32.ErrIfFailed(int32(r1))
 }
 
 // CAImportPFX dispatches through ICertSrvSetup's vtable slot 19.
 func (self *ICertSrvSetup) CAImportPFX(bstrFileName foundation.BSTR, bstrPasswd foundation.BSTR, bOverwriteExistingKey foundation.VARIANT_BOOL) (*ICertSrvSetupKeyInformation, error) {
-	var _ppVal *ICertSrvSetupKeyInformation
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrFileName)), uintptr(unsafe.Pointer(bstrPasswd)), uintptr(bOverwriteExistingKey), uintptr(unsafe.Pointer(&_ppVal)))
-	return _ppVal, win32.ErrIfFailed(int32(r1))
+	_ppVal := new(*ICertSrvSetupKeyInformation)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrFileName)), uintptr(unsafe.Pointer(bstrPasswd)), uintptr(bOverwriteExistingKey), uintptr(win32.OutParam(unsafe.Pointer(_ppVal))))
+	return *_ppVal, win32.ErrIfFailed(int32(r1))
 }
 
 // SetCADistinguishedName dispatches through ICertSrvSetup's vtable slot 20.
@@ -165,9 +165,9 @@ var IID_ICertSrvSetupKeyInformation = win32.GUID{Data1: 0x6ba73778, Data2: 0x36d
 
 // Get_ProviderName dispatches through ICertSrvSetupKeyInformation's vtable slot 7.
 func (self *ICertSrvSetupKeyInformation) Get_ProviderName() (foundation.BSTR, error) {
-	var _pVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ProviderName dispatches through ICertSrvSetupKeyInformation's vtable slot 8.
@@ -178,9 +178,9 @@ func (self *ICertSrvSetupKeyInformation) Put_ProviderName(bstrVal foundation.BST
 
 // Get_Length dispatches through ICertSrvSetupKeyInformation's vtable slot 9.
 func (self *ICertSrvSetupKeyInformation) Get_Length() (int32, error) {
-	var _pVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Length dispatches through ICertSrvSetupKeyInformation's vtable slot 10.
@@ -191,9 +191,9 @@ func (self *ICertSrvSetupKeyInformation) Put_Length(lVal int32) error {
 
 // Get_Existing dispatches through ICertSrvSetupKeyInformation's vtable slot 11.
 func (self *ICertSrvSetupKeyInformation) Get_Existing() (foundation.VARIANT_BOOL, error) {
-	var _pVal foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Existing dispatches through ICertSrvSetupKeyInformation's vtable slot 12.
@@ -204,9 +204,9 @@ func (self *ICertSrvSetupKeyInformation) Put_Existing(bVal foundation.VARIANT_BO
 
 // Get_ContainerName dispatches through ICertSrvSetupKeyInformation's vtable slot 13.
 func (self *ICertSrvSetupKeyInformation) Get_ContainerName() (foundation.BSTR, error) {
-	var _pVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ContainerName dispatches through ICertSrvSetupKeyInformation's vtable slot 14.
@@ -217,9 +217,9 @@ func (self *ICertSrvSetupKeyInformation) Put_ContainerName(bstrVal foundation.BS
 
 // Get_HashAlgorithm dispatches through ICertSrvSetupKeyInformation's vtable slot 15.
 func (self *ICertSrvSetupKeyInformation) Get_HashAlgorithm() (foundation.BSTR, error) {
-	var _pVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_HashAlgorithm dispatches through ICertSrvSetupKeyInformation's vtable slot 16.
@@ -230,9 +230,9 @@ func (self *ICertSrvSetupKeyInformation) Put_HashAlgorithm(bstrVal foundation.BS
 
 // Get_ExistingCACertificate dispatches through ICertSrvSetupKeyInformation's vtable slot 17.
 func (self *ICertSrvSetupKeyInformation) Get_ExistingCACertificate() (systemvariant.VARIANT, error) {
-	var _pVal systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // ICertSrvSetupKeyInformationCollection: https://learn.microsoft.com/windows/win32/api/casetup/nn-casetup-icertsrvsetupkeyinformationcollection
@@ -246,23 +246,23 @@ var IID_ICertSrvSetupKeyInformationCollection = win32.GUID{Data1: 0xe65c8b00, Da
 
 // Get__NewEnum dispatches through ICertSrvSetupKeyInformationCollection's vtable slot 7.
 func (self *ICertSrvSetupKeyInformationCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _ppVal *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppVal)))
-	return _ppVal, win32.ErrIfFailed(int32(r1))
+	_ppVal := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppVal))))
+	return *_ppVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Item dispatches through ICertSrvSetupKeyInformationCollection's vtable slot 8.
 func (self *ICertSrvSetupKeyInformationCollection) Get_Item(Index int32) (systemvariant.VARIANT, error) {
-	var _pVal systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through ICertSrvSetupKeyInformationCollection's vtable slot 9.
 func (self *ICertSrvSetupKeyInformationCollection) Get_Count() (int32, error) {
-	var _pVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through ICertSrvSetupKeyInformationCollection's vtable slot 10.
@@ -282,9 +282,9 @@ var IID_ICertificateEnrollmentPolicyServerSetup = win32.GUID{Data1: 0x859252cc, 
 
 // Get_ErrorString dispatches through ICertificateEnrollmentPolicyServerSetup's vtable slot 7.
 func (self *ICertificateEnrollmentPolicyServerSetup) Get_ErrorString() (foundation.BSTR, error) {
-	var _pVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeInstallDefaults dispatches through ICertificateEnrollmentPolicyServerSetup's vtable slot 8.
@@ -295,9 +295,9 @@ func (self *ICertificateEnrollmentPolicyServerSetup) InitializeInstallDefaults()
 
 // GetProperty dispatches through ICertificateEnrollmentPolicyServerSetup's vtable slot 9.
 func (self *ICertificateEnrollmentPolicyServerSetup) GetProperty(propertyId CEPSetupProperty) (systemvariant.VARIANT, error) {
-	var _pPropertyValue systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(propertyId), uintptr(unsafe.Pointer(&_pPropertyValue)))
-	return _pPropertyValue, win32.ErrIfFailed(int32(r1))
+	_pPropertyValue := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(propertyId), uintptr(win32.OutParam(unsafe.Pointer(_pPropertyValue))))
+	return *_pPropertyValue, win32.ErrIfFailed(int32(r1))
 }
 
 // SetProperty dispatches through ICertificateEnrollmentPolicyServerSetup's vtable slot 10.
@@ -329,9 +329,9 @@ var IID_ICertificateEnrollmentServerSetup = win32.GUID{Data1: 0x70027fdb, Data2:
 
 // Get_ErrorString dispatches through ICertificateEnrollmentServerSetup's vtable slot 7.
 func (self *ICertificateEnrollmentServerSetup) Get_ErrorString() (foundation.BSTR, error) {
-	var _pVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeInstallDefaults dispatches through ICertificateEnrollmentServerSetup's vtable slot 8.
@@ -342,9 +342,9 @@ func (self *ICertificateEnrollmentServerSetup) InitializeInstallDefaults() error
 
 // GetProperty dispatches through ICertificateEnrollmentServerSetup's vtable slot 9.
 func (self *ICertificateEnrollmentServerSetup) GetProperty(propertyId CESSetupProperty) (systemvariant.VARIANT, error) {
-	var _pPropertyValue systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(propertyId), uintptr(unsafe.Pointer(&_pPropertyValue)))
-	return _pPropertyValue, win32.ErrIfFailed(int32(r1))
+	_pPropertyValue := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(propertyId), uintptr(win32.OutParam(unsafe.Pointer(_pPropertyValue))))
+	return *_pPropertyValue, win32.ErrIfFailed(int32(r1))
 }
 
 // SetProperty dispatches through ICertificateEnrollmentServerSetup's vtable slot 10.
@@ -382,16 +382,16 @@ var IID_IMSCEPSetup = win32.GUID{Data1: 0x4f7761bb, Data2: 0x9f3b, Data3: 0x4592
 
 // Get_MSCEPErrorId dispatches through IMSCEPSetup's vtable slot 7.
 func (self *IMSCEPSetup) Get_MSCEPErrorId() (int32, error) {
-	var _pVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MSCEPErrorString dispatches through IMSCEPSetup's vtable slot 8.
 func (self *IMSCEPSetup) Get_MSCEPErrorString() (foundation.BSTR, error) {
-	var _pVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // InitializeDefaults dispatches through IMSCEPSetup's vtable slot 9.
@@ -402,9 +402,9 @@ func (self *IMSCEPSetup) InitializeDefaults() error {
 
 // GetMSCEPSetupProperty dispatches through IMSCEPSetup's vtable slot 10.
 func (self *IMSCEPSetup) GetMSCEPSetupProperty(propertyId MSCEPSetupProperty) (systemvariant.VARIANT, error) {
-	var _pVal systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(propertyId), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(propertyId), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // SetMSCEPSetupProperty dispatches through IMSCEPSetup's vtable slot 11.
@@ -421,23 +421,23 @@ func (self *IMSCEPSetup) SetAccountInformation(bstrUserName foundation.BSTR, bst
 
 // IsMSCEPStoreEmpty dispatches through IMSCEPSetup's vtable slot 13.
 func (self *IMSCEPSetup) IsMSCEPStoreEmpty() (foundation.VARIANT_BOOL, error) {
-	var _pbEmpty foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbEmpty)))
-	return _pbEmpty, win32.ErrIfFailed(int32(r1))
+	_pbEmpty := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbEmpty))))
+	return *_pbEmpty, win32.ErrIfFailed(int32(r1))
 }
 
 // GetProviderNameList dispatches through IMSCEPSetup's vtable slot 14.
 func (self *IMSCEPSetup) GetProviderNameList(bExchange foundation.VARIANT_BOOL) (systemvariant.VARIANT, error) {
-	var _pVal systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(bExchange), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(bExchange), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetKeyLengthList dispatches through IMSCEPSetup's vtable slot 15.
 func (self *IMSCEPSetup) GetKeyLengthList(bExchange foundation.VARIANT_BOOL, bstrProviderName foundation.BSTR) (systemvariant.VARIANT, error) {
-	var _pVal systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(bExchange), uintptr(unsafe.Pointer(bstrProviderName)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(bExchange), uintptr(unsafe.Pointer(bstrProviderName)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Install dispatches through IMSCEPSetup's vtable slot 16.

@@ -194,23 +194,23 @@ var IID_ISClusApplication = win32.GUID{Data1: 0xf2e606e6, Data2: 0x2631, Data3: 
 
 // Get_DomainNames dispatches through ISClusApplication's vtable slot 7.
 func (self *ISClusApplication) Get_DomainNames() (*ISDomainNames, error) {
-	var _ppDomains *ISDomainNames
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppDomains)))
-	return _ppDomains, win32.ErrIfFailed(int32(r1))
+	_ppDomains := new(*ISDomainNames)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppDomains))))
+	return *_ppDomains, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ClusterNames dispatches through ISClusApplication's vtable slot 8.
 func (self *ISClusApplication) Get_ClusterNames(bstrDomainName foundation.BSTR) (*ISClusterNames, error) {
-	var _ppClusters *ISClusterNames
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDomainName)), uintptr(unsafe.Pointer(&_ppClusters)))
-	return _ppClusters, win32.ErrIfFailed(int32(r1))
+	_ppClusters := new(*ISClusterNames)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDomainName)), uintptr(win32.OutParam(unsafe.Pointer(_ppClusters))))
+	return *_ppClusters, win32.ErrIfFailed(int32(r1))
 }
 
 // OpenCluster dispatches through ISClusApplication's vtable slot 9.
 func (self *ISClusApplication) OpenCluster(bstrClusterName foundation.BSTR) (*ISCluster, error) {
-	var _pCluster *ISCluster
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrClusterName)), uintptr(unsafe.Pointer(&_pCluster)))
-	return _pCluster, win32.ErrIfFailed(int32(r1))
+	_pCluster := new(*ISCluster)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrClusterName)), uintptr(win32.OutParam(unsafe.Pointer(_pCluster))))
+	return *_pCluster, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f2e6072c-2631-11d1-89f1-00a0c90d061e
@@ -223,16 +223,16 @@ var IID_ISClusCryptoKeys = win32.GUID{Data1: 0xf2e6072c, Data2: 0x2631, Data3: 0
 
 // Get_Count dispatches through ISClusCryptoKeys's vtable slot 7.
 func (self *ISClusCryptoKeys) Get_Count() (int32, error) {
-	var _plCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
-	return _plCount, win32.ErrIfFailed(int32(r1))
+	_plCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plCount))))
+	return *_plCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusCryptoKeys's vtable slot 8.
 func (self *ISClusCryptoKeys) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through ISClusCryptoKeys's vtable slot 9.
@@ -257,30 +257,30 @@ var IID_ISClusDisk = win32.GUID{Data1: 0xf2e60724, Data2: 0x2631, Data3: 0x11d1,
 
 // Get_Signature dispatches through ISClusDisk's vtable slot 7.
 func (self *ISClusDisk) Get_Signature() (int32, error) {
-	var _plSignature int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plSignature)))
-	return _plSignature, win32.ErrIfFailed(int32(r1))
+	_plSignature := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plSignature))))
+	return *_plSignature, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ScsiAddress dispatches through ISClusDisk's vtable slot 8.
 func (self *ISClusDisk) Get_ScsiAddress() (*ISClusScsiAddress, error) {
-	var _ppScsiAddress *ISClusScsiAddress
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppScsiAddress)))
-	return _ppScsiAddress, win32.ErrIfFailed(int32(r1))
+	_ppScsiAddress := new(*ISClusScsiAddress)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppScsiAddress))))
+	return *_ppScsiAddress, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DiskNumber dispatches through ISClusDisk's vtable slot 9.
 func (self *ISClusDisk) Get_DiskNumber() (int32, error) {
-	var _plDiskNumber int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plDiskNumber)))
-	return _plDiskNumber, win32.ErrIfFailed(int32(r1))
+	_plDiskNumber := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plDiskNumber))))
+	return *_plDiskNumber, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Partitions dispatches through ISClusDisk's vtable slot 10.
 func (self *ISClusDisk) Get_Partitions() (*ISClusPartitions, error) {
-	var _ppPartitions *ISClusPartitions
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppPartitions)))
-	return _ppPartitions, win32.ErrIfFailed(int32(r1))
+	_ppPartitions := new(*ISClusPartitions)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppPartitions))))
+	return *_ppPartitions, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f2e60726-2631-11d1-89f1-00a0c90d061e
@@ -293,16 +293,16 @@ var IID_ISClusDisks = win32.GUID{Data1: 0xf2e60726, Data2: 0x2631, Data3: 0x11d1
 
 // Get_Count dispatches through ISClusDisks's vtable slot 7.
 func (self *ISClusDisks) Get_Count() (int32, error) {
-	var _plCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
-	return _plCount, win32.ErrIfFailed(int32(r1))
+	_plCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plCount))))
+	return *_plCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusDisks's vtable slot 8.
 func (self *ISClusDisks) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f2e606ee-2631-11d1-89f1-00a0c90d061e
@@ -315,58 +315,58 @@ var IID_ISClusNetInterface = win32.GUID{Data1: 0xf2e606ee, Data2: 0x2631, Data3:
 
 // Get_CommonProperties dispatches through ISClusNetInterface's vtable slot 7.
 func (self *ISClusNetInterface) Get_CommonProperties() (*ISClusProperties, error) {
-	var _ppProperties *ISClusProperties
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
-	return _ppProperties, win32.ErrIfFailed(int32(r1))
+	_ppProperties := new(*ISClusProperties)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppProperties))))
+	return *_ppProperties, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PrivateProperties dispatches through ISClusNetInterface's vtable slot 8.
 func (self *ISClusNetInterface) Get_PrivateProperties() (*ISClusProperties, error) {
-	var _ppProperties *ISClusProperties
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
-	return _ppProperties, win32.ErrIfFailed(int32(r1))
+	_ppProperties := new(*ISClusProperties)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppProperties))))
+	return *_ppProperties, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CommonROProperties dispatches through ISClusNetInterface's vtable slot 9.
 func (self *ISClusNetInterface) Get_CommonROProperties() (*ISClusProperties, error) {
-	var _ppProperties *ISClusProperties
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
-	return _ppProperties, win32.ErrIfFailed(int32(r1))
+	_ppProperties := new(*ISClusProperties)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppProperties))))
+	return *_ppProperties, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PrivateROProperties dispatches through ISClusNetInterface's vtable slot 10.
 func (self *ISClusNetInterface) Get_PrivateROProperties() (*ISClusProperties, error) {
-	var _ppProperties *ISClusProperties
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
-	return _ppProperties, win32.ErrIfFailed(int32(r1))
+	_ppProperties := new(*ISClusProperties)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppProperties))))
+	return *_ppProperties, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through ISClusNetInterface's vtable slot 11.
 func (self *ISClusNetInterface) Get_Name() (foundation.BSTR, error) {
-	var _pbstrName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrName)))
-	return _pbstrName, win32.ErrIfFailed(int32(r1))
+	_pbstrName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrName))))
+	return *_pbstrName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Handle dispatches through ISClusNetInterface's vtable slot 12.
 func (self *ISClusNetInterface) Get_Handle() (uintptr, error) {
-	var _phandle uintptr
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_phandle)))
-	return _phandle, win32.ErrIfFailed(int32(r1))
+	_phandle := new(uintptr)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_phandle))))
+	return *_phandle, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_State dispatches through ISClusNetInterface's vtable slot 13.
 func (self *ISClusNetInterface) Get_State() (CLUSTER_NETINTERFACE_STATE, error) {
-	var _dwState CLUSTER_NETINTERFACE_STATE
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_dwState)))
-	return _dwState, win32.ErrIfFailed(int32(r1))
+	_dwState := new(CLUSTER_NETINTERFACE_STATE)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_dwState))))
+	return *_dwState, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Cluster dispatches through ISClusNetInterface's vtable slot 14.
 func (self *ISClusNetInterface) Get_Cluster() (*ISCluster, error) {
-	var _ppCluster *ISCluster
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCluster)))
-	return _ppCluster, win32.ErrIfFailed(int32(r1))
+	_ppCluster := new(*ISCluster)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppCluster))))
+	return *_ppCluster, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f2e606f0-2631-11d1-89f1-00a0c90d061e
@@ -379,16 +379,16 @@ var IID_ISClusNetInterfaces = win32.GUID{Data1: 0xf2e606f0, Data2: 0x2631, Data3
 
 // Get_Count dispatches through ISClusNetInterfaces's vtable slot 7.
 func (self *ISClusNetInterfaces) Get_Count() (int32, error) {
-	var _plCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
-	return _plCount, win32.ErrIfFailed(int32(r1))
+	_plCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plCount))))
+	return *_plCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusNetInterfaces's vtable slot 8.
 func (self *ISClusNetInterfaces) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through ISClusNetInterfaces's vtable slot 9.
@@ -407,44 +407,44 @@ var IID_ISClusNetwork = win32.GUID{Data1: 0xf2e606f2, Data2: 0x2631, Data3: 0x11
 
 // Get_CommonProperties dispatches through ISClusNetwork's vtable slot 7.
 func (self *ISClusNetwork) Get_CommonProperties() (*ISClusProperties, error) {
-	var _ppProperties *ISClusProperties
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
-	return _ppProperties, win32.ErrIfFailed(int32(r1))
+	_ppProperties := new(*ISClusProperties)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppProperties))))
+	return *_ppProperties, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PrivateProperties dispatches through ISClusNetwork's vtable slot 8.
 func (self *ISClusNetwork) Get_PrivateProperties() (*ISClusProperties, error) {
-	var _ppProperties *ISClusProperties
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
-	return _ppProperties, win32.ErrIfFailed(int32(r1))
+	_ppProperties := new(*ISClusProperties)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppProperties))))
+	return *_ppProperties, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CommonROProperties dispatches through ISClusNetwork's vtable slot 9.
 func (self *ISClusNetwork) Get_CommonROProperties() (*ISClusProperties, error) {
-	var _ppProperties *ISClusProperties
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
-	return _ppProperties, win32.ErrIfFailed(int32(r1))
+	_ppProperties := new(*ISClusProperties)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppProperties))))
+	return *_ppProperties, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PrivateROProperties dispatches through ISClusNetwork's vtable slot 10.
 func (self *ISClusNetwork) Get_PrivateROProperties() (*ISClusProperties, error) {
-	var _ppProperties *ISClusProperties
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
-	return _ppProperties, win32.ErrIfFailed(int32(r1))
+	_ppProperties := new(*ISClusProperties)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppProperties))))
+	return *_ppProperties, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Handle dispatches through ISClusNetwork's vtable slot 11.
 func (self *ISClusNetwork) Get_Handle() (uintptr, error) {
-	var _phandle uintptr
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_phandle)))
-	return _phandle, win32.ErrIfFailed(int32(r1))
+	_phandle := new(uintptr)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_phandle))))
+	return *_phandle, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through ISClusNetwork's vtable slot 12.
 func (self *ISClusNetwork) Get_Name() (foundation.BSTR, error) {
-	var _pbstrName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrName)))
-	return _pbstrName, win32.ErrIfFailed(int32(r1))
+	_pbstrName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrName))))
+	return *_pbstrName, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Name dispatches through ISClusNetwork's vtable slot 13.
@@ -455,30 +455,30 @@ func (self *ISClusNetwork) Put_Name(bstrNetworkName foundation.BSTR) error {
 
 // Get_NetworkID dispatches through ISClusNetwork's vtable slot 14.
 func (self *ISClusNetwork) Get_NetworkID() (foundation.BSTR, error) {
-	var _pbstrNetworkID foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrNetworkID)))
-	return _pbstrNetworkID, win32.ErrIfFailed(int32(r1))
+	_pbstrNetworkID := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrNetworkID))))
+	return *_pbstrNetworkID, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_State dispatches through ISClusNetwork's vtable slot 15.
 func (self *ISClusNetwork) Get_State() (CLUSTER_NETWORK_STATE, error) {
-	var _dwState CLUSTER_NETWORK_STATE
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_dwState)))
-	return _dwState, win32.ErrIfFailed(int32(r1))
+	_dwState := new(CLUSTER_NETWORK_STATE)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_dwState))))
+	return *_dwState, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NetInterfaces dispatches through ISClusNetwork's vtable slot 16.
 func (self *ISClusNetwork) Get_NetInterfaces() (*ISClusNetworkNetInterfaces, error) {
-	var _ppClusNetInterfaces *ISClusNetworkNetInterfaces
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppClusNetInterfaces)))
-	return _ppClusNetInterfaces, win32.ErrIfFailed(int32(r1))
+	_ppClusNetInterfaces := new(*ISClusNetworkNetInterfaces)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppClusNetInterfaces))))
+	return *_ppClusNetInterfaces, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Cluster dispatches through ISClusNetwork's vtable slot 17.
 func (self *ISClusNetwork) Get_Cluster() (*ISCluster, error) {
-	var _ppCluster *ISCluster
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCluster)))
-	return _ppCluster, win32.ErrIfFailed(int32(r1))
+	_ppCluster := new(*ISCluster)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppCluster))))
+	return *_ppCluster, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f2e606f6-2631-11d1-89f1-00a0c90d061e
@@ -491,16 +491,16 @@ var IID_ISClusNetworkNetInterfaces = win32.GUID{Data1: 0xf2e606f6, Data2: 0x2631
 
 // Get_Count dispatches through ISClusNetworkNetInterfaces's vtable slot 7.
 func (self *ISClusNetworkNetInterfaces) Get_Count() (int32, error) {
-	var _plCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
-	return _plCount, win32.ErrIfFailed(int32(r1))
+	_plCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plCount))))
+	return *_plCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusNetworkNetInterfaces's vtable slot 8.
 func (self *ISClusNetworkNetInterfaces) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through ISClusNetworkNetInterfaces's vtable slot 9.
@@ -519,16 +519,16 @@ var IID_ISClusNetworks = win32.GUID{Data1: 0xf2e606f4, Data2: 0x2631, Data3: 0x1
 
 // Get_Count dispatches through ISClusNetworks's vtable slot 7.
 func (self *ISClusNetworks) Get_Count() (int32, error) {
-	var _plCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
-	return _plCount, win32.ErrIfFailed(int32(r1))
+	_plCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plCount))))
+	return *_plCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusNetworks's vtable slot 8.
 func (self *ISClusNetworks) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through ISClusNetworks's vtable slot 9.
@@ -547,58 +547,58 @@ var IID_ISClusNode = win32.GUID{Data1: 0xf2e606f8, Data2: 0x2631, Data3: 0x11d1,
 
 // Get_CommonProperties dispatches through ISClusNode's vtable slot 7.
 func (self *ISClusNode) Get_CommonProperties() (*ISClusProperties, error) {
-	var _ppProperties *ISClusProperties
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
-	return _ppProperties, win32.ErrIfFailed(int32(r1))
+	_ppProperties := new(*ISClusProperties)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppProperties))))
+	return *_ppProperties, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PrivateProperties dispatches through ISClusNode's vtable slot 8.
 func (self *ISClusNode) Get_PrivateProperties() (*ISClusProperties, error) {
-	var _ppProperties *ISClusProperties
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
-	return _ppProperties, win32.ErrIfFailed(int32(r1))
+	_ppProperties := new(*ISClusProperties)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppProperties))))
+	return *_ppProperties, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CommonROProperties dispatches through ISClusNode's vtable slot 9.
 func (self *ISClusNode) Get_CommonROProperties() (*ISClusProperties, error) {
-	var _ppProperties *ISClusProperties
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
-	return _ppProperties, win32.ErrIfFailed(int32(r1))
+	_ppProperties := new(*ISClusProperties)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppProperties))))
+	return *_ppProperties, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PrivateROProperties dispatches through ISClusNode's vtable slot 10.
 func (self *ISClusNode) Get_PrivateROProperties() (*ISClusProperties, error) {
-	var _ppProperties *ISClusProperties
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
-	return _ppProperties, win32.ErrIfFailed(int32(r1))
+	_ppProperties := new(*ISClusProperties)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppProperties))))
+	return *_ppProperties, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through ISClusNode's vtable slot 11.
 func (self *ISClusNode) Get_Name() (foundation.BSTR, error) {
-	var _pbstrName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrName)))
-	return _pbstrName, win32.ErrIfFailed(int32(r1))
+	_pbstrName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrName))))
+	return *_pbstrName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Handle dispatches through ISClusNode's vtable slot 12.
 func (self *ISClusNode) Get_Handle() (uintptr, error) {
-	var _phandle uintptr
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_phandle)))
-	return _phandle, win32.ErrIfFailed(int32(r1))
+	_phandle := new(uintptr)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_phandle))))
+	return *_phandle, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NodeID dispatches through ISClusNode's vtable slot 13.
 func (self *ISClusNode) Get_NodeID() (foundation.BSTR, error) {
-	var _pbstrNodeID foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrNodeID)))
-	return _pbstrNodeID, win32.ErrIfFailed(int32(r1))
+	_pbstrNodeID := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrNodeID))))
+	return *_pbstrNodeID, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_State dispatches through ISClusNode's vtable slot 14.
 func (self *ISClusNode) Get_State() (CLUSTER_NODE_STATE, error) {
-	var _dwState CLUSTER_NODE_STATE
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_dwState)))
-	return _dwState, win32.ErrIfFailed(int32(r1))
+	_dwState := new(CLUSTER_NODE_STATE)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_dwState))))
+	return *_dwState, win32.ErrIfFailed(int32(r1))
 }
 
 // Pause dispatches through ISClusNode's vtable slot 15.
@@ -621,23 +621,23 @@ func (self *ISClusNode) Evict() error {
 
 // Get_ResourceGroups dispatches through ISClusNode's vtable slot 18.
 func (self *ISClusNode) Get_ResourceGroups() (*ISClusResGroups, error) {
-	var _ppResourceGroups *ISClusResGroups
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppResourceGroups)))
-	return _ppResourceGroups, win32.ErrIfFailed(int32(r1))
+	_ppResourceGroups := new(*ISClusResGroups)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppResourceGroups))))
+	return *_ppResourceGroups, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Cluster dispatches through ISClusNode's vtable slot 19.
 func (self *ISClusNode) Get_Cluster() (*ISCluster, error) {
-	var _ppCluster *ISCluster
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCluster)))
-	return _ppCluster, win32.ErrIfFailed(int32(r1))
+	_ppCluster := new(*ISCluster)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppCluster))))
+	return *_ppCluster, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NetInterfaces dispatches through ISClusNode's vtable slot 20.
 func (self *ISClusNode) Get_NetInterfaces() (*ISClusNodeNetInterfaces, error) {
-	var _ppClusNetInterfaces *ISClusNodeNetInterfaces
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppClusNetInterfaces)))
-	return _ppClusNetInterfaces, win32.ErrIfFailed(int32(r1))
+	_ppClusNetInterfaces := new(*ISClusNodeNetInterfaces)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppClusNetInterfaces))))
+	return *_ppClusNetInterfaces, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f2e606fc-2631-11d1-89f1-00a0c90d061e
@@ -650,16 +650,16 @@ var IID_ISClusNodeNetInterfaces = win32.GUID{Data1: 0xf2e606fc, Data2: 0x2631, D
 
 // Get_Count dispatches through ISClusNodeNetInterfaces's vtable slot 7.
 func (self *ISClusNodeNetInterfaces) Get_Count() (int32, error) {
-	var _plCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
-	return _plCount, win32.ErrIfFailed(int32(r1))
+	_plCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plCount))))
+	return *_plCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusNodeNetInterfaces's vtable slot 8.
 func (self *ISClusNodeNetInterfaces) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through ISClusNodeNetInterfaces's vtable slot 9.
@@ -678,16 +678,16 @@ var IID_ISClusNodes = win32.GUID{Data1: 0xf2e606fa, Data2: 0x2631, Data3: 0x11d1
 
 // Get_Count dispatches through ISClusNodes's vtable slot 7.
 func (self *ISClusNodes) Get_Count() (int32, error) {
-	var _plCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
-	return _plCount, win32.ErrIfFailed(int32(r1))
+	_plCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plCount))))
+	return *_plCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusNodes's vtable slot 8.
 func (self *ISClusNodes) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through ISClusNodes's vtable slot 9.
@@ -706,51 +706,51 @@ var IID_ISClusPartition = win32.GUID{Data1: 0xf2e60720, Data2: 0x2631, Data3: 0x
 
 // Get_Flags dispatches through ISClusPartition's vtable slot 7.
 func (self *ISClusPartition) Get_Flags() (int32, error) {
-	var _plFlags int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plFlags)))
-	return _plFlags, win32.ErrIfFailed(int32(r1))
+	_plFlags := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plFlags))))
+	return *_plFlags, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DeviceName dispatches through ISClusPartition's vtable slot 8.
 func (self *ISClusPartition) Get_DeviceName() (foundation.BSTR, error) {
-	var _pbstrDeviceName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrDeviceName)))
-	return _pbstrDeviceName, win32.ErrIfFailed(int32(r1))
+	_pbstrDeviceName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrDeviceName))))
+	return *_pbstrDeviceName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_VolumeLabel dispatches through ISClusPartition's vtable slot 9.
 func (self *ISClusPartition) Get_VolumeLabel() (foundation.BSTR, error) {
-	var _pbstrVolumeLabel foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrVolumeLabel)))
-	return _pbstrVolumeLabel, win32.ErrIfFailed(int32(r1))
+	_pbstrVolumeLabel := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrVolumeLabel))))
+	return *_pbstrVolumeLabel, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SerialNumber dispatches through ISClusPartition's vtable slot 10.
 func (self *ISClusPartition) Get_SerialNumber() (int32, error) {
-	var _plSerialNumber int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plSerialNumber)))
-	return _plSerialNumber, win32.ErrIfFailed(int32(r1))
+	_plSerialNumber := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plSerialNumber))))
+	return *_plSerialNumber, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MaximumComponentLength dispatches through ISClusPartition's vtable slot 11.
 func (self *ISClusPartition) Get_MaximumComponentLength() (int32, error) {
-	var _plMaximumComponentLength int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plMaximumComponentLength)))
-	return _plMaximumComponentLength, win32.ErrIfFailed(int32(r1))
+	_plMaximumComponentLength := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plMaximumComponentLength))))
+	return *_plMaximumComponentLength, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FileSystemFlags dispatches through ISClusPartition's vtable slot 12.
 func (self *ISClusPartition) Get_FileSystemFlags() (int32, error) {
-	var _plFileSystemFlags int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plFileSystemFlags)))
-	return _plFileSystemFlags, win32.ErrIfFailed(int32(r1))
+	_plFileSystemFlags := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plFileSystemFlags))))
+	return *_plFileSystemFlags, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FileSystem dispatches through ISClusPartition's vtable slot 13.
 func (self *ISClusPartition) Get_FileSystem() (foundation.BSTR, error) {
-	var _pbstrFileSystem foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrFileSystem)))
-	return _pbstrFileSystem, win32.ErrIfFailed(int32(r1))
+	_pbstrFileSystem := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrFileSystem))))
+	return *_pbstrFileSystem, win32.ErrIfFailed(int32(r1))
 }
 
 // ISClusPartitionEx: https://learn.microsoft.com/windows/win32/api/msclus/nn-msclus-iscluspartitionex
@@ -764,37 +764,37 @@ var IID_ISClusPartitionEx = win32.GUID{Data1: 0x8802d4fe, Data2: 0xb32e, Data3: 
 
 // Get_TotalSize dispatches through ISClusPartitionEx's vtable slot 14.
 func (self *ISClusPartitionEx) Get_TotalSize() (int32, error) {
-	var _plTotalSize int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plTotalSize)))
-	return _plTotalSize, win32.ErrIfFailed(int32(r1))
+	_plTotalSize := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plTotalSize))))
+	return *_plTotalSize, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FreeSpace dispatches through ISClusPartitionEx's vtable slot 15.
 func (self *ISClusPartitionEx) Get_FreeSpace() (int32, error) {
-	var _plFreeSpace int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plFreeSpace)))
-	return _plFreeSpace, win32.ErrIfFailed(int32(r1))
+	_plFreeSpace := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plFreeSpace))))
+	return *_plFreeSpace, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DeviceNumber dispatches through ISClusPartitionEx's vtable slot 16.
 func (self *ISClusPartitionEx) Get_DeviceNumber() (int32, error) {
-	var _plDeviceNumber int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plDeviceNumber)))
-	return _plDeviceNumber, win32.ErrIfFailed(int32(r1))
+	_plDeviceNumber := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plDeviceNumber))))
+	return *_plDeviceNumber, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PartitionNumber dispatches through ISClusPartitionEx's vtable slot 17.
 func (self *ISClusPartitionEx) Get_PartitionNumber() (int32, error) {
-	var _plPartitionNumber int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plPartitionNumber)))
-	return _plPartitionNumber, win32.ErrIfFailed(int32(r1))
+	_plPartitionNumber := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plPartitionNumber))))
+	return *_plPartitionNumber, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_VolumeGuid dispatches through ISClusPartitionEx's vtable slot 18.
 func (self *ISClusPartitionEx) Get_VolumeGuid() (foundation.BSTR, error) {
-	var _pbstrVolumeGuid foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrVolumeGuid)))
-	return _pbstrVolumeGuid, win32.ErrIfFailed(int32(r1))
+	_pbstrVolumeGuid := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrVolumeGuid))))
+	return *_pbstrVolumeGuid, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f2e60722-2631-11d1-89f1-00a0c90d061e
@@ -807,16 +807,16 @@ var IID_ISClusPartitions = win32.GUID{Data1: 0xf2e60722, Data2: 0x2631, Data3: 0
 
 // Get_Count dispatches through ISClusPartitions's vtable slot 7.
 func (self *ISClusPartitions) Get_Count() (int32, error) {
-	var _plCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
-	return _plCount, win32.ErrIfFailed(int32(r1))
+	_plCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plCount))))
+	return *_plCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusPartitions's vtable slot 8.
 func (self *ISClusPartitions) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f2e60700-2631-11d1-89f1-00a0c90d061e
@@ -829,16 +829,16 @@ var IID_ISClusProperties = win32.GUID{Data1: 0xf2e60700, Data2: 0x2631, Data3: 0
 
 // Get_Count dispatches through ISClusProperties's vtable slot 7.
 func (self *ISClusProperties) Get_Count() (int32, error) {
-	var _plCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
-	return _plCount, win32.ErrIfFailed(int32(r1))
+	_plCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plCount))))
+	return *_plCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusProperties's vtable slot 8.
 func (self *ISClusProperties) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through ISClusProperties's vtable slot 9.
@@ -855,30 +855,30 @@ func (self *ISClusProperties) SaveChanges(pvarStatusCode *systemvariant.VARIANT)
 
 // Get_ReadOnly dispatches through ISClusProperties's vtable slot 14.
 func (self *ISClusProperties) Get_ReadOnly() (systemvariant.VARIANT, error) {
-	var _pvarReadOnly systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarReadOnly)))
-	return _pvarReadOnly, win32.ErrIfFailed(int32(r1))
+	_pvarReadOnly := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pvarReadOnly))))
+	return *_pvarReadOnly, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Private dispatches through ISClusProperties's vtable slot 15.
 func (self *ISClusProperties) Get_Private() (systemvariant.VARIANT, error) {
-	var _pvarPrivate systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarPrivate)))
-	return _pvarPrivate, win32.ErrIfFailed(int32(r1))
+	_pvarPrivate := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pvarPrivate))))
+	return *_pvarPrivate, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Common dispatches through ISClusProperties's vtable slot 16.
 func (self *ISClusProperties) Get_Common() (systemvariant.VARIANT, error) {
-	var _pvarCommon systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarCommon)))
-	return _pvarCommon, win32.ErrIfFailed(int32(r1))
+	_pvarCommon := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pvarCommon))))
+	return *_pvarCommon, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Modified dispatches through ISClusProperties's vtable slot 17.
 func (self *ISClusProperties) Get_Modified() (systemvariant.VARIANT, error) {
-	var _pvarModified systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarModified)))
-	return _pvarModified, win32.ErrIfFailed(int32(r1))
+	_pvarModified := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pvarModified))))
+	return *_pvarModified, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f2e606fe-2631-11d1-89f1-00a0c90d061e
@@ -891,44 +891,44 @@ var IID_ISClusProperty = win32.GUID{Data1: 0xf2e606fe, Data2: 0x2631, Data3: 0x1
 
 // Get_Name dispatches through ISClusProperty's vtable slot 7.
 func (self *ISClusProperty) Get_Name() (foundation.BSTR, error) {
-	var _pbstrName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrName)))
-	return _pbstrName, win32.ErrIfFailed(int32(r1))
+	_pbstrName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrName))))
+	return *_pbstrName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Length dispatches through ISClusProperty's vtable slot 8.
 func (self *ISClusProperty) Get_Length() (int32, error) {
-	var _pLength int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pLength)))
-	return _pLength, win32.ErrIfFailed(int32(r1))
+	_pLength := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pLength))))
+	return *_pLength, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ValueCount dispatches through ISClusProperty's vtable slot 9.
 func (self *ISClusProperty) Get_ValueCount() (int32, error) {
-	var _pCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pCount)))
-	return _pCount, win32.ErrIfFailed(int32(r1))
+	_pCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pCount))))
+	return *_pCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Values dispatches through ISClusProperty's vtable slot 10.
 func (self *ISClusProperty) Get_Values() (*ISClusPropertyValues, error) {
-	var _ppClusterPropertyValues *ISClusPropertyValues
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppClusterPropertyValues)))
-	return _ppClusterPropertyValues, win32.ErrIfFailed(int32(r1))
+	_ppClusterPropertyValues := new(*ISClusPropertyValues)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppClusterPropertyValues))))
+	return *_ppClusterPropertyValues, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Value dispatches through ISClusProperty's vtable slot 11.
 func (self *ISClusProperty) Get_Value() (systemvariant.VARIANT, error) {
-	var _pvarValue systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarValue)))
-	return _pvarValue, win32.ErrIfFailed(int32(r1))
+	_pvarValue := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pvarValue))))
+	return *_pvarValue, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Type dispatches through ISClusProperty's vtable slot 13.
 func (self *ISClusProperty) Get_Type() (CLUSTER_PROPERTY_TYPE, error) {
-	var _pType CLUSTER_PROPERTY_TYPE
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pType)))
-	return _pType, win32.ErrIfFailed(int32(r1))
+	_pType := new(CLUSTER_PROPERTY_TYPE)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pType))))
+	return *_pType, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Type dispatches through ISClusProperty's vtable slot 14.
@@ -939,9 +939,9 @@ func (self *ISClusProperty) Put_Type(Type CLUSTER_PROPERTY_TYPE) error {
 
 // Get_Format dispatches through ISClusProperty's vtable slot 15.
 func (self *ISClusProperty) Get_Format() (CLUSTER_PROPERTY_FORMAT, error) {
-	var _pFormat CLUSTER_PROPERTY_FORMAT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pFormat)))
-	return _pFormat, win32.ErrIfFailed(int32(r1))
+	_pFormat := new(CLUSTER_PROPERTY_FORMAT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pFormat))))
+	return *_pFormat, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Format dispatches through ISClusProperty's vtable slot 16.
@@ -952,30 +952,30 @@ func (self *ISClusProperty) Put_Format(Format CLUSTER_PROPERTY_FORMAT) error {
 
 // Get_ReadOnly dispatches through ISClusProperty's vtable slot 17.
 func (self *ISClusProperty) Get_ReadOnly() (systemvariant.VARIANT, error) {
-	var _pvarReadOnly systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarReadOnly)))
-	return _pvarReadOnly, win32.ErrIfFailed(int32(r1))
+	_pvarReadOnly := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pvarReadOnly))))
+	return *_pvarReadOnly, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Private dispatches through ISClusProperty's vtable slot 18.
 func (self *ISClusProperty) Get_Private() (systemvariant.VARIANT, error) {
-	var _pvarPrivate systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarPrivate)))
-	return _pvarPrivate, win32.ErrIfFailed(int32(r1))
+	_pvarPrivate := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pvarPrivate))))
+	return *_pvarPrivate, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Common dispatches through ISClusProperty's vtable slot 19.
 func (self *ISClusProperty) Get_Common() (systemvariant.VARIANT, error) {
-	var _pvarCommon systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarCommon)))
-	return _pvarCommon, win32.ErrIfFailed(int32(r1))
+	_pvarCommon := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pvarCommon))))
+	return *_pvarCommon, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Modified dispatches through ISClusProperty's vtable slot 20.
 func (self *ISClusProperty) Get_Modified() (systemvariant.VARIANT, error) {
-	var _pvarModified systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarModified)))
-	return _pvarModified, win32.ErrIfFailed(int32(r1))
+	_pvarModified := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pvarModified))))
+	return *_pvarModified, win32.ErrIfFailed(int32(r1))
 }
 
 // UseDefaultValue dispatches through ISClusProperty's vtable slot 21.
@@ -994,16 +994,16 @@ var IID_ISClusPropertyValue = win32.GUID{Data1: 0xf2e6071a, Data2: 0x2631, Data3
 
 // Get_Value dispatches through ISClusPropertyValue's vtable slot 7.
 func (self *ISClusPropertyValue) Get_Value() (systemvariant.VARIANT, error) {
-	var _pvarValue systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarValue)))
-	return _pvarValue, win32.ErrIfFailed(int32(r1))
+	_pvarValue := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pvarValue))))
+	return *_pvarValue, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Type dispatches through ISClusPropertyValue's vtable slot 9.
 func (self *ISClusPropertyValue) Get_Type() (CLUSTER_PROPERTY_TYPE, error) {
-	var _pType CLUSTER_PROPERTY_TYPE
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pType)))
-	return _pType, win32.ErrIfFailed(int32(r1))
+	_pType := new(CLUSTER_PROPERTY_TYPE)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pType))))
+	return *_pType, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Type dispatches through ISClusPropertyValue's vtable slot 10.
@@ -1014,9 +1014,9 @@ func (self *ISClusPropertyValue) Put_Type(Type CLUSTER_PROPERTY_TYPE) error {
 
 // Get_Format dispatches through ISClusPropertyValue's vtable slot 11.
 func (self *ISClusPropertyValue) Get_Format() (CLUSTER_PROPERTY_FORMAT, error) {
-	var _pFormat CLUSTER_PROPERTY_FORMAT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pFormat)))
-	return _pFormat, win32.ErrIfFailed(int32(r1))
+	_pFormat := new(CLUSTER_PROPERTY_FORMAT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pFormat))))
+	return *_pFormat, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Format dispatches through ISClusPropertyValue's vtable slot 12.
@@ -1027,23 +1027,23 @@ func (self *ISClusPropertyValue) Put_Format(Format CLUSTER_PROPERTY_FORMAT) erro
 
 // Get_Length dispatches through ISClusPropertyValue's vtable slot 13.
 func (self *ISClusPropertyValue) Get_Length() (int32, error) {
-	var _pLength int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pLength)))
-	return _pLength, win32.ErrIfFailed(int32(r1))
+	_pLength := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pLength))))
+	return *_pLength, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DataCount dispatches through ISClusPropertyValue's vtable slot 14.
 func (self *ISClusPropertyValue) Get_DataCount() (int32, error) {
-	var _pCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pCount)))
-	return _pCount, win32.ErrIfFailed(int32(r1))
+	_pCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pCount))))
+	return *_pCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Data dispatches through ISClusPropertyValue's vtable slot 15.
 func (self *ISClusPropertyValue) Get_Data() (*ISClusPropertyValueData, error) {
-	var _ppClusterPropertyValueData *ISClusPropertyValueData
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppClusterPropertyValueData)))
-	return _ppClusterPropertyValueData, win32.ErrIfFailed(int32(r1))
+	_ppClusterPropertyValueData := new(*ISClusPropertyValueData)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppClusterPropertyValueData))))
+	return *_ppClusterPropertyValueData, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f2e6071e-2631-11d1-89f1-00a0c90d061e
@@ -1056,16 +1056,16 @@ var IID_ISClusPropertyValueData = win32.GUID{Data1: 0xf2e6071e, Data2: 0x2631, D
 
 // Get_Count dispatches through ISClusPropertyValueData's vtable slot 7.
 func (self *ISClusPropertyValueData) Get_Count() (int32, error) {
-	var _plCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
-	return _plCount, win32.ErrIfFailed(int32(r1))
+	_plCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plCount))))
+	return *_plCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusPropertyValueData's vtable slot 8.
 func (self *ISClusPropertyValueData) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f2e6071c-2631-11d1-89f1-00a0c90d061e
@@ -1078,16 +1078,16 @@ var IID_ISClusPropertyValues = win32.GUID{Data1: 0xf2e6071c, Data2: 0x2631, Data
 
 // Get_Count dispatches through ISClusPropertyValues's vtable slot 7.
 func (self *ISClusPropertyValues) Get_Count() (int32, error) {
-	var _plCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
-	return _plCount, win32.ErrIfFailed(int32(r1))
+	_plCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plCount))))
+	return *_plCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusPropertyValues's vtable slot 8.
 func (self *ISClusPropertyValues) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f2e60702-2631-11d1-89f1-00a0c90d061e
@@ -1100,9 +1100,9 @@ var IID_ISClusRefObject = win32.GUID{Data1: 0xf2e60702, Data2: 0x2631, Data3: 0x
 
 // Get_Handle dispatches through ISClusRefObject's vtable slot 7.
 func (self *ISClusRefObject) Get_Handle() (uintptr, error) {
-	var _phandle uintptr
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_phandle)))
-	return _phandle, win32.ErrIfFailed(int32(r1))
+	_phandle := new(uintptr)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_phandle))))
+	return *_phandle, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f2e6072a-2631-11d1-89f1-00a0c90d061e
@@ -1115,16 +1115,16 @@ var IID_ISClusRegistryKeys = win32.GUID{Data1: 0xf2e6072a, Data2: 0x2631, Data3:
 
 // Get_Count dispatches through ISClusRegistryKeys's vtable slot 7.
 func (self *ISClusRegistryKeys) Get_Count() (int32, error) {
-	var _plCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
-	return _plCount, win32.ErrIfFailed(int32(r1))
+	_plCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plCount))))
+	return *_plCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusRegistryKeys's vtable slot 8.
 func (self *ISClusRegistryKeys) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through ISClusRegistryKeys's vtable slot 9.
@@ -1149,16 +1149,16 @@ var IID_ISClusResDependencies = win32.GUID{Data1: 0xf2e60704, Data2: 0x2631, Dat
 
 // Get_Count dispatches through ISClusResDependencies's vtable slot 7.
 func (self *ISClusResDependencies) Get_Count() (int32, error) {
-	var _plCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
-	return _plCount, win32.ErrIfFailed(int32(r1))
+	_plCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plCount))))
+	return *_plCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusResDependencies's vtable slot 8.
 func (self *ISClusResDependencies) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through ISClusResDependencies's vtable slot 9.
@@ -1169,9 +1169,9 @@ func (self *ISClusResDependencies) Refresh() error {
 
 // CreateItem dispatches through ISClusResDependencies's vtable slot 11.
 func (self *ISClusResDependencies) CreateItem(bstrResourceName foundation.BSTR, bstrResourceType foundation.BSTR, dwFlags CLUSTER_RESOURCE_CREATE_FLAGS) (*ISClusResource, error) {
-	var _ppClusterResource *ISClusResource
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrResourceName)), uintptr(unsafe.Pointer(bstrResourceType)), uintptr(dwFlags), uintptr(unsafe.Pointer(&_ppClusterResource)))
-	return _ppClusterResource, win32.ErrIfFailed(int32(r1))
+	_ppClusterResource := new(*ISClusResource)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrResourceName)), uintptr(unsafe.Pointer(bstrResourceType)), uintptr(dwFlags), uintptr(win32.OutParam(unsafe.Pointer(_ppClusterResource))))
+	return *_ppClusterResource, win32.ErrIfFailed(int32(r1))
 }
 
 // AddItem dispatches through ISClusResDependencies's vtable slot 13.
@@ -1190,16 +1190,16 @@ var IID_ISClusResDependents = win32.GUID{Data1: 0xf2e6072e, Data2: 0x2631, Data3
 
 // Get_Count dispatches through ISClusResDependents's vtable slot 7.
 func (self *ISClusResDependents) Get_Count() (int32, error) {
-	var _plCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
-	return _plCount, win32.ErrIfFailed(int32(r1))
+	_plCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plCount))))
+	return *_plCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusResDependents's vtable slot 8.
 func (self *ISClusResDependents) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through ISClusResDependents's vtable slot 9.
@@ -1210,9 +1210,9 @@ func (self *ISClusResDependents) Refresh() error {
 
 // CreateItem dispatches through ISClusResDependents's vtable slot 11.
 func (self *ISClusResDependents) CreateItem(bstrResourceName foundation.BSTR, bstrResourceType foundation.BSTR, dwFlags CLUSTER_RESOURCE_CREATE_FLAGS) (*ISClusResource, error) {
-	var _ppClusterResource *ISClusResource
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrResourceName)), uintptr(unsafe.Pointer(bstrResourceType)), uintptr(dwFlags), uintptr(unsafe.Pointer(&_ppClusterResource)))
-	return _ppClusterResource, win32.ErrIfFailed(int32(r1))
+	_ppClusterResource := new(*ISClusResource)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrResourceName)), uintptr(unsafe.Pointer(bstrResourceType)), uintptr(dwFlags), uintptr(win32.OutParam(unsafe.Pointer(_ppClusterResource))))
+	return *_ppClusterResource, win32.ErrIfFailed(int32(r1))
 }
 
 // AddItem dispatches through ISClusResDependents's vtable slot 13.
@@ -1231,44 +1231,44 @@ var IID_ISClusResGroup = win32.GUID{Data1: 0xf2e60706, Data2: 0x2631, Data3: 0x1
 
 // Get_CommonProperties dispatches through ISClusResGroup's vtable slot 7.
 func (self *ISClusResGroup) Get_CommonProperties() (*ISClusProperties, error) {
-	var _ppProperties *ISClusProperties
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
-	return _ppProperties, win32.ErrIfFailed(int32(r1))
+	_ppProperties := new(*ISClusProperties)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppProperties))))
+	return *_ppProperties, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PrivateProperties dispatches through ISClusResGroup's vtable slot 8.
 func (self *ISClusResGroup) Get_PrivateProperties() (*ISClusProperties, error) {
-	var _ppProperties *ISClusProperties
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
-	return _ppProperties, win32.ErrIfFailed(int32(r1))
+	_ppProperties := new(*ISClusProperties)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppProperties))))
+	return *_ppProperties, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CommonROProperties dispatches through ISClusResGroup's vtable slot 9.
 func (self *ISClusResGroup) Get_CommonROProperties() (*ISClusProperties, error) {
-	var _ppProperties *ISClusProperties
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
-	return _ppProperties, win32.ErrIfFailed(int32(r1))
+	_ppProperties := new(*ISClusProperties)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppProperties))))
+	return *_ppProperties, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PrivateROProperties dispatches through ISClusResGroup's vtable slot 10.
 func (self *ISClusResGroup) Get_PrivateROProperties() (*ISClusProperties, error) {
-	var _ppProperties *ISClusProperties
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
-	return _ppProperties, win32.ErrIfFailed(int32(r1))
+	_ppProperties := new(*ISClusProperties)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppProperties))))
+	return *_ppProperties, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Handle dispatches through ISClusResGroup's vtable slot 11.
 func (self *ISClusResGroup) Get_Handle() (uintptr, error) {
-	var _phandle uintptr
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_phandle)))
-	return _phandle, win32.ErrIfFailed(int32(r1))
+	_phandle := new(uintptr)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_phandle))))
+	return *_phandle, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through ISClusResGroup's vtable slot 12.
 func (self *ISClusResGroup) Get_Name() (foundation.BSTR, error) {
-	var _pbstrName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrName)))
-	return _pbstrName, win32.ErrIfFailed(int32(r1))
+	_pbstrName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrName))))
+	return *_pbstrName, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Name dispatches through ISClusResGroup's vtable slot 13.
@@ -1279,30 +1279,30 @@ func (self *ISClusResGroup) Put_Name(bstrGroupName foundation.BSTR) error {
 
 // Get_State dispatches through ISClusResGroup's vtable slot 14.
 func (self *ISClusResGroup) Get_State() (CLUSTER_GROUP_STATE, error) {
-	var _dwState CLUSTER_GROUP_STATE
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_dwState)))
-	return _dwState, win32.ErrIfFailed(int32(r1))
+	_dwState := new(CLUSTER_GROUP_STATE)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_dwState))))
+	return *_dwState, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OwnerNode dispatches through ISClusResGroup's vtable slot 15.
 func (self *ISClusResGroup) Get_OwnerNode() (*ISClusNode, error) {
-	var _ppOwnerNode *ISClusNode
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppOwnerNode)))
-	return _ppOwnerNode, win32.ErrIfFailed(int32(r1))
+	_ppOwnerNode := new(*ISClusNode)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppOwnerNode))))
+	return *_ppOwnerNode, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Resources dispatches through ISClusResGroup's vtable slot 16.
 func (self *ISClusResGroup) Get_Resources() (*ISClusResGroupResources, error) {
-	var _ppClusterGroupResources *ISClusResGroupResources
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppClusterGroupResources)))
-	return _ppClusterGroupResources, win32.ErrIfFailed(int32(r1))
+	_ppClusterGroupResources := new(*ISClusResGroupResources)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppClusterGroupResources))))
+	return *_ppClusterGroupResources, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PreferredOwnerNodes dispatches through ISClusResGroup's vtable slot 17.
 func (self *ISClusResGroup) Get_PreferredOwnerNodes() (*ISClusResGroupPreferredOwnerNodes, error) {
-	var _ppOwnerNodes *ISClusResGroupPreferredOwnerNodes
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppOwnerNodes)))
-	return _ppOwnerNodes, win32.ErrIfFailed(int32(r1))
+	_ppOwnerNodes := new(*ISClusResGroupPreferredOwnerNodes)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppOwnerNodes))))
+	return *_ppOwnerNodes, win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through ISClusResGroup's vtable slot 18.
@@ -1313,9 +1313,9 @@ func (self *ISClusResGroup) Delete() error {
 
 // Get_Cluster dispatches through ISClusResGroup's vtable slot 22.
 func (self *ISClusResGroup) Get_Cluster() (*ISCluster, error) {
-	var _ppCluster *ISCluster
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCluster)))
-	return _ppCluster, win32.ErrIfFailed(int32(r1))
+	_ppCluster := new(*ISCluster)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppCluster))))
+	return *_ppCluster, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f2e606e8-2631-11d1-89f1-00a0c90d061e
@@ -1328,16 +1328,16 @@ var IID_ISClusResGroupPreferredOwnerNodes = win32.GUID{Data1: 0xf2e606e8, Data2:
 
 // Get_Count dispatches through ISClusResGroupPreferredOwnerNodes's vtable slot 7.
 func (self *ISClusResGroupPreferredOwnerNodes) Get_Count() (int32, error) {
-	var _plCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
-	return _plCount, win32.ErrIfFailed(int32(r1))
+	_plCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plCount))))
+	return *_plCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusResGroupPreferredOwnerNodes's vtable slot 8.
 func (self *ISClusResGroupPreferredOwnerNodes) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through ISClusResGroupPreferredOwnerNodes's vtable slot 9.
@@ -1354,9 +1354,9 @@ func (self *ISClusResGroupPreferredOwnerNodes) InsertItem(pNode *ISClusNode, nPo
 
 // Get_Modified dispatches through ISClusResGroupPreferredOwnerNodes's vtable slot 13.
 func (self *ISClusResGroupPreferredOwnerNodes) Get_Modified() (systemvariant.VARIANT, error) {
-	var _pvarModified systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarModified)))
-	return _pvarModified, win32.ErrIfFailed(int32(r1))
+	_pvarModified := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pvarModified))))
+	return *_pvarModified, win32.ErrIfFailed(int32(r1))
 }
 
 // SaveChanges dispatches through ISClusResGroupPreferredOwnerNodes's vtable slot 14.
@@ -1381,16 +1381,16 @@ var IID_ISClusResGroupResources = win32.GUID{Data1: 0xf2e606ea, Data2: 0x2631, D
 
 // Get_Count dispatches through ISClusResGroupResources's vtable slot 7.
 func (self *ISClusResGroupResources) Get_Count() (int32, error) {
-	var _plCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
-	return _plCount, win32.ErrIfFailed(int32(r1))
+	_plCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plCount))))
+	return *_plCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusResGroupResources's vtable slot 8.
 func (self *ISClusResGroupResources) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through ISClusResGroupResources's vtable slot 9.
@@ -1401,9 +1401,9 @@ func (self *ISClusResGroupResources) Refresh() error {
 
 // CreateItem dispatches through ISClusResGroupResources's vtable slot 11.
 func (self *ISClusResGroupResources) CreateItem(bstrResourceName foundation.BSTR, bstrResourceType foundation.BSTR, dwFlags CLUSTER_RESOURCE_CREATE_FLAGS) (*ISClusResource, error) {
-	var _ppClusterResource *ISClusResource
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrResourceName)), uintptr(unsafe.Pointer(bstrResourceType)), uintptr(dwFlags), uintptr(unsafe.Pointer(&_ppClusterResource)))
-	return _ppClusterResource, win32.ErrIfFailed(int32(r1))
+	_ppClusterResource := new(*ISClusResource)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrResourceName)), uintptr(unsafe.Pointer(bstrResourceType)), uintptr(dwFlags), uintptr(win32.OutParam(unsafe.Pointer(_ppClusterResource))))
+	return *_ppClusterResource, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f2e60708-2631-11d1-89f1-00a0c90d061e
@@ -1416,16 +1416,16 @@ var IID_ISClusResGroups = win32.GUID{Data1: 0xf2e60708, Data2: 0x2631, Data3: 0x
 
 // Get_Count dispatches through ISClusResGroups's vtable slot 7.
 func (self *ISClusResGroups) Get_Count() (int32, error) {
-	var _plCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
-	return _plCount, win32.ErrIfFailed(int32(r1))
+	_plCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plCount))))
+	return *_plCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusResGroups's vtable slot 8.
 func (self *ISClusResGroups) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through ISClusResGroups's vtable slot 9.
@@ -1436,9 +1436,9 @@ func (self *ISClusResGroups) Refresh() error {
 
 // CreateItem dispatches through ISClusResGroups's vtable slot 11.
 func (self *ISClusResGroups) CreateItem(bstrResourceGroupName foundation.BSTR) (*ISClusResGroup, error) {
-	var _ppResourceGroup *ISClusResGroup
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrResourceGroupName)), uintptr(unsafe.Pointer(&_ppResourceGroup)))
-	return _ppResourceGroup, win32.ErrIfFailed(int32(r1))
+	_ppResourceGroup := new(*ISClusResGroup)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrResourceGroupName)), uintptr(win32.OutParam(unsafe.Pointer(_ppResourceGroup))))
+	return *_ppResourceGroup, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f2e6070e-2631-11d1-89f1-00a0c90d061e
@@ -1451,16 +1451,16 @@ var IID_ISClusResPossibleOwnerNodes = win32.GUID{Data1: 0xf2e6070e, Data2: 0x263
 
 // Get_Count dispatches through ISClusResPossibleOwnerNodes's vtable slot 7.
 func (self *ISClusResPossibleOwnerNodes) Get_Count() (int32, error) {
-	var _plCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
-	return _plCount, win32.ErrIfFailed(int32(r1))
+	_plCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plCount))))
+	return *_plCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusResPossibleOwnerNodes's vtable slot 8.
 func (self *ISClusResPossibleOwnerNodes) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through ISClusResPossibleOwnerNodes's vtable slot 9.
@@ -1477,9 +1477,9 @@ func (self *ISClusResPossibleOwnerNodes) AddItem(pNode *ISClusNode) error {
 
 // Get_Modified dispatches through ISClusResPossibleOwnerNodes's vtable slot 13.
 func (self *ISClusResPossibleOwnerNodes) Get_Modified() (systemvariant.VARIANT, error) {
-	var _pvarModified systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarModified)))
-	return _pvarModified, win32.ErrIfFailed(int32(r1))
+	_pvarModified := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pvarModified))))
+	return *_pvarModified, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f2e60710-2631-11d1-89f1-00a0c90d061e
@@ -1492,37 +1492,37 @@ var IID_ISClusResType = win32.GUID{Data1: 0xf2e60710, Data2: 0x2631, Data3: 0x11
 
 // Get_CommonProperties dispatches through ISClusResType's vtable slot 7.
 func (self *ISClusResType) Get_CommonProperties() (*ISClusProperties, error) {
-	var _ppProperties *ISClusProperties
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
-	return _ppProperties, win32.ErrIfFailed(int32(r1))
+	_ppProperties := new(*ISClusProperties)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppProperties))))
+	return *_ppProperties, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PrivateProperties dispatches through ISClusResType's vtable slot 8.
 func (self *ISClusResType) Get_PrivateProperties() (*ISClusProperties, error) {
-	var _ppProperties *ISClusProperties
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
-	return _ppProperties, win32.ErrIfFailed(int32(r1))
+	_ppProperties := new(*ISClusProperties)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppProperties))))
+	return *_ppProperties, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CommonROProperties dispatches through ISClusResType's vtable slot 9.
 func (self *ISClusResType) Get_CommonROProperties() (*ISClusProperties, error) {
-	var _ppProperties *ISClusProperties
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
-	return _ppProperties, win32.ErrIfFailed(int32(r1))
+	_ppProperties := new(*ISClusProperties)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppProperties))))
+	return *_ppProperties, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PrivateROProperties dispatches through ISClusResType's vtable slot 10.
 func (self *ISClusResType) Get_PrivateROProperties() (*ISClusProperties, error) {
-	var _ppProperties *ISClusProperties
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
-	return _ppProperties, win32.ErrIfFailed(int32(r1))
+	_ppProperties := new(*ISClusProperties)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppProperties))))
+	return *_ppProperties, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through ISClusResType's vtable slot 11.
 func (self *ISClusResType) Get_Name() (foundation.BSTR, error) {
-	var _pbstrName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrName)))
-	return _pbstrName, win32.ErrIfFailed(int32(r1))
+	_pbstrName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrName))))
+	return *_pbstrName, win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through ISClusResType's vtable slot 12.
@@ -1533,30 +1533,30 @@ func (self *ISClusResType) Delete() error {
 
 // Get_Cluster dispatches through ISClusResType's vtable slot 13.
 func (self *ISClusResType) Get_Cluster() (*ISCluster, error) {
-	var _ppCluster *ISCluster
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCluster)))
-	return _ppCluster, win32.ErrIfFailed(int32(r1))
+	_ppCluster := new(*ISCluster)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppCluster))))
+	return *_ppCluster, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Resources dispatches through ISClusResType's vtable slot 14.
 func (self *ISClusResType) Get_Resources() (*ISClusResTypeResources, error) {
-	var _ppClusterResTypeResources *ISClusResTypeResources
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppClusterResTypeResources)))
-	return _ppClusterResTypeResources, win32.ErrIfFailed(int32(r1))
+	_ppClusterResTypeResources := new(*ISClusResTypeResources)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppClusterResTypeResources))))
+	return *_ppClusterResTypeResources, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PossibleOwnerNodes dispatches through ISClusResType's vtable slot 15.
 func (self *ISClusResType) Get_PossibleOwnerNodes() (*ISClusResTypePossibleOwnerNodes, error) {
-	var _ppOwnerNodes *ISClusResTypePossibleOwnerNodes
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppOwnerNodes)))
-	return _ppOwnerNodes, win32.ErrIfFailed(int32(r1))
+	_ppOwnerNodes := new(*ISClusResTypePossibleOwnerNodes)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppOwnerNodes))))
+	return *_ppOwnerNodes, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AvailableDisks dispatches through ISClusResType's vtable slot 16.
 func (self *ISClusResType) Get_AvailableDisks() (*ISClusDisks, error) {
-	var _ppAvailableDisks *ISClusDisks
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppAvailableDisks)))
-	return _ppAvailableDisks, win32.ErrIfFailed(int32(r1))
+	_ppAvailableDisks := new(*ISClusDisks)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppAvailableDisks))))
+	return *_ppAvailableDisks, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f2e60718-2631-11d1-89f1-00a0c90d061e
@@ -1569,16 +1569,16 @@ var IID_ISClusResTypePossibleOwnerNodes = win32.GUID{Data1: 0xf2e60718, Data2: 0
 
 // Get_Count dispatches through ISClusResTypePossibleOwnerNodes's vtable slot 7.
 func (self *ISClusResTypePossibleOwnerNodes) Get_Count() (int32, error) {
-	var _plCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
-	return _plCount, win32.ErrIfFailed(int32(r1))
+	_plCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plCount))))
+	return *_plCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusResTypePossibleOwnerNodes's vtable slot 8.
 func (self *ISClusResTypePossibleOwnerNodes) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through ISClusResTypePossibleOwnerNodes's vtable slot 9.
@@ -1597,16 +1597,16 @@ var IID_ISClusResTypeResources = win32.GUID{Data1: 0xf2e60714, Data2: 0x2631, Da
 
 // Get_Count dispatches through ISClusResTypeResources's vtable slot 7.
 func (self *ISClusResTypeResources) Get_Count() (int32, error) {
-	var _plCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
-	return _plCount, win32.ErrIfFailed(int32(r1))
+	_plCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plCount))))
+	return *_plCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusResTypeResources's vtable slot 8.
 func (self *ISClusResTypeResources) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through ISClusResTypeResources's vtable slot 9.
@@ -1617,9 +1617,9 @@ func (self *ISClusResTypeResources) Refresh() error {
 
 // CreateItem dispatches through ISClusResTypeResources's vtable slot 11.
 func (self *ISClusResTypeResources) CreateItem(bstrResourceName foundation.BSTR, bstrGroupName foundation.BSTR, dwFlags CLUSTER_RESOURCE_CREATE_FLAGS) (*ISClusResource, error) {
-	var _ppClusterResource *ISClusResource
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrResourceName)), uintptr(unsafe.Pointer(bstrGroupName)), uintptr(dwFlags), uintptr(unsafe.Pointer(&_ppClusterResource)))
-	return _ppClusterResource, win32.ErrIfFailed(int32(r1))
+	_ppClusterResource := new(*ISClusResource)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrResourceName)), uintptr(unsafe.Pointer(bstrGroupName)), uintptr(dwFlags), uintptr(win32.OutParam(unsafe.Pointer(_ppClusterResource))))
+	return *_ppClusterResource, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f2e60712-2631-11d1-89f1-00a0c90d061e
@@ -1632,16 +1632,16 @@ var IID_ISClusResTypes = win32.GUID{Data1: 0xf2e60712, Data2: 0x2631, Data3: 0x1
 
 // Get_Count dispatches through ISClusResTypes's vtable slot 7.
 func (self *ISClusResTypes) Get_Count() (int32, error) {
-	var _plCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
-	return _plCount, win32.ErrIfFailed(int32(r1))
+	_plCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plCount))))
+	return *_plCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusResTypes's vtable slot 8.
 func (self *ISClusResTypes) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through ISClusResTypes's vtable slot 9.
@@ -1652,9 +1652,9 @@ func (self *ISClusResTypes) Refresh() error {
 
 // CreateItem dispatches through ISClusResTypes's vtable slot 11.
 func (self *ISClusResTypes) CreateItem(bstrResourceTypeName foundation.BSTR, bstrDisplayName foundation.BSTR, bstrResourceTypeDll foundation.BSTR, dwLooksAlivePollInterval int32, dwIsAlivePollInterval int32) (*ISClusResType, error) {
-	var _ppResourceType *ISClusResType
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrResourceTypeName)), uintptr(unsafe.Pointer(bstrDisplayName)), uintptr(unsafe.Pointer(bstrResourceTypeDll)), uintptr(dwLooksAlivePollInterval), uintptr(dwIsAlivePollInterval), uintptr(unsafe.Pointer(&_ppResourceType)))
-	return _ppResourceType, win32.ErrIfFailed(int32(r1))
+	_ppResourceType := new(*ISClusResType)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrResourceTypeName)), uintptr(unsafe.Pointer(bstrDisplayName)), uintptr(unsafe.Pointer(bstrResourceTypeDll)), uintptr(dwLooksAlivePollInterval), uintptr(dwIsAlivePollInterval), uintptr(win32.OutParam(unsafe.Pointer(_ppResourceType))))
+	return *_ppResourceType, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f2e6070a-2631-11d1-89f1-00a0c90d061e
@@ -1667,44 +1667,44 @@ var IID_ISClusResource = win32.GUID{Data1: 0xf2e6070a, Data2: 0x2631, Data3: 0x1
 
 // Get_CommonProperties dispatches through ISClusResource's vtable slot 7.
 func (self *ISClusResource) Get_CommonProperties() (*ISClusProperties, error) {
-	var _ppProperties *ISClusProperties
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
-	return _ppProperties, win32.ErrIfFailed(int32(r1))
+	_ppProperties := new(*ISClusProperties)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppProperties))))
+	return *_ppProperties, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PrivateProperties dispatches through ISClusResource's vtable slot 8.
 func (self *ISClusResource) Get_PrivateProperties() (*ISClusProperties, error) {
-	var _ppProperties *ISClusProperties
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
-	return _ppProperties, win32.ErrIfFailed(int32(r1))
+	_ppProperties := new(*ISClusProperties)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppProperties))))
+	return *_ppProperties, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CommonROProperties dispatches through ISClusResource's vtable slot 9.
 func (self *ISClusResource) Get_CommonROProperties() (*ISClusProperties, error) {
-	var _ppProperties *ISClusProperties
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
-	return _ppProperties, win32.ErrIfFailed(int32(r1))
+	_ppProperties := new(*ISClusProperties)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppProperties))))
+	return *_ppProperties, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PrivateROProperties dispatches through ISClusResource's vtable slot 10.
 func (self *ISClusResource) Get_PrivateROProperties() (*ISClusProperties, error) {
-	var _ppProperties *ISClusProperties
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
-	return _ppProperties, win32.ErrIfFailed(int32(r1))
+	_ppProperties := new(*ISClusProperties)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppProperties))))
+	return *_ppProperties, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Handle dispatches through ISClusResource's vtable slot 11.
 func (self *ISClusResource) Get_Handle() (uintptr, error) {
-	var _phandle uintptr
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_phandle)))
-	return _phandle, win32.ErrIfFailed(int32(r1))
+	_phandle := new(uintptr)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_phandle))))
+	return *_phandle, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through ISClusResource's vtable slot 12.
 func (self *ISClusResource) Get_Name() (foundation.BSTR, error) {
-	var _pbstrName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrName)))
-	return _pbstrName, win32.ErrIfFailed(int32(r1))
+	_pbstrName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrName))))
+	return *_pbstrName, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Name dispatches through ISClusResource's vtable slot 13.
@@ -1715,16 +1715,16 @@ func (self *ISClusResource) Put_Name(bstrResourceName foundation.BSTR) error {
 
 // Get_State dispatches through ISClusResource's vtable slot 14.
 func (self *ISClusResource) Get_State() (CLUSTER_RESOURCE_STATE, error) {
-	var _dwState CLUSTER_RESOURCE_STATE
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_dwState)))
-	return _dwState, win32.ErrIfFailed(int32(r1))
+	_dwState := new(CLUSTER_RESOURCE_STATE)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_dwState))))
+	return *_dwState, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CoreFlag dispatches through ISClusResource's vtable slot 15.
 func (self *ISClusResource) Get_CoreFlag() (CLUS_FLAGS, error) {
-	var _dwCoreFlag CLUS_FLAGS
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_dwCoreFlag)))
-	return _dwCoreFlag, win32.ErrIfFailed(int32(r1))
+	_dwCoreFlag := new(CLUS_FLAGS)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_dwCoreFlag))))
+	return *_dwCoreFlag, win32.ErrIfFailed(int32(r1))
 }
 
 // BecomeQuorumResource dispatches through ISClusResource's vtable slot 16.
@@ -1747,16 +1747,16 @@ func (self *ISClusResource) Fail() error {
 
 // Online dispatches through ISClusResource's vtable slot 19.
 func (self *ISClusResource) Online(nTimeout int32) (systemvariant.VARIANT, error) {
-	var _pvarPending systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(nTimeout), uintptr(unsafe.Pointer(&_pvarPending)))
-	return _pvarPending, win32.ErrIfFailed(int32(r1))
+	_pvarPending := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(nTimeout), uintptr(win32.OutParam(unsafe.Pointer(_pvarPending))))
+	return *_pvarPending, win32.ErrIfFailed(int32(r1))
 }
 
 // Offline dispatches through ISClusResource's vtable slot 20.
 func (self *ISClusResource) Offline(nTimeout int32) (systemvariant.VARIANT, error) {
-	var _pvarPending systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(nTimeout), uintptr(unsafe.Pointer(&_pvarPending)))
-	return _pvarPending, win32.ErrIfFailed(int32(r1))
+	_pvarPending := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(nTimeout), uintptr(win32.OutParam(unsafe.Pointer(_pvarPending))))
+	return *_pvarPending, win32.ErrIfFailed(int32(r1))
 }
 
 // ChangeResourceGroup dispatches through ISClusResource's vtable slot 21.
@@ -1779,100 +1779,100 @@ func (self *ISClusResource) RemoveResourceNode(pNode *ISClusNode) error {
 
 // CanResourceBeDependent dispatches through ISClusResource's vtable slot 24.
 func (self *ISClusResource) CanResourceBeDependent(pResource *ISClusResource) (systemvariant.VARIANT, error) {
-	var _pvarDependent systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResource)), uintptr(unsafe.Pointer(&_pvarDependent)))
-	return _pvarDependent, win32.ErrIfFailed(int32(r1))
+	_pvarDependent := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResource)), uintptr(win32.OutParam(unsafe.Pointer(_pvarDependent))))
+	return *_pvarDependent, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PossibleOwnerNodes dispatches through ISClusResource's vtable slot 25.
 func (self *ISClusResource) Get_PossibleOwnerNodes() (*ISClusResPossibleOwnerNodes, error) {
-	var _ppOwnerNodes *ISClusResPossibleOwnerNodes
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppOwnerNodes)))
-	return _ppOwnerNodes, win32.ErrIfFailed(int32(r1))
+	_ppOwnerNodes := new(*ISClusResPossibleOwnerNodes)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppOwnerNodes))))
+	return *_ppOwnerNodes, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Dependencies dispatches through ISClusResource's vtable slot 26.
 func (self *ISClusResource) Get_Dependencies() (*ISClusResDependencies, error) {
-	var _ppResDependencies *ISClusResDependencies
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppResDependencies)))
-	return _ppResDependencies, win32.ErrIfFailed(int32(r1))
+	_ppResDependencies := new(*ISClusResDependencies)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppResDependencies))))
+	return *_ppResDependencies, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Dependents dispatches through ISClusResource's vtable slot 27.
 func (self *ISClusResource) Get_Dependents() (*ISClusResDependents, error) {
-	var _ppResDependents *ISClusResDependents
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppResDependents)))
-	return _ppResDependents, win32.ErrIfFailed(int32(r1))
+	_ppResDependents := new(*ISClusResDependents)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppResDependents))))
+	return *_ppResDependents, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Group dispatches through ISClusResource's vtable slot 28.
 func (self *ISClusResource) Get_Group() (*ISClusResGroup, error) {
-	var _ppResGroup *ISClusResGroup
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppResGroup)))
-	return _ppResGroup, win32.ErrIfFailed(int32(r1))
+	_ppResGroup := new(*ISClusResGroup)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppResGroup))))
+	return *_ppResGroup, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OwnerNode dispatches through ISClusResource's vtable slot 29.
 func (self *ISClusResource) Get_OwnerNode() (*ISClusNode, error) {
-	var _ppOwnerNode *ISClusNode
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppOwnerNode)))
-	return _ppOwnerNode, win32.ErrIfFailed(int32(r1))
+	_ppOwnerNode := new(*ISClusNode)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppOwnerNode))))
+	return *_ppOwnerNode, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Cluster dispatches through ISClusResource's vtable slot 30.
 func (self *ISClusResource) Get_Cluster() (*ISCluster, error) {
-	var _ppCluster *ISCluster
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCluster)))
-	return _ppCluster, win32.ErrIfFailed(int32(r1))
+	_ppCluster := new(*ISCluster)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppCluster))))
+	return *_ppCluster, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ClassInfo dispatches through ISClusResource's vtable slot 31.
 func (self *ISClusResource) Get_ClassInfo() (CLUSTER_RESOURCE_CLASS, error) {
-	var _prcClassInfo CLUSTER_RESOURCE_CLASS
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_prcClassInfo)))
-	return _prcClassInfo, win32.ErrIfFailed(int32(r1))
+	_prcClassInfo := new(CLUSTER_RESOURCE_CLASS)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_prcClassInfo))))
+	return *_prcClassInfo, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Disk dispatches through ISClusResource's vtable slot 32.
 func (self *ISClusResource) Get_Disk() (*ISClusDisk, error) {
-	var _ppDisk *ISClusDisk
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppDisk)))
-	return _ppDisk, win32.ErrIfFailed(int32(r1))
+	_ppDisk := new(*ISClusDisk)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppDisk))))
+	return *_ppDisk, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RegistryKeys dispatches through ISClusResource's vtable slot 33.
 func (self *ISClusResource) Get_RegistryKeys() (*ISClusRegistryKeys, error) {
-	var _ppRegistryKeys *ISClusRegistryKeys
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppRegistryKeys)))
-	return _ppRegistryKeys, win32.ErrIfFailed(int32(r1))
+	_ppRegistryKeys := new(*ISClusRegistryKeys)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppRegistryKeys))))
+	return *_ppRegistryKeys, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CryptoKeys dispatches through ISClusResource's vtable slot 34.
 func (self *ISClusResource) Get_CryptoKeys() (*ISClusCryptoKeys, error) {
-	var _ppCryptoKeys *ISClusCryptoKeys
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCryptoKeys)))
-	return _ppCryptoKeys, win32.ErrIfFailed(int32(r1))
+	_ppCryptoKeys := new(*ISClusCryptoKeys)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppCryptoKeys))))
+	return *_ppCryptoKeys, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TypeName dispatches through ISClusResource's vtable slot 35.
 func (self *ISClusResource) Get_TypeName() (foundation.BSTR, error) {
-	var _pbstrTypeName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrTypeName)))
-	return _pbstrTypeName, win32.ErrIfFailed(int32(r1))
+	_pbstrTypeName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrTypeName))))
+	return *_pbstrTypeName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Type dispatches through ISClusResource's vtable slot 36.
 func (self *ISClusResource) Get_Type() (*ISClusResType, error) {
-	var _ppResourceType *ISClusResType
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppResourceType)))
-	return _ppResourceType, win32.ErrIfFailed(int32(r1))
+	_ppResourceType := new(*ISClusResType)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppResourceType))))
+	return *_ppResourceType, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MaintenanceMode dispatches through ISClusResource's vtable slot 37.
 func (self *ISClusResource) Get_MaintenanceMode() (foundation.BOOL, error) {
-	var _pbMaintenanceMode foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbMaintenanceMode)))
-	return _pbMaintenanceMode, win32.ErrIfFailed(int32(r1))
+	_pbMaintenanceMode := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbMaintenanceMode))))
+	return *_pbMaintenanceMode, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MaintenanceMode dispatches through ISClusResource's vtable slot 38.
@@ -1892,16 +1892,16 @@ var IID_ISClusResources = win32.GUID{Data1: 0xf2e6070c, Data2: 0x2631, Data3: 0x
 
 // Get_Count dispatches through ISClusResources's vtable slot 7.
 func (self *ISClusResources) Get_Count() (int32, error) {
-	var _plCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
-	return _plCount, win32.ErrIfFailed(int32(r1))
+	_plCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plCount))))
+	return *_plCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusResources's vtable slot 8.
 func (self *ISClusResources) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through ISClusResources's vtable slot 9.
@@ -1912,9 +1912,9 @@ func (self *ISClusResources) Refresh() error {
 
 // CreateItem dispatches through ISClusResources's vtable slot 11.
 func (self *ISClusResources) CreateItem(bstrResourceName foundation.BSTR, bstrResourceType foundation.BSTR, bstrGroupName foundation.BSTR, dwFlags CLUSTER_RESOURCE_CREATE_FLAGS) (*ISClusResource, error) {
-	var _ppClusterResource *ISClusResource
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrResourceName)), uintptr(unsafe.Pointer(bstrResourceType)), uintptr(unsafe.Pointer(bstrGroupName)), uintptr(dwFlags), uintptr(unsafe.Pointer(&_ppClusterResource)))
-	return _ppClusterResource, win32.ErrIfFailed(int32(r1))
+	_ppClusterResource := new(*ISClusResource)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrResourceName)), uintptr(unsafe.Pointer(bstrResourceType)), uintptr(unsafe.Pointer(bstrGroupName)), uintptr(dwFlags), uintptr(win32.OutParam(unsafe.Pointer(_ppClusterResource))))
+	return *_ppClusterResource, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f2e60728-2631-11d1-89f1-00a0c90d061e
@@ -1927,30 +1927,30 @@ var IID_ISClusScsiAddress = win32.GUID{Data1: 0xf2e60728, Data2: 0x2631, Data3: 
 
 // Get_PortNumber dispatches through ISClusScsiAddress's vtable slot 7.
 func (self *ISClusScsiAddress) Get_PortNumber() (systemvariant.VARIANT, error) {
-	var _pvarPortNumber systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarPortNumber)))
-	return _pvarPortNumber, win32.ErrIfFailed(int32(r1))
+	_pvarPortNumber := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pvarPortNumber))))
+	return *_pvarPortNumber, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PathId dispatches through ISClusScsiAddress's vtable slot 8.
 func (self *ISClusScsiAddress) Get_PathId() (systemvariant.VARIANT, error) {
-	var _pvarPathId systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarPathId)))
-	return _pvarPathId, win32.ErrIfFailed(int32(r1))
+	_pvarPathId := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pvarPathId))))
+	return *_pvarPathId, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TargetId dispatches through ISClusScsiAddress's vtable slot 9.
 func (self *ISClusScsiAddress) Get_TargetId() (systemvariant.VARIANT, error) {
-	var _pvarTargetId systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarTargetId)))
-	return _pvarTargetId, win32.ErrIfFailed(int32(r1))
+	_pvarTargetId := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pvarTargetId))))
+	return *_pvarTargetId, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Lun dispatches through ISClusScsiAddress's vtable slot 10.
 func (self *ISClusScsiAddress) Get_Lun() (systemvariant.VARIANT, error) {
-	var _pvarLun systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarLun)))
-	return _pvarLun, win32.ErrIfFailed(int32(r1))
+	_pvarLun := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pvarLun))))
+	return *_pvarLun, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f2e60716-2631-11d1-89f1-00a0c90d061e
@@ -1963,72 +1963,72 @@ var IID_ISClusVersion = win32.GUID{Data1: 0xf2e60716, Data2: 0x2631, Data3: 0x11
 
 // Get_Name dispatches through ISClusVersion's vtable slot 7.
 func (self *ISClusVersion) Get_Name() (foundation.BSTR, error) {
-	var _pbstrClusterName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrClusterName)))
-	return _pbstrClusterName, win32.ErrIfFailed(int32(r1))
+	_pbstrClusterName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrClusterName))))
+	return *_pbstrClusterName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MajorVersion dispatches through ISClusVersion's vtable slot 8.
 func (self *ISClusVersion) Get_MajorVersion() (int32, error) {
-	var _pnMajorVersion int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pnMajorVersion)))
-	return _pnMajorVersion, win32.ErrIfFailed(int32(r1))
+	_pnMajorVersion := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pnMajorVersion))))
+	return *_pnMajorVersion, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MinorVersion dispatches through ISClusVersion's vtable slot 9.
 func (self *ISClusVersion) Get_MinorVersion() (int32, error) {
-	var _pnMinorVersion int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pnMinorVersion)))
-	return _pnMinorVersion, win32.ErrIfFailed(int32(r1))
+	_pnMinorVersion := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pnMinorVersion))))
+	return *_pnMinorVersion, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BuildNumber dispatches through ISClusVersion's vtable slot 10.
 func (self *ISClusVersion) Get_BuildNumber() (int16, error) {
-	var _pnBuildNumber int16
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pnBuildNumber)))
-	return _pnBuildNumber, win32.ErrIfFailed(int32(r1))
+	_pnBuildNumber := new(int16)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pnBuildNumber))))
+	return *_pnBuildNumber, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_VendorId dispatches through ISClusVersion's vtable slot 11.
 func (self *ISClusVersion) Get_VendorId() (foundation.BSTR, error) {
-	var _pbstrVendorId foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrVendorId)))
-	return _pbstrVendorId, win32.ErrIfFailed(int32(r1))
+	_pbstrVendorId := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrVendorId))))
+	return *_pbstrVendorId, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CSDVersion dispatches through ISClusVersion's vtable slot 12.
 func (self *ISClusVersion) Get_CSDVersion() (foundation.BSTR, error) {
-	var _pbstrCSDVersion foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrCSDVersion)))
-	return _pbstrCSDVersion, win32.ErrIfFailed(int32(r1))
+	_pbstrCSDVersion := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrCSDVersion))))
+	return *_pbstrCSDVersion, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ClusterHighestVersion dispatches through ISClusVersion's vtable slot 13.
 func (self *ISClusVersion) Get_ClusterHighestVersion() (int32, error) {
-	var _pnClusterHighestVersion int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pnClusterHighestVersion)))
-	return _pnClusterHighestVersion, win32.ErrIfFailed(int32(r1))
+	_pnClusterHighestVersion := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pnClusterHighestVersion))))
+	return *_pnClusterHighestVersion, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ClusterLowestVersion dispatches through ISClusVersion's vtable slot 14.
 func (self *ISClusVersion) Get_ClusterLowestVersion() (int32, error) {
-	var _pnClusterLowestVersion int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pnClusterLowestVersion)))
-	return _pnClusterLowestVersion, win32.ErrIfFailed(int32(r1))
+	_pnClusterLowestVersion := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pnClusterLowestVersion))))
+	return *_pnClusterLowestVersion, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Flags dispatches through ISClusVersion's vtable slot 15.
 func (self *ISClusVersion) Get_Flags() (int32, error) {
-	var _pnFlags int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pnFlags)))
-	return _pnFlags, win32.ErrIfFailed(int32(r1))
+	_pnFlags := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pnFlags))))
+	return *_pnFlags, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_MixedVersion dispatches through ISClusVersion's vtable slot 16.
 func (self *ISClusVersion) Get_MixedVersion() (systemvariant.VARIANT, error) {
-	var _pvarMixedVersion systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarMixedVersion)))
-	return _pvarMixedVersion, win32.ErrIfFailed(int32(r1))
+	_pvarMixedVersion := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pvarMixedVersion))))
+	return *_pvarMixedVersion, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f2e606e4-2631-11d1-89f1-00a0c90d061e
@@ -2041,37 +2041,37 @@ var IID_ISCluster = win32.GUID{Data1: 0xf2e606e4, Data2: 0x2631, Data3: 0x11d1, 
 
 // Get_CommonProperties dispatches through ISCluster's vtable slot 7.
 func (self *ISCluster) Get_CommonProperties() (*ISClusProperties, error) {
-	var _ppProperties *ISClusProperties
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
-	return _ppProperties, win32.ErrIfFailed(int32(r1))
+	_ppProperties := new(*ISClusProperties)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppProperties))))
+	return *_ppProperties, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PrivateProperties dispatches through ISCluster's vtable slot 8.
 func (self *ISCluster) Get_PrivateProperties() (*ISClusProperties, error) {
-	var _ppProperties *ISClusProperties
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
-	return _ppProperties, win32.ErrIfFailed(int32(r1))
+	_ppProperties := new(*ISClusProperties)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppProperties))))
+	return *_ppProperties, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CommonROProperties dispatches through ISCluster's vtable slot 9.
 func (self *ISCluster) Get_CommonROProperties() (*ISClusProperties, error) {
-	var _ppProperties *ISClusProperties
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
-	return _ppProperties, win32.ErrIfFailed(int32(r1))
+	_ppProperties := new(*ISClusProperties)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppProperties))))
+	return *_ppProperties, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PrivateROProperties dispatches through ISCluster's vtable slot 10.
 func (self *ISCluster) Get_PrivateROProperties() (*ISClusProperties, error) {
-	var _ppProperties *ISClusProperties
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
-	return _ppProperties, win32.ErrIfFailed(int32(r1))
+	_ppProperties := new(*ISClusProperties)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppProperties))))
+	return *_ppProperties, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Handle dispatches through ISCluster's vtable slot 11.
 func (self *ISCluster) Get_Handle() (uintptr, error) {
-	var _phandle uintptr
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_phandle)))
-	return _phandle, win32.ErrIfFailed(int32(r1))
+	_phandle := new(uintptr)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_phandle))))
+	return *_phandle, win32.ErrIfFailed(int32(r1))
 }
 
 // Open dispatches through ISCluster's vtable slot 12.
@@ -2082,9 +2082,9 @@ func (self *ISCluster) Open(bstrClusterName foundation.BSTR) error {
 
 // Get_Name dispatches through ISCluster's vtable slot 13.
 func (self *ISCluster) Get_Name() (foundation.BSTR, error) {
-	var _pbstrName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrName)))
-	return _pbstrName, win32.ErrIfFailed(int32(r1))
+	_pbstrName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrName))))
+	return *_pbstrName, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Name dispatches through ISCluster's vtable slot 14.
@@ -2095,9 +2095,9 @@ func (self *ISCluster) Put_Name(bstrClusterName foundation.BSTR) error {
 
 // Get_Version dispatches through ISCluster's vtable slot 15.
 func (self *ISCluster) Get_Version() (*ISClusVersion, error) {
-	var _ppClusVersion *ISClusVersion
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppClusVersion)))
-	return _ppClusVersion, win32.ErrIfFailed(int32(r1))
+	_ppClusVersion := new(*ISClusVersion)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppClusVersion))))
+	return *_ppClusVersion, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_QuorumResource dispatches through ISCluster's vtable slot 16.
@@ -2108,16 +2108,16 @@ func (self *ISCluster) Put_QuorumResource(pClusterResource *ISClusResource) erro
 
 // Get_QuorumResource dispatches through ISCluster's vtable slot 17.
 func (self *ISCluster) Get_QuorumResource() (*ISClusResource, error) {
-	var _pClusterResource *ISClusResource
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pClusterResource)))
-	return _pClusterResource, win32.ErrIfFailed(int32(r1))
+	_pClusterResource := new(*ISClusResource)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pClusterResource))))
+	return *_pClusterResource, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_QuorumLogSize dispatches through ISCluster's vtable slot 18.
 func (self *ISCluster) Get_QuorumLogSize() (int32, error) {
-	var _pnLogSize int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pnLogSize)))
-	return _pnLogSize, win32.ErrIfFailed(int32(r1))
+	_pnLogSize := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pnLogSize))))
+	return *_pnLogSize, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_QuorumLogSize dispatches through ISCluster's vtable slot 19.
@@ -2128,9 +2128,9 @@ func (self *ISCluster) Put_QuorumLogSize(nLogSize int32) error {
 
 // Get_QuorumPath dispatches through ISCluster's vtable slot 20.
 func (self *ISCluster) Get_QuorumPath() (foundation.BSTR, error) {
-	var _ppPath foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppPath)))
-	return _ppPath, win32.ErrIfFailed(int32(r1))
+	_ppPath := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppPath))))
+	return *_ppPath, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_QuorumPath dispatches through ISCluster's vtable slot 21.
@@ -2141,44 +2141,44 @@ func (self *ISCluster) Put_QuorumPath(pPath foundation.BSTR) error {
 
 // Get_Nodes dispatches through ISCluster's vtable slot 22.
 func (self *ISCluster) Get_Nodes() (*ISClusNodes, error) {
-	var _ppNodes *ISClusNodes
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppNodes)))
-	return _ppNodes, win32.ErrIfFailed(int32(r1))
+	_ppNodes := new(*ISClusNodes)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppNodes))))
+	return *_ppNodes, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ResourceGroups dispatches through ISCluster's vtable slot 23.
 func (self *ISCluster) Get_ResourceGroups() (*ISClusResGroups, error) {
-	var _ppClusterResourceGroups *ISClusResGroups
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppClusterResourceGroups)))
-	return _ppClusterResourceGroups, win32.ErrIfFailed(int32(r1))
+	_ppClusterResourceGroups := new(*ISClusResGroups)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppClusterResourceGroups))))
+	return *_ppClusterResourceGroups, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Resources dispatches through ISCluster's vtable slot 24.
 func (self *ISCluster) Get_Resources() (*ISClusResources, error) {
-	var _ppClusterResources *ISClusResources
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppClusterResources)))
-	return _ppClusterResources, win32.ErrIfFailed(int32(r1))
+	_ppClusterResources := new(*ISClusResources)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppClusterResources))))
+	return *_ppClusterResources, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ResourceTypes dispatches through ISCluster's vtable slot 25.
 func (self *ISCluster) Get_ResourceTypes() (*ISClusResTypes, error) {
-	var _ppResourceTypes *ISClusResTypes
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppResourceTypes)))
-	return _ppResourceTypes, win32.ErrIfFailed(int32(r1))
+	_ppResourceTypes := new(*ISClusResTypes)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppResourceTypes))))
+	return *_ppResourceTypes, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Networks dispatches through ISCluster's vtable slot 26.
 func (self *ISCluster) Get_Networks() (*ISClusNetworks, error) {
-	var _ppNetworks *ISClusNetworks
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppNetworks)))
-	return _ppNetworks, win32.ErrIfFailed(int32(r1))
+	_ppNetworks := new(*ISClusNetworks)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppNetworks))))
+	return *_ppNetworks, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NetInterfaces dispatches through ISCluster's vtable slot 27.
 func (self *ISCluster) Get_NetInterfaces() (*ISClusNetInterfaces, error) {
-	var _ppNetInterfaces *ISClusNetInterfaces
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppNetInterfaces)))
-	return _ppNetInterfaces, win32.ErrIfFailed(int32(r1))
+	_ppNetInterfaces := new(*ISClusNetInterfaces)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppNetInterfaces))))
+	return *_ppNetInterfaces, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f2e606ec-2631-11d1-89f1-00a0c90d061e
@@ -2191,16 +2191,16 @@ var IID_ISClusterNames = win32.GUID{Data1: 0xf2e606ec, Data2: 0x2631, Data3: 0x1
 
 // Get_Count dispatches through ISClusterNames's vtable slot 7.
 func (self *ISClusterNames) Get_Count() (int32, error) {
-	var _plCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
-	return _plCount, win32.ErrIfFailed(int32(r1))
+	_plCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plCount))))
+	return *_plCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusterNames's vtable slot 8.
 func (self *ISClusterNames) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through ISClusterNames's vtable slot 9.
@@ -2211,9 +2211,9 @@ func (self *ISClusterNames) Refresh() error {
 
 // Get_DomainName dispatches through ISClusterNames's vtable slot 11.
 func (self *ISClusterNames) Get_DomainName() (foundation.BSTR, error) {
-	var _pbstrDomainName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrDomainName)))
-	return _pbstrDomainName, win32.ErrIfFailed(int32(r1))
+	_pbstrDomainName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrDomainName))))
+	return *_pbstrDomainName, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f2e606e2-2631-11d1-89f1-00a0c90d061e
@@ -2226,16 +2226,16 @@ var IID_ISDomainNames = win32.GUID{Data1: 0xf2e606e2, Data2: 0x2631, Data3: 0x11
 
 // Get_Count dispatches through ISDomainNames's vtable slot 7.
 func (self *ISDomainNames) Get_Count() (int32, error) {
-	var _plCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
-	return _plCount, win32.ErrIfFailed(int32(r1))
+	_plCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plCount))))
+	return *_plCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISDomainNames's vtable slot 8.
 func (self *ISDomainNames) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Refresh dispatches through ISDomainNames's vtable slot 9.

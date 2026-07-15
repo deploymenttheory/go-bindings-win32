@@ -100,9 +100,9 @@ var IID_IUnbufferedFileHandleProvider = win32.GUID{Data1: 0xa65c9109, Data2: 0x4
 
 // OpenUnbufferedFileHandle dispatches through IUnbufferedFileHandleProvider's vtable slot 3.
 func (self *IUnbufferedFileHandleProvider) OpenUnbufferedFileHandle(oplockBreakCallback *IUnbufferedFileHandleOplockCallback) (uintptr, error) {
-	var _fileHandle uintptr
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(oplockBreakCallback)), uintptr(unsafe.Pointer(&_fileHandle)))
-	return _fileHandle, win32.ErrIfFailed(int32(r1))
+	_fileHandle := new(uintptr)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(oplockBreakCallback)), uintptr(win32.OutParam(unsafe.Pointer(_fileHandle))))
+	return *_fileHandle, win32.ErrIfFailed(int32(r1))
 }
 
 // CloseUnbufferedFileHandle dispatches through IUnbufferedFileHandleProvider's vtable slot 4.

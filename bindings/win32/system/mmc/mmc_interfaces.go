@@ -35,16 +35,16 @@ var IID_Column = win32.GUID{Data1: 0xfd1c5f63, Data2: 0x2b16, Data3: 0x4d06, Dat
 
 // Name dispatches through Column's vtable slot 7.
 func (self *Column) Name() (foundation.BSTR, error) {
-	var _Name foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Name)))
-	return _Name, win32.ErrIfFailed(int32(r1))
+	_Name := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Name))))
+	return *_Name, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Width dispatches through Column's vtable slot 8.
 func (self *Column) Get_Width() (int32, error) {
-	var _Width int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Width)))
-	return _Width, win32.ErrIfFailed(int32(r1))
+	_Width := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Width))))
+	return *_Width, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Width dispatches through Column's vtable slot 9.
@@ -55,9 +55,9 @@ func (self *Column) Put_Width(Width int32) error {
 
 // Get_DisplayPosition dispatches through Column's vtable slot 10.
 func (self *Column) Get_DisplayPosition() (int32, error) {
-	var _DisplayPosition int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_DisplayPosition)))
-	return _DisplayPosition, win32.ErrIfFailed(int32(r1))
+	_DisplayPosition := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_DisplayPosition))))
+	return *_DisplayPosition, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DisplayPosition dispatches through Column's vtable slot 11.
@@ -68,9 +68,9 @@ func (self *Column) Put_DisplayPosition(Index int32) error {
 
 // Get_Hidden dispatches through Column's vtable slot 12.
 func (self *Column) Get_Hidden() (foundation.BOOL, error) {
-	var _Hidden foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Hidden)))
-	return _Hidden, win32.ErrIfFailed(int32(r1))
+	_Hidden := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Hidden))))
+	return *_Hidden, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Hidden dispatches through Column's vtable slot 13.
@@ -88,9 +88,9 @@ func (self *Column) SetAsSortColumn(SortOrder ColumnSortOrder) error {
 
 // IsSortColumn dispatches through Column's vtable slot 15.
 func (self *Column) IsSortColumn() (foundation.BOOL, error) {
-	var _IsSortColumn foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_IsSortColumn)))
-	return _IsSortColumn, win32.ErrIfFailed(int32(r1))
+	_IsSortColumn := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_IsSortColumn))))
+	return *_IsSortColumn, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 383d4d97-fc44-478b-b139-6323dc48611c
@@ -103,23 +103,23 @@ var IID_Columns = win32.GUID{Data1: 0x383d4d97, Data2: 0xfc44, Data3: 0x478b, Da
 
 // Item dispatches through Columns's vtable slot 7.
 func (self *Columns) Item(Index int32) (*Column, error) {
-	var _Column_ *Column
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(&_Column_)))
-	return _Column_, win32.ErrIfFailed(int32(r1))
+	_Column_ := new(*Column)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(win32.OutParam(unsafe.Pointer(_Column_))))
+	return *_Column_, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through Columns's vtable slot 8.
 func (self *Columns) Get_Count() (int32, error) {
-	var _Count int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Count)))
-	return _Count, win32.ErrIfFailed(int32(r1))
+	_Count := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Count))))
+	return *_Count, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through Columns's vtable slot 9.
 func (self *Columns) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // ContextMenu: https://learn.microsoft.com/windows/win32/windowsribbon/windowsribbon-element-contextmenu
@@ -133,16 +133,16 @@ var IID_ContextMenu = win32.GUID{Data1: 0xdab39ce0, Data2: 0x25e6, Data3: 0x4e07
 
 // Get__NewEnum dispatches through ContextMenu's vtable slot 7.
 func (self *ContextMenu) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through ContextMenu's vtable slot 9.
 func (self *ContextMenu) Get_Count() (int32, error) {
-	var _Count int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Count)))
-	return _Count, win32.ErrIfFailed(int32(r1))
+	_Count := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Count))))
+	return *_Count, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 225120d6-1e0f-40a3-93fe-1079e6a8017b
@@ -174,30 +174,30 @@ func (self *Document) Close(SaveChanges bool) error {
 
 // Get_Views dispatches through Document's vtable slot 10.
 func (self *Document) Get_Views() (*Views, error) {
-	var _Views_ *Views
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Views_)))
-	return _Views_, win32.ErrIfFailed(int32(r1))
+	_Views_ := new(*Views)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Views_))))
+	return *_Views_, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SnapIns dispatches through Document's vtable slot 11.
 func (self *Document) Get_SnapIns() (*SnapIns, error) {
-	var _SnapIns_ *SnapIns
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_SnapIns_)))
-	return _SnapIns_, win32.ErrIfFailed(int32(r1))
+	_SnapIns_ := new(*SnapIns)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_SnapIns_))))
+	return *_SnapIns_, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ActiveView dispatches through Document's vtable slot 12.
 func (self *Document) Get_ActiveView() (*View, error) {
-	var _View_ *View
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_View_)))
-	return _View_, win32.ErrIfFailed(int32(r1))
+	_View_ := new(*View)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_View_))))
+	return *_View_, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through Document's vtable slot 13.
 func (self *Document) Get_Name() (foundation.BSTR, error) {
-	var _Name foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Name)))
-	return _Name, win32.ErrIfFailed(int32(r1))
+	_Name := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Name))))
+	return *_Name, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Name dispatches through Document's vtable slot 14.
@@ -208,23 +208,23 @@ func (self *Document) Put_Name(Name foundation.BSTR) error {
 
 // Get_Location dispatches through Document's vtable slot 15.
 func (self *Document) Get_Location() (foundation.BSTR, error) {
-	var _Location foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Location)))
-	return _Location, win32.ErrIfFailed(int32(r1))
+	_Location := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Location))))
+	return *_Location, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsSaved dispatches through Document's vtable slot 16.
 func (self *Document) Get_IsSaved() (foundation.BOOL, error) {
-	var _IsSaved foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_IsSaved)))
-	return _IsSaved, win32.ErrIfFailed(int32(r1))
+	_IsSaved := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_IsSaved))))
+	return *_IsSaved, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Mode dispatches through Document's vtable slot 17.
 func (self *Document) Get_Mode() (DocumentMode, error) {
-	var _Mode DocumentMode
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Mode)))
-	return _Mode, win32.ErrIfFailed(int32(r1))
+	_Mode := new(DocumentMode)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Mode))))
+	return *_Mode, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Mode dispatches through Document's vtable slot 18.
@@ -235,30 +235,30 @@ func (self *Document) Put_Mode(Mode DocumentMode) error {
 
 // Get_RootNode dispatches through Document's vtable slot 19.
 func (self *Document) Get_RootNode() (*Node, error) {
-	var _Node_ *Node
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Node_)))
-	return _Node_, win32.ErrIfFailed(int32(r1))
+	_Node_ := new(*Node)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Node_))))
+	return *_Node_, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ScopeNamespace dispatches through Document's vtable slot 20.
 func (self *Document) Get_ScopeNamespace() (*ScopeNamespace, error) {
-	var _ScopeNamespace_ *ScopeNamespace
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ScopeNamespace_)))
-	return _ScopeNamespace_, win32.ErrIfFailed(int32(r1))
+	_ScopeNamespace_ := new(*ScopeNamespace)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ScopeNamespace_))))
+	return *_ScopeNamespace_, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateProperties dispatches through Document's vtable slot 21.
 func (self *Document) CreateProperties() (*Properties, error) {
-	var _Properties_ *Properties
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Properties_)))
-	return _Properties_, win32.ErrIfFailed(int32(r1))
+	_Properties_ := new(*Properties)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Properties_))))
+	return *_Properties_, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Application dispatches through Document's vtable slot 22.
 func (self *Document) Get_Application() (*Application, error) {
-	var _Application_ *Application
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Application_)))
-	return _Application_, win32.ErrIfFailed(int32(r1))
+	_Application_ := new(*Application)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Application_))))
+	return *_Application_, win32.ErrIfFailed(int32(r1))
 }
 
 // Extension: https://learn.microsoft.com/windows/win32/SecCrypto/extension
@@ -272,37 +272,37 @@ var IID_Extension = win32.GUID{Data1: 0xad4d6ca6, Data2: 0x912f, Data3: 0x409b, 
 
 // Get_Name dispatches through Extension's vtable slot 7.
 func (self *Extension) Get_Name() (foundation.BSTR, error) {
-	var _Name foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Name)))
-	return _Name, win32.ErrIfFailed(int32(r1))
+	_Name := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Name))))
+	return *_Name, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Vendor dispatches through Extension's vtable slot 8.
 func (self *Extension) Get_Vendor() (foundation.BSTR, error) {
-	var _Vendor foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Vendor)))
-	return _Vendor, win32.ErrIfFailed(int32(r1))
+	_Vendor := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Vendor))))
+	return *_Vendor, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Version dispatches through Extension's vtable slot 9.
 func (self *Extension) Get_Version() (foundation.BSTR, error) {
-	var _Version foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Version)))
-	return _Version, win32.ErrIfFailed(int32(r1))
+	_Version := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Version))))
+	return *_Version, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Extensions dispatches through Extension's vtable slot 10.
 func (self *Extension) Get_Extensions() (*Extensions, error) {
-	var _Extensions_ *Extensions
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Extensions_)))
-	return _Extensions_, win32.ErrIfFailed(int32(r1))
+	_Extensions_ := new(*Extensions)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Extensions_))))
+	return *_Extensions_, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SnapinCLSID dispatches through Extension's vtable slot 11.
 func (self *Extension) Get_SnapinCLSID() (foundation.BSTR, error) {
-	var _SnapinCLSID foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_SnapinCLSID)))
-	return _SnapinCLSID, win32.ErrIfFailed(int32(r1))
+	_SnapinCLSID := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_SnapinCLSID))))
+	return *_SnapinCLSID, win32.ErrIfFailed(int32(r1))
 }
 
 // EnableAllExtensions dispatches through Extension's vtable slot 12.
@@ -330,23 +330,23 @@ var IID_Extensions = win32.GUID{Data1: 0x82dbea43, Data2: 0x8ca4, Data3: 0x44bc,
 
 // Get__NewEnum dispatches through Extensions's vtable slot 7.
 func (self *Extensions) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Item dispatches through Extensions's vtable slot 8.
 func (self *Extensions) Item(Index int32) (*Extension, error) {
-	var _Extension_ *Extension
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(&_Extension_)))
-	return _Extension_, win32.ErrIfFailed(int32(r1))
+	_Extension_ := new(*Extension)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(win32.OutParam(unsafe.Pointer(_Extension_))))
+	return *_Extension_, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through Extensions's vtable slot 9.
 func (self *Extensions) Get_Count() (int32, error) {
-	var _Count int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Count)))
-	return _Count, win32.ErrIfFailed(int32(r1))
+	_Count := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Count))))
+	return *_Count, win32.ErrIfFailed(int32(r1))
 }
 
 // Frame: https://learn.microsoft.com/windows/win32/medfound/framerateconverter
@@ -378,9 +378,9 @@ func (self *Frame) Restore() error {
 
 // Get_Top dispatches through Frame's vtable slot 10.
 func (self *Frame) Get_Top() (int32, error) {
-	var _Top int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Top)))
-	return _Top, win32.ErrIfFailed(int32(r1))
+	_Top := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Top))))
+	return *_Top, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Top dispatches through Frame's vtable slot 11.
@@ -391,9 +391,9 @@ func (self *Frame) Put_Top(top int32) error {
 
 // Get_Bottom dispatches through Frame's vtable slot 12.
 func (self *Frame) Get_Bottom() (int32, error) {
-	var _Bottom int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Bottom)))
-	return _Bottom, win32.ErrIfFailed(int32(r1))
+	_Bottom := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Bottom))))
+	return *_Bottom, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Bottom dispatches through Frame's vtable slot 13.
@@ -404,9 +404,9 @@ func (self *Frame) Put_Bottom(bottom int32) error {
 
 // Get_Left dispatches through Frame's vtable slot 14.
 func (self *Frame) Get_Left() (int32, error) {
-	var _Left int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Left)))
-	return _Left, win32.ErrIfFailed(int32(r1))
+	_Left := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Left))))
+	return *_Left, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Left dispatches through Frame's vtable slot 15.
@@ -417,9 +417,9 @@ func (self *Frame) Put_Left(left int32) error {
 
 // Get_Right dispatches through Frame's vtable slot 16.
 func (self *Frame) Get_Right() (int32, error) {
-	var _Right int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Right)))
-	return _Right, win32.ErrIfFailed(int32(r1))
+	_Right := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Right))))
+	return *_Right, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Right dispatches through Frame's vtable slot 17.
@@ -927,9 +927,9 @@ func (self *IContextMenuProvider) AddThirdPartyExtensionItems(piDataObject *syst
 
 // ShowContextMenu dispatches through IContextMenuProvider's vtable slot 7.
 func (self *IContextMenuProvider) ShowContextMenu(hwndParent foundation.HWND, xPos int32, yPos int32) (int32, error) {
-	var _plSelected int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(xPos), uintptr(yPos), uintptr(unsafe.Pointer(&_plSelected)))
-	return _plSelected, win32.ErrIfFailed(int32(r1))
+	_plSelected := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(xPos), uintptr(yPos), uintptr(win32.OutParam(unsafe.Pointer(_plSelected))))
+	return *_plSelected, win32.ErrIfFailed(int32(r1))
 }
 
 // IControlbar: https://learn.microsoft.com/windows/win32/api/mmc/nn-mmc-icontrolbar
@@ -1851,30 +1851,30 @@ var IID_MenuItem = win32.GUID{Data1: 0x0178fad1, Data2: 0xb361, Data3: 0x4b27, D
 
 // Get_DisplayName dispatches through MenuItem's vtable slot 7.
 func (self *MenuItem) Get_DisplayName() (foundation.BSTR, error) {
-	var _DisplayName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_DisplayName)))
-	return _DisplayName, win32.ErrIfFailed(int32(r1))
+	_DisplayName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_DisplayName))))
+	return *_DisplayName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LanguageIndependentName dispatches through MenuItem's vtable slot 8.
 func (self *MenuItem) Get_LanguageIndependentName() (foundation.BSTR, error) {
-	var _LanguageIndependentName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_LanguageIndependentName)))
-	return _LanguageIndependentName, win32.ErrIfFailed(int32(r1))
+	_LanguageIndependentName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_LanguageIndependentName))))
+	return *_LanguageIndependentName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Path dispatches through MenuItem's vtable slot 9.
 func (self *MenuItem) Get_Path() (foundation.BSTR, error) {
-	var _Path foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Path)))
-	return _Path, win32.ErrIfFailed(int32(r1))
+	_Path := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Path))))
+	return *_Path, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LanguageIndependentPath dispatches through MenuItem's vtable slot 10.
 func (self *MenuItem) Get_LanguageIndependentPath() (foundation.BSTR, error) {
-	var _LanguageIndependentPath foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_LanguageIndependentPath)))
-	return _LanguageIndependentPath, win32.ErrIfFailed(int32(r1))
+	_LanguageIndependentPath := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_LanguageIndependentPath))))
+	return *_LanguageIndependentPath, win32.ErrIfFailed(int32(r1))
 }
 
 // Execute dispatches through MenuItem's vtable slot 11.
@@ -1885,9 +1885,9 @@ func (self *MenuItem) Execute() error {
 
 // Get_Enabled dispatches through MenuItem's vtable slot 12.
 func (self *MenuItem) Get_Enabled() (foundation.BOOL, error) {
-	var _Enabled foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Enabled)))
-	return _Enabled, win32.ErrIfFailed(int32(r1))
+	_Enabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Enabled))))
+	return *_Enabled, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f81ed800-7839-4447-945d-8e15da59ca55
@@ -1900,37 +1900,37 @@ var IID_Node = win32.GUID{Data1: 0xf81ed800, Data2: 0x7839, Data3: 0x4447, Data4
 
 // Get_Name dispatches through Node's vtable slot 7.
 func (self *Node) Get_Name() (foundation.BSTR, error) {
-	var _Name foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Name)))
-	return _Name, win32.ErrIfFailed(int32(r1))
+	_Name := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Name))))
+	return *_Name, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Property dispatches through Node's vtable slot 8.
 func (self *Node) Get_Property(PropertyName foundation.BSTR) (foundation.BSTR, error) {
-	var _PropertyValue foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PropertyName)), uintptr(unsafe.Pointer(&_PropertyValue)))
-	return _PropertyValue, win32.ErrIfFailed(int32(r1))
+	_PropertyValue := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PropertyName)), uintptr(win32.OutParam(unsafe.Pointer(_PropertyValue))))
+	return *_PropertyValue, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Bookmark dispatches through Node's vtable slot 9.
 func (self *Node) Get_Bookmark() (foundation.BSTR, error) {
-	var _Bookmark foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Bookmark)))
-	return _Bookmark, win32.ErrIfFailed(int32(r1))
+	_Bookmark := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Bookmark))))
+	return *_Bookmark, win32.ErrIfFailed(int32(r1))
 }
 
 // IsScopeNode dispatches through Node's vtable slot 10.
 func (self *Node) IsScopeNode() (foundation.BOOL, error) {
-	var _IsScopeNode foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_IsScopeNode)))
-	return _IsScopeNode, win32.ErrIfFailed(int32(r1))
+	_IsScopeNode := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_IsScopeNode))))
+	return *_IsScopeNode, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Nodetype dispatches through Node's vtable slot 11.
 func (self *Node) Get_Nodetype() (foundation.BSTR, error) {
-	var _Nodetype foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Nodetype)))
-	return _Nodetype, win32.ErrIfFailed(int32(r1))
+	_Nodetype := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Nodetype))))
+	return *_Nodetype, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 313b01df-b22f-4d42-b1b8-483cdcf51d35
@@ -1943,23 +1943,23 @@ var IID_Nodes = win32.GUID{Data1: 0x313b01df, Data2: 0xb22f, Data3: 0x4d42, Data
 
 // Get__NewEnum dispatches through Nodes's vtable slot 7.
 func (self *Nodes) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Item dispatches through Nodes's vtable slot 8.
 func (self *Nodes) Item(Index int32) (*Node, error) {
-	var _Node_ *Node
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(&_Node_)))
-	return _Node_, win32.ErrIfFailed(int32(r1))
+	_Node_ := new(*Node)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(win32.OutParam(unsafe.Pointer(_Node_))))
+	return *_Node_, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through Nodes's vtable slot 9.
 func (self *Nodes) Get_Count() (int32, error) {
-	var _Count int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Count)))
-	return _Count, win32.ErrIfFailed(int32(r1))
+	_Count := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Count))))
+	return *_Count, win32.ErrIfFailed(int32(r1))
 }
 
 // Properties: https://learn.microsoft.com/windows/win32/com/properties-and-methods
@@ -1973,23 +1973,23 @@ var IID_Properties = win32.GUID{Data1: 0x2886abc2, Data2: 0xa425, Data3: 0x42b2,
 
 // Get__NewEnum dispatches through Properties's vtable slot 7.
 func (self *Properties) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Item dispatches through Properties's vtable slot 8.
 func (self *Properties) Item(Name foundation.BSTR) (*Property, error) {
-	var _Property_ *Property
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Name)), uintptr(unsafe.Pointer(&_Property_)))
-	return _Property_, win32.ErrIfFailed(int32(r1))
+	_Property_ := new(*Property)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Name)), uintptr(win32.OutParam(unsafe.Pointer(_Property_))))
+	return *_Property_, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through Properties's vtable slot 9.
 func (self *Properties) Get_Count() (int32, error) {
-	var _Count int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Count)))
-	return _Count, win32.ErrIfFailed(int32(r1))
+	_Count := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Count))))
+	return *_Count, win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through Properties's vtable slot 10.
@@ -2009,16 +2009,16 @@ var IID_Property = win32.GUID{Data1: 0x4600c3a5, Data2: 0xe301, Data3: 0x41d8, D
 
 // Get_Value dispatches through Property's vtable slot 7.
 func (self *Property) Get_Value() (systemvariant.VARIANT, error) {
-	var _Value systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Value)))
-	return _Value, win32.ErrIfFailed(int32(r1))
+	_Value := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Value))))
+	return *_Value, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through Property's vtable slot 9.
 func (self *Property) Get_Name() (foundation.BSTR, error) {
-	var _Name foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Name)))
-	return _Name, win32.ErrIfFailed(int32(r1))
+	_Name := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Name))))
+	return *_Name, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: ebbb48dc-1a3b-4d86-b786-c21b28389012
@@ -2031,30 +2031,30 @@ var IID_ScopeNamespace = win32.GUID{Data1: 0xebbb48dc, Data2: 0x1a3b, Data3: 0x4
 
 // GetParent dispatches through ScopeNamespace's vtable slot 7.
 func (self *ScopeNamespace) GetParent(Node_ *Node) (*Node, error) {
-	var _Parent *Node
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Node_)), uintptr(unsafe.Pointer(&_Parent)))
-	return _Parent, win32.ErrIfFailed(int32(r1))
+	_Parent := new(*Node)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Node_)), uintptr(win32.OutParam(unsafe.Pointer(_Parent))))
+	return *_Parent, win32.ErrIfFailed(int32(r1))
 }
 
 // GetChild dispatches through ScopeNamespace's vtable slot 8.
 func (self *ScopeNamespace) GetChild(Node_ *Node) (*Node, error) {
-	var _Child *Node
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Node_)), uintptr(unsafe.Pointer(&_Child)))
-	return _Child, win32.ErrIfFailed(int32(r1))
+	_Child := new(*Node)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Node_)), uintptr(win32.OutParam(unsafe.Pointer(_Child))))
+	return *_Child, win32.ErrIfFailed(int32(r1))
 }
 
 // GetNext dispatches through ScopeNamespace's vtable slot 9.
 func (self *ScopeNamespace) GetNext(Node_ *Node) (*Node, error) {
-	var _Next *Node
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Node_)), uintptr(unsafe.Pointer(&_Next)))
-	return _Next, win32.ErrIfFailed(int32(r1))
+	_Next := new(*Node)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Node_)), uintptr(win32.OutParam(unsafe.Pointer(_Next))))
+	return *_Next, win32.ErrIfFailed(int32(r1))
 }
 
 // GetRoot dispatches through ScopeNamespace's vtable slot 10.
 func (self *ScopeNamespace) GetRoot() (*Node, error) {
-	var _Root *Node
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Root)))
-	return _Root, win32.ErrIfFailed(int32(r1))
+	_Root := new(*Node)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Root))))
+	return *_Root, win32.ErrIfFailed(int32(r1))
 }
 
 // Expand dispatches through ScopeNamespace's vtable slot 11.
@@ -2073,44 +2073,44 @@ var IID_SnapIn = win32.GUID{Data1: 0x3be910f6, Data2: 0x3459, Data3: 0x49c6, Dat
 
 // Get_Name dispatches through SnapIn's vtable slot 7.
 func (self *SnapIn) Get_Name() (foundation.BSTR, error) {
-	var _Name foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Name)))
-	return _Name, win32.ErrIfFailed(int32(r1))
+	_Name := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Name))))
+	return *_Name, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Vendor dispatches through SnapIn's vtable slot 8.
 func (self *SnapIn) Get_Vendor() (foundation.BSTR, error) {
-	var _Vendor foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Vendor)))
-	return _Vendor, win32.ErrIfFailed(int32(r1))
+	_Vendor := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Vendor))))
+	return *_Vendor, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Version dispatches through SnapIn's vtable slot 9.
 func (self *SnapIn) Get_Version() (foundation.BSTR, error) {
-	var _Version foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Version)))
-	return _Version, win32.ErrIfFailed(int32(r1))
+	_Version := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Version))))
+	return *_Version, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Extensions dispatches through SnapIn's vtable slot 10.
 func (self *SnapIn) Get_Extensions() (*Extensions, error) {
-	var _Extensions_ *Extensions
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Extensions_)))
-	return _Extensions_, win32.ErrIfFailed(int32(r1))
+	_Extensions_ := new(*Extensions)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Extensions_))))
+	return *_Extensions_, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SnapinCLSID dispatches through SnapIn's vtable slot 11.
 func (self *SnapIn) Get_SnapinCLSID() (foundation.BSTR, error) {
-	var _SnapinCLSID foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_SnapinCLSID)))
-	return _SnapinCLSID, win32.ErrIfFailed(int32(r1))
+	_SnapinCLSID := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_SnapinCLSID))))
+	return *_SnapinCLSID, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Properties dispatches through SnapIn's vtable slot 12.
 func (self *SnapIn) Get_Properties() (*Properties, error) {
-	var _Properties_ *Properties
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Properties_)))
-	return _Properties_, win32.ErrIfFailed(int32(r1))
+	_Properties_ := new(*Properties)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Properties_))))
+	return *_Properties_, win32.ErrIfFailed(int32(r1))
 }
 
 // EnableAllExtensions dispatches through SnapIn's vtable slot 13.
@@ -2130,23 +2130,23 @@ var IID_SnapIns = win32.GUID{Data1: 0x2ef3de1d, Data2: 0xb12a, Data3: 0x49d1, Da
 
 // Get__NewEnum dispatches through SnapIns's vtable slot 7.
 func (self *SnapIns) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // Item dispatches through SnapIns's vtable slot 8.
 func (self *SnapIns) Item(Index int32) (*SnapIn, error) {
-	var _SnapIn_ *SnapIn
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(&_SnapIn_)))
-	return _SnapIn_, win32.ErrIfFailed(int32(r1))
+	_SnapIn_ := new(*SnapIn)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(win32.OutParam(unsafe.Pointer(_SnapIn_))))
+	return *_SnapIn_, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through SnapIns's vtable slot 9.
 func (self *SnapIns) Get_Count() (int32, error) {
-	var _Count int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Count)))
-	return _Count, win32.ErrIfFailed(int32(r1))
+	_Count := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Count))))
+	return *_Count, win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through SnapIns's vtable slot 11.
@@ -2166,9 +2166,9 @@ var IID_View = win32.GUID{Data1: 0x6efc2da2, Data2: 0xb38c, Data3: 0x457e, Data4
 
 // Get_ActiveScopeNode dispatches through View's vtable slot 7.
 func (self *View) Get_ActiveScopeNode() (*Node, error) {
-	var _Node_ *Node
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Node_)))
-	return _Node_, win32.ErrIfFailed(int32(r1))
+	_Node_ := new(*Node)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Node_))))
+	return *_Node_, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ActiveScopeNode dispatches through View's vtable slot 8.
@@ -2179,37 +2179,37 @@ func (self *View) Put_ActiveScopeNode(Node_ *Node) error {
 
 // Get_Selection dispatches through View's vtable slot 9.
 func (self *View) Get_Selection() (*Nodes, error) {
-	var _Nodes_ *Nodes
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Nodes_)))
-	return _Nodes_, win32.ErrIfFailed(int32(r1))
+	_Nodes_ := new(*Nodes)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Nodes_))))
+	return *_Nodes_, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ListItems dispatches through View's vtable slot 10.
 func (self *View) Get_ListItems() (*Nodes, error) {
-	var _Nodes_ *Nodes
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Nodes_)))
-	return _Nodes_, win32.ErrIfFailed(int32(r1))
+	_Nodes_ := new(*Nodes)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Nodes_))))
+	return *_Nodes_, win32.ErrIfFailed(int32(r1))
 }
 
 // SnapinSelectionObject dispatches through View's vtable slot 12.
 func (self *View) SnapinSelectionObject() (*systemcom.IDispatch, error) {
-	var _SelectionObject *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_SelectionObject)))
-	return _SelectionObject, win32.ErrIfFailed(int32(r1))
+	_SelectionObject := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_SelectionObject))))
+	return *_SelectionObject, win32.ErrIfFailed(int32(r1))
 }
 
 // Is dispatches through View's vtable slot 13.
 func (self *View) Is(View_ *View) (foundation.VARIANT_BOOL, error) {
-	var _TheSame foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(View_)), uintptr(unsafe.Pointer(&_TheSame)))
-	return _TheSame, win32.ErrIfFailed(int32(r1))
+	_TheSame := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(View_)), uintptr(win32.OutParam(unsafe.Pointer(_TheSame))))
+	return *_TheSame, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Document dispatches through View's vtable slot 14.
 func (self *View) Get_Document() (*Document, error) {
-	var _Document_ *Document
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Document_)))
-	return _Document_, win32.ErrIfFailed(int32(r1))
+	_Document_ := new(*Document)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Document_))))
+	return *_Document_, win32.ErrIfFailed(int32(r1))
 }
 
 // SelectAll dispatches through View's vtable slot 15.
@@ -2232,9 +2232,9 @@ func (self *View) Deselect(Node_ *Node) error {
 
 // IsSelected dispatches through View's vtable slot 18.
 func (self *View) IsSelected(Node_ *Node) (foundation.BOOL, error) {
-	var _IsSelected foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Node_)), uintptr(unsafe.Pointer(&_IsSelected)))
-	return _IsSelected, win32.ErrIfFailed(int32(r1))
+	_IsSelected := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Node_)), uintptr(win32.OutParam(unsafe.Pointer(_IsSelected))))
+	return *_IsSelected, win32.ErrIfFailed(int32(r1))
 }
 
 // DisplaySelectionPropertySheet dispatches through View's vtable slot 20.
@@ -2263,9 +2263,9 @@ func (self *View) RenameSelectedItem(NewName foundation.BSTR) error {
 
 // Get_SelectionContextMenu dispatches through View's vtable slot 28.
 func (self *View) Get_SelectionContextMenu() (*ContextMenu, error) {
-	var _ContextMenu_ *ContextMenu
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ContextMenu_)))
-	return _ContextMenu_, win32.ErrIfFailed(int32(r1))
+	_ContextMenu_ := new(*ContextMenu)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ContextMenu_))))
+	return *_ContextMenu_, win32.ErrIfFailed(int32(r1))
 }
 
 // RefreshSelection dispatches through View's vtable slot 30.
@@ -2288,9 +2288,9 @@ func (self *View) ExecuteShellCommand(Command foundation.BSTR, Directory foundat
 
 // Get_Frame dispatches through View's vtable slot 34.
 func (self *View) Get_Frame() (*Frame, error) {
-	var _Frame_ *Frame
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Frame_)))
-	return _Frame_, win32.ErrIfFailed(int32(r1))
+	_Frame_ := new(*Frame)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Frame_))))
+	return *_Frame_, win32.ErrIfFailed(int32(r1))
 }
 
 // Close dispatches through View's vtable slot 35.
@@ -2301,9 +2301,9 @@ func (self *View) Close() error {
 
 // Get_ScopeTreeVisible dispatches through View's vtable slot 36.
 func (self *View) Get_ScopeTreeVisible() (foundation.BOOL, error) {
-	var _Visible foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Visible)))
-	return _Visible, win32.ErrIfFailed(int32(r1))
+	_Visible := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Visible))))
+	return *_Visible, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ScopeTreeVisible dispatches through View's vtable slot 37.
@@ -2333,9 +2333,9 @@ func (self *View) Put_StatusBarText(StatusBarText foundation.BSTR) error {
 
 // Get_Memento dispatches through View's vtable slot 41.
 func (self *View) Get_Memento() (foundation.BSTR, error) {
-	var _Memento foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Memento)))
-	return _Memento, win32.ErrIfFailed(int32(r1))
+	_Memento := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Memento))))
+	return *_Memento, win32.ErrIfFailed(int32(r1))
 }
 
 // ViewMemento dispatches through View's vtable slot 42.
@@ -2346,16 +2346,16 @@ func (self *View) ViewMemento(Memento foundation.BSTR) error {
 
 // Get_Columns dispatches through View's vtable slot 43.
 func (self *View) Get_Columns() (*Columns, error) {
-	var _Columns_ *Columns
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Columns_)))
-	return _Columns_, win32.ErrIfFailed(int32(r1))
+	_Columns_ := new(*Columns)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Columns_))))
+	return *_Columns_, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CellContents dispatches through View's vtable slot 44.
 func (self *View) Get_CellContents(Node_ *Node, Column int32) (foundation.BSTR, error) {
-	var _CellContents foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Node_)), uintptr(Column), uintptr(unsafe.Pointer(&_CellContents)))
-	return _CellContents, win32.ErrIfFailed(int32(r1))
+	_CellContents := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Node_)), uintptr(Column), uintptr(win32.OutParam(unsafe.Pointer(_CellContents))))
+	return *_CellContents, win32.ErrIfFailed(int32(r1))
 }
 
 // ExportList dispatches through View's vtable slot 45.
@@ -2366,9 +2366,9 @@ func (self *View) ExportList(File foundation.BSTR, exportoptions ExportListOptio
 
 // Get_ListViewMode dispatches through View's vtable slot 46.
 func (self *View) Get_ListViewMode() (ListViewMode, error) {
-	var _Mode ListViewMode
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Mode)))
-	return _Mode, win32.ErrIfFailed(int32(r1))
+	_Mode := new(ListViewMode)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Mode))))
+	return *_Mode, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ListViewMode dispatches through View's vtable slot 47.
@@ -2379,9 +2379,9 @@ func (self *View) Put_ListViewMode(mode ListViewMode) error {
 
 // Get_ControlObject dispatches through View's vtable slot 48.
 func (self *View) Get_ControlObject() (*systemcom.IDispatch, error) {
-	var _Control *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Control)))
-	return _Control, win32.ErrIfFailed(int32(r1))
+	_Control := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Control))))
+	return *_Control, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: d6b8c29d-a1ff-4d72-aab0-e381e9b9338d
@@ -2394,16 +2394,16 @@ var IID_Views = win32.GUID{Data1: 0xd6b8c29d, Data2: 0xa1ff, Data3: 0x4d72, Data
 
 // Item dispatches through Views's vtable slot 7.
 func (self *Views) Item(Index int32) (*View, error) {
-	var _View_ *View
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(&_View_)))
-	return _View_, win32.ErrIfFailed(int32(r1))
+	_View_ := new(*View)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(win32.OutParam(unsafe.Pointer(_View_))))
+	return *_View_, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through Views's vtable slot 8.
 func (self *Views) Get_Count() (int32, error) {
-	var _Count int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Count)))
-	return _Count, win32.ErrIfFailed(int32(r1))
+	_Count := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Count))))
+	return *_Count, win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through Views's vtable slot 9.
@@ -2414,9 +2414,9 @@ func (self *Views) Add(Node_ *Node, viewOptions ViewOptions) error {
 
 // Get__NewEnum dispatches through Views's vtable slot 10.
 func (self *Views) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _retval *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
-	return _retval, win32.ErrIfFailed(int32(r1))
+	_retval := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: c0bccd30-de44-4528-8403-a05a6a1cc8ea

@@ -5323,9 +5323,9 @@ var IID_ICCSubStreamFiltering = win32.GUID{Data1: 0x4b2bd7ea, Data2: 0x8347, Dat
 
 // Get_SubstreamTypes dispatches through ICCSubStreamFiltering's vtable slot 3.
 func (self *ICCSubStreamFiltering) Get_SubstreamTypes() (int32, error) {
-	var _pTypes int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pTypes)))
-	return _pTypes, win32.ErrIfFailed(int32(r1))
+	_pTypes := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pTypes))))
+	return *_pTypes, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SubstreamTypes dispatches through ICCSubStreamFiltering's vtable slot 4.
@@ -7338,16 +7338,16 @@ var IID_IESEvent = win32.GUID{Data1: 0x1f0e5357, Data2: 0xaf43, Data3: 0x44e6, D
 
 // GetEventId dispatches through IESEvent's vtable slot 3.
 func (self *IESEvent) GetEventId() (uint32, error) {
-	var _pdwEventId uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pdwEventId)))
-	return _pdwEventId, win32.ErrIfFailed(int32(r1))
+	_pdwEventId := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pdwEventId))))
+	return *_pdwEventId, win32.ErrIfFailed(int32(r1))
 }
 
 // GetEventType dispatches through IESEvent's vtable slot 4.
 func (self *IESEvent) GetEventType() (win32.GUID, error) {
-	var _pguidEventType win32.GUID
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pguidEventType)))
-	return _pguidEventType, win32.ErrIfFailed(int32(r1))
+	_pguidEventType := new(win32.GUID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pguidEventType))))
+	return *_pguidEventType, win32.ErrIfFailed(int32(r1))
 }
 
 // SetCompletionStatus dispatches through IESEvent's vtable slot 5.
@@ -7358,16 +7358,16 @@ func (self *IESEvent) SetCompletionStatus(dwResult uint32) error {
 
 // GetData dispatches through IESEvent's vtable slot 6.
 func (self *IESEvent) GetData() (*systemcom.SAFEARRAY, error) {
-	var _pbData *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbData)))
-	return _pbData, win32.ErrIfFailed(int32(r1))
+	_pbData := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbData))))
+	return *_pbData, win32.ErrIfFailed(int32(r1))
 }
 
 // GetStringData dispatches through IESEvent's vtable slot 7.
 func (self *IESEvent) GetStringData() (foundation.BSTR, error) {
-	var _pbstrData foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrData)))
-	return _pbstrData, win32.ErrIfFailed(int32(r1))
+	_pbstrData := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrData))))
+	return *_pbstrData, win32.ErrIfFailed(int32(r1))
 }
 
 // IESEvents: https://learn.microsoft.com/windows/win32/api/tuner/nn-tuner-iesevents

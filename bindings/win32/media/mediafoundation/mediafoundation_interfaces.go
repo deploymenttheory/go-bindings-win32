@@ -2570,9 +2570,9 @@ var IID_IMFActivate = win32.GUID{Data1: 0x7fee9e9a, Data2: 0x4a89, Data3: 0x47a6
 
 // ActivateObject dispatches through IMFActivate's vtable slot 33.
 func (self *IMFActivate) ActivateObject(riid *win32.GUID) (*win32.IUnknown, error) {
-	var _ppv *win32.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_ppv)))
-	return _ppv, win32.ErrIfFailed(int32(r1))
+	_ppv := new(*win32.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(win32.OutParam(unsafe.Pointer(_ppv))))
+	return *_ppv, win32.ErrIfFailed(int32(r1))
 }
 
 // ShutdownObject dispatches through IMFActivate's vtable slot 34.

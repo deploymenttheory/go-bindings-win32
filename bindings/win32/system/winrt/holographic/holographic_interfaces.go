@@ -24,16 +24,16 @@ var IID_IHolographicCameraInterop = win32.GUID{Data1: 0x7cc1f9c5, Data2: 0x6d02,
 
 // CreateDirect3D12BackBufferResource dispatches through IHolographicCameraInterop's vtable slot 6.
 func (self *IHolographicCameraInterop) CreateDirect3D12BackBufferResource(pDevice *graphicsdirect3d12.ID3D12Device, pTexture2DDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC) (*graphicsdirect3d12.ID3D12Resource, error) {
-	var _ppCreatedTexture2DResource *graphicsdirect3d12.ID3D12Resource
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(pTexture2DDesc)), uintptr(unsafe.Pointer(&_ppCreatedTexture2DResource)))
-	return _ppCreatedTexture2DResource, win32.ErrIfFailed(int32(r1))
+	_ppCreatedTexture2DResource := new(*graphicsdirect3d12.ID3D12Resource)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(pTexture2DDesc)), uintptr(win32.OutParam(unsafe.Pointer(_ppCreatedTexture2DResource))))
+	return *_ppCreatedTexture2DResource, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateDirect3D12HardwareProtectedBackBufferResource dispatches through IHolographicCameraInterop's vtable slot 7.
 func (self *IHolographicCameraInterop) CreateDirect3D12HardwareProtectedBackBufferResource(pDevice *graphicsdirect3d12.ID3D12Device, pTexture2DDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession) (*graphicsdirect3d12.ID3D12Resource, error) {
-	var _ppCreatedTexture2DResource *graphicsdirect3d12.ID3D12Resource
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(pTexture2DDesc)), uintptr(unsafe.Pointer(pProtectedResourceSession)), uintptr(unsafe.Pointer(&_ppCreatedTexture2DResource)))
-	return _ppCreatedTexture2DResource, win32.ErrIfFailed(int32(r1))
+	_ppCreatedTexture2DResource := new(*graphicsdirect3d12.ID3D12Resource)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(pTexture2DDesc)), uintptr(unsafe.Pointer(pProtectedResourceSession)), uintptr(win32.OutParam(unsafe.Pointer(_ppCreatedTexture2DResource))))
+	return *_ppCreatedTexture2DResource, win32.ErrIfFailed(int32(r1))
 }
 
 // AcquireDirect3D12BufferResource dispatches through IHolographicCameraInterop's vtable slot 8.
@@ -86,16 +86,16 @@ var IID_IHolographicQuadLayerInterop = win32.GUID{Data1: 0xcfa688f0, Data2: 0x63
 
 // CreateDirect3D12ContentBufferResource dispatches through IHolographicQuadLayerInterop's vtable slot 6.
 func (self *IHolographicQuadLayerInterop) CreateDirect3D12ContentBufferResource(pDevice *graphicsdirect3d12.ID3D12Device, pTexture2DDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC) (*graphicsdirect3d12.ID3D12Resource, error) {
-	var _ppTexture2DResource *graphicsdirect3d12.ID3D12Resource
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(pTexture2DDesc)), uintptr(unsafe.Pointer(&_ppTexture2DResource)))
-	return _ppTexture2DResource, win32.ErrIfFailed(int32(r1))
+	_ppTexture2DResource := new(*graphicsdirect3d12.ID3D12Resource)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(pTexture2DDesc)), uintptr(win32.OutParam(unsafe.Pointer(_ppTexture2DResource))))
+	return *_ppTexture2DResource, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateDirect3D12HardwareProtectedContentBufferResource dispatches through IHolographicQuadLayerInterop's vtable slot 7.
 func (self *IHolographicQuadLayerInterop) CreateDirect3D12HardwareProtectedContentBufferResource(pDevice *graphicsdirect3d12.ID3D12Device, pTexture2DDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession) (*graphicsdirect3d12.ID3D12Resource, error) {
-	var _ppCreatedTexture2DResource *graphicsdirect3d12.ID3D12Resource
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(pTexture2DDesc)), uintptr(unsafe.Pointer(pProtectedResourceSession)), uintptr(unsafe.Pointer(&_ppCreatedTexture2DResource)))
-	return _ppCreatedTexture2DResource, win32.ErrIfFailed(int32(r1))
+	_ppCreatedTexture2DResource := new(*graphicsdirect3d12.ID3D12Resource)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(pTexture2DDesc)), uintptr(unsafe.Pointer(pProtectedResourceSession)), uintptr(win32.OutParam(unsafe.Pointer(_ppCreatedTexture2DResource))))
+	return *_ppCreatedTexture2DResource, win32.ErrIfFailed(int32(r1))
 }
 
 // AcquireDirect3D12BufferResource dispatches through IHolographicQuadLayerInterop's vtable slot 8.

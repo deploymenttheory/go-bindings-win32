@@ -114,16 +114,16 @@ var IID_IPresentationBuffer = win32.GUID{Data1: 0x2e217d3a, Data2: 0x5abb, Data3
 
 // GetAvailableEvent dispatches through IPresentationBuffer's vtable slot 3.
 func (self *IPresentationBuffer) GetAvailableEvent() (foundation.HANDLE, error) {
-	var _availableEventHandle foundation.HANDLE
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_availableEventHandle)))
-	return _availableEventHandle, win32.ErrIfFailed(int32(r1))
+	_availableEventHandle := new(foundation.HANDLE)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_availableEventHandle))))
+	return *_availableEventHandle, win32.ErrIfFailed(int32(r1))
 }
 
 // IsAvailable dispatches through IPresentationBuffer's vtable slot 4.
 func (self *IPresentationBuffer) IsAvailable() (byte, error) {
-	var _isAvailable byte
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_isAvailable)))
-	return _isAvailable, win32.ErrIfFailed(int32(r1))
+	_isAvailable := new(byte)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_isAvailable))))
+	return *_isAvailable, win32.ErrIfFailed(int32(r1))
 }
 
 // IPresentationContent: https://learn.microsoft.com/windows/win32/api/presentation/nn-presentation-ipresentationcontent
@@ -163,9 +163,9 @@ func (self *IPresentationFactory) IsPresentationSupportedWithIndependentFlip() b
 
 // CreatePresentationManager dispatches through IPresentationFactory's vtable slot 5.
 func (self *IPresentationFactory) CreatePresentationManager() (*IPresentationManager, error) {
-	var _ppPresentationManager *IPresentationManager
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppPresentationManager)))
-	return _ppPresentationManager, win32.ErrIfFailed(int32(r1))
+	_ppPresentationManager := new(*IPresentationManager)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppPresentationManager))))
+	return *_ppPresentationManager, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 2bd0b885-a16f-4bd9-a59a-d073e069d416
@@ -187,16 +187,16 @@ var IID_IPresentationManager = win32.GUID{Data1: 0xfb562f82, Data2: 0x6292, Data
 
 // AddBufferFromResource dispatches through IPresentationManager's vtable slot 3.
 func (self *IPresentationManager) AddBufferFromResource(resource *systemcom.IUnknown) (*IPresentationBuffer, error) {
-	var _presentationBuffer *IPresentationBuffer
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(resource)), uintptr(unsafe.Pointer(&_presentationBuffer)))
-	return _presentationBuffer, win32.ErrIfFailed(int32(r1))
+	_presentationBuffer := new(*IPresentationBuffer)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(resource)), uintptr(win32.OutParam(unsafe.Pointer(_presentationBuffer))))
+	return *_presentationBuffer, win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePresentationSurface dispatches through IPresentationManager's vtable slot 4.
 func (self *IPresentationManager) CreatePresentationSurface(compositionSurfaceHandle foundation.HANDLE) (*IPresentationSurface, error) {
-	var _presentationSurface *IPresentationSurface
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(compositionSurfaceHandle), uintptr(unsafe.Pointer(&_presentationSurface)))
-	return _presentationSurface, win32.ErrIfFailed(int32(r1))
+	_presentationSurface := new(*IPresentationSurface)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(compositionSurfaceHandle), uintptr(win32.OutParam(unsafe.Pointer(_presentationSurface))))
+	return *_presentationSurface, win32.ErrIfFailed(int32(r1))
 }
 
 // GetNextPresentId dispatches through IPresentationManager's vtable slot 5.
@@ -219,9 +219,9 @@ func (self *IPresentationManager) Present() error {
 
 // GetPresentRetiringFence dispatches through IPresentationManager's vtable slot 10.
 func (self *IPresentationManager) GetPresentRetiringFence(riid *win32.GUID) (*win32.IUnknown, error) {
-	var _fence *win32.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_fence)))
-	return _fence, win32.ErrIfFailed(int32(r1))
+	_fence := new(*win32.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(win32.OutParam(unsafe.Pointer(_fence))))
+	return *_fence, win32.ErrIfFailed(int32(r1))
 }
 
 // CancelPresentsFrom dispatches through IPresentationManager's vtable slot 11.
@@ -232,16 +232,16 @@ func (self *IPresentationManager) CancelPresentsFrom(presentIdToCancelFrom uint6
 
 // GetLostEvent dispatches through IPresentationManager's vtable slot 12.
 func (self *IPresentationManager) GetLostEvent() (foundation.HANDLE, error) {
-	var _lostEventHandle foundation.HANDLE
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lostEventHandle)))
-	return _lostEventHandle, win32.ErrIfFailed(int32(r1))
+	_lostEventHandle := new(foundation.HANDLE)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_lostEventHandle))))
+	return *_lostEventHandle, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPresentStatisticsAvailableEvent dispatches through IPresentationManager's vtable slot 13.
 func (self *IPresentationManager) GetPresentStatisticsAvailableEvent() (foundation.HANDLE, error) {
-	var _presentStatisticsAvailableEventHandle foundation.HANDLE
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_presentStatisticsAvailableEventHandle)))
-	return _presentStatisticsAvailableEventHandle, win32.ErrIfFailed(int32(r1))
+	_presentStatisticsAvailableEventHandle := new(foundation.HANDLE)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_presentStatisticsAvailableEventHandle))))
+	return *_presentStatisticsAvailableEventHandle, win32.ErrIfFailed(int32(r1))
 }
 
 // EnablePresentStatisticsKind dispatches through IPresentationManager's vtable slot 14.
@@ -252,9 +252,9 @@ func (self *IPresentationManager) EnablePresentStatisticsKind(presentStatisticsK
 
 // GetNextPresentStatistics dispatches through IPresentationManager's vtable slot 15.
 func (self *IPresentationManager) GetNextPresentStatistics() (*IPresentStatistics, error) {
-	var _nextPresentStatistics *IPresentStatistics
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_nextPresentStatistics)))
-	return _nextPresentStatistics, win32.ErrIfFailed(int32(r1))
+	_nextPresentStatistics := new(*IPresentStatistics)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_nextPresentStatistics))))
+	return *_nextPresentStatistics, win32.ErrIfFailed(int32(r1))
 }
 
 // IPresentationSurface: https://learn.microsoft.com/windows/win32/api/presentation/nn-presentation-ipresentationsurface

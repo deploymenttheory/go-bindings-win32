@@ -29,17 +29,17 @@ func (self *IFunctionDiscovery) GetInstanceCollection(pszCategory string, pszSub
 	_pszCategory := win32.UTF16Ptr(pszCategory)
 	_pszSubCategory := win32.UTF16Ptr(pszSubCategory)
 	_fIncludeAllSubCategories := win32.Bool32(fIncludeAllSubCategories)
-	var _ppIFunctionInstanceCollection *IFunctionInstanceCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszCategory)), uintptr(unsafe.Pointer(_pszSubCategory)), uintptr(_fIncludeAllSubCategories), uintptr(unsafe.Pointer(&_ppIFunctionInstanceCollection)))
-	return _ppIFunctionInstanceCollection, win32.ErrIfFailed(int32(r1))
+	_ppIFunctionInstanceCollection := new(*IFunctionInstanceCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszCategory)), uintptr(unsafe.Pointer(_pszSubCategory)), uintptr(_fIncludeAllSubCategories), uintptr(win32.OutParam(unsafe.Pointer(_ppIFunctionInstanceCollection))))
+	return *_ppIFunctionInstanceCollection, win32.ErrIfFailed(int32(r1))
 }
 
 // GetInstance dispatches through IFunctionDiscovery's vtable slot 4.
 func (self *IFunctionDiscovery) GetInstance(pszFunctionInstanceIdentity string) (*IFunctionInstance, error) {
 	_pszFunctionInstanceIdentity := win32.UTF16Ptr(pszFunctionInstanceIdentity)
-	var _ppIFunctionInstance *IFunctionInstance
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFunctionInstanceIdentity)), uintptr(unsafe.Pointer(&_ppIFunctionInstance)))
-	return _ppIFunctionInstance, win32.ErrIfFailed(int32(r1))
+	_ppIFunctionInstance := new(*IFunctionInstance)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFunctionInstanceIdentity)), uintptr(win32.OutParam(unsafe.Pointer(_ppIFunctionInstance))))
+	return *_ppIFunctionInstance, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateInstanceCollectionQuery dispatches through IFunctionDiscovery's vtable slot 5.
@@ -47,17 +47,17 @@ func (self *IFunctionDiscovery) CreateInstanceCollectionQuery(pszCategory string
 	_pszCategory := win32.UTF16Ptr(pszCategory)
 	_pszSubCategory := win32.UTF16Ptr(pszSubCategory)
 	_fIncludeAllSubCategories := win32.Bool32(fIncludeAllSubCategories)
-	var _ppIFunctionInstanceCollectionQuery *IFunctionInstanceCollectionQuery
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszCategory)), uintptr(unsafe.Pointer(_pszSubCategory)), uintptr(_fIncludeAllSubCategories), uintptr(unsafe.Pointer(pIFunctionDiscoveryNotification)), uintptr(unsafe.Pointer(pfdqcQueryContext)), uintptr(unsafe.Pointer(&_ppIFunctionInstanceCollectionQuery)))
-	return _ppIFunctionInstanceCollectionQuery, win32.ErrIfFailed(int32(r1))
+	_ppIFunctionInstanceCollectionQuery := new(*IFunctionInstanceCollectionQuery)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszCategory)), uintptr(unsafe.Pointer(_pszSubCategory)), uintptr(_fIncludeAllSubCategories), uintptr(unsafe.Pointer(pIFunctionDiscoveryNotification)), uintptr(unsafe.Pointer(pfdqcQueryContext)), uintptr(win32.OutParam(unsafe.Pointer(_ppIFunctionInstanceCollectionQuery))))
+	return *_ppIFunctionInstanceCollectionQuery, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateInstanceQuery dispatches through IFunctionDiscovery's vtable slot 6.
 func (self *IFunctionDiscovery) CreateInstanceQuery(pszFunctionInstanceIdentity string, pIFunctionDiscoveryNotification *IFunctionDiscoveryNotification, pfdqcQueryContext *uint64) (*IFunctionInstanceQuery, error) {
 	_pszFunctionInstanceIdentity := win32.UTF16Ptr(pszFunctionInstanceIdentity)
-	var _ppIFunctionInstanceQuery *IFunctionInstanceQuery
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFunctionInstanceIdentity)), uintptr(unsafe.Pointer(pIFunctionDiscoveryNotification)), uintptr(unsafe.Pointer(pfdqcQueryContext)), uintptr(unsafe.Pointer(&_ppIFunctionInstanceQuery)))
-	return _ppIFunctionInstanceQuery, win32.ErrIfFailed(int32(r1))
+	_ppIFunctionInstanceQuery := new(*IFunctionInstanceQuery)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFunctionInstanceIdentity)), uintptr(unsafe.Pointer(pIFunctionDiscoveryNotification)), uintptr(unsafe.Pointer(pfdqcQueryContext)), uintptr(win32.OutParam(unsafe.Pointer(_ppIFunctionInstanceQuery))))
+	return *_ppIFunctionInstanceQuery, win32.ErrIfFailed(int32(r1))
 }
 
 // AddInstance dispatches through IFunctionDiscovery's vtable slot 7.
@@ -65,9 +65,9 @@ func (self *IFunctionDiscovery) AddInstance(enumSystemVisibility SystemVisibilit
 	_pszCategory := win32.UTF16Ptr(pszCategory)
 	_pszSubCategory := win32.UTF16Ptr(pszSubCategory)
 	_pszCategoryIdentity := win32.UTF16Ptr(pszCategoryIdentity)
-	var _ppIFunctionInstance *IFunctionInstance
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(enumSystemVisibility), uintptr(unsafe.Pointer(_pszCategory)), uintptr(unsafe.Pointer(_pszSubCategory)), uintptr(unsafe.Pointer(_pszCategoryIdentity)), uintptr(unsafe.Pointer(&_ppIFunctionInstance)))
-	return _ppIFunctionInstance, win32.ErrIfFailed(int32(r1))
+	_ppIFunctionInstance := new(*IFunctionInstance)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(enumSystemVisibility), uintptr(unsafe.Pointer(_pszCategory)), uintptr(unsafe.Pointer(_pszSubCategory)), uintptr(unsafe.Pointer(_pszCategoryIdentity)), uintptr(win32.OutParam(unsafe.Pointer(_ppIFunctionInstance))))
+	return *_ppIFunctionInstance, win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveInstance dispatches through IFunctionDiscovery's vtable slot 8.
@@ -238,9 +238,9 @@ var IID_IFunctionDiscoveryServiceProvider = win32.GUID{Data1: 0x4c81ed02, Data2:
 
 // Initialize dispatches through IFunctionDiscoveryServiceProvider's vtable slot 3.
 func (self *IFunctionDiscoveryServiceProvider) Initialize(pIFunctionInstance *IFunctionInstance, riid *win32.GUID) (*win32.IUnknown, error) {
-	var _ppv *win32.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIFunctionInstance)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_ppv)))
-	return _ppv, win32.ErrIfFailed(int32(r1))
+	_ppv := new(*win32.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIFunctionInstance)), uintptr(unsafe.Pointer(riid)), uintptr(win32.OutParam(unsafe.Pointer(_ppv))))
+	return *_ppv, win32.ErrIfFailed(int32(r1))
 }
 
 // IFunctionInstance: https://learn.microsoft.com/windows/win32/api/functiondiscoveryapi/nn-functiondiscoveryapi-ifunctioninstance
@@ -254,23 +254,23 @@ var IID_IFunctionInstance = win32.GUID{Data1: 0x33591c10, Data2: 0x0bed, Data3: 
 
 // GetID dispatches through IFunctionInstance's vtable slot 4.
 func (self *IFunctionInstance) GetID() (*uint16, error) {
-	var _ppszCoMemIdentity *uint16
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppszCoMemIdentity)))
-	return _ppszCoMemIdentity, win32.ErrIfFailed(int32(r1))
+	_ppszCoMemIdentity := new(*uint16)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppszCoMemIdentity))))
+	return *_ppszCoMemIdentity, win32.ErrIfFailed(int32(r1))
 }
 
 // GetProviderInstanceID dispatches through IFunctionInstance's vtable slot 5.
 func (self *IFunctionInstance) GetProviderInstanceID() (*uint16, error) {
-	var _ppszCoMemProviderInstanceIdentity *uint16
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppszCoMemProviderInstanceIdentity)))
-	return _ppszCoMemProviderInstanceIdentity, win32.ErrIfFailed(int32(r1))
+	_ppszCoMemProviderInstanceIdentity := new(*uint16)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppszCoMemProviderInstanceIdentity))))
+	return *_ppszCoMemProviderInstanceIdentity, win32.ErrIfFailed(int32(r1))
 }
 
 // OpenPropertyStore dispatches through IFunctionInstance's vtable slot 6.
 func (self *IFunctionInstance) OpenPropertyStore(dwStgAccess systemcom.STGM) (*uishellpropertiessystem.IPropertyStore, error) {
-	var _ppIPropertyStore *uishellpropertiessystem.IPropertyStore
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwStgAccess), uintptr(unsafe.Pointer(&_ppIPropertyStore)))
-	return _ppIPropertyStore, win32.ErrIfFailed(int32(r1))
+	_ppIPropertyStore := new(*uishellpropertiessystem.IPropertyStore)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwStgAccess), uintptr(win32.OutParam(unsafe.Pointer(_ppIPropertyStore))))
+	return *_ppIPropertyStore, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCategory dispatches through IFunctionInstance's vtable slot 7.
@@ -290,24 +290,24 @@ var IID_IFunctionInstanceCollection = win32.GUID{Data1: 0xf0a3d895, Data2: 0x855
 
 // GetCount dispatches through IFunctionInstanceCollection's vtable slot 3.
 func (self *IFunctionInstanceCollection) GetCount() (uint32, error) {
-	var _pdwCount uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pdwCount)))
-	return _pdwCount, win32.ErrIfFailed(int32(r1))
+	_pdwCount := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pdwCount))))
+	return *_pdwCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Get dispatches through IFunctionInstanceCollection's vtable slot 4.
 func (self *IFunctionInstanceCollection) Get(pszInstanceIdentity string, pdwIndex *uint32) (*IFunctionInstance, error) {
 	_pszInstanceIdentity := win32.UTF16Ptr(pszInstanceIdentity)
-	var _ppIFunctionInstance *IFunctionInstance
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszInstanceIdentity)), uintptr(unsafe.Pointer(pdwIndex)), uintptr(unsafe.Pointer(&_ppIFunctionInstance)))
-	return _ppIFunctionInstance, win32.ErrIfFailed(int32(r1))
+	_ppIFunctionInstance := new(*IFunctionInstance)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszInstanceIdentity)), uintptr(unsafe.Pointer(pdwIndex)), uintptr(win32.OutParam(unsafe.Pointer(_ppIFunctionInstance))))
+	return *_ppIFunctionInstance, win32.ErrIfFailed(int32(r1))
 }
 
 // Item dispatches through IFunctionInstanceCollection's vtable slot 5.
 func (self *IFunctionInstanceCollection) Item(dwIndex uint32) (*IFunctionInstance, error) {
-	var _ppIFunctionInstance *IFunctionInstance
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(&_ppIFunctionInstance)))
-	return _ppIFunctionInstance, win32.ErrIfFailed(int32(r1))
+	_ppIFunctionInstance := new(*IFunctionInstance)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(win32.OutParam(unsafe.Pointer(_ppIFunctionInstance))))
+	return *_ppIFunctionInstance, win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through IFunctionInstanceCollection's vtable slot 6.
@@ -318,9 +318,9 @@ func (self *IFunctionInstanceCollection) Add(pIFunctionInstance *IFunctionInstan
 
 // Remove dispatches through IFunctionInstanceCollection's vtable slot 7.
 func (self *IFunctionInstanceCollection) Remove(dwIndex uint32) (*IFunctionInstance, error) {
-	var _ppIFunctionInstance *IFunctionInstance
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(&_ppIFunctionInstance)))
-	return _ppIFunctionInstance, win32.ErrIfFailed(int32(r1))
+	_ppIFunctionInstance := new(*IFunctionInstance)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(win32.OutParam(unsafe.Pointer(_ppIFunctionInstance))))
+	return *_ppIFunctionInstance, win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IFunctionInstanceCollection's vtable slot 8.
@@ -375,9 +375,9 @@ var IID_IFunctionInstanceQuery = win32.GUID{Data1: 0x6242bc6b, Data2: 0x90ec, Da
 
 // Execute dispatches through IFunctionInstanceQuery's vtable slot 3.
 func (self *IFunctionInstanceQuery) Execute() (*IFunctionInstance, error) {
-	var _ppIFunctionInstance *IFunctionInstance
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppIFunctionInstance)))
-	return _ppIFunctionInstance, win32.ErrIfFailed(int32(r1))
+	_ppIFunctionInstance := new(*IFunctionInstance)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppIFunctionInstance))))
+	return *_ppIFunctionInstance, win32.ErrIfFailed(int32(r1))
 }
 
 // IPNPXAssociation: https://learn.microsoft.com/windows/win32/api/pnpxassoc/nn-pnpxassoc-ipnpxassociation
@@ -450,24 +450,24 @@ var IID_IPropertyStoreCollection = win32.GUID{Data1: 0xd14d9c30, Data2: 0x12d2, 
 
 // GetCount dispatches through IPropertyStoreCollection's vtable slot 3.
 func (self *IPropertyStoreCollection) GetCount() (uint32, error) {
-	var _pdwCount uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pdwCount)))
-	return _pdwCount, win32.ErrIfFailed(int32(r1))
+	_pdwCount := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pdwCount))))
+	return *_pdwCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Get dispatches through IPropertyStoreCollection's vtable slot 4.
 func (self *IPropertyStoreCollection) Get(pszInstanceIdentity string, pdwIndex *uint32) (*uishellpropertiessystem.IPropertyStore, error) {
 	_pszInstanceIdentity := win32.UTF16Ptr(pszInstanceIdentity)
-	var _ppIPropertyStore *uishellpropertiessystem.IPropertyStore
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszInstanceIdentity)), uintptr(unsafe.Pointer(pdwIndex)), uintptr(unsafe.Pointer(&_ppIPropertyStore)))
-	return _ppIPropertyStore, win32.ErrIfFailed(int32(r1))
+	_ppIPropertyStore := new(*uishellpropertiessystem.IPropertyStore)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszInstanceIdentity)), uintptr(unsafe.Pointer(pdwIndex)), uintptr(win32.OutParam(unsafe.Pointer(_ppIPropertyStore))))
+	return *_ppIPropertyStore, win32.ErrIfFailed(int32(r1))
 }
 
 // Item dispatches through IPropertyStoreCollection's vtable slot 5.
 func (self *IPropertyStoreCollection) Item(dwIndex uint32) (*uishellpropertiessystem.IPropertyStore, error) {
-	var _ppIPropertyStore *uishellpropertiessystem.IPropertyStore
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(&_ppIPropertyStore)))
-	return _ppIPropertyStore, win32.ErrIfFailed(int32(r1))
+	_ppIPropertyStore := new(*uishellpropertiessystem.IPropertyStore)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(win32.OutParam(unsafe.Pointer(_ppIPropertyStore))))
+	return *_ppIPropertyStore, win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through IPropertyStoreCollection's vtable slot 6.
@@ -478,9 +478,9 @@ func (self *IPropertyStoreCollection) Add(pIPropertyStore *uishellpropertiessyst
 
 // Remove dispatches through IPropertyStoreCollection's vtable slot 7.
 func (self *IPropertyStoreCollection) Remove(dwIndex uint32) (*uishellpropertiessystem.IPropertyStore, error) {
-	var _pIPropertyStore *uishellpropertiessystem.IPropertyStore
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(&_pIPropertyStore)))
-	return _pIPropertyStore, win32.ErrIfFailed(int32(r1))
+	_pIPropertyStore := new(*uishellpropertiessystem.IPropertyStore)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(win32.OutParam(unsafe.Pointer(_pIPropertyStore))))
+	return *_pIPropertyStore, win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IPropertyStoreCollection's vtable slot 8.

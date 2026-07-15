@@ -25,16 +25,16 @@ var IID_IWindowsMediaLibrarySharingDevice = win32.GUID{Data1: 0x3dccc293, Data2:
 
 // Get_DeviceID dispatches through IWindowsMediaLibrarySharingDevice's vtable slot 7.
 func (self *IWindowsMediaLibrarySharingDevice) Get_DeviceID() (foundation.BSTR, error) {
-	var _deviceID foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_deviceID)))
-	return _deviceID, win32.ErrIfFailed(int32(r1))
+	_deviceID := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_deviceID))))
+	return *_deviceID, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Authorization dispatches through IWindowsMediaLibrarySharingDevice's vtable slot 8.
 func (self *IWindowsMediaLibrarySharingDevice) Get_Authorization() (WindowsMediaLibrarySharingDeviceAuthorizationStatus, error) {
-	var _authorization WindowsMediaLibrarySharingDeviceAuthorizationStatus
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_authorization)))
-	return _authorization, win32.ErrIfFailed(int32(r1))
+	_authorization := new(WindowsMediaLibrarySharingDeviceAuthorizationStatus)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_authorization))))
+	return *_authorization, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Authorization dispatches through IWindowsMediaLibrarySharingDevice's vtable slot 9.
@@ -45,9 +45,9 @@ func (self *IWindowsMediaLibrarySharingDevice) Put_Authorization(authorization W
 
 // Get_Properties dispatches through IWindowsMediaLibrarySharingDevice's vtable slot 10.
 func (self *IWindowsMediaLibrarySharingDevice) Get_Properties() (*IWindowsMediaLibrarySharingDeviceProperties, error) {
-	var _deviceProperties *IWindowsMediaLibrarySharingDeviceProperties
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_deviceProperties)))
-	return _deviceProperties, win32.ErrIfFailed(int32(r1))
+	_deviceProperties := new(*IWindowsMediaLibrarySharingDeviceProperties)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_deviceProperties))))
+	return *_deviceProperties, win32.ErrIfFailed(int32(r1))
 }
 
 // IWindowsMediaLibrarySharingDeviceProperties: https://learn.microsoft.com/windows/win32/api/wmlss/nn-wmlss-iwindowsmedialibrarysharingdeviceproperties
@@ -61,23 +61,23 @@ var IID_IWindowsMediaLibrarySharingDeviceProperties = win32.GUID{Data1: 0xc46232
 
 // Get_Item dispatches through IWindowsMediaLibrarySharingDeviceProperties's vtable slot 7.
 func (self *IWindowsMediaLibrarySharingDeviceProperties) Get_Item(index int32) (*IWindowsMediaLibrarySharingDeviceProperty, error) {
-	var _property *IWindowsMediaLibrarySharingDeviceProperty
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_property)))
-	return _property, win32.ErrIfFailed(int32(r1))
+	_property := new(*IWindowsMediaLibrarySharingDeviceProperty)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(win32.OutParam(unsafe.Pointer(_property))))
+	return *_property, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IWindowsMediaLibrarySharingDeviceProperties's vtable slot 8.
 func (self *IWindowsMediaLibrarySharingDeviceProperties) Get_Count() (int32, error) {
-	var _count int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
-	return _count, win32.ErrIfFailed(int32(r1))
+	_count := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_count))))
+	return *_count, win32.ErrIfFailed(int32(r1))
 }
 
 // GetProperty dispatches through IWindowsMediaLibrarySharingDeviceProperties's vtable slot 9.
 func (self *IWindowsMediaLibrarySharingDeviceProperties) GetProperty(name foundation.BSTR) (*IWindowsMediaLibrarySharingDeviceProperty, error) {
-	var _property *IWindowsMediaLibrarySharingDeviceProperty
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(&_property)))
-	return _property, win32.ErrIfFailed(int32(r1))
+	_property := new(*IWindowsMediaLibrarySharingDeviceProperty)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(win32.OutParam(unsafe.Pointer(_property))))
+	return *_property, win32.ErrIfFailed(int32(r1))
 }
 
 // IWindowsMediaLibrarySharingDeviceProperty: https://learn.microsoft.com/windows/win32/api/wmlss/nn-wmlss-iwindowsmedialibrarysharingdeviceproperty
@@ -91,16 +91,16 @@ var IID_IWindowsMediaLibrarySharingDeviceProperty = win32.GUID{Data1: 0x81e26927
 
 // Get_Name dispatches through IWindowsMediaLibrarySharingDeviceProperty's vtable slot 7.
 func (self *IWindowsMediaLibrarySharingDeviceProperty) Get_Name() (foundation.BSTR, error) {
-	var _name foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
-	return _name, win32.ErrIfFailed(int32(r1))
+	_name := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_name))))
+	return *_name, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Value dispatches through IWindowsMediaLibrarySharingDeviceProperty's vtable slot 8.
 func (self *IWindowsMediaLibrarySharingDeviceProperty) Get_Value() (systemvariant.VARIANT, error) {
-	var _value systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.ErrIfFailed(int32(r1))
+	_value := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
 // IWindowsMediaLibrarySharingDevices: https://learn.microsoft.com/windows/win32/api/wmlss/nn-wmlss-iwindowsmedialibrarysharingdevices
@@ -114,23 +114,23 @@ var IID_IWindowsMediaLibrarySharingDevices = win32.GUID{Data1: 0x1803f9d6, Data2
 
 // Get_Item dispatches through IWindowsMediaLibrarySharingDevices's vtable slot 7.
 func (self *IWindowsMediaLibrarySharingDevices) Get_Item(index int32) (*IWindowsMediaLibrarySharingDevice, error) {
-	var _device *IWindowsMediaLibrarySharingDevice
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_device)))
-	return _device, win32.ErrIfFailed(int32(r1))
+	_device := new(*IWindowsMediaLibrarySharingDevice)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(win32.OutParam(unsafe.Pointer(_device))))
+	return *_device, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through IWindowsMediaLibrarySharingDevices's vtable slot 8.
 func (self *IWindowsMediaLibrarySharingDevices) Get_Count() (int32, error) {
-	var _count int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
-	return _count, win32.ErrIfFailed(int32(r1))
+	_count := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_count))))
+	return *_count, win32.ErrIfFailed(int32(r1))
 }
 
 // GetDevice dispatches through IWindowsMediaLibrarySharingDevices's vtable slot 9.
 func (self *IWindowsMediaLibrarySharingDevices) GetDevice(deviceID foundation.BSTR) (*IWindowsMediaLibrarySharingDevice, error) {
-	var _device *IWindowsMediaLibrarySharingDevice
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(deviceID)), uintptr(unsafe.Pointer(&_device)))
-	return _device, win32.ErrIfFailed(int32(r1))
+	_device := new(*IWindowsMediaLibrarySharingDevice)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(deviceID)), uintptr(win32.OutParam(unsafe.Pointer(_device))))
+	return *_device, win32.ErrIfFailed(int32(r1))
 }
 
 // IWindowsMediaLibrarySharingServices: https://learn.microsoft.com/windows/win32/api/wmlss/nn-wmlss-iwindowsmedialibrarysharingservices
@@ -150,9 +150,9 @@ func (self *IWindowsMediaLibrarySharingServices) ShowShareMediaCPL(device founda
 
 // Get_userHomeMediaSharingState dispatches through IWindowsMediaLibrarySharingServices's vtable slot 8.
 func (self *IWindowsMediaLibrarySharingServices) Get_userHomeMediaSharingState() (foundation.VARIANT_BOOL, error) {
-	var _sharingEnabled foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_sharingEnabled)))
-	return _sharingEnabled, win32.ErrIfFailed(int32(r1))
+	_sharingEnabled := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_sharingEnabled))))
+	return *_sharingEnabled, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_userHomeMediaSharingState dispatches through IWindowsMediaLibrarySharingServices's vtable slot 9.
@@ -163,9 +163,9 @@ func (self *IWindowsMediaLibrarySharingServices) Put_userHomeMediaSharingState(s
 
 // Get_userHomeMediaSharingLibraryName dispatches through IWindowsMediaLibrarySharingServices's vtable slot 10.
 func (self *IWindowsMediaLibrarySharingServices) Get_userHomeMediaSharingLibraryName() (foundation.BSTR, error) {
-	var _libraryName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_libraryName)))
-	return _libraryName, win32.ErrIfFailed(int32(r1))
+	_libraryName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_libraryName))))
+	return *_libraryName, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_userHomeMediaSharingLibraryName dispatches through IWindowsMediaLibrarySharingServices's vtable slot 11.
@@ -176,9 +176,9 @@ func (self *IWindowsMediaLibrarySharingServices) Put_userHomeMediaSharingLibrary
 
 // Get_computerHomeMediaSharingAllowedState dispatches through IWindowsMediaLibrarySharingServices's vtable slot 12.
 func (self *IWindowsMediaLibrarySharingServices) Get_computerHomeMediaSharingAllowedState() (foundation.VARIANT_BOOL, error) {
-	var _sharingAllowed foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_sharingAllowed)))
-	return _sharingAllowed, win32.ErrIfFailed(int32(r1))
+	_sharingAllowed := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_sharingAllowed))))
+	return *_sharingAllowed, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_computerHomeMediaSharingAllowedState dispatches through IWindowsMediaLibrarySharingServices's vtable slot 13.
@@ -189,9 +189,9 @@ func (self *IWindowsMediaLibrarySharingServices) Put_computerHomeMediaSharingAll
 
 // Get_userInternetMediaSharingState dispatches through IWindowsMediaLibrarySharingServices's vtable slot 14.
 func (self *IWindowsMediaLibrarySharingServices) Get_userInternetMediaSharingState() (foundation.VARIANT_BOOL, error) {
-	var _sharingEnabled foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_sharingEnabled)))
-	return _sharingEnabled, win32.ErrIfFailed(int32(r1))
+	_sharingEnabled := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_sharingEnabled))))
+	return *_sharingEnabled, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_userInternetMediaSharingState dispatches through IWindowsMediaLibrarySharingServices's vtable slot 15.
@@ -202,9 +202,9 @@ func (self *IWindowsMediaLibrarySharingServices) Put_userInternetMediaSharingSta
 
 // Get_computerInternetMediaSharingAllowedState dispatches through IWindowsMediaLibrarySharingServices's vtable slot 16.
 func (self *IWindowsMediaLibrarySharingServices) Get_computerInternetMediaSharingAllowedState() (foundation.VARIANT_BOOL, error) {
-	var _sharingAllowed foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_sharingAllowed)))
-	return _sharingAllowed, win32.ErrIfFailed(int32(r1))
+	_sharingAllowed := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_sharingAllowed))))
+	return *_sharingAllowed, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_computerInternetMediaSharingAllowedState dispatches through IWindowsMediaLibrarySharingServices's vtable slot 17.
@@ -215,9 +215,9 @@ func (self *IWindowsMediaLibrarySharingServices) Put_computerInternetMediaSharin
 
 // Get_internetMediaSharingSecurityGroup dispatches through IWindowsMediaLibrarySharingServices's vtable slot 18.
 func (self *IWindowsMediaLibrarySharingServices) Get_internetMediaSharingSecurityGroup() (foundation.BSTR, error) {
-	var _securityGroup foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_securityGroup)))
-	return _securityGroup, win32.ErrIfFailed(int32(r1))
+	_securityGroup := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_securityGroup))))
+	return *_securityGroup, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_internetMediaSharingSecurityGroup dispatches through IWindowsMediaLibrarySharingServices's vtable slot 19.
@@ -228,9 +228,9 @@ func (self *IWindowsMediaLibrarySharingServices) Put_internetMediaSharingSecurit
 
 // Get_allowSharingToAllDevices dispatches through IWindowsMediaLibrarySharingServices's vtable slot 20.
 func (self *IWindowsMediaLibrarySharingServices) Get_allowSharingToAllDevices() (foundation.VARIANT_BOOL, error) {
-	var _sharingEnabled foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_sharingEnabled)))
-	return _sharingEnabled, win32.ErrIfFailed(int32(r1))
+	_sharingEnabled := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_sharingEnabled))))
+	return *_sharingEnabled, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_allowSharingToAllDevices dispatches through IWindowsMediaLibrarySharingServices's vtable slot 21.
@@ -253,14 +253,14 @@ func (self *IWindowsMediaLibrarySharingServices) SetAuthorizationState(MACAddres
 
 // GetAllDevices dispatches through IWindowsMediaLibrarySharingServices's vtable slot 24.
 func (self *IWindowsMediaLibrarySharingServices) GetAllDevices() (*IWindowsMediaLibrarySharingDevices, error) {
-	var _devices *IWindowsMediaLibrarySharingDevices
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_devices)))
-	return _devices, win32.ErrIfFailed(int32(r1))
+	_devices := new(*IWindowsMediaLibrarySharingDevices)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_devices))))
+	return *_devices, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_customSettingsApplied dispatches through IWindowsMediaLibrarySharingServices's vtable slot 25.
 func (self *IWindowsMediaLibrarySharingServices) Get_customSettingsApplied() (foundation.VARIANT_BOOL, error) {
-	var _customSettingsApplied foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_customSettingsApplied)))
-	return _customSettingsApplied, win32.ErrIfFailed(int32(r1))
+	_customSettingsApplied := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_customSettingsApplied))))
+	return *_customSettingsApplied, win32.ErrIfFailed(int32(r1))
 }

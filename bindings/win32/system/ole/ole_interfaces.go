@@ -687,9 +687,9 @@ func (self *IEnterpriseDropTarget) SetDropSourceEnterpriseId(identity string) er
 
 // IsEvaluatingEdpPolicy dispatches through IEnterpriseDropTarget's vtable slot 4.
 func (self *IEnterpriseDropTarget) IsEvaluatingEdpPolicy() (foundation.BOOL, error) {
-	var _value foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.ErrIfFailed(int32(r1))
+	_value := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumOLEVERB: https://learn.microsoft.com/windows/win32/api/oleidl/nn-oleidl-ienumoleverb

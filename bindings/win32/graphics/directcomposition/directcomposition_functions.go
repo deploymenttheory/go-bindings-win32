@@ -104,9 +104,9 @@ func DCompositionGetStatistics(frameId uint64, frameStats *COMPOSITION_FRAME_STA
 
 // DCompositionGetTargetStatistics calls dcomp!DCompositionGetTargetStatistics.
 func DCompositionGetTargetStatistics(frameId uint64, targetId *COMPOSITION_TARGET_ID) (COMPOSITION_TARGET_STATS, error) {
-	var _targetStats COMPOSITION_TARGET_STATS
-	r1, _, _ := syscall.SyscallN(procDCompositionGetTargetStatistics.Addr(), uintptr(frameId), uintptr(unsafe.Pointer(targetId)), uintptr(unsafe.Pointer(&_targetStats)))
-	return _targetStats, win32.ErrIfFailed(int32(r1))
+	_targetStats := new(COMPOSITION_TARGET_STATS)
+	r1, _, _ := syscall.SyscallN(procDCompositionGetTargetStatistics.Addr(), uintptr(frameId), uintptr(unsafe.Pointer(targetId)), uintptr(win32.OutParam(unsafe.Pointer(_targetStats))))
+	return *_targetStats, win32.ErrIfFailed(int32(r1))
 }
 
 // DCompositionWaitForCompositorClock calls dcomp!DCompositionWaitForCompositorClock.

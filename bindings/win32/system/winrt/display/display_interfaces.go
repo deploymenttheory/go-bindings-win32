@@ -25,9 +25,9 @@ var IID_IDisplayDeviceInterop = win32.GUID{Data1: 0x64338358, Data2: 0x366a, Dat
 
 // CreateSharedHandle dispatches through IDisplayDeviceInterop's vtable slot 3.
 func (self *IDisplayDeviceInterop) CreateSharedHandle(pObject *systemwinrt.IInspectable, pSecurityAttributes *security.SECURITY_ATTRIBUTES, Access uint32, Name systemwinrt.HSTRING) (foundation.HANDLE, error) {
-	var _pHandle foundation.HANDLE
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObject)), uintptr(unsafe.Pointer(pSecurityAttributes)), uintptr(Access), uintptr(Name), uintptr(unsafe.Pointer(&_pHandle)))
-	return _pHandle, win32.ErrIfFailed(int32(r1))
+	_pHandle := new(foundation.HANDLE)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObject)), uintptr(unsafe.Pointer(pSecurityAttributes)), uintptr(Access), uintptr(Name), uintptr(win32.OutParam(unsafe.Pointer(_pHandle))))
+	return *_pHandle, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: a6ba4205-e59e-4e71-b25b-4e436d21ee3d
@@ -40,14 +40,14 @@ var IID_IDisplayPathInterop = win32.GUID{Data1: 0xa6ba4205, Data2: 0xe59e, Data3
 
 // CreateSourcePresentationHandle dispatches through IDisplayPathInterop's vtable slot 3.
 func (self *IDisplayPathInterop) CreateSourcePresentationHandle() (foundation.HANDLE, error) {
-	var _pValue foundation.HANDLE
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pValue)))
-	return _pValue, win32.ErrIfFailed(int32(r1))
+	_pValue := new(foundation.HANDLE)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pValue))))
+	return *_pValue, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSourceId dispatches through IDisplayPathInterop's vtable slot 4.
 func (self *IDisplayPathInterop) GetSourceId() (uint32, error) {
-	var _pSourceId uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pSourceId)))
-	return _pSourceId, win32.ErrIfFailed(int32(r1))
+	_pSourceId := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pSourceId))))
+	return *_pSourceId, win32.ErrIfFailed(int32(r1))
 }

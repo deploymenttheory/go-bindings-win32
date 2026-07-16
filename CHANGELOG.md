@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0](https://github.com/deploymenttheory/go-bindings-win32/compare/v0.1.0...v0.2.0) (2026-07-16)
+
+
+### Features
+
+* extract the ECMA-335 reader to deploymenttheory/go-winmd ([9d9b04a](https://github.com/deploymenttheory/go-bindings-win32/commit/9d9b04a32830a1071fe626869ae66c382834ac06))
+
+
+### Bug Fixes
+
+* **ci:** let include:scope derive the dependabot commit scope ([f326f35](https://github.com/deploymenttheory/go-bindings-win32/commit/f326f3509fc2860b3a070400ac2959f520b8636d))
+* **ci:** stop dependabot doubling the commit scope to chore(deps)(deps) ([b1d98be](https://github.com/deploymenttheory/go-bindings-win32/commit/b1d98be7e4d18112b3645f8cd8996c8607e7c666))
+* heap-escape elevated out-params (stack-move hazard under reentrant callbacks) ([5bd1590](https://github.com/deploymenttheory/go-bindings-win32/commit/5bd1590ef5e291192fd958addb10b8a04e404cf9))
+* heap-escape elevated out-params (stack-move hazard under reentrant callbacks) ([cd98306](https://github.com/deploymenttheory/go-bindings-win32/commit/cd98306344a35df9ab940f916fc08f3ddbeaa4a6))
+
 ## 0.1.0 (2026-07-14)
 
 

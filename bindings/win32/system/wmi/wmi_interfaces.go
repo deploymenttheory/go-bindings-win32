@@ -112,9 +112,9 @@ var IID_ISWbemDateTime = win32.GUID{Data1: 0x5e97458a, Data2: 0xcf77, Data3: 0x1
 
 // Get_Value dispatches through ISWbemDateTime's vtable slot 7.
 func (self *ISWbemDateTime) Get_Value() (foundation.BSTR, error) {
-	var _strValue foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_strValue)))
-	return _strValue, win32.ErrIfFailed(int32(r1))
+	_strValue := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_strValue))))
+	return *_strValue, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Value dispatches through ISWbemDateTime's vtable slot 8.
@@ -125,9 +125,9 @@ func (self *ISWbemDateTime) Put_Value(strValue foundation.BSTR) error {
 
 // Get_Year dispatches through ISWbemDateTime's vtable slot 9.
 func (self *ISWbemDateTime) Get_Year() (int32, error) {
-	var _iYear int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_iYear)))
-	return _iYear, win32.ErrIfFailed(int32(r1))
+	_iYear := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_iYear))))
+	return *_iYear, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Year dispatches through ISWbemDateTime's vtable slot 10.
@@ -138,9 +138,9 @@ func (self *ISWbemDateTime) Put_Year(iYear int32) error {
 
 // Get_YearSpecified dispatches through ISWbemDateTime's vtable slot 11.
 func (self *ISWbemDateTime) Get_YearSpecified() (foundation.VARIANT_BOOL, error) {
-	var _bYearSpecified foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bYearSpecified)))
-	return _bYearSpecified, win32.ErrIfFailed(int32(r1))
+	_bYearSpecified := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_bYearSpecified))))
+	return *_bYearSpecified, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_YearSpecified dispatches through ISWbemDateTime's vtable slot 12.
@@ -151,9 +151,9 @@ func (self *ISWbemDateTime) Put_YearSpecified(bYearSpecified foundation.VARIANT_
 
 // Get_Month dispatches through ISWbemDateTime's vtable slot 13.
 func (self *ISWbemDateTime) Get_Month() (int32, error) {
-	var _iMonth int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_iMonth)))
-	return _iMonth, win32.ErrIfFailed(int32(r1))
+	_iMonth := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_iMonth))))
+	return *_iMonth, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Month dispatches through ISWbemDateTime's vtable slot 14.
@@ -164,9 +164,9 @@ func (self *ISWbemDateTime) Put_Month(iMonth int32) error {
 
 // Get_MonthSpecified dispatches through ISWbemDateTime's vtable slot 15.
 func (self *ISWbemDateTime) Get_MonthSpecified() (foundation.VARIANT_BOOL, error) {
-	var _bMonthSpecified foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bMonthSpecified)))
-	return _bMonthSpecified, win32.ErrIfFailed(int32(r1))
+	_bMonthSpecified := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_bMonthSpecified))))
+	return *_bMonthSpecified, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MonthSpecified dispatches through ISWbemDateTime's vtable slot 16.
@@ -177,9 +177,9 @@ func (self *ISWbemDateTime) Put_MonthSpecified(bMonthSpecified foundation.VARIAN
 
 // Get_Day dispatches through ISWbemDateTime's vtable slot 17.
 func (self *ISWbemDateTime) Get_Day() (int32, error) {
-	var _iDay int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_iDay)))
-	return _iDay, win32.ErrIfFailed(int32(r1))
+	_iDay := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_iDay))))
+	return *_iDay, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Day dispatches through ISWbemDateTime's vtable slot 18.
@@ -190,9 +190,9 @@ func (self *ISWbemDateTime) Put_Day(iDay int32) error {
 
 // Get_DaySpecified dispatches through ISWbemDateTime's vtable slot 19.
 func (self *ISWbemDateTime) Get_DaySpecified() (foundation.VARIANT_BOOL, error) {
-	var _bDaySpecified foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bDaySpecified)))
-	return _bDaySpecified, win32.ErrIfFailed(int32(r1))
+	_bDaySpecified := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_bDaySpecified))))
+	return *_bDaySpecified, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DaySpecified dispatches through ISWbemDateTime's vtable slot 20.
@@ -203,9 +203,9 @@ func (self *ISWbemDateTime) Put_DaySpecified(bDaySpecified foundation.VARIANT_BO
 
 // Get_Hours dispatches through ISWbemDateTime's vtable slot 21.
 func (self *ISWbemDateTime) Get_Hours() (int32, error) {
-	var _iHours int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_iHours)))
-	return _iHours, win32.ErrIfFailed(int32(r1))
+	_iHours := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_iHours))))
+	return *_iHours, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Hours dispatches through ISWbemDateTime's vtable slot 22.
@@ -216,9 +216,9 @@ func (self *ISWbemDateTime) Put_Hours(iHours int32) error {
 
 // Get_HoursSpecified dispatches through ISWbemDateTime's vtable slot 23.
 func (self *ISWbemDateTime) Get_HoursSpecified() (foundation.VARIANT_BOOL, error) {
-	var _bHoursSpecified foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bHoursSpecified)))
-	return _bHoursSpecified, win32.ErrIfFailed(int32(r1))
+	_bHoursSpecified := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_bHoursSpecified))))
+	return *_bHoursSpecified, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_HoursSpecified dispatches through ISWbemDateTime's vtable slot 24.
@@ -229,9 +229,9 @@ func (self *ISWbemDateTime) Put_HoursSpecified(bHoursSpecified foundation.VARIAN
 
 // Get_Minutes dispatches through ISWbemDateTime's vtable slot 25.
 func (self *ISWbemDateTime) Get_Minutes() (int32, error) {
-	var _iMinutes int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_iMinutes)))
-	return _iMinutes, win32.ErrIfFailed(int32(r1))
+	_iMinutes := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_iMinutes))))
+	return *_iMinutes, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Minutes dispatches through ISWbemDateTime's vtable slot 26.
@@ -242,9 +242,9 @@ func (self *ISWbemDateTime) Put_Minutes(iMinutes int32) error {
 
 // Get_MinutesSpecified dispatches through ISWbemDateTime's vtable slot 27.
 func (self *ISWbemDateTime) Get_MinutesSpecified() (foundation.VARIANT_BOOL, error) {
-	var _bMinutesSpecified foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bMinutesSpecified)))
-	return _bMinutesSpecified, win32.ErrIfFailed(int32(r1))
+	_bMinutesSpecified := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_bMinutesSpecified))))
+	return *_bMinutesSpecified, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MinutesSpecified dispatches through ISWbemDateTime's vtable slot 28.
@@ -255,9 +255,9 @@ func (self *ISWbemDateTime) Put_MinutesSpecified(bMinutesSpecified foundation.VA
 
 // Get_Seconds dispatches through ISWbemDateTime's vtable slot 29.
 func (self *ISWbemDateTime) Get_Seconds() (int32, error) {
-	var _iSeconds int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_iSeconds)))
-	return _iSeconds, win32.ErrIfFailed(int32(r1))
+	_iSeconds := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_iSeconds))))
+	return *_iSeconds, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Seconds dispatches through ISWbemDateTime's vtable slot 30.
@@ -268,9 +268,9 @@ func (self *ISWbemDateTime) Put_Seconds(iSeconds int32) error {
 
 // Get_SecondsSpecified dispatches through ISWbemDateTime's vtable slot 31.
 func (self *ISWbemDateTime) Get_SecondsSpecified() (foundation.VARIANT_BOOL, error) {
-	var _bSecondsSpecified foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bSecondsSpecified)))
-	return _bSecondsSpecified, win32.ErrIfFailed(int32(r1))
+	_bSecondsSpecified := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_bSecondsSpecified))))
+	return *_bSecondsSpecified, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SecondsSpecified dispatches through ISWbemDateTime's vtable slot 32.
@@ -281,9 +281,9 @@ func (self *ISWbemDateTime) Put_SecondsSpecified(bSecondsSpecified foundation.VA
 
 // Get_Microseconds dispatches through ISWbemDateTime's vtable slot 33.
 func (self *ISWbemDateTime) Get_Microseconds() (int32, error) {
-	var _iMicroseconds int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_iMicroseconds)))
-	return _iMicroseconds, win32.ErrIfFailed(int32(r1))
+	_iMicroseconds := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_iMicroseconds))))
+	return *_iMicroseconds, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Microseconds dispatches through ISWbemDateTime's vtable slot 34.
@@ -294,9 +294,9 @@ func (self *ISWbemDateTime) Put_Microseconds(iMicroseconds int32) error {
 
 // Get_MicrosecondsSpecified dispatches through ISWbemDateTime's vtable slot 35.
 func (self *ISWbemDateTime) Get_MicrosecondsSpecified() (foundation.VARIANT_BOOL, error) {
-	var _bMicrosecondsSpecified foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bMicrosecondsSpecified)))
-	return _bMicrosecondsSpecified, win32.ErrIfFailed(int32(r1))
+	_bMicrosecondsSpecified := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_bMicrosecondsSpecified))))
+	return *_bMicrosecondsSpecified, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MicrosecondsSpecified dispatches through ISWbemDateTime's vtable slot 36.
@@ -307,9 +307,9 @@ func (self *ISWbemDateTime) Put_MicrosecondsSpecified(bMicrosecondsSpecified fou
 
 // Get_UTC dispatches through ISWbemDateTime's vtable slot 37.
 func (self *ISWbemDateTime) Get_UTC() (int32, error) {
-	var _iUTC int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_iUTC)))
-	return _iUTC, win32.ErrIfFailed(int32(r1))
+	_iUTC := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_iUTC))))
+	return *_iUTC, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_UTC dispatches through ISWbemDateTime's vtable slot 38.
@@ -320,9 +320,9 @@ func (self *ISWbemDateTime) Put_UTC(iUTC int32) error {
 
 // Get_UTCSpecified dispatches through ISWbemDateTime's vtable slot 39.
 func (self *ISWbemDateTime) Get_UTCSpecified() (foundation.VARIANT_BOOL, error) {
-	var _bUTCSpecified foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bUTCSpecified)))
-	return _bUTCSpecified, win32.ErrIfFailed(int32(r1))
+	_bUTCSpecified := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_bUTCSpecified))))
+	return *_bUTCSpecified, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_UTCSpecified dispatches through ISWbemDateTime's vtable slot 40.
@@ -333,9 +333,9 @@ func (self *ISWbemDateTime) Put_UTCSpecified(bUTCSpecified foundation.VARIANT_BO
 
 // Get_IsInterval dispatches through ISWbemDateTime's vtable slot 41.
 func (self *ISWbemDateTime) Get_IsInterval() (foundation.VARIANT_BOOL, error) {
-	var _bIsInterval foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bIsInterval)))
-	return _bIsInterval, win32.ErrIfFailed(int32(r1))
+	_bIsInterval := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_bIsInterval))))
+	return *_bIsInterval, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_IsInterval dispatches through ISWbemDateTime's vtable slot 42.
@@ -346,16 +346,16 @@ func (self *ISWbemDateTime) Put_IsInterval(bIsInterval foundation.VARIANT_BOOL) 
 
 // GetVarDate dispatches through ISWbemDateTime's vtable slot 43.
 func (self *ISWbemDateTime) GetVarDate(bIsLocal foundation.VARIANT_BOOL) (float64, error) {
-	var _dVarDate float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(bIsLocal), uintptr(unsafe.Pointer(&_dVarDate)))
-	return _dVarDate, win32.ErrIfFailed(int32(r1))
+	_dVarDate := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(bIsLocal), uintptr(win32.OutParam(unsafe.Pointer(_dVarDate))))
+	return *_dVarDate, win32.ErrIfFailed(int32(r1))
 }
 
 // GetFileTime dispatches through ISWbemDateTime's vtable slot 45.
 func (self *ISWbemDateTime) GetFileTime(bIsLocal foundation.VARIANT_BOOL) (foundation.BSTR, error) {
-	var _strFileTime foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(bIsLocal), uintptr(unsafe.Pointer(&_strFileTime)))
-	return _strFileTime, win32.ErrIfFailed(int32(r1))
+	_strFileTime := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(bIsLocal), uintptr(win32.OutParam(unsafe.Pointer(_strFileTime))))
+	return *_strFileTime, win32.ErrIfFailed(int32(r1))
 }
 
 // SetFileTime dispatches through ISWbemDateTime's vtable slot 46.
@@ -374,16 +374,16 @@ var IID_ISWbemEventSource = win32.GUID{Data1: 0x27d54d92, Data2: 0x0ebe, Data3: 
 
 // NextEvent dispatches through ISWbemEventSource's vtable slot 7.
 func (self *ISWbemEventSource) NextEvent(iTimeoutMs int32) (*ISWbemObject, error) {
-	var _objWbemObject *ISWbemObject
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(iTimeoutMs), uintptr(unsafe.Pointer(&_objWbemObject)))
-	return _objWbemObject, win32.ErrIfFailed(int32(r1))
+	_objWbemObject := new(*ISWbemObject)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(iTimeoutMs), uintptr(win32.OutParam(unsafe.Pointer(_objWbemObject))))
+	return *_objWbemObject, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Security_ dispatches through ISWbemEventSource's vtable slot 8.
 func (self *ISWbemEventSource) Get_Security_() (*ISWbemSecurity, error) {
-	var _objWbemSecurity *ISWbemSecurity
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_objWbemSecurity)))
-	return _objWbemSecurity, win32.ErrIfFailed(int32(r1))
+	_objWbemSecurity := new(*ISWbemSecurity)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemSecurity))))
+	return *_objWbemSecurity, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: d962db84-d4bb-11d1-8b09-00600806d9b6
@@ -404,16 +404,16 @@ var IID_ISWbemLocator = win32.GUID{Data1: 0x76a6415b, Data2: 0xcb41, Data3: 0x11
 
 // ConnectServer dispatches through ISWbemLocator's vtable slot 7.
 func (self *ISWbemLocator) ConnectServer(strServer foundation.BSTR, strNamespace foundation.BSTR, strUser foundation.BSTR, strPassword foundation.BSTR, strLocale foundation.BSTR, strAuthority foundation.BSTR, iSecurityFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*ISWbemServices, error) {
-	var _objWbemServices *ISWbemServices
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strServer)), uintptr(unsafe.Pointer(strNamespace)), uintptr(unsafe.Pointer(strUser)), uintptr(unsafe.Pointer(strPassword)), uintptr(unsafe.Pointer(strLocale)), uintptr(unsafe.Pointer(strAuthority)), uintptr(iSecurityFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(unsafe.Pointer(&_objWbemServices)))
-	return _objWbemServices, win32.ErrIfFailed(int32(r1))
+	_objWbemServices := new(*ISWbemServices)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strServer)), uintptr(unsafe.Pointer(strNamespace)), uintptr(unsafe.Pointer(strUser)), uintptr(unsafe.Pointer(strPassword)), uintptr(unsafe.Pointer(strLocale)), uintptr(unsafe.Pointer(strAuthority)), uintptr(iSecurityFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemServices))))
+	return *_objWbemServices, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Security_ dispatches through ISWbemLocator's vtable slot 8.
 func (self *ISWbemLocator) Get_Security_() (*ISWbemSecurity, error) {
-	var _objWbemSecurity *ISWbemSecurity
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_objWbemSecurity)))
-	return _objWbemSecurity, win32.ErrIfFailed(int32(r1))
+	_objWbemSecurity := new(*ISWbemSecurity)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemSecurity))))
+	return *_objWbemSecurity, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 422e8e90-d955-11d1-8b09-00600806d9b6
@@ -426,37 +426,37 @@ var IID_ISWbemMethod = win32.GUID{Data1: 0x422e8e90, Data2: 0xd955, Data3: 0x11d
 
 // Get_Name dispatches through ISWbemMethod's vtable slot 7.
 func (self *ISWbemMethod) Get_Name() (foundation.BSTR, error) {
-	var _strName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_strName)))
-	return _strName, win32.ErrIfFailed(int32(r1))
+	_strName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_strName))))
+	return *_strName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Origin dispatches through ISWbemMethod's vtable slot 8.
 func (self *ISWbemMethod) Get_Origin() (foundation.BSTR, error) {
-	var _strOrigin foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_strOrigin)))
-	return _strOrigin, win32.ErrIfFailed(int32(r1))
+	_strOrigin := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_strOrigin))))
+	return *_strOrigin, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InParameters dispatches through ISWbemMethod's vtable slot 9.
 func (self *ISWbemMethod) Get_InParameters() (*ISWbemObject, error) {
-	var _objWbemInParameters *ISWbemObject
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_objWbemInParameters)))
-	return _objWbemInParameters, win32.ErrIfFailed(int32(r1))
+	_objWbemInParameters := new(*ISWbemObject)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemInParameters))))
+	return *_objWbemInParameters, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OutParameters dispatches through ISWbemMethod's vtable slot 10.
 func (self *ISWbemMethod) Get_OutParameters() (*ISWbemObject, error) {
-	var _objWbemOutParameters *ISWbemObject
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_objWbemOutParameters)))
-	return _objWbemOutParameters, win32.ErrIfFailed(int32(r1))
+	_objWbemOutParameters := new(*ISWbemObject)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemOutParameters))))
+	return *_objWbemOutParameters, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Qualifiers_ dispatches through ISWbemMethod's vtable slot 11.
 func (self *ISWbemMethod) Get_Qualifiers_() (*ISWbemQualifierSet, error) {
-	var _objWbemQualifierSet *ISWbemQualifierSet
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_objWbemQualifierSet)))
-	return _objWbemQualifierSet, win32.ErrIfFailed(int32(r1))
+	_objWbemQualifierSet := new(*ISWbemQualifierSet)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemQualifierSet))))
+	return *_objWbemQualifierSet, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: c93ba292-d955-11d1-8b09-00600806d9b6
@@ -469,23 +469,23 @@ var IID_ISWbemMethodSet = win32.GUID{Data1: 0xc93ba292, Data2: 0xd955, Data3: 0x
 
 // Get__NewEnum dispatches through ISWbemMethodSet's vtable slot 7.
 func (self *ISWbemMethodSet) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _pUnk *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pUnk)))
-	return _pUnk, win32.ErrIfFailed(int32(r1))
+	_pUnk := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pUnk))))
+	return *_pUnk, win32.ErrIfFailed(int32(r1))
 }
 
 // Item dispatches through ISWbemMethodSet's vtable slot 8.
 func (self *ISWbemMethodSet) Item(strName foundation.BSTR, iFlags int32) (*ISWbemMethod, error) {
-	var _objWbemMethod *ISWbemMethod
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strName)), uintptr(iFlags), uintptr(unsafe.Pointer(&_objWbemMethod)))
-	return _objWbemMethod, win32.ErrIfFailed(int32(r1))
+	_objWbemMethod := new(*ISWbemMethod)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strName)), uintptr(iFlags), uintptr(win32.OutParam(unsafe.Pointer(_objWbemMethod))))
+	return *_objWbemMethod, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through ISWbemMethodSet's vtable slot 9.
 func (self *ISWbemMethodSet) Get_Count() (int32, error) {
-	var _iCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_iCount)))
-	return _iCount, win32.ErrIfFailed(int32(r1))
+	_iCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_iCount))))
+	return *_iCount, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 76a64164-cb41-11d1-8b02-00600806d9b6
@@ -498,9 +498,9 @@ var IID_ISWbemNamedValue = win32.GUID{Data1: 0x76a64164, Data2: 0xcb41, Data3: 0
 
 // Get_Value dispatches through ISWbemNamedValue's vtable slot 7.
 func (self *ISWbemNamedValue) Get_Value() (systemvariant.VARIANT, error) {
-	var _varValue systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_varValue)))
-	return _varValue, win32.ErrIfFailed(int32(r1))
+	_varValue := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_varValue))))
+	return *_varValue, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Value dispatches through ISWbemNamedValue's vtable slot 8.
@@ -511,9 +511,9 @@ func (self *ISWbemNamedValue) Put_Value(varValue *systemvariant.VARIANT) error {
 
 // Get_Name dispatches through ISWbemNamedValue's vtable slot 9.
 func (self *ISWbemNamedValue) Get_Name() (foundation.BSTR, error) {
-	var _strName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_strName)))
-	return _strName, win32.ErrIfFailed(int32(r1))
+	_strName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_strName))))
+	return *_strName, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: cf2376ea-ce8c-11d1-8b05-00600806d9b6
@@ -526,30 +526,30 @@ var IID_ISWbemNamedValueSet = win32.GUID{Data1: 0xcf2376ea, Data2: 0xce8c, Data3
 
 // Get__NewEnum dispatches through ISWbemNamedValueSet's vtable slot 7.
 func (self *ISWbemNamedValueSet) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _pUnk *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pUnk)))
-	return _pUnk, win32.ErrIfFailed(int32(r1))
+	_pUnk := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pUnk))))
+	return *_pUnk, win32.ErrIfFailed(int32(r1))
 }
 
 // Item dispatches through ISWbemNamedValueSet's vtable slot 8.
 func (self *ISWbemNamedValueSet) Item(strName foundation.BSTR, iFlags int32) (*ISWbemNamedValue, error) {
-	var _objWbemNamedValue *ISWbemNamedValue
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strName)), uintptr(iFlags), uintptr(unsafe.Pointer(&_objWbemNamedValue)))
-	return _objWbemNamedValue, win32.ErrIfFailed(int32(r1))
+	_objWbemNamedValue := new(*ISWbemNamedValue)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strName)), uintptr(iFlags), uintptr(win32.OutParam(unsafe.Pointer(_objWbemNamedValue))))
+	return *_objWbemNamedValue, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through ISWbemNamedValueSet's vtable slot 9.
 func (self *ISWbemNamedValueSet) Get_Count() (int32, error) {
-	var _iCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_iCount)))
-	return _iCount, win32.ErrIfFailed(int32(r1))
+	_iCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_iCount))))
+	return *_iCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through ISWbemNamedValueSet's vtable slot 10.
 func (self *ISWbemNamedValueSet) Add(strName foundation.BSTR, varValue *systemvariant.VARIANT, iFlags int32) (*ISWbemNamedValue, error) {
-	var _objWbemNamedValue *ISWbemNamedValue
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strName)), uintptr(unsafe.Pointer(varValue)), uintptr(iFlags), uintptr(unsafe.Pointer(&_objWbemNamedValue)))
-	return _objWbemNamedValue, win32.ErrIfFailed(int32(r1))
+	_objWbemNamedValue := new(*ISWbemNamedValue)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strName)), uintptr(unsafe.Pointer(varValue)), uintptr(iFlags), uintptr(win32.OutParam(unsafe.Pointer(_objWbemNamedValue))))
+	return *_objWbemNamedValue, win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through ISWbemNamedValueSet's vtable slot 11.
@@ -560,9 +560,9 @@ func (self *ISWbemNamedValueSet) Remove(strName foundation.BSTR, iFlags int32) e
 
 // Clone dispatches through ISWbemNamedValueSet's vtable slot 12.
 func (self *ISWbemNamedValueSet) Clone() (*ISWbemNamedValueSet, error) {
-	var _objWbemNamedValueSet *ISWbemNamedValueSet
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_objWbemNamedValueSet)))
-	return _objWbemNamedValueSet, win32.ErrIfFailed(int32(r1))
+	_objWbemNamedValueSet := new(*ISWbemNamedValueSet)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemNamedValueSet))))
+	return *_objWbemNamedValueSet, win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteAll dispatches through ISWbemNamedValueSet's vtable slot 13.
@@ -581,9 +581,9 @@ var IID_ISWbemObject = win32.GUID{Data1: 0x76a6415a, Data2: 0xcb41, Data3: 0x11d
 
 // Put_ dispatches through ISWbemObject's vtable slot 7.
 func (self *ISWbemObject) Put_(iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*ISWbemObjectPath, error) {
-	var _objWbemObjectPath *ISWbemObjectPath
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(iFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(unsafe.Pointer(&_objWbemObjectPath)))
-	return _objWbemObjectPath, win32.ErrIfFailed(int32(r1))
+	_objWbemObjectPath := new(*ISWbemObjectPath)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(iFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemObjectPath))))
+	return *_objWbemObjectPath, win32.ErrIfFailed(int32(r1))
 }
 
 // PutAsync_ dispatches through ISWbemObject's vtable slot 8.
@@ -606,9 +606,9 @@ func (self *ISWbemObject) DeleteAsync_(objWbemSink *systemcom.IDispatch, iFlags 
 
 // Instances_ dispatches through ISWbemObject's vtable slot 11.
 func (self *ISWbemObject) Instances_(iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*ISWbemObjectSet, error) {
-	var _objWbemObjectSet *ISWbemObjectSet
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(iFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(unsafe.Pointer(&_objWbemObjectSet)))
-	return _objWbemObjectSet, win32.ErrIfFailed(int32(r1))
+	_objWbemObjectSet := new(*ISWbemObjectSet)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(iFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemObjectSet))))
+	return *_objWbemObjectSet, win32.ErrIfFailed(int32(r1))
 }
 
 // InstancesAsync_ dispatches through ISWbemObject's vtable slot 12.
@@ -619,9 +619,9 @@ func (self *ISWbemObject) InstancesAsync_(objWbemSink *systemcom.IDispatch, iFla
 
 // Subclasses_ dispatches through ISWbemObject's vtable slot 13.
 func (self *ISWbemObject) Subclasses_(iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*ISWbemObjectSet, error) {
-	var _objWbemObjectSet *ISWbemObjectSet
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(iFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(unsafe.Pointer(&_objWbemObjectSet)))
-	return _objWbemObjectSet, win32.ErrIfFailed(int32(r1))
+	_objWbemObjectSet := new(*ISWbemObjectSet)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(iFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemObjectSet))))
+	return *_objWbemObjectSet, win32.ErrIfFailed(int32(r1))
 }
 
 // SubclassesAsync_ dispatches through ISWbemObject's vtable slot 14.
@@ -632,9 +632,9 @@ func (self *ISWbemObject) SubclassesAsync_(objWbemSink *systemcom.IDispatch, iFl
 
 // Associators_ dispatches through ISWbemObject's vtable slot 15.
 func (self *ISWbemObject) Associators_(strAssocClass foundation.BSTR, strResultClass foundation.BSTR, strResultRole foundation.BSTR, strRole foundation.BSTR, bClassesOnly foundation.VARIANT_BOOL, bSchemaOnly foundation.VARIANT_BOOL, strRequiredAssocQualifier foundation.BSTR, strRequiredQualifier foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*ISWbemObjectSet, error) {
-	var _objWbemObjectSet *ISWbemObjectSet
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strAssocClass)), uintptr(unsafe.Pointer(strResultClass)), uintptr(unsafe.Pointer(strResultRole)), uintptr(unsafe.Pointer(strRole)), uintptr(bClassesOnly), uintptr(bSchemaOnly), uintptr(unsafe.Pointer(strRequiredAssocQualifier)), uintptr(unsafe.Pointer(strRequiredQualifier)), uintptr(iFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(unsafe.Pointer(&_objWbemObjectSet)))
-	return _objWbemObjectSet, win32.ErrIfFailed(int32(r1))
+	_objWbemObjectSet := new(*ISWbemObjectSet)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strAssocClass)), uintptr(unsafe.Pointer(strResultClass)), uintptr(unsafe.Pointer(strResultRole)), uintptr(unsafe.Pointer(strRole)), uintptr(bClassesOnly), uintptr(bSchemaOnly), uintptr(unsafe.Pointer(strRequiredAssocQualifier)), uintptr(unsafe.Pointer(strRequiredQualifier)), uintptr(iFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemObjectSet))))
+	return *_objWbemObjectSet, win32.ErrIfFailed(int32(r1))
 }
 
 // AssociatorsAsync_ dispatches through ISWbemObject's vtable slot 16.
@@ -645,9 +645,9 @@ func (self *ISWbemObject) AssociatorsAsync_(objWbemSink *systemcom.IDispatch, st
 
 // References_ dispatches through ISWbemObject's vtable slot 17.
 func (self *ISWbemObject) References_(strResultClass foundation.BSTR, strRole foundation.BSTR, bClassesOnly foundation.VARIANT_BOOL, bSchemaOnly foundation.VARIANT_BOOL, strRequiredQualifier foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*ISWbemObjectSet, error) {
-	var _objWbemObjectSet *ISWbemObjectSet
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strResultClass)), uintptr(unsafe.Pointer(strRole)), uintptr(bClassesOnly), uintptr(bSchemaOnly), uintptr(unsafe.Pointer(strRequiredQualifier)), uintptr(iFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(unsafe.Pointer(&_objWbemObjectSet)))
-	return _objWbemObjectSet, win32.ErrIfFailed(int32(r1))
+	_objWbemObjectSet := new(*ISWbemObjectSet)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strResultClass)), uintptr(unsafe.Pointer(strRole)), uintptr(bClassesOnly), uintptr(bSchemaOnly), uintptr(unsafe.Pointer(strRequiredQualifier)), uintptr(iFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemObjectSet))))
+	return *_objWbemObjectSet, win32.ErrIfFailed(int32(r1))
 }
 
 // ReferencesAsync_ dispatches through ISWbemObject's vtable slot 18.
@@ -658,9 +658,9 @@ func (self *ISWbemObject) ReferencesAsync_(objWbemSink *systemcom.IDispatch, str
 
 // ExecMethod_ dispatches through ISWbemObject's vtable slot 19.
 func (self *ISWbemObject) ExecMethod_(strMethodName foundation.BSTR, objWbemInParameters *systemcom.IDispatch, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*ISWbemObject, error) {
-	var _objWbemOutParameters *ISWbemObject
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strMethodName)), uintptr(unsafe.Pointer(objWbemInParameters)), uintptr(iFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(unsafe.Pointer(&_objWbemOutParameters)))
-	return _objWbemOutParameters, win32.ErrIfFailed(int32(r1))
+	_objWbemOutParameters := new(*ISWbemObject)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strMethodName)), uintptr(unsafe.Pointer(objWbemInParameters)), uintptr(iFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemOutParameters))))
+	return *_objWbemOutParameters, win32.ErrIfFailed(int32(r1))
 }
 
 // ExecMethodAsync_ dispatches through ISWbemObject's vtable slot 20.
@@ -671,79 +671,79 @@ func (self *ISWbemObject) ExecMethodAsync_(objWbemSink *systemcom.IDispatch, str
 
 // Clone_ dispatches through ISWbemObject's vtable slot 21.
 func (self *ISWbemObject) Clone_() (*ISWbemObject, error) {
-	var _objWbemObject *ISWbemObject
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_objWbemObject)))
-	return _objWbemObject, win32.ErrIfFailed(int32(r1))
+	_objWbemObject := new(*ISWbemObject)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemObject))))
+	return *_objWbemObject, win32.ErrIfFailed(int32(r1))
 }
 
 // GetObjectText_ dispatches through ISWbemObject's vtable slot 22.
 func (self *ISWbemObject) GetObjectText_(iFlags int32) (foundation.BSTR, error) {
-	var _strObjectText foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(iFlags), uintptr(unsafe.Pointer(&_strObjectText)))
-	return _strObjectText, win32.ErrIfFailed(int32(r1))
+	_strObjectText := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(iFlags), uintptr(win32.OutParam(unsafe.Pointer(_strObjectText))))
+	return *_strObjectText, win32.ErrIfFailed(int32(r1))
 }
 
 // SpawnDerivedClass_ dispatches through ISWbemObject's vtable slot 23.
 func (self *ISWbemObject) SpawnDerivedClass_(iFlags int32) (*ISWbemObject, error) {
-	var _objWbemObject *ISWbemObject
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(iFlags), uintptr(unsafe.Pointer(&_objWbemObject)))
-	return _objWbemObject, win32.ErrIfFailed(int32(r1))
+	_objWbemObject := new(*ISWbemObject)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(iFlags), uintptr(win32.OutParam(unsafe.Pointer(_objWbemObject))))
+	return *_objWbemObject, win32.ErrIfFailed(int32(r1))
 }
 
 // SpawnInstance_ dispatches through ISWbemObject's vtable slot 24.
 func (self *ISWbemObject) SpawnInstance_(iFlags int32) (*ISWbemObject, error) {
-	var _objWbemObject *ISWbemObject
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(iFlags), uintptr(unsafe.Pointer(&_objWbemObject)))
-	return _objWbemObject, win32.ErrIfFailed(int32(r1))
+	_objWbemObject := new(*ISWbemObject)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(iFlags), uintptr(win32.OutParam(unsafe.Pointer(_objWbemObject))))
+	return *_objWbemObject, win32.ErrIfFailed(int32(r1))
 }
 
 // CompareTo_ dispatches through ISWbemObject's vtable slot 25.
 func (self *ISWbemObject) CompareTo_(objWbemObject *systemcom.IDispatch, iFlags int32) (foundation.VARIANT_BOOL, error) {
-	var _bResult foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(objWbemObject)), uintptr(iFlags), uintptr(unsafe.Pointer(&_bResult)))
-	return _bResult, win32.ErrIfFailed(int32(r1))
+	_bResult := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(objWbemObject)), uintptr(iFlags), uintptr(win32.OutParam(unsafe.Pointer(_bResult))))
+	return *_bResult, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Qualifiers_ dispatches through ISWbemObject's vtable slot 26.
 func (self *ISWbemObject) Get_Qualifiers_() (*ISWbemQualifierSet, error) {
-	var _objWbemQualifierSet *ISWbemQualifierSet
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_objWbemQualifierSet)))
-	return _objWbemQualifierSet, win32.ErrIfFailed(int32(r1))
+	_objWbemQualifierSet := new(*ISWbemQualifierSet)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemQualifierSet))))
+	return *_objWbemQualifierSet, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Properties_ dispatches through ISWbemObject's vtable slot 27.
 func (self *ISWbemObject) Get_Properties_() (*ISWbemPropertySet, error) {
-	var _objWbemPropertySet *ISWbemPropertySet
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_objWbemPropertySet)))
-	return _objWbemPropertySet, win32.ErrIfFailed(int32(r1))
+	_objWbemPropertySet := new(*ISWbemPropertySet)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemPropertySet))))
+	return *_objWbemPropertySet, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Methods_ dispatches through ISWbemObject's vtable slot 28.
 func (self *ISWbemObject) Get_Methods_() (*ISWbemMethodSet, error) {
-	var _objWbemMethodSet *ISWbemMethodSet
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_objWbemMethodSet)))
-	return _objWbemMethodSet, win32.ErrIfFailed(int32(r1))
+	_objWbemMethodSet := new(*ISWbemMethodSet)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemMethodSet))))
+	return *_objWbemMethodSet, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Derivation_ dispatches through ISWbemObject's vtable slot 29.
 func (self *ISWbemObject) Get_Derivation_() (systemvariant.VARIANT, error) {
-	var _strClassNameArray systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_strClassNameArray)))
-	return _strClassNameArray, win32.ErrIfFailed(int32(r1))
+	_strClassNameArray := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_strClassNameArray))))
+	return *_strClassNameArray, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Path_ dispatches through ISWbemObject's vtable slot 30.
 func (self *ISWbemObject) Get_Path_() (*ISWbemObjectPath, error) {
-	var _objWbemObjectPath *ISWbemObjectPath
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_objWbemObjectPath)))
-	return _objWbemObjectPath, win32.ErrIfFailed(int32(r1))
+	_objWbemObjectPath := new(*ISWbemObjectPath)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemObjectPath))))
+	return *_objWbemObjectPath, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Security_ dispatches through ISWbemObject's vtable slot 31.
 func (self *ISWbemObject) Get_Security_() (*ISWbemSecurity, error) {
-	var _objWbemSecurity *ISWbemSecurity
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_objWbemSecurity)))
-	return _objWbemSecurity, win32.ErrIfFailed(int32(r1))
+	_objWbemSecurity := new(*ISWbemSecurity)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemSecurity))))
+	return *_objWbemSecurity, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 269ad56a-8a67-4129-bc8c-0506dcfe9880
@@ -762,16 +762,16 @@ func (self *ISWbemObjectEx) Refresh_(iFlags int32, objWbemNamedValueSet *systemc
 
 // Get_SystemProperties_ dispatches through ISWbemObjectEx's vtable slot 33.
 func (self *ISWbemObjectEx) Get_SystemProperties_() (*ISWbemPropertySet, error) {
-	var _objWbemPropertySet *ISWbemPropertySet
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_objWbemPropertySet)))
-	return _objWbemPropertySet, win32.ErrIfFailed(int32(r1))
+	_objWbemPropertySet := new(*ISWbemPropertySet)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemPropertySet))))
+	return *_objWbemPropertySet, win32.ErrIfFailed(int32(r1))
 }
 
 // GetText_ dispatches through ISWbemObjectEx's vtable slot 34.
 func (self *ISWbemObjectEx) GetText_(iObjectTextFormat WbemObjectTextFormatEnum, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (foundation.BSTR, error) {
-	var _bsText foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(iObjectTextFormat), uintptr(iFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(unsafe.Pointer(&_bsText)))
-	return _bsText, win32.ErrIfFailed(int32(r1))
+	_bsText := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(iObjectTextFormat), uintptr(iFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(win32.OutParam(unsafe.Pointer(_bsText))))
+	return *_bsText, win32.ErrIfFailed(int32(r1))
 }
 
 // SetFromText_ dispatches through ISWbemObjectEx's vtable slot 35.
@@ -790,9 +790,9 @@ var IID_ISWbemObjectPath = win32.GUID{Data1: 0x5791bc27, Data2: 0xce9c, Data3: 0
 
 // Get_Path dispatches through ISWbemObjectPath's vtable slot 7.
 func (self *ISWbemObjectPath) Get_Path() (foundation.BSTR, error) {
-	var _strPath foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_strPath)))
-	return _strPath, win32.ErrIfFailed(int32(r1))
+	_strPath := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_strPath))))
+	return *_strPath, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Path dispatches through ISWbemObjectPath's vtable slot 8.
@@ -803,9 +803,9 @@ func (self *ISWbemObjectPath) Put_Path(strPath foundation.BSTR) error {
 
 // Get_RelPath dispatches through ISWbemObjectPath's vtable slot 9.
 func (self *ISWbemObjectPath) Get_RelPath() (foundation.BSTR, error) {
-	var _strRelPath foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_strRelPath)))
-	return _strRelPath, win32.ErrIfFailed(int32(r1))
+	_strRelPath := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_strRelPath))))
+	return *_strRelPath, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_RelPath dispatches through ISWbemObjectPath's vtable slot 10.
@@ -816,9 +816,9 @@ func (self *ISWbemObjectPath) Put_RelPath(strRelPath foundation.BSTR) error {
 
 // Get_Server dispatches through ISWbemObjectPath's vtable slot 11.
 func (self *ISWbemObjectPath) Get_Server() (foundation.BSTR, error) {
-	var _strServer foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_strServer)))
-	return _strServer, win32.ErrIfFailed(int32(r1))
+	_strServer := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_strServer))))
+	return *_strServer, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Server dispatches through ISWbemObjectPath's vtable slot 12.
@@ -829,9 +829,9 @@ func (self *ISWbemObjectPath) Put_Server(strServer foundation.BSTR) error {
 
 // Get_Namespace dispatches through ISWbemObjectPath's vtable slot 13.
 func (self *ISWbemObjectPath) Get_Namespace() (foundation.BSTR, error) {
-	var _strNamespace foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_strNamespace)))
-	return _strNamespace, win32.ErrIfFailed(int32(r1))
+	_strNamespace := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_strNamespace))))
+	return *_strNamespace, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Namespace dispatches through ISWbemObjectPath's vtable slot 14.
@@ -842,16 +842,16 @@ func (self *ISWbemObjectPath) Put_Namespace(strNamespace foundation.BSTR) error 
 
 // Get_ParentNamespace dispatches through ISWbemObjectPath's vtable slot 15.
 func (self *ISWbemObjectPath) Get_ParentNamespace() (foundation.BSTR, error) {
-	var _strParentNamespace foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_strParentNamespace)))
-	return _strParentNamespace, win32.ErrIfFailed(int32(r1))
+	_strParentNamespace := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_strParentNamespace))))
+	return *_strParentNamespace, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DisplayName dispatches through ISWbemObjectPath's vtable slot 16.
 func (self *ISWbemObjectPath) Get_DisplayName() (foundation.BSTR, error) {
-	var _strDisplayName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_strDisplayName)))
-	return _strDisplayName, win32.ErrIfFailed(int32(r1))
+	_strDisplayName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_strDisplayName))))
+	return *_strDisplayName, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_DisplayName dispatches through ISWbemObjectPath's vtable slot 17.
@@ -862,9 +862,9 @@ func (self *ISWbemObjectPath) Put_DisplayName(strDisplayName foundation.BSTR) er
 
 // Get_Class dispatches through ISWbemObjectPath's vtable slot 18.
 func (self *ISWbemObjectPath) Get_Class() (foundation.BSTR, error) {
-	var _strClass foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_strClass)))
-	return _strClass, win32.ErrIfFailed(int32(r1))
+	_strClass := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_strClass))))
+	return *_strClass, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Class dispatches through ISWbemObjectPath's vtable slot 19.
@@ -875,9 +875,9 @@ func (self *ISWbemObjectPath) Put_Class(strClass foundation.BSTR) error {
 
 // Get_IsClass dispatches through ISWbemObjectPath's vtable slot 20.
 func (self *ISWbemObjectPath) Get_IsClass() (foundation.VARIANT_BOOL, error) {
-	var _bIsClass foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bIsClass)))
-	return _bIsClass, win32.ErrIfFailed(int32(r1))
+	_bIsClass := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_bIsClass))))
+	return *_bIsClass, win32.ErrIfFailed(int32(r1))
 }
 
 // SetAsClass dispatches through ISWbemObjectPath's vtable slot 21.
@@ -888,9 +888,9 @@ func (self *ISWbemObjectPath) SetAsClass() error {
 
 // Get_IsSingleton dispatches through ISWbemObjectPath's vtable slot 22.
 func (self *ISWbemObjectPath) Get_IsSingleton() (foundation.VARIANT_BOOL, error) {
-	var _bIsSingleton foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bIsSingleton)))
-	return _bIsSingleton, win32.ErrIfFailed(int32(r1))
+	_bIsSingleton := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_bIsSingleton))))
+	return *_bIsSingleton, win32.ErrIfFailed(int32(r1))
 }
 
 // SetAsSingleton dispatches through ISWbemObjectPath's vtable slot 23.
@@ -901,23 +901,23 @@ func (self *ISWbemObjectPath) SetAsSingleton() error {
 
 // Get_Keys dispatches through ISWbemObjectPath's vtable slot 24.
 func (self *ISWbemObjectPath) Get_Keys() (*ISWbemNamedValueSet, error) {
-	var _objWbemNamedValueSet *ISWbemNamedValueSet
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_objWbemNamedValueSet)))
-	return _objWbemNamedValueSet, win32.ErrIfFailed(int32(r1))
+	_objWbemNamedValueSet := new(*ISWbemNamedValueSet)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemNamedValueSet))))
+	return *_objWbemNamedValueSet, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Security_ dispatches through ISWbemObjectPath's vtable slot 25.
 func (self *ISWbemObjectPath) Get_Security_() (*ISWbemSecurity, error) {
-	var _objWbemSecurity *ISWbemSecurity
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_objWbemSecurity)))
-	return _objWbemSecurity, win32.ErrIfFailed(int32(r1))
+	_objWbemSecurity := new(*ISWbemSecurity)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemSecurity))))
+	return *_objWbemSecurity, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Locale dispatches through ISWbemObjectPath's vtable slot 26.
 func (self *ISWbemObjectPath) Get_Locale() (foundation.BSTR, error) {
-	var _strLocale foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_strLocale)))
-	return _strLocale, win32.ErrIfFailed(int32(r1))
+	_strLocale := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_strLocale))))
+	return *_strLocale, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Locale dispatches through ISWbemObjectPath's vtable slot 27.
@@ -928,9 +928,9 @@ func (self *ISWbemObjectPath) Put_Locale(strLocale foundation.BSTR) error {
 
 // Get_Authority dispatches through ISWbemObjectPath's vtable slot 28.
 func (self *ISWbemObjectPath) Get_Authority() (foundation.BSTR, error) {
-	var _strAuthority foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_strAuthority)))
-	return _strAuthority, win32.ErrIfFailed(int32(r1))
+	_strAuthority := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_strAuthority))))
+	return *_strAuthority, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Authority dispatches through ISWbemObjectPath's vtable slot 29.
@@ -949,37 +949,37 @@ var IID_ISWbemObjectSet = win32.GUID{Data1: 0x76a6415f, Data2: 0xcb41, Data3: 0x
 
 // Get__NewEnum dispatches through ISWbemObjectSet's vtable slot 7.
 func (self *ISWbemObjectSet) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _pUnk *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pUnk)))
-	return _pUnk, win32.ErrIfFailed(int32(r1))
+	_pUnk := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pUnk))))
+	return *_pUnk, win32.ErrIfFailed(int32(r1))
 }
 
 // Item dispatches through ISWbemObjectSet's vtable slot 8.
 func (self *ISWbemObjectSet) Item(strObjectPath foundation.BSTR, iFlags int32) (*ISWbemObject, error) {
-	var _objWbemObject *ISWbemObject
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strObjectPath)), uintptr(iFlags), uintptr(unsafe.Pointer(&_objWbemObject)))
-	return _objWbemObject, win32.ErrIfFailed(int32(r1))
+	_objWbemObject := new(*ISWbemObject)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strObjectPath)), uintptr(iFlags), uintptr(win32.OutParam(unsafe.Pointer(_objWbemObject))))
+	return *_objWbemObject, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through ISWbemObjectSet's vtable slot 9.
 func (self *ISWbemObjectSet) Get_Count() (int32, error) {
-	var _iCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_iCount)))
-	return _iCount, win32.ErrIfFailed(int32(r1))
+	_iCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_iCount))))
+	return *_iCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Security_ dispatches through ISWbemObjectSet's vtable slot 10.
 func (self *ISWbemObjectSet) Get_Security_() (*ISWbemSecurity, error) {
-	var _objWbemSecurity *ISWbemSecurity
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_objWbemSecurity)))
-	return _objWbemSecurity, win32.ErrIfFailed(int32(r1))
+	_objWbemSecurity := new(*ISWbemSecurity)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemSecurity))))
+	return *_objWbemSecurity, win32.ErrIfFailed(int32(r1))
 }
 
 // ItemIndex dispatches through ISWbemObjectSet's vtable slot 11.
 func (self *ISWbemObjectSet) ItemIndex(lIndex int32) (*ISWbemObject, error) {
-	var _objWbemObject *ISWbemObject
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(&_objWbemObject)))
-	return _objWbemObject, win32.ErrIfFailed(int32(r1))
+	_objWbemObject := new(*ISWbemObject)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(win32.OutParam(unsafe.Pointer(_objWbemObject))))
+	return *_objWbemObject, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 26ee67bd-5804-11d2-8b4a-00600806d9b6
@@ -992,9 +992,9 @@ var IID_ISWbemPrivilege = win32.GUID{Data1: 0x26ee67bd, Data2: 0x5804, Data3: 0x
 
 // Get_IsEnabled dispatches through ISWbemPrivilege's vtable slot 7.
 func (self *ISWbemPrivilege) Get_IsEnabled() (foundation.VARIANT_BOOL, error) {
-	var _bIsEnabled foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bIsEnabled)))
-	return _bIsEnabled, win32.ErrIfFailed(int32(r1))
+	_bIsEnabled := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_bIsEnabled))))
+	return *_bIsEnabled, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_IsEnabled dispatches through ISWbemPrivilege's vtable slot 8.
@@ -1005,23 +1005,23 @@ func (self *ISWbemPrivilege) Put_IsEnabled(bIsEnabled foundation.VARIANT_BOOL) e
 
 // Get_Name dispatches through ISWbemPrivilege's vtable slot 9.
 func (self *ISWbemPrivilege) Get_Name() (foundation.BSTR, error) {
-	var _strDisplayName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_strDisplayName)))
-	return _strDisplayName, win32.ErrIfFailed(int32(r1))
+	_strDisplayName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_strDisplayName))))
+	return *_strDisplayName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DisplayName dispatches through ISWbemPrivilege's vtable slot 10.
 func (self *ISWbemPrivilege) Get_DisplayName() (foundation.BSTR, error) {
-	var _strDisplayName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_strDisplayName)))
-	return _strDisplayName, win32.ErrIfFailed(int32(r1))
+	_strDisplayName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_strDisplayName))))
+	return *_strDisplayName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Identifier dispatches through ISWbemPrivilege's vtable slot 11.
 func (self *ISWbemPrivilege) Get_Identifier() (WbemPrivilegeEnum, error) {
-	var _iPrivilege WbemPrivilegeEnum
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_iPrivilege)))
-	return _iPrivilege, win32.ErrIfFailed(int32(r1))
+	_iPrivilege := new(WbemPrivilegeEnum)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_iPrivilege))))
+	return *_iPrivilege, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 26ee67bf-5804-11d2-8b4a-00600806d9b6
@@ -1034,30 +1034,30 @@ var IID_ISWbemPrivilegeSet = win32.GUID{Data1: 0x26ee67bf, Data2: 0x5804, Data3:
 
 // Get__NewEnum dispatches through ISWbemPrivilegeSet's vtable slot 7.
 func (self *ISWbemPrivilegeSet) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _pUnk *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pUnk)))
-	return _pUnk, win32.ErrIfFailed(int32(r1))
+	_pUnk := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pUnk))))
+	return *_pUnk, win32.ErrIfFailed(int32(r1))
 }
 
 // Item dispatches through ISWbemPrivilegeSet's vtable slot 8.
 func (self *ISWbemPrivilegeSet) Item(iPrivilege WbemPrivilegeEnum) (*ISWbemPrivilege, error) {
-	var _objWbemPrivilege *ISWbemPrivilege
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(iPrivilege), uintptr(unsafe.Pointer(&_objWbemPrivilege)))
-	return _objWbemPrivilege, win32.ErrIfFailed(int32(r1))
+	_objWbemPrivilege := new(*ISWbemPrivilege)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(iPrivilege), uintptr(win32.OutParam(unsafe.Pointer(_objWbemPrivilege))))
+	return *_objWbemPrivilege, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through ISWbemPrivilegeSet's vtable slot 9.
 func (self *ISWbemPrivilegeSet) Get_Count() (int32, error) {
-	var _iCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_iCount)))
-	return _iCount, win32.ErrIfFailed(int32(r1))
+	_iCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_iCount))))
+	return *_iCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through ISWbemPrivilegeSet's vtable slot 10.
 func (self *ISWbemPrivilegeSet) Add(iPrivilege WbemPrivilegeEnum, bIsEnabled foundation.VARIANT_BOOL) (*ISWbemPrivilege, error) {
-	var _objWbemPrivilege *ISWbemPrivilege
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(iPrivilege), uintptr(bIsEnabled), uintptr(unsafe.Pointer(&_objWbemPrivilege)))
-	return _objWbemPrivilege, win32.ErrIfFailed(int32(r1))
+	_objWbemPrivilege := new(*ISWbemPrivilege)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(iPrivilege), uintptr(bIsEnabled), uintptr(win32.OutParam(unsafe.Pointer(_objWbemPrivilege))))
+	return *_objWbemPrivilege, win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through ISWbemPrivilegeSet's vtable slot 11.
@@ -1074,9 +1074,9 @@ func (self *ISWbemPrivilegeSet) DeleteAll() error {
 
 // AddAsString dispatches through ISWbemPrivilegeSet's vtable slot 13.
 func (self *ISWbemPrivilegeSet) AddAsString(strPrivilege foundation.BSTR, bIsEnabled foundation.VARIANT_BOOL) (*ISWbemPrivilege, error) {
-	var _objWbemPrivilege *ISWbemPrivilege
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strPrivilege)), uintptr(bIsEnabled), uintptr(unsafe.Pointer(&_objWbemPrivilege)))
-	return _objWbemPrivilege, win32.ErrIfFailed(int32(r1))
+	_objWbemPrivilege := new(*ISWbemPrivilege)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strPrivilege)), uintptr(bIsEnabled), uintptr(win32.OutParam(unsafe.Pointer(_objWbemPrivilege))))
+	return *_objWbemPrivilege, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 1a388f98-d4ba-11d1-8b09-00600806d9b6
@@ -1089,9 +1089,9 @@ var IID_ISWbemProperty = win32.GUID{Data1: 0x1a388f98, Data2: 0xd4ba, Data3: 0x1
 
 // Get_Value dispatches through ISWbemProperty's vtable slot 7.
 func (self *ISWbemProperty) Get_Value() (systemvariant.VARIANT, error) {
-	var _varValue systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_varValue)))
-	return _varValue, win32.ErrIfFailed(int32(r1))
+	_varValue := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_varValue))))
+	return *_varValue, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Value dispatches through ISWbemProperty's vtable slot 8.
@@ -1102,44 +1102,44 @@ func (self *ISWbemProperty) Put_Value(varValue *systemvariant.VARIANT) error {
 
 // Get_Name dispatches through ISWbemProperty's vtable slot 9.
 func (self *ISWbemProperty) Get_Name() (foundation.BSTR, error) {
-	var _strName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_strName)))
-	return _strName, win32.ErrIfFailed(int32(r1))
+	_strName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_strName))))
+	return *_strName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsLocal dispatches through ISWbemProperty's vtable slot 10.
 func (self *ISWbemProperty) Get_IsLocal() (foundation.VARIANT_BOOL, error) {
-	var _bIsLocal foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bIsLocal)))
-	return _bIsLocal, win32.ErrIfFailed(int32(r1))
+	_bIsLocal := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_bIsLocal))))
+	return *_bIsLocal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Origin dispatches through ISWbemProperty's vtable slot 11.
 func (self *ISWbemProperty) Get_Origin() (foundation.BSTR, error) {
-	var _strOrigin foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_strOrigin)))
-	return _strOrigin, win32.ErrIfFailed(int32(r1))
+	_strOrigin := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_strOrigin))))
+	return *_strOrigin, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CIMType dispatches through ISWbemProperty's vtable slot 12.
 func (self *ISWbemProperty) Get_CIMType() (WbemCimtypeEnum, error) {
-	var _iCimType WbemCimtypeEnum
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_iCimType)))
-	return _iCimType, win32.ErrIfFailed(int32(r1))
+	_iCimType := new(WbemCimtypeEnum)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_iCimType))))
+	return *_iCimType, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Qualifiers_ dispatches through ISWbemProperty's vtable slot 13.
 func (self *ISWbemProperty) Get_Qualifiers_() (*ISWbemQualifierSet, error) {
-	var _objWbemQualifierSet *ISWbemQualifierSet
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_objWbemQualifierSet)))
-	return _objWbemQualifierSet, win32.ErrIfFailed(int32(r1))
+	_objWbemQualifierSet := new(*ISWbemQualifierSet)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemQualifierSet))))
+	return *_objWbemQualifierSet, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsArray dispatches through ISWbemProperty's vtable slot 14.
 func (self *ISWbemProperty) Get_IsArray() (foundation.VARIANT_BOOL, error) {
-	var _bIsArray foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bIsArray)))
-	return _bIsArray, win32.ErrIfFailed(int32(r1))
+	_bIsArray := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_bIsArray))))
+	return *_bIsArray, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: dea0a7b2-d4ba-11d1-8b09-00600806d9b6
@@ -1152,30 +1152,30 @@ var IID_ISWbemPropertySet = win32.GUID{Data1: 0xdea0a7b2, Data2: 0xd4ba, Data3: 
 
 // Get__NewEnum dispatches through ISWbemPropertySet's vtable slot 7.
 func (self *ISWbemPropertySet) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _pUnk *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pUnk)))
-	return _pUnk, win32.ErrIfFailed(int32(r1))
+	_pUnk := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pUnk))))
+	return *_pUnk, win32.ErrIfFailed(int32(r1))
 }
 
 // Item dispatches through ISWbemPropertySet's vtable slot 8.
 func (self *ISWbemPropertySet) Item(strName foundation.BSTR, iFlags int32) (*ISWbemProperty, error) {
-	var _objWbemProperty *ISWbemProperty
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strName)), uintptr(iFlags), uintptr(unsafe.Pointer(&_objWbemProperty)))
-	return _objWbemProperty, win32.ErrIfFailed(int32(r1))
+	_objWbemProperty := new(*ISWbemProperty)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strName)), uintptr(iFlags), uintptr(win32.OutParam(unsafe.Pointer(_objWbemProperty))))
+	return *_objWbemProperty, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through ISWbemPropertySet's vtable slot 9.
 func (self *ISWbemPropertySet) Get_Count() (int32, error) {
-	var _iCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_iCount)))
-	return _iCount, win32.ErrIfFailed(int32(r1))
+	_iCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_iCount))))
+	return *_iCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through ISWbemPropertySet's vtable slot 10.
 func (self *ISWbemPropertySet) Add(strName foundation.BSTR, iCIMType WbemCimtypeEnum, bIsArray foundation.VARIANT_BOOL, iFlags int32) (*ISWbemProperty, error) {
-	var _objWbemProperty *ISWbemProperty
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strName)), uintptr(iCIMType), uintptr(bIsArray), uintptr(iFlags), uintptr(unsafe.Pointer(&_objWbemProperty)))
-	return _objWbemProperty, win32.ErrIfFailed(int32(r1))
+	_objWbemProperty := new(*ISWbemProperty)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strName)), uintptr(iCIMType), uintptr(bIsArray), uintptr(iFlags), uintptr(win32.OutParam(unsafe.Pointer(_objWbemProperty))))
+	return *_objWbemProperty, win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through ISWbemPropertySet's vtable slot 11.
@@ -1194,9 +1194,9 @@ var IID_ISWbemQualifier = win32.GUID{Data1: 0x79b05932, Data2: 0xd3b7, Data3: 0x
 
 // Get_Value dispatches through ISWbemQualifier's vtable slot 7.
 func (self *ISWbemQualifier) Get_Value() (systemvariant.VARIANT, error) {
-	var _varValue systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_varValue)))
-	return _varValue, win32.ErrIfFailed(int32(r1))
+	_varValue := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_varValue))))
+	return *_varValue, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Value dispatches through ISWbemQualifier's vtable slot 8.
@@ -1207,23 +1207,23 @@ func (self *ISWbemQualifier) Put_Value(varValue *systemvariant.VARIANT) error {
 
 // Get_Name dispatches through ISWbemQualifier's vtable slot 9.
 func (self *ISWbemQualifier) Get_Name() (foundation.BSTR, error) {
-	var _strName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_strName)))
-	return _strName, win32.ErrIfFailed(int32(r1))
+	_strName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_strName))))
+	return *_strName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsLocal dispatches through ISWbemQualifier's vtable slot 10.
 func (self *ISWbemQualifier) Get_IsLocal() (foundation.VARIANT_BOOL, error) {
-	var _bIsLocal foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bIsLocal)))
-	return _bIsLocal, win32.ErrIfFailed(int32(r1))
+	_bIsLocal := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_bIsLocal))))
+	return *_bIsLocal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PropagatesToSubclass dispatches through ISWbemQualifier's vtable slot 11.
 func (self *ISWbemQualifier) Get_PropagatesToSubclass() (foundation.VARIANT_BOOL, error) {
-	var _bPropagatesToSubclass foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bPropagatesToSubclass)))
-	return _bPropagatesToSubclass, win32.ErrIfFailed(int32(r1))
+	_bPropagatesToSubclass := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_bPropagatesToSubclass))))
+	return *_bPropagatesToSubclass, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PropagatesToSubclass dispatches through ISWbemQualifier's vtable slot 12.
@@ -1234,9 +1234,9 @@ func (self *ISWbemQualifier) Put_PropagatesToSubclass(bPropagatesToSubclass foun
 
 // Get_PropagatesToInstance dispatches through ISWbemQualifier's vtable slot 13.
 func (self *ISWbemQualifier) Get_PropagatesToInstance() (foundation.VARIANT_BOOL, error) {
-	var _bPropagatesToInstance foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bPropagatesToInstance)))
-	return _bPropagatesToInstance, win32.ErrIfFailed(int32(r1))
+	_bPropagatesToInstance := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_bPropagatesToInstance))))
+	return *_bPropagatesToInstance, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PropagatesToInstance dispatches through ISWbemQualifier's vtable slot 14.
@@ -1247,9 +1247,9 @@ func (self *ISWbemQualifier) Put_PropagatesToInstance(bPropagatesToInstance foun
 
 // Get_IsOverridable dispatches through ISWbemQualifier's vtable slot 15.
 func (self *ISWbemQualifier) Get_IsOverridable() (foundation.VARIANT_BOOL, error) {
-	var _bIsOverridable foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bIsOverridable)))
-	return _bIsOverridable, win32.ErrIfFailed(int32(r1))
+	_bIsOverridable := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_bIsOverridable))))
+	return *_bIsOverridable, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_IsOverridable dispatches through ISWbemQualifier's vtable slot 16.
@@ -1260,9 +1260,9 @@ func (self *ISWbemQualifier) Put_IsOverridable(bIsOverridable foundation.VARIANT
 
 // Get_IsAmended dispatches through ISWbemQualifier's vtable slot 17.
 func (self *ISWbemQualifier) Get_IsAmended() (foundation.VARIANT_BOOL, error) {
-	var _bIsAmended foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bIsAmended)))
-	return _bIsAmended, win32.ErrIfFailed(int32(r1))
+	_bIsAmended := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_bIsAmended))))
+	return *_bIsAmended, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 9b16ed16-d3df-11d1-8b08-00600806d9b6
@@ -1275,30 +1275,30 @@ var IID_ISWbemQualifierSet = win32.GUID{Data1: 0x9b16ed16, Data2: 0xd3df, Data3:
 
 // Get__NewEnum dispatches through ISWbemQualifierSet's vtable slot 7.
 func (self *ISWbemQualifierSet) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _pUnk *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pUnk)))
-	return _pUnk, win32.ErrIfFailed(int32(r1))
+	_pUnk := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pUnk))))
+	return *_pUnk, win32.ErrIfFailed(int32(r1))
 }
 
 // Item dispatches through ISWbemQualifierSet's vtable slot 8.
 func (self *ISWbemQualifierSet) Item(name foundation.BSTR, iFlags int32) (*ISWbemQualifier, error) {
-	var _objWbemQualifier *ISWbemQualifier
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(iFlags), uintptr(unsafe.Pointer(&_objWbemQualifier)))
-	return _objWbemQualifier, win32.ErrIfFailed(int32(r1))
+	_objWbemQualifier := new(*ISWbemQualifier)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(iFlags), uintptr(win32.OutParam(unsafe.Pointer(_objWbemQualifier))))
+	return *_objWbemQualifier, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through ISWbemQualifierSet's vtable slot 9.
 func (self *ISWbemQualifierSet) Get_Count() (int32, error) {
-	var _iCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_iCount)))
-	return _iCount, win32.ErrIfFailed(int32(r1))
+	_iCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_iCount))))
+	return *_iCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through ISWbemQualifierSet's vtable slot 10.
 func (self *ISWbemQualifierSet) Add(strName foundation.BSTR, varVal *systemvariant.VARIANT, bPropagatesToSubclass foundation.VARIANT_BOOL, bPropagatesToInstance foundation.VARIANT_BOOL, bIsOverridable foundation.VARIANT_BOOL, iFlags int32) (*ISWbemQualifier, error) {
-	var _objWbemQualifier *ISWbemQualifier
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strName)), uintptr(unsafe.Pointer(varVal)), uintptr(bPropagatesToSubclass), uintptr(bPropagatesToInstance), uintptr(bIsOverridable), uintptr(iFlags), uintptr(unsafe.Pointer(&_objWbemQualifier)))
-	return _objWbemQualifier, win32.ErrIfFailed(int32(r1))
+	_objWbemQualifier := new(*ISWbemQualifier)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strName)), uintptr(unsafe.Pointer(varVal)), uintptr(bPropagatesToSubclass), uintptr(bPropagatesToInstance), uintptr(bIsOverridable), uintptr(iFlags), uintptr(win32.OutParam(unsafe.Pointer(_objWbemQualifier))))
+	return *_objWbemQualifier, win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through ISWbemQualifierSet's vtable slot 11.
@@ -1317,37 +1317,37 @@ var IID_ISWbemRefreshableItem = win32.GUID{Data1: 0x5ad4bf92, Data2: 0xdaab, Dat
 
 // Get_Index dispatches through ISWbemRefreshableItem's vtable slot 7.
 func (self *ISWbemRefreshableItem) Get_Index() (int32, error) {
-	var _iIndex int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_iIndex)))
-	return _iIndex, win32.ErrIfFailed(int32(r1))
+	_iIndex := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_iIndex))))
+	return *_iIndex, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Refresher dispatches through ISWbemRefreshableItem's vtable slot 8.
 func (self *ISWbemRefreshableItem) Get_Refresher() (*ISWbemRefresher, error) {
-	var _objWbemRefresher *ISWbemRefresher
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_objWbemRefresher)))
-	return _objWbemRefresher, win32.ErrIfFailed(int32(r1))
+	_objWbemRefresher := new(*ISWbemRefresher)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemRefresher))))
+	return *_objWbemRefresher, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsSet dispatches through ISWbemRefreshableItem's vtable slot 9.
 func (self *ISWbemRefreshableItem) Get_IsSet() (foundation.VARIANT_BOOL, error) {
-	var _bIsSet foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bIsSet)))
-	return _bIsSet, win32.ErrIfFailed(int32(r1))
+	_bIsSet := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_bIsSet))))
+	return *_bIsSet, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Object dispatches through ISWbemRefreshableItem's vtable slot 10.
 func (self *ISWbemRefreshableItem) Get_Object() (*ISWbemObjectEx, error) {
-	var _objWbemObject *ISWbemObjectEx
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_objWbemObject)))
-	return _objWbemObject, win32.ErrIfFailed(int32(r1))
+	_objWbemObject := new(*ISWbemObjectEx)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemObject))))
+	return *_objWbemObject, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ObjectSet dispatches through ISWbemRefreshableItem's vtable slot 11.
 func (self *ISWbemRefreshableItem) Get_ObjectSet() (*ISWbemObjectSet, error) {
-	var _objWbemObjectSet *ISWbemObjectSet
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_objWbemObjectSet)))
-	return _objWbemObjectSet, win32.ErrIfFailed(int32(r1))
+	_objWbemObjectSet := new(*ISWbemObjectSet)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemObjectSet))))
+	return *_objWbemObjectSet, win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through ISWbemRefreshableItem's vtable slot 12.
@@ -1366,37 +1366,37 @@ var IID_ISWbemRefresher = win32.GUID{Data1: 0x14d8250e, Data2: 0xd9c2, Data3: 0x
 
 // Get__NewEnum dispatches through ISWbemRefresher's vtable slot 7.
 func (self *ISWbemRefresher) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _pUnk *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pUnk)))
-	return _pUnk, win32.ErrIfFailed(int32(r1))
+	_pUnk := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pUnk))))
+	return *_pUnk, win32.ErrIfFailed(int32(r1))
 }
 
 // Item dispatches through ISWbemRefresher's vtable slot 8.
 func (self *ISWbemRefresher) Item(iIndex int32) (*ISWbemRefreshableItem, error) {
-	var _objWbemRefreshableItem *ISWbemRefreshableItem
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(iIndex), uintptr(unsafe.Pointer(&_objWbemRefreshableItem)))
-	return _objWbemRefreshableItem, win32.ErrIfFailed(int32(r1))
+	_objWbemRefreshableItem := new(*ISWbemRefreshableItem)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(iIndex), uintptr(win32.OutParam(unsafe.Pointer(_objWbemRefreshableItem))))
+	return *_objWbemRefreshableItem, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Count dispatches through ISWbemRefresher's vtable slot 9.
 func (self *ISWbemRefresher) Get_Count() (int32, error) {
-	var _iCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_iCount)))
-	return _iCount, win32.ErrIfFailed(int32(r1))
+	_iCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_iCount))))
+	return *_iCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Add dispatches through ISWbemRefresher's vtable slot 10.
 func (self *ISWbemRefresher) Add(objWbemServices *ISWbemServicesEx, bsInstancePath foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*ISWbemRefreshableItem, error) {
-	var _objWbemRefreshableItem *ISWbemRefreshableItem
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(objWbemServices)), uintptr(unsafe.Pointer(bsInstancePath)), uintptr(iFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(unsafe.Pointer(&_objWbemRefreshableItem)))
-	return _objWbemRefreshableItem, win32.ErrIfFailed(int32(r1))
+	_objWbemRefreshableItem := new(*ISWbemRefreshableItem)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(objWbemServices)), uintptr(unsafe.Pointer(bsInstancePath)), uintptr(iFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemRefreshableItem))))
+	return *_objWbemRefreshableItem, win32.ErrIfFailed(int32(r1))
 }
 
 // AddEnum dispatches through ISWbemRefresher's vtable slot 11.
 func (self *ISWbemRefresher) AddEnum(objWbemServices *ISWbemServicesEx, bsClassName foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*ISWbemRefreshableItem, error) {
-	var _objWbemRefreshableItem *ISWbemRefreshableItem
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(objWbemServices)), uintptr(unsafe.Pointer(bsClassName)), uintptr(iFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(unsafe.Pointer(&_objWbemRefreshableItem)))
-	return _objWbemRefreshableItem, win32.ErrIfFailed(int32(r1))
+	_objWbemRefreshableItem := new(*ISWbemRefreshableItem)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(objWbemServices)), uintptr(unsafe.Pointer(bsClassName)), uintptr(iFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemRefreshableItem))))
+	return *_objWbemRefreshableItem, win32.ErrIfFailed(int32(r1))
 }
 
 // Remove dispatches through ISWbemRefresher's vtable slot 12.
@@ -1413,9 +1413,9 @@ func (self *ISWbemRefresher) Refresh(iFlags int32) error {
 
 // Get_AutoReconnect dispatches through ISWbemRefresher's vtable slot 14.
 func (self *ISWbemRefresher) Get_AutoReconnect() (foundation.VARIANT_BOOL, error) {
-	var _bCount foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bCount)))
-	return _bCount, win32.ErrIfFailed(int32(r1))
+	_bCount := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_bCount))))
+	return *_bCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AutoReconnect dispatches through ISWbemRefresher's vtable slot 15.
@@ -1440,9 +1440,9 @@ var IID_ISWbemSecurity = win32.GUID{Data1: 0xb54d66e6, Data2: 0x2287, Data3: 0x1
 
 // Get_ImpersonationLevel dispatches through ISWbemSecurity's vtable slot 7.
 func (self *ISWbemSecurity) Get_ImpersonationLevel() (WbemImpersonationLevelEnum, error) {
-	var _iImpersonationLevel WbemImpersonationLevelEnum
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_iImpersonationLevel)))
-	return _iImpersonationLevel, win32.ErrIfFailed(int32(r1))
+	_iImpersonationLevel := new(WbemImpersonationLevelEnum)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_iImpersonationLevel))))
+	return *_iImpersonationLevel, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ImpersonationLevel dispatches through ISWbemSecurity's vtable slot 8.
@@ -1453,9 +1453,9 @@ func (self *ISWbemSecurity) Put_ImpersonationLevel(iImpersonationLevel WbemImper
 
 // Get_AuthenticationLevel dispatches through ISWbemSecurity's vtable slot 9.
 func (self *ISWbemSecurity) Get_AuthenticationLevel() (WbemAuthenticationLevelEnum, error) {
-	var _iAuthenticationLevel WbemAuthenticationLevelEnum
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_iAuthenticationLevel)))
-	return _iAuthenticationLevel, win32.ErrIfFailed(int32(r1))
+	_iAuthenticationLevel := new(WbemAuthenticationLevelEnum)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_iAuthenticationLevel))))
+	return *_iAuthenticationLevel, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AuthenticationLevel dispatches through ISWbemSecurity's vtable slot 10.
@@ -1466,9 +1466,9 @@ func (self *ISWbemSecurity) Put_AuthenticationLevel(iAuthenticationLevel WbemAut
 
 // Get_Privileges dispatches through ISWbemSecurity's vtable slot 11.
 func (self *ISWbemSecurity) Get_Privileges() (*ISWbemPrivilegeSet, error) {
-	var _objWbemPrivilegeSet *ISWbemPrivilegeSet
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_objWbemPrivilegeSet)))
-	return _objWbemPrivilegeSet, win32.ErrIfFailed(int32(r1))
+	_objWbemPrivilegeSet := new(*ISWbemPrivilegeSet)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemPrivilegeSet))))
+	return *_objWbemPrivilegeSet, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 76a6415c-cb41-11d1-8b02-00600806d9b6
@@ -1481,9 +1481,9 @@ var IID_ISWbemServices = win32.GUID{Data1: 0x76a6415c, Data2: 0xcb41, Data3: 0x1
 
 // Get dispatches through ISWbemServices's vtable slot 7.
 func (self *ISWbemServices) Get(strObjectPath foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*ISWbemObject, error) {
-	var _objWbemObject *ISWbemObject
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strObjectPath)), uintptr(iFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(unsafe.Pointer(&_objWbemObject)))
-	return _objWbemObject, win32.ErrIfFailed(int32(r1))
+	_objWbemObject := new(*ISWbemObject)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strObjectPath)), uintptr(iFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemObject))))
+	return *_objWbemObject, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAsync dispatches through ISWbemServices's vtable slot 8.
@@ -1506,9 +1506,9 @@ func (self *ISWbemServices) DeleteAsync(objWbemSink *systemcom.IDispatch, strObj
 
 // InstancesOf dispatches through ISWbemServices's vtable slot 11.
 func (self *ISWbemServices) InstancesOf(strClass foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*ISWbemObjectSet, error) {
-	var _objWbemObjectSet *ISWbemObjectSet
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strClass)), uintptr(iFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(unsafe.Pointer(&_objWbemObjectSet)))
-	return _objWbemObjectSet, win32.ErrIfFailed(int32(r1))
+	_objWbemObjectSet := new(*ISWbemObjectSet)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strClass)), uintptr(iFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemObjectSet))))
+	return *_objWbemObjectSet, win32.ErrIfFailed(int32(r1))
 }
 
 // InstancesOfAsync dispatches through ISWbemServices's vtable slot 12.
@@ -1519,9 +1519,9 @@ func (self *ISWbemServices) InstancesOfAsync(objWbemSink *systemcom.IDispatch, s
 
 // SubclassesOf dispatches through ISWbemServices's vtable slot 13.
 func (self *ISWbemServices) SubclassesOf(strSuperclass foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*ISWbemObjectSet, error) {
-	var _objWbemObjectSet *ISWbemObjectSet
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strSuperclass)), uintptr(iFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(unsafe.Pointer(&_objWbemObjectSet)))
-	return _objWbemObjectSet, win32.ErrIfFailed(int32(r1))
+	_objWbemObjectSet := new(*ISWbemObjectSet)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strSuperclass)), uintptr(iFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemObjectSet))))
+	return *_objWbemObjectSet, win32.ErrIfFailed(int32(r1))
 }
 
 // SubclassesOfAsync dispatches through ISWbemServices's vtable slot 14.
@@ -1532,9 +1532,9 @@ func (self *ISWbemServices) SubclassesOfAsync(objWbemSink *systemcom.IDispatch, 
 
 // ExecQuery dispatches through ISWbemServices's vtable slot 15.
 func (self *ISWbemServices) ExecQuery(strQuery foundation.BSTR, strQueryLanguage foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*ISWbemObjectSet, error) {
-	var _objWbemObjectSet *ISWbemObjectSet
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strQuery)), uintptr(unsafe.Pointer(strQueryLanguage)), uintptr(iFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(unsafe.Pointer(&_objWbemObjectSet)))
-	return _objWbemObjectSet, win32.ErrIfFailed(int32(r1))
+	_objWbemObjectSet := new(*ISWbemObjectSet)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strQuery)), uintptr(unsafe.Pointer(strQueryLanguage)), uintptr(iFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemObjectSet))))
+	return *_objWbemObjectSet, win32.ErrIfFailed(int32(r1))
 }
 
 // ExecQueryAsync dispatches through ISWbemServices's vtable slot 16.
@@ -1545,9 +1545,9 @@ func (self *ISWbemServices) ExecQueryAsync(objWbemSink *systemcom.IDispatch, str
 
 // AssociatorsOf dispatches through ISWbemServices's vtable slot 17.
 func (self *ISWbemServices) AssociatorsOf(strObjectPath foundation.BSTR, strAssocClass foundation.BSTR, strResultClass foundation.BSTR, strResultRole foundation.BSTR, strRole foundation.BSTR, bClassesOnly foundation.VARIANT_BOOL, bSchemaOnly foundation.VARIANT_BOOL, strRequiredAssocQualifier foundation.BSTR, strRequiredQualifier foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*ISWbemObjectSet, error) {
-	var _objWbemObjectSet *ISWbemObjectSet
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strObjectPath)), uintptr(unsafe.Pointer(strAssocClass)), uintptr(unsafe.Pointer(strResultClass)), uintptr(unsafe.Pointer(strResultRole)), uintptr(unsafe.Pointer(strRole)), uintptr(bClassesOnly), uintptr(bSchemaOnly), uintptr(unsafe.Pointer(strRequiredAssocQualifier)), uintptr(unsafe.Pointer(strRequiredQualifier)), uintptr(iFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(unsafe.Pointer(&_objWbemObjectSet)))
-	return _objWbemObjectSet, win32.ErrIfFailed(int32(r1))
+	_objWbemObjectSet := new(*ISWbemObjectSet)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strObjectPath)), uintptr(unsafe.Pointer(strAssocClass)), uintptr(unsafe.Pointer(strResultClass)), uintptr(unsafe.Pointer(strResultRole)), uintptr(unsafe.Pointer(strRole)), uintptr(bClassesOnly), uintptr(bSchemaOnly), uintptr(unsafe.Pointer(strRequiredAssocQualifier)), uintptr(unsafe.Pointer(strRequiredQualifier)), uintptr(iFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemObjectSet))))
+	return *_objWbemObjectSet, win32.ErrIfFailed(int32(r1))
 }
 
 // AssociatorsOfAsync dispatches through ISWbemServices's vtable slot 18.
@@ -1558,9 +1558,9 @@ func (self *ISWbemServices) AssociatorsOfAsync(objWbemSink *systemcom.IDispatch,
 
 // ReferencesTo dispatches through ISWbemServices's vtable slot 19.
 func (self *ISWbemServices) ReferencesTo(strObjectPath foundation.BSTR, strResultClass foundation.BSTR, strRole foundation.BSTR, bClassesOnly foundation.VARIANT_BOOL, bSchemaOnly foundation.VARIANT_BOOL, strRequiredQualifier foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*ISWbemObjectSet, error) {
-	var _objWbemObjectSet *ISWbemObjectSet
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strObjectPath)), uintptr(unsafe.Pointer(strResultClass)), uintptr(unsafe.Pointer(strRole)), uintptr(bClassesOnly), uintptr(bSchemaOnly), uintptr(unsafe.Pointer(strRequiredQualifier)), uintptr(iFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(unsafe.Pointer(&_objWbemObjectSet)))
-	return _objWbemObjectSet, win32.ErrIfFailed(int32(r1))
+	_objWbemObjectSet := new(*ISWbemObjectSet)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strObjectPath)), uintptr(unsafe.Pointer(strResultClass)), uintptr(unsafe.Pointer(strRole)), uintptr(bClassesOnly), uintptr(bSchemaOnly), uintptr(unsafe.Pointer(strRequiredQualifier)), uintptr(iFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemObjectSet))))
+	return *_objWbemObjectSet, win32.ErrIfFailed(int32(r1))
 }
 
 // ReferencesToAsync dispatches through ISWbemServices's vtable slot 20.
@@ -1571,9 +1571,9 @@ func (self *ISWbemServices) ReferencesToAsync(objWbemSink *systemcom.IDispatch, 
 
 // ExecNotificationQuery dispatches through ISWbemServices's vtable slot 21.
 func (self *ISWbemServices) ExecNotificationQuery(strQuery foundation.BSTR, strQueryLanguage foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*ISWbemEventSource, error) {
-	var _objWbemEventSource *ISWbemEventSource
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strQuery)), uintptr(unsafe.Pointer(strQueryLanguage)), uintptr(iFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(unsafe.Pointer(&_objWbemEventSource)))
-	return _objWbemEventSource, win32.ErrIfFailed(int32(r1))
+	_objWbemEventSource := new(*ISWbemEventSource)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strQuery)), uintptr(unsafe.Pointer(strQueryLanguage)), uintptr(iFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemEventSource))))
+	return *_objWbemEventSource, win32.ErrIfFailed(int32(r1))
 }
 
 // ExecNotificationQueryAsync dispatches through ISWbemServices's vtable slot 22.
@@ -1584,9 +1584,9 @@ func (self *ISWbemServices) ExecNotificationQueryAsync(objWbemSink *systemcom.ID
 
 // ExecMethod dispatches through ISWbemServices's vtable slot 23.
 func (self *ISWbemServices) ExecMethod(strObjectPath foundation.BSTR, strMethodName foundation.BSTR, objWbemInParameters *systemcom.IDispatch, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*ISWbemObject, error) {
-	var _objWbemOutParameters *ISWbemObject
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strObjectPath)), uintptr(unsafe.Pointer(strMethodName)), uintptr(unsafe.Pointer(objWbemInParameters)), uintptr(iFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(unsafe.Pointer(&_objWbemOutParameters)))
-	return _objWbemOutParameters, win32.ErrIfFailed(int32(r1))
+	_objWbemOutParameters := new(*ISWbemObject)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strObjectPath)), uintptr(unsafe.Pointer(strMethodName)), uintptr(unsafe.Pointer(objWbemInParameters)), uintptr(iFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemOutParameters))))
+	return *_objWbemOutParameters, win32.ErrIfFailed(int32(r1))
 }
 
 // ExecMethodAsync dispatches through ISWbemServices's vtable slot 24.
@@ -1597,9 +1597,9 @@ func (self *ISWbemServices) ExecMethodAsync(objWbemSink *systemcom.IDispatch, st
 
 // Get_Security_ dispatches through ISWbemServices's vtable slot 25.
 func (self *ISWbemServices) Get_Security_() (*ISWbemSecurity, error) {
-	var _objWbemSecurity *ISWbemSecurity
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_objWbemSecurity)))
-	return _objWbemSecurity, win32.ErrIfFailed(int32(r1))
+	_objWbemSecurity := new(*ISWbemSecurity)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemSecurity))))
+	return *_objWbemSecurity, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: d2f68443-85dc-427e-91d8-366554cc754c
@@ -1612,9 +1612,9 @@ var IID_ISWbemServicesEx = win32.GUID{Data1: 0xd2f68443, Data2: 0x85dc, Data3: 0
 
 // Put dispatches through ISWbemServicesEx's vtable slot 26.
 func (self *ISWbemServicesEx) Put(objWbemObject *ISWbemObjectEx, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*ISWbemObjectPath, error) {
-	var _objWbemObjectPath *ISWbemObjectPath
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(objWbemObject)), uintptr(iFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(unsafe.Pointer(&_objWbemObjectPath)))
-	return _objWbemObjectPath, win32.ErrIfFailed(int32(r1))
+	_objWbemObjectPath := new(*ISWbemObjectPath)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(objWbemObject)), uintptr(iFlags), uintptr(unsafe.Pointer(objWbemNamedValueSet)), uintptr(win32.OutParam(unsafe.Pointer(_objWbemObjectPath))))
+	return *_objWbemObjectPath, win32.ErrIfFailed(int32(r1))
 }
 
 // PutAsync dispatches through ISWbemServicesEx's vtable slot 27.
@@ -1670,23 +1670,23 @@ var IID_IWMIExtension = win32.GUID{Data1: 0xadc1f06e, Data2: 0x5c7e, Data3: 0x11
 
 // Get_WMIObjectPath dispatches through IWMIExtension's vtable slot 7.
 func (self *IWMIExtension) Get_WMIObjectPath() (foundation.BSTR, error) {
-	var _strWMIObjectPath foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_strWMIObjectPath)))
-	return _strWMIObjectPath, win32.ErrIfFailed(int32(r1))
+	_strWMIObjectPath := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_strWMIObjectPath))))
+	return *_strWMIObjectPath, win32.ErrIfFailed(int32(r1))
 }
 
 // GetWMIObject dispatches through IWMIExtension's vtable slot 8.
 func (self *IWMIExtension) GetWMIObject() (*ISWbemObject, error) {
-	var _objWMIObject *ISWbemObject
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_objWMIObject)))
-	return _objWMIObject, win32.ErrIfFailed(int32(r1))
+	_objWMIObject := new(*ISWbemObject)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_objWMIObject))))
+	return *_objWMIObject, win32.ErrIfFailed(int32(r1))
 }
 
 // GetWMIServices dispatches through IWMIExtension's vtable slot 9.
 func (self *IWMIExtension) GetWMIServices() (*ISWbemServices, error) {
-	var _objWMIServices *ISWbemServices
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_objWMIServices)))
-	return _objWMIServices, win32.ErrIfFailed(int32(r1))
+	_objWMIServices := new(*ISWbemServices)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_objWMIServices))))
+	return *_objWMIServices, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f7ce2e12-8c90-11d1-9e7b-00c04fc324a8

@@ -81,16 +81,16 @@ func (self *IBITSExtensionSetup) DisableBITSUploads() error {
 
 // GetCleanupTaskName dispatches through IBITSExtensionSetup's vtable slot 9.
 func (self *IBITSExtensionSetup) GetCleanupTaskName() (foundation.BSTR, error) {
-	var _pTaskName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pTaskName)))
-	return _pTaskName, win32.ErrIfFailed(int32(r1))
+	_pTaskName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pTaskName))))
+	return *_pTaskName, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCleanupTask dispatches through IBITSExtensionSetup's vtable slot 10.
 func (self *IBITSExtensionSetup) GetCleanupTask(riid *win32.GUID) (*systemcom.IUnknown, error) {
-	var _ppUnk *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_ppUnk)))
-	return _ppUnk, win32.ErrIfFailed(int32(r1))
+	_ppUnk := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(win32.OutParam(unsafe.Pointer(_ppUnk))))
+	return *_ppUnk, win32.ErrIfFailed(int32(r1))
 }
 
 // IBITSExtensionSetupFactory: https://learn.microsoft.com/windows/win32/api/bitscfg/nn-bitscfg-ibitsextensionsetupfactory
@@ -104,9 +104,9 @@ var IID_IBITSExtensionSetupFactory = win32.GUID{Data1: 0xd5d2d542, Data2: 0x5503
 
 // GetObject dispatches through IBITSExtensionSetupFactory's vtable slot 7.
 func (self *IBITSExtensionSetupFactory) GetObject(Path foundation.BSTR) (*IBITSExtensionSetup, error) {
-	var _ppExtensionSetup *IBITSExtensionSetup
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Path)), uintptr(unsafe.Pointer(&_ppExtensionSetup)))
-	return _ppExtensionSetup, win32.ErrIfFailed(int32(r1))
+	_ppExtensionSetup := new(*IBITSExtensionSetup)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Path)), uintptr(win32.OutParam(unsafe.Pointer(_ppExtensionSetup))))
+	return *_ppExtensionSetup, win32.ErrIfFailed(int32(r1))
 }
 
 // IBackgroundCopyCallback: https://learn.microsoft.com/windows/win32/api/bits/nn-bits-ibackgroundcopycallback

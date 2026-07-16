@@ -61,9 +61,9 @@ var IID_IUPnPDescriptionDocument = win32.GUID{Data1: 0x11d1c1b2, Data2: 0x7daa, 
 
 // Get_ReadyState dispatches through IUPnPDescriptionDocument's vtable slot 7.
 func (self *IUPnPDescriptionDocument) Get_ReadyState() (int32, error) {
-	var _plReadyState int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plReadyState)))
-	return _plReadyState, win32.ErrIfFailed(int32(r1))
+	_plReadyState := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plReadyState))))
+	return *_plReadyState, win32.ErrIfFailed(int32(r1))
 }
 
 // Load dispatches through IUPnPDescriptionDocument's vtable slot 8.
@@ -80,9 +80,9 @@ func (self *IUPnPDescriptionDocument) LoadAsync(bstrUrl foundation.BSTR, punkCal
 
 // Get_LoadResult dispatches through IUPnPDescriptionDocument's vtable slot 10.
 func (self *IUPnPDescriptionDocument) Get_LoadResult() (int32, error) {
-	var _phrError int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_phrError)))
-	return _phrError, win32.ErrIfFailed(int32(r1))
+	_phrError := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_phrError))))
+	return *_phrError, win32.ErrIfFailed(int32(r1))
 }
 
 // Abort dispatches through IUPnPDescriptionDocument's vtable slot 11.
@@ -93,16 +93,16 @@ func (self *IUPnPDescriptionDocument) Abort() error {
 
 // RootDevice dispatches through IUPnPDescriptionDocument's vtable slot 12.
 func (self *IUPnPDescriptionDocument) RootDevice() (*IUPnPDevice, error) {
-	var _ppudRootDevice *IUPnPDevice
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppudRootDevice)))
-	return _ppudRootDevice, win32.ErrIfFailed(int32(r1))
+	_ppudRootDevice := new(*IUPnPDevice)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppudRootDevice))))
+	return *_ppudRootDevice, win32.ErrIfFailed(int32(r1))
 }
 
 // DeviceByUDN dispatches through IUPnPDescriptionDocument's vtable slot 13.
 func (self *IUPnPDescriptionDocument) DeviceByUDN(bstrUDN foundation.BSTR) (*IUPnPDevice, error) {
-	var _ppudDevice *IUPnPDevice
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUDN)), uintptr(unsafe.Pointer(&_ppudDevice)))
-	return _ppudDevice, win32.ErrIfFailed(int32(r1))
+	_ppudDevice := new(*IUPnPDevice)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUDN)), uintptr(win32.OutParam(unsafe.Pointer(_ppudDevice))))
+	return *_ppudDevice, win32.ErrIfFailed(int32(r1))
 }
 
 // IUPnPDescriptionDocumentCallback: https://learn.microsoft.com/windows/win32/api/upnp/nn-upnp-iupnpdescriptiondocumentcallback
@@ -131,135 +131,135 @@ var IID_IUPnPDevice = win32.GUID{Data1: 0x3d44d0d1, Data2: 0x98c9, Data3: 0x4889
 
 // Get_IsRootDevice dispatches through IUPnPDevice's vtable slot 7.
 func (self *IUPnPDevice) Get_IsRootDevice() (foundation.VARIANT_BOOL, error) {
-	var _pvarb foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarb)))
-	return _pvarb, win32.ErrIfFailed(int32(r1))
+	_pvarb := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pvarb))))
+	return *_pvarb, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RootDevice dispatches through IUPnPDevice's vtable slot 8.
 func (self *IUPnPDevice) Get_RootDevice() (*IUPnPDevice, error) {
-	var _ppudRootDevice *IUPnPDevice
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppudRootDevice)))
-	return _ppudRootDevice, win32.ErrIfFailed(int32(r1))
+	_ppudRootDevice := new(*IUPnPDevice)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppudRootDevice))))
+	return *_ppudRootDevice, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ParentDevice dispatches through IUPnPDevice's vtable slot 9.
 func (self *IUPnPDevice) Get_ParentDevice() (*IUPnPDevice, error) {
-	var _ppudDeviceParent *IUPnPDevice
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppudDeviceParent)))
-	return _ppudDeviceParent, win32.ErrIfFailed(int32(r1))
+	_ppudDeviceParent := new(*IUPnPDevice)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppudDeviceParent))))
+	return *_ppudDeviceParent, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HasChildren dispatches through IUPnPDevice's vtable slot 10.
 func (self *IUPnPDevice) Get_HasChildren() (foundation.VARIANT_BOOL, error) {
-	var _pvarb foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarb)))
-	return _pvarb, win32.ErrIfFailed(int32(r1))
+	_pvarb := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pvarb))))
+	return *_pvarb, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Children dispatches through IUPnPDevice's vtable slot 11.
 func (self *IUPnPDevice) Get_Children() (*IUPnPDevices, error) {
-	var _ppudChildren *IUPnPDevices
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppudChildren)))
-	return _ppudChildren, win32.ErrIfFailed(int32(r1))
+	_ppudChildren := new(*IUPnPDevices)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppudChildren))))
+	return *_ppudChildren, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UniqueDeviceName dispatches through IUPnPDevice's vtable slot 12.
 func (self *IUPnPDevice) Get_UniqueDeviceName() (foundation.BSTR, error) {
-	var _pbstr foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstr)))
-	return _pbstr, win32.ErrIfFailed(int32(r1))
+	_pbstr := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstr))))
+	return *_pbstr, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FriendlyName dispatches through IUPnPDevice's vtable slot 13.
 func (self *IUPnPDevice) Get_FriendlyName() (foundation.BSTR, error) {
-	var _pbstr foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstr)))
-	return _pbstr, win32.ErrIfFailed(int32(r1))
+	_pbstr := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstr))))
+	return *_pbstr, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Type dispatches through IUPnPDevice's vtable slot 14.
 func (self *IUPnPDevice) Get_Type() (foundation.BSTR, error) {
-	var _pbstr foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstr)))
-	return _pbstr, win32.ErrIfFailed(int32(r1))
+	_pbstr := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstr))))
+	return *_pbstr, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PresentationURL dispatches through IUPnPDevice's vtable slot 15.
 func (self *IUPnPDevice) Get_PresentationURL() (foundation.BSTR, error) {
-	var _pbstr foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstr)))
-	return _pbstr, win32.ErrIfFailed(int32(r1))
+	_pbstr := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstr))))
+	return *_pbstr, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ManufacturerName dispatches through IUPnPDevice's vtable slot 16.
 func (self *IUPnPDevice) Get_ManufacturerName() (foundation.BSTR, error) {
-	var _pbstr foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstr)))
-	return _pbstr, win32.ErrIfFailed(int32(r1))
+	_pbstr := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstr))))
+	return *_pbstr, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ManufacturerURL dispatches through IUPnPDevice's vtable slot 17.
 func (self *IUPnPDevice) Get_ManufacturerURL() (foundation.BSTR, error) {
-	var _pbstr foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstr)))
-	return _pbstr, win32.ErrIfFailed(int32(r1))
+	_pbstr := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstr))))
+	return *_pbstr, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ModelName dispatches through IUPnPDevice's vtable slot 18.
 func (self *IUPnPDevice) Get_ModelName() (foundation.BSTR, error) {
-	var _pbstr foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstr)))
-	return _pbstr, win32.ErrIfFailed(int32(r1))
+	_pbstr := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstr))))
+	return *_pbstr, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ModelNumber dispatches through IUPnPDevice's vtable slot 19.
 func (self *IUPnPDevice) Get_ModelNumber() (foundation.BSTR, error) {
-	var _pbstr foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstr)))
-	return _pbstr, win32.ErrIfFailed(int32(r1))
+	_pbstr := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstr))))
+	return *_pbstr, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through IUPnPDevice's vtable slot 20.
 func (self *IUPnPDevice) Get_Description() (foundation.BSTR, error) {
-	var _pbstr foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstr)))
-	return _pbstr, win32.ErrIfFailed(int32(r1))
+	_pbstr := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstr))))
+	return *_pbstr, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ModelURL dispatches through IUPnPDevice's vtable slot 21.
 func (self *IUPnPDevice) Get_ModelURL() (foundation.BSTR, error) {
-	var _pbstr foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstr)))
-	return _pbstr, win32.ErrIfFailed(int32(r1))
+	_pbstr := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstr))))
+	return *_pbstr, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UPC dispatches through IUPnPDevice's vtable slot 22.
 func (self *IUPnPDevice) Get_UPC() (foundation.BSTR, error) {
-	var _pbstr foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstr)))
-	return _pbstr, win32.ErrIfFailed(int32(r1))
+	_pbstr := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstr))))
+	return *_pbstr, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SerialNumber dispatches through IUPnPDevice's vtable slot 23.
 func (self *IUPnPDevice) Get_SerialNumber() (foundation.BSTR, error) {
-	var _pbstr foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstr)))
-	return _pbstr, win32.ErrIfFailed(int32(r1))
+	_pbstr := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstr))))
+	return *_pbstr, win32.ErrIfFailed(int32(r1))
 }
 
 // IconURL dispatches through IUPnPDevice's vtable slot 24.
 func (self *IUPnPDevice) IconURL(bstrEncodingFormat foundation.BSTR, lSizeX int32, lSizeY int32, lBitDepth int32) (foundation.BSTR, error) {
-	var _pbstrIconURL foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrEncodingFormat)), uintptr(lSizeX), uintptr(lSizeY), uintptr(lBitDepth), uintptr(unsafe.Pointer(&_pbstrIconURL)))
-	return _pbstrIconURL, win32.ErrIfFailed(int32(r1))
+	_pbstrIconURL := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrEncodingFormat)), uintptr(lSizeX), uintptr(lSizeY), uintptr(lBitDepth), uintptr(win32.OutParam(unsafe.Pointer(_pbstrIconURL))))
+	return *_pbstrIconURL, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Services dispatches through IUPnPDevice's vtable slot 25.
 func (self *IUPnPDevice) Get_Services() (*IUPnPServices, error) {
-	var _ppusServices *IUPnPServices
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppusServices)))
-	return _ppusServices, win32.ErrIfFailed(int32(r1))
+	_ppusServices := new(*IUPnPServices)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppusServices))))
+	return *_ppusServices, win32.ErrIfFailed(int32(r1))
 }
 
 // IUPnPDeviceControl: https://learn.microsoft.com/windows/win32/api/upnphost/nn-upnphost-iupnpdevicecontrol
@@ -279,9 +279,9 @@ func (self *IUPnPDeviceControl) Initialize(bstrXMLDesc foundation.BSTR, bstrDevi
 
 // GetServiceObject dispatches through IUPnPDeviceControl's vtable slot 4.
 func (self *IUPnPDeviceControl) GetServiceObject(bstrUDN foundation.BSTR, bstrServiceId foundation.BSTR) (*systemcom.IDispatch, error) {
-	var _ppdispService *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUDN)), uintptr(unsafe.Pointer(bstrServiceId)), uintptr(unsafe.Pointer(&_ppdispService)))
-	return _ppdispService, win32.ErrIfFailed(int32(r1))
+	_ppdispService := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUDN)), uintptr(unsafe.Pointer(bstrServiceId)), uintptr(win32.OutParam(unsafe.Pointer(_ppdispService))))
+	return *_ppdispService, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 204810bb-73b2-11d4-bf42-00b0d0118b56
@@ -294,9 +294,9 @@ var IID_IUPnPDeviceControlHttpHeaders = win32.GUID{Data1: 0x204810bb, Data2: 0x7
 
 // GetAdditionalResponseHeaders dispatches through IUPnPDeviceControlHttpHeaders's vtable slot 3.
 func (self *IUPnPDeviceControlHttpHeaders) GetAdditionalResponseHeaders() (foundation.BSTR, error) {
-	var _bstrHttpResponseHeaders foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bstrHttpResponseHeaders)))
-	return _bstrHttpResponseHeaders, win32.ErrIfFailed(int32(r1))
+	_bstrHttpResponseHeaders := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_bstrHttpResponseHeaders))))
+	return *_bstrHttpResponseHeaders, win32.ErrIfFailed(int32(r1))
 }
 
 // IUPnPDeviceDocumentAccess: https://learn.microsoft.com/windows/win32/api/upnp/nn-upnp-iupnpdevicedocumentaccess
@@ -310,9 +310,9 @@ var IID_IUPnPDeviceDocumentAccess = win32.GUID{Data1: 0xe7772804, Data2: 0x3287,
 
 // GetDocumentURL dispatches through IUPnPDeviceDocumentAccess's vtable slot 3.
 func (self *IUPnPDeviceDocumentAccess) GetDocumentURL() (foundation.BSTR, error) {
-	var _pbstrDocument foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrDocument)))
-	return _pbstrDocument, win32.ErrIfFailed(int32(r1))
+	_pbstrDocument := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrDocument))))
+	return *_pbstrDocument, win32.ErrIfFailed(int32(r1))
 }
 
 // IUPnPDeviceDocumentAccessEx: https://learn.microsoft.com/windows/win32/api/upnp/nn-upnp-iupnpdevicedocumentaccessex
@@ -326,9 +326,9 @@ var IID_IUPnPDeviceDocumentAccessEx = win32.GUID{Data1: 0xc4bc4050, Data2: 0x617
 
 // GetDocument dispatches through IUPnPDeviceDocumentAccessEx's vtable slot 3.
 func (self *IUPnPDeviceDocumentAccessEx) GetDocument() (foundation.BSTR, error) {
-	var _pbstrDocument foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrDocument)))
-	return _pbstrDocument, win32.ErrIfFailed(int32(r1))
+	_pbstrDocument := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrDocument))))
+	return *_pbstrDocument, win32.ErrIfFailed(int32(r1))
 }
 
 // IUPnPDeviceFinder: https://learn.microsoft.com/windows/win32/api/upnp/nn-upnp-iupnpdevicefinder
@@ -342,16 +342,16 @@ var IID_IUPnPDeviceFinder = win32.GUID{Data1: 0xadda3d55, Data2: 0x6f72, Data3: 
 
 // FindByType dispatches through IUPnPDeviceFinder's vtable slot 7.
 func (self *IUPnPDeviceFinder) FindByType(bstrTypeURI foundation.BSTR, dwFlags uint32) (*IUPnPDevices, error) {
-	var _pDevices *IUPnPDevices
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTypeURI)), uintptr(dwFlags), uintptr(unsafe.Pointer(&_pDevices)))
-	return _pDevices, win32.ErrIfFailed(int32(r1))
+	_pDevices := new(*IUPnPDevices)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTypeURI)), uintptr(dwFlags), uintptr(win32.OutParam(unsafe.Pointer(_pDevices))))
+	return *_pDevices, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateAsyncFind dispatches through IUPnPDeviceFinder's vtable slot 8.
 func (self *IUPnPDeviceFinder) CreateAsyncFind(bstrTypeURI foundation.BSTR, dwFlags uint32, punkDeviceFinderCallback *systemcom.IUnknown) (int32, error) {
-	var _plFindData int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTypeURI)), uintptr(dwFlags), uintptr(unsafe.Pointer(punkDeviceFinderCallback)), uintptr(unsafe.Pointer(&_plFindData)))
-	return _plFindData, win32.ErrIfFailed(int32(r1))
+	_plFindData := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTypeURI)), uintptr(dwFlags), uintptr(unsafe.Pointer(punkDeviceFinderCallback)), uintptr(win32.OutParam(unsafe.Pointer(_plFindData))))
+	return *_plFindData, win32.ErrIfFailed(int32(r1))
 }
 
 // StartAsyncFind dispatches through IUPnPDeviceFinder's vtable slot 9.
@@ -368,9 +368,9 @@ func (self *IUPnPDeviceFinder) CancelAsyncFind(lFindData int32) error {
 
 // FindByUDN dispatches through IUPnPDeviceFinder's vtable slot 11.
 func (self *IUPnPDeviceFinder) FindByUDN(bstrUDN foundation.BSTR) (*IUPnPDevice, error) {
-	var _pDevice *IUPnPDevice
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUDN)), uintptr(unsafe.Pointer(&_pDevice)))
-	return _pDevice, win32.ErrIfFailed(int32(r1))
+	_pDevice := new(*IUPnPDevice)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUDN)), uintptr(win32.OutParam(unsafe.Pointer(_pDevice))))
+	return *_pDevice, win32.ErrIfFailed(int32(r1))
 }
 
 // IUPnPDeviceFinderAddCallbackWithInterface: https://learn.microsoft.com/windows/win32/api/upnp/nn-upnp-iupnpdevicefinderaddcallbackwithinterface
@@ -447,23 +447,23 @@ var IID_IUPnPDevices = win32.GUID{Data1: 0xfdbc0c73, Data2: 0xbda3, Data3: 0x4c6
 
 // Get_Count dispatches through IUPnPDevices's vtable slot 7.
 func (self *IUPnPDevices) Get_Count() (int32, error) {
-	var _plCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
-	return _plCount, win32.ErrIfFailed(int32(r1))
+	_plCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plCount))))
+	return *_plCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IUPnPDevices's vtable slot 8.
 func (self *IUPnPDevices) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _ppunk *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppunk)))
-	return _ppunk, win32.ErrIfFailed(int32(r1))
+	_ppunk := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppunk))))
+	return *_ppunk, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Item dispatches through IUPnPDevices's vtable slot 9.
 func (self *IUPnPDevices) Get_Item(bstrUDN foundation.BSTR) (*IUPnPDevice, error) {
-	var _ppDevice *IUPnPDevice
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUDN)), uintptr(unsafe.Pointer(&_ppDevice)))
-	return _ppDevice, win32.ErrIfFailed(int32(r1))
+	_ppDevice := new(*IUPnPDevice)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUDN)), uintptr(win32.OutParam(unsafe.Pointer(_ppDevice))))
+	return *_ppDevice, win32.ErrIfFailed(int32(r1))
 }
 
 // IUPnPEventSink: https://learn.microsoft.com/windows/win32/api/upnphost/nn-upnphost-iupnpeventsink
@@ -532,16 +532,16 @@ var IID_IUPnPRegistrar = win32.GUID{Data1: 0x204810b6, Data2: 0x73b2, Data3: 0x1
 
 // RegisterDevice dispatches through IUPnPRegistrar's vtable slot 3.
 func (self *IUPnPRegistrar) RegisterDevice(bstrXMLDesc foundation.BSTR, bstrProgIDDeviceControlClass foundation.BSTR, bstrInitString foundation.BSTR, bstrContainerId foundation.BSTR, bstrResourcePath foundation.BSTR, nLifeTime int32) (foundation.BSTR, error) {
-	var _pbstrDeviceIdentifier foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrXMLDesc)), uintptr(unsafe.Pointer(bstrProgIDDeviceControlClass)), uintptr(unsafe.Pointer(bstrInitString)), uintptr(unsafe.Pointer(bstrContainerId)), uintptr(unsafe.Pointer(bstrResourcePath)), uintptr(nLifeTime), uintptr(unsafe.Pointer(&_pbstrDeviceIdentifier)))
-	return _pbstrDeviceIdentifier, win32.ErrIfFailed(int32(r1))
+	_pbstrDeviceIdentifier := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrXMLDesc)), uintptr(unsafe.Pointer(bstrProgIDDeviceControlClass)), uintptr(unsafe.Pointer(bstrInitString)), uintptr(unsafe.Pointer(bstrContainerId)), uintptr(unsafe.Pointer(bstrResourcePath)), uintptr(nLifeTime), uintptr(win32.OutParam(unsafe.Pointer(_pbstrDeviceIdentifier))))
+	return *_pbstrDeviceIdentifier, win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterRunningDevice dispatches through IUPnPRegistrar's vtable slot 4.
 func (self *IUPnPRegistrar) RegisterRunningDevice(bstrXMLDesc foundation.BSTR, punkDeviceControl *systemcom.IUnknown, bstrInitString foundation.BSTR, bstrResourcePath foundation.BSTR, nLifeTime int32) (foundation.BSTR, error) {
-	var _pbstrDeviceIdentifier foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrXMLDesc)), uintptr(unsafe.Pointer(punkDeviceControl)), uintptr(unsafe.Pointer(bstrInitString)), uintptr(unsafe.Pointer(bstrResourcePath)), uintptr(nLifeTime), uintptr(unsafe.Pointer(&_pbstrDeviceIdentifier)))
-	return _pbstrDeviceIdentifier, win32.ErrIfFailed(int32(r1))
+	_pbstrDeviceIdentifier := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrXMLDesc)), uintptr(unsafe.Pointer(punkDeviceControl)), uintptr(unsafe.Pointer(bstrInitString)), uintptr(unsafe.Pointer(bstrResourcePath)), uintptr(nLifeTime), uintptr(win32.OutParam(unsafe.Pointer(_pbstrDeviceIdentifier))))
+	return *_pbstrDeviceIdentifier, win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterDeviceProvider dispatches through IUPnPRegistrar's vtable slot 5.
@@ -552,9 +552,9 @@ func (self *IUPnPRegistrar) RegisterDeviceProvider(bstrProviderName foundation.B
 
 // GetUniqueDeviceName dispatches through IUPnPRegistrar's vtable slot 6.
 func (self *IUPnPRegistrar) GetUniqueDeviceName(bstrDeviceIdentifier foundation.BSTR, bstrTemplateUDN foundation.BSTR) (foundation.BSTR, error) {
-	var _pbstrUDN foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDeviceIdentifier)), uintptr(unsafe.Pointer(bstrTemplateUDN)), uintptr(unsafe.Pointer(&_pbstrUDN)))
-	return _pbstrUDN, win32.ErrIfFailed(int32(r1))
+	_pbstrUDN := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDeviceIdentifier)), uintptr(unsafe.Pointer(bstrTemplateUDN)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrUDN))))
+	return *_pbstrUDN, win32.ErrIfFailed(int32(r1))
 }
 
 // UnregisterDevice dispatches through IUPnPRegistrar's vtable slot 7.
@@ -629,16 +629,16 @@ var IID_IUPnPService = win32.GUID{Data1: 0xa295019c, Data2: 0xdc65, Data3: 0x47d
 
 // QueryStateVariable dispatches through IUPnPService's vtable slot 7.
 func (self *IUPnPService) QueryStateVariable(bstrVariableName foundation.BSTR) (systemvariant.VARIANT, error) {
-	var _pValue systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrVariableName)), uintptr(unsafe.Pointer(&_pValue)))
-	return _pValue, win32.ErrIfFailed(int32(r1))
+	_pValue := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrVariableName)), uintptr(win32.OutParam(unsafe.Pointer(_pValue))))
+	return *_pValue, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ServiceTypeIdentifier dispatches through IUPnPService's vtable slot 9.
 func (self *IUPnPService) Get_ServiceTypeIdentifier() (foundation.BSTR, error) {
-	var _pVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // AddCallback dispatches through IUPnPService's vtable slot 10.
@@ -649,16 +649,16 @@ func (self *IUPnPService) AddCallback(pUnkCallback *systemcom.IUnknown) error {
 
 // Get_Id dispatches through IUPnPService's vtable slot 11.
 func (self *IUPnPService) Get_Id() (foundation.BSTR, error) {
-	var _pbstrId foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrId)))
-	return _pbstrId, win32.ErrIfFailed(int32(r1))
+	_pbstrId := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrId))))
+	return *_pbstrId, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastTransportStatus dispatches through IUPnPService's vtable slot 12.
 func (self *IUPnPService) Get_LastTransportStatus() (int32, error) {
-	var _plValue int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plValue)))
-	return _plValue, win32.ErrIfFailed(int32(r1))
+	_plValue := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plValue))))
+	return *_plValue, win32.ErrIfFailed(int32(r1))
 }
 
 // IUPnPServiceAsync: https://learn.microsoft.com/windows/win32/api/upnp/nn-upnp-iupnpserviceasync
@@ -780,21 +780,21 @@ var IID_IUPnPServices = win32.GUID{Data1: 0x3f8c8e9e, Data2: 0x9a7a, Data3: 0x4d
 
 // Get_Count dispatches through IUPnPServices's vtable slot 7.
 func (self *IUPnPServices) Get_Count() (int32, error) {
-	var _plCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
-	return _plCount, win32.ErrIfFailed(int32(r1))
+	_plCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_plCount))))
+	return *_plCount, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IUPnPServices's vtable slot 8.
 func (self *IUPnPServices) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _ppunk *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppunk)))
-	return _ppunk, win32.ErrIfFailed(int32(r1))
+	_ppunk := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppunk))))
+	return *_ppunk, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Item dispatches through IUPnPServices's vtable slot 9.
 func (self *IUPnPServices) Get_Item(bstrServiceId foundation.BSTR) (*IUPnPService, error) {
-	var _ppService *IUPnPService
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrServiceId)), uintptr(unsafe.Pointer(&_ppService)))
-	return _ppService, win32.ErrIfFailed(int32(r1))
+	_ppService := new(*IUPnPService)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrServiceId)), uintptr(win32.OutParam(unsafe.Pointer(_ppService))))
+	return *_ppService, win32.ErrIfFailed(int32(r1))
 }

@@ -696,51 +696,51 @@ var IID_ITsSbClientConnection = win32.GUID{Data1: 0x18857499, Data2: 0xad61, Dat
 
 // Get_UserName dispatches through ITsSbClientConnection's vtable slot 3.
 func (self *ITsSbClientConnection) Get_UserName() (foundation.BSTR, error) {
-	var _pVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Domain dispatches through ITsSbClientConnection's vtable slot 4.
 func (self *ITsSbClientConnection) Get_Domain() (foundation.BSTR, error) {
-	var _pVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InitialProgram dispatches through ITsSbClientConnection's vtable slot 5.
 func (self *ITsSbClientConnection) Get_InitialProgram() (foundation.BSTR, error) {
-	var _pVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LoadBalanceResult dispatches through ITsSbClientConnection's vtable slot 6.
 func (self *ITsSbClientConnection) Get_LoadBalanceResult() (*ITsSbLoadBalanceResult, error) {
-	var _ppVal *ITsSbLoadBalanceResult
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppVal)))
-	return _ppVal, win32.ErrIfFailed(int32(r1))
+	_ppVal := new(*ITsSbLoadBalanceResult)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppVal))))
+	return *_ppVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FarmName dispatches through ITsSbClientConnection's vtable slot 7.
 func (self *ITsSbClientConnection) Get_FarmName() (foundation.BSTR, error) {
-	var _pVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetContext dispatches through ITsSbClientConnection's vtable slot 9.
 func (self *ITsSbClientConnection) GetContext(contextId foundation.BSTR) (systemvariant.VARIANT, error) {
-	var _context systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(contextId)), uintptr(unsafe.Pointer(&_context)))
-	return _context, win32.ErrIfFailed(int32(r1))
+	_context := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(contextId)), uintptr(win32.OutParam(unsafe.Pointer(_context))))
+	return *_context, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Environment dispatches through ITsSbClientConnection's vtable slot 10.
 func (self *ITsSbClientConnection) Get_Environment() (*ITsSbEnvironment, error) {
-	var _ppEnvironment *ITsSbEnvironment
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnvironment)))
-	return _ppEnvironment, win32.ErrIfFailed(int32(r1))
+	_ppEnvironment := new(*ITsSbEnvironment)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppEnvironment))))
+	return *_ppEnvironment, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ConnectionError dispatches through ITsSbClientConnection's vtable slot 11.
@@ -751,37 +751,37 @@ func (self *ITsSbClientConnection) Get_ConnectionError() error {
 
 // Get_SamUserAccount dispatches through ITsSbClientConnection's vtable slot 12.
 func (self *ITsSbClientConnection) Get_SamUserAccount() (foundation.BSTR, error) {
-	var _pVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ClientConnectionPropertySet dispatches through ITsSbClientConnection's vtable slot 13.
 func (self *ITsSbClientConnection) Get_ClientConnectionPropertySet() (*ITsSbClientConnectionPropertySet, error) {
-	var _ppPropertySet *ITsSbClientConnectionPropertySet
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppPropertySet)))
-	return _ppPropertySet, win32.ErrIfFailed(int32(r1))
+	_ppPropertySet := new(*ITsSbClientConnectionPropertySet)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppPropertySet))))
+	return *_ppPropertySet, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsFirstAssignment dispatches through ITsSbClientConnection's vtable slot 14.
 func (self *ITsSbClientConnection) Get_IsFirstAssignment() (foundation.BOOL, error) {
-	var _ppVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppVal)))
-	return _ppVal, win32.ErrIfFailed(int32(r1))
+	_ppVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppVal))))
+	return *_ppVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RdFarmType dispatches through ITsSbClientConnection's vtable slot 15.
 func (self *ITsSbClientConnection) Get_RdFarmType() (RD_FARM_TYPE, error) {
-	var _pRdFarmType RD_FARM_TYPE
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRdFarmType)))
-	return _pRdFarmType, win32.ErrIfFailed(int32(r1))
+	_pRdFarmType := new(RD_FARM_TYPE)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRdFarmType))))
+	return *_pRdFarmType, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UserSidString dispatches through ITsSbClientConnection's vtable slot 16.
 func (self *ITsSbClientConnection) Get_UserSidString() (*int8, error) {
-	var _pszUserSidString *int8
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszUserSidString)))
-	return _pszUserSidString, win32.ErrIfFailed(int32(r1))
+	_pszUserSidString := new(*int8)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pszUserSidString))))
+	return *_pszUserSidString, win32.ErrIfFailed(int32(r1))
 }
 
 // GetDisconnectedSession dispatches through ITsSbClientConnection's vtable slot 17.
@@ -810,23 +810,23 @@ var IID_ITsSbEnvironment = win32.GUID{Data1: 0x8c87f7f7, Data2: 0xbf51, Data3: 0
 
 // Get_Name dispatches through ITsSbEnvironment's vtable slot 3.
 func (self *ITsSbEnvironment) Get_Name() (foundation.BSTR, error) {
-	var _pVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ServerWeight dispatches through ITsSbEnvironment's vtable slot 4.
 func (self *ITsSbEnvironment) Get_ServerWeight() (uint32, error) {
-	var _pVal uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EnvironmentPropertySet dispatches through ITsSbEnvironment's vtable slot 5.
 func (self *ITsSbEnvironment) Get_EnvironmentPropertySet() (*ITsSbEnvironmentPropertySet, error) {
-	var _ppPropertySet *ITsSbEnvironmentPropertySet
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppPropertySet)))
-	return _ppPropertySet, win32.ErrIfFailed(int32(r1))
+	_ppPropertySet := new(*ITsSbEnvironmentPropertySet)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppPropertySet))))
+	return *_ppPropertySet, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EnvironmentPropertySet dispatches through ITsSbEnvironment's vtable slot 6.
@@ -861,9 +861,9 @@ func (self *ITsSbFilterPluginStore) SaveProperties(pPropertySet *ITsSbPropertySe
 
 // EnumerateProperties dispatches through ITsSbFilterPluginStore's vtable slot 4.
 func (self *ITsSbFilterPluginStore) EnumerateProperties() (*ITsSbPropertySet, error) {
-	var _ppPropertySet *ITsSbPropertySet
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppPropertySet)))
-	return _ppPropertySet, win32.ErrIfFailed(int32(r1))
+	_ppPropertySet := new(*ITsSbPropertySet)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppPropertySet))))
+	return *_ppPropertySet, win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteProperties dispatches through ITsSbFilterPluginStore's vtable slot 5.
@@ -955,9 +955,9 @@ var IID_ITsSbLoadBalanceResult = win32.GUID{Data1: 0x24fdb7ac, Data2: 0xfea6, Da
 
 // Get_TargetName dispatches through ITsSbLoadBalanceResult's vtable slot 3.
 func (self *ITsSbLoadBalanceResult) Get_TargetName() (foundation.BSTR, error) {
-	var _pVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // ITsSbLoadBalancing: https://learn.microsoft.com/windows/win32/api/sbtsv/nn-sbtsv-itssbloadbalancing
@@ -1140,9 +1140,9 @@ func (self *ITsSbProvider) CreateSessionObject(TargetName foundation.BSTR, UserN
 
 // CreatePluginPropertySet dispatches through ITsSbProvider's vtable slot 6.
 func (self *ITsSbProvider) CreatePluginPropertySet() (*ITsSbPluginPropertySet, error) {
-	var _ppPropertySet *ITsSbPluginPropertySet
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppPropertySet)))
-	return _ppPropertySet, win32.ErrIfFailed(int32(r1))
+	_ppPropertySet := new(*ITsSbPluginPropertySet)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppPropertySet))))
+	return *_ppPropertySet, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateTargetPropertySetObject dispatches through ITsSbProvider's vtable slot 7.
@@ -1546,16 +1546,16 @@ var IID_ITsSbSession = win32.GUID{Data1: 0xd453aac7, Data2: 0xb1d8, Data3: 0x4c5
 
 // Get_SessionId dispatches through ITsSbSession's vtable slot 3.
 func (self *ITsSbSession) Get_SessionId() (uint32, error) {
-	var _pVal uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TargetName dispatches through ITsSbSession's vtable slot 4.
 func (self *ITsSbSession) Get_TargetName() (foundation.BSTR, error) {
-	var _targetName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_targetName)))
-	return _targetName, win32.ErrIfFailed(int32(r1))
+	_targetName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_targetName))))
+	return *_targetName, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_TargetName dispatches through ITsSbSession's vtable slot 5.
@@ -1566,23 +1566,23 @@ func (self *ITsSbSession) Put_TargetName(targetName foundation.BSTR) error {
 
 // Get_Username dispatches through ITsSbSession's vtable slot 6.
 func (self *ITsSbSession) Get_Username() (foundation.BSTR, error) {
-	var _userName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_userName)))
-	return _userName, win32.ErrIfFailed(int32(r1))
+	_userName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_userName))))
+	return *_userName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Domain dispatches through ITsSbSession's vtable slot 7.
 func (self *ITsSbSession) Get_Domain() (foundation.BSTR, error) {
-	var _domain foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_domain)))
-	return _domain, win32.ErrIfFailed(int32(r1))
+	_domain := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_domain))))
+	return *_domain, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_State dispatches through ITsSbSession's vtable slot 8.
 func (self *ITsSbSession) Get_State() (TSSESSION_STATE, error) {
-	var _pState TSSESSION_STATE
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pState)))
-	return _pState, win32.ErrIfFailed(int32(r1))
+	_pState := new(TSSESSION_STATE)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pState))))
+	return *_pState, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_State dispatches through ITsSbSession's vtable slot 9.
@@ -1593,23 +1593,23 @@ func (self *ITsSbSession) Put_State(State TSSESSION_STATE) error {
 
 // Get_CreateTime dispatches through ITsSbSession's vtable slot 10.
 func (self *ITsSbSession) Get_CreateTime() (foundation.FILETIME, error) {
-	var _pTime foundation.FILETIME
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pTime)))
-	return _pTime, win32.ErrIfFailed(int32(r1))
+	_pTime := new(foundation.FILETIME)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pTime))))
+	return *_pTime, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DisconnectTime dispatches through ITsSbSession's vtable slot 12.
 func (self *ITsSbSession) Get_DisconnectTime() (foundation.FILETIME, error) {
-	var _pTime foundation.FILETIME
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pTime)))
-	return _pTime, win32.ErrIfFailed(int32(r1))
+	_pTime := new(foundation.FILETIME)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pTime))))
+	return *_pTime, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InitialProgram dispatches through ITsSbSession's vtable slot 14.
 func (self *ITsSbSession) Get_InitialProgram() (foundation.BSTR, error) {
-	var _app foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_app)))
-	return _app, win32.ErrIfFailed(int32(r1))
+	_app := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_app))))
+	return *_app, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_InitialProgram dispatches through ITsSbSession's vtable slot 15.
@@ -1620,16 +1620,16 @@ func (self *ITsSbSession) Put_InitialProgram(Application foundation.BSTR) error 
 
 // Get_ClientDisplay dispatches through ITsSbSession's vtable slot 16.
 func (self *ITsSbSession) Get_ClientDisplay() (CLIENT_DISPLAY, error) {
-	var _pClientDisplay CLIENT_DISPLAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pClientDisplay)))
-	return _pClientDisplay, win32.ErrIfFailed(int32(r1))
+	_pClientDisplay := new(CLIENT_DISPLAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pClientDisplay))))
+	return *_pClientDisplay, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ProtocolType dispatches through ITsSbSession's vtable slot 18.
 func (self *ITsSbSession) Get_ProtocolType() (uint32, error) {
-	var _pVal uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ProtocolType dispatches through ITsSbSession's vtable slot 19.
@@ -1649,9 +1649,9 @@ var IID_ITsSbTarget = win32.GUID{Data1: 0x16616ecc, Data2: 0x272d, Data3: 0x411d
 
 // Get_TargetName dispatches through ITsSbTarget's vtable slot 3.
 func (self *ITsSbTarget) Get_TargetName() (foundation.BSTR, error) {
-	var _pVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_TargetName dispatches through ITsSbTarget's vtable slot 4.
@@ -1662,9 +1662,9 @@ func (self *ITsSbTarget) Put_TargetName(Val foundation.BSTR) error {
 
 // Get_FarmName dispatches through ITsSbTarget's vtable slot 5.
 func (self *ITsSbTarget) Get_FarmName() (foundation.BSTR, error) {
-	var _pVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FarmName dispatches through ITsSbTarget's vtable slot 6.
@@ -1675,9 +1675,9 @@ func (self *ITsSbTarget) Put_FarmName(Val foundation.BSTR) error {
 
 // Get_TargetFQDN dispatches through ITsSbTarget's vtable slot 7.
 func (self *ITsSbTarget) Get_TargetFQDN() (foundation.BSTR, error) {
-	var _TargetFqdnName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_TargetFqdnName)))
-	return _TargetFqdnName, win32.ErrIfFailed(int32(r1))
+	_TargetFqdnName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_TargetFqdnName))))
+	return *_TargetFqdnName, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_TargetFQDN dispatches through ITsSbTarget's vtable slot 8.
@@ -1688,9 +1688,9 @@ func (self *ITsSbTarget) Put_TargetFQDN(Val foundation.BSTR) error {
 
 // Get_TargetNetbios dispatches through ITsSbTarget's vtable slot 9.
 func (self *ITsSbTarget) Get_TargetNetbios() (foundation.BSTR, error) {
-	var _TargetNetbiosName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_TargetNetbiosName)))
-	return _TargetNetbiosName, win32.ErrIfFailed(int32(r1))
+	_TargetNetbiosName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_TargetNetbiosName))))
+	return *_TargetNetbiosName, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_TargetNetbios dispatches through ITsSbTarget's vtable slot 10.
@@ -1717,9 +1717,9 @@ func (self *ITsSbTarget) Put_IpAddresses(SOCKADDR []TSSD_ConnectionPoint) error 
 
 // Get_TargetState dispatches through ITsSbTarget's vtable slot 13.
 func (self *ITsSbTarget) Get_TargetState() (TARGET_STATE, error) {
-	var _pState TARGET_STATE
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pState)))
-	return _pState, win32.ErrIfFailed(int32(r1))
+	_pState := new(TARGET_STATE)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pState))))
+	return *_pState, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_TargetState dispatches through ITsSbTarget's vtable slot 14.
@@ -1730,9 +1730,9 @@ func (self *ITsSbTarget) Put_TargetState(State TARGET_STATE) error {
 
 // Get_TargetPropertySet dispatches through ITsSbTarget's vtable slot 15.
 func (self *ITsSbTarget) Get_TargetPropertySet() (*ITsSbTargetPropertySet, error) {
-	var _ppPropertySet *ITsSbTargetPropertySet
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppPropertySet)))
-	return _ppPropertySet, win32.ErrIfFailed(int32(r1))
+	_ppPropertySet := new(*ITsSbTargetPropertySet)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppPropertySet))))
+	return *_ppPropertySet, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_TargetPropertySet dispatches through ITsSbTarget's vtable slot 16.
@@ -1743,9 +1743,9 @@ func (self *ITsSbTarget) Put_TargetPropertySet(pVal *ITsSbTargetPropertySet) err
 
 // Get_EnvironmentName dispatches through ITsSbTarget's vtable slot 17.
 func (self *ITsSbTarget) Get_EnvironmentName() (foundation.BSTR, error) {
-	var _pVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EnvironmentName dispatches through ITsSbTarget's vtable slot 18.
@@ -1756,23 +1756,23 @@ func (self *ITsSbTarget) Put_EnvironmentName(Val foundation.BSTR) error {
 
 // Get_NumSessions dispatches through ITsSbTarget's vtable slot 19.
 func (self *ITsSbTarget) Get_NumSessions() (uint32, error) {
-	var _pNumSessions uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pNumSessions)))
-	return _pNumSessions, win32.ErrIfFailed(int32(r1))
+	_pNumSessions := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pNumSessions))))
+	return *_pNumSessions, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NumPendingConnections dispatches through ITsSbTarget's vtable slot 20.
 func (self *ITsSbTarget) Get_NumPendingConnections() (uint32, error) {
-	var _pNumPendingConnections uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pNumPendingConnections)))
-	return _pNumPendingConnections, win32.ErrIfFailed(int32(r1))
+	_pNumPendingConnections := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pNumPendingConnections))))
+	return *_pNumPendingConnections, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TargetLoad dispatches through ITsSbTarget's vtable slot 21.
 func (self *ITsSbTarget) Get_TargetLoad() (uint32, error) {
-	var _pTargetLoad uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pTargetLoad)))
-	return _pTargetLoad, win32.ErrIfFailed(int32(r1))
+	_pTargetLoad := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pTargetLoad))))
+	return *_pTargetLoad, win32.ErrIfFailed(int32(r1))
 }
 
 // ITsSbTargetPropertySet: https://learn.microsoft.com/windows/win32/api/sbtsv/nn-sbtsv-itssbtargetpropertyset
@@ -1795,65 +1795,65 @@ var IID_ITsSbTaskInfo = win32.GUID{Data1: 0x523d1083, Data2: 0x89be, Data3: 0x48
 
 // Get_TargetId dispatches through ITsSbTaskInfo's vtable slot 3.
 func (self *ITsSbTaskInfo) Get_TargetId() (foundation.BSTR, error) {
-	var _pName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pName)))
-	return _pName, win32.ErrIfFailed(int32(r1))
+	_pName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pName))))
+	return *_pName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StartTime dispatches through ITsSbTaskInfo's vtable slot 4.
 func (self *ITsSbTaskInfo) Get_StartTime() (foundation.FILETIME, error) {
-	var _pStartTime foundation.FILETIME
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pStartTime)))
-	return _pStartTime, win32.ErrIfFailed(int32(r1))
+	_pStartTime := new(foundation.FILETIME)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pStartTime))))
+	return *_pStartTime, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EndTime dispatches through ITsSbTaskInfo's vtable slot 5.
 func (self *ITsSbTaskInfo) Get_EndTime() (foundation.FILETIME, error) {
-	var _pEndTime foundation.FILETIME
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pEndTime)))
-	return _pEndTime, win32.ErrIfFailed(int32(r1))
+	_pEndTime := new(foundation.FILETIME)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pEndTime))))
+	return *_pEndTime, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Deadline dispatches through ITsSbTaskInfo's vtable slot 6.
 func (self *ITsSbTaskInfo) Get_Deadline() (foundation.FILETIME, error) {
-	var _pDeadline foundation.FILETIME
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDeadline)))
-	return _pDeadline, win32.ErrIfFailed(int32(r1))
+	_pDeadline := new(foundation.FILETIME)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pDeadline))))
+	return *_pDeadline, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Identifier dispatches through ITsSbTaskInfo's vtable slot 7.
 func (self *ITsSbTaskInfo) Get_Identifier() (foundation.BSTR, error) {
-	var _pIdentifier foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pIdentifier)))
-	return _pIdentifier, win32.ErrIfFailed(int32(r1))
+	_pIdentifier := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIdentifier))))
+	return *_pIdentifier, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Label dispatches through ITsSbTaskInfo's vtable slot 8.
 func (self *ITsSbTaskInfo) Get_Label() (foundation.BSTR, error) {
-	var _pLabel foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pLabel)))
-	return _pLabel, win32.ErrIfFailed(int32(r1))
+	_pLabel := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pLabel))))
+	return *_pLabel, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Context dispatches through ITsSbTaskInfo's vtable slot 9.
 func (self *ITsSbTaskInfo) Get_Context() (*systemcom.SAFEARRAY, error) {
-	var _pContext *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pContext)))
-	return _pContext, win32.ErrIfFailed(int32(r1))
+	_pContext := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pContext))))
+	return *_pContext, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Plugin dispatches through ITsSbTaskInfo's vtable slot 10.
 func (self *ITsSbTaskInfo) Get_Plugin() (foundation.BSTR, error) {
-	var _pPlugin foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pPlugin)))
-	return _pPlugin, win32.ErrIfFailed(int32(r1))
+	_pPlugin := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pPlugin))))
+	return *_pPlugin, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Status dispatches through ITsSbTaskInfo's vtable slot 11.
 func (self *ITsSbTaskInfo) Get_Status() (RDV_TASK_STATUS, error) {
-	var _pStatus RDV_TASK_STATUS
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pStatus)))
-	return _pStatus, win32.ErrIfFailed(int32(r1))
+	_pStatus := new(RDV_TASK_STATUS)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pStatus))))
+	return *_pStatus, win32.ErrIfFailed(int32(r1))
 }
 
 // ITsSbTaskPlugin: https://learn.microsoft.com/windows/win32/api/sbtsv/nn-sbtsv-itssbtaskplugin
@@ -2001,9 +2001,9 @@ var IID_IWRdsGraphicsChannelManager = win32.GUID{Data1: 0x0fd57159, Data2: 0xe83
 
 // CreateChannel dispatches through IWRdsGraphicsChannelManager's vtable slot 3.
 func (self *IWRdsGraphicsChannelManager) CreateChannel(pszChannelName *byte, channelType WRdsGraphicsChannelType) (*IWRdsGraphicsChannel, error) {
-	var _ppVirtualChannel *IWRdsGraphicsChannel
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszChannelName)), uintptr(channelType), uintptr(unsafe.Pointer(&_ppVirtualChannel)))
-	return _ppVirtualChannel, win32.ErrIfFailed(int32(r1))
+	_ppVirtualChannel := new(*IWRdsGraphicsChannel)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszChannelName)), uintptr(channelType), uintptr(win32.OutParam(unsafe.Pointer(_ppVirtualChannel))))
+	return *_ppVirtualChannel, win32.ErrIfFailed(int32(r1))
 }
 
 // IWRdsProtocolConnection: https://learn.microsoft.com/windows/win32/api/wtsprotocol/nn-wtsprotocol-iwrdsprotocolconnection
@@ -3253,9 +3253,9 @@ func (self *IWorkspace) StartRemoteApplication(bstrWorkspaceId foundation.BSTR, 
 
 // GetProcessId dispatches through IWorkspace's vtable slot 5.
 func (self *IWorkspace) GetProcessId() (uint32, error) {
-	var _pulProcessId uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulProcessId)))
-	return _pulProcessId, win32.ErrIfFailed(int32(r1))
+	_pulProcessId := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pulProcessId))))
+	return *_pulProcessId, win32.ErrIfFailed(int32(r1))
 }
 
 // IWorkspace2: https://learn.microsoft.com/windows/win32/api/workspaceruntime/nn-workspaceruntime-iworkspace2
@@ -3362,9 +3362,9 @@ func (self *IWorkspaceReportMessage) RegisterErrorLogMessage(bstrMessage foundat
 
 // IsErrorMessageRegistered dispatches through IWorkspaceReportMessage's vtable slot 4.
 func (self *IWorkspaceReportMessage) IsErrorMessageRegistered(bstrWkspId foundation.BSTR, dwErrorType uint32, bstrErrorMessageType foundation.BSTR, dwErrorCode uint32) (foundation.VARIANT_BOOL, error) {
-	var _pfErrorExist foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrWkspId)), uintptr(dwErrorType), uintptr(unsafe.Pointer(bstrErrorMessageType)), uintptr(dwErrorCode), uintptr(unsafe.Pointer(&_pfErrorExist)))
-	return _pfErrorExist, win32.ErrIfFailed(int32(r1))
+	_pfErrorExist := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrWkspId)), uintptr(dwErrorType), uintptr(unsafe.Pointer(bstrErrorMessageType)), uintptr(dwErrorCode), uintptr(win32.OutParam(unsafe.Pointer(_pfErrorExist))))
+	return *_pfErrorExist, win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterErrorEvent dispatches through IWorkspaceReportMessage's vtable slot 5.
@@ -3435,16 +3435,16 @@ func (self *IWorkspaceScriptable) StartWorkspace(bstrWorkspaceId foundation.BSTR
 
 // IsWorkspaceCredentialSpecified dispatches through IWorkspaceScriptable's vtable slot 9.
 func (self *IWorkspaceScriptable) IsWorkspaceCredentialSpecified(bstrWorkspaceId foundation.BSTR, bCountUnauthenticatedCredentials foundation.VARIANT_BOOL) (foundation.VARIANT_BOOL, error) {
-	var _pbCredExist foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrWorkspaceId)), uintptr(bCountUnauthenticatedCredentials), uintptr(unsafe.Pointer(&_pbCredExist)))
-	return _pbCredExist, win32.ErrIfFailed(int32(r1))
+	_pbCredExist := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrWorkspaceId)), uintptr(bCountUnauthenticatedCredentials), uintptr(win32.OutParam(unsafe.Pointer(_pbCredExist))))
+	return *_pbCredExist, win32.ErrIfFailed(int32(r1))
 }
 
 // IsWorkspaceSSOEnabled dispatches through IWorkspaceScriptable's vtable slot 10.
 func (self *IWorkspaceScriptable) IsWorkspaceSSOEnabled() (foundation.VARIANT_BOOL, error) {
-	var _pbSSOEnabled foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbSSOEnabled)))
-	return _pbSSOEnabled, win32.ErrIfFailed(int32(r1))
+	_pbSSOEnabled := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbSSOEnabled))))
+	return *_pbSSOEnabled, win32.ErrIfFailed(int32(r1))
 }
 
 // ClearWorkspaceCredential dispatches through IWorkspaceScriptable's vtable slot 11.
@@ -3526,16 +3526,16 @@ func (self *ItsPubPlugin) GetCacheLastUpdateTime(lastUpdateTime *uint64) error {
 
 // Get_pluginName dispatches through ItsPubPlugin's vtable slot 6.
 func (self *ItsPubPlugin) Get_pluginName() (foundation.BSTR, error) {
-	var _pVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_pluginVersion dispatches through ItsPubPlugin's vtable slot 7.
 func (self *ItsPubPlugin) Get_pluginVersion() (foundation.BSTR, error) {
-	var _pVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // ResolveResource dispatches through ItsPubPlugin's vtable slot 8.

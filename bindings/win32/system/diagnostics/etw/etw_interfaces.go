@@ -24,9 +24,9 @@ var IID_ITraceEvent = win32.GUID{Data1: 0x8cc97f40, Data2: 0x9028, Data3: 0x4ff3
 
 // Clone dispatches through ITraceEvent's vtable slot 3.
 func (self *ITraceEvent) Clone() (*ITraceEvent, error) {
-	var _NewEvent *ITraceEvent
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_NewEvent)))
-	return _NewEvent, win32.ErrIfFailed(int32(r1))
+	_NewEvent := new(*ITraceEvent)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_NewEvent))))
+	return *_NewEvent, win32.ErrIfFailed(int32(r1))
 }
 
 // GetUserContext dispatches through ITraceEvent's vtable slot 4.
@@ -37,9 +37,9 @@ func (self *ITraceEvent) GetUserContext(UserContext *unsafe.Pointer) error {
 
 // GetEventRecord dispatches through ITraceEvent's vtable slot 5.
 func (self *ITraceEvent) GetEventRecord() (*EVENT_RECORD, error) {
-	var _EventRecord *EVENT_RECORD
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_EventRecord)))
-	return _EventRecord, win32.ErrIfFailed(int32(r1))
+	_EventRecord := new(*EVENT_RECORD)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_EventRecord))))
+	return *_EventRecord, win32.ErrIfFailed(int32(r1))
 }
 
 // SetPayload dispatches through ITraceEvent's vtable slot 6.
@@ -138,16 +138,16 @@ var IID_ITraceRelogger = win32.GUID{Data1: 0xf754ad43, Data2: 0x3bcc, Data3: 0x4
 
 // AddLogfileTraceStream dispatches through ITraceRelogger's vtable slot 3.
 func (self *ITraceRelogger) AddLogfileTraceStream(LogfileName foundation.BSTR, UserContext unsafe.Pointer) (uint64, error) {
-	var _TraceStreamId uint64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(LogfileName)), uintptr(unsafe.Pointer(UserContext)), uintptr(unsafe.Pointer(&_TraceStreamId)))
-	return _TraceStreamId, win32.ErrIfFailed(int32(r1))
+	_TraceStreamId := new(uint64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(LogfileName)), uintptr(unsafe.Pointer(UserContext)), uintptr(win32.OutParam(unsafe.Pointer(_TraceStreamId))))
+	return *_TraceStreamId, win32.ErrIfFailed(int32(r1))
 }
 
 // AddRealtimeTraceStream dispatches through ITraceRelogger's vtable slot 4.
 func (self *ITraceRelogger) AddRealtimeTraceStream(LoggerName foundation.BSTR, UserContext unsafe.Pointer) (uint64, error) {
-	var _TraceStreamId uint64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(LoggerName)), uintptr(unsafe.Pointer(UserContext)), uintptr(unsafe.Pointer(&_TraceStreamId)))
-	return _TraceStreamId, win32.ErrIfFailed(int32(r1))
+	_TraceStreamId := new(uint64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(LoggerName)), uintptr(unsafe.Pointer(UserContext)), uintptr(win32.OutParam(unsafe.Pointer(_TraceStreamId))))
+	return *_TraceStreamId, win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterCallback dispatches through ITraceRelogger's vtable slot 5.
@@ -164,9 +164,9 @@ func (self *ITraceRelogger) Inject(Event *ITraceEvent) error {
 
 // CreateEventInstance dispatches through ITraceRelogger's vtable slot 7.
 func (self *ITraceRelogger) CreateEventInstance(TraceStreamId uint64, Flags uint32) (*ITraceEvent, error) {
-	var _Event *ITraceEvent
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(TraceStreamId), uintptr(Flags), uintptr(unsafe.Pointer(&_Event)))
-	return _Event, win32.ErrIfFailed(int32(r1))
+	_Event := new(*ITraceEvent)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(TraceStreamId), uintptr(Flags), uintptr(win32.OutParam(unsafe.Pointer(_Event))))
+	return *_Event, win32.ErrIfFailed(int32(r1))
 }
 
 // ProcessTrace dispatches through ITraceRelogger's vtable slot 8.

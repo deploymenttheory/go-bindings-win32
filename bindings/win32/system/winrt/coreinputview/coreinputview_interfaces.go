@@ -24,7 +24,7 @@ var IID_ICoreFrameworkInputViewInterop = win32.GUID{Data1: 0x0e3da342, Data2: 0x
 
 // GetForWindow dispatches through ICoreFrameworkInputViewInterop's vtable slot 6.
 func (self *ICoreFrameworkInputViewInterop) GetForWindow(appWindow foundation.HWND, riid *win32.GUID) (*win32.IUnknown, error) {
-	var _coreFrameworkInputView *win32.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_coreFrameworkInputView)))
-	return _coreFrameworkInputView, win32.ErrIfFailed(int32(r1))
+	_coreFrameworkInputView := new(*win32.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(win32.OutParam(unsafe.Pointer(_coreFrameworkInputView))))
+	return *_coreFrameworkInputView, win32.ErrIfFailed(int32(r1))
 }

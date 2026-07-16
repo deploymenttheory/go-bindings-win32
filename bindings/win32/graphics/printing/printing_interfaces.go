@@ -962,44 +962,44 @@ var IID_IPrintJob = win32.GUID{Data1: 0xb771dab8, Data2: 0x1282, Data3: 0x41b7, 
 
 // Get_Name dispatches through IPrintJob's vtable slot 3.
 func (self *IPrintJob) Get_Name() (foundation.BSTR, error) {
-	var _pbstrName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrName)))
-	return _pbstrName, win32.ErrIfFailed(int32(r1))
+	_pbstrName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrName))))
+	return *_pbstrName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Id dispatches through IPrintJob's vtable slot 4.
 func (self *IPrintJob) Get_Id() (uint32, error) {
-	var _pulID uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulID)))
-	return _pulID, win32.ErrIfFailed(int32(r1))
+	_pulID := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pulID))))
+	return *_pulID, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PrintedPages dispatches through IPrintJob's vtable slot 5.
 func (self *IPrintJob) Get_PrintedPages() (uint32, error) {
-	var _pulPages uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulPages)))
-	return _pulPages, win32.ErrIfFailed(int32(r1))
+	_pulPages := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pulPages))))
+	return *_pulPages, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TotalPages dispatches through IPrintJob's vtable slot 6.
 func (self *IPrintJob) Get_TotalPages() (uint32, error) {
-	var _pulPages uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulPages)))
-	return _pulPages, win32.ErrIfFailed(int32(r1))
+	_pulPages := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pulPages))))
+	return *_pulPages, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Status dispatches through IPrintJob's vtable slot 7.
 func (self *IPrintJob) Get_Status() (PrintJobStatus, error) {
-	var _pStatus PrintJobStatus
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pStatus)))
-	return _pStatus, win32.ErrIfFailed(int32(r1))
+	_pStatus := new(PrintJobStatus)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pStatus))))
+	return *_pStatus, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SubmissionTime dispatches through IPrintJob's vtable slot 8.
 func (self *IPrintJob) Get_SubmissionTime() (float64, error) {
-	var _pSubmissionTime float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pSubmissionTime)))
-	return _pSubmissionTime, win32.ErrIfFailed(int32(r1))
+	_pSubmissionTime := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pSubmissionTime))))
+	return *_pSubmissionTime, win32.ErrIfFailed(int32(r1))
 }
 
 // RequestCancel dispatches through IPrintJob's vtable slot 9.
@@ -1018,23 +1018,23 @@ var IID_IPrintJobCollection = win32.GUID{Data1: 0x72b82a24, Data2: 0xa598, Data3
 
 // Get_Count dispatches through IPrintJobCollection's vtable slot 7.
 func (self *IPrintJobCollection) Get_Count() (uint32, error) {
-	var _pulCount uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulCount)))
-	return _pulCount, win32.ErrIfFailed(int32(r1))
+	_pulCount := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pulCount))))
+	return *_pulCount, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAt dispatches through IPrintJobCollection's vtable slot 8.
 func (self *IPrintJobCollection) GetAt(ulIndex uint32) (*IPrintJob, error) {
-	var _ppJob *IPrintJob
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(ulIndex), uintptr(unsafe.Pointer(&_ppJob)))
-	return _ppJob, win32.ErrIfFailed(int32(r1))
+	_ppJob := new(*IPrintJob)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(ulIndex), uintptr(win32.OutParam(unsafe.Pointer(_ppJob))))
+	return *_ppJob, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IPrintJobCollection's vtable slot 9.
 func (self *IPrintJobCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _ppUnk *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppUnk)))
-	return _ppUnk, win32.ErrIfFailed(int32(r1))
+	_ppUnk := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppUnk))))
+	return *_ppUnk, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 7f42285e-91d5-11d1-8820-00c04fb961ec
@@ -1413,51 +1413,51 @@ var IID_IPrintSchemaCapabilities = win32.GUID{Data1: 0x5a577640, Data2: 0x501d, 
 
 // GetFeatureByKeyName dispatches through IPrintSchemaCapabilities's vtable slot 10.
 func (self *IPrintSchemaCapabilities) GetFeatureByKeyName(bstrKeyName foundation.BSTR) (*IPrintSchemaFeature, error) {
-	var _ppFeature *IPrintSchemaFeature
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrKeyName)), uintptr(unsafe.Pointer(&_ppFeature)))
-	return _ppFeature, win32.ErrIfFailed(int32(r1))
+	_ppFeature := new(*IPrintSchemaFeature)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrKeyName)), uintptr(win32.OutParam(unsafe.Pointer(_ppFeature))))
+	return *_ppFeature, win32.ErrIfFailed(int32(r1))
 }
 
 // GetFeature dispatches through IPrintSchemaCapabilities's vtable slot 11.
 func (self *IPrintSchemaCapabilities) GetFeature(bstrName foundation.BSTR, bstrNamespaceUri foundation.BSTR) (*IPrintSchemaFeature, error) {
-	var _ppFeature *IPrintSchemaFeature
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(bstrNamespaceUri)), uintptr(unsafe.Pointer(&_ppFeature)))
-	return _ppFeature, win32.ErrIfFailed(int32(r1))
+	_ppFeature := new(*IPrintSchemaFeature)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(bstrNamespaceUri)), uintptr(win32.OutParam(unsafe.Pointer(_ppFeature))))
+	return *_ppFeature, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PageImageableSize dispatches through IPrintSchemaCapabilities's vtable slot 12.
 func (self *IPrintSchemaCapabilities) Get_PageImageableSize() (*IPrintSchemaPageImageableSize, error) {
-	var _ppPageImageableSize *IPrintSchemaPageImageableSize
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppPageImageableSize)))
-	return _ppPageImageableSize, win32.ErrIfFailed(int32(r1))
+	_ppPageImageableSize := new(*IPrintSchemaPageImageableSize)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppPageImageableSize))))
+	return *_ppPageImageableSize, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_JobCopiesAllDocumentsMinValue dispatches through IPrintSchemaCapabilities's vtable slot 13.
 func (self *IPrintSchemaCapabilities) Get_JobCopiesAllDocumentsMinValue() (uint32, error) {
-	var _pulJobCopiesAllDocumentsMinValue uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulJobCopiesAllDocumentsMinValue)))
-	return _pulJobCopiesAllDocumentsMinValue, win32.ErrIfFailed(int32(r1))
+	_pulJobCopiesAllDocumentsMinValue := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pulJobCopiesAllDocumentsMinValue))))
+	return *_pulJobCopiesAllDocumentsMinValue, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_JobCopiesAllDocumentsMaxValue dispatches through IPrintSchemaCapabilities's vtable slot 14.
 func (self *IPrintSchemaCapabilities) Get_JobCopiesAllDocumentsMaxValue() (uint32, error) {
-	var _pulJobCopiesAllDocumentsMaxValue uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulJobCopiesAllDocumentsMaxValue)))
-	return _pulJobCopiesAllDocumentsMaxValue, win32.ErrIfFailed(int32(r1))
+	_pulJobCopiesAllDocumentsMaxValue := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pulJobCopiesAllDocumentsMaxValue))))
+	return *_pulJobCopiesAllDocumentsMaxValue, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSelectedOptionInPrintTicket dispatches through IPrintSchemaCapabilities's vtable slot 15.
 func (self *IPrintSchemaCapabilities) GetSelectedOptionInPrintTicket(pFeature *IPrintSchemaFeature) (*IPrintSchemaOption, error) {
-	var _ppOption *IPrintSchemaOption
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFeature)), uintptr(unsafe.Pointer(&_ppOption)))
-	return _ppOption, win32.ErrIfFailed(int32(r1))
+	_ppOption := new(*IPrintSchemaOption)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFeature)), uintptr(win32.OutParam(unsafe.Pointer(_ppOption))))
+	return *_ppOption, win32.ErrIfFailed(int32(r1))
 }
 
 // GetOptions dispatches through IPrintSchemaCapabilities's vtable slot 16.
 func (self *IPrintSchemaCapabilities) GetOptions(pFeature *IPrintSchemaFeature) (*IPrintSchemaOptionCollection, error) {
-	var _ppOptionCollection *IPrintSchemaOptionCollection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFeature)), uintptr(unsafe.Pointer(&_ppOptionCollection)))
-	return _ppOptionCollection, win32.ErrIfFailed(int32(r1))
+	_ppOptionCollection := new(*IPrintSchemaOptionCollection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFeature)), uintptr(win32.OutParam(unsafe.Pointer(_ppOptionCollection))))
+	return *_ppOptionCollection, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: b58845f4-9970-4d87-a636-169fb82ed642
@@ -1470,9 +1470,9 @@ var IID_IPrintSchemaCapabilities2 = win32.GUID{Data1: 0xb58845f4, Data2: 0x9970,
 
 // GetParameterDefinition dispatches through IPrintSchemaCapabilities2's vtable slot 17.
 func (self *IPrintSchemaCapabilities2) GetParameterDefinition(bstrName foundation.BSTR, bstrNamespaceUri foundation.BSTR) (*IPrintSchemaParameterDefinition, error) {
-	var _ppParameterDefinition *IPrintSchemaParameterDefinition
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(bstrNamespaceUri)), uintptr(unsafe.Pointer(&_ppParameterDefinition)))
-	return _ppParameterDefinition, win32.ErrIfFailed(int32(r1))
+	_ppParameterDefinition := new(*IPrintSchemaParameterDefinition)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(bstrNamespaceUri)), uintptr(win32.OutParam(unsafe.Pointer(_ppParameterDefinition))))
+	return *_ppParameterDefinition, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: af45af49-d6aa-407d-bf87-3912236e9d94
@@ -1485,9 +1485,9 @@ var IID_IPrintSchemaDisplayableElement = win32.GUID{Data1: 0xaf45af49, Data2: 0x
 
 // Get_DisplayName dispatches through IPrintSchemaDisplayableElement's vtable slot 10.
 func (self *IPrintSchemaDisplayableElement) Get_DisplayName() (foundation.BSTR, error) {
-	var _pbstrDisplayName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrDisplayName)))
-	return _pbstrDisplayName, win32.ErrIfFailed(int32(r1))
+	_pbstrDisplayName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrDisplayName))))
+	return *_pbstrDisplayName, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 724c1646-e64b-4bbf-8eb4-d45e4fd580da
@@ -1500,23 +1500,23 @@ var IID_IPrintSchemaElement = win32.GUID{Data1: 0x724c1646, Data2: 0xe64b, Data3
 
 // Get_XmlNode dispatches through IPrintSchemaElement's vtable slot 7.
 func (self *IPrintSchemaElement) Get_XmlNode() (*systemcom.IUnknown, error) {
-	var _ppXmlNode *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppXmlNode)))
-	return _ppXmlNode, win32.ErrIfFailed(int32(r1))
+	_ppXmlNode := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppXmlNode))))
+	return *_ppXmlNode, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through IPrintSchemaElement's vtable slot 8.
 func (self *IPrintSchemaElement) Get_Name() (foundation.BSTR, error) {
-	var _pbstrName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrName)))
-	return _pbstrName, win32.ErrIfFailed(int32(r1))
+	_pbstrName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrName))))
+	return *_pbstrName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NamespaceUri dispatches through IPrintSchemaElement's vtable slot 9.
 func (self *IPrintSchemaElement) Get_NamespaceUri() (foundation.BSTR, error) {
-	var _pbstrNamespaceUri foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrNamespaceUri)))
-	return _pbstrNamespaceUri, win32.ErrIfFailed(int32(r1))
+	_pbstrNamespaceUri := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrNamespaceUri))))
+	return *_pbstrNamespaceUri, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: ef189461-5d62-4626-8e57-ff83583c4826
@@ -1529,9 +1529,9 @@ var IID_IPrintSchemaFeature = win32.GUID{Data1: 0xef189461, Data2: 0x5d62, Data3
 
 // Get_SelectedOption dispatches through IPrintSchemaFeature's vtable slot 11.
 func (self *IPrintSchemaFeature) Get_SelectedOption() (*IPrintSchemaOption, error) {
-	var _ppOption *IPrintSchemaOption
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppOption)))
-	return _ppOption, win32.ErrIfFailed(int32(r1))
+	_ppOption := new(*IPrintSchemaOption)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppOption))))
+	return *_ppOption, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_SelectedOption dispatches through IPrintSchemaFeature's vtable slot 12.
@@ -1542,23 +1542,23 @@ func (self *IPrintSchemaFeature) Put_SelectedOption(pOption *IPrintSchemaOption)
 
 // Get_SelectionType dispatches through IPrintSchemaFeature's vtable slot 13.
 func (self *IPrintSchemaFeature) Get_SelectionType() (PrintSchemaSelectionType, error) {
-	var _pSelectionType PrintSchemaSelectionType
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pSelectionType)))
-	return _pSelectionType, win32.ErrIfFailed(int32(r1))
+	_pSelectionType := new(PrintSchemaSelectionType)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pSelectionType))))
+	return *_pSelectionType, win32.ErrIfFailed(int32(r1))
 }
 
 // GetOption dispatches through IPrintSchemaFeature's vtable slot 14.
 func (self *IPrintSchemaFeature) GetOption(bstrName foundation.BSTR, bstrNamespaceUri foundation.BSTR) (*IPrintSchemaOption, error) {
-	var _ppOption *IPrintSchemaOption
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(bstrNamespaceUri)), uintptr(unsafe.Pointer(&_ppOption)))
-	return _ppOption, win32.ErrIfFailed(int32(r1))
+	_ppOption := new(*IPrintSchemaOption)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(bstrNamespaceUri)), uintptr(win32.OutParam(unsafe.Pointer(_ppOption))))
+	return *_ppOption, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DisplayUI dispatches through IPrintSchemaFeature's vtable slot 15.
 func (self *IPrintSchemaFeature) Get_DisplayUI() (foundation.BOOL, error) {
-	var _pbShow foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbShow)))
-	return _pbShow, win32.ErrIfFailed(int32(r1))
+	_pbShow := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbShow))))
+	return *_pbShow, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 1f6342f2-d848-42e3-8995-c10a9ef9a3ba
@@ -1571,9 +1571,9 @@ var IID_IPrintSchemaNUpOption = win32.GUID{Data1: 0x1f6342f2, Data2: 0xd848, Dat
 
 // Get_PagesPerSheet dispatches through IPrintSchemaNUpOption's vtable slot 14.
 func (self *IPrintSchemaNUpOption) Get_PagesPerSheet() (uint32, error) {
-	var _pulPagesPerSheet uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulPagesPerSheet)))
-	return _pulPagesPerSheet, win32.ErrIfFailed(int32(r1))
+	_pulPagesPerSheet := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pulPagesPerSheet))))
+	return *_pulPagesPerSheet, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 66bb2f51-5844-4997-8d70-4b7cc221cf92
@@ -1586,23 +1586,23 @@ var IID_IPrintSchemaOption = win32.GUID{Data1: 0x66bb2f51, Data2: 0x5844, Data3:
 
 // Get_Selected dispatches through IPrintSchemaOption's vtable slot 11.
 func (self *IPrintSchemaOption) Get_Selected() (foundation.BOOL, error) {
-	var _pbIsSelected foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbIsSelected)))
-	return _pbIsSelected, win32.ErrIfFailed(int32(r1))
+	_pbIsSelected := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbIsSelected))))
+	return *_pbIsSelected, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Constrained dispatches through IPrintSchemaOption's vtable slot 12.
 func (self *IPrintSchemaOption) Get_Constrained() (PrintSchemaConstrainedSetting, error) {
-	var _pSetting PrintSchemaConstrainedSetting
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pSetting)))
-	return _pSetting, win32.ErrIfFailed(int32(r1))
+	_pSetting := new(PrintSchemaConstrainedSetting)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pSetting))))
+	return *_pSetting, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPropertyValue dispatches through IPrintSchemaOption's vtable slot 13.
 func (self *IPrintSchemaOption) GetPropertyValue(bstrName foundation.BSTR, bstrNamespaceUri foundation.BSTR) (*systemcom.IUnknown, error) {
-	var _ppXmlValueNode *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(bstrNamespaceUri)), uintptr(unsafe.Pointer(&_ppXmlValueNode)))
-	return _ppXmlValueNode, win32.ErrIfFailed(int32(r1))
+	_ppXmlValueNode := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(bstrNamespaceUri)), uintptr(win32.OutParam(unsafe.Pointer(_ppXmlValueNode))))
+	return *_ppXmlValueNode, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: baecb0bd-a946-4771-bc30-e8b24f8d45c1
@@ -1615,23 +1615,23 @@ var IID_IPrintSchemaOptionCollection = win32.GUID{Data1: 0xbaecb0bd, Data2: 0xa9
 
 // Get_Count dispatches through IPrintSchemaOptionCollection's vtable slot 7.
 func (self *IPrintSchemaOptionCollection) Get_Count() (uint32, error) {
-	var _pulCount uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulCount)))
-	return _pulCount, win32.ErrIfFailed(int32(r1))
+	_pulCount := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pulCount))))
+	return *_pulCount, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAt dispatches through IPrintSchemaOptionCollection's vtable slot 8.
 func (self *IPrintSchemaOptionCollection) GetAt(ulIndex uint32) (*IPrintSchemaOption, error) {
-	var _ppOption *IPrintSchemaOption
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(ulIndex), uintptr(unsafe.Pointer(&_ppOption)))
-	return _ppOption, win32.ErrIfFailed(int32(r1))
+	_ppOption := new(*IPrintSchemaOption)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(ulIndex), uintptr(win32.OutParam(unsafe.Pointer(_ppOption))))
+	return *_ppOption, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IPrintSchemaOptionCollection's vtable slot 9.
 func (self *IPrintSchemaOptionCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _ppUnk *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppUnk)))
-	return _ppUnk, win32.ErrIfFailed(int32(r1))
+	_ppUnk := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppUnk))))
+	return *_ppUnk, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 7c85bf5e-dc7c-4f61-839b-4107e1c9b68e
@@ -1644,44 +1644,44 @@ var IID_IPrintSchemaPageImageableSize = win32.GUID{Data1: 0x7c85bf5e, Data2: 0xd
 
 // Get_ImageableSizeWidthInMicrons dispatches through IPrintSchemaPageImageableSize's vtable slot 10.
 func (self *IPrintSchemaPageImageableSize) Get_ImageableSizeWidthInMicrons() (uint32, error) {
-	var _pulImageableSizeWidth uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulImageableSizeWidth)))
-	return _pulImageableSizeWidth, win32.ErrIfFailed(int32(r1))
+	_pulImageableSizeWidth := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pulImageableSizeWidth))))
+	return *_pulImageableSizeWidth, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ImageableSizeHeightInMicrons dispatches through IPrintSchemaPageImageableSize's vtable slot 11.
 func (self *IPrintSchemaPageImageableSize) Get_ImageableSizeHeightInMicrons() (uint32, error) {
-	var _pulImageableSizeHeight uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulImageableSizeHeight)))
-	return _pulImageableSizeHeight, win32.ErrIfFailed(int32(r1))
+	_pulImageableSizeHeight := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pulImageableSizeHeight))))
+	return *_pulImageableSizeHeight, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OriginWidthInMicrons dispatches through IPrintSchemaPageImageableSize's vtable slot 12.
 func (self *IPrintSchemaPageImageableSize) Get_OriginWidthInMicrons() (uint32, error) {
-	var _pulOriginWidth uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulOriginWidth)))
-	return _pulOriginWidth, win32.ErrIfFailed(int32(r1))
+	_pulOriginWidth := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pulOriginWidth))))
+	return *_pulOriginWidth, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_OriginHeightInMicrons dispatches through IPrintSchemaPageImageableSize's vtable slot 13.
 func (self *IPrintSchemaPageImageableSize) Get_OriginHeightInMicrons() (uint32, error) {
-	var _pulOriginHeight uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulOriginHeight)))
-	return _pulOriginHeight, win32.ErrIfFailed(int32(r1))
+	_pulOriginHeight := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pulOriginHeight))))
+	return *_pulOriginHeight, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ExtentWidthInMicrons dispatches through IPrintSchemaPageImageableSize's vtable slot 14.
 func (self *IPrintSchemaPageImageableSize) Get_ExtentWidthInMicrons() (uint32, error) {
-	var _pulExtentWidth uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulExtentWidth)))
-	return _pulExtentWidth, win32.ErrIfFailed(int32(r1))
+	_pulExtentWidth := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pulExtentWidth))))
+	return *_pulExtentWidth, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ExtentHeightInMicrons dispatches through IPrintSchemaPageImageableSize's vtable slot 15.
 func (self *IPrintSchemaPageImageableSize) Get_ExtentHeightInMicrons() (uint32, error) {
-	var _pulExtentHeight uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulExtentHeight)))
-	return _pulExtentHeight, win32.ErrIfFailed(int32(r1))
+	_pulExtentHeight := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pulExtentHeight))))
+	return *_pulExtentHeight, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 68746729-f493-4830-a10f-69028774605d
@@ -1694,16 +1694,16 @@ var IID_IPrintSchemaPageMediaSizeOption = win32.GUID{Data1: 0x68746729, Data2: 0
 
 // Get_WidthInMicrons dispatches through IPrintSchemaPageMediaSizeOption's vtable slot 14.
 func (self *IPrintSchemaPageMediaSizeOption) Get_WidthInMicrons() (uint32, error) {
-	var _pulWidth uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulWidth)))
-	return _pulWidth, win32.ErrIfFailed(int32(r1))
+	_pulWidth := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pulWidth))))
+	return *_pulWidth, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HeightInMicrons dispatches through IPrintSchemaPageMediaSizeOption's vtable slot 15.
 func (self *IPrintSchemaPageMediaSizeOption) Get_HeightInMicrons() (uint32, error) {
-	var _pulHeight uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulHeight)))
-	return _pulHeight, win32.ErrIfFailed(int32(r1))
+	_pulHeight := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pulHeight))))
+	return *_pulHeight, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: b5ade81e-0e61-4fe1-81c6-c333e4ffe0f1
@@ -1716,37 +1716,37 @@ var IID_IPrintSchemaParameterDefinition = win32.GUID{Data1: 0xb5ade81e, Data2: 0
 
 // Get_UserInputRequired dispatches through IPrintSchemaParameterDefinition's vtable slot 11.
 func (self *IPrintSchemaParameterDefinition) Get_UserInputRequired() (foundation.BOOL, error) {
-	var _pbIsRequired foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbIsRequired)))
-	return _pbIsRequired, win32.ErrIfFailed(int32(r1))
+	_pbIsRequired := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbIsRequired))))
+	return *_pbIsRequired, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UnitType dispatches through IPrintSchemaParameterDefinition's vtable slot 12.
 func (self *IPrintSchemaParameterDefinition) Get_UnitType() (foundation.BSTR, error) {
-	var _pbstrUnitType foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrUnitType)))
-	return _pbstrUnitType, win32.ErrIfFailed(int32(r1))
+	_pbstrUnitType := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrUnitType))))
+	return *_pbstrUnitType, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DataType dispatches through IPrintSchemaParameterDefinition's vtable slot 13.
 func (self *IPrintSchemaParameterDefinition) Get_DataType() (PrintSchemaParameterDataType, error) {
-	var _pDataType PrintSchemaParameterDataType
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDataType)))
-	return _pDataType, win32.ErrIfFailed(int32(r1))
+	_pDataType := new(PrintSchemaParameterDataType)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pDataType))))
+	return *_pDataType, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RangeMin dispatches through IPrintSchemaParameterDefinition's vtable slot 14.
 func (self *IPrintSchemaParameterDefinition) Get_RangeMin() (int32, error) {
-	var _pRangeMin int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRangeMin)))
-	return _pRangeMin, win32.ErrIfFailed(int32(r1))
+	_pRangeMin := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRangeMin))))
+	return *_pRangeMin, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RangeMax dispatches through IPrintSchemaParameterDefinition's vtable slot 15.
 func (self *IPrintSchemaParameterDefinition) Get_RangeMax() (int32, error) {
-	var _pRangeMax int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRangeMax)))
-	return _pRangeMax, win32.ErrIfFailed(int32(r1))
+	_pRangeMax := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRangeMax))))
+	return *_pRangeMax, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 52027082-0b74-4648-9564-828cc6cb656c
@@ -1759,9 +1759,9 @@ var IID_IPrintSchemaParameterInitializer = win32.GUID{Data1: 0x52027082, Data2: 
 
 // Get_Value dispatches through IPrintSchemaParameterInitializer's vtable slot 10.
 func (self *IPrintSchemaParameterInitializer) Get_Value() (systemvariant.VARIANT, error) {
-	var _pVar systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVar)))
-	return _pVar, win32.ErrIfFailed(int32(r1))
+	_pVar := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVar))))
+	return *_pVar, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Value dispatches through IPrintSchemaParameterInitializer's vtable slot 11.
@@ -1780,16 +1780,16 @@ var IID_IPrintSchemaTicket = win32.GUID{Data1: 0xe480b861, Data2: 0x4708, Data3:
 
 // GetFeatureByKeyName dispatches through IPrintSchemaTicket's vtable slot 10.
 func (self *IPrintSchemaTicket) GetFeatureByKeyName(bstrKeyName foundation.BSTR) (*IPrintSchemaFeature, error) {
-	var _ppFeature *IPrintSchemaFeature
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrKeyName)), uintptr(unsafe.Pointer(&_ppFeature)))
-	return _ppFeature, win32.ErrIfFailed(int32(r1))
+	_ppFeature := new(*IPrintSchemaFeature)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrKeyName)), uintptr(win32.OutParam(unsafe.Pointer(_ppFeature))))
+	return *_ppFeature, win32.ErrIfFailed(int32(r1))
 }
 
 // GetFeature dispatches through IPrintSchemaTicket's vtable slot 11.
 func (self *IPrintSchemaTicket) GetFeature(bstrName foundation.BSTR, bstrNamespaceUri foundation.BSTR) (*IPrintSchemaFeature, error) {
-	var _ppFeature *IPrintSchemaFeature
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(bstrNamespaceUri)), uintptr(unsafe.Pointer(&_ppFeature)))
-	return _ppFeature, win32.ErrIfFailed(int32(r1))
+	_ppFeature := new(*IPrintSchemaFeature)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(bstrNamespaceUri)), uintptr(win32.OutParam(unsafe.Pointer(_ppFeature))))
+	return *_ppFeature, win32.ErrIfFailed(int32(r1))
 }
 
 // ValidateAsync dispatches through IPrintSchemaTicket's vtable slot 12.
@@ -1812,16 +1812,16 @@ func (self *IPrintSchemaTicket) NotifyXmlChanged() error {
 
 // GetCapabilities dispatches through IPrintSchemaTicket's vtable slot 15.
 func (self *IPrintSchemaTicket) GetCapabilities() (*IPrintSchemaCapabilities, error) {
-	var _ppCapabilities *IPrintSchemaCapabilities
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCapabilities)))
-	return _ppCapabilities, win32.ErrIfFailed(int32(r1))
+	_ppCapabilities := new(*IPrintSchemaCapabilities)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppCapabilities))))
+	return *_ppCapabilities, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_JobCopiesAllDocuments dispatches through IPrintSchemaTicket's vtable slot 16.
 func (self *IPrintSchemaTicket) Get_JobCopiesAllDocuments() (uint32, error) {
-	var _pulJobCopiesAllDocuments uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulJobCopiesAllDocuments)))
-	return _pulJobCopiesAllDocuments, win32.ErrIfFailed(int32(r1))
+	_pulJobCopiesAllDocuments := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pulJobCopiesAllDocuments))))
+	return *_pulJobCopiesAllDocuments, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_JobCopiesAllDocuments dispatches through IPrintSchemaTicket's vtable slot 17.
@@ -1840,9 +1840,9 @@ var IID_IPrintSchemaTicket2 = win32.GUID{Data1: 0x2ec1f844, Data2: 0x766a, Data3
 
 // GetParameterInitializer dispatches through IPrintSchemaTicket2's vtable slot 18.
 func (self *IPrintSchemaTicket2) GetParameterInitializer(bstrName foundation.BSTR, bstrNamespaceUri foundation.BSTR) (*IPrintSchemaParameterInitializer, error) {
-	var _ppParameterInitializer *IPrintSchemaParameterInitializer
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(bstrNamespaceUri)), uintptr(unsafe.Pointer(&_ppParameterInitializer)))
-	return _ppParameterInitializer, win32.ErrIfFailed(int32(r1))
+	_ppParameterInitializer := new(*IPrintSchemaParameterInitializer)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(bstrNamespaceUri)), uintptr(win32.OutParam(unsafe.Pointer(_ppParameterInitializer))))
+	return *_ppParameterInitializer, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: bb5116db-0a23-4c3a-a6b6-89e5558dfb5d
@@ -2001,30 +2001,30 @@ var IID_IPrinterExtensionContext = win32.GUID{Data1: 0x39843bf2, Data2: 0xc4d2, 
 
 // Get_PrinterQueue dispatches through IPrinterExtensionContext's vtable slot 7.
 func (self *IPrinterExtensionContext) Get_PrinterQueue() (*IPrinterQueue, error) {
-	var _ppQueue *IPrinterQueue
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppQueue)))
-	return _ppQueue, win32.ErrIfFailed(int32(r1))
+	_ppQueue := new(*IPrinterQueue)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppQueue))))
+	return *_ppQueue, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PrintSchemaTicket dispatches through IPrinterExtensionContext's vtable slot 8.
 func (self *IPrinterExtensionContext) Get_PrintSchemaTicket() (*IPrintSchemaTicket, error) {
-	var _ppTicket *IPrintSchemaTicket
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppTicket)))
-	return _ppTicket, win32.ErrIfFailed(int32(r1))
+	_ppTicket := new(*IPrintSchemaTicket)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppTicket))))
+	return *_ppTicket, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DriverProperties dispatches through IPrinterExtensionContext's vtable slot 9.
 func (self *IPrinterExtensionContext) Get_DriverProperties() (*IPrinterPropertyBag, error) {
-	var _ppPropertyBag *IPrinterPropertyBag
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppPropertyBag)))
-	return _ppPropertyBag, win32.ErrIfFailed(int32(r1))
+	_ppPropertyBag := new(*IPrinterPropertyBag)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppPropertyBag))))
+	return *_ppPropertyBag, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UserProperties dispatches through IPrinterExtensionContext's vtable slot 10.
 func (self *IPrinterExtensionContext) Get_UserProperties() (*IPrinterPropertyBag, error) {
-	var _ppPropertyBag *IPrinterPropertyBag
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppPropertyBag)))
-	return _ppPropertyBag, win32.ErrIfFailed(int32(r1))
+	_ppPropertyBag := new(*IPrinterPropertyBag)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppPropertyBag))))
+	return *_ppPropertyBag, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: fb476970-9bab-4861-811e-3e98b0c5addf
@@ -2037,23 +2037,23 @@ var IID_IPrinterExtensionContextCollection = win32.GUID{Data1: 0xfb476970, Data2
 
 // Get_Count dispatches through IPrinterExtensionContextCollection's vtable slot 7.
 func (self *IPrinterExtensionContextCollection) Get_Count() (uint32, error) {
-	var _pulCount uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pulCount)))
-	return _pulCount, win32.ErrIfFailed(int32(r1))
+	_pulCount := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pulCount))))
+	return *_pulCount, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAt dispatches through IPrinterExtensionContextCollection's vtable slot 8.
 func (self *IPrinterExtensionContextCollection) GetAt(ulIndex uint32) (*IPrinterExtensionContext, error) {
-	var _ppContext *IPrinterExtensionContext
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(ulIndex), uintptr(unsafe.Pointer(&_ppContext)))
-	return _ppContext, win32.ErrIfFailed(int32(r1))
+	_ppContext := new(*IPrinterExtensionContext)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(ulIndex), uintptr(win32.OutParam(unsafe.Pointer(_ppContext))))
+	return *_ppContext, win32.ErrIfFailed(int32(r1))
 }
 
 // Get__NewEnum dispatches through IPrinterExtensionContextCollection's vtable slot 9.
 func (self *IPrinterExtensionContextCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
-	var _ppUnk *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppUnk)))
-	return _ppUnk, win32.ErrIfFailed(int32(r1))
+	_ppUnk := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppUnk))))
+	return *_ppUnk, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: c093cb63-5ef5-4585-af8e-4d5637487b57
@@ -2086,51 +2086,51 @@ var IID_IPrinterExtensionEventArgs = win32.GUID{Data1: 0x39843bf4, Data2: 0xc4d2
 
 // Get_BidiNotification dispatches through IPrinterExtensionEventArgs's vtable slot 11.
 func (self *IPrinterExtensionEventArgs) Get_BidiNotification() (foundation.BSTR, error) {
-	var _pbstrBidiNotification foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrBidiNotification)))
-	return _pbstrBidiNotification, win32.ErrIfFailed(int32(r1))
+	_pbstrBidiNotification := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrBidiNotification))))
+	return *_pbstrBidiNotification, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReasonId dispatches through IPrinterExtensionEventArgs's vtable slot 12.
 func (self *IPrinterExtensionEventArgs) Get_ReasonId() (win32.GUID, error) {
-	var _pReasonId win32.GUID
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pReasonId)))
-	return _pReasonId, win32.ErrIfFailed(int32(r1))
+	_pReasonId := new(win32.GUID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pReasonId))))
+	return *_pReasonId, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Request dispatches through IPrinterExtensionEventArgs's vtable slot 13.
 func (self *IPrinterExtensionEventArgs) Get_Request() (*IPrinterExtensionRequest, error) {
-	var _ppRequest *IPrinterExtensionRequest
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppRequest)))
-	return _ppRequest, win32.ErrIfFailed(int32(r1))
+	_ppRequest := new(*IPrinterExtensionRequest)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppRequest))))
+	return *_ppRequest, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SourceApplication dispatches through IPrinterExtensionEventArgs's vtable slot 14.
 func (self *IPrinterExtensionEventArgs) Get_SourceApplication() (foundation.BSTR, error) {
-	var _pbstrApplication foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrApplication)))
-	return _pbstrApplication, win32.ErrIfFailed(int32(r1))
+	_pbstrApplication := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrApplication))))
+	return *_pbstrApplication, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DetailedReasonId dispatches through IPrinterExtensionEventArgs's vtable slot 15.
 func (self *IPrinterExtensionEventArgs) Get_DetailedReasonId() (win32.GUID, error) {
-	var _pDetailedReasonId win32.GUID
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDetailedReasonId)))
-	return _pDetailedReasonId, win32.ErrIfFailed(int32(r1))
+	_pDetailedReasonId := new(win32.GUID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pDetailedReasonId))))
+	return *_pDetailedReasonId, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_WindowModal dispatches through IPrinterExtensionEventArgs's vtable slot 16.
 func (self *IPrinterExtensionEventArgs) Get_WindowModal() (foundation.BOOL, error) {
-	var _pbModal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbModal)))
-	return _pbModal, win32.ErrIfFailed(int32(r1))
+	_pbModal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbModal))))
+	return *_pbModal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_WindowParent dispatches through IPrinterExtensionEventArgs's vtable slot 17.
 func (self *IPrinterExtensionEventArgs) Get_WindowParent() (foundation.HANDLE, error) {
-	var _phwndParent foundation.HANDLE
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_phwndParent)))
-	return _phwndParent, win32.ErrIfFailed(int32(r1))
+	_phwndParent := new(foundation.HANDLE)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_phwndParent))))
+	return *_phwndParent, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 93c6eb8c-b001-4355-9629-8e8a1b3f8e77
@@ -2177,9 +2177,9 @@ var IID_IPrinterPropertyBag = win32.GUID{Data1: 0xfea77364, Data2: 0xdf95, Data3
 
 // GetBool dispatches through IPrinterPropertyBag's vtable slot 7.
 func (self *IPrinterPropertyBag) GetBool(bstrName foundation.BSTR) (foundation.BOOL, error) {
-	var _pbValue foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(&_pbValue)))
-	return _pbValue, win32.ErrIfFailed(int32(r1))
+	_pbValue := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(win32.OutParam(unsafe.Pointer(_pbValue))))
+	return *_pbValue, win32.ErrIfFailed(int32(r1))
 }
 
 // SetBool dispatches through IPrinterPropertyBag's vtable slot 8.
@@ -2191,9 +2191,9 @@ func (self *IPrinterPropertyBag) SetBool(bstrName foundation.BSTR, bValue bool) 
 
 // GetInt32 dispatches through IPrinterPropertyBag's vtable slot 9.
 func (self *IPrinterPropertyBag) GetInt32(bstrName foundation.BSTR) (int32, error) {
-	var _pnValue int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(&_pnValue)))
-	return _pnValue, win32.ErrIfFailed(int32(r1))
+	_pnValue := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(win32.OutParam(unsafe.Pointer(_pnValue))))
+	return *_pnValue, win32.ErrIfFailed(int32(r1))
 }
 
 // SetInt32 dispatches through IPrinterPropertyBag's vtable slot 10.
@@ -2204,9 +2204,9 @@ func (self *IPrinterPropertyBag) SetInt32(bstrName foundation.BSTR, nValue int32
 
 // GetString dispatches through IPrinterPropertyBag's vtable slot 11.
 func (self *IPrinterPropertyBag) GetString(bstrName foundation.BSTR) (foundation.BSTR, error) {
-	var _pbstrValue foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(&_pbstrValue)))
-	return _pbstrValue, win32.ErrIfFailed(int32(r1))
+	_pbstrValue := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrValue))))
+	return *_pbstrValue, win32.ErrIfFailed(int32(r1))
 }
 
 // SetString dispatches through IPrinterPropertyBag's vtable slot 12.
@@ -2233,16 +2233,16 @@ func (self *IPrinterPropertyBag) SetBytes(bstrName foundation.BSTR, pValue []byt
 
 // GetReadStream dispatches through IPrinterPropertyBag's vtable slot 15.
 func (self *IPrinterPropertyBag) GetReadStream(bstrName foundation.BSTR) (*systemcom.IStream, error) {
-	var _ppValue *systemcom.IStream
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(&_ppValue)))
-	return _ppValue, win32.ErrIfFailed(int32(r1))
+	_ppValue := new(*systemcom.IStream)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(win32.OutParam(unsafe.Pointer(_ppValue))))
+	return *_ppValue, win32.ErrIfFailed(int32(r1))
 }
 
 // GetWriteStream dispatches through IPrinterPropertyBag's vtable slot 16.
 func (self *IPrinterPropertyBag) GetWriteStream(bstrName foundation.BSTR) (*systemcom.IStream, error) {
-	var _ppValue *systemcom.IStream
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(&_ppValue)))
-	return _ppValue, win32.ErrIfFailed(int32(r1))
+	_ppValue := new(*systemcom.IStream)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(win32.OutParam(unsafe.Pointer(_ppValue))))
+	return *_ppValue, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 3580a828-07fe-4b94-ac1a-757d9d2d3056
@@ -2255,16 +2255,16 @@ var IID_IPrinterQueue = win32.GUID{Data1: 0x3580a828, Data2: 0x07fe, Data3: 0x4b
 
 // Get_Handle dispatches through IPrinterQueue's vtable slot 7.
 func (self *IPrinterQueue) Get_Handle() (PRINTER_HANDLE, error) {
-	var _phPrinter PRINTER_HANDLE
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_phPrinter)))
-	return _phPrinter, win32.ErrIfFailed(int32(r1))
+	_phPrinter := new(PRINTER_HANDLE)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_phPrinter))))
+	return *_phPrinter, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through IPrinterQueue's vtable slot 8.
 func (self *IPrinterQueue) Get_Name() (foundation.BSTR, error) {
-	var _pbstrName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrName)))
-	return _pbstrName, win32.ErrIfFailed(int32(r1))
+	_pbstrName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrName))))
+	return *_pbstrName, win32.ErrIfFailed(int32(r1))
 }
 
 // SendBidiQuery dispatches through IPrinterQueue's vtable slot 9.
@@ -2275,9 +2275,9 @@ func (self *IPrinterQueue) SendBidiQuery(bstrBidiQuery foundation.BSTR) error {
 
 // GetProperties dispatches through IPrinterQueue's vtable slot 10.
 func (self *IPrinterQueue) GetProperties() (*IPrinterPropertyBag, error) {
-	var _ppPropertyBag *IPrinterPropertyBag
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppPropertyBag)))
-	return _ppPropertyBag, win32.ErrIfFailed(int32(r1))
+	_ppPropertyBag := new(*IPrinterPropertyBag)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppPropertyBag))))
+	return *_ppPropertyBag, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 8cd444e8-c9bb-49b3-8e38-e03209416131
@@ -2290,16 +2290,16 @@ var IID_IPrinterQueue2 = win32.GUID{Data1: 0x8cd444e8, Data2: 0xc9bb, Data3: 0x4
 
 // SendBidiSetRequestAsync dispatches through IPrinterQueue2's vtable slot 11.
 func (self *IPrinterQueue2) SendBidiSetRequestAsync(bstrBidiRequest foundation.BSTR, pCallback *IPrinterBidiSetRequestCallback) (*IPrinterExtensionAsyncOperation, error) {
-	var _ppAsyncOperation *IPrinterExtensionAsyncOperation
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrBidiRequest)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(&_ppAsyncOperation)))
-	return _ppAsyncOperation, win32.ErrIfFailed(int32(r1))
+	_ppAsyncOperation := new(*IPrinterExtensionAsyncOperation)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrBidiRequest)), uintptr(unsafe.Pointer(pCallback)), uintptr(win32.OutParam(unsafe.Pointer(_ppAsyncOperation))))
+	return *_ppAsyncOperation, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPrinterQueueView dispatches through IPrinterQueue2's vtable slot 12.
 func (self *IPrinterQueue2) GetPrinterQueueView(ulViewOffset uint32, ulViewSize uint32) (*IPrinterQueueView, error) {
-	var _ppJobView *IPrinterQueueView
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(ulViewOffset), uintptr(ulViewSize), uintptr(unsafe.Pointer(&_ppJobView)))
-	return _ppJobView, win32.ErrIfFailed(int32(r1))
+	_ppJobView := new(*IPrinterQueueView)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(ulViewOffset), uintptr(ulViewSize), uintptr(win32.OutParam(unsafe.Pointer(_ppJobView))))
+	return *_ppJobView, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 214685f6-7b78-4681-87e0-495f739273d1
@@ -2354,23 +2354,23 @@ var IID_IPrinterScriptContext = win32.GUID{Data1: 0x066acbca, Data2: 0x8881, Dat
 
 // Get_DriverProperties dispatches through IPrinterScriptContext's vtable slot 7.
 func (self *IPrinterScriptContext) Get_DriverProperties() (*IPrinterScriptablePropertyBag, error) {
-	var _ppPropertyBag *IPrinterScriptablePropertyBag
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppPropertyBag)))
-	return _ppPropertyBag, win32.ErrIfFailed(int32(r1))
+	_ppPropertyBag := new(*IPrinterScriptablePropertyBag)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppPropertyBag))))
+	return *_ppPropertyBag, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_QueueProperties dispatches through IPrinterScriptContext's vtable slot 8.
 func (self *IPrinterScriptContext) Get_QueueProperties() (*IPrinterScriptablePropertyBag, error) {
-	var _ppPropertyBag *IPrinterScriptablePropertyBag
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppPropertyBag)))
-	return _ppPropertyBag, win32.ErrIfFailed(int32(r1))
+	_ppPropertyBag := new(*IPrinterScriptablePropertyBag)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppPropertyBag))))
+	return *_ppPropertyBag, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UserProperties dispatches through IPrinterScriptContext's vtable slot 9.
 func (self *IPrinterScriptContext) Get_UserProperties() (*IPrinterScriptablePropertyBag, error) {
-	var _ppPropertyBag *IPrinterScriptablePropertyBag
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppPropertyBag)))
-	return _ppPropertyBag, win32.ErrIfFailed(int32(r1))
+	_ppPropertyBag := new(*IPrinterScriptablePropertyBag)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppPropertyBag))))
+	return *_ppPropertyBag, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 91c7765f-ed57-49ad-8b01-dc24816a5294
@@ -2383,9 +2383,9 @@ var IID_IPrinterScriptablePropertyBag = win32.GUID{Data1: 0x91c7765f, Data2: 0xe
 
 // GetBool dispatches through IPrinterScriptablePropertyBag's vtable slot 7.
 func (self *IPrinterScriptablePropertyBag) GetBool(bstrName foundation.BSTR) (foundation.BOOL, error) {
-	var _pbValue foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(&_pbValue)))
-	return _pbValue, win32.ErrIfFailed(int32(r1))
+	_pbValue := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(win32.OutParam(unsafe.Pointer(_pbValue))))
+	return *_pbValue, win32.ErrIfFailed(int32(r1))
 }
 
 // SetBool dispatches through IPrinterScriptablePropertyBag's vtable slot 8.
@@ -2397,9 +2397,9 @@ func (self *IPrinterScriptablePropertyBag) SetBool(bstrName foundation.BSTR, bVa
 
 // GetInt32 dispatches through IPrinterScriptablePropertyBag's vtable slot 9.
 func (self *IPrinterScriptablePropertyBag) GetInt32(bstrName foundation.BSTR) (int32, error) {
-	var _pnValue int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(&_pnValue)))
-	return _pnValue, win32.ErrIfFailed(int32(r1))
+	_pnValue := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(win32.OutParam(unsafe.Pointer(_pnValue))))
+	return *_pnValue, win32.ErrIfFailed(int32(r1))
 }
 
 // SetInt32 dispatches through IPrinterScriptablePropertyBag's vtable slot 10.
@@ -2410,9 +2410,9 @@ func (self *IPrinterScriptablePropertyBag) SetInt32(bstrName foundation.BSTR, nV
 
 // GetString dispatches through IPrinterScriptablePropertyBag's vtable slot 11.
 func (self *IPrinterScriptablePropertyBag) GetString(bstrName foundation.BSTR) (foundation.BSTR, error) {
-	var _pbstrValue foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(&_pbstrValue)))
-	return _pbstrValue, win32.ErrIfFailed(int32(r1))
+	_pbstrValue := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrValue))))
+	return *_pbstrValue, win32.ErrIfFailed(int32(r1))
 }
 
 // SetString dispatches through IPrinterScriptablePropertyBag's vtable slot 12.
@@ -2423,9 +2423,9 @@ func (self *IPrinterScriptablePropertyBag) SetString(bstrName foundation.BSTR, b
 
 // GetBytes dispatches through IPrinterScriptablePropertyBag's vtable slot 13.
 func (self *IPrinterScriptablePropertyBag) GetBytes(bstrName foundation.BSTR) (*systemcom.IDispatch, error) {
-	var _ppArray *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(&_ppArray)))
-	return _ppArray, win32.ErrIfFailed(int32(r1))
+	_ppArray := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(win32.OutParam(unsafe.Pointer(_ppArray))))
+	return *_ppArray, win32.ErrIfFailed(int32(r1))
 }
 
 // SetBytes dispatches through IPrinterScriptablePropertyBag's vtable slot 14.
@@ -2436,16 +2436,16 @@ func (self *IPrinterScriptablePropertyBag) SetBytes(bstrName foundation.BSTR, pA
 
 // GetReadStream dispatches through IPrinterScriptablePropertyBag's vtable slot 15.
 func (self *IPrinterScriptablePropertyBag) GetReadStream(bstrName foundation.BSTR) (*IPrinterScriptableStream, error) {
-	var _ppStream *IPrinterScriptableStream
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(&_ppStream)))
-	return _ppStream, win32.ErrIfFailed(int32(r1))
+	_ppStream := new(*IPrinterScriptableStream)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(win32.OutParam(unsafe.Pointer(_ppStream))))
+	return *_ppStream, win32.ErrIfFailed(int32(r1))
 }
 
 // GetWriteStream dispatches through IPrinterScriptablePropertyBag's vtable slot 16.
 func (self *IPrinterScriptablePropertyBag) GetWriteStream(bstrName foundation.BSTR) (*IPrinterScriptableStream, error) {
-	var _ppStream *IPrinterScriptableStream
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(&_ppStream)))
-	return _ppStream, win32.ErrIfFailed(int32(r1))
+	_ppStream := new(*IPrinterScriptableStream)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(win32.OutParam(unsafe.Pointer(_ppStream))))
+	return *_ppStream, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 2a1c53c4-8638-4b3e-b518-2773c94556a3
@@ -2458,9 +2458,9 @@ var IID_IPrinterScriptablePropertyBag2 = win32.GUID{Data1: 0x2a1c53c4, Data2: 0x
 
 // GetReadStreamAsXML dispatches through IPrinterScriptablePropertyBag2's vtable slot 17.
 func (self *IPrinterScriptablePropertyBag2) GetReadStreamAsXML(bstrName foundation.BSTR) (*systemcom.IUnknown, error) {
-	var _ppXmlNode *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(&_ppXmlNode)))
-	return _ppXmlNode, win32.ErrIfFailed(int32(r1))
+	_ppXmlNode := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(win32.OutParam(unsafe.Pointer(_ppXmlNode))))
+	return *_ppXmlNode, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 2072838a-316f-467a-a949-27f68c44a854
@@ -2473,16 +2473,16 @@ var IID_IPrinterScriptableSequentialStream = win32.GUID{Data1: 0x2072838a, Data2
 
 // Read dispatches through IPrinterScriptableSequentialStream's vtable slot 7.
 func (self *IPrinterScriptableSequentialStream) Read(cbRead int32) (*systemcom.IDispatch, error) {
-	var _ppArray *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(cbRead), uintptr(unsafe.Pointer(&_ppArray)))
-	return _ppArray, win32.ErrIfFailed(int32(r1))
+	_ppArray := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(cbRead), uintptr(win32.OutParam(unsafe.Pointer(_ppArray))))
+	return *_ppArray, win32.ErrIfFailed(int32(r1))
 }
 
 // Write dispatches through IPrinterScriptableSequentialStream's vtable slot 8.
 func (self *IPrinterScriptableSequentialStream) Write(pArray *systemcom.IDispatch) (int32, error) {
-	var _pcbWritten int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pArray)), uintptr(unsafe.Pointer(&_pcbWritten)))
-	return _pcbWritten, win32.ErrIfFailed(int32(r1))
+	_pcbWritten := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pArray)), uintptr(win32.OutParam(unsafe.Pointer(_pcbWritten))))
+	return *_pcbWritten, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 7edf9a92-4750-41a5-a17f-879a6f4f7dcb
@@ -2501,9 +2501,9 @@ func (self *IPrinterScriptableStream) Commit() error {
 
 // Seek dispatches through IPrinterScriptableStream's vtable slot 10.
 func (self *IPrinterScriptableStream) Seek(lOffset int32, streamSeek systemcom.STREAM_SEEK) (int32, error) {
-	var _plPosition int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lOffset), uintptr(streamSeek), uintptr(unsafe.Pointer(&_plPosition)))
-	return _plPosition, win32.ErrIfFailed(int32(r1))
+	_plPosition := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lOffset), uintptr(streamSeek), uintptr(win32.OutParam(unsafe.Pointer(_plPosition))))
+	return *_plPosition, win32.ErrIfFailed(int32(r1))
 }
 
 // SetSize dispatches through IPrinterScriptableStream's vtable slot 11.

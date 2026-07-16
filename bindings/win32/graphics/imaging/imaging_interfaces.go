@@ -901,9 +901,9 @@ func (self *IWICDdsDecoder) GetParameters(pParameters *WICDdsParameters) error {
 
 // GetFrame dispatches through IWICDdsDecoder's vtable slot 4.
 func (self *IWICDdsDecoder) GetFrame(arrayIndex uint32, mipLevel uint32, sliceIndex uint32) (*IWICBitmapFrameDecode, error) {
-	var _ppIBitmapFrame *IWICBitmapFrameDecode
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(arrayIndex), uintptr(mipLevel), uintptr(sliceIndex), uintptr(unsafe.Pointer(&_ppIBitmapFrame)))
-	return _ppIBitmapFrame, win32.ErrIfFailed(int32(r1))
+	_ppIBitmapFrame := new(*IWICBitmapFrameDecode)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(arrayIndex), uintptr(mipLevel), uintptr(sliceIndex), uintptr(win32.OutParam(unsafe.Pointer(_ppIBitmapFrame))))
+	return *_ppIBitmapFrame, win32.ErrIfFailed(int32(r1))
 }
 
 // IWICDdsEncoder: https://learn.microsoft.com/windows/win32/api/wincodec/nn-wincodec-iwicddsencoder
@@ -1148,9 +1148,9 @@ func (self *IWICDisplayAdaptationControl) DoesSupportChangingMaxLuminance(pguidD
 
 // GetDisplayMaxLuminance dispatches through IWICDisplayAdaptationControl's vtable slot 5.
 func (self *IWICDisplayAdaptationControl) GetDisplayMaxLuminance() (float32, error) {
-	var _pfLuminanceInNits float32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfLuminanceInNits)))
-	return _pfLuminanceInNits, win32.ErrIfFailed(int32(r1))
+	_pfLuminanceInNits := new(float32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfLuminanceInNits))))
+	return *_pfLuminanceInNits, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: d7508d29-3ab7-447e-a676-4d80d7de726b
@@ -1163,9 +1163,9 @@ var IID_IWICDisplayAdaptationControl2 = win32.GUID{Data1: 0xd7508d29, Data2: 0x3
 
 // GetSdrWhiteLevel dispatches through IWICDisplayAdaptationControl2's vtable slot 7.
 func (self *IWICDisplayAdaptationControl2) GetSdrWhiteLevel() (float32, error) {
-	var _pfWhiteLevelInNits float32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfWhiteLevelInNits)))
-	return _pfWhiteLevelInNits, win32.ErrIfFailed(int32(r1))
+	_pfWhiteLevelInNits := new(float32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfWhiteLevelInNits))))
+	return *_pfWhiteLevelInNits, win32.ErrIfFailed(int32(r1))
 }
 
 // SetToneMappingMode dispatches through IWICDisplayAdaptationControl2's vtable slot 8.
@@ -1176,9 +1176,9 @@ func (self *IWICDisplayAdaptationControl2) SetToneMappingMode(mode WICBitmapTone
 
 // GetToneMappingMode dispatches through IWICDisplayAdaptationControl2's vtable slot 9.
 func (self *IWICDisplayAdaptationControl2) GetToneMappingMode() (WICBitmapToneMappingMode, error) {
-	var _mode WICBitmapToneMappingMode
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_mode)))
-	return _mode, win32.ErrIfFailed(int32(r1))
+	_mode := new(WICBitmapToneMappingMode)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_mode))))
+	return *_mode, win32.ErrIfFailed(int32(r1))
 }
 
 // DoesSupportToneMappingMode dispatches through IWICDisplayAdaptationControl2's vtable slot 10.
@@ -1293,23 +1293,23 @@ var IID_IWICImagingFactory = win32.GUID{Data1: 0xec5ec8a9, Data2: 0xc395, Data3:
 // CreateDecoderFromFilename dispatches through IWICImagingFactory's vtable slot 3.
 func (self *IWICImagingFactory) CreateDecoderFromFilename(wzFilename string, pguidVendor *win32.GUID, dwDesiredAccess foundation.GENERIC_ACCESS_RIGHTS, metadataOptions WICDecodeOptions) (*IWICBitmapDecoder, error) {
 	_wzFilename := win32.UTF16Ptr(wzFilename)
-	var _ppIDecoder *IWICBitmapDecoder
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wzFilename)), uintptr(unsafe.Pointer(pguidVendor)), uintptr(dwDesiredAccess), uintptr(metadataOptions), uintptr(unsafe.Pointer(&_ppIDecoder)))
-	return _ppIDecoder, win32.ErrIfFailed(int32(r1))
+	_ppIDecoder := new(*IWICBitmapDecoder)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wzFilename)), uintptr(unsafe.Pointer(pguidVendor)), uintptr(dwDesiredAccess), uintptr(metadataOptions), uintptr(win32.OutParam(unsafe.Pointer(_ppIDecoder))))
+	return *_ppIDecoder, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateDecoderFromStream dispatches through IWICImagingFactory's vtable slot 4.
 func (self *IWICImagingFactory) CreateDecoderFromStream(pIStream *systemcom.IStream, pguidVendor *win32.GUID, metadataOptions WICDecodeOptions) (*IWICBitmapDecoder, error) {
-	var _ppIDecoder *IWICBitmapDecoder
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIStream)), uintptr(unsafe.Pointer(pguidVendor)), uintptr(metadataOptions), uintptr(unsafe.Pointer(&_ppIDecoder)))
-	return _ppIDecoder, win32.ErrIfFailed(int32(r1))
+	_ppIDecoder := new(*IWICBitmapDecoder)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIStream)), uintptr(unsafe.Pointer(pguidVendor)), uintptr(metadataOptions), uintptr(win32.OutParam(unsafe.Pointer(_ppIDecoder))))
+	return *_ppIDecoder, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateDecoderFromFileHandle dispatches through IWICImagingFactory's vtable slot 5.
 func (self *IWICImagingFactory) CreateDecoderFromFileHandle(hFile uintptr, pguidVendor *win32.GUID, metadataOptions WICDecodeOptions) (*IWICBitmapDecoder, error) {
-	var _ppIDecoder *IWICBitmapDecoder
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hFile), uintptr(unsafe.Pointer(pguidVendor)), uintptr(metadataOptions), uintptr(unsafe.Pointer(&_ppIDecoder)))
-	return _ppIDecoder, win32.ErrIfFailed(int32(r1))
+	_ppIDecoder := new(*IWICBitmapDecoder)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hFile), uintptr(unsafe.Pointer(pguidVendor)), uintptr(metadataOptions), uintptr(win32.OutParam(unsafe.Pointer(_ppIDecoder))))
+	return *_ppIDecoder, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateComponentInfo dispatches through IWICImagingFactory's vtable slot 6.
@@ -1320,16 +1320,16 @@ func (self *IWICImagingFactory) CreateComponentInfo(clsidComponent *win32.GUID, 
 
 // CreateDecoder dispatches through IWICImagingFactory's vtable slot 7.
 func (self *IWICImagingFactory) CreateDecoder(guidContainerFormat *win32.GUID, pguidVendor *win32.GUID) (*IWICBitmapDecoder, error) {
-	var _ppIDecoder *IWICBitmapDecoder
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidContainerFormat)), uintptr(unsafe.Pointer(pguidVendor)), uintptr(unsafe.Pointer(&_ppIDecoder)))
-	return _ppIDecoder, win32.ErrIfFailed(int32(r1))
+	_ppIDecoder := new(*IWICBitmapDecoder)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidContainerFormat)), uintptr(unsafe.Pointer(pguidVendor)), uintptr(win32.OutParam(unsafe.Pointer(_ppIDecoder))))
+	return *_ppIDecoder, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateEncoder dispatches through IWICImagingFactory's vtable slot 8.
 func (self *IWICImagingFactory) CreateEncoder(guidContainerFormat *win32.GUID, pguidVendor *win32.GUID) (*IWICBitmapEncoder, error) {
-	var _ppIEncoder *IWICBitmapEncoder
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidContainerFormat)), uintptr(unsafe.Pointer(pguidVendor)), uintptr(unsafe.Pointer(&_ppIEncoder)))
-	return _ppIEncoder, win32.ErrIfFailed(int32(r1))
+	_ppIEncoder := new(*IWICBitmapEncoder)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidContainerFormat)), uintptr(unsafe.Pointer(pguidVendor)), uintptr(win32.OutParam(unsafe.Pointer(_ppIEncoder))))
+	return *_ppIEncoder, win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePalette dispatches through IWICImagingFactory's vtable slot 9.
@@ -2132,16 +2132,16 @@ var IID_IWICProgressiveLevelControl = win32.GUID{Data1: 0xdaac296f, Data2: 0x7aa
 
 // GetLevelCount dispatches through IWICProgressiveLevelControl's vtable slot 3.
 func (self *IWICProgressiveLevelControl) GetLevelCount() (uint32, error) {
-	var _pcLevels uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pcLevels)))
-	return _pcLevels, win32.ErrIfFailed(int32(r1))
+	_pcLevels := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pcLevels))))
+	return *_pcLevels, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentLevel dispatches through IWICProgressiveLevelControl's vtable slot 4.
 func (self *IWICProgressiveLevelControl) GetCurrentLevel() (uint32, error) {
-	var _pnLevel uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pnLevel)))
-	return _pnLevel, win32.ErrIfFailed(int32(r1))
+	_pnLevel := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pnLevel))))
+	return *_pnLevel, win32.ErrIfFailed(int32(r1))
 }
 
 // SetCurrentLevel dispatches through IWICProgressiveLevelControl's vtable slot 5.

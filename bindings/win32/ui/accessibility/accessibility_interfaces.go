@@ -159,37 +159,37 @@ var IID_IAccessible = win32.GUID{Data1: 0x618736e0, Data2: 0x3c3d, Data3: 0x11cf
 
 // Get_accParent dispatches through IAccessible's vtable slot 7.
 func (self *IAccessible) Get_accParent() (*systemcom.IDispatch, error) {
-	var _ppdispParent *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppdispParent)))
-	return _ppdispParent, win32.ErrIfFailed(int32(r1))
+	_ppdispParent := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppdispParent))))
+	return *_ppdispParent, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_accChildCount dispatches through IAccessible's vtable slot 8.
 func (self *IAccessible) Get_accChildCount() (int32, error) {
-	var _pcountChildren int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pcountChildren)))
-	return _pcountChildren, win32.ErrIfFailed(int32(r1))
+	_pcountChildren := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pcountChildren))))
+	return *_pcountChildren, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_accFocus dispatches through IAccessible's vtable slot 18.
 func (self *IAccessible) Get_accFocus() (systemvariant.VARIANT, error) {
-	var _pvarChild systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarChild)))
-	return _pvarChild, win32.ErrIfFailed(int32(r1))
+	_pvarChild := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pvarChild))))
+	return *_pvarChild, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_accSelection dispatches through IAccessible's vtable slot 19.
 func (self *IAccessible) Get_accSelection() (systemvariant.VARIANT, error) {
-	var _pvarChildren systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarChildren)))
-	return _pvarChildren, win32.ErrIfFailed(int32(r1))
+	_pvarChildren := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pvarChildren))))
+	return *_pvarChildren, win32.ErrIfFailed(int32(r1))
 }
 
 // AccHitTest dispatches through IAccessible's vtable slot 24.
 func (self *IAccessible) AccHitTest(xLeft int32, yTop int32) (systemvariant.VARIANT, error) {
-	var _pvarChild systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(xLeft), uintptr(yTop), uintptr(unsafe.Pointer(&_pvarChild)))
-	return _pvarChild, win32.ErrIfFailed(int32(r1))
+	_pvarChild := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(xLeft), uintptr(yTop), uintptr(win32.OutParam(unsafe.Pointer(_pvarChild))))
+	return *_pvarChild, win32.ErrIfFailed(int32(r1))
 }
 
 // IAccessibleEx: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-iaccessibleex
@@ -203,9 +203,9 @@ var IID_IAccessibleEx = win32.GUID{Data1: 0xf8b80ada, Data2: 0x2c44, Data3: 0x48
 
 // GetObjectForChild dispatches through IAccessibleEx's vtable slot 3.
 func (self *IAccessibleEx) GetObjectForChild(idChild int32) (*IAccessibleEx, error) {
-	var _pRetVal *IAccessibleEx
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(idChild), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*IAccessibleEx)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(idChild), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetIAccessiblePair dispatches through IAccessibleEx's vtable slot 4.
@@ -216,9 +216,9 @@ func (self *IAccessibleEx) GetIAccessiblePair(ppAcc **IAccessible, pidChild *int
 
 // GetRuntimeId dispatches through IAccessibleEx's vtable slot 5.
 func (self *IAccessibleEx) GetRuntimeId() (*systemcom.SAFEARRAY, error) {
-	var _pRetVal *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // ConvertReturnedElement dispatches through IAccessibleEx's vtable slot 6.
@@ -253,9 +253,9 @@ var IID_IAccessibleHostingElementProviders = win32.GUID{Data1: 0x33ac331b, Data2
 
 // GetEmbeddedFragmentRoots dispatches through IAccessibleHostingElementProviders's vtable slot 3.
 func (self *IAccessibleHostingElementProviders) GetEmbeddedFragmentRoots() (*systemcom.SAFEARRAY, error) {
-	var _pRetVal *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetObjectIdForProvider dispatches through IAccessibleHostingElementProviders's vtable slot 4.
@@ -308,37 +308,37 @@ var IID_IAnnotationProvider = win32.GUID{Data1: 0xf95c7e80, Data2: 0xbd63, Data3
 
 // Get_AnnotationTypeId dispatches through IAnnotationProvider's vtable slot 3.
 func (self *IAnnotationProvider) Get_AnnotationTypeId() (UIA_ANNOTATIONTYPE, error) {
-	var _retVal UIA_ANNOTATIONTYPE
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(UIA_ANNOTATIONTYPE)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AnnotationTypeName dispatches through IAnnotationProvider's vtable slot 4.
 func (self *IAnnotationProvider) Get_AnnotationTypeName() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Author dispatches through IAnnotationProvider's vtable slot 5.
 func (self *IAnnotationProvider) Get_Author() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DateTime dispatches through IAnnotationProvider's vtable slot 6.
 func (self *IAnnotationProvider) Get_DateTime() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Target dispatches through IAnnotationProvider's vtable slot 7.
 func (self *IAnnotationProvider) Get_Target() (*IRawElementProviderSimple, error) {
-	var _retVal *IRawElementProviderSimple
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IRawElementProviderSimple)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 2062a28a-8c07-4b94-8e12-7037c622aeb8
@@ -351,9 +351,9 @@ var IID_ICustomNavigationProvider = win32.GUID{Data1: 0x2062a28a, Data2: 0x8c07,
 
 // Navigate dispatches through ICustomNavigationProvider's vtable slot 3.
 func (self *ICustomNavigationProvider) Navigate(direction NavigateDirection) (*IRawElementProviderSimple, error) {
-	var _pRetVal *IRawElementProviderSimple
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(direction), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*IRawElementProviderSimple)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(direction), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IDockProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-idockprovider
@@ -373,9 +373,9 @@ func (self *IDockProvider) SetDockPosition(dockPosition DockPosition) error {
 
 // Get_DockPosition dispatches through IDockProvider's vtable slot 4.
 func (self *IDockProvider) Get_DockPosition() (DockPosition, error) {
-	var _pRetVal DockPosition
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(DockPosition)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IDragProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-idragprovider
@@ -389,30 +389,30 @@ var IID_IDragProvider = win32.GUID{Data1: 0x6aa7bbbb, Data2: 0x7ff9, Data3: 0x49
 
 // Get_IsGrabbed dispatches through IDragProvider's vtable slot 3.
 func (self *IDragProvider) Get_IsGrabbed() (foundation.BOOL, error) {
-	var _pRetVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DropEffect dispatches through IDragProvider's vtable slot 4.
 func (self *IDragProvider) Get_DropEffect() (foundation.BSTR, error) {
-	var _pRetVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DropEffects dispatches through IDragProvider's vtable slot 5.
 func (self *IDragProvider) Get_DropEffects() (*systemcom.SAFEARRAY, error) {
-	var _pRetVal *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetGrabbedItems dispatches through IDragProvider's vtable slot 6.
 func (self *IDragProvider) GetGrabbedItems() (*systemcom.SAFEARRAY, error) {
-	var _pRetVal *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IDropTargetProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-idroptargetprovider
@@ -426,16 +426,16 @@ var IID_IDropTargetProvider = win32.GUID{Data1: 0xbae82bfd, Data2: 0x358a, Data3
 
 // Get_DropTargetEffect dispatches through IDropTargetProvider's vtable slot 3.
 func (self *IDropTargetProvider) Get_DropTargetEffect() (foundation.BSTR, error) {
-	var _pRetVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DropTargetEffects dispatches through IDropTargetProvider's vtable slot 4.
 func (self *IDropTargetProvider) Get_DropTargetEffects() (*systemcom.SAFEARRAY, error) {
-	var _pRetVal *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IExpandCollapseProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-iexpandcollapseprovider
@@ -461,9 +461,9 @@ func (self *IExpandCollapseProvider) Collapse() error {
 
 // Get_ExpandCollapseState dispatches through IExpandCollapseProvider's vtable slot 5.
 func (self *IExpandCollapseProvider) Get_ExpandCollapseState() (ExpandCollapseState, error) {
-	var _pRetVal ExpandCollapseState
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(ExpandCollapseState)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IGridItemProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-igriditemprovider
@@ -477,37 +477,37 @@ var IID_IGridItemProvider = win32.GUID{Data1: 0xd02541f1, Data2: 0xfb81, Data3: 
 
 // Get_Row dispatches through IGridItemProvider's vtable slot 3.
 func (self *IGridItemProvider) Get_Row() (int32, error) {
-	var _pRetVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Column dispatches through IGridItemProvider's vtable slot 4.
 func (self *IGridItemProvider) Get_Column() (int32, error) {
-	var _pRetVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RowSpan dispatches through IGridItemProvider's vtable slot 5.
 func (self *IGridItemProvider) Get_RowSpan() (int32, error) {
-	var _pRetVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ColumnSpan dispatches through IGridItemProvider's vtable slot 6.
 func (self *IGridItemProvider) Get_ColumnSpan() (int32, error) {
-	var _pRetVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ContainingGrid dispatches through IGridItemProvider's vtable slot 7.
 func (self *IGridItemProvider) Get_ContainingGrid() (*IRawElementProviderSimple, error) {
-	var _pRetVal *IRawElementProviderSimple
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*IRawElementProviderSimple)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IGridProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-igridprovider
@@ -521,23 +521,23 @@ var IID_IGridProvider = win32.GUID{Data1: 0xb17d6187, Data2: 0x0907, Data3: 0x46
 
 // GetItem dispatches through IGridProvider's vtable slot 3.
 func (self *IGridProvider) GetItem(row int32, column int32) (*IRawElementProviderSimple, error) {
-	var _pRetVal *IRawElementProviderSimple
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(row), uintptr(column), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*IRawElementProviderSimple)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(row), uintptr(column), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RowCount dispatches through IGridProvider's vtable slot 4.
 func (self *IGridProvider) Get_RowCount() (int32, error) {
-	var _pRetVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ColumnCount dispatches through IGridProvider's vtable slot 5.
 func (self *IGridProvider) Get_ColumnCount() (int32, error) {
-	var _pRetVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IInvokeProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-iinvokeprovider
@@ -594,79 +594,79 @@ func (self *ILegacyIAccessibleProvider) SetValue(szValue string) error {
 
 // GetIAccessible dispatches through ILegacyIAccessibleProvider's vtable slot 6.
 func (self *ILegacyIAccessibleProvider) GetIAccessible() (*IAccessible, error) {
-	var _ppAccessible *IAccessible
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppAccessible)))
-	return _ppAccessible, win32.ErrIfFailed(int32(r1))
+	_ppAccessible := new(*IAccessible)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppAccessible))))
+	return *_ppAccessible, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ChildId dispatches through ILegacyIAccessibleProvider's vtable slot 7.
 func (self *ILegacyIAccessibleProvider) Get_ChildId() (int32, error) {
-	var _pRetVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Name dispatches through ILegacyIAccessibleProvider's vtable slot 8.
 func (self *ILegacyIAccessibleProvider) Get_Name() (foundation.BSTR, error) {
-	var _pszName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszName)))
-	return _pszName, win32.ErrIfFailed(int32(r1))
+	_pszName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pszName))))
+	return *_pszName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Value dispatches through ILegacyIAccessibleProvider's vtable slot 9.
 func (self *ILegacyIAccessibleProvider) Get_Value() (foundation.BSTR, error) {
-	var _pszValue foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszValue)))
-	return _pszValue, win32.ErrIfFailed(int32(r1))
+	_pszValue := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pszValue))))
+	return *_pszValue, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Description dispatches through ILegacyIAccessibleProvider's vtable slot 10.
 func (self *ILegacyIAccessibleProvider) Get_Description() (foundation.BSTR, error) {
-	var _pszDescription foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszDescription)))
-	return _pszDescription, win32.ErrIfFailed(int32(r1))
+	_pszDescription := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pszDescription))))
+	return *_pszDescription, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Role dispatches through ILegacyIAccessibleProvider's vtable slot 11.
 func (self *ILegacyIAccessibleProvider) Get_Role() (uint32, error) {
-	var _pdwRole uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pdwRole)))
-	return _pdwRole, win32.ErrIfFailed(int32(r1))
+	_pdwRole := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pdwRole))))
+	return *_pdwRole, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_State dispatches through ILegacyIAccessibleProvider's vtable slot 12.
 func (self *ILegacyIAccessibleProvider) Get_State() (uint32, error) {
-	var _pdwState uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pdwState)))
-	return _pdwState, win32.ErrIfFailed(int32(r1))
+	_pdwState := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pdwState))))
+	return *_pdwState, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Help dispatches through ILegacyIAccessibleProvider's vtable slot 13.
 func (self *ILegacyIAccessibleProvider) Get_Help() (foundation.BSTR, error) {
-	var _pszHelp foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszHelp)))
-	return _pszHelp, win32.ErrIfFailed(int32(r1))
+	_pszHelp := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pszHelp))))
+	return *_pszHelp, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_KeyboardShortcut dispatches through ILegacyIAccessibleProvider's vtable slot 14.
 func (self *ILegacyIAccessibleProvider) Get_KeyboardShortcut() (foundation.BSTR, error) {
-	var _pszKeyboardShortcut foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszKeyboardShortcut)))
-	return _pszKeyboardShortcut, win32.ErrIfFailed(int32(r1))
+	_pszKeyboardShortcut := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pszKeyboardShortcut))))
+	return *_pszKeyboardShortcut, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSelection dispatches through ILegacyIAccessibleProvider's vtable slot 15.
 func (self *ILegacyIAccessibleProvider) GetSelection() (*systemcom.SAFEARRAY, error) {
-	var _pvarSelectedChildren *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarSelectedChildren)))
-	return _pvarSelectedChildren, win32.ErrIfFailed(int32(r1))
+	_pvarSelectedChildren := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pvarSelectedChildren))))
+	return *_pvarSelectedChildren, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DefaultAction dispatches through ILegacyIAccessibleProvider's vtable slot 16.
 func (self *ILegacyIAccessibleProvider) Get_DefaultAction() (foundation.BSTR, error) {
-	var _pszDefaultAction foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszDefaultAction)))
-	return _pszDefaultAction, win32.ErrIfFailed(int32(r1))
+	_pszDefaultAction := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pszDefaultAction))))
+	return *_pszDefaultAction, win32.ErrIfFailed(int32(r1))
 }
 
 // IMultipleViewProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-imultipleviewprovider
@@ -680,9 +680,9 @@ var IID_IMultipleViewProvider = win32.GUID{Data1: 0x6278cab1, Data2: 0xb556, Dat
 
 // GetViewName dispatches through IMultipleViewProvider's vtable slot 3.
 func (self *IMultipleViewProvider) GetViewName(viewId int32) (foundation.BSTR, error) {
-	var _pRetVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(viewId), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(viewId), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // SetCurrentView dispatches through IMultipleViewProvider's vtable slot 4.
@@ -693,16 +693,16 @@ func (self *IMultipleViewProvider) SetCurrentView(viewId int32) error {
 
 // Get_CurrentView dispatches through IMultipleViewProvider's vtable slot 5.
 func (self *IMultipleViewProvider) Get_CurrentView() (int32, error) {
-	var _pRetVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSupportedViews dispatches through IMultipleViewProvider's vtable slot 6.
 func (self *IMultipleViewProvider) GetSupportedViews() (*systemcom.SAFEARRAY, error) {
-	var _pRetVal *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IObjectModelProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-iobjectmodelprovider
@@ -716,9 +716,9 @@ var IID_IObjectModelProvider = win32.GUID{Data1: 0x3ad86ebd, Data2: 0xf5ef, Data
 
 // GetUnderlyingObjectModel dispatches through IObjectModelProvider's vtable slot 3.
 func (self *IObjectModelProvider) GetUnderlyingObjectModel() (*systemcom.IUnknown, error) {
-	var _ppUnknown *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppUnknown)))
-	return _ppUnknown, win32.ErrIfFailed(int32(r1))
+	_ppUnknown := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppUnknown))))
+	return *_ppUnknown, win32.ErrIfFailed(int32(r1))
 }
 
 // IProxyProviderWinEventHandler: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-iproxyproviderwineventhandler
@@ -768,44 +768,44 @@ var IID_IRangeValueProvider = win32.GUID{Data1: 0x36dc7aef, Data2: 0x33e6, Data3
 
 // Get_Value dispatches through IRangeValueProvider's vtable slot 4.
 func (self *IRangeValueProvider) Get_Value() (float64, error) {
-	var _pRetVal float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsReadOnly dispatches through IRangeValueProvider's vtable slot 5.
 func (self *IRangeValueProvider) Get_IsReadOnly() (foundation.BOOL, error) {
-	var _pRetVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Maximum dispatches through IRangeValueProvider's vtable slot 6.
 func (self *IRangeValueProvider) Get_Maximum() (float64, error) {
-	var _pRetVal float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Minimum dispatches through IRangeValueProvider's vtable slot 7.
 func (self *IRangeValueProvider) Get_Minimum() (float64, error) {
-	var _pRetVal float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LargeChange dispatches through IRangeValueProvider's vtable slot 8.
 func (self *IRangeValueProvider) Get_LargeChange() (float64, error) {
-	var _pRetVal float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SmallChange dispatches through IRangeValueProvider's vtable slot 9.
 func (self *IRangeValueProvider) Get_SmallChange() (float64, error) {
-	var _pRetVal float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IRawElementProviderAdviseEvents: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-irawelementprovideradviseevents
@@ -840,30 +840,30 @@ var IID_IRawElementProviderFragment = win32.GUID{Data1: 0xf7063da8, Data2: 0x835
 
 // Navigate dispatches through IRawElementProviderFragment's vtable slot 3.
 func (self *IRawElementProviderFragment) Navigate(direction NavigateDirection) (*IRawElementProviderFragment, error) {
-	var _pRetVal *IRawElementProviderFragment
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(direction), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*IRawElementProviderFragment)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(direction), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetRuntimeId dispatches through IRawElementProviderFragment's vtable slot 4.
 func (self *IRawElementProviderFragment) GetRuntimeId() (*systemcom.SAFEARRAY, error) {
-	var _pRetVal *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BoundingRectangle dispatches through IRawElementProviderFragment's vtable slot 5.
 func (self *IRawElementProviderFragment) Get_BoundingRectangle() (UiaRect, error) {
-	var _pRetVal UiaRect
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(UiaRect)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetEmbeddedFragmentRoots dispatches through IRawElementProviderFragment's vtable slot 6.
 func (self *IRawElementProviderFragment) GetEmbeddedFragmentRoots() (*systemcom.SAFEARRAY, error) {
-	var _pRetVal *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // SetFocus dispatches through IRawElementProviderFragment's vtable slot 7.
@@ -874,9 +874,9 @@ func (self *IRawElementProviderFragment) SetFocus() error {
 
 // Get_FragmentRoot dispatches through IRawElementProviderFragment's vtable slot 8.
 func (self *IRawElementProviderFragment) Get_FragmentRoot() (*IRawElementProviderFragmentRoot, error) {
-	var _pRetVal *IRawElementProviderFragmentRoot
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*IRawElementProviderFragmentRoot)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IRawElementProviderFragmentRoot: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-irawelementproviderfragmentroot
@@ -890,9 +890,9 @@ var IID_IRawElementProviderFragmentRoot = win32.GUID{Data1: 0x620ce2a5, Data2: 0
 
 // GetFocus dispatches through IRawElementProviderFragmentRoot's vtable slot 4.
 func (self *IRawElementProviderFragmentRoot) GetFocus() (*IRawElementProviderFragment, error) {
-	var _pRetVal *IRawElementProviderFragment
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*IRawElementProviderFragment)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IRawElementProviderHostingAccessibles: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-irawelementproviderhostingaccessibles
@@ -906,9 +906,9 @@ var IID_IRawElementProviderHostingAccessibles = win32.GUID{Data1: 0x24be0b07, Da
 
 // GetEmbeddedAccessibles dispatches through IRawElementProviderHostingAccessibles's vtable slot 3.
 func (self *IRawElementProviderHostingAccessibles) GetEmbeddedAccessibles() (*systemcom.SAFEARRAY, error) {
-	var _pRetVal *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IRawElementProviderHwndOverride: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-irawelementproviderhwndoverride
@@ -922,9 +922,9 @@ var IID_IRawElementProviderHwndOverride = win32.GUID{Data1: 0x1d5df27c, Data2: 0
 
 // GetOverrideProviderForHwnd dispatches through IRawElementProviderHwndOverride's vtable slot 3.
 func (self *IRawElementProviderHwndOverride) GetOverrideProviderForHwnd(hwnd foundation.HWND) (*IRawElementProviderSimple, error) {
-	var _pRetVal *IRawElementProviderSimple
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*IRawElementProviderSimple)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IRawElementProviderSimple: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-irawelementprovidersimple
@@ -938,30 +938,30 @@ var IID_IRawElementProviderSimple = win32.GUID{Data1: 0xd6dd68d1, Data2: 0x86fd,
 
 // Get_ProviderOptions dispatches through IRawElementProviderSimple's vtable slot 3.
 func (self *IRawElementProviderSimple) Get_ProviderOptions() (ProviderOptions, error) {
-	var _pRetVal ProviderOptions
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(ProviderOptions)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPatternProvider dispatches through IRawElementProviderSimple's vtable slot 4.
 func (self *IRawElementProviderSimple) GetPatternProvider(patternId UIA_PATTERN_ID) (*systemcom.IUnknown, error) {
-	var _pRetVal *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(patternId), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(patternId), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPropertyValue dispatches through IRawElementProviderSimple's vtable slot 5.
 func (self *IRawElementProviderSimple) GetPropertyValue(propertyId UIA_PROPERTY_ID) (systemvariant.VARIANT, error) {
-	var _pRetVal systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(propertyId), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(propertyId), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HostRawElementProvider dispatches through IRawElementProviderSimple's vtable slot 6.
 func (self *IRawElementProviderSimple) Get_HostRawElementProvider() (*IRawElementProviderSimple, error) {
-	var _pRetVal *IRawElementProviderSimple
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*IRawElementProviderSimple)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IRawElementProviderSimple2: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-irawelementprovidersimple2
@@ -990,9 +990,9 @@ var IID_IRawElementProviderSimple3 = win32.GUID{Data1: 0xfcf5d820, Data2: 0xd7ec
 
 // GetMetadataValue dispatches through IRawElementProviderSimple3's vtable slot 8.
 func (self *IRawElementProviderSimple3) GetMetadataValue(targetId int32, metadataId UIA_METADATA_ID) (systemvariant.VARIANT, error) {
-	var _returnVal systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(targetId), uintptr(metadataId), uintptr(unsafe.Pointer(&_returnVal)))
-	return _returnVal, win32.ErrIfFailed(int32(r1))
+	_returnVal := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(targetId), uintptr(metadataId), uintptr(win32.OutParam(unsafe.Pointer(_returnVal))))
+	return *_returnVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IRawElementProviderWindowlessSite: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-irawelementproviderwindowlesssite
@@ -1006,16 +1006,16 @@ var IID_IRawElementProviderWindowlessSite = win32.GUID{Data1: 0x0a2a93cc, Data2:
 
 // GetAdjacentFragment dispatches through IRawElementProviderWindowlessSite's vtable slot 3.
 func (self *IRawElementProviderWindowlessSite) GetAdjacentFragment(direction NavigateDirection) (*IRawElementProviderFragment, error) {
-	var _ppParent *IRawElementProviderFragment
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(direction), uintptr(unsafe.Pointer(&_ppParent)))
-	return _ppParent, win32.ErrIfFailed(int32(r1))
+	_ppParent := new(*IRawElementProviderFragment)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(direction), uintptr(win32.OutParam(unsafe.Pointer(_ppParent))))
+	return *_ppParent, win32.ErrIfFailed(int32(r1))
 }
 
 // GetRuntimeIdPrefix dispatches through IRawElementProviderWindowlessSite's vtable slot 4.
 func (self *IRawElementProviderWindowlessSite) GetRuntimeIdPrefix() (*systemcom.SAFEARRAY, error) {
-	var _pRetVal *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IRichEditUiaInformation: https://learn.microsoft.com/windows/win32/api/textserv/nn-textserv-irichedituiainformation
@@ -1086,44 +1086,44 @@ func (self *IScrollProvider) Scroll(horizontalAmount ScrollAmount, verticalAmoun
 
 // Get_HorizontalScrollPercent dispatches through IScrollProvider's vtable slot 5.
 func (self *IScrollProvider) Get_HorizontalScrollPercent() (float64, error) {
-	var _pRetVal float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_VerticalScrollPercent dispatches through IScrollProvider's vtable slot 6.
 func (self *IScrollProvider) Get_VerticalScrollPercent() (float64, error) {
-	var _pRetVal float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HorizontalViewSize dispatches through IScrollProvider's vtable slot 7.
 func (self *IScrollProvider) Get_HorizontalViewSize() (float64, error) {
-	var _pRetVal float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_VerticalViewSize dispatches through IScrollProvider's vtable slot 8.
 func (self *IScrollProvider) Get_VerticalViewSize() (float64, error) {
-	var _pRetVal float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_HorizontallyScrollable dispatches through IScrollProvider's vtable slot 9.
 func (self *IScrollProvider) Get_HorizontallyScrollable() (foundation.BOOL, error) {
-	var _pRetVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_VerticallyScrollable dispatches through IScrollProvider's vtable slot 10.
 func (self *IScrollProvider) Get_VerticallyScrollable() (foundation.BOOL, error) {
-	var _pRetVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // ISelectionItemProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-iselectionitemprovider
@@ -1155,16 +1155,16 @@ func (self *ISelectionItemProvider) RemoveFromSelection() error {
 
 // Get_IsSelected dispatches through ISelectionItemProvider's vtable slot 6.
 func (self *ISelectionItemProvider) Get_IsSelected() (foundation.BOOL, error) {
-	var _pRetVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SelectionContainer dispatches through ISelectionItemProvider's vtable slot 7.
 func (self *ISelectionItemProvider) Get_SelectionContainer() (*IRawElementProviderSimple, error) {
-	var _pRetVal *IRawElementProviderSimple
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*IRawElementProviderSimple)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // ISelectionProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-iselectionprovider
@@ -1178,23 +1178,23 @@ var IID_ISelectionProvider = win32.GUID{Data1: 0xfb8b03af, Data2: 0x3bdf, Data3:
 
 // GetSelection dispatches through ISelectionProvider's vtable slot 3.
 func (self *ISelectionProvider) GetSelection() (*systemcom.SAFEARRAY, error) {
-	var _pRetVal *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CanSelectMultiple dispatches through ISelectionProvider's vtable slot 4.
 func (self *ISelectionProvider) Get_CanSelectMultiple() (foundation.BOOL, error) {
-	var _pRetVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsSelectionRequired dispatches through ISelectionProvider's vtable slot 5.
 func (self *ISelectionProvider) Get_IsSelectionRequired() (foundation.BOOL, error) {
-	var _pRetVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // ISelectionProvider2: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-iselectionprovider2
@@ -1208,30 +1208,30 @@ var IID_ISelectionProvider2 = win32.GUID{Data1: 0x14f68475, Data2: 0xee1c, Data3
 
 // Get_FirstSelectedItem dispatches through ISelectionProvider2's vtable slot 6.
 func (self *ISelectionProvider2) Get_FirstSelectedItem() (*IRawElementProviderSimple, error) {
-	var _retVal *IRawElementProviderSimple
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IRawElementProviderSimple)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_LastSelectedItem dispatches through ISelectionProvider2's vtable slot 7.
 func (self *ISelectionProvider2) Get_LastSelectedItem() (*IRawElementProviderSimple, error) {
-	var _retVal *IRawElementProviderSimple
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IRawElementProviderSimple)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentSelectedItem dispatches through ISelectionProvider2's vtable slot 8.
 func (self *ISelectionProvider2) Get_CurrentSelectedItem() (*IRawElementProviderSimple, error) {
-	var _retVal *IRawElementProviderSimple
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IRawElementProviderSimple)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ItemCount dispatches through ISelectionProvider2's vtable slot 9.
 func (self *ISelectionProvider2) Get_ItemCount() (int32, error) {
-	var _retVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // ISpreadsheetItemProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-ispreadsheetitemprovider
@@ -1245,23 +1245,23 @@ var IID_ISpreadsheetItemProvider = win32.GUID{Data1: 0xeaed4660, Data2: 0x7b3d, 
 
 // Get_Formula dispatches through ISpreadsheetItemProvider's vtable slot 3.
 func (self *ISpreadsheetItemProvider) Get_Formula() (foundation.BSTR, error) {
-	var _pRetVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAnnotationObjects dispatches through ISpreadsheetItemProvider's vtable slot 4.
 func (self *ISpreadsheetItemProvider) GetAnnotationObjects() (*systemcom.SAFEARRAY, error) {
-	var _pRetVal *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAnnotationTypes dispatches through ISpreadsheetItemProvider's vtable slot 5.
 func (self *ISpreadsheetItemProvider) GetAnnotationTypes() (*systemcom.SAFEARRAY, error) {
-	var _pRetVal *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // ISpreadsheetProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-ispreadsheetprovider
@@ -1276,9 +1276,9 @@ var IID_ISpreadsheetProvider = win32.GUID{Data1: 0x6f6b5d35, Data2: 0x5525, Data
 // GetItemByName dispatches through ISpreadsheetProvider's vtable slot 3.
 func (self *ISpreadsheetProvider) GetItemByName(name string) (*IRawElementProviderSimple, error) {
 	_name := win32.UTF16Ptr(name)
-	var _pRetVal *IRawElementProviderSimple
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*IRawElementProviderSimple)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IStylesProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-istylesprovider
@@ -1292,51 +1292,51 @@ var IID_IStylesProvider = win32.GUID{Data1: 0x19b6b649, Data2: 0xf5d7, Data3: 0x
 
 // Get_StyleId dispatches through IStylesProvider's vtable slot 3.
 func (self *IStylesProvider) Get_StyleId() (UIA_STYLE_ID, error) {
-	var _retVal UIA_STYLE_ID
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(UIA_STYLE_ID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_StyleName dispatches through IStylesProvider's vtable slot 4.
 func (self *IStylesProvider) Get_StyleName() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FillColor dispatches through IStylesProvider's vtable slot 5.
 func (self *IStylesProvider) Get_FillColor() (int32, error) {
-	var _retVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FillPatternStyle dispatches through IStylesProvider's vtable slot 6.
 func (self *IStylesProvider) Get_FillPatternStyle() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Shape dispatches through IStylesProvider's vtable slot 7.
 func (self *IStylesProvider) Get_Shape() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FillPatternColor dispatches through IStylesProvider's vtable slot 8.
 func (self *IStylesProvider) Get_FillPatternColor() (int32, error) {
-	var _retVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ExtendedProperties dispatches through IStylesProvider's vtable slot 9.
 func (self *IStylesProvider) Get_ExtendedProperties() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // ISynchronizedInputProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-isynchronizedinputprovider
@@ -1371,16 +1371,16 @@ var IID_ITableItemProvider = win32.GUID{Data1: 0xb9734fa6, Data2: 0x771f, Data3:
 
 // GetRowHeaderItems dispatches through ITableItemProvider's vtable slot 3.
 func (self *ITableItemProvider) GetRowHeaderItems() (*systemcom.SAFEARRAY, error) {
-	var _pRetVal *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetColumnHeaderItems dispatches through ITableItemProvider's vtable slot 4.
 func (self *ITableItemProvider) GetColumnHeaderItems() (*systemcom.SAFEARRAY, error) {
-	var _pRetVal *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // ITableProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-itableprovider
@@ -1394,23 +1394,23 @@ var IID_ITableProvider = win32.GUID{Data1: 0x9c860395, Data2: 0x97b3, Data3: 0x4
 
 // GetRowHeaders dispatches through ITableProvider's vtable slot 3.
 func (self *ITableProvider) GetRowHeaders() (*systemcom.SAFEARRAY, error) {
-	var _pRetVal *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetColumnHeaders dispatches through ITableProvider's vtable slot 4.
 func (self *ITableProvider) GetColumnHeaders() (*systemcom.SAFEARRAY, error) {
-	var _pRetVal *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RowOrColumnMajor dispatches through ITableProvider's vtable slot 5.
 func (self *ITableProvider) Get_RowOrColumnMajor() (RowOrColumnMajor, error) {
-	var _pRetVal RowOrColumnMajor
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(RowOrColumnMajor)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // ITextChildProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-itextchildprovider
@@ -1424,16 +1424,16 @@ var IID_ITextChildProvider = win32.GUID{Data1: 0x4c2de2b9, Data2: 0xc88f, Data3:
 
 // Get_TextContainer dispatches through ITextChildProvider's vtable slot 3.
 func (self *ITextChildProvider) Get_TextContainer() (*IRawElementProviderSimple, error) {
-	var _pRetVal *IRawElementProviderSimple
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*IRawElementProviderSimple)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TextRange dispatches through ITextChildProvider's vtable slot 4.
 func (self *ITextChildProvider) Get_TextRange() (*ITextRangeProvider, error) {
-	var _pRetVal *ITextRangeProvider
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*ITextRangeProvider)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // ITextEditProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-itexteditprovider
@@ -1447,16 +1447,16 @@ var IID_ITextEditProvider = win32.GUID{Data1: 0xea3605b4, Data2: 0x3a05, Data3: 
 
 // GetActiveComposition dispatches through ITextEditProvider's vtable slot 9.
 func (self *ITextEditProvider) GetActiveComposition() (*ITextRangeProvider, error) {
-	var _pRetVal *ITextRangeProvider
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*ITextRangeProvider)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetConversionTarget dispatches through ITextEditProvider's vtable slot 10.
 func (self *ITextEditProvider) GetConversionTarget() (*ITextRangeProvider, error) {
-	var _pRetVal *ITextRangeProvider
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*ITextRangeProvider)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // ITextProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-itextprovider
@@ -1470,37 +1470,37 @@ var IID_ITextProvider = win32.GUID{Data1: 0x3589c92c, Data2: 0x63f3, Data3: 0x43
 
 // GetSelection dispatches through ITextProvider's vtable slot 3.
 func (self *ITextProvider) GetSelection() (*systemcom.SAFEARRAY, error) {
-	var _pRetVal *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetVisibleRanges dispatches through ITextProvider's vtable slot 4.
 func (self *ITextProvider) GetVisibleRanges() (*systemcom.SAFEARRAY, error) {
-	var _pRetVal *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // RangeFromChild dispatches through ITextProvider's vtable slot 5.
 func (self *ITextProvider) RangeFromChild(childElement *IRawElementProviderSimple) (*ITextRangeProvider, error) {
-	var _pRetVal *ITextRangeProvider
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(childElement)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*ITextRangeProvider)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(childElement)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DocumentRange dispatches through ITextProvider's vtable slot 7.
 func (self *ITextProvider) Get_DocumentRange() (*ITextRangeProvider, error) {
-	var _pRetVal *ITextRangeProvider
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*ITextRangeProvider)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SupportedTextSelection dispatches through ITextProvider's vtable slot 8.
 func (self *ITextProvider) Get_SupportedTextSelection() (SupportedTextSelection, error) {
-	var _pRetVal SupportedTextSelection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(SupportedTextSelection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // ITextProvider2: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-itextprovider2
@@ -1514,16 +1514,16 @@ var IID_ITextProvider2 = win32.GUID{Data1: 0x0dc5e6ed, Data2: 0x3e16, Data3: 0x4
 
 // RangeFromAnnotation dispatches through ITextProvider2's vtable slot 9.
 func (self *ITextProvider2) RangeFromAnnotation(annotationElement *IRawElementProviderSimple) (*ITextRangeProvider, error) {
-	var _pRetVal *ITextRangeProvider
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(annotationElement)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*ITextRangeProvider)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(annotationElement)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCaretRange dispatches through ITextProvider2's vtable slot 10.
 func (self *ITextProvider2) GetCaretRange(isActive *foundation.BOOL) (*ITextRangeProvider, error) {
-	var _pRetVal *ITextRangeProvider
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(isActive)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*ITextRangeProvider)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(isActive)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // ITextRangeProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-itextrangeprovider
@@ -1537,23 +1537,23 @@ var IID_ITextRangeProvider = win32.GUID{Data1: 0x5347ad7b, Data2: 0xc355, Data3:
 
 // Clone dispatches through ITextRangeProvider's vtable slot 3.
 func (self *ITextRangeProvider) Clone() (*ITextRangeProvider, error) {
-	var _pRetVal *ITextRangeProvider
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*ITextRangeProvider)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Compare dispatches through ITextRangeProvider's vtable slot 4.
 func (self *ITextRangeProvider) Compare(range_ *ITextRangeProvider) (foundation.BOOL, error) {
-	var _pRetVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(range_)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(range_)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // CompareEndpoints dispatches through ITextRangeProvider's vtable slot 5.
 func (self *ITextRangeProvider) CompareEndpoints(endpoint TextPatternRangeEndpoint, targetRange *ITextRangeProvider, targetEndpoint TextPatternRangeEndpoint) (int32, error) {
-	var _pRetVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(endpoint), uintptr(unsafe.Pointer(targetRange)), uintptr(targetEndpoint), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(endpoint), uintptr(unsafe.Pointer(targetRange)), uintptr(targetEndpoint), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // ExpandToEnclosingUnit dispatches through ITextRangeProvider's vtable slot 6.
@@ -1566,51 +1566,51 @@ func (self *ITextRangeProvider) ExpandToEnclosingUnit(unit TextUnit) error {
 func (self *ITextRangeProvider) FindText(text foundation.BSTR, backward bool, ignoreCase bool) (*ITextRangeProvider, error) {
 	_backward := win32.Bool32(backward)
 	_ignoreCase := win32.Bool32(ignoreCase)
-	var _pRetVal *ITextRangeProvider
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(text)), uintptr(_backward), uintptr(_ignoreCase), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*ITextRangeProvider)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(text)), uintptr(_backward), uintptr(_ignoreCase), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAttributeValue dispatches through ITextRangeProvider's vtable slot 9.
 func (self *ITextRangeProvider) GetAttributeValue(attributeId UIA_TEXTATTRIBUTE_ID) (systemvariant.VARIANT, error) {
-	var _pRetVal systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(attributeId), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(attributeId), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetBoundingRectangles dispatches through ITextRangeProvider's vtable slot 10.
 func (self *ITextRangeProvider) GetBoundingRectangles() (*systemcom.SAFEARRAY, error) {
-	var _pRetVal *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetEnclosingElement dispatches through ITextRangeProvider's vtable slot 11.
 func (self *ITextRangeProvider) GetEnclosingElement() (*IRawElementProviderSimple, error) {
-	var _pRetVal *IRawElementProviderSimple
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*IRawElementProviderSimple)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetText dispatches through ITextRangeProvider's vtable slot 12.
 func (self *ITextRangeProvider) GetText(maxLength int32) (foundation.BSTR, error) {
-	var _pRetVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(maxLength), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(maxLength), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Move dispatches through ITextRangeProvider's vtable slot 13.
 func (self *ITextRangeProvider) Move(unit TextUnit, count int32) (int32, error) {
-	var _pRetVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unit), uintptr(count), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unit), uintptr(count), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveEndpointByUnit dispatches through ITextRangeProvider's vtable slot 14.
 func (self *ITextRangeProvider) MoveEndpointByUnit(endpoint TextPatternRangeEndpoint, unit TextUnit, count int32) (int32, error) {
-	var _pRetVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(endpoint), uintptr(unit), uintptr(count), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(endpoint), uintptr(unit), uintptr(count), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveEndpointByRange dispatches through ITextRangeProvider's vtable slot 15.
@@ -1646,9 +1646,9 @@ func (self *ITextRangeProvider) ScrollIntoView(alignToTop bool) error {
 
 // GetChildren dispatches through ITextRangeProvider's vtable slot 20.
 func (self *ITextRangeProvider) GetChildren() (*systemcom.SAFEARRAY, error) {
-	var _pRetVal *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // ITextRangeProvider2: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-itextrangeprovider2
@@ -1683,9 +1683,9 @@ func (self *IToggleProvider) Toggle() error {
 
 // Get_ToggleState dispatches through IToggleProvider's vtable slot 4.
 func (self *IToggleProvider) Get_ToggleState() (ToggleState, error) {
-	var _pRetVal ToggleState
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(ToggleState)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // ITransformProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-itransformprovider
@@ -1699,23 +1699,23 @@ var IID_ITransformProvider = win32.GUID{Data1: 0x6829ddc4, Data2: 0x4f91, Data3:
 
 // Get_CanMove dispatches through ITransformProvider's vtable slot 6.
 func (self *ITransformProvider) Get_CanMove() (foundation.BOOL, error) {
-	var _pRetVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CanResize dispatches through ITransformProvider's vtable slot 7.
 func (self *ITransformProvider) Get_CanResize() (foundation.BOOL, error) {
-	var _pRetVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CanRotate dispatches through ITransformProvider's vtable slot 8.
 func (self *ITransformProvider) Get_CanRotate() (foundation.BOOL, error) {
-	var _pRetVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // ITransformProvider2: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-itransformprovider2
@@ -1729,30 +1729,30 @@ var IID_ITransformProvider2 = win32.GUID{Data1: 0x4758742f, Data2: 0x7ac2, Data3
 
 // Get_CanZoom dispatches through ITransformProvider2's vtable slot 10.
 func (self *ITransformProvider2) Get_CanZoom() (foundation.BOOL, error) {
-	var _pRetVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ZoomLevel dispatches through ITransformProvider2's vtable slot 11.
 func (self *ITransformProvider2) Get_ZoomLevel() (float64, error) {
-	var _pRetVal float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ZoomMinimum dispatches through ITransformProvider2's vtable slot 12.
 func (self *ITransformProvider2) Get_ZoomMinimum() (float64, error) {
-	var _pRetVal float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ZoomMaximum dispatches through ITransformProvider2's vtable slot 13.
 func (self *ITransformProvider2) Get_ZoomMaximum() (float64, error) {
-	var _pRetVal float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // ZoomByUnit dispatches through ITransformProvider2's vtable slot 14.
@@ -1772,142 +1772,142 @@ var IID_IUIAutomation = win32.GUID{Data1: 0x30cbe57d, Data2: 0xd9d0, Data3: 0x45
 
 // CompareElements dispatches through IUIAutomation's vtable slot 3.
 func (self *IUIAutomation) CompareElements(el1 *IUIAutomationElement, el2 *IUIAutomationElement) (foundation.BOOL, error) {
-	var _areSame foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(el1)), uintptr(unsafe.Pointer(el2)), uintptr(unsafe.Pointer(&_areSame)))
-	return _areSame, win32.ErrIfFailed(int32(r1))
+	_areSame := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(el1)), uintptr(unsafe.Pointer(el2)), uintptr(win32.OutParam(unsafe.Pointer(_areSame))))
+	return *_areSame, win32.ErrIfFailed(int32(r1))
 }
 
 // CompareRuntimeIds dispatches through IUIAutomation's vtable slot 4.
 func (self *IUIAutomation) CompareRuntimeIds(runtimeId1 *systemcom.SAFEARRAY, runtimeId2 *systemcom.SAFEARRAY) (foundation.BOOL, error) {
-	var _areSame foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(runtimeId1)), uintptr(unsafe.Pointer(runtimeId2)), uintptr(unsafe.Pointer(&_areSame)))
-	return _areSame, win32.ErrIfFailed(int32(r1))
+	_areSame := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(runtimeId1)), uintptr(unsafe.Pointer(runtimeId2)), uintptr(win32.OutParam(unsafe.Pointer(_areSame))))
+	return *_areSame, win32.ErrIfFailed(int32(r1))
 }
 
 // GetRootElement dispatches through IUIAutomation's vtable slot 5.
 func (self *IUIAutomation) GetRootElement() (*IUIAutomationElement, error) {
-	var _root *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_root)))
-	return _root, win32.ErrIfFailed(int32(r1))
+	_root := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_root))))
+	return *_root, win32.ErrIfFailed(int32(r1))
 }
 
 // ElementFromHandle dispatches through IUIAutomation's vtable slot 6.
 func (self *IUIAutomation) ElementFromHandle(hwnd foundation.HWND) (*IUIAutomationElement, error) {
-	var _element *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(unsafe.Pointer(&_element)))
-	return _element, win32.ErrIfFailed(int32(r1))
+	_element := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(win32.OutParam(unsafe.Pointer(_element))))
+	return *_element, win32.ErrIfFailed(int32(r1))
 }
 
 // GetFocusedElement dispatches through IUIAutomation's vtable slot 8.
 func (self *IUIAutomation) GetFocusedElement() (*IUIAutomationElement, error) {
-	var _element *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_element)))
-	return _element, win32.ErrIfFailed(int32(r1))
+	_element := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_element))))
+	return *_element, win32.ErrIfFailed(int32(r1))
 }
 
 // GetRootElementBuildCache dispatches through IUIAutomation's vtable slot 9.
 func (self *IUIAutomation) GetRootElementBuildCache(cacheRequest *IUIAutomationCacheRequest) (*IUIAutomationElement, error) {
-	var _root *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(&_root)))
-	return _root, win32.ErrIfFailed(int32(r1))
+	_root := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(win32.OutParam(unsafe.Pointer(_root))))
+	return *_root, win32.ErrIfFailed(int32(r1))
 }
 
 // ElementFromHandleBuildCache dispatches through IUIAutomation's vtable slot 10.
 func (self *IUIAutomation) ElementFromHandleBuildCache(hwnd foundation.HWND, cacheRequest *IUIAutomationCacheRequest) (*IUIAutomationElement, error) {
-	var _element *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(&_element)))
-	return _element, win32.ErrIfFailed(int32(r1))
+	_element := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(unsafe.Pointer(cacheRequest)), uintptr(win32.OutParam(unsafe.Pointer(_element))))
+	return *_element, win32.ErrIfFailed(int32(r1))
 }
 
 // GetFocusedElementBuildCache dispatches through IUIAutomation's vtable slot 12.
 func (self *IUIAutomation) GetFocusedElementBuildCache(cacheRequest *IUIAutomationCacheRequest) (*IUIAutomationElement, error) {
-	var _element *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(&_element)))
-	return _element, win32.ErrIfFailed(int32(r1))
+	_element := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(win32.OutParam(unsafe.Pointer(_element))))
+	return *_element, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateTreeWalker dispatches through IUIAutomation's vtable slot 13.
 func (self *IUIAutomation) CreateTreeWalker(pCondition *IUIAutomationCondition) (*IUIAutomationTreeWalker, error) {
-	var _walker *IUIAutomationTreeWalker
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCondition)), uintptr(unsafe.Pointer(&_walker)))
-	return _walker, win32.ErrIfFailed(int32(r1))
+	_walker := new(*IUIAutomationTreeWalker)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCondition)), uintptr(win32.OutParam(unsafe.Pointer(_walker))))
+	return *_walker, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ControlViewWalker dispatches through IUIAutomation's vtable slot 14.
 func (self *IUIAutomation) Get_ControlViewWalker() (*IUIAutomationTreeWalker, error) {
-	var _walker *IUIAutomationTreeWalker
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_walker)))
-	return _walker, win32.ErrIfFailed(int32(r1))
+	_walker := new(*IUIAutomationTreeWalker)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_walker))))
+	return *_walker, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ContentViewWalker dispatches through IUIAutomation's vtable slot 15.
 func (self *IUIAutomation) Get_ContentViewWalker() (*IUIAutomationTreeWalker, error) {
-	var _walker *IUIAutomationTreeWalker
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_walker)))
-	return _walker, win32.ErrIfFailed(int32(r1))
+	_walker := new(*IUIAutomationTreeWalker)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_walker))))
+	return *_walker, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RawViewWalker dispatches through IUIAutomation's vtable slot 16.
 func (self *IUIAutomation) Get_RawViewWalker() (*IUIAutomationTreeWalker, error) {
-	var _walker *IUIAutomationTreeWalker
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_walker)))
-	return _walker, win32.ErrIfFailed(int32(r1))
+	_walker := new(*IUIAutomationTreeWalker)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_walker))))
+	return *_walker, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RawViewCondition dispatches through IUIAutomation's vtable slot 17.
 func (self *IUIAutomation) Get_RawViewCondition() (*IUIAutomationCondition, error) {
-	var _condition *IUIAutomationCondition
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_condition)))
-	return _condition, win32.ErrIfFailed(int32(r1))
+	_condition := new(*IUIAutomationCondition)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_condition))))
+	return *_condition, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ControlViewCondition dispatches through IUIAutomation's vtable slot 18.
 func (self *IUIAutomation) Get_ControlViewCondition() (*IUIAutomationCondition, error) {
-	var _condition *IUIAutomationCondition
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_condition)))
-	return _condition, win32.ErrIfFailed(int32(r1))
+	_condition := new(*IUIAutomationCondition)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_condition))))
+	return *_condition, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ContentViewCondition dispatches through IUIAutomation's vtable slot 19.
 func (self *IUIAutomation) Get_ContentViewCondition() (*IUIAutomationCondition, error) {
-	var _condition *IUIAutomationCondition
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_condition)))
-	return _condition, win32.ErrIfFailed(int32(r1))
+	_condition := new(*IUIAutomationCondition)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_condition))))
+	return *_condition, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateCacheRequest dispatches through IUIAutomation's vtable slot 20.
 func (self *IUIAutomation) CreateCacheRequest() (*IUIAutomationCacheRequest, error) {
-	var _cacheRequest *IUIAutomationCacheRequest
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_cacheRequest)))
-	return _cacheRequest, win32.ErrIfFailed(int32(r1))
+	_cacheRequest := new(*IUIAutomationCacheRequest)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_cacheRequest))))
+	return *_cacheRequest, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateTrueCondition dispatches through IUIAutomation's vtable slot 21.
 func (self *IUIAutomation) CreateTrueCondition() (*IUIAutomationCondition, error) {
-	var _newCondition *IUIAutomationCondition
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_newCondition)))
-	return _newCondition, win32.ErrIfFailed(int32(r1))
+	_newCondition := new(*IUIAutomationCondition)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_newCondition))))
+	return *_newCondition, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateFalseCondition dispatches through IUIAutomation's vtable slot 22.
 func (self *IUIAutomation) CreateFalseCondition() (*IUIAutomationCondition, error) {
-	var _newCondition *IUIAutomationCondition
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_newCondition)))
-	return _newCondition, win32.ErrIfFailed(int32(r1))
+	_newCondition := new(*IUIAutomationCondition)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_newCondition))))
+	return *_newCondition, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateAndCondition dispatches through IUIAutomation's vtable slot 25.
 func (self *IUIAutomation) CreateAndCondition(condition1 *IUIAutomationCondition, condition2 *IUIAutomationCondition) (*IUIAutomationCondition, error) {
-	var _newCondition *IUIAutomationCondition
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(condition1)), uintptr(unsafe.Pointer(condition2)), uintptr(unsafe.Pointer(&_newCondition)))
-	return _newCondition, win32.ErrIfFailed(int32(r1))
+	_newCondition := new(*IUIAutomationCondition)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(condition1)), uintptr(unsafe.Pointer(condition2)), uintptr(win32.OutParam(unsafe.Pointer(_newCondition))))
+	return *_newCondition, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateAndConditionFromArray dispatches through IUIAutomation's vtable slot 26.
 func (self *IUIAutomation) CreateAndConditionFromArray(conditions *systemcom.SAFEARRAY) (*IUIAutomationCondition, error) {
-	var _newCondition *IUIAutomationCondition
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(conditions)), uintptr(unsafe.Pointer(&_newCondition)))
-	return _newCondition, win32.ErrIfFailed(int32(r1))
+	_newCondition := new(*IUIAutomationCondition)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(conditions)), uintptr(win32.OutParam(unsafe.Pointer(_newCondition))))
+	return *_newCondition, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateAndConditionFromNativeArray dispatches through IUIAutomation's vtable slot 27.
@@ -1916,23 +1916,23 @@ func (self *IUIAutomation) CreateAndConditionFromNativeArray(conditions []*IUIAu
 	if len(conditions) > 0 {
 		_conditions = &conditions[0]
 	}
-	var _newCondition *IUIAutomationCondition
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_conditions)), uintptr(len(conditions)), uintptr(unsafe.Pointer(&_newCondition)))
-	return _newCondition, win32.ErrIfFailed(int32(r1))
+	_newCondition := new(*IUIAutomationCondition)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_conditions)), uintptr(len(conditions)), uintptr(win32.OutParam(unsafe.Pointer(_newCondition))))
+	return *_newCondition, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateOrCondition dispatches through IUIAutomation's vtable slot 28.
 func (self *IUIAutomation) CreateOrCondition(condition1 *IUIAutomationCondition, condition2 *IUIAutomationCondition) (*IUIAutomationCondition, error) {
-	var _newCondition *IUIAutomationCondition
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(condition1)), uintptr(unsafe.Pointer(condition2)), uintptr(unsafe.Pointer(&_newCondition)))
-	return _newCondition, win32.ErrIfFailed(int32(r1))
+	_newCondition := new(*IUIAutomationCondition)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(condition1)), uintptr(unsafe.Pointer(condition2)), uintptr(win32.OutParam(unsafe.Pointer(_newCondition))))
+	return *_newCondition, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateOrConditionFromArray dispatches through IUIAutomation's vtable slot 29.
 func (self *IUIAutomation) CreateOrConditionFromArray(conditions *systemcom.SAFEARRAY) (*IUIAutomationCondition, error) {
-	var _newCondition *IUIAutomationCondition
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(conditions)), uintptr(unsafe.Pointer(&_newCondition)))
-	return _newCondition, win32.ErrIfFailed(int32(r1))
+	_newCondition := new(*IUIAutomationCondition)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(conditions)), uintptr(win32.OutParam(unsafe.Pointer(_newCondition))))
+	return *_newCondition, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateOrConditionFromNativeArray dispatches through IUIAutomation's vtable slot 30.
@@ -1941,16 +1941,16 @@ func (self *IUIAutomation) CreateOrConditionFromNativeArray(conditions []*IUIAut
 	if len(conditions) > 0 {
 		_conditions = &conditions[0]
 	}
-	var _newCondition *IUIAutomationCondition
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_conditions)), uintptr(len(conditions)), uintptr(unsafe.Pointer(&_newCondition)))
-	return _newCondition, win32.ErrIfFailed(int32(r1))
+	_newCondition := new(*IUIAutomationCondition)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_conditions)), uintptr(len(conditions)), uintptr(win32.OutParam(unsafe.Pointer(_newCondition))))
+	return *_newCondition, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateNotCondition dispatches through IUIAutomation's vtable slot 31.
 func (self *IUIAutomation) CreateNotCondition(condition *IUIAutomationCondition) (*IUIAutomationCondition, error) {
-	var _newCondition *IUIAutomationCondition
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(condition)), uintptr(unsafe.Pointer(&_newCondition)))
-	return _newCondition, win32.ErrIfFailed(int32(r1))
+	_newCondition := new(*IUIAutomationCondition)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(condition)), uintptr(win32.OutParam(unsafe.Pointer(_newCondition))))
+	return *_newCondition, win32.ErrIfFailed(int32(r1))
 }
 
 // AddAutomationEventHandler dispatches through IUIAutomation's vtable slot 32.
@@ -2023,51 +2023,51 @@ func (self *IUIAutomation) IntNativeArrayToSafeArray(array []int32) (*systemcom.
 	if len(array) > 0 {
 		_array = &array[0]
 	}
-	var _safeArray *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_array)), uintptr(len(array)), uintptr(unsafe.Pointer(&_safeArray)))
-	return _safeArray, win32.ErrIfFailed(int32(r1))
+	_safeArray := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_array)), uintptr(len(array)), uintptr(win32.OutParam(unsafe.Pointer(_safeArray))))
+	return *_safeArray, win32.ErrIfFailed(int32(r1))
 }
 
 // IntSafeArrayToNativeArray dispatches through IUIAutomation's vtable slot 43.
 func (self *IUIAutomation) IntSafeArrayToNativeArray(intArray *systemcom.SAFEARRAY, array **int32) (int32, error) {
-	var _arrayCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(intArray)), uintptr(unsafe.Pointer(array)), uintptr(unsafe.Pointer(&_arrayCount)))
-	return _arrayCount, win32.ErrIfFailed(int32(r1))
+	_arrayCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(intArray)), uintptr(unsafe.Pointer(array)), uintptr(win32.OutParam(unsafe.Pointer(_arrayCount))))
+	return *_arrayCount, win32.ErrIfFailed(int32(r1))
 }
 
 // SafeArrayToRectNativeArray dispatches through IUIAutomation's vtable slot 46.
 func (self *IUIAutomation) SafeArrayToRectNativeArray(rects *systemcom.SAFEARRAY, rectArray **foundation.RECT) (int32, error) {
-	var _rectArrayCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rects)), uintptr(unsafe.Pointer(rectArray)), uintptr(unsafe.Pointer(&_rectArrayCount)))
-	return _rectArrayCount, win32.ErrIfFailed(int32(r1))
+	_rectArrayCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rects)), uintptr(unsafe.Pointer(rectArray)), uintptr(win32.OutParam(unsafe.Pointer(_rectArrayCount))))
+	return *_rectArrayCount, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateProxyFactoryEntry dispatches through IUIAutomation's vtable slot 47.
 func (self *IUIAutomation) CreateProxyFactoryEntry(factory *IUIAutomationProxyFactory) (*IUIAutomationProxyFactoryEntry, error) {
-	var _factoryEntry *IUIAutomationProxyFactoryEntry
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(factory)), uintptr(unsafe.Pointer(&_factoryEntry)))
-	return _factoryEntry, win32.ErrIfFailed(int32(r1))
+	_factoryEntry := new(*IUIAutomationProxyFactoryEntry)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(factory)), uintptr(win32.OutParam(unsafe.Pointer(_factoryEntry))))
+	return *_factoryEntry, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ProxyFactoryMapping dispatches through IUIAutomation's vtable slot 48.
 func (self *IUIAutomation) Get_ProxyFactoryMapping() (*IUIAutomationProxyFactoryMapping, error) {
-	var _factoryMapping *IUIAutomationProxyFactoryMapping
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_factoryMapping)))
-	return _factoryMapping, win32.ErrIfFailed(int32(r1))
+	_factoryMapping := new(*IUIAutomationProxyFactoryMapping)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_factoryMapping))))
+	return *_factoryMapping, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPropertyProgrammaticName dispatches through IUIAutomation's vtable slot 49.
 func (self *IUIAutomation) GetPropertyProgrammaticName(property UIA_PROPERTY_ID) (foundation.BSTR, error) {
-	var _name foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(property), uintptr(unsafe.Pointer(&_name)))
-	return _name, win32.ErrIfFailed(int32(r1))
+	_name := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(property), uintptr(win32.OutParam(unsafe.Pointer(_name))))
+	return *_name, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPatternProgrammaticName dispatches through IUIAutomation's vtable slot 50.
 func (self *IUIAutomation) GetPatternProgrammaticName(pattern UIA_PATTERN_ID) (foundation.BSTR, error) {
-	var _name foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(pattern), uintptr(unsafe.Pointer(&_name)))
-	return _name, win32.ErrIfFailed(int32(r1))
+	_name := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(pattern), uintptr(win32.OutParam(unsafe.Pointer(_name))))
+	return *_name, win32.ErrIfFailed(int32(r1))
 }
 
 // PollForPotentialSupportedPatterns dispatches through IUIAutomation's vtable slot 51.
@@ -2084,30 +2084,30 @@ func (self *IUIAutomation) PollForPotentialSupportedProperties(pElement *IUIAuto
 
 // Get_ReservedNotSupportedValue dispatches through IUIAutomation's vtable slot 54.
 func (self *IUIAutomation) Get_ReservedNotSupportedValue() (*systemcom.IUnknown, error) {
-	var _notSupportedValue *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_notSupportedValue)))
-	return _notSupportedValue, win32.ErrIfFailed(int32(r1))
+	_notSupportedValue := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_notSupportedValue))))
+	return *_notSupportedValue, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReservedMixedAttributeValue dispatches through IUIAutomation's vtable slot 55.
 func (self *IUIAutomation) Get_ReservedMixedAttributeValue() (*systemcom.IUnknown, error) {
-	var _mixedAttributeValue *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_mixedAttributeValue)))
-	return _mixedAttributeValue, win32.ErrIfFailed(int32(r1))
+	_mixedAttributeValue := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_mixedAttributeValue))))
+	return *_mixedAttributeValue, win32.ErrIfFailed(int32(r1))
 }
 
 // ElementFromIAccessible dispatches through IUIAutomation's vtable slot 56.
 func (self *IUIAutomation) ElementFromIAccessible(accessible *IAccessible, childId int32) (*IUIAutomationElement, error) {
-	var _element *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(accessible)), uintptr(childId), uintptr(unsafe.Pointer(&_element)))
-	return _element, win32.ErrIfFailed(int32(r1))
+	_element := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(accessible)), uintptr(childId), uintptr(win32.OutParam(unsafe.Pointer(_element))))
+	return *_element, win32.ErrIfFailed(int32(r1))
 }
 
 // ElementFromIAccessibleBuildCache dispatches through IUIAutomation's vtable slot 57.
 func (self *IUIAutomation) ElementFromIAccessibleBuildCache(accessible *IAccessible, childId int32, cacheRequest *IUIAutomationCacheRequest) (*IUIAutomationElement, error) {
-	var _element *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(accessible)), uintptr(childId), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(&_element)))
-	return _element, win32.ErrIfFailed(int32(r1))
+	_element := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(accessible)), uintptr(childId), uintptr(unsafe.Pointer(cacheRequest)), uintptr(win32.OutParam(unsafe.Pointer(_element))))
+	return *_element, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomation2: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomation2
@@ -2121,9 +2121,9 @@ var IID_IUIAutomation2 = win32.GUID{Data1: 0x34723aff, Data2: 0x0c9d, Data3: 0x4
 
 // Get_AutoSetFocus dispatches through IUIAutomation2's vtable slot 58.
 func (self *IUIAutomation2) Get_AutoSetFocus() (foundation.BOOL, error) {
-	var _autoSetFocus foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_autoSetFocus)))
-	return _autoSetFocus, win32.ErrIfFailed(int32(r1))
+	_autoSetFocus := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_autoSetFocus))))
+	return *_autoSetFocus, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AutoSetFocus dispatches through IUIAutomation2's vtable slot 59.
@@ -2135,9 +2135,9 @@ func (self *IUIAutomation2) Put_AutoSetFocus(autoSetFocus bool) error {
 
 // Get_ConnectionTimeout dispatches through IUIAutomation2's vtable slot 60.
 func (self *IUIAutomation2) Get_ConnectionTimeout() (uint32, error) {
-	var _timeout uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_timeout)))
-	return _timeout, win32.ErrIfFailed(int32(r1))
+	_timeout := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_timeout))))
+	return *_timeout, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ConnectionTimeout dispatches through IUIAutomation2's vtable slot 61.
@@ -2148,9 +2148,9 @@ func (self *IUIAutomation2) Put_ConnectionTimeout(timeout uint32) error {
 
 // Get_TransactionTimeout dispatches through IUIAutomation2's vtable slot 62.
 func (self *IUIAutomation2) Get_TransactionTimeout() (uint32, error) {
-	var _timeout uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_timeout)))
-	return _timeout, win32.ErrIfFailed(int32(r1))
+	_timeout := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_timeout))))
+	return *_timeout, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_TransactionTimeout dispatches through IUIAutomation2's vtable slot 63.
@@ -2255,9 +2255,9 @@ func (self *IUIAutomation6) RemoveEventHandlerGroup(element *IUIAutomationElemen
 
 // Get_ConnectionRecoveryBehavior dispatches through IUIAutomation6's vtable slot 73.
 func (self *IUIAutomation6) Get_ConnectionRecoveryBehavior() (ConnectionRecoveryBehaviorOptions, error) {
-	var _connectionRecoveryBehaviorOptions ConnectionRecoveryBehaviorOptions
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_connectionRecoveryBehaviorOptions)))
-	return _connectionRecoveryBehaviorOptions, win32.ErrIfFailed(int32(r1))
+	_connectionRecoveryBehaviorOptions := new(ConnectionRecoveryBehaviorOptions)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_connectionRecoveryBehaviorOptions))))
+	return *_connectionRecoveryBehaviorOptions, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ConnectionRecoveryBehavior dispatches through IUIAutomation6's vtable slot 74.
@@ -2268,9 +2268,9 @@ func (self *IUIAutomation6) Put_ConnectionRecoveryBehavior(connectionRecoveryBeh
 
 // Get_CoalesceEvents dispatches through IUIAutomation6's vtable slot 75.
 func (self *IUIAutomation6) Get_CoalesceEvents() (CoalesceEventsOptions, error) {
-	var _coalesceEventsOptions CoalesceEventsOptions
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[75], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_coalesceEventsOptions)))
-	return _coalesceEventsOptions, win32.ErrIfFailed(int32(r1))
+	_coalesceEventsOptions := new(CoalesceEventsOptions)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[75], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_coalesceEventsOptions))))
+	return *_coalesceEventsOptions, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_CoalesceEvents dispatches through IUIAutomation6's vtable slot 76.
@@ -2317,9 +2317,9 @@ var IID_IUIAutomationAndCondition = win32.GUID{Data1: 0xa7d0af36, Data2: 0xb912,
 
 // Get_ChildCount dispatches through IUIAutomationAndCondition's vtable slot 3.
 func (self *IUIAutomationAndCondition) Get_ChildCount() (int32, error) {
-	var _childCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_childCount)))
-	return _childCount, win32.ErrIfFailed(int32(r1))
+	_childCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_childCount))))
+	return *_childCount, win32.ErrIfFailed(int32(r1))
 }
 
 // GetChildrenAsNativeArray dispatches through IUIAutomationAndCondition's vtable slot 4.
@@ -2330,9 +2330,9 @@ func (self *IUIAutomationAndCondition) GetChildrenAsNativeArray(childArray ***IU
 
 // GetChildren dispatches through IUIAutomationAndCondition's vtable slot 5.
 func (self *IUIAutomationAndCondition) GetChildren() (*systemcom.SAFEARRAY, error) {
-	var _childArray *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_childArray)))
-	return _childArray, win32.ErrIfFailed(int32(r1))
+	_childArray := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_childArray))))
+	return *_childArray, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationAnnotationPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationannotationpattern
@@ -2346,72 +2346,72 @@ var IID_IUIAutomationAnnotationPattern = win32.GUID{Data1: 0x9a175b21, Data2: 0x
 
 // Get_CurrentAnnotationTypeId dispatches through IUIAutomationAnnotationPattern's vtable slot 3.
 func (self *IUIAutomationAnnotationPattern) Get_CurrentAnnotationTypeId() (UIA_ANNOTATIONTYPE, error) {
-	var _retVal UIA_ANNOTATIONTYPE
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(UIA_ANNOTATIONTYPE)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentAnnotationTypeName dispatches through IUIAutomationAnnotationPattern's vtable slot 4.
 func (self *IUIAutomationAnnotationPattern) Get_CurrentAnnotationTypeName() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentAuthor dispatches through IUIAutomationAnnotationPattern's vtable slot 5.
 func (self *IUIAutomationAnnotationPattern) Get_CurrentAuthor() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentDateTime dispatches through IUIAutomationAnnotationPattern's vtable slot 6.
 func (self *IUIAutomationAnnotationPattern) Get_CurrentDateTime() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentTarget dispatches through IUIAutomationAnnotationPattern's vtable slot 7.
 func (self *IUIAutomationAnnotationPattern) Get_CurrentTarget() (*IUIAutomationElement, error) {
-	var _retVal *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedAnnotationTypeId dispatches through IUIAutomationAnnotationPattern's vtable slot 8.
 func (self *IUIAutomationAnnotationPattern) Get_CachedAnnotationTypeId() (UIA_ANNOTATIONTYPE, error) {
-	var _retVal UIA_ANNOTATIONTYPE
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(UIA_ANNOTATIONTYPE)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedAnnotationTypeName dispatches through IUIAutomationAnnotationPattern's vtable slot 9.
 func (self *IUIAutomationAnnotationPattern) Get_CachedAnnotationTypeName() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedAuthor dispatches through IUIAutomationAnnotationPattern's vtable slot 10.
 func (self *IUIAutomationAnnotationPattern) Get_CachedAuthor() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedDateTime dispatches through IUIAutomationAnnotationPattern's vtable slot 11.
 func (self *IUIAutomationAnnotationPattern) Get_CachedDateTime() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedTarget dispatches through IUIAutomationAnnotationPattern's vtable slot 12.
 func (self *IUIAutomationAnnotationPattern) Get_CachedTarget() (*IUIAutomationElement, error) {
-	var _retVal *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationBoolCondition: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationboolcondition
@@ -2425,9 +2425,9 @@ var IID_IUIAutomationBoolCondition = win32.GUID{Data1: 0x1b4e1f2e, Data2: 0x75eb
 
 // Get_BooleanValue dispatches through IUIAutomationBoolCondition's vtable slot 3.
 func (self *IUIAutomationBoolCondition) Get_BooleanValue() (foundation.BOOL, error) {
-	var _boolVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_boolVal)))
-	return _boolVal, win32.ErrIfFailed(int32(r1))
+	_boolVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_boolVal))))
+	return *_boolVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationCacheRequest: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationcacherequest
@@ -2453,16 +2453,16 @@ func (self *IUIAutomationCacheRequest) AddPattern(patternId UIA_PATTERN_ID) erro
 
 // Clone dispatches through IUIAutomationCacheRequest's vtable slot 5.
 func (self *IUIAutomationCacheRequest) Clone() (*IUIAutomationCacheRequest, error) {
-	var _clonedRequest *IUIAutomationCacheRequest
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_clonedRequest)))
-	return _clonedRequest, win32.ErrIfFailed(int32(r1))
+	_clonedRequest := new(*IUIAutomationCacheRequest)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_clonedRequest))))
+	return *_clonedRequest, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TreeScope dispatches through IUIAutomationCacheRequest's vtable slot 6.
 func (self *IUIAutomationCacheRequest) Get_TreeScope() (TreeScope, error) {
-	var _scope TreeScope
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_scope)))
-	return _scope, win32.ErrIfFailed(int32(r1))
+	_scope := new(TreeScope)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_scope))))
+	return *_scope, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_TreeScope dispatches through IUIAutomationCacheRequest's vtable slot 7.
@@ -2473,9 +2473,9 @@ func (self *IUIAutomationCacheRequest) Put_TreeScope(scope TreeScope) error {
 
 // Get_TreeFilter dispatches through IUIAutomationCacheRequest's vtable slot 8.
 func (self *IUIAutomationCacheRequest) Get_TreeFilter() (*IUIAutomationCondition, error) {
-	var _filter *IUIAutomationCondition
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_filter)))
-	return _filter, win32.ErrIfFailed(int32(r1))
+	_filter := new(*IUIAutomationCondition)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_filter))))
+	return *_filter, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_TreeFilter dispatches through IUIAutomationCacheRequest's vtable slot 9.
@@ -2486,9 +2486,9 @@ func (self *IUIAutomationCacheRequest) Put_TreeFilter(filter *IUIAutomationCondi
 
 // Get_AutomationElementMode dispatches through IUIAutomationCacheRequest's vtable slot 10.
 func (self *IUIAutomationCacheRequest) Get_AutomationElementMode() (AutomationElementMode, error) {
-	var _mode AutomationElementMode
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_mode)))
-	return _mode, win32.ErrIfFailed(int32(r1))
+	_mode := new(AutomationElementMode)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_mode))))
+	return *_mode, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AutomationElementMode dispatches through IUIAutomationCacheRequest's vtable slot 11.
@@ -2578,9 +2578,9 @@ func (self *IUIAutomationClientInfoSource) UnregisterClientConnectionCallback(ha
 
 // GetConnectedClients dispatches through IUIAutomationClientInfoSource's vtable slot 5.
 func (self *IUIAutomationClientInfoSource) GetConnectedClients() (*systemcom.SAFEARRAY, error) {
-	var _clients *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_clients)))
-	return _clients, win32.ErrIfFailed(int32(r1))
+	_clients := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_clients))))
+	return *_clients, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationCondition: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationcondition
@@ -2603,9 +2603,9 @@ var IID_IUIAutomationCustomNavigationPattern = win32.GUID{Data1: 0x01ea217a, Dat
 
 // Navigate dispatches through IUIAutomationCustomNavigationPattern's vtable slot 3.
 func (self *IUIAutomationCustomNavigationPattern) Navigate(direction NavigateDirection) (*IUIAutomationElement, error) {
-	var _pRetVal *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(direction), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(direction), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationDockPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationdockpattern
@@ -2625,16 +2625,16 @@ func (self *IUIAutomationDockPattern) SetDockPosition(dockPos DockPosition) erro
 
 // Get_CurrentDockPosition dispatches through IUIAutomationDockPattern's vtable slot 4.
 func (self *IUIAutomationDockPattern) Get_CurrentDockPosition() (DockPosition, error) {
-	var _retVal DockPosition
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(DockPosition)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedDockPosition dispatches through IUIAutomationDockPattern's vtable slot 5.
 func (self *IUIAutomationDockPattern) Get_CachedDockPosition() (DockPosition, error) {
-	var _retVal DockPosition
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(DockPosition)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationDragPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationdragpattern
@@ -2648,58 +2648,58 @@ var IID_IUIAutomationDragPattern = win32.GUID{Data1: 0x1dc7b570, Data2: 0x1f54, 
 
 // Get_CurrentIsGrabbed dispatches through IUIAutomationDragPattern's vtable slot 3.
 func (self *IUIAutomationDragPattern) Get_CurrentIsGrabbed() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedIsGrabbed dispatches through IUIAutomationDragPattern's vtable slot 4.
 func (self *IUIAutomationDragPattern) Get_CachedIsGrabbed() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentDropEffect dispatches through IUIAutomationDragPattern's vtable slot 5.
 func (self *IUIAutomationDragPattern) Get_CurrentDropEffect() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedDropEffect dispatches through IUIAutomationDragPattern's vtable slot 6.
 func (self *IUIAutomationDragPattern) Get_CachedDropEffect() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentDropEffects dispatches through IUIAutomationDragPattern's vtable slot 7.
 func (self *IUIAutomationDragPattern) Get_CurrentDropEffects() (*systemcom.SAFEARRAY, error) {
-	var _retVal *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedDropEffects dispatches through IUIAutomationDragPattern's vtable slot 8.
 func (self *IUIAutomationDragPattern) Get_CachedDropEffects() (*systemcom.SAFEARRAY, error) {
-	var _retVal *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentGrabbedItems dispatches through IUIAutomationDragPattern's vtable slot 9.
 func (self *IUIAutomationDragPattern) GetCurrentGrabbedItems() (*IUIAutomationElementArray, error) {
-	var _retVal *IUIAutomationElementArray
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElementArray)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCachedGrabbedItems dispatches through IUIAutomationDragPattern's vtable slot 10.
 func (self *IUIAutomationDragPattern) GetCachedGrabbedItems() (*IUIAutomationElementArray, error) {
-	var _retVal *IUIAutomationElementArray
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElementArray)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationDropTargetPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationdroptargetpattern
@@ -2713,30 +2713,30 @@ var IID_IUIAutomationDropTargetPattern = win32.GUID{Data1: 0x69a095f7, Data2: 0x
 
 // Get_CurrentDropTargetEffect dispatches through IUIAutomationDropTargetPattern's vtable slot 3.
 func (self *IUIAutomationDropTargetPattern) Get_CurrentDropTargetEffect() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedDropTargetEffect dispatches through IUIAutomationDropTargetPattern's vtable slot 4.
 func (self *IUIAutomationDropTargetPattern) Get_CachedDropTargetEffect() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentDropTargetEffects dispatches through IUIAutomationDropTargetPattern's vtable slot 5.
 func (self *IUIAutomationDropTargetPattern) Get_CurrentDropTargetEffects() (*systemcom.SAFEARRAY, error) {
-	var _retVal *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedDropTargetEffects dispatches through IUIAutomationDropTargetPattern's vtable slot 6.
 func (self *IUIAutomationDropTargetPattern) Get_CachedDropTargetEffects() (*systemcom.SAFEARRAY, error) {
-	var _retVal *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationElement: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationelement
@@ -2756,571 +2756,571 @@ func (self *IUIAutomationElement) SetFocus() error {
 
 // GetRuntimeId dispatches through IUIAutomationElement's vtable slot 4.
 func (self *IUIAutomationElement) GetRuntimeId() (*systemcom.SAFEARRAY, error) {
-	var _runtimeId *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_runtimeId)))
-	return _runtimeId, win32.ErrIfFailed(int32(r1))
+	_runtimeId := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_runtimeId))))
+	return *_runtimeId, win32.ErrIfFailed(int32(r1))
 }
 
 // FindFirst dispatches through IUIAutomationElement's vtable slot 5.
 func (self *IUIAutomationElement) FindFirst(scope TreeScope, condition *IUIAutomationCondition) (*IUIAutomationElement, error) {
-	var _found *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(condition)), uintptr(unsafe.Pointer(&_found)))
-	return _found, win32.ErrIfFailed(int32(r1))
+	_found := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(condition)), uintptr(win32.OutParam(unsafe.Pointer(_found))))
+	return *_found, win32.ErrIfFailed(int32(r1))
 }
 
 // FindAll dispatches through IUIAutomationElement's vtable slot 6.
 func (self *IUIAutomationElement) FindAll(scope TreeScope, condition *IUIAutomationCondition) (*IUIAutomationElementArray, error) {
-	var _found *IUIAutomationElementArray
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(condition)), uintptr(unsafe.Pointer(&_found)))
-	return _found, win32.ErrIfFailed(int32(r1))
+	_found := new(*IUIAutomationElementArray)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(condition)), uintptr(win32.OutParam(unsafe.Pointer(_found))))
+	return *_found, win32.ErrIfFailed(int32(r1))
 }
 
 // FindFirstBuildCache dispatches through IUIAutomationElement's vtable slot 7.
 func (self *IUIAutomationElement) FindFirstBuildCache(scope TreeScope, condition *IUIAutomationCondition, cacheRequest *IUIAutomationCacheRequest) (*IUIAutomationElement, error) {
-	var _found *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(condition)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(&_found)))
-	return _found, win32.ErrIfFailed(int32(r1))
+	_found := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(condition)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(win32.OutParam(unsafe.Pointer(_found))))
+	return *_found, win32.ErrIfFailed(int32(r1))
 }
 
 // FindAllBuildCache dispatches through IUIAutomationElement's vtable slot 8.
 func (self *IUIAutomationElement) FindAllBuildCache(scope TreeScope, condition *IUIAutomationCondition, cacheRequest *IUIAutomationCacheRequest) (*IUIAutomationElementArray, error) {
-	var _found *IUIAutomationElementArray
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(condition)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(&_found)))
-	return _found, win32.ErrIfFailed(int32(r1))
+	_found := new(*IUIAutomationElementArray)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(condition)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(win32.OutParam(unsafe.Pointer(_found))))
+	return *_found, win32.ErrIfFailed(int32(r1))
 }
 
 // BuildUpdatedCache dispatches through IUIAutomationElement's vtable slot 9.
 func (self *IUIAutomationElement) BuildUpdatedCache(cacheRequest *IUIAutomationCacheRequest) (*IUIAutomationElement, error) {
-	var _updatedElement *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(&_updatedElement)))
-	return _updatedElement, win32.ErrIfFailed(int32(r1))
+	_updatedElement := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(win32.OutParam(unsafe.Pointer(_updatedElement))))
+	return *_updatedElement, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentPropertyValue dispatches through IUIAutomationElement's vtable slot 10.
 func (self *IUIAutomationElement) GetCurrentPropertyValue(propertyId UIA_PROPERTY_ID) (systemvariant.VARIANT, error) {
-	var _retVal systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(propertyId), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(propertyId), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentPropertyValueEx dispatches through IUIAutomationElement's vtable slot 11.
 func (self *IUIAutomationElement) GetCurrentPropertyValueEx(propertyId UIA_PROPERTY_ID, ignoreDefaultValue bool) (systemvariant.VARIANT, error) {
 	_ignoreDefaultValue := win32.Bool32(ignoreDefaultValue)
-	var _retVal systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(propertyId), uintptr(_ignoreDefaultValue), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(propertyId), uintptr(_ignoreDefaultValue), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCachedPropertyValue dispatches through IUIAutomationElement's vtable slot 12.
 func (self *IUIAutomationElement) GetCachedPropertyValue(propertyId UIA_PROPERTY_ID) (systemvariant.VARIANT, error) {
-	var _retVal systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(propertyId), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(propertyId), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCachedPropertyValueEx dispatches through IUIAutomationElement's vtable slot 13.
 func (self *IUIAutomationElement) GetCachedPropertyValueEx(propertyId UIA_PROPERTY_ID, ignoreDefaultValue bool) (systemvariant.VARIANT, error) {
 	_ignoreDefaultValue := win32.Bool32(ignoreDefaultValue)
-	var _retVal systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(propertyId), uintptr(_ignoreDefaultValue), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(propertyId), uintptr(_ignoreDefaultValue), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentPatternAs dispatches through IUIAutomationElement's vtable slot 14.
 func (self *IUIAutomationElement) GetCurrentPatternAs(patternId UIA_PATTERN_ID, riid *win32.GUID) (*win32.IUnknown, error) {
-	var _patternObject *win32.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(patternId), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_patternObject)))
-	return _patternObject, win32.ErrIfFailed(int32(r1))
+	_patternObject := new(*win32.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(patternId), uintptr(unsafe.Pointer(riid)), uintptr(win32.OutParam(unsafe.Pointer(_patternObject))))
+	return *_patternObject, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCachedPatternAs dispatches through IUIAutomationElement's vtable slot 15.
 func (self *IUIAutomationElement) GetCachedPatternAs(patternId UIA_PATTERN_ID, riid *win32.GUID) (*win32.IUnknown, error) {
-	var _patternObject *win32.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(patternId), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_patternObject)))
-	return _patternObject, win32.ErrIfFailed(int32(r1))
+	_patternObject := new(*win32.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(patternId), uintptr(unsafe.Pointer(riid)), uintptr(win32.OutParam(unsafe.Pointer(_patternObject))))
+	return *_patternObject, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentPattern dispatches through IUIAutomationElement's vtable slot 16.
 func (self *IUIAutomationElement) GetCurrentPattern(patternId UIA_PATTERN_ID) (*systemcom.IUnknown, error) {
-	var _patternObject *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(patternId), uintptr(unsafe.Pointer(&_patternObject)))
-	return _patternObject, win32.ErrIfFailed(int32(r1))
+	_patternObject := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(patternId), uintptr(win32.OutParam(unsafe.Pointer(_patternObject))))
+	return *_patternObject, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCachedPattern dispatches through IUIAutomationElement's vtable slot 17.
 func (self *IUIAutomationElement) GetCachedPattern(patternId UIA_PATTERN_ID) (*systemcom.IUnknown, error) {
-	var _patternObject *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(patternId), uintptr(unsafe.Pointer(&_patternObject)))
-	return _patternObject, win32.ErrIfFailed(int32(r1))
+	_patternObject := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(patternId), uintptr(win32.OutParam(unsafe.Pointer(_patternObject))))
+	return *_patternObject, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCachedParent dispatches through IUIAutomationElement's vtable slot 18.
 func (self *IUIAutomationElement) GetCachedParent() (*IUIAutomationElement, error) {
-	var _parent *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_parent)))
-	return _parent, win32.ErrIfFailed(int32(r1))
+	_parent := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_parent))))
+	return *_parent, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCachedChildren dispatches through IUIAutomationElement's vtable slot 19.
 func (self *IUIAutomationElement) GetCachedChildren() (*IUIAutomationElementArray, error) {
-	var _children *IUIAutomationElementArray
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_children)))
-	return _children, win32.ErrIfFailed(int32(r1))
+	_children := new(*IUIAutomationElementArray)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_children))))
+	return *_children, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentProcessId dispatches through IUIAutomationElement's vtable slot 20.
 func (self *IUIAutomationElement) Get_CurrentProcessId() (int32, error) {
-	var _retVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentControlType dispatches through IUIAutomationElement's vtable slot 21.
 func (self *IUIAutomationElement) Get_CurrentControlType() (UIA_CONTROLTYPE_ID, error) {
-	var _retVal UIA_CONTROLTYPE_ID
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(UIA_CONTROLTYPE_ID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentLocalizedControlType dispatches through IUIAutomationElement's vtable slot 22.
 func (self *IUIAutomationElement) Get_CurrentLocalizedControlType() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentName dispatches through IUIAutomationElement's vtable slot 23.
 func (self *IUIAutomationElement) Get_CurrentName() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentAcceleratorKey dispatches through IUIAutomationElement's vtable slot 24.
 func (self *IUIAutomationElement) Get_CurrentAcceleratorKey() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentAccessKey dispatches through IUIAutomationElement's vtable slot 25.
 func (self *IUIAutomationElement) Get_CurrentAccessKey() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentHasKeyboardFocus dispatches through IUIAutomationElement's vtable slot 26.
 func (self *IUIAutomationElement) Get_CurrentHasKeyboardFocus() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentIsKeyboardFocusable dispatches through IUIAutomationElement's vtable slot 27.
 func (self *IUIAutomationElement) Get_CurrentIsKeyboardFocusable() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentIsEnabled dispatches through IUIAutomationElement's vtable slot 28.
 func (self *IUIAutomationElement) Get_CurrentIsEnabled() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentAutomationId dispatches through IUIAutomationElement's vtable slot 29.
 func (self *IUIAutomationElement) Get_CurrentAutomationId() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentClassName dispatches through IUIAutomationElement's vtable slot 30.
 func (self *IUIAutomationElement) Get_CurrentClassName() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentHelpText dispatches through IUIAutomationElement's vtable slot 31.
 func (self *IUIAutomationElement) Get_CurrentHelpText() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentCulture dispatches through IUIAutomationElement's vtable slot 32.
 func (self *IUIAutomationElement) Get_CurrentCulture() (int32, error) {
-	var _retVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentIsControlElement dispatches through IUIAutomationElement's vtable slot 33.
 func (self *IUIAutomationElement) Get_CurrentIsControlElement() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentIsContentElement dispatches through IUIAutomationElement's vtable slot 34.
 func (self *IUIAutomationElement) Get_CurrentIsContentElement() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentIsPassword dispatches through IUIAutomationElement's vtable slot 35.
 func (self *IUIAutomationElement) Get_CurrentIsPassword() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentNativeWindowHandle dispatches through IUIAutomationElement's vtable slot 36.
 func (self *IUIAutomationElement) Get_CurrentNativeWindowHandle() (foundation.HWND, error) {
-	var _retVal foundation.HWND
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.HWND)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentItemType dispatches through IUIAutomationElement's vtable slot 37.
 func (self *IUIAutomationElement) Get_CurrentItemType() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentIsOffscreen dispatches through IUIAutomationElement's vtable slot 38.
 func (self *IUIAutomationElement) Get_CurrentIsOffscreen() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentOrientation dispatches through IUIAutomationElement's vtable slot 39.
 func (self *IUIAutomationElement) Get_CurrentOrientation() (OrientationType, error) {
-	var _retVal OrientationType
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(OrientationType)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentFrameworkId dispatches through IUIAutomationElement's vtable slot 40.
 func (self *IUIAutomationElement) Get_CurrentFrameworkId() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentIsRequiredForForm dispatches through IUIAutomationElement's vtable slot 41.
 func (self *IUIAutomationElement) Get_CurrentIsRequiredForForm() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentItemStatus dispatches through IUIAutomationElement's vtable slot 42.
 func (self *IUIAutomationElement) Get_CurrentItemStatus() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentBoundingRectangle dispatches through IUIAutomationElement's vtable slot 43.
 func (self *IUIAutomationElement) Get_CurrentBoundingRectangle() (foundation.RECT, error) {
-	var _retVal foundation.RECT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.RECT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentLabeledBy dispatches through IUIAutomationElement's vtable slot 44.
 func (self *IUIAutomationElement) Get_CurrentLabeledBy() (*IUIAutomationElement, error) {
-	var _retVal *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentAriaRole dispatches through IUIAutomationElement's vtable slot 45.
 func (self *IUIAutomationElement) Get_CurrentAriaRole() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentAriaProperties dispatches through IUIAutomationElement's vtable slot 46.
 func (self *IUIAutomationElement) Get_CurrentAriaProperties() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentIsDataValidForForm dispatches through IUIAutomationElement's vtable slot 47.
 func (self *IUIAutomationElement) Get_CurrentIsDataValidForForm() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentControllerFor dispatches through IUIAutomationElement's vtable slot 48.
 func (self *IUIAutomationElement) Get_CurrentControllerFor() (*IUIAutomationElementArray, error) {
-	var _retVal *IUIAutomationElementArray
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElementArray)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentDescribedBy dispatches through IUIAutomationElement's vtable slot 49.
 func (self *IUIAutomationElement) Get_CurrentDescribedBy() (*IUIAutomationElementArray, error) {
-	var _retVal *IUIAutomationElementArray
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElementArray)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentFlowsTo dispatches through IUIAutomationElement's vtable slot 50.
 func (self *IUIAutomationElement) Get_CurrentFlowsTo() (*IUIAutomationElementArray, error) {
-	var _retVal *IUIAutomationElementArray
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElementArray)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentProviderDescription dispatches through IUIAutomationElement's vtable slot 51.
 func (self *IUIAutomationElement) Get_CurrentProviderDescription() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedProcessId dispatches through IUIAutomationElement's vtable slot 52.
 func (self *IUIAutomationElement) Get_CachedProcessId() (int32, error) {
-	var _retVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedControlType dispatches through IUIAutomationElement's vtable slot 53.
 func (self *IUIAutomationElement) Get_CachedControlType() (UIA_CONTROLTYPE_ID, error) {
-	var _retVal UIA_CONTROLTYPE_ID
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(UIA_CONTROLTYPE_ID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedLocalizedControlType dispatches through IUIAutomationElement's vtable slot 54.
 func (self *IUIAutomationElement) Get_CachedLocalizedControlType() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedName dispatches through IUIAutomationElement's vtable slot 55.
 func (self *IUIAutomationElement) Get_CachedName() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedAcceleratorKey dispatches through IUIAutomationElement's vtable slot 56.
 func (self *IUIAutomationElement) Get_CachedAcceleratorKey() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedAccessKey dispatches through IUIAutomationElement's vtable slot 57.
 func (self *IUIAutomationElement) Get_CachedAccessKey() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedHasKeyboardFocus dispatches through IUIAutomationElement's vtable slot 58.
 func (self *IUIAutomationElement) Get_CachedHasKeyboardFocus() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedIsKeyboardFocusable dispatches through IUIAutomationElement's vtable slot 59.
 func (self *IUIAutomationElement) Get_CachedIsKeyboardFocusable() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedIsEnabled dispatches through IUIAutomationElement's vtable slot 60.
 func (self *IUIAutomationElement) Get_CachedIsEnabled() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedAutomationId dispatches through IUIAutomationElement's vtable slot 61.
 func (self *IUIAutomationElement) Get_CachedAutomationId() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedClassName dispatches through IUIAutomationElement's vtable slot 62.
 func (self *IUIAutomationElement) Get_CachedClassName() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedHelpText dispatches through IUIAutomationElement's vtable slot 63.
 func (self *IUIAutomationElement) Get_CachedHelpText() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedCulture dispatches through IUIAutomationElement's vtable slot 64.
 func (self *IUIAutomationElement) Get_CachedCulture() (int32, error) {
-	var _retVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedIsControlElement dispatches through IUIAutomationElement's vtable slot 65.
 func (self *IUIAutomationElement) Get_CachedIsControlElement() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedIsContentElement dispatches through IUIAutomationElement's vtable slot 66.
 func (self *IUIAutomationElement) Get_CachedIsContentElement() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedIsPassword dispatches through IUIAutomationElement's vtable slot 67.
 func (self *IUIAutomationElement) Get_CachedIsPassword() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedNativeWindowHandle dispatches through IUIAutomationElement's vtable slot 68.
 func (self *IUIAutomationElement) Get_CachedNativeWindowHandle() (foundation.HWND, error) {
-	var _retVal foundation.HWND
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.HWND)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedItemType dispatches through IUIAutomationElement's vtable slot 69.
 func (self *IUIAutomationElement) Get_CachedItemType() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedIsOffscreen dispatches through IUIAutomationElement's vtable slot 70.
 func (self *IUIAutomationElement) Get_CachedIsOffscreen() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedOrientation dispatches through IUIAutomationElement's vtable slot 71.
 func (self *IUIAutomationElement) Get_CachedOrientation() (OrientationType, error) {
-	var _retVal OrientationType
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(OrientationType)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedFrameworkId dispatches through IUIAutomationElement's vtable slot 72.
 func (self *IUIAutomationElement) Get_CachedFrameworkId() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[72], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[72], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedIsRequiredForForm dispatches through IUIAutomationElement's vtable slot 73.
 func (self *IUIAutomationElement) Get_CachedIsRequiredForForm() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedItemStatus dispatches through IUIAutomationElement's vtable slot 74.
 func (self *IUIAutomationElement) Get_CachedItemStatus() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[74], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[74], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedBoundingRectangle dispatches through IUIAutomationElement's vtable slot 75.
 func (self *IUIAutomationElement) Get_CachedBoundingRectangle() (foundation.RECT, error) {
-	var _retVal foundation.RECT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[75], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.RECT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[75], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedLabeledBy dispatches through IUIAutomationElement's vtable slot 76.
 func (self *IUIAutomationElement) Get_CachedLabeledBy() (*IUIAutomationElement, error) {
-	var _retVal *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[76], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[76], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedAriaRole dispatches through IUIAutomationElement's vtable slot 77.
 func (self *IUIAutomationElement) Get_CachedAriaRole() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[77], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[77], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedAriaProperties dispatches through IUIAutomationElement's vtable slot 78.
 func (self *IUIAutomationElement) Get_CachedAriaProperties() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedIsDataValidForForm dispatches through IUIAutomationElement's vtable slot 79.
 func (self *IUIAutomationElement) Get_CachedIsDataValidForForm() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[79], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[79], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedControllerFor dispatches through IUIAutomationElement's vtable slot 80.
 func (self *IUIAutomationElement) Get_CachedControllerFor() (*IUIAutomationElementArray, error) {
-	var _retVal *IUIAutomationElementArray
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[80], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElementArray)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[80], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedDescribedBy dispatches through IUIAutomationElement's vtable slot 81.
 func (self *IUIAutomationElement) Get_CachedDescribedBy() (*IUIAutomationElementArray, error) {
-	var _retVal *IUIAutomationElementArray
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElementArray)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedFlowsTo dispatches through IUIAutomationElement's vtable slot 82.
 func (self *IUIAutomationElement) Get_CachedFlowsTo() (*IUIAutomationElementArray, error) {
-	var _retVal *IUIAutomationElementArray
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElementArray)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedProviderDescription dispatches through IUIAutomationElement's vtable slot 83.
 func (self *IUIAutomationElement) Get_CachedProviderDescription() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetClickablePoint dispatches through IUIAutomationElement's vtable slot 84.
 func (self *IUIAutomationElement) GetClickablePoint(clickable *foundation.POINT) (foundation.BOOL, error) {
-	var _gotClickable foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clickable)), uintptr(unsafe.Pointer(&_gotClickable)))
-	return _gotClickable, win32.ErrIfFailed(int32(r1))
+	_gotClickable := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clickable)), uintptr(win32.OutParam(unsafe.Pointer(_gotClickable))))
+	return *_gotClickable, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationElement2: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationelement2
@@ -3334,44 +3334,44 @@ var IID_IUIAutomationElement2 = win32.GUID{Data1: 0x6749c683, Data2: 0xf70d, Dat
 
 // Get_CurrentOptimizeForVisualContent dispatches through IUIAutomationElement2's vtable slot 85.
 func (self *IUIAutomationElement2) Get_CurrentOptimizeForVisualContent() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedOptimizeForVisualContent dispatches through IUIAutomationElement2's vtable slot 86.
 func (self *IUIAutomationElement2) Get_CachedOptimizeForVisualContent() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentLiveSetting dispatches through IUIAutomationElement2's vtable slot 87.
 func (self *IUIAutomationElement2) Get_CurrentLiveSetting() (LiveSetting, error) {
-	var _retVal LiveSetting
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[87], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(LiveSetting)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[87], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedLiveSetting dispatches through IUIAutomationElement2's vtable slot 88.
 func (self *IUIAutomationElement2) Get_CachedLiveSetting() (LiveSetting, error) {
-	var _retVal LiveSetting
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[88], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(LiveSetting)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[88], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentFlowsFrom dispatches through IUIAutomationElement2's vtable slot 89.
 func (self *IUIAutomationElement2) Get_CurrentFlowsFrom() (*IUIAutomationElementArray, error) {
-	var _retVal *IUIAutomationElementArray
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[89], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElementArray)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[89], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedFlowsFrom dispatches through IUIAutomationElement2's vtable slot 90.
 func (self *IUIAutomationElement2) Get_CachedFlowsFrom() (*IUIAutomationElementArray, error) {
-	var _retVal *IUIAutomationElementArray
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElementArray)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationElement3: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationelement3
@@ -3391,16 +3391,16 @@ func (self *IUIAutomationElement3) ShowContextMenu() error {
 
 // Get_CurrentIsPeripheral dispatches through IUIAutomationElement3's vtable slot 92.
 func (self *IUIAutomationElement3) Get_CurrentIsPeripheral() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[92], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[92], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedIsPeripheral dispatches through IUIAutomationElement3's vtable slot 93.
 func (self *IUIAutomationElement3) Get_CachedIsPeripheral() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[93], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[93], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationElement4: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationelement4
@@ -3414,72 +3414,72 @@ var IID_IUIAutomationElement4 = win32.GUID{Data1: 0x3b6e233c, Data2: 0x52fb, Dat
 
 // Get_CurrentPositionInSet dispatches through IUIAutomationElement4's vtable slot 94.
 func (self *IUIAutomationElement4) Get_CurrentPositionInSet() (int32, error) {
-	var _retVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[94], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[94], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentSizeOfSet dispatches through IUIAutomationElement4's vtable slot 95.
 func (self *IUIAutomationElement4) Get_CurrentSizeOfSet() (int32, error) {
-	var _retVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[95], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[95], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentLevel dispatches through IUIAutomationElement4's vtable slot 96.
 func (self *IUIAutomationElement4) Get_CurrentLevel() (int32, error) {
-	var _retVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[96], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[96], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentAnnotationTypes dispatches through IUIAutomationElement4's vtable slot 97.
 func (self *IUIAutomationElement4) Get_CurrentAnnotationTypes() (*systemcom.SAFEARRAY, error) {
-	var _retVal *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[97], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[97], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentAnnotationObjects dispatches through IUIAutomationElement4's vtable slot 98.
 func (self *IUIAutomationElement4) Get_CurrentAnnotationObjects() (*IUIAutomationElementArray, error) {
-	var _retVal *IUIAutomationElementArray
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[98], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElementArray)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[98], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedPositionInSet dispatches through IUIAutomationElement4's vtable slot 99.
 func (self *IUIAutomationElement4) Get_CachedPositionInSet() (int32, error) {
-	var _retVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[99], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[99], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedSizeOfSet dispatches through IUIAutomationElement4's vtable slot 100.
 func (self *IUIAutomationElement4) Get_CachedSizeOfSet() (int32, error) {
-	var _retVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[100], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[100], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedLevel dispatches through IUIAutomationElement4's vtable slot 101.
 func (self *IUIAutomationElement4) Get_CachedLevel() (int32, error) {
-	var _retVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[101], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[101], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedAnnotationTypes dispatches through IUIAutomationElement4's vtable slot 102.
 func (self *IUIAutomationElement4) Get_CachedAnnotationTypes() (*systemcom.SAFEARRAY, error) {
-	var _retVal *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[102], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[102], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedAnnotationObjects dispatches through IUIAutomationElement4's vtable slot 103.
 func (self *IUIAutomationElement4) Get_CachedAnnotationObjects() (*IUIAutomationElementArray, error) {
-	var _retVal *IUIAutomationElementArray
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[103], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElementArray)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[103], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationElement5: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationelement5
@@ -3493,30 +3493,30 @@ var IID_IUIAutomationElement5 = win32.GUID{Data1: 0x98141c1d, Data2: 0x0d0e, Dat
 
 // Get_CurrentLandmarkType dispatches through IUIAutomationElement5's vtable slot 104.
 func (self *IUIAutomationElement5) Get_CurrentLandmarkType() (UIA_LANDMARKTYPE_ID, error) {
-	var _retVal UIA_LANDMARKTYPE_ID
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[104], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(UIA_LANDMARKTYPE_ID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[104], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentLocalizedLandmarkType dispatches through IUIAutomationElement5's vtable slot 105.
 func (self *IUIAutomationElement5) Get_CurrentLocalizedLandmarkType() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[105], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[105], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedLandmarkType dispatches through IUIAutomationElement5's vtable slot 106.
 func (self *IUIAutomationElement5) Get_CachedLandmarkType() (UIA_LANDMARKTYPE_ID, error) {
-	var _retVal UIA_LANDMARKTYPE_ID
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[106], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(UIA_LANDMARKTYPE_ID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[106], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedLocalizedLandmarkType dispatches through IUIAutomationElement5's vtable slot 107.
 func (self *IUIAutomationElement5) Get_CachedLocalizedLandmarkType() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[107], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[107], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationElement6: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationelement6
@@ -3530,16 +3530,16 @@ var IID_IUIAutomationElement6 = win32.GUID{Data1: 0x4780d450, Data2: 0x8bca, Dat
 
 // Get_CurrentFullDescription dispatches through IUIAutomationElement6's vtable slot 108.
 func (self *IUIAutomationElement6) Get_CurrentFullDescription() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[108], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[108], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedFullDescription dispatches through IUIAutomationElement6's vtable slot 109.
 func (self *IUIAutomationElement6) Get_CachedFullDescription() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[109], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[109], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationElement7: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationelement7
@@ -3553,37 +3553,37 @@ var IID_IUIAutomationElement7 = win32.GUID{Data1: 0x204e8572, Data2: 0xcfc3, Dat
 
 // FindFirstWithOptions dispatches through IUIAutomationElement7's vtable slot 110.
 func (self *IUIAutomationElement7) FindFirstWithOptions(scope TreeScope, condition *IUIAutomationCondition, traversalOptions TreeTraversalOptions, root *IUIAutomationElement) (*IUIAutomationElement, error) {
-	var _found *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[110], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(condition)), uintptr(traversalOptions), uintptr(unsafe.Pointer(root)), uintptr(unsafe.Pointer(&_found)))
-	return _found, win32.ErrIfFailed(int32(r1))
+	_found := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[110], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(condition)), uintptr(traversalOptions), uintptr(unsafe.Pointer(root)), uintptr(win32.OutParam(unsafe.Pointer(_found))))
+	return *_found, win32.ErrIfFailed(int32(r1))
 }
 
 // FindAllWithOptions dispatches through IUIAutomationElement7's vtable slot 111.
 func (self *IUIAutomationElement7) FindAllWithOptions(scope TreeScope, condition *IUIAutomationCondition, traversalOptions TreeTraversalOptions, root *IUIAutomationElement) (*IUIAutomationElementArray, error) {
-	var _found *IUIAutomationElementArray
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[111], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(condition)), uintptr(traversalOptions), uintptr(unsafe.Pointer(root)), uintptr(unsafe.Pointer(&_found)))
-	return _found, win32.ErrIfFailed(int32(r1))
+	_found := new(*IUIAutomationElementArray)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[111], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(condition)), uintptr(traversalOptions), uintptr(unsafe.Pointer(root)), uintptr(win32.OutParam(unsafe.Pointer(_found))))
+	return *_found, win32.ErrIfFailed(int32(r1))
 }
 
 // FindFirstWithOptionsBuildCache dispatches through IUIAutomationElement7's vtable slot 112.
 func (self *IUIAutomationElement7) FindFirstWithOptionsBuildCache(scope TreeScope, condition *IUIAutomationCondition, cacheRequest *IUIAutomationCacheRequest, traversalOptions TreeTraversalOptions, root *IUIAutomationElement) (*IUIAutomationElement, error) {
-	var _found *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[112], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(condition)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(traversalOptions), uintptr(unsafe.Pointer(root)), uintptr(unsafe.Pointer(&_found)))
-	return _found, win32.ErrIfFailed(int32(r1))
+	_found := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[112], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(condition)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(traversalOptions), uintptr(unsafe.Pointer(root)), uintptr(win32.OutParam(unsafe.Pointer(_found))))
+	return *_found, win32.ErrIfFailed(int32(r1))
 }
 
 // FindAllWithOptionsBuildCache dispatches through IUIAutomationElement7's vtable slot 113.
 func (self *IUIAutomationElement7) FindAllWithOptionsBuildCache(scope TreeScope, condition *IUIAutomationCondition, cacheRequest *IUIAutomationCacheRequest, traversalOptions TreeTraversalOptions, root *IUIAutomationElement) (*IUIAutomationElementArray, error) {
-	var _found *IUIAutomationElementArray
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[113], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(condition)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(traversalOptions), uintptr(unsafe.Pointer(root)), uintptr(unsafe.Pointer(&_found)))
-	return _found, win32.ErrIfFailed(int32(r1))
+	_found := new(*IUIAutomationElementArray)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[113], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(condition)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(traversalOptions), uintptr(unsafe.Pointer(root)), uintptr(win32.OutParam(unsafe.Pointer(_found))))
+	return *_found, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentMetadataValue dispatches through IUIAutomationElement7's vtable slot 114.
 func (self *IUIAutomationElement7) GetCurrentMetadataValue(targetId int32, metadataId UIA_METADATA_ID) (systemvariant.VARIANT, error) {
-	var _returnVal systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[114], uintptr(unsafe.Pointer(self)), uintptr(targetId), uintptr(metadataId), uintptr(unsafe.Pointer(&_returnVal)))
-	return _returnVal, win32.ErrIfFailed(int32(r1))
+	_returnVal := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[114], uintptr(unsafe.Pointer(self)), uintptr(targetId), uintptr(metadataId), uintptr(win32.OutParam(unsafe.Pointer(_returnVal))))
+	return *_returnVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationElement8: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationelement8
@@ -3597,16 +3597,16 @@ var IID_IUIAutomationElement8 = win32.GUID{Data1: 0x8c60217d, Data2: 0x5411, Dat
 
 // Get_CurrentHeadingLevel dispatches through IUIAutomationElement8's vtable slot 115.
 func (self *IUIAutomationElement8) Get_CurrentHeadingLevel() (UIA_HEADINGLEVEL_ID, error) {
-	var _retVal UIA_HEADINGLEVEL_ID
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[115], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(UIA_HEADINGLEVEL_ID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[115], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedHeadingLevel dispatches through IUIAutomationElement8's vtable slot 116.
 func (self *IUIAutomationElement8) Get_CachedHeadingLevel() (UIA_HEADINGLEVEL_ID, error) {
-	var _retVal UIA_HEADINGLEVEL_ID
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[116], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(UIA_HEADINGLEVEL_ID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[116], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationElement9: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationelement9
@@ -3620,16 +3620,16 @@ var IID_IUIAutomationElement9 = win32.GUID{Data1: 0x39325fac, Data2: 0x039d, Dat
 
 // Get_CurrentIsDialog dispatches through IUIAutomationElement9's vtable slot 117.
 func (self *IUIAutomationElement9) Get_CurrentIsDialog() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[117], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[117], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedIsDialog dispatches through IUIAutomationElement9's vtable slot 118.
 func (self *IUIAutomationElement9) Get_CachedIsDialog() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[118], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[118], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationElementArray: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationelementarray
@@ -3643,16 +3643,16 @@ var IID_IUIAutomationElementArray = win32.GUID{Data1: 0x14314595, Data2: 0xb4bc,
 
 // Get_Length dispatches through IUIAutomationElementArray's vtable slot 3.
 func (self *IUIAutomationElementArray) Get_Length() (int32, error) {
-	var _length int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_length)))
-	return _length, win32.ErrIfFailed(int32(r1))
+	_length := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_length))))
+	return *_length, win32.ErrIfFailed(int32(r1))
 }
 
 // GetElement dispatches through IUIAutomationElementArray's vtable slot 4.
 func (self *IUIAutomationElementArray) GetElement(index int32) (*IUIAutomationElement, error) {
-	var _element *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_element)))
-	return _element, win32.ErrIfFailed(int32(r1))
+	_element := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(win32.OutParam(unsafe.Pointer(_element))))
+	return *_element, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationEventHandler: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationeventhandler
@@ -3752,16 +3752,16 @@ func (self *IUIAutomationExpandCollapsePattern) Collapse() error {
 
 // Get_CurrentExpandCollapseState dispatches through IUIAutomationExpandCollapsePattern's vtable slot 5.
 func (self *IUIAutomationExpandCollapsePattern) Get_CurrentExpandCollapseState() (ExpandCollapseState, error) {
-	var _retVal ExpandCollapseState
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(ExpandCollapseState)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedExpandCollapseState dispatches through IUIAutomationExpandCollapsePattern's vtable slot 6.
 func (self *IUIAutomationExpandCollapsePattern) Get_CachedExpandCollapseState() (ExpandCollapseState, error) {
-	var _retVal ExpandCollapseState
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(ExpandCollapseState)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationFocusChangedEventHandler: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationfocuschangedeventhandler
@@ -3790,72 +3790,72 @@ var IID_IUIAutomationGridItemPattern = win32.GUID{Data1: 0x78f8ef57, Data2: 0x66
 
 // Get_CurrentContainingGrid dispatches through IUIAutomationGridItemPattern's vtable slot 3.
 func (self *IUIAutomationGridItemPattern) Get_CurrentContainingGrid() (*IUIAutomationElement, error) {
-	var _retVal *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentRow dispatches through IUIAutomationGridItemPattern's vtable slot 4.
 func (self *IUIAutomationGridItemPattern) Get_CurrentRow() (int32, error) {
-	var _retVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentColumn dispatches through IUIAutomationGridItemPattern's vtable slot 5.
 func (self *IUIAutomationGridItemPattern) Get_CurrentColumn() (int32, error) {
-	var _retVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentRowSpan dispatches through IUIAutomationGridItemPattern's vtable slot 6.
 func (self *IUIAutomationGridItemPattern) Get_CurrentRowSpan() (int32, error) {
-	var _retVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentColumnSpan dispatches through IUIAutomationGridItemPattern's vtable slot 7.
 func (self *IUIAutomationGridItemPattern) Get_CurrentColumnSpan() (int32, error) {
-	var _retVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedContainingGrid dispatches through IUIAutomationGridItemPattern's vtable slot 8.
 func (self *IUIAutomationGridItemPattern) Get_CachedContainingGrid() (*IUIAutomationElement, error) {
-	var _retVal *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedRow dispatches through IUIAutomationGridItemPattern's vtable slot 9.
 func (self *IUIAutomationGridItemPattern) Get_CachedRow() (int32, error) {
-	var _retVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedColumn dispatches through IUIAutomationGridItemPattern's vtable slot 10.
 func (self *IUIAutomationGridItemPattern) Get_CachedColumn() (int32, error) {
-	var _retVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedRowSpan dispatches through IUIAutomationGridItemPattern's vtable slot 11.
 func (self *IUIAutomationGridItemPattern) Get_CachedRowSpan() (int32, error) {
-	var _retVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedColumnSpan dispatches through IUIAutomationGridItemPattern's vtable slot 12.
 func (self *IUIAutomationGridItemPattern) Get_CachedColumnSpan() (int32, error) {
-	var _retVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationGridPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationgridpattern
@@ -3869,37 +3869,37 @@ var IID_IUIAutomationGridPattern = win32.GUID{Data1: 0x414c3cdc, Data2: 0x856b, 
 
 // GetItem dispatches through IUIAutomationGridPattern's vtable slot 3.
 func (self *IUIAutomationGridPattern) GetItem(row int32, column int32) (*IUIAutomationElement, error) {
-	var _element *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(row), uintptr(column), uintptr(unsafe.Pointer(&_element)))
-	return _element, win32.ErrIfFailed(int32(r1))
+	_element := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(row), uintptr(column), uintptr(win32.OutParam(unsafe.Pointer(_element))))
+	return *_element, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentRowCount dispatches through IUIAutomationGridPattern's vtable slot 4.
 func (self *IUIAutomationGridPattern) Get_CurrentRowCount() (int32, error) {
-	var _retVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentColumnCount dispatches through IUIAutomationGridPattern's vtable slot 5.
 func (self *IUIAutomationGridPattern) Get_CurrentColumnCount() (int32, error) {
-	var _retVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedRowCount dispatches through IUIAutomationGridPattern's vtable slot 6.
 func (self *IUIAutomationGridPattern) Get_CachedRowCount() (int32, error) {
-	var _retVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedColumnCount dispatches through IUIAutomationGridPattern's vtable slot 7.
 func (self *IUIAutomationGridPattern) Get_CachedColumnCount() (int32, error) {
-	var _retVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationInvokePattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationinvokepattern
@@ -3956,149 +3956,149 @@ func (self *IUIAutomationLegacyIAccessiblePattern) SetValue(szValue string) erro
 
 // Get_CurrentChildId dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 6.
 func (self *IUIAutomationLegacyIAccessiblePattern) Get_CurrentChildId() (int32, error) {
-	var _pRetVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentName dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 7.
 func (self *IUIAutomationLegacyIAccessiblePattern) Get_CurrentName() (foundation.BSTR, error) {
-	var _pszName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszName)))
-	return _pszName, win32.ErrIfFailed(int32(r1))
+	_pszName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pszName))))
+	return *_pszName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentValue dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 8.
 func (self *IUIAutomationLegacyIAccessiblePattern) Get_CurrentValue() (foundation.BSTR, error) {
-	var _pszValue foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszValue)))
-	return _pszValue, win32.ErrIfFailed(int32(r1))
+	_pszValue := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pszValue))))
+	return *_pszValue, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentDescription dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 9.
 func (self *IUIAutomationLegacyIAccessiblePattern) Get_CurrentDescription() (foundation.BSTR, error) {
-	var _pszDescription foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszDescription)))
-	return _pszDescription, win32.ErrIfFailed(int32(r1))
+	_pszDescription := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pszDescription))))
+	return *_pszDescription, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentRole dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 10.
 func (self *IUIAutomationLegacyIAccessiblePattern) Get_CurrentRole() (uint32, error) {
-	var _pdwRole uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pdwRole)))
-	return _pdwRole, win32.ErrIfFailed(int32(r1))
+	_pdwRole := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pdwRole))))
+	return *_pdwRole, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentState dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 11.
 func (self *IUIAutomationLegacyIAccessiblePattern) Get_CurrentState() (uint32, error) {
-	var _pdwState uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pdwState)))
-	return _pdwState, win32.ErrIfFailed(int32(r1))
+	_pdwState := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pdwState))))
+	return *_pdwState, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentHelp dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 12.
 func (self *IUIAutomationLegacyIAccessiblePattern) Get_CurrentHelp() (foundation.BSTR, error) {
-	var _pszHelp foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszHelp)))
-	return _pszHelp, win32.ErrIfFailed(int32(r1))
+	_pszHelp := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pszHelp))))
+	return *_pszHelp, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentKeyboardShortcut dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 13.
 func (self *IUIAutomationLegacyIAccessiblePattern) Get_CurrentKeyboardShortcut() (foundation.BSTR, error) {
-	var _pszKeyboardShortcut foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszKeyboardShortcut)))
-	return _pszKeyboardShortcut, win32.ErrIfFailed(int32(r1))
+	_pszKeyboardShortcut := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pszKeyboardShortcut))))
+	return *_pszKeyboardShortcut, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentSelection dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 14.
 func (self *IUIAutomationLegacyIAccessiblePattern) GetCurrentSelection() (*IUIAutomationElementArray, error) {
-	var _pvarSelectedChildren *IUIAutomationElementArray
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarSelectedChildren)))
-	return _pvarSelectedChildren, win32.ErrIfFailed(int32(r1))
+	_pvarSelectedChildren := new(*IUIAutomationElementArray)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pvarSelectedChildren))))
+	return *_pvarSelectedChildren, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentDefaultAction dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 15.
 func (self *IUIAutomationLegacyIAccessiblePattern) Get_CurrentDefaultAction() (foundation.BSTR, error) {
-	var _pszDefaultAction foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszDefaultAction)))
-	return _pszDefaultAction, win32.ErrIfFailed(int32(r1))
+	_pszDefaultAction := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pszDefaultAction))))
+	return *_pszDefaultAction, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedChildId dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 16.
 func (self *IUIAutomationLegacyIAccessiblePattern) Get_CachedChildId() (int32, error) {
-	var _pRetVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedName dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 17.
 func (self *IUIAutomationLegacyIAccessiblePattern) Get_CachedName() (foundation.BSTR, error) {
-	var _pszName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszName)))
-	return _pszName, win32.ErrIfFailed(int32(r1))
+	_pszName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pszName))))
+	return *_pszName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedValue dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 18.
 func (self *IUIAutomationLegacyIAccessiblePattern) Get_CachedValue() (foundation.BSTR, error) {
-	var _pszValue foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszValue)))
-	return _pszValue, win32.ErrIfFailed(int32(r1))
+	_pszValue := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pszValue))))
+	return *_pszValue, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedDescription dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 19.
 func (self *IUIAutomationLegacyIAccessiblePattern) Get_CachedDescription() (foundation.BSTR, error) {
-	var _pszDescription foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszDescription)))
-	return _pszDescription, win32.ErrIfFailed(int32(r1))
+	_pszDescription := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pszDescription))))
+	return *_pszDescription, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedRole dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 20.
 func (self *IUIAutomationLegacyIAccessiblePattern) Get_CachedRole() (uint32, error) {
-	var _pdwRole uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pdwRole)))
-	return _pdwRole, win32.ErrIfFailed(int32(r1))
+	_pdwRole := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pdwRole))))
+	return *_pdwRole, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedState dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 21.
 func (self *IUIAutomationLegacyIAccessiblePattern) Get_CachedState() (uint32, error) {
-	var _pdwState uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pdwState)))
-	return _pdwState, win32.ErrIfFailed(int32(r1))
+	_pdwState := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pdwState))))
+	return *_pdwState, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedHelp dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 22.
 func (self *IUIAutomationLegacyIAccessiblePattern) Get_CachedHelp() (foundation.BSTR, error) {
-	var _pszHelp foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszHelp)))
-	return _pszHelp, win32.ErrIfFailed(int32(r1))
+	_pszHelp := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pszHelp))))
+	return *_pszHelp, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedKeyboardShortcut dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 23.
 func (self *IUIAutomationLegacyIAccessiblePattern) Get_CachedKeyboardShortcut() (foundation.BSTR, error) {
-	var _pszKeyboardShortcut foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszKeyboardShortcut)))
-	return _pszKeyboardShortcut, win32.ErrIfFailed(int32(r1))
+	_pszKeyboardShortcut := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pszKeyboardShortcut))))
+	return *_pszKeyboardShortcut, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCachedSelection dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 24.
 func (self *IUIAutomationLegacyIAccessiblePattern) GetCachedSelection() (*IUIAutomationElementArray, error) {
-	var _pvarSelectedChildren *IUIAutomationElementArray
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarSelectedChildren)))
-	return _pvarSelectedChildren, win32.ErrIfFailed(int32(r1))
+	_pvarSelectedChildren := new(*IUIAutomationElementArray)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pvarSelectedChildren))))
+	return *_pvarSelectedChildren, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedDefaultAction dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 25.
 func (self *IUIAutomationLegacyIAccessiblePattern) Get_CachedDefaultAction() (foundation.BSTR, error) {
-	var _pszDefaultAction foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszDefaultAction)))
-	return _pszDefaultAction, win32.ErrIfFailed(int32(r1))
+	_pszDefaultAction := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pszDefaultAction))))
+	return *_pszDefaultAction, win32.ErrIfFailed(int32(r1))
 }
 
 // GetIAccessible dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 26.
 func (self *IUIAutomationLegacyIAccessiblePattern) GetIAccessible() (*IAccessible, error) {
-	var _ppAccessible *IAccessible
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppAccessible)))
-	return _ppAccessible, win32.ErrIfFailed(int32(r1))
+	_ppAccessible := new(*IAccessible)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppAccessible))))
+	return *_ppAccessible, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationMultipleViewPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationmultipleviewpattern
@@ -4112,9 +4112,9 @@ var IID_IUIAutomationMultipleViewPattern = win32.GUID{Data1: 0x8d253c91, Data2: 
 
 // GetViewName dispatches through IUIAutomationMultipleViewPattern's vtable slot 3.
 func (self *IUIAutomationMultipleViewPattern) GetViewName(view int32) (foundation.BSTR, error) {
-	var _name foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(view), uintptr(unsafe.Pointer(&_name)))
-	return _name, win32.ErrIfFailed(int32(r1))
+	_name := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(view), uintptr(win32.OutParam(unsafe.Pointer(_name))))
+	return *_name, win32.ErrIfFailed(int32(r1))
 }
 
 // SetCurrentView dispatches through IUIAutomationMultipleViewPattern's vtable slot 4.
@@ -4125,30 +4125,30 @@ func (self *IUIAutomationMultipleViewPattern) SetCurrentView(view int32) error {
 
 // Get_CurrentCurrentView dispatches through IUIAutomationMultipleViewPattern's vtable slot 5.
 func (self *IUIAutomationMultipleViewPattern) Get_CurrentCurrentView() (int32, error) {
-	var _retVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentSupportedViews dispatches through IUIAutomationMultipleViewPattern's vtable slot 6.
 func (self *IUIAutomationMultipleViewPattern) GetCurrentSupportedViews() (*systemcom.SAFEARRAY, error) {
-	var _retVal *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedCurrentView dispatches through IUIAutomationMultipleViewPattern's vtable slot 7.
 func (self *IUIAutomationMultipleViewPattern) Get_CachedCurrentView() (int32, error) {
-	var _retVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCachedSupportedViews dispatches through IUIAutomationMultipleViewPattern's vtable slot 8.
 func (self *IUIAutomationMultipleViewPattern) GetCachedSupportedViews() (*systemcom.SAFEARRAY, error) {
-	var _retVal *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationNotCondition: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationnotcondition
@@ -4162,9 +4162,9 @@ var IID_IUIAutomationNotCondition = win32.GUID{Data1: 0xf528b657, Data2: 0x847b,
 
 // GetChild dispatches through IUIAutomationNotCondition's vtable slot 3.
 func (self *IUIAutomationNotCondition) GetChild() (*IUIAutomationCondition, error) {
-	var _condition *IUIAutomationCondition
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_condition)))
-	return _condition, win32.ErrIfFailed(int32(r1))
+	_condition := new(*IUIAutomationCondition)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_condition))))
+	return *_condition, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationNotificationEventHandler: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationnotificationeventhandler
@@ -4193,9 +4193,9 @@ var IID_IUIAutomationObjectModelPattern = win32.GUID{Data1: 0x71c284b3, Data2: 0
 
 // GetUnderlyingObjectModel dispatches through IUIAutomationObjectModelPattern's vtable slot 3.
 func (self *IUIAutomationObjectModelPattern) GetUnderlyingObjectModel() (*systemcom.IUnknown, error) {
-	var _retVal *systemcom.IUnknown
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*systemcom.IUnknown)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationOrCondition: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationorcondition
@@ -4209,9 +4209,9 @@ var IID_IUIAutomationOrCondition = win32.GUID{Data1: 0x8753f032, Data2: 0x3db1, 
 
 // Get_ChildCount dispatches through IUIAutomationOrCondition's vtable slot 3.
 func (self *IUIAutomationOrCondition) Get_ChildCount() (int32, error) {
-	var _childCount int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_childCount)))
-	return _childCount, win32.ErrIfFailed(int32(r1))
+	_childCount := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_childCount))))
+	return *_childCount, win32.ErrIfFailed(int32(r1))
 }
 
 // GetChildrenAsNativeArray dispatches through IUIAutomationOrCondition's vtable slot 4.
@@ -4222,9 +4222,9 @@ func (self *IUIAutomationOrCondition) GetChildrenAsNativeArray(childArray ***IUI
 
 // GetChildren dispatches through IUIAutomationOrCondition's vtable slot 5.
 func (self *IUIAutomationOrCondition) GetChildren() (*systemcom.SAFEARRAY, error) {
-	var _childArray *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_childArray)))
-	return _childArray, win32.ErrIfFailed(int32(r1))
+	_childArray := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_childArray))))
+	return *_childArray, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationPatternHandler: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-iuiautomationpatternhandler
@@ -4290,23 +4290,23 @@ var IID_IUIAutomationPropertyCondition = win32.GUID{Data1: 0x99ebf2cb, Data2: 0x
 
 // Get_PropertyId dispatches through IUIAutomationPropertyCondition's vtable slot 3.
 func (self *IUIAutomationPropertyCondition) Get_PropertyId() (UIA_PROPERTY_ID, error) {
-	var _propertyId UIA_PROPERTY_ID
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_propertyId)))
-	return _propertyId, win32.ErrIfFailed(int32(r1))
+	_propertyId := new(UIA_PROPERTY_ID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_propertyId))))
+	return *_propertyId, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PropertyValue dispatches through IUIAutomationPropertyCondition's vtable slot 4.
 func (self *IUIAutomationPropertyCondition) Get_PropertyValue() (systemvariant.VARIANT, error) {
-	var _propertyValue systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_propertyValue)))
-	return _propertyValue, win32.ErrIfFailed(int32(r1))
+	_propertyValue := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_propertyValue))))
+	return *_propertyValue, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PropertyConditionFlags dispatches through IUIAutomationPropertyCondition's vtable slot 5.
 func (self *IUIAutomationPropertyCondition) Get_PropertyConditionFlags() (PropertyConditionFlags, error) {
-	var _flags PropertyConditionFlags
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_flags)))
-	return _flags, win32.ErrIfFailed(int32(r1))
+	_flags := new(PropertyConditionFlags)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_flags))))
+	return *_flags, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationProxyFactory: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationproxyfactory
@@ -4320,16 +4320,16 @@ var IID_IUIAutomationProxyFactory = win32.GUID{Data1: 0x85b94ecd, Data2: 0x849d,
 
 // CreateProvider dispatches through IUIAutomationProxyFactory's vtable slot 3.
 func (self *IUIAutomationProxyFactory) CreateProvider(hwnd foundation.HWND, idObject int32, idChild int32) (*IRawElementProviderSimple, error) {
-	var _provider *IRawElementProviderSimple
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(idObject), uintptr(idChild), uintptr(unsafe.Pointer(&_provider)))
-	return _provider, win32.ErrIfFailed(int32(r1))
+	_provider := new(*IRawElementProviderSimple)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(idObject), uintptr(idChild), uintptr(win32.OutParam(unsafe.Pointer(_provider))))
+	return *_provider, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ProxyFactoryId dispatches through IUIAutomationProxyFactory's vtable slot 4.
 func (self *IUIAutomationProxyFactory) Get_ProxyFactoryId() (foundation.BSTR, error) {
-	var _factoryId foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_factoryId)))
-	return _factoryId, win32.ErrIfFailed(int32(r1))
+	_factoryId := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_factoryId))))
+	return *_factoryId, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationProxyFactoryEntry: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationproxyfactoryentry
@@ -4343,44 +4343,44 @@ var IID_IUIAutomationProxyFactoryEntry = win32.GUID{Data1: 0xd50e472e, Data2: 0x
 
 // Get_ProxyFactory dispatches through IUIAutomationProxyFactoryEntry's vtable slot 3.
 func (self *IUIAutomationProxyFactoryEntry) Get_ProxyFactory() (*IUIAutomationProxyFactory, error) {
-	var _factory *IUIAutomationProxyFactory
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_factory)))
-	return _factory, win32.ErrIfFailed(int32(r1))
+	_factory := new(*IUIAutomationProxyFactory)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_factory))))
+	return *_factory, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ClassName dispatches through IUIAutomationProxyFactoryEntry's vtable slot 4.
 func (self *IUIAutomationProxyFactoryEntry) Get_ClassName() (foundation.BSTR, error) {
-	var _className foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_className)))
-	return _className, win32.ErrIfFailed(int32(r1))
+	_className := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_className))))
+	return *_className, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ImageName dispatches through IUIAutomationProxyFactoryEntry's vtable slot 5.
 func (self *IUIAutomationProxyFactoryEntry) Get_ImageName() (foundation.BSTR, error) {
-	var _imageName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_imageName)))
-	return _imageName, win32.ErrIfFailed(int32(r1))
+	_imageName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_imageName))))
+	return *_imageName, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_AllowSubstringMatch dispatches through IUIAutomationProxyFactoryEntry's vtable slot 6.
 func (self *IUIAutomationProxyFactoryEntry) Get_AllowSubstringMatch() (foundation.BOOL, error) {
-	var _allowSubstringMatch foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_allowSubstringMatch)))
-	return _allowSubstringMatch, win32.ErrIfFailed(int32(r1))
+	_allowSubstringMatch := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_allowSubstringMatch))))
+	return *_allowSubstringMatch, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CanCheckBaseClass dispatches through IUIAutomationProxyFactoryEntry's vtable slot 7.
 func (self *IUIAutomationProxyFactoryEntry) Get_CanCheckBaseClass() (foundation.BOOL, error) {
-	var _canCheckBaseClass foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_canCheckBaseClass)))
-	return _canCheckBaseClass, win32.ErrIfFailed(int32(r1))
+	_canCheckBaseClass := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_canCheckBaseClass))))
+	return *_canCheckBaseClass, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NeedsAdviseEvents dispatches through IUIAutomationProxyFactoryEntry's vtable slot 8.
 func (self *IUIAutomationProxyFactoryEntry) Get_NeedsAdviseEvents() (foundation.BOOL, error) {
-	var _adviseEvents foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_adviseEvents)))
-	return _adviseEvents, win32.ErrIfFailed(int32(r1))
+	_adviseEvents := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_adviseEvents))))
+	return *_adviseEvents, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ClassName dispatches through IUIAutomationProxyFactoryEntry's vtable slot 9.
@@ -4426,9 +4426,9 @@ func (self *IUIAutomationProxyFactoryEntry) SetWinEventsForAutomationEvent(event
 
 // GetWinEventsForAutomationEvent dispatches through IUIAutomationProxyFactoryEntry's vtable slot 15.
 func (self *IUIAutomationProxyFactoryEntry) GetWinEventsForAutomationEvent(eventId UIA_EVENT_ID, propertyId UIA_PROPERTY_ID) (*systemcom.SAFEARRAY, error) {
-	var _winEvents *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(eventId), uintptr(propertyId), uintptr(unsafe.Pointer(&_winEvents)))
-	return _winEvents, win32.ErrIfFailed(int32(r1))
+	_winEvents := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(eventId), uintptr(propertyId), uintptr(win32.OutParam(unsafe.Pointer(_winEvents))))
+	return *_winEvents, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationProxyFactoryMapping: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationproxyfactorymapping
@@ -4442,23 +4442,23 @@ var IID_IUIAutomationProxyFactoryMapping = win32.GUID{Data1: 0x09e31e18, Data2: 
 
 // Get_Count dispatches through IUIAutomationProxyFactoryMapping's vtable slot 3.
 func (self *IUIAutomationProxyFactoryMapping) Get_Count() (uint32, error) {
-	var _count uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
-	return _count, win32.ErrIfFailed(int32(r1))
+	_count := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_count))))
+	return *_count, win32.ErrIfFailed(int32(r1))
 }
 
 // GetTable dispatches through IUIAutomationProxyFactoryMapping's vtable slot 4.
 func (self *IUIAutomationProxyFactoryMapping) GetTable() (*systemcom.SAFEARRAY, error) {
-	var _table *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_table)))
-	return _table, win32.ErrIfFailed(int32(r1))
+	_table := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_table))))
+	return *_table, win32.ErrIfFailed(int32(r1))
 }
 
 // GetEntry dispatches through IUIAutomationProxyFactoryMapping's vtable slot 5.
 func (self *IUIAutomationProxyFactoryMapping) GetEntry(index uint32) (*IUIAutomationProxyFactoryEntry, error) {
-	var _entry *IUIAutomationProxyFactoryEntry
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_entry)))
-	return _entry, win32.ErrIfFailed(int32(r1))
+	_entry := new(*IUIAutomationProxyFactoryEntry)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(win32.OutParam(unsafe.Pointer(_entry))))
+	return *_entry, win32.ErrIfFailed(int32(r1))
 }
 
 // SetTable dispatches through IUIAutomationProxyFactoryMapping's vtable slot 6.
@@ -4508,86 +4508,86 @@ var IID_IUIAutomationRangeValuePattern = win32.GUID{Data1: 0x59213f4f, Data2: 0x
 
 // Get_CurrentValue dispatches through IUIAutomationRangeValuePattern's vtable slot 4.
 func (self *IUIAutomationRangeValuePattern) Get_CurrentValue() (float64, error) {
-	var _retVal float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentIsReadOnly dispatches through IUIAutomationRangeValuePattern's vtable slot 5.
 func (self *IUIAutomationRangeValuePattern) Get_CurrentIsReadOnly() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentMaximum dispatches through IUIAutomationRangeValuePattern's vtable slot 6.
 func (self *IUIAutomationRangeValuePattern) Get_CurrentMaximum() (float64, error) {
-	var _retVal float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentMinimum dispatches through IUIAutomationRangeValuePattern's vtable slot 7.
 func (self *IUIAutomationRangeValuePattern) Get_CurrentMinimum() (float64, error) {
-	var _retVal float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentLargeChange dispatches through IUIAutomationRangeValuePattern's vtable slot 8.
 func (self *IUIAutomationRangeValuePattern) Get_CurrentLargeChange() (float64, error) {
-	var _retVal float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentSmallChange dispatches through IUIAutomationRangeValuePattern's vtable slot 9.
 func (self *IUIAutomationRangeValuePattern) Get_CurrentSmallChange() (float64, error) {
-	var _retVal float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedValue dispatches through IUIAutomationRangeValuePattern's vtable slot 10.
 func (self *IUIAutomationRangeValuePattern) Get_CachedValue() (float64, error) {
-	var _retVal float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedIsReadOnly dispatches through IUIAutomationRangeValuePattern's vtable slot 11.
 func (self *IUIAutomationRangeValuePattern) Get_CachedIsReadOnly() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedMaximum dispatches through IUIAutomationRangeValuePattern's vtable slot 12.
 func (self *IUIAutomationRangeValuePattern) Get_CachedMaximum() (float64, error) {
-	var _retVal float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedMinimum dispatches through IUIAutomationRangeValuePattern's vtable slot 13.
 func (self *IUIAutomationRangeValuePattern) Get_CachedMinimum() (float64, error) {
-	var _retVal float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedLargeChange dispatches through IUIAutomationRangeValuePattern's vtable slot 14.
 func (self *IUIAutomationRangeValuePattern) Get_CachedLargeChange() (float64, error) {
-	var _retVal float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedSmallChange dispatches through IUIAutomationRangeValuePattern's vtable slot 15.
 func (self *IUIAutomationRangeValuePattern) Get_CachedSmallChange() (float64, error) {
-	var _retVal float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationRegistrar: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-iuiautomationregistrar
@@ -4657,86 +4657,86 @@ func (self *IUIAutomationScrollPattern) Scroll(horizontalAmount ScrollAmount, ve
 
 // Get_CurrentHorizontalScrollPercent dispatches through IUIAutomationScrollPattern's vtable slot 5.
 func (self *IUIAutomationScrollPattern) Get_CurrentHorizontalScrollPercent() (float64, error) {
-	var _retVal float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentVerticalScrollPercent dispatches through IUIAutomationScrollPattern's vtable slot 6.
 func (self *IUIAutomationScrollPattern) Get_CurrentVerticalScrollPercent() (float64, error) {
-	var _retVal float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentHorizontalViewSize dispatches through IUIAutomationScrollPattern's vtable slot 7.
 func (self *IUIAutomationScrollPattern) Get_CurrentHorizontalViewSize() (float64, error) {
-	var _retVal float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentVerticalViewSize dispatches through IUIAutomationScrollPattern's vtable slot 8.
 func (self *IUIAutomationScrollPattern) Get_CurrentVerticalViewSize() (float64, error) {
-	var _retVal float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentHorizontallyScrollable dispatches through IUIAutomationScrollPattern's vtable slot 9.
 func (self *IUIAutomationScrollPattern) Get_CurrentHorizontallyScrollable() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentVerticallyScrollable dispatches through IUIAutomationScrollPattern's vtable slot 10.
 func (self *IUIAutomationScrollPattern) Get_CurrentVerticallyScrollable() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedHorizontalScrollPercent dispatches through IUIAutomationScrollPattern's vtable slot 11.
 func (self *IUIAutomationScrollPattern) Get_CachedHorizontalScrollPercent() (float64, error) {
-	var _retVal float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedVerticalScrollPercent dispatches through IUIAutomationScrollPattern's vtable slot 12.
 func (self *IUIAutomationScrollPattern) Get_CachedVerticalScrollPercent() (float64, error) {
-	var _retVal float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedHorizontalViewSize dispatches through IUIAutomationScrollPattern's vtable slot 13.
 func (self *IUIAutomationScrollPattern) Get_CachedHorizontalViewSize() (float64, error) {
-	var _retVal float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedVerticalViewSize dispatches through IUIAutomationScrollPattern's vtable slot 14.
 func (self *IUIAutomationScrollPattern) Get_CachedVerticalViewSize() (float64, error) {
-	var _retVal float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedHorizontallyScrollable dispatches through IUIAutomationScrollPattern's vtable slot 15.
 func (self *IUIAutomationScrollPattern) Get_CachedHorizontallyScrollable() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedVerticallyScrollable dispatches through IUIAutomationScrollPattern's vtable slot 16.
 func (self *IUIAutomationScrollPattern) Get_CachedVerticallyScrollable() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationSelectionItemPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationselectionitempattern
@@ -4768,30 +4768,30 @@ func (self *IUIAutomationSelectionItemPattern) RemoveFromSelection() error {
 
 // Get_CurrentIsSelected dispatches through IUIAutomationSelectionItemPattern's vtable slot 6.
 func (self *IUIAutomationSelectionItemPattern) Get_CurrentIsSelected() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentSelectionContainer dispatches through IUIAutomationSelectionItemPattern's vtable slot 7.
 func (self *IUIAutomationSelectionItemPattern) Get_CurrentSelectionContainer() (*IUIAutomationElement, error) {
-	var _retVal *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedIsSelected dispatches through IUIAutomationSelectionItemPattern's vtable slot 8.
 func (self *IUIAutomationSelectionItemPattern) Get_CachedIsSelected() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedSelectionContainer dispatches through IUIAutomationSelectionItemPattern's vtable slot 9.
 func (self *IUIAutomationSelectionItemPattern) Get_CachedSelectionContainer() (*IUIAutomationElement, error) {
-	var _retVal *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationSelectionPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationselectionpattern
@@ -4805,44 +4805,44 @@ var IID_IUIAutomationSelectionPattern = win32.GUID{Data1: 0x5ed5202e, Data2: 0xb
 
 // GetCurrentSelection dispatches through IUIAutomationSelectionPattern's vtable slot 3.
 func (self *IUIAutomationSelectionPattern) GetCurrentSelection() (*IUIAutomationElementArray, error) {
-	var _retVal *IUIAutomationElementArray
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElementArray)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentCanSelectMultiple dispatches through IUIAutomationSelectionPattern's vtable slot 4.
 func (self *IUIAutomationSelectionPattern) Get_CurrentCanSelectMultiple() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentIsSelectionRequired dispatches through IUIAutomationSelectionPattern's vtable slot 5.
 func (self *IUIAutomationSelectionPattern) Get_CurrentIsSelectionRequired() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCachedSelection dispatches through IUIAutomationSelectionPattern's vtable slot 6.
 func (self *IUIAutomationSelectionPattern) GetCachedSelection() (*IUIAutomationElementArray, error) {
-	var _retVal *IUIAutomationElementArray
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElementArray)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedCanSelectMultiple dispatches through IUIAutomationSelectionPattern's vtable slot 7.
 func (self *IUIAutomationSelectionPattern) Get_CachedCanSelectMultiple() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedIsSelectionRequired dispatches through IUIAutomationSelectionPattern's vtable slot 8.
 func (self *IUIAutomationSelectionPattern) Get_CachedIsSelectionRequired() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationSelectionPattern2: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationselectionpattern2
@@ -4856,58 +4856,58 @@ var IID_IUIAutomationSelectionPattern2 = win32.GUID{Data1: 0x0532bfae, Data2: 0x
 
 // Get_CurrentFirstSelectedItem dispatches through IUIAutomationSelectionPattern2's vtable slot 9.
 func (self *IUIAutomationSelectionPattern2) Get_CurrentFirstSelectedItem() (*IUIAutomationElement, error) {
-	var _retVal *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentLastSelectedItem dispatches through IUIAutomationSelectionPattern2's vtable slot 10.
 func (self *IUIAutomationSelectionPattern2) Get_CurrentLastSelectedItem() (*IUIAutomationElement, error) {
-	var _retVal *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentCurrentSelectedItem dispatches through IUIAutomationSelectionPattern2's vtable slot 11.
 func (self *IUIAutomationSelectionPattern2) Get_CurrentCurrentSelectedItem() (*IUIAutomationElement, error) {
-	var _retVal *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentItemCount dispatches through IUIAutomationSelectionPattern2's vtable slot 12.
 func (self *IUIAutomationSelectionPattern2) Get_CurrentItemCount() (int32, error) {
-	var _retVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedFirstSelectedItem dispatches through IUIAutomationSelectionPattern2's vtable slot 13.
 func (self *IUIAutomationSelectionPattern2) Get_CachedFirstSelectedItem() (*IUIAutomationElement, error) {
-	var _retVal *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedLastSelectedItem dispatches through IUIAutomationSelectionPattern2's vtable slot 14.
 func (self *IUIAutomationSelectionPattern2) Get_CachedLastSelectedItem() (*IUIAutomationElement, error) {
-	var _retVal *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedCurrentSelectedItem dispatches through IUIAutomationSelectionPattern2's vtable slot 15.
 func (self *IUIAutomationSelectionPattern2) Get_CachedCurrentSelectedItem() (*IUIAutomationElement, error) {
-	var _retVal *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedItemCount dispatches through IUIAutomationSelectionPattern2's vtable slot 16.
 func (self *IUIAutomationSelectionPattern2) Get_CachedItemCount() (int32, error) {
-	var _retVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationSpreadsheetItemPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationspreadsheetitempattern
@@ -4921,44 +4921,44 @@ var IID_IUIAutomationSpreadsheetItemPattern = win32.GUID{Data1: 0x7d4fb86c, Data
 
 // Get_CurrentFormula dispatches through IUIAutomationSpreadsheetItemPattern's vtable slot 3.
 func (self *IUIAutomationSpreadsheetItemPattern) Get_CurrentFormula() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentAnnotationObjects dispatches through IUIAutomationSpreadsheetItemPattern's vtable slot 4.
 func (self *IUIAutomationSpreadsheetItemPattern) GetCurrentAnnotationObjects() (*IUIAutomationElementArray, error) {
-	var _retVal *IUIAutomationElementArray
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElementArray)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentAnnotationTypes dispatches through IUIAutomationSpreadsheetItemPattern's vtable slot 5.
 func (self *IUIAutomationSpreadsheetItemPattern) GetCurrentAnnotationTypes() (*systemcom.SAFEARRAY, error) {
-	var _retVal *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedFormula dispatches through IUIAutomationSpreadsheetItemPattern's vtable slot 6.
 func (self *IUIAutomationSpreadsheetItemPattern) Get_CachedFormula() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCachedAnnotationObjects dispatches through IUIAutomationSpreadsheetItemPattern's vtable slot 7.
 func (self *IUIAutomationSpreadsheetItemPattern) GetCachedAnnotationObjects() (*IUIAutomationElementArray, error) {
-	var _retVal *IUIAutomationElementArray
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElementArray)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCachedAnnotationTypes dispatches through IUIAutomationSpreadsheetItemPattern's vtable slot 8.
 func (self *IUIAutomationSpreadsheetItemPattern) GetCachedAnnotationTypes() (*systemcom.SAFEARRAY, error) {
-	var _retVal *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationSpreadsheetPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationspreadsheetpattern
@@ -4972,9 +4972,9 @@ var IID_IUIAutomationSpreadsheetPattern = win32.GUID{Data1: 0x7517a7c8, Data2: 0
 
 // GetItemByName dispatches through IUIAutomationSpreadsheetPattern's vtable slot 3.
 func (self *IUIAutomationSpreadsheetPattern) GetItemByName(name foundation.BSTR) (*IUIAutomationElement, error) {
-	var _element *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(&_element)))
-	return _element, win32.ErrIfFailed(int32(r1))
+	_element := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(win32.OutParam(unsafe.Pointer(_element))))
+	return *_element, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationStructureChangedEventHandler: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationstructurechangedeventhandler
@@ -5003,51 +5003,51 @@ var IID_IUIAutomationStylesPattern = win32.GUID{Data1: 0x85b5f0a2, Data2: 0xbd79
 
 // Get_CurrentStyleId dispatches through IUIAutomationStylesPattern's vtable slot 3.
 func (self *IUIAutomationStylesPattern) Get_CurrentStyleId() (UIA_STYLE_ID, error) {
-	var _retVal UIA_STYLE_ID
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(UIA_STYLE_ID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentStyleName dispatches through IUIAutomationStylesPattern's vtable slot 4.
 func (self *IUIAutomationStylesPattern) Get_CurrentStyleName() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentFillColor dispatches through IUIAutomationStylesPattern's vtable slot 5.
 func (self *IUIAutomationStylesPattern) Get_CurrentFillColor() (int32, error) {
-	var _retVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentFillPatternStyle dispatches through IUIAutomationStylesPattern's vtable slot 6.
 func (self *IUIAutomationStylesPattern) Get_CurrentFillPatternStyle() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentShape dispatches through IUIAutomationStylesPattern's vtable slot 7.
 func (self *IUIAutomationStylesPattern) Get_CurrentShape() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentFillPatternColor dispatches through IUIAutomationStylesPattern's vtable slot 8.
 func (self *IUIAutomationStylesPattern) Get_CurrentFillPatternColor() (int32, error) {
-	var _retVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentExtendedProperties dispatches through IUIAutomationStylesPattern's vtable slot 9.
 func (self *IUIAutomationStylesPattern) Get_CurrentExtendedProperties() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentExtendedPropertiesAsArray dispatches through IUIAutomationStylesPattern's vtable slot 10.
@@ -5058,51 +5058,51 @@ func (self *IUIAutomationStylesPattern) GetCurrentExtendedPropertiesAsArray(prop
 
 // Get_CachedStyleId dispatches through IUIAutomationStylesPattern's vtable slot 11.
 func (self *IUIAutomationStylesPattern) Get_CachedStyleId() (UIA_STYLE_ID, error) {
-	var _retVal UIA_STYLE_ID
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(UIA_STYLE_ID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedStyleName dispatches through IUIAutomationStylesPattern's vtable slot 12.
 func (self *IUIAutomationStylesPattern) Get_CachedStyleName() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedFillColor dispatches through IUIAutomationStylesPattern's vtable slot 13.
 func (self *IUIAutomationStylesPattern) Get_CachedFillColor() (int32, error) {
-	var _retVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedFillPatternStyle dispatches through IUIAutomationStylesPattern's vtable slot 14.
 func (self *IUIAutomationStylesPattern) Get_CachedFillPatternStyle() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedShape dispatches through IUIAutomationStylesPattern's vtable slot 15.
 func (self *IUIAutomationStylesPattern) Get_CachedShape() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedFillPatternColor dispatches through IUIAutomationStylesPattern's vtable slot 16.
 func (self *IUIAutomationStylesPattern) Get_CachedFillPatternColor() (int32, error) {
-	var _retVal int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedExtendedProperties dispatches through IUIAutomationStylesPattern's vtable slot 17.
 func (self *IUIAutomationStylesPattern) Get_CachedExtendedProperties() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCachedExtendedPropertiesAsArray dispatches through IUIAutomationStylesPattern's vtable slot 18.
@@ -5143,30 +5143,30 @@ var IID_IUIAutomationTableItemPattern = win32.GUID{Data1: 0x0b964eb3, Data2: 0xe
 
 // GetCurrentRowHeaderItems dispatches through IUIAutomationTableItemPattern's vtable slot 3.
 func (self *IUIAutomationTableItemPattern) GetCurrentRowHeaderItems() (*IUIAutomationElementArray, error) {
-	var _retVal *IUIAutomationElementArray
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElementArray)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentColumnHeaderItems dispatches through IUIAutomationTableItemPattern's vtable slot 4.
 func (self *IUIAutomationTableItemPattern) GetCurrentColumnHeaderItems() (*IUIAutomationElementArray, error) {
-	var _retVal *IUIAutomationElementArray
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElementArray)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCachedRowHeaderItems dispatches through IUIAutomationTableItemPattern's vtable slot 5.
 func (self *IUIAutomationTableItemPattern) GetCachedRowHeaderItems() (*IUIAutomationElementArray, error) {
-	var _retVal *IUIAutomationElementArray
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElementArray)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCachedColumnHeaderItems dispatches through IUIAutomationTableItemPattern's vtable slot 6.
 func (self *IUIAutomationTableItemPattern) GetCachedColumnHeaderItems() (*IUIAutomationElementArray, error) {
-	var _retVal *IUIAutomationElementArray
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElementArray)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationTablePattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationtablepattern
@@ -5180,44 +5180,44 @@ var IID_IUIAutomationTablePattern = win32.GUID{Data1: 0x620e691c, Data2: 0xea96,
 
 // GetCurrentRowHeaders dispatches through IUIAutomationTablePattern's vtable slot 3.
 func (self *IUIAutomationTablePattern) GetCurrentRowHeaders() (*IUIAutomationElementArray, error) {
-	var _retVal *IUIAutomationElementArray
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElementArray)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentColumnHeaders dispatches through IUIAutomationTablePattern's vtable slot 4.
 func (self *IUIAutomationTablePattern) GetCurrentColumnHeaders() (*IUIAutomationElementArray, error) {
-	var _retVal *IUIAutomationElementArray
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElementArray)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentRowOrColumnMajor dispatches through IUIAutomationTablePattern's vtable slot 5.
 func (self *IUIAutomationTablePattern) Get_CurrentRowOrColumnMajor() (RowOrColumnMajor, error) {
-	var _retVal RowOrColumnMajor
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(RowOrColumnMajor)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCachedRowHeaders dispatches through IUIAutomationTablePattern's vtable slot 6.
 func (self *IUIAutomationTablePattern) GetCachedRowHeaders() (*IUIAutomationElementArray, error) {
-	var _retVal *IUIAutomationElementArray
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElementArray)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCachedColumnHeaders dispatches through IUIAutomationTablePattern's vtable slot 7.
 func (self *IUIAutomationTablePattern) GetCachedColumnHeaders() (*IUIAutomationElementArray, error) {
-	var _retVal *IUIAutomationElementArray
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(*IUIAutomationElementArray)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedRowOrColumnMajor dispatches through IUIAutomationTablePattern's vtable slot 8.
 func (self *IUIAutomationTablePattern) Get_CachedRowOrColumnMajor() (RowOrColumnMajor, error) {
-	var _retVal RowOrColumnMajor
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(RowOrColumnMajor)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationTextChildPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationtextchildpattern
@@ -5231,16 +5231,16 @@ var IID_IUIAutomationTextChildPattern = win32.GUID{Data1: 0x6552b038, Data2: 0xa
 
 // Get_TextContainer dispatches through IUIAutomationTextChildPattern's vtable slot 3.
 func (self *IUIAutomationTextChildPattern) Get_TextContainer() (*IUIAutomationElement, error) {
-	var _container *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_container)))
-	return _container, win32.ErrIfFailed(int32(r1))
+	_container := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_container))))
+	return *_container, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_TextRange dispatches through IUIAutomationTextChildPattern's vtable slot 4.
 func (self *IUIAutomationTextChildPattern) Get_TextRange() (*IUIAutomationTextRange, error) {
-	var _range_ *IUIAutomationTextRange
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_range_)))
-	return _range_, win32.ErrIfFailed(int32(r1))
+	_range_ := new(*IUIAutomationTextRange)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_range_))))
+	return *_range_, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationTextEditPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationtexteditpattern
@@ -5254,16 +5254,16 @@ var IID_IUIAutomationTextEditPattern = win32.GUID{Data1: 0x17e21576, Data2: 0x99
 
 // GetActiveComposition dispatches through IUIAutomationTextEditPattern's vtable slot 9.
 func (self *IUIAutomationTextEditPattern) GetActiveComposition() (*IUIAutomationTextRange, error) {
-	var _range_ *IUIAutomationTextRange
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_range_)))
-	return _range_, win32.ErrIfFailed(int32(r1))
+	_range_ := new(*IUIAutomationTextRange)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_range_))))
+	return *_range_, win32.ErrIfFailed(int32(r1))
 }
 
 // GetConversionTarget dispatches through IUIAutomationTextEditPattern's vtable slot 10.
 func (self *IUIAutomationTextEditPattern) GetConversionTarget() (*IUIAutomationTextRange, error) {
-	var _range_ *IUIAutomationTextRange
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_range_)))
-	return _range_, win32.ErrIfFailed(int32(r1))
+	_range_ := new(*IUIAutomationTextRange)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_range_))))
+	return *_range_, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationTextEditTextChangedEventHandler: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationtextedittextchangedeventhandler
@@ -5292,37 +5292,37 @@ var IID_IUIAutomationTextPattern = win32.GUID{Data1: 0x32eba289, Data2: 0x3583, 
 
 // RangeFromChild dispatches through IUIAutomationTextPattern's vtable slot 4.
 func (self *IUIAutomationTextPattern) RangeFromChild(child *IUIAutomationElement) (*IUIAutomationTextRange, error) {
-	var _range_ *IUIAutomationTextRange
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(child)), uintptr(unsafe.Pointer(&_range_)))
-	return _range_, win32.ErrIfFailed(int32(r1))
+	_range_ := new(*IUIAutomationTextRange)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(child)), uintptr(win32.OutParam(unsafe.Pointer(_range_))))
+	return *_range_, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSelection dispatches through IUIAutomationTextPattern's vtable slot 5.
 func (self *IUIAutomationTextPattern) GetSelection() (*IUIAutomationTextRangeArray, error) {
-	var _ranges *IUIAutomationTextRangeArray
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ranges)))
-	return _ranges, win32.ErrIfFailed(int32(r1))
+	_ranges := new(*IUIAutomationTextRangeArray)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ranges))))
+	return *_ranges, win32.ErrIfFailed(int32(r1))
 }
 
 // GetVisibleRanges dispatches through IUIAutomationTextPattern's vtable slot 6.
 func (self *IUIAutomationTextPattern) GetVisibleRanges() (*IUIAutomationTextRangeArray, error) {
-	var _ranges *IUIAutomationTextRangeArray
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ranges)))
-	return _ranges, win32.ErrIfFailed(int32(r1))
+	_ranges := new(*IUIAutomationTextRangeArray)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ranges))))
+	return *_ranges, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DocumentRange dispatches through IUIAutomationTextPattern's vtable slot 7.
 func (self *IUIAutomationTextPattern) Get_DocumentRange() (*IUIAutomationTextRange, error) {
-	var _range_ *IUIAutomationTextRange
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_range_)))
-	return _range_, win32.ErrIfFailed(int32(r1))
+	_range_ := new(*IUIAutomationTextRange)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_range_))))
+	return *_range_, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_SupportedTextSelection dispatches through IUIAutomationTextPattern's vtable slot 8.
 func (self *IUIAutomationTextPattern) Get_SupportedTextSelection() (SupportedTextSelection, error) {
-	var _supportedTextSelection SupportedTextSelection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_supportedTextSelection)))
-	return _supportedTextSelection, win32.ErrIfFailed(int32(r1))
+	_supportedTextSelection := new(SupportedTextSelection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_supportedTextSelection))))
+	return *_supportedTextSelection, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationTextPattern2: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationtextpattern2
@@ -5336,16 +5336,16 @@ var IID_IUIAutomationTextPattern2 = win32.GUID{Data1: 0x506a921a, Data2: 0xfcc9,
 
 // RangeFromAnnotation dispatches through IUIAutomationTextPattern2's vtable slot 9.
 func (self *IUIAutomationTextPattern2) RangeFromAnnotation(annotation *IUIAutomationElement) (*IUIAutomationTextRange, error) {
-	var _range_ *IUIAutomationTextRange
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(annotation)), uintptr(unsafe.Pointer(&_range_)))
-	return _range_, win32.ErrIfFailed(int32(r1))
+	_range_ := new(*IUIAutomationTextRange)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(annotation)), uintptr(win32.OutParam(unsafe.Pointer(_range_))))
+	return *_range_, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCaretRange dispatches through IUIAutomationTextPattern2's vtable slot 10.
 func (self *IUIAutomationTextPattern2) GetCaretRange(isActive *foundation.BOOL) (*IUIAutomationTextRange, error) {
-	var _range_ *IUIAutomationTextRange
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(isActive)), uintptr(unsafe.Pointer(&_range_)))
-	return _range_, win32.ErrIfFailed(int32(r1))
+	_range_ := new(*IUIAutomationTextRange)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(isActive)), uintptr(win32.OutParam(unsafe.Pointer(_range_))))
+	return *_range_, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationTextRange: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationtextrange
@@ -5359,23 +5359,23 @@ var IID_IUIAutomationTextRange = win32.GUID{Data1: 0xa543cc6a, Data2: 0xf4ae, Da
 
 // Clone dispatches through IUIAutomationTextRange's vtable slot 3.
 func (self *IUIAutomationTextRange) Clone() (*IUIAutomationTextRange, error) {
-	var _clonedRange *IUIAutomationTextRange
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_clonedRange)))
-	return _clonedRange, win32.ErrIfFailed(int32(r1))
+	_clonedRange := new(*IUIAutomationTextRange)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_clonedRange))))
+	return *_clonedRange, win32.ErrIfFailed(int32(r1))
 }
 
 // Compare dispatches through IUIAutomationTextRange's vtable slot 4.
 func (self *IUIAutomationTextRange) Compare(range_ *IUIAutomationTextRange) (foundation.BOOL, error) {
-	var _areSame foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(range_)), uintptr(unsafe.Pointer(&_areSame)))
-	return _areSame, win32.ErrIfFailed(int32(r1))
+	_areSame := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(range_)), uintptr(win32.OutParam(unsafe.Pointer(_areSame))))
+	return *_areSame, win32.ErrIfFailed(int32(r1))
 }
 
 // CompareEndpoints dispatches through IUIAutomationTextRange's vtable slot 5.
 func (self *IUIAutomationTextRange) CompareEndpoints(srcEndPoint TextPatternRangeEndpoint, range_ *IUIAutomationTextRange, targetEndPoint TextPatternRangeEndpoint) (int32, error) {
-	var _compValue int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(srcEndPoint), uintptr(unsafe.Pointer(range_)), uintptr(targetEndPoint), uintptr(unsafe.Pointer(&_compValue)))
-	return _compValue, win32.ErrIfFailed(int32(r1))
+	_compValue := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(srcEndPoint), uintptr(unsafe.Pointer(range_)), uintptr(targetEndPoint), uintptr(win32.OutParam(unsafe.Pointer(_compValue))))
+	return *_compValue, win32.ErrIfFailed(int32(r1))
 }
 
 // ExpandToEnclosingUnit dispatches through IUIAutomationTextRange's vtable slot 6.
@@ -5388,51 +5388,51 @@ func (self *IUIAutomationTextRange) ExpandToEnclosingUnit(textUnit TextUnit) err
 func (self *IUIAutomationTextRange) FindText(text foundation.BSTR, backward bool, ignoreCase bool) (*IUIAutomationTextRange, error) {
 	_backward := win32.Bool32(backward)
 	_ignoreCase := win32.Bool32(ignoreCase)
-	var _found *IUIAutomationTextRange
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(text)), uintptr(_backward), uintptr(_ignoreCase), uintptr(unsafe.Pointer(&_found)))
-	return _found, win32.ErrIfFailed(int32(r1))
+	_found := new(*IUIAutomationTextRange)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(text)), uintptr(_backward), uintptr(_ignoreCase), uintptr(win32.OutParam(unsafe.Pointer(_found))))
+	return *_found, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAttributeValue dispatches through IUIAutomationTextRange's vtable slot 9.
 func (self *IUIAutomationTextRange) GetAttributeValue(attr UIA_TEXTATTRIBUTE_ID) (systemvariant.VARIANT, error) {
-	var _value systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(attr), uintptr(unsafe.Pointer(&_value)))
-	return _value, win32.ErrIfFailed(int32(r1))
+	_value := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(attr), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
 // GetBoundingRectangles dispatches through IUIAutomationTextRange's vtable slot 10.
 func (self *IUIAutomationTextRange) GetBoundingRectangles() (*systemcom.SAFEARRAY, error) {
-	var _boundingRects *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_boundingRects)))
-	return _boundingRects, win32.ErrIfFailed(int32(r1))
+	_boundingRects := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_boundingRects))))
+	return *_boundingRects, win32.ErrIfFailed(int32(r1))
 }
 
 // GetEnclosingElement dispatches through IUIAutomationTextRange's vtable slot 11.
 func (self *IUIAutomationTextRange) GetEnclosingElement() (*IUIAutomationElement, error) {
-	var _enclosingElement *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_enclosingElement)))
-	return _enclosingElement, win32.ErrIfFailed(int32(r1))
+	_enclosingElement := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_enclosingElement))))
+	return *_enclosingElement, win32.ErrIfFailed(int32(r1))
 }
 
 // GetText dispatches through IUIAutomationTextRange's vtable slot 12.
 func (self *IUIAutomationTextRange) GetText(maxLength int32) (foundation.BSTR, error) {
-	var _text foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(maxLength), uintptr(unsafe.Pointer(&_text)))
-	return _text, win32.ErrIfFailed(int32(r1))
+	_text := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(maxLength), uintptr(win32.OutParam(unsafe.Pointer(_text))))
+	return *_text, win32.ErrIfFailed(int32(r1))
 }
 
 // Move dispatches through IUIAutomationTextRange's vtable slot 13.
 func (self *IUIAutomationTextRange) Move(unit TextUnit, count int32) (int32, error) {
-	var _moved int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unit), uintptr(count), uintptr(unsafe.Pointer(&_moved)))
-	return _moved, win32.ErrIfFailed(int32(r1))
+	_moved := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unit), uintptr(count), uintptr(win32.OutParam(unsafe.Pointer(_moved))))
+	return *_moved, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveEndpointByUnit dispatches through IUIAutomationTextRange's vtable slot 14.
 func (self *IUIAutomationTextRange) MoveEndpointByUnit(endpoint TextPatternRangeEndpoint, unit TextUnit, count int32) (int32, error) {
-	var _moved int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(endpoint), uintptr(unit), uintptr(count), uintptr(unsafe.Pointer(&_moved)))
-	return _moved, win32.ErrIfFailed(int32(r1))
+	_moved := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(endpoint), uintptr(unit), uintptr(count), uintptr(win32.OutParam(unsafe.Pointer(_moved))))
+	return *_moved, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveEndpointByRange dispatches through IUIAutomationTextRange's vtable slot 15.
@@ -5468,9 +5468,9 @@ func (self *IUIAutomationTextRange) ScrollIntoView(alignToTop bool) error {
 
 // GetChildren dispatches through IUIAutomationTextRange's vtable slot 20.
 func (self *IUIAutomationTextRange) GetChildren() (*IUIAutomationElementArray, error) {
-	var _children *IUIAutomationElementArray
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_children)))
-	return _children, win32.ErrIfFailed(int32(r1))
+	_children := new(*IUIAutomationElementArray)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_children))))
+	return *_children, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationTextRange2: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationtextrange2
@@ -5499,16 +5499,16 @@ var IID_IUIAutomationTextRange3 = win32.GUID{Data1: 0x6a315d69, Data2: 0x5512, D
 
 // GetEnclosingElementBuildCache dispatches through IUIAutomationTextRange3's vtable slot 22.
 func (self *IUIAutomationTextRange3) GetEnclosingElementBuildCache(cacheRequest *IUIAutomationCacheRequest) (*IUIAutomationElement, error) {
-	var _enclosingElement *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(&_enclosingElement)))
-	return _enclosingElement, win32.ErrIfFailed(int32(r1))
+	_enclosingElement := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(win32.OutParam(unsafe.Pointer(_enclosingElement))))
+	return *_enclosingElement, win32.ErrIfFailed(int32(r1))
 }
 
 // GetChildrenBuildCache dispatches through IUIAutomationTextRange3's vtable slot 23.
 func (self *IUIAutomationTextRange3) GetChildrenBuildCache(cacheRequest *IUIAutomationCacheRequest) (*IUIAutomationElementArray, error) {
-	var _children *IUIAutomationElementArray
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(&_children)))
-	return _children, win32.ErrIfFailed(int32(r1))
+	_children := new(*IUIAutomationElementArray)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(win32.OutParam(unsafe.Pointer(_children))))
+	return *_children, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAttributeValues dispatches through IUIAutomationTextRange3's vtable slot 24.
@@ -5517,9 +5517,9 @@ func (self *IUIAutomationTextRange3) GetAttributeValues(attributeIds []UIA_TEXTA
 	if len(attributeIds) > 0 {
 		_attributeIds = &attributeIds[0]
 	}
-	var _attributeValues *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_attributeIds)), uintptr(len(attributeIds)), uintptr(unsafe.Pointer(&_attributeValues)))
-	return _attributeValues, win32.ErrIfFailed(int32(r1))
+	_attributeValues := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_attributeIds)), uintptr(len(attributeIds)), uintptr(win32.OutParam(unsafe.Pointer(_attributeValues))))
+	return *_attributeValues, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationTextRangeArray: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationtextrangearray
@@ -5533,16 +5533,16 @@ var IID_IUIAutomationTextRangeArray = win32.GUID{Data1: 0xce4ae76a, Data2: 0xe71
 
 // Get_Length dispatches through IUIAutomationTextRangeArray's vtable slot 3.
 func (self *IUIAutomationTextRangeArray) Get_Length() (int32, error) {
-	var _length int32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_length)))
-	return _length, win32.ErrIfFailed(int32(r1))
+	_length := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_length))))
+	return *_length, win32.ErrIfFailed(int32(r1))
 }
 
 // GetElement dispatches through IUIAutomationTextRangeArray's vtable slot 4.
 func (self *IUIAutomationTextRangeArray) GetElement(index int32) (*IUIAutomationTextRange, error) {
-	var _element *IUIAutomationTextRange
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_element)))
-	return _element, win32.ErrIfFailed(int32(r1))
+	_element := new(*IUIAutomationTextRange)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(win32.OutParam(unsafe.Pointer(_element))))
+	return *_element, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationTogglePattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationtogglepattern
@@ -5562,16 +5562,16 @@ func (self *IUIAutomationTogglePattern) Toggle() error {
 
 // Get_CurrentToggleState dispatches through IUIAutomationTogglePattern's vtable slot 4.
 func (self *IUIAutomationTogglePattern) Get_CurrentToggleState() (ToggleState, error) {
-	var _retVal ToggleState
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(ToggleState)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedToggleState dispatches through IUIAutomationTogglePattern's vtable slot 5.
 func (self *IUIAutomationTogglePattern) Get_CachedToggleState() (ToggleState, error) {
-	var _retVal ToggleState
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(ToggleState)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationTransformPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationtransformpattern
@@ -5585,44 +5585,44 @@ var IID_IUIAutomationTransformPattern = win32.GUID{Data1: 0xa9b55844, Data2: 0xa
 
 // Get_CurrentCanMove dispatches through IUIAutomationTransformPattern's vtable slot 6.
 func (self *IUIAutomationTransformPattern) Get_CurrentCanMove() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentCanResize dispatches through IUIAutomationTransformPattern's vtable slot 7.
 func (self *IUIAutomationTransformPattern) Get_CurrentCanResize() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentCanRotate dispatches through IUIAutomationTransformPattern's vtable slot 8.
 func (self *IUIAutomationTransformPattern) Get_CurrentCanRotate() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedCanMove dispatches through IUIAutomationTransformPattern's vtable slot 9.
 func (self *IUIAutomationTransformPattern) Get_CachedCanMove() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedCanResize dispatches through IUIAutomationTransformPattern's vtable slot 10.
 func (self *IUIAutomationTransformPattern) Get_CachedCanResize() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedCanRotate dispatches through IUIAutomationTransformPattern's vtable slot 11.
 func (self *IUIAutomationTransformPattern) Get_CachedCanRotate() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationTransformPattern2: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationtransformpattern2
@@ -5642,58 +5642,58 @@ func (self *IUIAutomationTransformPattern2) ZoomByUnit(zoomUnit ZoomUnit) error 
 
 // Get_CurrentCanZoom dispatches through IUIAutomationTransformPattern2's vtable slot 14.
 func (self *IUIAutomationTransformPattern2) Get_CurrentCanZoom() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedCanZoom dispatches through IUIAutomationTransformPattern2's vtable slot 15.
 func (self *IUIAutomationTransformPattern2) Get_CachedCanZoom() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentZoomLevel dispatches through IUIAutomationTransformPattern2's vtable slot 16.
 func (self *IUIAutomationTransformPattern2) Get_CurrentZoomLevel() (float64, error) {
-	var _retVal float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedZoomLevel dispatches through IUIAutomationTransformPattern2's vtable slot 17.
 func (self *IUIAutomationTransformPattern2) Get_CachedZoomLevel() (float64, error) {
-	var _retVal float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentZoomMinimum dispatches through IUIAutomationTransformPattern2's vtable slot 18.
 func (self *IUIAutomationTransformPattern2) Get_CurrentZoomMinimum() (float64, error) {
-	var _retVal float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedZoomMinimum dispatches through IUIAutomationTransformPattern2's vtable slot 19.
 func (self *IUIAutomationTransformPattern2) Get_CachedZoomMinimum() (float64, error) {
-	var _retVal float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentZoomMaximum dispatches through IUIAutomationTransformPattern2's vtable slot 20.
 func (self *IUIAutomationTransformPattern2) Get_CurrentZoomMaximum() (float64, error) {
-	var _retVal float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedZoomMaximum dispatches through IUIAutomationTransformPattern2's vtable slot 21.
 func (self *IUIAutomationTransformPattern2) Get_CachedZoomMaximum() (float64, error) {
-	var _retVal float64
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(float64)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationTreeWalker: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationtreewalker
@@ -5707,93 +5707,93 @@ var IID_IUIAutomationTreeWalker = win32.GUID{Data1: 0x4042c624, Data2: 0x389c, D
 
 // GetParentElement dispatches through IUIAutomationTreeWalker's vtable slot 3.
 func (self *IUIAutomationTreeWalker) GetParentElement(element *IUIAutomationElement) (*IUIAutomationElement, error) {
-	var _parent *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(&_parent)))
-	return _parent, win32.ErrIfFailed(int32(r1))
+	_parent := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(win32.OutParam(unsafe.Pointer(_parent))))
+	return *_parent, win32.ErrIfFailed(int32(r1))
 }
 
 // GetFirstChildElement dispatches through IUIAutomationTreeWalker's vtable slot 4.
 func (self *IUIAutomationTreeWalker) GetFirstChildElement(element *IUIAutomationElement) (*IUIAutomationElement, error) {
-	var _first *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(&_first)))
-	return _first, win32.ErrIfFailed(int32(r1))
+	_first := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(win32.OutParam(unsafe.Pointer(_first))))
+	return *_first, win32.ErrIfFailed(int32(r1))
 }
 
 // GetLastChildElement dispatches through IUIAutomationTreeWalker's vtable slot 5.
 func (self *IUIAutomationTreeWalker) GetLastChildElement(element *IUIAutomationElement) (*IUIAutomationElement, error) {
-	var _last *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(&_last)))
-	return _last, win32.ErrIfFailed(int32(r1))
+	_last := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(win32.OutParam(unsafe.Pointer(_last))))
+	return *_last, win32.ErrIfFailed(int32(r1))
 }
 
 // GetNextSiblingElement dispatches through IUIAutomationTreeWalker's vtable slot 6.
 func (self *IUIAutomationTreeWalker) GetNextSiblingElement(element *IUIAutomationElement) (*IUIAutomationElement, error) {
-	var _next *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(&_next)))
-	return _next, win32.ErrIfFailed(int32(r1))
+	_next := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(win32.OutParam(unsafe.Pointer(_next))))
+	return *_next, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPreviousSiblingElement dispatches through IUIAutomationTreeWalker's vtable slot 7.
 func (self *IUIAutomationTreeWalker) GetPreviousSiblingElement(element *IUIAutomationElement) (*IUIAutomationElement, error) {
-	var _previous *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(&_previous)))
-	return _previous, win32.ErrIfFailed(int32(r1))
+	_previous := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(win32.OutParam(unsafe.Pointer(_previous))))
+	return *_previous, win32.ErrIfFailed(int32(r1))
 }
 
 // NormalizeElement dispatches through IUIAutomationTreeWalker's vtable slot 8.
 func (self *IUIAutomationTreeWalker) NormalizeElement(element *IUIAutomationElement) (*IUIAutomationElement, error) {
-	var _normalized *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(&_normalized)))
-	return _normalized, win32.ErrIfFailed(int32(r1))
+	_normalized := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(win32.OutParam(unsafe.Pointer(_normalized))))
+	return *_normalized, win32.ErrIfFailed(int32(r1))
 }
 
 // GetParentElementBuildCache dispatches through IUIAutomationTreeWalker's vtable slot 9.
 func (self *IUIAutomationTreeWalker) GetParentElementBuildCache(element *IUIAutomationElement, cacheRequest *IUIAutomationCacheRequest) (*IUIAutomationElement, error) {
-	var _parent *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(&_parent)))
-	return _parent, win32.ErrIfFailed(int32(r1))
+	_parent := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(win32.OutParam(unsafe.Pointer(_parent))))
+	return *_parent, win32.ErrIfFailed(int32(r1))
 }
 
 // GetFirstChildElementBuildCache dispatches through IUIAutomationTreeWalker's vtable slot 10.
 func (self *IUIAutomationTreeWalker) GetFirstChildElementBuildCache(element *IUIAutomationElement, cacheRequest *IUIAutomationCacheRequest) (*IUIAutomationElement, error) {
-	var _first *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(&_first)))
-	return _first, win32.ErrIfFailed(int32(r1))
+	_first := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(win32.OutParam(unsafe.Pointer(_first))))
+	return *_first, win32.ErrIfFailed(int32(r1))
 }
 
 // GetLastChildElementBuildCache dispatches through IUIAutomationTreeWalker's vtable slot 11.
 func (self *IUIAutomationTreeWalker) GetLastChildElementBuildCache(element *IUIAutomationElement, cacheRequest *IUIAutomationCacheRequest) (*IUIAutomationElement, error) {
-	var _last *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(&_last)))
-	return _last, win32.ErrIfFailed(int32(r1))
+	_last := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(win32.OutParam(unsafe.Pointer(_last))))
+	return *_last, win32.ErrIfFailed(int32(r1))
 }
 
 // GetNextSiblingElementBuildCache dispatches through IUIAutomationTreeWalker's vtable slot 12.
 func (self *IUIAutomationTreeWalker) GetNextSiblingElementBuildCache(element *IUIAutomationElement, cacheRequest *IUIAutomationCacheRequest) (*IUIAutomationElement, error) {
-	var _next *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(&_next)))
-	return _next, win32.ErrIfFailed(int32(r1))
+	_next := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(win32.OutParam(unsafe.Pointer(_next))))
+	return *_next, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPreviousSiblingElementBuildCache dispatches through IUIAutomationTreeWalker's vtable slot 13.
 func (self *IUIAutomationTreeWalker) GetPreviousSiblingElementBuildCache(element *IUIAutomationElement, cacheRequest *IUIAutomationCacheRequest) (*IUIAutomationElement, error) {
-	var _previous *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(&_previous)))
-	return _previous, win32.ErrIfFailed(int32(r1))
+	_previous := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(win32.OutParam(unsafe.Pointer(_previous))))
+	return *_previous, win32.ErrIfFailed(int32(r1))
 }
 
 // NormalizeElementBuildCache dispatches through IUIAutomationTreeWalker's vtable slot 14.
 func (self *IUIAutomationTreeWalker) NormalizeElementBuildCache(element *IUIAutomationElement, cacheRequest *IUIAutomationCacheRequest) (*IUIAutomationElement, error) {
-	var _normalized *IUIAutomationElement
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(&_normalized)))
-	return _normalized, win32.ErrIfFailed(int32(r1))
+	_normalized := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(win32.OutParam(unsafe.Pointer(_normalized))))
+	return *_normalized, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Condition dispatches through IUIAutomationTreeWalker's vtable slot 15.
 func (self *IUIAutomationTreeWalker) Get_Condition() (*IUIAutomationCondition, error) {
-	var _condition *IUIAutomationCondition
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_condition)))
-	return _condition, win32.ErrIfFailed(int32(r1))
+	_condition := new(*IUIAutomationCondition)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_condition))))
+	return *_condition, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationValuePattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationvaluepattern
@@ -5813,30 +5813,30 @@ func (self *IUIAutomationValuePattern) SetValue(val foundation.BSTR) error {
 
 // Get_CurrentValue dispatches through IUIAutomationValuePattern's vtable slot 4.
 func (self *IUIAutomationValuePattern) Get_CurrentValue() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentIsReadOnly dispatches through IUIAutomationValuePattern's vtable slot 5.
 func (self *IUIAutomationValuePattern) Get_CurrentIsReadOnly() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedValue dispatches through IUIAutomationValuePattern's vtable slot 6.
 func (self *IUIAutomationValuePattern) Get_CachedValue() (foundation.BSTR, error) {
-	var _retVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedIsReadOnly dispatches through IUIAutomationValuePattern's vtable slot 7.
 func (self *IUIAutomationValuePattern) Get_CachedIsReadOnly() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IUIAutomationVirtualizedItemPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationvirtualizeditempattern
@@ -5871,9 +5871,9 @@ func (self *IUIAutomationWindowPattern) Close() error {
 
 // WaitForInputIdle dispatches through IUIAutomationWindowPattern's vtable slot 4.
 func (self *IUIAutomationWindowPattern) WaitForInputIdle(milliseconds int32) (foundation.BOOL, error) {
-	var _success foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(milliseconds), uintptr(unsafe.Pointer(&_success)))
-	return _success, win32.ErrIfFailed(int32(r1))
+	_success := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(milliseconds), uintptr(win32.OutParam(unsafe.Pointer(_success))))
+	return *_success, win32.ErrIfFailed(int32(r1))
 }
 
 // SetWindowVisualState dispatches through IUIAutomationWindowPattern's vtable slot 5.
@@ -5884,86 +5884,86 @@ func (self *IUIAutomationWindowPattern) SetWindowVisualState(state WindowVisualS
 
 // Get_CurrentCanMaximize dispatches through IUIAutomationWindowPattern's vtable slot 6.
 func (self *IUIAutomationWindowPattern) Get_CurrentCanMaximize() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentCanMinimize dispatches through IUIAutomationWindowPattern's vtable slot 7.
 func (self *IUIAutomationWindowPattern) Get_CurrentCanMinimize() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentIsModal dispatches through IUIAutomationWindowPattern's vtable slot 8.
 func (self *IUIAutomationWindowPattern) Get_CurrentIsModal() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentIsTopmost dispatches through IUIAutomationWindowPattern's vtable slot 9.
 func (self *IUIAutomationWindowPattern) Get_CurrentIsTopmost() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentWindowVisualState dispatches through IUIAutomationWindowPattern's vtable slot 10.
 func (self *IUIAutomationWindowPattern) Get_CurrentWindowVisualState() (WindowVisualState, error) {
-	var _retVal WindowVisualState
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(WindowVisualState)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CurrentWindowInteractionState dispatches through IUIAutomationWindowPattern's vtable slot 11.
 func (self *IUIAutomationWindowPattern) Get_CurrentWindowInteractionState() (WindowInteractionState, error) {
-	var _retVal WindowInteractionState
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(WindowInteractionState)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedCanMaximize dispatches through IUIAutomationWindowPattern's vtable slot 12.
 func (self *IUIAutomationWindowPattern) Get_CachedCanMaximize() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedCanMinimize dispatches through IUIAutomationWindowPattern's vtable slot 13.
 func (self *IUIAutomationWindowPattern) Get_CachedCanMinimize() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedIsModal dispatches through IUIAutomationWindowPattern's vtable slot 14.
 func (self *IUIAutomationWindowPattern) Get_CachedIsModal() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedIsTopmost dispatches through IUIAutomationWindowPattern's vtable slot 15.
 func (self *IUIAutomationWindowPattern) Get_CachedIsTopmost() (foundation.BOOL, error) {
-	var _retVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedWindowVisualState dispatches through IUIAutomationWindowPattern's vtable slot 16.
 func (self *IUIAutomationWindowPattern) Get_CachedWindowVisualState() (WindowVisualState, error) {
-	var _retVal WindowVisualState
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(WindowVisualState)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CachedWindowInteractionState dispatches through IUIAutomationWindowPattern's vtable slot 17.
 func (self *IUIAutomationWindowPattern) Get_CachedWindowInteractionState() (WindowInteractionState, error) {
-	var _retVal WindowInteractionState
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
-	return _retVal, win32.ErrIfFailed(int32(r1))
+	_retVal := new(WindowInteractionState)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retVal))))
+	return *_retVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IValueProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-ivalueprovider
@@ -5984,16 +5984,16 @@ func (self *IValueProvider) SetValue(val string) error {
 
 // Get_Value dispatches through IValueProvider's vtable slot 4.
 func (self *IValueProvider) Get_Value() (foundation.BSTR, error) {
-	var _pRetVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsReadOnly dispatches through IValueProvider's vtable slot 5.
 func (self *IValueProvider) Get_IsReadOnly() (foundation.BOOL, error) {
-	var _pRetVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // IVirtualizedItemProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-ivirtualizeditemprovider
@@ -6034,49 +6034,49 @@ func (self *IWindowProvider) Close() error {
 
 // WaitForInputIdle dispatches through IWindowProvider's vtable slot 5.
 func (self *IWindowProvider) WaitForInputIdle(milliseconds int32) (foundation.BOOL, error) {
-	var _pRetVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(milliseconds), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(milliseconds), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CanMaximize dispatches through IWindowProvider's vtable slot 6.
 func (self *IWindowProvider) Get_CanMaximize() (foundation.BOOL, error) {
-	var _pRetVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_CanMinimize dispatches through IWindowProvider's vtable slot 7.
 func (self *IWindowProvider) Get_CanMinimize() (foundation.BOOL, error) {
-	var _pRetVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsModal dispatches through IWindowProvider's vtable slot 8.
 func (self *IWindowProvider) Get_IsModal() (foundation.BOOL, error) {
-	var _pRetVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_WindowVisualState dispatches through IWindowProvider's vtable slot 9.
 func (self *IWindowProvider) Get_WindowVisualState() (WindowVisualState, error) {
-	var _pRetVal WindowVisualState
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(WindowVisualState)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_WindowInteractionState dispatches through IWindowProvider's vtable slot 10.
 func (self *IWindowProvider) Get_WindowInteractionState() (WindowInteractionState, error) {
-	var _pRetVal WindowInteractionState
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(WindowInteractionState)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsTopmost dispatches through IWindowProvider's vtable slot 11.
 func (self *IWindowProvider) Get_IsTopmost() (foundation.BOOL, error) {
-	var _pRetVal foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
-	return _pRetVal, win32.ErrIfFailed(int32(r1))
+	_pRetVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal))))
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }

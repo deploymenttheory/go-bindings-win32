@@ -146,12 +146,15 @@ func (g *Generator) buildComMethod(meta *win32meta.NamespaceMeta, interfaceName 
 		param := &method.Params[i]
 		resolved := resolvedParams[i]
 
+		// The elevated out local is heap-escaped via win32.OutParam: a native
+		// callee that reenters Go can move this goroutine's stack, stranding
+		// any stack out-pointer — see runtime outparam.go.
 		if elevate {
 			if element, ok := retValElement(param, resolved); ok {
 				local := "_" + paramNames[i]
-				preamble = append(preamble, "var "+local+" "+element)
-				argWords = append(argWords, "uintptr(unsafe.Pointer(&"+local+"))")
-				returnValues = append(returnValues, local)
+				preamble = append(preamble, local+" := new("+element+")")
+				argWords = append(argWords, "uintptr(win32.OutParam(unsafe.Pointer("+local+")))")
+				returnValues = append(returnValues, "*"+local)
 				returnTypes = append(returnTypes, element)
 				continue
 			}

@@ -52,9 +52,9 @@ func (self *INetDiagHelper) Initialize(rgAttributes []HELPER_ATTRIBUTE) error {
 
 // GetDiagnosticsInfo dispatches through INetDiagHelper's vtable slot 4.
 func (self *INetDiagHelper) GetDiagnosticsInfo() (*DiagnosticsInfo, error) {
-	var _ppInfo *DiagnosticsInfo
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppInfo)))
-	return _ppInfo, win32.ErrIfFailed(int32(r1))
+	_ppInfo := new(*DiagnosticsInfo)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppInfo))))
+	return *_ppInfo, win32.ErrIfFailed(int32(r1))
 }
 
 // GetKeyAttributes dispatches through INetDiagHelper's vtable slot 5.

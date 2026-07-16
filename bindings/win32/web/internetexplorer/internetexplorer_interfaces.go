@@ -456,23 +456,23 @@ var IID_IHTMLPersistData = win32.GUID{Data1: 0x3050f4c5, Data2: 0x98b5, Data3: 0
 
 // Save dispatches through IHTMLPersistData's vtable slot 3.
 func (self *IHTMLPersistData) Save(pUnk *systemcom.IUnknown, lType int32) (foundation.VARIANT_BOOL, error) {
-	var _fContinueBroacast foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnk)), uintptr(lType), uintptr(unsafe.Pointer(&_fContinueBroacast)))
-	return _fContinueBroacast, win32.ErrIfFailed(int32(r1))
+	_fContinueBroacast := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnk)), uintptr(lType), uintptr(win32.OutParam(unsafe.Pointer(_fContinueBroacast))))
+	return *_fContinueBroacast, win32.ErrIfFailed(int32(r1))
 }
 
 // Load dispatches through IHTMLPersistData's vtable slot 4.
 func (self *IHTMLPersistData) Load(pUnk *systemcom.IUnknown, lType int32) (foundation.VARIANT_BOOL, error) {
-	var _fDoDefault foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnk)), uintptr(lType), uintptr(unsafe.Pointer(&_fDoDefault)))
-	return _fDoDefault, win32.ErrIfFailed(int32(r1))
+	_fDoDefault := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnk)), uintptr(lType), uintptr(win32.OutParam(unsafe.Pointer(_fDoDefault))))
+	return *_fDoDefault, win32.ErrIfFailed(int32(r1))
 }
 
 // QueryType dispatches through IHTMLPersistData's vtable slot 5.
 func (self *IHTMLPersistData) QueryType(lType int32) (foundation.VARIANT_BOOL, error) {
-	var _pfSupportsType foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(lType), uintptr(unsafe.Pointer(&_pfSupportsType)))
-	return _pfSupportsType, win32.ErrIfFailed(int32(r1))
+	_pfSupportsType := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(lType), uintptr(win32.OutParam(unsafe.Pointer(_pfSupportsType))))
+	return *_pfSupportsType, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 3050f4c0-98b5-11cf-bb82-00aa00bdce0b
@@ -485,16 +485,16 @@ var IID_IHTMLPersistDataOM = win32.GUID{Data1: 0x3050f4c0, Data2: 0x98b5, Data3:
 
 // Get_XMLDocument dispatches through IHTMLPersistDataOM's vtable slot 7.
 func (self *IHTMLPersistDataOM) Get_XMLDocument() (*systemcom.IDispatch, error) {
-	var _p *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.ErrIfFailed(int32(r1))
+	_p := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
+	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAttribute dispatches through IHTMLPersistDataOM's vtable slot 8.
 func (self *IHTMLPersistDataOM) GetAttribute(name foundation.BSTR) (systemvariant.VARIANT, error) {
-	var _pValue systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(&_pValue)))
-	return _pValue, win32.ErrIfFailed(int32(r1))
+	_pValue := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(win32.OutParam(unsafe.Pointer(_pValue))))
+	return *_pValue, win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAttribute dispatches through IHTMLPersistDataOM's vtable slot 10.
@@ -513,9 +513,9 @@ var IID_IHTMLUserDataOM = win32.GUID{Data1: 0x3050f48f, Data2: 0x98b5, Data3: 0x
 
 // Get_XMLDocument dispatches through IHTMLUserDataOM's vtable slot 7.
 func (self *IHTMLUserDataOM) Get_XMLDocument() (*systemcom.IDispatch, error) {
-	var _p *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.ErrIfFailed(int32(r1))
+	_p := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
+	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
 // Save dispatches through IHTMLUserDataOM's vtable slot 8.
@@ -532,9 +532,9 @@ func (self *IHTMLUserDataOM) Load(strName foundation.BSTR) error {
 
 // GetAttribute dispatches through IHTMLUserDataOM's vtable slot 10.
 func (self *IHTMLUserDataOM) GetAttribute(name foundation.BSTR) (systemvariant.VARIANT, error) {
-	var _pValue systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(&_pValue)))
-	return _pValue, win32.ErrIfFailed(int32(r1))
+	_pValue := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(win32.OutParam(unsafe.Pointer(_pValue))))
+	return *_pValue, win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAttribute dispatches through IHTMLUserDataOM's vtable slot 12.
@@ -551,9 +551,9 @@ func (self *IHTMLUserDataOM) Put_expires(bstr foundation.BSTR) error {
 
 // Get_expires dispatches through IHTMLUserDataOM's vtable slot 14.
 func (self *IHTMLUserDataOM) Get_expires() (foundation.BSTR, error) {
-	var _pbstr foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstr)))
-	return _pbstr, win32.ErrIfFailed(int32(r1))
+	_pbstr := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstr))))
+	return *_pbstr, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 3050f6ce-98b5-11cf-bb82-00aa00bdce0b
@@ -566,16 +566,16 @@ var IID_IHeaderFooter = win32.GUID{Data1: 0x3050f6ce, Data2: 0x98b5, Data3: 0x11
 
 // Get_htmlHead dispatches through IHeaderFooter's vtable slot 7.
 func (self *IHeaderFooter) Get_htmlHead() (foundation.BSTR, error) {
-	var _p foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.ErrIfFailed(int32(r1))
+	_p := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
+	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_htmlFoot dispatches through IHeaderFooter's vtable slot 8.
 func (self *IHeaderFooter) Get_htmlFoot() (foundation.BSTR, error) {
-	var _p foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.ErrIfFailed(int32(r1))
+	_p := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
+	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_textHead dispatches through IHeaderFooter's vtable slot 9.
@@ -586,9 +586,9 @@ func (self *IHeaderFooter) Put_textHead(v foundation.BSTR) error {
 
 // Get_textHead dispatches through IHeaderFooter's vtable slot 10.
 func (self *IHeaderFooter) Get_textHead() (foundation.BSTR, error) {
-	var _p foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.ErrIfFailed(int32(r1))
+	_p := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
+	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_textFoot dispatches through IHeaderFooter's vtable slot 11.
@@ -599,9 +599,9 @@ func (self *IHeaderFooter) Put_textFoot(v foundation.BSTR) error {
 
 // Get_textFoot dispatches through IHeaderFooter's vtable slot 12.
 func (self *IHeaderFooter) Get_textFoot() (foundation.BSTR, error) {
-	var _p foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.ErrIfFailed(int32(r1))
+	_p := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
+	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_page dispatches through IHeaderFooter's vtable slot 13.
@@ -612,9 +612,9 @@ func (self *IHeaderFooter) Put_page(v uint32) error {
 
 // Get_page dispatches through IHeaderFooter's vtable slot 14.
 func (self *IHeaderFooter) Get_page() (uint32, error) {
-	var _p uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.ErrIfFailed(int32(r1))
+	_p := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
+	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_pageTotal dispatches through IHeaderFooter's vtable slot 15.
@@ -625,9 +625,9 @@ func (self *IHeaderFooter) Put_pageTotal(v uint32) error {
 
 // Get_pageTotal dispatches through IHeaderFooter's vtable slot 16.
 func (self *IHeaderFooter) Get_pageTotal() (uint32, error) {
-	var _p uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.ErrIfFailed(int32(r1))
+	_p := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
+	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_URL dispatches through IHeaderFooter's vtable slot 17.
@@ -638,9 +638,9 @@ func (self *IHeaderFooter) Put_URL(v foundation.BSTR) error {
 
 // Get_URL dispatches through IHeaderFooter's vtable slot 18.
 func (self *IHeaderFooter) Get_URL() (foundation.BSTR, error) {
-	var _p foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.ErrIfFailed(int32(r1))
+	_p := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
+	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_title dispatches through IHeaderFooter's vtable slot 19.
@@ -651,9 +651,9 @@ func (self *IHeaderFooter) Put_title(v foundation.BSTR) error {
 
 // Get_title dispatches through IHeaderFooter's vtable slot 20.
 func (self *IHeaderFooter) Get_title() (foundation.BSTR, error) {
-	var _p foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.ErrIfFailed(int32(r1))
+	_p := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
+	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_dateShort dispatches through IHeaderFooter's vtable slot 21.
@@ -664,9 +664,9 @@ func (self *IHeaderFooter) Put_dateShort(v foundation.BSTR) error {
 
 // Get_dateShort dispatches through IHeaderFooter's vtable slot 22.
 func (self *IHeaderFooter) Get_dateShort() (foundation.BSTR, error) {
-	var _p foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.ErrIfFailed(int32(r1))
+	_p := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
+	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_dateLong dispatches through IHeaderFooter's vtable slot 23.
@@ -677,9 +677,9 @@ func (self *IHeaderFooter) Put_dateLong(v foundation.BSTR) error {
 
 // Get_dateLong dispatches through IHeaderFooter's vtable slot 24.
 func (self *IHeaderFooter) Get_dateLong() (foundation.BSTR, error) {
-	var _p foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.ErrIfFailed(int32(r1))
+	_p := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
+	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_timeShort dispatches through IHeaderFooter's vtable slot 25.
@@ -690,9 +690,9 @@ func (self *IHeaderFooter) Put_timeShort(v foundation.BSTR) error {
 
 // Get_timeShort dispatches through IHeaderFooter's vtable slot 26.
 func (self *IHeaderFooter) Get_timeShort() (foundation.BSTR, error) {
-	var _p foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.ErrIfFailed(int32(r1))
+	_p := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
+	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_timeLong dispatches through IHeaderFooter's vtable slot 27.
@@ -703,9 +703,9 @@ func (self *IHeaderFooter) Put_timeLong(v foundation.BSTR) error {
 
 // Get_timeLong dispatches through IHeaderFooter's vtable slot 28.
 func (self *IHeaderFooter) Get_timeLong() (foundation.BSTR, error) {
-	var _p foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.ErrIfFailed(int32(r1))
+	_p := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
+	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 305104a5-98b5-11cf-bb82-00aa00bdce0b
@@ -724,9 +724,9 @@ func (self *IHeaderFooter2) Put_font(v foundation.BSTR) error {
 
 // Get_font dispatches through IHeaderFooter2's vtable slot 30.
 func (self *IHeaderFooter2) Get_font() (foundation.BSTR, error) {
-	var _p foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.ErrIfFailed(int32(r1))
+	_p := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
+	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 766bf2af-d650-11d1-9811-00c04fc31d2e
@@ -751,9 +751,9 @@ func (self *IHomePage) SetHomePage(bstrURL foundation.BSTR) error {
 
 // IsHomePage dispatches through IHomePage's vtable slot 9.
 func (self *IHomePage) IsHomePage(bstrURL foundation.BSTR) (foundation.VARIANT_BOOL, error) {
-	var _p foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrURL)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.ErrIfFailed(int32(r1))
+	_p := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrURL)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
+	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: fdfc244f-18fa-4ff2-b08e-1d618f3ffbe4
@@ -922,9 +922,9 @@ var IID_IIntelliForms = win32.GUID{Data1: 0x9b9f68e6, Data2: 0x1aaa, Data3: 0x11
 
 // Get_enabled dispatches through IIntelliForms's vtable slot 7.
 func (self *IIntelliForms) Get_enabled() (foundation.VARIANT_BOOL, error) {
-	var _pVal foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
-	return _pVal, win32.ErrIfFailed(int32(r1))
+	_pVal := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_enabled dispatches through IIntelliForms's vtable slot 8.
@@ -978,16 +978,16 @@ func (self *ILayoutRect) Put_nextRect(bstrElementId foundation.BSTR) error {
 
 // Get_nextRect dispatches through ILayoutRect's vtable slot 8.
 func (self *ILayoutRect) Get_nextRect() (foundation.BSTR, error) {
-	var _pbstrElementId foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrElementId)))
-	return _pbstrElementId, win32.ErrIfFailed(int32(r1))
+	_pbstrElementId := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrElementId))))
+	return *_pbstrElementId, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_contentSrc dispatches through ILayoutRect's vtable slot 10.
 func (self *ILayoutRect) Get_contentSrc() (systemvariant.VARIANT, error) {
-	var _pvarContentSrc systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarContentSrc)))
-	return _pvarContentSrc, win32.ErrIfFailed(int32(r1))
+	_pvarContentSrc := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pvarContentSrc))))
+	return *_pvarContentSrc, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_honorPageBreaks dispatches through ILayoutRect's vtable slot 11.
@@ -998,9 +998,9 @@ func (self *ILayoutRect) Put_honorPageBreaks(v foundation.VARIANT_BOOL) error {
 
 // Get_honorPageBreaks dispatches through ILayoutRect's vtable slot 12.
 func (self *ILayoutRect) Get_honorPageBreaks() (foundation.VARIANT_BOOL, error) {
-	var _p foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.ErrIfFailed(int32(r1))
+	_p := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
+	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_honorPageRules dispatches through ILayoutRect's vtable slot 13.
@@ -1011,9 +1011,9 @@ func (self *ILayoutRect) Put_honorPageRules(v foundation.VARIANT_BOOL) error {
 
 // Get_honorPageRules dispatches through ILayoutRect's vtable slot 14.
 func (self *ILayoutRect) Get_honorPageRules() (foundation.VARIANT_BOOL, error) {
-	var _p foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_p)))
-	return _p, win32.ErrIfFailed(int32(r1))
+	_p := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
+	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_nextRectElement dispatches through ILayoutRect's vtable slot 15.
@@ -1024,16 +1024,16 @@ func (self *ILayoutRect) Put_nextRectElement(pElem *systemcom.IDispatch) error {
 
 // Get_nextRectElement dispatches through ILayoutRect's vtable slot 16.
 func (self *ILayoutRect) Get_nextRectElement() (*systemcom.IDispatch, error) {
-	var _ppElem *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppElem)))
-	return _ppElem, win32.ErrIfFailed(int32(r1))
+	_ppElem := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppElem))))
+	return *_ppElem, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_contentDocument dispatches through ILayoutRect's vtable slot 17.
 func (self *ILayoutRect) Get_contentDocument() (*systemcom.IDispatch, error) {
-	var _pDoc *systemcom.IDispatch
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDoc)))
-	return _pDoc, win32.ErrIfFailed(int32(r1))
+	_pDoc := new(*systemcom.IDispatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pDoc))))
+	return *_pDoc, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: d9e89500-30fa-11d0-b724-00aa006c1a01
@@ -2190,9 +2190,9 @@ var IID_IWebBrowserEventsService = win32.GUID{Data1: 0x54a8f188, Data2: 0x9ebd, 
 
 // FireBeforeNavigate2Event dispatches through IWebBrowserEventsService's vtable slot 3.
 func (self *IWebBrowserEventsService) FireBeforeNavigate2Event() (foundation.VARIANT_BOOL, error) {
-	var _pfCancel foundation.VARIANT_BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfCancel)))
-	return _pfCancel, win32.ErrIfFailed(int32(r1))
+	_pfCancel := new(foundation.VARIANT_BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfCancel))))
+	return *_pfCancel, win32.ErrIfFailed(int32(r1))
 }
 
 // FireNavigateComplete2Event dispatches through IWebBrowserEventsService's vtable slot 4.
@@ -2229,9 +2229,9 @@ var IID_IWebBrowserEventsUrlService = win32.GUID{Data1: 0x87cc5d04, Data2: 0xeaf
 
 // GetUrlForEvents dispatches through IWebBrowserEventsUrlService's vtable slot 3.
 func (self *IWebBrowserEventsUrlService) GetUrlForEvents() (foundation.BSTR, error) {
-	var _pUrl foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pUrl)))
-	return _pUrl, win32.ErrIfFailed(int32(r1))
+	_pUrl := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pUrl))))
+	return *_pUrl, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: bae31f98-1b81-11d2-a97a-00c04f8ecb02
@@ -2244,16 +2244,16 @@ var IID_Iwfolders = win32.GUID{Data1: 0xbae31f98, Data2: 0x1b81, Data3: 0x11d2, 
 
 // Navigate dispatches through Iwfolders's vtable slot 7.
 func (self *Iwfolders) Navigate(bstrUrl foundation.BSTR) (foundation.BSTR, error) {
-	var _pbstrRetVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUrl)), uintptr(unsafe.Pointer(&_pbstrRetVal)))
-	return _pbstrRetVal, win32.ErrIfFailed(int32(r1))
+	_pbstrRetVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUrl)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrRetVal))))
+	return *_pbstrRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // NavigateFrame dispatches through Iwfolders's vtable slot 8.
 func (self *Iwfolders) NavigateFrame(bstrUrl foundation.BSTR, bstrTargetFrame foundation.BSTR) (foundation.BSTR, error) {
-	var _pbstrRetVal foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUrl)), uintptr(unsafe.Pointer(bstrTargetFrame)), uintptr(unsafe.Pointer(&_pbstrRetVal)))
-	return _pbstrRetVal, win32.ErrIfFailed(int32(r1))
+	_pbstrRetVal := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUrl)), uintptr(unsafe.Pointer(bstrTargetFrame)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrRetVal))))
+	return *_pbstrRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // NavigateNoSite dispatches through Iwfolders's vtable slot 9.

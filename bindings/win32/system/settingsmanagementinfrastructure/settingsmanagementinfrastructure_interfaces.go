@@ -25,16 +25,16 @@ var IID_IItemEnumerator = win32.GUID{Data1: 0x9f7d7bb7, Data2: 0x20b3, Data3: 0x
 
 // Current dispatches through IItemEnumerator's vtable slot 3.
 func (self *IItemEnumerator) Current() (systemvariant.VARIANT, error) {
-	var _Item systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Item)))
-	return _Item, win32.ErrIfFailed(int32(r1))
+	_Item := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Item))))
+	return *_Item, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IItemEnumerator's vtable slot 4.
 func (self *IItemEnumerator) MoveNext() (foundation.BOOL, error) {
-	var _ItemValid foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ItemValid)))
-	return _ItemValid, win32.ErrIfFailed(int32(r1))
+	_ItemValid := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ItemValid))))
+	return *_ItemValid, win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IItemEnumerator's vtable slot 5.
@@ -60,9 +60,9 @@ func (self *ISettingsContext) Serialize(pStream *systemcom.IStream, pTarget *ITa
 
 // Deserialize dispatches through ISettingsContext's vtable slot 4.
 func (self *ISettingsContext) Deserialize(pStream *systemcom.IStream, pTarget *ITargetInfo, pppResults ***ISettingsResult) (uintptr, error) {
-	var _pcResultCount uintptr
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStream)), uintptr(unsafe.Pointer(pTarget)), uintptr(unsafe.Pointer(pppResults)), uintptr(unsafe.Pointer(&_pcResultCount)))
-	return _pcResultCount, win32.ErrIfFailed(int32(r1))
+	_pcResultCount := new(uintptr)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStream)), uintptr(unsafe.Pointer(pTarget)), uintptr(unsafe.Pointer(pppResults)), uintptr(win32.OutParam(unsafe.Pointer(_pcResultCount))))
+	return *_pcResultCount, win32.ErrIfFailed(int32(r1))
 }
 
 // SetUserData dispatches through ISettingsContext's vtable slot 5.
@@ -79,9 +79,9 @@ func (self *ISettingsContext) GetUserData(pUserData *unsafe.Pointer) error {
 
 // GetNamespaces dispatches through ISettingsContext's vtable slot 7.
 func (self *ISettingsContext) GetNamespaces() (*IItemEnumerator, error) {
-	var _ppNamespaceIds *IItemEnumerator
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppNamespaceIds)))
-	return _ppNamespaceIds, win32.ErrIfFailed(int32(r1))
+	_ppNamespaceIds := new(*IItemEnumerator)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppNamespaceIds))))
+	return *_ppNamespaceIds, win32.ErrIfFailed(int32(r1))
 }
 
 // GetStoredSettings dispatches through ISettingsContext's vtable slot 8.
@@ -108,30 +108,30 @@ var IID_ISettingsEngine = win32.GUID{Data1: 0x9f7d7bb9, Data2: 0x20b3, Data3: 0x
 
 // GetNamespaces dispatches through ISettingsEngine's vtable slot 3.
 func (self *ISettingsEngine) GetNamespaces(Flags WcmNamespaceEnumerationFlags, Reserved unsafe.Pointer) (*IItemEnumerator, error) {
-	var _Namespaces *IItemEnumerator
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(Reserved)), uintptr(unsafe.Pointer(&_Namespaces)))
-	return _Namespaces, win32.ErrIfFailed(int32(r1))
+	_Namespaces := new(*IItemEnumerator)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(Reserved)), uintptr(win32.OutParam(unsafe.Pointer(_Namespaces))))
+	return *_Namespaces, win32.ErrIfFailed(int32(r1))
 }
 
 // GetNamespace dispatches through ISettingsEngine's vtable slot 4.
 func (self *ISettingsEngine) GetNamespace(SettingsID *ISettingsIdentity, Access WcmNamespaceAccess, Reserved unsafe.Pointer) (*ISettingsNamespace, error) {
-	var _NamespaceItem *ISettingsNamespace
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SettingsID)), uintptr(Access), uintptr(unsafe.Pointer(Reserved)), uintptr(unsafe.Pointer(&_NamespaceItem)))
-	return _NamespaceItem, win32.ErrIfFailed(int32(r1))
+	_NamespaceItem := new(*ISettingsNamespace)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SettingsID)), uintptr(Access), uintptr(unsafe.Pointer(Reserved)), uintptr(win32.OutParam(unsafe.Pointer(_NamespaceItem))))
+	return *_NamespaceItem, win32.ErrIfFailed(int32(r1))
 }
 
 // GetErrorDescription dispatches through ISettingsEngine's vtable slot 5.
 func (self *ISettingsEngine) GetErrorDescription(HResult int32) (foundation.BSTR, error) {
-	var _Message foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(HResult), uintptr(unsafe.Pointer(&_Message)))
-	return _Message, win32.ErrIfFailed(int32(r1))
+	_Message := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(HResult), uintptr(win32.OutParam(unsafe.Pointer(_Message))))
+	return *_Message, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSettingsIdentity dispatches through ISettingsEngine's vtable slot 6.
 func (self *ISettingsEngine) CreateSettingsIdentity() (*ISettingsIdentity, error) {
-	var _SettingsID *ISettingsIdentity
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_SettingsID)))
-	return _SettingsID, win32.ErrIfFailed(int32(r1))
+	_SettingsID := new(*ISettingsIdentity)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_SettingsID))))
+	return *_SettingsID, win32.ErrIfFailed(int32(r1))
 }
 
 // GetStoreStatus dispatches through ISettingsEngine's vtable slot 7.
@@ -155,9 +155,9 @@ func (self *ISettingsEngine) UnloadStore(Reserved unsafe.Pointer) error {
 // RegisterNamespace dispatches through ISettingsEngine's vtable slot 10.
 func (self *ISettingsEngine) RegisterNamespace(SettingsID *ISettingsIdentity, Stream *systemcom.IStream, PushSettings bool) (systemvariant.VARIANT, error) {
 	_PushSettings := win32.Bool32(PushSettings)
-	var _Results systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SettingsID)), uintptr(unsafe.Pointer(Stream)), uintptr(_PushSettings), uintptr(unsafe.Pointer(&_Results)))
-	return _Results, win32.ErrIfFailed(int32(r1))
+	_Results := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SettingsID)), uintptr(unsafe.Pointer(Stream)), uintptr(_PushSettings), uintptr(win32.OutParam(unsafe.Pointer(_Results))))
+	return *_Results, win32.ErrIfFailed(int32(r1))
 }
 
 // UnregisterNamespace dispatches through ISettingsEngine's vtable slot 11.
@@ -169,16 +169,16 @@ func (self *ISettingsEngine) UnregisterNamespace(SettingsID *ISettingsIdentity, 
 
 // CreateTargetInfo dispatches through ISettingsEngine's vtable slot 12.
 func (self *ISettingsEngine) CreateTargetInfo() (*ITargetInfo, error) {
-	var _Target *ITargetInfo
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Target)))
-	return _Target, win32.ErrIfFailed(int32(r1))
+	_Target := new(*ITargetInfo)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Target))))
+	return *_Target, win32.ErrIfFailed(int32(r1))
 }
 
 // GetTargetInfo dispatches through ISettingsEngine's vtable slot 13.
 func (self *ISettingsEngine) GetTargetInfo() (*ITargetInfo, error) {
-	var _Target *ITargetInfo
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Target)))
-	return _Target, win32.ErrIfFailed(int32(r1))
+	_Target := new(*ITargetInfo)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Target))))
+	return *_Target, win32.ErrIfFailed(int32(r1))
 }
 
 // SetTargetInfo dispatches through ISettingsEngine's vtable slot 14.
@@ -189,9 +189,9 @@ func (self *ISettingsEngine) SetTargetInfo(Target *ITargetInfo) error {
 
 // CreateSettingsContext dispatches through ISettingsEngine's vtable slot 15.
 func (self *ISettingsEngine) CreateSettingsContext(Flags uint32, Reserved unsafe.Pointer) (*ISettingsContext, error) {
-	var _SettingsContext *ISettingsContext
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(Reserved)), uintptr(unsafe.Pointer(&_SettingsContext)))
-	return _SettingsContext, win32.ErrIfFailed(int32(r1))
+	_SettingsContext := new(*ISettingsContext)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(Reserved)), uintptr(win32.OutParam(unsafe.Pointer(_SettingsContext))))
+	return *_SettingsContext, win32.ErrIfFailed(int32(r1))
 }
 
 // SetSettingsContext dispatches through ISettingsEngine's vtable slot 16.
@@ -202,16 +202,16 @@ func (self *ISettingsEngine) SetSettingsContext(SettingsContext *ISettingsContex
 
 // ApplySettingsContext dispatches through ISettingsEngine's vtable slot 17.
 func (self *ISettingsEngine) ApplySettingsContext(SettingsContext *ISettingsContext, pppwzIdentities **foundation.PWSTR) (uintptr, error) {
-	var _pcIdentities uintptr
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SettingsContext)), uintptr(unsafe.Pointer(pppwzIdentities)), uintptr(unsafe.Pointer(&_pcIdentities)))
-	return _pcIdentities, win32.ErrIfFailed(int32(r1))
+	_pcIdentities := new(uintptr)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SettingsContext)), uintptr(unsafe.Pointer(pppwzIdentities)), uintptr(win32.OutParam(unsafe.Pointer(_pcIdentities))))
+	return *_pcIdentities, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSettingsContext dispatches through ISettingsEngine's vtable slot 18.
 func (self *ISettingsEngine) GetSettingsContext() (*ISettingsContext, error) {
-	var _SettingsContext *ISettingsContext
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_SettingsContext)))
-	return _SettingsContext, win32.ErrIfFailed(int32(r1))
+	_SettingsContext := new(*ISettingsContext)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_SettingsContext))))
+	return *_SettingsContext, win32.ErrIfFailed(int32(r1))
 }
 
 // ISettingsIdentity: https://learn.microsoft.com/windows/win32/api/wcmconfig/nn-wcmconfig-isettingsidentity
@@ -226,9 +226,9 @@ var IID_ISettingsIdentity = win32.GUID{Data1: 0x9f7d7bb6, Data2: 0x20b3, Data3: 
 // GetAttribute dispatches through ISettingsIdentity's vtable slot 3.
 func (self *ISettingsIdentity) GetAttribute(Reserved unsafe.Pointer, Name string) (foundation.BSTR, error) {
 	_Name := win32.UTF16Ptr(Name)
-	var _Value foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Reserved)), uintptr(unsafe.Pointer(_Name)), uintptr(unsafe.Pointer(&_Value)))
-	return _Value, win32.ErrIfFailed(int32(r1))
+	_Value := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Reserved)), uintptr(unsafe.Pointer(_Name)), uintptr(win32.OutParam(unsafe.Pointer(_Value))))
+	return *_Value, win32.ErrIfFailed(int32(r1))
 }
 
 // SetAttribute dispatches through ISettingsIdentity's vtable slot 4.
@@ -241,9 +241,9 @@ func (self *ISettingsIdentity) SetAttribute(Reserved unsafe.Pointer, Name string
 
 // GetFlags dispatches through ISettingsIdentity's vtable slot 5.
 func (self *ISettingsIdentity) GetFlags() (uint32, error) {
-	var _Flags uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Flags)))
-	return _Flags, win32.ErrIfFailed(int32(r1))
+	_Flags := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Flags))))
+	return *_Flags, win32.ErrIfFailed(int32(r1))
 }
 
 // SetFlags dispatches through ISettingsIdentity's vtable slot 6.
@@ -263,16 +263,16 @@ var IID_ISettingsItem = win32.GUID{Data1: 0x9f7d7bbb, Data2: 0x20b3, Data3: 0x11
 
 // GetName dispatches through ISettingsItem's vtable slot 3.
 func (self *ISettingsItem) GetName() (foundation.BSTR, error) {
-	var _Name foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Name)))
-	return _Name, win32.ErrIfFailed(int32(r1))
+	_Name := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Name))))
+	return *_Name, win32.ErrIfFailed(int32(r1))
 }
 
 // GetValue dispatches through ISettingsItem's vtable slot 4.
 func (self *ISettingsItem) GetValue() (systemvariant.VARIANT, error) {
-	var _Value systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Value)))
-	return _Value, win32.ErrIfFailed(int32(r1))
+	_Value := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Value))))
+	return *_Value, win32.ErrIfFailed(int32(r1))
 }
 
 // SetValue dispatches through ISettingsItem's vtable slot 5.
@@ -283,23 +283,23 @@ func (self *ISettingsItem) SetValue(Value *systemvariant.VARIANT) error {
 
 // GetSettingType dispatches through ISettingsItem's vtable slot 6.
 func (self *ISettingsItem) GetSettingType() (WcmSettingType, error) {
-	var _Type WcmSettingType
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Type)))
-	return _Type, win32.ErrIfFailed(int32(r1))
+	_Type := new(WcmSettingType)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Type))))
+	return *_Type, win32.ErrIfFailed(int32(r1))
 }
 
 // GetDataType dispatches through ISettingsItem's vtable slot 7.
 func (self *ISettingsItem) GetDataType() (WcmDataType, error) {
-	var _Type WcmDataType
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Type)))
-	return _Type, win32.ErrIfFailed(int32(r1))
+	_Type := new(WcmDataType)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Type))))
+	return *_Type, win32.ErrIfFailed(int32(r1))
 }
 
 // GetValueRaw dispatches through ISettingsItem's vtable slot 8.
 func (self *ISettingsItem) GetValueRaw(Data **byte) (uint32, error) {
-	var _DataSize uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Data)), uintptr(unsafe.Pointer(&_DataSize)))
-	return _DataSize, win32.ErrIfFailed(int32(r1))
+	_DataSize := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Data)), uintptr(win32.OutParam(unsafe.Pointer(_DataSize))))
+	return *_DataSize, win32.ErrIfFailed(int32(r1))
 }
 
 // SetValueRaw dispatches through ISettingsItem's vtable slot 9.
@@ -314,40 +314,40 @@ func (self *ISettingsItem) SetValueRaw(DataType int32, Data []byte) error {
 
 // HasChild dispatches through ISettingsItem's vtable slot 10.
 func (self *ISettingsItem) HasChild() (foundation.BOOL, error) {
-	var _ItemHasChild foundation.BOOL
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ItemHasChild)))
-	return _ItemHasChild, win32.ErrIfFailed(int32(r1))
+	_ItemHasChild := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ItemHasChild))))
+	return *_ItemHasChild, win32.ErrIfFailed(int32(r1))
 }
 
 // Children dispatches through ISettingsItem's vtable slot 11.
 func (self *ISettingsItem) Children() (*IItemEnumerator, error) {
-	var _Children *IItemEnumerator
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Children)))
-	return _Children, win32.ErrIfFailed(int32(r1))
+	_Children := new(*IItemEnumerator)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Children))))
+	return *_Children, win32.ErrIfFailed(int32(r1))
 }
 
 // GetChild dispatches through ISettingsItem's vtable slot 12.
 func (self *ISettingsItem) GetChild(Name string) (*ISettingsItem, error) {
 	_Name := win32.UTF16Ptr(Name)
-	var _Child *ISettingsItem
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Name)), uintptr(unsafe.Pointer(&_Child)))
-	return _Child, win32.ErrIfFailed(int32(r1))
+	_Child := new(*ISettingsItem)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Name)), uintptr(win32.OutParam(unsafe.Pointer(_Child))))
+	return *_Child, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSettingByPath dispatches through ISettingsItem's vtable slot 13.
 func (self *ISettingsItem) GetSettingByPath(Path string) (*ISettingsItem, error) {
 	_Path := win32.UTF16Ptr(Path)
-	var _Setting *ISettingsItem
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Path)), uintptr(unsafe.Pointer(&_Setting)))
-	return _Setting, win32.ErrIfFailed(int32(r1))
+	_Setting := new(*ISettingsItem)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Path)), uintptr(win32.OutParam(unsafe.Pointer(_Setting))))
+	return *_Setting, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSettingByPath dispatches through ISettingsItem's vtable slot 14.
 func (self *ISettingsItem) CreateSettingByPath(Path string) (*ISettingsItem, error) {
 	_Path := win32.UTF16Ptr(Path)
-	var _Setting *ISettingsItem
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Path)), uintptr(unsafe.Pointer(&_Setting)))
-	return _Setting, win32.ErrIfFailed(int32(r1))
+	_Setting := new(*ISettingsItem)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Path)), uintptr(win32.OutParam(unsafe.Pointer(_Setting))))
+	return *_Setting, win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveSettingByPath dispatches through ISettingsItem's vtable slot 15.
@@ -359,16 +359,16 @@ func (self *ISettingsItem) RemoveSettingByPath(Path string) error {
 
 // GetListKeyInformation dispatches through ISettingsItem's vtable slot 16.
 func (self *ISettingsItem) GetListKeyInformation(KeyName *foundation.BSTR) (WcmDataType, error) {
-	var _DataType WcmDataType
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(KeyName)), uintptr(unsafe.Pointer(&_DataType)))
-	return _DataType, win32.ErrIfFailed(int32(r1))
+	_DataType := new(WcmDataType)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(KeyName)), uintptr(win32.OutParam(unsafe.Pointer(_DataType))))
+	return *_DataType, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateListElement dispatches through ISettingsItem's vtable slot 17.
 func (self *ISettingsItem) CreateListElement(KeyData *systemvariant.VARIANT) (*ISettingsItem, error) {
-	var _Child *ISettingsItem
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(KeyData)), uintptr(unsafe.Pointer(&_Child)))
-	return _Child, win32.ErrIfFailed(int32(r1))
+	_Child := new(*ISettingsItem)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(KeyData)), uintptr(win32.OutParam(unsafe.Pointer(_Child))))
+	return *_Child, win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveListElement dispatches through ISettingsItem's vtable slot 18.
@@ -380,45 +380,45 @@ func (self *ISettingsItem) RemoveListElement(ElementName string) error {
 
 // Attributes dispatches through ISettingsItem's vtable slot 19.
 func (self *ISettingsItem) Attributes() (*IItemEnumerator, error) {
-	var _Attributes *IItemEnumerator
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Attributes)))
-	return _Attributes, win32.ErrIfFailed(int32(r1))
+	_Attributes := new(*IItemEnumerator)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Attributes))))
+	return *_Attributes, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAttribute dispatches through ISettingsItem's vtable slot 20.
 func (self *ISettingsItem) GetAttribute(Name string) (systemvariant.VARIANT, error) {
 	_Name := win32.UTF16Ptr(Name)
-	var _Value systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Name)), uintptr(unsafe.Pointer(&_Value)))
-	return _Value, win32.ErrIfFailed(int32(r1))
+	_Value := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Name)), uintptr(win32.OutParam(unsafe.Pointer(_Value))))
+	return *_Value, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPath dispatches through ISettingsItem's vtable slot 21.
 func (self *ISettingsItem) GetPath() (foundation.BSTR, error) {
-	var _Path foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Path)))
-	return _Path, win32.ErrIfFailed(int32(r1))
+	_Path := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Path))))
+	return *_Path, win32.ErrIfFailed(int32(r1))
 }
 
 // GetRestrictionFacets dispatches through ISettingsItem's vtable slot 22.
 func (self *ISettingsItem) GetRestrictionFacets() (WcmRestrictionFacets, error) {
-	var _RestrictionFacets WcmRestrictionFacets
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_RestrictionFacets)))
-	return _RestrictionFacets, win32.ErrIfFailed(int32(r1))
+	_RestrictionFacets := new(WcmRestrictionFacets)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_RestrictionFacets))))
+	return *_RestrictionFacets, win32.ErrIfFailed(int32(r1))
 }
 
 // GetRestriction dispatches through ISettingsItem's vtable slot 23.
 func (self *ISettingsItem) GetRestriction(RestrictionFacet WcmRestrictionFacets) (systemvariant.VARIANT, error) {
-	var _FacetData systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(RestrictionFacet), uintptr(unsafe.Pointer(&_FacetData)))
-	return _FacetData, win32.ErrIfFailed(int32(r1))
+	_FacetData := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(RestrictionFacet), uintptr(win32.OutParam(unsafe.Pointer(_FacetData))))
+	return *_FacetData, win32.ErrIfFailed(int32(r1))
 }
 
 // GetKeyValue dispatches through ISettingsItem's vtable slot 24.
 func (self *ISettingsItem) GetKeyValue() (systemvariant.VARIANT, error) {
-	var _Value systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Value)))
-	return _Value, win32.ErrIfFailed(int32(r1))
+	_Value := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Value))))
+	return *_Value, win32.ErrIfFailed(int32(r1))
 }
 
 // ISettingsNamespace: https://learn.microsoft.com/windows/win32/api/wcmconfig/nn-wcmconfig-isettingsnamespace
@@ -432,40 +432,40 @@ var IID_ISettingsNamespace = win32.GUID{Data1: 0x9f7d7bba, Data2: 0x20b3, Data3:
 
 // GetIdentity dispatches through ISettingsNamespace's vtable slot 3.
 func (self *ISettingsNamespace) GetIdentity() (*ISettingsIdentity, error) {
-	var _SettingsID *ISettingsIdentity
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_SettingsID)))
-	return _SettingsID, win32.ErrIfFailed(int32(r1))
+	_SettingsID := new(*ISettingsIdentity)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_SettingsID))))
+	return *_SettingsID, win32.ErrIfFailed(int32(r1))
 }
 
 // Settings dispatches through ISettingsNamespace's vtable slot 4.
 func (self *ISettingsNamespace) Settings() (*IItemEnumerator, error) {
-	var _Settings *IItemEnumerator
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Settings)))
-	return _Settings, win32.ErrIfFailed(int32(r1))
+	_Settings := new(*IItemEnumerator)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Settings))))
+	return *_Settings, win32.ErrIfFailed(int32(r1))
 }
 
 // Save dispatches through ISettingsNamespace's vtable slot 5.
 func (self *ISettingsNamespace) Save(PushSettings bool) (*ISettingsResult, error) {
 	_PushSettings := win32.Bool32(PushSettings)
-	var _Result *ISettingsResult
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(_PushSettings), uintptr(unsafe.Pointer(&_Result)))
-	return _Result, win32.ErrIfFailed(int32(r1))
+	_Result := new(*ISettingsResult)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(_PushSettings), uintptr(win32.OutParam(unsafe.Pointer(_Result))))
+	return *_Result, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSettingByPath dispatches through ISettingsNamespace's vtable slot 6.
 func (self *ISettingsNamespace) GetSettingByPath(Path string) (*ISettingsItem, error) {
 	_Path := win32.UTF16Ptr(Path)
-	var _Setting *ISettingsItem
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Path)), uintptr(unsafe.Pointer(&_Setting)))
-	return _Setting, win32.ErrIfFailed(int32(r1))
+	_Setting := new(*ISettingsItem)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Path)), uintptr(win32.OutParam(unsafe.Pointer(_Setting))))
+	return *_Setting, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSettingByPath dispatches through ISettingsNamespace's vtable slot 7.
 func (self *ISettingsNamespace) CreateSettingByPath(Path string) (*ISettingsItem, error) {
 	_Path := win32.UTF16Ptr(Path)
-	var _Setting *ISettingsItem
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Path)), uintptr(unsafe.Pointer(&_Setting)))
-	return _Setting, win32.ErrIfFailed(int32(r1))
+	_Setting := new(*ISettingsItem)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Path)), uintptr(win32.OutParam(unsafe.Pointer(_Setting))))
+	return *_Setting, win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveSettingByPath dispatches through ISettingsNamespace's vtable slot 8.
@@ -478,9 +478,9 @@ func (self *ISettingsNamespace) RemoveSettingByPath(Path string) error {
 // GetAttribute dispatches through ISettingsNamespace's vtable slot 9.
 func (self *ISettingsNamespace) GetAttribute(Name string) (systemvariant.VARIANT, error) {
 	_Name := win32.UTF16Ptr(Name)
-	var _Value systemvariant.VARIANT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Name)), uintptr(unsafe.Pointer(&_Value)))
-	return _Value, win32.ErrIfFailed(int32(r1))
+	_Value := new(systemvariant.VARIANT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Name)), uintptr(win32.OutParam(unsafe.Pointer(_Value))))
+	return *_Value, win32.ErrIfFailed(int32(r1))
 }
 
 // ISettingsResult: https://learn.microsoft.com/windows/win32/api/wcmconfig/nn-wcmconfig-isettingsresult
@@ -494,44 +494,44 @@ var IID_ISettingsResult = win32.GUID{Data1: 0x9f7d7bbc, Data2: 0x20b3, Data3: 0x
 
 // GetDescription dispatches through ISettingsResult's vtable slot 3.
 func (self *ISettingsResult) GetDescription() (foundation.BSTR, error) {
-	var _description foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_description)))
-	return _description, win32.ErrIfFailed(int32(r1))
+	_description := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_description))))
+	return *_description, win32.ErrIfFailed(int32(r1))
 }
 
 // GetErrorCode dispatches through ISettingsResult's vtable slot 4.
 func (self *ISettingsResult) GetErrorCode() (foundation.HRESULT, error) {
-	var _hrOut foundation.HRESULT
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hrOut)))
-	return _hrOut, win32.ErrIfFailed(int32(r1))
+	_hrOut := new(foundation.HRESULT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hrOut))))
+	return *_hrOut, win32.ErrIfFailed(int32(r1))
 }
 
 // GetContextDescription dispatches through ISettingsResult's vtable slot 5.
 func (self *ISettingsResult) GetContextDescription() (foundation.BSTR, error) {
-	var _description foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_description)))
-	return _description, win32.ErrIfFailed(int32(r1))
+	_description := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_description))))
+	return *_description, win32.ErrIfFailed(int32(r1))
 }
 
 // GetLine dispatches through ISettingsResult's vtable slot 6.
 func (self *ISettingsResult) GetLine() (uint32, error) {
-	var _dwLine uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_dwLine)))
-	return _dwLine, win32.ErrIfFailed(int32(r1))
+	_dwLine := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_dwLine))))
+	return *_dwLine, win32.ErrIfFailed(int32(r1))
 }
 
 // GetColumn dispatches through ISettingsResult's vtable slot 7.
 func (self *ISettingsResult) GetColumn() (uint32, error) {
-	var _dwColumn uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_dwColumn)))
-	return _dwColumn, win32.ErrIfFailed(int32(r1))
+	_dwColumn := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_dwColumn))))
+	return *_dwColumn, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSource dispatches through ISettingsResult's vtable slot 8.
 func (self *ISettingsResult) GetSource() (foundation.BSTR, error) {
-	var _file foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_file)))
-	return _file, win32.ErrIfFailed(int32(r1))
+	_file := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_file))))
+	return *_file, win32.ErrIfFailed(int32(r1))
 }
 
 // ITargetInfo: https://learn.microsoft.com/windows/win32/api/wcmconfig/nn-wcmconfig-itargetinfo
@@ -545,9 +545,9 @@ var IID_ITargetInfo = win32.GUID{Data1: 0x9f7d7bb8, Data2: 0x20b3, Data3: 0x11da
 
 // GetTargetMode dispatches through ITargetInfo's vtable slot 3.
 func (self *ITargetInfo) GetTargetMode() (WcmTargetMode, error) {
-	var _TargetMode WcmTargetMode
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_TargetMode)))
-	return _TargetMode, win32.ErrIfFailed(int32(r1))
+	_TargetMode := new(WcmTargetMode)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_TargetMode))))
+	return *_TargetMode, win32.ErrIfFailed(int32(r1))
 }
 
 // SetTargetMode dispatches through ITargetInfo's vtable slot 4.
@@ -558,9 +558,9 @@ func (self *ITargetInfo) SetTargetMode(TargetMode WcmTargetMode) error {
 
 // GetTemporaryStoreLocation dispatches through ITargetInfo's vtable slot 5.
 func (self *ITargetInfo) GetTemporaryStoreLocation() (foundation.BSTR, error) {
-	var _TemporaryStoreLocation foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_TemporaryStoreLocation)))
-	return _TemporaryStoreLocation, win32.ErrIfFailed(int32(r1))
+	_TemporaryStoreLocation := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_TemporaryStoreLocation))))
+	return *_TemporaryStoreLocation, win32.ErrIfFailed(int32(r1))
 }
 
 // SetTemporaryStoreLocation dispatches through ITargetInfo's vtable slot 6.
@@ -572,16 +572,16 @@ func (self *ITargetInfo) SetTemporaryStoreLocation(TemporaryStoreLocation string
 
 // GetTargetID dispatches through ITargetInfo's vtable slot 7.
 func (self *ITargetInfo) GetTargetID() (foundation.BSTR, error) {
-	var _TargetID foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_TargetID)))
-	return _TargetID, win32.ErrIfFailed(int32(r1))
+	_TargetID := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_TargetID))))
+	return *_TargetID, win32.ErrIfFailed(int32(r1))
 }
 
 // GetTargetProcessorArchitecture dispatches through ITargetInfo's vtable slot 9.
 func (self *ITargetInfo) GetTargetProcessorArchitecture() (foundation.BSTR, error) {
-	var _ProcessorArchitecture foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ProcessorArchitecture)))
-	return _ProcessorArchitecture, win32.ErrIfFailed(int32(r1))
+	_ProcessorArchitecture := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ProcessorArchitecture))))
+	return *_ProcessorArchitecture, win32.ErrIfFailed(int32(r1))
 }
 
 // SetTargetProcessorArchitecture dispatches through ITargetInfo's vtable slot 10.
@@ -595,9 +595,9 @@ func (self *ITargetInfo) SetTargetProcessorArchitecture(ProcessorArchitecture st
 func (self *ITargetInfo) GetProperty(Offline bool, Property string) (foundation.BSTR, error) {
 	_Offline := win32.Bool32(Offline)
 	_Property := win32.UTF16Ptr(Property)
-	var _Value foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(_Offline), uintptr(unsafe.Pointer(_Property)), uintptr(unsafe.Pointer(&_Value)))
-	return _Value, win32.ErrIfFailed(int32(r1))
+	_Value := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(_Offline), uintptr(unsafe.Pointer(_Property)), uintptr(win32.OutParam(unsafe.Pointer(_Value))))
+	return *_Value, win32.ErrIfFailed(int32(r1))
 }
 
 // SetProperty dispatches through ITargetInfo's vtable slot 12.
@@ -611,27 +611,27 @@ func (self *ITargetInfo) SetProperty(Offline bool, Property string, Value string
 
 // GetEnumerator dispatches through ITargetInfo's vtable slot 13.
 func (self *ITargetInfo) GetEnumerator() (*IItemEnumerator, error) {
-	var _Enumerator *IItemEnumerator
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_Enumerator)))
-	return _Enumerator, win32.ErrIfFailed(int32(r1))
+	_Enumerator := new(*IItemEnumerator)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Enumerator))))
+	return *_Enumerator, win32.ErrIfFailed(int32(r1))
 }
 
 // ExpandTarget dispatches through ITargetInfo's vtable slot 14.
 func (self *ITargetInfo) ExpandTarget(Offline bool, Location string) (foundation.BSTR, error) {
 	_Offline := win32.Bool32(Offline)
 	_Location := win32.UTF16Ptr(Location)
-	var _ExpandedLocation foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(_Offline), uintptr(unsafe.Pointer(_Location)), uintptr(unsafe.Pointer(&_ExpandedLocation)))
-	return _ExpandedLocation, win32.ErrIfFailed(int32(r1))
+	_ExpandedLocation := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(_Offline), uintptr(unsafe.Pointer(_Location)), uintptr(win32.OutParam(unsafe.Pointer(_ExpandedLocation))))
+	return *_ExpandedLocation, win32.ErrIfFailed(int32(r1))
 }
 
 // ExpandTargetPath dispatches through ITargetInfo's vtable slot 15.
 func (self *ITargetInfo) ExpandTargetPath(Offline bool, Location string) (foundation.BSTR, error) {
 	_Offline := win32.Bool32(Offline)
 	_Location := win32.UTF16Ptr(Location)
-	var _ExpandedLocation foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(_Offline), uintptr(unsafe.Pointer(_Location)), uintptr(unsafe.Pointer(&_ExpandedLocation)))
-	return _ExpandedLocation, win32.ErrIfFailed(int32(r1))
+	_ExpandedLocation := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(_Offline), uintptr(unsafe.Pointer(_Location)), uintptr(win32.OutParam(unsafe.Pointer(_ExpandedLocation))))
+	return *_ExpandedLocation, win32.ErrIfFailed(int32(r1))
 }
 
 // SetModulePath dispatches through ITargetInfo's vtable slot 16.
@@ -645,9 +645,9 @@ func (self *ITargetInfo) SetModulePath(Module string, Path string) error {
 // LoadModule dispatches through ITargetInfo's vtable slot 17.
 func (self *ITargetInfo) LoadModule(Module string) (foundation.HMODULE, error) {
 	_Module := win32.UTF16Ptr(Module)
-	var _ModuleHandle foundation.HMODULE
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Module)), uintptr(unsafe.Pointer(&_ModuleHandle)))
-	return _ModuleHandle, win32.ErrIfFailed(int32(r1))
+	_ModuleHandle := new(foundation.HMODULE)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Module)), uintptr(win32.OutParam(unsafe.Pointer(_ModuleHandle))))
+	return *_ModuleHandle, win32.ErrIfFailed(int32(r1))
 }
 
 // SetWow64Context dispatches through ITargetInfo's vtable slot 18.
@@ -661,9 +661,9 @@ func (self *ITargetInfo) SetWow64Context(InstallerModule string, Wow64Context *b
 func (self *ITargetInfo) TranslateWow64(ClientArchitecture string, Value string) (foundation.BSTR, error) {
 	_ClientArchitecture := win32.UTF16Ptr(ClientArchitecture)
 	_Value := win32.UTF16Ptr(Value)
-	var _TranslatedValue foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_ClientArchitecture)), uintptr(unsafe.Pointer(_Value)), uintptr(unsafe.Pointer(&_TranslatedValue)))
-	return _TranslatedValue, win32.ErrIfFailed(int32(r1))
+	_TranslatedValue := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_ClientArchitecture)), uintptr(unsafe.Pointer(_Value)), uintptr(win32.OutParam(unsafe.Pointer(_TranslatedValue))))
+	return *_TranslatedValue, win32.ErrIfFailed(int32(r1))
 }
 
 // SetSchemaHiveLocation dispatches through ITargetInfo's vtable slot 20.
@@ -675,9 +675,9 @@ func (self *ITargetInfo) SetSchemaHiveLocation(pwzHiveDir string) error {
 
 // GetSchemaHiveLocation dispatches through ITargetInfo's vtable slot 21.
 func (self *ITargetInfo) GetSchemaHiveLocation() (foundation.BSTR, error) {
-	var _pHiveLocation foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pHiveLocation)))
-	return _pHiveLocation, win32.ErrIfFailed(int32(r1))
+	_pHiveLocation := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pHiveLocation))))
+	return *_pHiveLocation, win32.ErrIfFailed(int32(r1))
 }
 
 // SetSchemaHiveMountName dispatches through ITargetInfo's vtable slot 22.
@@ -689,7 +689,7 @@ func (self *ITargetInfo) SetSchemaHiveMountName(pwzMountName string) error {
 
 // GetSchemaHiveMountName dispatches through ITargetInfo's vtable slot 23.
 func (self *ITargetInfo) GetSchemaHiveMountName() (foundation.BSTR, error) {
-	var _pMountName foundation.BSTR
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pMountName)))
-	return _pMountName, win32.ErrIfFailed(int32(r1))
+	_pMountName := new(foundation.BSTR)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pMountName))))
+	return *_pMountName, win32.ErrIfFailed(int32(r1))
 }

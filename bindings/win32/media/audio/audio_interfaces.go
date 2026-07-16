@@ -167,9 +167,9 @@ func (self *IAudioChannelConfig) SetChannelConfig(dwConfig uint32, pguidEventCon
 
 // GetChannelConfig dispatches through IAudioChannelConfig's vtable slot 4.
 func (self *IAudioChannelConfig) GetChannelConfig() (uint32, error) {
-	var _pdwConfig uint32
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pdwConfig)))
-	return _pdwConfig, win32.ErrIfFailed(int32(r1))
+	_pdwConfig := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pdwConfig))))
+	return *_pdwConfig, win32.ErrIfFailed(int32(r1))
 }
 
 // IAudioClient: https://learn.microsoft.com/windows/win32/api/audioclient/nn-audioclient-iaudioclient
@@ -783,9 +783,9 @@ var IID_IAudioSessionManager2 = win32.GUID{Data1: 0x77aa99a0, Data2: 0x1bd6, Dat
 
 // GetSessionEnumerator dispatches through IAudioSessionManager2's vtable slot 5.
 func (self *IAudioSessionManager2) GetSessionEnumerator() (*IAudioSessionEnumerator, error) {
-	var _SessionEnum *IAudioSessionEnumerator
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_SessionEnum)))
-	return _SessionEnum, win32.ErrIfFailed(int32(r1))
+	_SessionEnum := new(*IAudioSessionEnumerator)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_SessionEnum))))
+	return *_SessionEnum, win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterSessionNotification dispatches through IAudioSessionManager2's vtable slot 6.

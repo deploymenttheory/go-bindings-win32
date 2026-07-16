@@ -23,7 +23,7 @@ var IID_IWaaSAssessor = win32.GUID{Data1: 0x2347bbef, Data2: 0x1a3b, Data3: 0x45
 
 // GetOSUpdateAssessment dispatches through IWaaSAssessor's vtable slot 3.
 func (self *IWaaSAssessor) GetOSUpdateAssessment() (OSUpdateAssessment, error) {
-	var _result OSUpdateAssessment
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_result)))
-	return _result, win32.ErrIfFailed(int32(r1))
+	_result := new(OSUpdateAssessment)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_result))))
+	return *_result, win32.ErrIfFailed(int32(r1))
 }

@@ -384,9 +384,9 @@ var IID_IMbnDeviceServicesContext = win32.GUID{Data1: 0xfc5ac347, Data2: 0x1592,
 
 // EnumerateDeviceServices dispatches through IMbnDeviceServicesContext's vtable slot 3.
 func (self *IMbnDeviceServicesContext) EnumerateDeviceServices() (*systemcom.SAFEARRAY, error) {
-	var _deviceServices *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_deviceServices)))
-	return _deviceServices, win32.ErrIfFailed(int32(r1))
+	_deviceServices := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_deviceServices))))
+	return *_deviceServices, win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceService dispatches through IMbnDeviceServicesContext's vtable slot 4.
@@ -520,9 +520,9 @@ func (self *IMbnInterface) GetInterfaceCapability(interfaceCaps *MBN_INTERFACE_C
 
 // GetSubscriberInformation dispatches through IMbnInterface's vtable slot 5.
 func (self *IMbnInterface) GetSubscriberInformation() (*IMbnSubscriberInformation, error) {
-	var _subscriberInformation *IMbnSubscriberInformation
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_subscriberInformation)))
-	return _subscriberInformation, win32.ErrIfFailed(int32(r1))
+	_subscriberInformation := new(*IMbnSubscriberInformation)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_subscriberInformation))))
+	return *_subscriberInformation, win32.ErrIfFailed(int32(r1))
 }
 
 // GetReadyState dispatches through IMbnInterface's vtable slot 6.
@@ -557,9 +557,9 @@ func (self *IMbnInterface) SetPreferredProviders(preferredProviders *systemcom.S
 
 // GetVisibleProviders dispatches through IMbnInterface's vtable slot 11.
 func (self *IMbnInterface) GetVisibleProviders(age *uint32) (*systemcom.SAFEARRAY, error) {
-	var _visibleProviders *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(age)), uintptr(unsafe.Pointer(&_visibleProviders)))
-	return _visibleProviders, win32.ErrIfFailed(int32(r1))
+	_visibleProviders := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(age)), uintptr(win32.OutParam(unsafe.Pointer(_visibleProviders))))
+	return *_visibleProviders, win32.ErrIfFailed(int32(r1))
 }
 
 // ScanNetwork dispatches through IMbnInterface's vtable slot 12.
@@ -570,9 +570,9 @@ func (self *IMbnInterface) ScanNetwork(requestID *uint32) error {
 
 // GetConnection dispatches through IMbnInterface's vtable slot 13.
 func (self *IMbnInterface) GetConnection() (*IMbnConnection, error) {
-	var _mbnConnection *IMbnConnection
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_mbnConnection)))
-	return _mbnConnection, win32.ErrIfFailed(int32(r1))
+	_mbnConnection := new(*IMbnConnection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_mbnConnection))))
+	return *_mbnConnection, win32.ErrIfFailed(int32(r1))
 }
 
 // IMbnInterfaceEvents: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbninterfaceevents
@@ -698,9 +698,9 @@ func (self *IMbnMultiCarrier) GetPreferredProviders(preferredMulticarrierProvide
 
 // GetVisibleProviders dispatches through IMbnMultiCarrier's vtable slot 5.
 func (self *IMbnMultiCarrier) GetVisibleProviders(age *uint32) (*systemcom.SAFEARRAY, error) {
-	var _visibleProviders *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(age)), uintptr(unsafe.Pointer(&_visibleProviders)))
-	return _visibleProviders, win32.ErrIfFailed(int32(r1))
+	_visibleProviders := new(*systemcom.SAFEARRAY)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(age)), uintptr(win32.OutParam(unsafe.Pointer(_visibleProviders))))
+	return *_visibleProviders, win32.ErrIfFailed(int32(r1))
 }
 
 // GetSupportedCellularClasses dispatches through IMbnMultiCarrier's vtable slot 6.

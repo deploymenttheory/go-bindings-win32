@@ -107,8 +107,9 @@ A curated set of APIs whose *success* codes matter (`IEnum*::Next`/`::Skip`,
 go get github.com/deploymenttheory/go-bindings-win32@latest
 ```
 
-Pre-v1: until a tagged release exists, `@latest` resolves a pseudo-version of
-`main` — pin the commit you build against.
+Pre-v1: tagged releases are published, so `@latest` resolves the newest tag.
+The pre-v1 API is still evolving — pin the version you build against and
+review the changelog before upgrading.
 
 **Requirements:** Go 1.25+; runs on **Windows amd64 or arm64** (they share
 Win32's LLP64 layout). The only dependency is our own

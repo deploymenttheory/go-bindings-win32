@@ -89,7 +89,7 @@ Windows.Win32.winmd → .w32meta.json (IR) → Go source
   namespace with structs/enums/functions/constants/interfaces/delegates/
   typedefs. `TypeRef` is the recursive type grammar (Native / ApiRef /
   PointerTo / Array), shaped to match win32json's vocabulary so that project
-  can serve as a test oracle. `SchemaVersion` gates stale caches.
+  can serve as a test trusted source. `SchemaVersion` gates stale caches.
 - **`internal/win32meta/ingest/`** — winmd → IR projector. Namespace ownership
   is authoritative (no scoring heuristic needed, unlike macOS). Reads the
   attribute contract from win32metadata's `docs/projections.md`: DllImport via

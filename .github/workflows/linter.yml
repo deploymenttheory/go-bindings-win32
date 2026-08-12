@@ -40,8 +40,20 @@ jobs:
           VALIDATE_CPD: false # Disable CPD (Copy Paste Detection) for all languages
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # To report GitHub Actions status checks
           MARKDOWN_CONFIG_FILE: .markdown-lint.yml
+          # bindings/win32/ is generated and not hand-editable, so a per-file
+          # lint there has nothing actionable to report — the fix for anything
+          # it found would be in the generator. It is already covered by the
+          # package-mode golangci-lint job, the regeneration determinism gate,
+          # and the Windows build and tests in ci.yml.
+          #
+          # Excluding it also avoids a golangci-lint limitation super-linter
+          # runs into: given an explicit file list spanning two directories it
+          # fails with "named files must all be in one directory", which any PR
+          # touching both the hand-written runtime and the regenerated tree
+          # triggers.
           FILTER_REGEX_EXCLUDE: |
             .*\.md$|                # Exclude all markdown files
             .*test/.*|              # Exclude all files in any test directory
             .*_test\.go$|           # Exclude Go test files (e.g., *_test.go)
+            bindings/win32/.*|      # Exclude the generated bindings tree
             .*\.json$               # Exclude all JSON files

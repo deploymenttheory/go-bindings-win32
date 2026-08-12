@@ -32,46 +32,16 @@ jobs:
         env:
           DEFAULT_BRANCH: origin/main
           VALIDATE_ALL_CODEBASE: false # tells the linter to only check files that have been modified in the current pull request
-          # This list is opt-in: naming linters here runs those and only those.
-          # VALIDATE_GO and VALIDATE_GOLANGCI_LINT are deliberately ABSENT
-          # rather than set to false — setting any validator false flips
-          # super-linter to opt-out and enables every other linter it ships.
-          #
-          # They are omitted because both run golangci-lint over the PR's
-          # changed FILES, and given a list spanning two directories it refuses
-          # outright:
-          #
-          #   named files must all be in one directory;
-          #   have bindings/runtime/win32 and internal/codegen/emit/raw
-          #
-          # which is true of any PR touching more than one package. That is a
-          # limitation of file-list mode, not something a file can be edited to
-          # satisfy. go-lint.yml already runs golangci-lint in package mode, so
-          # this was a broken duplicate of a check that works.
-          #
-          # The per-FILE tools below have no such constraint and stay on.
+          VALIDATE_GO: true
           VALIDATE_GOFMT: true
           VALIDATE_GOCYCLO: true
           VALIDATE_GOVET: true
+          VALIDATE_GOLANGCI_LINT: true
           VALIDATE_CPD: false # Disable CPD (Copy Paste Detection) for all languages
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # To report GitHub Actions status checks
           MARKDOWN_CONFIG_FILE: .markdown-lint.yml
-          # bindings/win32/ is generated and not hand-editable, so a per-file
-          # lint there has nothing actionable to report — the fix for anything
-          # it found would be in the generator. It is already covered by the
-          # package-mode golangci-lint job, the regeneration determinism gate,
-          # and the Windows build and tests in ci.yml.
-          #
-          # Excluding it also avoids a golangci-lint limitation super-linter
-          # runs into: given an explicit file list spanning two directories it
-          # fails with "named files must all be in one directory", which any PR
-          # touching both the hand-written runtime and the regenerated tree
-          # triggers.
-          # One line, no inline comments: this value is a single regex, and the
-          # previous block-scalar form folded the comment text and newlines into
-          # the alternation — so branches after the first never matched anything
-          # and the exclusions silently did nothing.
-          #
-          # Branches: markdown | any test directory | Go test files |
-          # the generated bindings tree | JSON.
-          FILTER_REGEX_EXCLUDE: '.*\.md$|.*test/.*|.*_test\.go$|.*bindings/win32/.*|.*\.json$'
+          FILTER_REGEX_EXCLUDE: |
+            .*\.md$|                # Exclude all markdown files
+            .*test/.*|              # Exclude all files in any test directory
+            .*_test\.go$|           # Exclude Go test files (e.g., *_test.go)
+            .*\.json$               # Exclude all JSON files

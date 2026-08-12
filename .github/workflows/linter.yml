@@ -51,9 +51,11 @@ jobs:
           # fails with "named files must all be in one directory", which any PR
           # touching both the hand-written runtime and the regenerated tree
           # triggers.
-          FILTER_REGEX_EXCLUDE: |
-            .*\.md$|                # Exclude all markdown files
-            .*test/.*|              # Exclude all files in any test directory
-            .*_test\.go$|           # Exclude Go test files (e.g., *_test.go)
-            .*bindings/win32/.*|    # Exclude the generated bindings tree
-            .*\.json$               # Exclude all JSON files
+          # One line, no inline comments: this value is a single regex, and the
+          # previous block-scalar form folded the comment text and newlines into
+          # the alternation — so branches after the first never matched anything
+          # and the exclusions silently did nothing.
+          #
+          # Branches: markdown | any test directory | Go test files |
+          # the generated bindings tree | JSON.
+          FILTER_REGEX_EXCLUDE: '.*\.md$|.*test/.*|.*_test\.go$|.*bindings/win32/.*|.*\.json$'

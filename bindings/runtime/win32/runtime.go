@@ -99,3 +99,31 @@ func UTF16ToString(p *uint16) string {
 	}
 	return syscall.UTF16ToString(unsafe.Slice(p, length))
 }
+
+// StructArg packs a small by-value struct into one syscall argument word.
+//
+// The Windows x64 calling convention passes a struct or union of 1, 2, 4 or 8
+// bytes "as if it were an integer of the same size" — in a register, not by
+// reference. ARM64 does the same for a struct this small. syscall.SyscallN
+// only accepts uintptr words, so the struct's bytes are reinterpreted as one.
+//
+// This is what makes COORD-taking APIs callable at all: CreatePseudoConsole,
+// SetConsoleCursorPosition and the console-output family all pass a 4-byte
+// COORD by value, and without this they cannot be expressed as a syscall
+// argument.
+//
+// The generator emits calls to this only for structs whose computed C layout
+// is 1, 2, 4 or 8 bytes. Anything larger travels by reference under the same
+// ABI and would need a different shape entirely, so it panics rather than
+// silently passing a truncated value the callee would read as garbage.
+func StructArg[T any](v T) uintptr {
+	var word uintptr
+	if unsafe.Sizeof(v) > unsafe.Sizeof(word) {
+		panic("win32: by-value struct is too large to pass in a register")
+	}
+	// Write into the low bytes of a zeroed word. Windows runs only on
+	// little-endian architectures, so the low bytes are the ones the callee
+	// reads, and zeroing the remainder keeps the unused high bytes defined.
+	*(*T)(unsafe.Pointer(&word)) = v
+	return word
+}

@@ -2920,6 +2920,18 @@ func (self *IAMVideoControl) GetCurrentActualFrameRate(pPin *IPin, ActualFrameRa
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// GetMaxAvailableFrameRate dispatches through IAMVideoControl's vtable slot 7.
+func (self *IAMVideoControl) GetMaxAvailableFrameRate(pPin *IPin, iIndex int32, Dimensions foundation.SIZE, MaxAvailableFrameRate *int64) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPin)), uintptr(iIndex), uintptr(win32.StructArg(Dimensions)), uintptr(unsafe.Pointer(MaxAvailableFrameRate)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// GetFrameRateList dispatches through IAMVideoControl's vtable slot 8.
+func (self *IAMVideoControl) GetFrameRateList(pPin *IPin, iIndex int32, Dimensions foundation.SIZE, ListSize *int32, FrameRates **int64) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPin)), uintptr(iIndex), uintptr(win32.StructArg(Dimensions)), uintptr(unsafe.Pointer(ListSize)), uintptr(unsafe.Pointer(FrameRates)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IAMVideoDecimationProperties: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iamvideodecimationproperties
 // IID: 60d32930-13da-11d3-9ec6-c4fcaef5c7be
 type IAMVideoDecimationProperties struct {
@@ -6653,6 +6665,18 @@ func (self *IDvdControl) SetRoot(pszPath string) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// MouseActivate dispatches through IDvdControl's vtable slot 35.
+func (self *IDvdControl) MouseActivate(point foundation.POINT) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(point)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// MouseSelect dispatches through IDvdControl's vtable slot 36.
+func (self *IDvdControl) MouseSelect(point foundation.POINT) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(point)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // ChapterPlayAutoStop dispatches through IDvdControl's vtable slot 37.
 func (self *IDvdControl) ChapterPlayAutoStop(ulTitle uint32, ulChapter uint32, ulChaptersToPlay uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(ulTitle), uintptr(ulChapter), uintptr(ulChaptersToPlay))
@@ -6830,6 +6854,18 @@ func (self *IDvdControl2) SelectVideoModePreference(ulPreferredDisplayMode uint3
 func (self *IDvdControl2) SetDVDDirectory(pszwPath string) error {
 	_pszwPath := win32.UTF16Ptr(pszwPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszwPath)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// ActivateAtPosition dispatches through IDvdControl2's vtable slot 32.
+func (self *IDvdControl2) ActivateAtPosition(point foundation.POINT) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(point)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// SelectAtPosition dispatches through IDvdControl2's vtable slot 33.
+func (self *IDvdControl2) SelectAtPosition(point foundation.POINT) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(point)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -7261,6 +7297,12 @@ func (self *IDvdInfo2) GetState(pStateData **IDvdState) error {
 // GetMenuLanguages dispatches through IDvdInfo2's vtable slot 33.
 func (self *IDvdInfo2) GetMenuLanguages(pLanguages *uint32, ulMaxLanguages uint32, pulActualLanguages *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLanguages)), uintptr(ulMaxLanguages), uintptr(unsafe.Pointer(pulActualLanguages)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// GetButtonAtPosition dispatches through IDvdInfo2's vtable slot 34.
+func (self *IDvdInfo2) GetButtonAtPosition(point foundation.POINT, pulButtonIndex *uint32) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(point)), uintptr(unsafe.Pointer(pulButtonIndex)))
 	return win32.ErrIfFailed(int32(r1))
 }
 

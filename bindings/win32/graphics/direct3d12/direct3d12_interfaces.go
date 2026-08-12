@@ -803,9 +803,44 @@ func (self *ID3D12Device) CreateRootSignature(nodeMask uint32, pBlobWithRootSign
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// CreateConstantBufferView dispatches through ID3D12Device's vtable slot 17.
+func (self *ID3D12Device) CreateConstantBufferView(pDesc *D3D12_CONSTANT_BUFFER_VIEW_DESC, DestDescriptor D3D12_CPU_DESCRIPTOR_HANDLE) {
+	syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)), uintptr(win32.StructArg(DestDescriptor)))
+}
+
+// CreateShaderResourceView dispatches through ID3D12Device's vtable slot 18.
+func (self *ID3D12Device) CreateShaderResourceView(pResource *ID3D12Resource, pDesc *D3D12_SHADER_RESOURCE_VIEW_DESC, DestDescriptor D3D12_CPU_DESCRIPTOR_HANDLE) {
+	syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResource)), uintptr(unsafe.Pointer(pDesc)), uintptr(win32.StructArg(DestDescriptor)))
+}
+
+// CreateUnorderedAccessView dispatches through ID3D12Device's vtable slot 19.
+func (self *ID3D12Device) CreateUnorderedAccessView(pResource *ID3D12Resource, pCounterResource *ID3D12Resource, pDesc *D3D12_UNORDERED_ACCESS_VIEW_DESC, DestDescriptor D3D12_CPU_DESCRIPTOR_HANDLE) {
+	syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResource)), uintptr(unsafe.Pointer(pCounterResource)), uintptr(unsafe.Pointer(pDesc)), uintptr(win32.StructArg(DestDescriptor)))
+}
+
+// CreateRenderTargetView dispatches through ID3D12Device's vtable slot 20.
+func (self *ID3D12Device) CreateRenderTargetView(pResource *ID3D12Resource, pDesc *D3D12_RENDER_TARGET_VIEW_DESC, DestDescriptor D3D12_CPU_DESCRIPTOR_HANDLE) {
+	syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResource)), uintptr(unsafe.Pointer(pDesc)), uintptr(win32.StructArg(DestDescriptor)))
+}
+
+// CreateDepthStencilView dispatches through ID3D12Device's vtable slot 21.
+func (self *ID3D12Device) CreateDepthStencilView(pResource *ID3D12Resource, pDesc *D3D12_DEPTH_STENCIL_VIEW_DESC, DestDescriptor D3D12_CPU_DESCRIPTOR_HANDLE) {
+	syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResource)), uintptr(unsafe.Pointer(pDesc)), uintptr(win32.StructArg(DestDescriptor)))
+}
+
+// CreateSampler dispatches through ID3D12Device's vtable slot 22.
+func (self *ID3D12Device) CreateSampler(pDesc *D3D12_SAMPLER_DESC, DestDescriptor D3D12_CPU_DESCRIPTOR_HANDLE) {
+	syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)), uintptr(win32.StructArg(DestDescriptor)))
+}
+
 // CopyDescriptors dispatches through ID3D12Device's vtable slot 23.
 func (self *ID3D12Device) CopyDescriptors(NumDestDescriptorRanges uint32, pDestDescriptorRangeStarts *D3D12_CPU_DESCRIPTOR_HANDLE, pDestDescriptorRangeSizes *uint32, NumSrcDescriptorRanges uint32, pSrcDescriptorRangeStarts *D3D12_CPU_DESCRIPTOR_HANDLE, pSrcDescriptorRangeSizes *uint32, DescriptorHeapsType D3D12_DESCRIPTOR_HEAP_TYPE) {
 	syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(NumDestDescriptorRanges), uintptr(unsafe.Pointer(pDestDescriptorRangeStarts)), uintptr(unsafe.Pointer(pDestDescriptorRangeSizes)), uintptr(NumSrcDescriptorRanges), uintptr(unsafe.Pointer(pSrcDescriptorRangeStarts)), uintptr(unsafe.Pointer(pSrcDescriptorRangeSizes)), uintptr(DescriptorHeapsType))
+}
+
+// CopyDescriptorsSimple dispatches through ID3D12Device's vtable slot 24.
+func (self *ID3D12Device) CopyDescriptorsSimple(NumDescriptors uint32, DestDescriptorRangeStart D3D12_CPU_DESCRIPTOR_HANDLE, SrcDescriptorRangeStart D3D12_CPU_DESCRIPTOR_HANDLE, DescriptorHeapsType D3D12_DESCRIPTOR_HEAP_TYPE) {
+	syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(NumDescriptors), uintptr(win32.StructArg(DestDescriptorRangeStart)), uintptr(win32.StructArg(SrcDescriptorRangeStart)), uintptr(DescriptorHeapsType))
 }
 
 // CreateCommittedResource dispatches through ID3D12Device's vtable slot 27.
@@ -987,6 +1022,11 @@ type ID3D12Device11 struct {
 // IID_ID3D12Device11 is the interface identifier for ID3D12Device11.
 var IID_ID3D12Device11 = win32.GUID{Data1: 0x5405c344, Data2: 0xd457, Data3: 0x444e, Data4: [8]byte{0xb4, 0xdd, 0x23, 0x66, 0xe4, 0x5a, 0xee, 0x39}}
 
+// CreateSampler2 dispatches through ID3D12Device11's vtable slot 79.
+func (self *ID3D12Device11) CreateSampler2(pDesc *D3D12_SAMPLER_DESC2, DestDescriptor D3D12_CPU_DESCRIPTOR_HANDLE) {
+	syscall.SyscallN(self.LpVtbl[79], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)), uintptr(win32.StructArg(DestDescriptor)))
+}
+
 // IID: 5af5c532-4c91-4cd0-b541-15a405395fc5
 type ID3D12Device12 struct {
 	ID3D12Device11
@@ -1041,6 +1081,48 @@ func (self *ID3D12Device15) RegisterTrimNotificationCallback(pData *D3D12_REGIST
 // UnregisterTrimNotificationCallback dispatches through ID3D12Device15's vtable slot 84.
 func (self *ID3D12Device15) UnregisterTrimNotificationCallback(CallbackCookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(CallbackCookie))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// TryCreateShaderResourceView dispatches through ID3D12Device15's vtable slot 85.
+func (self *ID3D12Device15) TryCreateShaderResourceView(pResource *ID3D12Resource, pDesc *D3D12_SHADER_RESOURCE_VIEW_DESC, DestDescriptor D3D12_CPU_DESCRIPTOR_HANDLE) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResource)), uintptr(unsafe.Pointer(pDesc)), uintptr(win32.StructArg(DestDescriptor)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// TryCreateUnorderedAccessView dispatches through ID3D12Device15's vtable slot 86.
+func (self *ID3D12Device15) TryCreateUnorderedAccessView(pResource *ID3D12Resource, pCounterResource *ID3D12Resource, pDesc *D3D12_UNORDERED_ACCESS_VIEW_DESC, DestDescriptor D3D12_CPU_DESCRIPTOR_HANDLE) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResource)), uintptr(unsafe.Pointer(pCounterResource)), uintptr(unsafe.Pointer(pDesc)), uintptr(win32.StructArg(DestDescriptor)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// TryCreateConstantBufferView dispatches through ID3D12Device15's vtable slot 87.
+func (self *ID3D12Device15) TryCreateConstantBufferView(pDesc *D3D12_CONSTANT_BUFFER_VIEW_DESC, DestDescriptor D3D12_CPU_DESCRIPTOR_HANDLE) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[87], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)), uintptr(win32.StructArg(DestDescriptor)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// TryCreateSampler2 dispatches through ID3D12Device15's vtable slot 88.
+func (self *ID3D12Device15) TryCreateSampler2(pDesc *D3D12_SAMPLER_DESC2, DestDescriptor D3D12_CPU_DESCRIPTOR_HANDLE) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[88], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)), uintptr(win32.StructArg(DestDescriptor)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// TryCreateRenderTargetView dispatches through ID3D12Device15's vtable slot 89.
+func (self *ID3D12Device15) TryCreateRenderTargetView(pResource *ID3D12Resource, pDesc *D3D12_RENDER_TARGET_VIEW_DESC, DestDescriptor D3D12_CPU_DESCRIPTOR_HANDLE) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[89], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResource)), uintptr(unsafe.Pointer(pDesc)), uintptr(win32.StructArg(DestDescriptor)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// TryCreateDepthStencilView dispatches through ID3D12Device15's vtable slot 90.
+func (self *ID3D12Device15) TryCreateDepthStencilView(pResource *ID3D12Resource, pDesc *D3D12_DEPTH_STENCIL_VIEW_DESC, DestDescriptor D3D12_CPU_DESCRIPTOR_HANDLE) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResource)), uintptr(unsafe.Pointer(pDesc)), uintptr(win32.StructArg(DestDescriptor)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// TryCreateSamplerFeedbackUnorderedAccessView dispatches through ID3D12Device15's vtable slot 91.
+func (self *ID3D12Device15) TryCreateSamplerFeedbackUnorderedAccessView(pTargetedResource *ID3D12Resource, pFeedbackResource *ID3D12Resource, DestDescriptor D3D12_CPU_DESCRIPTOR_HANDLE) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[91], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTargetedResource)), uintptr(unsafe.Pointer(pFeedbackResource)), uintptr(win32.StructArg(DestDescriptor)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1255,6 +1337,11 @@ func (self *ID3D12Device8) CreateCommittedResource2(pHeapProperties *D3D12_HEAP_
 func (self *ID3D12Device8) CreatePlacedResource1(pHeap *ID3D12Heap, HeapOffset uint64, pDesc *D3D12_RESOURCE_DESC1, InitialState D3D12_RESOURCE_STATES, pOptimizedClearValue *D3D12_CLEAR_VALUE, riid *win32.GUID, ppvResource **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHeap)), uintptr(HeapOffset), uintptr(unsafe.Pointer(pDesc)), uintptr(InitialState), uintptr(unsafe.Pointer(pOptimizedClearValue)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvResource)))
 	return win32.ErrIfFailed(int32(r1))
+}
+
+// CreateSamplerFeedbackUnorderedAccessView dispatches through ID3D12Device8's vtable slot 71.
+func (self *ID3D12Device8) CreateSamplerFeedbackUnorderedAccessView(pTargetedResource *ID3D12Resource, pFeedbackResource *ID3D12Resource, DestDescriptor D3D12_CPU_DESCRIPTOR_HANDLE) {
+	syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTargetedResource)), uintptr(unsafe.Pointer(pFeedbackResource)), uintptr(win32.StructArg(DestDescriptor)))
 }
 
 // GetCopyableFootprints1 dispatches through ID3D12Device8's vtable slot 72.
@@ -1853,6 +1940,16 @@ func (self *ID3D12GraphicsCommandList) SetGraphicsRootSignature(pRootSignature *
 	syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRootSignature)))
 }
 
+// SetComputeRootDescriptorTable dispatches through ID3D12GraphicsCommandList's vtable slot 31.
+func (self *ID3D12GraphicsCommandList) SetComputeRootDescriptorTable(RootParameterIndex uint32, BaseDescriptor D3D12_GPU_DESCRIPTOR_HANDLE) {
+	syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(RootParameterIndex), uintptr(win32.StructArg(BaseDescriptor)))
+}
+
+// SetGraphicsRootDescriptorTable dispatches through ID3D12GraphicsCommandList's vtable slot 32.
+func (self *ID3D12GraphicsCommandList) SetGraphicsRootDescriptorTable(RootParameterIndex uint32, BaseDescriptor D3D12_GPU_DESCRIPTOR_HANDLE) {
+	syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(RootParameterIndex), uintptr(win32.StructArg(BaseDescriptor)))
+}
+
 // SetComputeRoot32BitConstant dispatches through ID3D12GraphicsCommandList's vtable slot 33.
 func (self *ID3D12GraphicsCommandList) SetComputeRoot32BitConstant(RootParameterIndex uint32, SrcData uint32, DestOffsetIn32BitValues uint32) {
 	syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(RootParameterIndex), uintptr(SrcData), uintptr(DestOffsetIn32BitValues))
@@ -1930,6 +2027,33 @@ func (self *ID3D12GraphicsCommandList) SOSetTargets(StartSlot uint32, pViews []D
 func (self *ID3D12GraphicsCommandList) OMSetRenderTargets(NumRenderTargetDescriptors uint32, pRenderTargetDescriptors *D3D12_CPU_DESCRIPTOR_HANDLE, RTsSingleHandleToDescriptorRange bool, pDepthStencilDescriptor *D3D12_CPU_DESCRIPTOR_HANDLE) {
 	_RTsSingleHandleToDescriptorRange := win32.Bool32(RTsSingleHandleToDescriptorRange)
 	syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(NumRenderTargetDescriptors), uintptr(unsafe.Pointer(pRenderTargetDescriptors)), uintptr(_RTsSingleHandleToDescriptorRange), uintptr(unsafe.Pointer(pDepthStencilDescriptor)))
+}
+
+// ClearRenderTargetView dispatches through ID3D12GraphicsCommandList's vtable slot 48.
+func (self *ID3D12GraphicsCommandList) ClearRenderTargetView(RenderTargetView D3D12_CPU_DESCRIPTOR_HANDLE, ColorRGBA *float32, pRects []foundation.RECT) {
+	var _pRects *foundation.RECT
+	if len(pRects) > 0 {
+		_pRects = &pRects[0]
+	}
+	syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(RenderTargetView)), uintptr(unsafe.Pointer(ColorRGBA)), uintptr(len(pRects)), uintptr(unsafe.Pointer(_pRects)))
+}
+
+// ClearUnorderedAccessViewUint dispatches through ID3D12GraphicsCommandList's vtable slot 49.
+func (self *ID3D12GraphicsCommandList) ClearUnorderedAccessViewUint(ViewGPUHandleInCurrentHeap D3D12_GPU_DESCRIPTOR_HANDLE, ViewCPUHandle D3D12_CPU_DESCRIPTOR_HANDLE, pResource *ID3D12Resource, Values *uint32, pRects []foundation.RECT) {
+	var _pRects *foundation.RECT
+	if len(pRects) > 0 {
+		_pRects = &pRects[0]
+	}
+	syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(ViewGPUHandleInCurrentHeap)), uintptr(win32.StructArg(ViewCPUHandle)), uintptr(unsafe.Pointer(pResource)), uintptr(unsafe.Pointer(Values)), uintptr(len(pRects)), uintptr(unsafe.Pointer(_pRects)))
+}
+
+// ClearUnorderedAccessViewFloat dispatches through ID3D12GraphicsCommandList's vtable slot 50.
+func (self *ID3D12GraphicsCommandList) ClearUnorderedAccessViewFloat(ViewGPUHandleInCurrentHeap D3D12_GPU_DESCRIPTOR_HANDLE, ViewCPUHandle D3D12_CPU_DESCRIPTOR_HANDLE, pResource *ID3D12Resource, Values *float32, pRects []foundation.RECT) {
+	var _pRects *foundation.RECT
+	if len(pRects) > 0 {
+		_pRects = &pRects[0]
+	}
+	syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(ViewGPUHandleInCurrentHeap)), uintptr(win32.StructArg(ViewCPUHandle)), uintptr(unsafe.Pointer(pResource)), uintptr(unsafe.Pointer(Values)), uintptr(len(pRects)), uintptr(unsafe.Pointer(_pRects)))
 }
 
 // DiscardResource dispatches through ID3D12GraphicsCommandList's vtable slot 51.

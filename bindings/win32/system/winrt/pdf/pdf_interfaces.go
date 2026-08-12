@@ -9,7 +9,9 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
+	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsdirect2d "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct2d"
+	graphicsdxgi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/dxgi"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
@@ -21,6 +23,12 @@ type IPdfRendererNative struct {
 
 // IID_IPdfRendererNative is the interface identifier for IPdfRendererNative.
 var IID_IPdfRendererNative = win32.GUID{Data1: 0x7d9dcd91, Data2: 0xd277, Data3: 0x4947, Data4: [8]byte{0x85, 0x27, 0x07, 0xa0, 0xda, 0xed, 0xa9, 0x4a}}
+
+// RenderPageToSurface dispatches through IPdfRendererNative's vtable slot 3.
+func (self *IPdfRendererNative) RenderPageToSurface(pdfPage *systemcom.IUnknown, pSurface *graphicsdxgi.IDXGISurface, offset foundation.POINT, pRenderParams *PDF_RENDER_PARAMS) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdfPage)), uintptr(unsafe.Pointer(pSurface)), uintptr(win32.StructArg(offset)), uintptr(unsafe.Pointer(pRenderParams)))
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // RenderPageToDeviceContext dispatches through IPdfRendererNative's vtable slot 4.
 func (self *IPdfRendererNative) RenderPageToDeviceContext(pdfPage *systemcom.IUnknown, pD2DDeviceContext *graphicsdirect2d.ID2D1DeviceContext, pRenderParams *PDF_RENDER_PARAMS) error {

@@ -1405,9 +1405,21 @@ func (self *IPMLiveTileJobInfo) Get_NextSchedule(pNextSchedule *foundation.FILET
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// Set_NextSchedule dispatches through IPMLiveTileJobInfo's vtable slot 6.
+func (self *IPMLiveTileJobInfo) Set_NextSchedule(ftNextSchedule foundation.FILETIME) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(ftNextSchedule)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_StartSchedule dispatches through IPMLiveTileJobInfo's vtable slot 7.
 func (self *IPMLiveTileJobInfo) Get_StartSchedule(pStartSchedule *foundation.FILETIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStartSchedule)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// Set_StartSchedule dispatches through IPMLiveTileJobInfo's vtable slot 8.
+func (self *IPMLiveTileJobInfo) Set_StartSchedule(ftStartSchedule foundation.FILETIME) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(ftStartSchedule)))
 	return win32.ErrIfFailed(int32(r1))
 }
 

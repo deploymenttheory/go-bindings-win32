@@ -174,7 +174,7 @@ func (g *Generator) buildComMethod(meta *win32meta.NamespaceMeta, interfaceName 
 			argWords = append(argWords, "uintptr(unsafe.Pointer("+local+"))")
 			continue
 		}
-		decl, pre, word, _, ok := shapeParam(paramNames[i], param, resolved)
+		decl, pre, word, _, ok := g.shapeParam(paramNames[i], param, resolved)
 		if !ok {
 			g.diag("interface %s: method %s param %s not marshalable (%s), method skipped",
 				interfaceName, method.Name, param.Name, resolved.GoType)

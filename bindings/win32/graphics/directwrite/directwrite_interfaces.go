@@ -382,6 +382,24 @@ type IDWriteFactory4 struct {
 // IID_IDWriteFactory4 is the interface identifier for IDWriteFactory4.
 var IID_IDWriteFactory4 = win32.GUID{Data1: 0x4b0b5bd3, Data2: 0x0797, Data3: 0x4549, Data4: [8]byte{0x8a, 0xc5, 0xfe, 0x91, 0x5c, 0xc5, 0x38, 0x56}}
 
+// TranslateColorGlyphRun dispatches through IDWriteFactory4's vtable slot 40.
+func (self *IDWriteFactory4) TranslateColorGlyphRun(baselineOrigin graphicsdirect2dcommon.D2D_POINT_2F, glyphRun *DWRITE_GLYPH_RUN, glyphRunDescription *DWRITE_GLYPH_RUN_DESCRIPTION, desiredGlyphImageFormats DWRITE_GLYPH_IMAGE_FORMATS, measuringMode DWRITE_MEASURING_MODE, worldAndDpiTransform *DWRITE_MATRIX, colorPaletteIndex uint32, colorLayers **IDWriteColorGlyphRunEnumerator1) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(baselineOrigin)), uintptr(unsafe.Pointer(glyphRun)), uintptr(unsafe.Pointer(glyphRunDescription)), uintptr(desiredGlyphImageFormats), uintptr(measuringMode), uintptr(unsafe.Pointer(worldAndDpiTransform)), uintptr(colorPaletteIndex), uintptr(unsafe.Pointer(colorLayers)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// ComputeGlyphOrigins dispatches through IDWriteFactory4's vtable slot 41.
+func (self *IDWriteFactory4) ComputeGlyphOrigins(glyphRun *DWRITE_GLYPH_RUN, baselineOrigin graphicsdirect2dcommon.D2D_POINT_2F, glyphOrigins *graphicsdirect2dcommon.D2D_POINT_2F) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(glyphRun)), uintptr(win32.StructArg(baselineOrigin)), uintptr(unsafe.Pointer(glyphOrigins)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// ComputeGlyphOrigins dispatches through IDWriteFactory4's vtable slot 42.
+func (self *IDWriteFactory4) ComputeGlyphOrigins_(glyphRun *DWRITE_GLYPH_RUN, measuringMode DWRITE_MEASURING_MODE, baselineOrigin graphicsdirect2dcommon.D2D_POINT_2F, worldAndDpiTransform *DWRITE_MATRIX, glyphOrigins *graphicsdirect2dcommon.D2D_POINT_2F) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(glyphRun)), uintptr(measuringMode), uintptr(win32.StructArg(baselineOrigin)), uintptr(unsafe.Pointer(worldAndDpiTransform)), uintptr(unsafe.Pointer(glyphOrigins)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IDWriteFactory5: https://learn.microsoft.com/windows/win32/api/dwrite_3/nn-dwrite_3-idwritefactory5
 // IID: 958db99a-be2a-4f09-af7d-65189803d1d3
 type IDWriteFactory5 struct {
@@ -512,6 +530,12 @@ type IDWriteFactory8 struct {
 
 // IID_IDWriteFactory8 is the interface identifier for IDWriteFactory8.
 var IID_IDWriteFactory8 = win32.GUID{Data1: 0xee0a7fb5, Data2: 0xdef4, Data3: 0x4c23, Data4: [8]byte{0xa4, 0x54, 0xc9, 0xc7, 0xdc, 0x87, 0x83, 0x98}}
+
+// TranslateColorGlyphRun dispatches through IDWriteFactory8's vtable slot 57.
+func (self *IDWriteFactory8) TranslateColorGlyphRun(baselineOrigin graphicsdirect2dcommon.D2D_POINT_2F, glyphRun *DWRITE_GLYPH_RUN, glyphRunDescription *DWRITE_GLYPH_RUN_DESCRIPTION, desiredGlyphImageFormats DWRITE_GLYPH_IMAGE_FORMATS, paintFeatureLevel DWRITE_PAINT_FEATURE_LEVEL, measuringMode DWRITE_MEASURING_MODE, worldAndDpiTransform *DWRITE_MATRIX, colorPaletteIndex uint32, colorEnumerator **IDWriteColorGlyphRunEnumerator1) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(baselineOrigin)), uintptr(unsafe.Pointer(glyphRun)), uintptr(unsafe.Pointer(glyphRunDescription)), uintptr(desiredGlyphImageFormats), uintptr(paintFeatureLevel), uintptr(measuringMode), uintptr(unsafe.Pointer(worldAndDpiTransform)), uintptr(colorPaletteIndex), uintptr(unsafe.Pointer(colorEnumerator)))
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // IDWriteFont: https://learn.microsoft.com/windows/win32/api/dwrite/nn-dwrite-idwritefont
 // IID: acd16696-8c14-4f5d-877e-fe3fc1d32737
@@ -2814,6 +2838,15 @@ type IDWriteTextAnalyzer1 struct {
 // IID_IDWriteTextAnalyzer1 is the interface identifier for IDWriteTextAnalyzer1.
 var IID_IDWriteTextAnalyzer1 = win32.GUID{Data1: 0x80dad800, Data2: 0xe21f, Data3: 0x4e83, Data4: [8]byte{0x96, 0xce, 0xbf, 0xcc, 0xe5, 0x00, 0xdb, 0x7c}}
 
+// GetBaseline dispatches through IDWriteTextAnalyzer1's vtable slot 11.
+func (self *IDWriteTextAnalyzer1) GetBaseline(fontFace *IDWriteFontFace, baseline DWRITE_BASELINE, isVertical bool, isSimulationAllowed bool, scriptAnalysis DWRITE_SCRIPT_ANALYSIS, localeName string, baselineCoordinate *int32, exists *foundation.BOOL) error {
+	_isVertical := win32.Bool32(isVertical)
+	_isSimulationAllowed := win32.Bool32(isSimulationAllowed)
+	_localeName := win32.UTF16Ptr(localeName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontFace)), uintptr(baseline), uintptr(_isVertical), uintptr(_isSimulationAllowed), uintptr(win32.StructArg(scriptAnalysis)), uintptr(unsafe.Pointer(_localeName)), uintptr(unsafe.Pointer(baselineCoordinate)), uintptr(unsafe.Pointer(exists)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // AnalyzeVerticalGlyphOrientation dispatches through IDWriteTextAnalyzer1's vtable slot 12.
 func (self *IDWriteTextAnalyzer1) AnalyzeVerticalGlyphOrientation(analysisSource *IDWriteTextAnalysisSource1, textPosition uint32, textLength uint32, analysisSink *IDWriteTextAnalysisSink1) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(analysisSource)), uintptr(textPosition), uintptr(textLength), uintptr(unsafe.Pointer(analysisSink)))
@@ -2824,6 +2857,12 @@ func (self *IDWriteTextAnalyzer1) AnalyzeVerticalGlyphOrientation(analysisSource
 func (self *IDWriteTextAnalyzer1) GetGlyphOrientationTransform(glyphOrientationAngle DWRITE_GLYPH_ORIENTATION_ANGLE, isSideways bool, transform *DWRITE_MATRIX) error {
 	_isSideways := win32.Bool32(isSideways)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(glyphOrientationAngle), uintptr(_isSideways), uintptr(unsafe.Pointer(transform)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// GetScriptProperties dispatches through IDWriteTextAnalyzer1's vtable slot 14.
+func (self *IDWriteTextAnalyzer1) GetScriptProperties(scriptAnalysis DWRITE_SCRIPT_ANALYSIS, scriptProperties *DWRITE_SCRIPT_PROPERTIES) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(scriptAnalysis)), uintptr(unsafe.Pointer(scriptProperties)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2842,6 +2881,24 @@ type IDWriteTextAnalyzer2 struct {
 
 // IID_IDWriteTextAnalyzer2 is the interface identifier for IDWriteTextAnalyzer2.
 var IID_IDWriteTextAnalyzer2 = win32.GUID{Data1: 0x553a9ff3, Data2: 0x5693, Data3: 0x4df7, Data4: [8]byte{0xb5, 0x2b, 0x74, 0x80, 0x6f, 0x7f, 0x2e, 0xb9}}
+
+// GetTypographicFeatures dispatches through IDWriteTextAnalyzer2's vtable slot 20.
+func (self *IDWriteTextAnalyzer2) GetTypographicFeatures(fontFace *IDWriteFontFace, scriptAnalysis DWRITE_SCRIPT_ANALYSIS, localeName string, actualTagCount *uint32, tags []DWRITE_FONT_FEATURE_TAG) error {
+	_localeName := win32.UTF16Ptr(localeName)
+	var _tags *DWRITE_FONT_FEATURE_TAG
+	if len(tags) > 0 {
+		_tags = &tags[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontFace)), uintptr(win32.StructArg(scriptAnalysis)), uintptr(unsafe.Pointer(_localeName)), uintptr(len(tags)), uintptr(unsafe.Pointer(actualTagCount)), uintptr(unsafe.Pointer(_tags)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// CheckTypographicFeature dispatches through IDWriteTextAnalyzer2's vtable slot 21.
+func (self *IDWriteTextAnalyzer2) CheckTypographicFeature(fontFace *IDWriteFontFace, scriptAnalysis DWRITE_SCRIPT_ANALYSIS, localeName string, featureTag DWRITE_FONT_FEATURE_TAG, glyphCount uint32, glyphIndices *uint16, featureApplies *byte) error {
+	_localeName := win32.UTF16Ptr(localeName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontFace)), uintptr(win32.StructArg(scriptAnalysis)), uintptr(unsafe.Pointer(_localeName)), uintptr(featureTag), uintptr(glyphCount), uintptr(unsafe.Pointer(glyphIndices)), uintptr(unsafe.Pointer(featureApplies)))
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // IDWriteTextFormat: https://learn.microsoft.com/windows/win32/api/dwrite/nn-dwrite-idwritetextformat
 // IID: 9c906818-31d7-4fd3-a151-7c5e225db55a
@@ -3113,6 +3170,76 @@ type IDWriteTextLayout struct {
 // IID_IDWriteTextLayout is the interface identifier for IDWriteTextLayout.
 var IID_IDWriteTextLayout = win32.GUID{Data1: 0x53737037, Data2: 0x6d14, Data3: 0x410b, Data4: [8]byte{0x9b, 0xfe, 0x0b, 0x18, 0x2b, 0xb7, 0x09, 0x61}}
 
+// SetFontCollection dispatches through IDWriteTextLayout's vtable slot 30.
+func (self *IDWriteTextLayout) SetFontCollection(fontCollection *IDWriteFontCollection, textRange DWRITE_TEXT_RANGE) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontCollection)), uintptr(win32.StructArg(textRange)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// SetFontFamilyName dispatches through IDWriteTextLayout's vtable slot 31.
+func (self *IDWriteTextLayout) SetFontFamilyName(fontFamilyName string, textRange DWRITE_TEXT_RANGE) error {
+	_fontFamilyName := win32.UTF16Ptr(fontFamilyName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fontFamilyName)), uintptr(win32.StructArg(textRange)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// SetFontWeight dispatches through IDWriteTextLayout's vtable slot 32.
+func (self *IDWriteTextLayout) SetFontWeight(fontWeight DWRITE_FONT_WEIGHT, textRange DWRITE_TEXT_RANGE) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(fontWeight), uintptr(win32.StructArg(textRange)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// SetFontStyle dispatches through IDWriteTextLayout's vtable slot 33.
+func (self *IDWriteTextLayout) SetFontStyle(fontStyle DWRITE_FONT_STYLE, textRange DWRITE_TEXT_RANGE) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(fontStyle), uintptr(win32.StructArg(textRange)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// SetFontStretch dispatches through IDWriteTextLayout's vtable slot 34.
+func (self *IDWriteTextLayout) SetFontStretch(fontStretch DWRITE_FONT_STRETCH, textRange DWRITE_TEXT_RANGE) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(fontStretch), uintptr(win32.StructArg(textRange)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// SetUnderline dispatches through IDWriteTextLayout's vtable slot 36.
+func (self *IDWriteTextLayout) SetUnderline(hasUnderline bool, textRange DWRITE_TEXT_RANGE) error {
+	_hasUnderline := win32.Bool32(hasUnderline)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(_hasUnderline), uintptr(win32.StructArg(textRange)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// SetStrikethrough dispatches through IDWriteTextLayout's vtable slot 37.
+func (self *IDWriteTextLayout) SetStrikethrough(hasStrikethrough bool, textRange DWRITE_TEXT_RANGE) error {
+	_hasStrikethrough := win32.Bool32(hasStrikethrough)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(_hasStrikethrough), uintptr(win32.StructArg(textRange)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// SetDrawingEffect dispatches through IDWriteTextLayout's vtable slot 38.
+func (self *IDWriteTextLayout) SetDrawingEffect(drawingEffect *systemcom.IUnknown, textRange DWRITE_TEXT_RANGE) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(drawingEffect)), uintptr(win32.StructArg(textRange)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// SetInlineObject dispatches through IDWriteTextLayout's vtable slot 39.
+func (self *IDWriteTextLayout) SetInlineObject(inlineObject *IDWriteInlineObject, textRange DWRITE_TEXT_RANGE) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inlineObject)), uintptr(win32.StructArg(textRange)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// SetTypography dispatches through IDWriteTextLayout's vtable slot 40.
+func (self *IDWriteTextLayout) SetTypography(typography *IDWriteTypography, textRange DWRITE_TEXT_RANGE) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(typography)), uintptr(win32.StructArg(textRange)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// SetLocaleName dispatches through IDWriteTextLayout's vtable slot 41.
+func (self *IDWriteTextLayout) SetLocaleName(localeName string, textRange DWRITE_TEXT_RANGE) error {
+	_localeName := win32.UTF16Ptr(localeName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_localeName)), uintptr(win32.StructArg(textRange)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetFontCollection dispatches through IDWriteTextLayout's vtable slot 44.
 func (self *IDWriteTextLayout) GetFontCollection(currentPosition uint32, fontCollection **IDWriteFontCollection, textRange *DWRITE_TEXT_RANGE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(currentPosition), uintptr(unsafe.Pointer(fontCollection)), uintptr(unsafe.Pointer(textRange)))
@@ -3251,6 +3378,13 @@ type IDWriteTextLayout1 struct {
 // IID_IDWriteTextLayout1 is the interface identifier for IDWriteTextLayout1.
 var IID_IDWriteTextLayout1 = win32.GUID{Data1: 0x9064d822, Data2: 0x80a7, Data3: 0x465c, Data4: [8]byte{0xa9, 0x86, 0xdf, 0x65, 0xf7, 0x8b, 0x8f, 0xeb}}
 
+// SetPairKerning dispatches through IDWriteTextLayout1's vtable slot 67.
+func (self *IDWriteTextLayout1) SetPairKerning(isPairKerningEnabled bool, textRange DWRITE_TEXT_RANGE) error {
+	_isPairKerningEnabled := win32.Bool32(isPairKerningEnabled)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(_isPairKerningEnabled), uintptr(win32.StructArg(textRange)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetPairKerning dispatches through IDWriteTextLayout1's vtable slot 68.
 func (self *IDWriteTextLayout1) GetPairKerning(currentPosition uint32, isPairKerningEnabled *foundation.BOOL, textRange *DWRITE_TEXT_RANGE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(currentPosition), uintptr(unsafe.Pointer(isPairKerningEnabled)), uintptr(unsafe.Pointer(textRange)))
@@ -3373,6 +3507,16 @@ type IDWriteTextLayout4 struct {
 // IID_IDWriteTextLayout4 is the interface identifier for IDWriteTextLayout4.
 var IID_IDWriteTextLayout4 = win32.GUID{Data1: 0x05a9bf42, Data2: 0x223f, Data3: 0x4441, Data4: [8]byte{0xb5, 0xfb, 0x82, 0x63, 0x68, 0x5f, 0x55, 0xe9}}
 
+// SetFontAxisValues dispatches through IDWriteTextLayout4's vtable slot 84.
+func (self *IDWriteTextLayout4) SetFontAxisValues(fontAxisValues []DWRITE_FONT_AXIS_VALUE, textRange DWRITE_TEXT_RANGE) error {
+	var _fontAxisValues *DWRITE_FONT_AXIS_VALUE
+	if len(fontAxisValues) > 0 {
+		_fontAxisValues = &fontAxisValues[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fontAxisValues)), uintptr(len(fontAxisValues)), uintptr(win32.StructArg(textRange)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetFontAxisValueCount dispatches through IDWriteTextLayout4's vtable slot 85.
 func (self *IDWriteTextLayout4) GetFontAxisValueCount(currentPosition uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(currentPosition))
@@ -3427,6 +3571,12 @@ type IDWriteTypography struct {
 
 // IID_IDWriteTypography is the interface identifier for IDWriteTypography.
 var IID_IDWriteTypography = win32.GUID{Data1: 0x55f1112b, Data2: 0x1dc2, Data3: 0x4b3c, Data4: [8]byte{0x95, 0x41, 0xf4, 0x68, 0x94, 0xed, 0x85, 0xb6}}
+
+// AddFontFeature dispatches through IDWriteTypography's vtable slot 3.
+func (self *IDWriteTypography) AddFontFeature(fontFeature DWRITE_FONT_FEATURE) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(fontFeature)))
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // GetFontFeatureCount dispatches through IDWriteTypography's vtable slot 4.
 func (self *IDWriteTypography) GetFontFeatureCount() uint32 {

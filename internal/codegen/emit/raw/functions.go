@@ -215,7 +215,7 @@ func (g *Generator) buildFunction(meta *win32meta.NamespaceMeta, function *win32
 			continue
 		}
 
-		decl, pre, word, pointer, ok := shapeParam(paramNames[i], param, resolved)
+		decl, pre, word, pointer, ok := g.shapeParam(paramNames[i], param, resolved)
 		if !ok {
 			g.diag("function %s: param %s not marshalable (%s), function skipped",
 				function.Name, param.Name, resolved.GoType)
@@ -298,10 +298,10 @@ func (g *Generator) buildFunction(meta *win32meta.NamespaceMeta, function *win32
 // shapeParam maps one non-slice, non-retval parameter to its idiomatic Go
 // declaration, any conversion preamble, and the syscall word. pointer reports
 // whether the word uses unsafe.Pointer. ok is false when the param cannot be
-// marshaled (float / by-value struct); the caller then skips its function or
-// method with a context-appropriate diagnostic. Shared by functions and COM
-// methods.
-func shapeParam(name string, param *win32meta.Param, resolved typemap.Resolved) (decl string, preamble []string, word string, pointer bool, ok bool) {
+// marshaled (float, or a by-value struct too large for a register); the caller
+// then skips its function or method with a context-appropriate diagnostic.
+// Shared by functions and COM methods.
+func (g *Generator) shapeParam(name string, param *win32meta.Param, resolved typemap.Resolved) (decl string, preamble []string, word string, pointer bool, ok bool) {
 	// Reserved parameters always take NULL — dropped from the signature.
 	if param.IsReserved {
 		return "", nil, "0", false, true
@@ -326,9 +326,49 @@ func shapeParam(name string, param *win32meta.Param, resolved typemap.Resolved) 
 		return name + " " + resolved.GoType, nil, "uintptr(" + name + ")", false, true
 	case typemap.ArgPointer:
 		return name + " " + resolved.GoType, nil, "uintptr(unsafe.Pointer(" + name + "))", true, true
-	default:
-		return "", nil, "", false, false
 	}
+	// A by-value struct or union small enough to travel in a register.
+	if word, ok := registerStructWord(g.byValueStructSize(param, resolved), name); ok {
+		return name + " " + resolved.GoType, nil, word, false, true
+	}
+	return "", nil, "", false, false
+}
+
+// byValueStructSize reports the computed C size of a by-value struct or union
+// parameter, or 0 when the parameter is not one (or its layout cannot be
+// derived).
+func (g *Generator) byValueStructSize(param *win32meta.Param, resolved typemap.Resolved) uint32 {
+	switch resolved.Kind {
+	case typemap.KindStruct, typemap.KindUnion:
+	default:
+		return 0
+	}
+	if computed := g.layoutOf(&param.Type, nil); computed.ok {
+		return computed.size
+	}
+	return 0
+}
+
+// registerStructWord builds the syscall word for a by-value struct of the
+// given size, reporting false when the size is not one the ABI passes in a
+// register.
+//
+// The Windows x64 convention passes a struct or union of 1, 2, 4 or 8 bytes as
+// if it were an integer of the same size; ARM64 likewise puts one this small in
+// a register. Any other size — 12 bytes, or an odd 3 — travels by reference
+// instead, which is a different call shape entirely, so those stay skipped
+// rather than being passed truncated for the callee to read as garbage.
+//
+// This is what makes the COORD-taking APIs expressible: CreatePseudoConsole,
+// ResizePseudoConsole, SetConsoleCursorPosition and the console-output family
+// all take a 4-byte COORD by value, and syscall.SyscallN accepts only uintptr
+// words.
+func registerStructWord(size uint32, name string) (string, bool) {
+	switch size {
+	case 1, 2, 4, 8:
+		return "uintptr(win32.StructArg(" + name + "))", true
+	}
+	return "", false
 }
 
 // buildReturnShape selects the body/return template shape (idiomatic).

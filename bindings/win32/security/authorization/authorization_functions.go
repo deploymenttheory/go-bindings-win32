@@ -89,6 +89,9 @@ var (
 	procAuthzFreeResourceManager                             = modAUTHZ.NewProc("AuthzFreeResourceManager")
 	procAuthzGetInformationFromContext                       = modAUTHZ.NewProc("AuthzGetInformationFromContext")
 	procAuthzInitializeCompoundContext                       = modAUTHZ.NewProc("AuthzInitializeCompoundContext")
+	procAuthzInitializeContextFromAuthzContext               = modAUTHZ.NewProc("AuthzInitializeContextFromAuthzContext")
+	procAuthzInitializeContextFromSid                        = modAUTHZ.NewProc("AuthzInitializeContextFromSid")
+	procAuthzInitializeContextFromToken                      = modAUTHZ.NewProc("AuthzInitializeContextFromToken")
 	procAuthzInitializeObjectAccessAuditEvent                = modAUTHZ.NewProc("AuthzInitializeObjectAccessAuditEvent")
 	procAuthzInitializeObjectAccessAuditEvent2               = modAUTHZ.NewProc("AuthzInitializeObjectAccessAuditEvent2")
 	procAuthzInitializeRemoteResourceManager                 = modAUTHZ.NewProc("AuthzInitializeRemoteResourceManager")
@@ -235,6 +238,39 @@ func AuthzGetInformationFromContext(hAuthzClientContext AUTHZ_CLIENT_CONTEXT_HAN
 // Minimum OS: windows8.0.
 func AuthzInitializeCompoundContext(UserContext AUTHZ_CLIENT_CONTEXT_HANDLE, DeviceContext AUTHZ_CLIENT_CONTEXT_HANDLE, phCompoundContext *AUTHZ_CLIENT_CONTEXT_HANDLE) error {
 	r1, _, e1 := syscall.SyscallN(procAuthzInitializeCompoundContext.Addr(), uintptr(UserContext), uintptr(DeviceContext), uintptr(unsafe.Pointer(phCompoundContext)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// AuthzInitializeContextFromAuthzContext calls AUTHZ!AuthzInitializeContextFromAuthzContext.
+// https://learn.microsoft.com/windows/win32/api/authz/nf-authz-authzinitializecontextfromauthzcontext
+// Minimum OS: windows5.1.2600.
+func AuthzInitializeContextFromAuthzContext(Flags uint32, hAuthzClientContext AUTHZ_CLIENT_CONTEXT_HANDLE, pExpirationTime *int64, Identifier foundation.LUID, DynamicGroupArgs unsafe.Pointer, phNewAuthzClientContext *AUTHZ_CLIENT_CONTEXT_HANDLE) error {
+	r1, _, e1 := syscall.SyscallN(procAuthzInitializeContextFromAuthzContext.Addr(), uintptr(Flags), uintptr(hAuthzClientContext), uintptr(unsafe.Pointer(pExpirationTime)), uintptr(win32.StructArg(Identifier)), uintptr(unsafe.Pointer(DynamicGroupArgs)), uintptr(unsafe.Pointer(phNewAuthzClientContext)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// AuthzInitializeContextFromSid calls AUTHZ!AuthzInitializeContextFromSid.
+// https://learn.microsoft.com/windows/win32/api/authz/nf-authz-authzinitializecontextfromsid
+// Minimum OS: windows5.1.2600.
+func AuthzInitializeContextFromSid(Flags uint32, UserSid security.PSID, hAuthzResourceManager AUTHZ_RESOURCE_MANAGER_HANDLE, pExpirationTime *int64, Identifier foundation.LUID, DynamicGroupArgs unsafe.Pointer, phAuthzClientContext *AUTHZ_CLIENT_CONTEXT_HANDLE) error {
+	r1, _, e1 := syscall.SyscallN(procAuthzInitializeContextFromSid.Addr(), uintptr(Flags), uintptr(UserSid), uintptr(hAuthzResourceManager), uintptr(unsafe.Pointer(pExpirationTime)), uintptr(win32.StructArg(Identifier)), uintptr(unsafe.Pointer(DynamicGroupArgs)), uintptr(unsafe.Pointer(phAuthzClientContext)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// AuthzInitializeContextFromToken calls AUTHZ!AuthzInitializeContextFromToken.
+// https://learn.microsoft.com/windows/win32/api/authz/nf-authz-authzinitializecontextfromtoken
+// Minimum OS: windows5.1.2600.
+func AuthzInitializeContextFromToken(Flags uint32, TokenHandle foundation.HANDLE, hAuthzResourceManager AUTHZ_RESOURCE_MANAGER_HANDLE, pExpirationTime *int64, Identifier foundation.LUID, DynamicGroupArgs unsafe.Pointer, phAuthzClientContext *AUTHZ_CLIENT_CONTEXT_HANDLE) error {
+	r1, _, e1 := syscall.SyscallN(procAuthzInitializeContextFromToken.Addr(), uintptr(Flags), uintptr(TokenHandle), uintptr(hAuthzResourceManager), uintptr(unsafe.Pointer(pExpirationTime)), uintptr(win32.StructArg(Identifier)), uintptr(unsafe.Pointer(DynamicGroupArgs)), uintptr(unsafe.Pointer(phAuthzClientContext)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

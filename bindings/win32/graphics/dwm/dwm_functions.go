@@ -46,6 +46,7 @@ var (
 	procDwmSetPresentParameters           = moddwmapi.NewProc("DwmSetPresentParameters")
 	procDwmSetWindowAttribute             = moddwmapi.NewProc("DwmSetWindowAttribute")
 	procDwmShowContact                    = moddwmapi.NewProc("DwmShowContact")
+	procDwmTetherContact                  = moddwmapi.NewProc("DwmTetherContact")
 	procDwmTransitionOwnedWindow          = moddwmapi.NewProc("DwmTransitionOwnedWindow")
 	procDwmUnregisterThumbnail            = moddwmapi.NewProc("DwmUnregisterThumbnail")
 	procDwmUpdateThumbnailProperties      = moddwmapi.NewProc("DwmUpdateThumbnailProperties")
@@ -274,6 +275,15 @@ func DwmSetWindowAttribute(hwnd foundation.HWND, dwAttribute uint32, pvAttribute
 // Minimum OS: windows8.0.
 func DwmShowContact(dwPointerID uint32, eShowContact DWM_SHOWCONTACT) error {
 	r1, _, _ := syscall.SyscallN(procDwmShowContact.Addr(), uintptr(dwPointerID), uintptr(eShowContact))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// DwmTetherContact calls dwmapi!DwmTetherContact.
+// https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmtethercontact
+// Minimum OS: windows8.0.
+func DwmTetherContact(dwPointerID uint32, fEnable bool, ptTether foundation.POINT) error {
+	_fEnable := win32.Bool32(fEnable)
+	r1, _, _ := syscall.SyscallN(procDwmTetherContact.Addr(), uintptr(dwPointerID), uintptr(_fEnable), uintptr(win32.StructArg(ptTether)))
 	return win32.ErrIfFailed(int32(r1))
 }
 

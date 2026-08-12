@@ -543,6 +543,15 @@ func (self *IVssComponent) GetFileRestoreStatus(pStatus *VSS_FILE_RESTORE_STATUS
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// AddDifferencedFilesByLastModifyTime dispatches through IVssComponent's vtable slot 37.
+func (self *IVssComponent) AddDifferencedFilesByLastModifyTime(wszPath string, wszFilespec string, bRecursive bool, ftLastModifyTime foundation.FILETIME) error {
+	_wszPath := win32.UTF16Ptr(wszPath)
+	_wszFilespec := win32.UTF16Ptr(wszFilespec)
+	_bRecursive := win32.Bool32(bRecursive)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszPath)), uintptr(unsafe.Pointer(_wszFilespec)), uintptr(_bRecursive), uintptr(win32.StructArg(ftLastModifyTime)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // AddDifferencedFilesByLastModifyLSN dispatches through IVssComponent's vtable slot 38.
 func (self *IVssComponent) AddDifferencedFilesByLastModifyLSN(wszPath string, wszFilespec string, bRecursive bool, bstrLsnString foundation.BSTR) error {
 	_wszPath := win32.UTF16Ptr(wszPath)

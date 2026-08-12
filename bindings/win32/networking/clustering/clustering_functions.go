@@ -367,6 +367,7 @@ var (
 	procResUtilGetDwordProperty                     = modRESUTILS.NewProc("ResUtilGetDwordProperty")
 	procResUtilGetDwordValue                        = modRESUTILS.NewProc("ResUtilGetDwordValue")
 	procResUtilGetEnvironmentWithNetName            = modRESUTILS.NewProc("ResUtilGetEnvironmentWithNetName")
+	procResUtilGetFileTimeProperty                  = modRESUTILS.NewProc("ResUtilGetFileTimeProperty")
 	procResUtilGetLongProperty                      = modRESUTILS.NewProc("ResUtilGetLongProperty")
 	procResUtilGetMultiSzProperty                   = modRESUTILS.NewProc("ResUtilGetMultiSzProperty")
 	procResUtilGetPrivateProperties                 = modRESUTILS.NewProc("ResUtilGetPrivateProperties")
@@ -3419,6 +3420,14 @@ func ResUtilGetEnvironmentWithNetName(hResource HRESOURCE) (unsafe.Pointer, erro
 		return ret, win32.LastError(e1)
 	}
 	return ret, nil
+}
+
+// ResUtilGetFileTimeProperty calls RESUTILS!ResUtilGetFileTimeProperty.
+// https://learn.microsoft.com/windows/win32/api/resapi/nf-resapi-resutilgetfiletimeproperty
+// Minimum OS: windowsserver2008.
+func ResUtilGetFileTimeProperty(pftOutValue *foundation.FILETIME, pValueStruct *CLUSPROP_FILETIME, ftOldValue foundation.FILETIME, ftMinimum foundation.FILETIME, ftMaximum foundation.FILETIME, ppPropertyList **byte, pcbPropertyListSize *uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procResUtilGetFileTimeProperty.Addr(), uintptr(unsafe.Pointer(pftOutValue)), uintptr(unsafe.Pointer(pValueStruct)), uintptr(win32.StructArg(ftOldValue)), uintptr(win32.StructArg(ftMinimum)), uintptr(win32.StructArg(ftMaximum)), uintptr(unsafe.Pointer(ppPropertyList)), uintptr(unsafe.Pointer(pcbPropertyListSize)))
+	return uint32(r1)
 }
 
 // ResUtilGetLongProperty calls RESUTILS!ResUtilGetLongProperty.

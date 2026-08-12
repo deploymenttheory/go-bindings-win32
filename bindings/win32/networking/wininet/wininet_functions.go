@@ -29,6 +29,8 @@ var (
 	procAppCacheFinalize                           = modWININET.NewProc("AppCacheFinalize")
 	procAppCacheFreeDownloadList                   = modWININET.NewProc("AppCacheFreeDownloadList")
 	procAppCacheFreeGroupList                      = modWININET.NewProc("AppCacheFreeGroupList")
+	procAppCacheFreeIESpace                        = modWININET.NewProc("AppCacheFreeIESpace")
+	procAppCacheFreeSpace                          = modWININET.NewProc("AppCacheFreeSpace")
 	procAppCacheGetDownloadList                    = modWININET.NewProc("AppCacheGetDownloadList")
 	procAppCacheGetFallbackUrl                     = modWININET.NewProc("AppCacheGetFallbackUrl")
 	procAppCacheGetGroupList                       = modWININET.NewProc("AppCacheGetGroupList")
@@ -36,6 +38,9 @@ var (
 	procAppCacheGetInfo                            = modWININET.NewProc("AppCacheGetInfo")
 	procAppCacheGetManifestUrl                     = modWININET.NewProc("AppCacheGetManifestUrl")
 	procAppCacheLookup                             = modWININET.NewProc("AppCacheLookup")
+	procCommitUrlCacheEntry                        = modWININET.NewProc("CommitUrlCacheEntryW")
+	procCommitUrlCacheEntryA                       = modWININET.NewProc("CommitUrlCacheEntryA")
+	procCommitUrlCacheEntryBinaryBlob              = modWININET.NewProc("CommitUrlCacheEntryBinaryBlob")
 	procCreateMD5SSOHash                           = modWININET.NewProc("CreateMD5SSOHash")
 	procCreateUrlCacheContainer                    = modWININET.NewProc("CreateUrlCacheContainerW")
 	procCreateUrlCacheContainerA                   = modWININET.NewProc("CreateUrlCacheContainerA")
@@ -386,6 +391,18 @@ func AppCacheFreeGroupList(pAppCacheGroupList *APP_CACHE_GROUP_LIST) {
 	syscall.SyscallN(procAppCacheFreeGroupList.Addr(), uintptr(unsafe.Pointer(pAppCacheGroupList)))
 }
 
+// AppCacheFreeIESpace calls WININET!AppCacheFreeIESpace.
+func AppCacheFreeIESpace(ftCutOff foundation.FILETIME) uint32 {
+	r1, _, _ := syscall.SyscallN(procAppCacheFreeIESpace.Addr(), uintptr(win32.StructArg(ftCutOff)))
+	return uint32(r1)
+}
+
+// AppCacheFreeSpace calls WININET!AppCacheFreeSpace.
+func AppCacheFreeSpace(ftCutOff foundation.FILETIME) uint32 {
+	r1, _, _ := syscall.SyscallN(procAppCacheFreeSpace.Addr(), uintptr(win32.StructArg(ftCutOff)))
+	return uint32(r1)
+}
+
 // AppCacheGetDownloadList calls WININET!AppCacheGetDownloadList.
 func AppCacheGetDownloadList(hAppCache unsafe.Pointer, pDownloadList *APP_CACHE_DOWNLOAD_LIST) uint32 {
 	r1, _, _ := syscall.SyscallN(procAppCacheGetDownloadList.Addr(), uintptr(unsafe.Pointer(hAppCache)), uintptr(unsafe.Pointer(pDownloadList)))
@@ -427,6 +444,47 @@ func AppCacheGetManifestUrl(hAppCache unsafe.Pointer, ppwszManifestUrl *foundati
 func AppCacheLookup(pwszUrl string, dwFlags uint32, phAppCache *unsafe.Pointer) uint32 {
 	_pwszUrl := win32.UTF16Ptr(pwszUrl)
 	r1, _, _ := syscall.SyscallN(procAppCacheLookup.Addr(), uintptr(unsafe.Pointer(_pwszUrl)), uintptr(dwFlags), uintptr(unsafe.Pointer(phAppCache)))
+	return uint32(r1)
+}
+
+// CommitUrlCacheEntry calls WININET!CommitUrlCacheEntryW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-commiturlcacheentryw
+// Minimum OS: windows5.0.
+func CommitUrlCacheEntry(lpszUrlName string, lpszLocalFileName string, ExpireTime foundation.FILETIME, LastModifiedTime foundation.FILETIME, CacheEntryType uint32, lpszHeaderInfo string, cchHeaderInfo uint32, lpszOriginalUrl string) error {
+	_lpszUrlName := win32.UTF16Ptr(lpszUrlName)
+	_lpszLocalFileName := win32.UTF16Ptr(lpszLocalFileName)
+	_lpszHeaderInfo := win32.UTF16Ptr(lpszHeaderInfo)
+	_lpszOriginalUrl := win32.UTF16Ptr(lpszOriginalUrl)
+	r1, _, e1 := syscall.SyscallN(procCommitUrlCacheEntry.Addr(), uintptr(unsafe.Pointer(_lpszUrlName)), uintptr(unsafe.Pointer(_lpszLocalFileName)), uintptr(win32.StructArg(ExpireTime)), uintptr(win32.StructArg(LastModifiedTime)), uintptr(CacheEntryType), uintptr(unsafe.Pointer(_lpszHeaderInfo)), uintptr(cchHeaderInfo), 0, uintptr(unsafe.Pointer(_lpszOriginalUrl)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// CommitUrlCacheEntryA calls WININET!CommitUrlCacheEntryA.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-commiturlcacheentrya
+// Minimum OS: windows5.0.
+func CommitUrlCacheEntryA(lpszUrlName foundation.PSTR, lpszLocalFileName foundation.PSTR, ExpireTime foundation.FILETIME, LastModifiedTime foundation.FILETIME, CacheEntryType uint32, lpHeaderInfo []byte, lpszOriginalUrl foundation.PSTR) error {
+	var _lpHeaderInfo *byte
+	if len(lpHeaderInfo) > 0 {
+		_lpHeaderInfo = &lpHeaderInfo[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procCommitUrlCacheEntryA.Addr(), uintptr(unsafe.Pointer(lpszUrlName)), uintptr(unsafe.Pointer(lpszLocalFileName)), uintptr(win32.StructArg(ExpireTime)), uintptr(win32.StructArg(LastModifiedTime)), uintptr(CacheEntryType), uintptr(unsafe.Pointer(_lpHeaderInfo)), uintptr(len(lpHeaderInfo)), 0, uintptr(unsafe.Pointer(lpszOriginalUrl)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// CommitUrlCacheEntryBinaryBlob calls WININET!CommitUrlCacheEntryBinaryBlob.
+func CommitUrlCacheEntryBinaryBlob(pwszUrlName string, dwType uint32, ftExpireTime foundation.FILETIME, ftModifiedTime foundation.FILETIME, pbBlob []byte) uint32 {
+	_pwszUrlName := win32.UTF16Ptr(pwszUrlName)
+	var _pbBlob *byte
+	if len(pbBlob) > 0 {
+		_pbBlob = &pbBlob[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCommitUrlCacheEntryBinaryBlob.Addr(), uintptr(unsafe.Pointer(_pwszUrlName)), uintptr(dwType), uintptr(win32.StructArg(ftExpireTime)), uintptr(win32.StructArg(ftModifiedTime)), uintptr(unsafe.Pointer(_pbBlob)), uintptr(len(pbBlob)))
 	return uint32(r1)
 }
 

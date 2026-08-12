@@ -3150,6 +3150,12 @@ func (self *ID3D11VideoContext) VideoProcessorSetOutputAlphaFillMode(pVideoProce
 	syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(AlphaFillMode), uintptr(StreamIndex))
 }
 
+// VideoProcessorSetOutputConstriction dispatches through ID3D11VideoContext's vtable slot 17.
+func (self *ID3D11VideoContext) VideoProcessorSetOutputConstriction(pVideoProcessor *ID3D11VideoProcessor, Enable bool, Size foundation.SIZE) {
+	_Enable := win32.Bool32(Enable)
+	syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(_Enable), uintptr(win32.StructArg(Size)))
+}
+
 // VideoProcessorSetOutputStereoMode dispatches through ID3D11VideoContext's vtable slot 18.
 func (self *ID3D11VideoContext) VideoProcessorSetOutputStereoMode(pVideoProcessor *ID3D11VideoProcessor, Enable bool) {
 	_Enable := win32.Bool32(Enable)

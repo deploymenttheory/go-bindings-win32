@@ -347,6 +347,12 @@ type IBackgroundCopyFile5 struct {
 // IID_IBackgroundCopyFile5 is the interface identifier for IBackgroundCopyFile5.
 var IID_IBackgroundCopyFile5 = win32.GUID{Data1: 0x85c1657f, Data2: 0xdafc, Data3: 0x40e8, Data4: [8]byte{0x88, 0x34, 0xdf, 0x18, 0xea, 0x25, 0x71, 0x7e}}
 
+// SetProperty dispatches through IBackgroundCopyFile5's vtable slot 13.
+func (self *IBackgroundCopyFile5) SetProperty(PropertyId BITS_FILE_PROPERTY_ID, PropertyValue BITS_FILE_PROPERTY_VALUE) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(PropertyId), uintptr(win32.StructArg(PropertyValue)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetProperty dispatches through IBackgroundCopyFile5's vtable slot 14.
 func (self *IBackgroundCopyFile5) GetProperty(PropertyId BITS_FILE_PROPERTY_ID, PropertyValue *BITS_FILE_PROPERTY_VALUE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(PropertyId), uintptr(unsafe.Pointer(PropertyValue)))

@@ -66,6 +66,7 @@ var (
 	procBuildIoRingRegisterBuffers          = modapi_ms_win_core_ioring_l1_1_0.NewProc("BuildIoRingRegisterBuffers")
 	procBuildIoRingRegisterFileHandles      = modapi_ms_win_core_ioring_l1_1_0.NewProc("BuildIoRingRegisterFileHandles")
 	procCloseIoRing                         = modapi_ms_win_core_ioring_l1_1_0.NewProc("CloseIoRing")
+	procCreateIoRing                        = modapi_ms_win_core_ioring_l1_1_0.NewProc("CreateIoRing")
 	procGetIoRingInfo                       = modapi_ms_win_core_ioring_l1_1_0.NewProc("GetIoRingInfo")
 	procIsIoRingOpSupported                 = modapi_ms_win_core_ioring_l1_1_0.NewProc("IsIoRingOpSupported")
 	procPopIoRingCompletion                 = modapi_ms_win_core_ioring_l1_1_0.NewProc("PopIoRingCompletion")
@@ -411,6 +412,8 @@ var (
 	procNetShareSetInfo                     = modNETAPI32.NewProc("NetShareSetInfo")
 	procNetStatisticsGet                    = modNETAPI32.NewProc("NetStatisticsGet")
 	procTxfGetThreadMiniVersionForCreate    = modtxfw32.NewProc("TxfGetThreadMiniVersionForCreate")
+	procTxfLogCreateFileReadContext         = modtxfw32.NewProc("TxfLogCreateFileReadContext")
+	procTxfLogCreateRangeReadContext        = modtxfw32.NewProc("TxfLogCreateRangeReadContext")
 	procTxfLogDestroyReadContext            = modtxfw32.NewProc("TxfLogDestroyReadContext")
 	procTxfLogReadRecords                   = modtxfw32.NewProc("TxfLogReadRecords")
 	procTxfLogRecordGetFileName             = modtxfw32.NewProc("TxfLogRecordGetFileName")
@@ -1043,6 +1046,13 @@ func CreateHardLinkTransactedA(lpFileName foundation.PSTR, lpExistingFileName fo
 		return win32.LastError(e1)
 	}
 	return nil
+}
+
+// CreateIoRing calls api-ms-win-core-ioring-l1-1-0!CreateIoRing.
+// https://learn.microsoft.com/windows/win32/api/ioringapi/nf-ioringapi-createioring
+func CreateIoRing(ioringVersion IORING_VERSION, flags IORING_CREATE_FLAGS, submissionQueueSize uint32, completionQueueSize uint32, h *HIORING) error {
+	r1, _, _ := syscall.SyscallN(procCreateIoRing.Addr(), uintptr(ioringVersion), uintptr(win32.StructArg(flags)), uintptr(submissionQueueSize), uintptr(completionQueueSize), uintptr(unsafe.Pointer(h)))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateLogContainerScanContext calls clfsw32!CreateLogContainerScanContext.
@@ -4467,6 +4477,26 @@ func TruncateLog(pvMarshal unsafe.Pointer, plsnEnd *CLS_LSN, lpOverlapped *syste
 // https://learn.microsoft.com/windows/win32/api/txfw32/nf-txfw32-txfgetthreadminiversionforcreate
 func TxfGetThreadMiniVersionForCreate(MiniVersion *uint16) {
 	syscall.SyscallN(procTxfGetThreadMiniVersionForCreate.Addr(), uintptr(unsafe.Pointer(MiniVersion)))
+}
+
+// TxfLogCreateFileReadContext calls txfw32!TxfLogCreateFileReadContext.
+// https://learn.microsoft.com/windows/win32/api/txfw32/nf-txfw32-txflogcreatefilereadcontext
+// Minimum OS: windows6.0.6000.
+func TxfLogCreateFileReadContext(LogPath string, BeginningLsn CLS_LSN, EndingLsn CLS_LSN, TxfFileId *TXF_ID, TxfLogContext *unsafe.Pointer) error {
+	_LogPath := win32.UTF16Ptr(LogPath)
+	r1, _, e1 := syscall.SyscallN(procTxfLogCreateFileReadContext.Addr(), uintptr(unsafe.Pointer(_LogPath)), uintptr(win32.StructArg(BeginningLsn)), uintptr(win32.StructArg(EndingLsn)), uintptr(unsafe.Pointer(TxfFileId)), uintptr(unsafe.Pointer(TxfLogContext)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// TxfLogCreateRangeReadContext calls txfw32!TxfLogCreateRangeReadContext.
+// https://learn.microsoft.com/windows/win32/api/txfw32/nf-txfw32-txflogcreaterangereadcontext
+func TxfLogCreateRangeReadContext(LogPath string, BeginningLsn CLS_LSN, EndingLsn CLS_LSN, BeginningVirtualClock *int64, EndingVirtualClock *int64, RecordTypeMask uint32, TxfLogContext *unsafe.Pointer) bool {
+	_LogPath := win32.UTF16Ptr(LogPath)
+	r1, _, _ := syscall.SyscallN(procTxfLogCreateRangeReadContext.Addr(), uintptr(unsafe.Pointer(_LogPath)), uintptr(win32.StructArg(BeginningLsn)), uintptr(win32.StructArg(EndingLsn)), uintptr(unsafe.Pointer(BeginningVirtualClock)), uintptr(unsafe.Pointer(EndingVirtualClock)), uintptr(RecordTypeMask), uintptr(unsafe.Pointer(TxfLogContext)))
+	return r1 != 0
 }
 
 // TxfLogDestroyReadContext calls txfw32!TxfLogDestroyReadContext.

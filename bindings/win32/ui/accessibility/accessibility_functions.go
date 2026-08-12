@@ -22,9 +22,11 @@ var (
 )
 
 var (
+	procAccNotifyTouchInteraction                = modOLEACC.NewProc("AccNotifyTouchInteraction")
 	procAccSetRunningUtilityState                = modOLEACC.NewProc("AccSetRunningUtilityState")
 	procAccessibleChildren                       = modOLEACC.NewProc("AccessibleChildren")
 	procAccessibleObjectFromEvent                = modOLEACC.NewProc("AccessibleObjectFromEvent")
+	procAccessibleObjectFromPoint                = modOLEACC.NewProc("AccessibleObjectFromPoint")
 	procAccessibleObjectFromWindow               = modOLEACC.NewProc("AccessibleObjectFromWindow")
 	procCreateStdAccessibleObject                = modOLEACC.NewProc("CreateStdAccessibleObject")
 	procCreateStdAccessibleProxy                 = modOLEACC.NewProc("CreateStdAccessibleProxyW")
@@ -134,6 +136,14 @@ var (
 	procUnregisterPointerInputTargetEx           = modUSER32.NewProc("UnregisterPointerInputTargetEx")
 )
 
+// AccNotifyTouchInteraction calls OLEACC!AccNotifyTouchInteraction.
+// https://learn.microsoft.com/windows/win32/api/oleacc/nf-oleacc-accnotifytouchinteraction
+// Minimum OS: windows8.0.
+func AccNotifyTouchInteraction(hwndApp foundation.HWND, hwndTarget foundation.HWND, ptTarget foundation.POINT) error {
+	r1, _, _ := syscall.SyscallN(procAccNotifyTouchInteraction.Addr(), uintptr(hwndApp), uintptr(hwndTarget), uintptr(win32.StructArg(ptTarget)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // AccSetRunningUtilityState calls OLEACC!AccSetRunningUtilityState.
 // https://learn.microsoft.com/windows/win32/api/oleacc/nf-oleacc-accsetrunningutilitystate
 // Minimum OS: windows8.0.
@@ -159,6 +169,14 @@ func AccessibleChildren(paccContainer *IAccessible, iChildStart int32, rgvarChil
 // Minimum OS: windows5.0.
 func AccessibleObjectFromEvent(hwnd foundation.HWND, dwId uint32, dwChildId uint32, ppacc **IAccessible, pvarChild *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(procAccessibleObjectFromEvent.Addr(), uintptr(hwnd), uintptr(dwId), uintptr(dwChildId), uintptr(unsafe.Pointer(ppacc)), uintptr(unsafe.Pointer(pvarChild)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// AccessibleObjectFromPoint calls OLEACC!AccessibleObjectFromPoint.
+// https://learn.microsoft.com/windows/win32/api/oleacc/nf-oleacc-accessibleobjectfrompoint
+// Minimum OS: windows5.0.
+func AccessibleObjectFromPoint(ptScreen foundation.POINT, ppacc **IAccessible, pvarChild *systemvariant.VARIANT) error {
+	r1, _, _ := syscall.SyscallN(procAccessibleObjectFromPoint.Addr(), uintptr(win32.StructArg(ptScreen)), uintptr(unsafe.Pointer(ppacc)), uintptr(unsafe.Pointer(pvarChild)))
 	return win32.ErrIfFailed(int32(r1))
 }
 

@@ -50,6 +50,12 @@ func (self *ICompositionDrawingSurfaceInterop) EndDraw() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// Resize dispatches through ICompositionDrawingSurfaceInterop's vtable slot 5.
+func (self *ICompositionDrawingSurfaceInterop) Resize(sizePixels foundation.SIZE) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(sizePixels)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Scroll dispatches through ICompositionDrawingSurfaceInterop's vtable slot 6.
 func (self *ICompositionDrawingSurfaceInterop) Scroll(scrollRect *foundation.RECT, clipRect *foundation.RECT, offsetX int32, offsetY int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(scrollRect)), uintptr(unsafe.Pointer(clipRect)), uintptr(offsetX), uintptr(offsetY))

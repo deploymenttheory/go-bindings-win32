@@ -4394,6 +4394,12 @@ type IDisplayPointer struct {
 // IID_IDisplayPointer is the interface identifier for IDisplayPointer.
 var IID_IDisplayPointer = win32.GUID{Data1: 0x3050f69e, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+// MoveToPoint dispatches through IDisplayPointer's vtable slot 3.
+func (self *IDisplayPointer) MoveToPoint(ptPoint foundation.POINT, eCoordSystem COORD_SYSTEM, pElementContext *IHTMLElement, dwHitTestOptions uint32, pdwHitTestResults *uint32) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(ptPoint)), uintptr(eCoordSystem), uintptr(unsafe.Pointer(pElementContext)), uintptr(dwHitTestOptions), uintptr(unsafe.Pointer(pdwHitTestResults)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // MoveUnit dispatches through IDisplayPointer's vtable slot 4.
 func (self *IDisplayPointer) MoveUnit(eMoveUnit DISPLAY_MOVEUNIT, lXPos int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(eMoveUnit), uintptr(lXPos))
@@ -4560,6 +4566,13 @@ func (self *IDocHostShowUI) ShowMessage(hwnd foundation.HWND, lpstrText string, 
 	_lpstrCaption := win32.UTF16Ptr(lpstrCaption)
 	_lpstrHelpFile := win32.UTF16Ptr(lpstrHelpFile)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(unsafe.Pointer(_lpstrText)), uintptr(unsafe.Pointer(_lpstrCaption)), uintptr(dwType), uintptr(unsafe.Pointer(_lpstrHelpFile)), uintptr(dwHelpContext), uintptr(unsafe.Pointer(plResult)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// ShowHelp dispatches through IDocHostShowUI's vtable slot 4.
+func (self *IDocHostShowUI) ShowHelp(hwnd foundation.HWND, pszHelpFile string, uCommand uint32, dwData uint32, ptMouse foundation.POINT, pDispatchObjectHit *systemcom.IDispatch) error {
+	_pszHelpFile := win32.UTF16Ptr(pszHelpFile)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(unsafe.Pointer(_pszHelpFile)), uintptr(uCommand), uintptr(dwData), uintptr(win32.StructArg(ptMouse)), uintptr(unsafe.Pointer(pDispatchObjectHit)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -4831,6 +4844,12 @@ type IElementBehaviorLayout struct {
 
 // IID_IElementBehaviorLayout is the interface identifier for IElementBehaviorLayout.
 var IID_IElementBehaviorLayout = win32.GUID{Data1: 0x3050f6ba, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
+
+// GetSize dispatches through IElementBehaviorLayout's vtable slot 3.
+func (self *IElementBehaviorLayout) GetSize(dwFlags int32, sizeContent foundation.SIZE, pptTranslateBy *foundation.POINT, pptTopLeft *foundation.POINT, psizeProposed *foundation.SIZE) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(win32.StructArg(sizeContent)), uintptr(unsafe.Pointer(pptTranslateBy)), uintptr(unsafe.Pointer(pptTopLeft)), uintptr(unsafe.Pointer(psizeProposed)))
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // GetLayoutInfo dispatches through IElementBehaviorLayout's vtable slot 4.
 func (self *IElementBehaviorLayout) GetLayoutInfo() (int32, error) {
@@ -25811,6 +25830,18 @@ func (self *IHTMLPaintSite) GetDrawInfo(lFlags int32, pDrawInfo *HTML_PAINT_DRAW
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// TransformGlobalToLocal dispatches through IHTMLPaintSite's vtable slot 7.
+func (self *IHTMLPaintSite) TransformGlobalToLocal(ptGlobal foundation.POINT, pptLocal *foundation.POINT) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(ptGlobal)), uintptr(unsafe.Pointer(pptLocal)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// TransformLocalToGlobal dispatches through IHTMLPaintSite's vtable slot 8.
+func (self *IHTMLPaintSite) TransformLocalToGlobal(ptLocal foundation.POINT, pptGlobal *foundation.POINT) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(ptLocal)), uintptr(unsafe.Pointer(pptGlobal)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetHitTestCookie dispatches through IHTMLPaintSite's vtable slot 9.
 func (self *IHTMLPaintSite) GetHitTestCookie(plCookie *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCookie)))
@@ -25825,9 +25856,21 @@ type IHTMLPainter struct {
 // IID_IHTMLPainter is the interface identifier for IHTMLPainter.
 var IID_IHTMLPainter = win32.GUID{Data1: 0x3050f6a6, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+// OnResize dispatches through IHTMLPainter's vtable slot 4.
+func (self *IHTMLPainter) OnResize(size foundation.SIZE) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(size)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetPainterInfo dispatches through IHTMLPainter's vtable slot 5.
 func (self *IHTMLPainter) GetPainterInfo(pInfo *HTML_PAINTER_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// HitTestPoint dispatches through IHTMLPainter's vtable slot 6.
+func (self *IHTMLPainter) HitTestPoint(pt foundation.POINT, pbHit *foundation.BOOL, plPartID *int32) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(pt)), uintptr(unsafe.Pointer(pbHit)), uintptr(unsafe.Pointer(plPartID)))
 	return win32.ErrIfFailed(int32(r1))
 }
 

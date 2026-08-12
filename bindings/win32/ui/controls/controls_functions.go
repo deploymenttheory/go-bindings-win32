@@ -121,6 +121,7 @@ var (
 	procInitCommonControlsEx                   = modCOMCTL32.NewProc("InitCommonControlsEx")
 	procInitMUILanguage                        = modCOMCTL32.NewProc("InitMUILanguage")
 	procInitializeFlatSB                       = modCOMCTL32.NewProc("InitializeFlatSB")
+	procLBItemFromPt                           = modCOMCTL32.NewProc("LBItemFromPt")
 	procLoadIconMetric                         = modCOMCTL32.NewProc("LoadIconMetric")
 	procLoadIconWithScaleDown                  = modCOMCTL32.NewProc("LoadIconWithScaleDown")
 	procMakeDragList                           = modCOMCTL32.NewProc("MakeDragList")
@@ -221,6 +222,7 @@ var (
 	procGetThemeTimingFunction                 = modUxTheme.NewProc("GetThemeTimingFunction")
 	procGetThemeTransitionDuration             = modUxTheme.NewProc("GetThemeTransitionDuration")
 	procGetWindowTheme                         = modUxTheme.NewProc("GetWindowTheme")
+	procHitTestThemeBackground                 = modUxTheme.NewProc("HitTestThemeBackground")
 	procIsAppThemed                            = modUxTheme.NewProc("IsAppThemed")
 	procIsCompositionActive                    = modUxTheme.NewProc("IsCompositionActive")
 	procIsThemeActive                          = modUxTheme.NewProc("IsThemeActive")
@@ -1407,6 +1409,14 @@ func HIMAGELIST_QueryInterface(himl HIMAGELIST, riid *win32.GUID, ppv **win32.IU
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// HitTestThemeBackground calls UxTheme!HitTestThemeBackground.
+// https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-hittestthemebackground
+// Minimum OS: windows6.0.6000.
+func HitTestThemeBackground(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, dwOptions HIT_TEST_BACKGROUND_OPTIONS, pRect *foundation.RECT, hrgn graphicsgdi.HRGN, ptTest foundation.POINT, pwHitTestCode *uint16) error {
+	r1, _, _ := syscall.SyscallN(procHitTestThemeBackground.Addr(), uintptr(hTheme), uintptr(hdc), uintptr(iPartId), uintptr(iStateId), uintptr(dwOptions), uintptr(unsafe.Pointer(pRect)), uintptr(hrgn), uintptr(win32.StructArg(ptTest)), uintptr(unsafe.Pointer(pwHitTestCode)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // ImageList_Add calls COMCTL32!ImageList_Add.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-imagelist_add
 // Minimum OS: windows6.0.6000.
@@ -1788,6 +1798,15 @@ func IsThemeDialogTextureEnabled(hwnd foundation.HWND) bool {
 func IsThemePartDefined(hTheme HTHEME, iPartId int32, iStateId int32) bool {
 	r1, _, _ := syscall.SyscallN(procIsThemePartDefined.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId))
 	return r1 != 0
+}
+
+// LBItemFromPt calls COMCTL32!LBItemFromPt.
+// https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-lbitemfrompt
+// Minimum OS: windows6.0.6000.
+func LBItemFromPt(hLB foundation.HWND, pt foundation.POINT, bAutoScroll bool) int32 {
+	_bAutoScroll := win32.Bool32(bAutoScroll)
+	r1, _, _ := syscall.SyscallN(procLBItemFromPt.Addr(), uintptr(hLB), uintptr(win32.StructArg(pt)), uintptr(_bAutoScroll))
+	return int32(r1)
 }
 
 // LoadIconMetric calls COMCTL32!LoadIconMetric.

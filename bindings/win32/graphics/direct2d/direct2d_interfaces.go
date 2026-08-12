@@ -433,6 +433,12 @@ func (self *ID2D1CommandSink) Clear(color *graphicsdirect2dcommon.D2D1_COLOR_F) 
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// DrawGlyphRun dispatches through ID2D1CommandSink's vtable slot 13.
+func (self *ID2D1CommandSink) DrawGlyphRun(baselineOrigin graphicsdirect2dcommon.D2D_POINT_2F, glyphRun *graphicsdirectwrite.DWRITE_GLYPH_RUN, glyphRunDescription *graphicsdirectwrite.DWRITE_GLYPH_RUN_DESCRIPTION, foregroundBrush *ID2D1Brush, measuringMode graphicsdirectwrite.DWRITE_MEASURING_MODE) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(baselineOrigin)), uintptr(unsafe.Pointer(glyphRun)), uintptr(unsafe.Pointer(glyphRunDescription)), uintptr(unsafe.Pointer(foregroundBrush)), uintptr(measuringMode))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // DrawImage dispatches through ID2D1CommandSink's vtable slot 18.
 func (self *ID2D1CommandSink) DrawImage(image *ID2D1Image, targetOffset *graphicsdirect2dcommon.D2D_POINT_2F, imageRectangle *graphicsdirect2dcommon.D2D_RECT_F, interpolationMode D2D1_INTERPOLATION_MODE, compositeMode graphicsdirect2dcommon.D2D1_COMPOSITE_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(image)), uintptr(unsafe.Pointer(targetOffset)), uintptr(unsafe.Pointer(imageRectangle)), uintptr(interpolationMode), uintptr(compositeMode))
@@ -851,6 +857,12 @@ type ID2D1DeviceContext struct {
 // IID_ID2D1DeviceContext is the interface identifier for ID2D1DeviceContext.
 var IID_ID2D1DeviceContext = win32.GUID{Data1: 0xe8f7fe7a, Data2: 0x191c, Data3: 0x466d, Data4: [8]byte{0xad, 0x95, 0x97, 0x56, 0x78, 0xbd, 0xa9, 0x98}}
 
+// CreateBitmap dispatches through ID2D1DeviceContext's vtable slot 57.
+func (self *ID2D1DeviceContext) CreateBitmap(size graphicsdirect2dcommon.D2D_SIZE_U, sourceData unsafe.Pointer, pitch uint32, bitmapProperties *D2D1_BITMAP_PROPERTIES1, bitmap **ID2D1Bitmap1) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(size)), uintptr(unsafe.Pointer(sourceData)), uintptr(pitch), uintptr(unsafe.Pointer(bitmapProperties)), uintptr(unsafe.Pointer(bitmap)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // CreateBitmapFromWicBitmap dispatches through ID2D1DeviceContext's vtable slot 58.
 func (self *ID2D1DeviceContext) CreateBitmapFromWicBitmap(wicBitmapSource *graphicsimaging.IWICBitmapSource, bitmapProperties *D2D1_BITMAP_PROPERTIES1, bitmap **ID2D1Bitmap1) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wicBitmapSource)), uintptr(unsafe.Pointer(bitmapProperties)), uintptr(unsafe.Pointer(bitmap)))
@@ -944,6 +956,12 @@ func (self *ID2D1DeviceContext) GetImageWorldBounds(image *ID2D1Image, worldBoun
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// GetGlyphRunWorldBounds dispatches through ID2D1DeviceContext's vtable slot 72.
+func (self *ID2D1DeviceContext) GetGlyphRunWorldBounds(baselineOrigin graphicsdirect2dcommon.D2D_POINT_2F, glyphRun *graphicsdirectwrite.DWRITE_GLYPH_RUN, measuringMode graphicsdirectwrite.DWRITE_MEASURING_MODE, bounds *graphicsdirect2dcommon.D2D_RECT_F) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[72], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(baselineOrigin)), uintptr(unsafe.Pointer(glyphRun)), uintptr(measuringMode), uintptr(unsafe.Pointer(bounds)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetDevice dispatches through ID2D1DeviceContext's vtable slot 73.
 func (self *ID2D1DeviceContext) GetDevice(device **ID2D1Device) {
 	syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(device)))
@@ -989,6 +1007,11 @@ func (self *ID2D1DeviceContext) SetUnitMode(unitMode D2D1_UNIT_MODE) {
 func (self *ID2D1DeviceContext) GetUnitMode() D2D1_UNIT_MODE {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)))
 	return D2D1_UNIT_MODE(r1)
+}
+
+// DrawGlyphRun dispatches through ID2D1DeviceContext's vtable slot 82.
+func (self *ID2D1DeviceContext) DrawGlyphRun(baselineOrigin graphicsdirect2dcommon.D2D_POINT_2F, glyphRun *graphicsdirectwrite.DWRITE_GLYPH_RUN, glyphRunDescription *graphicsdirectwrite.DWRITE_GLYPH_RUN_DESCRIPTION, foregroundBrush *ID2D1Brush, measuringMode graphicsdirectwrite.DWRITE_MEASURING_MODE) {
+	syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(baselineOrigin)), uintptr(unsafe.Pointer(glyphRun)), uintptr(unsafe.Pointer(glyphRunDescription)), uintptr(unsafe.Pointer(foregroundBrush)), uintptr(measuringMode))
 }
 
 // DrawImage dispatches through ID2D1DeviceContext's vtable slot 83.
@@ -1178,6 +1201,21 @@ func (self *ID2D1DeviceContext4) DrawText(string_ string, stringLength uint32, t
 	syscall.SyscallN(self.LpVtbl[109], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_string_)), uintptr(stringLength), uintptr(unsafe.Pointer(textFormat)), uintptr(unsafe.Pointer(layoutRect)), uintptr(unsafe.Pointer(defaultFillBrush)), uintptr(unsafe.Pointer(svgGlyphStyle)), uintptr(colorPaletteIndex), uintptr(options), uintptr(measuringMode))
 }
 
+// DrawTextLayout dispatches through ID2D1DeviceContext4's vtable slot 110.
+func (self *ID2D1DeviceContext4) DrawTextLayout(origin graphicsdirect2dcommon.D2D_POINT_2F, textLayout *graphicsdirectwrite.IDWriteTextLayout, defaultFillBrush *ID2D1Brush, svgGlyphStyle *ID2D1SvgGlyphStyle, colorPaletteIndex uint32, options D2D1_DRAW_TEXT_OPTIONS) {
+	syscall.SyscallN(self.LpVtbl[110], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(origin)), uintptr(unsafe.Pointer(textLayout)), uintptr(unsafe.Pointer(defaultFillBrush)), uintptr(unsafe.Pointer(svgGlyphStyle)), uintptr(colorPaletteIndex), uintptr(options))
+}
+
+// DrawColorBitmapGlyphRun dispatches through ID2D1DeviceContext4's vtable slot 111.
+func (self *ID2D1DeviceContext4) DrawColorBitmapGlyphRun(glyphImageFormat graphicsdirectwrite.DWRITE_GLYPH_IMAGE_FORMATS, baselineOrigin graphicsdirect2dcommon.D2D_POINT_2F, glyphRun *graphicsdirectwrite.DWRITE_GLYPH_RUN, measuringMode graphicsdirectwrite.DWRITE_MEASURING_MODE, bitmapSnapOption D2D1_COLOR_BITMAP_GLYPH_SNAP_OPTION) {
+	syscall.SyscallN(self.LpVtbl[111], uintptr(unsafe.Pointer(self)), uintptr(glyphImageFormat), uintptr(win32.StructArg(baselineOrigin)), uintptr(unsafe.Pointer(glyphRun)), uintptr(measuringMode), uintptr(bitmapSnapOption))
+}
+
+// DrawSvgGlyphRun dispatches through ID2D1DeviceContext4's vtable slot 112.
+func (self *ID2D1DeviceContext4) DrawSvgGlyphRun(baselineOrigin graphicsdirect2dcommon.D2D_POINT_2F, glyphRun *graphicsdirectwrite.DWRITE_GLYPH_RUN, defaultFillBrush *ID2D1Brush, svgGlyphStyle *ID2D1SvgGlyphStyle, colorPaletteIndex uint32, measuringMode graphicsdirectwrite.DWRITE_MEASURING_MODE) {
+	syscall.SyscallN(self.LpVtbl[112], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(baselineOrigin)), uintptr(unsafe.Pointer(glyphRun)), uintptr(unsafe.Pointer(defaultFillBrush)), uintptr(unsafe.Pointer(svgGlyphStyle)), uintptr(colorPaletteIndex), uintptr(measuringMode))
+}
+
 // ID2D1DeviceContext5: https://learn.microsoft.com/windows/win32/api/d2d1_3/nn-d2d1_3-id2d1devicecontext5
 // IID: 7836d248-68cc-4df6-b9e8-de991bf62eb7
 type ID2D1DeviceContext5 struct {
@@ -1186,6 +1224,12 @@ type ID2D1DeviceContext5 struct {
 
 // IID_ID2D1DeviceContext5 is the interface identifier for ID2D1DeviceContext5.
 var IID_ID2D1DeviceContext5 = win32.GUID{Data1: 0x7836d248, Data2: 0x68cc, Data3: 0x4df6, Data4: [8]byte{0xb9, 0xe8, 0xde, 0x99, 0x1b, 0xf6, 0x2e, 0xb7}}
+
+// CreateSvgDocument dispatches through ID2D1DeviceContext5's vtable slot 115.
+func (self *ID2D1DeviceContext5) CreateSvgDocument(inputXmlStream *systemcom.IStream, viewportSize graphicsdirect2dcommon.D2D_SIZE_F, svgDocument **ID2D1SvgDocument) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[115], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inputXmlStream)), uintptr(win32.StructArg(viewportSize)), uintptr(unsafe.Pointer(svgDocument)))
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // DrawSvgDocument dispatches through ID2D1DeviceContext5's vtable slot 116.
 func (self *ID2D1DeviceContext5) DrawSvgDocument(svgDocument *ID2D1SvgDocument) {
@@ -1230,6 +1274,16 @@ var IID_ID2D1DeviceContext7 = win32.GUID{Data1: 0xec891cf7, Data2: 0x9b69, Data3
 func (self *ID2D1DeviceContext7) GetPaintFeatureLevel() graphicsdirectwrite.DWRITE_PAINT_FEATURE_LEVEL {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[120], uintptr(unsafe.Pointer(self)))
 	return graphicsdirectwrite.DWRITE_PAINT_FEATURE_LEVEL(r1)
+}
+
+// DrawPaintGlyphRun dispatches through ID2D1DeviceContext7's vtable slot 121.
+func (self *ID2D1DeviceContext7) DrawPaintGlyphRun(baselineOrigin graphicsdirect2dcommon.D2D_POINT_2F, glyphRun *graphicsdirectwrite.DWRITE_GLYPH_RUN, defaultFillBrush *ID2D1Brush, colorPaletteIndex uint32, measuringMode graphicsdirectwrite.DWRITE_MEASURING_MODE) {
+	syscall.SyscallN(self.LpVtbl[121], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(baselineOrigin)), uintptr(unsafe.Pointer(glyphRun)), uintptr(unsafe.Pointer(defaultFillBrush)), uintptr(colorPaletteIndex), uintptr(measuringMode))
+}
+
+// DrawGlyphRunWithColorSupport dispatches through ID2D1DeviceContext7's vtable slot 122.
+func (self *ID2D1DeviceContext7) DrawGlyphRunWithColorSupport(baselineOrigin graphicsdirect2dcommon.D2D_POINT_2F, glyphRun *graphicsdirectwrite.DWRITE_GLYPH_RUN, glyphRunDescription *graphicsdirectwrite.DWRITE_GLYPH_RUN_DESCRIPTION, foregroundBrush *ID2D1Brush, svgGlyphStyle *ID2D1SvgGlyphStyle, colorPaletteIndex uint32, measuringMode graphicsdirectwrite.DWRITE_MEASURING_MODE, bitmapSnapOption D2D1_COLOR_BITMAP_GLYPH_SNAP_OPTION) {
+	syscall.SyscallN(self.LpVtbl[122], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(baselineOrigin)), uintptr(unsafe.Pointer(glyphRun)), uintptr(unsafe.Pointer(glyphRunDescription)), uintptr(unsafe.Pointer(foregroundBrush)), uintptr(unsafe.Pointer(svgGlyphStyle)), uintptr(colorPaletteIndex), uintptr(measuringMode), uintptr(bitmapSnapOption))
 }
 
 // ID2D1DrawInfo: https://learn.microsoft.com/windows/win32/api/d2d1effectauthor/nn-d2d1effectauthor-id2d1drawinfo
@@ -1424,6 +1478,12 @@ func (self *ID2D1EffectContext) CreateBlendTransform(numInputs uint32, blendDesc
 // CreateBorderTransform dispatches through ID2D1EffectContext's vtable slot 8.
 func (self *ID2D1EffectContext) CreateBorderTransform(extendModeX D2D1_EXTEND_MODE, extendModeY D2D1_EXTEND_MODE, transform **ID2D1BorderTransform) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(extendModeX), uintptr(extendModeY), uintptr(unsafe.Pointer(transform)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// CreateOffsetTransform dispatches through ID2D1EffectContext's vtable slot 9.
+func (self *ID2D1EffectContext) CreateOffsetTransform(offset foundation.POINT, transform **ID2D1OffsetTransform) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(offset)), uintptr(unsafe.Pointer(transform)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2062,6 +2122,11 @@ type ID2D1GeometrySink struct {
 // IID_ID2D1GeometrySink is the interface identifier for ID2D1GeometrySink.
 var IID_ID2D1GeometrySink = win32.GUID{Data1: 0x2cd9069f, Data2: 0x12e2, Data3: 0x11dc, Data4: [8]byte{0x9f, 0xed, 0x00, 0x11, 0x43, 0xa0, 0x55, 0xf9}}
 
+// AddLine dispatches through ID2D1GeometrySink's vtable slot 10.
+func (self *ID2D1GeometrySink) AddLine(point graphicsdirect2dcommon.D2D_POINT_2F) {
+	syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(point)))
+}
+
 // AddBezier dispatches through ID2D1GeometrySink's vtable slot 11.
 func (self *ID2D1GeometrySink) AddBezier(bezier *graphicsdirect2dcommon.D2D1_BEZIER_SEGMENT) {
 	syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bezier)))
@@ -2450,6 +2515,16 @@ type ID2D1LinearGradientBrush struct {
 // IID_ID2D1LinearGradientBrush is the interface identifier for ID2D1LinearGradientBrush.
 var IID_ID2D1LinearGradientBrush = win32.GUID{Data1: 0x2cd906ab, Data2: 0x12e2, Data3: 0x11dc, Data4: [8]byte{0x9f, 0xed, 0x00, 0x11, 0x43, 0xa0, 0x55, 0xf9}}
 
+// SetStartPoint dispatches through ID2D1LinearGradientBrush's vtable slot 8.
+func (self *ID2D1LinearGradientBrush) SetStartPoint(startPoint graphicsdirect2dcommon.D2D_POINT_2F) {
+	syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(startPoint)))
+}
+
+// SetEndPoint dispatches through ID2D1LinearGradientBrush's vtable slot 9.
+func (self *ID2D1LinearGradientBrush) SetEndPoint(endPoint graphicsdirect2dcommon.D2D_POINT_2F) {
+	syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(endPoint)))
+}
+
 // GetGradientStopCollection dispatches through ID2D1LinearGradientBrush's vtable slot 12.
 func (self *ID2D1LinearGradientBrush) GetGradientStopCollection(gradientStopCollection **ID2D1GradientStopCollection) {
 	syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(gradientStopCollection)))
@@ -2513,6 +2588,11 @@ type ID2D1OffsetTransform struct {
 // IID_ID2D1OffsetTransform is the interface identifier for ID2D1OffsetTransform.
 var IID_ID2D1OffsetTransform = win32.GUID{Data1: 0x3fe6adea, Data2: 0x7643, Data3: 0x4f53, Data4: [8]byte{0xbd, 0x14, 0xa0, 0xce, 0x63, 0xf2, 0x40, 0x42}}
 
+// SetOffset dispatches through ID2D1OffsetTransform's vtable slot 4.
+func (self *ID2D1OffsetTransform) SetOffset(offset foundation.POINT) {
+	syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(offset)))
+}
+
 // ID2D1PathGeometry: https://learn.microsoft.com/windows/win32/api/d2d1/nn-d2d1-id2d1pathgeometry
 // IID: 2cd906a5-12e2-11dc-9fed-001143a055f9
 type ID2D1PathGeometry struct {
@@ -2563,6 +2643,12 @@ type ID2D1PrintControl struct {
 
 // IID_ID2D1PrintControl is the interface identifier for ID2D1PrintControl.
 var IID_ID2D1PrintControl = win32.GUID{Data1: 0x2c1d867d, Data2: 0xc290, Data3: 0x41c8, Data4: [8]byte{0xae, 0x7e, 0x34, 0xa9, 0x87, 0x02, 0xe9, 0xa5}}
+
+// AddPage dispatches through ID2D1PrintControl's vtable slot 3.
+func (self *ID2D1PrintControl) AddPage(commandList *ID2D1CommandList, pageSize graphicsdirect2dcommon.D2D_SIZE_F, pagePrintTicketStream *systemcom.IStream, tag1 *uint64, tag2 *uint64) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(commandList)), uintptr(win32.StructArg(pageSize)), uintptr(unsafe.Pointer(pagePrintTicketStream)), uintptr(unsafe.Pointer(tag1)), uintptr(unsafe.Pointer(tag2)))
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // Close dispatches through ID2D1PrintControl's vtable slot 4.
 func (self *ID2D1PrintControl) Close() error {
@@ -2673,6 +2759,16 @@ type ID2D1RadialGradientBrush struct {
 // IID_ID2D1RadialGradientBrush is the interface identifier for ID2D1RadialGradientBrush.
 var IID_ID2D1RadialGradientBrush = win32.GUID{Data1: 0x2cd906ac, Data2: 0x12e2, Data3: 0x11dc, Data4: [8]byte{0x9f, 0xed, 0x00, 0x11, 0x43, 0xa0, 0x55, 0xf9}}
 
+// SetCenter dispatches through ID2D1RadialGradientBrush's vtable slot 8.
+func (self *ID2D1RadialGradientBrush) SetCenter(center graphicsdirect2dcommon.D2D_POINT_2F) {
+	syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(center)))
+}
+
+// SetGradientOriginOffset dispatches through ID2D1RadialGradientBrush's vtable slot 9.
+func (self *ID2D1RadialGradientBrush) SetGradientOriginOffset(gradientOriginOffset graphicsdirect2dcommon.D2D_POINT_2F) {
+	syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(gradientOriginOffset)))
+}
+
 // GetGradientStopCollection dispatches through ID2D1RadialGradientBrush's vtable slot 16.
 func (self *ID2D1RadialGradientBrush) GetGradientStopCollection(gradientStopCollection **ID2D1GradientStopCollection) {
 	syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(gradientStopCollection)))
@@ -2701,6 +2797,12 @@ type ID2D1RenderInfo struct {
 // IID_ID2D1RenderInfo is the interface identifier for ID2D1RenderInfo.
 var IID_ID2D1RenderInfo = win32.GUID{Data1: 0x519ae1bd, Data2: 0xd19a, Data3: 0x420d, Data4: [8]byte{0xb8, 0x49, 0x36, 0x4f, 0x59, 0x47, 0x76, 0xb7}}
 
+// SetInputDescription dispatches through ID2D1RenderInfo's vtable slot 3.
+func (self *ID2D1RenderInfo) SetInputDescription(inputIndex uint32, inputDescription D2D1_INPUT_DESCRIPTION) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(inputIndex), uintptr(win32.StructArg(inputDescription)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetOutputBuffer dispatches through ID2D1RenderInfo's vtable slot 4.
 func (self *ID2D1RenderInfo) SetOutputBuffer(bufferPrecision D2D1_BUFFER_PRECISION, channelDepth D2D1_CHANNEL_DEPTH) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(bufferPrecision), uintptr(channelDepth))
@@ -2726,6 +2828,12 @@ type ID2D1RenderTarget struct {
 
 // IID_ID2D1RenderTarget is the interface identifier for ID2D1RenderTarget.
 var IID_ID2D1RenderTarget = win32.GUID{Data1: 0x2cd90694, Data2: 0x12e2, Data3: 0x11dc, Data4: [8]byte{0x9f, 0xed, 0x00, 0x11, 0x43, 0xa0, 0x55, 0xf9}}
+
+// CreateBitmap dispatches through ID2D1RenderTarget's vtable slot 4.
+func (self *ID2D1RenderTarget) CreateBitmap(size graphicsdirect2dcommon.D2D_SIZE_U, srcData unsafe.Pointer, pitch uint32, bitmapProperties *D2D1_BITMAP_PROPERTIES, bitmap **ID2D1Bitmap) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(size)), uintptr(unsafe.Pointer(srcData)), uintptr(pitch), uintptr(unsafe.Pointer(bitmapProperties)), uintptr(unsafe.Pointer(bitmap)))
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // CreateBitmapFromWicBitmap dispatches through ID2D1RenderTarget's vtable slot 5.
 func (self *ID2D1RenderTarget) CreateBitmapFromWicBitmap(wicBitmapSource *graphicsimaging.IWICBitmapSource, bitmapProperties *D2D1_BITMAP_PROPERTIES, bitmap **ID2D1Bitmap) error {
@@ -2825,6 +2933,16 @@ func (self *ID2D1RenderTarget) FillOpacityMask(opacityMask *ID2D1Bitmap, brush *
 func (self *ID2D1RenderTarget) DrawText(string_ string, stringLength uint32, textFormat *graphicsdirectwrite.IDWriteTextFormat, layoutRect *graphicsdirect2dcommon.D2D_RECT_F, defaultFillBrush *ID2D1Brush, options D2D1_DRAW_TEXT_OPTIONS, measuringMode graphicsdirectwrite.DWRITE_MEASURING_MODE) {
 	_string_ := win32.UTF16Ptr(string_)
 	syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_string_)), uintptr(stringLength), uintptr(unsafe.Pointer(textFormat)), uintptr(unsafe.Pointer(layoutRect)), uintptr(unsafe.Pointer(defaultFillBrush)), uintptr(options), uintptr(measuringMode))
+}
+
+// DrawTextLayout dispatches through ID2D1RenderTarget's vtable slot 28.
+func (self *ID2D1RenderTarget) DrawTextLayout(origin graphicsdirect2dcommon.D2D_POINT_2F, textLayout *graphicsdirectwrite.IDWriteTextLayout, defaultFillBrush *ID2D1Brush, options D2D1_DRAW_TEXT_OPTIONS) {
+	syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(origin)), uintptr(unsafe.Pointer(textLayout)), uintptr(unsafe.Pointer(defaultFillBrush)), uintptr(options))
+}
+
+// DrawGlyphRun dispatches through ID2D1RenderTarget's vtable slot 29.
+func (self *ID2D1RenderTarget) DrawGlyphRun(baselineOrigin graphicsdirect2dcommon.D2D_POINT_2F, glyphRun *graphicsdirectwrite.DWRITE_GLYPH_RUN, foregroundBrush *ID2D1Brush, measuringMode graphicsdirectwrite.DWRITE_MEASURING_MODE) {
+	syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(baselineOrigin)), uintptr(unsafe.Pointer(glyphRun)), uintptr(unsafe.Pointer(foregroundBrush)), uintptr(measuringMode))
 }
 
 // SetTransform dispatches through ID2D1RenderTarget's vtable slot 30.
@@ -3024,6 +3142,12 @@ func (self *ID2D1SourceTransform) SetRenderInfo(renderInfo *ID2D1RenderInfo) err
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// Draw dispatches through ID2D1SourceTransform's vtable slot 8.
+func (self *ID2D1SourceTransform) Draw(target *ID2D1Bitmap1, drawRect *foundation.RECT, targetOrigin graphicsdirect2dcommon.D2D_POINT_2U) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(target)), uintptr(unsafe.Pointer(drawRect)), uintptr(win32.StructArg(targetOrigin)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // ID2D1SpriteBatch: https://learn.microsoft.com/windows/win32/api/d2d1_3/nn-d2d1_3-id2d1spritebatch
 // IID: 4dc583bf-3a10-438a-8722-e9765224f1f1
 type ID2D1SpriteBatch struct {
@@ -3159,6 +3283,12 @@ type ID2D1SvgDocument struct {
 
 // IID_ID2D1SvgDocument is the interface identifier for ID2D1SvgDocument.
 var IID_ID2D1SvgDocument = win32.GUID{Data1: 0x86b88e4d, Data2: 0xafa4, Data3: 0x4d7b, Data4: [8]byte{0x88, 0xe4, 0x68, 0xa5, 0x1c, 0x4a, 0x0a, 0xec}}
+
+// SetViewportSize dispatches through ID2D1SvgDocument's vtable slot 4.
+func (self *ID2D1SvgDocument) SetViewportSize(viewportSize graphicsdirect2dcommon.D2D_SIZE_F) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(viewportSize)))
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // SetRoot dispatches through ID2D1SvgDocument's vtable slot 6.
 func (self *ID2D1SvgDocument) SetRoot(root *ID2D1SvgElement) error {

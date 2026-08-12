@@ -10,6 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/security"
 	systemio "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/io"
 )
 
@@ -26,12 +27,16 @@ var (
 	procHttpCloseServerSession         = modHTTPAPI.NewProc("HttpCloseServerSession")
 	procHttpCloseUrlGroup              = modHTTPAPI.NewProc("HttpCloseUrlGroup")
 	procHttpCreateHttpHandle           = modHTTPAPI.NewProc("HttpCreateHttpHandle")
+	procHttpCreateRequestQueue         = modHTTPAPI.NewProc("HttpCreateRequestQueue")
+	procHttpCreateServerSession        = modHTTPAPI.NewProc("HttpCreateServerSession")
 	procHttpCreateUrlGroup             = modHTTPAPI.NewProc("HttpCreateUrlGroup")
 	procHttpDeclarePush                = modHTTPAPI.NewProc("HttpDeclarePush")
 	procHttpDelegateRequestEx          = modHTTPAPI.NewProc("HttpDelegateRequestEx")
 	procHttpDeleteServiceConfiguration = modHTTPAPI.NewProc("HttpDeleteServiceConfiguration")
 	procHttpFindUrlGroupId             = modHTTPAPI.NewProc("HttpFindUrlGroupId")
 	procHttpFlushResponseCache         = modHTTPAPI.NewProc("HttpFlushResponseCache")
+	procHttpGetExtension               = modHTTPAPI.NewProc("HttpGetExtension")
+	procHttpInitialize                 = modHTTPAPI.NewProc("HttpInitialize")
 	procHttpIsFeatureSupported         = modHTTPAPI.NewProc("HttpIsFeatureSupported")
 	procHttpPrepareUrl                 = modHTTPAPI.NewProc("HttpPrepareUrl")
 	procHttpQueryRequestProperty       = modHTTPAPI.NewProc("HttpQueryRequestProperty")
@@ -127,6 +132,23 @@ func HttpCreateHttpHandle(RequestQueueHandle *foundation.HANDLE) uint32 {
 	return uint32(r1)
 }
 
+// HttpCreateRequestQueue calls HTTPAPI!HttpCreateRequestQueue.
+// https://learn.microsoft.com/windows/win32/api/http/nf-http-httpcreaterequestqueue
+// Minimum OS: windows6.0.6000.
+func HttpCreateRequestQueue(Version HTTPAPI_VERSION, Name string, SecurityAttributes *security.SECURITY_ATTRIBUTES, Flags uint32, RequestQueueHandle *HTTP_REQUEST_QUEUE_HANDLE) uint32 {
+	_Name := win32.UTF16Ptr(Name)
+	r1, _, _ := syscall.SyscallN(procHttpCreateRequestQueue.Addr(), uintptr(win32.StructArg(Version)), uintptr(unsafe.Pointer(_Name)), uintptr(unsafe.Pointer(SecurityAttributes)), uintptr(Flags), uintptr(unsafe.Pointer(RequestQueueHandle)))
+	return uint32(r1)
+}
+
+// HttpCreateServerSession calls HTTPAPI!HttpCreateServerSession.
+// https://learn.microsoft.com/windows/win32/api/http/nf-http-httpcreateserversession
+// Minimum OS: windows6.0.6000.
+func HttpCreateServerSession(Version HTTPAPI_VERSION, ServerSessionId *uint64) uint32 {
+	r1, _, _ := syscall.SyscallN(procHttpCreateServerSession.Addr(), uintptr(win32.StructArg(Version)), uintptr(unsafe.Pointer(ServerSessionId)), 0)
+	return uint32(r1)
+}
+
 // HttpCreateUrlGroup calls HTTPAPI!HttpCreateUrlGroup.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpcreateurlgroup
 // Minimum OS: windows6.0.6000.
@@ -177,6 +199,20 @@ func HttpFindUrlGroupId(FullyQualifiedUrl string, RequestQueueHandle foundation.
 func HttpFlushResponseCache(RequestQueueHandle foundation.HANDLE, UrlPrefix string, Flags uint32, Overlapped *systemio.OVERLAPPED) uint32 {
 	_UrlPrefix := win32.UTF16Ptr(UrlPrefix)
 	r1, _, _ := syscall.SyscallN(procHttpFlushResponseCache.Addr(), uintptr(RequestQueueHandle), uintptr(unsafe.Pointer(_UrlPrefix)), uintptr(Flags), uintptr(unsafe.Pointer(Overlapped)))
+	return uint32(r1)
+}
+
+// HttpGetExtension calls HTTPAPI!HttpGetExtension.
+func HttpGetExtension(Version HTTPAPI_VERSION, Extension uint32, Buffer unsafe.Pointer, BufferSize uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procHttpGetExtension.Addr(), uintptr(win32.StructArg(Version)), uintptr(Extension), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize))
+	return uint32(r1)
+}
+
+// HttpInitialize calls HTTPAPI!HttpInitialize.
+// https://learn.microsoft.com/windows/win32/api/http/nf-http-httpinitialize
+// Minimum OS: windows6.0.6000.
+func HttpInitialize(Version HTTPAPI_VERSION, Flags HTTP_INITIALIZE) uint32 {
+	r1, _, _ := syscall.SyscallN(procHttpInitialize.Addr(), uintptr(win32.StructArg(Version)), uintptr(Flags), 0)
 	return uint32(r1)
 }
 

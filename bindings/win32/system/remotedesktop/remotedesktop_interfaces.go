@@ -1598,11 +1598,23 @@ func (self *ITsSbSession) Get_CreateTime() (foundation.FILETIME, error) {
 	return *_pTime, win32.ErrIfFailed(int32(r1))
 }
 
+// Put_CreateTime dispatches through ITsSbSession's vtable slot 11.
+func (self *ITsSbSession) Put_CreateTime(Time foundation.FILETIME) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(Time)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_DisconnectTime dispatches through ITsSbSession's vtable slot 12.
 func (self *ITsSbSession) Get_DisconnectTime() (foundation.FILETIME, error) {
 	_pTime := new(foundation.FILETIME)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pTime))))
 	return *_pTime, win32.ErrIfFailed(int32(r1))
+}
+
+// Put_DisconnectTime dispatches through ITsSbSession's vtable slot 13.
+func (self *ITsSbSession) Put_DisconnectTime(Time foundation.FILETIME) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(Time)))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InitialProgram dispatches through ITsSbSession's vtable slot 14.
@@ -1889,6 +1901,12 @@ type ITsSbTaskPluginNotifySink struct {
 
 // IID_ITsSbTaskPluginNotifySink is the interface identifier for ITsSbTaskPluginNotifySink.
 var IID_ITsSbTaskPluginNotifySink = win32.GUID{Data1: 0x6aaf899e, Data2: 0xc2ec, Data3: 0x45ee, Data4: [8]byte{0xaa, 0x37, 0x45, 0xe6, 0x08, 0x95, 0x26, 0x1a}}
+
+// OnSetTaskTime dispatches through ITsSbTaskPluginNotifySink's vtable slot 5.
+func (self *ITsSbTaskPluginNotifySink) OnSetTaskTime(szTargetName foundation.BSTR, TaskStartTime foundation.FILETIME, TaskEndTime foundation.FILETIME, TaskDeadline foundation.FILETIME, szTaskLabel foundation.BSTR, szTaskIdentifier foundation.BSTR, szTaskPlugin foundation.BSTR, dwTaskStatus uint32, saContext *systemcom.SAFEARRAY) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szTargetName)), uintptr(win32.StructArg(TaskStartTime)), uintptr(win32.StructArg(TaskEndTime)), uintptr(win32.StructArg(TaskDeadline)), uintptr(unsafe.Pointer(szTaskLabel)), uintptr(unsafe.Pointer(szTaskIdentifier)), uintptr(unsafe.Pointer(szTaskPlugin)), uintptr(dwTaskStatus), uintptr(unsafe.Pointer(saContext)))
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // OnDeleteTaskTime dispatches through ITsSbTaskPluginNotifySink's vtable slot 6.
 func (self *ITsSbTaskPluginNotifySink) OnDeleteTaskTime(szTargetName foundation.BSTR, szTaskIdentifier foundation.BSTR) error {

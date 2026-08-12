@@ -38,6 +38,12 @@ func (self *IAccClientDocMgr) LookupByHWND(hWnd foundation.HWND, riid *win32.GUI
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// LookupByPoint dispatches through IAccClientDocMgr's vtable slot 5.
+func (self *IAccClientDocMgr) LookupByPoint(pt foundation.POINT, riid *win32.GUID, ppunk **systemcom.IUnknown) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(pt)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppunk)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetFocused dispatches through IAccClientDocMgr's vtable slot 6.
 func (self *IAccClientDocMgr) GetFocused(riid *win32.GUID, ppunk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppunk)))
@@ -133,6 +139,12 @@ func (self *IAccStore) GetDocuments(enumUnknown **systemcom.IEnumUnknown) error 
 // LookupByHWND dispatches through IAccStore's vtable slot 6.
 func (self *IAccStore) LookupByHWND(hWnd foundation.HWND, riid *win32.GUID, ppunk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hWnd), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppunk)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// LookupByPoint dispatches through IAccStore's vtable slot 7.
+func (self *IAccStore) LookupByPoint(pt foundation.POINT, riid *win32.GUID, ppunk **systemcom.IUnknown) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(pt)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppunk)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3757,6 +3769,12 @@ type ITfLangBarItemBalloon struct {
 // IID_ITfLangBarItemBalloon is the interface identifier for ITfLangBarItemBalloon.
 var IID_ITfLangBarItemBalloon = win32.GUID{Data1: 0x01c2d285, Data2: 0xd3c7, Data3: 0x4b7b, Data4: [8]byte{0xb5, 0xb5, 0xd9, 0x74, 0x11, 0xd0, 0xc2, 0x83}}
 
+// OnClick dispatches through ITfLangBarItemBalloon's vtable slot 7.
+func (self *ITfLangBarItemBalloon) OnClick(click TfLBIClick, pt foundation.POINT, prcArea *foundation.RECT) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(click), uintptr(win32.StructArg(pt)), uintptr(unsafe.Pointer(prcArea)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetPreferredSize dispatches through ITfLangBarItemBalloon's vtable slot 8.
 func (self *ITfLangBarItemBalloon) GetPreferredSize(pszDefault *foundation.SIZE, psz *foundation.SIZE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszDefault)), uintptr(unsafe.Pointer(psz)))
@@ -3778,6 +3796,12 @@ type ITfLangBarItemBitmap struct {
 // IID_ITfLangBarItemBitmap is the interface identifier for ITfLangBarItemBitmap.
 var IID_ITfLangBarItemBitmap = win32.GUID{Data1: 0x73830352, Data2: 0xd722, Data3: 0x4179, Data4: [8]byte{0xad, 0xa5, 0xf0, 0x45, 0xc9, 0x8d, 0xf3, 0x55}}
 
+// OnClick dispatches through ITfLangBarItemBitmap's vtable slot 7.
+func (self *ITfLangBarItemBitmap) OnClick(click TfLBIClick, pt foundation.POINT, prcArea *foundation.RECT) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(click), uintptr(win32.StructArg(pt)), uintptr(unsafe.Pointer(prcArea)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetPreferredSize dispatches through ITfLangBarItemBitmap's vtable slot 8.
 func (self *ITfLangBarItemBitmap) GetPreferredSize(pszDefault *foundation.SIZE, psz *foundation.SIZE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszDefault)), uintptr(unsafe.Pointer(psz)))
@@ -3798,6 +3822,12 @@ type ITfLangBarItemBitmapButton struct {
 
 // IID_ITfLangBarItemBitmapButton is the interface identifier for ITfLangBarItemBitmapButton.
 var IID_ITfLangBarItemBitmapButton = win32.GUID{Data1: 0xa26a0525, Data2: 0x3fae, Data3: 0x4fa0, Data4: [8]byte{0x89, 0xee, 0x88, 0xa9, 0x64, 0xf9, 0xf1, 0xb5}}
+
+// OnClick dispatches through ITfLangBarItemBitmapButton's vtable slot 7.
+func (self *ITfLangBarItemBitmapButton) OnClick(click TfLBIClick, pt foundation.POINT, prcArea *foundation.RECT) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(click), uintptr(win32.StructArg(pt)), uintptr(unsafe.Pointer(prcArea)))
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // InitMenu dispatches through ITfLangBarItemBitmapButton's vtable slot 8.
 func (self *ITfLangBarItemBitmapButton) InitMenu(pMenu *ITfMenu) error {
@@ -3837,6 +3867,12 @@ type ITfLangBarItemButton struct {
 
 // IID_ITfLangBarItemButton is the interface identifier for ITfLangBarItemButton.
 var IID_ITfLangBarItemButton = win32.GUID{Data1: 0x28c7f1d0, Data2: 0xde25, Data3: 0x11d2, Data4: [8]byte{0xaf, 0xdd, 0x00, 0x10, 0x5a, 0x27, 0x99, 0xb5}}
+
+// OnClick dispatches through ITfLangBarItemButton's vtable slot 7.
+func (self *ITfLangBarItemButton) OnClick(click TfLBIClick, pt foundation.POINT, prcArea *foundation.RECT) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(click), uintptr(win32.StructArg(pt)), uintptr(unsafe.Pointer(prcArea)))
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // InitMenu dispatches through ITfLangBarItemButton's vtable slot 8.
 func (self *ITfLangBarItemButton) InitMenu(pMenu *ITfMenu) error {

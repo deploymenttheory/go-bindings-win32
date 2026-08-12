@@ -138,6 +138,7 @@ var (
 	procPdhParseCounterPathA                = modpdh.NewProc("PdhParseCounterPathA")
 	procPdhParseInstanceName                = modpdh.NewProc("PdhParseInstanceNameW")
 	procPdhParseInstanceNameA               = modpdh.NewProc("PdhParseInstanceNameA")
+	procPdhReadRawLogRecord                 = modpdh.NewProc("PdhReadRawLogRecord")
 	procPdhRemoveCounter                    = modpdh.NewProc("PdhRemoveCounter")
 	procPdhSelectDataSource                 = modpdh.NewProc("PdhSelectDataSourceW")
 	procPdhSelectDataSourceA                = modpdh.NewProc("PdhSelectDataSourceA")
@@ -878,6 +879,14 @@ func PdhParseInstanceName(szInstanceString string, szInstanceName foundation.PWS
 // Minimum OS: windows5.1.2600.
 func PdhParseInstanceNameA(szInstanceString foundation.PSTR, szInstanceName foundation.PSTR, pcchInstanceNameLength *uint32, szParentName foundation.PSTR, pcchParentNameLength *uint32, lpIndex *uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procPdhParseInstanceNameA.Addr(), uintptr(unsafe.Pointer(szInstanceString)), uintptr(unsafe.Pointer(szInstanceName)), uintptr(unsafe.Pointer(pcchInstanceNameLength)), uintptr(unsafe.Pointer(szParentName)), uintptr(unsafe.Pointer(pcchParentNameLength)), uintptr(unsafe.Pointer(lpIndex)))
+	return uint32(r1)
+}
+
+// PdhReadRawLogRecord calls pdh!PdhReadRawLogRecord.
+// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhreadrawlogrecord
+// Minimum OS: windows5.1.2600.
+func PdhReadRawLogRecord(hLog PDH_HLOG, ftRecord foundation.FILETIME, pRawLogRecord *PDH_RAW_LOG_RECORD, pdwBufferLength *uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procPdhReadRawLogRecord.Addr(), uintptr(hLog), uintptr(win32.StructArg(ftRecord)), uintptr(unsafe.Pointer(pRawLogRecord)), uintptr(unsafe.Pointer(pdwBufferLength)))
 	return uint32(r1)
 }
 

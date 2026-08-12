@@ -1798,6 +1798,13 @@ func (self *IUIAutomation) ElementFromHandle(hwnd foundation.HWND) (*IUIAutomati
 	return *_element, win32.ErrIfFailed(int32(r1))
 }
 
+// ElementFromPoint dispatches through IUIAutomation's vtable slot 7.
+func (self *IUIAutomation) ElementFromPoint(pt foundation.POINT) (*IUIAutomationElement, error) {
+	_element := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(pt)), uintptr(win32.OutParam(unsafe.Pointer(_element))))
+	return *_element, win32.ErrIfFailed(int32(r1))
+}
+
 // GetFocusedElement dispatches through IUIAutomation's vtable slot 8.
 func (self *IUIAutomation) GetFocusedElement() (*IUIAutomationElement, error) {
 	_element := new(*IUIAutomationElement)
@@ -1816,6 +1823,13 @@ func (self *IUIAutomation) GetRootElementBuildCache(cacheRequest *IUIAutomationC
 func (self *IUIAutomation) ElementFromHandleBuildCache(hwnd foundation.HWND, cacheRequest *IUIAutomationCacheRequest) (*IUIAutomationElement, error) {
 	_element := new(*IUIAutomationElement)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(unsafe.Pointer(cacheRequest)), uintptr(win32.OutParam(unsafe.Pointer(_element))))
+	return *_element, win32.ErrIfFailed(int32(r1))
+}
+
+// ElementFromPointBuildCache dispatches through IUIAutomation's vtable slot 11.
+func (self *IUIAutomation) ElementFromPointBuildCache(pt foundation.POINT, cacheRequest *IUIAutomationCacheRequest) (*IUIAutomationElement, error) {
+	_element := new(*IUIAutomationElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(pt)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(win32.OutParam(unsafe.Pointer(_element))))
 	return *_element, win32.ErrIfFailed(int32(r1))
 }
 
@@ -5289,6 +5303,13 @@ type IUIAutomationTextPattern struct {
 
 // IID_IUIAutomationTextPattern is the interface identifier for IUIAutomationTextPattern.
 var IID_IUIAutomationTextPattern = win32.GUID{Data1: 0x32eba289, Data2: 0x3583, Data3: 0x42c9, Data4: [8]byte{0x9c, 0x59, 0x3b, 0x6d, 0x9a, 0x1e, 0x9b, 0x6a}}
+
+// RangeFromPoint dispatches through IUIAutomationTextPattern's vtable slot 3.
+func (self *IUIAutomationTextPattern) RangeFromPoint(pt foundation.POINT) (*IUIAutomationTextRange, error) {
+	_range_ := new(*IUIAutomationTextRange)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(pt)), uintptr(win32.OutParam(unsafe.Pointer(_range_))))
+	return *_range_, win32.ErrIfFailed(int32(r1))
+}
 
 // RangeFromChild dispatches through IUIAutomationTextPattern's vtable slot 4.
 func (self *IUIAutomationTextPattern) RangeFromChild(child *IUIAutomationElement) (*IUIAutomationTextRange, error) {

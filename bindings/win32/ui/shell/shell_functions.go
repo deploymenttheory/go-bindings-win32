@@ -129,7 +129,10 @@ var (
 	procCIDLData_CreateFromIDArray                  = modSHELL32.NewProc("CIDLData_CreateFromIDArray")
 	procCommandLineToArgvW                          = modSHELL32.NewProc("CommandLineToArgvW")
 	procDAD_AutoScroll                              = modSHELL32.NewProc("DAD_AutoScroll")
+	procDAD_DragEnterEx                             = modSHELL32.NewProc("DAD_DragEnterEx")
+	procDAD_DragEnterEx2                            = modSHELL32.NewProc("DAD_DragEnterEx2")
 	procDAD_DragLeave                               = modSHELL32.NewProc("DAD_DragLeave")
+	procDAD_DragMove                                = modSHELL32.NewProc("DAD_DragMove")
 	procDAD_SetDragImage                            = modSHELL32.NewProc("DAD_SetDragImage")
 	procDAD_ShowDragImage                           = modSHELL32.NewProc("DAD_ShowDragImage")
 	procDoEnvironmentSubst                          = modSHELL32.NewProc("DoEnvironmentSubstW")
@@ -934,11 +937,35 @@ func DAD_AutoScroll(hwnd foundation.HWND, pad *AUTO_SCROLL_DATA, pptNow *foundat
 	return r1 != 0
 }
 
+// DAD_DragEnterEx calls SHELL32!DAD_DragEnterEx.
+// https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-dad_dragenterex
+// Minimum OS: windows5.0.
+func DAD_DragEnterEx(hwndTarget foundation.HWND, ptStart foundation.POINT) bool {
+	r1, _, _ := syscall.SyscallN(procDAD_DragEnterEx.Addr(), uintptr(hwndTarget), uintptr(win32.StructArg(ptStart)))
+	return r1 != 0
+}
+
+// DAD_DragEnterEx2 calls SHELL32!DAD_DragEnterEx2.
+// https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-dad_dragenterex2
+// Minimum OS: windows5.0.
+func DAD_DragEnterEx2(hwndTarget foundation.HWND, ptStart foundation.POINT, pdtObject *systemcom.IDataObject) bool {
+	r1, _, _ := syscall.SyscallN(procDAD_DragEnterEx2.Addr(), uintptr(hwndTarget), uintptr(win32.StructArg(ptStart)), uintptr(unsafe.Pointer(pdtObject)))
+	return r1 != 0
+}
+
 // DAD_DragLeave calls SHELL32!DAD_DragLeave.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-dad_dragleave
 // Minimum OS: windows5.0.
 func DAD_DragLeave() bool {
 	r1, _, _ := syscall.SyscallN(procDAD_DragLeave.Addr())
+	return r1 != 0
+}
+
+// DAD_DragMove calls SHELL32!DAD_DragMove.
+// https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-dad_dragmove
+// Minimum OS: windows5.0.
+func DAD_DragMove(pt foundation.POINT) bool {
+	r1, _, _ := syscall.SyscallN(procDAD_DragMove.Addr(), uintptr(win32.StructArg(pt)))
 	return r1 != 0
 }
 

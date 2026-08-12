@@ -19,6 +19,7 @@ var (
 var (
 	procActivateKeyboardLayout = modUSER32.NewProc("ActivateKeyboardLayout")
 	procBlockInput             = modUSER32.NewProc("BlockInput")
+	procDragDetect             = modUSER32.NewProc("DragDetect")
 	procEnableWindow           = modUSER32.NewProc("EnableWindow")
 	procGetActiveWindow        = modUSER32.NewProc("GetActiveWindow")
 	procGetAsyncKeyState       = modUSER32.NewProc("GetAsyncKeyState")
@@ -91,6 +92,14 @@ func BlockInput(fBlockIt bool) error {
 		return win32.LastError(e1)
 	}
 	return nil
+}
+
+// DragDetect calls USER32!DragDetect.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-dragdetect
+// Minimum OS: windows5.0.
+func DragDetect(hwnd foundation.HWND, pt foundation.POINT) bool {
+	r1, _, _ := syscall.SyscallN(procDragDetect.Addr(), uintptr(hwnd), uintptr(win32.StructArg(pt)))
+	return r1 != 0
 }
 
 // EnableWindow calls USER32!EnableWindow.

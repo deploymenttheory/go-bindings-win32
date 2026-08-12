@@ -559,6 +559,12 @@ type IDXGIFactory4 struct {
 // IID_IDXGIFactory4 is the interface identifier for IDXGIFactory4.
 var IID_IDXGIFactory4 = win32.GUID{Data1: 0x1bc6ea02, Data2: 0xef36, Data3: 0x464f, Data4: [8]byte{0xbf, 0x0c, 0x21, 0xca, 0x39, 0xe5, 0x16, 0x8a}}
 
+// EnumAdapterByLuid dispatches through IDXGIFactory4's vtable slot 26.
+func (self *IDXGIFactory4) EnumAdapterByLuid(AdapterLuid foundation.LUID, riid *win32.GUID, ppvAdapter **win32.IUnknown) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(AdapterLuid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvAdapter)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // EnumWarpAdapter dispatches through IDXGIFactory4's vtable slot 27.
 func (self *IDXGIFactory4) EnumWarpAdapter(riid *win32.GUID, ppvAdapter **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvAdapter)))

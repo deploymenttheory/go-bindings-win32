@@ -55,5 +55,5 @@ jobs:
             .*\.md$|                # Exclude all markdown files
             .*test/.*|              # Exclude all files in any test directory
             .*_test\.go$|           # Exclude Go test files (e.g., *_test.go)
-            bindings/win32/.*|      # Exclude the generated bindings tree
+            .*bindings/win32/.*|    # Exclude the generated bindings tree
             .*\.json$               # Exclude all JSON files

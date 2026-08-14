@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.1](https://github.com/deploymenttheory/go-bindings-win32/compare/v0.3.0...v0.3.1) (2026-08-14)
+
+
+### Bug Fixes
+
+* gofmt the repository after the go-winmd path change ([a63c453](https://github.com/deploymenttheory/go-bindings-win32/commit/a63c45361f67e5beac676f239df258914585891b))
+* resolve the four open code-scanning alerts ([68dc4cc](https://github.com/deploymenttheory/go-bindings-win32/commit/68dc4cc5042984ba0348b0dffec3a3fefd6f2b5b))
+* resolve the four open code-scanning alerts ([88f6f1e](https://github.com/deploymenttheory/go-bindings-win32/commit/88f6f1efad404fb3fe469c478a0026d015f0bcf2))
+* restore import ordering after the go-winmd path change ([d3e21dd](https://github.com/deploymenttheory/go-bindings-win32/commit/d3e21dd129296fbe72c7937a98b1c1ec916cc451))
+
 ## [0.3.0](https://github.com/deploymenttheory/go-bindings-win32/compare/v0.2.1...v0.3.0) (2026-08-12)
 
 

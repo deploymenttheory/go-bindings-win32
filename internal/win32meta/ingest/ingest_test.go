@@ -6,7 +6,7 @@ import (
 	"testing"
 
 	"github.com/deploymenttheory/go-bindings-win32/internal/win32meta"
-	"github.com/deploymenttheory/go-winmd"
+	"github.com/deploymenttheory/go-winmd/pkg/winmd"
 )
 
 func ingestAll(t *testing.T) ([]*win32meta.NamespaceMeta, *Ingester) {

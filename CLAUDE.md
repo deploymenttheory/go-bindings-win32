@@ -77,7 +77,7 @@ Windows.Win32.winmd → .w32meta.json (IR) → Go source
 
 ### Pipeline packages
 
-- **`github.com/deploymenttheory/go-winmd`** (external, first-party) — the
+- **`github.com/deploymenttheory/go-winmd/pkg/winmd`** (external, first-party) — the
   native Go ECMA-335 reader, extracted from this repo's former
   `internal/winmd`: PE container → metadata streams → tables → signature
   blobs → decoded custom-attribute values. §II.x spec-referenced, typed

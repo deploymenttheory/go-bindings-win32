@@ -2,6 +2,7 @@ package rawwin
 
 import (
 	"fmt"
+	"math"
 	"sort"
 	"strconv"
 	"strings"
@@ -94,13 +95,16 @@ func literalForBase(value, baseType string) string {
 	if err != nil {
 		return value
 	}
+	// Masking the widened value is the two's-complement wrap, written without
+	// a narrowing conversion so it cannot be read as an unchecked truncation:
+	// uint64(v) & math.MaxUint8 is exactly uint64(uint8(v)) for every v.
 	switch baseType {
 	case "uint8":
-		return strconv.FormatUint(uint64(uint8(signed)), 10)
+		return strconv.FormatUint(uint64(signed)&math.MaxUint8, 10)
 	case "uint16":
-		return strconv.FormatUint(uint64(uint16(signed)), 10)
+		return strconv.FormatUint(uint64(signed)&math.MaxUint16, 10)
 	case "uint32":
-		return strconv.FormatUint(uint64(uint32(signed)), 10)
+		return strconv.FormatUint(uint64(signed)&math.MaxUint32, 10)
 	default:
 		return strconv.FormatUint(uint64(signed), 10)
 	}

@@ -4,6 +4,11 @@ on:
   pull_request:
     types: [opened, edited, synchronize, reopened]
 
+# The job only reads the PR title out of the event payload, so it needs no
+# write scopes at all.
+permissions:
+  contents: read
+
 jobs:
   validate-pr-title:
     name: '✅ Validate PR Title'

@@ -393,6 +393,7 @@ var (
 	procRpcErrorStartEnumeration                       = modRPCRT4.NewProc("RpcErrorStartEnumeration")
 	procRpcExceptionFilter                             = modRPCRT4.NewProc("RpcExceptionFilter")
 	procRpcFreeAuthorizationContext                    = modRPCRT4.NewProc("RpcFreeAuthorizationContext")
+	procRpcGetAuthorizationContextForClient            = modRPCRT4.NewProc("RpcGetAuthorizationContextForClient")
 	procRpcIfInqId                                     = modRPCRT4.NewProc("RpcIfInqId")
 	procRpcImpersonateClient                           = modRPCRT4.NewProc("RpcImpersonateClient")
 	procRpcImpersonateClient2                          = modRPCRT4.NewProc("RpcImpersonateClient2")
@@ -2563,6 +2564,15 @@ func RpcExceptionFilter(ExceptionCode uint32) int32 {
 // Minimum OS: windows5.1.2600.
 func RpcFreeAuthorizationContext(pAuthzClientContext *unsafe.Pointer) RPC_STATUS {
 	r1, _, _ := syscall.SyscallN(procRpcFreeAuthorizationContext.Addr(), uintptr(unsafe.Pointer(pAuthzClientContext)))
+	return RPC_STATUS(r1)
+}
+
+// RpcGetAuthorizationContextForClient calls RPCRT4!RpcGetAuthorizationContextForClient.
+// https://learn.microsoft.com/windows/win32/api/rpcasync/nf-rpcasync-rpcgetauthorizationcontextforclient
+// Minimum OS: windows5.1.2600.
+func RpcGetAuthorizationContextForClient(ClientBinding unsafe.Pointer, ImpersonateOnReturn bool, Reserved1 unsafe.Pointer, pExpirationTime *int64, Reserved2 foundation.LUID, Reserved3 uint32, Reserved4 unsafe.Pointer, pAuthzClientContext *unsafe.Pointer) RPC_STATUS {
+	_ImpersonateOnReturn := win32.Bool32(ImpersonateOnReturn)
+	r1, _, _ := syscall.SyscallN(procRpcGetAuthorizationContextForClient.Addr(), uintptr(unsafe.Pointer(ClientBinding)), uintptr(_ImpersonateOnReturn), uintptr(unsafe.Pointer(Reserved1)), uintptr(unsafe.Pointer(pExpirationTime)), uintptr(win32.StructArg(Reserved2)), uintptr(Reserved3), uintptr(unsafe.Pointer(Reserved4)), uintptr(unsafe.Pointer(pAuthzClientContext)))
 	return RPC_STATUS(r1)
 }
 

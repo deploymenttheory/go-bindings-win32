@@ -166,6 +166,7 @@ var (
 	procVarAbs                            = modOLEAUT32.NewProc("VarAbs")
 	procVarAdd                            = modOLEAUT32.NewProc("VarAdd")
 	procVarAnd                            = modOLEAUT32.NewProc("VarAnd")
+	procVarBoolFromCy                     = modOLEAUT32.NewProc("VarBoolFromCy")
 	procVarBoolFromDec                    = modOLEAUT32.NewProc("VarBoolFromDec")
 	procVarBoolFromDisp                   = modOLEAUT32.NewProc("VarBoolFromDisp")
 	procVarBoolFromI1                     = modOLEAUT32.NewProc("VarBoolFromI1")
@@ -180,6 +181,7 @@ var (
 	procVarBstrCat                        = modOLEAUT32.NewProc("VarBstrCat")
 	procVarBstrCmp                        = modOLEAUT32.NewProc("VarBstrCmp")
 	procVarBstrFromBool                   = modOLEAUT32.NewProc("VarBstrFromBool")
+	procVarBstrFromCy                     = modOLEAUT32.NewProc("VarBstrFromCy")
 	procVarBstrFromDec                    = modOLEAUT32.NewProc("VarBstrFromDec")
 	procVarBstrFromDisp                   = modOLEAUT32.NewProc("VarBstrFromDisp")
 	procVarBstrFromI1                     = modOLEAUT32.NewProc("VarBstrFromI1")
@@ -192,6 +194,10 @@ var (
 	procVarBstrFromUI8                    = modOLEAUT32.NewProc("VarBstrFromUI8")
 	procVarCat                            = modOLEAUT32.NewProc("VarCat")
 	procVarCmp                            = modOLEAUT32.NewProc("VarCmp")
+	procVarCyAbs                          = modOLEAUT32.NewProc("VarCyAbs")
+	procVarCyAdd                          = modOLEAUT32.NewProc("VarCyAdd")
+	procVarCyCmp                          = modOLEAUT32.NewProc("VarCyCmp")
+	procVarCyFix                          = modOLEAUT32.NewProc("VarCyFix")
 	procVarCyFromBool                     = modOLEAUT32.NewProc("VarCyFromBool")
 	procVarCyFromDec                      = modOLEAUT32.NewProc("VarCyFromDec")
 	procVarCyFromDisp                     = modOLEAUT32.NewProc("VarCyFromDisp")
@@ -204,7 +210,15 @@ var (
 	procVarCyFromUI2                      = modOLEAUT32.NewProc("VarCyFromUI2")
 	procVarCyFromUI4                      = modOLEAUT32.NewProc("VarCyFromUI4")
 	procVarCyFromUI8                      = modOLEAUT32.NewProc("VarCyFromUI8")
+	procVarCyInt                          = modOLEAUT32.NewProc("VarCyInt")
+	procVarCyMul                          = modOLEAUT32.NewProc("VarCyMul")
+	procVarCyMulI4                        = modOLEAUT32.NewProc("VarCyMulI4")
+	procVarCyMulI8                        = modOLEAUT32.NewProc("VarCyMulI8")
+	procVarCyNeg                          = modOLEAUT32.NewProc("VarCyNeg")
+	procVarCyRound                        = modOLEAUT32.NewProc("VarCyRound")
+	procVarCySub                          = modOLEAUT32.NewProc("VarCySub")
 	procVarDateFromBool                   = modOLEAUT32.NewProc("VarDateFromBool")
+	procVarDateFromCy                     = modOLEAUT32.NewProc("VarDateFromCy")
 	procVarDateFromDec                    = modOLEAUT32.NewProc("VarDateFromDec")
 	procVarDateFromDisp                   = modOLEAUT32.NewProc("VarDateFromDisp")
 	procVarDateFromI1                     = modOLEAUT32.NewProc("VarDateFromI1")
@@ -224,6 +238,7 @@ var (
 	procVarDecDiv                         = modOLEAUT32.NewProc("VarDecDiv")
 	procVarDecFix                         = modOLEAUT32.NewProc("VarDecFix")
 	procVarDecFromBool                    = modOLEAUT32.NewProc("VarDecFromBool")
+	procVarDecFromCy                      = modOLEAUT32.NewProc("VarDecFromCy")
 	procVarDecFromDisp                    = modOLEAUT32.NewProc("VarDecFromDisp")
 	procVarDecFromI1                      = modOLEAUT32.NewProc("VarDecFromI1")
 	procVarDecFromI2                      = modOLEAUT32.NewProc("VarDecFromI2")
@@ -249,6 +264,7 @@ var (
 	procVarFormatNumber                   = modOLEAUT32.NewProc("VarFormatNumber")
 	procVarFormatPercent                  = modOLEAUT32.NewProc("VarFormatPercent")
 	procVarI1FromBool                     = modOLEAUT32.NewProc("VarI1FromBool")
+	procVarI1FromCy                       = modOLEAUT32.NewProc("VarI1FromCy")
 	procVarI1FromDec                      = modOLEAUT32.NewProc("VarI1FromDec")
 	procVarI1FromDisp                     = modOLEAUT32.NewProc("VarI1FromDisp")
 	procVarI1FromI2                       = modOLEAUT32.NewProc("VarI1FromI2")
@@ -260,6 +276,7 @@ var (
 	procVarI1FromUI4                      = modOLEAUT32.NewProc("VarI1FromUI4")
 	procVarI1FromUI8                      = modOLEAUT32.NewProc("VarI1FromUI8")
 	procVarI2FromBool                     = modOLEAUT32.NewProc("VarI2FromBool")
+	procVarI2FromCy                       = modOLEAUT32.NewProc("VarI2FromCy")
 	procVarI2FromDec                      = modOLEAUT32.NewProc("VarI2FromDec")
 	procVarI2FromDisp                     = modOLEAUT32.NewProc("VarI2FromDisp")
 	procVarI2FromI1                       = modOLEAUT32.NewProc("VarI2FromI1")
@@ -271,6 +288,7 @@ var (
 	procVarI2FromUI4                      = modOLEAUT32.NewProc("VarI2FromUI4")
 	procVarI2FromUI8                      = modOLEAUT32.NewProc("VarI2FromUI8")
 	procVarI4FromBool                     = modOLEAUT32.NewProc("VarI4FromBool")
+	procVarI4FromCy                       = modOLEAUT32.NewProc("VarI4FromCy")
 	procVarI4FromDec                      = modOLEAUT32.NewProc("VarI4FromDec")
 	procVarI4FromDisp                     = modOLEAUT32.NewProc("VarI4FromDisp")
 	procVarI4FromI1                       = modOLEAUT32.NewProc("VarI4FromI1")
@@ -282,6 +300,7 @@ var (
 	procVarI4FromUI4                      = modOLEAUT32.NewProc("VarI4FromUI4")
 	procVarI4FromUI8                      = modOLEAUT32.NewProc("VarI4FromUI8")
 	procVarI8FromBool                     = modOLEAUT32.NewProc("VarI8FromBool")
+	procVarI8FromCy                       = modOLEAUT32.NewProc("VarI8FromCy")
 	procVarI8FromDec                      = modOLEAUT32.NewProc("VarI8FromDec")
 	procVarI8FromDisp                     = modOLEAUT32.NewProc("VarI8FromDisp")
 	procVarI8FromI1                       = modOLEAUT32.NewProc("VarI8FromI1")
@@ -304,6 +323,7 @@ var (
 	procVarParseNumFromStr                = modOLEAUT32.NewProc("VarParseNumFromStr")
 	procVarPow                            = modOLEAUT32.NewProc("VarPow")
 	procVarR4FromBool                     = modOLEAUT32.NewProc("VarR4FromBool")
+	procVarR4FromCy                       = modOLEAUT32.NewProc("VarR4FromCy")
 	procVarR4FromDec                      = modOLEAUT32.NewProc("VarR4FromDec")
 	procVarR4FromDisp                     = modOLEAUT32.NewProc("VarR4FromDisp")
 	procVarR4FromI1                       = modOLEAUT32.NewProc("VarR4FromI1")
@@ -316,6 +336,7 @@ var (
 	procVarR4FromUI4                      = modOLEAUT32.NewProc("VarR4FromUI4")
 	procVarR4FromUI8                      = modOLEAUT32.NewProc("VarR4FromUI8")
 	procVarR8FromBool                     = modOLEAUT32.NewProc("VarR8FromBool")
+	procVarR8FromCy                       = modOLEAUT32.NewProc("VarR8FromCy")
 	procVarR8FromDec                      = modOLEAUT32.NewProc("VarR8FromDec")
 	procVarR8FromDisp                     = modOLEAUT32.NewProc("VarR8FromDisp")
 	procVarR8FromI1                       = modOLEAUT32.NewProc("VarR8FromI1")
@@ -331,6 +352,7 @@ var (
 	procVarSub                            = modOLEAUT32.NewProc("VarSub")
 	procVarTokenizeFormatString           = modOLEAUT32.NewProc("VarTokenizeFormatString")
 	procVarUI1FromBool                    = modOLEAUT32.NewProc("VarUI1FromBool")
+	procVarUI1FromCy                      = modOLEAUT32.NewProc("VarUI1FromCy")
 	procVarUI1FromDec                     = modOLEAUT32.NewProc("VarUI1FromDec")
 	procVarUI1FromDisp                    = modOLEAUT32.NewProc("VarUI1FromDisp")
 	procVarUI1FromI1                      = modOLEAUT32.NewProc("VarUI1FromI1")
@@ -342,6 +364,7 @@ var (
 	procVarUI1FromUI4                     = modOLEAUT32.NewProc("VarUI1FromUI4")
 	procVarUI1FromUI8                     = modOLEAUT32.NewProc("VarUI1FromUI8")
 	procVarUI2FromBool                    = modOLEAUT32.NewProc("VarUI2FromBool")
+	procVarUI2FromCy                      = modOLEAUT32.NewProc("VarUI2FromCy")
 	procVarUI2FromDec                     = modOLEAUT32.NewProc("VarUI2FromDec")
 	procVarUI2FromDisp                    = modOLEAUT32.NewProc("VarUI2FromDisp")
 	procVarUI2FromI1                      = modOLEAUT32.NewProc("VarUI2FromI1")
@@ -353,6 +376,7 @@ var (
 	procVarUI2FromUI4                     = modOLEAUT32.NewProc("VarUI2FromUI4")
 	procVarUI2FromUI8                     = modOLEAUT32.NewProc("VarUI2FromUI8")
 	procVarUI4FromBool                    = modOLEAUT32.NewProc("VarUI4FromBool")
+	procVarUI4FromCy                      = modOLEAUT32.NewProc("VarUI4FromCy")
 	procVarUI4FromDec                     = modOLEAUT32.NewProc("VarUI4FromDec")
 	procVarUI4FromDisp                    = modOLEAUT32.NewProc("VarUI4FromDisp")
 	procVarUI4FromI1                      = modOLEAUT32.NewProc("VarUI4FromI1")
@@ -364,6 +388,7 @@ var (
 	procVarUI4FromUI2                     = modOLEAUT32.NewProc("VarUI4FromUI2")
 	procVarUI4FromUI8                     = modOLEAUT32.NewProc("VarUI4FromUI8")
 	procVarUI8FromBool                    = modOLEAUT32.NewProc("VarUI8FromBool")
+	procVarUI8FromCy                      = modOLEAUT32.NewProc("VarUI8FromCy")
 	procVarUI8FromDec                     = modOLEAUT32.NewProc("VarUI8FromDec")
 	procVarUI8FromDisp                    = modOLEAUT32.NewProc("VarUI8FromDisp")
 	procVarUI8FromI1                      = modOLEAUT32.NewProc("VarUI8FromI1")
@@ -1652,6 +1677,13 @@ func VarAnd(pvarLeft *systemvariant.VARIANT, pvarRight *systemvariant.VARIANT, p
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// VarBoolFromCy calls OLEAUT32!VarBoolFromCy.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varboolfromcy
+func VarBoolFromCy(cyIn systemcom.CY, pboolOut *foundation.VARIANT_BOOL) error {
+	r1, _, _ := syscall.SyscallN(procVarBoolFromCy.Addr(), uintptr(win32.StructArg(cyIn)), uintptr(unsafe.Pointer(pboolOut)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // VarBoolFromDec calls OLEAUT32!VarBoolFromDec.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varboolfromdec
 func VarBoolFromDec(pdecIn *foundation.DECIMAL, pboolOut *foundation.VARIANT_BOOL) error {
@@ -1751,6 +1783,13 @@ func VarBstrFromBool(boolIn foundation.VARIANT_BOOL, lcid uint32, dwFlags uint32
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// VarBstrFromCy calls OLEAUT32!VarBstrFromCy.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varbstrfromcy
+func VarBstrFromCy(cyIn systemcom.CY, lcid uint32, dwFlags uint32, pbstrOut *foundation.BSTR) error {
+	r1, _, _ := syscall.SyscallN(procVarBstrFromCy.Addr(), uintptr(win32.StructArg(cyIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pbstrOut)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // VarBstrFromDec calls OLEAUT32!VarBstrFromDec.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varbstrfromdec
 func VarBstrFromDec(pdecIn *foundation.DECIMAL, lcid uint32, dwFlags uint32, pbstrOut *foundation.BSTR) error {
@@ -1833,6 +1872,34 @@ func VarCat(pvarLeft *systemvariant.VARIANT, pvarRight *systemvariant.VARIANT, p
 func VarCmp(pvarLeft *systemvariant.VARIANT, pvarRight *systemvariant.VARIANT, lcid uint32, dwFlags uint32) VARCMP {
 	r1, _, _ := syscall.SyscallN(procVarCmp.Addr(), uintptr(unsafe.Pointer(pvarLeft)), uintptr(unsafe.Pointer(pvarRight)), uintptr(lcid), uintptr(dwFlags))
 	return VARCMP(r1)
+}
+
+// VarCyAbs calls OLEAUT32!VarCyAbs.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varcyabs
+func VarCyAbs(cyIn systemcom.CY, pcyResult *systemcom.CY) error {
+	r1, _, _ := syscall.SyscallN(procVarCyAbs.Addr(), uintptr(win32.StructArg(cyIn)), uintptr(unsafe.Pointer(pcyResult)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// VarCyAdd calls OLEAUT32!VarCyAdd.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varcyadd
+func VarCyAdd(cyLeft systemcom.CY, cyRight systemcom.CY, pcyResult *systemcom.CY) error {
+	r1, _, _ := syscall.SyscallN(procVarCyAdd.Addr(), uintptr(win32.StructArg(cyLeft)), uintptr(win32.StructArg(cyRight)), uintptr(unsafe.Pointer(pcyResult)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// VarCyCmp calls OLEAUT32!VarCyCmp.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varcycmp
+func VarCyCmp(cyLeft systemcom.CY, cyRight systemcom.CY) VARCMP {
+	r1, _, _ := syscall.SyscallN(procVarCyCmp.Addr(), uintptr(win32.StructArg(cyLeft)), uintptr(win32.StructArg(cyRight)))
+	return VARCMP(r1)
+}
+
+// VarCyFix calls OLEAUT32!VarCyFix.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varcyfix
+func VarCyFix(cyIn systemcom.CY, pcyResult *systemcom.CY) error {
+	r1, _, _ := syscall.SyscallN(procVarCyFix.Addr(), uintptr(win32.StructArg(cyIn)), uintptr(unsafe.Pointer(pcyResult)))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // VarCyFromBool calls OLEAUT32!VarCyFromBool.
@@ -1920,10 +1987,66 @@ func VarCyFromUI8(ui64In uint64, pcyOut *systemcom.CY) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// VarCyInt calls OLEAUT32!VarCyInt.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varcyint
+func VarCyInt(cyIn systemcom.CY, pcyResult *systemcom.CY) error {
+	r1, _, _ := syscall.SyscallN(procVarCyInt.Addr(), uintptr(win32.StructArg(cyIn)), uintptr(unsafe.Pointer(pcyResult)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// VarCyMul calls OLEAUT32!VarCyMul.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varcymul
+func VarCyMul(cyLeft systemcom.CY, cyRight systemcom.CY, pcyResult *systemcom.CY) error {
+	r1, _, _ := syscall.SyscallN(procVarCyMul.Addr(), uintptr(win32.StructArg(cyLeft)), uintptr(win32.StructArg(cyRight)), uintptr(unsafe.Pointer(pcyResult)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// VarCyMulI4 calls OLEAUT32!VarCyMulI4.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varcymuli4
+func VarCyMulI4(cyLeft systemcom.CY, lRight int32, pcyResult *systemcom.CY) error {
+	r1, _, _ := syscall.SyscallN(procVarCyMulI4.Addr(), uintptr(win32.StructArg(cyLeft)), uintptr(lRight), uintptr(unsafe.Pointer(pcyResult)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// VarCyMulI8 calls OLEAUT32!VarCyMulI8.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varcymuli8
+func VarCyMulI8(cyLeft systemcom.CY, lRight int64, pcyResult *systemcom.CY) error {
+	r1, _, _ := syscall.SyscallN(procVarCyMulI8.Addr(), uintptr(win32.StructArg(cyLeft)), uintptr(lRight), uintptr(unsafe.Pointer(pcyResult)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// VarCyNeg calls OLEAUT32!VarCyNeg.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varcyneg
+func VarCyNeg(cyIn systemcom.CY, pcyResult *systemcom.CY) error {
+	r1, _, _ := syscall.SyscallN(procVarCyNeg.Addr(), uintptr(win32.StructArg(cyIn)), uintptr(unsafe.Pointer(pcyResult)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// VarCyRound calls OLEAUT32!VarCyRound.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varcyround
+func VarCyRound(cyIn systemcom.CY, cDecimals int32, pcyResult *systemcom.CY) error {
+	r1, _, _ := syscall.SyscallN(procVarCyRound.Addr(), uintptr(win32.StructArg(cyIn)), uintptr(cDecimals), uintptr(unsafe.Pointer(pcyResult)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// VarCySub calls OLEAUT32!VarCySub.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varcysub
+func VarCySub(cyLeft systemcom.CY, cyRight systemcom.CY, pcyResult *systemcom.CY) error {
+	r1, _, _ := syscall.SyscallN(procVarCySub.Addr(), uintptr(win32.StructArg(cyLeft)), uintptr(win32.StructArg(cyRight)), uintptr(unsafe.Pointer(pcyResult)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // VarDateFromBool calls OLEAUT32!VarDateFromBool.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardatefrombool
 func VarDateFromBool(boolIn foundation.VARIANT_BOOL, pdateOut *float64) error {
 	r1, _, _ := syscall.SyscallN(procVarDateFromBool.Addr(), uintptr(boolIn), uintptr(unsafe.Pointer(pdateOut)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// VarDateFromCy calls OLEAUT32!VarDateFromCy.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardatefromcy
+func VarDateFromCy(cyIn systemcom.CY, pdateOut *float64) error {
+	r1, _, _ := syscall.SyscallN(procVarDateFromCy.Addr(), uintptr(win32.StructArg(cyIn)), uintptr(unsafe.Pointer(pdateOut)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2058,6 +2181,13 @@ func VarDecFix(pdecIn *foundation.DECIMAL, pdecResult *foundation.DECIMAL) error
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardecfrombool
 func VarDecFromBool(boolIn foundation.VARIANT_BOOL, pdecOut *foundation.DECIMAL) error {
 	r1, _, _ := syscall.SyscallN(procVarDecFromBool.Addr(), uintptr(boolIn), uintptr(unsafe.Pointer(pdecOut)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// VarDecFromCy calls OLEAUT32!VarDecFromCy.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardecfromcy
+func VarDecFromCy(cyIn systemcom.CY, pdecOut *foundation.DECIMAL) error {
+	r1, _, _ := syscall.SyscallN(procVarDecFromCy.Addr(), uintptr(win32.StructArg(cyIn)), uintptr(unsafe.Pointer(pdecOut)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2239,6 +2369,13 @@ func VarI1FromBool(boolIn foundation.VARIANT_BOOL, pcOut foundation.PSTR) error 
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// VarI1FromCy calls OLEAUT32!VarI1FromCy.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari1fromcy
+func VarI1FromCy(cyIn systemcom.CY, pcOut foundation.PSTR) error {
+	r1, _, _ := syscall.SyscallN(procVarI1FromCy.Addr(), uintptr(win32.StructArg(cyIn)), uintptr(unsafe.Pointer(pcOut)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // VarI1FromDec calls OLEAUT32!VarI1FromDec.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari1fromdec
 func VarI1FromDec(pdecIn *foundation.DECIMAL, pcOut foundation.PSTR) error {
@@ -2314,6 +2451,13 @@ func VarI1FromUI8(i64In uint64, pcOut foundation.PSTR) error {
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari2frombool
 func VarI2FromBool(boolIn foundation.VARIANT_BOOL, psOut *int16) error {
 	r1, _, _ := syscall.SyscallN(procVarI2FromBool.Addr(), uintptr(boolIn), uintptr(unsafe.Pointer(psOut)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// VarI2FromCy calls OLEAUT32!VarI2FromCy.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari2fromcy
+func VarI2FromCy(cyIn systemcom.CY, psOut *int16) error {
+	r1, _, _ := syscall.SyscallN(procVarI2FromCy.Addr(), uintptr(win32.StructArg(cyIn)), uintptr(unsafe.Pointer(psOut)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2395,6 +2539,13 @@ func VarI4FromBool(boolIn foundation.VARIANT_BOOL, plOut *int32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// VarI4FromCy calls OLEAUT32!VarI4FromCy.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari4fromcy
+func VarI4FromCy(cyIn systemcom.CY, plOut *int32) error {
+	r1, _, _ := syscall.SyscallN(procVarI4FromCy.Addr(), uintptr(win32.StructArg(cyIn)), uintptr(unsafe.Pointer(plOut)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // VarI4FromDec calls OLEAUT32!VarI4FromDec.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari4fromdec
 func VarI4FromDec(pdecIn *foundation.DECIMAL, plOut *int32) error {
@@ -2470,6 +2621,13 @@ func VarI4FromUI8(ui64In uint64, plOut *int32) error {
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari8frombool
 func VarI8FromBool(boolIn foundation.VARIANT_BOOL, pi64Out *int64) error {
 	r1, _, _ := syscall.SyscallN(procVarI8FromBool.Addr(), uintptr(boolIn), uintptr(unsafe.Pointer(pi64Out)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// VarI8FromCy calls OLEAUT32!VarI8FromCy.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari8fromcy
+func VarI8FromCy(cyIn systemcom.CY, pi64Out *int64) error {
+	r1, _, _ := syscall.SyscallN(procVarI8FromCy.Addr(), uintptr(win32.StructArg(cyIn)), uintptr(unsafe.Pointer(pi64Out)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2629,6 +2787,13 @@ func VarR4FromBool(boolIn foundation.VARIANT_BOOL, pfltOut *float32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// VarR4FromCy calls OLEAUT32!VarR4FromCy.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr4fromcy
+func VarR4FromCy(cyIn systemcom.CY, pfltOut *float32) error {
+	r1, _, _ := syscall.SyscallN(procVarR4FromCy.Addr(), uintptr(win32.StructArg(cyIn)), uintptr(unsafe.Pointer(pfltOut)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // VarR4FromDec calls OLEAUT32!VarR4FromDec.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr4fromdec
 func VarR4FromDec(pdecIn *foundation.DECIMAL, pfltOut *float32) error {
@@ -2711,6 +2876,13 @@ func VarR4FromUI8(ui64In uint64, pfltOut *float32) error {
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr8frombool
 func VarR8FromBool(boolIn foundation.VARIANT_BOOL, pdblOut *float64) error {
 	r1, _, _ := syscall.SyscallN(procVarR8FromBool.Addr(), uintptr(boolIn), uintptr(unsafe.Pointer(pdblOut)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// VarR8FromCy calls OLEAUT32!VarR8FromCy.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr8fromcy
+func VarR8FromCy(cyIn systemcom.CY, pdblOut *float64) error {
+	r1, _, _ := syscall.SyscallN(procVarR8FromCy.Addr(), uintptr(win32.StructArg(cyIn)), uintptr(unsafe.Pointer(pdblOut)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2825,6 +2997,13 @@ func VarUI1FromBool(boolIn foundation.VARIANT_BOOL, pbOut *byte) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// VarUI1FromCy calls OLEAUT32!VarUI1FromCy.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui1fromcy
+func VarUI1FromCy(cyIn systemcom.CY, pbOut *byte) error {
+	r1, _, _ := syscall.SyscallN(procVarUI1FromCy.Addr(), uintptr(win32.StructArg(cyIn)), uintptr(unsafe.Pointer(pbOut)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // VarUI1FromDec calls OLEAUT32!VarUI1FromDec.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui1fromdec
 func VarUI1FromDec(pdecIn *foundation.DECIMAL, pbOut *byte) error {
@@ -2900,6 +3079,13 @@ func VarUI1FromUI8(ui64In uint64, pbOut *byte) error {
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui2frombool
 func VarUI2FromBool(boolIn foundation.VARIANT_BOOL, puiOut *uint16) error {
 	r1, _, _ := syscall.SyscallN(procVarUI2FromBool.Addr(), uintptr(boolIn), uintptr(unsafe.Pointer(puiOut)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// VarUI2FromCy calls OLEAUT32!VarUI2FromCy.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui2fromcy
+func VarUI2FromCy(cyIn systemcom.CY, puiOut *uint16) error {
+	r1, _, _ := syscall.SyscallN(procVarUI2FromCy.Addr(), uintptr(win32.StructArg(cyIn)), uintptr(unsafe.Pointer(puiOut)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2981,6 +3167,13 @@ func VarUI4FromBool(boolIn foundation.VARIANT_BOOL, pulOut *uint32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// VarUI4FromCy calls OLEAUT32!VarUI4FromCy.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui4fromcy
+func VarUI4FromCy(cyIn systemcom.CY, pulOut *uint32) error {
+	r1, _, _ := syscall.SyscallN(procVarUI4FromCy.Addr(), uintptr(win32.StructArg(cyIn)), uintptr(unsafe.Pointer(pulOut)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // VarUI4FromDec calls OLEAUT32!VarUI4FromDec.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui4fromdec
 func VarUI4FromDec(pdecIn *foundation.DECIMAL, pulOut *uint32) error {
@@ -3056,6 +3249,13 @@ func VarUI4FromUI8(ui64In uint64, plOut *uint32) error {
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui8frombool
 func VarUI8FromBool(boolIn foundation.VARIANT_BOOL, pi64Out *uint64) error {
 	r1, _, _ := syscall.SyscallN(procVarUI8FromBool.Addr(), uintptr(boolIn), uintptr(unsafe.Pointer(pi64Out)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// VarUI8FromCy calls OLEAUT32!VarUI8FromCy.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui8fromcy
+func VarUI8FromCy(cyIn systemcom.CY, pi64Out *uint64) error {
+	r1, _, _ := syscall.SyscallN(procVarUI8FromCy.Addr(), uintptr(win32.StructArg(cyIn)), uintptr(unsafe.Pointer(pi64Out)))
 	return win32.ErrIfFailed(int32(r1))
 }
 

@@ -119,6 +119,7 @@ var (
 	procWHvMapVpciDeviceMmioRanges                      = modWinHvPlatform.NewProc("WHvMapVpciDeviceMmioRanges")
 	procWHvPostVirtualProcessorSynicMessage             = modWinHvPlatform.NewProc("WHvPostVirtualProcessorSynicMessage")
 	procWHvQueryGpaRangeDirtyBitmap                     = modWinHvPlatform.NewProc("WHvQueryGpaRangeDirtyBitmap")
+	procWHvReadGpaRange                                 = modWinHvPlatform.NewProc("WHvReadGpaRange")
 	procWHvReadVpciDeviceRegister                       = modWinHvPlatform.NewProc("WHvReadVpciDeviceRegister")
 	procWHvRegisterPartitionDoorbellEvent               = modWinHvPlatform.NewProc("WHvRegisterPartitionDoorbellEvent")
 	procWHvRequestInterrupt                             = modWinHvPlatform.NewProc("WHvRequestInterrupt")
@@ -136,6 +137,7 @@ var (
 	procWHvSetVirtualProcessorXsaveState                = modWinHvPlatform.NewProc("WHvSetVirtualProcessorXsaveState")
 	procWHvSetVpciDevicePowerState                      = modWinHvPlatform.NewProc("WHvSetVpciDevicePowerState")
 	procWHvSetupPartition                               = modWinHvPlatform.NewProc("WHvSetupPartition")
+	procWHvSignalVirtualProcessorSynicEvent             = modWinHvPlatform.NewProc("WHvSignalVirtualProcessorSynicEvent")
 	procWHvStartPartitionMigration                      = modWinHvPlatform.NewProc("WHvStartPartitionMigration")
 	procWHvSuspendPartitionTime                         = modWinHvPlatform.NewProc("WHvSuspendPartitionTime")
 	procWHvTranslateGva                                 = modWinHvPlatform.NewProc("WHvTranslateGva")
@@ -144,6 +146,7 @@ var (
 	procWHvUnmapVpciDeviceMmioRanges                    = modWinHvPlatform.NewProc("WHvUnmapVpciDeviceMmioRanges")
 	procWHvUnregisterPartitionDoorbellEvent             = modWinHvPlatform.NewProc("WHvUnregisterPartitionDoorbellEvent")
 	procWHvUpdateTriggerParameters                      = modWinHvPlatform.NewProc("WHvUpdateTriggerParameters")
+	procWHvWriteGpaRange                                = modWinHvPlatform.NewProc("WHvWriteGpaRange")
 	procWHvWriteVpciDeviceRegister                      = modWinHvPlatform.NewProc("WHvWriteVpciDeviceRegister")
 )
 
@@ -819,6 +822,16 @@ func WHvQueryGpaRangeDirtyBitmap(Partition WHV_PARTITION_HANDLE, GuestAddress ui
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// WHvReadGpaRange calls WinHvPlatform!WHvReadGpaRange.
+func WHvReadGpaRange(Partition WHV_PARTITION_HANDLE, VpIndex uint32, GuestAddress uint64, Controls WHV_ACCESS_GPA_CONTROLS, Data []byte) error {
+	var _Data *byte
+	if len(Data) > 0 {
+		_Data = &Data[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWHvReadGpaRange.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(GuestAddress), uintptr(win32.StructArg(Controls)), uintptr(unsafe.Pointer(_Data)), uintptr(len(Data)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // WHvReadVpciDeviceRegister calls WinHvPlatform!WHvReadVpciDeviceRegister.
 func WHvReadVpciDeviceRegister(Partition WHV_PARTITION_HANDLE, LogicalDeviceId uint64, Register *WHV_VPCI_DEVICE_REGISTER, Data unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWHvReadVpciDeviceRegister.Addr(), uintptr(Partition), uintptr(LogicalDeviceId), uintptr(unsafe.Pointer(Register)), uintptr(unsafe.Pointer(Data)))
@@ -945,6 +958,12 @@ func WHvSetupPartition(Partition WHV_PARTITION_HANDLE) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// WHvSignalVirtualProcessorSynicEvent calls WinHvPlatform!WHvSignalVirtualProcessorSynicEvent.
+func WHvSignalVirtualProcessorSynicEvent(Partition WHV_PARTITION_HANDLE, SynicEvent WHV_SYNIC_EVENT_PARAMETERS, NewlySignaled *foundation.BOOL) error {
+	r1, _, _ := syscall.SyscallN(procWHvSignalVirtualProcessorSynicEvent.Addr(), uintptr(Partition), uintptr(win32.StructArg(SynicEvent)), uintptr(unsafe.Pointer(NewlySignaled)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // WHvStartPartitionMigration calls WinHvPlatform!WHvStartPartitionMigration.
 func WHvStartPartitionMigration(Partition WHV_PARTITION_HANDLE, MigrationHandle *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procWHvStartPartitionMigration.Addr(), uintptr(Partition), uintptr(unsafe.Pointer(MigrationHandle)))
@@ -990,6 +1009,16 @@ func WHvUnregisterPartitionDoorbellEvent(Partition WHV_PARTITION_HANDLE, MatchDa
 // WHvUpdateTriggerParameters calls WinHvPlatform!WHvUpdateTriggerParameters.
 func WHvUpdateTriggerParameters(Partition WHV_PARTITION_HANDLE, Parameters *WHV_TRIGGER_PARAMETERS, TriggerHandle unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWHvUpdateTriggerParameters.Addr(), uintptr(Partition), uintptr(unsafe.Pointer(Parameters)), uintptr(unsafe.Pointer(TriggerHandle)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// WHvWriteGpaRange calls WinHvPlatform!WHvWriteGpaRange.
+func WHvWriteGpaRange(Partition WHV_PARTITION_HANDLE, VpIndex uint32, GuestAddress uint64, Controls WHV_ACCESS_GPA_CONTROLS, Data []byte) error {
+	var _Data *byte
+	if len(Data) > 0 {
+		_Data = &Data[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWHvWriteGpaRange.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(GuestAddress), uintptr(win32.StructArg(Controls)), uintptr(unsafe.Pointer(_Data)), uintptr(len(Data)))
 	return win32.ErrIfFailed(int32(r1))
 }
 

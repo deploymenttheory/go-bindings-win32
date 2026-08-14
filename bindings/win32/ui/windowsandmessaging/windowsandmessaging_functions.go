@@ -25,17 +25,27 @@ var (
 	procIndexFilePath                                  = modMrmSupport.NewProc("IndexFilePath")
 	procMrmCreateConfig                                = modMrmSupport.NewProc("MrmCreateConfig")
 	procMrmCreateConfigInMemory                        = modMrmSupport.NewProc("MrmCreateConfigInMemory")
+	procMrmCreateResourceFile                          = modMrmSupport.NewProc("MrmCreateResourceFile")
+	procMrmCreateResourceFileInMemory                  = modMrmSupport.NewProc("MrmCreateResourceFileInMemory")
+	procMrmCreateResourceFileWithChecksum              = modMrmSupport.NewProc("MrmCreateResourceFileWithChecksum")
 	procMrmCreateResourceIndexer                       = modMrmSupport.NewProc("MrmCreateResourceIndexer")
 	procMrmCreateResourceIndexerFromPreviousPriData    = modMrmSupport.NewProc("MrmCreateResourceIndexerFromPreviousPriData")
 	procMrmCreateResourceIndexerFromPreviousPriFile    = modMrmSupport.NewProc("MrmCreateResourceIndexerFromPreviousPriFile")
 	procMrmCreateResourceIndexerFromPreviousSchemaData = modMrmSupport.NewProc("MrmCreateResourceIndexerFromPreviousSchemaData")
 	procMrmCreateResourceIndexerFromPreviousSchemaFile = modMrmSupport.NewProc("MrmCreateResourceIndexerFromPreviousSchemaFile")
 	procMrmCreateResourceIndexerWithFlags              = modMrmSupport.NewProc("MrmCreateResourceIndexerWithFlags")
+	procMrmDestroyIndexerAndMessages                   = modMrmSupport.NewProc("MrmDestroyIndexerAndMessages")
 	procMrmDumpPriDataInMemory                         = modMrmSupport.NewProc("MrmDumpPriDataInMemory")
 	procMrmDumpPriFile                                 = modMrmSupport.NewProc("MrmDumpPriFile")
 	procMrmDumpPriFileInMemory                         = modMrmSupport.NewProc("MrmDumpPriFileInMemory")
 	procMrmFreeMemory                                  = modMrmSupport.NewProc("MrmFreeMemory")
 	procMrmGetPriFileContentChecksum                   = modMrmSupport.NewProc("MrmGetPriFileContentChecksum")
+	procMrmIndexEmbeddedData                           = modMrmSupport.NewProc("MrmIndexEmbeddedData")
+	procMrmIndexFile                                   = modMrmSupport.NewProc("MrmIndexFile")
+	procMrmIndexFileAutoQualifiers                     = modMrmSupport.NewProc("MrmIndexFileAutoQualifiers")
+	procMrmIndexResourceContainerAutoQualifiers        = modMrmSupport.NewProc("MrmIndexResourceContainerAutoQualifiers")
+	procMrmIndexString                                 = modMrmSupport.NewProc("MrmIndexString")
+	procMrmPeekResourceIndexerMessages                 = modMrmSupport.NewProc("MrmPeekResourceIndexerMessages")
 	procAdjustWindowRect                               = modUSER32.NewProc("AdjustWindowRect")
 	procAdjustWindowRectEx                             = modUSER32.NewProc("AdjustWindowRectEx")
 	procAllowSetForegroundWindow                       = modUSER32.NewProc("AllowSetForegroundWindow")
@@ -79,6 +89,8 @@ var (
 	procCharUpperBuffA                                 = modUSER32.NewProc("CharUpperBuffA")
 	procCheckMenuItem                                  = modUSER32.NewProc("CheckMenuItem")
 	procCheckMenuRadioItem                             = modUSER32.NewProc("CheckMenuRadioItem")
+	procChildWindowFromPoint                           = modUSER32.NewProc("ChildWindowFromPoint")
+	procChildWindowFromPointEx                         = modUSER32.NewProc("ChildWindowFromPointEx")
 	procClipCursor                                     = modUSER32.NewProc("ClipCursor")
 	procCloseWindow                                    = modUSER32.NewProc("CloseWindow")
 	procConvertPrimaryPointerToMouseDrag               = modUSER32.NewProc("ConvertPrimaryPointerToMouseDrag")
@@ -137,6 +149,7 @@ var (
 	procEndDeferWindowPos                              = modUSER32.NewProc("EndDeferWindowPos")
 	procEndDialog                                      = modUSER32.NewProc("EndDialog")
 	procEndMenu                                        = modUSER32.NewProc("EndMenu")
+	procEnterMoveSizeLoop                              = modUSER32.NewProc("EnterMoveSizeLoop")
 	procEnumChildWindows                               = modUSER32.NewProc("EnumChildWindows")
 	procEnumProps                                      = modUSER32.NewProc("EnumPropsW")
 	procEnumPropsA                                     = modUSER32.NewProc("EnumPropsA")
@@ -295,6 +308,7 @@ var (
 	procLookupIconIdFromDirectory                      = modUSER32.NewProc("LookupIconIdFromDirectory")
 	procLookupIconIdFromDirectoryEx                    = modUSER32.NewProc("LookupIconIdFromDirectoryEx")
 	procMapDialogRect                                  = modUSER32.NewProc("MapDialogRect")
+	procMenuItemFromPoint                              = modUSER32.NewProc("MenuItemFromPoint")
 	procMessageBox                                     = modUSER32.NewProc("MessageBoxW")
 	procMessageBoxA                                    = modUSER32.NewProc("MessageBoxA")
 	procMessageBoxEx                                   = modUSER32.NewProc("MessageBoxExW")
@@ -321,6 +335,7 @@ var (
 	procPostThreadMessageA                             = modUSER32.NewProc("PostThreadMessageA")
 	procPrivateExtractIcons                            = modUSER32.NewProc("PrivateExtractIconsW")
 	procPrivateExtractIconsA                           = modUSER32.NewProc("PrivateExtractIconsA")
+	procRealChildWindowFromPoint                       = modUSER32.NewProc("RealChildWindowFromPoint")
 	procRealGetWindowClass                             = modUSER32.NewProc("RealGetWindowClassW")
 	procRealGetWindowClassA                            = modUSER32.NewProc("RealGetWindowClassA")
 	procRegisterClass                                  = modUSER32.NewProc("RegisterClassW")
@@ -422,6 +437,8 @@ var (
 	procUpdateLayeredWindow                            = modUSER32.NewProc("UpdateLayeredWindow")
 	procUpdateLayeredWindowIndirect                    = modUSER32.NewProc("UpdateLayeredWindowIndirect")
 	procWaitMessage                                    = modUSER32.NewProc("WaitMessage")
+	procWindowFromPhysicalPoint                        = modUSER32.NewProc("WindowFromPhysicalPoint")
+	procWindowFromPoint                                = modUSER32.NewProc("WindowFromPoint")
 	procWsprintf                                       = modUSER32.NewProc("wsprintfW")
 	procWsprintfA                                      = modUSER32.NewProc("wsprintfA")
 	procWvsprintf                                      = modUSER32.NewProc("wvsprintfW")
@@ -846,6 +863,22 @@ func CheckMenuRadioItem(hmenu HMENU, first uint32, last uint32, check uint32, fl
 		return win32.LastError(e1)
 	}
 	return nil
+}
+
+// ChildWindowFromPoint calls USER32!ChildWindowFromPoint.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-childwindowfrompoint
+// Minimum OS: windows5.0.
+func ChildWindowFromPoint(hWndParent foundation.HWND, Point foundation.POINT) foundation.HWND {
+	r1, _, _ := syscall.SyscallN(procChildWindowFromPoint.Addr(), uintptr(hWndParent), uintptr(win32.StructArg(Point)))
+	return foundation.HWND(r1)
+}
+
+// ChildWindowFromPointEx calls USER32!ChildWindowFromPointEx.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-childwindowfrompointex
+// Minimum OS: windows5.0.
+func ChildWindowFromPointEx(hwnd foundation.HWND, pt foundation.POINT, flags CWP_FLAGS) foundation.HWND {
+	r1, _, _ := syscall.SyscallN(procChildWindowFromPointEx.Addr(), uintptr(hwnd), uintptr(win32.StructArg(pt)), uintptr(flags))
+	return foundation.HWND(r1)
 }
 
 // ClipCursor calls USER32!ClipCursor.
@@ -1500,6 +1533,12 @@ func EndMenu() error {
 		return win32.LastError(e1)
 	}
 	return nil
+}
+
+// EnterMoveSizeLoop calls USER32!EnterMoveSizeLoop.
+func EnterMoveSizeLoop(hwnd foundation.HWND, ptCursor foundation.POINT, moveSizeCode MOVESIZE_OPERATION) bool {
+	r1, _, _ := syscall.SyscallN(procEnterMoveSizeLoop.Addr(), uintptr(hwnd), uintptr(win32.StructArg(ptCursor)), uintptr(moveSizeCode))
+	return r1 != 0
 }
 
 // EnumChildWindows calls USER32!EnumChildWindows.
@@ -3116,6 +3155,14 @@ func MapDialogRect(hDlg foundation.HWND, lpRect *foundation.RECT) error {
 	return nil
 }
 
+// MenuItemFromPoint calls USER32!MenuItemFromPoint.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-menuitemfrompoint
+// Minimum OS: windows5.0.
+func MenuItemFromPoint(hWnd foundation.HWND, hMenu HMENU, ptScreen foundation.POINT) int32 {
+	r1, _, _ := syscall.SyscallN(procMenuItemFromPoint.Addr(), uintptr(hWnd), uintptr(hMenu), uintptr(win32.StructArg(ptScreen)))
+	return int32(r1)
+}
+
 // MessageBox calls USER32!MessageBoxW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-messageboxw
 // Minimum OS: windows5.0.
@@ -3232,6 +3279,28 @@ func MrmCreateConfigInMemory(platformVersion MrmPlatformVersion, defaultQualifie
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// MrmCreateResourceFile calls MrmSupport!MrmCreateResourceFile.
+// https://learn.microsoft.com/windows/win32/menurc/mrmcreateresourcefile
+func MrmCreateResourceFile(indexer MrmResourceIndexerHandle, packagingMode MrmPackagingMode, packagingOptions MrmPackagingOptions, outputDirectory string) error {
+	_outputDirectory := win32.UTF16Ptr(outputDirectory)
+	r1, _, _ := syscall.SyscallN(procMrmCreateResourceFile.Addr(), uintptr(win32.StructArg(indexer)), uintptr(packagingMode), uintptr(packagingOptions), uintptr(unsafe.Pointer(_outputDirectory)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// MrmCreateResourceFileInMemory calls MrmSupport!MrmCreateResourceFileInMemory.
+// https://learn.microsoft.com/windows/win32/menurc/mrmcreateresourcefileinmemory
+func MrmCreateResourceFileInMemory(indexer MrmResourceIndexerHandle, packagingMode MrmPackagingMode, packagingOptions MrmPackagingOptions, outputPriData **byte, outputPriSize *uint32) error {
+	r1, _, _ := syscall.SyscallN(procMrmCreateResourceFileInMemory.Addr(), uintptr(win32.StructArg(indexer)), uintptr(packagingMode), uintptr(packagingOptions), uintptr(unsafe.Pointer(outputPriData)), uintptr(unsafe.Pointer(outputPriSize)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// MrmCreateResourceFileWithChecksum calls MrmSupport!MrmCreateResourceFileWithChecksum.
+func MrmCreateResourceFileWithChecksum(indexer MrmResourceIndexerHandle, packagingMode MrmPackagingMode, packagingOptions MrmPackagingOptions, checksum uint32, outputDirectory string) error {
+	_outputDirectory := win32.UTF16Ptr(outputDirectory)
+	r1, _, _ := syscall.SyscallN(procMrmCreateResourceFileWithChecksum.Addr(), uintptr(win32.StructArg(indexer)), uintptr(packagingMode), uintptr(packagingOptions), uintptr(checksum), uintptr(unsafe.Pointer(_outputDirectory)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // MrmCreateResourceIndexer calls MrmSupport!MrmCreateResourceIndexer.
 // https://learn.microsoft.com/windows/win32/menurc/mrmcreateresourceindexer
 func MrmCreateResourceIndexer(packageFamilyName string, projectRoot string, platformVersion MrmPlatformVersion, defaultQualifiers string, indexer *MrmResourceIndexerHandle) error {
@@ -3297,6 +3366,13 @@ func MrmCreateResourceIndexerWithFlags(packageFamilyName string, projectRoot str
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// MrmDestroyIndexerAndMessages calls MrmSupport!MrmDestroyIndexerAndMessages.
+// https://learn.microsoft.com/windows/win32/menurc/mrmdestroyindexerandmessages
+func MrmDestroyIndexerAndMessages(indexer MrmResourceIndexerHandle) error {
+	r1, _, _ := syscall.SyscallN(procMrmDestroyIndexerAndMessages.Addr(), uintptr(win32.StructArg(indexer)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // MrmDumpPriDataInMemory calls MrmSupport!MrmDumpPriDataInMemory.
 // https://learn.microsoft.com/windows/win32/menurc/mrmdumppridatainmemory
 func MrmDumpPriDataInMemory(inputPriData []byte, schemaPriData []byte, dumpType MrmDumpType, outputXmlData **byte, outputXmlSize *uint32) error {
@@ -3342,6 +3418,62 @@ func MrmFreeMemory(data *byte) error {
 func MrmGetPriFileContentChecksum(priFile string, checksum *uint32) error {
 	_priFile := win32.UTF16Ptr(priFile)
 	r1, _, _ := syscall.SyscallN(procMrmGetPriFileContentChecksum.Addr(), uintptr(unsafe.Pointer(_priFile)), uintptr(unsafe.Pointer(checksum)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// MrmIndexEmbeddedData calls MrmSupport!MrmIndexEmbeddedData.
+// https://learn.microsoft.com/windows/win32/menurc/mrmindexembeddeddata
+func MrmIndexEmbeddedData(indexer MrmResourceIndexerHandle, resourceUri string, embeddedData []byte, qualifiers string) error {
+	_resourceUri := win32.UTF16Ptr(resourceUri)
+	var _embeddedData *byte
+	if len(embeddedData) > 0 {
+		_embeddedData = &embeddedData[0]
+	}
+	_qualifiers := win32.UTF16Ptr(qualifiers)
+	r1, _, _ := syscall.SyscallN(procMrmIndexEmbeddedData.Addr(), uintptr(win32.StructArg(indexer)), uintptr(unsafe.Pointer(_resourceUri)), uintptr(unsafe.Pointer(_embeddedData)), uintptr(len(embeddedData)), uintptr(unsafe.Pointer(_qualifiers)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// MrmIndexFile calls MrmSupport!MrmIndexFile.
+// https://learn.microsoft.com/windows/win32/menurc/mrmindexfile
+func MrmIndexFile(indexer MrmResourceIndexerHandle, resourceUri string, filePath string, qualifiers string) error {
+	_resourceUri := win32.UTF16Ptr(resourceUri)
+	_filePath := win32.UTF16Ptr(filePath)
+	_qualifiers := win32.UTF16Ptr(qualifiers)
+	r1, _, _ := syscall.SyscallN(procMrmIndexFile.Addr(), uintptr(win32.StructArg(indexer)), uintptr(unsafe.Pointer(_resourceUri)), uintptr(unsafe.Pointer(_filePath)), uintptr(unsafe.Pointer(_qualifiers)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// MrmIndexFileAutoQualifiers calls MrmSupport!MrmIndexFileAutoQualifiers.
+// https://learn.microsoft.com/windows/win32/menurc/mrmindexfileautoqualifiers
+func MrmIndexFileAutoQualifiers(indexer MrmResourceIndexerHandle, filePath string) error {
+	_filePath := win32.UTF16Ptr(filePath)
+	r1, _, _ := syscall.SyscallN(procMrmIndexFileAutoQualifiers.Addr(), uintptr(win32.StructArg(indexer)), uintptr(unsafe.Pointer(_filePath)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// MrmIndexResourceContainerAutoQualifiers calls MrmSupport!MrmIndexResourceContainerAutoQualifiers.
+// https://learn.microsoft.com/windows/win32/menurc/mrmindexresourcecontainerautoqualifiers
+func MrmIndexResourceContainerAutoQualifiers(indexer MrmResourceIndexerHandle, containerPath string) error {
+	_containerPath := win32.UTF16Ptr(containerPath)
+	r1, _, _ := syscall.SyscallN(procMrmIndexResourceContainerAutoQualifiers.Addr(), uintptr(win32.StructArg(indexer)), uintptr(unsafe.Pointer(_containerPath)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// MrmIndexString calls MrmSupport!MrmIndexString.
+// https://learn.microsoft.com/windows/win32/menurc/mrmindexstring
+func MrmIndexString(indexer MrmResourceIndexerHandle, resourceUri string, resourceString string, qualifiers string) error {
+	_resourceUri := win32.UTF16Ptr(resourceUri)
+	_resourceString := win32.UTF16Ptr(resourceString)
+	_qualifiers := win32.UTF16Ptr(qualifiers)
+	r1, _, _ := syscall.SyscallN(procMrmIndexString.Addr(), uintptr(win32.StructArg(indexer)), uintptr(unsafe.Pointer(_resourceUri)), uintptr(unsafe.Pointer(_resourceString)), uintptr(unsafe.Pointer(_qualifiers)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// MrmPeekResourceIndexerMessages calls MrmSupport!MrmPeekResourceIndexerMessages.
+// https://learn.microsoft.com/windows/win32/menurc/mrmpeekresourceindexermessages
+func MrmPeekResourceIndexerMessages(handle MrmResourceIndexerHandle, messages **MrmResourceIndexerMessage, numMsgs *uint32) error {
+	r1, _, _ := syscall.SyscallN(procMrmPeekResourceIndexerMessages.Addr(), uintptr(win32.StructArg(handle)), uintptr(unsafe.Pointer(messages)), uintptr(unsafe.Pointer(numMsgs)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3529,6 +3661,14 @@ func PrivateExtractIconsA(szFileName foundation.PSTR, nIconIndex int32, cxIcon i
 	}
 	r1, _, _ := syscall.SyscallN(procPrivateExtractIconsA.Addr(), uintptr(unsafe.Pointer(szFileName)), uintptr(nIconIndex), uintptr(cxIcon), uintptr(cyIcon), uintptr(unsafe.Pointer(_phicon)), uintptr(unsafe.Pointer(piconid)), uintptr(len(phicon)), uintptr(flags))
 	return uint32(r1)
+}
+
+// RealChildWindowFromPoint calls USER32!RealChildWindowFromPoint.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-realchildwindowfrompoint
+// Minimum OS: windows5.0.
+func RealChildWindowFromPoint(hwndParent foundation.HWND, ptParentClientCoords foundation.POINT) foundation.HWND {
+	r1, _, _ := syscall.SyscallN(procRealChildWindowFromPoint.Addr(), uintptr(hwndParent), uintptr(win32.StructArg(ptParentClientCoords)))
+	return foundation.HWND(r1)
 }
 
 // RealGetWindowClass calls USER32!RealGetWindowClassW.
@@ -4569,6 +4709,22 @@ func WaitMessage() error {
 		return win32.LastError(e1)
 	}
 	return nil
+}
+
+// WindowFromPhysicalPoint calls USER32!WindowFromPhysicalPoint.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-windowfromphysicalpoint
+// Minimum OS: windows6.0.6000.
+func WindowFromPhysicalPoint(Point foundation.POINT) foundation.HWND {
+	r1, _, _ := syscall.SyscallN(procWindowFromPhysicalPoint.Addr(), uintptr(win32.StructArg(Point)))
+	return foundation.HWND(r1)
+}
+
+// WindowFromPoint calls USER32!WindowFromPoint.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-windowfrompoint
+// Minimum OS: windows5.0.
+func WindowFromPoint(Point foundation.POINT) foundation.HWND {
+	r1, _, _ := syscall.SyscallN(procWindowFromPoint.Addr(), uintptr(win32.StructArg(Point)))
+	return foundation.HWND(r1)
 }
 
 // Wsprintf calls USER32!wsprintfW.

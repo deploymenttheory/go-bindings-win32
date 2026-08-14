@@ -1221,6 +1221,7 @@ var (
 	procScriptLayout                                          = modUSP10.NewProc("ScriptLayout")
 	procScriptPlace                                           = modUSP10.NewProc("ScriptPlace")
 	procScriptPlaceOpenType                                   = modUSP10.NewProc("ScriptPlaceOpenType")
+	procScriptPositionSingleGlyph                             = modUSP10.NewProc("ScriptPositionSingleGlyph")
 	procScriptRecordDigitSubstitution                         = modUSP10.NewProc("ScriptRecordDigitSubstitution")
 	procScriptShape                                           = modUSP10.NewProc("ScriptShape")
 	procScriptShapeOpenType                                   = modUSP10.NewProc("ScriptShapeOpenType")
@@ -2910,6 +2911,14 @@ func ScriptPlace(hdc graphicsgdi.HDC, psc *unsafe.Pointer, pwGlyphs *uint16, cGl
 func ScriptPlaceOpenType(hdc graphicsgdi.HDC, psc *unsafe.Pointer, psa *SCRIPT_ANALYSIS, tagScript uint32, tagLangSys uint32, rcRangeChars *int32, rpRangeProperties **TEXTRANGE_PROPERTIES, cRanges int32, pwcChars string, pwLogClust *uint16, pCharProps *SCRIPT_CHARPROP, cChars int32, pwGlyphs *uint16, pGlyphProps *SCRIPT_GLYPHPROP, cGlyphs int32, piAdvance *int32, pGoffset *GOFFSET, pABC *graphicsgdi.ABC) error {
 	_pwcChars := win32.UTF16Ptr(pwcChars)
 	r1, _, _ := syscall.SyscallN(procScriptPlaceOpenType.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(psa)), uintptr(tagScript), uintptr(tagLangSys), uintptr(unsafe.Pointer(rcRangeChars)), uintptr(unsafe.Pointer(rpRangeProperties)), uintptr(cRanges), uintptr(unsafe.Pointer(_pwcChars)), uintptr(unsafe.Pointer(pwLogClust)), uintptr(unsafe.Pointer(pCharProps)), uintptr(cChars), uintptr(unsafe.Pointer(pwGlyphs)), uintptr(unsafe.Pointer(pGlyphProps)), uintptr(cGlyphs), uintptr(unsafe.Pointer(piAdvance)), uintptr(unsafe.Pointer(pGoffset)), uintptr(unsafe.Pointer(pABC)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// ScriptPositionSingleGlyph calls USP10!ScriptPositionSingleGlyph.
+// https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptpositionsingleglyph
+// Minimum OS: windows6.0.6000.
+func ScriptPositionSingleGlyph(hdc graphicsgdi.HDC, psc *unsafe.Pointer, psa *SCRIPT_ANALYSIS, tagScript uint32, tagLangSys uint32, tagFeature uint32, lParameter int32, wGlyphId uint16, iAdvance int32, GOffset GOFFSET, piOutAdvance *int32, pOutGoffset *GOFFSET) error {
+	r1, _, _ := syscall.SyscallN(procScriptPositionSingleGlyph.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(psa)), uintptr(tagScript), uintptr(tagLangSys), uintptr(tagFeature), uintptr(lParameter), uintptr(wGlyphId), uintptr(iAdvance), uintptr(win32.StructArg(GOffset)), uintptr(unsafe.Pointer(piOutAdvance)), uintptr(unsafe.Pointer(pOutGoffset)))
 	return win32.ErrIfFailed(int32(r1))
 }
 

@@ -205,6 +205,18 @@ func (self *IPresentationManager) GetNextPresentId() uint64 {
 	return uint64(r1)
 }
 
+// SetTargetTime dispatches through IPresentationManager's vtable slot 6.
+func (self *IPresentationManager) SetTargetTime(targetTime SystemInterruptTime) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(targetTime)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// SetPreferredPresentDuration dispatches through IPresentationManager's vtable slot 7.
+func (self *IPresentationManager) SetPreferredPresentDuration(preferredDuration SystemInterruptTime, deviationTolerance SystemInterruptTime) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(preferredDuration)), uintptr(win32.StructArg(deviationTolerance)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // ForceVSyncInterrupt dispatches through IPresentationManager's vtable slot 8.
 func (self *IPresentationManager) ForceVSyncInterrupt(forceVsyncInterrupt byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(forceVsyncInterrupt))

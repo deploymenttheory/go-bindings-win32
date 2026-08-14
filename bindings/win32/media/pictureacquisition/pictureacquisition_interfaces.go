@@ -91,6 +91,12 @@ func (self *IPhotoAcquireItem) GetItemName(pbstrItemName *foundation.BSTR) error
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// GetThumbnail dispatches through IPhotoAcquireItem's vtable slot 4.
+func (self *IPhotoAcquireItem) GetThumbnail(sizeThumbnail foundation.SIZE, phbmpThumbnail *graphicsgdi.HBITMAP) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(sizeThumbnail)), uintptr(unsafe.Pointer(phbmpThumbnail)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetProperty dispatches through IPhotoAcquireItem's vtable slot 5.
 func (self *IPhotoAcquireItem) GetProperty(key *foundation.PROPERTYKEY, pv *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pv)))

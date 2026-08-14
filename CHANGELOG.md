@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0](https://github.com/deploymenttheory/go-bindings-win32/compare/v0.2.1...v0.3.0) (2026-08-12)
+
+
+### Features
+
+* **codegen:** pass register-sized by-value structs, unlocking ConPTY ([0847514](https://github.com/deploymenttheory/go-bindings-win32/commit/08475144d7e2c852750b62ec7740af02242897ef))
+* **codegen:** pass register-sized by-value structs, unlocking ConPTY ([e5f99fc](https://github.com/deploymenttheory/go-bindings-win32/commit/e5f99fce9e207f307da2ec7e0a383589c2344782))
+
+
+### Bug Fixes
+
+* update terminology from "oracle" to "trusted source" in documentation ([3b02b9d](https://github.com/deploymenttheory/go-bindings-win32/commit/3b02b9d6d09273e0cfd621c5dc924d7b86d9a39e))
+
 ## [0.2.1](https://github.com/deploymenttheory/go-bindings-win32/compare/v0.2.0...v0.2.1) (2026-07-19)
 
 

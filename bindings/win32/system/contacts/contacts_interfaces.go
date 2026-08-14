@@ -1035,6 +1035,13 @@ func (self *IContactProperties) SetString(pszPropertyName string, dwFlags uint32
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// SetDate dispatches through IContactProperties's vtable slot 8.
+func (self *IContactProperties) SetDate(pszPropertyName string, dwFlags uint32, ftDateTime foundation.FILETIME) error {
+	_pszPropertyName := win32.UTF16Ptr(pszPropertyName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(dwFlags), uintptr(win32.StructArg(ftDateTime)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetBinary dispatches through IContactProperties's vtable slot 9.
 func (self *IContactProperties) SetBinary(pszPropertyName string, dwFlags uint32, pszContentType string, pStream *systemcom.IStream) error {
 	_pszPropertyName := win32.UTF16Ptr(pszPropertyName)

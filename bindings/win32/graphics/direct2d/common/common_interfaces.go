@@ -31,6 +31,11 @@ func (self *ID2D1SimplifiedGeometrySink) SetSegmentFlags(vertexFlags D2D1_PATH_S
 	syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(vertexFlags))
 }
 
+// BeginFigure dispatches through ID2D1SimplifiedGeometrySink's vtable slot 5.
+func (self *ID2D1SimplifiedGeometrySink) BeginFigure(startPoint D2D_POINT_2F, figureBegin D2D1_FIGURE_BEGIN) {
+	syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(startPoint)), uintptr(figureBegin))
+}
+
 // AddLines dispatches through ID2D1SimplifiedGeometrySink's vtable slot 6.
 func (self *ID2D1SimplifiedGeometrySink) AddLines(points []D2D_POINT_2F) {
 	var _points *D2D_POINT_2F

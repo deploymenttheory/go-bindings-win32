@@ -98,6 +98,7 @@ var (
 	procInetNtopW                        = modWS2_32.NewProc("InetNtopW")
 	procInetPtonW                        = modWS2_32.NewProc("InetPtonW")
 	procInet_addr                        = modWS2_32.NewProc("inet_addr")
+	procInet_ntoa                        = modWS2_32.NewProc("inet_ntoa")
 	procInet_ntop                        = modWS2_32.NewProc("inet_ntop")
 	procInet_pton                        = modWS2_32.NewProc("inet_pton")
 	procIoctlsocket                      = modWS2_32.NewProc("ioctlsocket")
@@ -676,6 +677,18 @@ func Inet_addr(cp foundation.PSTR) (uint32, error) {
 		return uint32(r1), e1
 	}
 	return uint32(r1), nil
+}
+
+// Inet_ntoa calls WS2_32!inet_ntoa.
+// https://learn.microsoft.com/windows/win32/api/wsipv6ok/nf-wsipv6ok-inet_ntoa
+// Minimum OS: windows8.1.
+func Inet_ntoa(in IN_ADDR) (foundation.PSTR, error) {
+	r1, _, e1 := syscall.SyscallN(procInet_ntoa.Addr(), uintptr(win32.StructArg(in)))
+	ret := foundation.PSTR(unsafe.Pointer(r1))
+	if ret == nil {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
 }
 
 // Inet_ntop calls WS2_32!inet_ntop.

@@ -891,6 +891,12 @@ type IApplicationDesignModeSettings struct {
 // IID_IApplicationDesignModeSettings is the interface identifier for IApplicationDesignModeSettings.
 var IID_IApplicationDesignModeSettings = win32.GUID{Data1: 0x2a3dee9a, Data2: 0xe31d, Data3: 0x46d6, Data4: [8]byte{0x85, 0x08, 0xbc, 0xc5, 0x97, 0xdb, 0x35, 0x57}}
 
+// SetNativeDisplaySize dispatches through IApplicationDesignModeSettings's vtable slot 3.
+func (self *IApplicationDesignModeSettings) SetNativeDisplaySize(nativeDisplaySizePixels foundation.SIZE) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(nativeDisplaySizePixels)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetScaleFactor dispatches through IApplicationDesignModeSettings's vtable slot 4.
 func (self *IApplicationDesignModeSettings) SetScaleFactor(scaleFactor uishellcommon.DEVICE_SCALE_FACTOR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(scaleFactor))
@@ -906,6 +912,12 @@ func (self *IApplicationDesignModeSettings) SetApplicationViewState(viewState AP
 // ComputeApplicationSize dispatches through IApplicationDesignModeSettings's vtable slot 6.
 func (self *IApplicationDesignModeSettings) ComputeApplicationSize(applicationSizePixels *foundation.SIZE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(applicationSizePixels)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// IsApplicationViewStateSupported dispatches through IApplicationDesignModeSettings's vtable slot 7.
+func (self *IApplicationDesignModeSettings) IsApplicationViewStateSupported(viewState APPLICATION_VIEW_STATE, nativeDisplaySizePixels foundation.SIZE, scaleFactor uishellcommon.DEVICE_SCALE_FACTOR, supported *foundation.BOOL) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(viewState), uintptr(win32.StructArg(nativeDisplaySizePixels)), uintptr(scaleFactor), uintptr(unsafe.Pointer(supported)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -958,6 +970,12 @@ func (self *IApplicationDesignModeSettings2) SetApplicationViewMinWidth(viewMinW
 // GetApplicationSizeBounds dispatches through IApplicationDesignModeSettings2's vtable slot 14.
 func (self *IApplicationDesignModeSettings2) GetApplicationSizeBounds(minApplicationSizePixels *foundation.SIZE, maxApplicationSizePixels *foundation.SIZE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(minApplicationSizePixels)), uintptr(unsafe.Pointer(maxApplicationSizePixels)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// GetApplicationViewOrientation dispatches through IApplicationDesignModeSettings2's vtable slot 15.
+func (self *IApplicationDesignModeSettings2) GetApplicationViewOrientation(applicationSizePixels foundation.SIZE, viewOrientation *APPLICATION_VIEW_ORIENTATION) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(applicationSizePixels)), uintptr(unsafe.Pointer(viewOrientation)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2448,6 +2466,12 @@ type IContextMenuSite struct {
 
 // IID_IContextMenuSite is the interface identifier for IContextMenuSite.
 var IID_IContextMenuSite = win32.GUID{Data1: 0x0811aebe, Data2: 0x0b87, Data3: 0x4c54, Data4: [8]byte{0x9e, 0x72, 0x54, 0x8c, 0xf6, 0x49, 0x01, 0x6b}}
+
+// DoContextMenuPopup dispatches through IContextMenuSite's vtable slot 3.
+func (self *IContextMenuSite) DoContextMenuPopup(punkContextMenu *systemcom.IUnknown, fFlags uint32, pt foundation.POINT) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(punkContextMenu)), uintptr(fFlags), uintptr(win32.StructArg(pt)))
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // ICopyHookA: https://learn.microsoft.com/windows/win32/api/shlobj/nn-shlobj-icopyhooka
 // IID: 000214ef-0000-0000-c000-000000000046
@@ -4302,6 +4326,12 @@ func (self *IExecuteCommand) SetKeyState(grfKeyState uint32) error {
 func (self *IExecuteCommand) SetParameters(pszParameters string) error {
 	_pszParameters := win32.UTF16Ptr(pszParameters)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszParameters)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// SetPosition dispatches through IExecuteCommand's vtable slot 5.
+func (self *IExecuteCommand) SetPosition(pt foundation.POINT) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(pt)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -11015,6 +11045,12 @@ type IShellItemImageFactory struct {
 // IID_IShellItemImageFactory is the interface identifier for IShellItemImageFactory.
 var IID_IShellItemImageFactory = win32.GUID{Data1: 0xbcc18b79, Data2: 0xba16, Data3: 0x442f, Data4: [8]byte{0x80, 0xc4, 0x8a, 0x59, 0xc3, 0x0c, 0x46, 0x3b}}
 
+// GetImage dispatches through IShellItemImageFactory's vtable slot 3.
+func (self *IShellItemImageFactory) GetImage(size foundation.SIZE, flags SIIGBF, phbm *graphicsgdi.HBITMAP) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(size)), uintptr(flags), uintptr(unsafe.Pointer(phbm)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IShellItemResources: https://learn.microsoft.com/windows/win32/api/shobjidl_core/nn-shobjidl_core-ishellitemresources
 // IID: ff5693be-2ce0-4d48-b5c5-40817d1acdb9
 type IShellItemResources struct {
@@ -14401,6 +14437,13 @@ var IID_IThumbnailStreamCache = win32.GUID{Data1: 0x90e11430, Data2: 0x9569, Dat
 func (self *IThumbnailStreamCache) GetThumbnailStream(path string, cacheId uint64, options ThumbnailStreamCacheOptions, requestedThumbnailSize uint32, thumbnailSize *foundation.SIZE, thumbnailStream **systemcom.IStream) error {
 	_path := win32.UTF16Ptr(path)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_path)), uintptr(cacheId), uintptr(options), uintptr(requestedThumbnailSize), uintptr(unsafe.Pointer(thumbnailSize)), uintptr(unsafe.Pointer(thumbnailStream)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// SetThumbnailStream dispatches through IThumbnailStreamCache's vtable slot 4.
+func (self *IThumbnailStreamCache) SetThumbnailStream(path string, cacheId uint64, thumbnailSize foundation.SIZE, thumbnailStream *systemcom.IStream) error {
+	_path := win32.UTF16Ptr(path)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_path)), uintptr(cacheId), uintptr(win32.StructArg(thumbnailSize)), uintptr(unsafe.Pointer(thumbnailStream)))
 	return win32.ErrIfFailed(int32(r1))
 }
 

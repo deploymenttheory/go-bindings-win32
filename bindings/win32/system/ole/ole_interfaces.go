@@ -663,9 +663,27 @@ type IDropTarget struct {
 // IID_IDropTarget is the interface identifier for IDropTarget.
 var IID_IDropTarget = win32.GUID{Data1: 0x00000122, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
+// DragEnter dispatches through IDropTarget's vtable slot 3.
+func (self *IDropTarget) DragEnter(pDataObj *systemcom.IDataObject, grfKeyState systemsystemservices.MODIFIERKEYS_FLAGS, pt foundation.POINTL, pdwEffect *DROPEFFECT) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDataObj)), uintptr(grfKeyState), uintptr(win32.StructArg(pt)), uintptr(unsafe.Pointer(pdwEffect)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// DragOver dispatches through IDropTarget's vtable slot 4.
+func (self *IDropTarget) DragOver(grfKeyState systemsystemservices.MODIFIERKEYS_FLAGS, pt foundation.POINTL, pdwEffect *DROPEFFECT) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(grfKeyState), uintptr(win32.StructArg(pt)), uintptr(unsafe.Pointer(pdwEffect)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // DragLeave dispatches through IDropTarget's vtable slot 5.
 func (self *IDropTarget) DragLeave() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// Drop dispatches through IDropTarget's vtable slot 6.
+func (self *IDropTarget) Drop(pDataObj *systemcom.IDataObject, grfKeyState systemsystemservices.MODIFIERKEYS_FLAGS, pt foundation.POINTL, pdwEffect *DROPEFFECT) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDataObj)), uintptr(grfKeyState), uintptr(win32.StructArg(pt)), uintptr(unsafe.Pointer(pdwEffect)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -868,6 +886,12 @@ func (self *IFont) Put_Name(name foundation.BSTR) error {
 // Get_Size dispatches through IFont's vtable slot 5.
 func (self *IFont) Get_Size(pSize *systemcom.CY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSize)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// Put_Size dispatches through IFont's vtable slot 6.
+func (self *IFont) Put_Size(size systemcom.CY) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(size)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1685,6 +1709,12 @@ func (self *IOleInPlaceSite) OnUIActivate() error {
 // GetWindowContext dispatches through IOleInPlaceSite's vtable slot 8.
 func (self *IOleInPlaceSite) GetWindowContext(ppFrame **IOleInPlaceFrame, ppDoc **IOleInPlaceUIWindow, lprcPosRect *foundation.RECT, lprcClipRect *foundation.RECT, lpFrameInfo *OLEINPLACEFRAMEINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFrame)), uintptr(unsafe.Pointer(ppDoc)), uintptr(unsafe.Pointer(lprcPosRect)), uintptr(unsafe.Pointer(lprcClipRect)), uintptr(unsafe.Pointer(lpFrameInfo)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// Scroll dispatches through IOleInPlaceSite's vtable slot 9.
+func (self *IOleInPlaceSite) Scroll(scrollExtant foundation.SIZE) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(scrollExtant)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3489,6 +3519,12 @@ func (self *IViewObjectEx) GetRect(dwAspect uint32, pRect *foundation.RECTL) err
 // GetViewStatus dispatches through IViewObjectEx's vtable slot 11.
 func (self *IViewObjectEx) GetViewStatus(pdwStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwStatus)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// QueryHitPoint dispatches through IViewObjectEx's vtable slot 12.
+func (self *IViewObjectEx) QueryHitPoint(dwAspect uint32, pRectBounds *foundation.RECT, ptlLoc foundation.POINT, lCloseHint int32, pHitResult *uint32) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(dwAspect), uintptr(unsafe.Pointer(pRectBounds)), uintptr(win32.StructArg(ptlLoc)), uintptr(lCloseHint), uintptr(unsafe.Pointer(pHitResult)))
 	return win32.ErrIfFailed(int32(r1))
 }
 

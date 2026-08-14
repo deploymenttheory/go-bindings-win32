@@ -44,6 +44,7 @@ var (
 	procGetPackageDependencyInformation                 = modapi_ms_win_appmodel_runtime_l1_1_7.NewProc("GetPackageDependencyInformation")
 	procGetProcessesUsingPackageDependency              = modapi_ms_win_appmodel_runtime_l1_1_7.NewProc("GetProcessesUsingPackageDependency")
 	procGetResolvedPackageFullNameForPackageDependency2 = modapi_ms_win_appmodel_runtime_l1_1_7.NewProc("GetResolvedPackageFullNameForPackageDependency2")
+	procTryCreatePackageDependency2                     = modapi_ms_win_appmodel_runtime_l1_1_7.NewProc("TryCreatePackageDependency2")
 	procActivatePackageVirtualizationContext            = modKERNEL32.NewProc("ActivatePackageVirtualizationContext")
 	procAppPolicyGetClrCompat                           = modKERNEL32.NewProc("AppPolicyGetClrCompat")
 	procAppPolicyGetCreateFileAccess                    = modKERNEL32.NewProc("AppPolicyGetCreateFileAccess")
@@ -92,6 +93,7 @@ var (
 	procGetIdForPackageDependencyContext                = modKERNELBASE.NewProc("GetIdForPackageDependencyContext")
 	procGetResolvedPackageFullNameForPackageDependency  = modKERNELBASE.NewProc("GetResolvedPackageFullNameForPackageDependency")
 	procRemovePackageDependency                         = modKERNELBASE.NewProc("RemovePackageDependency")
+	procTryCreatePackageDependency                      = modKERNELBASE.NewProc("TryCreatePackageDependency")
 )
 
 // ActivatePackageVirtualizationContext calls KERNEL32!ActivatePackageVirtualizationContext.
@@ -580,6 +582,23 @@ func ReleasePackageVirtualizationContext(context PACKAGE_VIRTUALIZATION_CONTEXT_
 // https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-removepackagedependency
 func RemovePackageDependency(packageDependencyContext PACKAGEDEPENDENCY_CONTEXT) error {
 	r1, _, _ := syscall.SyscallN(procRemovePackageDependency.Addr(), uintptr(packageDependencyContext))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// TryCreatePackageDependency calls KERNELBASE!TryCreatePackageDependency.
+// https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-trycreatepackagedependency
+func TryCreatePackageDependency(user security.PSID, packageFamilyName string, minVersion PACKAGE_VERSION, packageDependencyProcessorArchitectures PackageDependencyProcessorArchitectures, lifetimeKind PackageDependencyLifetimeKind, lifetimeArtifact string, options CreatePackageDependencyOptions, packageDependencyId *foundation.PWSTR) error {
+	_packageFamilyName := win32.UTF16Ptr(packageFamilyName)
+	_lifetimeArtifact := win32.UTF16Ptr(lifetimeArtifact)
+	r1, _, _ := syscall.SyscallN(procTryCreatePackageDependency.Addr(), uintptr(user), uintptr(unsafe.Pointer(_packageFamilyName)), uintptr(win32.StructArg(minVersion)), uintptr(packageDependencyProcessorArchitectures), uintptr(lifetimeKind), uintptr(unsafe.Pointer(_lifetimeArtifact)), uintptr(options), uintptr(unsafe.Pointer(packageDependencyId)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// TryCreatePackageDependency2 calls api-ms-win-appmodel-runtime-l1-1-7!TryCreatePackageDependency2.
+func TryCreatePackageDependency2(user security.PSID, packageFamilyName string, minVersion PACKAGE_VERSION, packageDependencyProcessorArchitectures PackageDependencyProcessorArchitectures, lifetimeKind PackageDependencyLifetimeKind, lifetimeArtifact string, options CreatePackageDependencyOptions, lifetimeExpiration *foundation.FILETIME, packageDependencyId *foundation.PWSTR) error {
+	_packageFamilyName := win32.UTF16Ptr(packageFamilyName)
+	_lifetimeArtifact := win32.UTF16Ptr(lifetimeArtifact)
+	r1, _, _ := syscall.SyscallN(procTryCreatePackageDependency2.Addr(), uintptr(user), uintptr(unsafe.Pointer(_packageFamilyName)), uintptr(win32.StructArg(minVersion)), uintptr(packageDependencyProcessorArchitectures), uintptr(lifetimeKind), uintptr(unsafe.Pointer(_lifetimeArtifact)), uintptr(options), uintptr(unsafe.Pointer(lifetimeExpiration)), uintptr(unsafe.Pointer(packageDependencyId)))
 	return win32.ErrIfFailed(int32(r1))
 }
 

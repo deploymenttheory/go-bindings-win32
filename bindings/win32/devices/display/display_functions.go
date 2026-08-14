@@ -67,7 +67,10 @@ var (
 	procEngCheckAbort                                   = modGDI32.NewProc("EngCheckAbort")
 	procEngComputeGlyphSet                              = modGDI32.NewProc("EngComputeGlyphSet")
 	procEngCopyBits                                     = modGDI32.NewProc("EngCopyBits")
+	procEngCreateBitmap                                 = modGDI32.NewProc("EngCreateBitmap")
 	procEngCreateClip                                   = modGDI32.NewProc("EngCreateClip")
+	procEngCreateDeviceBitmap                           = modGDI32.NewProc("EngCreateDeviceBitmap")
+	procEngCreateDeviceSurface                          = modGDI32.NewProc("EngCreateDeviceSurface")
 	procEngCreatePalette                                = modGDI32.NewProc("EngCreatePalette")
 	procEngCreateSemaphore                              = modGDI32.NewProc("EngCreateSemaphore")
 	procEngDeleteClip                                   = modGDI32.NewProc("EngDeleteClip")
@@ -315,12 +318,36 @@ func EngCopyBits(psoDest *SURFOBJ, psoSrc *SURFOBJ, pco *CLIPOBJ, pxlo *XLATEOBJ
 	return r1 != 0
 }
 
+// EngCreateBitmap calls GDI32!EngCreateBitmap.
+// https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-engcreatebitmap
+// Minimum OS: windows5.0.
+func EngCreateBitmap(sizl foundation.SIZE, lWidth int32, iFormat uint32, fl uint32, pvBits unsafe.Pointer) graphicsgdi.HBITMAP {
+	r1, _, _ := syscall.SyscallN(procEngCreateBitmap.Addr(), uintptr(win32.StructArg(sizl)), uintptr(lWidth), uintptr(iFormat), uintptr(fl), uintptr(unsafe.Pointer(pvBits)))
+	return graphicsgdi.HBITMAP(r1)
+}
+
 // EngCreateClip calls GDI32!EngCreateClip.
 // https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-engcreateclip
 // Minimum OS: windows5.0.
 func EngCreateClip() *CLIPOBJ {
 	r1, _, _ := syscall.SyscallN(procEngCreateClip.Addr())
 	return (*CLIPOBJ)(unsafe.Pointer(r1))
+}
+
+// EngCreateDeviceBitmap calls GDI32!EngCreateDeviceBitmap.
+// https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-engcreatedevicebitmap
+// Minimum OS: windows5.0.
+func EngCreateDeviceBitmap(dhsurf DHSURF, sizl foundation.SIZE, iFormatCompat uint32) graphicsgdi.HBITMAP {
+	r1, _, _ := syscall.SyscallN(procEngCreateDeviceBitmap.Addr(), uintptr(dhsurf), uintptr(win32.StructArg(sizl)), uintptr(iFormatCompat))
+	return graphicsgdi.HBITMAP(r1)
+}
+
+// EngCreateDeviceSurface calls GDI32!EngCreateDeviceSurface.
+// https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-engcreatedevicesurface
+// Minimum OS: windows5.0.
+func EngCreateDeviceSurface(dhsurf DHSURF, sizl foundation.SIZE, iFormatCompat uint32) HSURF {
+	r1, _, _ := syscall.SyscallN(procEngCreateDeviceSurface.Addr(), uintptr(dhsurf), uintptr(win32.StructArg(sizl)), uintptr(iFormatCompat))
+	return HSURF(r1)
 }
 
 // EngCreatePalette calls GDI32!EngCreatePalette.

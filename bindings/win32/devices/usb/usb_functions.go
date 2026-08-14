@@ -19,6 +19,7 @@ var (
 
 var (
 	procWinUsb_AbortPipe                    = modWINUSB.NewProc("WinUsb_AbortPipe")
+	procWinUsb_ControlTransfer              = modWINUSB.NewProc("WinUsb_ControlTransfer")
 	procWinUsb_FlushPipe                    = modWINUSB.NewProc("WinUsb_FlushPipe")
 	procWinUsb_Free                         = modWINUSB.NewProc("WinUsb_Free")
 	procWinUsb_GetAdjustedFrameNumber       = modWINUSB.NewProc("WinUsb_GetAdjustedFrameNumber")
@@ -57,6 +58,20 @@ var (
 // https://learn.microsoft.com/windows/win32/api/winusb/nf-winusb-winusb_abortpipe
 func WinUsb_AbortPipe(InterfaceHandle WINUSB_INTERFACE_HANDLE, PipeID byte) error {
 	r1, _, e1 := syscall.SyscallN(procWinUsb_AbortPipe.Addr(), uintptr(InterfaceHandle), uintptr(PipeID))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// WinUsb_ControlTransfer calls WINUSB!WinUsb_ControlTransfer.
+// https://learn.microsoft.com/windows/win32/api/winusb/nf-winusb-winusb_controltransfer
+func WinUsb_ControlTransfer(InterfaceHandle WINUSB_INTERFACE_HANDLE, SetupPacket WINUSB_SETUP_PACKET, Buffer []byte, LengthTransferred *uint32, Overlapped *systemio.OVERLAPPED) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procWinUsb_ControlTransfer.Addr(), uintptr(InterfaceHandle), uintptr(win32.StructArg(SetupPacket)), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(LengthTransferred)), uintptr(unsafe.Pointer(Overlapped)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

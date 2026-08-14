@@ -117,6 +117,7 @@ var (
 	procFlattenPath                     = modGDI32.NewProc("FlattenPath")
 	procFloodFill                       = modGDI32.NewProc("FloodFill")
 	procFrameRgn                        = modGDI32.NewProc("FrameRgn")
+	procGdiAlphaBlend                   = modGDI32.NewProc("GdiAlphaBlend")
 	procGdiComment                      = modGDI32.NewProc("GdiComment")
 	procGdiFlush                        = modGDI32.NewProc("GdiFlush")
 	procGdiGetBatchLimit                = modGDI32.NewProc("GdiGetBatchLimit")
@@ -321,6 +322,7 @@ var (
 	procUnrealizeObject                 = modGDI32.NewProc("UnrealizeObject")
 	procUpdateColors                    = modGDI32.NewProc("UpdateColors")
 	procWidenPath                       = modGDI32.NewProc("WidenPath")
+	procAlphaBlend                      = modMSIMG32.NewProc("AlphaBlend")
 	procGradientFill                    = modMSIMG32.NewProc("GradientFill")
 	procTransparentBlt                  = modMSIMG32.NewProc("TransparentBlt")
 	procWglSwapMultipleBuffers          = modOPENGL32.NewProc("wglSwapMultipleBuffers")
@@ -393,10 +395,12 @@ var (
 	procLoadBitmapA                     = modUSER32.NewProc("LoadBitmapA")
 	procLockWindowUpdate                = modUSER32.NewProc("LockWindowUpdate")
 	procMapWindowPoints                 = modUSER32.NewProc("MapWindowPoints")
+	procMonitorFromPoint                = modUSER32.NewProc("MonitorFromPoint")
 	procMonitorFromRect                 = modUSER32.NewProc("MonitorFromRect")
 	procMonitorFromWindow               = modUSER32.NewProc("MonitorFromWindow")
 	procOffsetRect                      = modUSER32.NewProc("OffsetRect")
 	procPaintDesktop                    = modUSER32.NewProc("PaintDesktop")
+	procPtInRect                        = modUSER32.NewProc("PtInRect")
 	procRedrawWindow                    = modUSER32.NewProc("RedrawWindow")
 	procReleaseDC                       = modUSER32.NewProc("ReleaseDC")
 	procScreenToClient                  = modUSER32.NewProc("ScreenToClient")
@@ -466,6 +470,14 @@ func AddFontResourceEx(name string, fl FONT_RESOURCE_CHARACTERISTICS) int32 {
 func AddFontResourceExA(name foundation.PSTR, fl FONT_RESOURCE_CHARACTERISTICS) int32 {
 	r1, _, _ := syscall.SyscallN(procAddFontResourceExA.Addr(), uintptr(unsafe.Pointer(name)), uintptr(fl), 0)
 	return int32(r1)
+}
+
+// AlphaBlend calls MSIMG32!AlphaBlend.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-alphablend
+// Minimum OS: windows5.0.
+func AlphaBlend(hdcDest HDC, xoriginDest int32, yoriginDest int32, wDest int32, hDest int32, hdcSrc HDC, xoriginSrc int32, yoriginSrc int32, wSrc int32, hSrc int32, ftn BLENDFUNCTION) bool {
+	r1, _, _ := syscall.SyscallN(procAlphaBlend.Addr(), uintptr(hdcDest), uintptr(xoriginDest), uintptr(yoriginDest), uintptr(wDest), uintptr(hDest), uintptr(hdcSrc), uintptr(xoriginSrc), uintptr(yoriginSrc), uintptr(wSrc), uintptr(hSrc), uintptr(win32.StructArg(ftn)))
+	return r1 != 0
 }
 
 // AnimatePalette calls GDI32!AnimatePalette.
@@ -1462,6 +1474,14 @@ func FrameRect(hDC HDC, lprc *foundation.RECT, hbr HBRUSH) int32 {
 // Minimum OS: windows5.0.
 func FrameRgn(hdc HDC, hrgn HRGN, hbr HBRUSH, w int32, h int32) bool {
 	r1, _, _ := syscall.SyscallN(procFrameRgn.Addr(), uintptr(hdc), uintptr(hrgn), uintptr(hbr), uintptr(w), uintptr(h))
+	return r1 != 0
+}
+
+// GdiAlphaBlend calls GDI32!GdiAlphaBlend.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-gdialphablend
+// Minimum OS: windows5.0.
+func GdiAlphaBlend(hdcDest HDC, xoriginDest int32, yoriginDest int32, wDest int32, hDest int32, hdcSrc HDC, xoriginSrc int32, yoriginSrc int32, wSrc int32, hSrc int32, ftn BLENDFUNCTION) bool {
+	r1, _, _ := syscall.SyscallN(procGdiAlphaBlend.Addr(), uintptr(hdcDest), uintptr(xoriginDest), uintptr(yoriginDest), uintptr(wDest), uintptr(hDest), uintptr(hdcSrc), uintptr(xoriginSrc), uintptr(yoriginSrc), uintptr(wSrc), uintptr(hSrc), uintptr(win32.StructArg(ftn)))
 	return r1 != 0
 }
 
@@ -2674,6 +2694,14 @@ func ModifyWorldTransform(hdc HDC, lpxf *XFORM, mode MODIFY_WORLD_TRANSFORM_MODE
 	return r1 != 0
 }
 
+// MonitorFromPoint calls USER32!MonitorFromPoint.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-monitorfrompoint
+// Minimum OS: windows5.0.
+func MonitorFromPoint(pt foundation.POINT, dwFlags MONITOR_FROM_FLAGS) HMONITOR {
+	r1, _, _ := syscall.SyscallN(procMonitorFromPoint.Addr(), uintptr(win32.StructArg(pt)), uintptr(dwFlags))
+	return HMONITOR(r1)
+}
+
 // MonitorFromRect calls USER32!MonitorFromRect.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-monitorfromrect
 // Minimum OS: windows5.0.
@@ -2939,6 +2967,14 @@ func PolylineTo(hdc HDC, apt []foundation.POINT) bool {
 		_apt = &apt[0]
 	}
 	r1, _, _ := syscall.SyscallN(procPolylineTo.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(_apt)), uintptr(len(apt)))
+	return r1 != 0
+}
+
+// PtInRect calls USER32!PtInRect.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-ptinrect
+// Minimum OS: windows5.0.
+func PtInRect(lprc *foundation.RECT, pt foundation.POINT) bool {
+	r1, _, _ := syscall.SyscallN(procPtInRect.Addr(), uintptr(unsafe.Pointer(lprc)), uintptr(win32.StructArg(pt)))
 	return r1 != 0
 }
 

@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/deploymenttheory/go-bindings-win32/internal/win32meta"
-	"github.com/deploymenttheory/go-winmd"
+	"github.com/deploymenttheory/go-winmd/pkg/winmd"
 )
 
 // ── Attribute helpers ─────────────────────────────────────────────────────────

@@ -8,7 +8,7 @@ import (
 	"strings"
 
 	"github.com/deploymenttheory/go-bindings-win32/internal/win32meta"
-	"github.com/deploymenttheory/go-winmd"
+	"github.com/deploymenttheory/go-winmd/pkg/winmd"
 )
 
 // namespacePrefix scopes ingestion to the Win32 projection; the attribute

@@ -19,8 +19,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/internal/diagnostics"
 	"github.com/deploymenttheory/go-bindings-win32/internal/win32meta"
 	"github.com/deploymenttheory/go-bindings-win32/internal/win32meta/ingest"
-	"github.com/deploymenttheory/go-winmd"
-	"github.com/deploymenttheory/go-winmd/nuget"
+	"github.com/deploymenttheory/go-winmd/pkg/winmd"
+	"github.com/deploymenttheory/go-winmd/pkg/nuget"
 )
 
 func main() {

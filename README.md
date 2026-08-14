@@ -1,8 +1,11 @@
 # go-bindings-win32
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/deploymenttheory/go-bindings-win32.svg)](https://pkg.go.dev/github.com/deploymenttheory/go-bindings-win32)
-[![CI](https://github.com/deploymenttheory/go-bindings-win32/actions/workflows/ci.yml/badge.svg)](https://github.com/deploymenttheory/go-bindings-win32/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![GoDoc](https://pkg.go.dev/badge/github.com/deploymenttheory/go-bindings-win32)](https://pkg.go.dev/github.com/deploymenttheory/go-bindings-win32)
+[![License](https://img.shields.io/github/license/deploymenttheory/go-bindings-win32)](LICENSE)
+[![Go Version](https://img.shields.io/github/go-mod/go-version/deploymenttheory/go-bindings-win32)](https://go.dev/)
+[![Release](https://img.shields.io/github/v/release/deploymenttheory/go-bindings-win32)](https://github.com/deploymenttheory/go-bindings-win32/releases)
+[![codecov](https://codecov.io/gh/deploymenttheory/go-bindings-win32/graph/badge.svg)](https://codecov.io/gh/deploymenttheory/go-bindings-win32)
+![Status: GA](https://img.shields.io/badge/status-GA-green)
 
 Idiomatic Go bindings for the **Win32 API**, generated from Microsoft's
 [win32metadata](https://github.com/microsoft/win32metadata) — the same

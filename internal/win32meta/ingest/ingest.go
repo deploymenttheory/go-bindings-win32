@@ -14,9 +14,9 @@ import (
 // namespacePrefix scopes ingestion to the Win32 projection; the attribute
 // definitions namespace is metadata plumbing and never emitted.
 const (
-	namespacePrefix    = "Windows.Win32."
-	metadataNamespace  = "Windows.Win32.Foundation.Metadata"
-	interopNamespace   = "Windows.Win32.Interop"
+	namespacePrefix   = "Windows.Win32."
+	metadataNamespace = "Windows.Win32.Foundation.Metadata"
+	interopNamespace  = "Windows.Win32.Interop"
 )
 
 // Options parameterizes a projection run. The zero value reproduces the

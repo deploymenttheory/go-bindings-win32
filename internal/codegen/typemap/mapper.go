@@ -20,20 +20,20 @@ type ImportSet map[string]string
 type Kind uint8
 
 const (
-	KindVoid          Kind = iota // no value (returns only)
-	KindScalar                    // integer/float/bool value
-	KindPointer                   // Go pointer (incl. unsafe.Pointer)
-	KindHandleTypedef             // uintptr-backed named handle (HANDLE, HWND)
-	KindPointerTypedef            // pointer-backed named typedef (PWSTR)
-	KindScalarTypedef             // scalar-backed named typedef (BOOL, HRESULT)
-	KindEnum                      // named enum type
-	KindStruct                    // struct by value
-	KindUnion                     // union by value
-	KindArray                     // fixed array by value
-	KindFuncPtr                   // callback (uintptr-backed named type)
-	KindGUID                      // win32.GUID by value
-	KindComPtr                    // COM interface pointer (*IFoo)
-	KindUnsupported               // degraded; see Diagnostics
+	KindVoid           Kind = iota // no value (returns only)
+	KindScalar                     // integer/float/bool value
+	KindPointer                    // Go pointer (incl. unsafe.Pointer)
+	KindHandleTypedef              // uintptr-backed named handle (HANDLE, HWND)
+	KindPointerTypedef             // pointer-backed named typedef (PWSTR)
+	KindScalarTypedef              // scalar-backed named typedef (BOOL, HRESULT)
+	KindEnum                       // named enum type
+	KindStruct                     // struct by value
+	KindUnion                      // union by value
+	KindArray                      // fixed array by value
+	KindFuncPtr                    // callback (uintptr-backed named type)
+	KindGUID                       // win32.GUID by value
+	KindComPtr                     // COM interface pointer (*IFoo)
+	KindUnsupported                // degraded; see Diagnostics
 )
 
 // Resolved is the pure-data result of one type resolution.

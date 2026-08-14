@@ -18,6 +18,6 @@ import (
 // The runtime path (vtable dispatch, HRESULT→error, out-pointer fill) is
 // covered by TestComStreamRoundTrip.
 var (
-	_ func(*shell.Folder) (*shell.Folder, error)                            = (*shell.Folder).Get_ParentFolder
+	_ func(*shell.Folder) (*shell.Folder, error)                              = (*shell.Folder).Get_ParentFolder
 	_ func(*shell.IAppVisibility, *shell.IAppVisibilityEvents, *uint32) error = (*shell.IAppVisibility).Advise
 )

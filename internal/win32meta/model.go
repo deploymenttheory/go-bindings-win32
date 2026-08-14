@@ -74,11 +74,11 @@ type Param struct {
 	Name string  `json:"name"`
 	Type TypeRef `json:"type"`
 
-	IsIn       bool `json:"is_in,omitempty"`
-	IsOut      bool `json:"is_out,omitempty"`
-	IsOptional bool `json:"is_optional,omitempty"`
-	IsReserved bool `json:"is_reserved,omitempty"`
-	IsConst    bool `json:"is_const,omitempty"`
+	IsIn        bool `json:"is_in,omitempty"`
+	IsOut       bool `json:"is_out,omitempty"`
+	IsOptional  bool `json:"is_optional,omitempty"`
+	IsReserved  bool `json:"is_reserved,omitempty"`
+	IsConst     bool `json:"is_const,omitempty"`
 	IsComOutPtr bool `json:"is_com_out_ptr,omitempty"`
 	IsRetVal    bool `json:"is_ret_val,omitempty"`
 
@@ -99,14 +99,14 @@ type Param struct {
 
 // Function is a flat Win32 function exported from a DLL.
 type Function struct {
-	Name string  `json:"name"`
-	DLL  string  `json:"dll"`
+	Name string `json:"name"`
+	DLL  string `json:"dll"`
 	// EntryPoint is the DLL export name when it differs from Name.
-	EntryPoint     string  `json:"entry_point,omitempty"`
-	SetLastError   bool    `json:"set_last_error,omitempty"`
-	Return         TypeRef `json:"return"`
-	Params         []Param `json:"params,omitempty"`
-	Availability   Availability `json:"availability,omitempty"`
+	EntryPoint   string       `json:"entry_point,omitempty"`
+	SetLastError bool         `json:"set_last_error,omitempty"`
+	Return       TypeRef      `json:"return"`
+	Params       []Param      `json:"params,omitempty"`
+	Availability Availability `json:"availability,omitempty"`
 	// UnsuffixedName is set on -W functions to the header macro name
 	// (e.g. CreateEventW → CreateEvent) when the metadata declares a
 	// Unicode alias.
@@ -115,10 +115,10 @@ type Function struct {
 
 // Struct is a value struct (or union) with C layout.
 type Struct struct {
-	Fields       []StructField `json:"fields,omitempty"`
-	IsUnion      bool          `json:"is_union,omitempty"`
-	PackingSize  uint16        `json:"packing_size,omitempty"`
-	Size         uint32        `json:"size,omitempty"`
+	Fields      []StructField `json:"fields,omitempty"`
+	IsUnion     bool          `json:"is_union,omitempty"`
+	PackingSize uint16        `json:"packing_size,omitempty"`
+	Size        uint32        `json:"size,omitempty"`
 	// NestedTypes holds anonymous member structs/unions declared inside
 	// this struct (names like "_Anonymous_e__Union").
 	NestedTypes  map[string]Struct `json:"nested_types,omitempty"`
@@ -183,8 +183,8 @@ type ComInterface struct {
 	// BaseInterface names the inherited interface (empty for IUnknown).
 	BaseInterface string `json:"base_interface,omitempty"`
 	// BaseInterfaceApi is the namespace owning BaseInterface.
-	BaseInterfaceApi string      `json:"base_interface_api,omitempty"`
-	Methods          []ComMethod `json:"methods,omitempty"`
+	BaseInterfaceApi string       `json:"base_interface_api,omitempty"`
+	Methods          []ComMethod  `json:"methods,omitempty"`
 	Availability     Availability `json:"availability,omitempty"`
 }
 

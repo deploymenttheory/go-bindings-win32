@@ -5,7 +5,7 @@
 [![Go Version](https://img.shields.io/github/go-mod/go-version/deploymenttheory/go-bindings-win32)](https://go.dev/)
 [![Release](https://img.shields.io/github/v/release/deploymenttheory/go-bindings-win32)](https://github.com/deploymenttheory/go-bindings-win32/releases)
 [![codecov](https://codecov.io/gh/deploymenttheory/go-bindings-win32/graph/badge.svg)](https://codecov.io/gh/deploymenttheory/go-bindings-win32)
-![Status: beta](https://img.shields.io/badge/status-beta-blue)
+![Status: GA](https://img.shields.io/badge/status-GA-green)
 
 Idiomatic Go bindings for the **Win32 API**, generated from Microsoft's
 [win32metadata](https://github.com/microsoft/win32metadata) — the same

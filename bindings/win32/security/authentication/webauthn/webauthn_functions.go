@@ -20,10 +20,16 @@ var (
 	procWebAuthNAuthenticatorGetAssertion                     = modwebauthn.NewProc("WebAuthNAuthenticatorGetAssertion")
 	procWebAuthNAuthenticatorMakeCredential                   = modwebauthn.NewProc("WebAuthNAuthenticatorMakeCredential")
 	procWebAuthNCancelCurrentOperation                        = modwebauthn.NewProc("WebAuthNCancelCurrentOperation")
+	procWebAuthNDecodeGetAssertionRequest                     = modwebauthn.NewProc("WebAuthNDecodeGetAssertionRequest")
+	procWebAuthNDecodeMakeCredentialRequest                   = modwebauthn.NewProc("WebAuthNDecodeMakeCredentialRequest")
 	procWebAuthNDeletePlatformCredential                      = modwebauthn.NewProc("WebAuthNDeletePlatformCredential")
+	procWebAuthNEncodeGetAssertionResponse                    = modwebauthn.NewProc("WebAuthNEncodeGetAssertionResponse")
+	procWebAuthNEncodeMakeCredentialResponse                  = modwebauthn.NewProc("WebAuthNEncodeMakeCredentialResponse")
 	procWebAuthNFreeAssertion                                 = modwebauthn.NewProc("WebAuthNFreeAssertion")
 	procWebAuthNFreeAuthenticatorList                         = modwebauthn.NewProc("WebAuthNFreeAuthenticatorList")
 	procWebAuthNFreeCredentialAttestation                     = modwebauthn.NewProc("WebAuthNFreeCredentialAttestation")
+	procWebAuthNFreeDecodedGetAssertionRequest                = modwebauthn.NewProc("WebAuthNFreeDecodedGetAssertionRequest")
+	procWebAuthNFreeDecodedMakeCredentialRequest              = modwebauthn.NewProc("WebAuthNFreeDecodedMakeCredentialRequest")
 	procWebAuthNFreePlatformCredentialList                    = modwebauthn.NewProc("WebAuthNFreePlatformCredentialList")
 	procWebAuthNGetApiVersionNumber                           = modwebauthn.NewProc("WebAuthNGetApiVersionNumber")
 	procWebAuthNGetAuthenticatorList                          = modwebauthn.NewProc("WebAuthNGetAuthenticatorList")
@@ -32,6 +38,24 @@ var (
 	procWebAuthNGetPlatformCredentialList                     = modwebauthn.NewProc("WebAuthNGetPlatformCredentialList")
 	procWebAuthNGetW3CExceptionDOMError                       = modwebauthn.NewProc("WebAuthNGetW3CExceptionDOMError")
 	procWebAuthNIsUserVerifyingPlatformAuthenticatorAvailable = modwebauthn.NewProc("WebAuthNIsUserVerifyingPlatformAuthenticatorAvailable")
+	procWebAuthNPluginAddAuthenticator                        = modwebauthn.NewProc("WebAuthNPluginAddAuthenticator")
+	procWebAuthNPluginAuthenticatorAddCredentials             = modwebauthn.NewProc("WebAuthNPluginAuthenticatorAddCredentials")
+	procWebAuthNPluginAuthenticatorFreeCredentialDetailsArray = modwebauthn.NewProc("WebAuthNPluginAuthenticatorFreeCredentialDetailsArray")
+	procWebAuthNPluginAuthenticatorGetAllCredentials          = modwebauthn.NewProc("WebAuthNPluginAuthenticatorGetAllCredentials")
+	procWebAuthNPluginAuthenticatorRemoveAllCredentials       = modwebauthn.NewProc("WebAuthNPluginAuthenticatorRemoveAllCredentials")
+	procWebAuthNPluginAuthenticatorRemoveCredentials          = modwebauthn.NewProc("WebAuthNPluginAuthenticatorRemoveCredentials")
+	procWebAuthNPluginFreeAddAuthenticatorResponse            = modwebauthn.NewProc("WebAuthNPluginFreeAddAuthenticatorResponse")
+	procWebAuthNPluginFreePublicKeyResponse                   = modwebauthn.NewProc("WebAuthNPluginFreePublicKeyResponse")
+	procWebAuthNPluginFreeUserVerificationResponse            = modwebauthn.NewProc("WebAuthNPluginFreeUserVerificationResponse")
+	procWebAuthNPluginGetAuthenticatorState                   = modwebauthn.NewProc("WebAuthNPluginGetAuthenticatorState")
+	procWebAuthNPluginGetOperationSigningPublicKey            = modwebauthn.NewProc("WebAuthNPluginGetOperationSigningPublicKey")
+	procWebAuthNPluginGetUserVerificationCount                = modwebauthn.NewProc("WebAuthNPluginGetUserVerificationCount")
+	procWebAuthNPluginGetUserVerificationPublicKey            = modwebauthn.NewProc("WebAuthNPluginGetUserVerificationPublicKey")
+	procWebAuthNPluginPerformUserVerification                 = modwebauthn.NewProc("WebAuthNPluginPerformUserVerification")
+	procWebAuthNPluginRegisterStatusChangeCallback            = modwebauthn.NewProc("WebAuthNPluginRegisterStatusChangeCallback")
+	procWebAuthNPluginRemoveAuthenticator                     = modwebauthn.NewProc("WebAuthNPluginRemoveAuthenticator")
+	procWebAuthNPluginUnregisterStatusChangeCallback          = modwebauthn.NewProc("WebAuthNPluginUnregisterStatusChangeCallback")
+	procWebAuthNPluginUpdateAuthenticatorDetails              = modwebauthn.NewProc("WebAuthNPluginUpdateAuthenticatorDetails")
 )
 
 // WebAuthNAuthenticatorGetAssertion calls webauthn!WebAuthNAuthenticatorGetAssertion.
@@ -56,6 +80,26 @@ func WebAuthNCancelCurrentOperation(pCancellationId *win32.GUID) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// WebAuthNDecodeGetAssertionRequest calls webauthn!WebAuthNDecodeGetAssertionRequest.
+func WebAuthNDecodeGetAssertionRequest(pbEncoded []byte, ppGetAssertionRequest **WEBAUTHN_CTAPCBOR_GET_ASSERTION_REQUEST) error {
+	var _pbEncoded *byte
+	if len(pbEncoded) > 0 {
+		_pbEncoded = &pbEncoded[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWebAuthNDecodeGetAssertionRequest.Addr(), uintptr(len(pbEncoded)), uintptr(unsafe.Pointer(_pbEncoded)), uintptr(unsafe.Pointer(ppGetAssertionRequest)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// WebAuthNDecodeMakeCredentialRequest calls webauthn!WebAuthNDecodeMakeCredentialRequest.
+func WebAuthNDecodeMakeCredentialRequest(pbEncoded []byte, ppMakeCredentialRequest **WEBAUTHN_CTAPCBOR_MAKE_CREDENTIAL_REQUEST) error {
+	var _pbEncoded *byte
+	if len(pbEncoded) > 0 {
+		_pbEncoded = &pbEncoded[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWebAuthNDecodeMakeCredentialRequest.Addr(), uintptr(len(pbEncoded)), uintptr(unsafe.Pointer(_pbEncoded)), uintptr(unsafe.Pointer(ppMakeCredentialRequest)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // WebAuthNDeletePlatformCredential calls webauthn!WebAuthNDeletePlatformCredential.
 // https://learn.microsoft.com/windows/win32/api/webauthn/nf-webauthn-webauthndeleteplatformcredential
 func WebAuthNDeletePlatformCredential(pbCredentialId []byte) error {
@@ -64,6 +108,18 @@ func WebAuthNDeletePlatformCredential(pbCredentialId []byte) error {
 		_pbCredentialId = &pbCredentialId[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWebAuthNDeletePlatformCredential.Addr(), uintptr(len(pbCredentialId)), uintptr(unsafe.Pointer(_pbCredentialId)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// WebAuthNEncodeGetAssertionResponse calls webauthn!WebAuthNEncodeGetAssertionResponse.
+func WebAuthNEncodeGetAssertionResponse(pGetAssertionResponse *WEBAUTHN_CTAPCBOR_GET_ASSERTION_RESPONSE, pcbResp *uint32, ppbResp **byte) error {
+	r1, _, _ := syscall.SyscallN(procWebAuthNEncodeGetAssertionResponse.Addr(), uintptr(unsafe.Pointer(pGetAssertionResponse)), uintptr(unsafe.Pointer(pcbResp)), uintptr(unsafe.Pointer(ppbResp)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// WebAuthNEncodeMakeCredentialResponse calls webauthn!WebAuthNEncodeMakeCredentialResponse.
+func WebAuthNEncodeMakeCredentialResponse(pCredentialAttestation *WEBAUTHN_CREDENTIAL_ATTESTATION, pcbResp *uint32, ppbResp **byte) error {
+	r1, _, _ := syscall.SyscallN(procWebAuthNEncodeMakeCredentialResponse.Addr(), uintptr(unsafe.Pointer(pCredentialAttestation)), uintptr(unsafe.Pointer(pcbResp)), uintptr(unsafe.Pointer(ppbResp)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -82,6 +138,16 @@ func WebAuthNFreeAuthenticatorList(pAuthenticatorDetailsList *WEBAUTHN_AUTHENTIC
 // https://learn.microsoft.com/windows/win32/api/webauthn/nf-webauthn-webauthnfreecredentialattestation
 func WebAuthNFreeCredentialAttestation(pWebAuthNCredentialAttestation *WEBAUTHN_CREDENTIAL_ATTESTATION) {
 	syscall.SyscallN(procWebAuthNFreeCredentialAttestation.Addr(), uintptr(unsafe.Pointer(pWebAuthNCredentialAttestation)))
+}
+
+// WebAuthNFreeDecodedGetAssertionRequest calls webauthn!WebAuthNFreeDecodedGetAssertionRequest.
+func WebAuthNFreeDecodedGetAssertionRequest(pGetAssertionRequest *WEBAUTHN_CTAPCBOR_GET_ASSERTION_REQUEST) {
+	syscall.SyscallN(procWebAuthNFreeDecodedGetAssertionRequest.Addr(), uintptr(unsafe.Pointer(pGetAssertionRequest)))
+}
+
+// WebAuthNFreeDecodedMakeCredentialRequest calls webauthn!WebAuthNFreeDecodedMakeCredentialRequest.
+func WebAuthNFreeDecodedMakeCredentialRequest(pMakeCredentialRequest *WEBAUTHN_CTAPCBOR_MAKE_CREDENTIAL_REQUEST) {
+	syscall.SyscallN(procWebAuthNFreeDecodedMakeCredentialRequest.Addr(), uintptr(unsafe.Pointer(pMakeCredentialRequest)))
 }
 
 // WebAuthNFreePlatformCredentialList calls webauthn!WebAuthNFreePlatformCredentialList.
@@ -135,5 +201,121 @@ func WebAuthNGetW3CExceptionDOMError(hr foundation.HRESULT) error {
 // https://learn.microsoft.com/windows/win32/api/webauthn/nf-webauthn-webauthnisuserverifyingplatformauthenticatoravailable
 func WebAuthNIsUserVerifyingPlatformAuthenticatorAvailable(pbIsUserVerifyingPlatformAuthenticatorAvailable *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procWebAuthNIsUserVerifyingPlatformAuthenticatorAvailable.Addr(), uintptr(unsafe.Pointer(pbIsUserVerifyingPlatformAuthenticatorAvailable)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// WebAuthNPluginAddAuthenticator calls webauthn!WebAuthNPluginAddAuthenticator.
+func WebAuthNPluginAddAuthenticator(pPluginAddAuthenticatorOptions *WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_OPTIONS, ppPluginAddAuthenticatorResponse **WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_RESPONSE) error {
+	r1, _, _ := syscall.SyscallN(procWebAuthNPluginAddAuthenticator.Addr(), uintptr(unsafe.Pointer(pPluginAddAuthenticatorOptions)), uintptr(unsafe.Pointer(ppPluginAddAuthenticatorResponse)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// WebAuthNPluginAuthenticatorAddCredentials calls webauthn!WebAuthNPluginAuthenticatorAddCredentials.
+func WebAuthNPluginAuthenticatorAddCredentials(rclsid *win32.GUID, pCredentialDetails []WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS) error {
+	var _pCredentialDetails *WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS
+	if len(pCredentialDetails) > 0 {
+		_pCredentialDetails = &pCredentialDetails[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWebAuthNPluginAuthenticatorAddCredentials.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(len(pCredentialDetails)), uintptr(unsafe.Pointer(_pCredentialDetails)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// WebAuthNPluginAuthenticatorFreeCredentialDetailsArray calls webauthn!WebAuthNPluginAuthenticatorFreeCredentialDetailsArray.
+func WebAuthNPluginAuthenticatorFreeCredentialDetailsArray(pCredentialDetailsArray []WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS) {
+	var _pCredentialDetailsArray *WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS
+	if len(pCredentialDetailsArray) > 0 {
+		_pCredentialDetailsArray = &pCredentialDetailsArray[0]
+	}
+	syscall.SyscallN(procWebAuthNPluginAuthenticatorFreeCredentialDetailsArray.Addr(), uintptr(len(pCredentialDetailsArray)), uintptr(unsafe.Pointer(_pCredentialDetailsArray)))
+}
+
+// WebAuthNPluginAuthenticatorGetAllCredentials calls webauthn!WebAuthNPluginAuthenticatorGetAllCredentials.
+func WebAuthNPluginAuthenticatorGetAllCredentials(rclsid *win32.GUID, pcCredentialDetails *uint32, ppCredentialDetailsArray **WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS) error {
+	r1, _, _ := syscall.SyscallN(procWebAuthNPluginAuthenticatorGetAllCredentials.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(pcCredentialDetails)), uintptr(unsafe.Pointer(ppCredentialDetailsArray)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// WebAuthNPluginAuthenticatorRemoveAllCredentials calls webauthn!WebAuthNPluginAuthenticatorRemoveAllCredentials.
+func WebAuthNPluginAuthenticatorRemoveAllCredentials(rclsid *win32.GUID) error {
+	r1, _, _ := syscall.SyscallN(procWebAuthNPluginAuthenticatorRemoveAllCredentials.Addr(), uintptr(unsafe.Pointer(rclsid)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// WebAuthNPluginAuthenticatorRemoveCredentials calls webauthn!WebAuthNPluginAuthenticatorRemoveCredentials.
+func WebAuthNPluginAuthenticatorRemoveCredentials(rclsid *win32.GUID, pCredentialDetails []WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS) error {
+	var _pCredentialDetails *WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS
+	if len(pCredentialDetails) > 0 {
+		_pCredentialDetails = &pCredentialDetails[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWebAuthNPluginAuthenticatorRemoveCredentials.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(len(pCredentialDetails)), uintptr(unsafe.Pointer(_pCredentialDetails)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// WebAuthNPluginFreeAddAuthenticatorResponse calls webauthn!WebAuthNPluginFreeAddAuthenticatorResponse.
+func WebAuthNPluginFreeAddAuthenticatorResponse(pPluginAddAuthenticatorResponse *WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_RESPONSE) {
+	syscall.SyscallN(procWebAuthNPluginFreeAddAuthenticatorResponse.Addr(), uintptr(unsafe.Pointer(pPluginAddAuthenticatorResponse)))
+}
+
+// WebAuthNPluginFreePublicKeyResponse calls webauthn!WebAuthNPluginFreePublicKeyResponse.
+func WebAuthNPluginFreePublicKeyResponse(pbOpSignPubKey *byte) {
+	syscall.SyscallN(procWebAuthNPluginFreePublicKeyResponse.Addr(), uintptr(unsafe.Pointer(pbOpSignPubKey)))
+}
+
+// WebAuthNPluginFreeUserVerificationResponse calls webauthn!WebAuthNPluginFreeUserVerificationResponse.
+func WebAuthNPluginFreeUserVerificationResponse(ppbResponse *byte) {
+	syscall.SyscallN(procWebAuthNPluginFreeUserVerificationResponse.Addr(), uintptr(unsafe.Pointer(ppbResponse)))
+}
+
+// WebAuthNPluginGetAuthenticatorState calls webauthn!WebAuthNPluginGetAuthenticatorState.
+func WebAuthNPluginGetAuthenticatorState(rclsid *win32.GUID, pluginAuthenticatorState *AUTHENTICATOR_STATE) error {
+	r1, _, _ := syscall.SyscallN(procWebAuthNPluginGetAuthenticatorState.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(pluginAuthenticatorState)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// WebAuthNPluginGetOperationSigningPublicKey calls webauthn!WebAuthNPluginGetOperationSigningPublicKey.
+func WebAuthNPluginGetOperationSigningPublicKey(rclsid *win32.GUID, pcbOpSignPubKey *uint32, ppbOpSignPubKey **byte) error {
+	r1, _, _ := syscall.SyscallN(procWebAuthNPluginGetOperationSigningPublicKey.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(pcbOpSignPubKey)), uintptr(unsafe.Pointer(ppbOpSignPubKey)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// WebAuthNPluginGetUserVerificationCount calls webauthn!WebAuthNPluginGetUserVerificationCount.
+func WebAuthNPluginGetUserVerificationCount(rclsid *win32.GUID, pdwVerificationCount *uint32) error {
+	r1, _, _ := syscall.SyscallN(procWebAuthNPluginGetUserVerificationCount.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(pdwVerificationCount)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// WebAuthNPluginGetUserVerificationPublicKey calls webauthn!WebAuthNPluginGetUserVerificationPublicKey.
+func WebAuthNPluginGetUserVerificationPublicKey(rclsid *win32.GUID, pcbPublicKey *uint32, ppbPublicKey **byte) error {
+	r1, _, _ := syscall.SyscallN(procWebAuthNPluginGetUserVerificationPublicKey.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(pcbPublicKey)), uintptr(unsafe.Pointer(ppbPublicKey)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// WebAuthNPluginPerformUserVerification calls webauthn!WebAuthNPluginPerformUserVerification.
+func WebAuthNPluginPerformUserVerification(pPluginUserVerification *WEBAUTHN_PLUGIN_USER_VERIFICATION_REQUEST, pcbResponse *uint32, ppbResponse **byte) error {
+	r1, _, _ := syscall.SyscallN(procWebAuthNPluginPerformUserVerification.Addr(), uintptr(unsafe.Pointer(pPluginUserVerification)), uintptr(unsafe.Pointer(pcbResponse)), uintptr(unsafe.Pointer(ppbResponse)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// WebAuthNPluginRegisterStatusChangeCallback calls webauthn!WebAuthNPluginRegisterStatusChangeCallback.
+func WebAuthNPluginRegisterStatusChangeCallback(callback WEBAUTHN_PLUGIN_STATUS_CHANGE_CALLBACK, context unsafe.Pointer, rclsid *win32.GUID, pdwRegister *uint32) error {
+	r1, _, _ := syscall.SyscallN(procWebAuthNPluginRegisterStatusChangeCallback.Addr(), uintptr(callback), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(pdwRegister)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// WebAuthNPluginRemoveAuthenticator calls webauthn!WebAuthNPluginRemoveAuthenticator.
+func WebAuthNPluginRemoveAuthenticator(rclsid *win32.GUID) error {
+	r1, _, _ := syscall.SyscallN(procWebAuthNPluginRemoveAuthenticator.Addr(), uintptr(unsafe.Pointer(rclsid)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// WebAuthNPluginUnregisterStatusChangeCallback calls webauthn!WebAuthNPluginUnregisterStatusChangeCallback.
+func WebAuthNPluginUnregisterStatusChangeCallback(pdwRegister *uint32) error {
+	r1, _, _ := syscall.SyscallN(procWebAuthNPluginUnregisterStatusChangeCallback.Addr(), uintptr(unsafe.Pointer(pdwRegister)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// WebAuthNPluginUpdateAuthenticatorDetails calls webauthn!WebAuthNPluginUpdateAuthenticatorDetails.
+func WebAuthNPluginUpdateAuthenticatorDetails(pPluginUpdateAuthenticatorDetails *WEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS) error {
+	r1, _, _ := syscall.SyscallN(procWebAuthNPluginUpdateAuthenticatorDetails.Addr(), uintptr(unsafe.Pointer(pPluginUpdateAuthenticatorDetails)))
 	return win32.ErrIfFailed(int32(r1))
 }

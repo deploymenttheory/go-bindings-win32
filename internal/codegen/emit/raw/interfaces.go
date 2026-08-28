@@ -39,6 +39,12 @@ func (g *Generator) buildInterfaceModels(meta *win32meta.NamespaceMeta, imports 
 	return models
 }
 
+// runtimeRootInterface is the metadata interface the hand-written runtime
+// already defines (bindings/runtime/win32/iunknown.go). It is emitted as a
+// type alias so the tree has exactly one IUnknown: every embedding root,
+// every [ComOutPtr] out-param and the runtime helpers name the same type.
+const runtimeRootInterface = "System.Com.IUnknown"
+
 func (g *Generator) buildInterface(meta *win32meta.NamespaceMeta, name, goName string, comInterface *win32meta.ComInterface, imports typemap.ImportSet) (view.InterfaceModel, bool) {
 	startSlot, ok := g.registry.VtableStartSlot(meta.Namespace, name)
 	if !ok {
@@ -66,6 +72,13 @@ func (g *Generator) buildInterface(meta *win32meta.NamespaceMeta, name, goName s
 				g.diag("interface %s: IID name %s already used", name, iidVar)
 			}
 		}
+	}
+
+	// The runtime owns the root: alias it, keep the IID, emit no methods.
+	if meta.Namespace+"."+name == runtimeRootInterface {
+		model.AliasOf = "win32.IUnknown"
+		imports["win32"] = g.mapper.RuntimeImportPath()
+		return model, true
 	}
 
 	// Base embedding promotes the base's methods; a severed or dangling base

@@ -42,32 +42,58 @@ func main() {
 }
 ```
 
-COM interfaces are typed vtable structs — the struct **is** the COM object,
-obtained by casting a factory out-param. Here, streaming XML with
-`IXmlReader` (a curated API whose `S_FALSE` end-of-input code survives — see
+COM interfaces are typed vtable structs — the struct **is** the COM object.
+Typed factories hand you a `*com.IStream` directly; riid-selected factories
+hand you the root `*win32.IUnknown`, which `win32.Cast[T]` reinterprets as
+the interface the riid picked. Here, streaming XML with `IXmlReader` (a
+curated API whose `S_FALSE` end-of-input code survives — see
 [Errors](#errors)):
 
 ```go
-var out *win32.IUnknown
-if err := xmllite.CreateXmlReader(&xmllite.IID_IXmlReader, &out, nil); err != nil {
-	return err
-}
-reader := (*xmllite.IXmlReader)(unsafe.Pointer(out))
-defer reader.Release()
-if err := reader.SetInput((*com.IUnknown)(unsafe.Pointer(stream))); err != nil {
-	return err
-}
+import (
+	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
+	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/data/xml/xmllite"
+	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
+	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/structuredstorage"
+)
 
-var nodeType xmllite.XmlNodeType
-for {
-	hr, err := reader.Read(&nodeType)
-	if err != nil {
-		return err // a real failure
+func countNodes(document []byte) (int, error) {
+	var stream *com.IStream // a typed factory out-param: no cast
+	if err := structuredstorage.CreateStreamOnHGlobal(0, true, &stream); err != nil {
+		return 0, err
 	}
-	if hr == win32.S_FALSE {
-		break // end of input
+	defer stream.Release()
+	var written uint32
+	if err := stream.Write(document, &written); err != nil { // void*+size → []byte
+		return 0, err
 	}
-	// process the node
+	var position uint64
+	if err := stream.Seek(0, com.STREAM_SEEK_SET, &position); err != nil {
+		return 0, err
+	}
+
+	var out *win32.IUnknown // a riid-selected factory out-param
+	if err := xmllite.CreateXmlReader(&xmllite.IID_IXmlReader, &out, nil); err != nil {
+		return 0, err
+	}
+	reader := win32.Cast[xmllite.IXmlReader](out) // the interface the riid selected
+	defer reader.Release()
+	if err := reader.SetInput(&stream.IUnknown); err != nil { // upcast: the embedded root
+		return 0, err
+	}
+
+	nodes := 0
+	var nodeType xmllite.XmlNodeType
+	for {
+		hr, err := reader.Read(&nodeType)
+		if err != nil {
+			return nodes, err // a real failure
+		}
+		if hr == win32.S_FALSE {
+			return nodes, nil // end of input
+		}
+		nodes++
+	}
 }
 ```
 

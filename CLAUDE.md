@@ -189,9 +189,12 @@ each call, then the template dispatches via `syscall.SyscallN`:
   the return is HRESULT.
 - a `void**` `[out]` param carrying `[ComOutPtr]` (or `[IidParameterIndex]`,
   ingested but absent from the current winmd) is typed `**win32.IUnknown` —
-  the runtime's root COM shape (`bindings/runtime/win32/iunknown.go`), layout-
-  compatible with every generated `*IFoo` and carrying QueryInterface/AddRef/
-  Release. Cast to the concrete interface selected by the riid argument. A
+  the runtime's root COM shape (`bindings/runtime/win32/iunknown.go`), which
+  the generated `System.Com.IUnknown` is a type alias of (there is exactly
+  one `IUnknown`), layout-compatible with every generated `*IFoo` and
+  carrying QueryInterface/AddRef/Release. `win32.Cast[T]` reinterprets the
+  result as the interface the riid selected; `win32.QueryInterface[T]` asks
+  any object for another interface, typed. A
   `[retval]` one elevates to a `(*win32.IUnknown, error)` return like any
   typed COM out. An un-attributed `void**` `[out]` that pairs with an input
   `*GUID` param whose name contains `iid` — immediately preceding it, or the

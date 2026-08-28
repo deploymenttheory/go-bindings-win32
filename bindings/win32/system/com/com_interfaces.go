@@ -3652,30 +3652,12 @@ func (self *ITypeLibRegistrationReader) EnumTypeLibRegistrations(ppEnumUnknown *
 
 // IUnknown: https://learn.microsoft.com/windows/win32/api/unknwn/nn-unknwn-iunknown
 // IID: 00000000-0000-0000-c000-000000000046
-type IUnknown struct {
-	LpVtbl *[1024]uintptr
-}
+// IUnknown is the runtime's root COM shape (win32.IUnknown), which carries
+// QueryInterface/AddRef/Release and the QueryInterface[T] / Cast[T] helpers.
+type IUnknown = win32.IUnknown
 
 // IID_IUnknown is the interface identifier for IUnknown.
 var IID_IUnknown = win32.GUID{Data1: 0x00000000, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
-
-// QueryInterface dispatches through IUnknown's vtable slot 0.
-func (self *IUnknown) QueryInterface(riid *win32.GUID, ppvObject **win32.IUnknown) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[0], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
-	return win32.ErrIfFailed(int32(r1))
-}
-
-// AddRef dispatches through IUnknown's vtable slot 1.
-func (self *IUnknown) AddRef() uint32 {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[1], uintptr(unsafe.Pointer(self)))
-	return uint32(r1)
-}
-
-// Release dispatches through IUnknown's vtable slot 2.
-func (self *IUnknown) Release() uint32 {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[2], uintptr(unsafe.Pointer(self)))
-	return uint32(r1)
-}
 
 // IID: a39ee748-6a27-4817-a6f2-13914bef5890
 type IUri struct {

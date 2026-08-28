@@ -5,6 +5,10 @@
 {{end -}}
 {{- if .BaseNote}}// {{.BaseNote}}
 {{end -}}
+{{- if .AliasOf}}// {{.TypeName}} is the runtime's root COM shape ({{.AliasOf}}), which carries
+// QueryInterface/AddRef/Release and the QueryInterface[T] / Cast[T] helpers.
+type {{.TypeName}} = {{.AliasOf}}
+{{- else -}}
 type {{.TypeName}} struct {
 {{- if .BaseType}}
 	{{.BaseType}}
@@ -12,6 +16,7 @@ type {{.TypeName}} struct {
 	LpVtbl *[1024]uintptr
 {{- end}}
 }
+{{- end}}
 
 {{if .IIDVar}}// {{.IIDVar}} is the interface identifier for {{.TypeName}}.
 var {{.IIDVar}} = {{.IIDLiteral}}

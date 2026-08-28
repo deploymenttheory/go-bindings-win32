@@ -4,7 +4,6 @@ package acceptance
 
 import (
 	"testing"
-	"unsafe"
 
 	win32 "github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/data/xml/xmllite"
@@ -58,10 +57,10 @@ func TestComStreamRoundTrip(t *testing.T) {
 		t.Fatalf("round trip = %q, want %q", readBack, payload)
 	}
 
-	// QueryInterface for IUnknown promoted from IUnknown through the generated
-	// IID constant — the [ComOutPtr] void** out-param is typed **win32.IUnknown,
-	// usable (Release, further QueryInterface) without a cast.
-	var unknown *win32.IUnknown
+	// QueryInterface promoted from the embedded root, through the generated
+	// IID constant — the [ComOutPtr] void** out-param is typed **win32.IUnknown
+	// (the same type as com.IUnknown), usable without a cast.
+	var unknown *com.IUnknown
 	if err := stream.QueryInterface(&com.IID_IUnknown, &unknown); err != nil {
 		t.Fatalf("QueryInterface(IID_IUnknown): %v", err)
 	}
@@ -73,6 +72,20 @@ func TestComStreamRoundTrip(t *testing.T) {
 	// one), so the returned refcount is non-zero.
 	if refs := unknown.Release(); refs == 0 {
 		t.Fatal("Release after QueryInterface freed the object while a reference remained")
+	}
+
+	// The typed helper: ask the stream for IStream again and drive it.
+	again, err := win32.QueryInterface[com.IStream](stream, &com.IID_IStream)
+	if err != nil {
+		t.Fatalf("QueryInterface[com.IStream]: %v", err)
+	}
+	defer again.Release()
+	var size com.STATSTG
+	if err := again.Stat(&size, uint32(com.STATFLAG_NONAME)); err != nil {
+		t.Fatalf("IStream.Stat through the QueryInterface[T] result: %v", err)
+	}
+	if size.CbSize != uint64(len(payload)) {
+		t.Fatalf("STATSTG.cbSize = %d, want %d", size.CbSize, len(payload))
 	}
 }
 
@@ -87,7 +100,7 @@ func TestComOutPtrFactory(t *testing.T) {
 	if out == nil {
 		t.Fatal("CreateDXGIFactory1 returned nil factory without error")
 	}
-	factory := (*dxgi.IDXGIFactory1)(unsafe.Pointer(out))
+	factory := win32.Cast[dxgi.IDXGIFactory1](out)
 	defer factory.Release()
 
 	// Exercise a method through the cast pointer to prove the vtable lines up.
@@ -116,7 +129,7 @@ func TestHeuristicRiidPairFactory(t *testing.T) {
 	if out == nil {
 		t.Fatal("CreateXmlReader returned nil reader without error")
 	}
-	reader := (*xmllite.IXmlReader)(unsafe.Pointer(out))
+	reader := win32.Cast[xmllite.IXmlReader](out)
 	defer reader.Release()
 
 	// Exercise a method through the cast pointer to prove the vtable lines up:

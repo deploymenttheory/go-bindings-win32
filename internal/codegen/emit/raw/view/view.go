@@ -137,6 +137,10 @@ type InterfaceModel struct {
 	// BaseType is the embedded base interface type ("com.IUnknown"); ""
 	// makes this a root that declares the raw vtable field itself.
 	BaseType string
+	// AliasOf, when set, declares the type as an alias of the runtime's root
+	// COM shape ("win32.IUnknown") instead of a struct; no methods are
+	// emitted (the runtime owns them).
+	AliasOf string
 	// BaseNote documents a severed base embedding ("" when none).
 	BaseNote string
 	Methods  []ComMethodModel

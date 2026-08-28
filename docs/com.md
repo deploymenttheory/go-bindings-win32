@@ -17,8 +17,8 @@ For an interface `IFoo`, the package emits:
 
 ## Getting an interface
 
-Most objects come from a factory function (or `QueryInterface`) that hands back
-a typed pointer via an out parameter:
+Most objects come from a factory function that hands back a typed pointer via
+an out parameter:
 
 ```go
 import (
@@ -33,14 +33,44 @@ if err := structuredstorage.CreateStreamOnHGlobal(0, true, &stream); err != nil 
 defer stream.Release()
 ```
 
+Factories that take an `riid` (`CoCreateInstance`, `CreateXmlReader`,
+`CreateDXGIFactory1`, …) cannot be typed statically: their `void**` out
+parameter is the root `*win32.IUnknown`, and `win32.Cast[T]` reinterprets it
+as the interface the riid selected (no `unsafe`, no AddRef — the factory's
+reference is now held through the typed pointer):
+
+```go
+var out *win32.IUnknown
+if err := xmllite.CreateXmlReader(&xmllite.IID_IXmlReader, &out, nil); err != nil {
+	return err
+}
+reader := win32.Cast[xmllite.IXmlReader](out)
+defer reader.Release()
+```
+
+`win32.QueryInterface[T]` asks any object for another interface, typed:
+
+```go
+stream2, err := win32.QueryInterface[com.IStream](reader, &com.IID_IStream)
+```
+
+There is exactly one `IUnknown` type: the generated `com.IUnknown` is an alias
+of `win32.IUnknown`, and every generated interface embeds it. **Upcasting**
+therefore needs no helper — `&reader.IUnknown` is the same object as its
+root, ready for a parameter typed `*com.IUnknown`:
+
+```go
+if err := reader.SetInput(&stream.IUnknown); err != nil { /* … */ }
+```
+
 ## Calling methods
 
 Methods return `error`; base-interface methods are promoted through embedding;
 `[out, retval]` values become returns:
 
 ```go
-// promoted from ISequentialStream; returns error
-if err := stream.Write(unsafe.Pointer(&data[0]), uint32(len(data)), &written); err != nil {
+// promoted from ISequentialStream; the void*+[MemorySize] pair is a []byte
+if err := stream.Write(data, &written); err != nil {
 	return err
 }
 
@@ -72,11 +102,11 @@ COM uses reference counting. The rules the bindings expect:
 - **`QueryInterface`** returns a new reference; release it separately.
 
 ```go
-var unk unsafe.Pointer
-if err := stream.QueryInterface(&com.IID_IUnknown, &unk); err != nil {
+unknown, err := win32.QueryInterface[com.IUnknown](stream, &com.IID_IUnknown)
+if err != nil {
 	return err
 }
-(*com.IUnknown)(unk).Release() // release the QI reference
+unknown.Release() // release the QI reference
 ```
 
 ## Apartments

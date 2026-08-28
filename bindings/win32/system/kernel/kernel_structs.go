@@ -119,12 +119,6 @@ type SLIST_ENTRY struct {
 	Next *SLIST_ENTRY
 }
 
-// SLIST_HEADER is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
-type SLIST_HEADER struct {
-	Data [2]uint64
-}
-
 // STRING: https://learn.microsoft.com/windows/win32/api/ntdef/ns-ntdef-string
 type STRING struct {
 	Length        uint16

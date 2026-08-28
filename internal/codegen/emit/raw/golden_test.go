@@ -267,6 +267,27 @@ func syntheticNamespaces() []*win32meta.NamespaceMeta {
 		},
 	}
 	taken := win32meta.Struct{Fields: []win32meta.StructField{field("v", native("Int32"))}}
+	// amd64 and arm64 layouts differ: the shared file leaves it to the
+	// per-architecture files, and CONTAINER (holding it by value) follows.
+	archSpecific := win32meta.Struct{
+		Availability: win32meta.Availability{Architectures: []string{"amd64"}},
+		Fields:       []win32meta.StructField{field("rip", native("UInt64")), field("regs", win32meta.TypeRef{Kind: "Array", ArrayLen: 16, Child: &win32meta.TypeRef{Kind: "Native", Name: "UInt64"}})},
+		ArchVariants: []win32meta.Struct{
+			{
+				Availability: win32meta.Availability{Architectures: []string{"arm64"}},
+				Fields:       []win32meta.StructField{field("pc", native("UInt64")), field("regs", win32meta.TypeRef{Kind: "Array", ArrayLen: 31, Child: &win32meta.TypeRef{Kind: "Native", Name: "UInt64"}})},
+			},
+			{
+				Availability: win32meta.Availability{Architectures: []string{"386"}},
+				Fields:       []win32meta.StructField{field("eip", native("UInt32"))},
+			},
+		},
+	}
+	container := win32meta.Struct{Fields: []win32meta.StructField{field("kind", native("UInt32")), field("ctx", apiRef(shapes, "ARCHCTX", "Struct"))}}
+	x86Only := win32meta.Struct{
+		Availability: win32meta.Availability{Architectures: []string{"386"}},
+		Fields:       []win32meta.StructField{field("v", native("UInt32"))},
+	}
 
 	smallRef := apiRef(shapes, "SMALL", "Struct")
 	otherStructRef := apiRef(other, "OTHER_STRUCT", "Struct")
@@ -280,6 +301,7 @@ func syntheticNamespaces() []*win32meta.NamespaceMeta {
 		Structs: map[string]win32meta.Struct{
 			"SMALL": small, "MEDIUM": medium, "BIG": big, "FPAIR": fpair,
 			"PACKED": packed, "UNI": union, "WITHNESTED": withNested, "Taken": taken,
+			"ARCHCTX": archSpecific, "CONTAINER": container, "X86ONLY": x86Only,
 		},
 		Enums: map[string]win32meta.Enum{
 			"MODE": {BaseType: "int32", Members: []win32meta.EnumMember{{Name: "MODE_A", Value: "0"}, {Name: "MODE_B", Value: "1"}}},

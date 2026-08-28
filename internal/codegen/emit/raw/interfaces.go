@@ -278,6 +278,11 @@ func (g *Generator) buildComMethod(meta *win32meta.NamespaceMeta, interfaceName 
 
 	self := "uintptr(unsafe.Pointer(self))"
 	target := fmt.Sprintf("self.LpVtbl[%d]", slot)
+	if viaCall && len(model.ArgExprs)+1 > maxCallWords {
+		g.diag("interface %s: method %s: %d argument words exceed the register-aware call limit, method skipped",
+			interfaceName, method.Name, len(model.ArgExprs)+1)
+		return view.ComMethodModel{}, false
+	}
 	if viaCall {
 		specVar := "spec" + naming.Export(interfaceName) + "_" + model.GoName
 		model.SpecDecl = specDecl(specVar, append([]string{specWord}, specArgs...), retSpec)

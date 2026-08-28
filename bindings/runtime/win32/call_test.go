@@ -184,7 +184,7 @@ func TestPlanAMD64(t *testing.T) {
 	keep, stack := planAMD64(frame, spec, nil, []uintptr{
 		uintptr(math.Float64bits(1.5)), uintptr(unsafe.Pointer(&value)), 42,
 		uintptr(unsafe.Pointer(&pair)), uintptr(math.Float32bits(2.5)), 99,
-	})
+	}, nil)
 	if frame.floats[0] != math.Float64bits(1.5) || frame.ints[0] != uintptr(math.Float64bits(1.5)) {
 		t.Errorf("position 0 not mirrored into XMM0/RCX: %#x / %#x", frame.floats[0], frame.ints[0])
 	}
@@ -204,7 +204,7 @@ func TestPlanAMD64(t *testing.T) {
 	// A composite return larger than a register: hidden pointer first.
 	ret := new(big)
 	frame = new(callFrame)
-	planAMD64(frame, &Spec{Args: []Arg{Word}, Ret: Struct(24, 8, 0, false)}, unsafe.Pointer(ret), []uintptr{5})
+	planAMD64(frame, &Spec{Args: []Arg{Word}, Ret: Struct(24, 8, 0, false)}, unsafe.Pointer(ret), []uintptr{5}, nil)
 	if frame.ints[0] != uintptr(unsafe.Pointer(ret)) || frame.ints[1] != 5 {
 		t.Errorf("hidden result pointer must be RCX and shift the arguments: %#x %d", frame.ints[0], frame.ints[1])
 	}
@@ -221,7 +221,7 @@ func TestPlanARM64(t *testing.T) {
 	t.Run("independent integer and float counters", func(t *testing.T) {
 		spec := &Spec{Args: []Arg{Float64, Word, Float32, Word}}
 		frame := new(callFrame)
-		_, stack := planARM64(frame, spec, nil, []uintptr{uintptr(math.Float64bits(1.5)), 1, uintptr(math.Float32bits(2.5)), 2})
+		_, stack := planARM64(frame, spec, nil, []uintptr{uintptr(math.Float64bits(1.5)), 1, uintptr(math.Float32bits(2.5)), 2}, nil)
 		if frame.floats[0] != math.Float64bits(1.5) || uint32(frame.floats[1]) != math.Float32bits(2.5) {
 			t.Errorf("D0/D1 = %#x/%#x", frame.floats[0], frame.floats[1])
 		}
@@ -237,7 +237,7 @@ func TestPlanARM64(t *testing.T) {
 			spec.Args[i] = Word
 		}
 		frame := new(callFrame)
-		_, stack := planARM64(frame, spec, nil, args)
+		_, stack := planARM64(frame, spec, nil, args, nil)
 		if frame.ints[7] != 8 || len(stack) != 1 || stack[0] != 9 {
 			t.Errorf("X7 = %d, stack = %v", frame.ints[7], stack)
 		}
@@ -246,7 +246,7 @@ func TestPlanARM64(t *testing.T) {
 		point := [2]float32{1.5, 2.5}
 		spec := &Spec{Args: []Arg{Float64, Struct(8, 4, 2, false), Word}}
 		frame := new(callFrame)
-		planARM64(frame, spec, nil, []uintptr{uintptr(math.Float64bits(9)), uintptr(unsafe.Pointer(&point)), 3})
+		planARM64(frame, spec, nil, []uintptr{uintptr(math.Float64bits(9)), uintptr(unsafe.Pointer(&point)), 3}, nil)
 		if uint32(frame.floats[1]) != math.Float32bits(1.5) || uint32(frame.floats[2]) != math.Float32bits(2.5) {
 			t.Errorf("HFA elements in D1/D2 = %#x/%#x", frame.floats[1], frame.floats[2])
 		}
@@ -267,7 +267,7 @@ func TestPlanARM64(t *testing.T) {
 		spec.Args[7] = Float32 // after the overflow every float is stacked
 		args[7] = uintptr(math.Float32bits(7))
 		frame := new(callFrame)
-		_, stack := planARM64(frame, spec, nil, args)
+		_, stack := planARM64(frame, spec, nil, args, nil)
 		if frame.floats[6] != 0 || frame.floats[7] != 0 {
 			t.Errorf("D6/D7 must stay unused: %#x/%#x", frame.floats[6], frame.floats[7])
 		}
@@ -278,13 +278,13 @@ func TestPlanARM64(t *testing.T) {
 	t.Run("16-byte composite in two X registers, or stacked when it does not fit", func(t *testing.T) {
 		guid := GUID{Data1: 0x11223344, Data2: 0x5566, Data3: 0x7788, Data4: [8]byte{1, 2, 3, 4, 5, 6, 7, 8}}
 		frame := new(callFrame)
-		planARM64(frame, &Spec{Args: []Arg{Word, Struct(16, 4, 0, false)}}, nil, []uintptr{1, uintptr(unsafe.Pointer(&guid))})
+		planARM64(frame, &Spec{Args: []Arg{Word, Struct(16, 4, 0, false)}}, nil, []uintptr{1, uintptr(unsafe.Pointer(&guid))}, nil)
 		if got := *(*GUID)(unsafe.Pointer(&frame.ints[1])); got != guid {
 			t.Errorf("GUID in X1:X2 = %v, want %v", got, guid)
 		}
 		spec := &Spec{Args: []Arg{Word, Word, Word, Word, Word, Word, Word, Struct(16, 4, 0, false), Word}}
 		frame = new(callFrame)
-		_, stack := planARM64(frame, spec, nil, []uintptr{1, 2, 3, 4, 5, 6, 7, uintptr(unsafe.Pointer(&guid)), 9})
+		_, stack := planARM64(frame, spec, nil, []uintptr{1, 2, 3, 4, 5, 6, 7, uintptr(unsafe.Pointer(&guid)), 9}, nil)
 		if len(stack) != 3 || *(*GUID)(unsafe.Pointer(&stack[0])) != guid || stack[2] != 9 {
 			t.Errorf("stack = %v, want the GUID then 9 (NGRN closes at 8)", stack)
 		}
@@ -295,7 +295,7 @@ func TestPlanARM64(t *testing.T) {
 	t.Run("larger composite by pointer to a copy", func(t *testing.T) {
 		value := [3]uint64{1, 2, 3}
 		frame := new(callFrame)
-		keep, _ := planARM64(frame, &Spec{Args: []Arg{Struct(24, 8, 0, false)}}, nil, []uintptr{uintptr(unsafe.Pointer(&value))})
+		keep, _ := planARM64(frame, &Spec{Args: []Arg{Struct(24, 8, 0, false)}}, nil, []uintptr{uintptr(unsafe.Pointer(&value))}, nil)
 		if len(keep) != 1 || frame.ints[0] == uintptr(unsafe.Pointer(&value)) || *(*[3]uint64)(wordPointer(&frame.ints[0])) != value {
 			t.Errorf("X0 = %#x, want a pointer to a copy of %v", frame.ints[0], value)
 		}
@@ -319,7 +319,7 @@ func TestPlanARM64(t *testing.T) {
 		// Larger: X8 carries the buffer address.
 		big := new([3]uint64)
 		frame = new(callFrame)
-		planARM64(frame, &Spec{Ret: Struct(24, 8, 0, false)}, unsafe.Pointer(big), nil)
+		planARM64(frame, &Spec{Ret: Struct(24, 8, 0, false)}, unsafe.Pointer(big), nil, nil)
 		if frame.x8 != uintptr(unsafe.Pointer(big)) {
 			t.Errorf("X8 = %#x, want the result buffer", frame.x8)
 		}

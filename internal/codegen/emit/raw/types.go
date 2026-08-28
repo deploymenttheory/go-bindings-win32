@@ -165,6 +165,10 @@ func (g *Generator) buildStructModels(meta *win32meta.NamespaceMeta, imports typ
 
 	var models []view.StructModel
 	for _, name := range names {
+		if g.isArchStruct(meta.Namespace, name) {
+			g.diag("struct %s: architecture-specific layout, emitted per architecture (amd64, arm64)", name)
+			continue // buildArchStructModels emits it, once per architecture
+		}
 		definition := meta.Structs[name]
 		chosen := g.chooseArchVariant(name, &definition)
 		if chosen == nil {
@@ -175,32 +179,10 @@ func (g *Generator) buildStructModels(meta *win32meta.NamespaceMeta, imports typ
 	return models
 }
 
-// pickAmd64Variant returns the amd64-compatible layout of a struct, or nil.
-// Pure — usable from layout computation without emitting diagnostics.
-func pickAmd64Variant(definition *win32meta.Struct) *win32meta.Struct {
-	matches := func(s *win32meta.Struct) bool {
-		if len(s.Availability.Architectures) == 0 {
-			return true
-		}
-		for _, arch := range s.Availability.Architectures {
-			if arch == "amd64" {
-				return true
-			}
-		}
-		return false
-	}
-	if matches(definition) {
-		return definition
-	}
-	for i := range definition.ArchVariants {
-		if matches(&definition.ArchVariants[i]) {
-			return &definition.ArchVariants[i]
-		}
-	}
-	return nil
-}
-
-// chooseArchVariant picks the amd64 layout for emission, with diagnostics.
+// chooseArchVariant picks the layout shared by amd64 and arm64 for emission,
+// with diagnostics: a struct that also has an x86 layout emits its 64-bit
+// one; a struct with only an x86 layout is skipped. Structs whose amd64 and
+// arm64 layouts differ never reach here (see archstructs.go).
 func (g *Generator) chooseArchVariant(name string, definition *win32meta.Struct) *win32meta.Struct {
 	chosen := pickAmd64Variant(definition)
 	if chosen == nil {
@@ -208,7 +190,7 @@ func (g *Generator) chooseArchVariant(name string, definition *win32meta.Struct)
 		return nil
 	}
 	if len(definition.ArchVariants) > 0 {
-		g.diag("struct %s: emitting amd64 variant only (%d variants)", name, len(definition.ArchVariants)+1)
+		g.diag("struct %s: emitting the 64-bit layout only (%d variants; x86 differs)", name, len(definition.ArchVariants)+1)
 	}
 	return chosen
 }

@@ -178,15 +178,3 @@ type WER_REPORT_SIGNATURE struct {
 	EventName  [65]uint16
 	Parameters [10]WER_REPORT_PARAMETER
 }
-
-// WER_RUNTIME_EXCEPTION_INFORMATION: https://learn.microsoft.com/windows/win32/api/werapi/ns-werapi-wer_runtime_exception_information
-type WER_RUNTIME_EXCEPTION_INFORMATION struct {
-	DwSize          uint32
-	HProcess        foundation.HANDLE
-	HThread         foundation.HANDLE
-	ExceptionRecord systemdiagnosticsdebug.EXCEPTION_RECORD
-	Context         systemdiagnosticsdebug.CONTEXT
-	PwszReportId    foundation.PWSTR
-	BIsFatal        foundation.BOOL
-	DwReserved      uint32
-}

@@ -86,62 +86,6 @@ type ARM64_NT_NEON128 struct {
 	Data [2]uint64
 }
 
-// CONTEXT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
-type CONTEXT_Anonymous_e__Union struct {
-	Data [64]uint64
-}
-
-// CONTEXT: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-context
-type CONTEXT struct {
-	P1Home               uint64
-	P2Home               uint64
-	P3Home               uint64
-	P4Home               uint64
-	P5Home               uint64
-	P6Home               uint64
-	ContextFlags         CONTEXT_FLAGS
-	MxCsr                uint32
-	SegCs                uint16
-	SegDs                uint16
-	SegEs                uint16
-	SegFs                uint16
-	SegGs                uint16
-	SegSs                uint16
-	EFlags               uint32
-	Dr0                  uint64
-	Dr1                  uint64
-	Dr2                  uint64
-	Dr3                  uint64
-	Dr6                  uint64
-	Dr7                  uint64
-	Rax                  uint64
-	Rcx                  uint64
-	Rdx                  uint64
-	Rbx                  uint64
-	Rsp                  uint64
-	Rbp                  uint64
-	Rsi                  uint64
-	Rdi                  uint64
-	R8                   uint64
-	R9                   uint64
-	R10                  uint64
-	R11                  uint64
-	R12                  uint64
-	R13                  uint64
-	R14                  uint64
-	R15                  uint64
-	Rip                  uint64
-	Anonymous            CONTEXT_Anonymous_e__Union
-	VectorRegister       [26]M128A
-	VectorControl        uint64
-	DebugControl         uint64
-	LastBranchToRip      uint64
-	LastBranchFromRip    uint64
-	LastExceptionToRip   uint64
-	LastExceptionFromRip uint64
-}
-
 // CPU_INFORMATION is a C union, exposed as correctly sized and aligned backing
 // storage; read or write a specific member through an unsafe.Pointer cast.
 type CPU_INFORMATION struct {
@@ -222,20 +166,6 @@ type DIMM_INFO struct {
 type DISCRIMINATEDUNION_TAG_VALUE struct {
 	Value          [16]byte
 	ValueSizeBytes byte
-}
-
-type DISPATCHER_CONTEXT struct {
-	ControlPc        uint64
-	ImageBase        uint64
-	FunctionEntry    *IMAGE_RUNTIME_FUNCTION_ENTRY
-	EstablisherFrame uint64
-	TargetIp         uint64
-	ContextRecord    *CONTEXT
-	LanguageHandler  systemkernel.EXCEPTION_ROUTINE
-	HandlerData      unsafe.Pointer
-	HistoryTable     *UNWIND_HISTORY_TABLE
-	ScopeIndex       uint32
-	Fill0            uint32
 }
 
 // DUMP_FILE_ATTRIBUTES is a C union, exposed as correctly sized and aligned backing
@@ -937,23 +867,6 @@ type KDHELP64 struct {
 	Reserved0                      [2]uint64
 }
 
-// KNONVOLATILE_CONTEXT_POINTERS_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
-type KNONVOLATILE_CONTEXT_POINTERS_Anonymous1_e__Union struct {
-	Data [16]uint64
-}
-
-// KNONVOLATILE_CONTEXT_POINTERS_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
-type KNONVOLATILE_CONTEXT_POINTERS_Anonymous2_e__Union struct {
-	Data [16]uint64
-}
-
-type KNONVOLATILE_CONTEXT_POINTERS struct {
-	Anonymous1 KNONVOLATILE_CONTEXT_POINTERS_Anonymous1_e__Union
-	Anonymous2 KNONVOLATILE_CONTEXT_POINTERS_Anonymous2_e__Union
-}
-
 // LDT_ENTRY_HighWord_e__Union is a C union, exposed as correctly sized and aligned backing
 // storage; read or write a specific member through an unsafe.Pointer cast.
 type LDT_ENTRY_HighWord_e__Union struct {
@@ -1013,14 +926,6 @@ type MEMORY_DEFECT struct {
 // field through an unsafe.Pointer cast.
 type MINIDUMP_CALLBACK_INFORMATION struct {
 	Data [4]uint32
-}
-
-// MINIDUMP_CALLBACK_INPUT: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_callback_input
-// MINIDUMP_CALLBACK_INPUT is a packed C struct (non-default field alignment), exposed as
-// correctly sized and aligned opaque backing storage; read or write a specific
-// field through an unsafe.Pointer cast.
-type MINIDUMP_CALLBACK_INPUT struct {
-	Data [324]uint32
 }
 
 // MINIDUMP_CALLBACK_OUTPUT: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_callback_output
@@ -1440,28 +1345,12 @@ type MINIDUMP_THREAD struct {
 	Data [12]uint32
 }
 
-// MINIDUMP_THREAD_CALLBACK: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_thread_callback
-// MINIDUMP_THREAD_CALLBACK is a packed C struct (non-default field alignment), exposed as
-// correctly sized and aligned opaque backing storage; read or write a specific
-// field through an unsafe.Pointer cast.
-type MINIDUMP_THREAD_CALLBACK struct {
-	Data [316]uint32
-}
-
 // MINIDUMP_THREAD_EX: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_thread_ex
 // MINIDUMP_THREAD_EX is a packed C struct (non-default field alignment), exposed as
 // correctly sized and aligned opaque backing storage; read or write a specific
 // field through an unsafe.Pointer cast.
 type MINIDUMP_THREAD_EX struct {
 	Data [16]uint32
-}
-
-// MINIDUMP_THREAD_EX_CALLBACK: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_thread_ex_callback
-// MINIDUMP_THREAD_EX_CALLBACK is a packed C struct (non-default field alignment), exposed as
-// correctly sized and aligned opaque backing storage; read or write a specific
-// field through an unsafe.Pointer cast.
-type MINIDUMP_THREAD_EX_CALLBACK struct {
-	Data [320]uint32
 }
 
 // MINIDUMP_THREAD_EX_LIST: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_thread_ex_list
@@ -1815,22 +1704,6 @@ type TI_GET_DISCRIMINATEDUNION_TAG_RANGES_PARAMS struct {
 // UNLOAD_DLL_DEBUG_INFO: https://learn.microsoft.com/windows/win32/api/minwinbase/ns-minwinbase-unload_dll_debug_info
 type UNLOAD_DLL_DEBUG_INFO struct {
 	LpBaseOfDll unsafe.Pointer
-}
-
-type UNWIND_HISTORY_TABLE struct {
-	Count       uint32
-	LocalHint   byte
-	GlobalHint  byte
-	Search      byte
-	Once        byte
-	LowAddress  uintptr
-	HighAddress uintptr
-	Entry       [12]UNWIND_HISTORY_TABLE_ENTRY
-}
-
-type UNWIND_HISTORY_TABLE_ENTRY struct {
-	ImageBase     uintptr
-	FunctionEntry *IMAGE_RUNTIME_FUNCTION_ENTRY
 }
 
 // WAITCHAIN_NODE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing

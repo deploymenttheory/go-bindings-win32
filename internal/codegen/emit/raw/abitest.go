@@ -16,7 +16,10 @@ import (
 type ABIRecord struct {
 	Namespace string
 	TypeName  string
-	Size      uint32
+	// Arch is "" for the layout amd64 and arm64 share, else the architecture
+	// this layout is specific to (the record's test file is tagged with it).
+	Arch string
+	Size uint32
 	// Fields is nil for union blobs (size-only assertion).
 	Fields []ABIField
 }
@@ -38,7 +41,7 @@ func (g *Generator) recordABI(namespace, typeName string, definition *win32meta.
 	if !detailed.ok || detailed.size == 0 {
 		return
 	}
-	record := ABIRecord{Namespace: namespace, TypeName: typeName, Size: detailed.size}
+	record := ABIRecord{Namespace: namespace, TypeName: typeName, Arch: g.layoutArch, Size: detailed.size}
 	if modelFields != nil && len(modelFields) == len(detailed.offsets) {
 		for i := range modelFields {
 			record.Fields = append(record.Fields, ABIField{
@@ -47,7 +50,11 @@ func (g *Generator) recordABI(namespace, typeName string, definition *win32meta.
 			})
 		}
 	}
-	g.abiRecords[namespace+"."+typeName] = record
+	key := namespace + "." + typeName
+	if record.Arch != "" {
+		key += "@" + record.Arch
+	}
+	g.abiRecords[key] = record
 }
 
 // ABIRecords returns the collected layouts sorted by key.
@@ -71,9 +78,14 @@ func (g *Generator) ImportPathFor(namespace string) string {
 }
 
 // ABITestFileName is the generated test file for a namespace's layouts
-// ("System.Threading" → "abi_system_threading_test.go").
-func ABITestFileName(namespace string) string {
-	return "abi_" + strings.ReplaceAll(naming.PackagePath(namespace), "/", "_") + "_test.go"
+// ("System.Threading" → "abi_system_threading_test.go"; an architecture-
+// specific file adds the GOARCH suffix, "abi_system_kernel_arm64_test.go").
+func ABITestFileName(namespace, arch string) string {
+	name := "abi_" + strings.ReplaceAll(naming.PackagePath(namespace), "/", "_")
+	if arch != "" {
+		name += "_" + arch
+	}
+	return name + "_test.go"
 }
 
 // BuildABITests renders one generated test file per namespace asserting the
@@ -82,24 +94,38 @@ func ABITestFileName(namespace string) string {
 // hand-written checkABI driver in package abi walks. importPathFor maps a
 // namespace to its bindings import path. The result maps file name → source.
 func BuildABITests(records []ABIRecord, importPathFor func(namespace string) string) map[string]string {
-	byNamespace := map[string][]ABIRecord{}
-	var namespaces []string
+	type group struct{ namespace, arch string }
+	byGroup := map[group][]ABIRecord{}
+	var groups []group
 	for _, record := range records {
-		if _, seen := byNamespace[record.Namespace]; !seen {
-			namespaces = append(namespaces, record.Namespace)
+		key := group{record.Namespace, record.Arch}
+		if _, seen := byGroup[key]; !seen {
+			groups = append(groups, key)
 		}
-		byNamespace[record.Namespace] = append(byNamespace[record.Namespace], record)
+		byGroup[key] = append(byGroup[key], record)
 	}
-	sort.Strings(namespaces)
+	sort.Slice(groups, func(i, j int) bool {
+		if groups[i].namespace != groups[j].namespace {
+			return groups[i].namespace < groups[j].namespace
+		}
+		return groups[i].arch < groups[j].arch
+	})
 
-	files := make(map[string]string, len(namespaces))
-	for _, namespace := range namespaces {
+	files := make(map[string]string, len(groups))
+	for _, key := range groups {
+		namespace := key.namespace
 		alias := naming.ImportAlias(namespace)
 		ident := strings.ReplaceAll(namespace, ".", "_")
+		buildTag, scope := fileasm.GeneratedBuildTag, "every struct"
+		if key.arch != "" {
+			ident += "_" + key.arch
+			buildTag = "windows && " + key.arch
+			scope = "every " + key.arch + "-specific struct"
+		}
 		var body strings.Builder
-		fmt.Fprintf(&body, "// abi%s holds the expected C layout of every struct emitted for\n// %s%s.\n", ident, apiRootPrefix, namespace)
+		fmt.Fprintf(&body, "// abi%s holds the expected C layout of %s emitted for\n// %s%s.\n", ident, scope, apiRootPrefix, namespace)
 		fmt.Fprintf(&body, "var abi%s = []abiCase{\n", ident)
-		for _, record := range byNamespace[namespace] {
+		for _, record := range byGroup[key] {
 			qualified := alias + "." + record.TypeName
 			fmt.Fprintf(&body, "\t{%q, unsafe.Sizeof(%s{}), %d},\n", qualified+" size", qualified, record.Size)
 			for _, field := range record.Fields {
@@ -112,11 +138,11 @@ func BuildABITests(records []ABIRecord, importPathFor func(namespace string) str
 
 		var file strings.Builder
 		file.WriteString(generatedHeader + "\n\n")
-		file.WriteString("//go:build " + fileasm.GeneratedBuildTag + "\n\n")
+		file.WriteString("//go:build " + buildTag + "\n\n")
 		file.WriteString("package abi\n\nimport (\n\t\"testing\"\n\t\"unsafe\"\n\n")
 		fmt.Fprintf(&file, "\t%s %q\n)\n\n", alias, importPathFor(namespace))
 		file.WriteString(body.String())
-		files[ABITestFileName(namespace)] = file.String()
+		files[ABITestFileName(namespace, key.arch)] = file.String()
 	}
 	return files
 }

@@ -151,15 +151,6 @@ var abiSystem_ErrorReporting = []abiCase{
 	{"systemerrorreporting.WER_REPORT_SIGNATURE size", unsafe.Sizeof(systemerrorreporting.WER_REPORT_SIGNATURE{}), 7910},
 	{"systemerrorreporting.WER_REPORT_SIGNATURE.EventName", unsafe.Offsetof(systemerrorreporting.WER_REPORT_SIGNATURE{}.EventName), 0},
 	{"systemerrorreporting.WER_REPORT_SIGNATURE.Parameters", unsafe.Offsetof(systemerrorreporting.WER_REPORT_SIGNATURE{}.Parameters), 130},
-	{"systemerrorreporting.WER_RUNTIME_EXCEPTION_INFORMATION size", unsafe.Sizeof(systemerrorreporting.WER_RUNTIME_EXCEPTION_INFORMATION{}), 1424},
-	{"systemerrorreporting.WER_RUNTIME_EXCEPTION_INFORMATION.DwSize", unsafe.Offsetof(systemerrorreporting.WER_RUNTIME_EXCEPTION_INFORMATION{}.DwSize), 0},
-	{"systemerrorreporting.WER_RUNTIME_EXCEPTION_INFORMATION.HProcess", unsafe.Offsetof(systemerrorreporting.WER_RUNTIME_EXCEPTION_INFORMATION{}.HProcess), 8},
-	{"systemerrorreporting.WER_RUNTIME_EXCEPTION_INFORMATION.HThread", unsafe.Offsetof(systemerrorreporting.WER_RUNTIME_EXCEPTION_INFORMATION{}.HThread), 16},
-	{"systemerrorreporting.WER_RUNTIME_EXCEPTION_INFORMATION.ExceptionRecord", unsafe.Offsetof(systemerrorreporting.WER_RUNTIME_EXCEPTION_INFORMATION{}.ExceptionRecord), 24},
-	{"systemerrorreporting.WER_RUNTIME_EXCEPTION_INFORMATION.Context", unsafe.Offsetof(systemerrorreporting.WER_RUNTIME_EXCEPTION_INFORMATION{}.Context), 176},
-	{"systemerrorreporting.WER_RUNTIME_EXCEPTION_INFORMATION.PwszReportId", unsafe.Offsetof(systemerrorreporting.WER_RUNTIME_EXCEPTION_INFORMATION{}.PwszReportId), 1408},
-	{"systemerrorreporting.WER_RUNTIME_EXCEPTION_INFORMATION.BIsFatal", unsafe.Offsetof(systemerrorreporting.WER_RUNTIME_EXCEPTION_INFORMATION{}.BIsFatal), 1416},
-	{"systemerrorreporting.WER_RUNTIME_EXCEPTION_INFORMATION.DwReserved", unsafe.Offsetof(systemerrorreporting.WER_RUNTIME_EXCEPTION_INFORMATION{}.DwReserved), 1420},
 }
 
 func TestABI_System_ErrorReporting(t *testing.T) { checkABI(t, abiSystem_ErrorReporting) }

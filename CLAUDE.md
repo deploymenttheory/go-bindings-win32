@@ -234,8 +234,12 @@ each call, then the template dispatches via `syscall.SyscallN`:
   adapts the `Result` to SyscallN's `(r1, r2, err)`), so the templates never
   know which dispatcher they render.
 
-Only by-value arrays and float returns with SetLastError remain skipped with
-a diagnostic. `sizes.go` keeps a scalar-leaf census per layout so the ARM64
+Only by-value arrays, float returns with SetLastError, and call sites that
+would exceed the trampolines' 42 stack words remain skipped with a
+diagnostic. Variadic functions carry only their fixed (integer/pointer)
+parameters in the metadata, which both architectures' variadic conventions
+pass identically. `docs/calling-convention.md` is the maintainer's guide to
+the two dispatch paths. `sizes.go` keeps a scalar-leaf census per layout so the ARM64
 homogeneous-float-aggregate rule (`layout.hfa`) is applied to descriptors.
 The merged `view.ReturnKind` enumerates all the shapes above.
 
@@ -321,9 +325,14 @@ DO-NOT-EDIT header are never touched.
 
 ## Important constraints
 
-- **amd64-only for now**: arch-specific structs/functions emit the amd64
-  variant (`chooseArchVariant`); arm64/x86 build-tag emission is a later
-  milestone (M5).
+- **Architecture-specific layouts**: a struct whose amd64 and arm64 layouts
+  differ (directly, or through a by-value field — `CONTEXT`, `SLIST_HEADER`,
+  the unwind/minidump thread records and their containers) is emitted per
+  architecture into `<pkg>_structs_{amd64,arm64}.go` under per-arch build
+  tags, from its own variant, with per-arch ABI assertions
+  (`archstructs.go`, `computeArchStructs`). A struct whose only other layout
+  is x86 emits the shared 64-bit one (`chooseArchVariant`); x86-only structs
+  are skipped. Functions with an x86-only entry are skipped silently.
 - **COM interfaces are emitted** (`<pkg>_interfaces.go`): one Go struct per
   interface (roots carry `LpVtbl *[1024]uintptr`; derived interfaces embed
   their base, promoting its methods), methods dispatch through absolute

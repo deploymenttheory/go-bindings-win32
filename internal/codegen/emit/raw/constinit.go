@@ -52,7 +52,7 @@ func tokenizeInitializer(text string) ([]string, error) {
 		case c == '-' || (c >= '0' && c <= '9'):
 			start := i
 			i++
-			for i < len(text) && (isNumChar(text[i])) {
+			for i < len(text) && isNumChar(text[i]) {
 				i++
 			}
 			token := strings.TrimRight(text[start:i], "uUlL") // C suffixes

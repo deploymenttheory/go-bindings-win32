@@ -15,7 +15,7 @@ go test ./internal/...
 go test ./bindings/runtime/...
 
 # Live acceptance tests (calls real Win32 APIs; Windows only)
-go test ./acceptance/
+go test ./acceptance/...
 
 # ── Pipeline ─────────────────────────────────────────────────────────────────
 # 0. Update the committed winmd from NuGet (writes PROVENANCE.json; no-op when current)
@@ -38,7 +38,7 @@ go run ./cmd/generate/ bindings --namespace System.Threading
 # Verbose diagnostics (degradations, skips, cycle breaks)
 go run ./cmd/generate/ bindings -v
 
-# Regenerate bindings AND the ABI layout acceptance test (acceptance/abi_generated_test.go)
+# Regenerate bindings AND the ABI layout tests (acceptance/abi/abi_<namespace>_test.go)
 go run ./cmd/generate/ abitest
 
 # Structural integrity checks (errors fail; warnings report)
@@ -289,9 +289,12 @@ DO-NOT-EDIT header are never touched.
 
 ### QA gates (M2)
 
-- **ABI layout test** — `generate abitest` records every emitted struct's
-  computed C layout and writes `acceptance/abi_generated_test.go` with
-  `unsafe.Sizeof`/`Offsetof` assertions (all Foundation + ~400 sampled).
+- **ABI layout tests** — `generate abitest` records every emitted struct's
+  computed C layout and writes one `acceptance/abi/abi_<namespace>_test.go`
+  per namespace: static tables of `unsafe.Sizeof`/`Offsetof` assertions
+  (compile-time constants) over **every** recorded struct, walked by the
+  hand-written `checkABI` driver in `acceptance/abi/abi_test.go`. Stale
+  generated files are pruned.
   Structs whose packed C layout Go cannot reproduce are skipped up front.
 - **`generate validate`** — dangling refs, invalid enum bases, missing DLLs,
   dangling COM bases. Errors fail CI.

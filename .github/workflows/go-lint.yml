@@ -38,11 +38,17 @@ jobs:
           cache: true
           go-version: stable
 
+      # GOOS=windows: the runtime package and the generated tree only build on
+      # Windows, and the runner is Linux — without it the linter typechecks
+      # neither. Findings fail the job (no --issues-exit-code=0).
       - name: Run golangci-lint
         uses: golangci/golangci-lint-action@ba0d7d2ec06a0ea1cb5fa41b2e4a3ab91d21278a # v9.3.0
+        env:
+          GOOS: windows
+          GOARCH: amd64
         with:
           version: latest
-          args: --timeout=30m --verbose --config=./.golangci.yml --issues-exit-code=0
+          args: --timeout=30m --verbose --config=./.golangci.yml
           only-new-issues: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           skip-cache: false              # restore and save cache

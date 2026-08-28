@@ -24,10 +24,15 @@ jobs:
       - name: Build
         run: go build ./...
 
-      # Generated syscall wrappers trip vet's unsafe.Pointer heuristic by
-      # design; vet everything hand-written instead.
-      - name: Vet (non-generated packages)
-        run: go vet ./cmd/... ./internal/... ./acceptance/ ./bindings/runtime/...
+      - name: Vet (hand-written packages)
+        run: go vet ./cmd/... ./internal/... ./acceptance/... ./bindings/runtime/...
+
+      # The generated tree gets every vet check except the two that are wrong
+      # by design here: unsafeptr (uintptr(unsafe.Pointer(p)) in SyscallN
+      # argument lists is the sanctioned keepalive pattern) and stdmethods
+      # (COM vtable methods such as IStream.Seek do not match io.Seeker).
+      - name: Vet (generated bindings)
+        run: go vet -unsafeptr=false -stdmethods=false ./bindings/win32/...
 
       # amd64 and arm64 share Win32's LLP64 layout, so the same bindings must
       # compile for both; 386 is deliberately excluded by build constraints.

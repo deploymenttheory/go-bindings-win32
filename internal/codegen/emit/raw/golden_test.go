@@ -279,7 +279,8 @@ func syntheticNamespaces() []*win32meta.NamespaceMeta {
 		Enums: map[string]win32meta.Enum{
 			"MODE": {BaseType: "int32", Members: []win32meta.EnumMember{{Name: "MODE_A", Value: "0"}, {Name: "MODE_B", Value: "1"}}},
 			"FLAGSX": {BaseType: "uint32", IsFlags: true, Members: []win32meta.EnumMember{
-				{Name: "F_ONE", Value: "1"}, {Name: "F_TWO", Value: "2"}, {Name: "F_ALIAS", Value: "2"}}},
+				{Name: "F_ONE", Value: "1"}, {Name: "F_TWO", Value: "2"}, {Name: "F_ALIAS", Value: "2"},
+			}},
 		},
 		Constants: []win32meta.Constant{
 			{Name: "MAX_THING", Type: native("UInt32"), Value: "42", ValueKind: "UInt"},

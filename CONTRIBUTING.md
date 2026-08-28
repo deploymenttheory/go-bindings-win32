@@ -12,7 +12,9 @@ the template. Small, well-described reports are genuinely useful contributions.
 
 - PR titles follow [Conventional Commits](https://www.conventionalcommits.org/)
   (`feat:`, `fix:`, `docs:`, `chore:`, …) — this is CI-enforced.
-- Run `gofmt`/`go vet` and keep the build and tests green.
+- Run `gofmt`/`go vet` and keep the build and tests green. CI vets the
+  generated tree too (`go vet -unsafeptr=false -stdmethods=false
+  ./bindings/win32/...`) and runs `golangci-lint` under `GOOS=windows`.
 - By contributing you agree to the [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## Generated code

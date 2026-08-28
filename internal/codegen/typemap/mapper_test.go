@@ -68,20 +68,30 @@ func TestGoTypeTable(t *testing.T) {
 		{name: "void pointer", ref: pointerTo(native("Void")), wantGo: "unsafe.Pointer", wantKind: KindPointer},
 		{name: "int pointer", ref: pointerTo(native("UInt32")), wantGo: "*uint32", wantKind: KindPointer},
 		{name: "pointer to degraded pointee stays a pointer", ref: pointerTo(native("Decimal")), wantGo: "unsafe.Pointer", wantKind: KindPointer, wantDiag: true},
-		{name: "handle typedef", ref: apiRef("Foundation", "HANDLE", "Typedef"), wantGo: "foundation.HANDLE", wantKind: KindHandleTypedef,
-			wantImports: map[string]string{"foundation": modulePath + "/bindings/win32/foundation"}},
-		{name: "pointer typedef", ref: apiRef("Foundation", "PWSTR", "Typedef"), wantGo: "foundation.PWSTR", wantKind: KindPointerTypedef,
-			wantImports: map[string]string{"foundation": modulePath + "/bindings/win32/foundation"}},
-		{name: "scalar typedef", ref: apiRef("Foundation", "BOOL", "Typedef"), wantGo: "foundation.BOOL", wantKind: KindScalarTypedef,
-			wantImports: map[string]string{"foundation": modulePath + "/bindings/win32/foundation"}},
+		{
+			name: "handle typedef", ref: apiRef("Foundation", "HANDLE", "Typedef"), wantGo: "foundation.HANDLE", wantKind: KindHandleTypedef,
+			wantImports: map[string]string{"foundation": modulePath + "/bindings/win32/foundation"},
+		},
+		{
+			name: "pointer typedef", ref: apiRef("Foundation", "PWSTR", "Typedef"), wantGo: "foundation.PWSTR", wantKind: KindPointerTypedef,
+			wantImports: map[string]string{"foundation": modulePath + "/bindings/win32/foundation"},
+		},
+		{
+			name: "scalar typedef", ref: apiRef("Foundation", "BOOL", "Typedef"), wantGo: "foundation.BOOL", wantKind: KindScalarTypedef,
+			wantImports: map[string]string{"foundation": modulePath + "/bindings/win32/foundation"},
+		},
 		// The import is recorded before the typedef lookup fails; writeFile's
 		// usage pruning drops it again, so the stray entry is harmless.
-		{name: "unknown typedef degrades", ref: apiRef("Foundation", "NOPE", "Typedef"), wantGo: "uintptr", wantKind: KindUnsupported, wantDiag: true,
-			wantImports: map[string]string{"foundation": modulePath + "/bindings/win32/foundation"}},
+		{
+			name: "unknown typedef degrades", ref: apiRef("Foundation", "NOPE", "Typedef"), wantGo: "uintptr", wantKind: KindUnsupported, wantDiag: true,
+			wantImports: map[string]string{"foundation": modulePath + "/bindings/win32/foundation"},
+		},
 		{name: "local enum unqualified", ref: apiRef("Test.A", "MODE", "Enum"), wantGo: "MODE", wantKind: KindEnum},
 		{name: "local struct", ref: apiRef("Test.A", "S", "Struct"), wantGo: "S", wantKind: KindStruct},
-		{name: "cross-namespace struct qualified", ref: apiRef("Test.B", "T", "Struct"), wantGo: "testb.T", wantKind: KindStruct,
-			wantImports: map[string]string{"testb": modulePath + "/bindings/win32/test/b"}},
+		{
+			name: "cross-namespace struct qualified", ref: apiRef("Test.B", "T", "Struct"), wantGo: "testb.T", wantKind: KindStruct,
+			wantImports: map[string]string{"testb": modulePath + "/bindings/win32/test/b"},
+		},
 		{name: "union", ref: apiRef("Test.A", "U", "Union"), wantGo: "U", wantKind: KindUnion},
 		{name: "delegate", ref: apiRef("Test.A", "PFN", "FunctionPointer"), wantGo: "PFN", wantKind: KindFuncPtr},
 		{name: "com pointer", ref: apiRef("Test.A", "IFoo", "Com"), wantGo: "*IFoo", wantKind: KindComPtr},

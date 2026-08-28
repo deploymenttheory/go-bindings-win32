@@ -436,7 +436,7 @@ func (g *Generator) buildDelegateModels(meta *win32meta.NamespaceMeta, imports t
 
 // delegateSignature renders the callback's Go shape for the doc comment.
 func (g *Generator) delegateSignature(meta *win32meta.NamespaceMeta, delegate *win32meta.FuncPointer, imports typemap.ImportSet) string {
-	var params []string
+	params := make([]string, 0, len(delegate.Params))
 	for i := range delegate.Params {
 		resolved := g.mapper.GoType(&delegate.Params[i].Type, typemap.Context{Namespace: meta.Namespace}, imports)
 		params = append(params, resolved.GoType)

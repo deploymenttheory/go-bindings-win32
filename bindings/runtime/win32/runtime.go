@@ -1,3 +1,5 @@
+//go:build windows
+
 // Package win32 is the runtime layer for the generated Win32 bindings.
 //
 // It is the only package the generated code (and its consumers) need beyond

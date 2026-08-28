@@ -4,31 +4,66 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/internal/win32meta"
 )
 
-// layout is a computed C size/alignment pair (amd64 model: pointers are 8).
+// layout is a computed C size/alignment pair (amd64 model: pointers are 8;
+// Windows arm64 shares every value) plus a census of the scalar leaves the
+// composite flattens to, which decides the ARM64 homogeneous-floating-point-
+// aggregate (HFA) rule: an aggregate of one to four float32s (or float64s)
+// and nothing else travels in V registers, not X registers or memory.
 type layout struct {
 	size  uint32
 	align uint32
 	ok    bool
+	// Leaf census (nested structs and arrays flattened): float32 leaves,
+	// float64 leaves, and every other scalar/pointer leaf.
+	f32, f64, other uint32
 }
 
-// nativeLayouts gives size/alignment for IR Native primitives on amd64.
-var nativeLayouts = map[string]layout{
-	"Boolean": {1, 1, true},
-	"SByte":   {1, 1, true},
-	"Byte":    {1, 1, true},
-	"Char":    {2, 2, true},
-	"Int16":   {2, 2, true},
-	"UInt16":  {2, 2, true},
-	"Int32":   {4, 4, true},
-	"UInt32":  {4, 4, true},
-	"Single":  {4, 4, true},
-	"Int64":   {8, 8, true},
-	"UInt64":  {8, 8, true},
-	"Double":  {8, 8, true},
-	"IntPtr":  {8, 8, true},
-	"UIntPtr": {8, 8, true},
-	"Guid":    {16, 4, true},
+// hfa reports whether the layout is an HFA — one to four scalar leaves, all
+// float32 or all float64 — and the element type.
+func (l layout) hfa() (count uint32, isFloat64 bool, ok bool) {
+	if !l.ok || l.other != 0 {
+		return 0, false, false
+	}
+	switch {
+	case l.f32 > 0 && l.f64 == 0 && l.f32 <= 4:
+		return l.f32, false, true
+	case l.f64 > 0 && l.f32 == 0 && l.f64 <= 4:
+		return l.f64, true, true
+	}
+	return 0, false, false
 }
+
+// registerSized reports whether the size is one the x64 convention passes in
+// (and returns from) an integer register as if it were an integer.
+func (l layout) registerSized() bool {
+	switch l.size {
+	case 1, 2, 4, 8:
+		return l.ok
+	}
+	return false
+}
+
+// nativeLayouts gives size/alignment (and leaf class) for IR Native primitives.
+var nativeLayouts = map[string]layout{
+	"Boolean": {size: 1, align: 1, ok: true, other: 1},
+	"SByte":   {size: 1, align: 1, ok: true, other: 1},
+	"Byte":    {size: 1, align: 1, ok: true, other: 1},
+	"Char":    {size: 2, align: 2, ok: true, other: 1},
+	"Int16":   {size: 2, align: 2, ok: true, other: 1},
+	"UInt16":  {size: 2, align: 2, ok: true, other: 1},
+	"Int32":   {size: 4, align: 4, ok: true, other: 1},
+	"UInt32":  {size: 4, align: 4, ok: true, other: 1},
+	"Single":  {size: 4, align: 4, ok: true, f32: 1},
+	"Int64":   {size: 8, align: 8, ok: true, other: 1},
+	"UInt64":  {size: 8, align: 8, ok: true, other: 1},
+	"Double":  {size: 8, align: 8, ok: true, f64: 1},
+	"IntPtr":  {size: 8, align: 8, ok: true, other: 1},
+	"UIntPtr": {size: 8, align: 8, ok: true, other: 1},
+	"Guid":    {size: 16, align: 4, ok: true, other: 4},
+}
+
+// wordLayout is the layout of one pointer-sized non-float leaf.
+var wordLayout = layout{size: 8, align: 8, ok: true, other: 1}
 
 // layoutOf computes the C layout of a type reference. nested resolves
 // same-struct anonymous types. Returns ok=false when a layout cannot be
@@ -41,13 +76,16 @@ func (g *Generator) layoutOf(ref *win32meta.TypeRef, nested map[string]win32meta
 		}
 		return layout{}
 	case "PointerTo":
-		return layout{8, 8, true}
+		return wordLayout
 	case "Array":
 		element := g.layoutOf(ref.Child, nested)
 		if !element.ok || ref.ArrayLen == 0 {
 			return layout{}
 		}
-		return layout{element.size * ref.ArrayLen, element.align, true}
+		return layout{
+			size: element.size * ref.ArrayLen, align: element.align, ok: true,
+			f32: element.f32 * ref.ArrayLen, f64: element.f64 * ref.ArrayLen, other: element.other * ref.ArrayLen,
+		}
 	case "ApiRef":
 		return g.layoutOfApiRef(ref, nested)
 	}
@@ -69,14 +107,14 @@ func (g *Generator) layoutOfApiRef(ref *win32meta.TypeRef, nested map[string]win
 		if base := g.registry.EnumBase(ref.Api, ref.Name); base != "" {
 			return nativeLayouts[goBaseToNative(base)]
 		}
-		return layout{4, 4, true}
+		return nativeLayouts["Int32"]
 	case "Typedef":
 		if typedef := g.registry.Typedef(ref.Api, ref.Name); typedef != nil {
 			return g.layoutOf(&typedef.Underlying, nil)
 		}
 		return layout{}
 	case "FunctionPointer", "Com":
-		return layout{8, 8, true}
+		return wordLayout
 	case "Struct", "Union":
 		if definition := g.registry.StructIndex[ref.Api+"."+ref.Name]; definition != nil {
 			// Layouts must describe the variant the generator emits.
@@ -95,22 +133,27 @@ type structLayout struct {
 	align   uint32
 	offsets []uint32
 	ok      bool
+	// Leaf census, as in layout.
+	f32, f64, other uint32
 }
 
 // layoutOfStruct computes a struct or union's C layout, honoring its
 // PackingSize when it narrows alignment.
 func (g *Generator) layoutOfStruct(definition *win32meta.Struct) layout {
 	detailed := g.structLayoutOf(definition, true)
-	return layout{detailed.size, detailed.align, detailed.ok}
+	return layout{size: detailed.size, align: detailed.align, ok: detailed.ok, f32: detailed.f32, f64: detailed.f64, other: detailed.other}
 }
 
 // structLayoutOf computes size, alignment, and field offsets. clampPacking
 // applies the struct's own PackingSize (the C layout); passing false yields
 // the layout Go's natural alignment produces for the emitted fields —
 // comparing the two decides whether a packed struct is representable.
+//
+// A union's leaf census sums every member's leaves, so a union mixing floats
+// with anything else (VARIANT) is never classified as an HFA.
 func (g *Generator) structLayoutOf(definition *win32meta.Struct, clampPacking bool) structLayout {
-	var size, align uint32
-	offsets := make([]uint32, 0, len(definition.Fields))
+	var result structLayout
+	result.offsets = make([]uint32, 0, len(definition.Fields))
 	for i := range definition.Fields {
 		field := g.layoutOf(&definition.Fields[i].Type, definition.NestedTypes)
 		if !field.ok {
@@ -120,24 +163,29 @@ func (g *Generator) structLayoutOf(definition *win32meta.Struct, clampPacking bo
 		if clampPacking && definition.PackingSize != 0 && uint32(definition.PackingSize) < fieldAlign {
 			fieldAlign = uint32(definition.PackingSize)
 		}
-		if fieldAlign > align {
-			align = fieldAlign
+		if fieldAlign > result.align {
+			result.align = fieldAlign
 		}
 		if definition.IsUnion {
-			offsets = append(offsets, 0)
-			if field.size > size {
-				size = field.size
+			result.offsets = append(result.offsets, 0)
+			if field.size > result.size {
+				result.size = field.size
 			}
 		} else {
-			size = roundUp(size, fieldAlign)
-			offsets = append(offsets, size)
-			size += field.size
+			result.size = roundUp(result.size, fieldAlign)
+			result.offsets = append(result.offsets, result.size)
+			result.size += field.size
 		}
+		result.f32 += field.f32
+		result.f64 += field.f64
+		result.other += field.other
 	}
-	if align == 0 {
-		align = 1
+	if result.align == 0 {
+		result.align = 1
 	}
-	return structLayout{roundUp(size, align), align, offsets, true}
+	result.size = roundUp(result.size, result.align)
+	result.ok = true
+	return result
 }
 
 func roundUp(value, multiple uint32) uint32 {

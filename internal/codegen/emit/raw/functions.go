@@ -394,11 +394,23 @@ func registerStructWord(size uint32, name string) (string, bool) {
 
 // buildReturnShape selects the body/return template shape (idiomatic).
 func (g *Generator) buildReturnShape(model *view.FunctionModel, meta *win32meta.NamespaceMeta, function *win32meta.Function, resolved typemap.Resolved) bool {
+	structRet := ""
 	switch resolved.Kind {
 	case typemap.KindVoid:
 		model.ReturnKind = view.RetVoid
 		return true
-	case typemap.KindStruct, typemap.KindUnion, typemap.KindArray, typemap.KindGUID:
+	case typemap.KindStruct, typemap.KindUnion:
+		// A non-member function returns a 1/2/4/8-byte aggregate in RAX (x64)
+		// or X0 (ARM64) as if it were an integer — unless it is a float
+		// aggregate, which ARM64 returns in V registers instead.
+		returnLayout := g.layoutOf(&function.Return, nil)
+		if _, _, isHFA := returnLayout.hfa(); !returnLayout.registerSized() || isHFA {
+			g.diag("function %s: by-value %s return not marshalable, function skipped",
+				function.Name, resolved.GoType)
+			return false
+		}
+		structRet = "win32.StructRet[" + resolved.GoType + "](r1)"
+	case typemap.KindArray, typemap.KindGUID:
 		g.diag("function %s: by-value %s return not marshalable, function skipped",
 			function.Name, resolved.GoType)
 		return false
@@ -410,6 +422,9 @@ func (g *Generator) buildReturnShape(model *view.FunctionModel, meta *win32meta.
 	}
 
 	model.RetExpr = returnConversion(resolved)
+	if structRet != "" {
+		model.RetExpr = structRet
+	}
 
 	// BOOL + SetLastError → error (the BOOL carries nothing beyond success).
 	if function.SetLastError && isBOOL(resolved) {

@@ -229,7 +229,19 @@ func (g *Generator) buildComMethod(meta *win32meta.NamespaceMeta, interfaceName 
 	case returnResolved.Kind == typemap.KindVoid:
 		model.ReturnKind = view.RetVoid
 	case returnResolved.Kind == typemap.KindStruct, returnResolved.Kind == typemap.KindUnion,
-		returnResolved.Kind == typemap.KindArray, returnResolved.Kind == typemap.KindGUID:
+		returnResolved.Kind == typemap.KindGUID:
+		// A non-static member function returns an aggregate of any size
+		// through a hidden result pointer placed right after `this`, on x64
+		// and ARM64 alike (the C-style vtable declarations in d2d1.h spell
+		// it out; windows-rs emits the same shape). The buffer is a heap
+		// local — see runtime outparam.go for why never a stack address.
+		model.Preamble = append([]string{"_ret := new(" + returnResolved.GoType + ")"}, model.Preamble...)
+		model.ArgExprs = append([]string{"uintptr(win32.OutParam(unsafe.Pointer(_ret)))"}, model.ArgExprs...)
+		model.ReturnKind = view.RetStructOut
+		model.ReturnSig = returnResolved.GoType
+		model.RetExpr = "*_ret"
+		scratch["win32"] = g.mapper.RuntimeImportPath()
+	case returnResolved.Kind == typemap.KindArray:
 		g.diag("interface %s: method %s by-value %s return not marshalable, method skipped",
 			interfaceName, method.Name, returnResolved.GoType)
 		return view.ComMethodModel{}, false

@@ -127,6 +127,22 @@ func UTF16ToString(p *uint16) string {
 // is 1, 2, 4 or 8 bytes. Anything larger travels by reference under the same
 // ABI and would need a different shape entirely, so it panics rather than
 // silently passing a truncated value the callee would read as garbage.
+// StructRet reconstructs a by-value struct of 1, 2, 4 or 8 bytes from the
+// syscall result word: the x64 convention returns such an aggregate from a
+// non-member function in RAX as if it were an integer, and ARM64 returns a
+// non-float aggregate of up to 8 bytes in X0. The generator emits this only
+// for those sizes (and never for a float aggregate, which ARM64 returns in
+// V registers); anything larger panics rather than yielding garbage.
+func StructRet[T any](word uintptr) T {
+	var value T
+	if unsafe.Sizeof(value) > unsafe.Sizeof(word) {
+		panic("win32: by-value struct is too large to return in a register")
+	}
+	// The low bytes of the word are the struct's bytes (little-endian).
+	value = *(*T)(unsafe.Pointer(&word))
+	return value
+}
+
 func StructArg[T any](v T) uintptr {
 	var word uintptr
 	if unsafe.Sizeof(v) > unsafe.Sizeof(word) {

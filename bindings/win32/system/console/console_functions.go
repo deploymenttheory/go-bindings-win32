@@ -60,6 +60,7 @@ var (
 	procGetConsoleCursorMode            = modKERNEL32.NewProc("GetConsoleCursorMode")
 	procGetConsoleDisplayMode           = modKERNEL32.NewProc("GetConsoleDisplayMode")
 	procGetConsoleFontInfo              = modKERNEL32.NewProc("GetConsoleFontInfo")
+	procGetConsoleFontSize              = modKERNEL32.NewProc("GetConsoleFontSize")
 	procGetConsoleHardwareState         = modKERNEL32.NewProc("GetConsoleHardwareState")
 	procGetConsoleHistoryInfo           = modKERNEL32.NewProc("GetConsoleHistoryInfo")
 	procGetConsoleInputExeName          = modKERNEL32.NewProc("GetConsoleInputExeNameW")
@@ -79,6 +80,7 @@ var (
 	procGetConsoleWindow                = modKERNEL32.NewProc("GetConsoleWindow")
 	procGetCurrentConsoleFont           = modKERNEL32.NewProc("GetCurrentConsoleFont")
 	procGetCurrentConsoleFontEx         = modKERNEL32.NewProc("GetCurrentConsoleFontEx")
+	procGetLargestConsoleWindowSize     = modKERNEL32.NewProc("GetLargestConsoleWindowSize")
 	procGetNumberOfConsoleFonts         = modKERNEL32.NewProc("GetNumberOfConsoleFonts")
 	procGetNumberOfConsoleInputEvents   = modKERNEL32.NewProc("GetNumberOfConsoleInputEvents")
 	procGetNumberOfConsoleMouseButtons  = modKERNEL32.NewProc("GetNumberOfConsoleMouseButtons")
@@ -204,6 +206,7 @@ var Procs = struct {
 	GetConsoleCursorMode            *win32.Proc
 	GetConsoleDisplayMode           *win32.Proc
 	GetConsoleFontInfo              *win32.Proc
+	GetConsoleFontSize              *win32.Proc
 	GetConsoleHardwareState         *win32.Proc
 	GetConsoleHistoryInfo           *win32.Proc
 	GetConsoleInputExeName          *win32.Proc
@@ -225,6 +228,7 @@ var Procs = struct {
 	GetConsoleWindow                *win32.Proc
 	GetCurrentConsoleFont           *win32.Proc
 	GetCurrentConsoleFontEx         *win32.Proc
+	GetLargestConsoleWindowSize     *win32.Proc
 	GetNumberOfConsoleFonts         *win32.Proc
 	GetNumberOfConsoleInputEvents   *win32.Proc
 	GetNumberOfConsoleMouseButtons  *win32.Proc
@@ -341,6 +345,7 @@ var Procs = struct {
 	GetConsoleCursorMode:            procGetConsoleCursorMode,
 	GetConsoleDisplayMode:           procGetConsoleDisplayMode,
 	GetConsoleFontInfo:              procGetConsoleFontInfo,
+	GetConsoleFontSize:              procGetConsoleFontSize,
 	GetConsoleHardwareState:         procGetConsoleHardwareState,
 	GetConsoleHistoryInfo:           procGetConsoleHistoryInfo,
 	GetConsoleInputExeName:          procGetConsoleInputExeName,
@@ -362,6 +367,7 @@ var Procs = struct {
 	GetConsoleWindow:                procGetConsoleWindow,
 	GetCurrentConsoleFont:           procGetCurrentConsoleFont,
 	GetCurrentConsoleFontEx:         procGetCurrentConsoleFontEx,
+	GetLargestConsoleWindowSize:     procGetLargestConsoleWindowSize,
 	GetNumberOfConsoleFonts:         procGetNumberOfConsoleFonts,
 	GetNumberOfConsoleInputEvents:   procGetNumberOfConsoleInputEvents,
 	GetNumberOfConsoleMouseButtons:  procGetNumberOfConsoleMouseButtons,
@@ -779,6 +785,16 @@ func GetConsoleFontInfo(hConsoleOutput foundation.HANDLE, bMaximumWindow bool, n
 	return uint32(r1)
 }
 
+// GetConsoleFontSize calls KERNEL32!GetConsoleFontSize.
+// https://learn.microsoft.com/windows/console/getconsolefontsize
+func GetConsoleFontSize(hConsoleOutput foundation.HANDLE, nFont uint32) (COORD, error) {
+	r1, _, e1 := syscall.SyscallN(procGetConsoleFontSize.Addr(), uintptr(hConsoleOutput), uintptr(nFont))
+	if e1 != 0 {
+		return win32.StructRet[COORD](r1), e1
+	}
+	return win32.StructRet[COORD](r1), nil
+}
+
 // GetConsoleHardwareState calls KERNEL32!GetConsoleHardwareState.
 func GetConsoleHardwareState(hConsoleOutput foundation.HANDLE, lpResolution *COORD, lpFontSize *COORD) bool {
 	r1, _, _ := syscall.SyscallN(procGetConsoleHardwareState.Addr(), uintptr(hConsoleOutput), uintptr(unsafe.Pointer(lpResolution)), uintptr(unsafe.Pointer(lpFontSize)))
@@ -962,6 +978,16 @@ func GetCurrentConsoleFontEx(hConsoleOutput foundation.HANDLE, bMaximumWindow bo
 		return win32.LastError(e1)
 	}
 	return nil
+}
+
+// GetLargestConsoleWindowSize calls KERNEL32!GetLargestConsoleWindowSize.
+// https://learn.microsoft.com/windows/console/getlargestconsolewindowsize
+func GetLargestConsoleWindowSize(hConsoleOutput foundation.HANDLE) (COORD, error) {
+	r1, _, e1 := syscall.SyscallN(procGetLargestConsoleWindowSize.Addr(), uintptr(hConsoleOutput))
+	if e1 != 0 {
+		return win32.StructRet[COORD](r1), e1
+	}
+	return win32.StructRet[COORD](r1), nil
 }
 
 // GetNumberOfConsoleFonts calls KERNEL32!GetNumberOfConsoleFonts.

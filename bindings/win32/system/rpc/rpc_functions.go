@@ -171,16 +171,21 @@ var (
 	procNDRSContextUnmarshall                          = modRPCRT4.NewProc("NDRSContextUnmarshall")
 	procNDRSContextUnmarshall2                         = modRPCRT4.NewProc("NDRSContextUnmarshall2")
 	procNDRSContextUnmarshallEx                        = modRPCRT4.NewProc("NDRSContextUnmarshallEx")
+	procNdr64AsyncClientCall                           = modRPCRT4.NewProc("Ndr64AsyncClientCall")
 	procNdr64AsyncServerCall64                         = modRPCRT4.NewProc("Ndr64AsyncServerCall64")
 	procNdr64AsyncServerCallAll                        = modRPCRT4.NewProc("Ndr64AsyncServerCallAll")
+	procNdr64DcomAsyncClientCall                       = modRPCRT4.NewProc("Ndr64DcomAsyncClientCall")
 	procNdr64DcomAsyncStubCall                         = modRPCRT4.NewProc("Ndr64DcomAsyncStubCall")
 	procNdrAllocate                                    = modRPCRT4.NewProc("NdrAllocate")
+	procNdrAsyncClientCall                             = modRPCRT4.NewProc("NdrAsyncClientCall")
 	procNdrAsyncServerCall                             = modRPCRT4.NewProc("NdrAsyncServerCall")
 	procNdrByteCountPointerBufferSize                  = modRPCRT4.NewProc("NdrByteCountPointerBufferSize")
 	procNdrByteCountPointerFree                        = modRPCRT4.NewProc("NdrByteCountPointerFree")
 	procNdrByteCountPointerMarshall                    = modRPCRT4.NewProc("NdrByteCountPointerMarshall")
 	procNdrByteCountPointerUnmarshall                  = modRPCRT4.NewProc("NdrByteCountPointerUnmarshall")
 	procNdrClearOutParameters                          = modRPCRT4.NewProc("NdrClearOutParameters")
+	procNdrClientCall2                                 = modRPCRT4.NewProc("NdrClientCall2")
+	procNdrClientCall3                                 = modRPCRT4.NewProc("NdrClientCall3")
 	procNdrClientContextMarshall                       = modRPCRT4.NewProc("NdrClientContextMarshall")
 	procNdrClientContextUnmarshall                     = modRPCRT4.NewProc("NdrClientContextUnmarshall")
 	procNdrClientInitialize                            = modRPCRT4.NewProc("NdrClientInitialize")
@@ -227,6 +232,7 @@ var (
 	procNdrCorrelationInitialize                       = modRPCRT4.NewProc("NdrCorrelationInitialize")
 	procNdrCorrelationPass                             = modRPCRT4.NewProc("NdrCorrelationPass")
 	procNdrCreateServerInterfaceFromStub               = modRPCRT4.NewProc("NdrCreateServerInterfaceFromStub")
+	procNdrDcomAsyncClientCall                         = modRPCRT4.NewProc("NdrDcomAsyncClientCall")
 	procNdrDcomAsyncStubCall                           = modRPCRT4.NewProc("NdrDcomAsyncStubCall")
 	procNdrEncapsulatedUnionBufferSize                 = modRPCRT4.NewProc("NdrEncapsulatedUnionBufferSize")
 	procNdrEncapsulatedUnionFree                       = modRPCRT4.NewProc("NdrEncapsulatedUnionFree")
@@ -251,6 +257,8 @@ var (
 	procNdrInterfacePointerUnmarshall                  = modRPCRT4.NewProc("NdrInterfacePointerUnmarshall")
 	procNdrMapCommAndFaultStatus                       = modRPCRT4.NewProc("NdrMapCommAndFaultStatus")
 	procNdrMesProcEncodeDecode                         = modRPCRT4.NewProc("NdrMesProcEncodeDecode")
+	procNdrMesProcEncodeDecode2                        = modRPCRT4.NewProc("NdrMesProcEncodeDecode2")
+	procNdrMesProcEncodeDecode3                        = modRPCRT4.NewProc("NdrMesProcEncodeDecode3")
 	procNdrMesSimpleTypeAlignSize                      = modRPCRT4.NewProc("NdrMesSimpleTypeAlignSize")
 	procNdrMesSimpleTypeAlignSizeAll                   = modRPCRT4.NewProc("NdrMesSimpleTypeAlignSizeAll")
 	procNdrMesSimpleTypeDecode                         = modRPCRT4.NewProc("NdrMesSimpleTypeDecode")
@@ -620,16 +628,21 @@ var Procs = struct {
 	NDRSContextUnmarshall                          *win32.Proc
 	NDRSContextUnmarshall2                         *win32.Proc
 	NDRSContextUnmarshallEx                        *win32.Proc
+	Ndr64AsyncClientCall                           *win32.Proc
 	Ndr64AsyncServerCall64                         *win32.Proc
 	Ndr64AsyncServerCallAll                        *win32.Proc
+	Ndr64DcomAsyncClientCall                       *win32.Proc
 	Ndr64DcomAsyncStubCall                         *win32.Proc
 	NdrAllocate                                    *win32.Proc
+	NdrAsyncClientCall                             *win32.Proc
 	NdrAsyncServerCall                             *win32.Proc
 	NdrByteCountPointerBufferSize                  *win32.Proc
 	NdrByteCountPointerFree                        *win32.Proc
 	NdrByteCountPointerMarshall                    *win32.Proc
 	NdrByteCountPointerUnmarshall                  *win32.Proc
 	NdrClearOutParameters                          *win32.Proc
+	NdrClientCall2                                 *win32.Proc
+	NdrClientCall3                                 *win32.Proc
 	NdrClientContextMarshall                       *win32.Proc
 	NdrClientContextUnmarshall                     *win32.Proc
 	NdrClientInitialize                            *win32.Proc
@@ -676,6 +689,7 @@ var Procs = struct {
 	NdrCorrelationInitialize                       *win32.Proc
 	NdrCorrelationPass                             *win32.Proc
 	NdrCreateServerInterfaceFromStub               *win32.Proc
+	NdrDcomAsyncClientCall                         *win32.Proc
 	NdrDcomAsyncStubCall                           *win32.Proc
 	NdrEncapsulatedUnionBufferSize                 *win32.Proc
 	NdrEncapsulatedUnionFree                       *win32.Proc
@@ -700,6 +714,8 @@ var Procs = struct {
 	NdrInterfacePointerUnmarshall                  *win32.Proc
 	NdrMapCommAndFaultStatus                       *win32.Proc
 	NdrMesProcEncodeDecode                         *win32.Proc
+	NdrMesProcEncodeDecode2                        *win32.Proc
+	NdrMesProcEncodeDecode3                        *win32.Proc
 	NdrMesSimpleTypeAlignSize                      *win32.Proc
 	NdrMesSimpleTypeAlignSizeAll                   *win32.Proc
 	NdrMesSimpleTypeDecode                         *win32.Proc
@@ -1120,16 +1136,21 @@ var Procs = struct {
 	NDRSContextUnmarshall:                          procNDRSContextUnmarshall,
 	NDRSContextUnmarshall2:                         procNDRSContextUnmarshall2,
 	NDRSContextUnmarshallEx:                        procNDRSContextUnmarshallEx,
+	Ndr64AsyncClientCall:                           procNdr64AsyncClientCall,
 	Ndr64AsyncServerCall64:                         procNdr64AsyncServerCall64,
 	Ndr64AsyncServerCallAll:                        procNdr64AsyncServerCallAll,
+	Ndr64DcomAsyncClientCall:                       procNdr64DcomAsyncClientCall,
 	Ndr64DcomAsyncStubCall:                         procNdr64DcomAsyncStubCall,
 	NdrAllocate:                                    procNdrAllocate,
+	NdrAsyncClientCall:                             procNdrAsyncClientCall,
 	NdrAsyncServerCall:                             procNdrAsyncServerCall,
 	NdrByteCountPointerBufferSize:                  procNdrByteCountPointerBufferSize,
 	NdrByteCountPointerFree:                        procNdrByteCountPointerFree,
 	NdrByteCountPointerMarshall:                    procNdrByteCountPointerMarshall,
 	NdrByteCountPointerUnmarshall:                  procNdrByteCountPointerUnmarshall,
 	NdrClearOutParameters:                          procNdrClearOutParameters,
+	NdrClientCall2:                                 procNdrClientCall2,
+	NdrClientCall3:                                 procNdrClientCall3,
 	NdrClientContextMarshall:                       procNdrClientContextMarshall,
 	NdrClientContextUnmarshall:                     procNdrClientContextUnmarshall,
 	NdrClientInitialize:                            procNdrClientInitialize,
@@ -1176,6 +1197,7 @@ var Procs = struct {
 	NdrCorrelationInitialize:                       procNdrCorrelationInitialize,
 	NdrCorrelationPass:                             procNdrCorrelationPass,
 	NdrCreateServerInterfaceFromStub:               procNdrCreateServerInterfaceFromStub,
+	NdrDcomAsyncClientCall:                         procNdrDcomAsyncClientCall,
 	NdrDcomAsyncStubCall:                           procNdrDcomAsyncStubCall,
 	NdrEncapsulatedUnionBufferSize:                 procNdrEncapsulatedUnionBufferSize,
 	NdrEncapsulatedUnionFree:                       procNdrEncapsulatedUnionFree,
@@ -1200,6 +1222,8 @@ var Procs = struct {
 	NdrInterfacePointerUnmarshall:                  procNdrInterfacePointerUnmarshall,
 	NdrMapCommAndFaultStatus:                       procNdrMapCommAndFaultStatus,
 	NdrMesProcEncodeDecode:                         procNdrMesProcEncodeDecode,
+	NdrMesProcEncodeDecode2:                        procNdrMesProcEncodeDecode2,
+	NdrMesProcEncodeDecode3:                        procNdrMesProcEncodeDecode3,
 	NdrMesSimpleTypeAlignSize:                      procNdrMesSimpleTypeAlignSize,
 	NdrMesSimpleTypeAlignSizeAll:                   procNdrMesSimpleTypeAlignSizeAll,
 	NdrMesSimpleTypeDecode:                         procNdrMesSimpleTypeDecode,
@@ -2119,6 +2143,14 @@ func NDRSContextUnmarshallEx(BindingHandle unsafe.Pointer, pBuff unsafe.Pointer,
 	return (*NDR_SCONTEXT)(unsafe.Pointer(r1))
 }
 
+// Ndr64AsyncClientCall calls RPCRT4!Ndr64AsyncClientCall.
+// https://learn.microsoft.com/windows/win32/api/rpcndr/nf-rpcndr-ndr64asyncclientcall
+// Minimum OS: windows5.1.2600.
+func Ndr64AsyncClientCall(pProxyInfo *MIDL_STUBLESS_PROXY_INFO, nProcNum uint32, pReturnValue unsafe.Pointer) CLIENT_CALL_RETURN {
+	r1, _, _ := syscall.SyscallN(procNdr64AsyncClientCall.Addr(), uintptr(unsafe.Pointer(pProxyInfo)), uintptr(nProcNum), uintptr(unsafe.Pointer(pReturnValue)))
+	return win32.StructRet[CLIENT_CALL_RETURN](r1)
+}
+
 // Ndr64AsyncServerCall64 calls RPCRT4!Ndr64AsyncServerCall64.
 func Ndr64AsyncServerCall64(pRpcMsg *RPC_MESSAGE) {
 	syscall.SyscallN(procNdr64AsyncServerCall64.Addr(), uintptr(unsafe.Pointer(pRpcMsg)))
@@ -2131,6 +2163,12 @@ func Ndr64AsyncServerCallAll(pRpcMsg *RPC_MESSAGE) {
 	syscall.SyscallN(procNdr64AsyncServerCallAll.Addr(), uintptr(unsafe.Pointer(pRpcMsg)))
 }
 
+// Ndr64DcomAsyncClientCall calls RPCRT4!Ndr64DcomAsyncClientCall.
+func Ndr64DcomAsyncClientCall(pProxyInfo *MIDL_STUBLESS_PROXY_INFO, nProcNum uint32, pReturnValue unsafe.Pointer) CLIENT_CALL_RETURN {
+	r1, _, _ := syscall.SyscallN(procNdr64DcomAsyncClientCall.Addr(), uintptr(unsafe.Pointer(pProxyInfo)), uintptr(nProcNum), uintptr(unsafe.Pointer(pReturnValue)))
+	return win32.StructRet[CLIENT_CALL_RETURN](r1)
+}
+
 // Ndr64DcomAsyncStubCall calls RPCRT4!Ndr64DcomAsyncStubCall.
 func Ndr64DcomAsyncStubCall(pThis *systemcom.IRpcStubBuffer, pChannel *systemcom.IRpcChannelBuffer, pRpcMsg *RPC_MESSAGE, pdwStubPhase *uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procNdr64DcomAsyncStubCall.Addr(), uintptr(unsafe.Pointer(pThis)), uintptr(unsafe.Pointer(pChannel)), uintptr(unsafe.Pointer(pRpcMsg)), uintptr(unsafe.Pointer(pdwStubPhase)))
@@ -2141,6 +2179,14 @@ func Ndr64DcomAsyncStubCall(pThis *systemcom.IRpcStubBuffer, pChannel *systemcom
 func NdrAllocate(pStubMsg *MIDL_STUB_MESSAGE, Len uintptr) unsafe.Pointer {
 	r1, _, _ := syscall.SyscallN(procNdrAllocate.Addr(), uintptr(unsafe.Pointer(pStubMsg)), uintptr(Len))
 	return unsafe.Pointer(r1)
+}
+
+// NdrAsyncClientCall calls RPCRT4!NdrAsyncClientCall.
+// https://learn.microsoft.com/windows/win32/api/rpcndr/nf-rpcndr-ndrasyncclientcall
+// Minimum OS: windows5.0.
+func NdrAsyncClientCall(pStubDescriptor *MIDL_STUB_DESC, pFormat *byte) CLIENT_CALL_RETURN {
+	r1, _, _ := syscall.SyscallN(procNdrAsyncClientCall.Addr(), uintptr(unsafe.Pointer(pStubDescriptor)), uintptr(unsafe.Pointer(pFormat)))
+	return win32.StructRet[CLIENT_CALL_RETURN](r1)
 }
 
 // NdrAsyncServerCall calls RPCRT4!NdrAsyncServerCall.
@@ -2177,6 +2223,22 @@ func NdrByteCountPointerUnmarshall(pStubMsg *MIDL_STUB_MESSAGE, ppMemory **byte,
 // Minimum OS: windows5.0.
 func NdrClearOutParameters(pStubMsg *MIDL_STUB_MESSAGE, pFormat *byte, ArgAddr unsafe.Pointer) {
 	syscall.SyscallN(procNdrClearOutParameters.Addr(), uintptr(unsafe.Pointer(pStubMsg)), uintptr(unsafe.Pointer(pFormat)), uintptr(unsafe.Pointer(ArgAddr)))
+}
+
+// NdrClientCall2 calls RPCRT4!NdrClientCall2.
+// https://learn.microsoft.com/windows/win32/api/rpcndr/nf-rpcndr-ndrclientcall2
+// Minimum OS: windows5.0.
+func NdrClientCall2(pStubDescriptor *MIDL_STUB_DESC, pFormat *byte) CLIENT_CALL_RETURN {
+	r1, _, _ := syscall.SyscallN(procNdrClientCall2.Addr(), uintptr(unsafe.Pointer(pStubDescriptor)), uintptr(unsafe.Pointer(pFormat)))
+	return win32.StructRet[CLIENT_CALL_RETURN](r1)
+}
+
+// NdrClientCall3 calls RPCRT4!NdrClientCall3.
+// https://learn.microsoft.com/windows/win32/api/rpcndr/nf-rpcndr-ndrclientcall3
+// Minimum OS: windows5.0.
+func NdrClientCall3(pProxyInfo *MIDL_STUBLESS_PROXY_INFO, nProcNum uint32, pReturnValue unsafe.Pointer) CLIENT_CALL_RETURN {
+	r1, _, _ := syscall.SyscallN(procNdrClientCall3.Addr(), uintptr(unsafe.Pointer(pProxyInfo)), uintptr(nProcNum), uintptr(unsafe.Pointer(pReturnValue)))
+	return win32.StructRet[CLIENT_CALL_RETURN](r1)
 }
 
 // NdrClientContextMarshall calls RPCRT4!NdrClientContextMarshall.
@@ -2460,6 +2522,14 @@ func NdrCreateServerInterfaceFromStub(pStub *systemcom.IRpcStubBuffer, pServerIf
 	return RPC_STATUS(r1)
 }
 
+// NdrDcomAsyncClientCall calls RPCRT4!NdrDcomAsyncClientCall.
+// https://learn.microsoft.com/windows/win32/api/rpcndr/nf-rpcndr-ndrdcomasyncclientcall
+// Minimum OS: windows5.0.
+func NdrDcomAsyncClientCall(pStubDescriptor *MIDL_STUB_DESC, pFormat *byte) CLIENT_CALL_RETURN {
+	r1, _, _ := syscall.SyscallN(procNdrDcomAsyncClientCall.Addr(), uintptr(unsafe.Pointer(pStubDescriptor)), uintptr(unsafe.Pointer(pFormat)))
+	return win32.StructRet[CLIENT_CALL_RETURN](r1)
+}
+
 // NdrDcomAsyncStubCall calls RPCRT4!NdrDcomAsyncStubCall.
 func NdrDcomAsyncStubCall(pThis *systemcom.IRpcStubBuffer, pChannel *systemcom.IRpcChannelBuffer, pRpcMsg *RPC_MESSAGE, pdwStubPhase *uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procNdrDcomAsyncStubCall.Addr(), uintptr(unsafe.Pointer(pThis)), uintptr(unsafe.Pointer(pChannel)), uintptr(unsafe.Pointer(pRpcMsg)), uintptr(unsafe.Pointer(pdwStubPhase)))
@@ -2603,6 +2673,20 @@ func NdrMapCommAndFaultStatus(pStubMsg *MIDL_STUB_MESSAGE, pCommStatus *uint32, 
 // NdrMesProcEncodeDecode calls RPCRT4!NdrMesProcEncodeDecode.
 func NdrMesProcEncodeDecode(Handle unsafe.Pointer, pStubDesc *MIDL_STUB_DESC, pFormatString *byte) {
 	syscall.SyscallN(procNdrMesProcEncodeDecode.Addr(), uintptr(unsafe.Pointer(Handle)), uintptr(unsafe.Pointer(pStubDesc)), uintptr(unsafe.Pointer(pFormatString)))
+}
+
+// NdrMesProcEncodeDecode2 calls RPCRT4!NdrMesProcEncodeDecode2.
+// https://learn.microsoft.com/windows/win32/api/midles/nf-midles-ndrmesprocencodedecode2
+// Minimum OS: windows5.0.
+func NdrMesProcEncodeDecode2(Handle unsafe.Pointer, pStubDesc *MIDL_STUB_DESC, pFormatString *byte) CLIENT_CALL_RETURN {
+	r1, _, _ := syscall.SyscallN(procNdrMesProcEncodeDecode2.Addr(), uintptr(unsafe.Pointer(Handle)), uintptr(unsafe.Pointer(pStubDesc)), uintptr(unsafe.Pointer(pFormatString)))
+	return win32.StructRet[CLIENT_CALL_RETURN](r1)
+}
+
+// NdrMesProcEncodeDecode3 calls RPCRT4!NdrMesProcEncodeDecode3.
+func NdrMesProcEncodeDecode3(Handle unsafe.Pointer, pProxyInfo *MIDL_STUBLESS_PROXY_INFO, nProcNum uint32, pReturnValue unsafe.Pointer) CLIENT_CALL_RETURN {
+	r1, _, _ := syscall.SyscallN(procNdrMesProcEncodeDecode3.Addr(), uintptr(unsafe.Pointer(Handle)), uintptr(unsafe.Pointer(pProxyInfo)), uintptr(nProcNum), uintptr(unsafe.Pointer(pReturnValue)))
+	return win32.StructRet[CLIENT_CALL_RETURN](r1)
 }
 
 // NdrMesSimpleTypeAlignSize calls RPCRT4!NdrMesSimpleTypeAlignSize.

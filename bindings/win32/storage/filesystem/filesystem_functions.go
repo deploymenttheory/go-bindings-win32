@@ -101,8 +101,10 @@ var (
 	procLogTailAdvanceFailure               = modclfsw32.NewProc("LogTailAdvanceFailure")
 	procLsnBlockOffset                      = modclfsw32.NewProc("LsnBlockOffset")
 	procLsnContainer                        = modclfsw32.NewProc("LsnContainer")
+	procLsnCreate                           = modclfsw32.NewProc("LsnCreate")
 	procLsnEqual                            = modclfsw32.NewProc("LsnEqual")
 	procLsnGreater                          = modclfsw32.NewProc("LsnGreater")
+	procLsnIncrement                        = modclfsw32.NewProc("LsnIncrement")
 	procLsnInvalid                          = modclfsw32.NewProc("LsnInvalid")
 	procLsnLess                             = modclfsw32.NewProc("LsnLess")
 	procLsnNull                             = modclfsw32.NewProc("LsnNull")
@@ -685,8 +687,10 @@ var Procs = struct {
 	LogTailAdvanceFailure               *win32.Proc
 	LsnBlockOffset                      *win32.Proc
 	LsnContainer                        *win32.Proc
+	LsnCreate                           *win32.Proc
 	LsnEqual                            *win32.Proc
 	LsnGreater                          *win32.Proc
+	LsnIncrement                        *win32.Proc
 	LsnInvalid                          *win32.Proc
 	LsnLess                             *win32.Proc
 	LsnNull                             *win32.Proc
@@ -1102,8 +1106,10 @@ var Procs = struct {
 	LogTailAdvanceFailure:               procLogTailAdvanceFailure,
 	LsnBlockOffset:                      procLsnBlockOffset,
 	LsnContainer:                        procLsnContainer,
+	LsnCreate:                           procLsnCreate,
 	LsnEqual:                            procLsnEqual,
 	LsnGreater:                          procLsnGreater,
+	LsnIncrement:                        procLsnIncrement,
 	LsnInvalid:                          procLsnInvalid,
 	LsnLess:                             procLsnLess,
 	LsnNull:                             procLsnNull,
@@ -3819,6 +3825,14 @@ func LsnContainer(plsn *CLS_LSN) uint32 {
 	return uint32(r1)
 }
 
+// LsnCreate calls clfsw32!LsnCreate.
+// https://learn.microsoft.com/windows/win32/api/clfsw32/nf-clfsw32-lsncreate
+// Minimum OS: windows6.0.6000.
+func LsnCreate(cidContainer uint32, offBlock uint32, cRecord uint32) CLS_LSN {
+	r1, _, _ := syscall.SyscallN(procLsnCreate.Addr(), uintptr(cidContainer), uintptr(offBlock), uintptr(cRecord))
+	return win32.StructRet[CLS_LSN](r1)
+}
+
 // LsnEqual calls clfsw32!LsnEqual.
 func LsnEqual(plsn1 *CLS_LSN, plsn2 *CLS_LSN) foundation.BOOLEAN {
 	r1, _, _ := syscall.SyscallN(procLsnEqual.Addr(), uintptr(unsafe.Pointer(plsn1)), uintptr(unsafe.Pointer(plsn2)))
@@ -3829,6 +3843,12 @@ func LsnEqual(plsn1 *CLS_LSN, plsn2 *CLS_LSN) foundation.BOOLEAN {
 func LsnGreater(plsn1 *CLS_LSN, plsn2 *CLS_LSN) foundation.BOOLEAN {
 	r1, _, _ := syscall.SyscallN(procLsnGreater.Addr(), uintptr(unsafe.Pointer(plsn1)), uintptr(unsafe.Pointer(plsn2)))
 	return foundation.BOOLEAN(r1)
+}
+
+// LsnIncrement calls clfsw32!LsnIncrement.
+func LsnIncrement(plsn *CLS_LSN) CLS_LSN {
+	r1, _, _ := syscall.SyscallN(procLsnIncrement.Addr(), uintptr(unsafe.Pointer(plsn)))
+	return win32.StructRet[CLS_LSN](r1)
 }
 
 // LsnInvalid calls clfsw32!LsnInvalid.

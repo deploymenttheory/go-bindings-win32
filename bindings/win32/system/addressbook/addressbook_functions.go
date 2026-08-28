@@ -32,6 +32,11 @@ var (
 	procFPropExists               = modMAPI32.NewProc("FPropExists")
 	procFreePadrlist              = modMAPI32.NewProc("FreePadrlist")
 	procFreeProws                 = modMAPI32.NewProc("FreeProws")
+	procFtAddFt                   = modMAPI32.NewProc("FtAddFt")
+	procFtMulDw                   = modMAPI32.NewProc("FtMulDw")
+	procFtMulDwDw                 = modMAPI32.NewProc("FtMulDwDw")
+	procFtNegFt                   = modMAPI32.NewProc("FtNegFt")
+	procFtSubFt                   = modMAPI32.NewProc("FtSubFt")
 	procFtgRegisterIdleRoutine    = modMAPI32.NewProc("FtgRegisterIdleRoutine")
 	procHrAddColumns              = modMAPI32.NewProc("HrAddColumns")
 	procHrAddColumnsEx            = modMAPI32.NewProc("HrAddColumnsEx")
@@ -92,6 +97,11 @@ var Procs = struct {
 	FPropExists               *win32.Proc
 	FreePadrlist              *win32.Proc
 	FreeProws                 *win32.Proc
+	FtAddFt                   *win32.Proc
+	FtMulDw                   *win32.Proc
+	FtMulDwDw                 *win32.Proc
+	FtNegFt                   *win32.Proc
+	FtSubFt                   *win32.Proc
 	FtgRegisterIdleRoutine    *win32.Proc
 	HrAddColumns              *win32.Proc
 	HrAddColumnsEx            *win32.Proc
@@ -145,6 +155,11 @@ var Procs = struct {
 	FPropExists:               procFPropExists,
 	FreePadrlist:              procFreePadrlist,
 	FreeProws:                 procFreeProws,
+	FtAddFt:                   procFtAddFt,
+	FtMulDw:                   procFtMulDw,
+	FtMulDwDw:                 procFtMulDwDw,
+	FtNegFt:                   procFtNegFt,
+	FtSubFt:                   procFtSubFt,
 	FtgRegisterIdleRoutine:    procFtgRegisterIdleRoutine,
 	HrAddColumns:              procHrAddColumns,
 	HrAddColumnsEx:            procHrAddColumnsEx,
@@ -270,6 +285,41 @@ func FreePadrlist(lpAdrlist *ADRLIST) {
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/freeprows
 func FreeProws(lpRows *SRowSet) {
 	syscall.SyscallN(procFreeProws.Addr(), uintptr(unsafe.Pointer(lpRows)))
+}
+
+// FtAddFt calls MAPI32!FtAddFt.
+// https://learn.microsoft.com/office/client-developer/outlook/mapi/ftaddft
+func FtAddFt(ftAddend1 foundation.FILETIME, ftAddend2 foundation.FILETIME) foundation.FILETIME {
+	r1, _, _ := syscall.SyscallN(procFtAddFt.Addr(), uintptr(win32.StructArg(ftAddend1)), uintptr(win32.StructArg(ftAddend2)))
+	return win32.StructRet[foundation.FILETIME](r1)
+}
+
+// FtMulDw calls MAPI32!FtMulDw.
+// https://learn.microsoft.com/office/client-developer/outlook/mapi/ftmuldw
+func FtMulDw(ftMultiplier uint32, ftMultiplicand foundation.FILETIME) foundation.FILETIME {
+	r1, _, _ := syscall.SyscallN(procFtMulDw.Addr(), uintptr(ftMultiplier), uintptr(win32.StructArg(ftMultiplicand)))
+	return win32.StructRet[foundation.FILETIME](r1)
+}
+
+// FtMulDwDw calls MAPI32!FtMulDwDw.
+// https://learn.microsoft.com/office/client-developer/outlook/mapi/ftmuldwdw
+func FtMulDwDw(ftMultiplicand uint32, ftMultiplier uint32) foundation.FILETIME {
+	r1, _, _ := syscall.SyscallN(procFtMulDwDw.Addr(), uintptr(ftMultiplicand), uintptr(ftMultiplier))
+	return win32.StructRet[foundation.FILETIME](r1)
+}
+
+// FtNegFt calls MAPI32!FtNegFt.
+// https://learn.microsoft.com/office/client-developer/outlook/mapi/ftnegft
+func FtNegFt(ft foundation.FILETIME) foundation.FILETIME {
+	r1, _, _ := syscall.SyscallN(procFtNegFt.Addr(), uintptr(win32.StructArg(ft)))
+	return win32.StructRet[foundation.FILETIME](r1)
+}
+
+// FtSubFt calls MAPI32!FtSubFt.
+// https://learn.microsoft.com/office/client-developer/outlook/mapi/ftsubft
+func FtSubFt(ftMinuend foundation.FILETIME, ftSubtrahend foundation.FILETIME) foundation.FILETIME {
+	r1, _, _ := syscall.SyscallN(procFtSubFt.Addr(), uintptr(win32.StructArg(ftMinuend)), uintptr(win32.StructArg(ftSubtrahend)))
+	return win32.StructRet[foundation.FILETIME](r1)
 }
 
 // FtgRegisterIdleRoutine calls MAPI32!FtgRegisterIdleRoutine.

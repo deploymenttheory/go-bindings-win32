@@ -64,6 +64,13 @@ func (self *ITest) SetOptional(name string) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// GetSize dispatches through ITest's vtable slot 6.
+func (self *ITest) GetSize() SMALL {
+	_ret := new(SMALL)
+	syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
+}
+
 // IsOk dispatches through ITest's vtable slot 7.
 func (self *ITest) IsOk() bool {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
@@ -98,6 +105,13 @@ func (self *ITest) GetChild() (*ITest, error) {
 	return *_child, win32.ErrIfFailed(int32(r1))
 }
 
+// GetBig dispatches through ITest's vtable slot 14.
+func (self *ITest) GetBig(index uint32) BIG {
+	_ret := new(BIG)
+	syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))), uintptr(index))
+	return *_ret
+}
+
 // IID: aaaaaaaa-0000-0000-0000-000000000002
 type ITest2 struct {
 	ITest
@@ -106,9 +120,9 @@ type ITest2 struct {
 // IID_ITest2 is the interface identifier for ITest2.
 var IID_ITest2 = win32.GUID{Data1: 0xaaaaaaaa, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02}}
 
-// Extra dispatches through ITest2's vtable slot 14.
+// Extra dispatches through ITest2's vtable slot 15.
 func (self *ITest2) Extra(flag bool) error {
 	_flag := win32.Bool32(flag)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(_flag))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(_flag))
 	return win32.ErrIfFailed(int32(r1))
 }

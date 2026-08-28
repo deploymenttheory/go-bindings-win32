@@ -362,6 +362,13 @@ type ID3D12VideoDecoder struct {
 // IID_ID3D12VideoDecoder is the interface identifier for ID3D12VideoDecoder.
 var IID_ID3D12VideoDecoder = win32.GUID{Data1: 0xc59b6bdc, Data2: 0x7720, Data3: 0x4074, Data4: [8]byte{0xa1, 0x36, 0x17, 0xa1, 0x56, 0x03, 0x74, 0x70}}
 
+// GetDesc dispatches through ID3D12VideoDecoder's vtable slot 8.
+func (self *ID3D12VideoDecoder) GetDesc() D3D12_VIDEO_DECODER_DESC {
+	_ret := new(D3D12_VIDEO_DECODER_DESC)
+	syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
+}
+
 // ID3D12VideoDecoder1: https://learn.microsoft.com/windows/win32/api/d3d12video/nn-d3d12video-id3d12videodecoder1
 // IID: 79a2e5fb-ccd2-469a-9fde-195d10951f7e
 type ID3D12VideoDecoder1 struct {
@@ -385,6 +392,13 @@ type ID3D12VideoDecoderHeap struct {
 
 // IID_ID3D12VideoDecoderHeap is the interface identifier for ID3D12VideoDecoderHeap.
 var IID_ID3D12VideoDecoderHeap = win32.GUID{Data1: 0x0946b7c9, Data2: 0xebf6, Data3: 0x4047, Data4: [8]byte{0xbb, 0x73, 0x86, 0x83, 0xe2, 0x7d, 0xbb, 0x1f}}
+
+// GetDesc dispatches through ID3D12VideoDecoderHeap's vtable slot 8.
+func (self *ID3D12VideoDecoderHeap) GetDesc() D3D12_VIDEO_DECODER_HEAP_DESC {
+	_ret := new(D3D12_VIDEO_DECODER_HEAP_DESC)
+	syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
+}
 
 // ID3D12VideoDecoderHeap1: https://learn.microsoft.com/windows/win32/api/d3d12video/nn-d3d12video-id3d12videodecoderheap1
 // IID: da1d98c5-539f-41b2-bf6b-1198a03b6d26
@@ -848,6 +862,13 @@ type ID3D12VideoExtensionCommand struct {
 // IID_ID3D12VideoExtensionCommand is the interface identifier for ID3D12VideoExtensionCommand.
 var IID_ID3D12VideoExtensionCommand = win32.GUID{Data1: 0x554e41e8, Data2: 0xae8e, Data3: 0x4a8c, Data4: [8]byte{0xb7, 0xd2, 0x5b, 0x4f, 0x27, 0x4a, 0x30, 0xe4}}
 
+// GetDesc dispatches through ID3D12VideoExtensionCommand's vtable slot 8.
+func (self *ID3D12VideoExtensionCommand) GetDesc() D3D12_VIDEO_EXTENSION_COMMAND_DESC {
+	_ret := new(D3D12_VIDEO_EXTENSION_COMMAND_DESC)
+	syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
+}
+
 // GetProtectedResourceSession dispatches through ID3D12VideoExtensionCommand's vtable slot 9.
 func (self *ID3D12VideoExtensionCommand) GetProtectedResourceSession(riid *win32.GUID, ppProtectedSession **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppProtectedSession)))
@@ -863,6 +884,13 @@ type ID3D12VideoMotionEstimator struct {
 // IID_ID3D12VideoMotionEstimator is the interface identifier for ID3D12VideoMotionEstimator.
 var IID_ID3D12VideoMotionEstimator = win32.GUID{Data1: 0x33fdae0e, Data2: 0x098b, Data3: 0x428f, Data4: [8]byte{0x87, 0xbb, 0x34, 0xb6, 0x95, 0xde, 0x08, 0xf8}}
 
+// GetDesc dispatches through ID3D12VideoMotionEstimator's vtable slot 8.
+func (self *ID3D12VideoMotionEstimator) GetDesc() D3D12_VIDEO_MOTION_ESTIMATOR_DESC {
+	_ret := new(D3D12_VIDEO_MOTION_ESTIMATOR_DESC)
+	syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
+}
+
 // GetProtectedResourceSession dispatches through ID3D12VideoMotionEstimator's vtable slot 9.
 func (self *ID3D12VideoMotionEstimator) GetProtectedResourceSession(riid *win32.GUID, ppProtectedSession **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppProtectedSession)))
@@ -877,6 +905,13 @@ type ID3D12VideoMotionVectorHeap struct {
 
 // IID_ID3D12VideoMotionVectorHeap is the interface identifier for ID3D12VideoMotionVectorHeap.
 var IID_ID3D12VideoMotionVectorHeap = win32.GUID{Data1: 0x5be17987, Data2: 0x743a, Data3: 0x4061, Data4: [8]byte{0x83, 0x4b, 0x23, 0xd2, 0x2d, 0xae, 0xa5, 0x05}}
+
+// GetDesc dispatches through ID3D12VideoMotionVectorHeap's vtable slot 8.
+func (self *ID3D12VideoMotionVectorHeap) GetDesc() D3D12_VIDEO_MOTION_VECTOR_HEAP_DESC {
+	_ret := new(D3D12_VIDEO_MOTION_VECTOR_HEAP_DESC)
+	syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
+}
 
 // GetProtectedResourceSession dispatches through ID3D12VideoMotionVectorHeap's vtable slot 9.
 func (self *ID3D12VideoMotionVectorHeap) GetProtectedResourceSession(riid *win32.GUID, ppProtectedSession **win32.IUnknown) error {
@@ -1078,6 +1113,13 @@ func (self *ID3D12VideoProcessor) GetInputStreamDescs(pInputStreamDescs []D3D12_
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(len(pInputStreamDescs)), uintptr(unsafe.Pointer(_pInputStreamDescs)))
 	return win32.ErrIfFailed(int32(r1))
+}
+
+// GetOutputStreamDesc dispatches through ID3D12VideoProcessor's vtable slot 11.
+func (self *ID3D12VideoProcessor) GetOutputStreamDesc() D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC {
+	_ret := new(D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC)
+	syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
 }
 
 // ID3D12VideoProcessor1: https://learn.microsoft.com/windows/win32/api/d3d12video/nn-d3d12video-id3d12videoprocessor1

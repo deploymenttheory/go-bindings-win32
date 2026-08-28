@@ -122,6 +122,10 @@ const (
 	RetHResultValueErr = 10 // HRESULT → (win32.HRESULT, error); success codes preserved
 	// Header inline carrying a [Constant]: no dispatch, `return RetExpr`.
 	RetInline = 11
+	// COM method returning a struct by value: the callee writes it through a
+	// hidden result pointer passed right after `this` (ArgExprs[0]); the
+	// method returns the local (RetExpr).
+	RetStructOut = 12
 )
 
 // InterfaceModel is one COM interface: a pointer-sized struct dispatching

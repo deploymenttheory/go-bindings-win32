@@ -207,9 +207,17 @@ each call, then the template dispatches via `syscall.SyscallN`:
   param `Node` in a method returning `(*Node, error)`) is suffixed with `_`,
   because Go puts parameter names in scope for the result types.
 
+- a COM method returning a struct/union/GUID by value receives a hidden
+  result pointer right after `this` (the MSVC member-function ABI on x64 and
+  ARM64 alike; windows-rs emits the same shape) and returns the value
+  (`RetStructOut`); a flat function returning a 1/2/4/8-byte non-float
+  aggregate reconstructs it from `r1` (`win32.StructRet[T]`).
+
 The set of emittable functions is exactly what `syscall.SyscallN` can marshal:
-by-value struct/union/array/GUID params and floats are skipped with a
-diagnostic. The merged `view.ReturnKind` enumerates all the shapes above.
+larger by-value struct/union/array/GUID params, float aggregates and floats
+are skipped with a diagnostic. `sizes.go` keeps a scalar-leaf census per
+layout so the ARM64 homogeneous-float-aggregate rule (`layout.hfa`) can be
+applied. The merged `view.ReturnKind` enumerates all the shapes above.
 
 **Handle closers** (`<pkg>_handles.go`): each `[RAIIFree]` handle typedef gets a
 `Close<Handle>(h) error` helper (a plain function, not RAII — Go has no

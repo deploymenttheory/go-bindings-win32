@@ -594,6 +594,13 @@ func (self *IKsPinPipe) KsSetPipeAllocatorFlag(Flag uint32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// KsGetPinBusCache dispatches through IKsPinPipe's vtable slot 10.
+func (self *IKsPinPipe) KsGetPinBusCache() win32.GUID {
+	_ret := new(win32.GUID)
+	syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
+}
+
 // KsGetPinName dispatches through IKsPinPipe's vtable slot 12.
 func (self *IKsPinPipe) KsGetPinName() foundation.PWSTR {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))

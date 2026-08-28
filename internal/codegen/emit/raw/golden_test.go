@@ -326,6 +326,9 @@ func syntheticNamespaces() []*win32meta.NamespaceMeta {
 			function("FloatParam", testDLL, native("Void"), param("f", native("Single"), in)),
 			function("FloatReturn", testDLL, native("Double")),
 			function("StructReturn", testDLL, smallRef),
+			withLastError(function("StructReturnLastErr", testDLL, smallRef)),
+			function("FpairReturn", testDLL, apiRef(shapes, "FPAIR", "Struct")),
+			function("BigReturn", testDLL, apiRef(shapes, "BIG", "Struct")),
 			function("BoolReturnNative", testDLL, native("Boolean")),
 			function("BoolNativeParam", testDLL, native("Void"), param("flag", native("Boolean"), in)),
 			function("FreeTest", testDLL, native("Void"), param("h", apiRef(shapes, "HLOCALTEST", "Typedef"), in)),
@@ -353,6 +356,7 @@ func syntheticNamespaces() []*win32meta.NamespaceMeta {
 					method("GetItems", hresultType(), param("count", native("UInt32"), in), param("items", pointerTo(smallRef), in, countedBy(0))),
 					method("Plain", native("Void")),
 					method("GetChild", hresultType(), param("child", pointerTo(apiRef(shapes, "ITest", "Com")), retval)),
+					method("GetBig", apiRef(shapes, "BIG", "Struct"), param("index", native("UInt32"), in)),
 				},
 			},
 			"ITest2": {

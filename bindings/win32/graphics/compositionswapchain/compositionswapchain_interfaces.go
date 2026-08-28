@@ -49,6 +49,13 @@ type IIndependentFlipFramePresentStatistics struct {
 // IID_IIndependentFlipFramePresentStatistics is the interface identifier for IIndependentFlipFramePresentStatistics.
 var IID_IIndependentFlipFramePresentStatistics = win32.GUID{Data1: 0x8c93be27, Data2: 0xad94, Data3: 0x4da0, Data4: [8]byte{0x8f, 0xd4, 0x24, 0x13, 0x13, 0x2d, 0x12, 0x4e}}
 
+// GetOutputAdapterLUID dispatches through IIndependentFlipFramePresentStatistics's vtable slot 5.
+func (self *IIndependentFlipFramePresentStatistics) GetOutputAdapterLUID() foundation.LUID {
+	_ret := new(foundation.LUID)
+	syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
+}
+
 // GetOutputVidPnSourceId dispatches through IIndependentFlipFramePresentStatistics's vtable slot 6.
 func (self *IIndependentFlipFramePresentStatistics) GetOutputVidPnSourceId() uint32 {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
@@ -59,6 +66,20 @@ func (self *IIndependentFlipFramePresentStatistics) GetOutputVidPnSourceId() uin
 func (self *IIndependentFlipFramePresentStatistics) GetContentTag() uintptr {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
 	return uintptr(r1)
+}
+
+// GetDisplayedTime dispatches through IIndependentFlipFramePresentStatistics's vtable slot 8.
+func (self *IIndependentFlipFramePresentStatistics) GetDisplayedTime() SystemInterruptTime {
+	_ret := new(SystemInterruptTime)
+	syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
+}
+
+// GetPresentDuration dispatches through IIndependentFlipFramePresentStatistics's vtable slot 9.
+func (self *IIndependentFlipFramePresentStatistics) GetPresentDuration() SystemInterruptTime {
+	_ret := new(SystemInterruptTime)
+	syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
 }
 
 // IPresentStatistics: https://learn.microsoft.com/windows/win32/api/presentation/nn-presentation-ipresentstatistics

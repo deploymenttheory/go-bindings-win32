@@ -1,12 +1,12 @@
 [Test.Shapes] cycle break: Struct Test.Other.OTHER_STRUCT not representable without import
+function BigReturn: by-value BIG return not marshalable, function skipped
 function BigStruct: param b not marshalable (BIG), function skipped
 function FloatParam: param f not marshalable (float32), function skipped
 function FloatReturn: float64 return not marshalable, function skipped
+function FpairReturn: by-value FPAIR return not marshalable, function skipped
 function GetCurrentThing: DLL "FORCEINLINE" is not a loadable module and no [Constant] value is recorded, skipped
 function MediumStruct: param m not marshalable (MEDIUM), function skipped
-function StructReturn: by-value SMALL return not marshalable, function skipped
 function Test.Shapes: bare name Taken taken, keeping TakenW
 informational-success entry Data.Xml.XmlLite.IXmlReader.Read matched no emitted API (stale entry?)
-interface ITest: method GetSize by-value SMALL return not marshalable, method skipped
 interface ITest: method Scale param factor not marshalable (float32), method skipped
 interface ITest: method SetBig param value not marshalable (BIG), method skipped

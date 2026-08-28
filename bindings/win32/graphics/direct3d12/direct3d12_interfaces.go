@@ -135,6 +135,13 @@ func (self *ID3D12CommandQueue) GetClockCalibration(pGpuTimestamp *uint64, pCpuT
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// GetDesc dispatches through ID3D12CommandQueue's vtable slot 18.
+func (self *ID3D12CommandQueue) GetDesc() D3D12_COMMAND_QUEUE_DESC {
+	_ret := new(D3D12_COMMAND_QUEUE_DESC)
+	syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
+}
+
 // IID: 3a3c3165-0ee7-4b8e-a0af-6356b4c3bbb9
 type ID3D12CommandQueue1 struct {
 	ID3D12CommandQueue
@@ -248,6 +255,13 @@ func (self *ID3D12CompilerCacheSession) FindValue(pValueKey *D3D12_COMPILER_CACH
 func (self *ID3D12CompilerCacheSession) GetApplicationDesc() *D3D12_APPLICATION_DESC {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
 	return (*D3D12_APPLICATION_DESC)(unsafe.Pointer(r1))
+}
+
+// GetCompilerTarget dispatches through ID3D12CompilerCacheSession's vtable slot 9.
+func (self *ID3D12CompilerCacheSession) GetCompilerTarget() D3D12_COMPILER_TARGET {
+	_ret := new(D3D12_COMPILER_TARGET)
+	syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
 }
 
 // GetValueTypes dispatches through ID3D12CompilerCacheSession's vtable slot 10.
@@ -730,6 +744,27 @@ type ID3D12DescriptorHeap struct {
 // IID_ID3D12DescriptorHeap is the interface identifier for ID3D12DescriptorHeap.
 var IID_ID3D12DescriptorHeap = win32.GUID{Data1: 0x8efb471d, Data2: 0x616c, Data3: 0x4f49, Data4: [8]byte{0x90, 0xf7, 0x12, 0x7b, 0xb7, 0x63, 0xfa, 0x51}}
 
+// GetDesc dispatches through ID3D12DescriptorHeap's vtable slot 8.
+func (self *ID3D12DescriptorHeap) GetDesc() D3D12_DESCRIPTOR_HEAP_DESC {
+	_ret := new(D3D12_DESCRIPTOR_HEAP_DESC)
+	syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
+}
+
+// GetCPUDescriptorHandleForHeapStart dispatches through ID3D12DescriptorHeap's vtable slot 9.
+func (self *ID3D12DescriptorHeap) GetCPUDescriptorHandleForHeapStart() D3D12_CPU_DESCRIPTOR_HANDLE {
+	_ret := new(D3D12_CPU_DESCRIPTOR_HANDLE)
+	syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
+}
+
+// GetGPUDescriptorHandleForHeapStart dispatches through ID3D12DescriptorHeap's vtable slot 10.
+func (self *ID3D12DescriptorHeap) GetGPUDescriptorHandleForHeapStart() D3D12_GPU_DESCRIPTOR_HANDLE {
+	_ret := new(D3D12_GPU_DESCRIPTOR_HANDLE)
+	syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
+}
+
 // ID3D12Device: https://learn.microsoft.com/windows/win32/api/d3d12/nn-d3d12-id3d12device
 // IID: 189819f1-1db6-4b57-be54-1821339b85f7
 type ID3D12Device struct {
@@ -843,6 +878,24 @@ func (self *ID3D12Device) CopyDescriptorsSimple(NumDescriptors uint32, DestDescr
 	syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(NumDescriptors), uintptr(win32.StructArg(DestDescriptorRangeStart)), uintptr(win32.StructArg(SrcDescriptorRangeStart)), uintptr(DescriptorHeapsType))
 }
 
+// GetResourceAllocationInfo dispatches through ID3D12Device's vtable slot 25.
+func (self *ID3D12Device) GetResourceAllocationInfo(visibleMask uint32, pResourceDescs []D3D12_RESOURCE_DESC) D3D12_RESOURCE_ALLOCATION_INFO {
+	_ret := new(D3D12_RESOURCE_ALLOCATION_INFO)
+	var _pResourceDescs *D3D12_RESOURCE_DESC
+	if len(pResourceDescs) > 0 {
+		_pResourceDescs = &pResourceDescs[0]
+	}
+	syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))), uintptr(visibleMask), uintptr(len(pResourceDescs)), uintptr(unsafe.Pointer(_pResourceDescs)))
+	return *_ret
+}
+
+// GetCustomHeapProperties dispatches through ID3D12Device's vtable slot 26.
+func (self *ID3D12Device) GetCustomHeapProperties(nodeMask uint32, heapType D3D12_HEAP_TYPE) D3D12_HEAP_PROPERTIES {
+	_ret := new(D3D12_HEAP_PROPERTIES)
+	syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))), uintptr(nodeMask), uintptr(heapType))
+	return *_ret
+}
+
 // CreateCommittedResource dispatches through ID3D12Device's vtable slot 27.
 func (self *ID3D12Device) CreateCommittedResource(pHeapProperties *D3D12_HEAP_PROPERTIES, HeapFlags D3D12_HEAP_FLAGS, pDesc *D3D12_RESOURCE_DESC, InitialResourceState D3D12_RESOURCE_STATES, pOptimizedClearValue *D3D12_CLEAR_VALUE, riidResource *win32.GUID, ppvResource **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHeapProperties)), uintptr(HeapFlags), uintptr(unsafe.Pointer(pDesc)), uintptr(InitialResourceState), uintptr(unsafe.Pointer(pOptimizedClearValue)), uintptr(unsafe.Pointer(riidResource)), uintptr(unsafe.Pointer(ppvResource)))
@@ -948,6 +1001,13 @@ func (self *ID3D12Device) GetResourceTiling(pTiledResource *ID3D12Resource, pNum
 	syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTiledResource)), uintptr(unsafe.Pointer(pNumTilesForEntireResource)), uintptr(unsafe.Pointer(pPackedMipDesc)), uintptr(unsafe.Pointer(pStandardTileShapeForNonPackedMips)), uintptr(unsafe.Pointer(pNumSubresourceTilings)), uintptr(FirstSubresourceTilingToGet), uintptr(unsafe.Pointer(pSubresourceTilingsForNonPackedMips)))
 }
 
+// GetAdapterLuid dispatches through ID3D12Device's vtable slot 43.
+func (self *ID3D12Device) GetAdapterLuid() foundation.LUID {
+	_ret := new(foundation.LUID)
+	syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
+}
+
 // ID3D12Device1: https://learn.microsoft.com/windows/win32/api/d3d12/nn-d3d12-id3d12device1
 // IID: 77acce80-638e-4e65-8895-c1f23386863e
 type ID3D12Device1 struct {
@@ -1034,6 +1094,13 @@ type ID3D12Device12 struct {
 
 // IID_ID3D12Device12 is the interface identifier for ID3D12Device12.
 var IID_ID3D12Device12 = win32.GUID{Data1: 0x5af5c532, Data2: 0x4c91, Data3: 0x4cd0, Data4: [8]byte{0xb5, 0x41, 0x15, 0xa4, 0x05, 0x39, 0x5f, 0xc5}}
+
+// GetResourceAllocationInfo3 dispatches through ID3D12Device12's vtable slot 80.
+func (self *ID3D12Device12) GetResourceAllocationInfo3(visibleMask uint32, numResourceDescs uint32, pResourceDescs *D3D12_RESOURCE_DESC1, pNumCastableFormats *uint32, ppCastableFormats **graphicsdxgicommon.DXGI_FORMAT, pResourceAllocationInfo1 *D3D12_RESOURCE_ALLOCATION_INFO1) D3D12_RESOURCE_ALLOCATION_INFO {
+	_ret := new(D3D12_RESOURCE_ALLOCATION_INFO)
+	syscall.SyscallN(self.LpVtbl[80], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))), uintptr(visibleMask), uintptr(numResourceDescs), uintptr(unsafe.Pointer(pResourceDescs)), uintptr(unsafe.Pointer(pNumCastableFormats)), uintptr(unsafe.Pointer(ppCastableFormats)), uintptr(unsafe.Pointer(pResourceAllocationInfo1)))
+	return *_ret
+}
 
 // IID: 14eecffc-4df8-40f7-a118-5c816f45695e
 type ID3D12Device13 struct {
@@ -1223,6 +1290,13 @@ func (self *ID3D12Device4) CreateReservedResource1(pDesc *D3D12_RESOURCE_DESC, I
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// GetResourceAllocationInfo1 dispatches through ID3D12Device4's vtable slot 56.
+func (self *ID3D12Device4) GetResourceAllocationInfo1(visibleMask uint32, numResourceDescs uint32, pResourceDescs *D3D12_RESOURCE_DESC, pResourceAllocationInfo1 *D3D12_RESOURCE_ALLOCATION_INFO1) D3D12_RESOURCE_ALLOCATION_INFO {
+	_ret := new(D3D12_RESOURCE_ALLOCATION_INFO)
+	syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))), uintptr(visibleMask), uintptr(numResourceDescs), uintptr(unsafe.Pointer(pResourceDescs)), uintptr(unsafe.Pointer(pResourceAllocationInfo1)))
+	return *_ret
+}
+
 // ID3D12Device5: https://learn.microsoft.com/windows/win32/api/d3d12/nn-d3d12-id3d12device5
 // IID: 8b4f173b-2fea-4b80-8f58-4307191ab95d
 type ID3D12Device5 struct {
@@ -1327,6 +1401,13 @@ type ID3D12Device8 struct {
 // IID_ID3D12Device8 is the interface identifier for ID3D12Device8.
 var IID_ID3D12Device8 = win32.GUID{Data1: 0x9218e6bb, Data2: 0xf944, Data3: 0x4f7e, Data4: [8]byte{0xa7, 0x5c, 0xb1, 0xb2, 0xc7, 0xb7, 0x01, 0xf3}}
 
+// GetResourceAllocationInfo2 dispatches through ID3D12Device8's vtable slot 68.
+func (self *ID3D12Device8) GetResourceAllocationInfo2(visibleMask uint32, numResourceDescs uint32, pResourceDescs *D3D12_RESOURCE_DESC1, pResourceAllocationInfo1 *D3D12_RESOURCE_ALLOCATION_INFO1) D3D12_RESOURCE_ALLOCATION_INFO {
+	_ret := new(D3D12_RESOURCE_ALLOCATION_INFO)
+	syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))), uintptr(visibleMask), uintptr(numResourceDescs), uintptr(unsafe.Pointer(pResourceDescs)), uintptr(unsafe.Pointer(pResourceAllocationInfo1)))
+	return *_ret
+}
+
 // CreateCommittedResource2 dispatches through ID3D12Device8's vtable slot 69.
 func (self *ID3D12Device8) CreateCommittedResource2(pHeapProperties *D3D12_HEAP_PROPERTIES, HeapFlags D3D12_HEAP_FLAGS, pDesc *D3D12_RESOURCE_DESC1, InitialResourceState D3D12_RESOURCE_STATES, pOptimizedClearValue *D3D12_CLEAR_VALUE, pProtectedSession *ID3D12ProtectedResourceSession, riidResource *win32.GUID, ppvResource **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHeapProperties)), uintptr(HeapFlags), uintptr(unsafe.Pointer(pDesc)), uintptr(InitialResourceState), uintptr(unsafe.Pointer(pOptimizedClearValue)), uintptr(unsafe.Pointer(pProtectedSession)), uintptr(unsafe.Pointer(riidResource)), uintptr(unsafe.Pointer(ppvResource)))
@@ -1398,6 +1479,13 @@ type ID3D12DeviceConfiguration struct {
 
 // IID_ID3D12DeviceConfiguration is the interface identifier for ID3D12DeviceConfiguration.
 var IID_ID3D12DeviceConfiguration = win32.GUID{Data1: 0x78dbf87b, Data2: 0xf766, Data3: 0x422b, Data4: [8]byte{0xa6, 0x1c, 0xc8, 0xc4, 0x46, 0xbd, 0xb9, 0xad}}
+
+// GetDesc dispatches through ID3D12DeviceConfiguration's vtable slot 3.
+func (self *ID3D12DeviceConfiguration) GetDesc() D3D12_DEVICE_CONFIGURATION_DESC {
+	_ret := new(D3D12_DEVICE_CONFIGURATION_DESC)
+	syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
+}
 
 // GetEnabledExperimentalFeatures dispatches through ID3D12DeviceConfiguration's vtable slot 4.
 func (self *ID3D12DeviceConfiguration) GetEnabledExperimentalFeatures(pGuids []win32.GUID) error {
@@ -2348,6 +2436,13 @@ type ID3D12Heap struct {
 // IID_ID3D12Heap is the interface identifier for ID3D12Heap.
 var IID_ID3D12Heap = win32.GUID{Data1: 0x6b3b2502, Data2: 0x6e51, Data3: 0x45b3, Data4: [8]byte{0x90, 0xee, 0x98, 0x84, 0x26, 0x5e, 0x8d, 0xf3}}
 
+// GetDesc dispatches through ID3D12Heap's vtable slot 8.
+func (self *ID3D12Heap) GetDesc() D3D12_HEAP_DESC {
+	_ret := new(D3D12_HEAP_DESC)
+	syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
+}
+
 // IID: 572f7389-2168-49e3-9693-d6df5871bf6d
 type ID3D12Heap1 struct {
 	ID3D12Heap
@@ -2834,6 +2929,13 @@ type ID3D12ProtectedResourceSession struct {
 // IID_ID3D12ProtectedResourceSession is the interface identifier for ID3D12ProtectedResourceSession.
 var IID_ID3D12ProtectedResourceSession = win32.GUID{Data1: 0x6cd696f4, Data2: 0xf289, Data3: 0x40cc, Data4: [8]byte{0x80, 0x91, 0x5a, 0x6c, 0x0a, 0x09, 0x9c, 0x3d}}
 
+// GetDesc dispatches through ID3D12ProtectedResourceSession's vtable slot 10.
+func (self *ID3D12ProtectedResourceSession) GetDesc() D3D12_PROTECTED_RESOURCE_SESSION_DESC {
+	_ret := new(D3D12_PROTECTED_RESOURCE_SESSION_DESC)
+	syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
+}
+
 // ID3D12ProtectedResourceSession1: https://learn.microsoft.com/windows/win32/api/d3d12/nn-d3d12-id3d12protectedresourcesession1
 // IID: d6f12dd6-76fb-406e-8961-4296eefc0409
 type ID3D12ProtectedResourceSession1 struct {
@@ -2842,6 +2944,13 @@ type ID3D12ProtectedResourceSession1 struct {
 
 // IID_ID3D12ProtectedResourceSession1 is the interface identifier for ID3D12ProtectedResourceSession1.
 var IID_ID3D12ProtectedResourceSession1 = win32.GUID{Data1: 0xd6f12dd6, Data2: 0x76fb, Data3: 0x406e, Data4: [8]byte{0x89, 0x61, 0x42, 0x96, 0xee, 0xfc, 0x04, 0x09}}
+
+// GetDesc1 dispatches through ID3D12ProtectedResourceSession1's vtable slot 11.
+func (self *ID3D12ProtectedResourceSession1) GetDesc1() D3D12_PROTECTED_RESOURCE_SESSION_DESC1 {
+	_ret := new(D3D12_PROTECTED_RESOURCE_SESSION_DESC1)
+	syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
+}
 
 // ID3D12ProtectedSession: https://learn.microsoft.com/windows/win32/api/d3d12/nn-d3d12-id3d12protectedsession
 // IID: a1533d18-0ac1-4084-85b9-89a96116806b
@@ -2893,6 +3002,13 @@ func (self *ID3D12Resource) Unmap(Subresource uint32, pWrittenRange *D3D12_RANGE
 	syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Subresource), uintptr(unsafe.Pointer(pWrittenRange)))
 }
 
+// GetDesc dispatches through ID3D12Resource's vtable slot 10.
+func (self *ID3D12Resource) GetDesc() D3D12_RESOURCE_DESC {
+	_ret := new(D3D12_RESOURCE_DESC)
+	syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
+}
+
 // GetGPUVirtualAddress dispatches through ID3D12Resource's vtable slot 11.
 func (self *ID3D12Resource) GetGPUVirtualAddress() uint64 {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
@@ -2938,6 +3054,13 @@ type ID3D12Resource2 struct {
 
 // IID_ID3D12Resource2 is the interface identifier for ID3D12Resource2.
 var IID_ID3D12Resource2 = win32.GUID{Data1: 0xbe36ec3b, Data2: 0xea85, Data3: 0x4aeb, Data4: [8]byte{0xa4, 0x5a, 0xe9, 0xd7, 0x64, 0x04, 0xa4, 0x95}}
+
+// GetDesc1 dispatches through ID3D12Resource2's vtable slot 16.
+func (self *ID3D12Resource2) GetDesc1() D3D12_RESOURCE_DESC1 {
+	_ret := new(D3D12_RESOURCE_DESC1)
+	syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
+}
 
 // ID3D12RootSignature: https://learn.microsoft.com/windows/win32/api/d3d12/nn-d3d12-id3d12rootsignature
 // IID: c54a6b66-72df-4ee8-8be5-a946a1429214
@@ -3077,6 +3200,13 @@ func (self *ID3D12ShaderCacheSession) StoreValue(pKey []byte, pValue []byte) err
 // SetDeleteOnDestroy dispatches through ID3D12ShaderCacheSession's vtable slot 10.
 func (self *ID3D12ShaderCacheSession) SetDeleteOnDestroy() {
 	syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
+}
+
+// GetDesc dispatches through ID3D12ShaderCacheSession's vtable slot 11.
+func (self *ID3D12ShaderCacheSession) GetDesc() D3D12_SHADER_CACHE_SESSION_DESC {
+	_ret := new(D3D12_SHADER_CACHE_SESSION_DESC)
+	syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
 }
 
 // ID3D12ShaderReflection: https://learn.microsoft.com/windows/win32/api/d3d12shader/nn-d3d12shader-id3d12shaderreflection
@@ -3482,6 +3612,14 @@ type ID3D12StateObjectProperties1 struct {
 // IID_ID3D12StateObjectProperties1 is the interface identifier for ID3D12StateObjectProperties1.
 var IID_ID3D12StateObjectProperties1 = win32.GUID{Data1: 0x460caac7, Data2: 0x1d24, Data3: 0x446a, Data4: [8]byte{0xa1, 0x84, 0xca, 0x67, 0xdb, 0x49, 0x41, 0x38}}
 
+// GetProgramIdentifier dispatches through ID3D12StateObjectProperties1's vtable slot 7.
+func (self *ID3D12StateObjectProperties1) GetProgramIdentifier(pProgramName string) D3D12_PROGRAM_IDENTIFIER {
+	_ret := new(D3D12_PROGRAM_IDENTIFIER)
+	_pProgramName := win32.UTF16Ptr(pProgramName)
+	syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))), uintptr(unsafe.Pointer(_pProgramName)))
+	return *_ret
+}
+
 // IID: d5e82917-f0f1-44cf-ae5e-ce222dd0b884
 type ID3D12StateObjectProperties2 struct {
 	ID3D12StateObjectProperties1
@@ -3511,6 +3649,13 @@ type ID3D12SwapChainAssistant struct {
 
 // IID_ID3D12SwapChainAssistant is the interface identifier for ID3D12SwapChainAssistant.
 var IID_ID3D12SwapChainAssistant = win32.GUID{Data1: 0xf1df64b6, Data2: 0x57fd, Data3: 0x49cd, Data4: [8]byte{0x88, 0x07, 0xc0, 0xeb, 0x88, 0xb4, 0x5c, 0x8f}}
+
+// GetLUID dispatches through ID3D12SwapChainAssistant's vtable slot 3.
+func (self *ID3D12SwapChainAssistant) GetLUID() foundation.LUID {
+	_ret := new(foundation.LUID)
+	syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
+}
 
 // GetSwapChainObject dispatches through ID3D12SwapChainAssistant's vtable slot 4.
 func (self *ID3D12SwapChainAssistant) GetSwapChainObject(riid *win32.GUID, ppv **win32.IUnknown) error {
@@ -3663,6 +3808,13 @@ func (self *ID3D12WorkGraphProperties) GetNumNodes(WorkGraphIndex uint32) uint32
 	return uint32(r1)
 }
 
+// GetNodeID dispatches through ID3D12WorkGraphProperties's vtable slot 7.
+func (self *ID3D12WorkGraphProperties) GetNodeID(WorkGraphIndex uint32, NodeIndex uint32) D3D12_NODE_ID {
+	_ret := new(D3D12_NODE_ID)
+	syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))), uintptr(WorkGraphIndex), uintptr(NodeIndex))
+	return *_ret
+}
+
 // GetNodeLocalRootArgumentsTableIndex dispatches through ID3D12WorkGraphProperties's vtable slot 9.
 func (self *ID3D12WorkGraphProperties) GetNodeLocalRootArgumentsTableIndex(WorkGraphIndex uint32, NodeIndex uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(WorkGraphIndex), uintptr(NodeIndex))
@@ -3673,6 +3825,13 @@ func (self *ID3D12WorkGraphProperties) GetNodeLocalRootArgumentsTableIndex(WorkG
 func (self *ID3D12WorkGraphProperties) GetNumEntrypoints(WorkGraphIndex uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(WorkGraphIndex))
 	return uint32(r1)
+}
+
+// GetEntrypointID dispatches through ID3D12WorkGraphProperties's vtable slot 11.
+func (self *ID3D12WorkGraphProperties) GetEntrypointID(WorkGraphIndex uint32, EntrypointIndex uint32) D3D12_NODE_ID {
+	_ret := new(D3D12_NODE_ID)
+	syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))), uintptr(WorkGraphIndex), uintptr(EntrypointIndex))
+	return *_ret
 }
 
 // GetEntrypointRecordSizeInBytes dispatches through ID3D12WorkGraphProperties's vtable slot 13.

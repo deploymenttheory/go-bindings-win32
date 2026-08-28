@@ -17,31 +17,33 @@ var (
 )
 
 var (
-	procBoolIn           = modTEST.NewProc("BoolIn")
-	procBoolNativeParam  = modTEST.NewProc("BoolNativeParam")
-	procBoolReturnNative = modTEST.NewProc("BoolReturnNative")
-	procByteBuffer       = modTEST.NewProc("ByteBuffer")
-	procCallbackParam    = modTEST.NewProc("CallbackParam")
-	procComOut           = modTEST.NewProc("ComOut")
-	procEnumParam        = modTEST.NewProc("EnumParam")
-	procFpairParam       = modTEST.NewProc("FpairParam")
-	procFreeTest         = modTEST.NewProc("FreeTest")
-	procHandleOpen       = modTEST.NewProc("HandleOpen")
-	procInOutString      = modTEST.NewProc("InOutString")
-	procOptionalStringW  = modTEST.NewProc("OptionalStringW")
-	procPtrRet           = modTEST.NewProc("PtrRet")
-	procRequiredString   = modTEST.NewProc("RequiredStringW")
-	procReservedParam    = modTEST.NewProc("ReservedParam")
-	procRetValBool       = modTEST.NewProc("RetValBool")
-	procRetValHR         = modTEST.NewProc("RetValHR")
-	procRetValVoid       = modTEST.NewProc("RetValVoid")
-	procRiidPair         = modTEST.NewProc("RiidPair")
-	procShadowParam      = modTEST.NewProc("ShadowParam")
-	procSliceParam       = modTEST.NewProc("SliceParam")
-	procSmallStruct      = modTEST.NewProc("SmallStruct")
-	procTakenW           = modTEST.NewProc("TakenW")
-	procUseOther         = modTEST.NewProc("UseOther")
-	procValueLastErr     = modTEST.NewProc("ValueLastErr")
+	procBoolIn              = modTEST.NewProc("BoolIn")
+	procBoolNativeParam     = modTEST.NewProc("BoolNativeParam")
+	procBoolReturnNative    = modTEST.NewProc("BoolReturnNative")
+	procByteBuffer          = modTEST.NewProc("ByteBuffer")
+	procCallbackParam       = modTEST.NewProc("CallbackParam")
+	procComOut              = modTEST.NewProc("ComOut")
+	procEnumParam           = modTEST.NewProc("EnumParam")
+	procFpairParam          = modTEST.NewProc("FpairParam")
+	procFreeTest            = modTEST.NewProc("FreeTest")
+	procHandleOpen          = modTEST.NewProc("HandleOpen")
+	procInOutString         = modTEST.NewProc("InOutString")
+	procOptionalStringW     = modTEST.NewProc("OptionalStringW")
+	procPtrRet              = modTEST.NewProc("PtrRet")
+	procRequiredString      = modTEST.NewProc("RequiredStringW")
+	procReservedParam       = modTEST.NewProc("ReservedParam")
+	procRetValBool          = modTEST.NewProc("RetValBool")
+	procRetValHR            = modTEST.NewProc("RetValHR")
+	procRetValVoid          = modTEST.NewProc("RetValVoid")
+	procRiidPair            = modTEST.NewProc("RiidPair")
+	procShadowParam         = modTEST.NewProc("ShadowParam")
+	procSliceParam          = modTEST.NewProc("SliceParam")
+	procSmallStruct         = modTEST.NewProc("SmallStruct")
+	procStructReturn        = modTEST.NewProc("StructReturn")
+	procStructReturnLastErr = modTEST.NewProc("StructReturnLastErr")
+	procTakenW              = modTEST.NewProc("TakenW")
+	procUseOther            = modTEST.NewProc("UseOther")
+	procValueLastErr        = modTEST.NewProc("ValueLastErr")
 )
 
 // Procs exposes this package's lazily resolved exports for availability
@@ -49,57 +51,61 @@ var (
 // call to <Function> would panic with on this system (an export missing from
 // this Windows build, or a DLL that is not installed).
 var Procs = struct {
-	BoolIn           *win32.Proc
-	BoolNativeParam  *win32.Proc
-	BoolReturnNative *win32.Proc
-	ByteBuffer       *win32.Proc
-	CallbackParam    *win32.Proc
-	ComOut           *win32.Proc
-	EnumParam        *win32.Proc
-	FpairParam       *win32.Proc
-	FreeTest         *win32.Proc
-	HandleOpen       *win32.Proc
-	InOutString      *win32.Proc
-	OptionalStringW  *win32.Proc
-	PtrRet           *win32.Proc
-	RequiredString   *win32.Proc
-	ReservedParam    *win32.Proc
-	RetValBool       *win32.Proc
-	RetValHR         *win32.Proc
-	RetValVoid       *win32.Proc
-	RiidPair         *win32.Proc
-	ShadowParam      *win32.Proc
-	SliceParam       *win32.Proc
-	SmallStruct      *win32.Proc
-	TakenW           *win32.Proc
-	UseOther         *win32.Proc
-	ValueLastErr     *win32.Proc
+	BoolIn              *win32.Proc
+	BoolNativeParam     *win32.Proc
+	BoolReturnNative    *win32.Proc
+	ByteBuffer          *win32.Proc
+	CallbackParam       *win32.Proc
+	ComOut              *win32.Proc
+	EnumParam           *win32.Proc
+	FpairParam          *win32.Proc
+	FreeTest            *win32.Proc
+	HandleOpen          *win32.Proc
+	InOutString         *win32.Proc
+	OptionalStringW     *win32.Proc
+	PtrRet              *win32.Proc
+	RequiredString      *win32.Proc
+	ReservedParam       *win32.Proc
+	RetValBool          *win32.Proc
+	RetValHR            *win32.Proc
+	RetValVoid          *win32.Proc
+	RiidPair            *win32.Proc
+	ShadowParam         *win32.Proc
+	SliceParam          *win32.Proc
+	SmallStruct         *win32.Proc
+	StructReturn        *win32.Proc
+	StructReturnLastErr *win32.Proc
+	TakenW              *win32.Proc
+	UseOther            *win32.Proc
+	ValueLastErr        *win32.Proc
 }{
-	BoolIn:           procBoolIn,
-	BoolNativeParam:  procBoolNativeParam,
-	BoolReturnNative: procBoolReturnNative,
-	ByteBuffer:       procByteBuffer,
-	CallbackParam:    procCallbackParam,
-	ComOut:           procComOut,
-	EnumParam:        procEnumParam,
-	FpairParam:       procFpairParam,
-	FreeTest:         procFreeTest,
-	HandleOpen:       procHandleOpen,
-	InOutString:      procInOutString,
-	OptionalStringW:  procOptionalStringW,
-	PtrRet:           procPtrRet,
-	RequiredString:   procRequiredString,
-	ReservedParam:    procReservedParam,
-	RetValBool:       procRetValBool,
-	RetValHR:         procRetValHR,
-	RetValVoid:       procRetValVoid,
-	RiidPair:         procRiidPair,
-	ShadowParam:      procShadowParam,
-	SliceParam:       procSliceParam,
-	SmallStruct:      procSmallStruct,
-	TakenW:           procTakenW,
-	UseOther:         procUseOther,
-	ValueLastErr:     procValueLastErr,
+	BoolIn:              procBoolIn,
+	BoolNativeParam:     procBoolNativeParam,
+	BoolReturnNative:    procBoolReturnNative,
+	ByteBuffer:          procByteBuffer,
+	CallbackParam:       procCallbackParam,
+	ComOut:              procComOut,
+	EnumParam:           procEnumParam,
+	FpairParam:          procFpairParam,
+	FreeTest:            procFreeTest,
+	HandleOpen:          procHandleOpen,
+	InOutString:         procInOutString,
+	OptionalStringW:     procOptionalStringW,
+	PtrRet:              procPtrRet,
+	RequiredString:      procRequiredString,
+	ReservedParam:       procReservedParam,
+	RetValBool:          procRetValBool,
+	RetValHR:            procRetValHR,
+	RetValVoid:          procRetValVoid,
+	RiidPair:            procRiidPair,
+	ShadowParam:         procShadowParam,
+	SliceParam:          procSliceParam,
+	SmallStruct:         procSmallStruct,
+	StructReturn:        procStructReturn,
+	StructReturnLastErr: procStructReturnLastErr,
+	TakenW:              procTakenW,
+	UseOther:            procUseOther,
+	ValueLastErr:        procValueLastErr,
 }
 
 // BoolIn calls TEST!BoolIn.
@@ -266,6 +272,21 @@ func SliceParam(items []SMALL) error {
 // SmallStruct calls TEST!SmallStruct.
 func SmallStruct(s SMALL) {
 	syscall.SyscallN(procSmallStruct.Addr(), uintptr(win32.StructArg(s)))
+}
+
+// StructReturn calls TEST!StructReturn.
+func StructReturn() SMALL {
+	r1, _, _ := syscall.SyscallN(procStructReturn.Addr())
+	return win32.StructRet[SMALL](r1)
+}
+
+// StructReturnLastErr calls TEST!StructReturnLastErr.
+func StructReturnLastErr() (SMALL, error) {
+	r1, _, e1 := syscall.SyscallN(procStructReturnLastErr.Addr())
+	if e1 != 0 {
+		return win32.StructRet[SMALL](r1), e1
+	}
+	return win32.StructRet[SMALL](r1), nil
 }
 
 // TakenW calls TEST!TakenW.

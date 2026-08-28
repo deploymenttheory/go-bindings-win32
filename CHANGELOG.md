@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0](https://github.com/deploymenttheory/go-bindings-win32/compare/v0.4.0...v0.5.0) (2026-08-28)
+
+
+### Features
+
+* **codegen:** emit architecture-specific struct layouts per architecture ([49a35ec](https://github.com/deploymenttheory/go-bindings-win32/commit/49a35ec9b29c015ba7cac7c03c7a0d50909414c6))
+* emit architecture-specific struct layouts per architecture ([b22d4b2](https://github.com/deploymenttheory/go-bindings-win32/commit/b22d4b2631e36b85f4bf104eb5eaeb0a279ce162))
+
 ## [0.4.0](https://github.com/deploymenttheory/go-bindings-win32/compare/v0.3.1...v0.4.0) (2026-08-28)
 
 
